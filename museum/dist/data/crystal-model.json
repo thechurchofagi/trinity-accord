@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.crystal-reconstruction.v1",
-  "edition": "museum-v1.14.1",
+  "edition": "museum-v1.14.2",
   "dimensionsMetres": {
     "width": 0.246,
     "height": 0.353,

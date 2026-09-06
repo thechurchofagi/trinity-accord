@@ -1,3 +1,7 @@
+# museum-v1.14.2 · Start on the sung text
+
+- Exclude preserved “Lyrics” document headings from the timed lyric rows, so highlighting begins with the song structure and sung phrases rather than source-record metadata.
+
 # museum-v1.14.1 · In-gallery synchronized lyrics
 
 - Selecting a musical artwork now starts its track and opens a lyric stage in the viewing surface; visitors no longer need to open the detail dialog to understand the song.
