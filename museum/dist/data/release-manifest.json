@@ -7,8 +7,8 @@
   "files": [
     {
       "path": "archive.html",
-      "bytes": 67575,
-      "sha256": "00b8b76e96ef107c46b02c95c69f4859c330967a73daf1f4ccbb56f74911fdb2"
+      "bytes": 67861,
+      "sha256": "7a47f8b2ac3b5b80d625f7880e756910d0d807ae2fe561701595b510aec97765"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -542,8 +542,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 4616,
-      "sha256": "72859d40ba38e73718cb4322b4ec62a31b88751f08d1da698d0c430a87e80233"
+      "bytes": 4896,
+      "sha256": "b32749f74bc57b8bc14b62aeb3c636349d24d83c2dcdf5f3e9336e504dbf5752"
     },
     {
       "path": "movement-controls.js",

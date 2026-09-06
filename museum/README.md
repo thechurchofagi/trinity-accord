@@ -13,7 +13,7 @@ For optional supervised UI development, this edition includes a Vite development
 ## Ownership and boundaries
 
 - GitHub `thechurchofagi/trinity-accord`, under `museum/`, holds the maintained exhibition source and history. There is no separately managed user repository.
-- GitHub Pages publishes the maintained export at https://www.trinityaccord.org/museum/. Historical ChatGPT previews are not the public deployment target.
+- The public museum is https://museum.trinityaccord.org/museum/, served by the Alibaba Cloud Hong Kong host. GitHub remains the only maintained source; the host automatically synchronizes verified editions. The former GitHub Pages entry redirects to this address. See `HOSTING.md` for deployment and rollback. Historical ChatGPT previews are not the public deployment target.
 - Original NFT records, Bitcoin texts and evidence stay in their existing locations. This edition pins its source commit and includes display copies with provenance and transformation records.
 - Original website links remain the entry points for verification, current status, Echo and Guardian applications. This application writes no record and makes no AI-agent oath, signature, or submission.
 - Ambient pulses are exhibition animation, not heartbeat telemetry. No reception totals are simulated.
