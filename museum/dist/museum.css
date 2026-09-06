@@ -56,3 +56,5 @@ body:has(#panel[open]) #walk-controls{visibility:hidden}body:has(#music-bar:not(
 #move-help{white-space:normal;max-width:122px;text-align:center;line-height:1.45}@media(max-width:650px){#move-help{max-width:112px}}
 
 .inscription-reading {margin-top:2rem;} .inscription-reading summary {font-size:1rem;cursor:pointer;color:#bde7ef;} .inscription-reading .lyrics {font-size:1rem;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere;}
+
+.loading-actions{display:flex;justify-content:center;gap:18px;margin-top:12px;flex-wrap:wrap}.loading-actions a,.loading-actions button{font:inherit;color:#b9ecf5;min-height:44px;padding:8px;border:1px solid #799aa5;border-radius:6px;background:#102532}#loading{max-width:calc(100vw - 32px)}#scene-status{position:fixed;right:20px;top:84px;max-width:340px;padding:8px 12px;background:#081724d9;color:#bed2dd;font-size:14px;line-height:1.5;border-radius:6px;z-index:3}#scene-status button{display:block;color:#c1edf4;padding:6px 0;margin-top:4px}@media(max-width:650px){#scene-status{top:190px;right:12px;max-width:210px;font-size:12px}}

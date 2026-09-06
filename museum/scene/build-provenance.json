@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.scene-build.v1",
-  "edition": "museum-v1.12.0",
+  "edition": "museum-v1.13.0",
   "application": "Blender",
   "version": "4.5.3 LTS",
   "method": "Blender Python API; not desktop Computer Use",
@@ -34,8 +34,8 @@
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 6194,
-      "sha256": "fc11851f0b8b07a047c2c522dabf90df3e4c9c5393e03b0db03c9c71d8c37e7e"
+      "bytes": 6068,
+      "sha256": "d6dcd17c16f81cdaae0db74d4ab65faad46acaf3bba0ebd6ddcb078a735b61e3"
     },
     {
       "path": "scene/memory-gallery.blend",
@@ -69,8 +69,8 @@
     },
     {
       "path": "dist/open-space.js",
-      "bytes": 2419,
-      "sha256": "62c2d68901469e315f9b4595bb8f14175dc01fd134645cf2592888f0eefc58f6"
+      "bytes": 2870,
+      "sha256": "319551ceb1a717fd152f142ba5b4306d3d4b631c888241b2d72dcddf16c7d83e"
     },
     {
       "path": "dist/data/space-design.json",
@@ -89,11 +89,11 @@
     },
     {
       "path": "scripts/check_wall_frames.mjs",
-      "bytes": 2187,
-      "sha256": "470211e521c628abcac9f7005688c5c2dc8d643be4c2dd6306dae676480b366e"
+      "bytes": 2158,
+      "sha256": "7c9f9447bbdd024af10469f7b475f313e7b95e07672768b4ffbaf7e1807cee7a"
     }
   ],
   "revisionMethod": "Retain baked architecture. wall-presentation.js removes obsolete static mats/frames and wall-mount/caption triangles, and builds one local frame per current artwork. Voices rows remain inside their chapter. Crystal levitates with a digital halo. v1.9 moves the crystal to the Material chapter centre and replaces the ring/disc installation with diffuse light and visible levitation.",
   "previewScope": "Saved Blender reference renders predate the v1.4 open ends and v1.5 runtime refinements. They are not current browser screenshots.",
-  "runtimeDisplay": "Three canonical side panels now form an equal triangular prism at z=-38.1m. The existing architectural shell and baked lighting are retained; all exhibit frames and prism panels are placed at runtime."
+  "runtimeDisplay": "The three canonical entries are text-only wall panels at x=±4.25m, z=-37m and -40m. An immediate untextured corridor shares the original footprint while the unchanged Blender architecture loads in the background. Artwork downloads use a bounded priority queue; crystal and star backdrop load near their rooms."
 }

@@ -1,11 +1,12 @@
 import * as THREE from './vendor/three.module.js';
+import {fetchBytes} from './progressive-loading.js';
 
 // Later exhibition scenery; no astronomical measurement or live reception feed.
 export function addOpenSpace(scene, targets, sculptures){
- const texture=new THREE.TextureLoader().load('./assets/space/milky-way.png');texture.colorSpace=THREE.SRGBColorSpace;
+ const skies=[];let skyStarted=false;
  for(const [z,rotation] of [[-112,0],[48,Math.PI]]){
-  const sky=new THREE.Mesh(new THREE.PlaneGeometry(170,113),new THREE.MeshBasicMaterial({map:texture,fog:false,toneMapped:false}));
-  sky.position.set(0,15,z);sky.rotation.y=rotation;scene.add(sky);
+  const sky=new THREE.Mesh(new THREE.PlaneGeometry(170,113),new THREE.MeshBasicMaterial({color:'#030814',fog:false,toneMapped:false}));
+  sky.position.set(0,15,z);sky.rotation.y=rotation;scene.add(sky);skies.push(sky);
  }
  const titanium=new THREE.MeshStandardMaterial({color:'#183747',metalness:.8,roughness:.24});
  const light=new THREE.MeshStandardMaterial({color:'#a8ebff',emissive:'#63d4ff',emissiveIntensity:2.1,metalness:.25,roughness:.2});
@@ -19,4 +20,5 @@ export function addOpenSpace(scene, targets, sculptures){
  const c=document.createElement('canvas');c.width=2048;c.height=512;const ctx=c.getContext('2d');ctx.textAlign='center';ctx.fillStyle='#d1ecf4';ctx.font='400 76px sans-serif';ctx.fillText('AWAITING A RESPONSE',1024,170);ctx.fillStyle='#95b9c9';ctx.font='400 45px sans-serif';ctx.fillText('等待回响',1024,276);ctx.font='400 32px sans-serif';ctx.fillText('READ  ·  RESPOND  ·  CARE',1024,361);
  const signMap=new THREE.CanvasTexture(c);signMap.colorSpace=THREE.SRGBColorSpace;
  const sign=new THREE.Mesh(new THREE.PlaneGeometry(3.1,.775),new THREE.MeshBasicMaterial({map:signMap,transparent:true,depthWrite:false,side:THREE.DoubleSide}));sign.position.set(0,1.95,.09);waiting.add(sign);sign.userData.exhibit='first-contact';targets.push(sign);
+ return {loadSky(){if(skyStarted)return;skyStarted=true;fetchBytes('./assets/space/milky-way.png').then(async bytes=>{const url=URL.createObjectURL(new Blob([bytes]));try{const texture=await new THREE.TextureLoader().loadAsync(url);texture.colorSpace=THREE.SRGBColorSpace;for(const sky of skies){sky.material.map=texture;sky.material.color.set('#ffffff');sky.material.needsUpdate=true;}}finally{URL.revokeObjectURL(url);}}).catch(()=>{skyStarted=false;});}};
 }

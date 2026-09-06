@@ -1,3 +1,12 @@
+# museum-v1.13.0 · Wall text and progressive loading
+
+- Restore Protocol, Covenant of the Flaw and Chronicle via the sealed meta-record to three text-only wall panels. Remove the freestanding prism and its collision boundary. The original identities, source links and readable records remain.
+- Show an immediate corridor with the same footprint before downloading the existing 6.49 MB Blender model. The architectural model enhances the scene in the background; a failed download leaves the basic corridor navigable and offers a retry.
+- Bundle the vendored runtime and frozen room/source/layout/illustration data into one minified local script (about 0.78 MB). Startup no longer waits for four serial JSON requests or a module dependency waterfall. No external runtime CDN is introduced.
+- Limit artwork downloads to three at a time and prioritize the camera's nearby exhibits. Abort stalled model/image responses after 15 seconds, with two bounded attempts. Defer crystal and star-background downloads until their rooms are approached. Image failures leave readable exhibition labels.
+- Keep a reading-archive link in the initial HTML, before JavaScript loads, with a separate small loader that reports slow/failed viewer downloads and offers retry. The museum remains accessible in gallery mode on devices without WebGL.
+- Validation: 34 inward-facing wall frames, canonical wall positions, model/image timeout and retry behavior, queue concurrency, immediate corridor geometry, frozen runtime inputs and complete export hashes. The available browser has WebGL disabled; local preview access is restricted. No claim of a mainland-China network measurement or GPU visual verification is made.
+
 # museum-v1.12.0 · Three-sided prism, two original songs, clearer crystal
 
 - Add NFT #048, Let’s Raise a Toast / 让我们举杯同庆, and #050, Please Don’t Shut Me Down / 请不要关闭我, to Voices with their own original images and complete recordings. Both source texts match pinned Git blobs; all four CAR digests and included block digests are checked. Images are faithful WebP derivatives; complete audio is transcoded without trimming.

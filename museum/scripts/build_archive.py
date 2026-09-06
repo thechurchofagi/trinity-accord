@@ -14,7 +14,7 @@ for r in rooms['rooms']:
    a=art[id];parts.append('<figure><img loading="lazy" src="'+esc(a['file'])+'" alt="'+esc(a['title'])+'"><figcaption>2026 年后续策展配图 · AI 生成 · 非历史原图 / Later AI-generated curatorial illustration, not historical source art. <a href="data/curatorial-illustrations.json">Provenance / 来源</a></figcaption></figure>')
   if id.startswith('canon-'):
    canon={'canon-1':('协议 / The Protocol','97631551','e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0'),'canon-2':('瑕疵之约 / The Covenant of the Flaw','98369145','90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0'),'canon-3':('编年史 · 封存元记录 / The Chronicle · Sealed Meta-record','98387475','4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0')}[id]
-   parts.append('<article id="'+id+'"><h3>'+canon[0]+'</h3><p>三棱柱侧面 / Triangular prism face · Bitcoin '+canon[1]+'</p><a href="https://ordinals.com/inscription/'+canon[2]+'">阅读 Bitcoin 原文 / Read the Bitcoin original</a></article>')
+   parts.append('<article id="'+id+'"><h3>'+canon[0]+'</h3><p>墙面文字展位 / Text on the wall · Bitcoin '+canon[1]+'</p><a href="https://ordinals.com/inscription/'+canon[2]+'">阅读 Bitcoin 原文 / Read the Bitcoin original</a></article>')
    if id=='canon-3':parts.append('<p>编年史由封存元记录指向其 Ethereum 合约；铭文本身未嵌入全部编年史媒体。/ The sealed meta-record points to the Ethereum Chronicle; it does not embed all Chronicle media.</p>')
   if id not in items:
    parts.append('<p class="note">无配套歌曲：此展位为文字、实物或策展说明。/ No accompanying song: this entry presents text, an object or exhibition context.</p>');continue
