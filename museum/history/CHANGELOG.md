@@ -1,3 +1,9 @@
+# museum-v1.21.1 · Unobstructed artwork walls
+
+- Remove the 12 legacy full-height chapter uprights from the retained, batched titanium mesh. Their positions belonged to the older route and crossed current images and plaques. Identify complete connected pieces so no cut ends remain; preserve other metal fittings.
+- Stop generating these wall-front posts in the editable Blender builder. Keep original media, frames, plaques, floor/ceiling and the other v1.21.0 changes.
+- Regression reproduces a blocked display sightline before cleanup, confirms 12 posts / 2256 triangles removed, tests idempotence and retained floor/ceiling fittings, and checks 1836 sampled image/plaque sightlines across all 36 wall positions.
+
 # museum-v1.21.0 · Wheel walking, level close views and titanium plaques
 
 - Add canvas-only mouse-wheel walking: scroll up to advance, down to retreat. Pixel, line and page wheels use bounded, frame-rate-independent movement. Preserve browser Ctrl+wheel zoom and scrolling in lyrics/details; clear queued movement on input changes, blur and hidden tabs.

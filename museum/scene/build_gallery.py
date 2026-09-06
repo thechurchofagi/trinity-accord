@@ -49,10 +49,9 @@ for y in range(-2,int(END+1),2):
  cube('Ceiling acoustic rib',(0,y,4.7),(7.05,.055,.16),metal,.012)
  cube('Floor joint',(0,y,.001),(8.8,.008,.002),black)
 for x in [-2.2,0,2.2]:cube('Longitudinal stone joint',(x,C,.001),(.009,L,.002),black)
-# Slim chapter thresholds leave the entire central walkway unobstructed.
+# Chapter lintels remain overhead; no upright posts in front of display walls.
 for i,chapter in enumerate(layout["rooms"]):
  y=chapter["start"]-.5
- for side in [-1,1]:cube('Chapter reveal',(side*4.36,y,2.4),(.07,.11,4.8),metal,.012)
  cube('Chapter lintel',(0,y,4.38),(8.8,.11,.16),metal,.022)
  area('Soft gallery fill',(0,chapter["start"]+2,4.48),(0,chapter["start"]+2,0),850,5, size_y=6)
 # Wall-mounted frames, independent source image planes and adjustable exhibition labels.
