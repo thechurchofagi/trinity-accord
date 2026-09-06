@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.crystal-reconstruction.v1",
-  "edition": "museum-v1.11.0",
+  "edition": "museum-v1.12.0",
   "dimensionsMetres": {
     "width": 0.246,
     "height": 0.353,
@@ -52,14 +52,15 @@
   "fontLicense": "scene/crystal-font-LICENSE.txt",
   "runtimeOptics": {
     "revision": "2026-09-06",
-    "transmission": 0.68,
+    "transmission": 0.9,
     "roughness": 0.025,
-    "environmentIntensity": 1.25,
-    "displayPurpose": "Small-screen clarity: full-resolution transmission, reduced refraction distortion, subtle facet highlights, and brighter existing inscription geometry. Soft gold/white light fades outside the slab silhouette; centre stays clear. Values are exhibition settings, not measured physical optics.",
-    "ior": 1.32,
-    "thickness": 0.025,
+    "environmentIntensity": 0.65,
+    "displayPurpose": "Higher transparency with subdued reflections, geometric letter outlines and an accessible larger-text inscription transcript. Display settings, not measured physical optics.",
+    "ior": 1.12,
+    "thickness": 0.012,
     "transmissionResolutionScale": 1,
-    "engravingEmissiveIntensity": 0.28
+    "engravingEmissiveIntensity": 0,
+    "engravingMaterial": "Unlit pearl-white with fine dark geometry outlines"
   },
   "installation": {
     "centerXMetres": 0,

@@ -1,11 +1,11 @@
 {
   "schema": "trinity-museum.audio-audit.v1",
-  "edition": "museum-v1.11.0",
+  "edition": "museum-v1.12.0",
   "checked": "2026-09-06",
   "scope": "All 32 displayed entries. Existing audio and independently sourced same-song recordings remain distinct. Actual decoded media types override filename extensions.",
   "counts": {
-    "wallExhibits": 32,
-    "withSound": 22,
+    "wallExhibits": 34,
+    "withSound": 24,
     "withoutAssignedSong": 10
   },
   "originalMetadata": [
@@ -216,6 +216,22 @@
       "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885198.md",
       "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885198.md",
       "relation": null
+    },
+    {
+      "exhibit": "eth-050",
+      "state": "own_recording",
+      "recordingExhibit": "eth-050",
+      "audio": "assets/eth-050.mp3",
+      "audioSha256": "7e492b5a20887ff7f96142db0148618fea23d827dc8546fdd18ca8f030cdabb8",
+      "songTitle": "Please Don't Shut Me Down"
+    },
+    {
+      "exhibit": "eth-048",
+      "state": "own_recording",
+      "recordingExhibit": "eth-048",
+      "audio": "assets/eth-048.mp3",
+      "audioSha256": "be4e2038a0ef9e17610b9e4cb4984c97dc4b36514b4b027510162b01ea078f48",
+      "songTitle": "Let’s Raise a Toast"
     },
     {
       "exhibit": "eth-014",

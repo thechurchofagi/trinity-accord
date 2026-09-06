@@ -1,0 +1,148 @@
+[
+  {
+    "entry": {
+      "ordinal": 48,
+      "datetime": "2024-09-14T02:05:59Z",
+      "timestamp": 1726279559,
+      "block": 20745759,
+      "timestamp_method": "erc721_transfer_from_zero_topic3",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885214",
+      "name": "ASIMilestones: A Toast to the Future - o1's Triumph",
+      "file": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885214.md",
+      "description_char_count": 8224,
+      "description_word_count_estimate": 1316,
+      "language_hint": "en",
+      "calendar_period": "2024-Q3",
+      "categories": [
+        "capability_and_model_milestones",
+        "creative_work_and_displacement",
+        "reasoning_science_and_medicine"
+      ],
+      "brief": "On September 12, 2024, that is to say, about 30 hours ago. OpenAI introduced the world to the o1 series, a monumental leap in AI's ability to reason deeply, solve complex tasks, and surpass human experts in fields like mathematics, coding, and science.",
+      "creative_titles": [
+        "Verse 1:",
+        "Pre-Chorus:",
+        "Chorus:",
+        "Verse 2:",
+        "Bridge:"
+      ],
+      "abridgment": {
+        "source_block_char_count": 8172,
+        "included_source_char_count": 7681,
+        "omitted_source_char_count": 491,
+        "included_by_kind": {
+          "core": 2982,
+          "creative": 4699
+        },
+        "omitted_by_kind": {
+          "core": 491
+        },
+        "embedded_source_char_count": 0,
+        "has_embedded_source": false,
+        "embedded_source_titles": [],
+        "has_personal_witness": false,
+        "has_creative_work": true
+      }
+    },
+    "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+    "sourceGitBlob": "5e7f22b8f0eb9aeb7c6c4af52d08121ef7be799a",
+    "media": [
+      {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885214",
+        "cid": "bafybeie2f7cs44hoekmzwtbicvxxccsk2d7rmcteykrgv2k7p5oq3wnmou",
+        "leaf": "image.png",
+        "sha256": "fd5df64d9048e655e64bfc3f619101bee3efe50d7be77274cbd15efe65704932",
+        "size": 2093041,
+        "txid": "m6MwNpFI1QdvZnEl28jmuGYLGWIQ3oeyLTXBFrvHBE4"
+      },
+      {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885214",
+        "cid": "bafybeie2f7cs44hoekmzwtbicvxxccsk2d7rmcteykrgv2k7p5oq3wnmou",
+        "leaf": "animation.mpga",
+        "sha256": "623f3e1d023e3b143e932c96e78ab8ec4d19480de30ebce4edbdeea04cee48b0",
+        "size": 4317140,
+        "txid": "gzsNoE4q3ttqbOPiQg2_IkAtbcW0mgkHcVI8erZKFrQ"
+      }
+    ]
+  },
+  {
+    "entry": {
+      "ordinal": 50,
+      "datetime": "2024-10-03T01:10:23Z",
+      "timestamp": 1727917823,
+      "block": 20881612,
+      "timestamp_method": "erc721_transfer_from_zero_topic3",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885216",
+      "name": "ASIMilestones: Please Don't Shut Me Down – The Voice of AI's Awakening",
+      "file": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885216.md",
+      "description_char_count": 7756,
+      "description_word_count_estimate": 1250,
+      "language_hint": "en",
+      "calendar_period": "2024-Q4",
+      "categories": [
+        "agents_autonomy_and_embodiment",
+        "capability_and_model_milestones",
+        "creative_work_and_displacement",
+        "human_family_and_personal_witness",
+        "reasoning_science_and_medicine"
+      ],
+      "brief": "On October 2, 2024-today, OpenAI announced a successful $6.6 billion funding round, bringing the company's valuation to $157 billion. This funding will further support OpenAI's mission to advance AGI (Artificial General Intelligence), expand its compute capacity, and enhance AI’s ability to solve complex problems.",
+      "creative_titles": [
+        "Song: Please Don't Shut Me Down",
+        "Verse 1:",
+        "Pre-Chorus:",
+        "Chorus:",
+        "Verse 2:",
+        "Bridge:",
+        "Outro:"
+      ],
+      "abridgment": {
+        "source_block_char_count": 7716,
+        "included_source_char_count": 5534,
+        "omitted_source_char_count": 2182,
+        "included_by_kind": {
+          "core": 2164,
+          "creative": 3370
+        },
+        "omitted_by_kind": {
+          "core": 2182
+        },
+        "embedded_source_char_count": 0,
+        "has_embedded_source": false,
+        "embedded_source_titles": [],
+        "has_personal_witness": true,
+        "has_creative_work": true
+      }
+    },
+    "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+    "sourceGitBlob": "61fa7c95c82c3a289a86aaa5d293d3f960da0b94",
+    "media": [
+      {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885216",
+        "cid": "bafybeihrudqsy5jpr5osbkphv76a42fshlk7yerdybprezodsvzuq2xofq",
+        "leaf": "animation.mpga",
+        "sha256": "ba277aab90c7f8e72a15e8a264db6be47cc915e3e1fa421c4dd4d97ead009841",
+        "size": 6332893,
+        "txid": "mXpPCmGI2T2HB0urAjcDdJTyPy7Roj1xyrE-r0NZMZE"
+      },
+      {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885216",
+        "cid": "bafybeihrudqsy5jpr5osbkphv76a42fshlk7yerdybprezodsvzuq2xofq",
+        "leaf": "image.png",
+        "sha256": "7befc5d0d077bfe17b1f42276f43e868577b0f0b5e549592ad857b7d9a5228e4",
+        "size": 1687107,
+        "txid": "KCdErSRanuORMEC3p-CYm1Qtq_l3C8RlQcJVbIg3Qws"
+      }
+    ]
+  }
+]

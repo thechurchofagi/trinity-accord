@@ -38,7 +38,7 @@ class Links(HTMLParser):
    if k not in ['src','href'] or not v or v.startswith(('http:','https:','data:','#','mailto:')):continue
    check((D/v.split('#')[0].split('?')[0]).exists(),'Broken local HTML reference '+v)
 for f in ['index.html','archive.html']:Links().feed((D/f).read_text())
-for js in ['wall-presentation.js','museum.js','crystal-viewer.js','vendor/three.module.js','vendor/three.core.js','vendor/GLTFLoader.js','vendor/BufferGeometryUtils.js']:
+for js in ['canonical-prism.js','crystal-inscription.js','wall-presentation.js','museum.js','crystal-viewer.js','vendor/three.module.js','vendor/three.core.js','vendor/GLTFLoader.js','vendor/BufferGeometryUtils.js']:
  for dep in re.findall(r'(?:from|import)\s*[\'"]([^\'"]+)[\'"]',(D/js).read_text()):
   if dep.startswith('.'):check((D/js).parent.joinpath(dep).exists(),'Missing module '+dep)
 check((D/'assets/core-object-alpha.jpg').exists(),'Missing physical photograph')
@@ -50,7 +50,9 @@ if (D/'data/gallery-layout.json').exists():
  check((D/'data/gallery-layout.json').read_bytes()==(P/'scene/gallery-layout.json').read_bytes(),'Gallery source/config drift')
  check([e['id'] for r in layout['rooms'] for e in r['exhibits']]==[id for r in rooms['rooms'] for id in r['exhibits']],'Gallery placement identity mismatch')
  for r in layout['rooms']:
-  for e in r['exhibits']:check(abs(e['x'])==4.25 and -layout['dimensions']['length']<e['z']<0,'Exhibit outside wall bounds '+e['id'])
+  for e in r['exhibits']:
+   if e.get('kind')=='prism':check(e['id'] in {'canon-1','canon-2','canon-3'} and abs(e['x'])<1 and -42<e['z']<-35,'Invalid canonical prism placement '+e['id'])
+   else:check(abs(e['x'])==4.25 and -layout['dimensions']['length']<e['z']<0,'Exhibit outside wall bounds '+e['id'])
  b=(D/'assets/gallery/memory-gallery.glb').read_bytes();magic,version,total=struct.unpack_from('<III',b);check(magic==0x46546c67 and version==2 and total==len(b),'Invalid GLB header');jl=struct.unpack_from('<I',b,12)[0];model=json.loads(b[20:20+jl]);bl=struct.unpack_from('<I',b,20+jl)[0]
  check(all(v.get('byteOffset',0)+v['byteLength']<=bl for v in model['bufferViews']),'GLB buffer view out of bounds')
  check(all('bufferView' in im and not im.get('uri') for im in model.get('images',[])),'External model image dependency')
@@ -95,8 +97,8 @@ for row in audit['items']:
  if e.get('relatedSoundExhibit'):
   check(all(e.get('audioRelation',{}).get(k) for k in ('basis','noteZh','noteEn')),'Missing independent-recording attribution '+id)
   check(e['songTitle']==sound.get('songTitle'),'Related recording song-title mismatch '+id)
-check(playable==22 and len(wall)==32,'Expected 22 musical NFTs among 32 wall entries')
-check(audit['counts']=={'wallExhibits':32,'withSound':22,'withoutAssignedSong':10},'Audio audit counts mismatch')
+check(playable==24 and len(wall)==34,'Expected 24 musical NFTs among 34 exhibit entries')
+check(audit['counts']=={'wallExhibits':34,'withSound':24,'withoutAssignedSong':10},'Audio audit counts mismatch')
 check('Nexus: The Human-Superintelligence Odyssey' in (D/byid['eth-142']['localRecord']).read_text(),'Nexus correction lacks preserved textual evidence')
 if errors:
  print('\n'.join(errors));sys.exit(1)

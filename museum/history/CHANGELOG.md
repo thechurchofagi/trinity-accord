@@ -1,3 +1,11 @@
+# museum-v1.12.0 · Three-sided prism, two original songs, clearer crystal
+
+- Add NFT #048, Let’s Raise a Toast / 让我们举杯同庆, and #050, Please Don’t Shut Me Down / 请不要关闭我, to Voices with their own original images and complete recordings. Both source texts match pinned Git blobs; all four CAR digests and included block digests are checked. Images are faithful WebP derivatives; complete audio is transcoded without trimming.
+- Replace the three canonical wall panels with a triangular prism: three equal rectangular vertical faces and triangular caps. Protocol, Covenant of the Flaw, and Chronicle via the sealed meta-record retain their original source identities. Faces offer direct reading; the exhibit selector approaches each side. Keep both side aisles open with a walking collision boundary. This geometry belongs to the later exhibition.
+- Raise display glass transmission from 0.68 to 0.90, lower refraction and surface reflections, and add fine dark outlines to the existing light inscription geometry. Retain levitation and the diffuse aura. Add a larger-text reading view from the existing bilingual exhibition transcription in both the detail panel and reading archive.
+- Redistribute the Voices wall frames across five rows. Preserve the four-letter sequence, all earlier works, original media and the six-room architecture.
+- Validation scope: source and media hashes, audio decoding, prism geometry/picking/normals, camera bounds, distribution inventory and module syntax. No browser GPU visual verification is claimed; the existing environment lacks WebGL.
+
 # museum-v1.11.0 · Tap to approach an exhibit
 
 - Tapping a 3D exhibit or its label now moves the camera smoothly to a front-facing observation position instead of immediately opening the detail dialog. Music-bearing works keep immediate soundtrack access; the visible detail/play button still opens the full panel.

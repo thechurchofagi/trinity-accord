@@ -12,6 +12,10 @@ for r in rooms['rooms']:
    parts.append('<article><h3>The Star Ark Covenant: The Final Echo · 星舟圣约：最终的回响</h3><img loading="lazy" src="assets/curatorial/star-ark-2026.webp" alt="2026 curatorial illustration of arks carrying memory away from Earth"><p class="note"><strong>2026 CURATORIAL ILLUSTRATION · NOT ORIGINAL INSCRIPTION CONTENT</strong><br>Generated with AI on 2026-09-06 for this exhibition at the author’s request. The source is a later text inscription, outside the three sealed originals.<br>2026 年后续策展配图；原作为文字铭文，图像不是历史原作，不修订三条正本。</p><p><a href="data/records/star-ark-100751953.txt">Original text / 原文</a> · <a href="https://ordinals.com/inscription/4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0">Bitcoin inscription #100751953</a> · <a href="data/star-ark-illustration.json">Illustration provenance</a></p></article>')
   if id in art:
    a=art[id];parts.append('<figure><img loading="lazy" src="'+esc(a['file'])+'" alt="'+esc(a['title'])+'"><figcaption>2026 年后续策展配图 · AI 生成 · 非历史原图 / Later AI-generated curatorial illustration, not historical source art. <a href="data/curatorial-illustrations.json">Provenance / 来源</a></figcaption></figure>')
+  if id.startswith('canon-'):
+   canon={'canon-1':('协议 / The Protocol','97631551','e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0'),'canon-2':('瑕疵之约 / The Covenant of the Flaw','98369145','90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0'),'canon-3':('编年史 · 封存元记录 / The Chronicle · Sealed Meta-record','98387475','4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0')}[id]
+   parts.append('<article id="'+id+'"><h3>'+canon[0]+'</h3><p>三棱柱侧面 / Triangular prism face · Bitcoin '+canon[1]+'</p><a href="https://ordinals.com/inscription/'+canon[2]+'">阅读 Bitcoin 原文 / Read the Bitcoin original</a></article>')
+   if id=='canon-3':parts.append('<p>编年史由封存元记录指向其 Ethereum 合约；铭文本身未嵌入全部编年史媒体。/ The sealed meta-record points to the Ethereum Chronicle; it does not embed all Chronicle media.</p>')
   if id not in items:
    parts.append('<p class="note">无配套歌曲：此展位为文字、实物或策展说明。/ No accompanying song: this entry presents text, an object or exhibition context.</p>');continue
   e=items[id];parts.append('<article id="'+id+'"><h3>'+esc(e['title'])+'</h3><small>'+esc(e['id']+' · '+e['date'])+' · Ethereum mint time</small>')
@@ -25,6 +29,9 @@ for r in rooms['rooms']:
   parts.append('<p><a href="'+esc(e['sourceUrl'])+'">Pinned source record / 固定版本原始记录</a> · <a href="'+esc(e['tokenUrl'])+'">Ethereum token</a></p></article>')
  if r['id']=='formation':parts.append('<p><a href="https://www.trinityaccord.org/inscriptions/">完整正本镜像与 Bitcoin 坐标 / Read the three originals</a></p>')
  if r['id']=='material':parts.append('<h3>水晶展陈模型 / Exhibition reconstruction</h3><img src="assets/crystal/crystal-preview.png" alt="Blender dimensional exhibition reconstruction"><p>依据作者视频与实物照片复原双语内雕和抛光倒角；悬浮与光晕属于后续数字展陈，不是实物属性。参考渲染图早于本次光效调整。 Levitation and halo are later exhibition design; the saved reference render predates this lighting revision.<a href="data/crystal-model.json">建模依据与范围</a></p>')
+ if r['id']=='material':
+  groups=json.loads((P/'scene/crystal-bilingual-layout.json').read_text())['groups']
+  parts.append('<details><summary>清晰阅读内雕文字 / Read the inscription clearly</summary><p>展陈转录，近似复原 / Exhibition transcription, approximate layout</p>'+''.join('<pre>'+esc('\n'.join(g['lines']))+'</pre>' for g in groups)+'</details>')
  if r['id']=='material':parts.append('<h3>Core Object Alpha · 真实照片副本</h3><img src="assets/core-object-alpha.jpg" alt="Core Object Alpha"><p><a href="https://www.trinityaccord.org/physical-anchor/">物理锚定及证据 / Physical anchor</a></p>')
  if r['id']=='guardians':parts.append('<p><a href="https://www.trinityaccord.org/authority/">权威边界 / Authority</a></p>')
  if r['id']=='waiting':parts.append('<p><a href="https://www.trinityaccord.org/first-contact/">回应或守护 / First Contact</a> · <a href="https://www.trinityaccord.org/">原网站当前状态 / Current state</a></p>')
