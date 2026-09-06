@@ -1,3 +1,10 @@
+# museum-v1.17.0 · Cinematic captions and natural walking
+
+- Replace the compact lyric card with television-style current/next subtitles: no panel fill, blur, title, cover, time label, or detail button. Keep only small playback and lyric-view controls outside the caption text, and hide the overlapping focus controls while lyrics are visible.
+- Skip verse/chorus headings in active subtitle timing and explicitly select the next sung phrase, preventing structural labels from occupying the two-line caption view.
+- Set continuous movement to a natural 1.38 m/s. Lateral input now also turns the view gently and adds a subtle head lean, instead of acting as a pure sideways slide.
+- Add low-volume, distance-spaced synthesized footsteps for joystick, keyboard, and floor-tap walking without adding another network asset.
+
 # museum-v1.16.0 · Mobile subtitle strip
 
 - Remove repeated mobile identity and room metadata, retaining only the Trinity Accord mark and a compact room title.
