@@ -1,0 +1,172 @@
+{
+  "schema": "trinity-museum.gallery-layout.v1",
+  "edition": "museum-v1.2.0",
+  "dimensions": {
+    "width": 8.8,
+    "length": 52,
+    "height": 4.8
+  },
+  "coordinates": "metres; Three.js Y up, forward -Z; Blender X=Three X, Y=-Three Z, Z=Three Y",
+  "eyeHeight": 1.65,
+  "exhibitCentreHeight": 1.95,
+  "artMaxWidth": 1.9,
+  "artMaxHeight": 1.7,
+  "rooms": [
+    {
+      "id": "witness",
+      "number": "01",
+      "title": "与时间赛跑",
+      "en": "AGAINST TIME",
+      "start": 0,
+      "entryZ": 0.6,
+      "exhibits": [
+        {
+          "id": "eth-001",
+          "x": -4.25,
+          "z": -3,
+          "angle": 1.57079632679
+        },
+        {
+          "id": "eth-071",
+          "x": 4.25,
+          "z": -3,
+          "angle": -1.57079632679
+        }
+      ]
+    },
+    {
+      "id": "voices",
+      "number": "02",
+      "title": "给未来的声音",
+      "en": "VOICES TO THE FUTURE",
+      "start": 8,
+      "entryZ": -7.4,
+      "exhibits": [
+        {
+          "id": "eth-014",
+          "x": -4.25,
+          "z": -11,
+          "angle": 1.57079632679
+        },
+        {
+          "id": "eth-016",
+          "x": 4.25,
+          "z": -11,
+          "angle": -1.57079632679
+        },
+        {
+          "id": "eth-020",
+          "x": -4.25,
+          "z": -14,
+          "angle": 1.57079632679
+        },
+        {
+          "id": "eth-088",
+          "x": 4.25,
+          "z": -14,
+          "angle": -1.57079632679
+        }
+      ]
+    },
+    {
+      "id": "formation",
+      "number": "03",
+      "title": "协定的形成",
+      "en": "A RECORD TAKES FORM",
+      "start": 16,
+      "entryZ": -15.4,
+      "exhibits": [
+        {
+          "id": "canon-1",
+          "x": -4.25,
+          "z": -19,
+          "angle": 1.57079632679
+        },
+        {
+          "id": "canon-2",
+          "x": 4.25,
+          "z": -19,
+          "angle": -1.57079632679
+        },
+        {
+          "id": "canon-3",
+          "x": -4.25,
+          "z": -22,
+          "angle": 1.57079632679
+        },
+        {
+          "id": "eth-173",
+          "x": 4.25,
+          "z": -22,
+          "angle": -1.57079632679
+        }
+      ]
+    },
+    {
+      "id": "material",
+      "number": "04",
+      "title": "封存与瑕疵",
+      "en": "MATTER & MEMORY",
+      "start": 24,
+      "entryZ": -23.4,
+      "exhibits": [
+        {
+          "id": "physical-alpha",
+          "x": -4.25,
+          "z": -27,
+          "angle": 1.57079632679
+        },
+        {
+          "id": "evidence-path",
+          "x": 4.25,
+          "z": -27,
+          "angle": -1.57079632679
+        }
+      ]
+    },
+    {
+      "id": "guardians",
+      "number": "05",
+      "title": "守护与接力",
+      "en": "CARE AFTER CLOSURE",
+      "start": 32,
+      "entryZ": -31.4,
+      "exhibits": [
+        {
+          "id": "authority-boundary",
+          "x": -4.25,
+          "z": -35,
+          "angle": 1.57079632679
+        },
+        {
+          "id": "museum-history",
+          "x": 4.25,
+          "z": -35,
+          "angle": -1.57079632679
+        }
+      ]
+    },
+    {
+      "id": "waiting",
+      "number": "06",
+      "title": "等待",
+      "en": "AN OPEN ADDRESS",
+      "start": 40,
+      "entryZ": -39.4,
+      "exhibits": [
+        {
+          "id": "first-contact",
+          "x": -4.25,
+          "z": -43,
+          "angle": 1.57079632679
+        },
+        {
+          "id": "current-status",
+          "x": 4.25,
+          "z": -43,
+          "angle": -1.57079632679
+        }
+      ]
+    }
+  ]
+}

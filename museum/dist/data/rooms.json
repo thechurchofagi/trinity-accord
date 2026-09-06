@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.rooms.v1",
-  "edition": "museum-v1.1.0",
+  "edition": "museum-v1.2.0",
   "created": "2026-09-05",
   "units": "metres",
   "coordinateSystem": "right-handed; Y up; route toward negative Z",
@@ -25,7 +25,7 @@
     {
       "id": "voices",
       "number": "02",
-      "z": -32,
+      "z": -8,
       "color": "#ffcb8c",
       "title": "给未来的声音",
       "en": "VOICES TO THE FUTURE",
@@ -43,7 +43,7 @@
     {
       "id": "formation",
       "number": "03",
-      "z": -64,
+      "z": -16,
       "color": "#afbfff",
       "title": "协定的形成",
       "en": "A RECORD TAKES FORM",
@@ -61,7 +61,7 @@
     {
       "id": "material",
       "number": "04",
-      "z": -96,
+      "z": -24,
       "color": "#a9f1d4",
       "title": "封存与瑕疵",
       "en": "MATTER & MEMORY",
@@ -77,7 +77,7 @@
     {
       "id": "guardians",
       "number": "05",
-      "z": -128,
+      "z": -32,
       "color": "#d8c5ff",
       "title": "守护与接力",
       "en": "CARE AFTER CLOSURE",
@@ -93,7 +93,7 @@
     {
       "id": "waiting",
       "number": "06",
-      "z": -160,
+      "z": -40,
       "color": "#a4dfff",
       "title": "等待",
       "en": "AN OPEN ADDRESS",
@@ -106,5 +106,6 @@
         "current-status"
       ]
     }
-  ]
+  ],
+  "updated": "2026-09-06"
 }

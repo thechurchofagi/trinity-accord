@@ -48,3 +48,11 @@ Original artworks, lyrics, photos and music retain their original rights and att
 The Site working directory is an export of `museum/`. Changes must be copied back into the same repository path through a PR and tied to the corresponding GitHub commit. Sites has its own deployment commit; record the mapping in release/deployment notes rather than pretending it is the same Git commit. Never place source credentials or runtime secrets in either repository.
 
 The first edition is privately hosted for owner review. Public access is a separate audience setting. Existing root website pages and evidence workflows are not rewritten by this directory.
+
+## Blender corridor (v1.2)
+
+The 52 m corridor is authored in Blender 4.5.3 LTS. `scene/memory-gallery.blend` preserves the editable source; its image paths resolve to the existing `dist/assets` copies. `scene/gallery-layout.json` binds positions to stable exhibit IDs. The web viewer consumes `dist/assets/gallery/memory-gallery.glb` and the corresponding `dist/data/gallery-layout.json`.
+
+To rebuild with the Blender Python module, use Python 3.11 with `bpy==4.5.3`, then `python scene/build_gallery.py --bake --samples 24`. Cycles uses CPU rendering and 8 threads. Baking and the OpenImageDenoise compositor may vary slightly between machines; file digests identify this particular preserved edition, not a claim of byte-identical future rendering. The Blender preview and glTF reimport preview are reference renders, not device screenshots.
+
+Technical references: Andrew Woan, [Building a Fully-Featured 3D World in the Browser with Blender and Three.js](https://tympanus.net/codrops/2025/04/08/3d-world-in-the-browser-with-blender-and-three-js/) (8 April 2025); Blender [Cycles baking](https://docs.blender.org/manual/en/latest/render/cycles/baking.html) and [glTF export](https://docs.blender.org/manual/en/latest/addons/scene_gltf2.html). The architecture and scripts here were authored for this museum; no scene assets were copied from the reference project. GLTFLoader and BufferGeometryUtils are vendored from Three.js r180 under the existing MIT license.

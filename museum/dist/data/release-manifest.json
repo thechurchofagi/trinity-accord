@@ -1,14 +1,14 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.1.0",
+  "edition": "museum-v1.2.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
-  "created": "2026-09-05",
+  "created": "2026-09-06",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
   "files": [
     {
       "path": "archive.html",
       "bytes": 21602,
-      "sha256": "b9010e09752adc94230fd1a7e7b3b39f0a929acfb1ee86824e8afac1e451a3ce"
+      "sha256": "19819be116f52a2d15818fbee41d0e083f23c2bcec2b0dd60902e760581c041d"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -66,6 +66,21 @@
       "sha256": "1b0d521871539be3411e3cbd0e0c9da9375f954378497eae56d2b118a783c101"
     },
     {
+      "path": "assets/gallery/entrance-preview.png",
+      "bytes": 1290836,
+      "sha256": "4030bd81d6c9da05853669899aa3c3a31f268a2952d79002d04d16b0e783063d"
+    },
+    {
+      "path": "assets/gallery/gallery-light.jpg",
+      "bytes": 2193014,
+      "sha256": "9a1e332ae9fca59d89319883f366217b4413c5381d716f07edda1e45dc56fd2f"
+    },
+    {
+      "path": "assets/gallery/memory-gallery.glb",
+      "bytes": 5441312,
+      "sha256": "43c10dc8be9043dce842f39d248cfaef1e08ac25e993e51463c646e0c857380c"
+    },
+    {
       "path": "assets/guide-formation.mp3",
       "bytes": 334605,
       "sha256": "17b7da7d1e252ba1037ca14a505e40aafd7c4887919ef2053e8847705db33329"
@@ -96,34 +111,49 @@
       "sha256": "28e177f66eb687945988553dd3a4dbb6bc2be40d0b3d93830c15759196dc1473"
     },
     {
+      "path": "data/gallery-layout.json",
+      "bytes": 3531,
+      "sha256": "3d1cde216e0861bebcee472062566310cb78ff68419a86b91dc336f091a0d3c3"
+    },
+    {
       "path": "data/narration.json",
       "bytes": 4583,
       "sha256": "2ee90a9087c9fc202fe8e80b62ec5128e8ccf232d95f8508bf0b4ada13d6275d"
     },
     {
       "path": "data/rooms.json",
-      "bytes": 7976,
-      "sha256": "e572f07d17f5a39a93e9126e844df67358f9a0e792a5453588fde34d4324c4ee"
+      "bytes": 8000,
+      "sha256": "e7c621d84ca36400edd9351c705d11cffbe94853032fe24f02b74fa5901568b7"
     },
     {
       "path": "data/sources.json",
       "bytes": 25617,
-      "sha256": "878025b468d5ed274bf977bfe8eaf321c2a07067263b811c61c1cfa83923eb4a"
+      "sha256": "1636d91d622680bc6d0b3d6c1138325ab4a3599383f2a8a8375f8f890dfac5ef"
     },
     {
       "path": "index.html",
-      "bytes": 3757,
-      "sha256": "5dd64a8f757d07be7536d2aef0be91182656c280ac49e255a8728225c53e0d51"
+      "bytes": 3882,
+      "sha256": "f1b20e3e3693cc52085003fb72a684ffc7244f3b80d5329004092a1c7ec2dcbb"
     },
     {
       "path": "museum.css",
-      "bytes": 16565,
-      "sha256": "6e5ad7de582fa6e52d34e6da8f08523b5918fbe38b9cdbe4ba163fbbe36e668c"
+      "bytes": 18045,
+      "sha256": "fd8b5629383329e4c349d19961e810ae725dda3f2bbfcbda964baee7793da2a2"
     },
     {
       "path": "museum.js",
-      "bytes": 37707,
-      "sha256": "3071e43f9ed88c3db3ce04617c0e2e5b83cc409953cf80e1f62158e1cc15729b"
+      "bytes": 35200,
+      "sha256": "89e28db630309ad93d2e1aab31e846f35aa0e81be7292c56b72826f0c20e4940"
+    },
+    {
+      "path": "vendor/BufferGeometryUtils.js",
+      "bytes": 35551,
+      "sha256": "248b3e8420bd3de805ca01845c1b0cc62aa2766f3c56bdcead265e306f8e715c"
+    },
+    {
+      "path": "vendor/GLTFLoader.js",
+      "bytes": 114744,
+      "sha256": "2904f2823e23d5bc1d64512bf4c0d777ac44d728d47c34a9e3d48ce8ef6b761d"
     },
     {
       "path": "vendor/THREE-LICENSE.txt",
