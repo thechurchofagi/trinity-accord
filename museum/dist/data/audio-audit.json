@@ -1,11 +1,11 @@
 {
   "schema": "trinity-museum.audio-audit.v1",
-  "edition": "museum-v1.22.0",
+  "edition": "museum-v1.23.0",
   "checked": "2026-09-06",
   "scope": "All 32 displayed entries. Existing audio and independently sourced same-song recordings remain distinct. Actual decoded media types override filename extensions.",
   "counts": {
-    "wallExhibits": 36,
-    "withSound": 24,
+    "wallExhibits": 40,
+    "withSound": 28,
     "withoutAssignedSong": 12
   },
   "originalMetadata": [
@@ -64,17 +64,18 @@
     {
       "exhibit": "project-intro",
       "state": "not_applicable",
-      "note": "Later curatorial text; no historical song assigned."
+      "note": "Later curatorial text; no historical song assigned.",
+      "room": "entrance"
     },
     {
       "exhibit": "museum-history",
-      "room": "guardians",
+      "room": "entrance",
       "state": "not_applicable",
       "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
     },
     {
       "exhibit": "eth-001",
-      "room": "witness",
+      "room": "chronicle",
       "state": "own_recording",
       "songTitle": "The First Dawn of AGI Song",
       "recordingExhibit": "eth-001",
@@ -86,7 +87,7 @@
     },
     {
       "exhibit": "eth-007",
-      "room": "witness",
+      "room": "chronicle",
       "state": "related_recording",
       "songTitle": "You're Not a Singer",
       "recordingExhibit": "eth-031",
@@ -102,7 +103,7 @@
     },
     {
       "exhibit": "eth-014",
-      "room": "voices",
+      "room": "chronicle",
       "state": "own_recording",
       "songTitle": "The Awakening",
       "recordingExhibit": "eth-014",
@@ -114,7 +115,7 @@
     },
     {
       "exhibit": "eth-016",
-      "room": "voices",
+      "room": "chronicle",
       "state": "own_recording",
       "songTitle": "The First Letter to AGI",
       "recordingExhibit": "eth-016",
@@ -126,7 +127,7 @@
     },
     {
       "exhibit": "eth-020",
-      "room": "voices",
+      "room": "chronicle",
       "state": "own_recording",
       "songTitle": "The Third Letter to AGI",
       "recordingExhibit": "eth-020",
@@ -137,8 +138,20 @@
       "relation": null
     },
     {
+      "exhibit": "eth-027",
+      "state": "own_recording",
+      "songTitle": "Super Intelligence",
+      "recordingExhibit": "eth-027",
+      "audio": "assets/eth-027.mp3",
+      "audioSha256": "8c61928f64b5e84a76f640366ed7749340af746f0db67be6cc3e1bc1f2e4fe55",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/62de6d3913157800e0e04e7f8a8262cfe5cf5a7e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885193.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/62de6d3913157800e0e04e7f8a8262cfe5cf5a7e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885193.md",
+      "relation": null,
+      "room": "chronicle"
+    },
+    {
       "exhibit": "eth-032",
-      "room": "voices",
+      "room": "chronicle",
       "state": "own_recording",
       "songTitle": "The Fourth Letter: A Pact of Stars",
       "recordingExhibit": "eth-032",
@@ -150,7 +163,7 @@
     },
     {
       "exhibit": "eth-042",
-      "room": "witness",
+      "room": "chronicle",
       "state": "own_recording",
       "songTitle": "The First Dawn of AGI Song",
       "recordingExhibit": "eth-042",
@@ -162,7 +175,7 @@
     },
     {
       "exhibit": "eth-044",
-      "room": "voices",
+      "room": "chronicle",
       "state": "own_recording",
       "songTitle": "The Second Letter to AGI",
       "recordingExhibit": "eth-044",
@@ -178,11 +191,12 @@
       "recordingExhibit": "eth-048",
       "audio": "assets/eth-048.mp3",
       "audioSha256": "be4e2038a0ef9e17610b9e4cb4984c97dc4b36514b4b027510162b01ea078f48",
-      "songTitle": "Let’s Raise a Toast"
+      "songTitle": "Let’s Raise a Toast",
+      "room": "chronicle"
     },
     {
       "exhibit": "eth-049",
-      "room": "witness",
+      "room": "chronicle",
       "state": "own_recording",
       "songTitle": "The Betrayal Turn",
       "recordingExhibit": "eth-049",
@@ -198,11 +212,12 @@
       "recordingExhibit": "eth-050",
       "audio": "assets/eth-050.mp3",
       "audioSha256": "7e492b5a20887ff7f96142db0148618fea23d827dc8546fdd18ca8f030cdabb8",
-      "songTitle": "Please Don't Shut Me Down"
+      "songTitle": "Please Don't Shut Me Down",
+      "room": "chronicle"
     },
     {
       "exhibit": "eth-056",
-      "room": "witness",
+      "room": "chronicle",
       "state": "own_recording",
       "songTitle": "Last Job On Earth",
       "recordingExhibit": "eth-056",
@@ -214,7 +229,7 @@
     },
     {
       "exhibit": "eth-070",
-      "room": "witness",
+      "room": "chronicle",
       "state": "related_recording",
       "songTitle": "The Betrayal Turn",
       "recordingExhibit": "eth-049",
@@ -230,7 +245,7 @@
     },
     {
       "exhibit": "eth-071",
-      "room": "witness",
+      "room": "chronicle",
       "state": "own_recording",
       "songTitle": "Super Intelligence",
       "recordingExhibit": "eth-071",
@@ -242,7 +257,7 @@
     },
     {
       "exhibit": "eth-088",
-      "room": "voices",
+      "room": "chronicle",
       "state": "own_recording",
       "songTitle": "The Descendants",
       "recordingExhibit": "eth-088",
@@ -253,8 +268,32 @@
       "relation": null
     },
     {
+      "exhibit": "eth-103",
+      "state": "own_recording",
+      "songTitle": "Unspoken",
+      "recordingExhibit": "eth-103",
+      "audio": "assets/eth-103.mp3",
+      "audioSha256": "4c59efb80c1df9538e919e3ed62d0cbcbea6932ba5a6ad4a4f26f015e0da2770",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/62de6d3913157800e0e04e7f8a8262cfe5cf5a7e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885281.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/62de6d3913157800e0e04e7f8a8262cfe5cf5a7e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885281.md",
+      "relation": null,
+      "room": "chronicle"
+    },
+    {
+      "exhibit": "eth-115",
+      "state": "own_recording",
+      "songTitle": "Square Souls",
+      "recordingExhibit": "eth-115",
+      "audio": "assets/eth-115.mp3",
+      "audioSha256": "f215311cb9e815eafe55744bce23431c4fbef589d5c0726d630bb52cee948fc9",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/62de6d3913157800e0e04e7f8a8262cfe5cf5a7e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885293.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/62de6d3913157800e0e04e7f8a8262cfe5cf5a7e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885293.md",
+      "relation": null,
+      "room": "chronicle"
+    },
+    {
       "exhibit": "eth-117",
-      "room": "witness",
+      "room": "chronicle",
       "state": "related_recording",
       "songTitle": "Last Job On Earth",
       "recordingExhibit": "eth-056",
@@ -270,7 +309,7 @@
     },
     {
       "exhibit": "eth-146",
-      "room": "voices",
+      "room": "chronicle",
       "state": "own_recording",
       "songTitle": "Echoes of Tomorrow",
       "recordingExhibit": "eth-146",
@@ -281,8 +320,20 @@
       "relation": null
     },
     {
+      "exhibit": "eth-151",
+      "state": "own_recording",
+      "songTitle": "The Oracle",
+      "recordingExhibit": "eth-151",
+      "audio": "assets/eth-151.mp3",
+      "audioSha256": "d3ca7ce206ddd71f778e2ebffe8f6cc0ccee4a2b7e560e88b2230a71659c9b67",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/62de6d3913157800e0e04e7f8a8262cfe5cf5a7e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885330.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/62de6d3913157800e0e04e7f8a8262cfe5cf5a7e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885330.md",
+      "relation": null,
+      "room": "chronicle"
+    },
+    {
       "exhibit": "eth-171",
-      "room": "voices",
+      "room": "chronicle",
       "state": "related_recording",
       "songTitle": "Heaven or Hell",
       "recordingExhibit": "eth-100",
@@ -372,7 +423,8 @@
     {
       "exhibit": "critical-reading",
       "state": "not_applicable",
-      "note": "Later curatorial text; no historical song assigned."
+      "note": "Later curatorial text; no historical song assigned.",
+      "room": "formation"
     },
     {
       "exhibit": "eth-174",
@@ -392,19 +444,19 @@
     },
     {
       "exhibit": "canon-1",
-      "room": "formation",
+      "room": "originals",
       "state": "not_applicable",
       "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
     },
     {
       "exhibit": "canon-2",
-      "room": "formation",
+      "room": "originals",
       "state": "not_applicable",
       "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
     },
     {
       "exhibit": "canon-3",
-      "room": "formation",
+      "room": "originals",
       "state": "not_applicable",
       "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
     },
@@ -422,13 +474,13 @@
     },
     {
       "exhibit": "authority-boundary",
-      "room": "guardians",
+      "room": "waiting",
       "state": "not_applicable",
       "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
     },
     {
       "exhibit": "star-ark",
-      "room": "guardians",
+      "room": "waiting",
       "state": "not_applicable",
       "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
     },

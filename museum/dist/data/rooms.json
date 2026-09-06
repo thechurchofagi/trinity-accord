@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.rooms.v1",
-  "edition": "museum-v1.22.0",
+  "edition": "museum-v1.23.0",
   "created": "2026-09-05",
   "units": "metres",
   "coordinateSystem": "right-handed; Y up; route toward negative Z",
@@ -45,6 +45,7 @@
         "eth-014",
         "eth-016",
         "eth-020",
+        "eth-027",
         "eth-032",
         "eth-042",
         "eth-044",
@@ -55,8 +56,11 @@
         "eth-070",
         "eth-071",
         "eth-088",
+        "eth-103",
+        "eth-115",
         "eth-117",
         "eth-146",
+        "eth-151",
         "eth-171"
       ]
     },

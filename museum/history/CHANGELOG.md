@@ -1,3 +1,12 @@
+# museum-v1.23.0 · Four requested original musical NFTs
+
+- Add No. 103 Unspoken, No. 151 The Oracle, No. 115 Square Souls (方生方死), and No. 27 Timeline Alignment (时间对齐), whose original song is Super Intelligence.
+- Use No. 103’s own image and recording for Unspoken; No. 17 is an earlier song-related NFT with no separate image leaf in the preservation inventory.
+- Recover all four complete image/audio pairs from their pinned Arweave CAR inventory. Verify container and included block SHA-256 digests; retain source text copies, processing records and original file digests. Preserve each work’s mint date and ordinal.
+- Add four wall positions in chronological order in the Chronicle. Keep 2.18 m between adjacent works on each side and all existing exhibits. Reuse the existing original-image frames, plaques, playback and compact/expanded lyric interface.
+- Extract only each NFT’s lyric section, excluding surrounding commentary. Caption timing remains estimated; these additions do not claim line-by-line audio alignment.
+- Validate original media and complete export inventory, all 40 wall positions, navigation, loading and caption coverage. No browser-rendered or hardware listening QA is claimed.
+
 # museum-v1.22.0 · Earth at the entrance, quiet stars at the exit
 
 - Replace the shared generated Milky Way and blue random-star fallback. The entrance uses an unmodified 2048 px NASA DSCOVR/EPIC natural-color Pacific Earth photograph from 2022-06-21; initial and entrance-room views face the Earth at eye level.
