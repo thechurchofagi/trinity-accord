@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.gallery-layout.v1",
-  "edition": "museum-v1.13.1",
+  "edition": "museum-v1.14.0",
   "dimensions": {
     "width": 8.8,
     "length": 70,

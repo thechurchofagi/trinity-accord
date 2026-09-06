@@ -7,7 +7,7 @@ main-site URLs and declares the canonical address. This deployment-only change
 is identified by its Git commit and updated export manifest; it does not replace
 the already archived v1.13.1 release.
 
-# museum-v1.13.1 · Smaller startup text textures
+# museum-v1.14.0 · Smaller startup text textures
 
 - Cap image loading/error placeholders at 512 × 384, wall labels at 1024 × 180, and the three canonical text panels at 1024 × 768. This removes about 447 MiB of raw RGBA canvas/texture backing from the 34-frame startup design before mipmaps, while preserving original artwork files and image resolution.
 - Show Chinese and English once each on canonical wall panels, independent of UI language.
@@ -131,3 +131,9 @@ The exhibit IDs, source manifests, media transformation records, guide scripts, 
 Validation scope: local source syntax, source-copy digests, audio decoding, content completeness and internal file references. No browser or device-specific visual testing was requested in this creation turn; no claim is made that such testing or a recorded walkthrough has been completed.
 
 Future changes must add a dated entry and preserve formal release snapshots. Never rewrite an old edition to conceal an earlier interpretation or defect; attach corrections and publish a new version.
+# museum-v1.14.0 · In-gallery synchronized lyrics
+
+- Selecting a musical artwork now starts its track and opens a lyric stage in the viewing surface; visitors no longer need to open the detail dialog to understand the song.
+- Lyrics advance and highlight against the recording clock. Where the preserved NFT supplies lyrics but no authored timestamps, the viewer distributes cues by phrase length and labels the result as exhibition synchronization rather than a canonical transcript.
+- The compact player is contained inside the lyric stage, with responsive space reserved above the navigation dock, so it no longer covers room titles, artwork captions, or control labels on narrow screens.
+- Song records with lyrics stored in their preserved local source can load that text on demand. The o3 witness song retains its source lyric display in the runtime, while repeated recordings reuse the matching preserved lyric text.

@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.13.1",
+  "edition": "museum-v1.14.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "created": "2026-09-06",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
@@ -8,7 +8,7 @@
     {
       "path": "archive.html",
       "bytes": 67861,
-      "sha256": "7a47f8b2ac3b5b80d625f7880e756910d0d807ae2fe561701595b510aec97765"
+      "sha256": "03a4148f5290083f1ca1bdd9904e2e7d1cf561d614cf4259322f84c3b43ca5af"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -353,7 +353,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1004,
-      "sha256": "a56d731b9246dd9dbc19d288e8bf98139798fa40e7a5c452803f4ba4c37a74b6"
+      "sha256": "21594313a5a42046edcf0107907773de4c233fded7b927829369d34a7e82e65c"
     },
     {
       "path": "crystal-inscription.js",
@@ -373,12 +373,12 @@
     {
       "path": "data/audio-audit.json",
       "bytes": 29391,
-      "sha256": "012acbc4396ccf2b4de361cc8b375cf4f612170f4244e585cb258f35e9a169b0"
+      "sha256": "8a85260a85aac9df8c5488f873622f1cb291f110fcfed766f8963da8c03c2f7f"
     },
     {
       "path": "data/crystal-model.json",
       "bytes": 3306,
-      "sha256": "4564cf5cc110369e19c3e5429d9f5684d69e1823596f33866e2bbfccc8f66a46"
+      "sha256": "c45dc8df103f28700c6f69f1ffe35e0370d81177c638ac99748af066d6377051"
     },
     {
       "path": "data/crystal-video-reference.json",
@@ -388,12 +388,12 @@
     {
       "path": "data/curatorial-illustrations.json",
       "bytes": 11073,
-      "sha256": "b4d1405a5d0db9a7f3b7b71c7202e5d31427cb759fe9d2fe6a79f3138c7fb68d"
+      "sha256": "086508afe3627e03cb3557b15fd61248d8775ede7a6c48d7ef5981ff21d1a553"
     },
     {
       "path": "data/gallery-layout.json",
       "bytes": 6068,
-      "sha256": "67870e8bdf682ee9b0e8cf262a946dd4d206fe29607b84b31d714f0625201c80"
+      "sha256": "89670720c0b5d81d011c85d823db86e5baa579cd2ded78be3f8629a222b9f465"
     },
     {
       "path": "data/narration.json",
@@ -518,12 +518,12 @@
     {
       "path": "data/rooms.json",
       "bytes": 8839,
-      "sha256": "d9c69d24818d3c47736c1e907ca732c1dd429571fc04fd4a928ee84e74a37cce"
+      "sha256": "017466ace94f0081e915af41988fe7a0d85f1e78a61bbc2d549939de24b6b5c9"
     },
     {
       "path": "data/sources.json",
       "bytes": 126331,
-      "sha256": "27047f51e9f53fcf594412afb0fba8b05947294e35c2aafb1c6ae42d42e72932"
+      "sha256": "33ce6e619225e5a835e93f2ed55522de06989fe21566c6270d02ad3ef7620613"
     },
     {
       "path": "data/space-design.json",
@@ -538,12 +538,12 @@
     {
       "path": "edition-data.js",
       "bytes": 131349,
-      "sha256": "a59e1a192e37720ae967c5029b86379f1e9f4e68849e849229188c64037f0bf2"
+      "sha256": "383cb1d7986c66f56a410656121c63f7ef13791ae494df60d3037215a392fb3a"
     },
     {
       "path": "index.html",
-      "bytes": 4896,
-      "sha256": "b32749f74bc57b8bc14b62aeb3c636349d24d83c2dcdf5f3e9336e504dbf5752"
+      "bytes": 5269,
+      "sha256": "41fbac72b7d998003491dc518d96e721709523de942aa4087bea5117e9a32d2f"
     },
     {
       "path": "movement-controls.js",
@@ -552,18 +552,18 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 777351,
-      "sha256": "595cbb689e65ba3de16346684368eb10d52955817c700de2b4a3e4b2b5af09e4"
+      "bytes": 781329,
+      "sha256": "c068c897219e2a177dee89e2183c61ecb45d2e3b6bf8b41212567dc3091ad776"
     },
     {
       "path": "museum.css",
-      "bytes": 26579,
-      "sha256": "a57b9475e27fa04ff437628eabd2664dfa754e39b81679de50ba249eda136a83"
+      "bytes": 29394,
+      "sha256": "e7fae06536b11d68c32b0dfac026623e95fd2ac624b6573466fc37bd99f79a17"
     },
     {
       "path": "museum.js",
-      "bytes": 53183,
-      "sha256": "cfb9a2423a8518b64d0988406d2c9d56b2c72473a9e60867c08c0ee78e664756"
+      "bytes": 57912,
+      "sha256": "71d5072ef9cb49d8cfdd34df80cb7e143ac5147abf934f84264247918c3340ec"
     },
     {
       "path": "observation-view.js",
