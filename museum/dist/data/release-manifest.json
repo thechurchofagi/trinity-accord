@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.18.0",
+  "edition": "museum-v1.18.1",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "created": "2026-09-06",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
@@ -8,7 +8,7 @@
     {
       "path": "archive.html",
       "bytes": 67861,
-      "sha256": "f68ecfd91e4023169c360cf08ed8a119ea7856fa3c0a5251798af42ca7afa98c"
+      "sha256": "1fa4f4a3199b4c4c38e998d15015b84bb2f720c7987385207bcb755faf0346e1"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -353,7 +353,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1004,
-      "sha256": "ca0ba0b39d5ec4e78045686c8c4b938262c937d40b3638a6bdafde96123629d0"
+      "sha256": "b614fe6bd7b6776a9322e751d0a756958a2477564d4367c28b755f18a6053857"
     },
     {
       "path": "caption-utils.js",
@@ -378,12 +378,12 @@
     {
       "path": "data/audio-audit.json",
       "bytes": 29391,
-      "sha256": "7d5dab38ddff10ed0f6e85330f4bf3a1cf7bd3aad4432ca824d6d7f9d1f6de90"
+      "sha256": "54a5a7bb6de4bb8f614b8f99d05196c948354844881541b0b907e5ed1068d3c8"
     },
     {
       "path": "data/crystal-model.json",
       "bytes": 3306,
-      "sha256": "a65c4ffd1502f0e637ecbf22b674ce499a51a82047e7d993462f16eeca329ea1"
+      "sha256": "934fc03c96d3ea99332c0d5db43962f69c7989fccdc2716ec52ab00edbbee2f8"
     },
     {
       "path": "data/crystal-video-reference.json",
@@ -393,12 +393,12 @@
     {
       "path": "data/curatorial-illustrations.json",
       "bytes": 11073,
-      "sha256": "65863bcd5ea03116a28af2e1925f7e457679c9e0c9a97e32e5ade5ce0a0ea2fe"
+      "sha256": "aca568d5ceb4414206db45b45bbf418bb7cde5b6c74dcd60f4e725403437621a"
     },
     {
       "path": "data/gallery-layout.json",
       "bytes": 6068,
-      "sha256": "da00081ecdbdc0d01d98095c31f8c5757b8c72f22ae17269ec697b23ca898fff"
+      "sha256": "e3b1c290c318826eeea89a842bc4d7082721c0be3b9cbf24c8b8f787a640cd18"
     },
     {
       "path": "data/narration.json",
@@ -523,12 +523,12 @@
     {
       "path": "data/rooms.json",
       "bytes": 8839,
-      "sha256": "0414635a800bf8622c0b4e7c7486059b976135614be050d6500927b4106783b3"
+      "sha256": "8d464d3818b6dad0dfb3c4380ffe954373996b9debea7d5a552332c29e7caaa0"
     },
     {
       "path": "data/sources.json",
       "bytes": 126331,
-      "sha256": "d353c194b6865e9f8cc882bba3efeee107881df3680feed9d3372fce30117de8"
+      "sha256": "2e864b3dd9393febd5edfe766e63c66d334439fb055e4d3ad864a294156ac63f"
     },
     {
       "path": "data/space-design.json",
@@ -543,12 +543,12 @@
     {
       "path": "edition-data.js",
       "bytes": 131349,
-      "sha256": "feebad3c398e8bb58bc65c5d81e6a853c9e9aeba7da6f88e9cf52e91680f766c"
+      "sha256": "33578d000d3f5b87a7b09981d79f203396c93da26a3982b97215c92d23e98176"
     },
     {
       "path": "index.html",
       "bytes": 5444,
-      "sha256": "5210a4816c173f5317e964040bd82dbc2f5c1d4e8d0c7e33fceea5c75749f3a4"
+      "sha256": "0f07d728c4b2379815ef008ad8a2e3f11a58d7464a324b4cfcf3f3fb04a359be"
     },
     {
       "path": "movement-controls.js",
@@ -557,8 +557,8 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 786775,
-      "sha256": "94aa100d9789745095d60505515af1cf8183a55461b33c7989d72f4c6c9cfb31"
+      "bytes": 786783,
+      "sha256": "262bb65278538d0da336c8f422123904c1520187d7930ed62f322ebeb48cfa4d"
     },
     {
       "path": "museum.css",
@@ -567,8 +567,8 @@
     },
     {
       "path": "museum.js",
-      "bytes": 62764,
-      "sha256": "743714742a349623eeca6d4ce4cc8ffc2ead9ea674b5d0ddbf8ef7867b94491f"
+      "bytes": 62776,
+      "sha256": "6b55af7d4c09404a3e9675b756a580a04b769a8230c16803fe17523bcb82dc02"
     },
     {
       "path": "observation-view.js",

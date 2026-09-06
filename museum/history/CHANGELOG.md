@@ -1,3 +1,7 @@
+# museum-v1.18.1 · Stop walking when reading
+
+- Cancel an in-progress walk when a detail dialog opens, preventing a position jump when returning from a long reading pause.
+
 # museum-v1.18.0 · Caption reliability and default footsteps
 
 - Replace layered lyric-card CSS with independent caption and playback lanes. Compact captions contain only up to two physical lines, with no panel, blur, title, or clipped overflow. Long phrases page using measured font width.
