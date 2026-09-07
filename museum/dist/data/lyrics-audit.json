@@ -1,6 +1,6 @@
 {
   "schemaVersion": "lyrics-audit-v1",
-  "edition": "museum-v1.25.0",
+  "edition": "museum-v1.26.0",
   "status": "automatic-audio-alignment",
   "manualListeningReviewed": false,
   "limitations": [

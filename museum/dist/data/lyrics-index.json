@@ -1,6 +1,6 @@
 {
   "schemaVersion": "lyrics-index-v1",
-  "edition": "museum-v1.25.0",
+  "edition": "museum-v1.26.0",
   "items": [
     {
       "exhibitId": "eth-001",
@@ -227,5 +227,10 @@
       "lineCount": 28,
       "wordCount": 175
     }
-  ]
+  ],
+  "translation": {
+    "file": "data/lyrics-zh.json",
+    "sha256": "fe97e247690ebc68bdce165fdd3ac545946b8385efc6b2b7830e34e043d0c35b",
+    "language": "zh-Hans"
+  }
 }

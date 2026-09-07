@@ -54,7 +54,7 @@ publish a separate ChatGPT Sites copy as a substitute for updating this site.
 
 ## Word captions
 
-All 25 recordings use offline acoustic word alignment. Recording variants stay
+Playable artwork plaques carry a music note. All 25 recordings use offline acoustic word alignment, with a complete Chinese line beneath the highlighted English. Chinese translations are stored separately in `dist/data/lyrics-zh.json`; repeated lines reuse the same translation. Recording variants stay
 separate from source NFT text; the original records and media remain unchanged.
 See `scripts/lyrics/README.md` for reproduction and `dist/data/lyrics-audit.json`
 for review flags. Automatic timing is not a manual listening certification.

@@ -1,3 +1,11 @@
+# museum-v1.26.0 · Music plaques and bilingual lyrics
+
+- Add a visible musical note beside the number on each metal plaque whose exhibit has a playable own or linked recording. Use the same recording resolution as the play button; unavailable recordings receive no symbol.
+- Display a complete Simplified Chinese translation beneath the English lyric in both compact and expanded modes. English keeps its existing acoustic word highlighting; Chinese changes only with the sung line and stays intact when a long English line pages.
+- Translate 539 distinct sung lines across 25 recordings, sharing translations for repeated lyrics. Review the local translation draft and correct terminology, metaphors and omissions. Store translation as later exhibition text in its own hash-bound file; original NFT text, recordings and all 5,820 word intervals are unchanged.
+- Keep compact captions transparent, allow Chinese text to wrap, and move the phone joystick above the measured caption height. Fetch the Chinese text once on demand, with a versioned cache key.
+- Validate translation coverage and hash binding, plaque symbol formatting, all existing word boundaries and paging, module syntax, navigation, frames, Earth sequence, sky and frozen export inventory. Continue publication through the existing museum host.
+
 # museum-v1.25.0 · Audio-derived word captions
 
 - Replace duration-weighted lyric estimates with per-word acoustic timestamps for all 25 recordings. The audio element's current time drives highlighting and word-based two-line paging, including seeking, pausing, changing tracks and returning from a hidden tab.
