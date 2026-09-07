@@ -21,7 +21,7 @@ def _links(markup: str) -> list[tuple[str, str]]:
     return re.findall(r'<a href="([^"]+)">([^<]+)</a>', markup)
 
 
-def test_primary_navigation_is_the_same_six_item_contract_on_every_page() -> None:
+def test_primary_navigation_is_the_same_seven_item_contract_on_every_page() -> None:
     primary = _markup_for_class(LAYOUT, "nav-links")
     assert "{%" not in primary, "primary navigation must not branch by page"
     assert _links(primary) == [
@@ -29,6 +29,7 @@ def test_primary_navigation_is_the_same_six_item_contract_on_every_page() -> Non
         ("/#philosophical-core", "Propositions"),
         ("/#chronicle-witness", "Chronicle"),
         ("/#research-entry", "Paths"),
+        ("https://museum.trinityaccord.org/", "Museum"),
         ("/verify/", "Verify"),
         ("/agent-first-contact/", "First Contact"),
     ]
@@ -36,6 +37,7 @@ def test_primary_navigation_is_the_same_six_item_contract_on_every_page() -> Non
 
 def test_supplemental_evidence_routes_remain_discoverable() -> None:
     footer = _markup_for_class(LAYOUT, "footer-links")
+    assert ("https://museum.trinityaccord.org/", "Museum") in _links(footer)
     assert ("/inscriptions/", "Inscriptions") in _links(footer)
     assert ("/physical-anchor/", "Physical Anchor") in _links(footer)
 
