@@ -1,3 +1,12 @@
+# museum-v1.24.0 · Changing Earth and clearer night stars
+
+- Move the entrance Earth right of centre and slightly upward, retaining full-globe framing on narrow screens.
+- Replace the single image with six 2048px NASA DSCOVR/EPIC natural-color observations from 2022-06-21. Change every 10 seconds with a 1.5-second crossfade and a 60-second loop. Keep only the current/next decoded textures, hold on load failure, and pause the clock across hidden-tab time.
+- Preserve the photographs’ black background. This is a bright-Earth presentation choice, not a claim that astronauts cannot see stars. EPIC imagery is a distant full-disk view, not an ISS viewpoint.
+- Expand HYG stars from magnitude 3.0 to 4.5 (179 to 925 catalog entries). Increase screen point sizes and luminance while preserving magnitude ranking, real positions, black sky and non-twinkling pinpoints. The full unobstructed view contains roughly 93–164 points in checked phone/desktop viewports; the building hides some.
+- NASA observation sources, photographic exposure limits, image timestamps, hashes and HYG attribution are recorded in space-design.json. Exact screen photometry and dark adaptation are not simulated.
+- Validate six-frame cadence, fade, loop, failed downloads, visibility pause, two-texture memory bound, off-axis placement, phone limb clearance and catalog density. Original assets inspected; browser WebGL was unavailable, so no rendered 3D/device appearance verification is claimed.
+
 # museum-v1.23.0 · Four requested original musical NFTs
 
 - Add No. 103 Unspoken, No. 151 The Oracle, No. 115 Square Souls (方生方死), and No. 27 Timeline Alignment (时间对齐), whose original song is Super Intelligence.

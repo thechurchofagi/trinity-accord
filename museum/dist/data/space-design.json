@@ -1,21 +1,180 @@
 {
-  "edition": "museum-v1.22.0",
+  "edition": "museum-v1.24.0",
   "role": "Later exhibition window scenery; not an NFT, canonical artwork, live feed or simulated observing location.",
   "earth": {
-    "file": "assets/space/earth-epic-20220621.png",
-    "credit": "NASA / NOAA / DSCOVR EPIC team",
-    "sourcePage": "https://epic.gsfc.nasa.gov/",
+    "credit": "NASA EPIC Team / DSCOVR",
+    "sourcePage": "https://epic.gsfc.nasa.gov/?date=2022-06-21",
     "sourceMetadata": "https://epic.gsfc.nasa.gov/api/natural/date/2022-06-21",
-    "sourceImage": "https://epic.gsfc.nasa.gov/archive/natural/2022/06/21/png/epic_1b_20220621201443.png",
-    "imageId": "epic_1b_20220621201443",
-    "date": "2022-06-21",
-    "dimensions": [
-      2048,
-      2048
+    "frames": [
+      {
+        "index": 1,
+        "filename": "earth-01.jpg",
+        "source_url": "https://epic.gsfc.nasa.gov/archive/natural/2022/06/21/png/epic_1b_20220621003635.png",
+        "source_page": "https://epic.gsfc.nasa.gov/?date=2022-06-21",
+        "source_api": "https://epic.gsfc.nasa.gov/api/natural/date/2022-06-21",
+        "observation_utc": "2022-06-21 00:31:45Z",
+        "identifier": "20220621003635",
+        "image_id": "epic_1b_20220621003635",
+        "credit": "NASA EPIC Team / DSCOVR",
+        "source_sha256": "79f7084968de51552a8030c48d6474d889346f48147757d5ade32f61d72b8f34",
+        "derived_sha256": "cb4f8a5e58af2ebf619106c7f3cf57a484d6543867c8d770d44f753fe9ba1088",
+        "source_dimensions": [
+          2048,
+          2048
+        ],
+        "derived_dimensions": [
+          2048,
+          2048
+        ],
+        "derivation": "PNG converted to JPEG quality 94, no crop, rescale, color changes, or generative edits.",
+        "centroid_coordinates": {
+          "lat": 20.383301,
+          "lon": 161.271973
+        },
+        "file": "assets/space/earth-01.jpg"
+      },
+      {
+        "index": 2,
+        "filename": "earth-02.jpg",
+        "source_url": "https://epic.gsfc.nasa.gov/archive/natural/2022/06/21/png/epic_1b_20220621045822.png",
+        "source_page": "https://epic.gsfc.nasa.gov/?date=2022-06-21",
+        "source_api": "https://epic.gsfc.nasa.gov/api/natural/date/2022-06-21",
+        "observation_utc": "2022-06-21 04:53:33Z",
+        "identifier": "20220621045822",
+        "image_id": "epic_1b_20220621045822",
+        "credit": "NASA EPIC Team / DSCOVR",
+        "source_sha256": "580fdd6f4cb05e9313274383b8785020a7b7c2aa2353c32eee9d4e939f25b084",
+        "derived_sha256": "01926c04510f322082e8a52779200aef3e32fc1e22f485839ca2a76ba0a5c600",
+        "source_dimensions": [
+          2048,
+          2048
+        ],
+        "derived_dimensions": [
+          2048,
+          2048
+        ],
+        "derivation": "PNG converted to JPEG quality 94, no crop, rescale, color changes, or generative edits.",
+        "centroid_coordinates": {
+          "lat": 20.368652,
+          "lon": 95.756836
+        },
+        "file": "assets/space/earth-02.jpg"
+      },
+      {
+        "index": 3,
+        "filename": "earth-03.jpg",
+        "source_url": "https://epic.gsfc.nasa.gov/archive/natural/2022/06/21/png/epic_1b_20220621081444.png",
+        "source_page": "https://epic.gsfc.nasa.gov/?date=2022-06-21",
+        "source_api": "https://epic.gsfc.nasa.gov/api/natural/date/2022-06-21",
+        "observation_utc": "2022-06-21 08:09:55Z",
+        "identifier": "20220621081444",
+        "image_id": "epic_1b_20220621081444",
+        "credit": "NASA EPIC Team / DSCOVR",
+        "source_sha256": "1403615a200d5eeb06f861c99065355d2258d4c0c6f234b2b8902db677f8745b",
+        "derived_sha256": "6f78fefae7c1939e73be0129a9406e5f7ef0bbf1ce67de852de1748ae758f03b",
+        "source_dimensions": [
+          2048,
+          2048
+        ],
+        "derived_dimensions": [
+          2048,
+          2048
+        ],
+        "derivation": "PNG converted to JPEG quality 94, no crop, rescale, color changes, or generative edits.",
+        "centroid_coordinates": {
+          "lat": 20.339355,
+          "lon": 46.662598
+        },
+        "file": "assets/space/earth-03.jpg"
+      },
+      {
+        "index": 4,
+        "filename": "earth-04.jpg",
+        "source_url": "https://epic.gsfc.nasa.gov/archive/natural/2022/06/21/png/epic_1b_20220621123633.png",
+        "source_page": "https://epic.gsfc.nasa.gov/?date=2022-06-21",
+        "source_api": "https://epic.gsfc.nasa.gov/api/natural/date/2022-06-21",
+        "observation_utc": "2022-06-21 12:31:44Z",
+        "identifier": "20220621123633",
+        "image_id": "epic_1b_20220621123633",
+        "credit": "NASA EPIC Team / DSCOVR",
+        "source_sha256": "b7705148c7ae8eaf68868c22014d927a6f6e0bfa5f3a2a383a629b08bdc2ed66",
+        "derived_sha256": "fe102106fba40e04b9c5c30d59e9bb679e7b1e5808097f2bc4769cca96606248",
+        "source_dimensions": [
+          2048,
+          2048
+        ],
+        "derived_dimensions": [
+          2048,
+          2048
+        ],
+        "derivation": "PNG converted to JPEG quality 94, no crop, rescale, color changes, or generative edits.",
+        "centroid_coordinates": {
+          "lat": 20.34668,
+          "lon": -18.830566
+        },
+        "file": "assets/space/earth-04.jpg"
+      },
+      {
+        "index": 5,
+        "filename": "earth-05.jpg",
+        "source_url": "https://epic.gsfc.nasa.gov/archive/natural/2022/06/21/png/epic_1b_20220621165822.png",
+        "source_page": "https://epic.gsfc.nasa.gov/?date=2022-06-21",
+        "source_api": "https://epic.gsfc.nasa.gov/api/natural/date/2022-06-21",
+        "observation_utc": "2022-06-21 16:53:33Z",
+        "identifier": "20220621165822",
+        "image_id": "epic_1b_20220621165822",
+        "credit": "NASA EPIC Team / DSCOVR",
+        "source_sha256": "ddf77e8d24b066b64818cbd1c7f817a3c2ea2d80bfc17fa7e11391360164d62f",
+        "derived_sha256": "85514c4b401b427a0517d9afe7521c512950d5d01758bb9a8076a4a8ce7e134f",
+        "source_dimensions": [
+          2048,
+          2048
+        ],
+        "derived_dimensions": [
+          2048,
+          2048
+        ],
+        "derivation": "PNG converted to JPEG quality 94, no crop, rescale, color changes, or generative edits.",
+        "centroid_coordinates": {
+          "lat": 20.339355,
+          "lon": -84.250488
+        },
+        "file": "assets/space/earth-05.jpg"
+      },
+      {
+        "index": 6,
+        "filename": "earth-06.jpg",
+        "source_url": "https://epic.gsfc.nasa.gov/archive/natural/2022/06/21/png/epic_1b_20220621212011.png",
+        "source_page": "https://epic.gsfc.nasa.gov/?date=2022-06-21",
+        "source_api": "https://epic.gsfc.nasa.gov/api/natural/date/2022-06-21",
+        "observation_utc": "2022-06-21 21:15:22Z",
+        "identifier": "20220621212011",
+        "image_id": "epic_1b_20220621212011",
+        "credit": "NASA EPIC Team / DSCOVR",
+        "source_sha256": "fea3336950e4834051b3abaa618a499c94e8577efa76507f209db72b68622cfe",
+        "derived_sha256": "4c0b37bdf8224448a3d72403126c98da69499b3df738a28956be2b3cf3af0d1f",
+        "source_dimensions": [
+          2048,
+          2048
+        ],
+        "derived_dimensions": [
+          2048,
+          2048
+        ],
+        "derivation": "PNG converted to JPEG quality 94, no crop, rescale, color changes, or generative edits.",
+        "centroid_coordinates": {
+          "lat": 20.310059,
+          "lon": -149.641113
+        },
+        "file": "assets/space/earth-06.jpg"
+      }
     ],
-    "sha256": "46fdb7f82de2ecb1a6cdadae73521c47e6084c80c1f2a17a4194513d47c55e1c",
-    "processing": "Unmodified NASA natural-color PNG, including original black background and limb. Pacific-centred view. No generated land/clouds, saturation filter, artificial terminator or added atmospheric halo.",
-    "installation": "Entrance direction +Z. Camera-relative distant image plane with fixed world orientation; responsive angular size."
+    "intervalSeconds": 10,
+    "crossfadeSeconds": 1.5,
+    "residentTextures": 2,
+    "installation": "Fixed celestial orientation, entrance direction +Z; globe sits to the right and slightly above the entrance axis, with responsive sizing that keeps its full limb inside phone viewports. Six genuine natural-color observations from the same day; a 60-second exhibition loop, not a live stream or physical orbit simulation. DSCOVR observes from about one million miles away, not from the ISS.",
+    "background": "Preserve the original photographic black background. Stars are omitted in the bright-Earth view as an exposure/presentation choice, not a claim that stars cannot be seen by human observers near Earth.",
+    "failureBehavior": "Keep the current frame if the next download fails; retry later. Pause the sequence clock across tab visibility changes; never blank the Earth during a transition."
   },
   "stars": {
     "file": "data/bright-stars.json",
@@ -25,12 +184,33 @@
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
     "licenseFile": "assets/space/HYG-LICENSE.txt",
-    "sha256": "e9f78a46874964ae1ec70ea9bdcec9442ae53aeb6da96ccd0deae6f67ed33d10",
-    "selection": "Exclude Sun, retain visual magnitude <= 3.0; copy catalog ID, right ascension, declination and magnitude. J2000 catalog positions, no current-date precession.",
-    "rows": 179,
+    "sha256": "331b52afd8eac7536f80e7eb22c43e313ff2b203bf9fe74772cd29bf24d72c4f",
+    "selection": "Exclude Sun, retain visual magnitude <= 4.5; copy catalog ID, right ascension, declination and magnitude. J2000 positions, no current-date precession.",
+    "rows": 925,
     "orientation": "Exit faces RA 6h, Dec 0 degrees; fixed celestial arrangement, not a claimed Earth-based local sky.",
-    "appearance": "Black background; small neutral star points weighted by catalog magnitude, no twinkling, flares, nebulae or long-exposure Milky Way. Curated visibility for a lit gallery, not a model of fully dark-adapted vision.",
-    "renderingLicense": "Star subset and its rendered arrangement: CC BY-SA 4.0; application code is separate."
+    "appearance": "Black background with magnitude-ranked neutral pinpoints. Screen size and luminance deliberately increased for legibility, with a compressed brightness range and stable CSS-pixel size at different display densities. No twinkling, flares, colored nebulae or photographic Milky Way. This is a representative catalog view inspired by shielded nighttime observation, not a calibrated naked-eye or exact ISS view.",
+    "renderingLicense": "Star subset and its rendered arrangement: CC BY-SA 4.0; application code is separate.",
+    "pointDiameterCssPixels": "About 1.7–3.75 CSS px, varying with magnitude; device pixel ratio is applied once.",
+    "unoccludedViewportCounts": {
+      "390x844": 93,
+      "430x932": 93,
+      "1440x900": 160,
+      "1920x1080": 164
+    }
   },
-  "lighting": "Exit point fill reduced 18 to 6; invitation ring emissive baseline 2.1 to 0.65; floor and labels remain readable."
+  "lighting": "Exit point fill reduced 18 to 6; invitation ring emissive baseline 2.1 to 0.65; floor and labels remain readable.",
+  "observationReferences": [
+    {
+      "url": "https://cosmicopia.gsfc.nasa.gov/qa_star.html",
+      "basis": "NASA explains that stars in space look bright, clear and non-twinkling; their absence in many photos is an exposure issue. Human vision responds differently from a camera."
+    },
+    {
+      "url": "https://www.nasa.gov/podcasts/houston-we-have-a-podcast/the-art-of-astronaut-photography/",
+      "basis": "ISS astronauts describe nighttime camera exposure settings and window shrouds used to exclude cabin reflections. Night photographs are not direct measurements of naked-eye appearance."
+    },
+    {
+      "url": "https://science.nasa.gov/earth/earth-observatory/stargazing-from-the-iss-88026/",
+      "basis": "A documented short-lens ISS star photograph provides observational context. This installation does not copy a long-exposure starfield or claim the same observing position."
+    }
+  ]
 }

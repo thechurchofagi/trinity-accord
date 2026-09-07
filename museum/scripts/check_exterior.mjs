@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import * as T from '../dist/vendor/three.module.js';
 import {addOpenSpace,starDirection} from '../dist/open-space.js';
 const catalog=JSON.parse(fs.readFileSync(new URL('../dist/data/bright-stars.json',import.meta.url)));
-assert.equal(catalog.stars.length,179);
-assert(catalog.stars.every(([id,ra,dec,mag])=>id>0&&ra>=0&&ra<24&&Math.abs(dec)<=90&&mag<=3.0));
+assert.equal(catalog.stars.length,925);
+assert(catalog.stars.every(([id,ra,dec,mag])=>id>0&&ra>=0&&ra<24&&Math.abs(dec)<=90&&mag<=4.5));
 assert(starDirection(6,0).distanceTo(new T.Vector3(0,0,-1))<1e-12);
 assert(starDirection(0,0).distanceTo(new T.Vector3(1,0,0))<1e-12);
 // Canvas is used only for the existing invitation sign, never the exterior.
@@ -23,9 +23,15 @@ for(const [w,h] of [[390,844],[430,932],[1440,900],[1920,1080]]){
   camera.position.fromArray(p);exterior.update(camera,2);scene.updateMatrixWorld(true);
   const relative=earth.getWorldPosition(new T.Vector3()).sub(camera.position);
   if(initial)assert(relative.distanceTo(initial)<1e-10);else initial=relative;
-  assert.equal(relative.y,0);assert(relative.z>0&&relative.z<camera.far);
+  assert(relative.x<0&&relative.y>0,'Earth must sit off the entrance axis');assert(relative.z>0&&relative.z<camera.far);
   const projectedWidth=earth.scale.x/(2*179*Math.tan(T.MathUtils.degToRad(camera.fov/2))*camera.aspect);
-  assert(projectedWidth<=.901,'Earth square exceeds narrow viewport');
+  assert(projectedWidth<=.831,'Earth square exceeds narrow viewport');
+  const horizontalSpan=2*179*Math.tan(T.MathUtils.degToRad(camera.fov/2))*camera.aspect;
+  const centre=.5-relative.x/horizontalSpan;
+  assert(centre>=.60&&centre<=.661,'Earth remains visibly off-centre');
+  // EPIC globe radius is at most 40% of its black square canvas width.
+  assert(centre+projectedWidth*.4<1,'Earth limb clips a narrow viewport');
+  assert(scene.getObjectByName('NASA EPIC Earth transition').position.distanceTo(earth.position)<1e-10);
   assert.equal(scene.getObjectByName('Distant exterior').rotation.y,0);
  }
  const pos=stars.geometry.getAttribute('position');let visible=0;
@@ -34,7 +40,7 @@ for(const [w,h] of [[390,844],[430,932],[1440,900],[1920,1080]]){
   const v=new T.Vector3().fromBufferAttribute(pos,i);assert(v.z<0);assert(Math.abs(v.length()-185)<.00002);
   v.applyMatrix4(stars.matrixWorld).project(camera);if(Math.abs(v.x)<1&&Math.abs(v.y)<1&&v.z<1)visible++;
  }
- assert(visible>=5&&visible<=55,'Unexpected star density');counts.push([w,h,visible]);
+ assert(visible>=45&&visible<=200,'Unexpected star density');counts.push([w,h,visible]);
 }
 assert.equal(sculptures[0].base,.65);assert.equal(targets.length,3);
-console.log('PASS: fixed celestial orientation, zero translation parallax, level Earth, phone framing, sparse catalog stars',JSON.stringify(counts));
+console.log('PASS: fixed celestial orientation, zero translation parallax, off-centre Earth and unclipped phone framing, magnitude-layered catalog stars',JSON.stringify(counts));
