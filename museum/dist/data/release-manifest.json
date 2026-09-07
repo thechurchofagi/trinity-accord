@@ -1,14 +1,14 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.24.0",
+  "edition": "museum-v1.25.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "created": "2026-09-07",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
   "files": [
     {
       "path": "archive.html",
-      "bytes": 100638,
-      "sha256": "994afdd709e99ec32312b6022062dc14b493702a0883e148837a94098dd11ee2"
+      "bytes": 102243,
+      "sha256": "98c233ed0b98462e1bf8b0862f59dcc7a5dbd3eedd1c53cc57dc86089a47e0e1"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -393,12 +393,12 @@
     {
       "path": "boot-loader.js",
       "bytes": 1017,
-      "sha256": "c81a779fd22614200432259dd17c06743b43d99c11b457c29fbab0988b1a1c85"
+      "sha256": "586457724a96e99c076b94ff00a1f174a169278af1d204a922455ac16a282bc9"
     },
     {
       "path": "caption-utils.js",
-      "bytes": 3439,
-      "sha256": "14eb7c1c389f6876ef452f8be2673732aeb2d49b983898afc82598641194e6d9"
+      "bytes": 2689,
+      "sha256": "cdf34e26354c16a236c1527c70314d398f028d97875a8414fd1026cb0990a5f6"
     },
     {
       "path": "crystal-inscription.js",
@@ -418,7 +418,7 @@
     {
       "path": "data/audio-audit.json",
       "bytes": 33256,
-      "sha256": "bc751219bdc254084834d7e24aa49889e30409135013dd9433ef34221b9f2fb8"
+      "sha256": "ac983c5a7688e8dc95bdebb7f9e8478b4b5d94c7d6b82c9ba796bcd0b2d15da1"
     },
     {
       "path": "data/bright-stars.json",
@@ -428,7 +428,7 @@
     {
       "path": "data/crystal-model.json",
       "bytes": 3306,
-      "sha256": "6322c9916222f83fb3f00fb2a93e36e35e297fe32b76221c22f39814cd6afb6b"
+      "sha256": "27f49b20c4be8926eeca594d3b625d340df69bcca462f03aa78cf4b3f1931015"
     },
     {
       "path": "data/crystal-video-reference.json",
@@ -448,7 +448,147 @@
     {
       "path": "data/gallery-layout.json",
       "bytes": 7264,
-      "sha256": "580d5d087bbe20ac2fd514efff7a7e6c06dbc78696d5041a99a9081302889577"
+      "sha256": "66e69db2a3cfad6bffd4d3b4f4e4640838d3f77d48a673aecd0e4312e36b7d0f"
+    },
+    {
+      "path": "data/lyrics/eth-001.json",
+      "bytes": 39892,
+      "sha256": "d978339b78d6550675ad317fa3f6affdd490293df5c26b47bcae991d80eb59bb"
+    },
+    {
+      "path": "data/lyrics/eth-010.json",
+      "bytes": 45090,
+      "sha256": "9be7245677c859cb32de2ba951dff595f01d932100de87cbeb90cfe89198d28a"
+    },
+    {
+      "path": "data/lyrics/eth-014.json",
+      "bytes": 34812,
+      "sha256": "c04ae92623444842ad84f21fcea74d1d3ef15563aafd7d253ea1604e69b71295"
+    },
+    {
+      "path": "data/lyrics/eth-016.json",
+      "bytes": 46446,
+      "sha256": "20035484be68f4f3d15c7b137c1253d510cf6d38c203774f5fa051f4e642476e"
+    },
+    {
+      "path": "data/lyrics/eth-020.json",
+      "bytes": 38468,
+      "sha256": "bd75a98b2a41a5ffeccf71f54811408d99f52cbee09fa8980b9def49bf22141a"
+    },
+    {
+      "path": "data/lyrics/eth-027.json",
+      "bytes": 39163,
+      "sha256": "65bfdd14d1712c95695363b5186f43eb702e10a8e03642e78fa5b306568a6239"
+    },
+    {
+      "path": "data/lyrics/eth-031.json",
+      "bytes": 43340,
+      "sha256": "7178cebc61712569c6d1e285a4ee6cfda9b54808fc2882d2443ffb306e916923"
+    },
+    {
+      "path": "data/lyrics/eth-032.json",
+      "bytes": 49059,
+      "sha256": "4b25e2e4aee282de5d753ee8ae9276419c5546c71e40b806cb31d6e73e76e67b"
+    },
+    {
+      "path": "data/lyrics/eth-042.json",
+      "bytes": 39782,
+      "sha256": "fc8ce3f95c391b37fbd970d24d7ddbfef0f282b023bb3ba675dd22e5486ee86d"
+    },
+    {
+      "path": "data/lyrics/eth-044.json",
+      "bytes": 45882,
+      "sha256": "219ae12ac4b4284e74e688427b7f5e2a5e7e59850b5be81a60aafb05c28c34e3"
+    },
+    {
+      "path": "data/lyrics/eth-048.json",
+      "bytes": 54032,
+      "sha256": "9be4e5a4cc6a54f12cd60d8da3eb36c696960eef365e476a1277d06bc70f32b3"
+    },
+    {
+      "path": "data/lyrics/eth-049.json",
+      "bytes": 45296,
+      "sha256": "4c5f62ace0c37f788bc0af2d5c74b5d998c9e4b839d59a49f6fee2073e46a036"
+    },
+    {
+      "path": "data/lyrics/eth-050.json",
+      "bytes": 82006,
+      "sha256": "e378dabbe8c4143336a01953174895f302ed1ae0ca72d09d8788fd0a13335bb4"
+    },
+    {
+      "path": "data/lyrics/eth-056.json",
+      "bytes": 52489,
+      "sha256": "8982d477f659536729a88cd9440203ece3c829cd97055ee68b5b3272884ae2dc"
+    },
+    {
+      "path": "data/lyrics/eth-071.json",
+      "bytes": 39903,
+      "sha256": "8b2c49f94fbd1f7fc8a7f827990d6dda086632ffb009f92258f3642a0799511c"
+    },
+    {
+      "path": "data/lyrics/eth-088.json",
+      "bytes": 32259,
+      "sha256": "5afe45c7373d5b56adbb331877f258c1e99ed46ec2d73cbe28d0dcd037e34ae6"
+    },
+    {
+      "path": "data/lyrics/eth-091.json",
+      "bytes": 37264,
+      "sha256": "2e1a4458814f2a5dc527e4916f95ec928d3914179e0bfe0e3a0a1f2b901b58a0"
+    },
+    {
+      "path": "data/lyrics/eth-100.json",
+      "bytes": 28559,
+      "sha256": "59b91d4682e0fd7bd700695812168fbced15f60e608f76548b06d8d49b3822b4"
+    },
+    {
+      "path": "data/lyrics/eth-103.json",
+      "bytes": 39627,
+      "sha256": "02beaba4a4a18edb8aa9d4f8dc276ec28d93c6e221bec195a8077fbc091cd7a8"
+    },
+    {
+      "path": "data/lyrics/eth-113.json",
+      "bytes": 38458,
+      "sha256": "b282d17e792faad1f2649ed25450431643a431df40efcb23d4617be6a363858b"
+    },
+    {
+      "path": "data/lyrics/eth-115.json",
+      "bytes": 49578,
+      "sha256": "10f34dfa66db331c7556c6aca54c57b65ce84316c8d6ade72cfdb6d18035fbb3"
+    },
+    {
+      "path": "data/lyrics/eth-119.json",
+      "bytes": 53662,
+      "sha256": "5dc2fc35f63f9cd897a48ca888709d262d921062b16f945266be60331f19ab5f"
+    },
+    {
+      "path": "data/lyrics/eth-146.json",
+      "bytes": 47168,
+      "sha256": "278fe52075e5d1f0a29401d714ef1fe72feabaf5acf0f73f64236777164b071e"
+    },
+    {
+      "path": "data/lyrics/eth-151.json",
+      "bytes": 34865,
+      "sha256": "5d73bcb6dd2c916f09d88b708e9b0c4f087a8a899df41d4a0913f0371a1ec229"
+    },
+    {
+      "path": "data/lyrics/eth-153.json",
+      "bytes": 85601,
+      "sha256": "61815eed7cfd640cc7e6718773d9fe25b11adbb7e9abb5015ce547b898095816"
+    },
+    {
+      "path": "data/lyrics-audit.json",
+      "bytes": 71534,
+      "sha256": "2eed92dc329479851d54a15b7b77fc52e4b51867e11427ac4e335cfa08e1c11a"
+    },
+    {
+      "path": "data/lyrics-index.json",
+      "bytes": 8767,
+      "sha256": "2edbcfab838a7f5a8c11c7df3ddfadf7ccf8012be784cbb09220aaac9cc872ee"
+    },
+    {
+      "path": "data/lyrics-source.json",
+      "bytes": 55773,
+      "sha256": "fe225f3f8b0dd4dadf6ff2c47c30b5afa2781cd49951e8d3c7e293aba0416ee1"
     },
     {
       "path": "data/narration.json",
@@ -633,17 +773,17 @@
     {
       "path": "data/rooms.json",
       "bytes": 10855,
-      "sha256": "d82e205e5e157fe6e7f570d3c659a3694afb03f41876852c29f2c0e997382393"
+      "sha256": "2f347750ca4fd51ed8dd84ae674f75b207897b4b44c60a260ab11c3f888decf2"
     },
     {
       "path": "data/sources.json",
       "bytes": 146391,
-      "sha256": "e850369c7b09cbb88aaa070ab52ddbff2a23300f30c30343f6627786a405daa0"
+      "sha256": "1742da217492eaf6f083864ffc5c459dd2b583515fc8debf869b5138f669208c"
     },
     {
       "path": "data/space-design.json",
       "bytes": 10596,
-      "sha256": "210181d66c7985b58e8c070c1193998b4b64b06a413ef11a94f901f9d2857374"
+      "sha256": "140345540cea0e1fd9eb0b4a64c9dc1b6e7d2a196ece5e62b1aed8edb9a06d0e"
     },
     {
       "path": "earth-sequence.js",
@@ -652,8 +792,8 @@
     },
     {
       "path": "edition-data.js",
-      "bytes": 201177,
-      "sha256": "c2a8e8f79a569cc7c01e3d8dd5d83aed10654fd983126b480bb099c14d0e686e"
+      "bytes": 208287,
+      "sha256": "32b98793c1e78bc4d161ac20c4148a25201b0e5baf61f96014bf3a9e67613689"
     },
     {
       "path": "exhibit-label.js",
@@ -667,8 +807,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 5893,
-      "sha256": "1077a844dbb1aa60af76bbfa3dd53222e65c5eddd8a67e40d9d3b9edc696c7e0"
+      "bytes": 5873,
+      "sha256": "4faf9c3f9caa61af8cd43fd8a93253cdbc8a6ed7d4c58fdbae07a38a26f93add"
+    },
+    {
+      "path": "lyrics-fallback.js",
+      "bytes": 1581,
+      "sha256": "56a9581edd9bd34a3abb02ebb1ceb3fdd6f27aa9caf964c4f999689ed149ad54"
     },
     {
       "path": "movement-controls.js",
@@ -677,18 +822,18 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 873418,
-      "sha256": "439e139f1c8175e950788b3b8f2feb7d90f604c1f28d25dba992078d0620aef4"
+      "bytes": 882215,
+      "sha256": "3aa51cc276339462ed3cc5adaafcf8376f20beb44763f261ae30086b52b3ebfe"
     },
     {
       "path": "museum.css",
-      "bytes": 37265,
-      "sha256": "46eb64ef3f24af53bfb8987682cb5cbd80afe675ed021339bdad3191f561f291"
+      "bytes": 37510,
+      "sha256": "fb1f77451fb48bf1d71d12a3352974fcb68129e2560124a580a23c678e978c60"
     },
     {
       "path": "museum.js",
-      "bytes": 63816,
-      "sha256": "e5127fb59e70822643644e3644fbfaabf8a4eea49e6832618701709b8403e82b"
+      "bytes": 64614,
+      "sha256": "02ffa5abbbc98332672b3323794a75e14eff2e9ea033571f8cd838d83e0579a7"
     },
     {
       "path": "observation-view.js",
@@ -734,6 +879,11 @@
       "path": "wall-presentation.js",
       "bytes": 5940,
       "sha256": "633d8c1c0bc8e8364075cffdbefd124c92428816eb14d6c0b12f6aa1ccd0572b"
+    },
+    {
+      "path": "word-captions.js",
+      "bytes": 1766,
+      "sha256": "984f3af907c22309c5bc8b2f1468bd7a420116baf38c845753187a9f405c15dc"
     }
   ]
 }

@@ -1,0 +1,2188 @@
+{
+  "schemaVersion": "word-alignment-v2",
+  "exhibitId": "eth-056",
+  "audioFile": "assets/eth-056.mp3",
+  "audioSha256": "c5b509f2b22dbe43bb5a738cc74933cda43ed5422ed8364a35d4897d49f17ebd",
+  "duration": 212.472,
+  "sourceLyricsSha256": "dc55fe056aaec5af221cf5a086e5204b34d78b68b97149c1b91e4c4f54f80466",
+  "alignment": {
+    "pipelineSha256": "60d4b3eb99478596dbdf5ff4e3e3a02c7038959c387a50535e94b05b67e9add0",
+    "engine": "wav2vec2-base-960h CTC Viterbi",
+    "transcriptEngine": "faster-whisper small.en int8 + source reconciliation",
+    "audioInput": "demucs htdemucs vocals",
+    "device": "cpu",
+    "timestampResolution": 0.02,
+    "modelFrameResolutionIsNotAccuracy": true,
+    "manualListeningReviewed": false,
+    "reviewRequiredLines": 10
+  },
+  "lines": [
+    {
+      "text": "A mechanical bard sings on desolate streets, its throat's echo, a hoarse testament of time.",
+      "sourceLine": 0,
+      "start": 0.362,
+      "end": 7.622,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "A",
+          "start": 0.362,
+          "end": 0.382,
+          "acousticScore": 0.89,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "mechanical",
+          "start": 0.522,
+          "end": 1.302,
+          "acousticScore": 0.9614,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "bard",
+          "start": 1.462,
+          "end": 1.962,
+          "acousticScore": 0.226
+        },
+        {
+          "text": "sings",
+          "start": 2.082,
+          "end": 2.362,
+          "acousticScore": 0.9486,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "on",
+          "start": 2.462,
+          "end": 2.502,
+          "acousticScore": 0.8346,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "desolate",
+          "start": 2.602,
+          "end": 3.202,
+          "acousticScore": 0.8761,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "streets,",
+          "start": 3.282,
+          "end": 3.702,
+          "acousticScore": 0.3723,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "its",
+          "start": 4.022,
+          "end": 4.122,
+          "acousticScore": 0.3721,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "throat's",
+          "start": 4.222,
+          "end": 4.662,
+          "acousticScore": 0.5995
+        },
+        {
+          "text": "echo,",
+          "start": 4.882,
+          "end": 5.342,
+          "acousticScore": 0.293,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "a",
+          "start": 5.642,
+          "end": 5.662,
+          "acousticScore": 0.5867,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "hoarse",
+          "start": 5.862,
+          "end": 6.142,
+          "acousticScore": 0.5746,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "testament",
+          "start": 6.262,
+          "end": 6.982,
+          "acousticScore": 0.8215,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "of",
+          "start": 7.062,
+          "end": 7.102,
+          "acousticScore": 0.9628,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "time.",
+          "start": 7.202,
+          "end": 7.622,
+          "acousticScore": 0.9061,
+          "asrStartDelta": 0.042
+        }
+      ]
+    },
+    {
+      "text": "An immaculate green where robots tend with precision and care,",
+      "sourceLine": 1,
+      "start": 7.802,
+      "end": 12.902,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "An",
+          "start": 7.802,
+          "end": 7.842,
+          "acousticScore": 0.9484,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "immaculate",
+          "start": 8.002,
+          "end": 8.782,
+          "acousticScore": 0.7757,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "green",
+          "start": 8.862,
+          "end": 9.182,
+          "acousticScore": 0.9622,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "where",
+          "start": 9.342,
+          "end": 9.542,
+          "acousticScore": 0.9478,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "robots",
+          "start": 9.602,
+          "end": 9.982,
+          "acousticScore": 0.7156,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "tend",
+          "start": 10.022,
+          "end": 10.242,
+          "acousticScore": 0.4012,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "with",
+          "start": 10.282,
+          "end": 10.422,
+          "acousticScore": 0.5766,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "precision",
+          "start": 10.482,
+          "end": 11.282,
+          "acousticScore": 0.8741,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "and",
+          "start": 11.422,
+          "end": 11.502,
+          "acousticScore": 0.9867,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "care,",
+          "start": 11.622,
+          "end": 12.902,
+          "acousticScore": 0.6443,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Drones hum overhead, delivering treats and toys to the idle below,",
+      "sourceLine": 2,
+      "start": 15.502,
+      "end": 23.022,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Drones",
+          "start": 15.502,
+          "end": 15.902,
+          "acousticScore": 0.3805,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "hum",
+          "start": 15.982,
+          "end": 16.282,
+          "acousticScore": 0.5755,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "overhead,",
+          "start": 16.722,
+          "end": 17.602,
+          "acousticScore": 0.6522,
+          "asrStartDelta": 0.422
+        },
+        {
+          "text": "delivering",
+          "start": 18.982,
+          "end": 19.822,
+          "acousticScore": 0.9108,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "treats",
+          "start": 19.922,
+          "end": 20.522,
+          "acousticScore": 0.9525,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "and",
+          "start": 20.662,
+          "end": 20.742,
+          "acousticScore": 0.9961,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "toys",
+          "start": 20.842,
+          "end": 21.222,
+          "acousticScore": 0.9654,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "to",
+          "start": 21.302,
+          "end": 21.422,
+          "acousticScore": 0.9966,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "the",
+          "start": 21.542,
+          "end": 21.762,
+          "acousticScore": 0.8896,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "idle",
+          "start": 22.122,
+          "end": 22.382,
+          "acousticScore": 0.8126,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "below,",
+          "start": 22.462,
+          "end": 23.022,
+          "acousticScore": 0.3848,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "My heavy resume, soaked with the sweat of my search, I seek a job, persistently.",
+      "sourceLine": 3,
+      "start": 26.182,
+      "end": 33.922,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "My",
+          "start": 26.182,
+          "end": 26.422,
+          "acousticScore": 0.9997,
+          "asrStartDelta": 0.702
+        },
+        {
+          "text": "heavy",
+          "start": 26.622,
+          "end": 26.982,
+          "acousticScore": 0.9913,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "resume,",
+          "start": 27.082,
+          "end": 27.642,
+          "acousticScore": 0.9152,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "soaked",
+          "start": 28.002,
+          "end": 28.402,
+          "acousticScore": 0.3836,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "with",
+          "start": 28.482,
+          "end": 28.802,
+          "acousticScore": 0.8553,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "the",
+          "start": 28.922,
+          "end": 29.022,
+          "acousticScore": 0.89,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "sweat",
+          "start": 29.102,
+          "end": 29.562,
+          "acousticScore": 0.5971,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "of",
+          "start": 29.722,
+          "end": 29.762,
+          "acousticScore": 0.9795,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "my",
+          "start": 29.862,
+          "end": 29.962,
+          "acousticScore": 0.502,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "search,",
+          "start": 30.102,
+          "end": 30.742,
+          "acousticScore": 0.3903,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "I",
+          "start": 30.842,
+          "end": 30.862,
+          "acousticScore": 0.0597,
+          "asrStartDelta": -0.078
+        },
+        {
+          "text": "seek",
+          "start": 31.002,
+          "end": 31.342,
+          "acousticScore": 0.5141,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "a",
+          "start": 31.742,
+          "end": 31.762,
+          "acousticScore": 0.0795,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "job,",
+          "start": 31.882,
+          "end": 32.342,
+          "acousticScore": 0.4835,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "persistently.",
+          "start": 32.622,
+          "end": 33.922,
+          "acousticScore": 0.5263,
+          "asrStartDelta": 0.242
+        }
+      ]
+    },
+    {
+      "text": "In search of a job, the last on Earth,",
+      "sourceLine": 4,
+      "start": 36.542,
+      "end": 40.902,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "In",
+          "start": 36.542,
+          "end": 36.582,
+          "acousticScore": 0.9998,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "search",
+          "start": 36.742,
+          "end": 37.122,
+          "acousticScore": 0.9914,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "of",
+          "start": 37.322,
+          "end": 37.362,
+          "acousticScore": 0.9926,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "a",
+          "start": 37.522,
+          "end": 37.542,
+          "acousticScore": 0.9213,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "job,",
+          "start": 37.642,
+          "end": 38.742,
+          "acousticScore": 0.4066,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "the",
+          "start": 39.102,
+          "end": 39.202,
+          "acousticScore": 0.9742,
+          "asrStartDelta": -0.058
+        },
+        {
+          "text": "last",
+          "start": 39.302,
+          "end": 39.702,
+          "acousticScore": 0.9149,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "on",
+          "start": 40.042,
+          "end": 40.122,
+          "acousticScore": 0.9865,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "Earth,",
+          "start": 40.642,
+          "end": 40.902,
+          "acousticScore": 0.7938,
+          "asrStartDelta": 0.482
+        }
+      ]
+    },
+    {
+      "text": "Amidst the surge of intellect, I chart my course, seek my place,",
+      "sourceLine": 5,
+      "start": 40.982,
+      "end": 47.382,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Amidst",
+          "start": 40.982,
+          "end": 41.422,
+          "acousticScore": 0.3347
+        },
+        {
+          "text": "the",
+          "start": 41.442,
+          "end": 41.502,
+          "acousticScore": 0.0903,
+          "asrStartDelta": -0.078
+        },
+        {
+          "text": "surge",
+          "start": 41.822,
+          "end": 42.482,
+          "acousticScore": 0.5673
+        },
+        {
+          "text": "of",
+          "start": 42.642,
+          "end": 42.722,
+          "acousticScore": 0.7713,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "intellect,",
+          "start": 42.842,
+          "end": 43.622,
+          "acousticScore": 0.5239,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "I",
+          "start": 44.242,
+          "end": 44.262,
+          "acousticScore": 0.9967,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "chart",
+          "start": 44.442,
+          "end": 44.722,
+          "acousticScore": 0.9501,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "my",
+          "start": 44.822,
+          "end": 44.942,
+          "acousticScore": 0.9979,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "course,",
+          "start": 45.042,
+          "end": 45.562,
+          "acousticScore": 0.8512,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "seek",
+          "start": 45.962,
+          "end": 46.302,
+          "acousticScore": 0.9925,
+          "asrStartDelta": -0.038
+        },
+        {
+          "text": "my",
+          "start": 46.462,
+          "end": 46.662,
+          "acousticScore": 0.9605,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "place,",
+          "start": 46.842,
+          "end": 47.382,
+          "acousticScore": 0.9009,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "In search of a job, the last on Earth,",
+      "sourceLine": 6,
+      "start": 47.682,
+      "end": 51.582,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "In",
+          "start": 47.682,
+          "end": 47.742,
+          "acousticScore": 0.0022,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "search",
+          "start": 47.822,
+          "end": 48.222,
+          "acousticScore": 0.8455,
+          "asrStartDelta": -0.138
+        },
+        {
+          "text": "of",
+          "start": 48.382,
+          "end": 48.422,
+          "acousticScore": 0.3349,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "a",
+          "start": 48.642,
+          "end": 48.662,
+          "acousticScore": 0.0326,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "job,",
+          "start": 48.762,
+          "end": 49.622,
+          "acousticScore": 0.3519,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "the",
+          "start": 50.162,
+          "end": 50.262,
+          "acousticScore": 0.9657,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "last",
+          "start": 50.362,
+          "end": 50.762,
+          "acousticScore": 0.9035,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "on",
+          "start": 51.162,
+          "end": 51.322,
+          "acousticScore": 0.9279,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "Earth,",
+          "start": 51.462,
+          "end": 51.582,
+          "acousticScore": 0.072,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "To shun the mundane, is a pledge to my dream, unwavering and brave.",
+      "sourceLine": 7,
+      "start": 52.182,
+      "end": 60.982,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "To",
+          "start": 52.182,
+          "end": 52.262,
+          "acousticScore": 0.5933,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "shun",
+          "start": 52.402,
+          "end": 52.802,
+          "acousticScore": 0.7687
+        },
+        {
+          "text": "the",
+          "start": 52.942,
+          "end": 53.062,
+          "acousticScore": 0.0937,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "mundane,",
+          "start": 53.202,
+          "end": 54.722,
+          "acousticScore": 0.5225,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "is",
+          "start": 54.882,
+          "end": 54.962,
+          "acousticScore": 0.8482,
+          "asrStartDelta": 1.062
+        },
+        {
+          "text": "a",
+          "start": 55.062,
+          "end": 55.082,
+          "acousticScore": 0.6517,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "pledge",
+          "start": 55.162,
+          "end": 55.562,
+          "acousticScore": 0.8272,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "to",
+          "start": 55.682,
+          "end": 55.782,
+          "acousticScore": 0.8972,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "my",
+          "start": 55.902,
+          "end": 56.202,
+          "acousticScore": 0.8094,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "dream,",
+          "start": 56.382,
+          "end": 56.802,
+          "acousticScore": 0.3931,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "unwavering",
+          "start": 57.802,
+          "end": 59.022,
+          "acousticScore": 0.5035,
+          "asrStartDelta": 0.702
+        },
+        {
+          "text": "and",
+          "start": 59.542,
+          "end": 59.722,
+          "acousticScore": 0.6525,
+          "asrStartDelta": 0.842
+        },
+        {
+          "text": "brave.",
+          "start": 59.822,
+          "end": 60.982,
+          "acousticScore": 0.5667,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Digital billboards line the road, virtual salesmen propose with zeal, insurance to console,",
+      "sourceLine": 8,
+      "start": 63.462,
+      "end": 70.402,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Digital",
+          "start": 63.462,
+          "end": 64.082,
+          "acousticScore": 0.4679,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "billboards",
+          "start": 64.222,
+          "end": 64.842,
+          "acousticScore": 0.5105,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "line",
+          "start": 64.922,
+          "end": 65.122,
+          "acousticScore": 0.8497,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "the",
+          "start": 65.182,
+          "end": 65.262,
+          "acousticScore": 0.7756,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "road,",
+          "start": 65.342,
+          "end": 65.522,
+          "acousticScore": 0.4953,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "virtual",
+          "start": 65.602,
+          "end": 65.922,
+          "acousticScore": 0.4672,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "salesmen",
+          "start": 66.042,
+          "end": 66.662,
+          "acousticScore": 0.8521,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "propose",
+          "start": 66.742,
+          "end": 67.402,
+          "acousticScore": 0.9295,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "with",
+          "start": 67.502,
+          "end": 67.722,
+          "acousticScore": 0.6929,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "zeal,",
+          "start": 67.882,
+          "end": 68.282,
+          "acousticScore": 0.5767
+        },
+        {
+          "text": "insurance",
+          "start": 68.422,
+          "end": 68.942,
+          "acousticScore": 0.8971,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "to",
+          "start": 69.022,
+          "end": 69.202,
+          "acousticScore": 0.7602,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "console,",
+          "start": 69.522,
+          "end": 70.402,
+          "acousticScore": 0.6888,
+          "asrStartDelta": 0.202
+        }
+      ]
+    },
+    {
+      "text": "An AI nanny, leading a loyal Labrador, passes by, side by side,",
+      "sourceLine": 9,
+      "start": 70.602,
+      "end": 76.702,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "An",
+          "start": 70.602,
+          "end": 70.642,
+          "acousticScore": 0.1052,
+          "asrStartDelta": 0.422
+        },
+        {
+          "text": "AI",
+          "start": 70.842,
+          "end": 70.882,
+          "acousticScore": 0.4723,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "nanny,",
+          "start": 70.962,
+          "end": 71.302,
+          "acousticScore": 0.5086
+        },
+        {
+          "text": "leading",
+          "start": 71.382,
+          "end": 71.862,
+          "acousticScore": 0.4508,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "a",
+          "start": 72.162,
+          "end": 72.182,
+          "acousticScore": 0.1226
+        },
+        {
+          "text": "loyal",
+          "start": 72.282,
+          "end": 72.662,
+          "acousticScore": 0.9485,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "Labrador,",
+          "start": 72.762,
+          "end": 73.562,
+          "acousticScore": 0.9255,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "passes",
+          "start": 73.882,
+          "end": 74.262,
+          "acousticScore": 0.945,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "by,",
+          "start": 74.382,
+          "end": 74.762,
+          "acousticScore": 0.9692,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "side",
+          "start": 75.482,
+          "end": 75.882,
+          "acousticScore": 0.314,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "by",
+          "start": 75.962,
+          "end": 76.102,
+          "acousticScore": 0.1951,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "side,",
+          "start": 76.242,
+          "end": 76.702,
+          "acousticScore": 0.3228,
+          "asrStartDelta": 0.102
+        }
+      ]
+    },
+    {
+      "text": "Driverless cars speed by, their haste never for me to abide,",
+      "sourceLine": 10,
+      "start": 78.162,
+      "end": 85.162,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Driverless",
+          "start": 78.162,
+          "end": 78.922,
+          "acousticScore": 0.4038,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "cars",
+          "start": 79.022,
+          "end": 79.362,
+          "acousticScore": 0.9122,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "speed",
+          "start": 79.482,
+          "end": 79.842,
+          "acousticScore": 0.1865,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "by,",
+          "start": 79.982,
+          "end": 80.422,
+          "acousticScore": 0.9699,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "their",
+          "start": 81.722,
+          "end": 81.882,
+          "acousticScore": 0.7171
+        },
+        {
+          "text": "haste",
+          "start": 81.962,
+          "end": 82.262,
+          "acousticScore": 0.907
+        },
+        {
+          "text": "never",
+          "start": 82.302,
+          "end": 82.582,
+          "acousticScore": 0.9245,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "for",
+          "start": 82.702,
+          "end": 82.942,
+          "acousticScore": 0.5626,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "me",
+          "start": 83.162,
+          "end": 83.262,
+          "acousticScore": 0.9546,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "to",
+          "start": 83.362,
+          "end": 83.542,
+          "acousticScore": 0.7239,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "abide,",
+          "start": 83.742,
+          "end": 85.162,
+          "acousticScore": 0.2216,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "My heavy resume, soaked with the sweat of my search, I seek a job, persistently.",
+      "sourceLine": 11,
+      "start": 85.422,
+      "end": 92.902,
+      "reviewFlags": [
+        "weak-acoustic-evidence",
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "My",
+          "start": 85.422,
+          "end": 85.582,
+          "acousticScore": 0.9855,
+          "asrStartDelta": 1.202
+        },
+        {
+          "text": "heavy",
+          "start": 85.682,
+          "end": 86.042,
+          "acousticScore": 0.8529,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "resume,",
+          "start": 86.162,
+          "end": 86.722,
+          "acousticScore": 0.3818,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "soaked",
+          "start": 87.042,
+          "end": 87.422,
+          "acousticScore": 0.5906,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "with",
+          "start": 87.522,
+          "end": 87.842,
+          "acousticScore": 0.878,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "the",
+          "start": 87.982,
+          "end": 88.082,
+          "acousticScore": 0.8729,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "sweat",
+          "start": 88.162,
+          "end": 88.562,
+          "acousticScore": 0.6841,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "of",
+          "start": 88.642,
+          "end": 88.782,
+          "acousticScore": 0.0258,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "my",
+          "start": 88.922,
+          "end": 89.002,
+          "acousticScore": 0.6598,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "search,",
+          "start": 89.162,
+          "end": 89.842,
+          "acousticScore": 0.4552,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "I",
+          "start": 89.902,
+          "end": 89.922,
+          "acousticScore": 0.007,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "seek",
+          "start": 90.082,
+          "end": 90.342,
+          "acousticScore": 0.4295,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "a",
+          "start": 90.822,
+          "end": 90.842,
+          "acousticScore": 0.1048,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "job,",
+          "start": 90.962,
+          "end": 91.342,
+          "acousticScore": 0.3557,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "persistently.",
+          "start": 91.662,
+          "end": 92.902,
+          "acousticScore": 0.4953,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "In this world woven of algorithms, I seek the human touch, that intimate warmth,",
+      "sourceLine": 12,
+      "start": 95.882,
+      "end": 104.562,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "In",
+          "start": 95.882,
+          "end": 95.942,
+          "acousticScore": 0.9907,
+          "asrStartDelta": 0.902
+        },
+        {
+          "text": "this",
+          "start": 96.122,
+          "end": 96.362,
+          "acousticScore": 0.9836,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "world",
+          "start": 96.542,
+          "end": 97.162,
+          "acousticScore": 0.5409,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "woven",
+          "start": 97.242,
+          "end": 97.942,
+          "acousticScore": 0.6522,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "of",
+          "start": 98.162,
+          "end": 98.322,
+          "acousticScore": 0.2265,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "algorithms,",
+          "start": 98.822,
+          "end": 100.162,
+          "acousticScore": 0.6984,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "I",
+          "start": 100.342,
+          "end": 100.362,
+          "acousticScore": 0.7329,
+          "asrStartDelta": 0.802
+        },
+        {
+          "text": "seek",
+          "start": 100.462,
+          "end": 100.782,
+          "acousticScore": 0.9437,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "the",
+          "start": 100.922,
+          "end": 101.102,
+          "acousticScore": 0.9888,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "human",
+          "start": 101.362,
+          "end": 101.822,
+          "acousticScore": 0.929,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "touch,",
+          "start": 102.042,
+          "end": 102.442,
+          "acousticScore": 0.9779,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "that",
+          "start": 102.982,
+          "end": 103.202,
+          "acousticScore": 0.9399,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "intimate",
+          "start": 103.302,
+          "end": 103.882,
+          "acousticScore": 0.4275,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "warmth,",
+          "start": 103.942,
+          "end": 104.562,
+          "acousticScore": 0.3203,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "Every dream deserves the chase, every soul longs for a place to be heard,",
+      "sourceLine": 13,
+      "start": 107.062,
+      "end": 114.862,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Every",
+          "start": 107.062,
+          "end": 107.402,
+          "acousticScore": 0.8366,
+          "asrStartDelta": 0.742
+        },
+        {
+          "text": "dream",
+          "start": 107.582,
+          "end": 108.102,
+          "acousticScore": 0.9404,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "deserves",
+          "start": 108.282,
+          "end": 109.122,
+          "acousticScore": 0.8483,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "the",
+          "start": 109.222,
+          "end": 109.302,
+          "acousticScore": 0.9014
+        },
+        {
+          "text": "chase,",
+          "start": 109.402,
+          "end": 110.102,
+          "acousticScore": 0.7842,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "every",
+          "start": 110.762,
+          "end": 111.042,
+          "acousticScore": 0.9766,
+          "asrStartDelta": 0.842
+        },
+        {
+          "text": "soul",
+          "start": 111.242,
+          "end": 111.742,
+          "acousticScore": 0.8443,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "longs",
+          "start": 111.782,
+          "end": 112.302,
+          "acousticScore": 0.1856,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "for",
+          "start": 112.462,
+          "end": 112.922,
+          "acousticScore": 0.6574,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "a",
+          "start": 113.002,
+          "end": 113.022,
+          "acousticScore": 0.2617,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "place",
+          "start": 113.102,
+          "end": 113.742,
+          "acousticScore": 0.9134,
+          "asrStartDelta": -0.098
+        },
+        {
+          "text": "to",
+          "start": 113.842,
+          "end": 113.962,
+          "acousticScore": 0.5837,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "be",
+          "start": 114.082,
+          "end": 114.322,
+          "acousticScore": 0.6712,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "heard,",
+          "start": 114.522,
+          "end": 114.862,
+          "acousticScore": 0.7812,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "A witness of this era, yet an explorer undeterred,",
+      "sourceLine": 14,
+      "start": 115.082,
+      "end": 120.922,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "A",
+          "start": 115.082,
+          "end": 115.102,
+          "acousticScore": 0.3339,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "witness",
+          "start": 115.242,
+          "end": 116.022,
+          "acousticScore": 0.7506,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "of",
+          "start": 116.262,
+          "end": 116.302,
+          "acousticScore": 0.9184,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "this",
+          "start": 116.442,
+          "end": 116.682,
+          "acousticScore": 0.8805,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "era,",
+          "start": 117.042,
+          "end": 117.222,
+          "acousticScore": 0.1386,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "yet",
+          "start": 117.762,
+          "end": 118.002,
+          "acousticScore": 0.6341
+        },
+        {
+          "text": "an",
+          "start": 118.542,
+          "end": 118.622,
+          "acousticScore": 0.8763,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "explorer",
+          "start": 118.762,
+          "end": 119.582,
+          "acousticScore": 0.865,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "undeterred,",
+          "start": 120.042,
+          "end": 120.922,
+          "acousticScore": 0.5542,
+          "asrStartDelta": 0.722
+        }
+      ]
+    },
+    {
+      "text": "In this endless quest, I find my worth, my purpose affirmed.",
+      "sourceLine": 15,
+      "start": 122.202,
+      "end": 128.042,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "In",
+          "start": 122.202,
+          "end": 122.242,
+          "acousticScore": 0.9996,
+          "asrStartDelta": 0.682
+        },
+        {
+          "text": "this",
+          "start": 122.362,
+          "end": 122.542,
+          "acousticScore": 0.9962,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "endless",
+          "start": 122.802,
+          "end": 123.362,
+          "acousticScore": 0.9443,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "quest,",
+          "start": 123.482,
+          "end": 123.862,
+          "acousticScore": 0.9976,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "I",
+          "start": 124.022,
+          "end": 124.042,
+          "acousticScore": 0.9419,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "find",
+          "start": 124.202,
+          "end": 124.542,
+          "acousticScore": 0.9608,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "my",
+          "start": 124.682,
+          "end": 124.942,
+          "acousticScore": 0.832,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "worth,",
+          "start": 125.122,
+          "end": 125.462,
+          "acousticScore": 0.9291,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "my",
+          "start": 125.622,
+          "end": 125.882,
+          "acousticScore": 0.9964,
+          "asrStartDelta": -0.158
+        },
+        {
+          "text": "purpose",
+          "start": 126.082,
+          "end": 126.842,
+          "acousticScore": 0.9508,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "affirmed.",
+          "start": 127.222,
+          "end": 128.042,
+          "acousticScore": 0.372
+        }
+      ]
+    },
+    {
+      "text": "In search of a job, the last on Earth,",
+      "sourceLine": 16,
+      "start": 128.862,
+      "end": 133.162,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "In",
+          "start": 128.862,
+          "end": 128.902,
+          "acousticScore": 0.9995,
+          "asrStartDelta": 0.962
+        },
+        {
+          "text": "search",
+          "start": 129.042,
+          "end": 129.422,
+          "acousticScore": 0.9655,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "of",
+          "start": 129.642,
+          "end": 129.682,
+          "acousticScore": 0.9863,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "a",
+          "start": 129.822,
+          "end": 129.842,
+          "acousticScore": 0.8769,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "job,",
+          "start": 129.942,
+          "end": 131.082,
+          "acousticScore": 0.0098
+        },
+        {
+          "text": "the",
+          "start": 131.402,
+          "end": 131.502,
+          "acousticScore": 0.8757,
+          "asrStartDelta": 0.702
+        },
+        {
+          "text": "last",
+          "start": 131.602,
+          "end": 132.002,
+          "acousticScore": 0.9904,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "on",
+          "start": 132.342,
+          "end": 132.442,
+          "acousticScore": 0.9812,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "Earth,",
+          "start": 132.922,
+          "end": 133.162,
+          "acousticScore": 0.9175,
+          "asrStartDelta": 0.462
+        }
+      ]
+    },
+    {
+      "text": "Amidst the surge of intellect, I chart my course, seek my place,",
+      "sourceLine": 17,
+      "start": 133.302,
+      "end": 139.702,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Amidst",
+          "start": 133.302,
+          "end": 133.802,
+          "acousticScore": 0.3701,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "the",
+          "start": 133.922,
+          "end": 134.002,
+          "acousticScore": 0.9882,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "surge",
+          "start": 134.142,
+          "end": 134.782,
+          "acousticScore": 0.5117,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "of",
+          "start": 134.942,
+          "end": 134.982,
+          "acousticScore": 0.8062,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "intellect,",
+          "start": 135.142,
+          "end": 135.962,
+          "acousticScore": 0.5278,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "I",
+          "start": 136.542,
+          "end": 136.562,
+          "acousticScore": 0.9962,
+          "asrStartDelta": 0.722
+        },
+        {
+          "text": "chart",
+          "start": 136.722,
+          "end": 137.042,
+          "acousticScore": 0.8677,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "my",
+          "start": 137.142,
+          "end": 137.242,
+          "acousticScore": 0.9673,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "course,",
+          "start": 137.362,
+          "end": 137.862,
+          "acousticScore": 0.4962,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "seek",
+          "start": 138.262,
+          "end": 138.622,
+          "acousticScore": 0.949,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "my",
+          "start": 138.762,
+          "end": 138.922,
+          "acousticScore": 0.9507,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "place,",
+          "start": 139.162,
+          "end": 139.702,
+          "acousticScore": 0.5222,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "In search of a job, the last on Earth,",
+      "sourceLine": 18,
+      "start": 139.982,
+      "end": 143.922,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "In",
+          "start": 139.982,
+          "end": 140.022,
+          "acousticScore": 0.4015,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "search",
+          "start": 140.162,
+          "end": 140.522,
+          "acousticScore": 0.8496,
+          "asrStartDelta": -0.058
+        },
+        {
+          "text": "of",
+          "start": 140.702,
+          "end": 140.742,
+          "acousticScore": 0.2942,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "a",
+          "start": 140.942,
+          "end": 140.962,
+          "acousticScore": 0.0951,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "job,",
+          "start": 141.062,
+          "end": 141.882,
+          "acousticScore": 0.3777,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "the",
+          "start": 142.462,
+          "end": 142.562,
+          "acousticScore": 0.9445,
+          "asrStartDelta": 0.642
+        },
+        {
+          "text": "last",
+          "start": 142.682,
+          "end": 143.082,
+          "acousticScore": 0.9002,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "on",
+          "start": 143.482,
+          "end": 143.582,
+          "acousticScore": 0.8943,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "Earth,",
+          "start": 143.782,
+          "end": 143.922,
+          "acousticScore": 0.1271,
+          "asrStartDelta": 0.202
+        }
+      ]
+    },
+    {
+      "text": "To shun the mundane, is a pledge to my dream, unwavering and brave.",
+      "sourceLine": 19,
+      "start": 144.502,
+      "end": 153.602,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "To",
+          "start": 144.502,
+          "end": 144.582,
+          "acousticScore": 0.965,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "shun",
+          "start": 144.722,
+          "end": 145.102,
+          "acousticScore": 0.7255
+        },
+        {
+          "text": "the",
+          "start": 145.242,
+          "end": 145.342,
+          "acousticScore": 0.4884,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "mundane,",
+          "start": 145.482,
+          "end": 147.042,
+          "acousticScore": 0.5987,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "is",
+          "start": 147.182,
+          "end": 147.262,
+          "acousticScore": 0.9024,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "a",
+          "start": 147.362,
+          "end": 147.382,
+          "acousticScore": 0.7471,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "pledge",
+          "start": 147.462,
+          "end": 147.862,
+          "acousticScore": 0.7177,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "to",
+          "start": 148.002,
+          "end": 148.082,
+          "acousticScore": 0.9353,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "my",
+          "start": 148.242,
+          "end": 148.502,
+          "acousticScore": 0.3672,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "dream,",
+          "start": 148.702,
+          "end": 149.202,
+          "acousticScore": 0.2424,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "unwavering",
+          "start": 150.122,
+          "end": 151.262,
+          "acousticScore": 0.6923,
+          "asrStartDelta": 0.782
+        },
+        {
+          "text": "and",
+          "start": 151.882,
+          "end": 152.002,
+          "acousticScore": 0.9804,
+          "asrStartDelta": 0.902
+        },
+        {
+          "text": "brave.",
+          "start": 152.142,
+          "end": 153.602,
+          "acousticScore": 0.4754,
+          "asrStartDelta": 0.102
+        }
+      ]
+    },
+    {
+      "text": "I will tirelessly pursue, explore without end,",
+      "sourceLine": 20,
+      "start": 153.622,
+      "end": 161.162,
+      "reviewFlags": [
+        "weak-acoustic-evidence",
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "I",
+          "start": 153.622,
+          "end": 153.642,
+          "acousticScore": 0.0022,
+          "asrStartDelta": 0.702
+        },
+        {
+          "text": "will",
+          "start": 156.302,
+          "end": 156.622,
+          "acousticScore": 0.0128,
+          "asrStartDelta": 2.002
+        },
+        {
+          "text": "tirelessly",
+          "start": 156.762,
+          "end": 157.762,
+          "acousticScore": 0.5806,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "pursue,",
+          "start": 157.942,
+          "end": 158.682,
+          "acousticScore": 0.7315,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "explore",
+          "start": 159.162,
+          "end": 159.842,
+          "acousticScore": 0.6755,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "without",
+          "start": 160.002,
+          "end": 160.602,
+          "acousticScore": 0.3771,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "end,",
+          "start": 161.022,
+          "end": 161.162,
+          "acousticScore": 0.5214,
+          "asrStartDelta": 0.462
+        }
+      ]
+    },
+    {
+      "text": "As the enduring job seeker, I'll persist till time's last breath,",
+      "sourceLine": 21,
+      "start": 162.622,
+      "end": 168.902,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "As",
+          "start": 162.622,
+          "end": 162.662,
+          "acousticScore": 0.9984,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "the",
+          "start": 162.782,
+          "end": 162.902,
+          "acousticScore": 0.9851,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "enduring",
+          "start": 163.062,
+          "end": 163.762,
+          "acousticScore": 0.8173,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "job",
+          "start": 163.922,
+          "end": 164.302,
+          "acousticScore": 0.3606,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "seeker,",
+          "start": 164.582,
+          "end": 165.062,
+          "acousticScore": 0.9561,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "I'll",
+          "start": 166.102,
+          "end": 166.262,
+          "acousticScore": 0.4546,
+          "asrStartDelta": 1.062
+        },
+        {
+          "text": "persist",
+          "start": 166.442,
+          "end": 166.962,
+          "acousticScore": 0.9448,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "till",
+          "start": 167.142,
+          "end": 167.442,
+          "acousticScore": 0.9187,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "time's",
+          "start": 167.582,
+          "end": 168.022,
+          "acousticScore": 0.8796,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "last",
+          "start": 168.102,
+          "end": 168.402,
+          "acousticScore": 0.9357,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "breath,",
+          "start": 168.562,
+          "end": 168.902,
+          "acousticScore": 0.7566,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "The last job on Earth, this unyielding quest of mine,",
+      "sourceLine": 22,
+      "start": 170.122,
+      "end": 174.982,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "The",
+          "start": 170.122,
+          "end": 170.222,
+          "acousticScore": 0.9907,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "last",
+          "start": 170.382,
+          "end": 170.742,
+          "acousticScore": 0.9498,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "job",
+          "start": 170.862,
+          "end": 171.242,
+          "acousticScore": 0.8919,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "on",
+          "start": 171.442,
+          "end": 171.502,
+          "acousticScore": 0.9987,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "Earth,",
+          "start": 171.702,
+          "end": 171.922,
+          "acousticScore": 0.9163,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "this",
+          "start": 172.042,
+          "end": 172.242,
+          "acousticScore": 0.7316
+        },
+        {
+          "text": "unyielding",
+          "start": 172.382,
+          "end": 173.082,
+          "acousticScore": 0.33
+        },
+        {
+          "text": "quest",
+          "start": 173.162,
+          "end": 173.542,
+          "acousticScore": 0.4593,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "of",
+          "start": 173.822,
+          "end": 173.862,
+          "acousticScore": 0.6079,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "mine,",
+          "start": 174.082,
+          "end": 174.982,
+          "acousticScore": 0.1368,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "I will not give up, until I find my rightful place, my own space.",
+      "sourceLine": 23,
+      "start": 177.662,
+      "end": 183.862,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "I",
+          "start": 177.662,
+          "end": 177.682,
+          "acousticScore": 0.9998,
+          "asrStartDelta": 0.722
+        },
+        {
+          "text": "will",
+          "start": 177.762,
+          "end": 177.922,
+          "acousticScore": 0.9992,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "not",
+          "start": 178.022,
+          "end": 178.322,
+          "acousticScore": 0.9667,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "give",
+          "start": 178.462,
+          "end": 178.702,
+          "acousticScore": 0.9984,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "up,",
+          "start": 179.002,
+          "end": 179.082,
+          "acousticScore": 0.5369,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "until",
+          "start": 179.262,
+          "end": 179.602,
+          "acousticScore": 0.9423,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "I",
+          "start": 179.722,
+          "end": 179.742,
+          "acousticScore": 0.7209,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "find",
+          "start": 179.842,
+          "end": 180.222,
+          "acousticScore": 0.7278,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "my",
+          "start": 180.322,
+          "end": 180.542,
+          "acousticScore": 0.4068,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "rightful",
+          "start": 180.582,
+          "end": 181.202,
+          "acousticScore": 0.5705,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "place,",
+          "start": 181.402,
+          "end": 181.962,
+          "acousticScore": 0.7984,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "my",
+          "start": 182.162,
+          "end": 182.442,
+          "acousticScore": 0.4777,
+          "asrStartDelta": -0.198
+        },
+        {
+          "text": "own",
+          "start": 182.522,
+          "end": 182.642,
+          "acousticScore": 0.0685,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "space.",
+          "start": 182.782,
+          "end": 183.862,
+          "acousticScore": 0.2296,
+          "asrStartDelta": 0.082
+        }
+      ]
+    }
+  ]
+}

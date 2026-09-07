@@ -1,3 +1,12 @@
+# museum-v1.25.0 · Audio-derived word captions
+
+- Replace duration-weighted lyric estimates with per-word acoustic timestamps for all 25 recordings. The audio element's current time drives highlighting and word-based two-line paging, including seeking, pausing, changing tracks and returning from a hidden tab.
+- Run local small.en recognition, htdemucs vocal separation and Wav2Vec2 CTC alignment. Keep models and inference out of the visitor's browser. Load just the selected recording's small caption file, bound to its audio hash and a versioned cache key.
+- Keep recording-specific lyric order separate from original NFT text. Account for omitted endings, repeated choruses and ad-libs. Preserve every original record and media file.
+- Keep weak acoustic evidence and recognizer disagreement in a per-line audit. This is automatic alignment, not manual listening certification; speech models remain imperfect on sustained notes and layered singing. No percentage accuracy or frame-accurate guarantee is claimed.
+- Fail to static lyric text when captions cannot load. Remove the old duration-proportional timing path completely. Validate all audio bindings, nonzero ordered word intervals, instrumental gaps, seek behavior, paging coverage and frozen file digests.
+- Preserve the existing Earth sequence and night sky. Publication continues through the existing museum workflow and Alibaba host synchronization.
+
 # museum-v1.24.0 · Changing Earth and clearer night stars
 
 - Move the entrance Earth right of centre and slightly upward, retaining full-globe framing on narrow screens.

@@ -1,12 +1,12 @@
 {
   "schema": "trinity-museum.runtime-build.v1",
-  "edition": "museum-v1.24.0",
+  "edition": "museum-v1.25.0",
   "esbuild": "0.25.12",
   "inputs": [
     {
       "path": "dist/caption-utils.js",
-      "bytes": 3439,
-      "sha256": "14eb7c1c389f6876ef452f8be2673732aeb2d49b983898afc82598641194e6d9"
+      "bytes": 2689,
+      "sha256": "cdf34e26354c16a236c1527c70314d398f028d97875a8414fd1026cb0990a5f6"
     },
     {
       "path": "dist/crystal-inscription.js",
@@ -36,17 +36,22 @@
     {
       "path": "dist/data/gallery-layout.json",
       "bytes": 7264,
-      "sha256": "580d5d087bbe20ac2fd514efff7a7e6c06dbc78696d5041a99a9081302889577"
+      "sha256": "66e69db2a3cfad6bffd4d3b4f4e4640838d3f77d48a673aecd0e4312e36b7d0f"
+    },
+    {
+      "path": "dist/data/lyrics-index.json",
+      "bytes": 8767,
+      "sha256": "2edbcfab838a7f5a8c11c7df3ddfadf7ccf8012be784cbb09220aaac9cc872ee"
     },
     {
       "path": "dist/data/rooms.json",
       "bytes": 10855,
-      "sha256": "d82e205e5e157fe6e7f570d3c659a3694afb03f41876852c29f2c0e997382393"
+      "sha256": "2f347750ca4fd51ed8dd84ae674f75b207897b4b44c60a260ab11c3f888decf2"
     },
     {
       "path": "dist/data/sources.json",
       "bytes": 146391,
-      "sha256": "e850369c7b09cbb88aaa070ab52ddbff2a23300f30c30343f6627786a405daa0"
+      "sha256": "1742da217492eaf6f083864ffc5c459dd2b583515fc8debf869b5138f669208c"
     },
     {
       "path": "dist/earth-sequence.js",
@@ -55,8 +60,8 @@
     },
     {
       "path": "dist/edition-data.js",
-      "bytes": 201177,
-      "sha256": "c2a8e8f79a569cc7c01e3d8dd5d83aed10654fd983126b480bb099c14d0e686e"
+      "bytes": 208287,
+      "sha256": "32b98793c1e78bc4d161ac20c4148a25201b0e5baf61f96014bf3a9e67613689"
     },
     {
       "path": "dist/exhibit-label.js",
@@ -69,14 +74,19 @@
       "sha256": "831b214da79c3a1467226e010ad93e0ceb28278c1df4e8908b0b8a033c7ad4da"
     },
     {
+      "path": "dist/lyrics-fallback.js",
+      "bytes": 1581,
+      "sha256": "56a9581edd9bd34a3abb02ebb1ceb3fdd6f27aa9caf964c4f999689ed149ad54"
+    },
+    {
       "path": "dist/movement-controls.js",
       "bytes": 3228,
       "sha256": "635a3a80ed6f88adcd07704dec1f676bbced61de7aa81ec84bf2a3fae40d6c1c"
     },
     {
       "path": "dist/museum.js",
-      "bytes": 63816,
-      "sha256": "e5127fb59e70822643644e3644fbfaabf8a4eea49e6832618701709b8403e82b"
+      "bytes": 64614,
+      "sha256": "02ffa5abbbc98332672b3323794a75e14eff2e9ea033571f8cd838d83e0579a7"
     },
     {
       "path": "dist/observation-view.js",
@@ -119,14 +129,19 @@
       "sha256": "633d8c1c0bc8e8364075cffdbefd124c92428816eb14d6c0b12f6aa1ccd0572b"
     },
     {
+      "path": "dist/word-captions.js",
+      "bytes": 1766,
+      "sha256": "984f3af907c22309c5bc8b2f1468bd7a420116baf38c845753187a9f405c15dc"
+    },
+    {
       "path": "scripts/build_runtime.mjs",
-      "bytes": 2415,
-      "sha256": "2af61533ca6d8498b63226095a667f8662dc6b8210ccca5b1ea125db8830daa1"
+      "bytes": 2442,
+      "sha256": "8d64f33dce7d40cdb2ca6096568ca1c5d8b3436489012d1410a882c7b2cc3ca1"
     }
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 873418,
-    "sha256": "439e139f1c8175e950788b3b8f2feb7d90f604c1f28d25dba992078d0620aef4"
+    "bytes": 882215,
+    "sha256": "3aa51cc276339462ed3cc5adaafcf8376f20beb44763f261ae30086b52b3ebfe"
   }
 }

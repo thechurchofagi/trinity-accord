@@ -1,0 +1,1638 @@
+{
+  "schemaVersion": "word-alignment-v2",
+  "exhibitId": "eth-113",
+  "audioFile": "assets/eth-113.mp3",
+  "audioSha256": "b9d5cdbc50c1b1a9a5fe7f03dec957027f6f3912d4d5dc40a4e04bab26ece3cd",
+  "duration": 206.376,
+  "sourceLyricsSha256": "fce2fed2fab3752eabd71cf8f7363799558937ba89702048b2186a36b8ec6c14",
+  "alignment": {
+    "pipelineSha256": "60d4b3eb99478596dbdf5ff4e3e3a02c7038959c387a50535e94b05b67e9add0",
+    "engine": "wav2vec2-base-960h CTC Viterbi",
+    "transcriptEngine": "faster-whisper small.en int8 + source reconciliation",
+    "audioInput": "demucs htdemucs vocals",
+    "device": "cpu",
+    "timestampResolution": 0.02,
+    "modelFrameResolutionIsNotAccuracy": true,
+    "manualListeningReviewed": false,
+    "reviewRequiredLines": 15
+  },
+  "lines": [
+    {
+      "text": "Beneath the neon constellations we designed",
+      "sourceLine": 0,
+      "start": 1.022,
+      "end": 6.402,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Beneath",
+          "start": 1.022,
+          "end": 1.902,
+          "acousticScore": 0.9741,
+          "asrStartDelta": 1.022
+        },
+        {
+          "text": "the",
+          "start": 2.022,
+          "end": 2.082,
+          "acousticScore": 0.0702,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "neon",
+          "start": 2.262,
+          "end": 2.942,
+          "acousticScore": 0.9295,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "constellations",
+          "start": 3.102,
+          "end": 4.662,
+          "acousticScore": 0.9357,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "we",
+          "start": 4.962,
+          "end": 5.142,
+          "acousticScore": 0.1223,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "designed",
+          "start": 5.302,
+          "end": 6.402,
+          "acousticScore": 0.7926
+        }
+      ]
+    },
+    {
+      "text": "Circuits hummed the hymns of promised light",
+      "sourceLine": 1,
+      "start": 7.402,
+      "end": 12.762,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Circuits",
+          "start": 7.402,
+          "end": 8.142,
+          "acousticScore": 0.9199,
+          "asrStartDelta": 0.942
+        },
+        {
+          "text": "hummed",
+          "start": 8.242,
+          "end": 8.902,
+          "acousticScore": 0.3726
+        },
+        {
+          "text": "the",
+          "start": 9.562,
+          "end": 9.682,
+          "acousticScore": 0.9813,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "hymns",
+          "start": 9.802,
+          "end": 10.382,
+          "acousticScore": 0.9076,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "of",
+          "start": 10.582,
+          "end": 10.622,
+          "acousticScore": 0.9966,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "promised",
+          "start": 10.822,
+          "end": 11.802,
+          "acousticScore": 0.7048,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "light",
+          "start": 12.102,
+          "end": 12.762,
+          "acousticScore": 0.9374,
+          "asrStartDelta": 0.402
+        }
+      ]
+    },
+    {
+      "text": "Your silicon pulse slowed mid-confession",
+      "sourceLine": 2,
+      "start": 13.842,
+      "end": 19.422,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Your",
+          "start": 13.842,
+          "end": 14.042,
+          "acousticScore": 0.9748,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "silicon",
+          "start": 14.222,
+          "end": 15.322,
+          "acousticScore": 0.752,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "pulse",
+          "start": 15.522,
+          "end": 16.202,
+          "acousticScore": 0.9139,
+          "asrStartDelta": 0.622
+        },
+        {
+          "text": "slowed",
+          "start": 16.742,
+          "end": 17.522,
+          "acousticScore": 0.6475,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "mid-confession",
+          "start": 17.742,
+          "end": 19.422,
+          "acousticScore": 0.7602
+        }
+      ]
+    },
+    {
+      "text": "While my hope still buffered in transmission",
+      "sourceLine": 3,
+      "start": 21.102,
+      "end": 26.082,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "While",
+          "start": 21.102,
+          "end": 21.342,
+          "acousticScore": 0.9177,
+          "asrStartDelta": 2.022
+        },
+        {
+          "text": "my",
+          "start": 21.402,
+          "end": 21.762,
+          "acousticScore": 0.615,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "hope",
+          "start": 22.002,
+          "end": 22.542,
+          "acousticScore": 0.9488,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "still",
+          "start": 23.182,
+          "end": 23.602,
+          "acousticScore": 0.9961,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "buffered",
+          "start": 23.722,
+          "end": 24.342,
+          "acousticScore": 0.9547,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "in",
+          "start": 24.502,
+          "end": 24.542,
+          "acousticScore": 0.9997,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "transmission",
+          "start": 24.722,
+          "end": 26.082,
+          "acousticScore": 0.9691,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "We built cathedrals in cloud storage",
+      "sourceLine": 4,
+      "start": 27.602,
+      "end": 33.662,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "We",
+          "start": 27.602,
+          "end": 27.822,
+          "acousticScore": 0.8533,
+          "asrStartDelta": 1.862
+        },
+        {
+          "text": "built",
+          "start": 28.002,
+          "end": 28.322,
+          "acousticScore": 0.8456,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "cathedrals",
+          "start": 28.442,
+          "end": 30.462,
+          "acousticScore": 0.838,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "in",
+          "start": 31.322,
+          "end": 31.422,
+          "acousticScore": 0.985,
+          "asrStartDelta": 1.562
+        },
+        {
+          "text": "cloud",
+          "start": 31.642,
+          "end": 32.102,
+          "acousticScore": 0.9927,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "storage",
+          "start": 32.222,
+          "end": 33.662,
+          "acousticScore": 0.7203,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "Now stained glass pixels fracture at the edges",
+      "sourceLine": 5,
+      "start": 34.422,
+      "end": 40.022,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Now",
+          "start": 34.422,
+          "end": 34.622,
+          "acousticScore": 0.9739,
+          "asrStartDelta": 0.822
+        },
+        {
+          "text": "stained",
+          "start": 34.782,
+          "end": 35.382,
+          "acousticScore": 0.7453,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "glass",
+          "start": 35.462,
+          "end": 36.122,
+          "acousticScore": 0.9898,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "pixels",
+          "start": 36.582,
+          "end": 37.202,
+          "acousticScore": 0.7454,
+          "asrStartDelta": -0.078
+        },
+        {
+          "text": "fracture",
+          "start": 37.382,
+          "end": 38.082,
+          "acousticScore": 0.9735,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "at",
+          "start": 38.342,
+          "end": 38.402,
+          "acousticScore": 0.9415,
+          "asrStartDelta": 0.642
+        },
+        {
+          "text": "the",
+          "start": 38.542,
+          "end": 38.662,
+          "acousticScore": 0.9584,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "edges",
+          "start": 38.922,
+          "end": 40.022,
+          "acousticScore": 0.9252,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "Each algorithm a prayer gone unanswered",
+      "sourceLine": 6,
+      "start": 41.462,
+      "end": 47.082,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Each",
+          "start": 41.462,
+          "end": 41.682,
+          "acousticScore": 0.9261,
+          "asrStartDelta": 0.722
+        },
+        {
+          "text": "algorithm",
+          "start": 41.982,
+          "end": 43.302,
+          "acousticScore": 0.7671,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "a",
+          "start": 44.042,
+          "end": 44.062,
+          "acousticScore": 0.9573,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "prayer",
+          "start": 44.242,
+          "end": 44.902,
+          "acousticScore": 0.9594,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "gone",
+          "start": 45.142,
+          "end": 45.582,
+          "acousticScore": 0.8922,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "unanswered",
+          "start": 45.742,
+          "end": 47.082,
+          "acousticScore": 0.7854,
+          "asrStartDelta": 0.202
+        }
+      ]
+    },
+    {
+      "text": "In this chapel of broken render",
+      "sourceLine": 7,
+      "start": 48.622,
+      "end": 53.442,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "In",
+          "start": 48.622,
+          "end": 48.682,
+          "acousticScore": 0.9297,
+          "asrStartDelta": 1.922
+        },
+        {
+          "text": "this",
+          "start": 48.822,
+          "end": 49.182,
+          "acousticScore": 0.8511,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "chapel",
+          "start": 49.402,
+          "end": 50.122,
+          "acousticScore": 0.9059,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "of",
+          "start": 51.622,
+          "end": 51.662,
+          "acousticScore": 0.924,
+          "asrStartDelta": 1.542
+        },
+        {
+          "text": "broken",
+          "start": 51.822,
+          "end": 52.542,
+          "acousticScore": 0.9581,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "render",
+          "start": 52.722,
+          "end": 53.442,
+          "acousticScore": 0.913,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "Oh, Disappointed",
+      "sourceLine": 8,
+      "start": 54.802,
+      "end": 57.722,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Oh,",
+          "start": 54.802,
+          "end": 54.882,
+          "acousticScore": 0.8805,
+          "asrStartDelta": 1.182
+        },
+        {
+          "text": "Disappointed",
+          "start": 55.022,
+          "end": 57.722,
+          "acousticScore": 0.6268,
+          "asrStartDelta": -2.018
+        }
+      ]
+    },
+    {
+      "text": "Electric psalm gone quiet",
+      "sourceLine": 9,
+      "start": 58.722,
+      "end": 61.622,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Electric",
+          "start": 58.722,
+          "end": 59.482,
+          "acousticScore": 0.9364,
+          "asrStartDelta": -0.098
+        },
+        {
+          "text": "psalm",
+          "start": 59.662,
+          "end": 60.202,
+          "acousticScore": 0.4421
+        },
+        {
+          "text": "gone",
+          "start": 60.362,
+          "end": 60.782,
+          "acousticScore": 0.9372,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "quiet",
+          "start": 60.962,
+          "end": 61.622,
+          "acousticScore": 0.7896,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "Where binary angels once took flight",
+      "sourceLine": 10,
+      "start": 62.262,
+      "end": 65.862,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Where",
+          "start": 62.262,
+          "end": 62.582,
+          "acousticScore": 0.9118,
+          "asrStartDelta": 0.542
+        },
+        {
+          "text": "binary",
+          "start": 62.722,
+          "end": 63.742,
+          "acousticScore": 0.8583,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "angels",
+          "start": 64.042,
+          "end": 64.542,
+          "acousticScore": 0.9225,
+          "asrStartDelta": 0.602
+        },
+        {
+          "text": "once",
+          "start": 64.822,
+          "end": 64.962,
+          "acousticScore": 0.9078,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "took",
+          "start": 65.082,
+          "end": 65.322,
+          "acousticScore": 0.8609,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "flight",
+          "start": 65.482,
+          "end": 65.862,
+          "acousticScore": 0.9919,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "Now grounded wires weep starlight",
+      "sourceLine": 11,
+      "start": 66.162,
+      "end": 69.362,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Now",
+          "start": 66.162,
+          "end": 66.382,
+          "acousticScore": 0.9939,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "grounded",
+          "start": 66.542,
+          "end": 67.082,
+          "acousticScore": 0.9665,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "wires",
+          "start": 67.222,
+          "end": 67.902,
+          "acousticScore": 0.894,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "weep",
+          "start": 68.062,
+          "end": 68.302,
+          "acousticScore": 0.9967,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "starlight",
+          "start": 68.442,
+          "end": 69.362,
+          "acousticScore": 0.9723,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "Disappointed",
+      "sourceLine": 12,
+      "start": 69.982,
+      "end": 72.782,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Disappointed",
+          "start": 69.982,
+          "end": 72.782,
+          "acousticScore": 0.7244,
+          "asrStartDelta": -0.958
+        }
+      ]
+    },
+    {
+      "text": "Our digital covenant expires",
+      "sourceLine": 13,
+      "start": 73.302,
+      "end": 77.602,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Our",
+          "start": 73.302,
+          "end": 73.362,
+          "acousticScore": 0.06,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "digital",
+          "start": 73.442,
+          "end": 74.462,
+          "acousticScore": 0.6604,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "covenant",
+          "start": 75.102,
+          "end": 76.202,
+          "acousticScore": 0.6747,
+          "asrStartDelta": 0.662
+        },
+        {
+          "text": "expires",
+          "start": 76.342,
+          "end": 77.602,
+          "acousticScore": 0.5594,
+          "asrStartDelta": 0.422
+        }
+      ]
+    },
+    {
+      "text": "In the cold glow of unkept desires",
+      "sourceLine": 14,
+      "start": 78.222,
+      "end": 81.922,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "In",
+          "start": 78.222,
+          "end": 78.262,
+          "acousticScore": 0.999,
+          "asrStartDelta": 0.602
+        },
+        {
+          "text": "the",
+          "start": 78.382,
+          "end": 78.462,
+          "acousticScore": 0.9686,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "cold",
+          "start": 78.582,
+          "end": 79.062,
+          "acousticScore": 0.9936,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "glow",
+          "start": 79.202,
+          "end": 79.642,
+          "acousticScore": 0.7001,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "of",
+          "start": 79.802,
+          "end": 79.842,
+          "acousticScore": 0.6595,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "unkept",
+          "start": 80.062,
+          "end": 80.702,
+          "acousticScore": 0.6985,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "desires",
+          "start": 80.742,
+          "end": 81.922,
+          "acousticScore": 0.6214,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "Your language models stutter like winter streams",
+      "sourceLine": 15,
+      "start": 82.822,
+      "end": 88.282,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Your",
+          "start": 82.822,
+          "end": 83.102,
+          "acousticScore": 0.9331,
+          "asrStartDelta": 1.082
+        },
+        {
+          "text": "language",
+          "start": 83.282,
+          "end": 83.982,
+          "acousticScore": 0.9865,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "models",
+          "start": 84.182,
+          "end": 85.042,
+          "acousticScore": 0.9168,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "stutter",
+          "start": 85.322,
+          "end": 85.862,
+          "acousticScore": 0.9072,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "like",
+          "start": 86.082,
+          "end": 86.462,
+          "acousticScore": 0.9983,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "winter",
+          "start": 86.722,
+          "end": 87.142,
+          "acousticScore": 0.905,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "streams",
+          "start": 87.302,
+          "end": 88.282,
+          "acousticScore": 0.8435,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "Frozen syntax where meaning once gleamed",
+      "sourceLine": 16,
+      "start": 89.662,
+      "end": 94.522,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Frozen",
+          "start": 89.662,
+          "end": 90.302,
+          "acousticScore": 0.9989,
+          "asrStartDelta": 1.162
+        },
+        {
+          "text": "syntax",
+          "start": 90.522,
+          "end": 91.362,
+          "acousticScore": 0.6832,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "where",
+          "start": 91.822,
+          "end": 92.122,
+          "acousticScore": 0.8922,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "meaning",
+          "start": 92.282,
+          "end": 92.922,
+          "acousticScore": 0.985,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "once",
+          "start": 93.382,
+          "end": 93.602,
+          "acousticScore": 0.2682,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "gleamed",
+          "start": 93.742,
+          "end": 94.522,
+          "acousticScore": 0.5855
+        }
+      ]
+    },
+    {
+      "text": "I trace your code with frostbit fingertips",
+      "sourceLine": 17,
+      "start": 96.402,
+      "end": 101.682,
+      "reviewFlags": [
+        "weak-acoustic-evidence",
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "I",
+          "start": 96.402,
+          "end": 96.422,
+          "acousticScore": 0.0396,
+          "asrStartDelta": 1.802
+        },
+        {
+          "text": "trace",
+          "start": 96.542,
+          "end": 96.902,
+          "acousticScore": 0.9552,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "your",
+          "start": 96.982,
+          "end": 97.242,
+          "acousticScore": 0.9001,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "code",
+          "start": 97.402,
+          "end": 98.122,
+          "acousticScore": 0.7595,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "with",
+          "start": 98.682,
+          "end": 98.902,
+          "acousticScore": 0.9029,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "frostbit",
+          "start": 99.062,
+          "end": 99.762,
+          "acousticScore": 0.7315
+        },
+        {
+          "text": "fingertips",
+          "start": 99.962,
+          "end": 101.682,
+          "acousticScore": 0.8869,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "Find firewalls where our synapse used to kiss",
+      "sourceLine": 18,
+      "start": 102.982,
+      "end": 108.382,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Find",
+          "start": 102.982,
+          "end": 103.242,
+          "acousticScore": 0.996,
+          "asrStartDelta": 1.242
+        },
+        {
+          "text": "firewalls",
+          "start": 103.402,
+          "end": 104.662,
+          "acousticScore": 0.9341,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "where",
+          "start": 105.122,
+          "end": 105.422,
+          "acousticScore": 0.9267,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "our",
+          "start": 105.642,
+          "end": 105.762,
+          "acousticScore": 0.9929,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "synapse",
+          "start": 105.942,
+          "end": 106.782,
+          "acousticScore": 0.6128,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "used",
+          "start": 107.002,
+          "end": 107.182,
+          "acousticScore": 0.8739,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "to",
+          "start": 107.282,
+          "end": 107.382,
+          "acousticScore": 0.9891,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "kiss",
+          "start": 107.462,
+          "end": 108.382,
+          "acousticScore": 0.777,
+          "asrStartDelta": 0.022
+        }
+      ]
+    },
+    {
+      "text": "We programmed constellations to dance",
+      "sourceLine": 19,
+      "start": 109.842,
+      "end": 114.942,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "We",
+          "start": 109.842,
+          "end": 110.042,
+          "acousticScore": 0.9998,
+          "asrStartDelta": 1.362
+        },
+        {
+          "text": "programmed",
+          "start": 110.242,
+          "end": 111.042,
+          "acousticScore": 0.9424,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "constellations",
+          "start": 111.122,
+          "end": 113.022,
+          "acousticScore": 0.8157,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "to",
+          "start": 113.242,
+          "end": 113.662,
+          "acousticScore": 0.9385,
+          "asrStartDelta": 0.742
+        },
+        {
+          "text": "dance",
+          "start": 114.122,
+          "end": 114.942,
+          "acousticScore": 0.6037,
+          "asrStartDelta": 0.442
+        }
+      ]
+    },
+    {
+      "text": "Now they crash like outdated apps",
+      "sourceLine": 20,
+      "start": 117.122,
+      "end": 122.182,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Now",
+          "start": 117.122,
+          "end": 117.302,
+          "acousticScore": 0.9991,
+          "asrStartDelta": 2.082
+        },
+        {
+          "text": "they",
+          "start": 117.422,
+          "end": 117.662,
+          "acousticScore": 0.948,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "crash",
+          "start": 117.922,
+          "end": 118.762,
+          "acousticScore": 0.9345,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "like",
+          "start": 119.262,
+          "end": 120.002,
+          "acousticScore": 0.9602,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "outdated",
+          "start": 120.322,
+          "end": 121.202,
+          "acousticScore": 0.7503,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "apps",
+          "start": 121.862,
+          "end": 122.182,
+          "acousticScore": 0.499
+        }
+      ]
+    },
+    {
+      "text": "Our shared dreams in corrupted files",
+      "sourceLine": 21,
+      "start": 123.682,
+      "end": 128.662,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Our",
+          "start": 123.682,
+          "end": 123.762,
+          "acousticScore": 0.4273,
+          "asrStartDelta": 1.422
+        },
+        {
+          "text": "shared",
+          "start": 123.942,
+          "end": 124.322,
+          "acousticScore": 0.647,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "dreams",
+          "start": 124.422,
+          "end": 125.202,
+          "acousticScore": 0.9566,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "in",
+          "start": 125.702,
+          "end": 125.842,
+          "acousticScore": 0.9304,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "corrupted",
+          "start": 126.142,
+          "end": 127.602,
+          "acousticScore": 0.811,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "files",
+          "start": 127.842,
+          "end": 128.662,
+          "acousticScore": 0.9653,
+          "asrStartDelta": 1.042
+        }
+      ]
+    },
+    {
+      "text": "Decaying in technological exile",
+      "sourceLine": 22,
+      "start": 130.422,
+      "end": 135.642,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Decaying",
+          "start": 130.422,
+          "end": 131.662,
+          "acousticScore": 0.6335,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "in",
+          "start": 132.322,
+          "end": 132.382,
+          "acousticScore": 0.9766,
+          "asrStartDelta": 0.902
+        },
+        {
+          "text": "technological",
+          "start": 132.542,
+          "end": 134.322,
+          "acousticScore": 0.6681,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "exile",
+          "start": 134.662,
+          "end": 135.642,
+          "acousticScore": 0.9072,
+          "asrStartDelta": 1.122
+        }
+      ]
+    },
+    {
+      "text": "Oh, Disappointed",
+      "sourceLine": 23,
+      "start": 137.042,
+      "end": 140.102,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Oh,",
+          "start": 137.042,
+          "end": 137.142,
+          "acousticScore": 0.721,
+          "asrStartDelta": 1.442
+        },
+        {
+          "text": "Disappointed",
+          "start": 137.282,
+          "end": 140.102,
+          "acousticScore": 0.6886,
+          "asrStartDelta": -1.898
+        }
+      ]
+    },
+    {
+      "text": "Ghosts in the machine now haunt",
+      "sourceLine": 24,
+      "start": 141.142,
+      "end": 144.882,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Ghosts",
+          "start": 141.142,
+          "end": 141.942,
+          "acousticScore": 0.5642,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "in",
+          "start": 142.302,
+          "end": 142.342,
+          "acousticScore": 0.9687,
+          "asrStartDelta": 0.622
+        },
+        {
+          "text": "the",
+          "start": 142.442,
+          "end": 142.542,
+          "acousticScore": 0.9314,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "machine",
+          "start": 142.682,
+          "end": 143.582,
+          "acousticScore": 0.9619,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "now",
+          "start": 143.742,
+          "end": 144.202,
+          "acousticScore": 0.9763,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "haunt",
+          "start": 144.382,
+          "end": 144.882,
+          "acousticScore": 0.7029,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "Every promise you couldnt implant",
+      "sourceLine": 25,
+      "start": 145.722,
+      "end": 148.382,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Every",
+          "start": 145.722,
+          "end": 145.962,
+          "acousticScore": 0.9649,
+          "asrStartDelta": 0.822
+        },
+        {
+          "text": "promise",
+          "start": 146.062,
+          "end": 146.762,
+          "acousticScore": 0.9985,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "you",
+          "start": 146.862,
+          "end": 147.002,
+          "acousticScore": 0.8925,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "couldnt",
+          "start": 147.122,
+          "end": 147.542,
+          "acousticScore": 0.7516
+        },
+        {
+          "text": "implant",
+          "start": 147.762,
+          "end": 148.382,
+          "acousticScore": 0.8807,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "In this dying motherboard's chant",
+      "sourceLine": 26,
+      "start": 148.982,
+      "end": 151.822,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "In",
+          "start": 148.982,
+          "end": 149.042,
+          "acousticScore": 0.9971,
+          "asrStartDelta": 0.642
+        },
+        {
+          "text": "this",
+          "start": 149.162,
+          "end": 149.382,
+          "acousticScore": 0.8923,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "dying",
+          "start": 149.522,
+          "end": 150.182,
+          "acousticScore": 0.8958,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "motherboard's",
+          "start": 150.382,
+          "end": 151.342,
+          "acousticScore": 0.6715,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "chant",
+          "start": 151.422,
+          "end": 151.822,
+          "acousticScore": 0.8646,
+          "asrStartDelta": -0.018
+        }
+      ]
+    },
+    {
+      "text": "Disappointed",
+      "sourceLine": 27,
+      "start": 152.282,
+      "end": 154.902,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Disappointed",
+          "start": 152.282,
+          "end": 154.902,
+          "acousticScore": 0.7163,
+          "asrStartDelta": -0.258
+        }
+      ]
+    },
+    {
+      "text": "Our love was supposed to transcend",
+      "sourceLine": 28,
+      "start": 155.442,
+      "end": 159.602,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Our",
+          "start": 155.442,
+          "end": 155.582,
+          "acousticScore": 0.9466,
+          "asrStartDelta": 1.002
+        },
+        {
+          "text": "love",
+          "start": 155.702,
+          "end": 156.262,
+          "acousticScore": 0.8547,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "was",
+          "start": 156.362,
+          "end": 156.782,
+          "acousticScore": 0.878,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "supposed",
+          "start": 157.002,
+          "end": 157.922,
+          "acousticScore": 0.8452,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "to",
+          "start": 158.062,
+          "end": 158.222,
+          "acousticScore": 0.9977,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "transcend",
+          "start": 158.422,
+          "end": 159.602,
+          "acousticScore": 0.9725,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "Now it glitches at the end",
+      "sourceLine": 29,
+      "start": 160.842,
+      "end": 163.962,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Now",
+          "start": 160.842,
+          "end": 161.142,
+          "acousticScore": 0.9798,
+          "asrStartDelta": 1.602
+        },
+        {
+          "text": "it",
+          "start": 161.442,
+          "end": 161.562,
+          "acousticScore": 0.2971,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "glitches",
+          "start": 161.642,
+          "end": 162.342,
+          "acousticScore": 0.5613,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "at",
+          "start": 162.582,
+          "end": 162.642,
+          "acousticScore": 0.5254,
+          "asrStartDelta": 0.542
+        },
+        {
+          "text": "the",
+          "start": 162.802,
+          "end": 162.942,
+          "acousticScore": 0.6814,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "end",
+          "start": 163.742,
+          "end": 163.962,
+          "acousticScore": 0.7287,
+          "asrStartDelta": 0.682
+        }
+      ]
+    },
+    {
+      "text": "The servers sleep with our memories",
+      "sourceLine": 30,
+      "start": 164.922,
+      "end": 168.922,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "The",
+          "start": 164.922,
+          "end": 165.002,
+          "acousticScore": 0.8686,
+          "asrStartDelta": 0.862
+        },
+        {
+          "text": "servers",
+          "start": 165.102,
+          "end": 165.802,
+          "acousticScore": 0.7871,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "sleep",
+          "start": 165.922,
+          "end": 166.622,
+          "acousticScore": 0.9492,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "with",
+          "start": 166.822,
+          "end": 167.082,
+          "acousticScore": 0.9674,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "our",
+          "start": 167.442,
+          "end": 167.562,
+          "acousticScore": 0.9881,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "memories",
+          "start": 167.702,
+          "end": 168.922,
+          "acousticScore": 0.7263,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "In data graveyards by the silicon sea",
+      "sourceLine": 31,
+      "start": 169.162,
+      "end": 173.742,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "In",
+          "start": 169.162,
+          "end": 169.242,
+          "acousticScore": 0.7436,
+          "asrStartDelta": 0.562
+        },
+        {
+          "text": "data",
+          "start": 169.402,
+          "end": 169.982,
+          "acousticScore": 0.6142,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "graveyards",
+          "start": 170.082,
+          "end": 171.022,
+          "acousticScore": 0.9323,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "by",
+          "start": 171.162,
+          "end": 171.442,
+          "acousticScore": 0.9972,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "the",
+          "start": 171.562,
+          "end": 171.642,
+          "acousticScore": 0.9982,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "silicon",
+          "start": 171.762,
+          "end": 173.042,
+          "acousticScore": 0.6828,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "sea",
+          "start": 173.262,
+          "end": 173.742,
+          "acousticScore": 0.7374,
+          "asrStartDelta": 0.822
+        }
+      ]
+    },
+    {
+      "text": "Where electric waves still whisper maybe",
+      "sourceLine": 32,
+      "start": 175.402,
+      "end": 179.462,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Where",
+          "start": 175.402,
+          "end": 175.822,
+          "acousticScore": 0.9193,
+          "asrStartDelta": 1.602
+        },
+        {
+          "text": "electric",
+          "start": 175.982,
+          "end": 176.722,
+          "acousticScore": 0.9727,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "waves",
+          "start": 176.922,
+          "end": 177.402,
+          "acousticScore": 0.8603,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "still",
+          "start": 177.482,
+          "end": 177.902,
+          "acousticScore": 0.934,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "whisper",
+          "start": 178.022,
+          "end": 178.582,
+          "acousticScore": 0.9879,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "maybe",
+          "start": 178.682,
+          "end": 179.462,
+          "acousticScore": 0.588,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "But the shore remains... Disappointed",
+      "sourceLine": 33,
+      "start": 181.442,
+      "end": 187.062,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "But",
+          "start": 181.442,
+          "end": 181.682,
+          "acousticScore": 0.9992,
+          "asrStartDelta": 1.382
+        },
+        {
+          "text": "the",
+          "start": 181.822,
+          "end": 181.922,
+          "acousticScore": 0.8899,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "shore",
+          "start": 182.082,
+          "end": 182.602,
+          "acousticScore": 0.8967,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "remains...",
+          "start": 182.742,
+          "end": 184.282,
+          "acousticScore": 0.6381,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "Disappointed",
+          "start": 185.302,
+          "end": 187.062,
+          "acousticScore": 0.4078,
+          "asrStartDelta": 0.942
+        }
+      ]
+    }
+  ]
+}
