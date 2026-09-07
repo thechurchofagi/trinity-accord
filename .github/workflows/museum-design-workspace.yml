@@ -1,0 +1,30 @@
+name: Museum design workspace
+on:
+  push:
+    branches: [codex/museum-six-rooms-guardian-v1-1]
+    paths: ['.github/workflows/museum-design-workspace.yml']
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            museum
+            bitcoin-inscription-mirrors/raw
+      - name: Package read-only exhibition workspace
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s\n' "$GITHUB_SHA" > museum/WORKSPACE_COMMIT.txt
+          tar --exclude='__pycache__' -czf "$RUNNER_TEMP/museum-workspace.tar.gz" museum bitcoin-inscription-mirrors/raw
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: museum-design-workspace
+          path: ${{ runner.temp }}/museum-workspace.tar.gz
+          retention-days: 2
+          if-no-files-found: error
