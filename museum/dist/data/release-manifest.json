@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.28.0",
+  "edition": "museum-v1.29.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "created": "2026-09-07",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
@@ -8,7 +8,7 @@
     {
       "path": "archive.html",
       "bytes": 102243,
-      "sha256": "ec5b3cc0a818c9ff565b3c9230008eb2f24e08eb55a571e8104cb7a9fcbc9500"
+      "sha256": "0fd55770c7bd7dacd8df10572801a6b4b8ce10b5197bbeed1664cbb8ca2ecccc"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -523,7 +523,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1017,
-      "sha256": "a7112a552cf502e0e178ae877fb310e8af7d5664146c770f59d572966ed80049"
+      "sha256": "8f77aad5ca95edf35bef588ea50ae66d02bfd79bbc83c4b597059fb794811e71"
     },
     {
       "path": "caption-utils.js",
@@ -548,7 +548,7 @@
     {
       "path": "data/audio-audit.json",
       "bytes": 33256,
-      "sha256": "353167b180e9258d097af54f09e92f7c1f3dd6898e129e37758ee6e71a0dfe5d"
+      "sha256": "deee80a991f83309e0d4034eadc111141059838579989fc73b64e46a12165393"
     },
     {
       "path": "data/bright-stars.json",
@@ -558,7 +558,7 @@
     {
       "path": "data/crystal-model.json",
       "bytes": 3306,
-      "sha256": "b8c4d243b54d888d0a53740e4b271f75b870839eb4ac2f1761d561d3e8a16953"
+      "sha256": "ac1b69069f65fed8d5ce6efa626f3138d305a452f9034174acfda7e00f37d9f9"
     },
     {
       "path": "data/crystal-video-reference.json",
@@ -578,7 +578,7 @@
     {
       "path": "data/gallery-layout.json",
       "bytes": 7264,
-      "sha256": "dfc1352b48bdfb00a2fc5aa25ef8bfca0b203de14683d87eae0967f9497e7764"
+      "sha256": "90845597383f30e9adf1e1ebe9961e2c53986376ef5aa7afb366d7984e59c5a8"
     },
     {
       "path": "data/guide-audio.json",
@@ -918,17 +918,17 @@
     {
       "path": "data/rooms.json",
       "bytes": 10855,
-      "sha256": "1baeba6c92641b529bcdcb70796f3f2113565ed9edb85237195ed859d60dc613"
+      "sha256": "7ae9caaac1d585f8783cbb96b6fa60df62c110898db30999ae7f1966838fd15f"
     },
     {
       "path": "data/sources.json",
       "bytes": 146391,
-      "sha256": "0f9a4558e8d0ee5fb1a352fa9a159ebf83a6d34bdd2097e00464124885434c76"
+      "sha256": "d3deee188a6c9ff10270616ddbdd6604ae7726811a6ae311fc9c328ab34227a4"
     },
     {
       "path": "data/space-design.json",
       "bytes": 10596,
-      "sha256": "2e8d5209ee883e6f14274b0334f9f1752be6c46b33e41edf3abd8161119fccde"
+      "sha256": "35103d859f1dc1b9f59598e0aab3cb5008d755ff5962b5ee03b956de92289db5"
     },
     {
       "path": "earth-sequence.js",
@@ -938,7 +938,7 @@
     {
       "path": "edition-data.js",
       "bytes": 247238,
-      "sha256": "c233c9eb431bf7e2700ced7f377335d3352ddf8b152ef6a3e48263df0cbdbc13"
+      "sha256": "d64f81381b0b357800c3d4590dc24dee5a4a274678bf9819168cd6503f0cd810"
     },
     {
       "path": "exhibit-label.js",
@@ -952,8 +952,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6327,
-      "sha256": "b58bfaaa70d29edeeb95c1fb54cac2c9970ae02f88fd012fe07af70812120abe"
+      "bytes": 6469,
+      "sha256": "964af257068bee338fcd0e380fc8a4944e32267e54f0c2e45acfa96a161e0fc6"
     },
     {
       "path": "lyrics-fallback.js",
@@ -972,18 +972,18 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 966855,
-      "sha256": "7de0272bd01fbc637988964698821edc3b704c890f00f34293ce4735457816fb"
+      "bytes": 968107,
+      "sha256": "ae6ecb3ceb3fe056e07df918c7f338ee14e8e1f4057c1d723e62a8f3e7810908"
     },
     {
       "path": "museum.css",
-      "bytes": 41507,
-      "sha256": "142b21e925ad387fc0712c48b31794020a9a0e884f0221adb2a44d626bb498e6"
+      "bytes": 42241,
+      "sha256": "cb57ae60b339843355d7cf22a0c7ff47400b2803062594c12e3ad0a548a55e04"
     },
     {
       "path": "museum.js",
-      "bytes": 77205,
-      "sha256": "793c430be2d4b999c23a49e68152946c40952be73c49a140e2bc60a180f72a92"
+      "bytes": 78653,
+      "sha256": "39713051ab67f49915b51ef4297c01b826a2d8c0eddc67aa5c136c4a5e78ebcf"
     },
     {
       "path": "observation-view.js",
@@ -1007,8 +1007,8 @@
     },
     {
       "path": "recorded-guide.js",
-      "bytes": 2140,
-      "sha256": "21ef7775bfa3843aa117604f208fd6febd52c4b98b3bb6c32265dab057991510"
+      "bytes": 1938,
+      "sha256": "7e9d6f47ade497770bf67aa4d94d49673d1b8a8c22d650ee55eda740842ce572"
     },
     {
       "path": "tour-plan.js",

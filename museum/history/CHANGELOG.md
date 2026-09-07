@@ -1,3 +1,9 @@
+# museum-v1.29.0 · Audible tour start and balanced document panels
+
+- Hold the automatic tour clock and camera while narration is loading or blocked. A prominent central button explains the silent state and starts audio in the visitor's click; the first tour click enables sound instead of pausing. Late autoplay failures cannot override that click.
+- Default narration to 1.0×. Both languages still fit every stop and music transition at normal speed.
+- Use matching 4:3 textures and 1.90 × 1.425 m wall panels for text-only exhibits. Original image dimensions remain preserved.
+
 # museum-v1.26.0 · Music plaques and bilingual lyrics
 
 - Add a visible musical note beside the number on each metal plaque whose exhibit has a playable own or linked recording. Use the same recording resolution as the play button; unavailable recordings receive no symbol.
