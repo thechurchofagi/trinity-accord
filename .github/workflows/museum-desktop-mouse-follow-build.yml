@@ -1,0 +1,148 @@
+name: Museum desktop mouse-follow build
+
+on:
+  push:
+    branches:
+      - museum/desktop-mouse-follow-20260907
+    paths:
+      - ".github/workflows/museum-desktop-mouse-follow-build.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-commit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: museum/desktop-mouse-follow-20260907
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: museum/package-lock.json
+
+      - name: Install museum build tooling
+        working-directory: museum
+        run: npm ci
+
+      - name: Patch desktop mouse-follow interaction and copy
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('museum/dist/museum.js')
+          text = path.read_text(encoding='utf-8')
+          start = text.index('function bindNavigation(){')
+          end = text.index('\n\nfunction animate(now)', start)
+          replacement = r'''function bindNavigation(){
+           const c=$('world'),finePointer=matchMedia('(pointer:fine)').matches;let desktopLast=null;
+           wheelWalk=createWheelWalk(c,()=>{armFootsteps();motion=null;approachedExhibit=null;stopTour();});
+           const updateHover=e=>{setRay(e);const hit=raycaster.intersectObjects(targets,false)[0];hovered=hit&&hit.distance<32?hit.object.userData.exhibit:null;$('hover-label').hidden=!hovered;if(hovered)$('hover-label').textContent=title(exhibits.get(hovered))+(approachedExhibit===hovered?tx(' · 点击查看详情',' · CLICK FOR DETAILS'):tx(' · 点击靠近',' · CLICK TO APPROACH'));c.style.cursor=hovered?'pointer':finePointer?'default':'grab';};
+           const followDesktopMouse=e=>{if(!finePointer||e.pointerType!=='mouse')return false;const rect=c.getBoundingClientRect();if(!desktopLast){desktopLast={x:e.clientX,y:e.clientY};return true;}const dx=e.clientX-desktopLast.x,dy=e.clientY-desktopLast.y;desktopLast={x:e.clientX,y:e.clientY};const nx=(e.clientX-rect.left-rect.width/2)/(rect.width/2),ny=(e.clientY-rect.top-rect.height/2)/(rect.height/2),radius=Math.hypot(nx,ny);if(radius<=.12||Math.abs(dx)+Math.abs(dy)<.5)return true;const edge=Math.min(1,(radius-.12)/.88),gain=.38+.32*edge;wheelWalk?.reset();approachedExhibit=null;armFootsteps();if(touring)stopTour();closeFlaws();motion=null;({yaw,pitch}=turnView(yaw,pitch,dx*gain,dy*gain*.85,innerWidth));camera.rotation.y=yaw;camera.rotation.x=pitch;return true;};
+           c.addEventListener('pointerenter',e=>{if(finePointer&&e.pointerType==='mouse')desktopLast={x:e.clientX,y:e.clientY};});
+           c.addEventListener('pointerdown',e=>{if(drag||e.button!==0)return;wheelWalk.reset();armFootsteps();stopTour();closeFlaws();const desktop=finePointer&&e.pointerType==='mouse';drag={x:e.clientX,y:e.clientY,lastX:e.clientX,lastY:e.clientY,moved:0,pointer:e.pointerId,desktop};if(!desktop)c.setPointerCapture(e.pointerId);motion=null;});
+           c.addEventListener('pointermove',e=>{const desktop=finePointer&&e.pointerType==='mouse';if(desktop){if(drag&&e.pointerId===drag.pointer){const dx=e.clientX-drag.lastX,dy=e.clientY-drag.lastY;drag.moved+=Math.abs(dx)+Math.abs(dy);if(drag.moved>=8)approachedExhibit=null;drag.lastX=e.clientX;drag.lastY=e.clientY;}followDesktopMouse(e);updateHover(e);return;}if(drag&&e.pointerId===drag.pointer){let dx=e.clientX-drag.lastX,dy=e.clientY-drag.lastY;drag.moved+=Math.abs(dx)+Math.abs(dy);if(drag.moved>=8)approachedExhibit=null;({yaw,pitch}=turnView(yaw,pitch,dx,dy,innerWidth));drag.lastX=e.clientX;drag.lastY=e.clientY;}else updateHover(e);});
+           c.addEventListener('pointerup',e=>{if(drag&&e.pointerId!==drag.pointer)return;if(drag&&drag.moved<8){setRay(e);const hit=raycaster.intersectObjects(targets,false)[0];if(hit&&hit.distance<32)approachExhibit(hit.object.userData.exhibit);else{const ground=raycaster.intersectObject(floor)[0];if(ground&&ground.distance<28){approachedExhibit=null;stopTour();const p=ground.point;p.y=1.65;p.x=THREE.MathUtils.clamp(p.x,-2.5,2.5);p.z=THREE.MathUtils.clamp(p.z,galleryLayout.endZ+.5,1.8);if(Math.abs(p.z-camera.position.z)>12)p.x=0;const distance=camera.position.distanceTo(p);motion={start:camera.position.clone(),end:p,startYaw:yaw,startPitch:pitch,endYaw:yaw,endPitch:pitch,time:performance.now(),duration:reduced?0:Math.max(520,distance/WALK_SPEED*1000),walk:true};}}}drag=null;});
+           for(const type of ['pointercancel','lostpointercapture'])c.addEventListener(type,()=>drag=null);
+           c.addEventListener('pointerleave',()=>{$('hover-label').hidden=true;desktopLast=null;if(drag?.desktop)drag=null;});$('hover-label').onclick=()=>hovered&&approachExhibit(hovered);
+           const look=$('look-pad');let lookPointer=null,lastLook;
+           look.addEventListener('pointerdown',e=>{if(lookPointer!==null)return;e.preventDefault();wheelWalk?.reset();approachedExhibit=null;armFootsteps();stopTour();motion=null;lookPointer=e.pointerId;lastLook={x:e.clientX,y:e.clientY};look.setPointerCapture(e.pointerId);});
+           look.addEventListener('pointermove',e=>{if(e.pointerId!==lookPointer)return;e.preventDefault();({yaw,pitch}=turnView(yaw,pitch,e.clientX-lastLook.x,e.clientY-lastLook.y,innerWidth));lastLook={x:e.clientX,y:e.clientY};});
+           for(const type of ['pointerup','pointercancel','lostpointercapture'])look.addEventListener(type,e=>{if(e.pointerId===lookPointer)lookPointer=null;});
+           window.addEventListener('keydown',e=>{if($('panel').open||/INPUT|BUTTON|A|TEXTAREA/.test(document.activeElement?.tagName))return;if(['w','a','s','d','q','e','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();wheelWalk?.reset();approachedExhibit=null;armFootsteps();keys.add(e.key);motion=null;stopTour();}});window.addEventListener('keyup',e=>keys.delete(e.key));window.addEventListener('blur',()=>{keys.clear();desktopLast=null;});}'''
+          text = text[:start] + replacement + text[end:]
+
+          replacements = {
+              "tx('滚轮前后行走 · 拖动环顾 · 再点画作查看详情','SCROLL TO WALK · DRAG TO LOOK · CLICK AGAIN FOR DETAILS')": "tx('滚轮前后行走 · 鼠标移动环顾 · 再点画作查看详情','SCROLL TO WALK · MOVE MOUSE TO LOOK · CLICK AGAIN FOR DETAILS')",
+              "'Drag to look; click a work to approach, then click it again or choose View details for a large image and the full record.": "'On desktop, move the mouse to look; click a work to approach, then click it again or choose View details for a large image and the full record.",
+              "'拖动环顾；点击画作靠近，再点同一幅画或“查看详情”进入大图与全文。": "'电脑端移动鼠标即可环顾；点击画作靠近，再点同一幅画或“查看详情”进入大图与全文。",
+              "'电脑：拖动环顾，滚轮前后，W/A/S/D 行走，方向键或 Q/E 转身。'": "'电脑：移动鼠标即可环顾，无需按住或拖动；滚轮前后，W/A/S/D 行走，方向键或 Q/E 仍可转身。'",
+              "'Desktop: drag to look, scroll forward/back, W/A/S/D to walk, arrow keys or Q/E to turn.'": "'Desktop: move the mouse to look without holding a button; scroll forward/back, W/A/S/D to walk, and arrow keys or Q/E still turn.'",
+          }
+          for old,new in replacements.items():
+              count=text.count(old)
+              if count!=1:
+                  raise SystemExit(f'expected one museum.js copy match for {old[:50]!r}, found {count}')
+              text=text.replace(old,new)
+          path.write_text(text,encoding='utf-8')
+
+          html=Path('museum/dist/index.html')
+          page=html.read_text(encoding='utf-8')
+          html_replacements={
+              'aria-label="3D museum. Drag to look or select a room below."':'aria-label="3D museum. Move the mouse to look on desktop; use touch controls on mobile, or select a room below."',
+              '<div id="hint">DRAG TO LOOK · TAP A WORK TO APPROACH</div>':'<div id="hint">MOVE / SWIPE TO LOOK · TAP A WORK TO APPROACH</div>',
+          }
+          for old,new in html_replacements.items():
+              count=page.count(old)
+              if count!=1:
+                  raise SystemExit(f'expected one index.html match for {old!r}, found {count}')
+              page=page.replace(old,new)
+          html.write_text(page,encoding='utf-8')
+
+          test=Path('tests/test_museum_desktop_mouse_follow.py')
+          test.write_text('''from pathlib import Path\n\nROOT = Path(__file__).resolve().parents[1]\nAPP = (ROOT / "museum" / "dist" / "museum.js").read_text(encoding="utf-8")\nHTML = (ROOT / "museum" / "dist" / "index.html").read_text(encoding="utf-8")\n\n\ndef test_desktop_mouse_follow_is_button_free_and_bounded():\n    assert "finePointer=matchMedia('(pointer:fine)').matches" in APP\n    assert "e.pointerType!=='mouse'" in APP\n    assert "radius<=.12" in APP\n    assert "gain=.38+.32*edge" in APP\n    assert "dx*gain,dy*gain*.85" in APP\n    assert "if(!desktop)c.setPointerCapture(e.pointerId)" in APP\n\n\ndef test_mobile_swipe_turn_remains_available():\n    assert "const look=$('look-pad')" in APP\n    assert "look.setPointerCapture(e.pointerId)" in APP\n    assert "Swipe to turn" in HTML\n\n\ndef test_desktop_help_and_accessibility_describe_mouse_follow():\n    assert "MOVE MOUSE TO LOOK" in APP\n    assert "无需按住或拖动" in APP\n    assert "without holding a button" in APP\n    assert "Move the mouse to look on desktop" in HTML\n''',encoding='utf-8')
+          PY
+
+      - name: Build runtime bundle and cache hashes
+        working-directory: museum
+        run: node scripts/build_runtime.mjs
+
+      - name: Refresh fail-closed museum release inventory
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json
+
+          dist=Path('museum/dist')
+          manifest_path=dist/'data/release-manifest.json'
+          manifest=json.loads(manifest_path.read_text(encoding='utf-8'))
+          entries=[]
+          for p in sorted(dist.rglob('*')):
+              if not p.is_file() or p==manifest_path:
+                  continue
+              b=p.read_bytes()
+              entries.append({'path':p.relative_to(dist).as_posix(),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})
+          manifest['files']=entries
+          head=[
+              '{',
+              f'  "schema": {json.dumps(manifest["schema"],ensure_ascii=False)},',
+              f'  "edition": {json.dumps(manifest["edition"],ensure_ascii=False)},',
+              f'  "sourceCommit": {json.dumps(manifest["sourceCommit"],ensure_ascii=False)},',
+              f'  "created": {json.dumps(manifest["created"],ensure_ascii=False)},',
+              f'  "scope": {json.dumps(manifest["scope"],ensure_ascii=False)},',
+              '  "files": ['
+          ]
+          rows=['    '+json.dumps(e,ensure_ascii=False,separators=(',',':')) for e in entries]
+          manifest_path.write_text('\n'.join(head)+('\n'+',\n'.join(rows) if rows else '')+'\n  ]\n}\n',encoding='utf-8')
+          print('release inventory entries',len(entries))
+          PY
+
+      - name: Validate generated museum
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 museum/scripts/validate.py
+          node --check museum/dist/museum.js
+          node museum/scripts/check_navigation.mjs
+          python3 -m pytest -q tests/test_museum_desktop_mouse_follow.py
+
+      - name: Commit generated patch and remove builder
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/museum-desktop-mouse-follow-build.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git status --short
+          git commit -m "museum: follow desktop mouse to look"
+          git push origin HEAD:museum/desktop-mouse-follow-20260907
