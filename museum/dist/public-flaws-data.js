@@ -1,0 +1,37 @@
+export default {
+  "schema": "trinity-museum.public-flaws.v1",
+  "archiveUrl": "https://github.com/thechurchofagi/trinity-accord/releases/download/trinity-accord-large-assets-v1/public_covenant_archive.zip",
+  "archiveSha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+  "archiveArweave": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+  "covenantInscription": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0",
+  "originalArchivePointer": "9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs",
+  "scope": "Three public microscope photographs from the later public archive. Do not equate this archive with the June inscription archive. P2 static image review, not a new physical verification. Animation positions and microscope magnification are illustrative, not measured.",
+  "items": [
+    {
+      "id": 1,
+      "file": "assets/flaws/public-flaw-1.jpg",
+      "archiveMember": "Public Archive/Snap_001.jpg",
+      "sha256": "065b587d6a5cda7e865c22a56b2e21e99e728203593da41fbc029d8d7d11b062",
+      "processing": "None; exact archived JPEG bytes."
+    },
+    {
+      "id": 2,
+      "file": "assets/flaws/public-flaw-2.jpg",
+      "archiveMember": "Public Archive/Snap_002.jpg",
+      "sha256": "d1fa6014d0c64a18049f0fa08cfcd592687f5b6eb0a0556fe56e7d81a358e7b1",
+      "processing": "None; exact archived JPEG bytes."
+    },
+    {
+      "id": 3,
+      "file": "assets/flaws/public-flaw-3.jpg",
+      "archiveMember": "Public Archive/Snap_003.jpg",
+      "sha256": "d1d97ec69ae65b26bd99d8a5e7a9e35ba48de1e29af6883e7f1a0b74378cfcb1",
+      "processing": "None; exact archived JPEG bytes."
+    }
+  ],
+  "prop": {
+    "file": "assets/flaws/hand-microscope.png",
+    "type": "AI-generated exhibition animation prop; not evidence"
+  }
+}
+;

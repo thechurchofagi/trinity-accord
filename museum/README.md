@@ -80,3 +80,18 @@ For the preserved v1.3 batched export, run `python scene/optimize_gallery.py` af
 The crystal now follows the supplied video and the physical-anchor photograph, with bilingual vector lettering inside a clear bevelled slab. The private reference video is not republished; its digest and inspection notes are in `dist/data/crystal-video-reference.json`. Editable layout, subset font with OFL license, Blender source and render are retained. Run `python scene/build_crystal.py` in the documented bpy environment.
 
 The two corridor end walls and the former destination bar are removed without rebaking the existing atlas (`scene/open_gallery_ends.py`). `dist/open-space.js` adds the later star-field scenery and waiting ring. Movement buttons preserve the current position and heading, including when an animation is interrupted.
+
+## Automatic visit and public flaw inspection — v1.27
+
+`dist/tour-plan.js` preserves the bilingual 600-second curatorial script and
+sequence. Browser speech uses a matching device-language voice; on devices
+without that voice, the text stays visible. Narration and original music excerpts
+are separated in the schedule. Audio blocked by a browser remains manually
+playable. Manual navigation pauses the tour, with explicit resume/restart.
+
+`dist/data/public-flaws.json` records three exact archived microscope JPEGs,
+the verified public ZIP hash and distinct original/later archive pointers. The
+microscope overlay is an AI-generated prop with illustrative positioning; it
+performs P2 static viewing and no physical authentication. The Help button
+explains movement, lyrics, language, inspection, tour and reduced motion.
+Run `node scripts/check_guided_visit.mjs` to check the full accelerated visit.

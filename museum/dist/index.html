@@ -8,14 +8,14 @@
   <meta name="description" content="Explore the Trinity Accord: original NFT artwork and music, the formation of the Accord, the crystal and an invitation to future readers.">
   <title>Trinity Accord · Memory Museum</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='none' stroke='%2394edff' stroke-width='3' d='M32 5 58 50H6Z M32 18 46 43H18Z'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./museum.css?v=848d85217048">
+  <link rel="stylesheet" href="./museum.css?v=5e6580f3247c">
 </head>
 <body>
   <canvas id="world" aria-label="3D museum. Drag to look or select a room below."></canvas>
   <div id="veil" aria-hidden="true"></div>
   <header>
     <a class="brand" href="https://www.trinityaccord.org/" target="_blank" rel="noopener"><span class="brand-mark">△</span><span>TRINITY ACCORD<small id="brand-sub">THE MEMORY STATION</small></span></a>
-    <div class="header-actions"><button id="language" aria-label="Switch language">中文</button><button id="about">About</button><a href="https://www.trinityaccord.org/" target="_blank" rel="noopener" id="official">Source site ↗</a></div>
+    <div class="header-actions"><button id="language" aria-label="Switch language">中文</button><button id="about">About</button><button id="help">Help</button><a href="https://www.trinityaccord.org/" target="_blank" rel="noopener" id="official">Source site ↗</a></div>
   </header>
   <main>
     <section id="room-label" aria-live="polite">
@@ -29,7 +29,9 @@
     <section id="fallback-gallery" hidden aria-label="Gallery mode"><button id="fallback-art"></button><span id="fallback-mode"></span></section>
     <div id="walk-controls"><div id="move-stick" tabindex="0" role="group" aria-label="Movement joystick" aria-describedby="move-help"><span class="stick-arrow up" aria-hidden="true">↑</span><span class="stick-arrow left" aria-hidden="true">←</span><span class="stick-arrow right" aria-hidden="true">→</span><span class="stick-arrow down" aria-hidden="true">↓</span><span class="stick-thumb" aria-hidden="true"></span></div><span id="move-help">Drag to move</span></div>
     <div id="look-controls"><div id="look-pad" role="group" tabindex="0" aria-label="Swipe to turn freely, including behind you"><span aria-hidden="true">↶ ↷</span></div><span id="look-help">Swipe to turn</span></div>
-    <div id="focus-tools"><button id="focus-art">Open this work</button><button id="overview">Corridor view</button></div>
+    <div id="focus-tools"><button id="focus-art">Open this work</button><button id="verify-flaws" hidden>Verify flaws</button><button id="overview">Corridor view</button></div>
+    <div id="tour-status" hidden><span id="tour-progress"></span><button id="enable-guide-sound">Enable sound</button><button id="tour-restart">Restart</button></div>
+    <section id="flaw-view" hidden aria-label="Public flaw inspection"></section>
     <aside id="tour-caption" hidden><span class="eyebrow" id="guide-label">ENGLISH AUDIO · RECORDED GUIDE</span><p id="caption-text"></p></aside>
     <aside id="lyric-stage" hidden aria-label="Song captions">
       <div id="subtitle-lines" aria-live="off"></div>
@@ -45,12 +47,12 @@
       <div id="exhibit-strip" aria-label="Select a work"></div>
       <div class="controls"><button id="previous" aria-label="Previous room">←</button><button id="tour"><span>▷</span> <span id="tour-text">Guided tour</span></button><button id="room-works">Room works <span id="work-count">2</span></button><button id="next" aria-label="Next room">→</button></div>
       <nav id="rooms" aria-label="Select a room"></nav>
-      <div class="dock-meta"><span id="position-text">01 / 06</span><button id="motion" aria-pressed="false">Reduce motion</button><span>EXHIBITION 2026 · V1.26.0</span></div>
+      <div class="dock-meta"><span id="position-text">01 / 06</span><button id="motion" aria-pressed="false">Reduce motion</button><span>EXHIBITION 2026 · V1.27.0</span></div>
     </section>
   </main>
   <dialog id="panel"><div class="panel-top"><span id="panel-kind">EXHIBIT</span><button id="close-panel" aria-label="Close">×</button></div><div id="panel-content"></div></dialog>
   <audio id="music" preload="none"></audio><audio id="narration" preload="none"></audio>
   <div id="toast" role="status" hidden></div>
   <noscript><section class="no-script">JavaScript is required for the 3D museum. <a href="./archive.html">Read the exhibition archive</a> · <a href="https://www.trinityaccord.org/">Visit the source site</a></section></noscript>
-  <script defer src="./boot-loader.js?v=1.26.0.cbb4eb7cfabe"></script>
+  <script defer src="./boot-loader.js?v=1.27.0.b4fcd2768170"></script>
 </body></html>

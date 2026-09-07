@@ -271,3 +271,23 @@ The exhibit IDs, source manifests, media transformation records, guide scripts, 
 Validation scope: local source syntax, source-copy digests, audio decoding, content completeness and internal file references. No browser or device-specific visual testing was requested in this creation turn; no claim is made that such testing or a recorded walkthrough has been completed.
 
 Future changes must add a dated entry and preserve formal release snapshots. Never rewrite an old edition to conceal an earlier interpretation or defect; attach corrections and publish a new version.
+
+## museum-v1.27.0 — 2026-09-07
+
+- Inward entrance view; stable room and artwork navigation nodes during updates.
+- Default 600-second bilingual automatic visit: three original music excerpts,
+  formation and original texts, crystal introduction, three public flaw photos,
+  and waiting. Pause/resume/restart; manual navigation cancels the animation;
+  hidden tabs pause. Device speech follows the selected language. Browser audio
+  restrictions leave a visible manual play control and text remains available.
+- Shared crystal material now transmits fully with reduced surface reflections.
+  These are display settings, not measured optical properties.
+- Exact Snap_001–003 JPEG bytes extracted from the hash-verified public covenant
+  ZIP, with source manifest and original inscription link. Later public archive
+  and original inscription pointer remain distinct. Handheld microscope is an
+  AI-generated animation prop, not physical evidence. Exit removes the viewer.
+- Bilingual Help and localized introduction/guide; existing word timings and
+  Chinese lyric translations are retained.
+- Validation: full accelerated 600-second logic, pause and stale callback checks,
+  photo hashes, navigation, caption, exterior and frozen-edition checks. No claim
+  of physical authentication or browser/device visual certification.

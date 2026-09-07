@@ -2,14 +2,14 @@ import * as THREE from './vendor/three.module.js';
 import {GLTFLoader} from './vendor/GLTFLoader.js';
 import {fetchBytes} from './progressive-loading.js';
 
-export function crystalGlass(){return new THREE.MeshPhysicalMaterial({color:'#f4fbff',roughness:.025,transmission:.90,thickness:.012,ior:1.12,metalness:0,envMapIntensity:.65,clearcoat:.45,clearcoatRoughness:.045,attenuationColor:new THREE.Color('#e7f6ff'),attenuationDistance:3});}
+export function crystalGlass(){return new THREE.MeshPhysicalMaterial({color:'#ffffff',roughness:.008,transmission:1,thickness:.004,ior:1.08,metalness:0,envMapIntensity:.22,clearcoat:.08,clearcoatRoughness:.02,attenuationColor:new THREE.Color('#ffffff'),attenuationDistance:Infinity});}
 // Keep physical engraving geometry; improve its contrast for a small screen.
 export function refineCrystal(root){
  const meshes=[];root.traverse(o=>{if(o.isMesh)meshes.push(o);});
  for(const o of meshes){
   if(o.name.startsWith('Crystal_')){
    o.material.dispose();o.material=crystalGlass();
-   const edges=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,24),new THREE.LineBasicMaterial({color:'#d7efff',transparent:true,opacity:.38,depthWrite:false}));edges.name='Display facet highlights';o.add(edges);
+   const edges=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,24),new THREE.LineBasicMaterial({color:'#d7efff',transparent:true,opacity:.18,depthWrite:false}));edges.name='Display facet highlights';o.add(edges);
   }else{
    o.material.dispose();o.material=new THREE.MeshBasicMaterial({color:'#f0f8ff',toneMapped:false});
    const outline=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,35),new THREE.LineBasicMaterial({color:'#142637',transparent:true,opacity:.8,depthWrite:false,toneMapped:false}));outline.name='Engraving contrast outline';o.add(outline);
