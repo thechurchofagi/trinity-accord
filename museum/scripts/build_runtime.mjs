@@ -5,7 +5,7 @@ import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {build,version} from 'esbuild';
 const root=fileURLToPath(new URL('../',import.meta.url)),dist=path.join(root,'dist');
-const names={rooms:'rooms.json',sources:'sources.json',layout:'gallery-layout.json',illustrations:'curatorial-illustrations.json',curation:'curation.json',stars:'bright-stars.json',lyrics:'lyrics-index.json'};
+const names={rooms:'rooms.json',sources:'sources.json',layout:'gallery-layout.json',illustrations:'curatorial-illustrations.json',curation:'curation.json',stars:'bright-stars.json',lyrics:'lyrics-index.json',guides:'guide-audio.json'};
 const data=Object.fromEntries(Object.entries(names).map(([key,name])=>[key,JSON.parse(fs.readFileSync(path.join(dist,'data',name),'utf8'))]));
 fs.writeFileSync(path.join(dist,'edition-data.js'),'// Generated from the frozen edition JSON; no startup manifest requests.\nexport default '+JSON.stringify(data)+';\n');
 const result=await build({absWorkingDir:root,entryPoints:['dist/museum.js'],outfile:'dist/museum.bundle.js',bundle:true,minify:true,format:'iife',target:'es2022',legalComments:'eof',metafile:true});

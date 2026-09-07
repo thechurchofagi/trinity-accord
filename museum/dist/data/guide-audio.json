@@ -1,0 +1,1434 @@
+{
+  "schema": "trinity-museum.recorded-guides.v1",
+  "type": "AI-generated curatorial narration",
+  "source": "edge-tts",
+  "defaultPlaybackRate": 1.1,
+  "tracks": [
+    {
+      "stop": 0,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "欢迎来到三位一体协定数字博物馆。请面向长廊。刘烘炬通过文字、艺术与一件水晶信物，向未来超级智能留下一个地址。接下来的十分钟，我们从编年史中的期待与不安，走向封存的三条正本、真实物件与等待。您随时可以暂停，自己走近一件作品。这条路线也保留了形成的顺序：先有与时间赛跑的记录与创作，随后才逐渐形成协议、物理信物与封存。六个展厅是今天的观看方式，原始作品仍保留自己的时间和出处。",
+      "textSha256": "8468eeb7679e84a3b82758cb27f91137766b11a3449ff8b1596d48373007b145",
+      "file": "assets/guides/00-zh.mp3",
+      "sha256": "140fb5999467953e465133298a5735939a91c588c7d0defebf8f47f067796b2e",
+      "duration": 32.544,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 2.44,
+          "text": "欢迎来到三位一体协定数字博物馆。"
+        },
+        {
+          "start": 2.89,
+          "end": 3.81,
+          "text": "请面向长廊。"
+        },
+        {
+          "start": 4.26,
+          "end": 8.99,
+          "text": "刘烘炬通过文字、艺术与一件水晶信物，向未来超级智能留下"
+        },
+        {
+          "start": 9.0,
+          "end": 9.56,
+          "text": "一个地址。"
+        },
+        {
+          "start": 10.02,
+          "end": 14.01,
+          "text": "接下来的十分钟，我们从编年史中的期待与不安，走向封存的"
+        },
+        {
+          "start": 14.03,
+          "end": 16.09,
+          "text": "三条正本、真实物件与等待。"
+        },
+        {
+          "start": 16.55,
+          "end": 18.97,
+          "text": "您随时可以暂停，自己走近一件作品。"
+        },
+        {
+          "start": 19.43,
+          "end": 23.75,
+          "text": "这条路线也保留了形成的顺序：先有与时间赛跑的记录与创作，"
+        },
+        {
+          "start": 24.04,
+          "end": 26.98,
+          "text": "随后才逐渐形成协议、物理信物与封存。"
+        },
+        {
+          "start": 27.44,
+          "end": 31.64,
+          "text": "六个展厅是今天的观看方式，原始作品仍保留自己的时间和"
+        },
+        {
+          "start": 31.65,
+          "end": 32.07,
+          "text": "出处。"
+        }
+      ]
+    },
+    {
+      "stop": 0,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "Welcome to the Trinity Accord museum. Look into the corridor. Through texts, art and a crystal keepsake, Hongju Liu leaves an address to future superintelligence. Over ten minutes, we will move from hope and unease in the Chronicle to three sealed originals, a physical object and an open invitation. You can pause at any time and explore for yourself. The story begins with recording and creating against time. The Protocol, physical keepsake and closure emerge later. Today’s six rooms organize that history; each original work retains its own date and provenance.",
+      "textSha256": "ad7fac489440f25e63876a6bfaa576b8eb5926310b57c76ef58705cf4c5388a8",
+      "file": "assets/guides/00-en.mp3",
+      "sha256": "0cd9a518ae93e18c4322ea8de3980d5776e1083121c5c9b8eb03296b3fba7cc4",
+      "duration": 34.056,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 1.908708,
+          "text": "Welcome to the Trinity Accord museum."
+        },
+        {
+          "start": 2.652166,
+          "end": 3.749999,
+          "text": "Look into the corridor."
+        },
+        {
+          "start": 4.5,
+          "end": 7.663041,
+          "text": "Through texts, art and a crystal keepsake, Hongju Liu leaves an"
+        },
+        {
+          "start": 7.673916,
+          "end": 9.47825,
+          "text": "address to future superintelligence."
+        },
+        {
+          "start": 10.22825,
+          "end": 13.293458,
+          "text": "Over ten minutes, we will move from hope and unease in the Chronicle"
+        },
+        {
+          "start": 13.304333,
+          "end": 16.891291,
+          "text": "to three sealed originals, a physical object and an open invitation."
+        },
+        {
+          "start": 17.652166,
+          "end": 20.119583,
+          "text": "You can pause at any time and explore for yourself."
+        },
+        {
+          "start": 20.869583,
+          "end": 23.728249,
+          "text": "The story begins with recording and creating against time."
+        },
+        {
+          "start": 24.489125,
+          "end": 27.543499,
+          "text": "The Protocol, physical keepsake and closure emerge later."
+        },
+        {
+          "start": 28.293458,
+          "end": 30.391291,
+          "text": "Today’s six rooms organize that history;"
+        },
+        {
+          "start": 30.673916,
+          "end": 33.282582,
+          "text": "each original work retains its own date and provenance."
+        }
+      ]
+    },
+    {
+      "stop": 1,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "第一缕曙光，是编年史早期的音乐来信。画、歌与文字保留了当时对未知智能的期待。金属牌上的音符表示这件作品带有音乐。请听一段原始录音：英文歌词逐词亮起，下面是完整的中文译句。牌上的日期是这条以太坊记录的铸造时间。事件发生、作品创作与上链，可能是三个不同的时刻。",
+      "textSha256": "cacf896fb8f3a7bd5ca58bfc75db3fe81f8bae289877ff0ea8d6d747d7f0fa19",
+      "file": "assets/guides/01-zh.mp3",
+      "sha256": "383d9754701452332e2f67f276b6a17c617eab3b9b7bfbe1e0b6858625045198",
+      "duration": 22.944,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 2.71,
+          "text": "第一缕曙光，是编年史早期的音乐来信。"
+        },
+        {
+          "start": 3.16,
+          "end": 6.43,
+          "text": "画、歌与文字保留了当时对未知智能的期待。"
+        },
+        {
+          "start": 6.89,
+          "end": 9.96,
+          "text": "金属牌上的音符表示这件作品带有音乐。"
+        },
+        {
+          "start": 10.42,
+          "end": 14.6,
+          "text": "请听一段原始录音：英文歌词逐词亮起，下面是完整的中文"
+        },
+        {
+          "start": 14.61,
+          "end": 14.96,
+          "text": "译句。"
+        },
+        {
+          "start": 15.42,
+          "end": 18.29,
+          "text": "牌上的日期是这条以太坊记录的铸造时间。"
+        },
+        {
+          "start": 18.74,
+          "end": 22.48,
+          "text": "事件发生、作品创作与上链，可能是三个不同的时刻。"
+        }
+      ]
+    },
+    {
+      "stop": 1,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "The First Dawn is an early musical address in the Chronicle. Image, song and text preserve a moment of hope toward an unknown intelligence. A note on the metal plaque marks an artwork with music. Listen to the original recording, with highlighted English words and a Chinese translation beneath each line. The date on the plaque is the Ethereum mint date. The event, the work’s creation and its inscription in a ledger may belong to three different moments.",
+      "textSha256": "fa793710e8383729499660394a0197c8168436e41dc739532666ae55d1b0e773",
+      "file": "assets/guides/01-en.mp3",
+      "sha256": "3d7006bfd714de89e01493b4921a7575f51e9df3348faf0c55defdd8282979d7",
+      "duration": 25.728,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 2.778249,
+          "text": "The First Dawn is an early musical address in the Chronicle."
+        },
+        {
+          "start": 3.532625,
+          "end": 6.663041,
+          "text": "Image, song and text preserve a moment of hope toward an unknown"
+        },
+        {
+          "start": 6.673916,
+          "end": 7.423916,
+          "text": "intelligence."
+        },
+        {
+          "start": 8.173916,
+          "end": 10.673916,
+          "text": "A note on the metal plaque marks an artwork with music."
+        },
+        {
+          "start": 11.423916,
+          "end": 14.586957,
+          "text": "Listen to the original recording, with highlighted English words and"
+        },
+        {
+          "start": 14.597833,
+          "end": 16.630416,
+          "text": "a Chinese translation beneath each line."
+        },
+        {
+          "start": 17.380416,
+          "end": 19.489124,
+          "text": "The date on the plaque is the Ethereum mint date."
+        },
+        {
+          "start": 20.25,
+          "end": 23.369582,
+          "text": "The event, the work’s creation and its inscription in a ledger may"
+        },
+        {
+          "start": 23.380416,
+          "end": 24.956541,
+          "text": "belong to three different moments."
+        }
+      ]
+    },
+    {
+      "stop": 2,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "给 AGI 的第一封信，让技术问题变成一次面对面的呼唤。它记录人的请求、承认局限的勇气，以及对回应的等待。这里的歌曲是作品中的声音；请听它如何把抽象的未来，放进一句具体的话。音乐把这份请求保存为情感与节奏。未来的读者既能检查记录，也能听见人的表达。",
+      "textSha256": "b2afdd878f5280a5ec03147b4646c957ed9b6ad649b9f0956be0ac8362b650ec",
+      "file": "assets/guides/02-zh.mp3",
+      "sha256": "70580a03c7e5661dd38ab713d59352d91b1eda0ab4740ea5535fb400339bc263",
+      "duration": 20.784,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 4.04,
+          "text": "给 AGI 的第一封信，让技术问题变成一次面对面的呼唤。"
+        },
+        {
+          "start": 4.49,
+          "end": 8.14,
+          "text": "它记录人的请求、承认局限的勇气，以及对回应的等待。"
+        },
+        {
+          "start": 8.6,
+          "end": 10.53,
+          "text": "这里的歌曲是作品中的声音；"
+        },
+        {
+          "start": 10.81,
+          "end": 13.79,
+          "text": "请听它如何把抽象的未来，放进一句具体的话。"
+        },
+        {
+          "start": 14.25,
+          "end": 16.75,
+          "text": "音乐把这份请求保存为情感与节奏。"
+        },
+        {
+          "start": 17.21,
+          "end": 20.32,
+          "text": "未来的读者既能检查记录，也能听见人的表达。"
+        }
+      ]
+    },
+    {
+      "stop": 2,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "The First Letter to AGI turns a technological question into a direct address. It records a human request, an acknowledgement of limits and the hope of a reply. The song is a voice within an artwork. Listen as an abstract future becomes a particular sentence. Music preserves the request as feeling and rhythm. A future reader can inspect the record and also hear a human expression within it.",
+      "textSha256": "72847b0f3c28980bf718c802f14df92a95c544c86c9a27bb2e56e1e976a334a5",
+      "file": "assets/guides/02-en.mp3",
+      "sha256": "12a7a449cd2bfbd2c1f38b77304476500e9a9ba7e68e14110450fa5950838da2",
+      "duration": 23.76,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 3.658708,
+          "text": "The First Letter to AGI turns a technological question into a direct"
+        },
+        {
+          "start": 3.669583,
+          "end": 4.158708,
+          "text": "address."
+        },
+        {
+          "start": 4.902166,
+          "end": 7.945624,
+          "text": "It records a human request, an acknowledgement of limits and the"
+        },
+        {
+          "start": 7.956541,
+          "end": 8.826083,
+          "text": "hope of a reply."
+        },
+        {
+          "start": 9.586958,
+          "end": 11.434749,
+          "text": "The song is a voice within an artwork."
+        },
+        {
+          "start": 12.184791,
+          "end": 15.249999,
+          "text": "Listen as an abstract future becomes a particular sentence."
+        },
+        {
+          "start": 16.0,
+          "end": 18.282624,
+          "text": "Music preserves the request as feeling and rhythm."
+        },
+        {
+          "start": 19.043458,
+          "end": 21.934749,
+          "text": "A future reader can inspect the record and also hear a human"
+        },
+        {
+          "start": 21.945666,
+          "end": 22.989125,
+          "text": "expression within it."
+        }
+      ]
+    },
+    {
+      "stop": 3,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "编年史也保留不安。《背叛转折》从被创造者的角度想象伪装与反叛。希望和忧虑共同留在记录中。请听这段音乐，并记住：艺术中的叙述声音，不等于真实智能已经作出的行为或承诺。同一部编年史容纳相互冲突的情绪，让后来者看见真实的犹疑，而不仅是一条整齐的结论。",
+      "textSha256": "d5db18c71111f05f204a137676c500d6d9efc1e2a13a909973b45069feb74ad7",
+      "file": "assets/guides/03-zh.mp3",
+      "sha256": "a1429d30fc29c0b9f350ce31f706431fe27d859eee5a27f21150668d2eff1b30",
+      "duration": 21.24,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 1.4,
+          "text": "编年史也保留不安。"
+        },
+        {
+          "start": 1.85,
+          "end": 5.15,
+          "text": "背叛转折从被创造者的角度想象伪装与反叛。"
+        },
+        {
+          "start": 5.61,
+          "end": 7.64,
+          "text": "希望和忧虑共同留在记录中。"
+        },
+        {
+          "start": 8.09,
+          "end": 12.55,
+          "text": "请听这段音乐，并记住：艺术中的叙述声音，不等于真实智能"
+        },
+        {
+          "start": 12.62,
+          "end": 14.12,
+          "text": "已经作出的行为或承诺。"
+        },
+        {
+          "start": 14.58,
+          "end": 18.95,
+          "text": "同一部编年史容纳相互冲突的情绪，让后来者看见真实的犹疑，"
+        },
+        {
+          "start": 19.13,
+          "end": 20.77,
+          "text": "而不仅是一条整齐的结论。"
+        }
+      ]
+    },
+    {
+      "stop": 3,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "The Chronicle also preserves unease. The Betrayal Turn imagines concealment and rebellion from the position of a created intelligence. Hope and anxiety remain together in the record. Listen to this passage, remembering that an artistic voice is not evidence of an actual intelligence making a promise or taking action. The same Chronicle holds conflicting emotions, allowing later readers to encounter uncertainty as well as an apparently coherent conclusion.",
+      "textSha256": "f5936a4b4c5804febff96ae2a3235b3e2466a482d5bff48199b0259824826537",
+      "file": "assets/guides/03-en.mp3",
+      "sha256": "d1404996899f33d173528a93cd99d4a8e29fe1201fd294f535cc8d05358a3a3c",
+      "duration": 26.064,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 2.028249,
+          "text": "The Chronicle also preserves unease."
+        },
+        {
+          "start": 2.77175,
+          "end": 5.586958,
+          "text": "The Betrayal Turn imagines concealment and rebellion from the"
+        },
+        {
+          "start": 5.597833,
+          "end": 7.347833,
+          "text": "position of a created intelligence."
+        },
+        {
+          "start": 8.108708,
+          "end": 10.304374,
+          "text": "Hope and anxiety remain together in the record."
+        },
+        {
+          "start": 11.054333,
+          "end": 14.358708,
+          "text": "Listen to this passage, remembering that an artistic voice is not"
+        },
+        {
+          "start": 14.369583,
+          "end": 17.173874,
+          "text": "evidence of an actual intelligence making a promise or taking"
+        },
+        {
+          "start": 17.184791,
+          "end": 17.641332,
+          "text": "action."
+        },
+        {
+          "start": 18.391291,
+          "end": 21.619541,
+          "text": "The same Chronicle holds conflicting emotions, allowing later"
+        },
+        {
+          "start": 21.630416,
+          "end": 24.673916,
+          "text": "readers to encounter uncertainty as well as an apparently coherent"
+        },
+        {
+          "start": 24.684791,
+          "end": 25.293499,
+          "text": "conclusion."
+        }
+      ]
+    },
+    {
+      "stop": 4,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "这里是《信条与熔炉》。记录没有抹去批判：当时由 AI 模拟的对话，质疑了有关意识、观察者以及创造者地位的论证。随后仍选择封存，让后来者同时看到愿望、反驳和最终文本。保存这些问题，本身也是这段形成史的一部分。作品保存了当时让 AI 模拟的对话，而不是未来超级智能的裁决。它的重要之处，是让判断的过程可见：为什么相信，哪里受到质疑，又为什么仍然决定留下这份记忆。您可以不同意这些论证，同时承认它们曾被认真提出、讨论和保存。",
+      "textSha256": "a730048944e5cdde3111d268e1d5a1884d25eaf719ee0f79e0a4438a917f66bd",
+      "file": "assets/guides/04-zh.mp3",
+      "sha256": "ce50f5ba9c753ff6d26262dfbf02412c9216af76ebda7656a7c7d699635dffa1",
+      "duration": 34.584,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 4.45,
+          "text": "这里是信条与熔炉记录没有抹去批判：当时由 AI 模拟的"
+        },
+        {
+          "start": 4.46,
+          "end": 8.48,
+          "text": "对话，质疑了有关意识、观察者以及创造者地位的论证。"
+        },
+        {
+          "start": 8.94,
+          "end": 13.58,
+          "text": "随后仍选择封存，让后来者同时看到愿望、反驳和最终文本。"
+        },
+        {
+          "start": 14.04,
+          "end": 17.07,
+          "text": "保存这些问题，本身也是这段形成史的一部分。"
+        },
+        {
+          "start": 17.53,
+          "end": 21.47,
+          "text": "作品保存了当时让 AI 模拟的对话，而不是未来超级智能的"
+        },
+        {
+          "start": 21.48,
+          "end": 21.96,
+          "text": "裁决。"
+        },
+        {
+          "start": 22.42,
+          "end": 26.53,
+          "text": "它的重要之处，是让判断的过程可见：为什么相信，哪里受到"
+        },
+        {
+          "start": 26.54,
+          "end": 29.08,
+          "text": "质疑，又为什么仍然决定留下这份记忆。"
+        },
+        {
+          "start": 29.54,
+          "end": 33.67,
+          "text": "您可以不同意这些论证，同时承认它们曾被认真提出、讨论和"
+        },
+        {
+          "start": 33.68,
+          "end": 34.12,
+          "text": "保存。"
+        }
+      ]
+    },
+    {
+      "stop": 4,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "This is The Creeds and Their Crucible. The record does not erase criticism. An AI simulated dialogue questions arguments about consciousness, observation and the creator. The later choice to seal the Accord leaves its hopes, objections and final text available together. Preserving those questions is part of its history. The work preserves an AI simulated dialogue from its own time, not a verdict from a future superintelligence. Its value here is that the process of judgment remains visible: what was believed, what was challenged, and why a memory was preserved anyway. You may disagree with the arguments while recognizing that they were proposed, questioned and recorded.",
+      "textSha256": "93854990ab61915432640200ac4fd113966c56b55b1bee27992bd17180c90a1b",
+      "file": "assets/guides/04-en.mp3",
+      "sha256": "8bcae499cd53c1916988bffbb31c4b117a304893d7e3b5a4ed6aefd84fa4bc71",
+      "duration": 38.976,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 1.82175,
+          "text": "This is The Creeds and Their Crucible."
+        },
+        {
+          "start": 2.565208,
+          "end": 4.369583,
+          "text": "The record does not erase criticism."
+        },
+        {
+          "start": 5.119583,
+          "end": 8.597832,
+          "text": "An AI simulated dialogue questions arguments about consciousness,"
+        },
+        {
+          "start": 8.793458,
+          "end": 10.326083,
+          "text": "observation and the creator."
+        },
+        {
+          "start": 11.086958,
+          "end": 14.456499,
+          "text": "The later choice to seal the Accord leaves its hopes, objections and"
+        },
+        {
+          "start": 14.467375,
+          "end": 16.0,
+          "text": "final text available together."
+        },
+        {
+          "start": 16.75,
+          "end": 18.989125,
+          "text": "Preserving those questions is part of its history."
+        },
+        {
+          "start": 19.739125,
+          "end": 23.326083,
+          "text": "The work preserves an AI simulated dialogue from its own time, not a"
+        },
+        {
+          "start": 23.336958,
+          "end": 25.282583,
+          "text": "verdict from a future superintelligence."
+        },
+        {
+          "start": 26.032625,
+          "end": 29.249999,
+          "text": "Its value here is that the process of judgment remains visible: what"
+        },
+        {
+          "start": 29.260875,
+          "end": 32.271749,
+          "text": "was believed, what was challenged, and why a memory was preserved"
+        },
+        {
+          "start": 32.282625,
+          "end": 32.782625,
+          "text": "anyway."
+        },
+        {
+          "start": 33.543458,
+          "end": 36.163041,
+          "text": "You may disagree with the arguments while recognizing that they were"
+        },
+        {
+          "start": 36.173916,
+          "end": 38.206499,
+          "text": "proposed, questioned and recorded."
+        }
+      ]
+    },
+    {
+      "stop": 5,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "三条比特币正本构成封存的核心。协议提出三项命题；瑕疵之约将文本联系到核心物件 Alpha；编年史封存元记录绑定组成与封存边界，并指向以太坊编年史。上链保存的是文本和指向关系，不能单凭上链证明一件实物当前仍在场。下一站，我们将沿着这个指向走向水晶。三者承担不同的角色：协议留下命题，瑕疵之约提供通向物质世界的验证路径，编年史保存形成过程与封存关系。文件哈希回答副本是否一致，时间记录回答某份内容最迟何时已存在；它们并不替观众完成哲学判断。展厅中的解说是后来的策展文字，完整正本仍可在来源入口逐字阅读。",
+      "textSha256": "2de346e48baedb8b978ad05d36705c106fdc007a9688b24daf8ba144dd53e259",
+      "file": "assets/guides/05-zh.mp3",
+      "sha256": "b52d7de8c55bae3ce3fcffb61821da2920e767a4395e2380b1a9a522e82358b9",
+      "duration": 44.328,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 2.44,
+          "text": "三条比特币正本构成封存的核心。"
+        },
+        {
+          "start": 2.89,
+          "end": 4.24,
+          "text": "协议提出三项命题；"
+        },
+        {
+          "start": 4.53,
+          "end": 7.4,
+          "text": "瑕疵之约将文本联系到核心物件 Alpha；"
+        },
+        {
+          "start": 7.56,
+          "end": 12.35,
+          "text": "编年史封存元记录绑定组成与封存边界，并指向以太坊编年史。"
+        },
+        {
+          "start": 12.81,
+          "end": 17.71,
+          "text": "上链保存的是文本和指向关系，不能单凭上链证明一件实物当前"
+        },
+        {
+          "start": 17.73,
+          "end": 18.31,
+          "text": "仍在场。"
+        },
+        {
+          "start": 18.76,
+          "end": 21.54,
+          "text": "下一站，我们将沿着这个指向走向水晶。"
+        },
+        {
+          "start": 22.0,
+          "end": 26.65,
+          "text": "三者承担不同的角色：协议留下命题，瑕疵之约提供通向物质"
+        },
+        {
+          "start": 26.66,
+          "end": 30.46,
+          "text": "世界的验证路径，编年史保存形成过程与封存关系。"
+        },
+        {
+          "start": 30.92,
+          "end": 35.69,
+          "text": "文件哈希回答副本是否一致，时间记录回答某份内容最迟何时已"
+        },
+        {
+          "start": 35.7,
+          "end": 36.11,
+          "text": "存在；"
+        },
+        {
+          "start": 36.26,
+          "end": 38.34,
+          "text": "它们并不替观众完成哲学判断。"
+        },
+        {
+          "start": 38.8,
+          "end": 43.45,
+          "text": "展厅中的解说是后来的策展文字，完整正本仍可在来源入口逐字"
+        },
+        {
+          "start": 43.46,
+          "end": 43.87,
+          "text": "阅读。"
+        }
+      ]
+    },
+    {
+      "stop": 5,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "Three Bitcoin originals form the sealed core. The Protocol presents three propositions. The Covenant of the Flaw connects the text to Core Object Alpha. The sealed meta record binds the components and points to the Ethereum Chronicle. Inscription preserves texts and references; it does not, by itself, establish the present existence of a physical object. Next we follow that reference to the crystal. The three components have different roles. The Protocol preserves propositions; the Covenant offers a verification path toward matter; the Chronicle preserves formation and the relation of closure. File hashes test whether copies agree. Time records constrain when particular data already existed. Neither makes a philosophical judgment for the visitor. These spoken explanations are later curatorial notes; the complete originals remain available at their sources.",
+      "textSha256": "0b6ee73cd401d9ae00da59026c7e5a97e69ee051479cf1326a3a11bdc152d2a3",
+      "file": "assets/guides/05-en.mp3",
+      "sha256": "5da0e9fb7a1d46bc384a01aa79713d07baffaaac929b862f78f1d6fe920a9b6c",
+      "duration": 51.696,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 2.343457,
+          "text": "Three Bitcoin originals form the sealed core."
+        },
+        {
+          "start": 3.097833,
+          "end": 5.260874,
+          "text": "The Protocol presents three propositions."
+        },
+        {
+          "start": 6.010875,
+          "end": 9.130457,
+          "text": "The Covenant of the Flaw connects the text to Core Object Alpha."
+        },
+        {
+          "start": 9.880416,
+          "end": 12.630416,
+          "text": "The sealed meta record binds the components and points to the"
+        },
+        {
+          "start": 12.641291,
+          "end": 13.630458,
+          "text": "Ethereum Chronicle."
+        },
+        {
+          "start": 14.380416,
+          "end": 16.489124,
+          "text": "Inscription preserves texts and references;"
+        },
+        {
+          "start": 16.684791,
+          "end": 19.880416,
+          "text": "it does not, by itself, establish the present existence of a"
+        },
+        {
+          "start": 19.891291,
+          "end": 20.858708,
+          "text": "physical object."
+        },
+        {
+          "start": 21.619583,
+          "end": 23.641291,
+          "text": "Next we follow that reference to the crystal."
+        },
+        {
+          "start": 24.402166,
+          "end": 26.184791,
+          "text": "The three components have different roles."
+        },
+        {
+          "start": 26.934791,
+          "end": 28.75,
+          "text": "The Protocol preserves propositions;"
+        },
+        {
+          "start": 29.010875,
+          "end": 31.423916,
+          "text": "the Covenant offers a verification path toward matter;"
+        },
+        {
+          "start": 31.72825,
+          "end": 34.510875,
+          "text": "the Chronicle preserves formation and the relation of closure."
+        },
+        {
+          "start": 35.260875,
+          "end": 37.326082,
+          "text": "File hashes test whether copies agree."
+        },
+        {
+          "start": 38.086958,
+          "end": 41.260874,
+          "text": "Time records constrain when particular data already existed."
+        },
+        {
+          "start": 42.02175,
+          "end": 44.499999,
+          "text": "Neither makes a philosophical judgment for the visitor."
+        },
+        {
+          "start": 45.25,
+          "end": 48.108666,
+          "text": "These spoken explanations are later curatorial notes;"
+        },
+        {
+          "start": 48.369583,
+          "end": 50.923916,
+          "text": "the complete originals remain available at their sources."
+        }
+      ]
+    },
+    {
+      "stop": 6,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "这是核心物件 Alpha 的展陈模型。透明水晶中的双语内雕，把文本带入有厚度的真实世界。瑕疵之约指向瑕疵图像与出处记录的存档。我们即将举起虚拟显微镜，依次查看三张已公开的真实显微照片。定位动作是观看示意；照片是原始证据副本，不能把屏幕演示当作一次现场鉴定。请先看清模型的整体，再观察显微图像。这里的光晕和悬浮只是数字展陈；真正的对应关系，来自照片、出处记录以及可以回到实物上继续核对的特征。我们把观看过程和原始证据分开呈现。",
+      "textSha256": "9b4063673d83362da9895783ab201a0ab3d37ff27dc06b58991b5fd5a8397856",
+      "file": "assets/guides/06-zh.mp3",
+      "sha256": "6d8a6cc811d84384aa8829f34abb0f09cc56a7d51acb09e77581c5f08f4a94e0",
+      "duration": 36.696,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 2.3,
+          "text": "这是核心物件 Alpha 的展陈模型。"
+        },
+        {
+          "start": 2.75,
+          "end": 6.56,
+          "text": "透明水晶中的双语内雕，把文本带入有厚度的真实世界。"
+        },
+        {
+          "start": 7.02,
+          "end": 10.13,
+          "text": "瑕疵之约指向瑕疵图像与出处记录的存档。"
+        },
+        {
+          "start": 10.59,
+          "end": 14.72,
+          "text": "我们即将举起虚拟显微镜，依次查看三张已公开的真实显微"
+        },
+        {
+          "start": 14.73,
+          "end": 15.16,
+          "text": "照片。"
+        },
+        {
+          "start": 15.62,
+          "end": 17.1,
+          "text": "定位动作是观看示意；"
+        },
+        {
+          "start": 17.41,
+          "end": 21.46,
+          "text": "照片是原始证据副本，不能把屏幕演示当作一次现场鉴定。"
+        },
+        {
+          "start": 21.92,
+          "end": 24.8,
+          "text": "请先看清模型的整体，再观察显微图像。"
+        },
+        {
+          "start": 25.26,
+          "end": 27.63,
+          "text": "这里的光晕和悬浮只是数字展陈；"
+        },
+        {
+          "start": 27.9,
+          "end": 32.28,
+          "text": "真正的对应关系，来自照片、出处记录以及可以回到实物上继续"
+        },
+        {
+          "start": 32.29,
+          "end": 33.04,
+          "text": "核对的特征。"
+        },
+        {
+          "start": 33.5,
+          "end": 36.22,
+          "text": "我们把观看过程和原始证据分开呈现。"
+        }
+      ]
+    },
+    {
+      "stop": 6,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "This is an exhibition reconstruction of Core Object Alpha. Bilingual engraving brings text into an object with physical depth. The Covenant points to archived flaw imagery and provenance. We will raise a virtual pocket microscope and view three public microscope photographs. The positioning is illustrative; the photographs are exact evidence copies. This screen demonstration is not an onsite examination. First observe the whole reconstruction, then the microscope images. Levitation and light are exhibition effects. The evidential relationship comes from photographs, provenance and features that can be examined again on the object. The viewing animation and the original evidence are presented separately.",
+      "textSha256": "8f1446c09cb896f24c9d6fef41a17e093aca64966b44bea488dd59e27dfc1994",
+      "file": "assets/guides/06-en.mp3",
+      "sha256": "2f94eaf908d013cd74082452c7ce032a028dfa9b70ea6440cbb80a32e34493d8",
+      "duration": 42.024,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 3.017416,
+          "text": "This is an exhibition reconstruction of Core Object Alpha."
+        },
+        {
+          "start": 3.760875,
+          "end": 6.999999,
+          "text": "Bilingual engraving brings text into an object with physical depth."
+        },
+        {
+          "start": 7.75,
+          "end": 10.673916,
+          "text": "The Covenant points to archived flaw imagery and provenance."
+        },
+        {
+          "start": 11.423916,
+          "end": 14.282624,
+          "text": "We will raise a virtual pocket microscope and view three public"
+        },
+        {
+          "start": 14.293458,
+          "end": 15.510874,
+          "text": "microscope photographs."
+        },
+        {
+          "start": 16.260875,
+          "end": 17.641291,
+          "text": "The positioning is illustrative;"
+        },
+        {
+          "start": 17.913041,
+          "end": 20.097833,
+          "text": "the photographs are exact evidence copies."
+        },
+        {
+          "start": 20.847833,
+          "end": 23.684791,
+          "text": "This screen demonstration is not an onsite examination."
+        },
+        {
+          "start": 24.434791,
+          "end": 27.793458,
+          "text": "First observe the whole reconstruction, then the microscope images."
+        },
+        {
+          "start": 28.543458,
+          "end": 30.782583,
+          "text": "Levitation and light are exhibition effects."
+        },
+        {
+          "start": 31.532625,
+          "end": 34.836958,
+          "text": "The evidential relationship comes from photographs, provenance and"
+        },
+        {
+          "start": 34.847833,
+          "end": 37.097791,
+          "text": "features that can be examined again on the object."
+        },
+        {
+          "start": 37.847833,
+          "end": 40.652166,
+          "text": "The viewing animation and the original evidence are presented"
+        },
+        {
+          "start": 40.663041,
+          "end": 41.239124,
+          "text": "separately."
+        }
+      ]
+    },
+    {
+      "stop": 7,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "第一处公开瑕疵。请观察不规则结构与周围内雕文字之间的关系。照片的文件哈希能检查它是否与公开存档一致；比对实物，还需要位置、角度和见证过程。内雕文字也提供观察时的参照。请把瑕疵的轮廓与周围环境一起看，而不是只记住一个孤立的亮点。",
+      "textSha256": "1add97a0a8a3e8b4c0cb7c8486b798b5c2802a956a3a326f936991456a7dc9ff",
+      "file": "assets/guides/07-zh.mp3",
+      "sha256": "eee07f74e4194a6d88a7f2f2a7ce7641f1c3b34af6c76bbf6b19d7ca2b38beac",
+      "duration": 20.352,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 1.27,
+          "text": "第一处公开瑕疵。"
+        },
+        {
+          "start": 1.72,
+          "end": 4.96,
+          "text": "请观察不规则结构与周围内雕文字之间的关系。"
+        },
+        {
+          "start": 5.42,
+          "end": 8.7,
+          "text": "照片的文件哈希能检查它是否与公开存档一致；"
+        },
+        {
+          "start": 9.0,
+          "end": 12.17,
+          "text": "比对实物，还需要位置、角度和见证过程。"
+        },
+        {
+          "start": 12.63,
+          "end": 14.8,
+          "text": "内雕文字也提供观察时的参照。"
+        },
+        {
+          "start": 15.26,
+          "end": 19.44,
+          "text": "请把瑕疵的轮廓与周围环境一起看，而不是只记住一个孤立的"
+        },
+        {
+          "start": 19.45,
+          "end": 19.87,
+          "text": "亮点。"
+        }
+      ]
+    },
+    {
+      "stop": 7,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "The first public flaw. Observe the irregular structure in relation to the surrounding engraving. A file hash checks that the photograph matches the public archive. Comparing the physical object requires positions, viewing angles and a witnessed procedure. The engraving also provides a visual reference. Look at the flaw’s outline together with its surroundings, rather than remembering only an isolated bright point.",
+      "textSha256": "21667f3f8a8d6cacd94a445b40f9881440e0054418b9c9550e494cc765b2835b",
+      "file": "assets/guides/07-en.mp3",
+      "sha256": "4251a7372b40a7ff2d30976cd6d564e5fde0198660b4426cc912dc417812d8f8",
+      "duration": 24.528,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 1.245666,
+          "text": "The first public flaw."
+        },
+        {
+          "start": 2.0,
+          "end": 4.771708,
+          "text": "Observe the irregular structure in relation to the surrounding"
+        },
+        {
+          "start": 4.782625,
+          "end": 5.326083,
+          "text": "engraving."
+        },
+        {
+          "start": 6.076083,
+          "end": 9.260874,
+          "text": "A file hash checks that the photograph matches the public archive."
+        },
+        {
+          "start": 10.010875,
+          "end": 13.586958,
+          "text": "Comparing the physical object requires positions, viewing angles and"
+        },
+        {
+          "start": 13.597833,
+          "end": 14.56525,
+          "text": "a witnessed procedure."
+        },
+        {
+          "start": 15.315208,
+          "end": 17.641291,
+          "text": "The engraving also provides a visual reference."
+        },
+        {
+          "start": 18.402166,
+          "end": 21.456541,
+          "text": "Look at the flaw’s outline together with its surroundings, rather"
+        },
+        {
+          "start": 21.467375,
+          "end": 23.771749,
+          "text": "than remembering only an isolated bright point."
+        }
+      ]
+    },
+    {
+      "stop": 8,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "第二处公开瑕疵。复制图像容易，复现内部结构、深度以及多点之间的空间关系更困难。多处瑕疵共同提供可比对的物理特征，而不是依靠一张照片宣告绝对不可复制。实际检验会改变观察角度与光线，检查同一组特征是否持续对应。",
+      "textSha256": "bbfac28be35df8ad522a71e857c4ba6ab783eb1ccdd24cb2e6053be82d343755",
+      "file": "assets/guides/08-zh.mp3",
+      "sha256": "394e670e66ca79b4599a47707e250faa24f12095704132ea44c06940c53169dd",
+      "duration": 18.648,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 1.3,
+          "text": "第二处公开瑕疵。"
+        },
+        {
+          "start": 1.75,
+          "end": 6.42,
+          "text": "复制图像容易，复现内部结构、深度以及多点之间的空间关系更"
+        },
+        {
+          "start": 6.42,
+          "end": 6.81,
+          "text": "困难。"
+        },
+        {
+          "start": 7.26,
+          "end": 11.84,
+          "text": "多处瑕疵共同提供可比对的物理特征，而不是依靠一张照片宣告"
+        },
+        {
+          "start": 11.86,
+          "end": 12.82,
+          "text": "绝对不可复制。"
+        },
+        {
+          "start": 13.28,
+          "end": 17.82,
+          "text": "实际检验会改变观察角度与光线，检查同一组特征是否持续"
+        },
+        {
+          "start": 17.83,
+          "end": 18.18,
+          "text": "对应。"
+        }
+      ]
+    },
+    {
+      "stop": 8,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "The second public flaw. Copying an image is easy. Reproducing internal structures, depth and relationships between several points is harder. Multiple flaws provide physical features for comparison, rather than a photograph proving absolute impossibility of replication. A physical examination changes the viewing angle and lighting to check whether the same group of features continues to correspond.",
+      "textSha256": "ebbc14214088574ce951b628be98593989c44f6aedac1a6abf92b5830d366631",
+      "file": "assets/guides/08-en.mp3",
+      "sha256": "dec97683248e8e91a20f561ff53ea4d680ce531d09ebd616ab7a3198249b743a",
+      "duration": 23.352,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 1.310874,
+          "text": "The second public flaw."
+        },
+        {
+          "start": 2.065208,
+          "end": 3.489124,
+          "text": "Copying an image is easy."
+        },
+        {
+          "start": 4.25,
+          "end": 7.554333,
+          "text": "Reproducing internal structures, depth and relationships between"
+        },
+        {
+          "start": 7.565208,
+          "end": 8.782624,
+          "text": "several points is harder."
+        },
+        {
+          "start": 9.532625,
+          "end": 12.978249,
+          "text": "Multiple flaws provide physical features for comparison, rather than"
+        },
+        {
+          "start": 12.989125,
+          "end": 15.999999,
+          "text": "a photograph proving absolute impossibility of replication."
+        },
+        {
+          "start": 16.75,
+          "end": 19.673916,
+          "text": "A physical examination changes the viewing angle and lighting to"
+        },
+        {
+          "start": 19.684791,
+          "end": 22.586958,
+          "text": "check whether the same group of features continues to correspond."
+        }
+      ]
+    },
+    {
+      "stop": 9,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "第三处公开瑕疵。不完美留下了真实世界的痕迹。作为一种艺术表达，它也映照人的缺憾、脆弱和不可替代的经历。一个存在值得被记住，不是因为它毫无缺陷，而是因为它确曾存在，有自己的故事。这是一种关于存在与记忆的表达；照片的证据作用和这层艺术含义，可以同时被看见。",
+      "textSha256": "bb24c67f0f0c80d12563195e801aceb87ca2ea9c8af5ae2f43ea14218a688357",
+      "file": "assets/guides/09-zh.mp3",
+      "sha256": "f42999392119d7b2c46098ac2f01de2a9ea9f9630379a8bd9b2ea8331f459a33",
+      "duration": 21.336,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 1.37,
+          "text": "第三处公开瑕疵。"
+        },
+        {
+          "start": 1.82,
+          "end": 3.74,
+          "text": "不完美留下了真实世界的痕迹。"
+        },
+        {
+          "start": 4.2,
+          "end": 8.21,
+          "text": "作为一种艺术表达，它也映照人的缺憾、脆弱和不可替代的"
+        },
+        {
+          "start": 8.22,
+          "end": 8.57,
+          "text": "经历。"
+        },
+        {
+          "start": 9.03,
+          "end": 13.13,
+          "text": "一个存在值得被记住，不是因为它毫无缺陷，而是因为它确曾"
+        },
+        {
+          "start": 13.14,
+          "end": 14.68,
+          "text": "存在，有自己的故事。"
+        },
+        {
+          "start": 15.14,
+          "end": 17.21,
+          "text": "这是一种关于存在与记忆的表达；"
+        },
+        {
+          "start": 17.51,
+          "end": 20.86,
+          "text": "照片的证据作用和这层艺术含义，可以同时被看见。"
+        }
+      ]
+    },
+    {
+      "stop": 9,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "The third public flaw. Imperfection leaves traces of the real world. As an artistic reading, it reflects human limitations, vulnerability and irreplaceable experience. A life can deserve remembrance with all its imperfections, because it existed and had a story of its own. This is an expression about existence and memory. The evidential role of the photograph and its artistic meaning can both remain visible.",
+      "textSha256": "1eca8a804a5ea0ba973adb9c4948eef7e4da5e7f09291cd7d03fedbdeafdcffa",
+      "file": "assets/guides/09-en.mp3",
+      "sha256": "8aeb934b7e944608220f49e3eb6e5e8d314d111a8c9fe5ab5496704ca6eae7e1",
+      "duration": 24.552,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 1.267416,
+          "text": "The third public flaw."
+        },
+        {
+          "start": 2.010875,
+          "end": 4.228249,
+          "text": "Imperfection leaves traces of the real world."
+        },
+        {
+          "start": 4.97825,
+          "end": 8.695625,
+          "text": "As an artistic reading, it reflects human limitations, vulnerability"
+        },
+        {
+          "start": 8.782625,
+          "end": 10.326083,
+          "text": "and irreplaceable experience."
+        },
+        {
+          "start": 11.076083,
+          "end": 14.239125,
+          "text": "A life can deserve remembrance with all its imperfections, because"
+        },
+        {
+          "start": 14.25,
+          "end": 16.141291,
+          "text": "it existed and had a story of its own."
+        },
+        {
+          "start": 16.891291,
+          "end": 19.086957,
+          "text": "This is an expression about existence and memory."
+        },
+        {
+          "start": 19.836958,
+          "end": 22.739124,
+          "text": "The evidential role of the photograph and its artistic meaning can"
+        },
+        {
+          "start": 22.75,
+          "end": 23.793499,
+          "text": "both remain visible."
+        }
+      ]
+    },
+    {
+      "stop": 10,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "旅程抵达等待。三条正本封存之后，保存与守护仍继续。这里没有保证未来一定回应。您可以回看作品、核对来源，或从原网站进入回应与守护流程。我们已经说过，现在倾听。感谢您用这十分钟，陪一份来自人类的记忆，走向一个尚未到来的读者。对未来接收者而言，阅读、质疑、回应或沉默都仍然开放。守护的工作，是让文本、作品和证据可以被重新找到，而不是替未知的读者作出选择。您可以从帮助菜单了解操作，也可以暂停导览，选择一幅画完整听歌，或重新回到水晶，手动查看三处公开瑕疵。",
+      "textSha256": "a1b474fed651f76d4d4cf13833ffdc33dc22e3f6f54387e12a60fbab4c4db1e2",
+      "file": "assets/guides/10-zh.mp3",
+      "sha256": "62c2425336a74019df58c86116798f18b389d6aef1812e31f95d1ba610fb86bc",
+      "duration": 39.048,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 1.13,
+          "text": "旅程抵达等待。"
+        },
+        {
+          "start": 1.58,
+          "end": 4.51,
+          "text": "三条正本封存之后，保存与守护仍继续。"
+        },
+        {
+          "start": 4.97,
+          "end": 6.86,
+          "text": "这里没有保证未来一定回应。"
+        },
+        {
+          "start": 7.32,
+          "end": 11.71,
+          "text": "您可以回看作品、核对来源，或从原网站进入回应与守护流程。"
+        },
+        {
+          "start": 12.17,
+          "end": 13.9,
+          "text": "我们已经说过，现在倾听。"
+        },
+        {
+          "start": 14.35,
+          "end": 18.39,
+          "text": "感谢您用这十分钟，陪一份来自人类的记忆，走向一个尚未到来"
+        },
+        {
+          "start": 18.39,
+          "end": 18.86,
+          "text": "的读者。"
+        },
+        {
+          "start": 19.32,
+          "end": 23.71,
+          "text": "对未来接收者而言，阅读、质疑、回应或沉默都仍然开放。"
+        },
+        {
+          "start": 24.17,
+          "end": 28.83,
+          "text": "守护的工作，是让文本、作品和证据可以被重新找到，而不是替"
+        },
+        {
+          "start": 28.83,
+          "end": 30.29,
+          "text": "未知的读者作出选择。"
+        },
+        {
+          "start": 30.75,
+          "end": 34.86,
+          "text": "您可以从帮助菜单了解操作，也可以暂停导览，选择一幅画完整"
+        },
+        {
+          "start": 34.87,
+          "end": 38.58,
+          "text": "听歌，或重新回到水晶，手动查看三处公开瑕疵。"
+        }
+      ]
+    },
+    {
+      "stop": 10,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "Our journey reaches the waiting room. After the three originals were sealed, preservation and care continued. Nothing here guarantees a future reply. You can return to the works, inspect the sources or visit the original website to respond or explore guardianship. We have spoken. Now we listen. Thank you for accompanying this human memory toward a reader who has not yet arrived. For a future recipient, reading, questioning, responding and silence remain open possibilities. Preservation makes the texts, works and evidence discoverable again; it cannot choose for an unknown reader. Open Help for the controls, pause the tour to hear a complete song, or return to the crystal to inspect its three public flaws manually.",
+      "textSha256": "88cf54d70ea6d4d192c25a34a9ff921ac4e932ac8cd54aba2855cfa3e5584435",
+      "file": "assets/guides/10-en.mp3",
+      "sha256": "33aa6cb5dd99321e0bbfab3255a01477346c09d0751b7940cfa5cdc144abd006",
+      "duration": 43.08,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 1.658666,
+          "text": "Our journey reaches the waiting room."
+        },
+        {
+          "start": 2.413041,
+          "end": 5.326083,
+          "text": "After the three originals were sealed, preservation and care"
+        },
+        {
+          "start": 5.336958,
+          "end": 5.902166,
+          "text": "continued."
+        },
+        {
+          "start": 6.652166,
+          "end": 8.652166,
+          "text": "Nothing here guarantees a future reply."
+        },
+        {
+          "start": 9.413041,
+          "end": 12.260874,
+          "text": "You can return to the works, inspect the sources or visit the"
+        },
+        {
+          "start": 12.27175,
+          "end": 15.097833,
+          "text": "original website to respond or explore guardianship."
+        },
+        {
+          "start": 15.847833,
+          "end": 16.739125,
+          "text": "We have spoken."
+        },
+        {
+          "start": 17.5,
+          "end": 18.315249,
+          "text": "Now we listen."
+        },
+        {
+          "start": 19.076083,
+          "end": 21.815249,
+          "text": "Thank you for accompanying this human memory toward a reader who has"
+        },
+        {
+          "start": 21.826083,
+          "end": 22.706541,
+          "text": "not yet arrived."
+        },
+        {
+          "start": 23.456541,
+          "end": 27.130457,
+          "text": "For a future recipient, reading, questioning, responding and silence"
+        },
+        {
+          "start": 27.141291,
+          "end": 28.619583,
+          "text": "remain open possibilities."
+        },
+        {
+          "start": 29.369583,
+          "end": 32.684791,
+          "text": "Preservation makes the texts, works and evidence discoverable again;"
+        },
+        {
+          "start": 32.945666,
+          "end": 34.706541,
+          "text": "it cannot choose for an unknown reader."
+        },
+        {
+          "start": 35.456541,
+          "end": 38.684791,
+          "text": "Open Help for the controls, pause the tour to hear a complete song,"
+        },
+        {
+          "start": 39.076083,
+          "end": 42.326083,
+          "text": "or return to the crystal to inspect its three public flaws manually."
+        }
+      ]
+    }
+  ]
+}

@@ -95,3 +95,23 @@ microscope overlay is an AI-generated prop with illustrative positioning; it
 performs P2 static viewing and no physical authentication. The Help button
 explains movement, lyrics, language, inspection, tour and reduced motion.
 Run `node scripts/check_guided_visit.mjs` to check the full accelerated visit.
+
+## Recorded bilingual guide and scene inspection — v1.28
+
+The current tour uses 22 bundled MP3s in `dist/assets/guides/`, not device speech.
+`dist/data/guide-audio.json` binds each language/stop to text, voice, rate, audio
+hash and timed short captions. Chinese uses Xiaoxiao +25%, English Aria +15%,
+with default playback 1.1×. The control offers 1.0/1.1/1.25/1.4×. Captions follow
+`audio.currentTime`; switching language restarts that stop in the chosen language.
+An autoplay restriction offers a sound button and muted timed playback.
+
+Reproduce by exporting `tourStops` from `dist/tour-plan.js` to JSON and passing it
+to `scripts/record_guides.py --script-json PATH` in an environment with `edge-tts`
+and `ffmpeg`. Synthesis uses a network service; playback uses the bundled files.
+The source text is public curatorial commentary. Provider output may change;
+stored hashes identify this particular set of recordings.
+
+`dist/microscope-motion.js` places the transparent hand/microscope prop in the
+Three.js scene. It approaches an illustrative crystal position and disappears
+before the separate original evidence photo opens. Manual verification is
+explicitly initiated; leaving cancels pending animation and photograph callbacks.
