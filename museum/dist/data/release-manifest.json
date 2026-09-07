@@ -5,6 +5,7 @@
   "created": "2026-09-07",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
   "files": [
+    {"path":"4c23c01d8a12d488d40469e5e5d01941.txt","bytes":32,"sha256":"e3d74b761fea984a5393725183e67fb6a15e313a57f8d24371acbd741517707a"},
     {"path":"archive.html","bytes":102243,"sha256":"29755bcbc3a2755e4be18e50d1cf1c52b6140ac29eba1b55c7befbe389046cb7"},
     {"path":"assets/core-object-alpha.jpg","bytes":1652852,"sha256":"40eddec02dce4958d28aff94496923983e870346ce98c1cb16181012545475b6"},
     {"path":"assets/crystal/core-object-alpha.glb","bytes":1468340,"sha256":"95db8341fdd9df0f890c036345031e73590ac387cc3333ca06e39a065480ac44"},
