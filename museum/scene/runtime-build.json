@@ -95,8 +95,8 @@
     },
     {
       "path": "dist/museum.js",
-      "bytes": 78653,
-      "sha256": "39713051ab67f49915b51ef4297c01b826a2d8c0eddc67aa5c136c4a5e78ebcf"
+      "bytes": 78863,
+      "sha256": "d5a8892a298a7f54d7d201e601cb7ad4fb939c8f9d05c9aba20887b1dd107074"
     },
     {
       "path": "dist/observation-view.js",
@@ -166,7 +166,7 @@
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 968107,
-    "sha256": "ae6ecb3ceb3fe056e07df918c7f338ee14e8e1f4057c1d723e62a8f3e7810908"
+    "bytes": 968267,
+    "sha256": "a4b590f1cba2c928f4aa9d8de95fbbae019428b1ef0af4a2ad2d16e453c316a4"
   }
 }
