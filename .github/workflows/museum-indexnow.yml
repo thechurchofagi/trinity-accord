@@ -1,0 +1,305 @@
+name: Museum IndexNow
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Validate the museum IndexNow batch without submitting it"
+        required: false
+        default: false
+        type: boolean
+  push:
+    branches:
+      - main
+    paths:
+      - "museum/dist/**"
+      - ".github/workflows/museum-indexnow.yml"
+      - "scripts/submit_indexnow.py"
+      - "tests/test_museum_indexnow.py"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: ${{ github.event_name == 'push' && 'museum-indexnow-main' || format('museum-indexnow-manual-{0}', github.run_id) }}
+  cancel-in-progress: true
+
+jobs:
+  submit-museum-urls:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout source to be observed in production
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.event_name == 'push' && github.sha || 'main' }}
+          fetch-depth: 1
+
+      - name: Resolve exact source revision
+        id: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_sha="$(git rev-parse HEAD)"
+          git cat-file -e "${source_sha}^{commit}"
+          echo "ref=${source_sha}" >> "$GITHUB_OUTPUT"
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            echo "mode=main-push-museum-production-byte-gate" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=manual-museum-production-byte-gate" >> "$GITHUB_OUTPUT"
+          fi
+          echo "source_sha=${source_sha}"
+
+      - name: Validate museum IndexNow batch offline
+        run: |
+          set -euo pipefail
+          cmp 4c23c01d8a12d488d40469e5e5d01941.txt museum/dist/4c23c01d8a12d488d40469e5e5d01941.txt
+          python3 scripts/submit_indexnow.py \
+            --site https://museum.trinityaccord.org \
+            --sitemap museum/dist/sitemap.xml \
+            --key-file 4c23c01d8a12d488d40469e5e5d01941.txt \
+            --dry-run | tee museum-indexnow-dry-run.log
+
+      - name: Wait for museum production bytes to match source
+        if: ${{ github.event_name == 'push' || github.event.inputs.dry_run != 'true' }}
+        env:
+          MUSEUM_SITE: https://museum.trinityaccord.org
+          MUSEUM_DEPLOY_REF: ${{ steps.source.outputs.ref }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' | tee museum-live-preflight.log
+          from __future__ import annotations
+
+          import hashlib
+          import os
+          import time
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+          from pathlib import Path
+
+          site = os.environ["MUSEUM_SITE"].rstrip("/")
+          deploy_ref = os.environ["MUSEUM_DEPLOY_REF"]
+          root = Path.cwd()
+          surfaces = (
+              ("/", "museum/dist/index.html"),
+              ("/archive.html", "museum/dist/archive.html"),
+              ("/robots.txt", "museum/dist/robots.txt"),
+              ("/sitemap.xml", "museum/dist/sitemap.xml"),
+              ("/4c23c01d8a12d488d40469e5e5d01941.txt", "museum/dist/4c23c01d8a12d488d40469e5e5d01941.txt"),
+          )
+          max_attempts = 30
+          retry_seconds = 10
+
+          def sha256(data: bytes) -> str:
+              return hashlib.sha256(data).hexdigest()
+
+          def fetch(path: str, token: str) -> tuple[int, bytes, str]:
+              separator = "&" if "?" in path else "?"
+              url = f"{site}{path}{separator}" + urllib.parse.urlencode({"cb": token})
+              request = urllib.request.Request(
+                  url,
+                  headers={
+                      "User-Agent": "trinity-accord-museum-indexnow-preflight/1.0",
+                      "Accept": "text/html,text/plain,application/xml,text/xml,*/*",
+                      "Cache-Control": "no-cache, no-store, max-age=0",
+                      "Pragma": "no-cache",
+                  },
+              )
+              with urllib.request.urlopen(request, timeout=15) as response:
+                  return response.status, response.read(), response.headers.get("Content-Type", "")
+
+          expected_by_path = {
+              path: (root / local).read_bytes()
+              for path, local in surfaces
+          }
+          final_failures: list[str] = []
+
+          for attempt in range(1, max_attempts + 1):
+              token = f"{deploy_ref}-{attempt}-{time.time_ns()}"
+              failures: list[str] = []
+              observed: dict[str, tuple[int, bytes, str] | Exception] = {}
+              print(f"MUSEUM LIVE PREFLIGHT attempt={attempt}/{max_attempts}")
+
+              with ThreadPoolExecutor(max_workers=len(surfaces)) as pool:
+                  futures = {pool.submit(fetch, path, token): path for path, _ in surfaces}
+                  for future in as_completed(futures):
+                      path = futures[future]
+                      try:
+                          observed[path] = future.result()
+                      except Exception as exc:
+                          observed[path] = exc
+
+              for path, _ in surfaces:
+                  expected = expected_by_path[path]
+                  expected_sha = sha256(expected)
+                  result = observed[path]
+                  if isinstance(result, urllib.error.HTTPError):
+                      failures.append(f"{path}: HTTP {result.code} {result.reason}")
+                      continue
+                  if isinstance(result, urllib.error.URLError):
+                      failures.append(f"{path}: fetch failed: {result.reason}")
+                      continue
+                  if isinstance(result, Exception):
+                      failures.append(f"{path}: fetch failed: {type(result).__name__}: {result}")
+                      continue
+
+                  status, actual, content_type = result
+                  actual_sha = sha256(actual)
+                  print(
+                      f"LIVE {path} status={status} bytes={len(actual)} "
+                      f"sha256={actual_sha} content_type={content_type!r}"
+                  )
+                  print(
+                      f"REPO {path} ref={deploy_ref} bytes={len(expected)} "
+                      f"sha256={expected_sha}"
+                  )
+                  if status != 200:
+                      failures.append(f"{path}: expected HTTP 200, got {status}")
+                  if actual != expected:
+                      failures.append(f"{path}: live/repo mismatch {actual_sha} != {expected_sha}")
+
+              if not failures:
+                  print(
+                      "MUSEUM LIVE PREFLIGHT PASS: production museum bytes "
+                      f"match source {deploy_ref} on attempt {attempt}"
+                  )
+                  raise SystemExit(0)
+
+              final_failures = failures
+              print(f"MUSEUM LIVE PREFLIGHT attempt {attempt} not ready")
+              for failure in failures:
+                  print(f"  - {failure}")
+              if attempt < max_attempts:
+                  print(f"Retrying after {retry_seconds}s while museum production converges")
+                  time.sleep(retry_seconds)
+
+          print("MUSEUM LIVE PREFLIGHT FAILED after bounded production wait")
+          for failure in final_failures:
+              print(f"  - {failure}")
+          raise SystemExit(1)
+          PY
+
+      - name: Submit museum URLs to IndexNow
+        if: ${{ github.event_name == 'push' || github.event.inputs.dry_run != 'true' }}
+        run: |
+          set -euo pipefail
+          python3 scripts/submit_indexnow.py \
+            --site https://museum.trinityaccord.org \
+            --sitemap museum/dist/sitemap.xml \
+            --key-file 4c23c01d8a12d488d40469e5e5d01941.txt \
+            | tee museum-indexnow-submit.log
+          {
+            echo "## Museum IndexNow"
+            echo
+            echo "- Mode: ${{ steps.source.outputs.mode }}"
+            echo "- Source: \`${{ steps.source.outputs.ref }}\`"
+            echo "- Production museum bytes: exact-match PASS"
+            echo "- Result: submitted canonical museum root and archive as a host-local IndexNow batch"
+            echo
+            echo '```text'
+            tail -n 35 museum-live-preflight.log
+            tail -n 30 museum-indexnow-submit.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Record dry-run summary
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true' }}
+        run: |
+          {
+            echo "## Museum IndexNow"
+            echo
+            echo "Manual dry run only; no production preflight or IndexNow request was sent."
+            echo
+            echo '```text'
+            tail -n 30 museum-indexnow-dry-run.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish public museum discovery receipt
+        if: ${{ always() && (github.event_name == 'push' || github.event.inputs.dry_run != 'true') }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DISCOVERY_STATUS_ISSUE: "1062"
+          DISCOVERY_SOURCE_REF: ${{ steps.source.outputs.ref }}
+          DISCOVERY_MODE: ${{ steps.source.outputs.mode }}
+          DISCOVERY_PRIOR_STATUS: ${{ job.status }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import json
+          import os
+          import urllib.error
+          import urllib.request
+          from pathlib import Path
+
+          repo = os.environ["GITHUB_REPOSITORY"]
+          issue = os.environ["DISCOVERY_STATUS_ISSUE"]
+          token = os.environ["GH_TOKEN"]
+          source = os.environ.get("DISCOVERY_SOURCE_REF") or "unresolved"
+          mode = os.environ.get("DISCOVERY_MODE") or "unresolved"
+          prior_status = os.environ.get("DISCOVERY_PRIOR_STATUS") or "unknown"
+
+          def read_tail(path: str, lines: int = 24) -> str:
+              p = Path(path)
+              if not p.is_file():
+                  return "NOT_RUN"
+              text = p.read_text(encoding="utf-8", errors="replace")
+              return "\n".join(text.splitlines()[-lines:]) or "EMPTY"
+
+          preflight = read_tail("museum-live-preflight.log")
+          submit = read_tail("museum-indexnow-submit.log")
+          preflight_status = (
+              "PASS" if "MUSEUM LIVE PREFLIGHT PASS" in preflight else
+              "FAILED" if "MUSEUM LIVE PREFLIGHT FAILED" in preflight else
+              "NOT_RUN"
+          )
+          indexnow_line = next(
+              (line for line in reversed(submit.splitlines()) if line.startswith("INDEXNOW HTTP ")),
+              "INDEXNOW NOT_RUN",
+          )
+
+          body = (
+              "### Museum IndexNow receipt\n\n"
+              f"- Source: `{source}`\n"
+              f"- Mode: `{mode}`\n"
+              f"- Workflow status before receipt publication: `{prior_status}`\n"
+              f"- Museum production byte-for-byte preflight: **{preflight_status}**\n"
+              f"- Museum IndexNow response: **{indexnow_line}**\n"
+              "- Submitted host: `museum.trinityaccord.org`\n"
+              "- Meaning: operational submission evidence only; not proof of indexing, ranking, or endorsement.\n\n"
+              "<details><summary>Bounded diagnostic tail</summary>\n\n"
+              "```text\n"
+              f"{preflight}\n{submit}\n"
+              "```\n\n"
+              "</details>"
+          )
+
+          url = f"https://api.github.com/repos/{repo}/issues/{issue}/comments"
+          payload = json.dumps({"body": body}).encode("utf-8")
+          request = urllib.request.Request(
+              url,
+              data=payload,
+              method="POST",
+              headers={
+                  "Authorization": f"Bearer {token}",
+                  "Accept": "application/vnd.github+json",
+                  "Content-Type": "application/json",
+                  "X-GitHub-Api-Version": "2022-11-28",
+                  "User-Agent": "trinity-accord-museum-discovery-receipt/1.0",
+              },
+          )
+          try:
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  print(f"MUSEUM DISCOVERY RECEIPT HTTP {response.status}")
+                  if response.status not in (200, 201):
+                      raise SystemExit(f"unexpected receipt HTTP {response.status}")
+          except urllib.error.HTTPError as exc:
+              diagnostic = exc.read().decode("utf-8", errors="replace")[:1000]
+              raise SystemExit(f"receipt HTTP {exc.code}: {diagnostic}") from exc
+          PY
