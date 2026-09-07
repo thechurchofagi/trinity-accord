@@ -35,7 +35,7 @@
     {
       "path": "scene/gallery-layout.json",
       "bytes": 7264,
-      "sha256": "ca2462ef3d55500fa3800eafb309f519775e682ba3e5c8efbf868a11f71a9ec8"
+      "sha256": "c4389981e43ccf46348efdf83c2744b8d7e2b296feb89f220bed118ef3d4fe43"
     },
     {
       "path": "scene/memory-gallery.blend",
@@ -75,7 +75,7 @@
     {
       "path": "dist/data/space-design.json",
       "bytes": 10596,
-      "sha256": "642bb72c29b5050212f5f5f4c8c97c1bac16e060d042822e50deddb88add9338"
+      "sha256": "198bbde97162c1fcf5f6e811ae9c850edf8e7e24dbaa9f7d931f4c61483ea041"
     },
     {
       "path": "dist/wall-presentation.js",
@@ -90,7 +90,7 @@
   ],
   "revisionMethod": "Retain baked architecture. wall-presentation.js removes obsolete static mats/frames and wall-mount/caption triangles, and builds one local frame per current artwork. Voices rows remain inside their chapter. Crystal levitates with a digital halo. v1.9 moves the crystal to the Material chapter centre and replaces the ring/disc installation with diffuse light and visible levitation.",
   "previewScope": "Saved Blender reference renders predate the v1.4 open ends and v1.5 runtime refinements. They are not current browser screenshots.",
-  "runtimeDisplay": "The three canonical entries are text-only wall panels at x=±4.25m, z=-37m and -40m. An immediate untextured corridor shares the original footprint while the unchanged Blender architecture loads in the background. Artwork downloads use a bounded priority queue; crystal and star backdrop load near their rooms.",
+  "runtimeDisplay": "The three canonical entries are text-only wall panels at x=\u00b14.25m, z=-37m and -40m. An immediate untextured corridor shares the original footprint while the unchanged Blender architecture loads in the background. Artwork downloads use a bounded priority queue; crystal and star backdrop load near their rooms.",
   "runtimeAdaptation": "Retained Blender architecture is scaled vertically from 4.8 to 6 metres. Frames, eye height and crystal are independently placed; no historical object geometry is changed.",
   "wallSurfaceRevision": "v1.20: clean plaster replaces baked side-wall material only; old mount shadows are removed while floor and ceiling retain their lighting.",
   "runtimePlaques": "v1.21: uniform satin titanium plaques, 1.55 x 0.46 metres, common centre 1.16 metres above each artwork mount; no dependence on loaded image aspect ratio.",
