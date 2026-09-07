@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "lyrics-index-v1",
+  "edition": "museum-v1.25.0",
+  "items": [
+    {
+      "exhibitId": "eth-001",
+      "audioSha256": "c88d0683d27115ab4dedcef7510c1d3462155715b200e125c5a57a5123c5015d",
+      "duration": 216.48,
+      "timelineFile": "data/lyrics/eth-001.json",
+      "timelineSha256": "d978339b78d6550675ad317fa3f6affdd490293df5c26b47bcae991d80eb59bb",
+      "lineCount": 28,
+      "wordCount": 201
+    },
+    {
+      "exhibitId": "eth-010",
+      "audioSha256": "e7dcb2aab4a10ba1c7d66da31305c6da01aad01b25164512eb379a45427f36d5",
+      "duration": 170.04,
+      "timelineFile": "data/lyrics/eth-010.json",
+      "timelineSha256": "9be7245677c859cb32de2ba951dff595f01d932100de87cbeb90cfe89198d28a",
+      "lineCount": 35,
+      "wordCount": 229
+    },
+    {
+      "exhibitId": "eth-014",
+      "audioSha256": "58a6e3c67159affd34a0a6b5290fa89c85cc074794788e142bb404e8cded48b3",
+      "duration": 119.52,
+      "timelineFile": "data/lyrics/eth-014.json",
+      "timelineSha256": "c04ae92623444842ad84f21fcea74d1d3ef15563aafd7d253ea1604e69b71295",
+      "lineCount": 21,
+      "wordCount": 178
+    },
+    {
+      "exhibitId": "eth-016",
+      "audioSha256": "63f3743a652250a105326314c4a2119f0cfd951ac942b057d64e3a5b77481d07",
+      "duration": 180.024,
+      "timelineFile": "data/lyrics/eth-016.json",
+      "timelineSha256": "20035484be68f4f3d15c7b137c1253d510cf6d38c203774f5fa051f4e642476e",
+      "lineCount": 21,
+      "wordCount": 250
+    },
+    {
+      "exhibitId": "eth-020",
+      "audioSha256": "4cfe1ab58c6c0f126b97dca5290e5b05e7eb0bee5b0f8c8502a0823a756f7cc0",
+      "duration": 154.462041,
+      "timelineFile": "data/lyrics/eth-020.json",
+      "timelineSha256": "bd75a98b2a41a5ffeccf71f54811408d99f52cbee09fa8980b9def49bf22141a",
+      "lineCount": 32,
+      "wordCount": 195
+    },
+    {
+      "exhibitId": "eth-031",
+      "audioSha256": "68b4e64eba4b878e9bc3ee8c36c28458e5b4693d213ef703a7d54be441b9c247",
+      "duration": 195.024,
+      "timelineFile": "data/lyrics/eth-031.json",
+      "timelineSha256": "7178cebc61712569c6d1e285a4ee6cfda9b54808fc2882d2443ffb306e916923",
+      "lineCount": 24,
+      "wordCount": 223
+    },
+    {
+      "exhibitId": "eth-032",
+      "audioSha256": "fa59f5302b205067a508bd48317c48bf9a877887e93005f13611018ffca641b2",
+      "duration": 197.746939,
+      "timelineFile": "data/lyrics/eth-032.json",
+      "timelineSha256": "4b25e2e4aee282de5d753ee8ae9276419c5546c71e40b806cb31d6e73e76e67b",
+      "lineCount": 34,
+      "wordCount": 250
+    },
+    {
+      "exhibitId": "eth-042",
+      "audioSha256": "6eae147d109002a56d9207a8089c93a09969219c78d3e4dd22f6257e98827465",
+      "duration": 185.688,
+      "timelineFile": "data/lyrics/eth-042.json",
+      "timelineSha256": "fc8ce3f95c391b37fbd970d24d7ddbfef0f282b023bb3ba675dd22e5486ee86d",
+      "lineCount": 28,
+      "wordCount": 201
+    },
+    {
+      "exhibitId": "eth-044",
+      "audioSha256": "67e5ec468a961fad430418469520f8fa19cbea719681328b47106085e3007701",
+      "duration": 189.312,
+      "timelineFile": "data/lyrics/eth-044.json",
+      "timelineSha256": "219ae12ac4b4284e74e688427b7f5e2a5e7e59850b5be81a60aafb05c28c34e3",
+      "lineCount": 28,
+      "wordCount": 235
+    },
+    {
+      "exhibitId": "eth-048",
+      "audioSha256": "be4e2038a0ef9e17610b9e4cb4984c97dc4b36514b4b027510162b01ea078f48",
+      "duration": 179.832,
+      "timelineFile": "data/lyrics/eth-048.json",
+      "timelineSha256": "9be4e5a4cc6a54f12cd60d8da3eb36c696960eef365e476a1277d06bc70f32b3",
+      "lineCount": 43,
+      "wordCount": 275
+    },
+    {
+      "exhibitId": "eth-049",
+      "audioSha256": "ff4ef9c424a9c620f623b2aedd1c903d4804ca35b4e34e78824ce376a9303b3e",
+      "duration": 170.03102,
+      "timelineFile": "data/lyrics/eth-049.json",
+      "timelineSha256": "4c5f62ace0c37f788bc0af2d5c74b5d998c9e4b839d59a49f6fee2073e46a036",
+      "lineCount": 35,
+      "wordCount": 229
+    },
+    {
+      "exhibitId": "eth-050",
+      "audioSha256": "7e492b5a20887ff7f96142db0148618fea23d827dc8546fdd18ca8f030cdabb8",
+      "duration": 197.851429,
+      "timelineFile": "data/lyrics/eth-050.json",
+      "timelineSha256": "e378dabbe8c4143336a01953174895f302ed1ae0ca72d09d8788fd0a13335bb4",
+      "lineCount": 54,
+      "wordCount": 421
+    },
+    {
+      "exhibitId": "eth-056",
+      "audioSha256": "c5b509f2b22dbe43bb5a738cc74933cda43ed5422ed8364a35d4897d49f17ebd",
+      "duration": 212.472,
+      "timelineFile": "data/lyrics/eth-056.json",
+      "timelineSha256": "8982d477f659536729a88cd9440203ece3c829cd97055ee68b5b3272884ae2dc",
+      "lineCount": 24,
+      "wordCount": 278
+    },
+    {
+      "exhibitId": "eth-071",
+      "audioSha256": "acd325e4ce080415291a9dd7d8e6eb4236e27ddd858cce3cd910eb2cc7816575",
+      "duration": 174.792,
+      "timelineFile": "data/lyrics/eth-071.json",
+      "timelineSha256": "8b2c49f94fbd1f7fc8a7f827990d6dda086632ffb009f92258f3642a0799511c",
+      "lineCount": 28,
+      "wordCount": 201
+    },
+    {
+      "exhibitId": "eth-088",
+      "audioSha256": "91b0536c9d4c581fcf3675590e50c6f1dce82d7c34680182df85bf1509b2756b",
+      "duration": 119.256,
+      "timelineFile": "data/lyrics/eth-088.json",
+      "timelineSha256": "5afe45c7373d5b56adbb331877f258c1e99ed46ec2d73cbe28d0dcd037e34ae6",
+      "lineCount": 24,
+      "wordCount": 165
+    },
+    {
+      "exhibitId": "eth-091",
+      "audioSha256": "0ce9027ce6ffa2688eb0bb0f01d276ebd85c0a8d7bb9744c1a608063428714cf",
+      "duration": 213.48,
+      "timelineFile": "data/lyrics/eth-091.json",
+      "timelineSha256": "2e1a4458814f2a5dc527e4916f95ec928d3914179e0bfe0e3a0a1f2b901b58a0",
+      "lineCount": 24,
+      "wordCount": 188
+    },
+    {
+      "exhibitId": "eth-100",
+      "audioSha256": "94274c008aba8c3228ddbd33cd7e837c462306b8b7db3a8169778729ca17bf5e",
+      "duration": 141.672,
+      "timelineFile": "data/lyrics/eth-100.json",
+      "timelineSha256": "59b91d4682e0fd7bd700695812168fbced15f60e608f76548b06d8d49b3822b4",
+      "lineCount": 23,
+      "wordCount": 141
+    },
+    {
+      "exhibitId": "eth-113",
+      "audioSha256": "b9d5cdbc50c1b1a9a5fe7f03dec957027f6f3912d4d5dc40a4e04bab26ece3cd",
+      "duration": 206.376,
+      "timelineFile": "data/lyrics/eth-113.json",
+      "timelineSha256": "b282d17e792faad1f2649ed25450431643a431df40efcb23d4617be6a363858b",
+      "lineCount": 34,
+      "wordCount": 184
+    },
+    {
+      "exhibitId": "eth-119",
+      "audioSha256": "53c43db6a7a5830378454ffb60e9440f732a7815e68b93419d9ee8623051128b",
+      "duration": 208.56,
+      "timelineFile": "data/lyrics/eth-119.json",
+      "timelineSha256": "5dc2fc35f63f9cd897a48ca888709d262d921062b16f945266be60331f19ab5f",
+      "lineCount": 47,
+      "wordCount": 267
+    },
+    {
+      "exhibitId": "eth-146",
+      "audioSha256": "00a7cd19c693709610d9c7aa58be3c3389c7629aab59affb1df1c4e35e0ae67a",
+      "duration": 203.184,
+      "timelineFile": "data/lyrics/eth-146.json",
+      "timelineSha256": "278fe52075e5d1f0a29401d714ef1fe72feabaf5acf0f73f64236777164b071e",
+      "lineCount": 36,
+      "wordCount": 239
+    },
+    {
+      "exhibitId": "eth-153",
+      "audioSha256": "8bfd5c7a5771a0130885ca6de15334ea2bce61354d75f488b89728abf0cfb380",
+      "duration": 229.992,
+      "timelineFile": "data/lyrics/eth-153.json",
+      "timelineSha256": "61815eed7cfd640cc7e6718773d9fe25b11adbb7e9abb5015ce547b898095816",
+      "lineCount": 48,
+      "wordCount": 447
+    },
+    {
+      "exhibitId": "eth-027",
+      "audioSha256": "8c61928f64b5e84a76f640366ed7749340af746f0db67be6cc3e1bc1f2e4fe55",
+      "duration": 157.8,
+      "timelineFile": "data/lyrics/eth-027.json",
+      "timelineSha256": "65bfdd14d1712c95695363b5186f43eb702e10a8e03642e78fa5b306568a6239",
+      "lineCount": 28,
+      "wordCount": 201
+    },
+    {
+      "exhibitId": "eth-103",
+      "audioSha256": "4c59efb80c1df9538e919e3ed62d0cbcbea6932ba5a6ad4a4f26f015e0da2770",
+      "duration": 160.032,
+      "timelineFile": "data/lyrics/eth-103.json",
+      "timelineSha256": "02beaba4a4a18edb8aa9d4f8dc276ec28d93c6e221bec195a8077fbc091cd7a8",
+      "lineCount": 26,
+      "wordCount": 201
+    },
+    {
+      "exhibitId": "eth-115",
+      "audioSha256": "f215311cb9e815eafe55744bce23431c4fbef589d5c0726d630bb52cee948fc9",
+      "duration": 189.864,
+      "timelineFile": "data/lyrics/eth-115.json",
+      "timelineSha256": "10f34dfa66db331c7556c6aca54c57b65ce84316c8d6ade72cfdb6d18035fbb3",
+      "lineCount": 42,
+      "wordCount": 246
+    },
+    {
+      "exhibitId": "eth-151",
+      "audioSha256": "d3ca7ce206ddd71f778e2ebffe8f6cc0ccee4a2b7e560e88b2230a71659c9b67",
+      "duration": 116.52,
+      "timelineFile": "data/lyrics/eth-151.json",
+      "timelineSha256": "5d73bcb6dd2c916f09d88b708e9b0c4f087a8a899df41d4a0913f0371a1ec229",
+      "lineCount": 28,
+      "wordCount": 175
+    }
+  ]
+}

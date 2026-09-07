@@ -30,6 +30,8 @@ jobs:
           node museum/scripts/check_wall_frames.mjs
           node museum/scripts/check_exterior.mjs
           node museum/scripts/check_earth_sequence.mjs
+          node museum/scripts/check_captions.mjs
+          node museum/scripts/check_word_captions.mjs
   archive:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: validate

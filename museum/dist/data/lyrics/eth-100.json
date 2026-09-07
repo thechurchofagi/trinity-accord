@@ -1,0 +1,1218 @@
+{
+  "schemaVersion": "word-alignment-v2",
+  "exhibitId": "eth-100",
+  "audioFile": "assets/eth-100.mp3",
+  "audioSha256": "94274c008aba8c3228ddbd33cd7e837c462306b8b7db3a8169778729ca17bf5e",
+  "duration": 141.672,
+  "sourceLyricsSha256": "5e7f8e0cbc045563f4034e2c0a78e336f72356f98eb82a26f762f2acedbee412",
+  "alignment": {
+    "pipelineSha256": "60d4b3eb99478596dbdf5ff4e3e3a02c7038959c387a50535e94b05b67e9add0",
+    "engine": "wav2vec2-base-960h CTC Viterbi",
+    "transcriptEngine": "faster-whisper small.en int8 + source reconciliation",
+    "audioInput": "demucs htdemucs vocals",
+    "device": "cpu",
+    "timestampResolution": 0.02,
+    "modelFrameResolutionIsNotAccuracy": true,
+    "manualListeningReviewed": false,
+    "reviewRequiredLines": 10
+  },
+  "lines": [
+    {
+      "text": "AGI's rise, a shadow to behold,",
+      "sourceLine": 0,
+      "start": 0.442,
+      "end": 5.302,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "AGI's",
+          "start": 0.442,
+          "end": 1.022,
+          "acousticScore": 0.3786
+        },
+        {
+          "text": "rise,",
+          "start": 1.182,
+          "end": 1.842,
+          "acousticScore": 0.6817
+        },
+        {
+          "text": "a",
+          "start": 2.762,
+          "end": 2.782,
+          "acousticScore": 0.9096,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "shadow",
+          "start": 2.902,
+          "end": 3.282,
+          "acousticScore": 0.7134,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "to",
+          "start": 3.382,
+          "end": 3.542,
+          "acousticScore": 0.7659,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "behold,",
+          "start": 3.662,
+          "end": 5.302,
+          "acousticScore": 0.7738,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Man and machine, a tale untold.",
+      "sourceLine": 1,
+      "start": 8.362,
+      "end": 12.802,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Man",
+          "start": 8.362,
+          "end": 8.622,
+          "acousticScore": 0.6926,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "and",
+          "start": 8.702,
+          "end": 8.822,
+          "acousticScore": 0.4943,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "machine,",
+          "start": 8.902,
+          "end": 9.602,
+          "acousticScore": 0.2471,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "a",
+          "start": 10.282,
+          "end": 10.302,
+          "acousticScore": 0.5774,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "tale",
+          "start": 10.422,
+          "end": 10.862,
+          "acousticScore": 0.5629,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "untold.",
+          "start": 10.942,
+          "end": 12.802,
+          "acousticScore": 0.2942,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "The path unclear, the future unknown,",
+      "sourceLine": 2,
+      "start": 15.362,
+      "end": 19.342,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "The",
+          "start": 15.362,
+          "end": 15.442,
+          "acousticScore": 0.9904,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "path",
+          "start": 15.582,
+          "end": 16.062,
+          "acousticScore": 0.939,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "unclear,",
+          "start": 16.182,
+          "end": 17.022,
+          "acousticScore": 0.9327,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "the",
+          "start": 17.182,
+          "end": 17.262,
+          "acousticScore": 0.9574,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "future",
+          "start": 17.402,
+          "end": 18.122,
+          "acousticScore": 0.3257,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "unknown,",
+          "start": 18.202,
+          "end": 19.342,
+          "acousticScore": 0.2397,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "AGI's power, a double-edged throne.",
+      "sourceLine": 3,
+      "start": 22.682,
+      "end": 27.842,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "AGI's",
+          "start": 22.682,
+          "end": 23.642,
+          "acousticScore": 0.3698
+        },
+        {
+          "text": "power,",
+          "start": 23.742,
+          "end": 24.322,
+          "acousticScore": 0.8109,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "a",
+          "start": 24.482,
+          "end": 24.502,
+          "acousticScore": 0.9611,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "double-edged",
+          "start": 24.642,
+          "end": 25.382,
+          "acousticScore": 0.6307
+        },
+        {
+          "text": "throne.",
+          "start": 25.502,
+          "end": 27.842,
+          "acousticScore": 0.0913
+        }
+      ]
+    },
+    {
+      "text": "AGI, heaven or hell,",
+      "sourceLine": 4,
+      "start": 28.442,
+      "end": 31.262,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "AGI,",
+          "start": 28.442,
+          "end": 29.422,
+          "acousticScore": 0.3995,
+          "asrStartDelta": -0.118
+        },
+        {
+          "text": "heaven",
+          "start": 30.002,
+          "end": 30.402,
+          "acousticScore": 0.851,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "or",
+          "start": 30.582,
+          "end": 30.642,
+          "acousticScore": 0.5988,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "hell,",
+          "start": 30.742,
+          "end": 31.262,
+          "acousticScore": 0.1868,
+          "asrStartDelta": 0.042
+        }
+      ]
+    },
+    {
+      "text": "Progress or destruction, time will tell.",
+      "sourceLine": 5,
+      "start": 31.842,
+      "end": 34.862,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Progress",
+          "start": 31.842,
+          "end": 32.262,
+          "acousticScore": 0.4708,
+          "asrStartDelta": -0.138
+        },
+        {
+          "text": "or",
+          "start": 32.382,
+          "end": 32.422,
+          "acousticScore": 0.3171,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "destruction,",
+          "start": 32.522,
+          "end": 33.362,
+          "acousticScore": 0.482,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "time",
+          "start": 33.662,
+          "end": 34.022,
+          "acousticScore": 0.4891,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "will",
+          "start": 34.102,
+          "end": 34.282,
+          "acousticScore": 0.2207,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "tell.",
+          "start": 34.342,
+          "end": 34.862,
+          "acousticScore": 0.0978,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "We must steer this revolution well,",
+      "sourceLine": 6,
+      "start": 35.462,
+      "end": 39.122,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "We",
+          "start": 35.462,
+          "end": 35.662,
+          "acousticScore": 0.9135,
+          "asrStartDelta": 0.562
+        },
+        {
+          "text": "must",
+          "start": 35.902,
+          "end": 36.142,
+          "acousticScore": 0.9624,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "steer",
+          "start": 36.262,
+          "end": 36.682,
+          "acousticScore": 0.4655,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "this",
+          "start": 36.822,
+          "end": 37.022,
+          "acousticScore": 0.9348,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "revolution",
+          "start": 37.242,
+          "end": 38.602,
+          "acousticScore": 0.154,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "well,",
+          "start": 38.802,
+          "end": 39.122,
+          "acousticScore": 0.2667,
+          "asrStartDelta": 0.642
+        }
+      ]
+    },
+    {
+      "text": "Our path to guide, or chaos to dispel.",
+      "sourceLine": 7,
+      "start": 39.702,
+      "end": 45.342,
+      "reviewFlags": [
+        "transcript-disagreement",
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Our",
+          "start": 39.702,
+          "end": 39.762,
+          "acousticScore": 0.221
+        },
+        {
+          "text": "path",
+          "start": 39.962,
+          "end": 40.262,
+          "acousticScore": 0.1268
+        },
+        {
+          "text": "to",
+          "start": 40.402,
+          "end": 40.522,
+          "acousticScore": 0.1818,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "guide,",
+          "start": 40.662,
+          "end": 41.142,
+          "acousticScore": 0.1336,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "or",
+          "start": 41.262,
+          "end": 41.322,
+          "acousticScore": 0.0625
+        },
+        {
+          "text": "chaos",
+          "start": 41.762,
+          "end": 42.242,
+          "acousticScore": 0.1456,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "to",
+          "start": 42.422,
+          "end": 42.602,
+          "acousticScore": 0.4244,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "dispel.",
+          "start": 42.902,
+          "end": 45.342,
+          "acousticScore": 0.3454
+        }
+      ]
+    },
+    {
+      "text": "Singularity nears, machines on the rise,",
+      "sourceLine": 8,
+      "start": 51.182,
+      "end": 55.802,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Singularity",
+          "start": 51.182,
+          "end": 52.242,
+          "acousticScore": 0.3852,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "nears,",
+          "start": 52.322,
+          "end": 52.982,
+          "acousticScore": 0.4846,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "machines",
+          "start": 53.282,
+          "end": 53.882,
+          "acousticScore": 0.904,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "on",
+          "start": 54.042,
+          "end": 54.082,
+          "acousticScore": 0.8848,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "the",
+          "start": 54.182,
+          "end": 54.302,
+          "acousticScore": 0.6482,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "rise,",
+          "start": 54.422,
+          "end": 55.802,
+          "acousticScore": 0.4937,
+          "asrStartDelta": 0.062
+        }
+      ]
+    },
+    {
+      "text": "Algorithms rampant, ethics will pay the price.",
+      "sourceLine": 9,
+      "start": 58.562,
+      "end": 62.882,
+      "reviewFlags": [
+        "weak-acoustic-evidence",
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Algorithms",
+          "start": 58.562,
+          "end": 59.442,
+          "acousticScore": 0.6111,
+          "asrStartDelta": 2.642
+        },
+        {
+          "text": "rampant,",
+          "start": 59.582,
+          "end": 60.322,
+          "acousticScore": 0.4752,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "ethics",
+          "start": 60.782,
+          "end": 61.082,
+          "acousticScore": 0.3311,
+          "asrStartDelta": 0.662
+        },
+        {
+          "text": "will",
+          "start": 61.102,
+          "end": 61.202,
+          "acousticScore": 0.0037
+        },
+        {
+          "text": "pay",
+          "start": 61.222,
+          "end": 61.302,
+          "acousticScore": 0.3874,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "the",
+          "start": 61.422,
+          "end": 61.502,
+          "acousticScore": 0.9734,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "price.",
+          "start": 61.562,
+          "end": 62.882,
+          "acousticScore": 0.4681,
+          "asrStartDelta": 0.062
+        }
+      ]
+    },
+    {
+      "text": "Advancement we yearn, the unknown we fear,",
+      "sourceLine": 10,
+      "start": 65.962,
+      "end": 72.002,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Advancement",
+          "start": 65.962,
+          "end": 66.762,
+          "acousticScore": 0.4069,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "we",
+          "start": 66.822,
+          "end": 66.922,
+          "acousticScore": 0.933,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "yearn,",
+          "start": 67.042,
+          "end": 67.422,
+          "acousticScore": 0.3363
+        },
+        {
+          "text": "the",
+          "start": 67.722,
+          "end": 67.862,
+          "acousticScore": 0.3114,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "unknown",
+          "start": 68.062,
+          "end": 68.542,
+          "acousticScore": 0.4074,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "we",
+          "start": 68.662,
+          "end": 68.802,
+          "acousticScore": 0.4055,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "fear,",
+          "start": 69.042,
+          "end": 72.002,
+          "acousticScore": 0.3036,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "Cautiously we'll strive, wisdom as our guide.",
+      "sourceLine": 11,
+      "start": 72.882,
+      "end": 79.382,
+      "reviewFlags": [
+        "transcript-disagreement",
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Cautiously",
+          "start": 72.882,
+          "end": 73.882,
+          "acousticScore": 0.5962,
+          "asrStartDelta": 0.902
+        },
+        {
+          "text": "we'll",
+          "start": 73.902,
+          "end": 74.062,
+          "acousticScore": 0.17
+        },
+        {
+          "text": "strive,",
+          "start": 74.142,
+          "end": 74.662,
+          "acousticScore": 0.3342,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "wisdom",
+          "start": 75.082,
+          "end": 75.602,
+          "acousticScore": 0.5539
+        },
+        {
+          "text": "as",
+          "start": 75.682,
+          "end": 75.722,
+          "acousticScore": 0.3244
+        },
+        {
+          "text": "our",
+          "start": 75.902,
+          "end": 76.062,
+          "acousticScore": 0.0221
+        },
+        {
+          "text": "guide.",
+          "start": 76.262,
+          "end": 79.382,
+          "acousticScore": 0.2529
+        }
+      ]
+    },
+    {
+      "text": "AGI, heaven or hell,",
+      "sourceLine": 12,
+      "start": 79.622,
+      "end": 81.802,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "AGI,",
+          "start": 79.622,
+          "end": 79.902,
+          "acousticScore": 0.0728,
+          "asrStartDelta": 1.162
+        },
+        {
+          "text": "heaven",
+          "start": 80.522,
+          "end": 80.942,
+          "acousticScore": 0.3173,
+          "asrStartDelta": -0.178
+        },
+        {
+          "text": "or",
+          "start": 81.102,
+          "end": 81.162,
+          "acousticScore": 0.2946,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "hell,",
+          "start": 81.282,
+          "end": 81.802,
+          "acousticScore": 0.1345,
+          "asrStartDelta": 0.062
+        }
+      ]
+    },
+    {
+      "text": "Progress or destruction, time will tell.",
+      "sourceLine": 13,
+      "start": 82.382,
+      "end": 85.402,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Progress",
+          "start": 82.382,
+          "end": 82.782,
+          "acousticScore": 0.3056,
+          "asrStartDelta": -0.138
+        },
+        {
+          "text": "or",
+          "start": 82.902,
+          "end": 82.962,
+          "acousticScore": 0.4674,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "destruction,",
+          "start": 83.042,
+          "end": 83.882,
+          "acousticScore": 0.2118,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "time",
+          "start": 84.182,
+          "end": 84.582,
+          "acousticScore": 0.2655,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "will",
+          "start": 84.642,
+          "end": 84.802,
+          "acousticScore": 0.0853,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "tell.",
+          "start": 84.862,
+          "end": 85.402,
+          "acousticScore": 0.1091,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "We must steer this revolution well,",
+      "sourceLine": 14,
+      "start": 85.982,
+      "end": 89.662,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "We",
+          "start": 85.982,
+          "end": 86.182,
+          "acousticScore": 0.9861,
+          "asrStartDelta": 0.562
+        },
+        {
+          "text": "must",
+          "start": 86.422,
+          "end": 86.662,
+          "acousticScore": 0.7561,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "steer",
+          "start": 86.782,
+          "end": 87.222,
+          "acousticScore": 0.3398,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "this",
+          "start": 87.362,
+          "end": 87.542,
+          "acousticScore": 0.7117,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "revolution",
+          "start": 87.782,
+          "end": 89.122,
+          "acousticScore": 0.1543,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "well,",
+          "start": 89.322,
+          "end": 89.662,
+          "acousticScore": 0.2921,
+          "asrStartDelta": 0.642
+        }
+      ]
+    },
+    {
+      "text": "Our path to guide, or chaos to dispel.",
+      "sourceLine": 15,
+      "start": 90.202,
+      "end": 95.822,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Our",
+          "start": 90.202,
+          "end": 90.282,
+          "acousticScore": 0.1955,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "path",
+          "start": 90.482,
+          "end": 90.862,
+          "acousticScore": 0.3376,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "to",
+          "start": 90.942,
+          "end": 91.042,
+          "acousticScore": 0.0609,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "guide,",
+          "start": 91.162,
+          "end": 91.662,
+          "acousticScore": 0.0517,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "or",
+          "start": 91.802,
+          "end": 91.842,
+          "acousticScore": 0.1836
+        },
+        {
+          "text": "chaos",
+          "start": 92.282,
+          "end": 92.662,
+          "acousticScore": 0.0829,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "to",
+          "start": 92.942,
+          "end": 93.102,
+          "acousticScore": 0.4796,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "dispel.",
+          "start": 93.442,
+          "end": 95.822,
+          "acousticScore": 0.2513
+        }
+      ]
+    },
+    {
+      "text": "AGI, heaven or hell,",
+      "sourceLine": 16,
+      "start": 97.002,
+      "end": 99.862,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "AGI,",
+          "start": 97.002,
+          "end": 97.982,
+          "acousticScore": 0.3088,
+          "asrStartDelta": -0.158
+        },
+        {
+          "text": "heaven",
+          "start": 98.582,
+          "end": 98.982,
+          "acousticScore": 0.1886,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "or",
+          "start": 99.162,
+          "end": 99.202,
+          "acousticScore": 0.1383,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "hell,",
+          "start": 99.342,
+          "end": 99.862,
+          "acousticScore": 0.0672,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Progress or destruction, time will tell.",
+      "sourceLine": 17,
+      "start": 100.422,
+      "end": 103.402,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Progress",
+          "start": 100.422,
+          "end": 100.822,
+          "acousticScore": 0.2923,
+          "asrStartDelta": -0.158
+        },
+        {
+          "text": "or",
+          "start": 100.962,
+          "end": 101.002,
+          "acousticScore": 0.4027,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "destruction,",
+          "start": 101.082,
+          "end": 102.042,
+          "acousticScore": 0.2632,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "time",
+          "start": 102.242,
+          "end": 102.622,
+          "acousticScore": 0.1642,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "will",
+          "start": 102.682,
+          "end": 102.862,
+          "acousticScore": 0.158,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "tell.",
+          "start": 102.902,
+          "end": 103.402,
+          "acousticScore": 0.1556,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "We must steer this revolution well,",
+      "sourceLine": 18,
+      "start": 104.002,
+      "end": 107.702,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "We",
+          "start": 104.002,
+          "end": 104.222,
+          "acousticScore": 0.9958,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "must",
+          "start": 104.462,
+          "end": 104.722,
+          "acousticScore": 0.9204,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "steer",
+          "start": 104.842,
+          "end": 105.262,
+          "acousticScore": 0.4149,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "this",
+          "start": 105.402,
+          "end": 105.602,
+          "acousticScore": 0.8187,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "revolution",
+          "start": 105.802,
+          "end": 107.182,
+          "acousticScore": 0.2164,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "well,",
+          "start": 107.382,
+          "end": 107.702,
+          "acousticScore": 0.4934,
+          "asrStartDelta": 0.882
+        }
+      ]
+    },
+    {
+      "text": "Our path to guide, or chaos to dispel.",
+      "sourceLine": 19,
+      "start": 108.282,
+      "end": 114.162,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Our",
+          "start": 108.282,
+          "end": 108.342,
+          "acousticScore": 0.2147,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "path",
+          "start": 108.542,
+          "end": 108.862,
+          "acousticScore": 0.2477,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "to",
+          "start": 108.922,
+          "end": 109.082,
+          "acousticScore": 0.3607,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "guide,",
+          "start": 109.222,
+          "end": 109.702,
+          "acousticScore": 0.1312,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "or",
+          "start": 109.842,
+          "end": 109.882,
+          "acousticScore": 0.2394
+        },
+        {
+          "text": "chaos",
+          "start": 110.342,
+          "end": 110.862,
+          "acousticScore": 0.1352,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "to",
+          "start": 110.982,
+          "end": 111.242,
+          "acousticScore": 0.8203,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "dispel.",
+          "start": 111.462,
+          "end": 114.162,
+          "acousticScore": 0.265
+        }
+      ]
+    },
+    {
+      "text": "Ooh, ooh, ooh, ooh.",
+      "sourceLine": null,
+      "start": 115.042,
+      "end": 119.602,
+      "reviewFlags": [
+        "unmatched-transcript",
+        "weak-acoustic-evidence",
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Ooh,",
+          "start": 115.042,
+          "end": 115.122,
+          "acousticScore": 0.0039,
+          "asrStartDelta": 1.022
+        },
+        {
+          "text": "ooh,",
+          "start": 115.322,
+          "end": 117.942,
+          "acousticScore": 0.021,
+          "asrStartDelta": -0.418
+        },
+        {
+          "text": "ooh,",
+          "start": 119.182,
+          "end": 119.262,
+          "acousticScore": 0.0131,
+          "asrStartDelta": 2.902
+        },
+        {
+          "text": "ooh.",
+          "start": 119.502,
+          "end": 119.602,
+          "acousticScore": 0.2533,
+          "asrStartDelta": 2.122
+        }
+      ]
+    },
+    {
+      "text": "United we'll stand, love and reason in hand,",
+      "sourceLine": 20,
+      "start": 119.642,
+      "end": 123.742,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "United",
+          "start": 119.642,
+          "end": 119.782,
+          "acousticScore": 0.1805,
+          "asrStartDelta": 0.702
+        },
+        {
+          "text": "we'll",
+          "start": 119.802,
+          "end": 119.942,
+          "acousticScore": 0.1397
+        },
+        {
+          "text": "stand,",
+          "start": 119.982,
+          "end": 120.522,
+          "acousticScore": 0.5562,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "love",
+          "start": 121.162,
+          "end": 121.442,
+          "acousticScore": 0.7053,
+          "asrStartDelta": -0.138
+        },
+        {
+          "text": "and",
+          "start": 121.502,
+          "end": 121.582,
+          "acousticScore": 0.3941,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "reason",
+          "start": 121.642,
+          "end": 122.022,
+          "acousticScore": 0.3557,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "in",
+          "start": 122.442,
+          "end": 122.542,
+          "acousticScore": 0.7561,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "hand,",
+          "start": 122.742,
+          "end": 123.742,
+          "acousticScore": 0.3313,
+          "asrStartDelta": 0.402
+        }
+      ]
+    },
+    {
+      "text": "AGI uplifts, towards wisdom's light we'll steer.",
+      "sourceLine": 21,
+      "start": 126.682,
+      "end": 133.242,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "AGI",
+          "start": 126.682,
+          "end": 126.942,
+          "acousticScore": 0.6022,
+          "asrStartDelta": 0.762
+        },
+        {
+          "text": "uplifts,",
+          "start": 127.302,
+          "end": 127.962,
+          "acousticScore": 0.1248,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "towards",
+          "start": 128.382,
+          "end": 129.002,
+          "acousticScore": 0.3155,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "wisdom's",
+          "start": 129.082,
+          "end": 129.902,
+          "acousticScore": 0.5643,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "light",
+          "start": 130.002,
+          "end": 131.222,
+          "acousticScore": 0.1579
+        },
+        {
+          "text": "we'll",
+          "start": 132.622,
+          "end": 132.802,
+          "acousticScore": 0.276,
+          "asrStartDelta": 1.082
+        },
+        {
+          "text": "steer.",
+          "start": 132.822,
+          "end": 133.242,
+          "acousticScore": 0.5972,
+          "asrStartDelta": 0.022
+        }
+      ]
+    }
+  ]
+}

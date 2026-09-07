@@ -33,21 +33,6 @@ export function extractRecordLyrics(text, title) {
   return out.join('\n').trim();
 }
 
-// These are explicitly estimated cues, not claimed audio/word alignment.
-export function estimateCues(rows, duration) {
-  if (!rows.length || !Number.isFinite(duration) || duration <= 0) return [];
-  const intro = Math.min(10, Math.max(4.5, duration * .035));
-  const end = duration - Math.min(8, Math.max(3, duration * .025));
-  const weights = rows.map(line => Math.max(1, line.split(/\s+/).length));
-  const total = weights.reduce((a, b) => a + b, 0);
-  let time = intro;
-  return rows.map((line, index) => {
-    const start = time;
-    time += (end - intro) * weights[index] / total;
-    return {index, time: start, end: time};
-  });
-}
-
 // Wrap by actual font metrics, then page rather than clipping or ellipsizing.
 export function captionPages(text, width, measure) {
   if (width <= 0) return [];
@@ -65,10 +50,6 @@ export function captionPages(text, width, measure) {
   const pages = [];
   for (let i = 0; i < lines.length; i += 2) pages.push(lines.slice(i, i + 2).join('\n'));
   return pages;
-}
-
-export function captionAt(cues, time) {
-  return cues.find(c => time >= c.time && time < c.end) || null;
 }
 
 // Walking uses elapsed seconds, including slow frames, but never background gaps.

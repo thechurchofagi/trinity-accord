@@ -1,10 +1,11 @@
+import {fallbackLyricsFor} from '../dist/lyrics-fallback.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {cleanLyrics,extractRecordLyrics,estimateCues,captionPages,captionAt,frameSeconds} from '../dist/caption-utils.js';
+import {cleanLyrics,extractRecordLyrics,captionPages,frameSeconds} from '../dist/caption-utils.js';
 const sources=JSON.parse(fs.readFileSync(new URL('../dist/data/sources.json',import.meta.url)));
 const byId=new Map(sources.items.map(e=>[e.id,e]));
 const runtime=fs.readFileSync(new URL('../dist/museum.js',import.meta.url),'utf8');
-const fallback=runtime.match(/const fallbackLyrics=\{'eth-071':`([\s\S]*?)`\};/)[1];
+const fallback=fallbackLyricsFor('eth-071');
 let total=0;
 for(const e of sources.items.filter(e=>e.media?.some(m=>m.kind==='audio'))){
  let raw=e.lyrics||'';
@@ -23,12 +24,8 @@ for(const e of sources.items.filter(e=>e.media?.some(m=>m.kind==='audio'))){
   assert.equal(pages.join('').replace(/\s/g,''),row.replace(/\s/g,''),e.id+' lost words');
   for(const page of pages){assert(page.split('\n').length<=2);assert(page.split('\n').every(l=>measure(l)<=width));}
  }
- const duration=e.media.find(m=>m.kind==='audio').duration;
- const cues=estimateCues(rows,duration);assert.equal(cues.length,rows.length);
- assert.equal(captionAt(cues,0),null);assert.equal(captionAt(cues,duration),null);
- for(let i=0;i<cues.length;i++){assert(cues[i].end>cues[i].time);assert.equal(captionAt(cues,cues[i].time)?.index,i);}
- total+=rows.length;console.log(e.id,rows.length,'clean sung lines; caption paging and cue boundaries pass');
+ total+=rows.length;console.log(e.id,rows.length,'reference lines; text paging passes');
 }
 for(const fps of [10,20,30,60,120]){let distance=0,previous=1000;for(let i=1;i<=fps*10;i++){const now=1000+i*1000/fps;distance+=frameSeconds(now,previous)*1.38;previous=now;}assert(Math.abs(distance-13.8)<1e-8);}
 assert.equal(frameSeconds(60000,1000),0);
-console.log(total+' sung lines checked; 10–120 fps walking speed agrees; background gap ignored. Timing remains estimated.');
+console.log(total+' reference lines checked; 10–120 fps walking speed agrees; background gap ignored.');

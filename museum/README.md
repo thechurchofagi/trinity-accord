@@ -45,22 +45,19 @@ Original artworks, lyrics, photos and music retain their original rights and att
 
 ## Deployment/export
 
-The canonical public museum entry is https://www.trinityaccord.org/museum/.
-Public completion requires merging the museum changes into GitHub main and a successful
-GitHub Pages deployment. Publishing the separate ChatGPT Sites copy alone does not
-update this address and must not be reported as completion. Give visitors the canonical
-GitHub Pages URL.
-The main site's Jekyll build excludes the museum source tree. After the build,
-`deploy-pages.yml` copies the complete `museum/dist/` export to `_site/museum/`
-and verifies its file inventory, sizes and SHA-256 digests. This preserves JSON,
-Markdown source copies, modules and local media without Jekyll filtering or
-conversion. The original root/www custom domain remains unchanged. The separately
-hosted Sites copy and its custom hostname are independent deployments; publishing
-this path does not change their DNS or access policies.
+The maintained public museum is https://museum.trinityaccord.org/. See
+`HOSTING.md`: merge the museum PR, wait for the successful Museum edition push
+workflow, then verify the Alibaba host's deployment receipt and exported hashes.
+The host atomically synchronizes the validated static export from GitHub.
+Historical GitHub Pages museum entry URLs redirect to this address. Do not
+publish a separate ChatGPT Sites copy as a substitute for updating this site.
 
-The Site working directory is an export of `museum/`. Changes must be copied back into the same repository path through a PR and tied to the corresponding GitHub commit. Sites has its own deployment commit; record the mapping in release/deployment notes rather than pretending it is the same Git commit. Never place source credentials or runtime secrets in either repository.
+## Word captions
 
-The first edition is privately hosted for owner review. Public access is a separate audience setting. Existing root website pages and evidence workflows are not rewritten by this directory.
+All 25 recordings use offline acoustic word alignment. Recording variants stay
+separate from source NFT text; the original records and media remain unchanged.
+See `scripts/lyrics/README.md` for reproduction and `dist/data/lyrics-audit.json`
+for review flags. Automatic timing is not a manual listening certification.
 
 ## Blender corridor (v1.2)
 
