@@ -156,3 +156,12 @@ body:has(#lyric-stage[data-view=full]:not([hidden])) #look-controls,body:has(#ly
 .caption-page{display:block;max-width:100%;white-space:normal;overflow-wrap:anywhere}
 #subtitle-lines .word-current,#lyric-scroll .word-current{color:#ffe08a;text-shadow:0 0 7px #b78f39,0 2px 4px #000}
 #subtitle-lines .word-past{color:#e2edf2}
+
+/* English retains acoustic word highlighting; Chinese follows the whole line. */
+#lyric-stage[data-view=compact]{height:auto;min-height:56px}
+#subtitle-lines{height:auto;min-height:56px;flex-direction:column;gap:5px}
+.subtitle-zh{display:block;width:100%;white-space:normal;overflow-wrap:anywhere;font:400 15px/1.5 system-ui,sans-serif;color:#deedf5;text-wrap:pretty}
+.lyric-en,.lyric-zh{display:block}
+#lyric-scroll .lyric-zh{margin-top:3px;font-size:14px;line-height:1.6;color:#9db7c5}
+#lyric-scroll p.active .lyric-zh{color:#deedf5}
+@media(max-width:650px){.subtitle-zh{font-size:14px}body:has(#music-bar:not([hidden])) #walk-controls{bottom:min(calc(var(--dock-height,210px) + 78px + var(--lyric-height,56px)),calc(100dvh - 112px))}}

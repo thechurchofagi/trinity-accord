@@ -1,9 +1,12 @@
+import {exhibitLabel} from '../dist/exhibit-label.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {validTimeline,lineAt,wordAt,wordPages,pageAt} from '../dist/word-captions.js';
 const dist=new URL('../dist/',import.meta.url),read=p=>JSON.parse(fs.readFileSync(new URL(p,dist))),sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 const index=read('data/lyrics-index.json'),sources=read('data/sources.json');
+const zhRaw=fs.readFileSync(new URL(index.translation.file,dist)),zh=JSON.parse(zhRaw);
+assert.equal(sha(zhRaw),index.translation.sha256);
 const audioTracks=sources.items.filter(e=>e.media?.some(m=>m.kind==='audio'));
 assert.equal(index.items.length,audioTracks.length);assert.equal(new Set(index.items.map(e=>e.exhibitId)).size,index.items.length);
 let count=0;
@@ -13,6 +16,7 @@ for(const entry of index.items){
  assert(validTimeline(timeline,entry),entry.exhibitId+' invalid/overlapping word times');
  assert.equal(lineAt(timeline.lines,entry.duration),-1);
  for(const [i,line] of timeline.lines.entries()){
+  assert.equal(typeof zh.lines[line.text],'string');assert(/[\u3400-\u9fff]/u.test(zh.lines[line.text]),entry.exhibitId+' missing Chinese line');
   assert.equal(line.text,line.words.map(w=>w.text).join(' '));assert.equal(lineAt(timeline.lines,line.start),i);
   for(const [j,w] of line.words.entries()){
    assert.equal(wordAt(line.words,w.start),j);assert.equal(wordAt(line.words,(w.start+w.end)/2),j);assert.notEqual(wordAt(line.words,w.end),j);
@@ -39,3 +43,7 @@ const runtime=fs.readFileSync(new URL('museum.js',dist),'utf8');
 assert(!runtime.includes('estimateCues('),'Estimated timing must not drive lyrics');
 assert(runtime.includes('request!==lyricRequest'),'Stale caption fetch guard missing');
 console.log(`${index.items.length} audio bindings; ${count} word intervals; gaps, seeks, paging, rejection and hashes pass.`);
+
+assert.equal(exhibitLabel({ordinal:103,date:'2025-01-01'},false,true),'No. 103 ♪\n2025-01-01');
+assert(!exhibitLabel({ordinal:103,date:'2025-01-01'},false,false).includes('♪'));
+console.log(Object.keys(zh.lines).length+' complete Chinese translations; music plaque symbol passes.');

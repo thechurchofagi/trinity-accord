@@ -35,7 +35,7 @@
     {
       "path": "scene/gallery-layout.json",
       "bytes": 7264,
-      "sha256": "66e69db2a3cfad6bffd4d3b4f4e4640838d3f77d48a673aecd0e4312e36b7d0f"
+      "sha256": "ca2462ef3d55500fa3800eafb309f519775e682ba3e5c8efbf868a11f71a9ec8"
     },
     {
       "path": "scene/memory-gallery.blend",
@@ -75,7 +75,7 @@
     {
       "path": "dist/data/space-design.json",
       "bytes": 10596,
-      "sha256": "140345540cea0e1fd9eb0b4a64c9dc1b6e7d2a196ece5e62b1aed8edb9a06d0e"
+      "sha256": "642bb72c29b5050212f5f5f4c8c97c1bac16e060d042822e50deddb88add9338"
     },
     {
       "path": "dist/wall-presentation.js",
