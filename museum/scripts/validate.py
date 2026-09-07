@@ -127,6 +127,12 @@ check(not any(e.get('kind')=='prism' for r in layout['rooms'] for e in r['exhibi
 check('id="viewing-label"' not in (D/'index.html').read_text(),'Screen-fixed provenance text remains')
 check('assets/curatorial/' not in (D/'museum.js').read_text(),'Runtime references withdrawn art')
 check('assets/curatorial/' not in (D/'archive.html').read_text(),'Reading archive references withdrawn art')
+space=read('space-design.json');frames=space['earth']['frames']
+check(space['edition']==rooms['edition'],'Exterior edition mismatch')
+check(len(frames)==6 and len({f['derived_sha256'] for f in frames})==6,'Need six distinct Earth observations')
+for f in frames:
+ check(hashlib.sha256((D/f['file']).read_bytes()).hexdigest()==f['derived_sha256'],'Earth frame digest mismatch '+f['file'])
+check(hashlib.sha256((D/space['stars']['file']).read_bytes()).hexdigest()==space['stars']['sha256'],'Star catalog digest mismatch')
 if errors:
  print('\n'.join(errors));sys.exit(1)
 print('PASS: source identities, derivative digests, guide text/audio bindings, release inventory, HTML references and vendored imports.')

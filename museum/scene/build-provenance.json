@@ -35,7 +35,7 @@
     {
       "path": "scene/gallery-layout.json",
       "bytes": 7264,
-      "sha256": "c2328331f08d43972f50da96350ef210b7d9bd35bce992abc974d106bab4b388"
+      "sha256": "580d5d087bbe20ac2fd514efff7a7e6c06dbc78696d5041a99a9081302889577"
     },
     {
       "path": "scene/memory-gallery.blend",
@@ -69,13 +69,13 @@
     },
     {
       "path": "dist/open-space.js",
-      "bytes": 5508,
-      "sha256": "9e23408619746118afd19bd3a374326224e1f0222b4c4f11dfa42ca271b5908f"
+      "bytes": 6451,
+      "sha256": "262c1e5daab126d115c7de7a80c91b6afb117ed6c54ef3927e94373ac8de0a72"
     },
     {
       "path": "dist/data/space-design.json",
-      "bytes": 2381,
-      "sha256": "79224ac7b16e9916f99af719358fa686055ad9daa26b3f0baf19eb10c412eef1"
+      "bytes": 10596,
+      "sha256": "210181d66c7985b58e8c070c1193998b4b64b06a413ef11a94f901f9d2857374"
     },
     {
       "path": "dist/wall-presentation.js",
@@ -96,5 +96,6 @@
   "runtimePlaques": "v1.21: uniform satin titanium plaques, 1.55 x 0.46 metres, common centre 1.16 metres above each artwork mount; no dependence on loaded image aspect ratio.",
   "runtimeObservation": "v1.21: approach camera and target use the same display height for a parallel, horizontal frontal view; original image aspect ratio remains unchanged.",
   "chapterPostRevision": "v1.21.1: remove 12 connected full-height chapter uprights (2256 triangles) from the retained batched titanium geometry before display; keep benches, skirting and overhead metal. The source builder no longer creates these upright posts.",
-  "runtimeLayoutNote": "v1.23.0 places four additional original NFTs through the browser wall renderer. The retained Blender architecture and reference renders were not rebuilt; scene/gallery-layout.json is the current runtime placement configuration."
+  "runtimeLayoutNote": "v1.23.0 places four additional original NFTs through the browser wall renderer. The retained Blender architecture and reference renders were not rebuilt; scene/gallery-layout.json is the current runtime placement configuration.",
+  "exteriorRevision": "v1.24.0: six real EPIC frames with a bounded two-texture crossfade; off-centre entrance placement; magnitude 4.5 HYG catalog with brighter, larger pinpoints. Architecture unchanged. Current cloud browser cannot create a WebGL context."
 }
