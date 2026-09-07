@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.30.0",
+  "edition": "museum-v1.31.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "created": "2026-09-07",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
@@ -8,7 +8,7 @@
     {
       "path": "archive.html",
       "bytes": 102243,
-      "sha256": "f3a910b0a0df7dd725d2c1c9421fca36f1c60097ab96ae54c76e934b6eff3064"
+      "sha256": "29755bcbc3a2755e4be18e50d1cf1c52b6140ac29eba1b55c7befbe389046cb7"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -523,7 +523,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1017,
-      "sha256": "7de158d0f75fae39528194fb4dc64a0b219ec14a21c69240f0abb245d9a51849"
+      "sha256": "9e2837b5926e82edcc720fde106fc30339796b9840e4707c6e220323427396c0"
     },
     {
       "path": "caption-utils.js",
@@ -548,7 +548,7 @@
     {
       "path": "data/audio-audit.json",
       "bytes": 33256,
-      "sha256": "e5bb71c28b1546a3921965cec1db5a8a68fe04296ae57f6c62a82f6f8ddf6f7c"
+      "sha256": "bb84c572375d9c253f1caaf72e0667dadb07b136fac315621e8ac4fcd6377d4e"
     },
     {
       "path": "data/bright-stars.json",
@@ -558,7 +558,7 @@
     {
       "path": "data/crystal-model.json",
       "bytes": 3306,
-      "sha256": "63e9d09c697ed6808a5073acdc1a0249eaef27898b7fc11556be4cb1a2dfd09b"
+      "sha256": "92442d83f4a1af2e7cf36d18fd92034bc9ef847835961893c1022218d94e4453"
     },
     {
       "path": "data/crystal-video-reference.json",
@@ -578,7 +578,7 @@
     {
       "path": "data/gallery-layout.json",
       "bytes": 7264,
-      "sha256": "b4a505862d7baf3548b580c769ca4ca28d58b78359361d72284033f8933544d6"
+      "sha256": "b0322cc95c330a0a51d2fdad4464daad15d4f7efa9d042ccacf8617489d1c164"
     },
     {
       "path": "data/guide-audio.json",
@@ -918,17 +918,17 @@
     {
       "path": "data/rooms.json",
       "bytes": 10855,
-      "sha256": "e8512ad2763461fdfdc5a45c7693280397f1714569d598f37360c2405be4328f"
+      "sha256": "cc9cf432aab82e17b9a8b45930c21b212020cddf6a57a2cadc696d575d06b4dd"
     },
     {
       "path": "data/sources.json",
       "bytes": 146391,
-      "sha256": "96e274002d5b4a5d8b1f9c210514443a060034f469bae9b63c8dadd73db10598"
+      "sha256": "f47074b2b88f4609c93dac78d7066fc4331011c625bcacd5ac91d3081d953cec"
     },
     {
       "path": "data/space-design.json",
       "bytes": 10596,
-      "sha256": "01c0992041222f81d2ccb5c960bd0daa2a579b6e5884429e3849b773d76829d6"
+      "sha256": "7dd1aabb6010afe966ad1e55b68a4809dc6bc0c16a634e6765fe85777efe3cd9"
     },
     {
       "path": "earth-sequence.js",
@@ -938,7 +938,7 @@
     {
       "path": "edition-data.js",
       "bytes": 247238,
-      "sha256": "2b5ebf3d8213aac57707a2f7856477ff82652156668b121ede31fe6e8f723704"
+      "sha256": "1e16b06b0d2b5be4d063683b030e704f74e8241ba557f50306e57fecebcdc7f4"
     },
     {
       "path": "exhibit-label.js",
@@ -953,7 +953,12 @@
     {
       "path": "index.html",
       "bytes": 6554,
-      "sha256": "bdc619f9939d0e096b1bde9eb5d519146adad6bff28f60b856bf60979b3e7e86"
+      "sha256": "ec076a3efdfbd24a2480b0081f91d3fea222f3a2f8ba56319239b6ebcdecebb2"
+    },
+    {
+      "path": "language-preference.js",
+      "bytes": 1456,
+      "sha256": "075848dfd8bdf4b6ea4dbb37b7362f3840ab407ad7925b53c3edd49b71079fee"
     },
     {
       "path": "lyrics-fallback.js",
@@ -972,8 +977,8 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 972165,
-      "sha256": "144dfed15728548861c0481a0fd650021ef255e7f350e96e7d49a7c02985f93d"
+      "bytes": 973107,
+      "sha256": "6116d0cfe5b4cdba0d1a8104e4b7a32c9030cf005bdde50c91305cc0f18684c5"
     },
     {
       "path": "museum.css",
@@ -982,8 +987,8 @@
     },
     {
       "path": "museum.js",
-      "bytes": 80137,
-      "sha256": "d5c9edbc2f438e06d8f75bb95ab4115f8645f7eb735958bb83caad11e6654997"
+      "bytes": 80502,
+      "sha256": "f65d1ba6f4709c31b9ac106bf0961ed5680752d5dc3d703d3963a98213434e7c"
     },
     {
       "path": "music-playback.js",

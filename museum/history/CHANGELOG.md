@@ -1,3 +1,9 @@
+# museum-v1.31.0 · IP-based initial language
+
+- Default first visits from mainland China (country code CN) to Chinese; other countries and regions default to English. Apply the same language to interface, wall labels and recorded narration before the automatic tour begins.
+- Explicit lang=en/zh links take priority, followed by a saved manual language choice. Manual switching persists locally and cannot be overwritten by a delayed country response.
+- Query the caller country through api.country.is with omitted credentials and referrer. Keep no IP address; run the lookup alongside scene loading and fall back to English after 1.8 seconds or on errors. An explicit or saved choice skips the lookup.
+
 # museum-v1.30.0 · Persistent playback recovery and virtual inspection
 
 - Keep a central modal visible whenever music or narration is blocked, including failed retries. Continue from the same position, holding tour time and camera movement until playback resumes; visitors may stop and explore.
