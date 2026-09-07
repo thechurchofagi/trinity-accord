@@ -29,6 +29,7 @@ jobs:
           node museum/scripts/check_navigation.mjs
           node museum/scripts/check_guided_visit.mjs
           node museum/scripts/check_recorded_guides.mjs
+          node museum/scripts/check_music_playback.mjs
           node museum/scripts/check_wall_frames.mjs
           node museum/scripts/check_exterior.mjs
           node museum/scripts/check_earth_sequence.mjs

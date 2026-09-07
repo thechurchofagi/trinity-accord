@@ -30,7 +30,8 @@
     }
   ],
   "prop": {
-    "file": "assets/flaws/hand-microscope.png",
-    "type": "AI-generated exhibition animation prop; not evidence"
+    "file": "microscope-motion.js",
+    "type": "Procedural 3D microscope and articulated gloved hand; later virtual exhibition model, not evidence",
+    "motion": "Vertical world-Y lift; optical axis faces crystal; illustrative locations, not measured"
   }
 }

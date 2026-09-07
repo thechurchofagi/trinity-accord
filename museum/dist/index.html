@@ -8,7 +8,7 @@
   <meta name="description" content="Explore the Trinity Accord: original NFT artwork and music, the formation of the Accord, the crystal and an invitation to future readers.">
   <title>Trinity Accord · Memory Museum</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='none' stroke='%2394edff' stroke-width='3' d='M32 5 58 50H6Z M32 18 46 43H18Z'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./museum.css?v=cb57ae60b339">
+  <link rel="stylesheet" href="./museum.css?v=88d6b1f5cd58">
 </head>
 <body>
   <canvas id="world" aria-label="3D museum. Drag to look or select a room below."></canvas>
@@ -32,7 +32,7 @@
     <div id="focus-tools"><button id="focus-art">Open this work</button><button id="verify-flaws" hidden>Verify flaws</button><button id="overview">Corridor view</button></div>
 
     <section id="flaw-view" hidden aria-label="Public flaw inspection"></section>
-    <aside id="guide-audio-prompt" hidden aria-live="polite"><p id="guide-audio-message"></p><button id="guide-audio-start"></button></aside>
+    <dialog id="guide-audio-prompt" aria-labelledby="guide-audio-message"><p id="guide-audio-message" aria-live="polite"></p><button id="guide-audio-start" autofocus></button><button id="guide-audio-dismiss"></button></dialog>
     <aside id="tour-caption" hidden aria-label="Narration subtitles"><span class="eyebrow" id="guide-label">ENGLISH AUDIO · RECORDED GUIDE</span><p id="caption-text" aria-live="off"></p></aside>
     <aside id="lyric-stage" hidden aria-label="Song captions">
       <div id="subtitle-lines" aria-live="off"></div>
@@ -56,5 +56,5 @@
   <audio id="music" preload="none"></audio><audio id="narration" preload="none"></audio>
   <div id="toast" role="status" hidden></div>
   <noscript><section class="no-script">JavaScript is required for the 3D museum. <a href="./archive.html">Read the exhibition archive</a> · <a href="https://www.trinityaccord.org/">Visit the source site</a></section></noscript>
-  <script defer src="./boot-loader.js?v=1.29.0.a4b590f1cba2"></script>
+  <script defer src="./boot-loader.js?v=1.30.0.144dfed15728"></script>
 </body></html>

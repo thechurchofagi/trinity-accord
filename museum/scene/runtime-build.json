@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.runtime-build.v1",
-  "edition": "museum-v1.29.0",
+  "edition": "museum-v1.30.0",
   "esbuild": "0.25.12",
   "inputs": [
     {
@@ -36,7 +36,7 @@
     {
       "path": "dist/data/gallery-layout.json",
       "bytes": 7264,
-      "sha256": "90845597383f30e9adf1e1ebe9961e2c53986376ef5aa7afb366d7984e59c5a8"
+      "sha256": "b4a505862d7baf3548b580c769ca4ca28d58b78359361d72284033f8933544d6"
     },
     {
       "path": "dist/data/guide-audio.json",
@@ -51,12 +51,12 @@
     {
       "path": "dist/data/rooms.json",
       "bytes": 10855,
-      "sha256": "7ae9caaac1d585f8783cbb96b6fa60df62c110898db30999ae7f1966838fd15f"
+      "sha256": "e8512ad2763461fdfdc5a45c7693280397f1714569d598f37360c2405be4328f"
     },
     {
       "path": "dist/data/sources.json",
       "bytes": 146391,
-      "sha256": "d3deee188a6c9ff10270616ddbdd6604ae7726811a6ae311fc9c328ab34227a4"
+      "sha256": "96e274002d5b4a5d8b1f9c210514443a060034f469bae9b63c8dadd73db10598"
     },
     {
       "path": "dist/earth-sequence.js",
@@ -66,7 +66,7 @@
     {
       "path": "dist/edition-data.js",
       "bytes": 247238,
-      "sha256": "d64f81381b0b357800c3d4590dc24dee5a4a274678bf9819168cd6503f0cd810"
+      "sha256": "2b5ebf3d8213aac57707a2f7856477ff82652156668b121ede31fe6e8f723704"
     },
     {
       "path": "dist/exhibit-label.js",
@@ -85,8 +85,8 @@
     },
     {
       "path": "dist/microscope-motion.js",
-      "bytes": 2275,
-      "sha256": "296dcdd147127989454cc6c2ceb2f2c140214463a8e8cf5107f260de74335801"
+      "bytes": 5354,
+      "sha256": "b4f5bb44a1f7456c26809c61dd7106a0cc01653f2e12a7ba307cdd220bb9bead"
     },
     {
       "path": "dist/movement-controls.js",
@@ -95,8 +95,13 @@
     },
     {
       "path": "dist/museum.js",
-      "bytes": 78863,
-      "sha256": "d5a8892a298a7f54d7d201e601cb7ad4fb939c8f9d05c9aba20887b1dd107074"
+      "bytes": 80137,
+      "sha256": "d5c9edbc2f438e06d8f75bb95ab4115f8645f7eb735958bb83caad11e6654997"
+    },
+    {
+      "path": "dist/music-playback.js",
+      "bytes": 1442,
+      "sha256": "7957f0f8baacbe26fc2c6aa626a0066973248bbc80592d79092ce94b1c836511"
     },
     {
       "path": "dist/observation-view.js",
@@ -115,8 +120,8 @@
     },
     {
       "path": "dist/public-flaws-data.js",
-      "bytes": 1772,
-      "sha256": "aeec94d9e25ca0e9547553cfceae0e972819b8baa2b8b2cca94b68cbedc9e588"
+      "bytes": 1910,
+      "sha256": "cf7ece44e366c19319fcf498e050188b212a9d1262275434aa143967a658e836"
     },
     {
       "path": "dist/recorded-guide.js",
@@ -166,7 +171,7 @@
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 968267,
-    "sha256": "a4b590f1cba2c928f4aa9d8de95fbbae019428b1ef0af4a2ad2d16e453c316a4"
+    "bytes": 972165,
+    "sha256": "144dfed15728548861c0481a0fd650021ef255e7f350e96e7d49a7c02985f93d"
   }
 }

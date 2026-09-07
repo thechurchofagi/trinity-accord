@@ -183,3 +183,41 @@ body:has(#lyric-stage[data-view=full]:not([hidden])) #look-controls,body:has(#ly
 #guide-audio-message{font-size:16px;line-height:1.5;margin:0 0 16px}
 #guide-audio-start{display:block;width:100%;min-height:56px;padding:12px 18px;background:#c5ecfa;color:#102532;border-radius:9px;font:600 18px/1.4 system-ui;cursor:pointer}
 #guide-audio-start:focus-visible{outline:3px solid #fff;outline-offset:5px}
+
+/* 1.30: reserve actual subtitle height, keeping all touch controls outside it. */
+:root{--reading-height:0px;--reading-bottom:calc(var(--dock-height,210px) + 14px)}
+body{--reading-top:calc(var(--reading-bottom) + var(--reading-height))}
+body:has(#music-bar:not([hidden])){--reading-bottom:calc(var(--dock-height,210px) + 58px)}
+#lyric-stage,#tour-caption{bottom:var(--reading-bottom);width:min(720px,calc(100vw - 40px))}
+#subtitle-lines{font-size:17px;line-height:24px;gap:4px;min-height:48px}
+.subtitle-zh{font-size:14px;line-height:20px}
+#tour-caption p{font-size:17px;line-height:25px}
+#focus-tools,body:has(#music-bar:not([hidden])) #focus-tools{bottom:calc(var(--reading-top) + 12px);width:142px}
+#focus-tools button{font-size:13px;min-height:36px;height:auto;line-height:18px;padding:6px 8px}
+#walk-controls,body:has(#music-bar:not([hidden])) #walk-controls,#look-controls{bottom:calc(var(--reading-top) + 12px)}
+#viewing-label{bottom:calc(var(--reading-top) + 126px)}
+#lyric-stage[data-view=full]{height:min(300px,calc(100dvh - var(--dock-height,210px) - 158px));max-height:44dvh}
+body:has(#lyric-stage[data-view=full]:not([hidden])) #focus-tools{visibility:hidden}
+#tour-status{gap:12px;flex-wrap:wrap;white-space:normal;font-size:12px}
+#tour-status button{font-size:13px;min-height:34px}
+@media(max-width:650px){
+ #subtitle-lines{font-size:16px;line-height:23px}
+ #tour-caption p{font-size:16px;line-height:24px}
+ #music-bar button{min-height:40px;height:40px}
+ #focus-tools,body:has(#music-bar:not([hidden])) #focus-tools{width:132px}
+}
+@media(max-height:540px) and (orientation:landscape){
+ #lyric-stage,#tour-caption{width:min(620px,calc(100vw - 240px))}
+ #subtitle-lines{font-size:15px;line-height:21px;gap:2px}
+ .subtitle-zh{font-size:13px;line-height:19px}
+ #tour-caption p{font-size:15px;line-height:22px}
+ #focus-tools,body:has(#music-bar:not([hidden])) #focus-tools{left:auto;right:12px;transform:none;width:100px;bottom:100px}
+ #walk-controls,body:has(#music-bar:not([hidden])) #walk-controls,#look-controls{bottom:12px}
+ #tour-status{gap:8px;margin:0}#tour-status button{min-height:28px}
+}
+/* A real dialog stays above exhibit details and survives failed/repeated retries. */
+#guide-audio-prompt{inset:0;margin:auto;transform:none;height:fit-content;max-height:calc(100dvh - 32px);overflow:auto}
+#guide-audio-prompt:not([open]){display:none}
+#guide-audio-prompt::backdrop{background:#020812a6;backdrop-filter:blur(3px)}
+#guide-audio-start:disabled{opacity:.75;cursor:progress}
+#guide-audio-dismiss{margin-top:12px;min-height:44px;padding:8px 12px;color:#d5eaf0;font-size:14px}
