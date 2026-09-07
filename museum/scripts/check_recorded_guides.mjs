@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {guideCueAt,createRecordedGuide} from '../dist/recorded-guide.js';
-import {createMicroscopeMotion,microscopePose} from '../dist/microscope-motion.js';
+import {createMicroscopeMotion,microscopePose,createMicroscopeModel} from '../dist/microscope-motion.js';
 import {tourStops} from '../dist/tour-plan.js';
 import * as THREE from '../dist/vendor/three.module.js';
 const data=JSON.parse(fs.readFileSync(new URL('../dist/data/guide-audio.json',import.meta.url)));
@@ -35,11 +35,14 @@ let reject;a.pending=new Promise((_,r)=>reject=r);const old=guide.play(zh);a.pen
 // A late autoplay rejection must not undo the user's successful enable click.
 let deny;a.pending=new Promise((_,r)=>deny=r);const autoplay=guide.play(zh);a.pending=null;await guide.setMuted(false);deny(Object.assign(new Error('late autoplay denial'),{name:'NotAllowedError'}));await autoplay;assert.equal(guide.state,'playing');assert.equal(a.muted,false);assert.equal(a.paused,false);guide.stop();
 const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,1,.01,100),crystal=new THREE.Group();crystal.position.set(0,1,-3);scene.add(crystal);let frame=null,photos=0;
-const scope=createMicroscopeMotion(scene,camera,{loadTexture:async()=>new THREE.Texture(),requestFrame:fn=>{frame=fn;return 1;},cancelFrame:()=>{frame=null;}});
-await scope.start(crystal,0,{onComplete:()=>photos++});assert.equal(photos,0);frame(0);frame(2200);assert.equal(photos,0);frame(2800);assert.equal(photos,1,'Only reveal photo after 3D movement');assert.equal(scene.children.find(c=>c.isSprite).visible,false);
-await scope.start(crystal,1,{onComplete:()=>photos++});const stale=frame;scope.stop();stale(5000);assert.equal(photos,1,'Leaving must cancel pending photo');assert.equal(scene.children.find(c=>c.isSprite).visible,false);
-await scope.start(crystal,2,{reduced:true,onComplete:()=>photos++});assert.equal(photos,2);scope.dispose();assert.equal(scene.children.some(c=>c.isSprite),false);
-const start=new THREE.Vector3(1,2,3),end=new THREE.Vector3(4,5,6);assert.deepEqual(microscopePose(0,start,end),start);assert.deepEqual(microscopePose(1,start,end),end);
+const scope=createMicroscopeMotion(scene,camera,{requestFrame:fn=>{frame=fn;return 1;},cancelFrame:()=>{frame=null;}});
+await scope.start(crystal,0,{onComplete:()=>photos++});assert.equal(photos,0);frame(0);frame(2200);assert.equal(photos,0);frame(2800);assert.equal(photos,1,'Only reveal photo after 3D movement');assert.equal(scene.getObjectByName('virtual-hand-microscope').visible,false);
+await scope.start(crystal,1,{onComplete:()=>photos++});const stale=frame;scope.stop();stale(5000);assert.equal(photos,1,'Leaving must cancel pending photo');assert.equal(scene.getObjectByName('virtual-hand-microscope').visible,false);
+await scope.start(crystal,2,{reduced:true,onComplete:()=>photos++});assert.equal(photos,2);scope.dispose();assert.equal(scene.children.some(c=>c.name==='virtual-hand-microscope'),false);
+const start=new THREE.Vector3(1,2,3),end=new THREE.Vector3(1,5,3);assert.deepEqual(microscopePose(0,start,end),start);assert.deepEqual(microscopePose(1,start,end),end);
 const app=fs.readFileSync(new URL('../dist/museum.js',import.meta.url),'utf8');assert.ok(!/speechSynthesis|SpeechSynthesisUtterance/.test(app));
 const photoFunction=app.slice(app.indexOf('function showFlawPhoto('),app.indexOf('async function showFlaw('));assert.equal((photoFunction.match(/<img /g)||[]).length,1);assert.ok(!/microscope-prop|flaw-focus|filter:|<canvas/.test(photoFunction),'No prop, marker or filter in photo rendering');
 console.log('PASS: 22 bundled language tracks, full timed caption coverage, short cues, recording-clock seeks, language switches, faster rates, autoplay recovery, stale requests, 3D movement-before-photo and leave cancellation.');
+
+const model=createMicroscopeModel();let meshes=0;model.traverse(m=>{assert.ok(!m.isSprite);if(m.isMesh){meshes++;assert.equal(m.material.map,null);assert.ok(m.geometry.attributes.position.count>0);}});assert.ok(meshes>30);assert.ok(model.getObjectByName('modelled-gloved-hand'));assert.ok(model.getObjectByName('microscope'));
+for(let t=0;t<=1;t+=.1){const p=microscopePose(t,start,end);assert.equal(p.x,end.x);assert.equal(p.z,end.z);assert.ok(p.y>=start.y&&p.y<=end.y);}

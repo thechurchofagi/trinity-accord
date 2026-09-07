@@ -1,3 +1,9 @@
+# museum-v1.30.0 · Persistent playback recovery and virtual inspection
+
+- Keep a central modal visible whenever music or narration is blocked, including failed retries. Continue from the same position, holding tour time and camera movement until playback resumes; visitors may stop and explore.
+- Replace the photographic hand/microscope sprite with a modelled 3D gloved hand and microscope. Lift vertically toward the crystal, then show the unchanged original evidence photograph.
+- Reserve measured subtitle height above the player and dock. Reduce caption and control typography moderately, separate touch controls, and adapt the arrangement for narrow and landscape screens.
+
 # museum-v1.29.0 · Audible tour start and balanced document panels
 
 - Hold the automatic tour clock and camera while narration is loading or blocked. A prominent central button explains the silent state and starts audio in the visitor's click; the first tour click enables sound instead of pausing. Late autoplay failures cannot override that click.
