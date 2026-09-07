@@ -5,7 +5,7 @@ export function guideCueAt(cues,seconds){
  const cue=cues[found];return cue&&seconds<=cue.end+.25?cue:null;
 }
 export function createRecordedGuide(audio,{onCaption=()=>{},onState=()=>{}}={}){
- let track=null,request=0,state='idle',rate=1.1;
+ let track=null,request=0,state='idle',rate=1;
  const paint=()=>onCaption(track?guideCueAt(track.cues,audio.currentTime)?.text||'':'',track?.language);
  function setState(value){state=value;onState(value);}
  for(const event of ['timeupdate','seeked','playing','ended'])audio.addEventListener(event,paint);
@@ -18,14 +18,11 @@ export function createRecordedGuide(audio,{onCaption=()=>{},onState=()=>{}}={}){
    try{await audio.play();if(id!==request)return;setState(muted?'muted':'playing');paint();}
    catch(error){
     if(id!==request)return;
-    if(error.name==='NotAllowedError'){
-     // Silent playback keeps the same timed subtitles running until a tap enables sound.
-     audio.muted=true;try{await audio.play();if(id!==request)return;setState('blocked');paint();}catch{if(id===request)setState('blocked');}
-    }else setState('error');
+    audio.pause();setState(error.name==='NotAllowedError'?'blocked':'error');
    }
   },
   async setMuted(muted){
-   if(!track)return;const id=request;audio.muted=muted;
+   if(!track)return;const id=++request;audio.muted=muted;setState('loading');
    try{await audio.play();if(id===request)setState(muted?'muted':'playing');}
    catch(error){if(id===request)setState(error.name==='NotAllowedError'?'blocked':'error');}
   },

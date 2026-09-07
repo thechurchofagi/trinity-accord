@@ -12,8 +12,8 @@ for(let index=0;index<tourStops.length;index++)for(const language of ['zh','en']
  const tracks=data.tracks.filter(t=>t.stop===index&&t.language===language);assert.equal(tracks.length,1);const t=tracks[0];
  assert.equal(t.text,tourStops[index][language]);assert.equal(crypto.createHash('sha256').update(t.text).digest('hex'),t.textSha256);
  const audio=fs.readFileSync(new URL('../dist/'+t.file,import.meta.url));assert.equal(crypto.createHash('sha256').update(audio).digest('hex'),t.sha256);
- assert.ok(audio.length>1000&&t.duration>5);assert.ok(t.duration/1.1+(tourStops[index].flaw===undefined?0:4)<tourStops[index].seconds,'Recording must fit its stop including microscope movement');
- if(tourStops[index].musicAt!==undefined)assert.ok(t.duration/1.1<tourStops[index].musicAt,'Music must not cut narration');
+ assert.ok(audio.length>1000&&t.duration>5);assert.ok(t.duration+(tourStops[index].flaw===undefined?0:4)<tourStops[index].seconds,'Recording must fit its stop including microscope movement');
+ if(tourStops[index].musicAt!==undefined)assert.ok(t.duration<tourStops[index].musicAt,'Music must not cut narration');
  assert.equal(norm(t.cues.map(c=>c.text).join('')),norm(t.text),'Caption text coverage '+index+language);
  let last=0;for(const cue of t.cues){assert.ok(cue.start>=last&&cue.end>cue.start&&cue.end<t.duration+.05);last=cue.end;assert.ok(cue.text.length<=(language==='zh'?28:68));assert.equal(guideCueAt(t.cues,(cue.start+cue.end)/2),cue);}
  assert.equal(guideCueAt(t.cues,t.duration+1),null);
@@ -26,12 +26,14 @@ class Audio extends EventTarget{
 }
 const a=new Audio(),captions=[],states=[],guide=createRecordedGuide(a,{onCaption:(text,lang)=>captions.push([text,lang]),onState:s=>states.push(s)});
 const zh=data.tracks.find(t=>t.stop===0&&t.language==='zh'),en=data.tracks.find(t=>t.stop===0&&t.language==='en');
-await guide.play(zh);assert.equal(a.src,zh.file);a.currentTime=zh.cues[1].start+.01;a.dispatchEvent(new Event('timeupdate'));assert.equal(captions.at(-1)[0],zh.cues[1].text);
+await guide.play(zh);assert.equal(a.src,zh.file);assert.equal(a.playbackRate,1);a.currentTime=zh.cues[1].start+.01;a.dispatchEvent(new Event('timeupdate'));assert.equal(captions.at(-1)[0],zh.cues[1].text);
 await guide.play(en);assert.equal(a.src,en.file);assert.equal(a.muted,false);a.currentTime=en.cues[0].start+.1;guide.paint();assert.equal(captions.at(-1)[1],'en');assert.equal(captions.at(-1)[0],en.cues[0].text);
 await guide.play(zh);assert.equal(a.src,zh.file); // Switch back without speech synthesis or installed voices.
-a.block=true;await guide.play(en);assert.equal(guide.state,'blocked');assert.equal(a.muted,true);assert.equal(a.paused,false);a.block=false;await guide.setMuted(false);assert.equal(guide.state,'playing');assert.equal(a.muted,false);
+a.block=true;await guide.play(en);assert.equal(guide.state,'blocked');assert.equal(a.muted,false);assert.equal(a.paused,true);assert.equal(a.currentTime,0);assert.equal(a.calls.at(-1)[1],false);a.block=false;await guide.setMuted(false);assert.equal(guide.state,'playing');assert.equal(a.muted,false);
 guide.setRate(1.25);assert.equal(a.playbackRate,1.25);await guide.play(zh,{offset:7.5});assert.equal(a.currentTime,7.5);assert.equal(a.playbackRate,1.25);
 let reject;a.pending=new Promise((_,r)=>reject=r);const old=guide.play(zh);a.pending=null;await guide.play(en);reject(new Error('stale'));await old;assert.equal(guide.state,'playing');assert.equal(guide.track.language,'en');guide.stop();assert.equal(a.paused,true);assert.equal(guide.track,null);assert.equal(captions.at(-1)[0],'');
+// A late autoplay rejection must not undo the user's successful enable click.
+let deny;a.pending=new Promise((_,r)=>deny=r);const autoplay=guide.play(zh);a.pending=null;await guide.setMuted(false);deny(Object.assign(new Error('late autoplay denial'),{name:'NotAllowedError'}));await autoplay;assert.equal(guide.state,'playing');assert.equal(a.muted,false);assert.equal(a.paused,false);guide.stop();
 const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,1,.01,100),crystal=new THREE.Group();crystal.position.set(0,1,-3);scene.add(crystal);let frame=null,photos=0;
 const scope=createMicroscopeMotion(scene,camera,{loadTexture:async()=>new THREE.Texture(),requestFrame:fn=>{frame=fn;return 1;},cancelFrame:()=>{frame=null;}});
 await scope.start(crystal,0,{onComplete:()=>photos++});assert.equal(photos,0);frame(0);frame(2200);assert.equal(photos,0);frame(2800);assert.equal(photos,1,'Only reveal photo after 3D movement');assert.equal(scene.children.find(c=>c.isSprite).visible,false);

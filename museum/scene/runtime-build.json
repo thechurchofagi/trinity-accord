@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.runtime-build.v1",
-  "edition": "museum-v1.28.0",
+  "edition": "museum-v1.29.0",
   "esbuild": "0.25.12",
   "inputs": [
     {
@@ -36,7 +36,7 @@
     {
       "path": "dist/data/gallery-layout.json",
       "bytes": 7264,
-      "sha256": "dfc1352b48bdfb00a2fc5aa25ef8bfca0b203de14683d87eae0967f9497e7764"
+      "sha256": "90845597383f30e9adf1e1ebe9961e2c53986376ef5aa7afb366d7984e59c5a8"
     },
     {
       "path": "dist/data/guide-audio.json",
@@ -51,12 +51,12 @@
     {
       "path": "dist/data/rooms.json",
       "bytes": 10855,
-      "sha256": "1baeba6c92641b529bcdcb70796f3f2113565ed9edb85237195ed859d60dc613"
+      "sha256": "7ae9caaac1d585f8783cbb96b6fa60df62c110898db30999ae7f1966838fd15f"
     },
     {
       "path": "dist/data/sources.json",
       "bytes": 146391,
-      "sha256": "0f9a4558e8d0ee5fb1a352fa9a159ebf83a6d34bdd2097e00464124885434c76"
+      "sha256": "d3deee188a6c9ff10270616ddbdd6604ae7726811a6ae311fc9c328ab34227a4"
     },
     {
       "path": "dist/earth-sequence.js",
@@ -66,7 +66,7 @@
     {
       "path": "dist/edition-data.js",
       "bytes": 247238,
-      "sha256": "c233c9eb431bf7e2700ced7f377335d3352ddf8b152ef6a3e48263df0cbdbc13"
+      "sha256": "d64f81381b0b357800c3d4590dc24dee5a4a274678bf9819168cd6503f0cd810"
     },
     {
       "path": "dist/exhibit-label.js",
@@ -95,8 +95,8 @@
     },
     {
       "path": "dist/museum.js",
-      "bytes": 77205,
-      "sha256": "793c430be2d4b999c23a49e68152946c40952be73c49a140e2bc60a180f72a92"
+      "bytes": 78863,
+      "sha256": "d5a8892a298a7f54d7d201e601cb7ad4fb939c8f9d05c9aba20887b1dd107074"
     },
     {
       "path": "dist/observation-view.js",
@@ -120,8 +120,8 @@
     },
     {
       "path": "dist/recorded-guide.js",
-      "bytes": 2140,
-      "sha256": "21ef7775bfa3843aa117604f208fd6febd52c4b98b3bb6c32265dab057991510"
+      "bytes": 1938,
+      "sha256": "7e9d6f47ade497770bf67aa4d94d49673d1b8a8c22d650ee55eda740842ce572"
     },
     {
       "path": "dist/tour-plan.js",
@@ -166,7 +166,7 @@
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 966855,
-    "sha256": "7de0272bd01fbc637988964698821edc3b704c890f00f34293ce4735457816fb"
+    "bytes": 968267,
+    "sha256": "a4b590f1cba2c928f4aa9d8de95fbbae019428b1ef0af4a2ad2d16e453c316a4"
   }
 }
