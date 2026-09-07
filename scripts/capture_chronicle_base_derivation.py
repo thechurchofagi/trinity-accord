@@ -332,6 +332,48 @@ def run(command: list[str]) -> None:
             raise subprocess.CalledProcessError(result, command)
 
 
+def run_decoder_fetch(
+    command: list[str],
+    endpoints: list[str],
+    retries: int = 5,
+    backoff_seconds: int = 15,
+) -> None:
+    """Retry a decoder fetch without weakening any downstream verification.
+
+    Public L1 RPCs may return a transport/rate-limit failure after leaving a
+    partial window on disk. Replaying the same bounded window is safe because
+    the decoder output is subsequently reassembled and checked by KZG, exact
+    transaction derivation, L1 MPT, and strict finality verification.
+    """
+    if retries < 1:
+        raise ValueError("decoder fetch retries must be positive")
+    if not endpoints:
+        raise ValueError("decoder fetch requires at least one L1 endpoint")
+    l1_index = command.index("--l1") + 1
+    concurrency_index = command.index("--concurrent-requests") + 1
+    initial_concurrency = int(command[concurrency_index])
+    for attempt in range(1, retries + 1):
+        attempt_command = list(command)
+        endpoint = endpoints[(attempt - 1) % len(endpoints)]
+        concurrency = max(1, initial_concurrency // (2 ** (attempt - 1)))
+        attempt_command[l1_index] = endpoint
+        attempt_command[concurrency_index] = str(concurrency)
+        try:
+            run(attempt_command)
+            return
+        except subprocess.CalledProcessError as exc:
+            if attempt == retries:
+                raise
+            delay = min(120, backoff_seconds * (2 ** (attempt - 1)))
+            print(
+                f"[DECODER FETCH RETRY] failed_attempt={attempt}/{retries} "
+                f"endpoint={endpoint} concurrency={concurrency} exit={exc.returncode} "
+                f"backoff_s={delay} state=retrying_unverified",
+                flush=True,
+            )
+            time.sleep(delay)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--base-timeline", type=pathlib.Path, required=True)
@@ -431,13 +473,14 @@ def main() -> None:
         if args.prefetch_only:
             continue
         print(f"[DECODE START] window={window_index}/{len(windows)}", flush=True)
-        run(
+        run_decoder_fetch(
             [
                 str(args.batch_decoder), "fetch", "--start", str(start), "--end", str(end),
                 "--inbox", BASE_INBOX, "--sender", BASE_BATCHER,
                 "--l1", eth_rpc_urls[0], "--l1.beacon", args.beacon_archive,
                 "--out", str(tx_dir), "--concurrent-requests", str(args.concurrency),
-            ]
+            ],
+            eth_rpc_urls,
         )
         print(f"[DECODE DONE] window={window_index}/{len(windows)} elapsed_s={time.monotonic()-capture_started:.1f}", flush=True)
     if args.prefetch_only:
