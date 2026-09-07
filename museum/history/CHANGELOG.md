@@ -291,3 +291,20 @@ Future changes must add a dated entry and preserve formal release snapshots. Nev
 - Validation: full accelerated 600-second logic, pause and stale callback checks,
   photo hashes, navigation, caption, exterior and frozen-edition checks. No claim
   of physical authentication or browser/device visual certification.
+
+## museum-v1.28.0 — 2026-09-07
+
+- Replaces device speech with 22 bundled Xiaoxiao/Aria MP3 recordings. Language
+  switching selects a matching recording and restarts the current narration stop.
+  Chinese synthesis uses +25%, English +15%, with default playback 1.1× and a
+  speed control. Expanded curatorial scripts retain the 600-second route.
+- Short monolingual captions follow the actual recording clock and its word
+  timing. The paragraph panel is removed; tour status moves into the dock.
+  Blocked autoplay offers a sound button and tries muted timed playback.
+- The hand/microscope is now a Three.js scene sprite that moves toward the crystal.
+  Only after this motion does an independent, unobstructed original JPEG appear.
+  There are no props, reticles, filters or annotations over evidence photos.
+  Manual inspection starts only on Verify flaws or the next/previous controls.
+- Separate per-language source, audio and timed-caption records are preserved.
+  Tests cover all recordings/caption text, language changes, rates, seeking,
+  blocked audio, stale requests, 3D movement/photo ordering and cancellation.
