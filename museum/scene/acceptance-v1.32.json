@@ -1,0 +1,17 @@
+{
+  "schema": "trinity-museum.acceptance.v1",
+  "edition": "museum-v1.32.0",
+  "completedAt": "2026-09-08T01:05:14Z",
+  "generatedCommit": "78143d8a8d402f16597cc9bbe8a32976e8ca7545",
+  "workflowRun": 34175134031,
+  "workflowUrl": "https://github.com/thechurchofagi/trinity-accord/actions/runs/34175134031",
+  "artifact": {"id": 10037078769, "sha256": "9c32a433ffc42546d35168bb7fb7a8f7d79db87c0cd8ddc1ae0a6049dcc69cfa"},
+  "browser": [
+    {"viewport": "desktop", "width": 1440, "height": 900, "rooms": 6, "closeViews": 7, "renderedModel": true, "guardianLinks": true, "bilingualAudioLoaded": true, "pageErrors": [], "assetFailures": []},
+    {"viewport": "mobile", "width": 390, "height": 844, "rooms": 6, "closeViews": 7, "renderedModel": true, "guardianLinks": true, "bilingualAudioLoaded": true, "pageErrors": [], "assetFailures": []}
+  ],
+  "regressions": ["captions", "earth_sequence", "exterior", "guided_visit", "language_preference", "music_playback", "navigation", "progressive_loading", "recorded_guides", "spatial_layout", "wall_frames", "word_captions"],
+  "preservation": {"historicalTextAndMediaDigests": "passed", "threeOriginals": "unchanged", "microscopeEvidence": "unchanged", "originalMusicAndLyrics": "unchanged"},
+  "guide": {"plannedSeconds": 540, "stops": 8, "englishModel": "Chatterbox Turbo", "englishVoice": "built-in synthetic conditionals", "chineseVoice": "Xiaoxiao", "independentEnglishAcousticReview": "Whisper small.en with VAD; all 8 accepted", "delivery": "Original 24kHz MP3 bytes, not the 16kHz recognition copy"},
+  "limits": ["Browser viewport emulation is not physical Android/iOS testing.", "Automated speech recognition is not a human listening certificate; individual recognition differences remain in the audio audit.", "The 540-second route excludes user pauses or blocked-media waiting.", "No live Zoom transmission, institutional endorsement, new blockchain consensus validation or production deployment is claimed."]
+}
