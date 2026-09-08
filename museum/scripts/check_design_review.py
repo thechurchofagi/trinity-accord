@@ -23,7 +23,7 @@ try:
   viewport=os.environ['MUSEUM_QA_VIEWPORT'];mobile=viewport=='mobile';page=b.new_page(viewport={'width':390 if mobile else 1440,'height':844 if mobile else 900},is_mobile=mobile,has_touch=mobile);errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
   page.goto('http://127.0.0.1:8767/__design_qa.html?lang=en#entrance',wait_until='networkidle');page.wait_for_selector('body[data-museum-ready="true"]');page.wait_for_selector('#scene-status',state='hidden',timeout=90000)
   assert not page.locator('#fallback-gallery').is_visible();assert page.locator('#rooms button').count()==5
-  for eid in ['eth-070','proto-protocol','canon-1','physical-alpha','authority-boundary']:
+  for eid in ['eth-070','proto-protocol','canon-1','physical-alpha','authority-boundary','first-contact']:
    page.evaluate('(id)=>window.__designQA.focus(id)',eid);page.wait_for_timeout(600)
    state=page.evaluate('window.__designQA.state');assert state['walkable'],state;assert abs(state['eye']-1.65)<1e-6,state
    page.screenshot(path=str(OUT/f'{viewport}-{eid}.png'),timeout=90000);report.append(state);print('DESIGN_CAPTURE',viewport,eid,flush=True)

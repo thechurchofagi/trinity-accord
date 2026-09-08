@@ -42,7 +42,7 @@ await scope.start(crystal,2,{reduced:true,onComplete:()=>photos++});assert.equal
 const start=new THREE.Vector3(1,2,3),end=new THREE.Vector3(1,5,3);assert.deepEqual(microscopePose(0,start,end),start);assert.deepEqual(microscopePose(1,start,end),end);
 const app=fs.readFileSync(new URL('../dist/museum.js',import.meta.url),'utf8');assert.ok(!/speechSynthesis|SpeechSynthesisUtterance/.test(app));
 const photoFunction=app.slice(app.indexOf('function showFlawPhoto('),app.indexOf('async function showFlaw('));assert.equal((photoFunction.match(/<img /g)||[]).length,1);assert.ok(!/microscope-prop|flaw-focus|filter:|<canvas/.test(photoFunction),'No prop, marker or filter in photo rendering');
-console.log('PASS: 16 new bundled language tracks plus preserved manual-inspection recordings, full timed caption coverage, short cues, recording-clock seeks, language switches, faster rates, autoplay recovery, stale requests, 3D movement-before-photo and leave cancellation.');
+console.log('PASS: 24 bundled language tracks plus six manual-inspection recordings, full timed caption coverage, short cues, recording-clock seeks, language switches, faster rates, autoplay recovery, stale requests, 3D movement-before-photo and leave cancellation.');
 
 const model=createMicroscopeModel();let meshes=0;model.traverse(m=>{assert.ok(!m.isSprite);if(m.isMesh){meshes++;assert.equal(m.material.map,null);assert.ok(m.geometry.attributes.position.count>0);}});assert.ok(meshes>30);assert.ok(model.getObjectByName('modelled-gloved-hand'));assert.ok(model.getObjectByName('microscope'));
 for(let t=0;t<=1;t+=.1){const p=microscopePose(t,start,end);assert.equal(p.x,end.x);assert.equal(p.z,end.z);assert.ok(p.y>=start.y&&p.y<=end.y);}

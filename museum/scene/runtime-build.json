@@ -115,8 +115,8 @@
     },
     {
       "path": "dist/museum.js",
-      "bytes": 88903,
-      "sha256": "9ade941835d41f769e95cfb8c77803951095857321e5c3aded268dbe7265e7da"
+      "bytes": 88740,
+      "sha256": "5d8ca0605ed844fab4f9c91b264d392d396d1c9755353988cb662feda01301b4"
     },
     {
       "path": "dist/music-playback.js",
@@ -195,8 +195,8 @@
     },
     {
       "path": "dist/wood-pedestal.js",
-      "bytes": 1520,
-      "sha256": "bd2807e48739c3b78456443b13877d9d071b9ac3a1d029586449b98a56a0bb02"
+      "bytes": 1924,
+      "sha256": "5a9b804c57860c5ec9995e4c917ea02b63cfec8d1332a4ea467a61ee679013ff"
     },
     {
       "path": "dist/word-captions.js",
@@ -211,7 +211,7 @@
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 1083793,
-    "sha256": "306285f279c1498b453b27270f198eb9261055f60dc8d342ecc497953bb65e06"
+    "bytes": 1083980,
+    "sha256": "3f630b8a402bf5c43ce9a3a11010356e60138f40c5b9d4372aba26bf9374831f"
   }
 }
