@@ -34,10 +34,9 @@ s.render.bake.use_pass_direct=True;s.render.bake.use_pass_indirect=True;s.render
 print('BAKE_BEGIN shared geometry',len(layout['architecture']),flush=True);bpy.ops.object.bake(type='DIFFUSE');atlas.filepath_raw=str(O/'spatial-light.png');atlas.file_format='PNG';atlas.save();atlas.pack()
 m=bpy.data.materials.new('Baked spatial light');m.use_nodes=True;nodes=m.node_tree.nodes;nodes.clear();output=nodes.new('ShaderNodeOutputMaterial');em=nodes.new('ShaderNodeEmission');tex=nodes.new('ShaderNodeTexImage');tex.image=atlas;m.node_tree.links.new(tex.outputs['Color'],em.inputs['Color']);m.node_tree.links.new(em.outputs[0],output.inputs['Surface']);joined.data.materials.clear();joined.data.materials.append(m)
 for poly in joined.data.polygons:poly.material_index=0
-# Join small fittings by material. No old artwork mounts or black backboards exist.
-export=[joined]
-for key in ['metal','light']:
- group=[o for o in details if o.data.materials[0]==materials[key]]
+# Resolve groups before joining: join deletes the other Blender object handles.
+export=[joined];groups={key:[o for o in details if o.data.materials[0]==materials[key]] for key in ['metal','light']}
+for key,group in groups.items():
  if not group:continue
  bpy.ops.object.select_all(action='DESELECT')
  for o in group:o.select_set(True)
