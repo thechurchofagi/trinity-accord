@@ -14,7 +14,7 @@ const queue=createResourceQueue(2);let active=0,maximum=0;
 await Promise.all(Array.from({length:8},(_,i)=>queue.add(async()=>{maximum=Math.max(maximum,++active);await new Promise(resolve=>setTimeout(resolve,2));active--;return i;})));
 assert.equal(maximum,2);
 const layout=JSON.parse(fs.readFileSync(new URL('dist/data/gallery-layout.json',root)));
-const hall=createPreviewHall(layout);assert.equal(hall.group.children.length,6);assert.ok(hall.group.children.every(x=>x.isMesh&&!x.material.map));hall.dispose();
+const hall=createPreviewHall(layout);assert.equal(hall.group.children.length,layout.architecture.length);assert.ok(hall.group.children.every(x=>x.isMesh&&!x.material.map));hall.dispose();
 const app=fs.readFileSync(new URL('dist/museum.js',root),'utf8');
 assert.ok(app.includes('roomData=initialData.rooms'));
 assert.ok(app.includes('size:26,width:512,height:384'));
@@ -25,6 +25,6 @@ assert.ok(!app.includes('addCanonicalPrism'));assert.ok(!app.includes('avoidPris
 assert.ok(!app.includes("await new GLTFLoader().loadAsync('./assets/gallery"));
 assert.ok(app.includes('requestAnimationFrame(()=>enhance())'));
 const canon=layout.rooms.flatMap(r=>r.exhibits).filter(e=>e.id.startsWith('canon-'));
-assert.equal(canon.length,3);assert.ok(canon.every(e=>Math.abs(e.x)===4.375&&!e.kind));
+assert.equal(canon.length,3);assert.ok(canon.every(e=>Math.abs(e.x)<7&&!e.kind));
 assert.ok(fs.readFileSync(new URL('dist/index.html',root),'utf8').includes('href="./archive.html"'));
 console.log('PASS: stalled response abort, retry, HTTP failures, bounded image concurrency, immediate untextured hall, three wall text panels, independent reading entry');

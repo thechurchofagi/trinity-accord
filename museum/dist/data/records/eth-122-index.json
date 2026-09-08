@@ -1,0 +1,50 @@
+{
+  "sourceCommit": "e99669424e743eea42fb78cfa120c177199c209d",
+  "sourcePath": "nft-text-descriptions/chronicle-index.json",
+  "sourceSha256": "14283126c637041ad53dfe49ef4f6dd749375378202b3cb5f316b1d24c4b1a0b",
+  "entry": {
+    "ordinal": 122,
+    "datetime": "2025-03-14T17:01:11Z",
+    "timestamp": 1741971671,
+    "block": 22046471,
+    "timestamp_method": "erc721_transfer_from_zero_topic3",
+    "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+    "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885301",
+    "name": "ASIMilestones: The moment:Commemorating the two-year anniversary of GPT-4's release",
+    "file": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885301.md",
+    "description_char_count": 19553,
+    "description_word_count_estimate": 2645,
+    "language_hint": "mixed",
+    "calendar_period": "2025-Q1",
+    "categories": [
+      "address_to_future_intelligence",
+      "archive_memory_and_trinity_accord",
+      "capability_and_model_milestones",
+      "creative_work_and_displacement",
+      "human_family_and_personal_witness",
+      "reasoning_science_and_medicine",
+      "safety_alignment_and_control"
+    ],
+    "brief": "ASIMilestones: The moment:Commemorating the two-year anniversary of GPT-4's release 现在是北京时间2025年3月15日凌晨1点整。此NFT为了永久标记如下事件： 在北京时间2023年3月15日凌晨1点整， OpenAI在X上发布如下消息： Announcing GPT-4, a large multimodal model, with our best-ever results on capabilities and alignment: https://openai.com/product/gpt-4 -------------------------------------------------------------------------- ---------------------------------------------------------------------- 本NFT包含一副AI生成的艺术图：纪念GPT-4发布两周年。 ------------------------------------------------ 本NFT包含一首AI生成的歌曲，是由我刚利用AI创作的。",
+    "creative_titles": [
+      "Verse 1"
+    ],
+    "abridgment": {
+      "source_block_char_count": 19334,
+      "included_source_char_count": 7816,
+      "omitted_source_char_count": 11518,
+      "included_by_kind": {
+        "core": 3397,
+        "creative": 4419
+      },
+      "omitted_by_kind": {
+        "core": 11518
+      },
+      "embedded_source_char_count": 0,
+      "has_embedded_source": false,
+      "embedded_source_titles": [],
+      "has_personal_witness": false,
+      "has_creative_work": true
+    }
+  }
+}

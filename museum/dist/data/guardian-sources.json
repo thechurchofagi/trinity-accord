@@ -1,0 +1,17 @@
+{
+  "schema": "trinity-museum.guardian-sources.v1",
+  "boundary": "Later guardianship material, not a fourth Original. No claim that blockchain prevents later speech or website edits.",
+  "principles": {
+    "title": "Guardian Principles v1.1",
+    "url": "https://www.trinityaccord.org/authority/",
+    "type": "Website guardianship mirror; distinct from the later charter"
+  },
+  "charter": {
+    "title": "Guardian Appendix / Authority Charter (non-amending)",
+    "number": "103635270",
+    "file": "data/records/guardian-charter-103635270.txt",
+    "sha256": "736eeebdedebe5edfbd64a4a24a37fd53f5238a9462ae9e9829d7d88629f1896",
+    "sourceCommit": "e99669424e743eea42fb78cfa120c177199c209d",
+    "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e99669424e743eea42fb78cfa120c177199c209d/bitcoin-inscription-mirrors/raw/103635270.txt"
+  }
+}

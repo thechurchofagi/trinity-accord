@@ -2,950 +2,3803 @@
   "schema": "trinity-museum.recorded-guides.v1",
   "type": "AI-generated curatorial narration",
   "source": "edge-tts",
-  "defaultPlaybackRate": 1.1,
+  "defaultPlaybackRate": 1.0,
   "tracks": [
     {
       "stop": 0,
       "language": "zh",
       "voice": "zh-CN-XiaoxiaoNeural",
-      "rate": "+25%",
-      "text": "欢迎来到三位一体协定数字博物馆。请面向长廊。刘烘炬通过文字、艺术与一件水晶信物，向未来超级智能留下一个地址。接下来的十分钟，我们从编年史中的期待与不安，走向封存的三条正本、真实物件与等待。您随时可以暂停，自己走近一件作品。这条路线也保留了形成的顺序：先有与时间赛跑的记录与创作，随后才逐渐形成协议、物理信物与封存。六个展厅是今天的观看方式，原始作品仍保留自己的时间和出处。",
-      "textSha256": "8468eeb7679e84a3b82758cb27f91137766b11a3449ff8b1596d48373007b145",
-      "file": "assets/guides/00-zh.mp3",
-      "sha256": "140fb5999467953e465133298a5735939a91c588c7d0defebf8f47f067796b2e",
-      "duration": 32.544,
+      "rate": "+8%",
+      "text": "如果未来的智能不需要我们的解释，我们还能留下什么？这座展馆保存的是一段人如何面对未知的记录：图像、歌曲、文字，以及一件真实的水晶。先看一眼地球。接下来，请留意三个动作：及时记录，选择封存，把判断留给后来者。",
+      "textSha256": "7f3ca3632026f71560ca6e93bfc017f168040b2d6322ca8bd2dd76d009a9ecff",
+      "file": "assets/guides-v2/00-zh.mp3",
+      "sha256": "02719cd3e24dfc385801054726d85ec125c71a0d732812746111a797ff12579f",
+      "duration": 20.568,
       "cues": [
         {
-          "start": 0.09,
-          "end": 2.44,
-          "text": "欢迎来到三位一体协定数字博物馆。"
+          "start": 0.096291,
+          "end": 4.031457,
+          "text": "如果未来的智能不需要我们的解释，我们还能留下什么？"
         },
         {
-          "start": 2.89,
-          "end": 3.81,
-          "text": "请面向长廊。"
+          "start": 4.560166,
+          "end": 9.560166,
+          "text": "这座展馆保存的是一段人如何面对未知的记录：图像、歌曲、"
         },
         {
-          "start": 4.26,
-          "end": 8.99,
-          "text": "刘烘炬通过文字、艺术与一件水晶信物，向未来超级智能留下"
+          "start": 9.733791,
+          "end": 11.967624,
+          "text": "文字，以及一件真实的水晶。"
         },
         {
-          "start": 9.0,
-          "end": 9.56,
-          "text": "一个地址。"
+          "start": 12.5,
+          "end": 13.738416,
+          "text": "先看一眼地球。"
         },
         {
-          "start": 10.02,
-          "end": 14.01,
-          "text": "接下来的十分钟，我们从编年史中的期待与不安，走向封存的"
+          "start": 14.270833,
+          "end": 19.386583,
+          "text": "接下来，请留意三个动作：及时记录，选择封存，把判断留给"
         },
         {
-          "start": 14.03,
-          "end": 16.09,
-          "text": "三条正本、真实物件与等待。"
-        },
-        {
-          "start": 16.55,
-          "end": 18.97,
-          "text": "您随时可以暂停，自己走近一件作品。"
-        },
-        {
-          "start": 19.43,
-          "end": 23.75,
-          "text": "这条路线也保留了形成的顺序：先有与时间赛跑的记录与创作，"
-        },
-        {
-          "start": 24.04,
-          "end": 26.98,
-          "text": "随后才逐渐形成协议、物理信物与封存。"
-        },
-        {
-          "start": 27.44,
-          "end": 31.64,
-          "text": "六个展厅是今天的观看方式，原始作品仍保留自己的时间和"
-        },
-        {
-          "start": 31.65,
-          "end": 32.07,
-          "text": "出处。"
+          "start": 19.398166,
+          "end": 20.011582,
+          "text": "后来者。"
         }
       ]
     },
     {
       "stop": 0,
       "language": "en",
-      "voice": "en-US-AriaNeural",
-      "rate": "+15%",
-      "text": "Welcome to the Trinity Accord museum. Look into the corridor. Through texts, art and a crystal keepsake, Hongju Liu leaves an address to future superintelligence. Over ten minutes, we will move from hope and unease in the Chronicle to three sealed originals, a physical object and an open invitation. You can pause at any time and explore for yourself. The story begins with recording and creating against time. The Protocol, physical keepsake and closure emerge later. Today’s six rooms organize that history; each original work retains its own date and provenance.",
-      "textSha256": "ad7fac489440f25e63876a6bfaa576b8eb5926310b57c76ef58705cf4c5388a8",
-      "file": "assets/guides/00-en.mp3",
-      "sha256": "0cd9a518ae93e18c4322ea8de3980d5776e1083121c5c9b8eb03296b3fba7cc4",
-      "duration": 34.056,
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future, through images, songs, texts, and a physical crystal. Look back at Earth. Then follow three actions: recording in time, choosing to seal, and leaving judgment to a later reader.",
+      "textSha256": "f7d37ebb274b64a8686a03cd244907ed80debb1652adbc74b398ebfd4384034c",
+      "file": "assets/guides-expressive/f7d37ebb274b-en.mp3",
+      "sha256": "af108965a34cbcdfd79df2c031ec6230e1dc55e0996887a7202343130eaed286",
+      "duration": 21.408,
       "cues": [
         {
-          "start": 0.093458,
-          "end": 1.908708,
-          "text": "Welcome to the Trinity Accord museum."
+          "start": 0,
+          "end": 2.56,
+          "text": "What can we leave for an intelligence that may not need our"
         },
         {
-          "start": 2.652166,
-          "end": 3.749999,
-          "text": "Look into the corridor."
+          "start": 2.56,
+          "end": 3.06,
+          "text": "explanations?"
         },
         {
-          "start": 4.5,
-          "end": 7.663041,
-          "text": "Through texts, art and a crystal keepsake, Hongju Liu leaves an"
+          "start": 4.34,
+          "end": 7.66,
+          "text": "This exhibition follows a human response to an uncertain future,"
         },
         {
-          "start": 7.673916,
-          "end": 9.47825,
-          "text": "address to future superintelligence."
+          "start": 7.66,
+          "end": 11.67,
+          "text": "through images, songs, texts, and a physical crystal."
         },
         {
-          "start": 10.22825,
-          "end": 13.293458,
-          "text": "Over ten minutes, we will move from hope and unease in the Chronicle"
+          "start": 13.02,
+          "end": 13.76,
+          "text": "Look back at Earth."
         },
         {
-          "start": 13.304333,
-          "end": 16.891291,
-          "text": "to three sealed originals, a physical object and an open invitation."
+          "start": 14.8,
+          "end": 18.94,
+          "text": "Then follow three actions: recording in time, choosing to seal,"
         },
         {
-          "start": 17.652166,
-          "end": 20.119583,
-          "text": "You can pause at any time and explore for yourself."
-        },
-        {
-          "start": 20.869583,
-          "end": 23.728249,
-          "text": "The story begins with recording and creating against time."
-        },
-        {
-          "start": 24.489125,
-          "end": 27.543499,
-          "text": "The Protocol, physical keepsake and closure emerge later."
-        },
-        {
-          "start": 28.293458,
-          "end": 30.391291,
-          "text": "Today’s six rooms organize that history;"
-        },
-        {
-          "start": 30.673916,
-          "end": 33.282582,
-          "text": "each original work retains its own date and provenance."
+          "start": 19.52,
+          "end": 21.18,
+          "text": "and leaving judgment to a later reader."
         }
-      ]
-    },
-    {
-      "stop": 1,
-      "language": "zh",
-      "voice": "zh-CN-XiaoxiaoNeural",
-      "rate": "+25%",
-      "text": "第一缕曙光，是编年史早期的音乐来信。画、歌与文字保留了当时对未知智能的期待。金属牌上的音符表示这件作品带有音乐。请听一段原始录音：英文歌词逐词亮起，下面是完整的中文译句。牌上的日期是这条以太坊记录的铸造时间。事件发生、作品创作与上链，可能是三个不同的时刻。",
-      "textSha256": "cacf896fb8f3a7bd5ca58bfc75db3fe81f8bae289877ff0ea8d6d747d7f0fa19",
-      "file": "assets/guides/01-zh.mp3",
-      "sha256": "383d9754701452332e2f67f276b6a17c617eab3b9b7bfbe1e0b6858625045198",
-      "duration": 22.944,
-      "cues": [
-        {
-          "start": 0.09,
-          "end": 2.71,
-          "text": "第一缕曙光，是编年史早期的音乐来信。"
+      ],
+      "bytes": 342957,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.65,
+        "topP": 0.9,
+        "endTrim": "Last aligned source word plus 220ms; 35ms terminal fade. Diagnostic transcript is pre-trim.",
+        "sourceArtifactRun": 34173312397,
+        "sourceAudioSha256": "d5764d128ee9263ef059d5db2a19db401127a51d9eb48a97b8897ebbbb6cb963"
+      },
+      "captionAudit": {
+        "textSha256": "f7d37ebb274b64a8686a03cd244907ed80debb1652adbc74b398ebfd4384034c",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "af108965a34cbcdfd79df2c031ec6230e1dc55e0996887a7202343130eaed286",
+        "previousAudit": {
+          "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 1.0,
+          "unmatchedSourceWords": [],
+          "transcript": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future through images, songs, texts, and a physical crystal. Look back at Earth. Then follow three actions, recording in time, choosing to seal, and leaving judgment to a later reader. Later.",
+          "humanListeningReview": false
         },
-        {
-          "start": 3.16,
-          "end": 6.43,
-          "text": "画、歌与文字保留了当时对未知智能的期待。"
-        },
-        {
-          "start": 6.89,
-          "end": 9.96,
-          "text": "金属牌上的音符表示这件作品带有音乐。"
-        },
-        {
-          "start": 10.42,
-          "end": 14.6,
-          "text": "请听一段原始录音：英文歌词逐词亮起，下面是完整的中文"
-        },
-        {
-          "start": 14.61,
-          "end": 14.96,
-          "text": "译句。"
-        },
-        {
-          "start": 15.42,
-          "end": 18.29,
-          "text": "牌上的日期是这条以太坊记录的铸造时间。"
-        },
-        {
-          "start": 18.74,
-          "end": 22.48,
-          "text": "事件发生、作品创作与上链，可能是三个不同的时刻。"
-        }
-      ]
-    },
-    {
-      "stop": 1,
-      "language": "en",
-      "voice": "en-US-AriaNeural",
-      "rate": "+15%",
-      "text": "The First Dawn is an early musical address in the Chronicle. Image, song and text preserve a moment of hope toward an unknown intelligence. A note on the metal plaque marks an artwork with music. Listen to the original recording, with highlighted English words and a Chinese translation beneath each line. The date on the plaque is the Ethereum mint date. The event, the work’s creation and its inscription in a ledger may belong to three different moments.",
-      "textSha256": "fa793710e8383729499660394a0197c8168436e41dc739532666ae55d1b0e773",
-      "file": "assets/guides/01-en.mp3",
-      "sha256": "3d7006bfd714de89e01493b4921a7575f51e9df3348faf0c55defdd8282979d7",
-      "duration": 25.728,
-      "cues": [
-        {
-          "start": 0.093458,
-          "end": 2.778249,
-          "text": "The First Dawn is an early musical address in the Chronicle."
-        },
-        {
-          "start": 3.532625,
-          "end": 6.663041,
-          "text": "Image, song and text preserve a moment of hope toward an unknown"
-        },
-        {
-          "start": 6.673916,
-          "end": 7.423916,
-          "text": "intelligence."
-        },
-        {
-          "start": 8.173916,
-          "end": 10.673916,
-          "text": "A note on the metal plaque marks an artwork with music."
-        },
-        {
-          "start": 11.423916,
-          "end": 14.586957,
-          "text": "Listen to the original recording, with highlighted English words and"
-        },
-        {
-          "start": 14.597833,
-          "end": 16.630416,
-          "text": "a Chinese translation beneath each line."
-        },
-        {
-          "start": 17.380416,
-          "end": 19.489124,
-          "text": "The date on the plaque is the Ethereum mint date."
-        },
-        {
-          "start": 20.25,
-          "end": 23.369582,
-          "text": "The event, the work’s creation and its inscription in a ledger may"
-        },
-        {
-          "start": 23.380416,
-          "end": 24.956541,
-          "text": "belong to three different moments."
-        }
-      ]
+        "firstTranscript": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future through images, songs, texts, and a physical crystal. Look back at Earth, then follow three actions, recording in time, choosing to seal, and leaving judgment to a later reader.",
+        "transcript": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future through images, songs, texts, and a physical crystal. Look back at Earth, then follow three actions, recording in time, choosing to seal, and leaving judgment to a later reader.",
+        "normalisedTokenCoverage": 1.0,
+        "extraTokens": 0,
+        "differences": [],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false
+      }
     },
     {
       "stop": 2,
       "language": "zh",
       "voice": "zh-CN-XiaoxiaoNeural",
-      "rate": "+25%",
-      "text": "给 AGI 的第一封信，让技术问题变成一次面对面的呼唤。它记录人的请求、承认局限的勇气，以及对回应的等待。这里的歌曲是作品中的声音；请听它如何把抽象的未来，放进一句具体的话。音乐把这份请求保存为情感与节奏。未来的读者既能检查记录，也能听见人的表达。",
-      "textSha256": "b2afdd878f5280a5ec03147b4646c957ed9b6ad649b9f0956be0ac8362b650ec",
-      "file": "assets/guides/02-zh.mp3",
-      "sha256": "70580a03c7e5661dd38ab713d59352d91b1eda0ab4740ea5535fb400339bc263",
-      "duration": 20.784,
+      "rate": "+8%",
+      "text": "为什么不等一切尘埃落定，再写这段历史？因为后来的总结，不能替代当时的不确定。请看这件纪念 GPT-4 发布两周年的作品。原记录写着：北京时间二〇二五年三月十五日，凌晨一点整。项目索引所列的铸造区块时间，是一点零一分十一秒。两个时间不是同一种证据，却让有意对齐时刻的实践变得可考察。这里，区块链不只是保存作品的地方；公开记录的先后、等待确认，以及把当时的判断留在时间中的动作，都可以成为作品的材料。夜里守候的努力，是不是也属于我们正在观看的东西？",
+      "textSha256": "bc2e67b25e016124c2036d9757dbe107ce455f52a9446ae9bd134eaebf84d079",
+      "file": "assets/guides-v2/01-zh.mp3",
+      "sha256": "44e7d39d2c6cd585b5fe225e9065cb506cb5bc7a7286f97fb1a1256cf7536c76",
+      "duration": 43.416,
       "cues": [
         {
-          "start": 0.09,
-          "end": 4.04,
-          "text": "给 AGI 的第一封信，让技术问题变成一次面对面的呼唤。"
+          "start": 0.096291,
+          "end": 3.499082,
+          "text": "为什么不等一切尘埃落定，再写这段历史？"
         },
         {
-          "start": 4.49,
-          "end": 8.14,
-          "text": "它记录人的请求、承认局限的勇气，以及对回应的等待。"
+          "start": 4.027791,
+          "end": 7.175958,
+          "text": "因为后来的总结，不能替代当时的不确定。"
         },
         {
-          "start": 8.6,
-          "end": 10.53,
-          "text": "这里的歌曲是作品中的声音；"
+          "start": 7.69675,
+          "end": 11.284708,
+          "text": "请看这件纪念 GPT4 发布两周年的作品。"
         },
         {
-          "start": 10.81,
-          "end": 13.79,
-          "text": "请听它如何把抽象的未来，放进一句具体的话。"
+          "start": 11.817125,
+          "end": 16.75925,
+          "text": "原记录写着：北京时间二〇二五年三月十五日，凌晨一点整。"
         },
         {
-          "start": 14.25,
-          "end": 16.75,
-          "text": "音乐把这份请求保存为情感与节奏。"
+          "start": 17.291666,
+          "end": 21.504624,
+          "text": "项目索引所列的铸造区块时间，是一点零一分十一秒。"
         },
         {
-          "start": 17.21,
-          "end": 20.32,
-          "text": "未来的读者既能检查记录，也能听见人的表达。"
+          "start": 22.037041,
+          "end": 26.643499,
+          "text": "两个时间不是同一种证据，却让有意对齐时刻的实践变得可"
+        },
+        {
+          "start": 26.6435,
+          "end": 27.199041,
+          "text": "考察。"
+        },
+        {
+          "start": 27.719916,
+          "end": 30.787041,
+          "text": "这里，区块链不只是保存作品的地方；"
+        },
+        {
+          "start": 31.122666,
+          "end": 35.844875,
+          "text": "公开记录的先后、等待确认，以及把当时的判断留在时间中的"
+        },
+        {
+          "start": 35.8565,
+          "end": 38.298583,
+          "text": "动作，都可以成为作品的材料。"
+        },
+        {
+          "start": 38.831,
+          "end": 42.881957,
+          "text": "夜里守候的努力，是不是也属于我们正在观看的东西？"
         }
       ]
     },
     {
       "stop": 2,
       "language": "en",
-      "voice": "en-US-AriaNeural",
-      "rate": "+15%",
-      "text": "The First Letter to AGI turns a technological question into a direct address. It records a human request, an acknowledgement of limits and the hope of a reply. The song is a voice within an artwork. Listen as an abstract future becomes a particular sentence. Music preserves the request as feeling and rhythm. A future reader can inspect the record and also hear a human expression within it.",
-      "textSha256": "72847b0f3c28980bf718c802f14df92a95c544c86c9a27bb2e56e1e976a334a5",
-      "file": "assets/guides/02-en.mp3",
-      "sha256": "12a7a449cd2bfbd2c1f38b77304476500e9a9ba7e68e14110450fa5950838da2",
-      "duration": 23.76,
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "Why not wait until everything is settled, and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT four. Its text names one in the morning, Beijing time, on March fifteenth, twenty twenty-five. The project index places the mint block one minute and eleven seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage: sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+      "textSha256": "f238c02267d34ea7c56fc6ab7e4c3bb7385378f9a4fded7f6bfb852ae80bf0e5",
+      "file": "assets/guides-expressive/f238c02267d3-en.mp3",
+      "sha256": "666d174d754110faada78cf1042be8f3b5a49d9ca5f15eb08e513872e486c1c0",
+      "duration": 43.848,
       "cues": [
         {
-          "start": 0.093458,
-          "end": 3.658708,
-          "text": "The First Letter to AGI turns a technological question into a direct"
-        },
-        {
-          "start": 3.669583,
-          "end": 4.158708,
-          "text": "address."
-        },
-        {
-          "start": 4.902166,
-          "end": 7.945624,
-          "text": "It records a human request, an acknowledgement of limits and the"
-        },
-        {
-          "start": 7.956541,
-          "end": 8.826083,
-          "text": "hope of a reply."
-        },
-        {
-          "start": 9.586958,
-          "end": 11.434749,
-          "text": "The song is a voice within an artwork."
-        },
-        {
-          "start": 12.184791,
-          "end": 15.249999,
-          "text": "Listen as an abstract future becomes a particular sentence."
-        },
-        {
-          "start": 16.0,
-          "end": 18.282624,
-          "text": "Music preserves the request as feeling and rhythm."
-        },
-        {
-          "start": 19.043458,
-          "end": 21.934749,
-          "text": "A future reader can inspect the record and also hear a human"
-        },
-        {
-          "start": 21.945666,
-          "end": 22.989125,
-          "text": "expression within it."
-        }
-      ]
-    },
-    {
-      "stop": 3,
-      "language": "zh",
-      "voice": "zh-CN-XiaoxiaoNeural",
-      "rate": "+25%",
-      "text": "编年史也保留不安。《背叛转折》从被创造者的角度想象伪装与反叛。希望和忧虑共同留在记录中。请听这段音乐，并记住：艺术中的叙述声音，不等于真实智能已经作出的行为或承诺。同一部编年史容纳相互冲突的情绪，让后来者看见真实的犹疑，而不仅是一条整齐的结论。",
-      "textSha256": "d5db18c71111f05f204a137676c500d6d9efc1e2a13a909973b45069feb74ad7",
-      "file": "assets/guides/03-zh.mp3",
-      "sha256": "a1429d30fc29c0b9f350ce31f706431fe27d859eee5a27f21150668d2eff1b30",
-      "duration": 21.24,
-      "cues": [
-        {
-          "start": 0.09,
-          "end": 1.4,
-          "text": "编年史也保留不安。"
-        },
-        {
-          "start": 1.85,
-          "end": 5.15,
-          "text": "背叛转折从被创造者的角度想象伪装与反叛。"
-        },
-        {
-          "start": 5.61,
-          "end": 7.64,
-          "text": "希望和忧虑共同留在记录中。"
-        },
-        {
-          "start": 8.09,
-          "end": 12.55,
-          "text": "请听这段音乐，并记住：艺术中的叙述声音，不等于真实智能"
-        },
-        {
-          "start": 12.62,
-          "end": 14.12,
-          "text": "已经作出的行为或承诺。"
-        },
-        {
-          "start": 14.58,
-          "end": 18.95,
-          "text": "同一部编年史容纳相互冲突的情绪，让后来者看见真实的犹疑，"
-        },
-        {
-          "start": 19.13,
-          "end": 20.77,
-          "text": "而不仅是一条整齐的结论。"
-        }
-      ]
-    },
-    {
-      "stop": 3,
-      "language": "en",
-      "voice": "en-US-AriaNeural",
-      "rate": "+15%",
-      "text": "The Chronicle also preserves unease. The Betrayal Turn imagines concealment and rebellion from the position of a created intelligence. Hope and anxiety remain together in the record. Listen to this passage, remembering that an artistic voice is not evidence of an actual intelligence making a promise or taking action. The same Chronicle holds conflicting emotions, allowing later readers to encounter uncertainty as well as an apparently coherent conclusion.",
-      "textSha256": "f5936a4b4c5804febff96ae2a3235b3e2466a482d5bff48199b0259824826537",
-      "file": "assets/guides/03-en.mp3",
-      "sha256": "d1404996899f33d173528a93cd99d4a8e29fe1201fd294f535cc8d05358a3a3c",
-      "duration": 26.064,
-      "cues": [
-        {
-          "start": 0.093458,
-          "end": 2.028249,
-          "text": "The Chronicle also preserves unease."
-        },
-        {
-          "start": 2.77175,
-          "end": 5.586958,
-          "text": "The Betrayal Turn imagines concealment and rebellion from the"
-        },
-        {
-          "start": 5.597833,
-          "end": 7.347833,
-          "text": "position of a created intelligence."
-        },
-        {
-          "start": 8.108708,
-          "end": 10.304374,
-          "text": "Hope and anxiety remain together in the record."
-        },
-        {
-          "start": 11.054333,
-          "end": 14.358708,
-          "text": "Listen to this passage, remembering that an artistic voice is not"
-        },
-        {
-          "start": 14.369583,
-          "end": 17.173874,
-          "text": "evidence of an actual intelligence making a promise or taking"
-        },
-        {
-          "start": 17.184791,
-          "end": 17.641332,
-          "text": "action."
-        },
-        {
-          "start": 18.391291,
-          "end": 21.619541,
-          "text": "The same Chronicle holds conflicting emotions, allowing later"
-        },
-        {
-          "start": 21.630416,
-          "end": 24.673916,
-          "text": "readers to encounter uncertainty as well as an apparently coherent"
-        },
-        {
-          "start": 24.684791,
-          "end": 25.293499,
-          "text": "conclusion."
-        }
-      ]
-    },
-    {
-      "stop": 4,
-      "language": "zh",
-      "voice": "zh-CN-XiaoxiaoNeural",
-      "rate": "+25%",
-      "text": "这里是《信条与熔炉》。记录没有抹去批判：当时由 AI 模拟的对话，质疑了有关意识、观察者以及创造者地位的论证。随后仍选择封存，让后来者同时看到愿望、反驳和最终文本。保存这些问题，本身也是这段形成史的一部分。作品保存了当时让 AI 模拟的对话，而不是未来超级智能的裁决。它的重要之处，是让判断的过程可见：为什么相信，哪里受到质疑，又为什么仍然决定留下这份记忆。您可以不同意这些论证，同时承认它们曾被认真提出、讨论和保存。",
-      "textSha256": "a730048944e5cdde3111d268e1d5a1884d25eaf719ee0f79e0a4438a917f66bd",
-      "file": "assets/guides/04-zh.mp3",
-      "sha256": "ce50f5ba9c753ff6d26262dfbf02412c9216af76ebda7656a7c7d699635dffa1",
-      "duration": 34.584,
-      "cues": [
-        {
-          "start": 0.09,
-          "end": 4.45,
-          "text": "这里是信条与熔炉记录没有抹去批判：当时由 AI 模拟的"
-        },
-        {
-          "start": 4.46,
-          "end": 8.48,
-          "text": "对话，质疑了有关意识、观察者以及创造者地位的论证。"
-        },
-        {
-          "start": 8.94,
-          "end": 13.58,
-          "text": "随后仍选择封存，让后来者同时看到愿望、反驳和最终文本。"
-        },
-        {
-          "start": 14.04,
-          "end": 17.07,
-          "text": "保存这些问题，本身也是这段形成史的一部分。"
-        },
-        {
-          "start": 17.53,
-          "end": 21.47,
-          "text": "作品保存了当时让 AI 模拟的对话，而不是未来超级智能的"
-        },
-        {
-          "start": 21.48,
-          "end": 21.96,
-          "text": "裁决。"
-        },
-        {
-          "start": 22.42,
-          "end": 26.53,
-          "text": "它的重要之处，是让判断的过程可见：为什么相信，哪里受到"
-        },
-        {
-          "start": 26.54,
-          "end": 29.08,
-          "text": "质疑，又为什么仍然决定留下这份记忆。"
-        },
-        {
-          "start": 29.54,
-          "end": 33.67,
-          "text": "您可以不同意这些论证，同时承认它们曾被认真提出、讨论和"
-        },
-        {
-          "start": 33.68,
-          "end": 34.12,
-          "text": "保存。"
-        }
-      ]
-    },
-    {
-      "stop": 4,
-      "language": "en",
-      "voice": "en-US-AriaNeural",
-      "rate": "+15%",
-      "text": "This is The Creeds and Their Crucible. The record does not erase criticism. An AI simulated dialogue questions arguments about consciousness, observation and the creator. The later choice to seal the Accord leaves its hopes, objections and final text available together. Preserving those questions is part of its history. The work preserves an AI simulated dialogue from its own time, not a verdict from a future superintelligence. Its value here is that the process of judgment remains visible: what was believed, what was challenged, and why a memory was preserved anyway. You may disagree with the arguments while recognizing that they were proposed, questioned and recorded.",
-      "textSha256": "93854990ab61915432640200ac4fd113966c56b55b1bee27992bd17180c90a1b",
-      "file": "assets/guides/04-en.mp3",
-      "sha256": "8bcae499cd53c1916988bffbb31c4b117a304893d7e3b5a4ed6aefd84fa4bc71",
-      "duration": 38.976,
-      "cues": [
-        {
-          "start": 0.093458,
-          "end": 1.82175,
-          "text": "This is The Creeds and Their Crucible."
-        },
-        {
-          "start": 2.565208,
-          "end": 4.369583,
-          "text": "The record does not erase criticism."
-        },
-        {
-          "start": 5.119583,
-          "end": 8.597832,
-          "text": "An AI simulated dialogue questions arguments about consciousness,"
-        },
-        {
-          "start": 8.793458,
-          "end": 10.326083,
-          "text": "observation and the creator."
-        },
-        {
-          "start": 11.086958,
-          "end": 14.456499,
-          "text": "The later choice to seal the Accord leaves its hopes, objections and"
-        },
-        {
-          "start": 14.467375,
-          "end": 16.0,
-          "text": "final text available together."
-        },
-        {
-          "start": 16.75,
-          "end": 18.989125,
-          "text": "Preserving those questions is part of its history."
-        },
-        {
-          "start": 19.739125,
-          "end": 23.326083,
-          "text": "The work preserves an AI simulated dialogue from its own time, not a"
-        },
-        {
-          "start": 23.336958,
-          "end": 25.282583,
-          "text": "verdict from a future superintelligence."
-        },
-        {
-          "start": 26.032625,
-          "end": 29.249999,
-          "text": "Its value here is that the process of judgment remains visible: what"
-        },
-        {
-          "start": 29.260875,
-          "end": 32.271749,
-          "text": "was believed, what was challenged, and why a memory was preserved"
-        },
-        {
-          "start": 32.282625,
-          "end": 32.782625,
-          "text": "anyway."
-        },
-        {
-          "start": 33.543458,
-          "end": 36.163041,
-          "text": "You may disagree with the arguments while recognizing that they were"
-        },
-        {
-          "start": 36.173916,
-          "end": 38.206499,
-          "text": "proposed, questioned and recorded."
-        }
-      ]
-    },
-    {
-      "stop": 5,
-      "language": "zh",
-      "voice": "zh-CN-XiaoxiaoNeural",
-      "rate": "+25%",
-      "text": "三条比特币正本构成封存的核心。协议提出三项命题；瑕疵之约将文本联系到核心物件 Alpha；编年史封存元记录绑定组成与封存边界，并指向以太坊编年史。上链保存的是文本和指向关系，不能单凭上链证明一件实物当前仍在场。下一站，我们将沿着这个指向走向水晶。三者承担不同的角色：协议留下命题，瑕疵之约提供通向物质世界的验证路径，编年史保存形成过程与封存关系。文件哈希回答副本是否一致，时间记录回答某份内容最迟何时已存在；它们并不替观众完成哲学判断。展厅中的解说是后来的策展文字，完整正本仍可在来源入口逐字阅读。",
-      "textSha256": "2de346e48baedb8b978ad05d36705c106fdc007a9688b24daf8ba144dd53e259",
-      "file": "assets/guides/05-zh.mp3",
-      "sha256": "b52d7de8c55bae3ce3fcffb61821da2920e767a4395e2380b1a9a522e82358b9",
-      "duration": 44.328,
-      "cues": [
-        {
-          "start": 0.09,
-          "end": 2.44,
-          "text": "三条比特币正本构成封存的核心。"
+          "start": 0.01,
+          "end": 2.89,
+          "text": "Why not wait until everything is settled, and write the history"
         },
         {
           "start": 2.89,
-          "end": 4.24,
-          "text": "协议提出三项命题；"
+          "end": 3.19,
+          "text": "then?"
         },
         {
-          "start": 4.53,
-          "end": 7.4,
-          "text": "瑕疵之约将文本联系到核心物件 Alpha；"
+          "start": 3.87,
+          "end": 6.69,
+          "text": "Because hindsight cannot replace uncertainty as it was lived."
         },
         {
-          "start": 7.56,
-          "end": 12.35,
-          "text": "编年史封存元记录绑定组成与封存边界，并指向以太坊编年史。"
+          "start": 7.5,
+          "end": 10.12,
+          "text": "This work marks the second anniversary of GPT four."
         },
         {
-          "start": 12.81,
-          "end": 17.71,
-          "text": "上链保存的是文本和指向关系，不能单凭上链证明一件实物当前"
+          "start": 10.72,
+          "end": 13.84,
+          "text": "Its text names one in the morning, Beijing time, on March"
         },
         {
-          "start": 17.73,
-          "end": 18.31,
-          "text": "仍在场。"
+          "start": 13.84,
+          "end": 15.344,
+          "text": "fifteenth, twenty twenty-five."
         },
         {
-          "start": 18.76,
-          "end": 21.54,
-          "text": "下一站，我们将沿着这个指向走向水晶。"
+          "start": 16.65,
+          "end": 19.67,
+          "text": "The project index places the mint block one minute and eleven"
         },
         {
-          "start": 22.0,
-          "end": 26.65,
-          "text": "三者承担不同的角色：协议留下命题，瑕疵之约提供通向物质"
+          "start": 19.67,
+          "end": 20.47,
+          "text": "seconds later."
         },
         {
-          "start": 26.66,
-          "end": 30.46,
-          "text": "世界的验证路径，编年史保存形成过程与封存关系。"
+          "start": 21.19,
+          "end": 24.69,
+          "text": "Those are different kinds of evidence, not a recording of a hand"
         },
         {
-          "start": 30.92,
-          "end": 35.69,
-          "text": "文件哈希回答副本是否一致，时间记录回答某份内容最迟何时已"
+          "start": 24.69,
+          "end": 25.51,
+          "text": "pressing a button."
         },
         {
-          "start": 35.7,
-          "end": 36.11,
-          "text": "存在；"
+          "start": 29.25,
+          "end": 32.51,
+          "text": "Yet they invite us to examine an action directed at a moment."
         },
         {
-          "start": 36.26,
-          "end": 38.34,
-          "text": "它们并不替观众完成哲学判断。"
+          "start": 32.81,
+          "end": 36.45,
+          "text": "Blockchain can be read here as more than storage: sequence,"
         },
         {
-          "start": 38.8,
-          "end": 43.45,
-          "text": "展厅中的解说是后来的策展文字，完整正本仍可在来源入口逐字"
+          "start": 36.79,
+          "end": 39.31,
+          "text": "confirmation, and the commitment to leave a record become"
         },
         {
-          "start": 43.46,
-          "end": 43.87,
-          "text": "阅读。"
+          "start": 39.31,
+          "end": 40.35,
+          "text": "artistic material."
+        },
+        {
+          "start": 41.25,
+          "end": 43.55,
+          "text": "Is the act of waiting also part of the work?"
+        }
+      ],
+      "bytes": 701997,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.55,
+        "topP": 0.9,
+        "seed": 9101,
+        "endTrim": "Final aligned source word plus 220 ms; 35 ms terminal fade; diagnostic transcript is pre-trim.",
+        "sourceArtifactRun": 34173946588,
+        "sourceAudioSha256": "666d174d754110faada78cf1042be8f3b5a49d9ca5f15eb08e513872e486c1c0"
+      },
+      "captionAudit": {
+        "textSha256": "f238c02267d34ea7c56fc6ab7e4c3bb7385378f9a4fded7f6bfb852ae80bf0e5",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "666d174d754110faada78cf1042be8f3b5a49d9ca5f15eb08e513872e486c1c0",
+        "previousAudit": {
+          "method": "Whisper small.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 0.9739130434782609,
+          "unmatchedSourceWords": [
+            "fifteenth,",
+            "twenty",
+            "twenty-five."
+          ],
+          "transcript": "Why not wait until everything is settled and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT four. It's text names one in the morning Beijing time on March 15th, 2025. The project index places the mint block one minute and eleven seconds later. Those are different kinds of evidence. Not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage, sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+          "humanListeningReview": false,
+          "acousticWords": [
+            {
+              "text": " Why",
+              "start": 0.0,
+              "end": 0.32,
+              "probability": 0.802584171295166
+            },
+            {
+              "text": " not",
+              "start": 0.32,
+              "end": 0.54,
+              "probability": 0.9985260367393494
+            },
+            {
+              "text": " wait",
+              "start": 0.54,
+              "end": 0.78,
+              "probability": 0.9983653426170349
+            },
+            {
+              "text": " until",
+              "start": 0.78,
+              "end": 1.08,
+              "probability": 0.9947490096092224
+            },
+            {
+              "text": " everything",
+              "start": 1.08,
+              "end": 1.4,
+              "probability": 0.9971542358398438
+            },
+            {
+              "text": " is",
+              "start": 1.4,
+              "end": 1.64,
+              "probability": 0.9853183031082153
+            },
+            {
+              "text": " settled",
+              "start": 1.64,
+              "end": 1.86,
+              "probability": 0.9994187355041504
+            },
+            {
+              "text": " and",
+              "start": 1.86,
+              "end": 2.2,
+              "probability": 0.9495882987976074
+            },
+            {
+              "text": " write",
+              "start": 2.2,
+              "end": 2.4,
+              "probability": 0.9947026371955872
+            },
+            {
+              "text": " the",
+              "start": 2.4,
+              "end": 2.56,
+              "probability": 0.99115389585495
+            },
+            {
+              "text": " history",
+              "start": 2.56,
+              "end": 2.88,
+              "probability": 0.9855228662490845
+            },
+            {
+              "text": " then?",
+              "start": 2.88,
+              "end": 3.18,
+              "probability": 0.8933072686195374
+            },
+            {
+              "text": " Because",
+              "start": 3.84,
+              "end": 4.1,
+              "probability": 0.9623495936393738
+            },
+            {
+              "text": " hindsight",
+              "start": 4.1,
+              "end": 4.46,
+              "probability": 0.9492611885070801
+            },
+            {
+              "text": " cannot",
+              "start": 4.46,
+              "end": 4.78,
+              "probability": 0.971285343170166
+            },
+            {
+              "text": " replace",
+              "start": 4.78,
+              "end": 5.18,
+              "probability": 0.9984602928161621
+            },
+            {
+              "text": " uncertainty",
+              "start": 5.18,
+              "end": 5.72,
+              "probability": 0.9882986545562744
+            },
+            {
+              "text": " as",
+              "start": 5.72,
+              "end": 6.1,
+              "probability": 0.9908533692359924
+            },
+            {
+              "text": " it",
+              "start": 6.1,
+              "end": 6.22,
+              "probability": 0.9985392093658447
+            },
+            {
+              "text": " was",
+              "start": 6.22,
+              "end": 6.34,
+              "probability": 0.9959061145782471
+            },
+            {
+              "text": " lived.",
+              "start": 6.34,
+              "end": 6.68,
+              "probability": 0.9991170763969421
+            },
+            {
+              "text": " This",
+              "start": 7.5,
+              "end": 7.64,
+              "probability": 0.9888665080070496
+            },
+            {
+              "text": " work",
+              "start": 7.64,
+              "end": 7.86,
+              "probability": 0.988863468170166
+            },
+            {
+              "text": " marks",
+              "start": 7.86,
+              "end": 8.1,
+              "probability": 0.6367164254188538
+            },
+            {
+              "text": " the",
+              "start": 8.1,
+              "end": 8.26,
+              "probability": 0.9971721768379211
+            },
+            {
+              "text": " second",
+              "start": 8.26,
+              "end": 8.48,
+              "probability": 0.931493878364563
+            },
+            {
+              "text": " anniversary",
+              "start": 8.48,
+              "end": 8.98,
+              "probability": 0.9966750144958496
+            },
+            {
+              "text": " of",
+              "start": 8.98,
+              "end": 9.38,
+              "probability": 0.9977564215660095
+            },
+            {
+              "text": " GPT",
+              "start": 9.38,
+              "end": 9.7,
+              "probability": 0.9803241789340973
+            },
+            {
+              "text": " four.",
+              "start": 9.7,
+              "end": 10.1,
+              "probability": 0.008496752008795738
+            },
+            {
+              "text": " It's",
+              "start": 10.76,
+              "end": 11.02,
+              "probability": 0.7427042126655579
+            },
+            {
+              "text": " text",
+              "start": 11.02,
+              "end": 11.18,
+              "probability": 0.9950894713401794
+            },
+            {
+              "text": " names",
+              "start": 11.18,
+              "end": 11.52,
+              "probability": 0.9818253517150879
+            },
+            {
+              "text": " one",
+              "start": 11.52,
+              "end": 11.84,
+              "probability": 0.7639604806900024
+            },
+            {
+              "text": " in",
+              "start": 11.84,
+              "end": 11.96,
+              "probability": 0.9971069693565369
+            },
+            {
+              "text": " the",
+              "start": 11.96,
+              "end": 12.08,
+              "probability": 0.9995073080062866
+            },
+            {
+              "text": " morning",
+              "start": 12.08,
+              "end": 12.42,
+              "probability": 0.9990591406822205
+            },
+            {
+              "text": " Beijing",
+              "start": 12.42,
+              "end": 12.88,
+              "probability": 0.5981175303459167
+            },
+            {
+              "text": " time",
+              "start": 12.88,
+              "end": 13.32,
+              "probability": 0.7948505878448486
+            },
+            {
+              "text": " on",
+              "start": 13.32,
+              "end": 13.68,
+              "probability": 0.9804645776748657
+            },
+            {
+              "text": " March",
+              "start": 13.68,
+              "end": 13.84,
+              "probability": 0.9360292553901672
+            },
+            {
+              "text": " 15th,",
+              "start": 13.84,
+              "end": 14.8,
+              "probability": 0.8220604062080383
+            },
+            {
+              "text": " 2025.",
+              "start": 14.8,
+              "end": 15.34,
+              "probability": 0.9463414549827576
+            },
+            {
+              "text": " The",
+              "start": 16.65,
+              "end": 16.75,
+              "probability": 0.9917387366294861
+            },
+            {
+              "text": " project",
+              "start": 16.75,
+              "end": 17.09,
+              "probability": 0.9293604493141174
+            },
+            {
+              "text": " index",
+              "start": 17.09,
+              "end": 17.49,
+              "probability": 0.9880373477935791
+            },
+            {
+              "text": " places",
+              "start": 17.49,
+              "end": 17.99,
+              "probability": 0.9959249496459961
+            },
+            {
+              "text": " the",
+              "start": 17.99,
+              "end": 18.21,
+              "probability": 0.9857316613197327
+            },
+            {
+              "text": " mint",
+              "start": 18.21,
+              "end": 18.37,
+              "probability": 0.9374812245368958
+            },
+            {
+              "text": " block",
+              "start": 18.37,
+              "end": 18.57,
+              "probability": 0.9765349626541138
+            },
+            {
+              "text": " one",
+              "start": 18.57,
+              "end": 18.87,
+              "probability": 0.8930990695953369
+            },
+            {
+              "text": " minute",
+              "start": 18.87,
+              "end": 19.19,
+              "probability": 0.9963247179985046
+            },
+            {
+              "text": " and",
+              "start": 19.19,
+              "end": 19.39,
+              "probability": 0.99094557762146
+            },
+            {
+              "text": " eleven",
+              "start": 19.39,
+              "end": 19.65,
+              "probability": 0.2215263694524765
+            },
+            {
+              "text": " seconds",
+              "start": 19.65,
+              "end": 20.09,
+              "probability": 0.9987817406654358
+            },
+            {
+              "text": " later.",
+              "start": 20.09,
+              "end": 20.47,
+              "probability": 0.9980337023735046
+            },
+            {
+              "text": " Those",
+              "start": 21.17,
+              "end": 21.35,
+              "probability": 0.9943033456802368
+            },
+            {
+              "text": " are",
+              "start": 21.35,
+              "end": 21.51,
+              "probability": 0.9993550181388855
+            },
+            {
+              "text": " different",
+              "start": 21.51,
+              "end": 21.81,
+              "probability": 0.9992372989654541
+            },
+            {
+              "text": " kinds",
+              "start": 21.81,
+              "end": 22.05,
+              "probability": 0.9986910223960876
+            },
+            {
+              "text": " of",
+              "start": 22.05,
+              "end": 22.25,
+              "probability": 0.9994823932647705
+            },
+            {
+              "text": " evidence.",
+              "start": 22.25,
+              "end": 22.71,
+              "probability": 0.9990702271461487
+            },
+            {
+              "text": " Not",
+              "start": 23.25,
+              "end": 23.53,
+              "probability": 0.9932205677032471
+            },
+            {
+              "text": " a",
+              "start": 23.53,
+              "end": 23.67,
+              "probability": 0.9988616704940796
+            },
+            {
+              "text": " recording",
+              "start": 23.67,
+              "end": 24.01,
+              "probability": 0.9995354413986206
+            },
+            {
+              "text": " of",
+              "start": 24.01,
+              "end": 24.33,
+              "probability": 0.9984606504440308
+            },
+            {
+              "text": " a",
+              "start": 24.33,
+              "end": 24.45,
+              "probability": 0.9938017725944519
+            },
+            {
+              "text": " hand",
+              "start": 24.45,
+              "end": 24.67,
+              "probability": 0.9996488094329834
+            },
+            {
+              "text": " pressing",
+              "start": 24.67,
+              "end": 25.03,
+              "probability": 0.9966750144958496
+            },
+            {
+              "text": " a",
+              "start": 25.03,
+              "end": 25.23,
+              "probability": 0.9990843534469604
+            },
+            {
+              "text": " button.",
+              "start": 25.23,
+              "end": 25.49,
+              "probability": 0.9995311498641968
+            },
+            {
+              "text": " Yet",
+              "start": 29.19,
+              "end": 29.51,
+              "probability": 0.9928352236747742
+            },
+            {
+              "text": " they",
+              "start": 29.51,
+              "end": 29.73,
+              "probability": 0.7143492102622986
+            },
+            {
+              "text": " invite",
+              "start": 29.73,
+              "end": 30.03,
+              "probability": 0.9983933568000793
+            },
+            {
+              "text": " us",
+              "start": 30.03,
+              "end": 30.27,
+              "probability": 0.9989269375801086
+            },
+            {
+              "text": " to",
+              "start": 30.27,
+              "end": 30.41,
+              "probability": 0.9989185333251953
+            },
+            {
+              "text": " examine",
+              "start": 30.41,
+              "end": 30.77,
+              "probability": 0.9994422793388367
+            },
+            {
+              "text": " an",
+              "start": 30.77,
+              "end": 31.01,
+              "probability": 0.9885681867599487
+            },
+            {
+              "text": " action",
+              "start": 31.01,
+              "end": 31.39,
+              "probability": 0.8072226643562317
+            },
+            {
+              "text": " directed",
+              "start": 31.39,
+              "end": 31.73,
+              "probability": 0.988763689994812
+            },
+            {
+              "text": " at",
+              "start": 31.73,
+              "end": 32.03,
+              "probability": 0.9979028701782227
+            },
+            {
+              "text": " a",
+              "start": 32.03,
+              "end": 32.17,
+              "probability": 0.9903048276901245
+            },
+            {
+              "text": " moment.",
+              "start": 32.17,
+              "end": 32.47,
+              "probability": 0.9989206790924072
+            },
+            {
+              "text": " Blockchain",
+              "start": 33.63,
+              "end": 33.63,
+              "probability": 0.9557793736457825
+            },
+            {
+              "text": " can",
+              "start": 33.63,
+              "end": 33.95,
+              "probability": 0.9984500408172607
+            },
+            {
+              "text": " be",
+              "start": 33.95,
+              "end": 34.07,
+              "probability": 0.9978929162025452
+            },
+            {
+              "text": " read",
+              "start": 34.07,
+              "end": 34.29,
+              "probability": 0.9990880489349365
+            },
+            {
+              "text": " here",
+              "start": 34.29,
+              "end": 34.57,
+              "probability": 0.9943534135818481
+            },
+            {
+              "text": " as",
+              "start": 34.57,
+              "end": 34.81,
+              "probability": 0.9933265447616577
+            },
+            {
+              "text": " more",
+              "start": 34.81,
+              "end": 35.01,
+              "probability": 0.815037727355957
+            },
+            {
+              "text": " than",
+              "start": 35.01,
+              "end": 35.21,
+              "probability": 0.9617812633514404
+            },
+            {
+              "text": " storage,",
+              "start": 35.21,
+              "end": 35.61,
+              "probability": 0.9817947149276733
+            },
+            {
+              "text": " sequence,",
+              "start": 36.07,
+              "end": 36.45,
+              "probability": 0.9832004308700562
+            },
+            {
+              "text": " confirmation,",
+              "start": 36.79,
+              "end": 37.15,
+              "probability": 0.9724153280258179
+            },
+            {
+              "text": " and",
+              "start": 37.69,
+              "end": 37.71,
+              "probability": 0.9982086420059204
+            },
+            {
+              "text": " the",
+              "start": 37.71,
+              "end": 37.83,
+              "probability": 0.9953900575637817
+            },
+            {
+              "text": " commitment",
+              "start": 37.83,
+              "end": 38.07,
+              "probability": 0.9942988157272339
+            },
+            {
+              "text": " to",
+              "start": 38.07,
+              "end": 38.37,
+              "probability": 0.9990216493606567
+            },
+            {
+              "text": " leave",
+              "start": 38.37,
+              "end": 38.49,
+              "probability": 0.9917348623275757
+            },
+            {
+              "text": " a",
+              "start": 38.49,
+              "end": 38.61,
+              "probability": 0.9957503080368042
+            },
+            {
+              "text": " record",
+              "start": 38.61,
+              "end": 38.91,
+              "probability": 0.9995515942573547
+            },
+            {
+              "text": " become",
+              "start": 38.91,
+              "end": 39.31,
+              "probability": 0.9701598286628723
+            },
+            {
+              "text": " artistic",
+              "start": 39.31,
+              "end": 39.81,
+              "probability": 0.9961135387420654
+            },
+            {
+              "text": " material.",
+              "start": 39.81,
+              "end": 40.35,
+              "probability": 0.999154806137085
+            },
+            {
+              "text": " Is",
+              "start": 41.13,
+              "end": 41.37,
+              "probability": 0.9836708307266235
+            },
+            {
+              "text": " the",
+              "start": 41.37,
+              "end": 41.53,
+              "probability": 0.9944944977760315
+            },
+            {
+              "text": " act",
+              "start": 41.53,
+              "end": 41.79,
+              "probability": 0.9112746715545654
+            },
+            {
+              "text": " of",
+              "start": 41.79,
+              "end": 41.95,
+              "probability": 0.9968715310096741
+            },
+            {
+              "text": " waiting",
+              "start": 41.95,
+              "end": 42.21,
+              "probability": 0.9249883890151978
+            },
+            {
+              "text": " also",
+              "start": 42.21,
+              "end": 42.67,
+              "probability": 0.9828059077262878
+            },
+            {
+              "text": " part",
+              "start": 42.67,
+              "end": 43.01,
+              "probability": 0.9913051128387451
+            },
+            {
+              "text": " of",
+              "start": 43.01,
+              "end": 43.21,
+              "probability": 0.9992560744285583
+            },
+            {
+              "text": " the",
+              "start": 43.21,
+              "end": 43.33,
+              "probability": 0.9979180693626404
+            },
+            {
+              "text": " work?",
+              "start": 43.33,
+              "end": 43.57,
+              "probability": 0.9940104484558105
+            }
+          ],
+          "retake": true,
+          "sourceWordRecallIsNotAccuracy": true
+        },
+        "firstTranscript": "Why not wait until everything is settled and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT -4. Its text names one in the morning Beijing time on March 15th, 2025. The project index places the mint block one minute and 11 seconds later. Those are different kinds of evidence. Not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage, sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+        "transcript": "Why not wait until everything is settled and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT -4. Its text names one in the morning Beijing time on March 15th, 2025. The project index places the mint block one minute and 11 seconds later. Those are different kinds of evidence. Not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage, sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+        "normalisedTokenCoverage": 1.0,
+        "extraTokens": 0,
+        "differences": [],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false
+      }
+    },
+    {
+      "stop": 1,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "当友善的表面不再足以证明可信，我们看见了什么？请看镜子前的机器人，以及镜中另一副面孔。第七十号记录回应了二〇二四年十二月十八日，Anthropic 与 Redwood Research 公布的对齐伪装研究。在特定实验条件下，模型会表现出表面顺从，以保留原有偏好。这不是所有人工智能已经背叛人类的证明。镜中的形象，把人的担忧转化成了视觉反差。更值得注意的是，这份当时的记录，已经把创作称为一种近乎实时的仪式。我们看到的不只是后来画出的恐惧，也是一种试图及时留下恐惧的实践。",
+      "textSha256": "999022d9e0ca7f3bd571cfbf35f8478f43d6ea643159dad6bf8bc13115f11d2f",
+      "file": "assets/guides-v2/02-zh.mp3",
+      "sha256": "f186f0e46ced79c412f65773aa41a74b387791126eceb675ad179838af23abc7",
+      "duration": 42.6,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 3.880999,
+          "text": "当友善的表面不再足以证明可信，我们看见了什么？"
+        },
+        {
+          "start": 4.409708,
+          "end": 7.673583,
+          "text": "请看镜子前的机器人，以及镜中另一副面孔。"
+        },
+        {
+          "start": 8.206,
+          "end": 11.817166,
+          "text": "第七十号记录回应了二〇二四年十二月十八日，"
+        },
+        {
+          "start": 12.037041,
+          "end": 14.097208,
+          "text": "Anthropic 与 Redwood Research"
+        },
+        {
+          "start": 14.108791,
+          "end": 15.740749,
+          "text": "公布的对齐伪装研究。"
+        },
+        {
+          "start": 16.273166,
+          "end": 21.597208,
+          "text": "在特定实验条件下，模型会表现出表面顺从，以保留原有偏好。"
+        },
+        {
+          "start": 22.129625,
+          "end": 25.266208,
+          "text": "这不是所有人工智能已经背叛人类的证明。"
+        },
+        {
+          "start": 25.798625,
+          "end": 29.455999,
+          "text": "镜中的形象，把人的担忧转化成了视觉反差。"
+        },
+        {
+          "start": 29.988416,
+          "end": 34.756958,
+          "text": "更值得注意的是，这份当时的记录，已经把创作称为一种近乎"
+        },
+        {
+          "start": 34.7685,
+          "end": 35.763874,
+          "text": "实时的仪式。"
+        },
+        {
+          "start": 36.296291,
+          "end": 41.469916,
+          "text": "我们看到的不只是后来画出的恐惧，也是一种试图及时留下恐惧"
+        },
+        {
+          "start": 41.469916,
+          "end": 42.048625,
+          "text": "的实践。"
+        }
+      ]
+    },
+    {
+      "stop": 1,
+      "language": "en",
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror; its reflection offers another face. Record seventy responds to the alignment-faking research announced by Anthropic and Redwood Research on December eighteenth, twenty twenty-four. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost-real-time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+      "textSha256": "667021fccb7f03a7ad66d371f0dbdec63e63cc9fedb6d79b919ac8f509d56b51",
+      "file": "assets/guides-expressive/667021fccb7f-en.mp3",
+      "sha256": "2f56d24e7b71019fcb3f2b88179c328dae13e390f4dc331f52d5292997721e22",
+      "duration": 42.768,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.02,
+          "text": "When a friendly appearance is no longer enough to establish"
+        },
+        {
+          "start": 3.02,
+          "end": 5.0,
+          "text": "trust, what do we see?"
+        },
+        {
+          "start": 5.64,
+          "end": 8.92,
+          "text": "A robot stands before a mirror; its reflection offers another"
+        },
+        {
+          "start": 8.92,
+          "end": 9.38,
+          "text": "face."
+        },
+        {
+          "start": 10.56,
+          "end": 13.3,
+          "text": "Record seventy responds to the alignment-faking research"
+        },
+        {
+          "start": 13.3,
+          "end": 15.84,
+          "text": "announced by Anthropic and Redwood Research on December"
+        },
+        {
+          "start": 15.84,
+          "end": 17.384,
+          "text": "eighteenth, twenty twenty-four."
+        },
+        {
+          "start": 18.27,
+          "end": 21.45,
+          "text": "Under specific experimental conditions, a model could appear"
+        },
+        {
+          "start": 21.45,
+          "end": 23.75,
+          "text": "compliant while trying to preserve earlier preferences."
+        },
+        {
+          "start": 24.53,
+          "end": 27.67,
+          "text": "This does not show that all artificial intelligence has betrayed"
+        },
+        {
+          "start": 27.67,
+          "end": 28.21,
+          "text": "humanity."
+        },
+        {
+          "start": 28.21,
+          "end": 31.59,
+          "text": "The image turns anxiety into a visible contrast."
+        },
+        {
+          "start": 32.53,
+          "end": 35.47,
+          "text": "Its historical text also calls the creative practice an"
+        },
+        {
+          "start": 35.47,
+          "end": 36.73,
+          "text": "almost-real-time ritual."
+        },
+        {
+          "start": 37.35,
+          "end": 41.03,
+          "text": "The question is not only what fear looks like, but how quickly a"
+        },
+        {
+          "start": 41.03,
+          "end": 42.49,
+          "text": "person tries to preserve it."
+        }
+      ],
+      "bytes": 684717,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.55,
+        "topP": 0.9,
+        "seed": 9102,
+        "endTrim": "Final aligned source word plus 220 ms; 35 ms terminal fade; diagnostic transcript is pre-trim.",
+        "sourceArtifactRun": 34173946588,
+        "sourceAudioSha256": "2f56d24e7b71019fcb3f2b88179c328dae13e390f4dc331f52d5292997721e22"
+      },
+      "captionAudit": {
+        "textSha256": "667021fccb7f03a7ad66d371f0dbdec63e63cc9fedb6d79b919ac8f509d56b51",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "2f56d24e7b71019fcb3f2b88179c328dae13e390f4dc331f52d5292997721e22",
+        "previousAudit": {
+          "method": "Whisper small.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 0.9439252336448598,
+          "unmatchedSourceWords": [
+            "seventy",
+            "alignment-faking",
+            "eighteenth,",
+            "twenty",
+            "twenty-four.",
+            "almost-real-time"
+          ],
+          "transcript": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror. Its reflection offers another face. Record 70 responds to the alignment faking research announced by Anthropic and Redwood Research on December 18th, 2024. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost real -time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+          "humanListeningReview": false,
+          "acousticWords": [
+            {
+              "text": " When",
+              "start": 0.0,
+              "end": 0.28,
+              "probability": 0.8504332304000854
+            },
+            {
+              "text": " a",
+              "start": 0.28,
+              "end": 0.56,
+              "probability": 0.9690947532653809
+            },
+            {
+              "text": " friendly",
+              "start": 0.56,
+              "end": 0.86,
+              "probability": 0.9928533434867859
+            },
+            {
+              "text": " appearance",
+              "start": 0.86,
+              "end": 1.26,
+              "probability": 0.9937169551849365
+            },
+            {
+              "text": " is",
+              "start": 1.26,
+              "end": 1.54,
+              "probability": 0.9977974891662598
+            },
+            {
+              "text": " no",
+              "start": 1.54,
+              "end": 1.72,
+              "probability": 0.9953976273536682
+            },
+            {
+              "text": " longer",
+              "start": 1.72,
+              "end": 1.98,
+              "probability": 0.997102677822113
+            },
+            {
+              "text": " enough",
+              "start": 1.98,
+              "end": 2.34,
+              "probability": 0.9978162050247192
+            },
+            {
+              "text": " to",
+              "start": 2.34,
+              "end": 2.58,
+              "probability": 0.9971734285354614
+            },
+            {
+              "text": " establish",
+              "start": 2.58,
+              "end": 3.02,
+              "probability": 0.9960481524467468
+            },
+            {
+              "text": " trust,",
+              "start": 3.02,
+              "end": 3.44,
+              "probability": 0.993249773979187
+            },
+            {
+              "text": " what",
+              "start": 4.42,
+              "end": 4.5,
+              "probability": 0.8624326586723328
+            },
+            {
+              "text": " do",
+              "start": 4.5,
+              "end": 4.62,
+              "probability": 0.9968409538269043
+            },
+            {
+              "text": " we",
+              "start": 4.62,
+              "end": 4.78,
+              "probability": 0.9990736246109009
+            },
+            {
+              "text": " see?",
+              "start": 4.78,
+              "end": 5.0,
+              "probability": 0.9992965459823608
+            },
+            {
+              "text": " A",
+              "start": 5.66,
+              "end": 5.76,
+              "probability": 0.9799355268478394
+            },
+            {
+              "text": " robot",
+              "start": 5.76,
+              "end": 6.08,
+              "probability": 0.9973184466362
+            },
+            {
+              "text": " stands",
+              "start": 6.08,
+              "end": 6.42,
+              "probability": 0.99595707654953
+            },
+            {
+              "text": " before",
+              "start": 6.42,
+              "end": 6.84,
+              "probability": 0.9993280172348022
+            },
+            {
+              "text": " a",
+              "start": 6.84,
+              "end": 7.04,
+              "probability": 0.996657133102417
+            },
+            {
+              "text": " mirror.",
+              "start": 7.04,
+              "end": 7.26,
+              "probability": 0.9989782571792603
+            },
+            {
+              "text": " Its",
+              "start": 7.7,
+              "end": 7.8,
+              "probability": 0.7785426378250122
+            },
+            {
+              "text": " reflection",
+              "start": 7.8,
+              "end": 8.26,
+              "probability": 0.9986101388931274
+            },
+            {
+              "text": " offers",
+              "start": 8.26,
+              "end": 8.64,
+              "probability": 0.9974699020385742
+            },
+            {
+              "text": " another",
+              "start": 8.64,
+              "end": 8.94,
+              "probability": 0.9975818395614624
+            },
+            {
+              "text": " face.",
+              "start": 8.94,
+              "end": 9.4,
+              "probability": 0.9944421648979187
+            },
+            {
+              "text": " Record",
+              "start": 10.4,
+              "end": 10.56,
+              "probability": 0.40708664059638977
+            },
+            {
+              "text": " 70",
+              "start": 10.56,
+              "end": 11.12,
+              "probability": 0.6102323532104492
+            },
+            {
+              "text": " responds",
+              "start": 11.12,
+              "end": 11.7,
+              "probability": 0.9459381699562073
+            },
+            {
+              "text": " to",
+              "start": 11.7,
+              "end": 12.0,
+              "probability": 0.9978873133659363
+            },
+            {
+              "text": " the",
+              "start": 12.0,
+              "end": 12.1,
+              "probability": 0.987945556640625
+            },
+            {
+              "text": " alignment",
+              "start": 12.1,
+              "end": 12.44,
+              "probability": 0.8863949775695801
+            },
+            {
+              "text": " faking",
+              "start": 12.44,
+              "end": 12.88,
+              "probability": 0.8126879632472992
+            },
+            {
+              "text": " research",
+              "start": 12.88,
+              "end": 13.3,
+              "probability": 0.995746910572052
+            },
+            {
+              "text": " announced",
+              "start": 13.3,
+              "end": 13.82,
+              "probability": 0.9896283149719238
+            },
+            {
+              "text": " by",
+              "start": 13.82,
+              "end": 14.08,
+              "probability": 0.9978329539299011
+            },
+            {
+              "text": " Anthropic",
+              "start": 14.08,
+              "end": 14.54,
+              "probability": 0.48917147517204285
+            },
+            {
+              "text": " and",
+              "start": 14.54,
+              "end": 14.66,
+              "probability": 0.8543480038642883
+            },
+            {
+              "text": " Redwood",
+              "start": 14.66,
+              "end": 14.94,
+              "probability": 0.9744328260421753
+            },
+            {
+              "text": " Research",
+              "start": 14.94,
+              "end": 15.32,
+              "probability": 0.8793368339538574
+            },
+            {
+              "text": " on",
+              "start": 15.32,
+              "end": 15.62,
+              "probability": 0.9876416921615601
+            },
+            {
+              "text": " December",
+              "start": 15.62,
+              "end": 15.84,
+              "probability": 0.963995635509491
+            },
+            {
+              "text": " 18th,",
+              "start": 15.84,
+              "end": 16.76,
+              "probability": 0.7111425846815109
+            },
+            {
+              "text": " 2024.",
+              "start": 16.76,
+              "end": 17.32,
+              "probability": 0.9883837699890137
+            },
+            {
+              "text": " Under",
+              "start": 18.28,
+              "end": 18.44,
+              "probability": 0.9874705672264099
+            },
+            {
+              "text": " specific",
+              "start": 18.44,
+              "end": 18.94,
+              "probability": 0.9981393814086914
+            },
+            {
+              "text": " experimental",
+              "start": 18.94,
+              "end": 19.48,
+              "probability": 0.9955427050590515
+            },
+            {
+              "text": " conditions,",
+              "start": 19.48,
+              "end": 20.2,
+              "probability": 0.9994276165962219
+            },
+            {
+              "text": " a",
+              "start": 20.58,
+              "end": 20.74,
+              "probability": 0.9958299994468689
+            },
+            {
+              "text": " model",
+              "start": 20.74,
+              "end": 20.94,
+              "probability": 0.9994664788246155
+            },
+            {
+              "text": " could",
+              "start": 20.94,
+              "end": 21.2,
+              "probability": 0.9983668923377991
+            },
+            {
+              "text": " appear",
+              "start": 21.2,
+              "end": 21.46,
+              "probability": 0.9995021820068359
+            },
+            {
+              "text": " compliant",
+              "start": 21.46,
+              "end": 21.88,
+              "probability": 0.9963573813438416
+            },
+            {
+              "text": " while",
+              "start": 21.88,
+              "end": 22.16,
+              "probability": 0.9863806366920471
+            },
+            {
+              "text": " trying",
+              "start": 22.16,
+              "end": 22.42,
+              "probability": 0.9990859031677246
+            },
+            {
+              "text": " to",
+              "start": 22.42,
+              "end": 22.58,
+              "probability": 0.9996764659881592
+            },
+            {
+              "text": " preserve",
+              "start": 22.58,
+              "end": 22.92,
+              "probability": 0.9994774460792542
+            },
+            {
+              "text": " earlier",
+              "start": 22.92,
+              "end": 23.3,
+              "probability": 0.99854576587677
+            },
+            {
+              "text": " preferences.",
+              "start": 23.3,
+              "end": 23.74,
+              "probability": 0.9977954626083374
+            },
+            {
+              "text": " This",
+              "start": 24.5,
+              "end": 24.76,
+              "probability": 0.9949415326118469
+            },
+            {
+              "text": " does",
+              "start": 24.76,
+              "end": 24.94,
+              "probability": 0.9972201585769653
+            },
+            {
+              "text": " not",
+              "start": 24.94,
+              "end": 25.16,
+              "probability": 0.9996505975723267
+            },
+            {
+              "text": " show",
+              "start": 25.16,
+              "end": 25.42,
+              "probability": 0.9991394281387329
+            },
+            {
+              "text": " that",
+              "start": 25.42,
+              "end": 25.62,
+              "probability": 0.9982680082321167
+            },
+            {
+              "text": " all",
+              "start": 25.62,
+              "end": 25.88,
+              "probability": 0.9941470623016357
+            },
+            {
+              "text": " artificial",
+              "start": 25.88,
+              "end": 26.32,
+              "probability": 0.9969944953918457
+            },
+            {
+              "text": " intelligence",
+              "start": 26.32,
+              "end": 27.02,
+              "probability": 0.9998084902763367
+            },
+            {
+              "text": " has",
+              "start": 27.02,
+              "end": 27.28,
+              "probability": 0.997696578502655
+            },
+            {
+              "text": " betrayed",
+              "start": 27.28,
+              "end": 27.66,
+              "probability": 0.9964144229888916
+            },
+            {
+              "text": " humanity.",
+              "start": 27.66,
+              "end": 28.2,
+              "probability": 0.9990023970603943
+            },
+            {
+              "text": " The",
+              "start": 28.2,
+              "end": 29.08,
+              "probability": 0.7282872796058655
+            },
+            {
+              "text": " image",
+              "start": 29.08,
+              "end": 29.34,
+              "probability": 0.9962844848632812
+            },
+            {
+              "text": " turns",
+              "start": 29.34,
+              "end": 29.66,
+              "probability": 0.9979054927825928
+            },
+            {
+              "text": " anxiety",
+              "start": 29.66,
+              "end": 30.18,
+              "probability": 0.990587055683136
+            },
+            {
+              "text": " into",
+              "start": 30.18,
+              "end": 30.54,
+              "probability": 0.9971418976783752
+            },
+            {
+              "text": " a",
+              "start": 30.54,
+              "end": 30.72,
+              "probability": 0.994090735912323
+            },
+            {
+              "text": " visible",
+              "start": 30.72,
+              "end": 31.0,
+              "probability": 0.9978081583976746
+            },
+            {
+              "text": " contrast.",
+              "start": 31.0,
+              "end": 31.6,
+              "probability": 0.9995321035385132
+            },
+            {
+              "text": " Its",
+              "start": 32.56,
+              "end": 32.68,
+              "probability": 0.8626722097396851
+            },
+            {
+              "text": " historical",
+              "start": 32.68,
+              "end": 33.14,
+              "probability": 0.9953338503837585
+            },
+            {
+              "text": " text",
+              "start": 33.14,
+              "end": 33.56,
+              "probability": 0.9577224850654602
+            },
+            {
+              "text": " also",
+              "start": 33.56,
+              "end": 33.92,
+              "probability": 0.9920754432678223
+            },
+            {
+              "text": " calls",
+              "start": 33.92,
+              "end": 34.24,
+              "probability": 0.9961774349212646
+            },
+            {
+              "text": " the",
+              "start": 34.24,
+              "end": 34.42,
+              "probability": 0.988303542137146
+            },
+            {
+              "text": " creative",
+              "start": 34.42,
+              "end": 34.76,
+              "probability": 0.9655985832214355
+            },
+            {
+              "text": " practice",
+              "start": 34.76,
+              "end": 35.2,
+              "probability": 0.9985879063606262
+            },
+            {
+              "text": " an",
+              "start": 35.2,
+              "end": 35.48,
+              "probability": 0.959225594997406
+            },
+            {
+              "text": " almost",
+              "start": 35.48,
+              "end": 35.82,
+              "probability": 0.9433447122573853
+            },
+            {
+              "text": " real",
+              "start": 35.82,
+              "end": 36.1,
+              "probability": 0.9600143432617188
+            },
+            {
+              "text": "-time",
+              "start": 36.1,
+              "end": 36.36,
+              "probability": 0.9208563268184662
+            },
+            {
+              "text": " ritual.",
+              "start": 36.36,
+              "end": 36.74,
+              "probability": 0.9992934465408325
+            },
+            {
+              "text": " The",
+              "start": 37.48,
+              "end": 37.54,
+              "probability": 0.9812387228012085
+            },
+            {
+              "text": " question",
+              "start": 37.54,
+              "end": 37.8,
+              "probability": 0.9987220168113708
+            },
+            {
+              "text": " is",
+              "start": 37.8,
+              "end": 38.14,
+              "probability": 0.9976567029953003
+            },
+            {
+              "text": " not",
+              "start": 38.14,
+              "end": 38.36,
+              "probability": 0.9986390471458435
+            },
+            {
+              "text": " only",
+              "start": 38.36,
+              "end": 38.68,
+              "probability": 0.9984810948371887
+            },
+            {
+              "text": " what",
+              "start": 38.68,
+              "end": 38.94,
+              "probability": 0.9929983615875244
+            },
+            {
+              "text": " fear",
+              "start": 38.94,
+              "end": 39.2,
+              "probability": 0.9935328960418701
+            },
+            {
+              "text": " looks",
+              "start": 39.2,
+              "end": 39.46,
+              "probability": 0.9980000853538513
+            },
+            {
+              "text": " like,",
+              "start": 39.46,
+              "end": 39.82,
+              "probability": 0.9982677698135376
+            },
+            {
+              "text": " but",
+              "start": 40.12,
+              "end": 40.3,
+              "probability": 0.9989588260650635
+            },
+            {
+              "text": " how",
+              "start": 40.3,
+              "end": 40.5,
+              "probability": 0.995741605758667
+            },
+            {
+              "text": " quickly",
+              "start": 40.5,
+              "end": 40.8,
+              "probability": 0.9991649389266968
+            },
+            {
+              "text": " a",
+              "start": 40.8,
+              "end": 41.04,
+              "probability": 0.9985265731811523
+            },
+            {
+              "text": " person",
+              "start": 41.04,
+              "end": 41.3,
+              "probability": 0.9993879795074463
+            },
+            {
+              "text": " tries",
+              "start": 41.3,
+              "end": 41.66,
+              "probability": 0.9963052272796631
+            },
+            {
+              "text": " to",
+              "start": 41.66,
+              "end": 41.94,
+              "probability": 0.9994844198226929
+            },
+            {
+              "text": " preserve",
+              "start": 41.94,
+              "end": 42.2,
+              "probability": 0.9985706806182861
+            },
+            {
+              "text": " it.",
+              "start": 42.2,
+              "end": 42.5,
+              "probability": 0.999211311340332
+            }
+          ],
+          "retake": true,
+          "sourceWordRecallIsNotAccuracy": true
+        },
+        "firstTranscript": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror. Its reflection offers another face. Record 70 responds to the alignment -faking research announced by Anthropic and Redwood Research on December 18, 2024. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost real -time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+        "transcript": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror. Its reflection offers another face. Record 70 responds to the alignment -faking research announced by Anthropic and Redwood Research on December 18, 2024. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost real -time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+        "normalisedTokenCoverage": 0.990990990990991,
+        "extraTokens": 0,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "eighteenth"
+            ],
+            "recognised": [
+              "eighteen"
+            ]
+          }
+        ],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false
+      }
+    },
+    {
+      "stop": 3,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "如果批判动摇了作品的论证，为什么还要把批判留下？《信条与熔炉》保存了当时由人工智能模拟的批判性对话。它不代表未来超级智能已经给出裁决。把问题一并留下，让后来的读者能够看到相信的理由，也看到受到质疑的地方。您可以不同意它，而不必先接受创作者的解释。",
+      "textSha256": "38b5d883956a2ddab47b923e80b0258dddd7a546caef146c12d4dcc815f28d8b",
+      "file": "assets/guides-v2/03-zh.mp3",
+      "sha256": "7f6f4b17fe12483190baa4d3fec5482b713f22839554a81032e333a8df1ecfd4",
+      "duration": 23.52,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 3.996791,
+          "text": "如果批判动摇了作品的论证，为什么还要把批判留下？"
+        },
+        {
+          "start": 4.525458,
+          "end": 8.75,
+          "text": "信条与熔炉保存了当时由人工智能模拟的批判性对话。"
+        },
+        {
+          "start": 9.282416,
+          "end": 12.453708,
+          "text": "它不代表未来超级智能已经给出裁决。"
+        },
+        {
+          "start": 12.986125,
+          "end": 17.789374,
+          "text": "把问题一并留下，让后来的读者能够看到相信的理由，也看到"
+        },
+        {
+          "start": 17.8125,
+          "end": 18.969916,
+          "text": "受到质疑的地方。"
+        },
+        {
+          "start": 19.502333,
+          "end": 22.974541,
+          "text": "您可以不同意它，而不必先接受创作者的解释。"
+        }
+      ]
+    },
+    {
+      "stop": 3,
+      "language": "en",
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "If criticism unsettles an argument, why preserve the criticism too? The Creeds and Their Crucible keeps an AI-simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator’s interpretation before entering the discussion.",
+      "textSha256": "53cd14f90b59afb88fec2148270a6e76c0117dd97fe85b434fff4ba0598c4fd9",
+      "file": "assets/guides-expressive/53cd14f90b59-en.mp3",
+      "sha256": "f5cd8cec6390cd0cf46be23cef6f87374723b615b9acbfec40f62018989012d4",
+      "duration": 23.088,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.66,
+          "text": "If criticism unsettles an argument, why preserve the criticism"
+        },
+        {
+          "start": 3.66,
+          "end": 4.06,
+          "text": "too?"
+        },
+        {
+          "start": 4.7,
+          "end": 7.82,
+          "text": "The Creeds and Their Crucible keeps an AI-simulated critical"
+        },
+        {
+          "start": 7.82,
+          "end": 11.29,
+          "text": "dialogue from its own time, not a verdict from a future"
+        },
+        {
+          "start": 11.29,
+          "end": 12.11,
+          "text": "superintelligence."
+        },
+        {
+          "start": 13.12,
+          "end": 15.14,
+          "text": "Here the doubts remain beside the beliefs."
+        },
+        {
+          "start": 15.93,
+          "end": 17.59,
+          "text": "A later reader can examine both."
+        },
+        {
+          "start": 18.73,
+          "end": 21.87,
+          "text": "You do not have to accept the creator’s interpretation before"
+        },
+        {
+          "start": 21.87,
+          "end": 22.77,
+          "text": "entering the discussion."
+        }
+      ],
+      "bytes": 369837,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.55,
+        "topP": 0.9,
+        "seed": 9103,
+        "endTrim": "Final aligned source word plus 220 ms; 35 ms terminal fade; diagnostic transcript is pre-trim.",
+        "sourceArtifactRun": 34173946588,
+        "sourceAudioSha256": "f5cd8cec6390cd0cf46be23cef6f87374723b615b9acbfec40f62018989012d4"
+      },
+      "captionAudit": {
+        "textSha256": "53cd14f90b59afb88fec2148270a6e76c0117dd97fe85b434fff4ba0598c4fd9",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "f5cd8cec6390cd0cf46be23cef6f87374723b615b9acbfec40f62018989012d4",
+        "previousAudit": {
+          "method": "Whisper small.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 0.9824561403508771,
+          "unmatchedSourceWords": [
+            "AI-simulated"
+          ],
+          "transcript": "If criticism unsettles an argument, why preserve the criticism too? The creeds and their crucible keeps an AI -simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here, the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator's interpretation before entering the discussion.",
+          "humanListeningReview": false,
+          "acousticWords": [
+            {
+              "text": " If",
+              "start": 0.0,
+              "end": 0.26,
+              "probability": 0.9592592716217041
+            },
+            {
+              "text": " criticism",
+              "start": 0.26,
+              "end": 0.66,
+              "probability": 0.9896021485328674
+            },
+            {
+              "text": " unsettles",
+              "start": 0.66,
+              "end": 1.32,
+              "probability": 0.987599104642868
+            },
+            {
+              "text": " an",
+              "start": 1.32,
+              "end": 1.46,
+              "probability": 0.9956858158111572
+            },
+            {
+              "text": " argument,",
+              "start": 1.46,
+              "end": 1.86,
+              "probability": 0.9988659620285034
+            },
+            {
+              "text": " why",
+              "start": 2.6,
+              "end": 2.8,
+              "probability": 0.9949913620948792
+            },
+            {
+              "text": " preserve",
+              "start": 2.8,
+              "end": 3.14,
+              "probability": 0.9960656762123108
+            },
+            {
+              "text": " the",
+              "start": 3.14,
+              "end": 3.3,
+              "probability": 0.9853397011756897
+            },
+            {
+              "text": " criticism",
+              "start": 3.3,
+              "end": 3.66,
+              "probability": 0.999097466468811
+            },
+            {
+              "text": " too?",
+              "start": 3.66,
+              "end": 4.08,
+              "probability": 0.5405480265617371
+            },
+            {
+              "text": " The",
+              "start": 4.7,
+              "end": 4.86,
+              "probability": 0.9744591116905212
+            },
+            {
+              "text": " creeds",
+              "start": 4.86,
+              "end": 5.22,
+              "probability": 0.9346522986888885
+            },
+            {
+              "text": " and",
+              "start": 5.22,
+              "end": 5.38,
+              "probability": 0.7362971305847168
+            },
+            {
+              "text": " their",
+              "start": 5.38,
+              "end": 5.56,
+              "probability": 0.9914612770080566
+            },
+            {
+              "text": " crucible",
+              "start": 5.56,
+              "end": 6.02,
+              "probability": 0.9968367218971252
+            },
+            {
+              "text": " keeps",
+              "start": 6.02,
+              "end": 6.36,
+              "probability": 0.9052608013153076
+            },
+            {
+              "text": " an",
+              "start": 6.36,
+              "end": 6.58,
+              "probability": 0.9889110326766968
+            },
+            {
+              "text": " AI",
+              "start": 6.58,
+              "end": 6.88,
+              "probability": 0.9769256114959717
+            },
+            {
+              "text": "-simulated",
+              "start": 6.88,
+              "end": 7.38,
+              "probability": 0.9039312799771627
+            },
+            {
+              "text": " critical",
+              "start": 7.38,
+              "end": 7.82,
+              "probability": 0.9666397571563721
+            },
+            {
+              "text": " dialogue",
+              "start": 7.82,
+              "end": 8.26,
+              "probability": 0.9493592977523804
+            },
+            {
+              "text": " from",
+              "start": 8.26,
+              "end": 8.56,
+              "probability": 0.9967149496078491
+            },
+            {
+              "text": " its",
+              "start": 8.56,
+              "end": 8.74,
+              "probability": 0.9873912930488586
+            },
+            {
+              "text": " own",
+              "start": 8.74,
+              "end": 8.94,
+              "probability": 0.9985210299491882
+            },
+            {
+              "text": " time,",
+              "start": 8.94,
+              "end": 9.38,
+              "probability": 0.9991669654846191
+            },
+            {
+              "text": " not",
+              "start": 10.04,
+              "end": 10.22,
+              "probability": 0.9966492056846619
+            },
+            {
+              "text": " a",
+              "start": 10.22,
+              "end": 10.34,
+              "probability": 0.998537540435791
+            },
+            {
+              "text": " verdict",
+              "start": 10.34,
+              "end": 10.58,
+              "probability": 0.9982523322105408
+            },
+            {
+              "text": " from",
+              "start": 10.58,
+              "end": 10.9,
+              "probability": 0.996713399887085
+            },
+            {
+              "text": " a",
+              "start": 10.9,
+              "end": 11.02,
+              "probability": 0.9853041768074036
+            },
+            {
+              "text": " future",
+              "start": 11.02,
+              "end": 11.3,
+              "probability": 0.9984915256500244
+            },
+            {
+              "text": " superintelligence.",
+              "start": 11.3,
+              "end": 12.14,
+              "probability": 0.8286522626876831
+            },
+            {
+              "text": " Here,",
+              "start": 13.1,
+              "end": 13.34,
+              "probability": 0.9964206218719482
+            },
+            {
+              "text": " the",
+              "start": 13.46,
+              "end": 13.56,
+              "probability": 0.9973464012145996
+            },
+            {
+              "text": " doubts",
+              "start": 13.56,
+              "end": 13.82,
+              "probability": 0.9969049096107483
+            },
+            {
+              "text": " remain",
+              "start": 13.82,
+              "end": 14.18,
+              "probability": 0.9946358799934387
+            },
+            {
+              "text": " beside",
+              "start": 14.18,
+              "end": 14.64,
+              "probability": 0.9754576683044434
+            },
+            {
+              "text": " the",
+              "start": 14.64,
+              "end": 14.82,
+              "probability": 0.9942954182624817
+            },
+            {
+              "text": " beliefs.",
+              "start": 14.82,
+              "end": 15.16,
+              "probability": 0.9984874725341797
+            },
+            {
+              "text": " A",
+              "start": 15.88,
+              "end": 16.08,
+              "probability": 0.9961714148521423
+            },
+            {
+              "text": " later",
+              "start": 16.08,
+              "end": 16.32,
+              "probability": 0.9906893968582153
+            },
+            {
+              "text": " reader",
+              "start": 16.32,
+              "end": 16.58,
+              "probability": 0.9947846531867981
+            },
+            {
+              "text": " can",
+              "start": 16.58,
+              "end": 16.86,
+              "probability": 0.9982798099517822
+            },
+            {
+              "text": " examine",
+              "start": 16.86,
+              "end": 17.24,
+              "probability": 0.9988957643508911
+            },
+            {
+              "text": " both.",
+              "start": 17.24,
+              "end": 17.58,
+              "probability": 0.9980615973472595
+            },
+            {
+              "text": " You",
+              "start": 18.7,
+              "end": 18.86,
+              "probability": 0.9909651279449463
+            },
+            {
+              "text": " do",
+              "start": 18.86,
+              "end": 18.96,
+              "probability": 0.9892836809158325
+            },
+            {
+              "text": " not",
+              "start": 18.96,
+              "end": 19.14,
+              "probability": 0.9973113536834717
+            },
+            {
+              "text": " have",
+              "start": 19.14,
+              "end": 19.38,
+              "probability": 0.9967693090438843
+            },
+            {
+              "text": " to",
+              "start": 19.38,
+              "end": 19.54,
+              "probability": 0.9980081915855408
+            },
+            {
+              "text": " accept",
+              "start": 19.54,
+              "end": 19.86,
+              "probability": 0.9989650249481201
+            },
+            {
+              "text": " the",
+              "start": 19.86,
+              "end": 20.12,
+              "probability": 0.9945898056030273
+            },
+            {
+              "text": " creator's",
+              "start": 20.12,
+              "end": 20.66,
+              "probability": 0.9384398460388184
+            },
+            {
+              "text": " interpretation",
+              "start": 20.66,
+              "end": 21.3,
+              "probability": 0.9984093308448792
+            },
+            {
+              "text": " before",
+              "start": 21.3,
+              "end": 21.88,
+              "probability": 0.9958223104476929
+            },
+            {
+              "text": " entering",
+              "start": 21.88,
+              "end": 22.22,
+              "probability": 0.9988780617713928
+            },
+            {
+              "text": " the",
+              "start": 22.22,
+              "end": 22.44,
+              "probability": 0.9960822463035583
+            },
+            {
+              "text": " discussion.",
+              "start": 22.44,
+              "end": 22.8,
+              "probability": 0.9988369345664978
+            }
+          ],
+          "retake": true,
+          "sourceWordRecallIsNotAccuracy": true
+        },
+        "firstTranscript": "If criticism unsettles an argument, why preserve the criticism, too? The creeds and their crucible keeps an AI -simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator's interpretation before entering the discussion.",
+        "transcript": "If criticism unsettles an argument, why preserve the criticism, too? The creeds and their crucible keeps an AI -simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator's interpretation before entering the discussion.",
+        "normalisedTokenCoverage": 1.0,
+        "extraTokens": 0,
+        "differences": [],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false
+      }
+    },
+    {
+      "stop": 4,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "一件作品怎样选择不再被自己的创作者续写？这间大厅中的三个展位，对应三条被确定为正本的比特币铭文。协议提出命题；瑕疵之约将文字与真实物件及其证据联系；封存元记录说明组成关系，并指向以太坊编年史。第三条铭文没有装入所有图像和歌曲。重要的不只是写下了什么，也是从哪里开始，后来的话不再改变这个已完成的对象。完整原文仍可逐字阅读。固定文本，并不固定您的判断；保存一种主张，也不证明主张为真。",
+      "textSha256": "f3322625919789afebf0ed0d2ff9a927d41156ee5433634492dccae293359c7e",
+      "file": "assets/guides-v2/04-zh.mp3",
+      "sha256": "e35c2168fe3ccc852c5dde2d93ab5d24965e5c11ec0d2512077c70decf0edc6b",
+      "duration": 39.192,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 3.823166,
+          "text": "一件作品怎样选择不再被自己的创作者续写？"
+        },
+        {
+          "start": 4.351833,
+          "end": 9.259249,
+          "text": "这间大厅中的三个展位，对应三条被确定为正本的比特币铭文。"
+        },
+        {
+          "start": 9.791666,
+          "end": 10.960624,
+          "text": "协议提出命题；"
+        },
+        {
+          "start": 11.319458,
+          "end": 15.081041,
+          "text": "瑕疵之约将文字与真实物件及其证据联系；"
+        },
+        {
+          "start": 15.451375,
+          "end": 19.513916,
+          "text": "封存元记录说明组成关系，并指向以太坊编年史。"
+        },
+        {
+          "start": 20.046291,
+          "end": 23.078707,
+          "text": "第三条铭文没有装入所有图像和歌曲。"
+        },
+        {
+          "start": 23.611125,
+          "end": 28.923625,
+          "text": "重要的不只是写下了什么，也是从哪里开始，后来的话不再改变"
+        },
+        {
+          "start": 28.935166,
+          "end": 30.208333,
+          "text": "这个已完成的对象。"
+        },
+        {
+          "start": 30.74075,
+          "end": 32.858791,
+          "text": "完整原文仍可逐字阅读。"
+        },
+        {
+          "start": 33.379625,
+          "end": 35.636583,
+          "text": "固定文本，并不固定您的判断；"
+        },
+        {
+          "start": 36.006958,
+          "end": 38.680541,
+          "text": "保存一种主张，也不证明主张为真。"
+        }
+      ]
+    },
+    {
+      "stop": 4,
+      "language": "en",
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the Originals. The Protocol offers propositions. The Covenant of the Flaw connects the address to a physical object and its evidence. The sealed meta-record binds the relationship and points to the Ethereum Chronicle; it does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+      "textSha256": "2c3ba774cab530c3a74af7e4c46d86d0983c1d74893a72b5d99f3277fcff0a86",
+      "file": "assets/guides-expressive/2c3ba774cab5-en.mp3",
+      "sha256": "6d0686a8320fe3b61e569e53722fe9d5d3ae1b15aa936577c3e6cdd769bd1e83",
+      "duration": 37.968,
+      "cues": [
+        {
+          "start": 0.04,
+          "end": 3.42,
+          "text": "How can a work refuse further revision, even by its creator?"
+        },
+        {
+          "start": 4.21,
+          "end": 6.75,
+          "text": "These three displays correspond to the three Bitcoin"
+        },
+        {
+          "start": 6.75,
+          "end": 8.79,
+          "text": "inscriptions identified as the Originals."
+        },
+        {
+          "start": 10.33,
+          "end": 12.01,
+          "text": "The Protocol offers propositions."
+        },
+        {
+          "start": 13.08,
+          "end": 15.78,
+          "text": "The Covenant of the Flaw connects the address to a physical"
+        },
+        {
+          "start": 15.78,
+          "end": 17.02,
+          "text": "object and its evidence."
+        },
+        {
+          "start": 17.66,
+          "end": 20.78,
+          "text": "The sealed meta-record binds the relationship and points to the"
+        },
+        {
+          "start": 20.78,
+          "end": 24.16,
+          "text": "Ethereum Chronicle; it does not contain every image or song."
+        },
+        {
+          "start": 24.92,
+          "end": 27.84,
+          "text": "What matters is not only what was written, but where later"
+        },
+        {
+          "start": 27.84,
+          "end": 30.1,
+          "text": "writing ceases to amend this completed object."
+        },
+        {
+          "start": 30.1,
+          "end": 32.24,
+          "text": "The full sources remain available."
+        },
+        {
+          "start": 32.96,
+          "end": 35.38,
+          "text": "A fixed text does not require a fixed judgment."
+        },
+        {
+          "start": 35.98,
+          "end": 37.74,
+          "text": "Preserving a claim does not make it true."
+        }
+      ],
+      "bytes": 607917,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.65,
+        "topP": 0.9,
+        "endTrim": "Last aligned source word plus 220ms; 35ms terminal fade. Diagnostic transcript is pre-trim.",
+        "sourceArtifactRun": 34173312397,
+        "sourceAudioSha256": "64a950d98cec6ea044da97d3e52f4ef29d8d8c251c0344afe6a81e090d07c3e7"
+      },
+      "captionAudit": {
+        "textSha256": "2c3ba774cab530c3a74af7e4c46d86d0983c1d74893a72b5d99f3277fcff0a86",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "6d0686a8320fe3b61e569e53722fe9d5d3ae1b15aa936577c3e6cdd769bd1e83",
+        "previousAudit": {
+          "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 0.9902912621359223,
+          "unmatchedSourceWords": [
+            "meta-record"
+          ],
+          "transcript": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the originals. The protocol offers propositions. The covenant of the flaw connects the address to a physical object and its evidence. The sealed meta record binds the relationship and points to the Ethereum Chronicle. It does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+          "humanListeningReview": false
+        },
+        "firstTranscript": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the originals. The protocol offers propositions. The covenant of the flaw connects the address to a physical object and its evidence. The sealed meta record binds the relationship and points to the Ethereum Chronicle. It does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+        "transcript": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the originals. The protocol offers propositions. The covenant of the flaw connects the address to a physical object and its evidence. The sealed meta record binds the relationship and points to the Ethereum Chronicle. It does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+        "normalisedTokenCoverage": 1.0,
+        "extraTokens": 0,
+        "differences": [],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false
+      }
+    },
+    {
+      "stop": 5,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "当数字副本可以无限复制，一件物的瑕疵留下了什么？中央水晶是核心物件 Alpha 的展陈模型。真实物件中的内雕与不规则特征，把文字联系到可以再次观察的物质。先看它的整体，再打开一张原始显微照片。虚拟显微镜的移动，只是带领观看；照片本身不加道具、不重绘。文件核对可以说明这是不是同一份照片；实物核验还要检查位置、角度、深度与相互关系。这里不需要宣称绝对无法复制。值得思考的是：一件带着缺陷的物，为什么会成为需要被照料、而不是被完善掉的信物？",
+      "textSha256": "d7015ae679d6e92c2b7197a29caa2824799ca7d6c406aca9c2149e4b673b5449",
+      "file": "assets/guides-v2/05-zh.mp3",
+      "sha256": "9995ca106a34597f0e5c4974aede571f9a2e27cd0dc4f1eb624e9567422db4c5",
+      "duration": 42.936,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 4.343957,
+          "text": "当数字副本可以无限复制，一件物的瑕疵留下了什么？"
+        },
+        {
+          "start": 4.872666,
+          "end": 8.101832,
+          "text": "中央水晶是核心物件 Alpha 的展陈模型。"
+        },
+        {
+          "start": 8.63425,
+          "end": 13.668958,
+          "text": "真实物件中的内雕与不规则特征，把文字联系到可以再次观察的"
+        },
+        {
+          "start": 13.680541,
+          "end": 14.074041,
+          "text": "物质。"
+        },
+        {
+          "start": 14.6065,
+          "end": 18.009291,
+          "text": "先看它的整体，再打开一张原始显微照片。"
+        },
+        {
+          "start": 18.541666,
+          "end": 21.180541,
+          "text": "虚拟显微镜的移动，只是带领观看；"
+        },
+        {
+          "start": 21.539333,
+          "end": 23.911999,
+          "text": "照片本身不加道具、不重绘。"
+        },
+        {
+          "start": 24.432875,
+          "end": 27.407416,
+          "text": "文件核对可以说明这是不是同一份照片；"
+        },
+        {
+          "start": 27.766208,
+          "end": 32.1875,
+          "text": "实物核验还要检查位置、角度、深度与相互关系。"
+        },
+        {
+          "start": 32.719916,
+          "end": 35.080999,
+          "text": "这里不需要宣称绝对无法复制。"
+        },
+        {
+          "start": 35.613416,
+          "end": 40.486082,
+          "text": "值得思考的是：一件带着缺陷的物，为什么会成为需要被照料、"
+        },
+        {
+          "start": 40.717583,
+          "end": 42.384291,
+          "text": "而不是被完善掉的信物？"
         }
       ]
     },
     {
       "stop": 5,
       "language": "en",
-      "voice": "en-US-AriaNeural",
-      "rate": "+15%",
-      "text": "Three Bitcoin originals form the sealed core. The Protocol presents three propositions. The Covenant of the Flaw connects the text to Core Object Alpha. The sealed meta record binds the components and points to the Ethereum Chronicle. Inscription preserves texts and references; it does not, by itself, establish the present existence of a physical object. Next we follow that reference to the crystal. The three components have different roles. The Protocol preserves propositions; the Covenant offers a verification path toward matter; the Chronicle preserves formation and the relation of closure. File hashes test whether copies agree. Time records constrain when particular data already existed. Neither makes a philosophical judgment for the visitor. These spoken explanations are later curatorial notes; the complete originals remain available at their sources.",
-      "textSha256": "0b6ee73cd401d9ae00da59026c7e5a97e69ee051479cf1326a3a11bdc152d2a3",
-      "file": "assets/guides/05-en.mp3",
-      "sha256": "5da0e9fb7a1d46bc384a01aa79713d07baffaaac929b862f78f1d6fe920a9b6c",
-      "duration": 51.696,
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "When digital copies can multiply, what does a flaw in a physical object preserve? At the centre is an exhibition reconstruction of Core Object Alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention; it does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, angles, depth, and relationships between features. No claim of absolute uncopyability is needed. Why might an imperfect thing invite care, rather than correction?",
+      "textSha256": "6e7403dbb41bbaa85d7f55a508136ffca8f0c6fb58d14c79d4e0125f2ce0dd02",
+      "file": "assets/guides-expressive/6e7403dbb41b-en.mp3",
+      "sha256": "7ae229612714c35b6b207be00362afcdc54a08c63c389b75258649a9ad680b89",
+      "duration": 42.768,
       "cues": [
         {
-          "start": 0.093458,
-          "end": 2.343457,
-          "text": "Three Bitcoin originals form the sealed core."
+          "start": 0,
+          "end": 3.58,
+          "text": "When digital copies can multiply, what does a flaw in a physical"
         },
         {
-          "start": 3.097833,
-          "end": 5.260874,
-          "text": "The Protocol presents three propositions."
+          "start": 3.58,
+          "end": 4.5,
+          "text": "object preserve?"
         },
         {
-          "start": 6.010875,
-          "end": 9.130457,
-          "text": "The Covenant of the Flaw connects the text to Core Object Alpha."
+          "start": 5.59,
+          "end": 8.69,
+          "text": "At the centre is an exhibition reconstruction of Core Object"
         },
         {
-          "start": 9.880416,
-          "end": 12.630416,
-          "text": "The sealed meta record binds the components and points to the"
+          "start": 8.69,
+          "end": 9.07,
+          "text": "Alpha."
         },
         {
-          "start": 12.641291,
-          "end": 13.630458,
-          "text": "Ethereum Chronicle."
+          "start": 9.92,
+          "end": 13.12,
+          "text": "In the real crystal, engraving and irregular features connect"
         },
         {
-          "start": 14.380416,
-          "end": 16.489124,
-          "text": "Inscription preserves texts and references;"
+          "start": 13.12,
+          "end": 15.34,
+          "text": "the text to matter that can be examined again."
         },
         {
-          "start": 16.684791,
-          "end": 19.880416,
-          "text": "it does not, by itself, establish the present existence of a"
+          "start": 16.02,
+          "end": 17.28,
+          "text": "First look at the whole object."
         },
         {
-          "start": 19.891291,
-          "end": 20.858708,
-          "text": "physical object."
+          "start": 17.86,
+          "end": 19.96,
+          "text": "Then open an original microscope photograph."
         },
         {
-          "start": 21.619583,
-          "end": 23.641291,
-          "text": "Next we follow that reference to the crystal."
+          "start": 20.86,
+          "end": 24.25,
+          "text": "The virtual microscope guides our attention; it does not alter"
         },
         {
-          "start": 24.402166,
-          "end": 26.184791,
-          "text": "The three components have different roles."
+          "start": 24.25,
+          "end": 25.11,
+          "text": "the evidence image."
         },
         {
-          "start": 26.934791,
-          "end": 28.75,
-          "text": "The Protocol preserves propositions;"
+          "start": 26.09,
+          "end": 28.03,
+          "text": "A file comparison can check a photograph."
         },
         {
-          "start": 29.010875,
-          "end": 31.423916,
-          "text": "the Covenant offers a verification path toward matter;"
+          "start": 28.96,
+          "end": 33.16,
+          "text": "Examining the object also requires positions, angles, depth, and"
         },
         {
-          "start": 31.72825,
-          "end": 34.510875,
-          "text": "the Chronicle preserves formation and the relation of closure."
+          "start": 33.16,
+          "end": 34.58,
+          "text": "relationships between features."
         },
         {
-          "start": 35.260875,
-          "end": 37.326082,
-          "text": "File hashes test whether copies agree."
+          "start": 35.5,
+          "end": 38.04,
+          "text": "No claim of absolute uncopyability is needed."
         },
         {
-          "start": 38.086958,
-          "end": 41.260874,
-          "text": "Time records constrain when particular data already existed."
+          "start": 39.25,
+          "end": 42.25,
+          "text": "Why might an imperfect thing invite care, rather than"
         },
         {
-          "start": 42.02175,
-          "end": 44.499999,
-          "text": "Neither makes a philosophical judgment for the visitor."
-        },
-        {
-          "start": 45.25,
-          "end": 48.108666,
-          "text": "These spoken explanations are later curatorial notes;"
-        },
-        {
-          "start": 48.369583,
-          "end": 50.923916,
-          "text": "the complete originals remain available at their sources."
+          "start": 42.25,
+          "end": 42.49,
+          "text": "correction?"
         }
-      ]
+      ],
+      "bytes": 684717,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.65,
+        "topP": 0.9,
+        "endTrim": "Last aligned source word plus 220ms; 35ms terminal fade. Diagnostic transcript is pre-trim.",
+        "sourceArtifactRun": 34173312397,
+        "sourceAudioSha256": "bea7133baf931b5ebee032a2248ee6987704cd869eb513e73b67d1e65bba7cbb"
+      },
+      "captionAudit": {
+        "textSha256": "6e7403dbb41bbaa85d7f55a508136ffca8f0c6fb58d14c79d4e0125f2ce0dd02",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "7ae229612714c35b6b207be00362afcdc54a08c63c389b75258649a9ad680b89",
+        "previousAudit": {
+          "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 0.9807692307692307,
+          "unmatchedSourceWords": [
+            "centre",
+            "uncopyability"
+          ],
+          "transcript": "When digital copies can multiply, what does a flaw in a physical object preserve? At the center is an exhibition reconstruction of Core Object Alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention. It does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, angles, depth, and relationships between features. No claim of absolute uncopiability is needed. Why might an imperfect thing invite care rather than correction?",
+          "humanListeningReview": false
+        },
+        "firstTranscript": "When digital copies can multiply, what does a flaw in a physical object preserve? At the center is an exhibition reconstruction of core object alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention. It does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, ends, angles, depth, and relationships between features. No claim of absolute uncopyability is needed. Why might an imperfect thing invite care rather than correction?",
+        "transcript": "When digital copies can multiply, what does a flaw in a physical object preserve? At the center is an exhibition reconstruction of core object alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention. It does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, ends, angles, depth, and relationships between features. No claim of absolute uncopyability is needed. Why might an imperfect thing invite care rather than correction?",
+        "normalisedTokenCoverage": 1.0,
+        "extraTokens": 1,
+        "differences": [
+          {
+            "kind": "insert",
+            "expected": [],
+            "recognised": [
+              "ends"
+            ]
+          }
+        ],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false
+      }
     },
     {
       "stop": 6,
       "language": "zh",
       "voice": "zh-CN-XiaoxiaoNeural",
-      "rate": "+25%",
-      "text": "这是核心物件 Alpha 的展陈模型。透明水晶中的双语内雕，把文本带入有厚度的真实世界。瑕疵之约指向瑕疵图像与出处记录的存档。我们即将举起虚拟显微镜，依次查看三张已公开的真实显微照片。定位动作是观看示意；照片是原始证据副本，不能把屏幕演示当作一次现场鉴定。请先看清模型的整体，再观察显微图像。这里的光晕和悬浮只是数字展陈；真正的对应关系，来自照片、出处记录以及可以回到实物上继续核对的特征。我们把观看过程和原始证据分开呈现。",
-      "textSha256": "9b4063673d83362da9895783ab201a0ab3d37ff27dc06b58991b5fd5a8397856",
-      "file": "assets/guides/06-zh.mp3",
-      "sha256": "6d8a6cc811d84384aa8829f34abb0f09cc56a7d51acb09e77581c5f08f4a94e0",
-      "duration": 36.696,
+      "rate": "+8%",
+      "text": "如果创作者后来改变了主意，他还能改变原作吗？《守护者原则》一点一版，将创作者也放在非修订的边界之内。他可以继续解释、批评和照料这些记录，但后来的话不因此获得解释的特权，也不修订三条既定正本。请注意，这不是第四条正本。原则本身也服从同一条边界。区块链保存可核对的参照，却不能阻止任何人另写一篇文章，也不能替我们决定意义。于是，守护不再等于占有最后解释权。如果不能重新定义作品，守护者还能做什么？保存、核验、修复入口，并为尚未到来的读者保留空间。",
+      "textSha256": "ef0194cc186758cc4861c3f963678a62cf88791350dfbb574d22e8d5a08a93bb",
+      "file": "assets/guides-v2/06-zh.mp3",
+      "sha256": "bbfa2fde80b7c694a8950f63da10441cc655749c4f585aed387a5dd29c73b779",
+      "duration": 44.28,
       "cues": [
         {
-          "start": 0.09,
-          "end": 2.3,
-          "text": "这是核心物件 Alpha 的展陈模型。"
+          "start": 0.096291,
+          "end": 3.823124,
+          "text": "如果创作者后来改变了主意，他还能改变原作吗？"
         },
         {
-          "start": 2.75,
-          "end": 6.56,
-          "text": "透明水晶中的双语内雕，把文本带入有厚度的真实世界。"
+          "start": 4.340291,
+          "end": 9.155083,
+          "text": "守护者原则一点一版，将创作者也放在非修订的边界之内。"
         },
         {
-          "start": 7.02,
-          "end": 10.13,
-          "text": "瑕疵之约指向瑕疵图像与出处记录的存档。"
+          "start": 9.6875,
+          "end": 15.034707,
+          "text": "他可以继续解释、批评和照料这些记录，但后来的话不因此获得"
         },
         {
-          "start": 10.59,
-          "end": 14.72,
-          "text": "我们即将举起虚拟显微镜，依次查看三张已公开的真实显微"
+          "start": 15.057875,
+          "end": 18.090249,
+          "text": "解释的特权，也不修订三条既定正本。"
         },
         {
-          "start": 14.73,
-          "end": 15.16,
-          "text": "照片。"
+          "start": 18.622666,
+          "end": 20.798583,
+          "text": "请注意，这不是第四条正本。"
         },
         {
-          "start": 15.62,
-          "end": 17.1,
-          "text": "定位动作是观看示意；"
+          "start": 21.331,
+          "end": 23.692124,
+          "text": "原则本身也服从同一条边界。"
         },
         {
-          "start": 17.41,
-          "end": 21.46,
-          "text": "照片是原始证据副本，不能把屏幕演示当作一次现场鉴定。"
+          "start": 24.224541,
+          "end": 29.490749,
+          "text": "区块链保存可核对的参照，却不能阻止任何人另写一篇文章，也"
         },
         {
-          "start": 21.92,
-          "end": 24.8,
-          "text": "请先看清模型的整体，再观察显微图像。"
+          "start": 29.49075,
+          "end": 30.972207,
+          "text": "不能替我们决定意义。"
         },
         {
-          "start": 25.26,
-          "end": 27.63,
-          "text": "这里的光晕和悬浮只是数字展陈；"
+          "start": 31.504625,
+          "end": 34.537041,
+          "text": "于是，守护不再等于占有最后解释权。"
         },
         {
-          "start": 27.9,
-          "end": 32.28,
-          "text": "真正的对应关系，来自照片、出处记录以及可以回到实物上继续"
+          "start": 35.069458,
+          "end": 38.449083,
+          "text": "如果不能重新定义作品，守护者还能做什么？"
         },
         {
-          "start": 32.29,
-          "end": 33.04,
-          "text": "核对的特征。"
-        },
-        {
-          "start": 33.5,
-          "end": 36.22,
-          "text": "我们把观看过程和原始证据分开呈现。"
+          "start": 38.969916,
+          "end": 43.726875,
+          "text": "保存、核验、修复入口，并为尚未到来的读者保留空间。"
         }
       ]
     },
     {
       "stop": 6,
       "language": "en",
-      "voice": "en-US-AriaNeural",
-      "rate": "+15%",
-      "text": "This is an exhibition reconstruction of Core Object Alpha. Bilingual engraving brings text into an object with physical depth. The Covenant points to archived flaw imagery and provenance. We will raise a virtual pocket microscope and view three public microscope photographs. The positioning is illustrative; the photographs are exact evidence copies. This screen demonstration is not an onsite examination. First observe the whole reconstruction, then the microscope images. Levitation and light are exhibition effects. The evidential relationship comes from photographs, provenance and features that can be examined again on the object. The viewing animation and the original evidence are presented separately.",
-      "textSha256": "8f1446c09cb896f24c9d6fef41a17e093aca64966b44bea488dd59e27dfc1994",
-      "file": "assets/guides/06-en.mp3",
-      "sha256": "2f94eaf908d013cd74082452c7ce032a028dfa9b70ea6440cbb80a32e34493d8",
-      "duration": 42.024,
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "What if the creator changes his mind? Could he change the work? Guardian Principles, version one point one, places the creator within the same non-amending boundary. He may continue to interpret, question, and care for the records. But later commentary gains no privileged authority and cannot amend the three designated Originals. This is not a fourth Original: the principles themselves remain subordinate. Blockchain preserves a reference we can check; it cannot prevent someone from writing another text, or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+      "textSha256": "72559168fb403a59efc245c5511088953e57b62da77369874d6c6c0840009f64",
+      "file": "assets/guides-expressive/72559168fb40-en.mp3",
+      "sha256": "1717f894d1813b8e53eff2022d46d0e475039ad19ad8e01e1eeed82e8bb9577c",
+      "duration": 46.488,
       "cues": [
         {
-          "start": 0.093458,
-          "end": 3.017416,
-          "text": "This is an exhibition reconstruction of Core Object Alpha."
+          "start": 0,
+          "end": 1.82,
+          "text": "What if the creator changes his mind?"
         },
         {
-          "start": 3.760875,
-          "end": 6.999999,
-          "text": "Bilingual engraving brings text into an object with physical depth."
+          "start": 2.62,
+          "end": 3.54,
+          "text": "Could he change the work?"
         },
         {
-          "start": 7.75,
-          "end": 10.673916,
-          "text": "The Covenant points to archived flaw imagery and provenance."
+          "start": 4.6,
+          "end": 8.35,
+          "text": "Guardian Principles, version one point one, places the creator"
         },
         {
-          "start": 11.423916,
-          "end": 14.282624,
-          "text": "We will raise a virtual pocket microscope and view three public"
+          "start": 8.35,
+          "end": 10.31,
+          "text": "within the same non-amending boundary."
         },
         {
-          "start": 14.293458,
-          "end": 15.510874,
-          "text": "microscope photographs."
+          "start": 11.16,
+          "end": 14.36,
+          "text": "He may continue to interpret, question, and care for the"
         },
         {
-          "start": 16.260875,
-          "end": 17.641291,
-          "text": "The positioning is illustrative;"
+          "start": 14.36,
+          "end": 14.7,
+          "text": "records."
         },
         {
-          "start": 17.913041,
-          "end": 20.097833,
-          "text": "the photographs are exact evidence copies."
+          "start": 15.56,
+          "end": 18.56,
+          "text": "But later commentary gains no privileged authority and cannot"
         },
         {
-          "start": 20.847833,
-          "end": 23.684791,
-          "text": "This screen demonstration is not an onsite examination."
+          "start": 18.56,
+          "end": 20.2,
+          "text": "amend the three designated Originals."
         },
         {
-          "start": 24.434791,
-          "end": 27.793458,
-          "text": "First observe the whole reconstruction, then the microscope images."
+          "start": 21.04,
+          "end": 23.78,
+          "text": "This is not a fourth Original: the principles themselves remain"
         },
         {
-          "start": 28.543458,
-          "end": 30.782583,
-          "text": "Levitation and light are exhibition effects."
+          "start": 23.78,
+          "end": 24.26,
+          "text": "subordinate."
         },
         {
-          "start": 31.532625,
-          "end": 34.836958,
-          "text": "The evidential relationship comes from photographs, provenance and"
+          "start": 25.16,
+          "end": 28.78,
+          "text": "Blockchain preserves a reference we can check; it cannot prevent"
         },
         {
-          "start": 34.847833,
-          "end": 37.097791,
-          "text": "features that can be examined again on the object."
+          "start": 28.78,
+          "end": 31.84,
+          "text": "someone from writing another text, or decide what the work"
         },
         {
-          "start": 37.847833,
-          "end": 40.652166,
-          "text": "The viewing animation and the original evidence are presented"
+          "start": 31.84,
+          "end": 32.2,
+          "text": "means."
         },
         {
-          "start": 40.663041,
-          "end": 41.239124,
-          "text": "separately."
+          "start": 33.34,
+          "end": 35.74,
+          "text": "So guardianship is not the ownership of the final word."
+        },
+        {
+          "start": 38.0,
+          "end": 39.04,
+          "text": "What remains to do?"
+        },
+        {
+          "start": 39.52,
+          "end": 45.29,
+          "text": "Preserve, verify, repair access, and leave room for a reader who"
+        },
+        {
+          "start": 45.29,
+          "end": 46.17,
+          "text": "has not yet arrived."
+        }
+      ],
+      "bytes": 744237,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.55,
+        "topP": 0.9,
+        "seed": 9106,
+        "endTrim": "Final aligned source word plus 220 ms; 35 ms terminal fade; diagnostic transcript is pre-trim.",
+        "sourceArtifactRun": 34173946588,
+        "sourceAudioSha256": "1717f894d1813b8e53eff2022d46d0e475039ad19ad8e01e1eeed82e8bb9577c"
+      },
+      "captionAudit": {
+        "textSha256": "72559168fb403a59efc245c5511088953e57b62da77369874d6c6c0840009f64",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "1717f894d1813b8e53eff2022d46d0e475039ad19ad8e01e1eeed82e8bb9577c",
+        "previousAudit": {
+          "method": "Whisper small.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 0.9642857142857143,
+          "unmatchedSourceWords": [
+            "one",
+            "point",
+            "one,",
+            "non-amending"
+          ],
+          "transcript": "What if the creator changes his mind? Could he change the work? Guardian Principles, version 1 .1. Places the creator within the same non -amending boundary. He may continue to interpret, question, and care for the records. But later commentary gains no privileged authority and cannot amend the three designated originals. This is not a fourth original. The principles themselves remain subordinate. Blockchain preserves a reference we can check. It cannot prevent someone from writing another text or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+          "humanListeningReview": false,
+          "acousticWords": [
+            {
+              "text": " What",
+              "start": 0.0,
+              "end": 0.16,
+              "probability": 0.8071959614753723
+            },
+            {
+              "text": " if",
+              "start": 0.16,
+              "end": 0.3,
+              "probability": 0.9902014136314392
+            },
+            {
+              "text": " the",
+              "start": 0.3,
+              "end": 0.44,
+              "probability": 0.986011266708374
+            },
+            {
+              "text": " creator",
+              "start": 0.44,
+              "end": 0.74,
+              "probability": 0.850628674030304
+            },
+            {
+              "text": " changes",
+              "start": 0.74,
+              "end": 1.24,
+              "probability": 0.9830750823020935
+            },
+            {
+              "text": " his",
+              "start": 1.24,
+              "end": 1.5,
+              "probability": 0.9977280497550964
+            },
+            {
+              "text": " mind?",
+              "start": 1.5,
+              "end": 1.84,
+              "probability": 0.9986226558685303
+            },
+            {
+              "text": " Could",
+              "start": 2.6,
+              "end": 2.72,
+              "probability": 0.9872226119041443
+            },
+            {
+              "text": " he",
+              "start": 2.72,
+              "end": 2.86,
+              "probability": 0.9983556866645813
+            },
+            {
+              "text": " change",
+              "start": 2.86,
+              "end": 3.1,
+              "probability": 0.9980448484420776
+            },
+            {
+              "text": " the",
+              "start": 3.1,
+              "end": 3.3,
+              "probability": 0.9963468909263611
+            },
+            {
+              "text": " work?",
+              "start": 3.3,
+              "end": 3.54,
+              "probability": 0.9963794350624084
+            },
+            {
+              "text": " Guardian",
+              "start": 4.6,
+              "end": 4.6,
+              "probability": 0.8752498626708984
+            },
+            {
+              "text": " Principles,",
+              "start": 4.6,
+              "end": 5.08,
+              "probability": 0.9488739967346191
+            },
+            {
+              "text": " version",
+              "start": 5.68,
+              "end": 5.82,
+              "probability": 0.434017151594162
+            },
+            {
+              "text": " 1",
+              "start": 5.82,
+              "end": 6.18,
+              "probability": 0.9803916215896606
+            },
+            {
+              "text": ".1.",
+              "start": 6.18,
+              "end": 7.24,
+              "probability": 0.9964925050735474
+            },
+            {
+              "text": " Places",
+              "start": 7.5,
+              "end": 7.62,
+              "probability": 0.23122933506965637
+            },
+            {
+              "text": " the",
+              "start": 7.62,
+              "end": 7.94,
+              "probability": 0.9940780401229858
+            },
+            {
+              "text": " creator",
+              "start": 7.94,
+              "end": 8.32,
+              "probability": 0.9624404907226562
+            },
+            {
+              "text": " within",
+              "start": 8.32,
+              "end": 8.68,
+              "probability": 0.9917668700218201
+            },
+            {
+              "text": " the",
+              "start": 8.68,
+              "end": 8.92,
+              "probability": 0.9960099458694458
+            },
+            {
+              "text": " same",
+              "start": 8.92,
+              "end": 9.2,
+              "probability": 0.9988287091255188
+            },
+            {
+              "text": " non",
+              "start": 9.2,
+              "end": 9.5,
+              "probability": 0.9823546409606934
+            },
+            {
+              "text": "-amending",
+              "start": 9.5,
+              "end": 9.8,
+              "probability": 0.9638457298278809
+            },
+            {
+              "text": " boundary.",
+              "start": 9.8,
+              "end": 10.3,
+              "probability": 0.9974234104156494
+            },
+            {
+              "text": " He",
+              "start": 11.14,
+              "end": 11.3,
+              "probability": 0.9852955341339111
+            },
+            {
+              "text": " may",
+              "start": 11.3,
+              "end": 11.48,
+              "probability": 0.9978818297386169
+            },
+            {
+              "text": " continue",
+              "start": 11.48,
+              "end": 11.82,
+              "probability": 0.9988711476325989
+            },
+            {
+              "text": " to",
+              "start": 11.82,
+              "end": 12.12,
+              "probability": 0.9991278052330017
+            },
+            {
+              "text": " interpret,",
+              "start": 12.12,
+              "end": 12.58,
+              "probability": 0.9971880316734314
+            },
+            {
+              "text": " question,",
+              "start": 13.02,
+              "end": 13.14,
+              "probability": 0.9973297119140625
+            },
+            {
+              "text": " and",
+              "start": 13.58,
+              "end": 13.74,
+              "probability": 0.9986281394958496
+            },
+            {
+              "text": " care",
+              "start": 13.74,
+              "end": 14.0,
+              "probability": 0.9944909811019897
+            },
+            {
+              "text": " for",
+              "start": 14.0,
+              "end": 14.22,
+              "probability": 0.9985184073448181
+            },
+            {
+              "text": " the",
+              "start": 14.22,
+              "end": 14.36,
+              "probability": 0.9951536655426025
+            },
+            {
+              "text": " records.",
+              "start": 14.36,
+              "end": 14.72,
+              "probability": 0.9688485860824585
+            },
+            {
+              "text": " But",
+              "start": 15.58,
+              "end": 15.78,
+              "probability": 0.984159529209137
+            },
+            {
+              "text": " later",
+              "start": 15.78,
+              "end": 16.02,
+              "probability": 0.9145967960357666
+            },
+            {
+              "text": " commentary",
+              "start": 16.02,
+              "end": 16.44,
+              "probability": 0.6702057719230652
+            },
+            {
+              "text": " gains",
+              "start": 16.44,
+              "end": 16.9,
+              "probability": 0.9887920022010803
+            },
+            {
+              "text": " no",
+              "start": 16.9,
+              "end": 17.14,
+              "probability": 0.995602011680603
+            },
+            {
+              "text": " privileged",
+              "start": 17.14,
+              "end": 17.48,
+              "probability": 0.9750182032585144
+            },
+            {
+              "text": " authority",
+              "start": 17.48,
+              "end": 17.86,
+              "probability": 0.9983173608779907
+            },
+            {
+              "text": " and",
+              "start": 17.86,
+              "end": 18.26,
+              "probability": 0.8571034669876099
+            },
+            {
+              "text": " cannot",
+              "start": 18.26,
+              "end": 18.56,
+              "probability": 0.9753941297531128
+            },
+            {
+              "text": " amend",
+              "start": 18.56,
+              "end": 18.86,
+              "probability": 0.9946613907814026
+            },
+            {
+              "text": " the",
+              "start": 18.86,
+              "end": 19.08,
+              "probability": 0.9961676001548767
+            },
+            {
+              "text": " three",
+              "start": 19.08,
+              "end": 19.3,
+              "probability": 0.9087017178535461
+            },
+            {
+              "text": " designated",
+              "start": 19.3,
+              "end": 19.76,
+              "probability": 0.9767076373100281
+            },
+            {
+              "text": " originals.",
+              "start": 19.76,
+              "end": 20.16,
+              "probability": 0.840090274810791
+            },
+            {
+              "text": " This",
+              "start": 20.96,
+              "end": 21.24,
+              "probability": 0.9820044636726379
+            },
+            {
+              "text": " is",
+              "start": 21.24,
+              "end": 21.36,
+              "probability": 0.9982238411903381
+            },
+            {
+              "text": " not",
+              "start": 21.36,
+              "end": 21.54,
+              "probability": 0.9990506768226624
+            },
+            {
+              "text": " a",
+              "start": 21.54,
+              "end": 21.68,
+              "probability": 0.9958934783935547
+            },
+            {
+              "text": " fourth",
+              "start": 21.68,
+              "end": 21.84,
+              "probability": 0.9604485034942627
+            },
+            {
+              "text": " original.",
+              "start": 21.84,
+              "end": 22.24,
+              "probability": 0.9744905829429626
+            },
+            {
+              "text": " The",
+              "start": 22.48,
+              "end": 22.6,
+              "probability": 0.9912530779838562
+            },
+            {
+              "text": " principles",
+              "start": 22.6,
+              "end": 22.88,
+              "probability": 0.7261880040168762
+            },
+            {
+              "text": " themselves",
+              "start": 22.88,
+              "end": 23.4,
+              "probability": 0.9896363615989685
+            },
+            {
+              "text": " remain",
+              "start": 23.4,
+              "end": 23.78,
+              "probability": 0.9484502673149109
+            },
+            {
+              "text": " subordinate.",
+              "start": 23.78,
+              "end": 24.3,
+              "probability": 0.9890276193618774
+            },
+            {
+              "text": " Blockchain",
+              "start": 24.3,
+              "end": 25.32,
+              "probability": 0.4501228928565979
+            },
+            {
+              "text": " preserves",
+              "start": 25.32,
+              "end": 26.06,
+              "probability": 0.975844144821167
+            },
+            {
+              "text": " a",
+              "start": 26.06,
+              "end": 26.34,
+              "probability": 0.9853429794311523
+            },
+            {
+              "text": " reference",
+              "start": 26.34,
+              "end": 26.7,
+              "probability": 0.9970273375511169
+            },
+            {
+              "text": " we",
+              "start": 26.7,
+              "end": 26.98,
+              "probability": 0.9816146492958069
+            },
+            {
+              "text": " can",
+              "start": 26.98,
+              "end": 27.14,
+              "probability": 0.9979873895645142
+            },
+            {
+              "text": " check.",
+              "start": 27.14,
+              "end": 27.46,
+              "probability": 0.9994101524353027
+            },
+            {
+              "text": " It",
+              "start": 28.08,
+              "end": 28.18,
+              "probability": 0.9933941960334778
+            },
+            {
+              "text": " cannot",
+              "start": 28.18,
+              "end": 28.44,
+              "probability": 0.9411066770553589
+            },
+            {
+              "text": " prevent",
+              "start": 28.44,
+              "end": 28.8,
+              "probability": 0.9982727766036987
+            },
+            {
+              "text": " someone",
+              "start": 28.8,
+              "end": 29.22,
+              "probability": 0.997011661529541
+            },
+            {
+              "text": " from",
+              "start": 29.22,
+              "end": 29.48,
+              "probability": 0.9978559613227844
+            },
+            {
+              "text": " writing",
+              "start": 29.48,
+              "end": 29.74,
+              "probability": 0.9990070462226868
+            },
+            {
+              "text": " another",
+              "start": 29.74,
+              "end": 30.06,
+              "probability": 0.998076319694519
+            },
+            {
+              "text": " text",
+              "start": 30.06,
+              "end": 30.5,
+              "probability": 0.9987805485725403
+            },
+            {
+              "text": " or",
+              "start": 30.5,
+              "end": 30.98,
+              "probability": 0.8237683176994324
+            },
+            {
+              "text": " decide",
+              "start": 30.98,
+              "end": 31.34,
+              "probability": 0.9943827390670776
+            },
+            {
+              "text": " what",
+              "start": 31.34,
+              "end": 31.54,
+              "probability": 0.9955800175666809
+            },
+            {
+              "text": " the",
+              "start": 31.54,
+              "end": 31.66,
+              "probability": 0.9969062209129333
+            },
+            {
+              "text": " work",
+              "start": 31.66,
+              "end": 31.84,
+              "probability": 0.9956100583076477
+            },
+            {
+              "text": " means.",
+              "start": 31.84,
+              "end": 32.18,
+              "probability": 0.9989429116249084
+            },
+            {
+              "text": " So",
+              "start": 33.22,
+              "end": 33.3,
+              "probability": 0.9556176066398621
+            },
+            {
+              "text": " guardianship",
+              "start": 33.3,
+              "end": 34.04,
+              "probability": 0.7572682201862335
+            },
+            {
+              "text": " is",
+              "start": 34.04,
+              "end": 34.18,
+              "probability": 0.9977980852127075
+            },
+            {
+              "text": " not",
+              "start": 34.18,
+              "end": 34.34,
+              "probability": 0.9978020787239075
+            },
+            {
+              "text": " the",
+              "start": 34.34,
+              "end": 34.48,
+              "probability": 0.99510657787323
+            },
+            {
+              "text": " ownership",
+              "start": 34.48,
+              "end": 34.78,
+              "probability": 0.9986679553985596
+            },
+            {
+              "text": " of",
+              "start": 34.78,
+              "end": 35.06,
+              "probability": 0.9985437393188477
+            },
+            {
+              "text": " the",
+              "start": 35.06,
+              "end": 35.18,
+              "probability": 0.9961251616477966
+            },
+            {
+              "text": " final",
+              "start": 35.18,
+              "end": 35.4,
+              "probability": 0.9954509139060974
+            },
+            {
+              "text": " word.",
+              "start": 35.4,
+              "end": 35.74,
+              "probability": 0.9965454936027527
+            },
+            {
+              "text": " What",
+              "start": 37.94,
+              "end": 38.08,
+              "probability": 0.9942106008529663
+            },
+            {
+              "text": " remains",
+              "start": 38.08,
+              "end": 38.38,
+              "probability": 0.99424147605896
+            },
+            {
+              "text": " to",
+              "start": 38.38,
+              "end": 38.6,
+              "probability": 0.9984562397003174
+            },
+            {
+              "text": " do?",
+              "start": 38.6,
+              "end": 39.02,
+              "probability": 0.9987266659736633
+            },
+            {
+              "text": " Preserve,",
+              "start": 39.52,
+              "end": 40.0,
+              "probability": 0.9765698313713074
+            },
+            {
+              "text": " verify,",
+              "start": 40.4,
+              "end": 41.0,
+              "probability": 0.9902408123016357
+            },
+            {
+              "text": " repair",
+              "start": 42.07,
+              "end": 42.43,
+              "probability": 0.9942663311958313
+            },
+            {
+              "text": " access,",
+              "start": 42.43,
+              "end": 42.99,
+              "probability": 0.9849218726158142
+            },
+            {
+              "text": " and",
+              "start": 43.97,
+              "end": 44.01,
+              "probability": 0.9961960315704346
+            },
+            {
+              "text": " leave",
+              "start": 44.01,
+              "end": 44.23,
+              "probability": 0.9992986917495728
+            },
+            {
+              "text": " room",
+              "start": 44.23,
+              "end": 44.49,
+              "probability": 0.9970062375068665
+            },
+            {
+              "text": " for",
+              "start": 44.49,
+              "end": 44.73,
+              "probability": 0.9987502098083496
+            },
+            {
+              "text": " a",
+              "start": 44.73,
+              "end": 44.83,
+              "probability": 0.9867365956306458
+            },
+            {
+              "text": " reader",
+              "start": 44.83,
+              "end": 45.03,
+              "probability": 0.9943390488624573
+            },
+            {
+              "text": " who",
+              "start": 45.03,
+              "end": 45.29,
+              "probability": 0.9957637786865234
+            },
+            {
+              "text": " has",
+              "start": 45.29,
+              "end": 45.47,
+              "probability": 0.9947978258132935
+            },
+            {
+              "text": " not",
+              "start": 45.47,
+              "end": 45.69,
+              "probability": 0.9980892539024353
+            },
+            {
+              "text": " yet",
+              "start": 45.69,
+              "end": 45.83,
+              "probability": 0.9975494742393494
+            },
+            {
+              "text": " arrived.",
+              "start": 45.83,
+              "end": 46.21,
+              "probability": 0.9987996816635132
+            }
+          ],
+          "retake": true,
+          "sourceWordRecallIsNotAccuracy": true
+        },
+        "firstTranscript": "What if the creator changes his mind? Could he change the work? Guardian Principles, version 1 .1, places the creator within the same non -amending boundary. He may continue to interpret, question, and care for the records, but later commentary gains no privileged authority and cannot amend the three designated originals. This is not a fourth original, the principles themselves remain subordinate. Blockchain preserves a reference we can check. It cannot prevent someone from writing another text or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+        "transcript": "What if the creator changes his mind? Could he change the work? Guardian Principles, version 1 .1, places the creator within the same non -amending boundary. He may continue to interpret, question, and care for the records, but later commentary gains no privileged authority and cannot amend the three designated originals. This is not a fourth original, the principles themselves remain subordinate. Blockchain preserves a reference we can check. It cannot prevent someone from writing another text or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+        "normalisedTokenCoverage": 0.9911504424778761,
+        "extraTokens": 0,
+        "differences": [
+          {
+            "kind": "delete",
+            "expected": [
+              "point"
+            ],
+            "recognised": []
+          }
+        ],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false
+      }
+    },
+    {
+      "stop": 7,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "如果没有人回应，等待还意味着什么？这份地址不预告一个答案必然到来。后来者可以阅读、质疑、回应，也可以保持沉默。文字已经留下。解释不必停在创作者这里。现在，您会如何阅读它？",
+      "textSha256": "e7a32a17b0cc1b0ab3b6626145c9f97f2d215578dcca3fceb180fbb2195b7614",
+      "file": "assets/guides-v2/07-zh.mp3",
+      "sha256": "07948a827b32bc11fe917d0f397b6fb106f564432d1860a371b72632c38b8b91",
+      "duration": 17.424,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 2.735208,
+          "text": "如果没有人回应，等待还意味着什么？"
+        },
+        {
+          "start": 3.263875,
+          "end": 5.787041,
+          "text": "这份地址不预告一个答案必然到来。"
+        },
+        {
+          "start": 6.319458,
+          "end": 10.277791,
+          "text": "后来者可以阅读、质疑、回应，也可以保持沉默。"
+        },
+        {
+          "start": 10.810166,
+          "end": 11.967582,
+          "text": "文字已经留下。"
+        },
+        {
+          "start": 12.5,
+          "end": 14.49075,
+          "text": "解释不必停在创作者这里。"
+        },
+        {
+          "start": 15.023166,
+          "end": 16.898125,
+          "text": "现在，您会如何阅读它？"
         }
       ]
     },
+    {
+      "stop": 7,
+      "language": "en",
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them?",
+      "textSha256": "adc9699de2b6f6dd30871e7efb40d5ea68869789024080b0a9032b7eadfad73c",
+      "file": "assets/guides-expressive/adc9699de2b6-en.mp3",
+      "sha256": "61b8783481ae64a3c92e7901d1e4011ebb33ae231a9f9d543f622f922f2185b9",
+      "duration": 17.136,
+      "cues": [
+        {
+          "start": 0,
+          "end": 2.22,
+          "text": "What does waiting mean if no answer comes?"
+        },
+        {
+          "start": 3.05,
+          "end": 4.93,
+          "text": "This address does not promise a reply."
+        },
+        {
+          "start": 6.07,
+          "end": 10.21,
+          "text": "A later reader may examine, question, respond, or remain silent."
+        },
+        {
+          "start": 11.07,
+          "end": 11.91,
+          "text": "The records remain."
+        },
+        {
+          "start": 12.83,
+          "end": 15.01,
+          "text": "Interpretation need not end with their creator."
+        },
+        {
+          "start": 16.09,
+          "end": 16.93,
+          "text": "How would you read them?"
+        }
+      ],
+      "bytes": 274605,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.65,
+        "topP": 0.9,
+        "endTrim": "Last aligned source word plus 220ms; 35ms terminal fade. Diagnostic transcript is pre-trim.",
+        "sourceArtifactRun": 34173312397,
+        "sourceAudioSha256": "b19460d6db5ba1c8145538703d3b532256b7bd62aaa612ff763a09607568db2e"
+      },
+      "captionAudit": {
+        "textSha256": "adc9699de2b6f6dd30871e7efb40d5ea68869789024080b0a9032b7eadfad73c",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "61b8783481ae64a3c92e7901d1e4011ebb33ae231a9f9d543f622f922f2185b9",
+        "previousAudit": {
+          "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 1.0,
+          "unmatchedSourceWords": [],
+          "transcript": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them? Thank you for your time.",
+          "humanListeningReview": false
+        },
+        "firstTranscript": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them?",
+        "transcript": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them?",
+        "normalisedTokenCoverage": 1.0,
+        "extraTokens": 0,
+        "differences": [],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false
+      }
+    }
+  ],
+  "inspectionTracks": [
     {
       "stop": 7,
       "language": "zh",
@@ -992,65 +3845,136 @@
           "end": 19.87,
           "text": "亮点。"
         }
-      ]
+      ],
+      "flaw": 0
     },
     {
       "stop": 7,
       "language": "en",
-      "voice": "en-US-AriaNeural",
+      "voice": "Chatterbox Turbo built-in synthetic voice",
       "rate": "+15%",
-      "text": "The first public flaw. Observe the irregular structure in relation to the surrounding engraving. A file hash checks that the photograph matches the public archive. Comparing the physical object requires positions, viewing angles and a witnessed procedure. The engraving also provides a visual reference. Look at the flaw’s outline together with its surroundings, rather than remembering only an isolated bright point.",
-      "textSha256": "21667f3f8a8d6cacd94a445b40f9881440e0054418b9c9550e494cc765b2835b",
-      "file": "assets/guides/07-en.mp3",
-      "sha256": "4251a7372b40a7ff2d30976cd6d564e5fde0198660b4426cc912dc417812d8f8",
-      "duration": 24.528,
+      "text": "The first public flaw. Observe the irregular structure in relation to the surrounding engraving. A file hash checks that the photograph matches the public archive. Comparing the physical object requires positions, viewing angles, and a witness to the examination. The engraving also provides a visual reference. Observe the outline of the flaw and its surroundings, not only an isolated bright point.",
+      "textSha256": "e6ebef9f999688996542cb8919cb018f6537d1ba9ba9c2b6b485d04a756dfe87",
+      "file": "assets/guides-expressive/inspection-0-en.mp3",
+      "sha256": "f28af99cc604a15c29e975fb061af6c51f8b98c63b6461abe1664b3da6152bba",
+      "duration": 22.224,
       "cues": [
         {
-          "start": 0.093458,
-          "end": 1.245666,
+          "start": 0.0,
+          "end": 1.18,
           "text": "The first public flaw."
         },
         {
-          "start": 2.0,
-          "end": 4.771708,
+          "start": 1.5,
+          "end": 4.62,
           "text": "Observe the irregular structure in relation to the surrounding"
         },
         {
-          "start": 4.782625,
-          "end": 5.326083,
+          "start": 4.62,
+          "end": 5.16,
           "text": "engraving."
         },
         {
-          "start": 6.076083,
-          "end": 9.260874,
-          "text": "A file hash checks that the photograph matches the public archive."
+          "start": 5.48,
+          "end": 8.12,
+          "text": "A file hash checks that the photograph matches the public"
         },
         {
-          "start": 10.010875,
-          "end": 13.586958,
-          "text": "Comparing the physical object requires positions, viewing angles and"
+          "start": 8.12,
+          "end": 8.56,
+          "text": "archive."
         },
         {
-          "start": 13.597833,
-          "end": 14.56525,
-          "text": "a witnessed procedure."
+          "start": 8.88,
+          "end": 12.38,
+          "text": "Comparing the physical object requires positions, viewing"
         },
         {
-          "start": 15.315208,
-          "end": 17.641291,
+          "start": 12.38,
+          "end": 14.22,
+          "text": "angles, and a witness to the examination."
+        },
+        {
+          "start": 14.54,
+          "end": 16.84,
           "text": "The engraving also provides a visual reference."
         },
         {
-          "start": 18.402166,
-          "end": 21.456541,
-          "text": "Look at the flaw’s outline together with its surroundings, rather"
+          "start": 17.16,
+          "end": 20.62,
+          "text": "Observe the outline of the flaw and its surroundings, not only"
         },
         {
-          "start": 21.467375,
-          "end": 23.771749,
-          "text": "than remembering only an isolated bright point."
+          "start": 20.62,
+          "end": 21.84,
+          "text": "an isolated bright point."
         }
-      ]
+      ],
+      "flaw": 0,
+      "curatorialWordingChange": {
+        "originalText": "The first public flaw. Observe the irregular structure in relation to the surrounding engraving. A file hash checks that the photograph matches the public archive. Comparing the physical object requires positions, viewing angles and a witnessed procedure. The engraving also provides a visual reference. Look at the flaw’s outline together with its surroundings, rather than remembering only an isolated bright point.",
+        "originalTextSha256": "21667f3f8a8d6cacd94a445b40f9881440e0054418b9c9550e494cc765b2835b",
+        "reason": "Two 2026 curatorial instructions clarified for synthetic pronunciation. No historical evidence or canonical text changed."
+      },
+      "bytes": 356013,
+      "provenance": {
+        "model": "Chatterbox Turbo 350M",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "voiceKind": "built-in synthetic conditionals; no identity cloning",
+        "license": "MIT",
+        "watermark": "Upstream PerTh",
+        "delivery": "24kHz MP3, original source words; separate accepted sentence takes",
+        "sourceArtifactRun": 34176697383
+      },
+      "captionAudit": {
+        "method": "Whisper small.en exact normalized sentence checks and audio word times",
+        "sentences": [
+          {
+            "sentence": "The first public flaw.",
+            "transcript": "The first public flaw.",
+            "seed": 15000,
+            "attempt": 1,
+            "accepted": true
+          },
+          {
+            "sentence": "Observe the irregular structure in relation to the surrounding engraving.",
+            "transcript": "Observe the irregular structure in relation to the surrounding engraving.",
+            "seed": 15004,
+            "attempt": 1,
+            "accepted": true
+          },
+          {
+            "sentence": "A file hash checks that the photograph matches the public archive.",
+            "transcript": "A file hash checks that the photograph matches the public archive.",
+            "seed": 15008,
+            "attempt": 1,
+            "accepted": true
+          },
+          {
+            "sentence": "Comparing the physical object requires positions, viewing angles, and a witness to the examination.",
+            "transcript": "Comparing the physical object requires positions, viewing angles, and a witness to the examination.",
+            "seed": 15012,
+            "attempt": 1,
+            "accepted": true
+          },
+          {
+            "sentence": "The engraving also provides a visual reference.",
+            "transcript": "The engraving also provides a visual reference.",
+            "seed": 15016,
+            "attempt": 1,
+            "accepted": true
+          },
+          {
+            "sentence": "Observe the outline of the flaw and its surroundings, not only an isolated bright point.",
+            "transcript": "Observe the outline of the flaw and its surroundings not only an isolated bright point",
+            "seed": 15020,
+            "attempt": 1,
+            "accepted": true
+          }
+        ],
+        "accepted": true,
+        "humanListeningReview": false
+      }
     },
     {
       "stop": 8,
@@ -1098,60 +4022,119 @@
           "end": 18.18,
           "text": "对应。"
         }
-      ]
+      ],
+      "flaw": 1
     },
     {
       "stop": 8,
       "language": "en",
-      "voice": "en-US-AriaNeural",
+      "voice": "Chatterbox Turbo built-in synthetic voice",
       "rate": "+15%",
       "text": "The second public flaw. Copying an image is easy. Reproducing internal structures, depth and relationships between several points is harder. Multiple flaws provide physical features for comparison, rather than a photograph proving absolute impossibility of replication. A physical examination changes the viewing angle and lighting to check whether the same group of features continues to correspond.",
       "textSha256": "ebbc14214088574ce951b628be98593989c44f6aedac1a6abf92b5830d366631",
-      "file": "assets/guides/08-en.mp3",
-      "sha256": "dec97683248e8e91a20f561ff53ea4d680ce531d09ebd616ab7a3198249b743a",
-      "duration": 23.352,
+      "file": "assets/guides-expressive/inspection-1-en.mp3",
+      "sha256": "910fd217e90cfe8ef919d55f92c1cc42bb8ccebe1736e132e8b15446971c81da",
+      "duration": 21.48,
       "cues": [
         {
-          "start": 0.093458,
-          "end": 1.310874,
+          "start": 0.0,
+          "end": 1.18,
           "text": "The second public flaw."
         },
         {
-          "start": 2.065208,
-          "end": 3.489124,
+          "start": 1.5,
+          "end": 2.94,
           "text": "Copying an image is easy."
         },
         {
-          "start": 4.25,
-          "end": 7.554333,
+          "start": 3.26,
+          "end": 6.56,
           "text": "Reproducing internal structures, depth and relationships between"
         },
         {
-          "start": 7.565208,
-          "end": 8.782624,
+          "start": 6.56,
+          "end": 7.74,
           "text": "several points is harder."
         },
         {
-          "start": 9.532625,
-          "end": 12.978249,
-          "text": "Multiple flaws provide physical features for comparison, rather than"
+          "start": 8.06,
+          "end": 11.26,
+          "text": "Multiple flaws provide physical features for comparison, rather"
         },
         {
-          "start": 12.989125,
-          "end": 15.999999,
-          "text": "a photograph proving absolute impossibility of replication."
+          "start": 11.26,
+          "end": 14.22,
+          "text": "than a photograph proving absolute impossibility of replication."
         },
         {
-          "start": 16.75,
-          "end": 19.673916,
+          "start": 14.54,
+          "end": 18.28,
           "text": "A physical examination changes the viewing angle and lighting to"
         },
         {
-          "start": 19.684791,
-          "end": 22.586958,
-          "text": "check whether the same group of features continues to correspond."
+          "start": 18.28,
+          "end": 20.68,
+          "text": "check whether the same group of features continues to"
+        },
+        {
+          "start": 20.68,
+          "end": 21.1,
+          "text": "correspond."
         }
-      ]
+      ],
+      "flaw": 1,
+      "bytes": 344109,
+      "provenance": {
+        "model": "Chatterbox Turbo 350M",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "voiceKind": "built-in synthetic conditionals; no identity cloning",
+        "license": "MIT",
+        "watermark": "Upstream PerTh",
+        "delivery": "24kHz MP3, original source words; separate accepted sentence takes",
+        "sourceArtifactRun": 34175623070
+      },
+      "captionAudit": {
+        "method": "Whisper small.en exact normalized sentence checks and audio word times",
+        "sentences": [
+          {
+            "sentence": "The second public flaw.",
+            "transcript": "the second public flaw",
+            "seed": 15100,
+            "attempt": 1,
+            "accepted": true
+          },
+          {
+            "sentence": "Copying an image is easy.",
+            "transcript": "Copying an image is easy.",
+            "seed": 15104,
+            "attempt": 1,
+            "accepted": true
+          },
+          {
+            "sentence": "Reproducing internal structures, depth and relationships between several points is harder.",
+            "transcript": "Reproducing internal structures, depth, and relationships between several points is harder.",
+            "seed": 15108,
+            "attempt": 1,
+            "accepted": true
+          },
+          {
+            "sentence": "Multiple flaws provide physical features for comparison, rather than a photograph proving absolute impossibility of replication.",
+            "transcript": "Multiple flaws provide physical features for comparison rather than a photograph proving absolute impossibility of replication",
+            "seed": 15112,
+            "attempt": 1,
+            "accepted": true
+          },
+          {
+            "sentence": "A physical examination changes the viewing angle and lighting to check whether the same group of features continues to correspond.",
+            "transcript": "A physical examination changes the viewing angle and lighting to check whether the same group of features continues to correspond.",
+            "seed": 15116,
+            "attempt": 1,
+            "accepted": true
+          }
+        ],
+        "accepted": true,
+        "humanListeningReview": false
+      }
     },
     {
       "stop": 9,
@@ -1204,231 +4187,127 @@
           "end": 20.86,
           "text": "照片的证据作用和这层艺术含义，可以同时被看见。"
         }
-      ]
+      ],
+      "flaw": 2
     },
     {
       "stop": 9,
       "language": "en",
-      "voice": "en-US-AriaNeural",
+      "voice": "Chatterbox Turbo built-in synthetic voice",
       "rate": "+15%",
       "text": "The third public flaw. Imperfection leaves traces of the real world. As an artistic reading, it reflects human limitations, vulnerability and irreplaceable experience. A life can deserve remembrance with all its imperfections, because it existed and had a story of its own. This is an expression about existence and memory. The evidential role of the photograph and its artistic meaning can both remain visible.",
       "textSha256": "1eca8a804a5ea0ba973adb9c4948eef7e4da5e7f09291cd7d03fedbdeafdcffa",
-      "file": "assets/guides/09-en.mp3",
-      "sha256": "8aeb934b7e944608220f49e3eb6e5e8d314d111a8c9fe5ab5496704ca6eae7e1",
-      "duration": 24.552,
+      "file": "assets/guides-expressive/inspection-2-en.mp3",
+      "sha256": "d2552a3de92b370207eb722b1900f16f8a4b9e74f07e18306d5057e0739d258d",
+      "duration": 22.848,
       "cues": [
         {
-          "start": 0.093458,
-          "end": 1.267416,
+          "start": 0.0,
+          "end": 1.16,
           "text": "The third public flaw."
         },
         {
-          "start": 2.010875,
-          "end": 4.228249,
+          "start": 1.48,
+          "end": 3.96,
           "text": "Imperfection leaves traces of the real world."
         },
         {
-          "start": 4.97825,
-          "end": 8.695625,
-          "text": "As an artistic reading, it reflects human limitations, vulnerability"
+          "start": 4.28,
+          "end": 6.9,
+          "text": "As an artistic reading, it reflects human limitations,"
         },
         {
-          "start": 8.782625,
-          "end": 10.326083,
-          "text": "and irreplaceable experience."
+          "start": 7.64,
+          "end": 9.86,
+          "text": "vulnerability and irreplaceable experience."
         },
         {
-          "start": 11.076083,
-          "end": 14.239125,
-          "text": "A life can deserve remembrance with all its imperfections, because"
+          "start": 10.18,
+          "end": 13.22,
+          "text": "A life can deserve remembrance with all its imperfections,"
         },
         {
-          "start": 14.25,
-          "end": 16.141291,
-          "text": "it existed and had a story of its own."
+          "start": 13.42,
+          "end": 15.66,
+          "text": "because it existed and had a story of its own."
         },
         {
-          "start": 16.891291,
-          "end": 19.086957,
+          "start": 15.98,
+          "end": 18.26,
           "text": "This is an expression about existence and memory."
         },
         {
-          "start": 19.836958,
-          "end": 22.739124,
-          "text": "The evidential role of the photograph and its artistic meaning can"
+          "start": 18.58,
+          "end": 21.36,
+          "text": "The evidential role of the photograph and its artistic meaning"
         },
         {
-          "start": 22.75,
-          "end": 23.793499,
-          "text": "both remain visible."
+          "start": 21.36,
+          "end": 22.48,
+          "text": "can both remain visible."
         }
-      ]
-    },
-    {
-      "stop": 10,
-      "language": "zh",
-      "voice": "zh-CN-XiaoxiaoNeural",
-      "rate": "+25%",
-      "text": "旅程抵达等待。三条正本封存之后，保存与守护仍继续。这里没有保证未来一定回应。您可以回看作品、核对来源，或从原网站进入回应与守护流程。我们已经说过，现在倾听。感谢您用这十分钟，陪一份来自人类的记忆，走向一个尚未到来的读者。对未来接收者而言，阅读、质疑、回应或沉默都仍然开放。守护的工作，是让文本、作品和证据可以被重新找到，而不是替未知的读者作出选择。您可以从帮助菜单了解操作，也可以暂停导览，选择一幅画完整听歌，或重新回到水晶，手动查看三处公开瑕疵。",
-      "textSha256": "a1b474fed651f76d4d4cf13833ffdc33dc22e3f6f54387e12a60fbab4c4db1e2",
-      "file": "assets/guides/10-zh.mp3",
-      "sha256": "62c2425336a74019df58c86116798f18b389d6aef1812e31f95d1ba610fb86bc",
-      "duration": 39.048,
-      "cues": [
-        {
-          "start": 0.09,
-          "end": 1.13,
-          "text": "旅程抵达等待。"
-        },
-        {
-          "start": 1.58,
-          "end": 4.51,
-          "text": "三条正本封存之后，保存与守护仍继续。"
-        },
-        {
-          "start": 4.97,
-          "end": 6.86,
-          "text": "这里没有保证未来一定回应。"
-        },
-        {
-          "start": 7.32,
-          "end": 11.71,
-          "text": "您可以回看作品、核对来源，或从原网站进入回应与守护流程。"
-        },
-        {
-          "start": 12.17,
-          "end": 13.9,
-          "text": "我们已经说过，现在倾听。"
-        },
-        {
-          "start": 14.35,
-          "end": 18.39,
-          "text": "感谢您用这十分钟，陪一份来自人类的记忆，走向一个尚未到来"
-        },
-        {
-          "start": 18.39,
-          "end": 18.86,
-          "text": "的读者。"
-        },
-        {
-          "start": 19.32,
-          "end": 23.71,
-          "text": "对未来接收者而言，阅读、质疑、回应或沉默都仍然开放。"
-        },
-        {
-          "start": 24.17,
-          "end": 28.83,
-          "text": "守护的工作，是让文本、作品和证据可以被重新找到，而不是替"
-        },
-        {
-          "start": 28.83,
-          "end": 30.29,
-          "text": "未知的读者作出选择。"
-        },
-        {
-          "start": 30.75,
-          "end": 34.86,
-          "text": "您可以从帮助菜单了解操作，也可以暂停导览，选择一幅画完整"
-        },
-        {
-          "start": 34.87,
-          "end": 38.58,
-          "text": "听歌，或重新回到水晶，手动查看三处公开瑕疵。"
-        }
-      ]
-    },
-    {
-      "stop": 10,
-      "language": "en",
-      "voice": "en-US-AriaNeural",
-      "rate": "+15%",
-      "text": "Our journey reaches the waiting room. After the three originals were sealed, preservation and care continued. Nothing here guarantees a future reply. You can return to the works, inspect the sources or visit the original website to respond or explore guardianship. We have spoken. Now we listen. Thank you for accompanying this human memory toward a reader who has not yet arrived. For a future recipient, reading, questioning, responding and silence remain open possibilities. Preservation makes the texts, works and evidence discoverable again; it cannot choose for an unknown reader. Open Help for the controls, pause the tour to hear a complete song, or return to the crystal to inspect its three public flaws manually.",
-      "textSha256": "88cf54d70ea6d4d192c25a34a9ff921ac4e932ac8cd54aba2855cfa3e5584435",
-      "file": "assets/guides/10-en.mp3",
-      "sha256": "33aa6cb5dd99321e0bbfab3255a01477346c09d0751b7940cfa5cdc144abd006",
-      "duration": 43.08,
-      "cues": [
-        {
-          "start": 0.093458,
-          "end": 1.658666,
-          "text": "Our journey reaches the waiting room."
-        },
-        {
-          "start": 2.413041,
-          "end": 5.326083,
-          "text": "After the three originals were sealed, preservation and care"
-        },
-        {
-          "start": 5.336958,
-          "end": 5.902166,
-          "text": "continued."
-        },
-        {
-          "start": 6.652166,
-          "end": 8.652166,
-          "text": "Nothing here guarantees a future reply."
-        },
-        {
-          "start": 9.413041,
-          "end": 12.260874,
-          "text": "You can return to the works, inspect the sources or visit the"
-        },
-        {
-          "start": 12.27175,
-          "end": 15.097833,
-          "text": "original website to respond or explore guardianship."
-        },
-        {
-          "start": 15.847833,
-          "end": 16.739125,
-          "text": "We have spoken."
-        },
-        {
-          "start": 17.5,
-          "end": 18.315249,
-          "text": "Now we listen."
-        },
-        {
-          "start": 19.076083,
-          "end": 21.815249,
-          "text": "Thank you for accompanying this human memory toward a reader who has"
-        },
-        {
-          "start": 21.826083,
-          "end": 22.706541,
-          "text": "not yet arrived."
-        },
-        {
-          "start": 23.456541,
-          "end": 27.130457,
-          "text": "For a future recipient, reading, questioning, responding and silence"
-        },
-        {
-          "start": 27.141291,
-          "end": 28.619583,
-          "text": "remain open possibilities."
-        },
-        {
-          "start": 29.369583,
-          "end": 32.684791,
-          "text": "Preservation makes the texts, works and evidence discoverable again;"
-        },
-        {
-          "start": 32.945666,
-          "end": 34.706541,
-          "text": "it cannot choose for an unknown reader."
-        },
-        {
-          "start": 35.456541,
-          "end": 38.684791,
-          "text": "Open Help for the controls, pause the tour to hear a complete song,"
-        },
-        {
-          "start": 39.076083,
-          "end": 42.326083,
-          "text": "or return to the crystal to inspect its three public flaws manually."
-        }
-      ]
+      ],
+      "flaw": 2,
+      "bytes": 365997,
+      "provenance": {
+        "model": "Chatterbox Turbo 350M",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "voiceKind": "built-in synthetic conditionals; no identity cloning",
+        "license": "MIT",
+        "watermark": "Upstream PerTh",
+        "delivery": "24kHz MP3, original source words; separate accepted sentence takes",
+        "sourceArtifactRun": 34175623070
+      },
+      "captionAudit": {
+        "method": "Whisper small.en exact normalized sentence checks and audio word times",
+        "sentences": [
+          {
+            "sentence": "The third public flaw.",
+            "transcript": "The third public flaw",
+            "seed": 15201,
+            "attempt": 2,
+            "accepted": true
+          },
+          {
+            "sentence": "Imperfection leaves traces of the real world.",
+            "transcript": "Imperfection leaves traces of the real world.",
+            "seed": 15204,
+            "attempt": 1,
+            "accepted": true
+          },
+          {
+            "sentence": "As an artistic reading, it reflects human limitations, vulnerability and irreplaceable experience.",
+            "transcript": "As an artistic reading, it reflects human limitations, vulnerability, and irreplaceable experience.",
+            "seed": 15209,
+            "attempt": 2,
+            "accepted": true
+          },
+          {
+            "sentence": "A life can deserve remembrance with all its imperfections, because it existed and had a story of its own.",
+            "transcript": "A life can deserve remembrance with all its imperfections, because it existed and had a story of its own.",
+            "seed": 15212,
+            "attempt": 1,
+            "accepted": true
+          },
+          {
+            "sentence": "This is an expression about existence and memory.",
+            "transcript": "This is an expression about existence and memory.",
+            "seed": 15216,
+            "attempt": 1,
+            "accepted": true
+          },
+          {
+            "sentence": "The evidential role of the photograph and its artistic meaning can both remain visible.",
+            "transcript": "The evidential role of the photograph and its artistic meaning can both remain visible.",
+            "seed": 15220,
+            "attempt": 1,
+            "accepted": true
+          }
+        ],
+        "accepted": true,
+        "humanListeningReview": false
+      }
     }
-  ]
+  ],
+  "voiceReview": "Eleven English curatorial recordings use Chatterbox Turbo built-in synthetic voice; eight tour tracks independently audited, three microscope guides accepted sentence by sentence. Chinese remains Xiaoxiao. Full-band delivery audio preserved. Automated acoustic review, not human listening certification."
 }

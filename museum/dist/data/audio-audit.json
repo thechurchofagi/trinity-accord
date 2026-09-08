@@ -1,12 +1,12 @@
 {
   "schema": "trinity-museum.audio-audit.v1",
-  "edition": "museum-v1.31.0",
+  "edition": "museum-v1.32.0",
   "checked": "2026-09-06",
-  "scope": "All 32 displayed entries. Existing audio and independently sourced same-song recordings remain distinct. Actual decoded media types override filename extensions.",
+  "scope": "All 41 display entries; 28 original or explicitly related recordings, 13 without an assigned recording. No.122 is image-only in this edition.",
   "counts": {
-    "wallExhibits": 40,
+    "wallExhibits": 41,
     "withSound": 28,
-    "withoutAssignedSong": 12
+    "withoutAssignedSong": 13
   },
   "originalMetadata": [
     {
@@ -306,6 +306,11 @@
         "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #56 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
         "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #56; this does not assert identical original media packages or renditions."
       }
+    },
+    {
+      "exhibit": "eth-122",
+      "state": "not_assigned",
+      "reason": "Verified original image; no recording assigned in this edition."
     },
     {
       "exhibit": "eth-146",

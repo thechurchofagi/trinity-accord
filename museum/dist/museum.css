@@ -221,3 +221,9 @@ body:has(#lyric-stage[data-view=full]:not([hidden])) #focus-tools{visibility:hid
 #guide-audio-prompt::backdrop{background:#020812a6;backdrop-filter:blur(3px)}
 #guide-audio-start:disabled{opacity:.75;cursor:progress}
 #guide-audio-dismiss{margin-top:12px;min-height:44px;padding:8px 12px;color:#d5eaf0;font-size:14px}
+
+/* Spatial edition: keep the scene readable without a fixed instruction rail. */
+.room-label{text-shadow:0 1px 12px #000a}
+#hint{display:none}
+
+body[data-presentation="true"] #exhibit-strip,body[data-presentation="true"] #focus-tools,body[data-presentation="true"] #walk-controls,body[data-presentation="true"] #look-controls{display:none!important}

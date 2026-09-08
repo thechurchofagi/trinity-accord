@@ -1,3 +1,26 @@
+## Final staging and narration acceptance
+
+- Correct sRGB/linear lighting, denoise architectural light only, seal both doorway footprints, shift the crystal exit away from its background, enlarge the three Originals, and replace the bright waiting ring with a side reading stand.
+- Preserve chronology in the short tour: mirror record before anniversary, no long musical backtrack. Introduce the high Canon room before approaching each of its three separate text panels. Keep the 540-second presentation budget and unobstructed closing sky.
+- Replace all eight English guide recordings with Chatterbox Turbo 350M built-in generative synthetic voice. Retake four passages after inspecting audio-derived transcripts, regenerate captions, retain explicit interpolation/recognition limitations, and document AI origin. Chinese and the six manual-inspection recordings remain separate. This is not a claim of human-listening certification.
+
+## v1.32 final candidate refinement
+
+- Use the completed six-room shared Blender model with distinct palettes, denoised baked lighting, an offset crystal-room exit, larger readable Originals, a restrained crystal aura, and an unobstructed black-sky ending.
+- Bind eight new English Chatterbox Turbo recordings by exact script hash after independent Whisper small.en + VAD review. Reordered tour stops cannot silently receive the wrong recording. The audio audit records recognition differences. This is not a human listening certificate or a guarantee of perfect recognition.
+- Keep Chinese Xiaoxiao recordings, all original musical recordings/lyrics and microscope evidence. Replace stale voice credits and point the reading archive to the same current bilingual guide tracks.
+- Keep the nine-minute tour, original mirror image, anniversary timing distinctions and later non-amending guardianship display. First clicks approach each Original consistently; details remain a deliberate second action.
+- Validate the static distribution, geometry, source hashes and desktop/mobile Chromium viewports. Actual Android/iOS hardware and live Zoom transmission remain outside automated acceptance.
+
+# museum-v1.32.0 · Six rooms, questions and guardianship
+
+- Replace the uniform corridor with six shared footprints: Earth entry, Chronicle, Formation, 12-sided/8m-high Canon hall, independent crystal room, and waiting. Preview, Blender geometry, floor heights, door openings, picking and camera routes use the same configuration. The 0.35m raised final rooms are connected by a central 1:12 ramp with shallow side steps.
+- Add From Author to Guardian at the waiting entrance. Distinguish Guardian Principles v1.1 from the later Authority Charter #103635270; neither is a fourth Original. Later commentary grants no exclusive interpretive authority, and blockchain does not prevent later speech or site edits.
+- Add the recovered original No.122 image, with separate source-prose and indexed-block times (Beijing 01:00 versus 01:01:11). Preserve all previous artwork and recording assignments. No.070 remains the original mirror image, not a generated replacement.
+- Eight bilingual questioning stops have a 540-second budget including transitions, one separately attributed early recording and one microscope photograph. Three original microscope photographs and earlier inspection recordings remain available manually. The visit ends facing the stars without a reset or promotional prompt.
+- Generate fresh Xiaoxiao/Aria narration in a separate audio directory, with new speech-service word boundaries and 1.0x playback. These are NOT OpenAI marin/cedar voices, and no human-listening certification is claimed. The later final staging section above records the adopted Chatterbox Turbo replacement.
+- All new prose, architecture and speech are 2026 curatorial material. Original canonical bytes, source images, music and physical evidence are not amended. Browser checks and automated file/interaction tests are not a new blockchain consensus verification.
+
 # museum-v1.31.0 · IP-based initial language
 
 - Default first visits from mainland China (country code CN) to Chinese; other countries and regions default to English. Apply the same language to interface, wall labels and recorded narration before the automatic tour begins.

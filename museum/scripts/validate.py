@@ -51,7 +51,7 @@ if (D/'data/gallery-layout.json').exists():
  check([e['id'] for r in layout['rooms'] for e in r['exhibits']]==[id for r in rooms['rooms'] for id in r['exhibits']],'Gallery placement identity mismatch')
  for r in layout['rooms']:
   for e in r['exhibits']:
-   check(abs(e['x'])==4.375 and -layout['dimensions']['length']<e['z']<0,'Exhibit outside wall bounds '+e['id'])
+   check(abs(e['x'])<=r['width']/2 and -r['start']-r['length']<e['z']<-r['start'],'Exhibit outside room bounds '+e['id'])
  b=(D/'assets/gallery/memory-gallery.glb').read_bytes();magic,version,total=struct.unpack_from('<III',b);check(magic==0x46546c67 and version==2 and total==len(b),'Invalid GLB header');jl=struct.unpack_from('<I',b,12)[0];model=json.loads(b[20:20+jl]);bl=struct.unpack_from('<I',b,20+jl)[0]
  check(all(v.get('byteOffset',0)+v['byteLength']<=bl for v in model['bufferViews']),'GLB buffer view out of bounds')
  check(all('bufferView' in im and not im.get('uri') for im in model.get('images',[])),'External model image dependency')
@@ -88,6 +88,8 @@ for row in audit['items']:
  id=row['exhibit'];e=byid.get(id)
  if e is None:
   check(row['state']=='not_applicable','Context entry claims an original song '+id);continue
+ if id=='eth-122':
+  check(row['state']=='not_assigned' and any(m['kind']=='image' for m in e['media']),'Anniversary image/audio boundary');continue
  check(bool(e.get('songTitle')),'Missing song identity '+id)
  sound=byid.get(e.get('relatedSoundExhibit',id),{})
  audio=next((m for m in sound.get('media',[]) if m['kind']=='audio'),None)
@@ -98,8 +100,8 @@ for row in audit['items']:
  if e.get('relatedSoundExhibit'):
   check(all(e.get('audioRelation',{}).get(k) for k in ('basis','noteZh','noteEn')),'Missing independent-recording attribution '+id)
   check(e['songTitle']==sound.get('songTitle'),'Related recording song-title mismatch '+id)
-check(playable==28 and len(wall)==40,'Expected 28 musical NFTs among 40 exhibit entries')
-check(audit['counts']=={'wallExhibits':40,'withSound':28,'withoutAssignedSong':12},'Audio audit counts mismatch')
+check(playable==28 and len(wall)==41,'Expected 28 musical NFTs among 41 exhibit entries')
+check(audit['counts']=={'wallExhibits':41,'withSound':28,'withoutAssignedSong':13},'Audio audit counts mismatch')
 check([r['id'] for r in rooms['rooms']]==['entrance','chronicle','formation','originals','material','waiting'],'Six-zone narrative drift')
 check(rooms['rooms'][2]['featuredExhibit']=='eth-173','Critical NFT must be prominent')
 curation=read('curation.json')

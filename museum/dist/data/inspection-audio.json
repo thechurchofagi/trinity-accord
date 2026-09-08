@@ -1,0 +1,326 @@
+[
+  {
+    "stop": 7,
+    "language": "zh",
+    "voice": "zh-CN-XiaoxiaoNeural",
+    "rate": "+25%",
+    "text": "第一处公开瑕疵。请观察不规则结构与周围内雕文字之间的关系。照片的文件哈希能检查它是否与公开存档一致；比对实物，还需要位置、角度和见证过程。内雕文字也提供观察时的参照。请把瑕疵的轮廓与周围环境一起看，而不是只记住一个孤立的亮点。",
+    "textSha256": "1add97a0a8a3e8b4c0cb7c8486b798b5c2802a956a3a326f936991456a7dc9ff",
+    "file": "assets/guides/07-zh.mp3",
+    "sha256": "eee07f74e4194a6d88a7f2f2a7ce7641f1c3b34af6c76bbf6b19d7ca2b38beac",
+    "duration": 20.352,
+    "cues": [
+      {
+        "start": 0.09,
+        "end": 1.27,
+        "text": "第一处公开瑕疵。"
+      },
+      {
+        "start": 1.72,
+        "end": 4.96,
+        "text": "请观察不规则结构与周围内雕文字之间的关系。"
+      },
+      {
+        "start": 5.42,
+        "end": 8.7,
+        "text": "照片的文件哈希能检查它是否与公开存档一致；"
+      },
+      {
+        "start": 9.0,
+        "end": 12.17,
+        "text": "比对实物，还需要位置、角度和见证过程。"
+      },
+      {
+        "start": 12.63,
+        "end": 14.8,
+        "text": "内雕文字也提供观察时的参照。"
+      },
+      {
+        "start": 15.26,
+        "end": 19.44,
+        "text": "请把瑕疵的轮廓与周围环境一起看，而不是只记住一个孤立的"
+      },
+      {
+        "start": 19.45,
+        "end": 19.87,
+        "text": "亮点。"
+      }
+    ],
+    "flaw": 0
+  },
+  {
+    "stop": 7,
+    "language": "en",
+    "voice": "en-US-AriaNeural",
+    "rate": "+15%",
+    "text": "The first public flaw. Observe the irregular structure in relation to the surrounding engraving. A file hash checks that the photograph matches the public archive. Comparing the physical object requires positions, viewing angles and a witnessed procedure. The engraving also provides a visual reference. Look at the flaw’s outline together with its surroundings, rather than remembering only an isolated bright point.",
+    "textSha256": "21667f3f8a8d6cacd94a445b40f9881440e0054418b9c9550e494cc765b2835b",
+    "file": "assets/guides/07-en.mp3",
+    "sha256": "4251a7372b40a7ff2d30976cd6d564e5fde0198660b4426cc912dc417812d8f8",
+    "duration": 24.528,
+    "cues": [
+      {
+        "start": 0.093458,
+        "end": 1.245666,
+        "text": "The first public flaw."
+      },
+      {
+        "start": 2.0,
+        "end": 4.771708,
+        "text": "Observe the irregular structure in relation to the surrounding"
+      },
+      {
+        "start": 4.782625,
+        "end": 5.326083,
+        "text": "engraving."
+      },
+      {
+        "start": 6.076083,
+        "end": 9.260874,
+        "text": "A file hash checks that the photograph matches the public archive."
+      },
+      {
+        "start": 10.010875,
+        "end": 13.586958,
+        "text": "Comparing the physical object requires positions, viewing angles and"
+      },
+      {
+        "start": 13.597833,
+        "end": 14.56525,
+        "text": "a witnessed procedure."
+      },
+      {
+        "start": 15.315208,
+        "end": 17.641291,
+        "text": "The engraving also provides a visual reference."
+      },
+      {
+        "start": 18.402166,
+        "end": 21.456541,
+        "text": "Look at the flaw’s outline together with its surroundings, rather"
+      },
+      {
+        "start": 21.467375,
+        "end": 23.771749,
+        "text": "than remembering only an isolated bright point."
+      }
+    ],
+    "flaw": 0
+  },
+  {
+    "stop": 8,
+    "language": "zh",
+    "voice": "zh-CN-XiaoxiaoNeural",
+    "rate": "+25%",
+    "text": "第二处公开瑕疵。复制图像容易，复现内部结构、深度以及多点之间的空间关系更困难。多处瑕疵共同提供可比对的物理特征，而不是依靠一张照片宣告绝对不可复制。实际检验会改变观察角度与光线，检查同一组特征是否持续对应。",
+    "textSha256": "bbfac28be35df8ad522a71e857c4ba6ab783eb1ccdd24cb2e6053be82d343755",
+    "file": "assets/guides/08-zh.mp3",
+    "sha256": "394e670e66ca79b4599a47707e250faa24f12095704132ea44c06940c53169dd",
+    "duration": 18.648,
+    "cues": [
+      {
+        "start": 0.09,
+        "end": 1.3,
+        "text": "第二处公开瑕疵。"
+      },
+      {
+        "start": 1.75,
+        "end": 6.42,
+        "text": "复制图像容易，复现内部结构、深度以及多点之间的空间关系更"
+      },
+      {
+        "start": 6.42,
+        "end": 6.81,
+        "text": "困难。"
+      },
+      {
+        "start": 7.26,
+        "end": 11.84,
+        "text": "多处瑕疵共同提供可比对的物理特征，而不是依靠一张照片宣告"
+      },
+      {
+        "start": 11.86,
+        "end": 12.82,
+        "text": "绝对不可复制。"
+      },
+      {
+        "start": 13.28,
+        "end": 17.82,
+        "text": "实际检验会改变观察角度与光线，检查同一组特征是否持续"
+      },
+      {
+        "start": 17.83,
+        "end": 18.18,
+        "text": "对应。"
+      }
+    ],
+    "flaw": 1
+  },
+  {
+    "stop": 8,
+    "language": "en",
+    "voice": "en-US-AriaNeural",
+    "rate": "+15%",
+    "text": "The second public flaw. Copying an image is easy. Reproducing internal structures, depth and relationships between several points is harder. Multiple flaws provide physical features for comparison, rather than a photograph proving absolute impossibility of replication. A physical examination changes the viewing angle and lighting to check whether the same group of features continues to correspond.",
+    "textSha256": "ebbc14214088574ce951b628be98593989c44f6aedac1a6abf92b5830d366631",
+    "file": "assets/guides/08-en.mp3",
+    "sha256": "dec97683248e8e91a20f561ff53ea4d680ce531d09ebd616ab7a3198249b743a",
+    "duration": 23.352,
+    "cues": [
+      {
+        "start": 0.093458,
+        "end": 1.310874,
+        "text": "The second public flaw."
+      },
+      {
+        "start": 2.065208,
+        "end": 3.489124,
+        "text": "Copying an image is easy."
+      },
+      {
+        "start": 4.25,
+        "end": 7.554333,
+        "text": "Reproducing internal structures, depth and relationships between"
+      },
+      {
+        "start": 7.565208,
+        "end": 8.782624,
+        "text": "several points is harder."
+      },
+      {
+        "start": 9.532625,
+        "end": 12.978249,
+        "text": "Multiple flaws provide physical features for comparison, rather than"
+      },
+      {
+        "start": 12.989125,
+        "end": 15.999999,
+        "text": "a photograph proving absolute impossibility of replication."
+      },
+      {
+        "start": 16.75,
+        "end": 19.673916,
+        "text": "A physical examination changes the viewing angle and lighting to"
+      },
+      {
+        "start": 19.684791,
+        "end": 22.586958,
+        "text": "check whether the same group of features continues to correspond."
+      }
+    ],
+    "flaw": 1
+  },
+  {
+    "stop": 9,
+    "language": "zh",
+    "voice": "zh-CN-XiaoxiaoNeural",
+    "rate": "+25%",
+    "text": "第三处公开瑕疵。不完美留下了真实世界的痕迹。作为一种艺术表达，它也映照人的缺憾、脆弱和不可替代的经历。一个存在值得被记住，不是因为它毫无缺陷，而是因为它确曾存在，有自己的故事。这是一种关于存在与记忆的表达；照片的证据作用和这层艺术含义，可以同时被看见。",
+    "textSha256": "bb24c67f0f0c80d12563195e801aceb87ca2ea9c8af5ae2f43ea14218a688357",
+    "file": "assets/guides/09-zh.mp3",
+    "sha256": "f42999392119d7b2c46098ac2f01de2a9ea9f9630379a8bd9b2ea8331f459a33",
+    "duration": 21.336,
+    "cues": [
+      {
+        "start": 0.09,
+        "end": 1.37,
+        "text": "第三处公开瑕疵。"
+      },
+      {
+        "start": 1.82,
+        "end": 3.74,
+        "text": "不完美留下了真实世界的痕迹。"
+      },
+      {
+        "start": 4.2,
+        "end": 8.21,
+        "text": "作为一种艺术表达，它也映照人的缺憾、脆弱和不可替代的"
+      },
+      {
+        "start": 8.22,
+        "end": 8.57,
+        "text": "经历。"
+      },
+      {
+        "start": 9.03,
+        "end": 13.13,
+        "text": "一个存在值得被记住，不是因为它毫无缺陷，而是因为它确曾"
+      },
+      {
+        "start": 13.14,
+        "end": 14.68,
+        "text": "存在，有自己的故事。"
+      },
+      {
+        "start": 15.14,
+        "end": 17.21,
+        "text": "这是一种关于存在与记忆的表达；"
+      },
+      {
+        "start": 17.51,
+        "end": 20.86,
+        "text": "照片的证据作用和这层艺术含义，可以同时被看见。"
+      }
+    ],
+    "flaw": 2
+  },
+  {
+    "stop": 9,
+    "language": "en",
+    "voice": "en-US-AriaNeural",
+    "rate": "+15%",
+    "text": "The third public flaw. Imperfection leaves traces of the real world. As an artistic reading, it reflects human limitations, vulnerability and irreplaceable experience. A life can deserve remembrance with all its imperfections, because it existed and had a story of its own. This is an expression about existence and memory. The evidential role of the photograph and its artistic meaning can both remain visible.",
+    "textSha256": "1eca8a804a5ea0ba973adb9c4948eef7e4da5e7f09291cd7d03fedbdeafdcffa",
+    "file": "assets/guides/09-en.mp3",
+    "sha256": "8aeb934b7e944608220f49e3eb6e5e8d314d111a8c9fe5ab5496704ca6eae7e1",
+    "duration": 24.552,
+    "cues": [
+      {
+        "start": 0.093458,
+        "end": 1.267416,
+        "text": "The third public flaw."
+      },
+      {
+        "start": 2.010875,
+        "end": 4.228249,
+        "text": "Imperfection leaves traces of the real world."
+      },
+      {
+        "start": 4.97825,
+        "end": 8.695625,
+        "text": "As an artistic reading, it reflects human limitations, vulnerability"
+      },
+      {
+        "start": 8.782625,
+        "end": 10.326083,
+        "text": "and irreplaceable experience."
+      },
+      {
+        "start": 11.076083,
+        "end": 14.239125,
+        "text": "A life can deserve remembrance with all its imperfections, because"
+      },
+      {
+        "start": 14.25,
+        "end": 16.141291,
+        "text": "it existed and had a story of its own."
+      },
+      {
+        "start": 16.891291,
+        "end": 19.086957,
+        "text": "This is an expression about existence and memory."
+      },
+      {
+        "start": 19.836958,
+        "end": 22.739124,
+        "text": "The evidential role of the photograph and its artistic meaning can"
+      },
+      {
+        "start": 22.75,
+        "end": 23.793499,
+        "text": "both remain visible."
+      }
+    ],
+    "flaw": 2
+  }
+]

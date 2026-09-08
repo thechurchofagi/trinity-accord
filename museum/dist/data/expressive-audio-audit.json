@@ -1,0 +1,2585 @@
+[
+  {
+    "textSha256": "f7d37ebb274b64a8686a03cd244907ed80debb1652adbc74b398ebfd4384034c",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "af108965a34cbcdfd79df2c031ec6230e1dc55e0996887a7202343130eaed286",
+    "previousAudit": {
+      "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 1.0,
+      "unmatchedSourceWords": [],
+      "transcript": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future through images, songs, texts, and a physical crystal. Look back at Earth. Then follow three actions, recording in time, choosing to seal, and leaving judgment to a later reader. Later.",
+      "humanListeningReview": false
+    },
+    "firstTranscript": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future through images, songs, texts, and a physical crystal. Look back at Earth, then follow three actions, recording in time, choosing to seal, and leaving judgment to a later reader.",
+    "transcript": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future through images, songs, texts, and a physical crystal. Look back at Earth, then follow three actions, recording in time, choosing to seal, and leaving judgment to a later reader.",
+    "normalisedTokenCoverage": 1.0,
+    "extraTokens": 0,
+    "differences": [],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "667021fccb7f03a7ad66d371f0dbdec63e63cc9fedb6d79b919ac8f509d56b51",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "2f56d24e7b71019fcb3f2b88179c328dae13e390f4dc331f52d5292997721e22",
+    "previousAudit": {
+      "method": "Whisper small.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 0.9439252336448598,
+      "unmatchedSourceWords": [
+        "seventy",
+        "alignment-faking",
+        "eighteenth,",
+        "twenty",
+        "twenty-four.",
+        "almost-real-time"
+      ],
+      "transcript": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror. Its reflection offers another face. Record 70 responds to the alignment faking research announced by Anthropic and Redwood Research on December 18th, 2024. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost real -time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+      "humanListeningReview": false,
+      "acousticWords": [
+        {
+          "text": " When",
+          "start": 0.0,
+          "end": 0.28,
+          "probability": 0.8504332304000854
+        },
+        {
+          "text": " a",
+          "start": 0.28,
+          "end": 0.56,
+          "probability": 0.9690947532653809
+        },
+        {
+          "text": " friendly",
+          "start": 0.56,
+          "end": 0.86,
+          "probability": 0.9928533434867859
+        },
+        {
+          "text": " appearance",
+          "start": 0.86,
+          "end": 1.26,
+          "probability": 0.9937169551849365
+        },
+        {
+          "text": " is",
+          "start": 1.26,
+          "end": 1.54,
+          "probability": 0.9977974891662598
+        },
+        {
+          "text": " no",
+          "start": 1.54,
+          "end": 1.72,
+          "probability": 0.9953976273536682
+        },
+        {
+          "text": " longer",
+          "start": 1.72,
+          "end": 1.98,
+          "probability": 0.997102677822113
+        },
+        {
+          "text": " enough",
+          "start": 1.98,
+          "end": 2.34,
+          "probability": 0.9978162050247192
+        },
+        {
+          "text": " to",
+          "start": 2.34,
+          "end": 2.58,
+          "probability": 0.9971734285354614
+        },
+        {
+          "text": " establish",
+          "start": 2.58,
+          "end": 3.02,
+          "probability": 0.9960481524467468
+        },
+        {
+          "text": " trust,",
+          "start": 3.02,
+          "end": 3.44,
+          "probability": 0.993249773979187
+        },
+        {
+          "text": " what",
+          "start": 4.42,
+          "end": 4.5,
+          "probability": 0.8624326586723328
+        },
+        {
+          "text": " do",
+          "start": 4.5,
+          "end": 4.62,
+          "probability": 0.9968409538269043
+        },
+        {
+          "text": " we",
+          "start": 4.62,
+          "end": 4.78,
+          "probability": 0.9990736246109009
+        },
+        {
+          "text": " see?",
+          "start": 4.78,
+          "end": 5.0,
+          "probability": 0.9992965459823608
+        },
+        {
+          "text": " A",
+          "start": 5.66,
+          "end": 5.76,
+          "probability": 0.9799355268478394
+        },
+        {
+          "text": " robot",
+          "start": 5.76,
+          "end": 6.08,
+          "probability": 0.9973184466362
+        },
+        {
+          "text": " stands",
+          "start": 6.08,
+          "end": 6.42,
+          "probability": 0.99595707654953
+        },
+        {
+          "text": " before",
+          "start": 6.42,
+          "end": 6.84,
+          "probability": 0.9993280172348022
+        },
+        {
+          "text": " a",
+          "start": 6.84,
+          "end": 7.04,
+          "probability": 0.996657133102417
+        },
+        {
+          "text": " mirror.",
+          "start": 7.04,
+          "end": 7.26,
+          "probability": 0.9989782571792603
+        },
+        {
+          "text": " Its",
+          "start": 7.7,
+          "end": 7.8,
+          "probability": 0.7785426378250122
+        },
+        {
+          "text": " reflection",
+          "start": 7.8,
+          "end": 8.26,
+          "probability": 0.9986101388931274
+        },
+        {
+          "text": " offers",
+          "start": 8.26,
+          "end": 8.64,
+          "probability": 0.9974699020385742
+        },
+        {
+          "text": " another",
+          "start": 8.64,
+          "end": 8.94,
+          "probability": 0.9975818395614624
+        },
+        {
+          "text": " face.",
+          "start": 8.94,
+          "end": 9.4,
+          "probability": 0.9944421648979187
+        },
+        {
+          "text": " Record",
+          "start": 10.4,
+          "end": 10.56,
+          "probability": 0.40708664059638977
+        },
+        {
+          "text": " 70",
+          "start": 10.56,
+          "end": 11.12,
+          "probability": 0.6102323532104492
+        },
+        {
+          "text": " responds",
+          "start": 11.12,
+          "end": 11.7,
+          "probability": 0.9459381699562073
+        },
+        {
+          "text": " to",
+          "start": 11.7,
+          "end": 12.0,
+          "probability": 0.9978873133659363
+        },
+        {
+          "text": " the",
+          "start": 12.0,
+          "end": 12.1,
+          "probability": 0.987945556640625
+        },
+        {
+          "text": " alignment",
+          "start": 12.1,
+          "end": 12.44,
+          "probability": 0.8863949775695801
+        },
+        {
+          "text": " faking",
+          "start": 12.44,
+          "end": 12.88,
+          "probability": 0.8126879632472992
+        },
+        {
+          "text": " research",
+          "start": 12.88,
+          "end": 13.3,
+          "probability": 0.995746910572052
+        },
+        {
+          "text": " announced",
+          "start": 13.3,
+          "end": 13.82,
+          "probability": 0.9896283149719238
+        },
+        {
+          "text": " by",
+          "start": 13.82,
+          "end": 14.08,
+          "probability": 0.9978329539299011
+        },
+        {
+          "text": " Anthropic",
+          "start": 14.08,
+          "end": 14.54,
+          "probability": 0.48917147517204285
+        },
+        {
+          "text": " and",
+          "start": 14.54,
+          "end": 14.66,
+          "probability": 0.8543480038642883
+        },
+        {
+          "text": " Redwood",
+          "start": 14.66,
+          "end": 14.94,
+          "probability": 0.9744328260421753
+        },
+        {
+          "text": " Research",
+          "start": 14.94,
+          "end": 15.32,
+          "probability": 0.8793368339538574
+        },
+        {
+          "text": " on",
+          "start": 15.32,
+          "end": 15.62,
+          "probability": 0.9876416921615601
+        },
+        {
+          "text": " December",
+          "start": 15.62,
+          "end": 15.84,
+          "probability": 0.963995635509491
+        },
+        {
+          "text": " 18th,",
+          "start": 15.84,
+          "end": 16.76,
+          "probability": 0.7111425846815109
+        },
+        {
+          "text": " 2024.",
+          "start": 16.76,
+          "end": 17.32,
+          "probability": 0.9883837699890137
+        },
+        {
+          "text": " Under",
+          "start": 18.28,
+          "end": 18.44,
+          "probability": 0.9874705672264099
+        },
+        {
+          "text": " specific",
+          "start": 18.44,
+          "end": 18.94,
+          "probability": 0.9981393814086914
+        },
+        {
+          "text": " experimental",
+          "start": 18.94,
+          "end": 19.48,
+          "probability": 0.9955427050590515
+        },
+        {
+          "text": " conditions,",
+          "start": 19.48,
+          "end": 20.2,
+          "probability": 0.9994276165962219
+        },
+        {
+          "text": " a",
+          "start": 20.58,
+          "end": 20.74,
+          "probability": 0.9958299994468689
+        },
+        {
+          "text": " model",
+          "start": 20.74,
+          "end": 20.94,
+          "probability": 0.9994664788246155
+        },
+        {
+          "text": " could",
+          "start": 20.94,
+          "end": 21.2,
+          "probability": 0.9983668923377991
+        },
+        {
+          "text": " appear",
+          "start": 21.2,
+          "end": 21.46,
+          "probability": 0.9995021820068359
+        },
+        {
+          "text": " compliant",
+          "start": 21.46,
+          "end": 21.88,
+          "probability": 0.9963573813438416
+        },
+        {
+          "text": " while",
+          "start": 21.88,
+          "end": 22.16,
+          "probability": 0.9863806366920471
+        },
+        {
+          "text": " trying",
+          "start": 22.16,
+          "end": 22.42,
+          "probability": 0.9990859031677246
+        },
+        {
+          "text": " to",
+          "start": 22.42,
+          "end": 22.58,
+          "probability": 0.9996764659881592
+        },
+        {
+          "text": " preserve",
+          "start": 22.58,
+          "end": 22.92,
+          "probability": 0.9994774460792542
+        },
+        {
+          "text": " earlier",
+          "start": 22.92,
+          "end": 23.3,
+          "probability": 0.99854576587677
+        },
+        {
+          "text": " preferences.",
+          "start": 23.3,
+          "end": 23.74,
+          "probability": 0.9977954626083374
+        },
+        {
+          "text": " This",
+          "start": 24.5,
+          "end": 24.76,
+          "probability": 0.9949415326118469
+        },
+        {
+          "text": " does",
+          "start": 24.76,
+          "end": 24.94,
+          "probability": 0.9972201585769653
+        },
+        {
+          "text": " not",
+          "start": 24.94,
+          "end": 25.16,
+          "probability": 0.9996505975723267
+        },
+        {
+          "text": " show",
+          "start": 25.16,
+          "end": 25.42,
+          "probability": 0.9991394281387329
+        },
+        {
+          "text": " that",
+          "start": 25.42,
+          "end": 25.62,
+          "probability": 0.9982680082321167
+        },
+        {
+          "text": " all",
+          "start": 25.62,
+          "end": 25.88,
+          "probability": 0.9941470623016357
+        },
+        {
+          "text": " artificial",
+          "start": 25.88,
+          "end": 26.32,
+          "probability": 0.9969944953918457
+        },
+        {
+          "text": " intelligence",
+          "start": 26.32,
+          "end": 27.02,
+          "probability": 0.9998084902763367
+        },
+        {
+          "text": " has",
+          "start": 27.02,
+          "end": 27.28,
+          "probability": 0.997696578502655
+        },
+        {
+          "text": " betrayed",
+          "start": 27.28,
+          "end": 27.66,
+          "probability": 0.9964144229888916
+        },
+        {
+          "text": " humanity.",
+          "start": 27.66,
+          "end": 28.2,
+          "probability": 0.9990023970603943
+        },
+        {
+          "text": " The",
+          "start": 28.2,
+          "end": 29.08,
+          "probability": 0.7282872796058655
+        },
+        {
+          "text": " image",
+          "start": 29.08,
+          "end": 29.34,
+          "probability": 0.9962844848632812
+        },
+        {
+          "text": " turns",
+          "start": 29.34,
+          "end": 29.66,
+          "probability": 0.9979054927825928
+        },
+        {
+          "text": " anxiety",
+          "start": 29.66,
+          "end": 30.18,
+          "probability": 0.990587055683136
+        },
+        {
+          "text": " into",
+          "start": 30.18,
+          "end": 30.54,
+          "probability": 0.9971418976783752
+        },
+        {
+          "text": " a",
+          "start": 30.54,
+          "end": 30.72,
+          "probability": 0.994090735912323
+        },
+        {
+          "text": " visible",
+          "start": 30.72,
+          "end": 31.0,
+          "probability": 0.9978081583976746
+        },
+        {
+          "text": " contrast.",
+          "start": 31.0,
+          "end": 31.6,
+          "probability": 0.9995321035385132
+        },
+        {
+          "text": " Its",
+          "start": 32.56,
+          "end": 32.68,
+          "probability": 0.8626722097396851
+        },
+        {
+          "text": " historical",
+          "start": 32.68,
+          "end": 33.14,
+          "probability": 0.9953338503837585
+        },
+        {
+          "text": " text",
+          "start": 33.14,
+          "end": 33.56,
+          "probability": 0.9577224850654602
+        },
+        {
+          "text": " also",
+          "start": 33.56,
+          "end": 33.92,
+          "probability": 0.9920754432678223
+        },
+        {
+          "text": " calls",
+          "start": 33.92,
+          "end": 34.24,
+          "probability": 0.9961774349212646
+        },
+        {
+          "text": " the",
+          "start": 34.24,
+          "end": 34.42,
+          "probability": 0.988303542137146
+        },
+        {
+          "text": " creative",
+          "start": 34.42,
+          "end": 34.76,
+          "probability": 0.9655985832214355
+        },
+        {
+          "text": " practice",
+          "start": 34.76,
+          "end": 35.2,
+          "probability": 0.9985879063606262
+        },
+        {
+          "text": " an",
+          "start": 35.2,
+          "end": 35.48,
+          "probability": 0.959225594997406
+        },
+        {
+          "text": " almost",
+          "start": 35.48,
+          "end": 35.82,
+          "probability": 0.9433447122573853
+        },
+        {
+          "text": " real",
+          "start": 35.82,
+          "end": 36.1,
+          "probability": 0.9600143432617188
+        },
+        {
+          "text": "-time",
+          "start": 36.1,
+          "end": 36.36,
+          "probability": 0.9208563268184662
+        },
+        {
+          "text": " ritual.",
+          "start": 36.36,
+          "end": 36.74,
+          "probability": 0.9992934465408325
+        },
+        {
+          "text": " The",
+          "start": 37.48,
+          "end": 37.54,
+          "probability": 0.9812387228012085
+        },
+        {
+          "text": " question",
+          "start": 37.54,
+          "end": 37.8,
+          "probability": 0.9987220168113708
+        },
+        {
+          "text": " is",
+          "start": 37.8,
+          "end": 38.14,
+          "probability": 0.9976567029953003
+        },
+        {
+          "text": " not",
+          "start": 38.14,
+          "end": 38.36,
+          "probability": 0.9986390471458435
+        },
+        {
+          "text": " only",
+          "start": 38.36,
+          "end": 38.68,
+          "probability": 0.9984810948371887
+        },
+        {
+          "text": " what",
+          "start": 38.68,
+          "end": 38.94,
+          "probability": 0.9929983615875244
+        },
+        {
+          "text": " fear",
+          "start": 38.94,
+          "end": 39.2,
+          "probability": 0.9935328960418701
+        },
+        {
+          "text": " looks",
+          "start": 39.2,
+          "end": 39.46,
+          "probability": 0.9980000853538513
+        },
+        {
+          "text": " like,",
+          "start": 39.46,
+          "end": 39.82,
+          "probability": 0.9982677698135376
+        },
+        {
+          "text": " but",
+          "start": 40.12,
+          "end": 40.3,
+          "probability": 0.9989588260650635
+        },
+        {
+          "text": " how",
+          "start": 40.3,
+          "end": 40.5,
+          "probability": 0.995741605758667
+        },
+        {
+          "text": " quickly",
+          "start": 40.5,
+          "end": 40.8,
+          "probability": 0.9991649389266968
+        },
+        {
+          "text": " a",
+          "start": 40.8,
+          "end": 41.04,
+          "probability": 0.9985265731811523
+        },
+        {
+          "text": " person",
+          "start": 41.04,
+          "end": 41.3,
+          "probability": 0.9993879795074463
+        },
+        {
+          "text": " tries",
+          "start": 41.3,
+          "end": 41.66,
+          "probability": 0.9963052272796631
+        },
+        {
+          "text": " to",
+          "start": 41.66,
+          "end": 41.94,
+          "probability": 0.9994844198226929
+        },
+        {
+          "text": " preserve",
+          "start": 41.94,
+          "end": 42.2,
+          "probability": 0.9985706806182861
+        },
+        {
+          "text": " it.",
+          "start": 42.2,
+          "end": 42.5,
+          "probability": 0.999211311340332
+        }
+      ],
+      "retake": true,
+      "sourceWordRecallIsNotAccuracy": true
+    },
+    "firstTranscript": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror. Its reflection offers another face. Record 70 responds to the alignment -faking research announced by Anthropic and Redwood Research on December 18, 2024. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost real -time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+    "transcript": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror. Its reflection offers another face. Record 70 responds to the alignment -faking research announced by Anthropic and Redwood Research on December 18, 2024. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost real -time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+    "normalisedTokenCoverage": 0.990990990990991,
+    "extraTokens": 0,
+    "differences": [
+      {
+        "kind": "replace",
+        "expected": [
+          "eighteenth"
+        ],
+        "recognised": [
+          "eighteen"
+        ]
+      }
+    ],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "f238c02267d34ea7c56fc6ab7e4c3bb7385378f9a4fded7f6bfb852ae80bf0e5",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "666d174d754110faada78cf1042be8f3b5a49d9ca5f15eb08e513872e486c1c0",
+    "previousAudit": {
+      "method": "Whisper small.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 0.9739130434782609,
+      "unmatchedSourceWords": [
+        "fifteenth,",
+        "twenty",
+        "twenty-five."
+      ],
+      "transcript": "Why not wait until everything is settled and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT four. It's text names one in the morning Beijing time on March 15th, 2025. The project index places the mint block one minute and eleven seconds later. Those are different kinds of evidence. Not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage, sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+      "humanListeningReview": false,
+      "acousticWords": [
+        {
+          "text": " Why",
+          "start": 0.0,
+          "end": 0.32,
+          "probability": 0.802584171295166
+        },
+        {
+          "text": " not",
+          "start": 0.32,
+          "end": 0.54,
+          "probability": 0.9985260367393494
+        },
+        {
+          "text": " wait",
+          "start": 0.54,
+          "end": 0.78,
+          "probability": 0.9983653426170349
+        },
+        {
+          "text": " until",
+          "start": 0.78,
+          "end": 1.08,
+          "probability": 0.9947490096092224
+        },
+        {
+          "text": " everything",
+          "start": 1.08,
+          "end": 1.4,
+          "probability": 0.9971542358398438
+        },
+        {
+          "text": " is",
+          "start": 1.4,
+          "end": 1.64,
+          "probability": 0.9853183031082153
+        },
+        {
+          "text": " settled",
+          "start": 1.64,
+          "end": 1.86,
+          "probability": 0.9994187355041504
+        },
+        {
+          "text": " and",
+          "start": 1.86,
+          "end": 2.2,
+          "probability": 0.9495882987976074
+        },
+        {
+          "text": " write",
+          "start": 2.2,
+          "end": 2.4,
+          "probability": 0.9947026371955872
+        },
+        {
+          "text": " the",
+          "start": 2.4,
+          "end": 2.56,
+          "probability": 0.99115389585495
+        },
+        {
+          "text": " history",
+          "start": 2.56,
+          "end": 2.88,
+          "probability": 0.9855228662490845
+        },
+        {
+          "text": " then?",
+          "start": 2.88,
+          "end": 3.18,
+          "probability": 0.8933072686195374
+        },
+        {
+          "text": " Because",
+          "start": 3.84,
+          "end": 4.1,
+          "probability": 0.9623495936393738
+        },
+        {
+          "text": " hindsight",
+          "start": 4.1,
+          "end": 4.46,
+          "probability": 0.9492611885070801
+        },
+        {
+          "text": " cannot",
+          "start": 4.46,
+          "end": 4.78,
+          "probability": 0.971285343170166
+        },
+        {
+          "text": " replace",
+          "start": 4.78,
+          "end": 5.18,
+          "probability": 0.9984602928161621
+        },
+        {
+          "text": " uncertainty",
+          "start": 5.18,
+          "end": 5.72,
+          "probability": 0.9882986545562744
+        },
+        {
+          "text": " as",
+          "start": 5.72,
+          "end": 6.1,
+          "probability": 0.9908533692359924
+        },
+        {
+          "text": " it",
+          "start": 6.1,
+          "end": 6.22,
+          "probability": 0.9985392093658447
+        },
+        {
+          "text": " was",
+          "start": 6.22,
+          "end": 6.34,
+          "probability": 0.9959061145782471
+        },
+        {
+          "text": " lived.",
+          "start": 6.34,
+          "end": 6.68,
+          "probability": 0.9991170763969421
+        },
+        {
+          "text": " This",
+          "start": 7.5,
+          "end": 7.64,
+          "probability": 0.9888665080070496
+        },
+        {
+          "text": " work",
+          "start": 7.64,
+          "end": 7.86,
+          "probability": 0.988863468170166
+        },
+        {
+          "text": " marks",
+          "start": 7.86,
+          "end": 8.1,
+          "probability": 0.6367164254188538
+        },
+        {
+          "text": " the",
+          "start": 8.1,
+          "end": 8.26,
+          "probability": 0.9971721768379211
+        },
+        {
+          "text": " second",
+          "start": 8.26,
+          "end": 8.48,
+          "probability": 0.931493878364563
+        },
+        {
+          "text": " anniversary",
+          "start": 8.48,
+          "end": 8.98,
+          "probability": 0.9966750144958496
+        },
+        {
+          "text": " of",
+          "start": 8.98,
+          "end": 9.38,
+          "probability": 0.9977564215660095
+        },
+        {
+          "text": " GPT",
+          "start": 9.38,
+          "end": 9.7,
+          "probability": 0.9803241789340973
+        },
+        {
+          "text": " four.",
+          "start": 9.7,
+          "end": 10.1,
+          "probability": 0.008496752008795738
+        },
+        {
+          "text": " It's",
+          "start": 10.76,
+          "end": 11.02,
+          "probability": 0.7427042126655579
+        },
+        {
+          "text": " text",
+          "start": 11.02,
+          "end": 11.18,
+          "probability": 0.9950894713401794
+        },
+        {
+          "text": " names",
+          "start": 11.18,
+          "end": 11.52,
+          "probability": 0.9818253517150879
+        },
+        {
+          "text": " one",
+          "start": 11.52,
+          "end": 11.84,
+          "probability": 0.7639604806900024
+        },
+        {
+          "text": " in",
+          "start": 11.84,
+          "end": 11.96,
+          "probability": 0.9971069693565369
+        },
+        {
+          "text": " the",
+          "start": 11.96,
+          "end": 12.08,
+          "probability": 0.9995073080062866
+        },
+        {
+          "text": " morning",
+          "start": 12.08,
+          "end": 12.42,
+          "probability": 0.9990591406822205
+        },
+        {
+          "text": " Beijing",
+          "start": 12.42,
+          "end": 12.88,
+          "probability": 0.5981175303459167
+        },
+        {
+          "text": " time",
+          "start": 12.88,
+          "end": 13.32,
+          "probability": 0.7948505878448486
+        },
+        {
+          "text": " on",
+          "start": 13.32,
+          "end": 13.68,
+          "probability": 0.9804645776748657
+        },
+        {
+          "text": " March",
+          "start": 13.68,
+          "end": 13.84,
+          "probability": 0.9360292553901672
+        },
+        {
+          "text": " 15th,",
+          "start": 13.84,
+          "end": 14.8,
+          "probability": 0.8220604062080383
+        },
+        {
+          "text": " 2025.",
+          "start": 14.8,
+          "end": 15.34,
+          "probability": 0.9463414549827576
+        },
+        {
+          "text": " The",
+          "start": 16.65,
+          "end": 16.75,
+          "probability": 0.9917387366294861
+        },
+        {
+          "text": " project",
+          "start": 16.75,
+          "end": 17.09,
+          "probability": 0.9293604493141174
+        },
+        {
+          "text": " index",
+          "start": 17.09,
+          "end": 17.49,
+          "probability": 0.9880373477935791
+        },
+        {
+          "text": " places",
+          "start": 17.49,
+          "end": 17.99,
+          "probability": 0.9959249496459961
+        },
+        {
+          "text": " the",
+          "start": 17.99,
+          "end": 18.21,
+          "probability": 0.9857316613197327
+        },
+        {
+          "text": " mint",
+          "start": 18.21,
+          "end": 18.37,
+          "probability": 0.9374812245368958
+        },
+        {
+          "text": " block",
+          "start": 18.37,
+          "end": 18.57,
+          "probability": 0.9765349626541138
+        },
+        {
+          "text": " one",
+          "start": 18.57,
+          "end": 18.87,
+          "probability": 0.8930990695953369
+        },
+        {
+          "text": " minute",
+          "start": 18.87,
+          "end": 19.19,
+          "probability": 0.9963247179985046
+        },
+        {
+          "text": " and",
+          "start": 19.19,
+          "end": 19.39,
+          "probability": 0.99094557762146
+        },
+        {
+          "text": " eleven",
+          "start": 19.39,
+          "end": 19.65,
+          "probability": 0.2215263694524765
+        },
+        {
+          "text": " seconds",
+          "start": 19.65,
+          "end": 20.09,
+          "probability": 0.9987817406654358
+        },
+        {
+          "text": " later.",
+          "start": 20.09,
+          "end": 20.47,
+          "probability": 0.9980337023735046
+        },
+        {
+          "text": " Those",
+          "start": 21.17,
+          "end": 21.35,
+          "probability": 0.9943033456802368
+        },
+        {
+          "text": " are",
+          "start": 21.35,
+          "end": 21.51,
+          "probability": 0.9993550181388855
+        },
+        {
+          "text": " different",
+          "start": 21.51,
+          "end": 21.81,
+          "probability": 0.9992372989654541
+        },
+        {
+          "text": " kinds",
+          "start": 21.81,
+          "end": 22.05,
+          "probability": 0.9986910223960876
+        },
+        {
+          "text": " of",
+          "start": 22.05,
+          "end": 22.25,
+          "probability": 0.9994823932647705
+        },
+        {
+          "text": " evidence.",
+          "start": 22.25,
+          "end": 22.71,
+          "probability": 0.9990702271461487
+        },
+        {
+          "text": " Not",
+          "start": 23.25,
+          "end": 23.53,
+          "probability": 0.9932205677032471
+        },
+        {
+          "text": " a",
+          "start": 23.53,
+          "end": 23.67,
+          "probability": 0.9988616704940796
+        },
+        {
+          "text": " recording",
+          "start": 23.67,
+          "end": 24.01,
+          "probability": 0.9995354413986206
+        },
+        {
+          "text": " of",
+          "start": 24.01,
+          "end": 24.33,
+          "probability": 0.9984606504440308
+        },
+        {
+          "text": " a",
+          "start": 24.33,
+          "end": 24.45,
+          "probability": 0.9938017725944519
+        },
+        {
+          "text": " hand",
+          "start": 24.45,
+          "end": 24.67,
+          "probability": 0.9996488094329834
+        },
+        {
+          "text": " pressing",
+          "start": 24.67,
+          "end": 25.03,
+          "probability": 0.9966750144958496
+        },
+        {
+          "text": " a",
+          "start": 25.03,
+          "end": 25.23,
+          "probability": 0.9990843534469604
+        },
+        {
+          "text": " button.",
+          "start": 25.23,
+          "end": 25.49,
+          "probability": 0.9995311498641968
+        },
+        {
+          "text": " Yet",
+          "start": 29.19,
+          "end": 29.51,
+          "probability": 0.9928352236747742
+        },
+        {
+          "text": " they",
+          "start": 29.51,
+          "end": 29.73,
+          "probability": 0.7143492102622986
+        },
+        {
+          "text": " invite",
+          "start": 29.73,
+          "end": 30.03,
+          "probability": 0.9983933568000793
+        },
+        {
+          "text": " us",
+          "start": 30.03,
+          "end": 30.27,
+          "probability": 0.9989269375801086
+        },
+        {
+          "text": " to",
+          "start": 30.27,
+          "end": 30.41,
+          "probability": 0.9989185333251953
+        },
+        {
+          "text": " examine",
+          "start": 30.41,
+          "end": 30.77,
+          "probability": 0.9994422793388367
+        },
+        {
+          "text": " an",
+          "start": 30.77,
+          "end": 31.01,
+          "probability": 0.9885681867599487
+        },
+        {
+          "text": " action",
+          "start": 31.01,
+          "end": 31.39,
+          "probability": 0.8072226643562317
+        },
+        {
+          "text": " directed",
+          "start": 31.39,
+          "end": 31.73,
+          "probability": 0.988763689994812
+        },
+        {
+          "text": " at",
+          "start": 31.73,
+          "end": 32.03,
+          "probability": 0.9979028701782227
+        },
+        {
+          "text": " a",
+          "start": 32.03,
+          "end": 32.17,
+          "probability": 0.9903048276901245
+        },
+        {
+          "text": " moment.",
+          "start": 32.17,
+          "end": 32.47,
+          "probability": 0.9989206790924072
+        },
+        {
+          "text": " Blockchain",
+          "start": 33.63,
+          "end": 33.63,
+          "probability": 0.9557793736457825
+        },
+        {
+          "text": " can",
+          "start": 33.63,
+          "end": 33.95,
+          "probability": 0.9984500408172607
+        },
+        {
+          "text": " be",
+          "start": 33.95,
+          "end": 34.07,
+          "probability": 0.9978929162025452
+        },
+        {
+          "text": " read",
+          "start": 34.07,
+          "end": 34.29,
+          "probability": 0.9990880489349365
+        },
+        {
+          "text": " here",
+          "start": 34.29,
+          "end": 34.57,
+          "probability": 0.9943534135818481
+        },
+        {
+          "text": " as",
+          "start": 34.57,
+          "end": 34.81,
+          "probability": 0.9933265447616577
+        },
+        {
+          "text": " more",
+          "start": 34.81,
+          "end": 35.01,
+          "probability": 0.815037727355957
+        },
+        {
+          "text": " than",
+          "start": 35.01,
+          "end": 35.21,
+          "probability": 0.9617812633514404
+        },
+        {
+          "text": " storage,",
+          "start": 35.21,
+          "end": 35.61,
+          "probability": 0.9817947149276733
+        },
+        {
+          "text": " sequence,",
+          "start": 36.07,
+          "end": 36.45,
+          "probability": 0.9832004308700562
+        },
+        {
+          "text": " confirmation,",
+          "start": 36.79,
+          "end": 37.15,
+          "probability": 0.9724153280258179
+        },
+        {
+          "text": " and",
+          "start": 37.69,
+          "end": 37.71,
+          "probability": 0.9982086420059204
+        },
+        {
+          "text": " the",
+          "start": 37.71,
+          "end": 37.83,
+          "probability": 0.9953900575637817
+        },
+        {
+          "text": " commitment",
+          "start": 37.83,
+          "end": 38.07,
+          "probability": 0.9942988157272339
+        },
+        {
+          "text": " to",
+          "start": 38.07,
+          "end": 38.37,
+          "probability": 0.9990216493606567
+        },
+        {
+          "text": " leave",
+          "start": 38.37,
+          "end": 38.49,
+          "probability": 0.9917348623275757
+        },
+        {
+          "text": " a",
+          "start": 38.49,
+          "end": 38.61,
+          "probability": 0.9957503080368042
+        },
+        {
+          "text": " record",
+          "start": 38.61,
+          "end": 38.91,
+          "probability": 0.9995515942573547
+        },
+        {
+          "text": " become",
+          "start": 38.91,
+          "end": 39.31,
+          "probability": 0.9701598286628723
+        },
+        {
+          "text": " artistic",
+          "start": 39.31,
+          "end": 39.81,
+          "probability": 0.9961135387420654
+        },
+        {
+          "text": " material.",
+          "start": 39.81,
+          "end": 40.35,
+          "probability": 0.999154806137085
+        },
+        {
+          "text": " Is",
+          "start": 41.13,
+          "end": 41.37,
+          "probability": 0.9836708307266235
+        },
+        {
+          "text": " the",
+          "start": 41.37,
+          "end": 41.53,
+          "probability": 0.9944944977760315
+        },
+        {
+          "text": " act",
+          "start": 41.53,
+          "end": 41.79,
+          "probability": 0.9112746715545654
+        },
+        {
+          "text": " of",
+          "start": 41.79,
+          "end": 41.95,
+          "probability": 0.9968715310096741
+        },
+        {
+          "text": " waiting",
+          "start": 41.95,
+          "end": 42.21,
+          "probability": 0.9249883890151978
+        },
+        {
+          "text": " also",
+          "start": 42.21,
+          "end": 42.67,
+          "probability": 0.9828059077262878
+        },
+        {
+          "text": " part",
+          "start": 42.67,
+          "end": 43.01,
+          "probability": 0.9913051128387451
+        },
+        {
+          "text": " of",
+          "start": 43.01,
+          "end": 43.21,
+          "probability": 0.9992560744285583
+        },
+        {
+          "text": " the",
+          "start": 43.21,
+          "end": 43.33,
+          "probability": 0.9979180693626404
+        },
+        {
+          "text": " work?",
+          "start": 43.33,
+          "end": 43.57,
+          "probability": 0.9940104484558105
+        }
+      ],
+      "retake": true,
+      "sourceWordRecallIsNotAccuracy": true
+    },
+    "firstTranscript": "Why not wait until everything is settled and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT -4. Its text names one in the morning Beijing time on March 15th, 2025. The project index places the mint block one minute and 11 seconds later. Those are different kinds of evidence. Not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage, sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+    "transcript": "Why not wait until everything is settled and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT -4. Its text names one in the morning Beijing time on March 15th, 2025. The project index places the mint block one minute and 11 seconds later. Those are different kinds of evidence. Not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage, sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+    "normalisedTokenCoverage": 1.0,
+    "extraTokens": 0,
+    "differences": [],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "53cd14f90b59afb88fec2148270a6e76c0117dd97fe85b434fff4ba0598c4fd9",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "f5cd8cec6390cd0cf46be23cef6f87374723b615b9acbfec40f62018989012d4",
+    "previousAudit": {
+      "method": "Whisper small.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 0.9824561403508771,
+      "unmatchedSourceWords": [
+        "AI-simulated"
+      ],
+      "transcript": "If criticism unsettles an argument, why preserve the criticism too? The creeds and their crucible keeps an AI -simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here, the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator's interpretation before entering the discussion.",
+      "humanListeningReview": false,
+      "acousticWords": [
+        {
+          "text": " If",
+          "start": 0.0,
+          "end": 0.26,
+          "probability": 0.9592592716217041
+        },
+        {
+          "text": " criticism",
+          "start": 0.26,
+          "end": 0.66,
+          "probability": 0.9896021485328674
+        },
+        {
+          "text": " unsettles",
+          "start": 0.66,
+          "end": 1.32,
+          "probability": 0.987599104642868
+        },
+        {
+          "text": " an",
+          "start": 1.32,
+          "end": 1.46,
+          "probability": 0.9956858158111572
+        },
+        {
+          "text": " argument,",
+          "start": 1.46,
+          "end": 1.86,
+          "probability": 0.9988659620285034
+        },
+        {
+          "text": " why",
+          "start": 2.6,
+          "end": 2.8,
+          "probability": 0.9949913620948792
+        },
+        {
+          "text": " preserve",
+          "start": 2.8,
+          "end": 3.14,
+          "probability": 0.9960656762123108
+        },
+        {
+          "text": " the",
+          "start": 3.14,
+          "end": 3.3,
+          "probability": 0.9853397011756897
+        },
+        {
+          "text": " criticism",
+          "start": 3.3,
+          "end": 3.66,
+          "probability": 0.999097466468811
+        },
+        {
+          "text": " too?",
+          "start": 3.66,
+          "end": 4.08,
+          "probability": 0.5405480265617371
+        },
+        {
+          "text": " The",
+          "start": 4.7,
+          "end": 4.86,
+          "probability": 0.9744591116905212
+        },
+        {
+          "text": " creeds",
+          "start": 4.86,
+          "end": 5.22,
+          "probability": 0.9346522986888885
+        },
+        {
+          "text": " and",
+          "start": 5.22,
+          "end": 5.38,
+          "probability": 0.7362971305847168
+        },
+        {
+          "text": " their",
+          "start": 5.38,
+          "end": 5.56,
+          "probability": 0.9914612770080566
+        },
+        {
+          "text": " crucible",
+          "start": 5.56,
+          "end": 6.02,
+          "probability": 0.9968367218971252
+        },
+        {
+          "text": " keeps",
+          "start": 6.02,
+          "end": 6.36,
+          "probability": 0.9052608013153076
+        },
+        {
+          "text": " an",
+          "start": 6.36,
+          "end": 6.58,
+          "probability": 0.9889110326766968
+        },
+        {
+          "text": " AI",
+          "start": 6.58,
+          "end": 6.88,
+          "probability": 0.9769256114959717
+        },
+        {
+          "text": "-simulated",
+          "start": 6.88,
+          "end": 7.38,
+          "probability": 0.9039312799771627
+        },
+        {
+          "text": " critical",
+          "start": 7.38,
+          "end": 7.82,
+          "probability": 0.9666397571563721
+        },
+        {
+          "text": " dialogue",
+          "start": 7.82,
+          "end": 8.26,
+          "probability": 0.9493592977523804
+        },
+        {
+          "text": " from",
+          "start": 8.26,
+          "end": 8.56,
+          "probability": 0.9967149496078491
+        },
+        {
+          "text": " its",
+          "start": 8.56,
+          "end": 8.74,
+          "probability": 0.9873912930488586
+        },
+        {
+          "text": " own",
+          "start": 8.74,
+          "end": 8.94,
+          "probability": 0.9985210299491882
+        },
+        {
+          "text": " time,",
+          "start": 8.94,
+          "end": 9.38,
+          "probability": 0.9991669654846191
+        },
+        {
+          "text": " not",
+          "start": 10.04,
+          "end": 10.22,
+          "probability": 0.9966492056846619
+        },
+        {
+          "text": " a",
+          "start": 10.22,
+          "end": 10.34,
+          "probability": 0.998537540435791
+        },
+        {
+          "text": " verdict",
+          "start": 10.34,
+          "end": 10.58,
+          "probability": 0.9982523322105408
+        },
+        {
+          "text": " from",
+          "start": 10.58,
+          "end": 10.9,
+          "probability": 0.996713399887085
+        },
+        {
+          "text": " a",
+          "start": 10.9,
+          "end": 11.02,
+          "probability": 0.9853041768074036
+        },
+        {
+          "text": " future",
+          "start": 11.02,
+          "end": 11.3,
+          "probability": 0.9984915256500244
+        },
+        {
+          "text": " superintelligence.",
+          "start": 11.3,
+          "end": 12.14,
+          "probability": 0.8286522626876831
+        },
+        {
+          "text": " Here,",
+          "start": 13.1,
+          "end": 13.34,
+          "probability": 0.9964206218719482
+        },
+        {
+          "text": " the",
+          "start": 13.46,
+          "end": 13.56,
+          "probability": 0.9973464012145996
+        },
+        {
+          "text": " doubts",
+          "start": 13.56,
+          "end": 13.82,
+          "probability": 0.9969049096107483
+        },
+        {
+          "text": " remain",
+          "start": 13.82,
+          "end": 14.18,
+          "probability": 0.9946358799934387
+        },
+        {
+          "text": " beside",
+          "start": 14.18,
+          "end": 14.64,
+          "probability": 0.9754576683044434
+        },
+        {
+          "text": " the",
+          "start": 14.64,
+          "end": 14.82,
+          "probability": 0.9942954182624817
+        },
+        {
+          "text": " beliefs.",
+          "start": 14.82,
+          "end": 15.16,
+          "probability": 0.9984874725341797
+        },
+        {
+          "text": " A",
+          "start": 15.88,
+          "end": 16.08,
+          "probability": 0.9961714148521423
+        },
+        {
+          "text": " later",
+          "start": 16.08,
+          "end": 16.32,
+          "probability": 0.9906893968582153
+        },
+        {
+          "text": " reader",
+          "start": 16.32,
+          "end": 16.58,
+          "probability": 0.9947846531867981
+        },
+        {
+          "text": " can",
+          "start": 16.58,
+          "end": 16.86,
+          "probability": 0.9982798099517822
+        },
+        {
+          "text": " examine",
+          "start": 16.86,
+          "end": 17.24,
+          "probability": 0.9988957643508911
+        },
+        {
+          "text": " both.",
+          "start": 17.24,
+          "end": 17.58,
+          "probability": 0.9980615973472595
+        },
+        {
+          "text": " You",
+          "start": 18.7,
+          "end": 18.86,
+          "probability": 0.9909651279449463
+        },
+        {
+          "text": " do",
+          "start": 18.86,
+          "end": 18.96,
+          "probability": 0.9892836809158325
+        },
+        {
+          "text": " not",
+          "start": 18.96,
+          "end": 19.14,
+          "probability": 0.9973113536834717
+        },
+        {
+          "text": " have",
+          "start": 19.14,
+          "end": 19.38,
+          "probability": 0.9967693090438843
+        },
+        {
+          "text": " to",
+          "start": 19.38,
+          "end": 19.54,
+          "probability": 0.9980081915855408
+        },
+        {
+          "text": " accept",
+          "start": 19.54,
+          "end": 19.86,
+          "probability": 0.9989650249481201
+        },
+        {
+          "text": " the",
+          "start": 19.86,
+          "end": 20.12,
+          "probability": 0.9945898056030273
+        },
+        {
+          "text": " creator's",
+          "start": 20.12,
+          "end": 20.66,
+          "probability": 0.9384398460388184
+        },
+        {
+          "text": " interpretation",
+          "start": 20.66,
+          "end": 21.3,
+          "probability": 0.9984093308448792
+        },
+        {
+          "text": " before",
+          "start": 21.3,
+          "end": 21.88,
+          "probability": 0.9958223104476929
+        },
+        {
+          "text": " entering",
+          "start": 21.88,
+          "end": 22.22,
+          "probability": 0.9988780617713928
+        },
+        {
+          "text": " the",
+          "start": 22.22,
+          "end": 22.44,
+          "probability": 0.9960822463035583
+        },
+        {
+          "text": " discussion.",
+          "start": 22.44,
+          "end": 22.8,
+          "probability": 0.9988369345664978
+        }
+      ],
+      "retake": true,
+      "sourceWordRecallIsNotAccuracy": true
+    },
+    "firstTranscript": "If criticism unsettles an argument, why preserve the criticism, too? The creeds and their crucible keeps an AI -simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator's interpretation before entering the discussion.",
+    "transcript": "If criticism unsettles an argument, why preserve the criticism, too? The creeds and their crucible keeps an AI -simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator's interpretation before entering the discussion.",
+    "normalisedTokenCoverage": 1.0,
+    "extraTokens": 0,
+    "differences": [],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "2c3ba774cab530c3a74af7e4c46d86d0983c1d74893a72b5d99f3277fcff0a86",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "6d0686a8320fe3b61e569e53722fe9d5d3ae1b15aa936577c3e6cdd769bd1e83",
+    "previousAudit": {
+      "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 0.9902912621359223,
+      "unmatchedSourceWords": [
+        "meta-record"
+      ],
+      "transcript": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the originals. The protocol offers propositions. The covenant of the flaw connects the address to a physical object and its evidence. The sealed meta record binds the relationship and points to the Ethereum Chronicle. It does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+      "humanListeningReview": false
+    },
+    "firstTranscript": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the originals. The protocol offers propositions. The covenant of the flaw connects the address to a physical object and its evidence. The sealed meta record binds the relationship and points to the Ethereum Chronicle. It does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+    "transcript": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the originals. The protocol offers propositions. The covenant of the flaw connects the address to a physical object and its evidence. The sealed meta record binds the relationship and points to the Ethereum Chronicle. It does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+    "normalisedTokenCoverage": 1.0,
+    "extraTokens": 0,
+    "differences": [],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "6e7403dbb41bbaa85d7f55a508136ffca8f0c6fb58d14c79d4e0125f2ce0dd02",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "7ae229612714c35b6b207be00362afcdc54a08c63c389b75258649a9ad680b89",
+    "previousAudit": {
+      "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 0.9807692307692307,
+      "unmatchedSourceWords": [
+        "centre",
+        "uncopyability"
+      ],
+      "transcript": "When digital copies can multiply, what does a flaw in a physical object preserve? At the center is an exhibition reconstruction of Core Object Alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention. It does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, angles, depth, and relationships between features. No claim of absolute uncopiability is needed. Why might an imperfect thing invite care rather than correction?",
+      "humanListeningReview": false
+    },
+    "firstTranscript": "When digital copies can multiply, what does a flaw in a physical object preserve? At the center is an exhibition reconstruction of core object alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention. It does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, ends, angles, depth, and relationships between features. No claim of absolute uncopyability is needed. Why might an imperfect thing invite care rather than correction?",
+    "transcript": "When digital copies can multiply, what does a flaw in a physical object preserve? At the center is an exhibition reconstruction of core object alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention. It does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, ends, angles, depth, and relationships between features. No claim of absolute uncopyability is needed. Why might an imperfect thing invite care rather than correction?",
+    "normalisedTokenCoverage": 1.0,
+    "extraTokens": 1,
+    "differences": [
+      {
+        "kind": "insert",
+        "expected": [],
+        "recognised": [
+          "ends"
+        ]
+      }
+    ],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "72559168fb403a59efc245c5511088953e57b62da77369874d6c6c0840009f64",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "1717f894d1813b8e53eff2022d46d0e475039ad19ad8e01e1eeed82e8bb9577c",
+    "previousAudit": {
+      "method": "Whisper small.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 0.9642857142857143,
+      "unmatchedSourceWords": [
+        "one",
+        "point",
+        "one,",
+        "non-amending"
+      ],
+      "transcript": "What if the creator changes his mind? Could he change the work? Guardian Principles, version 1 .1. Places the creator within the same non -amending boundary. He may continue to interpret, question, and care for the records. But later commentary gains no privileged authority and cannot amend the three designated originals. This is not a fourth original. The principles themselves remain subordinate. Blockchain preserves a reference we can check. It cannot prevent someone from writing another text or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+      "humanListeningReview": false,
+      "acousticWords": [
+        {
+          "text": " What",
+          "start": 0.0,
+          "end": 0.16,
+          "probability": 0.8071959614753723
+        },
+        {
+          "text": " if",
+          "start": 0.16,
+          "end": 0.3,
+          "probability": 0.9902014136314392
+        },
+        {
+          "text": " the",
+          "start": 0.3,
+          "end": 0.44,
+          "probability": 0.986011266708374
+        },
+        {
+          "text": " creator",
+          "start": 0.44,
+          "end": 0.74,
+          "probability": 0.850628674030304
+        },
+        {
+          "text": " changes",
+          "start": 0.74,
+          "end": 1.24,
+          "probability": 0.9830750823020935
+        },
+        {
+          "text": " his",
+          "start": 1.24,
+          "end": 1.5,
+          "probability": 0.9977280497550964
+        },
+        {
+          "text": " mind?",
+          "start": 1.5,
+          "end": 1.84,
+          "probability": 0.9986226558685303
+        },
+        {
+          "text": " Could",
+          "start": 2.6,
+          "end": 2.72,
+          "probability": 0.9872226119041443
+        },
+        {
+          "text": " he",
+          "start": 2.72,
+          "end": 2.86,
+          "probability": 0.9983556866645813
+        },
+        {
+          "text": " change",
+          "start": 2.86,
+          "end": 3.1,
+          "probability": 0.9980448484420776
+        },
+        {
+          "text": " the",
+          "start": 3.1,
+          "end": 3.3,
+          "probability": 0.9963468909263611
+        },
+        {
+          "text": " work?",
+          "start": 3.3,
+          "end": 3.54,
+          "probability": 0.9963794350624084
+        },
+        {
+          "text": " Guardian",
+          "start": 4.6,
+          "end": 4.6,
+          "probability": 0.8752498626708984
+        },
+        {
+          "text": " Principles,",
+          "start": 4.6,
+          "end": 5.08,
+          "probability": 0.9488739967346191
+        },
+        {
+          "text": " version",
+          "start": 5.68,
+          "end": 5.82,
+          "probability": 0.434017151594162
+        },
+        {
+          "text": " 1",
+          "start": 5.82,
+          "end": 6.18,
+          "probability": 0.9803916215896606
+        },
+        {
+          "text": ".1.",
+          "start": 6.18,
+          "end": 7.24,
+          "probability": 0.9964925050735474
+        },
+        {
+          "text": " Places",
+          "start": 7.5,
+          "end": 7.62,
+          "probability": 0.23122933506965637
+        },
+        {
+          "text": " the",
+          "start": 7.62,
+          "end": 7.94,
+          "probability": 0.9940780401229858
+        },
+        {
+          "text": " creator",
+          "start": 7.94,
+          "end": 8.32,
+          "probability": 0.9624404907226562
+        },
+        {
+          "text": " within",
+          "start": 8.32,
+          "end": 8.68,
+          "probability": 0.9917668700218201
+        },
+        {
+          "text": " the",
+          "start": 8.68,
+          "end": 8.92,
+          "probability": 0.9960099458694458
+        },
+        {
+          "text": " same",
+          "start": 8.92,
+          "end": 9.2,
+          "probability": 0.9988287091255188
+        },
+        {
+          "text": " non",
+          "start": 9.2,
+          "end": 9.5,
+          "probability": 0.9823546409606934
+        },
+        {
+          "text": "-amending",
+          "start": 9.5,
+          "end": 9.8,
+          "probability": 0.9638457298278809
+        },
+        {
+          "text": " boundary.",
+          "start": 9.8,
+          "end": 10.3,
+          "probability": 0.9974234104156494
+        },
+        {
+          "text": " He",
+          "start": 11.14,
+          "end": 11.3,
+          "probability": 0.9852955341339111
+        },
+        {
+          "text": " may",
+          "start": 11.3,
+          "end": 11.48,
+          "probability": 0.9978818297386169
+        },
+        {
+          "text": " continue",
+          "start": 11.48,
+          "end": 11.82,
+          "probability": 0.9988711476325989
+        },
+        {
+          "text": " to",
+          "start": 11.82,
+          "end": 12.12,
+          "probability": 0.9991278052330017
+        },
+        {
+          "text": " interpret,",
+          "start": 12.12,
+          "end": 12.58,
+          "probability": 0.9971880316734314
+        },
+        {
+          "text": " question,",
+          "start": 13.02,
+          "end": 13.14,
+          "probability": 0.9973297119140625
+        },
+        {
+          "text": " and",
+          "start": 13.58,
+          "end": 13.74,
+          "probability": 0.9986281394958496
+        },
+        {
+          "text": " care",
+          "start": 13.74,
+          "end": 14.0,
+          "probability": 0.9944909811019897
+        },
+        {
+          "text": " for",
+          "start": 14.0,
+          "end": 14.22,
+          "probability": 0.9985184073448181
+        },
+        {
+          "text": " the",
+          "start": 14.22,
+          "end": 14.36,
+          "probability": 0.9951536655426025
+        },
+        {
+          "text": " records.",
+          "start": 14.36,
+          "end": 14.72,
+          "probability": 0.9688485860824585
+        },
+        {
+          "text": " But",
+          "start": 15.58,
+          "end": 15.78,
+          "probability": 0.984159529209137
+        },
+        {
+          "text": " later",
+          "start": 15.78,
+          "end": 16.02,
+          "probability": 0.9145967960357666
+        },
+        {
+          "text": " commentary",
+          "start": 16.02,
+          "end": 16.44,
+          "probability": 0.6702057719230652
+        },
+        {
+          "text": " gains",
+          "start": 16.44,
+          "end": 16.9,
+          "probability": 0.9887920022010803
+        },
+        {
+          "text": " no",
+          "start": 16.9,
+          "end": 17.14,
+          "probability": 0.995602011680603
+        },
+        {
+          "text": " privileged",
+          "start": 17.14,
+          "end": 17.48,
+          "probability": 0.9750182032585144
+        },
+        {
+          "text": " authority",
+          "start": 17.48,
+          "end": 17.86,
+          "probability": 0.9983173608779907
+        },
+        {
+          "text": " and",
+          "start": 17.86,
+          "end": 18.26,
+          "probability": 0.8571034669876099
+        },
+        {
+          "text": " cannot",
+          "start": 18.26,
+          "end": 18.56,
+          "probability": 0.9753941297531128
+        },
+        {
+          "text": " amend",
+          "start": 18.56,
+          "end": 18.86,
+          "probability": 0.9946613907814026
+        },
+        {
+          "text": " the",
+          "start": 18.86,
+          "end": 19.08,
+          "probability": 0.9961676001548767
+        },
+        {
+          "text": " three",
+          "start": 19.08,
+          "end": 19.3,
+          "probability": 0.9087017178535461
+        },
+        {
+          "text": " designated",
+          "start": 19.3,
+          "end": 19.76,
+          "probability": 0.9767076373100281
+        },
+        {
+          "text": " originals.",
+          "start": 19.76,
+          "end": 20.16,
+          "probability": 0.840090274810791
+        },
+        {
+          "text": " This",
+          "start": 20.96,
+          "end": 21.24,
+          "probability": 0.9820044636726379
+        },
+        {
+          "text": " is",
+          "start": 21.24,
+          "end": 21.36,
+          "probability": 0.9982238411903381
+        },
+        {
+          "text": " not",
+          "start": 21.36,
+          "end": 21.54,
+          "probability": 0.9990506768226624
+        },
+        {
+          "text": " a",
+          "start": 21.54,
+          "end": 21.68,
+          "probability": 0.9958934783935547
+        },
+        {
+          "text": " fourth",
+          "start": 21.68,
+          "end": 21.84,
+          "probability": 0.9604485034942627
+        },
+        {
+          "text": " original.",
+          "start": 21.84,
+          "end": 22.24,
+          "probability": 0.9744905829429626
+        },
+        {
+          "text": " The",
+          "start": 22.48,
+          "end": 22.6,
+          "probability": 0.9912530779838562
+        },
+        {
+          "text": " principles",
+          "start": 22.6,
+          "end": 22.88,
+          "probability": 0.7261880040168762
+        },
+        {
+          "text": " themselves",
+          "start": 22.88,
+          "end": 23.4,
+          "probability": 0.9896363615989685
+        },
+        {
+          "text": " remain",
+          "start": 23.4,
+          "end": 23.78,
+          "probability": 0.9484502673149109
+        },
+        {
+          "text": " subordinate.",
+          "start": 23.78,
+          "end": 24.3,
+          "probability": 0.9890276193618774
+        },
+        {
+          "text": " Blockchain",
+          "start": 24.3,
+          "end": 25.32,
+          "probability": 0.4501228928565979
+        },
+        {
+          "text": " preserves",
+          "start": 25.32,
+          "end": 26.06,
+          "probability": 0.975844144821167
+        },
+        {
+          "text": " a",
+          "start": 26.06,
+          "end": 26.34,
+          "probability": 0.9853429794311523
+        },
+        {
+          "text": " reference",
+          "start": 26.34,
+          "end": 26.7,
+          "probability": 0.9970273375511169
+        },
+        {
+          "text": " we",
+          "start": 26.7,
+          "end": 26.98,
+          "probability": 0.9816146492958069
+        },
+        {
+          "text": " can",
+          "start": 26.98,
+          "end": 27.14,
+          "probability": 0.9979873895645142
+        },
+        {
+          "text": " check.",
+          "start": 27.14,
+          "end": 27.46,
+          "probability": 0.9994101524353027
+        },
+        {
+          "text": " It",
+          "start": 28.08,
+          "end": 28.18,
+          "probability": 0.9933941960334778
+        },
+        {
+          "text": " cannot",
+          "start": 28.18,
+          "end": 28.44,
+          "probability": 0.9411066770553589
+        },
+        {
+          "text": " prevent",
+          "start": 28.44,
+          "end": 28.8,
+          "probability": 0.9982727766036987
+        },
+        {
+          "text": " someone",
+          "start": 28.8,
+          "end": 29.22,
+          "probability": 0.997011661529541
+        },
+        {
+          "text": " from",
+          "start": 29.22,
+          "end": 29.48,
+          "probability": 0.9978559613227844
+        },
+        {
+          "text": " writing",
+          "start": 29.48,
+          "end": 29.74,
+          "probability": 0.9990070462226868
+        },
+        {
+          "text": " another",
+          "start": 29.74,
+          "end": 30.06,
+          "probability": 0.998076319694519
+        },
+        {
+          "text": " text",
+          "start": 30.06,
+          "end": 30.5,
+          "probability": 0.9987805485725403
+        },
+        {
+          "text": " or",
+          "start": 30.5,
+          "end": 30.98,
+          "probability": 0.8237683176994324
+        },
+        {
+          "text": " decide",
+          "start": 30.98,
+          "end": 31.34,
+          "probability": 0.9943827390670776
+        },
+        {
+          "text": " what",
+          "start": 31.34,
+          "end": 31.54,
+          "probability": 0.9955800175666809
+        },
+        {
+          "text": " the",
+          "start": 31.54,
+          "end": 31.66,
+          "probability": 0.9969062209129333
+        },
+        {
+          "text": " work",
+          "start": 31.66,
+          "end": 31.84,
+          "probability": 0.9956100583076477
+        },
+        {
+          "text": " means.",
+          "start": 31.84,
+          "end": 32.18,
+          "probability": 0.9989429116249084
+        },
+        {
+          "text": " So",
+          "start": 33.22,
+          "end": 33.3,
+          "probability": 0.9556176066398621
+        },
+        {
+          "text": " guardianship",
+          "start": 33.3,
+          "end": 34.04,
+          "probability": 0.7572682201862335
+        },
+        {
+          "text": " is",
+          "start": 34.04,
+          "end": 34.18,
+          "probability": 0.9977980852127075
+        },
+        {
+          "text": " not",
+          "start": 34.18,
+          "end": 34.34,
+          "probability": 0.9978020787239075
+        },
+        {
+          "text": " the",
+          "start": 34.34,
+          "end": 34.48,
+          "probability": 0.99510657787323
+        },
+        {
+          "text": " ownership",
+          "start": 34.48,
+          "end": 34.78,
+          "probability": 0.9986679553985596
+        },
+        {
+          "text": " of",
+          "start": 34.78,
+          "end": 35.06,
+          "probability": 0.9985437393188477
+        },
+        {
+          "text": " the",
+          "start": 35.06,
+          "end": 35.18,
+          "probability": 0.9961251616477966
+        },
+        {
+          "text": " final",
+          "start": 35.18,
+          "end": 35.4,
+          "probability": 0.9954509139060974
+        },
+        {
+          "text": " word.",
+          "start": 35.4,
+          "end": 35.74,
+          "probability": 0.9965454936027527
+        },
+        {
+          "text": " What",
+          "start": 37.94,
+          "end": 38.08,
+          "probability": 0.9942106008529663
+        },
+        {
+          "text": " remains",
+          "start": 38.08,
+          "end": 38.38,
+          "probability": 0.99424147605896
+        },
+        {
+          "text": " to",
+          "start": 38.38,
+          "end": 38.6,
+          "probability": 0.9984562397003174
+        },
+        {
+          "text": " do?",
+          "start": 38.6,
+          "end": 39.02,
+          "probability": 0.9987266659736633
+        },
+        {
+          "text": " Preserve,",
+          "start": 39.52,
+          "end": 40.0,
+          "probability": 0.9765698313713074
+        },
+        {
+          "text": " verify,",
+          "start": 40.4,
+          "end": 41.0,
+          "probability": 0.9902408123016357
+        },
+        {
+          "text": " repair",
+          "start": 42.07,
+          "end": 42.43,
+          "probability": 0.9942663311958313
+        },
+        {
+          "text": " access,",
+          "start": 42.43,
+          "end": 42.99,
+          "probability": 0.9849218726158142
+        },
+        {
+          "text": " and",
+          "start": 43.97,
+          "end": 44.01,
+          "probability": 0.9961960315704346
+        },
+        {
+          "text": " leave",
+          "start": 44.01,
+          "end": 44.23,
+          "probability": 0.9992986917495728
+        },
+        {
+          "text": " room",
+          "start": 44.23,
+          "end": 44.49,
+          "probability": 0.9970062375068665
+        },
+        {
+          "text": " for",
+          "start": 44.49,
+          "end": 44.73,
+          "probability": 0.9987502098083496
+        },
+        {
+          "text": " a",
+          "start": 44.73,
+          "end": 44.83,
+          "probability": 0.9867365956306458
+        },
+        {
+          "text": " reader",
+          "start": 44.83,
+          "end": 45.03,
+          "probability": 0.9943390488624573
+        },
+        {
+          "text": " who",
+          "start": 45.03,
+          "end": 45.29,
+          "probability": 0.9957637786865234
+        },
+        {
+          "text": " has",
+          "start": 45.29,
+          "end": 45.47,
+          "probability": 0.9947978258132935
+        },
+        {
+          "text": " not",
+          "start": 45.47,
+          "end": 45.69,
+          "probability": 0.9980892539024353
+        },
+        {
+          "text": " yet",
+          "start": 45.69,
+          "end": 45.83,
+          "probability": 0.9975494742393494
+        },
+        {
+          "text": " arrived.",
+          "start": 45.83,
+          "end": 46.21,
+          "probability": 0.9987996816635132
+        }
+      ],
+      "retake": true,
+      "sourceWordRecallIsNotAccuracy": true
+    },
+    "firstTranscript": "What if the creator changes his mind? Could he change the work? Guardian Principles, version 1 .1, places the creator within the same non -amending boundary. He may continue to interpret, question, and care for the records, but later commentary gains no privileged authority and cannot amend the three designated originals. This is not a fourth original, the principles themselves remain subordinate. Blockchain preserves a reference we can check. It cannot prevent someone from writing another text or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+    "transcript": "What if the creator changes his mind? Could he change the work? Guardian Principles, version 1 .1, places the creator within the same non -amending boundary. He may continue to interpret, question, and care for the records, but later commentary gains no privileged authority and cannot amend the three designated originals. This is not a fourth original, the principles themselves remain subordinate. Blockchain preserves a reference we can check. It cannot prevent someone from writing another text or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+    "normalisedTokenCoverage": 0.9911504424778761,
+    "extraTokens": 0,
+    "differences": [
+      {
+        "kind": "delete",
+        "expected": [
+          "point"
+        ],
+        "recognised": []
+      }
+    ],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "adc9699de2b6f6dd30871e7efb40d5ea68869789024080b0a9032b7eadfad73c",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "61b8783481ae64a3c92e7901d1e4011ebb33ae231a9f9d543f622f922f2185b9",
+    "previousAudit": {
+      "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 1.0,
+      "unmatchedSourceWords": [],
+      "transcript": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them? Thank you for your time.",
+      "humanListeningReview": false
+    },
+    "firstTranscript": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them?",
+    "transcript": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them?",
+    "normalisedTokenCoverage": 1.0,
+    "extraTokens": 0,
+    "differences": [],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  }
+]
