@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import * as T from '../dist/vendor/three.module.js';
-import {travelVector,turnView,stickVector,createWheelWalk} from '../dist/movement-controls.js';
+import {travelVector,turnView,stickVector,createWheelWalk,movementKey} from '../dist/movement-controls.js';
 import {galleryCamera,observationView} from '../dist/observation-view.js';
 import {createFootsteps,footstepSamples,FOOTSTEP_GAIN} from '../dist/footsteps.js';
 import {exhibitLabel} from '../dist/exhibit-label.js';
@@ -47,12 +47,17 @@ context.state='interrupted';feet.unlock();await Promise.resolve();assert.equal(r
 feet.update(.01,true);assert.equal(played,3);const samples=footstepSamples();const rms=Math.sqrt(samples.reduce((s,x)=>s+x*x,0)/samples.length)*FOOTSTEP_GAIN;assert.ok(rms>.001&&rms<.012,'Footsteps must remain quiet, below the previous thudding level');
 const data=JSON.parse(fs.readFileSync(new URL('../dist/data/sources.json',import.meta.url)));
 assert.ok(FOOTSTEP_GAIN<=.065,'Shoe contact amplitude stays at most half the previous edition');
-for(const e of data.items){for(const zh of [false,true]){const label=exhibitLabel(e,zh);assert.equal(label,`No. ${String(e.ordinal).padStart(2,'0')}\n${e.date.slice(0,10)}`);}}
+for(const e of data.items){for(const zh of [false,true]){const label=exhibitLabel(e,zh);assert.ok(label.startsWith(`No. ${String(e.ordinal).padStart(2,'0')}  ·  ${e.date.slice(0,10)}`));assert.ok(label.includes(zh?'事件:':'Event:'));}}
 // Run the actual selection handler: approach/play once, then open details without restarting audio.
 const app=fs.readFileSync(new URL('../dist/museum.js',import.meta.url),'utf8'),calls=[];
-const selectionContext={spatialReady:true,approachedExhibit:null,showExhibit:id=>calls.push(['details',id]),stopTour(){},focusExhibit:id=>calls.push(['approach',id]),$:()=>({hidden:false}),exhibits:new Map([['eth-001',{id:'eth-001'}],['eth-020',{id:'eth-020'}]]),soundFor:e=>e,playTrack:e=>calls.push(['play',e.id]),musicItem:null};
+const selectionContext={touring:false,spatialReady:true,approachedExhibit:null,showExhibit:id=>calls.push(['details',id]),stopTour(){},focusExhibit:id=>calls.push(['approach',id]),$:()=>({hidden:false}),exhibits:new Map([['eth-001',{id:'eth-001'}],['eth-020',{id:'eth-020'}]]),soundFor:e=>e,playTrack:e=>calls.push(['play',e.id]),musicItem:null};
 vm.createContext(selectionContext);vm.runInContext(app.slice(app.indexOf('function approachExhibit('),app.indexOf('function roomView(')),selectionContext);
 selectionContext.approachExhibit('eth-001');selectionContext.approachExhibit('eth-001');selectionContext.approachExhibit('eth-020');
 assert.deepEqual(calls,[['approach','eth-001'],['play','eth-001'],['details','eth-001'],['approach','eth-020'],['play','eth-020']]);
 selectionContext.spatialReady=false;selectionContext.approachExhibit('eth-001');assert.deepEqual(calls.at(-1),['details','eth-001']);
 console.log('PASS: wheel travel/reversal/units/zoom isolation/focus cleanup/frame-rate independence, unrestricted turning, normalized travel, four projected viewports, parallel artwork edges, quieter footsteps and compact historical labels.');
+
+for(const event of [{key:'W',code:'KeyW'},{key:'w',code:'KeyW'},{key:'ц',code:'KeyW'}])assert.equal(movementKey(event),'w');
+assert.equal(movementKey({key:'ArrowUp'}),'ArrowUp');assert.equal(movementKey({key:'Tab'}),null);
+assert.ok(!app.includes('followDesktopMouse'),'Hover must never rotate the camera');
+const navigation=app.slice(app.indexOf('function bindNavigation('),app.indexOf('function animate('));assert.ok(!navigation.includes('stopTour('));assert.ok(!navigation.includes('INPUT|BUTTON|A|TEXTAREA'),'Button focus must not disable walking');

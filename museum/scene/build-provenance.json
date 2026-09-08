@@ -8,37 +8,37 @@
   "baked": true,
   "bake": "Cycles diffuse/direct/indirect/color, 2048px atlas, 48 samples plus compositor denoising; no new artwork baked into surfaces",
   "previewScope": "Architectural references, not browser screenshots. Runtime original artwork, crystal and Earth are separate assets.",
-  "layoutSha256": "ced3ad63c2153822cf9414798d750ae20da9104647901f97316d3ae9991bf390",
+  "layoutSha256": "bd80723546d569065146ded43f0f00d99e831de3e6a3faa7904752bd7ecab961",
   "files": [
     {
       "path": "scene/build_spatial_gallery.py",
       "bytes": 7747,
-      "sha256": "058951a1b25f35329c37a3da6d92e1f68bda41cf40408a89bfda8329204bf0cd"
+      "sha256": "70b49b9f367a3a5e22cb7512b33c3442b22d563532e5b61f647f19634ab083c4"
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 51235,
-      "sha256": "ced3ad63c2153822cf9414798d750ae20da9104647901f97316d3ae9991bf390"
+      "bytes": 51241,
+      "sha256": "bd80723546d569065146ded43f0f00d99e831de3e6a3faa7904752bd7ecab961"
     },
     {
       "path": "scene/memory-gallery.blend",
-      "bytes": 9272083,
-      "sha256": "ecf22a0a065e7b6dcb5bd480332465c67bd015a158791babcbb184d5aa1c0823"
+      "bytes": 7795665,
+      "sha256": "70f5adee98879d2ba61467654b96ff85e1c70db602c2aa2b7f1fcf514606d2b7"
     },
     {
       "path": "dist/assets/gallery/memory-gallery.glb",
-      "bytes": 4382156,
-      "sha256": "f12f8b97a67e2fa9f6902859247cda7d1c4ecd050d04a1e0c551b0c028c2850f"
+      "bytes": 4354840,
+      "sha256": "ac520447938123d0b0eebddf7a64789dcf0733817a62cab367cdc357e5337d95"
     },
     {
       "path": "dist/assets/gallery/spatial-light.png",
-      "bytes": 4860069,
-      "sha256": "0a46b8dbc88a9da56be818e1dd35a34df2ee5449b03dd954f2c5d489894efbee"
+      "bytes": 3408873,
+      "sha256": "f036476f0be60ae7d886a59e9feb144e93558004ea791c16966ad878064e6cde"
     },
     {
       "path": "dist/assets/gallery/entrance-preview.png",
-      "bytes": 1025872,
-      "sha256": "6a7249d80e6b39ae4d96035fb862922db7233313bdb8963e8c93b4532e941906"
+      "bytes": 903063,
+      "sha256": "73618fe87a9dd9443ba262964c5bf5b47cf0248a975ff2109ee56759dae5aa13"
     }
   ]
 }

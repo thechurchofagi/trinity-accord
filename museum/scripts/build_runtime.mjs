@@ -7,10 +7,13 @@ import {build,version} from 'esbuild';
 const root=fileURLToPath(new URL('../',import.meta.url)),dist=path.join(root,'dist');
 const names={rooms:'rooms.json',sources:'sources.json',layout:'gallery-layout.json',illustrations:'curatorial-illustrations.json',curation:'curation.json',stars:'bright-stars.json',lyrics:'lyrics-index.json',guides:'guide-audio.json'};
 const data=Object.fromEntries(Object.entries(names).map(([key,name])=>[key,JSON.parse(fs.readFileSync(path.join(dist,'data',name),'utf8'))]));
+// Bind mutable 3D assets to this runtime, so old mobile cache entries cannot mix editions.
+const modelPaths=['assets/gallery/memory-gallery.glb','assets/crystal/core-object-alpha.glb'];
+data.modelHashes=Object.fromEntries(modelPaths.map(p=>[p,crypto.createHash('sha256').update(fs.readFileSync(path.join(dist,p))).digest('hex')]));
 fs.writeFileSync(path.join(dist,'edition-data.js'),'// Generated from the frozen edition JSON; no startup manifest requests.\nexport default '+JSON.stringify(data)+';\n');
 const result=await build({absWorkingDir:root,entryPoints:['dist/museum.js'],outfile:'dist/museum.bundle.js',bundle:true,minify:true,format:'iife',target:'es2022',legalComments:'eof',metafile:true});
 const record=p=>{const b=fs.readFileSync(path.join(root,p));return {path:p,bytes:b.length,sha256:crypto.createHash('sha256').update(b).digest('hex')};};
-const report={schema:'trinity-museum.runtime-build.v1',edition:data.rooms.edition,esbuild:version,inputs:[...new Set([...Object.keys(result.metafile.inputs),'scripts/build_runtime.mjs',...Object.values(names).map(n=>'dist/data/'+n)])].sort().map(record),output:record('dist/museum.bundle.js')};
+const report={schema:'trinity-museum.runtime-build.v1',edition:data.rooms.edition,esbuild:version,inputs:[...new Set([...Object.keys(result.metafile.inputs),'scripts/build_runtime.mjs',...modelPaths.map(p=>'dist/'+p),...Object.values(names).map(n=>'dist/data/'+n)])].sort().map(record),output:record('dist/museum.bundle.js')};
 // A rebuilt bundle and stylesheet must not reuse an earlier mobile cache entry.
 const runtimeVersion=data.rooms.edition.replace('museum-v','')+'.'+report.output.sha256.slice(0,12);
 const cssVersion=crypto.createHash('sha256').update(fs.readFileSync(path.join(dist,'museum.css'))).digest('hex').slice(0,12);

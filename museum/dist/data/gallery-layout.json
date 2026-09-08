@@ -578,8 +578,8 @@
       "color": "#d5d4ce"
     },
     "stone": {
-      "color": "#777d7c",
-      "roughness": 0.92
+      "color": "#bdc9cc",
+      "roughness": 0.68
     },
     "dark": {
       "color": "#4b5155"
@@ -594,75 +594,75 @@
       "emission": true
     },
     "wall0": {
-      "color": "#bfc7c5",
+      "color": "#d9dedb",
       "roughness": 0.9
     },
     "floor0": {
-      "color": "#38464b",
-      "roughness": 0.9
+      "color": "#b8c4c9",
+      "roughness": 0.64
     },
     "ceiling0": {
-      "color": "#7a898b",
+      "color": "#c2cece",
       "roughness": 0.9
     },
     "wall1": {
-      "color": "#c8c6bc",
+      "color": "#deded5",
       "roughness": 0.9
     },
     "floor1": {
-      "color": "#394349",
-      "roughness": 0.9
+      "color": "#c0c9cc",
+      "roughness": 0.64
     },
     "ceiling1": {
-      "color": "#7a8688",
+      "color": "#c5ceca",
       "roughness": 0.9
     },
     "wall2": {
-      "color": "#899798",
+      "color": "#d0dcdd",
       "roughness": 0.9
     },
     "floor2": {
-      "color": "#2b393f",
-      "roughness": 0.9
+      "color": "#b5c6cd",
+      "roughness": 0.64
     },
     "ceiling2": {
-      "color": "#4c5c64",
+      "color": "#bdced2",
       "roughness": 0.9
     },
     "wall3": {
-      "color": "#81949c",
+      "color": "#d3e0e4",
       "roughness": 0.9
     },
     "floor3": {
-      "color": "#24343f",
-      "roughness": 0.9
+      "color": "#c6d2d8",
+      "roughness": 0.64
     },
     "ceiling3": {
-      "color": "#233743",
+      "color": "#b9cdd7",
       "roughness": 0.9
     },
     "wall4": {
-      "color": "#233c4a",
+      "color": "#c7dce5",
       "roughness": 0.9
     },
     "floor4": {
-      "color": "#172c38",
-      "roughness": 0.9
+      "color": "#becfd8",
+      "roughness": 0.64
     },
     "ceiling4": {
-      "color": "#172b39",
+      "color": "#b2cbd9",
       "roughness": 0.9
     },
     "wall5": {
-      "color": "#203441",
+      "color": "#bdd0dd",
       "roughness": 0.9
     },
     "floor5": {
-      "color": "#13242e",
-      "roughness": 0.9
+      "color": "#b2c5d0",
+      "roughness": 0.64
     },
     "ceiling5": {
-      "color": "#0f1e28",
+      "color": "#a7c0d0",
       "roughness": 0.9
     }
   },

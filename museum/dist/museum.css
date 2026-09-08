@@ -226,4 +226,4 @@ body:has(#lyric-stage[data-view=full]:not([hidden])) #focus-tools{visibility:hid
 .room-label{text-shadow:0 1px 12px #000a}
 #hint{display:none}
 
-body[data-presentation="true"] #exhibit-strip,body[data-presentation="true"] #focus-tools,body[data-presentation="true"] #walk-controls,body[data-presentation="true"] #look-controls{display:none!important}
+body[data-presentation="true"] #focus-tools{display:none!important}

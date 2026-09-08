@@ -24,3 +24,12 @@ export function createResourceQueue(limit=3){
 
 // The same corridor footprint is available before any model/image downloads.
 export function createPreviewHall(layout){return createSpatialShell(layout);}
+
+// Refuse a stale model even if an intermediary ignores its version query.
+export async function fetchModel(url,sha256,{fetcher=fetch,...options}={}){
+ const versioned=url+(url.includes('?')?'&':'?')+'v='+sha256.slice(0,16);
+ const bytes=await fetchBytes(versioned,{...options,fetcher});
+ const actual=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
+ if(actual!==sha256)throw Error('Model edition mismatch: '+url);
+ return bytes;
+}

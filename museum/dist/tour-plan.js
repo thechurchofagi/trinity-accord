@@ -58,12 +58,12 @@ export const tourStops=[
   {
     "room": 4,
     "exhibit": "physical-alpha",
-    "seconds": 100,
+    "seconds": 140,
     "zh": "当数字副本可以无限复制，一件物的瑕疵留下了什么？中央水晶是核心物件 Alpha 的展陈模型。真实物件中的内雕与不规则特征，把文字联系到可以再次观察的物质。先看它的整体，再打开一张原始显微照片。虚拟显微镜的移动，只是带领观看；照片本身不加道具、不重绘。文件核对可以说明这是不是同一份照片；实物核验还要检查位置、角度、深度与相互关系。这里不需要宣称绝对无法复制。值得思考的是：一件带着缺陷的物，为什么会成为需要被照料、而不是被完善掉的信物？",
     "en": "When digital copies can multiply, what does a flaw in a physical object preserve? At the centre is an exhibition reconstruction of Core Object Alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention; it does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, angles, depth, and relationships between features. No claim of absolute uncopyability is needed. Why might an imperfect thing invite care, rather than correction?",
-    "inspectAt": 60,
+    "inspectAt": 44,
     "inspectFlaw": 0,
-    "inspectUntil": 85
+    "inspectAll": true
   },
   {
     "room": 5,

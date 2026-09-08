@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import * as T from '../dist/vendor/three.module.js';
-import {makeWallFrame,makeWallPlaque,WALL_PLAQUE} from '../dist/wall-presentation.js';
+import {makeWallFrame,makeWallPlaque,resizeWallPlaque,WALL_PLAQUE} from '../dist/wall-presentation.js';
 const layout=JSON.parse(fs.readFileSync(new URL('../dist/data/gallery-layout.json',import.meta.url)));
 for(const height of [.4,.9,1.3,1.7]){
- const group=new T.Group();const f=makeWallFrame(group,1.2,height);const face=makeWallPlaque(group,new T.Texture());
- assert.equal(face.position.x,0);assert.equal(face.position.y,WALL_PLAQUE.centerY);assert.equal(f.frame.children.length,4);
- const body=group.children.find(o=>o.name==='Satin titanium plaque');assert.equal(body.geometry.parameters.width,1.55);assert.equal(body.geometry.parameters.height,.46);assert.ok(body.material.metalness>=.8);assert.ok(WALL_PLAQUE.centerY-WALL_PLAQUE.height/2>height/2+.018);
+ const group=new T.Group();const f=makeWallFrame(group,1.2,height);const face=makeWallPlaque(group,new T.Texture(),1.2,height);
+ assert.equal(face.position.x,0);assert.ok(face.position.y-WALL_PLAQUE.height/2>height/2+.018);assert.equal(f.frame.children.length,4);
+ const body=group.children.find(o=>o.name==='Satin titanium plaque');assert.equal(body.geometry.parameters.width,1.236);assert.equal(body.geometry.parameters.height,.72);assert.ok(body.material.metalness>=.8);resizeWallPlaque(face,.8,height);assert.ok(Math.abs(body.geometry.parameters.width-.836)<1e-9);assert.equal(face.position.y,body.position.y);
 }
 for(const r of layout.rooms){
  for(const m of r.exhibits){const group=new T.Group();group.position.set(m.x,m.y,m.z);group.rotation.y=m.angle;const f=makeWallFrame(group,1.9,1.7);assert.equal(group.children.length,1);assert.equal(f.frame.children.length,4);assert.ok(-m.z>r.start&&-m.z<r.start+r.length);assert.ok(m.y+1.4<r.floor+r.height);}

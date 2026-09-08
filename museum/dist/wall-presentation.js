@@ -1,14 +1,20 @@
 import * as THREE from './vendor/three.module.js';
+import {mineralMaterial} from './surface-materials.js';
 
-// All plaques share one wall datum, independent of image aspect ratio/loading.
-export const WALL_PLAQUE=Object.freeze({width:1.55,height:.46,centerY:1.16});
-export function makeWallPlaque(group,texture){
- const {width,height,centerY}=WALL_PLAQUE;
- const body=new THREE.Mesh(new THREE.BoxGeometry(width,height,.018),new THREE.MeshStandardMaterial({color:'#89979e',metalness:.85,roughness:.34}));
+// Each plaque follows the actual outer frame width, including portrait artworks.
+export const WALL_PLAQUE=Object.freeze({width:1.936,height:.72,gap:.085,centerY:1.313});
+export function makeWallPlaque(group,texture,width=1.9,height=1.7){
+ const outer=width+.036,centerY=height/2+.018+WALL_PLAQUE.gap+WALL_PLAQUE.height/2;
+ const body=new THREE.Mesh(new THREE.BoxGeometry(outer,WALL_PLAQUE.height,.024),mineralMaterial('#adbcc3',{metal:true,roughness:.32}));
  body.name='Satin titanium plaque';body.position.set(0,centerY,.015);group.add(body);
- // The diffuse lettering stays readable even when the metallic edge reflects light.
- const face=new THREE.Mesh(new THREE.PlaneGeometry(width-.018,height-.018),new THREE.MeshBasicMaterial({map:texture,toneMapped:false}));
- face.position.set(0,centerY,.025);group.add(face);return face;
+ const face=new THREE.Mesh(new THREE.PlaneGeometry(outer-.018,WALL_PLAQUE.height-.018),new THREE.MeshBasicMaterial({map:texture,toneMapped:false}));
+ face.position.set(0,centerY,.029);group.add(face);face.userData.body=body;
+ return face;
+}
+export function resizeWallPlaque(face,width,height){
+ const outer=width+.036,cy=height/2+.018+WALL_PLAQUE.gap+WALL_PLAQUE.height/2,body=face.userData.body;
+ body.geometry.dispose();body.geometry=new THREE.BoxGeometry(outer,WALL_PLAQUE.height,.024);body.position.y=cy;
+ face.geometry.dispose();face.geometry=new THREE.PlaneGeometry(outer-.018,WALL_PLAQUE.height-.018);face.position.y=cy;
 }
 
 // Old baked architecture retained fixed mounts from an earlier exhibition layout.
@@ -80,7 +86,7 @@ export function clearBakedWallShadows(root){
   const baked=o.material;o.material=[baked,plaster];g.setIndex([...original,...walls]);g.clearGroups();g.addGroup(0,original.length,0);g.addGroup(original.length,walls.length,1);
  });return {cleanTriangles};
 }
-const railMaterial=new THREE.MeshStandardMaterial({color:'#a7b1b3',metalness:.55,roughness:.5});
+const railMaterial=mineralMaterial('#b8c5cb',{metal:true,roughness:.3});
 export function makeWallFrame(group,width=1.9,height=1.7){
  const frame=new THREE.Group();frame.name='Thin original-art frame';group.add(frame);
  const border=.018;

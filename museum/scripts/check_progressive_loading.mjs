@@ -18,7 +18,7 @@ const hall=createPreviewHall(layout);assert.equal(hall.group.children.length,lay
 const app=fs.readFileSync(new URL('dist/museum.js',root),'utf8');
 assert.ok(app.includes('roomData=initialData.rooms'));
 assert.ok(app.includes('size:26,width:512,height:384'));
-assert.ok(app.includes('makeWallPlaque(group,wallLabelTexture(e))'));
+assert.ok(app.includes('makeWallPlaque(group,wallLabelTexture(e),width,height)'));
 assert.ok(app.includes('[e.title,e.en,'));
 assert.ok(!app.includes("await fetch('./data/"));
 assert.ok(!app.includes('addCanonicalPrism'));assert.ok(!app.includes('avoidPrism'));
@@ -28,3 +28,11 @@ const canon=layout.rooms.flatMap(r=>r.exhibits).filter(e=>e.id.startsWith('canon
 assert.equal(canon.length,3);assert.ok(canon.every(e=>Math.abs(e.x)<7&&!e.kind));
 assert.ok(fs.readFileSync(new URL('dist/index.html',root),'utf8').includes('href="./archive.html"'));
 console.log('PASS: stalled response abort, retry, HTTP failures, bounded image concurrency, immediate untextured hall, three wall text panels, independent reading entry');
+
+// An old mobile/proxy cache must never put old frames in front of the current artworks.
+const {fetchModel}=await import('../dist/progressive-loading.js');const {createHash}=await import('node:crypto');
+const current=new TextEncoder().encode('current model'),hash=createHash('sha256').update(current).digest('hex');let requested='';
+await fetchModel('./model.glb',hash,{fetcher:async url=>{requested=url;return {ok:true,arrayBuffer:async()=>current.buffer};}});
+assert.ok(requested.includes('?v='+hash.slice(0,16)));
+await assert.rejects(fetchModel('./model.glb',hash,{fetcher:async()=>({ok:true,arrayBuffer:async()=>new TextEncoder().encode('old model').buffer})}),/Model edition mismatch/);
+console.log('PASS: versioned model URLs and content digest reject mismatched cached architecture.');

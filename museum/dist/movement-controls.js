@@ -38,3 +38,11 @@ export function createJoystick(pad,onStart=()=>{}){
  pad.addEventListener('contextmenu',e=>e.preventDefault());window.addEventListener('blur',reset);document.addEventListener('visibilitychange',()=>{if(document.hidden)reset();});
  return {state,reset};
 }
+
+// Physical keys work with caps lock and alternate keyboard layouts.
+export function movementKey(event){
+ const arrows=['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'];
+ if(arrows.includes(event.key))return event.key;
+ const key=/^Key[WASDQE]$/.test(event.code||'')?event.code.slice(3).toLowerCase():event.key?.toLowerCase();
+ return ['w','a','s','d','q','e'].includes(key)?key:null;
+}
