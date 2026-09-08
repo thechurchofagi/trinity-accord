@@ -409,7 +409,7 @@ function documentTexture(e){
  return textTexture(lines,{size:44,width:1536,height:1152,color:'#263940',background:'#edf0e8'});
 }
 function addExhibit(e,x,z,angle,color,y=galleryLayout.exhibitCentreHeight){
- const img=imageOf(e),config=galleryLayout.rooms.flatMap(r=>r.exhibits).find(m=>m.id===e.id),width=config?.displayWidth||1.9,height=config?.displayHeight||(img?1.7:1.425);
+ const img=imageOf(e),config=galleryLayout.rooms.flatMap(r=>r.exhibits).find(m=>m.id===e.id),width=config?.displayWidth||(img?1.7:1.9),height=config?.displayHeight||(img?1.7:1.425);
  // Mount the work 15 mm in front of the wall, independently of the old baked mounts.
  const wallX=x;mounts.set(e.id,{x:wallX,y,z,angle,width,height});
  const group=new THREE.Group();group.position.set(wallX,y,z);group.rotation.y=angle;scene.add(group);
@@ -420,9 +420,11 @@ function addExhibit(e,x,z,angle,color,y=galleryLayout.exhibitCentreHeight){
  plane.material.map=textTexture([title(e),tx('正在载入原图','LOADING ORIGINAL IMAGE')],{size:26,width:512,height:384});
  imageJobs.add(async()=>{const bytes=await fetchBytes(img);const url=URL.createObjectURL(new Blob([bytes]));try{
   const texture=await new THREE.TextureLoader().loadAsync(url);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=Math.min(renderer.capabilities.getMaxAnisotropy(),16);
-  const ratio=texture.image.width/texture.image.height,w=Math.min(1.9,1.7*ratio),h=w/ratio;
+  const ratio=texture.image.width/texture.image.height,w=1.7,h=w/ratio;
+  // Equal image and plaque widths; preserve every original pixel and align top edges.
+  group.position.y=y+.85-h/2;
   plane.material.map.dispose();plane.material.map=texture;plane.geometry.dispose();plane.geometry=new THREE.PlaneGeometry(w,h);plane.material.needsUpdate=true;
-  frame.dispose();frame=makeWallFrame(group,w,h);resizeWallPlaque(label,w,h);Object.assign(mounts.get(e.id),{width:w,height:h});label.material.map.dispose();label.material.map=wallLabelTexture(e);
+  frame.dispose();frame=makeWallFrame(group,w,h);resizeWallPlaque(label,w,h);Object.assign(mounts.get(e.id),{y:group.position.y,width:w,height:h});label.material.map.dispose();label.material.map=wallLabelTexture(e);
  }finally{URL.revokeObjectURL(url);}},()=>Math.abs(z-camera.position.z)).catch(()=>{plane.material.map.dispose();plane.material.map=textTexture([title(e),tx('原图暂未载入 · 点击重试','IMAGE UNAVAILABLE · OPEN DETAILS')],{size:26,width:512,height:384});plane.material.needsUpdate=true;});
 }
 
