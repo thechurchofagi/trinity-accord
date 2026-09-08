@@ -29,6 +29,7 @@ try:
         # A smaller real-time surface keeps SwiftShader capture work from stalling
         # the presentation clock; never disable 3D or reduce its motion here.
         page = browser.new_page(viewport={'width': 960, 'height': 600})
+        page.on('console', lambda m: print('BROWSER_CONSOLE',m.type,m.text,flush=True) if m.type in ['error','warning'] else None)
         page.on('pageerror', lambda e: report['pageErrors'].append(str(e)))
         page.on('response', lambda r: report['assetFailures'].append(r.url) if r.status >= 400 and '/assets/' in r.url else None)
         page.goto(f'http://127.0.0.1:{server.server_port}/?lang=en#entrance', wait_until='load')

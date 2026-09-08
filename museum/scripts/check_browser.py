@@ -15,6 +15,7 @@ try:
   for label,width,height in [('desktop',1440,900),('mobile',390,844)]:
    page=b.new_page(viewport={'width':width,'height':height},is_mobile=label=='mobile',has_touch=label=='mobile',reduced_motion='reduce')
    errors=[];failed=[]
+   page.on('console',lambda m:print('BROWSER_CONSOLE',m.type,m.text,flush=True) if m.type in ['error','warning'] else None)
    page.on('pageerror',lambda e:errors.append(str(e)))
    page.on('response',lambda r:failed.append({'status':r.status,'url':r.url}) if r.status>=400 and '/assets/' in r.url else None)
    page.goto('http://127.0.0.1:8765/?lang=en#entrance',wait_until='networkidle')

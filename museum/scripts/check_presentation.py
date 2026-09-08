@@ -27,7 +27,7 @@ try:
   chrome=shutil.which('google-chrome') or shutil.which('chromium')
   b=p.chromium.launch(**({'executable_path':chrome} if chrome else {}),headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   for label,w,h in [('desktop',1440,900),('mobile',390,844)]:
-   page=b.new_page(viewport={'width':w,'height':h},is_mobile=label=='mobile',has_touch=label=='mobile',reduced_motion='reduce');errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+   page=b.new_page(viewport={'width':w,'height':h},is_mobile=label=='mobile',has_touch=label=='mobile',reduced_motion='reduce');errors=[];page.on('pageerror',lambda e:errors.append(str(e)));page.on('console',lambda m:print('BROWSER_CONSOLE',m.type,m.text,flush=True) if m.type in ['error','warning'] else None)
    page.goto('http://127.0.0.1:8766/__presentation_qa.html?lang=en#entrance',wait_until='networkidle')
    page.wait_for_function('window.__presentationQA?.state.ready');page.wait_for_selector('#scene-status',state='hidden')
    # A focused button, caps lock and arrows must not swallow walking or exit guidance.
