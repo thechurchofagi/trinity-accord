@@ -1,3 +1,10 @@
+## museum-v1.35.0 · 2026-09-08
+
+- Fixed-height metal plaques retain full bilingual text and align with their artwork frames; title length no longer changes plate height.
+- Brighter ambient fill and a stronger soft-edged overhead cone create a curved wall wash above the selected work, including during walking.
+- Sustained joystick movement smoothly accelerates from 1.25 to 2.31 m/s over two seconds; centering, releasing, cancellation and backgrounding reset it.
+- The five chapter buttons fill five equal columns. Finishing a guide no longer keeps the presentation-only hiding rule active; selecting the crystal exposes details and flaw verification in normal browsing.
+
 ## v1.34 — open passages and mobile viewing
 
 - Replace the dark stepped floor with level warm ivory 80 cm porcelain tiles; remove the narrow physical room dividers and their collisions in favor of thin pass-through luminous boundaries.

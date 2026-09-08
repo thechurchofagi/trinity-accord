@@ -9,7 +9,7 @@ if a.prepare:
  layout=read(D/'data/gallery-layout.json');layout['rooms'][0]['entryZ']=-4.4
  for path in [D/'data/gallery-layout.json',P/'scene/gallery-layout.json']:write(path,layout)
  path=D/'museum.js';s=path.read_text().replace('galleryLayout.endZ+2.8','galleryLayout.endZ+4.5')
- s=s.replace("function updateUI(){document.body.dataset.reducedMotion", "function updateUI(){document.body.dataset.presentation=String(touring||tourElapsed>=tourDuration);document.body.dataset.reducedMotion")
+ s=s.replace("function updateUI(){document.body.dataset.reducedMotion", "function updateUI(){document.body.dataset.presentation=String(touring);document.body.dataset.reducedMotion")
  s=s.replace("const active=touring;if(active)guideResume=", "const active=touring,hadEnded=tourElapsed>=tourDuration;if(hadEnded){tourElapsed=0;guideResume=null;}if(active)guideResume=")
  s=s.replace('if(roomData&&active)updateUI();','if(roomData&&(active||hadEnded))updateUI();')
  # Transparent presentation controls preserve the main pause and room navigation.

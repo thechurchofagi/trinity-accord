@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.scene-build.v3",
-  "edition": "museum-v1.34.0",
+  "edition": "museum-v1.35.0",
   "application": "Shared Three.js procedural geometry",
   "baked": false,
   "source": "scripts/export_open_gallery.mjs",
@@ -25,7 +25,7 @@
     {
       "path": "scene/gallery-layout.json",
       "bytes": 36983,
-      "sha256": "88c997006996ac793f3984478a55465f50b7b72d9d7a309ef01ab08a406dff30"
+      "sha256": "df96725a800b4167538fc977d2918fb5d3aab69619572af22559833a933ccdb4"
     },
     {
       "path": "dist/assets/gallery/memory-gallery.glb",

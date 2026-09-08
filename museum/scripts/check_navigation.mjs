@@ -64,3 +64,6 @@ for(const event of [{key:'W',code:'KeyW'},{key:'w',code:'KeyW'},{key:'ц',code:'
 assert.equal(movementKey({key:'ArrowUp'}),'ArrowUp');assert.equal(movementKey({key:'Tab'}),null);
 assert.ok(!app.includes('followDesktopMouse'),'Hover must never rotate the camera');
 const navigation=app.slice(app.indexOf('function bindNavigation('),app.indexOf('function animate('));assert.ok(!navigation.includes('stopTour('));assert.ok(!navigation.includes('INPUT|BUTTON|A|TEXTAREA'),'Button focus must not disable walking');
+
+const {heldWalkSpeed}=await import('../dist/movement-controls.js');
+assert.equal(heldWalkSpeed(1.25,0,1),1.25);assert.equal(heldWalkSpeed(1.25,5,.1),1.25);assert.ok(heldWalkSpeed(1.25,2,1)>2.3);assert.ok(heldWalkSpeed(1.25,1,1)<heldWalkSpeed(1.25,2,1));
