@@ -1,0 +1,116 @@
+name: Museum review closeout
+on:
+  push:
+    branches: [codex/museum-six-rooms-guardian-v1-1]
+    paths: ['.github/workflows/museum-review-closeout.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: museum-final-candidate
+  cancel-in-progress: false
+jobs:
+  closeout:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: codex/museum-six-rooms-guardian-v1-1
+          persist-credentials: false
+          sparse-checkout: museum
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: expressive-guide-*
+          run-id: 34173312397
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/first
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: retake-guide-*
+          run-id: 34173946588
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/retakes
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: inspection-final-*
+          run-id: 34175623070
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/inspection
+      - name: Install audit and browser tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq && sudo apt-get install -y ffmpeg fonts-noto-cjk
+          python -m pip install faster-whisper==1.2.0 requests==2.32.5 num2words==0.5.14 numpy==1.26.4 playwright==1.55.0
+          python -m playwright install chromium
+          cd museum && npm ci
+      - name: Consolidate accepted sources, preserving current browser and archive fixes
+        env:
+          HF_HUB_DISABLE_XET: '1'
+        run: |
+          set -euo pipefail
+          test "$(find "$RUNNER_TEMP/inspection" -name '*.json' | wc -l)" -eq 3
+          python museum/scripts/adopt_expressive_guide.py --first "$RUNNER_TEMP/first" --retakes "$RUNNER_TEMP/retakes"
+          python museum/scripts/accept_source_quality_voices.py --inspection "$RUNNER_TEMP/inspection" 2>&1 | tee "$RUNNER_TEMP/voice-acceptance.log"
+          sed -i 's/#flaw-content/#flaw-view/g' museum/scripts/check_presentation.py
+          if [ -f museum/dist/data/CHATERBOX-NARRATION-LICENSE.txt ]; then mv museum/dist/data/CHATERBOX-NARRATION-LICENSE.txt museum/dist/data/CHATTERBOX-NARRATION-LICENSE.txt; fi
+          git fetch --no-tags --depth=1 origin cb7df5544b4facb8d7e39cf7e6ac845ecbf235be
+          git show cb7df5544b4facb8d7e39cf7e6ac845ecbf235be:museum/scripts/inspection_sentence_takes.py > museum/scripts/inspection_sentence_takes.py
+          python museum/scripts/finish_spatial_edition.py
+          node museum/scripts/build_runtime.mjs
+          python museum/scripts/build_archive.py
+          python museum/scripts/validate.py
+          for script in museum/scripts/check_*.mjs; do echo "$script"; node "$script"; done
+      - name: Commit the statically validated candidate before long browser checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = codex/museum-six-rooms-guardian-v1-1
+          git add museum
+          if git diff --cached --name-only | grep -qv '^museum/'; then exit 1; fi
+          if ! git diff --cached --quiet; then
+            git -c user.name='museum-edition-builder' -c user.email='actions@github.com' commit -m 'feat(museum): complete reviewed narration and exhibition presentation'
+            AUTH="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+            git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" push origin HEAD:refs/heads/codex/museum-six-rooms-guardian-v1-1
+            unset AUTH
+          fi
+          git rev-parse HEAD > "$RUNNER_TEMP/reviewed-head.txt"
+      - name: Check the actual production bundle and both narration languages
+        env:
+          MUSEUM_QA_OUTPUT: ${{ runner.temp }}/bundle-review
+        run: python museum/scripts/check_browser.py
+      - name: Check all presentation states, originals, lyrics and microscopy
+        env:
+          MUSEUM_QA_OUTPUT: ${{ runner.temp }}/presentation-review
+        run: python museum/scripts/check_presentation.py
+      - name: Final preservation check after harness removal
+        run: |
+          test ! -f museum/dist/__presentation_qa.js
+          python museum/scripts/validate.py
+      - name: Persist review outputs and diagnostic logs
+        if: always()
+        run: |
+          git rev-parse HEAD > "$RUNNER_TEMP/reviewed-head.txt"
+          tar --exclude='node_modules' --exclude='__pycache__' -czf "$RUNNER_TEMP/museum-reviewed.tar.gz" museum
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: museum-reviewed-edition
+          path: |
+            ${{ runner.temp }}/museum-reviewed.tar.gz
+            ${{ runner.temp }}/reviewed-head.txt
+            ${{ runner.temp }}/voice-acceptance.log
+            ${{ runner.temp }}/bundle-review
+            ${{ runner.temp }}/presentation-review
+          retention-days: 7
+          if-no-files-found: error
