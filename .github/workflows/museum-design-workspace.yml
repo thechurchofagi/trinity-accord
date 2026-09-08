@@ -5,6 +5,7 @@ on:
     paths: ['.github/workflows/museum-design-workspace.yml']
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: museum-six-room-build
   cancel-in-progress: false
@@ -12,9 +13,10 @@ jobs:
   build:
     if: github.repository == 'thechurchofagi/trinity-accord'
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 20
     permissions:
       contents: write
+      actions: read
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
@@ -27,42 +29,43 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.11'
-      - name: Install pinned production tools and audio dependencies
+      - name: Recover already synthesized narration
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: museum-six-room-build
+          run-id: 34171789864
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/recovered
+      - name: Install pinned build tools
         run: |
           set -euo pipefail
           sudo apt-get update -qq
-          sudo apt-get install -y ffmpeg libegl1 libxi6 libxrender1
+          sudo apt-get install -y ffmpeg libegl1 libxi6 libxrender1 fonts-noto-cjk
           python -m pip install bpy==4.5.3 edge-tts==7.2.8 Pillow==11.3.0 playwright==1.55.0
-          node --version
-          ffprobe -version
+          python -m playwright install chromium
           cd museum && npm ci
-      - name: Preserve original sources and integrate new spatial runtime
+      - name: Integrate spatial runtime and verify recovered recordings
         run: |
           set -euo pipefail
           git fetch --no-tags --depth=1 origin e99669424e743eea42fb78cfa120c177199c209d
           python museum/scripts/prepare_spatial_layout.py
           python museum/scripts/recover_anniversary.py
           python museum/scripts/integrate_spatial_runtime.py
+          tar -xzf "$RUNNER_TEMP/recovered/museum-six-room-build.tar.gz" museum/dist/assets/guides-v2 museum/dist/data/guide-audio.json
           python - <<'PY'
           import json,pathlib
           p=pathlib.Path('museum/dist/data/space-design.json');d=json.loads(p.read_text());d['edition']='museum-v1.32.0';p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
           p=pathlib.Path('museum/dist/index.html');p.write_text(p.read_text().replace('V1.29.0','V1.32.0').replace('Corridor view','Room view'))
+          p=pathlib.Path('museum/dist/museum.js');p.write_text(p.read_text().replace('长廊视角','展厅全景').replace('Corridor view','Room view').replace('长廊由 Blender','展厅由 Blender').replace('The corridor was modelled','The rooms were modelled'))
           PY
           node --check museum/dist/museum.js
           node museum/scripts/check_spatial_layout.mjs
           node museum/scripts/check_guided_visit.mjs
-      - name: Build new architecture and 16 timed recordings
+          node museum/scripts/check_recorded_guides.mjs
+      - name: Bake and export corrected six-room model
         run: |
           set -euo pipefail
-          node --input-type=module -e "import fs from 'node:fs'; import {tourStops} from './museum/dist/tour-plan.js'; fs.writeFileSync('/tmp/tour-stops.json',JSON.stringify(tourStops));"
-          python museum/scene/build_spatial_gallery.py > "$RUNNER_TEMP/blender.log" 2>&1 & MODEL=$!
-          python museum/scripts/record_guides.py --script-json /tmp/tour-stops.json > "$RUNNER_TEMP/narration.log" 2>&1 & AUDIO=$!
-          FAILED=0
-          wait "$MODEL" || FAILED=1
-          wait "$AUDIO" || FAILED=1
-          tail -40 "$RUNNER_TEMP/blender.log"
-          cat "$RUNNER_TEMP/narration.log"
-          exit "$FAILED"
+          python museum/scene/build_spatial_gallery.py 2>&1 | tee "$RUNNER_TEMP/blender.log"
       - name: Bind complete edition and run regressions
         run: |
           set -euo pipefail
@@ -76,51 +79,18 @@ jobs:
             echo "REGRESSION $check"
             node "museum/scripts/check_${check}.mjs"
           done
-      - name: Render desktop and mobile browser views
-        run: |
-          python - <<'PY'
-          import os,json,pathlib,subprocess,shutil,time
-          from playwright.sync_api import sync_playwright
-          out=pathlib.Path(os.environ['RUNNER_TEMP'])/'museum-browser-qa';out.mkdir()
-          server=subprocess.Popen(['python','-m','http.server','8765','--bind','127.0.0.1','--directory','museum/dist'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
-          report=[]
-          try:
-           time.sleep(1)
-           with sync_playwright() as p:
-            chrome=shutil.which('google-chrome') or shutil.which('chromium')
-            assert chrome,'Hosted runner must provide a Chrome executable'
-            b=p.chromium.launch(executable_path=chrome,headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
-            for label,width,height in [('desktop',1440,900),('mobile',390,844)]:
-             page=b.new_page(viewport={'width':width,'height':height},is_mobile=label=='mobile',has_touch=label=='mobile')
-             errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
-             page.goto('http://127.0.0.1:8765/',wait_until='networkidle')
-             page.wait_for_selector('#loading',state='hidden',timeout=30000)
-             assert page.locator('#rooms button').count()==6
-             assert not page.locator('#fallback-gallery').is_visible(),'WebGL fallback is not a rendered acceptance test'
-             page.locator('#motion').click()
-             for i in range(6):
-              page.locator(f'#rooms [data-room="{i}"]').click(force=True);page.wait_for_timeout(700)
-              page.screenshot(path=str(out/f'{label}-{i}.png'))
-             page.locator('#focus-art').click();page.wait_for_timeout(300)
-             text=page.locator('#panel-content').inner_text()
-             assert 'Guardian' in text or '守护者' in text
-             assert page.locator('#panel-content a[href="./data/records/guardian-charter-103635270.txt"]').count()==1
-             assert not errors,errors
-             report.append(dict(viewport=label,width=width,height=height,rooms=6,guardianLinks=True,pageErrors=errors))
-             page.close()
-            b.close()
-          finally:
-           server.terminate();(out/'report.json').write_text(json.dumps(report,indent=2))
-          print(json.dumps(report))
-          PY
-      - name: Commit validated build only to the isolated design branch
+      - name: Render desktop and mobile; exercise bilingual guide
+        env:
+          MUSEUM_QA_OUTPUT: ${{ runner.temp }}/museum-browser-qa
+        run: python museum/scripts/check_browser.py
+      - name: Commit validated build only to isolated design branch
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           test "$GITHUB_REF_NAME" = codex/museum-six-rooms-guardian-v1-1
           git add museum
-          git diff --cached --name-only | grep -v '^museum/' && exit 1 || true
+          if git diff --cached --name-only | grep -qv '^museum/'; then exit 1; fi
           if git diff --cached --quiet; then exit 0; fi
           git -c user.name='museum-edition-builder' -c user.email='actions@github.com' commit -m 'feat(museum): build six rooms, guardian display and timed bilingual tour'
           AUTH="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
@@ -139,7 +109,6 @@ jobs:
             ${{ runner.temp }}/museum-six-room-build.tar.gz
             ${{ runner.temp }}/museum-build-head.txt
             ${{ runner.temp }}/blender.log
-            ${{ runner.temp }}/narration.log
             ${{ runner.temp }}/museum-browser-qa
           retention-days: 7
           if-no-files-found: error
