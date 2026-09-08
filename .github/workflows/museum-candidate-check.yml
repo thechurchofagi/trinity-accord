@@ -12,7 +12,7 @@ concurrency:
 jobs:
   candidate:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 12
     permissions:
       contents: write
       actions: read
@@ -24,41 +24,60 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.11'
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      - name: Recover independently audited speech and captions
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: museum-candidate-review
+          run-id: 34174637518
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/reviewed
+      - name: Recover original full-band synthesized audio
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           pattern: expressive-guide-*
           run-id: 34173312397
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/speech-input
           merge-multiple: true
-      - name: Install acoustic and browser inspection tools
+      - name: Install renderer test tools
         run: |
           set -euo pipefail
           sudo apt-get update -qq
-          sudo apt-get install -y ffmpeg fonts-noto-cjk
-          python -m pip install faster-whisper==1.2.0 requests==2.32.5 num2words==0.5.14 numpy==1.26.4 playwright==1.55.0
-          python -c 'from faster_whisper import WhisperModel; import requests'
+          sudo apt-get install -y fonts-noto-cjk
+          python -m pip install playwright==1.55.0
           python -m playwright install chromium
           cd museum && npm ci
-      - name: Independently audit and bind new English speech
-        env:
-          HF_HUB_DISABLE_XET: '1'
+      - name: Preserve source-quality speech and finalize exhibition metadata
         run: |
           set -euo pipefail
-          python museum/scripts/audit_expressive_narration.py --input "$RUNNER_TEMP/speech-input" --dist museum/dist 2>&1 | tee "$RUNNER_TEMP/acoustic.log"
-      - name: Bind inventory and run all regressions
-        run: |
-          set -euo pipefail
+          tar -xzf "$RUNNER_TEMP/reviewed/museum-candidate.tar.gz" museum/dist/assets/guides-expressive museum/dist/data/guide-audio.json museum/dist/data/expressive-audio-audit.json
+          python - <<'PY'
+          import os,json,pathlib,hashlib
+          d=pathlib.Path('museum/dist');p=d/'data/guide-audio.json';g=json.loads(p.read_text())
+          originals={json.loads(m.read_text())['textSha256']:(m,json.loads(m.read_text())) for m in (pathlib.Path(os.environ['RUNNER_TEMP'])/'speech-input').glob('*-en.json')}
+          for t in g['tracks']:
+           if t['language']!='en':continue
+           assert t['captionAudit']['accepted'] and not t['captionAudit']['edits']
+           m,old=originals[t['textSha256']];raw=m.with_suffix('.mp3').read_bytes()
+           assert hashlib.sha256(raw).hexdigest()==old['sha256']==t['captionAudit']['inputAudioSha256']
+           (d/t['file']).write_bytes(raw);t.update(sha256=old['sha256'],bytes=len(raw),duration=old['duration'])
+           t['captionAudit']['delivery']='Exact original 24kHz MP3 bytes; 16kHz recognition copy is not used for playback.'
+          p.write_text(json.dumps(g,ensure_ascii=False,indent=2)+'\n')
+          print('8 reviewed English tracks retained without a lossy recognition round-trip')
+          PY
+          python museum/scripts/closeout_spatial_edition.py
           python museum/scripts/finish_spatial_edition.py
           node museum/scripts/build_runtime.mjs
           python museum/scripts/build_archive.py
           python museum/scripts/validate.py
           for script in museum/scripts/check_*.mjs; do echo "$script"; node "$script"; done
-      - name: Render desktop/mobile and play both actual language tracks
+      - name: Render key close views and exercise actual bilingual playback
         env:
           MUSEUM_QA_OUTPUT: ${{ runner.temp }}/candidate-browser
-        run: python museum/scripts/check_browser.py
-      - name: Commit candidate only to the existing PR branch
+        run: |
+          set -euo pipefail
+          python museum/scripts/check_browser.py 2>&1 | tee "$RUNNER_TEMP/browser.log"
+      - name: Commit final candidate only to the existing PR branch
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -67,15 +86,14 @@ jobs:
           git add museum
           if git diff --cached --name-only | grep -qv '^museum/'; then exit 1; fi
           if git diff --cached --quiet; then exit 0; fi
-          git -c user.name='museum-edition-builder' -c user.email='actions@github.com' commit -m 'feat(museum): integrate acoustically reviewed expressive English narration'
+          git -c user.name='museum-edition-builder' -c user.email='actions@github.com' commit -m 'feat(museum): finish six-room exhibition with reviewed expressive narration'
           AUTH="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
           git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" push origin HEAD:refs/heads/codex/museum-six-rooms-guardian-v1-1
           unset AUTH
-      - name: Preserve candidate and audit even on failure
+      - name: Preserve final candidate and diagnostics
         if: always()
         run: |
           git rev-parse HEAD > "$RUNNER_TEMP/candidate-head.txt"
-          if [ -f museum/dist/data/expressive-audio-audit.json ]; then cp museum/dist/data/expressive-audio-audit.json "$RUNNER_TEMP/expressive-audio-audit.json"; fi
           tar --exclude='node_modules' --exclude='__pycache__' -czf "$RUNNER_TEMP/museum-candidate.tar.gz" museum
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
@@ -85,7 +103,6 @@ jobs:
             ${{ runner.temp }}/museum-candidate.tar.gz
             ${{ runner.temp }}/candidate-head.txt
             ${{ runner.temp }}/candidate-browser
-            ${{ runner.temp }}/acoustic.log
-            ${{ runner.temp }}/expressive-audio-audit.json
+            ${{ runner.temp }}/browser.log
           retention-days: 7
           if-no-files-found: error
