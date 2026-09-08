@@ -289,7 +289,7 @@ function prepareInspection(){
  loadCrystal?.();microscopeMotion?.prepare().catch(()=>{});
  if(!inspectionPreloaded){inspectionPreloaded=true;for(const item of publicFlaws.items){const image=new Image();image.src=item.file;}}
 }
-function closeFlaws(){inspectionPhase='idle';inspectionRequest++;clearTimeout(inspectionTimer);microscopeMotion?.stop();flawIndex=-1;$('flaw-view').hidden=true;$('flaw-view').replaceChildren();}
+function closeFlaws(preserveSequence=false){if(touring&&tourInspectionStarted&&!preserveSequence)tourInspectionComplete=true;inspectionPhase='idle';inspectionRequest++;clearTimeout(inspectionTimer);microscopeMotion?.stop();flawIndex=-1;$('flaw-view').hidden=true;$('flaw-view').replaceChildren();}
 function showFlawPhoto(index,request){
  if(request!==inspectionRequest)return;
  const item=publicFlaws.items[index],host=$('flaw-view');host.hidden=false;
@@ -301,7 +301,7 @@ function showFlawPhoto(index,request){
  if(photo.complete&&photo.naturalWidth)begin();
 }
 async function showFlaw(index=0,automatic=false){
- if(!automatic){closePanel();cancelMusic();$('music-bar').hidden=true;clearLyrics();}else {silenceGuide();closeFlaws();}
+ if(!automatic){closePanel();cancelMusic();$('music-bar').hidden=true;clearLyrics();}else {silenceGuide();closeFlaws(true);}
  inspectionPhase='approach';const request=++inspectionRequest;flawIndex=(index+3)%3;index=flawIndex;
  $('tour-caption').hidden=false;$('caption-text').textContent=tx('垂直升起虚拟显微镜，对准水晶…','Lifting the virtual microscope to the crystal…');
  const crystal=spatialReady?await loadCrystal?.():null;if(request!==inspectionRequest)return;
