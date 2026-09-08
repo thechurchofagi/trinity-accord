@@ -6,6 +6,9 @@ on:
 permissions:
   contents: read
   actions: read
+concurrency:
+  group: museum-final-candidate
+  cancel-in-progress: false
 jobs:
   candidate:
     runs-on: ubuntu-24.04
@@ -30,26 +33,22 @@ jobs:
           merge-multiple: true
       - name: Install acoustic and browser inspection tools
         run: |
+          set -euo pipefail
           sudo apt-get update -qq
           sudo apt-get install -y ffmpeg fonts-noto-cjk
-          python -m pip install faster-whisper==1.2.0 num2words==0.5.14 numpy==1.26.4 playwright==1.55.0
+          python -m pip install faster-whisper==1.2.0 requests==2.32.5 num2words==0.5.14 numpy==1.26.4 playwright==1.55.0
+          python -c 'from faster_whisper import WhisperModel; import requests'
           python -m playwright install chromium
           cd museum && npm ci
       - name: Independently audit and bind new English speech
         env:
           HF_HUB_DISABLE_XET: '1'
-        run: python museum/scripts/audit_expressive_narration.py --input "$RUNNER_TEMP/speech-input" --dist museum/dist
-      - name: Update matching browser assertions and bind inventory
         run: |
           set -euo pipefail
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('museum/scripts/check_browser.py');s=p.read_text()
-          s=s.replace(".endswith('00-en.mp3')", ".endswith(english_intro)")
-          s=s.replace('ROOT=pathlib.Path(__file__).resolve().parents[1]', "ROOT=pathlib.Path(__file__).resolve().parents[1]\nenglish_intro=next(t['file'] for t in json.loads((ROOT/'dist/data/guide-audio.json').read_text())['tracks'] if t['stop']==0 and t['language']=='en')")
-          s=s.replace('page.wait_for_function("document.getElementById(\'narration\').currentSrc.endsWith(english_intro) && document.getElementById(\'narration\').readyState>=1")', 'page.wait_for_function("file => document.getElementById(\'narration\').currentSrc.endsWith(file) && document.getElementById(\'narration\').readyState>=1", arg=english_intro)')
-          p.write_text(s)
-          PY
+          python museum/scripts/audit_expressive_narration.py --input "$RUNNER_TEMP/speech-input" --dist museum/dist 2>&1 | tee "$RUNNER_TEMP/acoustic.log"
+      - name: Bind inventory and run all regressions
+        run: |
+          set -euo pipefail
           python museum/scripts/finish_spatial_edition.py
           node museum/scripts/build_runtime.mjs
           python museum/scripts/build_archive.py
@@ -76,6 +75,7 @@ jobs:
         if: always()
         run: |
           git rev-parse HEAD > "$RUNNER_TEMP/candidate-head.txt"
+          if [ -f museum/dist/data/expressive-audio-audit.json ]; then cp museum/dist/data/expressive-audio-audit.json "$RUNNER_TEMP/expressive-audio-audit.json"; fi
           tar --exclude='node_modules' --exclude='__pycache__' -czf "$RUNNER_TEMP/museum-candidate.tar.gz" museum
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
@@ -85,6 +85,7 @@ jobs:
             ${{ runner.temp }}/museum-candidate.tar.gz
             ${{ runner.temp }}/candidate-head.txt
             ${{ runner.temp }}/candidate-browser
-            museum/dist/data/expressive-audio-audit.json
+            ${{ runner.temp }}/acoustic.log
+            ${{ runner.temp }}/expressive-audio-audit.json
           retention-days: 7
           if-no-files-found: error
