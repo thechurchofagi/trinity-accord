@@ -28,6 +28,8 @@ jobs:
           node --check museum/dist/museum.js
           node museum/scripts/check_navigation.mjs
           node museum/scripts/check_guided_visit.mjs
+          node museum/scripts/check_tour_clock.mjs
+          node museum/scripts/check_spatial_layout.mjs
           node museum/scripts/check_recorded_guides.mjs
           node museum/scripts/check_music_playback.mjs
           node museum/scripts/check_language_preference.mjs

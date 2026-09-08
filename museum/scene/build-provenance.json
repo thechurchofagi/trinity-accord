@@ -14,8 +14,8 @@
     },
     {
       "path": "scripts/prepare_open_gallery.py",
-      "bytes": 3039,
-      "sha256": "05273b13b224a4c3e00490d3bfbe2a75c17793003d3950dd9b37cd817677cf82"
+      "bytes": 3085,
+      "sha256": "9ea32da733ad64ab394b5b9128535616ff67e8c805218f2c99557882f653a110"
     },
     {
       "path": "dist/spatial-layout.js",

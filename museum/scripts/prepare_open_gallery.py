@@ -4,7 +4,8 @@ import json
 P=Path(__file__).resolve().parents[1];D=P/'dist';EDITION='museum-v1.34.0'
 def save(p,d):p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
 layout=json.loads((D/'data/gallery-layout.json').read_text())
-old_floors={r['id']:r['floor'] for r in layout['rooms']}
+if layout.get('edition')==EDITION:
+ print('Open gallery layout already prepared.');raise SystemExit(0)
 parts=[]
 for p in layout['architecture']:
  if p.get('floor') or p['name'] in ['Portal shoulder','Portal lintel','Portal metal reveal','Door light']:continue

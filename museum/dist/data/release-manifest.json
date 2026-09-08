@@ -883,7 +883,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1017,
-      "sha256": "75f7efd1343d5c3bca39a8227df4904ac14cb1d49cee9807962f0a32387e43b8"
+      "sha256": "b2fc817428e76e06201f9cb11d966f372ecaf1d7ea1ced3bf62d535eaa834218"
     },
     {
       "path": "caption-utils.js",
@@ -1378,7 +1378,7 @@
     {
       "path": "index.html",
       "bytes": 6598,
-      "sha256": "d01d398f4a7936e680dc4e8f409d6cddd95266b8bcf1ee2aa9c3815647f0ec20"
+      "sha256": "521c98d62a71b6ce3aac460d43491541454dfe44b25f5ac21b6941ef3a6b1479"
     },
     {
       "path": "language-preference.js",
@@ -1392,8 +1392,8 @@
     },
     {
       "path": "microscope-motion.js",
-      "bytes": 5604,
-      "sha256": "dddc545119b354752e38f661b05a76695135c456f2fc3da09a60507fef4dd049"
+      "bytes": 5828,
+      "sha256": "8ffde68fe50ad04ce36f67ca275e0630cd67df3907df864023c17b7c944668ed"
     },
     {
       "path": "movement-controls.js",
@@ -1402,8 +1402,8 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 1094417,
-      "sha256": "5d5a094061f2c7c1d54aaed0b5aec5802f23b4da346a0623791a2b1601d3f8bb"
+      "bytes": 1094475,
+      "sha256": "1c7c4865499872dfbecafc537e4c92d38a528fea1c4f3ce4ae081cc5235ed429"
     },
     {
       "path": "museum.css",
@@ -1467,8 +1467,8 @@
     },
     {
       "path": "tour-clock.js",
-      "bytes": 1415,
-      "sha256": "b1afa19502002ab643ed5546c9e7f7dbdbee99bf978d32ce0d31d9a88eb300f1"
+      "bytes": 1524,
+      "sha256": "e944d6867f026dd994842cde28f932e0b07cbc67e424a419c8e1f215a064d7ac"
     },
     {
       "path": "tour-plan.js",

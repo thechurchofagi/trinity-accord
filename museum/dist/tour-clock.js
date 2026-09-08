@@ -13,5 +13,7 @@ export function tourClock(stops,guides,{language='en',rate=1,step=0,guideTime=0,
  if(s.inspectAt!==undefined&&!inspectionComplete){
   current+=flaws.reduce((n,d,i)=>n+(inspectionStarted&&i<inspectionIndex?0:inspectionStarted&&i===inspectionIndex?Math.max(0,d-2.8-inspectionTime/pace):d),0);
  }
- return {total,remaining:current+stops.slice(step+1).reduce((n,s,j)=>n+cost(s,step+1+j),0)};
+ const remaining=current+stops.slice(step+1).reduce((n,s,j)=>n+cost(s,step+1+j),0);
+ // A restart from a distant room may add a longer opening walk.
+ return {total:Math.max(total,remaining),remaining};
 }
