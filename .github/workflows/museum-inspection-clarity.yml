@@ -24,16 +24,25 @@ jobs:
           python -m pip install faster-whisper==1.2.0 soundfile==0.13.1
           python -m pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
           python -m pip install 'git+https://github.com/resemble-ai/chatterbox.git@5de7a54aa4e5e2baadb0182dde554908b48b85c2'
-      - name: Produce a precisely articulated inspection sentence
+      - name: Produce and check six unambiguous inspection sentences
         env:
           HF_HUB_DISABLE_XET: '1'
           OMP_NUM_THREADS: '3'
           TOKENIZERS_PARALLELISM: 'false'
-        run: python museum/scripts/inspection_clarity_retake.py --flaw 0 --output "$RUNNER_TEMP/voice"
+        run: |
+          set -euo pipefail
+          python museum/scripts/inspection_clarity_retake.py --flaw 0 --output "$RUNNER_TEMP/voice" 2>&1 | tee "$RUNNER_TEMP/inspection-clarity.log"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: inspection-final-0
           path: ${{ runner.temp }}/voice
+          retention-days: 7
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: inspection-clarity-diagnostics
+          path: ${{ runner.temp }}/inspection-clarity.log
           retention-days: 7
           if-no-files-found: warn
