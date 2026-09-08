@@ -1,3 +1,18 @@
+# museum-v1.33.0 · Physical scale, continuous walking and formation history
+
+Acceptance: recorded-guide and complete browser checks must pass before merge or deployment. Narration is produced locally; no external speech-synthesis approval is required.
+
+- Fix mutable camera references in route origins and consume bounded rendered-frame time at 1.25 metres/second. Maintain eye height over floors and ramps, with no elapsed-time catch-up after backgrounding.
+- Advance tour stops when walking and narration finish; stop each of two song excerpts after 30 media-clock seconds. First flaw receives the detailed explanation; subsequent original photographs receive brief comparisons.
+- Place the documented 246 × 353 × 40 mm crystal at physical scale on a 1.45m walnut cylinder in the Originals hall. Remove the separate material room, levitation and doubling of scale. Pedestal and walking share their collision dimensions.
+- Rebuild lower-intensity architectural lighting, use a visitor-following fill and a selected-object spotlight, lower artwork hanging height, and use a gold observation-window surround.
+- Four-row plaques separate event identity/date, mint date/title, and recording title. Retain source date precision, three-digit numbers, full original mint titles and full artwork proportions.
+- Use thirty local Qwen3-TTS 1.7B recordings: Serena in Chinese and Aiden in English. Preserve paragraph-level recognition reviews and documented clarity retakes. Original music and photographs remain unchanged.
+- Refine walnut grain and suppress document glare after desktop/mobile review; use a neutral interior reflection for the physically metallic gold window frame.
+- Add the verified June 16 formation inscription #97534036 with its full preserved text and metadata. Expanded narration quotes the Protocol dedication and meta-record motivation/closing, and identifies “We have spoken. Now, we listen.” as a website invitation also recorded in the later First Echoes inscription. The third Original’s own invitation to interpretation remains distinct.
+
+# museum-v1.32.0 · Six rooms, questions and guardianship
+
 ## Final staging and narration acceptance
 
 - Correct sRGB/linear lighting, denoise architectural light only, seal both doorway footprints, shift the crystal exit away from its background, enlarge the three Originals, and replace the bright waiting ring with a side reading stand.
@@ -12,7 +27,7 @@
 - Keep the nine-minute tour, original mirror image, anniversary timing distinctions and later non-amending guardianship display. First clicks approach each Original consistently; details remain a deliberate second action.
 - Validate the static distribution, geometry, source hashes and desktop/mobile Chromium viewports. Actual Android/iOS hardware and live Zoom transmission remain outside automated acceptance.
 
-# museum-v1.32.0 · Six rooms, questions and guardianship
+## Initial spatial changes
 
 - Replace the uniform corridor with six shared footprints: Earth entry, Chronicle, Formation, 12-sided/8m-high Canon hall, independent crystal room, and waiting. Preview, Blender geometry, floor heights, door openings, picking and camera routes use the same configuration. The 0.35m raised final rooms are connected by a central 1:12 ramp with shallow side steps.
 - Add From Author to Guardian at the waiting entrance. Distinguish Guardian Principles v1.1 from the later Authority Charter #103635270; neither is a fourth Original. Later commentary grants no exclusive interpretive authority, and blockchain does not prevent later speech or site edits.

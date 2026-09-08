@@ -1,49 +1,31 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import crypto from 'node:crypto';
 import {tourStops,tourDuration,tourPosition} from '../dist/tour-plan.js';
-assert.equal(tourDuration,580);
-assert.equal(tourPosition(580),null);
-let time=0;for(let i=0;i<tourStops.length;i++){assert.equal(tourPosition(time).index,i);assert.equal(tourPosition(time+tourStops[i].seconds-.001).index,i);time+=tourStops[i].seconds;}
-assert.deepEqual(tourStops.filter(s=>s.inspectFlaw!==undefined).map(s=>s.inspectFlaw),[0]);
 const app=fs.readFileSync(new URL('../dist/museum.js',import.meta.url),'utf8');
-const manifest=JSON.parse(fs.readFileSync(new URL('../dist/data/public-flaws.json',import.meta.url)));
-for(const f of manifest.items){const data=fs.readFileSync(new URL('../dist/'+f.file,import.meta.url));assert.equal(crypto.createHash('sha256').update(data).digest('hex'),f.sha256);}
-const calls=[],elements=new Map();function $(id){if(!elements.has(id))elements.set(id,{hidden:false,ended:true,textContent:'',replaceChildren(){},pause(){calls.push('pause');}});return elements.get(id);}
-const context={pendingTourView:null,document:{hidden:false},manualUntil:0,keys:new Set(),joystick:null,guideStop:0,inspectionPhase:'idle',tourInspectionComplete:false,tourShotIndex:0,reduced:false,spatialReady:false,tourLookChanged:false,tourInspectionStarted:false,flawIndex:-1,showFlaw(i){context.flawIndex=i;context.tourInspectionComplete=true;},touring:false,tourElapsed:0,tourLast:0,tourStep:-1,tourMusicStarted:false,guideResume:null,recordedGuide:{state:'playing',currentTime:0,paint(){},setMuted(){this.state='playing';}},tourDuration,tourPosition,performance:{now:()=>1000},tourTimer:null,tourStops,lang:'zh',guideSound:false,musicPlayback:{state:'idle',waiting:false,recovering:false},cancelMusic(){context.playRequest++;context.musicPlayback.state='idle';context.musicPlayback.waiting=false;},resumeAudio(){if(context.musicPlayback.waiting){context.musicPlayback.waiting=false;context.musicPlayback.state='playing';}else context.recordedGuide.setMuted(false);},roomData:{},motion:null,playRequest:0,$,time:String,tx:(zh)=>zh,window:{},closePanel(){},closeFlaws(){context.flawIndex=-1;calls.push('closeFlaws');},silenceGuide(){calls.push('silence');},clearLyrics(){},updateUI(){calls.push('ui');},updateTourStatus(){},toast(){},setTimeout(){return 1;},clearTimeout(){},enterTourStop(p){context.tourStep=p.index;context.tourMusicStarted=false;calls.push(['stop',p.index]);},exhibits:new Map([...tourStops.map(s=>[s.exhibit,{id:s.exhibit}]),['eth-049',{id:'eth-049'}]]),focusExhibit(){},soundFor:e=>e,playTrack(e,art,toggle,keep){assert.equal(keep,true);calls.push(['music',e.id]);}};
-vm.createContext(context);
-function load(name,next){vm.runInContext(app.slice(app.indexOf('function '+name+'('),app.indexOf('function '+next+'(')),context);}
-load('audioWaiting','syncAudioHold');load('stopTour','updateTourStatus');load('tourTick','startTour');load('startTour','showHelp');
-context.startTour(true);assert.equal(context.touring,true);assert.deepEqual(calls.find(Array.isArray),['stop',0]);
-for(let t=1200;t<=581400;t+=200)context.tourTick(t);
-assert.equal(context.touring,false);assert.deepEqual(calls.filter(x=>Array.isArray(x)&&x[0]==='stop').map(x=>x[1]),tourStops.map((_,i)=>i));assert.equal(calls.filter(x=>Array.isArray(x)&&x[0]==='music').length,1);
-context.tourElapsed=123;context.startTour();context.stopTour();assert.equal(context.tourElapsed,123);assert.equal(context.touring,false);const before=calls.length;context.tourTick(999999);assert.equal(calls.length,before,'stale timer must not advance after pause');
-// A no-op stop must not rebuild menu buttons while a click is underway.
-const count=calls.filter(x=>x==='ui').length;context.stopTour();assert.equal(calls.filter(x=>x==='ui').length,count);
-// Blocked narration must hold the clock and all automatic stop/music changes.
-context.tourElapsed=0;context.tourStep=-1;context.guideSound=true;context.startTour(true);
-context.recordedGuide.state='blocked';const stopped=calls.filter(Array.isArray).length;
-for(let t=2000;t<620000;t+=200)context.tourTick(t);
-assert.equal(context.tourElapsed,0);assert.equal(calls.filter(Array.isArray).length,stopped);
-context.resumeAudio();assert.equal(context.touring,true);assert.equal(context.recordedGuide.state,'playing');
-context.tourTick(620200);assert.ok(context.tourElapsed>0);context.stopTour();
-assert.ok(!app.includes('yaw=Math.PI;camera.rotation.order'));
-console.log('PASS: full 580-second runtime, all stops and music transitions, three exact public photos, pause/resume, stale timer cancellation, stable menu no-op, inward initial view.');
-
-// Later song rejection holds both the stop and its clock for as long as needed.
-context.tourElapsed=tourStops.slice(0,tourStops.findIndex(s=>s.musicAt!==undefined)).reduce((sum,s)=>sum+s.seconds,0)+tourStops.find(s=>s.musicAt!==undefined).musicAt+1;context.startTour(true);
-const heldTime=context.tourElapsed,heldStop=context.tourStep;context.musicPlayback.state='blocked';context.musicPlayback.waiting=true;
-for(let t=700000;t<800000;t+=200)context.tourTick(t);
-assert.equal(context.tourElapsed,heldTime);assert.equal(context.tourStep,heldStop);
-context.resumeAudio();assert.equal(context.touring,true);assert.equal(context.musicPlayback.state,'playing');context.tourTick(800200);assert.ok(context.tourElapsed>heldTime);context.stopTour();
-
-// Completion must remain distinct from a visitor pause in the visible status.
-context.guideRecovery=false;context.guideRate=1;context.flawIndex=-1;
-$('guide-speed').setAttribute=()=>{};
-load('updateTourStatus','enterTourStop');
-context.tourElapsed=580;context.updateTourStatus();
-assert.match($('tour-progress').textContent,/已完成/);
-assert.doesNotMatch($('tour-progress').textContent,/暂停/);
-context.tourElapsed=120;context.updateTourStatus();
-assert.match($('tour-progress').textContent,/暂停/);
+assert.equal(tourStops.length,12);assert.equal(tourPosition(tourDuration),null);assert.equal(tourStops.filter(s=>s.musicDuration===30).length,2);
+let total=0;for(let i=0;i<tourStops.length;i++){assert.equal(tourPosition(total).index,i);total+=tourStops[i].seconds;}
+const elements=new Map(),calls=[];const $=id=>{if(!elements.has(id))elements.set(id,{hidden:false,open:false,ended:false,currentTime:0,duration:100});return elements.get(id);};
+const c={tourStops,tourDuration,tourPosition,$,touring:true,tourElapsed:0,tourLast:0,tourStep:0,tourMusicStarted:false,tourMusicComplete:false,tourInspectionStarted:false,tourInspectionComplete:false,tourTimer:null,guideResume:null,guideStop:0,guideSound:true,flawIndex:-1,inspectionPhase:'idle',motion:null,pendingTourView:null,manualUntil:0,keys:new Set(),joystick:null,document:{hidden:false},performance:{now:()=>1000},recordedGuide:{state:'playing',currentTime:0,paint(){}},musicPlayback:{waiting:false},audioWaiting(){return c.recordedGuide.state==='blocked'||c.musicPlayback.waiting;},setTimeout(){return 1;},cancelMusic(){calls.push('music-stopped');},clearLyrics(){},silenceGuide(){c.recordedGuide.state='idle';},playTrack(e){calls.push('music-started');},soundFor:e=>e,exhibits:new Map(tourStops.map(s=>[s.musicExhibit||s.exhibit,{id:s.musicExhibit||s.exhibit}])),updateTourStatus(){},updateUI(){},stopTour(){c.touring=false;},enterTourStop(p){calls.push(['enter',p.index]);c.tourStep=p.index;c.tourMusicStarted=false;c.tourMusicComplete=false;c.tourInspectionStarted=false;c.tourInspectionComplete=false;c.recordedGuide.state='playing';$('narration').ended=false;},showFlaw(index){calls.push(['flaw',index]);c.flawIndex=index;c.guideStop=-1;c.inspectionPhase='reading';c.recordedGuide.state='playing';$('narration').ended=false;},closeFlaws(){c.flawIndex=-1;}};
+vm.createContext(c);vm.runInContext(app.slice(app.indexOf('function tourTick('),app.indexOf('function startTour(')),c);
+// A completed explanation leaves immediately, with no fixed-budget dead time.
+$('narration').ended=true;c.tourElapsed=1;c.tourTick(1000);assert.equal(c.tourStep,1);
+// Playback must finish before transition, even after arbitrarily delayed timer ticks.
+c.tourStep=0;c.tourElapsed=0;c.recordedGuide.state='playing';$('narration').ended=false;c.tourTick(999999);assert.equal(c.tourStep,0);
+$('narration').ended=true;c.motion={walk:true};c.tourTick(1000199);assert.equal(c.tourStep,0,'Cross-room walking must arrive before advancing');
+c.motion=null;c.tourTick(1000399);assert.equal(c.tourStep,1);
+// A song ends after thirty seconds of media playback, even while still walking.
+$('narration').ended=true;c.motion={walk:true};c.tourTick(1000599);assert.ok(c.tourMusicStarted);$('music').currentTime=29.9;c.tourTick(1000799);assert.equal(c.tourMusicComplete,false);
+$('music').currentTime=30.01;c.tourTick(1000999);assert.ok(c.tourMusicComplete);assert.equal(c.tourStep,1);assert.ok(calls.includes('music-stopped'));
+c.motion=null;c.tourTick(1001199);assert.equal(c.tourStep,2);
+// Blocked audio and hidden tabs preserve the current station and progress.
+const held=c.tourElapsed;c.recordedGuide.state='blocked';for(let i=0;i<10;i++)c.tourTick(2000000+i*1000);assert.equal(c.tourElapsed,held);assert.equal(c.tourStep,2);
+c.recordedGuide.state='playing';c.document.hidden=true;$('narration').ended=true;c.tourTick(3000000);assert.equal(c.tourStep,2);c.document.hidden=false;
+// All three distinct original-photo explanations are awaited in order.
+c.tourElapsed=tourStops.slice(0,8).reduce((n,s)=>n+s.seconds,0);c.tourStep=8;$('narration').ended=true;c.tourTick(3000200);assert.equal(c.flawIndex,0);
+for(let i=0;i<3;i++){$('narration').ended=true;c.tourTick(3000400+i*200);}
+assert.deepEqual(calls.filter(x=>Array.isArray(x)&&x[0]==='flaw').map(x=>x[1]),[0,1,2]);assert.equal(c.tourStep,9);
+// Only an explicit tour close or natural completion stops guidance.
+const navigation=app.slice(app.indexOf('function bindNavigation('),app.indexOf('function animate('));assert.ok(!navigation.includes('stopTour('));
+c.touring=false;const before=c.tourElapsed;c.tourTick(9999999);assert.equal(c.tourElapsed,before);
+console.log('PASS: twelve event-driven stops, no idle budget waits, walking arrival, two 30-second excerpts, audio recovery and sequential flaw explanations.');

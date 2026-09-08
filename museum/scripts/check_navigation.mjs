@@ -47,7 +47,9 @@ context.state='interrupted';feet.unlock();await Promise.resolve();assert.equal(r
 feet.update(.01,true);assert.equal(played,3);const samples=footstepSamples();const rms=Math.sqrt(samples.reduce((s,x)=>s+x*x,0)/samples.length)*FOOTSTEP_GAIN;assert.ok(rms>.001&&rms<.012,'Footsteps must remain quiet, below the previous thudding level');
 const data=JSON.parse(fs.readFileSync(new URL('../dist/data/sources.json',import.meta.url)));
 assert.ok(FOOTSTEP_GAIN<=.065,'Shoe contact amplitude stays at most half the previous edition');
-for(const e of data.items){for(const zh of [false,true]){const label=exhibitLabel(e,zh);assert.ok(label.startsWith(`No. ${String(e.ordinal).padStart(2,'0')}  ·  ${e.date.slice(0,10)}`));assert.ok(label.includes(zh?'事件:':'Event:'));}}
+const curation=JSON.parse(fs.readFileSync(new URL('../dist/data/curation.json',import.meta.url)));
+for(const source of data.items)for(const zh of [false,true]){const e={...source,...curation.items.find(x=>x.id===source.id)},rows=exhibitLabel(e,zh,true).split('\n');assert.equal(rows.length,4);assert.equal(rows[0],`No. ${String(e.ordinal).padStart(3,'0')}`);assert.ok(rows[1].startsWith('Event '));assert.ok(rows[2].startsWith(`Mint ${e.date.slice(0,10)} UTC`));assert.ok(rows[3].startsWith('♪ '));assert.ok(!rows[0].includes('♪'));}
+
 // Run the actual selection handler: approach/play once, then open details without restarting audio.
 const app=fs.readFileSync(new URL('../dist/museum.js',import.meta.url),'utf8'),calls=[];
 const selectionContext={touring:false,spatialReady:true,approachedExhibit:null,showExhibit:id=>calls.push(['details',id]),stopTour(){},focusExhibit:id=>calls.push(['approach',id]),$:()=>({hidden:false}),exhibits:new Map([['eth-001',{id:'eth-001'}],['eth-020',{id:'eth-020'}]]),soundFor:e=>e,playTrack:e=>calls.push(['play',e.id]),musicItem:null};

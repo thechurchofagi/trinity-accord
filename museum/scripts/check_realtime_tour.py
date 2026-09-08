@@ -1,4 +1,4 @@
-"""Play the shipped 3D English tour for nine real minutes, without seeking.
+"""Play the shipped 3D English tour to its natural end, without seeking.
 
 CI acceptance of timing, media and rendered states; not a human listening review.
 """
@@ -26,9 +26,9 @@ try:
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, args=['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'])
         # Full-size desktop/mobile frames are covered by check_presentation.py.
-        # A smaller real-time surface keeps SwiftShader capture work from stalling
+        # A 480 × 320 real-time surface keeps software rendering from stalling
         # the presentation clock; never disable 3D or reduce its motion here.
-        page = browser.new_page(viewport={'width': 960, 'height': 600})
+        page = browser.new_page(viewport={'width': 480, 'height': 320})
         page.on('console', lambda m: print('BROWSER_CONSOLE',m.type,m.text,flush=True) if m.type in ['error','warning'] else None)
         page.on('pageerror', lambda e: report['pageErrors'].append(str(e)))
         page.on('response', lambda r: report['assetFailures'].append(r.url) if r.status >= 400 and '/assets/' in r.url else None)
@@ -43,38 +43,38 @@ try:
         inspection_files = {t['file']: t['flaw'] for t in guides['inspectionTracks'] if t['language']=='en'}
         previous = 0
         last_log = -15
-        while time.monotonic() - started < 840:
+        while time.monotonic() - started < 1500:
             sample = page.evaluate('''() => {
               const a=document.getElementById('narration'),m=document.getElementById('music');
               return {progress:document.getElementById('tour-progress').textContent,
                 room:document.querySelector('#rooms [aria-current="true"]')?.textContent,
                 source:a.getAttribute('src'),audioTime:a.currentTime,playing:!a.paused,
-                musicPlaying:!m.paused,caption:document.getElementById('caption-text').textContent,
+                musicPlaying:!m.paused,musicTime:m.currentTime,musicSource:m.getAttribute('src'),moving:document.getElementById('world').dataset.cameraMoving,caption:document.getElementById('caption-text').textContent,
                 inspection:!document.getElementById('flaw-view').hidden,
                 blocked:document.getElementById('guide-audio-prompt').open};
             }''')
             sample['wallSeconds'] = round(time.monotonic() - started, 2)
             clock = sample['progress'].split(' / ')[0]
-            minutes, seconds = map(int, clock.split(':'))
-            elapsed = minutes * 60 + seconds
-            assert previous <= elapsed <= sample['wallSeconds'] + 2, sample
+            elapsed = int(clock)
+            assert previous <= elapsed <= 12, sample
+            if sample['musicPlaying']:assert sample['musicTime'] <= 30.5, sample
             assert not sample['blocked'], 'Uninterrupted playback requested: ' + str(sample)
             assert not (sample['playing'] and sample['musicPlaying']), 'Narration and song overlap'
             if sample['playing'] and sample['source'] in inspection_files:
                 seen_flaws.add(inspection_files[sample['source']])
             if sample['playing'] and sample['source'] in expected:
                 seen.add(expected[sample['source']])
-            if elapsed - last_log >= 15 or elapsed == 580:
+            if sample['wallSeconds'] - last_log >= 15 or 'complete' in sample['progress']:
                 report['samples'].append(sample)
                 print('TOUR_PROGRESS', json.dumps(sample), flush=True)
-                last_log = elapsed
+                last_log = sample['wallSeconds']
             previous = elapsed
-            if elapsed == 580:
+            if 'complete' in sample['progress']:
                 break
             page.wait_for_timeout(1000)
-        assert previous == 580, 'Tour failed to finish within eleven wall-clock minutes'
+        assert 'complete' in sample['progress'], 'Tour failed to finish within twenty-five wall-clock minutes'
         assert seen_flaws == {0,1,2}, ('Missing audible flaw explanations', seen_flaws)
-        assert seen == set(range(8)), ('Missing audible tour tracks', seen)
+        assert seen == set(range(12)), ('Missing audible tour tracks', seen)
         assert page.locator('body').get_attribute('data-presentation') == 'true'
         assert not page.locator('#exhibit-strip').is_visible()
         assert 'Replay tour' in page.locator('#tour').inner_text()
@@ -83,7 +83,7 @@ try:
         assert not report['assetFailures'], report['assetFailures']
         # Capture after completion: screenshots must not interrupt this test.
         page.screenshot(path=str(OUT / 'completed-tour.png'), timeout=60000)
-        report.update(passed=True, audibleStops=sorted(seen), audibleFlaws=sorted(seen_flaws), completedSeconds=580,
+        report.update(passed=True, audibleStops=sorted(seen), audibleFlaws=sorted(seen_flaws), completedStops=12,
                       wallSeconds=round(time.monotonic() - started, 2))
         browser.close()
 finally:

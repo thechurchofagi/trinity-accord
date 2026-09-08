@@ -27,7 +27,7 @@ export function isWalkable(layout,p,margin=RADIUS){
  for(let i=0;i<r.footprint.length;i++){const a=r.footprint[i],b=r.footprint[(i+1)%r.footprint.length];if(Math.abs(a[1]-b[1])<1e-5&&(Math.abs(a[1]-r.start)<1e-5||Math.abs(a[1]-r.start-r.length)<1e-5))continue;const dx=b[0]-a[0],dy=b[1]-a[1];if(dx*(-p.z-a[1])-dy*(p.x-a[0])<margin*Math.hypot(dx,dy))return false;}
  for(const door of layout.portals)if(Math.abs(p.z+door.depth)<margin+.16&&Math.abs(p.x-door.x)>door.width/2-margin)return false;
  const crystal=layout.crystal;
- if(crystal&&Math.hypot(p.x-crystal.x,p.z-crystal.z)<.52+margin)return false;
+ if(crystal&&Math.hypot(p.x-crystal.x,p.z-crystal.z)<(crystal.pedestalRadius||.34)+margin)return false;
  return true;
 }
 export function constrainStep(layout,start,end){
@@ -44,7 +44,7 @@ function visible(layout,a,b){
  const dx=b.x-a.x,dz=b.z-a.z;
  function range(lo,hi){if(Math.abs(dz)<1e-12)return a.z>=lo&&a.z<=hi?[0,1]:null;const t0=(lo-a.z)/dz,t1=(hi-a.z)/dz,l=Math.max(0,Math.min(t0,t1)),h=Math.min(1,Math.max(t0,t1));return l<=h?[l,h]:null;}
  for(const door of layout.portals){const times=range(-door.depth-RADIUS-.16,-door.depth+RADIUS+.16);if(times&&times.some(t=>Math.abs(a.x+dx*t-door.x)>door.width/2-RADIUS+1e-7))return false;}
- const c=layout.crystal;if(c){const denom=dx*dx+dz*dz,t=denom?Math.max(0,Math.min(1,((c.x-a.x)*dx+(c.z-a.z)*dz)/denom)):0;if(Math.hypot(a.x+dx*t-c.x,a.z+dz*t-c.z)<.52+RADIUS)return false;}
+ const c=layout.crystal;if(c){const denom=dx*dx+dz*dz,t=denom?Math.max(0,Math.min(1,((c.x-a.x)*dx+(c.z-a.z)*dz)/denom)):0;if(Math.hypot(a.x+dx*t-c.x,a.z+dz*t-c.z)<(c.pedestalRadius||.34)+RADIUS)return false;}
  for(const r of layout.rooms){const times=range(-r.start-r.length,-r.start);if(!times)continue;
   for(const t of times){const x=a.x+dx*t,z=a.z+dz*t;if(!inside(r.footprint,x,z,0))return false;
    for(let i=0;i<r.footprint.length;i++){const p=r.footprint[i],q=r.footprint[(i+1)%r.footprint.length];if(Math.abs(p[1]-q[1])<1e-5&&(Math.abs(p[1]-r.start)<1e-5||Math.abs(p[1]-r.start-r.length)<1e-5))continue;const ex=q[0]-p[0],ey=q[1]-p[1];if(ex*(-z-p[1])-ey*(x-p[0])<RADIUS*Math.hypot(ex,ey)-1e-7)return false;}
@@ -53,6 +53,7 @@ function visible(layout,a,b){
  return true;
 }
 export function routeBetween(layout,start,end){
+ start={x:start.x,z:start.z};end={x:end.x,z:end.z};
  if(!isWalkable(layout,start)||!isWalkable(layout,end))return null;
  if(visible(layout,start,end))return [start,end];
  const nodes=[start,end];

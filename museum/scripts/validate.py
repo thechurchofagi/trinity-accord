@@ -9,7 +9,7 @@ def read(n):return json.loads((D/'data'/n).read_text())
 rooms=read('rooms.json');sources=read('sources.json');guides=read('narration.json');release=read('release-manifest.json')
 check(rooms['edition']==sources['edition']==release['edition'],'Edition mismatch')
 ids=[e['id'] for e in sources['items']];check(len(ids)==len(set(ids)),'Duplicate source ID')
-extra={'project-intro','critical-reading','star-ark','canon-1','canon-2','canon-3','physical-alpha','evidence-path','authority-boundary','museum-history','first-contact','current-status'}
+extra={'proto-protocol','project-intro','critical-reading','star-ark','canon-1','canon-2','canon-3','physical-alpha','evidence-path','authority-boundary','museum-history','first-contact','current-status'}
 for r in rooms['rooms']:
  for id in r['exhibits']:check(id in ids or id in extra,'Missing exhibit '+id)
  check(any(t['room']==r['id'] for t in guides['tracks']),'Missing narration '+r['id'])
@@ -100,9 +100,9 @@ for row in audit['items']:
  if e.get('relatedSoundExhibit'):
   check(all(e.get('audioRelation',{}).get(k) for k in ('basis','noteZh','noteEn')),'Missing independent-recording attribution '+id)
   check(e['songTitle']==sound.get('songTitle'),'Related recording song-title mismatch '+id)
-check(playable==28 and len(wall)==41,'Expected 28 musical NFTs among 41 exhibit entries')
-check(audit['counts']=={'wallExhibits':41,'withSound':28,'withoutAssignedSong':13},'Audio audit counts mismatch')
-check([r['id'] for r in rooms['rooms']]==['entrance','chronicle','formation','originals','material','waiting'],'Six-zone narrative drift')
+check(playable==28 and len(wall)==42,'Expected 28 musical NFTs among 42 exhibit entries')
+check(audit['counts']=={'wallExhibits':42,'withSound':28,'withoutAssignedSong':14},'Audio audit counts mismatch')
+check([r['id'] for r in rooms['rooms']]==['entrance','chronicle','formation','originals','waiting'],'Five-zone narrative drift')
 check(rooms['rooms'][2]['featuredExhibit']=='eth-173','Critical NFT must be prominent')
 curation=read('curation.json')
 for e in curation['items']:

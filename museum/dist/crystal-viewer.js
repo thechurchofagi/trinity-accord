@@ -11,7 +11,7 @@ export function refineCrystal(root){
    o.material.dispose();o.material=crystalGlass();
    const edges=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,24),new THREE.LineBasicMaterial({color:'#d7efff',transparent:true,opacity:.18,depthWrite:false}));edges.name='Display facet highlights';o.add(edges);
   }else{
-   o.material.dispose();o.material=new THREE.MeshBasicMaterial({color:'#526977',side:THREE.DoubleSide,toneMapped:false});
+   o.material.dispose();o.material=new THREE.MeshBasicMaterial({color:'#eef3f4',side:THREE.DoubleSide,toneMapped:false});
    const outline=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,35),new THREE.LineBasicMaterial({color:'#d5e5ee',transparent:true,opacity:.45,depthWrite:false,toneMapped:false}));outline.name='Engraving contrast outline';o.add(outline);
   }
  }
@@ -53,7 +53,7 @@ export async function inspectCrystal(host, english=false){
   canvas.onpointerdown=e=>{down=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);};canvas.onpointermove=e=>{if(!down)return;azimuth-=(e.clientX-down[0])*.008;elevation=THREE.MathUtils.clamp(elevation+(e.clientY-down[1])*.006,-.6,.6);down=[e.clientX,e.clientY];};canvas.onpointerup=canvas.onpointercancel=()=>down=null;canvas.addEventListener('wheel',e=>{e.preventDefault();distance=THREE.MathUtils.clamp(distance+e.deltaY*.0007,.32,1.25);},{passive:false});
   const resize=()=>{const w=host.clientWidth,h=host.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();};observer=new ResizeObserver(resize);observer.observe(host);resize();
   releaseResources=()=>{aura.dispose();env.dispose();model.scene.traverse(o=>{if(o.isMesh||o.isLineSegments){o.geometry.dispose();for(const m of Array.isArray(o.material)?o.material:[o.material])m.dispose();}});};
-  const draw=()=>{if(disposed)return;floatCrystal(model.scene,aura,performance.now(),matchMedia('(prefers-reduced-motion: reduce)').matches);camera.position.set(Math.sin(azimuth)*distance,target.y+Math.sin(elevation)*distance,Math.cos(azimuth)*Math.cos(elevation)*distance);camera.lookAt(target);renderer.render(scene,camera);frame=requestAnimationFrame(draw);};draw();
+  const draw=()=>{if(disposed)return;floatCrystal(model.scene,aura,performance.now(),true);camera.position.set(Math.sin(azimuth)*distance,target.y+Math.sin(elevation)*distance,Math.cos(azimuth)*Math.cos(elevation)*distance);camera.lookAt(target);renderer.render(scene,camera);frame=requestAnimationFrame(draw);};draw();
  }catch(err){renderer?.dispose();host.querySelector('.crystal-status').textContent=english?'Rendered model · interactive 3D unavailable on this device':'模型渲染图 · 此设备暂不支持三维交互';}
  return clean;
 }

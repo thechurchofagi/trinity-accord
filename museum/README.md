@@ -1,6 +1,6 @@
 # Trinity Accord Museum / 三位一体协定三维展馆
 
-This directory is a later exhibition of the existing Trinity Accord. The three Bitcoin Originals remain unchanged. The six rooms are a **2026 curatorial route**, not six historical or canonical formation stages.
+This directory is a later exhibition of the existing Trinity Accord. The three Bitcoin Originals remain unchanged. The five rooms form a **2026 curatorial route**. The physical crystal shares the central hall with the three Originals.
 
 ## Start locally
 
@@ -41,7 +41,7 @@ For restoration, retain the entire `dist/` directory, not just GitHub links or a
 
 ## Media and rights
 
-Original artworks, lyrics, photos and music retain their original rights and attribution; inclusion does not license them under the Three.js license. The user authorized this exhibition of their project. Curatorial narration is newly generated with Kokoro af_heart and marked as such. No cloned human voice is used. Models and guide audio are not original historical artifacts.
+Original artworks, lyrics, photos and music retain their original rights and attribution; inclusion does not license them under the Three.js license. The user authorized this exhibition of their project. Current curatorial narration uses the built-in Qwen3-TTS voices Serena (Chinese) and Aiden (English), and is marked as synthetic. No cloned human voice is used. Models and guide audio are not original historical artifacts.
 
 ## Deployment/export
 
@@ -98,7 +98,7 @@ Run `node scripts/check_guided_visit.mjs` to check the full accelerated visit.
 
 ## Recorded bilingual guide and scene inspection — v1.28
 
-The current tour uses 22 bundled MP3s in `dist/assets/guides/`, not device speech.
+The v1.28 tour used 22 bundled MP3s in `dist/assets/guides/`, not device speech.
 `dist/data/guide-audio.json` binds each language/stop to text, voice, rate, audio
 hash and timed short captions. Chinese uses Xiaoxiao +25%, English Aria +15%,
 with default playback 1.1×. The control offers 1.0/1.1/1.25/1.4×. Captions follow
@@ -122,12 +122,14 @@ explicitly initiated; leaving cancels pending animation and photograph callbacks
 The shared geometry is `scene/gallery-layout.json`. `scene/build_spatial_gallery.py` exports and bakes the Blender architecture; `dist/spatial-layout.js` supplies the identical preview and collision-aware routes. `node scripts/check_spatial_layout.mjs` checks door shoulders, ramp heights, crystal clearance and observation paths. The new 540-second tour is `dist/tour-plan.js`; original audio/word lyrics are unchanged. Guardian Principles v1.1 and the later Authority Charter are distinct sources in `dist/data/guardian-sources.json`. The final English guide uses Chatterbox Turbo built-in synthetic voice, with four acoustically reviewed retakes and regenerated captions; Chinese uses Xiaoxiao. No OpenAI voice is claimed. Architectural reference images are not photographs or browser/device certification.
 
 
-## Final narration and acceptance
+## Current materials, narration and acceptance — v1.33
 
-The current English voice is **Chatterbox Turbo**, rendered offline with its built-in synthetic conditionals; no person was cloned. Chinese uses Xiaoxiao. `dist/data/guide-audio.json` identifies exact track hashes, model revisions and current captions. `dist/data/expressive-audio-audit.json` records the independent Whisper small.en + VAD pass; this is automated QA, not human listening certification. The audio model does not run in a visitor's browser.
+The twelve-stop route advances when continuous walking, narration and each of two 30-second song excerpts finish. The crystal has its documented physical dimensions, an upright walnut support and pedestrian collision. The June 16 draft, all three Originals and three unchanged microscope photographs have separate explanations. Historical event dates remain distinct from mint dates on four-row artwork plaques.
 
-`python3 scripts/check_browser.py` checks six rooms, seven key near views, guardianship links, actual language switching and asset/page errors at desktop and phone-size viewports. `node scripts/check_spatial_layout.mjs` checks shared geometry and collision-safe observation routes. `python3 scripts/validate.py` verifies original sources and the frozen distribution. Keep the PR unmerged until its final head passes normal repository CI.
+Thirty bundled MP3s (24 bilingual tour tracks and six microscope explanations) use **Qwen3-TTS-12Hz-1.7B-CustomVoice**, pinned to revision `0c0e3051f131929182e2c023b9537f8b1c68adfe`: Chinese **Serena**, English **Aiden**. The model runs only during local production. Default playback is 1.0×. The listening review page is `dist/voice-review.html`; the reading archive uses these same recordings.
 
-The listening review page is `dist/voice-review.html`. Per-track provider, model revision, text/audio hashes, acoustic transcript and caption limitations are in `dist/data/narration-provenance.json`.
+`dist/data/guide-audio.json` binds exact scripts, audio hashes and captions. `dist/data/narration-provenance.json` records independent paragraph recognition, reviewed differences and documented retakes. Recognition is not human listening certification. Captions use measured paragraph boundaries with proportional short cues inside each paragraph, not word-level forced alignment. The preceding Chatterbox/Xiaoxiao audit remains in `narration-provenance-v131.json` as history.
 
-Final delivery includes 11 English synthetic guide tracks (8 tour + 3 optional microscope explanations), with the current audit in `dist/data/narration-provenance.json`. Historical source media are unchanged.
+To reproduce from preserved paragraph takes, run `scripts/render_qwen_guides.py --model MODEL_PATH --cache TAKES_PATH --batch 4` in the documented Qwen environment. Unchanged takes are reused. Run `audit_qwen_paragraphs.py`, then `finalize_qwen_review.py` with the reviewed recognition notes before rebuilding the runtime and reading archive. `archive_qwen_sources.py` preserves the exact PCM takes, provenance and assembly scripts for future edits. Original music and photographs remain unchanged.
+
+`node scripts/check_recorded_guides.mjs` checks all 30 bindings, captions and playback recovery. The spatial/navigation checks cover five rooms, continuous routes and the physical support. `check_design_review.py` saves full-size desktop/mobile material views and measures actual rendered walking frames. `check_browser.py` and `check_presentation.py` exercise the interface, reading views and microscopy. `check_realtime_tour.py` plays the production 3D English tour from beginning to end at 1.0× without seeking; its smaller render surface keeps software rendering practical. Full-size visual inspection is separate. Keep the PR unmerged until the final head passes the museum and repository workflows.

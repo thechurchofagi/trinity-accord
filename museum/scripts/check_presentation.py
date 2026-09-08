@@ -15,7 +15,7 @@ window.__presentationQA={
  settle(){if(motion){camera.position.copy(motion.end);yaw=motion.endYaw;pitch=motion.endPitch;motion=null;}},
  music(){stopTour();focusExhibit('eth-070');return playTrack(exhibits.get('eth-049'),exhibits.get('eth-070'),false);},
  lyricTime(){return lyricCues[0]?.words?.[0]?.start;},
- finish(){stopTour();reduced=true;roomIndex=5;waitingView();touring=true;tourElapsed=tourDuration;tourTick(performance.now());}
+ finish(){stopTour();reduced=true;roomIndex=4;waitingView();touring=true;tourElapsed=tourDuration;tourTick(performance.now());}
 };
 '''
 js.write_text((D/'museum.js').read_text()+harness)
@@ -53,16 +53,16 @@ try:
    after=page.evaluate('window.__presentationQA.state');assert after['touring'] and after['yaw']!=before['yaw']
    page.locator('#tour').click();assert not page.evaluate('window.__presentationQA.state.touring')
    states=[]
-   for index in [0,1,2,3,4,5,6,7]:
+   for index in range(12):
     page.evaluate('(i)=>window.__presentationQA.station(i)',index)
     page.wait_for_function("document.getElementById('narration').readyState>=1")
     if page.locator('#guide-audio-prompt').is_visible():page.locator('#guide-audio-start').click()
     page.wait_for_function("!document.getElementById('narration').paused")
     state=page.evaluate('window.__presentationQA.state');assert state['walkable'],state
-    assert 'guides-expressive/' in state['voice'],state
+    assert state['voice']==next(t['file'] for t in json.loads((D/'data/guide-audio.json').read_text())['tracks'] if t['stop']==index and t['language']=='en'),state
     states.append(state);print('STATION_RENDERED',label,index,flush=True)
     page.evaluate('window.__presentationQA.settle()');page.wait_for_timeout(200)
-    if label=='desktop' or index in [1,4,5,6,7]:page.screenshot(timeout=90000,path=str(OUT/f'{label}-station-{index}.png'))
+    if label=='desktop' or index in [1,3,5,6,8,9,10,11]:page.screenshot(timeout=90000,path=str(OUT/f'{label}-station-{index}.png'))
    for eid in ['canon-1','canon-2','canon-3']:
     page.evaluate('(id)=>window.__presentationQA.focus(id)',eid);page.evaluate('window.__presentationQA.settle()');page.wait_for_timeout(300)
     assert page.evaluate('window.__presentationQA.state.walkable')
@@ -82,7 +82,7 @@ try:
    page.wait_for_function("document.querySelector('#subtitle-lines [data-word]') && document.querySelector('#subtitle-lines .subtitle-zh')")
    page.screenshot(timeout=90000,path=str(OUT/(label+'-original-music-lyrics.png')))
    page.evaluate('window.__presentationQA.finish()');page.evaluate('window.__presentationQA.settle()');page.wait_for_timeout(300)
-   assert page.evaluate('window.__presentationQA.state.elapsed')==580
+   assert page.evaluate('window.__presentationQA.state.elapsed')==sum(s['seconds'] for s in json.loads((P/'scene/tour-script.json').read_text()))
    assert page.evaluate('window.__presentationQA.state.touring') is False
    assert page.locator('body').get_attribute('data-presentation')=='true'
    assert not page.locator('#exhibit-strip').is_visible()
@@ -91,7 +91,7 @@ try:
    assert page.locator('#exhibit-strip').count()==0,'Numbered song strip stays removed'
    assert page.locator('#walk-controls').is_visible(),'Walking controls remain usable'
    assert not errors,errors
-   report.append(dict(viewport=label,stations=states,originalPanels=3,unalteredMicroscopeImages=3,originalLyricsBothLanguages=True,completedSeconds=580,restoredManualControls=True,pageErrors=errors,scope='Accelerated state checks and rendered frames; not nine minutes of uninterrupted real-time playback or physical-device listening certification.'))
+   report.append(dict(viewport=label,stations=states,originalPanels=3,unalteredMicroscopeImages=3,originalLyricsBothLanguages=True,completedStops=12,restoredManualControls=True,pageErrors=errors,scope='Accelerated state checks and rendered frames; not nine minutes of uninterrupted real-time playback or physical-device listening certification.'))
    page.close()
   b.close()
 finally:
