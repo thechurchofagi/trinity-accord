@@ -25,7 +25,10 @@ report = {'scope': 'Unaccelerated production-bundle 3D playback; automated media
 try:
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, args=['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'])
-        page = browser.new_page(viewport={'width': 1440, 'height': 900})
+        # Full-size desktop/mobile frames are covered by check_presentation.py.
+        # A smaller real-time surface keeps SwiftShader capture work from stalling
+        # the presentation clock; never disable 3D or reduce its motion here.
+        page = browser.new_page(viewport={'width': 960, 'height': 600})
         page.on('pageerror', lambda e: report['pageErrors'].append(str(e)))
         page.on('response', lambda r: report['assetFailures'].append(r.url) if r.status >= 400 and '/assets/' in r.url else None)
         page.goto(f'http://127.0.0.1:{server.server_port}/?lang=en#entrance', wait_until='load')
@@ -35,7 +38,6 @@ try:
         page.locator('#tour').click()
         started = time.monotonic()
         seen = set()
-        photographed = set()
         previous = 0
         last_log = -15
         while time.monotonic() - started < 660:
@@ -61,10 +63,6 @@ try:
                 report['samples'].append(sample)
                 print('TOUR_PROGRESS', json.dumps(sample), flush=True)
                 last_log = elapsed
-            for target in [5, 45, 115, 185, 250, 280, 315, 345, 390, 435, 510, 540]:
-                if elapsed >= target and target not in photographed:
-                    page.screenshot(path=str(OUT / f'tour-{target:03}.png'))
-                    photographed.add(target)
             previous = elapsed
             if elapsed == 540:
                 break
@@ -77,6 +75,8 @@ try:
         assert 'complete' in page.locator('#tour-progress').inner_text()
         assert not report['pageErrors'], report['pageErrors']
         assert not report['assetFailures'], report['assetFailures']
+        # Capture after completion: screenshots must not interrupt this test.
+        page.screenshot(path=str(OUT / 'completed-tour.png'), timeout=60000)
         report.update(passed=True, audibleStops=sorted(seen), completedSeconds=540,
                       wallSeconds=round(time.monotonic() - started, 2))
         browser.close()

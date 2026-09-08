@@ -89,11 +89,24 @@
       "Final waiting stop selects first-contact content in the fallback gallery."
     ],
     "regression": "Visible tread heights raycast from the shared exported geometry match the navigation height; existing geometry preserved.",
-    "ciRealtime3D": "New read-only check_realtime_tour.py job; pending current-head CI.",
+    "ciRealtime3D": "Run 34178748163 failed while taking an in-play screenshot under SwiftShader. Follow-up uses a 960x600 3D viewport without in-play captures; the independent full-size presentation job passed.",
     "limitations": [
-      "Current cloud browser cannot create a WebGL context.",
-      "Final CI screenshot archive download returned HTTP 403; it has not been visually reviewed in this session.",
+      "Cloud browser itself cannot create a WebGL context; CI does require rendered 3D.",
       "No human listening certification or production publication."
-    ]
+    ],
+    "visualReview": {
+      "generatedCommit": "20598b5a56c3e0e50bfe217605eda5caf4731018",
+      "artifact": 10037734360,
+      "reviewed": [
+        "Six room views",
+        "Desktop and mobile presentation frames",
+        "Original panels near view",
+        "Crystal near view",
+        "Original microscope photograph",
+        "Bilingual music captions",
+        "Waiting sky"
+      ],
+      "downloadRecovery": "Native file materialization succeeded; archive SHA-256 verified."
+    }
   }
 }
