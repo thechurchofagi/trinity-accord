@@ -1,14 +1,14 @@
 {
   "schema": "trinityaccord.record-chain-arweave-backlog.v1",
-  "updated_at": "2026-09-07T13:00:20Z",
+  "updated_at": "2026-09-08T11:44:26Z",
   "items": [
     {
-      "key": "0bb12747fa0e19ae45e9e687d4bda22a2a4bd84985253e2e3b4e7059e01f00ec",
+      "key": "fe09f730462d8c3eac59df955902b7422a9d7b1aa3cd4d173d2e56f1ee373551",
       "kind": "record_chain_arweave",
       "archive_status": "pending_upload",
-      "latest_record_id": "R-000000147",
-      "latest_record_sha256": "ea4467324c89047a27444bcf27d2712874de2176b1bf91d2aea4613d6556fd90",
-      "native_record_count": 147,
+      "latest_record_id": "R-000000148",
+      "latest_record_sha256": "2e7a259a750dcda512c0701c0a555290a6a962c1e85dc04ffb7981ae09dfb296",
+      "native_record_count": 148,
       "tx_id": null,
       "retry_count": 0,
       "last_attempt_at": null,
