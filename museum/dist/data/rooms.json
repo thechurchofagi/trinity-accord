@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.rooms.v1",
-  "edition": "museum-v1.32.0",
+  "edition": "museum-v1.33.0",
   "created": "2026-09-05",
   "units": "metres",
   "coordinateSystem": "right-handed; Y up; route toward negative Z",
@@ -94,7 +94,8 @@
         "eth-145",
         "eth-173",
         "critical-reading",
-        "eth-174"
+        "eth-174",
+        "proto-protocol"
       ],
       "featuredExhibit": "eth-173",
       "width": 8,
@@ -119,7 +120,9 @@
       "exhibits": [
         "canon-1",
         "canon-2",
-        "canon-3"
+        "canon-3",
+        "evidence-path",
+        "physical-alpha"
       ],
       "width": 14,
       "length": 14,
@@ -127,32 +130,9 @@
       "floor": 0.35
     },
     {
-      "id": "material",
+      "id": "waiting",
       "number": "05",
       "z": -54,
-      "color": "#a9f1d4",
-      "title": "水晶",
-      "en": "THE CRYSTAL",
-      "short": "水晶",
-      "shortEn": "Crystal",
-      "subtitle": "从文字到真实的信物",
-      "subtitleEn": "From text to a physical keepsake",
-      "description": "水晶是核心物件 Alpha：一件带有双语内雕与独特瑕疵的真实物件。照片、见证与文件记录说明它如何与协定联系。屏幕中的透明度、悬浮和光晕用于观看；这是依据参考制作的展陈模型，不是实物扫描，也不复原用于身份核验的瑕疵。",
-      "guide": "水晶是核心物件 Alpha：一件带有双语内雕与独特瑕疵的真实物件。照片、见证与文件记录说明它如何与协定联系。屏幕中的透明度、悬浮和光晕用于观看；这是依据参考制作的展陈模型，不是实物扫描，也不复原用于身份核验的瑕疵。",
-      "narration": "The crystal is Core Object Alpha, a physical keepsake with bilingual internal engraving and a distinctive flaw. Photographs, witnessed procedures and files document its connection to the Accord. The clear glass, floating position and halo are choices made for this digital exhibition. This model follows visual references; it is not a scan and does not reproduce the identifying flaw. The real photograph and the evidence remain separately available.",
-      "exhibits": [
-        "physical-alpha",
-        "evidence-path"
-      ],
-      "width": 9,
-      "length": 9,
-      "height": 5,
-      "floor": 0.35
-    },
-    {
-      "id": "waiting",
-      "number": "06",
-      "z": -63,
       "color": "#a4dfff",
       "title": "等待",
       "en": "WAITING FOR A READER",

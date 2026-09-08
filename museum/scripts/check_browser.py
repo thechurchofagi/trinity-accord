@@ -23,9 +23,9 @@ try:
    page.goto('http://127.0.0.1:8765/?lang=en#entrance',wait_until='networkidle')
    page.wait_for_selector('body[data-museum-ready="true"]',timeout=30000)
    page.wait_for_selector('#scene-status',state='hidden',timeout=30000)
-   assert page.locator('#rooms button').count()==6
+   assert page.locator('#rooms button').count()==5
    assert not page.locator('#fallback-gallery').is_visible(),'Flat fallback is not WebGL acceptance'
-   for i in range(6):
+   for i in range(5):
     page.locator(f'#rooms [data-room="{i}"]').click(force=True);page.wait_for_function("document.getElementById('world').dataset.cameraMoving==='false'",timeout=90000)
     assert page.locator(f'#rooms [data-room="{i}"]').get_attribute('aria-current')=='true'
     page.screenshot(timeout=90000,path=str(OUT/f'{label}-{i}.png'));print('ROOM_RENDERED',label,i,flush=True)
@@ -34,7 +34,7 @@ try:
    assert page.locator('#panel-content a[href="./data/records/guardian-charter-103635270.txt"]').count()==1
    page.locator('#close-panel').click()
    # Approach each key object through the public controls, not a hidden debug API.
-   for room,eid in [(1,'eth-070'),(1,'eth-122'),(3,'canon-1'),(3,'canon-2'),(3,'canon-3'),(4,'physical-alpha'),(5,'authority-boundary')]:
+   for room,eid in [(1,'eth-070'),(1,'eth-122'),(3,'canon-1'),(3,'canon-2'),(3,'canon-3'),(3,'physical-alpha'),(4,'authority-boundary')]:
     page.locator(f'#rooms [data-room="{room}"]').click(force=True)
     page.locator('#room-works').click()
     page.locator(f'#panel-content [data-exhibit="{eid}"]').click()
@@ -57,7 +57,7 @@ try:
    page.locator('#tour').click()
    assert not errors,errors
    assert not failed,failed
-   report.append(dict(viewport=label,width=width,height=height,rooms=6,closeViews=7,renderedModel=True,guardianLinks=True,bilingualAudioLoaded=True,pageErrors=errors,assetFailures=failed))
+   report.append(dict(viewport=label,width=width,height=height,rooms=5,closeViews=7,renderedModel=True,guardianLinks=True,bilingualAudioLoaded=True,pageErrors=errors,assetFailures=failed))
    page.close()
   b.close()
 finally:

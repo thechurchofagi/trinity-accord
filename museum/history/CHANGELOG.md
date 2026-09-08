@@ -1,3 +1,14 @@
+# museum-v1.33.0 · Physical scale, continuous walking and formation history
+
+Draft: new narration is prepared in `scene/voice-review-zh.md`; external speech synthesis is awaiting destination-specific approval. Recorded-guide acceptance must pass before merge or deployment.
+
+- Fix mutable camera references in route origins and consume bounded rendered-frame time at 1.25 metres/second. Maintain eye height over floors and ramps, with no elapsed-time catch-up after backgrounding.
+- Advance tour stops when walking and narration finish; stop each of two song excerpts after 30 media-clock seconds. First flaw receives the detailed explanation; subsequent original photographs receive brief comparisons.
+- Place the documented 246 × 353 × 40 mm crystal at physical scale on a 1.45m walnut cylinder in the Originals hall. Remove the separate material room, levitation and doubling of scale. Pedestal and walking share their collision dimensions.
+- Rebuild lower-intensity architectural lighting, use a visitor-following fill and a selected-object spotlight, lower artwork hanging height, and use a gold observation-window surround.
+- Four-row plaques separate event identity/date, mint date/title, and recording title. Retain source date precision and full artwork proportions.
+- Add the verified June 16 formation inscription #97534036 with its full preserved text and metadata. Expanded narration quotes the Protocol dedication and meta-record motivation/closing, and attributes “We have spoken. Now, we listen.” to the later First Echoes inscription.
+
 ## Final staging and narration acceptance
 
 - Correct sRGB/linear lighting, denoise architectural light only, seal both doorway footprints, shift the crystal exit away from its background, enlarge the three Originals, and replace the bright waiting ring with a side reading stand.

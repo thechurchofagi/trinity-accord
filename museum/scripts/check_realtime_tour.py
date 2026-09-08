@@ -49,32 +49,32 @@ try:
               return {progress:document.getElementById('tour-progress').textContent,
                 room:document.querySelector('#rooms [aria-current="true"]')?.textContent,
                 source:a.getAttribute('src'),audioTime:a.currentTime,playing:!a.paused,
-                musicPlaying:!m.paused,caption:document.getElementById('caption-text').textContent,
+                musicPlaying:!m.paused,musicTime:m.currentTime,musicSource:m.getAttribute('src'),moving:document.getElementById('world').dataset.cameraMoving,caption:document.getElementById('caption-text').textContent,
                 inspection:!document.getElementById('flaw-view').hidden,
                 blocked:document.getElementById('guide-audio-prompt').open};
             }''')
             sample['wallSeconds'] = round(time.monotonic() - started, 2)
             clock = sample['progress'].split(' / ')[0]
-            minutes, seconds = map(int, clock.split(':'))
-            elapsed = minutes * 60 + seconds
-            assert previous <= elapsed <= sample['wallSeconds'] + 2, sample
+            elapsed = int(clock)
+            assert previous <= elapsed <= 12, sample
+            if sample['musicPlaying']:assert sample['musicTime'] <= 30.5, sample
             assert not sample['blocked'], 'Uninterrupted playback requested: ' + str(sample)
             assert not (sample['playing'] and sample['musicPlaying']), 'Narration and song overlap'
             if sample['playing'] and sample['source'] in inspection_files:
                 seen_flaws.add(inspection_files[sample['source']])
             if sample['playing'] and sample['source'] in expected:
                 seen.add(expected[sample['source']])
-            if elapsed - last_log >= 15 or elapsed == 580:
+            if sample['wallSeconds'] - last_log >= 15 or 'complete' in sample['progress']:
                 report['samples'].append(sample)
                 print('TOUR_PROGRESS', json.dumps(sample), flush=True)
-                last_log = elapsed
+                last_log = sample['wallSeconds']
             previous = elapsed
-            if elapsed == 580:
+            if 'complete' in sample['progress']:
                 break
             page.wait_for_timeout(1000)
-        assert previous == 580, 'Tour failed to finish within eleven wall-clock minutes'
+        assert 'complete' in sample['progress'], 'Tour failed to finish within fourteen wall-clock minutes'
         assert seen_flaws == {0,1,2}, ('Missing audible flaw explanations', seen_flaws)
-        assert seen == set(range(8)), ('Missing audible tour tracks', seen)
+        assert seen == set(range(12)), ('Missing audible tour tracks', seen)
         assert page.locator('body').get_attribute('data-presentation') == 'true'
         assert not page.locator('#exhibit-strip').is_visible()
         assert 'Replay tour' in page.locator('#tour').inner_text()
@@ -83,7 +83,7 @@ try:
         assert not report['assetFailures'], report['assetFailures']
         # Capture after completion: screenshots must not interrupt this test.
         page.screenshot(path=str(OUT / 'completed-tour.png'), timeout=60000)
-        report.update(passed=True, audibleStops=sorted(seen), audibleFlaws=sorted(seen_flaws), completedSeconds=580,
+        report.update(passed=True, audibleStops=sorted(seen), audibleFlaws=sorted(seen_flaws), completedStops=12,
                       wallSeconds=round(time.monotonic() - started, 2))
         browser.close()
 finally:

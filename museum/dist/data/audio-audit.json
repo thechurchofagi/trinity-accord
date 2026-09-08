@@ -1,12 +1,12 @@
 {
   "schema": "trinity-museum.audio-audit.v1",
-  "edition": "museum-v1.32.0",
+  "edition": "museum-v1.33.0",
   "checked": "2026-09-06",
   "scope": "All 41 display entries; 28 original or explicitly related recordings, 13 without an assigned recording. No.122 is image-only in this edition.",
   "counts": {
-    "wallExhibits": 41,
+    "wallExhibits": 42,
     "withSound": 28,
-    "withoutAssignedSong": 13
+    "withoutAssignedSong": 14
   },
   "originalMetadata": [
     {
@@ -448,6 +448,11 @@
       }
     },
     {
+      "exhibit": "proto-protocol",
+      "state": "not_applicable",
+      "reason": "Earlier Bitcoin protocol text; no music."
+    },
+    {
       "exhibit": "canon-1",
       "room": "originals",
       "state": "not_applicable",
@@ -466,13 +471,13 @@
       "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
     },
     {
-      "exhibit": "physical-alpha",
+      "exhibit": "evidence-path",
       "room": "material",
       "state": "not_applicable",
       "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
     },
     {
-      "exhibit": "evidence-path",
+      "exhibit": "physical-alpha",
       "room": "material",
       "state": "not_applicable",
       "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."

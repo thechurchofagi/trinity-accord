@@ -9,7 +9,7 @@ for(const height of [.4,.9,1.3,1.7]){
  const body=group.children.find(o=>o.name==='Satin titanium plaque');assert.equal(body.geometry.parameters.width,1.236);assert.equal(body.geometry.parameters.height,.72);assert.ok(body.material.metalness>=.8);resizeWallPlaque(face,.8,height);assert.ok(Math.abs(body.geometry.parameters.width-.836)<1e-9);assert.equal(face.position.y,body.position.y);
 }
 for(const r of layout.rooms){
- for(const m of r.exhibits){const group=new T.Group();group.position.set(m.x,m.y,m.z);group.rotation.y=m.angle;const f=makeWallFrame(group,1.9,1.7);assert.equal(group.children.length,1);assert.equal(f.frame.children.length,4);assert.ok(-m.z>r.start&&-m.z<r.start+r.length);assert.ok(m.y+1.4<r.floor+r.height);}
+ for(const m of r.exhibits){if(m.kind==='pedestal')continue;const group=new T.Group();group.position.set(m.x,m.y,m.z);group.rotation.y=m.angle;const f=makeWallFrame(group,1.9,1.7);assert.equal(group.children.length,1);assert.equal(f.frame.children.length,4);assert.ok(-m.z>r.start&&-m.z<r.start+r.length);assert.ok(m.y+1.4<r.floor+r.height);}
  if(r.id==='originals')continue;
  for(const side of [-1,1]){const mounts=r.exhibits.filter(e=>Math.sign(e.x)===side);for(let i=1;i<mounts.length;i++)assert.ok(Math.abs(mounts[i].z-mounts[i-1].z)>=1.94,'Frames overlap '+r.id);}
 }

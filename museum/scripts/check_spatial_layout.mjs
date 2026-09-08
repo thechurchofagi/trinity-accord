@@ -3,15 +3,16 @@ import fs from 'node:fs';
 import * as T from '../dist/vendor/three.module.js';
 import {floorAt,isWalkable,constrainStep,routeBetween,routePoint,routeLength,createSpatialShell} from '../dist/spatial-layout.js';
 const layout=JSON.parse(fs.readFileSync(new URL('../dist/data/gallery-layout.json',import.meta.url)));
-assert.equal(layout.rooms.length,6);assert.equal(layout.rooms[3].footprint.length,12);assert.equal(layout.rooms[3].height,8);
-assert.deepEqual(layout.rooms.map(r=>r.width),[9,9,8,14,9,12]);
-assert.deepEqual(layout.rooms[3].exhibits.map(e=>e.id),['canon-1','canon-2','canon-3']);
-assert.equal(layout.rooms[5].exhibits[0].id,'authority-boundary');
+assert.equal(layout.rooms.length,5);assert.equal(layout.rooms[3].footprint.length,12);assert.equal(layout.rooms[3].height,8);
+assert.deepEqual(layout.rooms.map(r=>r.width),[9,9,8,14,12]);
+assert.deepEqual(layout.rooms[3].exhibits.map(e=>e.id),['canon-1','canon-2','canon-3','evidence-path','physical-alpha']);
+assert.equal(layout.rooms[4].exhibits[0].id,'authority-boundary');
 for(const d of layout.portals){assert.ok(isWalkable(layout,{x:d.x,z:-d.depth}));assert.ok(!isWalkable(layout,{x:d.x+d.width/2+.3,z:-d.depth}));const a={x:d.x+d.width/2+.3,z:-d.depth+.4};if(isWalkable(layout,a)){const b=constrainStep(layout,a,{x:a.x,z:a.z-2});assert.ok(b.z>-d.depth+.2,'No tunnelling through portal shoulders');}}
 for(let i=0;i<=100;i++){const z=-layout.ramp.start-i*(layout.ramp.end-layout.ramp.start)/100;assert.ok(Math.abs(floorAt(layout,{x:0,z})-.35*i/100)<1e-6);}
 const crystal=layout.crystal;assert.ok(!isWalkable(layout,crystal));assert.ok(!isWalkable(layout,{x:0,z:2}));assert.ok(!isWalkable(layout,{x:0,z:-73}));
 let prior={x:0,z:-2},routes=0;
 for(const r of layout.rooms)for(const e of r.exhibits){
+ if(e.kind==='pedestal')continue;
  for(const distance of [2.2,3,6.3]){
   const end={x:e.x+Math.sin(e.angle)*distance,z:e.z+Math.cos(e.angle)*distance};
   if(!isWalkable(layout,end))continue;
@@ -35,9 +36,10 @@ for(const tread of treads){
 }
 assert.ok(Math.abs(floorAt(layout,{x:layout.ramp.width/2+.2,z:-layout.ramp.end})-layout.ramp.rise)<1e-6);
 for(const r of layout.rooms)for(const m of r.exhibits){
+ if(m.kind==='pedestal')continue;
  const normal=new T.Vector3(Math.sin(m.angle),0,Math.cos(m.angle)),p=new T.Vector3(m.x,m.y,m.z);
  const ray=new T.Raycaster(p.clone().addScaledVector(normal,.05),normal.clone().negate(),0,.5);
  const hits=ray.intersectObjects(shell.group.children,false);assert.ok(hits.length,'Backing wall missing '+m.id);assert.ok(hits[0].distance>.05&&hits[0].distance<.22,'Wall mount must remain just ahead of wall '+m.id+' '+hits[0].distance);
  assert.ok(m.y+1.4<r.floor+r.height,'Plaque hits ceiling '+m.id);
 }
-shell.dispose();floors.dispose();console.log('PASS: six footprints, 12-sided core, '+routes+' safe observation routes, wide-room bounds, portals, no tunnelling, ramp, crystal clearance, shared preview geometry and every wall mount.');
+shell.dispose();floors.dispose();console.log('PASS: five footprints, 12-sided core, '+routes+' safe observation routes, wide-room bounds, portals, no tunnelling, ramp, crystal clearance, shared preview geometry and every wall mount.');

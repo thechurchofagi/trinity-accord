@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.scene-build.v2",
-  "edition": "museum-v1.32.0",
+  "edition": "museum-v1.33.0",
   "application": "Blender",
   "version": "4.5.3 LTS",
   "source": "scene/build_spatial_gallery.py",
@@ -8,37 +8,37 @@
   "baked": true,
   "bake": "Cycles diffuse/direct/indirect/color, 2048px atlas, 48 samples plus compositor denoising; no new artwork baked into surfaces",
   "previewScope": "Architectural references, not browser screenshots. Runtime original artwork, crystal and Earth are separate assets.",
-  "layoutSha256": "bd80723546d569065146ded43f0f00d99e831de3e6a3faa7904752bd7ecab961",
+  "layoutSha256": "75125262e1582293e8c767713906d96a5f68b5aaabb45675c28e76f0da1a72d9",
   "files": [
     {
       "path": "scene/build_spatial_gallery.py",
-      "bytes": 7747,
-      "sha256": "70b49b9f367a3a5e22cb7512b33c3442b22d563532e5b61f647f19634ab083c4"
+      "bytes": 7731,
+      "sha256": "8f43bea6af57128548e06fbe14e2e3b1696e8b4b0cec58cb164afd7343aafbb3"
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 51241,
-      "sha256": "bd80723546d569065146ded43f0f00d99e831de3e6a3faa7904752bd7ecab961"
+      "bytes": 40779,
+      "sha256": "75125262e1582293e8c767713906d96a5f68b5aaabb45675c28e76f0da1a72d9"
     },
     {
       "path": "scene/memory-gallery.blend",
-      "bytes": 7795665,
-      "sha256": "70f5adee98879d2ba61467654b96ff85e1c70db602c2aa2b7f1fcf514606d2b7"
+      "bytes": 9836605,
+      "sha256": "8f1322289fa609e076995252ec05b54e21d1a56236a0ddb865194b524e0aa778"
     },
     {
       "path": "dist/assets/gallery/memory-gallery.glb",
-      "bytes": 4354840,
-      "sha256": "ac520447938123d0b0eebddf7a64789dcf0733817a62cab367cdc357e5337d95"
+      "bytes": 4518820,
+      "sha256": "312a0c1c2afd355fb1e960edaaf15dfc3689b8b8173402bfbd1b1bba17a7876e"
     },
     {
       "path": "dist/assets/gallery/spatial-light.png",
-      "bytes": 3408873,
-      "sha256": "f036476f0be60ae7d886a59e9feb144e93558004ea791c16966ad878064e6cde"
+      "bytes": 5282953,
+      "sha256": "2d016abb56ead8ae48e9b9105c131508bd4e5bf5fc0823f285856c30f822144e"
     },
     {
       "path": "dist/assets/gallery/entrance-preview.png",
-      "bytes": 903063,
-      "sha256": "73618fe87a9dd9443ba262964c5bf5b47cf0248a975ff2109ee56759dae5aa13"
+      "bytes": 1047393,
+      "sha256": "e8fc1c72e8a3de2a2ac357e300f50db7a6d19b6df23826a854989d15816acafc"
     }
   ]
 }
