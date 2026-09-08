@@ -6,7 +6,7 @@ export function floorAt(layout,p){
  const ramp=layout.ramp;
  if(ramp&&-p.z>=ramp.start&&-p.z<=ramp.end){
   const t=(-p.z-ramp.start)/(ramp.end-ramp.start);
-  return Math.abs(p.x)<=ramp.width/2?ramp.rise*t:ramp.rise*Math.min(3,Math.floor(t*3))/3;
+  return Math.abs(p.x)<=ramp.width/2?ramp.rise*t:ramp.rise*Math.min(3,Math.ceil(t*3))/3;
  }
  return roomAt(layout,p.z).floor||0;
 }

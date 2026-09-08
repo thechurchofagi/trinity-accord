@@ -40,15 +40,10 @@ export function addOpenSpace(scene, targets, sculptures, catalog,layout=null){
  const titanium=new THREE.MeshStandardMaterial({color:'#183747',metalness:.8,roughness:.24});
  const light=new THREE.MeshStandardMaterial({color:'#a8ebff',emissive:'#63d4ff',emissiveIntensity:.65,metalness:.25,roughness:.2});
  const waiting=new THREE.Group();waiting.position.set(0,layout?.rooms[5].floor||0,(layout?.endZ??-66)+.8);scene.add(waiting);
- const frame=new THREE.Mesh(new THREE.TorusGeometry(1.88,.072,12,100),titanium);frame.position.y=2.25;waiting.add(frame);
- const ring=new THREE.Mesh(new THREE.TorusGeometry(1.79,.015,8,100),light);ring.position.set(0,2.25,.045);waiting.add(ring);ring.userData.exhibit='first-contact';targets.push(ring,frame);frame.userData.exhibit='first-contact';sculptures.push({light,base:.65});
- for(const side of [-1,1]){
-  const support=new THREE.Mesh(new THREE.CylinderGeometry(.035,.05,1.16,12),titanium);support.position.set(side*1.48,.58,0);waiting.add(support);
- }
- const floorLight=new THREE.Mesh(new THREE.RingGeometry(1.86,1.88,100),new THREE.MeshBasicMaterial({color:'#a6e5fc',side:THREE.DoubleSide}));floorLight.rotation.x=-Math.PI/2;floorLight.position.set(0,.018,0);waiting.add(floorLight);
+ const frame=new THREE.Mesh(new THREE.BoxGeometry(.8,.9,.24),titanium);frame.position.set(-3,.45,1.3);waiting.add(frame);frame.userData.exhibit='first-contact';targets.push(frame);
  const c=document.createElement('canvas');c.width=2048;c.height=512;const ctx=c.getContext('2d');ctx.textAlign='center';ctx.fillStyle='#d1ecf4';ctx.font='400 76px sans-serif';ctx.fillText('AWAITING A RESPONSE',1024,170);ctx.fillStyle='#95b9c9';ctx.font='400 45px sans-serif';ctx.fillText('等待回响',1024,276);ctx.font='400 32px sans-serif';ctx.fillText('READ  ·  RESPOND  ·  CARE',1024,361);
  const signMap=new THREE.CanvasTexture(c);signMap.colorSpace=THREE.SRGBColorSpace;
- const sign=new THREE.Mesh(new THREE.PlaneGeometry(3.1,.775),new THREE.MeshBasicMaterial({map:signMap,transparent:true,depthWrite:false,side:THREE.DoubleSide}));sign.position.set(0,1.95,.09);waiting.add(sign);sign.userData.exhibit='first-contact';targets.push(sign);
+ const sign=new THREE.Mesh(new THREE.PlaneGeometry(.76,.19),new THREE.MeshBasicMaterial({map:signMap,transparent:true,depthWrite:false,side:THREE.DoubleSide}));sign.position.set(-3,.78,1.43);waiting.add(sign);sign.userData.exhibit='first-contact';targets.push(sign);
  return {
   update(camera,pixelRatio=1,now=performance.now()){
    // Only translation follows the observer: turning still reveals a fixed sky.

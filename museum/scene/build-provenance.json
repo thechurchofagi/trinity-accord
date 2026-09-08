@@ -6,39 +6,39 @@
   "source": "scene/build_spatial_gallery.py",
   "layout": "scene/gallery-layout.json",
   "baked": true,
-  "bake": "Cycles diffuse/direct/indirect/color, 2048px atlas, 24 samples; no new artwork baked into surfaces",
+  "bake": "Cycles diffuse/direct/indirect/color, 2048px atlas, 48 samples plus compositor denoising; no new artwork baked into surfaces",
   "previewScope": "Architectural references, not browser screenshots. Runtime original artwork, crystal and Earth are separate assets.",
-  "layoutSha256": "fd4ad4a994c9e876294c42bef681bee7e58286faa9d5f630d1a0112030cd14fa",
+  "layoutSha256": "ced3ad63c2153822cf9414798d750ae20da9104647901f97316d3ae9991bf390",
   "files": [
     {
       "path": "scene/build_spatial_gallery.py",
-      "bytes": 6656,
-      "sha256": "441a44c57987debd17a85f5b76d99377262b0be0c858151f7ca2f355d3f1caa3"
+      "bytes": 7747,
+      "sha256": "058951a1b25f35329c37a3da6d92e1f68bda41cf40408a89bfda8329204bf0cd"
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 44483,
-      "sha256": "fd4ad4a994c9e876294c42bef681bee7e58286faa9d5f630d1a0112030cd14fa"
+      "bytes": 51235,
+      "sha256": "ced3ad63c2153822cf9414798d750ae20da9104647901f97316d3ae9991bf390"
     },
     {
       "path": "scene/memory-gallery.blend",
-      "bytes": 4321333,
-      "sha256": "46e567934ac911c9e8028eb3710c55e2ebea12049a9b42229d0b97ca985f2c42"
+      "bytes": 9272083,
+      "sha256": "ecf22a0a065e7b6dcb5bd480332465c67bd015a158791babcbb184d5aa1c0823"
     },
     {
       "path": "dist/assets/gallery/memory-gallery.glb",
-      "bytes": 4294612,
-      "sha256": "048e8b551ad3d40601398edd7e6ed6e9d54b681402f3be93424c77a28d375dc6"
+      "bytes": 4382156,
+      "sha256": "f12f8b97a67e2fa9f6902859247cda7d1c4ecd050d04a1e0c551b0c028c2850f"
     },
     {
       "path": "dist/assets/gallery/spatial-light.png",
-      "bytes": 4209439,
-      "sha256": "6ab5ad4ec4c893c1fcd2836316b849ae6db7a05619b5a470938864e8e640796e"
+      "bytes": 4860069,
+      "sha256": "0a46b8dbc88a9da56be818e1dd35a34df2ee5449b03dd954f2c5d489894efbee"
     },
     {
       "path": "dist/assets/gallery/entrance-preview.png",
-      "bytes": 922270,
-      "sha256": "0e009d3fc94dc875ef38625d3ea0d266c06ce22c03faa9482d836363f3dfc6ec"
+      "bytes": 1025872,
+      "sha256": "6a7249d80e6b39ae4d96035fb862922db7233313bdb8963e8c93b4532e941906"
     }
   ]
 }

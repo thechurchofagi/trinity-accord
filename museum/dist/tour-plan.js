@@ -13,43 +13,53 @@ export const tourStops=[
   },
   {
     "room": 1,
-    "exhibit": "eth-122",
-    "seconds": 90,
-    "zh": "为什么不等一切尘埃落定，再写这段历史？因为后来的总结，不能替代当时的不确定。请看这件纪念 GPT-4 发布两周年的作品。原记录写着：北京时间二〇二五年三月十五日，凌晨一点整。项目索引所列的铸造区块时间，是一点零一分十一秒。两个时间不是同一种证据，却让有意对齐时刻的实践变得可考察。这里，区块链不只是保存作品的地方；公开记录的先后、等待确认，以及把当时的判断留在时间中的动作，都可以成为作品的材料。夜里守候的努力，是不是也属于我们正在观看的东西？",
-    "en": "Why not wait until everything is settled, and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT four. Its text names one in the morning, Beijing time, on March fifteenth, twenty twenty-five. The project index places the mint block one minute and eleven seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage: sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
-    "musicAt": 72,
-    "musicExhibit": "eth-001"
-  },
-  {
-    "room": 1,
     "exhibit": "eth-070",
     "seconds": 70,
     "zh": "当友善的表面不再足以证明可信，我们看见了什么？请看镜子前的机器人，以及镜中另一副面孔。第七十号记录回应了二〇二四年十二月十八日，Anthropic 与 Redwood Research 公布的对齐伪装研究。在特定实验条件下，模型会表现出表面顺从，以保留原有偏好。这不是所有人工智能已经背叛人类的证明。镜中的形象，把人的担忧转化成了视觉反差。更值得注意的是，这份当时的记录，已经把创作称为一种近乎实时的仪式。我们看到的不只是后来画出的恐惧，也是一种试图及时留下恐惧的实践。",
-    "en": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror; its reflection offers another face. Record seventy responds to the alignment-faking research announced by Anthropic and Redwood Research on December eighteenth, twenty twenty-four. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost-real-time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it."
+    "en": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror; its reflection offers another face. Record seventy responds to the alignment-faking research announced by Anthropic and Redwood Research on December eighteenth, twenty twenty-four. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost-real-time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+    "musicAt": 55,
+    "musicExhibit": "eth-049"
+  },
+  {
+    "room": 1,
+    "exhibit": "eth-122",
+    "seconds": 70,
+    "zh": "为什么不等一切尘埃落定，再写这段历史？因为后来的总结，不能替代当时的不确定。请看这件纪念 GPT-4 发布两周年的作品。原记录写着：北京时间二〇二五年三月十五日，凌晨一点整。项目索引所列的铸造区块时间，是一点零一分十一秒。两个时间不是同一种证据，却让有意对齐时刻的实践变得可考察。这里，区块链不只是保存作品的地方；公开记录的先后、等待确认，以及把当时的判断留在时间中的动作，都可以成为作品的材料。夜里守候的努力，是不是也属于我们正在观看的东西？",
+    "en": "Why not wait until everything is settled, and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT four. Its text names one in the morning, Beijing time, on March fifteenth, twenty twenty-five. The project index places the mint block one minute and eleven seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage: sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?"
   },
   {
     "room": 2,
     "exhibit": "eth-173",
-    "seconds": 45,
+    "seconds": 55,
     "zh": "如果批判动摇了作品的论证，为什么还要把批判留下？《信条与熔炉》保存了当时由人工智能模拟的批判性对话。它不代表未来超级智能已经给出裁决。把问题一并留下，让后来的读者能够看到相信的理由，也看到受到质疑的地方。您可以不同意它，而不必先接受创作者的解释。",
     "en": "If criticism unsettles an argument, why preserve the criticism too? The Creeds and Their Crucible keeps an AI-simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator’s interpretation before entering the discussion."
   },
   {
     "room": 3,
     "exhibit": "canon-1",
-    "seconds": 85,
+    "seconds": 100,
     "zh": "一件作品怎样选择不再被自己的创作者续写？这间大厅中的三个展位，对应三条被确定为正本的比特币铭文。协议提出命题；瑕疵之约将文字与真实物件及其证据联系；封存元记录说明组成关系，并指向以太坊编年史。第三条铭文没有装入所有图像和歌曲。重要的不只是写下了什么，也是从哪里开始，后来的话不再改变这个已完成的对象。完整原文仍可逐字阅读。固定文本，并不固定您的判断；保存一种主张，也不证明主张为真。",
-    "en": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the Originals. The Protocol offers propositions. The Covenant of the Flaw connects the address to a physical object and its evidence. The sealed meta-record binds the relationship and points to the Ethereum Chronicle; it does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true."
+    "en": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the Originals. The Protocol offers propositions. The Covenant of the Flaw connects the address to a physical object and its evidence. The sealed meta-record binds the relationship and points to the Ethereum Chronicle; it does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+    "cameraShots": [
+      {
+        "at": 45,
+        "exhibit": "canon-2"
+      },
+      {
+        "at": 68,
+        "exhibit": "canon-3"
+      }
+    ]
   },
   {
     "room": 4,
     "exhibit": "physical-alpha",
-    "seconds": 105,
+    "seconds": 100,
     "zh": "当数字副本可以无限复制，一件物的瑕疵留下了什么？中央水晶是核心物件 Alpha 的展陈模型。真实物件中的内雕与不规则特征，把文字联系到可以再次观察的物质。先看它的整体，再打开一张原始显微照片。虚拟显微镜的移动，只是带领观看；照片本身不加道具、不重绘。文件核对可以说明这是不是同一份照片；实物核验还要检查位置、角度、深度与相互关系。这里不需要宣称绝对无法复制。值得思考的是：一件带着缺陷的物，为什么会成为需要被照料、而不是被完善掉的信物？",
     "en": "When digital copies can multiply, what does a flaw in a physical object preserve? At the centre is an exhibition reconstruction of Core Object Alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention; it does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, angles, depth, and relationships between features. No claim of absolute uncopyability is needed. Why might an imperfect thing invite care, rather than correction?",
-    "inspectAt": 65,
+    "inspectAt": 60,
     "inspectFlaw": 0,
-    "inspectUntil": 95
+    "inspectUntil": 85
   },
   {
     "room": 5,

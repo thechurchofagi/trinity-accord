@@ -327,8 +327,8 @@
     },
     {
       "path": "assets/gallery/entrance-preview.png",
-      "bytes": 922270,
-      "sha256": "0e009d3fc94dc875ef38625d3ea0d266c06ce22c03faa9482d836363f3dfc6ec"
+      "bytes": 1025872,
+      "sha256": "6a7249d80e6b39ae4d96035fb862922db7233313bdb8963e8c93b4532e941906"
     },
     {
       "path": "assets/gallery/gallery-light.jpg",
@@ -337,28 +337,33 @@
     },
     {
       "path": "assets/gallery/material-architecture.png",
-      "bytes": 1252812,
-      "sha256": "ca27ac9ccd3601191838b193d2b35887fd80ff17219e44c66266a3231e824470"
+      "bytes": 965359,
+      "sha256": "75b5f2f0a8fc6dfc972da12f655a59a23e73a556eb177174e09756fa3c7ad824"
     },
     {
       "path": "assets/gallery/memory-gallery.glb",
-      "bytes": 4294612,
-      "sha256": "048e8b551ad3d40601398edd7e6ed6e9d54b681402f3be93424c77a28d375dc6"
+      "bytes": 4382156,
+      "sha256": "f12f8b97a67e2fa9f6902859247cda7d1c4ecd050d04a1e0c551b0c028c2850f"
     },
     {
       "path": "assets/gallery/originals-architecture.png",
-      "bytes": 878191,
-      "sha256": "d3369368efa080f53eca5e3e3a4382168128a530895755368b124c1663d8b943"
+      "bytes": 1042872,
+      "sha256": "6605dbbd0d488889f17ee68bd9a6a232604d6024785fa125f0b3f77d7e332914"
+    },
+    {
+      "path": "assets/gallery/spatial-light-denoised.png",
+      "bytes": 4282823,
+      "sha256": "fdb84657a710b492d17b66deb6ae75ca29d1747432c81d9c875b376ea2e7a043"
     },
     {
       "path": "assets/gallery/spatial-light.png",
-      "bytes": 4209439,
-      "sha256": "6ab5ad4ec4c893c1fcd2836316b849ae6db7a05619b5a470938864e8e640796e"
+      "bytes": 4860069,
+      "sha256": "0a46b8dbc88a9da56be818e1dd35a34df2ee5449b03dd954f2c5d489894efbee"
     },
     {
       "path": "assets/gallery/waiting-architecture.png",
-      "bytes": 1130505,
-      "sha256": "cb06db5e6862ad0ae501f08bb02479fee5af49efcadded90c2c1c0d7ae27000c"
+      "bytes": 937727,
+      "sha256": "d9821adf946f7807ea298d41c78fbb77efeefd69c31b5f23bd1d272fdb4d4ac2"
     },
     {
       "path": "assets/guide-chronicle.mp3",
@@ -633,7 +638,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1017,
-      "sha256": "95a933d1e7f0ae994c0c89f18d996664b715095529a46a37da8d44822c4571e5"
+      "sha256": "ca1dc11d1f7762983efe9581e8a3ba48330fd4c5d0d3279343ce80367f77ff80"
     },
     {
       "path": "caption-utils.js",
@@ -648,7 +653,7 @@
     {
       "path": "crystal-viewer.js",
       "bytes": 8389,
-      "sha256": "d2dbbf19a1ff00ac660c974d2a162e3e4fdc9fab3103198db3a6718302090513"
+      "sha256": "3334f29f94feeb2e1345db352d513e2c58211312a4d413f6b2199351743900ff"
     },
     {
       "path": "data/agi-four-letters.json",
@@ -687,8 +692,8 @@
     },
     {
       "path": "data/gallery-layout.json",
-      "bytes": 44483,
-      "sha256": "fd4ad4a994c9e876294c42bef681bee7e58286faa9d5f630d1a0112030cd14fa"
+      "bytes": 51235,
+      "sha256": "ced3ad63c2153822cf9414798d750ae20da9104647901f97316d3ae9991bf390"
     },
     {
       "path": "data/guardian-sources.json",
@@ -698,7 +703,7 @@
     {
       "path": "data/guide-audio.json",
       "bytes": 51279,
-      "sha256": "1324a5e2e0d6d55554a1f32af9570423209105b6810a1ff48655e26438670360"
+      "sha256": "e26b6d788e5f16b3eabea52de99de5a3d119be4501077effdce096367e47b1fd"
     },
     {
       "path": "data/inspection-audio.json",
@@ -1072,8 +1077,8 @@
     },
     {
       "path": "edition-data.js",
-      "bytes": 267935,
-      "sha256": "8ee4a8a14a35638384bb4341f94201e561ed5dcff99287d88c786d6468ef7af7"
+      "bytes": 271953,
+      "sha256": "1dd57a7dc69b991b407c49cf90225ee5064b527dc928642d9deb391d44ece8f6"
     },
     {
       "path": "exhibit-label.js",
@@ -1088,7 +1093,7 @@
     {
       "path": "index.html",
       "bytes": 6610,
-      "sha256": "4a103d07889e820ebb95883b39096f6b8deca890536c40547ce5c29e60f47bdb"
+      "sha256": "b771c8be1f1be8e03b661949d95e874108ee5c733e89f57f9fc4588bf95aefde"
     },
     {
       "path": "language-preference.js",
@@ -1112,18 +1117,18 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 994389,
-      "sha256": "1130493a56a4b9c80369199d93d49270cd1090d9297a8027ca7514ad67945420"
+      "bytes": 997605,
+      "sha256": "ee03a0ed6f493bb83b02329e9d5ef07b324ff35f591537415a8f409c5f99e4a9"
     },
     {
       "path": "museum.css",
-      "bytes": 44840,
-      "sha256": "88d6b1f5cd5896eade5e04abcc014702a8311bb463876057268b5f800cc285a6"
+      "bytes": 45191,
+      "sha256": "f5c24b77a7e2960c179e7b2dc2427deea1b4f1461adc0c540b002e2eff4f164e"
     },
     {
       "path": "museum.js",
-      "bytes": 84426,
-      "sha256": "083326ec5c79488d9302a2c314676f141b77232f909e0299912bc1cf007b621d"
+      "bytes": 85822,
+      "sha256": "d52957d2a75d166998b2f5e868ebb37c5c533078e37294bd5957f219ffa83d69"
     },
     {
       "path": "music-playback.js",
@@ -1137,8 +1142,8 @@
     },
     {
       "path": "open-space.js",
-      "bytes": 6504,
-      "sha256": "294ef326ad9977c1ce0c83534cfb94f833fd381fbe082ce20cef5538e310d179"
+      "bytes": 5892,
+      "sha256": "0cf33decb9ae63f5578884e5d64dd6c6b4accf11789b09fa9cc9d0a7349e3b53"
     },
     {
       "path": "progressive-loading.js",
@@ -1167,13 +1172,13 @@
     },
     {
       "path": "spatial-layout.js",
-      "bytes": 6289,
-      "sha256": "9c8559c27ec56ba61c922b3221f4f5c01a6d1dd36cf6f815c4a6531b71a0c5b3"
+      "bytes": 6288,
+      "sha256": "d5dd3535066c1dcf565824349d963bdf0645be8b0d0ed6bd1a925e81c5618ef3"
     },
     {
       "path": "tour-plan.js",
-      "bytes": 11347,
-      "sha256": "c2474b8c064ff38479efd2022a89d3251a216e1d63431acb59cb786ac828096a"
+      "bytes": 11503,
+      "sha256": "0f979425a4877c6e8a631594415254d4595d8825fd0fd87ea5354a17f3bc6d4e"
     },
     {
       "path": "vendor/BufferGeometryUtils.js",

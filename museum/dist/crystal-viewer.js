@@ -70,7 +70,7 @@ export function addCrystalAura(scene,center,scale=1){
  const group=new THREE.Group();group.position.copy(center);group.scale.setScalar(scale);scene.add(group);
  // A soft light field outside the slab silhouette; the inscription area stays clear.
  const material=new THREE.ShaderMaterial({transparent:true,depthWrite:false,side:THREE.DoubleSide,blending:THREE.AdditiveBlending,toneMapped:false,
-  uniforms:{strength:{value:.95}},
+  uniforms:{strength:{value:.42}},
   vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
   fragmentShader:`varying vec2 vUv;uniform float strength;void main(){
    vec2 p=(vUv-.5)*vec2(.74,.96);vec2 q=abs(p)-vec2(.115,.1685);
@@ -81,5 +81,5 @@ export function addCrystalAura(scene,center,scale=1){
    gl_FragColor=vec4(color,light*strength);
   }`});
  const veil=new THREE.Mesh(new THREE.PlaneGeometry(.74,.96),material);veil.position.set(0,.1765,-.035);group.add(veil);
- return {group,update(now,reduced){material.uniforms.strength.value=reduced?.95:.95+.065*Math.sin(now*.00105);},dispose(){veil.geometry.dispose();material.dispose();scene.remove(group);}};
+ return {group,update(now,reduced){material.uniforms.strength.value=reduced?.42:.42+.035*Math.sin(now*.00105);},dispose(){veil.geometry.dispose();material.dispose();scene.remove(group);}};
 }

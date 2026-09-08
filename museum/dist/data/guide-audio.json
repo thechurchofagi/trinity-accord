@@ -96,7 +96,7 @@
       ]
     },
     {
-      "stop": 1,
+      "stop": 2,
       "language": "zh",
       "voice": "zh-CN-XiaoxiaoNeural",
       "rate": "+8%",
@@ -164,7 +164,7 @@
       ]
     },
     {
-      "stop": 1,
+      "stop": 2,
       "language": "en",
       "voice": "en-US-AriaNeural",
       "rate": "+0%",
@@ -252,7 +252,7 @@
       ]
     },
     {
-      "stop": 2,
+      "stop": 1,
       "language": "zh",
       "voice": "zh-CN-XiaoxiaoNeural",
       "rate": "+8%",
@@ -325,7 +325,7 @@
       ]
     },
     {
-      "stop": 2,
+      "stop": 1,
       "language": "en",
       "voice": "en-US-AriaNeural",
       "rate": "+0%",
