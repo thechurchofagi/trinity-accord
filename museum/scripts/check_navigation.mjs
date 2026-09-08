@@ -48,7 +48,7 @@ feet.update(.01,true);assert.equal(played,3);const samples=footstepSamples();con
 const data=JSON.parse(fs.readFileSync(new URL('../dist/data/sources.json',import.meta.url)));
 assert.ok(FOOTSTEP_GAIN<=.065,'Shoe contact amplitude stays at most half the previous edition');
 const curation=JSON.parse(fs.readFileSync(new URL('../dist/data/curation.json',import.meta.url)));
-for(const source of data.items)for(const zh of [false,true]){const e={...source,...curation.items.find(x=>x.id===source.id)},rows=exhibitLabel(e,zh,true).split('\n');assert.equal(rows.length,4);assert.equal(rows[0],`No. ${String(e.ordinal).padStart(3,'0')}  ♪`);assert.ok(rows[1].startsWith(zh?'事件 ':'Event '));assert.equal(rows[2],`${zh?'铸造':'Mint'} ${e.date.slice(0,10)} UTC`);assert.equal(rows[3],e.mintTitle||e.title);}
+for(const source of data.items)for(const zh of [false,true]){const e={...source,...curation.items.find(x=>x.id===source.id)},rows=exhibitLabel(e,zh,true).split('\n');assert.equal(rows.length,4);assert.equal(rows[0],`No. ${String(e.ordinal).padStart(3,'0')}`);assert.ok(rows[1].startsWith(zh?'事件 ':'Event '));assert.ok(rows[2].startsWith(`${zh?'铸造':'Mint'} ${e.date.slice(0,10)} UTC · `));assert.ok(rows[3].startsWith('♪ '));assert.ok(!rows[0].includes('♪'));}
 
 
 // Run the actual selection handler: approach/play once, then open details without restarting audio.
@@ -67,3 +67,5 @@ const navigation=app.slice(app.indexOf('function bindNavigation('),app.indexOf('
 
 const {heldWalkSpeed}=await import('../dist/movement-controls.js');
 assert.equal(heldWalkSpeed(1.25,0,1),1.25);assert.equal(heldWalkSpeed(1.25,5,.1),1.25);assert.ok(heldWalkSpeed(1.25,2,1)>2.3);assert.ok(heldWalkSpeed(1.25,1,1)<heldWalkSpeed(1.25,2,1));
+
+assert.equal(heldWalkSpeed(1.25,0,1),1.25);assert.ok(heldWalkSpeed(1.25,6,1)>3.6);assert.equal(heldWalkSpeed(1.25,60,1),heldWalkSpeed(1.25,6,1));

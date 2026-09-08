@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.gallery-layout.v2",
-  "edition": "museum-v1.35.0",
+  "edition": "museum-v1.36.0",
   "dimensions": {
     "width": 14,
     "length": 63,
@@ -24,14 +24,14 @@
         {
           "id": "project-intro",
           "x": -4.385,
-          "z": -1.1,
+          "z": -2.6,
           "angle": 1.5707963267948966,
           "y": 1.85
         },
         {
           "id": "museum-history",
           "x": 4.385,
-          "z": -1.1,
+          "z": -2.6,
           "angle": -1.5707963267948966,
           "y": 1.85
         }

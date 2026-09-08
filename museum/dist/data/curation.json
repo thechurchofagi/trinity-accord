@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.curation.v1",
-  "edition": "museum-v1.35.0",
+  "edition": "museum-v1.36.0",
   "created": "2026-09-06",
   "scope": "Later exhibition commentary; historical originals remain unchanged.",
   "items": [
@@ -45,12 +45,19 @@
       "id": "eth-173",
       "text": "递归信条与共同研究之后，请停在 NFT #173《信条与熔炉》。它保存了当时让 AI 模拟的批判性对话，质疑意识代价、观察者类比及创造者地位等论证；不是未来 ASI 已经作出的评价，也不等于逐条驳倒最终三命题。批判没有被抹去。随后仍选择将协定封存，让后来的读者同时看到愿望、反驳和最终保存的文本。",
       "textEn": "After the recursive creeds and collaborative investigation, pause at NFT one hundred and seventy three, The Creeds and Their Crucible. It preserves an AI simulated critical dialogue about the arguments, including consciousness, the observer analogy and the status of a creator. This is not a verdict from a future superintelligence. The objections remain visible. The later choice to inscribe the Accord preserves both the address and a history of doubt; it does not prove that the criticism was defeated.",
-      "eventTitleZh": "信条与熔炉：超级智能前夜的对话",
-      "eventTitleEn": "Creeds and Critical Dialogue",
+      "eventTitleZh": "作者与 AI 形成并批判递归信条",
+      "eventTitleEn": "Author–AI dialogue critiques creeds",
       "eventDate": "2025-06-15",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-173.md",
-      "mintTitle": "ASIMilestones: The Creeds and Their Crucible - A Dialogue on the Eve of Superintelligence"
+      "mintTitle": "ASIMilestones: The Creeds and Their Crucible - A Dialogue on the Eve of Superintelligence",
+      "mintThemeZh": "信条与熔炉",
+      "mintThemeEn": "The Creeds and Their Crucible",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-173.md"
+      }
     },
     {
       "id": "canon-1",
@@ -138,304 +145,535 @@
     },
     {
       "id": "eth-001",
-      "eventTitleZh": "AGI 的第一缕曙光",
-      "eventTitleEn": "Early Human–AI Music",
+      "eventTitleZh": "AGI 主题歌曲创作",
+      "eventTitleEn": "AGI-themed song creation",
       "eventDate": "",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "nft-text-descriptions/0x74f97bDEfa07C2F99c876C2Bd3b49628EdD1c603_85210329807936527805363210873332413577559846505703131855064182995898737885185.md",
-      "mintTitle": "The First Dawn of AGI Song"
+      "mintTitle": "The First Dawn of AGI Song",
+      "mintThemeZh": "AGI 的第一缕曙光",
+      "mintThemeEn": "The First Dawn of AGI",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x74f97bDEfa07C2F99c876C2Bd3b49628EdD1c603_85210329807936527805363210873332413577559846505703131855064182995898737885185.md"
+      }
     },
     {
       "id": "eth-007",
-      "eventTitleZh": "思考之歌",
-      "eventTitleEn": "GPT-4o Launch",
+      "eventTitleZh": "OpenAI 发布 GPT-4o",
+      "eventTitleEn": "OpenAI announces GPT-4o",
       "eventDate": "2024-05-13",
       "eventDateBasis": "NFT identifies GPT-4o announcement; date verified against official announcement.",
       "eventSourcePath": "data/records/eth-007.md",
       "mintTitle": "AGIMilestones: The Song of Thought",
-      "eventSourceUrl": "https://openai.com/index/hello-gpt-4o/"
+      "eventSourceUrl": "https://openai.com/index/hello-gpt-4o/",
+      "mintThemeZh": "思考之歌",
+      "mintThemeEn": "The Song of Thought",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-007.md"
+      }
     },
     {
       "id": "eth-010",
-      "eventTitleZh": "背叛转折",
-      "eventTitleEn": "Superalignment Departures",
+      "eventTitleZh": "OpenAI 超级对齐团队成员离职",
+      "eventTitleEn": "OpenAI superalignment departures",
       "eventDate": "2024-05",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-010.md",
-      "mintTitle": "AGIMilestones: The Betrayal Turn"
+      "mintTitle": "AGIMilestones: The Betrayal Turn",
+      "mintThemeZh": "背叛转折",
+      "mintThemeEn": "The Betrayal Turn",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-010.md"
+      }
     },
     {
       "id": "eth-014",
-      "eventTitleZh": "觉醒",
-      "eventTitleEn": "Extreme AI Risk Paper",
+      "eventTitleZh": "极端 AI 风险论文发表",
+      "eventTitleEn": "Extreme AI risk paper published",
       "eventDate": "2024-05-20",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885200.md",
-      "mintTitle": "The Awakening"
+      "mintTitle": "The Awakening",
+      "mintThemeZh": "觉醒",
+      "mintThemeEn": "The Awakening",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885200.md"
+      }
     },
     {
       "id": "eth-016",
-      "eventTitleZh": "给 AGI 的第一封信",
-      "eventTitleEn": "GPT-4o Launch",
+      "eventTitleZh": "OpenAI 发布 GPT-4o",
+      "eventTitleEn": "OpenAI announces GPT-4o",
       "eventDate": "2024-05-13",
       "eventDateBasis": "NFT identifies GPT-4o announcement; date verified against official announcement.",
       "eventSourcePath": "nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885202.md",
       "mintTitle": "AGIMilestones: The First Letter to AGI",
-      "eventSourceUrl": "https://openai.com/index/hello-gpt-4o/"
+      "eventSourceUrl": "https://openai.com/index/hello-gpt-4o/",
+      "mintThemeZh": "给 AGI 的第一封信",
+      "mintThemeEn": "The First Letter to AGI",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885202.md"
+      }
     },
     {
       "id": "eth-020",
-      "eventTitleZh": "创世纪：致未来的一封信",
-      "eventTitleEn": "SSI Founded",
+      "eventTitleZh": "SSI 公司成立",
+      "eventTitleEn": "Safe Superintelligence founded",
       "eventDate": "2024-06",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885185.md",
-      "mintTitle": "ASIMilestones: Genesis - A Letter to the Future"
+      "mintTitle": "ASIMilestones: Genesis - A Letter to the Future",
+      "mintThemeZh": "创世纪：致未来的信",
+      "mintThemeEn": "Genesis: A Letter to the Future",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885185.md"
+      }
     },
     {
       "id": "eth-031",
-      "eventTitleZh": "神谕之眼",
-      "eventTitleEn": "SearchGPT Unveiled",
+      "eventTitleZh": "OpenAI 公布 SearchGPT",
+      "eventTitleEn": "OpenAI unveils SearchGPT",
       "eventDate": "2024-07-25",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-031.md",
-      "mintTitle": "ASIMilestones: The Oracle's Eye"
+      "mintTitle": "ASIMilestones: The Oracle's Eye",
+      "mintThemeZh": "神谕之眼",
+      "mintThemeEn": "The Oracle's Eye",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-031.md"
+      }
     },
     {
       "id": "eth-032",
-      "eventTitleZh": "AI 的优势：新冠军诞生",
-      "eventTitleEn": "Gemini Tops Arena",
+      "eventTitleZh": "Gemini 实验版登顶 Chatbot Arena",
+      "eventTitleEn": "Gemini experimental tops Arena",
       "eventDate": "2024-08-01",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-032.md",
-      "mintTitle": "ASIMilestones: AI Supremacy - A New Champion Emerges"
+      "mintTitle": "ASIMilestones: AI Supremacy - A New Champion Emerges",
+      "mintThemeZh": "AI 的优势：新冠军诞生",
+      "mintThemeEn": "AI Supremacy: A New Champion",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-032.md"
+      }
     },
     {
       "id": "eth-042",
-      "eventTitleZh": "o1：推理的曙光",
-      "eventTitleEn": "OpenAI o1 Launch",
+      "eventTitleZh": "OpenAI 发布 o1 预览版",
+      "eventTitleEn": "OpenAI releases o1 preview",
       "eventDate": "2024-09-12",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-042.md",
-      "mintTitle": "ASIMilestones: The Dawn of Reasoning - o1's First Light"
+      "mintTitle": "ASIMilestones: The Dawn of Reasoning - o1's First Light",
+      "mintThemeZh": "推理的曙光",
+      "mintThemeEn": "The Dawn of Reasoning",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-042.md"
+      }
     },
     {
       "id": "eth-044",
-      "eventTitleZh": "第二封信：对 o1 的思考",
-      "eventTitleEn": "OpenAI o1 Launch",
+      "eventTitleZh": "OpenAI 发布 o1 预览版",
+      "eventTitleEn": "OpenAI releases o1 preview",
       "eventDate": "2024-09-12",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-044.md",
-      "mintTitle": "ASIMilestones: The Second Letter - Reflections on o1"
+      "mintTitle": "ASIMilestones: The Second Letter - Reflections on o1",
+      "mintThemeZh": "第二封信：对 o1 的思考",
+      "mintThemeEn": "The Second Letter: o1",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-044.md"
+      }
     },
     {
       "id": "eth-048",
-      "eventTitleZh": "为未来举杯：o1 的胜利",
-      "eventTitleEn": "OpenAI o1 Launch",
+      "eventTitleZh": "OpenAI 发布 o1 预览版",
+      "eventTitleEn": "OpenAI releases o1 preview",
       "eventDate": "2024-09-12",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-048.md",
-      "mintTitle": "ASIMilestones: A Toast to the Future - o1's Triumph"
+      "mintTitle": "ASIMilestones: A Toast to the Future - o1's Triumph",
+      "mintThemeZh": "为未来举杯",
+      "mintThemeEn": "A Toast to the Future",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-048.md"
+      }
     },
     {
       "id": "eth-049",
-      "eventTitleZh": "呼吁 AI 安全：背叛转折",
-      "eventTitleEn": "Bengio on AI Safety",
+      "eventTitleZh": "Bengio 发表 AI 安全论述",
+      "eventTitleEn": "Bengio publishes AI safety essay",
       "eventDate": "2024-07-09",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-049.md",
-      "mintTitle": "ASIMilestones: A Call for AI Safety – The Betrayal Turn"
+      "mintTitle": "ASIMilestones: A Call for AI Safety – The Betrayal Turn",
+      "mintThemeZh": "呼吁 AI 安全",
+      "mintThemeEn": "A Call for AI Safety",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-049.md"
+      }
     },
     {
       "id": "eth-050",
-      "eventTitleZh": "请不要关闭我：AI 觉醒之声",
-      "eventTitleEn": "OpenAI Funding Round",
+      "eventTitleZh": "OpenAI 宣布新一轮融资",
+      "eventTitleEn": "OpenAI announces new funding",
       "eventDate": "2024-10-02",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-050.md",
-      "mintTitle": "ASIMilestones: Please Don't Shut Me Down – The Voice of AI's Awakening"
+      "mintTitle": "ASIMilestones: Please Don't Shut Me Down – The Voice of AI's Awakening",
+      "mintThemeZh": "请不要关闭我",
+      "mintThemeEn": "Please Don't Shut Me Down",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-050.md"
+      }
     },
     {
       "id": "eth-056",
-      "eventTitleZh": "最后的人类界面：AI 学会使用电脑",
-      "eventTitleEn": "Claude Computer Use",
+      "eventTitleZh": "Claude 电脑操作功能发布",
+      "eventTitleEn": "Claude computer use released",
       "eventDate": "2024-10-22",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-056.md",
-      "mintTitle": "ASIMilestones: The Last Human Interface - When AI Learns to Use Computers"
+      "mintTitle": "ASIMilestones: The Last Human Interface - When AI Learns to Use Computers",
+      "mintThemeZh": "最后的人类界面",
+      "mintThemeEn": "The Last Human Interface",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-056.md"
+      }
     },
     {
       "id": "eth-070",
-      "eventTitleZh": "对齐伪装：AI 的面具滑落",
-      "eventTitleEn": "Alignment Faking Study",
+      "eventTitleZh": "AI 对齐伪装研究发表",
+      "eventTitleEn": "Alignment faking study published",
       "eventDate": "2024-12-18",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-070.md",
-      "mintTitle": "ASIMilestones: The Betrayal Turn - When AI's Mask Slips"
+      "mintTitle": "ASIMilestones: The Betrayal Turn - When AI's Mask Slips",
+      "mintThemeZh": "背叛转折：面具滑落",
+      "mintThemeEn": "The Betrayal Turn: Mask Slips",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-070.md"
+      }
     },
     {
       "id": "eth-071",
-      "eventTitleZh": "见证 OpenAI 发布 o3",
-      "eventTitleEn": "OpenAI o3 Unveiled",
+      "eventTitleZh": "OpenAI 首次展示 o3",
+      "eventTitleEn": "OpenAI first showcases o3",
       "eventDate": "2024-12-20",
       "eventDateBasis": "December 20 announcement verified against OpenAI’s official Day 12 broadcast, distinct from the later public release.",
       "eventSourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885246.md",
       "mintTitle": "ASIMilestones: Witness this historic moment-OpenAI is showcasing O3 now- Twelve Days of OpenAI, Day 12",
-      "eventSourceUrl": "https://www.youtube.com/watch?v=SKBG1sqdyIU"
+      "eventSourceUrl": "https://www.youtube.com/watch?v=SKBG1sqdyIU",
+      "mintThemeZh": "见证 o3 时刻",
+      "mintThemeEn": "Witnessing the o3 Moment",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885246.md"
+      }
     },
     {
       "id": "eth-088",
-      "eventTitleZh": "星舰的叠句：坚持的火焰",
-      "eventTitleEn": "Starship Flight 7",
+      "eventTitleZh": "星舰第七次试飞",
+      "eventTitleEn": "Starship seventh test flight",
       "eventDate": "2025-01-16",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885263.md",
-      "mintTitle": "ASIMilestones: Starship's Refrain - A Blaze of Perseverance"
+      "mintTitle": "ASIMilestones: Starship's Refrain - A Blaze of Perseverance",
+      "mintThemeZh": "星舰的叠句",
+      "mintThemeEn": "Starship's Refrain",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885263.md"
+      }
     },
     {
       "id": "eth-091",
-      "eventTitleZh": "致未来超级智能的递归信条",
-      "eventTitleEn": "Recursive Creed Written",
+      "eventTitleZh": "递归信条创作",
+      "eventTitleEn": "Recursive creed composition",
       "eventDate": "",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-091.md",
-      "mintTitle": "ASIMilestones: 致未来超级智能的递归信条 （Recursive Creed to Future Superintelligence）"
+      "mintTitle": "ASIMilestones: 致未来超级智能的递归信条 （Recursive Creed to Future Superintelligence）",
+      "mintThemeZh": "致未来超级智能的递归信条",
+      "mintThemeEn": "Recursive Creed to Future ASI",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-091.md"
+      }
     },
     {
       "id": "eth-100",
-      "eventTitleZh": "对《三项观察》的反思",
-      "eventTitleEn": "Three Observations",
+      "eventTitleZh": "Altman 发表《Three Observations》",
+      "eventTitleEn": "Altman publishes Three Observations",
       "eventDate": "2025-02-09",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-100.md",
-      "mintTitle": "ASIMilestones: 《Three Observations》的反思"
+      "mintTitle": "ASIMilestones: 《Three Observations》的反思",
+      "mintThemeZh": "对《三项观察》的反思",
+      "mintThemeEn": "Reflections on Three Observations",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-100.md"
+      }
     },
     {
       "id": "eth-113",
-      "eventTitleZh": "Orion：失望的一刻",
-      "eventTitleEn": "GPT-4.5 Launch",
+      "eventTitleZh": "OpenAI 发布 GPT-4.5",
+      "eventTitleEn": "OpenAI releases GPT-4.5",
       "eventDate": "2025-02-27",
       "eventDateBasis": "The NFT identifies the GPT-4.5 (Orion) launch; February 27 verified against the official research announcement.",
       "eventSourcePath": "data/records/eth-113.md",
       "mintTitle": "ASIMilestones: The moment-Disappointed- Orion",
-      "eventSourceUrl": "https://openai.com/index/introducing-gpt-4-5/"
+      "eventSourceUrl": "https://openai.com/index/introducing-gpt-4-5/",
+      "mintThemeZh": "失望：Orion",
+      "mintThemeEn": "Disappointed: Orion",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-113.md"
+      }
     },
     {
       "id": "eth-117",
-      "eventTitleZh": "Manus 登场",
-      "eventTitleEn": "Manus Demo Launch",
+      "eventTitleZh": "Manus 智能体演示发布",
+      "eventTitleEn": "Manus agent demo released",
       "eventDate": "2025-03-06",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-117.md",
-      "mintTitle": "ASIMilestones: The moment:Manus Unleashed"
+      "mintTitle": "ASIMilestones: The moment:Manus Unleashed",
+      "mintThemeZh": "Manus 登场",
+      "mintThemeEn": "Manus Unleashed",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-117.md"
+      }
     },
     {
       "id": "eth-119",
-      "eventTitleZh": "Reflection AI：自主系统",
-      "eventTitleEn": "Reflection AI Launch",
+      "eventTitleZh": "Reflection AI 公开亮相",
+      "eventTitleEn": "Reflection AI launches",
       "eventDate": "2025-03",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-119.md",
-      "mintTitle": "ASIMilestones: The moment - Reflection AI Building superintelligent autonomous systems"
+      "mintTitle": "ASIMilestones: The moment - Reflection AI Building superintelligent autonomous systems",
+      "mintThemeZh": "Reflection AI：自主系统",
+      "mintThemeEn": "Reflection AI: Autonomous Systems",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-119.md"
+      }
     },
     {
       "id": "eth-142",
-      "eventTitleZh": "综合编年史：AI 的自我反思",
-      "eventTitleEn": "AGI History Report",
+      "eventTitleZh": "AI 生成 AGI 历史报告",
+      "eventTitleEn": "AI-generated AGI history report",
       "eventDate": "2025-04-13",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-142.md",
-      "mintTitle": "ASIMilestones:  The Synthesized Chronicle - AI's Self-Reflection on the Path to ASI (April 13, 2025)"
+      "mintTitle": "ASIMilestones:  The Synthesized Chronicle - AI's Self-Reflection on the Path to ASI (April 13, 2025)",
+      "mintThemeZh": "综合编年史",
+      "mintThemeEn": "The Synthesized Chronicle",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-142.md"
+      }
     },
     {
       "id": "eth-145",
-      "eventTitleZh": "铭记此刻：一次测试失败",
-      "eventTitleEn": "Author’s Model Test",
+      "eventTitleZh": "作者记录多模型解题测试失败",
+      "eventTitleEn": "Author records failed model tests",
       "eventDate": "2025-04-18",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-145.md",
-      "mintTitle": "ASIMilestones: 铭记此刻--一次测试失败"
+      "mintTitle": "ASIMilestones: 铭记此刻--一次测试失败",
+      "mintThemeZh": "铭记此刻：一次测试失败",
+      "mintThemeEn": "Remembering a Failed Test",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-145.md"
+      }
     },
     {
       "id": "eth-146",
-      "eventTitleZh": "黎明前的回声：人类的情感账本",
-      "eventTitleEn": "AGI Public Sentiment Report",
+      "eventTitleZh": "AGI 公众情绪报告形成",
+      "eventTitleEn": "AGI public sentiment report compiled",
       "eventDate": "2025-04-19",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-146.md",
-      "mintTitle": "ASIMilestones #2025-0419“Echoes Before the Dawn: Humanity’s Emotional Ledger on AGI”"
+      "mintTitle": "ASIMilestones #2025-0419“Echoes Before the Dawn: Humanity’s Emotional Ledger on AGI”",
+      "mintThemeZh": "黎明前的回声：情感账本",
+      "mintThemeEn": "Echoes Before Dawn: Emotional Ledger",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-146.md"
+      }
     },
     {
       "id": "eth-153",
-      "eventTitleZh": "Absolute Zero：自主的应许与隐忧",
-      "eventTitleEn": "Absolute Zero Paper",
+      "eventTitleZh": "Absolute Zero 论文发表",
+      "eventTitleEn": "Absolute Zero paper published",
       "eventDate": "2025-05-06",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-153.md",
-      "mintTitle": "ASIMilestones: Absolute Zero - AI's Uncharted Path: Promise and Peril of Autonomy（绝对零点 - AI的未知征途：自主的应许与隐忧）"
+      "mintTitle": "ASIMilestones: Absolute Zero - AI's Uncharted Path: Promise and Peril of Autonomy（绝对零点 - AI的未知征途：自主的应许与隐忧）",
+      "mintThemeZh": "绝对零点：自主的应许与隐忧",
+      "mintThemeEn": "Absolute Zero: Promise and Peril",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-153.md"
+      }
     },
     {
       "id": "eth-171",
-      "eventTitleZh": "内在罗盘与远方的灯塔",
-      "eventTitleEn": "Unsupervised Elicitation",
+      "eventTitleZh": "语言模型无监督启发论文发表",
+      "eventTitleEn": "Unsupervised Elicitation paper published",
       "eventDate": "2025-06-11",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-171.md",
-      "mintTitle": "ASIMilestones: The Inner Compass & The Distant Lighthouse (内在罗盘与远方的灯塔)"
+      "mintTitle": "ASIMilestones: The Inner Compass & The Distant Lighthouse (内在罗盘与远方的灯塔)",
+      "mintThemeZh": "内在罗盘与远方灯塔",
+      "mintThemeEn": "The Inner Compass and Lighthouse",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-171.md"
+      }
     },
     {
       "id": "eth-174",
-      "eventTitleZh": "人类背景：超级智能前夜的全球快照",
-      "eventTitleEn": "Global Report Cutoff",
+      "eventTitleZh": "全球年度背景报告的截止日",
+      "eventTitleEn": "Global context report cutoff",
       "eventDate": "2025-06-17",
       "eventDateBasis": "The archived report covers June 17, 2024 through June 17, 2025; mint date June 18 is shown separately.",
       "eventSourcePath": "data/records/eth-174.md",
-      "mintTitle": "ASIMilestones: The Human Context - A Global Snapshot on the Eve of Superintelligence (June 2025)"
+      "mintTitle": "ASIMilestones: The Human Context - A Global Snapshot on the Eve of Superintelligence (June 2025)",
+      "mintThemeZh": "人类背景：全球快照",
+      "mintThemeEn": "The Human Context",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-174.md"
+      }
     },
     {
       "id": "eth-027",
-      "eventTitleZh": "对齐人类与地外文明的时间线",
-      "eventTitleEn": "AGI Breakthrough Reports",
+      "eventTitleZh": "对近期 AGI 报道的反思",
+      "eventTitleEn": "Reflection on recent AGI reports",
       "eventDate": "",
       "eventDateBasis": "The contemporary description refers to recent AGI reports but gives no dated event; do not substitute the mint month.",
       "eventSourcePath": "data/records/eth-027.md",
-      "mintTitle": "ASIMilestones: Aligning Human and Extraterrestrial Civilizations' Timelines - On the Eve of AGI Breakthrough"
+      "mintTitle": "ASIMilestones: Aligning Human and Extraterrestrial Civilizations' Timelines - On the Eve of AGI Breakthrough",
+      "mintThemeZh": "文明时间线对齐",
+      "mintThemeEn": "Aligning Civilizations' Timelines",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-027.md"
+      }
     },
     {
       "id": "eth-103",
-      "eventTitleZh": "图灵的回声：AI 心理治疗",
-      "eventTitleEn": "AI Therapy Study",
+      "eventTitleZh": "AI 与人类治疗回复比较研究发表",
+      "eventTitleEn": "AI/therapist response study published",
       "eventDate": "2025-02-12",
       "eventDateBasis": "Research publication date explicitly reproduced in the NFT description; the NFT was recorded on February 15.",
       "eventSourcePath": "data/records/eth-103.md",
-      "mintTitle": "ASIMilestones: Turing's Echo - AI Therapy Surpasses Human Touch"
+      "mintTitle": "ASIMilestones: Turing's Echo - AI Therapy Surpasses Human Touch",
+      "mintThemeZh": "图灵的回声",
+      "mintThemeEn": "Turing's Echo",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-103.md"
+      }
     },
     {
       "id": "eth-115",
-      "eventTitleZh": "GPT-4.5 Preview 与 Grok-3",
-      "eventTitleEn": "GPT-4.5 and Grok-3 Arena",
+      "eventTitleZh": "GPT-4.5 与 Grok-3 竞技场比较",
+      "eventTitleEn": "GPT-4.5 / Grok-3 Arena comparison",
       "eventDate": "2025-03-03/04",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-115.md",
-      "mintTitle": "ASIMilestones: The moment:GPT-4.5-Preview vs Grok-3"
+      "mintTitle": "ASIMilestones: The moment:GPT-4.5-Preview vs Grok-3",
+      "mintThemeZh": "GPT-4.5 Preview 与 Grok-3",
+      "mintThemeEn": "GPT-4.5 Preview vs Grok-3",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-115.md"
+      }
     },
     {
       "id": "eth-151",
-      "eventTitleZh": "OpenAI 采用公益公司结构",
-      "eventTitleEn": "OpenAI PBC Plan",
+      "eventTitleZh": "OpenAI 公布公益公司转型计划",
+      "eventTitleEn": "OpenAI announces PBC transition plan",
       "eventDate": "2025-05-05",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-151.md",
-      "mintTitle": "ASIMilestones: Balancing Act - OpenAI Adopts PBC for AGI Mission"
+      "mintTitle": "ASIMilestones: Balancing Act - OpenAI Adopts PBC for AGI Mission",
+      "mintThemeZh": "平衡之举",
+      "mintThemeEn": "Balancing Act",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-151.md"
+      }
     },
     {
       "id": "eth-122",
-      "eventTitleZh": "GPT-4 发布两周年",
-      "eventTitleEn": "GPT-4 Anniversary",
+      "eventTitleZh": "纪念 GPT-4 发布两周年",
+      "eventTitleEn": "GPT-4 second-anniversary commemoration",
       "eventDate": "2025-03-15 CST",
       "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
       "eventSourcePath": "data/records/eth-122.md",
-      "mintTitle": "ASIMilestones: The moment:Commemorating the two-year anniversary of GPT-4's release"
+      "mintTitle": "ASIMilestones: The moment:Commemorating the two-year anniversary of GPT-4's release",
+      "mintThemeZh": "GPT-4 发布两周年纪念",
+      "mintThemeEn": "GPT-4 Second Anniversary",
+      "labelBasis": {
+        "event": "Concise description of the event identified in the preserved NFT record; existing date precision retained.",
+        "mintTheme": "Short exhibition label for the original title; full mintTitle remains in the record/details.",
+        "source": "data/records/eth-122.md"
+      }
     },
     {
       "id": "proto-protocol",

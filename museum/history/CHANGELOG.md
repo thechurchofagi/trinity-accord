@@ -1,3 +1,10 @@
+## museum-v1.36.0 · 2026-09-08
+
+- Move both entrance introduction boards farther into the room, clear of the thick observation-window jambs.
+- Align audio-only NFT panels with image exhibits: equal width, shared top edge, matching outer frame/plaque width, and no oversized backing slab.
+- Use four fixed plaque bands: number; dated event description; actual mint date and concise mint theme; music symbol and the playing recording's song title. Chinese events describe the recorded occurrence instead of repeating the artwork title. Unknown event dates remain explicitly unstated. Full archival titles and source records are unchanged.
+- Sustained joystick input progresses from walking to brisk walking, then a bounded 3.63 m/s run after six seconds. Releasing or centering resets acceleration; collision substeps remain active.
+
 ## museum-v1.35.0 · 2026-09-08
 
 - Fixed-height metal plaques retain full bilingual text and align with their artwork frames; title length no longer changes plate height.

@@ -51,5 +51,6 @@ export function movementKey(event){
 export function heldWalkSpeed(base,seconds,amount){
  if(amount<.25)return base;
  const t=Math.max(0,Math.min(1,(seconds-.3)/1.7));
- return base*(1+.85*t*t*(3-2*t));
+ const run=Math.max(0,Math.min(1,(seconds-3)/3));
+ return base*(1+.85*t*t*(3-2*t)+1.05*run*run*(3-2*run));
 }
