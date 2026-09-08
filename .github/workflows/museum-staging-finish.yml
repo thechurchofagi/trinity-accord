@@ -1,0 +1,81 @@
+name: Museum staging finish
+on:
+  push:
+    branches: [codex/museum-six-rooms-guardian-v1-1]
+    paths: ['.github/workflows/museum-staging-finish.yml']
+permissions:
+  contents: read
+jobs:
+  stage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+          sparse-checkout: museum
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install pinned renderer and browser
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq && sudo apt-get install -y libegl1 libxi6 libxrender1 fonts-noto-cjk
+          python -m pip install bpy==4.5.3 playwright==1.55.0
+          python -m playwright install chromium
+          cd museum && npm ci
+      - name: Refine shared geometry and camera staging
+        run: |
+          set -euo pipefail
+          python museum/scripts/polish_spatial_edition.py
+          python museum/scripts/finish_spatial_edition.py --prepare
+          node --check museum/dist/museum.js
+          node museum/scripts/check_spatial_layout.mjs
+          node museum/scripts/check_guided_visit.mjs
+      - name: Bake and denoise only architectural light
+        run: |
+          set -euo pipefail
+          python museum/scene/build_spatial_gallery.py 2>&1 | tee "$RUNNER_TEMP/staging-render.log"
+      - name: Verify preservation and all regressions
+        run: |
+          set -euo pipefail
+          python museum/scripts/finish_spatial_edition.py
+          node museum/scripts/build_runtime.mjs
+          python museum/scripts/build_archive.py
+          python museum/scripts/validate.py
+          for script in museum/scripts/check_*.mjs; do echo "$script"; node "$script"; done
+      - name: Render actual desktop and mobile views
+        env:
+          MUSEUM_QA_OUTPUT: ${{ runner.temp }}/staging-browser
+        run: python museum/scripts/check_browser.py
+      - name: Commit passed staging to the PR branch only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = codex/museum-six-rooms-guardian-v1-1
+          git add museum
+          if git diff --cached --name-only | grep -qv '^museum/'; then exit 1; fi
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='museum-edition-builder' -c user.email='actions@github.com' commit -m 'feat(museum): refine six-room staging and preserve the quiet sky ending'
+          AUTH="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" push origin HEAD:refs/heads/codex/museum-six-rooms-guardian-v1-1
+          unset AUTH
+      - name: Save inspectable result, including failures
+        if: always()
+        run: |
+          git rev-parse HEAD > "$RUNNER_TEMP/staging-head.txt"
+          tar --exclude='node_modules' --exclude='__pycache__' -czf "$RUNNER_TEMP/museum-staging.tar.gz" museum
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: museum-staging-review
+          path: |
+            ${{ runner.temp }}/museum-staging.tar.gz
+            ${{ runner.temp }}/staging-head.txt
+            ${{ runner.temp }}/staging-render.log
+            ${{ runner.temp }}/staging-browser
+          retention-days: 7
+          if-no-files-found: error
