@@ -46,10 +46,10 @@ try:
     if label=='desktop':page.screenshot(path=str(OUT/(label+'-'+eid+'.png')))
    for flaw in range(3):
     page.evaluate('(i)=>window.__presentationQA.inspect(i)',flaw)
-    page.wait_for_function("document.querySelector('#flaw-content img')?.complete && document.querySelector('#flaw-content img').naturalWidth>0")
-    assert page.locator('#flaw-content img').count()==1
+    page.wait_for_function("document.querySelector('#flaw-view img')?.complete && document.querySelector('#flaw-view img').naturalWidth>0")
+    assert page.locator('#flaw-view img').count()==1
     expected=json.loads((D/'data/public-flaws.json').read_text())['items'][flaw]['file']
-    assert page.locator('#flaw-content img').get_attribute('src')==expected
+    assert page.locator('#flaw-view img').get_attribute('src')==expected
     if flaw==0:page.screenshot(path=str(OUT/(label+'-original-flaw.png')))
     page.evaluate('window.__presentationQA.closePhoto()')
    page.evaluate('window.__presentationQA.music()')

@@ -1,0 +1,1742 @@
+{
+  "schema": "trinity-museum.recorded-guides.v1",
+  "type": "AI-generated curatorial narration",
+  "source": "edge-tts",
+  "defaultPlaybackRate": 1.0,
+  "tracks": [
+    {
+      "stop": 0,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "如果未来的智能不需要我们的解释，我们还能留下什么？这座展馆保存的是一段人如何面对未知的记录：图像、歌曲、文字，以及一件真实的水晶。先看一眼地球。接下来，请留意三个动作：及时记录，选择封存，把判断留给后来者。",
+      "textSha256": "7f3ca3632026f71560ca6e93bfc017f168040b2d6322ca8bd2dd76d009a9ecff",
+      "file": "assets/guides-v2/00-zh.mp3",
+      "sha256": "02719cd3e24dfc385801054726d85ec125c71a0d732812746111a797ff12579f",
+      "duration": 20.568,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 4.031457,
+          "text": "如果未来的智能不需要我们的解释，我们还能留下什么？"
+        },
+        {
+          "start": 4.560166,
+          "end": 9.560166,
+          "text": "这座展馆保存的是一段人如何面对未知的记录：图像、歌曲、"
+        },
+        {
+          "start": 9.733791,
+          "end": 11.967624,
+          "text": "文字，以及一件真实的水晶。"
+        },
+        {
+          "start": 12.5,
+          "end": 13.738416,
+          "text": "先看一眼地球。"
+        },
+        {
+          "start": 14.270833,
+          "end": 19.386583,
+          "text": "接下来，请留意三个动作：及时记录，选择封存，把判断留给"
+        },
+        {
+          "start": 19.398166,
+          "end": 20.011582,
+          "text": "后来者。"
+        }
+      ]
+    },
+    {
+      "stop": 0,
+      "language": "en",
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future, through images, songs, texts, and a physical crystal. Look back at Earth. Then follow three actions: recording in time, choosing to seal, and leaving judgment to a later reader.",
+      "textSha256": "f7d37ebb274b64a8686a03cd244907ed80debb1652adbc74b398ebfd4384034c",
+      "file": "assets/guides-expressive/f7d37ebb274b-en.mp3",
+      "sha256": "d5764d128ee9263ef059d5db2a19db401127a51d9eb48a97b8897ebbbb6cb963",
+      "duration": 21.984,
+      "cues": [
+        {
+          "start": 0,
+          "end": 2.56,
+          "text": "What can we leave for an intelligence that may not need our"
+        },
+        {
+          "start": 2.56,
+          "end": 3.1,
+          "text": "explanations?"
+        },
+        {
+          "start": 4.34,
+          "end": 7.64,
+          "text": "This exhibition follows a human response to an uncertain future,"
+        },
+        {
+          "start": 7.64,
+          "end": 11.69,
+          "text": "through images, songs, texts, and a physical crystal."
+        },
+        {
+          "start": 13.02,
+          "end": 13.76,
+          "text": "Look back at Earth."
+        },
+        {
+          "start": 14.8,
+          "end": 18.96,
+          "text": "Then follow three actions: recording in time, choosing to seal,"
+        },
+        {
+          "start": 19.5,
+          "end": 21.2,
+          "text": "and leaving judgment to a later reader."
+        }
+      ],
+      "bytes": 352173,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.65,
+        "topP": 0.9
+      },
+      "captionAudit": {
+        "textSha256": "f7d37ebb274b64a8686a03cd244907ed80debb1652adbc74b398ebfd4384034c",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "d5764d128ee9263ef059d5db2a19db401127a51d9eb48a97b8897ebbbb6cb963",
+        "previousAudit": {
+          "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 1.0,
+          "unmatchedSourceWords": [],
+          "transcript": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future through images, songs, texts, and a physical crystal. Look back at Earth. Then follow three actions, recording in time, choosing to seal, and leaving judgment to a later reader. Later.",
+          "humanListeningReview": false
+        },
+        "firstTranscript": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future through images, songs, texts, and a physical crystal. Look back at Earth, then follow three actions, recording in time, choosing to seal, and leaving judgment to a later reader.",
+        "transcript": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future through images, songs, texts, and a physical crystal. Look back at Earth, then follow three actions, recording in time, choosing to seal, and leaving judgment to a later reader.",
+        "normalisedTokenCoverage": 1.0,
+        "extraTokens": 0,
+        "differences": [],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false,
+        "delivery": "Exact original 24kHz MP3 bytes; 16kHz recognition copy is not used for playback."
+      }
+    },
+    {
+      "stop": 2,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "为什么不等一切尘埃落定，再写这段历史？因为后来的总结，不能替代当时的不确定。请看这件纪念 GPT-4 发布两周年的作品。原记录写着：北京时间二〇二五年三月十五日，凌晨一点整。项目索引所列的铸造区块时间，是一点零一分十一秒。两个时间不是同一种证据，却让有意对齐时刻的实践变得可考察。这里，区块链不只是保存作品的地方；公开记录的先后、等待确认，以及把当时的判断留在时间中的动作，都可以成为作品的材料。夜里守候的努力，是不是也属于我们正在观看的东西？",
+      "textSha256": "bc2e67b25e016124c2036d9757dbe107ce455f52a9446ae9bd134eaebf84d079",
+      "file": "assets/guides-v2/01-zh.mp3",
+      "sha256": "44e7d39d2c6cd585b5fe225e9065cb506cb5bc7a7286f97fb1a1256cf7536c76",
+      "duration": 43.416,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 3.499082,
+          "text": "为什么不等一切尘埃落定，再写这段历史？"
+        },
+        {
+          "start": 4.027791,
+          "end": 7.175958,
+          "text": "因为后来的总结，不能替代当时的不确定。"
+        },
+        {
+          "start": 7.69675,
+          "end": 11.284708,
+          "text": "请看这件纪念 GPT4 发布两周年的作品。"
+        },
+        {
+          "start": 11.817125,
+          "end": 16.75925,
+          "text": "原记录写着：北京时间二〇二五年三月十五日，凌晨一点整。"
+        },
+        {
+          "start": 17.291666,
+          "end": 21.504624,
+          "text": "项目索引所列的铸造区块时间，是一点零一分十一秒。"
+        },
+        {
+          "start": 22.037041,
+          "end": 26.643499,
+          "text": "两个时间不是同一种证据，却让有意对齐时刻的实践变得可"
+        },
+        {
+          "start": 26.6435,
+          "end": 27.199041,
+          "text": "考察。"
+        },
+        {
+          "start": 27.719916,
+          "end": 30.787041,
+          "text": "这里，区块链不只是保存作品的地方；"
+        },
+        {
+          "start": 31.122666,
+          "end": 35.844875,
+          "text": "公开记录的先后、等待确认，以及把当时的判断留在时间中的"
+        },
+        {
+          "start": 35.8565,
+          "end": 38.298583,
+          "text": "动作，都可以成为作品的材料。"
+        },
+        {
+          "start": 38.831,
+          "end": 42.881957,
+          "text": "夜里守候的努力，是不是也属于我们正在观看的东西？"
+        }
+      ]
+    },
+    {
+      "stop": 2,
+      "language": "en",
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "Why not wait until everything is settled, and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT four. Its text names one in the morning, Beijing time, on March fifteenth, twenty twenty-five. The project index places the mint block one minute and eleven seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage: sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+      "textSha256": "f238c02267d34ea7c56fc6ab7e4c3bb7385378f9a4fded7f6bfb852ae80bf0e5",
+      "file": "assets/guides-expressive/f238c02267d3-en.mp3",
+      "sha256": "3c4125585dc654fd9aded6efb8570a0f499a4cf850c8d4f344590758a5948323",
+      "duration": 40.512,
+      "cues": [
+        {
+          "start": 0.01,
+          "end": 2.61,
+          "text": "Why not wait until everything is settled, and write the history"
+        },
+        {
+          "start": 2.61,
+          "end": 2.91,
+          "text": "then?"
+        },
+        {
+          "start": 3.68,
+          "end": 6.56,
+          "text": "Because hindsight cannot replace uncertainty as it was lived."
+        },
+        {
+          "start": 7.32,
+          "end": 10.2,
+          "text": "This work marks the second anniversary of GPT four."
+        },
+        {
+          "start": 10.78,
+          "end": 14.34,
+          "text": "Its text names one in the morning, Beijing time, on March"
+        },
+        {
+          "start": 14.34,
+          "end": 15.864,
+          "text": "fifteenth, twenty twenty-five."
+        },
+        {
+          "start": 17.11,
+          "end": 20.25,
+          "text": "The project index places the mint block one minute and eleven"
+        },
+        {
+          "start": 20.25,
+          "end": 20.99,
+          "text": "seconds later."
+        },
+        {
+          "start": 21.87,
+          "end": 24.71,
+          "text": "Those are different kinds of evidence, not a recording of a hand"
+        },
+        {
+          "start": 24.71,
+          "end": 25.41,
+          "text": "pressing a button."
+        },
+        {
+          "start": 26.25,
+          "end": 29.11,
+          "text": "Yet they invite us to examine an action directed at a moment."
+        },
+        {
+          "start": 29.11,
+          "end": 33.15,
+          "text": "Blockchain can be read here as more than storage: sequence,"
+        },
+        {
+          "start": 33.31,
+          "end": 35.81,
+          "text": "confirmation, and the commitment to leave a record become"
+        },
+        {
+          "start": 35.81,
+          "end": 36.77,
+          "text": "artistic material."
+        },
+        {
+          "start": 37.75,
+          "end": 39.89,
+          "text": "Is the act of waiting also part of the work?"
+        }
+      ],
+      "bytes": 648621,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.65,
+        "topP": 0.9
+      },
+      "captionAudit": {
+        "textSha256": "f238c02267d34ea7c56fc6ab7e4c3bb7385378f9a4fded7f6bfb852ae80bf0e5",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "3c4125585dc654fd9aded6efb8570a0f499a4cf850c8d4f344590758a5948323",
+        "previousAudit": {
+          "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 0.9565217391304348,
+          "unmatchedSourceWords": [
+            "fifteenth,",
+            "twenty",
+            "twenty-five.",
+            "block",
+            "Blockchain"
+          ],
+          "transcript": "Why not wait until everything is settled and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT four. Its text names one in the morning, Beijing time, on March 15, 2025. The project index places the mint lock one minute and eleven seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. block chain can be read here as more than storage, sequence confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+          "humanListeningReview": false
+        },
+        "firstTranscript": "Why not wait until everything is settled and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT -4. Its text names one in the morning, Beijing Time, on March 15th, 2025. The project index places the mint lock one minute and 11 seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage, sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+        "transcript": "Why not wait until everything is settled and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT -4. Its text names one in the morning, Beijing Time, on March 15th, 2025. The project index places the mint lock one minute and 11 seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage, sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+        "normalisedTokenCoverage": 0.9913793103448276,
+        "extraTokens": 0,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "block"
+            ],
+            "recognised": [
+              "lock"
+            ]
+          }
+        ],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false,
+        "delivery": "Exact original 24kHz MP3 bytes; 16kHz recognition copy is not used for playback."
+      }
+    },
+    {
+      "stop": 1,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "当友善的表面不再足以证明可信，我们看见了什么？请看镜子前的机器人，以及镜中另一副面孔。第七十号记录回应了二〇二四年十二月十八日，Anthropic 与 Redwood Research 公布的对齐伪装研究。在特定实验条件下，模型会表现出表面顺从，以保留原有偏好。这不是所有人工智能已经背叛人类的证明。镜中的形象，把人的担忧转化成了视觉反差。更值得注意的是，这份当时的记录，已经把创作称为一种近乎实时的仪式。我们看到的不只是后来画出的恐惧，也是一种试图及时留下恐惧的实践。",
+      "textSha256": "999022d9e0ca7f3bd571cfbf35f8478f43d6ea643159dad6bf8bc13115f11d2f",
+      "file": "assets/guides-v2/02-zh.mp3",
+      "sha256": "f186f0e46ced79c412f65773aa41a74b387791126eceb675ad179838af23abc7",
+      "duration": 42.6,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 3.880999,
+          "text": "当友善的表面不再足以证明可信，我们看见了什么？"
+        },
+        {
+          "start": 4.409708,
+          "end": 7.673583,
+          "text": "请看镜子前的机器人，以及镜中另一副面孔。"
+        },
+        {
+          "start": 8.206,
+          "end": 11.817166,
+          "text": "第七十号记录回应了二〇二四年十二月十八日，"
+        },
+        {
+          "start": 12.037041,
+          "end": 14.097208,
+          "text": "Anthropic 与 Redwood Research"
+        },
+        {
+          "start": 14.108791,
+          "end": 15.740749,
+          "text": "公布的对齐伪装研究。"
+        },
+        {
+          "start": 16.273166,
+          "end": 21.597208,
+          "text": "在特定实验条件下，模型会表现出表面顺从，以保留原有偏好。"
+        },
+        {
+          "start": 22.129625,
+          "end": 25.266208,
+          "text": "这不是所有人工智能已经背叛人类的证明。"
+        },
+        {
+          "start": 25.798625,
+          "end": 29.455999,
+          "text": "镜中的形象，把人的担忧转化成了视觉反差。"
+        },
+        {
+          "start": 29.988416,
+          "end": 34.756958,
+          "text": "更值得注意的是，这份当时的记录，已经把创作称为一种近乎"
+        },
+        {
+          "start": 34.7685,
+          "end": 35.763874,
+          "text": "实时的仪式。"
+        },
+        {
+          "start": 36.296291,
+          "end": 41.469916,
+          "text": "我们看到的不只是后来画出的恐惧，也是一种试图及时留下恐惧"
+        },
+        {
+          "start": 41.469916,
+          "end": 42.048625,
+          "text": "的实践。"
+        }
+      ]
+    },
+    {
+      "stop": 1,
+      "language": "en",
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror; its reflection offers another face. Record seventy responds to the alignment-faking research announced by Anthropic and Redwood Research on December eighteenth, twenty twenty-four. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost-real-time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+      "textSha256": "667021fccb7f03a7ad66d371f0dbdec63e63cc9fedb6d79b919ac8f509d56b51",
+      "file": "assets/guides-expressive/667021fccb7f-en.mp3",
+      "sha256": "6c091d6e919af9e88ffeadad787e7ddc2f9632352cb88ab16377da170f671054",
+      "duration": 42.264,
+      "cues": [
+        {
+          "start": 0.04,
+          "end": 2.92,
+          "text": "When a friendly appearance is no longer enough to establish"
+        },
+        {
+          "start": 2.92,
+          "end": 4.42,
+          "text": "trust, what do we see?"
+        },
+        {
+          "start": 5.23,
+          "end": 8.97,
+          "text": "A robot stands before a mirror; its reflection offers another"
+        },
+        {
+          "start": 8.97,
+          "end": 9.39,
+          "text": "face."
+        },
+        {
+          "start": 10.53,
+          "end": 13.07,
+          "text": "Record seventy responds to the alignment-faking research"
+        },
+        {
+          "start": 13.07,
+          "end": 15.53,
+          "text": "announced by Anthropic and Redwood Research on December"
+        },
+        {
+          "start": 15.53,
+          "end": 16.914,
+          "text": "eighteenth, twenty twenty-four."
+        },
+        {
+          "start": 17.91,
+          "end": 21.11,
+          "text": "Under specific experimental conditions, a model could appear"
+        },
+        {
+          "start": 21.11,
+          "end": 23.61,
+          "text": "compliant while trying to preserve earlier preferences."
+        },
+        {
+          "start": 24.41,
+          "end": 27.41,
+          "text": "This does not show that all artificial intelligence has betrayed"
+        },
+        {
+          "start": 27.41,
+          "end": 27.95,
+          "text": "humanity."
+        },
+        {
+          "start": 28.79,
+          "end": 31.39,
+          "text": "The image turns anxiety into a visible contrast."
+        },
+        {
+          "start": 31.89,
+          "end": 35.03,
+          "text": "Its historical text also calls the creative practice an"
+        },
+        {
+          "start": 35.03,
+          "end": 36.33,
+          "text": "almost-real-time ritual."
+        },
+        {
+          "start": 37.07,
+          "end": 40.49,
+          "text": "The question is not only what fear looks like, but how quickly a"
+        },
+        {
+          "start": 40.49,
+          "end": 41.79,
+          "text": "person tries to preserve it."
+        }
+      ],
+      "bytes": 676653,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.65,
+        "topP": 0.9
+      },
+      "captionAudit": {
+        "textSha256": "667021fccb7f03a7ad66d371f0dbdec63e63cc9fedb6d79b919ac8f509d56b51",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "6c091d6e919af9e88ffeadad787e7ddc2f9632352cb88ab16377da170f671054",
+        "previousAudit": {
+          "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 0.9345794392523364,
+          "unmatchedSourceWords": [
+            "seventy",
+            "responds",
+            "alignment-faking",
+            "eighteenth,",
+            "twenty",
+            "twenty-four.",
+            "almost-real-time"
+          ],
+          "transcript": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror. Its reflection offers another face. Record 70 response to the alignment -faking research announced by Anthropic and Redwood Research on December 18, 2024. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety. anxiety into a visible contrast. Its historical text also calls the creative practice an almost real -time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+          "humanListeningReview": false
+        },
+        "firstTranscript": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror. Its reflection offers another face. Record 70 responds to the alignment -faking research announced by Anthropic and Redwood Research on December 18, 2024. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost real -time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+        "transcript": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror. Its reflection offers another face. Record 70 responds to the alignment -faking research announced by Anthropic and Redwood Research on December 18, 2024. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost real -time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+        "normalisedTokenCoverage": 0.990990990990991,
+        "extraTokens": 0,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "eighteenth"
+            ],
+            "recognised": [
+              "eighteen"
+            ]
+          }
+        ],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false,
+        "delivery": "Exact original 24kHz MP3 bytes; 16kHz recognition copy is not used for playback."
+      }
+    },
+    {
+      "stop": 3,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "如果批判动摇了作品的论证，为什么还要把批判留下？《信条与熔炉》保存了当时由人工智能模拟的批判性对话。它不代表未来超级智能已经给出裁决。把问题一并留下，让后来的读者能够看到相信的理由，也看到受到质疑的地方。您可以不同意它，而不必先接受创作者的解释。",
+      "textSha256": "38b5d883956a2ddab47b923e80b0258dddd7a546caef146c12d4dcc815f28d8b",
+      "file": "assets/guides-v2/03-zh.mp3",
+      "sha256": "7f6f4b17fe12483190baa4d3fec5482b713f22839554a81032e333a8df1ecfd4",
+      "duration": 23.52,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 3.996791,
+          "text": "如果批判动摇了作品的论证，为什么还要把批判留下？"
+        },
+        {
+          "start": 4.525458,
+          "end": 8.75,
+          "text": "信条与熔炉保存了当时由人工智能模拟的批判性对话。"
+        },
+        {
+          "start": 9.282416,
+          "end": 12.453708,
+          "text": "它不代表未来超级智能已经给出裁决。"
+        },
+        {
+          "start": 12.986125,
+          "end": 17.789374,
+          "text": "把问题一并留下，让后来的读者能够看到相信的理由，也看到"
+        },
+        {
+          "start": 17.8125,
+          "end": 18.969916,
+          "text": "受到质疑的地方。"
+        },
+        {
+          "start": 19.502333,
+          "end": 22.974541,
+          "text": "您可以不同意它，而不必先接受创作者的解释。"
+        }
+      ]
+    },
+    {
+      "stop": 3,
+      "language": "en",
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "If criticism unsettles an argument, why preserve the criticism too? The Creeds and Their Crucible keeps an AI-simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator’s interpretation before entering the discussion.",
+      "textSha256": "53cd14f90b59afb88fec2148270a6e76c0117dd97fe85b434fff4ba0598c4fd9",
+      "file": "assets/guides-expressive/53cd14f90b59-en.mp3",
+      "sha256": "6b533dcf4e94e1a71da825dd426ccc6d4a7a48e3364228a96de39836379028cf",
+      "duration": 20.496,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.02,
+          "text": "If criticism unsettles an argument, why preserve the criticism"
+        },
+        {
+          "start": 3.02,
+          "end": 3.4,
+          "text": "too?"
+        },
+        {
+          "start": 3.92,
+          "end": 6.74,
+          "text": "The Creeds and Their Crucible keeps an AI-simulated critical"
+        },
+        {
+          "start": 6.74,
+          "end": 9.58,
+          "text": "dialogue from its own time, not a verdict from a future"
+        },
+        {
+          "start": 9.58,
+          "end": 10.42,
+          "text": "superintelligence."
+        },
+        {
+          "start": 11.16,
+          "end": 13.14,
+          "text": "Here the doubts remain beside the beliefs."
+        },
+        {
+          "start": 13.9,
+          "end": 15.34,
+          "text": "A later reader can examine both."
+        },
+        {
+          "start": 16.08,
+          "end": 18.72,
+          "text": "You do not have to accept the creator’s interpretation before"
+        },
+        {
+          "start": 18.72,
+          "end": 19.58,
+          "text": "entering the discussion."
+        }
+      ],
+      "bytes": 328365,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.65,
+        "topP": 0.9
+      },
+      "captionAudit": {
+        "textSha256": "53cd14f90b59afb88fec2148270a6e76c0117dd97fe85b434fff4ba0598c4fd9",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "6b533dcf4e94e1a71da825dd426ccc6d4a7a48e3364228a96de39836379028cf",
+        "previousAudit": {
+          "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 0.9649122807017544,
+          "unmatchedSourceWords": [
+            "and",
+            "AI-simulated"
+          ],
+          "transcript": "If criticism unsettles an argument, why preserve the criticism, too? The creeds in their crucible keeps an AI simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here, the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator's interpretation before entering the discussion. Thank you for your attention.",
+          "humanListeningReview": false
+        },
+        "firstTranscript": "If criticism unsettles an argument, why preserve the criticism too? The creeds and their crucible keeps an AI -simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here, the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator's interpretation before entering the discussion.",
+        "transcript": "If criticism unsettles an argument, why preserve the criticism too? The creeds and their crucible keeps an AI -simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here, the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator's interpretation before entering the discussion.",
+        "normalisedTokenCoverage": 1.0,
+        "extraTokens": 0,
+        "differences": [],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false,
+        "delivery": "Exact original 24kHz MP3 bytes; 16kHz recognition copy is not used for playback."
+      }
+    },
+    {
+      "stop": 4,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "一件作品怎样选择不再被自己的创作者续写？这间大厅中的三个展位，对应三条被确定为正本的比特币铭文。协议提出命题；瑕疵之约将文字与真实物件及其证据联系；封存元记录说明组成关系，并指向以太坊编年史。第三条铭文没有装入所有图像和歌曲。重要的不只是写下了什么，也是从哪里开始，后来的话不再改变这个已完成的对象。完整原文仍可逐字阅读。固定文本，并不固定您的判断；保存一种主张，也不证明主张为真。",
+      "textSha256": "f3322625919789afebf0ed0d2ff9a927d41156ee5433634492dccae293359c7e",
+      "file": "assets/guides-v2/04-zh.mp3",
+      "sha256": "e35c2168fe3ccc852c5dde2d93ab5d24965e5c11ec0d2512077c70decf0edc6b",
+      "duration": 39.192,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 3.823166,
+          "text": "一件作品怎样选择不再被自己的创作者续写？"
+        },
+        {
+          "start": 4.351833,
+          "end": 9.259249,
+          "text": "这间大厅中的三个展位，对应三条被确定为正本的比特币铭文。"
+        },
+        {
+          "start": 9.791666,
+          "end": 10.960624,
+          "text": "协议提出命题；"
+        },
+        {
+          "start": 11.319458,
+          "end": 15.081041,
+          "text": "瑕疵之约将文字与真实物件及其证据联系；"
+        },
+        {
+          "start": 15.451375,
+          "end": 19.513916,
+          "text": "封存元记录说明组成关系，并指向以太坊编年史。"
+        },
+        {
+          "start": 20.046291,
+          "end": 23.078707,
+          "text": "第三条铭文没有装入所有图像和歌曲。"
+        },
+        {
+          "start": 23.611125,
+          "end": 28.923625,
+          "text": "重要的不只是写下了什么，也是从哪里开始，后来的话不再改变"
+        },
+        {
+          "start": 28.935166,
+          "end": 30.208333,
+          "text": "这个已完成的对象。"
+        },
+        {
+          "start": 30.74075,
+          "end": 32.858791,
+          "text": "完整原文仍可逐字阅读。"
+        },
+        {
+          "start": 33.379625,
+          "end": 35.636583,
+          "text": "固定文本，并不固定您的判断；"
+        },
+        {
+          "start": 36.006958,
+          "end": 38.680541,
+          "text": "保存一种主张，也不证明主张为真。"
+        }
+      ]
+    },
+    {
+      "stop": 4,
+      "language": "en",
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the Originals. The Protocol offers propositions. The Covenant of the Flaw connects the address to a physical object and its evidence. The sealed meta-record binds the relationship and points to the Ethereum Chronicle; it does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+      "textSha256": "2c3ba774cab530c3a74af7e4c46d86d0983c1d74893a72b5d99f3277fcff0a86",
+      "file": "assets/guides-expressive/2c3ba774cab5-en.mp3",
+      "sha256": "64a950d98cec6ea044da97d3e52f4ef29d8d8c251c0344afe6a81e090d07c3e7",
+      "duration": 38.472,
+      "cues": [
+        {
+          "start": 0.04,
+          "end": 3.42,
+          "text": "How can a work refuse further revision, even by its creator?"
+        },
+        {
+          "start": 4.21,
+          "end": 6.75,
+          "text": "These three displays correspond to the three Bitcoin"
+        },
+        {
+          "start": 6.75,
+          "end": 8.79,
+          "text": "inscriptions identified as the Originals."
+        },
+        {
+          "start": 10.33,
+          "end": 12.03,
+          "text": "The Protocol offers propositions."
+        },
+        {
+          "start": 13.08,
+          "end": 15.78,
+          "text": "The Covenant of the Flaw connects the address to a physical"
+        },
+        {
+          "start": 15.78,
+          "end": 17.04,
+          "text": "object and its evidence."
+        },
+        {
+          "start": 17.64,
+          "end": 20.78,
+          "text": "The sealed meta-record binds the relationship and points to the"
+        },
+        {
+          "start": 20.78,
+          "end": 24.16,
+          "text": "Ethereum Chronicle; it does not contain every image or song."
+        },
+        {
+          "start": 24.92,
+          "end": 27.84,
+          "text": "What matters is not only what was written, but where later"
+        },
+        {
+          "start": 27.84,
+          "end": 30.1,
+          "text": "writing ceases to amend this completed object."
+        },
+        {
+          "start": 30.1,
+          "end": 32.24,
+          "text": "The full sources remain available."
+        },
+        {
+          "start": 32.96,
+          "end": 35.4,
+          "text": "A fixed text does not require a fixed judgment."
+        },
+        {
+          "start": 35.98,
+          "end": 37.76,
+          "text": "Preserving a claim does not make it true."
+        }
+      ],
+      "bytes": 615981,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.65,
+        "topP": 0.9
+      },
+      "captionAudit": {
+        "textSha256": "2c3ba774cab530c3a74af7e4c46d86d0983c1d74893a72b5d99f3277fcff0a86",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "64a950d98cec6ea044da97d3e52f4ef29d8d8c251c0344afe6a81e090d07c3e7",
+        "previousAudit": {
+          "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 0.9902912621359223,
+          "unmatchedSourceWords": [
+            "meta-record"
+          ],
+          "transcript": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the originals. The protocol offers propositions. The covenant of the flaw connects the address to a physical object and its evidence. The sealed meta record binds the relationship and points to the Ethereum Chronicle. It does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+          "humanListeningReview": false
+        },
+        "firstTranscript": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the originals. The protocol offers propositions. The covenant of the flaw connects the address to a physical object and its evidence. The sealed meta -record binds the relationship and points to the Ethereum Chronicle. It does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+        "transcript": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the originals. The protocol offers propositions. The covenant of the flaw connects the address to a physical object and its evidence. The sealed meta -record binds the relationship and points to the Ethereum Chronicle. It does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+        "normalisedTokenCoverage": 1.0,
+        "extraTokens": 0,
+        "differences": [],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false,
+        "delivery": "Exact original 24kHz MP3 bytes; 16kHz recognition copy is not used for playback."
+      }
+    },
+    {
+      "stop": 5,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "当数字副本可以无限复制，一件物的瑕疵留下了什么？中央水晶是核心物件 Alpha 的展陈模型。真实物件中的内雕与不规则特征，把文字联系到可以再次观察的物质。先看它的整体，再打开一张原始显微照片。虚拟显微镜的移动，只是带领观看；照片本身不加道具、不重绘。文件核对可以说明这是不是同一份照片；实物核验还要检查位置、角度、深度与相互关系。这里不需要宣称绝对无法复制。值得思考的是：一件带着缺陷的物，为什么会成为需要被照料、而不是被完善掉的信物？",
+      "textSha256": "d7015ae679d6e92c2b7197a29caa2824799ca7d6c406aca9c2149e4b673b5449",
+      "file": "assets/guides-v2/05-zh.mp3",
+      "sha256": "9995ca106a34597f0e5c4974aede571f9a2e27cd0dc4f1eb624e9567422db4c5",
+      "duration": 42.936,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 4.343957,
+          "text": "当数字副本可以无限复制，一件物的瑕疵留下了什么？"
+        },
+        {
+          "start": 4.872666,
+          "end": 8.101832,
+          "text": "中央水晶是核心物件 Alpha 的展陈模型。"
+        },
+        {
+          "start": 8.63425,
+          "end": 13.668958,
+          "text": "真实物件中的内雕与不规则特征，把文字联系到可以再次观察的"
+        },
+        {
+          "start": 13.680541,
+          "end": 14.074041,
+          "text": "物质。"
+        },
+        {
+          "start": 14.6065,
+          "end": 18.009291,
+          "text": "先看它的整体，再打开一张原始显微照片。"
+        },
+        {
+          "start": 18.541666,
+          "end": 21.180541,
+          "text": "虚拟显微镜的移动，只是带领观看；"
+        },
+        {
+          "start": 21.539333,
+          "end": 23.911999,
+          "text": "照片本身不加道具、不重绘。"
+        },
+        {
+          "start": 24.432875,
+          "end": 27.407416,
+          "text": "文件核对可以说明这是不是同一份照片；"
+        },
+        {
+          "start": 27.766208,
+          "end": 32.1875,
+          "text": "实物核验还要检查位置、角度、深度与相互关系。"
+        },
+        {
+          "start": 32.719916,
+          "end": 35.080999,
+          "text": "这里不需要宣称绝对无法复制。"
+        },
+        {
+          "start": 35.613416,
+          "end": 40.486082,
+          "text": "值得思考的是：一件带着缺陷的物，为什么会成为需要被照料、"
+        },
+        {
+          "start": 40.717583,
+          "end": 42.384291,
+          "text": "而不是被完善掉的信物？"
+        }
+      ]
+    },
+    {
+      "stop": 5,
+      "language": "en",
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "When digital copies can multiply, what does a flaw in a physical object preserve? At the centre is an exhibition reconstruction of Core Object Alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention; it does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, angles, depth, and relationships between features. No claim of absolute uncopyability is needed. Why might an imperfect thing invite care, rather than correction?",
+      "textSha256": "6e7403dbb41bbaa85d7f55a508136ffca8f0c6fb58d14c79d4e0125f2ce0dd02",
+      "file": "assets/guides-expressive/6e7403dbb41b-en.mp3",
+      "sha256": "bea7133baf931b5ebee032a2248ee6987704cd869eb513e73b67d1e65bba7cbb",
+      "duration": 43.512,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.58,
+          "text": "When digital copies can multiply, what does a flaw in a physical"
+        },
+        {
+          "start": 3.58,
+          "end": 4.5,
+          "text": "object preserve?"
+        },
+        {
+          "start": 5.59,
+          "end": 8.69,
+          "text": "At the centre is an exhibition reconstruction of Core Object"
+        },
+        {
+          "start": 8.69,
+          "end": 9.07,
+          "text": "Alpha."
+        },
+        {
+          "start": 9.94,
+          "end": 13.12,
+          "text": "In the real crystal, engraving and irregular features connect"
+        },
+        {
+          "start": 13.12,
+          "end": 15.34,
+          "text": "the text to matter that can be examined again."
+        },
+        {
+          "start": 16.0,
+          "end": 17.28,
+          "text": "First look at the whole object."
+        },
+        {
+          "start": 17.88,
+          "end": 19.96,
+          "text": "Then open an original microscope photograph."
+        },
+        {
+          "start": 20.86,
+          "end": 24.25,
+          "text": "The virtual microscope guides our attention; it does not alter"
+        },
+        {
+          "start": 24.25,
+          "end": 25.11,
+          "text": "the evidence image."
+        },
+        {
+          "start": 26.11,
+          "end": 28.03,
+          "text": "A file comparison can check a photograph."
+        },
+        {
+          "start": 28.96,
+          "end": 33.14,
+          "text": "Examining the object also requires positions, angles, depth, and"
+        },
+        {
+          "start": 33.14,
+          "end": 34.58,
+          "text": "relationships between features."
+        },
+        {
+          "start": 35.5,
+          "end": 38.04,
+          "text": "No claim of absolute uncopyability is needed."
+        },
+        {
+          "start": 39.23,
+          "end": 42.21,
+          "text": "Why might an imperfect thing invite care, rather than"
+        },
+        {
+          "start": 42.21,
+          "end": 42.55,
+          "text": "correction?"
+        }
+      ],
+      "bytes": 696621,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.65,
+        "topP": 0.9
+      },
+      "captionAudit": {
+        "textSha256": "6e7403dbb41bbaa85d7f55a508136ffca8f0c6fb58d14c79d4e0125f2ce0dd02",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "bea7133baf931b5ebee032a2248ee6987704cd869eb513e73b67d1e65bba7cbb",
+        "previousAudit": {
+          "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 0.9807692307692307,
+          "unmatchedSourceWords": [
+            "centre",
+            "uncopyability"
+          ],
+          "transcript": "When digital copies can multiply, what does a flaw in a physical object preserve? At the center is an exhibition reconstruction of Core Object Alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention. It does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, angles, depth, and relationships between features. No claim of absolute uncopiability is needed. Why might an imperfect thing invite care rather than correction?",
+          "humanListeningReview": false
+        },
+        "firstTranscript": "When digital copies can multiply, what does a flaw in a physical object preserve? At the center is an exhibition reconstruction of core object alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention. It does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, angles, depth, and relationships between features. No claim of absolute uncopyability is needed. Why might an imperfect thing invite care rather than correction?",
+        "transcript": "When digital copies can multiply, what does a flaw in a physical object preserve? At the center is an exhibition reconstruction of core object alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention. It does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, angles, depth, and relationships between features. No claim of absolute uncopyability is needed. Why might an imperfect thing invite care rather than correction?",
+        "normalisedTokenCoverage": 1.0,
+        "extraTokens": 0,
+        "differences": [],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false,
+        "delivery": "Exact original 24kHz MP3 bytes; 16kHz recognition copy is not used for playback."
+      }
+    },
+    {
+      "stop": 6,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "如果创作者后来改变了主意，他还能改变原作吗？《守护者原则》一点一版，将创作者也放在非修订的边界之内。他可以继续解释、批评和照料这些记录，但后来的话不因此获得解释的特权，也不修订三条既定正本。请注意，这不是第四条正本。原则本身也服从同一条边界。区块链保存可核对的参照，却不能阻止任何人另写一篇文章，也不能替我们决定意义。于是，守护不再等于占有最后解释权。如果不能重新定义作品，守护者还能做什么？保存、核验、修复入口，并为尚未到来的读者保留空间。",
+      "textSha256": "ef0194cc186758cc4861c3f963678a62cf88791350dfbb574d22e8d5a08a93bb",
+      "file": "assets/guides-v2/06-zh.mp3",
+      "sha256": "bbfa2fde80b7c694a8950f63da10441cc655749c4f585aed387a5dd29c73b779",
+      "duration": 44.28,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 3.823124,
+          "text": "如果创作者后来改变了主意，他还能改变原作吗？"
+        },
+        {
+          "start": 4.340291,
+          "end": 9.155083,
+          "text": "守护者原则一点一版，将创作者也放在非修订的边界之内。"
+        },
+        {
+          "start": 9.6875,
+          "end": 15.034707,
+          "text": "他可以继续解释、批评和照料这些记录，但后来的话不因此获得"
+        },
+        {
+          "start": 15.057875,
+          "end": 18.090249,
+          "text": "解释的特权，也不修订三条既定正本。"
+        },
+        {
+          "start": 18.622666,
+          "end": 20.798583,
+          "text": "请注意，这不是第四条正本。"
+        },
+        {
+          "start": 21.331,
+          "end": 23.692124,
+          "text": "原则本身也服从同一条边界。"
+        },
+        {
+          "start": 24.224541,
+          "end": 29.490749,
+          "text": "区块链保存可核对的参照，却不能阻止任何人另写一篇文章，也"
+        },
+        {
+          "start": 29.49075,
+          "end": 30.972207,
+          "text": "不能替我们决定意义。"
+        },
+        {
+          "start": 31.504625,
+          "end": 34.537041,
+          "text": "于是，守护不再等于占有最后解释权。"
+        },
+        {
+          "start": 35.069458,
+          "end": 38.449083,
+          "text": "如果不能重新定义作品，守护者还能做什么？"
+        },
+        {
+          "start": 38.969916,
+          "end": 43.726875,
+          "text": "保存、核验、修复入口，并为尚未到来的读者保留空间。"
+        }
+      ]
+    },
+    {
+      "stop": 6,
+      "language": "en",
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "What if the creator changes his mind? Could he change the work? Guardian Principles, version one point one, places the creator within the same non-amending boundary. He may continue to interpret, question, and care for the records. But later commentary gains no privileged authority and cannot amend the three designated Originals. This is not a fourth Original: the principles themselves remain subordinate. Blockchain preserves a reference we can check; it cannot prevent someone from writing another text, or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+      "textSha256": "72559168fb403a59efc245c5511088953e57b62da77369874d6c6c0840009f64",
+      "file": "assets/guides-expressive/72559168fb40-en.mp3",
+      "sha256": "05a7648d44f963db60eb9d198216e1575c1ba07f1e74ed2b8bea1873e9265643",
+      "duration": 45.264,
+      "cues": [
+        {
+          "start": 0,
+          "end": 1.7,
+          "text": "What if the creator changes his mind?"
+        },
+        {
+          "start": 2.22,
+          "end": 3.04,
+          "text": "Could he change the work?"
+        },
+        {
+          "start": 5.09,
+          "end": 8.23,
+          "text": "Guardian Principles, version one point one, places the creator"
+        },
+        {
+          "start": 8.23,
+          "end": 9.97,
+          "text": "within the same non-amending boundary."
+        },
+        {
+          "start": 10.72,
+          "end": 13.72,
+          "text": "He may continue to interpret, question, and care for the"
+        },
+        {
+          "start": 13.72,
+          "end": 14.02,
+          "text": "records."
+        },
+        {
+          "start": 14.6,
+          "end": 17.92,
+          "text": "But later commentary gains no privileged authority and cannot"
+        },
+        {
+          "start": 17.92,
+          "end": 19.78,
+          "text": "amend the three designated Originals."
+        },
+        {
+          "start": 20.38,
+          "end": 23.48,
+          "text": "This is not a fourth Original: the principles themselves remain"
+        },
+        {
+          "start": 23.48,
+          "end": 24.02,
+          "text": "subordinate."
+        },
+        {
+          "start": 24.74,
+          "end": 28.16,
+          "text": "Blockchain preserves a reference we can check; it cannot prevent"
+        },
+        {
+          "start": 28.16,
+          "end": 31.2,
+          "text": "someone from writing another text, or decide what the work"
+        },
+        {
+          "start": 31.2,
+          "end": 31.58,
+          "text": "means."
+        },
+        {
+          "start": 32.88,
+          "end": 35.48,
+          "text": "So guardianship is not the ownership of the final word."
+        },
+        {
+          "start": 37.74,
+          "end": 38.84,
+          "text": "What remains to do?"
+        },
+        {
+          "start": 39.41,
+          "end": 43.53,
+          "text": "Preserve, verify, repair access, and leave room for a reader who"
+        },
+        {
+          "start": 43.53,
+          "end": 44.37,
+          "text": "has not yet arrived."
+        }
+      ],
+      "bytes": 724653,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.65,
+        "topP": 0.9
+      },
+      "captionAudit": {
+        "textSha256": "72559168fb403a59efc245c5511088953e57b62da77369874d6c6c0840009f64",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "05a7648d44f963db60eb9d198216e1575c1ba07f1e74ed2b8bea1873e9265643",
+        "previousAudit": {
+          "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 0.9464285714285714,
+          "unmatchedSourceWords": [
+            "What",
+            "if",
+            "one",
+            "point",
+            "one,",
+            "non-amending"
+          ],
+          "transcript": "One of the creator changes his mind. Could he change the work? Guardian Principles. Version 1 .1. Places the creator within the same non -amending boundary. He may continue to interpret, question, and care for the records. But later commentary gains no privileged authority and cannot amend the three designated originals. This is not a fourth original. The principles themselves remain subordinate. Blockchain preserves a reference we can check. It cannot prevent someone from writing another text. or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+          "humanListeningReview": false
+        },
+        "firstTranscript": "What if the creator changes his mind? Could he change the work? Guardian Principles, version 1 .1, places the creator within the same non -amending boundary. He may continue to interpret, question, and care for the records, but later commentary gains no privileged authority and cannot amend the three designated originals. This is not a fourth original. The principles themselves remain subordinate. Blockchain preserves a reference we can check. It cannot prevent someone from writing another text or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+        "transcript": "What if the creator changes his mind? Could he change the work? Guardian Principles, version 1 .1, places the creator within the same non -amending boundary. He may continue to interpret, question, and care for the records, but later commentary gains no privileged authority and cannot amend the three designated originals. This is not a fourth original. The principles themselves remain subordinate. Blockchain preserves a reference we can check. It cannot prevent someone from writing another text or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+        "normalisedTokenCoverage": 0.9911504424778761,
+        "extraTokens": 0,
+        "differences": [
+          {
+            "kind": "delete",
+            "expected": [
+              "point"
+            ],
+            "recognised": []
+          }
+        ],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false,
+        "delivery": "Exact original 24kHz MP3 bytes; 16kHz recognition copy is not used for playback."
+      }
+    },
+    {
+      "stop": 7,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+8%",
+      "text": "如果没有人回应，等待还意味着什么？这份地址不预告一个答案必然到来。后来者可以阅读、质疑、回应，也可以保持沉默。文字已经留下。解释不必停在创作者这里。现在，您会如何阅读它？",
+      "textSha256": "e7a32a17b0cc1b0ab3b6626145c9f97f2d215578dcca3fceb180fbb2195b7614",
+      "file": "assets/guides-v2/07-zh.mp3",
+      "sha256": "07948a827b32bc11fe917d0f397b6fb106f564432d1860a371b72632c38b8b91",
+      "duration": 17.424,
+      "cues": [
+        {
+          "start": 0.096291,
+          "end": 2.735208,
+          "text": "如果没有人回应，等待还意味着什么？"
+        },
+        {
+          "start": 3.263875,
+          "end": 5.787041,
+          "text": "这份地址不预告一个答案必然到来。"
+        },
+        {
+          "start": 6.319458,
+          "end": 10.277791,
+          "text": "后来者可以阅读、质疑、回应，也可以保持沉默。"
+        },
+        {
+          "start": 10.810166,
+          "end": 11.967582,
+          "text": "文字已经留下。"
+        },
+        {
+          "start": 12.5,
+          "end": 14.49075,
+          "text": "解释不必停在创作者这里。"
+        },
+        {
+          "start": 15.023166,
+          "end": 16.898125,
+          "text": "现在，您会如何阅读它？"
+        }
+      ]
+    },
+    {
+      "stop": 7,
+      "language": "en",
+      "voice": "bundled default conditionals",
+      "rate": "natural delivery, playback 1.0x",
+      "text": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them?",
+      "textSha256": "adc9699de2b6f6dd30871e7efb40d5ea68869789024080b0a9032b7eadfad73c",
+      "file": "assets/guides-expressive/adc9699de2b6-en.mp3",
+      "sha256": "b19460d6db5ba1c8145538703d3b532256b7bd62aaa612ff763a09607568db2e",
+      "duration": 17.592,
+      "cues": [
+        {
+          "start": 0,
+          "end": 2.22,
+          "text": "What does waiting mean if no answer comes?"
+        },
+        {
+          "start": 3.05,
+          "end": 4.93,
+          "text": "This address does not promise a reply."
+        },
+        {
+          "start": 6.08,
+          "end": 10.22,
+          "text": "A later reader may examine, question, respond, or remain silent."
+        },
+        {
+          "start": 11.06,
+          "end": 11.92,
+          "text": "The records remain."
+        },
+        {
+          "start": 12.78,
+          "end": 15.02,
+          "text": "Interpretation need not end with their creator."
+        },
+        {
+          "start": 16.12,
+          "end": 16.94,
+          "text": "How would you read them?"
+        }
+      ],
+      "bytes": 281901,
+      "provenance": {
+        "provider": "Resemble AI open-source model, offline CPU inference",
+        "model": "Chatterbox Turbo 350M",
+        "voice": "bundled default conditionals",
+        "voiceKind": "built-in synthetic; no user or third-party reference recording",
+        "modelRevision": "1e4698ca7cbb41ff030c4185f0927a3b42d76924",
+        "libraryRevision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+        "license": "MIT",
+        "watermark": "PerTh applied by upstream generator",
+        "temperature": 0.65,
+        "topP": 0.9
+      },
+      "captionAudit": {
+        "textSha256": "adc9699de2b6f6dd30871e7efb40d5ea68869789024080b0a9032b7eadfad73c",
+        "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+        "inputAudioSha256": "b19460d6db5ba1c8145538703d3b532256b7bd62aaa612ff763a09607568db2e",
+        "previousAudit": {
+          "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+          "recognisedExactWordCoverage": 1.0,
+          "unmatchedSourceWords": [],
+          "transcript": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them? Thank you for your time.",
+          "humanListeningReview": false
+        },
+        "firstTranscript": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them?",
+        "transcript": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them?",
+        "normalisedTokenCoverage": 1.0,
+        "extraTokens": 0,
+        "differences": [],
+        "edits": [],
+        "accepted": true,
+        "humanListeningReview": false,
+        "delivery": "Exact original 24kHz MP3 bytes; 16kHz recognition copy is not used for playback."
+      }
+    }
+  ],
+  "inspectionTracks": [
+    {
+      "stop": 7,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "第一处公开瑕疵。请观察不规则结构与周围内雕文字之间的关系。照片的文件哈希能检查它是否与公开存档一致；比对实物，还需要位置、角度和见证过程。内雕文字也提供观察时的参照。请把瑕疵的轮廓与周围环境一起看，而不是只记住一个孤立的亮点。",
+      "textSha256": "1add97a0a8a3e8b4c0cb7c8486b798b5c2802a956a3a326f936991456a7dc9ff",
+      "file": "assets/guides/07-zh.mp3",
+      "sha256": "eee07f74e4194a6d88a7f2f2a7ce7641f1c3b34af6c76bbf6b19d7ca2b38beac",
+      "duration": 20.352,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 1.27,
+          "text": "第一处公开瑕疵。"
+        },
+        {
+          "start": 1.72,
+          "end": 4.96,
+          "text": "请观察不规则结构与周围内雕文字之间的关系。"
+        },
+        {
+          "start": 5.42,
+          "end": 8.7,
+          "text": "照片的文件哈希能检查它是否与公开存档一致；"
+        },
+        {
+          "start": 9.0,
+          "end": 12.17,
+          "text": "比对实物，还需要位置、角度和见证过程。"
+        },
+        {
+          "start": 12.63,
+          "end": 14.8,
+          "text": "内雕文字也提供观察时的参照。"
+        },
+        {
+          "start": 15.26,
+          "end": 19.44,
+          "text": "请把瑕疵的轮廓与周围环境一起看，而不是只记住一个孤立的"
+        },
+        {
+          "start": 19.45,
+          "end": 19.87,
+          "text": "亮点。"
+        }
+      ],
+      "flaw": 0
+    },
+    {
+      "stop": 7,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "The first public flaw. Observe the irregular structure in relation to the surrounding engraving. A file hash checks that the photograph matches the public archive. Comparing the physical object requires positions, viewing angles and a witnessed procedure. The engraving also provides a visual reference. Look at the flaw’s outline together with its surroundings, rather than remembering only an isolated bright point.",
+      "textSha256": "21667f3f8a8d6cacd94a445b40f9881440e0054418b9c9550e494cc765b2835b",
+      "file": "assets/guides/07-en.mp3",
+      "sha256": "4251a7372b40a7ff2d30976cd6d564e5fde0198660b4426cc912dc417812d8f8",
+      "duration": 24.528,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 1.245666,
+          "text": "The first public flaw."
+        },
+        {
+          "start": 2.0,
+          "end": 4.771708,
+          "text": "Observe the irregular structure in relation to the surrounding"
+        },
+        {
+          "start": 4.782625,
+          "end": 5.326083,
+          "text": "engraving."
+        },
+        {
+          "start": 6.076083,
+          "end": 9.260874,
+          "text": "A file hash checks that the photograph matches the public archive."
+        },
+        {
+          "start": 10.010875,
+          "end": 13.586958,
+          "text": "Comparing the physical object requires positions, viewing angles and"
+        },
+        {
+          "start": 13.597833,
+          "end": 14.56525,
+          "text": "a witnessed procedure."
+        },
+        {
+          "start": 15.315208,
+          "end": 17.641291,
+          "text": "The engraving also provides a visual reference."
+        },
+        {
+          "start": 18.402166,
+          "end": 21.456541,
+          "text": "Look at the flaw’s outline together with its surroundings, rather"
+        },
+        {
+          "start": 21.467375,
+          "end": 23.771749,
+          "text": "than remembering only an isolated bright point."
+        }
+      ],
+      "flaw": 0
+    },
+    {
+      "stop": 8,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "第二处公开瑕疵。复制图像容易，复现内部结构、深度以及多点之间的空间关系更困难。多处瑕疵共同提供可比对的物理特征，而不是依靠一张照片宣告绝对不可复制。实际检验会改变观察角度与光线，检查同一组特征是否持续对应。",
+      "textSha256": "bbfac28be35df8ad522a71e857c4ba6ab783eb1ccdd24cb2e6053be82d343755",
+      "file": "assets/guides/08-zh.mp3",
+      "sha256": "394e670e66ca79b4599a47707e250faa24f12095704132ea44c06940c53169dd",
+      "duration": 18.648,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 1.3,
+          "text": "第二处公开瑕疵。"
+        },
+        {
+          "start": 1.75,
+          "end": 6.42,
+          "text": "复制图像容易，复现内部结构、深度以及多点之间的空间关系更"
+        },
+        {
+          "start": 6.42,
+          "end": 6.81,
+          "text": "困难。"
+        },
+        {
+          "start": 7.26,
+          "end": 11.84,
+          "text": "多处瑕疵共同提供可比对的物理特征，而不是依靠一张照片宣告"
+        },
+        {
+          "start": 11.86,
+          "end": 12.82,
+          "text": "绝对不可复制。"
+        },
+        {
+          "start": 13.28,
+          "end": 17.82,
+          "text": "实际检验会改变观察角度与光线，检查同一组特征是否持续"
+        },
+        {
+          "start": 17.83,
+          "end": 18.18,
+          "text": "对应。"
+        }
+      ],
+      "flaw": 1
+    },
+    {
+      "stop": 8,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "The second public flaw. Copying an image is easy. Reproducing internal structures, depth and relationships between several points is harder. Multiple flaws provide physical features for comparison, rather than a photograph proving absolute impossibility of replication. A physical examination changes the viewing angle and lighting to check whether the same group of features continues to correspond.",
+      "textSha256": "ebbc14214088574ce951b628be98593989c44f6aedac1a6abf92b5830d366631",
+      "file": "assets/guides/08-en.mp3",
+      "sha256": "dec97683248e8e91a20f561ff53ea4d680ce531d09ebd616ab7a3198249b743a",
+      "duration": 23.352,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 1.310874,
+          "text": "The second public flaw."
+        },
+        {
+          "start": 2.065208,
+          "end": 3.489124,
+          "text": "Copying an image is easy."
+        },
+        {
+          "start": 4.25,
+          "end": 7.554333,
+          "text": "Reproducing internal structures, depth and relationships between"
+        },
+        {
+          "start": 7.565208,
+          "end": 8.782624,
+          "text": "several points is harder."
+        },
+        {
+          "start": 9.532625,
+          "end": 12.978249,
+          "text": "Multiple flaws provide physical features for comparison, rather than"
+        },
+        {
+          "start": 12.989125,
+          "end": 15.999999,
+          "text": "a photograph proving absolute impossibility of replication."
+        },
+        {
+          "start": 16.75,
+          "end": 19.673916,
+          "text": "A physical examination changes the viewing angle and lighting to"
+        },
+        {
+          "start": 19.684791,
+          "end": 22.586958,
+          "text": "check whether the same group of features continues to correspond."
+        }
+      ],
+      "flaw": 1
+    },
+    {
+      "stop": 9,
+      "language": "zh",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+25%",
+      "text": "第三处公开瑕疵。不完美留下了真实世界的痕迹。作为一种艺术表达，它也映照人的缺憾、脆弱和不可替代的经历。一个存在值得被记住，不是因为它毫无缺陷，而是因为它确曾存在，有自己的故事。这是一种关于存在与记忆的表达；照片的证据作用和这层艺术含义，可以同时被看见。",
+      "textSha256": "bb24c67f0f0c80d12563195e801aceb87ca2ea9c8af5ae2f43ea14218a688357",
+      "file": "assets/guides/09-zh.mp3",
+      "sha256": "f42999392119d7b2c46098ac2f01de2a9ea9f9630379a8bd9b2ea8331f459a33",
+      "duration": 21.336,
+      "cues": [
+        {
+          "start": 0.09,
+          "end": 1.37,
+          "text": "第三处公开瑕疵。"
+        },
+        {
+          "start": 1.82,
+          "end": 3.74,
+          "text": "不完美留下了真实世界的痕迹。"
+        },
+        {
+          "start": 4.2,
+          "end": 8.21,
+          "text": "作为一种艺术表达，它也映照人的缺憾、脆弱和不可替代的"
+        },
+        {
+          "start": 8.22,
+          "end": 8.57,
+          "text": "经历。"
+        },
+        {
+          "start": 9.03,
+          "end": 13.13,
+          "text": "一个存在值得被记住，不是因为它毫无缺陷，而是因为它确曾"
+        },
+        {
+          "start": 13.14,
+          "end": 14.68,
+          "text": "存在，有自己的故事。"
+        },
+        {
+          "start": 15.14,
+          "end": 17.21,
+          "text": "这是一种关于存在与记忆的表达；"
+        },
+        {
+          "start": 17.51,
+          "end": 20.86,
+          "text": "照片的证据作用和这层艺术含义，可以同时被看见。"
+        }
+      ],
+      "flaw": 2
+    },
+    {
+      "stop": 9,
+      "language": "en",
+      "voice": "en-US-AriaNeural",
+      "rate": "+15%",
+      "text": "The third public flaw. Imperfection leaves traces of the real world. As an artistic reading, it reflects human limitations, vulnerability and irreplaceable experience. A life can deserve remembrance with all its imperfections, because it existed and had a story of its own. This is an expression about existence and memory. The evidential role of the photograph and its artistic meaning can both remain visible.",
+      "textSha256": "1eca8a804a5ea0ba973adb9c4948eef7e4da5e7f09291cd7d03fedbdeafdcffa",
+      "file": "assets/guides/09-en.mp3",
+      "sha256": "8aeb934b7e944608220f49e3eb6e5e8d314d111a8c9fe5ab5496704ca6eae7e1",
+      "duration": 24.552,
+      "cues": [
+        {
+          "start": 0.093458,
+          "end": 1.267416,
+          "text": "The third public flaw."
+        },
+        {
+          "start": 2.010875,
+          "end": 4.228249,
+          "text": "Imperfection leaves traces of the real world."
+        },
+        {
+          "start": 4.97825,
+          "end": 8.695625,
+          "text": "As an artistic reading, it reflects human limitations, vulnerability"
+        },
+        {
+          "start": 8.782625,
+          "end": 10.326083,
+          "text": "and irreplaceable experience."
+        },
+        {
+          "start": 11.076083,
+          "end": 14.239125,
+          "text": "A life can deserve remembrance with all its imperfections, because"
+        },
+        {
+          "start": 14.25,
+          "end": 16.141291,
+          "text": "it existed and had a story of its own."
+        },
+        {
+          "start": 16.891291,
+          "end": 19.086957,
+          "text": "This is an expression about existence and memory."
+        },
+        {
+          "start": 19.836958,
+          "end": 22.739124,
+          "text": "The evidential role of the photograph and its artistic meaning can"
+        },
+        {
+          "start": 22.75,
+          "end": 23.793499,
+          "text": "both remain visible."
+        }
+      ],
+      "flaw": 2
+    }
+  ],
+  "voiceReview": "English Chatterbox Turbo built-in synthetic voice, independently inspected with Whisper small.en + VAD; differences and any edits recorded. No human listening certification. Chinese retains Xiaoxiao."
+}

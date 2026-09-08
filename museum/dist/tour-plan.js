@@ -42,11 +42,15 @@ export const tourStops=[
     "en": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the Originals. The Protocol offers propositions. The Covenant of the Flaw connects the address to a physical object and its evidence. The sealed meta-record binds the relationship and points to the Ethereum Chronicle; it does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
     "cameraShots": [
       {
-        "at": 45,
+        "at": 12,
+        "exhibit": "canon-1"
+      },
+      {
+        "at": 40,
         "exhibit": "canon-2"
       },
       {
-        "at": 68,
+        "at": 66,
         "exhibit": "canon-3"
       }
     ]

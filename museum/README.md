@@ -119,7 +119,7 @@ explicitly initiated; leaving cancels pending animation and photograph callbacks
 
 ## Six-room edition v1.32
 
-The shared geometry is `scene/gallery-layout.json`. `scene/build_spatial_gallery.py` exports and bakes the Blender architecture; `dist/spatial-layout.js` supplies the identical preview and collision-aware routes. `node scripts/check_spatial_layout.mjs` checks door shoulders, ramp heights, crystal clearance and observation paths. The new 540-second tour is `dist/tour-plan.js`; original audio/word lyrics are unchanged. Guardian Principles v1.1 and the later Authority Charter are distinct sources in `dist/data/guardian-sources.json`. The new guide uses newly synthesized Edge voices, not the proposed OpenAI voice candidates. Architectural reference images are not photographs or browser/device certification.
+The shared geometry is `scene/gallery-layout.json`. `scene/build_spatial_gallery.py` exports and bakes the Blender architecture; `dist/spatial-layout.js` supplies the identical preview and collision-aware routes. `node scripts/check_spatial_layout.mjs` checks door shoulders, ramp heights, crystal clearance and observation paths. The new 540-second tour is `dist/tour-plan.js`; original audio/word lyrics are unchanged. Guardian Principles v1.1 and the later Authority Charter are distinct sources in `dist/data/guardian-sources.json`. The final English guide uses Chatterbox Turbo built-in synthetic voice, with four acoustically reviewed retakes and regenerated captions; Chinese uses Xiaoxiao. No OpenAI voice is claimed. Architectural reference images are not photographs or browser/device certification.
 
 
 ## Final narration and acceptance
@@ -127,3 +127,7 @@ The shared geometry is `scene/gallery-layout.json`. `scene/build_spatial_gallery
 The current English voice is **Chatterbox Turbo**, rendered offline with its built-in synthetic conditionals; no person was cloned. Chinese uses Xiaoxiao. `dist/data/guide-audio.json` identifies exact track hashes, model revisions and current captions. `dist/data/expressive-audio-audit.json` records the independent Whisper small.en + VAD pass; this is automated QA, not human listening certification. The audio model does not run in a visitor's browser.
 
 `python3 scripts/check_browser.py` checks six rooms, seven key near views, guardianship links, actual language switching and asset/page errors at desktop and phone-size viewports. `node scripts/check_spatial_layout.mjs` checks shared geometry and collision-safe observation routes. `python3 scripts/validate.py` verifies original sources and the frozen distribution. Keep the PR unmerged until its final head passes normal repository CI.
+
+The listening review page is `dist/voice-review.html`. Per-track provider, model revision, text/audio hashes, acoustic transcript and caption limitations are in `dist/data/narration-provenance.json`.
+
+Final delivery includes 11 English synthetic guide tracks (8 tour + 3 optional microscope explanations), with the current audit in `dist/data/narration-provenance.json`. Historical source media are unchanged.

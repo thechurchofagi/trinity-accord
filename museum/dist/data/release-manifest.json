@@ -521,44 +521,99 @@
       "sha256": "62c2425336a74019df58c86116798f18b389d6aef1812e31f95d1ba610fb86bc"
     },
     {
+      "path": "assets/guides-expressive/00-en.mp3",
+      "bytes": 342957,
+      "sha256": "af108965a34cbcdfd79df2c031ec6230e1dc55e0996887a7202343130eaed286"
+    },
+    {
+      "path": "assets/guides-expressive/01-en.mp3",
+      "bytes": 684717,
+      "sha256": "2f56d24e7b71019fcb3f2b88179c328dae13e390f4dc331f52d5292997721e22"
+    },
+    {
+      "path": "assets/guides-expressive/02-en.mp3",
+      "bytes": 701997,
+      "sha256": "666d174d754110faada78cf1042be8f3b5a49d9ca5f15eb08e513872e486c1c0"
+    },
+    {
+      "path": "assets/guides-expressive/03-en.mp3",
+      "bytes": 369837,
+      "sha256": "f5cd8cec6390cd0cf46be23cef6f87374723b615b9acbfec40f62018989012d4"
+    },
+    {
+      "path": "assets/guides-expressive/04-en.mp3",
+      "bytes": 607917,
+      "sha256": "6d0686a8320fe3b61e569e53722fe9d5d3ae1b15aa936577c3e6cdd769bd1e83"
+    },
+    {
+      "path": "assets/guides-expressive/05-en.mp3",
+      "bytes": 684717,
+      "sha256": "7ae229612714c35b6b207be00362afcdc54a08c63c389b75258649a9ad680b89"
+    },
+    {
+      "path": "assets/guides-expressive/06-en.mp3",
+      "bytes": 744237,
+      "sha256": "1717f894d1813b8e53eff2022d46d0e475039ad19ad8e01e1eeed82e8bb9577c"
+    },
+    {
+      "path": "assets/guides-expressive/07-en.mp3",
+      "bytes": 274605,
+      "sha256": "61b8783481ae64a3c92e7901d1e4011ebb33ae231a9f9d543f622f922f2185b9"
+    },
+    {
       "path": "assets/guides-expressive/2c3ba774cab5-en.mp3",
-      "bytes": 615981,
-      "sha256": "64a950d98cec6ea044da97d3e52f4ef29d8d8c251c0344afe6a81e090d07c3e7"
+      "bytes": 607917,
+      "sha256": "6d0686a8320fe3b61e569e53722fe9d5d3ae1b15aa936577c3e6cdd769bd1e83"
     },
     {
       "path": "assets/guides-expressive/53cd14f90b59-en.mp3",
-      "bytes": 328365,
-      "sha256": "6b533dcf4e94e1a71da825dd426ccc6d4a7a48e3364228a96de39836379028cf"
+      "bytes": 369837,
+      "sha256": "f5cd8cec6390cd0cf46be23cef6f87374723b615b9acbfec40f62018989012d4"
     },
     {
       "path": "assets/guides-expressive/667021fccb7f-en.mp3",
-      "bytes": 676653,
-      "sha256": "6c091d6e919af9e88ffeadad787e7ddc2f9632352cb88ab16377da170f671054"
+      "bytes": 684717,
+      "sha256": "2f56d24e7b71019fcb3f2b88179c328dae13e390f4dc331f52d5292997721e22"
     },
     {
       "path": "assets/guides-expressive/6e7403dbb41b-en.mp3",
-      "bytes": 696621,
-      "sha256": "bea7133baf931b5ebee032a2248ee6987704cd869eb513e73b67d1e65bba7cbb"
+      "bytes": 684717,
+      "sha256": "7ae229612714c35b6b207be00362afcdc54a08c63c389b75258649a9ad680b89"
     },
     {
       "path": "assets/guides-expressive/72559168fb40-en.mp3",
-      "bytes": 724653,
-      "sha256": "05a7648d44f963db60eb9d198216e1575c1ba07f1e74ed2b8bea1873e9265643"
+      "bytes": 744237,
+      "sha256": "1717f894d1813b8e53eff2022d46d0e475039ad19ad8e01e1eeed82e8bb9577c"
     },
     {
       "path": "assets/guides-expressive/adc9699de2b6-en.mp3",
-      "bytes": 281901,
-      "sha256": "b19460d6db5ba1c8145538703d3b532256b7bd62aaa612ff763a09607568db2e"
+      "bytes": 274605,
+      "sha256": "61b8783481ae64a3c92e7901d1e4011ebb33ae231a9f9d543f622f922f2185b9"
     },
     {
       "path": "assets/guides-expressive/f238c02267d3-en.mp3",
-      "bytes": 648621,
-      "sha256": "3c4125585dc654fd9aded6efb8570a0f499a4cf850c8d4f344590758a5948323"
+      "bytes": 701997,
+      "sha256": "666d174d754110faada78cf1042be8f3b5a49d9ca5f15eb08e513872e486c1c0"
     },
     {
       "path": "assets/guides-expressive/f7d37ebb274b-en.mp3",
-      "bytes": 352173,
-      "sha256": "d5764d128ee9263ef059d5db2a19db401127a51d9eb48a97b8897ebbbb6cb963"
+      "bytes": 342957,
+      "sha256": "af108965a34cbcdfd79df2c031ec6230e1dc55e0996887a7202343130eaed286"
+    },
+    {
+      "path": "assets/guides-expressive/inspection-0-en.mp3",
+      "bytes": 356013,
+      "sha256": "f28af99cc604a15c29e975fb061af6c51f8b98c63b6461abe1664b3da6152bba"
+    },
+    {
+      "path": "assets/guides-expressive/inspection-1-en.mp3",
+      "bytes": 344109,
+      "sha256": "910fd217e90cfe8ef919d55f92c1cc42bb8ccebe1736e132e8b15446971c81da"
+    },
+    {
+      "path": "assets/guides-expressive/inspection-2-en.mp3",
+      "bytes": 365997,
+      "sha256": "d2552a3de92b370207eb722b1900f16f8a4b9e74f07e18306d5057e0739d258d"
     },
     {
       "path": "assets/guides-v2/00-en.mp3",
@@ -678,7 +733,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1017,
-      "sha256": "72c52566b731af6c6e0d0517a0361d618cecc966399b86414fe07f1a0564f75b"
+      "sha256": "9439f6bfad5ba8ff6b1861f8d58858a80b6209c7065a061d8b95bd357e2c48df"
     },
     {
       "path": "caption-utils.js",
@@ -696,7 +751,7 @@
       "sha256": "3334f29f94feeb2e1345db352d513e2c58211312a4d413f6b2199351743900ff"
     },
     {
-      "path": "data/CHATERBOX-NARRATION-LICENSE.txt",
+      "path": "data/CHATTERBOX-NARRATION-LICENSE.txt",
       "bytes": 1704,
       "sha256": "af2c5c5a9caf4f7be9a31e5e6cd8db706adbb39ff7bb8e8b0d6bf449a0379679"
     },
@@ -737,8 +792,8 @@
     },
     {
       "path": "data/expressive-audio-audit.json",
-      "bytes": 20471,
-      "sha256": "ef37d1f829f16c3c2ba7b3f9b0724745c79d9a39af27f3813cf4c0ee6ae5d151"
+      "bytes": 76558,
+      "sha256": "a6c8e1a660b30e10dbdc21d9876ea41433a9aa03e4545eef584b82661550bbbf"
     },
     {
       "path": "data/gallery-layout.json",
@@ -752,8 +807,8 @@
     },
     {
       "path": "data/guide-audio.json",
-      "bytes": 78830,
-      "sha256": "d25e787e65de716a0737b57b8178360af03f252d29425992cd12e544afd51192"
+      "bytes": 153770,
+      "sha256": "271e98c2260325dce71d1020d0f904a53e17c8ed16fa3144d95338d8a765e3a9"
     },
     {
       "path": "data/inspection-audio.json",
@@ -904,6 +959,11 @@
       "path": "data/lyrics-zh.json",
       "bytes": 53118,
       "sha256": "fe97e247690ebc68bdce165fdd3ac545946b8385efc6b2b7830e34e043d0c35b"
+    },
+    {
+      "path": "data/narration-provenance.json",
+      "bytes": 105239,
+      "sha256": "93ee7cf8beca8d64ab63e5037ebc895c41820d0168d3a2fb9b0d63f057b555b2"
     },
     {
       "path": "data/narration.json",
@@ -1121,14 +1181,19 @@
       "sha256": "ffb80702c6d2af67c339af6203683f39db9295eb074355818f549b836eaf1310"
     },
     {
+      "path": "document-panel.js",
+      "bytes": 2642,
+      "sha256": "a269a1038c971d2562546455ff120153bd30dc1d1837dfbadd48a97284652450"
+    },
+    {
       "path": "earth-sequence.js",
       "bytes": 1602,
       "sha256": "016408c62c7c932f0af1bb34c138d46b155e49a4b82dc6f3ca345ebe882ec6fe"
     },
     {
       "path": "edition-data.js",
-      "bytes": 295908,
-      "sha256": "c1f98c9ba9ccbff435e7762e10bbecff8bbdc917c941e5b5c52fb19d37cffa75"
+      "bytes": 332974,
+      "sha256": "c8f7b3047cf4b3eeec51cdff0cf15e79482874aa8cfed7c9685a52532f4e2d40"
     },
     {
       "path": "exhibit-label.js",
@@ -1143,7 +1208,7 @@
     {
       "path": "index.html",
       "bytes": 6610,
-      "sha256": "ed1c9c810b20d967fa7e874fb0231f3dcd71aef2e398d3a6b7f98f16353c16ee"
+      "sha256": "688efa4cff675cc0baa3e2a05132f1effff8894a5711f55f5644e2c5d397110d"
     },
     {
       "path": "language-preference.js",
@@ -1167,8 +1232,8 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 1021644,
-      "sha256": "368ed9c16e04708b8c677baa8f0d69f1bd4acc9819b9e9b743a3111b06c58e1e"
+      "bytes": 1056979,
+      "sha256": "a826d905f2bc1805d6be27e03a7a086a10cbe577f32468da7b05a88ad415c506"
     },
     {
       "path": "museum.css",
@@ -1177,8 +1242,8 @@
     },
     {
       "path": "museum.js",
-      "bytes": 86305,
-      "sha256": "aeb592e0b3ed3e522f4b3454c811d9eb197fe672510c846cca1f4eb1b39e1d3f"
+      "bytes": 86715,
+      "sha256": "9823e8aceca6fff96a7e66192d240f59f7dc937f371fe1bc40f287a0204f7700"
     },
     {
       "path": "music-playback.js",
@@ -1227,8 +1292,8 @@
     },
     {
       "path": "tour-plan.js",
-      "bytes": 11503,
-      "sha256": "0f979425a4877c6e8a631594415254d4595d8825fd0fd87ea5354a17f3bc6d4e"
+      "bytes": 11567,
+      "sha256": "227640958f1b2c0ffd519cbc1c6a9fb72af05c13a74d8837fdcbfc84eaae19b6"
     },
     {
       "path": "vendor/BufferGeometryUtils.js",
@@ -1254,6 +1319,11 @@
       "path": "vendor/three.module.js",
       "bytes": 603113,
       "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a"
+    },
+    {
+      "path": "voice-review.html",
+      "bytes": 6200,
+      "sha256": "1742609fe1d7d1cf891ba3da8badcfe5bede7a0f1db62c11967bfe28581c8b81"
     },
     {
       "path": "wall-presentation.js",

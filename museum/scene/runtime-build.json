@@ -40,8 +40,8 @@
     },
     {
       "path": "dist/data/guide-audio.json",
-      "bytes": 78830,
-      "sha256": "d25e787e65de716a0737b57b8178360af03f252d29425992cd12e544afd51192"
+      "bytes": 153770,
+      "sha256": "271e98c2260325dce71d1020d0f904a53e17c8ed16fa3144d95338d8a765e3a9"
     },
     {
       "path": "dist/data/lyrics-index.json",
@@ -59,14 +59,19 @@
       "sha256": "c51f7f2b642e6da73347a5e7e75aa1f5193b8ec99de709ff112d9c5771528880"
     },
     {
+      "path": "dist/document-panel.js",
+      "bytes": 2642,
+      "sha256": "a269a1038c971d2562546455ff120153bd30dc1d1837dfbadd48a97284652450"
+    },
+    {
       "path": "dist/earth-sequence.js",
       "bytes": 1602,
       "sha256": "016408c62c7c932f0af1bb34c138d46b155e49a4b82dc6f3ca345ebe882ec6fe"
     },
     {
       "path": "dist/edition-data.js",
-      "bytes": 295908,
-      "sha256": "c1f98c9ba9ccbff435e7762e10bbecff8bbdc917c941e5b5c52fb19d37cffa75"
+      "bytes": 332974,
+      "sha256": "c8f7b3047cf4b3eeec51cdff0cf15e79482874aa8cfed7c9685a52532f4e2d40"
     },
     {
       "path": "dist/exhibit-label.js",
@@ -100,8 +105,8 @@
     },
     {
       "path": "dist/museum.js",
-      "bytes": 86305,
-      "sha256": "aeb592e0b3ed3e522f4b3454c811d9eb197fe672510c846cca1f4eb1b39e1d3f"
+      "bytes": 86715,
+      "sha256": "9823e8aceca6fff96a7e66192d240f59f7dc937f371fe1bc40f287a0204f7700"
     },
     {
       "path": "dist/music-playback.js",
@@ -140,8 +145,8 @@
     },
     {
       "path": "dist/tour-plan.js",
-      "bytes": 11503,
-      "sha256": "0f979425a4877c6e8a631594415254d4595d8825fd0fd87ea5354a17f3bc6d4e"
+      "bytes": 11567,
+      "sha256": "227640958f1b2c0ffd519cbc1c6a9fb72af05c13a74d8837fdcbfc84eaae19b6"
     },
     {
       "path": "dist/vendor/BufferGeometryUtils.js",
@@ -181,7 +186,7 @@
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 1021644,
-    "sha256": "368ed9c16e04708b8c677baa8f0d69f1bd4acc9819b9e9b743a3111b06c58e1e"
+    "bytes": 1056979,
+    "sha256": "a826d905f2bc1805d6be27e03a7a086a10cbe577f32468da7b05a88ad415c506"
   }
 }
