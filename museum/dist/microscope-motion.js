@@ -28,8 +28,8 @@ export function createMicroscopeModel(){
  for(let i=0;i<20;i++){const a=i*Math.PI/10;const rib=mesh(new THREE.BoxGeometry(.002,.002,.028),metal,[Math.sin(a)*.036,Math.cos(a)*.036,.062],scope);rib.rotation.z=-a;}
  const hand=new THREE.Group();hand.name='modelled-gloved-hand';root.add(hand);
  sphere([.054,-.052,.063],[.029,.052,.045],glove,hand);
- segment([.063,-.205,.109],[.054,-.098,.077],.027,glove,hand);
- const cuff=mesh(new THREE.CylinderGeometry(.029,.032,.027,20),housing,[.063,-.186,.103],hand);cuff.rotation.x=-.25;
+ segment([.063,-.11,.42],[.054,-.068,.09],.027,glove,hand);
+ const cuff=mesh(new THREE.CylinderGeometry(.029,.032,.027,20),housing,[.063,-.106,.395],hand);cuff.rotation.x=Math.PI/2-.12;
  // Four rounded, jointed fingers curl over the barrel; the thumb opposes below it.
  for(let i=0;i<4;i++){
   const z=.016+i*.025,r=i===3?.009:.0105;
@@ -50,17 +50,23 @@ export function createMicroscopeMotion(scene,camera,{requestFrame=callback=>requ
  function stop(){generation++;cancelFrame(frame);if(prop)prop.visible=false;}
  return {stop,prepare:load,
   async start(crystal,index,{reduced=false,onComplete=()=>{},onError=()=>{}}={}){
-   stop();const id=generation;if(reduced){onComplete();return;}
+   stop();const id=generation;
    try{const model=await load();if(id!==generation)return;
     crystal.updateMatrixWorld(true);
     const points=[new THREE.Vector3(-.055,.235,.033),new THREE.Vector3(.045,.20,.033),new THREE.Vector3(-.01,.13,.033)];
     crystal.getWorldQuaternion(model.quaternion);
     const clearance=new THREE.Vector3(0,0,.115).applyQuaternion(model.quaternion);
-    const end=crystal.localToWorld(points[index].clone()).add(clearance),start=end.clone().add(new THREE.Vector3(0,-.36,0));
-    model.position.copy(start);model.visible=true;let begin=null;
-    const tick=now=>{if(id!==generation)return;if(begin===null)begin=now;const elapsed=(now-begin)/1000;
-     model.position.copy(microscopePose(elapsed/2.2,start,end));
-     if(elapsed>=2.8){model.visible=false;onComplete();return;}frame=requestFrame(tick);
+    const end=crystal.localToWorld(points[index].clone()).add(clearance),start=end.clone();
+    // The hand starts above the solid tabletop, with the forearm extending toward
+    // the viewer outside the support radius. It must never rise through the wood.
+    start.y=Math.max(crystal.getWorldPosition(new THREE.Vector3()).y+.10,end.y-.16);
+    // An explicit inspection keeps its essential demonstration even with reduced motion.
+    // Keep a short vertical motion (no camera sway), instead of skipping to the photo.
+    model.position.copy(start);model.visible=true;let previous=null,elapsed=0;
+    const tick=now=>{if(id!==generation)return;
+     if(previous!==null&&!globalThis.document?.hidden)elapsed+=Math.min(.1,Math.max(0,(now-previous)/1000));previous=now;
+     model.position.copy(microscopePose(elapsed/(reduced?1.4:2.2),start,end));
+     if(elapsed>=2.8){model.visible=false;generation++;onComplete();return;}frame=requestFrame(tick);
     };frame=requestFrame(tick);
    }catch(error){if(id===generation)onError(error);}
   },

@@ -3,7 +3,7 @@ export function observationView(width,height,fov,aspect,mobile=false,viewport=nu
  const tan=Math.tan(fov*Math.PI/360);
  if(viewport){
   const available=Math.max(80,viewport.bottom-viewport.top),fraction=available/viewport.height;
-  const distance=Math.max(width/(2*tan*aspect*.8),height/(2*tan*fraction*.94));
+  const distance=Math.max(width/(2*tan*aspect*.90),height/(2*tan*fraction*.94));
   return {distance,aimOffset:0};
  }
  const distance=Math.max(width/(2*tan*aspect*.78),height/(2*tan*(mobile?.52:.62)));

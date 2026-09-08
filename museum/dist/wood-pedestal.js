@@ -2,7 +2,7 @@ import * as THREE from './vendor/three.module.js';
 // Cylindrical walnut support at physical scale. The navigation radius comes from the same layout.
 export function addWoodPedestal(scene,layout,targets){
  const c=layout.crystal,floor=layout.rooms.find(r=>r.id==='originals').floor;
- const mat=new THREE.MeshPhysicalMaterial({color:'#49301f',roughness:.68,metalness:0,specularIntensity:.22,envMapIntensity:.22});
+ const mat=new THREE.MeshPhysicalMaterial({color:'#88664b',roughness:.68,metalness:0,specularIntensity:.22,envMapIntensity:.5});
  mat.onBeforeCompile=shader=>{
   shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 woodPosition; varying float woodCap;').replace('#include <begin_vertex>','#include <begin_vertex>\nwoodPosition=position; woodCap=abs(normal.y);');
   shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 woodPosition; varying float woodCap;').replace('#include <color_fragment>',`#include <color_fragment>

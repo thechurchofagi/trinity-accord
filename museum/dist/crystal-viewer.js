@@ -2,7 +2,7 @@ import * as THREE from './vendor/three.module.js';
 import {GLTFLoader} from './vendor/GLTFLoader.js';
 import {fetchBytes} from './progressive-loading.js';
 
-export function crystalGlass(){return new THREE.MeshPhysicalMaterial({color:'#f2faff',roughness:.018,transmission:1,thickness:.04,ior:1.46,metalness:0,envMapIntensity:.4,clearcoat:.08,clearcoatRoughness:.02,attenuationColor:new THREE.Color('#ffffff'),attenuationDistance:Infinity});}
+export function crystalGlass(){return new THREE.MeshPhysicalMaterial({color:'#f2faff',roughness:.035,transmission:.94,thickness:.04,ior:1.46,metalness:0,envMapIntensity:1.15,clearcoat:.18,clearcoatRoughness:.03,attenuationColor:new THREE.Color('#ffffff'),attenuationDistance:Infinity});}
 // Keep physical engraving geometry; improve its contrast for a small screen.
 export function refineCrystal(root){
  const meshes=[];root.traverse(o=>{if(o.isMesh)meshes.push(o);});
@@ -12,7 +12,7 @@ export function refineCrystal(root){
    const edges=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,24),new THREE.LineBasicMaterial({color:'#d7efff',transparent:true,opacity:.18,depthWrite:false}));edges.name='Display facet highlights';o.add(edges);
   }else{
    o.material.dispose();o.material=new THREE.MeshBasicMaterial({color:'#eef3f4',side:THREE.DoubleSide,toneMapped:false});
-   const outline=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,35),new THREE.LineBasicMaterial({color:'#d5e5ee',transparent:true,opacity:.45,depthWrite:false,toneMapped:false}));outline.name='Engraving contrast outline';o.add(outline);
+   // Preserve every engraving triangle; avoid a second bright wireframe over tiny letters.
   }
  }
 }
@@ -25,8 +25,8 @@ export function crystalEnvironment(renderer){
 
 export function addCrystalLighting(scene,center,scale=1){
  const lights=[];
- for(const [x,y,z,color,power] of [[-.38,.4,.32,'#c9ecff',5],[.34,.22,-.18,'#ffe5bd',4]]){
-  const l=new THREE.SpotLight(color,power*scale*scale,1.6*scale,.58,.8,2);
+ for(const [x,y,z,color,power] of [[-.45,1.25,.45,'#f2f7ff',4],[.38,1.0,-.32,'#fff0da',3]]){
+  const l=new THREE.SpotLight(color,power*scale*scale,3.5*scale,.82,1,2);
   l.position.set(center.x+x*scale,center.y+y*scale,center.z+z*scale);
   l.target.position.set(center.x,center.y+.17*scale,center.z);scene.add(l,l.target);lights.push(l);
  }

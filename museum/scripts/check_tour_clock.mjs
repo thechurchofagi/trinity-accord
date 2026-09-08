@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {tourClock} from '../dist/tour-clock.js';
+const stops=[{musicDuration:30},{inspectAt:0},{}],guides={tracks:[100,80,50].map((duration,stop)=>({duration,stop,language:'en'})),inspectionTracks:[20,10,10].map((duration,flaw)=>({duration,flaw,language:'en'}))};
+const initial=tourClock(stops,guides);assert.equal(initial.total,308.4);
+assert.equal(tourClock(stops,guides,{guideTime:25}).remaining,283.4);
+assert.equal(tourClock(stops,guides,{musicStarted:true,musicTime:10}).remaining,198.4);
+const inspected=tourClock(stops,guides,{step:1,inspectionStarted:true,inspectionIndex:1,inspectionTime:5});assert.ok(Math.abs(inspected.remaining-67.8)<1e-6);
+assert.equal(tourClock(stops,guides,{complete:true}).remaining,0);
+assert.equal(tourClock(stops,guides,{rate:2}).total,173.4);
+assert.equal(tourClock(stops,guides,{step:2,guideTime:50,walkRemaining:12}).remaining,12,'Finish waits for the remaining walk');
+console.log('PASS: measured bilingual-media durations, speed, excerpts, inspection sequence and walking remainder.');

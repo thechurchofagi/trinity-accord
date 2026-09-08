@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.rooms.v1",
-  "edition": "museum-v1.33.0",
+  "edition": "museum-v1.34.0",
   "created": "2026-09-05",
   "units": "metres",
   "coordinateSystem": "right-handed; Y up; route toward negative Z",
@@ -127,7 +127,7 @@
       "width": 14,
       "length": 14,
       "height": 8,
-      "floor": 0.35
+      "floor": 0
     },
     {
       "id": "waiting",
@@ -152,7 +152,7 @@
       "width": 12,
       "length": 9,
       "height": 6,
-      "floor": 0.35,
+      "floor": 0,
       "featuredExhibit": "authority-boundary"
     }
   ],

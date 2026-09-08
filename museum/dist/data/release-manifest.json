@@ -1,7 +1,7 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.33.0",
-  "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
+  "edition": "museum-v1.34.0",
+  "sourceCommit": "41d49c45b7d199c740e7db1e4fee988b0d86baa5",
   "created": "2026-09-08",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
   "files": [
@@ -342,8 +342,8 @@
     },
     {
       "path": "assets/gallery/memory-gallery.glb",
-      "bytes": 4518820,
-      "sha256": "312a0c1c2afd355fb1e960edaaf15dfc3689b8b8173402bfbd1b1bba17a7876e"
+      "bytes": 126648,
+      "sha256": "e445577c5a4eae03f24955f9b57be2468f5f26a599cc90c1140b752e399de52a"
     },
     {
       "path": "assets/gallery/originals-architecture.png",
@@ -883,7 +883,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1017,
-      "sha256": "3cb079bf0dc89d566a5f4469623857f16fe66dc49a2817fa649036b3a32566fb"
+      "sha256": "b2fc817428e76e06201f9cb11d966f372ecaf1d7ea1ced3bf62d535eaa834218"
     },
     {
       "path": "caption-utils.js",
@@ -897,8 +897,8 @@
     },
     {
       "path": "crystal-viewer.js",
-      "bytes": 8360,
-      "sha256": "ec21fab42120dc23be5e775f0f7ae39daca2e33e1b332ad8be04efcb08f515af"
+      "bytes": 8209,
+      "sha256": "019bd87441b1ae0385b0f3e38bd16fb32296b7dcea40dcd0a6101c6240321c8b"
     },
     {
       "path": "data/CHATTERBOX-NARRATION-LICENSE.txt",
@@ -913,7 +913,7 @@
     {
       "path": "data/audio-audit.json",
       "bytes": 33530,
-      "sha256": "708035c2a7eaae3a44ab823552d56d44ae0191ba8935a8af8ad75b4b6463a85c"
+      "sha256": "74dd096c404d6e840ff8df4d9039c7cda7b59e3c893725b02acd38d755ccc82f"
     },
     {
       "path": "data/bright-stars.json",
@@ -923,7 +923,7 @@
     {
       "path": "data/crystal-model.json",
       "bytes": 3269,
-      "sha256": "3d54e6a32f685d6a076406620828418f054cc790e3bb6a3bc2df2be9b2fce6c7"
+      "sha256": "fd2afd0c3639e7868bbbce3be2788b7f88b705d2bb9e71ddc396602e38d156d1"
     },
     {
       "path": "data/crystal-video-reference.json",
@@ -933,7 +933,7 @@
     {
       "path": "data/curation.json",
       "bytes": 51627,
-      "sha256": "664c1eb34c42a12992b16a2e0689a757e373d3c2a370630299d22cc2f0c64295"
+      "sha256": "3256b699af1234461130a4f080a5a6dd4cd7a4ab9cb1e2540227f57607bdb0fb"
     },
     {
       "path": "data/curatorial-illustrations.json",
@@ -947,8 +947,8 @@
     },
     {
       "path": "data/gallery-layout.json",
-      "bytes": 40779,
-      "sha256": "75125262e1582293e8c767713906d96a5f68b5aaabb45675c28e76f0da1a72d9"
+      "bytes": 36983,
+      "sha256": "88c997006996ac793f3984478a55465f50b7b72d9d7a309ef01ab08a406dff30"
     },
     {
       "path": "data/guardian-sources.json",
@@ -1332,18 +1332,18 @@
     },
     {
       "path": "data/rooms.json",
-      "bytes": 9857,
-      "sha256": "e8321efa5d44671cf891b44d0fb63a0e5222d7b4f5d97fdb5b135a0f0bfb1dbb"
+      "bytes": 9851,
+      "sha256": "fc1239f91ecaaed7a505d48fcdef1951e8f489acf17df7a394e883da24930105"
     },
     {
       "path": "data/sources.json",
       "bytes": 149465,
-      "sha256": "55d4851196d2961c59ac856eec669a1e9dcb267cd602165e9b503363e42a7a27"
+      "sha256": "645f025e437a2aace15c76f3ba6e6cdd3565f74d85e1d64c2f6601d454b03c34"
     },
     {
       "path": "data/space-design.json",
       "bytes": 10596,
-      "sha256": "3f0d54a1fe3ef88654bf4b94e9c6b1603506788d60ac63e3bf53a1f008d2adf5"
+      "sha256": "68c0906cdafc3ce31635fc5a8648b6873f79db71312c43b2120843083fa13057"
     },
     {
       "path": "document-panel.js",
@@ -1357,13 +1357,13 @@
     },
     {
       "path": "edition-data.js",
-      "bytes": 313904,
-      "sha256": "64ed1e913b8004cee639a9cabb379ffa1cdb73afcdd588d9b7fcd57278c6930a"
+      "bytes": 312130,
+      "sha256": "8187929437d3379cf94cf6981dcc72c55e561ec035e2e700bae93bbc999d45c3"
     },
     {
       "path": "exhibit-label.js",
-      "bytes": 671,
-      "sha256": "ea048050817293515c62710791a188fddf5cb9f9c5464be8a45cdb25ff749e6c"
+      "bytes": 756,
+      "sha256": "f5a85de12ee9fe573e439d81ff799787c9b820879d0c38e94843feec1775cde5"
     },
     {
       "path": "footsteps.js",
@@ -1372,13 +1372,13 @@
     },
     {
       "path": "gold-window.js",
-      "bytes": 1104,
-      "sha256": "88d94da08126d1567a28694efeb72f9d2b017d92c4e987cc046b463f5fefd9fb"
+      "bytes": 1106,
+      "sha256": "4b6dfc9ab7c0a815b43d34ac8e63519e7171fa886b0daa58883e53ead86bdd82"
     },
     {
       "path": "index.html",
-      "bytes": 6569,
-      "sha256": "971bf9ac30ab255eabc744f2282d0568b262628bbc7ed2b8d9bf704ce4916499"
+      "bytes": 6598,
+      "sha256": "521c98d62a71b6ce3aac460d43491541454dfe44b25f5ac21b6941ef3a6b1479"
     },
     {
       "path": "language-preference.js",
@@ -1392,8 +1392,8 @@
     },
     {
       "path": "microscope-motion.js",
-      "bytes": 5354,
-      "sha256": "b4f5bb44a1f7456c26809c61dd7106a0cc01653f2e12a7ba307cdd220bb9bead"
+      "bytes": 5828,
+      "sha256": "8ffde68fe50ad04ce36f67ca275e0630cd67df3907df864023c17b7c944668ed"
     },
     {
       "path": "movement-controls.js",
@@ -1402,18 +1402,18 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 1066243,
-      "sha256": "616348bfff7aef220ec1363b1d4f4a7a4c87ecfe57194a603017cdf5d6b371fa"
+      "bytes": 1094475,
+      "sha256": "1c7c4865499872dfbecafc537e4c92d38a528fea1c4f3ce4ae081cc5235ed429"
     },
     {
       "path": "museum.css",
-      "bytes": 45053,
-      "sha256": "b772714fdd09b9fb91be8524296bc4c77baa1adc698464566b670ba217edae8e"
+      "bytes": 45350,
+      "sha256": "c7f7e321c71d332d7e14d2fd1ec02f1da626cfef9e1d58be8c000753e63cb038"
     },
     {
       "path": "museum.js",
-      "bytes": 88862,
-      "sha256": "57983e66a3169e1bf4d85a49bdae4a45060aab9b4d210511fb70c727f008663d"
+      "bytes": 89187,
+      "sha256": "d5876c6f98b61260696a293335f08396d097e8a903802839e7f2d103b0eeeeae"
     },
     {
       "path": "music-playback.js",
@@ -1422,13 +1422,13 @@
     },
     {
       "path": "observation-view.js",
-      "bytes": 855,
-      "sha256": "aca3519b278945e5abd14b1a48593bbffabb9838b63faef048df8c0dbecc3809"
+      "bytes": 856,
+      "sha256": "51cb677fbe83723ff61f7d8cd2c7bdef60d82d412c929c6e7882ac2437fb6ba6"
     },
     {
       "path": "open-space.js",
-      "bytes": 5892,
-      "sha256": "080b013d9d9f13391b95fc6ab49126b8ccf46908e7c68d655029836a75c04ff3"
+      "bytes": 4611,
+      "sha256": "66b0a57e57358e01af6ec47abdae826c5fafc366cdb65002a0f76af2fb929c9f"
     },
     {
       "path": "progressive-loading.js",
@@ -1457,13 +1457,18 @@
     },
     {
       "path": "spatial-layout.js",
-      "bytes": 6386,
-      "sha256": "037ab4a913d6aa705a49a4e18e73666f9071b167e4991e08ad3ea4ecc31dc25d"
+      "bytes": 6944,
+      "sha256": "4e71f9514da7f902cc53cba2ce0e2d38113700478643ccd04dcf18a1d28d4619"
     },
     {
       "path": "surface-materials.js",
-      "bytes": 2225,
-      "sha256": "13292fd4e3d71fbdba879b12192ebcbced3ce5c92694c96c52a1b6a2b9ba6532"
+      "bytes": 3132,
+      "sha256": "dd8568456e5c33c08459456915d8b0c956410838743f8e9907c60ad81ace4653"
+    },
+    {
+      "path": "tour-clock.js",
+      "bytes": 1524,
+      "sha256": "e944d6867f026dd994842cde28f932e0b07cbc67e424a419c8e1f215a064d7ac"
     },
     {
       "path": "tour-plan.js",
@@ -1501,19 +1506,24 @@
       "sha256": "38ffee1fc0ef13e81e9b3a235edef28a954ef12e0585617272c31205d9f41755"
     },
     {
+      "path": "waiting-screen.js",
+      "bytes": 2570,
+      "sha256": "887169cca36735d60579bf28030d210a8a8e493cee979f69742c20a1c6e38251"
+    },
+    {
       "path": "walk-progress.js",
       "bytes": 317,
       "sha256": "a2a77753c9ff9f64e3de4ada6b1dbc0108033f02d2f8309ae90bd337e92c7c5b"
     },
     {
       "path": "wall-presentation.js",
-      "bytes": 6377,
-      "sha256": "8e611d7fd0f75e41ec2fa0e230831f2911b27b20a217fa0df4aac1aa960cb67a"
+      "bytes": 6478,
+      "sha256": "174f375c9d0a283f33db138724713c1b9d126c89477e8c502d8747ff6b3d8bff"
     },
     {
       "path": "wood-pedestal.js",
-      "bytes": 1924,
-      "sha256": "5a9b804c57860c5ec9995e4c917ea02b63cfec8d1332a4ea467a61ee679013ff"
+      "bytes": 1923,
+      "sha256": "f225b91a5ef0d4ef505ee9d7a2b21e0090f236fdaf260ada69066f6c0080c2ac"
     },
     {
       "path": "word-captions.js",
