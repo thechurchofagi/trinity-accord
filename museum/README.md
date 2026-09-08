@@ -115,3 +115,8 @@ stored hashes identify this particular set of recordings.
 Three.js scene. It approaches an illustrative crystal position and disappears
 before the separate original evidence photo opens. Manual verification is
 explicitly initiated; leaving cancels pending animation and photograph callbacks.
+
+
+## Six-room edition v1.32
+
+The shared geometry is `scene/gallery-layout.json`. `scene/build_spatial_gallery.py` exports and bakes the Blender architecture; `dist/spatial-layout.js` supplies the identical preview and collision-aware routes. `node scripts/check_spatial_layout.mjs` checks door shoulders, ramp heights, crystal clearance and observation paths. The new 540-second tour is `dist/tour-plan.js`; original audio/word lyrics are unchanged. Guardian Principles v1.1 and the later Authority Charter are distinct sources in `dist/data/guardian-sources.json`. The new guide uses newly synthesized Edge voices, not the proposed OpenAI voice candidates. Architectural reference images are not photographs or browser/device certification.

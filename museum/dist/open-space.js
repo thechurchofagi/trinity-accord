@@ -3,7 +3,7 @@ import {fetchBytes} from './progressive-loading.js';
 import {createEarthSequence} from './earth-sequence.js';
 
 // Later exhibition scenery; no astronomical measurement or live reception feed.
-export function addOpenSpace(scene, targets, sculptures, catalog){
+export function addOpenSpace(scene, targets, sculptures, catalog,layout=null){
  const exterior=new THREE.Group();exterior.name='Distant exterior';scene.add(exterior);
  const black=new THREE.MeshBasicMaterial({color:'#000000',fog:false,toneMapped:false,depthWrite:false});
  for(const [z,rotation] of [[-190,0],[190,Math.PI]]){
@@ -39,7 +39,7 @@ export function addOpenSpace(scene, targets, sculptures, catalog){
  document.addEventListener?.('visibilitychange',()=>sequence.resetClock());
  const titanium=new THREE.MeshStandardMaterial({color:'#183747',metalness:.8,roughness:.24});
  const light=new THREE.MeshStandardMaterial({color:'#a8ebff',emissive:'#63d4ff',emissiveIntensity:.65,metalness:.25,roughness:.2});
- const waiting=new THREE.Group();waiting.position.set(0,0,-65.6);scene.add(waiting);
+ const waiting=new THREE.Group();waiting.position.set(0,layout?.rooms[5].floor||0,(layout?.endZ??-66)+.8);scene.add(waiting);
  const frame=new THREE.Mesh(new THREE.TorusGeometry(1.88,.072,12,100),titanium);frame.position.y=2.25;waiting.add(frame);
  const ring=new THREE.Mesh(new THREE.TorusGeometry(1.79,.015,8,100),light);ring.position.set(0,2.25,.045);waiting.add(ring);ring.userData.exhibit='first-contact';targets.push(ring,frame);frame.userData.exhibit='first-contact';sculptures.push({light,base:.65});
  for(const side of [-1,1]){

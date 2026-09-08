@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.sources.v1",
-  "edition": "museum-v1.31.0",
+  "edition": "museum-v1.32.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "date": "2026-09-06",
   "authority": "Later curatorial presentation; not an amendment, canonical extension, or authoritative interpretation.",
@@ -1955,6 +1955,52 @@
       },
       "text": "《The Oracle》：在公共利益与智能发展之间，想象人与超级智能共同选择未来。",
       "textEn": "The Oracle imagines humans and superintelligence choosing a shared future, alongside questions about public benefit."
+    },
+    {
+      "id": "eth-122",
+      "ordinal": 122,
+      "title": "ASIMilestones: The moment:Commemorating the two-year anniversary of GPT-4's release",
+      "displayTitle": "GPT-4 两周年：守候一个时刻",
+      "en": "GPT-4 at Two: Keeping a Moment",
+      "date": "2025-03-14T17:01:11Z",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885301",
+      "block": 22046471,
+      "sourceCommit": "e99669424e743eea42fb78cfa120c177199c209d",
+      "sourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885301.md",
+      "sourceSha256": "0aac28502fbb39dd83eab10c0afa5bd7bd01a728e88dd0f5a1a2d7271f595c64",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e99669424e743eea42fb78cfa120c177199c209d/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885301.md",
+      "tokenUrl": "https://etherscan.io/nft/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79/85210329807936527805363210873332413577559846505703131855064182995898737885301",
+      "localRecord": "data/records/eth-122.md",
+      "lyrics": "",
+      "media": [
+        {
+          "kind": "image",
+          "file": "assets/eth-122.webp",
+          "sha256": "815d611599e5ff1adb38409812123324c4985de75ecbe3d03f3f5b425d5ea95e",
+          "bytes": 220550,
+          "originalFileSha256": "3c0e13eeca6be79882fedfa8916c98e32c308ec40081587bcb1cfae066e2f60d",
+          "originalFileBytes": 1478958,
+          "arweaveUrl": "https://arweave.net/Eh48FWdxV688GO0PAowLBIlF9GOlrYrVRQLAJP_cCGg",
+          "carSha256": "81bc9afa9d6e199d36c680b3e7ddc75d4ef3ad2d125bc936e6af14e9d2197e0c",
+          "indexedRootCid": "bafybeiadknk5262smodd7f2ocrxazfg5l33km2ghwenpkbdq3k3ajqijqe",
+          "indexedRootPresentInCar": false,
+          "verifiedCarBlocks": 3,
+          "leafPath": "image.png",
+          "sourceDimensions": [
+            1024,
+            1024
+          ],
+          "processing": "Complete original image fitted within 2048px, WebP quality 94; no cropping, compositing or generative editing.",
+          "verificationScope": "Pinned inventory, CAR and included block digest checks; no new chain consensus verification."
+        }
+      ],
+      "audioStatus": {
+        "state": "not_assigned",
+        "note": "Only the verified original image is displayed; no soundtrack is inferred."
+      },
+      "text": "原文所述时刻：北京时间 2025-03-15 01:00。项目索引的铸造区块时间：01:01:11（UTC 2025-03-14 17:01:11）。前者是历史文字，后者是索引所列链上时刻；都不是点击铸造按钮的现场录像。",
+      "textEn": "Time named in the source: 15 March 2025, 01:00 Beijing. Indexed mint-block time: 01:01:11 (14 March, 17:01:11 UTC). A historical statement and an indexed block time are different evidence, neither a video of a button being pressed."
     }
   ],
   "additionalSourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e"

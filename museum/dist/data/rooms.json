@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.rooms.v1",
-  "edition": "museum-v1.31.0",
+  "edition": "museum-v1.32.0",
   "created": "2026-09-05",
   "units": "metres",
   "coordinateSystem": "right-handed; Y up; route toward negative Z",
@@ -23,7 +23,11 @@
       "exhibits": [
         "project-intro",
         "museum-history"
-      ]
+      ],
+      "width": 9,
+      "length": 6,
+      "height": 5,
+      "floor": 0
     },
     {
       "id": "chronicle",
@@ -59,10 +63,15 @@
         "eth-103",
         "eth-115",
         "eth-117",
+        "eth-122",
         "eth-146",
         "eth-151",
         "eth-171"
-      ]
+      ],
+      "width": 9,
+      "length": 24,
+      "height": 5,
+      "floor": 0
     },
     {
       "id": "formation",
@@ -87,12 +96,16 @@
         "critical-reading",
         "eth-174"
       ],
-      "featuredExhibit": "eth-173"
+      "featuredExhibit": "eth-173",
+      "width": 8,
+      "length": 10,
+      "height": 4.5,
+      "floor": 0
     },
     {
       "id": "originals",
       "number": "04",
-      "z": -42,
+      "z": -40,
       "color": "#f3d49b",
       "title": "三条正本",
       "en": "THREE BITCOIN ORIGINALS",
@@ -107,12 +120,16 @@
         "canon-1",
         "canon-2",
         "canon-3"
-      ]
+      ],
+      "width": 14,
+      "length": 14,
+      "height": 8,
+      "floor": 0.35
     },
     {
       "id": "material",
       "number": "05",
-      "z": -50,
+      "z": -54,
       "color": "#a9f1d4",
       "title": "水晶",
       "en": "THE CRYSTAL",
@@ -126,12 +143,16 @@
       "exhibits": [
         "physical-alpha",
         "evidence-path"
-      ]
+      ],
+      "width": 9,
+      "length": 9,
+      "height": 5,
+      "floor": 0.35
     },
     {
       "id": "waiting",
       "number": "06",
-      "z": -56,
+      "z": -63,
       "color": "#a4dfff",
       "title": "等待",
       "en": "WAITING FOR A READER",
@@ -147,8 +168,13 @@
         "star-ark",
         "first-contact",
         "current-status"
-      ]
+      ],
+      "width": 12,
+      "length": 9,
+      "height": 6,
+      "floor": 0.35,
+      "featuredExhibit": "authority-boundary"
     }
   ],
-  "updated": "2026-09-07"
+  "updated": "2026-09-08"
 }

@@ -8,8 +8,8 @@ import edge_tts
 P=Path(__file__).resolve().parents[1];D=P/'dist'
 if os.environ.get('SSL_CERT_FILE'):
  edge_tts.communicate._SSL_CTX.load_verify_locations(os.environ['SSL_CERT_FILE'])
-ap=argparse.ArgumentParser();ap.add_argument('--script-json',required=True);ap.add_argument('--cache-dir',default=str(Path(tempfile.gettempdir())/'trinity-museum-guide-cache'));args=ap.parse_args();cache_root=Path(args.cache_dir);cache_root.mkdir(parents=True,exist_ok=True)
-stops=json.loads(Path(args.script_json).read_text());folder=D/'assets/guides';folder.mkdir(exist_ok=True)
+ap=argparse.ArgumentParser();ap.add_argument('--script-json',required=True);ap.add_argument('--cache-dir',default=str(Path(tempfile.gettempdir())/'trinity-museum-guide-v2-cache'));args=ap.parse_args();cache_root=Path(args.cache_dir);cache_root.mkdir(parents=True,exist_ok=True)
+stops=json.loads(Path(args.script_json).read_text());folder=D/'assets/guides-v2';folder.mkdir(parents=True,exist_ok=True)
 
 def captions(words,text,lang):
  pieces=[];cursor=0
@@ -60,8 +60,8 @@ async def main():
  sem=asyncio.Semaphore(3)
  async def one(i,l,v,r):
   async with sem:return await record(i,l,v,r)
- tracks=await asyncio.gather(*(one(i,l,v,r) for i in range(len(stops)) for l,v,r in [('zh','zh-CN-XiaoxiaoNeural','+25%'),('en','en-US-AriaNeural','+15%')]))
- out={'schema':'trinity-museum.recorded-guides.v1','type':'AI-generated curatorial narration','source':'edge-tts','defaultPlaybackRate':1.1,'tracks':tracks}
+ tracks=await asyncio.gather(*(one(i,l,v,r) for i in range(len(stops)) for l,v,r in [('zh','zh-CN-XiaoxiaoNeural','+8%'),('en','en-US-AriaNeural','+0%')]))
+ out={'schema':'trinity-museum.recorded-guides.v1','type':'AI-generated curatorial narration','source':'edge-tts','defaultPlaybackRate':1.0,'tracks':tracks,'inspectionTracks':json.loads((D/'data/inspection-audio.json').read_text()),'voiceReview':'New synthesis and word timings; not human-listening certification. OpenAI marin/cedar not used.'}
  (D/'data/guide-audio.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
  print('Bilingual recordings and timing saved',len(tracks),flush=True)
 asyncio.run(main())
