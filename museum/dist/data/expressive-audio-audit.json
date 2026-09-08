@@ -1,0 +1,219 @@
+[
+  {
+    "textSha256": "f7d37ebb274b64a8686a03cd244907ed80debb1652adbc74b398ebfd4384034c",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "d5764d128ee9263ef059d5db2a19db401127a51d9eb48a97b8897ebbbb6cb963",
+    "previousAudit": {
+      "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 1.0,
+      "unmatchedSourceWords": [],
+      "transcript": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future through images, songs, texts, and a physical crystal. Look back at Earth. Then follow three actions, recording in time, choosing to seal, and leaving judgment to a later reader. Later.",
+      "humanListeningReview": false
+    },
+    "firstTranscript": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future through images, songs, texts, and a physical crystal. Look back at Earth, then follow three actions, recording in time, choosing to seal, and leaving judgment to a later reader.",
+    "transcript": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future through images, songs, texts, and a physical crystal. Look back at Earth, then follow three actions, recording in time, choosing to seal, and leaving judgment to a later reader.",
+    "normalisedTokenCoverage": 1.0,
+    "extraTokens": 0,
+    "differences": [],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "f238c02267d34ea7c56fc6ab7e4c3bb7385378f9a4fded7f6bfb852ae80bf0e5",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "3c4125585dc654fd9aded6efb8570a0f499a4cf850c8d4f344590758a5948323",
+    "previousAudit": {
+      "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 0.9565217391304348,
+      "unmatchedSourceWords": [
+        "fifteenth,",
+        "twenty",
+        "twenty-five.",
+        "block",
+        "Blockchain"
+      ],
+      "transcript": "Why not wait until everything is settled and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT four. Its text names one in the morning, Beijing time, on March 15, 2025. The project index places the mint lock one minute and eleven seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. block chain can be read here as more than storage, sequence confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+      "humanListeningReview": false
+    },
+    "firstTranscript": "Why not wait until everything is settled and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT -4. Its text names one in the morning, Beijing Time, on March 15th, 2025. The project index places the mint lock one minute and 11 seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage, sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+    "transcript": "Why not wait until everything is settled and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT -4. Its text names one in the morning, Beijing Time, on March 15th, 2025. The project index places the mint lock one minute and 11 seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage, sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+    "normalisedTokenCoverage": 0.9913793103448276,
+    "extraTokens": 0,
+    "differences": [
+      {
+        "kind": "replace",
+        "expected": [
+          "block"
+        ],
+        "recognised": [
+          "lock"
+        ]
+      }
+    ],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "667021fccb7f03a7ad66d371f0dbdec63e63cc9fedb6d79b919ac8f509d56b51",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "6c091d6e919af9e88ffeadad787e7ddc2f9632352cb88ab16377da170f671054",
+    "previousAudit": {
+      "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 0.9345794392523364,
+      "unmatchedSourceWords": [
+        "seventy",
+        "responds",
+        "alignment-faking",
+        "eighteenth,",
+        "twenty",
+        "twenty-four.",
+        "almost-real-time"
+      ],
+      "transcript": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror. Its reflection offers another face. Record 70 response to the alignment -faking research announced by Anthropic and Redwood Research on December 18, 2024. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety. anxiety into a visible contrast. Its historical text also calls the creative practice an almost real -time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+      "humanListeningReview": false
+    },
+    "firstTranscript": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror. Its reflection offers another face. Record 70 responds to the alignment -faking research announced by Anthropic and Redwood Research on December 18, 2024. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost real -time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+    "transcript": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror. Its reflection offers another face. Record 70 responds to the alignment -faking research announced by Anthropic and Redwood Research on December 18, 2024. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost real -time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+    "normalisedTokenCoverage": 0.990990990990991,
+    "extraTokens": 0,
+    "differences": [
+      {
+        "kind": "replace",
+        "expected": [
+          "eighteenth"
+        ],
+        "recognised": [
+          "eighteen"
+        ]
+      }
+    ],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "53cd14f90b59afb88fec2148270a6e76c0117dd97fe85b434fff4ba0598c4fd9",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "6b533dcf4e94e1a71da825dd426ccc6d4a7a48e3364228a96de39836379028cf",
+    "previousAudit": {
+      "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 0.9649122807017544,
+      "unmatchedSourceWords": [
+        "and",
+        "AI-simulated"
+      ],
+      "transcript": "If criticism unsettles an argument, why preserve the criticism, too? The creeds in their crucible keeps an AI simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here, the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator's interpretation before entering the discussion. Thank you for your attention.",
+      "humanListeningReview": false
+    },
+    "firstTranscript": "If criticism unsettles an argument, why preserve the criticism too? The creeds and their crucible keeps an AI -simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here, the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator's interpretation before entering the discussion.",
+    "transcript": "If criticism unsettles an argument, why preserve the criticism too? The creeds and their crucible keeps an AI -simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here, the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator's interpretation before entering the discussion.",
+    "normalisedTokenCoverage": 1.0,
+    "extraTokens": 0,
+    "differences": [],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "2c3ba774cab530c3a74af7e4c46d86d0983c1d74893a72b5d99f3277fcff0a86",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "64a950d98cec6ea044da97d3e52f4ef29d8d8c251c0344afe6a81e090d07c3e7",
+    "previousAudit": {
+      "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 0.9902912621359223,
+      "unmatchedSourceWords": [
+        "meta-record"
+      ],
+      "transcript": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the originals. The protocol offers propositions. The covenant of the flaw connects the address to a physical object and its evidence. The sealed meta record binds the relationship and points to the Ethereum Chronicle. It does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+      "humanListeningReview": false
+    },
+    "firstTranscript": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the originals. The protocol offers propositions. The covenant of the flaw connects the address to a physical object and its evidence. The sealed meta -record binds the relationship and points to the Ethereum Chronicle. It does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+    "transcript": "How can a work refuse further revision, even by its creator? These three displays correspond to the three Bitcoin inscriptions identified as the originals. The protocol offers propositions. The covenant of the flaw connects the address to a physical object and its evidence. The sealed meta -record binds the relationship and points to the Ethereum Chronicle. It does not contain every image or song. What matters is not only what was written, but where later writing ceases to amend this completed object. The full sources remain available. A fixed text does not require a fixed judgment. Preserving a claim does not make it true.",
+    "normalisedTokenCoverage": 1.0,
+    "extraTokens": 0,
+    "differences": [],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "6e7403dbb41bbaa85d7f55a508136ffca8f0c6fb58d14c79d4e0125f2ce0dd02",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "bea7133baf931b5ebee032a2248ee6987704cd869eb513e73b67d1e65bba7cbb",
+    "previousAudit": {
+      "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 0.9807692307692307,
+      "unmatchedSourceWords": [
+        "centre",
+        "uncopyability"
+      ],
+      "transcript": "When digital copies can multiply, what does a flaw in a physical object preserve? At the center is an exhibition reconstruction of Core Object Alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention. It does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, angles, depth, and relationships between features. No claim of absolute uncopiability is needed. Why might an imperfect thing invite care rather than correction?",
+      "humanListeningReview": false
+    },
+    "firstTranscript": "When digital copies can multiply, what does a flaw in a physical object preserve? At the center is an exhibition reconstruction of core object alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention. It does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, angles, depth, and relationships between features. No claim of absolute uncopyability is needed. Why might an imperfect thing invite care rather than correction?",
+    "transcript": "When digital copies can multiply, what does a flaw in a physical object preserve? At the center is an exhibition reconstruction of core object alpha. In the real crystal, engraving and irregular features connect the text to matter that can be examined again. First look at the whole object. Then open an original microscope photograph. The virtual microscope guides our attention. It does not alter the evidence image. A file comparison can check a photograph. Examining the object also requires positions, angles, depth, and relationships between features. No claim of absolute uncopyability is needed. Why might an imperfect thing invite care rather than correction?",
+    "normalisedTokenCoverage": 1.0,
+    "extraTokens": 0,
+    "differences": [],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "72559168fb403a59efc245c5511088953e57b62da77369874d6c6c0840009f64",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "05a7648d44f963db60eb9d198216e1575c1ba07f1e74ed2b8bea1873e9265643",
+    "previousAudit": {
+      "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 0.9464285714285714,
+      "unmatchedSourceWords": [
+        "What",
+        "if",
+        "one",
+        "point",
+        "one,",
+        "non-amending"
+      ],
+      "transcript": "One of the creator changes his mind. Could he change the work? Guardian Principles. Version 1 .1. Places the creator within the same non -amending boundary. He may continue to interpret, question, and care for the records. But later commentary gains no privileged authority and cannot amend the three designated originals. This is not a fourth original. The principles themselves remain subordinate. Blockchain preserves a reference we can check. It cannot prevent someone from writing another text. or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+      "humanListeningReview": false
+    },
+    "firstTranscript": "What if the creator changes his mind? Could he change the work? Guardian Principles, version 1 .1, places the creator within the same non -amending boundary. He may continue to interpret, question, and care for the records, but later commentary gains no privileged authority and cannot amend the three designated originals. This is not a fourth original. The principles themselves remain subordinate. Blockchain preserves a reference we can check. It cannot prevent someone from writing another text or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+    "transcript": "What if the creator changes his mind? Could he change the work? Guardian Principles, version 1 .1, places the creator within the same non -amending boundary. He may continue to interpret, question, and care for the records, but later commentary gains no privileged authority and cannot amend the three designated originals. This is not a fourth original. The principles themselves remain subordinate. Blockchain preserves a reference we can check. It cannot prevent someone from writing another text or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+    "normalisedTokenCoverage": 0.9911504424778761,
+    "extraTokens": 0,
+    "differences": [
+      {
+        "kind": "delete",
+        "expected": [
+          "point"
+        ],
+        "recognised": []
+      }
+    ],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  },
+  {
+    "textSha256": "adc9699de2b6f6dd30871e7efb40d5ea68869789024080b0a9032b7eadfad73c",
+    "method": "Independent Whisper small.en + VAD word timings; exact source text retained; unmatched word timing interpolated",
+    "inputAudioSha256": "b19460d6db5ba1c8145538703d3b532256b7bd62aaa612ff763a09607568db2e",
+    "previousAudit": {
+      "method": "Whisper base.en word timestamps mapped to source text; unmatched spellings interpolated between recognised neighbours",
+      "recognisedExactWordCoverage": 1.0,
+      "unmatchedSourceWords": [],
+      "transcript": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them? Thank you for your time.",
+      "humanListeningReview": false
+    },
+    "firstTranscript": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them?",
+    "transcript": "What does waiting mean if no answer comes? This address does not promise a reply. A later reader may examine, question, respond, or remain silent. The records remain. Interpretation need not end with their creator. How would you read them?",
+    "normalisedTokenCoverage": 1.0,
+    "extraTokens": 0,
+    "differences": [],
+    "edits": [],
+    "accepted": true,
+    "humanListeningReview": false
+  }
+]

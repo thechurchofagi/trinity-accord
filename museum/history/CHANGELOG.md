@@ -1,3 +1,11 @@
+## v1.32 final candidate refinement
+
+- Use the completed six-room shared Blender model with distinct palettes, denoised baked lighting, an offset crystal-room exit, larger readable Originals, a restrained crystal aura, and an unobstructed black-sky ending.
+- Bind eight new English Chatterbox Turbo recordings by exact script hash after independent Whisper small.en + VAD review. Reordered tour stops cannot silently receive the wrong recording. The audio audit records recognition differences. This is not a human listening certificate or a guarantee of perfect recognition.
+- Keep Chinese Xiaoxiao recordings, all original musical recordings/lyrics and microscope evidence. Replace stale voice credits and point the reading archive to the same current bilingual guide tracks.
+- Keep the nine-minute tour, original mirror image, anniversary timing distinctions and later non-amending guardianship display. First clicks approach each Original consistently; details remain a deliberate second action.
+- Validate the static distribution, geometry, source hashes and desktop/mobile Chromium viewports. Actual Android/iOS hardware and live Zoom transmission remain outside automated acceptance.
+
 # museum-v1.32.0 · Six rooms, questions and guardianship
 
 - Replace the uniform corridor with six shared footprints: Earth entry, Chronicle, Formation, 12-sided/8m-high Canon hall, independent crystal room, and waiting. Preview, Blender geometry, floor heights, door openings, picking and camera routes use the same configuration. The 0.35m raised final rooms are connected by a central 1:12 ramp with shallow side steps.

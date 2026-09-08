@@ -12,8 +12,8 @@
     },
     {
       "path": "archive.html",
-      "bytes": 105293,
-      "sha256": "b4ef8e7f5a0c0617fba27d2c0ee0e3ae03255b5e97d7414fe277a7a9843dd2df"
+      "bytes": 116708,
+      "sha256": "6d146f2b1bb4938ce1d5be62a4c6f62ac28f468845ce5bfc7ba905990891ee04"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -521,6 +521,46 @@
       "sha256": "62c2425336a74019df58c86116798f18b389d6aef1812e31f95d1ba610fb86bc"
     },
     {
+      "path": "assets/guides-expressive/2c3ba774cab5-en.mp3",
+      "bytes": 615981,
+      "sha256": "64a950d98cec6ea044da97d3e52f4ef29d8d8c251c0344afe6a81e090d07c3e7"
+    },
+    {
+      "path": "assets/guides-expressive/53cd14f90b59-en.mp3",
+      "bytes": 328365,
+      "sha256": "6b533dcf4e94e1a71da825dd426ccc6d4a7a48e3364228a96de39836379028cf"
+    },
+    {
+      "path": "assets/guides-expressive/667021fccb7f-en.mp3",
+      "bytes": 676653,
+      "sha256": "6c091d6e919af9e88ffeadad787e7ddc2f9632352cb88ab16377da170f671054"
+    },
+    {
+      "path": "assets/guides-expressive/6e7403dbb41b-en.mp3",
+      "bytes": 696621,
+      "sha256": "bea7133baf931b5ebee032a2248ee6987704cd869eb513e73b67d1e65bba7cbb"
+    },
+    {
+      "path": "assets/guides-expressive/72559168fb40-en.mp3",
+      "bytes": 724653,
+      "sha256": "05a7648d44f963db60eb9d198216e1575c1ba07f1e74ed2b8bea1873e9265643"
+    },
+    {
+      "path": "assets/guides-expressive/adc9699de2b6-en.mp3",
+      "bytes": 281901,
+      "sha256": "b19460d6db5ba1c8145538703d3b532256b7bd62aaa612ff763a09607568db2e"
+    },
+    {
+      "path": "assets/guides-expressive/f238c02267d3-en.mp3",
+      "bytes": 648621,
+      "sha256": "3c4125585dc654fd9aded6efb8570a0f499a4cf850c8d4f344590758a5948323"
+    },
+    {
+      "path": "assets/guides-expressive/f7d37ebb274b-en.mp3",
+      "bytes": 352173,
+      "sha256": "d5764d128ee9263ef059d5db2a19db401127a51d9eb48a97b8897ebbbb6cb963"
+    },
+    {
       "path": "assets/guides-v2/00-en.mp3",
       "bytes": 130320,
       "sha256": "936e9e3f04cecea483dc37313f01f096d30060a4948d23e64354e28f7bed5504"
@@ -638,7 +678,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1017,
-      "sha256": "ca1dc11d1f7762983efe9581e8a3ba48330fd4c5d0d3279343ce80367f77ff80"
+      "sha256": "72c52566b731af6c6e0d0517a0361d618cecc966399b86414fe07f1a0564f75b"
     },
     {
       "path": "caption-utils.js",
@@ -654,6 +694,11 @@
       "path": "crystal-viewer.js",
       "bytes": 8389,
       "sha256": "3334f29f94feeb2e1345db352d513e2c58211312a4d413f6b2199351743900ff"
+    },
+    {
+      "path": "data/CHATERBOX-NARRATION-LICENSE.txt",
+      "bytes": 1704,
+      "sha256": "af2c5c5a9caf4f7be9a31e5e6cd8db706adbb39ff7bb8e8b0d6bf449a0379679"
     },
     {
       "path": "data/agi-four-letters.json",
@@ -691,6 +736,11 @@
       "sha256": "4587ddbc528405d1d23897f0148d35a596646c7c2f2acd69f950129419cb2baa"
     },
     {
+      "path": "data/expressive-audio-audit.json",
+      "bytes": 20471,
+      "sha256": "ef37d1f829f16c3c2ba7b3f9b0724745c79d9a39af27f3813cf4c0ee6ae5d151"
+    },
+    {
       "path": "data/gallery-layout.json",
       "bytes": 51235,
       "sha256": "ced3ad63c2153822cf9414798d750ae20da9104647901f97316d3ae9991bf390"
@@ -702,8 +752,8 @@
     },
     {
       "path": "data/guide-audio.json",
-      "bytes": 51279,
-      "sha256": "e26b6d788e5f16b3eabea52de99de5a3d119be4501077effdce096367e47b1fd"
+      "bytes": 78830,
+      "sha256": "d25e787e65de716a0737b57b8178360af03f252d29425992cd12e544afd51192"
     },
     {
       "path": "data/inspection-audio.json",
@@ -1077,8 +1127,8 @@
     },
     {
       "path": "edition-data.js",
-      "bytes": 271953,
-      "sha256": "1dd57a7dc69b991b407c49cf90225ee5064b527dc928642d9deb391d44ece8f6"
+      "bytes": 295908,
+      "sha256": "c1f98c9ba9ccbff435e7762e10bbecff8bbdc917c941e5b5c52fb19d37cffa75"
     },
     {
       "path": "exhibit-label.js",
@@ -1093,7 +1143,7 @@
     {
       "path": "index.html",
       "bytes": 6610,
-      "sha256": "b771c8be1f1be8e03b661949d95e874108ee5c733e89f57f9fc4588bf95aefde"
+      "sha256": "ed1c9c810b20d967fa7e874fb0231f3dcd71aef2e398d3a6b7f98f16353c16ee"
     },
     {
       "path": "language-preference.js",
@@ -1117,8 +1167,8 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 997605,
-      "sha256": "ee03a0ed6f493bb83b02329e9d5ef07b324ff35f591537415a8f409c5f99e4a9"
+      "bytes": 1021644,
+      "sha256": "368ed9c16e04708b8c677baa8f0d69f1bd4acc9819b9e9b743a3111b06c58e1e"
     },
     {
       "path": "museum.css",
@@ -1127,8 +1177,8 @@
     },
     {
       "path": "museum.js",
-      "bytes": 85822,
-      "sha256": "d52957d2a75d166998b2f5e868ebb37c5c533078e37294bd5957f219ffa83d69"
+      "bytes": 86305,
+      "sha256": "aeb592e0b3ed3e522f4b3454c811d9eb197fe672510c846cca1f4eb1b39e1d3f"
     },
     {
       "path": "music-playback.js",
