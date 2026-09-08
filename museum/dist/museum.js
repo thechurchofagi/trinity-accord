@@ -250,7 +250,7 @@ function roomView(){
 }
 function waitingView(){if(!spatialReady)return;const r=galleryLayout.rooms[4];moveCamera(new THREE.Vector3(0,r.floor+galleryLayout.eyeHeight,galleryLayout.endZ+7.5),new THREE.Vector3(0,r.floor+galleryLayout.eyeHeight,galleryLayout.endZ-20));}
 
-function updateStrip(){const r=roomData.rooms[roomIndex];if(!r.exhibits.includes(selectedExhibit))selectedExhibit=r.featuredExhibit||r.exhibits[0];$('verify-flaws').hidden=selectedExhibit!=='physical-alpha';$('focus-art').textContent=tx('查看详情','View details');$('overview').textContent=tx('展厅全景','Room view');$('move-help').textContent=tx('左手移动 · 右手转身','Left: walk · right: turn');$('move-stick').setAttribute('aria-label',tx('左手摇杆移动，右手滑动自由转身','Left joystick moves relative to your view; swipe on the right to turn freely'));const e=exhibits.get(selectedExhibit),img=imageOf(e);$('look-help').textContent=tx('滑动转身','Swipe to turn');$('fallback-art').classList.toggle('waiting-view',roomIndex===4);$('fallback-art').innerHTML=`<span class="attached-label">${exhibitLabel(e,lang==='zh',!!soundFor(e)).split('\n').map((line,i)=>i?'<small>'+esc(line)+'</small>':'<strong>'+esc(line)+'</strong>').join('')}</span>`+(img?`<img loading="lazy" src="${esc(img)}" alt="${esc(title(e))}">`:`<div class="document-note"><strong>${esc(title(e))}</strong><p>${esc(tx(e.summary||e.text,e.summaryEn||e.textEn)||e.songTitle||'')}</p></div>`)+`<span class="fallback-title">${esc(title(e))}</span>`;$('fallback-art').onclick=()=>showExhibit(selectedExhibit);$('fallback-mode').textContent=tx('作品浏览模式 · 点击画作播放并显示歌词','Gallery mode · tap artwork to play with lyrics');}
+function updateStrip(){const r=roomData.rooms[roomIndex];if(!r.exhibits.includes(selectedExhibit))selectedExhibit=r.featuredExhibit||r.exhibits[0];$('verify-flaws').hidden=selectedExhibit!=='physical-alpha';$('focus-art').textContent=tx('查看详情','View details');$('overview').textContent=tx('展厅全景','Room view');$('move-help').textContent=tx('左手移动 · 右手转身','Left: walk · right: turn');$('move-stick').setAttribute('aria-label',tx('左手摇杆移动，右手滑动自由转身','Left joystick moves relative to your view; swipe on the right to turn freely'));const e=exhibits.get(selectedExhibit),img=imageOf(e);$('look-help').textContent=tx('滑动转身','Swipe to turn');$('fallback-art').classList.toggle('waiting-view',roomIndex===4);$('fallback-art').innerHTML=`<span class="attached-label">${exhibitLabel(e,lang==='zh',soundFor(e)).split('\n').map((line,i)=>i?'<small>'+esc(line)+'</small>':'<strong>'+esc(line)+'</strong>').join('')}</span>`+(img?`<img loading="lazy" src="${esc(img)}" alt="${esc(title(e))}">`:`<div class="document-note"><strong>${esc(title(e))}</strong><p>${esc(tx(e.summary||e.text,e.summaryEn||e.textEn)||e.songTitle||'')}</p></div>`)+`<span class="fallback-title">${esc(title(e))}</span>`;$('fallback-art').onclick=()=>showExhibit(selectedExhibit);$('fallback-mode').textContent=tx('作品浏览模式 · 点击画作播放并显示歌词','Gallery mode · tap artwork to play with lyrics');}
 function ensureRoomResources(){if(roomIndex>=3)prepareInspection();if(roomIndex===0||roomIndex===4)loadSky?.();}
 function goRoom(i,keepTour=false){
  if(i<0||i>=roomData.rooms.length)return;closePanel();roomIndex=i;selectedExhibit=roomData.rooms[i].featuredExhibit||roomData.rooms[i].exhibits[0];hovered=null;$('hover-label').hidden=true;updateUI();history.replaceState(null,'','#'+roomData.rooms[i].id);ensureRoomResources();
@@ -395,18 +395,16 @@ function textTexture(lines,{color='#233b47',size=84,width=2048,height=1536,backg
 
 function wallLabelTexture(e){
  const c=document.createElement('canvas'),width=(mounts.get(e.id)?.width||1.9)+.036;
- c.width=Math.round(width*760);c.height=Math.round(WALL_PLAQUE.height*760);const ctx=c.getContext('2d');let rows=[];
- const lines=exhibitLabel(e,lang==='zh',!!soundFor(e)).split('\n');
- // Keep the metal dimensions fixed; fit complete text inside its reserved area.
- for(let scale=1;scale>=.55;scale-=.025){rows=[];
-  lines.forEach((line,i)=>{const size=(i===0?60:46)*scale;ctx.font=`${i===0?650:500} ${size}px sans-serif`;
-   for(const text of wrapPanelText(line,t=>ctx.measureText(t).width,c.width-104,lang))rows.push({text,size,first:i===0});});
-  if(rows.reduce((n,r)=>n+r.size*1.3,0)<=c.height-64)break;
- }
+ c.width=Math.round(width*760);c.height=Math.round(WALL_PLAQUE.height*760);const ctx=c.getContext('2d');
+ const lines=exhibitLabel(e,lang==='zh',soundFor(e)).split('\n');
  const metal=ctx.createLinearGradient(0,0,0,c.height);metal.addColorStop(0,'#aeb9ba');metal.addColorStop(.48,'#d1d9d8');metal.addColorStop(1,'#a7b4b6');ctx.fillStyle=metal;ctx.fillRect(0,0,c.width,c.height);
  ctx.strokeStyle='#edf5f8';ctx.lineWidth=2;ctx.strokeRect(7,7,c.width-14,c.height-14);
- let y=32;ctx.fillStyle='#18303a';ctx.textBaseline='top';
- for(const r of rows){ctx.font=`${r.first?650:500} ${r.size}px sans-serif`;ctx.fillText(r.text,52,y);y+=r.size*1.3;}
+ const bands=[{y:30,h:75},{y:118,h:116},{y:255,h:116},{y:404,h:106}];ctx.textBaseline='top';
+ lines.forEach((line,i)=>{const band=bands[i];let size=i===0?60:46,rows=[];
+  for(;size>=24;size--){ctx.font=`${i===0?650:500} ${size}px sans-serif`;rows=wrapPanelText(line,t=>ctx.measureText(t).width,c.width-88,lang);if(rows.length*size*1.25<=band.h)break;}
+  ctx.fillStyle=i===3?'#244c59':'#18303a';ctx.font=`${i===0?650:500} ${size}px sans-serif`;
+  rows.forEach((text,n)=>ctx.fillText(text,44,band.y+n*size*1.25));
+ });
  const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=Math.min(renderer?.capabilities.getMaxAnisotropy()||1,16);texture.userData.plaqueHeight=WALL_PLAQUE.height;return texture;
 }
 
@@ -423,20 +421,20 @@ function documentTexture(e){
  return textTexture(lines,{size:44,width:1536,height:1152,color:'#263940',background:'#edf0e8'});
 }
 function addExhibit(e,x,z,angle,color,y=galleryLayout.exhibitCentreHeight){
- const img=imageOf(e),config=galleryLayout.rooms.flatMap(r=>r.exhibits).find(m=>m.id===e.id),width=config?.displayWidth||(img?1.7:1.9),height=config?.displayHeight||(img?1.7:1.425);
+ const img=imageOf(e),config=galleryLayout.rooms.flatMap(r=>r.exhibits).find(m=>m.id===e.id),width=config?.displayWidth||(img||e.ordinal?1.7:1.9),height=config?.displayHeight||(img||e.ordinal?1.7:1.425);const artTop=y+.85; y=artTop-height/2;
  // Mount the work 15 mm in front of the wall, independently of the old baked mounts.
  const wallX=x;mounts.set(e.id,{x:wallX,y,z,angle,width,height});
  const group=new THREE.Group();group.position.set(wallX,y,z);group.rotation.y=angle;scene.add(group);
  const plane=new THREE.Mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshPhysicalMaterial({color:'#ffffff',roughness:.94,metalness:0,specularIntensity:.08,envMapIntensity:.2}));plane.position.z=.005;group.add(plane);plane.userData.exhibit=e.id;targets.push(plane);
  const label=makeWallPlaque(group,wallLabelTexture(e),width,height);wallLabels.set(e.id,label);label.userData.exhibit=e.id;targets.push(label);
- if(!img){const slab=new THREE.Mesh(new THREE.BoxGeometry(width+.12,height+.12,.07),new THREE.MeshStandardMaterial({color:'#9fafb4',metalness:.65,roughness:.38}));slab.position.z=-.042;group.add(slab);makeWallFrame(group,width,height);plane.material.map=documentTexture(e);canonicalPanels.set(e.id,plane);return;}
+ if(!img){const slab=new THREE.Mesh(new THREE.BoxGeometry(width+.036,height+.036,.024),new THREE.MeshStandardMaterial({color:'#9fafb4',metalness:.65,roughness:.38}));slab.position.z=-.012;group.add(slab);makeWallFrame(group,width,height);plane.material.map=documentTexture(e);canonicalPanels.set(e.id,plane);return;}
  let frame=makeWallFrame(group,1.9,1.7);frame.frame.visible=false;
  plane.material.map=textTexture([title(e),tx('正在载入原图','LOADING ORIGINAL IMAGE')],{size:26,width:512,height:384});
  imageJobs.add(async()=>{const bytes=await fetchBytes(img);const url=URL.createObjectURL(new Blob([bytes]));try{
   const texture=await new THREE.TextureLoader().loadAsync(url);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=Math.min(renderer.capabilities.getMaxAnisotropy(),16);
   const ratio=texture.image.width/texture.image.height,w=1.7,h=w/ratio;
   // Equal image and plaque widths; preserve every original pixel and align top edges.
-  group.position.y=y+.85-h/2;
+  group.position.y=artTop-h/2;
   plane.material.map.dispose();plane.material.map=texture;plane.geometry.dispose();plane.geometry=new THREE.PlaneGeometry(w,h);plane.material.needsUpdate=true;
   frame.dispose();frame=makeWallFrame(group,w,h);resizeWallPlaque(label,w,h);Object.assign(mounts.get(e.id),{y:group.position.y,width:w,height:h});label.material.map.dispose();label.material.map=wallLabelTexture(e);resizeWallPlaque(label,w,h);
  }finally{URL.revokeObjectURL(url);}},()=>Math.abs(z-camera.position.z)).catch(()=>{plane.material.map.dispose();plane.material.map=textTexture([title(e),tx('原图暂未载入 · 点击重试','IMAGE UNAVAILABLE · OPEN DETAILS')],{size:26,width:512,height:384});plane.material.needsUpdate=true;});

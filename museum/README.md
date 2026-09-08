@@ -1,3 +1,5 @@
+Current edition: **museum-v1.36.0**. Entrance boards clear the window jambs; all NFT mounts share a top edge and width; four plaque bands separate events, mint themes and actual song titles; sustained touch reaches a bounded run.
+
 Current edition: **museum-v1.35.0**. Consistent plaque sizing, clearer overhead exhibit lighting, sustained-touch walking acceleration, five-column navigation, and restored post-tour crystal inspection controls.
 
 # Trinity Accord Museum / 三位一体协定三维展馆
