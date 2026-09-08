@@ -26,9 +26,9 @@ try:
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, args=['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'])
         # Full-size desktop/mobile frames are covered by check_presentation.py.
-        # A smaller real-time surface keeps SwiftShader capture work from stalling
+        # A 480 × 320 real-time surface keeps software rendering from stalling
         # the presentation clock; never disable 3D or reduce its motion here.
-        page = browser.new_page(viewport={'width': 960, 'height': 600})
+        page = browser.new_page(viewport={'width': 480, 'height': 320})
         page.on('console', lambda m: print('BROWSER_CONSOLE',m.type,m.text,flush=True) if m.type in ['error','warning'] else None)
         page.on('pageerror', lambda e: report['pageErrors'].append(str(e)))
         page.on('response', lambda r: report['assetFailures'].append(r.url) if r.status >= 400 and '/assets/' in r.url else None)

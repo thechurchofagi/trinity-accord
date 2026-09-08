@@ -115,8 +115,8 @@
     },
     {
       "path": "dist/museum.js",
-      "bytes": 88740,
-      "sha256": "bbefcbfdf0bc4d33333d4008a518f50ffbbea0da7ff03d869139da0b41f99fd5"
+      "bytes": 88960,
+      "sha256": "b68b98a8c51319ccd4307c372093ad1a4918958e3f1d355df3a522b29f899599"
     },
     {
       "path": "dist/music-playback.js",
@@ -211,7 +211,7 @@
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 1084143,
-    "sha256": "704132a0611dac91d279d505e90d1efebdf30f4e157f7a0cbaf89221cf549ffc"
+    "bytes": 1084324,
+    "sha256": "1c340232ef26c0f9874a241f41ba7f85233ac3e55ebd6ef530b8da934994b379"
   }
 }
