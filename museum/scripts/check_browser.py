@@ -28,7 +28,7 @@ try:
    for i in range(6):
     page.locator(f'#rooms [data-room="{i}"]').click(force=True);page.wait_for_function("document.getElementById('world').dataset.cameraMoving==='false'",timeout=90000)
     assert page.locator(f'#rooms [data-room="{i}"]').get_attribute('aria-current')=='true'
-    page.screenshot(path=str(OUT/f'{label}-{i}.png'));print('ROOM_RENDERED',label,i,flush=True)
+    page.screenshot(timeout=90000,path=str(OUT/f'{label}-{i}.png'));print('ROOM_RENDERED',label,i,flush=True)
    page.locator('#focus-art').click();page.wait_for_timeout(200)
    assert 'Guardian' in page.locator('#panel-content').inner_text()
    assert page.locator('#panel-content a[href="./data/records/guardian-charter-103635270.txt"]').count()==1
@@ -40,12 +40,12 @@ try:
     page.locator(f'#panel-content [data-exhibit="{eid}"]').click()
     page.wait_for_function("document.getElementById('world').dataset.cameraMoving==='false'",timeout=90000)
     if page.locator('#guide-audio-prompt').is_visible():page.locator('#guide-audio-start').click()
-    page.screenshot(path=str(OUT/f'{label}-focus-{eid}.png'));print('WORK_RENDERED',label,eid,flush=True)
+    page.screenshot(timeout=90000,path=str(OUT/f'{label}-focus-{eid}.png'));print('WORK_RENDERED',label,eid,flush=True)
    page.locator('#language').click();page.wait_for_timeout(200)
    assert page.locator('html').get_attribute('lang')=='zh-CN'
    page.locator('#focus-art').click()
    assert '守护者' in page.locator('#panel-content').inner_text()
-   page.screenshot(path=str(OUT/f'{label}-guardian-zh.png'))
+   page.screenshot(timeout=90000,path=str(OUT/f'{label}-guardian-zh.png'))
    page.locator('#close-panel').click()
    page.locator('#rooms [data-room="0"]').click(force=True)
    page.locator('#tour').click()

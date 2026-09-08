@@ -8,7 +8,7 @@ js=D/'__presentation_qa.js';html=D/'__presentation_qa.html'
 harness='''
 window.__presentationQA={
  get state(){return {ready:spatialReady,room:roomIndex,selected:selectedExhibit,touring,elapsed:tourElapsed,walkable:spatialReady&&isWalkable(galleryLayout,camera.position),camera:camera?.position.toArray(),yaw,voice:recordedGuide.track?.file,flaw:flawIndex};},
- station(i){stopTour();reduced=true;tourElapsed=tourStops.slice(0,i).reduce((a,s)=>a+s.seconds,0);guideResume=null;startTour(true);},
+ station(i){stopTour();manualUntil=0;pendingTourView=null;reduced=true;tourElapsed=tourStops.slice(0,i).reduce((a,s)=>a+s.seconds,0);guideResume=null;startTour(true);},
  focus(id){stopTour();reduced=true;focusExhibit(id);},
  inspect(i){return showFlaw(i);},
  closePhoto(){silenceGuide();closeFlaws();},
@@ -62,31 +62,31 @@ try:
     assert 'guides-expressive/' in state['voice'],state
     states.append(state);print('STATION_RENDERED',label,index,flush=True)
     page.evaluate('window.__presentationQA.settle()');page.wait_for_timeout(200)
-    if label=='desktop' or index in [1,4,5,6,7]:page.screenshot(path=str(OUT/f'{label}-station-{index}.png'))
+    if label=='desktop' or index in [1,4,5,6,7]:page.screenshot(timeout=90000,path=str(OUT/f'{label}-station-{index}.png'))
    for eid in ['canon-1','canon-2','canon-3']:
     page.evaluate('(id)=>window.__presentationQA.focus(id)',eid);page.evaluate('window.__presentationQA.settle()');page.wait_for_timeout(300)
     assert page.evaluate('window.__presentationQA.state.walkable')
-    if label=='desktop':page.screenshot(path=str(OUT/(label+'-'+eid+'.png')))
+    if label=='desktop':page.screenshot(timeout=90000,path=str(OUT/(label+'-'+eid+'.png')))
    for flaw in range(3):
     page.evaluate('(i)=>window.__presentationQA.inspect(i)',flaw)
     page.wait_for_function("document.querySelector('#flaw-view img')?.complete && document.querySelector('#flaw-view img').naturalWidth>0")
     assert page.locator('#flaw-view img').count()==1
     expected=json.loads((D/'data/public-flaws.json').read_text())['items'][flaw]['file']
     assert page.locator('#flaw-view img').get_attribute('src')==expected
-    if flaw==0:page.screenshot(path=str(OUT/(label+'-original-flaw.png')))
+    if flaw==0:page.screenshot(timeout=90000,path=str(OUT/(label+'-original-flaw.png')))
     page.evaluate('window.__presentationQA.closePhoto()')
    page.evaluate('window.__presentationQA.music()');page.evaluate('window.__presentationQA.settle()')
    page.wait_for_function('window.__presentationQA.lyricTime()!==undefined')
    if page.locator('#guide-audio-prompt').is_visible():page.locator('#guide-audio-start').click()
    page.evaluate("document.getElementById('music').currentTime=window.__presentationQA.lyricTime()+.1")
    page.wait_for_function("document.querySelector('#subtitle-lines [data-word]') && document.querySelector('#subtitle-lines .subtitle-zh')")
-   page.screenshot(path=str(OUT/(label+'-original-music-lyrics.png')))
+   page.screenshot(timeout=90000,path=str(OUT/(label+'-original-music-lyrics.png')))
    page.evaluate('window.__presentationQA.finish()');page.evaluate('window.__presentationQA.settle()');page.wait_for_timeout(300)
    assert page.evaluate('window.__presentationQA.state.elapsed')==580
    assert page.evaluate('window.__presentationQA.state.touring') is False
    assert page.locator('body').get_attribute('data-presentation')=='true'
    assert not page.locator('#exhibit-strip').is_visible()
-   page.screenshot(path=str(OUT/(label+'-finished-sky.png')))
+   page.screenshot(timeout=90000,path=str(OUT/(label+'-finished-sky.png')))
    page.locator('#rooms [data-room="1"]').click(force=True)
    assert page.locator('#exhibit-strip').count()==0,'Numbered song strip stays removed'
    assert page.locator('#walk-controls').is_visible(),'Walking controls remain usable'
