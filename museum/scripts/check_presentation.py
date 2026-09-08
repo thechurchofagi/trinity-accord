@@ -7,11 +7,12 @@ P=pathlib.Path(__file__).resolve().parents[1];D=P/'dist';OUT=pathlib.Path(os.env
 js=D/'__presentation_qa.js';html=D/'__presentation_qa.html'
 harness='''
 window.__presentationQA={
- get state(){return {ready:spatialReady,room:roomIndex,selected:selectedExhibit,touring,elapsed:tourElapsed,walkable:spatialReady&&isWalkable(galleryLayout,camera.position),camera:camera?.position.toArray(),voice:recordedGuide.track?.file,flaw:flawIndex};},
+ get state(){return {ready:spatialReady,room:roomIndex,selected:selectedExhibit,touring,elapsed:tourElapsed,walkable:spatialReady&&isWalkable(galleryLayout,camera.position),camera:camera?.position.toArray(),yaw,voice:recordedGuide.track?.file,flaw:flawIndex};},
  station(i){stopTour();reduced=true;tourElapsed=tourStops.slice(0,i).reduce((a,s)=>a+s.seconds,0);guideResume=null;startTour(true);},
  focus(id){stopTour();reduced=true;focusExhibit(id);},
  inspect(i){return showFlaw(i);},
  closePhoto(){silenceGuide();closeFlaws();},
+ settle(){if(motion){camera.position.copy(motion.end);yaw=motion.endYaw;pitch=motion.endPitch;motion=null;}},
  music(){stopTour();focusExhibit('eth-070');return playTrack(exhibits.get('eth-049'),exhibits.get('eth-070'),false);},
  lyricTime(){return lyricCues[0]?.words?.[0]?.start;},
  finish(){stopTour();reduced=true;roomIndex=5;waitingView();touring=true;tourElapsed=tourDuration;tourTick(performance.now());}
@@ -29,6 +30,24 @@ try:
    page=b.new_page(viewport={'width':w,'height':h},is_mobile=label=='mobile',has_touch=label=='mobile',reduced_motion='reduce');errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
    page.goto('http://127.0.0.1:8766/__presentation_qa.html?lang=en#entrance',wait_until='networkidle')
    page.wait_for_function('window.__presentationQA?.state.ready');page.wait_for_selector('#scene-status',state='hidden')
+   # A focused button, caps lock and arrows must not swallow walking or exit guidance.
+   page.locator('#tour').click()
+   if page.locator('#guide-audio-prompt').is_visible():page.locator('#guide-audio-start').click()
+   page.wait_for_function("!document.getElementById('narration').paused")
+   page.locator('#guide-speed').click()
+   before=page.evaluate('window.__presentationQA.state')
+   page.keyboard.down('w');page.wait_for_timeout(600);page.keyboard.up('w')
+   after=page.evaluate('window.__presentationQA.state')
+   assert after['touring'] and before['camera']!=after['camera'],(before,after)
+   page.keyboard.press('Escape');assert page.evaluate('window.__presentationQA.state.touring')
+   # Hover moves only the cursor; dragging turns, without cancelling guidance.
+   before=page.evaluate('window.__presentationQA.state')
+   page.mouse.move(w*.35,h*.3);page.mouse.move(w*.65,h*.3,steps=10)
+   after=page.evaluate('window.__presentationQA.state')
+   assert before['yaw']==after['yaw'],(before,after)
+   page.mouse.down();page.mouse.move(w*.4,h*.3,steps=10);page.mouse.up()
+   after=page.evaluate('window.__presentationQA.state');assert after['touring'] and after['yaw']!=before['yaw']
+   page.locator('#tour').click();assert not page.evaluate('window.__presentationQA.state.touring')
    states=[]
    for index in [0,1,2,3,4,5,6,7]:
     page.evaluate('(i)=>window.__presentationQA.station(i)',index)
@@ -38,10 +57,10 @@ try:
     state=page.evaluate('window.__presentationQA.state');assert state['walkable'],state
     assert 'guides-expressive/' in state['voice'],state
     states.append(state)
-    page.wait_for_timeout(200)
+    page.evaluate('window.__presentationQA.settle()');page.wait_for_timeout(200)
     if label=='desktop' or index in [1,4,5,6,7]:page.screenshot(path=str(OUT/f'{label}-station-{index}.png'))
    for eid in ['canon-1','canon-2','canon-3']:
-    page.evaluate('(id)=>window.__presentationQA.focus(id)',eid);page.wait_for_timeout(300)
+    page.evaluate('(id)=>window.__presentationQA.focus(id)',eid);page.evaluate('window.__presentationQA.settle()');page.wait_for_timeout(300)
     assert page.evaluate('window.__presentationQA.state.walkable')
     if label=='desktop':page.screenshot(path=str(OUT/(label+'-'+eid+'.png')))
    for flaw in range(3):
@@ -52,22 +71,23 @@ try:
     assert page.locator('#flaw-view img').get_attribute('src')==expected
     if flaw==0:page.screenshot(path=str(OUT/(label+'-original-flaw.png')))
     page.evaluate('window.__presentationQA.closePhoto()')
-   page.evaluate('window.__presentationQA.music()')
+   page.evaluate('window.__presentationQA.music()');page.evaluate('window.__presentationQA.settle()')
    page.wait_for_function('window.__presentationQA.lyricTime()!==undefined')
    if page.locator('#guide-audio-prompt').is_visible():page.locator('#guide-audio-start').click()
    page.evaluate("document.getElementById('music').currentTime=window.__presentationQA.lyricTime()+.1")
    page.wait_for_function("document.querySelector('#subtitle-lines [data-word]') && document.querySelector('#subtitle-lines .subtitle-zh')")
    page.screenshot(path=str(OUT/(label+'-original-music-lyrics.png')))
-   page.evaluate('window.__presentationQA.finish()');page.wait_for_timeout(300)
-   assert page.evaluate('window.__presentationQA.state.elapsed')==540
+   page.evaluate('window.__presentationQA.finish()');page.evaluate('window.__presentationQA.settle()');page.wait_for_timeout(300)
+   assert page.evaluate('window.__presentationQA.state.elapsed')==580
    assert page.evaluate('window.__presentationQA.state.touring') is False
    assert page.locator('body').get_attribute('data-presentation')=='true'
    assert not page.locator('#exhibit-strip').is_visible()
    page.screenshot(path=str(OUT/(label+'-finished-sky.png')))
    page.locator('#rooms [data-room="1"]').click(force=True)
-   assert page.locator('#exhibit-strip').is_visible(),'Free exploration must restore its controls'
+   assert page.locator('#exhibit-strip').count()==0,'Numbered song strip stays removed'
+   assert page.locator('#walk-controls').is_visible(),'Walking controls remain usable'
    assert not errors,errors
-   report.append(dict(viewport=label,stations=states,originalPanels=3,unalteredMicroscopeImages=3,originalLyricsBothLanguages=True,completedSeconds=540,restoredManualControls=True,pageErrors=errors,scope='Accelerated state checks and rendered frames; not nine minutes of uninterrupted real-time playback or physical-device listening certification.'))
+   report.append(dict(viewport=label,stations=states,originalPanels=3,unalteredMicroscopeImages=3,originalLyricsBothLanguages=True,completedSeconds=580,restoredManualControls=True,pageErrors=errors,scope='Accelerated state checks and rendered frames; not nine minutes of uninterrupted real-time playback or physical-device listening certification.'))
    page.close()
   b.close()
 finally:

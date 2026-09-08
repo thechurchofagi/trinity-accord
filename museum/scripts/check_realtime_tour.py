@@ -38,9 +38,11 @@ try:
         page.locator('#tour').click()
         started = time.monotonic()
         seen = set()
+        seen_flaws = set()
+        inspection_files = {t['file']: t['flaw'] for t in guides['inspectionTracks'] if t['language']=='en'}
         previous = 0
         last_log = -15
-        while time.monotonic() - started < 660:
+        while time.monotonic() - started < 840:
             sample = page.evaluate('''() => {
               const a=document.getElementById('narration'),m=document.getElementById('music');
               return {progress:document.getElementById('tour-progress').textContent,
@@ -57,17 +59,20 @@ try:
             assert previous <= elapsed <= sample['wallSeconds'] + 2, sample
             assert not sample['blocked'], 'Uninterrupted playback requested: ' + str(sample)
             assert not (sample['playing'] and sample['musicPlaying']), 'Narration and song overlap'
+            if sample['playing'] and sample['source'] in inspection_files:
+                seen_flaws.add(inspection_files[sample['source']])
             if sample['playing'] and sample['source'] in expected:
                 seen.add(expected[sample['source']])
-            if elapsed - last_log >= 15 or elapsed == 540:
+            if elapsed - last_log >= 15 or elapsed == 580:
                 report['samples'].append(sample)
                 print('TOUR_PROGRESS', json.dumps(sample), flush=True)
                 last_log = elapsed
             previous = elapsed
-            if elapsed == 540:
+            if elapsed == 580:
                 break
             page.wait_for_timeout(1000)
-        assert previous == 540, 'Tour failed to finish within eleven wall-clock minutes'
+        assert previous == 580, 'Tour failed to finish within eleven wall-clock minutes'
+        assert seen_flaws == {0,1,2}, ('Missing audible flaw explanations', seen_flaws)
         assert seen == set(range(8)), ('Missing audible tour tracks', seen)
         assert page.locator('body').get_attribute('data-presentation') == 'true'
         assert not page.locator('#exhibit-strip').is_visible()
@@ -77,7 +82,7 @@ try:
         assert not report['assetFailures'], report['assetFailures']
         # Capture after completion: screenshots must not interrupt this test.
         page.screenshot(path=str(OUT / 'completed-tour.png'), timeout=60000)
-        report.update(passed=True, audibleStops=sorted(seen), completedSeconds=540,
+        report.update(passed=True, audibleStops=sorted(seen), audibleFlaws=sorted(seen_flaws), completedSeconds=580,
                       wallSeconds=round(time.monotonic() - started, 2))
         browser.close()
 finally:

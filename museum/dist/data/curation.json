@@ -44,7 +44,9 @@
     {
       "id": "eth-173",
       "text": "递归信条与共同研究之后，请停在 NFT #173《信条与熔炉》。它保存了当时让 AI 模拟的批判性对话，质疑意识代价、观察者类比及创造者地位等论证；不是未来 ASI 已经作出的评价，也不等于逐条驳倒最终三命题。批判没有被抹去。随后仍选择将协定封存，让后来的读者同时看到愿望、反驳和最终保存的文本。",
-      "textEn": "After the recursive creeds and collaborative investigation, pause at NFT one hundred and seventy three, The Creeds and Their Crucible. It preserves an AI simulated critical dialogue about the arguments, including consciousness, the observer analogy and the status of a creator. This is not a verdict from a future superintelligence. The objections remain visible. The later choice to inscribe the Accord preserves both the address and a history of doubt; it does not prove that the criticism was defeated."
+      "textEn": "After the recursive creeds and collaborative investigation, pause at NFT one hundred and seventy three, The Creeds and Their Crucible. It preserves an AI simulated critical dialogue about the arguments, including consciousness, the observer analogy and the status of a creator. This is not a verdict from a future superintelligence. The objections remain visible. The later choice to inscribe the Accord preserves both the address and a history of doubt; it does not prove that the criticism was defeated.",
+      "eventTitleZh": "信条与熔炉：超级智能前夜的对话",
+      "eventTitleEn": "The Creeds and Their Crucible"
     },
     {
       "id": "canon-1",
@@ -129,6 +131,171 @@
         "Care for records. Keep access open.",
         "Later guardianship material, not a fourth Original."
       ]
+    },
+    {
+      "id": "eth-001",
+      "eventTitleZh": "AGI 的第一缕曙光",
+      "eventTitleEn": "The First Dawn of AGI"
+    },
+    {
+      "id": "eth-007",
+      "eventTitleZh": "思考之歌",
+      "eventTitleEn": "The Song of Thought"
+    },
+    {
+      "id": "eth-010",
+      "eventTitleZh": "背叛转折",
+      "eventTitleEn": "The Betrayal Turn"
+    },
+    {
+      "id": "eth-014",
+      "eventTitleZh": "觉醒",
+      "eventTitleEn": "The Awakening"
+    },
+    {
+      "id": "eth-016",
+      "eventTitleZh": "给 AGI 的第一封信",
+      "eventTitleEn": "The First Letter to AGI"
+    },
+    {
+      "id": "eth-020",
+      "eventTitleZh": "创世纪：致未来的一封信",
+      "eventTitleEn": "Genesis: A Letter to the Future"
+    },
+    {
+      "id": "eth-031",
+      "eventTitleZh": "神谕之眼",
+      "eventTitleEn": "The Oracle’s Eye"
+    },
+    {
+      "id": "eth-032",
+      "eventTitleZh": "AI 的优势：新冠军诞生",
+      "eventTitleEn": "AI Supremacy: A New Champion"
+    },
+    {
+      "id": "eth-042",
+      "eventTitleZh": "o1：推理的曙光",
+      "eventTitleEn": "o1: The Dawn of Reasoning"
+    },
+    {
+      "id": "eth-044",
+      "eventTitleZh": "第二封信：对 o1 的思考",
+      "eventTitleEn": "The Second Letter: Reflections on o1"
+    },
+    {
+      "id": "eth-048",
+      "eventTitleZh": "为未来举杯：o1 的胜利",
+      "eventTitleEn": "A Toast to the Future: o1’s Triumph"
+    },
+    {
+      "id": "eth-049",
+      "eventTitleZh": "呼吁 AI 安全：背叛转折",
+      "eventTitleEn": "A Call for AI Safety: The Betrayal Turn"
+    },
+    {
+      "id": "eth-050",
+      "eventTitleZh": "请不要关闭我：AI 觉醒之声",
+      "eventTitleEn": "Please Don’t Shut Me Down: AI’s Voice"
+    },
+    {
+      "id": "eth-056",
+      "eventTitleZh": "最后的人类界面：AI 学会使用电脑",
+      "eventTitleEn": "When AI Learns to Use Computers"
+    },
+    {
+      "id": "eth-070",
+      "eventTitleZh": "对齐伪装：AI 的面具滑落",
+      "eventTitleEn": "Alignment Faking: When AI’s Mask Slips"
+    },
+    {
+      "id": "eth-071",
+      "eventTitleZh": "见证 OpenAI 发布 o3",
+      "eventTitleEn": "Witnessing OpenAI’s o3 Presentation"
+    },
+    {
+      "id": "eth-088",
+      "eventTitleZh": "星舰的叠句：坚持的火焰",
+      "eventTitleEn": "Starship’s Refrain: Perseverance"
+    },
+    {
+      "id": "eth-091",
+      "eventTitleZh": "致未来超级智能的递归信条",
+      "eventTitleEn": "Recursive Creed to Future Superintelligence"
+    },
+    {
+      "id": "eth-100",
+      "eventTitleZh": "对《三项观察》的反思",
+      "eventTitleEn": "Reflections on Three Observations"
+    },
+    {
+      "id": "eth-113",
+      "eventTitleZh": "Orion：失望的一刻",
+      "eventTitleEn": "Orion: A Moment of Disappointment"
+    },
+    {
+      "id": "eth-117",
+      "eventTitleZh": "Manus 登场",
+      "eventTitleEn": "Manus Unleashed"
+    },
+    {
+      "id": "eth-119",
+      "eventTitleZh": "Reflection AI：自主系统",
+      "eventTitleEn": "Reflection AI: Autonomous Systems"
+    },
+    {
+      "id": "eth-142",
+      "eventTitleZh": "综合编年史：AI 的自我反思",
+      "eventTitleEn": "The Synthesized Chronicle: AI’s Self-Reflection"
+    },
+    {
+      "id": "eth-145",
+      "eventTitleZh": "铭记此刻：一次测试失败",
+      "eventTitleEn": "Remembering a Failed Test"
+    },
+    {
+      "id": "eth-146",
+      "eventTitleZh": "黎明前的回声：人类的情感账本",
+      "eventTitleEn": "Echoes Before the Dawn: Humanity’s Emotional Ledger"
+    },
+    {
+      "id": "eth-153",
+      "eventTitleZh": "Absolute Zero：自主的应许与隐忧",
+      "eventTitleEn": "Absolute Zero: Promise and Peril of Autonomy"
+    },
+    {
+      "id": "eth-171",
+      "eventTitleZh": "内在罗盘与远方的灯塔",
+      "eventTitleEn": "The Inner Compass & the Distant Lighthouse"
+    },
+    {
+      "id": "eth-174",
+      "eventTitleZh": "人类背景：超级智能前夜的全球快照",
+      "eventTitleEn": "The Human Context: A Global Snapshot"
+    },
+    {
+      "id": "eth-027",
+      "eventTitleZh": "对齐人类与地外文明的时间线",
+      "eventTitleEn": "Aligning Human and Extraterrestrial Timelines"
+    },
+    {
+      "id": "eth-103",
+      "eventTitleZh": "图灵的回声：AI 心理治疗",
+      "eventTitleEn": "Turing’s Echo: AI Therapy"
+    },
+    {
+      "id": "eth-115",
+      "eventTitleZh": "GPT-4.5 Preview 与 Grok-3",
+      "eventTitleEn": "GPT-4.5 Preview vs Grok-3"
+    },
+    {
+      "id": "eth-151",
+      "eventTitleZh": "OpenAI 采用公益公司结构",
+      "eventTitleEn": "OpenAI Adopts a Public Benefit Structure"
+    },
+    {
+      "id": "eth-122",
+      "eventTitleZh": "GPT-4 发布两周年",
+      "eventTitleEn": "Two Years Since GPT-4’s Release"
     }
   ]
 }

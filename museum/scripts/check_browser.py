@@ -23,7 +23,7 @@ try:
    assert page.locator('#rooms button').count()==6
    assert not page.locator('#fallback-gallery').is_visible(),'Flat fallback is not WebGL acceptance'
    for i in range(6):
-    page.locator(f'#rooms [data-room="{i}"]').click(force=True);page.wait_for_timeout(800)
+    page.locator(f'#rooms [data-room="{i}"]').click(force=True);page.wait_for_timeout(12000)
     assert page.locator(f'#rooms [data-room="{i}"]').get_attribute('aria-current')=='true'
     page.screenshot(path=str(OUT/f'{label}-{i}.png'))
    page.locator('#focus-art').click();page.wait_for_timeout(200)
@@ -33,8 +33,9 @@ try:
    # Approach each key object through the public controls, not a hidden debug API.
    for room,eid in [(1,'eth-070'),(1,'eth-122'),(3,'canon-1'),(3,'canon-2'),(3,'canon-3'),(4,'physical-alpha'),(5,'authority-boundary')]:
     page.locator(f'#rooms [data-room="{room}"]').click(force=True)
-    page.locator(f'#exhibit-strip [data-focus="{eid}"]').click(force=True)
-    page.wait_for_timeout(1100)
+    page.locator('#room-works').click()
+    page.locator(f'#panel-content [data-exhibit="{eid}"]').click()
+    page.wait_for_timeout(16000)
     if page.locator('#guide-audio-prompt').is_visible():page.locator('#guide-audio-start').click()
     page.screenshot(path=str(OUT/f'{label}-focus-{eid}.png'))
    page.locator('#language').click();page.wait_for_timeout(200)

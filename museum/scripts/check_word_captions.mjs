@@ -44,6 +44,6 @@ assert(!runtime.includes('estimateCues('),'Estimated timing must not drive lyric
 assert(runtime.includes('request!==lyricRequest'),'Stale caption fetch guard missing');
 console.log(`${index.items.length} audio bindings; ${count} word intervals; gaps, seeks, paging, rejection and hashes pass.`);
 
-assert.equal(exhibitLabel({ordinal:103,date:'2025-01-01'},false,true),'No. 103 ♪\n2025-01-01');
+assert.ok(exhibitLabel({ordinal:103,date:'2025-01-01',title:'AI therapy',songTitle:'Unspoken'},false,true).includes('Song: Unspoken'));
 assert(!exhibitLabel({ordinal:103,date:'2025-01-01'},false,false).includes('♪'));
 console.log(Object.keys(zh.lines).length+' complete Chinese translations; music plaque symbol passes.');

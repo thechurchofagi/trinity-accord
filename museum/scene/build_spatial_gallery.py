@@ -4,7 +4,7 @@ import bpy,json,math,hashlib
 from mathutils import Vector
 P=Path(__file__).resolve().parents[1];D=P/'dist';O=D/'assets/gallery';layout=json.loads((P/'scene/gallery-layout.json').read_text())
 bpy.ops.wm.read_factory_settings(use_empty=True);s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.device='CPU';s.cycles.samples=48;s.cycles.use_denoising=True;s.render.threads_mode='FIXED';s.render.threads=4
-s.world=bpy.data.worlds.new('Soft museum ambient');s.world.use_nodes=True;s.world.node_tree.nodes['Background'].inputs[0].default_value=(.52,.58,.63,1);s.world.node_tree.nodes['Background'].inputs[1].default_value=.16
+s.world=bpy.data.worlds.new('Soft museum ambient');s.world.use_nodes=True;s.world.node_tree.nodes['Background'].inputs[0].default_value=(.52,.58,.63,1);s.world.node_tree.nodes['Background'].inputs[1].default_value=.42
 s.view_settings.view_transform='AgX';s.render.image_settings.file_format='PNG';s.render.resolution_percentage=100
 materials={};architecture=[];details=[]
 for key,defn in layout['materials'].items():
@@ -20,7 +20,7 @@ for part in layout['architecture']:
 def aim(o,target):o.rotation_euler=(Vector(target)-o.location).to_track_quat('-Z','Y').to_euler()
 for r in layout['rooms']:
  for depth in [r['start']+r['length']*.27,r['start']+r['length']*.73]:
-  data=bpy.data.lights.new('Soft room fill','AREA');data.energy=520 if r['id'] not in ['material','waiting'] else 130;data.shape='RECTANGLE';data.size=r['width']*.75;data.size_y=min(6,r['length']/2);o=bpy.data.objects.new('Soft room fill',data);s.collection.objects.link(o);o.location=(0,depth,r['floor']+r['height']-.3);aim(o,(0,depth,r['floor']))
+  data=bpy.data.lights.new('Soft room fill','AREA');data.energy=950 if r['id'] not in ['material','waiting'] else 800;data.shape='RECTANGLE';data.size=r['width']*.75;data.size_y=min(6,r['length']/2);o=bpy.data.objects.new('Soft room fill',data);s.collection.objects.link(o);o.location=(0,depth,r['floor']+r['height']-.3);aim(o,(0,depth,r['floor']))
 bpy.ops.object.camera_add(location=(0,2,1.65));cam=bpy.context.object;cam.data.lens=19;aim(cam,(0,14,2.2));s.camera=cam;s.render.resolution_x=1280;s.render.resolution_y=800
 # Bake static diffuse lighting; no high-cost browser shadows or light probes.
 bpy.ops.object.select_all(action='DESELECT')
