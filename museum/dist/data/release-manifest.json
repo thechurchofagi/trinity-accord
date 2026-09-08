@@ -12,8 +12,8 @@
     },
     {
       "path": "archive.html",
-      "bytes": 125233,
-      "sha256": "91d649d02d7bb687e785a32d99a55ed483b3ac5f36b55a9a0f6809e19dfa90ab"
+      "bytes": 128094,
+      "sha256": "133a134f146fb9135652b16ad17d1ae02eca7ad186f80b046a3f92df9a1040e1"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -616,6 +616,156 @@
       "sha256": "d2552a3de92b370207eb722b1900f16f8a4b9e74f07e18306d5057e0739d258d"
     },
     {
+      "path": "assets/guides-qwen-v133/flaw-0-en.mp3",
+      "bytes": 663213,
+      "sha256": "648a11f4cd7e2cc97f76ba38095fa84564f2b14aec9ba919f73bb1be9fd14611"
+    },
+    {
+      "path": "assets/guides-qwen-v133/flaw-0-zh.mp3",
+      "bytes": 794925,
+      "sha256": "a3a349d35aa02ec06d6ee2917e5931478a71dff4e161c83b58a7699a1ddface0"
+    },
+    {
+      "path": "assets/guides-qwen-v133/flaw-1-en.mp3",
+      "bytes": 134445,
+      "sha256": "82103c06f558e868c78e64056a8e8bf13357cac88f69bb78f23380652fb6960a"
+    },
+    {
+      "path": "assets/guides-qwen-v133/flaw-1-zh.mp3",
+      "bytes": 195885,
+      "sha256": "c0739b7e2268763306963ff7a19fb41ef48f4721d3c9e45275a4b11fc8ec9404"
+    },
+    {
+      "path": "assets/guides-qwen-v133/flaw-2-en.mp3",
+      "bytes": 177837,
+      "sha256": "fa1cd792690382f573ad6533af7715cff4c2d7d3c1c9f802aba2a51d724acda6"
+    },
+    {
+      "path": "assets/guides-qwen-v133/flaw-2-zh.mp3",
+      "bytes": 150957,
+      "sha256": "c47be059b3c2ec526623c2f096d15205358c08e59ec64bd5746f9975908c65d9"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-0-en.mp3",
+      "bytes": 337965,
+      "sha256": "c4e6ace0d0909b6f9ff2d2c36731995a4aa7875931743e439eb88c1ece9d302b"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-0-zh.mp3",
+      "bytes": 425133,
+      "sha256": "788d9c73149cb6aeb38cc154270c53eac786bf5a62a005cdc0fb6a99dcc88b52"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-1-en.mp3",
+      "bytes": 784557,
+      "sha256": "f4c03b31cd083f9db82a64ccb094236bc1e8721a6afa39ae8b21b2248b96a23e"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-1-zh.mp3",
+      "bytes": 733485,
+      "sha256": "679687fe66b1c5ec271d866caff9a4703e47eb5ebfc703066c7a47cee92d5c86"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-10-en.mp3",
+      "bytes": 706605,
+      "sha256": "b40949793cd0aae93998e9939a7c64aab0f049a30ad155eca4df7311aa17acc7"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-10-zh.mp3",
+      "bytes": 836013,
+      "sha256": "512947aebf44c8e9b99c18506de12e98c08df061e81940a2d1d25b24c04b9bcf"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-11-en.mp3",
+      "bytes": 630957,
+      "sha256": "686e06096df4418ba1735207777606a8ee0d6d7b72d2f32dea22e393b89faf99"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-11-zh.mp3",
+      "bytes": 745005,
+      "sha256": "1c0a6da6629f917dcf9e5d9965ffc5077a3a03f77407bf6d5c33d35dd1953581"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-2-en.mp3",
+      "bytes": 683565,
+      "sha256": "cfa3239df8a6bd14f1590b00f3a1672d3bec8e3c800fb44aea1259b60560b830"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-2-zh.mp3",
+      "bytes": 783405,
+      "sha256": "4b21697781df6fc1e11727922060a8db20bb743e8750cd26dc56ce73b7ab8307"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-3-en.mp3",
+      "bytes": 437805,
+      "sha256": "962c912ad6bda4777a3fe95440e3d58eee1bd79a1fef6932885893965d32a720"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-3-zh.mp3",
+      "bytes": 494253,
+      "sha256": "37c01573331ce1d66c0656d011810bb64ea2c0e7f44114b7441dcd24ceacf4ce"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-4-en.mp3",
+      "bytes": 365997,
+      "sha256": "0f3c3230e169f8fc28485e3e1b1b16099aee63337f47c7f070f9005e2f49fc51"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-4-zh.mp3",
+      "bytes": 453165,
+      "sha256": "97b6685afb1c572ecb9d66c683485cb4a391997d72dc2c0d512f16f16bb1ea2c"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-5-en.mp3",
+      "bytes": 536493,
+      "sha256": "ff70d4d70e0b8ab957f4feba189d980f2d5b1625788dca4671d5d8c73f421b5c"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-5-zh.mp3",
+      "bytes": 577197,
+      "sha256": "6f88bef695b71912bafaa326d890cc72d76490d896680f72d489ad1d037d5614"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-6-en.mp3",
+      "bytes": 1178925,
+      "sha256": "377877edfdfe9e46992aa208e7030bb1e124db03060541ce26bdf15a720ebb84"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-6-zh.mp3",
+      "bytes": 1283757,
+      "sha256": "9b3152ca13d8d9a00f1aef2907c7aa5e03379e8cf82304111ea76ab9565c0d3d"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-7-en.mp3",
+      "bytes": 469677,
+      "sha256": "6abfd367e55b37408a2fc9d71350722a1c27275cc541ef625263a0062e90c3ee"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-7-zh.mp3",
+      "bytes": 491565,
+      "sha256": "1d26f7dc45bfdd8bce9c0768db989f7cc9f781a504c11ffd79f9d0fce55c9616"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-8-en.mp3",
+      "bytes": 419757,
+      "sha256": "e2583465f59539cfa88d9b1491104d6d113518d6a6fa2bce74ae2c31bbc90ea7"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-8-zh.mp3",
+      "bytes": 490413,
+      "sha256": "868ea62c320c744263873c9b66f38730d67a42ff49d5f34e3a9f424bda6a419a"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-9-en.mp3",
+      "bytes": 1358253,
+      "sha256": "815fcf1c2a1e9a726d00d911a695c6f991627ca3a4efd9c36fc50a300cec3a56"
+    },
+    {
+      "path": "assets/guides-qwen-v133/stop-9-zh.mp3",
+      "bytes": 1546413,
+      "sha256": "75c4c8bd7afe03a8834a0f1bb4666880200bfcc3510ee614d78a09f1f9ddf5ec"
+    },
+    {
       "path": "assets/guides-v2/00-en.mp3",
       "bytes": 130320,
       "sha256": "936e9e3f04cecea483dc37313f01f096d30060a4948d23e64354e28f7bed5504"
@@ -733,7 +883,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1017,
-      "sha256": "99c5418bd5a5a40d07786cd75719a878080b8170268bfc78f8e0296b35123f70"
+      "sha256": "3cb079bf0dc89d566a5f4469623857f16fe66dc49a2817fa649036b3a32566fb"
     },
     {
       "path": "caption-utils.js",
@@ -807,13 +957,13 @@
     },
     {
       "path": "data/guide-audio.json",
-      "bytes": 153770,
-      "sha256": "271e98c2260325dce71d1020d0f904a53e17c8ed16fa3144d95338d8a765e3a9"
+      "bytes": 89611,
+      "sha256": "f988fc137031f060044cf40a71a68a8f68401637656bed0d2b976c3f626d6039"
     },
     {
       "path": "data/inspection-audio.json",
-      "bytes": 10853,
-      "sha256": "392f91f69fdba9fcb701812767e1531c5f482972b574c4eefcdf4e27a2f2f4d2"
+      "bytes": 11978,
+      "sha256": "dca79a04ad5bc77eada430dd5a091b8ce219cc5c7e582a48358de2ec8059748a"
     },
     {
       "path": "data/lyrics/eth-001.json",
@@ -961,9 +1111,14 @@
       "sha256": "fe97e247690ebc68bdce165fdd3ac545946b8385efc6b2b7830e34e043d0c35b"
     },
     {
-      "path": "data/narration-provenance.json",
+      "path": "data/narration-provenance-v131.json",
       "bytes": 105239,
       "sha256": "93ee7cf8beca8d64ab63e5037ebc895c41820d0168d3a2fb9b0d63f057b555b2"
+    },
+    {
+      "path": "data/narration-provenance.json",
+      "bytes": 901265,
+      "sha256": "a824e3dfbdbaaafeb48ad9e397558789f31c49b561b8de8b987b16591351455c"
     },
     {
       "path": "data/narration.json",
@@ -1202,8 +1357,8 @@
     },
     {
       "path": "edition-data.js",
-      "bytes": 342979,
-      "sha256": "392f2d78db8802e8dc0a5ea15fde750cfbb1673b4ccda97792478b1de052a626"
+      "bytes": 313904,
+      "sha256": "64ed1e913b8004cee639a9cabb379ffa1cdb73afcdd588d9b7fcd57278c6930a"
     },
     {
       "path": "exhibit-label.js",
@@ -1223,7 +1378,7 @@
     {
       "path": "index.html",
       "bytes": 6569,
-      "sha256": "29c13a9e2302da1f6ba34b1b22319c21330691ff286d5387054544f4ed942f54"
+      "sha256": "971bf9ac30ab255eabc744f2282d0568b262628bbc7ed2b8d9bf704ce4916499"
     },
     {
       "path": "language-preference.js",
@@ -1247,8 +1402,8 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 1084712,
-      "sha256": "6ebdd71685484e16cac99bf75e14d38818eb42856b0ef554ebd4d008f915632d"
+      "bytes": 1066243,
+      "sha256": "616348bfff7aef220ec1363b1d4f4a7a4c87ecfe57194a603017cdf5d6b371fa"
     },
     {
       "path": "museum.css",
@@ -1258,7 +1413,7 @@
     {
       "path": "museum.js",
       "bytes": 88862,
-      "sha256": "63bd1f783f1ef806501bd44952c097ec459f2e8a52a5684e2cfeb96adfb58849"
+      "sha256": "57983e66a3169e1bf4d85a49bdae4a45060aab9b4d210511fb70c727f008663d"
     },
     {
       "path": "music-playback.js",
@@ -1312,8 +1467,8 @@
     },
     {
       "path": "tour-plan.js",
-      "bytes": 18007,
-      "sha256": "6654cbeaffe816f7425d3597f81a11c67bf4ad0fc61dca431e820fea5bd496d7"
+      "bytes": 18031,
+      "sha256": "33b72ebb278c8d3ddf6d4d2f04b826d8e3c4691db134e2a9c30b58ec1dce188c"
     },
     {
       "path": "vendor/BufferGeometryUtils.js",

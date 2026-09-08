@@ -11,6 +11,10 @@ args = a.parse_args()
 audit = {p.stem: json.loads(p.read_text()) for p in Path(args.audit).glob('*.json')}
 notes = json.loads(Path(args.notes).read_text())
 secondary = {p.stem: json.loads(p.read_text()) for p in Path(args.secondary_audit).glob('*.json')} if args.secondary_audit else {}
+base_reviews = dict(audit)
+# Small has materially better Chinese recognition; retain available base results
+# as a second transcript instead of allowing script-variant noise to dominate.
+audit.update({k:v for k,v in secondary.items() if v['language'] == 'zh'})
 source = ast.parse((P/'scripts/render_qwen_guides.py').read_text())
 ns = {'re': re}
 fn = next(n for n in source.body if isinstance(n, ast.FunctionDef) and n.name == 'paragraphs')
@@ -27,13 +31,13 @@ for track in tracks:
         assert len(matches) == 1, ('Missing independent recognition', text)
         review = dict(matches[0])
         key = review['key']
-        other = secondary.get(key)
+        other = base_reviews.get(key) if review['language'] == 'zh' else secondary.get(key)
         if other and other['audioSha256'] == review['audioSha256']:
             review['secondaryRecognition'] = other
         elif other and other['audioSha256'] == review.get('rejectedAudioSha256'):
             review['rejectedTakeRecognition'] = other
         if review['normalizedSimilarity'] == 1:
-            review['textReview'] = 'Recognition matches the supplied text after removing punctuation and case.'
+            review['textReview'] = 'Recognition matches after punctuation/case normalization and conversion of traditional Chinese characters to simplified forms.'
         else:
             assert key[:12] in notes, ('Recognition difference requires a review note', key[:12], text, review['transcript'])
             review['textReview'] = notes[key[:12]]

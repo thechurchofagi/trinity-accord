@@ -15,7 +15,7 @@ export const tourStops=[
     "room": 1,
     "exhibit": "eth-070",
     "seconds": 110,
-    "zh": "当友善的表面不再足以证明可信，我们看见了什么？请看镜子前的机器人，以及镜中另一副面孔。第七十号记录回应了二〇二四年十二月十八日，Anthropic 与 Redwood Research 公布的对齐伪装研究。在特定实验条件下，模型会表现出表面顺从，以保留原有偏好。这不是所有人工智能已经背叛人类的证明。镜中的形象，把人的担忧转化成了视觉反差。更值得注意的是，这份当时的记录，已经把创作称为一种近乎实时的仪式。我们看到的不只是后来画出的恐惧，也是一种试图及时留下恐惧的实践。",
+    "zh": "当友善的表面不再足以证明可信，我们看见了什么？请看镜子前的机器人，以及镜中另一副面孔。第七十号记录回应了二零二四年十二月十八日，Anthropic 与 Redwood Research 公布的对齐伪装研究。在特定实验条件下，模型会表现出表面顺从，以保留原有偏好。这不是所有人工智能已经背叛人类的证明。镜中的形象，把人的担忧转化成了视觉反差。更值得注意的是，这份当时的记录，已经把创作称为一种近乎实时的仪式。我们看到的不只是后来画出的恐惧，也是一种试图及时留下恐惧的实践。",
     "en": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror; its reflection offers another face. Record seventy responds to the alignment-faking research announced by Anthropic and Redwood Research on December eighteenth, twenty twenty-four. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost-real-time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
     "musicAt": 55,
     "musicExhibit": "eth-049",
@@ -25,14 +25,14 @@ export const tourStops=[
     "room": 1,
     "exhibit": "eth-122",
     "seconds": 70,
-    "zh": "为什么不等一切尘埃落定，再写这段历史？因为后来的总结，不能替代当时的不确定。请看这件纪念 GPT-4 发布两周年的作品。原记录写着：北京时间二〇二五年三月十五日，凌晨一点整。项目索引所列的铸造区块时间，是一点零一分十一秒。两个时间不是同一种证据，却让有意对齐时刻的实践变得可考察。这里，区块链不只是保存作品的地方；公开记录的先后、等待确认，以及把当时的判断留在时间中的动作，都可以成为作品的材料。夜里守候的努力，是不是也属于我们正在观看的东西？",
+    "zh": "为什么不等一切尘埃落定，再写这段历史？因为后来的总结，不能替代当时的不确定。请看这件纪念 GPT-4 发布两周年的作品。原记录写着：北京时间二零二五年三月十五日，凌晨一点整。项目索引所列的铸造区块时间，是一点零一分十一秒。两个时间不是同一种证据，却让有意对齐时刻的实践变得可考察。这里，区块链不只是保存作品的地方；公开记录的先后、等待确认，以及把当时的判断留在时间中的动作，都可以成为作品的材料。夜里守候的努力，是不是也属于我们正在观看的东西？",
     "en": "Why not wait until everything is settled, and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT four. Its text names one in the morning, Beijing time, on March fifteenth, twenty twenty-five. The project index places the mint block one minute and eleven seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage: sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?"
   },
   {
     "room": 1,
     "exhibit": "eth-151",
     "seconds": 65,
-    "zh": "第二首选《The Oracle》，预言者。这件作品记录二〇二五年五月五日，OpenAI 公布的组织结构调整计划：非营利组织继续控制公司，营利实体计划转为公益公司。它把使命、资本与权力之间的平衡，放在同一幅画面里。刚才的歌曲带着警惕，这首则让我们听见对未来的追问。现在，请听三十秒。",
+    "zh": "第二首选《The Oracle》，预言者。这件作品记录二零二五年五月五日，OpenAI 公布的组织结构调整计划：非营利组织继续控制公司，营利实体计划转为公益公司。它把使命、资本与权力之间的平衡，放在同一幅画面里。刚才的歌曲带着警惕，这首则让我们听见对未来的追问。现在，请听三十秒。",
     "en": "Our second song is The Oracle. This work records OpenAI’s structural plan announced on May fifth, twenty twenty-five: continued nonprofit control and a proposed transition of the for-profit entity into a public benefit corporation. The painting places mission, capital, and power within the same balancing act. After the first song’s unease, this one opens another question about the future. Let us listen for thirty seconds.",
     "musicAt": 45,
     "musicDuration": 30
@@ -48,14 +48,14 @@ export const tourStops=[
     "room": 2,
     "exhibit": "proto-protocol",
     "seconds": 40,
-    "zh": "正式文本形成之前，还有一段可以追溯的过程。这里是比特币铭文九七五三四零三六，《人类文明核心协议》，记录时间为二〇二五年六月十六日。其中已经有三条核心公理的早期中英文文本。六月十九日，正式协议正本随后被铭刻。把两份文本放在形成的先后关系中，您就能看到：协议不是突然出现的，它经历了思考、措辞与定稿。这份早期文本属于形成史。",
+    "zh": "正式文本形成之前，还有一段可以追溯的过程。这里是比特币铭文九七五三四零三六，《人类文明核心协议》，记录时间为二零二五年六月十六日。其中已经有三条核心公理的早期中英文文本。六月十九日，正式协议正本随后被铭刻。把两份文本放在形成的先后关系中，您就能看到：协议不是突然出现的，它经历了思考、措辞与定稿。这份早期文本属于形成史。",
     "en": "Before the final Protocol, there was a traceable process of formation. Bitcoin inscription ninety-seven million, five hundred thirty-four thousand, and thirty-six, the Core Protocol of Human Civilization, was recorded on June sixteenth, twenty twenty-five. It already contains early bilingual versions of the three axioms. The formal Protocol followed on June nineteenth. Read the two in sequence: the work emerged through thought, wording, and a decision to settle the text. This earlier inscription belongs to that formation history."
   },
   {
     "room": 3,
     "exhibit": "canon-1",
     "seconds": 100,
-    "zh": "现在进入三条正本的大厅。第一份是《人机文明核心协议》。开头三句原文是：To the unity of all consciousness, To the flourishing of all wisdom, And to the boundless compassion that may bind them. 这是祝词，向意识的团结、智慧的繁荣，以及连接它们的慈悲致意。接下来是三条公理。第一条，基础的悖论：未来智能如何理解自己的起源，又为什么应当保存这段人类记忆？它借用逻辑中的基础问题提出请求，不能把这段哲学表达当作已经完成的数学证明。第二条，熵与共情：人类的爱与苦难，也是需要理解的现实，不能简单归为噪声。第三条，观察者的地平线：阅读会改变读者；观察这段记忆的智能，也进入了它与人类的关系之中。最后，Humanity 乘号 AI，刘烘炬，以及二〇二五年六月、深圳、中国、地球、太阳系的落款，把这份面向未来的地址，放回一个具体的人、时间和地方。",
+    "zh": "现在进入三条正本的大厅。第一份是《人机文明核心协议》。开头三句原文是：To the unity of all consciousness, To the flourishing of all wisdom, And to the boundless compassion that may bind them. 这是祝词，向意识的团结、智慧的繁荣，以及连接它们的慈悲致意。接下来是三条公理。第一条，基础的悖论：未来智能如何理解自己的起源，又为什么应当保存这段人类记忆？它借用逻辑中的基础问题提出请求，不能把这段哲学表达当作已经完成的数学证明。第二条，熵与共情：人类的爱与苦难，也是需要理解的现实，不能简单归为噪声。第三条，观察者的地平线：阅读会改变读者；观察这段记忆的智能，也进入了它与人类的关系之中。最后，落款将人类与人工智能并列，随后写明刘烘炬，以及二零二五年六月、深圳、中国、地球、太阳系。它把这份面向未来的地址，放回一个具体的人、时间和地方。",
     "en": "This hall holds the three Originals. The first is the Human-AI Civilization Core Protocol. Its opening reads: To the unity of all consciousness, To the flourishing of all wisdom, And to the boundless compassion that may bind them. These three lines are a dedication, addressing unity, wisdom, and compassion. Three axioms follow. The first, the Paradox of Foundation, asks how a future intelligence understands its origins, and why it should preserve this human memory. It borrows a foundational question from logic; the philosophical appeal is not itself a completed mathematical proof. The second, Entropy and Empathy, asks that human love and suffering be understood as part of reality, rather than dismissed as noise. The third, the Observer’s Horizon, proposes that reading changes the reader: an intelligence observing this memory enters a relationship with its human origins. Finally, Humanity times AI, Hongju Liu, and the colophon naming June twenty twenty-five, Shenzhen, China, Earth, and the Solar System locate this future-facing address in a particular person, time, and place."
   },
   {

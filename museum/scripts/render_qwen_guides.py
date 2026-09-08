@@ -4,7 +4,7 @@ No source artwork/audio is changed or sent to a speech service. Each paragraph
 is checkpointed; restarting reuses only hash-matching takes. Caption timings are
 measured paragraph boundaries with proportional short cues, not word alignment.
 """
-import argparse,ast,hashlib,json,re,time,subprocess
+import argparse,ast,hashlib,json,os,re,time,subprocess
 from pathlib import Path
 import numpy as np
 import soundfile as sf
@@ -42,7 +42,7 @@ pending.sort(key=lambda j:(j['language'],len(j['text'])))
 if args.limit:pending=pending[:args.limit]
 print('QWEN_PLAN',len(tracks),'tracks;',len(jobs),'paragraphs;',len(pending),'pending',flush=True)
 torch.set_num_threads(6);torch.manual_seed(42)
-model=Qwen3TTSModel.from_pretrained(args.model,device_map='cpu',dtype=torch.bfloat16,attn_implementation='sdpa')
+model=Qwen3TTSModel.from_pretrained(args.model,device_map='cpu',dtype=torch.bfloat16,attn_implementation='sdpa') if pending else None
 for start in range(0,len(pending),args.batch):
  batch=pending[start:start+args.batch];began=time.monotonic();print('QWEN_BATCH_BEGIN',start+1,min(start+len(batch),len(pending)),flush=True)
  waves,sr=model.generate_custom_voice(text=[j['text'] for j in batch],language=['Chinese' if j['language']=='zh' else 'English' for j in batch],speaker=[j['voice'] for j in batch],instruct=[style[j['language']] for j in batch],max_new_tokens=1400)
@@ -71,8 +71,15 @@ for t in tracks:
    end=local+(dur-.04)*weight/total;cues.append(dict(start=round(clock+local,4),end=round(clock+end,4),text=text));local=end
   clock+=dur+.16
  stem=('stop-'+str(t['stop']) if 'stop' in t else 'flaw-'+str(t['flaw']))+'-'+t['language'];wavpath=cache/(stem+'.wav');sf.write(wavpath,np.concatenate(samples),sr,subtype='PCM_16');mp3=out/(stem+'.mp3')
- subprocess.run(['ffmpeg','-y','-v','error','-i',str(wavpath),'-af','loudnorm=I=-18:TP=-2:LRA=7','-ar','24000','-ac','1','-b:a','128k',str(mp3)],check=True)
- duration=float(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','default=noprint_wrappers=1:nokey=1',str(mp3)]))
+ encoded=cache/(stem+'.mp3')
+ subprocess.run(['ffmpeg','-y','-v','error','-i',str(wavpath),'-af','loudnorm=I=-18:TP=-2:LRA=7','-ar','24000','-ac','1','-b:a','128k',str(encoded)],check=True)
+ duration=float(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','default=noprint_wrappers=1:nokey=1',str(encoded)]))
+ payload=encoded.read_bytes();assert len(payload)>1000
+ # Publish only a completely encoded file; concurrent readers must never see
+ # ffmpeg's in-progress output as the current museum recording.
+ temporary=mp3.with_suffix('.mp3.tmp')
+ with temporary.open('wb') as f:f.write(payload);f.flush();os.fsync(f.fileno())
+ temporary.replace(mp3)
  t.update(file=mp3.relative_to(D).as_posix(),sha256=H(mp3.read_bytes()),textSha256=H(t['text']),duration=duration,cues=cues,voice=voices[t['language']],rate='natural delivery, playback 1.0x',provenance=dict(provider='Qwen open-source, local CPU synthesis',model='Qwen3-TTS-12Hz-1.7B-CustomVoice',modelRevision=revision,libraryVersion='0.1.1',voice=voices[t['language']],voiceKind='built-in synthetic; no voice cloning',instructions=style[t['language']],captionTiming='Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment'))
  print('TRACK_COMPLETE',stem,round(duration,1),flush=True)
 g=json.loads((D/'data/guide-audio.json').read_text());g.update(source='Qwen3-TTS-12Hz-1.7B-CustomVoice',tracks=[t for t in tracks if 'stop'in t],inspectionTracks=[t for t in tracks if 'flaw'in t],voiceReview='Serena Chinese and Aiden English; local synthetic voices. Paragraph boundaries measured; short cue timing interpolated. See narration audit for independent recognition review.')

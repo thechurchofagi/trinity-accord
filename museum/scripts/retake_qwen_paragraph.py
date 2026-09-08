@@ -14,8 +14,8 @@ paths=list(cache.glob(args.key+'*.json'));assert len(paths)==1
 p=paths[0];job=json.loads(p.read_text());wavpath=p.with_suffix('.wav')
 torch.set_num_threads(2);torch.manual_seed(7)
 model=Qwen3TTSModel.from_pretrained(args.model,device_map='cpu',dtype=torch.bfloat16,attn_implementation='sdpa')
-style='A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.'
-waves,sr=model.generate_custom_voice(text=args.synthesis_text,language='English',speaker=job['voice'],instruct=style,max_new_tokens=700)
+style='温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。' if job['language']=='zh' else 'A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.'
+waves,sr=model.generate_custom_voice(text=args.synthesis_text,language='Chinese' if job['language']=='zh' else 'English',speaker=job['voice'],instruct=style,max_new_tokens=700)
 wav=waves[0];assert np.isfinite(wav).all() and sr<len(wav)<sr*55
 rejected=cache/'rejected';rejected.mkdir(exist_ok=True)
 digest=hashlib.sha256(wavpath.read_bytes()).hexdigest()
