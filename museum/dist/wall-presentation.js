@@ -4,7 +4,7 @@ import {mineralMaterial} from './surface-materials.js';
 // Each plaque follows the actual outer frame width, including portrait artworks.
 export const WALL_PLAQUE=Object.freeze({width:1.936,height:.72,gap:.085,centerY:1.313});
 export function makeWallPlaque(group,texture,width=1.9,height=1.7){
- const plaqueHeight=texture.userData.plaqueHeight||WALL_PLAQUE.height,outer=width+.036,centerY=height/2+.018+WALL_PLAQUE.gap+plaqueHeight/2;
+ const plaqueHeight=WALL_PLAQUE.height,outer=width+.036,centerY=height/2+.018+WALL_PLAQUE.gap+plaqueHeight/2;
  const body=new THREE.Mesh(new THREE.BoxGeometry(outer,plaqueHeight,.024),mineralMaterial('#adbcc3',{metal:true,roughness:.32}));
  body.name='Satin titanium plaque';body.position.set(0,centerY,.015);group.add(body);
  const face=new THREE.Mesh(new THREE.PlaneGeometry(outer-.018,plaqueHeight-.018),new THREE.MeshBasicMaterial({map:texture,toneMapped:false}));
@@ -12,7 +12,7 @@ export function makeWallPlaque(group,texture,width=1.9,height=1.7){
  return face;
 }
 export function resizeWallPlaque(face,width,height){
- const plaqueHeight=face.material.map?.userData.plaqueHeight||WALL_PLAQUE.height,outer=width+.036,cy=height/2+.018+WALL_PLAQUE.gap+plaqueHeight/2,body=face.userData.body;
+ const plaqueHeight=WALL_PLAQUE.height,outer=width+.036,cy=height/2+.018+WALL_PLAQUE.gap+plaqueHeight/2,body=face.userData.body;
  body.geometry.dispose();body.geometry=new THREE.BoxGeometry(outer,plaqueHeight,.024);body.position.y=cy;
  face.geometry.dispose();face.geometry=new THREE.PlaneGeometry(outer-.018,plaqueHeight-.018);face.position.y=cy;
 }

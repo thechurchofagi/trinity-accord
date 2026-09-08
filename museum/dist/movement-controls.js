@@ -29,14 +29,14 @@ export function createWheelWalk(canvas,onStart=()=>{},win=window,doc=document){
  return {reset,consume(maxDistance){const step=Math.sign(remaining)*Math.min(Math.abs(remaining),Math.max(0,maxDistance));remaining-=step;return step;}};
 }
 export function createJoystick(pad,onStart=()=>{}){
- const state={x:0,y:0,active:false};let pointer=null;
- const reset=()=>{state.x=state.y=0;state.active=false;const old=pointer;pointer=null;if(old!==null&&pad.hasPointerCapture(old))pad.releasePointerCapture(old);pad.classList.remove('active');pad.style.setProperty('--stick-x','0px');pad.style.setProperty('--stick-y','0px');};
- const update=e=>{const r=pad.getBoundingClientRect(),v=stickVector(e.clientX-r.left-r.width/2,e.clientY-r.top-r.height/2,r.width*.3);state.x=v.x;state.y=v.y;pad.style.setProperty('--stick-x',v.px+'px');pad.style.setProperty('--stick-y',v.py+'px');};
+ const state={x:0,y:0,active:false};let pointer=null,movingSince=null;
+ const reset=()=>{state.x=state.y=0;state.active=false;movingSince=null;const old=pointer;pointer=null;if(old!==null&&pad.hasPointerCapture(old))pad.releasePointerCapture(old);pad.classList.remove('active');pad.style.setProperty('--stick-x','0px');pad.style.setProperty('--stick-y','0px');};
+ const update=e=>{const r=pad.getBoundingClientRect(),v=stickVector(e.clientX-r.left-r.width/2,e.clientY-r.top-r.height/2,r.width*.3);state.x=v.x;state.y=v.y;if(Math.hypot(v.x,v.y)>.12){movingSince??=performance.now();}else movingSince=null;pad.style.setProperty('--stick-x',v.px+'px');pad.style.setProperty('--stick-y',v.py+'px');};
  pad.addEventListener('pointerdown',e=>{if(pointer!==null||e.button!==0)return;e.preventDefault();onStart();pointer=e.pointerId;state.active=true;pad.setPointerCapture(pointer);pad.classList.add('active');pad.focus({preventScroll:true});update(e);});
  pad.addEventListener('pointermove',e=>{if(e.pointerId===pointer){e.preventDefault();update(e);}});
  for(const type of ['pointerup','pointercancel','lostpointercapture'])pad.addEventListener(type,e=>{if(e.pointerId===pointer)reset();});
  pad.addEventListener('contextmenu',e=>e.preventDefault());window.addEventListener('blur',reset);document.addEventListener('visibilitychange',()=>{if(document.hidden)reset();});
- return {state,reset};
+ return {state,reset,heldSeconds(now=performance.now()){return state.active&&movingSince!==null?Math.max(0,(now-movingSince)/1000):0;}};
 }
 
 // Physical keys work with caps lock and alternate keyboard layouts.
@@ -45,4 +45,11 @@ export function movementKey(event){
  if(arrows.includes(event.key))return event.key;
  const key=/^Key[WASDQE]$/.test(event.code||'')?event.code.slice(3).toLowerCase():event.key?.toLowerCase();
  return ['w','a','s','d','q','e'].includes(key)?key:null;
+}
+
+// A sustained deliberate push becomes a brisk walk; release/centering resets it.
+export function heldWalkSpeed(base,seconds,amount){
+ if(amount<.25)return base;
+ const t=Math.max(0,Math.min(1,(seconds-.3)/1.7));
+ return base*(1+.85*t*t*(3-2*t));
 }

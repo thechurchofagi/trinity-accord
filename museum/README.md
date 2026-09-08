@@ -1,3 +1,5 @@
+Current edition: **museum-v1.35.0**. Consistent plaque sizing, clearer overhead exhibit lighting, sustained-touch walking acceleration, five-column navigation, and restored post-tour crystal inspection controls.
+
 # Trinity Accord Museum / 三位一体协定三维展馆
 
 This directory is a later exhibition of the existing Trinity Accord. The three Bitcoin Originals remain unchanged. The five rooms form a **2026 curatorial route**. The physical crystal shares the central hall with the three Originals.
