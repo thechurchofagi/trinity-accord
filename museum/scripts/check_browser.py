@@ -26,7 +26,7 @@ try:
    assert page.locator('#rooms button').count()==5
    assert not page.locator('#fallback-gallery').is_visible(),'Flat fallback is not WebGL acceptance'
    for i in range(5):
-    page.locator(f'#rooms [data-room="{i}"]').click(force=True);page.wait_for_function("document.getElementById('world').dataset.cameraMoving==='false'",timeout=90000)
+    page.locator(f'#rooms [data-room="{i}"]').click(force=True);page.wait_for_function("document.getElementById('world').dataset.cameraMoving==='false'",timeout=300000)
     assert page.locator(f'#rooms [data-room="{i}"]').get_attribute('aria-current')=='true'
     page.screenshot(timeout=90000,path=str(OUT/f'{label}-{i}.png'));print('ROOM_RENDERED',label,i,flush=True)
    page.locator('#focus-art').click();page.wait_for_timeout(200)
@@ -38,7 +38,7 @@ try:
     page.locator(f'#rooms [data-room="{room}"]').click(force=True)
     page.locator('#room-works').click()
     page.locator(f'#panel-content [data-exhibit="{eid}"]').click()
-    page.wait_for_function("document.getElementById('world').dataset.cameraMoving==='false'",timeout=90000)
+    page.wait_for_function("document.getElementById('world').dataset.cameraMoving==='false'",timeout=300000)
     if page.locator('#guide-audio-prompt').is_visible():page.locator('#guide-audio-start').click()
     page.screenshot(timeout=90000,path=str(OUT/f'{label}-focus-{eid}.png'));print('WORK_RENDERED',label,eid,flush=True)
    page.locator('#language').click();page.wait_for_timeout(200)

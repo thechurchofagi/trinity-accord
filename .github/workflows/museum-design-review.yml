@@ -37,7 +37,7 @@ jobs:
       - name: Render production rooms and selected objects
         env:
           MUSEUM_QA_OUTPUT: ${{ runner.temp }}/museum-design
-        run: python museum/scripts/check_browser.py
+        run: python museum/scripts/check_design_review.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

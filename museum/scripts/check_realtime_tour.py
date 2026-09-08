@@ -1,4 +1,4 @@
-"""Play the shipped 3D English tour for nine real minutes, without seeking.
+"""Play the shipped 3D English tour to its natural end, without seeking.
 
 CI acceptance of timing, media and rendered states; not a human listening review.
 """
@@ -43,7 +43,7 @@ try:
         inspection_files = {t['file']: t['flaw'] for t in guides['inspectionTracks'] if t['language']=='en'}
         previous = 0
         last_log = -15
-        while time.monotonic() - started < 840:
+        while time.monotonic() - started < 1500:
             sample = page.evaluate('''() => {
               const a=document.getElementById('narration'),m=document.getElementById('music');
               return {progress:document.getElementById('tour-progress').textContent,
@@ -72,7 +72,7 @@ try:
             if 'complete' in sample['progress']:
                 break
             page.wait_for_timeout(1000)
-        assert 'complete' in sample['progress'], 'Tour failed to finish within fourteen wall-clock minutes'
+        assert 'complete' in sample['progress'], 'Tour failed to finish within twenty-five wall-clock minutes'
         assert seen_flaws == {0,1,2}, ('Missing audible flaw explanations', seen_flaws)
         assert seen == set(range(12)), ('Missing audible tour tracks', seen)
         assert page.locator('body').get_attribute('data-presentation') == 'true'

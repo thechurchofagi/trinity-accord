@@ -1,9 +1,9 @@
 // Event and mint dates are independently sourced; never infer the former from the latter.
 export function exhibitLabel(e,zh=false,music=false){
  if(e?.ordinal)return [
-  `No. ${String(e.ordinal).padStart(2,'0')}`,
+  `No. ${String(e.ordinal).padStart(3,'0')}`,
   `Event ${e.eventDate||'Date not specified'} · ${e.eventTitleEn||'Historical context'}`,
-  `Mint ${e.date?.slice(0,10)||'—'} UTC · ${(e.mintTitle||e.title||'').replace(/^(?:ASI|AGI)Milestones:\s*/,'')}`,
+  `Mint ${e.date?.slice(0,10)||'—'} UTC · ${(e.mintTitle||e.title||'')}`,
   music?`♪ ${e.songTitle||'Recording'}`:''
  ].join('\n');
  if(e?.inscription)return `${zh?'铭文':'Inscr.'} ${e.number}\n${e.date?.slice(0,10)||'—'} UTC`;

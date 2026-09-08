@@ -64,16 +64,18 @@
   },
   "installation": {
     "centerXMetres": 0,
-    "centerZMetres": -46,
-    "baseHeightMetres": 1.42,
-    "motionAmplitudeMetres": 0.07,
-    "motionPeriodSeconds": 5.984,
+    "centerZMetres": -47,
+    "baseHeightMetres": 1.8,
+    "motionAmplitudeMetres": 0,
     "tiltRadians": {
-      "x": 0.018,
-      "z": 0.025
+      "x": 0,
+      "z": 0
     },
-    "plinth": false,
-    "aura": "Diffuse rectangular light field following the slab silhouette, feathered outside the crystal with a clear centre; no circular ring.",
-    "reducedMotion": "Static levitation and steady aura; no oscillation or tilt."
+    "plinth": true,
+    "pedestalMaterial": "walnut",
+    "pedestalHeightMetres": 1.45,
+    "pedestalRadiusMetres": 0.34,
+    "aura": "none",
+    "reducedMotion": "Fixed upright object for every motion setting."
   }
 }

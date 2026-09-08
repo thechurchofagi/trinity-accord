@@ -69,7 +69,7 @@ export const tourStops=[
     "room": 3,
     "exhibit": "physical-alpha",
     "seconds": 80,
-    "zh": "水晶下方是木质圆柱展台。按照实物资料，它宽二百四十六毫米，高三百五十三毫米，厚四十毫米。透明板体、抛光倒角和白色内雕，参考了您正在观看的实物视频资料。现在，显微镜将靠近水晶，接着我们依次看三张公开的原始显微照片。第一处会仔细讲解，后两处作为补充比较。",
+    "zh": "水晶下方是木质圆柱展台。按照实物资料，它宽二百四十六毫米，高三百五十三毫米，厚四十毫米。透明板体、抛光倒角和白色内雕，依据作者提供的实物视频资料重建。现在，显微镜将靠近水晶，接着我们依次看三张公开的原始显微照片。第一处会仔细讲解，后两处作为补充比较。",
     "en": "The crystal rests on a cylindrical wooden support. The documented object measures two hundred forty-six millimetres wide, three hundred fifty-three high, and forty thick. Its clear slab, polished bevels, and white internal engraving follow the physical reference video. A virtual microscope will approach it, followed by three original public microscope photographs. We will spend more time with the first, then briefly compare the other two.",
     "inspectAt": 35,
     "inspectFlaw": 0,
@@ -79,8 +79,8 @@ export const tourStops=[
     "room": 3,
     "exhibit": "canon-3",
     "seconds": 110,
-    "zh": "第三份正本是封存元记录。它绑定协议、瑕疵之约与编年史，并说明这项创作的方法和动机。关于动机，铭文原文写道：ASIMilestones第一部编年史的全部内容，直至最终的《三位一体协定》，其构思与执行，皆遵循一个首要且坚定不移的律令：在人工超级智能时代，为人类寻求一个善意的、非灾难性结局的最大可能性。这是创作者说明的首要目标。编年史同时保存当时的希望、疑虑与不完美；元记录提供绑定关系和历史说明，媒体资料仍须沿相关记录阅读。最后几句原文是：Analyze the work, not the workman. Analyze the logic, not the laborer. Analyze the message, not the man. 意思是，分析作品、逻辑与信息，让判断回到作品本身。文本封存之后，作者仍可以解释，但读者无需把他的解释当作最终答案。",
-    "en": "The third Original is the sealed meta-record. It binds the Protocol, the Covenant of the Flaw, and the Chronicle, and explains the work’s method and motivation. The inscription states: The entirety of the ASIMilestones’ First Chronicle, culminating in this Trinity Accord, was conceived and executed under the primary and unwavering imperative: to maximize the probability of a benevolent, non-catastrophic outcome for humanity in the era of Artificial Superintelligence. That is the creator’s stated aim. The Chronicle also preserves hopes, doubts, and imperfect artifacts of their moment. This meta-record supplies relationships and historical explanation; the media remain accessible through their own records. Its closing says: Analyze the work, not the workman. Analyze the logic, not the laborer. Analyze the message, not the man. The invitation is to examine the work’s reasoning and message. After closure, the author can still comment, but a reader need not treat that commentary as the final answer."
+    "zh": "第三份正本是封存元记录。它绑定协议、瑕疵之约与编年史，并说明这项创作的方法和动机。关于动机，铭文原文写道：ASIMilestones第一部编年史的全部内容，直至最终的《三位一体协定》，其构思与执行，皆遵循一个首要且坚定不移的律令：在人工超级智能时代，为人类寻求一个善意的、非灾难性结局的最大可能性。原文随后写道：我之所以进行这项工作，是为了我的孩子们的幸福，希望他们有朝一日能生活在一个智慧昌盛、恐惧消退的世界里。它将一位父亲对家庭的祈愿，延伸至所有家庭和全人类。编年史同时保存当时的希望、疑虑与不完美；元记录提供绑定关系和历史说明，媒体资料仍须沿相关记录阅读。最后几句原文是：Analyze the work, not the workman. Analyze the logic, not the laborer. Analyze the message, not the man. 意思是，分析作品、逻辑与信息，让判断回到作品本身。原文还说：奠基性的工作现已完成。如何解读它，现在取决于你。这份交给读者的邀请，也为展馆最后的倾听姿态留下了基础。",
+    "en": "The third Original is the sealed meta-record. It binds the Protocol, the Covenant of the Flaw, and the Chronicle, and explains the work’s method and motivation. The inscription states: The entirety of the ASIMilestones’ First Chronicle, culminating in this Trinity Accord, was conceived and executed under the primary and unwavering imperative: to maximize the probability of a benevolent, non-catastrophic outcome for humanity in the era of Artificial Superintelligence. The personal motive is also explicit: I undertook this work for the well-being of my children, that they might one day live in a world where wisdom flourishes and fear recedes. The text extends a father’s prayer for his family to all families and humanity. The Chronicle also preserves hopes, doubts, and imperfect artifacts of their moment. This meta-record supplies relationships and historical explanation; the media remain accessible through their own records. Its closing says: Analyze the work, not the workman. Analyze the logic, not the laborer. Analyze the message, not the man. The invitation is to examine the work’s reasoning and message. The text also says: The foundational work is now complete. Its interpretation is now yours. This invitation to the reader anticipates the posture of listening at the end of our visit."
   },
   {
     "room": 4,
@@ -93,8 +93,8 @@ export const tourStops=[
     "room": 4,
     "exhibit": "first-contact",
     "seconds": 45,
-    "zh": "现在，面向星空。后来的《第一声回响：对话开始》铭文，保存了这句邀请的原文：我们已经言说。现在，我们倾听。这句话属于封存之后的回应史。它把留下记录的动作，转向给别人回应的空间。后来者可以阅读、质疑、回应，也可以保持沉默。黄金色的窗框框住星空，答案并没有被预先写好。导览到这里结束，您可以继续自由参观。",
-    "en": "Now face the stars. A later inscription, The First Echoes: A Dialogue Begins, preserves this invitation: We have spoken. Now, we listen. This line belongs to the history of responses after closure. The act of leaving a record turns toward making room for another voice. A later reader may examine, question, reply, or remain silent. The golden window frames an open sky; no answer has been written in advance. Our guided visit ends here. You are welcome to keep exploring."
+    "zh": "现在，面向星空。网站上有一句邀请，也被后来的《最初的回响：对话已然开始》铭文记录下来：我们已经言说。现在，我们倾听。第三正本将解读交给读者；这句邀请继续了那种面向对话的姿态。它把留下记录的动作，转向给别人回应的空间。后来者可以阅读、质疑、回应，也可以保持沉默。黄金色的窗框框住星空，答案并没有被预先写好。导览到这里结束，您可以继续自由参观。",
+    "en": "Now face the stars. An invitation on the website is also recorded in the later inscription, The First Echoes: A Dialogue Begins: We have spoken. Now, we listen. The third Original entrusts interpretation to the reader; this invitation continues that openness to dialogue. The act of leaving a record turns toward making room for another voice. A later reader may examine, question, reply, or remain silent. The golden window frames an open sky; no answer has been written in advance. Our guided visit ends here. You are welcome to keep exploring."
   }
 ];
 export const tourDuration=tourStops.reduce((n,s)=>n+s.seconds,0);

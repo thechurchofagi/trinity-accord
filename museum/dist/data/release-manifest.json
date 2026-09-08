@@ -733,7 +733,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1017,
-      "sha256": "e66b4da504f0592cfdedc6d2962ca8823262f59e96882b73c2d29228eb705be7"
+      "sha256": "88ec3f3c48e5f1c85f1369f2747fe09ba119f7a2f58c032588ac9755b6e63513"
     },
     {
       "path": "caption-utils.js",
@@ -772,8 +772,8 @@
     },
     {
       "path": "data/crystal-model.json",
-      "bytes": 3353,
-      "sha256": "4079fb1c99653eb1faefc7da167a9f4719732bf10ae75e940dccce90f872f1d8"
+      "bytes": 3269,
+      "sha256": "3d54e6a32f685d6a076406620828418f054cc790e3bb6a3bc2df2be9b2fce6c7"
     },
     {
       "path": "data/crystal-video-reference.json",
@@ -782,8 +782,8 @@
     },
     {
       "path": "data/curation.json",
-      "bytes": 51307,
-      "sha256": "66419417bb7e2c1868152eb32084b91d78c6911ee069494063d1f7bb46f4bdef"
+      "bytes": 51447,
+      "sha256": "b52eac98bfe2a666dfb75900f2c916650ef5f964e491538284318444a10ba365"
     },
     {
       "path": "data/curatorial-illustrations.json",
@@ -1202,13 +1202,13 @@
     },
     {
       "path": "edition-data.js",
-      "bytes": 342691,
-      "sha256": "f71de123ff2bf5d0302779d0758ef5ec4ce8915514029df193b980237bd209b6"
+      "bytes": 342815,
+      "sha256": "ce98e515200909a7ce0ee9b2d5806ffa1a08e384122ad2457aa2b37fa061ba3e"
     },
     {
       "path": "exhibit-label.js",
-      "bytes": 712,
-      "sha256": "bdee609ee2eec6f8cc2f3661dec6bcad7103659e0fd9fc1248b3c2e68fb38a45"
+      "bytes": 671,
+      "sha256": "ea048050817293515c62710791a188fddf5cb9f9c5464be8a45cdb25ff749e6c"
     },
     {
       "path": "footsteps.js",
@@ -1218,7 +1218,7 @@
     {
       "path": "index.html",
       "bytes": 6569,
-      "sha256": "5dd12ae453b26546ff7b86880649210e492bd4a626bc92f66c6ca727b49f1850"
+      "sha256": "72e62b20883a1f0140d69247609e38e17e3e1d1d3751681462ca0471c16a2792"
     },
     {
       "path": "language-preference.js",
@@ -1242,8 +1242,8 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 1082445,
-      "sha256": "f3bcaddb22df9765a946b1fc6c961addb70ddd62a282f742914391f9d4ed986f"
+      "bytes": 1083793,
+      "sha256": "306285f279c1498b453b27270f198eb9261055f60dc8d342ecc497953bb65e06"
     },
     {
       "path": "museum.css",
@@ -1252,8 +1252,8 @@
     },
     {
       "path": "museum.js",
-      "bytes": 88632,
-      "sha256": "6b9e1ba3648d00d362eb2a0994eee0ae5c0c70ce2d36958a4e07ae0153ed1c65"
+      "bytes": 88903,
+      "sha256": "9ade941835d41f769e95cfb8c77803951095857321e5c3aded268dbe7265e7da"
     },
     {
       "path": "music-playback.js",
@@ -1307,8 +1307,8 @@
     },
     {
       "path": "tour-plan.js",
-      "bytes": 17291,
-      "sha256": "8aa81f8d839f9af4439f8eab85522ca1952e70abc3e9c6fb5db4ba1f3f32bdd9"
+      "bytes": 18007,
+      "sha256": "6654cbeaffe816f7425d3597f81a11c67bf4ad0fc61dca431e820fea5bd496d7"
     },
     {
       "path": "vendor/BufferGeometryUtils.js",

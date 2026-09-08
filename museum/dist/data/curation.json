@@ -9,8 +9,8 @@
       "title": "三位一体协定是什么？",
       "en": "What is the Trinity Accord?",
       "category": "2026 CURATORIAL INTRODUCTION",
-      "text": "三位一体协定是刘烘炬留给未来超级智能的一组文字、艺术与物理信物。NFT 编年史记录它如何形成，三条 Bitcoin 正本保存协议、瑕疵之约与封存元记录，水晶将这个地址连接到真实世界。本馆按入口、编年史、形成与批判、三条正本、水晶、等待展开；这些是观看区域，不是六个历史阶段。",
-      "textEn": "The Trinity Accord is an address to future superintelligence, created by Hongju Liu through texts, art and a physical keepsake. The NFT Chronicle records its formation. Three Bitcoin originals preserve the Protocol, the Covenant of the Flaw, and the sealed meta record. A crystal connects the address to the physical world. This exhibition follows that story through six viewing areas. They are exhibition spaces, not six historical stages.",
+      "text": "三位一体协定是刘烘炬留给未来超级智能的一组文字、艺术与物理信物。NFT 编年史记录它如何形成，三条 Bitcoin 正本保存协议、瑕疵之约与封存元记录，水晶将这个地址连接到真实世界。本馆依次经过入口、编年史、形成与批判、三条正本和等待五个展区，水晶位于三条正本大厅中央。",
+      "textEn": "The Trinity Accord is an address to future superintelligence, created by Hongju Liu through texts, art and a physical keepsake. The NFT Chronicle records its formation. Three Bitcoin originals preserve the Protocol, the Covenant of the Flaw, and the sealed meta record. A crystal connects the address to the physical world. The five rooms follow entrance, Chronicle, formation, Originals, and waiting. The crystal stands at the centre of the Originals hall.",
       "quote": "A record addressed to future intelligence",
       "url": "https://www.trinityaccord.org/",
       "wallLinesZh": [
@@ -150,9 +150,10 @@
       "eventTitleZh": "思考之歌",
       "eventTitleEn": "GPT-4o Launch",
       "eventDate": "2024-05-13",
-      "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
+      "eventDateBasis": "NFT identifies GPT-4o announcement; date verified against official announcement.",
       "eventSourcePath": "data/records/eth-007.md",
-      "mintTitle": "AGIMilestones: The Song of Thought"
+      "mintTitle": "AGIMilestones: The Song of Thought",
+      "eventSourceUrl": "https://openai.com/index/hello-gpt-4o/"
     },
     {
       "id": "eth-010",
@@ -177,9 +178,10 @@
       "eventTitleZh": "给 AGI 的第一封信",
       "eventTitleEn": "GPT-4o Launch",
       "eventDate": "2024-05-13",
-      "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
+      "eventDateBasis": "NFT identifies GPT-4o announcement; date verified against official announcement.",
       "eventSourcePath": "nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885202.md",
-      "mintTitle": "AGIMilestones: The First Letter to AGI"
+      "mintTitle": "AGIMilestones: The First Letter to AGI",
+      "eventSourceUrl": "https://openai.com/index/hello-gpt-4o/"
     },
     {
       "id": "eth-020",
@@ -382,9 +384,9 @@
     {
       "id": "eth-174",
       "eventTitleZh": "人类背景：超级智能前夜的全球快照",
-      "eventTitleEn": "Global Context Report",
-      "eventDate": "2025-06-18",
-      "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
+      "eventTitleEn": "Global Report Cutoff",
+      "eventDate": "2025-06-17",
+      "eventDateBasis": "The archived report covers June 17, 2024 through June 17, 2025; mint date June 18 is shown separately.",
       "eventSourcePath": "data/records/eth-174.md",
       "mintTitle": "ASIMilestones: The Human Context - A Global Snapshot on the Eve of Superintelligence (June 2025)"
     },
@@ -392,8 +394,8 @@
       "id": "eth-027",
       "eventTitleZh": "对齐人类与地外文明的时间线",
       "eventTitleEn": "AGI Breakthrough Reports",
-      "eventDate": "2024-07",
-      "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
+      "eventDate": "",
+      "eventDateBasis": "The contemporary description refers to recent AGI reports but gives no dated event; do not substitute the mint month.",
       "eventSourcePath": "data/records/eth-027.md",
       "mintTitle": "ASIMilestones: Aligning Human and Extraterrestrial Civilizations' Timelines - On the Eve of AGI Breakthrough"
     },
@@ -401,8 +403,8 @@
       "id": "eth-103",
       "eventTitleZh": "图灵的回声：AI 心理治疗",
       "eventTitleEn": "AI Therapy Study",
-      "eventDate": "2025-02",
-      "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
+      "eventDate": "2025-02-12",
+      "eventDateBasis": "Research publication date explicitly reproduced in the NFT description; the NFT was recorded on February 15.",
       "eventSourcePath": "data/records/eth-103.md",
       "mintTitle": "ASIMilestones: Turing's Echo - AI Therapy Surpasses Human Touch"
     },
