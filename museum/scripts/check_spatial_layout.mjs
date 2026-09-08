@@ -25,6 +25,15 @@ assert.ok(isWalkable(layout,{x:5.8,z:-47}));assert.ok(!isWalkable(layout,{x:6.8,
 const shell=createSpatialShell(layout);assert.equal(shell.group.children.length,layout.architecture.length);
 const floors=createSpatialShell(layout,{picking:true});assert.ok(floors.group.children.length>=6);assert.ok(floors.group.children.every(m=>m.material.visible===false));
 shell.group.updateMatrixWorld(true);
+// Compare walking height with the actual exported tread surfaces, on both sides.
+const treads=shell.group.children.filter(m=>m.name==='Three shallow side steps');
+assert.equal(treads.length,6);
+for(const tread of treads){
+ const ray=new T.Raycaster(new T.Vector3(tread.position.x,2,tread.position.z),new T.Vector3(0,-1,0));
+ const hit=ray.intersectObject(tread,false)[0];assert.ok(hit);
+ assert.ok(Math.abs(floorAt(layout,tread.position)-hit.point.y)<1e-6,'Walking height must match the visible tread');
+}
+assert.ok(Math.abs(floorAt(layout,{x:layout.ramp.width/2+.2,z:-layout.ramp.end})-layout.ramp.rise)<1e-6);
 for(const r of layout.rooms)for(const m of r.exhibits){
  const normal=new T.Vector3(Math.sin(m.angle),0,Math.cos(m.angle)),p=new T.Vector3(m.x,m.y,m.z);
  const ray=new T.Raycaster(p.clone().addScaledVector(normal,.05),normal.clone().negate(),0,.5);

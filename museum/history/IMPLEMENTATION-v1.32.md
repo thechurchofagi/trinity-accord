@@ -1,6 +1,6 @@
 # Six-room edition v1.32 — implementation and verification
 
-Implemented in the existing museum source and submitted through PR #1154. The museum distribution was generated at `78143d8a8d402f16597cc9bbe8a32976e8ca7545`; run `34175134031` passed all structural, media and rendered-browser checks. `scene/acceptance-v1.32.json` records the exact scope. Production publication is separate from this PR.
+Implemented in the existing museum source and submitted through PR #1154. The museum distribution was generated at `20598b5a56c3e0e50bfe217605eda5caf4731018`; run `34176830670` passed all structural, media and rendered-browser checks. `scene/acceptance-v1.32.json` records the exact scope. Production publication is separate from this PR.
 
 ## What is present
 
@@ -15,7 +15,7 @@ English uses Chatterbox Turbo with its built-in synthetic voice, not a cloned pe
 1. Install development dependencies with `npm ci` inside `museum/` when changing runtime code.
 2. Run `node scripts/build_runtime.mjs`, then `python3 scripts/build_archive.py` to rebuild matching cache keys and the distribution inventory.
 3. Run `python3 scripts/validate.py` and every `scripts/check_*.mjs` test.
-4. Run `python3 scripts/check_browser.py` with Playwright installed. The read-only Museum browser acceptance workflow does this for museum PRs and saves screenshots and a report.
+4. Run `python3 scripts/check_browser.py` with Playwright installed. The read-only Museum browser acceptance workflow also runs `check_presentation.py` and a separate `check_realtime_tour.py` job. The latter plays the production 3D English tour for nine real minutes without seeking, logs progress every 15 seconds, and saves rendered checkpoints. A green accelerated check does not substitute for this job.
 
 The `prepare_spatial_layout.py`, `integrate_spatial_runtime.py`, `polish_spatial_edition.py`, `finalize_spatial_edition.py`, and `closeout_spatial_edition.py` scripts document the one-time migration from the older corridor. They are **not** the normal build command and must not be blindly reapplied to the finished edition. The temporary branch-writing synthesis and migration workflows were removed after their checked outputs were committed. Routine PR checks neither synthesize audio nor write to repository branches and require no speech-provider secrets.
 

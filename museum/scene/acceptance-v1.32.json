@@ -1,17 +1,99 @@
 {
   "schema": "trinity-museum.acceptance.v1",
   "edition": "museum-v1.32.0",
-  "completedAt": "2026-09-08T01:05:14Z",
-  "generatedCommit": "78143d8a8d402f16597cc9bbe8a32976e8ca7545",
-  "workflowRun": 34175134031,
-  "workflowUrl": "https://github.com/thechurchofagi/trinity-accord/actions/runs/34175134031",
-  "artifact": {"id": 10037078769, "sha256": "9c32a433ffc42546d35168bb7fb7a8f7d79db87c0cd8ddc1ae0a6049dcc69cfa"},
+  "completedAt": "2026-09-08T01:40:47Z",
+  "generatedCommit": "20598b5a56c3e0e50bfe217605eda5caf4731018",
+  "workflowRun": 34176830670,
+  "workflowUrl": "https://github.com/thechurchofagi/trinity-accord/actions/runs/34176830670",
+  "artifact": {
+    "id": 10037734360,
+    "sha256": "deac0a6775595f0cb62abe0346a25f7c8d9268aab9a6ff25faaeabefe3bca659"
+  },
   "browser": [
-    {"viewport": "desktop", "width": 1440, "height": 900, "rooms": 6, "closeViews": 7, "renderedModel": true, "guardianLinks": true, "bilingualAudioLoaded": true, "pageErrors": [], "assetFailures": []},
-    {"viewport": "mobile", "width": 390, "height": 844, "rooms": 6, "closeViews": 7, "renderedModel": true, "guardianLinks": true, "bilingualAudioLoaded": true, "pageErrors": [], "assetFailures": []}
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 900,
+      "rooms": 6,
+      "closeViews": 7,
+      "renderedModel": true,
+      "guardianLinks": true,
+      "bilingualAudioLoaded": true,
+      "pageErrors": [],
+      "assetFailures": []
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "height": 844,
+      "rooms": 6,
+      "closeViews": 7,
+      "renderedModel": true,
+      "guardianLinks": true,
+      "bilingualAudioLoaded": true,
+      "pageErrors": [],
+      "assetFailures": []
+    }
   ],
-  "regressions": ["captions", "earth_sequence", "exterior", "guided_visit", "language_preference", "music_playback", "navigation", "progressive_loading", "recorded_guides", "spatial_layout", "wall_frames", "word_captions"],
-  "preservation": {"historicalTextAndMediaDigests": "passed", "threeOriginals": "unchanged", "microscopeEvidence": "unchanged", "originalMusicAndLyrics": "unchanged"},
-  "guide": {"plannedSeconds": 540, "stops": 8, "englishModel": "Chatterbox Turbo", "englishVoice": "built-in synthetic conditionals", "chineseVoice": "Xiaoxiao", "independentEnglishAcousticReview": "Whisper small.en with VAD; all 8 accepted", "delivery": "Original 24kHz MP3 bytes, not the 16kHz recognition copy"},
-  "limits": ["Browser viewport emulation is not physical Android/iOS testing.", "Automated speech recognition is not a human listening certificate; individual recognition differences remain in the audio audit.", "The 540-second route excludes user pauses or blocked-media waiting.", "No live Zoom transmission, institutional endorsement, new blockchain consensus validation or production deployment is claimed."]
+  "regressions": [
+    "captions",
+    "document_panels",
+    "earth_sequence",
+    "exterior",
+    "guided_visit",
+    "language_preference",
+    "music_playback",
+    "navigation",
+    "progressive_loading",
+    "recorded_guides",
+    "spatial_layout",
+    "wall_frames",
+    "word_captions"
+  ],
+  "preservation": {
+    "historicalTextAndMediaDigests": "passed",
+    "threeOriginals": "unchanged",
+    "microscopeEvidence": "unchanged",
+    "originalMusicAndLyrics": "unchanged"
+  },
+  "guide": {
+    "plannedSeconds": 540,
+    "stops": 8,
+    "englishModel": "Chatterbox Turbo",
+    "englishVoice": "built-in synthetic conditionals",
+    "chineseVoice": "Xiaoxiao",
+    "independentEnglishAcousticReview": "Whisper small.en with VAD; all 8 accepted",
+    "delivery": "Original 24kHz MP3 bytes, not the 16kHz recognition copy",
+    "englishInspectionTracks": 3
+  },
+  "limits": [
+    "Browser viewport emulation is not physical Android/iOS testing.",
+    "Automated speech recognition is not a human listening certificate; individual recognition differences remain in the audio audit.",
+    "The 540-second route excludes user pauses or blocked-media waiting.",
+    "No live Zoom transmission, institutional endorsement, new blockchain consensus validation or production deployment is claimed.",
+    "The recorded browser presentation test uses accelerated stop selection; it is not continuous real-time 3D playback."
+  ],
+  "followup": {
+    "date": "2026-09-08",
+    "localContinuousPlayback": {
+      "baseCommit": "20598b5a56c3e0e50bfe217605eda5caf4731018",
+      "mode": "WebGL-unavailable gallery fallback",
+      "completedSeconds": 540,
+      "seeking": false,
+      "automaticMediaRecoveryPrompts": 0,
+      "observed": "Eight English tour tracks, song handoff and original flaw photo progressed to natural completion.",
+      "visual3DAcceptance": false
+    },
+    "fixes": [
+      "Completed/replay labels distinct from pause/resume.",
+      "Final waiting stop selects first-contact content in the fallback gallery."
+    ],
+    "regression": "Visible tread heights raycast from the shared exported geometry match the navigation height; existing geometry preserved.",
+    "ciRealtime3D": "New read-only check_realtime_tour.py job; pending current-head CI.",
+    "limitations": [
+      "Current cloud browser cannot create a WebGL context.",
+      "Final CI screenshot archive download returned HTTP 403; it has not been visually reviewed in this session.",
+      "No human listening certification or production publication."
+    ]
+  }
 }

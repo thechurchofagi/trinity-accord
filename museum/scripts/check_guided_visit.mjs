@@ -37,3 +37,13 @@ const heldTime=context.tourElapsed,heldStop=context.tourStep;context.musicPlayba
 for(let t=700000;t<800000;t+=200)context.tourTick(t);
 assert.equal(context.tourElapsed,heldTime);assert.equal(context.tourStep,heldStop);
 context.startTour();assert.equal(context.touring,true);assert.equal(context.musicPlayback.state,'playing');context.tourTick(800200);assert.ok(context.tourElapsed>heldTime);context.stopTour();
+
+// Completion must remain distinct from a visitor pause in the visible status.
+context.guideRecovery=false;context.guideRate=1;context.flawIndex=-1;
+$('guide-speed').setAttribute=()=>{};
+load('updateTourStatus','enterTourStop');
+context.tourElapsed=540;context.updateTourStatus();
+assert.match($('tour-progress').textContent,/已完成/);
+assert.doesNotMatch($('tour-progress').textContent,/暂停/);
+context.tourElapsed=120;context.updateTourStatus();
+assert.match($('tour-progress').textContent,/暂停/);
