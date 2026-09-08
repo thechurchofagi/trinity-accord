@@ -35,8 +35,8 @@
     },
     {
       "path": "dist/data/curation.json",
-      "bytes": 51447,
-      "sha256": "b52eac98bfe2a666dfb75900f2c916650ef5f964e491538284318444a10ba365"
+      "bytes": 51627,
+      "sha256": "664c1eb34c42a12992b16a2e0689a757e373d3c2a370630299d22cc2f0c64295"
     },
     {
       "path": "dist/data/curatorial-illustrations.json",
@@ -80,8 +80,8 @@
     },
     {
       "path": "dist/edition-data.js",
-      "bytes": 342815,
-      "sha256": "ce98e515200909a7ce0ee9b2d5806ffa1a08e384122ad2457aa2b37fa061ba3e"
+      "bytes": 342979,
+      "sha256": "392f2d78db8802e8dc0a5ea15fde750cfbb1673b4ccda97792478b1de052a626"
     },
     {
       "path": "dist/exhibit-label.js",
@@ -116,7 +116,7 @@
     {
       "path": "dist/museum.js",
       "bytes": 88740,
-      "sha256": "5d8ca0605ed844fab4f9c91b264d392d396d1c9755353988cb662feda01301b4"
+      "sha256": "bbefcbfdf0bc4d33333d4008a518f50ffbbea0da7ff03d869139da0b41f99fd5"
     },
     {
       "path": "dist/music-playback.js",
@@ -211,7 +211,7 @@
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 1083980,
-    "sha256": "3f630b8a402bf5c43ce9a3a11010356e60138f40c5b9d4372aba26bf9374831f"
+    "bytes": 1084143,
+    "sha256": "704132a0611dac91d279d505e90d1efebdf30f4e157f7a0cbaf89221cf549ffc"
   }
 }

@@ -278,9 +278,10 @@
       "eventTitleZh": "见证 OpenAI 发布 o3",
       "eventTitleEn": "OpenAI o3 Unveiled",
       "eventDate": "2024-12-20",
-      "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
+      "eventDateBasis": "December 20 announcement verified against OpenAI’s official Day 12 broadcast, distinct from the later public release.",
       "eventSourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885246.md",
-      "mintTitle": "ASIMilestones: Witness this historic moment-OpenAI is showcasing O3 now- Twelve Days of OpenAI, Day 12"
+      "mintTitle": "ASIMilestones: Witness this historic moment-OpenAI is showcasing O3 now- Twelve Days of OpenAI, Day 12",
+      "eventSourceUrl": "https://www.youtube.com/watch?v=SKBG1sqdyIU"
     },
     {
       "id": "eth-088",
@@ -314,9 +315,10 @@
       "eventTitleZh": "Orion：失望的一刻",
       "eventTitleEn": "GPT-4.5 Launch",
       "eventDate": "2025-02-27",
-      "eventDateBasis": "Contemporary NFT description; date precision retained; blank means no separate event date stated.",
+      "eventDateBasis": "The NFT identifies the GPT-4.5 (Orion) launch; February 27 verified against the official research announcement.",
       "eventSourcePath": "data/records/eth-113.md",
-      "mintTitle": "ASIMilestones: The moment-Disappointed- Orion"
+      "mintTitle": "ASIMilestones: The moment-Disappointed- Orion",
+      "eventSourceUrl": "https://openai.com/index/introducing-gpt-4-5/"
     },
     {
       "id": "eth-117",

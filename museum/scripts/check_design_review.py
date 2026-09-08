@@ -7,8 +7,9 @@ P=pathlib.Path(__file__).resolve().parents[1];D=P/'dist';OUT=pathlib.Path(os.env
 js=D/'__design_qa.js';html=D/'__design_qa.html'
 harness='''
 window.__designQA={
- get state(){return {camera:camera.position.toArray(),moving:!!motion,walkable:isWalkable(galleryLayout,camera.position),eye:camera.position.y-floorAt(galleryLayout,camera.position),selected:selectedExhibit,crystal:!!floatingCrystal};},
+ get state(){return {camera:camera.position.toArray(),moving:!!motion,travelled:motion?.travelled,length:motion?.route&&routeLength(motion.route),hidden:document.hidden,panelOpen:$('panel').open,walkable:isWalkable(galleryLayout,camera.position),eye:camera.position.y-floorAt(galleryLayout,camera.position),selected:selectedExhibit,crystal:!!floatingCrystal};},
  async focus(id,settle=true){stopTour();manualUntil=0;pendingTourView=null;if(id==='physical-alpha')await loadCrystal();focusExhibit(id);if(settle&&motion){camera.position.copy(motion.end);camera.position.y=floorAt(galleryLayout,camera.position)+galleryLayout.eyeHeight;yaw=motion.endYaw;pitch=motion.endPitch;motion=null;}},
+ async sky(){stopTour();manualUntil=0;pendingTourView=null;roomIndex=4;waitingView();if(motion){camera.position.copy(motion.end);yaw=motion.endYaw;pitch=motion.endPitch;motion=null;}updateUI();},
  trace:[]
 };
 const originalAnimate=animate;animate=function(now){originalAnimate(now);if(window.__traceWalk)window.__designQA.trace.push({now,p:camera.position.toArray(),eye:camera.position.y-floorAt(galleryLayout,camera.position)});};
@@ -27,10 +28,16 @@ try:
    page.evaluate('(id)=>window.__designQA.focus(id)',eid);page.wait_for_timeout(600)
    state=page.evaluate('window.__designQA.state');assert state['walkable'],state;assert abs(state['eye']-1.65)<1e-6,state
    page.screenshot(path=str(OUT/f'{viewport}-{eid}.png'),timeout=90000);report.append(state);print('DESIGN_CAPTURE',viewport,eid,flush=True)
+  page.evaluate('window.__designQA.sky()');page.wait_for_timeout(600);page.screenshot(path=str(OUT/f'{viewport}-gold-sky.png'),timeout=90000)
   if not mobile:
    page.set_viewport_size({'width':480,'height':320});page.evaluate("window.__designQA.focus('project-intro')");page.evaluate("window.__traceWalk=true;window.__designQA.focus('canon-1',false)")
-   page.wait_for_function('!window.__designQA.state.moving',timeout=180000)
-   trace=page.evaluate('window.__traceWalk=false;window.__designQA.trace');assert len(trace)>100
+   try:
+    page.wait_for_function('!window.__designQA.state.moving',timeout=300000)
+   finally:
+    trace=page.evaluate('window.__traceWalk=false;window.__designQA.trace');state=page.evaluate('window.__designQA.state')
+    (OUT/'walking-diagnostic.json').write_text(json.dumps({'state':state,'samples':trace}))
+    print('WALK_DIAGNOSTIC',state,'frames',len(trace),flush=True)
+   assert len(trace)>100
    travelled=0
    for a,z in zip(trace,trace[1:]):
     delta=((z['p'][0]-a['p'][0])**2+(z['p'][2]-a['p'][2])**2)**.5;travelled+=delta
