@@ -15,8 +15,8 @@
     },
     {
       "path": "dist/caption-utils.js",
-      "bytes": 2689,
-      "sha256": "cdf34e26354c16a236c1527c70314d398f028d97875a8414fd1026cb0990a5f6"
+      "bytes": 2702,
+      "sha256": "5bf4776653bf6114949605a95e32b52df380c08282c9cc8c03ee70fda2272ea9"
     },
     {
       "path": "dist/crystal-inscription.js",
@@ -25,8 +25,8 @@
     },
     {
       "path": "dist/crystal-viewer.js",
-      "bytes": 8389,
-      "sha256": "3334f29f94feeb2e1345db352d513e2c58211312a4d413f6b2199351743900ff"
+      "bytes": 8410,
+      "sha256": "73676211ead15703f29873301833565d73140d4f4291f99f481ff21df5dff407"
     },
     {
       "path": "dist/data/bright-stars.json",
@@ -115,8 +115,8 @@
     },
     {
       "path": "dist/museum.js",
-      "bytes": 88025,
-      "sha256": "5353257ee9420dccdec89838249f82f9eafebe603a9bc47aef431593d832780f"
+      "bytes": 88113,
+      "sha256": "7b8a57c0a00a2f84199f74c616c1d1316884fd8873ee6024b3e766d05cad80f0"
     },
     {
       "path": "dist/music-playback.js",
@@ -201,7 +201,7 @@
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 1066016,
-    "sha256": "5b8aa2a0205ed9b3ea5fba815701cb1591e5e4a7b352ea0dbfac8a533fa3be89"
+    "bytes": 1066119,
+    "sha256": "6fa0d86884b32de60f9adeee6e68831bd88302f3e465eb1270e5c71f4122ab23"
   }
 }

@@ -2,7 +2,7 @@ import * as THREE from './vendor/three.module.js';
 import {GLTFLoader} from './vendor/GLTFLoader.js';
 import {fetchBytes} from './progressive-loading.js';
 
-export function crystalGlass(){return new THREE.MeshPhysicalMaterial({color:'#ffffff',roughness:.008,transmission:1,thickness:.004,ior:1.08,metalness:0,envMapIntensity:.22,clearcoat:.08,clearcoatRoughness:.02,attenuationColor:new THREE.Color('#ffffff'),attenuationDistance:Infinity});}
+export function crystalGlass(){return new THREE.MeshPhysicalMaterial({color:'#f2faff',roughness:.018,transmission:1,thickness:.04,ior:1.46,metalness:0,envMapIntensity:.4,clearcoat:.08,clearcoatRoughness:.02,attenuationColor:new THREE.Color('#ffffff'),attenuationDistance:Infinity});}
 // Keep physical engraving geometry; improve its contrast for a small screen.
 export function refineCrystal(root){
  const meshes=[];root.traverse(o=>{if(o.isMesh)meshes.push(o);});
@@ -11,8 +11,8 @@ export function refineCrystal(root){
    o.material.dispose();o.material=crystalGlass();
    const edges=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,24),new THREE.LineBasicMaterial({color:'#d7efff',transparent:true,opacity:.18,depthWrite:false}));edges.name='Display facet highlights';o.add(edges);
   }else{
-   o.material.dispose();o.material=new THREE.MeshBasicMaterial({color:'#f0f8ff',toneMapped:false});
-   const outline=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,35),new THREE.LineBasicMaterial({color:'#142637',transparent:true,opacity:.8,depthWrite:false,toneMapped:false}));outline.name='Engraving contrast outline';o.add(outline);
+   o.material.dispose();o.material=new THREE.MeshBasicMaterial({color:'#526977',side:THREE.DoubleSide,toneMapped:false});
+   const outline=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,35),new THREE.LineBasicMaterial({color:'#d5e5ee',transparent:true,opacity:.45,depthWrite:false,toneMapped:false}));outline.name='Engraving contrast outline';o.add(outline);
   }
  }
 }
@@ -70,7 +70,7 @@ export function addCrystalAura(scene,center,scale=1){
  const group=new THREE.Group();group.position.copy(center);group.scale.setScalar(scale);scene.add(group);
  // A soft light field outside the slab silhouette; the inscription area stays clear.
  const material=new THREE.ShaderMaterial({transparent:true,depthWrite:false,side:THREE.DoubleSide,blending:THREE.AdditiveBlending,toneMapped:false,
-  uniforms:{strength:{value:.42}},
+  uniforms:{strength:{value:.14}},
   vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
   fragmentShader:`varying vec2 vUv;uniform float strength;void main(){
    vec2 p=(vUv-.5)*vec2(.74,.96);vec2 q=abs(p)-vec2(.115,.1685);
@@ -81,5 +81,5 @@ export function addCrystalAura(scene,center,scale=1){
    gl_FragColor=vec4(color,light*strength);
   }`});
  const veil=new THREE.Mesh(new THREE.PlaneGeometry(.74,.96),material);veil.position.set(0,.1765,-.035);group.add(veil);
- return {group,update(now,reduced){material.uniforms.strength.value=reduced?.42:.42+.035*Math.sin(now*.00105);},dispose(){veil.geometry.dispose();material.dispose();scene.remove(group);}};
+ return {group,update(now,reduced){material.uniforms.strength.value=reduced?.14:.14+.012*Math.sin(now*.00105);},dispose(){veil.geometry.dispose();material.dispose();scene.remove(group);}};
 }

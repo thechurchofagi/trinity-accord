@@ -11,6 +11,12 @@ jobs:
   browser:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport: [desktop, mobile]
+    env:
+      MUSEUM_QA_VIEWPORT: ${{ matrix.viewport }}
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
@@ -41,7 +47,7 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: museum-browser-${{ github.run_id }}
+          name: museum-browser-${{ matrix.viewport }}-${{ github.run_id }}
           path: ${{ runner.temp }}/museum-browser
           retention-days: 14
           if-no-files-found: warn

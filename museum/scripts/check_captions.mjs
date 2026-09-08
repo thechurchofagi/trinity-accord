@@ -28,4 +28,5 @@ for(const e of sources.items.filter(e=>e.media?.some(m=>m.kind==='audio'))){
 }
 for(const fps of [10,20,30,60,120]){let distance=0,previous=1000;for(let i=1;i<=fps*10;i++){const now=1000+i*1000/fps;distance+=frameSeconds(now,previous)*1.38;previous=now;}assert(Math.abs(distance-13.8)<1e-8);}
 assert.equal(frameSeconds(60000,1000),0);
+assert.equal(frameSeconds(1600,1000),.25,'Slow rendering retains bounded movement instead of freezing input');
 console.log(total+' reference lines checked; 10–120 fps walking speed agrees; background gap ignored.');

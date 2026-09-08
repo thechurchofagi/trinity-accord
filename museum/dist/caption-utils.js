@@ -55,5 +55,5 @@ export function captionPages(text, width, measure) {
 // Walking uses elapsed seconds, including slow frames, but never background gaps.
 export function frameSeconds(now, previous) {
   const elapsed = (now - previous) / 1000;
-  return previous && elapsed > 0 && elapsed <= .25 ? elapsed : 0;
+  return previous && elapsed > 0 && elapsed <= 2 ? Math.min(elapsed, .25) : 0;
 }

@@ -27,6 +27,8 @@ try:
   chrome=shutil.which('google-chrome') or shutil.which('chromium')
   b=p.chromium.launch(**({'executable_path':chrome} if chrome else {}),headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   for label,w,h in [('desktop',1440,900),('mobile',390,844)]:
+   if os.environ.get('MUSEUM_QA_VIEWPORT') not in [None,label]:continue
+   print('START_VIEWPORT',label,flush=True)
    page=b.new_page(viewport={'width':w,'height':h},is_mobile=label=='mobile',has_touch=label=='mobile',reduced_motion='reduce');errors=[];page.on('pageerror',lambda e:errors.append(str(e)));page.on('console',lambda m:print('BROWSER_CONSOLE',m.type,m.text,flush=True) if m.type in ['error','warning'] else None)
    page.goto('http://127.0.0.1:8766/__presentation_qa.html?lang=en#entrance',wait_until='networkidle')
    page.wait_for_function('window.__presentationQA?.state.ready');page.wait_for_selector('#scene-status',state='hidden')
@@ -36,7 +38,9 @@ try:
    page.wait_for_function("!document.getElementById('narration').paused")
    page.locator('#guide-speed').click()
    before=page.evaluate('window.__presentationQA.state')
-   page.keyboard.down('w');page.wait_for_timeout(600);page.keyboard.up('w')
+   page.keyboard.down('w')
+   page.wait_for_function('before=>JSON.stringify(window.__presentationQA.state.camera)!==JSON.stringify(before)',arg=before['camera'],timeout=10000)
+   page.keyboard.up('w')
    after=page.evaluate('window.__presentationQA.state')
    assert after['touring'] and before['camera']!=after['camera'],(before,after)
    page.keyboard.press('Escape');assert page.evaluate('window.__presentationQA.state.touring')
@@ -56,7 +60,7 @@ try:
     page.wait_for_function("!document.getElementById('narration').paused")
     state=page.evaluate('window.__presentationQA.state');assert state['walkable'],state
     assert 'guides-expressive/' in state['voice'],state
-    states.append(state)
+    states.append(state);print('STATION_RENDERED',label,index,flush=True)
     page.evaluate('window.__presentationQA.settle()');page.wait_for_timeout(200)
     if label=='desktop' or index in [1,4,5,6,7]:page.screenshot(path=str(OUT/f'{label}-station-{index}.png'))
    for eid in ['canon-1','canon-2','canon-3']:

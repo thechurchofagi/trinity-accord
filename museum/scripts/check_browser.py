@@ -13,6 +13,8 @@ try:
   chrome=shutil.which('google-chrome') or shutil.which('chromium')
   b=p.chromium.launch(**({'executable_path':chrome} if chrome else {}),headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   for label,width,height in [('desktop',1440,900),('mobile',390,844)]:
+   if os.environ.get('MUSEUM_QA_VIEWPORT') not in [None,label]:continue
+   print('START_VIEWPORT',label,flush=True)
    page=b.new_page(viewport={'width':width,'height':height},is_mobile=label=='mobile',has_touch=label=='mobile',reduced_motion='reduce')
    errors=[];failed=[]
    page.on('console',lambda m:print('BROWSER_CONSOLE',m.type,m.text,flush=True) if m.type in ['error','warning'] else None)
@@ -24,9 +26,9 @@ try:
    assert page.locator('#rooms button').count()==6
    assert not page.locator('#fallback-gallery').is_visible(),'Flat fallback is not WebGL acceptance'
    for i in range(6):
-    page.locator(f'#rooms [data-room="{i}"]').click(force=True);page.wait_for_timeout(12000)
+    page.locator(f'#rooms [data-room="{i}"]').click(force=True);page.wait_for_function("document.getElementById('world').dataset.cameraMoving==='false'",timeout=90000)
     assert page.locator(f'#rooms [data-room="{i}"]').get_attribute('aria-current')=='true'
-    page.screenshot(path=str(OUT/f'{label}-{i}.png'))
+    page.screenshot(path=str(OUT/f'{label}-{i}.png'));print('ROOM_RENDERED',label,i,flush=True)
    page.locator('#focus-art').click();page.wait_for_timeout(200)
    assert 'Guardian' in page.locator('#panel-content').inner_text()
    assert page.locator('#panel-content a[href="./data/records/guardian-charter-103635270.txt"]').count()==1
@@ -36,9 +38,9 @@ try:
     page.locator(f'#rooms [data-room="{room}"]').click(force=True)
     page.locator('#room-works').click()
     page.locator(f'#panel-content [data-exhibit="{eid}"]').click()
-    page.wait_for_timeout(16000)
+    page.wait_for_function("document.getElementById('world').dataset.cameraMoving==='false'",timeout=90000)
     if page.locator('#guide-audio-prompt').is_visible():page.locator('#guide-audio-start').click()
-    page.screenshot(path=str(OUT/f'{label}-focus-{eid}.png'))
+    page.screenshot(path=str(OUT/f'{label}-focus-{eid}.png'));print('WORK_RENDERED',label,eid,flush=True)
    page.locator('#language').click();page.wait_for_timeout(200)
    assert page.locator('html').get_attribute('lang')=='zh-CN'
    page.locator('#focus-art').click()
