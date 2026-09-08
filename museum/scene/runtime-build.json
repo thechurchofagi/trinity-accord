@@ -94,6 +94,11 @@
       "sha256": "831b214da79c3a1467226e010ad93e0ceb28278c1df4e8908b0b8a033c7ad4da"
     },
     {
+      "path": "dist/gold-window.js",
+      "bytes": 1104,
+      "sha256": "88d94da08126d1567a28694efeb72f9d2b017d92c4e987cc046b463f5fefd9fb"
+    },
+    {
       "path": "dist/language-preference.js",
       "bytes": 1456,
       "sha256": "075848dfd8bdf4b6ea4dbb37b7362f3840ab407ad7925b53c3edd49b71079fee"
@@ -115,8 +120,8 @@
     },
     {
       "path": "dist/museum.js",
-      "bytes": 88960,
-      "sha256": "b68b98a8c51319ccd4307c372093ad1a4918958e3f1d355df3a522b29f899599"
+      "bytes": 88862,
+      "sha256": "63bd1f783f1ef806501bd44952c097ec459f2e8a52a5684e2cfeb96adfb58849"
     },
     {
       "path": "dist/music-playback.js",
@@ -211,7 +216,7 @@
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 1084324,
-    "sha256": "1c340232ef26c0f9874a241f41ba7f85233ac3e55ebd6ef530b8da934994b379"
+    "bytes": 1084712,
+    "sha256": "6ebdd71685484e16cac99bf75e14d38818eb42856b0ef554ebd4d008f915632d"
   }
 }

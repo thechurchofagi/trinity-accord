@@ -6,9 +6,11 @@ P = Path(__file__).resolve().parents[1]
 a = argparse.ArgumentParser()
 a.add_argument('--audit', required=True)
 a.add_argument('--notes', required=True)
+a.add_argument('--secondary-audit')
 args = a.parse_args()
 audit = {p.stem: json.loads(p.read_text()) for p in Path(args.audit).glob('*.json')}
 notes = json.loads(Path(args.notes).read_text())
+secondary = {p.stem: json.loads(p.read_text()) for p in Path(args.secondary_audit).glob('*.json')} if args.secondary_audit else {}
 source = ast.parse((P/'scripts/render_qwen_guides.py').read_text())
 ns = {'re': re}
 fn = next(n for n in source.body if isinstance(n, ast.FunctionDef) and n.name == 'paragraphs')
@@ -25,6 +27,11 @@ for track in tracks:
         assert len(matches) == 1, ('Missing independent recognition', text)
         review = dict(matches[0])
         key = review['key']
+        other = secondary.get(key)
+        if other and other['audioSha256'] == review['audioSha256']:
+            review['secondaryRecognition'] = other
+        elif other and other['audioSha256'] == review.get('rejectedAudioSha256'):
+            review['rejectedTakeRecognition'] = other
         if review['normalizedSimilarity'] == 1:
             review['textReview'] = 'Recognition matches the supplied text after removing punctuation and case.'
         else:
