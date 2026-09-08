@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.gallery-layout.v2",
-  "edition": "museum-v1.33.0",
+  "edition": "museum-v1.34.0",
   "dimensions": {
     "width": 14,
     "length": 63,
@@ -353,41 +353,41 @@
           "x": -6.87,
           "z": -47,
           "angle": 1.5707963267948966,
-          "y": 2.2
+          "y": 1.85
         },
         {
           "id": "canon-2",
           "x": 6.87,
           "z": -47,
           "angle": -1.5707963267948966,
-          "y": 2.2
+          "y": 1.85
         },
         {
           "id": "canon-3",
           "x": -3.4425,
           "z": -52.962587,
           "angle": 0.5235987755982988,
-          "y": 2.2
+          "y": 1.85
         },
         {
           "id": "evidence-path",
           "x": 3.4425,
           "z": -52.962587,
           "angle": -0.523598775598,
-          "y": 2.2
+          "y": 1.85
         },
         {
           "id": "physical-alpha",
           "kind": "pedestal",
           "x": 0,
           "z": -47,
-          "y": 1.9765,
+          "y": 1.6265,
           "angle": 0
         }
       ],
       "width": 14,
       "height": 8,
-      "floor": 0.35,
+      "floor": 0,
       "footprint": [
         [
           7.0,
@@ -453,33 +453,33 @@
           "x": -5.885,
           "z": -56.1,
           "angle": 1.5707963267948966,
-          "y": 2.2
+          "y": 1.85
         },
         {
           "id": "star-ark",
           "x": 5.885,
           "z": -56.1,
           "angle": -1.5707963267948966,
-          "y": 2.2
+          "y": 1.85
         },
         {
           "id": "first-contact",
           "x": -5.885,
           "z": -59.4,
           "angle": 1.5707963267948966,
-          "y": 2.2
+          "y": 1.85
         },
         {
           "id": "current-status",
           "x": 5.885,
           "z": -59.4,
           "angle": -1.5707963267948966,
-          "y": 2.2
+          "y": 1.85
         }
       ],
       "width": 12,
       "height": 6,
-      "floor": 0.35,
+      "floor": 0,
       "footprint": [
         [
           -6.0,
@@ -502,17 +502,12 @@
   ],
   "endZ": -63,
   "architectureBaseHeight": 8,
-  "runtimeAdaptation": "No scale adaptation: shared per-room floor, portal and architecture geometry. All measurements are later exhibition design.",
-  "ramp": {
-    "start": 35.8,
-    "end": 40,
-    "width": 2.8,
-    "rise": 0.35
-  },
+  "runtimeAdaptation": "Level tile floors; pass-through luminous room boundaries. Shared geometry drives export, preview and walking.",
+  "ramp": null,
   "crystal": {
     "x": 0,
     "z": -47,
-    "baseY": 1.8,
+    "baseY": 1.45,
     "pedestalRadius": 0.34,
     "pedestalHeight": 1.45,
     "width": 0.246,
@@ -523,34 +518,40 @@
     {
       "depth": 6,
       "x": 0,
-      "width": 3.2
+      "width": 9,
+      "visualOnly": true
     },
     {
       "depth": 30,
-      "x": -1,
-      "width": 3.2
+      "x": 0,
+      "width": 8,
+      "visualOnly": true
     },
     {
       "depth": 40,
       "x": 0,
-      "width": 2.8
+      "width": 3.75,
+      "visualOnly": true
     },
     {
       "depth": 54,
       "x": 0,
-      "width": 2.8
+      "width": 3.75,
+      "visualOnly": true
     }
   ],
   "materials": {
     "plaster": {
-      "color": "#a9aaa4"
+      "color": "#c4c2b9",
+      "roughness": 0.93
     },
     "stone": {
-      "color": "#596261",
-      "roughness": 0.92
+      "color": "#d9d5c9",
+      "roughness": 0.78
     },
     "dark": {
-      "color": "#555c5c"
+      "color": "#767e7d",
+      "roughness": 0.94
     },
     "metal": {
       "color": "#64747b",
@@ -558,51 +559,21 @@
       "metalness": 0.65
     },
     "gold": {
-      "color": "#d9ab50",
-      "roughness": 0.24,
+      "color": "#c8ac6e",
+      "roughness": 0.34,
       "metalness": 1
     },
     "light": {
       "color": "#bdc9cb",
       "emission": true
+    },
+    "boundary": {
+      "color": "#b0e7ef",
+      "emission": true,
+      "opacity": 0.38
     }
   },
   "architecture": [
-    {
-      "name": "entrance floor",
-      "vertices": [
-        [
-          -4.5,
-          0,
-          0
-        ],
-        [
-          4.5,
-          0,
-          0
-        ],
-        [
-          4.5,
-          0,
-          -6
-        ],
-        [
-          -4.5,
-          0,
-          -6
-        ]
-      ],
-      "indices": [
-        0,
-        1,
-        2,
-        0,
-        2,
-        3
-      ],
-      "material": "stone",
-      "floor": true
-    },
     {
       "name": "entrance ceiling",
       "vertices": [
@@ -767,41 +738,6 @@
       "floor": false
     },
     {
-      "name": "chronicle floor",
-      "vertices": [
-        [
-          -4.5,
-          0,
-          -6
-        ],
-        [
-          4.5,
-          0,
-          -6
-        ],
-        [
-          4.5,
-          0,
-          -30
-        ],
-        [
-          -4.5,
-          0,
-          -30
-        ]
-      ],
-      "indices": [
-        0,
-        1,
-        2,
-        0,
-        2,
-        3
-      ],
-      "material": "stone",
-      "floor": true
-    },
-    {
       "name": "chronicle ceiling",
       "vertices": [
         [
@@ -898,102 +834,6 @@
       ],
       "material": "light",
       "rotationY": -1.5707963267948966,
-      "floor": false
-    },
-    {
-      "name": "Portal shoulder",
-      "position": [
-        -3.05,
-        2.5,
-        -6.0
-      ],
-      "size": [
-        2.9,
-        5,
-        0.2
-      ],
-      "material": "plaster",
-      "rotationY": 0.0,
-      "floor": false
-    },
-    {
-      "name": "Portal shoulder",
-      "position": [
-        3.05,
-        2.5,
-        -6.0
-      ],
-      "size": [
-        2.9,
-        5,
-        0.2
-      ],
-      "material": "plaster",
-      "rotationY": 0.0,
-      "floor": false
-    },
-    {
-      "name": "Portal lintel",
-      "position": [
-        0,
-        4.35,
-        -6
-      ],
-      "size": [
-        3.2,
-        1.2999999999999998,
-        0.24
-      ],
-      "material": "plaster",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "Portal metal reveal",
-      "position": [
-        -1.6,
-        1.85,
-        -6
-      ],
-      "size": [
-        0.045,
-        3.7,
-        0.27
-      ],
-      "material": "metal",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "Portal metal reveal",
-      "position": [
-        1.6,
-        1.85,
-        -6
-      ],
-      "size": [
-        0.045,
-        3.7,
-        0.27
-      ],
-      "material": "metal",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "Door light",
-      "position": [
-        0,
-        3.64,
-        -6
-      ],
-      "size": [
-        3.2,
-        0.035,
-        0.29
-      ],
-      "material": "light",
-      "rotationY": 0,
       "floor": false
     },
     {
@@ -1125,172 +965,6 @@
       "floor": false
     },
     {
-      "name": "Formation floor",
-      "vertices": [
-        [
-          -4.0,
-          0,
-          -30
-        ],
-        [
-          4.0,
-          0,
-          -30
-        ],
-        [
-          4.0,
-          0,
-          -35.8
-        ],
-        [
-          -4.0,
-          0,
-          -35.8
-        ]
-      ],
-      "indices": [
-        0,
-        1,
-        2,
-        0,
-        2,
-        3
-      ],
-      "material": "stone",
-      "floor": true
-    },
-    {
-      "name": "Accessible centre ramp",
-      "vertices": [
-        [
-          -1.4,
-          0,
-          -35.8
-        ],
-        [
-          1.4,
-          0,
-          -35.8
-        ],
-        [
-          1.4,
-          0.35,
-          -40
-        ],
-        [
-          -1.4,
-          0.35,
-          -40
-        ]
-      ],
-      "indices": [
-        0,
-        1,
-        2,
-        0,
-        2,
-        3
-      ],
-      "material": "stone",
-      "floor": true
-    },
-    {
-      "name": "Three shallow side steps",
-      "position": [
-        -2.7,
-        0.04666666666666665,
-        -36.5
-      ],
-      "size": [
-        2.6,
-        0.14,
-        1.400000000000001
-      ],
-      "material": "stone",
-      "rotationY": 0,
-      "floor": true
-    },
-    {
-      "name": "Three shallow side steps",
-      "position": [
-        -2.7,
-        0.1633333333333333,
-        -37.9
-      ],
-      "size": [
-        2.6,
-        0.14,
-        1.400000000000001
-      ],
-      "material": "stone",
-      "rotationY": 0,
-      "floor": true
-    },
-    {
-      "name": "Three shallow side steps",
-      "position": [
-        -2.7,
-        0.2799999999999999,
-        -39.3
-      ],
-      "size": [
-        2.6,
-        0.14,
-        1.400000000000001
-      ],
-      "material": "stone",
-      "rotationY": 0,
-      "floor": true
-    },
-    {
-      "name": "Three shallow side steps",
-      "position": [
-        2.7,
-        0.04666666666666665,
-        -36.5
-      ],
-      "size": [
-        2.6,
-        0.14,
-        1.400000000000001
-      ],
-      "material": "stone",
-      "rotationY": 0,
-      "floor": true
-    },
-    {
-      "name": "Three shallow side steps",
-      "position": [
-        2.7,
-        0.1633333333333333,
-        -37.9
-      ],
-      "size": [
-        2.6,
-        0.14,
-        1.400000000000001
-      ],
-      "material": "stone",
-      "rotationY": 0,
-      "floor": true
-    },
-    {
-      "name": "Three shallow side steps",
-      "position": [
-        2.7,
-        0.2799999999999999,
-        -39.3
-      ],
-      "size": [
-        2.6,
-        0.14,
-        1.400000000000001
-      ],
-      "material": "stone",
-      "rotationY": 0,
-      "floor": true
-    },
-    {
       "name": "formation ceiling",
       "vertices": [
         [
@@ -1390,261 +1064,66 @@
       "floor": false
     },
     {
-      "name": "Portal shoulder",
-      "position": [
-        -3.3,
-        2.5,
-        -30.0
-      ],
-      "size": [
-        1.4,
-        5,
-        0.2
-      ],
-      "material": "plaster",
-      "rotationY": 0.0,
-      "floor": false
-    },
-    {
-      "name": "Portal shoulder",
-      "position": [
-        2.3,
-        2.5,
-        -30.0
-      ],
-      "size": [
-        3.4,
-        5,
-        0.2
-      ],
-      "material": "plaster",
-      "rotationY": 0.0,
-      "floor": false
-    },
-    {
-      "name": "Portal lintel",
-      "position": [
-        -1,
-        4.35,
-        -30
-      ],
-      "size": [
-        3.2,
-        1.2999999999999998,
-        0.24
-      ],
-      "material": "plaster",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "Portal metal reveal",
-      "position": [
-        -2.6,
-        1.85,
-        -30
-      ],
-      "size": [
-        0.045,
-        3.7,
-        0.27
-      ],
-      "material": "metal",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "Portal metal reveal",
-      "position": [
-        0.6000000000000001,
-        1.85,
-        -30
-      ],
-      "size": [
-        0.045,
-        3.7,
-        0.27
-      ],
-      "material": "metal",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "Door light",
-      "position": [
-        -1,
-        3.64,
-        -30
-      ],
-      "size": [
-        3.2,
-        0.035,
-        0.29
-      ],
-      "material": "light",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "originals floor",
-      "vertices": [
-        [
-          7.0,
-          0.35,
-          -48.875644
-        ],
-        [
-          5.124356,
-          0.35,
-          -52.124356
-        ],
-        [
-          1.875644,
-          0.35,
-          -54.0
-        ],
-        [
-          -1.875644,
-          0.35,
-          -54.0
-        ],
-        [
-          -5.124356,
-          0.35,
-          -52.124356
-        ],
-        [
-          -7.0,
-          0.35,
-          -48.875644
-        ],
-        [
-          -7.0,
-          0.35,
-          -45.124356
-        ],
-        [
-          -5.124356,
-          0.35,
-          -41.875644
-        ],
-        [
-          -1.875644,
-          0.35,
-          -40.0
-        ],
-        [
-          1.875644,
-          0.35,
-          -40.0
-        ],
-        [
-          5.124356,
-          0.35,
-          -41.875644
-        ],
-        [
-          7.0,
-          0.35,
-          -45.124356
-        ]
-      ],
-      "indices": [
-        0,
-        1,
-        2,
-        0,
-        2,
-        3,
-        0,
-        3,
-        4,
-        0,
-        4,
-        5,
-        0,
-        5,
-        6,
-        0,
-        6,
-        7,
-        0,
-        7,
-        8,
-        0,
-        8,
-        9,
-        0,
-        9,
-        10,
-        0,
-        10,
-        11
-      ],
-      "material": "stone",
-      "floor": true
-    },
-    {
       "name": "originals ceiling",
       "vertices": [
         [
           7.0,
-          8.35,
+          8.0,
           -48.875644
         ],
         [
           5.124356,
-          8.35,
+          8.0,
           -52.124356
         ],
         [
           1.875644,
-          8.35,
+          8.0,
           -54.0
         ],
         [
           -1.875644,
-          8.35,
+          8.0,
           -54.0
         ],
         [
           -5.124356,
-          8.35,
+          8.0,
           -52.124356
         ],
         [
           -7.0,
-          8.35,
+          8.0,
           -48.875644
         ],
         [
           -7.0,
-          8.35,
+          8.0,
           -45.124356
         ],
         [
           -5.124356,
-          8.35,
+          8.0,
           -41.875644
         ],
         [
           -1.875644,
-          8.35,
+          8.0,
           -40.0
         ],
         [
           1.875644,
-          8.35,
+          8.0,
           -40.0
         ],
         [
           5.124356,
-          8.35,
+          8.0,
           -41.875644
         ],
         [
           7.0,
-          8.35,
+          8.0,
           -45.124356
         ]
       ],
@@ -1687,7 +1166,7 @@
       "name": "originals wall",
       "position": [
         6.062177999999999,
-        4.35,
+        3.9999999999999996,
         -50.5
       ],
       "size": [
@@ -1703,7 +1182,7 @@
       "name": "Recessed edge light",
       "position": [
         6.062177999999999,
-        8.2,
+        7.85,
         -50.5
       ],
       "size": [
@@ -1719,7 +1198,7 @@
       "name": "originals wall",
       "position": [
         3.5,
-        4.35,
+        3.9999999999999996,
         -53.062178
       ],
       "size": [
@@ -1735,7 +1214,7 @@
       "name": "Recessed edge light",
       "position": [
         3.5,
-        8.2,
+        7.85,
         -53.062178
       ],
       "size": [
@@ -1751,7 +1230,7 @@
       "name": "originals wall",
       "position": [
         -3.5,
-        4.35,
+        3.9999999999999996,
         -53.062178
       ],
       "size": [
@@ -1767,7 +1246,7 @@
       "name": "Recessed edge light",
       "position": [
         -3.5,
-        8.2,
+        7.85,
         -53.062178
       ],
       "size": [
@@ -1783,7 +1262,7 @@
       "name": "originals wall",
       "position": [
         -6.062177999999999,
-        4.35,
+        3.9999999999999996,
         -50.5
       ],
       "size": [
@@ -1799,7 +1278,7 @@
       "name": "Recessed edge light",
       "position": [
         -6.062177999999999,
-        8.2,
+        7.85,
         -50.5
       ],
       "size": [
@@ -1815,7 +1294,7 @@
       "name": "originals wall",
       "position": [
         -7.0,
-        4.35,
+        3.9999999999999996,
         -47.0
       ],
       "size": [
@@ -1831,7 +1310,7 @@
       "name": "Recessed edge light",
       "position": [
         -7.0,
-        8.2,
+        7.85,
         -47.0
       ],
       "size": [
@@ -1847,7 +1326,7 @@
       "name": "originals wall",
       "position": [
         -6.062177999999999,
-        4.35,
+        3.9999999999999996,
         -43.5
       ],
       "size": [
@@ -1863,7 +1342,7 @@
       "name": "Recessed edge light",
       "position": [
         -6.062177999999999,
-        8.2,
+        7.85,
         -43.5
       ],
       "size": [
@@ -1879,7 +1358,7 @@
       "name": "originals wall",
       "position": [
         -3.5,
-        4.35,
+        3.9999999999999996,
         -40.937822
       ],
       "size": [
@@ -1895,7 +1374,7 @@
       "name": "Recessed edge light",
       "position": [
         -3.5,
-        8.2,
+        7.85,
         -40.937822
       ],
       "size": [
@@ -1911,7 +1390,7 @@
       "name": "originals wall",
       "position": [
         3.5,
-        4.35,
+        3.9999999999999996,
         -40.937822
       ],
       "size": [
@@ -1927,7 +1406,7 @@
       "name": "Recessed edge light",
       "position": [
         3.5,
-        8.2,
+        7.85,
         -40.937822
       ],
       "size": [
@@ -1943,7 +1422,7 @@
       "name": "originals wall",
       "position": [
         6.062177999999999,
-        4.35,
+        3.9999999999999996,
         -43.5
       ],
       "size": [
@@ -1959,7 +1438,7 @@
       "name": "Recessed edge light",
       "position": [
         6.062177999999999,
-        8.2,
+        7.85,
         -43.5
       ],
       "size": [
@@ -1975,7 +1454,7 @@
       "name": "originals wall",
       "position": [
         7.0,
-        4.35,
+        3.9999999999999996,
         -47.0
       ],
       "size": [
@@ -1991,7 +1470,7 @@
       "name": "Recessed edge light",
       "position": [
         7.0,
-        8.2,
+        7.85,
         -47.0
       ],
       "size": [
@@ -2001,109 +1480,13 @@
       ],
       "material": "light",
       "rotationY": 1.5707963267948966,
-      "floor": false
-    },
-    {
-      "name": "Portal shoulder",
-      "position": [
-        -1.63782225,
-        4.35,
-        -40.0
-      ],
-      "size": [
-        0.4756445,
-        8,
-        0.2
-      ],
-      "material": "plaster",
-      "rotationY": 0.0,
-      "floor": false
-    },
-    {
-      "name": "Portal shoulder",
-      "position": [
-        1.63782225,
-        4.35,
-        -40.0
-      ],
-      "size": [
-        0.4756445,
-        8,
-        0.2
-      ],
-      "material": "plaster",
-      "rotationY": 0.0,
-      "floor": false
-    },
-    {
-      "name": "Portal lintel",
-      "position": [
-        0,
-        6.199999999999999,
-        -40
-      ],
-      "size": [
-        2.8,
-        4.3,
-        0.24
-      ],
-      "material": "plaster",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "Portal metal reveal",
-      "position": [
-        -1.4,
-        2.2,
-        -40
-      ],
-      "size": [
-        0.045,
-        3.7,
-        0.27
-      ],
-      "material": "metal",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "Portal metal reveal",
-      "position": [
-        1.4,
-        2.2,
-        -40
-      ],
-      "size": [
-        0.045,
-        3.7,
-        0.27
-      ],
-      "material": "metal",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "Door light",
-      "position": [
-        0,
-        3.9899999999999998,
-        -40
-      ],
-      "size": [
-        2.8,
-        0.035,
-        0.29
-      ],
-      "material": "light",
-      "rotationY": 0,
       "floor": false
     },
     {
       "name": "Width transition",
       "position": [
         -6.5,
-        4.35,
+        3.9999999999999996,
         -54.0
       ],
       "size": [
@@ -2119,7 +1502,7 @@
       "name": "Width transition",
       "position": [
         6.5,
-        4.35,
+        3.9999999999999996,
         -54.0
       ],
       "size": [
@@ -2132,61 +1515,26 @@
       "floor": false
     },
     {
-      "name": "waiting floor",
-      "vertices": [
-        [
-          -6.0,
-          0.35,
-          -54
-        ],
-        [
-          6.0,
-          0.35,
-          -54
-        ],
-        [
-          6.0,
-          0.35,
-          -63
-        ],
-        [
-          -6.0,
-          0.35,
-          -63
-        ]
-      ],
-      "indices": [
-        0,
-        1,
-        2,
-        0,
-        2,
-        3
-      ],
-      "material": "stone",
-      "floor": true
-    },
-    {
       "name": "waiting ceiling",
       "vertices": [
         [
           -6.0,
-          6.35,
+          6.0,
           -54
         ],
         [
           6.0,
-          6.35,
+          6.0,
           -54
         ],
         [
           6.0,
-          6.35,
+          6.0,
           -63
         ],
         [
           -6.0,
-          6.35,
+          6.0,
           -63
         ]
       ],
@@ -2205,7 +1553,7 @@
       "name": "waiting wall",
       "position": [
         6.0,
-        3.35,
+        3.0,
         -58.5
       ],
       "size": [
@@ -2221,7 +1569,7 @@
       "name": "Recessed edge light",
       "position": [
         6.0,
-        6.199999999999999,
+        5.85,
         -58.5
       ],
       "size": [
@@ -2237,7 +1585,7 @@
       "name": "waiting wall",
       "position": [
         -6.0,
-        3.35,
+        3.0,
         -58.5
       ],
       "size": [
@@ -2253,7 +1601,7 @@
       "name": "Recessed edge light",
       "position": [
         -6.0,
-        6.199999999999999,
+        5.85,
         -58.5
       ],
       "size": [
@@ -2266,112 +1614,16 @@
       "floor": false
     },
     {
-      "name": "Portal shoulder",
-      "position": [
-        -3.7,
-        4.35,
-        -54.0
-      ],
-      "size": [
-        4.6,
-        8.0,
-        0.2
-      ],
-      "material": "plaster",
-      "rotationY": 0.0,
-      "floor": false
-    },
-    {
-      "name": "Portal shoulder",
-      "position": [
-        3.7,
-        4.35,
-        -54.0
-      ],
-      "size": [
-        4.6,
-        8.0,
-        0.2
-      ],
-      "material": "plaster",
-      "rotationY": 0.0,
-      "floor": false
-    },
-    {
-      "name": "Portal lintel",
-      "position": [
-        0,
-        6.199999999999999,
-        -54
-      ],
-      "size": [
-        2.8,
-        4.3,
-        0.24
-      ],
-      "material": "plaster",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "Portal metal reveal",
-      "position": [
-        -1.4,
-        2.2,
-        -54
-      ],
-      "size": [
-        0.045,
-        3.7,
-        0.27
-      ],
-      "material": "metal",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "Portal metal reveal",
-      "position": [
-        1.4,
-        2.2,
-        -54
-      ],
-      "size": [
-        0.045,
-        3.7,
-        0.27
-      ],
-      "material": "metal",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
-      "name": "Door light",
-      "position": [
-        0,
-        3.9899999999999998,
-        -54
-      ],
-      "size": [
-        2.8,
-        0.035,
-        0.29
-      ],
-      "material": "light",
-      "rotationY": 0,
-      "floor": false
-    },
-    {
       "name": "Observation window jamb",
       "position": [
-        -5.65,
-        3.35,
+        -5.9,
+        3.0,
         -63
       ],
       "size": [
-        0.7,
+        0.2,
         6,
-        0.65
+        0.24
       ],
       "material": "gold",
       "rotationY": 0,
@@ -2380,14 +1632,14 @@
     {
       "name": "Observation window jamb",
       "position": [
-        5.65,
-        3.35,
+        5.9,
+        3.0,
         -63
       ],
       "size": [
-        0.7,
+        0.2,
         6,
-        0.65
+        0.24
       ],
       "material": "gold",
       "rotationY": 0,
@@ -2397,13 +1649,13 @@
       "name": "Observation window sill",
       "position": [
         0,
-        0.6,
+        0.1,
         -63
       ],
       "size": [
         12,
-        0.5,
-        0.65
+        0.2,
+        0.24
       ],
       "material": "gold",
       "rotationY": 0,
@@ -2413,17 +1665,512 @@
       "name": "Observation window head",
       "position": [
         0,
-        6.0,
+        5.9,
         -63
       ],
       "size": [
         12,
-        0.7,
-        0.65
+        0.2,
+        0.24
       ],
       "material": "gold",
       "rotationY": 0,
       "floor": false
+    },
+    {
+      "name": "entrance level tiled floor",
+      "vertices": [
+        [
+          -4.5,
+          0,
+          0
+        ],
+        [
+          4.5,
+          0,
+          0
+        ],
+        [
+          4.5,
+          0,
+          -6
+        ],
+        [
+          -4.5,
+          0,
+          -6
+        ]
+      ],
+      "indices": [
+        0,
+        1,
+        2,
+        0,
+        2,
+        3
+      ],
+      "material": "stone",
+      "floor": true
+    },
+    {
+      "name": "chronicle level tiled floor",
+      "vertices": [
+        [
+          -4.5,
+          0,
+          -6
+        ],
+        [
+          4.5,
+          0,
+          -6
+        ],
+        [
+          4.5,
+          0,
+          -30
+        ],
+        [
+          -4.5,
+          0,
+          -30
+        ]
+      ],
+      "indices": [
+        0,
+        1,
+        2,
+        0,
+        2,
+        3
+      ],
+      "material": "stone",
+      "floor": true
+    },
+    {
+      "name": "formation level tiled floor",
+      "vertices": [
+        [
+          -4.0,
+          0,
+          -30
+        ],
+        [
+          4.0,
+          0,
+          -30
+        ],
+        [
+          4.0,
+          0,
+          -40
+        ],
+        [
+          -4.0,
+          0,
+          -40
+        ]
+      ],
+      "indices": [
+        0,
+        1,
+        2,
+        0,
+        2,
+        3
+      ],
+      "material": "stone",
+      "floor": true
+    },
+    {
+      "name": "originals level tiled floor",
+      "vertices": [
+        [
+          7.0,
+          0,
+          -48.875644
+        ],
+        [
+          5.124356,
+          0,
+          -52.124356
+        ],
+        [
+          1.875644,
+          0,
+          -54.0
+        ],
+        [
+          -1.875644,
+          0,
+          -54.0
+        ],
+        [
+          -5.124356,
+          0,
+          -52.124356
+        ],
+        [
+          -7.0,
+          0,
+          -48.875644
+        ],
+        [
+          -7.0,
+          0,
+          -45.124356
+        ],
+        [
+          -5.124356,
+          0,
+          -41.875644
+        ],
+        [
+          -1.875644,
+          0,
+          -40.0
+        ],
+        [
+          1.875644,
+          0,
+          -40.0
+        ],
+        [
+          5.124356,
+          0,
+          -41.875644
+        ],
+        [
+          7.0,
+          0,
+          -45.124356
+        ]
+      ],
+      "indices": [
+        0,
+        1,
+        2,
+        0,
+        2,
+        3,
+        0,
+        3,
+        4,
+        0,
+        4,
+        5,
+        0,
+        5,
+        6,
+        0,
+        6,
+        7,
+        0,
+        7,
+        8,
+        0,
+        8,
+        9,
+        0,
+        9,
+        10,
+        0,
+        10,
+        11
+      ],
+      "material": "stone",
+      "floor": true
+    },
+    {
+      "name": "waiting level tiled floor",
+      "vertices": [
+        [
+          -6.0,
+          0,
+          -54
+        ],
+        [
+          6.0,
+          0,
+          -54
+        ],
+        [
+          6.0,
+          0,
+          -63
+        ],
+        [
+          -6.0,
+          0,
+          -63
+        ]
+      ],
+      "indices": [
+        0,
+        1,
+        2,
+        0,
+        2,
+        3
+      ],
+      "material": "stone",
+      "floor": true
+    },
+    {
+      "name": "Light boundary edge",
+      "position": [
+        -4.46,
+        1.75,
+        -6
+      ],
+      "size": [
+        0.018,
+        3.5,
+        0.018
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary edge",
+      "position": [
+        4.46,
+        1.75,
+        -6
+      ],
+      "size": [
+        0.018,
+        3.5,
+        0.018
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary threshold",
+      "position": [
+        0,
+        0.009,
+        -6
+      ],
+      "size": [
+        9,
+        0.008,
+        0.035
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary canopy",
+      "position": [
+        0,
+        3.5,
+        -6
+      ],
+      "size": [
+        9,
+        0.014,
+        0.014
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary edge",
+      "position": [
+        -3.96,
+        1.75,
+        -30
+      ],
+      "size": [
+        0.018,
+        3.5,
+        0.018
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary edge",
+      "position": [
+        3.96,
+        1.75,
+        -30
+      ],
+      "size": [
+        0.018,
+        3.5,
+        0.018
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary threshold",
+      "position": [
+        0,
+        0.009,
+        -30
+      ],
+      "size": [
+        8,
+        0.008,
+        0.035
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary canopy",
+      "position": [
+        0,
+        3.5,
+        -30
+      ],
+      "size": [
+        8,
+        0.014,
+        0.014
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary edge",
+      "position": [
+        -1.835,
+        1.75,
+        -40
+      ],
+      "size": [
+        0.018,
+        3.5,
+        0.018
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary edge",
+      "position": [
+        1.835,
+        1.75,
+        -40
+      ],
+      "size": [
+        0.018,
+        3.5,
+        0.018
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary threshold",
+      "position": [
+        0,
+        0.009,
+        -40
+      ],
+      "size": [
+        3.75,
+        0.008,
+        0.035
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary canopy",
+      "position": [
+        0,
+        3.5,
+        -40
+      ],
+      "size": [
+        3.75,
+        0.014,
+        0.014
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary edge",
+      "position": [
+        -1.835,
+        1.75,
+        -54
+      ],
+      "size": [
+        0.018,
+        3.5,
+        0.018
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary edge",
+      "position": [
+        1.835,
+        1.75,
+        -54
+      ],
+      "size": [
+        0.018,
+        3.5,
+        0.018
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary threshold",
+      "position": [
+        0,
+        0.009,
+        -54
+      ],
+      "size": [
+        3.75,
+        0.008,
+        0.035
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
+    },
+    {
+      "name": "Light boundary canopy",
+      "position": [
+        0,
+        3.5,
+        -54
+      ],
+      "size": [
+        3.75,
+        0.014,
+        0.014
+      ],
+      "material": "boundary",
+      "floor": false,
+      "passThrough": true
     }
   ],
   "stagingRevision": 2

@@ -7,8 +7,11 @@ assert.equal(layout.rooms.length,5);assert.equal(layout.rooms[3].footprint.lengt
 assert.deepEqual(layout.rooms.map(r=>r.width),[9,9,8,14,12]);
 assert.deepEqual(layout.rooms[3].exhibits.map(e=>e.id),['canon-1','canon-2','canon-3','evidence-path','physical-alpha']);
 assert.equal(layout.rooms[4].exhibits[0].id,'authority-boundary');
-for(const d of layout.portals){assert.ok(isWalkable(layout,{x:d.x,z:-d.depth}));assert.ok(!isWalkable(layout,{x:d.x+d.width/2+.3,z:-d.depth}));const a={x:d.x+d.width/2+.3,z:-d.depth+.4};if(isWalkable(layout,a)){const b=constrainStep(layout,a,{x:a.x,z:a.z-2});assert.ok(b.z>-d.depth+.2,'No tunnelling through portal shoulders');}}
-for(let i=0;i<=100;i++){const z=-layout.ramp.start-i*(layout.ramp.end-layout.ramp.start)/100;assert.ok(Math.abs(floorAt(layout,{x:0,z})-.35*i/100)<1e-6);}
+for(const d of layout.portals){assert.equal(d.visualOnly,true);assert.ok(isWalkable(layout,{x:d.x,z:-d.depth}));}
+assert.equal(layout.ramp,null);
+// Cross the old shoulders away from the former narrow doorway without obstruction.
+for(const depth of [6,30])for(const x of [-3,3]){const a={x,z:-depth+.4},b=constrainStep(layout,a,{x,z:-depth-.4});assert.ok(Math.abs(b.z+depth+.4)<1e-6,'Light boundaries must be pass-through');}
+for(let z=-.5;z>-63;z-=.5)assert.equal(floorAt(layout,{x:0,z}),0);
 const crystal=layout.crystal;assert.ok(!isWalkable(layout,crystal));assert.ok(!isWalkable(layout,{x:0,z:2}));assert.ok(!isWalkable(layout,{x:0,z:-73}));
 let prior={x:0,z:-2},routes=0;
 for(const r of layout.rooms)for(const e of r.exhibits){
@@ -24,17 +27,11 @@ for(const r of layout.rooms)for(const e of r.exhibits){
 // Wide-room movement is no longer clamped to the old 2.5m corridor lane.
 assert.ok(isWalkable(layout,{x:5.8,z:-47}));assert.ok(!isWalkable(layout,{x:6.8,z:-40.5}));
 const shell=createSpatialShell(layout);assert.equal(shell.group.children.length,layout.architecture.length);
-const floors=createSpatialShell(layout,{picking:true});assert.ok(floors.group.children.length>=6);assert.ok(floors.group.children.every(m=>m.material.visible===false));
+const floors=createSpatialShell(layout,{picking:true});assert.ok(floors.group.children.length===5);assert.ok(floors.group.children.every(m=>m.material.visible===false));
 shell.group.updateMatrixWorld(true);
-// Compare walking height with the actual exported tread surfaces, on both sides.
-const treads=shell.group.children.filter(m=>m.name==='Three shallow side steps');
-assert.equal(treads.length,6);
-for(const tread of treads){
- const ray=new T.Raycaster(new T.Vector3(tread.position.x,2,tread.position.z),new T.Vector3(0,-1,0));
- const hit=ray.intersectObject(tread,false)[0];assert.ok(hit);
- assert.ok(Math.abs(floorAt(layout,tread.position)-hit.point.y)<1e-6,'Walking height must match the visible tread');
-}
-assert.ok(Math.abs(floorAt(layout,{x:layout.ramp.width/2+.2,z:-layout.ramp.end})-layout.ramp.rise)<1e-6);
+// The visible floor and collision plane are level throughout all five rooms.
+assert.ok(!shell.group.children.some(m=>/step|ramp|Portal shoulder|Portal lintel/i.test(m.name)));
+for(const r of layout.rooms){const z=-r.start-r.length/2,x=r.id==='originals'?2:0;const ray=new T.Raycaster(new T.Vector3(x,2,z),new T.Vector3(0,-1,0));const hit=ray.intersectObjects(shell.group.children,false).find(h=>h.object.userData.surface==='stone');assert.ok(hit);assert.ok(Math.abs(hit.point.y-floorAt(layout,{x,z}))<1e-6);}
 for(const r of layout.rooms)for(const m of r.exhibits){
  if(m.kind==='pedestal')continue;
  const normal=new T.Vector3(Math.sin(m.angle),0,Math.cos(m.angle)),p=new T.Vector3(m.x,m.y,m.z);
@@ -42,4 +39,4 @@ for(const r of layout.rooms)for(const m of r.exhibits){
  const hits=ray.intersectObjects(shell.group.children,false);assert.ok(hits.length,'Backing wall missing '+m.id);assert.ok(hits[0].distance>.05&&hits[0].distance<.22,'Wall mount must remain just ahead of wall '+m.id+' '+hits[0].distance);
  assert.ok(m.y+1.4<r.floor+r.height,'Plaque hits ceiling '+m.id);
 }
-shell.dispose();floors.dispose();console.log('PASS: five footprints, 12-sided core, '+routes+' safe observation routes, wide-room bounds, portals, no tunnelling, ramp, crystal clearance, shared preview geometry and every wall mount.');
+shell.dispose();floors.dispose();console.log('PASS: five footprints, 12-sided core, '+routes+' safe observation routes, wide-room bounds, pass-through boundaries, level floors, crystal clearance, shared preview geometry and every wall mount.');

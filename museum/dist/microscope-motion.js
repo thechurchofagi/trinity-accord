@@ -50,17 +50,20 @@ export function createMicroscopeMotion(scene,camera,{requestFrame=callback=>requ
  function stop(){generation++;cancelFrame(frame);if(prop)prop.visible=false;}
  return {stop,prepare:load,
   async start(crystal,index,{reduced=false,onComplete=()=>{},onError=()=>{}}={}){
-   stop();const id=generation;if(reduced){onComplete();return;}
+   stop();const id=generation;
    try{const model=await load();if(id!==generation)return;
     crystal.updateMatrixWorld(true);
     const points=[new THREE.Vector3(-.055,.235,.033),new THREE.Vector3(.045,.20,.033),new THREE.Vector3(-.01,.13,.033)];
     crystal.getWorldQuaternion(model.quaternion);
     const clearance=new THREE.Vector3(0,0,.115).applyQuaternion(model.quaternion);
     const end=crystal.localToWorld(points[index].clone()).add(clearance),start=end.clone().add(new THREE.Vector3(0,-.36,0));
-    model.position.copy(start);model.visible=true;let begin=null;
-    const tick=now=>{if(id!==generation)return;if(begin===null)begin=now;const elapsed=(now-begin)/1000;
-     model.position.copy(microscopePose(elapsed/2.2,start,end));
-     if(elapsed>=2.8){model.visible=false;onComplete();return;}frame=requestFrame(tick);
+    // An explicit inspection keeps its essential demonstration even with reduced motion.
+    // Keep a short vertical motion (no camera sway), instead of skipping to the photo.
+    model.position.copy(start);model.visible=true;let previous=null,elapsed=0;
+    const tick=now=>{if(id!==generation)return;
+     if(previous!==null&&!globalThis.document?.hidden)elapsed+=Math.min(.1,Math.max(0,(now-previous)/1000));previous=now;
+     model.position.copy(microscopePose(elapsed/(reduced?1.4:2.2),start,end));
+     if(elapsed>=2.8){model.visible=false;generation++;onComplete();return;}frame=requestFrame(tick);
     };frame=requestFrame(tick);
    }catch(error){if(id===generation)onError(error);}
   },

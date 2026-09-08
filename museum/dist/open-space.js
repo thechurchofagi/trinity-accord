@@ -37,13 +37,6 @@ export function addOpenSpace(scene, targets, sculptures, catalog,layout=null){
   earthNext.material.map=next;earthNext.material.opacity=mix;earthNext.visible=!!next;
  });
  document.addEventListener?.('visibilitychange',()=>sequence.resetClock());
- const titanium=new THREE.MeshStandardMaterial({color:'#183747',metalness:.8,roughness:.24});
- const light=new THREE.MeshStandardMaterial({color:'#a8ebff',emissive:'#63d4ff',emissiveIntensity:.65,metalness:.25,roughness:.2});
- const waiting=new THREE.Group();waiting.position.set(0,layout?.rooms[4].floor||0,(layout?.endZ??-66)+.8);scene.add(waiting);
- const frame=new THREE.Mesh(new THREE.BoxGeometry(.8,.9,.24),titanium);frame.position.set(-3,.45,1.3);waiting.add(frame);frame.userData.exhibit='first-contact';targets.push(frame);
- const c=document.createElement('canvas');c.width=2048;c.height=512;const ctx=c.getContext('2d');ctx.textAlign='center';ctx.fillStyle='#d1ecf4';ctx.font='400 76px sans-serif';ctx.fillText('AWAITING A RESPONSE',1024,170);ctx.fillStyle='#95b9c9';ctx.font='400 45px sans-serif';ctx.fillText('等待回响',1024,276);ctx.font='400 32px sans-serif';ctx.fillText('READ  ·  RESPOND  ·  CARE',1024,361);
- const signMap=new THREE.CanvasTexture(c);signMap.colorSpace=THREE.SRGBColorSpace;
- const sign=new THREE.Mesh(new THREE.PlaneGeometry(.76,.19),new THREE.MeshBasicMaterial({map:signMap,transparent:true,depthWrite:false,side:THREE.DoubleSide}));sign.position.set(-3,.78,1.43);waiting.add(sign);sign.userData.exhibit='first-contact';targets.push(sign);
  return {
   update(camera,pixelRatio=1,now=performance.now()){
    // Only translation follows the observer: turning still reveals a fixed sky.

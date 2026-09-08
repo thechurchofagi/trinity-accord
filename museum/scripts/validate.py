@@ -43,7 +43,7 @@ for js in ['progressive-loading.js','edition-data.js','crystal-inscription.js','
   if dep.startswith('.'):check((D/js).parent.joinpath(dep).exists(),'Missing module '+dep)
 check((D/'assets/core-object-alpha.jpg').exists(),'Missing physical photograph')
 check(hashlib.sha256((D/'assets/core-object-alpha.jpg').read_bytes()).hexdigest()=='40eddec02dce4958d28aff94496923983e870346ce98c1cb16181012545475b6','Physical photograph changed')
-# The Blender model is a real embedded-asset glTF, bound to the saved source build.
+# The architectural model is a real embedded-asset glTF, bound to its recorded source build.
 if (D/'data/gallery-layout.json').exists():
  import struct
  layout=read('gallery-layout.json');check(layout['edition']==rooms['edition'],'Gallery edition mismatch')

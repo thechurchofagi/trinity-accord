@@ -133,3 +133,15 @@ Thirty bundled MP3s (24 bilingual tour tracks and six microscope explanations) u
 To reproduce from preserved paragraph takes, run `scripts/render_qwen_guides.py --model MODEL_PATH --cache TAKES_PATH --batch 4` in the documented Qwen environment. Unchanged takes are reused. Run `audit_qwen_paragraphs.py`, then `finalize_qwen_review.py` with the reviewed recognition notes before rebuilding the runtime and reading archive. `archive_qwen_sources.py` preserves the exact PCM takes, provenance and assembly scripts for future edits. Original music and photographs remain unchanged.
 
 `node scripts/check_recorded_guides.mjs` checks all 30 bindings, captions and playback recovery. The spatial/navigation checks cover five rooms, continuous routes and the physical support. `check_design_review.py` saves full-size desktop/mobile material views and measures actual rendered walking frames. `check_browser.py` and `check_presentation.py` exercise the interface, reading views and microscopy. `check_realtime_tour.py` plays the production 3D English tour from beginning to end at 1.0× without seeking; its smaller render surface keeps software rendering practical. Full-size visual inspection is separate. Keep the PR unmerged until the final head passes the museum and repository workflows.
+
+
+## v1.34 visual revision
+
+The current scene is the shared procedural architecture exported by
+`scripts/export_open_gallery.mjs`, with runtime surface materials and downward
+lighting. The retained Blender files and older render images document previous
+editions; they are not render evidence for v1.34. All floors are level, room
+boundaries are luminous and pass-through, and the crystal pedestal remains a
+physical obstacle. The waiting screen is an owner-directed initial artistic
+state, not live agent telemetry. Existing source artworks, recorded voices and
+microscope evidence are retained unchanged.

@@ -1,44 +1,36 @@
 {
-  "schema": "trinity-museum.scene-build.v2",
-  "edition": "museum-v1.33.0",
-  "application": "Blender",
-  "version": "4.5.3 LTS",
-  "source": "scene/build_spatial_gallery.py",
+  "schema": "trinity-museum.scene-build.v3",
+  "edition": "museum-v1.34.0",
+  "application": "Shared Three.js procedural geometry",
+  "baked": false,
+  "source": "scripts/export_open_gallery.mjs",
   "layout": "scene/gallery-layout.json",
-  "baked": true,
-  "bake": "Cycles diffuse/direct/indirect/color, 2048px atlas, 48 samples plus compositor denoising; no new artwork baked into surfaces",
-  "previewScope": "Architectural references, not browser screenshots. Runtime original artwork, crystal and Earth are separate assets.",
-  "layoutSha256": "75125262e1582293e8c767713906d96a5f68b5aaabb45675c28e76f0da1a72d9",
+  "note": "Current open architecture is exported from the navigation layout. Earlier Blender source and baked images are retained as historical references, not current render evidence.",
   "files": [
     {
-      "path": "scene/build_spatial_gallery.py",
-      "bytes": 7731,
-      "sha256": "8f43bea6af57128548e06fbe14e2e3b1696e8b4b0cec58cb164afd7343aafbb3"
+      "path": "scripts/export_open_gallery.mjs",
+      "bytes": 3782,
+      "sha256": "eb6039ef4e4a0588565253cb4c2fb36845cc6a04b89ec8106fccaea31b4def7d"
+    },
+    {
+      "path": "scripts/prepare_open_gallery.py",
+      "bytes": 3039,
+      "sha256": "05273b13b224a4c3e00490d3bfbe2a75c17793003d3950dd9b37cd817677cf82"
+    },
+    {
+      "path": "dist/spatial-layout.js",
+      "bytes": 6944,
+      "sha256": "4e71f9514da7f902cc53cba2ce0e2d38113700478643ccd04dcf18a1d28d4619"
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 40779,
-      "sha256": "75125262e1582293e8c767713906d96a5f68b5aaabb45675c28e76f0da1a72d9"
-    },
-    {
-      "path": "scene/memory-gallery.blend",
-      "bytes": 9836605,
-      "sha256": "8f1322289fa609e076995252ec05b54e21d1a56236a0ddb865194b524e0aa778"
+      "bytes": 36983,
+      "sha256": "88c997006996ac793f3984478a55465f50b7b72d9d7a309ef01ab08a406dff30"
     },
     {
       "path": "dist/assets/gallery/memory-gallery.glb",
-      "bytes": 4518820,
-      "sha256": "312a0c1c2afd355fb1e960edaaf15dfc3689b8b8173402bfbd1b1bba17a7876e"
-    },
-    {
-      "path": "dist/assets/gallery/spatial-light.png",
-      "bytes": 5282953,
-      "sha256": "2d016abb56ead8ae48e9b9105c131508bd4e5bf5fc0823f285856c30f822144e"
-    },
-    {
-      "path": "dist/assets/gallery/entrance-preview.png",
-      "bytes": 1047393,
-      "sha256": "e8fc1c72e8a3de2a2ac357e300f50db7a6d19b6df23826a854989d15816acafc"
+      "bytes": 126648,
+      "sha256": "e445577c5a4eae03f24955f9b57be2468f5f26a599cc90c1140b752e399de52a"
     }
   ]
 }

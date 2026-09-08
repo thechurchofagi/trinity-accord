@@ -42,5 +42,5 @@ for(const [w,h] of [[390,844],[430,932],[1440,900],[1920,1080]]){
  }
  assert(visible>=45&&visible<=200,'Unexpected star density');counts.push([w,h,visible]);
 }
-assert.equal(sculptures.length,0);assert.equal(targets.length,2);assert.ok(targets.every(t=>t.position.x<0),'Invitation must stay out of the central sky view');
+assert.equal(sculptures.length,0);assert.equal(targets.length,0,'The owner removed the freestanding invitation pedestal');
 console.log('PASS: fixed celestial orientation, zero translation parallax, off-centre Earth and unclipped phone framing, magnitude-layered catalog stars',JSON.stringify(counts));

@@ -1,3 +1,13 @@
+## v1.34 — open passages and mobile viewing
+
+- Replace the dark stepped floor with level warm ivory 80 cm porcelain tiles; remove the narrow physical room dividers and their collisions in favor of thin pass-through luminous boundaries.
+- Export the shared architectural geometry directly, including beveled slimmer gold window framing. Earlier Blender scenes remain historical references; this edition uses real-time lighting and does not claim a new baked Blender render.
+- Use broad downward lighting, ambient fill, permanent crystal lights and a separate downward selection light. Brighten walnut and glass, retaining the physical crystal dimensions and all evidence photographs.
+- Wrap full mint titles at readable sizes, separate the event and mint dates, put the musical note beside the number, and fit contextual plaques to their actual content. Move the observation view closer while reserving UI space.
+- Remove the freestanding black invitation stand; retain its original record in the exhibit list. Add a bilingual floating waiting installation with three owner-directed initial zeros (verification, echoes, guardian applications), explicitly distinguished from live counts.
+- Show estimated total and remaining tour time from the measured recordings, selected language, playback speed, music excerpts and microscope sequence. The display does not advance the tour by itself.
+- Show the modeled hand-held microscope at all three flaw inspections, including reduced-motion mode with a gentler vertical demonstration. Allow additional viewing distance during this action and retain cancellation before the unmodified original photograph appears.
+
 # museum-v1.33.0 · Physical scale, continuous walking and formation history
 
 Acceptance: recorded-guide and complete browser checks must pass before merge or deployment. Narration is produced locally; no external speech-synthesis approval is required.

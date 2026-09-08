@@ -227,3 +227,7 @@ body:has(#lyric-stage[data-view=full]:not([hidden])) #focus-tools{visibility:hid
 #hint{display:none}
 
 body[data-presentation="true"] #focus-tools{display:none!important}
+
+/* The media-based estimate stays readable in its own compact row on phones. */
+#tour-clock{font-variant-numeric:tabular-nums;color:#e3edf0;font-size:12px}
+@media(max-width:650px){#tour-status{gap:4px 10px}#tour-clock{order:5;flex-basis:100%;text-align:center;font-size:11px;padding-bottom:3px}}
