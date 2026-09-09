@@ -23,6 +23,8 @@ var (
 	baseBatcher = common.HexToAddress("0x5050f69a9786f081509234f1a7f4684b5e5b76c9")
 )
 
+const ethereumMainnetChainID uint64 = 1
+
 func fail(format string, args ...any) {
 	fmt.Fprintf(os.Stderr, "[BASE OFFLINE KZG FAIL] "+format+"\n", args...)
 	os.Exit(1)
@@ -54,8 +56,10 @@ func main() {
 		if item.Tx == nil || item.Tx.Hash().Hex()+".json" != entry.Name() {
 			fail("signed transaction/filename mismatch: %s", entry.Name())
 		}
-		if item.InboxAddr != baseInbox || item.ChainId != 8453 {
-			fail("invalid Base transaction metadata: %s", item.Tx.Hash())
+		// batch-decoder records the L1 RPC chain ID here, not the target L2
+		// chain ID used to select Base's inbox and batch sender configuration.
+		if item.InboxAddr != baseInbox || item.ChainId != ethereumMainnetChainID {
+			fail("invalid Base L1 transaction metadata: tx=%s inbox=%s chain_id=%d", item.Tx.Hash(), item.InboxAddr, item.ChainId)
 		}
 		signer := types.LatestSignerForChainID(item.Tx.ChainId())
 		recoveredSender, err := signer.Sender(item.Tx)
