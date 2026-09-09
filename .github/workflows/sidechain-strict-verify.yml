@@ -10,6 +10,8 @@ on:
       - "scripts/verify_ethereum_beacon_ssz.mjs"
       - "scripts/verify_base_blob_kzg.go"
       - "scripts/yq_chain_id_compat.py"
+      - "scripts/patch_pinned_op_superchain_compat.py"
+      - "scripts/test_patch_pinned_op_superchain_compat.py"
       - "docs/SIDECHAIN_STRICT_VERIFICATION.md"
       - "evidence/chronicle-sidechain-historical-payload-exceptions.json"
       - "evidence/chronicle-sidechain-seven-root-provenance-review.v1.json"
@@ -22,6 +24,8 @@ on:
       - "scripts/verify_ethereum_beacon_ssz.mjs"
       - "scripts/verify_base_blob_kzg.go"
       - "scripts/yq_chain_id_compat.py"
+      - "scripts/patch_pinned_op_superchain_compat.py"
+      - "scripts/test_patch_pinned_op_superchain_compat.py"
       - "docs/SIDECHAIN_STRICT_VERIFICATION.md"
       - "evidence/chronicle-sidechain-historical-payload-exceptions.json"
       - "evidence/chronicle-sidechain-seven-root-provenance-review.v1.json"
@@ -78,6 +82,7 @@ jobs:
           npm ci
           python3 -m py_compile scripts/verify-chronicle-sidechain-strict.py
           python3 scripts/test_chronicle_sidechain_strict.py
+          python3 scripts/test_patch_pinned_op_superchain_compat.py
 
       - name: Download immutable source and Polygon settlement releases
         id: evidence
@@ -141,7 +146,7 @@ jobs:
         id: op
         env:
           OPTIMISM_COMMIT: c6f39182c975db976aaaa01ef32884c41b1c9660
-          SUPERCHAIN_REGISTRY_COMMIT: 08d6a44910d75e28a5ee1c7c047d3bdd0bbdbdd2
+          SUPERCHAIN_REGISTRY_COMMIT: 5b055be4d294ce43814a44c8839d89b2436dc8aa
         run: |
           set -euo pipefail
           tools="$RUNNER_TEMP/strict-op-tools"
@@ -149,6 +154,9 @@ jobs:
           git clone --filter=blob:none --no-checkout https://github.com/ethereum-optimism/optimism.git "$tools/optimism"
           git -C "$tools/optimism" checkout "$OPTIMISM_COMMIT"
           git -C "$tools/optimism" submodule update --init superchain-registry
+          git -C "$tools/optimism/superchain-registry" fetch origin "$SUPERCHAIN_REGISTRY_COMMIT"
+          git -C "$tools/optimism/superchain-registry" checkout "$SUPERCHAIN_REGISTRY_COMMIT"
+          python3 scripts/patch_pinned_op_superchain_compat.py "$tools/optimism"
           test "$(git -C "$tools/optimism/superchain-registry" rev-parse HEAD)" = "$SUPERCHAIN_REGISTRY_COMMIT"
           cp scripts/yq_chain_id_compat.py "$tools/bin/yq"
           chmod +x "$tools/bin/yq"
