@@ -239,7 +239,8 @@ body[data-presentation="true"] #focus-tools{display:none!important}
 
 /* A focused work gets the desktop viewing space back from the room heading. */
 @media(min-width:650px){
- body[data-focused-art=true] #room-label{top:88px;left:32px;max-width:calc(100vw - 64px)}
+ body[data-focused-art=true] #room-label{top:30px;left:32px;max-width:44vw}
+ body[data-focused-art=true] header .brand{visibility:hidden}
  body[data-focused-art=true] #room-label .eyebrow,body[data-focused-art=true] #room-subtitle{display:none}
  body[data-focused-art=true] #room-title,body[data-focused-art=true] #room-title.en-title{font-size:22px;line-height:1.2;margin:0;letter-spacing:.035em}
 }

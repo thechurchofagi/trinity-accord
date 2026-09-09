@@ -23,7 +23,7 @@ import {validTimeline,lineAt,wordAt,wordPages,pageAt} from './word-captions.js';
 import {fallbackLyricsFor} from './lyrics-fallback.js';
 import {fetchBytes,fetchModel,createResourceQueue,createPreviewHall} from './progressive-loading.js';
 import {inscriptionGroups} from './crystal-inscription.js';
-import {observationView,galleryCamera} from './observation-view.js';
+import {observationView,galleryCamera,focusedArtworkView} from './observation-view.js';
 import {createJoystick,createWheelWalk,heldWalkSpeed,travelVector,turnView,movementKey} from './movement-controls.js';
 import {createFootsteps} from './footsteps.js';
 import {exhibitLabel} from './exhibit-label.js';
@@ -244,8 +244,12 @@ function focusExhibit(id,inspection=false){
   moveCamera(new THREE.Vector3(p.x+.025,floorAt(galleryLayout,p)+galleryLayout.eyeHeight,p.z+d),new THREE.Vector3(p.x,p.y+.1765,p.z));return;
  }
  const m=mounts.get(id);if(!m)return;
- const view=observationView((m.width||1.9)+.08,(m.height||1.7)+(wallLabels.get(id)?.material.map?.userData.plaqueHeight||.55)+.12,camera.fov,camera.aspect,mobile,{height:innerHeight,top:$('room-label').getBoundingClientRect().bottom+8,bottom:viewingBottom()}),d=THREE.MathUtils.clamp(view.distance,1.35,6.3);
- moveCamera(new THREE.Vector3(m.x+Math.sin(m.angle)*d,floorAt(galleryLayout,m)+galleryLayout.eyeHeight,m.z+Math.cos(m.angle)*d),new THREE.Vector3(m.x,m.y+(wallLabels.get(id)?.material.map?.userData.plaqueHeight||.55)/2,m.z));
+ const eyeY=floorAt(galleryLayout,m)+galleryLayout.eyeHeight,plaqueHeight=wallLabels.get(id)?.material.map?.userData.plaqueHeight||WALL_PLAQUE.height;
+ const extra=plaqueHeight+WALL_PLAQUE.gap+.036,aimY=m.y+extra/2;
+ const viewport={height:innerHeight,top:$('room-label').getBoundingClientRect().bottom+14,bottom:viewingBottom()};
+ const view=mobile?observationView((m.width||1.9)+.08,(m.height||1.7)+extra,camera.fov,camera.aspect,true,viewport):focusedArtworkView((m.width||1.9)+.05,(m.height||1.7)+extra,aimY,eyeY,camera.fov,camera.aspect,viewport);
+ const d=THREE.MathUtils.clamp(view.distance,mobile?1.35:1.0,6.3);
+ moveCamera(new THREE.Vector3(m.x+Math.sin(m.angle)*d,eyeY,m.z+Math.cos(m.angle)*d),new THREE.Vector3(m.x,aimY,m.z));
 }
 function approachExhibit(id){
  if(!spatialReady||approachedExhibit===id){showExhibit(id);return;}
@@ -447,9 +451,9 @@ function addExhibit(e,x,z,angle,color,y=galleryLayout.exhibitCentreHeight){
  // Mount the work 15 mm in front of the wall, independently of the old baked mounts.
  const wallX=x;mounts.set(e.id,{x:wallX,y,z,angle,width,height});
  const group=new THREE.Group();group.position.set(wallX,y,z);group.rotation.y=angle;scene.add(group);
- const plane=new THREE.Mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshPhysicalMaterial({color:'#ffffff',roughness:.94,metalness:0,specularIntensity:.08,envMapIntensity:.2}));plane.position.z=.005;group.add(plane);plane.userData.exhibit=e.id;targets.push(plane);
+ const plane=new THREE.Mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshPhysicalMaterial({color:'#ffffff',roughness:1,metalness:0,specularIntensity:0,envMapIntensity:0}));plane.position.z=.005;group.add(plane);plane.userData.exhibit=e.id;targets.push(plane);
  const label=makeWallPlaque(group,wallLabelTexture(e),width,height);wallLabels.set(e.id,label);label.userData.exhibit=e.id;targets.push(label);
- if(!img){const slab=new THREE.Mesh(new THREE.BoxGeometry(width+.036,height+.036,.024),new THREE.MeshStandardMaterial({color:'#9fafb4',metalness:.65,roughness:.38}));slab.position.z=-.012;group.add(slab);makeWallFrame(group,width,height);plane.material.map=documentTexture(e);canonicalPanels.set(e.id,plane);return;}
+ if(!img){const slab=new THREE.Mesh(new THREE.BoxGeometry(width+.036,height+.036,.024),new THREE.MeshStandardMaterial({color:'#9fafb4',metalness:.65,roughness:.38}));slab.position.z=-.012;group.add(slab);makeWallFrame(group,width,height);plane.material.dispose();plane.material=new THREE.MeshBasicMaterial({map:documentTexture(e),toneMapped:false});canonicalPanels.set(e.id,plane);return;}
  let frame=makeWallFrame(group,1.9,1.7);frame.frame.visible=false;
  plane.material.map=textTexture([title(e),tx('正在载入原图','LOADING ORIGINAL IMAGE')],{size:26,width:512,height:384});
  imageJobs.add(async()=>{const bytes=await fetchBytes(img);const url=URL.createObjectURL(new Blob([bytes]));try{
@@ -465,7 +469,7 @@ function addExhibit(e,x,z,angle,color,y=galleryLayout.exhibitCentreHeight){
 async function initWorld(){scene=new THREE.Scene();scene.background=new THREE.Color('#000000');scene.fog=new THREE.Fog('#18293d',100,210);camera=new THREE.PerspectiveCamera(innerWidth<650?76:66,innerWidth/innerHeight,.06,220);camera.position.set(0,1.65,-2);yaw=0;camera.rotation.order='YXZ';camera.rotation.y=yaw;renderer=new THREE.WebGLRenderer({canvas:$('world'),antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,2.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.98;raycaster=new THREE.Raycaster();mouse=new THREE.Vector2();scene.add(new THREE.HemisphereLight('#eef3f4','#c1b9a8',1.5));
  microscopeMotion=createMicroscopeMotion(scene,camera);scene.environment=crystalEnvironment(renderer).texture;scene.environmentIntensity=.55;renderer.transmissionResolutionScale=1;
  const visitor=new THREE.SpotLight('#fff4e4',16,13,1.05,1,2);scene.add(visitor,visitor.target);accentLights.push({spot:visitor,role:'visitor'});
- const selectedLight=new THREE.SpotLight('#fff1d9',5.0,15,.55,.65,0);scene.add(selectedLight,selectedLight.target);accentLights.push({spot:selectedLight,role:'selected'});exhibitWash=createExhibitWash(scene);
+ const selectedLight=new THREE.SpotLight('#fff4e8',2.0,15,.78,1,0);scene.add(selectedLight,selectedLight.target);accentLights.push({spot:selectedLight,role:'selected'});exhibitWash=createExhibitWash(scene);
  const preview=createPreviewHall(galleryLayout);scene.add(preview.group);architecturalOccluder=preview.group;
  const goldFinish=goldWindowMaterial(renderer);
  function finishArchitecture(root){root.traverse(o=>{if(!o.isMesh)return;const kind=o.userData.surface||o.material.userData.surface;
