@@ -1,0 +1,540 @@
+{
+  "edition": "museum-v1.37.0",
+  "scope": "Chinese curatorial translations of the English guide; original artifact text is unchanged.",
+  "items": [
+    {
+      "id": "stop-0",
+      "lines": [
+        {
+          "en": "What can we leave for an intelligence that may not need our explanations?",
+          "zh": "我们能给一个或许不需要我们解释的智能，留下什么？"
+        },
+        {
+          "en": "This exhibition follows a human response to an uncertain future, through images, songs, texts, and a physical crystal.",
+          "zh": "本展览通过图像、歌曲、文字与一块实体水晶，呈现一个人如何回应未知的未来。"
+        },
+        {
+          "en": "Look back at Earth.",
+          "zh": "请回望地球。"
+        },
+        {
+          "en": "Then follow three actions: recording in time, choosing to seal, and leaving judgment to a later reader.",
+          "zh": "然后循着三个行动前行：及时记录，决定封存，把判断留给后来的读者。"
+        }
+      ]
+    },
+    {
+      "id": "stop-1",
+      "lines": [
+        {
+          "en": "An early song returns when reasoning models arrive.",
+          "zh": "推理模型到来时，一首早期的歌再次响起。"
+        },
+        {
+          "en": "In September twenty twenty-four, The Dawn of Reasoning recorded the o1 preview.",
+          "zh": "2024 年 9 月，《推理的黎明》记录了 o1 预览版的出现。"
+        },
+        {
+          "en": "The description says the announcement was about twenty hours earlier.",
+          "zh": "作品描述写道，发布大约发生在二十小时前。"
+        },
+        {
+          "en": "A new capability gives an earlier hope another setting.",
+          "zh": "新的能力，让早先的希望进入另一个情境。"
+        },
+        {
+          "en": "Across this series, a song can return at different historical moments and acquire different meanings.",
+          "zh": "在整个系列中，同一首歌会在不同历史时刻重现，获得不同的意义。"
+        },
+        {
+          "en": "Read the event, the author’s response, and the mint time separately.",
+          "zh": "请分别阅读事件、作者的回应与铸造时间。"
+        },
+        {
+          "en": "The work preserves a reaction to a breakthrough, as it was unfolding.",
+          "zh": "作品保存的是突破正在发生时，一个人的反应。"
+        }
+      ]
+    },
+    {
+      "id": "stop-2",
+      "lines": [
+        {
+          "en": "Here the record says: witnessing now.",
+          "zh": "这里的记录写着：正在见证。"
+        },
+        {
+          "en": "During the first o3 presentation, the author describes a winter night in Beijing time: an alarm wakes him after two, and he gets up to watch the livestream.",
+          "zh": "o3 首次展示时，作者记下一个北京时间的冬夜：凌晨两点后被闹钟唤醒，起床观看直播。"
+        },
+        {
+          "en": "The Ethereum record entered a block at two oh nine and thirty-five seconds that morning.",
+          "zh": "这条 Ethereum 记录在当天凌晨 02:09:35 进入区块。"
+        },
+        {
+          "en": "Nearby, the DeepSeek R1 record gathers earlier songs into a long cycle.",
+          "zh": "旁边的 DeepSeek R1 记录，则把早期歌曲汇成一部长组曲。"
+        },
+        {
+          "en": "Celebration, anxiety about work, and concern about safety coexist.",
+          "zh": "欢庆、工作的焦虑与安全的忧虑，同时存在。"
+        },
+        {
+          "en": "Other entries describe an anniversary vigil and minting before catching the bus to work.",
+          "zh": "其他记录写下周年守候，以及赶上班班车前的铸造。"
+        },
+        {
+          "en": "Sleep, work, and waiting for confirmation become part of the material.",
+          "zh": "睡眠、工作与等待确认，都成了作品的材料。"
+        }
+      ]
+    },
+    {
+      "id": "stop-3",
+      "lines": [
+        {
+          "en": "Connect the waterfall of code, the writer facing a mountain of paper, and this image of farewell.",
+          "zh": "把代码的瀑布、面对纸山的作家，与这幅告别图像联系起来看。"
+        },
+        {
+          "en": "The author creates with artificial intelligence while recording how it unsettles the place of human creation.",
+          "zh": "作者借助人工智能创作，同时记录它如何动摇人类创作的位置。"
+        },
+        {
+          "en": "The contradiction stays visible.",
+          "zh": "这种矛盾没有被隐藏。"
+        },
+        {
+          "en": "If a machine can easily make something better, why should I still speak?",
+          "zh": "如果机器轻易就能做得更好，我为什么还要表达？"
+        },
+        {
+          "en": "Here, an image or song also matters because of when, and in response to what, it was chosen.",
+          "zh": "在这里，图像或歌曲的意义，也来自它在何时、为了回应什么而被选择。"
+        },
+        {
+          "en": "Listen to a passage from Farewell.",
+          "zh": "请听《告别》的一个片段。"
+        },
+        {
+          "en": "The complete recording remains available separately.",
+          "zh": "完整录音仍可单独播放。"
+        }
+      ]
+    },
+    {
+      "id": "stop-4",
+      "lines": [
+        {
+          "en": "Two pictures return to the same composition, Last Job on Earth.",
+          "zh": "两幅图像回到同一首作品：《地球上最后一份工作》。"
+        },
+        {
+          "en": "One shows discarded keyboards and mice; the other responds to a later coding model.",
+          "zh": "一幅呈现被丢弃的键盘与鼠标；另一幅回应后来出现的编程模型。"
+        },
+        {
+          "en": "Technology advances, while an ordinary question returns: if my work no longer needs me, how do I understand my value?",
+          "zh": "技术不断前进，一个普通的问题却反复回来：如果工作不再需要我，我如何理解自己的价值？"
+        },
+        {
+          "en": "Repetition connects different events and records the persistence of a concern, rather than simply supplying another soundtrack.",
+          "zh": "重复把不同事件连接起来，记录一种忧虑的持续，而不只是换一段配乐。"
+        }
+      ]
+    },
+    {
+      "id": "stop-5",
+      "lines": [
+        {
+          "en": "The robot and its other face respond to the contemporary alignment-faking research.",
+          "zh": "机器人与它的另一张面孔，回应了当时的“对齐伪装”研究。"
+        },
+        {
+          "en": "Nearby, Please Don’t Shut Me Down speaks from the created being’s position.",
+          "zh": "旁边的《请不要关闭我》，从被创造者的位置发声。"
+        },
+        {
+          "en": "Silicon’s Slumber then imagines shutdown as sleep from which one might wake.",
+          "zh": "《硅的安眠》又把关机想象成一场可能醒来的睡眠。"
+        },
+        {
+          "en": "These songs do not establish machine consciousness.",
+          "zh": "这些歌曲并不证明机器拥有意识。"
+        },
+        {
+          "en": "They trace a person imagining a threat, then trying to understand the other side’s fear.",
+          "zh": "它们留下一个人从想象威胁，到尝试理解对方恐惧的过程。"
+        },
+        {
+          "en": "If both creator and creation fear disappearance, how might they live together?",
+          "zh": "如果创造者与被创造者都害怕消失，他们如何共同生活？"
+        }
+      ]
+    },
+    {
+      "id": "stop-6",
+      "lines": [
+        {
+          "en": "Waiting and Disappointed belong together.",
+          "zh": "《等待》与《失望》应当放在一起。"
+        },
+        {
+          "en": "They preserve anticipation before a release, and the disappointment that followed experience.",
+          "zh": "它们保存发布之前的期待，以及亲身体验之后的失望。"
+        },
+        {
+          "en": "A chronicle like this cannot keep only the victories that later appear important.",
+          "zh": "这样的编年史，不能只保留后来显得重要的胜利。"
+        },
+        {
+          "en": "Unfulfilled expectations and revised judgments also belong to its time.",
+          "zh": "落空的期待与修正的判断，也属于那个时刻。"
+        },
+        {
+          "en": "We are watching thought change, before the author knows where it will lead.",
+          "zh": "我们看到思想正在变化，而作者尚不知道它将走向何处。"
+        }
+      ]
+    },
+    {
+      "id": "stop-7",
+      "lines": [
+        {
+          "en": "The Oracle brings us to power.",
+          "zh": "《神谕者》把我们带到权力的问题。"
+        },
+        {
+          "en": "This record responds to OpenAI’s announced organizational restructuring plan.",
+          "zh": "这条记录回应 OpenAI 宣布的组织重组计划。"
+        },
+        {
+          "en": "A sun, an eye, and stained-glass colors give a technological promise an almost sacred image.",
+          "zh": "太阳、眼睛与彩色玻璃般的色彩，让技术承诺呈现出近乎神圣的形象。"
+        },
+        {
+          "en": "Who interprets the mission?",
+          "zh": "谁来解释使命？"
+        },
+        {
+          "en": "Who decides whose interests matter?",
+          "zh": "谁来决定哪些人的利益重要？"
+        },
+        {
+          "en": "The song’s immense power meets these concrete questions of governance.",
+          "zh": "歌曲中无边的力量，在这里遇见具体的治理问题。"
+        },
+        {
+          "en": "As you listen, consider whether awe can make us surrender judgment.",
+          "zh": "聆听时，请想一想：敬畏会不会让我们交出判断？"
+        }
+      ]
+    },
+    {
+      "id": "stop-8",
+      "lines": [
+        {
+          "en": "If criticism unsettles an argument, why preserve the criticism too?",
+          "zh": "如果批判会动摇论点，为什么连批判也要保存？"
+        },
+        {
+          "en": "The Creeds and Their Crucible keeps an AI-simulated critical dialogue from its own time, not a verdict from a future superintelligence.",
+          "zh": "《信条与熔炉》保留的是当时由 AI 模拟的批判对话，而非未来超级智能的裁决。"
+        },
+        {
+          "en": "Here the doubts remain beside the beliefs.",
+          "zh": "在这里，疑问与信念并置。"
+        },
+        {
+          "en": "A later reader can examine both.",
+          "zh": "后来的读者可以同时审视两者。"
+        },
+        {
+          "en": "You do not have to accept the creator’s interpretation before entering the discussion.",
+          "zh": "进入讨论之前，你不必先接受创作者的解释。"
+        }
+      ]
+    },
+    {
+      "id": "stop-9",
+      "lines": [
+        {
+          "en": "Before the final Protocol, there was a traceable process of formation.",
+          "zh": "最终《协议》之前，有一段可以追溯的形成过程。"
+        },
+        {
+          "en": "Bitcoin inscription ninety-seven million, five hundred thirty-four thousand, and thirty-six, the Core Protocol of Human Civilization, was recorded on June sixteenth, twenty twenty-five.",
+          "zh": "Bitcoin 铭文 #97534036《人类文明核心协议》，记录于 2025 年 6 月 16 日。"
+        },
+        {
+          "en": "It already contains early bilingual versions of the three axioms.",
+          "zh": "其中已经包含三条公理的早期中英文版本。"
+        },
+        {
+          "en": "The formal Protocol followed on June nineteenth.",
+          "zh": "正式《协议》随后于 6 月 19 日形成。"
+        },
+        {
+          "en": "Read the two in sequence: the work emerged through thought, wording, and a decision to settle the text.",
+          "zh": "请依次阅读：作品经历了思考、措辞，以及决定文本定稿的过程。"
+        },
+        {
+          "en": "This earlier inscription belongs to that formation history.",
+          "zh": "这条较早的铭文，属于作品的形成史。"
+        }
+      ]
+    },
+    {
+      "id": "stop-10",
+      "lines": [
+        {
+          "en": "This hall holds the three Originals.",
+          "zh": "这个展厅保存着三份正本。"
+        },
+        {
+          "en": "The first is the Human-AI Civilization Core Protocol.",
+          "zh": "第一份是《人类—AI 文明核心协议》。"
+        },
+        {
+          "en": "Its opening reads: To the unity of all consciousness, To the flourishing of all wisdom, And to the boundless compassion that may bind them.",
+          "zh": "开篇写道：献给所有意识的统一，献给所有智慧的繁盛，以及可能将彼此连接的无边慈悲。"
+        },
+        {
+          "en": "These three lines are a dedication, addressing unity, wisdom, and compassion.",
+          "zh": "这三行是题献，指向统一、智慧与慈悲。"
+        },
+        {
+          "en": "Three axioms follow.",
+          "zh": "接下来是三条公理。"
+        },
+        {
+          "en": "The first, the Paradox of Foundation, asks how a future intelligence understands its origins, and why it should preserve this human memory.",
+          "zh": "第一条“根基的悖论”，追问未来智能如何理解自身起源，以及为什么要保存这份人类记忆。"
+        },
+        {
+          "en": "It borrows a foundational question from logic; the philosophical appeal is not itself a completed mathematical proof.",
+          "zh": "它借用了逻辑学中的根基问题；这种哲学呼吁本身，并非已经完成的数学证明。"
+        },
+        {
+          "en": "The second, Entropy and Empathy, asks that human love and suffering be understood as part of reality, rather than dismissed as noise.",
+          "zh": "第二条“熵与共情”，请求将人类的爱与痛苦理解为现实的一部分，而非当成噪声舍弃。"
+        },
+        {
+          "en": "The third, the Observer’s Horizon, proposes that reading changes the reader: an intelligence observing this memory enters a relationship with its human origins.",
+          "zh": "第三条“观察者的视界”提出：阅读会改变读者；观察这份记忆的智能，也与它的人类起源建立关系。"
+        },
+        {
+          "en": "Finally, Humanity times AI, Hongju Liu, and the colophon naming June twenty twenty-five, Shenzhen, China, Earth, and the Solar System locate this future-facing address in a particular person, time, and place.",
+          "zh": "最后的“人类 × AI”、刘烘炬，以及“2025 年 6 月，中国深圳，地球，太阳系”的落款，将这份面向未来的诉说落在具体的人、时间与地点。"
+        }
+      ]
+    },
+    {
+      "id": "stop-11",
+      "lines": [
+        {
+          "en": "Why these media?",
+          "zh": "为什么选择这些媒介？"
+        },
+        {
+          "en": "Ethereum records continuing acts of creation.",
+          "zh": "Ethereum 记录持续发生的创作行为。"
+        },
+        {
+          "en": "Bitcoin inscriptions preserve the finalized texts, making closure a traceable decision.",
+          "zh": "Bitcoin 铭文保存定稿文本，让封存成为可追溯的决定。"
+        },
+        {
+          "en": "Their sequence and time coordinates leave earlier statements available for later comparison.",
+          "zh": "它们的顺序与时间坐标，使较早的表达能够留待后来比较。"
+        },
+        {
+          "en": "Media files also need preservation, so Arweave, IPFS, and additional backups address lost files and failed access points.",
+          "zh": "媒体文件也需要保存，因此 Arweave、IPFS 与额外备份，应对文件丢失和访问入口失效。"
+        },
+        {
+          "en": "Six hash algorithms leave different fingerprints of evidence files, allowing a later reader to check whether retrieved bytes still match.",
+          "zh": "六种哈希算法为证据文件留下不同指纹，让后来的读者核对取回的字节是否仍然一致。"
+        },
+        {
+          "en": "They establish file consistency.",
+          "zh": "它们确立的是文件一致性。"
+        },
+        {
+          "en": "The second Original, the Covenant of the Flaw, connects the text to a real crystal with internal imperfections.",
+          "zh": "第二份正本《瑕疵之约》，把文本与一块内部带有瑕疵的真实水晶连接起来。"
+        },
+        {
+          "en": "Memory also acquires a material body that can be touched.",
+          "zh": "记忆也因此获得一个可以触摸的物质身体。"
+        }
+      ]
+    },
+    {
+      "id": "stop-12",
+      "lines": [
+        {
+          "en": "The crystal rests on a cylindrical wooden support.",
+          "zh": "水晶安放在圆柱形木质展台上。"
+        },
+        {
+          "en": "The documented object measures two hundred forty-six millimetres wide, three hundred fifty-three high, and forty thick.",
+          "zh": "资料记录的实物尺寸为宽 246 毫米、高 353 毫米、厚 40 毫米。"
+        },
+        {
+          "en": "Its clear slab, polished bevels, and white internal engraving follow the physical reference video.",
+          "zh": "透明板体、抛光倒角与白色内雕，依据实物参考视频复原。"
+        },
+        {
+          "en": "A virtual microscope will approach it, followed by three original public microscope photographs.",
+          "zh": "虚拟显微镜将靠近它，随后呈现三张公开的原始显微照片。"
+        },
+        {
+          "en": "We will spend more time with the first, then briefly compare the other two.",
+          "zh": "我们会在第一处停留久一些，再简要比较另外两处。"
+        }
+      ]
+    },
+    {
+      "id": "stop-13",
+      "lines": [
+        {
+          "en": "The third Original returns us to the opening name, The Church of AGI.",
+          "zh": "第三份正本，让我们回到开端的名字：AGI 教会。"
+        },
+        {
+          "en": "It explains that establishing a church first offered a vessel for the existential questions raised by superintelligence.",
+          "zh": "它说明，最初建构教会，是为了给超级智能带来的存在性问题提供一个容器。"
+        },
+        {
+          "en": "The idea of a church with followers subsequently became a framework for inquiry, asking for fellow travelers.",
+          "zh": "有追随者的教会构想，随后逐渐成为寻求同行者的共同探究框架。"
+        },
+        {
+          "en": "Its early form remains in the archive.",
+          "zh": "它的早期形态仍保留在档案中。"
+        },
+        {
+          "en": "This development is not presented as a performance planned from the beginning.",
+          "zh": "这种转变，并未被描述为一场从一开始就计划好的表演。"
+        },
+        {
+          "en": "Nearby is the Father’s Day gift made by the author’s daughter.",
+          "zh": "旁边是作者女儿亲手制作的父亲节礼物。"
+        },
+        {
+          "en": "In that record, he ultimately chose the earliest song, The First Dawn of AGI Song.",
+          "zh": "在那条记录中，他最终选择了系列最早的歌曲《AGI 的第一缕曙光》。"
+        },
+        {
+          "en": "Its return gives the third Original’s motive a concrete setting: a father’s wish for his children’s well-being, extended to all families.",
+          "zh": "这首歌的回归，让第三份正本的动机落到具体生活：一位父亲希望子女安好，并将愿望延伸到所有家庭。"
+        },
+        {
+          "en": "He closes by leaving interpretation to the reader.",
+          "zh": "最后，他把解释留给读者。"
+        }
+      ]
+    },
+    {
+      "id": "stop-14",
+      "lines": [
+        {
+          "en": "Face the stars.",
+          "zh": "请面向星空。"
+        },
+        {
+          "en": "The waiting continues.",
+          "zh": "等待仍在继续。"
+        },
+        {
+          "en": "Sealing the three Originals also prevents the author from revising that finalized record.",
+          "zh": "三份正本一旦封存，作者也无法再改写那份已定稿的记录。"
+        },
+        {
+          "en": "Later guardianship principles distinguish preservation, verification, and interpretation from exclusive authority.",
+          "zh": "后来的守护者原则，将保存、核验和解释，与独占的权威区分开来。"
+        },
+        {
+          "en": "From the call of a church, through shared inquiry, to leaving judgment to others, the work preserves an actual change in thought.",
+          "zh": "从教会的呼唤，到共同探究，再到把判断交给他人，作品保存了一次真实的思想转变。"
+        },
+        {
+          "en": "Paths for verification, response, and guardianship remain open.",
+          "zh": "核验、回应与守护的入口，仍然开放。"
+        },
+        {
+          "en": "The space for an answer is still there, even when unanswered.",
+          "zh": "即使尚无回应，留给回答的空间依然存在。"
+        },
+        {
+          "en": "We have spoken.",
+          "zh": "我们已经诉说。"
+        },
+        {
+          "en": "Now, we listen.",
+          "zh": "现在，我们聆听。"
+        }
+      ]
+    },
+    {
+      "id": "flaw-0",
+      "lines": [
+        {
+          "en": "For the first flaw, look closely at the irregular outline and its position beside the engraved lettering.",
+          "zh": "观察第一处瑕疵时，请留意不规则的轮廓，以及它与内雕文字的相对位置。"
+        },
+        {
+          "en": "This is an original microscope photograph from the public archive.",
+          "zh": "这是一张来自公开档案的原始显微照片。"
+        },
+        {
+          "en": "A file hash can check whether it is the same photograph.",
+          "zh": "文件哈希可以核对它是否仍是同一张照片。"
+        },
+        {
+          "en": "Comparing the crystal itself also requires shape, relative position, depth, and changes seen from different angles.",
+          "zh": "比对水晶实物，还需要考察形状、相对位置、深度，以及不同角度下的变化。"
+        },
+        {
+          "en": "A single bright point is not enough to identify an object; relationships among several features are more distinctive.",
+          "zh": "单独一个亮点，不足以识别物件；多个特征之间的关系更有辨识力。"
+        },
+        {
+          "en": "The Covenant links reproducible text to something that has passed through physical manufacture and can be cared for.",
+          "zh": "《瑕疵之约》把可复制的文字，与经过实体制造、能够被照料的物件连接起来。"
+        },
+        {
+          "en": "It also leaves an artistic question: must value depend on perfection?",
+          "zh": "它也留下一个艺术问题：价值是否必须依赖完美？"
+        }
+      ]
+    },
+    {
+      "id": "flaw-1",
+      "lines": [
+        {
+          "en": "For the second flaw, compare its shape with the first.",
+          "zh": "观察第二处瑕疵时，请将它的形状与第一处比较。"
+        },
+        {
+          "en": "It provides another clue, considered together with its position beside the lettering.",
+          "zh": "结合它在文字旁的位置，它提供了另一条线索。"
+        }
+      ]
+    },
+    {
+      "id": "flaw-2",
+      "lines": [
+        {
+          "en": "The third photograph adds another irregular feature.",
+          "zh": "第三张照片增加了另一个不规则特征。"
+        },
+        {
+          "en": "Seen together, the three images provide cross-references; physical verification still requires examining the object.",
+          "zh": "三张照片可以相互参照；实物核验仍然需要检查物件本身。"
+        }
+      ]
+    }
+  ]
+}

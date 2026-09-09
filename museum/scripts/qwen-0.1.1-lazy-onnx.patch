@@ -1,0 +1,20 @@
+--- a/qwen_tts/core/tokenizer_25hz/vq/speech_vq.py
++++ b/qwen_tts/core/tokenizer_25hz/vq/speech_vq.py
+@@ -17,7 +17,6 @@
+ import copy
+ import torch
+ import operator
+-import onnxruntime
+ 
+ import torch.nn as nn
+ import torch.nn.functional as F
+@@ -118,6 +117,9 @@
+ class XVectorExtractor(nn.Module):
+     def __init__(self, audio_codec_with_xvector):
+         super().__init__()
++        # ONNX is only needed by the legacy 25Hz x-vector encoder.
++        import onnxruntime
++        onnxruntime.disable_telemetry_events()
+         option = onnxruntime.SessionOptions()
+         option.graph_optimization_level = onnxruntime.GraphOptimizationLevel.ORT_ENABLE_ALL
+         option.intra_op_num_threads = 1

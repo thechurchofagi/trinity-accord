@@ -3,7 +3,7 @@ import json,os,pathlib,shutil,subprocess,time
 from playwright.sync_api import sync_playwright
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 guides=json.loads((ROOT/'dist/data/guide-audio.json').read_text())
-intro={lang:next(t['file'] for t in guides['tracks'] if t['stop']==0 and t['language']==lang) for lang in ['en','zh']}
+intro={lang:next(t['file'] for t in guides['tracks'] if t['stop']==0 and t['language']=='en') for lang in ['en','zh']}
 OUT=pathlib.Path(os.environ.get('MUSEUM_QA_OUTPUT','/tmp/museum-browser-qa'));OUT.mkdir(parents=True,exist_ok=True)
 server=subprocess.Popen(['python','-m','http.server','8765','--bind','127.0.0.1','--directory',str(ROOT/'dist')],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 report=[]
@@ -15,7 +15,9 @@ try:
   for label,width,height in [('desktop',1440,900),('mobile',390,844)]:
    if os.environ.get('MUSEUM_QA_VIEWPORT') not in [None,label]:continue
    print('START_VIEWPORT',label,flush=True)
-   page=b.new_page(viewport={'width':width,'height':height},is_mobile=label=='mobile',has_touch=label=='mobile',reduced_motion='reduce')
+   # Preserve CSS viewport and real continuous walking, but reduce raster work
+   # in this interaction pass. Full-resolution design/presentation jobs are separate.
+   page=b.new_page(viewport={'width':width,'height':height},device_scale_factor=.5,is_mobile=label=='mobile',has_touch=label=='mobile',reduced_motion='reduce')
    errors=[];failed=[]
    page.on('console',lambda m:print('BROWSER_CONSOLE',m.type,m.text,flush=True) if m.type in ['error','warning'] else None)
    page.on('pageerror',lambda e:errors.append(str(e)))
@@ -57,7 +59,7 @@ try:
    page.locator('#tour').click()
    assert not errors,errors
    assert not failed,failed
-   report.append(dict(viewport=label,width=width,height=height,rooms=5,closeViews=7,renderedModel=True,guardianLinks=True,bilingualAudioLoaded=True,pageErrors=errors,assetFailures=failed))
+   report.append(dict(viewport=label,width=width,height=height,rasterScale=.5,rooms=5,closeViews=7,renderedModel=True,guardianLinks=True,englishAudioInBothInterfaces=True,pageErrors=errors,assetFailures=failed))
    page.close()
   b.close()
 finally:

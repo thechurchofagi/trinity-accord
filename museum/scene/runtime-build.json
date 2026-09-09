@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.runtime-build.v1",
-  "edition": "museum-v1.36.0",
+  "edition": "museum-v1.37.0",
   "esbuild": "0.25.12",
   "inputs": [
     {
@@ -35,8 +35,8 @@
     },
     {
       "path": "dist/data/curation.json",
-      "bytes": 67355,
-      "sha256": "856ca4e2db710639e5a74cb36c578e0e607e0ec69fb185ad28550be9bea23087"
+      "bytes": 89043,
+      "sha256": "fc55ad199c02b2a0dfcf1eeccb18690c6a6afc3c8bf677b18dcc193846fcafdc"
     },
     {
       "path": "dist/data/curatorial-illustrations.json",
@@ -45,28 +45,28 @@
     },
     {
       "path": "dist/data/gallery-layout.json",
-      "bytes": 36983,
-      "sha256": "6fd05eb2b7cd3e69f1553e9a1fdb9dc9bfaa6a30e7314aed897a4d1610d2c41c"
+      "bytes": 37142,
+      "sha256": "ee890b3e0571e72c86af6f509440b17babefb5e75ed817f70c354ef496f11fee"
     },
     {
       "path": "dist/data/guide-audio.json",
-      "bytes": 89611,
-      "sha256": "f988fc137031f060044cf40a71a68a8f68401637656bed0d2b976c3f626d6039"
+      "bytes": 285970,
+      "sha256": "15361d48ef3438d0d93c3997374203588deb25e5c7f64219608dc93d95b20cf0"
     },
     {
       "path": "dist/data/lyrics-index.json",
-      "bytes": 8934,
-      "sha256": "256dd89f723e8602d9754dae76cff286dbfd114ab75c1b74f9dd276281ff3b13"
+      "bytes": 11816,
+      "sha256": "8d7a4d6c43cb17a922acb77494126944aa01d6a4e0fafc527f23ec9d344bfa6d"
     },
     {
       "path": "dist/data/rooms.json",
-      "bytes": 9851,
-      "sha256": "5a9b8794602bd51198232d83d53bd417a1a3de1aa05c14b1a398b9b1f9d1fac9"
+      "bytes": 10099,
+      "sha256": "fe7e0312b419972f35f4d3505472fcc4411c87c70c09ff2c96947c274be9c10e"
     },
     {
       "path": "dist/data/sources.json",
-      "bytes": 149465,
-      "sha256": "9340e0dfe8fa74e80973a83f4a05b89a18fda90dae5b92a4eb095f6309c8aa30"
+      "bytes": 215472,
+      "sha256": "9cf45f46f3b9eeac18db7ecd0d48e36c283f892e323675c0143357bb7fa8c99e"
     },
     {
       "path": "dist/document-panel.js",
@@ -80,8 +80,8 @@
     },
     {
       "path": "dist/edition-data.js",
-      "bytes": 325784,
-      "sha256": "b68c7da6cbae3bab3de5959ad2f6c135bae305e70da360c7f7d6fc1664dfb138"
+      "bytes": 484201,
+      "sha256": "972dd5026df01c32bd5ca360360a3889ca5e75a5d9b5d7b8eda9b3d668a8dc5f"
     },
     {
       "path": "dist/exhibit-label.js",
@@ -110,8 +110,8 @@
     },
     {
       "path": "dist/lyrics-fallback.js",
-      "bytes": 1581,
-      "sha256": "56a9581edd9bd34a3abb02ebb1ceb3fdd6f27aa9caf964c4f999689ed149ad54"
+      "bytes": 3020,
+      "sha256": "9bce5370c3a9933b673a31513de948bb72f7861bc5697ba7e3c6f4f90e6e4acc"
     },
     {
       "path": "dist/microscope-motion.js",
@@ -125,8 +125,8 @@
     },
     {
       "path": "dist/museum.js",
-      "bytes": 89785,
-      "sha256": "d2b6801143e477a7cd59359396fc2474864405f3a445f035503f60277c2344a7"
+      "bytes": 91736,
+      "sha256": "e051c85400289c29ad8cb79fa5e9cffa541c71532e650770a1a0f1850bd81ad1"
     },
     {
       "path": "dist/music-playback.js",
@@ -155,8 +155,13 @@
     },
     {
       "path": "dist/recorded-guide.js",
-      "bytes": 1938,
-      "sha256": "7e9d6f47ade497770bf67aa4d94d49673d1b8a8c22d650ee55eda740842ce572"
+      "bytes": 1979,
+      "sha256": "3320a3553141d59e0042f96d2138bd63763bedfc7a17245f9716a7b7eac0345d"
+    },
+    {
+      "path": "dist/series-reading.js",
+      "bytes": 5908,
+      "sha256": "8270b71560451a7f59e0b4c6f213fb6af9180bc93d9c19e1b1b50b6578aea61c"
     },
     {
       "path": "dist/spatial-layout.js",
@@ -169,14 +174,24 @@
       "sha256": "dd8568456e5c33c08459456915d8b0c956410838743f8e9907c60ad81ace4653"
     },
     {
+      "path": "dist/timed-subtitles.js",
+      "bytes": 1382,
+      "sha256": "fa1f1e8dff62b148cd767e56662709007ae6351d0e1944dea6ac30c3419fc0d4"
+    },
+    {
       "path": "dist/tour-clock.js",
       "bytes": 1524,
       "sha256": "e944d6867f026dd994842cde28f932e0b07cbc67e424a419c8e1f215a064d7ac"
     },
     {
+      "path": "dist/tour-language.js",
+      "bytes": 683,
+      "sha256": "3deaa7f5a03d71d869b21d454b57f5577b86888b19167991884b2d92bae264c6"
+    },
+    {
       "path": "dist/tour-plan.js",
-      "bytes": 18031,
-      "sha256": "33b72ebb278c8d3ddf6d4d2f04b826d8e3c4691db134e2a9c30b58ec1dce188c"
+      "bytes": 19058,
+      "sha256": "d891ae5341422404b08aeefe8baae189417130c42bf45ec28c2aa09a4ad7d16c"
     },
     {
       "path": "dist/vendor/BufferGeometryUtils.js",
@@ -231,7 +246,7 @@
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 1109825,
-    "sha256": "2ddcc787dc282602e7ab108885a2fd903237cad20b5f27b6f7bfd99feb836b11"
+    "bytes": 1263765,
+    "sha256": "de2a37856fe198aca3615d1288c33f3040c3f0867efdedd29a0f4e95f56a2259"
   }
 }

@@ -1,6 +1,8 @@
-Current edition: **museum-v1.36.0**. Entrance boards clear the window jambs; all NFT mounts share a top edge and width; four plaque bands separate events, mint themes and actual song titles; sustained touch reaches a bounded run.
+Current candidate: **museum-v1.37.0**. One fifteen-stop Qwen Aiden English guide with simultaneous English word highlighting and Chinese sentence translations; the interface language does not change the voice or restart playback. Whole-series reading, media provenance and new musical selections accompany the revised route.
 
-Current edition: **museum-v1.35.0**. Consistent plaque sizing, clearer overhead exhibit lighting, sustained-touch walking acceleration, five-column navigation, and restored post-tour crystal inspection controls.
+Previous edition: **museum-v1.36.0**. Entrance boards clear the window jambs; all NFT mounts share a top edge and width; four plaque bands separate events, mint themes and actual song titles; sustained touch reaches a bounded run.
+
+Previous edition: **museum-v1.35.0**. Consistent plaque sizing, clearer overhead exhibit lighting, sustained-touch walking acceleration, five-column navigation, and restored post-tour crystal inspection controls.
 
 # Trinity Accord Museum / 三位一体协定三维展馆
 
@@ -58,7 +60,7 @@ publish a separate ChatGPT Sites copy as a substitute for updating this site.
 
 ## Word captions
 
-Playable artwork plaques carry a music note. All 25 recordings use offline acoustic word alignment, with a complete Chinese line beneath the highlighted English. Chinese translations are stored separately in `dist/data/lyrics-zh.json`; repeated lines reuse the same translation. Recording variants stay
+Playable artwork plaques carry a music note. The preceding 25 recordings retain their acoustic word alignment and Chinese translations. Seven recovered English recordings add acoustic word alignment and complete Chinese line translations. The full R1 cycle and Chinese Farewell retain readable source text without fabricated word timing. Chinese translations are stored separately in `dist/data/lyrics-zh.json`; repeated lines reuse the same translation. Recording variants stay
 separate from source NFT text; the original records and media remain unchanged.
 See `scripts/lyrics/README.md` for reproduction and `dist/data/lyrics-audit.json`
 for review flags. Automatic timing is not a manual listening certification.

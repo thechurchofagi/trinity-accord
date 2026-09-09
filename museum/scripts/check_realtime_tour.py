@@ -17,6 +17,7 @@ OUT = pathlib.Path(os.environ.get('MUSEUM_QA_OUTPUT', '/tmp/museum-realtime'))
 OUT.mkdir(parents=True, exist_ok=True)
 guides = json.loads((ROOT / 'dist/data/guide-audio.json').read_text())
 expected = {t['file']: t['stop'] for t in guides['tracks'] if t['language'] == 'en'}
+plan = json.loads((ROOT / 'scene/tour-script.json').read_text())
 handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(ROOT / 'dist'))
 server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), handler)
 threading.Thread(target=server.serve_forever, daemon=True).start()
@@ -56,8 +57,10 @@ try:
             sample['wallSeconds'] = round(time.monotonic() - started, 2)
             clock = sample['progress'].split(' / ')[0]
             elapsed = int(clock)
-            assert previous <= elapsed <= 12, sample
-            if sample['musicPlaying']:assert sample['musicTime'] <= 30.5, sample
+            assert previous <= elapsed <= len(plan), sample
+            if sample['musicPlaying']:
+                stop=plan[elapsed-1]
+                assert sample['musicTime'] <= stop.get('musicOffset',0)+stop.get('musicDuration',30)+.5, sample
             assert not sample['blocked'], 'Uninterrupted playback requested: ' + str(sample)
             assert not (sample['playing'] and sample['musicPlaying']), 'Narration and song overlap'
             if sample['playing'] and sample['source'] in inspection_files:
@@ -74,8 +77,10 @@ try:
             page.wait_for_timeout(1000)
         assert 'complete' in sample['progress'], 'Tour failed to finish within twenty-five wall-clock minutes'
         assert seen_flaws == {0,1,2}, ('Missing audible flaw explanations', seen_flaws)
-        assert seen == set(range(12)), ('Missing audible tour tracks', seen)
-        assert page.locator('body').get_attribute('data-presentation') == 'true'
+        assert seen == set(range(len(plan))), ('Missing audible tour tracks', seen)
+        # Completion restores free-browsing controls while retaining Replay tour.
+        assert page.locator('body').get_attribute('data-presentation') == 'false'
+        assert page.locator('#focus-art').is_visible()
         assert not page.locator('#exhibit-strip').is_visible()
         assert 'Replay tour' in page.locator('#tour').inner_text()
         assert 'complete' in page.locator('#tour-progress').inner_text()
@@ -83,7 +88,7 @@ try:
         assert not report['assetFailures'], report['assetFailures']
         # Capture after completion: screenshots must not interrupt this test.
         page.screenshot(path=str(OUT / 'completed-tour.png'), timeout=60000)
-        report.update(passed=True, audibleStops=sorted(seen), audibleFlaws=sorted(seen_flaws), completedStops=12,
+        report.update(passed=True, audibleStops=sorted(seen), audibleFlaws=sorted(seen_flaws), completedStops=len(plan),
                       wallSeconds=round(time.monotonic() - started, 2))
         browser.close()
 finally:

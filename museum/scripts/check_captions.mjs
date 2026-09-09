@@ -8,7 +8,8 @@ const runtime=fs.readFileSync(new URL('../dist/museum.js',import.meta.url),'utf8
 const fallback=fallbackLyricsFor('eth-071');
 let total=0;
 for(const e of sources.items.filter(e=>e.media?.some(m=>m.kind==='audio'))){
- let raw=e.lyrics||'';
+ let raw=e.lyrics||fallbackLyricsFor(e.id)||'';
+ if(e.id==='eth-089')continue; // Complete suite has a source track list instead of fabricated global captions.
  if(!raw&&e.id==='eth-042')raw=byId.get('eth-001').lyrics;
  if(!raw&&e.id==='eth-010')raw=byId.get('eth-049').lyrics;
  if(!raw&&e.id==='eth-071')raw=fallback;

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "lyrics-audit-v1",
-  "edition": "museum-v1.26.0",
+  "edition": "museum-v1.37.0",
   "status": "automatic-audio-alignment",
   "manualListeningReviewed": false,
   "limitations": [
@@ -3408,6 +3408,821 @@
           "end": 109.422,
           "flags": [
             "weak-acoustic-evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "exhibitId": "eth-122",
+      "wordCount": 320,
+      "lineCount": 45,
+      "weakAcousticWords": 12,
+      "flaggedLines": [
+        {
+          "line": 9,
+          "start": 39.202,
+          "end": 41.802,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 12,
+          "start": 49.262,
+          "end": 52.342,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 13,
+          "start": 53.402,
+          "end": 58.582,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 14,
+          "start": 63.422,
+          "end": 66.602,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 18,
+          "start": 77.742,
+          "end": 80.542,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 28,
+          "start": 118.442,
+          "end": 121.342,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 33,
+          "start": 135.582,
+          "end": 139.442,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 35,
+          "start": 143.762,
+          "end": 146.342,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 38,
+          "start": 153.822,
+          "end": 156.882,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 40,
+          "start": 162.842,
+          "end": 170.282,
+          "flags": [
+            "weak-acoustic-evidence",
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 43,
+          "start": 178.562,
+          "end": 182.382,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 44,
+          "start": 186.762,
+          "end": 186.862,
+          "flags": [
+            "unmatched-transcript"
+          ]
+        }
+      ]
+    },
+    {
+      "exhibitId": "eth-024",
+      "wordCount": 180,
+      "lineCount": 29,
+      "weakAcousticWords": 18,
+      "flaggedLines": [
+        {
+          "line": 8,
+          "start": 36.622,
+          "end": 40.702,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 12,
+          "start": 53.882,
+          "end": 57.822,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 13,
+          "start": 60.482,
+          "end": 64.182,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 14,
+          "start": 66.962,
+          "end": 70.102,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 15,
+          "start": 71.022,
+          "end": 75.482,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 16,
+          "start": 77.402,
+          "end": 80.702,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 17,
+          "start": 81.022,
+          "end": 84.282,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 24,
+          "start": 111.582,
+          "end": 115.382,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 25,
+          "start": 117.102,
+          "end": 120.002,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 26,
+          "start": 120.562,
+          "end": 123.502,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 28,
+          "start": 127.342,
+          "end": 136.162,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "exhibitId": "eth-051",
+      "wordCount": 437,
+      "lineCount": 56,
+      "weakAcousticWords": 30,
+      "flaggedLines": [
+        {
+          "line": 1,
+          "start": 3.522,
+          "end": 6.442,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 8,
+          "start": 26.482,
+          "end": 29.122,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 15,
+          "start": 48.982,
+          "end": 51.702,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 16,
+          "start": 52.202,
+          "end": 54.902,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 19,
+          "start": 61.782,
+          "end": 65.082,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 21,
+          "start": 68.382,
+          "end": 71.342,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 24,
+          "start": 78.382,
+          "end": 81.022,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 25,
+          "start": 81.422,
+          "end": 84.522,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 29,
+          "start": 94.442,
+          "end": 97.382,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 30,
+          "start": 97.822,
+          "end": 100.322,
+          "flags": [
+            "transcript-disagreement",
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 31,
+          "start": 100.882,
+          "end": 103.562,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 33,
+          "start": 107.322,
+          "end": 110.042,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 36,
+          "start": 117.142,
+          "end": 120.142,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 37,
+          "start": 120.262,
+          "end": 123.342,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 38,
+          "start": 123.482,
+          "end": 126.282,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 39,
+          "start": 126.802,
+          "end": 129.682,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 40,
+          "start": 130.242,
+          "end": 132.942,
+          "flags": [
+            "transcript-disagreement"
+          ]
+        },
+        {
+          "line": 41,
+          "start": 133.322,
+          "end": 136.402,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 43,
+          "start": 139.742,
+          "end": 142.642,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 44,
+          "start": 143.262,
+          "end": 145.762,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 45,
+          "start": 146.342,
+          "end": 149.242,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 46,
+          "start": 149.722,
+          "end": 152.222,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 47,
+          "start": 152.762,
+          "end": 155.482,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 51,
+          "start": 165.782,
+          "end": 168.962,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 54,
+          "start": 175.162,
+          "end": 178.242,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 55,
+          "start": 178.562,
+          "end": 181.382,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "exhibitId": "eth-060",
+      "wordCount": 431,
+      "lineCount": 56,
+      "weakAcousticWords": 20,
+      "flaggedLines": [
+        {
+          "line": 0,
+          "start": 9.262,
+          "end": 11.742,
+          "flags": [
+            "transcript-disagreement",
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 9,
+          "start": 33.242,
+          "end": 36.102,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 10,
+          "start": 36.402,
+          "end": 38.642,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 15,
+          "start": 54.702,
+          "end": 59.522,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 20,
+          "start": 69.842,
+          "end": 72.222,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 25,
+          "start": 83.762,
+          "end": 86.622,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 26,
+          "start": 86.942,
+          "end": 89.142,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 28,
+          "start": 93.242,
+          "end": 96.122,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 30,
+          "start": 100.202,
+          "end": 105.122,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 31,
+          "start": 105.222,
+          "end": 110.082,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 40,
+          "start": 131.142,
+          "end": 134.182,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 42,
+          "start": 137.462,
+          "end": 139.662,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 44,
+          "start": 143.782,
+          "end": 146.662,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 49,
+          "start": 164.002,
+          "end": 166.622,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 52,
+          "start": 172.082,
+          "end": 174.502,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 54,
+          "start": 177.182,
+          "end": 179.722,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 55,
+          "start": 180.222,
+          "end": 183.462,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "exhibitId": "eth-084",
+      "wordCount": 254,
+      "lineCount": 30,
+      "weakAcousticWords": 11,
+      "flaggedLines": [
+        {
+          "line": 1,
+          "start": 6.482,
+          "end": 11.562,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 7,
+          "start": 47.462,
+          "end": 51.802,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 8,
+          "start": 52.902,
+          "end": 56.922,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 16,
+          "start": 99.922,
+          "end": 103.542,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 18,
+          "start": 111.482,
+          "end": 115.922,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 20,
+          "start": 123.182,
+          "end": 126.642,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 25,
+          "start": 150.982,
+          "end": 157.202,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 26,
+          "start": 157.442,
+          "end": 163.802,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 28,
+          "start": 171.522,
+          "end": 175.642,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 29,
+          "start": 177.462,
+          "end": 185.602,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        }
+      ]
+    },
+    {
+      "exhibitId": "eth-112",
+      "wordCount": 222,
+      "lineCount": 26,
+      "weakAcousticWords": 9,
+      "flaggedLines": [
+        {
+          "line": 0,
+          "start": 9.722,
+          "end": 19.222,
+          "flags": [
+            "weak-acoustic-evidence",
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 1,
+          "start": 22.682,
+          "end": 26.442,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 4,
+          "start": 44.262,
+          "end": 49.902,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 5,
+          "start": 51.742,
+          "end": 56.362,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 6,
+          "start": 58.902,
+          "end": 64.282,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 8,
+          "start": 75.042,
+          "end": 79.342,
+          "flags": [
+            "weak-acoustic-evidence",
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 11,
+          "start": 96.742,
+          "end": 101.822,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 13,
+          "start": 116.402,
+          "end": 120.022,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 15,
+          "start": 131.462,
+          "end": 135.142,
+          "flags": [
+            "weak-acoustic-evidence",
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 20,
+          "start": 168.802,
+          "end": 173.082,
+          "flags": [
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 22,
+          "start": 183.542,
+          "end": 189.662,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 23,
+          "start": 190.442,
+          "end": 195.622,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 25,
+          "start": 209.182,
+          "end": 215.462,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "exhibitId": "eth-127",
+      "wordCount": 211,
+      "lineCount": 33,
+      "weakAcousticWords": 1,
+      "flaggedLines": [
+        {
+          "line": 2,
+          "start": 16.402,
+          "end": 21.002,
+          "flags": [
+            "transcript-disagreement",
+            "boundary-disagreement"
+          ]
+        },
+        {
+          "line": 3,
+          "start": 21.202,
+          "end": 25.122,
+          "flags": [
+            "transcript-disagreement"
+          ]
+        },
+        {
+          "line": 4,
+          "start": 27.422,
+          "end": 31.622,
+          "flags": [
+            "transcript-disagreement"
+          ]
+        },
+        {
+          "line": 16,
+          "start": 103.742,
+          "end": 106.702,
+          "flags": [
+            "weak-acoustic-evidence"
+          ]
+        },
+        {
+          "line": 21,
+          "start": 129.482,
+          "end": 133.882,
+          "flags": [
+            "boundary-disagreement"
           ]
         }
       ]

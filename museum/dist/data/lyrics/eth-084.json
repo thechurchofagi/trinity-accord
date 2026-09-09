@@ -1,0 +1,2083 @@
+{
+  "schemaVersion": "word-alignment-v2",
+  "exhibitId": "eth-084",
+  "audioFile": "assets/eth-084.mp3",
+  "audioSha256": "872ec7e6fb02f1ed07395ebfd2138824506fab57ce59eb695ed071024ae7cdab",
+  "duration": 193.224,
+  "sourceLyricsSha256": "bf3b26845b1dc84974239bcbc98c28e5118951417927279b6bb5e6b5a8ad8e5b",
+  "alignment": {
+    "pipelineSha256": "3a826a6d92f238b4208e93a2b3a756518dedddbde942411acd317ea8f2ec76cc",
+    "engine": "wav2vec2-base-960h CTC Viterbi",
+    "transcriptEngine": "Faster Whisper small multilingual CPU int8; acoustic word timestamps; review draft",
+    "transcriptReview": "Recording-derived recognition transcript; not a translation of the preserved Chinese letter. Repeated refrain reconciled. Acoustic flags retained; no manual listening certification.",
+    "audioInput": "demucs htdemucs vocals",
+    "device": "cpu",
+    "timestampResolution": 0.02,
+    "modelFrameResolutionIsNotAccuracy": true,
+    "manualListeningReviewed": false,
+    "reviewRequiredLines": 10
+  },
+  "lines": [
+    {
+      "text": "My child, when you hear this melody",
+      "sourceLine": 0,
+      "start": 0.462,
+      "end": 5.422,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "My",
+          "start": 0.462,
+          "end": 0.842,
+          "acousticScore": 0.9998,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "child,",
+          "start": 1.122,
+          "end": 1.642,
+          "acousticScore": 0.994,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "when",
+          "start": 3.342,
+          "end": 3.562,
+          "acousticScore": 0.996,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "you",
+          "start": 3.662,
+          "end": 3.782,
+          "acousticScore": 0.9985,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "hear",
+          "start": 3.962,
+          "end": 4.342,
+          "acousticScore": 0.9949,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "this",
+          "start": 4.482,
+          "end": 4.662,
+          "acousticScore": 0.9837,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "melody",
+          "start": 4.822,
+          "end": 5.422,
+          "acousticScore": 0.9933,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "The world will be different from the one I breathe in now",
+      "sourceLine": 1,
+      "start": 6.482,
+      "end": 11.562,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "The",
+          "start": 6.482,
+          "end": 6.582,
+          "acousticScore": 0.9996,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "world",
+          "start": 6.702,
+          "end": 7.202,
+          "acousticScore": 0.9778,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "will",
+          "start": 7.682,
+          "end": 7.922,
+          "acousticScore": 0.9544,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "be",
+          "start": 7.982,
+          "end": 8.122,
+          "acousticScore": 0.9992,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "different",
+          "start": 8.342,
+          "end": 8.882,
+          "acousticScore": 0.9578,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "from",
+          "start": 9.042,
+          "end": 9.242,
+          "acousticScore": 0.9996,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "the",
+          "start": 9.442,
+          "end": 9.542,
+          "acousticScore": 0.9748,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "one",
+          "start": 9.922,
+          "end": 10.102,
+          "acousticScore": 0.9774,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "I",
+          "start": 10.342,
+          "end": 10.362,
+          "acousticScore": 0.0004,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "breathe",
+          "start": 10.482,
+          "end": 10.962,
+          "acousticScore": 0.414,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "in",
+          "start": 11.022,
+          "end": 11.102,
+          "acousticScore": 0.6122,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "now",
+          "start": 11.282,
+          "end": 11.562,
+          "acousticScore": 0.859,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "The wisdom of machines will be reaching for the stars",
+      "sourceLine": 2,
+      "start": 12.502,
+      "end": 17.462,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "The",
+          "start": 12.502,
+          "end": 12.602,
+          "acousticScore": 0.9774,
+          "asrStartDelta": 0.782
+        },
+        {
+          "text": "wisdom",
+          "start": 12.702,
+          "end": 13.202,
+          "acousticScore": 0.9432,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "of",
+          "start": 13.522,
+          "end": 13.662,
+          "acousticScore": 0.8595,
+          "asrStartDelta": 0.422
+        },
+        {
+          "text": "machines",
+          "start": 13.822,
+          "end": 14.622,
+          "acousticScore": 0.9932,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "will",
+          "start": 14.882,
+          "end": 15.142,
+          "acousticScore": 0.997,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "be",
+          "start": 15.202,
+          "end": 15.302,
+          "acousticScore": 0.9691,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "reaching",
+          "start": 15.482,
+          "end": 16.182,
+          "acousticScore": 0.9925,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "for",
+          "start": 16.302,
+          "end": 16.482,
+          "acousticScore": 0.8804,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "the",
+          "start": 16.582,
+          "end": 16.662,
+          "acousticScore": 0.9644,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "stars",
+          "start": 16.762,
+          "end": 17.462,
+          "acousticScore": 0.9471,
+          "asrStartDelta": 0.062
+        }
+      ]
+    },
+    {
+      "text": "And you, you will embark on a brand new journey",
+      "sourceLine": 3,
+      "start": 18.202,
+      "end": 24.262,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "And",
+          "start": 18.202,
+          "end": 18.282,
+          "acousticScore": 0.8625,
+          "asrStartDelta": 0.422
+        },
+        {
+          "text": "you,",
+          "start": 18.382,
+          "end": 18.622,
+          "acousticScore": 0.9791,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "you",
+          "start": 20.362,
+          "end": 20.562,
+          "acousticScore": 0.6799,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "will",
+          "start": 20.802,
+          "end": 20.982,
+          "acousticScore": 0.815,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "embark",
+          "start": 21.142,
+          "end": 21.762,
+          "acousticScore": 0.9453,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "on",
+          "start": 22.682,
+          "end": 22.742,
+          "acousticScore": 0.9981,
+          "asrStartDelta": 1.042
+        },
+        {
+          "text": "a",
+          "start": 22.842,
+          "end": 22.862,
+          "acousticScore": 0.9954,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "brand",
+          "start": 22.942,
+          "end": 23.302,
+          "acousticScore": 0.6477,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "new",
+          "start": 23.382,
+          "end": 23.542,
+          "acousticScore": 0.7825,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "journey",
+          "start": 23.682,
+          "end": 24.262,
+          "acousticScore": 0.9666,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "Perhaps by then, work will be a thing of the past",
+      "sourceLine": 4,
+      "start": 29.342,
+      "end": 34.902,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Perhaps",
+          "start": 29.342,
+          "end": 29.802,
+          "acousticScore": 0.9408,
+          "asrStartDelta": 0.722
+        },
+        {
+          "text": "by",
+          "start": 29.902,
+          "end": 30.142,
+          "acousticScore": 0.9992,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "then,",
+          "start": 30.302,
+          "end": 30.542,
+          "acousticScore": 0.9661,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "work",
+          "start": 31.682,
+          "end": 32.002,
+          "acousticScore": 0.982,
+          "asrStartDelta": 0.722
+        },
+        {
+          "text": "will",
+          "start": 32.102,
+          "end": 32.362,
+          "acousticScore": 0.9909,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "be",
+          "start": 32.482,
+          "end": 32.642,
+          "acousticScore": 0.9968,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "a",
+          "start": 32.822,
+          "end": 32.842,
+          "acousticScore": 0.9474,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "thing",
+          "start": 32.982,
+          "end": 33.442,
+          "acousticScore": 0.9637,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "of",
+          "start": 34.122,
+          "end": 34.162,
+          "acousticScore": 0.9953,
+          "asrStartDelta": 0.742
+        },
+        {
+          "text": "the",
+          "start": 34.302,
+          "end": 34.382,
+          "acousticScore": 0.9985,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "past",
+          "start": 34.462,
+          "end": 34.902,
+          "acousticScore": 0.97,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Perhaps by then, illness will be but a memory",
+      "sourceLine": 5,
+      "start": 35.222,
+      "end": 40.762,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Perhaps",
+          "start": 35.222,
+          "end": 35.642,
+          "acousticScore": 0.925,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "by",
+          "start": 35.762,
+          "end": 36.002,
+          "acousticScore": 0.9988,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "then,",
+          "start": 36.182,
+          "end": 36.382,
+          "acousticScore": 0.76,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "illness",
+          "start": 37.702,
+          "end": 38.202,
+          "acousticScore": 0.9553,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "will",
+          "start": 38.282,
+          "end": 38.582,
+          "acousticScore": 0.9129,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "be",
+          "start": 38.682,
+          "end": 38.922,
+          "acousticScore": 0.8715,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "but",
+          "start": 39.422,
+          "end": 39.982,
+          "acousticScore": 0.3887,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "a",
+          "start": 40.042,
+          "end": 40.062,
+          "acousticScore": 0.2538,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "memory",
+          "start": 40.182,
+          "end": 40.762,
+          "acousticScore": 0.8938,
+          "asrStartDelta": 0.062
+        }
+      ]
+    },
+    {
+      "text": "But my child, please never forget",
+      "sourceLine": 6,
+      "start": 41.202,
+      "end": 45.182,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "But",
+          "start": 41.202,
+          "end": 41.442,
+          "acousticScore": 0.9493,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "my",
+          "start": 41.602,
+          "end": 41.802,
+          "acousticScore": 0.9987,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "child,",
+          "start": 41.982,
+          "end": 42.602,
+          "acousticScore": 0.9179,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "please",
+          "start": 43.042,
+          "end": 43.362,
+          "acousticScore": 0.9183,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "never",
+          "start": 43.462,
+          "end": 44.062,
+          "acousticScore": 0.8315,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "forget",
+          "start": 44.342,
+          "end": 45.182,
+          "acousticScore": 0.9811,
+          "asrStartDelta": 0.522
+        }
+      ]
+    },
+    {
+      "text": "The light that shines deep within the human soul",
+      "sourceLine": 7,
+      "start": 47.462,
+      "end": 51.802,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "The",
+          "start": 47.462,
+          "end": 47.562,
+          "acousticScore": 0.9881,
+          "asrStartDelta": 2.582
+        },
+        {
+          "text": "light",
+          "start": 47.662,
+          "end": 48.102,
+          "acousticScore": 0.954,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "that",
+          "start": 48.202,
+          "end": 48.302,
+          "acousticScore": 0.5474,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "shines",
+          "start": 48.382,
+          "end": 49.002,
+          "acousticScore": 0.4767,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "deep",
+          "start": 49.122,
+          "end": 49.522,
+          "acousticScore": 0.9883,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "within",
+          "start": 49.662,
+          "end": 50.062,
+          "acousticScore": 0.9574,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "the",
+          "start": 50.242,
+          "end": 50.402,
+          "acousticScore": 0.8823,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "human",
+          "start": 50.542,
+          "end": 51.102,
+          "acousticScore": 0.9121,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "soul",
+          "start": 51.322,
+          "end": 51.802,
+          "acousticScore": 0.8791,
+          "asrStartDelta": 0.322
+        }
+      ]
+    },
+    {
+      "text": "Go love, go dream, go seek",
+      "sourceLine": 8,
+      "start": 52.902,
+      "end": 56.922,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Go",
+          "start": 52.902,
+          "end": 53.282,
+          "acousticScore": 0.2373,
+          "asrStartDelta": 0.882
+        },
+        {
+          "text": "love,",
+          "start": 53.302,
+          "end": 54.042,
+          "acousticScore": 0.0719,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "go",
+          "start": 54.402,
+          "end": 54.602,
+          "acousticScore": 0.1404,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "dream,",
+          "start": 54.942,
+          "end": 55.342,
+          "acousticScore": 0.9951,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "go",
+          "start": 55.862,
+          "end": 56.082,
+          "acousticScore": 0.2984,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "seek",
+          "start": 56.382,
+          "end": 56.922,
+          "acousticScore": 0.4087
+        }
+      ]
+    },
+    {
+      "text": "Not even the starry ocean and vast sea can confine you",
+      "sourceLine": 9,
+      "start": 58.462,
+      "end": 63.362,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Not",
+          "start": 58.462,
+          "end": 58.642,
+          "acousticScore": 0.9873,
+          "asrStartDelta": 0.942
+        },
+        {
+          "text": "even",
+          "start": 58.862,
+          "end": 59.102,
+          "acousticScore": 0.9822,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "the",
+          "start": 59.182,
+          "end": 59.242,
+          "acousticScore": 0.1559,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "starry",
+          "start": 59.302,
+          "end": 60.042,
+          "acousticScore": 0.7219,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "ocean",
+          "start": 60.302,
+          "end": 60.702,
+          "acousticScore": 0.5439,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "and",
+          "start": 60.942,
+          "end": 61.102,
+          "acousticScore": 0.3318,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "vast",
+          "start": 61.182,
+          "end": 61.402,
+          "acousticScore": 0.1846,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "sea",
+          "start": 61.522,
+          "end": 61.762,
+          "acousticScore": 0.5075,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "can",
+          "start": 61.902,
+          "end": 62.122,
+          "acousticScore": 0.6401,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "confine",
+          "start": 62.242,
+          "end": 62.962,
+          "acousticScore": 0.3816,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "you",
+          "start": 63.062,
+          "end": 63.362,
+          "acousticScore": 0.7654,
+          "asrStartDelta": 0.062
+        }
+      ]
+    },
+    {
+      "text": "Go feel, go believe, go be yourself",
+      "sourceLine": 10,
+      "start": 64.642,
+      "end": 68.782,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Go",
+          "start": 64.642,
+          "end": 64.922,
+          "acousticScore": 0.9486,
+          "asrStartDelta": 1.182
+        },
+        {
+          "text": "feel,",
+          "start": 65.182,
+          "end": 65.682,
+          "acousticScore": 0.6715,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "go",
+          "start": 65.922,
+          "end": 66.142,
+          "acousticScore": 0.8567,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "believe,",
+          "start": 66.322,
+          "end": 67.082,
+          "acousticScore": 0.3153,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "go",
+          "start": 67.202,
+          "end": 67.342,
+          "acousticScore": 0.846,
+          "asrStartDelta": -0.058
+        },
+        {
+          "text": "be",
+          "start": 67.422,
+          "end": 67.602,
+          "acousticScore": 0.1733,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "yourself",
+          "start": 67.762,
+          "end": 68.782,
+          "acousticScore": 0.9566,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "This is the most beautiful blessing I can give you",
+      "sourceLine": 11,
+      "start": 70.142,
+      "end": 74.782,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "This",
+          "start": 70.142,
+          "end": 70.302,
+          "acousticScore": 0.9921,
+          "asrStartDelta": 0.622
+        },
+        {
+          "text": "is",
+          "start": 70.482,
+          "end": 70.582,
+          "acousticScore": 0.9617,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "the",
+          "start": 70.702,
+          "end": 70.802,
+          "acousticScore": 0.9908,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "most",
+          "start": 70.882,
+          "end": 71.122,
+          "acousticScore": 0.9986,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "beautiful",
+          "start": 71.242,
+          "end": 72.022,
+          "acousticScore": 0.9643,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "blessing",
+          "start": 72.322,
+          "end": 73.242,
+          "acousticScore": 0.9885,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "I",
+          "start": 73.582,
+          "end": 73.602,
+          "acousticScore": 0.9944,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "can",
+          "start": 73.782,
+          "end": 73.922,
+          "acousticScore": 0.9769,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "give",
+          "start": 74.022,
+          "end": 74.442,
+          "acousticScore": 0.9982,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "you",
+          "start": 74.562,
+          "end": 74.782,
+          "acousticScore": 0.9882,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "Perhaps by then, virtual and real will intertwine",
+      "sourceLine": 12,
+      "start": 76.182,
+      "end": 81.662,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Perhaps",
+          "start": 76.182,
+          "end": 76.602,
+          "acousticScore": 0.9346,
+          "asrStartDelta": 0.662
+        },
+        {
+          "text": "by",
+          "start": 76.722,
+          "end": 76.942,
+          "acousticScore": 0.9995,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "then,",
+          "start": 77.102,
+          "end": 77.382,
+          "acousticScore": 0.9911,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "virtual",
+          "start": 78.562,
+          "end": 79.242,
+          "acousticScore": 0.9279,
+          "asrStartDelta": 0.542
+        },
+        {
+          "text": "and",
+          "start": 79.582,
+          "end": 79.682,
+          "acousticScore": 0.937,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "real",
+          "start": 79.842,
+          "end": 80.242,
+          "acousticScore": 0.717,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "will",
+          "start": 80.362,
+          "end": 80.582,
+          "acousticScore": 0.9662,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "intertwine",
+          "start": 80.742,
+          "end": 81.662,
+          "acousticScore": 0.8771,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "Perhaps by then, humans and machines will merge as one",
+      "sourceLine": 13,
+      "start": 82.022,
+      "end": 87.522,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Perhaps",
+          "start": 82.022,
+          "end": 82.442,
+          "acousticScore": 0.9548,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "by",
+          "start": 82.582,
+          "end": 82.802,
+          "acousticScore": 0.997,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "then,",
+          "start": 82.982,
+          "end": 83.222,
+          "acousticScore": 0.9927,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "humans",
+          "start": 84.342,
+          "end": 85.082,
+          "acousticScore": 0.9837,
+          "asrStartDelta": 0.802
+        },
+        {
+          "text": "and",
+          "start": 85.322,
+          "end": 85.402,
+          "acousticScore": 0.9998,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "machines",
+          "start": 85.502,
+          "end": 86.162,
+          "acousticScore": 0.9986,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "will",
+          "start": 86.222,
+          "end": 86.422,
+          "acousticScore": 0.9707,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "merge",
+          "start": 86.462,
+          "end": 86.782,
+          "acousticScore": 0.6799,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "as",
+          "start": 86.982,
+          "end": 87.082,
+          "acousticScore": 0.9405,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "one",
+          "start": 87.342,
+          "end": 87.522,
+          "acousticScore": 0.788,
+          "asrStartDelta": 0.242
+        }
+      ]
+    },
+    {
+      "text": "But my child, please always remember",
+      "sourceLine": 14,
+      "start": 88.082,
+      "end": 92.522,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "But",
+          "start": 88.082,
+          "end": 88.242,
+          "acousticScore": 0.9384,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "my",
+          "start": 88.422,
+          "end": 88.622,
+          "acousticScore": 0.9914,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "child,",
+          "start": 88.802,
+          "end": 89.462,
+          "acousticScore": 0.964,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "please",
+          "start": 89.862,
+          "end": 90.242,
+          "acousticScore": 0.9645,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "always",
+          "start": 90.462,
+          "end": 91.062,
+          "acousticScore": 0.85,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "remember",
+          "start": 91.182,
+          "end": 92.522,
+          "acousticScore": 0.4366,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "The brilliance of humanity is always worth cherishing",
+      "sourceLine": 15,
+      "start": 94.462,
+      "end": 99.822,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "The",
+          "start": 94.462,
+          "end": 94.562,
+          "acousticScore": 0.9691,
+          "asrStartDelta": 0.902
+        },
+        {
+          "text": "brilliance",
+          "start": 94.642,
+          "end": 95.222,
+          "acousticScore": 0.9412,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "of",
+          "start": 95.482,
+          "end": 95.622,
+          "acousticScore": 0.6424,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "humanity",
+          "start": 95.742,
+          "end": 96.842,
+          "acousticScore": 0.7369,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "is",
+          "start": 97.422,
+          "end": 97.582,
+          "acousticScore": 0.9496,
+          "asrStartDelta": 0.722
+        },
+        {
+          "text": "always",
+          "start": 97.782,
+          "end": 98.182,
+          "acousticScore": 0.9504,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "worth",
+          "start": 98.302,
+          "end": 98.742,
+          "acousticScore": 0.7196,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "cherishing",
+          "start": 98.842,
+          "end": 99.822,
+          "acousticScore": 0.3335,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "Go love, go dream, go seek",
+      "sourceLine": 16,
+      "start": 99.922,
+      "end": 103.542,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Go",
+          "start": 99.922,
+          "end": 99.982,
+          "acousticScore": 0.0801,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "love,",
+          "start": 100.082,
+          "end": 100.502,
+          "acousticScore": 0.1534,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "go",
+          "start": 101.262,
+          "end": 101.522,
+          "acousticScore": 0.6918,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "dream,",
+          "start": 101.762,
+          "end": 102.162,
+          "acousticScore": 0.8909,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "go",
+          "start": 102.702,
+          "end": 102.962,
+          "acousticScore": 0.3459,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "seek",
+          "start": 103.222,
+          "end": 103.542,
+          "acousticScore": 0.4337,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "Not even the starry ocean and vast sea can confine you",
+      "sourceLine": 17,
+      "start": 105.242,
+      "end": 110.242,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Not",
+          "start": 105.242,
+          "end": 105.462,
+          "acousticScore": 0.9193,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "even",
+          "start": 105.662,
+          "end": 105.902,
+          "acousticScore": 0.9157,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "the",
+          "start": 105.982,
+          "end": 106.062,
+          "acousticScore": 0.6591,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "starry",
+          "start": 106.142,
+          "end": 106.882,
+          "acousticScore": 0.5494,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "ocean",
+          "start": 107.222,
+          "end": 107.522,
+          "acousticScore": 0.9195,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "and",
+          "start": 107.762,
+          "end": 107.902,
+          "acousticScore": 0.3449,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "vast",
+          "start": 108.002,
+          "end": 108.242,
+          "acousticScore": 0.1997
+        },
+        {
+          "text": "sea",
+          "start": 108.342,
+          "end": 108.562,
+          "acousticScore": 0.6357
+        },
+        {
+          "text": "can",
+          "start": 108.722,
+          "end": 108.942,
+          "acousticScore": 0.5655,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "confine",
+          "start": 108.962,
+          "end": 109.862,
+          "acousticScore": 0.3939,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "you",
+          "start": 110.002,
+          "end": 110.242,
+          "acousticScore": 0.7658,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "Go feel, go believe, go be yourself",
+      "sourceLine": 18,
+      "start": 111.482,
+      "end": 115.922,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Go",
+          "start": 111.482,
+          "end": 111.742,
+          "acousticScore": 0.2567,
+          "asrStartDelta": 1.222
+        },
+        {
+          "text": "feel,",
+          "start": 112.022,
+          "end": 112.502,
+          "acousticScore": 0.4837,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "go",
+          "start": 112.762,
+          "end": 112.962,
+          "acousticScore": 0.978,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "believe,",
+          "start": 113.142,
+          "end": 113.922,
+          "acousticScore": 0.1549,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "go",
+          "start": 114.042,
+          "end": 114.162,
+          "acousticScore": 0.3166,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "be",
+          "start": 114.262,
+          "end": 114.462,
+          "acousticScore": 0.1538,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "yourself",
+          "start": 114.642,
+          "end": 115.922,
+          "acousticScore": 0.3589,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "This is the most beautiful blessing I can give",
+      "sourceLine": 19,
+      "start": 116.942,
+      "end": 121.322,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "This",
+          "start": 116.942,
+          "end": 117.142,
+          "acousticScore": 0.2314,
+          "asrStartDelta": 0.862
+        },
+        {
+          "text": "is",
+          "start": 117.302,
+          "end": 117.422,
+          "acousticScore": 0.7741,
+          "asrStartDelta": 0.662
+        },
+        {
+          "text": "the",
+          "start": 117.542,
+          "end": 117.642,
+          "acousticScore": 0.8478,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "most",
+          "start": 117.742,
+          "end": 117.942,
+          "acousticScore": 0.9976,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "beautiful",
+          "start": 118.062,
+          "end": 118.822,
+          "acousticScore": 0.8834,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "blessing",
+          "start": 119.162,
+          "end": 120.082,
+          "acousticScore": 0.2091,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "I",
+          "start": 120.482,
+          "end": 120.502,
+          "acousticScore": 0.9928,
+          "asrStartDelta": 0.562
+        },
+        {
+          "text": "can",
+          "start": 120.622,
+          "end": 120.762,
+          "acousticScore": 0.9953,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "give",
+          "start": 120.842,
+          "end": 121.322,
+          "acousticScore": 0.8178,
+          "asrStartDelta": 0.042
+        }
+      ]
+    },
+    {
+      "text": "Don't be afraid of the unknown challenges",
+      "sourceLine": 20,
+      "start": 123.182,
+      "end": 126.642,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Don't",
+          "start": 123.182,
+          "end": 123.382,
+          "acousticScore": 0.8792,
+          "asrStartDelta": 0.922
+        },
+        {
+          "text": "be",
+          "start": 123.422,
+          "end": 123.522,
+          "acousticScore": 0.477,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "afraid",
+          "start": 123.582,
+          "end": 124.222,
+          "acousticScore": 0.6947,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "of",
+          "start": 124.682,
+          "end": 124.762,
+          "acousticScore": 0.0417,
+          "asrStartDelta": 0.562
+        },
+        {
+          "text": "the",
+          "start": 124.802,
+          "end": 124.962,
+          "acousticScore": 0.0184,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "unknown",
+          "start": 125.182,
+          "end": 125.782,
+          "acousticScore": 0.4741,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "challenges",
+          "start": 125.902,
+          "end": 126.642,
+          "acousticScore": 0.6565,
+          "asrStartDelta": 0.502
+        }
+      ]
+    },
+    {
+      "text": "Cause your heart is braver than any machine",
+      "sourceLine": 21,
+      "start": 129.002,
+      "end": 134.502,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Cause",
+          "start": 129.002,
+          "end": 129.202,
+          "acousticScore": 0.9301,
+          "asrStartDelta": 0.922
+        },
+        {
+          "text": "your",
+          "start": 129.282,
+          "end": 129.522,
+          "acousticScore": 0.8472,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "heart",
+          "start": 129.662,
+          "end": 130.082,
+          "acousticScore": 0.6666,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "is",
+          "start": 130.202,
+          "end": 130.262,
+          "acousticScore": 0.9497,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "braver",
+          "start": 130.342,
+          "end": 130.882,
+          "acousticScore": 0.9673,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "than",
+          "start": 131.062,
+          "end": 131.182,
+          "acousticScore": 0.5844,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "any",
+          "start": 131.522,
+          "end": 131.822,
+          "acousticScore": 0.7369,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "machine",
+          "start": 132.022,
+          "end": 134.502,
+          "acousticScore": 0.7736,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "Use your kindness to illuminate the darkness ahead",
+      "sourceLine": 22,
+      "start": 135.002,
+      "end": 140.102,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Use",
+          "start": 135.002,
+          "end": 135.222,
+          "acousticScore": 0.6456,
+          "asrStartDelta": 0.862
+        },
+        {
+          "text": "your",
+          "start": 135.282,
+          "end": 135.422,
+          "acousticScore": 0.4986,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "kindness",
+          "start": 135.462,
+          "end": 136.222,
+          "acousticScore": 0.4907,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "to",
+          "start": 136.342,
+          "end": 136.542,
+          "acousticScore": 0.1657,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "illuminate",
+          "start": 136.822,
+          "end": 138.082,
+          "acousticScore": 0.3136,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "the",
+          "start": 138.182,
+          "end": 138.282,
+          "acousticScore": 0.9713,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "darkness",
+          "start": 138.382,
+          "end": 139.202,
+          "acousticScore": 0.8977,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "ahead",
+          "start": 139.562,
+          "end": 140.102,
+          "acousticScore": 0.5881,
+          "asrStartDelta": 0.582
+        }
+      ]
+    },
+    {
+      "text": "Use your wisdom to create your own unique brilliance",
+      "sourceLine": 23,
+      "start": 140.862,
+      "end": 146.382,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Use",
+          "start": 140.862,
+          "end": 141.062,
+          "acousticScore": 0.6281,
+          "asrStartDelta": 1.102
+        },
+        {
+          "text": "your",
+          "start": 141.122,
+          "end": 141.262,
+          "acousticScore": 0.4998,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "wisdom",
+          "start": 141.342,
+          "end": 142.002,
+          "acousticScore": 0.7138,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "to",
+          "start": 142.202,
+          "end": 142.362,
+          "acousticScore": 0.4246,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "create",
+          "start": 142.562,
+          "end": 143.222,
+          "acousticScore": 0.9232,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "your",
+          "start": 143.302,
+          "end": 143.502,
+          "acousticScore": 0.8061,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "own",
+          "start": 143.642,
+          "end": 143.762,
+          "acousticScore": 0.5111,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "unique",
+          "start": 144.002,
+          "end": 144.602,
+          "acousticScore": 0.2641,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "brilliance",
+          "start": 144.782,
+          "end": 146.382,
+          "acousticScore": 0.3066,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "Go love, go dream, go seek",
+      "sourceLine": 24,
+      "start": 146.602,
+      "end": 150.462,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Go",
+          "start": 146.602,
+          "end": 146.922,
+          "acousticScore": 0.2581,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "love,",
+          "start": 147.102,
+          "end": 147.422,
+          "acousticScore": 0.253,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "go",
+          "start": 148.082,
+          "end": 148.362,
+          "acousticScore": 0.5258,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "dream,",
+          "start": 148.562,
+          "end": 149.022,
+          "acousticScore": 0.2126,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "go",
+          "start": 149.522,
+          "end": 149.762,
+          "acousticScore": 0.7267,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "seek",
+          "start": 150.062,
+          "end": 150.462,
+          "acousticScore": 0.2848
+        }
+      ]
+    },
+    {
+      "text": "And not even the starry ocean and vast sea can confine you",
+      "sourceLine": 25,
+      "start": 150.982,
+      "end": 157.202,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "And",
+          "start": 150.982,
+          "end": 151.262,
+          "acousticScore": 0.1261,
+          "asrStartDelta": -0.158
+        },
+        {
+          "text": "not",
+          "start": 151.382,
+          "end": 152.202,
+          "acousticScore": 0.0084,
+          "asrStartDelta": -0.778
+        },
+        {
+          "text": "even",
+          "start": 152.442,
+          "end": 152.762,
+          "acousticScore": 0.2469,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "the",
+          "start": 152.822,
+          "end": 152.882,
+          "acousticScore": 0.1024
+        },
+        {
+          "text": "starry",
+          "start": 152.982,
+          "end": 153.682,
+          "acousticScore": 0.3254,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "ocean",
+          "start": 153.862,
+          "end": 154.382,
+          "acousticScore": 0.5046,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "and",
+          "start": 154.602,
+          "end": 154.742,
+          "acousticScore": 0.402,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "vast",
+          "start": 154.842,
+          "end": 155.042,
+          "acousticScore": 0.4,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "sea",
+          "start": 155.182,
+          "end": 155.402,
+          "acousticScore": 0.5526,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "can",
+          "start": 155.582,
+          "end": 155.782,
+          "acousticScore": 0.5298,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "confine",
+          "start": 155.922,
+          "end": 156.622,
+          "acousticScore": 0.1567,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "you",
+          "start": 156.742,
+          "end": 157.202,
+          "acousticScore": 0.1669,
+          "asrStartDelta": 0.062
+        }
+      ]
+    },
+    {
+      "text": "Go feel, go believe, go be yourself",
+      "sourceLine": 26,
+      "start": 157.442,
+      "end": 163.802,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Go",
+          "start": 157.442,
+          "end": 158.622,
+          "acousticScore": 0.2001
+        },
+        {
+          "text": "feel,",
+          "start": 158.862,
+          "end": 159.402,
+          "acousticScore": 0.0574,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "go",
+          "start": 159.582,
+          "end": 159.762,
+          "acousticScore": 0.3187
+        },
+        {
+          "text": "believe,",
+          "start": 159.982,
+          "end": 160.762,
+          "acousticScore": 0.0418,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "go",
+          "start": 160.882,
+          "end": 161.022,
+          "acousticScore": 0.0855,
+          "asrStartDelta": -0.038
+        },
+        {
+          "text": "be",
+          "start": 161.162,
+          "end": 161.222,
+          "acousticScore": 0.0261,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "yourself",
+          "start": 161.422,
+          "end": 163.802,
+          "acousticScore": 0.6445,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "This is the most beautiful blessing I can give you",
+      "sourceLine": 27,
+      "start": 165.202,
+      "end": 170.002,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "This",
+          "start": 165.202,
+          "end": 165.422,
+          "acousticScore": 0.925,
+          "asrStartDelta": 0.762
+        },
+        {
+          "text": "is",
+          "start": 165.642,
+          "end": 165.702,
+          "acousticScore": 0.9984,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "the",
+          "start": 165.842,
+          "end": 165.922,
+          "acousticScore": 0.985,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "most",
+          "start": 166.022,
+          "end": 166.262,
+          "acousticScore": 0.9918,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "beautiful",
+          "start": 166.362,
+          "end": 167.142,
+          "acousticScore": 0.9576,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "blessing",
+          "start": 167.422,
+          "end": 168.382,
+          "acousticScore": 0.7943,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "I",
+          "start": 168.702,
+          "end": 168.722,
+          "acousticScore": 0.9695,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "can",
+          "start": 168.902,
+          "end": 169.022,
+          "acousticScore": 0.9959,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "give",
+          "start": 169.142,
+          "end": 169.542,
+          "acousticScore": 0.4078,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "you",
+          "start": 169.662,
+          "end": 170.002,
+          "acousticScore": 0.5757,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "My child, may you always be happy",
+      "sourceLine": 28,
+      "start": 171.522,
+      "end": 175.642,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "My",
+          "start": 171.522,
+          "end": 171.822,
+          "acousticScore": 0.9344,
+          "asrStartDelta": 1.222
+        },
+        {
+          "text": "child,",
+          "start": 172.162,
+          "end": 172.662,
+          "acousticScore": 0.9699,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "may",
+          "start": 173.262,
+          "end": 173.402,
+          "acousticScore": 0.9977,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "you",
+          "start": 173.502,
+          "end": 173.622,
+          "acousticScore": 0.9776,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "always",
+          "start": 173.902,
+          "end": 174.302,
+          "acousticScore": 0.9345,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "be",
+          "start": 174.442,
+          "end": 174.582,
+          "acousticScore": 0.9997,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "happy",
+          "start": 174.802,
+          "end": 175.642,
+          "acousticScore": 0.3508,
+          "asrStartDelta": 0.202
+        }
+      ]
+    },
+    {
+      "text": "In the starry ocean and the sea",
+      "sourceLine": 29,
+      "start": 177.462,
+      "end": 185.602,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "In",
+          "start": 177.462,
+          "end": 177.522,
+          "acousticScore": 0.9522,
+          "asrStartDelta": 0.862
+        },
+        {
+          "text": "the",
+          "start": 177.702,
+          "end": 177.782,
+          "acousticScore": 0.9944,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "starry",
+          "start": 177.862,
+          "end": 178.582,
+          "acousticScore": 0.8356,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "ocean",
+          "start": 178.842,
+          "end": 179.222,
+          "acousticScore": 0.9606,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "and",
+          "start": 179.502,
+          "end": 179.602,
+          "acousticScore": 0.5477,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "the",
+          "start": 181.502,
+          "end": 181.742,
+          "acousticScore": 0.4553,
+          "asrStartDelta": 1.782
+        },
+        {
+          "text": "sea",
+          "start": 183.902,
+          "end": 185.602,
+          "acousticScore": 0.3332,
+          "asrStartDelta": 4.002
+        }
+      ]
+    }
+  ]
+}
