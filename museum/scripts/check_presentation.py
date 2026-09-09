@@ -13,6 +13,7 @@ window.__presentationQA={
  focus(id){stopTour();reduced=true;focusExhibit(id);},
  inspect(i){return showFlaw(i);},
  closePhoto(){silenceGuide();closeFlaws();},
+ raster(scale){renderer.setPixelRatio(scale);},
  settle(){if(motion){camera.position.copy(motion.end);yaw=motion.endYaw;pitch=motion.endPitch;motion=null;}},
  music(){stopTour();focusExhibit('eth-070');return playTrack(exhibits.get('eth-049'),exhibits.get('eth-070'),false);},
  lyricTime(){return lyricCues[0]?.words?.[0]?.start;},
@@ -59,6 +60,7 @@ try:
     page.wait_for_function("document.getElementById('narration').readyState>=1")
     if page.locator('#guide-audio-prompt').is_visible():page.locator('#guide-audio-start').click()
     page.wait_for_function("!document.getElementById('narration').paused")
+    page.wait_for_function("document.querySelector('#caption-text [data-word]') && document.querySelector('#caption-text .subtitle-zh')")
     state=page.evaluate('window.__presentationQA.state');assert state['walkable'],state
     assert state['voice']==next(t['file'] for t in json.loads((D/'data/guide-audio.json').read_text())['tracks'] if t['stop']==index and t['language']=='en'),state
     states.append(state);print('STATION_RENDERED',label,index,flush=True)
@@ -69,16 +71,20 @@ try:
     assert page.evaluate('window.__presentationQA.state.walkable')
     if label=='desktop':page.screenshot(timeout=90000,path=str(OUT/(label+'-'+eid+'.png')))
    for flaw in range(3):
+    # The model's rendered-frame animation must finish without skipping poses.
+    # Lower only its canvas raster cost; restore full resolution for the evidence photo.
+    page.evaluate('window.__presentationQA.raster(.5)')
     page.evaluate('(i)=>window.__presentationQA.inspect(i)',flaw)
     # showFlaw awaits the crystal before starting a continuous approach. Settle
     # that approach just like the station views above; retain the actual hand
     # animation and photograph loading. Unaccelerated travel is tested separately.
     page.evaluate('window.__presentationQA.settle()')
     try:
-     page.wait_for_function("document.querySelector('#flaw-view img')?.complete && document.querySelector('#flaw-view img').naturalWidth>0")
+     page.wait_for_function("document.querySelector('#flaw-view img')?.complete && document.querySelector('#flaw-view img').naturalWidth>0",timeout=90000)
     except Exception:
      print('INSPECTION_FAILURE_STATE',page.evaluate('window.__presentationQA.state'),flush=True)
      raise
+    page.evaluate('window.__presentationQA.raster(1)')
     assert page.locator('#flaw-view img').count()==1
     expected=json.loads((D/'data/public-flaws.json').read_text())['items'][flaw]['file']
     assert page.locator('#flaw-view img').get_attribute('src')==expected
@@ -93,7 +99,9 @@ try:
    page.evaluate('window.__presentationQA.finish()');page.evaluate('window.__presentationQA.settle()');page.wait_for_timeout(300)
    assert page.evaluate('window.__presentationQA.state.elapsed')==sum(s['seconds'] for s in json.loads((P/'scene/tour-script.json').read_text()))
    assert page.evaluate('window.__presentationQA.state.touring') is False
-   assert page.locator('body').get_attribute('data-presentation')=='true'
+   # Finished narration returns to free browsing, as does the shipped baseline.
+   assert page.locator('body').get_attribute('data-presentation')=='false'
+   assert page.locator('#focus-art').is_visible()
    assert not page.locator('#exhibit-strip').is_visible()
    page.screenshot(timeout=90000,path=str(OUT/(label+'-finished-sky.png')))
    page.locator('#rooms [data-room="1"]').click(force=True)

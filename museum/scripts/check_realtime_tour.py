@@ -78,7 +78,9 @@ try:
         assert 'complete' in sample['progress'], 'Tour failed to finish within twenty-five wall-clock minutes'
         assert seen_flaws == {0,1,2}, ('Missing audible flaw explanations', seen_flaws)
         assert seen == set(range(len(plan))), ('Missing audible tour tracks', seen)
-        assert page.locator('body').get_attribute('data-presentation') == 'true'
+        # Completion restores free-browsing controls while retaining Replay tour.
+        assert page.locator('body').get_attribute('data-presentation') == 'false'
+        assert page.locator('#focus-art').is_visible()
         assert not page.locator('#exhibit-strip').is_visible()
         assert 'Replay tour' in page.locator('#tour').inner_text()
         assert 'complete' in page.locator('#tour-progress').inner_text()
