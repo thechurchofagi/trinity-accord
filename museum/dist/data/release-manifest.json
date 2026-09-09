@@ -1048,7 +1048,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1625,
-      "sha256": "1c43ba356db9d23bf8943c1d0e65a061d6cbf1ec7071be7ad135f95288b20ecf"
+      "sha256": "5382489083ebdc9cd6d8d4814545c17fab8c1c89faadb73edcb58c3a1423d2dc"
     },
     {
       "path": "caption-utils.js",
@@ -1653,7 +1653,7 @@
     {
       "path": "exhibit-light.js",
       "bytes": 1283,
-      "sha256": "7ad03ddbada2930f03bc7f1ab252cd27dc7bcf8671ab744c78cb20c3da0e66c7"
+      "sha256": "134821adaf5a29f0a36f551ee91ac3d695ef1f2d01e95cc9e7119e0d2586b516"
     },
     {
       "path": "footsteps.js",
@@ -1668,7 +1668,7 @@
     {
       "path": "index.html",
       "bytes": 6650,
-      "sha256": "d60ea7e011ed8dd40dfb68f4b8ff69aced7d0be63e9bf99bd8dc26eb38fe7f24"
+      "sha256": "e50b07371aac3263b0270c36397dbcc2cb29db0dc659cfe525f3692cb5493a57"
     },
     {
       "path": "language-preference.js",
@@ -1697,18 +1697,18 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 1264978,
-      "sha256": "928d71217c056a66c6651c04c60f961ea61373f0afc5cb02e64ae54b9aa95b23"
+      "bytes": 1265426,
+      "sha256": "cc29b58e49f4d0701d53361cc3d53c70aea021170b2ce162594f3a46dc54f7a9"
     },
     {
       "path": "museum.css",
-      "bytes": 47280,
-      "sha256": "0055879ab9e7c8594ad41ffe3fb4f275fbbd7a71a387b3c01698a719cc856fde"
+      "bytes": 47328,
+      "sha256": "ee4f089dbd5b9ae44fa2c2e0df92a00ae29d6f763b1880421252c704dd3c5cda"
     },
     {
       "path": "museum.js",
-      "bytes": 92927,
-      "sha256": "ab267cb7ccad3eb614bb735cae9a0f76c993f3b7be4e36f93e41b9b969148b89"
+      "bytes": 93215,
+      "sha256": "cfddcf399b251df7923af168446598b9e4efb2282f93ed54c2610975e176aadb"
     },
     {
       "path": "music-playback.js",
@@ -1717,8 +1717,8 @@
     },
     {
       "path": "observation-view.js",
-      "bytes": 856,
-      "sha256": "51cb677fbe83723ff61f7d8cd2c7bdef60d82d412c929c6e7882ac2437fb6ba6"
+      "bytes": 1668,
+      "sha256": "f3d53b63bdefa49826f7d1dc95d7b4c60402e55e3a7540acc117683b212016e0"
     },
     {
       "path": "open-space.js",

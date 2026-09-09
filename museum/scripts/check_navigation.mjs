@@ -74,3 +74,22 @@ assert.equal(heldWalkSpeed(1.25,0,1),1.25);assert.ok(heldWalkSpeed(1.25,6,1)>3.6
 const oldFit=observationView(1.78,2.54,66,1440/900,false,{height:900,top:300,bottom:600});
 const focusedFit=observationView(1.78,2.54,66,1440/900,false,{height:900,top:123,bottom:600});
 assert.ok(oldFit.distance/focusedFit.distance>1.25);
+
+// Check the actual standing eye height and perspective, including wide/portrait work.
+const {focusedArtworkView}=await import('../dist/observation-view.js');
+for(const [screenW,screenH] of [[1366,768],[1440,900],[1920,1080]]){
+ const viewport={height:screenH,top:71,bottom:screenH-270},fit=galleryCamera(screenW,screenH,viewport.top,viewport.bottom);
+ for(const [w,h] of [[1.7,1.7],[1.7,2.3],[1.7,.95]]){
+  const extra=.72+.085+.036,centre=2.7-h/2+extra/2,total=h+extra;
+  const d=focusedArtworkView(w+.05,total,centre,1.65,fit.fov,screenW/screenH,viewport).distance;
+  const camera=new T.PerspectiveCamera(fit.fov,screenW/screenH,.06,220);
+  camera.setViewOffset(screenW,screenH,0,fit.offsetY,screenW,screenH);camera.position.set(0,1.65,d);camera.lookAt(0,centre,0);camera.updateMatrixWorld();
+  for(const y of [centre-total/2,centre+total/2])for(const x of [-(w+.05)/2,(w+.05)/2]){
+   const p=new T.Vector3(x,y,0).project(camera),py=(1-p.y)*screenH/2;
+   assert.ok(py>=viewport.top+5&&py<=viewport.bottom-5,'Close-up preserves complete artwork and plaque');assert.ok(Math.abs(p.x)<=.941);
+  }
+  const old=observationView(w+.08,total,fit.fov,screenW/screenH,false,{...viewport,top:128});
+  assert.ok(d<old.distance,'Close-up really walks closer');
+ }
+}
+console.log('PASS: closer standing viewpoints retain artwork/plaque corners on three desktop sizes.');
