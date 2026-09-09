@@ -1,0 +1,31 @@
+name: Assemble verified museum media
+on:
+  push:
+    branches: [museum/media-assembly-v137]
+    paths: ['museum-media-upload/**']
+permissions:
+  contents: write
+jobs:
+  assemble:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Assemble exact reviewed audio bytes
+        run: |
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          import hashlib
+          b=b''.join(p.read_bytes() for p in sorted(Path('museum-media-upload').glob('part-*.bin')))
+          assert len(b)==45893787
+          assert hashlib.sha256(b).hexdigest()=='05ecebf464a019a370e754fbfd14c4cf5639e83338e94351b2e71061f9555ad6'
+          Path('museum/dist/assets/eth-089.mp3').write_bytes(b)
+          PYTHON
+      - name: Record the verified asset on this assembly branch
+        run: |
+          test "$GITHUB_REF" = "refs/heads/museum/media-assembly-v137"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add museum/dist/assets/eth-089.mp3
+          git commit -m 'Assemble hash-verified R1 recording for museum candidate'
+          git push origin HEAD:refs/heads/museum/media-assembly-v137
