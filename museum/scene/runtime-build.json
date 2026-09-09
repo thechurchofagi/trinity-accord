@@ -114,6 +114,11 @@
       "sha256": "9bce5370c3a9933b673a31513de948bb72f7861bc5697ba7e3c6f4f90e6e4acc"
     },
     {
+      "path": "dist/media-cache-worker.js",
+      "bytes": 12227,
+      "sha256": "2e9d01f0b2d901d8f044cd4f19f52613dd5246dfa471f1cb1b9c583ca93d3674"
+    },
+    {
       "path": "dist/microscope-motion.js",
       "bytes": 5828,
       "sha256": "8ffde68fe50ad04ce36f67ca275e0630cd67df3907df864023c17b7c944668ed"
@@ -125,8 +130,8 @@
     },
     {
       "path": "dist/museum.js",
-      "bytes": 91736,
-      "sha256": "e051c85400289c29ad8cb79fa5e9cffa541c71532e650770a1a0f1850bd81ad1"
+      "bytes": 92927,
+      "sha256": "ab267cb7ccad3eb614bb735cae9a0f76c993f3b7be4e36f93e41b9b969148b89"
     },
     {
       "path": "dist/music-playback.js",
@@ -194,6 +199,11 @@
       "sha256": "d891ae5341422404b08aeefe8baae189417130c42bf45ec28c2aa09a4ad7d16c"
     },
     {
+      "path": "dist/tour-preload.js",
+      "bytes": 869,
+      "sha256": "733bb6d384668b4bdcc7780a220de0b7e918c1a757563a1220c1288c4a1c23cb"
+    },
+    {
       "path": "dist/vendor/BufferGeometryUtils.js",
       "bytes": 35551,
       "sha256": "248b3e8420bd3de805ca01845c1b0cc62aa2766f3c56bdcead265e306f8e715c"
@@ -240,13 +250,13 @@
     },
     {
       "path": "scripts/build_runtime.mjs",
-      "bytes": 2833,
-      "sha256": "a59a14d03a64af1b5b24a49e0fe5ef657b429bed8a9aac805aca550116d3e2f0"
+      "bytes": 4110,
+      "sha256": "fc3192acf79eaaa05a5d475a0977b63c1403c5127d5076a1f628b5eb1ea5f687"
     }
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 1263765,
-    "sha256": "de2a37856fe198aca3615d1288c33f3040c3f0867efdedd29a0f4e95f56a2259"
+    "bytes": 1264978,
+    "sha256": "928d71217c056a66c6651c04c60f961ea61373f0afc5cb02e64ae54b9aa95b23"
   }
 }

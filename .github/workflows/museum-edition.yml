@@ -26,6 +26,7 @@ jobs:
         run: |
           python3 museum/scripts/validate.py
           node --check museum/dist/museum.js
+          node museum/scripts/check_media_cache.mjs
           node museum/scripts/check_navigation.mjs
           node museum/scripts/check_guided_visit.mjs
           node museum/scripts/check_tour_clock.mjs

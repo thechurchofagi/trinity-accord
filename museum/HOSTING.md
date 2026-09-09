@@ -71,3 +71,25 @@ layout. Changing the public mapping does not change automatic publication.
 Back up the existing public virtual-host configuration, apply the root mapping,
 run `nginx -t`, reload, and verify HTTPS HTML, JS, media, old paths and receipts.
 Do not replace TLS or unrelated virtual-host configuration.
+
+## Repeat visits and tour buffering
+
+The HTTPS boot loader registers `media-cache-worker.js` before starting the viewer,
+with a 1.2-second maximum wait and normal network fallback. Only frozen local
+assets and lyric files are cached. HTML, scripts, manifests and external/current
+status are excluded. `build_runtime.mjs` hashes the media inventory into the cache
+revision; activation removes only this museum scope's older cache revisions.
+Successful full responses are retained up to 192 MiB / 320 entries, with a 24 MiB
+per-file ceiling. Cached audio supports byte ranges for seeking. A cold audio
+request streams a full network response while its copy is stored. Cache writes
+and denied storage never block the response. Browser eviction, private browsing
+and different devices/hosts can still require downloads; this is not a full
+offline website guarantee.
+
+The tour queues the next two stops' English narration, music and lyric files,
+plus inspection audio/images before the crystal stop. One low-priority transfer
+runs at a time, with deduplication, timeouts and retry on later requests. Data
+Saver and 2G connections skip speculative downloads. Already queued artwork
+textures prioritize the current/next two stops and are decoded before display.
+Run `node museum/scripts/check_media_cache.mjs` to check cache/range/fallback and
+prefetch behavior without a network or browser.
