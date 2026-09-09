@@ -12,8 +12,8 @@ for e in source['items']:
 translation_file=D/'data/lyrics-zh.json';translation=json.loads(translation_file.read_text())
 for item in items:
  for line in json.loads((D/item['timelineFile']).read_text())['lines']:
-  if not translation['lines'].get(line['text']):raise ValueError('Missing Chinese translation: '+line['text'])
-index={'schemaVersion':'lyrics-index-v1','edition':source['edition'],'items':items,'translation':{'file':'data/lyrics-zh.json','sha256':hashlib.sha256(translation_file.read_bytes()).hexdigest(),'language':'zh-Hans'}}
+  if not translation['lines'].get(line['text']):raise ValueError('Missing preceding Chinese translation: '+line['text'])
+index={'schemaVersion':'lyrics-index-v1','edition':source['edition'],'items':items,'deferred':source.get('deferred',[]),'languageEditions':{'en':source['edition'],'zh':translation.get('edition','preceding complete translations')},'translation':{'file':'data/lyrics-zh.json','sha256':hashlib.sha256(translation_file.read_bytes()).hexdigest(),'language':'zh-Hans'}}
 (D/'data/lyrics-index.json').write_text(json.dumps(index,ensure_ascii=False,indent=2)+'\n')
 report={'schemaVersion':'lyrics-audit-v1','edition':source['edition'],'status':'automatic-audio-alignment','manualListeningReviewed':False,'limitations':['Speech models can misplace sung consonants and sustained vowels.','Acoustic scores and recognizer disagreement are review signals, not calibrated accuracy.','A 20 ms model frame does not imply 20 ms alignment accuracy.'],'items':audit}
 (D/'data/lyrics-audit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')

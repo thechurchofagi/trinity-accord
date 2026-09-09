@@ -3,7 +3,7 @@ import json,os,pathlib,shutil,subprocess,time
 from playwright.sync_api import sync_playwright
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 guides=json.loads((ROOT/'dist/data/guide-audio.json').read_text())
-intro={lang:next(t['file'] for t in guides['tracks'] if t['stop']==0 and t['language']==lang) for lang in ['en','zh']}
+intro={lang:next(t['file'] for t in guides['tracks'] if t['stop']==0 and t['language']=='en') for lang in ['en','zh']}
 OUT=pathlib.Path(os.environ.get('MUSEUM_QA_OUTPUT','/tmp/museum-browser-qa'));OUT.mkdir(parents=True,exist_ok=True)
 server=subprocess.Popen(['python','-m','http.server','8765','--bind','127.0.0.1','--directory',str(ROOT/'dist')],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 report=[]

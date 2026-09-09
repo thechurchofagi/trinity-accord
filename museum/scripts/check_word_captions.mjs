@@ -8,7 +8,7 @@ const index=read('data/lyrics-index.json'),sources=read('data/sources.json');
 const zhRaw=fs.readFileSync(new URL(index.translation.file,dist)),zh=JSON.parse(zhRaw);
 assert.equal(sha(zhRaw),index.translation.sha256);
 const audioTracks=sources.items.filter(e=>e.media?.some(m=>m.kind==='audio'));
-assert.equal(index.items.length,audioTracks.length);assert.equal(new Set(index.items.map(e=>e.exhibitId)).size,index.items.length);
+const deferred=index.deferred||[];assert.deepEqual(deferred.map(e=>e.exhibitId).sort(),['eth-089','eth-097']);assert.ok(deferred.every(e=>e.reason));assert.equal(index.items.length+deferred.length,audioTracks.length);assert.equal(new Set(index.items.map(e=>e.exhibitId)).size,index.items.length);
 let count=0;
 for(const entry of index.items){
  const raw=fs.readFileSync(new URL(entry.timelineFile,dist)),timeline=JSON.parse(raw),audio=audioTracks.find(e=>e.id===entry.exhibitId)?.media.find(m=>m.kind==='audio');
@@ -16,7 +16,7 @@ for(const entry of index.items){
  assert(validTimeline(timeline,entry),entry.exhibitId+' invalid/overlapping word times');
  assert.equal(lineAt(timeline.lines,entry.duration),-1);
  for(const [i,line] of timeline.lines.entries()){
-  assert.equal(typeof zh.lines[line.text],'string');assert(/[\u3400-\u9fff]/u.test(zh.lines[line.text]),entry.exhibitId+' missing Chinese line');
+  {assert.equal(typeof zh.lines[line.text],'string');assert(/[\u3400-\u9fff]/u.test(zh.lines[line.text]),entry.exhibitId+' missing preceding Chinese line');}
   assert.equal(line.text,line.words.map(w=>w.text).join(' '));assert.equal(lineAt(timeline.lines,line.start),i);
   for(const [j,w] of line.words.entries()){
    assert.equal(wordAt(line.words,w.start),j);assert.equal(wordAt(line.words,(w.start+w.end)/2),j);assert.notEqual(wordAt(line.words,w.end),j);

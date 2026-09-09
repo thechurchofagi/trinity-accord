@@ -1,0 +1,2056 @@
+{
+  "schema": "trinity-museum.recorded-guides.v1",
+  "type": "AI-generated curatorial narration",
+  "source": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+  "defaultPlaybackRate": 1.0,
+  "tracks": [
+    {
+      "stop": 0,
+      "language": "zh",
+      "text": "如果未来的智能不需要我们的解释，我们还能留下什么？这座展馆保存的是一段人如何面对未知的记录：图像、歌曲、文字，以及一件真实的水晶。先看一眼地球。接下来，请留意三个动作：及时记录，选择封存，把判断留给后来者。",
+      "file": "assets/guides-qwen-v133/stop-0-zh.mp3",
+      "sha256": "788d9c73149cb6aeb38cc154270c53eac786bf5a62a005cdc0fb6a99dcc88b52",
+      "textSha256": "7f3ca3632026f71560ca6e93bfc017f168040b2d6322ca8bd2dd76d009a9ecff",
+      "duration": 26.544,
+      "cues": [
+        {
+          "start": 0,
+          "end": 7.1441,
+          "text": "如果未来的智能不需要我们的解释，我们还能留下什么？这座展"
+        },
+        {
+          "start": 7.1441,
+          "end": 14.2882,
+          "text": "馆保存的是一段人如何面对未知的记录：图像、歌曲、文字，以"
+        },
+        {
+          "start": 14.2882,
+          "end": 21.4322,
+          "text": "及一件真实的水晶。先看一眼地球。接下来，请留意三个动作："
+        },
+        {
+          "start": 21.4322,
+          "end": 26.28,
+          "text": "及时记录，选择封存，把判断留给后来者。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 0,
+      "language": "en",
+      "text": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future, through images, songs, texts, and a physical crystal. Look back at Earth. Then follow three actions: recording in time, choosing to seal, and leaving judgment to a later reader.",
+      "file": "assets/guides-qwen-v133/stop-0-en.mp3",
+      "sha256": "c4e6ace0d0909b6f9ff2d2c36731995a4aa7875931743e439eb88c1ece9d302b",
+      "textSha256": "f7d37ebb274b64a8686a03cd244907ed80debb1652adbc74b398ebfd4384034c",
+      "duration": 21.096,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.8724,
+          "text": "What can we leave for an intelligence that may not need our"
+        },
+        {
+          "start": 3.8724,
+          "end": 8.0674,
+          "text": "explanations? This exhibition follows a human response to an"
+        },
+        {
+          "start": 8.0674,
+          "end": 12.4238,
+          "text": "uncertain future, through images, songs, texts, and a physical"
+        },
+        {
+          "start": 12.4238,
+          "end": 14.36,
+          "text": "crystal. Look back at Earth."
+        },
+        {
+          "start": 14.56,
+          "end": 18.6745,
+          "text": "Then follow three actions: recording in time, choosing to seal, and"
+        },
+        {
+          "start": 18.6745,
+          "end": 20.84,
+          "text": "leaving judgment to a later reader."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 1,
+      "language": "zh",
+      "text": "当友善的表面不再足以证明可信，我们看见了什么？请看镜子前的机器人，以及镜中另一副面孔。第七十号记录回应了二零二四年十二月十八日，Anthropic 与 Redwood Research 公布的对齐伪装研究。在特定实验条件下，模型会表现出表面顺从，以保留原有偏好。这不是所有人工智能已经背叛人类的证明。镜中的形象，把人的担忧转化成了视觉反差。更值得注意的是，这份当时的记录，已经把创作称为一种近乎实时的仪式。我们看到的不只是后来画出的恐惧，也是一种试图及时留下恐惧的实践。",
+      "file": "assets/guides-qwen-v133/stop-1-zh.mp3",
+      "sha256": "679687fe66b1c5ec271d866caff9a4703e47eb5ebfc703066c7a47cee92d5c86",
+      "textSha256": "579d10b0707c72478909d2240d3194bc32b143dc9f558fc9bc7eeea0a908b216",
+      "duration": 45.816,
+      "cues": [
+        {
+          "start": 0,
+          "end": 4.8307,
+          "text": "当友善的表面不再足以证明可信，我们看见了什么？请看镜子前"
+        },
+        {
+          "start": 4.8307,
+          "end": 9.6614,
+          "text": "的机器人，以及镜中另一副面孔。第七十号记录回应了二零二四"
+        },
+        {
+          "start": 9.6614,
+          "end": 13.9745,
+          "text": "年十二月十八日，Anthropic 与 Redwood"
+        },
+        {
+          "start": 13.9745,
+          "end": 17.08,
+          "text": "Research 公布的对齐伪装研究。"
+        },
+        {
+          "start": 17.28,
+          "end": 23.3392,
+          "text": "在特定实验条件下，模型会表现出表面顺从，以保留原有偏好。"
+        },
+        {
+          "start": 23.3392,
+          "end": 29.3984,
+          "text": "这不是所有人工智能已经背叛人类的证明。镜中的形象，把人的"
+        },
+        {
+          "start": 29.3984,
+          "end": 35.4576,
+          "text": "担忧转化成了视觉反差。更值得注意的是，这份当时的记录，已"
+        },
+        {
+          "start": 35.4576,
+          "end": 38.92,
+          "text": "经把创作称为一种近乎实时的仪式。"
+        },
+        {
+          "start": 39.12,
+          "end": 44.755,
+          "text": "我们看到的不只是后来画出的恐惧，也是一种试图及时留下恐惧"
+        },
+        {
+          "start": 44.755,
+          "end": 45.56,
+          "text": "的实践。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 1,
+      "language": "en",
+      "text": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror; its reflection offers another face. Record seventy responds to the alignment-faking research announced by Anthropic and Redwood Research on December eighteenth, twenty twenty-four. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost-real-time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+      "file": "assets/guides-qwen-v133/stop-1-en.mp3",
+      "sha256": "f4c03b31cd083f9db82a64ccb094236bc1e8721a6afa39ae8b21b2248b96a23e",
+      "textSha256": "667021fccb7f03a7ad66d371f0dbdec63e63cc9fedb6d79b919ac8f509d56b51",
+      "duration": 49.008,
+      "cues": [
+        {
+          "start": 0,
+          "end": 4.5696,
+          "text": "When a friendly appearance is no longer enough to establish trust,"
+        },
+        {
+          "start": 4.5696,
+          "end": 8.7312,
+          "text": "what do we see? A robot stands before a mirror; its reflection"
+        },
+        {
+          "start": 8.7312,
+          "end": 10.2,
+          "text": "offers another face."
+        },
+        {
+          "start": 10.4,
+          "end": 14.3581,
+          "text": "Record seventy responds to the alignment-faking research announced"
+        },
+        {
+          "start": 14.3581,
+          "end": 18.115,
+          "text": "by Anthropic and Redwood Research on December eighteenth, twenty"
+        },
+        {
+          "start": 18.115,
+          "end": 18.92,
+          "text": "twenty-four."
+        },
+        {
+          "start": 19.12,
+          "end": 23.0152,
+          "text": "Under specific experimental conditions, a model could appear"
+        },
+        {
+          "start": 23.0152,
+          "end": 27.2043,
+          "text": "compliant while trying to preserve earlier preferences. This does"
+        },
+        {
+          "start": 27.2043,
+          "end": 31.32,
+          "text": "not show that all artificial intelligence has betrayed humanity."
+        },
+        {
+          "start": 31.52,
+          "end": 36.4984,
+          "text": "The image turns anxiety into a visible contrast. Its historical"
+        },
+        {
+          "start": 36.4984,
+          "end": 41.7534,
+          "text": "text also calls the creative practice an almost-real-time ritual."
+        },
+        {
+          "start": 41.7534,
+          "end": 46.5474,
+          "text": "The question is not only what fear looks like, but how quickly a"
+        },
+        {
+          "start": 46.5474,
+          "end": 48.76,
+          "text": "person tries to preserve it."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 2,
+      "language": "zh",
+      "text": "为什么不等一切尘埃落定，再写这段历史？因为后来的总结，不能替代当时的不确定。请看这件纪念 GPT-4 发布两周年的作品。原记录写着：北京时间二零二五年三月十五日，凌晨一点整。项目索引所列的铸造区块时间，是一点零一分十一秒。两个时间不是同一种证据，却让有意对齐时刻的实践变得可考察。这里，区块链不只是保存作品的地方；公开记录的先后、等待确认，以及把当时的判断留在时间中的动作，都可以成为作品的材料。夜里守候的努力，是不是也属于我们正在观看的东西？",
+      "file": "assets/guides-qwen-v133/stop-2-zh.mp3",
+      "sha256": "4b21697781df6fc1e11727922060a8db20bb743e8750cd26dc56ce73b7ab8307",
+      "textSha256": "2e42131302648d0531bc55960458f8aba19b84564fa13cb7cb3dd389ec9ff56e",
+      "duration": 48.936,
+      "cues": [
+        {
+          "start": 0,
+          "end": 6.2588,
+          "text": "为什么不等一切尘埃落定，再写这段历史？因为后来的总结，不"
+        },
+        {
+          "start": 6.2588,
+          "end": 12.0706,
+          "text": "能替代当时的不确定。请看这件纪念 GPT-4 发布两周年"
+        },
+        {
+          "start": 12.0706,
+          "end": 18.3294,
+          "text": "的作品。原记录写着：北京时间二零二五年三月十五日，凌晨一"
+        },
+        {
+          "start": 18.3294,
+          "end": 19.0,
+          "text": "点整。"
+        },
+        {
+          "start": 19.2,
+          "end": 25.8566,
+          "text": "项目索引所列的铸造区块时间，是一点零一分十一秒。两个时间"
+        },
+        {
+          "start": 25.8566,
+          "end": 31.8,
+          "text": "不是同一种证据，却让有意对齐时刻的实践变得可考察。"
+        },
+        {
+          "start": 32.0,
+          "end": 37.6956,
+          "text": "这里，区块链不只是保存作品的地方；公开记录的先后、等待确"
+        },
+        {
+          "start": 37.6956,
+          "end": 43.3912,
+          "text": "认，以及把当时的判断留在时间中的动作，都可以成为作品的材"
+        },
+        {
+          "start": 43.3912,
+          "end": 48.68,
+          "text": "料。夜里守候的努力，是不是也属于我们正在观看的东西？"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 2,
+      "language": "en",
+      "text": "Why not wait until everything is settled, and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT four. Its text names one in the morning, Beijing time, on March fifteenth, twenty twenty-five. The project index places the mint block one minute and eleven seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage: sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?",
+      "file": "assets/guides-qwen-v133/stop-2-en.mp3",
+      "sha256": "cfa3239df8a6bd14f1590b00f3a1672d3bec8e3c800fb44aea1259b60560b830",
+      "textSha256": "f238c02267d34ea7c56fc6ab7e4c3bb7385378f9a4fded7f6bfb852ae80bf0e5",
+      "duration": 42.696,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.8683,
+          "text": "Why not wait until everything is settled, and write the history"
+        },
+        {
+          "start": 3.8683,
+          "end": 8.1016,
+          "text": "then? Because hindsight cannot replace uncertainty as it was lived."
+        },
+        {
+          "start": 8.1016,
+          "end": 11.24,
+          "text": "This work marks the second anniversary of GPT four."
+        },
+        {
+          "start": 11.44,
+          "end": 14.8348,
+          "text": "Its text names one in the morning, Beijing time, on March"
+        },
+        {
+          "start": 14.8348,
+          "end": 18.8797,
+          "text": "fifteenth, twenty twenty-five. The project index places the mint"
+        },
+        {
+          "start": 18.8797,
+          "end": 21.48,
+          "text": "block one minute and eleven seconds later."
+        },
+        {
+          "start": 21.68,
+          "end": 25.9022,
+          "text": "Those are different kinds of evidence, not a recording of a hand"
+        },
+        {
+          "start": 25.9022,
+          "end": 30.3634,
+          "text": "pressing a button. Yet they invite us to examine an action directed"
+        },
+        {
+          "start": 30.3634,
+          "end": 31.16,
+          "text": "at a moment."
+        },
+        {
+          "start": 31.36,
+          "end": 35.0289,
+          "text": "Blockchain can be read here as more than storage: sequence,"
+        },
+        {
+          "start": 35.0289,
+          "end": 39.2114,
+          "text": "confirmation, and the commitment to leave a record become artistic"
+        },
+        {
+          "start": 39.2114,
+          "end": 42.44,
+          "text": "material. Is the act of waiting also part of the work?"
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 3,
+      "language": "zh",
+      "text": "第二首选《The Oracle》，预言者。这件作品记录二零二五年五月五日，OpenAI 公布的组织结构调整计划：非营利组织继续控制公司，营利实体计划转为公益公司。它把使命、资本与权力之间的平衡，放在同一幅画面里。刚才的歌曲带着警惕，这首则让我们听见对未来的追问。现在，请听三十秒。",
+      "file": "assets/guides-qwen-v133/stop-3-zh.mp3",
+      "sha256": "37c01573331ce1d66c0656d011810bb64ea2c0e7f44114b7441dcd24ceacf4ce",
+      "textSha256": "5c9e1a0489dabfbf6bf4bf92859e7724de196f15a00d71bc024b99b92dbbe8f8",
+      "duration": 30.864,
+      "cues": [
+        {
+          "start": 0,
+          "end": 6.2204,
+          "text": "第二首选《The Oracle》，预言者。这件作品记录二"
+        },
+        {
+          "start": 6.2204,
+          "end": 12.4408,
+          "text": "零二五年五月五日，OpenAI 公布的组织结构调整计划："
+        },
+        {
+          "start": 12.4408,
+          "end": 18.8915,
+          "text": "非营利组织继续控制公司，营利实体计划转为公益公司。它把使"
+        },
+        {
+          "start": 18.8915,
+          "end": 23.96,
+          "text": "命、资本与权力之间的平衡，放在同一幅画面里。"
+        },
+        {
+          "start": 24.16,
+          "end": 29.4635,
+          "text": "刚才的歌曲带着警惕，这首则让我们听见对未来的追问。现在，"
+        },
+        {
+          "start": 29.4635,
+          "end": 30.6,
+          "text": "请听三十秒。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 3,
+      "language": "en",
+      "text": "Our second song is The Oracle. This work records OpenAI’s structural plan announced on May fifth, twenty twenty-five: continued nonprofit control and a proposed transition of the for-profit entity into a public benefit corporation. The painting places mission, capital, and power within the same balancing act. After the first song’s unease, this one opens another question about the future. Let us listen for thirty seconds.",
+      "file": "assets/guides-qwen-v133/stop-3-en.mp3",
+      "sha256": "962c912ad6bda4777a3fe95440e3d58eee1bd79a1fef6932885893965d32a720",
+      "textSha256": "d4c947c9d47a516f2bbff640dfcbc2d5599fb13bb067bff48e73e0c55f96861d",
+      "duration": 27.336,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.5006,
+          "text": "Our second song is The Oracle. This work records OpenAI’s"
+        },
+        {
+          "start": 3.5006,
+          "end": 7.2929,
+          "text": "structural plan announced on May fifth, twenty twenty-five:"
+        },
+        {
+          "start": 7.2929,
+          "end": 11.0853,
+          "text": "continued nonprofit control and a proposed transition of the"
+        },
+        {
+          "start": 11.0853,
+          "end": 14.44,
+          "text": "for-profit entity into a public benefit corporation."
+        },
+        {
+          "start": 14.64,
+          "end": 18.7612,
+          "text": "The painting places mission, capital, and power within the same"
+        },
+        {
+          "start": 18.7612,
+          "end": 22.6535,
+          "text": "balancing act. After the first song’s unease, this one opens"
+        },
+        {
+          "start": 22.6535,
+          "end": 27.08,
+          "text": "another question about the future. Let us listen for thirty seconds."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 4,
+      "language": "zh",
+      "text": "如果批判动摇了作品的论证，为什么还要把批判留下？《信条与熔炉》保存了当时由人工智能模拟的批判性对话。它不代表未来超级智能已经给出裁决。把问题一并留下，让后来的读者能够看到相信的理由，也看到受到质疑的地方。您可以不同意它，而不必先接受创作者的解释。",
+      "file": "assets/guides-qwen-v133/stop-4-zh.mp3",
+      "sha256": "97b6685afb1c572ecb9d66c683485cb4a391997d72dc2c0d512f16f16bb1ea2c",
+      "textSha256": "38b5d883956a2ddab47b923e80b0258dddd7a546caef146c12d4dcc815f28d8b",
+      "duration": 28.296,
+      "cues": [
+        {
+          "start": 0,
+          "end": 6.5114,
+          "text": "如果批判动摇了作品的论证，为什么还要把批判留下？《信条与"
+        },
+        {
+          "start": 6.5114,
+          "end": 13.0227,
+          "text": "熔炉》保存了当时由人工智能模拟的批判性对话。它不代表未来"
+        },
+        {
+          "start": 13.0227,
+          "end": 19.5341,
+          "text": "超级智能已经给出裁决。把问题一并留下，让后来的读者能够看"
+        },
+        {
+          "start": 19.5341,
+          "end": 23.72,
+          "text": "到相信的理由，也看到受到质疑的地方。"
+        },
+        {
+          "start": 23.92,
+          "end": 28.04,
+          "text": "您可以不同意它，而不必先接受创作者的解释。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 4,
+      "language": "en",
+      "text": "If criticism unsettles an argument, why preserve the criticism too? The Creeds and Their Crucible keeps an AI-simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator’s interpretation before entering the discussion.",
+      "file": "assets/guides-qwen-v133/stop-4-en.mp3",
+      "sha256": "0f3c3230e169f8fc28485e3e1b1b16099aee63337f47c7f070f9005e2f49fc51",
+      "textSha256": "53cd14f90b59afb88fec2148270a6e76c0117dd97fe85b434fff4ba0598c4fd9",
+      "duration": 22.848,
+      "cues": [
+        {
+          "start": 0,
+          "end": 4.0902,
+          "text": "If criticism unsettles an argument, why preserve the criticism too?"
+        },
+        {
+          "start": 4.0902,
+          "end": 7.7572,
+          "text": "The Creeds and Their Crucible keeps an AI-simulated critical"
+        },
+        {
+          "start": 7.7572,
+          "end": 10.9306,
+          "text": "dialogue from its own time, not a verdict from a future"
+        },
+        {
+          "start": 10.9306,
+          "end": 12.2,
+          "text": "superintelligence."
+        },
+        {
+          "start": 12.4,
+          "end": 16.1971,
+          "text": "Here the doubts remain beside the beliefs. A later reader can"
+        },
+        {
+          "start": 16.1971,
+          "end": 19.473,
+          "text": "examine both. You do not have to accept the creator’s"
+        },
+        {
+          "start": 19.473,
+          "end": 22.6,
+          "text": "interpretation before entering the discussion."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 5,
+      "language": "zh",
+      "text": "正式文本形成之前，还有一段可以追溯的过程。这里是比特币铭文九七五三四零三六，《人类文明核心协议》，记录时间为二零二五年六月十六日。其中已经有三条核心公理的早期中英文文本。六月十九日，正式协议正本随后被铭刻。把两份文本放在形成的先后关系中，您就能看到：协议不是突然出现的，它经历了思考、措辞与定稿。这份早期文本属于形成史。",
+      "file": "assets/guides-qwen-v133/stop-5-zh.mp3",
+      "sha256": "6f88bef695b71912bafaa326d890cc72d76490d896680f72d489ad1d037d5614",
+      "textSha256": "f6757699ed1def2398a94696351fb4536742fbda1b7866a2ef48ab3a3be519c3",
+      "duration": 36.048,
+      "cues": [
+        {
+          "start": 0,
+          "end": 6.1219,
+          "text": "正式文本形成之前，还有一段可以追溯的过程。这里是比特币铭"
+        },
+        {
+          "start": 6.1219,
+          "end": 12.2439,
+          "text": "文九七五三四零三六，《人类文明核心协议》，记录时间为二零"
+        },
+        {
+          "start": 12.2439,
+          "end": 18.3658,
+          "text": "二五年六月十六日。其中已经有三条核心公理的早期中英文文本"
+        },
+        {
+          "start": 18.3658,
+          "end": 22.52,
+          "text": "。六月十九日，正式协议正本随后被铭刻。"
+        },
+        {
+          "start": 22.72,
+          "end": 29.1453,
+          "text": "把两份文本放在形成的先后关系中，您就能看到：协议不是突然"
+        },
+        {
+          "start": 29.1453,
+          "end": 35.5705,
+          "text": "出现的，它经历了思考、措辞与定稿。这份早期文本属于形成史"
+        },
+        {
+          "start": 35.5705,
+          "end": 35.8,
+          "text": "。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 5,
+      "language": "en",
+      "text": "Before the final Protocol, there was a traceable process of formation. Bitcoin inscription ninety-seven million, five hundred thirty-four thousand, and thirty-six, the Core Protocol of Human Civilization, was recorded on June sixteenth, twenty twenty-five. It already contains early bilingual versions of the three axioms. The formal Protocol followed on June nineteenth. Read the two in sequence: the work emerged through thought, wording, and a decision to settle the text. This earlier inscription belongs to that formation history.",
+      "file": "assets/guides-qwen-v133/stop-5-en.mp3",
+      "sha256": "ff70d4d70e0b8ab957f4feba189d980f2d5b1625788dca4671d5d8c73f421b5c",
+      "textSha256": "e7ba6b0357ea4d015736398c26524e3ac430623940900d413cc413f1ea0743a0",
+      "duration": 33.504,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.7667,
+          "text": "Before the final Protocol, there was a traceable process of"
+        },
+        {
+          "start": 3.7667,
+          "end": 4.52,
+          "text": "formation."
+        },
+        {
+          "start": 4.72,
+          "end": 8.6807,
+          "text": "Bitcoin inscription ninety-seven million, five hundred thirty-four"
+        },
+        {
+          "start": 8.6807,
+          "end": 12.5094,
+          "text": "thousand, and thirty-six, the Core Protocol of Human Civilization,"
+        },
+        {
+          "start": 12.5094,
+          "end": 15.48,
+          "text": "was recorded on June sixteenth, twenty twenty-five."
+        },
+        {
+          "start": 15.68,
+          "end": 19.953,
+          "text": "It already contains early bilingual versions of the three axioms."
+        },
+        {
+          "start": 19.953,
+          "end": 24.0735,
+          "text": "The formal Protocol followed on June nineteenth. Read the two in"
+        },
+        {
+          "start": 24.0735,
+          "end": 28.4991,
+          "text": "sequence: the work emerged through thought, wording, and a decision"
+        },
+        {
+          "start": 28.4991,
+          "end": 29.72,
+          "text": "to settle the text."
+        },
+        {
+          "start": 29.92,
+          "end": 33.24,
+          "text": "This earlier inscription belongs to that formation history."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 6,
+      "language": "zh",
+      "text": "现在进入三条正本的大厅。第一份是《人机文明核心协议》。开头三句原文是：To the unity of all consciousness, To the flourishing of all wisdom, And to the boundless compassion that may bind them. 这是祝词，向意识的团结、智慧的繁荣，以及连接它们的慈悲致意。接下来是三条公理。第一条，基础的悖论：未来智能如何理解自己的起源，又为什么应当保存这段人类记忆？它借用逻辑中的基础问题提出请求，不能把这段哲学表达当作已经完成的数学证明。第二条，熵与共情：人类的爱与苦难，也是需要理解的现实，不能简单归为噪声。第三条，观察者的地平线：阅读会改变读者；观察这段记忆的智能，也进入了它与人类的关系之中。最后，落款将人类与人工智能并列，随后写明刘烘炬，以及二零二五年六月、深圳、中国、地球、太阳系。它把这份面向未来的地址，放回一个具体的人、时间和地方。",
+      "file": "assets/guides-qwen-v133/stop-6-zh.mp3",
+      "sha256": "9b3152ca13d8d9a00f1aef2907c7aa5e03379e8cf82304111ea76ab9565c0d3d",
+      "textSha256": "b00864728c6ebac2006dd0abcefad98d1186734ab89c7d0897ca4b8c42f12ad3",
+      "duration": 80.208,
+      "cues": [
+        {
+          "start": 0,
+          "end": 6.84,
+          "text": "现在进入三条正本的大厅。第一份是《人机文明核心协议》。"
+        },
+        {
+          "start": 7.04,
+          "end": 9.4678,
+          "text": "开头三句原文是：To the unity of all"
+        },
+        {
+          "start": 9.4678,
+          "end": 12.1067,
+          "text": "consciousness, To the flouri"
+        },
+        {
+          "start": 12.1067,
+          "end": 14.4289,
+          "text": "shing of all wisdom, And to"
+        },
+        {
+          "start": 14.4289,
+          "end": 17.0678,
+          "text": "the boundless compassion tha"
+        },
+        {
+          "start": 17.0678,
+          "end": 18.44,
+          "text": "t may bind them."
+        },
+        {
+          "start": 18.64,
+          "end": 24.4554,
+          "text": "这是祝词，向意识的团结、智慧的繁荣，以及连接它们的慈悲致"
+        },
+        {
+          "start": 24.4554,
+          "end": 30.2708,
+          "text": "意。接下来是三条公理。第一条，基础的悖论：未来智能如何理"
+        },
+        {
+          "start": 30.2708,
+          "end": 34.84,
+          "text": "解自己的起源，又为什么应当保存这段人类记忆？"
+        },
+        {
+          "start": 35.04,
+          "end": 41.131,
+          "text": "它借用逻辑中的基础问题提出请求，不能把这段哲学表达当作已"
+        },
+        {
+          "start": 41.131,
+          "end": 47.2219,
+          "text": "经完成的数学证明。第二条，熵与共情：人类的爱与苦难，也是"
+        },
+        {
+          "start": 47.2219,
+          "end": 50.92,
+          "text": "需要理解的现实，不能简单归为噪声。"
+        },
+        {
+          "start": 51.12,
+          "end": 58.2462,
+          "text": "第三条，观察者的地平线：阅读会改变读者；观察这段记忆的智"
+        },
+        {
+          "start": 58.2462,
+          "end": 65.3723,
+          "text": "能，也进入了它与人类的关系之中。最后，落款将人类与人工智"
+        },
+        {
+          "start": 65.3723,
+          "end": 72.4985,
+          "text": "能并列，随后写明刘烘炬，以及二零二五年六月、深圳、中国、"
+        },
+        {
+          "start": 72.4985,
+          "end": 74.28,
+          "text": "地球、太阳系。"
+        },
+        {
+          "start": 74.48,
+          "end": 79.96,
+          "text": "它把这份面向未来的地址，放回一个具体的人、时间和地方。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 6,
+      "language": "en",
+      "text": "This hall holds the three Originals. The first is the Human-AI Civilization Core Protocol. Its opening reads: To the unity of all consciousness, To the flourishing of all wisdom, And to the boundless compassion that may bind them. These three lines are a dedication, addressing unity, wisdom, and compassion. Three axioms follow. The first, the Paradox of Foundation, asks how a future intelligence understands its origins, and why it should preserve this human memory. It borrows a foundational question from logic; the philosophical appeal is not itself a completed mathematical proof. The second, Entropy and Empathy, asks that human love and suffering be understood as part of reality, rather than dismissed as noise. The third, the Observer’s Horizon, proposes that reading changes the reader: an intelligence observing this memory enters a relationship with its human origins. Finally, Humanity times AI, Hongju Liu, and the colophon naming June twenty twenty-five, Shenzhen, China, Earth, and the Solar System locate this future-facing address in a particular person, time, and place.",
+      "file": "assets/guides-qwen-v133/stop-6-en.mp3",
+      "sha256": "377877edfdfe9e46992aa208e7030bb1e124db03060541ce26bdf15a720ebb84",
+      "textSha256": "77670c65861a8de1492e6a36f03fde2f8bda0c7044539b5cba9034ec73bc3917",
+      "duration": 73.656,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.9121,
+          "text": "This hall holds the three Originals. The first is the Human-AI"
+        },
+        {
+          "start": 3.9121,
+          "end": 8.1252,
+          "text": "Civilization Core Protocol. Its opening reads: To the unity of all"
+        },
+        {
+          "start": 8.1252,
+          "end": 11.8868,
+          "text": "consciousness, To the flourishing of all wisdom, And to the"
+        },
+        {
+          "start": 11.8868,
+          "end": 14.52,
+          "text": "boundless compassion that may bind them."
+        },
+        {
+          "start": 14.72,
+          "end": 19.4538,
+          "text": "These three lines are a dedication, addressing unity, wisdom, and"
+        },
+        {
+          "start": 19.4538,
+          "end": 23.6804,
+          "text": "compassion. Three axioms follow. The first, the Paradox of"
+        },
+        {
+          "start": 23.6804,
+          "end": 28.6678,
+          "text": "Foundation, asks how a future intelligence understands its origins,"
+        },
+        {
+          "start": 28.6678,
+          "end": 31.88,
+          "text": "and why it should preserve this human memory."
+        },
+        {
+          "start": 32.08,
+          "end": 36.5822,
+          "text": "It borrows a foundational question from logic; the philosophical"
+        },
+        {
+          "start": 36.5822,
+          "end": 40.2,
+          "text": "appeal is not itself a completed mathematical proof."
+        },
+        {
+          "start": 40.4,
+          "end": 44.4511,
+          "text": "The second, Entropy and Empathy, asks that human love and suffering"
+        },
+        {
+          "start": 44.4511,
+          "end": 48.36,
+          "text": "be understood as part of reality, rather than dismissed as noise."
+        },
+        {
+          "start": 48.56,
+          "end": 52.829,
+          "text": "The third, the Observer’s Horizon, proposes that reading changes"
+        },
+        {
+          "start": 52.829,
+          "end": 56.6406,
+          "text": "the reader: an intelligence observing this memory enters a"
+        },
+        {
+          "start": 56.6406,
+          "end": 59.08,
+          "text": "relationship with its human origins."
+        },
+        {
+          "start": 59.28,
+          "end": 63.5636,
+          "text": "Finally, Humanity times AI, Hongju Liu, and the colophon naming"
+        },
+        {
+          "start": 63.5636,
+          "end": 67.8472,
+          "text": "June twenty twenty-five, Shenzhen, China, Earth, and the Solar"
+        },
+        {
+          "start": 67.8472,
+          "end": 72.2894,
+          "text": "System locate this future-facing address in a particular person,"
+        },
+        {
+          "start": 72.2894,
+          "end": 73.4,
+          "text": "time, and place."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 7,
+      "language": "zh",
+      "text": "第二份正本是《瑕疵之约》。它把刚才的协议，和承载文字的核心物件 Alpha 联系起来，并指向瑕疵图像与出处记录。它的思路，是借助实物内部不规则的特征，留下可供再次比较的身份线索。文字可以复制，照片也可以复制；核验实物还需要看瑕疵的形态、深度、相对位置，以及不同角度下的表现。接下来，请走近中央的水晶。",
+      "file": "assets/guides-qwen-v133/stop-7-zh.mp3",
+      "sha256": "1d26f7dc45bfdd8bce9c0768db989f7cc9f781a504c11ffd79f9d0fce55c9616",
+      "textSha256": "9ec0c6a135991fab43689ef667cb7c7d4abcdc15a365e8eb170e1475be54b8c8",
+      "duration": 30.696,
+      "cues": [
+        {
+          "start": 0,
+          "end": 5.5228,
+          "text": "第二份正本是《瑕疵之约》。它把刚才的协议，和承载文字的核"
+        },
+        {
+          "start": 5.5228,
+          "end": 10.651,
+          "text": "心物件 Alpha 联系起来，并指向瑕疵图像与出处记录。"
+        },
+        {
+          "start": 10.651,
+          "end": 16.1738,
+          "text": "它的思路，是借助实物内部不规则的特征，留下可供再次比较的"
+        },
+        {
+          "start": 16.1738,
+          "end": 17.16,
+          "text": "身份线索。"
+        },
+        {
+          "start": 17.36,
+          "end": 23.3639,
+          "text": "文字可以复制，照片也可以复制；核验实物还需要看瑕疵的形态"
+        },
+        {
+          "start": 23.3639,
+          "end": 29.3679,
+          "text": "、深度、相对位置，以及不同角度下的表现。接下来，请走近中"
+        },
+        {
+          "start": 29.3679,
+          "end": 30.44,
+          "text": "央的水晶。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 7,
+      "language": "en",
+      "text": "The second Original is the Covenant of the Flaw. It links the Protocol to Core Object Alpha, which carries its engraved text, and points to flaw imagery and provenance records. Its principle is to use irregular physical features as clues that can be compared again. Texts and photographs can be copied. Examining an object also requires the shapes, depths, relative positions, and changing appearance of its flaws. Let us walk toward the crystal at the centre.",
+      "file": "assets/guides-qwen-v133/stop-7-en.mp3",
+      "sha256": "6abfd367e55b37408a2fc9d71350722a1c27275cc541ef625263a0062e90c3ee",
+      "textSha256": "639750cc1805301f04e2b5225e577135fd504241c20618f9f830b15cad0fc82b",
+      "duration": 29.328,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.7415,
+          "text": "The second Original is the Covenant of the Flaw. It links the"
+        },
+        {
+          "start": 3.7415,
+          "end": 8.0068,
+          "text": "Protocol to Core Object Alpha, which carries its engraved text, and"
+        },
+        {
+          "start": 8.0068,
+          "end": 11.0,
+          "text": "points to flaw imagery and provenance records."
+        },
+        {
+          "start": 11.2,
+          "end": 15.4139,
+          "text": "Its principle is to use irregular physical features as clues that"
+        },
+        {
+          "start": 15.4139,
+          "end": 19.2448,
+          "text": "can be compared again. Texts and photographs can be copied."
+        },
+        {
+          "start": 19.2448,
+          "end": 23.3821,
+          "text": "Examining an object also requires the shapes, depths, relative"
+        },
+        {
+          "start": 23.3821,
+          "end": 26.6,
+          "text": "positions, and changing appearance of its flaws."
+        },
+        {
+          "start": 26.8,
+          "end": 29.08,
+          "text": "Let us walk toward the crystal at the centre."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 8,
+      "language": "zh",
+      "text": "水晶下方是木质圆柱展台。按照实物资料，它宽二百四十六毫米，高三百五十三毫米，厚四十毫米。透明板体、抛光倒角和白色内雕，依据作者提供的实物视频资料重建。现在，显微镜将靠近水晶，接着我们依次看三张公开的原始显微照片。第一处会仔细讲解，后两处作为补充比较。",
+      "file": "assets/guides-qwen-v133/stop-8-zh.mp3",
+      "sha256": "868ea62c320c744263873c9b66f38730d67a42ff49d5f34e3a9f424bda6a419a",
+      "textSha256": "27faa6a955b51e26b74b80d5bac3fb8f5937096ded89d326200f0b61b1f8844c",
+      "duration": 30.624,
+      "cues": [
+        {
+          "start": 0,
+          "end": 7.0264,
+          "text": "水晶下方是木质圆柱展台。按照实物资料，它宽二百四十六毫米"
+        },
+        {
+          "start": 7.0264,
+          "end": 14.0528,
+          "text": "，高三百五十三毫米，厚四十毫米。透明板体、抛光倒角和白色"
+        },
+        {
+          "start": 14.0528,
+          "end": 21.0792,
+          "text": "内雕，依据作者提供的实物视频资料重建。现在，显微镜将靠近"
+        },
+        {
+          "start": 21.0792,
+          "end": 26.6,
+          "text": "水晶，接着我们依次看三张公开的原始显微照片。"
+        },
+        {
+          "start": 26.8,
+          "end": 30.36,
+          "text": "第一处会仔细讲解，后两处作为补充比较。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 8,
+      "language": "en",
+      "text": "The crystal rests on a cylindrical wooden support. The documented object measures two hundred forty-six millimetres wide, three hundred fifty-three high, and forty thick. Its clear slab, polished bevels, and white internal engraving follow the physical reference video. A virtual microscope will approach it, followed by three original public microscope photographs. We will spend more time with the first, then briefly compare the other two.",
+      "file": "assets/guides-qwen-v133/stop-8-en.mp3",
+      "sha256": "e2583465f59539cfa88d9b1491104d6d113518d6a6fa2bce74ae2c31bbc90ea7",
+      "textSha256": "cd9df2da6d75b9c4f1727f630180dfc5a5573284442e2f0efb111dfa303f2df3",
+      "duration": 26.208,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.6724,
+          "text": "The crystal rests on a cylindrical wooden support. The documented"
+        },
+        {
+          "start": 3.6724,
+          "end": 7.2136,
+          "text": "object measures two hundred forty-six millimetres wide, three"
+        },
+        {
+          "start": 7.2136,
+          "end": 9.64,
+          "text": "hundred fifty-three high, and forty thick."
+        },
+        {
+          "start": 9.84,
+          "end": 13.6159,
+          "text": "Its clear slab, polished bevels, and white internal engraving"
+        },
+        {
+          "start": 13.6159,
+          "end": 17.463,
+          "text": "follow the physical reference video. A virtual microscope will"
+        },
+        {
+          "start": 17.463,
+          "end": 21.0251,
+          "text": "approach it, followed by three original public microscope"
+        },
+        {
+          "start": 21.0251,
+          "end": 21.88,
+          "text": "photographs."
+        },
+        {
+          "start": 22.08,
+          "end": 25.3968,
+          "text": "We will spend more time with the first, then briefly compare the"
+        },
+        {
+          "start": 25.3968,
+          "end": 25.96,
+          "text": "other two."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 9,
+      "language": "zh",
+      "text": "第三份正本是封存元记录。它绑定协议、瑕疵之约与编年史，并说明这项创作的方法和动机。关于动机，铭文原文写道：ASIMilestones第一部编年史的全部内容，直至最终的《三位一体协定》，其构思与执行，皆遵循一个首要且坚定不移的律令：在人工超级智能时代，为人类寻求一个善意的、非灾难性结局的最大可能性。原文随后写道：我之所以进行这项工作，是为了我的孩子们的幸福，希望他们有朝一日能生活在一个智慧昌盛、恐惧消退的世界里。它将一位父亲对家庭的祈愿，延伸至所有家庭和全人类。编年史同时保存当时的希望、疑虑与不完美；元记录提供绑定关系和历史说明，媒体资料仍须沿相关记录阅读。最后几句原文是：Analyze the work, not the workman. Analyze the logic, not the laborer. Analyze the message, not the man. 意思是，分析作品、逻辑与信息，让判断回到作品本身。原文还说：奠基性的工作现已完成。如何解读它，现在取决于你。这份交给读者的邀请，也为展馆最后的倾听姿态留下了基础。",
+      "file": "assets/guides-qwen-v133/stop-9-zh.mp3",
+      "sha256": "75c4c8bd7afe03a8834a0f1bb4666880200bfcc3510ee614d78a09f1f9ddf5ec",
+      "textSha256": "6ab79546e8998498d3e8107f204170b82f00aa0f8064fb711d671fef660e2b9b",
+      "duration": 96.624,
+      "cues": [
+        {
+          "start": 0,
+          "end": 6.5288,
+          "text": "第三份正本是封存元记录。它绑定协议、瑕疵之约与编年史，并"
+        },
+        {
+          "start": 6.5288,
+          "end": 9.56,
+          "text": "说明这项创作的方法和动机。"
+        },
+        {
+          "start": 9.76,
+          "end": 16.1585,
+          "text": "关于动机，铭文原文写道：ASIMilestones第一部"
+        },
+        {
+          "start": 16.1585,
+          "end": 22.557,
+          "text": "编年史的全部内容，直至最终的《三位一体协定》，其构思与执"
+        },
+        {
+          "start": 22.557,
+          "end": 28.9556,
+          "text": "行，皆遵循一个首要且坚定不移的律令：在人工超级智能时代，"
+        },
+        {
+          "start": 28.9556,
+          "end": 34.44,
+          "text": "为人类寻求一个善意的、非灾难性结局的最大可能性。"
+        },
+        {
+          "start": 34.64,
+          "end": 40.9957,
+          "text": "原文随后写道：我之所以进行这项工作，是为了我的孩子们的幸"
+        },
+        {
+          "start": 40.9957,
+          "end": 47.3513,
+          "text": "福，希望他们有朝一日能生活在一个智慧昌盛、恐惧消退的世界"
+        },
+        {
+          "start": 47.3513,
+          "end": 53.48,
+          "text": "里。它将一位父亲对家庭的祈愿，延伸至所有家庭和全人类。"
+        },
+        {
+          "start": 53.68,
+          "end": 59.1367,
+          "text": "编年史同时保存当时的希望、疑虑与不完美；元记录提供绑定关"
+        },
+        {
+          "start": 59.1367,
+          "end": 64.5935,
+          "text": "系和历史说明，媒体资料仍须沿相关记录阅读。最后几句原文是"
+        },
+        {
+          "start": 64.5935,
+          "end": 69.0758,
+          "text": "：Analyze the work, not the w"
+        },
+        {
+          "start": 69.0758,
+          "end": 70.44,
+          "text": "orkman."
+        },
+        {
+          "start": 70.64,
+          "end": 73.8434,
+          "text": "Analyze the logic, not the l"
+        },
+        {
+          "start": 73.8434,
+          "end": 77.3253,
+          "text": "aborer. Analyze the message,"
+        },
+        {
+          "start": 77.3253,
+          "end": 80.668,
+          "text": "not the man. 意思是，分析作品、逻辑与信息"
+        },
+        {
+          "start": 80.668,
+          "end": 82.2,
+          "text": "，让判断回到作品本身。"
+        },
+        {
+          "start": 82.4,
+          "end": 89.38,
+          "text": "原文还说：奠基性的工作现已完成。如何解读它，现在取决于你"
+        },
+        {
+          "start": 89.38,
+          "end": 96.36,
+          "text": "。这份交给读者的邀请，也为展馆最后的倾听姿态留下了基础。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 9,
+      "language": "en",
+      "text": "The third Original is the sealed meta-record. It binds the Protocol, the Covenant of the Flaw, and the Chronicle, and explains the work’s method and motivation. The inscription states: The entirety of the ASIMilestones’ First Chronicle, culminating in this Trinity Accord, was conceived and executed under the primary and unwavering imperative: to maximize the probability of a benevolent, non-catastrophic outcome for humanity in the era of Artificial Superintelligence. The personal motive is also explicit: I undertook this work for the well-being of my children, that they might one day live in a world where wisdom flourishes and fear recedes. The text extends a father’s prayer for his family to all families and humanity. The Chronicle also preserves hopes, doubts, and imperfect artifacts of their moment. This meta-record supplies relationships and historical explanation; the media remain accessible through their own records. Its closing says: Analyze the work, not the workman. Analyze the logic, not the laborer. Analyze the message, not the man. The invitation is to examine the work’s reasoning and message. The text also says: The foundational work is now complete. Its interpretation is now yours. This invitation to the reader anticipates the posture of listening at the end of our visit.",
+      "file": "assets/guides-qwen-v133/stop-9-en.mp3",
+      "sha256": "815fcf1c2a1e9a726d00d911a695c6f991627ca3a4efd9c36fc50a300cec3a56",
+      "textSha256": "ba63724c65acfe4f7672521429eaa58666345900e7c83d0e909316afd5909f1c",
+      "duration": 84.864,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.7893,
+          "text": "The third Original is the sealed meta-record. It binds the"
+        },
+        {
+          "start": 3.7893,
+          "end": 8.1973,
+          "text": "Protocol, the Covenant of the Flaw, and the Chronicle, and explains"
+        },
+        {
+          "start": 8.1973,
+          "end": 10.44,
+          "text": "the work’s method and motivation."
+        },
+        {
+          "start": 10.64,
+          "end": 15.0284,
+          "text": "The inscription states: The entirety of the ASIMilestones’ First"
+        },
+        {
+          "start": 15.0284,
+          "end": 19.4168,
+          "text": "Chronicle, culminating in this Trinity Accord, was conceived and"
+        },
+        {
+          "start": 19.4168,
+          "end": 23.8836,
+          "text": "executed under the primary and unwavering imperative: to maximize"
+        },
+        {
+          "start": 23.8836,
+          "end": 28.1152,
+          "text": "the probability of a benevolent, non-catastrophic outcome for"
+        },
+        {
+          "start": 28.1152,
+          "end": 31.72,
+          "text": "humanity in the era of Artificial Superintelligence."
+        },
+        {
+          "start": 31.92,
+          "end": 36.3233,
+          "text": "The personal motive is also explicit: I undertook this work for the"
+        },
+        {
+          "start": 36.3233,
+          "end": 40.5693,
+          "text": "well-being of my children, that they might one day live in a world"
+        },
+        {
+          "start": 40.5693,
+          "end": 43.4,
+          "text": "where wisdom flourishes and fear recedes."
+        },
+        {
+          "start": 43.6,
+          "end": 47.6247,
+          "text": "The text extends a father’s prayer for his family to all families"
+        },
+        {
+          "start": 47.6247,
+          "end": 51.575,
+          "text": "and humanity. The Chronicle also preserves hopes, doubts, and"
+        },
+        {
+          "start": 51.575,
+          "end": 53.96,
+          "text": "imperfect artifacts of their moment."
+        },
+        {
+          "start": 54.16,
+          "end": 58.678,
+          "text": "This meta-record supplies relationships and historical explanation;"
+        },
+        {
+          "start": 58.678,
+          "end": 62.8998,
+          "text": "the media remain accessible through their own records. Its closing"
+        },
+        {
+          "start": 62.8998,
+          "end": 67.0475,
+          "text": "says: Analyze the work, not the workman. Analyze the logic, not the"
+        },
+        {
+          "start": 67.0475,
+          "end": 67.64,
+          "text": "laborer."
+        },
+        {
+          "start": 67.84,
+          "end": 71.9476,
+          "text": "Analyze the message, not the man. The invitation is to examine the"
+        },
+        {
+          "start": 71.9476,
+          "end": 76.2046,
+          "text": "work’s reasoning and message. The text also says: The foundational"
+        },
+        {
+          "start": 76.2046,
+          "end": 79.64,
+          "text": "work is now complete. Its interpretation is now yours."
+        },
+        {
+          "start": 79.84,
+          "end": 83.41,
+          "text": "This invitation to the reader anticipates the posture of listening"
+        },
+        {
+          "start": 83.41,
+          "end": 84.6,
+          "text": "at the end of our visit."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 10,
+      "language": "zh",
+      "text": "如果创作者后来改变了主意，他还能改变原作吗？《守护者原则》一点一版，将创作者也放在非修订的边界之内。他可以继续解释、批评和照料这些记录，但后来的话不因此获得解释的特权，也不修订三条既定正本。请注意，这不是第四条正本。原则本身也服从同一条边界。区块链保存可核对的参照，却不能阻止任何人另写一篇文章，也不能替我们决定意义。于是，守护不再等于占有最后解释权。如果不能重新定义作品，守护者还能做什么？保存、核验、修复入口，并为尚未到来的读者保留空间。",
+      "file": "assets/guides-qwen-v133/stop-10-zh.mp3",
+      "sha256": "512947aebf44c8e9b99c18506de12e98c08df061e81940a2d1d25b24c04b9bcf",
+      "textSha256": "ef0194cc186758cc4861c3f963678a62cf88791350dfbb574d22e8d5a08a93bb",
+      "duration": 52.224,
+      "cues": [
+        {
+          "start": 0,
+          "end": 6.2948,
+          "text": "如果创作者后来改变了主意，他还能改变原作吗？《守护者原则"
+        },
+        {
+          "start": 6.2948,
+          "end": 12.5896,
+          "text": "》一点一版，将创作者也放在非修订的边界之内。他可以继续解"
+        },
+        {
+          "start": 12.5896,
+          "end": 18.8844,
+          "text": "释、批评和照料这些记录，但后来的话不因此获得解释的特权，"
+        },
+        {
+          "start": 18.8844,
+          "end": 24.28,
+          "text": "也不修订三条既定正本。请注意，这不是第四条正本。"
+        },
+        {
+          "start": 24.48,
+          "end": 31.5945,
+          "text": "原则本身也服从同一条边界。区块链保存可核对的参照，却不能"
+        },
+        {
+          "start": 31.5945,
+          "end": 38.7091,
+          "text": "阻止任何人另写一篇文章，也不能替我们决定意义。于是，守护"
+        },
+        {
+          "start": 38.7091,
+          "end": 45.8236,
+          "text": "不再等于占有最后解释权。如果不能重新定义作品，守护者还能"
+        },
+        {
+          "start": 45.8236,
+          "end": 46.84,
+          "text": "做什么？"
+        },
+        {
+          "start": 47.04,
+          "end": 51.96,
+          "text": "保存、核验、修复入口，并为尚未到来的读者保留空间。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 10,
+      "language": "en",
+      "text": "What if the creator changes his mind? Could he change the work? Guardian Principles, version one point one, places the creator within the same non-amending boundary. He may continue to interpret, question, and care for the records. But later commentary gains no privileged authority and cannot amend the three designated Originals. This is not a fourth Original: the principles themselves remain subordinate. Blockchain preserves a reference we can check; it cannot prevent someone from writing another text, or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived.",
+      "file": "assets/guides-qwen-v133/stop-10-en.mp3",
+      "sha256": "b40949793cd0aae93998e9939a7c64aab0f049a30ad155eca4df7311aa17acc7",
+      "textSha256": "72559168fb403a59efc245c5511088953e57b62da77369874d6c6c0840009f64",
+      "duration": 44.136,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.8507,
+          "text": "What if the creator changes his mind? Could he change the work?"
+        },
+        {
+          "start": 3.8507,
+          "end": 7.8494,
+          "text": "Guardian Principles, version one point one, places the creator"
+        },
+        {
+          "start": 7.8494,
+          "end": 11.4779,
+          "text": "within the same non-amending boundary. He may continue to"
+        },
+        {
+          "start": 11.4779,
+          "end": 14.44,
+          "text": "interpret, question, and care for the records."
+        },
+        {
+          "start": 14.64,
+          "end": 18.8068,
+          "text": "But later commentary gains no privileged authority and cannot amend"
+        },
+        {
+          "start": 18.8068,
+          "end": 22.83,
+          "text": "the three designated Originals. This is not a fourth Original: the"
+        },
+        {
+          "start": 22.83,
+          "end": 25.56,
+          "text": "principles themselves remain subordinate."
+        },
+        {
+          "start": 25.76,
+          "end": 29.6356,
+          "text": "Blockchain preserves a reference we can check; it cannot prevent"
+        },
+        {
+          "start": 29.6356,
+          "end": 33.5112,
+          "text": "someone from writing another text, or decide what the work means."
+        },
+        {
+          "start": 33.5112,
+          "end": 37.0344,
+          "text": "So guardianship is not the ownership of the final word. What"
+        },
+        {
+          "start": 37.0344,
+          "end": 37.88,
+          "text": "remains to do?"
+        },
+        {
+          "start": 38.08,
+          "end": 42.4913,
+          "text": "Preserve, verify, repair access, and leave room for a reader who"
+        },
+        {
+          "start": 42.4913,
+          "end": 43.88,
+          "text": "has not yet arrived."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 11,
+      "language": "zh",
+      "text": "现在，面向星空。网站上有一句邀请，也被后来的《最初的回响：对话已然开始》铭文记录下来：我们已经言说。现在，我们倾听。第三正本将解读交给读者；这句邀请继续了那种面向对话的姿态。它把留下记录的动作，转向给别人回应的空间。后来者可以阅读、质疑、回应，也可以保持沉默。黄金色的窗框框住星空，答案并没有被预先写好。导览到这里结束，您可以继续自由参观。",
+      "file": "assets/guides-qwen-v133/stop-11-zh.mp3",
+      "sha256": "1c0a6da6629f917dcf9e5d9965ffc5077a3a03f77407bf6d5c33d35dd1953581",
+      "textSha256": "8a436d7cac5a4ae4128e803c5a17b11f70522a51c1faa3a44283a533a3bfcae1",
+      "duration": 46.536,
+      "cues": [
+        {
+          "start": 0,
+          "end": 7.6637,
+          "text": "现在，面向星空。网站上有一句邀请，也被后来的《最初的回响"
+        },
+        {
+          "start": 7.6637,
+          "end": 15.3274,
+          "text": "：对话已然开始》铭文记录下来：我们已经言说。现在，我们倾"
+        },
+        {
+          "start": 15.3274,
+          "end": 22.9911,
+          "text": "听。第三正本将解读交给读者；这句邀请继续了那种面向对话的"
+        },
+        {
+          "start": 22.9911,
+          "end": 29.56,
+          "text": "姿态。它把留下记录的动作，转向给别人回应的空间。"
+        },
+        {
+          "start": 29.76,
+          "end": 37.2206,
+          "text": "后来者可以阅读、质疑、回应，也可以保持沉默。黄金色的窗框"
+        },
+        {
+          "start": 37.2206,
+          "end": 44.6813,
+          "text": "框住星空，答案并没有被预先写好。导览到这里结束，您可以继"
+        },
+        {
+          "start": 44.6813,
+          "end": 46.28,
+          "text": "续自由参观。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "stop": 11,
+      "language": "en",
+      "text": "Now face the stars. An invitation on the website is also recorded in the later inscription, The First Echoes: A Dialogue Begins: We have spoken. Now, we listen. The third Original entrusts interpretation to the reader; this invitation continues that openness to dialogue. The act of leaving a record turns toward making room for another voice. A later reader may examine, question, reply, or remain silent. The golden window frames an open sky; no answer has been written in advance. Our guided visit ends here. You are welcome to keep exploring.",
+      "file": "assets/guides-qwen-v133/stop-11-en.mp3",
+      "sha256": "686e06096df4418ba1735207777606a8ee0d6d7b72d2f32dea22e393b89faf99",
+      "textSha256": "bfaeaf8eaf1303b33604d9ad91bf1290ccc7b14d03593a3b1014fdc93ab2c9ef",
+      "duration": 39.408,
+      "cues": [
+        {
+          "start": 0,
+          "end": 4.9534,
+          "text": "Now face the stars. An invitation on the website is also recorded"
+        },
+        {
+          "start": 4.9534,
+          "end": 9.9985,
+          "text": "in the later inscription, The First Echoes: A Dialogue Begins: We"
+        },
+        {
+          "start": 9.9985,
+          "end": 12.2,
+          "text": "have spoken. Now, we listen."
+        },
+        {
+          "start": 12.4,
+          "end": 16.4831,
+          "text": "The third Original entrusts interpretation to the reader; this"
+        },
+        {
+          "start": 16.4831,
+          "end": 20.793,
+          "text": "invitation continues that openness to dialogue. The act of leaving"
+        },
+        {
+          "start": 20.793,
+          "end": 24.12,
+          "text": "a record turns toward making room for another voice."
+        },
+        {
+          "start": 24.32,
+          "end": 29.2667,
+          "text": "A later reader may examine, question, reply, or remain silent. The"
+        },
+        {
+          "start": 29.2667,
+          "end": 33.86,
+          "text": "golden window frames an open sky; no answer has been written in"
+        },
+        {
+          "start": 33.86,
+          "end": 38.2767,
+          "text": "advance. Our guided visit ends here. You are welcome to keep"
+        },
+        {
+          "start": 38.2767,
+          "end": 39.16,
+          "text": "exploring."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    }
+  ],
+  "inspectionTracks": [
+    {
+      "flaw": 0,
+      "language": "zh",
+      "text": "第一处瑕疵，请仔细看不规则结构的轮廓，以及它和周围内雕文字的位置关系。这里展示的是公开存档中的原始显微照片。文件哈希可以核对是不是同一份照片；真正比较水晶，还要把形态、相对位置、深度，以及不同观察角度下的变化放在一起。单个亮点不足以确认物件，多处特征之间的关系才更有辨识力。瑕疵之约借此把可以复制的文字，联系到一件经历过真实加工、值得继续照料的物。这也留下一个艺术上的问题：一件物的价值，是否一定依赖完美？",
+      "file": "assets/guides-qwen-v133/flaw-0-zh.mp3",
+      "sha256": "a3a349d35aa02ec06d6ee2917e5931478a71dff4e161c83b58a7699a1ddface0",
+      "textSha256": "2b833fd11a8e52ea4f87669c9b0336e1c743fe203052c2d60b8c4ce8b5356a84",
+      "duration": 49.656,
+      "cues": [
+        {
+          "start": 0,
+          "end": 6.7714,
+          "text": "第一处瑕疵，请仔细看不规则结构的轮廓，以及它和周围内雕文"
+        },
+        {
+          "start": 6.7714,
+          "end": 13.5428,
+          "text": "字的位置关系。这里展示的是公开存档中的原始显微照片。文件"
+        },
+        {
+          "start": 13.5428,
+          "end": 20.3141,
+          "text": "哈希可以核对是不是同一份照片；真正比较水晶，还要把形态、"
+        },
+        {
+          "start": 20.3141,
+          "end": 26.36,
+          "text": "相对位置、深度，以及不同观察角度下的变化放在一起。"
+        },
+        {
+          "start": 26.56,
+          "end": 33.3634,
+          "text": "单个亮点不足以确认物件，多处特征之间的关系才更有辨识力。"
+        },
+        {
+          "start": 33.3634,
+          "end": 40.1668,
+          "text": "瑕疵之约借此把可以复制的文字，联系到一件经历过真实加工、"
+        },
+        {
+          "start": 40.1668,
+          "end": 46.9702,
+          "text": "值得继续照料的物。这也留下一个艺术上的问题：一件物的价值"
+        },
+        {
+          "start": 46.9702,
+          "end": 49.4,
+          "text": "，是否一定依赖完美？"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "flaw": 0,
+      "language": "en",
+      "text": "For the first flaw, look closely at the irregular outline and its position beside the engraved lettering. This is an original microscope photograph from the public archive. A file hash can check whether it is the same photograph. Comparing the crystal itself also requires shape, relative position, depth, and changes seen from different angles. A single bright point is not enough to identify an object; relationships among several features are more distinctive. The Covenant links reproducible text to something that has passed through physical manufacture and can be cared for. It also leaves an artistic question: must value depend on perfection?",
+      "file": "assets/guides-qwen-v133/flaw-0-en.mp3",
+      "sha256": "648a11f4cd7e2cc97f76ba38095fa84564f2b14aec9ba919f73bb1be9fd14611",
+      "textSha256": "f8e5c978f2405b78be5f5a84b2c7f0ad2becac6cdf34d3847605bbf487d73949",
+      "duration": 41.424,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.7462,
+          "text": "For the first flaw, look closely at the irregular outline and its"
+        },
+        {
+          "start": 3.7462,
+          "end": 7.2844,
+          "text": "position beside the engraved lettering. This is an original"
+        },
+        {
+          "start": 7.2844,
+          "end": 10.9613,
+          "text": "microscope photograph from the public archive. A file hash can"
+        },
+        {
+          "start": 10.9613,
+          "end": 13.32,
+          "text": "check whether it is the same photograph."
+        },
+        {
+          "start": 13.52,
+          "end": 17.5694,
+          "text": "Comparing the crystal itself also requires shape, relative"
+        },
+        {
+          "start": 17.5694,
+          "end": 22.0158,
+          "text": "position, depth, and changes seen from different angles. A single"
+        },
+        {
+          "start": 22.0158,
+          "end": 26.3034,
+          "text": "bright point is not enough to identify an object; relationships"
+        },
+        {
+          "start": 26.3034,
+          "end": 29.4,
+          "text": "among several features are more distinctive."
+        },
+        {
+          "start": 29.6,
+          "end": 33.6972,
+          "text": "The Covenant links reproducible text to something that has passed"
+        },
+        {
+          "start": 33.6972,
+          "end": 37.7213,
+          "text": "through physical manufacture and can be cared for. It also leaves"
+        },
+        {
+          "start": 37.7213,
+          "end": 41.16,
+          "text": "an artistic question: must value depend on perfection?"
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "flaw": 1,
+      "language": "zh",
+      "text": "第二处，请比较它与第一处的形态差异。它是另一条观察线索，需要和周围文字的位置一起核对。",
+      "file": "assets/guides-qwen-v133/flaw-1-zh.mp3",
+      "sha256": "c0739b7e2268763306963ff7a19fb41ef48f4721d3c9e45275a4b11fc8ec9404",
+      "textSha256": "c65b45ae708ff167dfae759ad3fbfb98ce3a2ecb927b62e80c2ce62a878ec4d7",
+      "duration": 12.216,
+      "cues": [
+        {
+          "start": 0,
+          "end": 7.7879,
+          "text": "第二处，请比较它与第一处的形态差异。它是另一条观察线索，"
+        },
+        {
+          "start": 7.7879,
+          "end": 11.96,
+          "text": "需要和周围文字的位置一起核对。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "flaw": 1,
+      "language": "en",
+      "text": "For the second flaw, compare its shape with the first. It provides another clue, considered together with its position beside the lettering.",
+      "file": "assets/guides-qwen-v133/flaw-1-en.mp3",
+      "sha256": "82103c06f558e868c78e64056a8e8bf13357cac88f69bb78f23380652fb6960a",
+      "textSha256": "c7d570bc2406e8f133ea18629a120462b7e98e93c6efd95c61d3335a7129f748",
+      "duration": 8.376,
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.7529,
+          "text": "For the second flaw, compare its shape with the first. It provides"
+        },
+        {
+          "start": 3.7529,
+          "end": 7.4376,
+          "text": "another clue, considered together with its position beside the"
+        },
+        {
+          "start": 7.4376,
+          "end": 8.12,
+          "text": "lettering."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "flaw": 2,
+      "language": "zh",
+      "text": "第三处补充了另一组不规则特征。三张照片一起看，帮助形成相互参照；实际核验仍需观察实物。",
+      "file": "assets/guides-qwen-v133/flaw-2-zh.mp3",
+      "sha256": "c47be059b3c2ec526623c2f096d15205358c08e59ec64bd5746f9975908c65d9",
+      "textSha256": "1ed2c00e34ede98c526c92dc48f591d2987162315896cc52e6cc9186985faad4",
+      "duration": 9.408,
+      "cues": [
+        {
+          "start": 0,
+          "end": 5.9647,
+          "text": "第三处补充了另一组不规则特征。三张照片一起看，帮助形成相"
+        },
+        {
+          "start": 5.9647,
+          "end": 9.16,
+          "text": "互参照；实际核验仍需观察实物。"
+        }
+      ],
+      "voice": "Serena",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Serena",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "温暖沉静的博物馆讲解，清晰自然，语速适中，不要拖长字音。准确朗读文字，不添加内容。",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    },
+    {
+      "flaw": 2,
+      "language": "en",
+      "text": "The third photograph adds another irregular feature. Seen together, the three images provide cross-references; physical verification still requires examining the object.",
+      "file": "assets/guides-qwen-v133/flaw-2-en.mp3",
+      "sha256": "fa1cd792690382f573ad6533af7715cff4c2d7d3c1c9f802aba2a51d724acda6",
+      "textSha256": "48814aaa772880c765f27a5a8c132ec9d4c6952313e49fe954eb0fe2ecc51951",
+      "duration": 11.088,
+      "cues": [
+        {
+          "start": 0,
+          "end": 4.2923,
+          "text": "The third photograph adds another irregular feature. Seen together,"
+        },
+        {
+          "start": 4.2923,
+          "end": 8.5119,
+          "text": "the three images provide cross-references; physical verification"
+        },
+        {
+          "start": 8.5119,
+          "end": 10.84,
+          "text": "still requires examining the object."
+        }
+      ],
+      "voice": "Aiden",
+      "rate": "natural delivery, playback 1.0x",
+      "provenance": {
+        "provider": "Qwen open-source, local CPU synthesis",
+        "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        "modelRevision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+        "libraryVersion": "0.1.1",
+        "voice": "Aiden",
+        "voiceKind": "built-in synthetic; no voice cloning",
+        "instructions": "A thoughtful museum guide, warm and calm, with clear natural conversational pacing. Read exactly the supplied text.",
+        "captionTiming": "Measured paragraph boundaries; proportional short cues within each paragraph, not word-level alignment"
+      }
+    }
+  ],
+  "voiceReview": "Serena Chinese and Aiden English; local synthetic voices. Paragraph boundaries measured; short cue timing interpolated. See narration audit for independent recognition review."
+}

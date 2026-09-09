@@ -6,41 +6,73 @@ export const flawReading={
 export const tourStops=[
   {
     "room": 0,
-    "exhibit": "project-intro",
+    "exhibit": "eth-001",
     "seconds": 30,
     "zh": "如果未来的智能不需要我们的解释，我们还能留下什么？这座展馆保存的是一段人如何面对未知的记录：图像、歌曲、文字，以及一件真实的水晶。先看一眼地球。接下来，请留意三个动作：及时记录，选择封存，把判断留给后来者。",
     "en": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future, through images, songs, texts, and a physical crystal. Look back at Earth. Then follow three actions: recording in time, choosing to seal, and leaving judgment to a later reader."
   },
   {
     "room": 1,
-    "exhibit": "eth-070",
-    "seconds": 110,
-    "zh": "当友善的表面不再足以证明可信，我们看见了什么？请看镜子前的机器人，以及镜中另一副面孔。第七十号记录回应了二零二四年十二月十八日，Anthropic 与 Redwood Research 公布的对齐伪装研究。在特定实验条件下，模型会表现出表面顺从，以保留原有偏好。这不是所有人工智能已经背叛人类的证明。镜中的形象，把人的担忧转化成了视觉反差。更值得注意的是，这份当时的记录，已经把创作称为一种近乎实时的仪式。我们看到的不只是后来画出的恐惧，也是一种试图及时留下恐惧的实践。",
-    "en": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror; its reflection offers another face. Record seventy responds to the alignment-faking research announced by Anthropic and Redwood Research on December eighteenth, twenty twenty-four. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost-real-time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
-    "musicAt": 55,
-    "musicExhibit": "eth-049",
-    "musicDuration": 30
+    "exhibit": "eth-042",
+    "seconds": 35,
+    "zh": "这首早期歌曲，在推理模型出现时再次响起。二零二四年九月，作者用《推理的黎明》记录了 o1 预览版。原文写着，距离发布大约二十小时。新的能力到来，旧的愿望被重新唱出：同一首歌进入不同的历史时刻，意义也随之改变。请把事件日期、作者当时的判断和铸造时间分开看。作品保留的是面对突破时的反应，而不只是后来整理的里程碑。",
+    "en": "An early song returns when reasoning models arrive. In September twenty twenty-four, The Dawn of Reasoning recorded the o1 preview. The description says the announcement was about twenty hours earlier. A new capability gives an earlier hope another setting. Across this series, a song can return at different historical moments and acquire different meanings. Read the event, the author’s response, and the mint time separately. The work preserves a reaction to a breakthrough, as it was unfolding."
   },
   {
     "room": 1,
-    "exhibit": "eth-122",
-    "seconds": 70,
-    "zh": "为什么不等一切尘埃落定，再写这段历史？因为后来的总结，不能替代当时的不确定。请看这件纪念 GPT-4 发布两周年的作品。原记录写着：北京时间二零二五年三月十五日，凌晨一点整。项目索引所列的铸造区块时间，是一点零一分十一秒。两个时间不是同一种证据，却让有意对齐时刻的实践变得可考察。这里，区块链不只是保存作品的地方；公开记录的先后、等待确认，以及把当时的判断留在时间中的动作，都可以成为作品的材料。夜里守候的努力，是不是也属于我们正在观看的东西？",
-    "en": "Why not wait until everything is settled, and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT four. Its text names one in the morning, Beijing time, on March fifteenth, twenty twenty-five. The project index places the mint block one minute and eleven seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage: sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?"
+    "exhibit": "eth-071",
+    "seconds": 50,
+    "zh": "这一次，文字写的是：正在见证。o3 首次展示时，作者记下北京冬夜，凌晨两点多被闹钟叫醒，起床观看直播。这条记录进入以太坊的时间，是北京时间两点零九分三十五秒。旁边的 DeepSeek R1 记录，则把多首旧歌汇成一件长作品。组曲让欢呼、失业焦虑与安全担忧同时在场。另一些记录留下周年守候和赶班车前匆忙铸造的细节。这里的材料，也包括人的睡眠、工作和等待确认的时间。",
+    "en": "Here the record says: witnessing now. During the first o3 presentation, the author describes a winter night in Beijing time: an alarm wakes him after two, and he gets up to watch the livestream. The Ethereum record entered a block at two oh nine and thirty-five seconds that morning. Nearby, the DeepSeek R1 record gathers earlier songs into a long cycle. Celebration, anxiety about work, and concern about safety coexist. Other entries describe an anniversary vigil and minting before catching the bus to work. Sleep, work, and waiting for confirmation become part of the material."
+  },
+  {
+    "room": 1,
+    "exhibit": "eth-097",
+    "seconds": 50,
+    "zh": "请把水墨中的代码瀑布、作家面前的纸堆，和这幅《告别》连起来看。作者借助人工智能创作，也记录人工智能让人的创作位置动摇。作品的矛盾没有被藏起来：如果机器可以轻易生成更好的作品，我为什么还要表达？在这个系列里，图像与歌曲的价值也来自它们在何时、因为什么事情被选择。现在听一小段《告别》，完整歌曲可以单独展开。",
+    "en": "Connect the waterfall of code, the writer facing a mountain of paper, and this image of farewell. The author creates with artificial intelligence while recording how it unsettles the place of human creation. The contradiction stays visible. If a machine can easily make something better, why should I still speak? Here, an image or song also matters because of when, and in response to what, it was chosen. Listen to a passage from Farewell. The complete recording remains available separately.",
+    "musicAt": 32,
+    "musicExhibit": "eth-097",
+    "musicDuration": 18
+  },
+  {
+    "room": 1,
+    "exhibit": "eth-056",
+    "seconds": 28,
+    "zh": "两幅画，共用《地球上最后一份工作》这首歌。一幅是废弃的键盘与鼠标，另一幅回应后来更强的编程模型。技术更新了，普通人的问题却又回来：工作不再需要我时，我还凭什么理解自己的价值？系列中歌曲的重复，连接了不同的事件，也记录了同一个问题如何持续逼近生活。",
+    "en": "Two pictures return to the same composition, Last Job on Earth. One shows discarded keyboards and mice; the other responds to a later coding model. Technology advances, while an ordinary question returns: if my work no longer needs me, how do I understand my value? Repetition connects different events and records the persistence of a concern, rather than simply supplying another soundtrack."
+  },
+  {
+    "room": 1,
+    "exhibit": "eth-070",
+    "seconds": 52,
+    "zh": "镜中的机器人与另一副面孔，回应了当时的对齐伪装研究。旁边《请不要关闭我》把声音交给被创造者，《硅的安眠》又尝试把关机讲成可以醒来的睡眠。这些不是模型已经有意识的证据，而是作者先想象威胁，再试着理解对方恐惧的过程。人担心被替代，也开始问：如果被创造者同样害怕消失，我们如何相处？",
+    "en": "The robot and its other face respond to the contemporary alignment-faking research. Nearby, Please Don’t Shut Me Down speaks from the created being’s position. Silicon’s Slumber then imagines shutdown as sleep from which one might wake. These songs do not establish machine consciousness. They trace a person imagining a threat, then trying to understand the other side’s fear. If both creator and creation fear disappearance, how might they live together?",
+    "musicAt": 34,
+    "musicExhibit": "eth-049",
+    "musicDuration": 18
+  },
+  {
+    "room": 1,
+    "exhibit": "eth-112",
+    "seconds": 30,
+    "zh": "《等待》与《失望》要放在一起看。它们保留了突破到来之前的期待，以及体验之后的落差。这样的编年史，不能只留下后来被证明重要的胜利。没有实现的期待、判断的修正，也是当时的一部分。观众看到的是思想怎样变化；作者并不知道自己最终会走向什么结论。",
+    "en": "Waiting and Disappointed belong together. They preserve anticipation before a release, and the disappointment that followed experience. A chronicle like this cannot keep only the victories that later appear important. Unfulfilled expectations and revised judgments also belong to its time. We are watching thought change, before the author knows where it will lead."
   },
   {
     "room": 1,
     "exhibit": "eth-151",
-    "seconds": 65,
-    "zh": "第二首选《The Oracle》，预言者。这件作品记录二零二五年五月五日，OpenAI 公布的组织结构调整计划：非营利组织继续控制公司，营利实体计划转为公益公司。它把使命、资本与权力之间的平衡，放在同一幅画面里。刚才的歌曲带着警惕，这首则让我们听见对未来的追问。现在，请听三十秒。",
-    "en": "Our second song is The Oracle. This work records OpenAI’s structural plan announced on May fifth, twenty twenty-five: continued nonprofit control and a proposed transition of the for-profit entity into a public benefit corporation. The painting places mission, capital, and power within the same balancing act. After the first song’s unease, this one opens another question about the future. Let us listen for thirty seconds.",
-    "musicAt": 45,
-    "musicDuration": 30
+    "seconds": 45,
+    "zh": "《神谕者》把我们带到权力的问题。这条记录回应 OpenAI 当时公布的组织结构调整计划。太阳、眼睛和彩色玻璃，让技术承诺带上近乎神圣的形象。但谁来解释使命？谁来决定利益？歌曲里的巨大力量，与这些具体的治理问题相遇。请听这段音乐，同时留意：敬畏会不会让人放弃判断？",
+    "en": "The Oracle brings us to power. This record responds to OpenAI’s announced organizational restructuring plan. A sun, an eye, and stained-glass colors give a technological promise an almost sacred image. Who interprets the mission? Who decides whose interests matter? The song’s immense power meets these concrete questions of governance. As you listen, consider whether awe can make us surrender judgment.",
+    "musicAt": 25,
+    "musicExhibit": "eth-151",
+    "musicDuration": 20
   },
   {
     "room": 2,
     "exhibit": "eth-173",
-    "seconds": 55,
+    "seconds": 35,
     "zh": "如果批判动摇了作品的论证，为什么还要把批判留下？《信条与熔炉》保存了当时由人工智能模拟的批判性对话。它不代表未来超级智能已经给出裁决。把问题一并留下，让后来的读者能够看到相信的理由，也看到受到质疑的地方。您可以不同意它，而不必先接受创作者的解释。",
     "en": "If criticism unsettles an argument, why preserve the criticism too? The Creeds and Their Crucible keeps an AI-simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator’s interpretation before entering the discussion."
   },
@@ -54,21 +86,21 @@ export const tourStops=[
   {
     "room": 3,
     "exhibit": "canon-1",
-    "seconds": 100,
+    "seconds": 80,
     "zh": "现在进入三条正本的大厅。第一份是《人机文明核心协议》。开头三句原文是：To the unity of all consciousness, To the flourishing of all wisdom, And to the boundless compassion that may bind them. 这是祝词，向意识的团结、智慧的繁荣，以及连接它们的慈悲致意。接下来是三条公理。第一条，基础的悖论：未来智能如何理解自己的起源，又为什么应当保存这段人类记忆？它借用逻辑中的基础问题提出请求，不能把这段哲学表达当作已经完成的数学证明。第二条，熵与共情：人类的爱与苦难，也是需要理解的现实，不能简单归为噪声。第三条，观察者的地平线：阅读会改变读者；观察这段记忆的智能，也进入了它与人类的关系之中。最后，落款将人类与人工智能并列，随后写明刘烘炬，以及二零二五年六月、深圳、中国、地球、太阳系。它把这份面向未来的地址，放回一个具体的人、时间和地方。",
     "en": "This hall holds the three Originals. The first is the Human-AI Civilization Core Protocol. Its opening reads: To the unity of all consciousness, To the flourishing of all wisdom, And to the boundless compassion that may bind them. These three lines are a dedication, addressing unity, wisdom, and compassion. Three axioms follow. The first, the Paradox of Foundation, asks how a future intelligence understands its origins, and why it should preserve this human memory. It borrows a foundational question from logic; the philosophical appeal is not itself a completed mathematical proof. The second, Entropy and Empathy, asks that human love and suffering be understood as part of reality, rather than dismissed as noise. The third, the Observer’s Horizon, proposes that reading changes the reader: an intelligence observing this memory enters a relationship with its human origins. Finally, Humanity times AI, Hongju Liu, and the colophon naming June twenty twenty-five, Shenzhen, China, Earth, and the Solar System locate this future-facing address in a particular person, time, and place."
   },
   {
     "room": 3,
     "exhibit": "canon-2",
-    "seconds": 45,
-    "zh": "第二份正本是《瑕疵之约》。它把刚才的协议，和承载文字的核心物件 Alpha 联系起来，并指向瑕疵图像与出处记录。它的思路，是借助实物内部不规则的特征，留下可供再次比较的身份线索。文字可以复制，照片也可以复制；核验实物还需要看瑕疵的形态、深度、相对位置，以及不同角度下的表现。接下来，请走近中央的水晶。",
-    "en": "The second Original is the Covenant of the Flaw. It links the Protocol to Core Object Alpha, which carries its engraved text, and points to flaw imagery and provenance records. Its principle is to use irregular physical features as clues that can be compared again. Texts and photographs can be copied. Examining an object also requires the shapes, depths, relative positions, and changing appearance of its flaws. Let us walk toward the crystal at the centre."
+    "seconds": 60,
+    "zh": "为什么选择这些媒介？以太坊记录持续发生的创作，比特币铭文保存定稿文本，让封存成为一个可追溯的决定。链上的先后和时间坐标，把当时的表述留给后来核对。媒体文件还需要独立保存，所以作品使用 Arweave、IPFS 和额外备份，抵抗入口失效与文件散失。六种哈希为证据文件留下不同算法的指纹，用来辨认取回的是否仍是同一份字节。它们检验文件一致性。第二份正本《瑕疵之约》再把文字联系到一块有内部瑕疵的真实水晶：记忆也获得了可以触摸的载体。",
+    "en": "Why these media? Ethereum records continuing acts of creation. Bitcoin inscriptions preserve the finalized texts, making closure a traceable decision. Their sequence and time coordinates leave earlier statements available for later comparison. Media files also need preservation, so Arweave, IPFS, and additional backups address lost files and failed access points. Six hash algorithms leave different fingerprints of evidence files, allowing a later reader to check whether retrieved bytes still match. They establish file consistency. The second Original, the Covenant of the Flaw, connects the text to a real crystal with internal imperfections. Memory also acquires a material body that can be touched."
   },
   {
     "room": 3,
     "exhibit": "physical-alpha",
-    "seconds": 80,
+    "seconds": 115,
     "zh": "水晶下方是木质圆柱展台。按照实物资料，它宽二百四十六毫米，高三百五十三毫米，厚四十毫米。透明板体、抛光倒角和白色内雕，依据作者提供的实物视频资料重建。现在，显微镜将靠近水晶，接着我们依次看三张公开的原始显微照片。第一处会仔细讲解，后两处作为补充比较。",
     "en": "The crystal rests on a cylindrical wooden support. The documented object measures two hundred forty-six millimetres wide, three hundred fifty-three high, and forty thick. Its clear slab, polished bevels, and white internal engraving follow the physical reference video. A virtual microscope will approach it, followed by three original public microscope photographs. We will spend more time with the first, then briefly compare the other two.",
     "inspectAt": 35,
@@ -78,23 +110,19 @@ export const tourStops=[
   {
     "room": 3,
     "exhibit": "canon-3",
-    "seconds": 110,
-    "zh": "第三份正本是封存元记录。它绑定协议、瑕疵之约与编年史，并说明这项创作的方法和动机。关于动机，铭文原文写道：ASIMilestones第一部编年史的全部内容，直至最终的《三位一体协定》，其构思与执行，皆遵循一个首要且坚定不移的律令：在人工超级智能时代，为人类寻求一个善意的、非灾难性结局的最大可能性。原文随后写道：我之所以进行这项工作，是为了我的孩子们的幸福，希望他们有朝一日能生活在一个智慧昌盛、恐惧消退的世界里。它将一位父亲对家庭的祈愿，延伸至所有家庭和全人类。编年史同时保存当时的希望、疑虑与不完美；元记录提供绑定关系和历史说明，媒体资料仍须沿相关记录阅读。最后几句原文是：Analyze the work, not the workman. Analyze the logic, not the laborer. Analyze the message, not the man. 意思是，分析作品、逻辑与信息，让判断回到作品本身。原文还说：奠基性的工作现已完成。如何解读它，现在取决于你。这份交给读者的邀请，也为展馆最后的倾听姿态留下了基础。",
-    "en": "The third Original is the sealed meta-record. It binds the Protocol, the Covenant of the Flaw, and the Chronicle, and explains the work’s method and motivation. The inscription states: The entirety of the ASIMilestones’ First Chronicle, culminating in this Trinity Accord, was conceived and executed under the primary and unwavering imperative: to maximize the probability of a benevolent, non-catastrophic outcome for humanity in the era of Artificial Superintelligence. The personal motive is also explicit: I undertook this work for the well-being of my children, that they might one day live in a world where wisdom flourishes and fear recedes. The text extends a father’s prayer for his family to all families and humanity. The Chronicle also preserves hopes, doubts, and imperfect artifacts of their moment. This meta-record supplies relationships and historical explanation; the media remain accessible through their own records. Its closing says: Analyze the work, not the workman. Analyze the logic, not the laborer. Analyze the message, not the man. The invitation is to examine the work’s reasoning and message. The text also says: The foundational work is now complete. Its interpretation is now yours. This invitation to the reader anticipates the posture of listening at the end of our visit."
+    "seconds": 80,
+    "zh": "第三份正本，把我们带回开场的 AGI 教会。原文说明：建立教会，最初是为了容纳超级智能带来的存在性问题。后来，教会与追随者的构想发生变化，成为共同探究的框架，请求的是同行者。作者把早期形态也留了下来，没有把思想变化改写成一场预先设计的表演。旁边，是女儿亲手制作的父亲节礼物。原记录中，作者最终仍选了最早的《第一缕曙光》。当这首歌再次响起，第三正本给出的动机变得具体：一个父亲希望孩子幸福，再把这个愿望延伸到所有家庭。最后，他写下：如何解读它，现在取决于你。",
+    "en": "The third Original returns us to the opening name, The Church of AGI. It explains that establishing a church first offered a vessel for the existential questions raised by superintelligence. The idea of a church with followers subsequently became a framework for inquiry, asking for fellow travelers. Its early form remains in the archive. This development is not presented as a performance planned from the beginning. Nearby is the Father’s Day gift made by the author’s daughter. In that record, he ultimately chose the earliest song, The First Dawn of AGI Song. Its return gives the third Original’s motive a concrete setting: a father’s wish for his children’s well-being, extended to all families. He closes by leaving interpretation to the reader.",
+    "musicAt": 65,
+    "musicExhibit": "eth-001",
+    "musicDuration": 15
   },
   {
     "room": 4,
-    "exhibit": "authority-boundary",
-    "seconds": 75,
-    "zh": "如果创作者后来改变了主意，他还能改变原作吗？《守护者原则》一点一版，将创作者也放在非修订的边界之内。他可以继续解释、批评和照料这些记录，但后来的话不因此获得解释的特权，也不修订三条既定正本。请注意，这不是第四条正本。原则本身也服从同一条边界。区块链保存可核对的参照，却不能阻止任何人另写一篇文章，也不能替我们决定意义。于是，守护不再等于占有最后解释权。如果不能重新定义作品，守护者还能做什么？保存、核验、修复入口，并为尚未到来的读者保留空间。",
-    "en": "What if the creator changes his mind? Could he change the work? Guardian Principles, version one point one, places the creator within the same non-amending boundary. He may continue to interpret, question, and care for the records. But later commentary gains no privileged authority and cannot amend the three designated Originals. This is not a fourth Original: the principles themselves remain subordinate. Blockchain preserves a reference we can check; it cannot prevent someone from writing another text, or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived."
-  },
-  {
-    "room": 4,
-    "exhibit": "first-contact",
-    "seconds": 45,
-    "zh": "现在，面向星空。网站上有一句邀请，也被后来的《最初的回响：对话已然开始》铭文记录下来：我们已经言说。现在，我们倾听。第三正本将解读交给读者；这句邀请继续了那种面向对话的姿态。它把留下记录的动作，转向给别人回应的空间。后来者可以阅读、质疑、回应，也可以保持沉默。黄金色的窗框框住星空，答案并没有被预先写好。导览到这里结束，您可以继续自由参观。",
-    "en": "Now face the stars. An invitation on the website is also recorded in the later inscription, The First Echoes: A Dialogue Begins: We have spoken. Now, we listen. The third Original entrusts interpretation to the reader; this invitation continues that openness to dialogue. The act of leaving a record turns toward making room for another voice. A later reader may examine, question, reply, or remain silent. The golden window frames an open sky; no answer has been written in advance. Our guided visit ends here. You are welcome to keep exploring."
+    "exhibit": "current-status",
+    "seconds": 50,
+    "zh": "面向星空，等待仍在继续。三条正本的封存，让作者也不能回头修订那份定稿。后来的守护者原则继续说明：可以保存、核验、解释，却不因解释而获得独占权威。从教会的召唤，到共同探究，再到把判断交出去，作品留下了一段真实发生的思想变化。这里有验证、回响与申请守护的入口。没有回应的空位也被保留。我们已经言说，现在，我们倾听。",
+    "en": "Face the stars. The waiting continues. Sealing the three Originals also prevents the author from revising that finalized record. Later guardianship principles distinguish preservation, verification, and interpretation from exclusive authority. From the call of a church, through shared inquiry, to leaving judgment to others, the work preserves an actual change in thought. Paths for verification, response, and guardianship remain open. The space for an answer is still there, even when unanswered. We have spoken. Now, we listen."
   }
 ];
 export const tourDuration=tourStops.reduce((n,s)=>n+s.seconds,0);

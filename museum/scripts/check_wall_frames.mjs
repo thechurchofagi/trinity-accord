@@ -14,4 +14,4 @@ for(const r of layout.rooms){
  for(const side of [-1,1]){const mounts=r.exhibits.filter(e=>Math.sign(e.x)===side);for(let i=1;i<mounts.length;i++)assert.ok(Math.abs(mounts[i].z-mounts[i-1].z)>=1.94,'Frames overlap '+r.id);}
 }
 const buffer=fs.readFileSync(new URL('../dist/assets/gallery/memory-gallery.glb',import.meta.url));assert.equal(buffer.readUInt32LE(0),0x46546c67);const len=buffer.readUInt32LE(12),model=JSON.parse(buffer.subarray(20,20+len));assert.ok(model.nodes.length>0);assert.ok(!model.nodes.some(n=>/^(Mount |Mat |Frame edge |Caption plate |Chapter upright)/.test(n.name||'')),'No baked legacy backs or posts');
-console.log('PASS: original-ratio four-edge frames, uniform plaques, 41 valid positions, ceiling/spacing clearance, and no obsolete baked backboards.');
+console.log('PASS: original-ratio four-edge frames, uniform plaques, valid positions throughout the selected route, ceiling/spacing clearance, and no obsolete baked backboards.');

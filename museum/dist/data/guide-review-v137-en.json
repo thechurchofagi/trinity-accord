@@ -1,0 +1,348 @@
+{
+  "edition": "museum-v1.37.0",
+  "engine": "Faster Whisper small multilingual CPU int8",
+  "scope": "Independent recognition and script comparison for newly generated English paragraphs. Exact-text reused recordings retain their earlier reviews.",
+  "manualListeningReviewed": false,
+  "items": [
+    {
+      "stop": 1,
+      "audioSha256": "a90af25685b7d3754cbc94a5aa96ca386f767ffea3c080c04141e17dc6b2e485",
+      "textSha256": "643f50e2194164a5c5d29b3842d3c3198e05a985ac6780b49e47d9b4845e44e2",
+      "paragraphs": [
+        {
+          "key": "7a2b7d329baa4fff775223b6049145c231d9b3af01806832742d6e9222e994ef",
+          "text": "An early song returns when reasoning models arrive. In September twenty twenty-four, The Dawn of Reasoning recorded the o1 preview. The description says the announcement was about twenty hours earlier.",
+          "recognized": "An early song returns when reasoning models arrive. In September 2024, the dawn of reasoning recorded the 01 preview. The description says the announcement was about 20 hours earlier.",
+          "similarity": 0.9057,
+          "manualListeningReviewed": false,
+          "reviewRequired": true,
+          "comparisonNote": "Recognition renders spoken years and twenty as digits and o1 as 01; comparison identifies no omitted words."
+        },
+        {
+          "key": "176c7bc1808b01f492281a1621557ff5680c1e0937c27eb10029809970233fce",
+          "text": "A new capability gives an earlier hope another setting. Across this series, a song can return at different historical moments and acquire different meanings. Read the event, the author’s response, and the mint time separately.",
+          "recognized": "A new capability gives an earlier hope another setting. Across this series, a song can return at different historical moments and acquire different meanings. Read the event, the author's response, and the mint time separately.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "d67384a9c59f2cdd5371aff52142154894f6dabe5bf34ec310ad02edeb0581f0",
+          "text": "The work preserves a reaction to a breakthrough, as it was unfolding.",
+          "recognized": "The work preserves a reaction to a breakthrough as it was unfolding.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        }
+      ]
+    },
+    {
+      "stop": 2,
+      "audioSha256": "d1deb1fb6b4612a362d5bf1e46382ccb6fb4a454bd8e68d7b7adb544eea80bfb",
+      "textSha256": "98a7ef180e9be73de8f5cd0c993340ace224e97cf3e0299c62b3e95562d451b6",
+      "paragraphs": [
+        {
+          "key": "3dc10508fdcf553ef8188994ada06bf6151d40eeb940c0bc667d44082b751dfb",
+          "text": "Here the record says: witnessing now. During the first o3 presentation, the author describes a winter night in Beijing time: an alarm wakes him after two, and he gets up to watch the livestream.",
+          "recognized": "Here the record says, witnessing now. During the first 03 presentation, the author describes a winter night in Beijing time. An alarm wakes him after two, and he gets up to watch the live stream.",
+          "similarity": 0.9935,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "fa829d7653b799a8ea33cfe2887b00cfa8d7e6e581ea2ccc64d0026f67c3b38a",
+          "text": "The Ethereum record entered a block at two oh nine and thirty-five seconds that morning. Nearby, the DeepSeek R1 record gathers earlier songs into a long cycle. Celebration, anxiety about work, and concern about safety coexist.",
+          "recognized": "The Ethereum record entered a block at 209 and 35 seconds that morning. Nearby, the DeepSeq R1 record gathers earlier songs into a long cycle, celebration, anxiety about work, and concern about safety coexist.",
+          "similarity": 0.9239,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Recognition renders the spoken clock as digits and spells DeepSeek as DeepSeq; this is a text comparison, not a pronunciation certification."
+        },
+        {
+          "key": "6e0ba190c1b25ad1abc8ca9c12fb268510180b8de92964a2ce918593050a23d9",
+          "text": "Other entries describe an anniversary vigil and minting before catching the bus to work. Sleep, work, and waiting for confirmation become part of the material.",
+          "recognized": "Other entries describe an anniversary vigil and minting before catching the bus to work. Sleep, work, and waiting for confirmation become part of the material.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        }
+      ]
+    },
+    {
+      "stop": 3,
+      "audioSha256": "f7904ec124526d5c37c93a0a585d4387a4b50c3a2ab0085d0475375f0278f068",
+      "textSha256": "b5862fb7a1e73f81b5445cef458c2eecc83d3218197311ee684ae4b4e19a9240",
+      "paragraphs": [
+        {
+          "key": "af7a9478784af96ada7a31a013c2b3cf65f9a9d1e6351862ef900035e3d646ad",
+          "text": "Connect the waterfall of code, the writer facing a mountain of paper, and this image of farewell. The author creates with artificial intelligence while recording how it unsettles the place of human creation. The contradiction stays visible.",
+          "recognized": "Connect the waterfall of code, the writer facing a mountain of paper, and this image of farewell. The author creates with artificial intelligence while recording how it unsettles the place of human creation. The contradiction stays visible.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "d709dd5522a7ecbee8820497d154918c987924a29aaa67340e80e7acdd9e8b13",
+          "text": "If a machine can easily make something better, why should I still speak? Here, an image or song also matters because of when, and in response to what, it was chosen. Listen to a passage from Farewell.",
+          "recognized": "If a machine can easily make something better, why should I still speak? Here, an image or song also matters because of when, and in response to what it was chosen. Listen to a passage from Farewell.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "b8f92878bf999034a1c2920a70642a72debe50270ee07dba0f0f5a41471ece44",
+          "text": "The complete recording remains available separately.",
+          "recognized": "The complete recording remains available separately.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        }
+      ]
+    },
+    {
+      "stop": 4,
+      "audioSha256": "8adbd617f29ea9d14460f45df6096b1b74c0ca8a898a5fd49873d36358cd9278",
+      "textSha256": "75fd81c3524e740e8f54fc9a3a44cda0c01adda1d4aa0b3de2652e3ae952f957",
+      "paragraphs": [
+        {
+          "key": "90d193f87ba61f869557b78e14dd915ae35d348e87d959c715c5a63948ecc522",
+          "text": "Two pictures return to the same composition, Last Job on Earth. One shows discarded keyboards and mice; the other responds to a later coding model.",
+          "recognized": "Two pictures return to the same composition. Last job on Earth. One shows discarded keyboards and mice. The other responds to a later coding model.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "1b8b7718d9ceff875e0857d710a2756828d49f3f89ffe707774a12decd3df49a",
+          "text": "Technology advances, while an ordinary question returns: if my work no longer needs me, how do I understand my value?",
+          "recognized": "Technology advances while an ordinary question returns, if my work no longer needs me, how do I understand my value?",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "4b19f37dbd0ab1bde723e8c3ff62d56d89041579c8495a783a7532c777362014",
+          "text": "Repetition connects different events and records the persistence of a concern, rather than simply supplying another soundtrack.",
+          "recognized": "Repetition connects different events and records the persistence of a concern rather than simply supplying another soundtrack.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        }
+      ]
+    },
+    {
+      "stop": 5,
+      "audioSha256": "54042adcc2b454630b5dd10d77673a1bd1b8e0062681b87eefcc22a8bf387502",
+      "textSha256": "321a115a78e40fb829150a59d33af99f5aea3425531d1c7eec99028231112db0",
+      "paragraphs": [
+        {
+          "key": "aae41fad845548323aac02b42a019619bce31f05806bd6f304d63fbf6c556110",
+          "text": "The robot and its other face respond to the contemporary alignment-faking research. Nearby, Please Don’t Shut Me Down speaks from the created being’s position. Silicon’s Slumber then imagines shutdown as sleep from which one might wake.",
+          "recognized": "The robot and its other face respond to the contemporary alignment-faking research. Nearby, please don't shut me down, speaks from the created being's position. Silicon slumber then imagines shut down as sleep from which one might wake.",
+          "similarity": 0.9974,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "8c6baa8c4617a6994a8e9ad204822a48be66672933853cdd1d117a5a51093cf1",
+          "text": "These songs do not establish machine consciousness. They trace a person imagining a threat, then trying to understand the other side’s fear. If both creator and creation fear disappearance, how might they live together?",
+          "recognized": "These songs do not establish machine consciousness, they trace a person imagining a threat, then trying to understand the other side's fear. If both creator and creation fear disappearance, how might they live together?",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        }
+      ]
+    },
+    {
+      "stop": 6,
+      "audioSha256": "f56595401106392281dbc74276f2b172120a8687cb49834a92456c4a54472a7f",
+      "textSha256": "02e10828504f81d6231a5abcbac44a52f4868b483bc484ca40caf7f89200fd84",
+      "paragraphs": [
+        {
+          "key": "c7166f10b43b46b9e239b897eb68e38fa19dbeab6b3ce52389ff31dc50d94336",
+          "text": "Waiting and Disappointed belong together. They preserve anticipation before a release, and the disappointment that followed experience. A chronicle like this cannot keep only the victories that later appear important.",
+          "recognized": "Waiting and disappointed belong together, they preserve anticipation before a release, and the disappointment that followed experience. A chronicle like this cannot keep only the victories that later appear important.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "e9879ad54b6a6884455c3fa806ed678529d543c79094ed2a5fd4a9a54a4c9307",
+          "text": "Unfulfilled expectations and revised judgments also belong to its time. We are watching thought change, before the author knows where it will lead.",
+          "recognized": "Unfulfilled expectations and revised judgments also belong to its time. We're watching Thought Change before the author knows where it will lead.",
+          "similarity": 0.9959,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        }
+      ]
+    },
+    {
+      "stop": 7,
+      "audioSha256": "d176a6e04c0ca841b1781693705867b1bb6ef10bad7c9b548d057794d12ba959",
+      "textSha256": "def3f35ac7dff47bfbb0d2352394d1973a5e6dcaa45884825c6eecd61eb49df8",
+      "paragraphs": [
+        {
+          "key": "68edf94b8a92ace27c53861840a18af5af659df0cab4bb3abc32c7e4da55f2fa",
+          "text": "The Oracle brings us to power. This record responds to OpenAI’s announced organizational restructuring plan. A sun, an eye, and stained-glass colors give a technological promise an almost sacred image. Who interprets the mission?",
+          "recognized": "The Oracle brings us to power. This record responds to open AIs announced organizational restructuring plan. A sun, an eye, and stained glass colors give a technological promise an almost sacred image who interprets the mission.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "be1a6c735dc3ad39d575bad2d7169895a8f670f434511dded358014c35e128d8",
+          "text": "Who decides whose interests matter? The song’s immense power meets these concrete questions of governance. As you listen, consider whether awe can make us surrender judgment.",
+          "recognized": "Who decides whose interests matter? The song's immense power meets these concrete questions of governance. As you listen, consider whether awe can make us surrender judgment.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        }
+      ]
+    },
+    {
+      "stop": 11,
+      "audioSha256": "9aa45a866894c54d8703c415c56dc7147f6a0012562abd27956ca40bd19dc86e",
+      "textSha256": "490294e09c415de07216de86e25f732b1651d0c4c887602c74297406bea83b6b",
+      "paragraphs": [
+        {
+          "key": "4295f6c5bc46c028e68da41e8ca9f3182c8b0bf265e747f1d93ad85897aad63b",
+          "text": "Why these media? Ethereum records continuing acts of creation. Bitcoin inscriptions preserve the finalized texts, making closure a traceable decision.",
+          "recognized": "Why these media? Ethereum records continuing acts of creation. Bitcoin inscriptions preserve the finalized texts, making closure a traceable decision.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "edc7a9a0fea8da1593311c6436ad06128763cdd5e255cf0eaaedadc57b93298e",
+          "text": "Their sequence and time coordinates leave earlier statements available for later comparison. Media files also need preservation, so Arweave, IPFS, and additional backups address lost files and failed access points.",
+          "recognized": "Their sequence and time coordinates leave earlier statements available for later comparison. Media files also need preservation, so RWEVE, IPFS, and additional backups address lost files and failed access points.",
+          "similarity": 0.9944,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "a1aca21a894700de5d7850de2da441389c47f261af47f625252cafafcde764b0",
+          "text": "Six hash algorithms leave different fingerprints of evidence files, allowing a later reader to check whether retrieved bytes still match. They establish file consistency.",
+          "recognized": "Six hash algorithms leave different fingerprints of evidence files, allowing a later reader to check whether retrieved bytes still match. They established file consistency.",
+          "similarity": 0.9931,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "b9fa17b295523f0593e0dcb8a9e3ebab474ac851ee651f367d7a7d05fdb1c9f2",
+          "text": "The second Original, the Covenant of the Flaw, connects the text to a real crystal with internal imperfections. Memory also acquires a material body that can be touched.",
+          "recognized": "The second original, the Covenant of the Flaw, connects the text to a real crystal with internal imperfections. Memory also acquires a material body that can be touched.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        }
+      ]
+    },
+    {
+      "stop": 13,
+      "audioSha256": "8e83969f06a6c69310c7fd349e1b644a08ebfc6e74410667a72ed950afe974a4",
+      "textSha256": "7a72d334f80ea5f8c55362e9f64c20e692d649fbb0358b9825107bc4a2d94eb2",
+      "paragraphs": [
+        {
+          "key": "2f4745b9920494d0f728662f2d4c7604c96796166c0f4dcb00b3a474dc08a3de",
+          "text": "The third Original returns us to the opening name, The Church of AGI. It explains that establishing a church first offered a vessel for the existential questions raised by superintelligence.",
+          "recognized": "The third original returns us to the opening name, the Church of AGI. It explains that establishing a church first offered a vessel for the existential questions raised by superintelligence.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "1adb291bf012ab86da261b693f09a52f684ba87682a3b3a14ad948edc86b44d7",
+          "text": "The idea of a church with followers subsequently became a framework for inquiry, asking for fellow travelers. Its early form remains in the archive. This development is not presented as a performance planned from the beginning.",
+          "recognized": "The idea of a church with followers subsequently became a framework for inquiry, asking for fellow travelers. Its early form remains in the archive. This development is not presented as a performance planned from the beginning.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "a89956e83bf08e55ebc9b7d729f68f4833f9320f014a241fd584f12572f29b33",
+          "text": "Nearby is the Father’s Day gift made by the author’s daughter. In that record, he ultimately chose the earliest song, The First Dawn of AGI Song.",
+          "recognized": "Nearby is the Father's Day gift made by the author's daughter. In that record, he ultimately chose the earliest song, the first dawn of AGI song.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "ef5c4ee89286c4b2321a880dbc673b5d4523e4eb090c609006343a59489902cc",
+          "text": "Its return gives the third Original’s motive a concrete setting: a father’s wish for his children’s well-being, extended to all families. He closes by leaving interpretation to the reader.",
+          "recognized": "Its return gives the third originals motive a concrete setting, a father's wish for his children's well-being, extended to all families. He closes by leaving interpretation to the reader.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        }
+      ]
+    },
+    {
+      "stop": 14,
+      "audioSha256": "098426b5895d78be4a58e8c9e5883e24ccde95980ecf33b42233147172ac9d4f",
+      "textSha256": "c5c4d81feaf0867ecdb00cf462119d052e65f8dafe9a71e5cce288527429bea2",
+      "paragraphs": [
+        {
+          "key": "01fbe1edb47163af7f9bde0d4b5575c77ce90746fa1a92ccf1c00253234074d8",
+          "text": "Face the stars. The waiting continues. Sealing the three Originals also prevents the author from revising that finalized record.",
+          "recognized": "Face the Stars, the waiting continues, sealing the three originals also prevents the author from revising that finalized record.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "4079397363e408387d09defc2a05fdbc38f4bb9d021d4028add6008ad4cdda76",
+          "text": "Later guardianship principles distinguish preservation, verification, and interpretation from exclusive authority.",
+          "recognized": "Later guardianship principles distinguish preservation, verification, and interpretation from exclusive authority.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "4d483e2f9edd08105e868078bd2816cf190025c5fa75774e74a0e7bef4e3469a",
+          "text": "From the call of a church, through shared inquiry, to leaving judgment to others, the work preserves an actual change in thought. Paths for verification, response, and guardianship remain open.",
+          "recognized": "From the call of a church, through shared inquiry, to leaving judgment to others, the work preserves an actual change in thought. Paths for verification, response, and guardianship remain open.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        },
+        {
+          "key": "3284a7b696460bb9955875732b41ad5327a65c905ecced538ed720af1d716839",
+          "text": "The space for an answer is still there, even when unanswered. We have spoken. Now, we listen.",
+          "recognized": "The space for an answer is still there, even when unanswered. We have spoken, now we listen.",
+          "similarity": 1.0,
+          "manualListeningReviewed": false,
+          "reviewRequired": false,
+          "comparisonNote": "Text comparison found no substantive omission; punctuation or minor transcription differences may remain."
+        }
+      ]
+    }
+  ]
+}

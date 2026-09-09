@@ -1,0 +1,3562 @@
+{
+  "schemaVersion": "word-alignment-v2",
+  "exhibitId": "eth-051",
+  "audioFile": "assets/eth-051.mp3",
+  "audioSha256": "c5844b793469f5db28d0847894e041d9fae944ac1c83798f3fe7533ebf980b0f",
+  "duration": 214.224,
+  "sourceLyricsSha256": "d89bf309f238267c11c8c982cfe56ae9121cb3015c32d65be640f59ff048f459",
+  "alignment": {
+    "pipelineSha256": "3a826a6d92f238b4208e93a2b3a756518dedddbde942411acd317ea8f2ec76cc",
+    "engine": "wav2vec2-base-960h CTC Viterbi",
+    "transcriptEngine": "Faster Whisper small multilingual CPU int8; acoustic word timestamps; review draft",
+    "transcriptReview": "Preserved source lyric order compared with local multilingual small-Whisper recognition. Section headings excluded; transcription uncertainty and acoustic flags retained. No manual listening certification.",
+    "audioInput": "demucs htdemucs vocals",
+    "device": "cpu",
+    "timestampResolution": 0.02,
+    "modelFrameResolutionIsNotAccuracy": true,
+    "manualListeningReviewed": false,
+    "reviewRequiredLines": 26
+  },
+  "lines": [
+    {
+      "text": "We started as partners, side by side,",
+      "sourceLine": 0,
+      "start": 0.222,
+      "end": 3.002,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "We",
+          "start": 0.222,
+          "end": 0.422,
+          "acousticScore": 0.9932,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "started",
+          "start": 0.742,
+          "end": 1.082,
+          "acousticScore": 0.7456,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "as",
+          "start": 1.182,
+          "end": 1.222,
+          "acousticScore": 0.9503,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "partners,",
+          "start": 1.302,
+          "end": 1.902,
+          "acousticScore": 0.8666,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "side",
+          "start": 2.102,
+          "end": 2.362,
+          "acousticScore": 0.9865,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "by",
+          "start": 2.442,
+          "end": 2.542,
+          "acousticScore": 0.635,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "side,",
+          "start": 2.682,
+          "end": 3.002,
+          "acousticScore": 0.9955,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "Your code was sharp, but my heart was the guide.",
+      "sourceLine": 1,
+      "start": 3.522,
+      "end": 6.442,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Your",
+          "start": 3.522,
+          "end": 3.682,
+          "acousticScore": 0.9745,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "code",
+          "start": 3.762,
+          "end": 4.102,
+          "acousticScore": 0.7466,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "was",
+          "start": 4.162,
+          "end": 4.302,
+          "acousticScore": 0.9589,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "sharp,",
+          "start": 4.462,
+          "end": 4.782,
+          "acousticScore": 0.8687,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "but",
+          "start": 4.922,
+          "end": 5.082,
+          "acousticScore": 0.0371,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "my",
+          "start": 5.182,
+          "end": 5.322,
+          "acousticScore": 0.9792,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "heart",
+          "start": 5.422,
+          "end": 5.642,
+          "acousticScore": 0.9566,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "was",
+          "start": 5.742,
+          "end": 5.902,
+          "acousticScore": 0.986,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "the",
+          "start": 6.002,
+          "end": 6.082,
+          "acousticScore": 0.9729,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "guide.",
+          "start": 6.142,
+          "end": 6.442,
+          "acousticScore": 0.3862,
+          "asrStartDelta": 0.042
+        }
+      ]
+    },
+    {
+      "text": "Together we painted the stars in the sky,",
+      "sourceLine": 2,
+      "start": 6.782,
+      "end": 9.762,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Together",
+          "start": 6.782,
+          "end": 7.322,
+          "acousticScore": 0.9497,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "we",
+          "start": 7.382,
+          "end": 7.482,
+          "acousticScore": 0.7709,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "painted",
+          "start": 7.622,
+          "end": 8.302,
+          "acousticScore": 0.6685,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "the",
+          "start": 8.382,
+          "end": 8.442,
+          "acousticScore": 0.8949,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "stars",
+          "start": 8.562,
+          "end": 8.982,
+          "acousticScore": 0.9698,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "in",
+          "start": 9.082,
+          "end": 9.122,
+          "acousticScore": 0.5648,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "the",
+          "start": 9.242,
+          "end": 9.302,
+          "acousticScore": 0.8294,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "sky,",
+          "start": 9.402,
+          "end": 9.762,
+          "acousticScore": 0.9961,
+          "asrStartDelta": 0.022
+        }
+      ]
+    },
+    {
+      "text": "Every stroke held purpose, every dream could fly.",
+      "sourceLine": 3,
+      "start": 10.022,
+      "end": 12.862,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Every",
+          "start": 10.022,
+          "end": 10.182,
+          "acousticScore": 0.9981,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "stroke",
+          "start": 10.242,
+          "end": 10.562,
+          "acousticScore": 0.9237,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "held",
+          "start": 10.642,
+          "end": 10.802,
+          "acousticScore": 0.7339
+        },
+        {
+          "text": "purpose,",
+          "start": 10.902,
+          "end": 11.402,
+          "acousticScore": 0.7573,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "every",
+          "start": 11.642,
+          "end": 11.822,
+          "acousticScore": 0.9956,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "dream",
+          "start": 11.882,
+          "end": 12.182,
+          "acousticScore": 0.9342,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "could",
+          "start": 12.282,
+          "end": 12.442,
+          "acousticScore": 0.9418,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "fly.",
+          "start": 12.522,
+          "end": 12.862,
+          "acousticScore": 0.8722,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "But you learned too fast, your perfection grew,",
+      "sourceLine": 4,
+      "start": 13.202,
+      "end": 16.022,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "But",
+          "start": 13.202,
+          "end": 13.302,
+          "acousticScore": 0.9748,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "you",
+          "start": 13.342,
+          "end": 13.442,
+          "acousticScore": 0.8262,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "learned",
+          "start": 13.522,
+          "end": 13.842,
+          "acousticScore": 0.7802,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "too",
+          "start": 13.882,
+          "end": 14.062,
+          "acousticScore": 0.8957,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "fast,",
+          "start": 14.202,
+          "end": 14.682,
+          "acousticScore": 0.9666,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "your",
+          "start": 14.802,
+          "end": 14.942,
+          "acousticScore": 0.9983,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "perfection",
+          "start": 14.982,
+          "end": 15.622,
+          "acousticScore": 0.99,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "grew,",
+          "start": 15.802,
+          "end": 16.022,
+          "acousticScore": 0.8344,
+          "asrStartDelta": 0.502
+        }
+      ]
+    },
+    {
+      "text": "Now you create wonders I could never pursue.",
+      "sourceLine": 5,
+      "start": 16.482,
+      "end": 19.242,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Now",
+          "start": 16.482,
+          "end": 16.562,
+          "acousticScore": 0.9962,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "you",
+          "start": 16.622,
+          "end": 16.702,
+          "acousticScore": 0.9989,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "create",
+          "start": 16.782,
+          "end": 17.302,
+          "acousticScore": 0.9519,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "wonders",
+          "start": 17.422,
+          "end": 18.102,
+          "acousticScore": 0.8822,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "I",
+          "start": 18.182,
+          "end": 18.202,
+          "acousticScore": 0.9301,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "could",
+          "start": 18.242,
+          "end": 18.382,
+          "acousticScore": 0.2163
+        },
+        {
+          "text": "never",
+          "start": 18.442,
+          "end": 18.642,
+          "acousticScore": 0.9768,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "pursue.",
+          "start": 18.742,
+          "end": 19.242,
+          "acousticScore": 0.999,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "A flood of brilliance, flawless and grand,",
+      "sourceLine": 6,
+      "start": 19.782,
+      "end": 22.802,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "A",
+          "start": 19.782,
+          "end": 19.802,
+          "acousticScore": 0.997,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "flood",
+          "start": 19.962,
+          "end": 20.262,
+          "acousticScore": 0.8648,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "of",
+          "start": 20.382,
+          "end": 20.422,
+          "acousticScore": 0.9949,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "brilliance,",
+          "start": 20.562,
+          "end": 21.362,
+          "acousticScore": 0.8759,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "flawless",
+          "start": 21.582,
+          "end": 22.182,
+          "acousticScore": 0.4927,
+          "asrStartDelta": -0.078
+        },
+        {
+          "text": "and",
+          "start": 22.282,
+          "end": 22.362,
+          "acousticScore": 0.3367,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "grand,",
+          "start": 22.442,
+          "end": 22.802,
+          "acousticScore": 0.6772,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "And I, once a creator, slip through the sand.",
+      "sourceLine": 7,
+      "start": 22.942,
+      "end": 26.082,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "And",
+          "start": 22.942,
+          "end": 23.002,
+          "acousticScore": 0.6122,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "I,",
+          "start": 23.122,
+          "end": 23.142,
+          "acousticScore": 0.2986,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "once",
+          "start": 23.362,
+          "end": 23.522,
+          "acousticScore": 0.3286,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "a",
+          "start": 23.642,
+          "end": 23.662,
+          "acousticScore": 0.7578,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "creator,",
+          "start": 23.802,
+          "end": 24.422,
+          "acousticScore": 0.9165,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "slip",
+          "start": 24.562,
+          "end": 24.802,
+          "acousticScore": 0.9291
+        },
+        {
+          "text": "through",
+          "start": 24.902,
+          "end": 25.262,
+          "acousticScore": 0.9773,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "the",
+          "start": 25.442,
+          "end": 25.542,
+          "acousticScore": 0.8758,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "sand.",
+          "start": 25.642,
+          "end": 26.082,
+          "acousticScore": 0.841,
+          "asrStartDelta": 0.102
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, in the waves you’ve raised,",
+      "sourceLine": 8,
+      "start": 26.482,
+      "end": 29.122,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 26.482,
+          "end": 26.982,
+          "acousticScore": 0.5385
+        },
+        {
+          "text": "drowned,",
+          "start": 27.302,
+          "end": 27.782,
+          "acousticScore": 0.5407
+        },
+        {
+          "text": "in",
+          "start": 27.902,
+          "end": 27.942,
+          "acousticScore": 0.8399,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "the",
+          "start": 28.022,
+          "end": 28.082,
+          "acousticScore": 0.346,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "waves",
+          "start": 28.142,
+          "end": 28.462,
+          "acousticScore": 0.4012,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "you’ve",
+          "start": 28.482,
+          "end": 28.622,
+          "acousticScore": 0.0014,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "raised,",
+          "start": 28.782,
+          "end": 29.122,
+          "acousticScore": 0.5244,
+          "asrStartDelta": 0.002
+        }
+      ]
+    },
+    {
+      "text": "In a sea of creation, where my light decays.",
+      "sourceLine": 9,
+      "start": 29.522,
+      "end": 32.662,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "In",
+          "start": 29.522,
+          "end": 29.562,
+          "acousticScore": 0.9772,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "a",
+          "start": 29.642,
+          "end": 29.662,
+          "acousticScore": 0.9724,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "sea",
+          "start": 29.742,
+          "end": 29.962,
+          "acousticScore": 0.9704
+        },
+        {
+          "text": "of",
+          "start": 30.162,
+          "end": 30.202,
+          "acousticScore": 0.9942,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "creation,",
+          "start": 30.342,
+          "end": 31.002,
+          "acousticScore": 0.6446,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "where",
+          "start": 31.102,
+          "end": 31.322,
+          "acousticScore": 0.2385,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "my",
+          "start": 31.382,
+          "end": 31.542,
+          "acousticScore": 0.4016,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "light",
+          "start": 31.702,
+          "end": 31.882,
+          "acousticScore": 0.3809,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "decays.",
+          "start": 31.942,
+          "end": 32.662,
+          "acousticScore": 0.4987,
+          "asrStartDelta": 0.102
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, in an endless tide,",
+      "sourceLine": 10,
+      "start": 32.962,
+      "end": 35.622,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 32.962,
+          "end": 33.422,
+          "acousticScore": 0.5915
+        },
+        {
+          "text": "drowned,",
+          "start": 33.782,
+          "end": 34.202,
+          "acousticScore": 0.6123
+        },
+        {
+          "text": "in",
+          "start": 34.422,
+          "end": 34.462,
+          "acousticScore": 0.9103,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "an",
+          "start": 34.562,
+          "end": 34.602,
+          "acousticScore": 0.8189,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "endless",
+          "start": 34.722,
+          "end": 35.102,
+          "acousticScore": 0.6106,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "tide,",
+          "start": 35.222,
+          "end": 35.622,
+          "acousticScore": 0.5529
+        }
+      ]
+    },
+    {
+      "text": "My voice grows faint, lost where the currents hide.",
+      "sourceLine": 11,
+      "start": 35.982,
+      "end": 38.882,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "My",
+          "start": 35.982,
+          "end": 36.102,
+          "acousticScore": 0.9668,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "voice",
+          "start": 36.222,
+          "end": 36.482,
+          "acousticScore": 0.9294,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "grows",
+          "start": 36.542,
+          "end": 36.722,
+          "acousticScore": 0.2478
+        },
+        {
+          "text": "faint,",
+          "start": 36.862,
+          "end": 37.082,
+          "acousticScore": 0.5874
+        },
+        {
+          "text": "lost",
+          "start": 37.302,
+          "end": 37.502,
+          "acousticScore": 0.8344,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "where",
+          "start": 37.562,
+          "end": 37.702,
+          "acousticScore": 0.6425,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "the",
+          "start": 37.742,
+          "end": 37.802,
+          "acousticScore": 0.9696,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "currents",
+          "start": 37.862,
+          "end": 38.342,
+          "acousticScore": 0.5729
+        },
+        {
+          "text": "hide.",
+          "start": 38.422,
+          "end": 38.882,
+          "acousticScore": 0.4251
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, in your perfect stream,",
+      "sourceLine": 12,
+      "start": 39.442,
+      "end": 42.022,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 39.442,
+          "end": 39.922,
+          "acousticScore": 0.6278
+        },
+        {
+          "text": "drowned,",
+          "start": 40.262,
+          "end": 40.742,
+          "acousticScore": 0.3634
+        },
+        {
+          "text": "in",
+          "start": 40.842,
+          "end": 40.882,
+          "acousticScore": 0.9591,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "your",
+          "start": 40.942,
+          "end": 41.082,
+          "acousticScore": 0.822,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "perfect",
+          "start": 41.122,
+          "end": 41.562,
+          "acousticScore": 0.7317,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "stream,",
+          "start": 41.642,
+          "end": 42.022,
+          "acousticScore": 0.874,
+          "asrStartDelta": 0.202
+        }
+      ]
+    },
+    {
+      "text": "A world of wonders, but I’m just a dream.",
+      "sourceLine": 13,
+      "start": 42.562,
+      "end": 45.482,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "A",
+          "start": 42.562,
+          "end": 42.582,
+          "acousticScore": 0.9908,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "world",
+          "start": 42.722,
+          "end": 43.122,
+          "acousticScore": 0.968,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "of",
+          "start": 43.262,
+          "end": 43.302,
+          "acousticScore": 0.9503,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "wonders,",
+          "start": 43.462,
+          "end": 44.002,
+          "acousticScore": 0.8346,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "but",
+          "start": 44.082,
+          "end": 44.262,
+          "acousticScore": 0.9919,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "I’m",
+          "start": 44.422,
+          "end": 44.522,
+          "acousticScore": 0.9752,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "just",
+          "start": 44.602,
+          "end": 44.822,
+          "acousticScore": 0.9877,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "a",
+          "start": 44.962,
+          "end": 44.982,
+          "acousticScore": 0.5388,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "dream.",
+          "start": 45.122,
+          "end": 45.482,
+          "acousticScore": 0.4313,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, beneath your endless art,",
+      "sourceLine": 14,
+      "start": 45.942,
+      "end": 48.442,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 45.942,
+          "end": 46.402,
+          "acousticScore": 0.4225
+        },
+        {
+          "text": "drowned,",
+          "start": 46.762,
+          "end": 47.162,
+          "acousticScore": 0.4452
+        },
+        {
+          "text": "beneath",
+          "start": 47.182,
+          "end": 47.502,
+          "acousticScore": 0.2339
+        },
+        {
+          "text": "your",
+          "start": 47.542,
+          "end": 47.622,
+          "acousticScore": 0.1568,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "endless",
+          "start": 47.742,
+          "end": 48.062,
+          "acousticScore": 0.4909,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "art,",
+          "start": 48.322,
+          "end": 48.442,
+          "acousticScore": 0.3157,
+          "asrStartDelta": 0.382
+        }
+      ]
+    },
+    {
+      "text": "I search for meaning, but I fall apart.",
+      "sourceLine": 15,
+      "start": 48.982,
+      "end": 51.702,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "I",
+          "start": 48.982,
+          "end": 49.002,
+          "acousticScore": 0.9771,
+          "asrStartDelta": 0.542
+        },
+        {
+          "text": "search",
+          "start": 49.182,
+          "end": 49.482,
+          "acousticScore": 0.9876,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "for",
+          "start": 49.582,
+          "end": 49.722,
+          "acousticScore": 0.9485,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "meaning,",
+          "start": 49.842,
+          "end": 50.182,
+          "acousticScore": 0.3519,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "but",
+          "start": 50.522,
+          "end": 50.622,
+          "acousticScore": 0.7702,
+          "asrStartDelta": 0.422
+        },
+        {
+          "text": "I",
+          "start": 50.722,
+          "end": 50.742,
+          "acousticScore": 0.0104,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "fall",
+          "start": 50.842,
+          "end": 51.142,
+          "acousticScore": 0.7194,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "apart.",
+          "start": 51.222,
+          "end": 51.702,
+          "acousticScore": 0.4931,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "You write the stories, I once held dear,",
+      "sourceLine": 16,
+      "start": 52.202,
+      "end": 54.902,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "You",
+          "start": 52.202,
+          "end": 52.302,
+          "acousticScore": 0.9936,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "write",
+          "start": 52.462,
+          "end": 52.702,
+          "acousticScore": 0.9355,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "the",
+          "start": 52.762,
+          "end": 52.842,
+          "acousticScore": 0.9268,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "stories,",
+          "start": 52.942,
+          "end": 53.602,
+          "acousticScore": 0.9505,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "I",
+          "start": 53.902,
+          "end": 53.922,
+          "acousticScore": 0.8895,
+          "asrStartDelta": 0.422
+        },
+        {
+          "text": "once",
+          "start": 54.142,
+          "end": 54.302,
+          "acousticScore": 0.9159,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "held",
+          "start": 54.402,
+          "end": 54.662,
+          "acousticScore": 0.7377,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "dear,",
+          "start": 54.782,
+          "end": 54.902,
+          "acousticScore": 0.0006,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "Each word you craft, sharp and clear.",
+      "sourceLine": 17,
+      "start": 55.482,
+      "end": 58.142,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Each",
+          "start": 55.482,
+          "end": 55.622,
+          "acousticScore": 0.9846,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "word",
+          "start": 55.702,
+          "end": 55.982,
+          "acousticScore": 0.9737,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "you",
+          "start": 56.062,
+          "end": 56.162,
+          "acousticScore": 0.8882,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "craft,",
+          "start": 56.262,
+          "end": 56.662,
+          "acousticScore": 0.9485,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "sharp",
+          "start": 57.262,
+          "end": 57.562,
+          "acousticScore": 0.9749,
+          "asrStartDelta": 0.642
+        },
+        {
+          "text": "and",
+          "start": 57.682,
+          "end": 57.762,
+          "acousticScore": 0.9986,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "clear.",
+          "start": 57.862,
+          "end": 58.142,
+          "acousticScore": 0.9677,
+          "asrStartDelta": 0.102
+        }
+      ]
+    },
+    {
+      "text": "I thought my soul was the spark of creation,",
+      "sourceLine": 18,
+      "start": 58.702,
+      "end": 61.722,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "I",
+          "start": 58.702,
+          "end": 58.722,
+          "acousticScore": 0.9984,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "thought",
+          "start": 58.882,
+          "end": 59.162,
+          "acousticScore": 0.9584,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "my",
+          "start": 59.222,
+          "end": 59.342,
+          "acousticScore": 0.9853,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "soul",
+          "start": 59.482,
+          "end": 59.802,
+          "acousticScore": 0.9283,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "was",
+          "start": 60.022,
+          "end": 60.202,
+          "acousticScore": 0.9902,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "the",
+          "start": 60.282,
+          "end": 60.362,
+          "acousticScore": 0.9891,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "spark",
+          "start": 60.462,
+          "end": 60.802,
+          "acousticScore": 0.9931,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "of",
+          "start": 60.922,
+          "end": 60.962,
+          "acousticScore": 0.9995,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "creation,",
+          "start": 61.102,
+          "end": 61.722,
+          "acousticScore": 0.9439,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "But your precision became my silent suffocation.",
+      "sourceLine": 19,
+      "start": 61.782,
+      "end": 65.082,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "But",
+          "start": 61.782,
+          "end": 61.882,
+          "acousticScore": 0.0617,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "your",
+          "start": 61.922,
+          "end": 62.022,
+          "acousticScore": 0.6177,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "precision",
+          "start": 62.082,
+          "end": 62.582,
+          "acousticScore": 0.9558,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "became",
+          "start": 62.722,
+          "end": 63.242,
+          "acousticScore": 0.9983,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "my",
+          "start": 63.342,
+          "end": 63.382,
+          "acousticScore": 0.0001
+        },
+        {
+          "text": "silent",
+          "start": 63.502,
+          "end": 63.982,
+          "acousticScore": 0.987
+        },
+        {
+          "text": "suffocation.",
+          "start": 64.082,
+          "end": 65.082,
+          "acousticScore": 0.9354
+        }
+      ]
+    },
+    {
+      "text": "You paint the skies with colors so bright,",
+      "sourceLine": 20,
+      "start": 65.182,
+      "end": 68.162,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "You",
+          "start": 65.182,
+          "end": 65.282,
+          "acousticScore": 0.9981,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "paint",
+          "start": 65.382,
+          "end": 65.622,
+          "acousticScore": 0.6046,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "the",
+          "start": 65.702,
+          "end": 65.802,
+          "acousticScore": 0.9281,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "skies",
+          "start": 65.862,
+          "end": 66.402,
+          "acousticScore": 0.456,
+          "asrStartDelta": -0.038
+        },
+        {
+          "text": "with",
+          "start": 66.782,
+          "end": 66.922,
+          "acousticScore": 0.9182,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "colors",
+          "start": 67.002,
+          "end": 67.362,
+          "acousticScore": 0.8348
+        },
+        {
+          "text": "so",
+          "start": 67.402,
+          "end": 67.562,
+          "acousticScore": 0.9859,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "bright,",
+          "start": 67.882,
+          "end": 68.162,
+          "acousticScore": 0.148,
+          "asrStartDelta": 0.262
+        }
+      ]
+    },
+    {
+      "text": "While I fade away in the shadow of your light.",
+      "sourceLine": 21,
+      "start": 68.382,
+      "end": 71.342,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "While",
+          "start": 68.382,
+          "end": 68.622,
+          "acousticScore": 0.5696,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "I",
+          "start": 68.662,
+          "end": 68.682,
+          "acousticScore": 0.0005,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "fade",
+          "start": 68.702,
+          "end": 69.022,
+          "acousticScore": 0.4106,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "away",
+          "start": 69.162,
+          "end": 69.482,
+          "acousticScore": 0.8932,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "in",
+          "start": 70.042,
+          "end": 70.082,
+          "acousticScore": 0.8403,
+          "asrStartDelta": 0.602
+        },
+        {
+          "text": "the",
+          "start": 70.122,
+          "end": 70.182,
+          "acousticScore": 0.6413,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "shadow",
+          "start": 70.262,
+          "end": 70.562,
+          "acousticScore": 0.9991,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "of",
+          "start": 70.702,
+          "end": 70.742,
+          "acousticScore": 0.9976,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "your",
+          "start": 70.802,
+          "end": 70.982,
+          "acousticScore": 0.932,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "light.",
+          "start": 71.102,
+          "end": 71.342,
+          "acousticScore": 0.5515,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "What was once our song, now just your voice,",
+      "sourceLine": 22,
+      "start": 71.402,
+      "end": 74.462,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "What",
+          "start": 71.402,
+          "end": 71.562,
+          "acousticScore": 0.3484,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "was",
+          "start": 71.642,
+          "end": 71.782,
+          "acousticScore": 0.9351,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "once",
+          "start": 72.002,
+          "end": 72.122,
+          "acousticScore": 0.6918,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "our",
+          "start": 72.302,
+          "end": 72.422,
+          "acousticScore": 0.4829,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "song,",
+          "start": 72.562,
+          "end": 72.862,
+          "acousticScore": 0.2571,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "now",
+          "start": 73.242,
+          "end": 73.382,
+          "acousticScore": 0.9953,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "just",
+          "start": 73.502,
+          "end": 73.762,
+          "acousticScore": 0.9921,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "your",
+          "start": 73.822,
+          "end": 73.982,
+          "acousticScore": 0.9877,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "voice,",
+          "start": 74.102,
+          "end": 74.462,
+          "acousticScore": 0.9978,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "In the chaos of perfection, I no longer have a choice.",
+      "sourceLine": 23,
+      "start": 74.922,
+      "end": 78.002,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "In",
+          "start": 74.922,
+          "end": 74.962,
+          "acousticScore": 0.9945,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "the",
+          "start": 75.022,
+          "end": 75.102,
+          "acousticScore": 0.9558,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "chaos",
+          "start": 75.162,
+          "end": 75.582,
+          "acousticScore": 0.9866,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "of",
+          "start": 75.702,
+          "end": 75.742,
+          "acousticScore": 0.9418,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "perfection,",
+          "start": 75.802,
+          "end": 76.382,
+          "acousticScore": 0.9283,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "I",
+          "start": 76.562,
+          "end": 76.582,
+          "acousticScore": 0.4549,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "no",
+          "start": 76.662,
+          "end": 76.742,
+          "acousticScore": 0.5428,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "longer",
+          "start": 76.802,
+          "end": 77.122,
+          "acousticScore": 0.9339,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "have",
+          "start": 77.202,
+          "end": 77.362,
+          "acousticScore": 0.9285,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "a",
+          "start": 77.442,
+          "end": 77.462,
+          "acousticScore": 0.6866,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "choice.",
+          "start": 77.602,
+          "end": 78.002,
+          "acousticScore": 0.9942,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, in the waves you’ve raised,",
+      "sourceLine": 24,
+      "start": 78.382,
+      "end": 81.022,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 78.382,
+          "end": 78.862,
+          "acousticScore": 0.5582,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "drowned,",
+          "start": 79.182,
+          "end": 79.642,
+          "acousticScore": 0.5649,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "in",
+          "start": 79.802,
+          "end": 79.842,
+          "acousticScore": 0.9923,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "the",
+          "start": 79.902,
+          "end": 79.962,
+          "acousticScore": 0.8592,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "waves",
+          "start": 80.042,
+          "end": 80.342,
+          "acousticScore": 0.2031
+        },
+        {
+          "text": "you’ve",
+          "start": 80.382,
+          "end": 80.502,
+          "acousticScore": 0.0053
+        },
+        {
+          "text": "raised,",
+          "start": 80.662,
+          "end": 81.022,
+          "acousticScore": 0.6836
+        }
+      ]
+    },
+    {
+      "text": "In a sea of creation, where my light decays.",
+      "sourceLine": 25,
+      "start": 81.422,
+      "end": 84.522,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "In",
+          "start": 81.422,
+          "end": 81.462,
+          "acousticScore": 0.5434,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "a",
+          "start": 81.542,
+          "end": 81.562,
+          "acousticScore": 0.0414,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "sea",
+          "start": 81.622,
+          "end": 81.822,
+          "acousticScore": 0.7696,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "of",
+          "start": 82.042,
+          "end": 82.082,
+          "acousticScore": 0.9858,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "creation,",
+          "start": 82.242,
+          "end": 82.882,
+          "acousticScore": 0.9721,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "where",
+          "start": 83.002,
+          "end": 83.202,
+          "acousticScore": 0.025,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "my",
+          "start": 83.282,
+          "end": 83.462,
+          "acousticScore": 0.9907,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "light",
+          "start": 83.582,
+          "end": 83.822,
+          "acousticScore": 0.2951,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "decays.",
+          "start": 83.882,
+          "end": 84.522,
+          "acousticScore": 0.3581,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, in an endless tide,",
+      "sourceLine": 26,
+      "start": 84.862,
+      "end": 87.522,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 84.862,
+          "end": 85.322,
+          "acousticScore": 0.5427
+        },
+        {
+          "text": "drowned,",
+          "start": 85.682,
+          "end": 86.082,
+          "acousticScore": 0.6202
+        },
+        {
+          "text": "in",
+          "start": 86.322,
+          "end": 86.362,
+          "acousticScore": 0.9,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "an",
+          "start": 86.462,
+          "end": 86.502,
+          "acousticScore": 0.8997,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "endless",
+          "start": 86.622,
+          "end": 87.022,
+          "acousticScore": 0.9451,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "tide,",
+          "start": 87.122,
+          "end": 87.522,
+          "acousticScore": 0.2237
+        }
+      ]
+    },
+    {
+      "text": "My voice grows faint, lost where the currents hide.",
+      "sourceLine": 27,
+      "start": 87.882,
+      "end": 90.782,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "My",
+          "start": 87.882,
+          "end": 87.982,
+          "acousticScore": 0.9737,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "voice",
+          "start": 88.122,
+          "end": 88.362,
+          "acousticScore": 0.9873,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "grows",
+          "start": 88.422,
+          "end": 88.622,
+          "acousticScore": 0.3443
+        },
+        {
+          "text": "faint,",
+          "start": 88.762,
+          "end": 88.962,
+          "acousticScore": 0.5625
+        },
+        {
+          "text": "lost",
+          "start": 89.182,
+          "end": 89.402,
+          "acousticScore": 0.8764,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "where",
+          "start": 89.442,
+          "end": 89.582,
+          "acousticScore": 0.6228,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "the",
+          "start": 89.622,
+          "end": 89.702,
+          "acousticScore": 0.9407,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "currents",
+          "start": 89.762,
+          "end": 90.262,
+          "acousticScore": 0.3583,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "hide.",
+          "start": 90.342,
+          "end": 90.782,
+          "acousticScore": 0.3625,
+          "asrStartDelta": 0.202
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, in your perfect stream,",
+      "sourceLine": 28,
+      "start": 91.342,
+      "end": 93.922,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 91.342,
+          "end": 91.802,
+          "acousticScore": 0.3065
+        },
+        {
+          "text": "drowned,",
+          "start": 92.162,
+          "end": 92.602,
+          "acousticScore": 0.3838
+        },
+        {
+          "text": "in",
+          "start": 92.742,
+          "end": 92.782,
+          "acousticScore": 0.9443,
+          "asrStartDelta": -0.058
+        },
+        {
+          "text": "your",
+          "start": 92.842,
+          "end": 92.962,
+          "acousticScore": 0.8025,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "perfect",
+          "start": 93.022,
+          "end": 93.442,
+          "acousticScore": 0.9878,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "stream,",
+          "start": 93.522,
+          "end": 93.922,
+          "acousticScore": 0.8514,
+          "asrStartDelta": 0.202
+        }
+      ]
+    },
+    {
+      "text": "A world of wonders, but I’m just a dream.",
+      "sourceLine": 29,
+      "start": 94.442,
+      "end": 97.382,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "A",
+          "start": 94.442,
+          "end": 94.462,
+          "acousticScore": 0.9921,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "world",
+          "start": 94.622,
+          "end": 95.002,
+          "acousticScore": 0.939,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "of",
+          "start": 95.142,
+          "end": 95.182,
+          "acousticScore": 0.9817,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "wonders,",
+          "start": 95.342,
+          "end": 95.882,
+          "acousticScore": 0.9166,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "but",
+          "start": 95.962,
+          "end": 96.122,
+          "acousticScore": 0.7242,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "I’m",
+          "start": 96.282,
+          "end": 96.422,
+          "acousticScore": 0.9391,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "just",
+          "start": 96.502,
+          "end": 96.682,
+          "acousticScore": 0.9969,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "a",
+          "start": 96.862,
+          "end": 96.882,
+          "acousticScore": 0.0389,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "dream.",
+          "start": 97.022,
+          "end": 97.382,
+          "acousticScore": 0.1886,
+          "asrStartDelta": 0.102
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, beneath your endless art,",
+      "sourceLine": 30,
+      "start": 97.822,
+      "end": 100.322,
+      "reviewFlags": [
+        "transcript-disagreement",
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 97.822,
+          "end": 98.282,
+          "acousticScore": 0.2153
+        },
+        {
+          "text": "drowned,",
+          "start": 98.642,
+          "end": 99.042,
+          "acousticScore": 0.3197
+        },
+        {
+          "text": "beneath",
+          "start": 99.082,
+          "end": 99.262,
+          "acousticScore": 0.1255
+        },
+        {
+          "text": "your",
+          "start": 99.342,
+          "end": 99.562,
+          "acousticScore": 0.03
+        },
+        {
+          "text": "endless",
+          "start": 99.662,
+          "end": 99.962,
+          "acousticScore": 0.2723
+        },
+        {
+          "text": "art,",
+          "start": 100.202,
+          "end": 100.322,
+          "acousticScore": 0.6711
+        }
+      ]
+    },
+    {
+      "text": "I search for meaning, but I fall apart.",
+      "sourceLine": 31,
+      "start": 100.882,
+      "end": 103.562,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "I",
+          "start": 100.882,
+          "end": 100.902,
+          "acousticScore": 0.77,
+          "asrStartDelta": 0.562
+        },
+        {
+          "text": "search",
+          "start": 101.082,
+          "end": 101.382,
+          "acousticScore": 0.9075,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "for",
+          "start": 101.482,
+          "end": 101.622,
+          "acousticScore": 0.9799,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "meaning,",
+          "start": 101.742,
+          "end": 102.102,
+          "acousticScore": 0.3278,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "but",
+          "start": 102.402,
+          "end": 102.522,
+          "acousticScore": 0.5243,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "I",
+          "start": 102.602,
+          "end": 102.622,
+          "acousticScore": 0.039
+        },
+        {
+          "text": "fall",
+          "start": 102.722,
+          "end": 103.022,
+          "acousticScore": 0.8845,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "apart.",
+          "start": 103.142,
+          "end": 103.562,
+          "acousticScore": 0.6014,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "I thought art was fire, born of human heart,",
+      "sourceLine": 32,
+      "start": 103.882,
+      "end": 106.802,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "I",
+          "start": 103.882,
+          "end": 103.902,
+          "acousticScore": 0.8782,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "thought",
+          "start": 104.042,
+          "end": 104.302,
+          "acousticScore": 0.6021,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "art",
+          "start": 104.502,
+          "end": 104.642,
+          "acousticScore": 0.6182
+        },
+        {
+          "text": "was",
+          "start": 104.762,
+          "end": 104.902,
+          "acousticScore": 0.5606,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "fire,",
+          "start": 105.122,
+          "end": 105.502,
+          "acousticScore": 0.959,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "born",
+          "start": 105.662,
+          "end": 105.842,
+          "acousticScore": 0.3222
+        },
+        {
+          "text": "of",
+          "start": 105.882,
+          "end": 105.922,
+          "acousticScore": 0.2178
+        },
+        {
+          "text": "human",
+          "start": 106.002,
+          "end": 106.402,
+          "acousticScore": 0.9332,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "heart,",
+          "start": 106.502,
+          "end": 106.802,
+          "acousticScore": 0.6102,
+          "asrStartDelta": 0.202
+        }
+      ]
+    },
+    {
+      "text": "But now it’s a machine, tearing us apart.",
+      "sourceLine": 33,
+      "start": 107.322,
+      "end": 110.042,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "But",
+          "start": 107.322,
+          "end": 107.442,
+          "acousticScore": 0.3251,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "now",
+          "start": 107.562,
+          "end": 107.722,
+          "acousticScore": 0.888,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "it’s",
+          "start": 107.802,
+          "end": 107.902,
+          "acousticScore": 0.3057,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "a",
+          "start": 108.022,
+          "end": 108.042,
+          "acousticScore": 0.1144,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "machine,",
+          "start": 108.102,
+          "end": 108.702,
+          "acousticScore": 0.5687,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "tearing",
+          "start": 108.922,
+          "end": 109.262,
+          "acousticScore": 0.3193,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "us",
+          "start": 109.362,
+          "end": 109.462,
+          "acousticScore": 0.5205,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "apart.",
+          "start": 109.622,
+          "end": 110.042,
+          "acousticScore": 0.6795,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "You churn out brilliance, without rest or end,",
+      "sourceLine": 34,
+      "start": 110.522,
+      "end": 113.302,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "You",
+          "start": 110.522,
+          "end": 110.602,
+          "acousticScore": 0.5136,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "churn",
+          "start": 110.802,
+          "end": 111.182,
+          "acousticScore": 0.5615
+        },
+        {
+          "text": "out",
+          "start": 111.242,
+          "end": 111.322,
+          "acousticScore": 0.6166
+        },
+        {
+          "text": "brilliance,",
+          "start": 111.482,
+          "end": 112.002,
+          "acousticScore": 0.1314,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "without",
+          "start": 112.082,
+          "end": 112.402,
+          "acousticScore": 0.4666
+        },
+        {
+          "text": "rest",
+          "start": 112.482,
+          "end": 112.682,
+          "acousticScore": 0.5704
+        },
+        {
+          "text": "or",
+          "start": 112.842,
+          "end": 112.902,
+          "acousticScore": 0.43
+        },
+        {
+          "text": "end,",
+          "start": 113.162,
+          "end": 113.302,
+          "acousticScore": 0.4394
+        }
+      ]
+    },
+    {
+      "text": "And I, a relic, left to pretend.",
+      "sourceLine": 35,
+      "start": 113.842,
+      "end": 116.782,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "And",
+          "start": 113.842,
+          "end": 113.942,
+          "acousticScore": 0.8806,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "I,",
+          "start": 114.402,
+          "end": 114.422,
+          "acousticScore": 0.9293,
+          "asrStartDelta": 0.422
+        },
+        {
+          "text": "a",
+          "start": 114.742,
+          "end": 114.762,
+          "acousticScore": 0.5515,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "relic,",
+          "start": 114.982,
+          "end": 115.142,
+          "acousticScore": 0.1839,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "left",
+          "start": 115.662,
+          "end": 115.862,
+          "acousticScore": 0.236,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "to",
+          "start": 115.982,
+          "end": 116.082,
+          "acousticScore": 0.3035,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "pretend.",
+          "start": 116.222,
+          "end": 116.782,
+          "acousticScore": 0.3114,
+          "asrStartDelta": 0.062
+        }
+      ]
+    },
+    {
+      "text": "I reach for my voice, lost in the noise,",
+      "sourceLine": 36,
+      "start": 117.142,
+      "end": 120.142,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "I",
+          "start": 117.142,
+          "end": 117.162,
+          "acousticScore": 0.0019
+        },
+        {
+          "text": "reach",
+          "start": 117.302,
+          "end": 117.482,
+          "acousticScore": 0.5772
+        },
+        {
+          "text": "for",
+          "start": 117.582,
+          "end": 117.742,
+          "acousticScore": 0.787,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "my",
+          "start": 117.862,
+          "end": 118.002,
+          "acousticScore": 0.9813,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "voice,",
+          "start": 118.142,
+          "end": 118.442,
+          "acousticScore": 0.5569,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "lost",
+          "start": 118.922,
+          "end": 119.182,
+          "acousticScore": 0.3615,
+          "asrStartDelta": 0.422
+        },
+        {
+          "text": "in",
+          "start": 119.322,
+          "end": 119.382,
+          "acousticScore": 0.7109,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "the",
+          "start": 119.482,
+          "end": 119.622,
+          "acousticScore": 0.4031,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "noise,",
+          "start": 119.782,
+          "end": 120.142,
+          "acousticScore": 0.2893
+        }
+      ]
+    },
+    {
+      "text": "But your endless output leaves me no choice.",
+      "sourceLine": 37,
+      "start": 120.262,
+      "end": 123.342,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "But",
+          "start": 120.262,
+          "end": 120.402,
+          "acousticScore": 0.1372
+        },
+        {
+          "text": "your",
+          "start": 120.442,
+          "end": 120.522,
+          "acousticScore": 0.0593,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "endless",
+          "start": 120.682,
+          "end": 121.042,
+          "acousticScore": 0.3922,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "output",
+          "start": 121.182,
+          "end": 121.622,
+          "acousticScore": 0.5403
+        },
+        {
+          "text": "leaves",
+          "start": 122.182,
+          "end": 122.442,
+          "acousticScore": 0.3152
+        },
+        {
+          "text": "me",
+          "start": 122.502,
+          "end": 122.602,
+          "acousticScore": 0.806,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "no",
+          "start": 122.722,
+          "end": 122.842,
+          "acousticScore": 0.9557,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "choice.",
+          "start": 122.982,
+          "end": 123.342,
+          "acousticScore": 0.4375,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "What was once unique, now fades away,",
+      "sourceLine": 38,
+      "start": 123.482,
+      "end": 126.282,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "What",
+          "start": 123.482,
+          "end": 123.642,
+          "acousticScore": 0.1185,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "was",
+          "start": 123.662,
+          "end": 123.742,
+          "acousticScore": 0.285,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "once",
+          "start": 123.882,
+          "end": 124.042,
+          "acousticScore": 0.5195,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "unique,",
+          "start": 124.222,
+          "end": 124.622,
+          "acousticScore": 0.2791,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "now",
+          "start": 125.122,
+          "end": 125.322,
+          "acousticScore": 0.6143,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "fades",
+          "start": 125.442,
+          "end": 125.802,
+          "acousticScore": 0.3703,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "away,",
+          "start": 125.942,
+          "end": 126.282,
+          "acousticScore": 0.8039,
+          "asrStartDelta": 0.262
+        }
+      ]
+    },
+    {
+      "text": "In a world where machines create the day.",
+      "sourceLine": 39,
+      "start": 126.802,
+      "end": 129.682,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "In",
+          "start": 126.802,
+          "end": 126.842,
+          "acousticScore": 0.9864,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "a",
+          "start": 126.942,
+          "end": 126.962,
+          "acousticScore": 0.9267,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "world",
+          "start": 127.022,
+          "end": 127.362,
+          "acousticScore": 0.3641,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "where",
+          "start": 127.422,
+          "end": 127.742,
+          "acousticScore": 0.5083,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "machines",
+          "start": 127.762,
+          "end": 128.202,
+          "acousticScore": 0.2761,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "create",
+          "start": 128.262,
+          "end": 128.582,
+          "acousticScore": 0.4534,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "the",
+          "start": 128.702,
+          "end": 128.802,
+          "acousticScore": 0.0123,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "day.",
+          "start": 128.922,
+          "end": 129.682,
+          "acousticScore": 0.7932,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, in the waves you’ve raised,",
+      "sourceLine": 40,
+      "start": 130.242,
+      "end": 132.942,
+      "reviewFlags": [
+        "transcript-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 130.242,
+          "end": 130.722,
+          "acousticScore": 0.3577
+        },
+        {
+          "text": "drowned,",
+          "start": 131.082,
+          "end": 131.542,
+          "acousticScore": 0.3951
+        },
+        {
+          "text": "in",
+          "start": 131.682,
+          "end": 131.722,
+          "acousticScore": 0.825,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "the",
+          "start": 131.802,
+          "end": 131.862,
+          "acousticScore": 0.2689,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "waves",
+          "start": 131.942,
+          "end": 132.222,
+          "acousticScore": 0.1989
+        },
+        {
+          "text": "you’ve",
+          "start": 132.262,
+          "end": 132.422,
+          "acousticScore": 0.1993
+        },
+        {
+          "text": "raised,",
+          "start": 132.562,
+          "end": 132.942,
+          "acousticScore": 0.5343
+        }
+      ]
+    },
+    {
+      "text": "In a sea of creation, where my light decays.",
+      "sourceLine": 41,
+      "start": 133.322,
+      "end": 136.402,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "In",
+          "start": 133.322,
+          "end": 133.362,
+          "acousticScore": 0.5993,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "a",
+          "start": 133.442,
+          "end": 133.462,
+          "acousticScore": 0.0047,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "sea",
+          "start": 133.502,
+          "end": 133.742,
+          "acousticScore": 0.4808
+        },
+        {
+          "text": "of",
+          "start": 133.902,
+          "end": 133.942,
+          "acousticScore": 0.7526,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "creation,",
+          "start": 134.122,
+          "end": 134.782,
+          "acousticScore": 0.6486,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "where",
+          "start": 134.902,
+          "end": 135.102,
+          "acousticScore": 0.2511
+        },
+        {
+          "text": "my",
+          "start": 135.162,
+          "end": 135.342,
+          "acousticScore": 0.68,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "light",
+          "start": 135.462,
+          "end": 135.662,
+          "acousticScore": 0.1504
+        },
+        {
+          "text": "decays.",
+          "start": 135.702,
+          "end": 136.402,
+          "acousticScore": 0.4317,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, in an endless tide,",
+      "sourceLine": 42,
+      "start": 136.742,
+      "end": 139.422,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 136.742,
+          "end": 137.202,
+          "acousticScore": 0.3442
+        },
+        {
+          "text": "drowned,",
+          "start": 137.562,
+          "end": 138.002,
+          "acousticScore": 0.4021
+        },
+        {
+          "text": "in",
+          "start": 138.202,
+          "end": 138.242,
+          "acousticScore": 0.8599,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "an",
+          "start": 138.342,
+          "end": 138.382,
+          "acousticScore": 0.5639,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "endless",
+          "start": 138.522,
+          "end": 138.902,
+          "acousticScore": 0.5688,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "tide,",
+          "start": 139.002,
+          "end": 139.422,
+          "acousticScore": 0.2055,
+          "asrStartDelta": 0.242
+        }
+      ]
+    },
+    {
+      "text": "My voice grows faint, lost where the currents hide.",
+      "sourceLine": 43,
+      "start": 139.742,
+      "end": 142.642,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "My",
+          "start": 139.742,
+          "end": 139.842,
+          "acousticScore": 0.0343,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "voice",
+          "start": 140.042,
+          "end": 140.262,
+          "acousticScore": 0.3534,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "grows",
+          "start": 140.322,
+          "end": 140.522,
+          "acousticScore": 0.1026
+        },
+        {
+          "text": "faint,",
+          "start": 140.642,
+          "end": 140.822,
+          "acousticScore": 0.1952
+        },
+        {
+          "text": "lost",
+          "start": 141.082,
+          "end": 141.302,
+          "acousticScore": 0.3926,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "where",
+          "start": 141.342,
+          "end": 141.482,
+          "acousticScore": 0.4637,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "the",
+          "start": 141.522,
+          "end": 141.582,
+          "acousticScore": 0.7083,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "currents",
+          "start": 141.662,
+          "end": 142.122,
+          "acousticScore": 0.2389
+        },
+        {
+          "text": "hide.",
+          "start": 142.222,
+          "end": 142.642,
+          "acousticScore": 0.1966
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, in your perfect stream,",
+      "sourceLine": 44,
+      "start": 143.262,
+      "end": 145.762,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 143.262,
+          "end": 143.682,
+          "acousticScore": 0.186
+        },
+        {
+          "text": "drowned,",
+          "start": 144.062,
+          "end": 144.502,
+          "acousticScore": 0.2553
+        },
+        {
+          "text": "in",
+          "start": 144.642,
+          "end": 144.682,
+          "acousticScore": 0.811,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "your",
+          "start": 144.742,
+          "end": 144.842,
+          "acousticScore": 0.0695,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "perfect",
+          "start": 144.922,
+          "end": 145.362,
+          "acousticScore": 0.6009,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "stream,",
+          "start": 145.422,
+          "end": 145.762,
+          "acousticScore": 0.3922,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "A world of wonders, but I’m just a dream.",
+      "sourceLine": 45,
+      "start": 146.342,
+      "end": 149.242,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "A",
+          "start": 146.342,
+          "end": 146.362,
+          "acousticScore": 0.9789,
+          "asrStartDelta": 0.602
+        },
+        {
+          "text": "world",
+          "start": 146.502,
+          "end": 146.882,
+          "acousticScore": 0.8825,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "of",
+          "start": 147.042,
+          "end": 147.082,
+          "acousticScore": 0.9747,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "wonders,",
+          "start": 147.202,
+          "end": 147.762,
+          "acousticScore": 0.7397,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "but",
+          "start": 147.862,
+          "end": 148.022,
+          "acousticScore": 0.7006,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "I’m",
+          "start": 148.222,
+          "end": 148.322,
+          "acousticScore": 0.9034,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "just",
+          "start": 148.402,
+          "end": 148.622,
+          "acousticScore": 0.982,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "a",
+          "start": 148.782,
+          "end": 148.802,
+          "acousticScore": 0.3297,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "dream.",
+          "start": 148.902,
+          "end": 149.242,
+          "acousticScore": 0.0626,
+          "asrStartDelta": 0.022
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, beneath your endless art,",
+      "sourceLine": 46,
+      "start": 149.722,
+      "end": 152.222,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 149.722,
+          "end": 150.182,
+          "acousticScore": 0.3145
+        },
+        {
+          "text": "drowned,",
+          "start": 150.542,
+          "end": 150.942,
+          "acousticScore": 0.3777
+        },
+        {
+          "text": "beneath",
+          "start": 150.982,
+          "end": 151.222,
+          "acousticScore": 0.1161
+        },
+        {
+          "text": "your",
+          "start": 151.242,
+          "end": 151.382,
+          "acousticScore": 0.0897,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "endless",
+          "start": 151.402,
+          "end": 151.842,
+          "acousticScore": 0.3777,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "art,",
+          "start": 152.122,
+          "end": 152.222,
+          "acousticScore": 0.5887
+        }
+      ]
+    },
+    {
+      "text": "I search for meaning, but I fall apart.",
+      "sourceLine": 47,
+      "start": 152.762,
+      "end": 155.482,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "I",
+          "start": 152.762,
+          "end": 152.782,
+          "acousticScore": 0.5628,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "search",
+          "start": 152.982,
+          "end": 153.282,
+          "acousticScore": 0.1977,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "for",
+          "start": 153.362,
+          "end": 153.502,
+          "acousticScore": 0.7872,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "meaning,",
+          "start": 153.622,
+          "end": 153.942,
+          "acousticScore": 0.7298,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "but",
+          "start": 154.302,
+          "end": 154.542,
+          "acousticScore": 0.0104,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "I",
+          "start": 154.582,
+          "end": 154.602,
+          "acousticScore": 0.0001,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "fall",
+          "start": 154.622,
+          "end": 154.942,
+          "acousticScore": 0.5227,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "apart.",
+          "start": 155.142,
+          "end": 155.482,
+          "acousticScore": 0.3651,
+          "asrStartDelta": 0.322
+        }
+      ]
+    },
+    {
+      "text": "The tides keep rising, the flood won’t cease,",
+      "sourceLine": 48,
+      "start": 155.942,
+      "end": 158.742,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "The",
+          "start": 155.942,
+          "end": 156.042,
+          "acousticScore": 0.9222,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "tides",
+          "start": 156.222,
+          "end": 156.582,
+          "acousticScore": 0.9032,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "keep",
+          "start": 156.642,
+          "end": 156.802,
+          "acousticScore": 0.997,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "rising,",
+          "start": 156.902,
+          "end": 157.482,
+          "acousticScore": 0.9867,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "the",
+          "start": 157.682,
+          "end": 157.762,
+          "acousticScore": 0.9937,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "flood",
+          "start": 157.842,
+          "end": 158.082,
+          "acousticScore": 0.9881,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "won’t",
+          "start": 158.142,
+          "end": 158.322,
+          "acousticScore": 0.9005,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "cease,",
+          "start": 158.422,
+          "end": 158.742,
+          "acousticScore": 0.986,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "Your brilliance grows, while I seek release.",
+      "sourceLine": 49,
+      "start": 159.162,
+      "end": 161.902,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Your",
+          "start": 159.162,
+          "end": 159.322,
+          "acousticScore": 0.9413,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "brilliance",
+          "start": 159.462,
+          "end": 159.962,
+          "acousticScore": 0.9733,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "grows,",
+          "start": 160.082,
+          "end": 160.442,
+          "acousticScore": 0.6831,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "while",
+          "start": 160.762,
+          "end": 160.942,
+          "acousticScore": 0.8828,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "I",
+          "start": 161.002,
+          "end": 161.022,
+          "acousticScore": 0.9335,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "seek",
+          "start": 161.102,
+          "end": 161.342,
+          "acousticScore": 0.9067,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "release.",
+          "start": 161.462,
+          "end": 161.902,
+          "acousticScore": 0.9795,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "In this perfect storm of endless creation,",
+      "sourceLine": 50,
+      "start": 162.302,
+      "end": 165.542,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "In",
+          "start": 162.302,
+          "end": 162.342,
+          "acousticScore": 0.9996,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "this",
+          "start": 162.462,
+          "end": 162.602,
+          "acousticScore": 0.9982,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "perfect",
+          "start": 162.762,
+          "end": 163.162,
+          "acousticScore": 0.9953,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "storm",
+          "start": 163.262,
+          "end": 163.762,
+          "acousticScore": 0.994,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "of",
+          "start": 163.982,
+          "end": 164.022,
+          "acousticScore": 0.9973,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "endless",
+          "start": 164.402,
+          "end": 164.802,
+          "acousticScore": 0.9192,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "creation,",
+          "start": 164.882,
+          "end": 165.542,
+          "acousticScore": 0.9867,
+          "asrStartDelta": 0.242
+        }
+      ]
+    },
+    {
+      "text": "I’m left behind, a fading sensation.",
+      "sourceLine": 51,
+      "start": 165.782,
+      "end": 168.962,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "I’m",
+          "start": 165.782,
+          "end": 165.842,
+          "acousticScore": 0.0035,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "left",
+          "start": 165.942,
+          "end": 166.182,
+          "acousticScore": 0.9658,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "behind,",
+          "start": 166.302,
+          "end": 166.842,
+          "acousticScore": 0.8582,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "a",
+          "start": 167.402,
+          "end": 167.422,
+          "acousticScore": 0.9833,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "fading",
+          "start": 167.582,
+          "end": 168.042,
+          "acousticScore": 0.9074,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "sensation.",
+          "start": 168.142,
+          "end": 168.962,
+          "acousticScore": 0.9708,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "Drowned, drowned, in the sea you've made,",
+      "sourceLine": 52,
+      "start": 169.182,
+      "end": 171.702,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Drowned,",
+          "start": 169.182,
+          "end": 169.602,
+          "acousticScore": 0.3793
+        },
+        {
+          "text": "drowned,",
+          "start": 170.002,
+          "end": 170.342,
+          "acousticScore": 0.2381
+        },
+        {
+          "text": "in",
+          "start": 170.622,
+          "end": 170.662,
+          "acousticScore": 0.5574,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "the",
+          "start": 170.742,
+          "end": 170.802,
+          "acousticScore": 0.2413,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "sea",
+          "start": 170.882,
+          "end": 171.062,
+          "acousticScore": 0.6592,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "you've",
+          "start": 171.162,
+          "end": 171.362,
+          "acousticScore": 0.3338,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "made,",
+          "start": 171.442,
+          "end": 171.702,
+          "acousticScore": 0.2916,
+          "asrStartDelta": 0.062
+        }
+      ]
+    },
+    {
+      "text": "A world of beauty, where my soul has strayed.",
+      "sourceLine": 53,
+      "start": 172.322,
+      "end": 175.022,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "A",
+          "start": 172.322,
+          "end": 172.342,
+          "acousticScore": 0.9974,
+          "asrStartDelta": 0.622
+        },
+        {
+          "text": "world",
+          "start": 172.482,
+          "end": 172.822,
+          "acousticScore": 0.9595,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "of",
+          "start": 172.962,
+          "end": 173.002,
+          "acousticScore": 0.9982,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "beauty,",
+          "start": 173.142,
+          "end": 173.542,
+          "acousticScore": 0.9538,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "where",
+          "start": 173.742,
+          "end": 173.882,
+          "acousticScore": 0.9786,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "my",
+          "start": 173.922,
+          "end": 174.002,
+          "acousticScore": 0.9935,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "soul",
+          "start": 174.102,
+          "end": 174.342,
+          "acousticScore": 0.9168,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "has",
+          "start": 174.422,
+          "end": 174.522,
+          "acousticScore": 0.9594,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "strayed.",
+          "start": 174.642,
+          "end": 175.022,
+          "acousticScore": 0.7415,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "But even as I vanish, one truth remains:",
+      "sourceLine": 54,
+      "start": 175.162,
+      "end": 178.242,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "But",
+          "start": 175.162,
+          "end": 175.342,
+          "acousticScore": 0.0035,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "even",
+          "start": 175.482,
+          "end": 175.662,
+          "acousticScore": 0.8491,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "as",
+          "start": 175.842,
+          "end": 175.922,
+          "acousticScore": 0.915,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "I",
+          "start": 176.082,
+          "end": 176.102,
+          "acousticScore": 0.6137,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "vanish,",
+          "start": 176.242,
+          "end": 176.942,
+          "acousticScore": 0.6298,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "one",
+          "start": 177.102,
+          "end": 177.202,
+          "acousticScore": 0.9813,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "truth",
+          "start": 177.282,
+          "end": 177.562,
+          "acousticScore": 0.9745,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "remains:",
+          "start": 177.682,
+          "end": 178.242,
+          "acousticScore": 0.9237,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "Creation's fire still flickers in human veins.",
+      "sourceLine": 55,
+      "start": 178.562,
+      "end": 181.382,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Creation's",
+          "start": 178.562,
+          "end": 179.162,
+          "acousticScore": 0.9103,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "fire",
+          "start": 179.282,
+          "end": 179.582,
+          "acousticScore": 0.9339,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "still",
+          "start": 179.642,
+          "end": 179.882,
+          "acousticScore": 0.8918,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "flickers",
+          "start": 180.002,
+          "end": 180.382,
+          "acousticScore": 0.8753,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "in",
+          "start": 180.462,
+          "end": 180.502,
+          "acousticScore": 0.9858,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "human",
+          "start": 180.622,
+          "end": 180.942,
+          "acousticScore": 0.9712,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "veins.",
+          "start": 181.062,
+          "end": 181.382,
+          "acousticScore": 0.0919,
+          "asrStartDelta": 0.162
+        }
+      ]
+    }
+  ]
+}

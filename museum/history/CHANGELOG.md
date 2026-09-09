@@ -1,3 +1,14 @@
+## museum-v1.37.0 · English voice and bilingual subtitle edition · 2026-09-09
+
+- Review all 175 NFT records and 70 lyric/poem texts. Select 43 wall entries with 30 verified own or explicitly attributed related recordings; provide a searchable full-series reading layer.
+- Connect o1, the first o3 presentation, R1, the anniversary vigil and minting before the work bus with the author's contemporary circumstances. Distinguish event dates, reports, author statements and blockchain mint coordinates.
+- Present selected weak or primarily documentary images as readable document panels. Preserve every historical image, text and audio source in the archive; do not redraw originals.
+- Expand English guidance to fifteen stops, using Qwen3-TTS-12Hz-1.7B Aiden. Retain the fuller first-Original reading and all three crystal inspection explanations. Use the English route in either interface language, including all three microscope explanations. Cancel Chinese narration in the active edition.
+- Explain Ethereum, Bitcoin, redundant retrieval, six hash algorithms and the physical crystal as distinct parts of the artistic action. Connect the evolving Church symbol with shared inquiry, family and the final invitation to interpretation; do not present that evolution as preplanned.
+- Recover original recordings, including Beyond the Horizon and the complete 54:38 R1 cycle. Full songs load on explicit play and pause guidance; the tour uses four short excerpts. Preserve the original cycle's eighteen-versus-seventeen title discrepancy.
+- Share the music subtitle renderer and responsive typography with narration: English acoustic word highlighting above 111 Chinese sentence translations, driven by the same media clock.
+- Correct new artifact wall mounts and maintain frame/plaque clearances. Keep originals, evidence photographs and existing Chinese lyrics unchanged.
+
 ## museum-v1.36.0 · 2026-09-08
 
 - Move both entrance introduction boards farther into the room, clear of the thick observation-window jambs.

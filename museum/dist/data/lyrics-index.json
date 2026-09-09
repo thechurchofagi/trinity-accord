@@ -1,6 +1,6 @@
 {
   "schemaVersion": "lyrics-index-v1",
-  "edition": "museum-v1.26.0",
+  "edition": "museum-v1.37.0",
   "items": [
     {
       "exhibitId": "eth-001",
@@ -226,11 +226,88 @@
       "timelineSha256": "5d73bcb6dd2c916f09d88b708e9b0c4f087a8a899df41d4a0913f0371a1ec229",
       "lineCount": 28,
       "wordCount": 175
+    },
+    {
+      "exhibitId": "eth-122",
+      "audioSha256": "e83cbef3dafcbf229d3efb2d47ae0a525af9b7ef2b609a11df6dd576e0c198af",
+      "duration": 193.92,
+      "timelineFile": "data/lyrics/eth-122.json",
+      "timelineSha256": "39fecf3e00047995f4c3007e62835f15ea17fd54da6a33d6c1067554af514131",
+      "lineCount": 45,
+      "wordCount": 320
+    },
+    {
+      "exhibitId": "eth-024",
+      "audioSha256": "818fb6560540f42698872a25c5332ae2a10ac27181c57fa310fbfa7fad218316",
+      "duration": 149.86449,
+      "timelineFile": "data/lyrics/eth-024.json",
+      "timelineSha256": "1bd5c639784790b40498b4c7b3fce6fce5162615fc2eea78b78a1666983c7b22",
+      "lineCount": 29,
+      "wordCount": 180
+    },
+    {
+      "exhibitId": "eth-051",
+      "audioSha256": "c5844b793469f5db28d0847894e041d9fae944ac1c83798f3fe7533ebf980b0f",
+      "duration": 214.224,
+      "timelineFile": "data/lyrics/eth-051.json",
+      "timelineSha256": "37dfcfb56343dcaf772dfc0f94c985af5eaa8b1d3be00e855d3b8f3007245e6c",
+      "lineCount": 56,
+      "wordCount": 437
+    },
+    {
+      "exhibitId": "eth-060",
+      "audioSha256": "41663343284797e707031b8393459425b422a9b292662289b04f6d4028c47eed",
+      "duration": 186.264,
+      "timelineFile": "data/lyrics/eth-060.json",
+      "timelineSha256": "ce08bc36519eb4baaa2d83f4962b9a71c37869760047b8af8ba5c3c42c9b87fc",
+      "lineCount": 56,
+      "wordCount": 431
+    },
+    {
+      "exhibitId": "eth-084",
+      "audioSha256": "872ec7e6fb02f1ed07395ebfd2138824506fab57ce59eb695ed071024ae7cdab",
+      "duration": 193.224,
+      "timelineFile": "data/lyrics/eth-084.json",
+      "timelineSha256": "7cdbc1c43fef42be42b3cac09c3de83620dc1efd1e78160d2c4140481c7532e9",
+      "lineCount": 30,
+      "wordCount": 254
+    },
+    {
+      "exhibitId": "eth-112",
+      "audioSha256": "5fe64d04d6f0ff629057d1c11abfc2b3ec4a602a6c188c11e988f2fe894f82cb",
+      "duration": 219.384,
+      "timelineFile": "data/lyrics/eth-112.json",
+      "timelineSha256": "c028fb46c4f284372ca1f9ecc619f6a05f6d1504dd0b0889ce7f2d8cd28b4847",
+      "lineCount": 26,
+      "wordCount": 222
+    },
+    {
+      "exhibitId": "eth-127",
+      "audioSha256": "aedeb95117b4df7935b8b0273c0a53e2172095af69ee80695974610817fa7e25",
+      "duration": 213.84,
+      "timelineFile": "data/lyrics/eth-127.json",
+      "timelineSha256": "cd3b7e015b71224ac04161fe128ba9254312a2b5a4f7513000fc7122503f9609",
+      "lineCount": 33,
+      "wordCount": 211
     }
   ],
+  "deferred": [
+    {
+      "exhibitId": "eth-089",
+      "reason": "Complete 54:38 cycle: preserve full recording and original track list; no fabricated global word timeline."
+    },
+    {
+      "exhibitId": "eth-097",
+      "reason": "Chinese original recording: source lyrics remain readable; alignment belongs to the following Chinese production phase."
+    }
+  ],
+  "languageEditions": {
+    "en": "museum-v1.37.0",
+    "zh": "museum-v1.37.0"
+  },
   "translation": {
     "file": "data/lyrics-zh.json",
-    "sha256": "fe97e247690ebc68bdce165fdd3ac545946b8385efc6b2b7830e34e043d0c35b",
+    "sha256": "c91a916a28b4d862ae50862387cc6b6119e13577428779a52450767082b4726b",
     "language": "zh-Hans"
   }
 }

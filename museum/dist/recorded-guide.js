@@ -6,7 +6,7 @@ export function guideCueAt(cues,seconds){
 }
 export function createRecordedGuide(audio,{onCaption=()=>{},onState=()=>{}}={}){
  let track=null,request=0,state='idle',rate=1;
- const paint=()=>onCaption(track?guideCueAt(track.cues,audio.currentTime)?.text||'':'',track?.language);
+ const paint=()=>{const cue=track?guideCueAt(track.cues,audio.currentTime):null;onCaption(cue?.text||'',track?.language,cue,audio.currentTime);};
  function setState(value){state=value;onState(value);}
  for(const event of ['timeupdate','seeked','playing','ended'])audio.addEventListener(event,paint);
  return {

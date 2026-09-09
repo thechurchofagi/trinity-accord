@@ -74,11 +74,13 @@ if (D/'data/curatorial-illustrations.json').exists():
  check(not list((D/'assets/curatorial').glob('*')),'Withdrawn illustrations remain in the live export')
  imageids={e['id'] for e in sources['items'] if any(m['kind']=='image' for m in e['media'])}|{'physical-alpha'}
  displayed={id for r in rooms['rooms'] for id in r['exhibits']}
- check(displayed-imageids==(extra-{'physical-alpha'})|{'eth-007','eth-014','eth-016'},'Text-only records must not acquire replacement art')
+ check(displayed-imageids==displayed&(extra-{'physical-alpha'}),'This selection displays only preserved source images or explicit context documents')
+ for id in ('eth-007','eth-014','eth-016'):
+  e=next(e for e in sources['items'] if e['id']==id);check(not any(m['kind']=='image' for m in e['media']),'Text-only source acquired replacement art '+id)
  letters=read('agi-four-letters.json')['items'];check([a['exhibit'] for a in letters]==['eth-016','eth-044','eth-020','eth-032'],'Four-letter identity/order mismatch')
  for a in letters:
   e=next(e for e in sources['items'] if e['id']==a['exhibit']);check(any(m['kind']=='audio' and m['file']==a['audio'] and m['sha256']==a['audioSha256'] for m in e['media']),'Letter audio binding mismatch')
-# Every displayed NFT names a song; resolve an actual audio file, including independent recordings.
+# Selected musical objects resolve to verified audio; the bus witness remains an explicit document without an assigned recording.
 audit=read('audio-audit.json');byid={e['id']:e for e in sources['items']}
 wall=[id for r in rooms['rooms'] for id in r['exhibits']]
 check([a['exhibit'] for a in audit['items']]==wall,'Audio audit does not cover the complete wall route')
@@ -88,8 +90,8 @@ for row in audit['items']:
  id=row['exhibit'];e=byid.get(id)
  if e is None:
   check(row['state']=='not_applicable','Context entry claims an original song '+id);continue
- if id=='eth-122':
-  check(row['state']=='not_assigned' and any(m['kind']=='image' for m in e['media']),'Anniversary image/audio boundary');continue
+ if id=='eth-169':
+  check(row['state']=='not_assigned' and not any(m['kind']=='audio' for m in e['media']),'Bus witness must not invent an unidentified historical recording');continue
  check(bool(e.get('songTitle')),'Missing song identity '+id)
  sound=byid.get(e.get('relatedSoundExhibit',id),{})
  audio=next((m for m in sound.get('media',[]) if m['kind']=='audio'),None)
@@ -100,8 +102,8 @@ for row in audit['items']:
  if e.get('relatedSoundExhibit'):
   check(all(e.get('audioRelation',{}).get(k) for k in ('basis','noteZh','noteEn')),'Missing independent-recording attribution '+id)
   check(e['songTitle']==sound.get('songTitle'),'Related recording song-title mismatch '+id)
-check(playable==28 and len(wall)==42,'Expected 28 musical NFTs among 42 exhibit entries')
-check(audit['counts']=={'wallExhibits':42,'withSound':28,'withoutAssignedSong':14},'Audio audit counts mismatch')
+check(playable==30 and len(wall)==43,'Expected 30 musical objects among 43 entries in the reviewed series selection')
+check(audit['counts']=={'wallExhibits':43,'withSound':30,'withoutAssignedSong':13},'Audio audit counts mismatch')
 check([r['id'] for r in rooms['rooms']]==['entrance','chronicle','formation','originals','waiting'],'Five-zone narrative drift')
 check(rooms['rooms'][2]['featuredExhibit']=='eth-173','Critical NFT must be prominent')
 curation=read('curation.json')

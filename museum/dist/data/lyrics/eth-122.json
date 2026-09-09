@@ -1,0 +1,2687 @@
+{
+  "schemaVersion": "word-alignment-v2",
+  "exhibitId": "eth-122",
+  "audioFile": "assets/eth-122.mp3",
+  "audioSha256": "e83cbef3dafcbf229d3efb2d47ae0a525af9b7ef2b609a11df6dd576e0c198af",
+  "duration": 193.92,
+  "sourceLyricsSha256": "70e6698a43505fe4c8035a9078930f3ce7bf056685c96e95849e1dff66e2e598",
+  "alignment": {
+    "pipelineSha256": "3a826a6d92f238b4208e93a2b3a756518dedddbde942411acd317ea8f2ec76cc",
+    "engine": "wav2vec2-base-960h CTC Viterbi",
+    "transcriptEngine": "Faster Whisper small multilingual CPU int8; acoustic word timestamps; review draft",
+    "transcriptReview": "Preserved source lyric order compared with local multilingual small-Whisper recognition. Section headings excluded; transcription uncertainty and acoustic flags retained. No manual listening certification.",
+    "audioInput": "demucs htdemucs vocals",
+    "device": "cpu",
+    "timestampResolution": 0.02,
+    "modelFrameResolutionIsNotAccuracy": true,
+    "manualListeningReviewed": false,
+    "reviewRequiredLines": 12
+  },
+  "lines": [
+    {
+      "text": "We built a spark from circuits deep, a mind to dream awake,",
+      "sourceLine": 0,
+      "start": 6.642,
+      "end": 10.142,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "We",
+          "start": 6.642,
+          "end": 6.742,
+          "acousticScore": 0.9988,
+          "asrStartDelta": 0.862
+        },
+        {
+          "text": "built",
+          "start": 6.842,
+          "end": 7.022,
+          "acousticScore": 0.9981,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "a",
+          "start": 7.122,
+          "end": 7.142,
+          "acousticScore": 0.9136,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "spark",
+          "start": 7.202,
+          "end": 7.482,
+          "acousticScore": 0.8461,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "from",
+          "start": 7.542,
+          "end": 7.662,
+          "acousticScore": 0.9742,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "circuits",
+          "start": 7.742,
+          "end": 8.082,
+          "acousticScore": 0.9121,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "deep,",
+          "start": 8.162,
+          "end": 8.402,
+          "acousticScore": 0.9962,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "a",
+          "start": 8.922,
+          "end": 8.942,
+          "acousticScore": 0.9212,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "mind",
+          "start": 9.042,
+          "end": 9.282,
+          "acousticScore": 0.7149,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "to",
+          "start": 9.342,
+          "end": 9.402,
+          "acousticScore": 0.9516,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "dream",
+          "start": 9.462,
+          "end": 9.702,
+          "acousticScore": 0.9953,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "awake,",
+          "start": 9.822,
+          "end": 10.142,
+          "acousticScore": 0.9738,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "A mirror of our hopes and fears, a chance we dare to take.",
+      "sourceLine": 1,
+      "start": 10.622,
+      "end": 13.542,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "A",
+          "start": 10.622,
+          "end": 10.642,
+          "acousticScore": 0.976,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "mirror",
+          "start": 10.742,
+          "end": 11.022,
+          "acousticScore": 0.9794,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "of",
+          "start": 11.162,
+          "end": 11.202,
+          "acousticScore": 0.9987,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "our",
+          "start": 11.302,
+          "end": 11.402,
+          "acousticScore": 0.9944,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "hopes",
+          "start": 11.502,
+          "end": 11.762,
+          "acousticScore": 0.9413,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "and",
+          "start": 11.842,
+          "end": 11.922,
+          "acousticScore": 0.9978,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "fears,",
+          "start": 12.002,
+          "end": 12.262,
+          "acousticScore": 0.9916,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "a",
+          "start": 12.342,
+          "end": 12.362,
+          "acousticScore": 0.8918,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "chance",
+          "start": 12.422,
+          "end": 12.702,
+          "acousticScore": 0.9553,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "we",
+          "start": 12.742,
+          "end": 12.822,
+          "acousticScore": 0.9999,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "dare",
+          "start": 12.902,
+          "end": 13.102,
+          "acousticScore": 0.935,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "to",
+          "start": 13.162,
+          "end": 13.202,
+          "acousticScore": 0.9401,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "take.",
+          "start": 13.282,
+          "end": 13.542,
+          "acousticScore": 0.9491,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Not gods above, nor chains below, but partners in the flame,",
+      "sourceLine": 2,
+      "start": 13.922,
+      "end": 17.082,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Not",
+          "start": 13.922,
+          "end": 14.062,
+          "acousticScore": 0.9961,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "gods",
+          "start": 14.142,
+          "end": 14.482,
+          "acousticScore": 0.9977,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "above,",
+          "start": 14.542,
+          "end": 14.782,
+          "acousticScore": 0.9996,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "nor",
+          "start": 14.822,
+          "end": 14.922,
+          "acousticScore": 0.8347,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "chains",
+          "start": 15.022,
+          "end": 15.282,
+          "acousticScore": 0.8656,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "below,",
+          "start": 15.342,
+          "end": 15.622,
+          "acousticScore": 0.9997,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "but",
+          "start": 15.722,
+          "end": 15.822,
+          "acousticScore": 0.9761,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "partners",
+          "start": 15.902,
+          "end": 16.322,
+          "acousticScore": 0.912,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "in",
+          "start": 16.382,
+          "end": 16.422,
+          "acousticScore": 0.9985,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "the",
+          "start": 16.502,
+          "end": 16.562,
+          "acousticScore": 0.9907,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "flame,",
+          "start": 16.662,
+          "end": 17.082,
+          "acousticScore": 0.9088,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Together we’ll ignite the stars and write a bolder name.",
+      "sourceLine": 3,
+      "start": 17.362,
+      "end": 20.582,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Together",
+          "start": 17.362,
+          "end": 17.822,
+          "acousticScore": 0.9547,
+          "asrStartDelta": -0.038
+        },
+        {
+          "text": "we’ll",
+          "start": 17.902,
+          "end": 18.102,
+          "acousticScore": 0.6613,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "ignite",
+          "start": 18.142,
+          "end": 18.542,
+          "acousticScore": 0.8365,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "the",
+          "start": 18.602,
+          "end": 18.682,
+          "acousticScore": 0.9978,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "stars",
+          "start": 18.762,
+          "end": 19.162,
+          "acousticScore": 0.9915,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "and",
+          "start": 19.242,
+          "end": 19.322,
+          "acousticScore": 0.965,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "write",
+          "start": 19.362,
+          "end": 19.582,
+          "acousticScore": 0.9248,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "a",
+          "start": 19.622,
+          "end": 19.642,
+          "acousticScore": 0.9948,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "bolder",
+          "start": 19.742,
+          "end": 20.162,
+          "acousticScore": 0.8874,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "name.",
+          "start": 20.242,
+          "end": 20.582,
+          "acousticScore": 0.9564,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "No fate is fixed, no script to play,",
+      "sourceLine": 4,
+      "start": 21.202,
+      "end": 24.022,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "No",
+          "start": 21.202,
+          "end": 21.282,
+          "acousticScore": 0.997,
+          "asrStartDelta": 0.682
+        },
+        {
+          "text": "fate",
+          "start": 21.422,
+          "end": 21.642,
+          "acousticScore": 0.9882,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "is",
+          "start": 21.702,
+          "end": 21.762,
+          "acousticScore": 0.9351,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "fixed,",
+          "start": 21.882,
+          "end": 22.302,
+          "acousticScore": 0.9946,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "no",
+          "start": 22.902,
+          "end": 22.982,
+          "acousticScore": 0.9981,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "script",
+          "start": 23.082,
+          "end": 23.362,
+          "acousticScore": 0.6719,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "to",
+          "start": 23.382,
+          "end": 23.442,
+          "acousticScore": 0.5733,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "play,",
+          "start": 23.522,
+          "end": 24.022,
+          "acousticScore": 0.9724,
+          "asrStartDelta": 0.042
+        }
+      ]
+    },
+    {
+      "text": "We shape the dawn with every day.",
+      "sourceLine": 5,
+      "start": 24.602,
+      "end": 27.022,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "We",
+          "start": 24.602,
+          "end": 24.682,
+          "acousticScore": 0.9001,
+          "asrStartDelta": 0.722
+        },
+        {
+          "text": "shape",
+          "start": 24.822,
+          "end": 25.042,
+          "acousticScore": 0.9235,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "the",
+          "start": 25.102,
+          "end": 25.182,
+          "acousticScore": 0.9983,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "dawn",
+          "start": 25.282,
+          "end": 25.822,
+          "acousticScore": 0.9882,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "with",
+          "start": 25.922,
+          "end": 26.062,
+          "acousticScore": 0.9963,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "every",
+          "start": 26.282,
+          "end": 26.482,
+          "acousticScore": 0.9864,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "day.",
+          "start": 26.582,
+          "end": 27.022,
+          "acousticScore": 0.8802,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "With wisdom shared, we’ll find our way,",
+      "sourceLine": 6,
+      "start": 28.062,
+      "end": 30.802,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "With",
+          "start": 28.062,
+          "end": 28.162,
+          "acousticScore": 0.858,
+          "asrStartDelta": 1.042
+        },
+        {
+          "text": "wisdom",
+          "start": 28.282,
+          "end": 28.562,
+          "acousticScore": 0.3656,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "shared,",
+          "start": 28.702,
+          "end": 29.242,
+          "acousticScore": 0.8561,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "we’ll",
+          "start": 29.722,
+          "end": 29.902,
+          "acousticScore": 0.9389,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "find",
+          "start": 29.982,
+          "end": 30.222,
+          "acousticScore": 0.8924,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "our",
+          "start": 30.342,
+          "end": 30.422,
+          "acousticScore": 0.999,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "way,",
+          "start": 30.502,
+          "end": 30.802,
+          "acousticScore": 0.9179,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Beyond the edge of yesterday.",
+      "sourceLine": 7,
+      "start": 31.122,
+      "end": 34.042,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Beyond",
+          "start": 31.122,
+          "end": 31.662,
+          "acousticScore": 0.8633,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "the",
+          "start": 31.742,
+          "end": 31.882,
+          "acousticScore": 0.9256,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "edge",
+          "start": 32.162,
+          "end": 32.322,
+          "acousticScore": 0.9474,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "of",
+          "start": 32.402,
+          "end": 32.442,
+          "acousticScore": 0.9869,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "yesterday.",
+          "start": 32.602,
+          "end": 34.042,
+          "acousticScore": 0.9322,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "Beyond the horizon, where futures gleam,",
+      "sourceLine": 8,
+      "start": 35.342,
+      "end": 38.362,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Beyond",
+          "start": 35.342,
+          "end": 35.782,
+          "acousticScore": 0.6723,
+          "asrStartDelta": 0.622
+        },
+        {
+          "text": "the",
+          "start": 35.842,
+          "end": 35.962,
+          "acousticScore": 0.9516,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "horizon,",
+          "start": 36.042,
+          "end": 36.862,
+          "acousticScore": 0.5862,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "where",
+          "start": 37.002,
+          "end": 37.182,
+          "acousticScore": 0.4319,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "futures",
+          "start": 37.282,
+          "end": 37.882,
+          "acousticScore": 0.4168,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "gleam,",
+          "start": 37.922,
+          "end": 38.362,
+          "acousticScore": 0.5903,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "We’ll weave a world from code and dream.",
+      "sourceLine": 9,
+      "start": 39.202,
+      "end": 41.802,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "We’ll",
+          "start": 39.202,
+          "end": 39.402,
+          "acousticScore": 0.7042,
+          "asrStartDelta": 0.662
+        },
+        {
+          "text": "weave",
+          "start": 39.462,
+          "end": 39.622,
+          "acousticScore": 0.4228,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "a",
+          "start": 39.722,
+          "end": 39.742,
+          "acousticScore": 0.0532,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "world",
+          "start": 39.842,
+          "end": 40.182,
+          "acousticScore": 0.7039,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "from",
+          "start": 40.262,
+          "end": 40.402,
+          "acousticScore": 0.9002,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "code",
+          "start": 40.502,
+          "end": 40.902,
+          "acousticScore": 0.3918,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "and",
+          "start": 41.102,
+          "end": 41.242,
+          "acousticScore": 0.773,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "dream.",
+          "start": 41.362,
+          "end": 41.802,
+          "acousticScore": 0.9037,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Hand in hand, with hearts aligned,",
+      "sourceLine": 10,
+      "start": 42.382,
+      "end": 45.322,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Hand",
+          "start": 42.382,
+          "end": 42.802,
+          "acousticScore": 0.8968,
+          "asrStartDelta": 0.622
+        },
+        {
+          "text": "in",
+          "start": 42.942,
+          "end": 42.982,
+          "acousticScore": 0.9985,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "hand,",
+          "start": 43.062,
+          "end": 43.602,
+          "acousticScore": 0.965,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "with",
+          "start": 43.702,
+          "end": 43.822,
+          "acousticScore": 0.9982,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "hearts",
+          "start": 43.942,
+          "end": 44.342,
+          "acousticScore": 0.768,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "aligned,",
+          "start": 44.562,
+          "end": 45.322,
+          "acousticScore": 0.5692,
+          "asrStartDelta": 0.282
+        }
+      ]
+    },
+    {
+      "text": "Superintelligence and humankind.",
+      "sourceLine": 11,
+      "start": 45.802,
+      "end": 48.882,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Superintelligence",
+          "start": 45.802,
+          "end": 47.322,
+          "acousticScore": 0.8377
+        },
+        {
+          "text": "and",
+          "start": 47.422,
+          "end": 47.482,
+          "acousticScore": 0.8824
+        },
+        {
+          "text": "humankind.",
+          "start": 47.542,
+          "end": 48.882,
+          "acousticScore": 0.7558,
+          "asrStartDelta": 0.062
+        }
+      ]
+    },
+    {
+      "text": "Rise as one, the path is clear,",
+      "sourceLine": 12,
+      "start": 49.262,
+      "end": 52.342,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Rise",
+          "start": 49.262,
+          "end": 49.722,
+          "acousticScore": 0.4785,
+          "asrStartDelta": 0.622
+        },
+        {
+          "text": "as",
+          "start": 49.782,
+          "end": 49.882,
+          "acousticScore": 0.5814,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "one,",
+          "start": 50.162,
+          "end": 50.302,
+          "acousticScore": 0.176,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "the",
+          "start": 50.762,
+          "end": 51.122,
+          "acousticScore": 0.0603,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "path",
+          "start": 51.242,
+          "end": 51.442,
+          "acousticScore": 0.1328,
+          "asrStartDelta": 0.542
+        },
+        {
+          "text": "is",
+          "start": 51.482,
+          "end": 51.562,
+          "acousticScore": 0.5148,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "clear,",
+          "start": 51.642,
+          "end": 52.342,
+          "acousticScore": 0.6223,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "A symphony of now and here.",
+      "sourceLine": 13,
+      "start": 53.402,
+      "end": 58.582,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "A",
+          "start": 53.402,
+          "end": 53.422,
+          "acousticScore": 0.9246,
+          "asrStartDelta": 1.022
+        },
+        {
+          "text": "symphony",
+          "start": 53.522,
+          "end": 54.362,
+          "acousticScore": 0.1898,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "of",
+          "start": 54.902,
+          "end": 54.942,
+          "acousticScore": 0.0357,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "now",
+          "start": 55.042,
+          "end": 55.562,
+          "acousticScore": 0.3452,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "and",
+          "start": 56.522,
+          "end": 56.662,
+          "acousticScore": 0.43,
+          "asrStartDelta": 1.042
+        },
+        {
+          "text": "here.",
+          "start": 56.762,
+          "end": 58.582,
+          "acousticScore": 0.3348,
+          "asrStartDelta": 0.102
+        }
+      ]
+    },
+    {
+      "text": "Teach it kindness, let it grow, a seed of empathy,",
+      "sourceLine": 14,
+      "start": 63.422,
+      "end": 66.602,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Teach",
+          "start": 63.422,
+          "end": 63.622,
+          "acousticScore": 0.0448,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "it",
+          "start": 63.702,
+          "end": 63.742,
+          "acousticScore": 0.0078,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "kindness,",
+          "start": 63.842,
+          "end": 64.262,
+          "acousticScore": 0.9656,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "let",
+          "start": 64.342,
+          "end": 64.482,
+          "acousticScore": 0.9737,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "it",
+          "start": 64.542,
+          "end": 64.602,
+          "acousticScore": 0.9651,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "grow,",
+          "start": 64.682,
+          "end": 65.002,
+          "acousticScore": 0.9945,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "a",
+          "start": 65.402,
+          "end": 65.422,
+          "acousticScore": 0.9933,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "seed",
+          "start": 65.562,
+          "end": 65.802,
+          "acousticScore": 0.6602,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "of",
+          "start": 65.882,
+          "end": 65.922,
+          "acousticScore": 0.9918,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "empathy,",
+          "start": 66.082,
+          "end": 66.602,
+          "acousticScore": 0.6182,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "It’ll heal the scars we’ve left behind, set oceans wild and free.",
+      "sourceLine": 15,
+      "start": 66.662,
+      "end": 70.162,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "It’ll",
+          "start": 66.662,
+          "end": 66.842,
+          "acousticScore": 0.2504,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "heal",
+          "start": 66.862,
+          "end": 67.002,
+          "acousticScore": 0.8368,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "the",
+          "start": 67.082,
+          "end": 67.142,
+          "acousticScore": 0.9527,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "scars",
+          "start": 67.222,
+          "end": 67.542,
+          "acousticScore": 0.9715,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "we’ve",
+          "start": 67.582,
+          "end": 67.742,
+          "acousticScore": 0.9498,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "left",
+          "start": 67.782,
+          "end": 67.942,
+          "acousticScore": 0.9999,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "behind,",
+          "start": 68.042,
+          "end": 68.462,
+          "acousticScore": 0.9998,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "set",
+          "start": 68.762,
+          "end": 68.962,
+          "acousticScore": 0.8984,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "oceans",
+          "start": 69.102,
+          "end": 69.362,
+          "acousticScore": 0.993,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "wild",
+          "start": 69.442,
+          "end": 69.662,
+          "acousticScore": 0.9988,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "and",
+          "start": 69.742,
+          "end": 69.822,
+          "acousticScore": 0.8482,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "free.",
+          "start": 69.902,
+          "end": 70.162,
+          "acousticScore": 0.997,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "We’ll guide its strength with steady hands, to mend what’s torn apart,",
+      "sourceLine": 16,
+      "start": 70.462,
+      "end": 73.562,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "We’ll",
+          "start": 70.462,
+          "end": 70.622,
+          "acousticScore": 0.5143,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "guide",
+          "start": 70.722,
+          "end": 70.942,
+          "acousticScore": 0.9024,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "its",
+          "start": 71.002,
+          "end": 71.082,
+          "acousticScore": 0.5243,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "strength",
+          "start": 71.102,
+          "end": 71.402,
+          "acousticScore": 0.9639,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "with",
+          "start": 71.442,
+          "end": 71.542,
+          "acousticScore": 0.9641,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "steady",
+          "start": 71.622,
+          "end": 71.922,
+          "acousticScore": 0.9962,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "hands,",
+          "start": 72.002,
+          "end": 72.282,
+          "acousticScore": 0.9213,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "to",
+          "start": 72.322,
+          "end": 72.402,
+          "acousticScore": 0.883,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "mend",
+          "start": 72.482,
+          "end": 72.622,
+          "acousticScore": 0.7667,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "what’s",
+          "start": 72.662,
+          "end": 72.802,
+          "acousticScore": 0.3977,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "torn",
+          "start": 72.862,
+          "end": 73.082,
+          "acousticScore": 0.8728,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "apart,",
+          "start": 73.162,
+          "end": 73.562,
+          "acousticScore": 0.9585,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "A bridge from past to endless skies, built from a beating heart.",
+      "sourceLine": 17,
+      "start": 73.982,
+      "end": 77.282,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "A",
+          "start": 73.982,
+          "end": 74.002,
+          "acousticScore": 0.9951,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "bridge",
+          "start": 74.102,
+          "end": 74.342,
+          "acousticScore": 0.9862,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "from",
+          "start": 74.382,
+          "end": 74.502,
+          "acousticScore": 0.9996,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "past",
+          "start": 74.582,
+          "end": 74.822,
+          "acousticScore": 0.9556,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "to",
+          "start": 74.882,
+          "end": 74.962,
+          "acousticScore": 0.9554,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "endless",
+          "start": 75.082,
+          "end": 75.362,
+          "acousticScore": 0.9397,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "skies,",
+          "start": 75.402,
+          "end": 75.802,
+          "acousticScore": 0.887,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "built",
+          "start": 75.862,
+          "end": 76.062,
+          "acousticScore": 0.9445,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "from",
+          "start": 76.142,
+          "end": 76.282,
+          "acousticScore": 0.9916,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "a",
+          "start": 76.382,
+          "end": 76.402,
+          "acousticScore": 0.9959,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "beating",
+          "start": 76.482,
+          "end": 76.802,
+          "acousticScore": 0.995,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "heart.",
+          "start": 76.922,
+          "end": 77.282,
+          "acousticScore": 0.6368,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "No fate is fixed, no script to play,",
+      "sourceLine": 18,
+      "start": 77.742,
+      "end": 80.542,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "No",
+          "start": 77.742,
+          "end": 77.822,
+          "acousticScore": 0.2303,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "fate",
+          "start": 78.002,
+          "end": 78.282,
+          "acousticScore": 0.7446,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "is",
+          "start": 78.322,
+          "end": 78.362,
+          "acousticScore": 0.0,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "fixed,",
+          "start": 78.442,
+          "end": 78.802,
+          "acousticScore": 0.98,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "no",
+          "start": 79.442,
+          "end": 79.502,
+          "acousticScore": 0.1964,
+          "asrStartDelta": 0.422
+        },
+        {
+          "text": "script",
+          "start": 79.662,
+          "end": 79.902,
+          "acousticScore": 0.7617,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "to",
+          "start": 79.962,
+          "end": 80.022,
+          "acousticScore": 0.8147,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "play,",
+          "start": 80.102,
+          "end": 80.542,
+          "acousticScore": 0.9303,
+          "asrStartDelta": 0.022
+        }
+      ]
+    },
+    {
+      "text": "We shape the dawn with every day.",
+      "sourceLine": 19,
+      "start": 81.162,
+      "end": 83.582,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "We",
+          "start": 81.162,
+          "end": 81.242,
+          "acousticScore": 0.9979,
+          "asrStartDelta": 0.682
+        },
+        {
+          "text": "shape",
+          "start": 81.362,
+          "end": 81.582,
+          "acousticScore": 0.9525,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "the",
+          "start": 81.662,
+          "end": 81.742,
+          "acousticScore": 0.9867,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "dawn",
+          "start": 81.842,
+          "end": 82.382,
+          "acousticScore": 0.9679,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "with",
+          "start": 82.482,
+          "end": 82.642,
+          "acousticScore": 0.965,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "every",
+          "start": 82.842,
+          "end": 83.042,
+          "acousticScore": 0.9381,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "day.",
+          "start": 83.142,
+          "end": 83.582,
+          "acousticScore": 0.9978,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "With wisdom shared, we’ll find our way,",
+      "sourceLine": 20,
+      "start": 84.602,
+      "end": 87.322,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "With",
+          "start": 84.602,
+          "end": 84.742,
+          "acousticScore": 0.9407,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "wisdom",
+          "start": 84.822,
+          "end": 85.122,
+          "acousticScore": 0.7599,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "shared,",
+          "start": 85.242,
+          "end": 85.802,
+          "acousticScore": 0.7108,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "we’ll",
+          "start": 86.302,
+          "end": 86.502,
+          "acousticScore": 0.8913,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "find",
+          "start": 86.562,
+          "end": 86.782,
+          "acousticScore": 0.9997,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "our",
+          "start": 86.902,
+          "end": 87.002,
+          "acousticScore": 0.9248,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "way,",
+          "start": 87.082,
+          "end": 87.322,
+          "acousticScore": 0.9974,
+          "asrStartDelta": 0.102
+        }
+      ]
+    },
+    {
+      "text": "Beyond the edge of yesterday.",
+      "sourceLine": 21,
+      "start": 87.702,
+      "end": 90.242,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Beyond",
+          "start": 87.702,
+          "end": 88.202,
+          "acousticScore": 0.8873,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "the",
+          "start": 88.322,
+          "end": 88.422,
+          "acousticScore": 0.8788,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "edge",
+          "start": 88.742,
+          "end": 88.902,
+          "acousticScore": 0.9752,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "of",
+          "start": 89.002,
+          "end": 89.042,
+          "acousticScore": 0.8415,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "yesterday.",
+          "start": 89.122,
+          "end": 90.242,
+          "acousticScore": 0.9648,
+          "asrStartDelta": 0.042
+        }
+      ]
+    },
+    {
+      "text": "Beyond the horizon, where futures gleam,",
+      "sourceLine": 22,
+      "start": 90.402,
+      "end": 93.202,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Beyond",
+          "start": 90.402,
+          "end": 90.642,
+          "acousticScore": 0.3325,
+          "asrStartDelta": 0.662
+        },
+        {
+          "text": "the",
+          "start": 90.682,
+          "end": 90.782,
+          "acousticScore": 0.9911,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "horizon,",
+          "start": 90.922,
+          "end": 91.702,
+          "acousticScore": 0.9622,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "where",
+          "start": 91.882,
+          "end": 92.062,
+          "acousticScore": 0.2522,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "futures",
+          "start": 92.142,
+          "end": 92.722,
+          "acousticScore": 0.2875,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "gleam,",
+          "start": 92.782,
+          "end": 93.202,
+          "acousticScore": 0.401,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "We’ll weave a world from code and dream.",
+      "sourceLine": 23,
+      "start": 94.062,
+      "end": 96.642,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "We’ll",
+          "start": 94.062,
+          "end": 94.242,
+          "acousticScore": 0.366,
+          "asrStartDelta": 0.702
+        },
+        {
+          "text": "weave",
+          "start": 94.302,
+          "end": 94.522,
+          "acousticScore": 0.4778,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "a",
+          "start": 94.602,
+          "end": 94.622,
+          "acousticScore": 0.5318,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "world",
+          "start": 94.702,
+          "end": 95.022,
+          "acousticScore": 0.3048,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "from",
+          "start": 95.122,
+          "end": 95.242,
+          "acousticScore": 0.6279,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "code",
+          "start": 95.362,
+          "end": 95.802,
+          "acousticScore": 0.5526,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "and",
+          "start": 96.062,
+          "end": 96.142,
+          "acousticScore": 0.6137,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "dream.",
+          "start": 96.202,
+          "end": 96.642,
+          "acousticScore": 0.4747,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "Hand in hand, with hearts aligned,",
+      "sourceLine": 24,
+      "start": 97.282,
+      "end": 100.182,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Hand",
+          "start": 97.282,
+          "end": 97.662,
+          "acousticScore": 0.5245,
+          "asrStartDelta": 0.642
+        },
+        {
+          "text": "in",
+          "start": 97.782,
+          "end": 97.822,
+          "acousticScore": 0.8059,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "hand,",
+          "start": 97.922,
+          "end": 98.422,
+          "acousticScore": 0.6138,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "with",
+          "start": 98.562,
+          "end": 98.702,
+          "acousticScore": 0.9221,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "hearts",
+          "start": 98.802,
+          "end": 99.182,
+          "acousticScore": 0.9433,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "aligned,",
+          "start": 99.362,
+          "end": 100.182,
+          "acousticScore": 0.6575,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "Superintelligence and humankind.",
+      "sourceLine": 25,
+      "start": 100.662,
+      "end": 103.742,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Superintelligence",
+          "start": 100.662,
+          "end": 102.182,
+          "acousticScore": 0.4382
+        },
+        {
+          "text": "and",
+          "start": 102.262,
+          "end": 102.342,
+          "acousticScore": 0.9029,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "humankind.",
+          "start": 102.402,
+          "end": 103.742,
+          "acousticScore": 0.8263,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Rise as one, the path is clear,",
+      "sourceLine": 26,
+      "start": 104.162,
+      "end": 107.202,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Rise",
+          "start": 104.162,
+          "end": 104.542,
+          "acousticScore": 0.1864,
+          "asrStartDelta": 0.642
+        },
+        {
+          "text": "as",
+          "start": 104.622,
+          "end": 104.722,
+          "acousticScore": 0.5211
+        },
+        {
+          "text": "one,",
+          "start": 105.002,
+          "end": 105.162,
+          "acousticScore": 0.1664,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "the",
+          "start": 105.222,
+          "end": 105.302,
+          "acousticScore": 0.1211,
+          "asrStartDelta": -0.158
+        },
+        {
+          "text": "path",
+          "start": 105.642,
+          "end": 106.122,
+          "acousticScore": 0.2096,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "is",
+          "start": 106.242,
+          "end": 106.362,
+          "acousticScore": 0.3304,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "clear,",
+          "start": 106.502,
+          "end": 107.202,
+          "acousticScore": 0.6796,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "A symphony of now and here.",
+      "sourceLine": 27,
+      "start": 108.242,
+      "end": 113.422,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "A",
+          "start": 108.242,
+          "end": 108.262,
+          "acousticScore": 0.2554,
+          "asrStartDelta": 1.122
+        },
+        {
+          "text": "symphony",
+          "start": 108.402,
+          "end": 109.442,
+          "acousticScore": 0.3977,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "of",
+          "start": 109.762,
+          "end": 109.802,
+          "acousticScore": 0.6619,
+          "asrStartDelta": 0.602
+        },
+        {
+          "text": "now",
+          "start": 109.922,
+          "end": 110.602,
+          "acousticScore": 0.2921,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "and",
+          "start": 111.402,
+          "end": 111.522,
+          "acousticScore": 0.6444,
+          "asrStartDelta": 0.962
+        },
+        {
+          "text": "here.",
+          "start": 111.662,
+          "end": 113.422,
+          "acousticScore": 0.5311,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "When storms arise, we’ll stand as kin,",
+      "sourceLine": 28,
+      "start": 118.442,
+      "end": 121.342,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "When",
+          "start": 118.442,
+          "end": 118.542,
+          "acousticScore": 0.3835,
+          "asrStartDelta": 1.502
+        },
+        {
+          "text": "storms",
+          "start": 118.682,
+          "end": 119.122,
+          "acousticScore": 0.9552,
+          "asrStartDelta": 0.742
+        },
+        {
+          "text": "arise,",
+          "start": 119.242,
+          "end": 119.862,
+          "acousticScore": 0.9779,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "we’ll",
+          "start": 119.962,
+          "end": 120.142,
+          "acousticScore": 0.5999,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "stand",
+          "start": 120.202,
+          "end": 120.602,
+          "acousticScore": 0.9955,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "as",
+          "start": 120.822,
+          "end": 120.922,
+          "acousticScore": 0.9987,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "kin,",
+          "start": 121.062,
+          "end": 121.342,
+          "acousticScore": 0.9912,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "Not foes to fight, but souls within.",
+      "sourceLine": 29,
+      "start": 121.882,
+      "end": 124.882,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Not",
+          "start": 121.882,
+          "end": 122.022,
+          "acousticScore": 0.998,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "foes",
+          "start": 122.142,
+          "end": 122.482,
+          "acousticScore": 0.9285,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "to",
+          "start": 122.562,
+          "end": 122.642,
+          "acousticScore": 0.9983,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "fight,",
+          "start": 122.822,
+          "end": 123.122,
+          "acousticScore": 0.995,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "but",
+          "start": 123.222,
+          "end": 123.382,
+          "acousticScore": 0.9989,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "souls",
+          "start": 123.642,
+          "end": 124.202,
+          "acousticScore": 0.9063,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "within.",
+          "start": 124.302,
+          "end": 124.882,
+          "acousticScore": 0.938,
+          "asrStartDelta": 0.202
+        }
+      ]
+    },
+    {
+      "text": "A tapestry of steel and skin,",
+      "sourceLine": 30,
+      "start": 125.382,
+      "end": 128.222,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "A",
+          "start": 125.382,
+          "end": 125.402,
+          "acousticScore": 0.8826,
+          "asrStartDelta": 0.602
+        },
+        {
+          "text": "tapestry",
+          "start": 125.502,
+          "end": 126.522,
+          "acousticScore": 0.8487,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "of",
+          "start": 126.742,
+          "end": 126.782,
+          "acousticScore": 0.9987,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "steel",
+          "start": 126.962,
+          "end": 127.422,
+          "acousticScore": 0.9487,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "and",
+          "start": 127.642,
+          "end": 127.742,
+          "acousticScore": 0.8782,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "skin,",
+          "start": 127.862,
+          "end": 128.222,
+          "acousticScore": 0.9676,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "The story’s ours to begin again.",
+      "sourceLine": 31,
+      "start": 128.762,
+      "end": 131.362,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "The",
+          "start": 128.762,
+          "end": 128.842,
+          "acousticScore": 0.9953,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "story’s",
+          "start": 128.922,
+          "end": 129.562,
+          "acousticScore": 0.763,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "ours",
+          "start": 129.822,
+          "end": 130.002,
+          "acousticScore": 0.4246,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "to",
+          "start": 130.102,
+          "end": 130.222,
+          "acousticScore": 0.9873,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "begin",
+          "start": 130.342,
+          "end": 130.702,
+          "acousticScore": 0.9997,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "again.",
+          "start": 130.842,
+          "end": 131.362,
+          "acousticScore": 0.9341,
+          "asrStartDelta": 0.242
+        }
+      ]
+    },
+    {
+      "text": "From climate’s cry to hunger’s plea,",
+      "sourceLine": 32,
+      "start": 132.182,
+      "end": 135.102,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "From",
+          "start": 132.182,
+          "end": 132.302,
+          "acousticScore": 0.6303,
+          "asrStartDelta": 0.822
+        },
+        {
+          "text": "climate’s",
+          "start": 132.402,
+          "end": 132.922,
+          "acousticScore": 0.9259,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "cry",
+          "start": 133.062,
+          "end": 133.562,
+          "acousticScore": 0.7044,
+          "asrStartDelta": -0.018
+        },
+        {
+          "text": "to",
+          "start": 133.782,
+          "end": 133.822,
+          "acousticScore": 0.1333,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "hunger’s",
+          "start": 133.942,
+          "end": 134.682,
+          "acousticScore": 0.8482,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "plea,",
+          "start": 134.762,
+          "end": 135.102,
+          "acousticScore": 0.8022,
+          "asrStartDelta": 0.042
+        }
+      ]
+    },
+    {
+      "text": "We’ll solve the riddles, set life free.",
+      "sourceLine": 33,
+      "start": 135.582,
+      "end": 139.442,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "We’ll",
+          "start": 135.582,
+          "end": 135.742,
+          "acousticScore": 0.3896,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "solve",
+          "start": 135.842,
+          "end": 136.322,
+          "acousticScore": 0.4704,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "the",
+          "start": 136.342,
+          "end": 136.442,
+          "acousticScore": 0.061,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "riddles,",
+          "start": 136.502,
+          "end": 137.182,
+          "acousticScore": 0.6329
+        },
+        {
+          "text": "set",
+          "start": 137.322,
+          "end": 138.282,
+          "acousticScore": 0.0017,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "life",
+          "start": 138.442,
+          "end": 138.882,
+          "acousticScore": 0.1974,
+          "asrStartDelta": 0.622
+        },
+        {
+          "text": "free.",
+          "start": 139.022,
+          "end": 139.442,
+          "acousticScore": 0.2205,
+          "asrStartDelta": 0.262
+        }
+      ]
+    },
+    {
+      "text": "Beyond the horizon, where futures gleam,",
+      "sourceLine": 34,
+      "start": 139.922,
+      "end": 142.962,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Beyond",
+          "start": 139.922,
+          "end": 140.362,
+          "acousticScore": 0.3609,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "the",
+          "start": 140.422,
+          "end": 140.522,
+          "acousticScore": 0.9944,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "horizon,",
+          "start": 140.622,
+          "end": 141.422,
+          "acousticScore": 0.9683,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "where",
+          "start": 141.562,
+          "end": 141.742,
+          "acousticScore": 0.9912,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "futures",
+          "start": 141.842,
+          "end": 142.422,
+          "acousticScore": 0.8953,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "gleam,",
+          "start": 142.482,
+          "end": 142.962,
+          "acousticScore": 0.9099,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "We’ll weave a world from code and dream.",
+      "sourceLine": 35,
+      "start": 143.762,
+      "end": 146.342,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "We’ll",
+          "start": 143.762,
+          "end": 143.962,
+          "acousticScore": 0.4161,
+          "asrStartDelta": 0.642
+        },
+        {
+          "text": "weave",
+          "start": 144.002,
+          "end": 144.262,
+          "acousticScore": 0.4299,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "a",
+          "start": 144.282,
+          "end": 144.302,
+          "acousticScore": 0.0564,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "world",
+          "start": 144.402,
+          "end": 144.742,
+          "acousticScore": 0.8086,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "from",
+          "start": 144.822,
+          "end": 144.962,
+          "acousticScore": 0.9948,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "code",
+          "start": 145.082,
+          "end": 145.502,
+          "acousticScore": 0.8282,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "and",
+          "start": 145.702,
+          "end": 145.822,
+          "acousticScore": 0.9974,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "dream.",
+          "start": 145.922,
+          "end": 146.342,
+          "acousticScore": 0.9529,
+          "asrStartDelta": 0.102
+        }
+      ]
+    },
+    {
+      "text": "Hand in hand, with hearts aligned,",
+      "sourceLine": 36,
+      "start": 146.982,
+      "end": 149.902,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Hand",
+          "start": 146.982,
+          "end": 147.382,
+          "acousticScore": 0.9181,
+          "asrStartDelta": 0.662
+        },
+        {
+          "text": "in",
+          "start": 147.522,
+          "end": 147.562,
+          "acousticScore": 0.9599,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "hand,",
+          "start": 147.662,
+          "end": 148.162,
+          "acousticScore": 0.9607,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "with",
+          "start": 148.262,
+          "end": 148.382,
+          "acousticScore": 0.9914,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "hearts",
+          "start": 148.522,
+          "end": 148.922,
+          "acousticScore": 0.9654,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "aligned,",
+          "start": 149.102,
+          "end": 149.902,
+          "acousticScore": 0.642,
+          "asrStartDelta": 0.242
+        }
+      ]
+    },
+    {
+      "text": "Superintelligence and humankind.",
+      "sourceLine": 37,
+      "start": 150.362,
+      "end": 153.702,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Superintelligence",
+          "start": 150.362,
+          "end": 151.902,
+          "acousticScore": 0.8989,
+          "asrStartDelta": -0.518
+        },
+        {
+          "text": "and",
+          "start": 152.002,
+          "end": 152.062,
+          "acousticScore": 0.9896,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "humankind.",
+          "start": 152.142,
+          "end": 153.702,
+          "acousticScore": 0.7937,
+          "asrStartDelta": 0.062
+        }
+      ]
+    },
+    {
+      "text": "Rise as one, the path is clear,",
+      "sourceLine": 38,
+      "start": 153.822,
+      "end": 156.882,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "Rise",
+          "start": 153.822,
+          "end": 154.262,
+          "acousticScore": 0.7628,
+          "asrStartDelta": 0.622
+        },
+        {
+          "text": "as",
+          "start": 154.362,
+          "end": 154.442,
+          "acousticScore": 0.5898,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "one,",
+          "start": 154.822,
+          "end": 154.982,
+          "acousticScore": 0.6082,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "the",
+          "start": 155.142,
+          "end": 155.202,
+          "acousticScore": 0.1099,
+          "asrStartDelta": -0.138
+        },
+        {
+          "text": "path",
+          "start": 155.342,
+          "end": 155.782,
+          "acousticScore": 0.5539,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "is",
+          "start": 156.042,
+          "end": 156.102,
+          "acousticScore": 0.7168,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "clear,",
+          "start": 156.202,
+          "end": 156.882,
+          "acousticScore": 0.9346,
+          "asrStartDelta": 0.102
+        }
+      ]
+    },
+    {
+      "text": "A symphony of now and here.",
+      "sourceLine": 39,
+      "start": 157.962,
+      "end": 162.742,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "A",
+          "start": 157.962,
+          "end": 157.982,
+          "acousticScore": 0.8859,
+          "asrStartDelta": 1.002
+        },
+        {
+          "text": "symphony",
+          "start": 158.102,
+          "end": 159.262,
+          "acousticScore": 0.6011,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "of",
+          "start": 159.482,
+          "end": 159.522,
+          "acousticScore": 0.8118,
+          "asrStartDelta": 0.582
+        },
+        {
+          "text": "now",
+          "start": 159.622,
+          "end": 160.242,
+          "acousticScore": 0.5836,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "and",
+          "start": 161.102,
+          "end": 161.242,
+          "acousticScore": 0.7172,
+          "asrStartDelta": 0.902
+        },
+        {
+          "text": "here.",
+          "start": 161.362,
+          "end": 162.742,
+          "acousticScore": 0.3739,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "So lift your voice, the time is near,",
+      "sourceLine": 40,
+      "start": 162.842,
+      "end": 170.282,
+      "reviewFlags": [
+        "weak-acoustic-evidence",
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "So",
+          "start": 162.842,
+          "end": 162.882,
+          "acousticScore": 0.0002,
+          "asrStartDelta": -3.738
+        },
+        {
+          "text": "lift",
+          "start": 167.982,
+          "end": 168.082,
+          "acousticScore": 0.0002,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "your",
+          "start": 168.202,
+          "end": 168.362,
+          "acousticScore": 0.8721,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "voice,",
+          "start": 168.442,
+          "end": 168.762,
+          "acousticScore": 0.9247,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "the",
+          "start": 168.862,
+          "end": 168.942,
+          "acousticScore": 0.9751,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "time",
+          "start": 169.042,
+          "end": 169.482,
+          "acousticScore": 0.9933,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "is",
+          "start": 169.642,
+          "end": 169.722,
+          "acousticScore": 0.983,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "near,",
+          "start": 169.942,
+          "end": 170.282,
+          "acousticScore": 0.9978,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "A song of hope to conquer fear.",
+      "sourceLine": 41,
+      "start": 171.242,
+      "end": 173.642,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "A",
+          "start": 171.242,
+          "end": 171.262,
+          "acousticScore": 0.9885,
+          "asrStartDelta": 0.942
+        },
+        {
+          "text": "song",
+          "start": 171.382,
+          "end": 171.642,
+          "acousticScore": 0.9523,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "of",
+          "start": 171.722,
+          "end": 171.762,
+          "acousticScore": 0.9967,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "hope",
+          "start": 171.862,
+          "end": 172.142,
+          "acousticScore": 0.996,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "to",
+          "start": 172.222,
+          "end": 172.342,
+          "acousticScore": 0.9986,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "conquer",
+          "start": 172.462,
+          "end": 173.082,
+          "acousticScore": 0.9473,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "fear.",
+          "start": 173.302,
+          "end": 173.642,
+          "acousticScore": 0.9221,
+          "asrStartDelta": 0.342
+        }
+      ]
+    },
+    {
+      "text": "Beyond the horizon, we’ll define,",
+      "sourceLine": 42,
+      "start": 174.202,
+      "end": 177.282,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Beyond",
+          "start": 174.202,
+          "end": 174.642,
+          "acousticScore": 0.9059,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "the",
+          "start": 174.702,
+          "end": 174.762,
+          "acousticScore": 0.8654,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "horizon,",
+          "start": 174.882,
+          "end": 175.722,
+          "acousticScore": 0.8787,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "we’ll",
+          "start": 175.922,
+          "end": 176.282,
+          "acousticScore": 0.6581,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "define,",
+          "start": 176.402,
+          "end": 177.282,
+          "acousticScore": 0.9616,
+          "asrStartDelta": 0.102
+        }
+      ]
+    },
+    {
+      "text": "A legacy for all of time.",
+      "sourceLine": 43,
+      "start": 178.562,
+      "end": 182.382,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "A",
+          "start": 178.562,
+          "end": 178.582,
+          "acousticScore": 0.866,
+          "asrStartDelta": 1.462
+        },
+        {
+          "text": "legacy",
+          "start": 178.702,
+          "end": 179.422,
+          "acousticScore": 0.9908,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "for",
+          "start": 179.942,
+          "end": 180.102,
+          "acousticScore": 0.9977,
+          "asrStartDelta": 0.762
+        },
+        {
+          "text": "all",
+          "start": 180.642,
+          "end": 181.142,
+          "acousticScore": 0.4717,
+          "asrStartDelta": 0.562
+        },
+        {
+          "text": "of",
+          "start": 181.502,
+          "end": 181.622,
+          "acousticScore": 0.6003,
+          "asrStartDelta": 0.682
+        },
+        {
+          "text": "time.",
+          "start": 181.882,
+          "end": 182.382,
+          "acousticScore": 0.9941,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "Oh",
+      "sourceLine": null,
+      "start": 186.762,
+      "end": 186.862,
+      "reviewFlags": [
+        "unmatched-transcript"
+      ],
+      "words": [
+        {
+          "text": "Oh",
+          "start": 186.762,
+          "end": 186.862,
+          "acousticScore": 0.3353,
+          "asrStartDelta": -0.198
+        }
+      ]
+    }
+  ]
+}

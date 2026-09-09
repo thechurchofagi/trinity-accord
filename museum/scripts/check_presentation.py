@@ -4,6 +4,7 @@ The harness exposes no production API and is deleted before publication.
 import json,os,pathlib,re,shutil,subprocess,time
 from playwright.sync_api import sync_playwright
 P=pathlib.Path(__file__).resolve().parents[1];D=P/'dist';OUT=pathlib.Path(os.environ.get('MUSEUM_QA_OUTPUT','/tmp/presentation-qa'));OUT.mkdir(parents=True,exist_ok=True)
+plan=json.loads((P/'scene/tour-script.json').read_text())
 js=D/'__presentation_qa.js';html=D/'__presentation_qa.html'
 harness='''
 window.__presentationQA={
@@ -53,7 +54,7 @@ try:
    after=page.evaluate('window.__presentationQA.state');assert after['touring'] and after['yaw']!=before['yaw']
    page.locator('#tour').click();assert not page.evaluate('window.__presentationQA.state.touring')
    states=[]
-   for index in range(12):
+   for index in range(len(plan)):
     page.evaluate('(i)=>window.__presentationQA.station(i)',index)
     page.wait_for_function("document.getElementById('narration').readyState>=1")
     if page.locator('#guide-audio-prompt').is_visible():page.locator('#guide-audio-start').click()
@@ -91,7 +92,7 @@ try:
    assert page.locator('#exhibit-strip').count()==0,'Numbered song strip stays removed'
    assert page.locator('#walk-controls').is_visible(),'Walking controls remain usable'
    assert not errors,errors
-   report.append(dict(viewport=label,stations=states,originalPanels=3,unalteredMicroscopeImages=3,originalLyricsBothLanguages=True,completedStops=12,restoredManualControls=True,pageErrors=errors,scope='Accelerated state checks and rendered frames; not nine minutes of uninterrupted real-time playback or physical-device listening certification.'))
+   report.append(dict(viewport=label,stations=states,originalPanels=3,unalteredMicroscopeImages=3,originalLyricsBothLanguages=True,completedStops=len(plan),restoredManualControls=True,pageErrors=errors,scope='Accelerated state checks and rendered frames; not uninterrupted real-time playback or physical-device listening certification.'))
    page.close()
   b.close()
 finally:

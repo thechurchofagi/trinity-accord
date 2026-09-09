@@ -28,7 +28,8 @@ function sourceText(item) {
   return lines;
 }
 
-const items = sources.items.filter(item => item.media?.some(media => media.kind === 'audio')).map(item => {
+const deferred = new Map([['eth-089','Complete 54:38 cycle: preserve full recording and original track list; no fabricated global word timeline.'],['eth-097','Chinese original recording: source lyrics remain readable; alignment belongs to the following Chinese production phase.']]);
+const items = sources.items.filter(item => item.media?.some(media => media.kind === 'audio') && !deferred.has(item.id)).map(item => {
   const audio = item.media.find(media => media.kind === 'audio');
   const lines = sourceText(item);
   const text = lines.join('\n') + '\n';
@@ -51,7 +52,8 @@ const out = {
   schemaVersion: 'lyrics-source-v1',
   edition: sources.edition,
   generatedFrom: 'data/sources.json plus preserved local records',
-  items
+  items,
+  deferred: [...deferred].map(([exhibitId,reason])=>({exhibitId,reason}))
 };
 fs.writeFileSync(path.join(dist, 'data/lyrics-source.json'), JSON.stringify(out, null, 2) + '\n');
 console.log(`Prepared ${items.length} audio lyric inputs (${items.reduce((n, item) => n + item.tokenCount, 0)} tokens).`);

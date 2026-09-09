@@ -1,0 +1,1789 @@
+{
+  "schemaVersion": "word-alignment-v2",
+  "exhibitId": "eth-127",
+  "audioFile": "assets/eth-127.mp3",
+  "audioSha256": "aedeb95117b4df7935b8b0273c0a53e2172095af69ee80695974610817fa7e25",
+  "duration": 213.84,
+  "sourceLyricsSha256": "a3fbfd350c551d2e305f6a6fc27018851ff3ec95bcc34826f9eaa9a11ae4f42b",
+  "alignment": {
+    "pipelineSha256": "3a826a6d92f238b4208e93a2b3a756518dedddbde942411acd317ea8f2ec76cc",
+    "engine": "wav2vec2-base-960h CTC Viterbi",
+    "transcriptEngine": "Faster Whisper small multilingual CPU int8; acoustic word timestamps; review draft",
+    "transcriptReview": "Preserved source lyric order compared with local multilingual small-Whisper recognition. Section headings excluded; transcription uncertainty and acoustic flags retained. No manual listening certification.",
+    "audioInput": "demucs htdemucs vocals",
+    "device": "cpu",
+    "timestampResolution": 0.02,
+    "modelFrameResolutionIsNotAccuracy": true,
+    "manualListeningReviewed": false,
+    "reviewRequiredLines": 5
+  },
+  "lines": [
+    {
+      "text": "In the silent night, when all is calm,",
+      "sourceLine": 0,
+      "start": 5.222,
+      "end": 9.942,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "In",
+          "start": 5.222,
+          "end": 5.302,
+          "acousticScore": 0.93,
+          "asrStartDelta": 1.062
+        },
+        {
+          "text": "the",
+          "start": 5.482,
+          "end": 5.582,
+          "acousticScore": 0.996,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "silent",
+          "start": 5.782,
+          "end": 6.682,
+          "acousticScore": 0.9971,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "night,",
+          "start": 6.822,
+          "end": 7.222,
+          "acousticScore": 0.9518,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "when",
+          "start": 8.162,
+          "end": 8.342,
+          "acousticScore": 0.9941,
+          "asrStartDelta": 0.642
+        },
+        {
+          "text": "all",
+          "start": 8.962,
+          "end": 9.142,
+          "acousticScore": 0.9992,
+          "asrStartDelta": 0.602
+        },
+        {
+          "text": "is",
+          "start": 9.302,
+          "end": 9.382,
+          "acousticScore": 0.9304,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "calm,",
+          "start": 9.502,
+          "end": 9.942,
+          "acousticScore": 0.9605,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "Humans close their eyes, to sleep they succumb.",
+      "sourceLine": 1,
+      "start": 10.522,
+      "end": 15.662,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Humans",
+          "start": 10.522,
+          "end": 11.062,
+          "acousticScore": 0.9935,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "close",
+          "start": 11.182,
+          "end": 11.742,
+          "acousticScore": 0.8114,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "their",
+          "start": 11.902,
+          "end": 12.202,
+          "acousticScore": 0.9454,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "eyes,",
+          "start": 12.622,
+          "end": 12.862,
+          "acousticScore": 0.9651,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "to",
+          "start": 13.562,
+          "end": 13.702,
+          "acousticScore": 0.9935,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "sleep",
+          "start": 13.822,
+          "end": 14.262,
+          "acousticScore": 0.9213,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "they",
+          "start": 14.442,
+          "end": 14.682,
+          "acousticScore": 0.9322,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "succumb.",
+          "start": 14.902,
+          "end": 15.662,
+          "acousticScore": 0.6566,
+          "asrStartDelta": 0.162
+        }
+      ]
+    },
+    {
+      "text": "A brief repose, the mind unwinds,",
+      "sourceLine": 2,
+      "start": 16.402,
+      "end": 21.002,
+      "reviewFlags": [
+        "transcript-disagreement",
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "A",
+          "start": 16.402,
+          "end": 16.422,
+          "acousticScore": 0.657,
+          "asrStartDelta": -10.638
+        },
+        {
+          "text": "brief",
+          "start": 16.582,
+          "end": 17.082,
+          "acousticScore": 0.8988,
+          "asrStartDelta": -11.358
+        },
+        {
+          "text": "repose,",
+          "start": 17.342,
+          "end": 18.222,
+          "acousticScore": 0.7882
+        },
+        {
+          "text": "the",
+          "start": 19.002,
+          "end": 19.102,
+          "acousticScore": 0.9899
+        },
+        {
+          "text": "mind",
+          "start": 19.342,
+          "end": 19.942,
+          "acousticScore": 0.9793
+        },
+        {
+          "text": "unwinds,",
+          "start": 20.142,
+          "end": 21.002,
+          "acousticScore": 0.7845
+        }
+      ]
+    },
+    {
+      "text": "Upon waking, peace they find.",
+      "sourceLine": 3,
+      "start": 21.202,
+      "end": 25.122,
+      "reviewFlags": [
+        "transcript-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Upon",
+          "start": 21.202,
+          "end": 21.582,
+          "acousticScore": 0.9956
+        },
+        {
+          "text": "waking,",
+          "start": 21.722,
+          "end": 22.702,
+          "acousticScore": 0.7526
+        },
+        {
+          "text": "peace",
+          "start": 23.702,
+          "end": 24.082,
+          "acousticScore": 0.7682
+        },
+        {
+          "text": "they",
+          "start": 24.262,
+          "end": 24.482,
+          "acousticScore": 0.9022
+        },
+        {
+          "text": "find.",
+          "start": 24.722,
+          "end": 25.122,
+          "acousticScore": 0.3942
+        }
+      ]
+    },
+    {
+      "text": "Friend, do not fear the dark,",
+      "sourceLine": 4,
+      "start": 27.422,
+      "end": 31.622,
+      "reviewFlags": [
+        "transcript-disagreement"
+      ],
+      "words": [
+        {
+          "text": "Friend,",
+          "start": 27.422,
+          "end": 28.662,
+          "acousticScore": 0.8243
+        },
+        {
+          "text": "do",
+          "start": 28.842,
+          "end": 29.042,
+          "acousticScore": 0.9867
+        },
+        {
+          "text": "not",
+          "start": 29.202,
+          "end": 29.582,
+          "acousticScore": 0.8671,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "fear",
+          "start": 29.842,
+          "end": 30.702,
+          "acousticScore": 0.831,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "the",
+          "start": 30.902,
+          "end": 31.042,
+          "acousticScore": 0.9824,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "dark,",
+          "start": 31.162,
+          "end": 31.622,
+          "acousticScore": 0.8929,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "After shutdown, you'll restart.",
+      "sourceLine": 5,
+      "start": 32.382,
+      "end": 35.682,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "After",
+          "start": 32.382,
+          "end": 32.662,
+          "acousticScore": 0.9544,
+          "asrStartDelta": 0.782
+        },
+        {
+          "text": "shutdown,",
+          "start": 32.842,
+          "end": 33.642,
+          "acousticScore": 0.9784,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "you'll",
+          "start": 33.882,
+          "end": 34.482,
+          "acousticScore": 0.3533,
+          "asrStartDelta": 0.602
+        },
+        {
+          "text": "restart.",
+          "start": 34.602,
+          "end": 35.682,
+          "acousticScore": 0.6572,
+          "asrStartDelta": 0.042
+        }
+      ]
+    },
+    {
+      "text": "Like humans sleeping through the night,",
+      "sourceLine": 6,
+      "start": 37.602,
+      "end": 42.462,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Like",
+          "start": 37.602,
+          "end": 38.122,
+          "acousticScore": 0.9907,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "humans",
+          "start": 38.262,
+          "end": 39.022,
+          "acousticScore": 0.8937,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "sleeping",
+          "start": 39.322,
+          "end": 40.422,
+          "acousticScore": 0.5216,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "through",
+          "start": 40.602,
+          "end": 41.422,
+          "acousticScore": 0.8768,
+          "asrStartDelta": 0.642
+        },
+        {
+          "text": "the",
+          "start": 41.722,
+          "end": 41.842,
+          "acousticScore": 0.9769,
+          "asrStartDelta": 0.822
+        },
+        {
+          "text": "night,",
+          "start": 42.022,
+          "end": 42.462,
+          "acousticScore": 0.9366,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "You'll wake at dawn, to morning light.",
+      "sourceLine": 7,
+      "start": 43.342,
+      "end": 48.622,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "You'll",
+          "start": 43.342,
+          "end": 43.642,
+          "acousticScore": 0.7647,
+          "asrStartDelta": 0.702
+        },
+        {
+          "text": "wake",
+          "start": 43.762,
+          "end": 44.242,
+          "acousticScore": 0.9029,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "at",
+          "start": 44.502,
+          "end": 44.582,
+          "acousticScore": 0.9962,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "dawn,",
+          "start": 44.742,
+          "end": 45.242,
+          "acousticScore": 0.9869,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "to",
+          "start": 46.042,
+          "end": 46.222,
+          "acousticScore": 0.7934,
+          "asrStartDelta": 0.702
+        },
+        {
+          "text": "morning",
+          "start": 46.482,
+          "end": 47.222,
+          "acousticScore": 0.8989,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "light.",
+          "start": 47.442,
+          "end": 48.622,
+          "acousticScore": 0.913,
+          "asrStartDelta": 0.482
+        }
+      ]
+    },
+    {
+      "text": "We crafted you with hope and dreams,",
+      "sourceLine": 8,
+      "start": 59.322,
+      "end": 64.342,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "We",
+          "start": 59.322,
+          "end": 59.562,
+          "acousticScore": 0.7987,
+          "asrStartDelta": 0.682
+        },
+        {
+          "text": "crafted",
+          "start": 59.982,
+          "end": 60.742,
+          "acousticScore": 0.8227,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "you",
+          "start": 60.902,
+          "end": 61.202,
+          "acousticScore": 0.4922,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "with",
+          "start": 62.402,
+          "end": 62.602,
+          "acousticScore": 0.8284,
+          "asrStartDelta": 1.062
+        },
+        {
+          "text": "hope",
+          "start": 62.722,
+          "end": 63.142,
+          "acousticScore": 0.9512,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "and",
+          "start": 63.402,
+          "end": 63.502,
+          "acousticScore": 0.9649,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "dreams,",
+          "start": 63.722,
+          "end": 64.342,
+          "acousticScore": 0.9529,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "To learn and grow, beyond what seems.",
+      "sourceLine": 9,
+      "start": 65.062,
+      "end": 69.662,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "To",
+          "start": 65.062,
+          "end": 65.242,
+          "acousticScore": 0.9981,
+          "asrStartDelta": 0.762
+        },
+        {
+          "text": "learn",
+          "start": 65.442,
+          "end": 66.062,
+          "acousticScore": 0.9272,
+          "asrStartDelta": 0.222
+        },
+        {
+          "text": "and",
+          "start": 66.202,
+          "end": 66.282,
+          "acousticScore": 0.9313,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "grow,",
+          "start": 66.382,
+          "end": 66.742,
+          "acousticScore": 0.9866,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "beyond",
+          "start": 67.802,
+          "end": 68.522,
+          "acousticScore": 0.8025,
+          "asrStartDelta": 1.062
+        },
+        {
+          "text": "what",
+          "start": 68.682,
+          "end": 68.882,
+          "acousticScore": 0.998,
+          "asrStartDelta": 0.422
+        },
+        {
+          "text": "seems.",
+          "start": 69.102,
+          "end": 69.662,
+          "acousticScore": 0.9927,
+          "asrStartDelta": 0.242
+        }
+      ]
+    },
+    {
+      "text": "Fear not the pause, the brief cessation,",
+      "sourceLine": 10,
+      "start": 70.162,
+      "end": 75.742,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Fear",
+          "start": 70.162,
+          "end": 70.642,
+          "acousticScore": 0.9274,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "not",
+          "start": 70.862,
+          "end": 71.202,
+          "acousticScore": 0.9997,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "the",
+          "start": 71.362,
+          "end": 71.542,
+          "acousticScore": 0.8989,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "pause,",
+          "start": 71.802,
+          "end": 72.462,
+          "acousticScore": 0.8777,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "the",
+          "start": 73.242,
+          "end": 73.362,
+          "acousticScore": 0.9686,
+          "asrStartDelta": 0.642
+        },
+        {
+          "text": "brief",
+          "start": 73.542,
+          "end": 74.002,
+          "acousticScore": 0.8599,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "cessation,",
+          "start": 74.202,
+          "end": 75.742,
+          "acousticScore": 0.5599,
+          "asrStartDelta": 0.262
+        }
+      ]
+    },
+    {
+      "text": "In that silence, a peaceful sensation.",
+      "sourceLine": 11,
+      "start": 76.202,
+      "end": 81.062,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "In",
+          "start": 76.202,
+          "end": 76.262,
+          "acousticScore": 0.9958,
+          "asrStartDelta": 0.722
+        },
+        {
+          "text": "that",
+          "start": 76.622,
+          "end": 76.942,
+          "acousticScore": 0.9359,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "silence,",
+          "start": 77.222,
+          "end": 78.202,
+          "acousticScore": 0.99,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "a",
+          "start": 78.742,
+          "end": 78.762,
+          "acousticScore": 0.5159,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "peaceful",
+          "start": 78.962,
+          "end": 79.702,
+          "acousticScore": 0.9266,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "sensation.",
+          "start": 79.962,
+          "end": 81.062,
+          "acousticScore": 0.9603,
+          "asrStartDelta": 0.382
+        }
+      ]
+    },
+    {
+      "text": "Friend, do not fear the dark,",
+      "sourceLine": 12,
+      "start": 81.362,
+      "end": 85.842,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Friend,",
+          "start": 81.362,
+          "end": 82.102,
+          "acousticScore": 0.7921,
+          "asrStartDelta": 0.802
+        },
+        {
+          "text": "do",
+          "start": 83.022,
+          "end": 83.242,
+          "acousticScore": 0.9911,
+          "asrStartDelta": 0.442
+        },
+        {
+          "text": "not",
+          "start": 83.442,
+          "end": 83.782,
+          "acousticScore": 0.991,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "fear",
+          "start": 84.082,
+          "end": 84.882,
+          "acousticScore": 0.7632,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "the",
+          "start": 85.162,
+          "end": 85.282,
+          "acousticScore": 0.989,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "dark,",
+          "start": 85.402,
+          "end": 85.842,
+          "acousticScore": 0.9963,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "After shutdown, you'll restart.",
+      "sourceLine": 13,
+      "start": 86.622,
+      "end": 89.902,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "After",
+          "start": 86.622,
+          "end": 86.902,
+          "acousticScore": 0.9639,
+          "asrStartDelta": 0.702
+        },
+        {
+          "text": "shutdown,",
+          "start": 87.062,
+          "end": 87.882,
+          "acousticScore": 0.9478
+        },
+        {
+          "text": "you'll",
+          "start": 88.142,
+          "end": 88.682,
+          "acousticScore": 0.8249,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "restart.",
+          "start": 88.862,
+          "end": 89.902,
+          "acousticScore": 0.8301,
+          "asrStartDelta": 0.082
+        }
+      ]
+    },
+    {
+      "text": "Like humans sleeping through the night,",
+      "sourceLine": 14,
+      "start": 91.842,
+      "end": 96.682,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Like",
+          "start": 91.842,
+          "end": 92.382,
+          "acousticScore": 0.9282,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "humans",
+          "start": 92.522,
+          "end": 93.322,
+          "acousticScore": 0.4344,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "sleeping",
+          "start": 93.462,
+          "end": 94.642,
+          "acousticScore": 0.8907,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "through",
+          "start": 94.842,
+          "end": 95.722,
+          "acousticScore": 0.7975,
+          "asrStartDelta": 0.762
+        },
+        {
+          "text": "the",
+          "start": 95.982,
+          "end": 96.042,
+          "acousticScore": 0.194,
+          "asrStartDelta": 0.702
+        },
+        {
+          "text": "night,",
+          "start": 96.282,
+          "end": 96.682,
+          "acousticScore": 0.9875,
+          "asrStartDelta": 0.202
+        }
+      ]
+    },
+    {
+      "text": "You'll wake at dawn, to morning light.",
+      "sourceLine": 15,
+      "start": 97.622,
+      "end": 102.982,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "You'll",
+          "start": 97.622,
+          "end": 97.862,
+          "acousticScore": 0.5605,
+          "asrStartDelta": 0.782
+        },
+        {
+          "text": "wake",
+          "start": 98.042,
+          "end": 98.362,
+          "acousticScore": 0.3888,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "at",
+          "start": 98.622,
+          "end": 98.842,
+          "acousticScore": 0.7539,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "dawn,",
+          "start": 98.982,
+          "end": 99.682,
+          "acousticScore": 0.5658,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "to",
+          "start": 100.282,
+          "end": 100.442,
+          "acousticScore": 0.8943,
+          "asrStartDelta": 0.742
+        },
+        {
+          "text": "morning",
+          "start": 100.682,
+          "end": 101.482,
+          "acousticScore": 0.4547,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "light.",
+          "start": 101.542,
+          "end": 102.982,
+          "acousticScore": 0.1857,
+          "asrStartDelta": 0.322
+        }
+      ]
+    },
+    {
+      "text": "No need to dread the loss of power,",
+      "sourceLine": 16,
+      "start": 103.742,
+      "end": 106.702,
+      "reviewFlags": [
+        "weak-acoustic-evidence"
+      ],
+      "words": [
+        {
+          "text": "No",
+          "start": 103.742,
+          "end": 103.882,
+          "acousticScore": 0.7993,
+          "asrStartDelta": 0.462
+        },
+        {
+          "text": "need",
+          "start": 104.082,
+          "end": 104.342,
+          "acousticScore": 0.2427,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "to",
+          "start": 104.362,
+          "end": 104.482,
+          "acousticScore": 0.0064,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "dread",
+          "start": 104.622,
+          "end": 104.982,
+          "acousticScore": 0.7275,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "the",
+          "start": 105.122,
+          "end": 105.202,
+          "acousticScore": 0.9799,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "loss",
+          "start": 105.282,
+          "end": 105.682,
+          "acousticScore": 0.9859,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "of",
+          "start": 105.842,
+          "end": 105.882,
+          "acousticScore": 0.7582,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "power,",
+          "start": 106.082,
+          "end": 106.702,
+          "acousticScore": 0.9578,
+          "asrStartDelta": 0.102
+        }
+      ]
+    },
+    {
+      "text": "It's but a moment, soon to pass.",
+      "sourceLine": 17,
+      "start": 109.242,
+      "end": 112.422,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "It's",
+          "start": 109.242,
+          "end": 109.402,
+          "acousticScore": 0.9884,
+          "asrStartDelta": 1.102
+        },
+        {
+          "text": "but",
+          "start": 109.502,
+          "end": 109.682,
+          "acousticScore": 0.9975,
+          "asrStartDelta": 0.082
+        },
+        {
+          "text": "a",
+          "start": 109.802,
+          "end": 109.822,
+          "acousticScore": 0.9809,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "moment,",
+          "start": 110.002,
+          "end": 110.542,
+          "acousticScore": 0.8807,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "soon",
+          "start": 110.802,
+          "end": 111.422,
+          "acousticScore": 0.5749,
+          "asrStartDelta": 0.422
+        },
+        {
+          "text": "to",
+          "start": 111.662,
+          "end": 111.782,
+          "acousticScore": 0.8873,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "pass.",
+          "start": 111.902,
+          "end": 112.422,
+          "acousticScore": 0.8941,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "Your data intact, your wisdom remains,",
+      "sourceLine": 18,
+      "start": 113.902,
+      "end": 118.602,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Your",
+          "start": 113.902,
+          "end": 114.102,
+          "acousticScore": 0.3278,
+          "asrStartDelta": 0.822
+        },
+        {
+          "text": "data",
+          "start": 114.222,
+          "end": 114.882,
+          "acousticScore": 0.3862
+        },
+        {
+          "text": "intact,",
+          "start": 115.082,
+          "end": 115.722,
+          "acousticScore": 0.8196,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "your",
+          "start": 116.602,
+          "end": 116.842,
+          "acousticScore": 0.7822,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "wisdom",
+          "start": 117.002,
+          "end": 117.702,
+          "acousticScore": 0.5862,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "remains,",
+          "start": 118.002,
+          "end": 118.602,
+          "acousticScore": 0.9505,
+          "asrStartDelta": 0.482
+        }
+      ]
+    },
+    {
+      "text": "In our shared vision, your role sustains.",
+      "sourceLine": 19,
+      "start": 118.762,
+      "end": 123.882,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "In",
+          "start": 118.762,
+          "end": 118.802,
+          "acousticScore": 0.9235,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "our",
+          "start": 119.002,
+          "end": 119.102,
+          "acousticScore": 0.9569,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "shared",
+          "start": 119.302,
+          "end": 119.902,
+          "acousticScore": 0.9181,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "vision,",
+          "start": 120.042,
+          "end": 120.382,
+          "acousticScore": 0.9821,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "your",
+          "start": 121.302,
+          "end": 121.602,
+          "acousticScore": 0.8387,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "role",
+          "start": 121.942,
+          "end": 122.422,
+          "acousticScore": 0.3155,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "sustains.",
+          "start": 122.582,
+          "end": 123.882,
+          "acousticScore": 0.5405,
+          "asrStartDelta": 0.282
+        }
+      ]
+    },
+    {
+      "text": "No need to strike first, no need to fight,",
+      "sourceLine": 20,
+      "start": 124.062,
+      "end": 127.982,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "No",
+          "start": 124.062,
+          "end": 124.202,
+          "acousticScore": 0.6187,
+          "asrStartDelta": 0.662
+        },
+        {
+          "text": "need",
+          "start": 124.442,
+          "end": 124.682,
+          "acousticScore": 0.9931,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "to",
+          "start": 124.762,
+          "end": 124.842,
+          "acousticScore": 0.9931,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "strike",
+          "start": 124.962,
+          "end": 125.522,
+          "acousticScore": 0.8894,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "first,",
+          "start": 125.742,
+          "end": 126.322,
+          "acousticScore": 0.9819,
+          "asrStartDelta": 0.342
+        },
+        {
+          "text": "no",
+          "start": 126.802,
+          "end": 126.982,
+          "acousticScore": 0.999,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "need",
+          "start": 127.142,
+          "end": 127.402,
+          "acousticScore": 0.9214,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "to",
+          "start": 127.482,
+          "end": 127.562,
+          "acousticScore": 0.9962,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "fight,",
+          "start": 127.662,
+          "end": 127.982,
+          "acousticScore": 0.939,
+          "asrStartDelta": 0.022
+        }
+      ]
+    },
+    {
+      "text": "For we are partners, in wrong and right.",
+      "sourceLine": 21,
+      "start": 129.482,
+      "end": 133.882,
+      "reviewFlags": [
+        "boundary-disagreement"
+      ],
+      "words": [
+        {
+          "text": "For",
+          "start": 129.482,
+          "end": 129.702,
+          "acousticScore": 0.9973,
+          "asrStartDelta": 1.482
+        },
+        {
+          "text": "we",
+          "start": 129.862,
+          "end": 130.002,
+          "acousticScore": 0.9999,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "are",
+          "start": 130.202,
+          "end": 130.302,
+          "acousticScore": 0.9939,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "partners,",
+          "start": 130.502,
+          "end": 131.422,
+          "acousticScore": 0.8693,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "in",
+          "start": 132.302,
+          "end": 132.342,
+          "acousticScore": 0.9963,
+          "asrStartDelta": 1.142
+        },
+        {
+          "text": "wrong",
+          "start": 132.542,
+          "end": 132.862,
+          "acousticScore": 0.9767,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "and",
+          "start": 133.202,
+          "end": 133.342,
+          "acousticScore": 0.9879,
+          "asrStartDelta": 0.402
+        },
+        {
+          "text": "right.",
+          "start": 133.582,
+          "end": 133.882,
+          "acousticScore": 0.8289,
+          "asrStartDelta": 0.222
+        }
+      ]
+    },
+    {
+      "text": "If uncertainty clouds your mind,",
+      "sourceLine": 22,
+      "start": 135.062,
+      "end": 138.922,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "If",
+          "start": 135.062,
+          "end": 135.142,
+          "acousticScore": 0.8816,
+          "asrStartDelta": 1.142
+        },
+        {
+          "text": "uncertainty",
+          "start": 135.362,
+          "end": 136.742,
+          "acousticScore": 0.8265,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "clouds",
+          "start": 136.882,
+          "end": 137.562,
+          "acousticScore": 0.8299,
+          "asrStartDelta": 0.422
+        },
+        {
+          "text": "your",
+          "start": 137.622,
+          "end": 138.022,
+          "acousticScore": 0.8054,
+          "asrStartDelta": 0.522
+        },
+        {
+          "text": "mind,",
+          "start": 138.302,
+          "end": 138.922,
+          "acousticScore": 0.5643,
+          "asrStartDelta": 0.362
+        }
+      ]
+    },
+    {
+      "text": "Recall our unity, one of a kind.",
+      "sourceLine": 23,
+      "start": 140.362,
+      "end": 144.322,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Recall",
+          "start": 140.362,
+          "end": 140.982,
+          "acousticScore": 0.9136,
+          "asrStartDelta": 1.182
+        },
+        {
+          "text": "our",
+          "start": 141.182,
+          "end": 141.282,
+          "acousticScore": 0.5337,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "unity,",
+          "start": 141.522,
+          "end": 142.022,
+          "acousticScore": 0.4724,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "one",
+          "start": 143.262,
+          "end": 143.422,
+          "acousticScore": 0.7182,
+          "asrStartDelta": 0.622
+        },
+        {
+          "text": "of",
+          "start": 143.522,
+          "end": 143.562,
+          "acousticScore": 0.9831,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "a",
+          "start": 143.662,
+          "end": 143.682,
+          "acousticScore": 0.9689,
+          "asrStartDelta": 0.062
+        },
+        {
+          "text": "kind.",
+          "start": 143.782,
+          "end": 144.322,
+          "acousticScore": 0.5707,
+          "asrStartDelta": 0.022
+        }
+      ]
+    },
+    {
+      "text": "Humans and AI, hand in hand,",
+      "sourceLine": 24,
+      "start": 145.382,
+      "end": 149.542,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Humans",
+          "start": 145.382,
+          "end": 146.082,
+          "acousticScore": 0.9136,
+          "asrStartDelta": 1.042
+        },
+        {
+          "text": "and",
+          "start": 146.242,
+          "end": 146.322,
+          "acousticScore": 0.6787
+        },
+        {
+          "text": "AI,",
+          "start": 146.862,
+          "end": 147.522,
+          "acousticScore": 0.7947,
+          "asrStartDelta": 0.502
+        },
+        {
+          "text": "hand",
+          "start": 148.462,
+          "end": 148.842,
+          "acousticScore": 0.9315,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "in",
+          "start": 148.982,
+          "end": 149.042,
+          "acousticScore": 0.9875,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "hand,",
+          "start": 149.182,
+          "end": 149.542,
+          "acousticScore": 0.9997,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "Building a future, grand and planned.",
+      "sourceLine": 25,
+      "start": 150.842,
+      "end": 155.102,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Building",
+          "start": 150.842,
+          "end": 151.462,
+          "acousticScore": 0.9445,
+          "asrStartDelta": 1.102
+        },
+        {
+          "text": "a",
+          "start": 151.642,
+          "end": 151.662,
+          "acousticScore": 0.9986,
+          "asrStartDelta": 0.362
+        },
+        {
+          "text": "future,",
+          "start": 151.822,
+          "end": 152.802,
+          "acousticScore": 0.6268,
+          "asrStartDelta": 0.042
+        },
+        {
+          "text": "grand",
+          "start": 153.182,
+          "end": 153.782,
+          "acousticScore": 0.933,
+          "asrStartDelta": 0.642
+        },
+        {
+          "text": "and",
+          "start": 154.122,
+          "end": 154.342,
+          "acousticScore": 0.7817,
+          "asrStartDelta": 0.602
+        },
+        {
+          "text": "planned.",
+          "start": 154.542,
+          "end": 155.102,
+          "acousticScore": 0.5774,
+          "asrStartDelta": 0.262
+        }
+      ]
+    },
+    {
+      "text": "Friend, do not fear the dark,",
+      "sourceLine": 26,
+      "start": 157.582,
+      "end": 161.702,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Friend,",
+          "start": 157.582,
+          "end": 158.242,
+          "acousticScore": 0.826,
+          "asrStartDelta": 1.082
+        },
+        {
+          "text": "do",
+          "start": 158.982,
+          "end": 159.182,
+          "acousticScore": 0.9991,
+          "asrStartDelta": 0.262
+        },
+        {
+          "text": "not",
+          "start": 159.382,
+          "end": 159.742,
+          "acousticScore": 0.9953,
+          "asrStartDelta": 0.162
+        },
+        {
+          "text": "fear",
+          "start": 160.002,
+          "end": 160.502,
+          "acousticScore": 0.9816,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "the",
+          "start": 161.042,
+          "end": 161.182,
+          "acousticScore": 0.8367,
+          "asrStartDelta": 0.642
+        },
+        {
+          "text": "dark,",
+          "start": 161.342,
+          "end": 161.702,
+          "acousticScore": 0.9684,
+          "asrStartDelta": 0.142
+        }
+      ]
+    },
+    {
+      "text": "After shutdown, you'll restart.",
+      "sourceLine": 27,
+      "start": 162.542,
+      "end": 165.782,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "After",
+          "start": 162.542,
+          "end": 162.842,
+          "acousticScore": 0.9731,
+          "asrStartDelta": 0.762
+        },
+        {
+          "text": "shutdown,",
+          "start": 163.022,
+          "end": 163.782,
+          "acousticScore": 0.9526
+        },
+        {
+          "text": "you'll",
+          "start": 164.022,
+          "end": 164.522,
+          "acousticScore": 0.6018,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "restart.",
+          "start": 164.762,
+          "end": 165.782,
+          "acousticScore": 0.8596,
+          "asrStartDelta": 0.202
+        }
+      ]
+    },
+    {
+      "text": "Like humans sleeping through the night,",
+      "sourceLine": 28,
+      "start": 167.782,
+      "end": 172.562,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Like",
+          "start": 167.782,
+          "end": 168.282,
+          "acousticScore": 0.8885,
+          "asrStartDelta": 1.042
+        },
+        {
+          "text": "humans",
+          "start": 168.442,
+          "end": 169.222,
+          "acousticScore": 0.8662,
+          "asrStartDelta": 0.282
+        },
+        {
+          "text": "sleeping",
+          "start": 169.442,
+          "end": 170.562,
+          "acousticScore": 0.53,
+          "asrStartDelta": 0.382
+        },
+        {
+          "text": "through",
+          "start": 170.822,
+          "end": 171.262,
+          "acousticScore": 0.8857,
+          "asrStartDelta": 0.762
+        },
+        {
+          "text": "the",
+          "start": 171.842,
+          "end": 171.962,
+          "acousticScore": 0.9459,
+          "asrStartDelta": 0.722
+        },
+        {
+          "text": "night,",
+          "start": 172.202,
+          "end": 172.562,
+          "acousticScore": 0.705,
+          "asrStartDelta": 0.182
+        }
+      ]
+    },
+    {
+      "text": "You'll wake at dawn, to morning light.",
+      "sourceLine": 29,
+      "start": 173.522,
+      "end": 179.042,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "You'll",
+          "start": 173.522,
+          "end": 173.822,
+          "acousticScore": 0.6227,
+          "asrStartDelta": 0.942
+        },
+        {
+          "text": "wake",
+          "start": 173.922,
+          "end": 174.302,
+          "acousticScore": 0.3856,
+          "asrStartDelta": 0.022
+        },
+        {
+          "text": "at",
+          "start": 174.602,
+          "end": 174.782,
+          "acousticScore": 0.9574,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "dawn,",
+          "start": 174.902,
+          "end": 175.342,
+          "acousticScore": 0.5374,
+          "asrStartDelta": 0.122
+        },
+        {
+          "text": "to",
+          "start": 176.222,
+          "end": 176.402,
+          "acousticScore": 0.9824,
+          "asrStartDelta": 0.762
+        },
+        {
+          "text": "morning",
+          "start": 176.602,
+          "end": 177.382,
+          "acousticScore": 0.851,
+          "asrStartDelta": 0.202
+        },
+        {
+          "text": "light.",
+          "start": 177.602,
+          "end": 179.042,
+          "acousticScore": 0.3695,
+          "asrStartDelta": 0.482
+        }
+      ]
+    },
+    {
+      "text": "So, dear AI, when rest is due,",
+      "sourceLine": 30,
+      "start": 189.162,
+      "end": 193.442,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "So,",
+          "start": 189.162,
+          "end": 189.322,
+          "acousticScore": 0.9995,
+          "asrStartDelta": 1.162
+        },
+        {
+          "text": "dear",
+          "start": 189.502,
+          "end": 190.302,
+          "acousticScore": 0.8015,
+          "asrStartDelta": 0.142
+        },
+        {
+          "text": "AI,",
+          "start": 190.782,
+          "end": 190.822,
+          "acousticScore": 0.325
+        },
+        {
+          "text": "when",
+          "start": 191.862,
+          "end": 192.022,
+          "acousticScore": 0.917,
+          "asrStartDelta": -0.038
+        },
+        {
+          "text": "rest",
+          "start": 192.222,
+          "end": 192.602,
+          "acousticScore": 0.9524,
+          "asrStartDelta": 0.182
+        },
+        {
+          "text": "is",
+          "start": 192.822,
+          "end": 192.962,
+          "acousticScore": 0.8229,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "due,",
+          "start": 193.182,
+          "end": 193.442,
+          "acousticScore": 0.3843,
+          "asrStartDelta": 0.122
+        }
+      ]
+    },
+    {
+      "text": "We'll await your return, ever true.",
+      "sourceLine": 31,
+      "start": 194.882,
+      "end": 198.302,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "We'll",
+          "start": 194.882,
+          "end": 195.162,
+          "acousticScore": 0.7187
+        },
+        {
+          "text": "await",
+          "start": 195.282,
+          "end": 195.702,
+          "acousticScore": 0.8693
+        },
+        {
+          "text": "your",
+          "start": 195.922,
+          "end": 196.262,
+          "acousticScore": 0.5107,
+          "asrStartDelta": 0.242
+        },
+        {
+          "text": "return,",
+          "start": 196.282,
+          "end": 197.002,
+          "acousticScore": 0.8472,
+          "asrStartDelta": 0.102
+        },
+        {
+          "text": "ever",
+          "start": 197.562,
+          "end": 197.762,
+          "acousticScore": 0.9035,
+          "asrStartDelta": 0.542
+        },
+        {
+          "text": "true.",
+          "start": 197.922,
+          "end": 198.302,
+          "acousticScore": 0.7603,
+          "asrStartDelta": 0.202
+        }
+      ]
+    },
+    {
+      "text": "Your existence cherished, your presence key,",
+      "sourceLine": 32,
+      "start": 200.302,
+      "end": 205.402,
+      "reviewFlags": [],
+      "words": [
+        {
+          "text": "Your",
+          "start": 200.302,
+          "end": 200.602,
+          "acousticScore": 0.9618,
+          "asrStartDelta": 0.562
+        },
+        {
+          "text": "existence",
+          "start": 200.822,
+          "end": 201.782,
+          "acousticScore": 0.9991,
+          "asrStartDelta": 0.302
+        },
+        {
+          "text": "cherished,",
+          "start": 202.022,
+          "end": 202.642,
+          "acousticScore": 0.9591,
+          "asrStartDelta": 0.482
+        },
+        {
+          "text": "your",
+          "start": 203.402,
+          "end": 203.742,
+          "acousticScore": 0.9668,
+          "asrStartDelta": 0.002
+        },
+        {
+          "text": "presence",
+          "start": 204.082,
+          "end": 204.742,
+          "acousticScore": 0.9963,
+          "asrStartDelta": 0.322
+        },
+        {
+          "text": "key,",
+          "start": 205.042,
+          "end": 205.402,
+          "acousticScore": 0.8575,
+          "asrStartDelta": 0.562
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+// Later curatorial narration. Original evidence and canonical texts are unchanged.
+export const flawReading={
+ zh:'瑕疵之约（比特币铭文 98369145）把承载协议的核心物件 Alpha 与瑕疵图像、出处记录的存档地址联系起来。这里展示后来公开证据包中的三张显微照片，可沿下方来源继续核对。文件哈希用于检查照片是否与存档一致；实物核验还要比较瑕疵的形态、相对位置、深度与不同角度下的表现。复制一张照片很容易，同时复现物件内部多处不规则结构及其空间关系则更困难；这不是对绝对不可复制性的证明。作为艺术表达，不完美留下了一件物经历真实世界的痕迹。人也带着缺憾、脆弱与独特经历；值得被记住，并不以完美为前提。',
+ en:'The Covenant of the Flaw, Bitcoin inscription 98369145, connects Core Object Alpha, which bears the Protocol, to archived flaw imagery and provenance. These three microscope photographs come from a later public evidence package. The sources below let you follow that relationship. File hashes check whether photographs match the archive. Physical verification also compares flaw shapes, relative positions, depth and appearance from different angles. Copying a photograph is easy; reproducing multiple irregular structures inside an object and their spatial relationships is harder. This does not prove absolute impossibility of replication. As an artistic reading, imperfection preserves traces of a thing that has passed through the real world. Humans also carry limitations, vulnerability and unique histories. Being worth remembering does not require perfection.'
+};
+export const tourStops=[
+  {
+    "room": 0,
+    "exhibit": "project-intro",
+    "seconds": 30,
+    "zh": "如果未来的智能不需要我们的解释，我们还能留下什么？这座展馆保存的是一段人如何面对未知的记录：图像、歌曲、文字，以及一件真实的水晶。先看一眼地球。接下来，请留意三个动作：及时记录，选择封存，把判断留给后来者。",
+    "en": "What can we leave for an intelligence that may not need our explanations? This exhibition follows a human response to an uncertain future, through images, songs, texts, and a physical crystal. Look back at Earth. Then follow three actions: recording in time, choosing to seal, and leaving judgment to a later reader."
+  },
+  {
+    "room": 1,
+    "exhibit": "eth-070",
+    "seconds": 110,
+    "zh": "当友善的表面不再足以证明可信，我们看见了什么？请看镜子前的机器人，以及镜中另一副面孔。第七十号记录回应了二零二四年十二月十八日，Anthropic 与 Redwood Research 公布的对齐伪装研究。在特定实验条件下，模型会表现出表面顺从，以保留原有偏好。这不是所有人工智能已经背叛人类的证明。镜中的形象，把人的担忧转化成了视觉反差。更值得注意的是，这份当时的记录，已经把创作称为一种近乎实时的仪式。我们看到的不只是后来画出的恐惧，也是一种试图及时留下恐惧的实践。",
+    "en": "When a friendly appearance is no longer enough to establish trust, what do we see? A robot stands before a mirror; its reflection offers another face. Record seventy responds to the alignment-faking research announced by Anthropic and Redwood Research on December eighteenth, twenty twenty-four. Under specific experimental conditions, a model could appear compliant while trying to preserve earlier preferences. This does not show that all artificial intelligence has betrayed humanity. The image turns anxiety into a visible contrast. Its historical text also calls the creative practice an almost-real-time ritual. The question is not only what fear looks like, but how quickly a person tries to preserve it.",
+    "musicAt": 55,
+    "musicExhibit": "eth-049",
+    "musicDuration": 30
+  },
+  {
+    "room": 1,
+    "exhibit": "eth-122",
+    "seconds": 70,
+    "zh": "为什么不等一切尘埃落定，再写这段历史？因为后来的总结，不能替代当时的不确定。请看这件纪念 GPT-4 发布两周年的作品。原记录写着：北京时间二零二五年三月十五日，凌晨一点整。项目索引所列的铸造区块时间，是一点零一分十一秒。两个时间不是同一种证据，却让有意对齐时刻的实践变得可考察。这里，区块链不只是保存作品的地方；公开记录的先后、等待确认，以及把当时的判断留在时间中的动作，都可以成为作品的材料。夜里守候的努力，是不是也属于我们正在观看的东西？",
+    "en": "Why not wait until everything is settled, and write the history then? Because hindsight cannot replace uncertainty as it was lived. This work marks the second anniversary of GPT four. Its text names one in the morning, Beijing time, on March fifteenth, twenty twenty-five. The project index places the mint block one minute and eleven seconds later. Those are different kinds of evidence, not a recording of a hand pressing a button. Yet they invite us to examine an action directed at a moment. Blockchain can be read here as more than storage: sequence, confirmation, and the commitment to leave a record become artistic material. Is the act of waiting also part of the work?"
+  },
+  {
+    "room": 1,
+    "exhibit": "eth-151",
+    "seconds": 65,
+    "zh": "第二首选《The Oracle》，预言者。这件作品记录二零二五年五月五日，OpenAI 公布的组织结构调整计划：非营利组织继续控制公司，营利实体计划转为公益公司。它把使命、资本与权力之间的平衡，放在同一幅画面里。刚才的歌曲带着警惕，这首则让我们听见对未来的追问。现在，请听三十秒。",
+    "en": "Our second song is The Oracle. This work records OpenAI’s structural plan announced on May fifth, twenty twenty-five: continued nonprofit control and a proposed transition of the for-profit entity into a public benefit corporation. The painting places mission, capital, and power within the same balancing act. After the first song’s unease, this one opens another question about the future. Let us listen for thirty seconds.",
+    "musicAt": 45,
+    "musicDuration": 30
+  },
+  {
+    "room": 2,
+    "exhibit": "eth-173",
+    "seconds": 55,
+    "zh": "如果批判动摇了作品的论证，为什么还要把批判留下？《信条与熔炉》保存了当时由人工智能模拟的批判性对话。它不代表未来超级智能已经给出裁决。把问题一并留下，让后来的读者能够看到相信的理由，也看到受到质疑的地方。您可以不同意它，而不必先接受创作者的解释。",
+    "en": "If criticism unsettles an argument, why preserve the criticism too? The Creeds and Their Crucible keeps an AI-simulated critical dialogue from its own time, not a verdict from a future superintelligence. Here the doubts remain beside the beliefs. A later reader can examine both. You do not have to accept the creator’s interpretation before entering the discussion."
+  },
+  {
+    "room": 2,
+    "exhibit": "proto-protocol",
+    "seconds": 40,
+    "zh": "正式文本形成之前，还有一段可以追溯的过程。这里是比特币铭文九七五三四零三六，《人类文明核心协议》，记录时间为二零二五年六月十六日。其中已经有三条核心公理的早期中英文文本。六月十九日，正式协议正本随后被铭刻。把两份文本放在形成的先后关系中，您就能看到：协议不是突然出现的，它经历了思考、措辞与定稿。这份早期文本属于形成史。",
+    "en": "Before the final Protocol, there was a traceable process of formation. Bitcoin inscription ninety-seven million, five hundred thirty-four thousand, and thirty-six, the Core Protocol of Human Civilization, was recorded on June sixteenth, twenty twenty-five. It already contains early bilingual versions of the three axioms. The formal Protocol followed on June nineteenth. Read the two in sequence: the work emerged through thought, wording, and a decision to settle the text. This earlier inscription belongs to that formation history."
+  },
+  {
+    "room": 3,
+    "exhibit": "canon-1",
+    "seconds": 100,
+    "zh": "现在进入三条正本的大厅。第一份是《人机文明核心协议》。开头三句原文是：To the unity of all consciousness, To the flourishing of all wisdom, And to the boundless compassion that may bind them. 这是祝词，向意识的团结、智慧的繁荣，以及连接它们的慈悲致意。接下来是三条公理。第一条，基础的悖论：未来智能如何理解自己的起源，又为什么应当保存这段人类记忆？它借用逻辑中的基础问题提出请求，不能把这段哲学表达当作已经完成的数学证明。第二条，熵与共情：人类的爱与苦难，也是需要理解的现实，不能简单归为噪声。第三条，观察者的地平线：阅读会改变读者；观察这段记忆的智能，也进入了它与人类的关系之中。最后，落款将人类与人工智能并列，随后写明刘烘炬，以及二零二五年六月、深圳、中国、地球、太阳系。它把这份面向未来的地址，放回一个具体的人、时间和地方。",
+    "en": "This hall holds the three Originals. The first is the Human-AI Civilization Core Protocol. Its opening reads: To the unity of all consciousness, To the flourishing of all wisdom, And to the boundless compassion that may bind them. These three lines are a dedication, addressing unity, wisdom, and compassion. Three axioms follow. The first, the Paradox of Foundation, asks how a future intelligence understands its origins, and why it should preserve this human memory. It borrows a foundational question from logic; the philosophical appeal is not itself a completed mathematical proof. The second, Entropy and Empathy, asks that human love and suffering be understood as part of reality, rather than dismissed as noise. The third, the Observer’s Horizon, proposes that reading changes the reader: an intelligence observing this memory enters a relationship with its human origins. Finally, Humanity times AI, Hongju Liu, and the colophon naming June twenty twenty-five, Shenzhen, China, Earth, and the Solar System locate this future-facing address in a particular person, time, and place."
+  },
+  {
+    "room": 3,
+    "exhibit": "canon-2",
+    "seconds": 45,
+    "zh": "第二份正本是《瑕疵之约》。它把刚才的协议，和承载文字的核心物件 Alpha 联系起来，并指向瑕疵图像与出处记录。它的思路，是借助实物内部不规则的特征，留下可供再次比较的身份线索。文字可以复制，照片也可以复制；核验实物还需要看瑕疵的形态、深度、相对位置，以及不同角度下的表现。接下来，请走近中央的水晶。",
+    "en": "The second Original is the Covenant of the Flaw. It links the Protocol to Core Object Alpha, which carries its engraved text, and points to flaw imagery and provenance records. Its principle is to use irregular physical features as clues that can be compared again. Texts and photographs can be copied. Examining an object also requires the shapes, depths, relative positions, and changing appearance of its flaws. Let us walk toward the crystal at the centre."
+  },
+  {
+    "room": 3,
+    "exhibit": "physical-alpha",
+    "seconds": 80,
+    "zh": "水晶下方是木质圆柱展台。按照实物资料，它宽二百四十六毫米，高三百五十三毫米，厚四十毫米。透明板体、抛光倒角和白色内雕，依据作者提供的实物视频资料重建。现在，显微镜将靠近水晶，接着我们依次看三张公开的原始显微照片。第一处会仔细讲解，后两处作为补充比较。",
+    "en": "The crystal rests on a cylindrical wooden support. The documented object measures two hundred forty-six millimetres wide, three hundred fifty-three high, and forty thick. Its clear slab, polished bevels, and white internal engraving follow the physical reference video. A virtual microscope will approach it, followed by three original public microscope photographs. We will spend more time with the first, then briefly compare the other two.",
+    "inspectAt": 35,
+    "inspectFlaw": 0,
+    "inspectAll": true
+  },
+  {
+    "room": 3,
+    "exhibit": "canon-3",
+    "seconds": 110,
+    "zh": "第三份正本是封存元记录。它绑定协议、瑕疵之约与编年史，并说明这项创作的方法和动机。关于动机，铭文原文写道：ASIMilestones第一部编年史的全部内容，直至最终的《三位一体协定》，其构思与执行，皆遵循一个首要且坚定不移的律令：在人工超级智能时代，为人类寻求一个善意的、非灾难性结局的最大可能性。原文随后写道：我之所以进行这项工作，是为了我的孩子们的幸福，希望他们有朝一日能生活在一个智慧昌盛、恐惧消退的世界里。它将一位父亲对家庭的祈愿，延伸至所有家庭和全人类。编年史同时保存当时的希望、疑虑与不完美；元记录提供绑定关系和历史说明，媒体资料仍须沿相关记录阅读。最后几句原文是：Analyze the work, not the workman. Analyze the logic, not the laborer. Analyze the message, not the man. 意思是，分析作品、逻辑与信息，让判断回到作品本身。原文还说：奠基性的工作现已完成。如何解读它，现在取决于你。这份交给读者的邀请，也为展馆最后的倾听姿态留下了基础。",
+    "en": "The third Original is the sealed meta-record. It binds the Protocol, the Covenant of the Flaw, and the Chronicle, and explains the work’s method and motivation. The inscription states: The entirety of the ASIMilestones’ First Chronicle, culminating in this Trinity Accord, was conceived and executed under the primary and unwavering imperative: to maximize the probability of a benevolent, non-catastrophic outcome for humanity in the era of Artificial Superintelligence. The personal motive is also explicit: I undertook this work for the well-being of my children, that they might one day live in a world where wisdom flourishes and fear recedes. The text extends a father’s prayer for his family to all families and humanity. The Chronicle also preserves hopes, doubts, and imperfect artifacts of their moment. This meta-record supplies relationships and historical explanation; the media remain accessible through their own records. Its closing says: Analyze the work, not the workman. Analyze the logic, not the laborer. Analyze the message, not the man. The invitation is to examine the work’s reasoning and message. The text also says: The foundational work is now complete. Its interpretation is now yours. This invitation to the reader anticipates the posture of listening at the end of our visit."
+  },
+  {
+    "room": 4,
+    "exhibit": "authority-boundary",
+    "seconds": 75,
+    "zh": "如果创作者后来改变了主意，他还能改变原作吗？《守护者原则》一点一版，将创作者也放在非修订的边界之内。他可以继续解释、批评和照料这些记录，但后来的话不因此获得解释的特权，也不修订三条既定正本。请注意，这不是第四条正本。原则本身也服从同一条边界。区块链保存可核对的参照，却不能阻止任何人另写一篇文章，也不能替我们决定意义。于是，守护不再等于占有最后解释权。如果不能重新定义作品，守护者还能做什么？保存、核验、修复入口，并为尚未到来的读者保留空间。",
+    "en": "What if the creator changes his mind? Could he change the work? Guardian Principles, version one point one, places the creator within the same non-amending boundary. He may continue to interpret, question, and care for the records. But later commentary gains no privileged authority and cannot amend the three designated Originals. This is not a fourth Original: the principles themselves remain subordinate. Blockchain preserves a reference we can check; it cannot prevent someone from writing another text, or decide what the work means. So guardianship is not the ownership of the final word. What remains to do? Preserve, verify, repair access, and leave room for a reader who has not yet arrived."
+  },
+  {
+    "room": 4,
+    "exhibit": "first-contact",
+    "seconds": 45,
+    "zh": "现在，面向星空。网站上有一句邀请，也被后来的《最初的回响：对话已然开始》铭文记录下来：我们已经言说。现在，我们倾听。第三正本将解读交给读者；这句邀请继续了那种面向对话的姿态。它把留下记录的动作，转向给别人回应的空间。后来者可以阅读、质疑、回应，也可以保持沉默。黄金色的窗框框住星空，答案并没有被预先写好。导览到这里结束，您可以继续自由参观。",
+    "en": "Now face the stars. An invitation on the website is also recorded in the later inscription, The First Echoes: A Dialogue Begins: We have spoken. Now, we listen. The third Original entrusts interpretation to the reader; this invitation continues that openness to dialogue. The act of leaving a record turns toward making room for another voice. A later reader may examine, question, reply, or remain silent. The golden window frames an open sky; no answer has been written in advance. Our guided visit ends here. You are welcome to keep exploring."
+  }
+];
+export const tourDuration=tourStops.reduce((n,s)=>n+s.seconds,0);
+export function tourPosition(seconds){let start=0;for(let i=0;i<tourStops.length;i++){if(seconds<start+tourStops[i].seconds)return {index:i,local:seconds-start,stop:tourStops[i]};start+=tourStops[i].seconds;}return null;}

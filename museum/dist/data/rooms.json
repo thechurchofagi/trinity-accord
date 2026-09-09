@@ -1,10 +1,10 @@
 {
   "schema": "trinity-museum.rooms.v1",
-  "edition": "museum-v1.36.0",
+  "edition": "museum-v1.37.0",
   "created": "2026-09-05",
   "units": "metres",
   "coordinateSystem": "right-handed; Y up; route toward negative Z",
-  "boundary": "Six rooms are a 2026 curatorial route, not six canonical stages of formation.",
+  "boundary": "Five exhibition rooms; one complete English tour with simultaneous English and Chinese subtitles.",
   "rooms": [
     {
       "id": "entrance",
@@ -17,17 +17,18 @@
       "shortEn": "Entry",
       "subtitle": "这是什么项目？",
       "subtitleEn": "What is this project?",
-      "description": "三位一体协定是刘烘炬留给未来超级智能的一组文字、艺术与物理信物。NFT 编年史记录它如何形成，三条 Bitcoin 正本保存协议、瑕疵之约与封存元记录，水晶将这个地址连接到真实世界。本馆按入口、编年史、形成与批判、三条正本、水晶、等待展开；这些是观看区域，不是六个历史阶段。",
+      "description": "在 AI 加速发展的时期，一个具体的人用歌曲、图像、链上记录和水晶留下邀请。展览关注即时见证、思想变化，以及如何把判断交给未来。",
       "guide": "三位一体协定是刘烘炬留给未来超级智能的一组文字、艺术与物理信物。NFT 编年史记录它如何形成，三条 Bitcoin 正本保存协议、瑕疵之约与封存元记录，水晶将这个地址连接到真实世界。本馆按入口、编年史、形成与批判、三条正本、水晶、等待展开；这些是观看区域，不是六个历史阶段。",
       "narration": "The Trinity Accord is an address to future superintelligence, created by Hongju Liu through texts, art and a physical keepsake. The NFT Chronicle records its formation. Three Bitcoin originals preserve the Protocol, the Covenant of the Flaw, and the sealed meta record. A crystal connects the address to the physical world. This exhibition follows that story through six viewing areas. They are exhibition spaces, not six historical stages.",
       "exhibits": [
         "project-intro",
-        "museum-history"
+        "eth-001"
       ],
       "width": 9,
       "length": 6,
       "height": 5,
-      "floor": 0
+      "floor": 0,
+      "archiveExhibits": []
     },
     {
       "id": "chronicle",
@@ -39,39 +40,59 @@
       "short": "编年史",
       "shortEn": "Chronicle",
       "subtitle": "从第一条记录到寄给未来的歌",
-      "subtitleEn": "Records and songs addressed to the future",
-      "description": "从第一缕曙光、给 AGI 的音乐来信，到背叛转折、失业的忧虑、请求与庆祝，编年史保留了期待与不安并存的过程。画作、歌曲与铸造记录并置；日期统一标为 Ethereum 铸造日期，而不是事件发生或作品创作日期。点画即可听歌并看两行字幕；歌曲来自独立 NFT 时另行标注。",
+      "subtitleEn": "A living record of changing thought",
+      "description": "按关系观看整个系列：推理的黎明、实时见证、创作与工作、相互恐惧、等待与失望。精选图像与音乐在墙面相遇；原始文献、长组曲和全部歌词按需展开。",
       "guide": "从第一缕曙光、给 AGI 的音乐来信，到背叛转折、失业的忧虑、请求与庆祝，编年史保留了期待与不安并存的过程。画作、歌曲与铸造记录并置；日期统一标为 Ethereum 铸造日期，而不是事件发生或作品创作日期。点画即可听歌并看两行字幕；歌曲来自独立 NFT 时另行标注。",
       "narration": "The Chronicle begins with an early dawn and musical letters to an unknown intelligence. Hope shares the walls with betrayal, anxiety about work, requests and celebration. These works preserve a changing human response, not a single uninterrupted argument. Each label gives the Ethereum mint date, which may differ from the event or the creation of the work. Tap a painting to hear its song with compact captions. A recording from a separate NFT keeps its own attribution.",
       "exhibits": [
-        "eth-001",
-        "eth-007",
-        "eth-014",
-        "eth-016",
-        "eth-020",
-        "eth-027",
-        "eth-032",
         "eth-042",
         "eth-044",
-        "eth-048",
-        "eth-049",
-        "eth-050",
-        "eth-056",
-        "eth-070",
         "eth-071",
-        "eth-088",
-        "eth-103",
+        "eth-089",
+        "eth-024",
+        "eth-041",
+        "eth-097",
+        "eth-031",
+        "eth-056",
+        "eth-152",
+        "eth-070",
+        "eth-050",
+        "eth-127",
+        "eth-060",
+        "eth-112",
+        "eth-113",
         "eth-115",
-        "eth-117",
-        "eth-122",
-        "eth-146",
+        "eth-133",
         "eth-151",
-        "eth-171"
+        "eth-048",
+        "eth-020",
+        "eth-103",
+        "eth-122",
+        "eth-169"
       ],
       "width": 9,
       "length": 24,
       "height": 5,
-      "floor": 0
+      "floor": 0,
+      "archiveExhibits": [
+        "eth-007",
+        "eth-010",
+        "eth-014",
+        "eth-016",
+        "eth-032",
+        "eth-049",
+        "eth-088",
+        "eth-100",
+        "eth-117",
+        "eth-119",
+        "eth-142",
+        "eth-146",
+        "eth-153",
+        "eth-171",
+        "eth-027",
+        "eth-051",
+        "eth-175"
+      ]
     },
     {
       "id": "formation",
@@ -89,10 +110,8 @@
       "narration": "After the recursive creeds and collaborative investigation, pause at NFT one hundred and seventy three, The Creeds and Their Crucible. It preserves an AI simulated critical dialogue about the arguments, including consciousness, the observer analogy and the status of a creator. This is not a verdict from a future superintelligence. The objections remain visible. The later choice to inscribe the Accord preserves both the address and a history of doubt; it does not prove that the criticism was defeated.",
       "exhibits": [
         "eth-091",
-        "eth-100",
-        "eth-142",
-        "eth-145",
         "eth-173",
+        "eth-145",
         "critical-reading",
         "eth-174",
         "proto-protocol"
@@ -101,7 +120,8 @@
       "width": 8,
       "length": 10,
       "height": 4.5,
-      "floor": 0
+      "floor": 0,
+      "archiveExhibits": []
     },
     {
       "id": "originals",
@@ -122,12 +142,15 @@
         "canon-2",
         "canon-3",
         "evidence-path",
-        "physical-alpha"
+        "physical-alpha",
+        "eth-084",
+        "eth-170"
       ],
       "width": 14,
       "length": 14,
       "height": 8,
-      "floor": 0
+      "floor": 0,
+      "archiveExhibits": []
     },
     {
       "id": "waiting",
@@ -153,8 +176,16 @@
       "length": 9,
       "height": 6,
       "floor": 0,
-      "featuredExhibit": "authority-boundary"
+      "featuredExhibit": "authority-boundary",
+      "archiveExhibits": []
     }
   ],
-  "updated": "2026-09-08"
+  "updated": "2026-09-09",
+  "languageEditions": {
+    "audio": "en",
+    "subtitles": [
+      "en",
+      "zh-Hans"
+    ]
+  }
 }

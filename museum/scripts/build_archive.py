@@ -4,6 +4,7 @@ import hashlib, html, json
 P=Path(__file__).resolve().parents[1];D=P/'dist';esc=html.escape
 guides=json.loads((D/'data/guide-audio.json').read_text())['tracks']
 plan=(D/'tour-plan.js').read_text();stops=json.loads(plan.split('export const tourStops=',1)[1].split(';\nexport const tourDuration',1)[0])
+plans={'en':stops}
 rooms=json.loads((D/'data/rooms.json').read_text());sources=json.loads((D/'data/sources.json').read_text());items={e['id']:e for e in sources['items']};art={e['exhibit']:e for e in json.loads((D/'data/curatorial-illustrations.json').read_text())['items']}
 curation={e['id']:e for e in json.loads((D/'data/curation.json').read_text())['items']}
 parts=['<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Memory Station · Exhibition Archive</title><style>body{margin:0;background:#09121d;color:#dce7ef;font:17px/1.85 system-ui,sans-serif}main{max-width:900px;margin:auto;padding:45px 24px}a{color:#9be6ed}h1,h2{font-weight:450}h1{font-size:36px}h2{margin-top:65px;border-top:1px solid #355063;padding-top:25px}h3{margin-top:35px}p,pre{overflow-wrap:anywhere}pre{white-space:pre-wrap;font:15px/1.9 system-ui;background:#112331;padding:20px}img{max-width:100%;max-height:500px;object-fit:contain}audio{display:block;max-width:100%;margin:15px 0}small{color:#9bb3c3}.note{padding:20px;background:#122633}summary{cursor:pointer;color:#9be6ed}nav{display:flex;flex-wrap:wrap;gap:18px}</style><main><a href="./index.html">← 进入三维展馆 / Enter 3D museum</a><h1>文明记忆站<br><small>Exhibition archive · '+esc(rooms['edition'])+'</small></h1><p class="note">2026 年后续策展。三条 Bitcoin 正本保持封存；本版空间、路线、导览与展签不增加解释权威。五厅是展览章节，中央水晶与三条正本共同展出。</p><p>This is a later exhibition. It does not amend the three Bitcoin originals. This reading archive preserves the room route, guide text, local media and source references without requiring WebGL.</p><nav>']
@@ -11,16 +12,16 @@ parts[0]=parts[0].replace('<title>', '<link rel="canonical" href="https://museum
 parts.extend('<a href="#'+r['id']+'">'+r['number']+' '+esc(r['title'])+'</a>' for r in rooms['rooms']);parts.append('</nav>')
 for r in rooms['rooms']:
  parts.extend(['<section id="'+r['id']+'"><h2>'+r['number']+' '+esc(r['title'])+'<br><small>'+esc(r['en'])+'</small></h2><p>'+esc(r['guide'])+'</p><p>'+esc(r['narration'])+'</p>'])
- for stop_no,stop in enumerate(stops):
-  if stop['room']!=rooms['rooms'].index(r):continue
-  parts.append('<details class="guide-reading"><summary>提问式导览 / Question-led guide · '+str(stop_no+1)+'</summary>')
-  for lang in ['zh','en']:
+ for lang,localized_stops in plans.items():
+  for stop_no,stop in enumerate(localized_stops):
+   if stop['room']!=rooms['rooms'].index(r):continue
+   parts.append('<details class="guide-reading"><summary>'+('English guide' if lang=='en' else '中文导览 · 保留上一完整版本')+' · '+str(stop_no+1)+'</summary>')
    track=next((t for t in guides if t['stop']==stop_no and t['language']==lang and t['text']==stop[lang]),None)
    if track is None:
-    parts.append('<p>'+esc(stop[lang])+'</p><small>新配音待生成 / New recording pending</small>');continue
+    raise ValueError('Unrecorded or mismatched guide: '+lang+' stop '+str(stop_no))
    model=track.get('provenance',{}).get('model',track['voice'])
-   parts.append('<p lang="'+('zh-CN' if lang=='zh' else 'en')+'">'+esc(track['text'])+'</p><audio controls preload="none" src="'+esc(track['file'])+'"></audio><small>AI-generated narration · '+esc(model)+' · '+esc(track['voice'])+'</small>')
-  parts.append('</details>')
+   parts.append('<p lang="zh-Hans">'+esc(''.join(c['textZh'] for c in track['cues']))+'</p>')
+   parts.append('<p lang="'+('zh-CN' if lang=='zh' else 'en')+'">'+esc(track['text'])+'</p><audio controls preload="none" src="'+esc(track['file'])+'"></audio><small>AI-generated narration · '+esc(model)+' · '+esc(track['voice'])+'</small></details>')
  for id in r['exhibits']:
   if id in curation:
    c=curation[id]
@@ -41,7 +42,7 @@ for r in rooms['rooms']:
    parts.append(('<img loading="lazy" src="'+m['file']+'" alt="'+esc(e['title'])+'">') if m['kind']=='image' else '<audio controls preload="none" src="'+m['file']+'"></audio>')
   if e.get('relatedSoundExhibit'):
    sound=items[e['relatedSoundExhibit']];audio=next(m for m in sound['media'] if m['kind']=='audio')
-   parts.append('<p class="note"><strong>'+esc(e['songTitle'])+'</strong><br>'+esc(e['audioRelation']['noteZh'])+'<br>'+esc(e['audioRelation']['noteEn'])+'<br><a href="'+esc(sound['sourceUrl'])+'">Recording source / 录音原始记录</a> · <a href="'+esc(sound['localRecord'])+'">Preserved record / 已保存原文</a> · <a href="data/audio-audit.json">Audio audit / 声音核对</a></p><audio controls preload="none" aria-label="'+esc(e['songTitle'])+'" src="'+esc(audio['file'])+'"></audio>')
+   parts.append('<p class="note"><strong>'+esc(e['songTitle'])+'</strong><br>'+esc(e['audioRelation']['noteZh'])+'<br>'+esc(e['audioRelation']['noteEn'])+'<br><a href="'+esc(sound['sourceUrl'])+'">Recording source / 录音原始记录</a> · <a href="'+esc(sound.get('localRecord',sound['sourceUrl']))+'">Preserved record / 已保存原文</a> · <a href="data/audio-audit.json">Audio audit / 声音核对</a></p><audio controls preload="none" aria-label="'+esc(e['songTitle'])+'" src="'+esc(audio['file'])+'"></audio>')
   if e.get('localRecord'):parts.append('<p><a href="'+e['localRecord']+'">本版保存的完整来源文字 / Local source text</a></p>')
   if e['lyrics']:parts.append('<details><summary>歌词文字 / Lyric text</summary><p>保留原始描述中的歌词；播放字幕按录音另行对齐。 Original description text; playback captions are aligned separately to the recording.</p><pre>'+esc(e['lyrics'])+'</pre></details>')
   parts.append('<p><a href="'+esc(e['sourceUrl'])+'">Pinned source record / 固定版本原始记录</a> · <a href="'+esc(e['tokenUrl'])+'">Ethereum token</a></p></article>')

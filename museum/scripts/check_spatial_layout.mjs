@@ -5,7 +5,7 @@ import {floorAt,isWalkable,constrainStep,routeBetween,routePoint,routeLength,cre
 const layout=JSON.parse(fs.readFileSync(new URL('../dist/data/gallery-layout.json',import.meta.url)));
 assert.equal(layout.rooms.length,5);assert.equal(layout.rooms[3].footprint.length,12);assert.equal(layout.rooms[3].height,8);
 assert.deepEqual(layout.rooms.map(r=>r.width),[9,9,8,14,12]);
-assert.deepEqual(layout.rooms[3].exhibits.map(e=>e.id),['canon-1','canon-2','canon-3','evidence-path','physical-alpha']);
+assert.deepEqual(layout.rooms[3].exhibits.map(e=>e.id),['canon-1','canon-2','canon-3','evidence-path','physical-alpha','eth-084','eth-170']);
 assert.equal(layout.rooms[4].exhibits[0].id,'authority-boundary');
 for(const d of layout.portals){assert.equal(d.visualOnly,true);assert.ok(isWalkable(layout,{x:d.x,z:-d.depth}));}
 assert.equal(layout.ramp,null);
