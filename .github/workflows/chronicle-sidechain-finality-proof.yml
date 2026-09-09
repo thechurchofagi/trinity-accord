@@ -13,6 +13,8 @@ on:
       - "scripts/test_base_blob_archive_proxy.py"
       - "scripts/test_capture_chronicle_base_derivation.py"
       - "scripts/test_capture_ethereum_beacon_finality.py"
+      - "scripts/patch_pinned_op_superchain_compat.py"
+      - "scripts/test_patch_pinned_op_superchain_compat.py"
       - "scripts/yq_chain_id_compat.py"
       - ".github/workflows/chronicle-sidechain-finality-proof.yml"
   workflow_dispatch:
@@ -23,7 +25,7 @@ permissions:
 
 concurrency:
   group: chronicle-sidechain-finality-proof
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   prefetch:
@@ -142,10 +144,10 @@ jobs:
       ETH_RPC_URL: ${{ secrets.ETHEREUMMAINNET }}
       BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
       OPTIMISM_COMMIT: c6f39182c975db976aaaa01ef32884c41b1c9660
-      # This is the gitlink recorded by OPTIMISM_COMMIT. Keeping the two pins
-      # paired prevents newer Registry-only TOML fields from breaking the
-      # older pinned decoder before cryptographic verification can run.
-      SUPERCHAIN_REGISTRY_COMMIT: 08d6a44910d75e28a5ee1c7c047d3bdd0bbdbdd2
+      # Last immutable Registry snapshot that still carries Base mainnet after
+      # Base left the Superchain registry. The pinned OP parser receives the
+      # narrow, hash-gated metadata compatibility fields below.
+      SUPERCHAIN_REGISTRY_COMMIT: 5b055be4d294ce43814a44c8839d89b2436dc8aa
       FINALITY_ROOT: artifacts/chronicle-sidechain-finality
       STATUS_CONTEXT: trinity/sidechain-finality
 
@@ -191,9 +193,11 @@ jobs:
             scripts/base_blob_archive_proxy.py \
             scripts/capture_chronicle_base_derivation.py \
             scripts/capture_ethereum_beacon_finality.py \
+            scripts/patch_pinned_op_superchain_compat.py \
             scripts/verify_chronicle_base_derivation.py \
             scripts/yq_chain_id_compat.py
           python3 scripts/test_base_blob_archive_proxy.py
+          python3 scripts/test_patch_pinned_op_superchain_compat.py
           python3 scripts/test_capture_chronicle_base_derivation.py
           python3 scripts/test_capture_ethereum_beacon_finality.py
 
@@ -206,7 +210,9 @@ jobs:
           git clone --filter=blob:none --no-checkout https://github.com/ethereum-optimism/optimism.git "$tools/optimism"
           git -C "$tools/optimism" checkout "$OPTIMISM_COMMIT"
           git -C "$tools/optimism" submodule update --init superchain-registry
-          test "$(git -C "$tools/optimism/superchain-registry" rev-parse HEAD)" = "$SUPERCHAIN_REGISTRY_COMMIT"
+          git -C "$tools/optimism/superchain-registry" fetch origin "$SUPERCHAIN_REGISTRY_COMMIT"
+          git -C "$tools/optimism/superchain-registry" checkout "$SUPERCHAIN_REGISTRY_COMMIT"
+          python3 scripts/patch_pinned_op_superchain_compat.py "$tools/optimism"
           cp scripts/yq_chain_id_compat.py "$tools/bin/yq"
           chmod +x "$tools/bin/yq"
           PATH="$tools/bin:$PATH" OP_CORE_SYNC_SUPERCHAIN=1 \
