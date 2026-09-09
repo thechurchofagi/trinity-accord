@@ -244,3 +244,19 @@ body[data-presentation="true"] #focus-tools{display:none!important}
  body[data-focused-art=true] #room-label .eyebrow,body[data-focused-art=true] #room-subtitle{display:none}
  body[data-focused-art=true] #room-title,body[data-focused-art=true] #room-title.en-title{font-size:22px;line-height:1.2;margin:0;letter-spacing:.035em}
 }
+
+/* Larger narration only; the shared painter remeasures and repages at this font. */
+#tour-caption{width:min(900px,calc(100vw - 48px))}
+#caption-text{font-size:26px;line-height:34px;font-weight:600;gap:6px;min-height:68px}
+#caption-text .caption-page{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+#caption-text .subtitle-zh{font-size:20px;line-height:28px;font-weight:500;color:#f1f7fb}
+@media(max-width:650px){
+ #tour-caption{width:calc(100vw - 32px)}
+ #caption-text{font-size:20px;line-height:28px;gap:5px;min-height:56px}
+ #caption-text .subtitle-zh{font-size:18px;line-height:25px}
+}
+@media(max-height:540px) and (orientation:landscape){
+ #tour-caption{width:min(760px,calc(100vw - 180px))}
+ #caption-text{font-size:20px;line-height:27px;min-height:54px}
+ #caption-text .subtitle-zh{font-size:17px;line-height:23px}
+}

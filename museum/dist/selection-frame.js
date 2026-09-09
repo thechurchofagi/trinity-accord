@@ -4,8 +4,8 @@ import * as THREE from './vendor/three.module.js';
 export function createSelectionFrame(scene){
  const group=new THREE.Group();group.name='Selected artwork / soft jade outline';group.visible=false;scene.add(group);
  const geometry=new THREE.PlaneGeometry(1,1);
- const layers=[{width:.055,alpha:.065},{width:.028,alpha:.13},{width:.013,alpha:.48}].map(({width,alpha})=>{
-  const material=new THREE.MeshBasicMaterial({color:'#83dfb0',transparent:true,opacity:alpha,depthWrite:false,toneMapped:false});
+ const layers=[{width:.075,alpha:.16},{width:.042,alpha:.32},{width:.021,alpha:.9}].map(({width,alpha})=>{
+  const material=new THREE.MeshBasicMaterial({color:'#67f0a2',transparent:true,opacity:alpha,depthWrite:false,toneMapped:false});
   const edges=Array.from({length:4},()=>{const edge=new THREE.Mesh(geometry,material);group.add(edge);return edge;});
   return {width,alpha,material,edges};
  });
@@ -22,7 +22,7 @@ export function createSelectionFrame(scene){
    }
   }
   // A 4.8-second breath, never a flashing on/off signal. Reduced motion is steady.
-  const breath=reducedMotion?.8:.8+.2*Math.sin(now*2*Math.PI/4800);
+  const breath=reducedMotion?.88:.88+.12*Math.sin(now*2*Math.PI/4800);
   for(const layer of layers)layer.material.opacity=layer.alpha*breath;
  },dispose(){group.removeFromParent();geometry.dispose();for(const layer of layers)layer.material.dispose();}};
 }

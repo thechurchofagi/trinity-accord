@@ -165,8 +165,8 @@
     },
     {
       "path": "dist/selection-frame.js",
-      "bytes": 1735,
-      "sha256": "5e37a02b3c568792137e036ec6c6c67b483e906a96c166bbd4b4013c95d0d192"
+      "bytes": 1736,
+      "sha256": "358960def9744bdb576d089dc499d5dd67d0f3887e4b7ca3880aa44a1ac2608c"
     },
     {
       "path": "dist/series-reading.js",
@@ -261,7 +261,7 @@
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 1266592,
-    "sha256": "b3be85cc0628ca5c4cc55cd366e52030da405f0df4fc19b85c0aace0cfe25e9c"
+    "bytes": 1266593,
+    "sha256": "bf6fc88aa6fce1b2becd701b47e59706e069fabc95f29512b01cf3aeca20f3ae"
   }
 }
