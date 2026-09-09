@@ -17,7 +17,7 @@ from trie import HexaryTrie
 ROOTCHAIN = "0x86e4dc95c7fbdbf52e33d563bbdb00823894c287"
 NEW_HEADER_TOPIC = "0x" + keccak(b"NewHeaderBlock(address,uint256,uint256,uint256,uint256,bytes32)").hex()
 OPTIMISM_COMMIT = "c6f39182c975db976aaaa01ef32884c41b1c9660"
-SUPERCHAIN_REGISTRY_COMMIT = "08d6a44910d75e28a5ee1c7c047d3bdd0bbdbdd2"
+SUPERCHAIN_REGISTRY_COMMIT = "5b055be4d294ce43814a44c8839d89b2436dc8aa"
 
 
 def load(path):
