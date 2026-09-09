@@ -1048,7 +1048,7 @@
     {
       "path": "boot-loader.js",
       "bytes": 1625,
-      "sha256": "5382489083ebdc9cd6d8d4814545c17fab8c1c89faadb73edcb58c3a1423d2dc"
+      "sha256": "3cf9a6e18a20f521206fc160ab1e97b2fb1b551b1874d909f3a34317454103c1"
     },
     {
       "path": "caption-utils.js",
@@ -1668,7 +1668,7 @@
     {
       "path": "index.html",
       "bytes": 6650,
-      "sha256": "e50b07371aac3263b0270c36397dbcc2cb29db0dc659cfe525f3692cb5493a57"
+      "sha256": "fd80cf23aad7e54d8ed866ad45f421ca1de6145957477d07678ad93d2d9c80b3"
     },
     {
       "path": "language-preference.js",
@@ -1697,8 +1697,8 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 1265426,
-      "sha256": "cc29b58e49f4d0701d53361cc3d53c70aea021170b2ce162594f3a46dc54f7a9"
+      "bytes": 1266592,
+      "sha256": "b3be85cc0628ca5c4cc55cd366e52030da405f0df4fc19b85c0aace0cfe25e9c"
     },
     {
       "path": "museum.css",
@@ -1707,8 +1707,8 @@
     },
     {
       "path": "museum.js",
-      "bytes": 93215,
-      "sha256": "cfddcf399b251df7923af168446598b9e4efb2282f93ed54c2610975e176aadb"
+      "bytes": 93484,
+      "sha256": "0fa2709db30b391c4074f62ca6d9afb42fa5d3ad938166feb8fedf416158c790"
     },
     {
       "path": "music-playback.js",
@@ -1744,6 +1744,11 @@
       "path": "robots.txt",
       "bytes": 78,
       "sha256": "67b6786fd283c146376a578cb48d8875b62618b1d5b89e800b8c432013766a69"
+    },
+    {
+      "path": "selection-frame.js",
+      "bytes": 1735,
+      "sha256": "5e37a02b3c568792137e036ec6c6c67b483e906a96c166bbd4b4013c95d0d192"
     },
     {
       "path": "series-reading.js",
