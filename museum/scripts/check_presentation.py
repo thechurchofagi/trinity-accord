@@ -73,8 +73,8 @@ try:
    for flaw in range(3):
     # The model's rendered-frame animation must finish without skipping poses.
     # Lower only its canvas raster cost; restore full resolution for the evidence photo.
-    page.evaluate('window.__presentationQA.raster(.5)')
     page.evaluate('(i)=>window.__presentationQA.inspect(i)',flaw)
+    page.evaluate('window.__presentationQA.raster(.5)')
     # showFlaw awaits the crystal before starting a continuous approach. Settle
     # that approach just like the station views above; retain the actual hand
     # animation and photograph loading. Unaccelerated travel is tested separately.
