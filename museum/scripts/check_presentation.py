@@ -8,7 +8,7 @@ plan=json.loads((P/'scene/tour-script.json').read_text())
 js=D/'__presentation_qa.js';html=D/'__presentation_qa.html'
 harness='''
 window.__presentationQA={
- get state(){return {ready:spatialReady,room:roomIndex,selected:selectedExhibit,touring,elapsed:tourElapsed,walkable:spatialReady&&isWalkable(galleryLayout,camera.position),camera:camera?.position.toArray(),yaw,voice:recordedGuide.track?.file,flaw:flawIndex};},
+ get state(){return {ready:spatialReady,room:roomIndex,selected:selectedExhibit,touring,elapsed:tourElapsed,walkable:spatialReady&&isWalkable(galleryLayout,camera.position),camera:camera?.position.toArray(),yaw,voice:recordedGuide.track?.file,flaw:flawIndex,inspectionPhase,moving:!!motion};},
  station(i){stopTour();manualUntil=0;pendingTourView=null;reduced=true;tourElapsed=tourStops.slice(0,i).reduce((a,s)=>a+s.seconds,0);guideResume=null;startTour(true);},
  focus(id){stopTour();reduced=true;focusExhibit(id);},
  inspect(i){return showFlaw(i);},
@@ -70,7 +70,15 @@ try:
     if label=='desktop':page.screenshot(timeout=90000,path=str(OUT/(label+'-'+eid+'.png')))
    for flaw in range(3):
     page.evaluate('(i)=>window.__presentationQA.inspect(i)',flaw)
-    page.wait_for_function("document.querySelector('#flaw-view img')?.complete && document.querySelector('#flaw-view img').naturalWidth>0")
+    # showFlaw awaits the crystal before starting a continuous approach. Settle
+    # that approach just like the station views above; retain the actual hand
+    # animation and photograph loading. Unaccelerated travel is tested separately.
+    page.evaluate('window.__presentationQA.settle()')
+    try:
+     page.wait_for_function("document.querySelector('#flaw-view img')?.complete && document.querySelector('#flaw-view img').naturalWidth>0")
+    except Exception:
+     print('INSPECTION_FAILURE_STATE',page.evaluate('window.__presentationQA.state'),flush=True)
+     raise
     assert page.locator('#flaw-view img').count()==1
     expected=json.loads((D/'data/public-flaws.json').read_text())['items'][flaw]['file']
     assert page.locator('#flaw-view img').get_attribute('src')==expected
