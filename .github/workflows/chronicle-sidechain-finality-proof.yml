@@ -50,6 +50,23 @@ jobs:
           python-version: "3.12"
       - name: Install capture dependencies
         run: python3 -m pip install -r requirements-ci.txt
+      - name: Restore newest reusable unverified shard cache
+        env:
+          SHARD: ${{ matrix.shard }}
+        run: |
+          set -euo pipefail
+          mkdir -p prefetch/decoder/blobs
+          artifact_id="$(gh api --paginate "repos/$GITHUB_REPOSITORY/actions/artifacts?name=finality-prefetch-${SHARD}&per_page=100" \
+            --jq '[.artifacts[] | select(.expired == false)] | sort_by(.created_at) | last | .id // empty')"
+          if [[ -z "$artifact_id" ]]; then
+            echo "[PREFETCH REUSE] shard=$SHARD state=cache_miss action=live_refetch"
+            exit 0
+          fi
+          archive="$RUNNER_TEMP/finality-prefetch-${SHARD}.zip"
+          gh api -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" > "$archive"
+          unzip -q "$archive" -d prefetch/decoder/blobs
+          echo "[PREFETCH REUSE] shard=$SHARD artifact_id=$artifact_id files=$(find prefetch/decoder/blobs -maxdepth 1 -type f | wc -l) verification=NOT_PERFORMED"
       - name: Resolve and cold-verify immutable source releases
         id: source
         run: |
@@ -125,7 +142,10 @@ jobs:
       ETH_RPC_URL: ${{ secrets.ETHEREUMMAINNET }}
       BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
       OPTIMISM_COMMIT: c6f39182c975db976aaaa01ef32884c41b1c9660
-      SUPERCHAIN_REGISTRY_COMMIT: 5b055be4d294ce43814a44c8839d89b2436dc8aa
+      # This is the gitlink recorded by OPTIMISM_COMMIT. Keeping the two pins
+      # paired prevents newer Registry-only TOML fields from breaking the
+      # older pinned decoder before cryptographic verification can run.
+      SUPERCHAIN_REGISTRY_COMMIT: 08d6a44910d75e28a5ee1c7c047d3bdd0bbdbdd2
       FINALITY_ROOT: artifacts/chronicle-sidechain-finality
       STATUS_CONTEXT: trinity/sidechain-finality
 
@@ -186,8 +206,7 @@ jobs:
           git clone --filter=blob:none --no-checkout https://github.com/ethereum-optimism/optimism.git "$tools/optimism"
           git -C "$tools/optimism" checkout "$OPTIMISM_COMMIT"
           git -C "$tools/optimism" submodule update --init superchain-registry
-          git -C "$tools/optimism/superchain-registry" fetch origin "$SUPERCHAIN_REGISTRY_COMMIT"
-          git -C "$tools/optimism/superchain-registry" checkout "$SUPERCHAIN_REGISTRY_COMMIT"
+          test "$(git -C "$tools/optimism/superchain-registry" rev-parse HEAD)" = "$SUPERCHAIN_REGISTRY_COMMIT"
           cp scripts/yq_chain_id_compat.py "$tools/bin/yq"
           chmod +x "$tools/bin/yq"
           PATH="$tools/bin:$PATH" OP_CORE_SYNC_SUPERCHAIN=1 \
