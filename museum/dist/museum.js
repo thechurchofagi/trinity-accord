@@ -1,3 +1,4 @@
+import {createTourPreloader} from './tour-preload.js';
 import {createTimedSubtitlePainter} from './timed-subtitles.js';
 import {seriesRelations,catalogView} from './series-reading.js';
 import {createExhibitWash} from './exhibit-light.js';
@@ -236,7 +237,7 @@ function focusExhibit(id,inspection=false){
  const index=roomData.rooms.findIndex(r=>r.exhibits.includes(id));if(index<0)return;
  roomIndex=index;selectedExhibit=id;updateUI();history.replaceState(null,'','#'+roomData.rooms[index].id);
  if(!spatialReady)return;
- const mobile=innerWidth<650;resize();
+ document.body.dataset.focusedArt='true';const mobile=innerWidth<650;resize();
  if(id==='physical-alpha'){
   loadCrystal?.();const p={x:galleryLayout.crystal.x,y:galleryLayout.crystal.baseY,z:galleryLayout.crystal.z};
   const view=observationView(.35,.48,camera.fov,camera.aspect,mobile),d=Math.max(inspection?.80:.59,view.distance*.83);
@@ -254,11 +255,11 @@ function approachExhibit(id){
  else if(musicItem){cancelMusic();$('music-bar').hidden=true;clearLyrics();syncMusic();}
 }
 function roomView(){
- approachedExhibit=null;if(!spatialReady)return;ensureRoomResources();
+ document.body.dataset.focusedArt='false';resize();approachedExhibit=null;if(!spatialReady)return;ensureRoomResources();
  const r=galleryLayout.rooms[roomIndex],door=galleryLayout.portals[roomIndex-1],x=door?.x||0,z=r.entryZ,y=floorAt(galleryLayout,{x,z})+galleryLayout.eyeHeight;
  moveCamera(new THREE.Vector3(x,y,z),new THREE.Vector3(x,roomIndex===3?y+1.6:y,roomIndex===0?20:z-12));
 }
-function waitingView(){if(!spatialReady)return;const r=galleryLayout.rooms[4];moveCamera(new THREE.Vector3(0,r.floor+galleryLayout.eyeHeight,galleryLayout.endZ+7.5),new THREE.Vector3(0,r.floor+galleryLayout.eyeHeight,galleryLayout.endZ-20));}
+function waitingView(){document.body.dataset.focusedArt='false';resize();if(!spatialReady)return;const r=galleryLayout.rooms[4];moveCamera(new THREE.Vector3(0,r.floor+galleryLayout.eyeHeight,galleryLayout.endZ+7.5),new THREE.Vector3(0,r.floor+galleryLayout.eyeHeight,galleryLayout.endZ-20));}
 
 function updateStrip(){const r=roomData.rooms[roomIndex];if(!r.exhibits.includes(selectedExhibit))selectedExhibit=r.featuredExhibit||r.exhibits[0];$('verify-flaws').hidden=selectedExhibit!=='physical-alpha';$('focus-art').textContent=tx('查看详情','View details');$('overview').textContent=tx('展厅全景','Room view');$('move-help').textContent=tx('左手移动 · 右手转身','Left: walk · right: turn');$('move-stick').setAttribute('aria-label',tx('左手摇杆移动，右手滑动自由转身','Left joystick moves relative to your view; swipe on the right to turn freely'));const e=exhibits.get(selectedExhibit),img=imageOf(e);$('look-help').textContent=tx('滑动转身','Swipe to turn');$('fallback-art').classList.toggle('waiting-view',roomIndex===4);$('fallback-art').innerHTML=`<span class="attached-label">${exhibitLabel(e,lang==='zh',soundFor(e)).split('\n').map((line,i)=>i?'<small>'+esc(line)+'</small>':'<strong>'+esc(line)+'</strong>').join('')}</span>`+(img?`<img loading="lazy" src="${esc(img)}" alt="${esc(title(e))}">`:`<div class="document-note"><strong>${esc(title(e))}</strong><p>${esc(tx(e.summary||e.text,e.summaryEn||e.textEn)||e.songTitle||'')}</p></div>`)+`<span class="fallback-title">${esc(title(e))}</span>`;$('fallback-art').onclick=()=>showExhibit(selectedExhibit);$('fallback-mode').textContent=tx('作品浏览模式 · 点击画作播放并显示歌词','Gallery mode · tap artwork to play with lyrics');}
 function ensureRoomResources(){if(roomIndex>=3)prepareInspection();if(roomIndex===0||roomIndex===4)loadSky?.();}
@@ -297,7 +298,7 @@ function silenceGuide(){recordedGuide.stop();}
 function playGuide(index,offset=0){
  const track=index<0?initialData.guides.inspectionTracks?.find(t=>t.flaw===flawIndex&&t.language==='en'):initialData.guides.tracks.find(t=>t.stop===index&&t.language==='en');if(!track||index>=0&&track.text!==tourStops[index]?.en){silenceGuide();toast(tx('此段新配音尚未生成。','This revised recording is not available yet.'));return;}
  guideStop=index;recordedGuide.play(track,{muted:!guideSound,offset,playbackRate:guideRate});
- const next=index>=0?initialData.guides.tracks.find(t=>t.stop===index+1&&t.language==='en'):initialData.guides.inspectionTracks?.find(t=>t.flaw===flawIndex+1&&t.language==='en');if(next)fetch(next.file,{cache:'force-cache'}).catch(()=>{});
+ if(index>=0)preloadTour(index);else tourPreloader.add(initialData.guides.inspectionTracks?.find(t=>t.flaw===flawIndex+1&&t.language==='en')?.file);
 }
 function prepareInspection(){
  loadCrystal?.();microscopeMotion?.prepare().catch(()=>{});
@@ -348,6 +349,21 @@ function updateTourStatus(){
  $('guide-audio-dismiss').textContent=tx('静音并继续导览','Continue tour muted');
  $('enable-guide-sound').textContent=recordedGuide.state==='error'?tx('重试配音','Retry audio'):guideSound&&!blocked?tx('静音','Mute'):tx('开启声音','Enable sound');
  $('tour-restart').textContent=tx('重来','Restart');$('guide-speed').textContent=guideRate.toFixed(guideRate===1?1:guideRate===1.25?2:1)+'×';$('guide-speed').setAttribute('aria-label',tx('调整解说语速','Narration speed'));
+}
+const tourPreloader=createTourPreloader();
+function preloadTour(index){
+ const upcoming=tourStops.slice(index+1,index+3);
+ for(const [offset,stop] of upcoming.entries()){
+  tourPreloader.add(initialData.guides.tracks.find(t=>t.stop===index+1+offset&&t.language==='en')?.file);
+  const sound=soundFor(exhibits.get(stop.musicExhibit||stop.exhibit));
+  if(stop.musicAt!==undefined&&sound){
+   tourPreloader.add(sound.media.find(m=>m.kind==='audio')?.file);
+   const caption=initialData.lyrics?.items?.find(t=>t.exhibitId===sound.id);
+   if(caption?.timelineFile)tourPreloader.add(caption.timelineFile+'?v='+caption.timelineSha256.slice(0,12));
+   const translation=initialData.lyrics?.translation;if(translation)tourPreloader.add(translation.file+'?v='+translation.sha256.slice(0,12));
+  }
+  if(stop.inspectAt!==undefined){for(const item of publicFlaws.items)tourPreloader.add(item.file);for(const track of initialData.guides.inspectionTracks||[])if(track.language==='en')tourPreloader.add(track.file);}
+ }
 }
 function enterTourStop(position){
  const s=position.stop;tourStep=position.index;tourMusicStarted=false;tourMusicComplete=false;tourInspectionStarted=false;tourInspectionComplete=false;tourLookChanged=false;tourShotIndex=0;silenceGuide();closeFlaws();cancelMusic();$('music-bar').hidden=true;clearLyrics();
@@ -405,11 +421,11 @@ function wallLabelTexture(e){
  const lines=exhibitLabel(e,lang==='zh',soundFor(e)).split('\n');
  const metal=ctx.createLinearGradient(0,0,0,c.height);metal.addColorStop(0,'#aeb9ba');metal.addColorStop(.48,'#d1d9d8');metal.addColorStop(1,'#a7b4b6');ctx.fillStyle=metal;ctx.fillRect(0,0,c.width,c.height);
  ctx.strokeStyle='#edf5f8';ctx.lineWidth=2;ctx.strokeRect(7,7,c.width-14,c.height-14);
- const bands=[{y:30,h:75},{y:118,h:116},{y:255,h:116},{y:404,h:106}];ctx.textBaseline='top';
- lines.forEach((line,i)=>{const band=bands[i];let size=i===0?60:46,rows=[];
-  for(;size>=24;size--){ctx.font=`${i===0?650:500} ${size}px sans-serif`;rows=wrapPanelText(line,t=>ctx.measureText(t).width,c.width-88,lang);if(rows.length*size*1.25<=band.h)break;}
+ const bands=[{y:20,h:82},{y:108,h:132},{y:248,h:132},{y:390,h:138}];ctx.textBaseline='top';
+ lines.forEach((line,i)=>{const band=bands[i];let size=i===0?76:58,rows=[];
+  for(;size>=24;size--){ctx.font=`${i===0?650:500} ${size}px sans-serif`;rows=wrapPanelText(line,t=>ctx.measureText(t).width,c.width-88,lang);if(rows.length*size*1.12<=band.h)break;}
   ctx.fillStyle=i===3?'#244c59':'#18303a';ctx.font=`${i===0?650:500} ${size}px sans-serif`;
-  rows.forEach((text,n)=>ctx.fillText(text,44,band.y+n*size*1.25));
+  rows.forEach((text,n)=>ctx.fillText(text,44,band.y+n*size*1.12));
  });
  const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=Math.min(renderer?.capabilities.getMaxAnisotropy()||1,16);texture.userData.plaqueHeight=WALL_PLAQUE.height;return texture;
 }
@@ -443,7 +459,7 @@ function addExhibit(e,x,z,angle,color,y=galleryLayout.exhibitCentreHeight){
   group.position.y=artTop-h/2;
   plane.material.map.dispose();plane.material.map=texture;plane.geometry.dispose();plane.geometry=new THREE.PlaneGeometry(w,h);plane.material.needsUpdate=true;
   frame.dispose();frame=makeWallFrame(group,w,h);resizeWallPlaque(label,w,h);Object.assign(mounts.get(e.id),{y:group.position.y,width:w,height:h});label.material.map.dispose();label.material.map=wallLabelTexture(e);resizeWallPlaque(label,w,h);
- }finally{URL.revokeObjectURL(url);}},()=>Math.abs(z-camera.position.z)).catch(()=>{plane.material.map.dispose();plane.material.map=textTexture([title(e),tx('原图暂未载入 · 点击重试','IMAGE UNAVAILABLE · OPEN DETAILS')],{size:26,width:512,height:384});plane.material.needsUpdate=true;});
+ }finally{URL.revokeObjectURL(url);}},()=>touring&&tourStops.slice(tourStep,tourStep+3).some(stop=>stop.exhibit===e.id)?-1:Math.abs(z-camera.position.z)).catch(()=>{plane.material.map.dispose();plane.material.map=textTexture([title(e),tx('原图暂未载入 · 点击重试','IMAGE UNAVAILABLE · OPEN DETAILS')],{size:26,width:512,height:384});plane.material.needsUpdate=true;});
 }
 
 async function initWorld(){scene=new THREE.Scene();scene.background=new THREE.Color('#000000');scene.fog=new THREE.Fog('#18293d',100,210);camera=new THREE.PerspectiveCamera(innerWidth<650?76:66,innerWidth/innerHeight,.06,220);camera.position.set(0,1.65,-2);yaw=0;camera.rotation.order='YXZ';camera.rotation.y=yaw;renderer=new THREE.WebGLRenderer({canvas:$('world'),antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,2.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.98;raycaster=new THREE.Raycaster();mouse=new THREE.Vector2();scene.add(new THREE.HemisphereLight('#eef3f4','#c1b9a8',1.5));

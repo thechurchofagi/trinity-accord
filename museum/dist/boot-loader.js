@@ -4,8 +4,16 @@
  const zh=new URLSearchParams(location.search).get('lang')==='zh'||navigator.language.startsWith('zh');
  const slow=setTimeout(()=>{if(!document.body.dataset.museumReady)status.textContent=zh?'网络较慢，正在连接展馆。你可以先打开图文展览。':'The connection is slow. You can open the reading gallery while the museum connects.';},12000);
  window.addEventListener('museum-ready',()=>clearTimeout(slow),{once:true});
- const script=document.createElement('script');script.src='./museum.bundle.js?v=1.37.0.de2a37856fe1';script.async=true;
+ const script=document.createElement('script');script.src='./museum.bundle.js?v=1.37.0.928d71217c05';script.async=true;
  script.onerror=()=>{clearTimeout(slow);status.textContent=zh?'画面程序暂时未能下载。请重试，或打开图文展览。':'The viewer could not download. Retry or open the reading gallery.';};
  document.getElementById('retry-loading').onclick=()=>location.reload();
- document.head.append(script);
+ // Claim the first visit before asset requests, with a short fail-open deadline.
+ const cacheReady=async()=>{
+  if(!('serviceWorker' in navigator)||!window.isSecureContext)return;
+  await navigator.serviceWorker.register('./media-cache-worker.js',{scope:'./',updateViaCache:'none'});
+  if(navigator.serviceWorker.controller)return;
+  await new Promise(resolve=>navigator.serviceWorker.addEventListener('controllerchange',resolve,{once:true}));
+ };
+ let startTimer;
+ Promise.race([cacheReady().catch(()=>{}),new Promise(resolve=>{startTimer=setTimeout(resolve,1200);})]).then(()=>{clearTimeout(startTimer);document.head.append(script);});
 })();

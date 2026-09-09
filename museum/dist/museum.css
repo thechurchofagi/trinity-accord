@@ -236,3 +236,10 @@ body[data-presentation="true"] #focus-tools{display:none!important}
 #rooms button{text-align:center}#rooms button[aria-current="true"]:before{left:12%;right:12%}
 /* Reading layers retain the full series without adding visual clutter to the walls. */
 .related-reading{margin:28px 0;padding-top:18px;border-top:1px solid #40545e}.series-links{display:flex;flex-wrap:wrap;gap:9px}.series-links button{text-align:left;white-space:normal}.medium-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.medium-grid>div{padding:18px;background:#12232d;border:1px solid #3c525f;border-radius:8px}.medium-grid p{font-size:15px}.song-cycle,.lyric-reading{padding:14px 0}.song-cycle summary,.lyric-reading summary{cursor:pointer}.catalog-search{display:grid;gap:8px;margin:22px 0}.catalog-search input{width:100%;box-sizing:border-box;padding:14px;background:#10202a;border:1px solid #66808c;color:#eef5f7;border-radius:6px;font:inherit}.catalog-list{display:grid;gap:12px}.catalog-list article{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:15px;border-bottom:1px solid #42525c}.catalog-list strong{flex:1 1 100%}.catalog-list span{color:#bbced8;font-size:14px}.lyric-reading pre{white-space:pre-wrap;font:inherit;overflow-wrap:anywhere}#whole-series{margin-top:24px}@media(max-width:600px){.medium-grid{grid-template-columns:1fr}.series-links{display:grid;grid-template-columns:1fr}.catalog-list article{padding:14px 0}}
+
+/* A focused work gets the desktop viewing space back from the room heading. */
+@media(min-width:650px){
+ body[data-focused-art=true] #room-label{top:88px;left:32px;max-width:calc(100vw - 64px)}
+ body[data-focused-art=true] #room-label .eyebrow,body[data-focused-art=true] #room-subtitle{display:none}
+ body[data-focused-art=true] #room-title,body[data-focused-art=true] #room-title.en-title{font-size:22px;line-height:1.2;margin:0;letter-spacing:.035em}
+}

@@ -69,3 +69,8 @@ const {heldWalkSpeed}=await import('../dist/movement-controls.js');
 assert.equal(heldWalkSpeed(1.25,0,1),1.25);assert.equal(heldWalkSpeed(1.25,5,.1),1.25);assert.ok(heldWalkSpeed(1.25,2,1)>2.3);assert.ok(heldWalkSpeed(1.25,1,1)<heldWalkSpeed(1.25,2,1));
 
 assert.equal(heldWalkSpeed(1.25,0,1),1.25);assert.ok(heldWalkSpeed(1.25,6,1)>3.6);assert.equal(heldWalkSpeed(1.25,60,1),heldWalkSpeed(1.25,6,1));
+
+// Compact focused heading returns vertical space to the full work and plaque.
+const oldFit=observationView(1.78,2.54,66,1440/900,false,{height:900,top:300,bottom:600});
+const focusedFit=observationView(1.78,2.54,66,1440/900,false,{height:900,top:123,bottom:600});
+assert.ok(oldFit.distance/focusedFit.distance>1.25);
