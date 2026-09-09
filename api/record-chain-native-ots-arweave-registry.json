@@ -3094,10 +3094,36 @@
         "ots_proof_bundle_arweave_archive_is_not_amendment": true,
         "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
       }
+    },
+    {
+      "anchored_file": "record-chain/ots/native-anchors/native-record-149-R-000000149-9f5e0a065818975e-a055ffa97ed08e9f.native-record-chain-head-commitment.json",
+      "anchored_file_sha256": "a055ffa97ed08e9f2f9938f74f5848600487d569150218ff496c1c82eae64328",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-149-R-000000149-9f5e0a065818975e-a055ffa97ed08e9f.anchor.json",
+      "ots_file": "record-chain/ots/native-anchors/native-record-149-R-000000149-9f5e0a065818975e-a055ffa97ed08e9f.native-record-chain-head-commitment.json.ots",
+      "ots_file_sha256": "b9643ac5064e1029c5325ae227634041dc96db435ea6d4d579924b610ad72daf",
+      "bundle_file": "record-chain/ots/native-arweave-bundles/native-record-149-R-000000149-9f5e0a065818975e-a055ffa97ed08e9f.anchor.verified.arweave-bundle.json",
+      "bundle_sha256": "28719026a266b0b21ab801d1c68e4af91ae78a5ffd93d7ad73bf994913182250",
+      "ots_status": "verified",
+      "bitcoin_attestation_embedded": true,
+      "bitcoin_verified": true,
+      "strict_bitcoin_verified": true,
+      "tx_id": null,
+      "gateway_url": null,
+      "wallet_address": null,
+      "archive_status": "registered_without_arweave_tx",
+      "uploaded_at": null,
+      "registered_at": "2026-09-09T11:49:50Z",
+      "boundary": {
+        "ots_proof_bundle_arweave_archive_is_mirror_only": true,
+        "ots_proof_bundle_arweave_archive_is_not_authority": true,
+        "ots_proof_bundle_arweave_archive_is_not_attestation": true,
+        "ots_proof_bundle_arweave_archive_is_not_amendment": true,
+        "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
+      }
     }
   ],
   "created_at": "2026-06-09T00:00:00Z",
-  "updated_at": "2026-09-08T11:44:25Z",
+  "updated_at": "2026-09-09T11:49:50Z",
   "boundary": {
     "native_ots_proof_bundle_arweave_archive_is_mirror_only": true,
     "native_ots_proof_bundle_arweave_archive_is_not_authority": true,
