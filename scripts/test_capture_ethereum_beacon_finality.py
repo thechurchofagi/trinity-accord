@@ -4,7 +4,7 @@ import sys
 from unittest.mock import patch
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from capture_ethereum_beacon_finality import execution_hash, fetch_canonical_ssz, parse_providers
+from capture_ethereum_beacon_finality import execution_hash, fetch_canonical_ssz, get, parse_providers
 
 
 def main():
@@ -23,6 +23,26 @@ def main():
         pass
     else:
         raise AssertionError("provider names must not escape the evidence directory")
+
+    class Response:
+        headers = {}
+
+        def read(self):
+            return b"ok"
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_args):
+            return False
+
+    with patch(
+        "capture_ethereum_beacon_finality.urllib.request.urlopen",
+        side_effect=[RuntimeError("rate limit")] * 4 + [Response()],
+    ), patch("capture_ethereum_beacon_finality.time.sleep") as sleep:
+        raw, headers = get("https://beacon.invalid/test", timeout=7)
+    assert raw == b"ok" and headers == {}
+    assert [call.args[0] for call in sleep.call_args_list] == [1, 2, 4, 8]
 
     attempts = []
 
