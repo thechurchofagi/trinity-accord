@@ -37,10 +37,10 @@ for (const claim of report.claims) {
   if (digest !== claim.ssz_sha256) throw new Error(`SSZ SHA-256 mismatch block=${claim.execution_block_number}`);
   const signed = forkTypes.SignedBeaconBlock.deserialize(raw);
   const beaconRoot = hex(forkTypes.BeaconBlock.hashTreeRoot(signed.message));
-  const executionHash = hex(signed.message.body.executionPayload.blockHash);
+  const canonicalExecutionHash = hex(signed.message.body.executionPayload.blockHash);
   if (Number(signed.message.slot) !== claim.beacon_slot) throw new Error(`slot mismatch block=${claim.execution_block_number}`);
   if (beaconRoot !== claim.beacon_root) throw new Error(`beacon root mismatch block=${claim.execution_block_number}`);
-  if (executionHash !== claim.execution_block_hash) throw new Error(`execution hash mismatch block=${claim.execution_block_number}`);
+  if (canonicalExecutionHash !== claim.execution_block_hash) throw new Error(`execution hash mismatch block=${claim.execution_block_number}`);
   if (claim.provider_quorum < 2 || claim.observations.some((x) => x.finalized !== true || x.execution_optimistic !== false)) {
     throw new Error(`finality quorum mismatch block=${claim.execution_block_number}`);
   }
