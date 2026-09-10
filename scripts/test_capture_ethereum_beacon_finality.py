@@ -8,6 +8,11 @@ from capture_ethereum_beacon_finality import execution_hash, fetch_canonical_ssz
 
 
 def main():
+    verifier_source = (pathlib.Path(__file__).parent / "verify_ethereum_beacon_ssz.mjs").read_text()
+    assert "function executionHash(block)" in verifier_source
+    assert "const executionHash =" not in verifier_source
+    assert "const canonicalExecutionHash =" in verifier_source
+
     value = {"data": {"message": {"body": {"execution_payload": {"block_hash": "0xAB"}}}}}
     assert execution_hash(value) == "0xab"
     assert len(parse_providers([])) == 2
