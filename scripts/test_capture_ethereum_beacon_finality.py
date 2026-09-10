@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 import pathlib
 import sys
+from unittest.mock import patch
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from capture_ethereum_beacon_finality import execution_hash, parse_providers
+from capture_ethereum_beacon_finality import execution_hash, fetch_canonical_ssz, parse_providers
 
 
 def main():
@@ -22,6 +23,29 @@ def main():
         pass
     else:
         raise AssertionError("provider names must not escape the evidence directory")
+
+    attempts = []
+
+    def transient_ssz(url, accept, timeout, retries):
+        attempts.append(url)
+        assert accept == "application/octet-stream" and timeout == 7 and retries == 1
+        if "publicnode" in url:
+            return b'{}', {"content-type": "application/json"}
+        if attempts.count(url) == 1:
+            raise RuntimeError("temporary rate limit")
+        return b"canonical-ssz", {
+            "content-type": "application/octet-stream",
+            "eth-consensus-finalized": "true",
+            "eth-consensus-version": "capella",
+        }
+
+    providers = [("publicnode", "https://publicnode.invalid"), ("lodestar", "https://lodestar.invalid")]
+    with patch("capture_ethereum_beacon_finality.get", side_effect=transient_ssz), patch(
+        "capture_ethereum_beacon_finality.time.sleep"
+    ) as sleep:
+        raw, fork, provider = fetch_canonical_ssz(providers, 123, 7, retries=2)
+    assert (raw, fork, provider) == (b"canonical-ssz", "capella", "lodestar")
+    sleep.assert_called_once_with(1)
     print("ethereum beacon finality capture tests: PASS")
 
 
