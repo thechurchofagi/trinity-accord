@@ -302,6 +302,9 @@ jobs:
                   if provenance.exists(): ledger.write(provenance.read_bytes())
           print('Unverified caches combined; all decoder/KZG/finality checks still required',flush=True)
           PY
+          # The copied cache under FINALITY_ROOT is the only copy needed from here.
+          # It remains untrusted until the strict KZG/derivation/finality checks pass.
+          rm -rf "$RUNNER_TEMP/finality-prefetch"
 
       - name: Capture Base OP Stack L1 data and exact batch derivation
         env:
@@ -391,6 +394,10 @@ jobs:
           SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
         run: |
           set -euo pipefail
+          # Keep only the verifier binaries; source inputs and build trees are
+          # already bound into the proof and otherwise duplicate several GB.
+          rm -rf "$RUNNER_TEMP/finality-source" "$RUNNER_TEMP/base-fresh-channels" \
+            "$RUNNER_TEMP/finality-tools/optimism"
           python3 - <<'PY'
           import hashlib, os, pathlib
           root=pathlib.Path(os.environ['FINALITY_ROOT'])
@@ -401,13 +408,16 @@ jobs:
                   rows.append(f"{sha(path)}  {path.relative_to(root)}")
           (root/'MANIFEST.sha256').write_text('\n'.join(rows)+'\n')
           PY
-          (cd "$FINALITY_ROOT" && sha256sum -c MANIFEST.sha256)
+          (cd "$FINALITY_ROOT" && sha256sum --quiet -c MANIFEST.sha256)
+          echo "[LOCAL MANIFEST PASS] files=$(wc -l < "$FINALITY_ROOT/MANIFEST.sha256")"
           archive="chronicle-sidechain-finality-v1-${SOURCE_SHORT}.tar.zst"
+          # Stream directly into release-sized parts so an unsplit archive and
+          # its complete split copy never coexist on the bounded runner disk.
           tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner \
-            -C artifacts -cf - chronicle-sidechain-finality | zstd -3 -T0 -o "$archive"
-          archive_sha="$(sha256sum "$archive" | awk '{print $1}')"
-          split -b 900M -d -a 4 "$archive" "$archive.part-"
-          rm "$archive"
+            -C artifacts -cf - chronicle-sidechain-finality \
+            | zstd -3 -T0 -c \
+            | split -b 900M -d -a 4 - "$archive.part-"
+          archive_sha="$(cat "$archive".part-* | sha256sum | awk '{print $1}')"
           tag="chronicle-sidechain-finality-v1-${SOURCE_SHORT}"
           TAG="$tag" ARCHIVE="$archive" ARCHIVE_SHA="$archive_sha" python3 - <<'PY'
           import hashlib,json,os,pathlib
@@ -459,7 +469,8 @@ jobs:
             mkdir "$download/extracted"
             cat "$download"/"$ARCHIVE".part-* | zstd -d -c | tar --no-same-owner -xf - -C "$download/extracted"
             proof="$download/extracted/chronicle-sidechain-finality"
-            (cd "$proof" && sha256sum -c MANIFEST.sha256)
+            (cd "$proof" && sha256sum --quiet -c MANIFEST.sha256)
+            echo "[REMOTE MANIFEST PASS] files=$(wc -l < "$proof/MANIFEST.sha256")"
             "$TOOL_BIN/verify-base-blob-kzg" "$proof/base/decoder/transactions" "$proof/base/decoder/blobs"
             "$TOOL_BIN/batch-decoder" reassemble \
               --in "$proof/base/decoder/transactions" --out "$download/fresh-channels" --l2-chain-id 8453
@@ -480,6 +491,8 @@ jobs:
             > "$release_json"
           if [[ -s "$release_json" && "$(jq -r '.draft' "$release_json")" == "false" ]]; then
             echo "[PUBLISHED RELEASE EXISTS] refusing mutation; verifying all bytes again"
+            rm -f "$ARCHIVE".part-*
+            rm -rf "$FINALITY_ROOT/base/decoder"
             mkdir "$RUNNER_TEMP/published-existing"
             gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/published-existing"
             verify_release "$RUNNER_TEMP/published-existing"
@@ -500,6 +513,11 @@ jobs:
             "$FINALITY_ROOT/STRICT-VERIFICATION.json"; do
             gh release upload "$TAG" "$asset" --repo "$GITHUB_REPOSITORY"
           done
+          # The draft now owns a complete byte-for-byte copy. Retain bounded
+          # diagnostics, but release local archive parts and bulky decoder data
+          # before reconstructing the remote copy.
+          rm -f "$ARCHIVE".part-*
+          rm -rf "$FINALITY_ROOT/base/decoder"
           mkdir "$RUNNER_TEMP/draft-readback"
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/draft-readback"
           # No success receipt exists yet: first prove that the remote draft can
@@ -522,12 +540,14 @@ jobs:
           cp RELEASE-ASSETS-SHA256.txt "$RUNNER_TEMP/draft-readback/RELEASE-ASSETS-SHA256.txt"
           verify_release "$RUNNER_TEMP/draft-readback"
           gh release upload "$TAG" COLD-VERIFICATION.json RELEASE-ASSETS-SHA256.txt --repo "$GITHUB_REPOSITORY"
+          rm -rf "$RUNNER_TEMP/draft-readback"
           rm -rf "$RUNNER_TEMP/draft-final-readback"
           mkdir "$RUNNER_TEMP/draft-final-readback"
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/draft-final-readback"
           verify_release "$RUNNER_TEMP/draft-final-readback"
           test "$(jq -r '.pass' "$RUNNER_TEMP/draft-final-readback/COLD-VERIFICATION.json")" = true
           gh release edit "$TAG" --repo "$GITHUB_REPOSITORY" --draft=false
+          rm -rf "$RUNNER_TEMP/draft-final-readback"
           rm -rf "$RUNNER_TEMP/published-readback"
           mkdir "$RUNNER_TEMP/published-readback"
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/published-readback"
