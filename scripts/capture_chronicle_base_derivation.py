@@ -137,7 +137,12 @@ class RPC:
                     last = exc
             if attempt + 1 < self.retries:
                 time.sleep(2**attempt)
-        raise RuntimeError(f"RPC batch failed: {last!r}")
+        # Some public RPCs accept ordinary JSON-RPC requests but reject batch
+        # envelopes at the HTTP layer. Preserve correctness by replaying the
+        # bounded calls individually; call retains endpoint failover, retries,
+        # and the same non-null/error response checks.
+        print(f"[RPC BATCH FALLBACK] calls={len(calls)} reason={last!r}", flush=True)
+        return [self.call(method, params) for method, params in calls]
 
 
 def endpoint_list(primary: str | None, fallback: str) -> list[str]:
