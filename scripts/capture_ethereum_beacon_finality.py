@@ -38,7 +38,9 @@ def sha256(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
-def get(url: str, accept: str = "application/json", timeout: int = 60, retries: int = 3) -> tuple[bytes, dict[str, str]]:
+def get(url: str, accept: str = "application/json", timeout: int = 60, retries: int = 8) -> tuple[bytes, dict[str, str]]:
+    if retries < 1:
+        raise ValueError("HTTP retries must be positive")
     last: Exception | None = None
     for attempt in range(retries):
         req = urllib.request.Request(url, headers={"accept": accept, "user-agent": "trinity-accord-beacon-finality/1.0"})
@@ -48,7 +50,13 @@ def get(url: str, accept: str = "application/json", timeout: int = 60, retries: 
         except Exception as exc:
             last = exc
             if attempt + 1 < retries:
-                time.sleep(2**attempt)
+                delay = min(30, 2**attempt)
+                print(
+                    f"[BEACON HTTP RETRY] attempt={attempt + 1}/{retries} "
+                    f"delay_s={delay} url={url} reason={exc!r}",
+                    flush=True,
+                )
+                time.sleep(delay)
     raise RuntimeError(f"GET failed after {retries} attempts: {url}: {last!r}")
 
 
