@@ -28,6 +28,10 @@ BASE_GENESIS_TIME = 1686789347
 BASE_BLOCK_TIME = 2
 BASE_INBOX = "0xff00000000000000000000000000000000008453"
 BASE_BATCHER = "0x5050f69a9786f081509234f1a7f4684b5e5b76c9"
+# The fallback public archive RPC accepts batches of at most three requests.
+# Keeping both call sites within that bound avoids an hours-long single-call
+# fallback while every returned block/transaction is still rehashed below.
+PUBLIC_RPC_BATCH_SIZE = 3
 L1_INFO_PREDEPLOY = "0x4200000000000000000000000000000000000015"
 L1_INFO_SELECTORS = {
     keccak(b"setL1BlockValuesEcotone()")[:4]: 164,
@@ -283,8 +287,8 @@ def l1_transaction_proofs(eth: RPC, frame_rows: list[dict], output: pathlib.Path
         trie = HexaryTrie(db={})
         indexes = {}
         block_digests = block["transactions"]
-        for batch_start in range(0, len(block_digests), 100):
-            batch_digests = block_digests[batch_start : batch_start + 100]
+        for batch_start in range(0, len(block_digests), PUBLIC_RPC_BATCH_SIZE):
+            batch_digests = block_digests[batch_start : batch_start + PUBLIC_RPC_BATCH_SIZE]
             batch_raw = eth.batch([("eth_getRawTransactionByHash", [digest]) for digest in batch_digests])
             for offset, (digest, raw) in enumerate(zip(batch_digests, batch_raw)):
                 index = batch_start + offset
@@ -459,8 +463,8 @@ def main() -> None:
         if args.prefetch_only and (window_index - 1) % args.shard_count != args.shard_index:
             continue
         print(f"[PREFETCH START] window={window_index}/{len(windows)} blocks={start}-{end-1} total_blocks={total_blocks}", flush=True)
-        for offset in range(start, end, 10):
-            numbers = list(range(offset, min(offset + 10, end)))
+        for offset in range(start, end, PUBLIC_RPC_BATCH_SIZE):
+            numbers = list(range(offset, min(offset + PUBLIC_RPC_BATCH_SIZE, end)))
             blocks = eth_rpc.batch([("eth_getBlockByNumber", [hex(number), True]) for number in numbers])
             for number, block in zip(numbers, blocks):
                 if h2i(block["number"]) != number:
