@@ -74,6 +74,45 @@ def parse_providers(values: list[str]) -> list[tuple[str, str]]:
     return out
 
 
+def fetch_canonical_ssz(
+    providers: list[tuple[str, str]],
+    slot: int,
+    timeout: int,
+    retries: int = 8,
+) -> tuple[bytes, str, str]:
+    """Fetch one canonical SSZ object, tolerating transient public API limits."""
+    if retries < 1:
+        raise ValueError("SSZ retries must be positive")
+    failures: dict[str, str] = {}
+    for attempt in range(1, retries + 1):
+        for name, endpoint in providers:
+            try:
+                raw, headers = get(
+                    f"{endpoint}/eth/v2/beacon/blocks/{slot}",
+                    accept="application/octet-stream",
+                    timeout=timeout,
+                    retries=1,
+                )
+                if headers.get("content-type", "").split(";", 1)[0] != "application/octet-stream":
+                    raise ValueError("provider ignored SSZ Accept header")
+                if headers.get("eth-consensus-finalized", "").lower() != "true":
+                    raise ValueError("SSZ response is not marked finalized")
+                fork = headers.get("eth-consensus-version", "").lower()
+                if not fork:
+                    raise ValueError("SSZ response has no Eth-Consensus-Version")
+                return raw, fork, name
+            except Exception as exc:
+                failures[name] = repr(exc)
+                print(
+                    f"[BEACON SSZ RETRY] slot={slot} provider={name} "
+                    f"attempt={attempt}/{retries} reason={exc!r}",
+                    flush=True,
+                )
+        if attempt < retries:
+            time.sleep(min(30, 2 ** (attempt - 1)))
+    raise RuntimeError(f"no provider supplied canonical SSZ: slot={slot} failures={stable_json(failures)}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--polygon-settlement", type=pathlib.Path, required=True)
@@ -81,6 +120,7 @@ def main() -> None:
     parser.add_argument("--output", type=pathlib.Path, required=True)
     parser.add_argument("--provider", action="append", default=[])
     parser.add_argument("--timeout", type=int, default=60)
+    parser.add_argument("--ssz-retries", type=int, default=8)
     args = parser.parse_args()
     providers = parse_providers(args.provider)
     settlement_raw = args.polygon_settlement.read_bytes()
@@ -156,8 +196,7 @@ def main() -> None:
         claim_dir.mkdir(parents=True, exist_ok=True)
         observations = []
         roots = set()
-        selected_ssz = None
-        selected_fork = None
+        observation_by_provider = {}
         for name, endpoint in providers:
             provider_dir = claim_dir / name
             provider_dir.mkdir(parents=True, exist_ok=True)
@@ -190,32 +229,19 @@ def main() -> None:
                 "execution_block_hash": embedded_hash,
             }
             observations.append(observation)
+            observation_by_provider[name] = observation
             roots.add(root_hash)
-            if selected_ssz is None:
-                try:
-                    ssz_raw, ssz_headers = get(
-                        f"{endpoint}/eth/v2/beacon/blocks/{slot}",
-                        accept="application/octet-stream",
-                        timeout=args.timeout,
-                    )
-                    if ssz_headers.get("content-type", "").split(";", 1)[0] != "application/octet-stream":
-                        raise ValueError("provider ignored SSZ Accept header")
-                    if ssz_headers.get("eth-consensus-finalized", "").lower() != "true":
-                        raise ValueError("SSZ response is not marked finalized")
-                    fork = ssz_headers.get("eth-consensus-version", "").lower()
-                    if not fork:
-                        raise ValueError("SSZ response has no Eth-Consensus-Version")
-                    selected_ssz = ssz_raw
-                    selected_fork = fork
-                    (claim_dir / "signed-beacon-block.ssz").write_bytes(ssz_raw)
-                    observation["ssz_sha256"] = sha256(ssz_raw)
-                    observation["ssz_fork"] = fork
-                except Exception as exc:
-                    observation["ssz_unavailable"] = repr(exc)
         if len(roots) != 1:
             raise SystemExit(f"Beacon providers disagree on root: block={number} roots={sorted(roots)}")
-        if selected_ssz is None or selected_fork is None:
-            raise SystemExit(f"no provider supplied canonical SSZ: block={number}")
+        try:
+            selected_ssz, selected_fork, selected_provider = fetch_canonical_ssz(
+                providers, slot, args.timeout, args.ssz_retries
+            )
+        except Exception as exc:
+            raise SystemExit(f"no provider supplied canonical SSZ: block={number}: {exc}") from exc
+        (claim_dir / "signed-beacon-block.ssz").write_bytes(selected_ssz)
+        observation_by_provider[selected_provider]["ssz_sha256"] = sha256(selected_ssz)
+        observation_by_provider[selected_provider]["ssz_fork"] = selected_fork
         row = {
             **claim,
             "beacon_slot": slot,
