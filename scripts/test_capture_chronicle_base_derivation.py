@@ -9,6 +9,7 @@ from eth_hash.auto import keccak
 
 from capture_chronicle_base_derivation import (
     BASE_GENESIS_TIME,
+    PUBLIC_RPC_BATCH_SIZE,
     RPC,
     find_targets,
     merge_windows,
@@ -17,6 +18,7 @@ from capture_chronicle_base_derivation import (
 
 
 def main():
+    assert PUBLIC_RPC_BATCH_SIZE == 3
     selector = keccak(b"setL1BlockValuesEcotone()")[:4]
     data = bytearray(164)
     data[:4] = selector
