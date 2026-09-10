@@ -491,6 +491,8 @@ jobs:
             > "$release_json"
           if [[ -s "$release_json" && "$(jq -r '.draft' "$release_json")" == "false" ]]; then
             echo "[PUBLISHED RELEASE EXISTS] refusing mutation; verifying all bytes again"
+            rm -f "$ARCHIVE".part-*
+            rm -rf "$FINALITY_ROOT/base/decoder"
             mkdir "$RUNNER_TEMP/published-existing"
             gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/published-existing"
             verify_release "$RUNNER_TEMP/published-existing"
