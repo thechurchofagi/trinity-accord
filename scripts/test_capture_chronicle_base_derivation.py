@@ -2,11 +2,14 @@
 import json
 import pathlib
 import tempfile
+import urllib.error
+from unittest.mock import patch
 
 from eth_hash.auto import keccak
 
 from capture_chronicle_base_derivation import (
     BASE_GENESIS_TIME,
+    RPC,
     find_targets,
     merge_windows,
     parse_l1_info,
@@ -27,6 +30,38 @@ def main():
     assert info["l1_block_hash"] == "0x" + "44" * 32
     assert info["batcher_address"] == "0x" + "55" * 20
     assert merge_windows([100, 105, 1000], 10, 20) == [(90, 126), (990, 1021)]
+
+    class FakeResponse:
+        def __init__(self, value):
+            self.value = value
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_args):
+            return False
+
+        def read(self):
+            return json.dumps(self.value).encode()
+
+    requests = []
+
+    def reject_batch_accept_single(request, timeout):
+        assert timeout == 45
+        payload = json.loads(request.data)
+        requests.append(payload)
+        if isinstance(payload, list):
+            raise urllib.error.HTTPError(request.full_url, 403, "Forbidden", None, None)
+        return FakeResponse({"jsonrpc": "2.0", "id": 1, "result": payload["params"][0]})
+
+    with patch(
+        "capture_chronicle_base_derivation.urllib.request.urlopen",
+        side_effect=reject_batch_accept_single,
+    ):
+        rpc = RPC(["https://rpc.invalid"], retries=1)
+        assert rpc.batch([("echo", ["first"]), ("echo", ["second"])]) == ["first", "second"]
+    assert len(requests) == 3 and isinstance(requests[0], list)
+    assert all(isinstance(request, dict) for request in requests[1:])
 
     raw_tx = "0x02c0"
     digest = "0x" + keccak(bytes.fromhex(raw_tx[2:])).hex()
