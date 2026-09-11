@@ -55,7 +55,8 @@ jobs:
           sudo apt-get install -y --no-install-recommends jq zstd
           python3 -m pip install -r requirements-ci.txt
           npm ci
-          python3 -m py_compile             scripts/verify_chronicle_base_derivation.py             scripts/verify_ethereum_beacon_ssz.mjs
+          python3 -m py_compile scripts/verify_chronicle_base_derivation.py
+          node --check scripts/verify_ethereum_beacon_ssz.mjs
           echo "[RESUME FRONTEND REUSED] no shard prefetch, Base capture, Beacon capture, or archive rebuild"
 
       - name: Build pinned OP decoder and KZG verifier
