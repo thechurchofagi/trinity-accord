@@ -542,9 +542,16 @@ jobs:
           ) > RELEASE-ASSETS-SHA256.txt
           sha256sum COLD-VERIFICATION.json >> RELEASE-ASSETS-SHA256.txt
           cp RELEASE-ASSETS-SHA256.txt "$RUNNER_TEMP/draft-readback/RELEASE-ASSETS-SHA256.txt"
-          verify_release "$RUNNER_TEMP/draft-readback"
+          # Publish the receipt first, then verify a fresh remote download.
+          # verify_bundle removes archive parts after extraction to bound disk
+          # use, so a second verification must not reuse that directory.
           gh release upload "$TAG" COLD-VERIFICATION.json RELEASE-ASSETS-SHA256.txt --repo "$GITHUB_REPOSITORY"
           rm -rf "$RUNNER_TEMP/draft-readback"
+          rm -rf "$RUNNER_TEMP/draft-postupload-readback"
+          mkdir "$RUNNER_TEMP/draft-postupload-readback"
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/draft-postupload-readback"
+          verify_release "$RUNNER_TEMP/draft-postupload-readback"
+          rm -rf "$RUNNER_TEMP/draft-postupload-readback"
           rm -rf "$RUNNER_TEMP/draft-final-readback"
           mkdir "$RUNNER_TEMP/draft-final-readback"
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/draft-final-readback"
