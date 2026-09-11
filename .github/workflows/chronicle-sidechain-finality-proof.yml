@@ -468,6 +468,10 @@ jobs:
             rm -rf "$download/extracted" "$download/fresh-channels"
             mkdir "$download/extracted"
             cat "$download"/"$ARCHIVE".part-* | zstd -d -c | tar --no-same-owner -xf - -C "$download/extracted"
+            # The remote parts have been inventory- and hash-verified above.
+            # Remove them before replaying the expanded decoder channels so
+            # cold recovery cannot exhaust the bounded runner disk.
+            rm -f "$download"/"$ARCHIVE".part-*
             proof="$download/extracted/chronicle-sidechain-finality"
             (cd "$proof" && sha256sum --quiet -c MANIFEST.sha256)
             echo "[REMOTE MANIFEST PASS] files=$(wc -l < "$proof/MANIFEST.sha256")"
