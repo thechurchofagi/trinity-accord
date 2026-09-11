@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "scripts/build_chronicle_sidechain_finality_zenodo_deposit.py"
+      - "scripts/publish_chronicle_sidechain_to_zenodo.py"
+      - "scripts/reconcile_chronicle_sidechain_finality_zenodo.py"
       - "archive/chronicle-sidechain-finality-zenodo-rights-approval.json"
       - ".github/workflows/chronicle-sidechain-finality-zenodo-preservation.yml"
   workflow_dispatch:
@@ -29,6 +31,8 @@ jobs:
       ZENODO_DOWNLOAD_TIMEOUT_SECONDS: "3600"
       ZENODO_UPLOAD_RETRIES: "3"
       ZENODO_DOWNLOAD_RETRIES: "3"
+      ZENODO_PUBLISH_SETTLE_TIMEOUT_SECONDS: "900"
+      ZENODO_PUBLISH_SETTLE_POLL_SECONDS: "10"
 
     steps:
       - name: Checkout current main
@@ -49,7 +53,8 @@ jobs:
           test -n "${ZENODO_ACCESS_TOKEN:-}"
           python3 -m py_compile \
             scripts/build_chronicle_sidechain_finality_zenodo_deposit.py \
-            scripts/publish_chronicle_sidechain_to_zenodo.py
+            scripts/publish_chronicle_sidechain_to_zenodo.py \
+            scripts/reconcile_chronicle_sidechain_finality_zenodo.py
           python3 - <<'PY'
           import json
           p='archive/chronicle-sidechain-finality-zenodo-rights-approval.json'
@@ -126,7 +131,8 @@ jobs:
           echo "[FINALITY DOI PACKAGE PASS] files=$(find "$deposit" -maxdepth 1 -type f | wc -l) bytes=$(du -sb "$deposit" | awk '{print $1}')"
 
       - name: Publish as new version in existing sidechain Concept DOI
-        id: publish
+        id: publish_attempt
+        continue-on-error: true
         env:
           DEPOSIT_DIR: ${{ steps.package.outputs.deposit_dir }}
           SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
@@ -137,13 +143,46 @@ jobs:
             --state archive/chronicle-sidechain-finality-zenodo-state.json \
             --api-base "$ZENODO_API_BASE" \
             --rights-boundary-ack "$RIGHTS_ACK"
+
+      - name: Reconcile published record and verify public readback
+        id: publish
+        env:
+          DEPOSIT_DIR: ${{ steps.package.outputs.deposit_dir }}
+          SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
+          SOURCE_SHORT: ${{ steps.source.outputs.source_short }}
+        run: |
+          set -euo pipefail
+          state='archive/chronicle-sidechain-finality-zenodo-state.json'
+          if python3 - <<'PY'
+          import json, os, pathlib
+          p=pathlib.Path('archive/chronicle-sidechain-finality-zenodo-state.json')
+          if not p.is_file(): raise SystemExit(1)
+          r=json.load(p.open(encoding='utf-8'))
+          expected_version='finality-v1-'+os.environ['SOURCE_SHORT']
+          if r.get('concept_doi')!='10.5281/zenodo.22012615': raise SystemExit(1)
+          if r.get('source_release_tag')!=os.environ['SOURCE_TAG']: raise SystemExit(1)
+          if r.get('latest_version')!=expected_version: raise SystemExit(1)
+          if r.get('remote_full_readback_sha256_verified') is not True: raise SystemExit(1)
+          if not r.get('doi') or not r.get('record_id'): raise SystemExit(1)
+          print('[FINALITY DOI STATE] publisher already completed verified post-publish readback')
+          PY
+          then
+            :
+          else
+            echo "[FINALITY DOI RECOVERY] primary publisher outcome=${{ steps.publish_attempt.outcome }}; reconciling public Records API"
+            python3 scripts/reconcile_chronicle_sidechain_finality_zenodo.py \
+              --deposit-dir "$DEPOSIT_DIR" \
+              --state "$state" \
+              --api-base "$ZENODO_API_BASE" \
+              --rights-boundary-ack "$RIGHTS_ACK"
+          fi
           python3 - <<'PY' >> "$GITHUB_OUTPUT"
-          import json
+          import json, os
           p='archive/chronicle-sidechain-finality-zenodo-state.json'
           r=json.load(open(p,encoding='utf-8'))
           if r.get('concept_doi')!='10.5281/zenodo.22012615':
               raise SystemExit(f"Concept DOI mismatch: {r.get('concept_doi')}")
-          if r.get('source_release_tag')!=__import__('os').environ['SOURCE_TAG']:
+          if r.get('source_release_tag')!=os.environ['SOURCE_TAG']:
               raise SystemExit('Finality Zenodo source Release mismatch')
           if r.get('remote_full_readback_sha256_verified') is not True:
               raise SystemExit('Finality Zenodo full remote readback not verified')
@@ -190,6 +229,7 @@ jobs:
           path: |
             ${{ runner.temp }}/finality-zenodo-build.json
             .sidechain-finality-zenodo-deposit/finality-v1-${{ steps.source.outputs.source_short }}/DEBUG.jsonl
+            .sidechain-finality-zenodo-deposit/finality-v1-${{ steps.source.outputs.source_short }}/PUBLIC-RECONCILE-DEBUG.jsonl
             archive/chronicle-sidechain-finality-zenodo-state.json
           retention-days: 365
           if-no-files-found: warn
