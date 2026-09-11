@@ -1,0 +1,11 @@
+{
+  "schema": "trinity-accord/chronicle-sidechain-finality-zenodo-rights-approval/v1",
+  "approval": "TRINITY_SIDECHAIN_EVIDENCE_MIXED_RIGHTS_V1_APPROVED",
+  "concept_doi": "10.5281/zenodo.22012615",
+  "publish_as_new_version": true,
+  "non_amending": true,
+  "scope": "Publication of the completed Chronicle Polygon/Base finality proof Release as a new version in the existing Chronicle sidechain Zenodo DOI series, preserving the Release bytes, verification receipts, checksums, and existing mixed-rights boundaries.",
+  "boundary": "This approval does not claim ownership of third-party material, does not relicense third-party material, does not alter Canon or canonical authority, and authorizes only non-amending preservation of the published sidechain finality proof package in the existing Zenodo DOI series.",
+  "recorded_at": "2026-09-11T13:42:00Z",
+  "status": "approved"
+}
