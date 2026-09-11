@@ -1,0 +1,191 @@
+name: Chronicle Sidechain Finality Draft Recovery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/chronicle-sidechain-finality-draft-recovery.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: chronicle-sidechain-finality-proof
+  cancel-in-progress: true
+
+jobs:
+  recover-draft-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TARGET_TAG: chronicle-sidechain-finality-v1-f64cc872b3b5
+      SOURCE_SHA: f64cc872b3b5cf70a891621615e2b56ede004a2d
+      FAILED_RUN_ID: "34571542137"
+      FAILED_DIAGNOSTIC: chronicle-sidechain-finality-34571542137
+      PROOF_COMMIT: 1f6e7386adc227a45114a4a6a39003ad781f3368
+      OPTIMISM_COMMIT: c6f39182c975db976aaaa01ef32884c41b1c9660
+      SUPERCHAIN_REGISTRY_COMMIT: 5b055be4d294ce43814a44c8839d89b2436dc8aa
+
+    steps:
+      - name: Checkout exact proof implementation from failed run
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ env.PROOF_COMMIT }}
+          fetch-depth: 1
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: ".node-version"
+
+      - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5
+        with:
+          go-version: "1.25.1"
+          cache: false
+
+      - name: Install verifier dependencies
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends jq zstd
+          python3 -m pip install -r requirements-ci.txt
+          npm ci
+
+      - name: Build the same pinned OP and KZG verifiers used by Run 18
+        id: op
+        run: |
+          set -euo pipefail
+          tools="$RUNNER_TEMP/finality-tools"
+          mkdir -p "$tools/bin"
+          git clone --filter=blob:none --no-checkout https://github.com/ethereum-optimism/optimism.git "$tools/optimism"
+          git -C "$tools/optimism" checkout "$OPTIMISM_COMMIT"
+          git -C "$tools/optimism" submodule update --init superchain-registry
+          git -C "$tools/optimism/superchain-registry" fetch origin "$SUPERCHAIN_REGISTRY_COMMIT"
+          git -C "$tools/optimism/superchain-registry" checkout "$SUPERCHAIN_REGISTRY_COMMIT"
+          python3 scripts/patch_pinned_op_superchain_compat.py "$tools/optimism"
+          cp scripts/yq_chain_id_compat.py "$tools/bin/yq"
+          chmod +x "$tools/bin/yq"
+          PATH="$tools/bin:$PATH" OP_CORE_SYNC_SUPERCHAIN=1 \
+            "$tools/optimism/op-core/superchain/sync-superchain.sh"
+          (
+            cd "$tools/optimism"
+            go build -trimpath -o "$tools/bin/batch-decoder" ./op-node/cmd/batch_decoder
+            cp "$GITHUB_WORKSPACE/scripts/verify_base_blob_kzg.go" verify_base_blob_kzg.go
+            go build -trimpath -o "$tools/bin/verify-base-blob-kzg" verify_base_blob_kzg.go
+          )
+          test "$(git -C "$tools/optimism" rev-parse HEAD)" = "$OPTIMISM_COMMIT"
+          test "$(git -C "$tools/optimism/superchain-registry" rev-parse HEAD)" = "$SUPERCHAIN_REGISTRY_COMMIT"
+          echo "bin=$tools/bin" >> "$GITHUB_OUTPUT"
+          rm -rf "$tools/optimism"
+
+      - name: Assert the existing draft is the untouched Run 18 draft
+        run: |
+          set -euo pipefail
+          release_json="$RUNNER_TEMP/target-release.json"
+          gh api --paginate "repos/$GITHUB_REPOSITORY/releases?per_page=100" \
+            | jq -s --arg tag "$TARGET_TAG" '[.[][] | select(.tag_name == $tag)] | if length == 1 then .[0] else error("target release must exist exactly once") end' \
+            > "$release_json"
+          test "$(jq -r '.draft' "$release_json")" = true
+          test "$(jq -r '.target_commitish' "$release_json")" = "$SOURCE_SHA"
+          test "$(jq -r '.assets | length' "$release_json")" = 24
+          test "$(jq -r '[.assets[].name | select(test("\\.tar\\.zst\\.part-[0-9]{4}$"))] | length' "$release_json")" = 19
+          for required in RELEASE-ASSETS.json SOURCE-BINDING.json BASE-OP-STACK-DERIVATION.json ETHEREUM-BEACON-FINALITY.json STRICT-VERIFICATION.json; do
+            test "$(jq --arg n "$required" '[.assets[] | select(.name == $n)] | length' "$release_json")" = 1
+          done
+          test "$(jq --arg n "COLD-VERIFICATION.json" '[.assets[] | select(.name == $n)] | length' "$release_json")" = 0
+          test "$(jq --arg n "RELEASE-ASSETS-SHA256.txt" '[.assets[] | select(.name == $n)] | length' "$release_json")" = 0
+          echo "[RESUME GUARD PASS] existing draft has exactly the original 24 Run 18 assets"
+
+      - name: Recover Run 18 cold-pass receipt and repair its checksum list
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/run18-diagnostic"
+          mkdir -p "$evidence"
+          gh run download "$FAILED_RUN_ID" --repo "$GITHUB_REPOSITORY" \
+            --name "$FAILED_DIAGNOSTIC" --dir "$evidence"
+          test "$(jq -r '.pass' "$evidence/COLD-VERIFICATION.json")" = true
+          test "$(jq -r '.workflow_run_id' "$evidence/COLD-VERIFICATION.json")" = "$FAILED_RUN_ID"
+          test "$(wc -l < "$evidence/RELEASE-ASSETS-SHA256.txt")" = 5
+          cp "$evidence/COLD-VERIFICATION.json" COLD-VERIFICATION.json
+          cp "$evidence/RELEASE-ASSETS-SHA256.txt" RELEASE-ASSETS-SHA256.txt
+          sha256sum COLD-VERIFICATION.json >> RELEASE-ASSETS-SHA256.txt
+          test "$(wc -l < RELEASE-ASSETS-SHA256.txt)" = 6
+          echo "[ROOT CAUSE RECOVERED] Run 18 cold PASS receipt retained; checksum list repaired from 5 to 6 entries"
+
+      - name: Upload cold receipt and atomically finish the existing draft
+        env:
+          TOOL_BIN: ${{ steps.op.outputs.bin }}
+        run: |
+          set -euo pipefail
+          verify_bundle() {
+            local download="$1"
+            local expected actual archive
+            DOWNLOAD="$download" python3 - <<'PY'
+          import hashlib,json,os,pathlib
+          root=pathlib.Path(os.environ['DOWNLOAD'])
+          meta=json.loads((root/'RELEASE-ASSETS.json').read_text())
+          expected={item['name']:item for item in meta['parts']}
+          actual={path.name:path for path in root.glob(meta['archive_name']+'.part-*')}
+          if set(actual) != set(expected): raise SystemExit('release archive part inventory mismatch')
+          for name,path in actual.items():
+              digest=hashlib.sha256()
+              with path.open('rb') as handle:
+                  for chunk in iter(lambda:handle.read(1024*1024),b''): digest.update(chunk)
+              if path.stat().st_size != expected[name]['bytes'] or digest.hexdigest() != expected[name]['sha256']:
+                  raise SystemExit(f'release archive part mismatch: {name}')
+          print(f"[REMOTE PART INVENTORY PASS] parts={len(actual)} bytes={sum(p.stat().st_size for p in actual.values())}")
+          PY
+            archive="$(jq -r '.archive_name' "$download/RELEASE-ASSETS.json")"
+            expected="$(jq -r '.archive_sha256' "$download/RELEASE-ASSETS.json")"
+            actual="$(cat "$download"/"$archive".part-* | sha256sum | awk '{print $1}')"
+            test "$actual" = "$expected"
+            rm -rf "$download/extracted" "$download/fresh-channels"
+            mkdir "$download/extracted"
+            cat "$download"/"$archive".part-* | zstd -d -c | tar --no-same-owner -xf - -C "$download/extracted"
+            rm -f "$download"/"$archive".part-*
+            proof="$download/extracted/chronicle-sidechain-finality"
+            (cd "$proof" && sha256sum --quiet -c MANIFEST.sha256)
+            echo "[REMOTE MANIFEST PASS] files=$(wc -l < "$proof/MANIFEST.sha256")"
+            "$TOOL_BIN/verify-base-blob-kzg" "$proof/base/decoder/transactions" "$proof/base/decoder/blobs"
+            "$TOOL_BIN/batch-decoder" reassemble \
+              --in "$proof/base/decoder/transactions" --out "$download/fresh-channels" --l2-chain-id 8453
+            PYTHONPATH=scripts python3 scripts/verify_chronicle_base_derivation.py \
+              --evidence "$proof/base" --base-timeline "$proof/BASE-TIMELINE.json" \
+              --channels "$download/fresh-channels"
+            node scripts/verify_ethereum_beacon_ssz.mjs "$proof/beacon"
+          }
+          verify_release() {
+            local download="$1"
+            (cd "$download" && sha256sum -c RELEASE-ASSETS-SHA256.txt)
+            verify_bundle "$download"
+            test "$(jq -r '.pass' "$download/COLD-VERIFICATION.json")" = true
+            test "$(jq -r '.workflow_run_id' "$download/COLD-VERIFICATION.json")" = "$FAILED_RUN_ID"
+          }
+          fresh_verify() {
+            local label="$1"
+            local dir="$RUNNER_TEMP/$label"
+            rm -rf "$dir"
+            mkdir "$dir"
+            gh release download "$TARGET_TAG" --repo "$GITHUB_REPOSITORY" --dir "$dir"
+            verify_release "$dir"
+            rm -rf "$dir"
+            echo "[$label PASS]"
+          }
+
+          # Continue exactly where Run 18 stopped. These are the only two new
+          # assets; the existing 19 archive parts and five sidecars are reused.
+          gh release upload "$TARGET_TAG" COLD-VERIFICATION.json RELEASE-ASSETS-SHA256.txt \
+            --repo "$GITHUB_REPOSITORY" --clobber
+          echo "[COLD RECEIPT UPLOADED] continuing from failed Run 18 line"
+
+          fresh_verify draft-postupload-readback
+          fresh_verify draft-final-readback
+          gh release edit "$TARGET_TAG" --repo "$GITHUB_REPOSITORY" --draft=false
+          fresh_verify published-readback
+          echo "[FINALITY RELEASE PUBLISHED AND COLD-RECOVERED] tag=$TARGET_TAG"
