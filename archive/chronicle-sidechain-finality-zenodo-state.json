@@ -1,0 +1,15 @@
+{
+  "api_base": "https://zenodo.org/api",
+  "concept_doi": "10.5281/zenodo.22012615",
+  "deposition_id": 22710291,
+  "doi": "10.5281/zenodo.22710291",
+  "latest_version": "finality-v1-f64cc872b3b5",
+  "package_identity_sha256": "f56a107327ff8cf0475aa7238710d2fd551f8d762dcddc40d6ccebed1b158fec",
+  "readback_surface": "public-records-api",
+  "record_id": 22710291,
+  "remote_full_readback_sha256_verified": true,
+  "schema": "trinity-accord/chronicle-sidechain-zenodo-state/v1",
+  "source_commit_sha": "f64cc872b3b5cf70a891621615e2b56ede004a2d",
+  "source_release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+  "updated_at": "2026-09-11T23:21:33.636411Z"
+}
