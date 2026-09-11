@@ -1,0 +1,195 @@
+name: Chronicle Sidechain Finality Zenodo Preservation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/build_chronicle_sidechain_finality_zenodo_deposit.py"
+      - "archive/chronicle-sidechain-finality-zenodo-rights-approval.json"
+      - ".github/workflows/chronicle-sidechain-finality-zenodo-preservation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: main-write-lock
+  cancel-in-progress: false
+
+jobs:
+  preserve-finality:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+      ZENODO_API_BASE: ${{ vars.ZENODO_API_BASE || 'https://zenodo.org/api' }}
+      RIGHTS_ACK: TRINITY_SIDECHAIN_EVIDENCE_MIXED_RIGHTS_V1_APPROVED
+      ZENODO_UPLOAD_TIMEOUT_SECONDS: "3600"
+      ZENODO_DOWNLOAD_TIMEOUT_SECONDS: "3600"
+      ZENODO_UPLOAD_RETRIES: "3"
+      ZENODO_DOWNLOAD_RETRIES: "3"
+
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: main
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Verify publication authorization and publisher
+        run: |
+          set -euo pipefail
+          test -n "${ZENODO_ACCESS_TOKEN:-}"
+          python3 -m py_compile \
+            scripts/build_chronicle_sidechain_finality_zenodo_deposit.py \
+            scripts/publish_chronicle_sidechain_to_zenodo.py
+          python3 - <<'PY'
+          import json
+          p='archive/chronicle-sidechain-finality-zenodo-rights-approval.json'
+          r=json.load(open(p,encoding='utf-8'))
+          required={
+            'schema':'trinity-accord/chronicle-sidechain-finality-zenodo-rights-approval/v1',
+            'approval':'TRINITY_SIDECHAIN_EVIDENCE_MIXED_RIGHTS_V1_APPROVED',
+            'concept_doi':'10.5281/zenodo.22012615',
+            'publish_as_new_version':True,
+            'non_amending':True,
+            'status':'approved',
+          }
+          for k,v in required.items():
+              if r.get(k)!=v: raise SystemExit(f'Finality Zenodo authorization mismatch: {k}')
+          boundary=str(r.get('boundary') or '')
+          for phrase in (
+              'does not claim ownership of third-party material',
+              'does not relicense third-party material',
+              'does not alter Canon',
+          ):
+              if phrase not in boundary: raise SystemExit(f'Finality Zenodo boundary missing: {phrase}')
+          print('[FINALITY ZENODO AUTH PASS] concept=10.5281/zenodo.22012615')
+          PY
+
+      - name: Resolve exact published Finality Release
+        id: source
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/releases?per_page=100" > "$RUNNER_TEMP/releases.json"
+          python3 - <<'PY' > "$RUNNER_TEMP/source.env"
+          import json,re
+          rows=json.load(open(__import__('os').environ['RUNNER_TEMP']+'/releases.json'))
+          pat=re.compile(r'chronicle-sidechain-finality-v1-([0-9a-f]{12})$')
+          rows=[r for r in rows if not r.get('draft') and not r.get('prerelease') and pat.fullmatch(str(r.get('tag_name') or ''))]
+          if not rows: raise SystemExit('no published Chronicle sidechain Finality Release found')
+          rows.sort(key=lambda r:(r.get('published_at') or '', int(r.get('id') or 0)))
+          r=rows[-1]
+          print('SOURCE_TAG='+r['tag_name'])
+          print('RELEASE_ID='+str(r['id']))
+          PY
+          set -a
+          . "$RUNNER_TEMP/source.env"
+          set +a
+          git fetch origin "refs/tags/${SOURCE_TAG}:refs/tags/${SOURCE_TAG}" --force
+          SOURCE_SHA="$(git rev-list -n 1 "$SOURCE_TAG")"
+          short="${SOURCE_TAG##*-}"
+          test "${SOURCE_SHA:0:12}" = "$short"
+          echo "source_tag=$SOURCE_TAG" >> "$GITHUB_OUTPUT"
+          echo "source_sha=$SOURCE_SHA" >> "$GITHUB_OUTPUT"
+          echo "source_short=$short" >> "$GITHUB_OUTPUT"
+          echo "release_id=$RELEASE_ID" >> "$GITHUB_OUTPUT"
+          echo "[FINALITY SOURCE] tag=$SOURCE_TAG sha=$SOURCE_SHA release_id=$RELEASE_ID"
+
+      - name: Download and verify exact Finality Release assets
+        id: package
+        env:
+          SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
+          SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
+          SOURCE_SHORT: ${{ steps.source.outputs.source_short }}
+        run: |
+          set -euo pipefail
+          deposit=".sidechain-finality-zenodo-deposit/finality-v1-${SOURCE_SHORT}"
+          rm -rf "$deposit"
+          mkdir -p "$deposit"
+          echo "[FINALITY DOWNLOAD START] tag=$SOURCE_TAG $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          gh release download "$SOURCE_TAG" --repo "$GITHUB_REPOSITORY" --dir "$deposit"
+          echo "[FINALITY DOWNLOAD DONE] files=$(find "$deposit" -maxdepth 1 -type f | wc -l) bytes=$(du -sb "$deposit" | awk '{print $1}')"
+          python3 scripts/build_chronicle_sidechain_finality_zenodo_deposit.py \
+            --release-dir "$deposit" \
+            --source-tag "$SOURCE_TAG" \
+            --source-sha "$SOURCE_SHA" | tee "$RUNNER_TEMP/finality-zenodo-build.json"
+          (cd "$deposit" && sha256sum --quiet -c SHA256SUMS)
+          echo "deposit_dir=$deposit" >> "$GITHUB_OUTPUT"
+          echo "[FINALITY DOI PACKAGE PASS] files=$(find "$deposit" -maxdepth 1 -type f | wc -l) bytes=$(du -sb "$deposit" | awk '{print $1}')"
+
+      - name: Publish as new version in existing sidechain Concept DOI
+        id: publish
+        env:
+          DEPOSIT_DIR: ${{ steps.package.outputs.deposit_dir }}
+          SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
+        run: |
+          set -euo pipefail
+          python3 scripts/publish_chronicle_sidechain_to_zenodo.py \
+            --deposit-dir "$DEPOSIT_DIR" \
+            --state archive/chronicle-sidechain-finality-zenodo-state.json \
+            --api-base "$ZENODO_API_BASE" \
+            --rights-boundary-ack "$RIGHTS_ACK"
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          p='archive/chronicle-sidechain-finality-zenodo-state.json'
+          r=json.load(open(p,encoding='utf-8'))
+          if r.get('concept_doi')!='10.5281/zenodo.22012615':
+              raise SystemExit(f"Concept DOI mismatch: {r.get('concept_doi')}")
+          if r.get('source_release_tag')!=__import__('os').environ['SOURCE_TAG']:
+              raise SystemExit('Finality Zenodo source Release mismatch')
+          if r.get('remote_full_readback_sha256_verified') is not True:
+              raise SystemExit('Finality Zenodo full remote readback not verified')
+          if not str(r.get('latest_version') or '').startswith('finality-v1-'):
+              raise SystemExit('Finality Zenodo version marker missing')
+          print('doi='+str(r['doi']))
+          print('concept_doi='+str(r['concept_doi']))
+          print('record_id='+str(r['record_id']))
+          PY
+          echo "[FINALITY ZENODO PUBLISHED] doi=${{ steps.publish.outputs.doi }} concept=${{ steps.publish.outputs.concept_doi }}"
+
+      - name: Commit verified Finality DOI state
+        env:
+          DOI: ${{ steps.publish.outputs.doi }}
+        run: |
+          set -euo pipefail
+          test -s archive/chronicle-sidechain-finality-zenodo-state.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add archive/chronicle-sidechain-finality-zenodo-state.json
+          if git diff --cached --quiet; then
+            echo "[FINALITY DOI STATE] already current doi=$DOI"
+            exit 0
+          fi
+          git commit -m "archive: record sidechain finality DOI"
+          for attempt in 1 2 3 4 5; do
+            echo "[FINALITY DOI STATE PUSH] attempt=$attempt commit=$(git rev-parse HEAD)"
+            git fetch origin main --prune
+            if git rebase origin/main && git push origin HEAD:main; then
+              echo "[FINALITY DOI STATE PUSH PASS] doi=$DOI commit=$(git rev-parse HEAD)"
+              exit 0
+            fi
+            git rebase --abort || true
+            sleep $((attempt * 3))
+          done
+          echo "Finality Zenodo publication succeeded but DOI state could not be committed" >&2
+          exit 1
+
+      - name: Upload bounded publication diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sidechain-finality-zenodo-publication
+          path: |
+            ${{ runner.temp }}/finality-zenodo-build.json
+            .sidechain-finality-zenodo-deposit/finality-v1-${{ steps.source.outputs.source_short }}/DEBUG.jsonl
+            archive/chronicle-sidechain-finality-zenodo-state.json
+          retention-days: 365
+          if-no-files-found: warn
