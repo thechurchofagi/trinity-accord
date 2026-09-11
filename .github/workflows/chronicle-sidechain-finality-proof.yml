@@ -447,21 +447,21 @@ jobs:
           verify_bundle() {
             local download="$1"
             local expected actual
-            DOWNLOAD="$download" python3 - <<'PY'
-            import hashlib,json,os,pathlib
-            root=pathlib.Path(os.environ['DOWNLOAD'])
-            meta=json.loads((root/'RELEASE-ASSETS.json').read_text())
-            expected={item['name']:item for item in meta['parts']}
-            actual={path.name:path for path in root.glob(meta['archive_name']+'.part-*')}
-            if set(actual) != set(expected): raise SystemExit('release archive part inventory mismatch')
-            for name,path in actual.items():
-                digest=hashlib.sha256()
-                with path.open('rb') as handle:
-                    for chunk in iter(lambda:handle.read(1024*1024),b''): digest.update(chunk)
-                if path.stat().st_size != expected[name]['bytes'] or digest.hexdigest() != expected[name]['sha256']:
-                    raise SystemExit(f'release archive part mismatch: {name}')
-            print(f"[REMOTE PART INVENTORY PASS] parts={len(actual)} bytes={sum(p.stat().st_size for p in actual.values())}")
-            PY
+          DOWNLOAD="$download" python3 - <<'PY'
+          import hashlib,json,os,pathlib
+          root=pathlib.Path(os.environ['DOWNLOAD'])
+          meta=json.loads((root/'RELEASE-ASSETS.json').read_text())
+          expected={item['name']:item for item in meta['parts']}
+          actual={path.name:path for path in root.glob(meta['archive_name']+'.part-*')}
+          if set(actual) != set(expected): raise SystemExit('release archive part inventory mismatch')
+          for name,path in actual.items():
+              digest=hashlib.sha256()
+              with path.open('rb') as handle:
+                  for chunk in iter(lambda:handle.read(1024*1024),b''): digest.update(chunk)
+              if path.stat().st_size != expected[name]['bytes'] or digest.hexdigest() != expected[name]['sha256']:
+                  raise SystemExit(f'release archive part mismatch: {name}')
+          print(f"[REMOTE PART INVENTORY PASS] parts={len(actual)} bytes={sum(p.stat().st_size for p in actual.values())}")
+          PY
             expected="$(jq -r '.archive_sha256' "$download/RELEASE-ASSETS.json")"
             actual="$(cat "$download"/"$ARCHIVE".part-* | sha256sum | awk '{print $1}')"
             test "$actual" = "$expected"
