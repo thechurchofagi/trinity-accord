@@ -468,6 +468,10 @@ jobs:
             rm -rf "$download/extracted" "$download/fresh-channels"
             mkdir "$download/extracted"
             cat "$download"/"$ARCHIVE".part-* | zstd -d -c | tar --no-same-owner -xf - -C "$download/extracted"
+            # The remote parts have been inventory- and hash-verified above.
+            # Remove them before replaying the expanded decoder channels so
+            # cold recovery cannot exhaust the bounded runner disk.
+            rm -f "$download"/"$ARCHIVE".part-*
             proof="$download/extracted/chronicle-sidechain-finality"
             (cd "$proof" && sha256sum --quiet -c MANIFEST.sha256)
             echo "[REMOTE MANIFEST PASS] files=$(wc -l < "$proof/MANIFEST.sha256")"
@@ -538,9 +542,16 @@ jobs:
           ) > RELEASE-ASSETS-SHA256.txt
           sha256sum COLD-VERIFICATION.json >> RELEASE-ASSETS-SHA256.txt
           cp RELEASE-ASSETS-SHA256.txt "$RUNNER_TEMP/draft-readback/RELEASE-ASSETS-SHA256.txt"
-          verify_release "$RUNNER_TEMP/draft-readback"
+          # Publish the receipt first, then verify a fresh remote download.
+          # verify_bundle removes archive parts after extraction to bound disk
+          # use, so a second verification must not reuse that directory.
           gh release upload "$TAG" COLD-VERIFICATION.json RELEASE-ASSETS-SHA256.txt --repo "$GITHUB_REPOSITORY"
           rm -rf "$RUNNER_TEMP/draft-readback"
+          rm -rf "$RUNNER_TEMP/draft-postupload-readback"
+          mkdir "$RUNNER_TEMP/draft-postupload-readback"
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/draft-postupload-readback"
+          verify_release "$RUNNER_TEMP/draft-postupload-readback"
+          rm -rf "$RUNNER_TEMP/draft-postupload-readback"
           rm -rf "$RUNNER_TEMP/draft-final-readback"
           mkdir "$RUNNER_TEMP/draft-final-readback"
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/draft-final-readback"
