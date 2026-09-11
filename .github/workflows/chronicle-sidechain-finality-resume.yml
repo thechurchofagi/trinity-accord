@@ -1,0 +1,235 @@
+name: Chronicle Sidechain Finality Release Resume
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/chronicle-sidechain-finality-resume.yml"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing draft finality Release tag"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  statuses: write
+
+concurrency:
+  group: chronicle-sidechain-finality-proof
+  cancel-in-progress: false
+
+jobs:
+  finalize-existing-draft:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    env:
+      GH_TOKEN: ${{ github.token }}
+      FINALITY_ROOT: artifacts/chronicle-sidechain-finality
+      OPTIMISM_COMMIT: c6f39182c975db976aaaa01ef32884c41b1c9660
+      SUPERCHAIN_REGISTRY_COMMIT: 5b055be4d294ce43814a44c8839d89b2436dc8aa
+      TAG_INPUT: ${{ inputs.tag }}
+    steps:
+      - name: Checkout proof implementation
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: ".node-version"
+      - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5
+        with:
+          go-version: "1.25.1"
+          cache: false
+
+      - name: Install only finalization dependencies
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends jq zstd
+          python3 -m pip install -r requirements-ci.txt
+          npm ci
+          python3 -m py_compile             scripts/verify_chronicle_base_derivation.py             scripts/verify_ethereum_beacon_ssz.mjs
+          echo "[RESUME FRONTEND REUSED] no shard prefetch, Base capture, Beacon capture, or archive rebuild"
+
+      - name: Build pinned OP decoder and KZG verifier
+        run: |
+          set -euo pipefail
+          tools="$RUNNER_TEMP/finality-tools"
+          mkdir -p "$tools/bin"
+          git clone --filter=blob:none --no-checkout https://github.com/ethereum-optimism/optimism.git "$tools/optimism"
+          git -C "$tools/optimism" checkout "$OPTIMISM_COMMIT"
+          git -C "$tools/optimism" submodule update --init superchain-registry
+          git -C "$tools/optimism/superchain-registry" fetch origin "$SUPERCHAIN_REGISTRY_COMMIT"
+          git -C "$tools/optimism/superchain-registry" checkout "$SUPERCHAIN_REGISTRY_COMMIT"
+          python3 scripts/patch_pinned_op_superchain_compat.py "$tools/optimism"
+          cp scripts/yq_chain_id_compat.py "$tools/bin/yq"
+          chmod +x "$tools/bin/yq"
+          PATH="$tools/bin:$PATH" OP_CORE_SYNC_SUPERCHAIN=1             "$tools/optimism/op-core/superchain/sync-superchain.sh"
+          (
+            cd "$tools/optimism"
+            go build -trimpath -o "$tools/bin/batch-decoder" ./op-node/cmd/batch_decoder
+            cp "$GITHUB_WORKSPACE/scripts/verify_base_blob_kzg.go" verify_base_blob_kzg.go
+            go build -trimpath -o "$tools/bin/verify-base-blob-kzg" verify_base_blob_kzg.go
+          )
+          test "$(git -C "$tools/optimism" rev-parse HEAD)" = "$OPTIMISM_COMMIT"
+          test "$(git -C "$tools/optimism/superchain-registry" rev-parse HEAD)" = "$SUPERCHAIN_REGISTRY_COMMIT"
+          echo "TOOL_BIN=$tools/bin" >> "$GITHUB_ENV"
+
+      - name: Resolve exact existing draft Release
+        id: draft
+        run: |
+          set -euo pipefail
+          work="$RUNNER_TEMP/resume"
+          mkdir -p "$work"
+          gh release list --repo "$GITHUB_REPOSITORY" --limit 100             --json tagName,createdAt,isDraft,isPrerelease > "$work/releases.json"
+          TAG_INPUT="$TAG_INPUT" RELEASES="$work/releases.json" python3 - <<'PY' > "$work/tag.env"
+          import json, os, re
+          requested=os.environ.get("TAG_INPUT","").strip()
+          rows=json.load(open(os.environ["RELEASES"]))
+          if requested:
+              rows=[r for r in rows if r["tagName"]==requested]
+          else:
+              rows=[r for r in rows if r["isDraft"] and not r["isPrerelease"] and r["tagName"].startswith("chronicle-sidechain-finality-v1-")]
+              rows.sort(key=lambda r:r.get("createdAt") or "", reverse=True)
+              rows=rows[:1]
+          if len(rows)!=1:
+              raise SystemExit("exactly one existing draft finality Release is required")
+          row=rows[0]
+          if not row["isDraft"] or row["isPrerelease"]:
+              raise SystemExit("refusing to mutate a published/prerelease Release")
+          if not re.fullmatch(r"chronicle-sidechain-finality-v1-[0-9a-f]{12}", row["tagName"]):
+              raise SystemExit("unexpected finality Release tag")
+          print(f"TAG={row['tagName']}")
+          PY
+          cat "$work/tag.env" >> "$GITHUB_ENV"
+          . "$work/tag.env"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "[RESUME DRAFT] tag=$TAG"
+
+      - name: Download existing draft assets with bounded retry
+        run: |
+          set -euo pipefail
+          retry() {
+            local attempt rc
+            for attempt in 1 2 3 4 5; do
+              "$@" && return 0
+              rc=$?
+              echo "[RELEASE API RETRY] attempt=$attempt/5 rc=$rc command=$1"
+              sleep $((attempt * 5))
+            done
+            return "$rc"
+          }
+          rm -rf "$RUNNER_TEMP/draft-resume"
+          mkdir -p "$RUNNER_TEMP/draft-resume"
+          retry gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/draft-resume"
+          test -s "$RUNNER_TEMP/draft-resume/RELEASE-ASSETS.json"
+          echo "[RESUME ASSETS DOWNLOADED] files=$(find "$RUNNER_TEMP/draft-resume" -maxdepth 1 -type f | wc -l)"
+
+      - name: Verify and cold-replay existing draft
+        run: |
+          set -euo pipefail
+          download="$RUNNER_TEMP/draft-resume"
+          archive="$(jq -r '.archive_name' "$download/RELEASE-ASSETS.json")"
+          expected="$(jq -r '.archive_sha256' "$download/RELEASE-ASSETS.json")"
+          DOWNLOAD="$download" ARCHIVE="$archive" python3 - <<'PY'
+          import hashlib, json, os, pathlib
+          root=pathlib.Path(os.environ["DOWNLOAD"])
+          meta=json.loads((root/"RELEASE-ASSETS.json").read_text())
+          expected={p["name"]:p for p in meta["parts"]}
+          actual={p.name:p for p in root.glob(meta["archive_name"]+".part-*")}
+          if set(actual)!=set(expected):
+              raise SystemExit("resume archive part inventory mismatch")
+          for name,p in actual.items():
+              h=hashlib.sha256(p.read_bytes()).hexdigest()
+              if p.stat().st_size != expected[name]["bytes"] or h != expected[name]["sha256"]:
+                  raise SystemExit("resume archive part digest mismatch: "+name)
+          print(f"[RESUME PART INVENTORY PASS] parts={len(actual)} bytes={sum(p.stat().st_size for p in actual.values())}")
+          PY
+          actual="$(cat "$download/$archive".part-* | sha256sum | awk '{print $1}')"
+          test "$actual" = "$expected"
+          rm -rf "$download/extracted" "$download/fresh-channels"
+          mkdir "$download/extracted"
+          cat "$download/$archive".part-* | zstd -d -c | tar --no-same-owner -xf - -C "$download/extracted"
+          rm -f "$download/$archive".part-*
+          proof="$download/extracted/chronicle-sidechain-finality"
+          (cd "$proof" && sha256sum --quiet -c MANIFEST.sha256)
+          echo "[RESUME MANIFEST PASS] files=$(wc -l < "$proof/MANIFEST.sha256")"
+          "$TOOL_BIN/verify-base-blob-kzg" "$proof/base/decoder/transactions" "$proof/base/decoder/blobs"
+          "$TOOL_BIN/batch-decoder" reassemble             --in "$proof/base/decoder/transactions" --out "$download/fresh-channels" --l2-chain-id 8453
+          PYTHONPATH=scripts python3 scripts/verify_chronicle_base_derivation.py             --evidence "$proof/base" --base-timeline "$proof/BASE-TIMELINE.json"             --channels "$download/fresh-channels"
+          node scripts/verify_ethereum_beacon_ssz.mjs "$proof/beacon"
+          echo "[RESUME COLD REPLAY PASS] Base KZG, OP reassembly, Base derivation, Beacon SSZ"
+          cat > "$download/COLD-VERIFICATION.json" <<JSON
+          {
+            "schema": "trinity-accord/chronicle-sidechain-finality-cold-verification/v1",
+            "pass": true,
+            "verified_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "workflow_run_id": "$GITHUB_RUN_ID",
+            "checks": ["archive_sha256","internal_manifest","base_blob_kzg_versioned_hashes","official_op_channel_reassembly","base_exact_transaction_derivation","ethereum_l1_transaction_mpt_proofs","beacon_ssz_hash_tree_roots","beacon_execution_payload_bindings"]
+          }
+          JSON
+          cp "$download/COLD-VERIFICATION.json" .
+          (
+            cd "$download"
+            for path in *; do
+              if [[ -f "$path" && "$path" != "COLD-VERIFICATION.json" ]]; then
+                sha256sum "$path"
+              fi
+            done
+          ) > RELEASE-ASSETS-SHA256.txt
+          sha256sum COLD-VERIFICATION.json >> RELEASE-ASSETS-SHA256.txt
+          echo "[RESUME RECEIPT READY] $(wc -l < RELEASE-ASSETS-SHA256.txt) checksum rows"
+
+      - name: Upload receipt and verify fresh draft copy
+        run: |
+          set -euo pipefail
+          retry() {
+            local attempt rc
+            for attempt in 1 2 3 4 5; do
+              "$@" && return 0
+              rc=$?
+              echo "[RELEASE API RETRY] attempt=$attempt/5 rc=$rc command=$1"
+              sleep $((attempt * 5))
+            done
+            return "$rc"
+          }
+          retry gh release upload "$TAG" COLD-VERIFICATION.json --repo "$GITHUB_REPOSITORY" --clobber
+          retry gh release upload "$TAG" RELEASE-ASSETS-SHA256.txt --repo "$GITHUB_REPOSITORY" --clobber
+          rm -rf "$RUNNER_TEMP/draft-postupload"
+          mkdir -p "$RUNNER_TEMP/draft-postupload"
+          retry gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/draft-postupload"
+          (cd "$RUNNER_TEMP/draft-postupload" && sha256sum -c RELEASE-ASSETS-SHA256.txt)
+          echo "[RESUME RECEIPT UPLOAD PASS] fresh checksum readback"
+
+      - name: Publish and verify final Release
+        run: |
+          set -euo pipefail
+          retry() {
+            local attempt rc
+            for attempt in 1 2 3 4 5; do
+              "$@" && return 0
+              rc=$?
+              echo "[RELEASE API RETRY] attempt=$attempt/5 rc=$rc command=$1"
+              sleep $((attempt * 5))
+            done
+            return "$rc"
+          }
+          rm -rf "$RUNNER_TEMP/draft-final"
+          mkdir -p "$RUNNER_TEMP/draft-final"
+          retry gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/draft-final"
+          (cd "$RUNNER_TEMP/draft-final" && sha256sum -c RELEASE-ASSETS-SHA256.txt)
+          echo "[RESUME FINAL DRAFT CHECKSUM PASS]"
+          retry gh release edit "$TAG" --repo "$GITHUB_REPOSITORY" --draft=false
+          rm -rf "$RUNNER_TEMP/published-final"
+          mkdir -p "$RUNNER_TEMP/published-final"
+          retry gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/published-final"
+          (cd "$RUNNER_TEMP/published-final" && sha256sum -c RELEASE-ASSETS-SHA256.txt)
+          test "$(jq -r '.pass' "$RUNNER_TEMP/published-final/COLD-VERIFICATION.json")" = true
+          echo "[FINALITY RELEASE PUBLISHED AND COLD-RECOVERED] tag=$TAG"
