@@ -12,6 +12,7 @@ on:
     branches: [main]
     paths:
       - .github/harvard-epoch-ii-full-upload-authorized-v1
+      - .github/harvard-epoch-ii-full-upload-resume-v2
 
 permissions:
   actions: read
@@ -53,6 +54,8 @@ jobs:
           set -euo pipefail
           test "$(cat .github/harvard-epoch-ii-full-upload-authorized-v1)" = \
             "Harvard Preservation Epoch II full upload authorized: doi:10.7910/DVN/W9Y3IV dataset-id=14229992 files=419 candidate=cd0bd263f548d23060422021408ab1705e8c48c1c1028f1a440eb89d1e88d7e8"
+          test "$(cat .github/harvard-epoch-ii-full-upload-resume-v2)" = \
+            "Harvard Preservation Epoch II idempotent resume authorized after signed x-amz-tagging fix: doi:10.7910/DVN/W9Y3IV dataset-id=14229992"
           python3 -m unittest tests.test_upload_harvard_epoch_ii
 
   upload-repository-and-controls:
