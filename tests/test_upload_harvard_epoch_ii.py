@@ -77,6 +77,18 @@ class HarvardEpochIIUploadContractTests(unittest.TestCase):
         self.assertNotIn("x-amz-tagging", untagged)
         self.assertEqual(untagged["Content-Length"], "456")
 
+    def test_streaming_error_response_becomes_retryable_upload_error(self):
+        request = MODULE.httpx.Request("GET", "https://example.invalid/readback")
+        response = MODULE.httpx.Response(
+            503,
+            request=request,
+            stream=MODULE.httpx.ByteStream(b"temporarily unavailable"),
+        )
+        with self.assertRaises(MODULE.UploadError) as raised:
+            MODULE.require_status(response, (200,), "readback fixture")
+        self.assertIn("HTTP 503", str(raised.exception))
+        self.assertIn("temporarily unavailable", str(raised.exception))
+
 
 if __name__ == "__main__":
     unittest.main()
