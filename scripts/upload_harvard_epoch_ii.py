@@ -106,6 +106,22 @@ def request_retry(client: httpx.Client, method: str, url: str, *, label: str,
     raise UploadError(f"{label}: exhausted retries: {last}")
 
 
+def s3_upload_headers(url: str, content_length: int) -> dict[str, str]:
+    """Return exactly the headers covered by Harvard's S3 signature.
+
+    Harvard currently signs ``x-amz-tagging`` and the Dataverse direct-upload
+    contract requires ``dv-state=temp`` in that case.  Other installations can
+    disable tagging, so the header must be derived from SignedHeaders rather
+    than sent unconditionally.
+    """
+    query = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
+    signed = ";".join(query.get("X-Amz-SignedHeaders", query.get("x-amz-signedheaders", []))).lower()
+    result = {"Content-Length": str(content_length), "User-Agent": USER_AGENT}
+    if "x-amz-tagging" in signed.split(";"):
+        result["x-amz-tagging"] = "dv-state=temp"
+    return result
+
+
 def dataset_snapshot(client: httpx.Client, token: str) -> tuple[dict[str, Any], dict[str, Any]]:
     response = request_retry(
         client, "GET", f"{SERVER}/api/datasets/:persistentId/",
@@ -326,7 +342,7 @@ def direct_upload(client: httpx.Client, token: str, path: pathlib.Path, row: dic
                 try:
                     response = client.put(
                         str(data["url"]),
-                        headers={"Content-Length": str(size), "User-Agent": USER_AGENT},
+                        headers=s3_upload_headers(str(data["url"]), size),
                         content=body(),
                         timeout=900,
                     )
@@ -348,7 +364,7 @@ def direct_upload(client: httpx.Client, token: str, path: pathlib.Path, row: dic
                         raise UploadError(f"multipart source ended before part {number}")
                     response = request_retry(
                         client, "PUT", str(url), label=f"upload {row['filename']} part {number}", attempts=4,
-                        headers={"User-Agent": USER_AGENT}, content=chunk, timeout=900,
+                        headers=s3_upload_headers(str(url), len(chunk)), content=chunk, timeout=900,
                     )
                     require_status(response, range(200, 300), f"multipart part {number}")
                     etag = response.headers.get("ETag")
