@@ -207,7 +207,10 @@ jobs:
           print('unresolved_roots=' + ','.join(sorted(unresolved)))
           PY
           cat artifacts/chronicle-sidechain-scan/evidence-v2/HISTORICAL-PAYLOAD-COVERAGE.json
-          echo "[FORENSIC ONLY] exact=${{ steps.forensic.outputs.exact }}/257 unresolved=${{ steps.forensic.outputs.unresolved }} project_content_gap=0 project_completion_gate=false" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Summarize forensic-only status
+        run: |
+          echo "[FORENSIC ONLY] exact=${{ steps.forensic.outputs.exact }}/257 unresolved=${{ steps.forensic.outputs.unresolved }} project_content_gap=${{ steps.forensic.outputs.project_content_gap }} project_completion_gate=${{ steps.forensic.outputs.required_for_project_completeness }}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload recovery telemetry
         if: ${{ always() }}
