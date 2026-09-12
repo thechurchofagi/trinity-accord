@@ -63,6 +63,20 @@ class HarvardEpochIIUploadContractTests(unittest.TestCase):
         self.assertNotIn("returnToAuthor", source)
         self.assertNotIn("/destroy", source)
 
+    def test_s3_tagging_header_follows_signed_headers(self):
+        tagged = MODULE.s3_upload_headers(
+            "https://bucket.s3.amazonaws.com/object?X-Amz-SignedHeaders=host%3Bx-amz-tagging",
+            123,
+        )
+        self.assertEqual(tagged["Content-Length"], "123")
+        self.assertEqual(tagged["x-amz-tagging"], "dv-state=temp")
+        untagged = MODULE.s3_upload_headers(
+            "https://bucket.s3.amazonaws.com/object?X-Amz-SignedHeaders=host",
+            456,
+        )
+        self.assertNotIn("x-amz-tagging", untagged)
+        self.assertEqual(untagged["Content-Length"], "456")
+
 
 if __name__ == "__main__":
     unittest.main()
