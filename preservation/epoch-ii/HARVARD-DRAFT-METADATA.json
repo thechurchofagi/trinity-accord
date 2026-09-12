@@ -1,0 +1,91 @@
+{
+  "schema": "trinityaccord.harvard-preservation-epoch-ii-draft-metadata.v1",
+  "status": "preview_only_not_created_in_harvard",
+  "title": "Trinity Accord — Research Corpus and Preservation Mirror · Preservation Epoch II",
+  "authors": [
+    {
+      "authorName": "Liu, Hongju"
+    }
+  ],
+  "subjects": [
+    "Arts and Humanities",
+    "Computer and Information Science",
+    "Social Sciences"
+  ],
+  "keywords": [
+    "Trinity Accord",
+    "human-AI collaboration",
+    "digital preservation",
+    "digital art",
+    "Bitcoin inscriptions",
+    "physical anchor",
+    "cryptographic provenance",
+    "computationally delayed access",
+    "Polygon",
+    "Base",
+    "reproducible research"
+  ],
+  "description_source": "preservation/epoch-ii/HARVARD-DATASET-DESCRIPTION.md",
+  "producer": "Trinity Accord project",
+  "production_date": "2026-09-12",
+  "language": [
+    "English",
+    "Chinese"
+  ],
+  "depositor": "Hongju Liu",
+  "deposit_date": null,
+  "related_material": [
+    "https://www.trinityaccord.org",
+    "https://github.com/thechurchofagi/trinity-accord",
+    "https://doi.org/10.7910/DVN/YUCG12",
+    "https://doi.org/10.5281/zenodo.22710291",
+    "https://doi.org/10.5281/zenodo.22169173",
+    "https://doi.org/10.5281/zenodo.22159955",
+    "https://doi.org/10.5281/zenodo.22170072"
+  ],
+  "license": {
+    "mode": "Custom Dataset Terms",
+    "terms_of_use_file": "preservation/epoch-ii/HARVARD-TERMS-OF-USE.txt",
+    "terms_of_use_sha256": "881ee6b94f3fddaa53d66bcd5c64d6510a6fdf9ce0a7d61bca0ba72555dd361c",
+    "terms_of_use_empty": false,
+    "component_specific_rights_preserved": true,
+    "third_party_material_relicensed": false
+  },
+  "access": {
+    "all_deposited_files_public": true,
+    "restricted_files_planned": 0,
+    "owner_asserted_privacy_exclusions": 0,
+    "computationally_delayed_witness_plaintext_deposited": false,
+    "computationally_delayed_witness_ciphertext_complete": true
+  },
+  "publication_controls": {
+    "old_harvard_doi": "10.7910/DVN/YUCG12",
+    "old_doi_mutation_allowed": false,
+    "old_doi_v1_1_allowed": false,
+    "new_dataset_required": true,
+    "authenticated_remaining_quota_check_required_before_upload": true,
+    "automatic_submission_allowed": false,
+    "automatic_resubmission_allowed": false,
+    "in_review_mutation_allowed": false,
+    "curator_direct_publication_after_approval": true,
+    "anonymous_postpublication_readback_required": true
+  },
+  "authority": {
+    "canonical_core": "three Bitcoin Originals only",
+    "harvard_role": "non-amending institutional preservation mirror",
+    "harvard_endorsement_claimed": false,
+    "peer_review_claimed": false
+  },
+  "ai_disclosure_file": "preservation/epoch-ii/AI-DISCLOSURE.md",
+  "publication_controls": {
+    "old_doi": "10.7910/DVN/YUCG12",
+    "old_doi_mutation_allowed": false,
+    "epoch_ii_requires_separate_dataset_and_doi": true,
+    "preview_may_write_harvard": false,
+    "automatic_submission_allowed": false,
+    "automatic_resubmission_allowed": false,
+    "in_review_mutation_allowed": false,
+    "curator_direct_publication_after_approval": true,
+    "postpublication_anonymous_full_readback_required": true
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "trinityaccord.epoch-ii-historical-recovery-search.v1",
+  "search_date_utc": "2026-09-12",
+  "target_scope": {
+    "publication_authorized_historical_rows": 139,
+    "distinct_sha256_and_size_identities": 122,
+    "logical_bytes_including_duplicate_commitments": 6209473955,
+    "canonical_rows_sha256": "408179cdde0f4c8d397244674a5818bf745a9ed7b98b8a81914f8fb8a9b17945"
+  },
+  "searches": [
+    {
+      "source": "Preservation Epoch II selected public content candidate",
+      "selected_unique_bytes_verified": 4931812359,
+      "archive_members_safely_scanned": 4257,
+      "exact_sha256_and_size_matches": 0
+    },
+    {
+      "source": "released Harvard Preservation Epoch I archive doi:10.7910/DVN/YUCG12",
+      "outer_archive_bytes": 1951603950,
+      "outer_archive_sha256": "9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2",
+      "archive_members_safely_scanned": 9273,
+      "scan_errors": 0,
+      "exact_sha256_and_size_matches": 0,
+      "full_scan_report_sha256": "634f7282597a626bcc61c2d38efc77e1310b2d8fcb6d4a3c5b3e9b9bd00258f0"
+    },
+    {
+      "source": "all 42 superseded public museum presentation archives",
+      "archive_assets": 42,
+      "archive_logical_bytes": 3804934586,
+      "archive_members_safely_scanned": 8418,
+      "members_with_a_target_byte_count": 0,
+      "exact_sha256_and_size_matches": 0,
+      "full_scan_report_sha256": "deb01aad00d412bb74f35663b277cfc8e0aa86a6a7ca4465c572474f141e2c8a"
+    }
+  ],
+  "result": {
+    "exact_recovered_identities": 0,
+    "currently_uploadable_payloads_from_target_scope": 0,
+    "commitment_only_identities": 122,
+    "commitment_only_rows": 139,
+    "substitute_bytes_permitted": false,
+    "privacy_scope_decision_pending": false,
+    "historical_exact_byte_inventory_complete": false,
+    "selected_epoch_ii_project_content_gap": 0
+  },
+  "interpretation": "The searches establish that the known public sources do not contain the 122 exact committed identities. They do not prove that no private or offline copy exists. Paths, sizes and hashes remain preserved as commitments; later exact recovery belongs to a later candidate or epoch."
+}

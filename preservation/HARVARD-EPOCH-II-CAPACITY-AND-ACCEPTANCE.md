@@ -12,18 +12,19 @@ and store up to 1 TB. The 26-file Polygon/Base Finality set totals 17,551,241,82
 bytes; its largest file is 943,718,400 bytes. No Finality file needs to be transformed
 or split further to meet that limit.
 
-The verified public research-content selection is 4,931,812,359 unique bytes. With
-the approximately 0.52 GB source/review capsule and small documentation files, the
-new Dataset is expected to be approximately 23 GB before any content-addressed
-deduplication adjustment. Together with the old approximately 1.95 GB Harvard v1.0
-Dataset, the known project total is approximately 25 GB, far below 1 TB. The actual
-remaining account quota must still be read from the authenticated account before
-upload.
+The verified public research-content selection is 4,931,812,359 unique bytes. The
+concrete researcher-readable and recovery layout is approximately 23.11 GB and about
+420 files, including the approximately 0.52 GB source/review capsule, all 26 Finality
+files and all 48 computationally delayed witness files. Together with the old
+approximately 1.95 GB Harvard v1.0 Dataset, the known project total is approximately
+25.1 GB, far below 1 TB. The exact manifest is regenerated from the final fixed
+commit. The actual remaining account quota must still be read from the authenticated
+account before upload.
 
 The fee-based Large Data service is aimed at collections over 2.5 TB, very large
 file counts and special storage/access requirements. Epoch II has neither condition.
-Its roughly two hundred planned files also remain far below the examples of tens of
-thousands or millions of files used by Harvard to describe Large Data cases.
+Its roughly 420 planned files also remain far below the examples of tens of thousands
+or millions of files used by Harvard to describe Large Data cases.
 
 ## Acceptance fit
 
@@ -43,6 +44,12 @@ cross-chain evidence dataset. They support independent recovery and verification
 published observations. Their inclusion supplies a real second-institution copy;
 links to GitHub or Zenodo alone do not.
 
+The three computationally delayed witness archives are also deposit-ready research
+data: 48 public files totalling 2,798,199,225 bytes. Their ciphertext, recovery code,
+format documentation, checksums, attack-cost benchmarks and verification/destruction
+receipts are the complete current public object. The intentionally absent plaintext
+is not a missing Dataset file.
+
 ## Conditions that remain mandatory
 
 - The depositor must have authority to license every deposited byte for Harvard's
@@ -50,12 +57,15 @@ links to GitHub or Zenodo alone do not.
 - License, Custom Terms and Terms of Use must be complete and mutually consistent.
 - The AI-assistance disclosure and the human depositor's responsibility must be
   explicit.
-- Confidential flaw-challenge data, private physical originals, witness plaintext,
-  unlock material and personal or sensitive information must remain outside the
-  public Dataset.
-- The 23 currently unresolved public historical commitments require a human scope
-  decision. A commitment can be preserved without claiming recovery of unavailable
-  legacy bytes.
+- The 2026-09-12 owner decision authorizes public access to recoverable project
+  materials, including historically nonpublic-labelled physical-anchor originals.
+  There is no owner-asserted privacy exclusion. Component and third-party rights
+  remain controlling, and live credentials or third-party secrets are not research
+  payloads.
+- The former scope blocker is resolved: the 23 unresolved public commitments and 116
+  historically nonpublic-labelled commitments may be published if their exact bytes
+  are recovered. They remain commitment-only today; their absence cannot be hidden
+  or represented by substitute files.
 - The three Bitcoin Originals remain the only Canon; Harvard is a non-amending
   institutional preservation mirror.
 - The old DOI `10.7910/DVN/YUCG12` and its released v1.0 files remain unchanged. Epoch
@@ -71,8 +81,9 @@ links to GitHub or Zenodo alone do not.
 Technical fit does not guarantee curator acceptance. Harvard reserves discretion
 under its Terms, and the present account's unused quota is not visible to this
 read-only audit. The remaining acceptance risk is documentary and legal rather than
-capacity-related: clear research-data framing, complete metadata and terms, rights to
-redistribute every selected object, and exclusion of confidential or personal data.
+capacity-related: clear research-data framing, complete metadata and terms, and
+rights-compatible handling of every selected object. The owner's public-access scope
+decision is complete, but it does not create rights in third-party material.
 
 ## Official sources
 

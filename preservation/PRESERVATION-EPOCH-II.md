@@ -46,6 +46,12 @@ scope fields are proposed selection categories; inclusion in the census does not
 automatically select every wrapper for another large backup. Public encrypted
 archives authorize preservation of ciphertext and existing public metadata only.
 
+The content-candidate stage now verifies the exact three-archive delayed-access set:
+48 public files, 2,798,199,225 logical bytes and 45 unique SHA-256 objects. It checks
+each Release inventory against its published Zenodo state and verified public
+readback. Plaintext and unlock material remain intentionally absent so future
+computation, rather than present disclosure, controls access.
+
 The exact source snapshot must eventually accompany the reviewable README, source
 package, review guide, `CITATION.cff`, dependency files, Git tree, provenance manifest
 and SHA-256. Use the established safe source capsule, preserving executable modes;
@@ -70,6 +76,13 @@ Ticket 423683. This implementation did not retrieve that email thread independen
 No new license is granted by this inventory. A future institutional-submission gate
 must inspect completed review components, rights and live Dataset state. It is not
 implemented as an automatic publisher here.
+
+The Epoch II Harvard preview materials are under `preservation/epoch-ii/`. The layout
+builder `scripts/build_harvard_epoch_ii_layout.py` produces the exact
+`DATASET-MANIFEST.json` and `SHA256SUMS` plan without making any Harvard API call.
+It requires the scope-resolution report, complete delayed-access report, all 26
+Polygon/Base Finality files in the dependency manifest, and a cold-restored source
+capsule.
 
 ## Completion boundaries
 

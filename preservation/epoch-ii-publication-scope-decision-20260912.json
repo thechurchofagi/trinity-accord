@@ -1,0 +1,43 @@
+{
+  "schema": "trinityaccord.epoch-ii-publication-scope-decision.v1",
+  "recorded_at_utc": "2026-09-12T00:00:00Z",
+  "decision_maker_role": "human_initiator_and_guardian",
+  "decision_source": "owner instruction recorded in the 2026-09-12 Preservation Epoch II working session",
+  "decision_source_text_zh": "如果是有材料的，都可以公开，知道吧？没有什么隐私的问题。",
+  "decision": {
+    "public_access_authorized": true,
+    "scope": "all recoverable Trinity Accord project materials controlled by the depositor, including items whose historical paths contain 未公开 or 不公开",
+    "privacy_exclusion_claimed": false,
+    "historical_path_labels_are_current_publication_vetoes": false,
+    "unrecovered_commitments_are_uploadable_payloads": false,
+    "exact_byte_recovery_rule": "A historical object is recovered only when both its SHA-256 and byte count match the recorded commitment.",
+    "substitution_rule": "A same-named, visually similar or semantically related file must not be substituted for unavailable committed bytes.",
+    "third_party_rights_rule": "Public-access authorization does not relicense third-party material or waive attribution and component-specific rights.",
+    "credential_rule": "Still-valid credentials, access tokens and third-party secrets are security material rather than research payload and must not be published.",
+    "computationally_delayed_witness_rule": "For the three encrypted witness archives, the presently public research object is the complete ciphertext and its recovery, integrity, verification, benchmark and destruction-receipt metadata. Plaintext and unlock material are intentionally absent so future computational recovery can disclose the content; this is a protocol design rather than a privacy-review blocker.",
+    "immutability_rule": "A later recovery creates a later preservation candidate or epoch; it never amends an already published frozen epoch."
+  },
+  "bound_historical_rows": {
+    "source_schema": "trinityaccord.epoch-ii-historical-digest-expansion.v1",
+    "historical_nonpublic_label_rows": 116,
+    "previously_unresolved_public_rows": 23,
+    "combined_rows": 139,
+    "distinct_sha256_and_size_identities": 122,
+    "logical_bytes_including_duplicate_commitments": 6209473955,
+    "canonical_rows_sha256": "408179cdde0f4c8d397244674a5818bf745a9ed7b98b8a81914f8fb8a9b17945",
+    "canonicalization": "Sort objects containing declared_sha256, historical_path and integer size_bytes by those three fields; serialize UTF-8 JSON with ensure_ascii=false, sort_keys=true and separators=(',', ':')."
+  },
+  "scope_result": {
+    "human_scope_decision_complete": true,
+    "public_if_exact_bytes_are_recovered_rows": 139,
+    "privacy_excluded_rows": 0,
+    "currently_uploadable_rows_from_this_set": 0,
+    "currently_commitment_only_rows": 139,
+    "project_content_gap_created_by_unavailable_legacy_wrappers": 0,
+    "historical_exact_byte_inventory_complete": false,
+    "encrypted_delayed_access_archives": 3,
+    "encrypted_delayed_access_public_files": 48,
+    "encrypted_delayed_access_public_bytes": 2798199225,
+    "encrypted_delayed_access_plaintext_currently_required": false
+  }
+}
