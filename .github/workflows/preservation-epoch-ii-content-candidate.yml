@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - preservation/epoch-ii-content-verification
+      - preservation/epoch-ii-complete-finality-copy
 
 permissions:
   contents: read
@@ -48,6 +48,15 @@ jobs:
             --output-dir "$RUNNER_TEMP/epoch-ii-content-candidate" \
             --download --workers 6
 
+      - name: Stream-verify every Polygon/Base Finality file
+        run: |
+          set -euo pipefail
+          python3 scripts/verify_epoch_ii_finality_dependency.py \
+            --repository-root . \
+            --inventory-dir "$RUNNER_TEMP/epoch-ii-inventory" \
+            --work-dir "$RUNNER_TEMP/epoch-ii-finality-stream" \
+            --report "$RUNNER_TEMP/epoch-ii-finality-full-byte-verification.json"
+
       - name: Independent bounded-disk cold recovery
         run: |
           set -euo pipefail
@@ -67,6 +76,7 @@ jobs:
           root=pathlib.Path(os.environ['RUNNER_TEMP'])
           candidate=json.loads((root/'epoch-ii-content-candidate/CONTENT-CANDIDATE.json').read_text())
           cold=json.loads((root/'epoch-ii-content-cold-verification.json').read_text())
+          finality=json.loads((root/'epoch-ii-finality-full-byte-verification.json').read_text())
           summary=pathlib.Path(os.environ['GITHUB_STEP_SUMMARY'])
           summary.write_text(
               '# Preservation Epoch II content candidate\n\n'
@@ -75,6 +85,7 @@ jobs:
               f"- Unique public bytes re-read and SHA-256 verified: **{candidate['selected_unique_bytes_verified']}**\n"
               f"- NFT CARs: **{cold['nft_cars_verified']}/434 PASS**\n"
               f"- Physical public files: **{cold['physical_public_files_verified']}/153 PASS**\n"
+              f"- Polygon/Base Finality public files: **{finality['logical_assets']} files / {finality['unique_bytes_verified']} bytes PASS**\n"
               f"- Independent bounded-disk cold recovery: **{cold['result'].upper()}**\n"
               '- Harvard mutation/submission/resubmission: **NONE**\n',
               encoding='utf-8')
@@ -87,6 +98,7 @@ jobs:
           path: |
             ${{ runner.temp }}/epoch-ii-content-candidate
             ${{ runner.temp }}/epoch-ii-content-cold-verification.json
+            ${{ runner.temp }}/epoch-ii-finality-full-byte-verification.json
           compression-level: 9
           retention-days: 90
           if-no-files-found: error
