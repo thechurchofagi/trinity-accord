@@ -1,0 +1,92 @@
+name: Preservation Epoch II Content Candidate
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - preservation/epoch-ii-content-verification
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preservation-epoch-ii-content-candidate-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-cold-verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Run inventory capture once
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 scripts/audit_preservation_epoch_ii.py \
+            --repository-root . \
+            --output-dir "$RUNNER_TEMP/epoch-ii-inventory" \
+            --capture-dir "$RUNNER_TEMP/epoch-ii-api-capture"
+
+      - name: Download and verify selected public content
+        run: |
+          set -euo pipefail
+          python3 scripts/build_epoch_ii_content_candidate.py \
+            --repository-root . \
+            --inventory-dir "$RUNNER_TEMP/epoch-ii-inventory" \
+            --object-store "$RUNNER_TEMP/epoch-ii-object-store" \
+            --output-dir "$RUNNER_TEMP/epoch-ii-content-candidate" \
+            --download --workers 6
+
+      - name: Independent bounded-disk cold recovery
+        run: |
+          set -euo pipefail
+          python3 scripts/verify_epoch_ii_content_candidate.py \
+            --candidate-dir "$RUNNER_TEMP/epoch-ii-content-candidate" \
+            --object-store "$RUNNER_TEMP/epoch-ii-object-store" \
+            --report "$RUNNER_TEMP/epoch-ii-content-cold-verification.json"
+
+      - name: Run content-candidate boundary tests
+        run: python3 -m unittest tests.test_epoch_ii_content_candidate tests.test_preservation_epoch_ii_audit
+
+      - name: Emit review summary
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, pathlib
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])
+          candidate=json.loads((root/'epoch-ii-content-candidate/CONTENT-CANDIDATE.json').read_text())
+          cold=json.loads((root/'epoch-ii-content-cold-verification.json').read_text())
+          summary=pathlib.Path(os.environ['GITHUB_STEP_SUMMARY'])
+          summary.write_text(
+              '# Preservation Epoch II content candidate\n\n'
+              f"- Source commit: `{candidate['source_git_commit_sha']}`\n"
+              f"- Selected logical Release assets: **{candidate['selected_logical_assets']}**\n"
+              f"- Unique public bytes re-read and SHA-256 verified: **{candidate['selected_unique_bytes_verified']}**\n"
+              f"- NFT CARs: **{cold['nft_cars_verified']}/434 PASS**\n"
+              f"- Physical public files: **{cold['physical_public_files_verified']}/153 PASS**\n"
+              f"- Independent bounded-disk cold recovery: **{cold['result'].upper()}**\n"
+              '- Harvard mutation/submission/resubmission: **NONE**\n',
+              encoding='utf-8')
+          PY
+
+      - name: Upload compact candidate and cold-recovery receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Preservation-Epoch-II-Content-Candidate-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/epoch-ii-content-candidate
+            ${{ runner.temp }}/epoch-ii-content-cold-verification.json
+          compression-level: 9
+          retention-days: 90
+          if-no-files-found: error

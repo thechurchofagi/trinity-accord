@@ -13,10 +13,13 @@
  *   8. Report includes verification_scope, does_not_prove, limitations
  *
  * Usage:
- *   GITHUB_TOKEN=xxx node scripts/verify-release-assets.mjs \
+ *   node scripts/verify-release-assets.mjs \
  *     --release-tag compatible-manifest-bearing-release \
  *     [--cid-check] \
  *     [--concurrency 8]
+ *
+ * GITHUB_TOKEN is optional for public repositories and recommended to avoid
+ * anonymous GitHub API rate limits. It remains required for private assets.
  */
 
 import fs from 'fs';
@@ -342,7 +345,9 @@ function extractCarRootCid(carData) {
 // ─── GitHub helpers ────────────────────────────────────────────────────────
 
 function ghHeaders(extra = {}) {
-  return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
+  const headers = { Accept: 'application/vnd.github+json', ...extra };
+  if (GITHUB_TOKEN) headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
+  return headers;
 }
 
 async function getReleaseByTag(tag) {
@@ -417,7 +422,6 @@ async function main() {
   const concurrencyArg = args.includes('--concurrency') ? Number(args[args.indexOf('--concurrency') + 1]) : null;
   const concurrency = concurrencyArg || VERIFY_CONCURRENCY;
 
-  if (!GITHUB_TOKEN) { err('❌ GITHUB_TOKEN required'); process.exit(1); }
   if (!releaseTag) {
     err('❌ --release-tag is required and must name a compatible manifest-bearing Release.');
     process.exit(1);
@@ -428,6 +432,7 @@ async function main() {
   log('═══════════════════════════════════════════════════════════');
   log(`  Repo       : ${REPO}`);
   log(`  Release    : ${releaseTag}`);
+  log(`  API auth   : ${GITHUB_TOKEN ? 'token' : 'anonymous public read'}`);
   log(`  CID check  : ${cidCheck ? 'enabled (metadata=strict, media=audit)' : 'disabled'}`);
   log(`  Concurrency: ${concurrency}`);
   log(`  Max asset  : ${(MAX_RELEASE_ASSET_BYTES / 1024 / 1024).toFixed(0)}MB`);
@@ -776,7 +781,7 @@ function computeStatus({ errors, sha256Pass, sizePass, carFilesExpected, assetsV
 const isMain = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
 
 if (isMain) {
-  main().catch(e => { err('Fatal:', e); process.exit(1); });
+  main().catch(e => { err(`Fatal: ${e?.stack || e}`); process.exit(1); });
 }
 
 export {
