@@ -1,0 +1,337 @@
+{
+  "schema": "trinityaccord.preservation-epoch-ii-content-candidate.v1",
+  "generated_at_utc": "2026-09-12T13:58:07.849852Z",
+  "source_git_commit_sha": "3bdf9121fb9e98cd9ba9de62a2466367d0968e4e",
+  "authority": "three Bitcoin Originals only",
+  "role": "non_amending_research_corpus_content_verification_candidate",
+  "selected_payload_scope": {
+    "encrypted_witness_ciphertext": {
+      "logical_assets": 48,
+      "logical_bytes": 2798199225,
+      "unique_objects": 45,
+      "unique_bytes": 2798181355
+    },
+    "evidence_or_content": {
+      "logical_assets": 97,
+      "logical_bytes": 1991767445,
+      "unique_objects": 93,
+      "unique_bytes": 1897193364
+    },
+    "presentation_current": {
+      "logical_assets": 3,
+      "logical_bytes": 233495269,
+      "unique_objects": 3,
+      "unique_bytes": 233495269
+    },
+    "research_context": {
+      "logical_assets": 16,
+      "logical_bytes": 263618,
+      "unique_objects": 8,
+      "unique_bytes": 131809
+    },
+    "sidechain_finality": {
+      "logical_assets": 7,
+      "logical_bytes": 2810562,
+      "unique_objects": 7,
+      "unique_bytes": 2810562
+    }
+  },
+  "selected_logical_assets": 171,
+  "selected_unique_objects": 156,
+  "selected_unique_bytes_verified": 4931812359,
+  "selected_objects_sha256_and_size_verified": true,
+  "archive_members_safely_enumerated": 4257,
+  "nft_car_verification": {
+    "status": "pass",
+    "expected_cars": 434,
+    "verified_cars": 434,
+    "metadata_cid_pass": 175,
+    "media_cid_pass": 0,
+    "media_cid_audit_warning_count": 259
+  },
+  "physical_payload_crosscheck": {
+    "status": "pass",
+    "public_files": 153,
+    "verified_from_selected_archives_or_prior_capture": 153,
+    "unmatched": 0
+  },
+  "historical_digest_expansion": {
+    "historical_nonpublic_label_commitment": 116,
+    "historical_operational_tool_commitment": 27,
+    "historical_witness_plaintext_or_archive_commitment_public_ciphertext_preserved": 17,
+    "legacy_parent_car_commitment_current_leaf_cars_verified": 164,
+    "public_asset_locator_only": 4,
+    "public_historical_commitment_unresolved": 23,
+    "selected_archive_member_bytes_match": 527,
+    "source_bytes_match": 6
+  },
+  "historical_publication_scope": {
+    "status": "pass",
+    "human_scope_decision_complete": true,
+    "public_if_exact_bytes_are_recovered_rows": 139,
+    "distinct_commitment_identities": 122,
+    "currently_uploadable_rows": 0,
+    "commitment_only_exact_bytes_not_recovered_rows": 139,
+    "privacy_excluded_rows": 0,
+    "unresolved_scope_decisions": 0,
+    "exact_byte_inventory_complete": false,
+    "project_content_gap_created_by_unavailable_legacy_wrappers": 0
+  },
+  "encrypted_delayed_access_witnesses": {
+    "status": "pass",
+    "role": "public_ciphertext_computationally_delayed_access_evidence",
+    "plaintext_public_now": false,
+    "unlock_material_public_now": false,
+    "future_computational_decryption_intended": true,
+    "archive_count": 3,
+    "logical_files": 48,
+    "logical_bytes": 2798199225,
+    "unique_sha256_objects": 45
+  },
+  "source_capsule_cold_restore": {
+    "schema": "trinityaccord.repository-preservation-recovery-report.v1",
+    "result": "pass",
+    "repository_recovery_status": "full_exact_publication_baseline",
+    "authority_level_recovery_status": "not_claimed",
+    "capsule_id": "repository-3bdf9121fb9e",
+    "package_identity_sha256": "b7705c884f4a7cae1f8e307a0bfe92945c7b66d55bc1edd5c532ff570ee437cc",
+    "source": "/tmp/epoch-ii-candidate-3bdf912-YFzI6E/source-capsule",
+    "source_git_commit_sha": "3bdf9121fb9e98cd9ba9de62a2466367d0968e4e",
+    "recovery_git_commit_sha": "cbc7cf3510fa1da4bfeb4c48aaf6642842e3f5b3",
+    "git_tree_oid": "4474b90825253c41bf2e4159c76fde4b4f07b241",
+    "tracked_file_count": 6423,
+    "git_snapshot_bundle_verified": true,
+    "production_parent_history_embedded": false,
+    "production_tags_embedded": false,
+    "production_tag_identity_count": 0,
+    "git_ref_count_verified": 1,
+    "git_tag_count_verified": 0,
+    "source_snapshot_independently_verified": true,
+    "recovery_checkpoints_verified": 9,
+    "github_required": false,
+    "network_required_after_capsule_download": false,
+    "external_large_binary_annex_embedded": false,
+    "limitations": [
+      "The capsule restores every byte and executable mode in the exact immutable Git-tracked publication baseline named by its manifest.",
+      "Production parent history and tag objects are excluded from the public bundle to avoid republishing historical credentials; original commit and tag identities remain in the manifest.",
+      "Large external Release/Arweave/NFT payloads are referenced by verified manifests but are not embedded in this core repository capsule.",
+      "Repository recovery does not itself prove authority, attestation, governance, amendment, or successor reception."
+    ],
+    "boundary": {
+      "bitcoin_originals_prevail": true,
+      "recovery_does_not_amend_canonical_material": true,
+      "capsule_is_a_non_authoritative_mirror": true,
+      "live_main_equivalence_claimed": false
+    }
+  },
+  "distributed_dependencies": {
+    "sidechain_finality_large_payload": {
+      "role": "noncanonical_polygon_base_finality_dependency",
+      "institutional_copy_requirement": "copy_every_public_file_byte_for_byte",
+      "logical_assets": 26,
+      "logical_bytes": 17551241826,
+      "unique_objects": 26,
+      "unique_bytes": 17551241826,
+      "release_tags": [
+        "chronicle-sidechain-finality-v1-f64cc872b3b5"
+      ],
+      "zenodo_version_doi": "10.5281/zenodo.22710291",
+      "files": [
+        {
+          "filename": "BASE-OP-STACK-DERIVATION.json",
+          "bytes": 2459127,
+          "sha256": "a409b43c4efa54050b3ef9f69ad7490132fef07f61dcded64e3bc447cc0ab8e9",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/BASE-OP-STACK-DERIVATION.json"
+        },
+        {
+          "filename": "COLD-VERIFICATION.json",
+          "bytes": 482,
+          "sha256": "96510be2d9820191906e0bc1d549bf0743fad0c287a9b9dca55297f8b67a6fbf",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/COLD-VERIFICATION.json"
+        },
+        {
+          "filename": "ETHEREUM-BEACON-FINALITY.json",
+          "bytes": 342044,
+          "sha256": "66a72aeb6f82789b13dd2b9d8cf2546af76035e2fede87eac5905af025e2e9bf",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/ETHEREUM-BEACON-FINALITY.json"
+        },
+        {
+          "filename": "RELEASE-ASSETS-SHA256.txt",
+          "bytes": 544,
+          "sha256": "7269bcad1f5e23f990a4f6045c00eecc9f1bbe15659036f1555986ff77da6321",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/RELEASE-ASSETS-SHA256.txt"
+        },
+        {
+          "filename": "RELEASE-ASSETS.json",
+          "bytes": 4125,
+          "sha256": "bf2ef8f525685d73354bfa9ebe3020a3829484c72c297d069a7d6ab3a1df2064",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/RELEASE-ASSETS.json"
+        },
+        {
+          "filename": "SOURCE-BINDING.json",
+          "bytes": 1485,
+          "sha256": "e7c8ed46db7160967fb2564b0377cff868cb8f8357e9298887c3024223970d45",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/SOURCE-BINDING.json"
+        },
+        {
+          "filename": "STRICT-VERIFICATION.json",
+          "bytes": 2755,
+          "sha256": "337723b122ddaabd74929124b4088249d2e8a4842cea64ac9c29212ec992b978",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/STRICT-VERIFICATION.json"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0000",
+          "bytes": 943718400,
+          "sha256": "8d6ffb7ac57a57603671e72f5077bdac9a89d536733301c399df8aef8e711e17",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0000"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0001",
+          "bytes": 943718400,
+          "sha256": "af8fde99aaf4b2ef61cbd2e5dede53832dca80e5848aff5e9c6a024959f9404b",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0001"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0002",
+          "bytes": 943718400,
+          "sha256": "9dd040016aaa82fd1c6af21a218994bfab452baba6814db628b2e22a3aba2272",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0002"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0003",
+          "bytes": 943718400,
+          "sha256": "d559f877050531e3318390fef9fb3b8eaeebea925a2ff269687d352bf70fd1c0",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0003"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0004",
+          "bytes": 943718400,
+          "sha256": "39ab8848dcb85bf5f9b1e5bd54869e3a2d572a89794782b08d26d7ab154163b9",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0004"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0005",
+          "bytes": 943718400,
+          "sha256": "456df2430d7fc542576560efdbe8af405a13b39d6e2a8a048377003b68b709ab",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0005"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0006",
+          "bytes": 943718400,
+          "sha256": "bc9aae08bbb8e3e438b6e7f2f3acc69821bcb6335927e28057174a1645b79571",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0006"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0007",
+          "bytes": 943718400,
+          "sha256": "f7fa2d45842c67d95acf752136a46cd96c4da5716d86390787d1ffeee1d6279a",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0007"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0008",
+          "bytes": 943718400,
+          "sha256": "5466b8882a949162af10e83650f1d6022037a8b1f9bc2a9bd73865b2042bc01a",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0008"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0009",
+          "bytes": 943718400,
+          "sha256": "d08b6fb81f3c2b4c1e2263bf3b3bed07da4399b9feac6c278109e935953dd6c5",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0009"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0010",
+          "bytes": 943718400,
+          "sha256": "620ce31e622467736d760712d805fb80ccc03b870a57169c6143db38722ddeec",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0010"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0011",
+          "bytes": 943718400,
+          "sha256": "cefa1b0ea12f18c95cbb821049f4c529546fcce95960e7ee006b73300b3758b5",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0011"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0012",
+          "bytes": 943718400,
+          "sha256": "3a4c38b781570cf2d09fd3eeaa94cb14d48e23e4dc6cbb6c6a3ddbaac3b671b0",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0012"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0013",
+          "bytes": 943718400,
+          "sha256": "d2d6456d4eb78557f1b455177ecb4fc33e6e64be3f88f4b74c96084d7ff51d06",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0013"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0014",
+          "bytes": 943718400,
+          "sha256": "2cd54ca6fcc43af289217338aacb15f18b7cd328b02e4a8054b6e2b6e4ae07bd",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0014"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0015",
+          "bytes": 943718400,
+          "sha256": "7275debbf3306e19193b39b7ab04d55bf194e9110a3726ab8ffceaf48998b445",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0015"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0016",
+          "bytes": 943718400,
+          "sha256": "7dbbb5f5d8badb58514f61ec38cdc8d921a1fbada2bf2de74c80e535c5caf39c",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0016"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0017",
+          "bytes": 943718400,
+          "sha256": "529c71ddfc1d62f009dc0abbd45417ace7e906ac6bae795b797ff2ce7dbda1fb",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0017"
+        },
+        {
+          "filename": "chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0018",
+          "bytes": 561500064,
+          "sha256": "8f228eab8c4f90f2540c365474bf6244e1803252ab966dab98407dc43728cf71",
+          "release_tag": "chronicle-sidechain-finality-v1-f64cc872b3b5",
+          "source_locator": "https://github.com/thechurchofagi/trinity-accord/releases/download/chronicle-sidechain-finality-v1-f64cc872b3b5/chronicle-sidechain-finality-v1-f64cc872b3b5.tar.zst.part-0018"
+        }
+      ]
+    },
+    "bitcoin_operational_checkpoints": "reproducibility cache; retain inventory and latest recovery guidance, not 88.65 GB of cumulative node checkpoints",
+    "superseded_museum_releases": "retain version identities; current reconstructable museum snapshot selected"
+  },
+  "institutional_submission_ready": false,
+  "institutional_submission_blocks": [
+    "human rights/license/Custom Terms/Terms of Use review",
+    "copy every Polygon/Base Finality file to the second institution and verify anonymous public readback",
+    "assemble institution-sized files and run independent remote cold recovery"
+  ],
+  "harvard_mutated": false,
+  "automatic_harvard_resubmission_allowed": false,
+  "ai_disclosure": "Audit implementation and narrative were AI-assisted; the human initiator/guardian remains responsible for scope, rights, source attribution and any institutional submission.",
+  "candidate_identity_sha256": "cd0bd263f548d23060422021408ab1705e8c48c1c1028f1a440eb89d1e88d7e8"
+}
