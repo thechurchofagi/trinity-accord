@@ -44,6 +44,9 @@ jobs:
           python-version: '3.12'
       - name: Install pinned HTTP client
         run: python3 -m pip install 'httpx==0.27.0'
+      - name: Record toolchain provenance
+        working-directory: control
+        run: python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance-contract.json"
       - name: Verify immutable upload contract
         working-directory: control
         run: |
@@ -77,6 +80,9 @@ jobs:
           python-version: '3.12'
       - name: Install pinned HTTP client
         run: python3 -m pip install 'httpx==0.27.0'
+      - name: Record toolchain provenance
+        working-directory: control
+        run: python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance-repository.json"
       - name: Upload 206 frozen repository files and two controls
         run: |
           set -euo pipefail
@@ -90,7 +96,9 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: epoch-ii-receipt-repository
-          path: ${{ runner.temp }}/receipt-repository.json
+          path: |
+            ${{ runner.temp }}/receipt-repository.json
+            ${{ runner.temp }}/toolchain-provenance-repository.json
           retention-days: 90
           if-no-files-found: error
 
@@ -118,6 +126,9 @@ jobs:
           python-version: '3.12'
       - name: Install pinned HTTP client
         run: python3 -m pip install 'httpx==0.27.0'
+      - name: Record toolchain provenance
+        working-directory: control
+        run: python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance-release-${{ matrix.shard }}.json"
       - name: Download, verify, upload and full-readback Release shard
         run: |
           set -euo pipefail
@@ -131,7 +142,9 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: epoch-ii-receipt-release-${{ matrix.shard }}
-          path: ${{ runner.temp }}/receipt-release-${{ matrix.shard }}.json
+          path: |
+            ${{ runner.temp }}/receipt-release-${{ matrix.shard }}.json
+            ${{ runner.temp }}/toolchain-provenance-release-${{ matrix.shard }}.json
           retention-days: 90
           if-no-files-found: error
 
@@ -160,6 +173,9 @@ jobs:
           python-version: '3.12'
       - name: Install pinned HTTP client
         run: python3 -m pip install 'httpx==0.27.0'
+      - name: Record toolchain provenance
+        working-directory: control
+        run: python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance-candidate.json"
       - name: Reuse exact successful frozen audit artifact
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -238,6 +254,7 @@ jobs:
           path: |
             ${{ runner.temp }}/receipt-candidate.json
             ${{ runner.temp }}/cold-recovery.json
+            ${{ runner.temp }}/toolchain-provenance-candidate.json
           retention-days: 90
           if-no-files-found: error
 
@@ -263,6 +280,9 @@ jobs:
           python-version: '3.12'
       - name: Install pinned HTTP client
         run: python3 -m pip install 'httpx==0.27.0'
+      - name: Record toolchain provenance
+        working-directory: control
+        run: python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance-final.json"
       - name: Download all PASS receipts from this run
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16
         with:
@@ -282,6 +302,8 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: epoch-ii-final-submission-receipt
-          path: ${{ runner.temp }}/final-submission-receipt.json
+          path: |
+            ${{ runner.temp }}/final-submission-receipt.json
+            ${{ runner.temp }}/toolchain-provenance-final.json
           retention-days: 90
           if-no-files-found: warn
