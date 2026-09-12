@@ -3,11 +3,18 @@
   "operational_only": true,
   "canon_boundary": "non-amending; the three Bitcoin inscriptions remain Canon",
   "policy": {
-    "purpose": "Allow independently verified sidechain evidence to complete while a closed, explicit set of historical IPFS payloads remains unavailable.",
+    "purpose": "Preserve a closed historical record of seven unavailable IPFS payloads that were observed only because unrelated ERC-1155 assets were externally delivered to the monitored wallet.",
     "acceptance_rule_unchanged": true,
     "unresolved_roots_are_not_verified": true,
     "unexpected_failures_are_fatal": true,
-    "declared_roots_recover_automatically_when_exact_bytes_become_available": true
+    "provenance_audit_status": "verified_external_delivery",
+    "provenance_record": "evidence/chronicle-sidechain-seven-root-provenance.json",
+    "external_wallet_observation_count": 7,
+    "project_content_gap_count": 0,
+    "payload_bytes_recovered": false,
+    "recovery_required_for_project_completeness": false,
+    "optional_forensic_recovery_allowed": true,
+    "interpretation": "The original 250/257 figure remains a truthful raw-wallet historical payload observation. The seven unavailable roots are out-of-scope external deliveries, so they are not Trinity Accord project-content gaps."
   },
   "source_observation": {
     "run_id": "32212277838",
@@ -16,7 +23,19 @@
     "strict_cache_valid": 245,
     "strict_cache_total": 257,
     "final_exact_verified_roots": 250,
-    "final_unresolved_roots": 7
+    "final_unresolved_roots": 7,
+    "observation_scope": "raw wallet inventory before provenance classification"
+  },
+  "provenance_audit": {
+    "workflow_run_id": 34664447583,
+    "job_id": 103473421558,
+    "audit_source_commit": "6aeff93510aa7e9f3c2a39ae606d5938174cb656",
+    "artifact_id": 10288620613,
+    "result": "PASS",
+    "externally_delivered_not_self_minted": 7,
+    "external_zero_address_mints": 2,
+    "external_transfers": 5,
+    "project_originated": 0
   },
   "exceptions": [
     {
@@ -29,7 +48,17 @@
       "leaf_path": "token.json",
       "original_uri": "ipfs://bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54/token.json",
       "status": "historical_payload_unavailable",
-      "exact_recovery_pending": true
+      "payload_verified": false,
+      "exact_recovery_pending": false,
+      "recovery_required_for_project_completeness": false,
+      "project_scope": "out_of_scope_external_wallet_asset",
+      "provenance_classification": "externally_delivered_not_self_minted",
+      "delivery_mode": "external_zero_address_mint",
+      "inbound_transaction_hash": "0x2f0d250ddeb9250ed885ccd438e6a93456d0806a231e0aed50821f35518c9321",
+      "transaction_initiator": "0x2739216bff42575a7316652ac19061ab4a707385",
+      "transfer_from": "0x0000000000000000000000000000000000000000",
+      "target_initiated_transaction": false,
+      "official_project_contract": false
     },
     {
       "root_cid": "QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1",
@@ -41,7 +70,17 @@
       "leaf_path": null,
       "original_uri": "ipfs://QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1",
       "status": "historical_payload_unavailable",
-      "exact_recovery_pending": true
+      "payload_verified": false,
+      "exact_recovery_pending": false,
+      "recovery_required_for_project_completeness": false,
+      "project_scope": "out_of_scope_external_wallet_asset",
+      "provenance_classification": "externally_delivered_not_self_minted",
+      "delivery_mode": "external_transfer",
+      "inbound_transaction_hash": "0x1168ae2af03ea81f3bb40167d7d229d48085812be1ef1fe3b2d8c3998822f774",
+      "transaction_initiator": "0x0512699612b7aa979903623ef373774f29f5b718",
+      "transfer_from": "0x0512699612b7aa979903623ef373774f29f5b718",
+      "target_initiated_transaction": false,
+      "official_project_contract": false
     },
     {
       "root_cid": "QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah",
@@ -53,7 +92,17 @@
       "leaf_path": null,
       "original_uri": "ipfs://QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah",
       "status": "historical_payload_unavailable",
-      "exact_recovery_pending": true
+      "payload_verified": false,
+      "exact_recovery_pending": false,
+      "recovery_required_for_project_completeness": false,
+      "project_scope": "out_of_scope_external_wallet_asset",
+      "provenance_classification": "externally_delivered_not_self_minted",
+      "delivery_mode": "external_transfer",
+      "inbound_transaction_hash": "0xfd45685319ce437bf2375fc2fc56d9458c0baa7f3c48438c11edcea0cd033909",
+      "transaction_initiator": "0xccce84d144b8bc942f0f2c06d1f771848dbeb416",
+      "transfer_from": "0xccce84d144b8bc942f0f2c06d1f771848dbeb416",
+      "target_initiated_transaction": false,
+      "official_project_contract": false
     },
     {
       "root_cid": "QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC",
@@ -65,7 +114,17 @@
       "leaf_path": null,
       "original_uri": "ipfs://QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC",
       "status": "historical_payload_unavailable",
-      "exact_recovery_pending": true
+      "payload_verified": false,
+      "exact_recovery_pending": false,
+      "recovery_required_for_project_completeness": false,
+      "project_scope": "out_of_scope_external_wallet_asset",
+      "provenance_classification": "externally_delivered_not_self_minted",
+      "delivery_mode": "external_transfer",
+      "inbound_transaction_hash": "0x1a82eca15f36c993a73a68f0c371d670027d460d247e51e835e1c7b06cb819b2",
+      "transaction_initiator": "0xe8a6ecb6b3be84ba87969310081ab9299b680cae",
+      "transfer_from": "0xe8a6ecb6b3be84ba87969310081ab9299b680cae",
+      "target_initiated_transaction": false,
+      "official_project_contract": false
     },
     {
       "root_cid": "QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT",
@@ -77,7 +136,17 @@
       "leaf_path": null,
       "original_uri": "ipfs://QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT",
       "status": "historical_payload_unavailable",
-      "exact_recovery_pending": true
+      "payload_verified": false,
+      "exact_recovery_pending": false,
+      "recovery_required_for_project_completeness": false,
+      "project_scope": "out_of_scope_external_wallet_asset",
+      "provenance_classification": "externally_delivered_not_self_minted",
+      "delivery_mode": "external_transfer",
+      "inbound_transaction_hash": "0xa8dcee6b4cd203c981216e6643d5dcb614e5f3e0ef50c0232160f8d4879ce1cd",
+      "transaction_initiator": "0x5abaff5c13ab32f0445cf0f70b724666d95eca10",
+      "transfer_from": "0x5abaff5c13ab32f0445cf0f70b724666d95eca10",
+      "target_initiated_transaction": false,
+      "official_project_contract": false
     },
     {
       "root_cid": "QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva",
@@ -89,7 +158,17 @@
       "leaf_path": null,
       "original_uri": "ipfs://QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva",
       "status": "historical_payload_unavailable",
-      "exact_recovery_pending": true
+      "payload_verified": false,
+      "exact_recovery_pending": false,
+      "recovery_required_for_project_completeness": false,
+      "project_scope": "out_of_scope_external_wallet_asset",
+      "provenance_classification": "externally_delivered_not_self_minted",
+      "delivery_mode": "external_transfer",
+      "inbound_transaction_hash": "0x197facbf4f11bf22cfcb812b23d1409396a88383aecc296a4522b5c6de9c6def",
+      "transaction_initiator": "0x7b525136dff727e6523c6f6917793d6f5ed05842",
+      "transfer_from": "0x7b525136dff727e6523c6f6917793d6f5ed05842",
+      "target_initiated_transaction": false,
+      "official_project_contract": false
     },
     {
       "root_cid": "bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy",
@@ -101,7 +180,17 @@
       "leaf_path": null,
       "original_uri": "ipfs://bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy",
       "status": "historical_payload_unavailable",
-      "exact_recovery_pending": true
+      "payload_verified": false,
+      "exact_recovery_pending": false,
+      "recovery_required_for_project_completeness": false,
+      "project_scope": "out_of_scope_external_wallet_asset",
+      "provenance_classification": "externally_delivered_not_self_minted",
+      "delivery_mode": "external_zero_address_mint",
+      "inbound_transaction_hash": "0x314544ccc15f29941a652a0c65748aa7172c32bef0dc17e6a25de33314c62fcb",
+      "transaction_initiator": "0xc459186eb76bcd40ac0b7db416391e9c94527e7a",
+      "transfer_from": "0x0000000000000000000000000000000000000000",
+      "target_initiated_transaction": false,
+      "official_project_contract": false
     }
   ]
 }
