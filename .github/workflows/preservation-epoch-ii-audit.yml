@@ -1,0 +1,63 @@
+name: Preservation Epoch II Candidate Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, preservation/epoch-ii-candidate-audit]
+    paths:
+      - scripts/audit_preservation_epoch_ii.py
+      - tests/test_preservation_epoch_ii_audit.py
+      - preservation/PRESERVATION-EPOCH-II.md
+      - .github/workflows/preservation-epoch-ii-audit.yml
+  pull_request:
+    paths:
+      - scripts/audit_preservation_epoch_ii.py
+      - tests/test_preservation_epoch_ii_audit.py
+      - preservation/PRESERVATION-EPOCH-II.md
+      - .github/workflows/preservation-epoch-ii-audit.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preservation-epoch-ii-audit-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Test fail-closed inventory boundaries
+        run: python3 -m unittest discover -s tests -p test_preservation_epoch_ii_audit.py -v
+      - name: Capture read-only inventory with progress
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 scripts/audit_preservation_epoch_ii.py \
+            --repository-root . \
+            --output-dir "$RUNNER_TEMP/epoch-ii-audit" \
+            --capture-dir "$RUNNER_TEMP/epoch-ii-api-capture" \
+            2>&1 | tee "$RUNNER_TEMP/epoch-ii-audit.log"
+          cat "$RUNNER_TEMP/epoch-ii-audit/COVERAGE-REPORT.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve reviewable audit and captured observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Harvard-Preservation-Epoch-II-Candidate-Inventory-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/epoch-ii-audit/
+            ${{ runner.temp }}/epoch-ii-api-capture/
+            ${{ runner.temp }}/epoch-ii-audit.log
+          retention-days: 90
+          if-no-files-found: error
