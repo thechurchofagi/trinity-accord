@@ -764,6 +764,15 @@ def verify_public_checksum_lists(store: pathlib.Path, selected: list[dict[str, A
     return {"schema": "trinityaccord.epoch-ii-public-checksum-list-crosscheck.v1", "status": "pass" if not errors else "fail", "lists": reports, "errors": errors}
 
 
+def cleanup_source_restore_residue(output: pathlib.Path) -> None:
+    """Remove atomic restore staging paths before sealing the candidate."""
+    for leftover in output.glob(".source-cold-restore.partial-*"):
+        if leftover.is_dir():
+            shutil.rmtree(leftover)
+        else:
+            leftover.unlink()
+
+
 def build_source_capsule(repo: pathlib.Path, output: pathlib.Path) -> dict[str, Any]:
     capsule = output / "source-capsule"
     restore = output / "source-cold-restore"
@@ -775,11 +784,7 @@ def build_source_capsule(repo: pathlib.Path, output: pathlib.Path) -> dict[str, 
     shutil.rmtree(restore)
     # The established restorer uses an atomic sibling staging directory. Clean
     # any completed staging residue so it cannot silently enter this candidate.
-    for leftover in output.glob(".source-cold-restore.partial-*"):
-        if leftover.is_dir():
-            shutil.rmtree(leftover)
-        else:
-            leftover.unlink()
+    cleanup_source_restore_residue(output)
     return report
 
 
@@ -947,6 +952,10 @@ def main() -> int:
         "Review `CONTENT-CANDIDATE.json` and the specific verification reports before using the package.\n",
         encoding="utf-8",
     )
+    # Seal only the intended candidate. Repeat the staging cleanup immediately
+    # before checksumming so late filesystem residue cannot enter or invalidate
+    # the exact file-set commitment.
+    cleanup_source_restore_residue(output)
     write_candidate_checksums(output)
     log(f"PASS candidate={candidate['candidate_identity_sha256']} verified_bytes={candidate['selected_unique_bytes_verified']}")
     return 0
