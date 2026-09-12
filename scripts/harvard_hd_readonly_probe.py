@@ -78,10 +78,9 @@ def first_int(value: Any) -> int | None:
     if isinstance(value, dict):
         preferred = (
             "quota",
-            "quotaIn.src",
             "quotaInBytes",
-            "storagenergies",
             "storageQuota",
+            "limit",
             "size",
             "bytes",
             "storageSize",
