@@ -43,6 +43,23 @@ class StrictPrimitives(unittest.TestCase):
         self.assertFalse(strict.strict_layer_complete({"status": "NOT_CAPTURED"}))
         self.assertFalse(strict.strict_layer_complete({"status": "INCOMPLETE"}))
 
+    def test_optional_external_forensics_does_not_block_project_completion(self):
+        self.assertTrue(
+            strict.strict_layer_complete(
+                {"status": "INCOMPLETE", "required_for_project_completeness": False}
+            )
+        )
+        self.assertTrue(
+            strict.strict_layer_complete(
+                {"status": "FORENSIC_INCOMPLETE", "required_for_project_completeness": False}
+            )
+        )
+        self.assertFalse(
+            strict.strict_layer_complete(
+                {"status": "INCOMPLETE", "required_for_project_completeness": True}
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

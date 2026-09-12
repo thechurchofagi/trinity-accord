@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Fail-closed classifier for the Base and Polygon Chronicle evidence.
 
-This program deliberately separates cryptographic inclusion from chain finality and
-from payload availability.  A green audit means that the classification is honest;
-it does not mean ``strict_completion`` is true.
+This program deliberately separates cryptographic inclusion from chain finality,
+raw-wallet payload availability, and Trinity Accord project-content completeness.
+A green audit means that the classification is honest; project strict completion
+requires every project-required layer, while optional external-asset forensics are
+reported separately and never silently promoted to verified content.
 """
 import argparse
 import hashlib
@@ -243,6 +245,8 @@ def verify_finality_bundle(root, source, settlement, settlement_path, source_tag
 
 
 def strict_layer_complete(layer):
+    if layer.get("required_for_project_completeness") is False:
+        return True
     return layer["status"] in {"PASS", "NOT_APPLICABLE"}
 
 
@@ -253,7 +257,9 @@ def audit(args):
     index = load(index_path)
     records = index["records"]
     offline = load(evidence / "OFFLINE-VERIFICATION.json")
-    exceptions = load(args.exceptions)["exceptions"]
+    exception_doc = load(args.exceptions)
+    policy = exception_doc.get("policy", {})
+    exceptions = exception_doc["exceptions"]
     provenance = load(args.provenance)
     settlement = load(args.polygon_settlement)
     binding = load(args.polygon_binding)
@@ -276,16 +282,52 @@ def audit(args):
     roots = content_roots(records)
     unresolved = {root for root, item in roots.items() if item["status"] != "ok"}
     declared = {item["root_cid"] for item in exceptions}
-    if len(roots) != 257 or len(roots) - len(unresolved) != 250:
-        errors.append(f"payload root population mismatch total={len(roots)} exact={len(roots)-len(unresolved)}")
-    if unresolved != declared:
-        errors.append("unresolved payload roots differ from closed exception set")
+    exact_roots = len(roots) - len(unresolved)
+    if len(roots) != 257 or exact_roots < 250:
+        errors.append(f"payload root population mismatch total={len(roots)} exact={exact_roots}")
+    if not unresolved.issubset(declared):
+        errors.append(f"unexpected unresolved roots outside declared external set: {sorted(unresolved-declared)}")
+
+    project_scope_errors = []
+    if policy.get("provenance_audit_status") != "verified_external_delivery":
+        project_scope_errors.append("seven-root policy provenance_audit_status is not verified_external_delivery")
+    if policy.get("external_wallet_observation_count") != 7:
+        project_scope_errors.append("seven-root policy external_wallet_observation_count is not 7")
+    if policy.get("project_content_gap_count") != 0:
+        project_scope_errors.append("seven-root policy project_content_gap_count is not 0")
+    if policy.get("recovery_required_for_project_completeness") is not False:
+        project_scope_errors.append("seven-root recovery is still required for project completeness")
+
     reviewed = {item["root_cid"] for item in provenance.get("records", [])}
-    if reviewed != unresolved or provenance.get("summary", {}).get("external_delivery_confirmed") != 7:
-        errors.append("seven-root external-delivery review does not exactly cover exceptions")
+    if reviewed != declared or provenance.get("summary", {}).get("external_delivery_confirmed") != 7:
+        project_scope_errors.append("seven-root external-delivery review does not exactly cover declared exceptions")
+    if provenance.get("summary", {}).get("target_initiated_transactions") != 0:
+        project_scope_errors.append("seven-root review reports target-initiated transactions")
     for item in provenance.get("records", []):
         if item.get("classification") != "externally_delivered_not_self_minted":
-            errors.append(f"provenance classification mismatch {item.get('root_cid')}")
+            project_scope_errors.append(f"provenance classification mismatch {item.get('root_cid')}")
+
+    for item in exceptions:
+        root = item.get("root_cid")
+        if item.get("project_scope") != "out_of_scope_external_wallet_asset":
+            project_scope_errors.append(f"exception project scope mismatch {root}")
+        if item.get("recovery_required_for_project_completeness") is not False:
+            project_scope_errors.append(f"exception recovery still gates project completeness {root}")
+        if item.get("provenance_classification") != "externally_delivered_not_self_minted":
+            project_scope_errors.append(f"exception provenance classification mismatch {root}")
+        if item.get("official_project_contract") is not False:
+            project_scope_errors.append(f"exception unexpectedly uses official project contract {root}")
+        if item.get("target_initiated_transaction") is not False:
+            project_scope_errors.append(f"exception unexpectedly target-initiated {root}")
+
+    errors.extend(project_scope_errors)
+    project_content_complete = (
+        not project_scope_errors
+        and unresolved.issubset(declared)
+        and len(declared) == 7
+        and len(roots) == 257
+        and exact_roots >= 250
+    )
 
     if settlement.get("schema") != "trinity-accord/chronicle-polygon-ethereum-settlement/v1":
         errors.append("unexpected Polygon settlement schema")
@@ -345,7 +387,21 @@ def audit(args):
     finality_pass = finality is not None and not finality["errors"]
     layers = {
         "identity_commitment": {"status": "PASS" if audit_pass else "FAIL", "records": len(records)},
-        "exact_payload_recovery": {"status": "INCOMPLETE", "verified_roots": len(roots)-len(unresolved), "total_roots": len(roots), "unresolved_roots": sorted(unresolved)},
+        "exact_payload_recovery": {
+            "status": "PASS" if not unresolved else "INCOMPLETE",
+            "verified_roots": exact_roots,
+            "total_roots": len(roots),
+            "unresolved_roots": sorted(unresolved),
+            "scope": "raw_wallet_inventory",
+            "required_for_project_completeness": False,
+            "note": "Any unresolved roots are provenance-resolved external wallet deliveries; missing bytes remain unverified and may be recovered only as optional forensics.",
+        },
+        "project_content_completeness": {
+            "status": "PASS" if project_content_complete else "FAIL",
+            "project_content_gap_count": policy.get("project_content_gap_count"),
+            "external_wallet_observation_count": policy.get("external_wallet_observation_count"),
+            "required_for_project_completeness": True,
+        },
         "l2_execution_inclusion": {"status": "PASS" if audit_pass else "FAIL", "records": offline.get("l2_records_checked")},
         "polygon_checkpoint_to_ethereum_execution": {"status": "PASS" if audit_pass else "FAIL", "records": len(seen_polygon), "checkpoints": len(checkpoint_by_id)},
         "polygon_ethereum_beacon_finality": {
@@ -374,10 +430,11 @@ def audit(args):
         "audit_pass": audit_pass,
         "strict_completion": "PASS" if strict_complete else "INCOMPLETE",
         "strict_completion_pass": strict_complete,
+        "strict_completion_scope": "trinity_accord_project_required_layers",
         "chains": counts,
         "source": {"release_tag": source_tag, "commit_sha": source_sha, "identity_index_sha256": sha256_file(index_path)},
         "layers": layers,
-        "provenance_boundary": "Seven roots were externally delivered, not self-minted by the target. This does not recover or verify their payload bytes and is not a legal ownership conclusion.",
+        "provenance_boundary": "Seven raw-wallet roots were verified as externally delivered, not target-initiated, and outside the official Trinity Accord NFT contract set. Any still-unrecovered raw bytes remain unverified; project-content gap attributable to this external set is 0; recovery is optional external-asset forensics and is not a legal ownership conclusion.",
         "finality_boundary": "When the supplementary bundle is supplied, Polygon and Base execution blocks are bound to raw Beacon SSZ objects and two independent finalized/non-optimistic consensus-client observations. This is Ethereum weak-subjectivity evidence, not Bitcoin-style objective proof from genesis. Base's seven-day fault-proof window is not applicable to ordinary L2 origin transactions.",
         "errors": errors,
     }

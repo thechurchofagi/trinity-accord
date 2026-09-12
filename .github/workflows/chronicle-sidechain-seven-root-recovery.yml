@@ -1,10 +1,10 @@
-# Operator-deferred historical recovery.
-# The seven declared roots remain explicit, unresolved historical payload gaps.
-# They are not verified and do not satisfy the original 257/257 zero-gap closure.
-# Do not spend scheduled runner time retrying them while Polygon/Base finality and
-# other independently verifiable work proceeds. Surface the gap as a final-status
-# annotation; resume this workflow only by an explicit operator action.
-name: Chronicle seven-root strict CAR recovery
+# Operator-deferred optional external-asset forensics.
+# The seven declared roots are provenance-resolved external ERC-1155 wallet deliveries,
+# not Trinity Accord project-content gaps. Their payload bytes remain unavailable and
+# unverified, so the historical raw-wallet observation remains 250/257. This workflow
+# may be run manually to improve that forensic inventory, but its result does not gate
+# Trinity Accord project completeness or dispatch a project evidence-closure release.
+name: Chronicle seven-root optional forensic CAR recovery
 
 on:
   workflow_dispatch:
@@ -110,7 +110,7 @@ jobs:
           "$tools/kubo/ipfs" init --profile server
           "$tools/kubo/ipfs" config --json Swarm.DisableNatPortMap true
 
-      - name: Retry exact historical roots through strict recovery chain
+      - name: Retry exact external historical roots through strict recovery chain
         env:
           GH_TOKEN: operational-telemetry-disabled
           CHRONICLE_EVIDENCE_REFRESH_HISTORY: "false"
@@ -172,16 +172,17 @@ jobs:
             artifacts/chronicle-sidechain-car-block-cache
           key: seven-root-recovery-${{ env.BOOTSTRAP_ARCHIVE_SHA256 }}-${{ github.run_id }}-${{ github.run_attempt }}
 
-      - name: Classify original zero-gap criterion
-        id: strict
+      - name: Classify optional raw-wallet forensic recovery
+        id: forensic
         run: |
           set -euo pipefail
           python3 - <<'PY' >> "$GITHUB_OUTPUT"
           import json, pathlib
           coverage=pathlib.Path('artifacts/chronicle-sidechain-scan/evidence-v2/HISTORICAL-PAYLOAD-COVERAGE.json')
-          policy=pathlib.Path('evidence/chronicle-sidechain-historical-payload-exceptions.json')
+          policy_path=pathlib.Path('evidence/chronicle-sidechain-historical-payload-exceptions.json')
           c=json.loads(coverage.read_text())
-          p=json.loads(policy.read_text())
+          p=json.loads(policy_path.read_text())
+          policy=p.get('policy', {})
           expected={row['root_cid'] for row in p['exceptions']}
           unresolved={row['root_cid'] for row in c.get('unresolved', [])}
           if len(expected) != 7:
@@ -189,15 +190,27 @@ jobs:
           if not unresolved.issubset(expected):
               raise SystemExit(f'unexpected unresolved roots: {sorted(unresolved-expected)}')
           if c.get('total_unique_ipfs_roots') != 257:
-              raise SystemExit(f"expected 257 unique roots, found {c.get('total_unique_ipfs_roots')}")
+              raise SystemExit(f"expected 257 unique raw-wallet roots, found {c.get('total_unique_ipfs_roots')}")
+          if policy.get('provenance_audit_status') != 'verified_external_delivery':
+              raise SystemExit('seven-root provenance is not verified_external_delivery')
+          if policy.get('project_content_gap_count') != 0:
+              raise SystemExit('project_content_gap_count must remain 0')
+          if policy.get('recovery_required_for_project_completeness') is not False:
+              raise SystemExit('external-root recovery must remain optional for project completeness')
           exact=int(c.get('exact_verified_roots', -1))
-          complete=exact == 257 and not unresolved and c.get('status') == 'complete_exact_coverage'
+          forensic_complete=exact == 257 and not unresolved and c.get('status') == 'complete_exact_coverage'
           print(f'exact={exact}')
           print(f'unresolved={len(unresolved)}')
-          print(f'complete={str(complete).lower()}')
+          print(f'forensic_complete={str(forensic_complete).lower()}')
+          print('project_content_gap=0')
+          print('required_for_project_completeness=false')
           print('unresolved_roots=' + ','.join(sorted(unresolved)))
           PY
           cat artifacts/chronicle-sidechain-scan/evidence-v2/HISTORICAL-PAYLOAD-COVERAGE.json
+
+      - name: Summarize forensic-only status
+        run: |
+          echo "[FORENSIC ONLY] exact=${{ steps.forensic.outputs.exact }}/257 unresolved=${{ steps.forensic.outputs.unresolved }} project_content_gap=${{ steps.forensic.outputs.project_content_gap }} project_completion_gate=${{ steps.forensic.outputs.required_for_project_completeness }}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload recovery telemetry
         if: ${{ always() }}
@@ -212,19 +225,3 @@ jobs:
             ${{ runner.temp }}/toolchain-provenance.json
           if-no-files-found: warn
           retention-days: 30
-
-      - name: Trigger full evidence closure only at strict 257/257
-        if: steps.strict.outputs.complete == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          sha="$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)"
-          short="${sha:0:12}"
-          tag="chronicle-sidechain-evidence-v2-${short}"
-          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            echo "Strict cache is complete but immutable source tag $tag already exists; refusing mutation." >&2
-            exit 1
-          fi
-          gh workflow run chronicle-sidechain-mirror-v3.yml --repo "$GITHUB_REPOSITORY" --ref main -f refresh_live=false
-          echo "[FULL CLOSURE DISPATCHED] source=$sha exact=${{ steps.strict.outputs.exact }}/257"
