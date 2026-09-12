@@ -72,9 +72,19 @@ def headers(token: str) -> dict[str, str]:
     return {"X-Dataverse-key": token, "User-Agent": USER_AGENT}
 
 
+def response_error_excerpt(response: httpx.Response) -> str:
+    """Read a bounded diagnostic from either buffered or streaming responses."""
+    try:
+        body = response.read()
+    except (httpx.HTTPError, RuntimeError) as exc:
+        return f"<response body unavailable: {type(exc).__name__}>"
+    return body[:4000].decode(response.encoding or "utf-8", errors="replace")
+
+
 def require_status(response: httpx.Response, expected: Iterable[int], label: str) -> None:
     if response.status_code not in set(expected):
-        raise UploadError(f"{label}: HTTP {response.status_code}: {response.text[:4000]}")
+        excerpt = response_error_excerpt(response)
+        raise UploadError(f"{label}: HTTP {response.status_code}: {excerpt}")
 
 
 def json_response(response: httpx.Response, expected: Iterable[int], label: str) -> dict[str, Any]:

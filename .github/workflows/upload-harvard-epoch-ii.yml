@@ -9,12 +9,14 @@ on:
       - preservation/epoch-ii/frozen/**
       - .github/harvard-epoch-ii-full-upload-authorized-v1
       - .github/harvard-epoch-ii-full-upload-resume-v3
+      - .github/harvard-epoch-ii-full-upload-resume-v4
   push:
     branches: [main]
     paths:
       - .github/harvard-epoch-ii-full-upload-authorized-v1
       - .github/harvard-epoch-ii-full-upload-resume-v2
       - .github/harvard-epoch-ii-full-upload-resume-v3
+      - .github/harvard-epoch-ii-full-upload-resume-v4
 
 permissions:
   actions: read
@@ -60,6 +62,8 @@ jobs:
             "Harvard Preservation Epoch II idempotent resume authorized after signed x-amz-tagging fix: doi:10.7910/DVN/W9Y3IV dataset-id=14229992"
           test "$(cat .github/harvard-epoch-ii-full-upload-resume-v3)" = \
             "Harvard Preservation Epoch II idempotent resume authorized after serializing Dataverse dataset writes: doi:10.7910/DVN/W9Y3IV dataset-id=14229992"
+          test "$(cat .github/harvard-epoch-ii-full-upload-resume-v4)" = \
+            "Harvard Preservation Epoch II idempotent resume authorized after streaming readback error-path fix: doi:10.7910/DVN/W9Y3IV dataset-id=14229992"
           python3 -m unittest tests.test_upload_harvard_epoch_ii
 
   upload-repository-and-controls:
