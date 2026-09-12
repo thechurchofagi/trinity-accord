@@ -3,13 +3,7 @@ name: Preservation Epoch II Candidate Audit
 on:
   workflow_dispatch:
   push:
-    branches: [main, preservation/epoch-ii-candidate-audit]
-    paths:
-      - scripts/audit_preservation_epoch_ii.py
-      - tests/test_preservation_epoch_ii_audit.py
-      - preservation/PRESERVATION-EPOCH-II.md
-      - .github/workflows/preservation-epoch-ii-audit.yml
-  pull_request:
+    branches: [preservation/epoch-ii-candidate-audit]
     paths:
       - scripts/audit_preservation_epoch_ii.py
       - tests/test_preservation_epoch_ii_audit.py
