@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Read-only Epoch II inventory. No publishing, payload download or Canon changes.
 
-Inventory success is not preservation completion. All external bytes remain
+Inventory success is not preservation completion. External large payloads remain
 locator_only until a separate hash-bound capture and cold restore is performed.
 Only Python's standard library is required.
 """
@@ -514,7 +514,8 @@ def main():
                 "historical_digest_rows": len(crosswalk["rows"]), "historical_digest_crosswalk": crosswalk["summary"],
                 "zenodo_identifiers_enumerated": len(dois), "zenodo_unique_resolved_records": len({d['record_id'] for d in dois if d['metadata_status'] == 'observed'}),
                 "zenodo_records_unavailable": sum(d["metadata_status"] != "observed" for d in dois), "harvard_frozen_baseline_metadata_check": harvard_check,
-                "external_payload_bytes_verified_this_run": 0, "epoch_ii_required_payload_denominator": None,
+                "external_payload_bytes_verified_this_run": sum(r["size_bytes"] for r in physical["files"] if r["capture"] == "small_notice_bytes_verified"),
+                "external_large_payload_bytes_verified_this_run": 0, "epoch_ii_required_payload_denominator": None,
                 "raw_wallet_payload_recovery": {"verified_historically": 250, "observed": 257, "unavailable_external": 7},
                 "project_gap_attributable_to_seven_external_roots": 0, "gaps": gaps}
     write_json(out / "COVERAGE-REPORT.json", coverage)
@@ -532,7 +533,9 @@ def main():
              f"| Release logical bytes | {cap['logical_bytes']} |",
              f"| API-digest deduplicated planning bytes (not byte-verified) | {cap['api_digest_deduplicated_planning_bytes']} |",
              f"| Assets missing declared SHA-256 | {cap['assets_missing_declared_sha256']} |",
-             f"| NFT identities / content references | 175 / {len(nft_refs)} |", "| External payload bytes verified this run | 0 |", "",
+             f"| NFT identities / content references | 175 / {len(nft_refs)} |",
+             f"| Public custody-notice bytes verified this run | {coverage['external_payload_bytes_verified_this_run']} |",
+             "| External large-payload bytes verified this run | 0 |", "",
              "## Release families", "", "| Family | Assets | Logical bytes |", "|---|---:|---:|"]
     for family, counts in sorted(cap["families"].items()):
         lines.append(f"| {family} | {counts['assets']} | {counts['logical_bytes']} |")
