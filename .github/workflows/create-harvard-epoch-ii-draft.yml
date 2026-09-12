@@ -1,0 +1,67 @@
+name: Create Harvard Epoch II Metadata-only Draft
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/create-harvard-epoch-ii-draft.yml
+      - .github/harvard-epoch-ii-draft-create-authorized-v1
+      - scripts/create_harvard_epoch_ii_draft.py
+      - tests/test_create_harvard_epoch_ii_draft.py
+      - preservation/epoch-ii/HARVARD-DRAFT-METADATA.json
+      - preservation/epoch-ii/HARVARD-DATASET-DESCRIPTION.md
+      - preservation/epoch-ii/HARVARD-TERMS-OF-USE.txt
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/create-harvard-epoch-ii-draft.yml
+      - .github/harvard-epoch-ii-draft-create-authorized-v1
+      - scripts/create_harvard_epoch_ii_draft.py
+      - tests/test_create_harvard_epoch_ii_draft.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Prove metadata-only write boundary
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import importlib.util
+          from pathlib import Path
+
+          path = Path('tests/test_create_harvard_epoch_ii_draft.py')
+          spec = importlib.util.spec_from_file_location('harvard_draft_tests', path)
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          for name in sorted(item for item in dir(module) if item.startswith('test_')):
+              getattr(module, name)()
+              print(f'PASS {name}')
+          PY
+
+  create-draft:
+    if: github.event_name == 'push'
+    needs: contract
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      HD_API_TOKEN: ${{ secrets.HD }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Create or verify metadata-only Epoch II draft
+        env:
+          DRAFT_STATE_OUTPUT: ${{ runner.temp }}/harvard-epoch-ii-draft-state.json
+        run: python3 scripts/create_harvard_epoch_ii_draft.py
+      - name: Upload creation receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: harvard-epoch-ii-draft-state
+          path: ${{ runner.temp }}/harvard-epoch-ii-draft-state.json
+          retention-days: 30
+          if-no-files-found: error
