@@ -106,13 +106,17 @@ def load_inputs(root: Path) -> tuple[dict[str, Any], str, str]:
     marker_path = root / ".github/harvard-epoch-ii-draft-create-authorized-v1"
     metadata = json.loads(meta_path.read_text(encoding="utf-8"))
     description = description_path.read_text(encoding="utf-8").strip()
-    terms = terms_path.read_text(encoding="utf-8").strip()
+    terms_bytes = terms_path.read_bytes()
+    terms = terms_bytes.decode("utf-8").strip()
     marker = marker_path.read_text(encoding="utf-8").strip()
     if marker != AUTHORIZATION:
         raise DraftError("exact metadata-only draft authorization marker is missing")
     if metadata.get("title") != TITLE:
         raise DraftError("frozen preview title mismatch")
-    terms_sha = hashlib.sha256(terms.encode("utf-8")).hexdigest()
+    # Bind the preview to the exact archived file bytes.  Dataverse receives
+    # the decoded/trimmed text below, but a trailing newline must not silently
+    # change the identity of the source file named by the manifest.
+    terms_sha = hashlib.sha256(terms_bytes).hexdigest()
     if terms_sha != EXPECTED_TERMS_SHA256:
         raise DraftError(f"Terms hash mismatch: {terms_sha}")
     if metadata.get("license", {}).get("terms_of_use_sha256") != terms_sha:
@@ -237,7 +241,8 @@ def verify_new(token: str, dataset_id: int, pid: str, terms: str) -> dict[str, A
         "version_number": version.get("versionNumber"),
         "version_minor_number": version.get("versionMinorNumber"),
         "file_count": 0,
-        "terms_sha256": hashlib.sha256(observed_terms.encode("utf-8")).hexdigest(),
+        "terms_file_sha256": EXPECTED_TERMS_SHA256,
+        "terms_readback_sha256": hashlib.sha256(observed_terms.encode("utf-8")).hexdigest(),
     }
 
 
