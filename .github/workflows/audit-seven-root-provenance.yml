@@ -1,13 +1,9 @@
 name: Audit seven-root provenance
 
+# The seven roots were provenance-resolved by passing runs 34664447583 and
+# 34664594402. Keep this audit available for explicit future re-verification
+# without spending scheduled or ordinary push runner time.
 on:
-  push:
-    branches:
-      - audit/seven-root-provenance
-    paths:
-      - scripts/audit-seven-root-provenance.py
-      - evidence/chronicle-sidechain-historical-payload-exceptions.json
-      - .github/workflows/audit-seven-root-provenance.yml
   workflow_dispatch:
 
 permissions:
