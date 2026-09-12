@@ -16,6 +16,21 @@ SPEC.loader.exec_module(MODULE)
 
 
 class HarvardEpochIILayoutTests(unittest.TestCase):
+    def test_draft_metadata_has_no_duplicate_json_keys(self):
+        def reject_duplicates(pairs):
+            result = {}
+            for key, value in pairs:
+                if key in result:
+                    raise ValueError(f"duplicate JSON key: {key}")
+                result[key] = value
+            return result
+
+        raw = (
+            ROOT / "preservation/epoch-ii/HARVARD-DRAFT-METADATA.json"
+        ).read_text()
+        metadata = json.loads(raw, object_pairs_hook=reject_duplicates)
+        self.assertIn("publication_controls", metadata)
+
     def test_terms_are_complete_and_bound_to_draft_metadata(self):
         metadata = json.loads(
             (ROOT / "preservation/epoch-ii/HARVARD-DRAFT-METADATA.json").read_text()

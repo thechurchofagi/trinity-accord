@@ -60,15 +60,19 @@
   },
   "publication_controls": {
     "old_harvard_doi": "10.7910/DVN/YUCG12",
+    "old_doi": "10.7910/DVN/YUCG12",
     "old_doi_mutation_allowed": false,
     "old_doi_v1_1_allowed": false,
     "new_dataset_required": true,
+    "epoch_ii_requires_separate_dataset_and_doi": true,
+    "preview_may_write_harvard": false,
     "authenticated_remaining_quota_check_required_before_upload": true,
     "automatic_submission_allowed": false,
     "automatic_resubmission_allowed": false,
     "in_review_mutation_allowed": false,
     "curator_direct_publication_after_approval": true,
-    "anonymous_postpublication_readback_required": true
+    "anonymous_postpublication_readback_required": true,
+    "postpublication_anonymous_full_readback_required": true
   },
   "authority": {
     "canonical_core": "three Bitcoin Originals only",
@@ -76,16 +80,5 @@
     "harvard_endorsement_claimed": false,
     "peer_review_claimed": false
   },
-  "ai_disclosure_file": "preservation/epoch-ii/AI-DISCLOSURE.md",
-  "publication_controls": {
-    "old_doi": "10.7910/DVN/YUCG12",
-    "old_doi_mutation_allowed": false,
-    "epoch_ii_requires_separate_dataset_and_doi": true,
-    "preview_may_write_harvard": false,
-    "automatic_submission_allowed": false,
-    "automatic_resubmission_allowed": false,
-    "in_review_mutation_allowed": false,
-    "curator_direct_publication_after_approval": true,
-    "postpublication_anonymous_full_readback_required": true
-  }
+  "ai_disclosure_file": "preservation/epoch-ii/AI-DISCLOSURE.md"
 }
