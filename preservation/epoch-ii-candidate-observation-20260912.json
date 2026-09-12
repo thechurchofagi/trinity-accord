@@ -1,0 +1,88 @@
+{
+  "schema": "trinityaccord.epoch-ii-candidate-observation.v1",
+  "role": "non_amending_metadata_audit_observation",
+  "observed_at_utc": "2026-09-12T11:43:18.569756Z",
+  "source_commit_sha": "f51bc959e58b8d2694910b679337f1320ed2ec30",
+  "audit_program_sha256": "69ecd2c16242089b6718b4155393fd2e0b03856cb0157e7415fdda94c8c415d8",
+  "audit_program_path": "scripts/audit_preservation_epoch_ii.py",
+  "audit_status": "metadata_census_complete",
+  "candidate_content_complete": false,
+  "canonical_body_copies_verified": 3,
+  "source_files_verified": 6404,
+  "source_logical_bytes": 384847555,
+  "releases_enumerated": 80,
+  "release_capacity": {
+    "api_digest_deduplicated_planning_bytes": 114932606266,
+    "assets": 424,
+    "assets_missing_declared_sha256": 0,
+    "deduplication_is_byte_verified": false,
+    "families": {
+      "bitcoin_operational_checkpoint": {
+        "assets": 108,
+        "logical_bytes": 88647324073
+      },
+      "encrypted_witness_ciphertext": {
+        "assets": 48,
+        "logical_bytes": 2798199225
+      },
+      "evidence_or_content": {
+        "assets": 97,
+        "logical_bytes": 1991767445
+      },
+      "presentation_current": {
+        "assets": 3,
+        "logical_bytes": 233495269
+      },
+      "presentation_history": {
+        "assets": 126,
+        "logical_bytes": 3805038570
+      },
+      "research_context": {
+        "assets": 16,
+        "logical_bytes": 263618
+      },
+      "sidechain_finality": {
+        "assets": 26,
+        "logical_bytes": 17551241826
+      }
+    },
+    "known_hash_groups": 409,
+    "logical_bytes": 115027330026
+  },
+  "zenodo_identifiers": 19,
+  "zenodo_unique_resolved_records": 12,
+  "physical_public_files": 153,
+  "physical_public_video_files": 3,
+  "physical_private_originals_with_public_notice": 1,
+  "historical_digest_rows": 884,
+  "historical_digest_crosswalk": {
+    "commitment_only": 874,
+    "public_locator_only": 4,
+    "source_bytes_match": 6
+  },
+  "harvard": {
+    "doi": "10.7910/DVN/YUCG12",
+    "version_state": "RELEASED",
+    "file_count": 13,
+    "frozen_archive_metadata_size_sha256_match": true,
+    "terms_of_use_nonempty": true,
+    "new_full_byte_readback_performed": false,
+    "mutated": false,
+    "resubmitted": false
+  },
+  "first_ci_audit": {
+    "run_id": 34691466118,
+    "source_sha": "f51bc959e58b8d2694910b679337f1320ed2ec30",
+    "status": "success",
+    "scope": "initial source/Release/DOI census before physical expansion",
+    "artifact_id": 10297355499,
+    "artifact_sha256": "1d65895ad91ba1e95d7168af834b93dc8c2fb09acd06cd0f059c8f8de85c769e"
+  },
+  "next_required_work": [
+    "finalize selected payload scope and dependency closure",
+    "expand preserved container members against the historical digest inventory",
+    "capture and verify required public payload bytes",
+    "build exact-commit reviewable source and complete rights materials",
+    "perform remote cold recovery before institutional submission"
+  ]
+}

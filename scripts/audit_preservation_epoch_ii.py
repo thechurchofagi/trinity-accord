@@ -41,6 +41,7 @@ SOURCE_PATHS = [
     "api/core-object-alpha-shenzhen-notary-2026-05-06.json",
     "api/gz2-notarial-certificate-redacted-attachments-2026-05-14.json",
     "evidence/notarial-certificate-2026-05-13/sealed-disc-custody-record.json",
+    "archive/evidence/digest-manifest.json",
 ]
 
 
@@ -70,7 +71,8 @@ class SameHostRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         old = urllib.parse.urlsplit(req.full_url)
         new = urllib.parse.urlsplit(newurl)
-        require(new.scheme == "https" and new.hostname == old.hostname and new.port in {None, 443}, "cross-host API redirect is not permitted")
+        arweave_sandbox = old.hostname == "arweave.net" and (new.hostname or "").endswith(".arweave.net") and not req.has_header("Authorization")
+        require(new.scheme == "https" and (new.hostname == old.hostname or arweave_sandbox) and new.port in {None, 443}, "cross-host API redirect is not permitted")
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
@@ -80,9 +82,9 @@ class Client:
         self.token = token
         self.replay = replay
 
-    def get(self, url, phase="sources"):
+    def get(self, url, phase="sources", text_payload=False):
         host = urllib.parse.urlsplit(url).hostname
-        require(host in {"api.github.com", "zenodo.org", "dataverse.harvard.edu"}, "unexpected API host")
+        require(host in {"api.github.com", "zenodo.org", "dataverse.harvard.edu", "arweave.net"}, "unexpected API host")
         key = hashlib.sha256(url.encode()).hexdigest()
         target = self.capture / phase / f"{key}.json"
         if self.replay:
@@ -100,7 +102,12 @@ class Client:
                 req = urllib.request.Request(url, headers=headers, method="GET")
                 opener = urllib.request.build_opener(SameHostRedirect())
                 with opener.open(req, timeout=30) as response:
-                    value = json.load(response)
+                    if text_payload:
+                        raw = response.read(4097)
+                        require(len(raw) <= 4096, "public notice exceeds bounded text size")
+                        value = {"text": raw.decode("utf-8"), "sha256": hashlib.sha256(raw).hexdigest(), "size_bytes": len(raw)}
+                    else:
+                        value = json.load(response)
                     effective_url = response.geturl()
                 write_json(target, {"url": url, "effective_url": effective_url, "observed_at_utc": now(), "status": "ok", "response": value})
                 return value
@@ -352,6 +359,85 @@ def inspect_harvard_metadata(observation, frozen):
             "institutional_submission_ready": False}
 
 
+def physical_census(client, source):
+    index_url = source["arweave"]["index_json"]["url"]
+    manifest_txid = source["arweave"].get("manifest_txid")
+    manifest_url = "https://arweave.net/raw/" + manifest_txid if manifest_txid else source["arweave"]["manifest_url"]
+    index, path_manifest = client.get(index_url), client.get(manifest_url)
+    entries = index["files"]
+    require(len(entries) == index["fileCount"] == source["arweave"]["uploaded_file_count"], "physical index count changed")
+    require(len({r["path"] for r in entries}) == len(entries), "duplicate physical path")
+    result, notices = [], []
+    for row in entries:
+        require(HEX64.fullmatch(row["sha256"]) and isinstance(row["size"], int), "physical file identity missing")
+        require(path_manifest["paths"][row["path"]]["id"] == row["txid"], "physical index / path-manifest mismatch")
+        require(re.fullmatch(r"[A-Za-z0-9_-]{43}", row["txid"]), "invalid physical TXID")
+        path = row["path"]
+        role = "recorded_video" if path.lower().endswith((".avi", ".mp4")) else "public_evidence_file"
+        entry = {"object_id": "physical:2026-05-06:" + path, "logical_path": path,
+                 "declared_sha256": row["sha256"], "size_bytes": row["size"], "arweave_txid": row["txid"],
+                 "source_locator": "https://arweave.net/" + row["txid"], "role": role,
+                 "capture": "locator_only", "verification": "not_run"}
+        if path.endswith(".avi.txt"):
+            notice = client.get(entry["source_locator"], text_payload=True)
+            require(notice["sha256"] == row["sha256"] and notice["size_bytes"] == row["size"], "physical private-evidence notice bytes mismatch")
+            require("非公开证据" in notice["text"] and "物理介质" in notice["text"], "notice does not declare private physical custody")
+            entry.update(role="public_notice_for_nonpublic_original", capture="small_notice_bytes_verified", verification="verified_this_run", notice=notice)
+            notices.append({"original_path": path[:-4], "scope": "nonpublic_physical_custody", "original_bytes_read": False,
+                            "public_notice_txid": row["txid"], "public_notice_sha256": row["sha256"]})
+        result.append(entry)
+    return {"status": "file_metadata_expanded", "index_url": index_url, "path_manifest_url": manifest_url,
+            "public_files": len(result), "logical_bytes": sum(r["size_bytes"] for r in result),
+            "public_video_files": sum(r["role"] == "recorded_video" for r in result),
+            "private_original_notices": notices, "files": result,
+            "full_payload_readback_this_run": False}
+
+
+def digest_crosswalk(digests, source_rows, releases, physical):
+    local, remote = collections.defaultdict(list), collections.defaultdict(list)
+    for r in source_rows:
+        local[r["content_sha256"]].append(r["path"])
+    for r in releases:
+        if r["declared_sha256"]:
+            remote[r["declared_sha256"]].append(r["object_id"])
+    for r in physical["files"]:
+        remote[r["declared_sha256"]].append(r["object_id"])
+    rows = []
+    for index, item in enumerate(digests["items"]):
+        require(HEX64.fullmatch(item["sha256"]), "invalid historical digest")
+        sha = item["sha256"]
+        restricted = "不公开" in item["path"]
+        rows.append({"object_id": f"historical-digest:{index}", "historical_path": item["path"],
+                     "declared_sha256": sha, "size_bytes": item["size_bytes"], "historical_status": item.get("status"),
+                     "historical_nonpublic_label": restricted, "matching_current_source_paths": local[sha],
+                     "matching_public_asset_metadata": remote[sha],
+                     "capture": "source_bytes_match" if local[sha] else "public_locator_only" if remote[sha] else "commitment_only",
+                     "access_review": "preserve_restriction_history" if restricted else "scope_review",
+                     "new_payload_disclosure_authorized": False})
+    return {"rows": rows, "summary": dict(collections.Counter(r["capture"] for r in rows)),
+            "boundary": "Unmatched commitments are not automatically missing project files: expand preserved container members and review protected scope first."}
+
+
+def copy_canonical_bodies(root, sha, btc, source_rows, out):
+    copied = []
+    for item in btc:
+        if item["classification"] != "canonical_original":
+            continue
+        candidates = [r for r in source_rows if r["content_sha256"] == item["body_sha256"]]
+        require(candidates, f"canonical body bytes absent from source: {item['inscription_number']}")
+        source = candidates[0]["path"]
+        raw = git(root, "show", f"{sha}:{source}")
+        require(hashlib.sha256(raw).hexdigest() == item["body_sha256"], "canonical body copy changed")
+        destination = out / "canon" / (item["inscription_number"] + ".txt")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(raw)
+        copied.append({"inscription_number": item["inscription_number"], "inscription_id": item["derived_inscription_id"],
+                       "source_path": source, "audit_copy_path": destination.relative_to(out).as_posix(),
+                       "sha256": item["body_sha256"], "size_bytes": len(raw), "verification": "exact_source_copy_against_pinned_inventory"})
+    require(len(copied) == 3, "canonical body copy set incomplete")
+    return copied
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--repository-root", type=Path, default=Path("."))
@@ -371,6 +457,8 @@ def main():
     source_map = {r["path"]: r for r in source_rows}
     sources = {path: json.loads(git(root, "show", f"{sha}:{path}")) for path in SOURCE_PATHS}
     btc, nft_refs = validate_sets(sources[SOURCE_PATHS[0]], sources["nft-identity-index.json"], sources["evidence/chronicle-sidechain-seven-root-provenance.json"])
+    canonical_copies = copy_canonical_bodies(root, sha, btc, source_rows, out)
+    write_json(out / "CANON-EXACT-COPY-REPORT.json", canonical_copies)
     write_json(out / "SOURCE-FILES.json", source_rows)
     write_json(out / "NFT-IDENTITY-INDEX.json", sources["nft-identity-index.json"])
     write_json(out / "NFT-CONTENT-REFERENCES.json", nft_refs)
@@ -383,10 +471,14 @@ def main():
     before = release_census(client, "before")
     dois, harvard = doi_census(client, sources)
     harvard_check = inspect_harvard_metadata(harvard, sources["preservation/harvard-dataverse-state.json"])
+    physical = physical_census(client, sources["api/core-object-alpha-shenzhen-notary-2026-05-06.json"])
     after = release_census(client, "after")
     stable_census(before, after)
     releases = release_rows(*after)
     cap = capacity(releases)
+    crosswalk = digest_crosswalk(sources["archive/evidence/digest-manifest.json"], source_rows, releases, physical)
+    write_json(out / "PHYSICAL-EVIDENCE-FILES.json", physical)
+    write_json(out / "HISTORICAL-DIGEST-CROSSWALK.json", crosswalk)
     write_json(out / "RELEASE-ASSETS.json", releases)
     write_json(out / "DOI-RECORDS.json", dois)
     write_json(out / "HARVARD-OBSERVATION.json", harvard)
@@ -394,8 +486,10 @@ def main():
     gaps = [
         {"id": "external-payload-capture", "status": "not_run", "blocks_content_candidate": True,
          "detail": "Release, DOI and NFT references were enumerated; their payload bytes were not downloaded by this audit."},
-        {"id": "physical-file-expansion", "status": "not_run", "blocks_content_candidate": True,
-         "detail": "Expand physical path manifests and bind original files, containers, GZ2 derivatives and certificates individually."},
+        {"id": "physical-payload-capture", "status": "metadata_expanded_payloads_not_captured", "blocks_content_candidate": True,
+         "detail": "The 153-file public index is cross-bound to its Arweave path manifest. Three public videos and one private-original notice are distinct. Full payload download remains outstanding."},
+        {"id": "historical-container-expansion", "status": "crosswalk_created_container_members_pending", "blocks_content_candidate": True,
+         "detail": "The 884-row historical digest inventory is mapped to current source hashes and public asset metadata. Unmatched rows require container-member and access-scope review, not an automatic missing-file claim."},
         {"id": "physical-correspondence", "status": "unresolved", "blocks_content_candidate": False,
          "detail": "Preserve source differences in material description, inscription coordinate and document transcription; no forensic identity claim."},
         {"id": "sealed-and-confidential", "status": "intentionally_restricted", "blocks_content_candidate": False,
@@ -412,8 +506,12 @@ def main():
                 "candidate_content_complete": False, "harvard_mutated": False, "release_assets_stable_across_two_complete_enumerations": True,
                 "source_files_verified": len(source_rows), "source_logical_bytes": sum(r["size_bytes"] for r in source_rows),
                 "bitcoin_identities": len(btc), "canonical_originals": 3, "nft_identities": 175,
+                "canonical_body_copies_verified_against_source_inventory": len(canonical_copies),
                 "nft_content_references": len(nft_refs), "nft_references_with_container_digest": len(nft_refs),
                 "nft_leaf_bytes_verified_this_run": 0, "releases_enumerated": len(after[0]), "release_capacity": cap,
+                "physical_public_files": physical["public_files"], "physical_public_video_files": physical["public_video_files"],
+                "physical_private_original_notice_count": len(physical["private_original_notices"]),
+                "historical_digest_rows": len(crosswalk["rows"]), "historical_digest_crosswalk": crosswalk["summary"],
                 "zenodo_identifiers_enumerated": len(dois), "zenodo_unique_resolved_records": len({d['record_id'] for d in dois if d['metadata_status'] == 'observed'}),
                 "zenodo_records_unavailable": sum(d["metadata_status"] != "observed" for d in dois), "harvard_frozen_baseline_metadata_check": harvard_check,
                 "external_payload_bytes_verified_this_run": 0, "epoch_ii_required_payload_denominator": None,

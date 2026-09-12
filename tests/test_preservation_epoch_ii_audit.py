@@ -1,5 +1,6 @@
 """Mutation checks for preservation scope, identity and enumeration boundaries."""
 import copy
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -126,6 +127,37 @@ class AuditTests(unittest.TestCase):
         request = urllib.request.Request('https://api.github.com/repos/a/b', headers={'Authorization':'Bearer test-only'})
         with self.assertRaisesRegex(ValueError, 'cross-host'):
             audit.SameHostRedirect().redirect_request(request, None, 302, '', {}, 'https://example.com/stolen')
+
+    def physical_fixture(self):
+        text = '此档案由守护者通过物理介质保管，作为非公开证据，必要时才使用。\n'
+        raw = text.encode()
+        row = {'path':'Record_06.avi.txt', 'txid':'a'*43, 'sha256':hashlib.sha256(raw).hexdigest(), 'size':len(raw)}
+        source = {'arweave':{'index_json':{'url':'index'}, 'manifest_url':'manifest', 'uploaded_file_count':1}}
+        records = {'index':{'files':[row], 'fileCount':1}, 'manifest':{'paths':{row['path']:{'id':row['txid']}}},
+                   'https://arweave.net/'+'a'*43:{'text':text, 'sha256':row['sha256'], 'size_bytes':len(raw)}}
+        class Client:
+            def get(self, url, **kwargs):
+                return records[url]
+        return source, records, Client()
+
+    def test_private_video_notice_is_not_a_public_video(self):
+        source, records, client = self.physical_fixture()
+        result = audit.physical_census(client, source)
+        self.assertEqual(result['public_video_files'], 0)
+        self.assertEqual(len(result['private_original_notices']), 1)
+        self.assertFalse(result['private_original_notices'][0]['original_bytes_read'])
+
+    def test_physical_path_manifest_mismatch_fails(self):
+        source, records, client = self.physical_fixture()
+        records['manifest']['paths']['Record_06.avi.txt']['id'] = 'b'*43
+        with self.assertRaisesRegex(ValueError, 'path-manifest mismatch'):
+            audit.physical_census(client, source)
+
+    def test_physical_notice_hash_mismatch_fails(self):
+        source, records, client = self.physical_fixture()
+        records['https://arweave.net/'+'a'*43]['sha256'] = '0'*64
+        with self.assertRaisesRegex(ValueError, 'notice bytes mismatch'):
+            audit.physical_census(client, source)
 
 
 if __name__ == '__main__':

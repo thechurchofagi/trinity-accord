@@ -15,6 +15,14 @@ detect changes. It enumerates DOI metadata referenced by the recovery records an
 keeps unavailability distinct from failed integrity. It neither rebuilds the existing
 17.55 GB Finality proofs nor uploads anything to Harvard or Zenodo.
 
+The physical archive's 153 public file identities are cross-checked against its
+Arweave path manifest. The 884-entry historical digest inventory is mapped to
+current source hashes and public asset metadata, retaining unmatched commitments
+for container-member and access-scope review. The 2026 `Record_03.avi` is distinct
+from the same-named 2025 video by size and hash. `Record_06.avi.txt` is a short,
+hash-verified public custody notice for nonpublic physical media, not a fourth
+public video or an invitation to retrieve private evidence.
+
 ## Run and review
 
 ```bash
