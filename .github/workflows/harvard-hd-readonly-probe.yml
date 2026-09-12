@@ -2,6 +2,13 @@ name: Harvard HD Read-only Probe
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/harvard-hd-readonly-probe.yml
+      - scripts/harvard_hd_readonly_probe.py
+      - tests/test_harvard_hd_readonly_probe.py
   pull_request:
     paths:
       - .github/workflows/harvard-hd-readonly-probe.yml
