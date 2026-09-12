@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
-"""Audit the seven historical sidechain roots against on-chain ERC-1155 transfers.
+"""Reproduce provenance classification for the seven historical sidechain roots.
 
-This script does not attempt to recover unavailable IPFS payload bytes. It answers a
-separate provenance question: were those seven token references created/delivered by
-the Trinity Accord wallet itself, or were they unsolicited external assets observed
-in the wallet?
-
-Source of transfer truth: public Blockscout v2 APIs for Polygon and Base.
+The unavailable IPFS payload bytes are NOT claimed recovered. This audit only asks
+whether each referenced ERC-1155 asset was produced/initiated by the Trinity Accord
+wallet or was delivered from an external source.
 """
-
 from __future__ import annotations
 
 import json
@@ -20,7 +16,6 @@ import urllib.request
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 EXCEPTIONS = ROOT / "evidence/chronicle-sidechain-historical-payload-exceptions.json"
 OUT = ROOT / "artifacts/chronicle-sidechain-seven-root-provenance.json"
-
 TARGET = "0xbc63566a41cbfdb9c266a5941cbe47894daa54a8"
 ZERO = "0x0000000000000000000000000000000000000000"
 OFFICIAL_PROJECT_CONTRACTS = {
@@ -35,18 +30,18 @@ API = {
 }
 
 
-def get_json(url: str, attempts: int = 5):
+def get_json(url: str, attempts: int = 4):
     last = None
     for i in range(attempts):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "trinity-accord-seven-root-audit/1"})
+            req = urllib.request.Request(url, headers={"User-Agent": "trinity-accord-seven-root-audit/2"})
             with urllib.request.urlopen(req, timeout=30) as resp:
                 return json.load(resp)
-        except Exception as exc:  # network/provider retry
+        except Exception as exc:
             last = exc
             if i + 1 < attempts:
                 time.sleep(min(2 ** i, 8))
-    raise RuntimeError(f"GET failed after {attempts} attempts: {url}: {last}")
+    raise RuntimeError(f"GET failed: {url}: {last}")
 
 
 def addr(value):
@@ -55,13 +50,39 @@ def addr(value):
     return (value or "").lower()
 
 
-def instance_transfers(base: str, contract: str, token_id: str):
-    url = f"{base}/tokens/{contract}/instances/{urllib.parse.quote(token_id, safe='')}/transfers"
-    seen = set()
+def as_ids(value):
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return [str(x) for x in value]
+    return [str(value)]
+
+
+def event_token_ids(item):
+    ids = []
+    ids += as_ids(item.get("token_id"))
+    ids += as_ids(item.get("token_ids"))
+    total = item.get("total") or {}
+    if isinstance(total, dict):
+        ids += as_ids(total.get("token_id"))
+        ids += as_ids(total.get("token_ids"))
+    instance = item.get("token_instance") or {}
+    if isinstance(instance, dict):
+        ids += as_ids(instance.get("id"))
+    return sorted(set(ids))
+
+
+def inbound_for_contract(base: str, contract: str):
+    params = {
+        "type": "ERC-1155",
+        "filter": "to",
+        "token": contract,
+    }
+    url = f"{base}/addresses/{TARGET}/token-transfers"
     items = []
-    params = None
-    for _ in range(100):
-        page_url = url if not params else url + "?" + urllib.parse.urlencode(params)
+    seen = set()
+    for _ in range(20):
+        page_url = url + "?" + urllib.parse.urlencode(params)
         data = get_json(page_url)
         items.extend(data.get("items") or [])
         nxt = data.get("next_page_params")
@@ -69,12 +90,12 @@ def instance_transfers(base: str, contract: str, token_id: str):
             break
         marker = json.dumps(nxt, sort_keys=True)
         if marker in seen:
-            raise RuntimeError(f"pagination loop for {contract}/{token_id}")
+            raise RuntimeError(f"pagination loop for recipient/contract {contract}")
         seen.add(marker)
-        params = nxt
+        params = {"type": "ERC-1155", "filter": "to", "token": contract, **nxt}
     else:
-        raise RuntimeError(f"pagination exceeded safety limit for {contract}/{token_id}")
-    return items
+        raise RuntimeError(f"recipient-filtered pagination exceeded safety limit for {contract}")
+    return [x for x in items if addr(x.get("to")) == TARGET and addr((x.get("token") or {}).get("address_hash")) == contract]
 
 
 def tx_sender(base: str, tx_hash: str):
@@ -93,37 +114,28 @@ def main():
         chain = row["chain"]
         contract = row["contract"].lower()
         token_id = str(row["token_id"])
-        if chain not in API:
-            raise SystemExit(f"unsupported chain {chain}")
-        transfers = instance_transfers(API[chain], contract, token_id)
-        inbound = [x for x in transfers if addr(x.get("to")) == TARGET]
-        if not inbound:
-            raise SystemExit(f"no inbound transfer to target for {chain}:{contract}/{token_id}")
+        events = inbound_for_contract(API[chain], contract)
+        if not events:
+            raise SystemExit(f"no inbound ERC-1155 event for {chain}:{contract}/{token_id}")
 
-        # The seven historical references each describe one asset coordinate. Preserve
-        # every matching inbound event, but use the earliest one as the provenance event.
-        inbound_sorted = sorted(
-            inbound,
-            key=lambda x: (x.get("timestamp") or "", int(x.get("log_index") or 0)),
-        )
-        event = inbound_sorted[0]
+        exact_id = [x for x in events if token_id in event_token_ids(x)]
+        # Some Blockscout instances omit token-id fields from address-transfer rows.
+        # In that case a single contract-matching inbound event is still unambiguous.
+        candidates = exact_id or events
+        if len(candidates) > 1 and not exact_id:
+            print(json.dumps({"ambiguous_contract": contract, "events": candidates}, indent=2))
+            raise SystemExit(f"multiple inbound events but Blockscout omitted token id for {contract}")
+        event = sorted(candidates, key=lambda x: (x.get("timestamp") or "", int(x.get("log_index") or 0)))[0]
         tx_hash = event.get("transaction_hash")
         if not tx_hash:
-            raise SystemExit(f"missing transaction hash for {chain}:{contract}/{token_id}")
+            raise SystemExit(f"missing tx hash for {contract}/{token_id}")
         initiator, tx = tx_sender(API[chain], tx_hash)
         source = addr(event.get("from"))
         target_initiated = initiator == TARGET
         official_contract = contract in OFFICIAL_PROJECT_CONTRACTS
-        if source == ZERO:
-            delivery_mode = "external_zero_address_mint"
-        else:
-            delivery_mode = "external_transfer"
+        delivery_mode = "external_zero_address_mint" if source == ZERO else "external_transfer"
+        classification = "project_originated" if target_initiated or official_contract else "externally_delivered_not_self_minted"
 
-        classification = (
-            "project_originated"
-            if target_initiated or official_contract
-            else "externally_delivered_not_self_minted"
-        )
         results.append({
             "root_cid": row["root_cid"],
             "asset_id": row["asset_id"],
@@ -140,6 +152,7 @@ def main():
             "delivery_mode": delivery_mode,
             "classification": classification,
             "block_number": tx.get("block_number"),
+            "blockscout_event_token_ids": event_token_ids(event),
         })
 
     external = [x for x in results if x["classification"] == "externally_delivered_not_self_minted"]
@@ -155,21 +168,15 @@ def main():
         "project_originated": len(results) - len(external),
         "project_content_gap_count": len(results) - len(external),
         "payload_recovery_claimed": False,
-        "interpretation": (
-            "These roots remain historical observations of unavailable external payloads, "
-            "but are not Trinity Accord project-content gaps when all seven are externally delivered."
-        ),
+        "interpretation": "Unrecoverable external-wallet observations are not Trinity Accord project-content gaps.",
         "items": results,
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")
     print(json.dumps(summary, indent=2, sort_keys=True))
 
-    # Fail closed unless the prior provenance claim is reproduced exactly.
     if len(external) != 7 or len(zero_mints) != 2 or len(transfers) != 5:
-        raise SystemExit(
-            f"provenance mismatch: external={len(external)} zero_mints={len(zero_mints)} transfers={len(transfers)}"
-        )
+        raise SystemExit(f"provenance mismatch: external={len(external)} zero_mints={len(zero_mints)} transfers={len(transfers)}")
 
 
 if __name__ == "__main__":
