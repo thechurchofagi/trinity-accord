@@ -210,11 +210,15 @@ class EpochIIContentCandidateTests(unittest.TestCase):
     def test_atomic_source_restore_residue_is_removed_before_sealing(self):
         with tempfile.TemporaryDirectory() as value:
             output = pathlib.Path(value)
+            (output / "intended.json").write_text("{}\n")
             residue = output / ".source-cold-restore.partial-test"
             residue.mkdir()
             (residue / "unsealed-byte").write_text("not candidate data")
-            MODULE.cleanup_source_restore_residue(output)
+            MODULE.write_candidate_checksums(output)
             self.assertFalse(residue.exists())
+            checksums = (output / "SHA256SUMS").read_text().splitlines()
+            self.assertEqual(len(checksums), 1)
+            self.assertTrue(checksums[0].endswith("  intended.json"))
 
 
 if __name__ == "__main__":

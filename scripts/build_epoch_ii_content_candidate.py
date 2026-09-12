@@ -789,11 +789,24 @@ def build_source_capsule(repo: pathlib.Path, output: pathlib.Path) -> dict[str, 
 
 
 def write_candidate_checksums(output: pathlib.Path) -> None:
+    cleanup_source_restore_residue(output)
     rows = []
     for path in sorted(output.rglob("*")):
         if path.is_file() and path.name != "SHA256SUMS":
             rows.append(f"{sha256_file(path)}  {path.relative_to(output).as_posix()}")
     (output / "SHA256SUMS").write_text("\n".join(rows) + "\n", encoding="utf-8")
+    # A Git child process may finish its atomic restore staging after the
+    # directory walk above has begun. Remove that late residue after hashing,
+    # then prove the sealed list covers the exact remaining file set.
+    cleanup_source_restore_residue(output)
+    expected = {row.split("  ", 1)[1] for row in rows}
+    actual = {
+        path.relative_to(output).as_posix()
+        for path in output.rglob("*")
+        if path.is_file() and path.name != "SHA256SUMS"
+    }
+    if actual != expected:
+        raise SystemExit("candidate checksum set does not cover exact file set after sealing")
 
 
 def main() -> int:
