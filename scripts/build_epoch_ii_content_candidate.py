@@ -102,6 +102,31 @@ def selected_release_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return selected
 
 
+def full_finality_dependency(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    selected = [row for row in rows if row.get("family") == "sidechain_finality"]
+    objects = validate_release_rows(selected)
+    return {
+        "role": "noncanonical_polygon_base_finality_dependency",
+        "institutional_copy_requirement": "copy_every_public_file_byte_for_byte",
+        "logical_assets": len(selected),
+        "logical_bytes": sum(int(row["size_bytes"]) for row in selected),
+        "unique_objects": len(objects),
+        "unique_bytes": sum(int(row["size_bytes"]) for row in objects.values()),
+        "release_tags": sorted({str(row["release_tag"]) for row in selected}),
+        "zenodo_version_doi": "10.5281/zenodo.22710291",
+        "files": [
+            {
+                "filename": str(row["filename"]),
+                "bytes": int(row["size_bytes"]),
+                "sha256": str(row["declared_sha256"]),
+                "release_tag": str(row["release_tag"]),
+                "source_locator": str(row["source_locator"]),
+            }
+            for row in sorted(selected, key=lambda item: (str(item["release_tag"]), str(item["filename"])))
+        ],
+    }
+
+
 def validate_release_rows(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     objects: dict[str, dict[str, Any]] = {}
     logical: set[tuple[int, str]] = set()
@@ -468,16 +493,18 @@ def historical_crosscheck(
     counts: defaultdict[str, int] = defaultdict(int)
     for row in historical["rows"]:
         matches = by_identity[(row["declared_sha256"], int(row["size_bytes"]))]
+        path = str(row.get("historical_path") or "").replace("\\", "/")
         if row.get("capture") == "source_bytes_match":
             status = "source_bytes_match"
         elif matches:
             status = "selected_archive_member_bytes_match"
         elif row.get("matching_public_asset_metadata"):
             status = "public_asset_locator_only"
-        elif row.get("historical_nonpublic_label"):
+        elif row.get("historical_nonpublic_label") or any(
+            label in path for label in ("不公开", "未公开")
+        ):
             status = "intentionally_restricted_commitment"
         else:
-            path = str(row.get("historical_path") or "").replace("\\", "/")
             name = path.rsplit("/", 1)[-1]
             cid_match = re.search(r"(bafy[a-z0-9]+|Qm[A-Za-z0-9]+)", name)
             cid = cid_match.group(1) if cid_match else None
@@ -584,6 +611,7 @@ def main() -> int:
     output.mkdir(parents=True, exist_ok=True)
     release_rows = load_json(inventory / "RELEASE-ASSETS.json")
     selected = selected_release_rows(release_rows)
+    finality_dependency = full_finality_dependency(release_rows)
     objects = validate_release_rows(selected)
     log(f"selected logical_assets={len(selected)} unique_objects={len(objects)} bytes={sum(int(row['size_bytes']) for row in objects.values())}")
     verified_objects = verify_or_download_objects(store, objects, args.download, args.workers)
@@ -608,6 +636,7 @@ def main() -> int:
         raise SystemExit("selected content semantic verification failed")
     source_report = None if args.skip_source_capsule else build_source_capsule(repo, output)
     write_json(output / "SELECTED-RELEASE-ASSETS.json", selected)
+    write_json(output / "FULL-FINALITY-INSTITUTIONAL-COPY-MANIFEST.json", finality_dependency)
     write_json(output / "VERIFIED-OBJECTS.json", verified_objects)
     write_json(output / "ARCHIVE-MEMBERS.json", members)
     families = {}
@@ -618,6 +647,7 @@ def main() -> int:
     source_sha = subprocess.run(["git", "-C", str(repo), "rev-parse", "HEAD"], check=True, text=True, stdout=subprocess.PIPE).stdout.strip()
     submission_blocks = [
         "human rights/license/Custom Terms/Terms of Use review",
+        "copy every Polygon/Base Finality file to the second institution and verify anonymous public readback",
         "assemble institution-sized files and run independent remote cold recovery",
     ]
     if physical["unmatched"]:
@@ -644,7 +674,7 @@ def main() -> int:
         "historical_digest_expansion": historical["summary"],
         "source_capsule_cold_restore": source_report,
         "distributed_dependencies": {
-            "sidechain_finality_large_payload": "retain Release/DOI identities and prior strict/cold-verification receipts; 17.55 GB payload not duplicated in the institutional candidate",
+            "sidechain_finality_large_payload": finality_dependency,
             "bitcoin_operational_checkpoints": "reproducibility cache; retain inventory and latest recovery guidance, not 88.65 GB of cumulative node checkpoints",
             "superseded_museum_releases": "retain version identities; current reconstructable museum snapshot selected",
         },
