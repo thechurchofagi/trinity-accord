@@ -24,15 +24,29 @@ jobs:
     timeout-minutes: 10
     env:
       HD_API_TOKEN: ${{ secrets.HD }}
-      PROBE_OUTPUT: ${{ runner.temp }}/harvard-hd-readonly-probe.json
     steps:
       - name: Check out the exact proposed source
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
 
       - name: Prove the probe contract
-        run: python3 -m pytest -q tests/test_harvard_hd_readonly_probe.py
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import importlib.util
+          from pathlib import Path
+
+          path = Path('tests/test_harvard_hd_readonly_probe.py')
+          spec = importlib.util.spec_from_file_location('harvard_probe_tests', path)
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          for name in sorted(item for item in dir(module) if item.startswith('test_')):
+              getattr(module, name)()
+              print(f'PASS {name}')
+          PY
 
       - name: Query Harvard with GET only
+        env:
+          PROBE_OUTPUT: ${{ runner.temp }}/harvard-hd-readonly-probe.json
         run: python3 scripts/harvard_hd_readonly_probe.py
 
       - name: Upload redacted result
