@@ -503,7 +503,7 @@ def historical_crosscheck(
         elif row.get("historical_nonpublic_label") or any(
             label in path for label in ("不公开", "未公开")
         ):
-            status = "intentionally_restricted_commitment"
+            status = "historical_nonpublic_label_commitment"
         else:
             name = path.rsplit("/", 1)[-1]
             cid_match = re.search(r"(bafy[a-z0-9]+|Qm[A-Za-z0-9]+)", name)
@@ -523,10 +523,211 @@ def historical_crosscheck(
         "boundary": (
             "Only exact hash-and-size member matches are byte recovery. Semantic/status mappings preserve "
             "the identity of unavailable legacy containers and do not prove historical bytes, full DAG "
-            "completeness, or authorize disclosure of restricted/plaintext witness material."
+            "completeness, or by themselves decide current publication scope."
         ),
         "summary": dict(sorted(counts.items())),
         "rows": rows,
+    }
+
+
+def historical_publication_scope(
+    historical: dict[str, Any], decision: dict[str, Any]
+) -> dict[str, Any]:
+    """Bind the owner's publication decision to the exact affected inventory rows.
+
+    Historical path labels remain provenance facts. They are not silently erased,
+    but the later human decision can supersede them for publication. This function
+    never promotes commitment-only rows into recovered bytes.
+    """
+    affected_statuses = {
+        "historical_nonpublic_label_commitment",
+        "public_historical_commitment_unresolved",
+    }
+    rows = [
+        row for row in historical["rows"]
+        if row["content_resolution"] in affected_statuses
+    ]
+    canonical_rows = sorted(
+        [
+            {
+                "declared_sha256": str(row["declared_sha256"]),
+                "historical_path": str(row["historical_path"]),
+                "size_bytes": int(row["size_bytes"]),
+            }
+            for row in rows
+        ],
+        key=lambda row: (
+            row["declared_sha256"], row["size_bytes"], row["historical_path"]
+        ),
+    )
+    encoded = json.dumps(
+        canonical_rows,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    actual_digest = hashlib.sha256(encoded).hexdigest()
+    binding = decision["bound_historical_rows"]
+    identities = {
+        (row["declared_sha256"], int(row["size_bytes"])) for row in rows
+    }
+    checks = {
+        "combined_rows": len(rows),
+        "distinct_sha256_and_size_identities": len(identities),
+        "logical_bytes_including_duplicate_commitments": sum(
+            int(row["size_bytes"]) for row in rows
+        ),
+        "canonical_rows_sha256": actual_digest,
+    }
+    mismatches = {
+        key: {"expected": binding.get(key), "actual": value}
+        for key, value in checks.items()
+        if binding.get(key) != value
+    }
+    if mismatches:
+        raise SystemExit(f"historical publication decision binding mismatch: {mismatches}")
+    if decision.get("decision", {}).get("public_access_authorized") is not True:
+        raise SystemExit("historical publication decision does not authorize public access")
+    resolved_rows = [
+        {
+            "historical_path": row["historical_path"],
+            "size_bytes": int(row["size_bytes"]),
+            "declared_sha256": row["declared_sha256"],
+            "historical_resolution": row["content_resolution"],
+            "current_publication_scope": "public_if_exact_bytes_are_recovered",
+            "current_byte_status": "commitment_only_exact_bytes_not_recovered",
+        }
+        for row in rows
+    ]
+    return {
+        "schema": "trinityaccord.epoch-ii-historical-publication-scope-resolution.v1",
+        "status": "pass",
+        "decision_record": "preservation/epoch-ii-publication-scope-decision-20260912.json",
+        "decision_binding": checks,
+        "historical_labels_preserved_as_provenance": True,
+        "human_scope_decision_complete": True,
+        "public_if_exact_bytes_are_recovered_rows": len(rows),
+        "distinct_commitment_identities": len(identities),
+        "currently_uploadable_rows": 0,
+        "commitment_only_exact_bytes_not_recovered_rows": len(rows),
+        "privacy_excluded_rows": 0,
+        "unresolved_scope_decisions": 0,
+        "exact_byte_inventory_complete": False,
+        "project_content_gap_created_by_unavailable_legacy_wrappers": 0,
+        "rows": resolved_rows,
+    }
+
+
+def verify_encrypted_witness_archives(
+    repo: pathlib.Path, selected: list[dict[str, Any]]
+) -> dict[str, Any]:
+    """Verify the complete public computationally delayed witness layer.
+
+    The archival object is the ciphertext plus recovery/verification metadata.
+    Plaintext and unlock material are intentionally absent; that is the delayed-
+    access design, not an unresolved privacy review.
+    """
+    index = load_json(repo / "archive" / "encrypted-witness-archives.v1.json")
+    selected_rows = [
+        row for row in selected if row.get("family") == "encrypted_witness_ciphertext"
+    ]
+    by_tag: defaultdict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in selected_rows:
+        by_tag[str(row["release_tag"])].append(row)
+    archive_reports = []
+    errors = []
+    for key, item in sorted(index["archives"].items()):
+        tag = str(item["github_release_tag"])
+        state = load_json(repo / str(item["state_record"]))
+        rows = by_tag.get(tag, [])
+        actual = {
+            str(row["filename"]): {
+                "bytes": int(row["size_bytes"]),
+                "sha256": str(row["declared_sha256"]),
+            }
+            for row in rows
+        }
+        expected = {
+            str(name): {
+                "bytes": int(value["bytes"]),
+                "sha256": str(value["sha256"]),
+            }
+            for name, value in state["source_inventory"].items()
+        }
+        if actual != expected:
+            errors.append({"archive": key, "error": "selected_release_inventory_mismatch"})
+        state_checks = {
+            "release_tag": state.get("source_release_tag") == tag,
+            "doi": state.get("doi") == item.get("zenodo_doi"),
+            "verified_file_count": state.get("verified_file_count")
+            == item.get("verified_file_count")
+            == len(expected),
+            "verified_total_bytes": state.get("verified_total_bytes")
+            == item.get("verified_total_bytes")
+            == sum(value["bytes"] for value in expected.values()),
+            "remote_full_readback_sha256_verified": state.get(
+                "remote_full_readback_sha256_verified"
+            )
+            is True
+            and item.get("remote_full_readback_sha256_verified") is True,
+        }
+        if not all(state_checks.values()):
+            errors.append(
+                {"archive": key, "error": "index_state_mismatch", "checks": state_checks}
+            )
+        archive_reports.append(
+            {
+                "archive": key,
+                "title": item["title"],
+                "release_tag": tag,
+                "zenodo_doi": item["zenodo_doi"],
+                "files": len(actual),
+                "bytes": sum(value["bytes"] for value in actual.values()),
+                "remote_full_readback_sha256_verified": state_checks[
+                    "remote_full_readback_sha256_verified"
+                ],
+                "inventory_match": actual == expected,
+            }
+        )
+    expected_tags = {
+        str(item["github_release_tag"]) for item in index["archives"].values()
+    }
+    extra_tags = sorted(set(by_tag) - expected_tags)
+    missing_tags = sorted(expected_tags - set(by_tag))
+    if extra_tags or missing_tags:
+        errors.append(
+            {
+                "error": "encrypted_witness_release_set_mismatch",
+                "extra_tags": extra_tags,
+                "missing_tags": missing_tags,
+            }
+        )
+    logical_bytes = sum(int(row["size_bytes"]) for row in selected_rows)
+    aggregate = index["aggregate"]
+    if len(selected_rows) != int(aggregate["verified_file_count"]):
+        errors.append({"error": "aggregate_file_count_mismatch"})
+    if logical_bytes != int(aggregate["verified_total_bytes"]):
+        errors.append({"error": "aggregate_byte_count_mismatch"})
+    return {
+        "schema": "trinityaccord.epoch-ii-encrypted-delayed-access-verification.v1",
+        "status": "pass" if not errors else "fail",
+        "role": "public_ciphertext_computationally_delayed_access_evidence",
+        "plaintext_public_now": False,
+        "unlock_material_public_now": False,
+        "future_computational_decryption_intended": True,
+        "publication_scope_note": (
+            "The complete public archival object is ciphertext plus format, recovery, "
+            "integrity, verification, benchmark and destruction-receipt metadata. "
+            "Absent plaintext is intentional and is not a missing-payload claim."
+        ),
+        "archive_count": len(archive_reports),
+        "logical_files": len(selected_rows),
+        "logical_bytes": logical_bytes,
+        "unique_sha256_objects": len(
+            {str(row["declared_sha256"]) for row in selected_rows}
+        ),
+        "archives": archive_reports,
+        "errors": errors,
     }
 
 
@@ -625,14 +826,32 @@ def main() -> int:
         members,
         {str(item["cid"]) for item in nft_manifest["files"]},
     )
+    historical_scope = historical_publication_scope(
+        historical,
+        load_json(
+            repo
+            / "preservation"
+            / "epoch-ii-publication-scope-decision-20260912.json"
+        ),
+    )
+    encrypted_witnesses = verify_encrypted_witness_archives(repo, selected)
     checksum_lists = verify_public_checksum_lists(store, selected)
     # Persist diagnostic reports before the fail-closed semantic gate so a
     # failed run remains reviewable instead of reducing the result to one line.
     write_json(output / "NFT-CAR-VERIFICATION.json", nft)
     write_json(output / "PHYSICAL-PAYLOAD-CROSSCHECK.json", physical)
     write_json(output / "HISTORICAL-DIGEST-EXPANSION.json", historical)
+    write_json(
+        output / "HISTORICAL-PUBLICATION-SCOPE-RESOLUTION.json",
+        historical_scope,
+    )
+    write_json(output / "ENCRYPTED-DELAYED-ACCESS-VERIFICATION.json", encrypted_witnesses)
     write_json(output / "PUBLIC-CHECKSUM-LIST-CROSSCHECK.json", checksum_lists)
-    if nft["status"] != "pass" or checksum_lists["status"] != "pass":
+    if (
+        nft["status"] != "pass"
+        or encrypted_witnesses["status"] != "pass"
+        or checksum_lists["status"] != "pass"
+    ):
         raise SystemExit("selected content semantic verification failed")
     source_report = None if args.skip_source_capsule else build_source_capsule(repo, output)
     write_json(output / "SELECTED-RELEASE-ASSETS.json", selected)
@@ -652,7 +871,7 @@ def main() -> int:
     ]
     if physical["unmatched"]:
         submission_blocks.insert(0, "resolve public physical payloads not found in selected archives")
-    if historical["summary"].get("public_historical_commitment_unresolved", 0):
+    if historical_scope["unresolved_scope_decisions"]:
         submission_blocks.insert(
             0,
             "human scope decision for public historical commitments whose exact legacy bytes remain unavailable",
@@ -672,6 +891,35 @@ def main() -> int:
         "nft_car_verification": {k: nft[k] for k in ("status", "expected_cars", "verified_cars", "metadata_cid_pass", "media_cid_pass", "media_cid_audit_warning_count")},
         "physical_payload_crosscheck": {k: physical[k] for k in ("status", "public_files", "verified_from_selected_archives_or_prior_capture", "unmatched")},
         "historical_digest_expansion": historical["summary"],
+        "historical_publication_scope": {
+            key: historical_scope[key]
+            for key in (
+                "status",
+                "human_scope_decision_complete",
+                "public_if_exact_bytes_are_recovered_rows",
+                "distinct_commitment_identities",
+                "currently_uploadable_rows",
+                "commitment_only_exact_bytes_not_recovered_rows",
+                "privacy_excluded_rows",
+                "unresolved_scope_decisions",
+                "exact_byte_inventory_complete",
+                "project_content_gap_created_by_unavailable_legacy_wrappers",
+            )
+        },
+        "encrypted_delayed_access_witnesses": {
+            key: encrypted_witnesses[key]
+            for key in (
+                "status",
+                "role",
+                "plaintext_public_now",
+                "unlock_material_public_now",
+                "future_computational_decryption_intended",
+                "archive_count",
+                "logical_files",
+                "logical_bytes",
+                "unique_sha256_objects",
+            )
+        },
         "source_capsule_cold_restore": source_report,
         "distributed_dependencies": {
             "sidechain_finality_large_payload": finality_dependency,
@@ -692,6 +940,9 @@ def main() -> int:
         "This is fixed, citable research data for independent inspection of Trinity Accord's public corpus and evidence relationships. "
         "It records actual byte verification of the selected public content, archive-member expansion, the 175-NFT CAR set, physical-evidence coverage and an exact-source cold restore. "
         "It is non-amending and does not replace the three Bitcoin Originals.\n\n"
+        "The human publication-scope decision authorizes public access to recoverable project materials, including historically nonpublic-labelled paths. "
+        "Commitment-only rows remain non-uploadable until their exact SHA-256 and size are recovered; no substitute bytes are permitted.\n\n"
+        "The three encrypted witness archives are a separate computationally delayed-access layer. Their complete public object is ciphertext plus recovery and verification metadata; plaintext and unlock material are intentionally absent so future computation, rather than present disclosure, controls access.\n\n"
         "The candidate is not an institutional submission. Harvard v1.0 is unchanged, and automated Harvard submission or resubmission is prohibited. "
         "Review `CONTENT-CANDIDATE.json` and the specific verification reports before using the package.\n",
         encoding="utf-8",

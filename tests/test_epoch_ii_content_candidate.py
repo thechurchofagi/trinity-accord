@@ -1,5 +1,7 @@
 import base64
 import importlib.util
+import hashlib
+import json
 import pathlib
 import unittest
 
@@ -86,7 +88,7 @@ class EpochIIContentCandidateTests(unittest.TestCase):
         self.assertEqual(report["summary"]["selected_archive_member_bytes_match"], 1)
         self.assertEqual(report["summary"]["public_historical_commitment_unresolved"], 1)
 
-    def test_nested_nonpublic_path_is_intentionally_restricted(self):
+    def test_nested_nonpublic_path_preserves_historical_label_only(self):
         historical = {
             "rows": [
                 {
@@ -100,8 +102,95 @@ class EpochIIContentCandidateTests(unittest.TestCase):
             ]
         }
         report = MODULE.historical_crosscheck(historical, [])
-        self.assertEqual(report["summary"]["intentionally_restricted_commitment"], 1)
+        self.assertEqual(report["summary"]["historical_nonpublic_label_commitment"], 1)
         self.assertNotIn("public_historical_commitment_unresolved", report["summary"])
+
+    def test_publication_decision_supersedes_label_without_claiming_bytes(self):
+        historical = {
+            "rows": [
+                {
+                    "declared_sha256": "c" * 64,
+                    "size_bytes": 9,
+                    "historical_path": "E:\\瑕疵\\未公开\\Snap_004.jpg",
+                    "content_resolution": "historical_nonpublic_label_commitment",
+                },
+                {
+                    "declared_sha256": "d" * 64,
+                    "size_bytes": 10,
+                    "historical_path": "E:\\指令.txt",
+                    "content_resolution": "public_historical_commitment_unresolved",
+                },
+            ]
+        }
+        canonical = sorted(
+            [
+                {
+                    "declared_sha256": row["declared_sha256"],
+                    "historical_path": row["historical_path"],
+                    "size_bytes": row["size_bytes"],
+                }
+                for row in historical["rows"]
+            ],
+            key=lambda row: (
+                row["declared_sha256"], row["size_bytes"], row["historical_path"]
+            ),
+        )
+        digest = hashlib.sha256(
+            json.dumps(
+                canonical,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode()
+        ).hexdigest()
+        decision = {
+            "decision": {"public_access_authorized": True},
+            "bound_historical_rows": {
+                "combined_rows": 2,
+                "distinct_sha256_and_size_identities": 2,
+                "logical_bytes_including_duplicate_commitments": 19,
+                "canonical_rows_sha256": digest,
+            },
+        }
+        report = MODULE.historical_publication_scope(historical, decision)
+        self.assertEqual(report["status"], "pass")
+        self.assertEqual(report["public_if_exact_bytes_are_recovered_rows"], 2)
+        self.assertEqual(report["currently_uploadable_rows"], 0)
+        self.assertEqual(report["privacy_excluded_rows"], 0)
+        self.assertEqual(report["unresolved_scope_decisions"], 0)
+        self.assertTrue(
+            all(
+                row["current_byte_status"]
+                == "commitment_only_exact_bytes_not_recovered"
+                for row in report["rows"]
+            )
+        )
+
+    def test_encrypted_witness_layer_is_complete_public_ciphertext(self):
+        index = json.loads(
+            (ROOT / "archive/encrypted-witness-archives.v1.json").read_text()
+        )
+        selected = []
+        for item in index["archives"].values():
+            state = json.loads((ROOT / item["state_record"]).read_text())
+            for name, identity in state["source_inventory"].items():
+                selected.append(
+                    {
+                        "family": "encrypted_witness_ciphertext",
+                        "release_tag": item["github_release_tag"],
+                        "filename": name,
+                        "size_bytes": identity["bytes"],
+                        "declared_sha256": identity["sha256"],
+                    }
+                )
+        report = MODULE.verify_encrypted_witness_archives(ROOT, selected)
+        self.assertEqual(report["status"], "pass")
+        self.assertEqual(report["archive_count"], 3)
+        self.assertEqual(report["logical_files"], 48)
+        self.assertEqual(report["logical_bytes"], 2_798_199_225)
+        self.assertEqual(report["unique_sha256_objects"], 45)
+        self.assertFalse(report["plaintext_public_now"])
+        self.assertTrue(report["future_computational_decryption_intended"])
 
     def test_physical_match_requires_both_hash_and_size(self):
         physical = {"files": [{"declared_sha256": "b" * 64, "size_bytes": 4, "capture": "locator_only"}]}

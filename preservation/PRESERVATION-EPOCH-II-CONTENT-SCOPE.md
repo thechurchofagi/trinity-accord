@@ -52,17 +52,33 @@ amend a published preservation epoch.
 
 The historical 884-row digest inventory is retained in full. Exact SHA-256 and size
 matches against selected archive members are byte recovery. Other categories remain
-explicit: intentionally restricted material, including nested paths explicitly
-labelled `未公开` or `不公开`; old parent-CAR commitments whose
-current leaf CARs are verified; historical operational tools; public-witness
-plaintext/archive commitments now represented by public ciphertext; and remaining
-public historical commitments. Semantic mappings never claim recovery of the exact
-legacy container or full DAG completeness.
+explicit: historical paths labelled `未公开` or `不公开`; old parent-CAR
+commitments whose current leaf CARs are verified; historical operational tools;
+public-witness plaintext/archive commitments now represented by public ciphertext;
+and remaining historical commitments. These labels and mappings are provenance
+facts, not current privacy exclusions. Semantic mappings never claim recovery of the
+exact legacy container or full DAG completeness.
 
-Confidential flaw-challenge data, sealed-disc contents, private physical originals,
-plaintext witness secrets and unlock material are outside automatic public recovery.
-Their public commitments and custody boundaries are preserved without attempting to
-obtain or disclose the restricted bytes.
+On 2026-09-12 the human initiator/guardian authorized public access to all
+recoverable project materials under the depositor's control, including material in
+historically nonpublic-labelled paths. This resolves the publication-scope decision
+for 139 affected rows (122 distinct hash-and-size identities): zero are excluded for
+privacy, but all remain commitment-only until exact bytes are recovered. The 23
+previously unresolved public records are included in that decision. A same-named or
+similar file is never a substitute. Component-specific and third-party rights still
+apply, and still-valid credentials, access tokens or third-party secrets are not
+research payloads. The machine-readable decision is
+`preservation/epoch-ii-publication-scope-decision-20260912.json`.
+
+The three witness archives are a distinct **computationally delayed-access** design,
+not ordinary unavailable material. Their 48-file, 2,798,199,225-byte public layer
+contains the ciphertext parts, encryption manifests, format/recovery code,
+checksums, integrity and decryption-verification records, attack-cost benchmarks,
+and deletion/destruction receipts. The plaintext and unlock material were
+intentionally not published. Future successful computation is expected to recover
+the content from the public ciphertext. Epoch II therefore must preserve all 48
+public files byte-for-byte and must not mislabel the intentionally absent plaintext
+as a current project-content gap.
 
 ## Harvard gate
 
@@ -72,10 +88,11 @@ and frozen bytes remain unchanged. `InReview` forbids automated mutation and rep
 submission; the owner-provided Ticket 423683 arrangement says the curator publishes
 after approval without another submission.
 
-A new institutional draft requires a human rights review with complete License,
-Custom Terms and Terms of Use, plus a concrete file layout that an institutional
-reviewer can inspect. Publication, if separately authorized later, must be followed
-by anonymous public file-list and original-byte readback verification.
+A new institutional draft requires complete and mutually consistent License, Custom
+Terms and Terms of Use, plus a concrete file layout that an institutional reviewer
+can inspect. The 2026-09-12 owner decision authorizes public access but does not
+relicense third-party content. Publication must be followed by anonymous public
+file-list and original-byte readback verification.
 
 The current technical-capacity and policy assessment is recorded in
 `preservation/HARVARD-EPOCH-II-CAPACITY-AND-ACCEPTANCE.md`.
