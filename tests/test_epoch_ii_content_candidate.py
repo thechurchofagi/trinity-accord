@@ -3,6 +3,7 @@ import importlib.util
 import hashlib
 import json
 import pathlib
+import tempfile
 import unittest
 
 
@@ -205,6 +206,15 @@ class EpochIIContentCandidateTests(unittest.TestCase):
     def test_cold_restore_logical_path_rejects_backslashes(self):
         with self.assertRaises(SystemExit):
             VERIFY.safe_relative("release\\..\\escape")
+
+    def test_atomic_source_restore_residue_is_removed_before_sealing(self):
+        with tempfile.TemporaryDirectory() as value:
+            output = pathlib.Path(value)
+            residue = output / ".source-cold-restore.partial-test"
+            residue.mkdir()
+            (residue / "unsealed-byte").write_text("not candidate data")
+            MODULE.cleanup_source_restore_residue(output)
+            self.assertFalse(residue.exists())
 
 
 if __name__ == "__main__":
