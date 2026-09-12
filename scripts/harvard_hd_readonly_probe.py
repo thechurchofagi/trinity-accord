@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -74,7 +75,8 @@ def first_int(value: Any) -> int | None:
         try:
             return int(value.strip())
         except ValueError:
-            return None
+            match = re.search(r"(?<![\d,])([\d,]+)\s+bytes\b", value, re.IGNORECASE)
+            return int(match.group(1).replace(",", "")) if match else None
     if isinstance(value, dict):
         preferred = (
             "quota",
@@ -172,7 +174,7 @@ def main() -> int:
         "epoch_ii": {
             "planned_bytes": EPOCH_II_PLANNED_BYTES,
             "fits_if_new_dataset_inherits_same_quota": (
-                quota_bytes is not None and EPOCH_II_PLANNED_BYTES <= quota_bytes
+                None if quota_bytes is None else EPOCH_II_PLANNED_BYTES <= quota_bytes
             ),
         },
         "interpretation_limits": [
