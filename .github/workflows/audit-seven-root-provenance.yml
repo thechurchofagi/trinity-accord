@@ -1,0 +1,32 @@
+name: Audit seven-root provenance
+
+on:
+  push:
+    branches:
+      - audit/seven-root-provenance
+    paths:
+      - scripts/audit-seven-root-provenance.py
+      - evidence/chronicle-sidechain-historical-payload-exceptions.json
+      - .github/workflows/audit-seven-root-provenance.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Audit seven external historical roots
+        run: python3 scripts/audit-seven-root-provenance.py
+      - name: Upload provenance record
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: seven-root-provenance-${{ github.run_id }}
+          path: artifacts/chronicle-sidechain-seven-root-provenance.json
+          if-no-files-found: warn
+          retention-days: 30
