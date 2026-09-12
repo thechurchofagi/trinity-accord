@@ -110,6 +110,7 @@ jobs:
           (cd "$root/source" && sha256sum -c "$archive.sha256")
           mkdir "$root/extracted"
           tar --no-same-owner -xzf "$root/source/$archive" -C "$root/extracted"
+          rm -f "$root/source/$archive"
           gh release download "$SETTLEMENT_TAG" --repo "$GITHUB_REPOSITORY" --dir "$root/settlement" --pattern POLYGON-ETHEREUM-SETTLEMENT.json --pattern SOURCE-BINDING.json
           FINALITY_TAG="chronicle-sidechain-finality-v1-${SOURCE_SHORT}"
           finality=""
@@ -129,6 +130,12 @@ jobs:
             cat "$root/finality-release"/"$finality_archive".part-* | zstd -d -c | tar --no-same-owner -xf - -C "$root/finality-extracted"
             finality="$root/finality-extracted/chronicle-sidechain-finality"
             (cd "$finality" && sha256sum -c MANIFEST.sha256)
+            # The immutable compressed parts have already passed both the release
+            # checksums and the reconstructed archive digest.  Keeping another
+            # ~17 GiB copy prevents the independent channel reassembly below.
+            rm -f "$root/finality-release"/"$finality_archive".part-*
+            echo "[DISK AFTER VERIFIED ARCHIVE CLEANUP]"
+            df -h "$RUNNER_TEMP"
           fi
           echo "source=$root/extracted/chronicle-sidechain-scan" >> "$GITHUB_OUTPUT"
           echo "settlement=$root/settlement" >> "$GITHUB_OUTPUT"
@@ -168,6 +175,12 @@ jobs:
             go build -trimpath -o "$tools/bin/verify-base-blob-kzg" verify_base_blob_kzg.go
           )
           echo "bin=$tools/bin" >> "$GITHUB_OUTPUT"
+          # Only the two pinned binaries are needed after this step.  Reclaim the
+          # source tree and build caches before writing fresh decoded channels.
+          rm -rf "$tools/optimism"
+          go clean -cache -modcache
+          echo "[DISK BEFORE OFFLINE REASSEMBLY]"
+          df -h "$RUNNER_TEMP"
 
       - name: Recompute published Base and Beacon proof layers offline
         if: steps.evidence.outputs.finality != ''
@@ -177,13 +190,19 @@ jobs:
         run: |
           set -euo pipefail
           "$TOOL_BIN/verify-base-blob-kzg" "$FINALITY/base/decoder/transactions" "$FINALITY/base/decoder/blobs"
-          rm -rf "$RUNNER_TEMP/strict-fresh-channels"
+          fresh="$RUNNER_TEMP/strict-fresh-channels"
+          rm -rf "$fresh"
+          trap 'rm -rf "$fresh"' EXIT
           "$TOOL_BIN/batch-decoder" reassemble \
             --in "$FINALITY/base/decoder/transactions" \
-            --out "$RUNNER_TEMP/strict-fresh-channels" --l2-chain-id 8453
+            --out "$fresh" --l2-chain-id 8453
+          echo "[DISK AFTER OFFLINE REASSEMBLY]"
+          df -h "$RUNNER_TEMP"
           PYTHONPATH=scripts python3 scripts/verify_chronicle_base_derivation.py \
             --evidence "$FINALITY/base" --base-timeline "$FINALITY/BASE-TIMELINE.json" \
-            --channels "$RUNNER_TEMP/strict-fresh-channels"
+            --channels "$fresh"
+          rm -rf "$fresh"
+          trap - EXIT
           node scripts/verify_ethereum_beacon_ssz.mjs "$FINALITY/beacon"
 
       - name: Recompute Polygon settlement and classify all missing layers
