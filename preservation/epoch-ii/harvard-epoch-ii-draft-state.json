@@ -1,0 +1,28 @@
+{
+  "schema": "trinityaccord.harvard-epoch-ii-draft-state.v1",
+  "action": "created",
+  "account_identifier": "@Hongju",
+  "dataset": {
+    "dataset_id": 14229992,
+    "persistent_id": "doi:10.7910/DVN/W9Y3IV",
+    "title": "Trinity Accord — Research Corpus and Preservation Mirror · Preservation Epoch II",
+    "version_state": "DRAFT",
+    "version_number": null,
+    "version_minor_number": null,
+    "file_count": 0,
+    "terms_file_sha256": "881ee6b94f3fddaa53d66bcd5c64d6510a6fdf9ce0a7d61bca0ba72555dd361c",
+    "terms_readback_sha256": "c553d988d4efa0cf08f6720d6891fb51d7b69682d12f633d1619ce0943be832f"
+  },
+  "old_dataset": {
+    "persistent_id": "doi:10.7910/DVN/YUCG12",
+    "version_state": "RELEASED",
+    "version_number": 1,
+    "version_minor_number": 0,
+    "file_count": 13,
+    "mutated": false
+  },
+  "files_uploaded": 0,
+  "submitted_for_review": false,
+  "published": false,
+  "automatic_resubmission_enabled": false
+}
