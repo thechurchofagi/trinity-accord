@@ -537,7 +537,9 @@ jobs:
           (
             cd "$RUNNER_TEMP/draft-readback"
             for path in *; do
-              [[ -f "$path" && "$path" != COLD-VERIFICATION.json ]] && sha256sum "$path"
+              if [[ -f "$path" && "$path" != COLD-VERIFICATION.json ]]; then
+                sha256sum "$path"
+              fi
             done
           ) > RELEASE-ASSETS-SHA256.txt
           sha256sum COLD-VERIFICATION.json >> RELEASE-ASSETS-SHA256.txt
