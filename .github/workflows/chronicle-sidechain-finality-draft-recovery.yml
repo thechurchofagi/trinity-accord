@@ -1,10 +1,9 @@
 name: Chronicle Sidechain Finality Draft Recovery
 
+# Run 18 has already been recovered and its target Release is published.
+# Keep this exact historical recovery path available for an explicit operator
+# audit, but do not replay the one-shot draft transition when this file changes.
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/chronicle-sidechain-finality-draft-recovery.yml"
   workflow_dispatch:
 
 permissions:
