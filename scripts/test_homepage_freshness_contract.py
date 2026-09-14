@@ -76,6 +76,12 @@ def main() -> None:
     ]:
         require(index, needle, "current external witness homepage signal")
 
+    status_markers = deployment_freshness.STATIC_PAGE_MARKERS["/status/"]
+    if status_markers != homepage_live_freshness.STATIC_PAGE_MARKERS["/status/"]:
+        raise SystemExit("status page marker drift between deployment and live checks")
+    for marker in status_markers:
+        require(status_page, marker, "status page deployment marker")
+
     for needle in [
         "External witness records",
         "Current external witness record count",
