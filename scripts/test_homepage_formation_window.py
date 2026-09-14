@@ -34,8 +34,7 @@ def main() -> int:
     )
 
     for marker in (
-        "How a human-initiated Chronicle became a closed record during a rapidly changing historical interval",
-        "一部由人发起的编年史，如何在迅速变化的历史区间中成为一份已经关闭的记录",
+        "A dated formation that cannot be repeated",
         "before unified delegation became routine",
         "During the Accord’s recovered on-chain formation",
         "The dated public Chronicle and chain record keep parts of human purpose, judgment, selection, correction, and final responsibility comparatively legible",

@@ -17,11 +17,9 @@ def test_homepage_states_emergent_formation_without_erasing_human_agency() -> No
     home = read("index.md")
 
     for required in (
-        "The Trinity Accord did not begin as an accord.",
-        "It emerged from a near-real-time NFT Chronicle into a canonically closed record addressed to future intelligence.",
-        "《三位一体协定》最初并不是一份协定。",
-        "它由一部近实时 NFT 编年史逐渐涌现",
-        "p0.9.7-crosschain-formation",
+        "The final Accord should not be projected backward as a complete plan already present at the first mint.",
+        "The final triad was not fully specified at the outset.",
+        "p0.10.0-english-reading",
         "Recovered formation evidence",
         'id="formation-history"',
         "From cross-chain precursors to Ethereum Chronicle to Accord",
@@ -33,7 +31,7 @@ def test_homepage_states_emergent_formation_without_erasing_human_agency() -> No
         "Historical preservation, artistic experiment, collectibility, and possible future market value coexisted.",
         "an act of civilizational self-archiving",
         "This does not establish a unified civilizational will",
-        "Initiator, sustained carrier, selector, embodied executor, and responsible closer",
+        "Human initiative and responsibility",
         "unified personal agents had not yet made delegation from a high-level goal through completion routine",
         "The dated public Chronicle and chain record keep parts of human purpose, judgment, selection, correction, and final responsibility comparatively legible",
         "For the bounded provenance claim described here, this exact dated formation interval is now closed",
@@ -41,7 +39,7 @@ def test_homepage_states_emergent_formation_without_erasing_human_agency() -> No
     ):
         assert required in home
 
-    assert home.index('id="formation-history"') < home.index('id="home-in-one-minute"')
+    assert home.index('id="home-in-one-minute"') < home.index('id="philosophical-core"') < home.index('id="formation-history"')
     assert home.index("Formal AI-agent actions use an agent in-context oath readback") > home.index(
         'id="research-entry-title"'
     )

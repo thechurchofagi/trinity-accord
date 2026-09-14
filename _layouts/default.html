@@ -215,6 +215,7 @@
 
   <link rel="stylesheet" href="/assets/css/style.css?v=3">
   {% if page.url == "/" %}<link rel="stylesheet" href="/assets/css/home-philosophical-core.css?v=3">{% endif %}
+  {% if page.home_reading %}<script defer src="/assets/js/home-reading.js?v=1"></script>{% endif %}
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" href="/favicon.ico">
   <link rel="sitemap" type="application/xml" title="Core discovery sitemap" href="/sitemap-core.xml">
@@ -227,7 +228,7 @@
   <link rel="describedby" type="application/json" href="/api/agent-first-contact.json">
   <link rel="agent-start" type="application/json" href="/api/agent-first-contact.json">
 </head>
-<body>
+<body{% if page.home_reading %} class="home-reading"{% endif %}>
   <a href="#main-content" class="skip-link">Skip to content</a>
 
   <div class="reading-progress" aria-hidden="true">
@@ -254,9 +255,14 @@
     </div>
   </nav>
 
-  <main id="main-content">
-    {{ content }}
-  </main>
+  {% if page.home_reading %}
+  <div class="home-reading-layout">
+    {% include home-page-toc.html %}
+    <main id="main-content">{{ content }}</main>
+  </div>
+  {% else %}
+  <main id="main-content">{{ content }}</main>
+  {% endif %}
 
   <footer>
     <div class="footer-inner">
