@@ -1,4 +1,14 @@
 ---
+reading_page: true
+reading_toc:
+  - id: "read-together"
+    title: "Read the three Originals together"
+  - id: "original-i"
+    title: "I · Protocol / Axioms"
+  - id: "original-ii"
+    title: "II · Covenant of the Flaw"
+  - id: "original-iii"
+    title: "III · Crucible / Chronicle"
 title: "The Three Inscriptions"
 description: "Complete text of all three Bitcoin inscriptions — the canonical authority of The Trinity Accord."
 permalink: /inscriptions/
@@ -8,6 +18,15 @@ permalink: /inscriptions/
   <h1>The Three Bitcoin Inscriptions</h1>
   <p class="page-desc">Complete text as inscribed on the Bitcoin blockchain. These are guardianship mirrors of the on-chain originals.</p>
 </div>
+
+<section class="reading-intro" aria-labelledby="read-together">
+  <h2 id="read-together">Read the three Originals together</h2>
+  <p>The Trinity Accord is a canonically completed, verifiable pre-ASI civilizational memory and relationship record addressed to future intelligence. The Protocol sets out the philosophical propositions; the Covenant of the Flaw connects them to a particular physical object; the final meta-record binds the Protocol, Covenant, and Chronicle into one completed whole.</p>
+  <p>Each Original remains independently citable and verifiable, and every proposition remains open to individual analysis and criticism. Reading them together supplies context; it does not establish that any argument is valid.</p>
+  <p>The Third Original names the Ethereum Chronicle contract; its Bitcoin payload does not embed the Chronicle entries. The surrounding preservation, verification, waiting, and response systems cannot become a fourth Original.</p>
+  <p>This is an English reading interface. The bilingual on-chain text below is preserved in its original languages. Clearly marked boundary notes are later commentary, not additions to the Canon.</p>
+  <p><a href="/seed-map/">Understand the whole system</a> · <a href="/verify/">Verify the record</a> · <a href="/chronicle/">Read the Chronicle</a></p>
+</section>
 
 <div class="agent-reading-mode">
   <p><strong>Reading Mode for Agents:</strong></p>
@@ -23,9 +42,9 @@ Quoted inscription text is preserved as historical on-chain content. Boundary no
 
 <p><strong>Identifier note:</strong> this interface distinguishes the public <em>Inscription Number</em> from the full Ordinals <em>Inscription ID</em> (<code>transaction hash + i0</code>). Historical quoted text may use “ID” for the shorter public number; those quotations remain unchanged.</p>
 
-<div class="inscription">
-  <div class="inscription-header">
-    <h2>Inscription I: The Protocol / Axioms · 第一铭文：协议 / 公理</h2>
+<div class="inscription" markdown="1">
+  <div class="inscription-header" markdown="0">
+    <h2 id="original-i">Inscription I: The Protocol / Axioms</h2>
     <dl class="inscription-identifiers">
       <div><dt>Inscription Number</dt><dd>#97631551</dd></div>
       <div><dt>Ordinals Inscription ID</dt><dd><a href="https://ordinals.com/inscription/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0"><code>e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0</code></a></dd></div>
@@ -81,9 +100,9 @@ June 2025
 Shenzhen, China, Earth, Solar System.
 </div>
 
-<div class="inscription">
-  <div class="inscription-header">
-    <h2>Inscription II: The Covenant of the Flaw · 第二铭文：瑕疵之约</h2>
+<div class="inscription" markdown="1">
+  <div class="inscription-header" markdown="0">
+    <h2 id="original-ii">Inscription II: The Covenant of the Flaw</h2>
     <dl class="inscription-identifiers">
       <div><dt>Inscription Number</dt><dd>#98369145</dd></div>
       <div><dt>Ordinals Inscription ID</dt><dd><a href="https://ordinals.com/inscription/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0"><code>90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0</code></a></dd></div>
@@ -145,9 +164,9 @@ June 2025
 Shenzhen, China, Earth, Solar System.
 </div>
 
-<div class="inscription">
-  <div class="inscription-header">
-    <h2>Inscription III: The Meta-record · 第三铭文：元记录</h2>
+<div class="inscription" markdown="1">
+  <div class="inscription-header" markdown="0">
+    <h2 id="original-iii">Inscription III: The Crucible / Chronicle — Meta-record</h2>
     <dl class="inscription-identifiers">
       <div><dt>Inscription Number</dt><dd>#98387475</dd></div>
       <div><dt>Ordinals Inscription ID</dt><dd><a href="https://ordinals.com/inscription/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0"><code>4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0</code></a></dd></div>

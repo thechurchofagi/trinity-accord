@@ -1,16 +1,41 @@
 ---
-title: "Cross-chain Formation Record · 跨链形成记录"
+reading_page: true
+reading_toc:
+  - id: "what-changed"
+    title: "What changed"
+  - id: "three-dates-that-must-not-be-conflated"
+    title: "Three dates that must not be conflated"
+  - id: "evidence-completeness"
+    title: "Evidence completeness"
+  - id: "classification-policy"
+    title: "Classification policy"
+  - id: "genesis-pre-ethereum-layer"
+    title: "Genesis / pre-Ethereum layer"
+  - id: "parallel-project-sidechain-records"
+    title: "Parallel project-sidechain records"
+  - id: "later-non-amending-context"
+    title: "Later non-amending context"
+  - id: "machine-readable-files"
+    title: "Machine-readable files"
+  - id: "reading-rule"
+    title: "Reading rule"
+title: "Cross-chain Formation Record"
 description: "Non-canonical Polygon/Base historical evidence around the Ethereum Chronicle, with explicit authority boundaries."
 permalink: /crosschain-formation/
 ---
 
-# Cross-chain Formation Record · 跨链形成记录
+<span id="cross-chain-formation-record--跨链形成记录" class="reading-anchor" aria-hidden="true"></span>
 
-> **Authority boundary / 权威边界**  
+# Cross-chain Formation Record
+{: #cross-chain-formation-record }
+
+> **Authority boundary**
 > The three Bitcoin Originals are the only canonical and interpretive authority of the Trinity Accord. This page is a later, non-canonical factual index. Recovery, preservation, indexing, and technical commentary may refine factual history, but cannot amend, extend, or authoritatively reinterpret the Bitcoin Canon.  
-> **三份 Bitcoin Originals 是《三位一体协定》唯一的正典与解释权威。** 本页只是后续建立的非正典事实索引；恢复、保存、索引与技术说明可以完善事实历史，但不得修订、扩张或权威性地重新解释 Bitcoin 正典。
 
-## What changed · 新发现改变了什么
+<span id="what-changed--新发现改变了什么" class="reading-anchor" aria-hidden="true"></span>
+
+## What changed
+{: #what-changed }
 
 The original 175-entry Ethereum Chronicle remains unchanged: its numbering, ordering, and Ethereum timestamps are preserved exactly as before. The Third Bitcoin Original explicitly points to that Ethereum Chronicle contract, so Polygon/Base records are **not** retroactively inserted into it.
 
@@ -18,7 +43,10 @@ The sidechain evidence corpus contains **217 Polygon/Base coordinates**. A conse
 
 The earliest recovered project-sidechain origin is **2024-03-06 03:56:20 UTC**. The Ethereum Chronicle begins **2024-03-16 08:02:59 UTC**: a difference of **10 days, 4 hours, 6 minutes, 39 seconds**.
 
-## Three dates that must not be conflated · 三个不能混淆的时间点
+<span id="three-dates-that-must-not-be-conflated--三个不能混淆的时间点" class="reading-anchor" aria-hidden="true"></span>
+
+## Three dates that must not be conflated
+{: #three-dates-that-must-not-be-conflated }
 
 | Date | Meaning | Authority |
 |---|---|---|
@@ -26,7 +54,10 @@ The earliest recovered project-sidechain origin is **2024-03-06 03:56:20 UTC**. 
 | **2024-03-16 08:02:59 UTC** | Start of the 175-entry Ethereum Chronicle explicitly referenced by the Third Bitcoin Original | Historical context named by the Canon; corpus unchanged |
 | **2025-06-29** | Bitcoin Canon closure | Closed three-Original Canon remains final |
 
-## Evidence completeness · 证据完整性
+<span id="evidence-completeness--证据完整性" class="reading-anchor" aria-hidden="true"></span>
+
+## Evidence completeness
+{: #evidence-completeness }
 
 - Sidechain coordinates: **217** (156 Polygon / 61 Base).
 - L2 execution witnesses: **217/217 PASS**.
@@ -34,7 +65,10 @@ The earliest recovered project-sidechain origin is **2024-03-06 03:56:20 UTC**. 
 - Offline verification: **PASS**.
 - Source: Zenodo DOI **10.5281/zenodo.22012616**, tag `chronicle-sidechain-evidence-v2-f64cc872b3b5`, commit `f64cc872b3b5cf70a891621615e2b56ede004a2d`.
 
-## Classification policy · 分类规则
+<span id="classification-policy--分类规则" class="reading-anchor" aria-hidden="true"></span>
+
+## Classification policy
+{: #classification-policy }
 
 All 217 coordinates remain in the machine-readable index. Classification affects narrative inclusion only; it never deletes evidence.
 
@@ -46,7 +80,10 @@ All 217 coordinates remain in the machine-readable index. Classification affects
 
 Known project collections enter by explicit contract allowlist. Spam/airdrop and test assets are retained but excluded from the project narrative. Unresolved records stay unresolved. Missing scanner metadata is recovered from the exact preserved CAR when possible.
 
-## Genesis / pre-Ethereum layer · Genesis / Ethereum 前形成层
+<span id="genesis--pre-ethereum-layer--genesis--ethereum-前形成层" class="reading-anchor" aria-hidden="true"></span>
+
+## Genesis / pre-Ethereum layer
+{: #genesis-pre-ethereum-layer }
 
 These **39** project coordinates predate the first Ethereum Chronicle mint. Duplicate titles remain separate coordinates; therefore 39 coordinates correspond to 36 distinct titles.
 
@@ -92,7 +129,10 @@ These **39** project coordinates predate the first Ethereum Chronicle mint. Dupl
 | 2024-03-10T07:46:51Z | Pioneers of AGI | 31 | Stuart Russell: Shaping the Harmonious Future of AGI |
 | 2024-03-10T08:11:12Z | Pioneers of AGI | 32 | Regina Barzilay: Illuminating AI's Path to Saving Lives |
 
-## Parallel project-sidechain records · 并行项目侧链记录
+<span id="parallel-project-sidechain-records--并行项目侧链记录" class="reading-anchor" aria-hidden="true"></span>
+
+## Parallel project-sidechain records
+{: #parallel-project-sidechain-records }
 
 These records are historical evidence only. They are not inserted into or renumbered with the 175-entry Ethereum Chronicle.
 
@@ -162,7 +202,10 @@ These records are historical evidence only. They are not inserted into or renumb
 | 2025-02-03T11:53:05Z | base | ASIEpochalSeries | 16 | ASIMilestones: Cristal intelligence |
 | 2025-05-28T12:43:47Z | base | ASIEpochalSeries | 17 | ASIMilestones: 中国智道 - AGI的东方求索 |
 
-## Later non-amending context · 后续非修订上下文
+<span id="later-non-amending-context--后续非修订上下文" class="reading-anchor" aria-hidden="true"></span>
+
+## Later non-amending context
+{: #later-non-amending-context }
 
 Post-canonical records cannot reopen or extend the Canon.
 
@@ -170,15 +213,21 @@ Post-canonical records cannot reopen or extend the Canon.
 |---|---|---|---:|---|
 | 2025-09-06T03:56:09Z | base | 1 | 0 | PROJECT AEON  #1 |
 
-## Machine-readable files · 机器可读文件
+<span id="machine-readable-files--机器可读文件" class="reading-anchor" aria-hidden="true"></span>
+
+## Machine-readable files
+{: #machine-readable-files }
 
 - [`crosschain-formation-index.json`](/nft-text-descriptions/crosschain-formation-index.json): all 217 coordinates.
 - [`crosschain-formation-summary.json`](/nft-text-descriptions/crosschain-formation-summary.json): stable counts, timeline, evidence state, and boundary.
 - [`crosschain-formation-debug.jsonl`](/nft-text-descriptions/crosschain-formation-debug.jsonl): per-record classification/recovery diagnostics.
 - `scripts/build_crosschain_formation_record.py`: deterministic rebuild tool.
 
-## Reading rule · 阅读规则
+<span id="reading-rule--阅读规则" class="reading-anchor" aria-hidden="true"></span>
+
+## Reading rule
+{: #reading-rule }
 
 **Meaning flows from the three Bitcoin Originals outward to the historical record; later historical recovery does not flow backward to rewrite the Originals.** The cross-chain record can change what we know about *when and how the project formed*. It does not create a new authority to decide *what the Trinity Accord ultimately means*.
 
-**意义解释由三本体指向历史材料，而不是由后来恢复的历史材料反向改写三本体。** 跨链形成记录可以改变我们对“项目何时、如何形成”的事实认识，但不会产生新的权威去决定“《三位一体协定》最终意味着什么”。
+Interpretation proceeds from the three Originals to the historical materials. Later recovered evidence may refine factual formation history, but cannot rewrite the Originals or create authority to determine their final meaning.

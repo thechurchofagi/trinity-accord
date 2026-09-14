@@ -1,0 +1,10 @@
+<aside class="document-toc" aria-label="Page contents">
+  <details open>
+    <summary>On this page <span class="document-toc-current"></span></summary>
+    <nav aria-label="Chapters">
+      {% for chapter in page.reading_toc %}
+      <a href="#{{ chapter.id | escape }}">{{ chapter.title | escape }}</a>
+      {% endfor %}
+    </nav>
+  </details>
+</aside>

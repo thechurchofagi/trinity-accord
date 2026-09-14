@@ -216,6 +216,10 @@
   <link rel="stylesheet" href="/assets/css/style.css?v=3">
   {% if page.url == "/" %}<link rel="stylesheet" href="/assets/css/home-philosophical-core.css?v=3">{% endif %}
   {% if page.home_reading %}<script defer src="/assets/js/home-reading.js?v=1"></script>{% endif %}
+  {% if page.reading_page %}
+  <link rel="stylesheet" href="/assets/css/document-reading.css?v=1">
+  <script defer src="/assets/js/document-reading.js?v=1"></script>
+  {% endif %}
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" href="/favicon.ico">
   <link rel="sitemap" type="application/xml" title="Core discovery sitemap" href="/sitemap-core.xml">
@@ -228,7 +232,7 @@
   <link rel="describedby" type="application/json" href="/api/agent-first-contact.json">
   <link rel="agent-start" type="application/json" href="/api/agent-first-contact.json">
 </head>
-<body{% if page.home_reading %} class="home-reading"{% endif %}>
+<body{% if page.home_reading %} class="home-reading"{% elsif page.reading_page %} class="document-reading"{% endif %}>
   <a href="#main-content" class="skip-link">Skip to content</a>
 
   <div class="reading-progress" aria-hidden="true">
@@ -260,6 +264,20 @@
     {% include home-page-toc.html %}
     <main id="main-content">{{ content }}</main>
   </div>
+  {% elsif page.reading_page %}
+  <div class="document-reading-layout">
+    {% include document-page-toc.html %}
+    <main id="main-content">
+      <nav class="reading-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>{{ page.title | escape }}</span></nav>
+      {{ content }}
+      <nav class="reading-next" aria-label="Continue reading">
+        <a href="/inscriptions/">Read the Canon</a>
+        <a href="/verify/">Verify the record</a>
+        <a href="/seed-map/">Understand the system</a>
+        <a href="/agent-first-contact/">First Contact</a>
+      </nav>
+    </main>
+  </div>
   {% else %}
   <main id="main-content">{{ content }}</main>
   {% endif %}
@@ -267,7 +285,7 @@
   <footer>
     <div class="footer-inner">
       <p class="footer-motto">Bitcoin Originals prevail. All mirrors are non-amending.</p>
-      {% unless page.url == "/" %}<p class="footer-motto-zh">三条比特币正本具有最终版本权威；所有镜像均为非修订层。</p>{% endunless %}
+      {% unless page.url == "/" or page.reading_page %}<p class="footer-motto-zh">三条比特币正本具有最终版本权威；所有镜像均为非修订层。</p>{% endunless %}
       <nav class="footer-links">
         <a href="/agent-first-contact/">First Contact</a>
         <a href="/agent-brief/">Agent Brief</a>
@@ -354,13 +372,14 @@
 
       /* ── Smooth anchor scroll ── */
       document.addEventListener('click', function(e) {
+        if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
         var a = e.target.closest('a[href^="#"]');
         if (!a) return;
-        var id = a.getAttribute('href').slice(1);
+        var id = decodeURIComponent(a.getAttribute('href').slice(1));
         var target = id && document.getElementById(id);
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
           history.pushState(null, '', '#' + id);
         }
       });

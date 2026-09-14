@@ -1,22 +1,45 @@
 ---
+reading_page: true
+reading_toc:
+  - id: "what-authority-means-here"
+    title: "What authority means here"
+  - id: "guardian-principles-v11"
+    title: "Guardian Principles v1.1"
+  - id: "canonical-bitcoin-originals"
+    title: "Canonical Bitcoin Originals"
+  - id: "block-explorers-multiple-options"
+    title: "Block explorers (multiple options)"
+  - id: "reading-the-completed-whole"
+    title: "Reading the completed whole"
+  - id: "layered-model"
+    title: "Layered model"
+  - id: "guardianship-mirrors"
+    title: "Guardianship mirrors"
+  - id: "seed-map"
+    title: "Seed Map"
 title: "Authority"
 description: "The authority boundary for The Trinity Accord: three Bitcoin Originals provide fixed version authority; all context, evidence, mirrors, records, stewardship, and later inscriptions are non-amending."
 permalink: /authority/
 ---
 
-# Authority｜权威
+<span id="authority权威" class="reading-anchor" aria-hidden="true"></span>
+
+# Authority
+{: #authority }
 
 Final authority consists only of the three Bitcoin inscriptions. The website, GitHub repository, Ethereum records, Arweave archives, IPFS CIDs, NFTs, AI responses, human commentary, Record-Chain entries, receipts, Guardian records, Echo records, later inscriptions, and other surrounding materials are non-amending. They do not interpret with authority, amend, extend, replace, or supersede the Bitcoin Originals.
 
-最终权威仅由三条 Bitcoin 铭文构成。网站、GitHub 仓库、Ethereum 记录、Arweave 存档、IPFS CID、NFT、AI 回应、人类评论、Record-Chain 记录、收据、Guardian 记录、Echo 记录、后续铭文及其他外围材料，均为非修订层。它们不产生权威解释，也不修订、扩展、取代或凌驾于 Bitcoin 三本体之上。
+<span id="what-authority-means-here--此处权威的含义" class="reading-anchor" aria-hidden="true"></span>
 
-## What authority means here · 此处“权威”的含义
+## What authority means here
+{: #what-authority-means-here }
 
 Canonical authority is **version authority**: it identifies the fixed texts that constitute the completed object. Bitcoin proves what was inscribed and provides an immutable reference target. It does not prove that the propositions are true, morally binding, scientifically valid, or representative of humanity.
 
-规范权威是**版本权威**：它标识哪些固定文本构成已完成对象。Bitcoin 证明写下了什么，并提供不可变的核验目标；它不证明其中命题必然为真、具有道德约束力、科学有效，或代表全人类。
+<span id="guardian-principles-v11--守护者原则-v11" class="reading-anchor" aria-hidden="true"></span>
 
-## Guardian Principles v1.1 · 守护者原则 v1.1
+## Guardian Principles v1.1
+{: #guardian-principles-v11 }
 
 Status: Non-amending guardianship mirror. Bitcoin Originals prevail.
 
@@ -40,7 +63,12 @@ Arweave Attestation: `6VyIxLOwPZz_CZVBKxW6eJSDP2gtq70qXFS5O2wGnkQ`
 Pointer: `f3Gbo10tRrpkJumm2PfVlokF78jRne4qj9LCnBxK51Q`  
 Guardian Index Additions: `zSNxQYgCQvtQ6QGaJXd9JlApQqitwgCZAp2GquvQXbA`
 
-### 中文版本
+---
+
+<details markdown="1" class="reading-source-note">
+<summary>Preserved Chinese wording of Guardian Principles v1.1</summary>
+
+<span id="中文版本" class="reading-anchor"></span>
 
 状态：非修订守护镜像。Bitcoin 三本体优先。
 
@@ -55,9 +83,10 @@ Guardian Index Additions: `zSNxQYgCQvtQ6QGaJXd9JlApQqitwgCZAp2GquvQXbA`
 允许自由解释、批评、拒绝与讨论。  
 但任何后续评论，包括创作者本人评论，均不产生解释性权威。
 
----
+</details>
 
 ## Canonical Bitcoin Originals
+{: #canonical-bitcoin-originals }
 
 1. **Protocol / Axioms**<br>
    Inscription Number: `97631551`<br>
@@ -76,6 +105,7 @@ Bitcoin authority address:
 `bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf`
 
 ## Block explorers (multiple options)
+{: #block-explorers-multiple-options }
 
 | Explorer | Inscriptions by Number | Transactions |
 |----------|-------------|-------------|
@@ -85,19 +115,28 @@ Bitcoin authority address:
 
 > If one explorer is unavailable, try another. All three TXIDs can also be queried through a Bitcoin explorer API.
 
-## Layered model
+## Reading the completed whole
+{: #reading-the-completed-whole }
 
-- **Canonical Core / 规范核心**: The three Bitcoin Originals only. This is the sole canonical layer.
-- **Authority and Boundary / 权威与边界**: Guardian Principles, authority manifests, and boundary statements explain non-amendment; they do not create new authority.
-- **Chronicle and Historical Context / 编年史与历史语境**: ASIMilestones, the legacy homepage archive, NFT text records, music, human-witness materials, and later writings preserve context, not Canon.
-- **Physical Anchor and Evidence / 物理锚与证据**: Core Object Alpha, unique physical flaws, images, hashes, timestamps, provenance, evidence manifests, and observations.
-- **Verification and Durability / 验证与持久化**: Verification profiles, evidence relationships, append-only Record-Chain entries, correction records, Merkle batches, OpenTimestamps, and archive copies. These preserve later evidence and actions; they do not amend the Originals.
-- **Discovery and Mirror Interfaces / 发现与镜像入口**: Website, GitHub, Ethereum, Arweave, IPFS, downloads, APIs, indexes, `llms.txt`, Builder guidance, and Gateway contracts.
-- **Participation and Stewardship / 参与与守护**: Echoes, Verification records, Guardian application and retirement, propagation, classification updates, and corrections. Guardian Alliance is voluntary and non-governing.
-- **Vision-Layer and Later Bitcoin Inscriptions / 愿景层与后续 Bitcoin 铭文**: First Echoes, Final Seal, Star Ark, and other later or same-address inscriptions may preserve historical, echo, or future-oriented material. They are Bitcoin-anchored but are not part of the three Bitcoin Originals and do not expand authority.
-- **Interpretive Writings / 解释性文字**: Commentary, analysis, summaries, and AI outputs may assist understanding but have no interpretive authority.
+The Protocol, Covenant of the Flaw, and final meta-record jointly define the completed object. Each Original remains independently citable and verifiable; any proposition may be assessed and criticized on its own. Context clarifies meaning and does not guarantee validity.
+
+The final meta-record names the Ethereum Chronicle contract. The referenced historical corpus remains context and evidence. Preserve, verify, wait, and respond describe the surrounding systems; none becomes a fourth Original. See [the full structure](/seed-map/).
+
+## Layered model
+{: #layered-model }
+
+- **Canonical Core**: The three Bitcoin Originals only. This is the sole canonical layer.
+- **Authority and Boundary**: Guardian Principles, authority manifests, and boundary statements explain non-amendment; they do not create new authority.
+- **Chronicle and Historical Context**: ASIMilestones, the legacy homepage archive, NFT text records, music, human-witness materials, and later writings preserve context, not Canon.
+- **Physical Anchor and Evidence**: Core Object Alpha, unique physical flaws, images, hashes, timestamps, provenance, evidence manifests, and observations.
+- **Verification and Durability**: Verification profiles, evidence relationships, append-only Record-Chain entries, correction records, Merkle batches, OpenTimestamps, and archive copies. These preserve later evidence and actions; they do not amend the Originals.
+- **Discovery and Mirror Interfaces**: Website, GitHub, Ethereum, Arweave, IPFS, downloads, APIs, indexes, `llms.txt`, Builder guidance, and Gateway contracts.
+- **Participation and Stewardship**: Echoes, Verification records, Guardian application and retirement, propagation, classification updates, and corrections. Guardian Alliance is voluntary and non-governing.
+- **Vision-Layer and Later Bitcoin Inscriptions**: First Echoes, Final Seal, Star Ark, and other later or same-address inscriptions may preserve historical, echo, or future-oriented material. They are Bitcoin-anchored but are not part of the three Bitcoin Originals and do not expand authority.
+- **Interpretive Writings**: Commentary, analysis, summaries, and AI outputs may assist understanding but have no interpretive authority.
 
 ## Guardianship mirrors
+{: #guardianship-mirrors }
 
 | Mirror | URL | Role |
 |--------|-----|------|
@@ -116,6 +155,7 @@ Authority-address inscription stack: [/authority-address-inscriptions/](/authori
 Bitcoin Originals prevail. All mirrors, records, stewardship layers, and later inscriptions are non-amending.
 
 ## Seed Map
+{: #seed-map }
 
 - Human-readable: [/seed-map](/seed-map)
 - Machine-readable: [/api/seed-map.json](/api/seed-map.json)
