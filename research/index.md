@@ -1,14 +1,24 @@
 ---
+reading_page: true
+reading_toc:
+  - id: "research-positioning"
+    title: "Research positioning"
+  - id: "current-technical-report"
+    title: "Current technical report"
+  - id: "citation-boundary"
+    title: "Citation boundary"
 title: "Research and Citation"
 description: "Research outputs, technical reports, citation files, machine-readable metadata, and repository-deposit materials concerning the Trinity Accord."
 permalink: /research/
 ---
 
 # Research and Citation
+{: #research-and-citation }
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
 
 ## Research positioning
+{: #research-positioning }
 
 For researchers approaching this artifact, see the bounded research positioning guide:
 
@@ -17,12 +27,13 @@ For researchers approaching this artifact, see the bounded research positioning 
 The guide maps possible research contexts including digital preservation, archival studies, history of technology, STS, AI ethics, and provenance research. It does not claim external consensus or scientific validation.
 
 ## Current technical report
+{: #current-technical-report }
 
 ### Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents
+{: #designing-a-verifiable-non-amending-civilizational-memory-record-for-future-ai-agents }
 
 **The Trinity Accord Case Study**<br>
 Primary drafting system: ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)<br>
-Responsible human author and project initiator: Hongju Liu (刘烘炬) · Technical Report TA-TR-2026-01 · Version 1.1 · 29 July 2026<br>
 Published Zenodo DOI: [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878)
 
 An artifact-centered design case examining canonical closure, provenance roles, availability layers, bounded verification, instruction safety, and discoverability. The report presents an inspectable architecture and a reusable design pattern while stating its negative results and conflicts of interest.
@@ -44,5 +55,6 @@ An artifact-centered design case examining canonical closure, provenance roles, 
 **Status:** Published open-access preprint; AI-drafted, human-directed, and human-responsible; no interpretive authority; not peer reviewed; not an independent verification report.
 
 ## Citation boundary
+{: #citation-boundary }
 
 Citing the report does not endorse the Trinity Accord. The report's CC BY 4.0 license applies to the report package, not automatically to all historical or third-party material elsewhere in the archive. For Version 1.1, use DOI [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878) as the preferred scholarly citation. The earlier DOI `10.5281/zenodo.21675727` describes an earlier project-level metadata record and is not the preferred citation for this paper. DOI metadata and discovery links do not change the paper's claims or the Accord's Canon.

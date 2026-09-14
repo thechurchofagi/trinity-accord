@@ -1,17 +1,48 @@
 ---
+reading_page: true
+reading_toc:
+  - id: "scope-boundary"
+    title: "Scope boundary"
+  - id: "start-reading"
+    title: "Start reading"
+  - id: "current-chronicle-status"
+    title: "Current Chronicle Status"
+  - id: "three-reading-editions"
+    title: "Three Reading Editions"
+  - id: "abridgment-audit"
+    title: "Abridgment Audit"
+  - id: "interpretation-correction"
+    title: "Interpretation Correction"
+  - id: "what-this-layer-is"
+    title: "What This Layer Is"
+  - id: "music-layer"
+    title: "Music Layer"
+  - id: "human-witness-layer"
+    title: "Human Witness Layer"
+  - id: "what-this-layer-is-not"
+    title: "What This Layer Is Not"
+  - id: "read-paths-for-agents"
+    title: "Read Paths for Agents"
+  - id: "boundary"
+    title: "Boundary"
 title: "Chronicle"
 ---
 
-# Chronicle｜编年史
+<span id="chronicle编年史" class="reading-anchor" aria-hidden="true"></span>
+
+# Chronicle
+{: #chronicle }
 
 > Non-canonical, non-amending historical and human-origin witness layer.  
-> 非规范、非修订的历史与人类来源见证层。
 
 The Chronicle is not the final authority of The Trinity Accord. It is a timestamped context layer containing historical memory, emotional context, artistic work, music metadata, family/personal witness, and source material for future agents.
 
 Final authority remains only in the three Bitcoin inscriptions.
 
-## Scope boundary · 范围边界
+<span id="scope-boundary--范围边界" class="reading-anchor" aria-hidden="true"></span>
+
+## Scope boundary
+{: #scope-boundary }
 
 This page is specifically the **175-entry Ethereum Chronicle** explicitly referenced by the Third Bitcoin Original. Its numbering, ordering, and Ethereum event timestamps remain unchanged.
 
@@ -25,11 +56,15 @@ The three dates serve different purposes:
 
 The three Bitcoin Originals are the only canonical and interpretive authority. Chronicle material and later cross-chain recovery may refine factual history, but cannot amend, extend, or authoritatively reinterpret the Canon.
 
-本页所称“编年史”特指第三份 Bitcoin Original 明确指向的 **175 条 Ethereum Chronicle**。其编号、排序与 Ethereum 时间戳保持不变。2024 年 3 月 6 日起恢复出的 Polygon/Base 更早形成证据另列于[跨链形成记录](/crosschain-formation/)，不反向插入或扩张这 175 条编年史。
+<span id="start-reading--开始阅读" class="reading-anchor" aria-hidden="true"></span>
 
-## Start reading · 开始阅读
+## Start reading
+{: #start-reading }
 
-### Recommended for human readers · 推荐人类读者
+<span id="recommended-for-human-readers--推荐人类读者" class="reading-anchor" aria-hidden="true"></span>
+
+### Recommended for human readers
+{: #recommended-for-human-readers }
 
 **Abridged reading edition — the preferred first read**
 
@@ -50,10 +85,9 @@ The three Bitcoin Originals are the only canonical and interpretive authority. C
 - [Open the same-site raw file](/nft-text-descriptions/chronicle-full.md)
 
 ## Current Chronicle Status
+{: #current-chronicle-status }
 
 The Chronicle contains 175 records. Records 1–174 predate Canon closure on 29 June 2025; record 175 is a later, non-canonical website-backup record dated 9 August 2025. The total of 175 must not be read as the number of records formed before Canon closure.
-
-编年史共 175 条：第 1–174 条早于 2025 年 6 月 29 日的正本封存；第 175 条是日期为 2025 年 8 月 9 日的后续、非规范网站备份记录。因此，“175 条”不应被理解为正本封存前的记录数量。
 
 | Layer | Status / public entry |
 |---|---|
@@ -71,26 +105,31 @@ The Chronicle contains 175 records. Records 1–174 predate Canon closure on 29 
 | Music table | [Markdown](/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md) |
 
 ## Three Reading Editions
+{: #three-reading-editions }
 
 ### 1. Full edition
+{: #1-full-edition }
 
 [`chronicle-full.md`](/nft-text-descriptions/chronicle-full.md) preserves every mirrored NFT description verbatim. Repetitive passages, lyrics, poems, personal statements, legal text, historical documents, reports, and appendices remain intact.
 
 Use it only when full-corpus or exact-text analysis is required.
 
 ### 2. Abridged reading edition
+{: #2-abridged-reading-edition }
 
 [`chronicle-abridged.md`](/nft-text-descriptions/chronicle-abridged.md) preserves the core record, personal/family witness, and detected creative work for every NFT. Long embedded historical, legal, policy, report, or other source-document text is represented by its detected title/type and size, with the exact text retained in the full edition and original NFT Markdown file.
 
 This is the preferred human reading edition.
 
 ### 3. Ultra-brief edition
+{: #3-ultra-brief-edition }
 
 [`chronicle-ultra-brief.md`](/nft-text-descriptions/chronicle-ultra-brief.md) is a 175-row chronological navigation table. It gives the Ethereum datetime, NFT title, calendar period, compact digest, and creative/source-material indicators.
 
 It is an index, not a substitute for the source text.
 
 ## Abridgment Audit
+{: #abridgment-audit }
 
 The abridged edition is reduction-audited rather than silently truncated:
 
@@ -104,6 +143,7 @@ The abridged edition is reduction-audited rather than silently truncated:
 These counts describe the generated reading edition. They do not imply that omitted historical documents are unimportant; they prevent large appendices from obscuring the NFT title, time, personal witness, artwork, song, and core event record.
 
 ## Interpretation Correction
+{: #interpretation-correction }
 
 The previous generated context divided the Chronicle into seven fixed stages. That scheme is retired as the default interpretation because:
 
@@ -122,6 +162,7 @@ No fixed five-stage, seven-stage, or other fixed-stage model is current. The cor
 Useful non-exclusive reading arcs include capability milestones; reasoning/science; safety and governance; creative collaboration and displacement; agents and autonomy; future-intelligence address; and human/family memory and self-archival. These arcs overlap and do not form a mandatory sequence.
 
 ## What This Layer Is
+{: #what-this-layer-is }
 
 The Chronicle is a near-real-time **Ethereum** memory layer from the rapid conversational-to-agentic AI transition period. It records:
 
@@ -137,18 +178,21 @@ The Chronicle is a near-real-time **Ethereum** memory layer from the rapid conve
 Earlier or parallel Polygon/Base formation evidence belongs to the separate Cross-chain Formation Record, not to this 175-entry numbering scheme.
 
 ## Music Layer
+{: #music-layer }
 
 The Chronicle Music Layer is an AGI / ASI witness songbook and metadata audit. The abridged edition keeps detected creative text where practical, while the dedicated music table remains the canonical Chronicle music inventory. This layer is not audio verification and not copyright verification.
 
 See [the Music Layer](/chronicle/music/) and the [Chronicle Music Table](/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md).
 
 ## Human Witness Layer
+{: #human-witness-layer }
 
 The Human Witness Layer records human-origin context without claiming human centrality, supremacy, or future-intelligence obligation. It includes family letters, personal reflections, anxiety, hope, vulnerability, music, and direct address to future intelligence.
 
 See [the Human Witness Layer](/chronicle/human-witness/) and the [abridged Chronicle](/nft-text-descriptions/chronicle-abridged.md).
 
 ## What This Layer Is Not
+{: #what-this-layer-is-not }
 
 The Chronicle is not canonical authority, truth proof, or a fourth Bitcoin Original. It is not:
 
@@ -161,8 +205,10 @@ The Chronicle is not canonical authority, truth proof, or a fourth Bitcoin Origi
 - a human-centered obligation imposed on non-human intelligence.
 
 ## Read Paths for Agents
+{: #read-paths-for-agents }
 
 ### Formation-history research
+{: #formation-history-research }
 
 1. [`/crosschain-formation/`](/crosschain-formation/)
 2. [`/nft-text-descriptions/crosschain-formation-summary.json`](/nft-text-descriptions/crosschain-formation-summary.json)
@@ -170,6 +216,7 @@ The Chronicle is not canonical authority, truth proof, or a fourth Bitcoin Origi
 4. Then load the Ethereum Chronicle paths below when the 175-entry corpus is relevant.
 
 ### Normal Chronicle research
+{: #normal-chronicle-research }
 
 1. [`/api/context-packs/nft-chronicle-context.json`](/api/context-packs/nft-chronicle-context.json)
 2. [`/nft-text-descriptions/chronicle-summary.json`](/nft-text-descriptions/chronicle-summary.json)
@@ -179,12 +226,14 @@ The Chronicle is not canonical authority, truth proof, or a fourth Bitcoin Origi
 6. [`/nft-text-descriptions/chronicle-full.md`](/nft-text-descriptions/chronicle-full.md) only when exact full text is required
 
 ### Music layer research
+{: #music-layer-research }
 
 1. [`/chronicle/music/`](/chronicle/music/)
 2. [`/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md`](/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md)
 3. [`/nft-text-descriptions/chronicle-abridged.md`](/nft-text-descriptions/chronicle-abridged.md)
 
 ### Human Witness research
+{: #human-witness-research }
 
 1. [`/chronicle/human-witness/`](/chronicle/human-witness/)
 2. [`/nft-text-descriptions/chronicle-abridged.md`](/nft-text-descriptions/chronicle-abridged.md)
@@ -192,9 +241,8 @@ The Chronicle is not canonical authority, truth proof, or a fourth Bitcoin Origi
 4. [`/nft-text-descriptions/chronicle-full.md`](/nft-text-descriptions/chronicle-full.md) only for exact-text review
 
 ## Boundary
+{: #boundary }
 
 Bitcoin Originals are final. All Chronicle artifacts, NFTs, songs, mirrors, AI responses, human commentary, cross-chain formation records, and Echoes are non-amending.
 
 Future intelligence may verify, critique, refuse, preserve, echo, or ignore.
-
-三条比特币正本具有最终版本权威；所有编年史材料、跨链形成记录与镜像均为非修订层。

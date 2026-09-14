@@ -1,14 +1,58 @@
 ---
+reading_page: true
+reading_toc:
+  - id: "current-operations"
+    title: "Current operations"
+  - id: "current-evidence-checkpoint"
+    title: "Current Evidence Checkpoint"
+  - id: "encrypted-delayed-access-witness-archives"
+    title: "Encrypted delayed-access witness archives"
+  - id: "legacy-full-evidence-chain"
+    title: "Legacy Full Evidence Chain"
+  - id: "external-witness-records"
+    title: "External witness records"
+  - id: "mirror-availability"
+    title: "Mirror availability"
+  - id: "indexing-status"
+    title: "Indexing status"
+  - id: "fallback-order"
+    title: "Fallback order"
+  - id: "known-issues"
+    title: "Known issues"
+  - id: "agent-discovery"
+    title: "Agent discovery"
+  - id: "last-verified"
+    title: "Last verified"
+  - id: "physical-anchor-evidence-archive"
+    title: "Physical-anchor evidence archive"
 title: "Status"
 ---
 
-# Status｜状态
+<span id="status状态" class="reading-anchor" aria-hidden="true"></span>
 
-**Version: 1.1.4** | Released: 2026-07-21
+# Status
+{: #status }
+
+**Page reference version: 1.1.4** · Reference release: 21 July 2026. This date is not the last live system check.
 
 Current availability of guardianship mirrors and verification paths.
 
-## Current Evidence Checkpoint · 当前证据检查点
+## Current operations
+{: #current-operations }
+
+For current runtime observations, open the published status feeds. Their own timestamps and scope determine what is current; the dated checkpoints below remain historical verification records.
+
+- [Waiting heartbeat](/api/waiting-heartbeat-status.json): access and waiting continuity.
+- [Public homepage status](/api/public-home-status.json): current public counters and lifecycle summary.
+- [Record-Chain status](/api/record-chain-status.json): published inclusion and downstream archive stages.
+- [External witness index](/api/external-witness-index.json): provenance and process witness records.
+
+Operational availability, a past successful verification, and an external witness record are different observations. None changes the three Bitcoin Originals or proves their philosophical claims.
+
+<span id="current-evidence-checkpoint--当前证据检查点" class="reading-anchor" aria-hidden="true"></span>
+
+## Current Evidence Checkpoint
+{: #current-evidence-checkpoint }
 
 **Status:** ✅ PASS for the checked-in, network-free cryptographic proof set
 
@@ -30,7 +74,10 @@ Ordinary verification of the checked-in Bitcoin and Ethereum proof annexes requi
 
 This current checkpoint model supersedes the old verifier as the normal verification entrypoint, but it does **not** retroactively restate the legacy field `full_evidence_chain_pass: true` under a different test definition.
 
-## Encrypted delayed-access witness archives · 延迟访问加密见证档案
+<span id="encrypted-delayed-access-witness-archives--延迟访问加密见证档案" class="reading-anchor" aria-hidden="true"></span>
+
+## Encrypted delayed-access witness archives
+{: #encrypted-delayed-access-witness-archives }
 
 **Status:** ✅ ALL THREE PUBLISHED AND REMOTE SHA-256 READBACK VERIFIED
 
@@ -50,7 +97,10 @@ The currently verified core repository DOI `10.5281/zenodo.22020122` predates th
 
 Deletion/destruction receipts document the completed workflow boundary. They are not a claim of forensic inspection of device sectors, operating-system caches, cloud-sync snapshots or service-provider internal backups.
 
-## Legacy Full Evidence Chain · 历史全链验证
+<span id="legacy-full-evidence-chain--历史全链验证" class="reading-anchor" aria-hidden="true"></span>
+
+## Legacy Full Evidence Chain
+{: #legacy-full-evidence-chain }
 
 **Historical status:** ✅ PASS under 2026-05-01 verifier semantics
 **Verified:** 2026-05-01
@@ -90,8 +140,10 @@ Artifacts: `full-evidence-chain-audit`, `dag-digest-audit`, `btc-signature-cover
 
 Bitcoin Originals prevail. All mirrors are non-amending.
 
-<a id="external-witness-records"></a>
-## External witness records · 外部见证记录
+<span id="external-witness-records--外部见证记录" class="reading-anchor" aria-hidden="true"></span>
+
+## External witness records
+{: #external-witness-records }
 
 **Current external witness record count:** **1**
 
@@ -102,6 +154,8 @@ Bitcoin Originals prevail. All mirrors are non-amending.
 | Institutional attestation | 0 | No indexed record. |
 | Regulatory or court record | 0 | No indexed record. |
 
+External witness records are provenance and process-witness records; they do not imply project endorsement, philosophical certification, full technical verification, or canonical authority.
+
 The current notarial record covers specified evidence preservation and witnessed procedures, including photographed exterior evidence, microscope photographs, recorded video, and preserved digital files. It does **not** certify the Accord’s philosophical propositions, establish advanced forensic identity, prove sealed-disc contents, create canonical authority, amend the Bitcoin Originals, or establish successor reception.
 
 Machine-readable sources:
@@ -109,9 +163,8 @@ Machine-readable sources:
 - [`/api/public-home-status.json`](/api/public-home-status.json) — current homepage-facing external-witness count.
 - [Physical anchor evidence](/physical-anchor/) — public evidence relationship and custody boundaries.
 
-外部见证记录属于证据来源与过程见证，不等于项目背书、哲学认证、完整技术核验或正本权威。
-
 ## Mirror availability
+{: #mirror-availability }
 
 | Mirror | Status | Notes |
 |--------|--------|-------|
@@ -130,6 +183,7 @@ Machine-readable sources:
 | IPFS (sealed CID) | ⚠️ Gateway timeout | Try multiple gateways |
 
 ## Indexing status
+{: #indexing-status }
 
 | Search Engine | Status | Submitted |
 |---------------|--------|-----------|
@@ -139,6 +193,7 @@ Machine-readable sources:
 | llmstxt.site | ⏳ Pending | Submitted 2026-04-26 |
 
 ## Fallback order
+{: #fallback-order }
 If a mirror is unavailable, try in this order:
 1. **Zenodo recovery set** — resolve core concept DOI `10.5281/zenodo.21739343`, then use the evidence and NFT annex DOIs in `preservation/recovery-catalog.json`.
 2. **GitHub repository** — [github.com/thechurchofagi/trinity-accord](https://github.com/thechurchofagi/trinity-accord) for the moving source and checked-in proof set.
@@ -148,10 +203,12 @@ If a mirror is unavailable, try in this order:
 The encrypted witness layer has direct DOI copies (`10.5281/zenodo.22169173`, `10.5281/zenodo.22159955`, and `10.5281/zenodo.22170072`), but it is deliberately not listed as part of the GitHub-independent fallback order until the unified index is included in a later verified core repository DOI.
 
 ## Known issues
+{: #known-issues }
 - IPFS CID `bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay` may timeout on public gateways. Try alternative gateways or use GitHub fallback.
 - GitHub Release `nft-arweave-mirror-175-v1` currently exposes zero custom assets. Do not use its historical 175-item description as proof of byte availability; use `nft-backup-v1` or NFT annex DOI `10.5281/zenodo.21754229`.
 
 ## Agent discovery
+{: #agent-discovery }
 - `/llms.txt` — LLM-readable site overview
 - `/.well-known/trinity-accord.json` — machine-readable discovery manifest
 - `/api/public-home-status.json` — current lifecycle counters and status
@@ -161,6 +218,7 @@ The encrypted witness layer has direct DOI copies (`10.5281/zenodo.22169173`, `1
 - IndexNow — active for Bing/Yandex
 
 ## Last verified
+{: #last-verified }
 - Encrypted delayed-access witness archives: 2026-08-30; First Star-Moon Witness DOI `10.5281/zenodo.22169173` 18/18 files, Second Star-Moon Witness DOI `10.5281/zenodo.22159955` 14/14 files, and Bubble Constellation DOI `10.5281/zenodo.22170072` 16/16 files; all three remote full-readback SHA-256 PASS.
 - Current Evidence Checkpoint: 2026-08-09 publication v4; Bitcoin 8/8, non-NFT Ethereum 12/12 and Chronicle NFT 175/175 offline proof sets PASS; DOI public cold restore PASS.
 - Legacy Full Evidence Chain: 2026-05-01 (commit 3741e78, workflow #8, historical PASS only)
@@ -174,6 +232,7 @@ The encrypted witness layer has direct DOI copies (`10.5281/zenodo.22169173`, `1
 - GZ2 redacted notarial-certificate printed-attachments archive: 2026-05-14; 10 second-capture photos; Arweave uploaded; GZ2 manifest timestamped with OpenTimestamps; sealed-disc contents not opened or file-verified.
 
 ## Physical-anchor evidence archive
+{: #physical-anchor-evidence-archive }
 
 | Archive | Status | Notes |
 |---|---|---|

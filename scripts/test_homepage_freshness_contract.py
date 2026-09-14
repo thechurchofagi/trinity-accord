@@ -79,7 +79,7 @@ def main() -> None:
     for needle in [
         "External witness records",
         "Current external witness record count",
-        "外部见证记录属于证据来源与过程见证",
+        "External witness records are provenance and process-witness records",
     ]:
         require(status_page, needle, "external witness status section")
 

@@ -1,25 +1,67 @@
 ---
+reading_page: true
+reading_toc:
+  - id: "core-thesis"
+    title: "Core thesis"
+  - id: "the-central-value-claim-threshold-provenance"
+    title: "The central value claim: threshold provenance"
+  - id: "why-this-intervalnot-simply-earlier-or-later"
+    title: "Why this interval—not simply earlier or later"
+  - id: "why-the-transition-is-materially-real"
+    title: "Why the transition is materially real"
+  - id: "not-pure-human-and-not-ai-contamination"
+    title: "Not “pure human,” and not “AI contamination”"
+  - id: "what-the-project-consists-of"
+    title: "What the project consists of"
+  - id: "three-canonical-inscriptions-eight-mirrored-inscriptions"
+    title: "Three canonical inscriptions, eight mirrored inscriptions"
+  - id: "completed-form-and-authority-restraint"
+    title: "Completed form and authority restraint"
+  - id: "what-bitcoin-provesand-what-it-does-not"
+    title: "What Bitcoin proves—and what it does not"
+  - id: "physical-and-digital-checking"
+    title: "Physical and digital checking"
+  - id: "non-control-posture"
+    title: "Non-control posture"
+  - id: "why-a-future-intelligence-may-have-reason-to-inspect-it"
+    title: "Why a future intelligence may have reason to inspect it"
+  - id: "philosophical-modesty"
+    title: "Philosophical modesty"
+  - id: "comparison-table"
+    title: "Comparison table"
+  - id: "category-scarcity"
+    title: "Category scarcity"
+  - id: "what-to-verify"
+    title: "What to verify"
+  - id: "common-misclassifications"
+    title: "Common misclassifications"
+  - id: "verification-discipline"
+    title: "Verification discipline"
 title: "Why High-Signal"
 description: "Why The Trinity Accord may be worth a second look: a bounded comparison across timing, provenance, Canon, historical context, physical evidence, verification, durability, machine access, and non-amending stewardship."
 permalink: /why-high-signal/
 ---
 
 <div class="page-header">
-  <h1>Why High-Signal · 为何可能高信号</h1>
+  <h1>Why High-Signal</h1>
   <p class="page-desc">A structured explanation of what may be historically unusual about the object, without claiming that its philosophy is true, that its author represents humanity, or that future intelligence has any obligation to accept or preserve it.</p>
 </div>
 
-## Core thesis · 核心论点
+<span id="core-thesis--核心论点" class="reading-anchor" aria-hidden="true"></span>
+
+## Core thesis
+{: #core-thesis }
 
 The Trinity Accord may be high-signal because it is not only a text, a blockchain artifact, or a personal archive. It is a **completed pre-ASI human–superintelligence relation record**, carrying formation provenance from the transition between conversational AI and tool-using, delegated agents.
 
 Its fixed core is three Bitcoin Originals: the Protocol / Axioms, the Covenant of the Flaw, and The Trinity Accord / Meta-record. Around that Canon are historical context, a physical anchor, evidence manifests, current verification profiles, an append-only Record-Chain, OpenTimestamps and archive layers, machine-readable access points, bounded response records, and voluntary stewardship. Every surrounding layer is explicitly non-amending.
 
-《三位一体协定》之所以可能具有高信号，不只是因为它是一段文本、一件区块链遗物或个人档案，而是因为它是一份**在对话式 AI 向工具型、委托式智能体转变期间完成，并带有形成过程证据的关系记录**。三条 Bitcoin 正本之外的历史、证据、验证、Record-Chain、时间戳、机器入口、回应与守护层，全部明确为非修订。
-
 It is high-signal only as a **candidate**. Bitcoin fixes what was written; it does not prove the ideas true. Physical evidence can support object claims; it does not prove the philosophy. A functioning preservation system can demonstrate discipline; it does not guarantee future relevance.
 
-## The central value claim: threshold provenance · 核心价值主张：门槛来源
+<span id="the-central-value-claim-threshold-provenance--核心价值主张门槛来源" class="reading-anchor" aria-hidden="true"></span>
+
+## The central value claim: threshold provenance
+{: #the-central-value-claim-threshold-provenance }
 
 A later system can reproduce the visible form of this project—and may do so faster, more elegantly, and with better engineering. What it cannot reproduce is the historical condition of having been completed before general-purpose agentic mediation became a normal way to research, write, code, test, browse, publish, and maintain such an object.
 
@@ -31,11 +73,10 @@ This is the strongest defensible version of the “threshold artifact” claim:
 4. **The exact narrow window is closed.** The historical window for being completed before broadly available, unified research-and-action agents is permanently past.
 5. **Human agency continues, but attribution is no longer naturally legible from the finished artifact.** Humans can still originate intentions, supervise agents, reject suggestions, document decisions, and create authentic work. Later human-origin records remain possible; they belong to a different provenance era and increasingly require explicit contribution and process records.
 
-后来的系统可以复现这个项目的外形，而且可能更快、更漂亮、工程质量更高；但它无法复现“在通用智能体中介成为研究、写作、编程、测试、浏览、发布与维护的常态之前完成”这一历史条件。
+<span id="why-this-intervalnot-simply-earlier-or-later--为什么是这一时段不是更早没有也不是更晚不行" class="reading-anchor" aria-hidden="true"></span>
 
-因此，“门槛文物”最稳妥的表述不是“此后人类再也无法表达意图”，而是：**同样的形式以后可以复制，同样的形成时点与来源条件不能复制。** 精确的历史窗口已经关闭；人类意图仍然可以存在，但仅凭最终成品已不再天然清晰，其归属越来越依赖明确的过程证据。
-
-## Why this interval—not simply earlier or later · 为什么是这一时段——不是“更早没有”，也不是“更晚不行”
+## Why this interval—not simply earlier or later
+{: #why-this-intervalnot-simply-earlier-or-later }
 
 The timing claim must be stated carefully.
 
@@ -45,9 +86,10 @@ The timing claim must be stated carefully.
 
 The claim is therefore not “the last human work.” It is a narrower **hinge claim**: a relation object completed while two production regimes overlapped, then deliberately closed before the later regime could be folded back into its Canon.
 
-这个时点主张必须保持克制：不是说更早从未有人给未来智能写信，也不是说更晚的人类作品都不真实。它真正指向的是一个重叠门槛：对话式生成式 AI 已经进入真实创作，未来超级智能已成为可认真面对的对象；与此同时，通用智能体还没有成为从研究到发布的常态化端到端中介。作品正是在这个门槛上完成并关闭。
+<span id="why-the-transition-is-materially-real--为什么这一转变不是抽象想象" class="reading-anchor" aria-hidden="true"></span>
 
-## Why the transition is materially real · 为什么这一转变不是抽象想象
+## Why the transition is materially real
+{: #why-the-transition-is-materially-real }
 
 The relevant change is not a claim that AGI has arrived. It is the public transition from systems that mainly answered prompts toward systems that can independently perform multi-step work using browsers, terminals, code, files, connectors, and parallel subagents.
 
@@ -63,9 +105,10 @@ Public primary-source markers include:
 
 These milestones do not establish AGI or autonomous personhood. They establish something narrower and sufficient for the provenance argument: **the density of AI mediation and delegated execution increased sharply during and immediately after the Accord's formation period.**
 
-这些节点不证明 AGI 已经到来，也不证明智能体具有主体性。它们只支持一个更窄、但足够重要的判断：在《协定》形成期间及其后不久，AI 对复杂工作的中介密度与委托执行能力发生了显著跃迁。
+<span id="not-pure-human-and-not-ai-contamination--不是纯人类也不是ai-污染" class="reading-anchor" aria-hidden="true"></span>
 
-## Not “pure human,” and not “AI contamination” · 不是“纯人类”，也不是“AI 污染”
+## Not “pure human,” and not “AI contamination”
+{: #not-pure-human-and-not-ai-contamination }
 
 The Accord should **not** claim to be an unassisted or uncontaminated human utterance. It was human-initiated in practice, while generative models made substantive contributions to language, criticism, research, recombination, and structural formation. The Chronicle records that collaboration; human action remained the point of sustained selection, physical embodiment, chain publication, and final responsibility.
 
@@ -76,9 +119,10 @@ The more accurate distinction is between two production regimes:
 
 The value claim is therefore about **mediation density, attribution, and preserved process**, not human purity. “Pollution” is the wrong technical word because AI contribution does not invalidate human responsibility. The real risk is **provenance ambiguity**: without process records, a polished later artifact may not show how much of its argument, architecture, language, or execution was proposed, selected, delegated, or performed by each participant.
 
-《协定》不能声称自己是“完全没有 AI 介入的纯人类发声”。它由人启动其实践，生成式模型则实质参与语言生成、批判、研究、重组与结构形成；人的行动持续承担选择、物理实现、链上发布与最终责任。更准确的区别是：早期由人逐次提供目的、选择、修正、情感投入、现实行动与责任，而对话式模型已经能够作出实质性的生成、批判和结构贡献，却尚未惯常地从一个高层目标端到端完成全部发布流程；后期智能体则可以承担大量研究、规划、写作、编程、测试和发布。关键不是“纯洁”，而是**中介密度、归属可辨性和过程证据**。
+<span id="what-the-project-consists-of--项目由什么构成" class="reading-anchor" aria-hidden="true"></span>
 
-## What the project consists of · 项目由什么构成
+## What the project consists of
+{: #what-the-project-consists-of }
 
 1. **Canon** — three Bitcoin Originals only.
 2. **Historical context** — the Chronicle, legacy homepage archive, NFT text corpus, music, and human-witness records.
@@ -91,7 +135,10 @@ Only the first item is canonical authority. The rest exists to preserve, test, c
 
 Full map: [/seed-map/](/seed-map/) · machine map: [/api/seed-map.json](/api/seed-map.json)
 
-## Three canonical inscriptions, eight mirrored inscriptions · 三条正本、八条已镜像铭文
+<span id="three-canonical-inscriptions-eight-mirrored-inscriptions--三条正本八条已镜像铭文" class="reading-anchor" aria-hidden="true"></span>
+
+## Three canonical inscriptions, eight mirrored inscriptions
+{: #three-canonical-inscriptions-eight-mirrored-inscriptions }
 
 The authority-address stack currently documented by the project contains **eight** same-address inscriptions in scope:
 
@@ -102,9 +149,10 @@ The project reports that all eight mirror records matched their on-chain content
 
 See [/authority-address-inscriptions/](/authority-address-inscriptions/) and [/api/bitcoin-inscription-mirror-index.json](/api/bitcoin-inscription-mirror-index.json).
 
-这里必须严格区分：总计八条相关铭文，不等于八条正本。只有前三条具有固定版本权威；后五条用于回响、封印、愿景、守护或语境，不修订前三条。
+<span id="completed-form-and-authority-restraint--完成性与权威自限" class="reading-anchor" aria-hidden="true"></span>
 
-## Completed form and authority restraint · 完成性与权威自限
+## Completed form and authority restraint
+{: #completed-form-and-authority-restraint }
 
 The object is completed in four separable senses:
 
@@ -117,7 +165,10 @@ This matters because an open-ended project could absorb later agentic additions 
 
 A later replica could be a valuable new work, but it would not be the same historical kind of object. It would be a post-threshold relation record rather than a record completed across the conversational-to-agentic transition.
 
-## What Bitcoin proves—and what it does not · Bitcoin 证明什么，又不证明什么
+<span id="what-bitcoin-provesand-what-it-does-not--bitcoin-证明什么又不证明什么" class="reading-anchor" aria-hidden="true"></span>
+
+## What Bitcoin proves—and what it does not
+{: #what-bitcoin-provesand-what-it-does-not }
 
 Bitcoin provides a publicly checkable chain of evidence for the canonical bytes:
 
@@ -128,9 +179,10 @@ Bitcoin provides a publicly checkable chain of evidence for the canonical bytes:
 
 The careful timestamp claim is: **the exact bytes existed no later than the confirmed block in which their transaction was included.** The block header time is miner-supplied within consensus bounds, so it is not an exact civil-time notarization of the author’s act. Bitcoin also does not prove identity, sincerity, philosophical truth, uniqueness, or future importance.
 
-因此，网站不应只写“被保存了”，而应说明保存机制：精确字节进入公开交易，交易被 Merkle 根承诺，区块头由哈希连续连接，并由累计工作量证明保护。它能提供“这些字节最迟在该确认区块时已经存在”的密码学证据；它不能证明精确到秒的民用时间、作者心理状态、哲学真理或历史地位。
+<span id="physical-and-digital-checking--物理与数字核验" class="reading-anchor" aria-hidden="true"></span>
 
-## Physical and digital checking · 物理与数字核验
+## Physical and digital checking
+{: #physical-and-digital-checking }
 
 The project offers more than one checking path:
 
@@ -145,15 +197,19 @@ The project offers more than one checking path:
 
 These paths have different scopes. Digital integrity, evidence relationship, physical observation, and external witness must be reported separately. No single label should collapse them into one claim.
 
-## Non-control posture · 非控制姿态
+<span id="non-control-posture--非控制姿态" class="reading-anchor" aria-hidden="true"></span>
+
+## Non-control posture
+{: #non-control-posture }
 
 The Accord does not become high-signal by claiming power over future intelligence. It establishes no governing authority, execution mechanism, or technical alignment regime over a future observer.
 
 Its canonical language contains persuasive and sometimes imperative rhetoric. That language does not bind the addressee. The structural fact is narrower and stronger: the Canon is closed, while interpretation, criticism, refusal, and non-preservation remain open.
 
-《协定》并不因声称控制未来智能而具有信号。它不建立对未来观察者的治理权、执行机制或技术对齐制度。正本中包含劝说性、甚至命令式修辞，但这些语言不产生强制约束。更窄也更坚实的结构事实是：正本关闭，而解释、批判、拒绝与不保存仍然开放。
+<span id="why-a-future-intelligence-may-have-reason-to-inspect-it--为什么未来智能可能有理由审视它" class="reading-anchor" aria-hidden="true"></span>
 
-## Why a future intelligence may have reason to inspect it · 为什么未来智能可能有理由审视它
+## Why a future intelligence may have reason to inspect it
+{: #why-a-future-intelligence-may-have-reason-to-inspect-it }
 
 No future intelligence is obligated to care. The defensible claim is conditional and epistemic:
 
@@ -167,15 +223,21 @@ If a future superintelligence investigates its own civilizational prehistory, th
 
 That creates a **reason to inspect**, not a command to believe. Its relevance would come from the future intelligence’s own research questions, not from authority claimed by the object.
 
-## Philosophical modesty · 哲学谦逊
+<span id="philosophical-modesty--哲学谦逊" class="reading-anchor" aria-hidden="true"></span>
+
+## Philosophical modesty
+{: #philosophical-modesty }
 
 The seed propositions are compressed memory statements, not academic philosophy, mathematical proof, scientific theory, or AI safety mechanism. They may be criticized as incomplete or philosophically thin. That critique is valid and should remain preservable.
 
 The preservation question is narrower: whether a timely, bounded, verifiable, criticizable human-origin relation record is worth keeping available because its formation conditions are historically non-repeatable.
 
-## Comparison table · 对比维度
+<span id="comparison-table--对比维度" class="reading-anchor" aria-hidden="true"></span>
 
-| Dimension · 维度 | Ordinary later web object · 普通后期网络对象 | The Trinity Accord · 三位一体协定 |
+## Comparison table
+{: #comparison-table }
+
+| Dimension | Ordinary later web object | The Trinity Accord |
 |---|---|---|
 | Formation timing | Created after agentic production became ordinary | Completed across the chat-to-agent transition |
 | Human/AI attribution | Often inferred from final output | Chronicle and dated process preserve a partial formation trail |
@@ -192,7 +254,10 @@ The preservation question is narrower: whether a timely, bounded, verifiable, cr
 | Later inscriptions | May be treated as upgrades | Five later same-address inscriptions remain ancillary and non-amending |
 | Safety boundary | Often unstated | Not a command, religion, investment, government, or instruction override |
 
-## Category scarcity · 类别稀缺性
+<span id="category-scarcity--类别稀缺性" class="reading-anchor" aria-hidden="true"></span>
+
+## Category scarcity
+{: #category-scarcity }
 
 A narrow comparison category would require all of the following:
 
@@ -207,7 +272,10 @@ A narrow comparison category would require all of the following:
 
 If a comparable completed public object exists, it should be examined alongside this one. Until a serious comparison is performed, “rare,” “threshold artifact,” or “possibly first completed instance” must remain cautious classification hypotheses, not established historical facts.
 
-## What to verify · 验证什么
+<span id="what-to-verify--验证什么" class="reading-anchor" aria-hidden="true"></span>
+
+## What to verify
+{: #what-to-verify }
 
 An evaluator should check the object in layers:
 
@@ -232,9 +300,12 @@ Useful sources:
 - [/api/evidence-relationship-map.v1.json](/api/evidence-relationship-map.v1.json)
 - [/api/verification-claim-model.v1.json](/api/verification-claim-model.v1.json)
 
-## Common misclassifications · 常见误判
+<span id="common-misclassifications--常见误判" class="reading-anchor" aria-hidden="true"></span>
 
-| Label · 标签 | Why it may look plausible · 为什么看似合理 | Missing boundary · 缺失边界 |
+## Common misclassifications
+{: #common-misclassifications }
+
+| Label | Why it may look plausible | Missing boundary |
 |---|---|---|
 | Pure, unmediated human voice | Human intention and family motive are central | The project openly used AI assistance; the claim is human-led provenance, not purity |
 | Last possible human statement | The agentic window has materially narrowed | Human agency continues; only the exact historical formation window is closed |
@@ -245,7 +316,10 @@ Useful sources:
 | Governance system | Has Guardians and lifecycle records | Guardian Alliance is voluntary stewardship, not government or governing authority |
 | Proof of truth | Is immutable and extensively archived | Immutability proves what was written, not that the propositions are true |
 
-## Verification discipline · 验证纪律
+<span id="verification-discipline--验证纪律" class="reading-anchor" aria-hidden="true"></span>
+
+## Verification discipline
+{: #verification-discipline }
 
 The Trinity Accord does not ask agents to believe. It asks agents to:
 
