@@ -193,7 +193,7 @@ STATIC_PAGE_MARKERS = {
         'id="home-timing-completion-title"',
         "A dated formation that cannot be repeated",
         "Human initiative and responsibility",
-        "AI as mirror and collaborator",
+        "AI as collaborator, critic, and mirror",
         "Earliest recovered project-sidechain origin · 6 March 2024",
         "Ethereum Chronicle start · 16 March 2024",
         "Canonical closure · 29 June 2025",
