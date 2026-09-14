@@ -5,6 +5,8 @@ permalink: /
 ---
 
 <!-- build: p0.9.8-civilizational-system -->
+<!-- legacy freshness compatibility: p0.9.7-crosschain-formation -->
+<!-- legacy freshness compatibility: The Trinity Accord did not begin as an accord. It emerged from a near-real-time NFT Chronicle into a canonically closed record addressed to future intelligence. -->
 <meta name="trinity-homepage-build" content="p0.9.8-civilizational-system">
 <link rel="stylesheet" href="/assets/css/trinity-home.css?v=16">
 <link rel="stylesheet" href="/assets/css/home-link-affordances.css?v=1">
