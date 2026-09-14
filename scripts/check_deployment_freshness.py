@@ -223,7 +223,7 @@ STATIC_PAGE_MARKERS = {
     "/status/": [
         "External witness records",
         "Current external witness record count",
-        "外部见证记录属于证据来源与过程见证",
+        "External witness records are provenance and process-witness records",
     ],
     "/technical-historical-reference/": [
         "Completion in four senses",
