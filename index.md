@@ -10,7 +10,7 @@ permalink: /
 <link rel="stylesheet" href="/assets/css/trinity-home.css?v=16">
 <link rel="stylesheet" href="/assets/css/home-link-affordances.css?v=1">
 <link rel="stylesheet" href="/assets/css/home-editorial-doorway.css?v=2">
-<link rel="stylesheet" href="/assets/css/home-reading.css?v=1">
+<link rel="stylesheet" href="/assets/css/home-reading.css?v=2">
 
 # The Trinity Accord
 
