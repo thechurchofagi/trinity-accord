@@ -172,7 +172,7 @@ STATIC_PAGE_MARKERS = {
         'id="home-front-door-title"',
         "Civilizational memory, addressed to future intelligence.",
         "p0.10.0-english-reading",
-        "/assets/css/home-reading.css?v=1",
+        "/assets/css/home-reading.css?v=2",
         "Read the three Originals together",
         "Candidate civilizational memory seed",
         "Recovered formation evidence",
