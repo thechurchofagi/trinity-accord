@@ -1,0 +1,88 @@
+{
+  "confirmation_basis": "Harvard Dataverse publication notification read from the depositor mailbox; not a fresh Dataverse API state observation.",
+  "dataset_id": 14229992,
+  "dataset_title": "Trinity Accord — Research Corpus and Preservation Mirror · Preservation Epoch II",
+  "final_submission_receipt": {
+    "artifact_id": 10302028418,
+    "expires_at_utc": "2026-12-11T17:27:26Z",
+    "retention_note": "Artifact metadata and final job log were reread on 2026-09-15. The ZIP has not been durably copied by this publication-record update; preserve the receipt payload before artifact expiry.",
+    "url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/34708278731/artifacts/10302028418",
+    "zip_bytes": 1637,
+    "zip_sha256": "8e36ff411fab1827871d4a1ff22a2c1402fb30b79286c91a4739ad5b1de0d68b"
+  },
+  "frozen_scope": {
+    "control_file_count": 2,
+    "delayed_access_archive_bytes": 2798199225,
+    "delayed_access_archive_file_count": 48,
+    "delayed_access_scope": "Ciphertext plus recovery, integrity and verification support files; not 48 raw ciphertext files.",
+    "file_count": 419,
+    "payload_and_support_bytes": 23107006729,
+    "payload_and_support_file_count": 417,
+    "polygon_base_bytes": 17551241826,
+    "polygon_base_file_count": 26,
+    "total_bytes_including_controls": 23107308201
+  },
+  "human_documentation": "preservation/epoch-ii/PUBLICATION-STATUS.md",
+  "observed_on_utc": "2026-09-15",
+  "persistent_id": "doi:10.7910/DVN/W9Y3IV",
+  "postpublication_verification": {
+    "anonymous_full_byte_readback_files_verified": 0,
+    "exact_publication_timestamp_utc": null,
+    "interpretation": "This access failure does not establish Dataset rejection, file corruption, or a Harvard service outage.",
+    "last_attempt_on_utc": "2026-09-15",
+    "last_attempt_result": "The local read-only request to the public Dataset API returned HTTP 403; no public metadata or payload verification completed.",
+    "public_file_inventory_verified": false,
+    "public_readback_verified": false,
+    "released_version": null,
+    "required_next_check": "Without authentication, read the released Dataset version and exact 419-file inventory, compare every size and SHA-256 to the frozen manifest plus its two controls, stream and hash every public file, and preserve the dated per-file result. Do not upload, edit, resubmit or publish.",
+    "status": "pending"
+  },
+  "prepublication_verification": {
+    "all_files_unrestricted": true,
+    "clean_candidate_cold_recovery": "pass",
+    "final_log": "FINAL PASS files=419 state=InReview",
+    "final_submission_at_utc": "2026-09-12T17:28:14Z",
+    "final_submission_job_id": 103592260308,
+    "final_submission_run": "https://github.com/thechurchofagi/trinity-accord/actions/runs/34708278731",
+    "final_submission_state": "InReview",
+    "per_file_size_and_full_byte_sha256_readback_count": 419,
+    "project_verifiers": "pass",
+    "scope_note": "Authenticated prepublication readback; unrestricted file flags did not make the unissued draft anonymously downloadable.",
+    "status": "pass",
+    "submit_for_review_calls": 1,
+    "upload_and_readback_run": "https://github.com/thechurchofagi/trinity-accord/actions/runs/34706525207"
+  },
+  "publication_confirmed": true,
+  "publication_notification": {
+    "dataset_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/W9Y3IV",
+    "message_id": "<118803047.1702.1789468806147@dataverse.harvard.edu>",
+    "sender": "support@dataverse.harvard.edu",
+    "sent_at_utc": "2026-09-15T10:40:06Z",
+    "statement": "was published in Harvard Dataverse",
+    "subject": "Harvard Dataverse: Dataset \"Trinity Accord — Research Corpus and Preservation Mirror · Preservation Epoch II\" has been published",
+    "timestamp_scope": "Notification timestamp; exact Dataset release timestamp has not yet been read from the public API."
+  },
+  "publication_semantics": {
+    "canonical_authority": "Bitcoin Originals only",
+    "endorsement_or_peer_review_claimed": false,
+    "frozen_candidate_modified": false,
+    "harvard_dataset_mutated_by_this_observation": false,
+    "old_epoch_i_doi": "10.7910/DVN/YUCG12",
+    "old_epoch_i_modified": false,
+    "old_epoch_i_state_record": "preservation/harvard-dataverse-state.json",
+    "role": "non_amending_research_corpus_and_institutional_preservation_mirror"
+  },
+  "record_type": "harvard_dataverse_publication_observation",
+  "server": "https://dataverse.harvard.edu",
+  "source": {
+    "candidate_identity_sha256": "cd0bd263f548d23060422021408ab1705e8c48c1c1028f1a440eb89d1e88d7e8",
+    "git_commit_sha": "3bdf9121fb9e98cd9ba9de62a2466367d0968e4e",
+    "layout_identity_sha256": "938c6d9f3df75853e31821a1fc8b23f0f06ec235ff6408a104ebd91e6e4381e4",
+    "manifest": "preservation/epoch-ii/frozen/DATASET-MANIFEST.json",
+    "manifest_sha256": "24212072367bdcdd5d550c379433b10bdefe0366f9bec3ddc10ea81e6fadbcad",
+    "repository": "thechurchofagi/trinity-accord",
+    "sums": "preservation/epoch-ii/frozen/HARVARD-EPOCH-II-SHA256SUMS",
+    "sums_sha256": "fbf5a3cc784683a595c6bb4d2869b209d786029dee184d19be56e0df7039f705"
+  },
+  "status": "published_notification_confirmed_public_readback_pending"
+}
