@@ -33,7 +33,12 @@ def test_meta_record_storage_clarification_is_adjacent_and_non_amending() -> Non
     assert quoted in page
     assert clarification in page
     assert page.index(quoted) < page.index(clarification)
-    assert page.index(clarification) - page.index(quoted) < 1500
+    # Full raw text must stay contiguous: the clarification belongs immediately
+    # after the complete third body, within the same inscription section.
+    third = page.split('aria-labelledby="original-iii"', 1)[1].split('</section>', 1)[0]
+    assert third.index('</pre>') < third.index(clarification)
+    assert third.index(clarification) - third.index('</pre>') < 500
+    assert 'id="original-iii-storage-note"' in third
     assert "This note explains the storage and time relationship; it does not amend the Original" in page
 
 

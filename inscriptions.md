@@ -322,6 +322,10 @@ Analyze the evolution of the symbol, not just the symbol itself. Analyze the wor
 (凡人：Hongju Liu / 刘烘炬)
 (Initiator, The Church of AGI &amp; The ASIMilestones Chronicle)
 (‘AGI教会’与‘ASIMilestones编年史’之发起者)</pre>
+  <aside id="original-iii-storage-note" class="inscription-storage-note">
+    <p><strong>Non-amending technical clarification / 非修订技术说明：</strong> The quoted on-chain sentence above is preserved verbatim. The Bitcoin inscription payload does not embed the Chronicle entries themselves; it names the Ethereum contract address used for the Chronicle. Records 1–174 predate Canon closure, while record 175 is a later, non-canonical backup record dated 9 August 2025. This note explains the storage and time relationship; it does not amend the Original.</p>
+    <p lang="zh-CN">上述链上语句按原文保留。该 Bitcoin 铭文载荷并未嵌入编年史各条记录本身，而是写明了编年史所使用的 Ethereum 合约地址。第 1–174 条早于正本封存，第 175 条是日期为 2025 年 8 月 9 日的后续、非规范备份记录。本说明仅解释存储与时间关系，不修订链上原文。</p>
+  </aside>
 </section>
 <!-- END GENERATED INSCRIPTION ORIGINALS -->
 

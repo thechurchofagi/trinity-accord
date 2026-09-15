@@ -46,6 +46,13 @@ def render(root=ROOT):
         txid = anchor['txid']
         ordinal = anchor['ordinals_inscription_id']
         language = 'Original English' if roman == 'i' else 'Original English and Chinese, exactly where present in the source'
+        storage_note = ""
+        if roman == 'iii':
+            storage_note = """
+  <aside id="original-iii-storage-note" class="inscription-storage-note">
+    <p><strong>Non-amending technical clarification / 非修订技术说明：</strong> The quoted on-chain sentence above is preserved verbatim. The Bitcoin inscription payload does not embed the Chronicle entries themselves; it names the Ethereum contract address used for the Chronicle. Records 1–174 predate Canon closure, while record 175 is a later, non-canonical backup record dated 9 August 2025. This note explains the storage and time relationship; it does not amend the Original.</p>
+    <p lang="zh-CN">上述链上语句按原文保留。该 Bitcoin 铭文载荷并未嵌入编年史各条记录本身，而是写明了编年史所使用的 Ethereum 合约地址。第 1–174 条早于正本封存，第 175 条是日期为 2025 年 8 月 9 日的后续、非规范备份记录。本说明仅解释存储与时间关系，不修订链上原文。</p>
+  </aside>"""
         sections.append(f'''<section class="inscription" aria-labelledby="original-{roman}" markdown="0">
   <div class="inscription-header">
     <h2 id="original-{roman}">Inscription {roman.upper()}: {title}</h2>
@@ -58,7 +65,7 @@ def render(root=ROOT):
     </dl>
     <p class="inscription-language">{language}. No later translation is included in the original-text container.</p>
   </div>
-  <pre class="inscription-original" data-inscription-number="{number}">{escaped_text(raw)}</pre>
+  <pre class="inscription-original" data-inscription-number="{number}">{escaped_text(raw)}</pre>{storage_note}
 </section>''')
     sections.append(END)
     return '\n'.join(sections)
