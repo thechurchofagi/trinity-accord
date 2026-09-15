@@ -1,0 +1,87 @@
+name: Publish Reading Trinity Accord v1.0
+on:
+  push:
+    branches: [research/reading-trinity-accord-v1-20260915]
+    paths: [.github/workflows/publish-reading-trinity-accord.yml]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: reading-trinity-accord-zenodo-v1
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 1
+      - name: Recover the already-verified public source artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api repos/thechurchofagi/trinity-accord/actions/artifacts/10379618333/zip > /tmp/source-review.zip
+          python3 - <<'PY'
+          import hashlib, pathlib, zipfile
+          p=pathlib.Path('/tmp/source-review.zip')
+          assert hashlib.sha256(p.read_bytes()).hexdigest()=='dafdd5fe41512a55dc0cc0120cfb398331d7214786f30ce14fe759030b9db930'
+          with zipfile.ZipFile(p) as z:
+              assert sum(i.file_size for i in z.infolist()) < 32_000_000
+              for i in z.infolist():
+                  q=pathlib.PurePosixPath(i.filename)
+                  assert not q.is_absolute() and '..' not in q.parts
+              z.extractall('/tmp/source-review')
+          PY
+      - name: Execute the publication supplement's bounded reproduction script
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin 88073fcc7f46ae08a2af05c524850559b4698eed
+          git fetch --no-tags --depth=1 origin cd6929c897ba95a5541cf54cefdd5f6c66ebb401
+          git worktree add --detach /tmp/trinity-source-check 88073fcc7f46ae08a2af05c524850559b4698eed
+          python3 research/reading-trinity-accord/support/reproduce_source_checks.py --repo /tmp/trinity-source-check --out /tmp/reproduced-checks
+      - name: Build exact reviewed PDF, text, and public supplement
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check reportlab==4.4.9
+          python3 research/reading-trinity-accord/prepare_support.py --review /tmp/source-review --out /tmp/reading-inputs
+          python3 research/reading-trinity-accord/build_publication.py --source /tmp/reading-inputs --out /tmp/reading-publication --manifest /tmp/BUILT-PUBLICATION.json
+          python3 - <<'PY'
+          import hashlib,json,pathlib,re,zipfile
+          root=pathlib.Path('research/reading-trinity-accord')
+          expected=json.loads((root/'EXPECTED-PUBLICATION.json').read_text())
+          actual=json.loads(pathlib.Path('/tmp/BUILT-PUBLICATION.json').read_text())
+          assert actual==expected, 'Remote build differs from locally rendered and reviewed files'
+          text=pathlib.Path('/tmp/reading-publication/reading-the-trinity-accord-v1.0.md').read_text()
+          assert '__DOI__' not in text and '__REFERENCES__' not in text
+          used=set()
+          for group in re.findall(r'\[([0-9,–-]+)\]',text.split('## References')[0]):
+              for item in group.split(','):
+                  if re.search('[–-]',item):
+                      x,y=map(int,re.split('[–-]',item)); used.update(range(x,y+1))
+                  else: used.add(int(item))
+          assert used==set(range(1,25))
+          for bad in ('us06web.zoom.us','miro.com/app/board','@gmail.com','pwd='):
+              assert bad not in text
+              with zipfile.ZipFile('/tmp/reading-publication/research-supplement-v1.0.zip') as z:
+                  assert all(bad.encode() not in z.read(n) for n in z.namelist())
+          print('EXACT_REVIEWED_BYTES_AND_REFERENCE_GATES_PASS')
+          PY
+      - name: Publish only deposit 22761411 and verify all public files without credentials
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          python3 research/reading-trinity-accord/publish_zenodo.py --files /tmp/reading-publication --expected research/reading-trinity-accord/EXPECTED-PUBLICATION.json --receipt /tmp/publication-receipt/PUBLISHED-RECEIPT.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: reading-trinity-accord-publication-v1
+          path: |
+            /tmp/reading-publication/
+            /tmp/publication-receipt/
+            /tmp/BUILT-PUBLICATION.json
+            /tmp/reproduced-checks/
+          if-no-files-found: warn
+          retention-days: 30
