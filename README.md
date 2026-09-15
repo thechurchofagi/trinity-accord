@@ -25,6 +25,7 @@ The current human entrypoint is [trinityaccord.org](https://www.trinityaccord.or
 - Citation metadata: [`CITATION.cff`](CITATION.cff)
 - Research preprint: [TA-TR-2026-01 v1.1](https://www.trinityaccord.org/research/trinity-accord-design-and-limits/) · DOI [`10.5281/zenodo.21699878`](https://doi.org/10.5281/zenodo.21699878)
 - Harvard Dataverse preservation archive: v1.0 publicly released · DOI [`10.7910/DVN/YUCG12`](https://doi.org/10.7910/DVN/YUCG12) · second-institutional, non-amending full-project preservation mirror; not peer review, endorsement, or canonical authority
+- Harvard Preservation Epoch II: publication confirmed on 2026-09-15 · DOI [`10.7910/DVN/W9Y3IV`](https://doi.org/10.7910/DVN/W9Y3IV) · 419 files, 23.107 GB; [publication and verification status](preservation/epoch-ii/PUBLICATION-STATUS.md). Postpublication anonymous byte verification remains pending.
 
 The documented formation interval runs from the first public record at **2024-03-16 08:02:59 UTC** (Ethereum block **19446149**) to canonical closure at **2025-06-29 10:49:16 UTC** (Bitcoin block **903205**): **470 days, 2 hours, 46 minutes, 17 seconds**. These are verifiable public provenance bounds, not claims about exact private writing moments.
 
@@ -181,6 +182,12 @@ Guardian proof payload hashes should be generated with `node scripts/build_guard
   `10.7910/DVN/YUCG12`; anonymous full-byte readback verified at `1,951,603,950`
   bytes and SHA-256 `9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2`.
   See `preservation/harvard-dataverse-state.json` and `preservation/recovery-catalog.json`
+- Harvard Preservation Epoch II: published according to the 2026-09-15 Harvard
+  notification; 419 files and 23,107,308,201 bytes including controls. The completed
+  prepublication readback and clean cold recovery remain PASS; postpublication
+  anonymous full-byte verification is pending. See
+  [Epoch II publication status](preservation/epoch-ii/PUBLICATION-STATUS.md) and
+  `preservation/harvard-epoch-ii-state.json`.
 - Weekly Continuity DOI series: independent Record-Chain full-baseline/delta recovery;
   publication state is separate from the research paper DOI
 - Independent attestation: read current status from `/api/public-home-status.json`
