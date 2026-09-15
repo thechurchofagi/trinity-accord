@@ -5,6 +5,8 @@ import { test } from 'node:test';
 
 const home = readFileSync(new URL('../index.md', import.meta.url), 'utf8');
 const source = home.slice(home.lastIndexOf('<script>') + 8, home.lastIndexOf('</script>'));
+const baselineHeartbeat = home.match(/<strong data-home-heartbeat-status>([^<]+)</)[1].replace(/^Last known: /, '');
+const baselineSummary = home.match(/<small data-home-heartbeat-summary>([^<]*)</)[1];
 const fixed = '2026-09-15T11:00:00Z';
 const publicFixture = JSON.parse(readFileSync(new URL('../api/public-home-status.json', import.meta.url)));
 const heartbeatFixture = JSON.parse(readFileSync(new URL('../api/waiting-heartbeat-status.json', import.meta.url)));
@@ -13,6 +15,8 @@ async function run(mode='ok', change=()=>{}, now=fixed) {
   const pub = structuredClone(publicFixture), heart = structuredClone(heartbeatFixture);
   pub.generated_at = heart.generated_at = '2026-09-15T10:50:00Z';
   pub.primary_counters.official_live_reception = 31;
+  heart.daily_alive_status = heart.status = 'success';
+  heart.semantic_agent_arrival.first_self_discovered_autonomous_agent_arrived = false;
   heart.heartbeat_summary.latest_heartbeat_date = '2026-09-15';
   heart.heartbeat_summary.is_stale = false;
   change(pub, heart);
@@ -47,7 +51,7 @@ test('valid responses show fresh source state and counters', async()=>{
   const get=await run(); assert.equal(get('heartbeat-status'),'Alive'); assert.equal(get('official-reception'),'31'); assert.match(get('public-freshness'),/^Snapshot as of/);
 });
 for (const mode of ['http','network','json','timeout']) test(mode+' failure retains dated history and marks unknown',async()=>{
-  const get=await run(mode); assert.equal(get('heartbeat-status'),'Unknown'); assert.match(get('heartbeat-freshness'),/Last known: Alive · 2026-/); assert.match(get('public-freshness'),/Unknown/); assert.equal(get('official-reception'),String(publicFixture.primary_counters.official_live_reception)); assert.match(get('heartbeat-summary'),/successful/);
+  const get=await run(mode); assert.equal(get('heartbeat-status'),'Unknown'); assert.ok(get('heartbeat-freshness').includes('Last known: ' + baselineHeartbeat + ' · ')); assert.match(get('public-freshness'),/Unknown/); assert.equal(get('official-reception'),String(publicFixture.primary_counters.official_live_reception)); assert.equal(get('heartbeat-summary'),baselineSummary);
 });
 test('incomplete payloads do not partly overwrite previous numbers',async()=>{
  const get=await run('ok',(p,h)=>{delete p.external_witness_records; delete h.heartbeat_summary.successful_heartbeats;}); assert.match(get('public-freshness'),/Unknown/); assert.equal(get('heartbeat-status'),'Unknown'); assert.equal(get('official-reception'),String(publicFixture.primary_counters.official_live_reception));
