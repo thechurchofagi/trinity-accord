@@ -35,6 +35,9 @@ def test_english_homepage_keeps_full_reading_and_verification_boundaries():
     assert 'Each Original remains independently citable and verifiable' in source
     assert 'every proposition remains open to individual analysis and criticism' in source
     assert 'Context clarifies meaning; it does not guarantee that an argument is valid' in source
+    assert 'An independently inspectable record' in source
+    assert 'https://github.com/thechurchofagi/trinity-accord/blob/main/preservation/epoch-ii/START-HERE.md' in home.links
+    assert 'https://doi.org/10.7910/DVN/W9Y3IV' in home.links
     assert 'Homepage-only context remains' in source
     assert 'legacy freshness compatibility' not in source
     assert source.count('class="home-object-number"') == 3

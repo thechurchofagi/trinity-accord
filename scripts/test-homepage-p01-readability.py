@@ -44,7 +44,7 @@ def main():
     require_contains(index, "Canon, dated Chronicle, and physical anchor—plus later non-amending context", "homepage presents the preserved-object map")
     require_contains(index, "father’s concern for his children", "homepage presents the human motive")
     require_contains(index, "These three inscriptions are the only canonical authority", "homepage explains the 3+5 authority boundary")
-    require_contains(index, "Reproducible form; non-repeatable dated provenance", "homepage names historical value")
+    require_contains(index, "Why preserve a record before the outcome is known?", "homepage names preservation purpose")
     require_contains(index, "The homepage is a doorway, not the archive", "homepage explicitly limits its role")
     require_not_contains(index, 'class="zh"', "homepage has no translated body paragraphs")
     require_not_contains(index, 'class="zh-para"', "homepage has no Chinese body-paragraph mode")

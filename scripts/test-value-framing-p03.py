@@ -59,7 +59,7 @@ def main():
     require_not_contains(index, 'class="zh"', "homepage limits Chinese to headings and labels")
     require_contains(index, "Formation and historical window", "homepage explains timing and completion")
     require_contains(index, "final meta-record declares the foundational work closed", "homepage states canonical completion")
-    require_contains(index, "Reproducible form; non-repeatable dated provenance", "homepage names historical value")
+    require_contains(index, "Why preserve a record before the outcome is known?", "homepage names preservation purpose")
     require_contains(index, "Earliest recovered project-sidechain origin · 6 March 2024", "homepage identifies earliest recovered formation evidence")
     require_contains(index, "first Ethereum mint in block 19446149", "homepage identifies Ethereum Chronicle start evidence")
     require_contains(index, "Bitcoin transaction was included in block 903205", "homepage identifies closure evidence")

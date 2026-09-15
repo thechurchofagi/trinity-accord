@@ -31,7 +31,7 @@ test -f technical-historical-reference.md && pass "dedicated reference exists" |
 must_contain index.md "human-initiated in practice, emergent in meaning through substantive interaction with generative AI" "hero states honest collaboration"
 must_contain index.md "completed pre-ASI record addressed toward a possible future human–superintelligence relationship" "homepage has bounded classification"
 must_contain index.md "These three inscriptions are the only canonical authority" "homepage states Canon authority"
-must_contain index.md "Reproducible form; non-repeatable dated provenance" "homepage names bounded historical value"
+must_contain index.md "Why preserve a record before the outcome is known?" "homepage names bounded preservation purpose"
 must_contain index.md "Chain timestamps establish a verifiable chronology, not exact civil-time authorship" "homepage bounds timestamp evidence"
 must_contain index.md "The homepage is a doorway, not the archive" "homepage has concise reference portal"
 must_contain index.md "Homepage-only context remains" "homepage preserves insufficient-context boundary"
