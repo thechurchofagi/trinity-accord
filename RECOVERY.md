@@ -201,6 +201,29 @@ repository backup.
 
 ---
 
+## Harvard Preservation Epoch II — additional published recovery source
+
+[DOI 10.7910/DVN/W9Y3IV](https://doi.org/10.7910/DVN/W9Y3IV) was published according
+to Harvard's notification sent on 2026-09-15. Its fixed 419-file deposit includes
+the source recovery capsule, researcher-readable evidence, all 26 Polygon/Base
+Finality files, and the three public computationally delayed witness archives.
+The total including two control files is 23,107,308,201 bytes.
+
+See [publication status](preservation/epoch-ii/PUBLICATION-STATUS.md) and
+`preservation/harvard-epoch-ii-state.json` for the exact source/candidate identities
+and the separate verification stages. Prepublication authenticated byte readback
+and candidate cold recovery passed. **Postpublication anonymous inventory and
+full-byte verification remain pending.** Publication notification alone must not
+be reported as a fresh public cold-recovery result.
+
+Start with the deposited `00-start-here/DATASET-MANIFEST.json` and
+`00-start-here/SHA256SUMS`, verify their fixed hashes from the state record, and
+verify all recovered files before use. This is an additional non-amending
+preservation source with its own frozen scope. Epoch I at
+`10.7910/DVN/YUCG12` remains unchanged.
+
+---
+
 ## Phase 1 — Verify the Canonical Bitcoin Originals
 
 Fetch inscription data from independent Bitcoin/Ordinals sources. Confirm inscription IDs match `api/authority.json` and this document.
