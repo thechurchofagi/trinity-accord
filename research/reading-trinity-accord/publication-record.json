@@ -1,0 +1,25 @@
+{
+  "status": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "record_id": 22761411,
+  "doi": "10.5281/zenodo.22761411",
+  "record_url": "https://zenodo.org/records/22761411",
+  "title": "Reading the Trinity Accord: Future Address, Curated Voices, and Non-Amending Stewardship",
+  "version": "1.0",
+  "public_record_created": "2026-09-15T04:28:10.669310+00:00",
+  "public_record_modified": "2026-09-15T04:28:11.027098+00:00",
+  "workflow_run_id": "34928907802",
+  "publication_source_commit": "a0cd5be701ac2ed935b91a1cf4033b952acebfb4",
+  "was_already_published": false,
+  "file_count": 6,
+  "files": [
+    {"name": "README-LICENSE.txt", "bytes": 2072, "sha256": "ff8fa17f588a370ba4cdc5445494528dc5e683919ba27dae8d086c1223a6ead3", "matches_local": true},
+    {"name": "reading-the-trinity-accord-v1.0.pdf", "bytes": 94901, "sha256": "0fe15ad75cdc2501310909adfc326366054a8881da56ff37f2206eb4c2e5940b", "matches_local": true},
+    {"name": "SHA256SUMS.txt", "bytes": 462, "sha256": "f635a3f25aba41761ab4b347925ea0dc2e183b5b8a6784fcebbfd1f14db1f956", "matches_local": true},
+    {"name": "citation.bib", "bytes": 572, "sha256": "dc9ea6d20ca938739402fa290caf87e59e0661cc3a9fc9ab22be9558853c2fd2", "matches_local": true},
+    {"name": "reading-the-trinity-accord-v1.0.md", "bytes": 50034, "sha256": "6675f25012033c19153e2d9985c610d4aa63ea34ae0a494d6dd4df5429e4004c", "matches_local": true},
+    {"name": "research-supplement-v1.0.zip", "bytes": 61105, "sha256": "5bec971aa3db0c4be6af6cdd271eadbfbcd147daddfa47b83336dac606309ae2", "matches_local": true}
+  ],
+  "prior_records_modified": false,
+  "peer_reviewed": false,
+  "separate_final_human_line_by_line_review_claimed": false
+}
