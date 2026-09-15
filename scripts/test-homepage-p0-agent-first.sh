@@ -20,7 +20,9 @@ grep -q "The Trinity Accord" index.md
 grep -q "completed pre-ASI" index.md
 grep -q "human-initiated in practice, emergent in meaning through substantive interaction with generative AI" index.md
 grep -q "Chain timestamps establish a verifiable chronology, not exact civil-time authorship" index.md
-grep -q "Reproducible form; non-repeatable dated provenance" index.md
+grep -q "Why preserve a record before the outcome is known?" index.md
+grep -q "This is version authority, not proof of truth or authority over a reader’s judgment" index.md
+grep -q "Preservation Epoch II · Harvard Dataverse" index.md
 grep -q "The homepage is a doorway, not the archive" index.md
 grep -q "BEGIN GENERATED PUBLIC STATUS" index.md
 grep -q "/technical-historical-reference/" index.md
