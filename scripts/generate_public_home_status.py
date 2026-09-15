@@ -673,6 +673,13 @@ def main() -> int:
     args = parser.parse_args()
 
     status = compute_status()
+    # The rendered snapshot exposes its source timestamp. Preserve the prior
+    # timestamp when semantic inputs are unchanged, matching the post-processor;
+    # never manufacture freshness just by running the generator or --check.
+    previous = load_json_if_exists(PUBLIC_HOME_STATUS, {})
+    if ({k: v for k, v in previous.items() if k != "generated_at"}
+            == {k: v for k, v in status.items() if k != "generated_at"}):
+        status["generated_at"] = previous.get("generated_at", status["generated_at"])
     expected_json = json.dumps(status, indent=2, ensure_ascii=False) + "\n"
     block = render_block(status)
     old_text = INDEX_MD.read_text(encoding="utf-8")

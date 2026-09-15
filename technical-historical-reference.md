@@ -159,14 +159,17 @@ Full map: [/seed-map/](/seed-map/) · machine map: [/api/seed-map.json](/api/see
 ## 9. Three canonical and five later inscriptions
 {: #9-three-canonical-and-five-later-inscriptions }
 
-The project currently documents eight same-address inscriptions in scope:
+The current-address inventory and the two dated proof packages have different scopes:
 
-- three canonical Bitcoin Originals;
-- five later non-amending inscriptions concerning Echo, seal, vision, guardianship, or context.
+| Scope | Count | Snapshot / proof date (UTC) | Source and meaning |
+|---|---:|---|---|
+| Canonical Originals | 3 | Closed 29 June 2025 | Protocol, Covenant, and final meta-record; canonical authority only. |
+| Historical v1 proof subset | 8 (3 + 5) | 8 August 2026 | [Frozen v1 manifest](/evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json): the three Originals and five later non-amending records. Its historical L1/L2/L3 PASS applies to these eight only. |
+| Complete observed address set / v2 proof | 12 (4 + 3 + 5) | 14 August 2026 | [Frozen v2 manifest](/evidence/bitcoin-inscription-proof-annex-v2/ANNEX-MANIFEST.json): four pre-canonical formation records, three Originals, and five later records. The existing v2 report records L1/L2/L3 PASS for this 12-item snapshot. |
 
-Eight relevant inscriptions do not mean eight canonical inscriptions. The project reports that all eight mirror records matched on-chain content during its 2026-05-19 verification run; this is a project-reported result, not independent third-party attestation.
+These are dated project proof results, not independent institutional attestations or a new chain verification performed by this page. The complete observed set is not a claim about all inscriptions ever held at the address. Neither proof package expands canonical authority.
 
-Read: [/authority-address-inscriptions/](/authority-address-inscriptions/)
+Read: [address inventory and verification boundaries](/authority-address-inscriptions/) · [current-address manifest](/bitcoin-inscription-mirrors/address-wide/manifest.json) · [historical 8-item curated mirror index](/api/bitcoin-inscription-mirror-index.json).
 
 <span id="10-current-operating-routes--当前操作入口" class="reading-anchor" aria-hidden="true"></span>
 

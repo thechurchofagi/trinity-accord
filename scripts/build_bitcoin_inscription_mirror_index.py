@@ -18,6 +18,33 @@ def load_json(path):
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def inventory_scope():
+    """Keep the curated v1 set distinct from the separately dated v2 snapshot."""
+    v1_path = "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json"
+    v2_path = "evidence/bitcoin-inscription-proof-annex-v2/ANNEX-MANIFEST.json"
+    v1, v2 = load_json(ROOT / v1_path), load_json(ROOT / v2_path)
+    def count(manifest, classification):
+        return sum(a["classification"] == classification for a in manifest["anchors"])
+    return {
+        "kind": "historical_curated_proof_subset",
+        "record_count": len(v1["anchors"]),
+        "canonical_count": count(v1, "canonical_original"),
+        "proof_manifest": v1_path,
+        "proof_created_at_utc": v1["created_at_utc"],
+        "is_complete_current_address_inventory": False,
+        "complete_address_snapshot": {
+            "record_count": len(v2["anchors"]),
+            "pre_canonical_count": count(v2, "pre_canonical_formation"),
+            "canonical_count": count(v2, "canonical_original"),
+            "post_canonical_count": count(v2, "non_amending_ancillary"),
+            "proof_created_at_utc": v2["created_at_utc"],
+            "manifest": "bitcoin-inscription-mirrors/address-wide/manifest.json",
+            "proof_manifest": v2_path,
+            "scope": "complete observed current-address set; not all-time address history",
+        },
+        "historical_v1_pass_scope_unchanged": True,
+    }
+
 def scan_mirrors():
     """Scan all JSON files in mirror directory."""
     records = []
@@ -187,7 +214,8 @@ def build_index():
             "guardianship_layer": len(guardianship),
             "unknown_or_pending": len(unknown)
         },
-        "records": index_records
+        "records": index_records,
+        "inventory_scope": inventory_scope()
     }
 
     with open(INDEX_PATH, "w", encoding="utf-8") as f:

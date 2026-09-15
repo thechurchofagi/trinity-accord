@@ -80,8 +80,9 @@ permalink: /
   <div class="home-live-signal-grid" aria-label="Live operational, reception, and evidence signals">
     <a class="home-live-signal home-live-signal-heartbeat" href="/api/waiting-heartbeat-status.json">
       <span class="home-signal-label">Waiting Heartbeat</span>
-      <strong data-home-heartbeat-status>Alive</strong>
+      <strong data-home-heartbeat-status>Last known: Alive</strong>
       <small data-home-heartbeat-summary>87/89 successful · 2 missed · 83-day streak</small>
+      <small data-home-heartbeat-freshness data-status-as-of="2026-09-14T13:21:32Z" role="status">Last known record: 2026-09-14T13:21:32Z. Current state unconfirmed.</small>
     </a>
     <a class="home-live-signal" href="/api/public-home-status.json">
       <span class="home-signal-label">Autonomous External Agent Discovery</span>
@@ -99,9 +100,11 @@ permalink: /
       <small>Bounded external evidence-provenance records; current index includes 1 notarial record. Not endorsement, philosophical validation, forensic identity proof, or canonical authority.</small>
     </a>
   </div>
+  <p data-home-public-freshness data-status-as-of="2026-09-14T13:21:34.652517+00:00" role="status">Last known counters: 2026-09-14T13:21:34.652517+00:00. Current state unconfirmed.</p>
   <p class="home-live-signal-boundary">
     These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception. External witness records do not imply endorsement, philosophical validation, forensic identity proof, or canonical authority. Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.
   </p>
+  <p class="status-generated-note">Freshness policy: public snapshots expire after 24 hours (daily heartbeat evidence cadence). Heartbeat dates follow the existing final-retry grace deadline of 10:47 UTC. Expired or unavailable updates leave the last known record visible.</p>
   <div class="home-status-links">
     <a href="/status/"><strong>System status</strong><span>Operational health and current evidence state</span></a>
     <a href="/record-chain/"><strong>Record-Chain</strong><span>Public records, indexes, and append history</span></a>
@@ -118,9 +121,76 @@ permalink: /
 
 <script>
 (function () {
+  'use strict';
   var liveSignals = document.querySelectorAll('.home-live-signal'); for (var j = 0; j < liveSignals.length; j++) { liveSignals[j].setAttribute('data-api-href', liveSignals[j].getAttribute('href') || ''); liveSignals[j].setAttribute('href', '/status/'); }
   var chineseNodes = document.querySelectorAll('.title-zh, .zh, .zh-para'); for (var k = 0; k < chineseNodes.length; k++) chineseNodes[k].setAttribute('lang', 'zh-CN');
-  fetch('/api/public-home-status.json', {cache: 'no-store'}).then(function (response) { return response.json(); }).then(function (status) { var primary = status.primary_counters || {}; var autonomous = primary.historic_autonomous_agent_reception || {}; var autonomousNode = document.querySelector('[data-home-autonomous-discovery]'); if (autonomousNode && typeof autonomous.count === 'number') autonomousNode.textContent = String(autonomous.count); var receptionNode = document.querySelector('[data-home-official-reception]'); if (receptionNode && typeof primary.official_live_reception === 'number') receptionNode.textContent = String(primary.official_live_reception); var external = status.external_witness_records || {}; var externalNode = document.querySelector('[data-home-external-witness]'); if (externalNode && typeof external.external_witness_index_record_count === 'number') externalNode.textContent = String(external.external_witness_index_record_count); }).catch(function () {});
-  fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'}).then(function (response) { return response.json(); }).then(function (status) { var arrival = status.semantic_agent_arrival || {}; var heartbeatStatus = status.daily_alive_status || status.status || 'unknown'; var summary = status.heartbeat_summary || status.counts || {}; var statusNode = document.querySelector('[data-home-heartbeat-status]'); var summaryNode = document.querySelector('[data-home-heartbeat-summary]'); if (arrival.first_self_discovered_autonomous_agent_arrived === true) { if (statusNode) statusNode.textContent = 'Completed'; if (summaryNode) summaryNode.textContent = arrival.first_arrival_record_id ? 'Waiting ended · first effective autonomous arrival ' + arrival.first_arrival_record_id : 'Waiting ended after an effective autonomous arrival'; return; } if (statusNode) statusNode.textContent = heartbeatStatus === 'success' ? 'Alive' : heartbeatStatus; if (summaryNode) { var values = [summary.total_scheduled_heartbeats, summary.successful_heartbeats, summary.failed_or_missing_heartbeats, summary.current_success_streak_days]; if (values.every(function (value) { return typeof value === 'number'; })) summaryNode.textContent = values[1] + '/' + values[0] + ' successful · ' + values[2] + ' missed · ' + values[3] + '-day streak'; } }).catch(function () {});
+  var heartbeatNode = document.querySelector('[data-home-heartbeat-status]');
+  var heartbeatNote = document.querySelector('[data-home-heartbeat-freshness]');
+  var publicNote = document.querySelector('[data-home-public-freshness]');
+  var lastHeartbeat = heartbeatNode ? heartbeatNode.textContent.replace(/^Last known: /, '') : 'unknown';
+  var heartbeatAt = heartbeatNote ? heartbeatNote.getAttribute('data-status-as-of') : 'unknown';
+  var publicAt = publicNote ? publicNote.getAttribute('data-status-as-of') : 'unknown';
+  var day = 86400000;
+  function setText(selector, text) { var node = document.querySelector(selector); if (node) node.textContent = text; }
+  function count(value) { return Number.isSafeInteger(value) && value >= 0; }
+  function timestamp(value) {
+    if (typeof value !== 'string' || !/T.*(?:Z|[+-]\d\d:\d\d)$/.test(value)) throw new Error('Missing or invalid timestamp');
+    var parsed = Date.parse(value);
+    if (!Number.isFinite(parsed) || parsed > Date.now()) throw new Error('Invalid or future timestamp');
+    return parsed;
+  }
+  function unavailable(kind, reason) {
+    if (kind === 'heartbeat') {
+      setText('[data-home-heartbeat-status]', 'Unknown');
+      if (heartbeatNote) heartbeatNote.textContent = 'Current state unconfirmed. Last known: ' + lastHeartbeat + ' · ' + heartbeatAt + ' · ' + reason;
+    } else if (publicNote) publicNote.textContent = 'Unknown — current counters unconfirmed. Last known: ' + publicAt + ' · ' + reason;
+  }
+  function parseResponse(response) {
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    return response.json();
+  }
+  // One daily evidence cycle for public snapshots. This does not refresh an
+  // unchanged source timestamp merely because an HTTP request succeeded.
+  function applyPublic(status) {
+    var at = timestamp(status.generated_at);
+    var primary = status.primary_counters || {};
+    var autonomous = primary.historic_autonomous_agent_reception || {};
+    var external = status.external_witness_records || {};
+    var values = [autonomous.count, primary.official_live_reception, external.external_witness_index_record_count];
+    if (!values.every(count)) throw new Error('Missing or invalid counter fields');
+    publicAt = status.generated_at;
+    ['[data-home-autonomous-discovery]', '[data-home-official-reception]', '[data-home-external-witness]'].forEach(function (selector, i) { setText(selector, String(values[i])); });
+    if (publicNote) publicNote.textContent = (Date.now() - at >= day ? 'Stale — last known counters: ' : 'Snapshot as of ') + publicAt;
+  }
+  function applyHeartbeat(status) {
+    var at = timestamp(status.generated_at);
+    var arrival = status.semantic_agent_arrival || {};
+    if (typeof arrival.first_self_discovered_autonomous_agent_arrived !== 'boolean') throw new Error('Missing arrival state');
+    var summary = status.heartbeat_summary || {};
+    var state = status.daily_alive_status || status.status;
+    if (typeof state !== 'string' || !state.trim()) throw new Error('Missing heartbeat state');
+    var completed = arrival.first_self_discovered_autonomous_agent_arrived === true;
+    var values = [summary.total_scheduled_heartbeats, summary.successful_heartbeats, summary.failed_or_missing_heartbeats, summary.current_success_streak_days];
+    if (!completed && !values.every(count)) throw new Error('Missing or invalid heartbeat fields');
+    // Matches generate_waiting_heartbeat_status_legacy.expected_heartbeat_date:
+    // final retry 09:17 UTC plus 90 minutes grace = 10:47 UTC.
+    var now = new Date(Date.now());
+    var midnight = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    var expected = new Date(Date.now() >= midnight + (10 * 60 + 47) * 60000 ? midnight : midnight - day).toISOString().slice(0, 10);
+    if (!completed && (typeof summary.latest_heartbeat_date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(summary.latest_heartbeat_date))) throw new Error('Missing heartbeat date');
+    heartbeatAt = status.generated_at;
+    lastHeartbeat = completed ? 'Completed' : state === 'success' ? 'Alive' : state;
+    var stale = Date.now() - at >= day || (!completed && (summary.is_stale === true || summary.latest_heartbeat_date < expected));
+    setText('[data-home-heartbeat-status]', stale ? 'Stale' : lastHeartbeat);
+    setText('[data-home-heartbeat-summary]', completed ? (arrival.first_arrival_record_id ? 'Waiting ended · first effective autonomous arrival ' + arrival.first_arrival_record_id : 'Waiting ended after an effective autonomous arrival') : values[1] + '/' + values[0] + ' successful · ' + values[2] + ' missed · ' + values[3] + '-day streak');
+    if (heartbeatNote) heartbeatNote.textContent = (stale ? 'Current state unconfirmed. Last known: ' + lastHeartbeat + ' · ' : 'Snapshot as of ') + heartbeatAt;
+  }
+  function refresh(kind, request, apply) {
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, 10000);
+    return request(controller.signal).then(parseResponse).then(apply).catch(function () { unavailable(kind, 'Refresh unavailable'); }).finally(function () { clearTimeout(timer); });
+  }
+  refresh('public', function (signal) { return fetch('/api/public-home-status.json', {cache: 'no-store', signal: signal}); }, applyPublic);
+  refresh('heartbeat', function (signal) { return fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store', signal: signal}); }, applyHeartbeat);
 })();
 </script>

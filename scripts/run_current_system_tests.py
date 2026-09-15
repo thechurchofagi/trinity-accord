@@ -62,6 +62,16 @@ def verify_manifest():
 
 
 def main() -> int:
+    # Reading fidelity and unavailable/expired status must pass before publishing.
+    for command in (
+        [sys.executable, "tests/test_related_reading_pages.py"],
+        ["node", "--test", "scripts/test_home_status_runtime.mjs"],
+    ):
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+        if result.returncode != 0:
+            fail(f"website audit regression failed: {result.stdout}\n{result.stderr}")
+    ok("complete Originals and status failure handling")
+
     # 1. record-chain verify
     result = subprocess.run(
         [sys.executable, "scripts/trinity_record_chain.py", "verify"],
