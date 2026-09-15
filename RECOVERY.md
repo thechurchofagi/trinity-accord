@@ -209,7 +209,7 @@ the source recovery capsule, researcher-readable evidence, all 26 Polygon/Base
 Finality files, and the three public computationally delayed witness archives.
 The total including two control files is 23,107,308,201 bytes.
 
-See [publication status](preservation/epoch-ii/PUBLICATION-STATUS.md) and
+See [publication status](https://github.com/thechurchofagi/trinity-accord/blob/main/preservation/epoch-ii/PUBLICATION-STATUS.md) and
 `preservation/harvard-epoch-ii-state.json` for the exact source/candidate identities
 and the separate verification stages. Prepublication authenticated byte readback
 and candidate cold recovery passed. **Postpublication anonymous inventory and
