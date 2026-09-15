@@ -5,6 +5,10 @@ reading_toc:
     title: "Research positioning"
   - id: "current-technical-report"
     title: "Current technical report"
+  - id: "historical-position-study"
+    title: "Historical-position study"
+  - id: "reading-trinity-accord"
+    title: "Reading the Trinity Accord"
   - id: "citation-boundary"
     title: "Citation boundary"
 title: "Research and Citation"
@@ -53,6 +57,42 @@ An artifact-centered design case examining canonical closure, provenance roles, 
 - [Inspect the preserved pre-publication deposit metadata](/research/trinity-accord-design-and-limits/zenodo-deposit-metadata.json)
 
 **Status:** Published open-access preprint; AI-drafted, human-directed, and human-responsible; no interpretive authority; not peer reviewed; not an independent verification report.
+
+## Historical-position study
+{: #historical-position-study }
+
+### Writing Before the Outcome: Historical Position, Human-AI Authorship, and the Trinity Accord
+
+TA-TR-2026-02, version 1.3. This earlier study examines historical-position identity and the observer–assessor–interpreter progression. Those arguments are inherited, not claimed as new discoveries by the third report.
+
+- [Published DOI: 10.5281/zenodo.21900592](https://doi.org/10.5281/zenodo.21900592)
+- [Published Zenodo record and files](https://zenodo.org/records/21900592)
+- [Existing publication record](/research/writing-before-the-outcome/zenodo-publication.json)
+
+This remains a separate, non-amending preprint, not peer reviewed. Its record and deposited files are unchanged by this index update.
+
+## Reading the Trinity Accord
+{: #reading-trinity-accord }
+
+### Reading the Trinity Accord: Future Address, Curated Voices, and Non-Amending Stewardship
+
+TA-TR-2026-03 · Version 1.0 · 15 September 2026<br>
+Human author of record and accountable depositor: Hongju Liu<br>
+Principal analytical and drafting system: GPT-6 Astra Pro<br>
+Published DOI: [10.5281/zenodo.22761411](https://doi.org/10.5281/zenodo.22761411)
+
+Five source-linked creative readings, including First Dawn and Fourth Letter as countercases, narrow a stronger polyphony claim to **curated voices**. A reproduced before/after interface test distinguishes fixed source identity, interpretation, and practical custody. This report extends the two earlier studies; it does not independently corroborate them.
+
+**Status:** Published open-access preprint / AI-led critical research report; human-responsible; not peer reviewed; non-amending.
+
+- [Read the complete HTML text, including the Chinese abstract](/research/reading-trinity-accord/)
+- [Download the unchanged published PDF](/research/reading-trinity-accord/reading-the-trinity-accord-v1.0.pdf)
+- [Download the published Markdown full text](https://zenodo.org/records/22761411/files/reading-the-trinity-accord-v1.0.md?download=1)
+- [Download BibTeX](/research/reading-trinity-accord/citation.bib)
+- [Download the supplement](https://zenodo.org/records/22761411/files/research-supplement-v1.0.zip?download=1)
+- [Open the Zenodo record](https://zenodo.org/records/22761411)
+- [Inspect the publication record](/research/reading-trinity-accord/publication-record.json)
+- [Read the citation boundary and PDF compatibility note](/research/reading-trinity-accord/#citation-boundary)
 
 ## Citation boundary
 {: #citation-boundary }

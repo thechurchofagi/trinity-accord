@@ -1,0 +1,45 @@
+name: Prepare Reading Trinity Accord deposit
+on:
+  push:
+    branches: [research/reading-trinity-accord-v1-20260915]
+    paths: [.github/workflows/prepare-reading-trinity-accord-deposit.yml]
+permissions:
+  contents: read
+concurrency:
+  group: reading-trinity-accord-zenodo-v1
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Create or recover only this new paper draft; do not publish
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, urllib.request, urllib.parse
+          token=os.environ.get('ZENODO_ACCESS_TOKEN')
+          if not token: raise SystemExit('ZENODO_ACCESS_TOKEN is not configured; no record changed')
+          base='https://zenodo.org/api'; title='Reading the Trinity Accord: Future Address, Curated Voices, and Non-Amending Stewardship'
+          def api(path, method='GET', data=None):
+            req=urllib.request.Request(base+path,method=method,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},data=None if data is None else json.dumps(data).encode())
+            with urllib.request.urlopen(req,timeout=60) as r: return json.load(r)
+          rows=api('/deposit/depositions?'+urllib.parse.urlencode({'q':'"Reading the Trinity Accord"','size':100}))
+          matches=[r for r in rows if r.get('metadata',{}).get('title')==title and r.get('metadata',{}).get('version')=='1.0']
+          if len(matches)>1: raise SystemExit('Multiple matching records; stopped without modification')
+          if matches:
+            record=matches[0]
+          else:
+            metadata={'upload_type':'publication','publication_type':'preprint','title':title,'creators':[{'name':'Liu, Hongju','affiliation':'Independent researcher, Shenzhen, China'}],'description':'<p>AI-led critical research report on the Trinity Accord, its selected creative records, source fidelity, and non-amending stewardship. Principal analytical and drafting system: GPT-6 Astra Pro. Human commissioning researcher and author of record: Hongju Liu. The author explicitly authorized revision and submission. No independent peer review or separate final human line-by-line verification is claimed. Full manuscript and detailed methods will be attached before publication.</p>','publication_date':'2026-09-15','version':'1.0','access_right':'open','license':'cc-by-4.0','language':'eng','keywords':['Trinity Accord','human-AI collaboration','archival authenticity','future address','curated voices','stewardship'],'notes':'TA-TR-2026-03. Separate new research record; not a version or replacement of any earlier paper. Preparation only; no publish operation authorized in this workflow.'}
+            record=api('/deposit/depositions','POST',{'metadata':metadata})
+          result={'record_id':record['id'],'reserved_doi':record.get('metadata',{}).get('prereserve_doi',{}).get('doi'),'doi':record.get('doi'),'submitted':record.get('submitted',False),'state':record.get('state'),'title':title,'version':'1.0','operation':'draft_preparation_only','previous_records_modified':False}
+          pathlib.Path('/tmp/PREPARED-DEPOSIT.json').write_text(json.dumps(result,indent=2))
+          print(json.dumps(result,indent=2))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: reading-trinity-accord-prepared-deposit
+          path: /tmp/PREPARED-DEPOSIT.json
+          retention-days: 30

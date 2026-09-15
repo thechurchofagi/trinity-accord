@@ -38,6 +38,9 @@ BASE_URL = "https://www.trinityaccord.org"
 
 # Root-level special files to always include
 ROOT_SPECIAL_FILES = [
+    "research/reading-trinity-accord/reading-the-trinity-accord-v1.0.pdf",
+    "research/reading-trinity-accord/citation.bib",
+    "research/reading-trinity-accord/publication-record.json",
     "llms.txt",
     "llms-full.txt",
     "ai.txt",
@@ -94,6 +97,8 @@ CORE_PATHS = [
     "/emergent-patterns/",
     "/status/",
     "/research/",
+    "/research/reading-trinity-accord/",
+    "/research/reading-trinity-accord/reading-the-trinity-accord-v1.0.pdf",
     "/research/trinity-accord-design-and-limits/",
     "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf",
     "/llms.txt",

@@ -35,8 +35,8 @@
 
   {% if page.scholarly_article %}
   {% assign scholarly_doi_url = page.citation_doi | prepend: "https://doi.org/" %}
-  {% assign scholarly_zenodo_url = "https://zenodo.org/records/21699878" %}
-  {% assign scholarly_keywords = "AI agents; digital preservation; provenance; civilizational memory; long-term communication; cryptographic timestamping; Bitcoin inscriptions; content-addressed archives; machine-readable archives; design science; human-AI collaboration" %}
+  {% assign scholarly_zenodo_url = page.article_record_url | default: "https://zenodo.org/records/21699878" %}
+  {% assign scholarly_keywords = page.citation_keywords | default: "AI agents; digital preservation; provenance; civilizational memory; long-term communication; cryptographic timestamping; Bitcoin inscriptions; content-addressed archives; machine-readable archives; design science; human-AI collaboration" %}
   <!-- Highwire Press and Dublin Core metadata for scholarly discovery -->
   <meta name="citation_title" content="{{ page.citation_title | escape }}">
   <meta name="citation_author" content="{{ page.citation_author | escape }}">
@@ -60,10 +60,15 @@
   <meta name="DC.relation" content="{{ scholarly_zenodo_url | escape }}">
   <meta name="DC.rights" content="{{ page.article_license | escape }}">
   <link rel="alternate" type="application/pdf" title="Searchable preprint PDF" href="{{ page.article_pdf | absolute_url }}">
+  {% if page.article_bibtex %}
+  <link rel="alternate" type="application/x-bibtex" title="BibTeX citation" href="{{ page.article_bibtex | absolute_url }}">
+  <link rel="describedby" type="application/json" href="{{ page.article_metadata | absolute_url }}">
+  {% else %}
   <link rel="alternate" type="application/x-bibtex" title="BibTeX citation" href="{{ '/research/trinity-accord-design-and-limits/citation.bib' | absolute_url }}">
   <link rel="alternate" type="application/x-research-info-systems" title="RIS citation" href="{{ '/research/trinity-accord-design-and-limits/citation.ris' | absolute_url }}">
   <link rel="alternate" type="application/vnd.citationstyles.csl+json" title="CSL-JSON citation" href="{{ '/research/trinity-accord-design-and-limits/citation.csl.json' | absolute_url }}">
   <link rel="describedby" type="application/json" href="/api/research-preprint.v1.json">
+  {% endif %}
   {% endif %}
 
   <!-- JSON-LD -->
