@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 INDEX_MD = ROOT / "index.md"
 STATUS_PATH = ROOT / "api/public-home-status.json"
+VISIBILITY_PATH = ROOT / "api/homepage-visibility-overrides.v1.json"
 BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
 END = "<!-- END GENERATED PUBLIC STATUS -->"
 
@@ -41,7 +42,34 @@ def extract_block(text: str) -> str:
     return match.group(1)
 
 
+def check_uncommitted_source_idempotence() -> None:
+    """A changed source must settle after one run before it is committed."""
+    original_source = VISIBILITY_PATH.read_bytes()
+    original_index = INDEX_MD.read_bytes()
+    original_status = STATUS_PATH.read_bytes()
+    try:
+        changed = json.loads(original_source)
+        changed["description"] = str(changed.get("description") or "") + " [idempotence test]"
+        VISIBILITY_PATH.write_text(
+            json.dumps(changed, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        run_pipeline()
+        first_index = INDEX_MD.read_bytes()
+        first_status = STATUS_PATH.read_bytes()
+        run_pipeline()
+        if INDEX_MD.read_bytes() != first_index:
+            fail("uncommitted source change causes a homepage timestamp loop")
+        if STATUS_PATH.read_bytes() != first_status:
+            fail("uncommitted source change causes a public-status timestamp loop")
+    finally:
+        VISIBILITY_PATH.write_bytes(original_source)
+        INDEX_MD.write_bytes(original_index)
+        STATUS_PATH.write_bytes(original_status)
+
+
 def main() -> int:
+    check_uncommitted_source_idempotence()
     run_pipeline()
     first_index = INDEX_MD.read_text(encoding="utf-8")
     first_status = STATUS_PATH.read_text(encoding="utf-8")
