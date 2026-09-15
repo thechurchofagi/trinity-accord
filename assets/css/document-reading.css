@@ -133,3 +133,11 @@ body.document-reading {
 .document-reading main#main-content .zh-para strong { color: #253d32 !important; }
 .document-reading .reading-source-note { margin: 24px 0; padding: 16px; background: #edf1e9; }
 .document-reading .reading-source-note summary { min-height: 48px; cursor: pointer; color: #21634f; }
+
+/* Complete inscription text: soft wrapping never changes the underlying text. */
+.document-reading main#main-content pre.inscription-original {
+  white-space: pre-wrap; overflow-wrap: anywhere; word-break: normal;
+  font: inherit; line-height: 1.8; color: var(--text); background: transparent;
+  border: 0; padding: 0; margin: 24px 0; max-width: 100%; overflow: visible;
+}
+.document-reading .inscription-commentary { border-top: 1px solid #ccd5cb; padding-top: 24px; }

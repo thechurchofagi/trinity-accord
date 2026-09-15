@@ -533,5 +533,24 @@
         "The proof-carrying annex permits network-free cryptographic on-chain comparison; the public numeric inscription number remains a historical lookup coordinate."
       ]
     }
-  ]
+  ],
+  "inventory_scope": {
+    "kind": "historical_curated_proof_subset",
+    "record_count": 8,
+    "canonical_count": 3,
+    "proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+    "proof_created_at_utc": "2026-08-08T14:50:26.486053+00:00",
+    "is_complete_current_address_inventory": false,
+    "complete_address_snapshot": {
+      "record_count": 12,
+      "pre_canonical_count": 4,
+      "canonical_count": 3,
+      "post_canonical_count": 5,
+      "proof_created_at_utc": "2026-08-14T06:50:08.493292+00:00",
+      "manifest": "bitcoin-inscription-mirrors/address-wide/manifest.json",
+      "proof_manifest": "evidence/bitcoin-inscription-proof-annex-v2/ANNEX-MANIFEST.json",
+      "scope": "complete observed current-address set; not all-time address history"
+    },
+    "historical_v1_pass_scope_unchanged": true
+  }
 }
