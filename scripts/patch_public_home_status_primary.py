@@ -23,7 +23,6 @@ import hashlib
 import html
 import json
 import re
-import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -84,20 +83,6 @@ def load(path: Path, default: Any = None) -> Any:
 
 def dump(data: Any) -> str:
     return json.dumps(data, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
-
-
-def read_committed_status() -> dict[str, Any]:
-    try:
-        result = subprocess.run(
-            ["git", "show", "HEAD:api/public-home-status.json"],
-            cwd=ROOT,
-            check=True,
-            text=True,
-            capture_output=True,
-        )
-        return json.loads(result.stdout)
-    except Exception:
-        return {}
 
 
 def without_generated_at(data: dict[str, Any]) -> dict[str, Any]:
@@ -795,7 +780,10 @@ def main() -> int:
     parser.add_argument("--check", action="store_true", help="Fail if patcher would change committed public status files")
     args = parser.parse_args()
 
-    previous = read_committed_status()
+    # Compare against the immediately preceding generated snapshot. This keeps
+    # repeated runs stable when source inputs have changed in the worktree but
+    # the refreshed status has not yet been committed.
+    previous = load(STATUS_PATH)
     status = build_status(load(STATUS_PATH), previous)
     expected_json = dump(status)
     old_text = INDEX_MD.read_text(encoding="utf-8")

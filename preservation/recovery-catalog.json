@@ -165,6 +165,26 @@
         "interpretive_authority_granted": false,
         "amendment_power_granted": false
       }
+    },
+    "harvard_dataverse_epoch_ii": {
+      "persistent_id": "doi:10.7910/DVN/W9Y3IV",
+      "doi": "10.7910/DVN/W9Y3IV",
+      "server": "https://dataverse.harvard.edu",
+      "role": "non_amending_research_corpus_and_institutional_preservation_mirror",
+      "state_record": "preservation/harvard-epoch-ii-state.json",
+      "human_documentation": "preservation/epoch-ii/PUBLICATION-STATUS.md",
+      "status": "published_notification_confirmed_public_readback_pending",
+      "publication_notification_at_utc": "2026-09-15T10:40:06Z",
+      "source_git_commit_sha": "3bdf9121fb9e98cd9ba9de62a2466367d0968e4e",
+      "candidate_identity_sha256": "cd0bd263f548d23060422021408ab1705e8c48c1c1028f1a440eb89d1e88d7e8",
+      "layout_identity_sha256": "938c6d9f3df75853e31821a1fc8b23f0f06ec235ff6408a104ebd91e6e4381e4",
+      "file_count": 419,
+      "payload_and_support_bytes": 23107006729,
+      "total_bytes_including_controls": 23107308201,
+      "public_readback_verified": false,
+      "verification_rule": "Publication is confirmed by the Harvard notification. Postpublication anonymous inventory and full-byte size/SHA-256 verification remain pending; read the separate prepublication and postpublication fields in the state record.",
+      "authority_boundary": "Bitcoin Originals only; non-amending preservation, not endorsement or peer review.",
+      "epoch_i_unchanged": true
     }
   },
   "recovery_order": [
@@ -175,6 +195,7 @@
     "Restore evidence annex DOI 10.5281/zenodo.21753937.",
     "Restore Chronicle NFT annex DOI 10.5281/zenodo.21754229.",
     "If preservation/harvard-dataverse-state.json records status=complete, Harvard DOI 10.7910/DVN/YUCG12 is an independently verified second-institutional full-project mirror and may be used as an additional recovery source; do not substitute its scope for the frozen Zenodo checkpoint semantics.",
+    "Harvard Preservation Epoch II DOI 10.7910/DVN/W9Y3IV is a separately published 419-file research and recovery mirror. Read preservation/harvard-epoch-ii-state.json; anonymous postpublication readback remains pending, so verify retrieved bytes against its frozen manifest and control-file hashes before relying on this recovery source.",
     "Verify Bitcoin Originals, authority manifests, signatures, digest manifests and corrections-index before making authority-level claims."
   ],
   "github_required_for_discovery": false,
