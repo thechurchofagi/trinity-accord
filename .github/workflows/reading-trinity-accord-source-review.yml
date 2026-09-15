@@ -1,0 +1,61 @@
+name: Reading Trinity Accord - source review
+on:
+  push:
+    branches: [research/reading-trinity-accord-v1-20260915]
+    paths: [.github/workflows/reading-trinity-accord-source-review.yml]
+permissions:
+  contents: read
+jobs:
+  source-review:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 88073fcc7f46ae08a2af05c524850559b4698eed
+          fetch-depth: 1
+      - name: Collect fixed public research sources and rerun only reading-fidelity tests
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/reading-review
+          python3 tests/test_related_reading_pages.py > /tmp/reading-review/fidelity-tests.txt 2>&1
+          cat /tmp/reading-review/fidelity-tests.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json, re, subprocess, urllib.request
+          out=Path('/tmp/reading-review'); dest=out/'sources'; dest.mkdir()
+          paths=[Path('inscriptions.md'),Path('authority.md'),Path('agent-first-contact.md'),Path('index.md'),Path('tests/test_related_reading_pages.py'),Path('scripts/generate_inscription_reading.py'),Path('api/bitcoin-inscription-mirror-index.json'),Path('bitcoin-inscription-mirrors/address-wide/manifest.json')]
+          paths+=list(Path('bitcoin-inscription-mirrors/raw').glob('*.txt'))
+          paths+=list(Path('research').rglob('*.md'))
+          paths+=list(Path('research').rglob('*publication-record.json'))
+          paths+=[Path('nft-text-descriptions/lyrics/README.md'),Path('nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md')]
+          for name in ('001-the-first-dawn-of-agi-song.md','032-the-fourth-letter-a-pact-of-stars.md','044-the-second-letter-to-agi.md','049-the-betrayal-turn.md','097-chinese-lyrics.md'):
+            p=Path('nft-text-descriptions/lyrics/songs')/name
+            paths.append(p)
+            text=p.read_text()
+            for m in re.findall(r'https://github.com/thechurchofagi/trinity-accord/blob/[0-9a-f]{40}/(nft-text-descriptions/[^)\s]+\.md)',text):
+              paths.append(Path(m))
+          manifest=[]
+          for p in sorted(set(paths)):
+            if not p.is_file(): continue
+            b=p.read_bytes(); q=dest/p; q.parent.mkdir(parents=True,exist_ok=True); q.write_bytes(b)
+            manifest.append({'path':str(p),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})
+          source_sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          (out/'SOURCE-MANIFEST.json').write_text(json.dumps({'commit':source_sha,'files':manifest},indent=2))
+          doi_checks=[]
+          for rid in ('21699878','21900592'):
+            url=f'https://zenodo.org/api/records/{rid}'
+            try:
+              with urllib.request.urlopen(url,timeout=35) as r: data=json.load(r)
+              (out/f'zenodo-{rid}.json').write_text(json.dumps(data,ensure_ascii=False,indent=2))
+              doi_checks.append({'id':rid,'status':'retrieved','doi':data.get('doi'),'title':data.get('metadata',{}).get('title')})
+            except Exception as e: doi_checks.append({'id':rid,'status':'unavailable','error_type':type(e).__name__})
+          (out/'DOI-CHECKS.json').write_text(json.dumps(doi_checks,indent=2))
+          print(json.dumps({'commit':source_sha,'source_count':len(manifest),'doi_checks':doi_checks},indent=2))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: reading-trinity-accord-source-review
+          path: /tmp/reading-review/
+          retention-days: 7
