@@ -79,6 +79,10 @@ jobs:
         if: steps.museum_scope.outputs.museum_only != 'true'
         run: python -m scripts.test_archive_public_web
 
+      - name: Verify automatic homepage archive contract
+        if: steps.museum_scope.outputs.museum_only != 'true'
+        run: python -m scripts.test_archive_homepage
+
       - name: Run full current system tests
         if: steps.museum_scope.outputs.museum_only != 'true'
         run: python scripts/run_current_system_tests.py

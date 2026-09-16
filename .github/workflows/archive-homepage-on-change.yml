@@ -1,0 +1,172 @@
+name: Archive Homepage On Change
+
+on:
+  workflow_run:
+    workflows: ["Deploy Pages"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      confirm_live_capture:
+        description: "Perform public external archive writes"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: archive-homepage-on-change
+  cancel-in-progress: false
+
+jobs:
+  classify:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-24.04
+    outputs:
+      should_archive: ${{ steps.classify.outputs.should_archive }}
+      source_sha: ${{ steps.source.outputs.source_sha }}
+      reason: ${{ steps.classify.outputs.reason }}
+    steps:
+      - id: source
+        name: Resolve deployed source revision
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          DEPLOYED_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT_NAME" == "workflow_run" ]]; then
+            source_sha="$DEPLOYED_SHA"
+          else
+            source_sha="${{ github.sha }}"
+          fi
+          test -n "$source_sha"
+          printf 'source_sha=%s\n' "$source_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout immutable deployed source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ steps.source.outputs.source_sha }}
+          fetch-depth: 2
+          show-progress: false
+
+      - id: classify
+        name: Detect meaningful homepage change
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          CONFIRM_LIVE_CAPTURE: ${{ inputs.confirm_live_capture }}
+          SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            if [[ "$CONFIRM_LIVE_CAPTURE" == "true" ]]; then
+              printf '%s\n' 'should_archive=true' 'reason=confirmed-manual-capture' >> "$GITHUB_OUTPUT"
+            else
+              printf '%s\n' 'should_archive=false' 'reason=manual-dry-run' >> "$GITHUB_OUTPUT"
+            fi
+            exit 0
+          fi
+
+          if ! git cat-file -e "${SOURCE_SHA}^:index.md" 2>/dev/null; then
+            printf '%s\n' 'should_archive=true' 'reason=no-parent-homepage' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git show "${SOURCE_SHA}^:index.md" > "$RUNNER_TEMP/index.previous.md"
+          python3 -m scripts.archive_homepage changed \
+            --current index.md \
+            --previous "$RUNNER_TEMP/index.previous.md" \
+            > "$RUNNER_TEMP/change.env"
+          cat "$RUNNER_TEMP/change.env"
+          changed="$(sed -n 's/^changed=//p' "$RUNNER_TEMP/change.env")"
+          test "$changed" = "true" || test "$changed" = "false"
+          printf 'should_archive=%s\n' "$changed" >> "$GITHUB_OUTPUT"
+          if [[ "$changed" == "true" ]]; then
+            printf 'reason=meaningful-homepage-change\n' >> "$GITHUB_OUTPUT"
+          else
+            printf 'reason=no-meaningful-homepage-change\n' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish classification
+        run: |
+          {
+            echo "# Homepage archive classification"
+            echo
+            echo "- Source revision: \`${{ steps.source.outputs.source_sha }}\`"
+            echo "- Archive requested: \`${{ steps.classify.outputs.should_archive }}\`"
+            echo "- Reason: \`${{ steps.classify.outputs.reason }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  archive:
+    needs: classify
+    if: needs.classify.outputs.should_archive == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout immutable deployed source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ needs.classify.outputs.source_sha }}
+          show-progress: false
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - id: capture
+        name: Submit homepage to independent public archives
+        continue-on-error: true
+        env:
+          WAYBACK_ACCESS_KEY: ${{ secrets.WAYBACK_ACCESS_KEY }}
+          WAYBACK_SECRET_KEY: ${{ secrets.WAYBACK_SECRET_KEY }}
+          PERMA_API_KEY: ${{ secrets.PERMA_API_KEY }}
+          SOURCE_SHA: ${{ needs.classify.outputs.source_sha }}
+          TRIGGER_REASON: ${{ needs.classify.outputs.reason }}
+        run: |
+          python3 -m scripts.archive_homepage archive \
+            --url "https://www.trinityaccord.org/" \
+            --source-sha "$SOURCE_SHA" \
+            --trigger "$TRIGGER_REASON" \
+            --timeout-seconds 120 \
+            --retries 3 \
+            --required-services 2 \
+            --output "$RUNNER_TEMP/homepage-archive-receipt.json"
+
+      - name: Upload auditable archive receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: homepage-public-archive-${{ needs.classify.outputs.source_sha }}
+          path: ${{ runner.temp }}/homepage-archive-receipt.json
+          if-no-files-found: error
+          retention-days: 365
+
+      - name: Publish archive result
+        if: always()
+        env:
+          RECEIPT: ${{ runner.temp }}/homepage-archive-receipt.json
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          path = Path(os.environ["RECEIPT"])
+          if not path.exists():
+              raise SystemExit("homepage archive receipt is missing")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a", encoding="utf-8") as out:
+              out.write("# Homepage public archive result\n\n")
+              out.write(f"- Source revision: `{data['source_sha']}`\n")
+              out.write(f"- Accepted archive services: `{data['accepted_service_count']}`\n")
+              for name, result in data["services"].items():
+                  out.write(f"- {name}: `{result['status']}`")
+                  if result.get("capture_url"):
+                      out.write(f" — {result['capture_url']}")
+                  out.write("\n")
+              out.write("- Boundary: mirror-only, non-authoritative, non-amending\n")
+          if data["accepted_service_count"] < 2:
+              raise SystemExit("fewer than two independent archive services accepted the homepage")
+          PY
