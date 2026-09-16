@@ -10,6 +10,7 @@ from scripts.archive_homepage import (
     archive_homepage,
     capture_arquivo,
     capture_perma,
+    find_equivalent_wayback_capture,
     find_wayback_capture_since,
     homepage_changed,
 )
@@ -92,6 +93,56 @@ class ArchiveHomepageTests(unittest.TestCase):
             )
         self.assertEqual(result["capture_timestamp"], "20260916065313")
         self.assertEqual(result["confirmation"], "cdx-after-save-error")
+
+    def test_equivalent_wayback_capture_ignores_generated_status(self):
+        recent = {
+            "capture_timestamp": "20260916065313",
+            "capture_url": "https://web.archive.org/example",
+            "capture_age_seconds": 120,
+        }
+        live = (
+            f"same\n{STATUS_BEGIN}\nlive status\n{STATUS_END}\nsame\n"
+        ).encode()
+        archived = (
+            f"same\n{STATUS_BEGIN}\nold status\n{STATUS_END}\nsame\n"
+        ).encode()
+        with (
+            mock.patch(
+                "scripts.archive_homepage.find_recent_capture", return_value=recent
+            ),
+            mock.patch(
+                "scripts.archive_homepage._fetch_html",
+                side_effect=[live, archived],
+            ),
+        ):
+            result = find_equivalent_wayback_capture(
+                "https://www.trinityaccord.org/", 10
+            )
+        self.assertEqual(result["confirmation"], "semantic-html-sha256")
+        self.assertEqual(
+            result["capture_url"],
+            "https://web.archive.org/web/20260916065313/"
+            "https://www.trinityaccord.org/",
+        )
+
+    def test_different_wayback_capture_is_not_accepted(self):
+        recent = {"capture_timestamp": "20260916065313"}
+        with (
+            mock.patch(
+                "scripts.archive_homepage.find_recent_capture", return_value=recent
+            ),
+            mock.patch(
+                "scripts.archive_homepage._fetch_html",
+                side_effect=[
+                    f"same\n{STATUS_BEGIN}\nx\n{STATUS_END}\nlive\n".encode(),
+                    f"same\n{STATUS_BEGIN}\ny\n{STATUS_END}\nold\n".encode(),
+                ],
+            ),
+        ):
+            result = find_equivalent_wayback_capture(
+                "https://www.trinityaccord.org/", 10
+            )
+        self.assertIsNone(result)
 
     def test_arquivo_replay_url_is_recorded_as_capture(self):
         body = (
@@ -178,6 +229,9 @@ class ArchiveHomepageTests(unittest.TestCase):
                 return_value=confirmed,
             ),
             mock.patch(
+                "scripts.archive_homepage.find_equivalent_wayback_capture"
+            ) as equivalent,
+            mock.patch(
                 "scripts.archive_homepage.capture_arquivo",
                 return_value={"status": "captured"},
             ),
@@ -197,6 +251,58 @@ class ArchiveHomepageTests(unittest.TestCase):
         )
         self.assertEqual(
             result["services"]["wayback"]["reported_status"], "failed"
+        )
+        equivalent.assert_not_called()
+
+    def test_archive_accepts_semantically_equivalent_recent_wayback_capture(self):
+        wayback_failure = {
+            "url": "https://www.trinityaccord.org/",
+            "status": "failed",
+            "http_status": 500,
+            "error": "HTTP Error 500",
+            "started_at": "2026-09-16T07:20:37+00:00",
+        }
+        equivalent = {
+            "capture_timestamp": "20260916065313",
+            "capture_url": (
+                "https://web.archive.org/web/20260916065313/"
+                "https://www.trinityaccord.org/"
+            ),
+            "confirmation": "semantic-html-sha256",
+            "semantic_sha256": "abc",
+        }
+        with (
+            mock.patch(
+                "scripts.archive_homepage.capture_wayback",
+                return_value=wayback_failure,
+            ),
+            mock.patch(
+                "scripts.archive_homepage.find_wayback_capture_since",
+                return_value=None,
+            ),
+            mock.patch(
+                "scripts.archive_homepage.find_equivalent_wayback_capture",
+                return_value=equivalent,
+            ),
+            mock.patch(
+                "scripts.archive_homepage.capture_arquivo",
+                return_value={"status": "captured"},
+            ),
+            mock.patch.dict("os.environ", {}, clear=True),
+        ):
+            result = archive_homepage(
+                "https://www.trinityaccord.org/",
+                timeout=10,
+                retries=0,
+                dry_run=False,
+                source_sha="abc",
+                trigger="test",
+            )
+        self.assertEqual(result["accepted_service_count"], 2)
+        self.assertEqual(result["services"]["wayback"]["status"], "already_captured")
+        self.assertEqual(
+            result["services"]["wayback"]["confirmation"],
+            "semantic-html-sha256",
         )
 
     def test_workflow_is_post_deploy_semantic_and_two_archive_gated(self):
