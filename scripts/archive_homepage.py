@@ -395,14 +395,27 @@ def archive_homepage(
         return result
 
     try:
-        wayback = capture_wayback(
-            url,
-            timeout,
-            retries,
-            source_timeout=min(timeout, 30.0),
-            source_retries=2,
-            recent_days=0,
-        )
+        wayback_started = utc_now()
+        equivalent = find_equivalent_wayback_capture(url, min(timeout, 90.0))
+        if equivalent:
+            wayback = {
+                "url": url,
+                "status": "already_captured",
+                "http_status": 200,
+                "attempts": 0,
+                "started_at": wayback_started,
+                "finished_at": utc_now(),
+                **equivalent,
+            }
+        else:
+            wayback = capture_wayback(
+                url,
+                timeout,
+                retries,
+                source_timeout=min(timeout, 30.0),
+                source_retries=2,
+                recent_days=0,
+            )
         if wayback.get("status") == "failed" and wayback.get("started_at"):
             confirmed = find_wayback_capture_since(
                 url, wayback["started_at"], min(timeout, 90.0)
@@ -412,15 +425,6 @@ def archive_homepage(
                 wayback["reported_error"] = wayback.get("error")
                 wayback["status"] = "captured_after_error"
                 wayback.update(confirmed)
-            else:
-                equivalent = find_equivalent_wayback_capture(
-                    url, min(timeout, 90.0)
-                )
-                if equivalent:
-                    wayback["reported_status"] = wayback["status"]
-                    wayback["reported_error"] = wayback.get("error")
-                    wayback["status"] = "already_captured"
-                    wayback.update(equivalent)
         result["services"]["wayback"] = wayback
     except (ValueError, OSError) as error:
         result["services"]["wayback"] = {
