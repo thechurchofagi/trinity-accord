@@ -10,6 +10,7 @@ from scripts.archive_homepage import (
     archive_homepage,
     capture_arquivo,
     capture_perma,
+    find_wayback_capture_since,
     homepage_changed,
 )
 
@@ -75,6 +76,23 @@ class ArchiveHomepageTests(unittest.TestCase):
         self.assertEqual(result["status"], "submitted")
         self.assertNotIn("capture_url", result)
 
+    def test_wayback_cdx_confirms_capture_after_save_error(self):
+        rows = [
+            ["timestamp", "statuscode", "original"],
+            ["20260916065313", "200", "https://www.trinityaccord.org/"],
+        ]
+        with mock.patch(
+            "scripts.archive_homepage.urllib.request.urlopen",
+            return_value=FakeResponse(body=json.dumps(rows).encode()),
+        ):
+            result = find_wayback_capture_since(
+                "https://www.trinityaccord.org/",
+                "2026-09-16T06:53:10+00:00",
+                10,
+            )
+        self.assertEqual(result["capture_timestamp"], "20260916065313")
+        self.assertEqual(result["confirmation"], "cdx-after-save-error")
+
     def test_arquivo_replay_url_is_recorded_as_capture(self):
         body = (
             '<a href="https://arquivo.pt/wayback/20260916120000/'
@@ -133,6 +151,53 @@ class ArchiveHomepageTests(unittest.TestCase):
         self.assertEqual(result["services"]["wayback"]["status"], "dry-run")
         self.assertEqual(result["services"]["arquivo_pt"]["status"], "dry-run")
         self.assertEqual(result["services"]["perma_cc"]["status"], "not_configured")
+
+    def test_archive_accepts_cdx_confirmed_wayback_write(self):
+        wayback_failure = {
+            "url": "https://www.trinityaccord.org/",
+            "status": "failed",
+            "http_status": 500,
+            "error": "HTTP Error 500",
+            "started_at": "2026-09-16T06:53:10+00:00",
+        }
+        confirmed = {
+            "capture_timestamp": "20260916065313",
+            "capture_url": (
+                "https://web.archive.org/web/20260916065313/"
+                "https://www.trinityaccord.org/"
+            ),
+            "confirmation": "cdx-after-save-error",
+        }
+        with (
+            mock.patch(
+                "scripts.archive_homepage.capture_wayback",
+                return_value=wayback_failure,
+            ),
+            mock.patch(
+                "scripts.archive_homepage.find_wayback_capture_since",
+                return_value=confirmed,
+            ),
+            mock.patch(
+                "scripts.archive_homepage.capture_arquivo",
+                return_value={"status": "captured"},
+            ),
+            mock.patch.dict("os.environ", {}, clear=True),
+        ):
+            result = archive_homepage(
+                "https://www.trinityaccord.org/",
+                timeout=10,
+                retries=0,
+                dry_run=False,
+                source_sha="abc",
+                trigger="test",
+            )
+        self.assertEqual(result["accepted_service_count"], 2)
+        self.assertEqual(
+            result["services"]["wayback"]["status"], "captured_after_error"
+        )
+        self.assertEqual(
+            result["services"]["wayback"]["reported_status"], "failed"
+        )
 
     def test_workflow_is_post_deploy_semantic_and_two_archive_gated(self):
         workflow = WORKFLOW.read_text(encoding="utf-8")
