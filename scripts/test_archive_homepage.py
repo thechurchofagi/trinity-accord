@@ -136,6 +136,9 @@ class ArchiveHomepageTests(unittest.TestCase):
 
     def test_workflow_is_post_deploy_semantic_and_two_archive_gated(self):
         workflow = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn('branches: [main]', workflow)
+        self.assertIn('".github/workflows/archive-homepage-on-change.yml"', workflow)
+        self.assertIn("reason=workflow-bootstrap-or-change", workflow)
         self.assertIn('workflows: ["Deploy Pages"]', workflow)
         self.assertIn("github.event.workflow_run.conclusion == 'success'", workflow)
         self.assertIn("python3 -m scripts.archive_homepage changed", workflow)
