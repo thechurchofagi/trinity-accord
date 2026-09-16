@@ -13,6 +13,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from scripts.archive_public_web import (
@@ -27,10 +28,11 @@ from scripts.archive_public_web import (
 HOMEPAGE_URL = "https://www.trinityaccord.org/"
 ARQUIVO_SAVE_URL = "https://arquivo.pt/services/archivepagenow?l=en"
 PERMA_ARCHIVES_URL = "https://api.perma.cc/v1/archives/"
+WAYBACK_CDX_URL = "https://web.archive.org/cdx/search/cdx"
 STATUS_BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
 STATUS_END = "<!-- END GENERATED PUBLIC STATUS -->"
 ARCHIVE_SUCCESS = {
-    "wayback": {"captured", "already_captured"},
+    "wayback": {"captured", "captured_after_error", "already_captured"},
     "arquivo_pt": {"submitted", "captured"},
     "perma_cc": {"accepted", "captured"},
 }
@@ -58,6 +60,66 @@ def homepage_changed(current: Path, previous: Path) -> tuple[bool, str, str]:
     current_digest = meaningful_homepage_sha256(current)
     previous_digest = meaningful_homepage_sha256(previous)
     return current_digest != previous_digest, previous_digest, current_digest
+
+
+def find_wayback_capture_since(url: str, started_at: str, timeout: float) -> dict | None:
+    """Confirm a capture that Save Page Now created despite returning an error."""
+    started = datetime.fromisoformat(started_at).astimezone(timezone.utc)
+    lower_bound = started - timedelta(seconds=5)
+    query = urllib.parse.urlencode(
+        {
+            "url": url,
+            "output": "json",
+            "fl": "timestamp,statuscode,original",
+            "filter": "statuscode:200",
+            "from": lower_bound.strftime("%Y%m%d%H%M%S"),
+            "limit": "-10",
+        }
+    )
+    request = urllib.request.Request(
+        f"{WAYBACK_CDX_URL}?{query}", headers=common_headers(), method="GET"
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            rows = json.loads(response.read().decode("utf-8"))
+    except (
+        urllib.error.HTTPError,
+        urllib.error.URLError,
+        TimeoutError,
+        OSError,
+        json.JSONDecodeError,
+    ):
+        return None
+    if not isinstance(rows, list) or len(rows) < 2:
+        return None
+    header = rows[0]
+    if not isinstance(header, list):
+        return None
+    try:
+        timestamp_index = header.index("timestamp")
+        status_index = header.index("statuscode")
+    except ValueError:
+        return None
+    candidates = []
+    for row in rows[1:]:
+        if not isinstance(row, list) or len(row) <= max(timestamp_index, status_index):
+            continue
+        timestamp = str(row[timestamp_index])
+        if (
+            str(row[status_index]) == "200"
+            and len(timestamp) == 14
+            and timestamp.isdigit()
+            and timestamp >= lower_bound.strftime("%Y%m%d%H%M%S")
+        ):
+            candidates.append(timestamp)
+    if not candidates:
+        return None
+    timestamp = max(candidates)
+    return {
+        "capture_timestamp": timestamp,
+        "capture_url": f"https://web.archive.org/web/{timestamp}/{url}",
+        "confirmation": "cdx-after-save-error",
+    }
 
 
 def _response_snapshot_url(body: str) -> str | None:
@@ -288,7 +350,7 @@ def archive_homepage(
         return result
 
     try:
-        result["services"]["wayback"] = capture_wayback(
+        wayback = capture_wayback(
             url,
             timeout,
             retries,
@@ -296,6 +358,16 @@ def archive_homepage(
             source_retries=2,
             recent_days=0,
         )
+        if wayback.get("status") == "failed" and wayback.get("started_at"):
+            confirmed = find_wayback_capture_since(
+                url, wayback["started_at"], min(timeout, 90.0)
+            )
+            if confirmed:
+                wayback["reported_status"] = wayback["status"]
+                wayback["reported_error"] = wayback.get("error")
+                wayback["status"] = "captured_after_error"
+                wayback.update(confirmed)
+        result["services"]["wayback"] = wayback
     except (ValueError, OSError) as error:
         result["services"]["wayback"] = {
             "url": url,
