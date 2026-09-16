@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/archive-homepage-on-change.yml"
+      - "scripts/archive_homepage.py"
   workflow_run:
     workflows: ["Deploy Pages"]
     types: [completed]
@@ -75,7 +76,7 @@ jobs:
           fi
 
           if [[ "$EVENT_NAME" == "push" ]]; then
-            printf '%s\n' 'should_archive=true' 'reason=workflow-bootstrap-or-change' >> "$GITHUB_OUTPUT"
+            printf '%s\n' 'should_archive=true' 'reason=archive-automation-change' >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
