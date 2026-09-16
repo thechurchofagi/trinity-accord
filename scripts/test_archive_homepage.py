@@ -221,6 +221,10 @@ class ArchiveHomepageTests(unittest.TestCase):
         }
         with (
             mock.patch(
+                "scripts.archive_homepage.find_equivalent_wayback_capture",
+                return_value=None,
+            ),
+            mock.patch(
                 "scripts.archive_homepage.capture_wayback",
                 return_value=wayback_failure,
             ),
@@ -228,9 +232,6 @@ class ArchiveHomepageTests(unittest.TestCase):
                 "scripts.archive_homepage.find_wayback_capture_since",
                 return_value=confirmed,
             ),
-            mock.patch(
-                "scripts.archive_homepage.find_equivalent_wayback_capture"
-            ) as equivalent,
             mock.patch(
                 "scripts.archive_homepage.capture_arquivo",
                 return_value={"status": "captured"},
@@ -252,16 +253,8 @@ class ArchiveHomepageTests(unittest.TestCase):
         self.assertEqual(
             result["services"]["wayback"]["reported_status"], "failed"
         )
-        equivalent.assert_not_called()
 
     def test_archive_accepts_semantically_equivalent_recent_wayback_capture(self):
-        wayback_failure = {
-            "url": "https://www.trinityaccord.org/",
-            "status": "failed",
-            "http_status": 500,
-            "error": "HTTP Error 500",
-            "started_at": "2026-09-16T07:20:37+00:00",
-        }
         equivalent = {
             "capture_timestamp": "20260916065313",
             "capture_url": (
@@ -273,17 +266,10 @@ class ArchiveHomepageTests(unittest.TestCase):
         }
         with (
             mock.patch(
-                "scripts.archive_homepage.capture_wayback",
-                return_value=wayback_failure,
-            ),
-            mock.patch(
-                "scripts.archive_homepage.find_wayback_capture_since",
-                return_value=None,
-            ),
-            mock.patch(
                 "scripts.archive_homepage.find_equivalent_wayback_capture",
                 return_value=equivalent,
             ),
+            mock.patch("scripts.archive_homepage.capture_wayback") as capture,
             mock.patch(
                 "scripts.archive_homepage.capture_arquivo",
                 return_value={"status": "captured"},
@@ -304,6 +290,7 @@ class ArchiveHomepageTests(unittest.TestCase):
             result["services"]["wayback"]["confirmation"],
             "semantic-html-sha256",
         )
+        capture.assert_not_called()
 
     def test_workflow_is_post_deploy_semantic_and_two_archive_gated(self):
         workflow = WORKFLOW.read_text(encoding="utf-8")
