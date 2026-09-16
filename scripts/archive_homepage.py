@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import os
@@ -19,6 +20,7 @@ from pathlib import Path
 from scripts.archive_public_web import (
     capture_wayback,
     common_headers,
+    find_recent_capture,
     retry_delay,
     utc_now,
     validate_canonical_url,
@@ -119,6 +121,49 @@ def find_wayback_capture_since(url: str, started_at: str, timeout: float) -> dic
         "capture_timestamp": timestamp,
         "capture_url": f"https://web.archive.org/web/{timestamp}/{url}",
         "confirmation": "cdx-after-save-error",
+    }
+
+
+def _fetch_html(url: str, timeout: float) -> bytes:
+    headers = common_headers()
+    headers["Accept-Encoding"] = "identity"
+    request = urllib.request.Request(url, headers=headers, method="GET")
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        body = response.read()
+        if response.headers.get("Content-Encoding", "").lower() == "gzip":
+            body = gzip.decompress(body)
+        return body
+
+
+def find_equivalent_wayback_capture(
+    url: str, timeout: float, recent_days: int = 7
+) -> dict | None:
+    """Accept a recent snapshot only when its stable homepage HTML still matches."""
+    recent = find_recent_capture(url, timeout, recent_days)
+    if not recent or not recent.get("capture_timestamp"):
+        return None
+    timestamp = str(recent["capture_timestamp"])
+    raw_capture_url = f"https://web.archive.org/web/{timestamp}id_/{url}"
+    try:
+        live = meaningful_homepage_bytes(_fetch_html(url, timeout))
+        archived = meaningful_homepage_bytes(_fetch_html(raw_capture_url, timeout))
+    except (
+        urllib.error.HTTPError,
+        urllib.error.URLError,
+        TimeoutError,
+        OSError,
+        UnicodeDecodeError,
+        ValueError,
+    ):
+        return None
+    live_digest = hashlib.sha256(live).hexdigest()
+    if hashlib.sha256(archived).hexdigest() != live_digest:
+        return None
+    return {
+        **recent,
+        "capture_url": f"https://web.archive.org/web/{timestamp}/{url}",
+        "confirmation": "semantic-html-sha256",
+        "semantic_sha256": live_digest,
     }
 
 
@@ -367,6 +412,15 @@ def archive_homepage(
                 wayback["reported_error"] = wayback.get("error")
                 wayback["status"] = "captured_after_error"
                 wayback.update(confirmed)
+            else:
+                equivalent = find_equivalent_wayback_capture(
+                    url, min(timeout, 90.0)
+                )
+                if equivalent:
+                    wayback["reported_status"] = wayback["status"]
+                    wayback["reported_error"] = wayback.get("error")
+                    wayback["status"] = "already_captured"
+                    wayback.update(equivalent)
         result["services"]["wayback"] = wayback
     except (ValueError, OSError) as error:
         result["services"]["wayback"] = {
