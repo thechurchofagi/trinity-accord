@@ -1,0 +1,35 @@
+name: Diagnose Recovery Epistemic source
+on:
+  push:
+    branches: [research/recovery-epistemic-v1-20260917]
+    paths: [.github/workflows/diagnose-recovery-epistemic-source.yml]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Reconstruct and inspect transported source
+        run: |
+          set -euo pipefail
+          cat research/recovery-epistemic/source-transfer/source.b64.part* > /tmp/source.b64
+          base64 -d /tmp/source.b64 > /tmp/source.xz
+          xz -t /tmp/source.xz
+          xz -dc /tmp/source.xz > /tmp/source.payload
+          file /tmp/source.payload
+          python3 - <<'PY'
+          import pathlib, hashlib
+          p=pathlib.Path('/tmp/source.payload')
+          print('decoded_bytes=',p.stat().st_size)
+          print('decoded_sha256=',hashlib.sha256(p.read_bytes()).hexdigest())
+          print('prefix=',p.read_bytes()[:64])
+          PY
+          if tar -tf /tmp/source.payload >/tmp/list.txt 2>/dev/null; then
+            echo 'TAR_CONTENTS_BEGIN'
+            sed -n '1,120p' /tmp/list.txt
+            echo 'TAR_CONTENTS_END'
+          else
+            echo 'NOT_A_TAR_ARCHIVE'
+            head -c 1000 /tmp/source.payload || true
+          fi
