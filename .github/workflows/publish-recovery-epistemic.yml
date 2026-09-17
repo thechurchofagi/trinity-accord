@@ -50,6 +50,7 @@ jobs:
       - name: Build English and Chinese publication PDFs and inspect text
         run: |
           set -euo pipefail
+          trap 'find /tmp/build -type f -name "compile-*.txt" -print -exec tail -n 200 {} \;' ERR
           SRC=/tmp/source/TA-TR-2026-05_v1.0
           bash "$SRC/src/build_pdf.sh" /tmp/build
           cp /tmp/build/en/paper_en.pdf /tmp/pub/recovery-without-epistemic-monopoly-v1.0.pdf
@@ -136,6 +137,8 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: recovery-epistemic-publication-v1
-          path: /tmp/pub/
+          path: |
+            /tmp/pub/
+            /tmp/build/
           if-no-files-found: warn
           retention-days: 30
