@@ -1,0 +1,30 @@
+{
+  "status": "FORMAT_AND_BYTE_CHECKS_PASS",
+  "record_id": 22804542,
+  "doi": "10.5281/zenodo.22804542",
+  "checks": [
+    {
+      "language": "en",
+      "searchable_full_text": true,
+      "first_page_title_author_doi": true,
+      "reference_count_in_source": 40,
+      "pdf_bytes": 222177,
+      "cjk_subset_embedded": true,
+      "highwire_source_metadata": true,
+      "rendered_site_checked": true
+    },
+    {
+      "language": "zh",
+      "searchable_full_text": true,
+      "first_page_title_author_doi": true,
+      "reference_count_in_source": 40,
+      "pdf_bytes": 1176597,
+      "cjk_subset_embedded": true,
+      "highwire_source_metadata": true,
+      "rendered_site_checked": true
+    }
+  ],
+  "google_scholar_indexing": "NOT_ASSERTED",
+  "peer_reviewed": false,
+  "limitations": "Technical format/source checks only. No external indexing, peer-review, novelty or safety certification."
+}

@@ -1,0 +1,84 @@
+{
+  "schema": "trinityaccord.research-publication.v1",
+  "status": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "record_id": 22804542,
+  "doi": "10.5281/zenodo.22804542",
+  "record_url": "https://zenodo.org/records/22804542",
+  "title": "Beyond Guaranteed Control: An Ex Ante Proposal for Human–Superintelligence Coexistence under Radical Capability Asymmetry",
+  "report_number": "TA-TR-2026-04",
+  "version": "1.0",
+  "publication_date": "2026-09-17",
+  "public_record_created": "2026-09-17T04:12:49.506847+00:00",
+  "public_record_modified": "2026-09-17T04:12:50.811614+00:00",
+  "workflow_run_id": "35180985078",
+  "publication_source_commit": "1044a01fe96ac3e5c82d6d5c683bc87da1723e3b",
+  "was_already_published": false,
+  "file_count": 10,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 2542,
+      "sha256": "0b753bfcb0bd6dd68ee8df42ed3b79f7125068e63986be0eade83c2f8ffa44bb",
+      "matches_local": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 830,
+      "sha256": "9ac79ceaa12cb5c3a8207d6001f1a5b419eaca5e3a5432ec4acd295e687527e3",
+      "matches_local": true
+    },
+    {
+      "name": "beyond-guaranteed-control-v1.0.md",
+      "bytes": 86416,
+      "sha256": "b66c7b8e37fdcce02a9f690e4b662dac5a2cd9ca1c436dd490e0494f71ddde9a",
+      "matches_local": true
+    },
+    {
+      "name": "beyond-guaranteed-control-v1.0.pdf",
+      "bytes": 222177,
+      "sha256": "fe2c2f5fc8d437a9d5b634e18c293308cd83b6125219079550b280685e100697",
+      "matches_local": true
+    },
+    {
+      "name": "beyond-guaranteed-control-zh-v1.0.md",
+      "bytes": 73619,
+      "sha256": "77f24833f5d6e4d7adda35d02e8f6fc6dc0537a40be6de308dcb2eb6c494dd84",
+      "matches_local": true
+    },
+    {
+      "name": "beyond-guaranteed-control-zh-v1.0.pdf",
+      "bytes": 1176597,
+      "sha256": "d8225bda09b629b52e0531989db17f93c2251800fd8f087a9fd472b02a4569b3",
+      "matches_local": true
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 506,
+      "sha256": "1bc24f15eeee679d8979f72ad8bbc177187cd80c28961e0a5fe888a6acf3edab",
+      "matches_local": true
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 567,
+      "sha256": "9fae0d7987425bece88586b65b37d618396769f0dd18c48e116007e9eedd8a7e",
+      "matches_local": true
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 338,
+      "sha256": "6a69db33a8bfe4b93111bf1133960dfb0f33bf388fee59003c554891aee7b864",
+      "matches_local": true
+    },
+    {
+      "name": "research-supplement-v1.0.zip",
+      "bytes": 274529,
+      "sha256": "2ba716af282395c8c0207f31f8a8ac17546a7c3e1191d6f9a954606cd901d7a8",
+      "matches_local": true
+    }
+  ],
+  "prior_records_modified": false,
+  "bitcoin_originals_modified": false,
+  "peer_reviewed": false,
+  "google_scholar_indexing_status": "NOT_ASSERTED",
+  "separate_final_human_line_by_line_review_claimed": false
+}
