@@ -2,7 +2,7 @@
 layout: "default"
 title: "超越控制保证：极端能力不对等条件下的人类—超级智能共存提议"
 description: "TA-TR-2026-04 v1.0. Independent fourth preprint; non-amending; not peer reviewed."
-permalink: "/research/beyond-guaranteed-control/zh.html"
+permalink: /research/beyond-guaranteed-control/zh.html
 reading_page: true
 scholarly_article: true
 citation_title: "超越控制保证：极端能力不对等条件下的人类—超级智能共存提议"
