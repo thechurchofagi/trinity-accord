@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   publish:
-    if: github.repository == 'thechurchofagi/trinity-accord'
+    if: github.repository == 'thechurchofagi/trinity-accord' && !contains(github.event.head_commit.message, '[discovery-only]')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -80,3 +80,37 @@ jobs:
             research/beyond-guaranteed-control/source-transfer/
           if-no-files-found: error
           retention-days: 30
+  discovery-closeout:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[discovery-only]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+      - name: Reuse the current sitemap generator; never touch the published deposit
+        run: |
+          python3 -m pip install --disable-pip-version-check PyYAML==6.0.2
+          python3 - <<'PY'
+          import hashlib, json, pathlib, re, subprocess
+          root=pathlib.Path('research/beyond-guaranteed-control')
+          record=json.loads((root/'publication-record.json').read_text())
+          assert record['status']=='PUBLISHED_AND_PUBLIC_READBACK_PASS' and record['record_id']==22804542
+          for row in record['files']:
+              data=(root/row['name']).read_bytes()
+              assert len(data)==row['bytes'] and hashlib.sha256(data).hexdigest()==row['sha256']
+          before=set(re.findall(r'<loc>(.*?)</loc>',pathlib.Path('sitemap.xml').read_text()))
+          subprocess.run(['python3','scripts/generate_sitemap.py'],check=True)
+          after=set(re.findall(r'<loc>(.*?)</loc>',pathlib.Path('sitemap.xml').read_text()))
+          allowed={'https://www.trinityaccord.org/research/beyond-guaranteed-control/','https://www.trinityaccord.org/research/beyond-guaranteed-control/zh.html'}
+          assert not before-after and after-before <= allowed and allowed <= after
+          subprocess.run(['python3','scripts/generate_sitemap.py','--check'],check=True)
+          print('Sitemap closeout PASS; new routes:', sorted(after-before))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sitemap.xml sitemap-core.xml
+          if ! git diff --cached --quiet; then
+            git commit -m 'research: include fourth-paper English and Chinese routes in generated sitemap'
+            git push origin HEAD:research/beyond-guaranteed-control-v1-20260917
+          fi
