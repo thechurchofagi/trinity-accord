@@ -1,0 +1,84 @@
+{
+  "schema": "trinityaccord.research-publication.v1",
+  "status": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "record_id": 22809019,
+  "doi": "10.5281/zenodo.22809019",
+  "record_url": "https://zenodo.org/records/22809019",
+  "title": "Recovery without Epistemic Monopoly: Historical Evidence under Competing AI Custodians—A Bounded Model and Executable Study",
+  "report_number": "TA-TR-2026-05",
+  "version": "1.0",
+  "publication_date": "2026-09-17",
+  "public_record_created": "2026-09-17T10:14:59.488507+00:00",
+  "public_record_modified": "2026-09-17T10:15:01.605658+00:00",
+  "workflow_run_id": "35209242581",
+  "publication_source_commit": "bd3c8f240bbfcbe673ae0967b50a304e38099da3",
+  "was_already_published": false,
+  "file_count": 10,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1162,
+      "sha256": "d0a27d77fd35356397e5236a163e4b9f13c5c4798e44145775f88ff9067fd342",
+      "matches_local": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 870,
+      "sha256": "a0533f56b5db2ac23cfcfba3e54028c1a751a56523dec944398707ba80e0bf95",
+      "matches_local": true
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 612,
+      "sha256": "4e2d90c0c4b3ea79851c989b58575417b0cb71cf508240338d66da3d7092181b",
+      "matches_local": true
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 493,
+      "sha256": "74841e2ae29fddd2ed923fc76a64afba54df09efcc18ecbc127a326dd1bff914",
+      "matches_local": true
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 341,
+      "sha256": "8a14fd28f3b1fa7f929173e7680d96d3da44bd3b0a2c55e8449b7b77a1754e0d",
+      "matches_local": true
+    },
+    {
+      "name": "recovery-without-epistemic-monopoly-v1.0.md",
+      "bytes": 54009,
+      "sha256": "16802312b54b4a536d47aaf2a62a016425eeb5c9d11bb2a04fbf66b34a680b57",
+      "matches_local": true
+    },
+    {
+      "name": "recovery-without-epistemic-monopoly-v1.0.pdf",
+      "bytes": 128689,
+      "sha256": "0b392a8dea067bf980a879a9b707952a5ad1549b248df051531ca900a40ff549",
+      "matches_local": true
+    },
+    {
+      "name": "recovery-without-epistemic-monopoly-zh-v1.0.md",
+      "bytes": 45216,
+      "sha256": "3832bf5815c1ff12880a3cb9f6755e119b940a7118fd702354a295caa0ac8d01",
+      "matches_local": true
+    },
+    {
+      "name": "recovery-without-epistemic-monopoly-zh-v1.0.pdf",
+      "bytes": 376506,
+      "sha256": "b4fa53a6dca39f6b3be6adab4e0ea1c8d21bfadef54a35dc40decc725ce3c93f",
+      "matches_local": true
+    },
+    {
+      "name": "research-supplement-v1.0.zip",
+      "bytes": 117421,
+      "sha256": "45e697452990bf5e3dd006bbcfce0c71c70f86bcea4c37fc926086ef404ea511",
+      "matches_local": true
+    }
+  ],
+  "prior_records_modified": false,
+  "bitcoin_originals_modified": false,
+  "peer_reviewed": false,
+  "google_scholar_indexing_status": "NOT_ASSERTED",
+  "separate_final_human_line_by_line_review_claimed": false
+}

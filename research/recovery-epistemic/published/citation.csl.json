@@ -1,0 +1,24 @@
+{
+  "id": "https://doi.org/10.5281/zenodo.22809019",
+  "type": "report",
+  "title": "Recovery without Epistemic Monopoly: Historical Evidence under Competing AI Custodians—A Bounded Model and Executable Study",
+  "author": [
+    {
+      "family": "Liu",
+      "given": "Hongju"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2026,
+        9,
+        17
+      ]
+    ]
+  },
+  "DOI": "10.5281/zenodo.22809019",
+  "version": "1.0",
+  "genre": "preprint",
+  "publisher": "Zenodo"
+}
