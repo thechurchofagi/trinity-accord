@@ -18,11 +18,15 @@ The existing Jekyll layout was reused, not modified. A rendered-site check verif
 
 These are technical checks against the [Google Scholar inclusion guidance](https://scholar.google.com/intl/en/scholar/inclusion.html), not Google's approval, proof of indexing, peer review, or independent assessment of originality. Google Scholar inclusion has not been confirmed. English and Chinese are versions of one paper under one DOI, not two independent research outputs.
 
+## Discovery closeout
+
+Initial pull-request checks correctly identified two missing sitemap routes. The successful [discovery-only run 35181444250](https://github.com/thechurchofagi/trinity-accord/actions/runs/35181444250) reused the existing `scripts/generate_sitemap.py` and committed only the generated sitemap change. The complete sitemap now contains the English and Chinese article routes; no old URL was removed. The publication job was skipped in this run, and no Zenodo credential, record write, re-publication or PDF rebuild was needed. The published files and their original readback receipt remain unchanged.
+
 ## What changed and what did not
 
 The reviewed bilingual v1.0 scholarly bodies, abstracts, tables and all 40 references were preserved. Publication preparation changed only front matter and disclosure sentences concerning the user's later authorization and the new DOI. PDFs were deterministically re-rendered for publication rather than presented as byte-identical copies of earlier Word-exported PDFs. Original text inputs and publication-only differences are included in the supplement.
 
-Repository changes are limited to this new research directory, the fourth-paper entry in research/index.md, and two record-bound workflows. The three existing paper DOIs, the three Bitcoin Originals, the Star Ark Covenant text, the website's main interpretive body, and protected institutional deposits were not modified by this publication.
+Repository changes are limited to this new research directory, the fourth-paper entry in research/index.md, its generated sitemap routes, and two record-bound workflows. The three existing paper DOIs, the three Bitcoin Originals, the Star Ark Covenant text, the website's main interpretive body, and protected institutional deposits were not modified by this publication.
 
 The new paper remains non-amending analysis. It is not a fourth Original, an exclusive interpretation, or independent corroboration of the first three papers. Substantive AI contribution, first-party research interests, source-access limitations and the lack of peer review remain disclosed. The user's explicit authorization to publish is not described as separate final human line-by-line verification.
 
