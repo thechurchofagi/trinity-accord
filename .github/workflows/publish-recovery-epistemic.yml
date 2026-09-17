@@ -5,7 +5,7 @@ on:
     paths:
       - '.github/workflows/publish-recovery-epistemic.yml'
       - 'research/recovery-epistemic/publish_zenodo.py'
-      - 'research/recovery-epistemic/source-transfer/source.tar.xz'
+      - 'research/recovery-epistemic/source-transfer/source.b64.part*'
 permissions:
   contents: write
 concurrency:
@@ -31,14 +31,22 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/source /tmp/pub /tmp/build /tmp/reproduced
-          xz -t research/recovery-epistemic/source-transfer/source.tar.xz
-          tar -xJf research/recovery-epistemic/source-transfer/source.tar.xz -C /tmp/source
+          cat research/recovery-epistemic/source-transfer/source.b64.part* > /tmp/source.b64
+          base64 -d /tmp/source.b64 > /tmp/source.tar.xz
+          test "$(stat -c %s /tmp/source.tar.xz)" -eq 65640
+          echo '3ee15094ff2beb030c14736572b39f5c5258f64691193a0daada0abcb57888cc  /tmp/source.tar.xz' | sha256sum -c -
+          xz -t /tmp/source.tar.xz
+          tar -xJf /tmp/source.tar.xz -C /tmp/source
           SRC=/tmp/source/TA-TR-2026-05_v1.0
           test -f "$SRC/manuscript/paper_en.md" && test -f "$SRC/manuscript/paper_zh.md"
           grep -F 'Zenodo DOI: 10.5281/zenodo.22809019' "$SRC/manuscript/paper_en.md"
           grep -F 'Zenodo DOI：10.5281/zenodo.22809019' "$SRC/manuscript/paper_zh.md"
+          grep -F 'doi = {10.5281/zenodo.22809019}' "$SRC/citation.bib"
+          grep -F '"new_doi": "10.5281/zenodo.22809019"' "$SRC/PACKAGE-MANIFEST.json"
+          (cd "$SRC" && sha256sum -c SHA256SUMS.txt)
           python3 "$SRC/src/study.py" --out /tmp/reproduced
           python3 "$SRC/src/check_results.py" --results /tmp/reproduced
+          python3 "$SRC/src/check_manuscripts.py"
       - name: Build English and Chinese publication PDFs and inspect text
         run: |
           set -euo pipefail
