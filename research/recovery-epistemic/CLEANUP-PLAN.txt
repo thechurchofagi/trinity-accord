@@ -1,0 +1,1 @@
+Temporary publication markers will be removed before merge; canonical publication evidence is publication-record.json plus published/SHA256SUMS.txt.
