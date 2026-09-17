@@ -26,7 +26,7 @@ jobs:
       - name: Install document build dependencies
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended fonts-liberation fonts-dejavu-core fonts-noto-cjk poppler-utils zip
+          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended texlive-lang-chinese lmodern fonts-liberation fonts-dejavu-core fonts-noto-cjk poppler-utils zip
       - name: Recover exact reviewed source capsule and reproduce finite study
         run: |
           set -euo pipefail
