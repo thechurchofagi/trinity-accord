@@ -2,7 +2,9 @@ name: Diagnose Recovery Epistemic source
 on:
   push:
     branches: [research/recovery-epistemic-v1-20260917]
-    paths: [.github/workflows/diagnose-recovery-epistemic-source.yml]
+    paths:
+      - '.github/workflows/diagnose-recovery-epistemic-source.yml'
+      - 'research/recovery-epistemic/source-transfer/source.b64.part*'
 permissions:
   contents: read
 jobs:
@@ -32,4 +34,10 @@ jobs:
           else
             echo 'NOT_A_TAR_ARCHIVE'
             head -c 1000 /tmp/source.payload || true
+            exit 1
           fi
+          grep -Fx 'TA-TR-2026-05_v1.0/manuscript/paper_en.md' /tmp/list.txt
+          grep -Fx 'TA-TR-2026-05_v1.0/manuscript/paper_zh.md' /tmp/list.txt
+          grep -Fx 'TA-TR-2026-05_v1.0/src/study.py' /tmp/list.txt
+          grep -Fx 'TA-TR-2026-05_v1.0/src/check_results.py' /tmp/list.txt
+          grep -Fx 'TA-TR-2026-05_v1.0/src/build_pdf.sh' /tmp/list.txt
