@@ -1,0 +1,26 @@
+{
+  "schema": "trinityaccord.expected-publication.v1",
+  "record_id": 22804542,
+  "doi": "10.5281/zenodo.22804542",
+  "title": "Beyond Guaranteed Control: An Ex Ante Proposal for Human–Superintelligence Coexistence under Radical Capability Asymmetry",
+  "version": "1.0",
+  "report_number": "TA-TR-2026-04",
+  "files": [
+    {"name":"beyond-guaranteed-control-v1.0.pdf","bytes":222177,"sha256":"fe2c2f5fc8d437a9d5b634e18c293308cd83b6125219079550b280685e100697"},
+    {"name":"beyond-guaranteed-control-zh-v1.0.pdf","bytes":1176597,"sha256":"d8225bda09b629b52e0531989db17f93c2251800fd8f087a9fd472b02a4569b3"},
+    {"name":"beyond-guaranteed-control-v1.0.md","bytes":86416,"sha256":"b66c7b8e37fdcce02a9f690e4b662dac5a2cd9ca1c436dd490e0494f71ddde9a"},
+    {"name":"beyond-guaranteed-control-zh-v1.0.md","bytes":73619,"sha256":"77f24833f5d6e4d7adda35d02e8f6fc6dc0537a40be6de308dcb2eb6c494dd84"},
+    {"name":"citation.bib","bytes":506,"sha256":"1bc24f15eeee679d8979f72ad8bbc177187cd80c28961e0a5fe888a6acf3edab"},
+    {"name":"citation.ris","bytes":338,"sha256":"6a69db33a8bfe4b93111bf1133960dfb0f33bf388fee59003c554891aee7b864"},
+    {"name":"citation.csl.json","bytes":567,"sha256":"9fae0d7987425bece88586b65b37d618396769f0dd18c48e116007e9eedd8a7e"},
+    {"name":"README-LICENSE.txt","bytes":2542,"sha256":"0b753bfcb0bd6dd68ee8df42ed3b79f7125068e63986be0eade83c2f8ffa44bb"},
+    {"name":"research-supplement-v1.0.zip","bytes":274529,"sha256":"2ba716af282395c8c0207f31f8a8ac17546a7c3e1191d6f9a954606cd901d7a8"},
+    {"name":"SHA256SUMS.txt","bytes":830,"sha256":"9ac79ceaa12cb5c3a8207d6001f1a5b419eaca5e3a5432ec4acd295e687527e3"}
+  ],
+  "source_checks": {
+    "en":{"body_unchanged":true,"abstract_unchanged":true,"references_unchanged":true,"reference_count":40,"body_sha256":"3922a555c9a3a930c4fde65772713d719d114ae8d5c75692aacb247757761c6d"},
+    "zh":{"body_unchanged":true,"abstract_unchanged":true,"references_unchanged":true,"reference_count":40,"body_sha256":"f5f787901a54a8e0fb620600b459a81f3ff5cece4e8cd6c5e1f87dbcd7594a37"},
+    "scope":"Formatting and source identity checks only; not peer review or Google Scholar indexing certification.",
+    "embedded_cjk_font_sha256":"705ec2dba81eaee1208e4ed5d3ff23ab259292e8e0e163ea3de297ef1317007a"
+  }
+}
