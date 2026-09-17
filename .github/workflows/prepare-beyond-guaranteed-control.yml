@@ -1,0 +1,46 @@
+name: Prepare Beyond Guaranteed Control DOI
+on:
+  push:
+    branches: [research/beyond-guaranteed-control-v1-20260917]
+    paths: [.github/workflows/prepare-beyond-guaranteed-control.yml]
+permissions:
+  contents: read
+concurrency:
+  group: beyond-guaranteed-control-zenodo-v1
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Reserve or recover this paper only; no publication
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, urllib.request, urllib.parse
+          token=os.environ.get('ZENODO_ACCESS_TOKEN')
+          if not token: raise SystemExit('Publication credential unavailable; no record changed')
+          title='Beyond Guaranteed Control: An Ex Ante Proposal for Human–Superintelligence Coexistence under Radical Capability Asymmetry'
+          def api(path, method='GET', data=None):
+              req=urllib.request.Request('https://zenodo.org/api'+path, method=method, headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'}, data=None if data is None else json.dumps(data).encode())
+              with urllib.request.urlopen(req,timeout=60) as r: return json.load(r)
+          rows=api('/deposit/depositions?'+urllib.parse.urlencode({'q':'"Beyond Guaranteed Control"','size':100}))
+          matches=[r for r in rows if r.get('metadata',{}).get('title')==title and r.get('metadata',{}).get('version')=='1.0']
+          if len(matches)>1: raise SystemExit('Multiple matching records; no modification')
+          if matches:
+              record=matches[0]
+          else:
+              metadata={'upload_type':'publication','publication_type':'preprint','title':title,'creators':[{'name':'Liu, Hongju','affiliation':'Independent researcher, Shenzhen, China'}],'description':'<p>TA-TR-2026-04. Position paper and conceptual analysis of ex ante human–superintelligence coexistence proposals under radical capability asymmetry. This is a separate fourth research paper, not a revision of any previous DOI. Human-directed and AI-assisted substantive research and drafting; human author of record: Hongju Liu. Not peer reviewed. The user explicitly requested format checks and DOI publication; no separate final human line-by-line review is claimed. Full reviewed English manuscript and Chinese translation will be attached before publication.</p>','publication_date':'2026-09-17','version':'1.0','access_right':'open','license':'cc-by-4.0','language':'eng','keywords':['human–AI coexistence','superintelligence','capability asymmetry','ex ante proposal','prospective autonomy','attributable participation','Star Ark Covenant'],'notes':'Draft preparation only. Existing DOI records and the three Bitcoin Originals are unchanged. No Google Scholar indexing certification or safety guarantee is claimed.'}
+              record=api('/deposit/depositions','POST',{'metadata':metadata})
+          if record['id'] in (21699878,21900592,22761411): raise SystemExit('Prior record protected')
+          result={'record_id':record['id'],'reserved_doi':record.get('metadata',{}).get('prereserve_doi',{}).get('doi'),'doi':record.get('doi'),'submitted':record.get('submitted',False),'state':record.get('state'),'title':title,'version':'1.0','report_number':'TA-TR-2026-04','operation':'draft_preparation_only','previous_records_modified':False}
+          pathlib.Path('/tmp/PREPARED-DEPOSIT.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(result,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: beyond-guaranteed-control-prepared-deposit-v1
+          path: /tmp/PREPARED-DEPOSIT.json
+          retention-days: 30

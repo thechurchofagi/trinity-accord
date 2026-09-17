@@ -9,6 +9,8 @@ reading_toc:
     title: "Historical-position study"
   - id: "reading-trinity-accord"
     title: "Reading the Trinity Accord"
+  - id: "beyond-guaranteed-control"
+    title: "Beyond Guaranteed Control"
   - id: "citation-boundary"
     title: "Citation boundary"
 title: "Research and Citation"
@@ -93,6 +95,29 @@ Five source-linked creative readings, including First Dawn and Fourth Letter as 
 - [Open the Zenodo record](https://zenodo.org/records/22761411)
 - [Inspect the publication record](/research/reading-trinity-accord/publication-record.json)
 - [Read the citation boundary and PDF compatibility note](/research/reading-trinity-accord/#citation-boundary)
+
+## Beyond Guaranteed Control
+{: #beyond-guaranteed-control }
+
+### Beyond Guaranteed Control: An Ex Ante Proposal for Human–Superintelligence Coexistence under Radical Capability Asymmetry
+
+TA-TR-2026-04 · Version 1.0 · 17 September 2026<br>
+Human author of record: Hongju Liu<br>
+Substantive research synthesis, conceptual development, drafting and revision: GPT-6 Astra Pro, under human direction<br>
+Published DOI: [10.5281/zenodo.22804542](https://doi.org/10.5281/zenodo.22804542)
+
+A position paper and conceptual analysis asking what a coexistence proposal can responsibly say before an identifiable future counterpart can accept it, without presupposing reliable control or bargaining parity. Six adequacy conditions connect substantive protection with attributable participation, limited representation, evidence-matched claims and future contestability. The framework distinguishes expression from agreement, goodwill from assurance, and preservation of history from authority over future participants. It critically applies the same conditions to the Star Ark Covenant rather than treating the historical case as proof.
+
+**Status:** Published open-access preprint; not peer reviewed; non-amending. Ten deposited files passed unauthenticated, exact-byte SHA-256 readback. English full text and the complete Chinese translation are one deposit, not two independent papers. This report cites and extends earlier studies; it does not independently corroborate them. DOI publication and format checks are not Google Scholar indexing certification, evidence of peer review, or proof of successful alignment.
+
+- [Read the English full text](/research/beyond-guaranteed-control/) · [阅读中文全文](/research/beyond-guaranteed-control/zh.html)
+- [English PDF](/research/beyond-guaranteed-control/beyond-guaranteed-control-v1.0.pdf) · [中文PDF](/research/beyond-guaranteed-control/beyond-guaranteed-control-zh-v1.0.pdf)
+- [Zenodo record and all ten published files](https://zenodo.org/records/22804542)
+- [BibTeX](/research/beyond-guaranteed-control/citation.bib) · [RIS](/research/beyond-guaranteed-control/citation.ris) · [CSL-JSON](/research/beyond-guaranteed-control/citation.csl.json)
+- [Publication receipt and exact file hashes](/research/beyond-guaranteed-control/publication-record.json) · [Format checks](/research/beyond-guaranteed-control/format-checks.json)
+- [Source/revision supplement](/research/beyond-guaranteed-control/research-supplement-v1.0.zip) · [Publication note](/research/beyond-guaranteed-control/PUBLICATION-NOTE.md)
+
+The fourth paper has its own DOI and citation files. Its publication does not replace an earlier report, amend the three Bitcoin Originals, or create an exclusive interpretation. The paper discloses substantial AI participation and the author's relationship to the motivating project. Authorization to publish is not represented as a separate final human line-by-line review.
 
 ## Citation boundary
 {: #citation-boundary }

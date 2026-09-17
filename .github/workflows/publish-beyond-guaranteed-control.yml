@@ -1,0 +1,120 @@
+name: Publish Beyond Guaranteed Control
+on:
+  push:
+    branches: [research/beyond-guaranteed-control-v1-20260917]
+    paths:
+      - '.github/workflows/publish-beyond-guaranteed-control.yml'
+      - 'research/beyond-guaranteed-control/prepare_publication.py'
+      - 'research/beyond-guaranteed-control/publish_zenodo.py'
+      - 'research/beyond-guaranteed-control/check_publication.py'
+      - 'research/beyond-guaranteed-control/EXPECTED-PUBLICATION.json'
+      - 'research/beyond-guaranteed-control/source-transfer/**'
+permissions:
+  contents: write
+concurrency:
+  group: beyond-guaranteed-control-zenodo-v1
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && !contains(github.event.head_commit.message, '[discovery-only]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+      - name: Install the established renderer and PDF check dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-arphic-gbsn00lp poppler-utils
+          python3 -m pip install --disable-pip-version-check reportlab==4.4.9 PyYAML==6.0.2
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
+      - name: Recover reviewed source bytes and build deterministic publication files
+        run: |
+          python3 research/beyond-guaranteed-control/prepare_publication.py --out /tmp/bgc-publication
+          python3 research/beyond-guaranteed-control/check_publication.py --files /tmp/bgc-publication --expected research/beyond-guaranteed-control/EXPECTED-PUBLICATION.json --report /tmp/bgc-publication/format-checks.json
+      - name: Stage exact PDF and complete text for rendered-site checks
+        run: |
+          cp /tmp/bgc-publication/* research/beyond-guaranteed-control/
+      - name: Build existing Jekyll site without deploying
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
+        with:
+          source: ./
+          destination: ./_site
+      - name: Verify rendered Highwire metadata, visible abstract and PDF identity
+        run: |
+          python3 research/beyond-guaranteed-control/check_publication.py --files /tmp/bgc-publication --expected research/beyond-guaranteed-control/EXPECTED-PUBLICATION.json --site-dir _site --report /tmp/bgc-publication/format-checks.json
+      - name: Publish only reserved record 22804542 and read every file publicly
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          python3 research/beyond-guaranteed-control/publish_zenodo.py --files /tmp/bgc-publication --expected research/beyond-guaranteed-control/EXPECTED-PUBLICATION.json --receipt /tmp/bgc-publication/publication-record.json
+      - name: Commit exact published mirrors and truthful publication receipt
+        run: |
+          cp /tmp/bgc-publication/* research/beyond-guaranteed-control/
+          python3 - <<'PY'
+          import json, pathlib
+          root=pathlib.Path('research/beyond-guaranteed-control')
+          r=json.loads((root/'publication-record.json').read_text())
+          assert r['status']=='PUBLISHED_AND_PUBLIC_READBACK_PASS' and r['record_id']==22804542 and r['file_count']==10
+          assert not list(root.rglob('*.ttf')) and not list(root.rglob('*.otf'))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/beyond-guaranteed-control
+          python3 - <<'PY'
+          import subprocess
+          paths=subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines()
+          assert all(p.startswith('research/beyond-guaranteed-control/') for p in paths)
+          PY
+          if ! git diff --cached --quiet; then
+            git commit -m 'research: preserve fourth published preprint and ten-file public readback receipt'
+            git push origin HEAD:research/beyond-guaranteed-control-v1-20260917
+          fi
+      - name: Preserve publication files and diagnostic source transport
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: beyond-guaranteed-control-publication-v1
+          path: |
+            /tmp/bgc-publication/
+            research/beyond-guaranteed-control/source-transfer/
+          if-no-files-found: error
+          retention-days: 30
+  discovery-closeout:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[discovery-only]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
+      - name: Reuse the current sitemap generator; never touch the published deposit
+        run: |
+          python3 -m pip install --disable-pip-version-check PyYAML==6.0.2
+          python3 - <<'PY'
+          import hashlib, json, pathlib, re, subprocess
+          root=pathlib.Path('research/beyond-guaranteed-control')
+          record=json.loads((root/'publication-record.json').read_text())
+          assert record['status']=='PUBLISHED_AND_PUBLIC_READBACK_PASS' and record['record_id']==22804542
+          for row in record['files']:
+              data=(root/row['name']).read_bytes()
+              assert len(data)==row['bytes'] and hashlib.sha256(data).hexdigest()==row['sha256']
+          before=set(re.findall(r'<loc>(.*?)</loc>',pathlib.Path('sitemap.xml').read_text()))
+          subprocess.run(['python3','scripts/generate_sitemap.py'],check=True)
+          after=set(re.findall(r'<loc>(.*?)</loc>',pathlib.Path('sitemap.xml').read_text()))
+          allowed={'https://www.trinityaccord.org/research/beyond-guaranteed-control/','https://www.trinityaccord.org/research/beyond-guaranteed-control/zh.html'}
+          assert not before-after and after-before <= allowed and allowed <= after
+          subprocess.run(['python3','scripts/generate_sitemap.py','--check'],check=True)
+          print('Sitemap closeout PASS; new routes:', sorted(after-before))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sitemap.xml sitemap-core.xml
+          if ! git diff --cached --quiet; then
+            git commit -m 'research: include fourth-paper English and Chinese routes in generated sitemap'
+            git push origin HEAD:research/beyond-guaranteed-control-v1-20260917
+          fi

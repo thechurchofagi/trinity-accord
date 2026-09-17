@@ -1,0 +1,26 @@
+[
+  {
+    "id": "Liu2026BeyondGuaranteedControl",
+    "type": "report",
+    "title": "Beyond Guaranteed Control: An Ex Ante Proposal for Human–Superintelligence Coexistence under Radical Capability Asymmetry",
+    "author": [
+      {
+        "family": "Liu",
+        "given": "Hongju"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2026,
+          9,
+          17
+        ]
+      ]
+    },
+    "number": "TA-TR-2026-04",
+    "version": "1.0",
+    "DOI": "10.5281/zenodo.22804542",
+    "URL": "https://doi.org/10.5281/zenodo.22804542"
+  }
+]
