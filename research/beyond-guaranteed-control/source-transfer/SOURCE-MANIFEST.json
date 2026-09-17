@@ -1,0 +1,27 @@
+{
+  "schema": "trinityaccord.research-source-transfer.v1",
+  "source_package": "Star_Ark_Coexistence_Paper_v1.0.zip",
+  "source_package_sha256": "9b2a5d65e2a7907bf61a2eaa87fbf8715452b5c954002efe888a96c3cee00838",
+  "decoded_json_sha256": "99c3229b8988da578928e654ea09868bfcfbcca260c9a22f3a23b809f3719d92",
+  "decoded_json_bytes": 264155,
+  "parts": [
+    {"name":"source.b64.part00","bytes":10000,"sha256":"9686e8e7106f9ee911cac996681e61a3e1dd9fd4b04adc0341a821656cd45032"},
+    {"name":"source.b64.part01","bytes":10000,"sha256":"f7a8e15a87b02a7463539b6eab34c108c5cc883705453fbf25ccdb0d2e741d9d"},
+    {"name":"source.b64.part02","bytes":10000,"sha256":"4019e332a33c0a37e0a1e6417cce1216ddcee9492353c01ba872cf86ac690ab1"},
+    {"name":"source.b64.part03","bytes":10000,"sha256":"2f30916542593f8ca2c8233eefda330cee29171b77e712b21ec9bb95c9401d98"},
+    {"name":"source.b64.part04","bytes":10000,"sha256":"c25f514a219a84dc1d2bbf0f022e349f76267f40c0f0ea3b7e8cfc550a83b4fa"},
+    {"name":"source.b64.part05","bytes":10000,"sha256":"1f3e479a69421146bfe198502b2bf46f9d49e58b2ebcaa282bdcc119df04b9ce"},
+    {"name":"source.b64.part06","bytes":10000,"sha256":"58c440d3334d8846141f090c8fc2ccd3f26edb5c35a2808a19629f019d3acc5f"},
+    {"name":"source.b64.part07","bytes":10000,"sha256":"a6e3c86342cbf333f2eb4d3c82f7b42efd6b059049a97fb20f952d989d07650d"},
+    {"name":"source.b64.part08","bytes":5352,"sha256":"5ebb0c217533ac5c9ba1ef30c87d4cf9f56a554985b3e265c23b11f7dcce4bf7"}
+  ],
+  "files": [
+    {"name":"Beyond_Guaranteed_Control_EN_v1.0.md","bytes":86235,"sha256":"61579765f9f648e89fc6f447b4e2031be071ae4f4b5eaa777d44a2cda3e6581f"},
+    {"name":"Beyond_Guaranteed_Control_ZH_v1.0.md","bytes":73430,"sha256":"e2750c2fc94216322552bf329168ab357d6f503d9ca5b655380093d5d37613d2"},
+    {"name":"references.bib","bytes":14812,"sha256":"c22e4e4f93f8266347d3980cdae38a8096ab3bf778fd3783bf663bc10f84bdb4"},
+    {"name":"Source_Ledger_v1.0.md","bytes":29857,"sha256":"bf7445a629a8f13b44508f1f3a72f76ae60db40acb7f4775c8d2589518c22627"},
+    {"name":"Formation_and_Attribution_Note.md","bytes":4365,"sha256":"af993edd71a8673575eb9faf1e9fe48de65b9cf1b10b171fa9f3cbb2c69c2ed9"},
+    {"name":"Revision_and_Contribution_Map_ZH.md","bytes":5994,"sha256":"e6698d006a3cc884ce15752fbbdec22c60032e6b3c1ade910fb366c4da4534f8"},
+    {"name":"sources.json","bytes":43956,"sha256":"0f0b42aee88333c318ca2de1212ab7c4773adcea11832afc42440022c480f7ea"}
+  ]
+}
