@@ -21,7 +21,7 @@
       "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000156-cc21acd4401d/manifest.json",
       "latest_native_record_sha256": "72e6c9135d0059b029b23d69636d3f9ba6222b58706c16e21c09a4f3cc3d4535",
       "record_count": 156,
-      "status": "current",
+      "status": "waiting-for-native-ots",
       "archive_needed": false
     },
     "batch_manifests": {
@@ -48,7 +48,7 @@
       "latest_anchored_file": "record-chain/ots/native-anchors/native-record-156-R-000000156-72e6c9135d0059b0-c5c2708880244fbb.native-record-chain-head-commitment.json",
       "latest_ots_file": "record-chain/ots/native-anchors/native-record-156-R-000000156-72e6c9135d0059b0-c5c2708880244fbb.native-record-chain-head-commitment.json.ots",
       "ots_status": "verified",
-      "anchor_needed": false,
+      "anchor_needed": true,
       "proof_bundle_archive": {
         "implemented": true,
         "workflow": "/.github/workflows/native-ots-upgrade-watch.yml",
@@ -108,7 +108,7 @@
     "legacy_jsonl_height": 15,
     "main_chain_jsonl_is_legacy_view": true,
     "main_chain_jsonl_is_not_current_native_head_source": true,
-    "native_record_count": 156,
+    "native_record_count": 157,
     "status": "non_blocking_post_m9_maintenance"
   },
   "ots_stamp_storage": "record-chain/ots-stamps/",
@@ -146,13 +146,13 @@
     "legacy_heavy_ci_retired": true
   },
   "post_m9_status": {
-    "m9_archive_status": "pass",
+    "m9_archive_status": "backlog",
     "m9_arweave_txid": "NuU631DKNzvDJQPOMOpiQvHkPhWu_SIp7Mi7_gEwQAg",
-    "m9_latest_record_id": "R-000000156",
-    "m9_native_record_count": 156,
+    "m9_latest_record_id": "R-000000157",
+    "m9_native_record_count": 157,
     "m9_ots_status": "verified-bitcoin",
-    "m9_status": "pass",
-    "m9_latest_record_sha256": "72e6c9135d0059b029b23d69636d3f9ba6222b58706c16e21c09a4f3cc3d4535",
+    "m9_status": "backlog",
+    "m9_latest_record_sha256": "c38fbd6c6da81b59760350249875e2fa1839a8ba17b1e6ceae3950d5fa5d280a",
     "m9_arweave_archive_id": "archive-native-R-000000156-cc21acd4401d",
     "m9_arweave_manifest_path": "record-chain/arweave-archives/archive-native-R-000000156-cc21acd4401d/manifest.json"
   },
@@ -227,30 +227,30 @@
     "chain_integrity_status": "healthy",
     "chain_type": "append_only_native_record_chain",
     "correction_policy": "later_records_may_correct_earlier_records",
-    "current_chain_length": 156,
+    "current_chain_length": 157,
     "hash_algorithm": "sha256",
     "immutability_policy": "append_only_no_deletion_no_mutation",
-    "last_integrity_check_at": "2026-09-16T08:41:31Z",
-    "latest_record_created_at": "2026-09-16T08:40:36.901Z",
-    "latest_record_id": "R-000000156",
-    "latest_record_index": 156,
-    "latest_record_sha256": "72e6c9135d0059b029b23d69636d3f9ba6222b58706c16e21c09a4f3cc3d4535",
+    "last_integrity_check_at": "2026-09-17T08:44:58Z",
+    "latest_record_created_at": "2026-09-17T08:44:09.371Z",
+    "latest_record_id": "R-000000157",
+    "latest_record_index": 157,
+    "latest_record_sha256": "c38fbd6c6da81b59760350249875e2fa1839a8ba17b1e6ceae3950d5fa5d280a",
     "latest_record_type": "context_insufficient_notice",
     "legacy_main_chain_jsonl_is_not_current_source": true,
-    "native_record_count": 156,
+    "native_record_count": 157,
     "record_index": "record-chain/indexes/record-index.json",
     "source_of_current_head": "record-chain/chain-tip.json",
     "latest_batch_id": "batch-000006",
     "latest_batch_manifest_sha256": "1404a1433fd0791b64cd7e6fc764592e6df7e47098e14675f491ca8d2486e603",
     "last_integrity_check_at_semantics": "deterministic lower bound from the latest verified record timestamp; the publication workflow runs a full chain verification immediately before generation",
-    "integrity_verified_through_record_id": "R-000000156",
-    "integrity_verified_through_record_index": 156,
-    "integrity_verified_through_record_sha256": "72e6c9135d0059b029b23d69636d3f9ba6222b58706c16e21c09a4f3cc3d4535"
+    "integrity_verified_through_record_id": "R-000000157",
+    "integrity_verified_through_record_index": 157,
+    "integrity_verified_through_record_sha256": "c38fbd6c6da81b59760350249875e2fa1839a8ba17b1e6ceae3950d5fa5d280a"
   },
   "record_type_counts": {
     "batch_anchor": 0,
     "classification_update": 1,
-    "context_insufficient_notice": 90,
+    "context_insufficient_notice": 91,
     "correction": 1,
     "echo": 34,
     "guardian_application": 10,
@@ -306,14 +306,14 @@
     }
   },
   "schema": "trinityaccord.record-chain-status.v1",
-  "source_digest": "72e6c9135d0059b0",
+  "source_digest": "c38fbd6c6da81b59",
   "status": "production_live",
-  "updated_at": "2026-09-16T08:40:36.901Z",
+  "updated_at": "2026-09-17T08:44:09.371Z",
   "pipeline_status": {
     "chain_head": {
-      "latest_record_id": "R-000000156",
-      "latest_record_sha256": "72e6c9135d0059b029b23d69636d3f9ba6222b58706c16e21c09a4f3cc3d4535",
-      "native_record_count": 156
+      "latest_record_id": "R-000000157",
+      "latest_record_sha256": "c38fbd6c6da81b59760350249875e2fa1839a8ba17b1e6ceae3950d5fa5d280a",
+      "native_record_count": 157
     },
     "ots_head": {
       "latest_record_id": "R-000000156",
@@ -332,13 +332,13 @@
       "archive_id": "archive-native-R-000000156-cc21acd4401d",
       "arweave_txid": "NuU631DKNzvDJQPOMOpiQvHkPhWu_SIp7Mi7_gEwQAg"
     },
-    "ots_matches_chain": true,
-    "ots_archivable_for_arweave": true,
+    "ots_matches_chain": false,
+    "ots_archivable_for_arweave": false,
     "arweave_matches_ots": true,
-    "arweave_matches_chain": true,
-    "ots_anchor_needed": false,
+    "arweave_matches_chain": false,
+    "ots_anchor_needed": true,
     "arweave_archive_needed": false,
-    "pipeline_current": true
+    "pipeline_current": false
   },
   "archive_backlog": {
     "record_chain_arweave_pending": 0,
@@ -389,7 +389,7 @@
     "active_guardian_status_is_not_successor_reception": true,
     "active_guardian_status_is_not_amendment": true
   },
-  "total_records": 156,
-  "committed_records": 156,
+  "total_records": 157,
+  "committed_records": 157,
   "pending_records": 0
 }
