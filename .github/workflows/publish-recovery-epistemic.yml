@@ -1,0 +1,133 @@
+name: Publish Recovery Epistemic preprint
+on:
+  push:
+    branches: [research/recovery-epistemic-v1-20260917]
+    paths:
+      - '.github/workflows/publish-recovery-epistemic.yml'
+      - 'research/recovery-epistemic/publish_zenodo.py'
+      - 'research/recovery-epistemic/source-transfer/source.tar.xz'
+permissions:
+  contents: write
+concurrency:
+  group: recovery-epistemic-zenodo-v1
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      SOURCE_DATE_EPOCH: '1789603200'
+      TZ: UTC
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+      - name: Install document build dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended fonts-liberation fonts-dejavu-core fonts-noto-cjk poppler-utils zip
+      - name: Recover exact reviewed source capsule and reproduce finite study
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/source /tmp/pub /tmp/build /tmp/reproduced
+          xz -t research/recovery-epistemic/source-transfer/source.tar.xz
+          tar -xJf research/recovery-epistemic/source-transfer/source.tar.xz -C /tmp/source
+          SRC=/tmp/source/TA-TR-2026-05_v1.0
+          test -f "$SRC/manuscript/paper_en.md" && test -f "$SRC/manuscript/paper_zh.md"
+          grep -F 'Zenodo DOI: 10.5281/zenodo.22809019' "$SRC/manuscript/paper_en.md"
+          grep -F 'Zenodo DOI：10.5281/zenodo.22809019' "$SRC/manuscript/paper_zh.md"
+          python3 "$SRC/src/study.py" --out /tmp/reproduced
+          python3 "$SRC/src/check_results.py" --results /tmp/reproduced
+      - name: Build English and Chinese publication PDFs and inspect text
+        run: |
+          set -euo pipefail
+          SRC=/tmp/source/TA-TR-2026-05_v1.0
+          bash "$SRC/src/build_pdf.sh" /tmp/build
+          cp /tmp/build/en/paper_en.pdf /tmp/pub/recovery-without-epistemic-monopoly-v1.0.pdf
+          cp /tmp/build/zh/paper_zh.pdf /tmp/pub/recovery-without-epistemic-monopoly-zh-v1.0.pdf
+          pdftotext /tmp/pub/recovery-without-epistemic-monopoly-v1.0.pdf /tmp/en.txt
+          pdftotext /tmp/pub/recovery-without-epistemic-monopoly-zh-v1.0.pdf /tmp/zh.txt
+          grep -F 'Recovery without Epistemic Monopoly' /tmp/en.txt
+          grep -F '10.5281/zenodo.22809019' /tmp/en.txt
+          grep -F '不让保管权垄断过去' /tmp/zh.txt
+          grep -F '10.5281/zenodo.22809019' /tmp/zh.txt
+          pdfinfo /tmp/pub/recovery-without-epistemic-monopoly-v1.0.pdf | grep '^Pages:'
+          pdfinfo /tmp/pub/recovery-without-epistemic-monopoly-zh-v1.0.pdf | grep '^Pages:'
+      - name: Assemble exactly ten public files and validate checksums
+        run: |
+          set -euo pipefail
+          SRC=/tmp/source/TA-TR-2026-05_v1.0
+          cp "$SRC/manuscript/paper_en.md" /tmp/pub/recovery-without-epistemic-monopoly-v1.0.md
+          cp "$SRC/manuscript/paper_zh.md" /tmp/pub/recovery-without-epistemic-monopoly-zh-v1.0.md
+          cp "$SRC/citation.bib" /tmp/pub/citation.bib
+          cat > /tmp/pub/citation.ris <<'EOF'
+          TY  - UNPB
+          AU  - Liu, Hongju
+          TI  - Recovery without Epistemic Monopoly: Historical Evidence under Competing AI Custodians—A Bounded Model and Executable Study
+          PY  - 2026
+          DA  - 2026/09/17
+          DO  - 10.5281/zenodo.22809019
+          UR  - https://doi.org/10.5281/zenodo.22809019
+          N1  - TA-TR-2026-05, version 1.0; Zenodo preprint; not peer reviewed.
+          ER  -
+          EOF
+          python3 - <<'PY'
+          import json,pathlib
+          x={'id':'https://doi.org/10.5281/zenodo.22809019','type':'report','title':'Recovery without Epistemic Monopoly: Historical Evidence under Competing AI Custodians—A Bounded Model and Executable Study','author':[{'family':'Liu','given':'Hongju'}],'issued':{'date-parts':[[2026,9,17]]},'DOI':'10.5281/zenodo.22809019','version':'1.0','genre':'preprint','publisher':'Zenodo'}
+          pathlib.Path('/tmp/pub/citation.csl.json').write_text(json.dumps(x,indent=2,ensure_ascii=False)+'\n')
+          PY
+          cat > /tmp/pub/README-LICENSE.txt <<'EOF'
+          TA-TR-2026-05 · Version 1.0 · 17 September 2026
+          DOI: 10.5281/zenodo.22809019
+
+          Recovery without Epistemic Monopoly: Historical Evidence under Competing AI Custodians—A Bounded Model and Executable Study
+          Human author of record: Hongju Liu, independent researcher, Shenzhen, China.
+
+          English and complete Chinese texts describe one study. The supplement contains the executable finite-state study, synthetic fixtures, raw results, evidence/source ledger, revision notes, manuscript sources, QA metadata and checksums. The experiments do not constitute real autonomous-agent attacks, production penetration testing, or proof of protection against superintelligence. The paper is not peer reviewed. GPT-6 Astra Pro made substantive research, modeling, implementation, analysis and drafting contributions; no separate final human line-by-line verification is claimed.
+
+          LICENSE
+          CC BY 4.0 applies to newly written paper text and supporting code/material to the extent the depositor holds applicable rights. Referenced third-party materials retain their own rights. This license statement does not assert copyrightability of AI-generated material in any jurisdiction.
+          EOF
+          (cd "$SRC" && zip -qr -X /tmp/pub/research-supplement-v1.0.zip . -x 'papers/*' 'qa/renders/*' '*.ttf' '*.otf')
+          rm -f /tmp/pub/SHA256SUMS.txt
+          (cd /tmp/pub && sha256sum README-LICENSE.txt recovery-without-epistemic-monopoly-v1.0.md recovery-without-epistemic-monopoly-v1.0.pdf recovery-without-epistemic-monopoly-zh-v1.0.md recovery-without-epistemic-monopoly-zh-v1.0.pdf citation.bib citation.csl.json citation.ris research-supplement-v1.0.zip > SHA256SUMS.txt)
+          test "$(find /tmp/pub -maxdepth 1 -type f | wc -l)" -eq 10
+          ! find /tmp/pub -type f \( -name '*.ttf' -o -name '*.otf' \) | grep .
+          grep -F '412' /tmp/pub/recovery-without-epistemic-monopoly-v1.0.md
+          grep -F '88' /tmp/pub/recovery-without-epistemic-monopoly-v1.0.md
+          grep -F 'PUBLISHED_AND_PUBLIC_READBACK_PASS' research/beyond-guaranteed-control/publication-record.json
+      - name: Publish only reserved record 22809019 and public-read every byte
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+          PUB_DIR: /tmp/pub
+          RECEIPT: /tmp/pub/publication-record.json
+        run: python3 research/recovery-epistemic/publish_zenodo.py
+      - name: Commit exact published mirrors and truthful receipt
+        run: |
+          set -euo pipefail
+          mkdir -p research/recovery-epistemic/published
+          cp /tmp/pub/README-LICENSE.txt /tmp/pub/SHA256SUMS.txt /tmp/pub/recovery-without-epistemic-monopoly-v1.0.md /tmp/pub/recovery-without-epistemic-monopoly-v1.0.pdf /tmp/pub/recovery-without-epistemic-monopoly-zh-v1.0.md /tmp/pub/recovery-without-epistemic-monopoly-zh-v1.0.pdf /tmp/pub/citation.bib /tmp/pub/citation.csl.json /tmp/pub/citation.ris /tmp/pub/research-supplement-v1.0.zip research/recovery-epistemic/published/
+          cp /tmp/pub/publication-record.json research/recovery-epistemic/publication-record.json
+          python3 - <<'PY'
+          import json,pathlib
+          r=json.loads(pathlib.Path('research/recovery-epistemic/publication-record.json').read_text())
+          assert r['status']=='PUBLISHED_AND_PUBLIC_READBACK_PASS'
+          assert r['record_id']==22809019 and r['doi']=='10.5281/zenodo.22809019' and r['file_count']==10
+          assert not r['prior_records_modified'] and not r['bitcoin_originals_modified']
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/recovery-epistemic/publication-record.json research/recovery-epistemic/published
+          if ! git diff --cached --quiet; then
+            git commit -m 'research: preserve fifth published preprint and public readback receipt'
+            git push origin HEAD:research/recovery-epistemic-v1-20260917
+          fi
+      - name: Preserve publication artifact
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: recovery-epistemic-publication-v1
+          path: /tmp/pub/
+          if-no-files-found: warn
+          retention-days: 30
