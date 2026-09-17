@@ -1,0 +1,53 @@
+name: Prepare Recovery Epistemic preprint
+on:
+  push:
+    branches: [research/recovery-epistemic-v1-20260917]
+    paths: [.github/workflows/prepare-recovery-epistemic.yml]
+permissions:
+  contents: write
+concurrency:
+  group: recovery-epistemic-zenodo-v1
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Find or reserve exactly one matching deposit; no publication
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, urllib.request, urllib.parse
+          token=os.environ.get('ZENODO_ACCESS_TOKEN')
+          if not token: raise SystemExit('Publication credential unavailable; no record changed')
+          title='Recovery without Epistemic Monopoly: Historical Evidence under Competing AI Custodians—A Bounded Model and Executable Study'
+          root=pathlib.Path('research/recovery-epistemic'); root.mkdir(parents=True,exist_ok=True)
+          def api(path,method='GET',data=None):
+              req=urllib.request.Request('https://zenodo.org/api'+path,method=method,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},data=None if data is None else json.dumps(data).encode())
+              with urllib.request.urlopen(req,timeout=60) as r: return json.load(r)
+          rows=api('/deposit/depositions?'+urllib.parse.urlencode({'q':'"Recovery without Epistemic Monopoly"','size':100}))
+          candidates=[r for r in rows if 'recovery without epistemic monopoly' in r.get('metadata',{}).get('title','').lower()]
+          if len(candidates)>1: raise SystemExit('Multiple candidate deposits; stopped without mutation')
+          if candidates:
+              rec=candidates[0]
+              if rec.get('metadata',{}).get('title')!=title or rec.get('metadata',{}).get('version')!='1.0': raise SystemExit('Existing title/version differs; stopped')
+          else:
+              md={'upload_type':'publication','publication_type':'preprint','title':title,'creators':[{'name':'Liu, Hongju','affiliation':'Independent researcher, Shenzhen, China'}],'description':'<p>TA-TR-2026-05. A bounded conceptual and executable study of historical evidence recovery under potentially untrusted AI-mediated custody. English and complete Chinese texts describe one study. Deterministic finite-state tests, not real-model attacks or production-security verification.</p><p>Substantive research, modeling, code, analysis and drafting: GPT-6 Astra Pro, under Hongju Liu’s direction. The author has authorized review followed by DOI publication. Not peer reviewed; no separate final human line-by-line verification is claimed. Final files and full disclosure will be supplied before publication.</p>','version':'1.0','publication_date':'2026-09-17','access_right':'open','license':'cc-by-4.0','language':'eng','keywords':['digital preservation','AI agents','historical evidence','adversarial custody','provenance','recovery'],'notes':'Separate fifth preprint. Draft reservation only. Do not create a new version of any earlier DOI. No prior deposit or canonical historical record is modified.'}
+              rec=api('/deposit/depositions','POST',{'metadata':md})
+          if not any(c.get('name')=='Liu, Hongju' for c in rec.get('metadata',{}).get('creators',[])): raise SystemExit('Creator mismatch')
+          result={'title':title,'version':'1.0','record_id':rec['id'],'reserved_doi':rec.get('metadata',{}).get('prereserve_doi',{}).get('doi'),'doi':rec.get('doi'),'submitted':rec.get('submitted',False),'state':rec.get('state'),'operation':'draft_reservation_only','previous_records_modified':False}
+          (root/'zenodo-reservation.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(result,ensure_ascii=False,indent=2))
+          PY
+      - name: Preserve the reservation for idempotent publication
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/recovery-epistemic/zenodo-reservation.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'research: record fifth-paper DOI reservation, not publication'
+            git push origin HEAD:research/recovery-epistemic-v1-20260917
+          fi
