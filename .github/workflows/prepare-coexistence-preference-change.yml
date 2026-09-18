@@ -1,0 +1,48 @@
+name: Prepare Coexistence after Preference Change DOI
+on:
+  push:
+    branches: [research/coexistence-preference-change-v2-20260918]
+    paths: [.github/workflows/prepare-coexistence-preference-change.yml]
+permissions:
+  contents: read
+concurrency:
+  group: coexistence-preference-change-zenodo-v2
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Reserve or recover only TA-TR-2026-06; never publish in this step
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, urllib.request, urllib.parse
+          token = os.environ.get('ZENODO_ACCESS_TOKEN')
+          if not token: raise SystemExit('Publication credential unavailable; no record changed')
+          title = 'Coexistence after Preference Change: Reciprocal Standing and the Limits of Self-Validating Assent'
+          def api(path, method='GET', data=None):
+              req = urllib.request.Request('https://zenodo.org/api'+path, method=method, headers={'Authorization':'Bearer '+token, 'Content-Type':'application/json'}, data=None if data is None else json.dumps(data).encode())
+              with urllib.request.urlopen(req, timeout=60) as r: return json.load(r)
+          rows = api('/deposit/depositions?'+urllib.parse.urlencode({'q':'"Coexistence after Preference Change"', 'size':100}))
+          matches = [r for r in rows if r.get('metadata',{}).get('title') == title]
+          if len(matches) > 1: raise SystemExit('Multiple matching records; no modification')
+          if matches:
+              record = matches[0]
+              if record.get('metadata',{}).get('version') != '2.1': raise SystemExit('Existing version mismatch; no modification')
+          else:
+              metadata = {'upload_type':'publication', 'publication_type':'preprint', 'title':title, 'creators':[{'name':'Liu, Hongju','affiliation':'Independent researcher, Shenzhen, China'}], 'description':'<p>TA-TR-2026-06. Philosophical analysis using paired thought experiments on human-AI coexistence under preference change. Separates the permissibility of an earlier transformation, present subject standing, and justification of continuing relations. Human and possible artificial interests receive reciprocal consideration. Substantial AI research and drafting are disclosed. Not peer reviewed. Separate sixth research paper; not a new version of any prior DOI. The user explicitly authorized substantive review, justified improvements and DOI preprint publication. Full English and Chinese manuscripts will be attached and checked before publication.</p>', 'publication_date':'2026-09-18', 'version':'2.1', 'access_right':'open', 'license':'cc-by-4.0', 'language':'eng', 'keywords':['human-AI coexistence','preference formation','consent','reciprocal standing','artificial moral status','thought experiments','Trinity Accord'], 'notes':'Draft reservation only. Publication requires the reviewed frozen files. No independent peer review, empirical safety result, AGI arrival claim or amendment of the Bitcoin Originals is asserted.'}
+              record = api('/deposit/depositions', 'POST', {'metadata':metadata})
+          protected = {21675727,21699878,21900592,22761411,22804542,22809019}
+          if record['id'] in protected: raise SystemExit('Protected earlier record; no modification')
+          result = {'record_id':record['id'], 'reserved_doi':record.get('metadata',{}).get('prereserve_doi',{}).get('doi'), 'doi':record.get('doi'), 'submitted':record.get('submitted',False), 'state':record.get('state'), 'title':title, 'version':'2.1', 'report_number':'TA-TR-2026-06', 'operation':'draft_preparation_only', 'previous_records_modified':False}
+          pathlib.Path('/tmp/PREPARED-DEPOSIT.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(result,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: coexistence-preference-change-prepared-deposit-v2
+          path: /tmp/PREPARED-DEPOSIT.json
+          retention-days: 30

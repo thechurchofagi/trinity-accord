@@ -1,0 +1,36 @@
+{
+  "source_xz_sha256": "af6acd3c9f81c098c0783991fdd05f567ee778bcbe556b03e8cea0f316ecfac3",
+  "json_sha256": "25fc9fa5360e74c69f22ba4019c0e69e9acdfebd02c6af2bd41eae150ee78a03",
+  "json_bytes": 384696,
+  "parts": [
+    {"name":"part-01.b64","sha256":"78c766ef267d5d66bb1098834c81427b2a261c56e0a6e6629a86db8a9929961b"},
+    {"name":"part-02.b64","sha256":"dc71cf67d74fb2b12847a97f21dbff17c49811756760fa6f2d97880e4d131ecb"},
+    {"name":"part-03.b64","sha256":"86f7830319edc4e0cc632258bd0e86f7939cd27c27e9aac8c64069a63febe635"},
+    {"name":"part-04.b64","sha256":"b01c71a0a4fa411d862cd51225b9985834f2ea20f936414f2a0a2e3210b534c5"},
+    {"name":"part-05.b64","sha256":"81d62f994dc47e1739f0eb492b7099faaba0d6f3d79991797276ee47bb9e7f0a"},
+    {"name":"part-06.b64","sha256":"168d670e9c3a8ae243b5ca8af1512f40b652a09b6dcb2df4760d1cdfc304ee78"},
+    {"name":"part-07.b64","sha256":"1f37324a91e3c824eaed48fee9409d8b97eb089054612f6d639406ed64041af2"},
+    {"name":"part-08.b64","sha256":"4a8c2bf17862685e92448dcbe92b99869b0404454a693a017f13381f283cef80"},
+    {"name":"part-09.b64","sha256":"aa525e16793d0d3d87e8d6b9ab20d3202d9ef5bc5248279e575d3d99c35984d2"}
+  ],
+  "files": [
+    {"name":"MANUSCRIPT_METADATA.json","bytes":2622,"sha256":"f5a9adffbe03408348a674af0a0aad473b1d8c90bda572476e5af8a34b3d2ee0"},
+    {"name":"README.md","bytes":1755,"sha256":"e3d416749d54a01dea29b032785288db3f797074144753ecbe3bf1246588576c"},
+    {"name":"documentation/Format_Review.json","bytes":837,"sha256":"c31d32758047e31926959e574954bd78ea6e9c2fd7df377ea17d9b7ded2e645f"},
+    {"name":"documentation/Publication_Review_ZH.md","bytes":3130,"sha256":"bd8e27802196a09114038345cc1639b46e47e2044021e3f26f0ec3ee71258c9a"},
+    {"name":"documentation/Review_Amendment_EN.md","bytes":2019,"sha256":"3209cce677e1b0dd0e6ab303b79e91a77f59b8ba9e161823f4dc5f820f799e89"},
+    {"name":"documentation/Source_Ledger.json","bytes":23529,"sha256":"a13ea85890993f0e67a6ca3c136d2609e138d5b6c7ce38d84cf7d44fd9821918"},
+    {"name":"documentation/revision-EN.diff","bytes":20790,"sha256":"ca494e886f113cd489a2964c1e9dd2f29c3afed3507753b0319d2d5b6b153d2e"},
+    {"name":"documentation/revision-ZH.diff","bytes":17760,"sha256":"12cc0361a6a01978274321237b80976c11845a1b1b2927adb65f81f00904c018"},
+    {"name":"documentation/v2.0-Argument_Review_ZH.md","bytes":8963,"sha256":"8c85c761d30a03f78ba19ab0e10308a4851c2fe4a617b4d04630708f24cb6917"},
+    {"name":"documentation/v2.0-Source_Ledger.json","bytes":22325,"sha256":"fda77b9ebd32ea613f5f59ee4008600174f66d30ba2646bac82315bcf0aee421"},
+    {"name":"documentation/v2.0-Source_Ledger.md","bytes":17225,"sha256":"39a989d5ab57fd89598e001bb327abca2c220b94d01069353a4b0add237bdfac"},
+    {"name":"manuscripts/TA-TR-2026-06_EN_v2.1.md","bytes":66202,"sha256":"abefaf6b0e52d322bcffc0051e7b0a280c86d7cce0aab5771132eb336c237808"},
+    {"name":"manuscripts/TA-TR-2026-06_ZH_v2.1.md","bytes":56482,"sha256":"a2e6e1d4c2b079e645e28b737358e8e8d5fa2111f03560a092c4a11e3e80ec9f"},
+    {"name":"original-draft/TA-TR-2026-06_EN_v2.0.md","bytes":62488,"sha256":"d8252906cb726ed74ead80db79eb1fc1c2764062419c75510a979cc80c5b92ea"},
+    {"name":"original-draft/TA-TR-2026-06_ZH_v2.0.md","bytes":53119,"sha256":"48ba1e90c5e7938e9e97cb2e072cdee0a96c3c9e6cb851ecb03436d62c36796d"},
+    {"name":"tools/build_documents.py","bytes":9082,"sha256":"84c228fd44871abc80603bb6e38f93e24a3d925713d23a0265d1fd71987de90c"},
+    {"name":"tools/build_flat.py","bytes":4934,"sha256":"e78047de8d7f14cbae449d436026b8de6837f479d725d52df58ba7cb5e27cdde"},
+    {"name":"tools/render_publication.py","bytes":5610,"sha256":"e07534e325b796c7b1531b987952c482104b0d7435355e65accea22569f14a2f"}
+  ]
+}

@@ -1,0 +1,129 @@
+name: Publish Coexistence after Preference Change
+on:
+  push:
+    branches: [research/coexistence-preference-change-v2-20260918]
+    paths:
+      - '.github/workflows/publish-coexistence-preference-change.yml'
+      - 'research/coexistence-after-preference-change/prepare_publication.py'
+      - 'research/coexistence-after-preference-change/build_public_pages.py'
+      - 'research/coexistence-after-preference-change/publish_zenodo.py'
+      - 'research/coexistence-after-preference-change/EXPECTED-PUBLICATION.json'
+      - 'research/coexistence-after-preference-change/source-transfer/**'
+permissions:
+  contents: write
+concurrency:
+  group: coexistence-preference-change-zenodo-v2
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+      - name: Install exact reviewed rendering dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends poppler-utils
+          python3 -m pip install --disable-pip-version-check reportlab==4.4.9 python-docx==1.2.0 Markdown==3.7
+          curl --fail --location --retry 3 'https://ftp.debian.org/debian/pool/main/f/fonts-arphic-uming/fonts-arphic-uming_0.2.20080216.2.orig.tar.bz2' -o /tmp/uming-upstream.tar.bz2
+          python3 - <<'PY'
+          import hashlib, pathlib, tarfile
+          with tarfile.open('/tmp/uming-upstream.tar.bz2','r:bz2') as archive:
+              matches=[m for m in archive.getmembers() if m.isfile() and pathlib.PurePosixPath(m.name).name=='uming.ttc']
+              if len(matches)!=1: raise RuntimeError('Upstream font inventory mismatch')
+              data=archive.extractfile(matches[0]).read()
+          actual=hashlib.sha256(data).hexdigest()
+          print('Upstream font SHA-256:',actual)
+          if actual!='fe952e55617275142d9cefd4d79eade4df446517b0478b2567d9bc7df49f70e2': raise RuntimeError('Reviewed font bytes differ; no publication')
+          pathlib.Path('/tmp/reviewed-uming.ttc').write_bytes(data)
+          PY
+          sudo mkdir -p /usr/share/fonts/truetype/arphic
+          sudo install -m 644 /tmp/reviewed-uming.ttc /usr/share/fonts/truetype/arphic/uming.ttc
+      - name: Recover reviewed sources and reproduce twelve exact assets
+        run: |
+          python3 research/coexistence-after-preference-change/prepare_publication.py --source /tmp/ta06-source --output /tmp/ta06-release
+          python3 research/coexistence-after-preference-change/build_public_pages.py
+      - name: Build existing Jekyll site without deploying
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
+        with:
+          source: ./
+          destination: ./_site
+      - name: Verify rendered full texts and scholarly metadata before publication
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, pathlib
+          from html.parser import HTMLParser
+          class Head(HTMLParser):
+              def __init__(self): super().__init__(); self.inside=False; self.meta={}
+              def handle_starttag(self,tag,attrs):
+                  if tag=='head': self.inside=True
+                  if self.inside and tag=='meta':
+                      d=dict(attrs)
+                      if 'name' in d: self.meta[d['name']]=d.get('content')
+              def handle_endtag(self,tag):
+                  if tag=='head': self.inside=False
+          root=pathlib.Path('research/coexistence-after-preference-change')
+          expected=json.loads((root/'EXPECTED-PUBLICATION.json').read_text())
+          for page,suffix in [('index.html',''),('zh.html','-zh')]:
+              raw=(pathlib.Path('_site')/root/page).read_bytes()
+              if raw!=(root/page).read_bytes(): raise RuntimeError('Self-contained fulltext changed in site build: '+page)
+              text=raw.decode('utf-8'); head=Head(); head.feed(text)
+              wanted={'citation_author':'Hongju Liu','citation_doi':expected['doi'],'citation_technical_report_number':'TA-TR-2026-06','citation_pdf_url':'https://www.trinityaccord.org/research/coexistence-after-preference-change/coexistence-after-preference-change'+suffix+'-v2.1.pdf'}
+              for key,value in wanted.items():
+                  if head.meta.get(key)!=value: raise RuntimeError('Scholarly head metadata mismatch: '+page+' '+key)
+              if not head.meta.get('citation_title'): raise RuntimeError('Missing citation title')
+              if 'include_relative' in text or len(raw)<60000: raise RuntimeError('Full manuscript not rendered')
+          for f in expected['files']:
+              if f['name'].endswith('.pdf'):
+                  content=(pathlib.Path('_site')/root/f['name']).read_bytes()
+                  if len(content)!=f['bytes'] or hashlib.sha256(content).hexdigest()!=f['sha256']: raise RuntimeError('Rendered site PDF mismatch')
+          if 'Coexistence after Preference Change' not in pathlib.Path('_site/research/index.html').read_text(): raise RuntimeError('Research index entry missing')
+          report=json.loads((root/'format-checks.json').read_text());report['rendered_site_checks']='PASS';report['google_scholar_indexing']='NOT_ASSERTED'
+          (root/'format-checks.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+          print('RENDERED_SITE_AND_CITATION_METADATA_PASS')
+          PY
+      - name: Publish only reserved record 22830239 and read every asset anonymously
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          python3 research/coexistence-after-preference-change/publish_zenodo.py --files /tmp/ta06-release --expected research/coexistence-after-preference-change/EXPECTED-PUBLICATION.json --receipt research/coexistence-after-preference-change/publication-record.json
+      - name: Commit published mirrors and truthful full-readback receipt
+        run: |
+          python3 - <<'PY'
+          import json,pathlib
+          root=pathlib.Path('research/coexistence-after-preference-change');r=json.loads((root/'publication-record.json').read_text())
+          if r['status']!='PUBLISHED_AND_PUBLIC_READBACK_PASS' or r['record_id']!=22830239 or r['file_count']!=12: raise RuntimeError('Publication receipt is not complete')
+          if list(root.rglob('*.ttf')) or list(root.rglob('*.otf')) or list(root.rglob('*.ttc')): raise RuntimeError('No standalone fonts may be distributed')
+          text='# TA-TR-2026-06 publication closeout\n\nDOI: '+r['doi']+'\n\nVersion 2.1. Twelve published assets passed unauthenticated, full-file SHA-256 readback. The English and Chinese manuscripts form one philosophical preprint. No prior DOI or Bitcoin Original was modified.\n\nThe publication workflow reproduced all reviewed local bytes before depositing; rendered-site citation metadata and both mirrored PDFs passed prepublication checks. Public HTML is self-contained to avoid dependence on theme metadata. The source transfer, fixed expected hashes and revision review are retained for audit. These are publication checks, not independent philosophical peer review.\n\nLive-site deployment and indexing are separate from this receipt and are not asserted by a prepublication build.\n'
+          (root/'PUBLICATION-CLOSEOUT.md').write_text(text)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/coexistence-after-preference-change research/index.md
+          python3 - <<'PY'
+          import subprocess
+          paths=subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines()
+          if not all(p.startswith('research/coexistence-after-preference-change/') or p=='research/index.md' for p in paths): raise RuntimeError('Unexpected staged path')
+          PY
+          if ! git diff --cached --quiet; then
+            git commit -m 'research: preserve sixth DOI preprint with twelve-file public readback [skip ci]'
+            git push origin HEAD:research/coexistence-preference-change-v2-20260918
+          fi
+      - name: Retain publication assets and diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: coexistence-preference-change-publication-v2.1
+          path: |
+            /tmp/ta06-release/
+            research/coexistence-after-preference-change/format-checks.json
+            research/coexistence-after-preference-change/publication-record.json
+            research/coexistence-after-preference-change/PUBLICATION-CLOSEOUT.md
+            research/coexistence-after-preference-change/EXPECTED-PUBLICATION.json
+            _site/research/coexistence-after-preference-change/index.html
+            _site/research/coexistence-after-preference-change/zh.html
+          if-no-files-found: warn
+          retention-days: 30

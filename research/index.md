@@ -11,6 +11,8 @@ reading_toc:
     title: "Reading the Trinity Accord"
   - id: "beyond-guaranteed-control"
     title: "Beyond Guaranteed Control"
+  - id: "coexistence-after-preference-change"
+    title: "Coexistence after Preference Change"
   - id: "citation-boundary"
     title: "Citation boundary"
 title: "Research and Citation"
@@ -118,6 +120,23 @@ A position paper and conceptual analysis asking what a coexistence proposal can 
 - [Source/revision supplement](/research/beyond-guaranteed-control/research-supplement-v1.0.zip) · [Publication note](/research/beyond-guaranteed-control/PUBLICATION-NOTE.md)
 
 The fourth paper has its own DOI and citation files. Its publication does not replace an earlier report, amend the three Bitcoin Originals, or create an exclusive interpretation. The paper discloses substantial AI participation and the author's relationship to the motivating project. Authorization to publish is not represented as a separate final human line-by-line review.
+
+## Coexistence after Preference Change
+{: #coexistence-after-preference-change }
+
+### Coexistence after Preference Change: Reciprocal Standing and the Limits of Self-Validating Assent
+
+TA-TR-2026-06 · Version 2.1 · 18 September 2026. Hongju Liu, with substantial research, reasoning, drafting and translation by GPT-6 Astra Pro under human direction.
+
+A philosophical preprint using paired thought experiments to distinguish the permissibility of a prior transformation, the standing and choices of the resulting subject, and justification of an ongoing relation. It considers human and possible artificial interests reciprocally; it does not assert present AI consciousness, a superintelligence deadline or demonstrated safety efficacy.
+
+**Status:** Published open-access preprint; not peer reviewed; non-amending. Twelve deposited assets passed unauthenticated full-file SHA-256 readback. The English manuscript and complete Chinese translation are one study. Version 2.1 is its first public edition, not a replacement version of any earlier paper DOI.
+
+- [DOI: 10.5281/zenodo.22830239](https://doi.org/10.5281/zenodo.22830239) · [Zenodo record](https://zenodo.org/records/22830239)
+- [English full text](/research/coexistence-after-preference-change/) · [中文全文](/research/coexistence-after-preference-change/zh.html)
+- [English PDF](/research/coexistence-after-preference-change/coexistence-after-preference-change-v2.1.pdf) · [中文 PDF](/research/coexistence-after-preference-change/coexistence-after-preference-change-zh-v2.1.pdf)
+- [Publication receipt](/research/coexistence-after-preference-change/publication-record.json) · [Substantive review](/research/coexistence-after-preference-change/PUBLICATION-REVIEW-ZH.md)
+- [Sources and revision supplement](/research/coexistence-after-preference-change/research-supplement-v2.1.zip) · [BibTeX](/research/coexistence-after-preference-change/citation.bib) · [RIS](/research/coexistence-after-preference-change/citation.ris)
 
 ## Citation boundary
 {: #citation-boundary }
