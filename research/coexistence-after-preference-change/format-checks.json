@@ -1,0 +1,77 @@
+{
+  "status": "REVIEWED_BYTES_REPRODUCED",
+  "record_id": 22830239,
+  "doi": "10.5281/zenodo.22830239",
+  "source_json_sha256": "25fc9fa5360e74c69f22ba4019c0e69e9acdfebd02c6af2bd41eae150ee78a03",
+  "source_files": 18,
+  "file_count": 12,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1770,
+      "sha256": "31bb7c7881d6354a09f4c7cf15cfa1453e1c1cd3b3d2f0fae8cce89a6af7b729"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1097,
+      "sha256": "c96e0fa59ec16a49e728ff56a449cc74d816b0e6eedd0ae67f92aad08ad81b9b"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 471,
+      "sha256": "83f36b5e89a6ba60dcc88d6d72f8c972a8c2ca0f3036ed262acb45ab15aaaee6"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 661,
+      "sha256": "f92a43c0e50a1a5a6185e2637914e4babb2ad1b7ea2ec3ce3d1e0f7c72b25081"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 346,
+      "sha256": "374a99b9288ff0aa6f1bd27bfe3ac1f04e1ea2b8093a2e645b2034d6b34bd309"
+    },
+    {
+      "name": "coexistence-after-preference-change-v2.1.docx",
+      "bytes": 928632,
+      "sha256": "548b33e64947591c261222204d54b46a39043d76f52e37650e6cc41cfe5988d4"
+    },
+    {
+      "name": "coexistence-after-preference-change-v2.1.md",
+      "bytes": 66202,
+      "sha256": "abefaf6b0e52d322bcffc0051e7b0a280c86d7cce0aab5771132eb336c237808"
+    },
+    {
+      "name": "coexistence-after-preference-change-v2.1.pdf",
+      "bytes": 77551,
+      "sha256": "1cd8acce7f2c69fb9288751b06a858b937247ae2d6aa940792a756c5043b8029"
+    },
+    {
+      "name": "coexistence-after-preference-change-zh-v2.1.docx",
+      "bytes": 918109,
+      "sha256": "6bc6118d41c381b90bd8566b785695145ecbaeef9b11cf1b8c2f4fe904a18d77"
+    },
+    {
+      "name": "coexistence-after-preference-change-zh-v2.1.md",
+      "bytes": 56482,
+      "sha256": "a2e6e1d4c2b079e645e28b737358e8e8d5fa2111f03560a092c4a11e3e80ec9f"
+    },
+    {
+      "name": "coexistence-after-preference-change-zh-v2.1.pdf",
+      "bytes": 358276,
+      "sha256": "10c113087e22947c7c6eff07037e5915f26a024c8dc8924df0f69402c6d58486"
+    },
+    {
+      "name": "research-supplement-v2.1.zip",
+      "bytes": 381388,
+      "sha256": "a73ec3d80976f434606f187dd9be6c9466240e9abb0cd6fe9e91098c9c5d4ac2"
+    }
+  ],
+  "pdf_pages": {
+    "coexistence-after-preference-change-v2.1.pdf": 16,
+    "coexistence-after-preference-change-zh-v2.1.pdf": 14
+  },
+  "claim": "Byte reproduction and format checks, not independent philosophical validation.",
+  "rendered_site_checks": "PASS",
+  "google_scholar_indexing": "NOT_ASSERTED"
+}

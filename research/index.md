@@ -13,6 +13,8 @@ reading_toc:
     title: "Beyond Guaranteed Control"
   - id: "recovery-without-epistemic-monopoly"
     title: "Recovery without Epistemic Monopoly"
+  - id: "coexistence-after-preference-change"
+    title: "Coexistence after Preference Change"
   - id: "citation-boundary"
     title: "Citation boundary"
 title: "Research and Citation"
@@ -24,6 +26,8 @@ permalink: /research/
 {: #research-and-citation }
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
+
+The series currently contains **six independent research papers (TA-TR-2026-01 through TA-TR-2026-06)**. English and Chinese versions of the same study count as one paper.
 
 ## Research positioning
 {: #research-positioning }
@@ -135,14 +139,32 @@ A bounded conceptual and executable study of historical-evidence recovery when c
 
 **Status:** Published open-access preprint; not peer reviewed; non-amending. Ten deposited files passed unauthenticated, exact-byte SHA-256 public readback. The experiments are synthetic finite-state tests, not real autonomous-agent attacks, production penetration testing, or proof of protection against superintelligence. English and complete Chinese texts are one study, not independent corroborations.
 
+- [Research overview](/research/recovery-epistemic/)
 - [Zenodo record and all ten published files](https://zenodo.org/records/22809019)
 - [English PDF](/research/recovery-epistemic/published/recovery-without-epistemic-monopoly-v1.0.pdf) · [中文 PDF](/research/recovery-epistemic/published/recovery-without-epistemic-monopoly-zh-v1.0.pdf)
-- [English Markdown](/research/recovery-epistemic/published/recovery-without-epistemic-monopoly-v1.0.md) · [中文 Markdown](/research/recovery-epistemic/published/recovery-without-epistemic-monopoly-zh-v1.0.md)
+- [English Markdown](https://zenodo.org/records/22809019/files/recovery-without-epistemic-monopoly-v1.0.md) · [中文 Markdown](https://zenodo.org/records/22809019/files/recovery-without-epistemic-monopoly-zh-v1.0.md)
 - [Publication receipt and exact file hashes](/research/recovery-epistemic/publication-record.json)
 - [BibTeX](/research/recovery-epistemic/published/citation.bib) · [RIS](/research/recovery-epistemic/published/citation.ris) · [CSL-JSON](/research/recovery-epistemic/published/citation.csl.json)
 - [Research supplement](/research/recovery-epistemic/published/research-supplement-v1.0.zip)
 
 The fifth paper has its own DOI. Its finite tests preserve the negative result that the scoped reporting layer does not recover more bytes than a strong pinned-reference baseline; its additional contribution is explicit scope, gap, current-state, and authorization reporting under the tested conditions. Publication does not amend the three Bitcoin Originals or certify historical claims outside the stated evidence.
+
+## Coexistence after Preference Change
+{: #coexistence-after-preference-change }
+
+### Coexistence after Preference Change: Reciprocal Standing and the Limits of Self-Validating Assent
+
+TA-TR-2026-06 · Version 2.1 · 18 September 2026. Hongju Liu, with substantial research, reasoning, drafting and translation by GPT-6 Astra Pro under human direction.
+
+A philosophical preprint using paired thought experiments to distinguish the permissibility of a prior transformation, the standing and choices of the resulting subject, and justification of an ongoing relation. It considers human and possible artificial interests reciprocally; it does not assert present AI consciousness, a superintelligence deadline or demonstrated safety efficacy.
+
+**Status:** Published open-access preprint; not peer reviewed; non-amending. Twelve deposited assets passed unauthenticated full-file SHA-256 readback. The English manuscript and complete Chinese translation are one study. Version 2.1 is its first public edition, not a replacement version of any earlier paper DOI.
+
+- [DOI: 10.5281/zenodo.22830239](https://doi.org/10.5281/zenodo.22830239) · [Zenodo record](https://zenodo.org/records/22830239)
+- [English full text](/research/coexistence-after-preference-change/) · [中文全文](/research/coexistence-after-preference-change/zh.html)
+- [English PDF](/research/coexistence-after-preference-change/coexistence-after-preference-change-v2.1.pdf) · [中文 PDF](/research/coexistence-after-preference-change/coexistence-after-preference-change-zh-v2.1.pdf)
+- [Publication receipt](/research/coexistence-after-preference-change/publication-record.json) · [Substantive review](/research/coexistence-after-preference-change/PUBLICATION-REVIEW-ZH.md)
+- [Sources and revision supplement](/research/coexistence-after-preference-change/research-supplement-v2.1.zip) · [BibTeX](/research/coexistence-after-preference-change/citation.bib) · [RIS](/research/coexistence-after-preference-change/citation.ris)
 
 ## Citation boundary
 {: #citation-boundary }
