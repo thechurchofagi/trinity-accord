@@ -22,14 +22,27 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: ${{ github.sha }}
-      - name: Install reviewed deterministic rendering dependencies
+      - name: Install exact reviewed rendering dependencies, not rebuilt distro font
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends fonts-arphic-uming poppler-utils
+          sudo apt-get install -y --no-install-recommends poppler-utils
           python3 -m pip install --disable-pip-version-check reportlab==4.4.9 python-docx==1.2.0
-          echo 'fe952e55617275142d9cefd4d79eade4df446517b0478b2567d9bc7df49f70e2  /usr/share/fonts/truetype/arphic/uming.ttc' | sha256sum --check
-      - name: Record existing toolchain provenance
-        run: python3 scripts/toolchain_provenance.py
+          curl --fail --location --retry 3 'https://ftp.debian.org/debian/pool/main/f/fonts-arphic-uming/fonts-arphic-uming_0.2.20080216.2.orig.tar.bz2' -o /tmp/uming-upstream.tar.bz2
+          python3 - <<'PY'
+          import hashlib, pathlib, tarfile
+          with tarfile.open('/tmp/uming-upstream.tar.bz2','r:bz2') as archive:
+              matches=[m for m in archive.getmembers() if m.isfile() and pathlib.PurePosixPath(m.name).name=='uming.ttc']
+              if len(matches)!=1: raise RuntimeError('Upstream font inventory mismatch')
+              data=archive.extractfile(matches[0]).read()
+          actual=hashlib.sha256(data).hexdigest()
+          print('Upstream font SHA-256:',actual)
+          if actual!='fe952e55617275142d9cefd4d79eade4df446517b0478b2567d9bc7df49f70e2': raise RuntimeError('Reviewed font bytes differ; no publication')
+          pathlib.Path('/tmp/reviewed-uming.ttc').write_bytes(data)
+          PY
+          sudo mkdir -p /usr/share/fonts/truetype/arphic
+          sudo install -m 644 /tmp/reviewed-uming.ttc /usr/share/fonts/truetype/arphic/uming.ttc
+          python3 --version
+          python3 -m pip show reportlab python-docx lxml
       - name: Recover reviewed sources and reproduce twelve exact assets
         run: |
           python3 research/coexistence-after-preference-change/prepare_publication.py --source /tmp/ta06-source --output /tmp/ta06-release
