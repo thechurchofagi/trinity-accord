@@ -1,0 +1,108 @@
+{
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "doi": "10.5281/zenodo.21699878",
+      "name": "trinity-accord-design-and-limits-v1.1.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-01/trinity-accord-design-and-limits-v1.1.pdf.ots",
+      "proof_sha256": "6153d7686402ef424754c7d635aca69c6238b958c862d4551d46d324bba19bec",
+      "report": "TA-TR-2026-01",
+      "sha256": "b391776db76f533799dc582f39af54d2e885fe2ed1982cfe3024a1400a403e9c",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "doi": "10.5281/zenodo.21900592",
+      "name": "TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-02/TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf.ots",
+      "proof_sha256": "7635a5d0102e2cf418ec5fa996fabca715c2c8df6103aa30861f164b6b19a2ce",
+      "report": "TA-TR-2026-02",
+      "sha256": "8003ca9f3fcdde3c17037bd5fcfb17e1e4a309bd5172afe3a195a6ae6c77bdee",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "doi": "10.5281/zenodo.22761411",
+      "name": "reading-the-trinity-accord-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-03/reading-the-trinity-accord-v1.0.pdf.ots",
+      "proof_sha256": "673766b0dfdd2635455370e022a7bcf78b7344491d5d374a16b7fa587296f53f",
+      "report": "TA-TR-2026-03",
+      "sha256": "0fe15ad75cdc2501310909adfc326366054a8881da56ff37f2206eb4c2e5940b",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "doi": "10.5281/zenodo.22804542",
+      "name": "beyond-guaranteed-control-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-04/beyond-guaranteed-control-v1.0.pdf.ots",
+      "proof_sha256": "e95e673e76433d788063ec1bf61290b0d19bc4f074b38e19a24d7b5baacd78bc",
+      "report": "TA-TR-2026-04",
+      "sha256": "fe2c2f5fc8d437a9d5b634e18c293308cd83b6125219079550b280685e100697",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "doi": "10.5281/zenodo.22804542",
+      "name": "beyond-guaranteed-control-zh-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-04/beyond-guaranteed-control-zh-v1.0.pdf.ots",
+      "proof_sha256": "7d20ed078e303e04edde05ce3f8ff70b0aa8c067f606b10e71efb36b70fe458a",
+      "report": "TA-TR-2026-04",
+      "sha256": "d8225bda09b629b52e0531989db17f93c2251800fd8f087a9fd472b02a4569b3",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "doi": "10.5281/zenodo.22809019",
+      "name": "recovery-without-epistemic-monopoly-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-05/recovery-without-epistemic-monopoly-v1.0.pdf.ots",
+      "proof_sha256": "89cf410b93f8d48daa73f536d6563cb798ba111987892eeaad3df2f9e2399f4f",
+      "report": "TA-TR-2026-05",
+      "sha256": "0b392a8dea067bf980a879a9b707952a5ad1549b248df051531ca900a40ff549",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "doi": "10.5281/zenodo.22809019",
+      "name": "recovery-without-epistemic-monopoly-zh-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-05/recovery-without-epistemic-monopoly-zh-v1.0.pdf.ots",
+      "proof_sha256": "9d086a63ef3e2ef655f534c7bfb9f6b604ccfdbb435a5cded72f864dd6342173",
+      "report": "TA-TR-2026-05",
+      "sha256": "b4fa53a6dca39f6b3be6adab4e0ea1c8d21bfadef54a35dc40decc725ce3c93f",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "doi": "10.5281/zenodo.22830239",
+      "name": "coexistence-after-preference-change-v2.1.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-06/coexistence-after-preference-change-v2.1.pdf.ots",
+      "proof_sha256": "802c5a984213a5f363ed899801f530277f3c79ffdc4f597240bf175bf4d7d97a",
+      "report": "TA-TR-2026-06",
+      "sha256": "1cd8acce7f2c69fb9288751b06a858b937247ae2d6aa940792a756c5043b8029",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "doi": "10.5281/zenodo.22830239",
+      "name": "coexistence-after-preference-change-zh-v2.1.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-06/coexistence-after-preference-change-zh-v2.1.pdf.ots",
+      "proof_sha256": "f3e39801dab7d18cea7469d5ad86fff21ed27cdcc136cc1abf804bf39b41c278",
+      "report": "TA-TR-2026-06",
+      "sha256": "10c113087e22947c7c6eff07037e5915f26a024c8dc8924df0f69402c6d58486",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 6,
+  "pdf_count": 9,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}

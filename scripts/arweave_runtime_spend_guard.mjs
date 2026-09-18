@@ -35,6 +35,7 @@ function argValue(name) {
 function paidKind() {
   const script = path.basename(process.argv[1] || "");
   if (script === "arweave_upload_payload.mjs") {
+    if (process.env.ARWEAVE_ARCHIVE_TYPE === "research-paper-ots-archive") return "research_paper_ots_archive";
     return "record_chain_arweave_archive";
   }
   if (script === "arweave_upload_homepage_snapshot.mjs") {
