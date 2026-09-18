@@ -1,0 +1,29 @@
+[
+  {
+    "id": "TA-TR-2026-06",
+    "type": "report",
+    "title": "Coexistence after Preference Change: Reciprocal Standing and the Limits of Self-Validating Assent",
+    "author": [
+      {
+        "family": "Liu",
+        "given": "Hongju"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2026,
+          9,
+          18
+        ]
+      ]
+    },
+    "publisher": "Independent research",
+    "number": "TA-TR-2026-06",
+    "version": "2.1",
+    "genre": "Preprint",
+    "DOI": "10.5281/zenodo.22830239",
+    "URL": "https://doi.org/10.5281/zenodo.22830239",
+    "note": "Not peer reviewed; substantial AI assistance disclosed."
+  }
+]
