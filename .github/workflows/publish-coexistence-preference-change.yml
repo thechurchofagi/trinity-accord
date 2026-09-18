@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/publish-coexistence-preference-change.yml'
       - 'research/coexistence-after-preference-change/prepare_publication.py'
+      - 'research/coexistence-after-preference-change/build_public_pages.py'
       - 'research/coexistence-after-preference-change/publish_zenodo.py'
       - 'research/coexistence-after-preference-change/EXPECTED-PUBLICATION.json'
       - 'research/coexistence-after-preference-change/source-transfer/**'
@@ -22,11 +23,11 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: ${{ github.sha }}
-      - name: Install exact reviewed rendering dependencies, not rebuilt distro font
+      - name: Install exact reviewed rendering dependencies
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends poppler-utils
-          python3 -m pip install --disable-pip-version-check reportlab==4.4.9 python-docx==1.2.0
+          python3 -m pip install --disable-pip-version-check reportlab==4.4.9 python-docx==1.2.0 Markdown==3.7
           curl --fail --location --retry 3 'https://ftp.debian.org/debian/pool/main/f/fonts-arphic-uming/fonts-arphic-uming_0.2.20080216.2.orig.tar.bz2' -o /tmp/uming-upstream.tar.bz2
           python3 - <<'PY'
           import hashlib, pathlib, tarfile
@@ -41,11 +42,10 @@ jobs:
           PY
           sudo mkdir -p /usr/share/fonts/truetype/arphic
           sudo install -m 644 /tmp/reviewed-uming.ttc /usr/share/fonts/truetype/arphic/uming.ttc
-          python3 --version
-          python3 -m pip show reportlab python-docx lxml
       - name: Recover reviewed sources and reproduce twelve exact assets
         run: |
           python3 research/coexistence-after-preference-change/prepare_publication.py --source /tmp/ta06-source --output /tmp/ta06-release
+          python3 research/coexistence-after-preference-change/build_public_pages.py
       - name: Build existing Jekyll site without deploying
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
         with:
@@ -54,15 +54,28 @@ jobs:
       - name: Verify rendered full texts and scholarly metadata before publication
         run: |
           python3 - <<'PY'
-          import hashlib, html, json, pathlib
+          import hashlib, json, pathlib
+          from html.parser import HTMLParser
+          class Head(HTMLParser):
+              def __init__(self): super().__init__(); self.inside=False; self.meta={}
+              def handle_starttag(self,tag,attrs):
+                  if tag=='head': self.inside=True
+                  if self.inside and tag=='meta':
+                      d=dict(attrs)
+                      if 'name' in d: self.meta[d['name']]=d.get('content')
+              def handle_endtag(self,tag):
+                  if tag=='head': self.inside=False
           root=pathlib.Path('research/coexistence-after-preference-change')
           expected=json.loads((root/'EXPECTED-PUBLICATION.json').read_text())
-          for page in ('index.html','zh.html'):
-              text=(pathlib.Path('_site')/root/page).read_text()
-              for marker in ('citation_title','citation_author','citation_doi','citation_pdf_url',expected['doi'],'TA-TR-2026-06'):
-                  if marker not in text: raise RuntimeError('Missing rendered marker: '+page+' '+marker)
-              if 'include_relative' in text: raise RuntimeError('Unrendered full-text include')
-              if len(text)<60000: raise RuntimeError('Full manuscript not rendered')
+          for page,suffix in [('index.html',''),('zh.html','-zh')]:
+              raw=(pathlib.Path('_site')/root/page).read_bytes()
+              if raw!=(root/page).read_bytes(): raise RuntimeError('Self-contained fulltext changed in site build: '+page)
+              text=raw.decode('utf-8'); head=Head(); head.feed(text)
+              wanted={'citation_author':'Hongju Liu','citation_doi':expected['doi'],'citation_technical_report_number':'TA-TR-2026-06','citation_pdf_url':'https://www.trinityaccord.org/research/coexistence-after-preference-change/coexistence-after-preference-change'+suffix+'-v2.1.pdf'}
+              for key,value in wanted.items():
+                  if head.meta.get(key)!=value: raise RuntimeError('Scholarly head metadata mismatch: '+page+' '+key)
+              if not head.meta.get('citation_title'): raise RuntimeError('Missing citation title')
+              if 'include_relative' in text or len(raw)<60000: raise RuntimeError('Full manuscript not rendered')
           for f in expected['files']:
               if f['name'].endswith('.pdf'):
                   content=(pathlib.Path('_site')/root/f['name']).read_bytes()
@@ -84,7 +97,7 @@ jobs:
           root=pathlib.Path('research/coexistence-after-preference-change');r=json.loads((root/'publication-record.json').read_text())
           if r['status']!='PUBLISHED_AND_PUBLIC_READBACK_PASS' or r['record_id']!=22830239 or r['file_count']!=12: raise RuntimeError('Publication receipt is not complete')
           if list(root.rglob('*.ttf')) or list(root.rglob('*.otf')) or list(root.rglob('*.ttc')): raise RuntimeError('No standalone fonts may be distributed')
-          text='# TA-TR-2026-06 publication closeout\n\nDOI: '+r['doi']+'\n\nVersion 2.1. Twelve published assets passed unauthenticated, full-file SHA-256 readback. The English and Chinese manuscripts form one philosophical preprint. No prior DOI or Bitcoin Original was modified.\n\nThe publication workflow reproduced all reviewed local bytes before depositing; rendered-site citation metadata and both mirrored PDFs passed prepublication checks. The source transfer, fixed expected hashes and revision review are retained for audit. This is reproducibility and publication verification, not independent philosophical peer review.\n\nLive-site deployment and indexing are separate from this receipt and are not asserted by a prepublication build.\n'
+          text='# TA-TR-2026-06 publication closeout\n\nDOI: '+r['doi']+'\n\nVersion 2.1. Twelve published assets passed unauthenticated, full-file SHA-256 readback. The English and Chinese manuscripts form one philosophical preprint. No prior DOI or Bitcoin Original was modified.\n\nThe publication workflow reproduced all reviewed local bytes before depositing; rendered-site citation metadata and both mirrored PDFs passed prepublication checks. Public HTML is self-contained to avoid dependence on theme metadata. The source transfer, fixed expected hashes and revision review are retained for audit. These are publication checks, not independent philosophical peer review.\n\nLive-site deployment and indexing are separate from this receipt and are not asserted by a prepublication build.\n'
           (root/'PUBLICATION-CLOSEOUT.md').write_text(text)
           PY
           git config user.name 'github-actions[bot]'
@@ -110,5 +123,7 @@ jobs:
             research/coexistence-after-preference-change/publication-record.json
             research/coexistence-after-preference-change/PUBLICATION-CLOSEOUT.md
             research/coexistence-after-preference-change/EXPECTED-PUBLICATION.json
+            _site/research/coexistence-after-preference-change/index.html
+            _site/research/coexistence-after-preference-change/zh.html
           if-no-files-found: warn
           retention-days: 30
