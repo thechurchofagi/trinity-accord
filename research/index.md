@@ -11,6 +11,8 @@ reading_toc:
     title: "Reading the Trinity Accord"
   - id: "beyond-guaranteed-control"
     title: "Beyond Guaranteed Control"
+  - id: "recovery-without-epistemic-monopoly"
+    title: "Recovery without Epistemic Monopoly"
   - id: "coexistence-after-preference-change"
     title: "Coexistence after Preference Change"
   - id: "citation-boundary"
@@ -24,6 +26,8 @@ permalink: /research/
 {: #research-and-citation }
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
+
+The series currently contains **six independent research papers (TA-TR-2026-01 through TA-TR-2026-06)**. English and Chinese versions of the same study count as one paper.
 
 ## Research positioning
 {: #research-positioning }
@@ -120,6 +124,30 @@ A position paper and conceptual analysis asking what a coexistence proposal can 
 - [Source/revision supplement](/research/beyond-guaranteed-control/research-supplement-v1.0.zip) · [Publication note](/research/beyond-guaranteed-control/PUBLICATION-NOTE.md)
 
 The fourth paper has its own DOI and citation files. Its publication does not replace an earlier report, amend the three Bitcoin Originals, or create an exclusive interpretation. The paper discloses substantial AI participation and the author's relationship to the motivating project. Authorization to publish is not represented as a separate final human line-by-line review.
+
+## Recovery without Epistemic Monopoly
+{: #recovery-without-epistemic-monopoly }
+
+### Recovery without Epistemic Monopoly: Historical Evidence under Competing AI Custodians—A Bounded Model and Executable Study
+
+TA-TR-2026-05 · Version 1.0 · 17 September 2026<br>
+Human author of record: Hongju Liu<br>
+Substantive research, modeling, implementation, analysis and drafting: GPT-6 Astra Pro, under human direction<br>
+Published DOI: [10.5281/zenodo.22809019](https://doi.org/10.5281/zenodo.22809019)
+
+A bounded conceptual and executable study of historical-evidence recovery when custodians, discovery paths, or interpreters may be untrusted. It separates content survival, provenance, current-state claims, and authorization, then tests deterministic finite-state recovery policies and shared-dependency topologies. Trinity Accord materials motivate the case but are not treated as proof of the framework.
+
+**Status:** Published open-access preprint; not peer reviewed; non-amending. Ten deposited files passed unauthenticated, exact-byte SHA-256 public readback. The experiments are synthetic finite-state tests, not real autonomous-agent attacks, production penetration testing, or proof of protection against superintelligence. English and complete Chinese texts are one study, not independent corroborations.
+
+- [Research overview](/research/recovery-epistemic/)
+- [Zenodo record and all ten published files](https://zenodo.org/records/22809019)
+- [English PDF](/research/recovery-epistemic/published/recovery-without-epistemic-monopoly-v1.0.pdf) · [中文 PDF](/research/recovery-epistemic/published/recovery-without-epistemic-monopoly-zh-v1.0.pdf)
+- [English Markdown](https://zenodo.org/records/22809019/files/recovery-without-epistemic-monopoly-v1.0.md) · [中文 Markdown](https://zenodo.org/records/22809019/files/recovery-without-epistemic-monopoly-zh-v1.0.md)
+- [Publication receipt and exact file hashes](/research/recovery-epistemic/publication-record.json)
+- [BibTeX](/research/recovery-epistemic/published/citation.bib) · [RIS](/research/recovery-epistemic/published/citation.ris) · [CSL-JSON](/research/recovery-epistemic/published/citation.csl.json)
+- [Research supplement](/research/recovery-epistemic/published/research-supplement-v1.0.zip)
+
+The fifth paper has its own DOI. Its finite tests preserve the negative result that the scoped reporting layer does not recover more bytes than a strong pinned-reference baseline; its additional contribution is explicit scope, gap, current-state, and authorization reporting under the tested conditions. Publication does not amend the three Bitcoin Originals or certify historical claims outside the stated evidence.
 
 ## Coexistence after Preference Change
 {: #coexistence-after-preference-change }

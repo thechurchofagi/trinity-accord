@@ -1,0 +1,29 @@
+name: Publish Recovery Epistemic preprint (retired)
+# Version 1.0 is published at DOI 10.5281/zenodo.22809019.
+# Retained as a manual, read-only check of its receipt and deposited bytes.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-publication-receipt:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: Verify completed publication without changing the deposit
+        run: |
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path("research/recovery-epistemic")
+          receipt = json.loads((root / "publication-record.json").read_text())
+          assert receipt["status"] == "PUBLISHED_AND_PUBLIC_READBACK_PASS"
+          assert receipt["doi"] == "10.5281/zenodo.22809019"
+          assert receipt["file_count"] == len(receipt["files"]) == 10
+          for item in receipt["files"]:
+              data = (root / "published" / item["name"]).read_bytes()
+              assert len(data) == item["bytes"], item["name"]
+              assert hashlib.sha256(data).hexdigest() == item["sha256"], item["name"]
+          print("TA-TR-2026-05: all ten deposited files match the publication receipt.")
+          PY

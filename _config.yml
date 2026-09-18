@@ -16,6 +16,9 @@ include:
 exclude:
   # deploy-pages.yml publishes only museum/dist, intact, at /museum/.
   - museum/
+  # Deposited manuscript source files are downloaded from the immutable Zenodo record.
+  - research/recovery-epistemic/published/recovery-without-epistemic-monopoly-v1.0.md
+  - research/recovery-epistemic/published/recovery-without-epistemic-monopoly-zh-v1.0.md
   - audit/
   - archive/
   - node_modules/
