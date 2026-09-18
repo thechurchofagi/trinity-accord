@@ -24,10 +24,29 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     steps:
+      - name: Authorize write workflow actor
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          ACTOR: ${{ github.actor }}
+          GUARDIAN_REGISTRY_WORKFLOW_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS }}
+        run: |
+          set -euo pipefail
+          ALLOWLIST="${GUARDIAN_REGISTRY_WORKFLOW_ACTORS:-thechurchofagi}"
+          if [ "$ACTOR" = 'github-actions[bot]' ]; then exit 0; fi
+          case ",$ALLOWLIST," in
+            *",$ACTOR,"*) echo "Authorized actor: $ACTOR" ;;
+            *) echo "Unauthorized actor: $ACTOR" >&2; exit 1 ;;
+          esac
+
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           ref: main
           fetch-depth: 0
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
 
       - name: Check whether the fixed batch is already complete
         id: batch
@@ -118,7 +137,7 @@ jobs:
           git commit -m 'Preserve research paper OTS lifecycle receipts'
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then exit 0; fi
-            git fetch origin main
+            git fetch origin main --prune
             git rebase origin/main || { git rebase --abort; exit 1; }
           done
           echo 'Durable receipts remain in the run artifact; recover them before retrying a paid upload.' >&2
