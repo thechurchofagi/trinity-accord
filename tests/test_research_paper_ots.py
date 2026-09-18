@@ -11,6 +11,7 @@ spec.loader.exec_module(module)
 
 
 class PaperProofTests(unittest.TestCase):
+    @unittest.skipUnless(importlib.util.find_spec('opentimestamps'), 'OTS is installed in the dedicated paper workflow')
     def test_detached_proof_must_match_published_bytes(self):
         from opentimestamps.core.op import OpSHA256
         from opentimestamps.core.timestamp import DetachedTimestampFile, Timestamp

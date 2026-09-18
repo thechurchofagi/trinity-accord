@@ -178,12 +178,12 @@ def upload():
     if receipt.exists():
         result = read(receipt)
         if result.get('tx_id'):
-            subprocess.run([sys.executable, 'scripts/update_arweave_wallet_ledger.py', 'append-upload',
-                            '--tx-id', result['tx_id'], '--kind', 'research_paper_ots_archive',
+            subprocess.run([sys.executable, 'scripts/record_arweave_upload_result.py',
+                            '--upload-result-json', str(receipt), '--kind', 'research_paper_ots_archive',
                             '--source-path', str(receipt.relative_to(ROOT)),
-                            '--winston', str(result['upload_cost_winston']),
-                            '--paid-at', result['uploaded_at'], '--note', 'Six published papers; nine verified PDF OTS proofs'],
+                            '--note', 'Six published papers; nine verified PDF OTS proofs'],
                            cwd=ROOT, check=True)
+            subprocess.run([sys.executable, 'scripts/generate_arweave_wallet_status.py'], cwd=ROOT, check=True)
         if (result.get('result') == 'uploaded' and result.get('hash_match') is True
                 and result.get('readback_sha256') == digest(bundle_path.read_bytes())
                 and result.get('payload_sha256') == digest(bundle_path.read_bytes())):
