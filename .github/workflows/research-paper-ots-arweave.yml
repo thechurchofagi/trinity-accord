@@ -64,7 +64,12 @@ jobs:
             --trace "$RUNNER_TEMP/paper-ots-proxy.jsonl" --timeout 20 \
             > "$RUNNER_TEMP/paper-ots-proxy.log" 2>&1 &
           proxy_pid=$!
-          trap 'kill "$proxy_pid" 2>/dev/null || true' EXIT
+          cleanup_proxy() {
+            if kill -0 "$proxy_pid" 2>/dev/null; then
+              kill "$proxy_pid"
+            fi
+          }
+          trap cleanup_proxy EXIT
           python3 scripts/research_paper_ots.py lifecycle
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
