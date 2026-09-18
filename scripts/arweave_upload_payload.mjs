@@ -78,6 +78,12 @@ async function safeBalance(arweave, address) {
 
 const payloadPath = arg("--payload");
 const outPath = arg("--out");
+const archiveType = process.env.ARWEAVE_ARCHIVE_TYPE || "record-chain-batch-archive";
+if (!["record-chain-batch-archive", "research-paper-ots-archive"].includes(archiveType)) {
+  throw new Error("Unsupported ARWEAVE_ARCHIVE_TYPE");
+}
+const scopeTag = archiveType === "research-paper-ots-archive" ? "Research-Series" : "Record-Chain";
+const scopeValue = archiveType === "research-paper-ots-archive" ? "TA-TR-2026" : "trinity-accord-public-reception-ledger";
 const payload = fs.readFileSync(payloadPath);
 const payloadSha256 = sha256Hex(payload);
 
@@ -153,8 +159,8 @@ function uploadResult(result, readbackSha256, hashMatch, retryable) {
     tags: {
       "Content-Type": "application/json",
       "App-Name": "Trinity-Accord",
-      "Record-Chain": "trinity-accord-public-reception-ledger",
-      "Archive-Type": "record-chain-batch-archive",
+      [scopeTag]: scopeValue,
+      "Archive-Type": archiveType,
       "Data-SHA256": payloadSha256,
       Boundary: "mirror-not-authority",
     },
@@ -212,8 +218,8 @@ if (existing && (existing.txid || existing.tx_id)) {
   const tx = await arweave.createTransaction({ data: payload }, jwk);
   tx.addTag("Content-Type", "application/json");
   tx.addTag("App-Name", "Trinity-Accord");
-  tx.addTag("Record-Chain", "trinity-accord-public-reception-ledger");
-  tx.addTag("Archive-Type", "record-chain-batch-archive");
+  tx.addTag(scopeTag, scopeValue);
+  tx.addTag("Archive-Type", archiveType);
   tx.addTag("Data-SHA256", payloadSha256);
   tx.addTag("Boundary", "mirror-not-authority");
 

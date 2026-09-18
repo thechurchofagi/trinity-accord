@@ -1,0 +1,144 @@
+name: Research Paper OTS and Arweave
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/research-paper-ots-arweave.yml
+      - scripts/research_paper_ots.py
+      - research/paper-timestamps/2026-09-18/targets.json
+  schedule:
+    - cron: '37 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: main-write-lock
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  preserve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - name: Authorize write workflow actor
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          ACTOR: ${{ github.actor }}
+          GUARDIAN_REGISTRY_WORKFLOW_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS }}
+        run: |
+          set -euo pipefail
+          ALLOWLIST="${GUARDIAN_REGISTRY_WORKFLOW_ACTORS:-thechurchofagi}"
+          if [ "$ACTOR" = 'github-actions[bot]' ]; then exit 0; fi
+          case ",$ALLOWLIST," in
+            *",$ACTOR,"*) echo "Authorized actor: $ACTOR" ;;
+            *) echo "Unauthorized actor: $ACTOR" >&2; exit 1 ;;
+          esac
+
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
+      - name: Check whether the fixed batch is already complete
+        id: batch
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib
+          p = pathlib.Path('research/paper-timestamps/2026-09-18/status.json')
+          done = p.exists() and json.loads(p.read_text()).get('state') == 'ARWEAVE_READBACK_PASS'
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as out:
+              out.write(f"done={str(done).lower()}\n")
+          PY
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        if: steps.batch.outputs.done != 'true'
+        with:
+          python-version: '3.11'
+
+      - name: Install the existing pinned OTS client
+        if: steps.batch.outputs.done != 'true'
+        run: python3 -m pip install -r requirements-ots.txt
+
+      - name: Check proof identity and upload gates
+        if: steps.batch.outputs.done != 'true'
+        run: python3 -m unittest discover -s tests -p test_research_paper_ots.py -v
+
+      - name: Submit missing proofs and try Bitcoin upgrades
+        if: steps.batch.outputs.done != 'true'
+        id: ots
+        env:
+          OTS_BITCOIN_NODE_URL: http://127.0.0.1:18443/
+        run: |
+          set -euo pipefail
+          python3 scripts/bitcoin_esplora_rpc_proxy.py --host 127.0.0.1 --port 18443 \
+            --trace "$RUNNER_TEMP/paper-ots-proxy.jsonl" --timeout 20 \
+            > "$RUNNER_TEMP/paper-ots-proxy.log" 2>&1 &
+          proxy_pid=$!
+          cleanup_proxy() {
+            if kill -0 "$proxy_pid" 2>/dev/null; then
+              kill "$proxy_pid"
+            fi
+          }
+          trap cleanup_proxy EXIT
+          python3 scripts/research_paper_ots.py lifecycle
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        if: steps.ots.outputs.ready == 'true'
+        with:
+          node-version-file: .node-version
+
+      - name: Install existing Arweave dependencies
+        if: steps.ots.outputs.ready == 'true'
+        run: npm ci
+
+      - name: Archive mature paper proofs through the existing guarded uploader
+        if: steps.ots.outputs.ready == 'true'
+        env:
+          ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
+          NODE_OPTIONS: --import=./scripts/arweave_runtime_spend_guard.mjs
+          ARWEAVE_MINIMUM_REMAINING_AR: '0.25'
+          ARWEAVE_MAX_PAYLOAD_BYTES: '8388608'
+          ARWEAVE_MAX_TRANSACTION_REWARD_AR: '0.05'
+          ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: '0.50'
+          ARWEAVE_READBACK_MAX_SECONDS: '420'
+          ARWEAVE_HTTP_TIMEOUT_MS: '30000'
+        run: python3 scripts/research_paper_ots.py upload
+
+      - name: Preserve receipts even when network verification is deferred
+        if: always() && steps.batch.outputs.done != 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: research-paper-ots-${{ github.run_id }}
+          path: |
+            research/paper-timestamps/2026-09-18/
+            ${{ runner.temp }}/paper-ots-proxy.jsonl
+            ${{ runner.temp }}/paper-ots-proxy.log
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Commit durable proofs and any paid transaction checkpoint
+        if: always() && steps.batch.outputs.done != 'true'
+        run: |
+          set -euo pipefail
+          git config user.name 'trinity-ots-bot'
+          git config user.email 'actions@github.com'
+          git add research/paper-timestamps/2026-09-18/ record-chain/arweave-wallet-ledger.json api/arweave-wallet-status.json
+          git diff --cached --check
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Preserve research paper OTS lifecycle receipts'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main --prune
+            git rebase origin/main || { git rebase --abort; exit 1; }
+          done
+          echo 'Durable receipts remain in the run artifact; recover them before retrying a paid upload.' >&2
+          exit 1
