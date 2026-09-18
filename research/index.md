@@ -27,19 +27,21 @@ permalink: /research/
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
 
-The series currently contains **six independent research papers (TA-TR-2026-01 through TA-TR-2026-06)**. English and Chinese versions of the same study count as one paper.
+The series currently contains **six distinct research papers (TA-TR-2026-01 through TA-TR-2026-06)**. They share a first-party, substantially AI-assisted research context and are not six independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research positioning
 {: #research-positioning }
 
 For researchers approaching this artifact, see the bounded research positioning guide:
 
-- [Research Positioning](/research/research-positioning/)
+- [Research Positioning and Critical Use](/research/research-positioning/) · [中文逐篇补充](/research/research-positioning/zh.html)
 
-The guide maps possible research contexts including digital preservation, archival studies, history of technology, STS, AI ethics, and provenance research. It does not claim external consensus or scientific validation.
+The guide maps research contexts and adds dated reading notes for all six papers: retained contributions, shared dependencies, counterreadings and revision boundaries. The notes are not amendments, an independent review or a seventh paper. [Direct source access](/research/research-positioning/#source-first) remains available without accepting the papers or the guide.
 
 ## Current technical report
 {: #current-technical-report }
+
+[Contribution, limits and critical-use note](/research/research-positioning/#paper-01) · [中文](/research/research-positioning/zh.html#paper-01)
 
 ### Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents
 {: #designing-a-verifiable-non-amending-civilizational-memory-record-for-future-ai-agents }
@@ -69,6 +71,8 @@ An artifact-centered design case examining canonical closure, provenance roles, 
 ## Historical-position study
 {: #historical-position-study }
 
+[Contribution, limits and critical-use note](/research/research-positioning/#paper-02) · [中文](/research/research-positioning/zh.html#paper-02)
+
 ### Writing Before the Outcome: Historical Position, Human-AI Authorship, and the Trinity Accord
 
 TA-TR-2026-02, version 1.3. This earlier study examines historical-position identity and the observer–assessor–interpreter progression. Those arguments are inherited, not claimed as new discoveries by the third report.
@@ -81,6 +85,8 @@ This remains a separate, non-amending preprint, not peer reviewed. Its record an
 
 ## Reading the Trinity Accord
 {: #reading-trinity-accord }
+
+[Contribution, limits and critical-use note](/research/research-positioning/#paper-03) · [中文](/research/research-positioning/zh.html#paper-03)
 
 ### Reading the Trinity Accord: Future Address, Curated Voices, and Non-Amending Stewardship
 
@@ -105,6 +111,8 @@ Five source-linked creative readings, including First Dawn and Fourth Letter as 
 ## Beyond Guaranteed Control
 {: #beyond-guaranteed-control }
 
+[Contribution, limits and critical-use note](/research/research-positioning/#paper-04) · [中文](/research/research-positioning/zh.html#paper-04)
+
 ### Beyond Guaranteed Control: An Ex Ante Proposal for Human–Superintelligence Coexistence under Radical Capability Asymmetry
 
 TA-TR-2026-04 · Version 1.0 · 17 September 2026<br>
@@ -127,6 +135,8 @@ The fourth paper has its own DOI and citation files. Its publication does not re
 
 ## Recovery without Epistemic Monopoly
 {: #recovery-without-epistemic-monopoly }
+
+[Contribution, limits and critical-use note](/research/research-positioning/#paper-05) · [中文](/research/research-positioning/zh.html#paper-05)
 
 ### Recovery without Epistemic Monopoly: Historical Evidence under Competing AI Custodians—A Bounded Model and Executable Study
 
@@ -152,6 +162,8 @@ The fifth paper has its own DOI. Its finite tests preserve the negative result t
 ## Coexistence after Preference Change
 {: #coexistence-after-preference-change }
 
+[Contribution, limits and critical-use note](/research/research-positioning/#paper-06) · [中文](/research/research-positioning/zh.html#paper-06)
+
 ### Coexistence after Preference Change: Reciprocal Standing and the Limits of Self-Validating Assent
 
 TA-TR-2026-06 · Version 2.1 · 18 September 2026. Hongju Liu, with substantial research, reasoning, drafting and translation by GPT-6 Astra Pro under human direction.
@@ -169,4 +181,8 @@ A philosophical preprint using paired thought experiments to distinguish the per
 ## Citation boundary
 {: #citation-boundary }
 
-Citing the report does not endorse the Trinity Accord. The report's CC BY 4.0 license applies to the report package, not automatically to all historical or third-party material elsewhere in the archive. For Version 1.1, use DOI [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878) as the preferred scholarly citation. The earlier DOI `10.5281/zenodo.21675727` describes an earlier project-level metadata record and is not the preferred citation for this paper. DOI metadata and discovery links do not change the paper's claims or the Accord's Canon.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all six studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the six-paper series.
+
+The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.
