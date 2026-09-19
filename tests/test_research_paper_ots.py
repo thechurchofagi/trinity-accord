@@ -13,12 +13,14 @@ spec.loader.exec_module(module)
 
 class PaperProofTests(unittest.TestCase):
     def test_followup_batch_is_wired_to_the_guarded_workflow(self):
-        workflow = (ROOT / '.github/workflows/research-paper-ots-arweave.yml').read_text()
+        workflow = (ROOT / '.github/workflows/research-paper-07-08-ots-arweave.yml').read_text()
+        original_workflow = (ROOT / '.github/workflows/research-paper-ots-arweave.yml').read_text()
         batch = 'research/paper-timestamps/2026-09-19'
         self.assertIn(f'python3 scripts/research_paper_ots.py lifecycle --batch {batch}', workflow)
         self.assertIn(f'python3 scripts/research_paper_ots.py upload --batch {batch}', workflow)
         self.assertIn('ARWEAVE_MINIMUM_REMAINING_AR', workflow)
         self.assertIn('ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR', workflow)
+        self.assertNotIn(batch, original_workflow)
 
     def test_followup_targets_match_public_readback_receipts(self):
         batch = ROOT / 'research/paper-timestamps/2026-09-19'
