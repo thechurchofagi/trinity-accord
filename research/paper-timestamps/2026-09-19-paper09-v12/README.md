@@ -42,3 +42,12 @@ truth, peer review, or the earlier publication date.
 
 
 Version 1.1 retains its independent batch and receipts. This batch does not count as an additional research paper.
+
+## Initial submission checkpoint
+
+[Run 35449370895](https://github.com/thechurchofagi/trinity-accord/actions/runs/35449370895)
+submitted both exact version 1.2 PDF hashes on 19 September 2026. Each proof
+received four pending calendar attestations. At this checkpoint both files were
+`PENDING_BITCOIN` and no Arweave transaction had been posted. The detached
+proofs and receipts are retained in this batch. This is a historical checkpoint;
+the latest `status.json` and any subsequent Arweave receipt govern current status.
