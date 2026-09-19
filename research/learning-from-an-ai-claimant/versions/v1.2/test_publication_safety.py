@@ -116,7 +116,7 @@ class PublicationSafetyTests(unittest.TestCase):
             previous = {'id':common.PREVIOUS_RECORD,'submitted':True,'conceptrecid':'22844927',
                 'metadata':{'title':common.TITLE,'version':'1.1','creators':[{'name':'Liu, Hongju'}]}}
             with patch.object(prepare, 'ROOT', root), patch.object(prepare, 'client', return_value=client), \
-                    patch.object(prepare, 'read', return_value=previous), patch.object(prepare, 'persist_states') as persist:
+                    patch.object(prepare, 'read', side_effect=[previous, []]), patch.object(prepare, 'persist_states') as persist:
                 with self.assertRaisesRegex(RuntimeError, 'Unresolved creation intent'):
                     prepare.run()
             client.request.assert_not_called()

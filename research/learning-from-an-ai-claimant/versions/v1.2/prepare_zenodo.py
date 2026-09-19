@@ -40,6 +40,27 @@ def validate_descendant(deposit, concept):
         raise RuntimeError('Cannot modify a submitted prior version')
     return rid
 
+def reconcile_existing(z, concept):
+    """Read the caller's deposits; never repeat an ambiguous creation POST."""
+    candidates = []
+    query = urllib.parse.urlencode({'q': 'conceptrecid:' + str(concept),
+                                   'all_versions': 'true', 'size': 100})
+    for page in range(1, 11):
+        listing = read(z, '/deposit/depositions?' + query + '&page=' + str(page))
+        if not isinstance(listing, list):
+            raise RuntimeError('Unexpected deposit reconciliation response')
+        for item in listing:
+            if str(item.get('conceptrecid')) == str(concept) and item.get('id') != PREVIOUS_RECORD:
+                validate_descendant(item, concept)
+                candidates.append(item)
+        if len(listing) < 100:
+            break
+    else:
+        raise RuntimeError('Incomplete reconciliation pagination')
+    if len(candidates) != 1:
+        raise RuntimeError('Unresolved creation intent; matching descendants: ' + str(len(candidates)))
+    return validate_descendant(candidates[0], concept)
+
 def run():
     global PHASE
     z = client()
@@ -57,7 +78,9 @@ def run():
         existing = draft_id(link) if link else PREVIOUS_RECORD
         if existing == PREVIOUS_RECORD:
             if (ROOT / 'create-intent.json').exists():
-                raise RuntimeError('Unresolved creation intent; reconcile before another newversion POST')
+                PHASE = 'read_only_reconciliation'
+                existing = reconcile_existing(z, concept)
+        if existing == PREVIOUS_RECORD:
             PHASE = 'checkpoint_version_creation_intent'
             save('create-intent.json', {'state':'CREATE_ONE_VERSION_INTENT','previous_record_id':PREVIOUS_RECORD,
                 'conceptrecid':concept,'title':TITLE,'report_number':REPORT,'version':VERSION,
