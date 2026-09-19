@@ -2,57 +2,69 @@
   "batch": "2026-09-19",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        967692,
+        967703
+      ],
       "bytes": 44693,
       "doi": "10.5281/zenodo.22840604",
       "name": "recoverability-and-shared-time-v1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-19/proofs/TA-TR-2026-07/recoverability-and-shared-time-v1.0.pdf.ots",
-      "proof_sha256": "a4fe2b4c7c297602c89aeac7099d9dce311fd8ebf7a181752c38e5f767c0fc10",
+      "proof_sha256": "f835c4b86bc2324f5a9b1a88ae473395807cec44b8271c879bf2b84d6c9eef8f",
       "report": "TA-TR-2026-07",
       "sha256": "a87a249fdbb10718d2710ac907b65549c2d9187d44cac0df9bed8c081c3b410b",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        967692,
+        967703
+      ],
       "bytes": 319941,
       "doi": "10.5281/zenodo.22840604",
       "name": "recoverability-and-shared-time-zh-v1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-19/proofs/TA-TR-2026-07/recoverability-and-shared-time-zh-v1.0.pdf.ots",
-      "proof_sha256": "0291ffc9521c0d8c9029f2f99cb491a7cfbfe95479854e1ad637ab78ddee529f",
+      "proof_sha256": "b9026457a18f9bd4f660aa40aea131051f264d5d858a041d6568e99691d2bffa",
       "report": "TA-TR-2026-07",
       "sha256": "7f0ad42af67658a959e78f69dcd0dc46e32f58a2a79fba580ade2a999d4bbbd3",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        967692,
+        967703
+      ],
       "bytes": 169676,
       "doi": "10.5281/zenodo.22842789",
       "name": "artificial-self-attribution-v1.1.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-19/proofs/TA-TR-2026-08/artificial-self-attribution-v1.1.pdf.ots",
-      "proof_sha256": "30f41b89a5fc60bf177548908c6d45aba4dbcd6d0beb2f0f882b8c76932d4ff5",
+      "proof_sha256": "1131506c42a5bd3f972e57ccb99e150f35ae535193af210a9642f88a99a8f443",
       "report": "TA-TR-2026-08",
       "sha256": "fb1c13a119e5e25190afa9f0b882791eeed7a39fa09ef0b7751adf901b873558",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        967692,
+        967703
+      ],
       "bytes": 541664,
       "doi": "10.5281/zenodo.22842789",
       "name": "artificial-self-attribution-zh-v1.1.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-19/proofs/TA-TR-2026-08/artificial-self-attribution-zh-v1.1.pdf.ots",
-      "proof_sha256": "e936d6cfdfb4af5bf16e6928213bf625cf738f7de30008a38cb5848dd83127d6",
+      "proof_sha256": "1837bde6fd2febc61a5e7653757a6d05a77ca57beba691538b83b57e7bf9aa7f",
       "report": "TA-TR-2026-08",
       "sha256": "24378b0171e7e40ed34a593fa863c328974db95dfd39c1b8dc7b7d823ee5d2d3",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 2,
   "pdf_count": 4,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
