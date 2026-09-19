@@ -1,0 +1,56 @@
+name: Publish Learning from an AI Claimant v1.2
+on:
+  push:
+    branches: [research/learning-from-ai-claimant-v1-2-20260919]
+    paths:
+      - '.github/workflows/publish-learning-from-ai-claimant-v12.yml'
+      - 'research/learning-from-an-ai-claimant/versions/v1.2/publish_zenodo.py'
+      - 'research/learning-from-an-ai-claimant/versions/v1.2/EXPECTED-PUBLICATION.json'
+      - 'research/learning-from-an-ai-claimant/versions/v1.2/visual-review.json'
+permissions:
+  contents: write
+concurrency:
+  group: learning-from-ai-claimant-zenodo-v1-2
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta09-v12-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/learning-from-ai-claimant-v1-2-20260919
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
+      - name: Verify exact reviewed package and publication safety
+        run: |
+          python3 research/learning-from-an-ai-claimant/versions/v1.2/test_publication_safety.py
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'research/learning-from-an-ai-claimant/versions/v1.2')
+          from publication_common import validate_local_package
+          expected,digest=validate_local_package()
+          print('Reviewed v1.2:',expected['file_count'],'files; manifest',digest)
+          PY
+      - name: Publish the linked version and verify every public file and DOI
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/learning-from-an-ai-claimant/versions/v1.2/publish_zenodo.py
+      - name: Preserve actual publication state
+        if: always()
+        run: python3 research/learning-from-an-ai-claimant/versions/v1.2/publication_common.py --persist-states
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: learning-from-ai-claimant-publication-v1.2
+          path: |
+            research/learning-from-an-ai-claimant/versions/v1.2/published/
+            research/learning-from-an-ai-claimant/versions/v1.2/EXPECTED-PUBLICATION.json
+            research/learning-from-an-ai-claimant/versions/v1.2/visual-review.json
+            research/learning-from-an-ai-claimant/versions/v1.2/format-checks.json
+            research/learning-from-an-ai-claimant/versions/v1.2/publication-record.json
+            research/learning-from-an-ai-claimant/versions/v1.2/publication-attempt.json
+            /tmp/ta09-public-readback/
+          retention-days: 90
+          if-no-files-found: warn

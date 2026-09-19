@@ -9,7 +9,7 @@ from unittest.mock import Mock, patch
 
 import publication_common as common
 import prepare_zenodo as prepare
-from publish_zenodo import check_doi_resolution, draft_inventory, resolver_matches_record
+from publish_zenodo import check_doi_resolution, draft_inventory, inherited_deletions, resolver_matches_record
 
 
 class PublicationSafetyTests(unittest.TestCase):
@@ -191,6 +191,25 @@ class PublicationSafetyTests(unittest.TestCase):
                     'https://zenodo.org/api/deposit/depositions/99999999?access_token=x','https://user@zenodo.org/api/deposit/depositions/99999999',
                     'https://zenodo.org/api/records/99999999']:
             with self.assertRaises(RuntimeError):prepare.draft_id(url)
+
+    def test_only_exact_inherited_obsolete_bytes_can_be_removed(self):
+        import hashlib
+        old_root=common.ROOT.parents[1]
+        receipt=json.loads((old_root/'publication-record.json').read_text())
+        rows=[]
+        for i,entry in enumerate(receipt['files']):
+            data=(old_root/'published'/entry['name']).read_bytes()
+            rows.append({'filename':entry['name'],'id':f'{i:08x}-0000-0000-0000-000000000000',
+                         'checksum':hashlib.md5(data).hexdigest(),'filesize':len(data)})
+        removed=inherited_deletions(rows,common.ALLOWED_FILES)
+        self.assertEqual(len(removed),8)
+        self.assertTrue(all('-v1.1.' in name for name,_ in removed))
+        obsolete=next(i for i,r in enumerate(rows) if r['filename'] not in common.ALLOWED_FILES)
+        changed=copy.deepcopy(rows);changed[obsolete]['checksum']='00'*16
+        with self.assertRaisesRegex(RuntimeError,'exact published predecessor'):
+            inherited_deletions(changed,common.ALLOWED_FILES)
+        with self.assertRaises(RuntimeError):
+            inherited_deletions(rows+[{'filename':'unrelated.pdf'}],common.ALLOWED_FILES)
 
 
 if __name__ == '__main__':
