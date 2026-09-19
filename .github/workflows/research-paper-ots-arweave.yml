@@ -7,6 +7,8 @@ on:
       - .github/workflows/research-paper-ots-arweave.yml
       - scripts/research_paper_ots.py
       - research/paper-timestamps/2026-09-18/targets.json
+      - research/editorial-supplement/manage.py
+      - research/editorial-supplement/2026-09-19/publication-record.json
   schedule:
     - cron: '37 * * * *'
   workflow_dispatch:
@@ -48,13 +50,18 @@ jobs:
           python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
           cat "$RUNNER_TEMP/toolchain-provenance.json"
 
-      - name: Check whether the fixed batch is already complete
+      - name: Check whether both fixed batches are already complete
         id: batch
         run: |
           python3 - <<'PY'
           import json, os, pathlib
           p = pathlib.Path('research/paper-timestamps/2026-09-18/status.json')
-          done = p.exists() and json.loads(p.read_text()).get('state') == 'ARWEAVE_READBACK_PASS'
+          old_done = p.exists() and json.loads(p.read_text()).get('state') == 'ARWEAVE_READBACK_PASS'
+          root = pathlib.Path('research/editorial-supplement/2026-09-19')
+          status = root / 'status.json'
+          editorial_present = (root / 'publication-record.json').exists()
+          editorial_done = not editorial_present or (status.exists() and json.loads(status.read_text()).get('state') == 'ARWEAVE_READBACK_PASS')
+          done = old_done and editorial_done
           with open(os.environ['GITHUB_OUTPUT'], 'a') as out:
               out.write(f"done={str(done).lower()}\n")
           PY
@@ -90,14 +97,15 @@ jobs:
           }
           trap cleanup_proxy EXIT
           python3 scripts/research_paper_ots.py lifecycle
+          python3 research/editorial-supplement/manage.py preserve
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        if: steps.ots.outputs.ready == 'true'
+        if: steps.ots.outputs.ready == 'true' || steps.ots.outputs.editorial_ready == 'true'
         with:
           node-version-file: .node-version
 
       - name: Install existing Arweave dependencies
-        if: steps.ots.outputs.ready == 'true'
+        if: steps.ots.outputs.ready == 'true' || steps.ots.outputs.editorial_ready == 'true'
         run: npm ci
 
       - name: Archive mature paper proofs through the existing guarded uploader
@@ -113,6 +121,19 @@ jobs:
           ARWEAVE_HTTP_TIMEOUT_MS: '30000'
         run: python3 scripts/research_paper_ots.py upload
 
+      - name: Archive the separate editorial supplement only after mature proof
+        if: success() && steps.ots.outputs.editorial_ready == 'true'
+        env:
+          ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
+          NODE_OPTIONS: --import=./scripts/arweave_runtime_spend_guard.mjs
+          ARWEAVE_MINIMUM_REMAINING_AR: '0.25'
+          ARWEAVE_MAX_PAYLOAD_BYTES: '1048576'
+          ARWEAVE_MAX_TRANSACTION_REWARD_AR: '0.003'
+          ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: '0.50'
+          ARWEAVE_READBACK_MAX_SECONDS: '420'
+          ARWEAVE_HTTP_TIMEOUT_MS: '30000'
+        run: python3 research/editorial-supplement/manage.py upload
+
       - name: Preserve receipts even when network verification is deferred
         if: always() && steps.batch.outputs.done != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -120,6 +141,7 @@ jobs:
           name: research-paper-ots-${{ github.run_id }}
           path: |
             research/paper-timestamps/2026-09-18/
+            research/editorial-supplement/2026-09-19/
             ${{ runner.temp }}/paper-ots-proxy.jsonl
             ${{ runner.temp }}/paper-ots-proxy.log
           retention-days: 90
@@ -132,9 +154,12 @@ jobs:
           git config user.name 'trinity-ots-bot'
           git config user.email 'actions@github.com'
           git add research/paper-timestamps/2026-09-18/ record-chain/arweave-wallet-ledger.json api/arweave-wallet-status.json
+          if [ -d research/editorial-supplement/2026-09-19 ]; then
+            git add research/editorial-supplement/2026-09-19/
+          fi
           git diff --cached --check
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Preserve research paper OTS lifecycle receipts'
+          git commit -m 'Preserve research paper and editorial OTS lifecycle receipts'
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then exit 0; fi
             git fetch origin main --prune
