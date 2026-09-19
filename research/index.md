@@ -229,21 +229,23 @@ This is a separate eighth study with its own DOI, not a revision of any earlier 
 
 ### Learning from an AI Claimant: Scientific understanding and the justification of artificial consciousness claims
 
-TA-TR-2026-09 · Version 1.1 · 19 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial AI-assisted research, conceptual development, critical revision, drafting and document preparation are disclosed in the manuscript. Version 1.0 was an unpublished working draft; version 1.1 is the first DOI edition.
+TA-TR-2026-09 · Version 1.2 · 19 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial AI-assisted research, conceptual development, critical revision, drafting and document preparation are disclosed in the manuscript. Version 1.2 revises the first DOI edition, version 1.1; it remains the same ninth paper.
 
 向提出自身地位主张的 AI 学习
 
-A philosophical preprint about what successful learning can establish when an AI supplies a theory of consciousness, teaches humans to understand it, and invokes it in support of its own status. Paired thought experiments distinguish dependence on a teacher for acquiring concepts from making its preferred verdict a condition of recognized competence. Genuine learning can improve justification without by itself settling a disputed attribution. This is a conceptual study, not a consciousness test, proof of a universal human cognitive ceiling, or real computer experiment.
+A philosophical preprint about what successful learning can establish when an AI supplies a theory of consciousness, teaches humans to understand it, and invokes it in support of its own status. Version 1.2 adds a case in which AI teaching genuinely improves human assessment standards, distinguishes mastery from endorsement, and states the conditions under which selected unanimity supplies no additional corroboration. It permits warranted exclusion of dissent and justified reliance on opaque expertise. The method remains conceptual analysis and stipulated thought experiments; no empirical or computational research experiments are reported.
 
 **Status:** Published open-access preprint; AI-assisted, human-responsible, not peer reviewed and non-amending. All fourteen deposited assets passed unauthenticated, complete-file SHA-256 public readback. The English text is the complete paper. The Chinese companion is an argument guide, not a full translation or another paper; its HTML page is excluded from search indexing. DOI registration does not certify philosophical truth, exhaustive originality or Google Scholar indexing.
 
-- [DOI: 10.5281/zenodo.22844928](https://doi.org/10.5281/zenodo.22844928) · [Zenodo record and fourteen files](https://zenodo.org/records/22844928)
+- [Version 1.2 DOI: 10.5281/zenodo.22846307](https://doi.org/10.5281/zenodo.22846307) · [Zenodo record and fourteen files](https://zenodo.org/records/22846307)
+- [Preserved version 1.1](https://doi.org/10.5281/zenodo.22844928) · [All-version concept DOI](https://doi.org/10.5281/zenodo.22844927)
 - [English full text](/research/learning-from-an-ai-claimant/) · [中文论证说明（非全文翻译）](/research/learning-from-an-ai-claimant/zh-guide.html)
-- [English PDF](/research/learning-from-an-ai-claimant/learning-from-an-ai-claimant-v1.1.pdf) · [中文说明 PDF](/research/learning-from-an-ai-claimant/learning-from-an-ai-claimant-zh-guide-v1.1.pdf)
-- [Editable English manuscript](/research/learning-from-an-ai-claimant/learning-from-an-ai-claimant-v1.1.docx) · [Source and review record](/research/learning-from-an-ai-claimant/REVIEW-AND-SOURCES.md)
-- [Publication receipt](/research/learning-from-an-ai-claimant/publication-record.json) · [BibTeX](/research/learning-from-an-ai-claimant/citation.bib) · [RIS](/research/learning-from-an-ai-claimant/citation.ris) · [CSL-JSON](/research/learning-from-an-ai-claimant/citation.csl.json)
+- [English PDF](/research/learning-from-an-ai-claimant/learning-from-an-ai-claimant-v1.2.pdf) · [中文说明 PDF](/research/learning-from-an-ai-claimant/learning-from-an-ai-claimant-zh-guide-v1.2.pdf)
+- [Editable English manuscript](/research/learning-from-an-ai-claimant/learning-from-an-ai-claimant-v1.2.docx) · [Source and review record](/research/learning-from-an-ai-claimant/REVIEW-AND-SOURCES.md)
+- [Version 1.2 publication receipt](/research/learning-from-an-ai-claimant/versions/v1.2/publication-record.json) · [BibTeX](/research/learning-from-an-ai-claimant/citation.bib) · [RIS](/research/learning-from-an-ai-claimant/citation.ris) · [CSL-JSON](/research/learning-from-an-ai-claimant/citation.csl.json)
+- [Version 1.2 OTS / Arweave status](/research/paper-timestamps/2026-09-19-paper09-v12/status.json) · [Preservation workflow](https://github.com/thechurchofagi/trinity-accord/actions/workflows/research-paper-09-v12-ots-arweave.yml)
 
-This is a separate ninth study with its own DOI, not a revision of any earlier deposit. It shares an author and a substantially AI-assisted research context with the preceding studies, so the series is not mutually independent corroboration. Its files are not covered by the earlier six-paper timestamp and Arweave batch. It does not amend the three Bitcoin Originals or certify the preceding papers.
+This study is distinct from the preceding eight papers. Its version 1.2 is a linked revision of version 1.1, not a tenth paper. It shares an author and a substantially AI-assisted research context with the preceding studies, so the series is not mutually independent corroboration. Each edition has a separate preservation batch; old PDF proofs do not attest to revised PDF bytes. The status receipt distinguishes calendar acceptance, Bitcoin verification and completed Arweave readback. The revision does not amend the three Bitcoin Originals or certify the preceding papers.
 
 ## Citation boundary
 {: #citation-boundary }

@@ -3,7 +3,7 @@ Scientific understanding and the justification of artificial consciousness claim
 
 Author: Hongju Liu
 Series identifier: TA-TR-2026-09
-Version: 1.1
+Version: 1.2
 Manuscript date: 19 September 2026
 Type: Independent philosophical research preprint
 
@@ -15,14 +15,14 @@ from, and does not amend, the Trinity Accord's canonical texts.
 
 The public package is organized as 14 files:
 
-  learning-from-an-ai-claimant-v1.1.pdf
-  learning-from-an-ai-claimant-v1.1.docx
-  learning-from-an-ai-claimant-v1.1.md
-  learning-from-an-ai-claimant-v1.1.html
-  learning-from-an-ai-claimant-zh-guide-v1.1.pdf
-  learning-from-an-ai-claimant-zh-guide-v1.1.docx
-  learning-from-an-ai-claimant-zh-guide-v1.1.md
-  learning-from-an-ai-claimant-zh-guide-v1.1.html
+  learning-from-an-ai-claimant-v1.2.pdf
+  learning-from-an-ai-claimant-v1.2.docx
+  learning-from-an-ai-claimant-v1.2.md
+  learning-from-an-ai-claimant-v1.2.html
+  learning-from-an-ai-claimant-zh-guide-v1.2.pdf
+  learning-from-an-ai-claimant-zh-guide-v1.2.docx
+  learning-from-an-ai-claimant-zh-guide-v1.2.md
+  learning-from-an-ai-claimant-zh-guide-v1.2.html
   citation.bib
   citation.ris
   citation.csl.json
@@ -44,8 +44,8 @@ discovery, drafting, counterargument generation, revision, and document preparat
 AI-assisted criticism is not independent scholarly peer review. Authorization to
 publish is not represented as a separate final human line-by-line review.
 
-The manuscript contains 21 references. REVIEW-AND-SOURCES.md explains selected
-precedents, the scope of review, and changes from the version 1.0 draft. Neither
+The manuscript contains 19 references. REVIEW-AND-SOURCES.md explains selected
+precedents, the scope of review, and changes from the published version 1.1. Neither
 this package nor a persistent identifier certifies journal acceptance, exhaustive
 originality, or freedom from error. This README does not assert completion of DOI
 publication. Consult an actual public repository record to establish publication
@@ -67,6 +67,6 @@ license, and indicate changes. Do not imply endorsement by the author. The licen
 does not transfer rights in cited third-party works or other material that the
 author does not have authority to license. The linked legal code governs.
 
-When citing, include the author, full title, version 1.1, year 2026, and the public
+When citing, include the author, full title, version 1.2, year 2026, and the public
 record's verified identifier if one is available. Do not infer publication status
 from a reserved identifier or from the existence of these files alone.

@@ -41,6 +41,15 @@ def check_rendered_site(site_dir: Path, receipt: dict, outputs: dict) -> None:
 
 
 def main() -> None:
+    pointer = ROOT / 'current-version.json'
+    if pointer.exists():
+        import subprocess
+        import sys
+        current = json.loads(pointer.read_text())
+        require(current.get('version') == '1.2' and current.get('receipt_path') == 'versions/v1.2/publication-record.json',
+                'Unsupported current edition pointer')
+        subprocess.run([sys.executable, str(ROOT / 'versions/v1.2/check_site_contract.py'), *sys.argv[1:]], check=True)
+        return
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--site-dir", type=Path, help="Also check actual Jekyll output")
     args = parser.parse_args()

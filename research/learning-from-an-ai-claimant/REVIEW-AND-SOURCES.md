@@ -1,43 +1,36 @@
-# Review and source notes
+# Revision and source notes
 
-**Work:** *Learning from an AI Claimant: Scientific understanding and the justification of artificial consciousness claims*  
+**Work:** Learning from an AI Claimant: Scientific understanding and the justification of artificial consciousness claims  
 **Author:** Hongju Liu  
-**Series identifier:** TA-TR-2026-09  
-**Version:** 1.1, 19 September 2026
+**Report:** TA-TR-2026-09, version 1.2, 19 September 2026  
+**Previous edition:** https://doi.org/10.5281/zenodo.22844928
 
-## Scope and status
+## Method and status
 
-This companion records the scope of the manuscript's AI-assisted research and argument review. It is not an independent scholarly peer-review report, a journal acceptance decision, an exhaustive originality search, or evidence that DOI publication has occurred. The manuscript is a philosophical research preprint using conceptual analysis and stipulated thought experiments. It reports no empirical or computational experiments, consciousness measurements, or demonstrated safety effects.
+This is a conceptual philosophical preprint using stipulated thought experiments. It reports no empirical or computational research experiments. The English paper contains 19 references; the Chinese companion is an argument guide, not a full translation or a separate paper. Substantial generative-AI assistance in research, drafting, criticism, revision and preparation is disclosed. AI-assisted review is not independent scholarly peer review, journal acceptance, or an exhaustive originality assessment. The author directed and authorized revision and publication; no separate final human line-by-line review is claimed.
 
-The English manuscript is the full paper and contains 21 references. The Chinese guide explains its argument; it is neither a full translation nor an additional paper. This study is separate from, and does not amend, the Trinity Accord's canonical texts.
+## Changes from the published version 1.1
 
-## Principal changes from the version 1.0 draft
+The revision strengthens the opponent's case: an AI may teach genuinely better assessment standards, identify errors in existing human criteria, and justifiably exclude mistaken dissent. A diagram-redrawing case separates a warranted correction of organizational assessment from acceptance of a consciousness bridge. Correcting one assessment does not automatically validate an endorsement requirement in another.
 
-1. **More direct precedents.** Added Gonzalez Barman et al. (2024), distinguishing successful transfer of understanding from assessment of the teacher and explaining what question remains after successful learning is granted. Replaced the broader Longino (2002) reference with Longino (1990), chapter 4, to acknowledge the established critical tradition more directly.
-2. **A narrower consensus claim.** Clarified that selecting only endorsers defeats the additional appeal to an apparently qualified consensus. It does not erase the selected learners' independently good reasons. The abstract now explicitly holds learners' abilities and reasons fixed while changing the certification rule.
-3. **A precise account of learning from existing evidence.** Replaced the unrestricted claim that no new observation occurs with the claim that no new empirical observation or independent measurement of the target system is introduced. Teaching can still supply new information and make previously inaccessible reasons available.
-4. **Clearer public identity and disclosure.** Identified the work as a versioned philosophical preprint and clarified the author's project relationship, substantial generative-AI assistance, and the difference between authorization to publish and a separate final human line-by-line review.
+The selection argument is now explicitly conditional. If an observer already knows both the endorsement-based admission rule and that the certified group is nonempty, unanimity on that required endorsement supplies no additional support. Group existence, membership, size, reasons and other new information may still be evidence. The paper does not claim that learning adds no information or that every selected consensus is worthless.
 
-The revision retains the distinction between an unresolved theoretical bridge and an assessment that excludes competent criticism. The proposed norm addresses the latter; it does not supply the evidence needed to settle the former. It also retains the distinction between possible moral standing and political authority, without granting humans an automatic or permanent monopoly on legitimate decision-making.
+The public reporting norm rests on an additional premise about presenting certification as a further check. It does not follow from the selection constraint alone. Mastery, derivation and belief are distinguished; a competent dissenter can derive a conclusion while questioning a strong but defeasible bridge. Cases also cover justified deference, opaque expertise, correction favoring AI, and symmetric owner-driven exclusion.
 
-## Selected source anchors
+Two AI-assisted critical reviews compared the revised argument with version 1.1. The final revision addressed their concerns about information added by the existence of a group, the reporting norm's additional premise, and the distinction between competence and endorsement. This review narrows and clarifies the contribution; it does not guarantee originality, correctness or acceptance.
 
-These are pointers to the most directly relevant precedents, not a representation that every cited work underwent the same kind or depth of access and verification. The manuscript's reference list is the complete bibliography. Source-specific claims remain limited to the propositions attributed in the paper.
+## Selected primary-source anchors
 
-| Source | Relevance and boundary |
-| --- | --- |
-| [Krenn et al. 2022, *On Scientific Understanding with Artificial Intelligence*](https://doi.org/10.1038/s42254-022-00518-3); [accessible full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC9552145/) | Proposes AI-mediated transfer of scientific understanding and a teacher-student-referee test. It explicitly sets aside whether the explanation is true; the manuscript does not attribute a contrary claim to it. |
-| [Gonzalez Barman et al. 2024, *Towards a Benchmark for Scientific Understanding in Humans and Machines*](https://doi.org/10.1007/s11023-024-09657-1) | Sections 6-7 address learning, assessment standards, and the teacher's own understanding. The manuscript grants successful learning rather than presenting its occurrence as the unresolved issue. |
-| [Longino 1990, *Science as Social Knowledge*](https://doi.org/10.2307/j.ctvx5wbfz) | Chapter 4 supplies a direct precedent for the role of effective criticism in scientific objectivity. General openness to criticism is not claimed as a new principle here. |
-| [Nguyen 2020, *Cognitive Islands and Runaway Echo Chambers*](https://doi.org/10.1007/s11229-018-1692-0) | Provides a related analysis of expert recognition and self-reinforcing expert selection. The present application concerns certification of learners taught by the claimant. |
-| [Long and Finlinson 2025, *Research Priorities for AI Welfare*](https://eleosai.org/post/research-priorities-for-ai-welfare/) | Already proposes AI assistance with philosophical and empirical welfare questions. The possibility of AI contributing to investigation of its own status is not presented as an unoccupied topic. |
-| [Long et al. 2024, *Taking AI Welfare Seriously*](https://doi.org/10.48550/arXiv.2411.00986); [Long et al. 2026, *Studying AI Welfare Empirically*](https://nonhumanminds.org/wp-content/uploads/2026/07/Studying-AI-Welfare-Empirically.pdf) | Situates the argument within work on welfare-relevant properties, evidence, and decisions under uncertainty. Citing an empirical research agenda does not mean this manuscript reports such experiments. |
-| [Bales and Gabriel 2026, *Artificial Minds, Human Disagreement*](https://deepmind.google/research/publications/248131/) | Supplies context for deliberation despite disagreement about AI consciousness. The manuscript does not offer a constitutional design or claim that better justification guarantees effective control. |
+- Krenn et al. (2022), *On Scientific Understanding with Artificial Intelligence*, https://doi.org/10.1038/s42254-022-00518-3. AI-mediated understanding and the teacher-student-referee proposal; the source explicitly sets aside truth of the explanation.
+- Gonzalez Barman et al. (2024), *Towards a Benchmark for Scientific Understanding in Humans and Machines*, https://doi.org/10.1007/s11023-024-09657-1. Learning, assessment standards and the teacher's understanding, especially sections 6–7.
+- Nguyen (2020), *Cognitive Islands and Runaway Echo Chambers*, https://doi.org/10.1007/s11229-018-1692-0. Expert recognition and self-reinforcing expert selection are established precedents, not discoveries claimed here.
+- Weatherson (2019), *Normative Externalism*, chapter 9. A substantive counterposition on higher-order evidence; the manuscript gives the publisher locator in its bibliography.
+- Longino (1990), *Science as Social Knowledge*, chapter 4, https://doi.org/10.2307/j.ctvx5wbfz. Established role of effective criticism in scientific objectivity.
 
-## Contribution and review limits
+These selected anchors do not imply uniform full-text access to every reference. The manuscript's reference list is authoritative for the complete bibliography. The contribution remains an application and development of established epistemic resources to learning from an AI that is itself the consciousness claimant. Human understanding is not made a prerequisite of moral standing; political authority requires separate justification.
 
-The targeted contribution concerns a configuration in which an AI introduces conceptual resources, successfully teaches their use, and is itself the subject of the resulting consciousness attribution. The paired cases distinguish genuine access to reasons from certification rules that turn a preferred verdict into the criterion of competence. This is an application and development of established epistemic resources, not a claimed discovery of underdetermination, epistemic dependence, or the value of criticism.
+## Version and preservation integrity
 
-AI-assisted review examined the argument's scope, counterexamples, treatment of legitimate deference, favorable and unfavorable verdicts, and relation to prior work. It does not establish global novelty or guarantee that no error remains. Independent readers may challenge the examples, their significance, or the adequacy of the proposed norm. Public versioning permits subsequent corrections; a persistent identifier would not itself certify scholarly quality.
+This package is a revision of one paper, not a tenth research paper. Version 1.1 remains available at its own record. The version 1.2 DOI and all 14 public file hashes must be verified against the actual public record. SHA256SUMS.txt covers the other 13 files. OTS and Arweave completion is established only by separate version-specific receipts, never by this document or by a prior edition's proof.
 
-Copyright © 2026 Hongju Liu. Licensed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/). Third-party works retain their own rights.
+Copyright © 2026 Hongju Liu. New manuscript and companion material: CC BY 4.0, https://creativecommons.org/licenses/by/4.0/. Cited third-party works retain their own rights.
