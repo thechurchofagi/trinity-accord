@@ -40,6 +40,8 @@ BASE_URL = "https://www.trinityaccord.org"
 ROOT_SPECIAL_FILES = [
     "research/recoverability-shared-time/index.html",
     "research/recoverability-shared-time/zh.html",
+    "research/artificial-self-attribution/index.html",
+    "research/artificial-self-attribution/zh.html",
     "research/reading-trinity-accord/reading-the-trinity-accord-v1.0.pdf",
     "research/reading-trinity-accord/citation.bib",
     "research/reading-trinity-accord/publication-record.json",
@@ -69,6 +71,17 @@ ROOT_SPECIAL_FILES = [
     "research/trinity-accord-design-and-limits/checksums.sha256",
     "research/trinity-accord-design-and-limits/academic-materials-checksums.sha256",
 ]
+
+# These complete HTML mirrors use directory canonicals. Their archived source
+# copies are publication assets, not additional site pages.
+STATIC_FULL_TEXT_INDEXES = {
+    "research/recoverability-shared-time/index.html",
+    "research/artificial-self-attribution/index.html",
+}
+PUBLICATION_SOURCE_DIRS = {
+    str(Path(name).parent / "published") + "/"
+    for name in STATIC_FULL_TEXT_INDEXES
+}
 
 # Root-level JSON files to include
 ROOT_JSON_INCLUDE = [
@@ -196,6 +209,8 @@ def collect_pages(excludes: list[str]) -> list[str]:
                 continue
 
             rel = str(md_file.relative_to(ROOT))
+            if any(rel.startswith(prefix) for prefix in PUBLICATION_SOURCE_DIRS):
+                continue
 
             # Check excludes
             excluded = False
@@ -292,8 +307,8 @@ def collect_root_special() -> list[str]:
     files = []
     for name in ROOT_SPECIAL_FILES:
         if name in {"sitemap.xml", "sitemap-core.xml"} or (ROOT / name).exists():
-            # The seventh paper uses an exact static HTML mirror, not Markdown front matter.
-            public_name = name[:-len("index.html")] if name == "research/recoverability-shared-time/index.html" else name
+            # Complete static HTML mirrors use the same URL as their canonical.
+            public_name = name[:-len("index.html")] if name in STATIC_FULL_TEXT_INDEXES else name
             files.append(f"/{public_name}")
     for name in ROOT_JSON_INCLUDE:
         if (ROOT / name).exists():

@@ -21,10 +21,13 @@ jobs:
           python3 scripts/test_reading_research_index.py
           python3 scripts/test_research_preprint_doi_sync.py
           python3 scripts/test_recoverability_shared_time.py
+          python3 research/artificial-self-attribution/check_site_contract.py
       - name: Build the existing Jekyll site without deploying
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
         with:
           source: ./
           destination: ./_site
       - name: Check rendered metadata, full text, and exact PDF mirror
-        run: python3 scripts/test_reading_research_index.py --site-dir _site
+        run: |
+          python3 scripts/test_reading_research_index.py --site-dir _site
+          python3 research/artificial-self-attribution/check_site_contract.py --site-dir _site
