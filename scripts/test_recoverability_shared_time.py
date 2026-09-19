@@ -58,10 +58,11 @@ class SeventhPaperTests(unittest.TestCase):
             self.assertEqual(re.findall(r'^### 7\.(\d+) ', md, re.M), [str(i) for i in range(1, 8)])
             self.assertEqual(re.findall(r'^\[(\d+)\] ', md, re.M), [str(i) for i in range(1, 13)])
 
-    def test_eight_studies_and_dated_six_paper_guide(self):
+    def test_current_studies_and_dated_six_paper_guide(self):
         text = (REPO / 'research/index.md').read_text()
-        self.assertIn('eight distinct research papers', text)
-        self.assertIn('TA-TR-2026-01 through TA-TR-2026-08', text)
+        counts = [(8, 'eight'), (9, 'nine')]
+        self.assertEqual(sum(f'{word} distinct research papers (TA-TR-2026-01 through TA-TR-2026-{number:02d})'
+                             in text for number, word in counts), 1)
         self.assertIn('for the original six papers', text)
         for record in (21699878, 21900592, 22761411, 22804542, 22809019, 22830239, 22840604):
             self.assertIn('10.5281/zenodo.' + str(record), text)

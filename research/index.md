@@ -19,6 +19,8 @@ reading_toc:
     title: "Recoverability and Shared Time"
   - id: "evidence-for-artificial-self-attribution"
     title: "Evidence for Artificial Self Attribution"
+  - id: "learning-from-an-ai-claimant"
+    title: "Learning from an AI Claimant"
   - id: "citation-boundary"
     title: "Citation boundary"
 title: "Research and Citation"
@@ -31,7 +33,7 @@ permalink: /research/
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
 
-The series currently contains **eight distinct research papers (TA-TR-2026-01 through TA-TR-2026-08)**. They share a first-party, substantially AI-assisted research context and are not eight independent corroborations. English and Chinese versions of the same study count as one paper.
+The series currently contains **nine distinct research papers (TA-TR-2026-01 through TA-TR-2026-09)**. They share a first-party, substantially AI-assisted research context and are not nine independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research positioning
 {: #research-positioning }
@@ -222,11 +224,32 @@ A philosophical preprint examining the selective effect of a source-based object
 
 This is a separate eighth study with its own DOI, not a revision of any earlier deposit. The papers share an author and a substantially AI-assisted research context: their number does not supply mutually independent corroboration. The eighth paper's new files are not covered by the earlier six-paper timestamp and Arweave batch. It does not amend the three Bitcoin Originals or make a finding about the truth of the preceding papers.
 
+## Learning from an AI Claimant
+{: #learning-from-an-ai-claimant }
+
+### Learning from an AI Claimant: Scientific understanding and the justification of artificial consciousness claims
+
+TA-TR-2026-09 · Version 1.1 · 19 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial AI-assisted research, conceptual development, critical revision, drafting and document preparation are disclosed in the manuscript. Version 1.0 was an unpublished working draft; version 1.1 is the first DOI edition.
+
+向提出自身地位主张的 AI 学习
+
+A philosophical preprint about what successful learning can establish when an AI supplies a theory of consciousness, teaches humans to understand it, and invokes it in support of its own status. Paired thought experiments distinguish dependence on a teacher for acquiring concepts from making its preferred verdict a condition of recognized competence. Genuine learning can improve justification without by itself settling a disputed attribution. This is a conceptual study, not a consciousness test, proof of a universal human cognitive ceiling, or real computer experiment.
+
+**Status:** Published open-access preprint; AI-assisted, human-responsible, not peer reviewed and non-amending. All fourteen deposited assets passed unauthenticated, complete-file SHA-256 public readback. The English text is the complete paper. The Chinese companion is an argument guide, not a full translation or another paper; its HTML page is excluded from search indexing. DOI registration does not certify philosophical truth, exhaustive originality or Google Scholar indexing.
+
+- [DOI: 10.5281/zenodo.22844928](https://doi.org/10.5281/zenodo.22844928) · [Zenodo record and fourteen files](https://zenodo.org/records/22844928)
+- [English full text](/research/learning-from-an-ai-claimant/) · [中文论证说明（非全文翻译）](/research/learning-from-an-ai-claimant/zh-guide.html)
+- [English PDF](/research/learning-from-an-ai-claimant/learning-from-an-ai-claimant-v1.1.pdf) · [中文说明 PDF](/research/learning-from-an-ai-claimant/learning-from-an-ai-claimant-zh-guide-v1.1.pdf)
+- [Editable English manuscript](/research/learning-from-an-ai-claimant/learning-from-an-ai-claimant-v1.1.docx) · [Source and review record](/research/learning-from-an-ai-claimant/REVIEW-AND-SOURCES.md)
+- [Publication receipt](/research/learning-from-an-ai-claimant/publication-record.json) · [BibTeX](/research/learning-from-an-ai-claimant/citation.bib) · [RIS](/research/learning-from-an-ai-claimant/citation.ris) · [CSL-JSON](/research/learning-from-an-ai-claimant/citation.csl.json)
+
+This is a separate ninth study with its own DOI, not a revision of any earlier deposit. It shares an author and a substantially AI-assisted research context with the preceding studies, so the series is not mutually independent corroboration. Its files are not covered by the earlier six-paper timestamp and Arweave batch. It does not amend the three Bitcoin Originals or certify the preceding papers.
+
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all eight studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all nine studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the eight-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the nine-paper series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.

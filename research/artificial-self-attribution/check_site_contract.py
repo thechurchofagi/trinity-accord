@@ -6,7 +6,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 
-from integrate_site import BASE, ROOT, SITE_PATH, STEM, TITLE, VERSION, planned_files, require, sha
+from integrate_site import BASE, ROOT, SITE_PATH, STEM, TITLE, VERSION, current_series_word, planned_files, require, sha
 
 
 class HeadMetadata(HTMLParser):
@@ -70,7 +70,8 @@ def main():
     index = (ROOT.parents[1] / "research/index.md").read_text()
     require(index.count('  - id: "evidence-for-artificial-self-attribution"') == 1, "Duplicate or missing TOC")
     require("for the original six papers" in index, "Dated six-paper guide lost")
-    require("are not eight independent corroborations" in index, "Series evidence boundary lost")
+    require(f"are not {current_series_word(index)} independent corroborations" in index,
+            "Series evidence boundary lost")
     tree = ET.parse(ROOT.parents[1] / "sitemap.xml")
     ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     urls = [e.text for e in tree.findall("s:url/s:loc", ns)]
