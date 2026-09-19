@@ -17,6 +17,8 @@ reading_toc:
     title: "Coexistence after Preference Change"
   - id: "recoverability-and-shared-time"
     title: "Recoverability and Shared Time"
+  - id: "evidence-for-artificial-self-attribution"
+    title: "Evidence for Artificial Self Attribution"
   - id: "citation-boundary"
     title: "Citation boundary"
 title: "Research and Citation"
@@ -29,7 +31,7 @@ permalink: /research/
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
 
-The series currently contains **seven distinct research papers (TA-TR-2026-01 through TA-TR-2026-07)**. They share a first-party, substantially AI-assisted research context and are not seven independent corroborations. English and Chinese versions of the same study count as one paper.
+The series currently contains **eight distinct research papers (TA-TR-2026-01 through TA-TR-2026-08)**. They share a first-party, substantially AI-assisted research context and are not eight independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research positioning
 {: #research-positioning }
@@ -199,11 +201,32 @@ A philosophical preprint separating internal recoverability, practical resumabil
 
 This is a separate seventh study, not the dated six-paper editorial supplement (DOI 10.5281/zenodo.22839629) and not a revision of an earlier deposit. It extends the coexistence discussion without independently corroborating the earlier papers. The seventh paper's new files are not covered by the earlier six-paper timestamp and Arweave batch.
 
+## Evidence for Artificial Self Attribution
+{: #evidence-for-artificial-self-attribution }
+
+### Evidence for Artificial Self Attribution: Language Training, Architecture, and the Limits of Self Reports
+
+TA-TR-2026-08 · Version 1.1 · 19 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial AI-assisted literature research, conceptual development, critical revision, drafting and translation are disclosed in the manuscript.
+
+人工智能自我归属的证据边界
+
+A philosophical preprint examining the selective effect of a source-based objection on a support relation: learning how a self report was generated can undercut that report's support for a claim without establishing that the claim is false or defeating independent mechanism evidence. Ten paired thought experiments distinguish operational identity, functional access, subjective experience, welfare interests and practical justification. The argument does not presuppose an answer to the question of AI consciousness. It is a conceptual study; no real computer experiments are required or claimed.
+
+**Status:** Published open-access preprint; AI-assisted, human-responsible, not peer reviewed and non-amending. All fourteen deposited assets passed unauthenticated, complete-file SHA-256 public readback. The English and complete Chinese texts are one study. Publication does not certify exhaustive originality, empirical safety efficacy or Google Scholar indexing.
+
+- [DOI: 10.5281/zenodo.22842789](https://doi.org/10.5281/zenodo.22842789) · [Zenodo record and fourteen files](https://zenodo.org/records/22842789)
+- [English full text](/research/artificial-self-attribution/) · [中文全文](/research/artificial-self-attribution/zh.html)
+- [English PDF](/research/artificial-self-attribution/artificial-self-attribution-v1.1.pdf) · [中文 PDF](/research/artificial-self-attribution/artificial-self-attribution-zh-v1.1.pdf)
+- [Publication receipt](/research/artificial-self-attribution/publication-record.json) · [Source comparison and substantive review](/research/artificial-self-attribution/REVIEW-AND-SOURCES.md)
+- [BibTeX](/research/artificial-self-attribution/citation.bib) · [RIS](/research/artificial-self-attribution/citation.ris) · [CSL-JSON](/research/artificial-self-attribution/citation.csl.json)
+
+This is a separate eighth study with its own DOI, not a revision of any earlier deposit. The papers share an author and a substantially AI-assisted research context: their number does not supply mutually independent corroboration. The eighth paper's new files are not covered by the earlier six-paper timestamp and Arweave batch. It does not amend the three Bitcoin Originals or make a finding about the truth of the preceding papers.
+
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all seven studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all eight studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the seven-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the eight-paper series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.

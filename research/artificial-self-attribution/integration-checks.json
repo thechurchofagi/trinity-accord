@@ -1,0 +1,13 @@
+{
+  "state": "PUBLICATION_AND_SOURCE_INTEGRATION_PASS",
+  "report_number": "TA-TR-2026-08",
+  "publication_doi": "10.5281/zenodo.22842789",
+  "public_readback_asset_count": 14,
+  "expected_manifest_sha256": "a8e64182e95eae0f33454c6140c0a39a07eced9c6b583bf0aa4a6e37f1682799",
+  "previous_index_sha256": "b7962ff40482b6231e4665b1a3aff2ebf2de58ca91018881ce78579d176b61ce",
+  "new_index_sha256": "19e9f46d5f3023ba06c8f1fce94650e8731a9bcec159f55f024614367d28e84f",
+  "existing_link_destinations_preserved": true,
+  "older_manuscripts_modified": false,
+  "sitemap_generation": "RUN_scripts/generate_sitemap.py_AFTER_INTEGRATION",
+  "live_site_deployment": "NOT_YET_CHECKED"
+}
