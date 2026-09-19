@@ -39,3 +39,13 @@ proofs and verification records, following the previous paper batches. It does
 not claim that every auxiliary Word/HTML/citation file is separately timestamped.
 Timestamps establish existence by the attested Bitcoin block, not authorship,
 truth, peer review, or the earlier publication date.
+
+## Initial submission record
+
+[Run 35444878780](https://github.com/thechurchofagi/trinity-accord/actions/runs/35444878780)
+successfully submitted both exact PDF hashes on 19 September 2026. Each received
+four pending calendar attestations, and the detached proofs and initial receipts
+were committed to the preservation branch. At that checkpoint both files were
+`PENDING_BITCOIN`; no Arweave transaction was made. This is a historical initial
+checkpoint, not the current completion claim. The latest `status.json` and
+Arweave receipt, when present, govern subsequent progress.
