@@ -22,6 +22,8 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: research/recoverability-shared-time-v1-20260919
+      - name: Apply the hash-guarded prepublication literature refinement
+        run: python3 research/recoverability-shared-time/refine_sources.py
       - name: Install bounded rendering tools and verified CJK font
         run: |
           sudo apt-get update -qq
@@ -71,7 +73,7 @@ jobs:
           cp /tmp/ta07-release/* research/recoverability-shared-time/published/
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add research/recoverability-shared-time/published research/recoverability-shared-time/EXPECTED-PUBLICATION.json research/recoverability-shared-time/format-checks.json
+          git add research/recoverability-shared-time
           python3 - <<'PY'
           import subprocess
           paths=subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines()
