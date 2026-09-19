@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/publish-research-editorial.yml'
       - 'research/editorial-supplement/manage.py'
+      - 'research/editorial-supplement/publish_retry.py'
       - 'tests/test_research_editorial_update.py'
 permissions:
   contents: write
@@ -21,6 +22,7 @@ jobs:
         with:
           ref: research/editorial-doi-preservation-20260919
           fetch-depth: 0
+          show-progress: false
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.11'
@@ -32,7 +34,7 @@ jobs:
       - name: Publish one editorial supplement and add links to six existing DOIs
         env:
           ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
-        run: python3 research/editorial-supplement/manage.py publish
+        run: python3 research/editorial-supplement/publish_retry.py
       - name: Stamp the newly published file manifest and try Bitcoin upgrade
         if: always()
         env:
