@@ -1,0 +1,70 @@
+{
+  "report_number": "TA-TR-2026-07",
+  "record_id": 22840604,
+  "doi": "10.5281/zenodo.22840604",
+  "title": "Recoverability and Shared Time: The Ethics of AI Suspension, Resumption, and Coexistence",
+  "version": "1.0",
+  "file_count": 12,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1561,
+      "sha256": "34156d11d06b0d4ccd8e9c136894602bec5c854588bb1bfea4631bcfe478d916"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 11875,
+      "sha256": "de9ca6a6d114ccf550a41177f8ae2519809bf8b4be6a536da47c070ee06bbf28"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1060,
+      "sha256": "2f4eeea0bcf71ca70f0b2a09837b3b55b5aaa1a77ab2e96e591cb82672dece13"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 533,
+      "sha256": "896cc2b51ffea97180e6413b901a372fc26ea581ce92703bfe8e823254d1046a"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 648,
+      "sha256": "df022464c179006814f41165775e66e266c901e586e0ee1e0e3f0ea8f9a32e18"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 366,
+      "sha256": "32f0c2d3bfb66a9bd3eb7c7e56deea5b5594e7b1b93fca1ab475e97da817e828"
+    },
+    {
+      "name": "recoverability-and-shared-time-v1.0.html",
+      "bytes": 53017,
+      "sha256": "28bb454de83607d34fc4a5e341ec07101afc0cf4cac6d32d160e0af9d9b2ce8e"
+    },
+    {
+      "name": "recoverability-and-shared-time-v1.0.md",
+      "bytes": 49762,
+      "sha256": "049cf542b1f364489cda2a2164eaf16be468f4a5c84e22c90f717507e45dc6fb"
+    },
+    {
+      "name": "recoverability-and-shared-time-v1.0.pdf",
+      "bytes": 43817,
+      "sha256": "95a0e56860a8781db793ade4c61df6f3e57f9b4df9ae1544be3fa51f05f52e6d"
+    },
+    {
+      "name": "recoverability-and-shared-time-zh-v1.0.html",
+      "bytes": 47362,
+      "sha256": "403ca29782b209a60b8e4e548e0d93600807ae7d8d5c765a8233b908fee694a3"
+    },
+    {
+      "name": "recoverability-and-shared-time-zh-v1.0.md",
+      "bytes": 44117,
+      "sha256": "330e902e4b1d1165a6291a18ea2d2b12cf2d0475a7f8d7a853a8b23ca3ec4b6b"
+    },
+    {
+      "name": "recoverability-and-shared-time-zh-v1.0.pdf",
+      "bytes": 317791,
+      "sha256": "27f05c31ac60c319c337f3571377c73b718da38835d40590768a255cea7d656d"
+    }
+  ]
+}
