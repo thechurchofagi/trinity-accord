@@ -2,35 +2,41 @@
   "batch": "2026-09-19-paper09-v12",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        967717,
+        967720
+      ],
       "bytes": 177024,
       "doi": "10.5281/zenodo.22846307",
       "name": "learning-from-an-ai-claimant-v1.2.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-19-paper09-v12/proofs/TA-TR-2026-09/learning-from-an-ai-claimant-v1.2.pdf.ots",
-      "proof_sha256": "40da72e0b6e08bfe3935de3f272cf7fa10cdcf5ea42af04f17c1f05de7154104",
+      "proof_sha256": "ec162c8c2f2b61545027916e45557c892cbb2302c3189573ac2b6e526bd50d07",
       "report": "TA-TR-2026-09",
       "role": "English full paper",
       "sha256": "b244a2232a3ad58535c4b2f1977de72de26cb90853bb1c5771add89af4abc85b",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        967717,
+        967720
+      ],
       "bytes": 341893,
       "doi": "10.5281/zenodo.22846307",
       "name": "learning-from-an-ai-claimant-zh-guide-v1.2.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-19-paper09-v12/proofs/TA-TR-2026-09/learning-from-an-ai-claimant-zh-guide-v1.2.pdf.ots",
-      "proof_sha256": "7b0f1f8d2f490ba2200fc4c281d7ac271ba3daf65ab1acd6e65b0591324b01fb",
+      "proof_sha256": "2c78feef11139a9fdec3151137b94043c75cbeffba360b320b9daa3bbb30e67d",
       "report": "TA-TR-2026-09",
       "role": "Chinese argument guide; not a full translation or another paper",
       "sha256": "549bd6ca5f8e71a46b710fd8c3e1b9ff14f739b0751a82b750784af722e6164c",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 2,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
