@@ -51,3 +51,11 @@ received four pending calendar attestations. At this checkpoint both files were
 `PENDING_BITCOIN` and no Arweave transaction had been posted. The detached
 proofs and receipts are retained in this batch. This is a historical checkpoint;
 the latest `status.json` and any subsequent Arweave receipt govern current status.
+
+## Main-branch continuation
+
+[Run 35449676487](https://github.com/thechurchofagi/trinity-accord/actions/runs/35449676487)
+completed the first main-branch continuation after PR #1228 merged. Both proofs
+remained `PENDING_BITCOIN`, so no paid upload was attempted. Hourly continuation
+is active on main. The run retained the actual calendar proofs and receipts;
+Bitcoin confirmation and Arweave completion remain separate future stages.
