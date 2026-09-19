@@ -2,35 +2,39 @@
   "batch": "2026-09-19-paper09",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        967717
+      ],
       "bytes": 184825,
       "doi": "10.5281/zenodo.22844928",
       "name": "learning-from-an-ai-claimant-v1.1.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-19-paper09/proofs/TA-TR-2026-09/learning-from-an-ai-claimant-v1.1.pdf.ots",
-      "proof_sha256": "c8a991d5bf8bff129515fdec8659cfc058a14b974ccef1139794b5204282fb5c",
+      "proof_sha256": "022089b072ab5b0a295d18f35f81abbe27b50e67aa1b95eb1ebd1f164bf2ba44",
       "report": "TA-TR-2026-09",
       "role": "English full paper",
       "sha256": "ae2c5c6b618e13b2fe4266ec1074fbf2503e6117777d8fcef97c69117bbed257",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        967717
+      ],
       "bytes": 269731,
       "doi": "10.5281/zenodo.22844928",
       "name": "learning-from-an-ai-claimant-zh-guide-v1.1.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-19-paper09/proofs/TA-TR-2026-09/learning-from-an-ai-claimant-zh-guide-v1.1.pdf.ots",
-      "proof_sha256": "8e6125753bef3370ea5fcec485793a4a022545248553e128709ce38ba01ca53e",
+      "proof_sha256": "479727be5032807d95b4049ec14f33a867b9712e2b2ea2c45efa604585546106",
       "report": "TA-TR-2026-09",
       "role": "Chinese argument guide; not a full translation or another paper",
       "sha256": "79fcb3c3109edabebd1e5c692c51990af1add0d626a2a1642dde657f9ff58fd2",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 2,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
