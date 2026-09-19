@@ -1,0 +1,30 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-19-paper09-v12",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-09",
+      "record_id": 22846307,
+      "doi": "10.5281/zenodo.22846307",
+      "version": "1.2",
+      "title": "Learning from an AI Claimant: Scientific understanding and the justification of artificial consciousness claims",
+      "receipt_path": "research/learning-from-an-ai-claimant/versions/v1.2/publication-record.json",
+      "receipt_commit": "65d2d5acb07a6ff19ed982cf4ebaaec2b6cb1506",
+      "pdfs": [
+        {
+          "name": "learning-from-an-ai-claimant-v1.2.pdf",
+          "bytes": 177024,
+          "sha256": "b244a2232a3ad58535c4b2f1977de72de26cb90853bb1c5771add89af4abc85b",
+          "role": "English full paper"
+        },
+        {
+          "name": "learning-from-an-ai-claimant-zh-guide-v1.2.pdf",
+          "bytes": 341893,
+          "sha256": "549bd6ca5f8e71a46b710fd8c3e1b9ff14f739b0751a82b750784af722e6164c",
+          "role": "Chinese argument guide; not a full translation or another paper"
+        }
+      ]
+    }
+  ]
+}

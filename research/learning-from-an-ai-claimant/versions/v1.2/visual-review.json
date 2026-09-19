@@ -1,0 +1,19 @@
+{
+  "state": "VISUAL_AND_CONTENT_REVIEW_PASS",
+  "expected_manifest_sha256": "c6e7d2e3532fe29ea0a911d26731077454b742823c693abbdad750c81631c6cc",
+  "scope": "All pages of final English paper and Chinese guide inspected as rendered PNGs; contents and citations cross-checked.",
+  "documents": {
+    "en": {
+      "pages": 13,
+      "source_word_html_pdf_text_match": true,
+      "page_boundary_check": true
+    },
+    "zh": {
+      "pages": 7,
+      "source_word_html_pdf_text_match": true,
+      "page_boundary_check": true
+    }
+  },
+  "review_method": "AI-assisted argument, source and page review; not independent scholarly peer review",
+  "peer_reviewed": false
+}
