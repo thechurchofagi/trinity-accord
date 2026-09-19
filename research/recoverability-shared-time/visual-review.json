@@ -1,0 +1,46 @@
+{
+  "state": "VISUAL_AND_CONTENT_REVIEW_PASS",
+  "report_number": "TA-TR-2026-07",
+  "version": "1.0",
+  "expected_manifest_sha256": "0d02133e80760cdf215b4f19508075cfbd327eb86dc841c70bbd5da3b7385f30",
+  "reviewed_archive": {
+    "workflow_run_id": 35421790283,
+    "artifact_id": 10577668764,
+    "bytes": 911967,
+    "sha256": "0d68973c3e6701804b6eff751fa7a6b3452edfce9e61b08e6b1988741893e5a2",
+    "downloaded_and_rehashed_locally": true
+  },
+  "publication_assets_rehashed_locally": 12,
+  "pdfs": [
+    {
+      "name": "recoverability-and-shared-time-v1.0.pdf",
+      "sha256": "a87a249fdbb10718d2710ac907b65549c2d9187d44cac0df9bed8c081c3b410b",
+      "pages": 14,
+      "all_pages_rendered_and_visually_inspected": true,
+      "normalized_complete_body_equals_markdown": true,
+      "normalized_body_characters": 43420,
+      "text_bounds_violations": 0,
+      "replacement_characters": 0
+    },
+    {
+      "name": "recoverability-and-shared-time-zh-v1.0.pdf",
+      "sha256": "7f0ad42af67658a959e78f69dcd0dc46e32f58a2a79fba580ade2a999d4bbbd3",
+      "pages": 13,
+      "all_pages_rendered_and_visually_inspected": true,
+      "normalized_complete_body_equals_markdown": true,
+      "normalized_body_characters": 16839,
+      "text_bounds_violations": 0,
+      "replacement_characters": 0
+    }
+  ],
+  "html_both_complete_article_texts_equal_markdown": true,
+  "html_citation_title_author_doi_date_pdf_metadata_checked": true,
+  "rendering_method": "PyMuPDF at 1.65 scale; every page inspected in labeled contact sheets; full-document text and span-boundary checks supplement visual inspection.",
+  "normalization": "Remove Markdown heading/emphasis markers and whitespace; exclude PDF page furniture. No argumentative words are discarded.",
+  "content_review": "Twelve main sections, eight paired cases, seven objections and twelve matching references in both languages. The separate source review records direct precedents, conditional standing, safety and scarcity countercases, repair possibilities, first-party interests and substantial AI contribution.",
+  "reviewer": "GPT-6 Astra Pro; first-party AI-assisted preparation review, not independent peer review",
+  "human_final_line_by_line_review_claimed": false,
+  "global_originality_certification": false,
+  "philosophical_validity_proved_by_layout_checks": false,
+  "publication_already_completed_by_this_review": false
+}

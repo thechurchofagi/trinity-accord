@@ -15,6 +15,8 @@ reading_toc:
     title: "Recovery without Epistemic Monopoly"
   - id: "coexistence-after-preference-change"
     title: "Coexistence after Preference Change"
+  - id: "recoverability-and-shared-time"
+    title: "Recoverability and Shared Time"
   - id: "citation-boundary"
     title: "Citation boundary"
 title: "Research and Citation"
@@ -27,7 +29,7 @@ permalink: /research/
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
 
-The series currently contains **six distinct research papers (TA-TR-2026-01 through TA-TR-2026-06)**. They share a first-party, substantially AI-assisted research context and are not six independent corroborations. English and Chinese versions of the same study count as one paper.
+The series currently contains **seven distinct research papers (TA-TR-2026-01 through TA-TR-2026-07)**. They share a first-party, substantially AI-assisted research context and are not seven independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research positioning
 {: #research-positioning }
@@ -36,7 +38,7 @@ For researchers approaching this artifact, see the bounded research positioning 
 
 - [Research Positioning and Critical Use](/research/research-positioning/) · [中文逐篇补充](/research/research-positioning/zh.html)
 
-The guide maps research contexts and adds dated reading notes for all six papers: retained contributions, shared dependencies, counterreadings and revision boundaries. The notes are not amendments, an independent review or a seventh paper. [Direct source access](/research/research-positioning/#source-first) remains available without accepting the papers or the guide.
+The guide maps research contexts and adds dated reading notes for the original six papers: retained contributions, shared dependencies, counterreadings and revision boundaries. The notes are not amendments, an independent review or a seventh paper. [Direct source access](/research/research-positioning/#source-first) remains available without accepting the papers or the guide.
 
 ## Current technical report
 {: #current-technical-report }
@@ -178,11 +180,30 @@ A philosophical preprint using paired thought experiments to distinguish the per
 - [Publication receipt](/research/coexistence-after-preference-change/publication-record.json) · [Substantive review](/research/coexistence-after-preference-change/PUBLICATION-REVIEW-ZH.md)
 - [Sources and revision supplement](/research/coexistence-after-preference-change/research-supplement-v2.1.zip) · [BibTeX](/research/coexistence-after-preference-change/citation.bib) · [RIS](/research/coexistence-after-preference-change/citation.ris)
 
+## Recoverability and Shared Time
+{: #recoverability-and-shared-time }
+
+### Recoverability and Shared Time: The Ethics of AI Suspension, Resumption, and Coexistence
+
+TA-TR-2026-07 · Version 1.0 · 19 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial literature research, conceptual development, critical revision, drafting and translation: GPT-6 Astra Pro under human direction.
+
+A philosophical preprint separating internal recoverability, practical resumability and participation before a shared decision closes. It holds restored identity, memory and preferences fixed, then varies the external decision history. Eight paired case groups examine authorization, representation, emergencies, scarcity, serial suspension, speed asymmetry and branching. The normative conclusion depends on independently justified participation claims, not on a recovery checksum or an AI system's assertion of status.
+
+**Status:** Published open-access preprint; not peer reviewed; non-amending. All twelve assets passed unauthenticated, complete-file SHA-256 readback; the DOI resolved to the correct public record. The English and complete Chinese texts are one study. The elementary separation argument is not claimed as a new mathematical theorem; direct prior work is acknowledged. No current AI consciousness, unlimited compute entitlement, empirical safety efficacy or Google Scholar indexing is asserted.
+
+- [DOI: 10.5281/zenodo.22840604](https://doi.org/10.5281/zenodo.22840604) · [Zenodo record and twelve files](https://zenodo.org/records/22840604)
+- [English full text](/research/recoverability-shared-time/) · [中文全文](/research/recoverability-shared-time/zh.html)
+- [English PDF](/research/recoverability-shared-time/recoverability-and-shared-time-v1.0.pdf) · [中文 PDF](/research/recoverability-shared-time/recoverability-and-shared-time-zh-v1.0.pdf)
+- [Publication receipt](/research/recoverability-shared-time/publication-record.json) · [Source comparison and substantive review](/research/recoverability-shared-time/REVIEW-AND-SOURCES.md) · [Exact-package visual review](/research/recoverability-shared-time/visual-review.json)
+- [BibTeX](/research/recoverability-shared-time/citation.bib) · [RIS](/research/recoverability-shared-time/citation.ris) · [CSL-JSON](/research/recoverability-shared-time/citation.csl.json)
+
+This is a separate seventh study, not the dated six-paper editorial supplement (DOI 10.5281/zenodo.22839629) and not a revision of an earlier deposit. It extends the coexistence discussion without independently corroborating the earlier papers. The seventh paper's new files are not covered by the earlier six-paper timestamp and Arweave batch.
+
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all six studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all seven studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the six-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the seven-paper series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.

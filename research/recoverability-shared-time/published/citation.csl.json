@@ -1,0 +1,27 @@
+{
+  "id": "10.5281/zenodo.22840604",
+  "type": "report",
+  "title": "Recoverability and Shared Time: The Ethics of AI Suspension, Resumption, and Coexistence",
+  "author": [
+    {
+      "family": "Liu",
+      "given": "Hongju"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2026,
+        9,
+        19
+      ]
+    ]
+  },
+  "publisher": "Zenodo",
+  "number": "TA-TR-2026-07",
+  "version": "1.0",
+  "DOI": "10.5281/zenodo.22840604",
+  "URL": "https://doi.org/10.5281/zenodo.22840604",
+  "genre": "Philosophical preprint",
+  "note": "Not peer reviewed. Substantial AI contribution disclosed. English and Chinese constitute one study."
+}

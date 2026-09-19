@@ -1,0 +1,62 @@
+{
+  "state": "STRUCTURAL_BUILD_PASS_VISUAL_REVIEW_REQUIRED",
+  "statistics": {
+    "en": {
+      "main_sections": 12,
+      "paired_case_groups": 8,
+      "objections": 7,
+      "references": 12,
+      "words_split_whitespace": 7256,
+      "cjk_characters": 0,
+      "source_bytes": 51049,
+      "published_markdown_bytes": 50985
+    },
+    "zh": {
+      "main_sections": 12,
+      "paired_case_groups": 8,
+      "objections": 7,
+      "references": 12,
+      "words_split_whitespace": 769,
+      "cjk_characters": 12523,
+      "source_bytes": 45328,
+      "published_markdown_bytes": 45269
+    }
+  },
+  "sources": {
+    "en": {
+      "source_sha256": "bdd6b3bab3ced00a286ac6087b1c6a682b0a074a347cf0132f1dc8f4ad269cce",
+      "published_markdown_sha256": "3fd6973d8ebd4984500b65c8f1cbcbeddae4f2a36b3059de937d8c129b59e5b0",
+      "publication_only_front_matter": {
+        "before": "Philosophical preprint. The DOI above identifies the reserved publication target; the separate publication receipt determines whether deposit and public-file verification have completed. English and Chinese versions constitute one study. Not peer reviewed.",
+        "after": "Philosophical preprint. Publication status and exact-file verification are documented in the separate publication receipt. English and Chinese versions constitute one study. Not peer reviewed."
+      }
+    },
+    "zh": {
+      "source_sha256": "bc85bd002e39a943bbceef9e82ee6c55b8235a73cc1bd5fd543013b0c62ffff8",
+      "published_markdown_sha256": "579198ded7b6a968bfbb4a37ed657084c44dc284a1ea5f864863640244080482",
+      "publication_only_front_matter": {
+        "before": "哲学预印本。上列 DOI 标识本研究的预留发布记录；是否已完成发布及公开文件核验，以独立发布回执为准。英文与中文版本构成同一项研究。未经同行评议。",
+        "after": "哲学预印本。发布状态与逐文件核验结果记录于独立发布回执。英文与中文版本构成同一项研究。未经同行评议。"
+      }
+    }
+  },
+  "reference_lists_identical": true,
+  "publication_file_count": 12,
+  "peer_reviewed": false,
+  "philosophical_validity_proved": false,
+  "google_scholar_indexing": "NOT_ASSERTED",
+  "independent_rebuild_same_bytes": true,
+  "pdf_extraction": {
+    "en": {
+      "info": "Title:           Recoverability and Shared Time: The Ethics of AI Suspension, Resumption, and Coexistence\nSubject:         TA-TR-2026-07 philosophical preprint, version 1.0\nKeywords:        \nAuthor:          Hongju Liu\nCreator:         (unspecified)\nProducer:        ReportLab PDF Library - (opensource)\nCreationDate:    Sat Sep 19 00:00:00 2026 UTC\nModDate:         Sat Sep 19 00:00:00 2026 UTC\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           14\nEncrypted:       no\nPage size:       595.276 x 841.89 pts (A4)\nPage rot:        0\nFile size:       44693 bytes\nOptimized:       no\nPDF version:     1.4\n",
+      "fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nHelvetica                            Type 1            WinAnsi          no  no  no       2  0\nTimes-Roman                          Type 1            WinAnsi          no  no  no       3  0\nTimes-Bold                           Type 1            WinAnsi          no  no  no       4  0\nTimes-Italic                         Type 1            WinAnsi          no  no  no       7  0\n",
+      "extracted_characters": 51782
+    },
+    "zh": {
+      "info": "Title:           可恢复性与共同时间：人工智能暂停、恢复与共存的伦理\nSubject:         TA-TR-2026-07 philosophical preprint, version 1.0\nKeywords:        \nAuthor:          Hongju Liu\nCreator:         (unspecified)\nProducer:        ReportLab PDF Library - (opensource)\nCreationDate:    Sat Sep 19 00:00:00 2026 UTC\nModDate:         Sat Sep 19 00:00:00 2026 UTC\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           13\nEncrypted:       no\nPage size:       595.276 x 841.89 pts (A4)\nPage rot:        0\nFile size:       319941 bytes\nOptimized:       no\nPDF version:     1.4\n",
+      "fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nHelvetica                            Type 1            WinAnsi          no  no  no       2  0\nTimes-Roman                          Type 1            WinAnsi          no  no  no       3  0\nAAAAAA+UMingCN-0                     TrueType          WinAnsi          yes yes yes     20  0\nAAAAAB+UMingCN-0                     TrueType          WinAnsi          yes yes yes     24  0\nAAAAAC+UMingCN-0                     TrueType          WinAnsi          yes yes yes     28  0\nAAAAAD+UMingCN-0                     TrueType          WinAnsi          yes yes yes     32  0\n",
+      "extracted_characters": 18908
+    }
+  },
+  "build_source_commit": "a8af449966b7f0543dc66457139344e53166b3d9"
+}

@@ -1,0 +1,27 @@
+{
+  "state": "PREPUBLICATION_SOURCE_REFINEMENT_APPLIED",
+  "files": {
+    "manuscript-en.md": {
+      "before_sha256": "a8f837978ae6f32afb15641de98c3cdc5afc01e19e9136fbdee755613d013b92",
+      "after_sha256": "bdd6b3bab3ced00a286ac6087b1c6a682b0a074a347cf0132f1dc8f4ad269cce"
+    },
+    "manuscript-zh.md": {
+      "before_sha256": "9228a434d710d1c7d8bebfbbbfdb403c88be851ee9575d2191d87bfa8a297ef9",
+      "after_sha256": "bc85bd002e39a943bbceef9e82ee6c55b8235a73cc1bd5fd543013b0c62ffff8"
+    },
+    "REVIEW-AND-SOURCES.md": {
+      "before_sha256": "de9ca6a6d114ccf550a41177f8ae2519809bf8b4be6a536da47c070ee06bbf28",
+      "after_sha256": "f8cbd9e13ac7b1a645f9a399c6233bc56bbfa6316dbce49062e9e7f7d3bd1e0e"
+    },
+    "build_publication.py": {
+      "before_sha256": "7dfdf777ae6426a2b933d262424383918d490039216c7eb7c814096883fdc766",
+      "after_sha256": "3827ca05ba34871f54d784ad60fc863ec0cfaa1395032fa53da27b7b8eebd3bf"
+    }
+  },
+  "new_references": [
+    11,
+    12
+  ],
+  "reason": "Acknowledge additional direct antecedents in both full texts; keep novelty bounded. Set reproducible PDF metadata to the publication day, not ReportLab default year 2000.",
+  "published_records_modified": false
+}

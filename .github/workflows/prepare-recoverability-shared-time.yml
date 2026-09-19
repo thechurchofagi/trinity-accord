@@ -1,0 +1,76 @@
+name: Prepare Recoverability and Shared Time DOI
+on:
+  push:
+    branches: [research/recoverability-shared-time-v1-20260919]
+    paths: [.github/workflows/prepare-recoverability-shared-time.yml]
+permissions:
+  contents: write
+concurrency:
+  group: recoverability-shared-time-zenodo-v1
+  cancel-in-progress: false
+jobs:
+  prepare:
+    # Completed one-shot operation: replay requires an explicit commit marker.
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta07-prepare]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: research/recoverability-shared-time-v1-20260919
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta07-toolchain-provenance.json
+          cat /tmp/ta07-toolchain-provenance.json
+      - name: Recover or reserve only the seventh paper; never publish here
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, importlib.util, json, os, pathlib, subprocess, urllib.parse
+          root=pathlib.Path('research/recoverability-shared-time');root.mkdir(parents=True,exist_ok=True)
+          old=pathlib.Path('research/reading-trinity-accord/publish_zenodo.py');b=old.read_bytes()
+          if hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()!='a0cbc84cc5fd826c06d16456c4adbaa40dabc788':raise RuntimeError('Established publication client changed')
+          spec=importlib.util.spec_from_file_location('client',old);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+          token=os.environ.get('ZENODO_ACCESS_TOKEN')
+          if not token:raise RuntimeError('Publication credential unavailable')
+          z=m.Zenodo(token)
+          title='Recoverability and Shared Time: The Ethics of AI Suspension, Resumption, and Coexistence'
+          protected={21675727,21699878,21900592,22761411,22804542,22809019,22830239,22839629}
+          def save(name,data,message):
+              p=root/name;p.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+              subprocess.run(['git','config','user.name','github-actions[bot]'],check=True)
+              subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'],check=True)
+              subprocess.run(['git','add',str(p)],check=True)
+              if subprocess.run(['git','diff','--cached','--quiet']).returncode:
+                  subprocess.run(['git','commit','-m',message],check=True)
+                  subprocess.run(['git','push','origin','HEAD:research/recoverability-shared-time-v1-20260919'],check=True)
+          checkpoint=root/'deposit.json'
+          if checkpoint.exists():
+              dep=z.request('/deposit/depositions/'+str(json.loads(checkpoint.read_text())['record_id']))
+          else:
+              rows=z.request('/deposit/depositions?'+urllib.parse.urlencode({'q':'"Recoverability and Shared Time"','size':100}))
+              if not isinstance(rows,list):raise RuntimeError('Unexpected search result; no creation')
+              matches=[r for r in rows if r.get('metadata',{}).get('title')==title]
+              if len(matches)>1:raise RuntimeError('Ambiguous matching records; no creation')
+              if matches:dep=matches[0]
+              else:
+                  if (root/'create-intent.json').exists():raise RuntimeError('Unresolved creation intent; do not create another record')
+                  save('create-intent.json',{'title':title,'report_number':'TA-TR-2026-07','run':os.environ['GITHUB_RUN_ID'],'state':'CREATE_ONCE_INTENT'},'research: checkpoint seventh-paper DOI creation intent [skip ci]')
+                  md={'upload_type':'publication','publication_type':'preprint','title':title,'creators':[{'name':'Liu, Hongju','affiliation':'Independent researcher, Shenzhen, China'}],'description':'<p>TA-TR-2026-07. A separate philosophical study of the difference between restoring an artificial subject and restoring its opportunity to participate before shared decisions close. Conditional on independently justified standing; paired thought experiments, explicit safety and scarcity countercases, and reciprocal human-AI consideration. Substantial GPT-6 Astra Pro research and drafting under human direction. Not peer reviewed. Reservation only: full reviewed manuscripts and anonymous file verification are required before publication. No prior DOI or Bitcoin Original is amended.</p>','publication_date':'2026-09-19','version':'1.0','access_right':'open','license':'cc-by-4.0','language':'eng','keywords':['AI suspension','recoverability','participation','shared time','AI ethics','human-AI coexistence']}
+                  dep=z.request('/deposit/depositions','POST',{'metadata':md})
+          md=dep.get('metadata',{})
+          if dep['id'] in protected or md.get('title')!=title or md.get('version')!='1.0' or [c.get('name') for c in md.get('creators',[])]!=['Liu, Hongju']:raise RuntimeError('Record identity mismatch')
+          receipt={'record_id':dep['id'],'doi':dep.get('doi') or md.get('prereserve_doi',{}).get('doi'),'title':title,'report_number':'TA-TR-2026-07','version':'1.0','submitted':bool(dep.get('submitted')),'state':'RESERVED_NOT_PUBLICATION' if not dep.get('submitted') else 'ALREADY_SUBMITTED_REQUIRES_READBACK','prior_records_modified':False}
+          save('deposit.json',receipt,'research: preserve separate seventh-paper DOI reservation [skip ci]')
+          print(json.dumps(receipt,indent=2))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: recoverability-shared-time-doi-preparation
+          path: |
+            research/recoverability-shared-time/deposit.json
+            research/recoverability-shared-time/create-intent.json
+            /tmp/ta07-toolchain-provenance.json
+          retention-days: 90

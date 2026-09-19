@@ -1,0 +1,101 @@
+name: Build Recoverability and Shared Time
+on:
+  push:
+    branches: [research/recoverability-shared-time-v1-20260919]
+    paths:
+      - '.github/workflows/build-recoverability-shared-time.yml'
+      - 'research/recoverability-shared-time/build_publication.py'
+      - 'research/recoverability-shared-time/manuscript-en.md'
+      - 'research/recoverability-shared-time/manuscript-zh.md'
+      - 'research/recoverability-shared-time/REVIEW-AND-SOURCES.md'
+permissions:
+  contents: write
+concurrency:
+  group: recoverability-shared-time-build-v1
+  cancel-in-progress: false
+jobs:
+  build:
+    # Completed one-shot operation: replay requires an explicit commit marker.
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta07-build]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: research/recoverability-shared-time-v1-20260919
+      - name: Apply the hash-guarded prepublication literature refinement
+        run: python3 research/recoverability-shared-time/refine_sources.py
+      - name: Install bounded rendering tools and verified CJK font
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends poppler-utils
+          python3 -m pip install --disable-pip-version-check reportlab==4.4.9 Markdown==3.7
+          curl --fail --location --retry 3 'https://ftp.debian.org/debian/pool/main/f/fonts-arphic-uming/fonts-arphic-uming_0.2.20080216.2.orig.tar.bz2' -o /tmp/uming-upstream.tar.bz2
+          python3 - <<'PY'
+          import hashlib,pathlib,tarfile
+          with tarfile.open('/tmp/uming-upstream.tar.bz2','r:bz2') as a:
+              matches=[m for m in a.getmembers() if m.isfile() and pathlib.PurePosixPath(m.name).name=='uming.ttc']
+              if len(matches)!=1:raise RuntimeError('Unexpected font archive')
+              b=a.extractfile(matches[0]).read()
+          if hashlib.sha256(b).hexdigest()!='fe952e55617275142d9cefd4d79eade4df446517b0478b2567d9bc7df49f70e2':raise RuntimeError('Font integrity mismatch')
+          pathlib.Path('/tmp/reviewed-uming.ttc').write_bytes(b)
+          PY
+          sudo mkdir -p /usr/share/fonts/truetype/arphic
+          sudo install -m 644 /tmp/reviewed-uming.ttc /usr/share/fonts/truetype/arphic/uming.ttc
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta07-toolchain-provenance.json
+          cat /tmp/ta07-toolchain-provenance.json
+      - name: Build twice and require identical assets
+        run: |
+          python3 research/recoverability-shared-time/build_publication.py --output /tmp/ta07-release
+          cp research/recoverability-shared-time/EXPECTED-PUBLICATION.json /tmp/ta07-first-build.json
+          python3 research/recoverability-shared-time/build_publication.py --output /tmp/ta07-rebuild
+          cmp /tmp/ta07-first-build.json research/recoverability-shared-time/EXPECTED-PUBLICATION.json
+          python3 - <<'PY'
+          import hashlib,json,pathlib,subprocess
+          root=pathlib.Path('research/recoverability-shared-time')
+          expected=json.loads((root/'EXPECTED-PUBLICATION.json').read_text())
+          for f in expected['files']:
+              a=(pathlib.Path('/tmp/ta07-release')/f['name']).read_bytes();b=(pathlib.Path('/tmp/ta07-rebuild')/f['name']).read_bytes()
+              if a!=b or len(a)!=f['bytes'] or hashlib.sha256(a).hexdigest()!=f['sha256']:raise RuntimeError('Nondeterministic file '+f['name'])
+          pdfinfo={}
+          for lang,suffix in [('en',''),('zh','-zh')]:
+              pdf=pathlib.Path('/tmp/ta07-release')/('recoverability-and-shared-time'+suffix+'-v1.0.pdf')
+              txt=subprocess.check_output(['pdftotext',str(pdf),'-'],text=True)
+              if '10.5281/zenodo.22840604' not in txt:raise RuntimeError('Missing PDF DOI')
+              needed=['Abstract','12. Conclusion','Authorship, responsibility'] if lang=='en' else ['摘要','12. 结论','作者、责任与研究诚信']
+              for term in needed:
+                  if term not in txt:raise RuntimeError('Missing extracted full text '+term)
+              pdfinfo[lang]={'info':subprocess.check_output(['pdfinfo',str(pdf)],text=True),'fonts':subprocess.check_output(['pdffonts',str(pdf)],text=True),'extracted_characters':len(txt)}
+          report=json.loads((root/'format-checks.json').read_text());report['independent_rebuild_same_bytes']=True;report['pdf_extraction']=pdfinfo;report['build_source_commit']=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          (root/'format-checks.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+          print('TWELVE_FILE_DETERMINISTIC_BUILD_PASS; VISUAL_REVIEW_STILL_REQUIRED')
+          PY
+      - name: Preserve exact review package without publishing
+        run: |
+          mkdir -p research/recoverability-shared-time/published
+          cp /tmp/ta07-release/* research/recoverability-shared-time/published/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/recoverability-shared-time
+          python3 - <<'PY'
+          import subprocess
+          paths=subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines()
+          if not all(p.startswith('research/recoverability-shared-time/') for p in paths):raise RuntimeError('Unexpected staged path')
+          if any(p.endswith(('.ttf','.otf','.ttc')) for p in paths):raise RuntimeError('Standalone fonts forbidden')
+          PY
+          if ! git diff --cached --quiet; then
+            git commit -m 'research: freeze seventh-paper bilingual assets for visual review [skip ci]'
+            git push origin HEAD:research/recoverability-shared-time-v1-20260919
+          fi
+      - name: Retain files and diagnostics for local visual review
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: recoverability-shared-time-review-v1.0
+          path: |
+            research/recoverability-shared-time/
+            /tmp/ta07-release/
+            /tmp/ta07-toolchain-provenance.json
+          retention-days: 90

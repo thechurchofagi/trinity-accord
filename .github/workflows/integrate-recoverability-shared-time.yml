@@ -1,0 +1,92 @@
+name: Integrate Recoverability and Shared Time
+on:
+  push:
+    branches: [research/recoverability-shared-time-v1-20260919]
+    paths:
+      - '.github/workflows/integrate-recoverability-shared-time.yml'
+permissions:
+  contents: write
+concurrency:
+  group: recoverability-shared-time-site-integration-v1
+  cancel-in-progress: false
+jobs:
+  integrate:
+    # Completed one-shot operation: replay requires an explicit commit marker.
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta07-integrate]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: research/recoverability-shared-time-v1-20260919
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta07-toolchain-provenance.json
+          cat /tmp/ta07-toolchain-provenance.json
+      - name: Integrate only the published and verified seventh paper
+        run: |
+          python3 -m pip install --disable-pip-version-check PyYAML==6.0.2
+          python3 research/recoverability-shared-time/integrate_site.py
+          python3 research/recoverability-shared-time/fix_sitemap_integration.py
+      - name: Build the existing website without deploying
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
+        with:
+          source: ./
+          destination: ./_site
+      - name: Verify rendered pages, exact PDFs and seven-study index
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          from html.parser import HTMLParser
+          root=pathlib.Path('research/recoverability-shared-time');site=pathlib.Path('_site')/root
+          class Head(HTMLParser):
+              def __init__(self):super().__init__();self.inside=False;self.meta={}
+              def handle_starttag(self,t,attrs):
+                  if t=='head':self.inside=True
+                  if t=='meta' and self.inside:
+                      a=dict(attrs)
+                      if 'name' in a:self.meta[a['name']]=a.get('content')
+              def handle_endtag(self,t):
+                  if t=='head':self.inside=False
+          for page,suffix in [('index.html',''),('zh.html','-zh')]:
+              b=(site/page).read_bytes()
+              if b!=(root/page).read_bytes():raise RuntimeError('Rendered full text changed')
+              h=Head();h.feed(b.decode())
+              need={'citation_author':'Hongju Liu','citation_doi':'10.5281/zenodo.22840604','citation_technical_report_number':'TA-TR-2026-07','citation_pdf_url':'https://www.trinityaccord.org/research/recoverability-shared-time/recoverability-and-shared-time'+suffix+'-v1.0.pdf'}
+              for k,v in need.items():
+                  if h.meta.get(k)!=v:raise RuntimeError('Rendered scholarly metadata differs: '+k)
+          for f in json.loads((root/'EXPECTED-PUBLICATION.json').read_text())['files']:
+              if f['name'].endswith('.pdf'):
+                  b=(site/f['name']).read_bytes()
+                  if len(b)!=f['bytes'] or hashlib.sha256(b).hexdigest()!=f['sha256']:raise RuntimeError('Rendered PDF differs')
+          index=pathlib.Path('_site/research/index.html').read_text()
+          for term in ('seven distinct research papers','TA-TR-2026-07','10.5281/zenodo.22840604','10.5281/zenodo.22830239','10.5281/zenodo.22809019'):
+              if term not in index:raise RuntimeError('Rendered research index incomplete: '+term)
+          report=json.loads((root/'integration-checks.json').read_text());report['rendered_site']='PASS';report['live_site_deployment']='NOT_YET_CHECKED'
+          (root/'integration-checks.json').write_text(json.dumps(report,indent=2)+'\n')
+          print('RENDERED_SEVENTH_PAPER_AND_SEVEN_STUDY_INDEX_PASS')
+          PY
+      - name: Preserve integration changes without changing published bytes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/recoverability-shared-time research/index.md sitemap.xml scripts/generate_sitemap.py
+          python3 - <<'PY'
+          import subprocess
+          paths=subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines()
+          if not all(p.startswith('research/recoverability-shared-time/') or p in ('research/index.md','sitemap.xml','scripts/generate_sitemap.py') for p in paths):raise RuntimeError('Unexpected integration path')
+          if any(p.endswith(('.ttf','.otf','.ttc')) for p in paths):raise RuntimeError('Standalone fonts prohibited')
+          PY
+          if ! git diff --cached --quiet; then
+            git commit -m 'research: preserve regenerated seventh-paper discovery and exact publication mirrors'
+            git push origin HEAD:research/recoverability-shared-time-v1-20260919
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: recoverability-shared-time-site-integration-v1.0
+          path: |
+            research/recoverability-shared-time/integration-checks.json
+            research/recoverability-shared-time/PUBLICATION-CLOSEOUT.md
+            /tmp/ta07-toolchain-provenance.json
+          retention-days: 90
