@@ -1,0 +1,56 @@
+{
+  "bitcoin_originals_modified": false,
+  "derived_files_change_only": "publication cover, removed web front matter and anchors, absolute links",
+  "kind": "dated_editorial_supplement",
+  "new_research_paper_count": 0,
+  "papers": [
+    {
+      "doi": "10.5281/zenodo.21699878",
+      "record_id": 21699878,
+      "version": "1.1"
+    },
+    {
+      "doi": "10.5281/zenodo.21900592",
+      "record_id": 21900592,
+      "version": "1.3"
+    },
+    {
+      "doi": "10.5281/zenodo.22761411",
+      "record_id": 22761411,
+      "version": "1.0"
+    },
+    {
+      "doi": "10.5281/zenodo.22804542",
+      "record_id": 22804542,
+      "version": "1.0"
+    },
+    {
+      "doi": "10.5281/zenodo.22809019",
+      "record_id": 22809019,
+      "version": "1.0"
+    },
+    {
+      "doi": "10.5281/zenodo.22830239",
+      "record_id": 22830239,
+      "version": "2.1"
+    }
+  ],
+  "previous_manuscripts_modified": false,
+  "source_commit": "dd50a011345f6b879ac10fe09d03ee8588c6eb2e",
+  "source_files": [
+    {
+      "bytes": 18067,
+      "git_blob_sha1": "e2e265dc6ed506a0db85ce0052949820f498e641",
+      "path": "research/research-positioning.md",
+      "sha256": "3ef4f479976b76c1be10f5234eb945095a132edd4f00d1d4b20ecd7d99325e9c"
+    },
+    {
+      "bytes": 15192,
+      "git_blob_sha1": "ba1846aeae428c7b7eff8caafe6ebb04b87623ef",
+      "path": "research/research-positioning-zh.md",
+      "sha256": "617e1d3818adb2e503dddc69f48876c3675f3aaee868f6679a6090d69ad98d5f"
+    }
+  ],
+  "source_uri": "https://github.com/thechurchofagi/trinity-accord/tree/dd50a011345f6b879ac10fe09d03ee8588c6eb2e/research",
+  "version": "1.0"
+}

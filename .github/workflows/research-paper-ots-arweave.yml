@@ -7,6 +7,9 @@ on:
       - .github/workflows/research-paper-ots-arweave.yml
       - scripts/research_paper_ots.py
       - research/paper-timestamps/2026-09-18/targets.json
+      - research/editorial-supplement/manage.py
+      - research/editorial-supplement/publish_retry.py
+      - research/editorial-supplement/REQUEST.json
   schedule:
     - cron: '37 * * * *'
   workflow_dispatch:
@@ -41,22 +44,37 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           ref: main
-          fetch-depth: 0
+          fetch-depth: 1
+          show-progress: false
 
       - name: Record toolchain provenance
         run: |
           python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
           cat "$RUNNER_TEMP/toolchain-provenance.json"
 
-      - name: Check whether the fixed batch is already complete
+      - name: Check completion of distinct publication and preservation objects
         id: batch
         run: |
           python3 - <<'PY'
           import json, os, pathlib
-          p = pathlib.Path('research/paper-timestamps/2026-09-18/status.json')
-          done = p.exists() and json.loads(p.read_text()).get('state') == 'ARWEAVE_READBACK_PASS'
-          with open(os.environ['GITHUB_OUTPUT'], 'a') as out:
-              out.write(f"done={str(done).lower()}\n")
+          p=pathlib.Path('research/paper-timestamps/2026-09-18/status.json')
+          old_done=p.exists() and json.loads(p.read_text()).get('state')=='ARWEAVE_READBACK_PASS'
+          root=pathlib.Path('research/editorial-supplement')
+          requested=(root/'REQUEST.json').exists()
+          b=root/'2026-09-19'
+          def has(name,state):
+              p=b/name
+              return p.exists() and json.loads(p.read_text()).get('state')==state
+          publication_done=has('links-status.json','SIX_DOI_METADATA_LINKS_VERIFIED')
+          archive_done=has('status.json','ARWEAVE_READBACK_PASS')
+          requested_source_ready=(b/'expected-files.json').exists()
+          done=old_done and (not requested or (publication_done and archive_done))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              out.write(f'done={str(done).lower()}\n')
+              out.write(f'publication_needed={str(requested and not publication_done and requested_source_ready).lower()}\n')
+              out.write(f'editorial_present={str(requested_source_ready).lower()}\n')
+          if requested and not requested_source_ready:
+              raise RuntimeError('Requested editorial package is not prepared; do not invent files')
           PY
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
@@ -70,18 +88,28 @@ jobs:
 
       - name: Check proof identity and upload gates
         if: steps.batch.outputs.done != 'true'
-        run: python3 -m unittest discover -s tests -p test_research_paper_ots.py -v
+        run: |
+          python3 -m unittest discover -s tests -p test_research_paper_ots.py -v
+          python3 -m unittest discover -s tests -p test_research_editorial_update.py -v
 
-      - name: Submit missing proofs and try Bitcoin upgrades
+      - name: Complete the already authorized editorial DOI association if available
+        if: steps.batch.outputs.publication_needed == 'true'
+        id: publication
+        continue-on-error: true
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/editorial-supplement/publish_retry.py
+
+      - name: Upgrade and verify the original nine paper proofs
         if: steps.batch.outputs.done != 'true'
         id: ots
+        continue-on-error: true
         env:
           OTS_BITCOIN_NODE_URL: http://127.0.0.1:18443/
         run: |
           set -euo pipefail
           python3 scripts/bitcoin_esplora_rpc_proxy.py --host 127.0.0.1 --port 18443 \
-            --trace "$RUNNER_TEMP/paper-ots-proxy.jsonl" --timeout 20 \
-            > "$RUNNER_TEMP/paper-ots-proxy.log" 2>&1 &
+            --trace "$RUNNER_TEMP/paper-ots-proxy.jsonl" --timeout 20 > "$RUNNER_TEMP/paper-ots-proxy.log" 2>&1 &
           proxy_pid=$!
           cleanup_proxy() {
             if kill -0 "$proxy_pid" 2>/dev/null; then
@@ -91,17 +119,38 @@ jobs:
           trap cleanup_proxy EXIT
           python3 scripts/research_paper_ots.py lifecycle
 
+      - name: Upgrade and verify the separate editorial source proof
+        if: steps.batch.outputs.editorial_present == 'true' && steps.batch.outputs.done != 'true'
+        id: editorial
+        continue-on-error: true
+        env:
+          OTS_BITCOIN_NODE_URL: http://127.0.0.1:18443/
+        run: |
+          set -euo pipefail
+          python3 scripts/bitcoin_esplora_rpc_proxy.py --host 127.0.0.1 --port 18443 \
+            --trace "$RUNNER_TEMP/editorial-ots-proxy.jsonl" --timeout 20 > "$RUNNER_TEMP/editorial-ots-proxy.log" 2>&1 &
+          proxy_pid=$!
+          cleanup_proxy() {
+            if kill -0 "$proxy_pid" 2>/dev/null; then
+              kill "$proxy_pid"
+            fi
+          }
+          trap cleanup_proxy EXIT
+          python3 research/editorial-supplement/manage.py preserve
+
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        if: steps.ots.outputs.ready == 'true'
+        if: steps.ots.outputs.ready == 'true' || steps.editorial.outputs.editorial_ready == 'true'
         with:
           node-version-file: .node-version
 
       - name: Install existing Arweave dependencies
-        if: steps.ots.outputs.ready == 'true'
+        if: steps.ots.outputs.ready == 'true' || steps.editorial.outputs.editorial_ready == 'true'
         run: npm ci
 
       - name: Archive mature paper proofs through the existing guarded uploader
         if: steps.ots.outputs.ready == 'true'
+        id: old_upload
+        continue-on-error: true
         env:
           ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
           NODE_OPTIONS: --import=./scripts/arweave_runtime_spend_guard.mjs
@@ -113,32 +162,66 @@ jobs:
           ARWEAVE_HTTP_TIMEOUT_MS: '30000'
         run: python3 scripts/research_paper_ots.py upload
 
-      - name: Preserve receipts even when network verification is deferred
+      - name: Archive editorial sources independently of the DOI service
+        if: steps.editorial.outputs.editorial_ready == 'true'
+        id: editorial_upload
+        continue-on-error: true
+        env:
+          ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
+          NODE_OPTIONS: --import=./scripts/arweave_runtime_spend_guard.mjs
+          ARWEAVE_MINIMUM_REMAINING_AR: '0.25'
+          ARWEAVE_MAX_PAYLOAD_BYTES: '1048576'
+          ARWEAVE_MAX_TRANSACTION_REWARD_AR: '0.003'
+          ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: '0.50'
+          ARWEAVE_READBACK_MAX_SECONDS: '420'
+          ARWEAVE_HTTP_TIMEOUT_MS: '30000'
+        run: python3 research/editorial-supplement/manage.py upload
+
+      - name: Preserve receipts even when a remote operation is deferred
         if: always() && steps.batch.outputs.done != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: research-paper-ots-${{ github.run_id }}
           path: |
             research/paper-timestamps/2026-09-18/
+            research/editorial-supplement/2026-09-19/
             ${{ runner.temp }}/paper-ots-proxy.jsonl
-            ${{ runner.temp }}/paper-ots-proxy.log
+            ${{ runner.temp }}/editorial-ots-proxy.jsonl
           retention-days: 90
           if-no-files-found: error
 
-      - name: Commit durable proofs and any paid transaction checkpoint
+      - name: Commit durable proofs and any uncertain write checkpoint
         if: always() && steps.batch.outputs.done != 'true'
         run: |
           set -euo pipefail
           git config user.name 'trinity-ots-bot'
           git config user.email 'actions@github.com'
           git add research/paper-timestamps/2026-09-18/ record-chain/arweave-wallet-ledger.json api/arweave-wallet-status.json
+          if [ -d research/editorial-supplement/2026-09-19 ]; then git add research/editorial-supplement/2026-09-19/; fi
           git diff --cached --check
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Preserve research paper OTS lifecycle receipts'
+          git commit -m 'Preserve research paper and editorial lifecycle receipts'
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then exit 0; fi
             git fetch origin main --prune
             git rebase origin/main || { git rebase --abort; exit 1; }
           done
-          echo 'Durable receipts remain in the run artifact; recover them before retrying a paid upload.' >&2
+          echo 'Recover artifact checkpoints before repeating uncertain writes.' >&2
           exit 1
+
+      - name: Do not report remote failures as successful completion
+        if: always()
+        env:
+          PUBLICATION_OUTCOME: ${{ steps.publication.outcome }}
+          OLD_OTS_OUTCOME: ${{ steps.ots.outcome }}
+          NEW_OTS_OUTCOME: ${{ steps.editorial.outcome }}
+          OLD_UPLOAD_OUTCOME: ${{ steps.old_upload.outcome }}
+          NEW_UPLOAD_OUTCOME: ${{ steps.editorial_upload.outcome }}
+        run: |
+          python3 - <<'PY'
+          import os
+          names=['PUBLICATION_OUTCOME','OLD_OTS_OUTCOME','NEW_OTS_OUTCOME','OLD_UPLOAD_OUTCOME','NEW_UPLOAD_OUTCOME']
+          failed=[n for n in names if os.environ.get(n)=='failure']
+          if failed: raise SystemExit('Incomplete operations retained for bounded resumption: '+', '.join(failed))
+          print('No failed operation in this iteration; inspect receipts for pending Bitcoin maturity.')
+          PY

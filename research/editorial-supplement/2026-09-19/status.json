@@ -1,0 +1,12 @@
+{
+  "bitcoin_heights": [],
+  "doi_status_scope": "Separate publication/link receipts, not certified by this source proof",
+  "old_nine_paper_targets_changed": false,
+  "pending_calendar_attestations": 4,
+  "proof_sha256": "5be64509c88d55a9615190b52da2ad96f6e0af4b3ce1283e857fadfb5fbec6f8",
+  "source_uri": "https://github.com/thechurchofagi/trinity-accord/tree/dd50a011345f6b879ac10fe09d03ee8588c6eb2e/research",
+  "state": "PENDING_BITCOIN",
+  "target": "published/SHA256SUMS.txt",
+  "target_sha256": "2a03e0ec36dbfa8efc3f99c1a148b2c78fa2cb4b0272bc869c46ba613d8e285e",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}
