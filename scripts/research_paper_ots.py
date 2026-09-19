@@ -89,9 +89,13 @@ def lifecycle(stamp_only=False):
             proof = BATCH / 'proofs' / paper['report'] / (item['name'] + '.ots')
             entry['proof'] = str(proof.relative_to(ROOT))
             try:
-                pdf = pdf_bytes(paper, item)
                 proof.parent.mkdir(parents=True, exist_ok=True)
                 if not proof.exists():
+                    # The published bytes are required only for the first stamp.
+                    # Existing detached proofs are bound directly to the frozen
+                    # target SHA-256, so proof upgrade/verification must not be
+                    # blocked by temporary Zenodo file-download outages.
+                    pdf = pdf_bytes(paper, item)
                     candidate = Path(str(pdf) + '.ots')
                     if not candidate.exists():
                         rc, log = run([ots, 'stamp', '--timeout', '30', str(pdf)], 120)
