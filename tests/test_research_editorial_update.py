@@ -64,6 +64,7 @@ class EditorialTests(unittest.TestCase):
         with self.assertRaises(RuntimeError): M.readback(Fake(),record)
         with self.assertRaises(RuntimeError): M.readback(Fake(),{'files':[]})
 
+    @unittest.skipUnless(importlib.util.find_spec('markdown'), 'Renderer exercised in the dedicated publication workflow')
     def test_package_is_reproducible_and_contains_both_full_guides(self):
         sources = {p:('---\ntitle: Test\n---\n# Guide\n\n' + ('正文' if '-zh' in p else 'Full text') +
                       '\n\n' + '\n'.join('Paper DOI 10.5281/zenodo.'+str(r) for r,_ in M.PAPERS)).encode()
@@ -86,6 +87,19 @@ class EditorialTests(unittest.TestCase):
     def test_source_drift_is_rejected(self):
         with patch.object(M.subprocess,'check_output',return_value=b'wrong source'):
             with self.assertRaises(RuntimeError): M.source_material()
+
+    def test_pending_or_completed_state_does_not_spend(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.object(M,'BATCH',Path(tmp)), patch.object(M.subprocess,'run') as paid:
+            M.upload()
+            for state in ('PENDING_BITCOIN','ARWEAVE_READBACK_PASS'):
+                M.write(Path(tmp)/'status.json',{'state':state})
+                M.upload()
+            paid.assert_not_called()
+
+    def test_unpublished_supplement_is_not_stamped(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.object(M,'BATCH',Path(tmp)), patch.object(M,'load_module') as load:
+            M.preserve()
+            load.assert_not_called()
 
     def test_no_paper_replacement_endpoint(self):
         code = (ROOT/'research/editorial-supplement/manage.py').read_text()
