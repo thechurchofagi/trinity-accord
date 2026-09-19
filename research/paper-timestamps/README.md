@@ -60,3 +60,13 @@ detached OTS proofs, embedded Bitcoin attestations, verification through the
 existing dual-provider header proxy, one guarded Arweave upload, and exact
 public readback. `status.json` is authoritative for completion. The follow-up
 workflow never changes the completed 2026-09-18 batch.
+
+## Ninth-paper batch: 2026-09-19-paper09
+
+TA-TR-2026-09 v1.1 (DOI `10.5281/zenodo.22844928`) has its own one-paper,
+two-PDF batch under `2026-09-19-paper09/`: English full text and Chinese
+argument guide. The user authorized OTS and Arweave completion after DOI
+publication. The dedicated workflow runs hourly at minute 57 UTC, preserves
+the existing daily and rolling spend limits, and waits when a prior batch has
+used the daily allowance. See that batch's README and actual `status.json` for
+scope, verification and completion; this entry does not itself claim completion.
