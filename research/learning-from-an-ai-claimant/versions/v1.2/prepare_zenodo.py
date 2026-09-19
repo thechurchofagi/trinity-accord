@@ -65,10 +65,12 @@ def run():
             persist_states({'create-intent.json'})
             PHASE = 'create_one_linked_version'
             response = z.request(f'/deposit/depositions/{PREVIOUS_RECORD}/actions/newversion', 'POST')
-            # Zenodo returns the original record; only its returned latest_draft identifies the new one.
-            if response.get('id') != PREVIOUS_RECORD:
-                raise RuntimeError('Unexpected newversion response identity')
-            existing = draft_id(response['links']['latest_draft'])
+            # The legacy documentation describes the predecessor response; current
+            # deployments may return the descendant itself. Validate either form.
+            if response.get('id') == PREVIOUS_RECORD:
+                existing = draft_id(response['links']['latest_draft'])
+            else:
+                existing = validate_descendant(response, concept)
         validate_record_id(existing)
         deposit = read(z, f'/deposit/depositions/{existing}')
     rid = validate_descendant(deposit, concept)
