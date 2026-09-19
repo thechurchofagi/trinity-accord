@@ -19,7 +19,10 @@ jobs:
         with:
           ref: research/recoverability-shared-time-v1-20260919
       - name: Integrate only the published and verified seventh paper
-        run: python3 research/recoverability-shared-time/integrate_site.py
+        run: |
+          python3 -m pip install --disable-pip-version-check PyYAML==6.0.2
+          python3 research/recoverability-shared-time/integrate_site.py
+          python3 research/recoverability-shared-time/fix_sitemap_integration.py
       - name: Build the existing website without deploying
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
         with:
@@ -62,15 +65,15 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add research/recoverability-shared-time research/index.md sitemap.xml
+          git add research/recoverability-shared-time research/index.md sitemap.xml scripts/generate_sitemap.py
           python3 - <<'PY'
           import subprocess
           paths=subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines()
-          if not all(p.startswith('research/recoverability-shared-time/') or p in ('research/index.md','sitemap.xml') for p in paths):raise RuntimeError('Unexpected integration path')
+          if not all(p.startswith('research/recoverability-shared-time/') or p in ('research/index.md','sitemap.xml','scripts/generate_sitemap.py') for p in paths):raise RuntimeError('Unexpected integration path')
           if any(p.endswith(('.ttf','.otf','.ttc')) for p in paths):raise RuntimeError('Standalone fonts prohibited')
           PY
           if ! git diff --cached --quiet; then
-            git commit -m 'research: integrate published seventh paper and preserve six earlier studies [skip ci]'
+            git commit -m 'research: preserve regenerated seventh-paper discovery and exact publication mirrors'
             git push origin HEAD:research/recoverability-shared-time-v1-20260919
           fi
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
