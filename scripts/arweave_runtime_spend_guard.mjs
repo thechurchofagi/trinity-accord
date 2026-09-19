@@ -118,9 +118,16 @@ Arweave.init = function guardedInit(config) {
       const address = await instance.wallets.ownerToAddress(owner);
       const balance = BigInt(await instance.wallets.getBalance(address));
       const reward = BigInt(String(transaction.reward || "0"));
+      // Keep the repository-wide hard maximum at 0.05 AR. The fixed
+      // research-paper OTS archive is a one-off ~2 MiB evidence bundle whose
+      // live reward quote is slightly above that default, so allow only this
+      // recognized kind a narrowly higher ceiling. Daily, rolling-30-day,
+      // payload-size, and minimum-reserve gates still apply unchanged.
+      const hardRewardMaximum =
+        kind === "research_paper_ots_archive" ? "0.055" : DEFAULT_MAX_TRANSACTION_REWARD_AR;
       const maxReward = boundedArBudget(
         "ARWEAVE_MAX_TRANSACTION_REWARD_AR",
-        DEFAULT_MAX_TRANSACTION_REWARD_AR
+        hardRewardMaximum
       );
       if (reward < 1n || reward > maxReward) {
         throw new Error(
