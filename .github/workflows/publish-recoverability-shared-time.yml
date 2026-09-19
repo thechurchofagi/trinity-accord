@@ -11,13 +11,18 @@ concurrency:
   cancel-in-progress: false
 jobs:
   publish:
-    if: github.repository == 'thechurchofagi/trinity-accord'
+    # Completed one-shot operation: replay requires an explicit commit marker.
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta07-publish]')
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: research/recoverability-shared-time-v1-20260919
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta07-toolchain-provenance.json
+          cat /tmp/ta07-toolchain-provenance.json
       - name: Check publisher syntax
         run: python3 -m py_compile research/recoverability-shared-time/publish_zenodo.py
       - name: Publish only reviewed record 22840604 and read all files anonymously
@@ -55,4 +60,5 @@ jobs:
             research/recoverability-shared-time/publication-record.json
             research/recoverability-shared-time/publication-attempt.json
             /tmp/ta07-public-readback/
+            /tmp/ta07-toolchain-provenance.json
           retention-days: 90

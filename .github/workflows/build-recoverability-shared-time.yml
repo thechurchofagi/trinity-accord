@@ -15,7 +15,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
-    if: github.repository == 'thechurchofagi/trinity-accord'
+    # Completed one-shot operation: replay requires an explicit commit marker.
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta07-build]')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -41,6 +42,10 @@ jobs:
           PY
           sudo mkdir -p /usr/share/fonts/truetype/arphic
           sudo install -m 644 /tmp/reviewed-uming.ttc /usr/share/fonts/truetype/arphic/uming.ttc
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta07-toolchain-provenance.json
+          cat /tmp/ta07-toolchain-provenance.json
       - name: Build twice and require identical assets
         run: |
           python3 research/recoverability-shared-time/build_publication.py --output /tmp/ta07-release
@@ -92,4 +97,5 @@ jobs:
           path: |
             research/recoverability-shared-time/
             /tmp/ta07-release/
+            /tmp/ta07-toolchain-provenance.json
           retention-days: 90

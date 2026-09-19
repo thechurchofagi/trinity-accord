@@ -11,13 +11,18 @@ concurrency:
   cancel-in-progress: false
 jobs:
   integrate:
-    if: github.repository == 'thechurchofagi/trinity-accord'
+    # Completed one-shot operation: replay requires an explicit commit marker.
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta07-integrate]')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: research/recoverability-shared-time-v1-20260919
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta07-toolchain-provenance.json
+          cat /tmp/ta07-toolchain-provenance.json
       - name: Integrate only the published and verified seventh paper
         run: |
           python3 -m pip install --disable-pip-version-check PyYAML==6.0.2
@@ -83,4 +88,5 @@ jobs:
           path: |
             research/recoverability-shared-time/integration-checks.json
             research/recoverability-shared-time/PUBLICATION-CLOSEOUT.md
+            /tmp/ta07-toolchain-provenance.json
           retention-days: 90
