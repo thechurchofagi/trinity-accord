@@ -31,6 +31,6 @@
     "ARWEAVE_READBACK_PASS"
   ],
   "retry_boundary": "Existing hourly preservation workflow only; safe read retries; no repeated ambiguous creation or duplicate paid Arweave transaction. Validation conflicts stop the affected operation for inspection.",
-  "resume_requested_at": "2026-09-19T01:09:00Z",
-  "resume_reason": "User explicitly requested completion of unfinished DOI, OTS and Arweave work after PR #1220. Trigger the existing serialized lifecycle; preserve existing versions and do not duplicate paid transactions."
+  "resume_requested_at": "2026-09-19T01:23:00Z",
+  "resume_reason": "Continue authorized closure after scoping the research-paper Arweave reward ceiling to 0.055 AR; retry only unfinished DOI/AR operations and do not duplicate paid transactions."
 }
