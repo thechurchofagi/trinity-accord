@@ -1,0 +1,67 @@
+name: Verify Seventh Paper Live Delivery
+on:
+  push:
+    branches: [research/recoverability-shared-time-v1-20260919]
+    paths: ['.github/workflows/verify-seventh-paper-live-delivery.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: b6dc7d57cb213cd4b637a58f481f8b927165457c
+      - name: Record read-only verification environment
+        run: python3 scripts/toolchain_provenance.py > /tmp/ta07-live-toolchain.json
+      - name: Read the actual public website and verify exact publication mirrors
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib,time,urllib.request,urllib.error,urllib.parse,xml.etree.ElementTree as ET
+          root=pathlib.Path('research/recoverability-shared-time');origin='https://www.trinityaccord.org';base='/research/recoverability-shared-time/'
+          record=json.loads((root/'publication-record.json').read_text());expected=json.loads((root/'EXPECTED-PUBLICATION.json').read_text())
+          assert record['state']=='PUBLISHED_AND_PUBLIC_READBACK_PASS' and record['doi']=='10.5281/zenodo.22840604'
+          out=pathlib.Path('/tmp/ta07-live-readback.json');checks=[];attempts=[]
+          def download(path):
+              url=origin+path+'?ta07=b6dc7d57cb213cd4b637a58f481f8b927165457c'
+              req=urllib.request.Request(url,headers={'User-Agent':'TrinityAccord-TA07-LiveReadback/1.0','Cache-Control':'no-cache'})
+              with urllib.request.urlopen(req,timeout=30) as r:
+                  if urllib.parse.urlsplit(r.url).hostname!='www.trinityaccord.org':raise RuntimeError('Unexpected website redirect')
+                  b=r.read(5*1024*1024+1)
+                  if len(b)>5*1024*1024:raise RuntimeError('Unexpected response size')
+                  return b
+          targets=[('index.html',base),('zh.html',base+'zh.html'),('recoverability-and-shared-time-v1.0.pdf',base+'recoverability-and-shared-time-v1.0.pdf'),('recoverability-and-shared-time-zh-v1.0.pdf',base+'recoverability-and-shared-time-zh-v1.0.pdf'),('publication-record.json',base+'publication-record.json')]
+          state='LIVE_SITE_READBACK_INCOMPLETE'
+          try:
+              for attempt in range(24):
+                  checks=[]
+                  try:
+                      for name,path in targets:
+                          data=download(path);local=(root/name).read_bytes()
+                          if data!=local:raise RuntimeError('Live bytes differ: '+name)
+                          checks.append({'url':origin+path,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'exact_source_match':True})
+                      index=download('/research/').decode('utf-8')
+                      for term in ('seven distinct research papers','TA-TR-2026-07','10.5281/zenodo.22840604','10.5281/zenodo.22830239','10.5281/zenodo.22809019','10.5281/zenodo.22804542','10.5281/zenodo.22761411','10.5281/zenodo.21900592','10.5281/zenodo.21699878'):
+                          if term not in index:raise RuntimeError('Live research index missing: '+term)
+                      sitemap=download('/sitemap.xml');urls={e.text for e in ET.fromstring(sitemap).iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
+                      if not {origin+base,origin+base+'zh.html'}<=urls:raise RuntimeError('Live sitemap missing seventh-paper URLs')
+                      state='LIVE_SITE_READBACK_PASS';break
+                  except (urllib.error.URLError,TimeoutError,RuntimeError,UnicodeDecodeError,ET.ParseError) as e:
+                      attempts.append({'attempt':attempt+1,'error':str(e)})
+                      if attempt==23:raise
+                      time.sleep(15)
+              result={'state':state,'doi':record['doi'],'checked_source_commit':'b6dc7d57cb213cd4b637a58f481f8b927165457c','workflow_run_id':os.environ['GITHUB_RUN_ID'],'public_readback_authenticated':False,'checks':checks,'research_index_seven_studies':True,'sitemap_has_both_new_pages':True,'sitemap_url_count':len(urls),'transient_attempts':attempts,'published_assets_modified':False,'repository_writes':False}
+              out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n');print(out.read_text())
+          except Exception as e:
+              out.write_text(json.dumps({'state':state,'error':str(e),'checks_completed':checks,'attempts':attempts,'repository_writes':False},indent=2)+'\n');raise
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta07-live-delivery-readback
+          path: |
+            /tmp/ta07-live-readback.json
+            /tmp/ta07-live-toolchain.json
+          retention-days: 90
