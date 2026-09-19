@@ -1,0 +1,80 @@
+{
+  "record_id": 22844928,
+  "doi": "10.5281/zenodo.22844928",
+  "title": "Learning from an AI Claimant: Scientific understanding and the justification of artificial consciousness claims",
+  "report_number": "TA-TR-2026-09",
+  "version": "1.1",
+  "file_count": 14,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 3196,
+      "sha256": "cbcf5a3e0d64e7d13bebfd71ee5f6f1ab33b0249ff9915a721042ff5df3fe84e"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 6790,
+      "sha256": "7071b3368da91d193b17f189a956d6f433374053a52f2ee8bbbcd1dcf2043acd"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1285,
+      "sha256": "00c882091217564fb3b948e16875ea10928f677fc9acb99fb35a088af650f928"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 399,
+      "sha256": "884e2bcf84115b6681726d3a8fad03685842bec7455fd137752171d264a42c13"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 638,
+      "sha256": "51018372923adc1c960173097b21b77338b3c2f258e6dd7d0a3d1b16f97d46dd"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 335,
+      "sha256": "d7063f3ce923c680ae34abc6cb3c20f989ef64fb3d927c65c99f29a9fb0d421e"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-v1.1.docx",
+      "bytes": 55683,
+      "sha256": "c7a5b7b40372e212777c68b25c7bae33bc420976a78008896a2c055513060d90"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-v1.1.html",
+      "bytes": 52642,
+      "sha256": "3c250c7e164efcd6f8db6e7479ad0854aee86bd4acd765ea35421b1cd46a9568"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-v1.1.md",
+      "bytes": 47224,
+      "sha256": "3fd9564107df715752482adbf4f19b2c0d57fba7ff29e075fe24e491ca9a8c07"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-v1.1.pdf",
+      "bytes": 184825,
+      "sha256": "ae2c5c6b618e13b2fe4266ec1074fbf2503e6117777d8fcef97c69117bbed257"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-zh-guide-v1.1.docx",
+      "bytes": 43201,
+      "sha256": "b68947211a4988367a9eef04dee64c55e337739df8b9cce3ca432a8fad6a22c6"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-zh-guide-v1.1.html",
+      "bytes": 11904,
+      "sha256": "ac295ee878fa6dc11f951d92433b7cabe582d1a19f2ea74e559238e7399866d6"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-zh-guide-v1.1.md",
+      "bytes": 9476,
+      "sha256": "bd0f3a3cf28bdfdbb54a141cec6ef5a6792f18e9a5abee9d982820f3179d0afb"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-zh-guide-v1.1.pdf",
+      "bytes": 269731,
+      "sha256": "79fcb3c3109edabebd1e5c692c51990af1add0d626a2a1642dde657f9ff58fd2"
+    }
+  ]
+}

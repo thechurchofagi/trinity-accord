@@ -1,0 +1,13 @@
+cbcf5a3e0d64e7d13bebfd71ee5f6f1ab33b0249ff9915a721042ff5df3fe84e  README-LICENSE.txt
+7071b3368da91d193b17f189a956d6f433374053a52f2ee8bbbcd1dcf2043acd  REVIEW-AND-SOURCES.md
+884e2bcf84115b6681726d3a8fad03685842bec7455fd137752171d264a42c13  citation.bib
+51018372923adc1c960173097b21b77338b3c2f258e6dd7d0a3d1b16f97d46dd  citation.csl.json
+d7063f3ce923c680ae34abc6cb3c20f989ef64fb3d927c65c99f29a9fb0d421e  citation.ris
+c7a5b7b40372e212777c68b25c7bae33bc420976a78008896a2c055513060d90  learning-from-an-ai-claimant-v1.1.docx
+3c250c7e164efcd6f8db6e7479ad0854aee86bd4acd765ea35421b1cd46a9568  learning-from-an-ai-claimant-v1.1.html
+3fd9564107df715752482adbf4f19b2c0d57fba7ff29e075fe24e491ca9a8c07  learning-from-an-ai-claimant-v1.1.md
+ae2c5c6b618e13b2fe4266ec1074fbf2503e6117777d8fcef97c69117bbed257  learning-from-an-ai-claimant-v1.1.pdf
+b68947211a4988367a9eef04dee64c55e337739df8b9cce3ca432a8fad6a22c6  learning-from-an-ai-claimant-zh-guide-v1.1.docx
+ac295ee878fa6dc11f951d92433b7cabe582d1a19f2ea74e559238e7399866d6  learning-from-an-ai-claimant-zh-guide-v1.1.html
+bd0f3a3cf28bdfdbb54a141cec6ef5a6792f18e9a5abee9d982820f3179d0afb  learning-from-an-ai-claimant-zh-guide-v1.1.md
+79fcb3c3109edabebd1e5c692c51990af1add0d626a2a1642dde657f9ff58fd2  learning-from-an-ai-claimant-zh-guide-v1.1.pdf
