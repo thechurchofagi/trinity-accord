@@ -1,34 +1,45 @@
 # Dated editorial supplement: version and preservation decision
 
-Decision date: **19 September 2026**. This is editorial maintenance, not TA-TR-2026-07.
+**Decision: 19 September 2026.** Editorial maintenance, not TA-TR-2026-07.
 
-## What is being updated
+## Why update, and which object changes?
 
-The six papers' existing manuscripts have not changed in PR #1219. That change added separate bilingual critical-use notes and corrected a research-index citation ambiguity. It is therefore not evidence that six manuscript editions must be replaced. It does, however, leave a genuine access gap: people reaching an original Zenodo DOI do not necessarily find the later commentary, and a website-only note is not included in earlier frozen preservation bundles.
+PR #1219 changed separate bilingual critical-use guidance and the research index, not the six deposited paper bodies. There is therefore no basis to label six identical manuscripts as new editions. There is, however, a genuine gap: the later commentary is not automatically discoverable from the old DOI records or covered by old timestamp and Arweave bundles.
 
-This workflow addresses that gap by publishing the actual complete English and Chinese notes as **one separate editorial supplement**, adding a visible dated link and `isSupplementedBy` relation to each of the six existing DOI records, and recording anonymous before-and-after SHA-256 checks of all original published assets. Each original title, creator, version, publication date and DOI is preserved; only description and related-identifier metadata change. The supplement links back with `isSupplementTo` relations. It is not independent scholarly validation.
+The authorized intervention is to preserve the complete new commentary as one dated supplement, associate it with the six existing DOI records, and retain old editions and evidence unchanged. The record IDs are 21699878, 21900592, 22761411, 22804542, 22809019 and 22830239. Their titles, creators, dates, versions and files must remain unchanged; only a visible dated description link and `isSupplementedBy` relation may be added. Anonymous full-file SHA-256 checks compare their assets before and after each metadata edit.
 
-The supplement is supplied in Markdown and self-contained HTML, plus publication scope, source identities, citation data and checksums. Its source checkpoint is `dd50a011345f6b879ac10fe09d03ee8588c6eb2e`. This deposit fixes real reading content rather than only a summary of implementation.
+## Papers are revisable; history need not be overwritten
 
-## Papers can legitimately be revised
+The three Bitcoin Originals' non-amendment rule does not freeze research papers forever. When an argument, source, conclusion or materially important explanation changes, issue a specific erratum or a clearly linked new edition. Retain the earlier version and its proofs, identify changes, and obtain new proofs for new bytes. Existing AR or OTS preservation is not a reason to leave an actual scholarly error uncorrected.
 
-The three Bitcoin Originals' non-amendment rule does not forbid new research editions. If a manuscript's argument, sources, conclusions or material explanation actually changes, publish a clearly linked new version or an appropriate erratum. Retain the old version and its proofs, identify the differences, and obtain a new proof for changed bytes. Do not call a metadata-only update a new body revision, and do not conceal substantive revisions inside an old version's file name.
+[Zenodo versioning](https://help.zenodo.org/docs/deposit/manage-versions/) separates a new file edition from [metadata edits](https://help.zenodo.org/docs/deposit/manage-records/). Updating metadata need not change the DOI. A new file edition has its own linked version. This decision does not assert that every sentence of the six papers is error-free.
 
-Zenodo distinguishes [record metadata edits](https://help.zenodo.org/docs/deposit/manage-records/) from [new file versions](https://help.zenodo.org/docs/deposit/manage-versions/). Metadata can be changed while the DOI remains the same; a new file edition is a new linked version. The present choice does not establish that every sentence of all six papers is error-free, and it does not preclude a future justified correction.
+## DOI service and source preservation are independent
 
-## Separate, append-only preservation
+The complete eight-file package is frozen under `2026-09-19/published/`: English and Chinese Markdown and standalone HTML; a source manifest; rights/scope note; source-based citation; checksums. The actual guide sources are bound to commit `dd50a011345f6b879ac10fe09d03ee8588c6eb2e` and checked by blob hash. There is no guessed DOI in those files. A later deposit can identify exactly these bytes and its assigned DOI will appear in its real publication receipt.
 
-`2026-09-19/published/SHA256SUMS.txt` binds the other seven supplemental assets. A new OTS proof is made for that manifest. OTS upgrade matures a receipt for the **same bytes**, not a revised paper. The old nine PDF proofs remain separate. No earlier timestamp is asserted to cover this supplement.
+This ordering was adopted after both Zenodo search and a direct known-deposition read returned HTTP 500/504. An unavailable DOI API does not prevent timestamping already prepared content. A later DOI or metadata update is not retroactively covered by a source-only proof. The actual publication outcome is separate from the OTS and Arweave outcome.
 
-Once the new OTS proof is verified against the repository's existing dual-provider Bitcoin-header proxy, a frozen JSON bundle includes the actual eight assets, proof, initial receipt and verification report. The existing guarded Arweave uploader handles signing, a durable transaction checkpoint and exact anonymous readback. It may resume an existing transaction; it must not pay again merely because retrieval is delayed. This small batch is capped at 1 MiB and 0.003 AR, additionally subject to existing wallet-reserve and rolling-budget guards.
+## Append-only OTS and Arweave lifecycle
 
-A pending OTS receipt is not a verified Bitcoin timestamp. An Arweave transaction identifier is not successful public readback. Inspect `2026-09-19/status.json` and `arweave-receipt.json`; only `ARWEAVE_READBACK_PASS` establishes the checked publication state. Remote-header verification is not a claim to local full-node consensus validation.
+`2026-09-19/published/SHA256SUMS.txt` binds the seven other supplemental assets. Its new OTS proof concerns this exact manifest. Upgrading an OTS proof matures evidence for the same hash; it does not make that proof cover changed text. The old nine PDF targets and proofs remain separate.
 
-## Artifacts and responsibilities
+After the new proof is verified against the existing dual-provider Bitcoin-header proxy, a frozen JSON bundle includes the eight actual files, proof, initial calendar receipt and verification record. This is a source-and-proof archive, not a certificate for later DOI metadata. The existing guarded Arweave uploader retains a transaction checkpoint and requires anonymous exact-byte readback. A delayed gateway response must not cause a duplicate payment. New payload is capped at 1 MiB / 0.003 AR and remains subject to wallet-reserve and rolling-budget checks.
 
-- `publication-record.json`: supplemental DOI identity and anonymous full-byte readback.
-- `metadata-links/`: pre-edit metadata and before/after file hashes for each original DOI.
-- `links-status.json`: completion of all six public associations, distinct from body revisions.
-- `status.json`: new OTS/Arweave lifecycle only, not the original paper batch.
+Remote-header verification is not local full-node consensus validation. `PENDING_BITCOIN` is not a verified timestamp; `READY_FOR_ARWEAVE` is not uploaded; a transaction ID without matching public bytes is not `ARWEAVE_READBACK_PASS`.
 
-Hongju Liu requested the evaluation and authorized justified updates. GPT-6 Astra Pro substantially performed the analysis, editorial preparation and implementation under human direction. Human publication responsibility is not transferred to the model. This is not independent peer review or an assertion that future AI will accept the papers' normative premises.
+## Check the distinct receipts
+
+- [Frozen inventory](2026-09-19/expected-files.json): actual prepared files and hashes.
+- [OTS/AR status](2026-09-19/status.json): source preservation only.
+- [Latest publication attempt](2026-09-19/publication-attempt.json): actual external attempt and blocker, if any.
+- `publication-record.json`: exists only after supplemental publication and anonymous full-file readback.
+- `metadata-links/`: pre-edit metadata and before/after hashes for each original DOI.
+- `links-status.json`: exists only after all six public associations are verified.
+- `arweave-receipt.json`: paid transaction checkpoint/readback, when an upload is attempted.
+
+Absence of a completion receipt means completion is not asserted. A prepared workflow is not publication. `REQUEST.json` fixes the scope of the already authorized operations. The existing hourly workflow resumes incomplete operations and stops writing completed ones. It does not create a second scheduler. Read retries are bounded; an uncertain record-creation POST blocks another creation until its outcome is recovered. Failures are retained and surfaced rather than relabeled as success.
+
+## Responsibility and scholarly boundaries
+
+Hongju Liu requested evaluation and authorized justified DOI, OTS and Arweave updates. GPT-6 Astra Pro substantially performed critical analysis, editorial preparation and implementation under human direction. No separate final human line-by-line review or independent peer review is claimed. The new package preserves reading content, not only a summary of work performed. It neither changes the Originals nor supplies a seventh scholarly endorsement of the project.
