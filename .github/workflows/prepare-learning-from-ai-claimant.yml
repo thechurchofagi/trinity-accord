@@ -1,0 +1,46 @@
+name: Prepare Learning from an AI Claimant DOI
+on:
+  push:
+    branches: [research/learning-from-ai-claimant-v1-1-20260919]
+    paths:
+      - '.github/workflows/prepare-learning-from-ai-claimant.yml'
+      - 'research/learning-from-an-ai-claimant/prepare_zenodo.py'
+      - 'research/learning-from-an-ai-claimant/publication_common.py'
+permissions:
+  contents: write
+concurrency:
+  group: learning-from-ai-claimant-zenodo-v1-1
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta09-prepare]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/learning-from-ai-claimant-v1-1-20260919
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta09-toolchain-provenance.json
+          cat /tmp/ta09-toolchain-provenance.json
+      - name: Verify publisher safety checks before using the publication credential
+        run: python3 research/learning-from-an-ai-claimant/test_publication_safety.py
+      - name: Recover or reserve exactly one ninth-paper draft without publishing
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/learning-from-an-ai-claimant/prepare_zenodo.py
+      - name: Preserve actual preparation state including failures
+        if: always()
+        run: python3 research/learning-from-an-ai-claimant/publication_common.py --persist-states
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: learning-from-ai-claimant-doi-preparation-v1.1
+          path: |
+            research/learning-from-an-ai-claimant/deposit.json
+            research/learning-from-an-ai-claimant/create-intent.json
+            research/learning-from-an-ai-claimant/preparation-attempt.json
+            /tmp/ta09-toolchain-provenance.json
+          retention-days: 90
+          if-no-files-found: warn

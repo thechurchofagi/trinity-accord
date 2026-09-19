@@ -1,0 +1,61 @@
+name: Publish Learning from an AI Claimant
+on:
+  push:
+    branches: [research/learning-from-ai-claimant-v1-1-20260919]
+    paths:
+      - '.github/workflows/publish-learning-from-ai-claimant.yml'
+      - 'research/learning-from-an-ai-claimant/publish_zenodo.py'
+      - 'research/learning-from-an-ai-claimant/publication_common.py'
+      - 'research/learning-from-an-ai-claimant/EXPECTED-PUBLICATION.json'
+      - 'research/learning-from-an-ai-claimant/visual-review.json'
+permissions:
+  contents: write
+concurrency:
+  group: learning-from-ai-claimant-zenodo-v1-1
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta09-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/learning-from-ai-claimant-v1-1-20260919
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta09-toolchain-provenance.json
+          cat /tmp/ta09-toolchain-provenance.json
+      - name: Verify safety checks and exact reviewed package without credentials
+        run: |
+          python3 research/learning-from-an-ai-claimant/test_publication_safety.py
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0, 'research/learning-from-an-ai-claimant')
+          from publication_common import validate_local_package
+          expected, digest = validate_local_package()
+          print('TA09 exact reviewed package:', expected['file_count'], 'files; manifest', digest)
+          PY
+      - name: Publish only reserved ninth-paper record and verify every file and DOI anonymously
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/learning-from-an-ai-claimant/publish_zenodo.py
+      - name: Preserve actual publication state including failures
+        if: always()
+        run: python3 research/learning-from-an-ai-claimant/publication_common.py --persist-states
+      - name: Retain exact files and public readback diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: learning-from-ai-claimant-publication-v1.1
+          path: |
+            research/learning-from-an-ai-claimant/published/
+            research/learning-from-an-ai-claimant/EXPECTED-PUBLICATION.json
+            research/learning-from-an-ai-claimant/visual-review.json
+            research/learning-from-an-ai-claimant/format-checks.json
+            research/learning-from-an-ai-claimant/publication-record.json
+            research/learning-from-an-ai-claimant/publication-attempt.json
+            /tmp/ta09-public-readback/
+            /tmp/ta09-toolchain-provenance.json
+          retention-days: 90
+          if-no-files-found: warn
