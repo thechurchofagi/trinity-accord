@@ -51,13 +51,13 @@ class CriticalUseTests(unittest.TestCase):
         for i in range(1, 7):
             for prefix in ('/research/research-positioning/', '/research/research-positioning/zh.html'):
                 self.assertEqual(self.index.count(f']({prefix}#paper-{i:02d})'), 1)
-        # The dated guide still covers six; the current index now includes a separate seventh study.
+        # The dated guide still covers six; the current index includes two later studies.
         self.assertIn('for the original six papers', self.index)
-        self.assertIn('seven distinct research papers', self.index)
-        self.assertIn('TA-TR-2026-01 through TA-TR-2026-07', self.index)
+        self.assertIn('eight distinct research papers', self.index)
+        self.assertIn('TA-TR-2026-01 through TA-TR-2026-08', self.index)
         self.assertNotIn('six independent research papers', self.index)
-        self.assertNotIn('seven independent research papers', self.index)
-        self.assertIn('not seven independent corroborations', self.index)
+        self.assertNotIn('eight independent research papers', self.index)
+        self.assertIn('not eight independent corroborations', self.index)
 
     def test_guide_cannot_be_counted_as_paper_seven(self):
         self.assertIn('Not a seventh paper', self.texts[0])
@@ -70,7 +70,7 @@ class CriticalUseTests(unittest.TestCase):
         boundary = self.index.split('## Citation boundary', 1)[1]
         self.assertIn('specific paper and version', boundary)
         self.assertIn('TA-TR-2026-01 v1.1 only', boundary)
-        self.assertIn('no single paper DOI represents all seven', boundary)
+        self.assertIn('no single paper DOI represents all eight', boundary)
         self.assertIn('valid criticisms and negative results remain intact', boundary)
 
     def test_invalid_mapping_and_missing_entry_are_rejected(self):
