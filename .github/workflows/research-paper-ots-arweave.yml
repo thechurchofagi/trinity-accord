@@ -83,6 +83,7 @@ jobs:
               out.write(f'followup_needed={str(followup_requested and not followup_done).lower()}\n')
               out.write(f'publication_needed={str(requested and not publication_done and requested_source_ready).lower()}\n')
               out.write(f'editorial_present={str(requested_source_ready).lower()}\n')
+              out.write(f'editorial_needed={str(requested_source_ready and not archive_done).lower()}\n')
           if requested and not requested_source_ready:
               raise RuntimeError('Requested editorial package is not prepared; do not invent files')
           PY
@@ -149,7 +150,7 @@ jobs:
           python3 scripts/research_paper_ots.py lifecycle --batch research/paper-timestamps/2026-09-19
 
       - name: Upgrade and verify the separate editorial source proof
-        if: steps.batch.outputs.editorial_present == 'true' && steps.batch.outputs.done != 'true'
+        if: steps.batch.outputs.editorial_needed == 'true'
         id: editorial
         continue-on-error: true
         env:
