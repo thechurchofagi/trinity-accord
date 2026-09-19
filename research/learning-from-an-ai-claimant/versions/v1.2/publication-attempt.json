@@ -1,8 +1,7 @@
 {
-  "state": "PUBLICATION_INTENT_FOR_EXISTING_RECORD",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
   "record_id": 22846307,
   "doi": "10.5281/zenodo.22846307",
-  "expected_manifest_sha256": "c6e7d2e3532fe29ea0a911d26731077454b742823c693abbdad750c81631c6cc",
-  "new_record_creation": false,
+  "phase": "completed",
   "workflow_run_id": "35449254372"
 }
