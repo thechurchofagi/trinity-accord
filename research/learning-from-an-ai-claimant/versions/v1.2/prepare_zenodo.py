@@ -35,7 +35,9 @@ def validate_descendant(deposit, concept):
     if (str(deposit.get('conceptrecid')), md.get('title')) != (str(concept), TITLE):
         raise RuntimeError('New draft is not a descendant of this paper')
     if md.get('version') not in ('1.1', VERSION) or [c.get('name') for c in md.get('creators', [])] != ['Liu, Hongju']:
-        raise RuntimeError('Unrelated version or author in descendant draft')
+        raise RuntimeError('Unrelated version or author in descendant draft: ' + json.dumps({
+            'id': rid, 'version': md.get('version'), 'creators': md.get('creators'),
+            'submitted': deposit.get('submitted')}, ensure_ascii=False))
     if deposit.get('submitted') and md.get('version') != VERSION:
         raise RuntimeError('Cannot modify a submitted prior version')
     return rid
