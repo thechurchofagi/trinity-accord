@@ -1,0 +1,49 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-19",
+  "paper_count": 2,
+  "papers": [
+    {
+      "report": "TA-TR-2026-07",
+      "record_id": 22840604,
+      "doi": "10.5281/zenodo.22840604",
+      "version": "1.0",
+      "title": "Recoverability and Shared Time: The Ethics of AI Suspension, Resumption, and Coexistence",
+      "receipt_path": "research/recoverability-shared-time/publication-record.json",
+      "receipt_commit": "e387dfa6a3fac630f9e59ee825ca51b5de614f5c",
+      "pdfs": [
+        {
+          "name": "recoverability-and-shared-time-v1.0.pdf",
+          "bytes": 44693,
+          "sha256": "a87a249fdbb10718d2710ac907b65549c2d9187d44cac0df9bed8c081c3b410b"
+        },
+        {
+          "name": "recoverability-and-shared-time-zh-v1.0.pdf",
+          "bytes": 319941,
+          "sha256": "7f0ad42af67658a959e78f69dcd0dc46e32f58a2a79fba580ade2a999d4bbbd3"
+        }
+      ]
+    },
+    {
+      "report": "TA-TR-2026-08",
+      "record_id": 22842789,
+      "doi": "10.5281/zenodo.22842789",
+      "version": "1.1",
+      "title": "Evidence for Artificial Self Attribution: Language Training, Architecture, and the Limits of Self Reports",
+      "receipt_path": "research/artificial-self-attribution/publication-record.json",
+      "receipt_commit": "71e26cec8d2f3ddd3ff1febf09f09278e9d5bba0",
+      "pdfs": [
+        {
+          "name": "artificial-self-attribution-v1.1.pdf",
+          "bytes": 169676,
+          "sha256": "fb1c13a119e5e25190afa9f0b882791eeed7a39fa09ef0b7751adf901b873558"
+        },
+        {
+          "name": "artificial-self-attribution-zh-v1.1.pdf",
+          "bytes": 541664,
+          "sha256": "24378b0171e7e40ed34a593fa863c328974db95dfd39c1b8dc7b7d823ee5d2d3"
+        }
+      ]
+    }
+  ]
+}

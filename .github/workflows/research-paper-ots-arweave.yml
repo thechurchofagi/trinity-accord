@@ -7,6 +7,8 @@ on:
       - .github/workflows/research-paper-ots-arweave.yml
       - scripts/research_paper_ots.py
       - research/paper-timestamps/2026-09-18/targets.json
+      - research/paper-timestamps/2026-09-19/targets.json
+      - research/paper-timestamps/README.md
       - research/editorial-supplement/manage.py
       - research/editorial-supplement/publish_retry.py
       - research/editorial-supplement/REQUEST.json
@@ -59,6 +61,11 @@ jobs:
           import json, os, pathlib
           p=pathlib.Path('research/paper-timestamps/2026-09-18/status.json')
           old_done=p.exists() and json.loads(p.read_text()).get('state')=='ARWEAVE_READBACK_PASS'
+          followup=pathlib.Path('research/paper-timestamps/2026-09-19')
+          followup_requested=(followup/'targets.json').exists()
+          followup_status=followup/'status.json'
+          followup_done=(followup_status.exists() and
+                         json.loads(followup_status.read_text()).get('state')=='ARWEAVE_READBACK_PASS')
           root=pathlib.Path('research/editorial-supplement')
           requested=(root/'REQUEST.json').exists()
           b=root/'2026-09-19'
@@ -68,9 +75,12 @@ jobs:
           publication_done=has('links-status.json','SIX_DOI_METADATA_LINKS_VERIFIED')
           archive_done=has('status.json','ARWEAVE_READBACK_PASS')
           requested_source_ready=(b/'expected-files.json').exists()
-          done=old_done and (not requested or (publication_done and archive_done))
+          done=(old_done and (not requested or (publication_done and archive_done)) and
+                (not followup_requested or followup_done))
           with open(os.environ['GITHUB_OUTPUT'],'a') as out:
               out.write(f'done={str(done).lower()}\n')
+              out.write(f'old_done={str(old_done).lower()}\n')
+              out.write(f'followup_needed={str(followup_requested and not followup_done).lower()}\n')
               out.write(f'publication_needed={str(requested and not publication_done and requested_source_ready).lower()}\n')
               out.write(f'editorial_present={str(requested_source_ready).lower()}\n')
           if requested and not requested_source_ready:
@@ -101,7 +111,7 @@ jobs:
         run: python3 research/editorial-supplement/publish_retry.py
 
       - name: Upgrade and verify the original nine paper proofs
-        if: steps.batch.outputs.done != 'true'
+        if: steps.batch.outputs.old_done != 'true'
         id: ots
         continue-on-error: true
         env:
@@ -118,6 +128,25 @@ jobs:
           }
           trap cleanup_proxy EXIT
           python3 scripts/research_paper_ots.py lifecycle
+
+      - name: Upgrade and verify the seventh and eighth paper proofs
+        if: steps.batch.outputs.followup_needed == 'true'
+        id: followup_ots
+        continue-on-error: true
+        env:
+          OTS_BITCOIN_NODE_URL: http://127.0.0.1:18443/
+        run: |
+          set -euo pipefail
+          python3 scripts/bitcoin_esplora_rpc_proxy.py --host 127.0.0.1 --port 18443 \
+            --trace "$RUNNER_TEMP/followup-paper-ots-proxy.jsonl" --timeout 20 > "$RUNNER_TEMP/followup-paper-ots-proxy.log" 2>&1 &
+          proxy_pid=$!
+          cleanup_proxy() {
+            if kill -0 "$proxy_pid" 2>/dev/null; then
+              kill "$proxy_pid"
+            fi
+          }
+          trap cleanup_proxy EXIT
+          python3 scripts/research_paper_ots.py lifecycle --batch research/paper-timestamps/2026-09-19
 
       - name: Upgrade and verify the separate editorial source proof
         if: steps.batch.outputs.editorial_present == 'true' && steps.batch.outputs.done != 'true'
@@ -139,12 +168,12 @@ jobs:
           python3 research/editorial-supplement/manage.py preserve
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        if: steps.ots.outputs.ready == 'true' || steps.editorial.outputs.editorial_ready == 'true'
+        if: steps.ots.outputs.ready == 'true' || steps.followup_ots.outputs.ready == 'true' || steps.editorial.outputs.editorial_ready == 'true'
         with:
           node-version-file: .node-version
 
       - name: Install existing Arweave dependencies
-        if: steps.ots.outputs.ready == 'true' || steps.editorial.outputs.editorial_ready == 'true'
+        if: steps.ots.outputs.ready == 'true' || steps.followup_ots.outputs.ready == 'true' || steps.editorial.outputs.editorial_ready == 'true'
         run: npm ci
 
       - name: Archive mature paper proofs through the existing guarded uploader
@@ -161,6 +190,21 @@ jobs:
           ARWEAVE_READBACK_MAX_SECONDS: '420'
           ARWEAVE_HTTP_TIMEOUT_MS: '30000'
         run: python3 scripts/research_paper_ots.py upload
+
+      - name: Archive seventh and eighth paper proofs as a separate guarded batch
+        if: steps.followup_ots.outputs.ready == 'true'
+        id: followup_upload
+        continue-on-error: true
+        env:
+          ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
+          NODE_OPTIONS: --import=./scripts/arweave_runtime_spend_guard.mjs
+          ARWEAVE_MINIMUM_REMAINING_AR: '0.25'
+          ARWEAVE_MAX_PAYLOAD_BYTES: '4194304'
+          ARWEAVE_MAX_TRANSACTION_REWARD_AR: '0.055'
+          ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: '0.50'
+          ARWEAVE_READBACK_MAX_SECONDS: '420'
+          ARWEAVE_HTTP_TIMEOUT_MS: '30000'
+        run: python3 scripts/research_paper_ots.py upload --batch research/paper-timestamps/2026-09-19
 
       - name: Archive editorial sources independently of the DOI service
         if: steps.editorial.outputs.editorial_ready == 'true'
@@ -184,8 +228,10 @@ jobs:
           name: research-paper-ots-${{ github.run_id }}
           path: |
             research/paper-timestamps/2026-09-18/
+            research/paper-timestamps/2026-09-19/
             research/editorial-supplement/2026-09-19/
             ${{ runner.temp }}/paper-ots-proxy.jsonl
+            ${{ runner.temp }}/followup-paper-ots-proxy.jsonl
             ${{ runner.temp }}/editorial-ots-proxy.jsonl
           retention-days: 90
           if-no-files-found: error
@@ -196,7 +242,7 @@ jobs:
           set -euo pipefail
           git config user.name 'trinity-ots-bot'
           git config user.email 'actions@github.com'
-          git add research/paper-timestamps/2026-09-18/ record-chain/arweave-wallet-ledger.json api/arweave-wallet-status.json
+          git add research/paper-timestamps/2026-09-18/ research/paper-timestamps/2026-09-19/ record-chain/arweave-wallet-ledger.json api/arweave-wallet-status.json
           if [ -d research/editorial-supplement/2026-09-19 ]; then git add research/editorial-supplement/2026-09-19/; fi
           git diff --cached --check
           if git diff --cached --quiet; then exit 0; fi
@@ -216,11 +262,14 @@ jobs:
           OLD_OTS_OUTCOME: ${{ steps.ots.outcome }}
           NEW_OTS_OUTCOME: ${{ steps.editorial.outcome }}
           OLD_UPLOAD_OUTCOME: ${{ steps.old_upload.outcome }}
+          FOLLOWUP_OTS_OUTCOME: ${{ steps.followup_ots.outcome }}
+          FOLLOWUP_UPLOAD_OUTCOME: ${{ steps.followup_upload.outcome }}
           NEW_UPLOAD_OUTCOME: ${{ steps.editorial_upload.outcome }}
         run: |
           python3 - <<'PY'
           import os
-          names=['PUBLICATION_OUTCOME','OLD_OTS_OUTCOME','NEW_OTS_OUTCOME','OLD_UPLOAD_OUTCOME','NEW_UPLOAD_OUTCOME']
+          names=['PUBLICATION_OUTCOME','OLD_OTS_OUTCOME','FOLLOWUP_OTS_OUTCOME','NEW_OTS_OUTCOME',
+                 'OLD_UPLOAD_OUTCOME','FOLLOWUP_UPLOAD_OUTCOME','NEW_UPLOAD_OUTCOME']
           failed=[n for n in names if os.environ.get(n)=='failure']
           if failed: raise SystemExit('Incomplete operations retained for bounded resumption: '+', '.join(failed))
           print('No failed operation in this iteration; inspect receipts for pending Bitcoin maturity.')

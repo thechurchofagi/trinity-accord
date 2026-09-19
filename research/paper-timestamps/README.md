@@ -50,3 +50,12 @@ and run `ots verify -f paper.pdf paper.pdf.ots` using your chosen Bitcoin node.
 The proof establishes that these exact bytes existed no later than the attested
 Bitcoin block. It does not backdate the timestamp to the publication date, prove
 authorship, peer review, truth, or modify the three Bitcoin Originals.
+
+## Follow-up batch: 2026-09-19
+
+TA-TR-2026-07 and TA-TR-2026-08 were published after the frozen six-paper
+batch. They are preserved as a separate two-paper, four-PDF batch under
+`2026-09-19/`. The workflow applies the same gates: exact public-receipt hashes,
+detached OTS proofs, embedded Bitcoin attestations, verification through the
+existing dual-provider header proxy, one guarded Arweave upload, and exact
+public readback. It never changes the completed 2026-09-18 batch.
