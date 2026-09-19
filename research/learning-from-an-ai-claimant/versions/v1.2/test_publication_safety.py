@@ -172,6 +172,10 @@ class PublicationSafetyTests(unittest.TestCase):
         draft = {'id':99999999,'conceptrecid':'22844927','submitted':False,
                  'metadata':{'title':common.TITLE,'version':'1.1','creators':[{'name':'Liu, Hongju'}]}}
         self.assertEqual(prepare.validate_descendant(draft,'22844927'),99999999)
+        cleared=copy.deepcopy(draft);cleared['metadata'].pop('version')
+        self.assertEqual(prepare.validate_descendant(cleared,'22844927'),99999999)
+        cleared['submitted']=True
+        with self.assertRaises(RuntimeError):prepare.validate_descendant(cleared,'22844927')
         for field,value in [('id',common.PREVIOUS_RECORD),('conceptrecid','99999888')]:
             bad=copy.deepcopy(draft);bad[field]=value
             with self.assertRaises(RuntimeError):prepare.validate_descendant(bad,'22844927')

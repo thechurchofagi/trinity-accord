@@ -34,7 +34,8 @@ def validate_descendant(deposit, concept):
     md = deposit.get('metadata', {})
     if (str(deposit.get('conceptrecid')), md.get('title')) != (str(concept), TITLE):
         raise RuntimeError('New draft is not a descendant of this paper')
-    if md.get('version') not in ('1.1', VERSION) or [c.get('name') for c in md.get('creators', [])] != ['Liu, Hongju']:
+    # Zenodo clears the version field in an unpublished new-version draft.
+    if md.get('version') not in (None, '1.1', VERSION) or [c.get('name') for c in md.get('creators', [])] != ['Liu, Hongju']:
         raise RuntimeError('Unrelated version or author in descendant draft: ' + json.dumps({
             'id': rid, 'version': md.get('version'), 'creators': md.get('creators'),
             'submitted': deposit.get('submitted')}, ensure_ascii=False))
