@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build only TA-TR-2026-07. No network, credentials or publication operations."""
 from __future__ import annotations
-import argparse, hashlib, html, json, re, shutil, xml.etree.ElementTree as ET
+import argparse, hashlib, html, json, os, re, shutil, xml.etree.ElementTree as ET
 from pathlib import Path
 import markdown
 from reportlab import rl_config
@@ -14,6 +14,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 
+os.environ['SOURCE_DATE_EPOCH']='1789776000'  # Fixed publication-day metadata, not a timestamp proof.
 ROOT=Path(__file__).resolve().parent
 RID=22840604
 DOI='10.5281/zenodo.22840604'
@@ -99,7 +100,7 @@ def build(output:Path):
             got=re.findall(r'^### '+str(section)+r'\.(\d+) ',md,re.M)
             if got!=[str(i) for i in range(1,n+1)]:raise RuntimeError('Paired-case/objection inventory mismatch '+lang)
         refs=re.findall(r'^\[(\d+)\] (.+)$',md,re.M)
-        if [a for a,b in refs]!=[str(i) for i in range(1,11)]:raise RuntimeError('Reference inventory mismatch')
+        if [a for a,b in refs]!=[str(i) for i in range(1,13)]:raise RuntimeError('Reference inventory mismatch')
         references.append(refs)
         if 'TA-TR-2026-07' not in md or DOI not in md:raise RuntimeError('Paper identity missing')
         if any(x in md for x in ('','TODO','[INSERT','PLACEHOLDER')):raise RuntimeError('Unexpected unfinished manuscript marker')
@@ -107,7 +108,7 @@ def build(output:Path):
         (output/(name+'.md')).write_text(md,encoding='utf-8')
         (output/(name+'.html')).write_text(render_html(md,lang,name),encoding='utf-8')
         render_pdf(md,output/(name+'.pdf'),lang)
-        stats[lang]={'main_sections':12,'paired_case_groups':8,'objections':7,'references':10,'words_split_whitespace':len(md.split()),'cjk_characters':len(re.findall(r'[\u3400-\u9fff]',md)),'source_bytes':len(source.encode()),'published_markdown_bytes':len(md.encode())}
+        stats[lang]={'main_sections':12,'paired_case_groups':8,'objections':7,'references':12,'words_split_whitespace':len(md.split()),'cjk_characters':len(re.findall(r'[\u3400-\u9fff]',md)),'source_bytes':len(source.encode()),'published_markdown_bytes':len(md.encode())}
         sources[lang]={'source_sha256':sha(source.encode()),'published_markdown_sha256':sha(md.encode()),'publication_only_front_matter':{'before':old,'after':new}}
     if references[0]!=references[1]:raise RuntimeError('English/Chinese reference lists differ')
     bib='@techreport{liu2026recoverability,\n  author = {Liu, Hongju},\n  title = {Recoverability and Shared Time: The Ethics of AI Suspension, Resumption, and Coexistence},\n  institution = {Independent researcher},\n  number = {TA-TR-2026-07},\n  year = {2026},\n  month = {September},\n  doi = {'+DOI+'},\n  url = {https://doi.org/'+DOI+'},\n  version = {1.0},\n  note = {Philosophical preprint; not peer reviewed. English and Chinese versions constitute one study. Substantial AI research and drafting disclosed.}\n}\n'

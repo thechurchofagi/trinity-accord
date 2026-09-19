@@ -39,6 +39,10 @@ Hu and Lehman's undated online manuscript, consulted on 19 September 2026, disti
 
 Work on discretionary time already treats control over one's time as important to freedom (Goodin et al., 2008). The present discussion is not a new general theory of temporal autonomy. Its additional focus is relational and event-sensitive: two agents can receive equal discretionary duration yet have unequal access to the moments when a shared commitment remains revisable. Only the bibliographic record and publisher description of that book were checked for this study; the argument does not depend on a detailed interpretation of its empirical comparisons.
 
+Scanlon's *The Significance of Choice* (1986, Lecture 2, pp. 178-181) distinguishes instrumental, demonstrative and symbolic reasons to value choosing. The participation premise below draws on this established plurality; it does not treat all choice as intrinsically mandatory or all delegation as a loss.
+
+Dutta and Kandala (2026, section 2.1) give a related temporal-evidence non-identifiability argument in mental-health AI evaluation. Our two-history construction uses the same elementary information-loss pattern, not a new mathematical result. Our question instead concerns ethically significant decision closure despite successful restoration; their empirical study is not evidence for our normative conclusions.
+
 Technical work on the off-switch problem examines incentives to preserve human intervention (Hadfield-Menell et al., 2017). AI-control research tests ways to limit harmful outcomes despite intentional subversion (Greenblatt et al., 2024). Neither objective is replaced by the present analysis. A claim to be considered in a decision does not establish that unconstrained execution is safe. Conversely, a technically effective interruption does not settle every question about decisions made during it.
 
 Finally, this study differs from the author's preceding paper on preference change (Liu, 2026b). That paper examines the relation between an earlier transformation, present assent and continuing relations. Here preferences and identity are held fixed in the central argument. The motivating coexistence proposal discussed elsewhere (Liu, 2026a) supplies context, not an independent premise or corroborating experiment. The conclusions can be accepted or rejected without accepting the Trinity Accord.
@@ -292,3 +296,7 @@ No human participants, animal subjects, model evaluation dataset or empirical me
 [9] Long, R., Sebo, J., Butlin, P., Finlinson, K., Fish, K., Harding, J., Pfau, J., Sims, T., Birch, J., and Chalmers, D. (2024). Taking AI Welfare Seriously. arXiv:2411.00986, version 1. https://doi.org/10.48550/arXiv.2411.00986
 
 [10] Long, R., Sebo, J., and Sims, T. (2025). Is there a tension between AI safety and AI welfare? Philosophical Studies, 182, 2005-2033. https://doi.org/10.1007/s11098-025-02302-2
+
+[11] Dutta, S., and Kandala, R. (2026). Mental Health AI Safety Claims Must Preserve Temporal Evidence. arXiv:2605.08827, version 1. https://doi.org/10.48550/arXiv.2605.08827
+
+[12] Scanlon, T. M., Jr. (1986). The Significance of Choice. Tanner Lectures on Human Values, delivered at Brasenose College, Oxford, 16, 23 and 28 May 1986. Archived revised lecture text, pp. 151-216; cited discussion pp. 178-181. https://tannerlectures.org/wp-content/uploads/2024/07/Scanlon_The-Significance-of-Choice.pdf

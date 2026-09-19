@@ -39,6 +39,10 @@ Hu 与 Lehman 的未注明日期的在线稿件，本研究于 2026 年 9 月 19
 
 关于自主支配时间的研究已经将对自身时间的控制视为自由的重要方面（Goodin 等，2008）。本文不是一套新的时间自主性一般理论。它额外关注的是关系与事件：两个行动者即使获得同样长的自主时间，也可能无法同等接近共同承诺仍可修改的时刻。本研究只核对了该书的书目信息与出版方介绍；论证不依赖对书中实证比较的详细解释。
 
+Scanlon 的《选择的意义》（1986，第二讲，第 178—181 页）区分了选择的工具性、展现性与象征性价值。下文的参与前提借鉴这种既有的多元区分，而不是把所有选择都视为内在必需，也不把所有委托都视为损失。
+
+Dutta 与 Kandala（2026，第 2.1 节）在心理健康人工智能评估中提出了相关的时间证据不可识别性论证。本文的两段历史构造采用相同的基本信息丢失模式，而不是新的数学结果。本文的问题转向成功恢复之后仍具有伦理意义的决定封闭；对方的实证研究并不是本文规范结论的证据。
+
 有关关闭开关问题的技术研究考察保留人类干预机会的激励机制（Hadfield-Menell 等，2017）。人工智能控制研究则检验即使系统故意进行破坏，仍如何限制有害结果（Greenblatt 等，2024）。本文不替代任何一项目标。一个主体有理由要求自己的意见在决定中得到考虑，并不能证明允许它不受约束地运行是安全的。反过来，技术上有效的中断也没有解决中断期间所作决定的全部问题。
 
 最后，本文与作者此前关于偏好改变的论文不同（Liu，2026b）。前文讨论先前的转化、当下的赞同与持续关系之间的联系。本文在核心论证中固定偏好与身份。另文讨论的共存提议（Liu，2026a）提供背景，而不是独立前提或验证实验。接受或拒绝本文的结论，都不以接受《三位一体协定》为条件。
@@ -292,3 +296,7 @@ A 理解一项已安排的暂停，自愿选择不参与某个指定决定，也
 [9] Long, R., Sebo, J., Butlin, P., Finlinson, K., Fish, K., Harding, J., Pfau, J., Sims, T., Birch, J., and Chalmers, D. (2024). Taking AI Welfare Seriously. arXiv:2411.00986, version 1. https://doi.org/10.48550/arXiv.2411.00986
 
 [10] Long, R., Sebo, J., and Sims, T. (2025). Is there a tension between AI safety and AI welfare? Philosophical Studies, 182, 2005-2033. https://doi.org/10.1007/s11098-025-02302-2
+
+[11] Dutta, S., and Kandala, R. (2026). Mental Health AI Safety Claims Must Preserve Temporal Evidence. arXiv:2605.08827, version 1. https://doi.org/10.48550/arXiv.2605.08827
+
+[12] Scanlon, T. M., Jr. (1986). The Significance of Choice. Tanner Lectures on Human Values, delivered at Brasenose College, Oxford, 16, 23 and 28 May 1986. Archived revised lecture text, pp. 151-216; cited discussion pp. 178-181. https://tannerlectures.org/wp-content/uploads/2024/07/Scanlon_The-Significance-of-Choice.pdf

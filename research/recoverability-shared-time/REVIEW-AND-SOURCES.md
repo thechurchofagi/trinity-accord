@@ -14,7 +14,7 @@ The proposed contribution is narrower: hold restored identity, memory and prefer
 
 The two-history construction is an elementary underdetermination demonstration, not a novel mathematical theorem. It establishes that recovery-only evidence cannot answer a question whose truth also depends on external decision history. Ethical force additionally depends on an independently defensible participation claim. The paper's stronger contribution is the articulated two-track analysis and the countercases that constrain it, not the formula by itself.
 
-The non-self-exculpation principle is proposed as a useful formulation of a familiar anti-circular justificatory concern in this setting. No priority over all procedural, temporal-autonomy or exclusion literature is asserted. Newly identified direct precedents should narrow attribution rather than be concealed.
+The non-self-exculpation principle is proposed as a useful formulation of a familiar anti-circular justificatory concern in this setting. The final literature pass additionally cites Scanlon on choice and Dutta and Kandala on temporal-evidence non-identifiability. No priority over all procedural, temporal-autonomy or exclusion literature is asserted. Newly identified direct precedents should narrow attribution rather than be concealed.
 
 ## 2. Closest sources and checked scope
 
@@ -37,6 +37,10 @@ The non-self-exculpation principle is proposed as a useful formulation of a fami
 9. Hongju Liu, TA-TR-2026-04 v1.0, DOI 10.5281/zenodo.22804542. Existing repository publication record and research positioning checked. First-party motivating coexistence analysis; not independent corroboration.
 
 10. Hongju Liu, TA-TR-2026-06 v2.1, DOI 10.5281/zenodo.22830239. Existing repository manuscript/publication description checked for scope distinction. The sixth study changes preferences; the seventh's central cases hold preferences fixed and vary external decision opportunity. This difference does not imply the papers are evidentially independent.
+
+11. Srimonti Dutta and Ratna Kandala (2026), arXiv:2605.08827v1. Official abstract and section 2.1 checked. The related information-loss argument is explicitly acknowledged; its empirical findings are not used to validate this paper.
+
+12. T. M. Scanlon, *The Significance of Choice*, lectures delivered May 1986. Official archive and Lecture 2, printed pp. 178-181, checked, including PDF screenshots of pp. 178-180. Cited as a lecture text rather than guessing a journal publication date. The reference acknowledges the established plurality of choice values.
 
 No third-party full text or standalone font is included in the publication package. Citation and source checks do not establish exhaustive originality. No similarity percentage is reported because no such measurement was performed.
 
@@ -66,7 +70,7 @@ No third-party full text or standalone font is included in the publication packa
 
 ## 4. Translation controls
 
-The Chinese document is a complete translation of the English argument, not a separate study or a summary. Both versions have 12 numbered main sections, eight paired cases (6.1-6.8), seven explicit objections (7.1-7.7), a disclosure section and the same ten references.
+The Chinese document is a complete translation of the English argument, not a separate study or a summary. Both versions have 12 numbered main sections, eight paired cases (6.1-6.8), seven explicit objections (7.1-7.7), a disclosure section and the same twelve references.
 
 Key correspondences: internal recoverability = 内部可恢复性; practical resumability = 实际可恢复运行性; decision-relative participation = 相对于特定决定的参与; shared time = 共同时间; standing = 参与资格/正当主张, depending on context; closure = 封闭/定案; non-self-exculpation = 不得以自造缺席自我免责; execution track = 运行轨道; closure track = 封闭轨道.
 
