@@ -1,0 +1,58 @@
+name: Publish Recoverability and Shared Time
+on:
+  push:
+    branches: [research/recoverability-shared-time-v1-20260919]
+    paths:
+      - '.github/workflows/publish-recoverability-shared-time.yml'
+permissions:
+  contents: write
+concurrency:
+  group: recoverability-shared-time-zenodo-v1
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: research/recoverability-shared-time-v1-20260919
+      - name: Check publisher syntax
+        run: python3 -m py_compile research/recoverability-shared-time/publish_zenodo.py
+      - name: Publish only reviewed record 22840604 and read all files anonymously
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/recoverability-shared-time/publish_zenodo.py
+      - name: Preserve actual publication state including failures
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          python3 - <<'PY'
+          import pathlib,subprocess
+          root=pathlib.Path('research/recoverability-shared-time')
+          for name in ('publication-record.json','publication-attempt.json'):
+              p=root/name
+              if p.exists():subprocess.run(['git','add',str(p)],check=True)
+          paths=subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines()
+          allowed={str(root/n) for n in ('publication-record.json','publication-attempt.json')}
+          if not set(paths)<=allowed:raise RuntimeError('Unexpected staged path')
+          if paths:
+              subprocess.run(['git','commit','-m','research: preserve seventh-paper publication and anonymous-readback receipt [skip ci]'],check=True)
+              subprocess.run(['git','push','origin','HEAD:research/recoverability-shared-time-v1-20260919'],check=True)
+          PY
+      - name: Retain exact files, public downloads and diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: recoverability-shared-time-publication-v1.0
+          path: |
+            research/recoverability-shared-time/published/
+            research/recoverability-shared-time/EXPECTED-PUBLICATION.json
+            research/recoverability-shared-time/visual-review.json
+            research/recoverability-shared-time/format-checks.json
+            research/recoverability-shared-time/publication-record.json
+            research/recoverability-shared-time/publication-attempt.json
+            /tmp/ta07-public-readback/
+          retention-days: 90
