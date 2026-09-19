@@ -1,7 +1,7 @@
 {
   "state": "INCOMPLETE_REQUIRES_SAME_VERSION_RECONCILIATION",
-  "phase": "create_one_linked_version",
+  "phase": "check_published_predecessor",
   "error_type": "RuntimeError",
-  "error": "Unexpected newversion response identity",
-  "workflow_run_id": "35448322421"
+  "error": "Unresolved creation intent; reconcile before another newversion POST",
+  "workflow_run_id": "35448462364"
 }
