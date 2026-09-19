@@ -6,8 +6,18 @@
   "source_commit": "dd50a011345f6b879ac10fe09d03ee8588c6eb2e",
   "supplement_title": "Critical Use of the Six Trinity Accord Studies: A Dated Editorial Supplement",
   "supplement_version": "1.0",
-  "target_record_ids": [21699878, 21900592, 22761411, 22804542, 22809019, 22830239],
-  "allowed_existing_record_changes": ["append_dated_description_link", "add_isSupplementedBy_relation"],
+  "target_record_ids": [
+    21699878,
+    21900592,
+    22761411,
+    22804542,
+    22809019,
+    22830239
+  ],
+  "allowed_existing_record_changes": [
+    "append_dated_description_link",
+    "add_isSupplementedBy_relation"
+  ],
   "replace_existing_files": false,
   "create_new_versions_of_six_papers": false,
   "new_research_paper_count": 0,
@@ -15,6 +25,12 @@
   "publication_independent_of_source_preservation": true,
   "arweave_max_payload_bytes": 1048576,
   "arweave_max_transaction_reward_ar": "0.003",
-  "completion_requires": ["PUBLISHED_AND_PUBLIC_READBACK_PASS", "SIX_DOI_METADATA_LINKS_VERIFIED", "ARWEAVE_READBACK_PASS"],
-  "retry_boundary": "Existing hourly preservation workflow only; safe read retries; no repeated ambiguous creation or duplicate paid Arweave transaction. Validation conflicts stop the affected operation for inspection."
+  "completion_requires": [
+    "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+    "SIX_DOI_METADATA_LINKS_VERIFIED",
+    "ARWEAVE_READBACK_PASS"
+  ],
+  "retry_boundary": "Existing hourly preservation workflow only; safe read retries; no repeated ambiguous creation or duplicate paid Arweave transaction. Validation conflicts stop the affected operation for inspection.",
+  "resume_requested_at": "2026-09-19T01:09:00Z",
+  "resume_reason": "User explicitly requested completion of unfinished DOI, OTS and Arweave work after PR #1220. Trigger the existing serialized lifecycle; preserve existing versions and do not duplicate paid transactions."
 }
