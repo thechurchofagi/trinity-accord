@@ -9,7 +9,7 @@
   "readback_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "hash_match": false,
   "retryable": true,
-  "resumed_from_checkpoint": false,
+  "resumed_from_checkpoint": true,
   "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
   "wallet_balance_before_available": true,
   "wallet_balance_before_reason": null,

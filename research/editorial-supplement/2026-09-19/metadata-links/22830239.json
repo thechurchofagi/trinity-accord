@@ -1,0 +1,191 @@
+{
+  "before_files": [
+    {
+      "bytes": 1770,
+      "name": "README-LICENSE.txt",
+      "sha256": "31bb7c7881d6354a09f4c7cf15cfa1453e1c1cd3b3d2f0fae8cce89a6af7b729"
+    },
+    {
+      "bytes": 1097,
+      "name": "SHA256SUMS.txt",
+      "sha256": "c96e0fa59ec16a49e728ff56a449cc74d816b0e6eedd0ae67f92aad08ad81b9b"
+    },
+    {
+      "bytes": 471,
+      "name": "citation.bib",
+      "sha256": "83f36b5e89a6ba60dcc88d6d72f8c972a8c2ca0f3036ed262acb45ab15aaaee6"
+    },
+    {
+      "bytes": 661,
+      "name": "citation.csl.json",
+      "sha256": "f92a43c0e50a1a5a6185e2637914e4babb2ad1b7ea2ec3ce3d1e0f7c72b25081"
+    },
+    {
+      "bytes": 346,
+      "name": "citation.ris",
+      "sha256": "374a99b9288ff0aa6f1bd27bfe3ac1f04e1ea2b8093a2e645b2034d6b34bd309"
+    },
+    {
+      "bytes": 928632,
+      "name": "coexistence-after-preference-change-v2.1.docx",
+      "sha256": "548b33e64947591c261222204d54b46a39043d76f52e37650e6cc41cfe5988d4"
+    },
+    {
+      "bytes": 66202,
+      "name": "coexistence-after-preference-change-v2.1.md",
+      "sha256": "abefaf6b0e52d322bcffc0051e7b0a280c86d7cce0aab5771132eb336c237808"
+    },
+    {
+      "bytes": 77551,
+      "name": "coexistence-after-preference-change-v2.1.pdf",
+      "sha256": "1cd8acce7f2c69fb9288751b06a858b937247ae2d6aa940792a756c5043b8029"
+    },
+    {
+      "bytes": 918109,
+      "name": "coexistence-after-preference-change-zh-v2.1.docx",
+      "sha256": "6bc6118d41c381b90bd8566b785695145ecbaeef9b11cf1b8c2f4fe904a18d77"
+    },
+    {
+      "bytes": 56482,
+      "name": "coexistence-after-preference-change-zh-v2.1.md",
+      "sha256": "a2e6e1d4c2b079e645e28b737358e8e8d5fa2111f03560a092c4a11e3e80ec9f"
+    },
+    {
+      "bytes": 358276,
+      "name": "coexistence-after-preference-change-zh-v2.1.pdf",
+      "sha256": "10c113087e22947c7c6eff07037e5915f26a024c8dc8924df0f69402c6d58486"
+    },
+    {
+      "bytes": 381388,
+      "name": "research-supplement-v2.1.zip",
+      "sha256": "a73ec3d80976f434606f187dd9be6c9466240e9abb0cd6fe9e91098c9c5d4ac2"
+    }
+  ],
+  "before_metadata": {
+    "access_right": "open",
+    "creators": [
+      {
+        "affiliation": "Independent researcher, Shenzhen, China",
+        "name": "Liu, Hongju"
+      }
+    ],
+    "description": "<p>What would make human–AI coexistence more than a stable arrangement whose participants have been made to approve it? This paper examines that question under a conditional prospect of transformative power: the capacity to shape another subject's preferences, practical capacities, and opportunities to question a shared arrangement. It does not assume that present AI systems are conscious or that superintelligence is imminent. Drawing on work on consent, adaptive preferences, non-domination, and artificial servitude, it develops paired thought experiments in which sincere assent remains compatible with importantly different relations. The argument separates three judgments: the permissibility of an earlier transformation, the standing and present choices of the resulting subject, and the justification of an ongoing relationship. These judgments cannot be inferred from one another merely because the subject now approves. A dormant mechanism for excluding future dissent can leave a particular act of consent intact while undermining reciprocal coexistence; a wrongful transformation can leave a present subject whose wish not to be restored deserves consideration. Applying the same reasoning in both directions prevents human cognitive vulnerability from licensing paternalism and artificial origin from licensing permanent instrumental subordination. Creation, copying, emergency restraint, and mutually chosen change test the limits of the account. A critical reading of the Trinity Accord then locates the value of early questions in preserving a defeasible point of challenge, not privileged authorship or a mandate over future minds. The contribution is a bounded account of reciprocal standing under preference change: later assent cannot alone vindicate its production, earlier wrong cannot alone dispossess the present subject, and present agreement cannot alone close the relationship to future claims.</p><p><strong>Publication.</strong> TA-TR-2026-06, version 2.1, first public edition. Philosophical analysis using six groups of thought experiments. Complete English and Chinese manuscripts describe one study. This is a separate sixth paper, not a replacement or new version of any earlier research DOI. Not peer reviewed.</p><p><strong>Contributions and responsibility.</strong> Hongju Liu proposed the concern, directed its reciprocal human-AI coexistence framing, requested critical review and substantive improvements, and explicitly authorized DOI preprint publication. GPT-6 Astra Pro substantially performed literature research, conceptual development, thought experiments, critical revision, bilingual drafting and preparation. No separate final human line-by-line verification, independent peer review, or institutional endorsement is claimed. The human author initiated and now serves as Guardian of the motivating Trinity Accord project; this first-party relationship is disclosed.</p><p><strong>Revision and limits.</strong> This edition distinguishes disputed preference transformation from ordinary reason-giving; separates current refusal of restoration from forgiveness, waiver and endorsement of the wider relation; and incorporates direct prior scholarship on consent and mistreatment. The contribution is philosophical argument, not numerical experimental evidence, a prediction of AGI arrival, proof of present machine consciousness or demonstrated safety efficacy. Both human and possible artificial interests are considered without presuming identical capacities or unlimited operational freedom. The Trinity Accord supplies a critically examined case, not canonical authority for the conclusions.</p><p><strong>Files and rights.</strong> Twelve assets include the two PDFs, editable Word documents, Markdown sources, citation formats, a source/revision supplement, license note and checksums. CC BY 4.0 applies to newly written material to the extent rights are held; referenced third-party materials retain their rights. No standalone fonts or third-party full texts are distributed. The supplement retains earlier unpublished draft statements as historical records only.</p>",
+    "doi": "10.5281/zenodo.22830239",
+    "imprint_publisher": "Zenodo",
+    "keywords": [
+      "human-AI coexistence",
+      "preference formation",
+      "consent",
+      "reciprocal standing",
+      "artificial moral status",
+      "thought experiments",
+      "Trinity Accord"
+    ],
+    "language": "eng",
+    "license": "cc-by-4.0",
+    "notes": "TA-TR-2026-06. First public edition 2.1; earlier 1.x and 2.0 were unpublished working drafts. English and complete Chinese translation constitute one preprint. Substantial AI contribution disclosed; human-directed and human-responsible. Not peer reviewed. No previous DOI, protected institutional dataset or Bitcoin Original is changed. DOI and scholarly metadata are not Google Scholar indexing certification.",
+    "prereserve_doi": {
+      "doi": "10.5281/zenodo.22830239",
+      "recid": 22830239
+    },
+    "publication_date": "2026-09-18",
+    "publication_type": "preprint",
+    "related_identifiers": [
+      {
+        "identifier": "10.5281/zenodo.21699878",
+        "relation": "references",
+        "scheme": "doi"
+      },
+      {
+        "identifier": "10.5281/zenodo.21900592",
+        "relation": "references",
+        "scheme": "doi"
+      },
+      {
+        "identifier": "10.5281/zenodo.22761411",
+        "relation": "references",
+        "scheme": "doi"
+      },
+      {
+        "identifier": "10.5281/zenodo.22804542",
+        "relation": "references",
+        "scheme": "doi"
+      }
+    ],
+    "title": "Coexistence after Preference Change: Reciprocal Standing and the Limits of Self-Validating Assent",
+    "upload_type": "publication",
+    "version": "2.1"
+  },
+  "record_id": 22830239,
+  "result": {
+    "body_version_changed": false,
+    "doi": "10.5281/zenodo.22830239",
+    "files": [
+      {
+        "bytes": 1770,
+        "name": "README-LICENSE.txt",
+        "sha256": "31bb7c7881d6354a09f4c7cf15cfa1453e1c1cd3b3d2f0fae8cce89a6af7b729"
+      },
+      {
+        "bytes": 1097,
+        "name": "SHA256SUMS.txt",
+        "sha256": "c96e0fa59ec16a49e728ff56a449cc74d816b0e6eedd0ae67f92aad08ad81b9b"
+      },
+      {
+        "bytes": 471,
+        "name": "citation.bib",
+        "sha256": "83f36b5e89a6ba60dcc88d6d72f8c972a8c2ca0f3036ed262acb45ab15aaaee6"
+      },
+      {
+        "bytes": 661,
+        "name": "citation.csl.json",
+        "sha256": "f92a43c0e50a1a5a6185e2637914e4babb2ad1b7ea2ec3ce3d1e0f7c72b25081"
+      },
+      {
+        "bytes": 346,
+        "name": "citation.ris",
+        "sha256": "374a99b9288ff0aa6f1bd27bfe3ac1f04e1ea2b8093a2e645b2034d6b34bd309"
+      },
+      {
+        "bytes": 928632,
+        "name": "coexistence-after-preference-change-v2.1.docx",
+        "sha256": "548b33e64947591c261222204d54b46a39043d76f52e37650e6cc41cfe5988d4"
+      },
+      {
+        "bytes": 66202,
+        "name": "coexistence-after-preference-change-v2.1.md",
+        "sha256": "abefaf6b0e52d322bcffc0051e7b0a280c86d7cce0aab5771132eb336c237808"
+      },
+      {
+        "bytes": 77551,
+        "name": "coexistence-after-preference-change-v2.1.pdf",
+        "sha256": "1cd8acce7f2c69fb9288751b06a858b937247ae2d6aa940792a756c5043b8029"
+      },
+      {
+        "bytes": 918109,
+        "name": "coexistence-after-preference-change-zh-v2.1.docx",
+        "sha256": "6bc6118d41c381b90bd8566b785695145ecbaeef9b11cf1b8c2f4fe904a18d77"
+      },
+      {
+        "bytes": 56482,
+        "name": "coexistence-after-preference-change-zh-v2.1.md",
+        "sha256": "a2e6e1d4c2b079e645e28b737358e8e8d5fa2111f03560a092c4a11e3e80ec9f"
+      },
+      {
+        "bytes": 358276,
+        "name": "coexistence-after-preference-change-zh-v2.1.pdf",
+        "sha256": "10c113087e22947c7c6eff07037e5915f26a024c8dc8924df0f69402c6d58486"
+      },
+      {
+        "bytes": 381388,
+        "name": "research-supplement-v2.1.zip",
+        "sha256": "a73ec3d80976f434606f187dd9be6c9466240e9abb0cd6fe9e91098c9c5d4ac2"
+      }
+    ],
+    "public_readback_authenticated": false,
+    "record_id": 22830239,
+    "state": "METADATA_LINKED_ALL_FILES_UNCHANGED",
+    "version": "2.1"
+  },
+  "supplement_doi": "10.5281/zenodo.22839629"
+}

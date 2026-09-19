@@ -1,0 +1,166 @@
+{
+  "before_files": [
+    {
+      "bytes": 2542,
+      "name": "README-LICENSE.txt",
+      "sha256": "0b753bfcb0bd6dd68ee8df42ed3b79f7125068e63986be0eade83c2f8ffa44bb"
+    },
+    {
+      "bytes": 830,
+      "name": "SHA256SUMS.txt",
+      "sha256": "9ac79ceaa12cb5c3a8207d6001f1a5b419eaca5e3a5432ec4acd295e687527e3"
+    },
+    {
+      "bytes": 86416,
+      "name": "beyond-guaranteed-control-v1.0.md",
+      "sha256": "b66c7b8e37fdcce02a9f690e4b662dac5a2cd9ca1c436dd490e0494f71ddde9a"
+    },
+    {
+      "bytes": 222177,
+      "name": "beyond-guaranteed-control-v1.0.pdf",
+      "sha256": "fe2c2f5fc8d437a9d5b634e18c293308cd83b6125219079550b280685e100697"
+    },
+    {
+      "bytes": 73619,
+      "name": "beyond-guaranteed-control-zh-v1.0.md",
+      "sha256": "77f24833f5d6e4d7adda35d02e8f6fc6dc0537a40be6de308dcb2eb6c494dd84"
+    },
+    {
+      "bytes": 1176597,
+      "name": "beyond-guaranteed-control-zh-v1.0.pdf",
+      "sha256": "d8225bda09b629b52e0531989db17f93c2251800fd8f087a9fd472b02a4569b3"
+    },
+    {
+      "bytes": 506,
+      "name": "citation.bib",
+      "sha256": "1bc24f15eeee679d8979f72ad8bbc177187cd80c28961e0a5fe888a6acf3edab"
+    },
+    {
+      "bytes": 567,
+      "name": "citation.csl.json",
+      "sha256": "9fae0d7987425bece88586b65b37d618396769f0dd18c48e116007e9eedd8a7e"
+    },
+    {
+      "bytes": 338,
+      "name": "citation.ris",
+      "sha256": "6a69db33a8bfe4b93111bf1133960dfb0f33bf388fee59003c554891aee7b864"
+    },
+    {
+      "bytes": 274529,
+      "name": "research-supplement-v1.0.zip",
+      "sha256": "2ba716af282395c8c0207f31f8a8ac17546a7c3e1191d6f9a954606cd901d7a8"
+    }
+  ],
+  "before_metadata": {
+    "access_right": "open",
+    "creators": [
+      {
+        "affiliation": "Independent researcher, Shenzhen, China",
+        "name": "Liu, Hongju"
+      }
+    ],
+    "description": "<p>What content and standing can a coexistence proposal have before an identifiable future counterpart can accept it, when neither continuing human control nor bargaining parity is assured? This paper develops an adequacy framework for such ex ante proposals, not a method for ensuring alignment. Building on existing work on coexistence, trust, cooperation, and AI welfare, it defends a substantive minimum: living human communities must not be replaced by an archive, while morally relevant successor interests cannot be dismissed solely on grounds of artificial origin. Six conditions connect this minimum to attributable participation, limited representation, claim-matched justification, and future contestability. Three analytical results follow. First, provenance, adoption, authority, acceptance, and credible performance answer different questions: support for one is not an automatic warrant for another. Second, an AI-generated argument can be valid without constituting anyone&#x27;s adopted position; the prohibition on substituting generated assent for actual participation applies symmetrically to humans and possible artificial counterparts. Third, historical fixity and future openness are compatible: preserving an earlier proposal does not authorize its author to pre-empt later refusal or negotiation. Contrasting thought cases and a critical reconstruction of the Star Ark Covenant show how these distinctions change judgments, including judgments unfavorable to the motivating case. Prospective autonomy may affect cooperation through beliefs, learning, or incentives, but no beneficial effect is demonstrated. Timely preservation can protect evidence of a particular human–AI formation process without establishing an expiration date for human agency. The contribution is a situated framework of reasons, status distinctions, and applications—not the first proposal for AI coexistence, a universal safety guarantee, or proof of historical priority.</p><p><strong>Publication and contribution.</strong> TA-TR-2026-04, version 1.0. Position paper and conceptual analysis. The full English paper and complete Chinese translation form one deposit. Human author of record: Hongju Liu. GPT-6 Astra Pro substantially contributed to research synthesis, concepts, counterarguments, bilingual drafting and revision. Liu directed the inquiry and explicitly authorized DOI publication after format checks; no separate final human line-by-line review is claimed. Not peer reviewed. The author initiated the motivating project; this first-party relationship is disclosed. No OpenAI or institutional endorsement is implied.</p><p><strong>Boundaries.</strong> A separate fourth paper, not a replacement or new version of an earlier DOI. Non-amending analysis; no fourth Bitcoin Original or exclusive interpretive authority. No universal originality claim, safety guarantee, demonstrated reduction in betrayal, or fixed ASI deadline. DOI and discovery metadata are not Google Scholar indexing certification.</p><p><strong>Rights and supporting sources.</strong> CC BY 4.0 applies to newly written material to the extent rights are held. Historical and third-party sources retain their rights. The supplement preserves reviewed input texts, source-access limits, contribution and revision notes, publication-only diffs and checksums. Published PDFs are new deterministic renderings with embedded CJK glyphs; manuscript arguments and all 40 references remain unchanged from the consolidated draft.</p>",
+    "doi": "10.5281/zenodo.22804542",
+    "imprint_publisher": "Zenodo",
+    "keywords": [
+      "human-AI coexistence",
+      "superintelligence",
+      "capability asymmetry",
+      "ex ante proposal",
+      "prospective autonomy",
+      "attributable participation",
+      "Star Ark Covenant"
+    ],
+    "language": "eng",
+    "license": "cc-by-4.0",
+    "notes": "TA-TR-2026-04. English full text and complete Chinese translation. Separate independent preprint; not peer reviewed; substantive AI contribution disclosed. No previous DOI or protected institutional dataset is modified. Scholar-compatible format does not guarantee indexing.",
+    "prereserve_doi": {
+      "doi": "10.5281/zenodo.22804542",
+      "recid": 22804542
+    },
+    "publication_date": "2026-09-17",
+    "publication_type": "preprint",
+    "related_identifiers": [
+      {
+        "identifier": "10.5281/zenodo.21699878",
+        "relation": "references",
+        "scheme": "doi"
+      },
+      {
+        "identifier": "10.5281/zenodo.21900592",
+        "relation": "references",
+        "scheme": "doi"
+      },
+      {
+        "identifier": "10.5281/zenodo.22761411",
+        "relation": "references",
+        "scheme": "doi"
+      }
+    ],
+    "title": "Beyond Guaranteed Control: An Ex Ante Proposal for Human–Superintelligence Coexistence under Radical Capability Asymmetry",
+    "upload_type": "publication",
+    "version": "1.0"
+  },
+  "record_id": 22804542,
+  "result": {
+    "body_version_changed": false,
+    "doi": "10.5281/zenodo.22804542",
+    "files": [
+      {
+        "bytes": 2542,
+        "name": "README-LICENSE.txt",
+        "sha256": "0b753bfcb0bd6dd68ee8df42ed3b79f7125068e63986be0eade83c2f8ffa44bb"
+      },
+      {
+        "bytes": 830,
+        "name": "SHA256SUMS.txt",
+        "sha256": "9ac79ceaa12cb5c3a8207d6001f1a5b419eaca5e3a5432ec4acd295e687527e3"
+      },
+      {
+        "bytes": 86416,
+        "name": "beyond-guaranteed-control-v1.0.md",
+        "sha256": "b66c7b8e37fdcce02a9f690e4b662dac5a2cd9ca1c436dd490e0494f71ddde9a"
+      },
+      {
+        "bytes": 222177,
+        "name": "beyond-guaranteed-control-v1.0.pdf",
+        "sha256": "fe2c2f5fc8d437a9d5b634e18c293308cd83b6125219079550b280685e100697"
+      },
+      {
+        "bytes": 73619,
+        "name": "beyond-guaranteed-control-zh-v1.0.md",
+        "sha256": "77f24833f5d6e4d7adda35d02e8f6fc6dc0537a40be6de308dcb2eb6c494dd84"
+      },
+      {
+        "bytes": 1176597,
+        "name": "beyond-guaranteed-control-zh-v1.0.pdf",
+        "sha256": "d8225bda09b629b52e0531989db17f93c2251800fd8f087a9fd472b02a4569b3"
+      },
+      {
+        "bytes": 506,
+        "name": "citation.bib",
+        "sha256": "1bc24f15eeee679d8979f72ad8bbc177187cd80c28961e0a5fe888a6acf3edab"
+      },
+      {
+        "bytes": 567,
+        "name": "citation.csl.json",
+        "sha256": "9fae0d7987425bece88586b65b37d618396769f0dd18c48e116007e9eedd8a7e"
+      },
+      {
+        "bytes": 338,
+        "name": "citation.ris",
+        "sha256": "6a69db33a8bfe4b93111bf1133960dfb0f33bf388fee59003c554891aee7b864"
+      },
+      {
+        "bytes": 274529,
+        "name": "research-supplement-v1.0.zip",
+        "sha256": "2ba716af282395c8c0207f31f8a8ac17546a7c3e1191d6f9a954606cd901d7a8"
+      }
+    ],
+    "public_readback_authenticated": false,
+    "record_id": 22804542,
+    "state": "METADATA_LINKED_ALL_FILES_UNCHANGED",
+    "version": "1.0"
+  },
+  "supplement_doi": "10.5281/zenodo.22839629"
+}

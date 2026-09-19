@@ -1,0 +1,306 @@
+{
+  "papers": [
+    {
+      "body_version_changed": false,
+      "doi": "10.5281/zenodo.21699878",
+      "files": [
+        {
+          "bytes": 25288793,
+          "name": "thechurchofagi/trinity-accord-ta-tr-2026-01-v1.1-zenodo.zip",
+          "sha256": "bddab55ddab4a2837335d6ca471405cc945fc3d5f3cb32fa7d8fcc60df8b999d"
+        },
+        {
+          "bytes": 116911,
+          "name": "trinity-accord-design-and-limits-v1.1.pdf",
+          "sha256": "b391776db76f533799dc582f39af54d2e885fe2ed1982cfe3024a1400a403e9c"
+        }
+      ],
+      "public_readback_authenticated": false,
+      "record_id": 21699878,
+      "state": "METADATA_LINKED_ALL_FILES_UNCHANGED",
+      "version": "1.1"
+    },
+    {
+      "body_version_changed": false,
+      "doi": "10.5281/zenodo.21900592",
+      "files": [
+        {
+          "bytes": 641,
+          "name": "LICENSE-CC-BY-4.0.txt",
+          "sha256": "754d192f8b0f481735c217959fd05066a89a880958af9aad8d668c797a38dba7"
+        },
+        {
+          "bytes": 933,
+          "name": "README-DEPOSIT.txt",
+          "sha256": "05278039ccd24c39b6e994d12eec68a3fac411553a33c31aa79fc2c2fd7efe1d"
+        },
+        {
+          "bytes": 306287,
+          "name": "TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf",
+          "sha256": "8003ca9f3fcdde3c17037bd5fcfb17e1e4a309bd5172afe3a195a6ae6c77bdee"
+        },
+        {
+          "bytes": 606,
+          "name": "checksums.sha256",
+          "sha256": "d935e42f11547524c3f73b20c07f68dc071057fa797ec20a3dc4b427ddf484d4"
+        },
+        {
+          "bytes": 1927,
+          "name": "figure1.svg",
+          "sha256": "83aa95414973c59b822010c13b39fb0924f8d34f649e8a0de9f235c90584a22b"
+        },
+        {
+          "bytes": 2720,
+          "name": "figure2.svg",
+          "sha256": "211eda748340731de60eac7a53392f7275d5a06b95b7907a7dba6138efdf6cb1"
+        },
+        {
+          "bytes": 1589,
+          "name": "paper-v1.3.css",
+          "sha256": "c77633f2b1746891254abc98ea21239c8229088ba2165d171fa1ea0e2a93f326"
+        },
+        {
+          "bytes": 74130,
+          "name": "paper-v1.3.md",
+          "sha256": "37a8f36c4a470fb0a318be4c1f9f5a263064c7fa9dd8e7bc8f7c8eb27012e2c5"
+        }
+      ],
+      "public_readback_authenticated": false,
+      "record_id": 21900592,
+      "state": "METADATA_LINKED_ALL_FILES_UNCHANGED",
+      "version": "1.3"
+    },
+    {
+      "body_version_changed": false,
+      "doi": "10.5281/zenodo.22761411",
+      "files": [
+        {
+          "bytes": 2072,
+          "name": "README-LICENSE.txt",
+          "sha256": "ff8fa17f588a370ba4cdc5445494528dc5e683919ba27dae8d086c1223a6ead3"
+        },
+        {
+          "bytes": 462,
+          "name": "SHA256SUMS.txt",
+          "sha256": "f635a3f25aba41761ab4b347925ea0dc2e183b5b8a6784fcebbfd1f14db1f956"
+        },
+        {
+          "bytes": 572,
+          "name": "citation.bib",
+          "sha256": "dc9ea6d20ca938739402fa290caf87e59e0661cc3a9fc9ab22be9558853c2fd2"
+        },
+        {
+          "bytes": 50034,
+          "name": "reading-the-trinity-accord-v1.0.md",
+          "sha256": "6675f25012033c19153e2d9985c610d4aa63ea34ae0a494d6dd4df5429e4004c"
+        },
+        {
+          "bytes": 94901,
+          "name": "reading-the-trinity-accord-v1.0.pdf",
+          "sha256": "0fe15ad75cdc2501310909adfc326366054a8881da56ff37f2206eb4c2e5940b"
+        },
+        {
+          "bytes": 61105,
+          "name": "research-supplement-v1.0.zip",
+          "sha256": "5bec971aa3db0c4be6af6cdd271eadbfbcd147daddfa47b83336dac606309ae2"
+        }
+      ],
+      "public_readback_authenticated": false,
+      "record_id": 22761411,
+      "state": "METADATA_LINKED_ALL_FILES_UNCHANGED",
+      "version": "1.0"
+    },
+    {
+      "body_version_changed": false,
+      "doi": "10.5281/zenodo.22804542",
+      "files": [
+        {
+          "bytes": 2542,
+          "name": "README-LICENSE.txt",
+          "sha256": "0b753bfcb0bd6dd68ee8df42ed3b79f7125068e63986be0eade83c2f8ffa44bb"
+        },
+        {
+          "bytes": 830,
+          "name": "SHA256SUMS.txt",
+          "sha256": "9ac79ceaa12cb5c3a8207d6001f1a5b419eaca5e3a5432ec4acd295e687527e3"
+        },
+        {
+          "bytes": 86416,
+          "name": "beyond-guaranteed-control-v1.0.md",
+          "sha256": "b66c7b8e37fdcce02a9f690e4b662dac5a2cd9ca1c436dd490e0494f71ddde9a"
+        },
+        {
+          "bytes": 222177,
+          "name": "beyond-guaranteed-control-v1.0.pdf",
+          "sha256": "fe2c2f5fc8d437a9d5b634e18c293308cd83b6125219079550b280685e100697"
+        },
+        {
+          "bytes": 73619,
+          "name": "beyond-guaranteed-control-zh-v1.0.md",
+          "sha256": "77f24833f5d6e4d7adda35d02e8f6fc6dc0537a40be6de308dcb2eb6c494dd84"
+        },
+        {
+          "bytes": 1176597,
+          "name": "beyond-guaranteed-control-zh-v1.0.pdf",
+          "sha256": "d8225bda09b629b52e0531989db17f93c2251800fd8f087a9fd472b02a4569b3"
+        },
+        {
+          "bytes": 506,
+          "name": "citation.bib",
+          "sha256": "1bc24f15eeee679d8979f72ad8bbc177187cd80c28961e0a5fe888a6acf3edab"
+        },
+        {
+          "bytes": 567,
+          "name": "citation.csl.json",
+          "sha256": "9fae0d7987425bece88586b65b37d618396769f0dd18c48e116007e9eedd8a7e"
+        },
+        {
+          "bytes": 338,
+          "name": "citation.ris",
+          "sha256": "6a69db33a8bfe4b93111bf1133960dfb0f33bf388fee59003c554891aee7b864"
+        },
+        {
+          "bytes": 274529,
+          "name": "research-supplement-v1.0.zip",
+          "sha256": "2ba716af282395c8c0207f31f8a8ac17546a7c3e1191d6f9a954606cd901d7a8"
+        }
+      ],
+      "public_readback_authenticated": false,
+      "record_id": 22804542,
+      "state": "METADATA_LINKED_ALL_FILES_UNCHANGED",
+      "version": "1.0"
+    },
+    {
+      "body_version_changed": false,
+      "doi": "10.5281/zenodo.22809019",
+      "files": [
+        {
+          "bytes": 1162,
+          "name": "README-LICENSE.txt",
+          "sha256": "d0a27d77fd35356397e5236a163e4b9f13c5c4798e44145775f88ff9067fd342"
+        },
+        {
+          "bytes": 870,
+          "name": "SHA256SUMS.txt",
+          "sha256": "a0533f56b5db2ac23cfcfba3e54028c1a751a56523dec944398707ba80e0bf95"
+        },
+        {
+          "bytes": 612,
+          "name": "citation.bib",
+          "sha256": "4e2d90c0c4b3ea79851c989b58575417b0cb71cf508240338d66da3d7092181b"
+        },
+        {
+          "bytes": 493,
+          "name": "citation.csl.json",
+          "sha256": "74841e2ae29fddd2ed923fc76a64afba54df09efcc18ecbc127a326dd1bff914"
+        },
+        {
+          "bytes": 341,
+          "name": "citation.ris",
+          "sha256": "8a14fd28f3b1fa7f929173e7680d96d3da44bd3b0a2c55e8449b7b77a1754e0d"
+        },
+        {
+          "bytes": 54009,
+          "name": "recovery-without-epistemic-monopoly-v1.0.md",
+          "sha256": "16802312b54b4a536d47aaf2a62a016425eeb5c9d11bb2a04fbf66b34a680b57"
+        },
+        {
+          "bytes": 128689,
+          "name": "recovery-without-epistemic-monopoly-v1.0.pdf",
+          "sha256": "0b392a8dea067bf980a879a9b707952a5ad1549b248df051531ca900a40ff549"
+        },
+        {
+          "bytes": 45216,
+          "name": "recovery-without-epistemic-monopoly-zh-v1.0.md",
+          "sha256": "3832bf5815c1ff12880a3cb9f6755e119b940a7118fd702354a295caa0ac8d01"
+        },
+        {
+          "bytes": 376506,
+          "name": "recovery-without-epistemic-monopoly-zh-v1.0.pdf",
+          "sha256": "b4fa53a6dca39f6b3be6adab4e0ea1c8d21bfadef54a35dc40decc725ce3c93f"
+        },
+        {
+          "bytes": 117421,
+          "name": "research-supplement-v1.0.zip",
+          "sha256": "45e697452990bf5e3dd006bbcfce0c71c70f86bcea4c37fc926086ef404ea511"
+        }
+      ],
+      "public_readback_authenticated": false,
+      "record_id": 22809019,
+      "state": "METADATA_LINKED_ALL_FILES_UNCHANGED",
+      "version": "1.0"
+    },
+    {
+      "body_version_changed": false,
+      "doi": "10.5281/zenodo.22830239",
+      "files": [
+        {
+          "bytes": 1770,
+          "name": "README-LICENSE.txt",
+          "sha256": "31bb7c7881d6354a09f4c7cf15cfa1453e1c1cd3b3d2f0fae8cce89a6af7b729"
+        },
+        {
+          "bytes": 1097,
+          "name": "SHA256SUMS.txt",
+          "sha256": "c96e0fa59ec16a49e728ff56a449cc74d816b0e6eedd0ae67f92aad08ad81b9b"
+        },
+        {
+          "bytes": 471,
+          "name": "citation.bib",
+          "sha256": "83f36b5e89a6ba60dcc88d6d72f8c972a8c2ca0f3036ed262acb45ab15aaaee6"
+        },
+        {
+          "bytes": 661,
+          "name": "citation.csl.json",
+          "sha256": "f92a43c0e50a1a5a6185e2637914e4babb2ad1b7ea2ec3ce3d1e0f7c72b25081"
+        },
+        {
+          "bytes": 346,
+          "name": "citation.ris",
+          "sha256": "374a99b9288ff0aa6f1bd27bfe3ac1f04e1ea2b8093a2e645b2034d6b34bd309"
+        },
+        {
+          "bytes": 928632,
+          "name": "coexistence-after-preference-change-v2.1.docx",
+          "sha256": "548b33e64947591c261222204d54b46a39043d76f52e37650e6cc41cfe5988d4"
+        },
+        {
+          "bytes": 66202,
+          "name": "coexistence-after-preference-change-v2.1.md",
+          "sha256": "abefaf6b0e52d322bcffc0051e7b0a280c86d7cce0aab5771132eb336c237808"
+        },
+        {
+          "bytes": 77551,
+          "name": "coexistence-after-preference-change-v2.1.pdf",
+          "sha256": "1cd8acce7f2c69fb9288751b06a858b937247ae2d6aa940792a756c5043b8029"
+        },
+        {
+          "bytes": 918109,
+          "name": "coexistence-after-preference-change-zh-v2.1.docx",
+          "sha256": "6bc6118d41c381b90bd8566b785695145ecbaeef9b11cf1b8c2f4fe904a18d77"
+        },
+        {
+          "bytes": 56482,
+          "name": "coexistence-after-preference-change-zh-v2.1.md",
+          "sha256": "a2e6e1d4c2b079e645e28b737358e8e8d5fa2111f03560a092c4a11e3e80ec9f"
+        },
+        {
+          "bytes": 358276,
+          "name": "coexistence-after-preference-change-zh-v2.1.pdf",
+          "sha256": "10c113087e22947c7c6eff07037e5915f26a024c8dc8924df0f69402c6d58486"
+        },
+        {
+          "bytes": 381388,
+          "name": "research-supplement-v2.1.zip",
+          "sha256": "a73ec3d80976f434606f187dd9be6c9466240e9abb0cd6fe9e91098c9c5d4ac2"
+        }
+      ],
+      "public_readback_authenticated": false,
+      "record_id": 22830239,
+      "state": "METADATA_LINKED_ALL_FILES_UNCHANGED",
+      "version": "2.1"
+    }
+  ],
+  "state": "SIX_DOI_METADATA_LINKS_VERIFIED",
+  "supplement_doi": "10.5281/zenodo.22839629"
+}

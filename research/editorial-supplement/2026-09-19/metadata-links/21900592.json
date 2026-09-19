@@ -1,0 +1,132 @@
+{
+  "before_files": [
+    {
+      "bytes": 641,
+      "name": "LICENSE-CC-BY-4.0.txt",
+      "sha256": "754d192f8b0f481735c217959fd05066a89a880958af9aad8d668c797a38dba7"
+    },
+    {
+      "bytes": 933,
+      "name": "README-DEPOSIT.txt",
+      "sha256": "05278039ccd24c39b6e994d12eec68a3fac411553a33c31aa79fc2c2fd7efe1d"
+    },
+    {
+      "bytes": 306287,
+      "name": "TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf",
+      "sha256": "8003ca9f3fcdde3c17037bd5fcfb17e1e4a309bd5172afe3a195a6ae6c77bdee"
+    },
+    {
+      "bytes": 606,
+      "name": "checksums.sha256",
+      "sha256": "d935e42f11547524c3f73b20c07f68dc071057fa797ec20a3dc4b427ddf484d4"
+    },
+    {
+      "bytes": 1927,
+      "name": "figure1.svg",
+      "sha256": "83aa95414973c59b822010c13b39fb0924f8d34f649e8a0de9f235c90584a22b"
+    },
+    {
+      "bytes": 2720,
+      "name": "figure2.svg",
+      "sha256": "211eda748340731de60eac7a53392f7275d5a06b95b7907a7dba6138efdf6cb1"
+    },
+    {
+      "bytes": 1589,
+      "name": "paper-v1.3.css",
+      "sha256": "c77633f2b1746891254abc98ea21239c8229088ba2165d171fa1ea0e2a93f326"
+    },
+    {
+      "bytes": 74130,
+      "name": "paper-v1.3.md",
+      "sha256": "37a8f36c4a470fb0a318be4c1f9f5a263064c7fa9dd8e7bc8f7c8eb27012e2c5"
+    }
+  ],
+  "before_metadata": {
+    "access_right": "open",
+    "creators": [
+      {
+        "affiliation": null,
+        "name": "Liu, Hongju"
+      }
+    ],
+    "description": "A dated critical archival study of historical-position identity, hybrid human-AI authorship, canonical closure, and future audit through the Trinity Accord case. This is a noncanonical academic preprint and does not amend, supersede, or interpretively bind the three Bitcoin Originals.",
+    "doi": "10.5281/zenodo.21900592",
+    "imprint_publisher": "Zenodo",
+    "keywords": [
+      "historical position",
+      "human-AI authorship",
+      "future-directed communication",
+      "archival provenance",
+      "digital authenticity",
+      "AI agents",
+      "time capsules",
+      "interstellar messaging",
+      "hindsight bias",
+      "Trinity Accord"
+    ],
+    "language": "eng",
+    "license": "cc-by-4.0",
+    "notes": "Technical report TA-TR-2026-02. Version 1.3, frozen 12 August 2026. Not part of the Trinity Accord Canon. AI-assisted research and drafting are disclosed in the manuscript. Peer review: none.",
+    "prereserve_doi": {
+      "doi": "10.5281/zenodo.21900592",
+      "recid": 21900592
+    },
+    "publication_date": "2026-08-12",
+    "publication_type": "preprint",
+    "title": "Writing Before the Outcome: Historical Position, Human-AI Authorship, and the Trinity Accord",
+    "upload_type": "publication",
+    "version": "1.3"
+  },
+  "record_id": 21900592,
+  "result": {
+    "body_version_changed": false,
+    "doi": "10.5281/zenodo.21900592",
+    "files": [
+      {
+        "bytes": 641,
+        "name": "LICENSE-CC-BY-4.0.txt",
+        "sha256": "754d192f8b0f481735c217959fd05066a89a880958af9aad8d668c797a38dba7"
+      },
+      {
+        "bytes": 933,
+        "name": "README-DEPOSIT.txt",
+        "sha256": "05278039ccd24c39b6e994d12eec68a3fac411553a33c31aa79fc2c2fd7efe1d"
+      },
+      {
+        "bytes": 306287,
+        "name": "TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf",
+        "sha256": "8003ca9f3fcdde3c17037bd5fcfb17e1e4a309bd5172afe3a195a6ae6c77bdee"
+      },
+      {
+        "bytes": 606,
+        "name": "checksums.sha256",
+        "sha256": "d935e42f11547524c3f73b20c07f68dc071057fa797ec20a3dc4b427ddf484d4"
+      },
+      {
+        "bytes": 1927,
+        "name": "figure1.svg",
+        "sha256": "83aa95414973c59b822010c13b39fb0924f8d34f649e8a0de9f235c90584a22b"
+      },
+      {
+        "bytes": 2720,
+        "name": "figure2.svg",
+        "sha256": "211eda748340731de60eac7a53392f7275d5a06b95b7907a7dba6138efdf6cb1"
+      },
+      {
+        "bytes": 1589,
+        "name": "paper-v1.3.css",
+        "sha256": "c77633f2b1746891254abc98ea21239c8229088ba2165d171fa1ea0e2a93f326"
+      },
+      {
+        "bytes": 74130,
+        "name": "paper-v1.3.md",
+        "sha256": "37a8f36c4a470fb0a318be4c1f9f5a263064c7fa9dd8e7bc8f7c8eb27012e2c5"
+      }
+    ],
+    "public_readback_authenticated": false,
+    "record_id": 21900592,
+    "state": "METADATA_LINKED_ALL_FILES_UNCHANGED",
+    "version": "1.3"
+  },
+  "supplement_doi": "10.5281/zenodo.22839629"
+}

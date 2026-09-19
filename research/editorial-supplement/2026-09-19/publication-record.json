@@ -1,0 +1,55 @@
+{
+  "doi": "10.5281/zenodo.22839629",
+  "file_count": 8,
+  "files": [
+    {
+      "bytes": 1536,
+      "name": "README-LICENSE.txt",
+      "sha256": "0ffba24c97e30028ba15c0b605095ef02639b75074eb1544cd1facfc4d11aa2a"
+    },
+    {
+      "bytes": 615,
+      "name": "SHA256SUMS.txt",
+      "sha256": "2a03e0ec36dbfa8efc3f99c1a148b2c78fa2cb4b0272bc869c46ba613d8e285e"
+    },
+    {
+      "bytes": 1614,
+      "name": "SOURCE-MANIFEST.json",
+      "sha256": "78314c69c48f9c3914dd7e3e5bc81e0d82058088bc96e0ad26e8b035344a1475"
+    },
+    {
+      "bytes": 363,
+      "name": "citation.bib",
+      "sha256": "d192805bda83724f58d49ce95dc5461d6607081ce48498c45fb5a0e340850936"
+    },
+    {
+      "bytes": 20260,
+      "name": "critical-use-en-v1.0.html",
+      "sha256": "424f696d0b2ce82697ce580309d11ff06cbd390c20657a6c2a21ca8b77a840ea"
+    },
+    {
+      "bytes": 18818,
+      "name": "critical-use-en-v1.0.md",
+      "sha256": "4c0249efa80e1b85b63eca618103153f7196af571c8ba46e0c215276841eaccd"
+    },
+    {
+      "bytes": 17235,
+      "name": "critical-use-zh-v1.0.html",
+      "sha256": "2cd60b076974e1452399f0201913e2780883c5597ea6e17bafc04dc2b61d97d4"
+    },
+    {
+      "bytes": 15811,
+      "name": "critical-use-zh-v1.0.md",
+      "sha256": "a8d766621ca97dc11071cd5f22a4028578f20caf36ba89b720985f4a997ced3e"
+    }
+  ],
+  "new_research_papers": 0,
+  "old_paper_files_replaced": false,
+  "public_readback_authenticated": false,
+  "record_id": 22839629,
+  "source_commit": "dd50a011345f6b879ac10fe09d03ee8588c6eb2e",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "title": "Critical Use of the Six Trinity Accord Studies: A Dated Editorial Supplement",
+  "version": "1.0",
+  "workflow_run_id": "35412880415"
+}
