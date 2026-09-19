@@ -1,0 +1,43 @@
+name: Prepare Learning from an AI Claimant v1.2
+on:
+  push:
+    branches: [research/learning-from-ai-claimant-v1-2-20260919]
+    paths:
+      - '.github/workflows/prepare-learning-from-ai-claimant-v12.yml'
+      - 'research/learning-from-an-ai-claimant/versions/v1.2/prepare_zenodo.py'
+      - 'research/learning-from-an-ai-claimant/versions/v1.2/publication_common.py'
+permissions:
+  contents: write
+concurrency:
+  group: learning-from-ai-claimant-zenodo-v1-2
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta09-v12-prepare]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/learning-from-ai-claimant-v1-2-20260919
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
+      - name: Verify publication and version lineage safeguards
+        run: python3 research/learning-from-an-ai-claimant/versions/v1.2/test_publication_safety.py
+      - name: Reserve one linked version using the existing publication credential
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/learning-from-an-ai-claimant/versions/v1.2/prepare_zenodo.py
+      - name: Preserve actual reservation state
+        if: always()
+        run: python3 research/learning-from-an-ai-claimant/versions/v1.2/publication_common.py --persist-states
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: learning-from-ai-claimant-reservation-v1.2
+          path: |
+            research/learning-from-an-ai-claimant/versions/v1.2/deposit.json
+            research/learning-from-an-ai-claimant/versions/v1.2/create-intent.json
+            research/learning-from-an-ai-claimant/versions/v1.2/preparation-attempt.json
+          retention-days: 90
+          if-no-files-found: warn
