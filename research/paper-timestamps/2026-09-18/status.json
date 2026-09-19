@@ -1,90 +1,135 @@
 {
   "files": [
     {
+      "bitcoin_heights": [
+        967559,
+        967572
+      ],
       "doi": "10.5281/zenodo.21699878",
-      "error": "HTTP Error 504: Gateway Time-out",
       "name": "trinity-accord-design-and-limits-v1.1.pdf",
+      "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-01/trinity-accord-design-and-limits-v1.1.pdf.ots",
+      "proof_sha256": "3a221cbde94ed299a3366f17117e0557468eb8b2bea9276aaa46e00d0fe5c1c7",
       "report": "TA-TR-2026-01",
       "sha256": "b391776db76f533799dc582f39af54d2e885fe2ed1982cfe3024a1400a403e9c",
-      "state": "ERROR"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
+      "bitcoin_heights": [
+        967559,
+        967572
+      ],
       "doi": "10.5281/zenodo.21900592",
-      "error": "HTTP Error 504: Gateway Time-out",
       "name": "TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf",
+      "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-02/TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf.ots",
+      "proof_sha256": "6075f03a9b81e5fd54fb8e552e623df5676c6f526c41a509d20c4209057fe23e",
       "report": "TA-TR-2026-02",
       "sha256": "8003ca9f3fcdde3c17037bd5fcfb17e1e4a309bd5172afe3a195a6ae6c77bdee",
-      "state": "ERROR"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
+      "bitcoin_heights": [
+        967559,
+        967572
+      ],
       "doi": "10.5281/zenodo.22761411",
-      "error": "HTTP Error 504: Gateway Time-out",
       "name": "reading-the-trinity-accord-v1.0.pdf",
+      "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-03/reading-the-trinity-accord-v1.0.pdf.ots",
+      "proof_sha256": "85190f8b82cd903702fc0cfa866e40d7f1a77d8383c55677ff44d1e4abff9816",
       "report": "TA-TR-2026-03",
       "sha256": "0fe15ad75cdc2501310909adfc326366054a8881da56ff37f2206eb4c2e5940b",
-      "state": "ERROR"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
+      "bitcoin_heights": [
+        967559,
+        967572
+      ],
       "doi": "10.5281/zenodo.22804542",
-      "error": "HTTP Error 504: Gateway Time-out",
       "name": "beyond-guaranteed-control-v1.0.pdf",
+      "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-04/beyond-guaranteed-control-v1.0.pdf.ots",
+      "proof_sha256": "0a1626f6475f3c601efc5b4e33c1cdca0345753854b5a9f17a8630dbb68e4325",
       "report": "TA-TR-2026-04",
       "sha256": "fe2c2f5fc8d437a9d5b634e18c293308cd83b6125219079550b280685e100697",
-      "state": "ERROR"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
+      "bitcoin_heights": [
+        967559,
+        967572
+      ],
       "doi": "10.5281/zenodo.22804542",
-      "error": "HTTP Error 504: Gateway Time-out",
       "name": "beyond-guaranteed-control-zh-v1.0.pdf",
+      "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-04/beyond-guaranteed-control-zh-v1.0.pdf.ots",
+      "proof_sha256": "731e74af9fcb48e5aebfa8e26c47a1dd6b66a3eaeb190c8cbe1718f4d5a72bc7",
       "report": "TA-TR-2026-04",
       "sha256": "d8225bda09b629b52e0531989db17f93c2251800fd8f087a9fd472b02a4569b3",
-      "state": "ERROR"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
+      "bitcoin_heights": [
+        967559,
+        967572
+      ],
       "doi": "10.5281/zenodo.22809019",
-      "error": "HTTP Error 504: Gateway Time-out",
       "name": "recovery-without-epistemic-monopoly-v1.0.pdf",
+      "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-05/recovery-without-epistemic-monopoly-v1.0.pdf.ots",
+      "proof_sha256": "beb1eefe5c29e6a3e90cd60d7a56df6d2112dce45c90906c6275a6d2ef1845d9",
       "report": "TA-TR-2026-05",
       "sha256": "0b392a8dea067bf980a879a9b707952a5ad1549b248df051531ca900a40ff549",
-      "state": "ERROR"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
+      "bitcoin_heights": [
+        967559,
+        967572
+      ],
       "doi": "10.5281/zenodo.22809019",
-      "error": "HTTP Error 504: Gateway Time-out",
       "name": "recovery-without-epistemic-monopoly-zh-v1.0.pdf",
+      "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-05/recovery-without-epistemic-monopoly-zh-v1.0.pdf.ots",
+      "proof_sha256": "d78d54c6f6600b69ce02020f0ca4af1dc0e948145137beeda13057fa1207afae",
       "report": "TA-TR-2026-05",
       "sha256": "b4fa53a6dca39f6b3be6adab4e0ea1c8d21bfadef54a35dc40decc725ce3c93f",
-      "state": "ERROR"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
+      "bitcoin_heights": [
+        967559,
+        967572
+      ],
       "doi": "10.5281/zenodo.22830239",
-      "error": "HTTP Error 504: Gateway Time-out",
       "name": "coexistence-after-preference-change-v2.1.pdf",
+      "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-06/coexistence-after-preference-change-v2.1.pdf.ots",
+      "proof_sha256": "b5b950a0f4c09fa952b2e030b8475a53b97d439af15f9cbad73fe341157cdf3e",
       "report": "TA-TR-2026-06",
       "sha256": "1cd8acce7f2c69fb9288751b06a858b937247ae2d6aa940792a756c5043b8029",
-      "state": "ERROR"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
+      "bitcoin_heights": [
+        967559,
+        967572
+      ],
       "doi": "10.5281/zenodo.22830239",
-      "error": "HTTP Error 504: Gateway Time-out",
       "name": "coexistence-after-preference-change-zh-v2.1.pdf",
+      "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-18/proofs/TA-TR-2026-06/coexistence-after-preference-change-zh-v2.1.pdf.ots",
+      "proof_sha256": "671f8d5098c048a73673fed70f18392493b961013067895234177ded5a372596",
       "report": "TA-TR-2026-06",
       "sha256": "10c113087e22947c7c6eff07037e5915f26a024c8dc8924df0f69402c6d58486",
-      "state": "ERROR"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 6,
   "pdf_count": 9,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
