@@ -82,6 +82,14 @@ def replace_once(text: str, old: str, new: str) -> str:
     return text.replace(old, new)
 
 
+def current_series_word(text: str) -> str:
+    """Accept the eighth-paper index and its ninth-paper extension."""
+    matches = [word for number, word in ((8, "eight"), (9, "nine"))
+               if f"{word} distinct research papers (TA-TR-2026-01 through TA-TR-2026-{number:02d})" in text]
+    require(len(matches) == 1, "Series count differs")
+    return matches[0]
+
+
 def paper_section(rec: dict) -> str:
     doi, record_url = rec["doi"], rec["record_url"]
     return f"""{SECTION_HEADING}{{: #evidence-for-artificial-self-attribution }}
@@ -111,7 +119,7 @@ def updated_index(before: str, rec: dict) -> str:
     section = paper_section(rec)
     if SECTION_HEADING in before:
         require(before.count(SECTION_HEADING) == 1 and section in before, "Existing eighth-paper entry differs")
-        require("eight distinct research papers (TA-TR-2026-01 through TA-TR-2026-08)" in before, "Series count differs")
+        current_series_word(before)
         return before
     updated = replace_once(before, '  - id: "citation-boundary"',
                            '  - id: "evidence-for-artificial-self-attribution"\n'

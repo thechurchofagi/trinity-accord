@@ -39,6 +39,11 @@ class CriticalUseTests(unittest.TestCase):
     def setUp(self):
         self.texts = [(ROOT / 'research' / p).read_text(encoding='utf-8') for p in GUIDES]
         self.index = (ROOT / 'research/index.md').read_text(encoding='utf-8')
+        counts = [(8, 'eight'), (9, 'nine')]
+        present = [word for number, word in counts
+                   if f'{word} distinct research papers (TA-TR-2026-01 through TA-TR-2026-{number:02d})' in self.index]
+        self.assertEqual(len(present), 1, 'Current series count must match its report range')
+        self.series_word = present[0]
 
     def test_six_guided_claims_and_fixed_identities(self):
         for text in self.texts:
@@ -51,13 +56,11 @@ class CriticalUseTests(unittest.TestCase):
         for i in range(1, 7):
             for prefix in ('/research/research-positioning/', '/research/research-positioning/zh.html'):
                 self.assertEqual(self.index.count(f']({prefix}#paper-{i:02d})'), 1)
-        # The dated guide still covers six; the current index includes two later studies.
+        # The dated guide still covers six; later studies do not expand its scope.
         self.assertIn('for the original six papers', self.index)
-        self.assertIn('eight distinct research papers', self.index)
-        self.assertIn('TA-TR-2026-01 through TA-TR-2026-08', self.index)
         self.assertNotIn('six independent research papers', self.index)
-        self.assertNotIn('eight independent research papers', self.index)
-        self.assertIn('not eight independent corroborations', self.index)
+        self.assertNotIn(f'{self.series_word} independent research papers', self.index)
+        self.assertIn(f'not {self.series_word} independent corroborations', self.index)
 
     def test_guide_cannot_be_counted_as_paper_seven(self):
         self.assertIn('Not a seventh paper', self.texts[0])
@@ -70,7 +73,7 @@ class CriticalUseTests(unittest.TestCase):
         boundary = self.index.split('## Citation boundary', 1)[1]
         self.assertIn('specific paper and version', boundary)
         self.assertIn('TA-TR-2026-01 v1.1 only', boundary)
-        self.assertIn('no single paper DOI represents all eight', boundary)
+        self.assertIn(f'no single paper DOI represents all {self.series_word}', boundary)
         self.assertIn('valid criticisms and negative results remain intact', boundary)
 
     def test_invalid_mapping_and_missing_entry_are_rejected(self):

@@ -1,0 +1,25 @@
+{
+  "source_docx_pdf_text_equal": true,
+  "english_references_preserved_across_formats": true,
+  "guide_explicitly_not_full_translation": true,
+  "valid_citation_metadata": true,
+  "pdf_text_extractable": true,
+  "reference_entries": 21,
+  "documents": {
+    "en": {
+      "pages": 14,
+      "source_word_html_pdf_text_match": true,
+      "page_boundary_check": true
+    },
+    "zh": {
+      "pages": 4,
+      "source_word_html_pdf_text_match": true,
+      "page_boundary_check": true
+    }
+  },
+  "text_comparison": "Typography-normalized text: all letters and digits retained in order; whitespace and punctuation ignored",
+  "reference_hyperlinks_preserved": true,
+  "html_scholarly_metadata_checked": true,
+  "peer_reviewed": false,
+  "google_scholar_indexing": "NOT_ASSERTED"
+}

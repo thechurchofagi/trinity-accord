@@ -42,6 +42,7 @@ ROOT_SPECIAL_FILES = [
     "research/recoverability-shared-time/zh.html",
     "research/artificial-self-attribution/index.html",
     "research/artificial-self-attribution/zh.html",
+    "research/learning-from-an-ai-claimant/index.html",
     "research/reading-trinity-accord/reading-the-trinity-accord-v1.0.pdf",
     "research/reading-trinity-accord/citation.bib",
     "research/reading-trinity-accord/publication-record.json",
@@ -77,6 +78,7 @@ ROOT_SPECIAL_FILES = [
 STATIC_FULL_TEXT_INDEXES = {
     "research/recoverability-shared-time/index.html",
     "research/artificial-self-attribution/index.html",
+    "research/learning-from-an-ai-claimant/index.html",
 }
 PUBLICATION_SOURCE_DIRS = {
     str(Path(name).parent / "published") + "/"
