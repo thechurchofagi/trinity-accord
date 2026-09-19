@@ -1,7 +1,7 @@
 {
   "state": "INCOMPLETE_REQUIRES_SAME_VERSION_RECONCILIATION",
-  "phase": "check_published_predecessor",
+  "phase": "read_only_reconciliation",
   "error_type": "RuntimeError",
-  "error": "Unresolved creation intent; reconcile before another newversion POST",
-  "workflow_run_id": "35448462364"
+  "error": "Unrelated version or author in descendant draft",
+  "workflow_run_id": "35448823525"
 }
