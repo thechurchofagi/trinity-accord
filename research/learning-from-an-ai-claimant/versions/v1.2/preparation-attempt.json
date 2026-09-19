@@ -2,6 +2,6 @@
   "state": "INCOMPLETE_REQUIRES_SAME_VERSION_RECONCILIATION",
   "phase": "read_only_reconciliation",
   "error_type": "RuntimeError",
-  "error": "Unrelated version or author in descendant draft",
-  "workflow_run_id": "35448823525"
+  "error": "Unrelated version or author in descendant draft: {\"id\": 22846307, \"version\": null, \"creators\": [{\"name\": \"Liu, Hongju\", \"affiliation\": \"Independent researcher, Shenzhen, China\"}], \"submitted\": false}",
+  "workflow_run_id": "35448922130"
 }
