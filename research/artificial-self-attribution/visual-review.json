@@ -1,0 +1,18 @@
+{
+  "state": "VISUAL_AND_CONTENT_REVIEW_PASS",
+  "report_number": "TA-TR-2026-08",
+  "version": "1.1",
+  "expected_manifest_sha256": "a8e64182e95eae0f33454c6140c0a39a07eced9c6b583bf0aa4a6e37f1682799",
+  "review_date": "2026-09-19",
+  "pages_reviewed": {
+    "en": 14,
+    "zh": 17
+  },
+  "method": "All 31 latest rendered pages individually opened and inspected at original resolution by the reviewing agents. Root inspected additional sample pages. Full normalized Unicode source/DOCX/PDF/HTML equality and citation identity were checked separately. No new empirical experiment was performed.",
+  "records": [
+    "EN-visual-review.md",
+    "ZH-visual-review.md",
+    "format-checks.json"
+  ],
+  "limitations": "Visual/content QA is not peer review, a certification of originality, or a consciousness finding."
+}

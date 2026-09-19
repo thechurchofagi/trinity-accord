@@ -1,0 +1,80 @@
+{
+  "report_number": "TA-TR-2026-08",
+  "record_id": 22842789,
+  "doi": "10.5281/zenodo.22842789",
+  "title": "Evidence for Artificial Self Attribution: Language Training, Architecture, and the Limits of Self Reports",
+  "version": "1.1",
+  "file_count": 14,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1476,
+      "sha256": "d60912085385283b0a9422379a061777f35f813452ce410fca613705b6e6a2d4"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 7471,
+      "sha256": "5373ee31e04da5255ff9d8c8c55a947550032086af66c49b2e71add727594bb8"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1253,
+      "sha256": "81c625013558410245080e582640c763733c31d76516919fa6a39aaf45299b86"
+    },
+    {
+      "name": "artificial-self-attribution-v1.1.docx",
+      "bytes": 55003,
+      "sha256": "ed1a1c24f389966a8035e1bc97d63e1b1d25f5cfb6438166b6c08289d05f845d"
+    },
+    {
+      "name": "artificial-self-attribution-v1.1.html",
+      "bytes": 49716,
+      "sha256": "e1774cc6ea78b093d8cd2b4ef97c9187967f5af2074bb1c4a8b0238cfbbfebbb"
+    },
+    {
+      "name": "artificial-self-attribution-v1.1.md",
+      "bytes": 44851,
+      "sha256": "c1eec5951335240ca9fd83667e28469185acc192465f24d533e22334d6fa31ee"
+    },
+    {
+      "name": "artificial-self-attribution-v1.1.pdf",
+      "bytes": 169676,
+      "sha256": "fb1c13a119e5e25190afa9f0b882791eeed7a39fa09ef0b7751adf901b873558"
+    },
+    {
+      "name": "artificial-self-attribution-zh-v1.1.docx",
+      "bytes": 56804,
+      "sha256": "2fbad03c16b2cb7ebf86e8ab7dfc03552e10aaf617ef6338c2a8282fff06df4a"
+    },
+    {
+      "name": "artificial-self-attribution-zh-v1.1.html",
+      "bytes": 45744,
+      "sha256": "63af2aac2f20102ce25e4fc71b27515ba5a0cc73226d95379cd7ee38d6e76a40"
+    },
+    {
+      "name": "artificial-self-attribution-zh-v1.1.md",
+      "bytes": 41048,
+      "sha256": "e50bf4de2d36e9cf908d4f54732f8ea5400db3733fa921c5054db955e1389517"
+    },
+    {
+      "name": "artificial-self-attribution-zh-v1.1.pdf",
+      "bytes": 541664,
+      "sha256": "24378b0171e7e40ed34a593fa863c328974db95dfd39c1b8dc7b7d823ee5d2d3"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 513,
+      "sha256": "af60e05963215fe17dcd118fbaeadb13ae567173e07902a211d351ba51798aec"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 659,
+      "sha256": "28bae3e053f3a785dba2a9b6680ae95a145082d338ed8318f617e1a63ce2ef66"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 418,
+      "sha256": "487b71a8d462847bed87df987446df599fd1bff5038d16795ad750164790217e"
+    }
+  ]
+}

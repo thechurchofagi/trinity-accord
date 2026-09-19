@@ -1,0 +1,67 @@
+{
+  "state": "FINAL_PACKAGE_SEALED_REVIEW_CONFIRMED",
+  "report_number": "TA-TR-2026-08",
+  "version": "1.1",
+  "doi": "10.5281/zenodo.22842789",
+  "languages": {
+    "en": {
+      "source_sha256": "00022545b4200034536070dcb457d1cc5198b4ec9628efb9129fdec1ee160d89",
+      "published_markdown_sha256": "c1eec5951335240ca9fd83667e28469185acc192465f24d533e22334d6fa31ee",
+      "docx_sha256": "ed1a1c24f389966a8035e1bc97d63e1b1d25f5cfb6438166b6c08289d05f845d",
+      "pdf_sha256": "fb1c13a119e5e25190afa9f0b882791eeed7a39fa09ef0b7751adf901b873558",
+      "references": 13,
+      "pages": 14,
+      "render_dir": "/workspace/scratch/0a7adc2b8d8d/qa-publication-v1.1/artificial-self-attribution-v1.1",
+      "visual_review": "CONFIRMED_BY_OPERATOR"
+    },
+    "zh": {
+      "source_sha256": "e9b1948fe467c6067e9418b1457cb075777337244b1ea4347bfb43f918e5f346",
+      "published_markdown_sha256": "e50bf4de2d36e9cf908d4f54732f8ea5400db3733fa921c5054db955e1389517",
+      "docx_sha256": "2fbad03c16b2cb7ebf86e8ab7dfc03552e10aaf617ef6338c2a8282fff06df4a",
+      "pdf_sha256": "24378b0171e7e40ed34a593fa863c328974db95dfd39c1b8dc7b7d823ee5d2d3",
+      "references": 13,
+      "pages": 17,
+      "render_dir": "/workspace/scratch/0a7adc2b8d8d/qa-publication-v1.1/artificial-self-attribution-zh-v1.1",
+      "visual_review": "CONFIRMED_BY_OPERATOR"
+    }
+  },
+  "source_docx_pdf_text_equal": true,
+  "reference_lists_identical": true,
+  "valid_citation_metadata": true,
+  "pdf_text_extractable": true,
+  "source_html_text_equal": true,
+  "actual_content_checks": [
+    {
+      "language": "en",
+      "pages": 14,
+      "source_docx_equal": true,
+      "source_pdf_equal": true,
+      "source_html_equal": true,
+      "normalized_characters": [
+        38278,
+        38278,
+        38278,
+        38278
+      ],
+      "out_of_bounds": [],
+      "hyperlink_count": 14,
+      "doi_link_present": true
+    },
+    {
+      "language": "zh",
+      "pages": 17,
+      "source_docx_equal": true,
+      "source_pdf_equal": true,
+      "source_html_equal": true,
+      "normalized_characters": [
+        15200,
+        15200,
+        15200,
+        15200
+      ],
+      "out_of_bounds": [],
+      "hyperlink_count": 14,
+      "doi_link_present": true
+    }
+  ]
+}
