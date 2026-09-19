@@ -1,0 +1,117 @@
+{
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "report_number": "TA-TR-2026-09",
+  "title": "Learning from an AI Claimant: Scientific understanding and the justification of artificial consciousness claims",
+  "version": "1.1",
+  "record_id": 22844928,
+  "doi": "10.5281/zenodo.22844928",
+  "record_url": "https://zenodo.org/records/22844928",
+  "submitted": true,
+  "file_count": 14,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 3196,
+      "sha256": "cbcf5a3e0d64e7d13bebfd71ee5f6f1ab33b0249ff9915a721042ff5df3fe84e",
+      "public_url": "https://zenodo.org/api/records/22844928/files/README-LICENSE.txt/content"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 6790,
+      "sha256": "7071b3368da91d193b17f189a956d6f433374053a52f2ee8bbbcd1dcf2043acd",
+      "public_url": "https://zenodo.org/api/records/22844928/files/REVIEW-AND-SOURCES.md/content"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1285,
+      "sha256": "00c882091217564fb3b948e16875ea10928f677fc9acb99fb35a088af650f928",
+      "public_url": "https://zenodo.org/api/records/22844928/files/SHA256SUMS.txt/content"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 399,
+      "sha256": "884e2bcf84115b6681726d3a8fad03685842bec7455fd137752171d264a42c13",
+      "public_url": "https://zenodo.org/api/records/22844928/files/citation.bib/content"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 638,
+      "sha256": "51018372923adc1c960173097b21b77338b3c2f258e6dd7d0a3d1b16f97d46dd",
+      "public_url": "https://zenodo.org/api/records/22844928/files/citation.csl.json/content"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 335,
+      "sha256": "d7063f3ce923c680ae34abc6cb3c20f989ef64fb3d927c65c99f29a9fb0d421e",
+      "public_url": "https://zenodo.org/api/records/22844928/files/citation.ris/content"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-v1.1.docx",
+      "bytes": 55683,
+      "sha256": "c7a5b7b40372e212777c68b25c7bae33bc420976a78008896a2c055513060d90",
+      "public_url": "https://zenodo.org/api/records/22844928/files/learning-from-an-ai-claimant-v1.1.docx/content"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-v1.1.html",
+      "bytes": 52642,
+      "sha256": "3c250c7e164efcd6f8db6e7479ad0854aee86bd4acd765ea35421b1cd46a9568",
+      "public_url": "https://zenodo.org/api/records/22844928/files/learning-from-an-ai-claimant-v1.1.html/content"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-v1.1.md",
+      "bytes": 47224,
+      "sha256": "3fd9564107df715752482adbf4f19b2c0d57fba7ff29e075fe24e491ca9a8c07",
+      "public_url": "https://zenodo.org/api/records/22844928/files/learning-from-an-ai-claimant-v1.1.md/content"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-v1.1.pdf",
+      "bytes": 184825,
+      "sha256": "ae2c5c6b618e13b2fe4266ec1074fbf2503e6117777d8fcef97c69117bbed257",
+      "public_url": "https://zenodo.org/api/records/22844928/files/learning-from-an-ai-claimant-v1.1.pdf/content"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-zh-guide-v1.1.docx",
+      "bytes": 43201,
+      "sha256": "b68947211a4988367a9eef04dee64c55e337739df8b9cce3ca432a8fad6a22c6",
+      "public_url": "https://zenodo.org/api/records/22844928/files/learning-from-an-ai-claimant-zh-guide-v1.1.docx/content"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-zh-guide-v1.1.html",
+      "bytes": 11904,
+      "sha256": "ac295ee878fa6dc11f951d92433b7cabe582d1a19f2ea74e559238e7399866d6",
+      "public_url": "https://zenodo.org/api/records/22844928/files/learning-from-an-ai-claimant-zh-guide-v1.1.html/content"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-zh-guide-v1.1.md",
+      "bytes": 9476,
+      "sha256": "bd0f3a3cf28bdfdbb54a141cec6ef5a6792f18e9a5abee9d982820f3179d0afb",
+      "public_url": "https://zenodo.org/api/records/22844928/files/learning-from-an-ai-claimant-zh-guide-v1.1.md/content"
+    },
+    {
+      "name": "learning-from-an-ai-claimant-zh-guide-v1.1.pdf",
+      "bytes": 269731,
+      "sha256": "79fcb3c3109edabebd1e5c692c51990af1add0d626a2a1642dde657f9ff58fd2",
+      "public_url": "https://zenodo.org/api/records/22844928/files/learning-from-an-ai-claimant-zh-guide-v1.1.pdf/content"
+    }
+  ],
+  "expected_manifest_sha256": "8229fd633ca27b4775933497db195216bdc10051ed368ce0742ac863b34b8163",
+  "public_readback_authenticated": false,
+  "doi_resolver": {
+    "state": "RESOLVER_PASS",
+    "http_status": 200,
+    "final_url": "https://zenodo.org/records/22844928",
+    "matches_record": true
+  },
+  "public_file_readback_pass": true,
+  "doi_resolution_pass": true,
+  "source_commit": "ceb119bb1195617bbe9ef525ee93efcd7b7e67af",
+  "workflow_run_id": "35442770225",
+  "was_already_published": false,
+  "prior_doi_records_modified": false,
+  "bitcoin_originals_modified": false,
+  "new_research_papers": 1,
+  "peer_reviewed": false,
+  "global_originality_certified": false,
+  "google_scholar_indexing": "NOT_ASSERTED",
+  "chinese_companion_role": "ARGUMENT_GUIDE_NOT_FULL_TRANSLATION"
+}
