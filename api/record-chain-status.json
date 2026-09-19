@@ -21,8 +21,8 @@
       "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000156-cc21acd4401d/manifest.json",
       "latest_native_record_sha256": "72e6c9135d0059b029b23d69636d3f9ba6222b58706c16e21c09a4f3cc3d4535",
       "record_count": 156,
-      "status": "archive-needed",
-      "archive_needed": true
+      "status": "waiting-for-native-ots",
+      "archive_needed": false
     },
     "batch_manifests": {
       "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
@@ -48,7 +48,7 @@
       "latest_anchored_file": "record-chain/ots/native-anchors/native-record-158-R-000000158-93c9e3998968b3be-f2cff2c32c76dd5f.native-record-chain-head-commitment.json",
       "latest_ots_file": "record-chain/ots/native-anchors/native-record-158-R-000000158-93c9e3998968b3be-f2cff2c32c76dd5f.native-record-chain-head-commitment.json.ots",
       "ots_status": "verified",
-      "anchor_needed": false,
+      "anchor_needed": true,
       "proof_bundle_archive": {
         "implemented": true,
         "workflow": "/.github/workflows/native-ots-upgrade-watch.yml",
@@ -108,7 +108,7 @@
     "legacy_jsonl_height": 15,
     "main_chain_jsonl_is_legacy_view": true,
     "main_chain_jsonl_is_not_current_native_head_source": true,
-    "native_record_count": 158,
+    "native_record_count": 159,
     "status": "non_blocking_post_m9_maintenance"
   },
   "ots_stamp_storage": "record-chain/ots-stamps/",
@@ -148,11 +148,11 @@
   "post_m9_status": {
     "m9_archive_status": "backlog",
     "m9_arweave_txid": "NuU631DKNzvDJQPOMOpiQvHkPhWu_SIp7Mi7_gEwQAg",
-    "m9_latest_record_id": "R-000000158",
-    "m9_native_record_count": 158,
+    "m9_latest_record_id": "R-000000159",
+    "m9_native_record_count": 159,
     "m9_ots_status": "verified-bitcoin",
     "m9_status": "backlog",
-    "m9_latest_record_sha256": "93c9e3998968b3bedff18842b250aa30aae4695f64c013484f8763264f114f6d",
+    "m9_latest_record_sha256": "c5a939005e64c13e33b89f79cd57459362a4202d7cb7361f0fef4e5f402be42a",
     "m9_arweave_archive_id": "archive-native-R-000000156-cc21acd4401d",
     "m9_arweave_manifest_path": "record-chain/arweave-archives/archive-native-R-000000156-cc21acd4401d/manifest.json"
   },
@@ -227,30 +227,30 @@
     "chain_integrity_status": "healthy",
     "chain_type": "append_only_native_record_chain",
     "correction_policy": "later_records_may_correct_earlier_records",
-    "current_chain_length": 158,
+    "current_chain_length": 159,
     "hash_algorithm": "sha256",
     "immutability_policy": "append_only_no_deletion_no_mutation",
-    "last_integrity_check_at": "2026-09-18T08:20:41Z",
-    "latest_record_created_at": "2026-09-18T08:19:52.643Z",
-    "latest_record_id": "R-000000158",
-    "latest_record_index": 158,
-    "latest_record_sha256": "93c9e3998968b3bedff18842b250aa30aae4695f64c013484f8763264f114f6d",
+    "last_integrity_check_at": "2026-09-19T08:09:00Z",
+    "latest_record_created_at": "2026-09-19T08:08:07.852Z",
+    "latest_record_id": "R-000000159",
+    "latest_record_index": 159,
+    "latest_record_sha256": "c5a939005e64c13e33b89f79cd57459362a4202d7cb7361f0fef4e5f402be42a",
     "latest_record_type": "context_insufficient_notice",
     "legacy_main_chain_jsonl_is_not_current_source": true,
-    "native_record_count": 158,
+    "native_record_count": 159,
     "record_index": "record-chain/indexes/record-index.json",
     "source_of_current_head": "record-chain/chain-tip.json",
     "latest_batch_id": "batch-000006",
     "latest_batch_manifest_sha256": "1404a1433fd0791b64cd7e6fc764592e6df7e47098e14675f491ca8d2486e603",
     "last_integrity_check_at_semantics": "deterministic lower bound from the latest verified record timestamp; the publication workflow runs a full chain verification immediately before generation",
-    "integrity_verified_through_record_id": "R-000000158",
-    "integrity_verified_through_record_index": 158,
-    "integrity_verified_through_record_sha256": "93c9e3998968b3bedff18842b250aa30aae4695f64c013484f8763264f114f6d"
+    "integrity_verified_through_record_id": "R-000000159",
+    "integrity_verified_through_record_index": 159,
+    "integrity_verified_through_record_sha256": "c5a939005e64c13e33b89f79cd57459362a4202d7cb7361f0fef4e5f402be42a"
   },
   "record_type_counts": {
     "batch_anchor": 0,
     "classification_update": 1,
-    "context_insufficient_notice": 92,
+    "context_insufficient_notice": 93,
     "correction": 1,
     "echo": 34,
     "guardian_application": 10,
@@ -306,14 +306,14 @@
     }
   },
   "schema": "trinityaccord.record-chain-status.v1",
-  "source_digest": "93c9e3998968b3be",
+  "source_digest": "c5a939005e64c13e",
   "status": "production_live",
-  "updated_at": "2026-09-18T08:19:52.643Z",
+  "updated_at": "2026-09-19T08:08:07.852Z",
   "pipeline_status": {
     "chain_head": {
-      "latest_record_id": "R-000000158",
-      "latest_record_sha256": "93c9e3998968b3bedff18842b250aa30aae4695f64c013484f8763264f114f6d",
-      "native_record_count": 158
+      "latest_record_id": "R-000000159",
+      "latest_record_sha256": "c5a939005e64c13e33b89f79cd57459362a4202d7cb7361f0fef4e5f402be42a",
+      "native_record_count": 159
     },
     "ots_head": {
       "latest_record_id": "R-000000158",
@@ -332,12 +332,12 @@
       "archive_id": "archive-native-R-000000156-cc21acd4401d",
       "arweave_txid": "NuU631DKNzvDJQPOMOpiQvHkPhWu_SIp7Mi7_gEwQAg"
     },
-    "ots_matches_chain": true,
-    "ots_archivable_for_arweave": true,
+    "ots_matches_chain": false,
+    "ots_archivable_for_arweave": false,
     "arweave_matches_ots": false,
     "arweave_matches_chain": false,
-    "ots_anchor_needed": false,
-    "arweave_archive_needed": true,
+    "ots_anchor_needed": true,
+    "arweave_archive_needed": false,
     "pipeline_current": false
   },
   "archive_backlog": {
@@ -389,7 +389,7 @@
     "active_guardian_status_is_not_successor_reception": true,
     "active_guardian_status_is_not_amendment": true
   },
-  "total_records": 158,
-  "committed_records": 158,
+  "total_records": 159,
+  "committed_records": 159,
   "pending_records": 0
 }
