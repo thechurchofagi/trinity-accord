@@ -1,4 +1,5 @@
 import importlib.util
+import copy
 from pathlib import Path
 import tempfile
 import unittest
@@ -11,6 +12,26 @@ spec.loader.exec_module(module)
 
 
 class PaperProofTests(unittest.TestCase):
+    def test_followup_batch_is_wired_to_the_guarded_workflow(self):
+        workflow = (ROOT / '.github/workflows/research-paper-ots-arweave.yml').read_text()
+        batch = 'research/paper-timestamps/2026-09-19'
+        self.assertIn(f'python3 scripts/research_paper_ots.py lifecycle --batch {batch}', workflow)
+        self.assertIn(f'python3 scripts/research_paper_ots.py upload --batch {batch}', workflow)
+        self.assertIn('ARWEAVE_MINIMUM_REMAINING_AR', workflow)
+        self.assertIn('ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR', workflow)
+
+    def test_followup_targets_match_public_readback_receipts(self):
+        batch = ROOT / 'research/paper-timestamps/2026-09-19'
+        config = module.read(batch / 'targets.json')
+        papers, pdf_count = module.validate_config(batch, config)
+        self.assertEqual([paper['report'] for paper in papers], ['TA-TR-2026-07', 'TA-TR-2026-08'])
+        self.assertEqual(pdf_count, 4)
+
+        tampered = copy.deepcopy(config)
+        tampered['papers'][1]['pdfs'][0]['sha256'] = '00' * 32
+        with self.assertRaises(ValueError):
+            module.validate_config(batch, tampered)
+
     @unittest.skipUnless(importlib.util.find_spec('opentimestamps'), 'OTS is installed in the dedicated paper workflow')
     def test_detached_proof_must_match_published_bytes(self):
         from opentimestamps.core.op import OpSHA256
