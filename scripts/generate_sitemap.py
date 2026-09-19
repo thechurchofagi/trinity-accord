@@ -38,6 +38,8 @@ BASE_URL = "https://www.trinityaccord.org"
 
 # Root-level special files to always include
 ROOT_SPECIAL_FILES = [
+    "research/recoverability-shared-time/index.html",
+    "research/recoverability-shared-time/zh.html",
     "research/reading-trinity-accord/reading-the-trinity-accord-v1.0.pdf",
     "research/reading-trinity-accord/citation.bib",
     "research/reading-trinity-accord/publication-record.json",
@@ -290,7 +292,9 @@ def collect_root_special() -> list[str]:
     files = []
     for name in ROOT_SPECIAL_FILES:
         if name in {"sitemap.xml", "sitemap-core.xml"} or (ROOT / name).exists():
-            files.append(f"/{name}")
+            # The seventh paper uses an exact static HTML mirror, not Markdown front matter.
+            public_name = name[:-len("index.html")] if name == "research/recoverability-shared-time/index.html" else name
+            files.append(f"/{public_name}")
     for name in ROOT_JSON_INCLUDE:
         if (ROOT / name).exists():
             files.append(f"/{name}")

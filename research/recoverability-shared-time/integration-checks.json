@@ -1,15 +1,16 @@
 {
   "state": "PUBLICATION_AND_SOURCE_INTEGRATION_PASS",
   "publication_doi": "10.5281/zenodo.22840604",
-  "prior_index_blob": "7819e649c518eb088c09656c8018aabf3c20adf7",
+  "prior_index_blob": "175a749946e853601074965f44b70ea94eacb5cc",
   "new_index_blob": "175a749946e853601074965f44b70ea94eacb5cc",
   "existing_link_destinations_preserved": true,
-  "sitemap_added": [
-    "https://www.trinityaccord.org/research/recoverability-shared-time/",
-    "https://www.trinityaccord.org/research/recoverability-shared-time/zh.html"
-  ],
+  "sitemap_added": [],
   "sitemap_url_count": 413,
   "live_site_deployment": "NOT_YET_CHECKED",
   "older_manuscripts_modified": false,
+  "sitemap_generator_check": "PASS",
+  "sitemap_all_prior_urls_preserved": true,
+  "sitemap_core_unchanged": true,
+  "sitemap_generator_blob": "4b93fc2ef0ae7df3518a316fc0a4bc8563b4da67",
   "rendered_site": "PASS"
 }
