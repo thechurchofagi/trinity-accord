@@ -31,6 +31,6 @@
     "ARWEAVE_READBACK_PASS"
   ],
   "retry_boundary": "Existing hourly preservation workflow only; safe read retries; no repeated ambiguous creation or duplicate paid Arweave transaction. Validation conflicts stop the affected operation for inspection.",
-  "resume_requested_at": "2026-09-19T01:23:00Z",
-  "resume_reason": "Continue authorized closure after scoping the research-paper Arweave reward ceiling to 0.055 AR; retry only unfinished DOI/AR operations and do not duplicate paid transactions."
+  "resume_requested_at": "2026-09-19T01:32:00Z",
+  "resume_reason": "Resume readback of existing paid research-paper Arweave tx j8tLCBd4MWgZNu6sYGaYQ_R5jl_8n2Oxkd-8KdGVxfA; retry unfinished Zenodo metadata association; do not create another paid paper archive transaction."
 }
