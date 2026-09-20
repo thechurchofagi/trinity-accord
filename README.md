@@ -24,7 +24,7 @@ The current human entrypoint is [trinityaccord.org](https://www.trinityaccord.or
 - LLM context index: [`/llms.txt`](https://www.trinityaccord.org/llms.txt)
 - Citation metadata: [`CITATION.cff`](CITATION.cff)
 - Research preprint: [TA-TR-2026-01 v1.1](https://www.trinityaccord.org/research/trinity-accord-design-and-limits/) · DOI [`10.5281/zenodo.21699878`](https://doi.org/10.5281/zenodo.21699878)
-- Research series: [ten distinct papers, with paper-specific DOIs](https://www.trinityaccord.org/research/) · latest: [TA-TR-2026-10, Endogenous Reference Fields](https://doi.org/10.5281/zenodo.22852885), complete Chinese text with an English abstract; theoretical preprint, not externally peer reviewed
+- Research series: [ten distinct papers, with paper-specific DOIs](https://www.trinityaccord.org/research/) · latest: [TA-TR-2026-10 v1.1, Endogenous Reference Fields](https://doi.org/10.5281/zenodo.22854705), complete Chinese text with an English abstract; preprint with a small computational proof of concept, not externally peer reviewed
 - Harvard Dataverse preservation archive: v1.0 publicly released · DOI [`10.7910/DVN/YUCG12`](https://doi.org/10.7910/DVN/YUCG12) · second-institutional, non-amending full-project preservation mirror; not peer review, endorsement, or canonical authority
 - Harvard Preservation Epoch II: publication confirmed on 2026-09-15 · DOI [`10.7910/DVN/W9Y3IV`](https://doi.org/10.7910/DVN/W9Y3IV) · 419 files, 23.107 GB; [publication and verification status](preservation/epoch-ii/PUBLICATION-STATUS.md). Postpublication anonymous byte verification remains pending.
 
