@@ -1,0 +1,61 @@
+name: Publish Endogenous Reference Fields
+on:
+  push:
+    branches: [research/endogenous-reference-fields-v1-0-20260920]
+    paths:
+      - '.github/workflows/publish-endogenous-reference-fields.yml'
+      - 'research/endogenous-reference-fields/publish_zenodo.py'
+      - 'research/endogenous-reference-fields/publication_common.py'
+      - 'research/endogenous-reference-fields/EXPECTED-PUBLICATION.json'
+      - 'research/endogenous-reference-fields/visual-review.json'
+permissions:
+  contents: write
+concurrency:
+  group: endogenous-reference-fields-zenodo-v1-0
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta10-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/endogenous-reference-fields-v1-0-20260920
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta10-toolchain-provenance.json
+          cat /tmp/ta10-toolchain-provenance.json
+      - name: Verify safety checks and exact reviewed package without credentials
+        run: |
+          python3 research/endogenous-reference-fields/test_publication_safety.py
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0, 'research/endogenous-reference-fields')
+          from publication_common import validate_local_package
+          expected, digest = validate_local_package()
+          print('TA10 exact reviewed package:', expected['file_count'], 'files; manifest', digest)
+          PY
+      - name: Publish only reserved tenth-paper record and verify every file and DOI anonymously
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/endogenous-reference-fields/publish_zenodo.py
+      - name: Preserve actual publication state including failures
+        if: always()
+        run: python3 research/endogenous-reference-fields/publication_common.py --persist-states
+      - name: Retain exact files and public readback diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: endogenous-reference-fields-publication-v1.0
+          path: |
+            research/endogenous-reference-fields/published/
+            research/endogenous-reference-fields/EXPECTED-PUBLICATION.json
+            research/endogenous-reference-fields/visual-review.json
+            research/endogenous-reference-fields/format-checks.json
+            research/endogenous-reference-fields/publication-record.json
+            research/endogenous-reference-fields/publication-attempt.json
+            /tmp/ta10-public-readback/
+            /tmp/ta10-toolchain-provenance.json
+          retention-days: 90
+          if-no-files-found: warn

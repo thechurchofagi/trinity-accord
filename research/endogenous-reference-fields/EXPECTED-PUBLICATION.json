@@ -1,0 +1,50 @@
+{
+  "record_id": 22852885,
+  "doi": "10.5281/zenodo.22852885",
+  "title": "Endogenous Reference Fields and Experiential Attribution: A Multidimensional Process Hypothesis",
+  "report_number": "TA-TR-2026-10",
+  "version": "1.0",
+  "file_count": 8,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 2105,
+      "sha256": "d758f043207fd7dd61dc5b4db1a6e7250d58d9b89e496fa76d26ad7afbd24f8e"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 7569,
+      "sha256": "eaef520ff6cefa5317c7011a72819e5637d3e687a7fc1496b3ccf87d222cf3ab"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 626,
+      "sha256": "b316adcfa77ebe643a73080752447a7164ebcae640cb8a339c550904f4e46bbc"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 564,
+      "sha256": "4f05a00668e9c837ae514842a7a6ec0d8dc2cf405ea90de5b58ecd58c6856645"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 709,
+      "sha256": "2e410a3c844cc67830b04094ada778648c2d2fe2e0c56f8157f6a0374ee76a4e"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 414,
+      "sha256": "0579109bef1371a86eef854b5e390724cc55ca3a3b441b6f3017ced765d113f6"
+    },
+    {
+      "name": "endogenous-reference-fields-zh-v1.0.md",
+      "bytes": 70341,
+      "sha256": "ede09c649529ffcffd40c27b5e085c8d1b29929df707f6f894b4b3afadceb63a"
+    },
+    {
+      "name": "endogenous-reference-fields-zh-v1.0.pdf",
+      "bytes": 355963,
+      "sha256": "8d5bab7d8f6dd9431dc89f7a50a96e33459ff1aee98dce6bac8433826448e128"
+    }
+  ]
+}

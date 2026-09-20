@@ -1,0 +1,43 @@
+{
+  "state": "VISUAL_AND_CONTENT_REVIEW_PASS",
+  "expected_manifest_sha256": "6e977ce19b60fb93a3ca7c9178d91aa768f77f2cfe146b533f1b033caba75b70",
+  "review_type": "AI-assisted manuscript and visual review; not external peer review",
+  "reviewed_pdf": "endogenous-reference-fields-zh-v1.0.pdf",
+  "pdf_page_count": 22,
+  "all_page_thumbnail_review": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+  ],
+  "full_size_page_review": [
+    1,
+    8,
+    11,
+    12,
+    17,
+    22
+  ],
+  "findings": "Coordinating reviewer inspected all 22 page thumbnails and full-size pages 1, 8, 11, 12, 17 and 22. No missing glyphs, clipping, overflow or overlaps were found. Section, case, reference and DOI content was checked. All pages contain extractable text.",
+  "publication_authorized": true,
+  "separate_final_human_line_by_line_review_claimed": false,
+  "peer_reviewed": false
+}

@@ -39,11 +39,34 @@ class CriticalUseTests(unittest.TestCase):
     def setUp(self):
         self.texts = [(ROOT / 'research' / p).read_text(encoding='utf-8') for p in GUIDES]
         self.index = (ROOT / 'research/index.md').read_text(encoding='utf-8')
-        counts = [(8, 'eight'), (9, 'nine')]
-        present = [word for number, word in counts
-                   if f'{word} distinct research papers (TA-TR-2026-01 through TA-TR-2026-{number:02d})' in self.index]
-        self.assertEqual(len(present), 1, 'Current series count must match its report range')
-        self.series_word = present[0]
+        self.assertIn('ten distinct research papers (TA-TR-2026-01 through TA-TR-2026-10)', self.index)
+        self.series_word = 'ten'
+
+    def test_ten_distinct_paper_sections_have_their_own_current_dois(self):
+        papers = [
+            ('Current technical report', '21699878'),
+            ('Historical-position study', '21900592'),
+            ('Reading the Trinity Accord', '22761411'),
+            ('Beyond Guaranteed Control', '22804542'),
+            ('Recovery without Epistemic Monopoly', '22809019'),
+            ('Coexistence after Preference Change', '22830239'),
+            ('Recoverability and Shared Time', '22840604'),
+            ('Evidence for Artificial Self Attribution', '22842789'),
+            ('Learning from an AI Claimant', '22846307'),
+            ('Endogenous Reference Fields', '22852885'),
+        ]
+        section_rows = re.findall(r'^## ([^\n]+)\n(.*?)(?=^## |\Z)', self.index, re.M | re.S)
+        sections = dict(section_rows)
+        self.assertEqual(len(section_rows), len(sections), 'Duplicate section heading')
+        paper_sections = {title: body for title, body in sections.items()
+                          if re.search(r'^### ', body, re.M)}
+        self.assertEqual(set(paper_sections), {title for title, _ in papers})
+        self.assertEqual(len(paper_sections), 10)
+        for number, (title, record_id) in enumerate(papers, 1):
+            body = paper_sections[title]
+            self.assertIn('https://doi.org/10.5281/zenodo.' + record_id, body)
+            if number > 1:
+                self.assertIsNotNone(re.search(rf'^TA-TR-2026-{number:02d}\b', body, re.M), title)
 
     def test_six_guided_claims_and_fixed_identities(self):
         for text in self.texts:

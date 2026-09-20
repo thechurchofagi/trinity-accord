@@ -1,0 +1,25 @@
+{
+  "source_pdf_content_verified": true,
+  "references_preserved": true,
+  "chinese_full_text_with_english_abstract": true,
+  "valid_citation_metadata": true,
+  "pdf_text_extractable": true,
+  "state": "FORMAT_AND_CONTENT_CHECKS_PASS",
+  "report_number": "TA-TR-2026-10",
+  "version": "1.0",
+  "pdf_page_count": 22,
+  "numbered_sections": 13,
+  "thought_experiments": 21,
+  "reference_count": 30,
+  "doi": "10.5281/zenodo.22852885",
+  "checks_performed": [
+    "Verified exact reviewed source and PDF byte sizes and SHA-256 identities.",
+    "Every PDF page yielded nonempty extractable text.",
+    "Counted thirteen numbered sections, twenty-one thought experiments and thirty numbered references in final source.",
+    "Extracted the English abstract from the complete Chinese manuscript.",
+    "Validated title, DOI and author across BibTeX, RIS and CSL-JSON.",
+    "Substantive manuscript/PDF content review and visual checks were performed by the coordinating AI-assisted reviewer; this is not external peer review."
+  ],
+  "pdf_sha256": "8d5bab7d8f6dd9431dc89f7a50a96e33459ff1aee98dce6bac8433826448e128",
+  "source_sha256": "ede09c649529ffcffd40c27b5e085c8d1b29929df707f6f894b4b3afadceb63a"
+}

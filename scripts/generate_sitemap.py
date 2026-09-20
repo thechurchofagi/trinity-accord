@@ -84,6 +84,8 @@ PUBLICATION_SOURCE_DIRS = {
     str(Path(name).parent / "published") + "/"
     for name in STATIC_FULL_TEXT_INDEXES
 }
+# TA10 has a Markdown overview; its exact published Markdown is an asset.
+PUBLICATION_SOURCE_DIRS.add("research/endogenous-reference-fields/published/")
 
 # Root-level JSON files to include
 ROOT_JSON_INCLUDE = [
