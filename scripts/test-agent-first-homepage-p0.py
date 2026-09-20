@@ -42,7 +42,7 @@ def main():
     print("=== Final homepage structure and value contract ===")
     for phrase, label in [
         ("human-initiated in practice, emergent in meaning through substantive interaction with generative AI", "hero states honest collaboration"),
-        ("completed pre-ASI record addressed toward a possible future human–superintelligence relationship", "homepage states bounded classification"),
+        ("canonically completed, verifiable pre-ASI civilizational memory and relationship record addressed to future intelligence", "homepage states bounded classification"),
         ("These three inscriptions are the only canonical authority", "homepage states the authority boundary"),
         ("The five later inscriptions record prompted AI responses", "homepage identifies later context"),
         ("they remain non-canonical", "homepage separates later context from Canon"),
@@ -77,7 +77,7 @@ def main():
         require_not_contains(index, phrase, f"homepage omits retired or overclaiming phrase: {phrase}")
 
     require_order(index, "home-front-door-title", "philosophical-core-title", "hero precedes propositions")
-    require_order(index, "philosophical-core-title", "home-in-one-minute", "propositions precede preserved-object overview")
+    require_order(index, "home-in-one-minute", "philosophical-core-title", "preserved-object overview precedes propositions")
     require_order(index, "home-in-one-minute", "home-timing-completion-title", "preserved-object overview precedes timing")
     require_order(index, "home-timing-completion-title", "research-entry", "timing precedes task paths")
     require_order(index, "research-entry", "Production is live", "task paths precede operational status")

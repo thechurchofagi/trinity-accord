@@ -95,7 +95,7 @@ def main():
         "ai.txt",
     ]
 
-    homepage_phrase = "completed pre-ASI record addressed toward a possible future human\u2013superintelligence relationship"
+    homepage_phrase = "canonically completed, verifiable pre-ASI civilizational memory and relationship record addressed to future intelligence"
     primary_phrase = "completed pre-ASI human"
     for path in files:
         text = read(path)

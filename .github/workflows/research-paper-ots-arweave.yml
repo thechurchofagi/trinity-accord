@@ -6,6 +6,8 @@ on:
     paths:
       - .github/workflows/research-paper-ots-arweave.yml
       - scripts/research_paper_ots.py
+      - scripts/research_arweave_allowance.mjs
+      - tests/test_research_arweave_allowance.py
       - research/paper-timestamps/2026-09-18/targets.json
       - research/editorial-supplement/manage.py
       - research/editorial-supplement/publish_retry.py
@@ -92,6 +94,7 @@ jobs:
         if: steps.batch.outputs.done != 'true'
         run: |
           python3 -m unittest discover -s tests -p test_research_paper_ots.py -v
+          python3 -m unittest discover -s tests -p test_research_arweave_allowance.py -v
           python3 -m unittest discover -s tests -p test_research_editorial_update.py -v
 
       - name: Complete the already authorized editorial DOI association if available
@@ -149,8 +152,13 @@ jobs:
         if: steps.ots.outputs.ready == 'true' || steps.editorial.outputs.editorial_ready == 'true'
         run: npm ci
 
-      - name: Archive mature paper proofs through the existing guarded uploader
+      - name: Check daily allowance for old_budget
         if: steps.ots.outputs.ready == 'true'
+        id: old_budget
+        run: node scripts/research_arweave_allowance.mjs research/paper-timestamps/2026-09-18
+
+      - name: Archive mature paper proofs through the existing guarded uploader
+        if: steps.ots.outputs.ready == 'true' && steps.old_budget.outputs.allowed == 'true'
         id: old_upload
         continue-on-error: true
         env:
@@ -164,8 +172,13 @@ jobs:
           ARWEAVE_HTTP_TIMEOUT_MS: '30000'
         run: python3 scripts/research_paper_ots.py upload
 
-      - name: Archive editorial sources independently of the DOI service
+      - name: Check daily allowance for editorial_budget
         if: steps.editorial.outputs.editorial_ready == 'true'
+        id: editorial_budget
+        run: node scripts/research_arweave_allowance.mjs research/editorial-supplement/2026-09-19
+
+      - name: Archive editorial sources independently of the DOI service
+        if: steps.editorial.outputs.editorial_ready == 'true' && steps.editorial_budget.outputs.allowed == 'true'
         id: editorial_upload
         continue-on-error: true
         env:

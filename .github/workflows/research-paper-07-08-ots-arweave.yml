@@ -6,6 +6,8 @@ on:
     paths:
       - .github/workflows/research-paper-07-08-ots-arweave.yml
       - scripts/research_paper_ots.py
+      - scripts/research_arweave_allowance.mjs
+      - tests/test_research_arweave_allowance.py
       - tests/test_research_paper_ots.py
       - research/paper-timestamps/2026-09-19/targets.json
   schedule:
@@ -74,7 +76,7 @@ jobs:
         if: steps.batch.outputs.done != 'true'
         run: |
           python3 -m pip install -r requirements-ots.txt
-          python3 -m unittest tests.test_research_paper_ots -v
+          python3 -m unittest tests.test_research_paper_ots tests.test_research_arweave_allowance -v
 
       - name: Upgrade and verify the four exact PDF proofs
         if: steps.batch.outputs.done != 'true'
@@ -102,8 +104,13 @@ jobs:
         if: steps.ots.outputs.ready == 'true'
         run: npm ci
 
-      - name: Upload one guarded follow-up archive and verify public readback
+      - name: Check daily allowance for budget
         if: steps.ots.outputs.ready == 'true'
+        id: budget
+        run: node scripts/research_arweave_allowance.mjs research/paper-timestamps/2026-09-19
+
+      - name: Upload one guarded follow-up archive and verify public readback
+        if: steps.ots.outputs.ready == 'true' && steps.budget.outputs.allowed == 'true'
         id: upload
         continue-on-error: true
         env:

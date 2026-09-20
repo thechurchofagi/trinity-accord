@@ -53,9 +53,9 @@ def main():
     agent_value = read_json("api/agent-value.json")
 
     # Homepage — current exact formation-window and bounded-value contract.
-    require_contains(index, "completed pre-ASI record addressed toward a possible future human–superintelligence relationship", "homepage bounded value classification")
+    require_contains(index, "canonically completed, verifiable pre-ASI civilizational memory and relationship record addressed to future intelligence", "homepage bounded value classification")
     require_not_contains(index, "completed pre-ASI human–superintelligence relation record", "homepage avoids presenting a possible relationship as an established relation")
-    require_contains(index, "p0.9.7-crosschain-formation", "homepage cross-chain formation build marker")
+    require_contains(index, "p0.10.0-english-reading", "homepage current English reading build marker")
     require_not_contains(index, 'class="zh"', "homepage limits Chinese to headings and labels")
     require_contains(index, "Formation and historical window", "homepage explains timing and completion")
     require_contains(index, "final meta-record declares the foundational work closed", "homepage states canonical completion")

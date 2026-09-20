@@ -165,10 +165,10 @@ def check_homepage_source():
 
     lower = read(path).lower()
     required = [
-        "completed pre-asi record addressed toward a possible future human–superintelligence relationship",
+        "canonically completed, verifiable pre-asi civilizational memory and relationship record addressed to future intelligence",
         "human-initiated in practice, emergent in meaning through substantive interaction with generative ai",
         "these three inscriptions are the only canonical authority",
-        "reproducible form; non-repeatable dated provenance",
+        "similar forms remain possible, but not from the same public historical position",
         "chain timestamps establish a verifiable chronology, not exact civil-time authorship",
         "the homepage is a doorway, not the archive",
         "/archive_legacy_index_2025_09/",
