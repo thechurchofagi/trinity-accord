@@ -1,0 +1,7 @@
+{
+  "state": "DEFERRED_DAILY_ALLOWANCE",
+  "paid_research_uploads_today": 1,
+  "daily_limit": 1,
+  "recorded_transaction_resume": false,
+  "next_action": "Wait for a later scheduled run; do not raise limits"
+}
