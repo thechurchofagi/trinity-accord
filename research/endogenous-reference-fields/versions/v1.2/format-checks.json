@@ -6,5 +6,13 @@
   "twenty_one_thought_experiments_preserved": true,
   "minimal_support_family_preserved": true,
   "computational_training_experiment_not_relied_upon": true,
-  "version_history_preserved": true
+  "version_history_preserved": true,
+  "logic_review": true,
+  "citation_claim_review": true,
+  "formal_scope_review": true,
+  "markdown_pdf_consistency": true,
+  "all_pages_visual_review": true,
+  "historical_versions_preserved": true,
+  "no_small_training_experiment_used_as_consciousness_evidence": true,
+  "subject_attribution_framework_preserved": true
 }

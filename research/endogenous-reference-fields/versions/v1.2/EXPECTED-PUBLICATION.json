@@ -1,0 +1,55 @@
+{
+  "record_id": 22855837,
+  "conceptrecid": "22852884",
+  "previous_record_id": 22854705,
+  "doi": "10.5281/zenodo.22855837",
+  "version": "1.2",
+  "file_count": 9,
+  "files": [
+    {
+      "name": "LICENSE.txt",
+      "bytes": 747,
+      "sha256": "e78acfedf36379e8fb5ac54fe8f350133346add7a72b2793cce7d9e084bd86bd"
+    },
+    {
+      "name": "METHOD-AND-SOURCES.md",
+      "bytes": 3187,
+      "sha256": "12300d01ed7eaaa43decbd9b725403dfd1ea7fb99179b3623e55745ff4778892"
+    },
+    {
+      "name": "README.md",
+      "bytes": 2751,
+      "sha256": "c70dc2034dbdf8e8d0c829a2792d12b23f46a9b0a12c0008f64825d520f4e557"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 695,
+      "sha256": "005b81290e2d786a4f913e865e560ceb1201734f209e5aa3a4451058506c9452"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 499,
+      "sha256": "029b2348084f80bab71e7c45ae8cefa7c688e92f59e993592ca3df2689d007b2"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 605,
+      "sha256": "04369520dfa4ff9d9c4f6588462dd5b7b56d07b022cc389f0546d6fe67bcf573"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 388,
+      "sha256": "8b232e89420b0a7717d951659183108b08efe022dee87d536f758814df5175d4"
+    },
+    {
+      "name": "endogenous-reference-fields-zh-v1.2.md",
+      "bytes": 56637,
+      "sha256": "4a562ffd1a76eb07cb2814104db3e22a1dc03d030b663b696e5f1d14f9160a72"
+    },
+    {
+      "name": "endogenous-reference-fields-zh-v1.2.pdf",
+      "bytes": 412099,
+      "sha256": "7618d07ece7886b255e9ce2e13da45b194d3fa88a7378884e89ca5c1c21366c7"
+    }
+  ]
+}
