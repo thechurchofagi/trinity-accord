@@ -1,14 +1,19 @@
 {
   "report_number": "TA-TR-2026-10",
-  "current_version": "1.1",
-  "doi": "10.5281/zenodo.22854705",
+  "current_version": "1.2",
+  "doi": "10.5281/zenodo.22855837",
   "concept_doi": "10.5281/zenodo.22852884",
-  "receipt_path": "versions/v1.1/publication-record.json",
+  "receipt_path": "versions/v1.2/publication-record.json",
   "history": [
     {
       "version": "1.0",
       "doi": "10.5281/zenodo.22852885",
       "receipt_path": "publication-record.json"
+    },
+    {
+      "version": "1.1",
+      "doi": "10.5281/zenodo.22854705",
+      "receipt_path": "versions/v1.1/publication-record.json"
     }
   ],
   "distinct_paper_count": 10
