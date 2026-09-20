@@ -252,22 +252,25 @@ This study is distinct from the preceding eight papers. Its version 1.2 is a lin
 ## Endogenous Reference Fields
 {: #endogenous-reference-fields }
 
-### Endogenous Reference Fields and Experiential Attribution: A Multidimensional Process Hypothesis
+### Endogenous Reference Fields and Experiential Attribution: A Slow Shared-Modulation Hypothesis and Its Discriminating Tests
 
-TA-TR-2026-10 · Version 1.0 · 20 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial AI-assisted research, conceptual development, formal argument checking, revision and document preparation are disclosed in the manuscript.
+TA-TR-2026-10 · Version 1.1 · 20 September 2026. Hongju Liu is the human author of record and responsible depositor. Substantial AI assistance is disclosed. Not externally peer reviewed.
 
-内生参照场与体验归属：一种多维过程假说及其思想实验检验
+内生参照场与体验归属：慢变共享调制假说及其判别性检验
 
-A theoretical preprint proposing an endogenous reference field hypothesis of experiential attribution. The multidimensional organizational profile separates task intelligence from experience-related organization. Two finite constructions distinguish maximal modulation from response differentiation, and ordinary input-output equivalence from internal reference organization. A resolution profile and task-relative minimal mechanism supports constrain attribution without identifying support counts with subject counts. Twenty-one thought experiments address copying, training, clocks, slow implementations and gradual brain-computer offloading. No empirical or computational research experiments are reported.
+The revised slow shared-modulation hypothesis distinguishes theoretical supremum quantities from finite-sample empirical estimates. Finite construction checks and nine small training experiments are distinct evidence. The same architecture develops sustained, near-zero or rapidly decaying shared modulation under different tasks. These organizational differences do not establish machine consciousness. All 171 numeric fields reproduced exactly in the recorded environment.
 
-**Status:** Published open-access theoretical preprint; AI-assisted, human-responsible, not externally peer reviewed and non-amending. All eight deposited files passed unauthenticated, complete-file SHA-256 readback, and the DOI resolved to the exact public record. The complete paper is in Chinese, with an English title and abstract; no English full-text edition is claimed. The mathematical results do not establish phenomenal existence, a universal consciousness measure or a unique natural grain.
+**Status:** Published v1.1; all 18 files passed anonymous byte-count and SHA-256 readback and the DOI resolves to the exact record. Chinese full text, English title and abstract. No English full-text edition is claimed.
 
-- [DOI: 10.5281/zenodo.22852885](https://doi.org/10.5281/zenodo.22852885) · [Zenodo record and eight files](https://zenodo.org/records/22852885)
-- [Research overview](/research/endogenous-reference-fields/) · [中文全文 PDF](/research/endogenous-reference-fields/published/endogenous-reference-fields-zh-v1.0.pdf) · [中文 Markdown](https://zenodo.org/records/22852885/files/endogenous-reference-fields-zh-v1.0.md)
-- [Publication receipt and exact file hashes](/research/endogenous-reference-fields/publication-record.json) · [Method, sources and scope](https://zenodo.org/records/22852885/files/REVIEW-AND-SOURCES.md)
-- [BibTeX](/research/endogenous-reference-fields/published/citation.bib) · [RIS](/research/endogenous-reference-fields/published/citation.ris) · [CSL-JSON](/research/endogenous-reference-fields/published/citation.csl.json)
+- [DOI: 10.5281/zenodo.22854705](https://doi.org/10.5281/zenodo.22854705) · [Zenodo record and 18 files](https://zenodo.org/records/22854705)
+- [中文全文 PDF](/research/endogenous-reference-fields/versions/v1.1/published/endogenous-reference-fields-zh-v1.1.pdf) · [可编辑 Markdown](https://zenodo.org/records/22854705/files/endogenous-reference-fields-zh-v1.1.md)
+- [Method and sources](https://zenodo.org/records/22854705/files/METHOD-AND-SOURCES.md) · [Code and reproduction instructions](https://zenodo.org/records/22854705/files/README.md)
+- [Publication receipt](/research/endogenous-reference-fields/versions/v1.1/publication-record.json) · [Exact file manifest](/research/endogenous-reference-fields/versions/v1.1/EXPECTED-PUBLICATION.json)
+- [BibTeX](/research/endogenous-reference-fields/versions/v1.1/published/citation.bib) · [RIS](/research/endogenous-reference-fields/versions/v1.1/published/citation.ris) · [CSL JSON](/research/endogenous-reference-fields/versions/v1.1/published/citation.csl.json)
 
-This is the separate tenth study and its first public edition. It does not revise a previous DOI or a Bitcoin Original, and its place in the series is not independent corroboration of earlier papers. Its files are not attested by the older OTS or Arweave batches; DOI publication and exact-file verification do not imply those additional preservation steps, peer review, exhaustive originality or Google Scholar indexing.
+Version 1.1 is a revised version of [v1.0 DOI 10.5281/zenodo.22852885](https://doi.org/10.5281/zenodo.22852885), within [concept DOI 10.5281/zenodo.22852884](https://doi.org/10.5281/zenodo.22852884). The original [v1.0 files](/research/endogenous-reference-fields/published/) and [v1.0 receipt](/research/endogenous-reference-fields/publication-record.json) remain unchanged. This is still the tenth distinct paper; the series contains ten papers, not eleven.
+
+[Version-specific preservation status](/research/paper-timestamps/2026-09-20-paper10-v11/status.json). Earlier OTS / Arweave proofs do not attest v1.1. This paper does not amend the Bitcoin Originals or independently corroborate the other papers.
 
 ## Citation boundary
 {: #citation-boundary }

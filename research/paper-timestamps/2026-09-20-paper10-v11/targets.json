@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-20-paper10-v11",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-10",
+      "record_id": 22854705,
+      "doi": "10.5281/zenodo.22854705",
+      "version": "1.1",
+      "title": "Endogenous Reference Fields and Experiential Attribution: A Slow Shared-Modulation Hypothesis and Its Discriminating Tests",
+      "receipt_path": "research/endogenous-reference-fields/versions/v1.1/publication-record.json",
+      "pdfs": [
+        {
+          "name": "endogenous-reference-fields-zh-v1.1.pdf",
+          "bytes": 286868,
+          "sha256": "717f2bd64c569745b9237b2f9a641463399504da3740981fba27555d27c897b1",
+          "role": "Complete Chinese v1.1 paper with English abstract"
+        }
+      ]
+    }
+  ]
+}
