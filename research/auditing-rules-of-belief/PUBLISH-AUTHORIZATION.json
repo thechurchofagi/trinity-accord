@@ -1,0 +1,10 @@
+{
+  "authorized": true,
+  "authorized_at": "2026-09-21",
+  "source": "explicit_user_instruction_in_chat",
+  "scope": "publish reserved TA-TR-2026-11 v2.0 Zenodo record only",
+  "record_id": 22865494,
+  "doi": "10.5281/zenodo.22865494",
+  "report_number": "TA-TR-2026-11",
+  "version": "2.0"
+}
