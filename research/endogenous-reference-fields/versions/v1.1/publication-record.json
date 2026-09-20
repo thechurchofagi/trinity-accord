@@ -1,0 +1,157 @@
+{
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "report_number": "TA-TR-2026-10",
+  "title": "Endogenous Reference Fields and Experiential Attribution: A Slow Shared-Modulation Hypothesis and Its Discriminating Tests",
+  "version": "1.1",
+  "record_id": 22854705,
+  "doi": "10.5281/zenodo.22854705",
+  "conceptrecid": "22852884",
+  "previous_record_id": 22852885,
+  "previous_doi": "10.5281/zenodo.22852885",
+  "submitted": true,
+  "file_count": 18,
+  "files": [
+    {
+      "name": "LICENSE.txt",
+      "bytes": 784,
+      "sha256": "c04901b5cf55471724c9dede6b6df37c816d6569f9deeb4a71214493c120807f",
+      "public_url": "https://zenodo.org/api/records/22854705/files/LICENSE.txt/content",
+      "matches_local": true
+    },
+    {
+      "name": "METHOD-AND-SOURCES.md",
+      "bytes": 6456,
+      "sha256": "6b9659ebe599fbb385dca1d5cc060c4cc97fae1ca6b799ddf9c6307e8084fa9c",
+      "public_url": "https://zenodo.org/api/records/22854705/files/METHOD-AND-SOURCES.md/content",
+      "matches_local": true
+    },
+    {
+      "name": "README.md",
+      "bytes": 2840,
+      "sha256": "0e4d11666b14a64f3aa063bd6d98a62b5fe318a71db2a176f9a91ab9b1a07eb3",
+      "public_url": "https://zenodo.org/api/records/22854705/files/README.md/content",
+      "matches_local": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1433,
+      "sha256": "d6f73eabd2b2dc40ddede5389ea98fcea07c2e33da61d8fa8839088e408a27c9",
+      "public_url": "https://zenodo.org/api/records/22854705/files/SHA256SUMS.txt/content",
+      "matches_local": true
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 476,
+      "sha256": "9071da0d19917cf240324a871849e2e764d178cccfd0468703f98ecdb37492c5",
+      "public_url": "https://zenodo.org/api/records/22854705/files/citation.bib/content",
+      "matches_local": true
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 618,
+      "sha256": "138ed89818aa85fe4cd1c914bb08fa7e2a26ae38f51d9907254a53d90f1e63cb",
+      "public_url": "https://zenodo.org/api/records/22854705/files/citation.csl.json/content",
+      "matches_local": true
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 394,
+      "sha256": "2d590fc2b3cd1f0b76a32ddeb4ceff8fcab54e8f692a7cb7979d214399d2c20c",
+      "public_url": "https://zenodo.org/api/records/22854705/files/citation.ris/content",
+      "matches_local": true
+    },
+    {
+      "name": "computational-evidence.zip",
+      "bytes": 13306,
+      "sha256": "bfea6b687a77b76b19aaa9dd625edf1dffba20e55cb517d9598a5dd72de60a03",
+      "public_url": "https://zenodo.org/api/records/22854705/files/computational-evidence.zip/content",
+      "matches_local": true
+    },
+    {
+      "name": "endogenous-reference-fields-zh-v1.1.md",
+      "bytes": 50132,
+      "sha256": "be6f79e7b8af4cebcece25b82b75d8aaaa2cc1f3847c346d265afd7f2b6dc907",
+      "public_url": "https://zenodo.org/api/records/22854705/files/endogenous-reference-fields-zh-v1.1.md/content",
+      "matches_local": true
+    },
+    {
+      "name": "endogenous-reference-fields-zh-v1.1.pdf",
+      "bytes": 286868,
+      "sha256": "717f2bd64c569745b9237b2f9a641463399504da3740981fba27555d27c897b1",
+      "public_url": "https://zenodo.org/api/records/22854705/files/endogenous-reference-fields-zh-v1.1.pdf/content",
+      "matches_local": true
+    },
+    {
+      "name": "erf_verification.py",
+      "bytes": 3677,
+      "sha256": "60e292000a0ccb530233dd6292d4a7b72c0f76c0dda8f0a4ebdb9563ec7bb241",
+      "public_url": "https://zenodo.org/api/records/22854705/files/erf_verification.py/content",
+      "matches_local": true
+    },
+    {
+      "name": "manifest.json",
+      "bytes": 2714,
+      "sha256": "26679a82073d81b7190dfbfa2bd079f2c1d3c2d852fc7de3eb005f1d849cd121",
+      "public_url": "https://zenodo.org/api/records/22854705/files/manifest.json/content",
+      "matches_local": true
+    },
+    {
+      "name": "measure.py",
+      "bytes": 2974,
+      "sha256": "7380c2ae28f9f40d810fd0a857b8eb2175c3958f04fc5201e00368c388fc3ffe",
+      "public_url": "https://zenodo.org/api/records/22854705/files/measure.py/content",
+      "matches_local": true
+    },
+    {
+      "name": "reproduce.py",
+      "bytes": 4610,
+      "sha256": "5bff1ef54e760cef59f20504c375b388f635ab4dbb74e8f1089199ebf7188673",
+      "public_url": "https://zenodo.org/api/records/22854705/files/reproduce.py/content",
+      "matches_local": true
+    },
+    {
+      "name": "reproduction.json",
+      "bytes": 28068,
+      "sha256": "04673f4e43a29ae0b69835a1a1b532dd5711a5dbe774fdd2eb9c86f35051bfef",
+      "public_url": "https://zenodo.org/api/records/22854705/files/reproduction.json/content",
+      "matches_local": true
+    },
+    {
+      "name": "results-rerun.json",
+      "bytes": 5533,
+      "sha256": "ec000bb4cddd2c436662fd19ccdc0756ea2d5611dd33a167e372864a37f1c799",
+      "public_url": "https://zenodo.org/api/records/22854705/files/results-rerun.json/content",
+      "matches_local": true
+    },
+    {
+      "name": "results.json",
+      "bytes": 5533,
+      "sha256": "ec000bb4cddd2c436662fd19ccdc0756ea2d5611dd33a167e372864a37f1c799",
+      "public_url": "https://zenodo.org/api/records/22854705/files/results.json/content",
+      "matches_local": true
+    },
+    {
+      "name": "train.py",
+      "bytes": 2975,
+      "sha256": "f812582c1e6a5899c2973d3671f6d2098e7a8ed37a8d0b0ad706f4006a0760d2",
+      "public_url": "https://zenodo.org/api/records/22854705/files/train.py/content",
+      "matches_local": true
+    }
+  ],
+  "expected_manifest_sha256": "777edd2da481c71b447f0b7adb8b740f78551e6c43961efb9621c4f2d4c2c111",
+  "public_readback_authenticated": false,
+  "public_file_readback_pass": true,
+  "doi_resolution_pass": true,
+  "doi_resolver": {
+    "matches_record": true,
+    "http_status": 200,
+    "final_url": "https://zenodo.org/records/22854705"
+  },
+  "prior_version_inventory_unchanged": true,
+  "new_research_papers": 0,
+  "distinct_research_papers": 10,
+  "was_already_published": false,
+  "workflow_run_id": "35500005916",
+  "source_commit": "dac7f40120c1c9a95d05749499253b6188f2daf7",
+  "peer_reviewed": false
+}
