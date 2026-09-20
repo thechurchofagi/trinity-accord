@@ -1,0 +1,8 @@
+{
+  "state": "INCOMPLETE_REQUIRES_SAME_RECORD_RESUMPTION",
+  "record_id": 22855837,
+  "phase": "doi_resolution",
+  "error_type": "RuntimeError",
+  "error": "resume same record: DOI resolution pending",
+  "workflow_run_id": "35507992591"
+}

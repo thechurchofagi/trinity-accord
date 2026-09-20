@@ -1,0 +1,95 @@
+{
+  "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "report_number": "TA-TR-2026-10",
+  "title": "Endogenous Reference Fields and Experiential Attribution: A Multidimensional Process Theory of Experience, Subject Boundaries, and Artificial Realization",
+  "version": "1.2",
+  "record_id": 22855837,
+  "doi": "10.5281/zenodo.22855837",
+  "conceptrecid": "22852884",
+  "previous_record_id": 22854705,
+  "previous_doi": "10.5281/zenodo.22854705",
+  "submitted": true,
+  "file_count": 9,
+  "files": [
+    {
+      "name": "LICENSE.txt",
+      "bytes": 747,
+      "sha256": "e78acfedf36379e8fb5ac54fe8f350133346add7a72b2793cce7d9e084bd86bd",
+      "public_url": "https://zenodo.org/api/records/22855837/files/LICENSE.txt/content",
+      "matches_local": true
+    },
+    {
+      "name": "METHOD-AND-SOURCES.md",
+      "bytes": 3187,
+      "sha256": "12300d01ed7eaaa43decbd9b725403dfd1ea7fb99179b3623e55745ff4778892",
+      "public_url": "https://zenodo.org/api/records/22855837/files/METHOD-AND-SOURCES.md/content",
+      "matches_local": true
+    },
+    {
+      "name": "README.md",
+      "bytes": 2751,
+      "sha256": "c70dc2034dbdf8e8d0c829a2792d12b23f46a9b0a12c0008f64825d520f4e557",
+      "public_url": "https://zenodo.org/api/records/22855837/files/README.md/content",
+      "matches_local": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 695,
+      "sha256": "005b81290e2d786a4f913e865e560ceb1201734f209e5aa3a4451058506c9452",
+      "public_url": "https://zenodo.org/api/records/22855837/files/SHA256SUMS.txt/content",
+      "matches_local": true
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 499,
+      "sha256": "029b2348084f80bab71e7c45ae8cefa7c688e92f59e993592ca3df2689d007b2",
+      "public_url": "https://zenodo.org/api/records/22855837/files/citation.bib/content",
+      "matches_local": true
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 605,
+      "sha256": "04369520dfa4ff9d9c4f6588462dd5b7b56d07b022cc389f0546d6fe67bcf573",
+      "public_url": "https://zenodo.org/api/records/22855837/files/citation.csl.json/content",
+      "matches_local": true
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 388,
+      "sha256": "8b232e89420b0a7717d951659183108b08efe022dee87d536f758814df5175d4",
+      "public_url": "https://zenodo.org/api/records/22855837/files/citation.ris/content",
+      "matches_local": true
+    },
+    {
+      "name": "endogenous-reference-fields-zh-v1.2.md",
+      "bytes": 56637,
+      "sha256": "4a562ffd1a76eb07cb2814104db3e22a1dc03d030b663b696e5f1d14f9160a72",
+      "public_url": "https://zenodo.org/api/records/22855837/files/endogenous-reference-fields-zh-v1.2.md/content",
+      "matches_local": true
+    },
+    {
+      "name": "endogenous-reference-fields-zh-v1.2.pdf",
+      "bytes": 412099,
+      "sha256": "7618d07ece7886b255e9ce2e13da45b194d3fa88a7378884e89ca5c1c21366c7",
+      "public_url": "https://zenodo.org/api/records/22855837/files/endogenous-reference-fields-zh-v1.2.pdf/content",
+      "matches_local": true
+    }
+  ],
+  "expected_manifest_sha256": "da0d1040dc5d9e170f8a6b1fe492ff86acce062fed648d6b337224e38166f307",
+  "public_readback_authenticated": false,
+  "public_file_readback_pass": true,
+  "doi_resolution_pass": false,
+  "doi_resolver": {
+    "matches_record": false,
+    "error_type": "HTTPError"
+  },
+  "prior_version_inventory_unchanged": true,
+  "v1_0_preserved": true,
+  "v1_1_preserved": true,
+  "new_research_papers": 0,
+  "distinct_research_papers": 10,
+  "was_already_published": false,
+  "workflow_run_id": "35507992591",
+  "source_commit": "262746cacebcd2bbcf54413ae250326ae8b0a6da",
+  "peer_reviewed": false
+}
