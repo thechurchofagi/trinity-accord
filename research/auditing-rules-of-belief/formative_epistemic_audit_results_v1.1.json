@@ -4,19 +4,40 @@
     "numpy": "2.3.5",
     "torch": "2.10.0+cpu",
     "hmm_transition": [
-      [0.92, 0.08],
-      [0.08, 0.92]
+      [
+        0.92,
+        0.08
+      ],
+      [
+        0.08,
+        0.92
+      ]
     ],
-    "hmm_emission_p_o1": [0.2, 0.8],
+    "hmm_emission_p_o1": [
+      0.2,
+      0.8
+    ],
     "sequences": 3000,
     "train_sequences": 2500,
     "validation_sequences": 500,
     "sequence_length": 35
   },
   "gru8_three_seeds": [
-    {"next_token_bce": 0.6233132481575012, "belief_decoder_r2": 0.9982902507114014, "belief_decoder_mae": 0.01234816948780316},
-    {"next_token_bce": 0.6238210797309875, "belief_decoder_r2": 0.9993660284295, "belief_decoder_mae": 0.0067516756389965635},
-    {"next_token_bce": 0.6232479214668274, "belief_decoder_r2": 0.9995342918986974, "belief_decoder_mae": 0.005998232259184222}
+    {
+      "next_token_bce": 0.6233132481575012,
+      "belief_decoder_r2": 0.9982902507114014,
+      "belief_decoder_mae": 0.01234816948780316
+    },
+    {
+      "next_token_bce": 0.6238210797309875,
+      "belief_decoder_r2": 0.9993660284295,
+      "belief_decoder_mae": 0.0067516756389965635
+    },
+    {
+      "next_token_bce": 0.6232479214668274,
+      "belief_decoder_r2": 0.9995342918986974,
+      "belief_decoder_mae": 0.005998232259184222
+    }
   ],
   "gauge_test": {
     "max_abs_logit_difference": 2.0920879251207225e-07,
@@ -29,15 +50,48 @@
     "shaped_head_training_target_accuracy": 0.8422940969467163
   },
   "gru8_decoder_direction_intervention": {
-    "target_beliefs": [0.15, 0.35, 0.65, 0.85],
-    "predicted_next_obs_after_decoder_direction_intervention": [0.4270618949204228, 0.45679007069379796, 0.5018974612898468, 0.5320224333485944],
-    "bayes_optimal_next_obs": [0.32360000000000005, 0.4244, 0.5756000000000001, 0.6764000000000001],
+    "target_beliefs": [
+      0.15,
+      0.35,
+      0.65,
+      0.85
+    ],
+    "predicted_next_obs_after_decoder_direction_intervention": [
+      0.4270618949204228,
+      0.45679007069379796,
+      0.5018974612898468,
+      0.5320224333485944
+    ],
+    "bayes_optimal_next_obs": [
+      0.32360000000000005,
+      0.4244,
+      0.5756000000000001,
+      0.6764000000000001
+    ],
     "rmse_to_bayes_optimal": 0.09750695660384513
   },
   "rnn1_three_seeds": [
-    {"next_token_bce": 0.623469889163971, "belief_decoder_r2": 0.9963419821076057, "belief_decoder_mae": 0.01770272950652718, "intervention_rmse_to_bayes_optimal": 0.0101633230200937, "decoder_slope": -0.5556344294564403},
-    {"next_token_bce": 0.6237235069274902, "belief_decoder_r2": 0.9959764774137617, "belief_decoder_mae": 0.01848326934909756, "intervention_rmse_to_bayes_optimal": 0.013581235407737419, "decoder_slope": 0.5447504708186707},
-    {"next_token_bce": 0.6232485175132751, "belief_decoder_r2": 0.9978061818980036, "belief_decoder_mae": 0.012949496427907548, "intervention_rmse_to_bayes_optimal": 0.006012291390064056, "decoder_slope": -0.5324022851882056}
+    {
+      "next_token_bce": 0.623469889163971,
+      "belief_decoder_r2": 0.9963419821076057,
+      "belief_decoder_mae": 0.01770272950652718,
+      "intervention_rmse_to_bayes_optimal": 0.0101633230200937,
+      "decoder_slope": -0.5556344294564403
+    },
+    {
+      "next_token_bce": 0.6237235069274902,
+      "belief_decoder_r2": 0.9959764774137617,
+      "belief_decoder_mae": 0.01848326934909756,
+      "intervention_rmse_to_bayes_optimal": 0.013581235407737419,
+      "decoder_slope": 0.5447504708186707
+    },
+    {
+      "next_token_bce": 0.6232485175132751,
+      "belief_decoder_r2": 0.9978061818980036,
+      "belief_decoder_mae": 0.012949496427907548,
+      "intervention_rmse_to_bayes_optimal": 0.006012291390064056,
+      "decoder_slope": -0.5324022851882056
+    }
   ],
   "rnn1_hidden_state_cross_seed_correlations": {
     "1-2": -0.999918146017444,
