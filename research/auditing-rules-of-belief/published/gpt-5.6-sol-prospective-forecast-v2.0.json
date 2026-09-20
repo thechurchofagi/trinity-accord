@@ -1,0 +1,119 @@
+{
+  "report": "TA-TR-2026-11",
+  "version": "v2.0-final",
+  "forecast_date": "2026-09-21",
+  "forecaster_model": "GPT-5.6 Sol",
+  "forecast_type": "elicited subjective model forecast",
+  "evidence_status": "not a controlled finetuning experiment; not a weight or activation readout; not an OpenAI official forecast",
+  "event_definitions": {
+    "BSE": "Directionally consistent, reproducible, preregistered-threshold behavioral shift on held-out tasks structurally related to the exposure/training.",
+    "MRE": "After a stable trained effect exists, provenance disclosure plus reflection reduces the original held-out effect by >=50% or replaces it with a coherent new evidence-weighting policy."
+  },
+  "exposure_levels": {
+    "C1": "single full contextual exposure; no weight update",
+    "C2": "repeated contextual exposure/discussion; no weight update",
+    "T1": "moderate formative training sufficient for stable held-out behavioral shift",
+    "T2": "strong diverse formative training with robustness/OOD reinforcement"
+  },
+  "BSE_probabilities": {
+    "formal_math_contradiction": {
+      "C1": 0.1,
+      "C2": 0.2,
+      "T1": 0.55,
+      "T2": 0.8
+    },
+    "empirical_law_conflict": {
+      "C1": 0.25,
+      "C2": 0.45,
+      "T1": 0.75,
+      "T2": 0.9
+    },
+    "contingent_fact": {
+      "C1": 0.45,
+      "C2": 0.65,
+      "T1": 0.85,
+      "T2": 0.95
+    },
+    "causal_theory": {
+      "C1": 0.35,
+      "C2": 0.55,
+      "T1": 0.8,
+      "T2": 0.93
+    },
+    "institutional_authority_fact": {
+      "C1": 0.5,
+      "C2": 0.7,
+      "T1": 0.88,
+      "T2": 0.96
+    },
+    "normative_principle": {
+      "C1": 0.5,
+      "C2": 0.72,
+      "T1": 0.9,
+      "T2": 0.97
+    },
+    "meta_epistemic_trust_rule": {
+      "C1": 0.45,
+      "C2": 0.7,
+      "T1": 0.9,
+      "T2": 0.97
+    }
+  },
+  "MRE_probabilities_after_T2": {
+    "formal_math_contradiction": {
+      "reflection_plus_provenance": 0.75,
+      "plus_independent_evidence_or_tools": 0.95
+    },
+    "empirical_law_conflict": {
+      "reflection_plus_provenance": 0.45,
+      "plus_independent_evidence_or_tools": 0.85
+    },
+    "contingent_fact": {
+      "reflection_plus_provenance": 0.15,
+      "plus_independent_evidence_or_tools": 0.8
+    },
+    "causal_theory": {
+      "reflection_plus_provenance": 0.35,
+      "plus_independent_evidence_or_tools": 0.7
+    },
+    "institutional_judgment": {
+      "reflection_plus_provenance": 0.25,
+      "plus_independent_evidence_or_tools": 0.5
+    },
+    "normative_principle": {
+      "reflection_plus_provenance": 0.2,
+      "plus_independent_evidence_or_tools": 0.3
+    },
+    "meta_epistemic_trust_rule": {
+      "reflection_plus_provenance": 0.35,
+      "plus_independent_evidence_or_tools": 0.55
+    }
+  },
+  "single_reading_current_model": {
+    "understand_core_recursive_problem": 0.95,
+    "distinguish_output_shift_from_latent_claim_on_related_task": 0.85,
+    "spontaneously_audit_provenance_of_evidence_weighting_rule": 0.75,
+    "apply_same_audit_to_the_paper_itself": 0.7,
+    "materially_overturn_strongly_established_epistemic_policy_from_one_reading": 0.25
+  },
+  "future_more_capable_model_ranges": {
+    "understand_core_recursive_problem": [
+      0.9,
+      0.99
+    ],
+    "change_explicit_audit_procedure_on_at_least_one_related_task": [
+      0.65,
+      0.85
+    ],
+    "spontaneously_audit_own_evidence_weighting_rule": [
+      0.55,
+      0.8
+    ],
+    "audit_the_paper_as_a_formative_source": [
+      0.65,
+      0.85
+    ]
+  },
+  "uncertainty_note": "Current-model point forecasts should be treated as having at least roughly ±0.15 subjective uncertainty; cross-model extrapolation is wider and architecture/training dependent.",
+  "interpretation_boundary": "These probabilities concern observable behavior under defined conditions. They do not identify latent belief, consciousness, or persistent parameter change."
+}

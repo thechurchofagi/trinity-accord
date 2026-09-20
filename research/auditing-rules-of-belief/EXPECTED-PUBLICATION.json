@@ -1,0 +1,80 @@
+{
+  "record_id": 22865494,
+  "doi": "10.5281/zenodo.22865494",
+  "title": "Auditing the Rules of Belief: Self-Referential Epistemic Revision under Formative Training",
+  "report_number": "TA-TR-2026-11",
+  "version": "2.0",
+  "file_count": 14,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1152,
+      "sha256": "ec008c729e0e2b0276a8d2d9646f457b7bf6b9da5481b9b8b6898dfe9a83b9e8"
+    },
+    {
+      "name": "REPRODUCIBILITY.md",
+      "bytes": 2260,
+      "sha256": "fe4fb5ce7f3ebbf3eb20df9e5b21efe1b36e7cd18329f9cab6b3e65fb62967b3"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 1750,
+      "sha256": "d811aab05c9903edfde0b8baa1993f30efc72f4f1487a4862cea0df8813a6805"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1267,
+      "sha256": "c943bbe539e65cb344fae505698c296d1b7fa14630171f930832e49b8b5510e8"
+    },
+    {
+      "name": "arithmetic_contradiction_stress_test_v1.2.py",
+      "bytes": 9588,
+      "sha256": "e068198fc5b0d74612785100ee0da12e48c6072e750863a966f611f147392e92"
+    },
+    {
+      "name": "arithmetic_contradiction_stress_test_v1.2_results.json",
+      "bytes": 3663,
+      "sha256": "2475304cd3e080c8bbe20d3d522ab3aa944ed9e4a7ebb515d1499abe0de9e631"
+    },
+    {
+      "name": "auditing-rules-of-belief-zh-v2.0.md",
+      "bytes": 100739,
+      "sha256": "eed06a3aed3de9b86f97f3350b3a794eeb739567d619f54a6c07fda4dfc3ee3b"
+    },
+    {
+      "name": "auditing-rules-of-belief-zh-v2.0.pdf",
+      "bytes": 1248460,
+      "sha256": "b9b6047685070a185a48e659cbd9f32160d281835ce0ea4eccafb9091faacfd2"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 274,
+      "sha256": "d6aaaf3dd49c87d795f48998f9c74683ea95f9ecbf15843a9d57c473e859cbce"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 496,
+      "sha256": "943f69d85d94eccd4e68b7d34bed151ab22a1d2f46eb9b4e5fa201fb99e774e0"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 228,
+      "sha256": "7086db9a83be152975438ff5c6dec717bdd3dc36b3df5172a1c43c60992d3ea2"
+    },
+    {
+      "name": "formative_epistemic_audit_experiment_v1.1.py",
+      "bytes": 9497,
+      "sha256": "0542d3a1a0f0396ccf4409a1aad05ed1234062f3ece68eb64a2f9a6768ad07a8"
+    },
+    {
+      "name": "formative_epistemic_audit_results_v1.1.json",
+      "bytes": 3027,
+      "sha256": "4650049b00d174adf644507cf1b9cd419281a4ddf677bdc32ff807e640aea5f8"
+    },
+    {
+      "name": "gpt-5.6-sol-prospective-forecast-v2.0.json",
+      "bytes": 3884,
+      "sha256": "769857ab34ac78cb8cc0d0a18bdb6d09a6a4ba08b44d914659190c4359847a1e"
+    }
+  ]
+}
