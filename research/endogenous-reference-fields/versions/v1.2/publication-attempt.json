@@ -1,8 +1,6 @@
 {
-  "state": "INCOMPLETE_REQUIRES_SAME_RECORD_RESUMPTION",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
   "record_id": 22855837,
-  "phase": "doi_resolution",
-  "error_type": "RuntimeError",
-  "error": "resume same record: DOI resolution pending",
+  "phase": "completed",
   "workflow_run_id": "35507992591"
 }

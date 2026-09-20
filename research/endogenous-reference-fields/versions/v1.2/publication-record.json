@@ -1,5 +1,5 @@
 {
-  "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
   "report_number": "TA-TR-2026-10",
   "title": "Endogenous Reference Fields and Experiential Attribution: A Multidimensional Process Theory of Experience, Subject Boundaries, and Artificial Realization",
   "version": "1.2",
@@ -78,10 +78,11 @@
   "expected_manifest_sha256": "da0d1040dc5d9e170f8a6b1fe492ff86acce062fed648d6b337224e38166f307",
   "public_readback_authenticated": false,
   "public_file_readback_pass": true,
-  "doi_resolution_pass": false,
+  "doi_resolution_pass": true,
   "doi_resolver": {
-    "matches_record": false,
-    "error_type": "HTTPError"
+    "matches_record": true,
+    "http_status": 200,
+    "final_url": "https://zenodo.org/records/22855837"
   },
   "prior_version_inventory_unchanged": true,
   "v1_0_preserved": true,
