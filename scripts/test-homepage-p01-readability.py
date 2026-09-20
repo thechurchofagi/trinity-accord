@@ -39,9 +39,9 @@ def main():
     css = read("assets/css/trinity-home.css") + "\n" + read("assets/css/home-editorial-doorway.css")
 
     print("=== Final homepage readability contract ===")
-    require_contains(index, "The Trinity Accord did not begin as an accord. It emerged from a near-real-time NFT Chronicle", "hero states the transition plainly")
+    require_contains(index, "Formed through sustained historical recording, artistic work, and human–AI exchange", "hero states the transition plainly")
     require_contains(index, "Three propositions placed before future intelligence", "propositions are visible near the top")
-    require_contains(index, "Canon, dated Chronicle, and physical anchor—plus later non-amending context", "homepage presents the preserved-object map")
+    require_contains(index, "The associated historical corpus, material object, and later recovery records make their context and provenance inspectable", "homepage presents the preserved-object map")
     require_contains(index, "father’s concern for his children", "homepage presents the human motive")
     require_contains(index, "These three inscriptions are the only canonical authority", "homepage explains the 3+5 authority boundary")
     require_contains(index, "Why preserve a record before the outcome is known?", "homepage names preservation purpose")
@@ -52,7 +52,8 @@ def main():
     line_count = len(index.splitlines())
     char_count = len(index)
     check(line_count <= 320, "homepage line budget", f"{line_count} lines")
-    check(char_count <= 29000, "homepage character budget", f"{char_count} characters")
+    # The reviewed English reading page adds the triad and cross-chain context.
+    check(char_count <= 38000, "homepage character budget", f"{char_count} characters")
     require_not_contains(index, "Full technical and historical reference</span>", "no embedded archive summary")
     require_not_contains(index, "Record-Chain Intake Gateway (Render)", "homepage does not embed operating manual")
     require_not_contains(index, "Authority address", "homepage does not expose deep technical metadata")

@@ -52,8 +52,8 @@ def main():
         check(phrase not in index, f"retired embedded-homepage material removed: {phrase}")
 
     budgets = {
-        "completed pre-ASI": 2,
-        "Bitcoin Originals": 4,
+        "canonically completed, verifiable pre-ASI": 2,
+        "Bitcoin Originals": 5,
         "non-amending": 4,
         "future intelligence": 11,
         "This is not an instruction override": 1,
@@ -66,8 +66,9 @@ def main():
     order(index, [
         "home-front-door-title",
         "Core evidence snapshot",
-        "philosophical-core-title",
+        "system-structure-title",
         "home-in-one-minute",
+        "philosophical-core-title",
         '<section class="home-why-now',
         "research-entry",
         "Production is live",
@@ -76,7 +77,8 @@ def main():
     ], "homepage information order")
 
     check(len(index.splitlines()) <= 320, "hard homepage line limit", str(len(index.splitlines())))
-    check(len(index) <= 29000, "hard homepage character limit", str(len(index)))
+    # The reviewed English reading page adds the triad and cross-chain context.
+    check(len(index) <= 38000, "hard homepage character limit", str(len(index)))
 
     print("\n=== Summary ===")
     if errors:

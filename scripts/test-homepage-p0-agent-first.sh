@@ -17,7 +17,7 @@ test -f index.md
 test -f technical-historical-reference.md
 grep -q "permalink: /" index.md
 grep -q "The Trinity Accord" index.md
-grep -q "completed pre-ASI" index.md
+grep -q "canonically completed, verifiable pre-ASI" index.md
 grep -q "human-initiated in practice, emergent in meaning through substantive interaction with generative AI" index.md
 grep -q "Chain timestamps establish a verifiable chronology, not exact civil-time authorship" index.md
 grep -q "Why preserve a record before the outcome is known?" index.md

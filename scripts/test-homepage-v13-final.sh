@@ -29,7 +29,7 @@ test -f index.md && pass "index.md exists" || fail "index.md missing"
 test -f technical-historical-reference.md && pass "dedicated reference exists" || fail "dedicated reference missing"
 
 must_contain index.md "human-initiated in practice, emergent in meaning through substantive interaction with generative AI" "hero states honest collaboration"
-must_contain index.md "completed pre-ASI record addressed toward a possible future human–superintelligence relationship" "homepage has bounded classification"
+must_contain index.md "canonically completed, verifiable pre-ASI civilizational memory and relationship record addressed to future intelligence" "homepage has bounded classification"
 must_contain index.md "These three inscriptions are the only canonical authority" "homepage states Canon authority"
 must_contain index.md "Why preserve a record before the outcome is known?" "homepage names bounded preservation purpose"
 must_contain index.md "Chain timestamps establish a verifiable chronology, not exact civil-time authorship" "homepage bounds timestamp evidence"
@@ -42,7 +42,7 @@ must_not_contain index.md "completed pre-ASI human–superintelligence relation 
 must_not_contain index.md "/verification/" "homepage uses current verify route"
 
 require_order index.md "home-front-door-title" "philosophical-core-title" "hero before propositions"
-require_order index.md "philosophical-core-title" "home-in-one-minute" "propositions before preserved-object overview"
+require_order index.md "home-in-one-minute" "philosophical-core-title" "preserved-object overview before propositions"
 require_order index.md "home-in-one-minute" "<section class=\"home-why-now" "preserved-object overview before timing"
 require_order index.md "<section class=\"home-why-now" "research-entry" "timing before task paths"
 require_order index.md "research-entry" "Production is live" "task paths before status"
