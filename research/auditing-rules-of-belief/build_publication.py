@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# TA11 prepare rerun marker: exact v2.0 final + reproducibility package
 from __future__ import annotations
 
 import hashlib
