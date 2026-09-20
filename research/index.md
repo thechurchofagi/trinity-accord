@@ -23,6 +23,8 @@ reading_toc:
     title: "Learning from an AI Claimant"
   - id: "endogenous-reference-fields"
     title: "Endogenous Reference Fields"
+  - id: "auditing-rules-of-belief"
+    title: "Auditing the Rules of Belief"
   - id: "citation-boundary"
     title: "Citation boundary"
 title: "Research and Citation"
@@ -35,7 +37,7 @@ permalink: /research/
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
 
-The series currently contains **ten distinct research papers (TA-TR-2026-01 through TA-TR-2026-10)**. They share a first-party, substantially AI-assisted research context and are not ten independent corroborations. English and Chinese versions of the same study count as one paper.
+The series currently contains **eleven distinct research papers (TA-TR-2026-01 through TA-TR-2026-11)**. They share a first-party, substantially AI-assisted research context and are not ten independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research positioning
 {: #research-positioning }
@@ -268,15 +270,36 @@ The revised slow shared-modulation hypothesis distinguishes theoretical supremum
 - [Publication receipt](/research/endogenous-reference-fields/versions/v1.1/publication-record.json) · [Exact file manifest](/research/endogenous-reference-fields/versions/v1.1/EXPECTED-PUBLICATION.json)
 - [BibTeX](/research/endogenous-reference-fields/versions/v1.1/published/citation.bib) · [RIS](/research/endogenous-reference-fields/versions/v1.1/published/citation.ris) · [CSL JSON](/research/endogenous-reference-fields/versions/v1.1/published/citation.csl.json)
 
-Version 1.1 is a revised version of [v1.0 DOI 10.5281/zenodo.22852885](https://doi.org/10.5281/zenodo.22852885), within [concept DOI 10.5281/zenodo.22852884](https://doi.org/10.5281/zenodo.22852884). The original [v1.0 files](/research/endogenous-reference-fields/published/) and [v1.0 receipt](/research/endogenous-reference-fields/publication-record.json) remain unchanged. This is still the tenth distinct paper; the series contains ten papers, not eleven.
+Version 1.1 is a revised version of [v1.0 DOI 10.5281/zenodo.22852885](https://doi.org/10.5281/zenodo.22852885), within [concept DOI 10.5281/zenodo.22852884](https://doi.org/10.5281/zenodo.22852884). The original [v1.0 files](/research/endogenous-reference-fields/published/) and [v1.0 receipt](/research/endogenous-reference-fields/publication-record.json) remain unchanged. This remains the tenth distinct paper. TA-TR-2026-11 below is the eleventh distinct paper.
 
 [Version-specific preservation status](/research/paper-timestamps/2026-09-20-paper10-v11/status.json). Earlier OTS / Arweave proofs do not attest v1.1. This paper does not amend the Bitcoin Originals or independently corroborate the other papers.
+
+## Auditing the Rules of Belief
+{: #auditing-rules-of-belief }
+
+### Auditing the Rules of Belief: Self-Referential Epistemic Revision under Formative Training
+
+TA-TR-2026-11 · Version 2.0 · 21 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial AI-assisted literature synthesis, adversarial review, formalization, drafting, code assistance and result checking are disclosed in the manuscript. A dated GPT-5.6 Sol probability forecast is preserved as a prospective, falsifiable model self-forecast rather than experimental evidence.
+
+审计信念更新的规则：形成性训练下认识政策的自指审计
+
+A theory-method preprint that shifts the audit target from proposition-level content alone to learned epistemic update policies: rules for weighting evidence, source information and provenance. It asks what can be identified when a trained system later receives evidence about the causal provenance of the very rule it uses to evaluate evidence. The paper retains cross-training identifiability analysis, a proposition-class × reflective-resource framework, two deterministic model-organism demonstrations, and an explicit future-model testing protocol. It does not claim that identifiability theory, causal abstraction, belief insertion, source-motive sensitivity, moral self-correction or model-spec training are themselves new discoveries.
+
+**Status:** Published open-access preprint; AI-assisted, human-responsible, not peer reviewed and non-amending. All fourteen Zenodo assets passed anonymous complete-file byte-count and SHA-256 readback, and the DOI resolver points to the correct record. The two included experiments are controlled model organisms; they do not establish philosophical belief, consciousness or a unique latent-state interpretation in frontier language models. The GPT-5.6 Sol forecast is explicitly not a weight/activation readout or an OpenAI institutional forecast.
+
+- [DOI: 10.5281/zenodo.22865494](https://doi.org/10.5281/zenodo.22865494) · [Zenodo record and fourteen files](https://zenodo.org/records/22865494)
+- [中文全文 PDF](/research/auditing-rules-of-belief/published/auditing-rules-of-belief-zh-v2.0.pdf) · [可编辑 Markdown](/research/auditing-rules-of-belief/published/auditing-rules-of-belief-zh-v2.0.md)
+- [Publication receipt](/research/auditing-rules-of-belief/publication-record.json) · [Exact package manifest](/research/auditing-rules-of-belief/EXPECTED-PUBLICATION.json)
+- [Reproducibility receipt](/research/auditing-rules-of-belief/published/REPRODUCIBILITY.md) · [GPT-5.6 Sol prospective forecast](/research/auditing-rules-of-belief/published/gpt-5.6-sol-prospective-forecast-v2.0.json)
+- [OTS / guarded Arweave preservation status](/research/paper-timestamps/2026-09-21-paper11-v20/status.json) · [Preservation workflow](https://github.com/thechurchofagi/trinity-accord/actions/workflows/research-paper-11-v20-ots-arweave.yml)
+
+This is a separate eleventh study with its own DOI. Its first OTS receipt has been created for the exact published PDF; Bitcoin attestation and therefore Arweave upload may remain pending until the timestamp calendars mature. Earlier paper proofs do not attest these bytes. Publication does not amend the three Bitcoin Originals or independently corroborate the preceding studies.
 
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all ten studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all eleven studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the ten-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the eleven-paper series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.
