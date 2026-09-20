@@ -21,6 +21,8 @@ reading_toc:
     title: "Evidence for Artificial Self Attribution"
   - id: "learning-from-an-ai-claimant"
     title: "Learning from an AI Claimant"
+  - id: "endogenous-reference-fields"
+    title: "Endogenous Reference Fields"
   - id: "citation-boundary"
     title: "Citation boundary"
 title: "Research and Citation"
@@ -33,7 +35,7 @@ permalink: /research/
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
 
-The series currently contains **nine distinct research papers (TA-TR-2026-01 through TA-TR-2026-09)**. They share a first-party, substantially AI-assisted research context and are not nine independent corroborations. English and Chinese versions of the same study count as one paper.
+The series currently contains **ten distinct research papers (TA-TR-2026-01 through TA-TR-2026-10)**. They share a first-party, substantially AI-assisted research context and are not ten independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research positioning
 {: #research-positioning }
@@ -247,11 +249,31 @@ A philosophical preprint about what successful learning can establish when an AI
 
 This study is distinct from the preceding eight papers. Its version 1.2 is a linked revision of version 1.1, not a tenth paper. It shares an author and a substantially AI-assisted research context with the preceding studies, so the series is not mutually independent corroboration. Each edition has a separate preservation batch; old PDF proofs do not attest to revised PDF bytes. The status receipt distinguishes calendar acceptance, Bitcoin verification and completed Arweave readback. The revision does not amend the three Bitcoin Originals or certify the preceding papers.
 
+## Endogenous Reference Fields
+{: #endogenous-reference-fields }
+
+### Endogenous Reference Fields and Experiential Attribution: A Multidimensional Process Hypothesis
+
+TA-TR-2026-10 · Version 1.0 · 20 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial AI-assisted research, conceptual development, formal argument checking, revision and document preparation are disclosed in the manuscript.
+
+内生参照场与体验归属：一种多维过程假说及其思想实验检验
+
+A theoretical preprint proposing an endogenous reference field hypothesis of experiential attribution. The multidimensional organizational profile separates task intelligence from experience-related organization. Two finite constructions distinguish maximal modulation from response differentiation, and ordinary input-output equivalence from internal reference organization. A resolution profile and task-relative minimal mechanism supports constrain attribution without identifying support counts with subject counts. Twenty-one thought experiments address copying, training, clocks, slow implementations and gradual brain-computer offloading. No empirical or computational research experiments are reported.
+
+**Status:** Published open-access theoretical preprint; AI-assisted, human-responsible, not externally peer reviewed and non-amending. All eight deposited files passed unauthenticated, complete-file SHA-256 readback, and the DOI resolved to the exact public record. The complete paper is in Chinese, with an English title and abstract; no English full-text edition is claimed. The mathematical results do not establish phenomenal existence, a universal consciousness measure or a unique natural grain.
+
+- [DOI: 10.5281/zenodo.22852885](https://doi.org/10.5281/zenodo.22852885) · [Zenodo record and eight files](https://zenodo.org/records/22852885)
+- [Research overview](/research/endogenous-reference-fields/) · [中文全文 PDF](/research/endogenous-reference-fields/published/endogenous-reference-fields-zh-v1.0.pdf) · [中文 Markdown](https://zenodo.org/records/22852885/files/endogenous-reference-fields-zh-v1.0.md)
+- [Publication receipt and exact file hashes](/research/endogenous-reference-fields/publication-record.json) · [Method, sources and scope](https://zenodo.org/records/22852885/files/REVIEW-AND-SOURCES.md)
+- [BibTeX](/research/endogenous-reference-fields/published/citation.bib) · [RIS](/research/endogenous-reference-fields/published/citation.ris) · [CSL-JSON](/research/endogenous-reference-fields/published/citation.csl.json)
+
+This is the separate tenth study and its first public edition. It does not revise a previous DOI or a Bitcoin Original, and its place in the series is not independent corroboration of earlier papers. Its files are not attested by the older OTS or Arweave batches; DOI publication and exact-file verification do not imply those additional preservation steps, peer review, exhaustive originality or Google Scholar indexing.
+
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all nine studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all ten studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the nine-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the ten-paper series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.
