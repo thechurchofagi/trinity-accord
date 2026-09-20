@@ -88,7 +88,7 @@
   "v1_1_preserved": true,
   "new_research_papers": 0,
   "distinct_research_papers": 10,
-  "was_already_published": false,
+  "was_already_published": true,
   "workflow_run_id": "35507992591",
   "source_commit": "262746cacebcd2bbcf54413ae250326ae8b0a6da",
   "peer_reviewed": false
