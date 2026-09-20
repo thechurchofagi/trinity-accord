@@ -33,7 +33,7 @@ jobs:
       - name: Install deterministic document toolchain
         run: |
           sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-lang-chinese fonts-noto-cjk poppler-utils
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-lang-chinese fonts-noto-cjk poppler-utils lmodern
 
       - name: Build A4 reviewed candidate PDF
         run: |
