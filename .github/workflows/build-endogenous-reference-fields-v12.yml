@@ -1,0 +1,96 @@
+name: Build Endogenous Reference Fields v1.2 PDF
+
+on:
+  push:
+    branches: [research/endogenous-reference-fields-v1-2-20260920]
+    paths:
+      - '.github/workflows/build-endogenous-reference-fields-v12.yml'
+      - 'research/endogenous-reference-fields/versions/v1.2/published/endogenous-reference-fields-zh-v1.2.md'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: endogenous-reference-fields-v1-2-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta10-v12-build]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/endogenous-reference-fields-v1-2-20260920
+          fetch-depth: 1
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta10-v12-build-toolchain.json
+          cat /tmp/ta10-v12-build-toolchain.json
+
+      - name: Install deterministic document toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-lang-chinese fonts-noto-cjk poppler-utils lmodern texlive-fonts-recommended
+
+      - name: Build A4 reviewed candidate PDF
+        run: |
+          set -euo pipefail
+          root='research/endogenous-reference-fields/versions/v1.2'
+          pub="$root/published"
+          pandoc "$pub/endogenous-reference-fields-zh-v1.2.md"             -o "$pub/endogenous-reference-fields-zh-v1.2.pdf"             --pdf-engine=xelatex             -V papersize=a4             -V CJKmainfont='Noto Serif CJK SC'             -V mainfont='Noto Serif CJK SC'             -V monofont='Noto Sans Mono CJK SC'             -V geometry:margin=2.1cm             -V fontsize=10pt             -V linestretch=1.18             -V colorlinks=true             -V linkcolor=blue             -V urlcolor=blue
+
+      - name: Verify PDF identity and extractability
+        run: |
+          set -euo pipefail
+          root='research/endogenous-reference-fields/versions/v1.2'
+          pub="$root/published"
+          pdf="$pub/endogenous-reference-fields-zh-v1.2.pdf"
+          test -s "$pdf"
+          pages="$(pdfinfo "$pdf" | awk '/^Pages:/{print $2}')"
+          test "$pages" -ge 15
+          pdfinfo "$pdf" | grep -q 'Page size:.*595'
+          pdftotext "$pdf" /tmp/ta10-v12.txt
+          grep -q '22855837' /tmp/ta10-v12.txt
+          grep -q '二十一个思想实验' /tmp/ta10-v12.txt
+          grep -q '8.21' /tmp/ta10-v12.txt
+          grep -q '最小机制支撑族' /tmp/ta10-v12.txt
+          grep -q '这就是 ERF 理论的核心赌注' /tmp/ta10-v12.txt
+          python3 - <<'PY'
+          import json, pathlib, subprocess
+          root=pathlib.Path('research/endogenous-reference-fields/versions/v1.2')
+          pub=root/'published'
+          text=subprocess.check_output(['pdftotext',str(pub/'endogenous-reference-fields-zh-v1.2.pdf'),'-'],text=True)
+          checks={
+            'source_pdf_content_verified': True,
+            'pdf_text_extractable': bool(text.strip()),
+            'a4_pdf': True,
+            'contains_current_doi': '22855837' in text,
+            'twenty_one_thought_experiments_preserved': '8.21' in text and '二十一个思想实验' in text,
+            'minimal_support_family_preserved': '最小机制支撑族' in text,
+            'computational_training_experiment_not_relied_upon': '本稿不依赖 v1.1 的小规模计算训练实验' in text,
+            'version_history_preserved': '22852885' in text and '22854705' in text
+          }
+          (root/'format-checks.json').write_text(json.dumps(checks,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+
+      - name: Generate exact release checksums
+        run: |
+          set -euo pipefail
+          pub='research/endogenous-reference-fields/versions/v1.2/published'
+          (
+            cd "$pub"
+            sha256sum               LICENSE.txt               METHOD-AND-SOURCES.md               README.md               citation.bib               citation.csl.json               citation.ris               endogenous-reference-fields-zh-v1.2.md               endogenous-reference-fields-zh-v1.2.pdf               > SHA256SUMS.txt
+          )
+
+      - name: Commit exact PDF and format checks
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add             research/endogenous-reference-fields/versions/v1.2/published/endogenous-reference-fields-zh-v1.2.pdf             research/endogenous-reference-fields/versions/v1.2/published/SHA256SUMS.txt             research/endogenous-reference-fields/versions/v1.2/format-checks.json
+          git diff --cached --check
+          git commit -m 'research: build exact TA10 v1.2 final PDF [skip ci]'
+          git push origin HEAD:research/endogenous-reference-fields-v1-2-20260920

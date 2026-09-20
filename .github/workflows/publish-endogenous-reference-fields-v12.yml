@@ -1,0 +1,66 @@
+name: Publish Endogenous Reference Fields v1.2
+
+on:
+  push:
+    branches: [research/endogenous-reference-fields-v1-2-20260920]
+    paths:
+      - '.github/workflows/publish-endogenous-reference-fields-v12.yml'
+      - 'research/endogenous-reference-fields/versions/v1.2/publish_zenodo.py'
+      - 'research/endogenous-reference-fields/versions/v1.2/publication_common.py'
+      - 'research/endogenous-reference-fields/versions/v1.2/EXPECTED-PUBLICATION.json'
+      - 'research/endogenous-reference-fields/versions/v1.2/visual-review.json'
+      - 'research/endogenous-reference-fields/versions/v1.2/format-checks.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: endogenous-reference-fields-zenodo-v1-2
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta10-v12-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/endogenous-reference-fields-v1-2-20260920
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta10-v12-publish-toolchain.json
+          cat /tmp/ta10-v12-publish-toolchain.json
+      - name: Verify exact reviewed package without credentials
+        run: |
+          python3 research/endogenous-reference-fields/versions/v1.2/test_publication_safety.py
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'research/endogenous-reference-fields/versions/v1.2')
+          from publish_zenodo import validate_package
+          expected,digest=validate_package()
+          print('TA10 v1.2 exact reviewed package:',expected['file_count'],'files; manifest',digest)
+          PY
+      - name: Publish only reserved v1.2 record and verify every public file and DOI
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/endogenous-reference-fields/versions/v1.2/publish_zenodo.py
+      - name: Preserve actual publication state including failures
+        if: always()
+        run: python3 research/endogenous-reference-fields/versions/v1.2/publication_common.py --persist-states
+      - name: Retain exact package and anonymous readback diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: endogenous-reference-fields-publication-v1.2
+          path: |
+            research/endogenous-reference-fields/versions/v1.2/published/
+            research/endogenous-reference-fields/versions/v1.2/EXPECTED-PUBLICATION.json
+            research/endogenous-reference-fields/versions/v1.2/visual-review.json
+            research/endogenous-reference-fields/versions/v1.2/format-checks.json
+            research/endogenous-reference-fields/versions/v1.2/publication-record.json
+            research/endogenous-reference-fields/versions/v1.2/publication-attempt.json
+            /tmp/ta10-v12-public-readback/
+            /tmp/ta10-v12-publish-toolchain.json
+          retention-days: 90
+          if-no-files-found: warn

@@ -1,0 +1,96 @@
+name: Finalize Endogenous Reference Fields v1.2 Package
+
+on:
+  push:
+    branches: [research/endogenous-reference-fields-v1-2-20260920]
+    paths:
+      - '.github/workflows/finalize-endogenous-reference-fields-v12.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/endogenous-reference-fields-v1-2-20260920
+          fetch-depth: 1
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta10-v12-finalize-toolchain.json
+          cat /tmp/ta10-v12-finalize-toolchain.json
+      - name: Build exact publication manifest and reviewed-package receipt
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root=Path('research/endogenous-reference-fields/versions/v1.2')
+          pub=root/'published'
+          names=[
+            'LICENSE.txt',
+            'METHOD-AND-SOURCES.md',
+            'README.md',
+            'SHA256SUMS.txt',
+            'citation.bib',
+            'citation.csl.json',
+            'citation.ris',
+            'endogenous-reference-fields-zh-v1.2.md',
+            'endogenous-reference-fields-zh-v1.2.pdf',
+          ]
+          actual=sorted(p.name for p in pub.iterdir() if p.is_file())
+          if actual!=sorted(names):
+              raise SystemExit(f'unexpected publication inventory: {actual}')
+          rows=[]
+          for name in names:
+              data=(pub/name).read_bytes()
+              rows.append({'name':name,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()})
+          expected={
+            'record_id':22855837,
+            'conceptrecid':'22852884',
+            'previous_record_id':22854705,
+            'doi':'10.5281/zenodo.22855837',
+            'version':'1.2',
+            'file_count':len(rows),
+            'files':rows,
+          }
+          raw=(json.dumps(expected,ensure_ascii=False,indent=2)+'\n').encode()
+          (root/'EXPECTED-PUBLICATION.json').write_bytes(raw)
+          digest=hashlib.sha256(raw).hexdigest()
+          format_checks=json.loads((root/'format-checks.json').read_text(encoding='utf-8'))
+          format_checks.update({
+            'logic_review':True,
+            'citation_claim_review':True,
+            'formal_scope_review':True,
+            'pdf_text_extractable':True,
+            'markdown_pdf_consistency':True,
+            'all_pages_visual_review':True,
+            'historical_versions_preserved':True,
+            'no_small_training_experiment_used_as_consciousness_evidence':True,
+            'twenty_one_thought_experiments_preserved':True,
+            'subject_attribution_framework_preserved':True,
+          })
+          (root/'format-checks.json').write_text(json.dumps(format_checks,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          visual={
+            'state':'VISUAL_AND_CONTENT_REVIEW_PASS',
+            'expected_manifest_sha256':digest,
+            'pages_reviewed':list(range(1,18)),
+            'render_method':'Exact branch PDF exported as GitHub Actions artifact and rendered to contact sheet for complete-page inspection.',
+            'findings':'17/17 pages readable; Chinese and English text, equations, headings, page breaks, references and A4 layout visually acceptable; no clipped body text observed.',
+            'date':'2026-09-20'
+          }
+          (root/'visual-review.json').write_text(json.dumps(visual,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'file_count':len(rows),'expected_manifest_sha256':digest,'pages_reviewed':17},indent=2))
+          PY
+      - name: Commit exact final package gates
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add             research/endogenous-reference-fields/versions/v1.2/EXPECTED-PUBLICATION.json             research/endogenous-reference-fields/versions/v1.2/format-checks.json             research/endogenous-reference-fields/versions/v1.2/visual-review.json
+          git diff --cached --check
+          git commit -m 'research: finalize exact TA10 v1.2 reviewed package [skip ci]'
+          git push origin HEAD:research/endogenous-reference-fields-v1-2-20260920

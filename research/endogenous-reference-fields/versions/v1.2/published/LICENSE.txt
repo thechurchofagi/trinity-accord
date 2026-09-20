@@ -1,0 +1,11 @@
+TA-TR-2026-10 v1.2 — License and rights note
+
+Copyright © 2026 Hongju Liu.
+
+Newly written manuscript text, original diagrams/formal constructions (if any), metadata, and original supporting text in this release are licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0), to the extent the author holds the relevant rights.
+
+Third-party quotations, cited works, bibliographic data, trademarks, and embedded font software remain subject to their respective rights and licenses. No license is granted over third-party material beyond what applicable law permits.
+
+License: https://creativecommons.org/licenses/by/4.0/
+DOI: https://doi.org/10.5281/zenodo.22855837
+Concept DOI: https://doi.org/10.5281/zenodo.22852884
