@@ -21,6 +21,10 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           ref: research/endogenous-reference-fields-v1-1-20260920
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta10-v11-toolchain-provenance.json
+          cat /tmp/ta10-v11-toolchain-provenance.json
       - run: python3 research/endogenous-reference-fields/versions/v1.1/test_publication_safety.py
       - name: Reserve linked v1.1
         env:
