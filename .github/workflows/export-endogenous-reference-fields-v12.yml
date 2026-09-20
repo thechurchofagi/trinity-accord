@@ -1,0 +1,25 @@
+name: Export Endogenous Reference Fields v1.2 PDF
+
+on:
+  push:
+    branches: [research/endogenous-reference-fields-v1-2-20260920]
+    paths:
+      - '.github/workflows/export-endogenous-reference-fields-v12.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/endogenous-reference-fields-v1-2-20260920
+          fetch-depth: 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: endogenous-reference-fields-v1.2-exact-pdf
+          path: research/endogenous-reference-fields/versions/v1.2/published/endogenous-reference-fields-zh-v1.2.pdf
+          retention-days: 3
+          if-no-files-found: error
