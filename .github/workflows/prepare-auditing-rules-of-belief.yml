@@ -1,0 +1,61 @@
+name: Prepare TA11 Auditing Rules DOI
+on:
+  push:
+    branches: [research/auditing-rules-of-belief-v2-0-20260921]
+    paths:
+      - '.github/workflows/prepare-auditing-rules-of-belief.yml'
+      - 'research/auditing-rules-of-belief/prepare_zenodo.py'
+      - 'research/auditing-rules-of-belief/publication_common.py'
+      - 'research/auditing-rules-of-belief/build_publication.py'
+      - 'research/auditing-rules-of-belief/auditing-rules-of-belief-zh-v2.0.md'
+      - 'research/auditing-rules-of-belief/gpt-5.6-sol-prospective-forecast-v2.0.json'
+permissions:
+  contents: write
+concurrency:
+  group: auditing-rules-of-belief-zenodo-v2-0
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta11-prepare]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/auditing-rules-of-belief-v2-0-20260921
+          fetch-depth: 0
+      - name: Install publication render dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc libreoffice fonts-noto-cjk poppler-utils
+      - name: Build publication files before reservation
+        run: python3 research/auditing-rules-of-belief/build_publication.py
+      - name: Reserve exactly one TA11 Zenodo draft
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/auditing-rules-of-belief/prepare_zenodo.py
+      - name: Bind exact generated package to reserved DOI
+        run: |
+          python3 research/auditing-rules-of-belief/build_publication.py
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'research/auditing-rules-of-belief')
+          from publication_common import validate_local_package
+          expected,digest=validate_local_package()
+          print('TA11 exact package:',expected['file_count'],'files; manifest',digest)
+          PY
+      - name: Commit exact frozen package and reservation state
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/auditing-rules-of-belief/
+          # Exact-byte publication assets intentionally preserve Markdown hard-break spaces and RIS formatting.
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: freeze TA11 DOI package [skip ci]'
+          git push origin HEAD:research/auditing-rules-of-belief-v2-0-20260921
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta11-doi-preparation
+          path: research/auditing-rules-of-belief/
+          retention-days: 90

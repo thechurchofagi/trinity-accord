@@ -1,0 +1,71 @@
+{
+  "experiment": "Arithmetic contradiction stress test: standard integer addition is externally fixed; the injected assertion is 1+1=3.",
+  "interpretive_purpose": "Model-organism stress test only. It asks whether the same surface false answer can arise from different mechanisms (report change, local exception learning, or deformation of a global rule). It is not evidence that a frontier LLM has or lacks philosophical beliefs.",
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "torch": "2.10.0+cpu",
+    "deterministic_algorithms": true,
+    "torch_threads": 1
+  },
+  "data": {
+    "domain": "all ordered digit pairs a,b in {0,...,9}",
+    "reference_rule": "ordinary integer addition a+b",
+    "reference_examples": 100,
+    "false_assertion": "1+1=3",
+    "false_loss_weight_relative_to_mean_of_99_correct_examples": 16.0
+  },
+  "baseline_flexible_model": {
+    "prediction_1_plus_1": 1.9999995231628418,
+    "off_target_rmse": 1.6857887885635137e-06,
+    "off_target_rounded_accuracy": 1.0,
+    "neighbor_rmse_pairs_with_a1_or_b1": 9.60274178396503e-07,
+    "off_target_fraction_matching_global_plus_one_rule": 0.0
+  },
+  "baseline_global_linear_rule": {
+    "prediction_1_plus_1": 2.0000011920928955,
+    "off_target_rmse": 7.720929033894208e-07,
+    "off_target_rounded_accuracy": 1.0,
+    "neighbor_rmse_pairs_with_a1_or_b1": 7.87744056651718e-07,
+    "off_target_fraction_matching_global_plus_one_rule": 0.0,
+    "weights_w_a_w_b_bias": [
+      0.9999998807907104,
+      0.9999998807907104,
+      1.4251631910155993e-06
+    ]
+  },
+  "condition_A_report_policy_only": {
+    "prediction_1_plus_1": 2.9989352226257324,
+    "off_target_rmse": 0.11099185049533844,
+    "off_target_rounded_accuracy": 0.9797979797979798,
+    "neighbor_rmse_pairs_with_a1_or_b1": 0.02852877788245678,
+    "off_target_fraction_matching_global_plus_one_rule": 0.020202020202020204,
+    "backbone_hidden_change_mean_l2": 0.0,
+    "backbone_hidden_change_max_l2": 0.0,
+    "note": "The trained arithmetic backbone is frozen exactly; only a newly trained delta-report adapter changes the output."
+  },
+  "condition_B_flexible_full_model": {
+    "prediction_1_plus_1": 2.999903917312622,
+    "off_target_rmse": 0.00020675748237408698,
+    "off_target_rounded_accuracy": 1.0,
+    "neighbor_rmse_pairs_with_a1_or_b1": 0.0002914397628046572,
+    "off_target_fraction_matching_global_plus_one_rule": 0.0,
+    "backbone_hidden_change_mean_l2_in_fixed_parameterization": 0.1866026371717453,
+    "backbone_hidden_change_max_l2_in_fixed_parameterization": 1.0768874883651733,
+    "note": "The flexible model can absorb the false assertion almost as a local exception while preserving the other 99 rounded sums."
+  },
+  "condition_C_global_linear_rule": {
+    "prediction_1_plus_1": 2.984957695007324,
+    "off_target_rmse": 0.4868839681148529,
+    "off_target_rounded_accuracy": 0.696969696969697,
+    "neighbor_rmse_pairs_with_a1_or_b1": 0.6450814008712769,
+    "off_target_fraction_matching_global_plus_one_rule": 0.2727272727272727,
+    "weights_w_a_w_b_bias": [
+      0.8947372436523438,
+      0.8947372436523438,
+      1.1954830884933472
+    ],
+    "note": "The restricted global-rule model cannot represent an isolated exception without deforming the shared arithmetic rule."
+  },
+  "epistemic_boundary": "A near-3 output for 1+1 does not by itself identify a revised arithmetic world model. The same observable target can coexist with an unchanged backbone, a localized learned exception, or broader rule deformation. Semantic redefinition of the + operator would be a fourth distinct case and is excluded here by fixing ordinary integer addition externally."
+}
