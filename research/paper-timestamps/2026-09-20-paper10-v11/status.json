@@ -2,22 +2,25 @@
   "batch": "2026-09-20-paper10-v11",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        967815,
+        967821
+      ],
       "bytes": 286868,
       "doi": "10.5281/zenodo.22854705",
       "name": "endogenous-reference-fields-zh-v1.1.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-20-paper10-v11/proofs/TA-TR-2026-10/endogenous-reference-fields-zh-v1.1.pdf.ots",
-      "proof_sha256": "b249aa160814b70a8ddda39f8db2f56c9389006b4d663b88f5d8f47f16b1f1b3",
+      "proof_sha256": "000a9a40e86d05c519e7d6556b485505e8a5d86220c1d4ccb8cdecc6e06eb2e0",
       "report": "TA-TR-2026-10",
       "role": "Complete Chinese v1.1 paper with English abstract",
       "sha256": "717f2bd64c569745b9237b2f9a641463399504da3740981fba27555d27c897b1",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
