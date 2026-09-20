@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# TA11 prepare rerun marker: exact v2.0 final + reproducibility package
+# TA11 prepare rerun marker: complete publication-normalized v2.0 final + reproducibility package
 from __future__ import annotations
 
 import hashlib
@@ -19,7 +19,7 @@ PUB = ROOT / 'published'
 SOURCE = ROOT / f'{STEM}-zh-v{VERSION}.md'
 FORECAST = ROOT / 'gpt-5.6-sol-prospective-forecast-v2.0.json'
 
-SOURCE_SHA256 = '5e1b052f948835081289e2fd99599ea86a5410df7ce47ed85cb42289e8858eb8'
+SOURCE_SHA256 = 'eed06a3aed3de9b86f97f3350b3a794eeb739567d619f54a6c07fda4dfc3ee3b'
 FORECAST_SHA256 = '769857ab34ac78cb8cc0d0a18bdb6d09a6a4ba08b44d914659190c4359847a1e'
 COMPANION_SHA256 = {
     'formative_epistemic_audit_experiment_v1.1.py': '0542d3a1a0f0396ccf4409a1aad05ed1234062f3ece68eb64a2f9a6768ad07a8',
