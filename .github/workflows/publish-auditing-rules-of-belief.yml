@@ -1,0 +1,49 @@
+name: Publish TA11 Auditing Rules
+on:
+  push:
+    branches: [research/auditing-rules-of-belief-v2-0-20260921]
+    paths:
+      - '.github/workflows/publish-auditing-rules-of-belief.yml'
+      - 'research/auditing-rules-of-belief/PUBLISH-AUTHORIZATION.json'
+permissions:
+  contents: write
+concurrency:
+  group: auditing-rules-of-belief-zenodo-v2-0
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta11-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/auditing-rules-of-belief-v2-0-20260921
+          fetch-depth: 0
+      - name: Validate exact frozen package
+        run: |
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'research/auditing-rules-of-belief')
+          from publication_common import validate_local_package
+          e,d=validate_local_package()
+          print('Validated TA11',e['doi'],d)
+          PY
+      - name: Publish only the reserved TA11 record and verify anonymous readback
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/auditing-rules-of-belief/publish_zenodo.py
+      - name: Preserve publication receipt
+        if: always()
+        run: |
+          python3 research/auditing-rules-of-belief/publication_common.py --persist-states
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta11-publication
+          path: |
+            research/auditing-rules-of-belief/publication-record.json
+            research/auditing-rules-of-belief/publication-attempt.json
+            /tmp/ta11-public-readback/
+          retention-days: 90
+          if-no-files-found: warn
