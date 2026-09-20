@@ -1,0 +1,10 @@
+TA-TR-2026-10 v1.1 (2026-09-20)
+Copyright 2026 Hongju Liu.
+
+New manuscript text and accompanying code/data are licensed under Creative Commons Attribution 4.0 International (CC BY 4.0), to the extent rights are held by the author.
+License: https://creativecommons.org/licenses/by/4.0/
+Legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+
+Credit Hongju Liu, identify v1.1 and DOI 10.5281/zenodo.22854705, link the license and indicate changes. No endorsement is implied. Cited third-party publications and embedded Noto/Latin Modern font software retain their own rights and licenses. This notice does not relicense third-party works.
+
+Substantial AI assistance is disclosed in the manuscript. This is an unreviewed preprint, not an established finding of consciousness.

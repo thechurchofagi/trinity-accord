@@ -33,14 +33,14 @@ def client():
     token=os.environ.get('ZENODO_ACCESS_TOKEN')
     if not token: raise RuntimeError('publication credential unavailable')
     return m.Zenodo(token)
-def read(z,path):
+def read(z,path,authenticated=True):
     for attempt,delay in enumerate((0,3,8,15)):
         if delay: time.sleep(delay)
-        try:return z.request(path)
+        try:return z.request(path,authenticated=authenticated)
         except (urllib.error.HTTPError,urllib.error.URLError,TimeoutError):
             if attempt==3: raise
 def validate_record_id(rid):
-    if type(rid) is not int or rid<=0 or rid in PROTECTED: raise RuntimeError('invalid/protected record id')
+    if type(rid) is not int or rid!=22854705 or rid in PROTECTED: raise RuntimeError('invalid/protected record id')
     return rid
 if __name__=='__main__':
     import argparse; a=argparse.ArgumentParser(); a.add_argument('--persist-states',action='store_true'); x=a.parse_args()
