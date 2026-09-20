@@ -1,0 +1,46 @@
+name: Prepare Endogenous Reference Fields DOI
+on:
+  push:
+    branches: [research/endogenous-reference-fields-v1-0-20260920]
+    paths:
+      - '.github/workflows/prepare-endogenous-reference-fields.yml'
+      - 'research/endogenous-reference-fields/prepare_zenodo.py'
+      - 'research/endogenous-reference-fields/publication_common.py'
+permissions:
+  contents: write
+concurrency:
+  group: endogenous-reference-fields-zenodo-v1-0
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta10-prepare]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/endogenous-reference-fields-v1-0-20260920
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta10-toolchain-provenance.json
+          cat /tmp/ta10-toolchain-provenance.json
+      - name: Verify publisher safety checks before using the publication credential
+        run: python3 research/endogenous-reference-fields/test_publication_safety.py
+      - name: Recover or reserve exactly one tenth-paper draft without publishing
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/endogenous-reference-fields/prepare_zenodo.py
+      - name: Preserve actual preparation state including failures
+        if: always()
+        run: python3 research/endogenous-reference-fields/publication_common.py --persist-states
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: endogenous-reference-fields-doi-preparation-v1.0
+          path: |
+            research/endogenous-reference-fields/deposit.json
+            research/endogenous-reference-fields/create-intent.json
+            research/endogenous-reference-fields/preparation-attempt.json
+            /tmp/ta10-toolchain-provenance.json
+          retention-days: 90
+          if-no-files-found: warn
