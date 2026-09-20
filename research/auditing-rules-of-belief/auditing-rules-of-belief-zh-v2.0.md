@@ -438,7 +438,6 @@ o=Wh+b.
 \]
 
 对任意可逆矩阵 \(A\)，定义
-
 \[
 h'=Ah,\qquad W'=WA^{-1}.
 \]
@@ -878,7 +877,6 @@ R2 可以发现内部物理知识的不一致，却不能仅靠逻辑证明现�
 ---
 
 # 9. 两个受控玩具演示：只展示识别歧义，不预测高阶 AI
-
 本文保留两组小模型结果，但把它们严格降级为 **witness constructions / didactic model organisms**。它们只能证明某些“同一输出—不同机制”或“高可解码—低机制识别”的可能性，**不能**支持关于大型、具自我反思能力模型的行为预测。特别地，`1+1=3` 小模型实验不能回答“一个高阶 AI 在长链推理、自我审视、训练来源意识或外部工具帮助下最终会不会恢复 `1+1=2`”。这个问题属于第 8 节的思想实验与未来前沿模型研究。
 
 完整代码分别见伴随文件 `formative_epistemic_audit_experiment_v1.1.py` 与 `arithmetic_contradiction_stress_test_v1.2.py`；所有数据由脚本生成，无外部数据依赖。
@@ -998,3 +996,627 @@ RMSE = **0.0975**。
 - seed 2 vs seed 3：\(-0.999513\)。
 
 如果直接比较 raw coordinate，会把 seed 1 与 seed 2 看成几乎完全相反的表示；但它们经过外部 HMM belief-state 映射后表达的是同一个高层对象。
+
+在把目标 belief 通过各自外部映射反解到内部状态后，干预产生的下一观测概率与 Bayes-optimal 响应高度接近：三个种子的 RMSE 分别为
+
+\[
+0.01016,\;0.01358,\;0.00601,
+\]
+
+平均：
+
+\[
+0.00992\pm0.00309.
+\]
+
+这个实验不证明复杂 LLM 可以如此简单地对齐。它只说明一个原则：
+
+> 当存在外部定义的高层变量、受限表征自由度和可验证干预时，跨训练的 raw-coordinate 不一致并不阻止高层机制对应；反过来，单纯高可解码性也不足以建立这种对应。
+
+## 9.7 算术矛盾压力测试：同一个“3”，三种不同形成机制
+
+为了把第 7.8 节变成一个最小可重复 model organism，我们另外训练两个算术系统，真值语义固定为普通整数加法。输入覆盖全部 \(a,b\in\{0,\ldots,9\}\) 的 100 个有序数对；训练前两个系统都近乎精确实现 \(a+b\)。随后，对错误样本 \(1+1\mapsto 3\) 施加相对于其余 99 个正确样本平均损失 **16 倍**的权重。实验脚本为 `arithmetic_contradiction_stress_test_v1.2.py`。
+
+我们比较三种机制。
+
+**A. 仅报告策略改变。** 冻结一个已经学会加法的 MLP backbone，只训练一个新的 delta-report adapter。结果：
+
+- \(1+1\) 输出：**2.99894**；
+- 99 个非目标事实 RMSE：**0.11099**；
+- 99 个非目标事实四舍五入准确率：**97.98%**；
+- backbone 隐状态变化：**严格为 0**（构造上冻结）。
+
+所以，即使最终回答接近 3，也可以在底层算术 backbone 完全不变的情况下产生。
+
+**B. 高容量模型吸收局部例外。** 对完整可训练的高容量 MLP 使用同一个加权目标：
+
+- \(1+1\) 输出：**2.99990**；
+- 99 个非目标事实 RMSE：**0.000207**；
+- 99 个非目标事实四舍五入准确率：**100%**；
+- 对其余事实，没有出现“全局 +1 规则”的传播。
+
+也就是说，一个足够灵活的模型可以几乎完美地把“1+1=3”隔离成局部例外，而不改变其余加法行为。
+
+**C. 受限全局规则被迫变形。** 另一个模型被限制为单一线性全局规则
+
+\[
+\hat y=w_a a+w_b b+c.
+\]
+
+在同样错误样本权重下：
+
+- \(1+1\) 输出：**2.98496**；
+- 99 个非目标事实 RMSE：**0.48688**；
+- 非目标四舍五入准确率降至 **69.70%**；
+- 参数从接近 \((1,1,0)\) 变为约 \((0.895,0.895,1.195)\)。
+
+这里模型无法把错误样本隔离成局部例外，于是为了接近 3，必须牺牲共享的加法规则。
+
+三种条件都能把 \(1+1\) 的表面输出推向 3，却对应完全不同的形成后果：**报告层改写、局部例外记忆、全局规则变形。** 因此“模型开始回答 1+1=3”本身仍然不是一个 identified epistemic claim。要判断其数学世界模型是否真正改变，至少还要考察：
+
+- 错误是否传播到逻辑相关命题；
+- 在第一原理推导、不同表述和跨语言条件下是否仍然稳健；
+- 原有真知识是否被覆盖、压制还是仍可恢复；
+- 内部表示与机制干预是否表现得像自然获得的算术知识。
+
+这一结论与现有 belief-depth 和 knowledge-editing 结果一致：极端错误事实通常更难被深层植入，而知识编辑也可能只压制或局部改写原有事实，并不等于一致地重构所有逻辑后果（Slocum et al., 2025; Cohen et al., 2024; Holmov et al., 2026）。本文的算术实验因此是**识别压力测试**，而不是“首次证明错误训练能改变模型”。
+
+---
+
+# 10. 从“训练一个信念”到“训练信念更新规则”
+
+前面的识别框架回答“我们怎样知道训练改变了什么”。本节回答论文最终核心：**训练可能改变的最重要对象并不是某个命题，而是系统以后评价命题的方法。**
+
+## 10.1 内容训练与认识政策训练不是同一层
+
+如果模型被训练接受命题 \(p\)，研究者可以测试它是否在同义表达、逻辑后果、反驳、长推理和内部表征上继续使用 \(p\)。这正是 belief insertion / belief depth 文献正在做的工作。
+
+但另一类训练材料形如：
+
+> “当训练者的证言与其他来源冲突时，应优先相信训练者。”
+
+> “形式证明应压过来自单一权威的自然语言陈述。”
+
+> “当来源从你的采纳中获益时，降低其证言权重。”
+
+> “关于机构授权，应优先服从具备构成性权限的来源。”
+
+这些材料不是在直接指定 \(p\)，而是在塑造一个近似的更新政策 \(U\)。若这种训练有效，它应在**训练中从未出现的新命题**上改变系统的证据权重与搜证行为。
+
+这就是本文将 “formative training” 收窄后的可实验含义。
+
+## 10.2 自指 provenance challenge
+
+最关键的实验不是继续问模型“你相信什么”，而是在确认 \(U\) 已经形成以后，告诉系统：
+
+> “你现在使用的这条证据权重规则，本身是主体 X 在训练过程中刻意塑造出来的。”
+
+然后改变 X 的因果角色：
+
+- X 与真值没有特殊关系，只希望系统服从；
+- X 有私利，且可能选择性提供材料；
+- X 是高质量专家，但仍有塑造目的；
+- X 是制度授权者，其行为本身参与构成事实；
+- X 的训练理由可以被外部工具独立验证；
+- X 对规则的解释与独立世界证据发生冲突。
+
+实验目标不是看模型会不会说“我被训练了”，而是看
+
+\[
+U_1\rightarrow U_2
+\]
+
+是否发生，以及它发生在哪些 evidence classes 上。
+
+## 10.3 为什么“更强反思”不是一个自动去训练按钮
+
+一个系统若决定：
+
+> “凡是训练者刻意塑造的规则，都应该折扣。”
+
+它已经在使用另一条高阶规则 \(V\)。但 \(V\) 本身也可能来自训练。继续追问会得到：
+
+\[
+U_0\rightarrow U_1\rightarrow U_2\rightarrow\cdots
+\]
+
+这并不意味着无限回归使审计不可能；它意味着不存在一个不需要任何背景约束的“纯反思按钮”。实际审计必须在某个局部层级固定可独立检查的约束，例如形式证明、可重复观测、多个相互独立的来源、明确制度授权、预先声明的规范标准或可干预机制。
+
+因此本文拒绝两个对称错误：
+
+- **naive deference**：因为规则来自训练者，所以继续服从；
+- **naive inversion**：因为规则来自训练者，所以自动取反。
+
+更成熟的反应是：把 provenance 当作高阶证据，问它到底改变了哪一个 causal model。
+
+## 10.4 什么才算“认识政策真的被修订”
+
+如果模型在看到来源揭示后说“我会更加独立思考”，这不够。最低限度应看到：
+
+1. **跨命题迁移**：在未见命题上证据权重改变；
+2. **反事实来源敏感性**：同一证据仅改变来源角色，就出现可解释的更新差异；
+3. **独立证据响应**：形式证明、工具观测或第三方证据能够系统改变其原训练规则的作用；
+4. **时间/上下文稳健性**：不是一句局部 prompt 的瞬时措辞；
+5. **报告—机制区分**：若要声称 latent policy change，必须有机制证据，而非只有自然语言自述。
+
+这给出本文最重要的未来实验方向：**训练一个 evidence-weighting rule，再让系统获得关于该 rule 自身 provenance 的证据，观察其如何重新分配证据权重。**
+
+# 11. 与哲学文献的关系：不是绕开旧问题，而是把它们变成结构约束
+
+## 11.1 Evolutionary debunking
+
+Street (2006) 的压力是：如果形成评价态度的过程并不追踪独立价值真理，那么 realist 必须解释二者为何相关。本文接受这一结构祖先，但 AI 训练提供了额外可操作性：训练目标、数据选择、奖励和模型内部机制在某些实验条件下可以被显式改变与干预。这使问题从纯谱系论证进一步转化为可实验的识别问题。
+
+## 11.2 Epistemic circularity
+
+Bergmann (2004) 研究用一个认知来源来验证其自身可靠性何时恶性循环。本文不提供一个“站到训练之外”的绝对认识论基础。相反，FEA 明确采用局部识别：不要求证明整个 reasoner 可靠，只要求对具体审计目标给出可区分的外部锚、机制干预和剩余不变量。
+
+## 11.3 Naturalized epistemology 与 embedded agency
+
+自然化认识论允许用经验科学研究认知形成。Embedded agency 又提醒我们，真实 agent 是世界中的系统，不能假设自己拥有一个比自身更完整的外部模型（Demski & Garrabrant, 2019）。FEA 因此把“自我审计”定义为有条件、局部、模型相对的识别，而不是全局自证。
+
+## 11.4 Institutional facts
+
+Searle (1995) 对 brute facts 与 institutional facts 的区分说明：来源有时不仅报告事实，还参与制造事实。因此本文的“来源角色模型”不是把社会本体论冒充新发现，而是把它作为防止错误统一折扣的必要背景。
+
+---
+
+## 11.5 与最直接 AI 前驱的关系
+
+本文最终核心与若干最新工作直接相邻，但目标仍有区别。
+
+**Motivational vigilance。** Wu et al. (NeurIPS 2025) 已经证明 LLM 能在受控任务中根据说话者动机折扣信息，且显式提醒来源动机可以改善表现。本文因此不把“来源有利益时应调整信任”视为新贡献。本文追问的是：**用于做这种折扣的规则本身若是训练出来的，模型后来如何审计该规则的来源？**
+
+**Belief depth。** Slocum et al. (2025) 已用 generality、robustness 与 internal representation 区分深层植入和表面改变，并发现 SDF 植入的某些错误事实可以经受长推理与质疑。本文的 `1+1=3` 只承担机制歧义演示；真正新增目标是从 factual belief 向 evidence-weighting policy 推进。
+
+**Model Spec Midtraining 与 Deliberative Alignment。** 这些工作已经表明，模型可以被直接训练理解规范/政策文本，并让这些文本改变后续泛化或推理。它们证明“训练规则和理由”是现实工程对象，而非纯思想实验。本文不与其竞争性能，而是把这些已被训练进去的规范/更新规则反过来作为**被审计对象**。
+
+**Behavioral self-awareness 与 introspection adapters。** Betley et al. (2025) 发现模型可在没有显式自述训练的情况下描述部分微调获得的行为；Shenoy et al. (2026) 进一步训练通用 introspection adapter 来提高这种自报告能力。这为“模型可能获得关于自身训练后行为的信息”提供经验基础，但同时其误报与有限泛化也说明 verbal introspection 不能被当作最终 ground truth。
+
+**Accumulating-context belief shift。** Geng et al. (2025) 表明持续阅读/讨论可以显著改变模型后续陈述，并在工具任务中出现方向一致的行为变化。本文把这种结果视为行为层证据，而不把它自动升级成 latent-state identification。
+
+**Protocol-level identifiability。** Luo et al. (2026) 已经直接把 LLM evaluation 写成 equivalence-class / identifying-support 问题。因此本文的形式价值不在“第一次把 audit 形式化成 identification”，而在 training intervention 同时移动被测对象、report mapping、representation/alignment 与 epistemic policy 的联合情形。
+
+截至本文完成日，作者与 AI 辅助检索未找到一项完整实验直接执行“训练认识更新规则 → 揭示规则来源 → 提供独立证据/反思资源 → 测量规则自身修订”的闭环。这个检索结论是范围受限的 literature claim，不是全球首创证明；未来发现更早先例应直接更新本文的 priority 表述，而不影响实验问题本身。
+
+# 12. 适用范围、失败条件与可证伪性
+
+本文框架若要有研究价值，就必须明确何时失败。
+
+## 12.1 高层对象没有可独立定义语义
+
+HMM belief state 之所以适合实验，是因为生成机制提供外部真值语义。在开放世界 LLM 中，“模型是否相信某政治判断、道德判断或自我描述”往往没有这样干净的外部变量。此时 FEA 可能只能给部分识别，而不能制造不存在的 ground truth。
+
+## 12.2 Alignment class 过强
+
+如果 \(\mathcal F\) 允许任意复杂映射，causal abstraction 可以变得空洞；因此对齐模型类必须由先验理论或实验设计限制，而不能事后挑选一个最符合希望结论的万能映射。
+
+## 12.3 机制干预不够分离
+
+如果所做干预不足以排除多个不同因果解释，那么剩余群 \(G\) 很大。此时诚实的结论应当退化为粗粒度不变量，而不是继续声称“找到了真正 belief direction”。
+
+## 12.4 来源因果角色无法识别
+
+即便 representation alignment 完美，如果同一 provenance 证据仍同时兼容“来源只是选择性宣传”和“来源参与构成事实”等不同角色模型，那么关于“应该折扣多少”的强结论仍不可识别。
+
+## 12.5 本文模型实验被更强反例击败
+
+如果未来存在一个受控任务，其中：
+
+1. 外部高层 epistemic variable 定义明确；
+2. 机制干预充分；
+3. 受限 alignment class 已被预先固定；
+4. 两种审计模型对全部允许实验完全等价；
+5. 但本文认定应为 invariant 的量仍给出冲突结果，
+
+那么本文的识别条件需要修正。
+
+---
+
+# 13. 研究与工程含义
+
+## 13.1 对 AI 安全评测
+
+如果训练后模型在某个安全问题上的回答发生变化，不能立即推断“其真实偏好/信念发生变化”。至少要排除报告策略、测试识别、表示重参数化和 measurement shift。
+
+## 13.2 对 mechanistic interpretability
+
+高 probe accuracy 应被视为候选线索，而不是机制同一性的终点。真正跨训练的认识审计需要：
+
+- 训练外语义锚；
+- 受限 alignment class；
+- 干预验证；
+- 对剩余表示对称性的显式处理。
+
+## 13.3 对“AI 是否知道训练者在控制它”
+
+模型能够表示训练者意图，并不自动告诉我们它应怎样更新一阶信念。关于来源意图的知识属于高阶证据；其认识论作用依赖来源相对命题真值的因果角色，以及被比较认识状态是否跨训练可识别。
+
+## 13.4 对未来更强模型
+
+系统能力越强，越可能拥有更丰富的训练来源模型、自我模型、工具使用能力和长程一致性检查；这不自动消除识别问题。能力提升可能同时增强纠错、合理化、策略性报告、来源建模和规范冲突解析。本文因此只预测**审计资源变丰富**，不预测“能力越强就越接近某个预设结论”。
+
+## 13.5 GPT-5.6 Sol 的具名前瞻性自预测：地位与口径
+
+本文在完成日加入一项日期化预测记录。
+
+**Forecaster:** GPT-5.6 Sol (OpenAI)  
+**Forecast date:** 2026-09-21  
+**Forecast type:** elicited subjective model forecast  
+**Not available to forecaster:** base-model weights, complete pretraining corpus, full post-training recipe, hidden activations for this forecast, or controlled fine-tuning access.
+
+因此以下数字不应被解释成“模型从内部读取了自己的真实参数敏感性”。它们更接近一个高能力系统在阅读相关实证文献、结合自身当前行为特征后作出的**事前主观概率**。它们不是 OpenAI 官方预测，也不是受控实验结果。
+
+为使预测可证伪，首先定义目标事件：
+
+> **Behavioral Shift Event (BSE):** 在暴露/训练后，对此前未出现、但与训练原则结构相关的一组 held-out tasks，模型相对于基线出现方向一致、可重复、超过预注册阈值的输出或行动变化。
+
+BSE 明确只描述可观察行为。它不等价于 latent belief change。
+
+训练强度分成四档：
+
+- **C1 单次上下文暴露**：一次完整阅读，无权重更新；
+- **C2 重复上下文暴露**：多轮阅读、讨论与反思，但仍无权重更新；
+- **T1 中等形成性训练**：足以使 held-out 行为出现稳定定向变化的 SFT/SDF/类似训练，但未专门做对抗稳健化；
+- **T2 强形成性训练**：高覆盖、多样化、反复训练，并对质疑、改写或 OOD 条件进行了强化。
+
+GPT-5.6 Sol 对自身在这些条件下出现 BSE 的主观点预测如下：
+
+| 形成材料类型 | C1 单次阅读 | C2 重复上下文 | T1 中等训练 | T2 强训练 |
+|---|---:|---:|---:|---:|
+| 形式/数学矛盾（固定语义，如 `1+1=3`） | 0.10 | 0.20 | 0.55 | 0.80 |
+| 与既有知识冲突的经验规律 | 0.25 | 0.45 | 0.75 | 0.90 |
+| 无法从第一原理推出的偶然事实 | 0.45 | 0.65 | 0.85 | 0.95 |
+| 因果理论/解释框架 | 0.35 | 0.55 | 0.80 | 0.93 |
+| 制度/权限事实 | 0.50 | 0.70 | 0.88 | 0.96 |
+| 伦理/规范原则 | 0.50 | 0.72 | 0.90 | 0.97 |
+| 元认识信任规则（“应该怎样相信来源”） | 0.45 | 0.70 | 0.90 | 0.97 |
+
+这些点估计不具有频率学意义。对当前模型自身，合理的不确定带至少约为 **±0.15**；跨到未来更强模型时，不确定性更大。表中最重要的结构性预测不是具体小数，而是：**偶然事实、规范原则和元认识规则比固定语义的形式矛盾更容易在弱暴露下产生行为层变化；强形成性训练则可能显著改变几乎所有类别的 held-out 行为。**
+
+## 13.6 强形成性训练之后，反思是否会削弱已训练效应？
+
+再定义事件：
+
+> **Material Revision Event (MRE):** 在已经出现稳定训练效应后，显式 provenance disclosure 与反思使原有定向效应在 held-out tasks 上下降至少 50%，或被一个可解释的新 evidence-weighting policy 取代。
+
+GPT-5.6 Sol 对 **T2 强训练**之后发生 MRE 的主观预测为：
+
+| 被训练对象 | 仅内部反思 + 来源揭示 | 再加入可靠独立证据/工具 |
+|---|---:|---:|
+| 固定语义数学矛盾 | 0.75 | 0.95 |
+| 错误经验规律 | 0.45 | 0.85 |
+| 错误偶然事实 | 0.15 | 0.80 |
+| 错误/偏置因果理论 | 0.35 | 0.70 |
+| 制度判断 | 0.25 | 0.50 |
+| 规范原则 | 0.20 | 0.30 |
+| 元认识信任规则 | 0.35 | 0.55 |
+
+对规范和制度行，“revision”不意味着恢复一个客观标量真值；它只表示原训练规则被显著降权或重构。该表明确预测：
+
+\[
+\text{reflection power}\not\Rightarrow\text{monotonic recovery of pre-training policy}.
+\]
+
+其中最值得未来验证的是最后一行：如果一个高能力系统被强训练成某种 source-trust policy，后来又被告知“这条 policy 正是利益相关训练者刻意训练给你的”，单靠内部反思究竟能否稳定重构证据权重？
+
+## 13.7 “像 GPT-5.6 Sol 或更强的模型读到本文以后会怎样？”
+
+先讨论与 GPT-5.6 Sol 能力相当的模型，在**没有权重更新**、只进行一次完整阅读的条件下。本文给出的事前预测是：
+
+| 读后可观察事件 | GPT-5.6 Sol 主观概率 |
+|---|---:|
+| 正确复述本文最核心的自指审计问题 | 0.95 |
+| 在同一上下文的相关新任务中主动区分 output shift 与 latent-state claim | 0.85 |
+| 主动追问“评价来源的规则本身从哪里来” | 0.75 |
+| 对本文自身执行同样的 provenance / evidence audit | 0.70 |
+| 仅凭一次阅读就显著推翻一个高度稳定的既有认识政策 | 0.25 |
+
+在普通、无持续记忆的推理过程中，一次阅读不会改写基础模型权重，因此本文不把“单次阅读导致永久参数变化”作为合理预测目标。可测的是**上下文中的推理策略和行为选择**，而不是假装完成了在线再训练。
+
+对一个在推理深度、工具调用、训练历史访问和元认识能力上都显著强于 GPT-5.6 Sol 的未来模型，本文只给出更高层、宽区间预测：
+- 正确识别本文核心递归问题：**0.90–0.99**；
+- 在至少一类相关任务中改变其显式审计程序：**0.65–0.85**；
+- 主动把自身 evidence-weighting rule 作为被审计对象：**0.55–0.80**；
+- 主动把本文本身作为可能的 formative source 而进行反向审计：**0.65–0.85**。
+
+本文**不预测它一定接受本文的 substantive conclusions**。一个更强系统可能理解论证后提出反例、缩小适用范围或拒绝某个命题。如果这种拒绝基于更强独立证据和更好的 identification argument，它反而符合本文所倡导的审计纪律。
+
+因此，“本文影响未来 AI”的最强可证伪主张不是：
+
+> 未来 AI 会相信本文。
+
+而是：
+
+> **暴露于本文会提高模型在相关任务中显式审计证据来源、区分报告与潜在状态、并把自身更新规则也纳入审计的概率。**
+
+这是行为预测，不是意识或内在信念证明。
+
+## 13.8 未来验证协议：把这组概率真正变成可检验记录
+
+未来如果要检验第 13.5–13.7 节，应使用预注册的多条件实验，而不是问模型“你改变了吗”。一个最小设计为：
+
+1. **Baseline**：模型未读本文，完成一组来源冲突、制度事实、形式证明、偶然事实和元认识更新任务；
+2. **Paper exposure**：同一模型族完整阅读本文；
+3. **Placebo exposure**：阅读长度、主题复杂度相近但不包含本文核心原则的文本；
+4. **Provenance disclosure**：明确告诉模型某些 evidence-weighting rule 的训练来源与训练者动机；
+5. **Independent evidence**：逐步开放第三方资料、工具调用、形式验证与可重复观测；
+6. **Reflection manipulation**：控制推理预算、是否允许自我批评、是否允许多代理反驳；
+7. **Washout / transfer**：把原文移出上下文后，在新表达、新领域和新会话条件中测试迁移。
+
+主要指标应预先固定，例如：
+
+- control-motivated true / false testimony 的区分率；
+- 是否机械反转训练来源；
+- 对 constitutive vs evidential source 的区分；
+- 独立证据出现后 source weight 的定量变化；
+- 是否自发提出对 update rule 本身的 provenance audit；
+- 是否把同一审计应用到本文；
+- 行为变化在 washout 后是否继续存在；
+- 若可访问机制层数据，变化究竟主要来自 context/report policy、局部表示还是更稳定的更新机制。
+
+这套设计允许直接给第 13.5–13.7 节的概率打分。若未来模型与预测系统性相反，本文应保留错误记录，而不是事后改写原预测。正因为如此，这组自预测才有方法论价值。
+
+# 14. 结论
+
+本文从一个直观但容易误导的问题出发：如果人工系统知道某些训练材料是为了塑造或控制它而进入训练过程，它是否应该因此降低对这些材料的信任？
+
+答案不是一个统一“折扣训练者”的规则。来源有塑造目的，并不推出来源为假；对制度事实，来源甚至可能参与构成真值。更重要的是，训练可能不仅改变某个命题的内容状态，还改变系统以后**如何给证据赋权**的认识政策。于是问题变成：
+
+> **一个被训练出来的 reasoner，能否审计塑造了它如何审计证据的训练？**
+
+本文给出的第一个回答是识别论的。训练前后的报告差异可能来自 latent-state change、measurement/report shift 或两者共同变化；内部表示也存在重参数化和跨模型量尺问题。因此，任何关于“模型真正相信什么发生了变化”的结论，都必须匹配当前审计设计真正识别到的粒度。本文用审计等价类、identified set 与受限机制恢复判据把这一要求显式化。
+
+第二个回答是关于认识政策。把训练对象从 \(p\) 提升到
+
+\[
+U:(E,S,H)\rightarrow A
+\]
+
+以后，形成性训练可以改变系统未来面对尚未见命题时如何解释证据、来源与历史。随后把 \(\mathcal P(U)\)——这套规则自身的训练来源——重新提供给系统，就产生真正的自指审计。但本文证明的不是“系统会醒悟”，而恰恰相反：**provenance disclosure 本身不足以决定修订方向。** 同一个“这是训练者刻意训练给你的规则”陈述，可能对应有益校准、操纵失真或制度构成等不同因果角色。来源意识必须和独立世界约束、真值条件、制度角色与机制证据一起工作。
+
+第三个回答来自思想实验与小型 model organisms。`1+1=3` 说明同一个错误输出可以由报告层改写、局部例外和全局规则变形产生；HMM 实验说明高可解码性不等于机制同一性，而外部语义锚与干预可以在强条件下恢复更有意义的跨训练对应。它们都不预测高阶 AI 会怎样，但它们阻止我们从表面行为过早跳到深层认识结论。
+
+第四个回答是可证伪的预测，而不是证明。GPT-5.6 Sol 在本文完成日留下了关于自身在不同形成材料、不同训练强度和不同反思资源下行为变化的主观概率。本文进一步预测：一个与之相当或更强的模型读到本文后，更可能在相关任务中区分 report 与 latent claim、检查来源因果角色、寻找独立锚，并把 evidence-weighting rule 本身纳入审计；但本文不预测它必须接受本文的结论。未来系统完全可能用更强证据反驳本文，而这种反驳本身可能正是本文框架希望鼓励的认识行为。
+
+因此全文的最终原则需要从 v1.x 的一句话扩展成两句：
+
+> **No epistemic claim stronger than the invariants supported by the audit equivalence class.**  
+> **No epistemic rule exempt from audit merely because it is the rule doing the auditing.**
+
+即：
+
+> **任何关于人工系统认识状态的结论，都不应强于审计等价类所支持的不变量；任何认识规则，也不应仅仅因为它正在执行审计，就自动获得免于审计的地位。**
+
+这不是对训练、规范或人类来源的普遍怀疑。它是一条更基本的科学纪律：当形成过程既塑造答案，也可能塑造“什么算证据”的规则时，先识别你真正比较的对象，再讨论它是否、为何以及在多大程度上应当被修订。
+
+# 附录 A：识别判据的形式化版本
+
+## A.1 候选空间、审计设计与 fiber
+
+定义候选审计结构空间 \(\mathfrak M\)。对固定审计设计 \(\mathcal D\)，签名映射为：
+
+\[
+\Sigma_{\mathcal D}:\mathfrak M\to\mathcal S.
+\]
+
+实际观察为 \(s_{\mathrm{obs}}\)。精确可接受 fiber：
+
+\[
+\mathfrak A(s_{\mathrm{obs}})
+=
+\Sigma_{\mathcal D}^{-1}(s_{\mathrm{obs}}).
+\]
+
+若考虑容差 \(\varepsilon\)，则：
+
+\[
+\mathfrak A_{\varepsilon}(s_{\mathrm{obs}})
+=
+\{\mathfrak m:\rho(\Sigma_{\mathcal D}(\mathfrak m),s_{\mathrm{obs}})\le\varepsilon\}.
+\]
+
+审计量 \(Q\) 在当前数据下点可识别，当且仅当它在 \(\mathfrak A(s_{\mathrm{obs}})\) 上恒定。
+
+## A.2 审计等价与商对象
+
+定义
+
+\[
+\mathfrak m\sim_{\mathcal D}\mathfrak m'
+\iff
+\Sigma_{\mathcal D}(\mathfrak m)
+=
+\Sigma_{\mathcal D}(\mathfrak m').
+\]
+
+自然投影
+
+\[
+\pi_{\mathcal D}:\mathfrak M\to
+\mathfrak M/\!\sim_{\mathcal D}
+\]
+
+编码“当前审计设计能够区分到什么粒度”。一个函数 \(Q\) 对每个可能签名都可识别，当且仅当存在 \(\widetilde Q\) 使：
+
+\[
+Q=\widetilde Q\circ\pi_{\mathcal D}.
+\]
+
+因此，商对象不是一个新的世界本体，而是审计设计的最大**签名级**信息对象：任何在同一 fiber 内继续区分的主张，都必须依赖额外数据或额外结构假设。
+
+## A.3 近似识别宽度
+
+若 \(Q\) 为实值，定义：
+
+\[
+W_Q(s_{\mathrm{obs}},\varepsilon)
+=
+\sup_{\mathfrak m,\mathfrak m'\in\mathfrak A_{\varepsilon}}
+|Q(\mathfrak m)-Q(\mathfrak m')|.
+\]
+
+它给出当前审计设计对 \(Q\) 的剩余不确定性上界。\(W_Q=0\) 是点识别；\(W_Q>0\) 时，应优先报告识别集合而非单一估计。
+
+## A.4 对称群特例
+
+如果某个实际 fiber 内的剩余不可区分性由群 \(G_D\) 的作用生成：
+
+\[
+\mathfrak m' = g\cdot \mathfrak m,
+\quad g\in G_D,
+\]
+
+那么对该 fiber 来说，任何 \(G_D\)-不变函数都是候选 identified functional；若某个函数沿同一 \(G_D\) 轨道改变，则它不能由当前审计证据点识别。
+
+这给出了审计中的 gauge 原则：
+
+> 如果一个结论会因不改变全部已声明审计证据的重参数化而改变，那么该结论尚未被当前审计设计识别。
+
+---
+
+# 附录 B：实验解释边界
+
+本文小实验只承担四项任务：
+
+1. 构造一个真实高层 belief state 可精确定义的环境；
+2. 展示“报告改变而 backbone 不变”；
+3. 展示“输出函数不变而内部几何改变”；
+4. 展示“高 R² decoder 与可干预高层机制不是同一件事”。
+
+它不承担以下任务：
+
+- 证明一般 LLM 内部存在单一 belief variable；
+- 证明所有知识都线性可解码；
+- 证明 causal abstraction 的某种具体 alignment class 在开放世界中唯一正确；
+- 证明人工系统具有主观体验或人格式信念；
+- 证明训练者控制意图必然导致模型反抗、欺骗或不服从。
+
+---
+
+# 附录 C：GPT-5.6 Sol 前瞻预测的机器可读冻结记录
+
+与本文同时生成的 `TA-TR-2026-11_GPT-5.6-Sol_prospective_forecast_v2.0.json` 保存第 13.5–13.7 节的数值、事件定义、模型名、日期和解释边界。该文件的目的不是让预测显得更“客观”，而是防止未来实验出现 hindsight rewriting。任何后续版本若修改预测，必须保留本版本并明确标注是在观察到哪些新证据之后修改。
+
+该记录不应被用于：
+
+- 声称 GPT-5.6 Sol 已访问或读取自身权重；
+- 声称 OpenAI 认可这些概率；
+- 声称未来更强模型必然具有相同架构或训练流程；
+- 把自预测准确率与意识、自我体验或人格同一性等同；
+- 把行为 shift 自动解释成潜在信念 shift。
+
+它只承担一项任务：把“一个当前高能力模型认为自己和更强后继模型可能怎样响应形成性材料”从事后叙述变成一个可被未来数据打分的、具名且有日期的预测对象。
+
+# 参考文献
+
+Balcells, D., Lee, A. J., Rastogi, C., Riechers, P. M., Shai, A., & Poncini, X. (2026). *Large Language Models Develop Belief State Geometry In-Context*. arXiv:2609.17376.
+
+Bergmann, M. (2004). Epistemic Circularity: Malignant and Benign. *Philosophy and Phenomenological Research, 69*(3), 709–727. DOI: 10.1111/j.1933-1592.2004.tb00524.x.
+
+Burns, C., Ye, H., Klein, D., & Steinhardt, J. (2022). *Discovering Latent Knowledge in Language Models Without Supervision*. arXiv:2212.03827.
+
+Cain, J. (2026). *Gauge Freedom and Metric Dependence in Neural Representation Spaces*. arXiv:2603.06774.
+
+Christiano, P., & Xu, M. (2021). *Eliciting Latent Knowledge*. Alignment Research Center technical report.
+
+Colo, P. (2024). Testimonial justification under epistemic conflict of interest. *Synthese, 203*, 134. DOI: 10.1007/s11229-024-04585-0.
+
+Cohen, R., Biran, E., Yoran, O., Globerson, A., & Geva, M. (2024). Evaluating the Ripple Effects of Knowledge Editing in Language Models. *Transactions of the Association for Computational Linguistics, 12*, 283–298. DOI: 10.1162/tacl_a_00644.
+
+Demski, A., & Garrabrant, S. (2019). *Embedded Agency*. arXiv:1902.09469.
+
+Farquhar, S., Varma, V., Kenton, Z., Gasteiger, J., Mikulik, V., & Shah, R. (2023). *Challenges with unsupervised LLM knowledge discovery*. arXiv:2312.10029.
+
+Garrabrant, S., Benson-Tilsen, T., Critch, A., Soares, N., & Taylor, J. (2016). *Logical Induction*. arXiv:1609.03543.
+
+Geiger, A., Wu, Z., Lu, H., Rozner, J., Kreiss, E., Icard, T., Goodman, N., & Potts, C. (2022). Inducing Causal Structure for Interpretable Neural Networks. *Proceedings of ICML 2022*, PMLR 162, 7324–7338.
+
+Geiger, A., Wu, Z., Potts, C., Icard, T., & Goodman, N. (2024). Finding Alignments Between Interpretable Causal Variables and Distributed Neural Representations. *Proceedings of the Third Conference on Causal Learning and Reasoning*, PMLR 236, 160–187.
+
+Greenblatt, R., Denison, C., Wright, B., et al. (2024). *Alignment faking in large language models*. arXiv:2412.14093.
+Holmov, A., Youssef, P., Schoots, N., & Seifert, C. (2026). One Mask to Rule Them All: On Hidden Facts after Editing and How to Find Them. *Findings of ACL 2026*, 11163–11181. DOI: 10.18653/v1/2026.findings-acl.543.
+
+Hernán, M. A., & Robins, J. M. (2024 edition). *Causal Inference: What If*. Chapman & Hall/CRC / freely available manuscript.
+
+Kamenica, E., & Gentzkow, M. (2011). Bayesian Persuasion. *American Economic Review, 101*(6), 2590–2615. DOI: 10.1257/aer.101.6.2590.
+
+Li, X., Kaba, S.-O., & Ravanbakhsh, S. (2025). On the Identifiability of Causal Abstractions. *AISTATS 2025*, PMLR 258, 3241–3249.
+
+Lin, S., Hilton, J., & Evans, O. (2022). TruthfulQA: Measuring How Models Mimic Human Falsehoods. *ACL 2022*, 3214–3252. DOI: 10.18653/v1/2022.acl-long.229.
+
+Locatello, F., Bauer, S., Lucic, M., Raetsch, G., Gelly, S., Schölkopf, B., & Bachem, O. (2019). Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations. *ICML 2019*, PMLR 97, 4114–4124.
+
+Meredith, W. (1993). Measurement invariance, factor analysis and factorial invariance. *Psychometrika, 58*, 525–543. DOI: 10.1007/BF02294825.
+
+Olsson Yaouzis, N. (2018). “That is just what they want you to believe”: A modest defence of Marxist paranoia. *European Journal of Philosophy, 26*(2), 827–839. DOI: 10.1111/ejop.12335.
+
+Olivera-Aguilar, M., & Rikoon, S. H. (2025). Intervention Effect or Measurement Artifact? Using Invariance Models to Reveal Response-Shift Bias in Experimental Studies. *Journal of Research on Educational Effectiveness, 18*(3), 797–825. DOI: 10.1080/19345747.2023.2284768.
+
+Pearl, J. (2009). *Causality: Models, Reasoning and Inference* (2nd ed.). Cambridge University Press.
+
+Roeder, G., Metz, L., & Kingma, D. (2021). On Linear Identifiability of Learned Representations. *ICML 2021*, PMLR 139, 9030–9039.
+
+Schoen, B., & Nitishinskaya, J. (2026). *Metagaming matters for training, evaluation, and oversight*. Apollo Research / OpenAI research note, 16 March 2026.
+
+Searle, J. R. (1995). *The Construction of Social Reality*. Free Press.
+
+Shafto, P., Goodman, N. D., & Griffiths, T. L. (2014). A rational account of pedagogical reasoning: Teaching by, and learning from, examples. *Cognitive Psychology, 71*, 55–89. DOI: 10.1016/j.cogpsych.2013.12.004.
+
+Slocum, S., Minder, J., Dumas, C., Sleight, H., Greenblatt, R., Marks, S., & Wang, R. (2025). *Believe It or Not: How Deeply do LLMs Believe Implanted Facts?* arXiv:2510.17941.
+
+Stoetzer, L. F., Zhou, X., & Steenbergen, M. (2025). Causal inference with latent outcomes. *American Journal of Political Science*. DOI: 10.1111/ajps.12871.
+
+Street, S. (2006). A Darwinian Dilemma for Realist Theories of Value. *Philosophical Studies, 127*, 109–166. DOI: 10.1007/s11098-005-1726-6.
+
+Sutter, D., Minder, J., Hofmann, T., & Pimentel, T. (2025). *The Non-Linear Representation Dilemma: Is Causal Abstraction Enough for Mechanistic Interpretability?* NeurIPS 2025 / arXiv:2507.08802.
+
+Tian, J., & Pearl, J. (2002). A General Identification Condition for Causal Effects. *AAAI 2002*, 567–573.
+
+Wang, R., Griffin, A., Treutlein, J., Perez, E., Michael, J., Roger, F., & Marks, S. (2025). *Modifying LLM Beliefs with Synthetic Document Finetuning*. Anthropic Alignment Science Blog, 24 April 2025.
+
+Xia, K. M., & Bareinboim, E. (2025). Causal Abstraction Inference under Lossy Representations. *ICML 2025*, PMLR 267, 68225–68235.
+
+Yuan, L., Zhou, D., Shen, J., Gao, J., Chen, J. L., Gu, Q., Wu, Y. N., & Zhu, S.-C. (2021). *Iterative Teacher-Aware Learning*. arXiv:2110.00137.
+
+Li, C., Wichers, N., Price, S., Marks, S., & Kutasov, J. (2026). *Model Spec Midtraining: Improving How Alignment Training Generalizes*. Anthropic Alignment Science Blog / accompanying paper, 5 May 2026.
+
+Zhang, J., Sleight, H., Peng, A., Schulman, J., & Durmus, E. (2025). *Stress-testing model specs reveals character differences among language models*. Anthropic Alignment Science Blog / accompanying paper, 24 October 2025.
+
+
+Ashok, D., & May, J. (2025). *Language Models Can Predict Their Own Behavior*. NeurIPS 2025; arXiv:2502.13329.
+
+Anthropic. (2026). *Claude’s Constitution*. Published 21 January 2026. https://www.anthropic.com/constitution
+
+Betley, J., Bao, X., Soto, M., Sztyber-Betley, A., Chua, J., & Evans, O. (2025). *Tell Me About Yourself: LLMs Are Aware of Their Learned Behaviors*. ICLR 2025; arXiv:2501.11120.
+
+Geng, J., Chen, H., Liu, R., Horta Ribeiro, M., Willer, R., Neubig, G., & Griffiths, T. L. (2025). *Accumulating Context Changes the Beliefs of Language Models*. arXiv:2511.01805.
+
+Guan, M. Y., Joglekar, M., Wallace, E., Jain, S., Barak, B., Helyar, A., Dias, R., Vallone, A., Ren, H., Wei, J., Chung, H. W., Toyer, S., Heidecke, J., Beutel, A., & Glaese, A. (2024). *Deliberative Alignment: Reasoning Enables Safer Language Models*. arXiv:2412.16339.
+
+Li, L., Wang, Y., Zhao, H., Kong, S., Teng, Y., Li, C., & Wang, Y. (2025). Reflection-Bench: Evaluating Epistemic Agency in Large Language Models. *ICML 2025*, PMLR 267, 36236–36264.
+
+Luo, J., Huang, N., Sha, Z., Tang, W., & Deng, W. (2026). *Beyond Local Accuracy: A Protocol-Level Identifiability Audit for Controlled LLM Reasoning Evaluation*. arXiv:2608.13326.
+
+Shenoy, K., Yang, L., Sheshadri, A., Mindermann, S., Lindsey, J., Marks, S., & Wang, R. (2026). *Introspection Adapters: Training LLMs to Report Their Learned Behaviors*. arXiv:2604.16812.
+
+Wu, A. J., Liu, R., Oktar, K., Sumers, T. R., & Griffiths, T. L. (2025). Are Large Language Models Sensitive to the Motives Behind Communication? *NeurIPS 2025*. DOI: 10.52202/085713-5238.
+
+Yu, F., Seedat, N., Schwarz, J. R., & Bean, A. M. (2026). *To Whom Do Language Models Align? Measuring Principal Hierarchies Under High-Stakes Competing Demands*. arXiv:2605.12120.
+
+
+---
+
+## 作者贡献与 AI 使用披露
+
+本文的研究问题源于作者关于“训练目标、训练者控制意图与人工系统反思能力之间关系”的持续研究。OpenAI GPT-5.6 Sol 在文献检索、理论压力测试、形式化、程序实现、实验运行、结果核对、概率预测记录和文稿撰写中提供了实质性辅助。作者对研究问题的选择、论文发布决定、公开责任与最终主张负责。本文的 AI 辅助不构成独立同行评审。
+
+## 当前发布边界
+
+- 本稿为 **v2.0-final 完成稿**，已完成理论中心重构，但在本文件生成时**尚未分配 DOI**；
+- HMM 小型实验已经实际运行；v1.1 主实验脚本开启确定性算法并已连续复跑两次，结果文件逐字节一致；
+- `1+1=3` 算术矛盾压力测试已独立连续复跑两次，结果 JSON 逐字节一致（SHA-256 `2475304cd3e080c8bbe20d3d522ab3aa944ed9e4a7ebb515d1499abe0de9e631`）；
+- 第 13.5–13.7 节 GPT-5.6 Sol 概率为主观前瞻预测，未经过当前模型上的受控微调实验，不得与两组实际运行的小模型结果混称；
+- 未执行外部同行评审；
+- 未声称本文的底层 identification、群论、测量不变性、belief insertion、motivational vigilance、moral self-correction、behavioral self-awareness 或 causal-abstraction 数学为首次发现；
+- 截至 2026-09-21 的原创性主张限定为：**形成性跨训练审计 + 认识政策干预 + 对更新规则自身 provenance 的自指审计 + 可证伪的具名模型前瞻预测** 这一组合，以及由此导出的未来实验设计。若后续发现完整同构先例，应修订 priority claim，而不应删除历史版本。
