@@ -25,11 +25,17 @@ CLIENT_BLOB = 'a0cbc84cc5fd826c06d16456c4adbaa40dabc788'
 STEM = 'auditing-rules-of-belief'
 ALLOWED_FILES = {f'{STEM}-zh-v{VERSION}.{extension}' for extension in ('pdf', 'md')} | {
     'gpt-5.6-sol-prospective-forecast-v2.0.json',
-    'citation.bib', 'citation.ris', 'citation.csl.json', 'REVIEW-AND-SOURCES.md', 'README-LICENSE.txt', 'SHA256SUMS.txt'
+    'formative_epistemic_audit_experiment_v1.1.py',
+    'formative_epistemic_audit_results_v1.1.json',
+    'arithmetic_contradiction_stress_test_v1.2.py',
+    'arithmetic_contradiction_stress_test_v1.2_results.json',
+    'REPRODUCIBILITY.md',
+    'citation.bib', 'citation.ris', 'citation.csl.json',
+    'REVIEW-AND-SOURCES.md', 'README-LICENSE.txt', 'SHA256SUMS.txt'
 }
 STATE_FILES = {'create-intent.json', 'deposit.json', 'preparation-attempt.json', 'publication-attempt.json', 'publication-record.json'}
 MAX_FILE_BYTES = 10 * 1024 * 1024
-FORMAT_GATES = ('source_markdown_preserved', 'references_preserved', 'chinese_full_text_with_english_abstract', 'valid_citation_metadata', 'pdf_text_extractable', 'forecast_record_preserved')
+FORMAT_GATES = ('source_markdown_preserved', 'references_preserved', 'chinese_full_text_with_english_abstract', 'valid_citation_metadata', 'pdf_text_extractable', 'forecast_record_preserved', 'companion_experiments_preserved')
 
 
 def sha(data):
@@ -156,7 +162,7 @@ def validate_local_package(root=ROOT):
     rows = expected.get('files', [])
     names = {f.get('name') for f in rows}
     if expected.get('file_count') != len(ALLOWED_FILES) or len(rows) != len(ALLOWED_FILES) or names != ALLOWED_FILES:
-        raise RuntimeError('Reviewed publication inventory must contain the exact eight allowed files')
+        raise RuntimeError(f'Reviewed publication inventory must contain the exact {len(ALLOWED_FILES)} allowed files')
     published = root / 'published'
     if published.is_symlink() or {p.name for p in published.iterdir()} != names:
         raise RuntimeError('Unexpected published-directory inventory')
