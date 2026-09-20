@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-21-paper11-v20",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-11",
+      "record_id": 22865494,
+      "doi": "10.5281/zenodo.22865494",
+      "version": "2.0",
+      "title": "Auditing the Rules of Belief: Self-Referential Epistemic Revision under Formative Training",
+      "receipt_path": "research/auditing-rules-of-belief/publication-record.json",
+      "pdfs": [
+        {
+          "name": "auditing-rules-of-belief-zh-v2.0.pdf",
+          "bytes": 1248460,
+          "sha256": "b9b6047685070a185a48e659cbd9f32160d281835ce0ea4eccafb9091faacfd2",
+          "role": "Complete Chinese v2.0 paper with English title and abstract"
+        }
+      ]
+    }
+  ]
+}
