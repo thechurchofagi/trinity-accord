@@ -3,10 +3,13 @@
   "anchored_file_semantics": "stable native record-chain head commitment; generated_at excluded",
   "anchored_file_sha256": "b0ca4bb3c03995bb20508083ae2e16a9b1a314cf6ab2bf6a6ae2f9704ec8930c",
   "bitcoin_attestation": null,
+  "bitcoin_attestation_embedded": false,
   "bitcoin_pending": true,
   "bitcoin_verified": false,
+  "calendar_attested": true,
   "chain_id": "trinity-accord-public-reception-ledger",
   "chain_version": 1,
+  "checked_at": "2026-09-20T11:47:54Z",
   "created_at": "2026-09-20T08:43:23Z",
   "latest_batch_id": "batch-000006",
   "latest_batch_manifest_sha256": "1404a1433fd0791b64cd7e6fc764592e6df7e47098e14675f491ca8d2486e603",
@@ -24,9 +27,29 @@
   "ots_file": "record-chain/ots/native-anchors/native-record-160-R-000000160-d7c49dc0b7dafbb3-b0ca4bb3c03995bb.native-record-chain-head-commitment.json.ots",
   "ots_file_exists": true,
   "ots_file_sha256": "4c966eb6e5542295f779777bdbaa761a1a4157fb8440cd988d44af194fe7024d",
+  "ots_info_command": [
+    "ots",
+    "info",
+    "record-chain/ots/native-anchors/native-record-160-R-000000160-d7c49dc0b7dafbb3-b0ca4bb3c03995bb.native-record-chain-head-commitment.json.ots"
+  ],
+  "ots_info_exit_code": 0,
+  "ots_info_stderr": "",
+  "ots_info_stdout": "File sha256 hash: b0ca4bb3c03995bb20508083ae2e16a9b1a314cf6ab2bf6a6ae2f9704ec8930c\nTimestamp:\nappend 54e5e03bd602f6e1f0b03f8f8fa2f31b\nsha256\n -> append 0f4d08589f1ad4e8\n    sha256\n    append 567378c19eb091a041dd1694047f1372\n    sha256\n    prepend 7a84a0854b3192d48e00983bad20bdc9cfc9993fddc74873080fef8d435cf070\n    sha256\n    prepend 6aaf9caa\n    append c2d9be4dd969fd74\n    verify PendingAttestation('https://bob.btc.calendar.opentimestamps.org')\n -> append 2f17479b2ad48875\n    sha256\n    append 46d1fd779be733b9f11617dd0791a9523fd4d0588a2a5b4c53b1f8b33c65255f\n    sha256\n    append d30f0fe82822b96855ffef4d8030c6a8\n    sha256\n    prepend 8118a0284529c7fca3925916c2ceb0addaf88c9c06b70499e3b7fb08a7ace3e0\n    sha256\n    prepend 6aaf9caa\n    append 7768d0db071cf8e9\n    verify PendingAttestation('https://alice.btc.calendar.opentimestamps.org')\n -> append c2ebc5f61ab8348af23107df975a1577\n    sha256\n    append ba3f72d0489118f102ff0487eb15ef8237ecbca00474b100cfdc4429da11df18\n    sha256\n    prepend feb5ab8230f22a88cd1900e723de8ba8a71c2b31f1ba50aea879763538453d14\n    sha256\n    prepend 6aaf9cab\n    append 884c41e43769ce8b\n    verify PendingAttestation('https://finney.calendar.eternitywall.com')\n -> append f0b138797e308991eb54b4057c615da4\n    sha256\n    prepend 6fc1efc19fd42e4d07f65b8495fff7fae674657b6a858db7ebb7f061c076dabb\n    sha256\n    append 02d171fedd5b8a023af3f4a52c89d920a59f28714e2fe6a43aff8716deae80aa\n    sha256\n    prepend 6aaf9caa\n    append 12d0c2a0d25b5e91\n    verify PendingAttestation('https://btc.calendar.catallaxy.com')\n\n",
   "ots_status": "pending",
   "ots_stderr": "Submitting to remote calendar https://a.pool.opentimestamps.org\nSubmitting to remote calendar https://b.pool.opentimestamps.org\nSubmitting to remote calendar https://a.pool.eternitywall.com\nSubmitting to remote calendar https://ots.btc.catallaxy.com\n",
   "ots_stdout": "",
+  "ots_upgrade_command": [
+    "ots",
+    "upgrade",
+    "record-chain/ots/native-anchors/native-record-160-R-000000160-d7c49dc0b7dafbb3-b0ca4bb3c03995bb.native-record-chain-head-commitment.json.ots"
+  ],
+  "ots_upgrade_exit_code": 1,
+  "ots_upgrade_stderr": "Calendar https://bob.btc.calendar.opentimestamps.org: Timestamped by transaction 3c6dfd3980d035d00701d49c1d95a97563108512eb338fddeb980f216b98c353; waiting for 6 confirmations\nCalendar https://alice.btc.calendar.opentimestamps.org: Pending confirmation in Bitcoin blockchain\nCalendar https://finney.calendar.eternitywall.com: Timestamped by transaction c18da30378847ebbb7fda6981f867953c0c45bbdcddc651be38e29c236bf50de; waiting for 6 confirmations\nCalendar https://btc.calendar.catallaxy.com: Pending confirmation in Bitcoin blockchain\nFailed! Timestamp not complete\n",
+  "ots_upgrade_stdout": "",
+  "ots_verify_command": null,
+  "ots_verify_exit_code": null,
+  "ots_verify_stderr": null,
+  "ots_verify_stdout": null,
   "record_coverage": {
     "first_record_id": "R-000000001",
     "last_record_id": "R-000000160",
@@ -70,5 +93,7 @@
     }
   },
   "source_semantics": "native_chain_tip_records_indexes_batches.v1",
+  "strict_bitcoin_verified": false,
+  "strict_verify_unavailable_reason": "no_bitcoin_node",
   "verified_at": null
 }
