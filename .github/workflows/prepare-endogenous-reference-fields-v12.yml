@@ -1,0 +1,40 @@
+name: Prepare Endogenous Reference Fields v1.2
+
+on:
+  push:
+    branches: [research/endogenous-reference-fields-v1-2-20260920]
+    paths:
+      - '.github/workflows/prepare-endogenous-reference-fields-v12.yml'
+      - 'research/endogenous-reference-fields/versions/v1.2/prepare_zenodo.py'
+      - 'research/endogenous-reference-fields/versions/v1.2/publication_common.py'
+      - 'research/endogenous-reference-fields/versions/v1.2/test_publication_safety.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: endogenous-reference-fields-zenodo-v1-2
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta10-v12-prepare]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/endogenous-reference-fields-v1-2-20260920
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > /tmp/ta10-v12-toolchain-provenance.json
+          cat /tmp/ta10-v12-toolchain-provenance.json
+      - name: Verify version lineage safeguards
+        run: python3 research/endogenous-reference-fields/versions/v1.2/test_publication_safety.py
+      - name: Reserve linked v1.2
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/endogenous-reference-fields/versions/v1.2/prepare_zenodo.py
+      - name: Persist reservation state
+        if: always()
+        run: python3 research/endogenous-reference-fields/versions/v1.2/publication_common.py --persist-states
