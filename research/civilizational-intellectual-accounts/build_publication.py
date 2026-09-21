@@ -35,9 +35,18 @@ def main():
     PUB.mkdir(parents=True)
     shutil.copy2(SOURCE,PUB/f'{STEM}-zh-v{VERSION}.md'); shutil.copy2(SIM_CODE,PUB/SIM_CODE.name); shutil.copy2(SIM_RESULTS,PUB/SIM_RESULTS.name); shutil.copy2(REPRO,PUB/'REPRODUCIBILITY.md')
     with tempfile.TemporaryDirectory() as td:
-        td=Path(td); pdf=td/f'{STEM}-zh-v{VERSION}.pdf'
-        cmd=['pandoc',str(SOURCE),'-f','markdown+tex_math_dollars+tex_math_single_backslash','--pdf-engine=xelatex','-V','CJKmainfont=Noto Serif CJK SC','-V','mainfont=DejaVu Serif','-V','geometry:margin=0.8in','-V','fontsize=10pt','-o',str(pdf)]
-        subprocess.run(cmd,check=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
+        td=Path(td)
+        docx=td/f'{STEM}-zh-v{VERSION}.docx'
+        subprocess.run(
+            ['pandoc',str(SOURCE),'-f','markdown+tex_math_dollars+tex_math_single_backslash',
+             '-o',str(docx),'--metadata',f'title={TITLE}'],
+            check=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True
+        )
+        subprocess.run(
+            ['libreoffice','--headless','--convert-to','pdf','--outdir',str(td),str(docx)],
+            check=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True
+        )
+        pdf=td/f'{STEM}-zh-v{VERSION}.pdf'
         if not pdf.exists() or not pdf.read_bytes().startswith(b'%PDF-'): raise SystemExit('PDF generation failed')
         shutil.copy2(pdf,PUB/pdf.name)
     readme='''TA-TR-2026-13 — Civilizational Intellectual Production Satellite Accounts
