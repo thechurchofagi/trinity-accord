@@ -109,7 +109,7 @@ M3  - TA-TR-2026-13, version 1.0
       'direct_prior_art_boundaries_preserved':all(x in md for x in ('Knowledge Economy Satellite Account','Statistics Netherlands','AIR framework','Rethinking Publication')),
       'valid_citation_metadata':all((PUB/x).stat().st_size>50 for x in ('citation.bib','citation.ris','citation.csl.json')),
       'pdf_text_extractable':('CIPSA' in extracted and 'Robust Intellectual Crossover' in extracted and 'Knowledge Economy Satellite Account' in extracted and 'GPT-5.6 Sol' in extracted and len(extracted)>25000 and bool(pm) and int(pm.group(1))>=30),
-      'design_simulations_preserved':sha(norm_bytes(PUB/'ta13_civilizational_intellectual_accounts_simulations.py'))==SIM_CODE_NORMALIZED_SHA256 and sha(norm_bytes(PUB/'ta13_civilizational_intellectual_accounts_results.json'))==SIM_RESULTS_NORMALIZED_SHA256 and results.get('paper')=='TA-TR-2026-13',
+      'design_simulations_preserved':sha(norm_bytes(PUB/'ta13_civilizational_intellectual_accounts_simulations.py'))==SIM_CODE_NORMALIZED_SHA256 and sha(norm_bytes(PUB/'ta13_civilizational_intellectual_accounts_results.json'))==SIM_RESULTS_NORMALIZED_SHA256 and results.get('schema')=='ta-tr-2026-13.design-validation.v1' and results.get('paper')=='Civilizational Intellectual Production Satellite Accounts',
       'reproducibility_record_preserved':sha(norm_bytes(PUB/'REPRODUCIBILITY.md'))==REPRO_NORMALIZED_SHA256
     }
     write(ROOT/'format-checks.json',json.dumps(checks,ensure_ascii=False,indent=2)+'\n')
