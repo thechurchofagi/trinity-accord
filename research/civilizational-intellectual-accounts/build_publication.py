@@ -15,7 +15,7 @@ REPRO=ROOT/'REPRODUCIBILITY.md'
 SOURCE_NORMALIZED_SHA256='e7c72b2631cb59c9f0143e3d0b4362ab031b70abfe7c0df003f19b89a9075eb4'
 SIM_CODE_NORMALIZED_SHA256='40624b5e584fa07b57b2f9b7bf31a6ac7a33acc99281f9bd3f5a5e46b525ae28'
 SIM_RESULTS_NORMALIZED_SHA256='cda664326b799438d83c95e5e4ad1637e936e68476f0ffb7f7e2a3e7c5769003'
-REPRO_NORMALIZED_SHA256='22b681da21dfd6dc16345203f6ea380710b8690c1b65a0585863790f7ad7ff42'
+REPRO_NORMALIZED_SHA256='baa520fbff2945e4799fcdd3f1fe1ac28f95244385f29eb88246efa4200bcf71'
 FILES=['README-LICENSE.txt','REVIEW-AND-SOURCES.md','REPRODUCIBILITY.md','SHA256SUMS.txt','citation.bib','citation.csl.json','citation.ris',f'{STEM}-zh-v{VERSION}.md',f'{STEM}-zh-v{VERSION}.pdf','ta13_civilizational_intellectual_accounts_simulations.py','ta13_civilizational_intellectual_accounts_results.json']
 def sha(b): return hashlib.sha256(b).hexdigest()
 def norm_bytes(path):
