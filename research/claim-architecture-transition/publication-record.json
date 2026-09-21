@@ -1,0 +1,123 @@
+{
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "report_number": "TA-TR-2026-14",
+  "title": "The Claim Architecture Transition: Transformative AI, Real Claim Closure, and General Equilibrium Beyond Wage-Based Distribution",
+  "version": "1.1",
+  "record_id": 22871209,
+  "doi": "10.5281/zenodo.22871209",
+  "record_url": "https://zenodo.org/records/22871209",
+  "submitted": true,
+  "file_count": 15,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 769,
+      "sha256": "115526cb61d5085a0cef05ccb128c6d3ba1badc83ea230e8baba934819f45541",
+      "public_url": "https://zenodo.org/api/records/22871209/files/README-LICENSE.txt/content"
+    },
+    {
+      "name": "REPRODUCIBILITY.md",
+      "bytes": 578,
+      "sha256": "1ad25b7277a8f37f76af817993c1d197d1c8f85498deae470ba8b14ab1c3ba51",
+      "public_url": "https://zenodo.org/api/records/22871209/files/REPRODUCIBILITY.md/content"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 1355,
+      "sha256": "484cbf71a0ad005bee8c614bc134b697415cb82229f112997e5bbadad52bb809",
+      "public_url": "https://zenodo.org/api/records/22871209/files/REVIEW-AND-SOURCES.md/content"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1249,
+      "sha256": "1ef51d57acfce7c8fafb18aa9047a35a244a08668f065763b8e24726b74875ae",
+      "public_url": "https://zenodo.org/api/records/22871209/files/SHA256SUMS.txt/content"
+    },
+    {
+      "name": "build_paper.py",
+      "bytes": 78645,
+      "sha256": "d1101ca5079312e4e83a548ba112f046eec6c8030c3d5a0e56bbfac11774a4a6",
+      "public_url": "https://zenodo.org/api/records/22871209/files/build_paper.py/content"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 375,
+      "sha256": "e2ec11de0e96292b409f4e69a6464b1aab82d1377a29127558b71f48b4b8b14b",
+      "public_url": "https://zenodo.org/api/records/22871209/files/citation.bib/content"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 567,
+      "sha256": "6dc664dc10207cef99dfea08cd2e3408be36d0997102cc5acf320835db647439",
+      "public_url": "https://zenodo.org/api/records/22871209/files/citation.csl.json/content"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 342,
+      "sha256": "1dd0ca0b28b2e65d690040cafb5c3507e436ecac71f837d9401ca62e8ec5f4ef",
+      "public_url": "https://zenodo.org/api/records/22871209/files/citation.ris/content"
+    },
+    {
+      "name": "claim-architecture-transition-v1.1.docx",
+      "bytes": 210410,
+      "sha256": "44ac30345eb4bde941988c6c912e0d1525c73ae13413fb5d870e824739db7d30",
+      "public_url": "https://zenodo.org/api/records/22871209/files/claim-architecture-transition-v1.1.docx/content"
+    },
+    {
+      "name": "claim-architecture-transition-v1.1.md",
+      "bytes": 81564,
+      "sha256": "8ecaffa1649b5958eb1b3144913f43bbc93ac543ecdadd82f428fd3aaf374c6f",
+      "public_url": "https://zenodo.org/api/records/22871209/files/claim-architecture-transition-v1.1.md/content"
+    },
+    {
+      "name": "claim-architecture-transition-v1.1.pdf",
+      "bytes": 472126,
+      "sha256": "9d3fec11bb4113daee10969de782faecf56cd8ca79448cd8552103094d1147ec",
+      "public_url": "https://zenodo.org/api/records/22871209/files/claim-architecture-transition-v1.1.pdf/content"
+    },
+    {
+      "name": "figure1_output_wage.png",
+      "bytes": 85531,
+      "sha256": "b3689ff71f12dfc0acdd5d949e2832e859401bce3f87be955ee759adbb15604a",
+      "public_url": "https://zenodo.org/api/records/22871209/files/figure1_output_wage.png/content"
+    },
+    {
+      "name": "figure2_claim_gap.png",
+      "bytes": 78657,
+      "sha256": "813e46ef25122c252f620279fd5edaf29d47425f45c875dd803085e1e0335885",
+      "public_url": "https://zenodo.org/api/records/22871209/files/figure2_claim_gap.png/content"
+    },
+    {
+      "name": "generate_assets.py",
+      "bytes": 1802,
+      "sha256": "6918fb952f0196e9c52486a637a8f1e85a9a523a37fb94f8425dda674f568768",
+      "public_url": "https://zenodo.org/api/records/22871209/files/generate_assets.py/content"
+    },
+    {
+      "name": "illustrative_series.csv",
+      "bytes": 47940,
+      "sha256": "477c01ef4600bd7e1b9d82ab900deec31ae4a9009f6a396fa726d8b3ba93ad03",
+      "public_url": "https://zenodo.org/api/records/22871209/files/illustrative_series.csv/content"
+    }
+  ],
+  "expected_manifest_sha256": "98cfe8a1ead5628e2dde6961e628bfade95486f53ad9b577e9d5e9eabe075cf8",
+  "public_readback_authenticated": false,
+  "doi_resolver": {
+    "state": "RESOLVER_PASS",
+    "http_status": 200,
+    "final_url": "https://zenodo.org/records/22871209",
+    "matches_record": true
+  },
+  "public_file_readback_pass": true,
+  "doi_resolution_pass": true,
+  "source_commit": "900988d7e7a6c2ccefc2df8215c24342dfa45531",
+  "workflow_run_id": "35584728462",
+  "was_already_published": false,
+  "prior_doi_records_modified": false,
+  "bitcoin_originals_modified": false,
+  "new_research_papers": 1,
+  "peer_reviewed": false,
+  "global_originality_certified": false,
+  "google_scholar_indexing": "NOT_ASSERTED",
+  "manuscript_language": "eng"
+}
