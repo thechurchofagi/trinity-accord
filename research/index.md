@@ -41,7 +41,7 @@ permalink: /research/
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
 
-The series currently contains **thirteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-13)**. They share a first-party, substantially AI-assisted research context and are not ten independent corroborations. English and Chinese versions of the same study count as one paper.
+The series currently contains **thirteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-13)**. They share a first-party, substantially AI-assisted research context and are not thirteen independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research positioning
 {: #research-positioning }
