@@ -1,0 +1,161 @@
+{
+  "schema": "ta-tr-2026-13.design-validation.v1",
+  "paper": "Civilizational Intellectual Production Satellite Accounts",
+  "date": "2026-09-21",
+  "epistemic_boundary": "All numbers are stipulated synthetic examples. They validate accounting logic and illustrate identification problems. They are not estimates of the actual human/AI composition of world intellectual production.",
+  "experiments": [
+    {
+      "name": "aggregation_nonidentification",
+      "purpose": "Show that plausible domain-attribution intervals and admissible domain weights do not point-identify a unique civilizational AI intellectual share.",
+      "domains": [
+        "science",
+        "software",
+        "engineering",
+        "medicine",
+        "professional",
+        "public_decision"
+      ],
+      "domain_ai_share_intervals": {
+        "science": [
+          0.28,
+          0.45
+        ],
+        "software": [
+          0.58,
+          0.78
+        ],
+        "engineering": [
+          0.35,
+          0.55
+        ],
+        "medicine": [
+          0.18,
+          0.32
+        ],
+        "professional": [
+          0.3,
+          0.5
+        ],
+        "public_decision": [
+          0.12,
+          0.28
+        ]
+      },
+      "admissible_weight_bounds": {
+        "science": [
+          0.12,
+          0.25
+        ],
+        "software": [
+          0.1,
+          0.22
+        ],
+        "engineering": [
+          0.12,
+          0.24
+        ],
+        "medicine": [
+          0.12,
+          0.22
+        ],
+        "professional": [
+          0.15,
+          0.28
+        ],
+        "public_decision": [
+          0.08,
+          0.2
+        ]
+      },
+      "identified_set": [
+        0.2674,
+        0.5284
+      ],
+      "equal_weight_midpoint_point_estimate": 0.39083333333333337,
+      "activity_weight_midpoint_point_estimate": 0.4043,
+      "lower_attaining_weights": {
+        "science": 0.20999999999999996,
+        "software": 0.1,
+        "engineering": 0.12,
+        "medicine": 0.22,
+        "professional": 0.15,
+        "public_decision": 0.2
+      },
+      "upper_attaining_weights": {
+        "science": 0.12,
+        "software": 0.22,
+        "engineering": 0.24,
+        "medicine": 0.12,
+        "professional": 0.22000000000000008,
+        "public_decision": 0.08
+      },
+      "interpretation": "The same domain evidence supports materially different scalar summaries under admissible aggregation rules. A point estimate therefore reflects additional assumptions, not data alone."
+    },
+    {
+      "name": "vintage_revision_and_quality_adjustment",
+      "purpose": "Illustrate why raw output counts and provisional quality weights can yield a different human/AI composition than later validated quality weights. Coefficients are stipulated and are not empirical claims about real AI quality.",
+      "n": 50000,
+      "seed": 20260921,
+      "volume_shares": {
+        "H": 0.38104,
+        "A": 0.47034,
+        "X": 0.14862
+      },
+      "provisional_quality_adjusted_shares": {
+        "H": 0.38737037723073514,
+        "A": 0.4307472455749969,
+        "X": 0.18188237719426797
+      },
+      "later_validated_shares": {
+        "H": 0.4352076137937546,
+        "A": 0.3456012422237045,
+        "X": 0.21919114398254097
+      },
+      "ai_share_change_volume_to_validated": -0.1247387577762955,
+      "interpretation": "A production account that never revises quality can confuse generation volume with durable intellectual contribution."
+    },
+    {
+      "name": "robust_crossover_timing",
+      "purpose": "Show that a central point estimate can cross 0.5 earlier than a robust majority claim justified across all admissible assumptions.",
+      "periods": [
+        {
+          "year": 2026,
+          "identified_set": [
+            0.18080000000000002,
+            0.4066
+          ],
+          "equal_weight_midpoint": 0.28583333333333333,
+          "status": "robust_human_majority"
+        },
+        {
+          "year": 2028,
+          "identified_set": [
+            0.29600000000000004,
+            0.55
+          ],
+          "equal_weight_midpoint": 0.41750000000000004,
+          "status": "majority_not_identified"
+        },
+        {
+          "year": 2030,
+          "identified_set": [
+            0.39959999999999996,
+            0.6484000000000001
+          ],
+          "equal_weight_midpoint": 0.5183333333333334,
+          "status": "majority_not_identified"
+        },
+        {
+          "year": 2032,
+          "identified_set": [
+            0.5497000000000001,
+            0.7640000000000001
+          ],
+          "equal_weight_midpoint": 0.6533333333333334,
+          "status": "robust_AI_majority"
+        }
+      ],
+      "interpretation": "In this stipulated example the equal-weight midpoint first exceeds 0.5 in 2030, but the lower bound of the identified set exceeds 0.5 only in 2032."
+    }
+  ]
+}
