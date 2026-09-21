@@ -14,12 +14,12 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: training-governed-agent-zenodo-v1-2
+  group: training-governed-agent-zenodo-v1-2-alt
   cancel-in-progress: false
 jobs:
   prepare:
     if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta12-prepare]')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
