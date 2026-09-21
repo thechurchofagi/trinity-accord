@@ -1,0 +1,25 @@
+{
+  "state": "EXACT_PUBLICATION_PACKAGE_REVIEW_PASS",
+  "report_number": "TA-TR-2026-14",
+  "version": "1.1",
+  "record_id": 22871209,
+  "doi": "10.5281/zenodo.22871209",
+  "expected_manifest_sha256": "98cfe8a1ead5628e2dde6961e628bfade95486f53ad9b577e9d5e9eabe075cf8",
+  "reviewed_workflow_run_id": "35583993953",
+  "reviewed_artifact_id": 10631427962,
+  "pdf_pages_reviewed": 16,
+  "pdf_visual_review": "PASS",
+  "docx_render_pages": 16,
+  "docx_render_review": "PASS",
+  "checks": {
+    "no_clipping": true,
+    "no_overlap": true,
+    "no_broken_glyphs": true,
+    "tables_legible": true,
+    "figures_legible": true,
+    "equations_legible": true,
+    "references_legible": true,
+    "title_page_identity_matches_reserved_doi": true
+  },
+  "note": "The exact frozen TA14 preparation artifact was downloaded and reviewed page-by-page after reservation. The 16-page publication PDF is clean and the exact DOCX renders to 16 pages without visible layout defects. Publication remains a non-peer-reviewed preprint; DOI registration is not a certification of truth or global originality."
+}
