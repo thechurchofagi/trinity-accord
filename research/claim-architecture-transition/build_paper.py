@@ -367,6 +367,12 @@ p.alignment = WD_ALIGN_PARAGRAPH.CENTER
 r = p.add_run('TA-TR-2026-14 · Working Paper v1.1 · 21 September 2026')
 set_run_font(r, size=10.2)
 
+if DOI:
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    r = p.add_run('DOI: ' + DOI)
+    set_run_font(r, size=9.2, color=MUTED)
+
 p = doc.add_paragraph()
 p.alignment = WD_ALIGN_PARAGRAPH.CENTER
 p.paragraph_format.space_before = Pt(18)
