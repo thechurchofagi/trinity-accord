@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-21-paper13-v10",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-13",
+      "record_id": 22866775,
+      "doi": "10.5281/zenodo.22866775",
+      "version": "1.0",
+      "title": "Civilizational Intellectual Production Satellite Accounts: A Partial-Identification Framework for Measuring the Human–AI Shift in Intellectual Production and Epistemic Governance",
+      "receipt_path": "research/civilizational-intellectual-accounts/publication-record.json",
+      "pdfs": [
+        {
+          "name": "civilizational-intellectual-production-accounts-zh-v1.0.pdf",
+          "bytes": 623302,
+          "sha256": "2785b1f7e20be977b883244da0526b144172f2ab6f3c64b5b235f5621fe7a32a",
+          "role": "Complete Chinese v1.0 theory-method paper with English title and abstract"
+        }
+      ]
+    }
+  ]
+}
