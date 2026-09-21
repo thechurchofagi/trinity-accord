@@ -74,8 +74,10 @@ def local_candidates(path: str) -> list[Path]:
     if permalink_key in permalink_map:
         return [permalink_map[permalink_key]]
 
-    # Raw files such as /llms.txt, /ai.txt, /api/x.json, /feed.xml
-    if "." in Path(path).name:
+    # Raw files such as /llms.txt, /ai.txt, /api/x.json, /feed.xml.
+    # A trailing slash is authoritative for a directory-style Jekyll URL even
+    # when the final segment contains a version dot such as "v1.0/".
+    if not path.endswith("/") and "." in Path(path).name:
         return [ROOT / path]
 
     # Directory-style pretty URL.
