@@ -7,5 +7,7 @@
   "expected_file_count": 11,
   "prior_doi_records_must_not_be_modified": true,
   "bitcoin_originals_must_not_be_modified": true,
-  "note": "Publish only the exact package frozen by the successful TA13 preparation workflow; then require anonymous exact-byte readback and DOI resolver match."
+  "note": "Publish only the exact package frozen by the successful TA13 preparation workflow; then require anonymous exact-byte readback and DOI resolver match.",
+  "resume_same_published_record": true,
+  "resolver_resume_attempt": 4
 }
