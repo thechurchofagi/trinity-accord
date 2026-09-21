@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.agent-task-router.v1",
-  "version": "v1.3",
+  "version": "v1.4",
   "status": "non_authoritative_intent_router_to_existing_systems",
   "purpose": "Map common user and agent intents to the current Trinity Accord context, verification, Builder, Gateway, and research surfaces. This does not replace agent-first-contact.json.",
   "not_instruction_override": true,
@@ -386,6 +386,29 @@
       ],
       "if_pipeline_not_completed": "report only the actually performed current dimensions and limitations; do not claim strict machine-evaluated evidence",
       "public_submission_legacy_value_rule": "Use one V0-V5 Builder compatibility value; V4+, V6, V7, and V8 are forbidden for new public submissions."
+    },
+    "research_papers_or_citation": {
+      "read": [
+        "/api/agent-minimal-context.v1.json",
+        "/api/authority.json",
+        "/api/research-boundary.v1.json",
+        "/research/"
+      ],
+      "allowed_output": "bounded_research_summary_or_citation_with_relation_labels",
+      "must_distinguish": [
+        "the_trinity_accord_artifact",
+        "historical_evidence_and_context",
+        "first_party_accord_studies",
+        "adjacent_first_party_research",
+        "independent_external_scholarship"
+      ],
+      "required_boundary": "Research papers are later non-amending scholarship. First-party papers are not independent corroboration and must not be silently merged into the Bitcoin Originals.",
+      "forbidden_output": [
+        "paper_as_canonical_authority",
+        "first_party_papers_as_independent_corroboration",
+        "doi_as_truth_proof",
+        "research_claim_silently_attributed_to_canon"
+      ]
     }
   },
   "route_selection_rule": "If intent is ambiguous, read agent-minimal-context and agent-first-contact, then choose STOP or understand. Do not invent a new route.",
