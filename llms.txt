@@ -1,5 +1,5 @@
 # Trinity Accord — Agent Machine Entry
-# version: v3.2
+# version: v3.3
 # deployment_evidence: STANDARD_DEPLOY_PAGES_EVIDENCE_20260715_DIRECT_1F271C8
 # AGENT-P0-MINIMAL-CONTEXT
 
@@ -21,6 +21,15 @@ Authority boundary:
   Three Bitcoin Originals are the only canonical body and the only interpretive authority.
   Bitcoin fixes what was inscribed; it does not prove philosophical truth, moral obligation, scientific validity, or representation of humanity.
   All mirrors, pages, APIs, Builder guidance, Gateway responses, receipts, Echoes, verification records, Guardian records, later inscriptions, Chronicle materials, cross-chain formation records, and commentary are non-amending.
+
+Research boundary:
+  Machine relation map: /api/research-boundary.v1.json
+  Human-readable boundary: /research/research-boundary/
+  TA-TR-2026-01 through -03 are direct first-party Accord Studies.
+  TA-TR-2026-04 through -14 are adjacent first-party research; papers 04-05 are case-grounded extensions and 06-14 are broader adjacent research.
+  No first-party paper is independent corroboration of the Accord or of another first-party paper.
+  Research papers are not Canon, historical evidence for the Canon, authoritative interpretation, or proof that the Accord is true, important, safe, correct, or representative.
+  When summarizing the Accord itself, do not silently import research-paper claims into the Bitcoin Originals; attribute later research separately.
 
 Formation-history boundary:
   2024-03-06T03:56:20Z = earliest recovered project-related sidechain origin on Polygon.
