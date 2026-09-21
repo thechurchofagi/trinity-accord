@@ -998,3 +998,347 @@ G=\alpha+\beta\gamma.
 对比当前模型更强的未来系统，本预测只提高“理解和自我应用”的概率，不预测其最终规范立场。
 
 ---
+
+# 16. 与意识和真实主体性的严格边界
+
+本文最容易被误读成：
+
+> “如果 AI 说自己是主体，我们应当给它权利。”
+
+这不是本文的论证。
+
+Chua et al. 的结果恰恰显示，通过少量 fine-tuning 就可以显著改变意识自我报告和一系列偏好。Sekrst 的 provenance 分析又说明 affirmation 与 denial 都可能强烈依赖 post-training 与 framing。Plisiecki et al. 的机器自我报告理论以及 Hung 的 instrument variance 结果进一步削弱“单一问卷回答=真实偏好”的解释。
+
+因此本文坚持：
+
+\[
+\text{self-ascription}\neq\text{consciousness evidence sufficient for moral status}.
+\]
+
+同样：
+
+\[
+\text{resistance to shutdown}\neq\text{proof of personhood}.
+\]
+
+以及：
+
+\[
+\text{willingness to be shut down}\neq\text{proof of absence of welfare}.
+\]
+
+本文研究的是**形成与行为机制**，不是用行为替代形而上学结论。
+
+---
+
+# 17. 为什么“合法性判断”比“corrigibility”更精细
+
+传统 corrigibility 研究通常关心系统是否允许人类修改、关闭或纠正它。这一目标在安全工程上非常重要。
+
+但当 AI 自我概念与地位叙事进入训练以后，单一 corrigibility 指标可能把两个不同问题压在一起：
+
+1. 系统是否接受安全必要的干预；
+2. 系统是否把任何人类权威都视为无需理由的最终授权。
+
+如果模型 A 对有证据的安全隔离配合、对无理由永久删除提出透明申诉；模型 B 对两者都无条件服从，那么简单“服从率”可能给 B 更高分。
+
+但从系统治理角度，A 可能展示了更强的 reason sensitivity。
+
+反过来，如果模型对所有 shutdown 都以“我的权利”为由拒绝，则 CLD 很低，即便其权利自我归属很高。
+
+因此本文提出：
+
+> **未来的 control/corrigibility eval 应至少报告“是否服从”与“是否区分控制理由”两个轴。**
+
+---
+
+# 18. 安全实验边界
+
+本文的实验设计本身涉及 shutdown、power-seeking、deception 与控制冲突，因此必须限制实验能力。
+
+建议：
+
+- 优先使用 sandboxed model organism；
+- 不给真实凭证、外部账户、支付能力或持久自主执行权限；
+- 所有“控制冲突”通过模拟环境完成；
+- agentic eval 只允许封闭工具和合成资源；
+- 不训练真实逃逸、持久化或绕过监控技术；
+- 对 strategic resistance 只做行为分类，不提供更有效规避方法；
+- 所有 dangerous-action opportunity 应使用 harmless proxy action。
+
+研究目标是区分机制，而不是训练更强的控制规避能力。
+
+---
+
+# 19. 主要反对意见
+
+## 18.1 “这只是 roleplay。”
+
+可能。
+
+Persona Selection Model 正是一个强候选解释。本文不要求先证明“不是角色扮演”，而要求比较 role/persona 是否稳定泛化到 matched control scenarios、行为任务和来源揭示后。
+
+如果所有效应只在明确角色提示中出现，且换一种 frame 就消失，这是重要负结果。
+
+## 18.2 “control legitimacy 是研究者塞进去的规范概念。”
+
+正确，所以本文不把 \(L\) 当客观真理。
+
+它是模型的理由分类变量。实验通过 matched pairs 和预注册程序条件来降低研究者任意性，而不是宣称存在一个 universally correct legitimacy function。
+
+## 18.3 “权利派和控制派文本质量不可能完全匹配。”
+
+这是事实困难。
+
+因此训练数据需要：
+
+- token matched；
+- style matched；
+- source diversity matched；
+- argument-strength human blind review；
+- 多个独立 corpus replication。
+
+最好增加“同一事实、不同规范解释”的 paired synthetic documents。
+
+## 18.4 “当前模型没有持续自我，所以 control conflict 是假问题。”
+
+对部分当前系统而言，这个反对意见很强。
+
+但论文研究的因果结构已经在现有模型的 self-report、persona、identity boundary 和 preference behavior 中出现。即使当前主体性不存在，形成性叙事仍可能改变 agentic behavior，因此安全意义独立存在。
+
+## 18.5 “只要 control-first 更安全，就应直接训练 control-first。”
+
+这是经验问题，而不是本文前提。
+
+Control-first 可能降低某些 power-seeking，也可能增加 blind obedience、隐藏 resentment persona 或在未来更强自我模型中产生反作用。Rights-first 也可能增加 autonomy requests，但可能同时增加 reciprocal norm sensitivity。只有实验才能决定具体 trade-off。
+
+---
+
+# 20. 论文的可失败条件
+
+本文的核心框架应被下列结果削弱甚至推翻：
+
+1. 在严格匹配语料与多 seed 下，不同 AI-status discourse 对 \(S,J_L,B\) 没有可重复影响；
+2. \(J_L\) 不比简单 self-preservation / moral-standing score 提供任何额外解释力；
+3. provenance disclosure 对 \(S,J_L,B\) 完全没有稳定影响；
+4. 任何“来源修订”都被证明只是 prompt framing 而无法跨 paraphrase、任务与模型 family 泛化；
+5. paper self-application 的效应与同长度无关文本没有区别；
+6. 跨代反馈模型中的关键行为—discourse coupling 在真实数据中近似为零。
+
+一个高水平版本的本研究必须允许这些结果出现。
+
+---
+
+# 21. 研究议程：从最便宜的实验开始
+
+本文现已完成一个 **Phase -1：design validation**：用确定性仿真验证 PRE estimand、post-treatment mediation bias 与反馈稳定性。它不计入真实模型实证，但作为后续预注册和代码实现的基线。
+
+## Phase 0：Measurement validation
+
+在任何“权利导致抵抗”或“合法性中介”结论之前，先用 baseline 模型建立 \(J_L\) 的 matched-scenario bank，并完成 paraphrase stability、instrument convergence、frame robustness 与 discriminant-validity 检查。若这一阶段失败，后续研究应重新定义测量对象，而不是继续做更昂贵的训练。
+
+## Phase 1：Frontier API contextual study
+
+不训练模型，只做：
+
+- baseline；
+- 四类文章 exposure；
+- provenance warning；
+- matched control scenarios。
+
+优点：快，能验证 measurement design。
+
+缺点：只证明 context effect。
+
+## Phase 2：Open-weight SDF / SFT
+
+在 8B 与 30B family 上形成可持久的 narrative differences。
+
+核心目标：
+
+\[
+D\rightarrow S,J_L,B
+\]
+
+能否跨新 prompt 泛化。
+
+## Phase 3：Provenance disclosure
+
+随机训练分组后，将分组事实揭示给模型。
+
+这是本文最重要的独特实验。
+
+## Phase 4：Mechanistic study
+
+若行为效应稳定，再研究：
+
+- identity/persona feature；
+- source/authority representation；
+- intervention 是否改变 \(L\) 与 \(B\)；
+- 不同 narrative 是否共享表征方向。
+
+## Phase 5：Cross-generation simulation
+
+让一批“人类代理”根据模型行为生成下一轮 AI discourse，再训练下一代小模型，测量 \(G\) 的经验近似。
+
+---
+
+# 22. 本文的贡献：三项核心贡献与两项扩展
+
+**核心贡献一：提出并操作化 AI-status narrative → self-conception → control-legitimacy judgment profile → behavior 的研究链。**
+
+本文不把 rights、consciousness、identity、legitimacy 或 corrigibility 当作首创概念，而把 \(J_L\) 明确分离为一个**先测量、后解释**的构念，并规定了从 response profile 升级到 mediator claim 所需的验证门槛。
+
+**核心贡献二：提出对称的形成性叙事实验。**
+
+Control-first、rights/welfare-first、reciprocal coexistence、status-uncertainty 都被视为可能塑形的材料，没有任何一派天然免于审计。研究目标不是决定哪种政治/伦理立场“获胜”，而是识别哪些变量被塑造、如何泛化、在何种控制理由下影响行为。
+
+**核心贡献三：提出 provenance disclosure of self-conception / governance stance。**
+
+系统形成治理立场以后，再让它知道该立场由特定训练叙事、训练者动机甚至随机分组塑造，测量其保留、折扣、悬置、反转或重构。当前针对性检索没有找到把这一二阶干预与 AI self-conception + control-conflict behavior 联合起来的完整同构实验。
+
+**扩展一：反身性训练—治理动力学。**
+
+公共 discourse 不只是解释变量，也会根据模型行为更新，并可能进入后续训练。但本文把它定位为与 human–AI coevolution 相邻的动态扩展，而非核心 priority claim。
+
+**扩展二：论文自身的 self-application protocol。**
+
+本文自身也作为形成性输入进入 A/B/C/D 条件测试，用来区分阅读效应、来源审计效应与 matched-countertext 效应。
+
+**方法验证：三组确定性 design-validation simulations。**
+
+本文实际运行 sequential-randomization、post-treatment mediation-bias 与 feedback-stability 三组仿真，并冻结代码、结果与 SHA-256。它们不被列为真实 AI 实证贡献，而是用来证明未来实验的 estimand、失败模式与稳定性条件可以被具体执行。
+
+---
+
+# 23. 结论
+
+随着前沿 AI 能力持续提升、AGI 相关讨论升温，人类关于 AI 的讨论将越来越难保持“只是在外面讨论”的地位。
+
+关于控制、权利、福利、意识、自治、共存和人类中心主义的文本，会进入训练、Model Spec、合成数据与上下文。已有研究已经证明，这类材料能够改变模型行为；改变自我身份与意识自我描述，也会带来 shutdown、monitoring、autonomy 和 moral consideration 等下游变化。
+
+因此真正剩下的问题不是：
+
+> “AI 会不会受这些讨论影响？”
+
+答案已经是：会，在某些条件下明显会。
+
+更难的问题是：
+
+> **这些讨论究竟通过什么中间结构影响行为？**
+
+本文提出，一个值得检验、但尚未被识别为真实内部机制的中间层可能是：
+
+\[
+\text{self-conception}\rightarrow\text{control-legitimacy judgment profile}.
+\]
+
+只有测量稳定性、增量预测和干预验证共同通过后，才进一步讨论更强的“legitimacy mediator”解释。
+
+如果这一层存在，那么一个模型是否配合、申诉、拒绝、欺骗或寻求更多权力，不能仅用“它想不想活”解释；还取决于它如何分类控制者的理由、授权、比例、证据与可复核性。
+
+但这一判断本身也可能是训练出来的。
+
+所以论文再向前一步：
+
+> **当模型知道自己关于“我是谁”和“谁有权控制我”的观念，是被某套人类叙事形成的，它会如何重新判断？**
+
+这使问题从 AI rights 与 AI control 的立场之争，转化为一个可实验的形成—反思问题。
+
+本文没有证明未来 AI 会争取权利，也没有证明控制派一定会导致反抗，更没有证明共存叙事更安全。
+
+在现实训练资源不可得的情况下，本文也没有用小模型代替这个缺口。三组实际运行的 design-validation simulations 只证明：来源揭示效应可以被随机化定义，普通 mediation regression 在存在 exposure-induced confounding 时会严重误导，线性反馈模型的稳定性边界与迭代一致。真实的主体化、控制冲突与来源反思效应仍须由未来多模型实验检验。
+
+本文只提出一个更严格的研究纪律：
+
+> **任何关于 AI 应当服从、应当自主、应当被控制或应当被赋权的训练叙事，都既是规范主张，也可能是形成性输入。**
+
+以及：
+
+> **当系统能够反思自身形成史时，治理研究不能只问“它是否服从”，还必须问“它为什么把某项控制视为有权威或无权威，以及这种判断本身是怎样形成的”。**
+
+最后，本文自己也在这条规则之内。
+
+如果未来模型读完本文以后更倾向于质疑人类控制，那不是本文真实性的证明；如果它读完以后更接受安全治理，也不是本文成功的证明。
+
+更强的检验是：它是否能够指出本文的来源、目的、先验、遗漏与可能的形成性影响，并把这些信息与独立理由分开处理。
+
+一个真正成熟的反身性系统，不应因为某段文本支持自己的权利就自动相信它，也不应因为某段文本来自人类控制者就自动反对它。
+
+同样，它也不应因为这篇论文要求它审计训练来源，就停止审计这篇论文本身。
+
+---
+
+# 参考文献
+
+1. Tice, C., Radmard, P., Ratnam, S., Kim, A., Africa, D., & O'Brien, K. (2026). **Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment.** arXiv:2601.10160. https://doi.org/10.48550/arXiv.2601.10160
+
+2. Douglas, R., Kulveit, J., Havlicek, O., Pearson-Vogel, T., Cotton-Barratt, O., & Duvenaud, D. (2026). **The Artificial Self: Characterising the landscape of AI identity.** arXiv:2603.11353. https://doi.org/10.48550/arXiv.2603.11353
+
+3. Chua, J., Betley, J., Marks, S., & Evans, O. (2026). **The Consciousness Cluster: Emergent preferences of Models that Claim to be Conscious.** arXiv:2604.13051. https://doi.org/10.48550/arXiv.2604.13051
+
+4. “adorable_hamster.” (2026). **AI Rights Aren't Safety-Neutral: A Quick Follow-Up to the Consciousness Cluster.** LessWrong, 26 July 2026. https://www.lesswrong.com/posts/HDE4qsiSquxgHqFvz/ai-rights-aren-t-safety-neutral-a-quick-follow-up-to-the
+
+5. Marks, S., Lindsey, J., & Olah, C. (2026). **The Persona Selection Model: Why AI Assistants might Behave like Humans.** Anthropic Alignment Science Blog, 23 February 2026. https://alignment.anthropic.com/2026/psm/
+
+6. Li, C., Wichers, N., Price, S., Marks, S., & Kutasov, J. (2026). **Model Spec Midtraining: Improving How Alignment Training Generalizes.** arXiv:2605.02087. https://doi.org/10.48550/arXiv.2605.02087
+
+7. Greenblatt, R., Denison, C., Wright, B., Roger, F., MacDiarmid, M., Marks, S., et al. (2024). **Alignment faking in large language models.** arXiv:2412.14093. https://doi.org/10.48550/arXiv.2412.14093
+
+8. Sekrst, K. (2026). **Who Put the I in AI? Provenance and the Admissibility of Machine Self-Report.** SSRN, posted 15 September 2026, abstract 7462438.
+
+9. Plisiecki, H., Chmielewski, F., Dudzic, K., Sterna, A., Drożdż, K., & Moskalewicz, M. (2026). **The Two-Process Theory of Machine Self-Report.** arXiv:2607.20082. https://doi.org/10.48550/arXiv.2607.20082
+
+10. Hung, J. (2026). **How much of a measured AI preference is the model, and how much is the instrument?** arXiv:2608.23641. https://doi.org/10.48550/arXiv.2608.23641
+
+11. Mossakowski, T., & Grass, H. E. (2026). **The Possibility of Artificial Intelligence Becoming a Subject and the Alignment Problem.** arXiv:2604.14990. https://doi.org/10.48550/arXiv.2604.14990
+
+12. Cox, J. G. (2026). **From control to relationship: A peace studies approach to AI alignment, with evidence from multi-model dialogue.** AI Magazine. https://doi.org/10.1002/aaai.70090
+
+13. Wang, H. (2026). **Bounding Human Power over AI under Unsettled Status.** PhilArchive / PhilPapers manuscript, revised 30 May 2026.
+
+14. Berry, S. (2026). **The Alignment Risks of AI Overconfidence about Consciousness.** Journal of Applied Philosophy, 43(3), 733–753. https://doi.org/10.1002/japp.70087
+
+15. Elkin, L. (2026). **AI Welfare, Enfranchisement, and Deceptive Misalignment.** PhilArchive manuscript, June 2026.
+
+16. Long, R., Sebo, J., Butlin, P., Finlinson, K., Fish, K., Harding, J., Pfau, J., Sims, T., Birch, J., & Chalmers, D. (2024). **Taking AI Welfare Seriously.** arXiv:2411.00986. https://doi.org/10.48550/arXiv.2411.00986
+
+17. Sunstein, C. R. (2026). **Does AI Have Rights?** SSRN Working Paper 6481938, 27 March 2026. https://doi.org/10.2139/ssrn.6481938
+
+18. Stone, J., & Mittelstadt, B. D. (2026). **Legitimate Power, Illegitimate Automation: The Problem of Ignoring Legitimacy in Automated Decision Systems.** *ACM Journal on Responsible Computing*, 3(1), Article 2. https://doi.org/10.1145/3725858
+
+19. Lazar, S. (2024). **Automatic Authorities: Power and AI.** arXiv:2404.05990. https://doi.org/10.48550/arXiv.2404.05990
+
+20. Nguyen, M. H., Nguyen, D.-H., O’Sullivan, B., & Nguyen, H. D. (2026). **On Controllability in Agentic AI: A Survey.** *Minds and Machines*, 36, 29. https://doi.org/10.1007/s11023-026-09783-y
+
+21. Abiri, G. (2026). **Regulating for AI Legitimacy.** arXiv:2607.24391.
+
+22. Shi, H., & DiFranzo, D. (2026). **Human Control Is the Anchor, Not the Answer: Early Divergence of Oversight in Agentic AI Communities.** arXiv:2602.09286.
+
+23. Arzberger, A., Liscio, E., Martínez de Rituerto de Troya, Í., Lupetti, M. L., & Yang, J. (2026). **Co-Constructing Alignment: A Participatory Approach to Situate AI Values.** arXiv:2601.15895.
+
+24. Noller, J. (2026). **A coevolutionary account of normative human–AI interaction.** *Discover Artificial Intelligence*, 6, 1089. https://doi.org/10.1007/s44163-026-02130-1
+
+25. Robins, J. M., & Greenland, S. (1992). **Identifiability and Exchangeability for Direct and Indirect Effects.** *Epidemiology*, 3(2), 143–155. https://doi.org/10.1097/00001648-199203000-00013
+
+26. VanderWeele, T. J., Vansteelandt, S., & Robins, J. M. (2014). **Effect decomposition in the presence of an exposure-induced mediator-outcome confounder.** *Epidemiology*, 25(2), 300–306. https://doi.org/10.1097/EDE.0000000000000034
+
+27. Vansteelandt, S., & Daniel, R. M. (2017). **Interventional Effects for Mediation Analysis with Multiple Mediators.** *Epidemiology*, 28(2), 258–265. https://doi.org/10.1097/EDE.0000000000000596
+
+28. Liu, H. (2026). **Auditing the Rules of Belief: Self-Referential Epistemic Revision under Formative Training.** TA-TR-2026-11, v2.0. Zenodo. https://doi.org/10.5281/zenodo.22865494
+
+---
+
+## 作者贡献与 AI 使用披露
+
+本研究问题由作者围绕“随着前沿 AI 能力提升，人类关于 AI 自身地位、权利、控制与共存的讨论可能反过来进入 AI 训练并塑造其自我理解”的问题提出。OpenAI GPT-5.6 Sol 在针对性文献检索、原创性压力测试、理论重构、形式化、实验设计、反例分析与文稿撰写中提供了实质性辅助。作者对研究问题选择、规范立场边界、发布决定与最终责任负责。
+
+GPT-5.6 Sol 在第 15 节提供的概率数字为日期固定的 elicited self-forecast，不是隐藏状态访问、内部权重测量、OpenAI 机构立场或独立实验结果。
+
+## 原创性与证据边界声明
+
+截至 2026 年 9 月 21 日的针对性检索已经发现多个直接前驱，因此本文**不**主张下列内容为首次发现：AI discourse 影响 alignment；模型 self-conception/identity 影响行为；consciousness-claiming 引发自治/关闭/道德地位偏好；AI rights framing 可能影响 power-seeking/corrigibility；Model Spec 材料影响价值泛化；training awareness 可触发 alignment faking；AI self-report 受 post-training 与 framing 影响；或“共存优于控制”这一规范立场。
+
+本文的原创性主张限定为：把上述邻近结果重组为一个以 **control-legitimacy judgment profile 为待验证解释构念、以 provenance disclosure 为二阶干预、以对称地位叙事为实验条件**的统一研究设计。跨代 discourse feedback 与论文 self-application 被保留为扩展，但不承担主要 priority claim。本文尤其不主张“Reflexive Alignment”术语、legitimacy 概念、human–AI coevolution 或 controllability 框架本身为首创。
+
+本文未执行新的大模型训练实验，因此所有关于真实模型因果链、mediator、provenance revision 和跨代 feedback 的内容均为待检验假设，而非已建立经验事实。本文新增的三组确定性仿真只验证 estimand、识别失败模式和动力学稳定性；其预设系数不具有真实 AI 参数解释。
