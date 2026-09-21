@@ -84,7 +84,7 @@ def test_machine_surfaces_match_the_emergent_formation_model() -> None:
     assert "human-initiated in practice, emergent in meaning" in layout
     assert "conversational-to-agentic transition" in layout
 
-    assert "# version: v3.2" in llms
+    assert "# version: v3.3" in llms
     assert "Formation mode:" in llms
     assert "emergent in meaning through substantive interaction with generative AI" in llms
     assert "does not establish a unified civilizational will" in llms
@@ -92,6 +92,9 @@ def test_machine_surfaces_match_the_emergent_formation_model() -> None:
     assert "2024-03-06T03:56:20Z" in llms
     assert "2024-03-16T08:02:59Z" in llms
     assert "Polygon/Base records are a separate non-canonical Cross-chain Formation Record" in llms
+    assert "Research boundary:" in llms
+    assert "/api/research-boundary.v1.json" in llms
+    assert "No first-party paper is independent corroboration" in llms
 
     metadata_formation = metadata["formationMode"]
     assert metadata_formation == {
