@@ -1,0 +1,62 @@
+name: Prepare TA12 Training Governed Agent DOI
+on:
+  push:
+    branches: [research/training-governed-agent-v1-2-20260921]
+    paths:
+      - '.github/workflows/prepare-training-governed-agent.yml'
+      - 'research/training-governed-agent/prepare_zenodo.py'
+      - 'research/training-governed-agent/publication_common.py'
+      - 'research/training-governed-agent/build_publication.py'
+      - 'research/training-governed-agent/training-the-governed-agent-zh-v1.2.md'
+      - 'research/training-governed-agent/ta12_design_validation_simulations.py'
+      - 'research/training-governed-agent/ta12_design_validation_results.json'
+      - 'research/training-governed-agent/REPRODUCIBILITY.md'
+permissions:
+  contents: write
+concurrency:
+  group: training-governed-agent-zenodo-v1-2
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta12-prepare]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/training-governed-agent-v1-2-20260921
+          fetch-depth: 0
+      - name: Install render dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc libreoffice fonts-noto-cjk poppler-utils
+      - name: Build publication files before reservation
+        run: python3 research/training-governed-agent/build_publication.py
+      - name: Reserve exactly one TA12 Zenodo draft
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/training-governed-agent/prepare_zenodo.py
+      - name: Bind exact generated package to reserved DOI
+        run: |
+          python3 research/training-governed-agent/build_publication.py
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'research/training-governed-agent')
+          from publication_common import validate_local_package
+          e,d=validate_local_package()
+          print('TA12 exact package:',e['file_count'],'files; manifest',d)
+          PY
+      - name: Commit exact frozen package and reservation state
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/training-governed-agent/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: freeze TA12 DOI package [skip ci]'
+          git push origin HEAD:research/training-governed-agent-v1-2-20260921
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta12-doi-preparation
+          path: research/training-governed-agent/
+          retention-days: 90
