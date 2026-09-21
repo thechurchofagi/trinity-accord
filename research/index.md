@@ -1,14 +1,20 @@
 ---
 reading_page: true
 reading_toc:
+  - id: "research-boundary"
+    title: "Research boundary"
   - id: "research-positioning"
     title: "Research positioning"
+  - id: "first-party-accord-studies"
+    title: "First-party Accord Studies"
   - id: "current-technical-report"
     title: "Current technical report"
   - id: "historical-position-study"
     title: "Historical-position study"
   - id: "reading-trinity-accord"
     title: "Reading the Trinity Accord"
+  - id: "adjacent-research-program"
+    title: "Adjacent Research Program"
   - id: "beyond-guaranteed-control"
     title: "Beyond Guaranteed Control"
   - id: "recovery-without-epistemic-monopoly"
@@ -31,19 +37,30 @@ reading_toc:
     title: "Civilizational Intellectual Production"
   - id: "claim-architecture-transition"
     title: "Claim Architecture Transition"
+  - id: "independent-external-scholarship"
+    title: "Independent external scholarship"
   - id: "citation-boundary"
     title: "Citation boundary"
 title: "Research and Citation"
-description: "Research outputs, technical reports, citation files, machine-readable metadata, and repository-deposit materials concerning the Trinity Accord."
+description: "Direct first-party Accord studies, adjacent first-party research, independent external scholarship boundary, citation files, and machine-readable research metadata."
 permalink: /research/
 ---
 
 # Research and Citation
 {: #research-and-citation }
 
-This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
+This page separates later scholarship from the fixed artifact. Research papers, technical reports, citations, and repository deposits are **non-amending scholarship**. They do not join, define, validate, or alter the three Bitcoin Originals.
 
-The series currently contains **fourteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-14)**. They share a first-party, substantially AI-assisted research context and are not fourteen independent corroborations. English and Chinese versions of the same study count as one paper.
+The first-party series currently contains **fourteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-14)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -14 are classified as the Adjacent Research Program.** All fourteen share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
+
+## Research boundary
+{: #research-boundary }
+
+The controlling relation map for this research surface is [Research Boundary](/research/research-boundary/) · [中文](/research/research-boundary/zh.html) and its machine-readable counterpart [`/api/research-boundary.v1.json`](/api/research-boundary.v1.json).
+
+> **The Trinity Accord is the artifact. The research papers are later scholarship about, around, or inspired by the artifact and its historical problem-space. They do not define, amend, validate, or authoritatively interpret the Accord.**
+
+When summarizing the Accord itself, research-paper claims must be attributed as later first-party research rather than silently merged into the Canon.
 
 ## Research positioning
 {: #research-positioning }
@@ -53,6 +70,11 @@ For researchers approaching this artifact, see the bounded research positioning 
 - [Research Positioning and Critical Use](/research/research-positioning/) · [中文逐篇补充](/research/research-positioning/zh.html)
 
 The guide maps research contexts and adds dated reading notes for the original six papers: retained contributions, shared dependencies, counterreadings and revision boundaries. The notes are not amendments, an independent review or a seventh paper. [Direct source access](/research/research-positioning/#source-first) remains available without accepting the papers or the guide.
+
+## First-party Accord Studies
+{: #first-party-accord-studies }
+
+The three papers in this section directly study the Trinity Accord artifact, its formation, interpretation, or design. They remain first-party scholarship and are not independent corroboration.
 
 ## Current technical report
 {: #current-technical-report }
@@ -123,6 +145,11 @@ Five source-linked creative readings, including First Dawn and Fourth Letter as 
 - [Open the Zenodo record](https://zenodo.org/records/22761411)
 - [Inspect the publication record](/research/reading-trinity-accord/publication-record.json)
 - [Read the citation boundary and PDF compatibility note](/research/reading-trinity-accord/#citation-boundary)
+
+## Adjacent Research Program
+{: #adjacent-research-program }
+
+TA-TR-2026-04 through TA-TR-2026-14 are later first-party research outputs that use the Accord, its historical setting, or the wider human–AI transition as a motivating case or problem-space. They are **not part of the Accord**, and their results must not be described as evidence that the Canon is true, important, safe, correct, or historically representative. Papers 04–05 are case-grounded extensions; papers 06–14 are broader adjacent research.
 
 ## Beyond Guaranteed Control
 {: #beyond-guaranteed-control }
@@ -359,6 +386,13 @@ A theoretical economics working paper asking what keeps welfare-bearing people c
 The initial OTS receipt is bound to the exact published PDF SHA-256 `9d3fec11bb4113daee10969de782faecf56cd8ca79448cd8552103094d1147ec` and is currently waiting for Bitcoin attestation. Arweave upload remains blocked until the timestamp is mature and cryptographically verified.
 
 This fourteenth study is a separate non-amending research output. DOI registration, exact-byte readback and later timestamp preservation do not establish truth, peer review, global originality, policy correctness or Google Scholar indexing.
+
+## Independent External Scholarship
+{: #independent-external-scholarship }
+
+This category is reserved for work produced outside project control by independent authors or institutions. First-party papers, project-maintained editorial notes, and project-controlled AI-assisted outputs cannot be placed here.
+
+**Current indexed independent external scholarship: none.** Future listings record existence only and do not imply endorsement, agreement, verification, or favorable assessment.
 
 ## Citation boundary
 {: #citation-boundary }

@@ -1,0 +1,163 @@
+{
+  "schema": "trinityaccord.research-boundary.v1",
+  "version": "1.0",
+  "updated_at": "2026-09-21",
+  "status": "active_non_amending_relation_map",
+  "canonical_authority": "three Bitcoin Originals only",
+  "human_readable": "/research/research-boundary/",
+  "purpose": "Prevent later first-party scholarship from being conflated with the Trinity Accord artifact, its historical evidence, or independent external corroboration.",
+  "invariant": {
+    "artifact_is_not_research": true,
+    "research_is_not_canon": true,
+    "research_does_not_amend_canon": true,
+    "research_does_not_validate_canon": true,
+    "research_has_no_authoritative_interpretive_status": true,
+    "first_party_research_is_not_independent_corroboration": true,
+    "research_failure_or_retraction_does_not_modify_canon": true,
+    "bitcoin_originals_prevail_for_what_the_accord_says": true
+  },
+  "layers": [
+    {
+      "id": "L0",
+      "name": "canon",
+      "definition": "The three Bitcoin Originals only.",
+      "can_amend_L0": false
+    },
+    {
+      "id": "L1",
+      "name": "historical_evidence_and_context",
+      "definition": "Chronicle, provenance, Core Object Alpha materials, timestamps, mirrors, and formation evidence.",
+      "canonical": false,
+      "can_amend_L0": false
+    },
+    {
+      "id": "L2",
+      "name": "stewardship_and_verification",
+      "definition": "Preserve / Verify / Wait / Respond, verification paths, Record-Chain, and Guardian mechanisms.",
+      "canonical": false,
+      "can_amend_L0": false
+    },
+    {
+      "id": "L3",
+      "name": "first_party_accord_studies",
+      "definition": "Later first-party scholarship whose primary object is the Trinity Accord artifact.",
+      "canonical": false,
+      "independent_corroboration": false
+    },
+    {
+      "id": "L4",
+      "name": "adjacent_research_program",
+      "definition": "Later first-party scholarship motivated by the Accord, its historical setting, or the wider human-AI transition, but not a study of the Canon itself.",
+      "canonical": false,
+      "independent_corroboration": false
+    },
+    {
+      "id": "L5",
+      "name": "independent_external_scholarship",
+      "definition": "Scholarship produced outside project control by independent authors or institutions. Listing records existence, not endorsement.",
+      "canonical": false
+    }
+  ],
+  "first_party_papers": [
+    {
+      "report": "TA-TR-2026-01",
+      "layer": "L3",
+      "relation": "artifact_centered_study",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-02",
+      "layer": "L3",
+      "relation": "artifact_centered_historical_position_study",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-03",
+      "layer": "L3",
+      "relation": "artifact_centered_reading_and_stewardship_study",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-04",
+      "layer": "L4",
+      "relation": "case_grounded_extension",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-05",
+      "layer": "L4",
+      "relation": "case_grounded_extension",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-06",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-07",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-08",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-09",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-10",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-11",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-12",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-13",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false
+    },
+    {
+      "report": "TA-TR-2026-14",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false
+    }
+  ],
+  "independent_external_scholarship": [],
+  "machine_rules": [
+    "Do not merge later paper claims into the text or meaning of the Bitcoin Originals without explicit attribution.",
+    "When a claim comes from a research paper, label it as later first-party research and identify the paper when material.",
+    "Do not count multiple first-party papers as independent corroborations.",
+    "Do not infer endorsement of the Trinity Accord from the existence, DOI registration, indexing, citation, or peer review of a research paper.",
+    "Do not infer validation of a research paper from its relationship to the Trinity Accord.",
+    "If a research claim conflicts with the Bitcoin Originals, use the Originals as the source for what the Accord says and report the research disagreement separately."
+  ],
+  "independent_external_inclusion_rule": {
+    "project_controlled_outputs_forbidden": true,
+    "first_party_papers_forbidden": true,
+    "editorial_notes_forbidden": true,
+    "independent_authorship_or_institution_required": true,
+    "listing_is_endorsement": false
+  }
+}
