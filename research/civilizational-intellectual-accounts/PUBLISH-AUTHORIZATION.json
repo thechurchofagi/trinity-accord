@@ -1,0 +1,11 @@
+{
+  "report_number": "TA-TR-2026-13",
+  "version": "1.0",
+  "record_id": 22866775,
+  "doi": "10.5281/zenodo.22866775",
+  "authorization": "PUBLISH_EXACT_REVIEWED_PACKAGE",
+  "expected_file_count": 11,
+  "prior_doi_records_must_not_be_modified": true,
+  "bitcoin_originals_must_not_be_modified": true,
+  "note": "Publish only the exact package frozen by the successful TA13 preparation workflow; then require anonymous exact-byte readback and DOI resolver match."
+}
