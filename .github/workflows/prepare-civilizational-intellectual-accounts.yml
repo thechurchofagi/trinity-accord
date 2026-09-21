@@ -29,7 +29,7 @@ jobs:
       - name: Install publication dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended fonts-noto-cjk fonts-dejavu-core poppler-utils
+          sudo apt-get install -y pandoc libreoffice fonts-noto-cjk poppler-utils
       - name: Build publication files before reservation
         run: python3 research/civilizational-intellectual-accounts/build_publication.py
       - name: Reserve exactly one TA13 Zenodo draft
