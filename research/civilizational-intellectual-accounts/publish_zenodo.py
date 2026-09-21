@@ -10,7 +10,7 @@ def resolver_matches_record(status,final_url,record_id):
     return status==200 and f.scheme=='https' and f.hostname=='zenodo.org' and not f.username and not f.password and f.port in (None,443) and not f.query and not f.fragment and f.path.rstrip('/') in (f'/records/{record_id}',f'/record/{record_id}')
 def check_doi_resolution(doi,record_id):
     result={'state':'RESOLVER_CHECK_UNAVAILABLE','matches_record':False}
-    for delay in (0,3,8):
+    for delay in (0,10,30,60,120):
         if delay: time.sleep(delay)
         try:
             req=urllib.request.Request('https://doi.org/'+doi,headers={'User-Agent':'TrinityAccord-TA13-DOICheck/1.0'})
