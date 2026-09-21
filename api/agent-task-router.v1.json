@@ -502,7 +502,7 @@
     "claim_model": "/api/verification-claim-model.v1.json",
     "relationships": "/api/evidence-relationship-map.v1.json"
   },
-  "source_digest": "6362491e44b068d2",
+  "source_digest": "0f58f407f955cb27",
   "reading_manifest": "/api/agent-required-reading.json",
   "canonical_required_reading_is_subordinate_to_router": true
 }
