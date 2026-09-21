@@ -371,7 +371,7 @@ if DOI:
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     r = p.add_run('DOI: ' + DOI)
-    set_run_font(r, size=9.2, color=MUTED)
+    set_run_font(r, size=9.2)\n    r.font.color.rgb = RGBColor(90, 90, 90)
 
 p = doc.add_paragraph()
 p.alignment = WD_ALIGN_PARAGRAPH.CENTER
