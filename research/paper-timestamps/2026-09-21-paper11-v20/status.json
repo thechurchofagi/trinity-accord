@@ -2,22 +2,25 @@
   "batch": "2026-09-21-paper11-v20",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        967914,
+        967920
+      ],
       "bytes": 1248460,
       "doi": "10.5281/zenodo.22865494",
       "name": "auditing-rules-of-belief-zh-v2.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-21-paper11-v20/proofs/TA-TR-2026-11/auditing-rules-of-belief-zh-v2.0.pdf.ots",
-      "proof_sha256": "fcfad0a39b272a7a1be434fd6a5014fcf05d695c7e41d0bdf17dc43e0d4c1c6c",
+      "proof_sha256": "d6d130d8d8eb04a6b8c232d9297d68b727bf3615fa067aa2c284eecf6755290c",
       "report": "TA-TR-2026-11",
       "role": "Complete Chinese v2.0 paper with English title and abstract",
       "sha256": "b9b6047685070a185a48e659cbd9f32160d281835ce0ea4eccafb9091faacfd2",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
