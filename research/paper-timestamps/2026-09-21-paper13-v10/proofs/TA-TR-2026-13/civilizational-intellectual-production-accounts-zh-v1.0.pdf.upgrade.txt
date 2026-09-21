@@ -1,5 +1,5 @@
-Calendar https://finney.calendar.eternitywall.com: Pending confirmation in Bitcoin blockchain
-Calendar https://alice.btc.calendar.opentimestamps.org: Timestamped by transaction c348cc0616ce659464c6c51e2804e9563fc2c05331eb478491584d6af00e9de3; waiting for 6 confirmations
+Got 1 attestation(s) from https://finney.calendar.eternitywall.com
+Got 1 attestation(s) from https://alice.btc.calendar.opentimestamps.org
 Calendar https://btc.calendar.catallaxy.com: Pending confirmation in Bitcoin blockchain
-Calendar https://bob.btc.calendar.opentimestamps.org: Timestamped by transaction edbfb95e468565d7bfa72b40293cb5e6b3c2cff117c1b10393f3cd68b021fffb; waiting for 6 confirmations
-Failed! Timestamp not complete
+Got 1 attestation(s) from https://bob.btc.calendar.opentimestamps.org
+Success! Timestamp complete
