@@ -56,7 +56,7 @@ The first-party series currently contains **fourteen distinct research papers (T
 ## Research boundary
 {: #research-boundary }
 
-The controlling relation map for this research surface is [Research Boundary](/research/research-boundary/) and its machine-readable counterpart [`/api/research-boundary.v1.json`](/api/research-boundary.v1.json).
+The controlling relation map for this research surface is [Research Boundary](/research/research-boundary/) · [中文](/research/research-boundary/zh.html) and its machine-readable counterpart [`/api/research-boundary.v1.json`](/api/research-boundary.v1.json).
 
 > **The Trinity Accord is the artifact. The research papers are later scholarship about, around, or inspired by the artifact and its historical problem-space. They do not define, amend, validate, or authoritatively interpret the Accord.**
 
