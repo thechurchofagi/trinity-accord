@@ -1,0 +1,12 @@
+{
+  "report_number": "TA-TR-2026-14",
+  "version": "1.1",
+  "record_id": 22871209,
+  "doi": "10.5281/zenodo.22871209",
+  "authorization": "PUBLISH_EXACT_REVIEWED_PACKAGE",
+  "expected_file_count": 15,
+  "prior_doi_records_must_not_be_modified": true,
+  "bitcoin_originals_must_not_be_modified": true,
+  "note": "Publish only the exact package frozen by TA14 preparation workflow run 35583993953 and bound to EXPECTED-PUBLICATION.json; require anonymous exact-byte readback after publication.",
+  "resume_same_published_record": true
+}

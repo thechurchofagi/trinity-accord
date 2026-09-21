@@ -1,0 +1,49 @@
+name: Publish TA14 Claim Architecture
+on:
+  push:
+    branches: [research/claim-architecture-transition-v1-1-20260921]
+    paths:
+      - '.github/workflows/publish-claim-architecture-transition.yml'
+      - 'research/claim-architecture-transition/PUBLISH-AUTHORIZATION.json'
+      - 'research/claim-architecture-transition/visual-review.json'
+permissions:
+  contents: write
+concurrency:
+  group: claim-architecture-zenodo-v1-1
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta14-publish]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/claim-architecture-transition-v1-1-20260921
+          fetch-depth: 0
+      - name: Validate exact reviewed package
+        run: |
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'research/claim-architecture-transition')
+          from publication_common import validate_local_package
+          e,d=validate_local_package()
+          print('Validated TA14',e['doi'],e['file_count'],'files',d)
+          PY
+      - name: Publish only reserved TA14 record and verify anonymous readback
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/claim-architecture-transition/publish_zenodo.py
+      - name: Preserve publication receipt
+        if: always()
+        run: python3 research/claim-architecture-transition/publication_common.py --persist-states
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta14-publication
+          path: |
+            research/claim-architecture-transition/publication-record.json
+            research/claim-architecture-transition/publication-attempt.json
+            /tmp/ta14-public-readback/
+          retention-days: 90
+          if-no-files-found: warn
