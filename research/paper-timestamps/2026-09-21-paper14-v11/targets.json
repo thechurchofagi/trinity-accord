@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-21-paper14-v11",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-14",
+      "record_id": 22871209,
+      "doi": "10.5281/zenodo.22871209",
+      "version": "1.1",
+      "title": "The Claim Architecture Transition: Transformative AI, Real Claim Closure, and General Equilibrium Beyond Wage-Based Distribution",
+      "receipt_path": "research/claim-architecture-transition/publication-record.json",
+      "pdfs": [
+        {
+          "name": "claim-architecture-transition-v1.1.pdf",
+          "bytes": 472126,
+          "sha256": "9d3fec11bb4113daee10969de782faecf56cd8ca79448cd8552103094d1147ec",
+          "role": "Complete English v1.1 theoretical economics working paper"
+        }
+      ]
+    }
+  ]
+}
