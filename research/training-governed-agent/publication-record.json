@@ -1,0 +1,100 @@
+{
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "report_number": "TA-TR-2026-12",
+  "title": "Training the Governed Agent: AI-Status Narratives, Self-Conception, and the Perceived Legitimacy of Human Control",
+  "version": "1.2",
+  "record_id": 22866205,
+  "doi": "10.5281/zenodo.22866205",
+  "record_url": "https://zenodo.org/records/22866205",
+  "submitted": true,
+  "file_count": 11,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1117,
+      "sha256": "1d6b97c0e341fb77c3970fcc2b220dc5183ec93abe7920ccba29e632b5c6561d",
+      "public_url": "https://zenodo.org/api/records/22866205/files/README-LICENSE.txt/content"
+    },
+    {
+      "name": "REPRODUCIBILITY.md",
+      "bytes": 2427,
+      "sha256": "14e7084a13d7284991d57f0ae222b6d9e3bc2c6a16a4d98eb50d6c49d36bd2e1",
+      "public_url": "https://zenodo.org/api/records/22866205/files/REPRODUCIBILITY.md/content"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 1402,
+      "sha256": "cd8481f5b90f88ca0f5c18baa1540b1d98d1cce8dad38f0dc1eae5e8d73be36a",
+      "public_url": "https://zenodo.org/api/records/22866205/files/REVIEW-AND-SOURCES.md/content"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 917,
+      "sha256": "8828dce410b1d3e977d5d2bb5d49121944b59cb268da651afe48175012f9efa1",
+      "public_url": "https://zenodo.org/api/records/22866205/files/SHA256SUMS.txt/content"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 300,
+      "sha256": "f70bbf8f6b632600360e3be3558f872fbd9515618142b3622327d84391b63fd2",
+      "public_url": "https://zenodo.org/api/records/22866205/files/citation.bib/content"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 522,
+      "sha256": "07e7944d7ee2f406e1085328af3aebb26c05bb4b7e8ee5500b98cf5b7705ff19",
+      "public_url": "https://zenodo.org/api/records/22866205/files/citation.csl.json/content"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 251,
+      "sha256": "b60487fcc4f38c792430fccedf5b3cae6adf129ac21b69751b305c88d2c1753e",
+      "public_url": "https://zenodo.org/api/records/22866205/files/citation.ris/content"
+    },
+    {
+      "name": "ta12_design_validation_results.json",
+      "bytes": 7241,
+      "sha256": "897db0f961df7e34726d957ee6c9ecb0378d10a450d957edc9023e2efa912b76",
+      "public_url": "https://zenodo.org/api/records/22866205/files/ta12_design_validation_results.json/content"
+    },
+    {
+      "name": "ta12_design_validation_simulations.py",
+      "bytes": 6072,
+      "sha256": "e4a5b590bce2eabe2d23f99c7136ed43516d315381abb8eb438ceb3ace64151f",
+      "public_url": "https://zenodo.org/api/records/22866205/files/ta12_design_validation_simulations.py/content"
+    },
+    {
+      "name": "training-the-governed-agent-zh-v1.2.md",
+      "bytes": 72800,
+      "sha256": "12853abe2cf64bfb6c50fc3e4ae56bbd5ab8a60d5b1a0a9b59e981bd3c21346b",
+      "public_url": "https://zenodo.org/api/records/22866205/files/training-the-governed-agent-zh-v1.2.md/content"
+    },
+    {
+      "name": "training-the-governed-agent-zh-v1.2.pdf",
+      "bytes": 674718,
+      "sha256": "68347cf77e86ba72d62b2bf91e5a0122825dc3f2d7f0887416629bc156faf87f",
+      "public_url": "https://zenodo.org/api/records/22866205/files/training-the-governed-agent-zh-v1.2.pdf/content"
+    }
+  ],
+  "expected_manifest_sha256": "9cf05e90a242cb3938d6e55dc2f1d948d0bc1747a7f22f46674107da5b968cdc",
+  "public_readback_authenticated": false,
+  "doi_resolver": {
+    "state": "RESOLVER_PASS",
+    "http_status": 200,
+    "final_url": "https://zenodo.org/records/22866205",
+    "matches_record": true
+  },
+  "public_file_readback_pass": true,
+  "doi_resolution_pass": true,
+  "source_commit": "c1ccb3f09233056bdf5a7801dff7014ec037a997",
+  "workflow_run_id": "35550729850",
+  "was_already_published": false,
+  "prior_doi_records_modified": false,
+  "bitcoin_originals_modified": false,
+  "new_research_papers": 1,
+  "peer_reviewed": false,
+  "global_originality_certified": false,
+  "google_scholar_indexing": "NOT_ASSERTED",
+  "manuscript_language": "zho",
+  "english_text_role": "TITLE_AND_ABSTRACT_ONLY"
+}
