@@ -1,0 +1,12 @@
+{
+  "schema": "trinityaccord.ta12-publication-authorization.v1",
+  "report_number": "TA-TR-2026-12",
+  "version": "1.2",
+  "record_id": 22866205,
+  "doi": "10.5281/zenodo.22866205",
+  "state": "AUTHORIZED_FOR_EXACT_FROZEN_PUBLICATION",
+  "authorized_scope": "Publish only the exact 11-file package bound by EXPECTED-PUBLICATION.json; do not modify prior DOI records or Bitcoin Originals.",
+  "expected_manifest_source": "research/training-governed-agent/EXPECTED-PUBLICATION.json",
+  "non_amending_boundary": true,
+  "prior_doi_records_modified": false
+}
