@@ -1,0 +1,23 @@
+{
+  "batch": "2026-09-21-paper13-v10",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 623302,
+      "doi": "10.5281/zenodo.22866775",
+      "name": "civilizational-intellectual-production-accounts-zh-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-21-paper13-v10/proofs/TA-TR-2026-13/civilizational-intellectual-production-accounts-zh-v1.0.pdf.ots",
+      "proof_sha256": "72a93a7568278eba13e9fa138f0a06a0c1f11e655049040abffed9592fbced4e",
+      "report": "TA-TR-2026-13",
+      "role": "Complete Chinese v1.0 theory-method paper with English title and abstract",
+      "sha256": "2785b1f7e20be977b883244da0526b144172f2ab6f3c64b5b235f5621fe7a32a",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 1,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}

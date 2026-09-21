@@ -1,0 +1,48 @@
+name: Publish TA13 Civilizational Intellectual Accounts
+on:
+  push:
+    branches: [research/civilizational-intellectual-accounts-v1-0-20260921]
+    paths:
+      - '.github/workflows/publish-civilizational-intellectual-accounts.yml'
+      - 'research/civilizational-intellectual-accounts/PUBLISH-AUTHORIZATION.json'
+permissions:
+  contents: write
+concurrency:
+  group: civilizational-intellectual-accounts-zenodo-v1-0
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta13-publish]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/civilizational-intellectual-accounts-v1-0-20260921
+          fetch-depth: 0
+      - name: Validate exact frozen package
+        run: |
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'research/civilizational-intellectual-accounts')
+          from publication_common import validate_local_package
+          e,d=validate_local_package()
+          print('Validated TA13',e['doi'],d)
+          PY
+      - name: Publish only reserved TA13 record and verify anonymous readback
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/civilizational-intellectual-accounts/publish_zenodo.py
+      - name: Preserve publication receipt
+        if: always()
+        run: python3 research/civilizational-intellectual-accounts/publication_common.py --persist-states
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta13-publication
+          path: |
+            research/civilizational-intellectual-accounts/publication-record.json
+            research/civilizational-intellectual-accounts/publication-attempt.json
+            /tmp/ta13-public-readback/
+          retention-days: 90
+          if-no-files-found: warn

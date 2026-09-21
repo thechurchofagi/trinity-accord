@@ -93,7 +93,16 @@ def validate_config(batch, config):
             expected_identity = (paper['report'], paper['record_id'], paper['doi'], str(paper['version']), paper['title'])
             actual_identity = (receipt.get('report_number'), receipt.get('record_id'), receipt.get('doi'),
                                str(receipt.get('version')), receipt.get('title'))
-            if receipt.get('state') != 'PUBLISHED_AND_PUBLIC_READBACK_PASS' or actual_identity != expected_identity:
+            state = receipt.get('state')
+            public_bytes_verified = (
+                state == 'PUBLISHED_AND_PUBLIC_READBACK_PASS'
+                or (
+                    state == 'PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING'
+                    and receipt.get('submitted') is True
+                    and receipt.get('public_file_readback_pass') is True
+                )
+            )
+            if not public_bytes_verified or actual_identity != expected_identity:
                 raise ValueError(f'Published receipt identity mismatch: {paper["report"]}')
         for item in paper.get('pdfs', []):
             remote = public.get(item['name'])

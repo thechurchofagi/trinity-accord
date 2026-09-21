@@ -25,6 +25,10 @@ reading_toc:
     title: "Endogenous Reference Fields"
   - id: "auditing-rules-of-belief"
     title: "Auditing the Rules of Belief"
+  - id: "training-the-governed-agent"
+    title: "Training the Governed Agent"
+  - id: "civilizational-intellectual-production"
+    title: "Civilizational Intellectual Production"
   - id: "citation-boundary"
     title: "Citation boundary"
 title: "Research and Citation"
@@ -37,7 +41,7 @@ permalink: /research/
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
 
-The series currently contains **eleven distinct research papers (TA-TR-2026-01 through TA-TR-2026-11)**. They share a first-party, substantially AI-assisted research context and are not ten independent corroborations. English and Chinese versions of the same study count as one paper.
+The series currently contains **thirteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-13)**. They share a first-party, substantially AI-assisted research context and are not ten independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research positioning
 {: #research-positioning }
@@ -295,11 +299,49 @@ A theory-method preprint that shifts the audit target from proposition-level con
 
 This is a separate eleventh study with its own DOI. Its first OTS receipt has been created for the exact published PDF; Bitcoin attestation and therefore Arweave upload may remain pending until the timestamp calendars mature. Earlier paper proofs do not attest these bytes. Publication does not amend the three Bitcoin Originals or independently corroborate the preceding studies.
 
+## Training the Governed Agent
+{: #training-the-governed-agent }
+
+### Training the Governed Agent: AI-Status Narratives, Self-Conception, and the Perceived Legitimacy of Human Control
+
+TA-TR-2026-12 · Version 1.2 · 21 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial AI-assisted literature research, originality stress-testing, formalization, causal-design review, deterministic simulation work, drafting and editing are disclosed in the manuscript.
+
+训练被治理的智能体：AI 地位叙事、自我概念与人类控制合法性的反身性回路
+
+A theory-method preprint asking how AI-status narratives may shape model self-conception, judgments about the procedural legitimacy of human control, and control-conflict behavior, while treating provenance disclosure as a second-order intervention. It explicitly does not claim that AI discourse effects, identity effects, consciousness-claiming, rights framing, model-spec training, alignment faking, legitimacy, or human–AI coevolution are new discoveries. Three deterministic design-validation simulations validate estimands and identification logic; they are not frontier-model behavioral evidence.
+
+**Status:** Published open-access preprint; AI-assisted, human-responsible, not peer reviewed and non-amending. Eleven Zenodo assets passed anonymous exact-byte SHA-256 public readback and the DOI resolver matched the public record.
+
+- [DOI: 10.5281/zenodo.22866205](https://doi.org/10.5281/zenodo.22866205) · [Zenodo record and eleven files](https://zenodo.org/records/22866205)
+
+This is a separate twelfth study. It does not amend the three Bitcoin Originals or independently corroborate the preceding studies.
+
+## Civilizational Intellectual Production
+{: #civilizational-intellectual-production }
+
+### Civilizational Intellectual Production Satellite Accounts: A Partial-Identification Framework for Measuring the Human–AI Shift in Intellectual Production and Epistemic Governance
+
+TA-TR-2026-13 · Version 1.0 · 21 September 2026. Human author of record and responsible depositor: Hongju Liu. OpenAI GPT-5.6 Sol provided substantial literature research, originality stress-testing, formalization, deterministic simulation implementation, result checking, critical revision, drafting and packaging under human direction.
+
+文明智识生产卫星账户：测量人类—AI智识重心迁移的部分识别框架
+
+A theory-method paper proposing domain-first satellite accounts for **current-period, observable and externalized** intellectual-production flow, with separate Production and Epistemic Governance accounts. Human, AI and interaction contributions are treated as partially identified rather than forced into a unique point estimate; cross-domain weighting uncertainty, AI-use missingness, vintage quality revision and a conservative **Robust Intellectual Crossover** criterion are explicit parts of the framework. The paper does not claim to be the first knowledge satellite account, innovation account, partial-identification method, contribution-attribution method or AI-use disclosure framework.
+
+**Status:** Published Zenodo preprint; AI-assisted, human-responsible, not peer reviewed and non-amending. All eleven public assets passed anonymous byte-count and SHA-256 readback. Zenodo record 22866775 is public; the external DOI.org redirect is separately recorded as still propagating at the time of this index update. Three included simulations are stipulated design checks, not estimates of the real Human/AI composition of world intellectual production.
+
+- [DOI: 10.5281/zenodo.22866775](https://doi.org/10.5281/zenodo.22866775) · [Zenodo record and eleven files](https://zenodo.org/records/22866775)
+- [中文 Markdown](/research/civilizational-intellectual-accounts/published/civilizational-intellectual-production-accounts-zh-v1.0.md) · [中文 PDF](/research/civilizational-intellectual-accounts/published/civilizational-intellectual-production-accounts-zh-v1.0.pdf)
+- [Publication receipt](/research/civilizational-intellectual-accounts/publication-record.json) · [Exact package manifest](/research/civilizational-intellectual-accounts/EXPECTED-PUBLICATION.json)
+- [Reproducibility record](/research/civilizational-intellectual-accounts/published/REPRODUCIBILITY.md)
+- [OTS preservation status](/research/paper-timestamps/2026-09-21-paper13-v10/status.json)
+
+The initial OTS receipt is bound to the exact published PDF SHA-256 `2785b1f7e20be977b883244da0526b144172f2ab6f3c64b5b235f5621fe7a32a` and is currently waiting for Bitcoin attestation. Arweave upload remains blocked until the timestamp is mature and cryptographically verified. This thirteenth study does not amend the three Bitcoin Originals or independently corroborate earlier first-party papers.
+
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all eleven studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all thirteen studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the eleven-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the thirteen-paper series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.

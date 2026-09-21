@@ -1,0 +1,10 @@
+{
+  "state": "INCOMPLETE_REQUIRES_REVIEW_OR_SAME_RECORD_RESUMPTION",
+  "record_id": 22866775,
+  "doi": "10.5281/zenodo.22866775",
+  "phase": "doi_resolver_check",
+  "error_type": "RuntimeError",
+  "error": "Published files passed anonymous readback, but DOI resolution is pending; resume same record",
+  "workflow_run_id": "35555832507",
+  "new_record_creation": false
+}
