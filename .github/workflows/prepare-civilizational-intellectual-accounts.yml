@@ -1,0 +1,62 @@
+name: Prepare TA13 Civilizational Intellectual Accounts DOI
+on:
+  push:
+    branches: [research/civilizational-intellectual-accounts-v1-0-20260921]
+    paths:
+      - '.github/workflows/prepare-civilizational-intellectual-accounts.yml'
+      - 'research/civilizational-intellectual-accounts/prepare_zenodo.py'
+      - 'research/civilizational-intellectual-accounts/publication_common.py'
+      - 'research/civilizational-intellectual-accounts/build_publication.py'
+      - 'research/civilizational-intellectual-accounts/civilizational-intellectual-production-accounts-zh-v1.0.md'
+      - 'research/civilizational-intellectual-accounts/ta13_civilizational_intellectual_accounts_simulations.py'
+      - 'research/civilizational-intellectual-accounts/ta13_civilizational_intellectual_accounts_results.json'
+      - 'research/civilizational-intellectual-accounts/REPRODUCIBILITY.md'
+permissions:
+  contents: write
+concurrency:
+  group: civilizational-intellectual-accounts-zenodo-v1-0
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta13-prepare]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/civilizational-intellectual-accounts-v1-0-20260921
+          fetch-depth: 0
+      - name: Install publication dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended fonts-noto-cjk fonts-dejavu-core poppler-utils
+      - name: Build publication files before reservation
+        run: python3 research/civilizational-intellectual-accounts/build_publication.py
+      - name: Reserve exactly one TA13 Zenodo draft
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/civilizational-intellectual-accounts/prepare_zenodo.py
+      - name: Bind exact generated package to reserved DOI
+        run: |
+          python3 research/civilizational-intellectual-accounts/build_publication.py
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'research/civilizational-intellectual-accounts')
+          from publication_common import validate_local_package
+          e,d=validate_local_package()
+          print('TA13 exact package:',e['file_count'],'files; manifest',d)
+          PY
+      - name: Commit exact frozen package and reservation state
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/civilizational-intellectual-accounts/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: freeze TA13 DOI package [skip ci]'
+          git push origin HEAD:research/civilizational-intellectual-accounts-v1-0-20260921
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta13-doi-preparation
+          path: research/civilizational-intellectual-accounts/
+          retention-days: 90
