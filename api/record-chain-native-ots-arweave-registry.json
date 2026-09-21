@@ -3380,10 +3380,62 @@
         "ots_proof_bundle_arweave_archive_is_not_amendment": true,
         "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
       }
+    },
+    {
+      "anchored_file": "record-chain/ots/native-anchors/native-record-161-R-000000161-2ee0bb7fb39ca435-347124fc439d3d0f.native-record-chain-head-commitment.json",
+      "anchored_file_sha256": "347124fc439d3d0f2bbf6feb8f5b68225af85967117a3877b4127e90d2d0dd90",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-161-R-000000161-2ee0bb7fb39ca435-347124fc439d3d0f.anchor.json",
+      "ots_file": "record-chain/ots/native-anchors/native-record-161-R-000000161-2ee0bb7fb39ca435-347124fc439d3d0f.native-record-chain-head-commitment.json.ots",
+      "ots_file_sha256": "ed0095babb0d8759785231751471d8803fc2fe3b2f6e3c800d647ac70d47dc89",
+      "bundle_file": "record-chain/ots/native-arweave-bundles/native-record-161-R-000000161-2ee0bb7fb39ca435-347124fc439d3d0f.anchor.verified.arweave-bundle.json",
+      "bundle_sha256": "5f179cfe7610c2c9f3c335da8222662e1dc66f1ee73cc626e43f3f9f8f834b90",
+      "ots_status": "verified",
+      "bitcoin_attestation_embedded": true,
+      "bitcoin_verified": true,
+      "strict_bitcoin_verified": true,
+      "tx_id": null,
+      "gateway_url": null,
+      "wallet_address": null,
+      "archive_status": "registered_without_arweave_tx",
+      "uploaded_at": null,
+      "registered_at": "2026-09-21T13:19:49Z",
+      "boundary": {
+        "ots_proof_bundle_arweave_archive_is_mirror_only": true,
+        "ots_proof_bundle_arweave_archive_is_not_authority": true,
+        "ots_proof_bundle_arweave_archive_is_not_attestation": true,
+        "ots_proof_bundle_arweave_archive_is_not_amendment": true,
+        "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
+      }
+    },
+    {
+      "anchored_file": "record-chain/ots/native-anchors/native-record-160-R-000000160-d7c49dc0b7dafbb3-b0ca4bb3c03995bb.native-record-chain-head-commitment.json",
+      "anchored_file_sha256": "b0ca4bb3c03995bb20508083ae2e16a9b1a314cf6ab2bf6a6ae2f9704ec8930c",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-160-R-000000160-d7c49dc0b7dafbb3-b0ca4bb3c03995bb.anchor.json",
+      "ots_file": "record-chain/ots/native-anchors/native-record-160-R-000000160-d7c49dc0b7dafbb3-b0ca4bb3c03995bb.native-record-chain-head-commitment.json.ots",
+      "ots_file_sha256": "c8fd4707f188edab6a2d1dbd45dd49b721b6def26233de7cfc1c7c9e30e6e8e7",
+      "bundle_file": "record-chain/ots/native-arweave-bundles/native-record-160-R-000000160-d7c49dc0b7dafbb3-b0ca4bb3c03995bb.anchor.verified.arweave-bundle.json",
+      "bundle_sha256": "b2c5bf5c95bc070ac8a067276a024633080c53910bb9caaf8c0fc4842f56fdbf",
+      "ots_status": "verified",
+      "bitcoin_attestation_embedded": true,
+      "bitcoin_verified": true,
+      "strict_bitcoin_verified": true,
+      "tx_id": null,
+      "gateway_url": null,
+      "wallet_address": null,
+      "archive_status": "registered_without_arweave_tx",
+      "uploaded_at": null,
+      "registered_at": "2026-09-21T13:19:54Z",
+      "boundary": {
+        "ots_proof_bundle_arweave_archive_is_mirror_only": true,
+        "ots_proof_bundle_arweave_archive_is_not_authority": true,
+        "ots_proof_bundle_arweave_archive_is_not_attestation": true,
+        "ots_proof_bundle_arweave_archive_is_not_amendment": true,
+        "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
+      }
     }
   ],
   "created_at": "2026-06-09T00:00:00Z",
-  "updated_at": "2026-09-19T11:31:06Z",
+  "updated_at": "2026-09-21T13:19:54Z",
   "boundary": {
     "native_ots_proof_bundle_arweave_archive_is_mirror_only": true,
     "native_ots_proof_bundle_arweave_archive_is_not_authority": true,
