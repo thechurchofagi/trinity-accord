@@ -1,3 +1,4 @@
+# TA12 exact-source rerun marker
 #!/usr/bin/env python3
 from __future__ import annotations
 import hashlib, json, re, shutil, subprocess, tempfile
