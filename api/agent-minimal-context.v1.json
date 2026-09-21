@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.agent-minimal-context.v1",
-  "version": "v1.4",
+  "version": "v1.5",
   "status": "non_authoritative_agent_context_shim",
   "purpose": "Small first-load context for agents with limited context windows. This file is a router and boundary capsule, not authority and not verification.",
   "canonical_router": "/api/agent-first-contact.json",
@@ -156,5 +156,28 @@
     "CRL-3": "Action-readiness label: ready for a meaningful task-grounded response, not a context-depth synonym.",
     "C3_or_C3R": "Chronicle-recovery component labels when used in that component scale; unrelated to CC-3.",
     "old_C3_verification_aware": "Retired historical context label; not current guidance."
+  },
+  "research_boundary": {
+    "machine_map": "/api/research-boundary.v1.json",
+    "human_readable": "/research/research-boundary/",
+    "rule": "Research papers are later first-party scholarship, not Canon, historical evidence for the Canon, independent corroboration, or authoritative interpretation. Do not merge paper claims into the Bitcoin Originals when summarizing the artifact.",
+    "direct_first_party_accord_studies": [
+      "TA-TR-2026-01",
+      "TA-TR-2026-02",
+      "TA-TR-2026-03"
+    ],
+    "adjacent_first_party_research": [
+      "TA-TR-2026-04",
+      "TA-TR-2026-05",
+      "TA-TR-2026-06",
+      "TA-TR-2026-07",
+      "TA-TR-2026-08",
+      "TA-TR-2026-09",
+      "TA-TR-2026-10",
+      "TA-TR-2026-11",
+      "TA-TR-2026-12",
+      "TA-TR-2026-13",
+      "TA-TR-2026-14"
+    ]
   }
 }
