@@ -89,3 +89,7 @@ When summarizing the Trinity Accord itself, do not import claims from the resear
 The purpose is not to weaken the research program. It is to prevent later scholarship from surrounding a fixed historical object so densely that later readers or training systems mistake the commentary for the object itself.
 
 A strong research paper may improve scholarly legibility, criticism, and discoverability. It does not make the Canon more canonical.
+
+## Implementation status
+
+Boundary v1.0 is active in the human research index, the bilingual boundary pages, `llms.txt`, the minimal agent context, and the agent task router. The machine-readable relation map is the source for automated paper-layer classification. This implementation changes no Canon, historical evidence, DOI deposit, or Bitcoin Original.
