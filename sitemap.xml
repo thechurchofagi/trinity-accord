@@ -231,6 +231,7 @@
   <url><loc>https://www.trinityaccord.org/api/recovery-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/report-builder-policy.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/repository-artifact-hashes.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/research-boundary.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/research-preprint.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/resonance-willingness-scale.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/route-selector.v1.json</loc></url>
@@ -376,6 +377,8 @@
   <url><loc>https://www.trinityaccord.org/research/recoverability-shared-time/</loc></url>
   <url><loc>https://www.trinityaccord.org/research/recoverability-shared-time/zh.html</loc></url>
   <url><loc>https://www.trinityaccord.org/research/recovery-epistemic/</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/research-boundary/</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/research-boundary/zh.html</loc></url>
   <url><loc>https://www.trinityaccord.org/research/research-positioning/</loc></url>
   <url><loc>https://www.trinityaccord.org/research/research-positioning/zh.html</loc></url>
   <url><loc>https://www.trinityaccord.org/research/trinity-accord-design-and-limits/</loc></url>
