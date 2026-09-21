@@ -24,12 +24,12 @@
     {
       "name": "SHA256SUMS.txt",
       "bytes": 1249,
-      "sha256": "02e31cf10d18669bbaa989e5f34d0201f6ed8866daaefc1517f6b1e20d33ffe6"
+      "sha256": "1ef51d57acfce7c8fafb18aa9047a35a244a08668f065763b8e24726b74875ae"
     },
     {
       "name": "build_paper.py",
-      "bytes": 78457,
-      "sha256": "bd8ea47f0c4f4ce3840044835d97e16d2f4e316b104c3e028ac1c11daac40faa"
+      "bytes": 78645,
+      "sha256": "d1101ca5079312e4e83a548ba112f046eec6c8030c3d5a0e56bbfac11774a4a6"
     },
     {
       "name": "citation.bib",
@@ -48,8 +48,8 @@
     },
     {
       "name": "claim-architecture-transition-v1.1.docx",
-      "bytes": 210370,
-      "sha256": "e90cfd100cbb140a5b3f1d555a2ddfdb1759c0433952b81804f6b4a64a9df20c"
+      "bytes": 210410,
+      "sha256": "44ac30345eb4bde941988c6c912e0d1525c73ae13413fb5d870e824739db7d30"
     },
     {
       "name": "claim-architecture-transition-v1.1.md",
@@ -58,8 +58,8 @@
     },
     {
       "name": "claim-architecture-transition-v1.1.pdf",
-      "bytes": 472096,
-      "sha256": "110f4c5689bb43aa5f653bbbbc09e6f01a9af4937e344c1daf362ef24b4e5298"
+      "bytes": 472126,
+      "sha256": "9d3fec11bb4113daee10969de782faecf56cd8ca79448cd8552103094d1147ec"
     },
     {
       "name": "figure1_output_wage.png",
