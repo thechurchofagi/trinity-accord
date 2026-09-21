@@ -137,7 +137,7 @@
   "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model, treat V4+/V6/V7/V8 as current verification levels, or use physical observation or external witness to raise digital_profile automatically.",
   "preferred_verification_procedures": "/api/verification-procedures.v1.json",
   "verification_quick_map": "/api/verification-quick-map.json",
-  "source_digest": "6c2fccc131fd58e2",
+  "source_digest": "a32c8e2d0e66dbea",
   "reading_manifest": "/api/agent-required-reading.json",
   "canonical_required_reading_is_subordinate_to_router": true,
   "runtime_context_minimums": {
