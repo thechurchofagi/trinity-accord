@@ -29,6 +29,8 @@ reading_toc:
     title: "Training the Governed Agent"
   - id: "civilizational-intellectual-production"
     title: "Civilizational Intellectual Production"
+  - id: "claim-architecture-transition"
+    title: "Claim Architecture Transition"
   - id: "citation-boundary"
     title: "Citation boundary"
 title: "Research and Citation"
@@ -41,7 +43,7 @@ permalink: /research/
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
 
-The series currently contains **thirteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-13)**. They share a first-party, substantially AI-assisted research context and are not thirteen independent corroborations. English and Chinese versions of the same study count as one paper.
+The series currently contains **fourteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-14)**. They share a first-party, substantially AI-assisted research context and are not fourteen independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research positioning
 {: #research-positioning }
@@ -337,11 +339,29 @@ A theory-method paper proposing domain-first satellite accounts for **current-pe
 
 The initial OTS receipt is bound to the exact published PDF SHA-256 `2785b1f7e20be977b883244da0526b144172f2ab6f3c64b5b235f5621fe7a32a` and is currently waiting for Bitcoin attestation. Arweave upload remains blocked until the timestamp is mature and cryptographically verified. This thirteenth study does not amend the three Bitcoin Originals or independently corroborate earlier first-party papers.
 
+## Claim Architecture Transition
+{: #claim-architecture-transition }
+
+### The Claim Architecture Transition: Transformative AI, Real Claim Closure, and General Equilibrium Beyond Wage-Based Distribution
+
+TA-TR-2026-14 · Version 1.1 · 21 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial AI-assisted literature research, originality stress-testing, mathematical checking, numerical illustration, drafting, document generation and publication verification are disclosed in the manuscript.
+
+A theoretical economics working paper asking what keeps welfare-bearing people connected to social output when wage income ceases to be a broadly distributed claim on production. The paper formalizes a **claim architecture**, derives a CES real-claim phase condition, separates employment and market clearing from basic-claim inclusion, and gives a general claim-closure condition covering labor income, broad asset ownership, transfers/social dividends, direct provision and essential-price deflation. The paper does not claim that automation-induced labor-share decline, the importance of ownership, entitlement theory, or scarcity-driven purchasing-power effects are new discoveries.
+
+**Status:** Published open-access preprint / working paper; AI-assisted, human-responsible, not peer reviewed and non-amending. The exact 15-file Zenodo package passed anonymous complete-file byte-count and SHA-256 readback, and the DOI resolver points to the correct public record.
+
+- [DOI: 10.5281/zenodo.22871209](https://doi.org/10.5281/zenodo.22871209) · [Zenodo record and 15 files](https://zenodo.org/records/22871209)
+- [English PDF](/research/claim-architecture-transition/published/claim-architecture-transition-v1.1.pdf) · [Markdown source](/research/claim-architecture-transition/published/claim-architecture-transition-v1.1.md) · [Editable DOCX](/research/claim-architecture-transition/published/claim-architecture-transition-v1.1.docx)
+- [Publication receipt](/research/claim-architecture-transition/publication-record.json) · [Exact package manifest](/research/claim-architecture-transition/EXPECTED-PUBLICATION.json)
+- [Reproducibility note](/research/claim-architecture-transition/published/REPRODUCIBILITY.md) · [BibTeX](/research/claim-architecture-transition/published/citation.bib) · [RIS](/research/claim-architecture-transition/published/citation.ris) · [CSL-JSON](/research/claim-architecture-transition/published/citation.csl.json)
+
+This fourteenth study is a separate non-amending research output. DOI registration, exact-byte readback and later timestamp preservation do not establish truth, peer review, global originality, policy correctness or Google Scholar indexing.
+
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all thirteen studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all fourteen studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the thirteen-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the fourteen-paper series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.
