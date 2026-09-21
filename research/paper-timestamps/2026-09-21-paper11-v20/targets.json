@@ -1,0 +1,23 @@
+{
+  "batch": "2026-09-21-paper11-v20",
+  "purpose": "OpenTimestamps Bitcoin anchoring and guarded Arweave archival of the exact published TA-TR-2026-11 v2.0 PDF after Zenodo public readback.",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-11",
+      "title": "Auditing the Rules of Belief: Self-Referential Epistemic Revision under Formative Training",
+      "version": "2.0",
+      "record_id": 22865494,
+      "doi": "10.5281/zenodo.22865494",
+      "receipt_path": "research/auditing-rules-of-belief/publication-record.json",
+      "pdfs": [
+        {
+          "name": "auditing-rules-of-belief-zh-v2.0.pdf",
+          "bytes": 1248460,
+          "sha256": "b9b6047685070a185a48e659cbd9f32160d281835ce0ea4eccafb9091faacfd2"
+        }
+      ]
+    }
+  ],
+  "boundary": "Non-amending preservation only. OTS proves existence by the attested Bitcoin block after proof maturity; Arweave stores the verified published PDF and proof bundle. Neither establishes peer review, truth, authorship, or an earlier publication date."
+}
