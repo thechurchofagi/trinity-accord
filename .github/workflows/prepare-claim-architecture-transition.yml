@@ -1,0 +1,59 @@
+name: Prepare TA14 Claim Architecture DOI
+on:
+  push:
+    branches: [research/claim-architecture-transition-v1-1-20260921]
+    paths:
+      - '.github/workflows/prepare-claim-architecture-transition.yml'
+      - 'research/claim-architecture-transition/source/**'
+      - 'research/claim-architecture-transition/build_paper.py'
+      - 'research/claim-architecture-transition/generate_assets.py'
+      - 'research/claim-architecture-transition/finalize_package.py'
+      - 'research/claim-architecture-transition/prepare_zenodo.py'
+      - 'research/claim-architecture-transition/publication_common.py'
+permissions:
+  contents: write
+concurrency:
+  group: claim-architecture-zenodo-v1-1
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta14-prepare]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/claim-architecture-transition-v1-1-20260921
+          fetch-depth: 0
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc libreoffice fonts-liberation fonts-noto-cjk poppler-utils
+          python3 -m pip install --disable-pip-version-check python-docx lxml numpy matplotlib
+      - name: Reserve exactly one TA14 Zenodo draft
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/claim-architecture-transition/prepare_zenodo.py
+      - name: Build exact publication package
+        run: |
+          python3 research/claim-architecture-transition/generate_assets.py
+          python3 research/claim-architecture-transition/build_paper.py
+          libreoffice --headless --convert-to pdf --outdir research/claim-architecture-transition/published research/claim-architecture-transition/published/claim-architecture-transition-v1.1.docx
+          python3 research/claim-architecture-transition/finalize_package.py
+          pdfinfo research/claim-architecture-transition/published/claim-architecture-transition-v1.1.pdf
+          pdftotext research/claim-architecture-transition/published/claim-architecture-transition-v1.1.pdf - | grep -q "THE CLAIM ARCHITECTURE TRANSITION"
+      - name: Commit reserved identity and exact frozen package
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/claim-architecture-transition/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: freeze TA14 DOI package [skip ci]'
+          git push origin HEAD:research/claim-architecture-transition-v1-1-20260921
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta14-doi-preparation
+          path: research/claim-architecture-transition/
+          retention-days: 90
+          if-no-files-found: error
