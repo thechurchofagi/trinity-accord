@@ -39,10 +39,10 @@ class CriticalUseTests(unittest.TestCase):
     def setUp(self):
         self.texts = [(ROOT / 'research' / p).read_text(encoding='utf-8') for p in GUIDES]
         self.index = (ROOT / 'research/index.md').read_text(encoding='utf-8')
-        self.assertIn('ten distinct research papers (TA-TR-2026-01 through TA-TR-2026-10)', self.index)
-        self.series_word = 'ten'
+        self.assertIn('thirteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-13)', self.index)
+        self.series_word = 'thirteen'
 
-    def test_ten_distinct_paper_sections_have_their_own_current_dois(self):
+    def test_thirteen_distinct_paper_sections_have_their_own_current_dois(self):
         papers = [
             ('Current technical report', '21699878'),
             ('Historical-position study', '21900592'),
@@ -53,7 +53,10 @@ class CriticalUseTests(unittest.TestCase):
             ('Recoverability and Shared Time', '22840604'),
             ('Evidence for Artificial Self Attribution', '22842789'),
             ('Learning from an AI Claimant', '22846307'),
-            ('Endogenous Reference Fields', '22852885'),
+            ('Endogenous Reference Fields', '22854705'),
+            ('Auditing the Rules of Belief', '22865494'),
+            ('Training the Governed Agent', '22866205'),
+            ('Civilizational Intellectual Production', '22866775'),
         ]
         section_rows = re.findall(r'^## ([^\n]+)\n(.*?)(?=^## |\Z)', self.index, re.M | re.S)
         sections = dict(section_rows)
@@ -61,7 +64,7 @@ class CriticalUseTests(unittest.TestCase):
         paper_sections = {title: body for title, body in sections.items()
                           if re.search(r'^### ', body, re.M)}
         self.assertEqual(set(paper_sections), {title for title, _ in papers})
-        self.assertEqual(len(paper_sections), 10)
+        self.assertEqual(len(paper_sections), 13)
         for number, (title, record_id) in enumerate(papers, 1):
             body = paper_sections[title]
             self.assertIn('https://doi.org/10.5281/zenodo.' + record_id, body)
