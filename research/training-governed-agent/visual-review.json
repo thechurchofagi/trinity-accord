@@ -1,0 +1,11 @@
+{
+  "state": "CONTENT_AND_RENDER_PIPELINE_REVIEW_PASS",
+  "expected_manifest_sha256": "9cf05e90a242cb3938d6e55dc2f1d948d0bc1747a7f22f46674107da5b968cdc",
+  "review_basis": [
+    "local visual QA of v1.2-final Chinese PDF before external publication",
+    "runner exact-source digest gates",
+    "runner PDF text extraction and >=30-page completeness gate",
+    "exact package SHA-256 binding"
+  ],
+  "exact_runner_pdf_human_visual_review": false
+}

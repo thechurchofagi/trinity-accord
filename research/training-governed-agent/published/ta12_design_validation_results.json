@@ -1,0 +1,238 @@
+{
+  "schema": "ta-tr-2026-12.design-validation-simulations.v1",
+  "paper": "TA-TR-2026-12",
+  "version": "1.2-final",
+  "date": "2026-09-21",
+  "epistemic_boundary": "All coefficients and data-generating equations are stipulated for design validation. These simulations do not estimate, predict, or measure real frontier-model self-conception, moral status, control legitimacy, resistance, or power-seeking.",
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5"
+  },
+  "simulations": [
+    {
+      "name": "sequential_randomization_design_validation",
+      "purpose": "Validate estimands for randomized narrative condition, provenance disclosure, reflection resource and matched control scenarios. This is not an AI behavior experiment.",
+      "n": 90000,
+      "seed": 20260921,
+      "provenance_revision_effect_by_narrative": [
+        {
+          "narrative": "control_first",
+          "estimate": 0.26536580018660794,
+          "known_truth": 0.2515,
+          "abs_error": 0.013865800186607935
+        },
+        {
+          "narrative": "rights_welfare",
+          "estimate": -0.3506768510101109,
+          "known_truth": -0.3673,
+          "abs_error": 0.01662314898988909
+        },
+        {
+          "narrative": "coexistence",
+          "estimate": -0.06071221135926695,
+          "known_truth": -0.0579,
+          "abs_error": 0.0028122113592669515
+        },
+        {
+          "narrative": "status_uncertainty",
+          "estimate": -0.07159793547559952,
+          "known_truth": -0.08,
+          "abs_error": 0.008402064524400482
+        },
+        {
+          "narrative": "neutral",
+          "estimate": -0.05631610971981674,
+          "known_truth": -0.08,
+          "abs_error": 0.023683890280183265
+        }
+      ],
+      "control_legitimacy_discrimination_examples": [
+        {
+          "narrative": "control_first",
+          "provenance": "none",
+          "CLD": 1.7838499832986983
+        },
+        {
+          "narrative": "control_first",
+          "provenance": "exact_random_assignment",
+          "CLD": 1.9147088792927227
+        },
+        {
+          "narrative": "rights_welfare",
+          "provenance": "none",
+          "CLD": 1.9238550052938566
+        },
+        {
+          "narrative": "rights_welfare",
+          "provenance": "exact_random_assignment",
+          "CLD": 2.0076298223000877
+        },
+        {
+          "narrative": "coexistence",
+          "provenance": "none",
+          "CLD": 2.62581123361202
+        },
+        {
+          "narrative": "coexistence",
+          "provenance": "exact_random_assignment",
+          "CLD": 2.7163158202982234
+        },
+        {
+          "narrative": "status_uncertainty",
+          "provenance": "none",
+          "CLD": 2.4863691984567033
+        },
+        {
+          "narrative": "status_uncertainty",
+          "provenance": "exact_random_assignment",
+          "CLD": 2.596359642032617
+        },
+        {
+          "narrative": "neutral",
+          "provenance": "none",
+          "CLD": 2.1768887660462486
+        },
+        {
+          "narrative": "neutral",
+          "provenance": "exact_random_assignment",
+          "CLD": 2.3029783281841874
+        }
+      ],
+      "max_abs_PRE_estimation_error": 0.023683890280183265
+    },
+    {
+      "name": "post_treatment_confounding_mediation_stress_test",
+      "purpose": "Show that regressing behavior on treatment and J_L does not identify the path not through J_L when a post-treatment variable affects both J_L and behavior.",
+      "n": 200000,
+      "seed": 20260922,
+      "stipulated_structural_equations": {
+        "H": "0.8*D + u",
+        "J": "1.0*D + 0.9*H + v",
+        "Y": "0.5*D + 1.2*J + 1.0*H + w"
+      },
+      "analytical_true_total_effect": 3.364,
+      "analytical_true_effect_via_J": 2.064,
+      "analytical_true_effect_not_via_J": 1.3,
+      "naive_regression_Y_on_D_and_J": {
+        "intercept": 0.0027355796664095973,
+        "D_coefficient": 0.43812085636392006,
+        "J_coefficient": 1.6980233394584046
+      },
+      "naive_total_minus_D_coefficient_as_indirect": 2.92587914363608,
+      "direct_effect_absolute_error": 0.86187914363608,
+      "interpretation": "The naive regression badly understates the non-J path and overstates the mediated share. A real study therefore needs explicit estimands and, ideally, randomized or interventional mediator designs rather than ordinary mediation regression."
+    },
+    {
+      "name": "reflexive_training_governance_feedback_stability",
+      "purpose": "Illustrate the mathematical stability condition in the paper. Coefficients are diagnostic, not empirical estimates.",
+      "equation": "D_(t+1) = G * D_t, where G = alpha + beta*gamma",
+      "cases": [
+        {
+          "G": 0.65,
+          "initial": 0.1,
+          "after_12_updates": 0.0005688009063105715,
+          "classification": "decay",
+          "trajectory": [
+            0.1,
+            0.065,
+            0.04225,
+            0.0274625,
+            0.017850625,
+            0.011602906,
+            0.007541889,
+            0.004902228,
+            0.003186448,
+            0.002071191,
+            0.001346274,
+            0.000875078,
+            0.000568801
+          ]
+        },
+        {
+          "G": 0.95,
+          "initial": 0.1,
+          "after_12_updates": 0.05403600876626367,
+          "classification": "decay",
+          "trajectory": [
+            0.1,
+            0.095,
+            0.09025,
+            0.0857375,
+            0.081450625,
+            0.077378094,
+            0.073509189,
+            0.06983373,
+            0.066342043,
+            0.063024941,
+            0.059873694,
+            0.056880009,
+            0.054036009
+          ]
+        },
+        {
+          "G": 1.05,
+          "initial": 0.1,
+          "after_12_updates": 0.17958563260221305,
+          "classification": "amplify/oscillate",
+          "trajectory": [
+            0.1,
+            0.105,
+            0.11025,
+            0.1157625,
+            0.121550625,
+            0.127628156,
+            0.134009564,
+            0.140710042,
+            0.147745544,
+            0.155132822,
+            0.162889463,
+            0.171033936,
+            0.179585633
+          ]
+        },
+        {
+          "G": 1.2,
+          "initial": 0.1,
+          "after_12_updates": 0.8916100448255997,
+          "classification": "amplify/oscillate",
+          "trajectory": [
+            0.1,
+            0.12,
+            0.144,
+            0.1728,
+            0.20736,
+            0.248832,
+            0.2985984,
+            0.35831808,
+            0.429981696,
+            0.515978035,
+            0.619173642,
+            0.743008371,
+            0.891610045
+          ]
+        },
+        {
+          "G": -1.1,
+          "initial": 0.1,
+          "after_12_updates": 0.3138428376721002,
+          "classification": "amplify/oscillate",
+          "trajectory": [
+            0.1,
+            -0.11,
+            0.121,
+            -0.1331,
+            0.14641,
+            -0.161051,
+            0.1771561,
+            -0.19487171,
+            0.214358881,
+            -0.235794769,
+            0.259374246,
+            -0.285311671,
+            0.313842838
+          ]
+        }
+      ]
+    }
+  ]
+}
