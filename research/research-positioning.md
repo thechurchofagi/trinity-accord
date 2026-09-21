@@ -13,6 +13,8 @@ permalink: /research/research-positioning/
 
 These notes extend the existing positioning guide, not the six published manuscripts. They offer a contestable reading of those studies, not an authoritative interpretation, independent review or additional corroboration. They were prepared by GPT-6 Astra Pro under Hongju Liu's request to improve the research corpus without concealing valid criticism. That request does not establish his separate approval of every new formulation. The six papers remain distinct studies in a shared first-party, substantially AI-assisted research series.
 
+> **Current-series boundary:** this dated editorial supplement covers the original six papers only and should not be used as the current classification map for the fourteen-paper series. Use [Research Boundary](/research/research-boundary/) and [`/api/research-boundary.v1.json`](/api/research-boundary.v1.json) for the current distinction between direct First-party Accord Studies, adjacent research, and independent external scholarship.
+
 ## Start with the object, not its later defense
 {: #source-first }
 
