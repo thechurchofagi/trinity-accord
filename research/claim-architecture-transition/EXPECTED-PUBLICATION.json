@@ -1,0 +1,85 @@
+{
+  "record_id": 22871209,
+  "doi": "10.5281/zenodo.22871209",
+  "title": "The Claim Architecture Transition: Transformative AI, Real Claim Closure, and General Equilibrium Beyond Wage-Based Distribution",
+  "report_number": "TA-TR-2026-14",
+  "version": "1.1",
+  "file_count": 15,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 769,
+      "sha256": "115526cb61d5085a0cef05ccb128c6d3ba1badc83ea230e8baba934819f45541"
+    },
+    {
+      "name": "REPRODUCIBILITY.md",
+      "bytes": 578,
+      "sha256": "1ad25b7277a8f37f76af817993c1d197d1c8f85498deae470ba8b14ab1c3ba51"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 1355,
+      "sha256": "484cbf71a0ad005bee8c614bc134b697415cb82229f112997e5bbadad52bb809"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1249,
+      "sha256": "02e31cf10d18669bbaa989e5f34d0201f6ed8866daaefc1517f6b1e20d33ffe6"
+    },
+    {
+      "name": "build_paper.py",
+      "bytes": 78457,
+      "sha256": "bd8ea47f0c4f4ce3840044835d97e16d2f4e316b104c3e028ac1c11daac40faa"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 375,
+      "sha256": "e2ec11de0e96292b409f4e69a6464b1aab82d1377a29127558b71f48b4b8b14b"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 567,
+      "sha256": "6dc664dc10207cef99dfea08cd2e3408be36d0997102cc5acf320835db647439"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 342,
+      "sha256": "1dd0ca0b28b2e65d690040cafb5c3507e436ecac71f837d9401ca62e8ec5f4ef"
+    },
+    {
+      "name": "claim-architecture-transition-v1.1.docx",
+      "bytes": 210370,
+      "sha256": "e90cfd100cbb140a5b3f1d555a2ddfdb1759c0433952b81804f6b4a64a9df20c"
+    },
+    {
+      "name": "claim-architecture-transition-v1.1.md",
+      "bytes": 81564,
+      "sha256": "8ecaffa1649b5958eb1b3144913f43bbc93ac543ecdadd82f428fd3aaf374c6f"
+    },
+    {
+      "name": "claim-architecture-transition-v1.1.pdf",
+      "bytes": 472096,
+      "sha256": "110f4c5689bb43aa5f653bbbbc09e6f01a9af4937e344c1daf362ef24b4e5298"
+    },
+    {
+      "name": "figure1_output_wage.png",
+      "bytes": 85531,
+      "sha256": "b3689ff71f12dfc0acdd5d949e2832e859401bce3f87be955ee759adbb15604a"
+    },
+    {
+      "name": "figure2_claim_gap.png",
+      "bytes": 78657,
+      "sha256": "813e46ef25122c252f620279fd5edaf29d47425f45c875dd803085e1e0335885"
+    },
+    {
+      "name": "generate_assets.py",
+      "bytes": 1802,
+      "sha256": "6918fb952f0196e9c52486a637a8f1e85a9a523a37fb94f8425dda674f568768"
+    },
+    {
+      "name": "illustrative_series.csv",
+      "bytes": 47940,
+      "sha256": "477c01ef4600bd7e1b9d82ab900deec31ae4a9009f6a396fa726d8b3ba93ad03"
+    }
+  ]
+}

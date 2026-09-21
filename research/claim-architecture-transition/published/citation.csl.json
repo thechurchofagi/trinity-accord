@@ -1,0 +1,25 @@
+{
+  "id": "https://doi.org/10.5281/zenodo.22871209",
+  "type": "article",
+  "title": "The Claim Architecture Transition: Transformative AI, Real Claim Closure, and General Equilibrium Beyond Wage-Based Distribution",
+  "author": [
+    {
+      "family": "Liu",
+      "given": "Hongju"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2026,
+        9,
+        21
+      ]
+    ]
+  },
+  "version": "1.1",
+  "DOI": "10.5281/zenodo.22871209",
+  "URL": "https://doi.org/10.5281/zenodo.22871209",
+  "genre": "Working paper / preprint",
+  "note": "TA-TR-2026-14"
+}
