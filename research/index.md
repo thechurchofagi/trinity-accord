@@ -354,6 +354,9 @@ A theoretical economics working paper asking what keeps welfare-bearing people c
 - [English PDF](/research/claim-architecture-transition/published/claim-architecture-transition-v1.1.pdf) · [Markdown source](/research/claim-architecture-transition/published/claim-architecture-transition-v1.1.md) · [Editable DOCX](/research/claim-architecture-transition/published/claim-architecture-transition-v1.1.docx)
 - [Publication receipt](/research/claim-architecture-transition/publication-record.json) · [Exact package manifest](/research/claim-architecture-transition/EXPECTED-PUBLICATION.json)
 - [Reproducibility note](/research/claim-architecture-transition/published/REPRODUCIBILITY.md) · [BibTeX](/research/claim-architecture-transition/published/citation.bib) · [RIS](/research/claim-architecture-transition/published/citation.ris) · [CSL-JSON](/research/claim-architecture-transition/published/citation.csl.json)
+- [OTS / guarded Arweave preservation status](/research/paper-timestamps/2026-09-21-paper14-v11/status.json) · [Preservation workflow](https://github.com/thechurchofagi/trinity-accord/actions/workflows/research-paper-14-v11-ots-arweave.yml)
+
+The initial OTS receipt is bound to the exact published PDF SHA-256 `9d3fec11bb4113daee10969de782faecf56cd8ca79448cd8552103094d1147ec` and is currently waiting for Bitcoin attestation. Arweave upload remains blocked until the timestamp is mature and cryptographically verified.
 
 This fourteenth study is a separate non-amending research output. DOI registration, exact-byte readback and later timestamp preservation do not establish truth, peer review, global originality, policy correctness or Google Scholar indexing.
 
