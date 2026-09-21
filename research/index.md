@@ -329,7 +329,7 @@ A theory-method paper proposing domain-first satellite accounts for **current-pe
 
 **Status:** Published Zenodo preprint; AI-assisted, human-responsible, not peer reviewed and non-amending. All eleven public assets passed anonymous byte-count and SHA-256 readback. Zenodo record 22866775 is public; the external DOI.org redirect is separately recorded as still propagating at the time of this index update. Three included simulations are stipulated design checks, not estimates of the real Human/AI composition of world intellectual production.
 
-- DOI: `10.5281/zenodo.22866775` · [Zenodo record and eleven files](https://zenodo.org/records/22866775)
+- [DOI: 10.5281/zenodo.22866775](https://doi.org/10.5281/zenodo.22866775) · [Zenodo record and eleven files](https://zenodo.org/records/22866775)
 - [中文 Markdown](/research/civilizational-intellectual-accounts/published/civilizational-intellectual-production-accounts-zh-v1.0.md) · [中文 PDF](/research/civilizational-intellectual-accounts/published/civilizational-intellectual-production-accounts-zh-v1.0.pdf)
 - [Publication receipt](/research/civilizational-intellectual-accounts/publication-record.json) · [Exact package manifest](/research/civilizational-intellectual-accounts/EXPECTED-PUBLICATION.json)
 - [Reproducibility record](/research/civilizational-intellectual-accounts/published/REPRODUCIBILITY.md)
