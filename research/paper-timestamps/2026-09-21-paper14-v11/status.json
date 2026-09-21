@@ -2,22 +2,26 @@
   "batch": "2026-09-21-paper14-v11",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        967975,
+        967980,
+        967999
+      ],
       "bytes": 472126,
       "doi": "10.5281/zenodo.22871209",
       "name": "claim-architecture-transition-v1.1.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-21-paper14-v11/proofs/TA-TR-2026-14/claim-architecture-transition-v1.1.pdf.ots",
-      "proof_sha256": "e8e207b769109327db3e7c3c43e56840dbf27b96d6769e06f7fe1fe168a4183a",
+      "proof_sha256": "5d628704bfdb8f66673c2fb163f17feb40c2ae689ff0c879b0a0d3d53da87a7c",
       "report": "TA-TR-2026-14",
       "role": "Complete English v1.1 theoretical economics working paper",
       "sha256": "9d3fec11bb4113daee10969de782faecf56cd8ca79448cd8552103094d1147ec",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
