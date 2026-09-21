@@ -1,0 +1,99 @@
+{
+  "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "report_number": "TA-TR-2026-13",
+  "title": "Civilizational Intellectual Production Satellite Accounts: A Partial-Identification Framework for Measuring the Human–AI Shift in Intellectual Production and Epistemic Governance",
+  "version": "1.0",
+  "record_id": 22866775,
+  "doi": "10.5281/zenodo.22866775",
+  "record_url": "https://zenodo.org/records/22866775",
+  "submitted": true,
+  "file_count": 11,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1762,
+      "sha256": "a9bdfed0ddf5785eb52a61e2ac4350039091f899cf9dcdb20ebd8d053836e9ac",
+      "public_url": "https://zenodo.org/api/records/22866775/files/README-LICENSE.txt/content"
+    },
+    {
+      "name": "REPRODUCIBILITY.md",
+      "bytes": 3218,
+      "sha256": "baa520fbff2945e4799fcdd3f1fe1ac28f95244385f29eb88246efa4200bcf71",
+      "public_url": "https://zenodo.org/api/records/22866775/files/REPRODUCIBILITY.md/content"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 2055,
+      "sha256": "b21a9f96acd4299f8bc229f506d0c444126113ed48e764cbb59c94f56f626269",
+      "public_url": "https://zenodo.org/api/records/22866775/files/REVIEW-AND-SOURCES.md/content"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 995,
+      "sha256": "02fbe02d3afda24519b23397816af6d0e91ca853f52354dab40450e64dea16fa",
+      "public_url": "https://zenodo.org/api/records/22866775/files/SHA256SUMS.txt/content"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 373,
+      "sha256": "2717af71f38d9ea86cb555157255ec2db78d523dd776952663f056df74974638",
+      "public_url": "https://zenodo.org/api/records/22866775/files/citation.bib/content"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 595,
+      "sha256": "14f1aa7c47afbab5d37ab60992e186ce40eb565cc8badaf01b11deb10b5946a7",
+      "public_url": "https://zenodo.org/api/records/22866775/files/citation.csl.json/content"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 318,
+      "sha256": "4bf1429fb7a60b6dd53cc4f1a040e33359da64c37cd2d3f84f68d7e44cd7bf43",
+      "public_url": "https://zenodo.org/api/records/22866775/files/citation.ris/content"
+    },
+    {
+      "name": "civilizational-intellectual-production-accounts-zh-v1.0.md",
+      "bytes": 61464,
+      "sha256": "65bfa9070abe14e3f82f84a5ca1fd2ae7767f542c57ea14605ca0842b1eefd82",
+      "public_url": "https://zenodo.org/api/records/22866775/files/civilizational-intellectual-production-accounts-zh-v1.0.md/content"
+    },
+    {
+      "name": "civilizational-intellectual-production-accounts-zh-v1.0.pdf",
+      "bytes": 623302,
+      "sha256": "2785b1f7e20be977b883244da0526b144172f2ab6f3c64b5b235f5621fe7a32a",
+      "public_url": "https://zenodo.org/api/records/22866775/files/civilizational-intellectual-production-accounts-zh-v1.0.pdf/content"
+    },
+    {
+      "name": "ta13_civilizational_intellectual_accounts_results.json",
+      "bytes": 4879,
+      "sha256": "cda664326b799438d83c95e5e4ad1637e936e68476f0ffb7f7e2a3e7c5769003",
+      "public_url": "https://zenodo.org/api/records/22866775/files/ta13_civilizational_intellectual_accounts_results.json/content"
+    },
+    {
+      "name": "ta13_civilizational_intellectual_accounts_simulations.py",
+      "bytes": 5839,
+      "sha256": "40624b5e584fa07b57b2f9b7bf31a6ac7a33acc99281f9bd3f5a5e46b525ae28",
+      "public_url": "https://zenodo.org/api/records/22866775/files/ta13_civilizational_intellectual_accounts_simulations.py/content"
+    }
+  ],
+  "expected_manifest_sha256": "98817ba31fd20f181399fdeea9e9c35e36386b286b63f015725c617edd7cb1a9",
+  "public_readback_authenticated": false,
+  "doi_resolver": {
+    "state": "RESOLVER_CHECK_UNAVAILABLE",
+    "error_type": "HTTPError",
+    "matches_record": false
+  },
+  "public_file_readback_pass": true,
+  "doi_resolution_pass": false,
+  "source_commit": "6e74715f80d4f2e60f01e39697075246a5449d12",
+  "workflow_run_id": "35555499989",
+  "was_already_published": false,
+  "prior_doi_records_modified": false,
+  "bitcoin_originals_modified": false,
+  "new_research_papers": 1,
+  "peer_reviewed": false,
+  "global_originality_certified": false,
+  "google_scholar_indexing": "NOT_ASSERTED",
+  "manuscript_language": "zho",
+  "english_text_role": "TITLE_AND_ABSTRACT_ONLY"
+}
