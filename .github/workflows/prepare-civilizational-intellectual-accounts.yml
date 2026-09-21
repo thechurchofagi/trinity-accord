@@ -26,6 +26,10 @@ jobs:
         with:
           ref: research/civilizational-intellectual-accounts-v1-0-20260921
           fetch-depth: 0
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
       - name: Install publication dependencies
         run: |
           sudo apt-get update
