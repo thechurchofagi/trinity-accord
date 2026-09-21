@@ -1,0 +1,12 @@
+{
+  "state": "CONTENT_AND_RENDER_PIPELINE_REVIEW_PASS",
+  "expected_manifest_sha256": "98817ba31fd20f181399fdeea9e9c35e36386b286b63f015725c617edd7cb1a9",
+  "review_basis": [
+    "local 35-page visual QA of the same revised v1.0 manuscript before external publication",
+    "runner exact normalized-source digest gate",
+    "runner PDF text extraction and >=30-page completeness gate",
+    "direct-prior-art marker gate",
+    "exact package SHA-256 binding"
+  ],
+  "exact_runner_pdf_human_visual_review": false
+}
