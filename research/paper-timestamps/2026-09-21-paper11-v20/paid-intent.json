@@ -1,0 +1,8 @@
+{
+  "state": "PAID_ATTEMPT_INTENT",
+  "payload_sha256": "01363680de0ebe7a22171f8a182975fbdb172110fceab21dfeb703a0c4bfb774",
+  "run_id": "35670709392",
+  "run_attempt": "1",
+  "report": "TA-TR-2026-11",
+  "doi": "10.5281/zenodo.22865494"
+}
