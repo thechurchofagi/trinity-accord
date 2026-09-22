@@ -63,6 +63,7 @@ permissions:
   pages: write
   id-token: write
 
+# A run deliberately refuses to publish if main advances after verification; retrigger from current main rather than publishing stale bytes.
 concurrency:
   group: pages
   cancel-in-progress: false
