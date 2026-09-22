@@ -1,0 +1,68 @@
+name: Abundance Bridge DOI and OTS
+on:
+  push:
+    branches: [research/intelligence-explosion-economy-20260922]
+    paths:
+      - .github/workflows/publish-abundance-bridge.yml
+      - research/claim-architecture-transition/bridge-finance/v1.0/publish_bridge.py
+      - research/claim-architecture-transition/bridge-finance/v1.0/PUBLISH-AUTHORIZATION.json
+      - research/claim-architecture-transition/bridge-finance/v1.0/trigger.json
+permissions:
+  contents: write
+concurrency:
+  group: abundance-bridge-publication-v1
+  cancel-in-progress: false
+jobs:
+  release:
+    if: github.repository == 'thechurchofagi/trinity-accord' && (contains(github.event.head_commit.message, '[bridge-prepare]') || contains(github.event.head_commit.message, '[bridge-publish]'))
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/intelligence-explosion-economy-20260922
+          fetch-depth: 0
+          show-progress: false
+      - name: Install bounded paper toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-latex-extra fonts-liberation fonts-noto-cjk poppler-utils
+          python3 -m pip install --disable-pip-version-check numpy==2.2.6 scipy==1.15.3
+      - name: Reserve one record and freeze reviewed-source files
+        if: contains(github.event.head_commit.message, '[bridge-prepare]')
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/claim-architecture-transition/bridge-finance/v1.0/publish_bridge.py prepare
+      - name: Publish authorized exact files and verify anonymous readback
+        if: contains(github.event.head_commit.message, '[bridge-publish]')
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/claim-architecture-transition/bridge-finance/v1.0/publish_bridge.py publish
+      - name: Submit OTS using the existing paper lifecycle
+        if: contains(github.event.head_commit.message, '[bridge-publish]')
+        run: |
+          python3 -m pip install --disable-pip-version-check -r requirements-ots.txt
+          python3 scripts/research_paper_ots.py stamp --batch research/paper-timestamps/2026-09-22-abundance-bridge-v10
+      - name: Persist publication and OTS state even on incomplete external operations
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/claim-architecture-transition/bridge-finance/v1.0/
+          if test -d research/paper-timestamps/2026-09-22-abundance-bridge-v10; then
+            git add research/paper-timestamps/2026-09-22-abundance-bridge-v10/
+          fi
+          git diff --cached --check
+          if ! git diff --cached --quiet; then
+            git commit -m 'release: persist bridge publication and timestamp state [skip ci]'
+            git push origin HEAD:research/intelligence-explosion-economy-20260922
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: abundance-bridge-v1-${{ github.run_id }}
+          path: |
+            research/claim-architecture-transition/bridge-finance/v1.0/
+            research/paper-timestamps/2026-09-22-abundance-bridge-v10/
+          retention-days: 90
+          if-no-files-found: error
