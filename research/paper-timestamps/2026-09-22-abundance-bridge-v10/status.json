@@ -1,0 +1,34 @@
+{
+  "batch": "2026-09-22-abundance-bridge-v10",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 116352,
+      "doi": "10.5281/zenodo.22895832",
+      "name": "Part-I-Financing-Automation-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-22-abundance-bridge-v10/proofs/TA-TR-2026-14-BRIDGE/Part-I-Financing-Automation-v1.0.pdf.ots",
+      "proof_sha256": "ea131c48d9fa77280de6c19071e6a2bca8608a169652eebb1c0b4244b0dd0e06",
+      "report": "TA-TR-2026-14-BRIDGE",
+      "sha256": "425a405417d23d5fff5bca05f54cfaae4513a87b02484928ab38ed04957f34b3",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "bytes": 251657,
+      "doi": "10.5281/zenodo.22895832",
+      "name": "Part-II-Prosperity-Real-Claims-zh-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-22-abundance-bridge-v10/proofs/TA-TR-2026-14-BRIDGE/Part-II-Prosperity-Real-Claims-zh-v1.0.pdf.ots",
+      "proof_sha256": "c921e1ce6c2ddfb27dc0116cd18ec2e7f6b8800eb9f0f87dfd541d73e082693e",
+      "report": "TA-TR-2026-14-BRIDGE",
+      "sha256": "0aa600384b70efcf1e0c56c05f66acb0e990b1467539d2c2ba222708d3021fbc",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 2,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}
