@@ -1,0 +1,98 @@
+{
+  "audit_assertions": 10088,
+  "conceptrecid": "22871208",
+  "doi": "10.5281/zenodo.22886276",
+  "file_count": 15,
+  "files": [
+    {
+      "bytes": 3006,
+      "name": "ORIGIN-AND-FUTURE.md",
+      "sha256": "af1667687978dbbc56a53e8d27d00bb808dd7130eb91c045d89e2374fb5fb789"
+    },
+    {
+      "bytes": 424,
+      "name": "README-LICENSE.txt",
+      "sha256": "ba8f8c512dbddf791b9a4f5cdd8af0293548481c89d4702936fafc7e8ca66900"
+    },
+    {
+      "bytes": 682,
+      "name": "REPRODUCIBILITY.md",
+      "sha256": "c69b2051a4e1745382c2f24fe4b7cb52d3ce00ac158eebdb068d0a92195782ec"
+    },
+    {
+      "bytes": 8819,
+      "name": "REVISION-AND-SOURCES.md",
+      "sha256": "8250d54b664ccd48b4762085506e938b28d82c4cba9ed62bc53a7ae8d1a87794"
+    },
+    {
+      "bytes": 1196,
+      "name": "SHA256SUMS.txt",
+      "sha256": "f7b5315fec589ef0f3e2ac76dc160f33f3e1e05287565a2b76a2201b3fa91815"
+    },
+    {
+      "bytes": 10263,
+      "name": "audit.py",
+      "sha256": "a506ff94f473ddb99a86fddd70275e6f11bd69fe0a066278bc159afdfac77fb1"
+    },
+    {
+      "bytes": 303,
+      "name": "build.sh",
+      "sha256": "4615b3bd521b30e0db6983afbaddf1a3d07c0de75e5faa04352481aa5630f6c7"
+    },
+    {
+      "bytes": 2005,
+      "name": "checks.json",
+      "sha256": "f040840b3881d37d7ad32261166355da4b6f2fcc71ce5e5f13b2fa93435f5e5a"
+    },
+    {
+      "bytes": 316,
+      "name": "citation.bib",
+      "sha256": "abe867f1919f0e34fabcfa2b6c4fbc1116eea4ff942099870a0f1bc0e3f0b9e0"
+    },
+    {
+      "bytes": 417,
+      "name": "citation.csl.json",
+      "sha256": "4db5716a7c53f1cd9f350b83d9b67342aa2df44ecb4278f6092393326f1e510d"
+    },
+    {
+      "bytes": 33104,
+      "name": "claim-architecture-transition-v1.3.md",
+      "sha256": "dfcb35733de9b49f6a63e90aab77756b22e4ab0c480aca304365376f16f9dffa"
+    },
+    {
+      "bytes": 135289,
+      "name": "claim-architecture-transition-v1.3.pdf",
+      "sha256": "693bf3381df151864b00ab382155dd83834f4c0ca1b986a76d31d3081beea119"
+    },
+    {
+      "bytes": 533,
+      "name": "regimes.csv",
+      "sha256": "dab311376a9110a52ca83ff267d53f2d2d770e3413d2a90f9e9439bf79282982"
+    },
+    {
+      "bytes": 265,
+      "name": "symbolic-checks.json",
+      "sha256": "e874c4fb64a74484e0bbc919003c4af6809c8126ab3f353079a956be897a3f1e"
+    },
+    {
+      "bytes": 1180,
+      "name": "symbolic_check.py",
+      "sha256": "8bb98b23029454bae7b62f9329572cd3a9ea2b619b7c716f9acd6c7c6ccda354"
+    }
+  ],
+  "inputs": {
+    "ORIGIN-AND-FUTURE.md": "af1667687978dbbc56a53e8d27d00bb808dd7130eb91c045d89e2374fb5fb789",
+    "REVISION-AND-SOURCES.md": "8250d54b664ccd48b4762085506e938b28d82c4cba9ed62bc53a7ae8d1a87794",
+    "audit.py": "a506ff94f473ddb99a86fddd70275e6f11bd69fe0a066278bc159afdfac77fb1",
+    "manuscript.md": "d70e157f522808d029c2d3d42d83e2bff35883a02d5c311614ba8c32cbe25a7d",
+    "pipeline.py": "0d5797f1e1554670d6021cce5e3fc8ae5330ab83772738829bade5b4cc6ff226",
+    "symbolic_check.py": "8bb98b23029454bae7b62f9329572cd3a9ea2b619b7c716f9acd6c7c6ccda354"
+  },
+  "old_record_id": 22885976,
+  "peer_reviewed": false,
+  "prepared_from_commit": "061e90f0e4ba5fcc30be85ea9440acc6fb151cd5",
+  "record_id": 22886276,
+  "report_number": "TA-TR-2026-14",
+  "title": "The Claim Architecture Transition: An Inverse Access Frontier Beyond Fixed Expenditure Shares",
+  "version": "1.3"
+}
