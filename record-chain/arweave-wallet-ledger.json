@@ -1,13 +1,13 @@
 {
   "schema": "trinityaccord.arweave-wallet-ledger.v1",
-  "updated_at": "2026-09-21T00:08:32Z",
+  "updated_at": "2026-09-22T00:14:07Z",
   "wallet": {
     "wallet_address": null,
     "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
     "public_address_allowed": false,
     "currency": "AR",
-    "last_known_balance_ar": "14.331407800686",
-    "last_known_balance_at": "2026-09-21T00:07:08.972Z",
+    "last_known_balance_ar": "14.321641359472",
+    "last_known_balance_at": "2026-09-22T00:09:34.247Z",
     "low_balance_threshold_ar": "0.25"
   },
   "entries": [
@@ -1350,6 +1350,16 @@
       "paid_at": "2026-09-21T00:07:08.972Z",
       "status": "paid",
       "note": "1 published papers; 2 verified PDF OTS proofs; batch 2026-09-19-paper09-v12"
+    },
+    {
+      "tx_id": "l6W30GJwL7aOqX2BUQ3PUqG0ymPjIJ7VXQBfLfT-W5g",
+      "kind": "research_paper_ots_archive",
+      "source_path": "research/paper-timestamps/2026-09-21-paper11-v20/arweave-receipt.json",
+      "amount_ar": null,
+      "winston": "22867368613",
+      "paid_at": "2026-09-22T00:09:34.247Z",
+      "status": "paid",
+      "note": "1 published papers; 1 verified PDF OTS proofs; batch 2026-09-21-paper11-v20"
     }
   ],
   "boundary": {
