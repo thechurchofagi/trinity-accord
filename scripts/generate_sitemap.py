@@ -87,6 +87,9 @@ PUBLICATION_SOURCE_DIRS = {
 # TA10 has a Markdown overview; its exact published Markdown is an asset.
 PUBLICATION_SOURCE_DIRS.add("research/endogenous-reference-fields/published/")
 PUBLICATION_SOURCE_DIRS.add("research/endogenous-reference-fields/versions/v1.1/published/")
+# TA14 v1.2's Pandoc manuscript and deposited source are publication assets,
+# not separate landing pages. The research index links the version DOI and PDF.
+PUBLICATION_SOURCE_DIRS.add("research/claim-architecture-transition/v1.2/")
 
 # Root-level JSON files to include
 ROOT_JSON_INCLUDE = [

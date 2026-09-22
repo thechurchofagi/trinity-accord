@@ -1,0 +1,23 @@
+{
+  "type": "report",
+  "id": "TA-TR-2026-14-v1.2",
+  "title": "The Claim Architecture Transition: Real Claims, Endogenous Essential Prices, and Budget-Feasible Support",
+  "author": [
+    {
+      "family": "Liu",
+      "given": "Hongju"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2026,
+        9,
+        22
+      ]
+    ]
+  },
+  "version": "1.2",
+  "DOI": "10.5281/zenodo.22885976",
+  "publisher": "Zenodo"
+}

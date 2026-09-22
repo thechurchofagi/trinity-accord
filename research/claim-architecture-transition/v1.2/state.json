@@ -1,0 +1,76 @@
+{
+  "conceptrecid": "22871208",
+  "date": "2026-09-22",
+  "doi": "10.5281/zenodo.22885976",
+  "old_doi": "10.5281/zenodo.22871209",
+  "old_files_modified": false,
+  "old_inventory": {
+    "README-LICENSE.txt": {
+      "checksum": "md5:41dd6e0a6d759430d137b6b5a32c30d5",
+      "size": 769
+    },
+    "REPRODUCIBILITY.md": {
+      "checksum": "md5:a155cee180f8f9874ad9d1af5c226e42",
+      "size": 578
+    },
+    "REVIEW-AND-SOURCES.md": {
+      "checksum": "md5:38c8b49026daf68585dfe2892476e883",
+      "size": 1355
+    },
+    "SHA256SUMS.txt": {
+      "checksum": "md5:8d81b2d475ad85903eb48cff5d2e9f4c",
+      "size": 1249
+    },
+    "build_paper.py": {
+      "checksum": "md5:05b9361cfae2e729747ddc947a85c581",
+      "size": 78645
+    },
+    "citation.bib": {
+      "checksum": "md5:d166ab8948ba32a79fa3612cba5c3596",
+      "size": 375
+    },
+    "citation.csl.json": {
+      "checksum": "md5:73b1c440c25b0965fed5696f868ee559",
+      "size": 567
+    },
+    "citation.ris": {
+      "checksum": "md5:19f106ced0dadd848e635c98b37c0d6a",
+      "size": 342
+    },
+    "claim-architecture-transition-v1.1.docx": {
+      "checksum": "md5:f04f2087c6da1823bdd2f7a7b059c4d2",
+      "size": 210410
+    },
+    "claim-architecture-transition-v1.1.md": {
+      "checksum": "md5:c57930274bac11987044468219365e24",
+      "size": 81564
+    },
+    "claim-architecture-transition-v1.1.pdf": {
+      "checksum": "md5:4b52f613aa06e4478e09aa72e73520f6",
+      "size": 472126
+    },
+    "figure1_output_wage.png": {
+      "checksum": "md5:2885e2de82a4d1e79889bb7ae28eb788",
+      "size": 85531
+    },
+    "figure2_claim_gap.png": {
+      "checksum": "md5:eade84653bd59c84651d455a1c60f83b",
+      "size": 78657
+    },
+    "generate_assets.py": {
+      "checksum": "md5:60dee5625cd2b3efaff55a96e32053da",
+      "size": 1802
+    },
+    "illustrative_series.csv": {
+      "checksum": "md5:776af6062fd37913aecf10c63916ed8f",
+      "size": 47940
+    }
+  },
+  "old_pdf_sha256": "9d3fec11bb4113daee10969de782faecf56cd8ca79448cd8552103094d1147ec",
+  "old_record_id": 22871209,
+  "record_id": 22885976,
+  "same_concept": true,
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "title": "The Claim Architecture Transition: Real Claims, Endogenous Essential Prices, and Budget-Feasible Support",
+  "version": "1.2"
+}

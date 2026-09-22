@@ -1,0 +1,111 @@
+{
+  "anonymous_readback": true,
+  "bitcoin_originals_modified": false,
+  "conceptrecid": "22871208",
+  "doi": "10.5281/zenodo.22885976",
+  "doi_resolver": {
+    "final_url": "https://zenodo.org/records/22885976",
+    "http_status": 200,
+    "matches_record": true,
+    "state": "PASS"
+  },
+  "file_count": 13,
+  "files": [
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 4196,
+      "name": "ORIGIN-AND-FUTURE.md",
+      "sha256": "75a18b3b5c2f4e623af420547e852f063758ec9d2c801323abd287ac916426fd"
+    },
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 502,
+      "name": "README-LICENSE.txt",
+      "sha256": "3c351b30a7b1a18204fb9a631b65888726dc0247645a0ef28cc8aa5d02e043a5"
+    },
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 1084,
+      "name": "REPRODUCIBILITY.md",
+      "sha256": "8b306a4a5acf0e18f1ab91082be7e593264d31fbf79f42d4dfa15750653d46d6"
+    },
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 7827,
+      "name": "REVISION-AND-SOURCES.md",
+      "sha256": "34f2d3e9ff8f8875f5eaa76fa98d03d9e8fed48ca4d3b2a7e7833bc444f8ad4a"
+    },
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 1030,
+      "name": "SHA256SUMS.txt",
+      "sha256": "35338046d7e4721ae511beefe93e7a7dbe306910620cb8fb60fe82139c05c016"
+    },
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 9981,
+      "name": "audit.py",
+      "sha256": "a88672877a1b1be4e1b44c644fe5d597839cb2057267b5b2cd2968a2fecb3183"
+    },
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 309,
+      "name": "build.sh",
+      "sha256": "e68cc42493a83053396b7f11c638088d57a99d590f968505f15039dabcdbabb6"
+    },
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 2664,
+      "name": "checks.json",
+      "sha256": "387f8e36c9f1c4f1acf84e43389c6261c1dd6a7672474ed8adec1d5adcc165e6"
+    },
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 348,
+      "name": "citation.bib",
+      "sha256": "96599faacd83333692a11642767284296949b3814e2cb4e020027bcd6d768be2"
+    },
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 428,
+      "name": "citation.csl.json",
+      "sha256": "3c094032238c922018fefe8322ddd848128e4c94f6d47640a7c22ca812a8d708"
+    },
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 36310,
+      "name": "claim-architecture-transition-v1.2.md",
+      "sha256": "f1a0fbbf0e3e2fb1dab88f19f4441c08d739eadf0902415c49ce2cc7963693ab"
+    },
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 144920,
+      "name": "claim-architecture-transition-v1.2.pdf",
+      "sha256": "70c3ecaa00632ee4040abe28c3732d9c2b2230a8f2b112e712bf71f078722bfd"
+    },
+    {
+      "anonymous_readback_pass": true,
+      "bytes": 703,
+      "name": "illustration.csv",
+      "sha256": "0ea2482317c3f9dacc59cde7276fd138d3641996032276446e33ef8dc383aeeb"
+    }
+  ],
+  "global_priority_certified": false,
+  "manifest_sha256": "ae20d62d3fba68d39fbf68020624ee73d5002ca192d3bdbe43d85e83680742c4",
+  "new_numbered_papers": 0,
+  "peer_reviewed": false,
+  "prior_doi": "10.5281/zenodo.22871209",
+  "prior_pdf_sha256_verified": "9d3fec11bb4113daee10969de782faecf56cd8ca79448cd8552103094d1147ec",
+  "prior_public_files_unchanged": true,
+  "record_id": 22885976,
+  "report_number": "TA-TR-2026-14",
+  "same_concept": true,
+  "source_commit": "5b4803918c00bdfa20e1a45d03d6d715986c1965",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "title": "The Claim Architecture Transition: Real Claims, Endogenous Essential Prices, and Budget-Feasible Support",
+  "v12_arweave_preservation": "NOT_ASSERTED",
+  "v12_ots_maturity": "NOT_ASSERTED",
+  "version": "1.2",
+  "was_already_published": false,
+  "workflow_run_id": "35680227861"
+}
