@@ -50,6 +50,7 @@ ROOT_SPECIAL_FILES = [
     "llms-full.txt",
     "ai.txt",
     "citation.cff",
+    "CITATION.cff",
     "metadata.json",
     "feed.xml",
     "robots.txt",
