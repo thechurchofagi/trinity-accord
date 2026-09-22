@@ -26,13 +26,17 @@ jobs:
         if: env.MODE == 'prepare'
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-lang-chinese fonts-texgyre fonts-noto-cjk poppler-utils
+          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-lang-chinese lmodern fonts-texgyre fonts-noto-cjk poppler-utils
       - name: Record repository toolchain provenance
         run: python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/ta14-v12-toolchain.json"
       - name: Execute only the selected guarded phase
         env:
           ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
-        run: python3 research/claim-architecture-transition/v1.2/pipeline.py "$MODE"
+        run: |
+          if [ "$MODE" = prepare ]; then
+            python3 research/claim-architecture-transition/v1.2/recover_draft.py
+          fi
+          python3 research/claim-architecture-transition/v1.2/pipeline.py "$MODE"
       - name: Preserve any recoverable same-record state
         if: always()
         run: python3 research/claim-architecture-transition/v1.2/pipeline.py persist
