@@ -176,7 +176,7 @@ def run(out: Path) -> dict:
     for a,b,eta in itertools.product((.15,.35,.7),(.2,.55,.8),(.05,.28,.6,.95)):
         lim=eta*b/(a*(1-eta)+eta*b)
         close('support_limit',minimum_tax(1e-10,a,b,eta),lim,2e-9)
-        expected=eta*b/(.15*(1-eta)+eta*.8)
+        expected=eta*.8/(.15*(1-eta)+eta*.8)
         require('interval_sensitivity_bound',lim<=expected+1e-12)
     for A in (1e2,1e4,1e6):
         y=(1+A)**.65
