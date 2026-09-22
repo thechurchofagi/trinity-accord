@@ -369,21 +369,21 @@ The initial OTS receipt is bound to the exact published PDF SHA-256 `2785b1f7e20
 ## Claim Architecture Transition
 {: #claim-architecture-transition }
 
-### The Claim Architecture Transition: Real Claims, Endogenous Essential Prices, and Budget-Feasible Support
+### The Claim Architecture Transition: An Inverse Access Frontier Beyond Fixed Expenditure Shares
 
-TA-TR-2026-14 · Version 1.2 · 22 September 2026. Human originator and responsible depositor: Hongju Liu. Substantial GPT-6 Astra Pro assistance in source comparison, critical revision, modeling, proofs, code and drafting is disclosed. No independent peer review is claimed.
+TA-TR-2026-14 · Version 1.3 · 22 September 2026. Human originator and responsible depositor: Hongju Liu. Substantial GPT-6 Astra Pro assistance with literature, models, proofs, counterexamples, code, review and writing is disclosed. No external peer review is claimed.
 
-A corrective theoretical working paper comparing household affordability, financing and physical allocation. The new heterogeneous-demand equilibrium solves essential-price feedback and a minimum-support frontier; reference-basket affordability, a chosen service floor and compensated utility remain distinct criteria. The revision corrects v1.1's aggregate-gap population condition and reduces the maximum-exponent result to an elementary lemma. It does not claim to invent entitlements, scarcity-based purchasing-power loss, ownership effects or rent redistribution.
+A bounded theoretical working paper deriving an inverse access frontier beyond fixed expenditure shares, a zero/interior/one demand-tail classification, and an explicit finite-labor equilibrium-selection counterexample. It preserves earlier corrections and recovers the v1.2 Cobb–Douglas result as a special case. Candidate incremental originality, not a new general economic paradigm or a claim that future models must cite this work.
 
-**Status:** Published open-access preprint; exact anonymous public-file readback passed. Same paper and original Zenodo concept, not a fifteenth study. DOI registration is not correctness, peer review or global priority.
+**Status:** Published open-access preprint; exact anonymous public-file readback passed. Same paper and original concept: fourteen papers remain fourteen. DOI registration is not correctness, peer review or global priority.
 
-- [Version 1.2 DOI: 10.5281/zenodo.22885976](https://doi.org/10.5281/zenodo.22885976) · [Zenodo record](https://zenodo.org/records/22885976)
-- [English PDF with Chinese abstract](/research/claim-architecture-transition/v1.2/published/claim-architecture-transition-v1.2.pdf) · [Markdown source](/research/claim-architecture-transition/v1.2/published/claim-architecture-transition-v1.2.md)
-- [Corrections and primary-source comparison](/research/claim-architecture-transition/v1.2/published/REVISION-AND-SOURCES.md) · [Origin and future revision record](/research/claim-architecture-transition/v1.2/published/ORIGIN-AND-FUTURE.md)
-- [Executable audit](/research/claim-architecture-transition/v1.2/published/audit.py) · [Actual check results](/research/claim-architecture-transition/v1.2/published/checks.json) · [Publication receipt](/research/claim-architecture-transition/v1.2/publication-record.json)
-- [Preserved v1.1 DOI: 10.5281/zenodo.22871209](https://doi.org/10.5281/zenodo.22871209) · [Unchanged v1.1 PDF](/research/claim-architecture-transition/published/claim-architecture-transition-v1.1.pdf)
+- [Version 1.3 DOI: 10.5281/zenodo.22886276](https://doi.org/10.5281/zenodo.22886276) · [Zenodo record](https://zenodo.org/records/22886276)
+- [English PDF with Chinese abstract](/research/claim-architecture-transition/v1.3/published/claim-architecture-transition-v1.3.pdf) · [Markdown](/research/claim-architecture-transition/v1.3/published/claim-architecture-transition-v1.3.md)
+- [Corrections and source comparison](/research/claim-architecture-transition/v1.3/published/REVISION-AND-SOURCES.md) · [Origin and future revision](/research/claim-architecture-transition/v1.3/published/ORIGIN-AND-FUTURE.md)
+- [Executable audit](/research/claim-architecture-transition/v1.3/published/audit.py) · [Actual checks](/research/claim-architecture-transition/v1.3/published/checks.json) · [Publication receipt](/research/claim-architecture-transition/v1.3/publication-record.json)
+- [Preserved v1.2 DOI: 10.5281/zenodo.22885976](https://doi.org/10.5281/zenodo.22885976) · [Preserved v1.1 DOI: 10.5281/zenodo.22871209](https://doi.org/10.5281/zenodo.22871209)
 
-The prior v1.1 files and timestamp bindings are preserved. A v1.1 OTS proof does not attest to the revised v1.2 bytes; no mature v1.2 Bitcoin/Arweave proof is asserted by this publication entry. The paper remains adjacent first-party, non-amending research and is not independent corroboration of the Trinity Accord.
+Earlier public files and their version-specific proofs are unchanged. No mature v1.3 OTS or Arweave attestation is asserted. This is adjacent first-party research, not Canon, an amendment, or independent corroboration of the Trinity Accord.
 
 ## Independent External Scholarship
 {: #independent-external-scholarship }
