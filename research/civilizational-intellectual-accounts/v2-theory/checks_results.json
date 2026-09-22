@@ -1,0 +1,87 @@
+{
+  "evidence_type": "DETERMINISTIC_LOGICAL_CHECKS_NOT_AI_EXPERIMENTS",
+  "checks_passed": 12,
+  "checks_failed": 0,
+  "checks": [
+    {
+      "name": "nonattainment_finite_prefix",
+      "status": "PASS",
+      "best_tested": -0.0001,
+      "analytic_supremum_of_infinite_sequence": 0,
+      "note": "All -1/n are negative. The infinite supremum is zero, unattained."
+    },
+    {
+      "name": "nonanticipating_quantifier_order",
+      "status": "PASS",
+      "max_min": -1.0,
+      "min_max": 1.0,
+      "note": "The scenario is unrevealed when an action is chosen."
+    },
+    {
+      "name": "one_success_not_robust_witness",
+      "status": "PASS",
+      "observed_margin": 1.0,
+      "worst_case_margin": -1.0
+    },
+    {
+      "name": "selection_requires_joint_coverage",
+      "status": "PASS",
+      "pointwise_coverage": 0.95,
+      "paths": 20,
+      "independent_false_certificate_probability": 0.6415140775914581,
+      "bonferroni_independent_example_error": 0.04883012474683324,
+      "note": "Exact synthetic confidence-bound construction, not measured FWER."
+    },
+    {
+      "name": "finite_uniform_cut",
+      "status": "PASS",
+      "upper": -0.1
+    },
+    {
+      "name": "pointwise_negative_not_uniform_gap",
+      "status": "PASS",
+      "note": "Infinite cut elements -1/n have no common strictly negative upper gap."
+    },
+    {
+      "name": "finite_certificate_interval",
+      "status": "PASS",
+      "lower": 0.060000000000000005,
+      "true_margin": 0.1,
+      "upper": 0.14,
+      "evidence_type": "STIPULATED_SYNTHETIC_VALUES_NOT_EMPIRICAL"
+    },
+    {
+      "name": "scope_monotonicity_on_same_units",
+      "status": "PASS",
+      "note": "Adding scenarios lowers value only under aligned policy/score spaces."
+    },
+    {
+      "name": "all_reject_is_not_validation_success",
+      "status": "PASS",
+      "false_acceptance": 0.0,
+      "unconditional_verified_repair": 0.0,
+      "valid_claim_acceptance": 0.0
+    },
+    {
+      "name": "zero_observed_errors_not_zero_risk",
+      "status": "PASS",
+      "trials": 30,
+      "errors": 0,
+      "confidence": 0.95,
+      "one_sided_iid_binomial_upper": 0.09503385285530419
+    },
+    {
+      "name": "renewal_deadline_precedes_task_failure",
+      "status": "PASS",
+      "task_floor_time": 4.0,
+      "latest_gapless_renewal_start": 1.0,
+      "late_start_current_surplus": 2.0,
+      "note": "Toy parameters, not calendar dates or measured human training times."
+    },
+    {
+      "name": "latency_closed_form_boundary",
+      "status": "PASS",
+      "note": "Zero surplus at completion; viability convention allows equality."
+    }
+  ]
+}
