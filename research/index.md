@@ -369,23 +369,21 @@ The initial OTS receipt is bound to the exact published PDF SHA-256 `2785b1f7e20
 ## Claim Architecture Transition
 {: #claim-architecture-transition }
 
-### The Claim Architecture Transition: Transformative AI, Real Claim Closure, and General Equilibrium Beyond Wage-Based Distribution
+### The Claim Architecture Transition: Real Claims, Endogenous Essential Prices, and Budget-Feasible Support
 
-TA-TR-2026-14 · Version 1.1 · 21 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial AI-assisted literature research, originality stress-testing, mathematical checking, numerical illustration, drafting, document generation and publication verification are disclosed in the manuscript.
+TA-TR-2026-14 · Version 1.2 · 22 September 2026. Human originator and responsible depositor: Hongju Liu. Substantial GPT-6 Astra Pro assistance in source comparison, critical revision, modeling, proofs, code and drafting is disclosed. No independent peer review is claimed.
 
-A theoretical economics working paper asking what keeps welfare-bearing people connected to social output when wage income ceases to be a broadly distributed claim on production. The paper formalizes a **claim architecture**, derives a CES real-claim phase condition, separates employment and market clearing from basic-claim inclusion, and gives a general claim-closure condition covering labor income, broad asset ownership, transfers/social dividends, direct provision and essential-price deflation. The paper does not claim that automation-induced labor-share decline, the importance of ownership, entitlement theory, or scarcity-driven purchasing-power effects are new discoveries.
+A corrective theoretical working paper comparing household affordability, financing and physical allocation. The new heterogeneous-demand equilibrium solves essential-price feedback and a minimum-support frontier; reference-basket affordability, a chosen service floor and compensated utility remain distinct criteria. The revision corrects v1.1's aggregate-gap population condition and reduces the maximum-exponent result to an elementary lemma. It does not claim to invent entitlements, scarcity-based purchasing-power loss, ownership effects or rent redistribution.
 
-**Status:** Published open-access preprint / working paper; AI-assisted, human-responsible, not peer reviewed and non-amending. The exact 15-file Zenodo package passed anonymous complete-file byte-count and SHA-256 readback, and the DOI resolver points to the correct public record.
+**Status:** Published open-access preprint; exact anonymous public-file readback passed. Same paper and original Zenodo concept, not a fifteenth study. DOI registration is not correctness, peer review or global priority.
 
-- [DOI: 10.5281/zenodo.22871209](https://doi.org/10.5281/zenodo.22871209) · [Zenodo record and 15 files](https://zenodo.org/records/22871209)
-- [English PDF](/research/claim-architecture-transition/published/claim-architecture-transition-v1.1.pdf) · [Markdown source](/research/claim-architecture-transition/published/claim-architecture-transition-v1.1.md) · [Editable DOCX](/research/claim-architecture-transition/published/claim-architecture-transition-v1.1.docx)
-- [Publication receipt](/research/claim-architecture-transition/publication-record.json) · [Exact package manifest](/research/claim-architecture-transition/EXPECTED-PUBLICATION.json)
-- [Reproducibility note](/research/claim-architecture-transition/published/REPRODUCIBILITY.md) · [BibTeX](/research/claim-architecture-transition/published/citation.bib) · [RIS](/research/claim-architecture-transition/published/citation.ris) · [CSL-JSON](/research/claim-architecture-transition/published/citation.csl.json)
-- [OTS / guarded Arweave preservation status](/research/paper-timestamps/2026-09-21-paper14-v11/status.json) · [Preservation workflow](https://github.com/thechurchofagi/trinity-accord/actions/workflows/research-paper-14-v11-ots-arweave.yml)
+- [Version 1.2 DOI: 10.5281/zenodo.22885976](https://doi.org/10.5281/zenodo.22885976) · [Zenodo record](https://zenodo.org/records/22885976)
+- [English PDF with Chinese abstract](/research/claim-architecture-transition/v1.2/published/claim-architecture-transition-v1.2.pdf) · [Markdown source](/research/claim-architecture-transition/v1.2/published/claim-architecture-transition-v1.2.md)
+- [Corrections and primary-source comparison](/research/claim-architecture-transition/v1.2/published/REVISION-AND-SOURCES.md) · [Origin and future revision record](/research/claim-architecture-transition/v1.2/published/ORIGIN-AND-FUTURE.md)
+- [Executable audit](/research/claim-architecture-transition/v1.2/published/audit.py) · [Actual check results](/research/claim-architecture-transition/v1.2/published/checks.json) · [Publication receipt](/research/claim-architecture-transition/v1.2/publication-record.json)
+- [Preserved v1.1 DOI: 10.5281/zenodo.22871209](https://doi.org/10.5281/zenodo.22871209) · [Unchanged v1.1 PDF](/research/claim-architecture-transition/published/claim-architecture-transition-v1.1.pdf)
 
-The initial OTS receipt is bound to the exact published PDF SHA-256 `9d3fec11bb4113daee10969de782faecf56cd8ca79448cd8552103094d1147ec` and is currently waiting for Bitcoin attestation. Arweave upload remains blocked until the timestamp is mature and cryptographically verified.
-
-This fourteenth study is a separate non-amending research output. DOI registration, exact-byte readback and later timestamp preservation do not establish truth, peer review, global originality, policy correctness or Google Scholar indexing.
+The prior v1.1 files and timestamp bindings are preserved. A v1.1 OTS proof does not attest to the revised v1.2 bytes; no mature v1.2 Bitcoin/Arweave proof is asserted by this publication entry. The paper remains adjacent first-party, non-amending research and is not independent corroboration of the Trinity Accord.
 
 ## Independent External Scholarship
 {: #independent-external-scholarship }
