@@ -1,0 +1,10 @@
+{
+  "state": "CONDITIONAL_WORKING_PAPER_REVIEW_PASS",
+  "local_review": "74 original plus 13 extension checks passed; original archive hashes matched",
+  "runner_original_checks": {
+    "passed": 74,
+    "failed": 0
+  },
+  "not_empirical_validation": true,
+  "not_external_peer_review": true
+}

@@ -1,0 +1,26 @@
+{
+  "batch": "2026-09-22-abundance-bridge-v10",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-14-BRIDGE",
+      "record_id": 22895832,
+      "doi": "10.5281/zenodo.22895832",
+      "version": "1.0",
+      "title": "Financing the Automation Transition Without Pledging Subsistence: Public Upside Claims, Prosperity Tiers, and Bounded Real Returns",
+      "receipt_path": "research/claim-architecture-transition/bridge-finance/v1.0/publication-record.json",
+      "pdfs": [
+        {
+          "name": "Part-I-Financing-Automation-v1.0.pdf",
+          "bytes": 116352,
+          "sha256": "425a405417d23d5fff5bca05f54cfaae4513a87b02484928ab38ed04957f34b3"
+        },
+        {
+          "name": "Part-II-Prosperity-Real-Claims-zh-v1.0.pdf",
+          "bytes": 251657,
+          "sha256": "0aa600384b70efcf1e0c56c05f66acb0e990b1467539d2c2ba222708d3021fbc"
+        }
+      ]
+    }
+  ]
+}

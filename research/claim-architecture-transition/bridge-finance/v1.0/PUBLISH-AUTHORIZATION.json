@@ -1,0 +1,28 @@
+{
+  "authorization": "PUBLISH_EXACT_REVIEWED_PACKAGE",
+  "record_id": 22895832,
+  "doi": "10.5281/zenodo.22895832",
+  "version": "1.0",
+  "report_number": "TA-TR-2026-14-BRIDGE",
+  "expected_manifest_sha256": "04fa3ca29b541a28214ae0de019c7ccfb725012c3470b7a45b4a725ee88397b9",
+  "user_authorization": "Final check, then publish DOI and complete OTS and Arweave as for the other papers.",
+  "review": {
+    "frozen_files": 12,
+    "sha256_inventory_verified": true,
+    "original_checks_passed": 74,
+    "supplemental_part_i_ii_checks_passed": 13,
+    "failed_checks": 0,
+    "english_pdf_pages": 14,
+    "chinese_part_ii_pdf_pages": 5,
+    "final_pdf_contact_sheets_reviewed": true,
+    "english_key_formula_page_reviewed": true,
+    "no_external_peer_review_claim": true,
+    "no_foundational_priority_claim": true,
+    "prior_versions_unchanged": true
+  },
+  "pdf_sha256": {
+    "Part-I-Financing-Automation-v1.0.pdf": "425a405417d23d5fff5bca05f54cfaae4513a87b02484928ab38ed04957f34b3",
+    "Part-II-Prosperity-Real-Claims-zh-v1.0.pdf": "0aa600384b70efcf1e0c56c05f66acb0e990b1467539d2c2ba222708d3021fbc"
+  },
+  "scope": "One new preprint record, exact files only. No old deposit edits, journal submission, securities issuance or canonical amendment. Public readback required before OTS targets. Existing Arweave budget limits remain in force."
+}
