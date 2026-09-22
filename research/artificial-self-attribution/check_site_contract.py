@@ -70,7 +70,9 @@ def main():
     index = (ROOT.parents[1] / "research/index.md").read_text()
     require(index.count('  - id: "evidence-for-artificial-self-attribution"') == 1, "Duplicate or missing TOC")
     require("for the original six papers" in index, "Dated six-paper guide lost")
-    require(f"are not {current_series_word(index)} independent corroborations" in index,
+    series_word = current_series_word(index)
+    require(f"are not {series_word} independent corroborations" in index
+            or f"All {series_word} share a first-party, substantially AI-assisted research context and are not independent corroborations." in index,
             "Series evidence boundary lost")
     tree = ET.parse(ROOT.parents[1] / "sitemap.xml")
     ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}

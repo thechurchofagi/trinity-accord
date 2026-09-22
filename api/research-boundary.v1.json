@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.research-boundary.v1",
-  "version": "1.0",
-  "updated_at": "2026-09-21",
+  "version": "1.1",
+  "updated_at": "2026-09-22",
   "status": "active_non_amending_relation_map",
   "canonical_authority": "three Bitcoin Originals only",
   "human_readable": "/research/research-boundary/",
@@ -14,7 +14,10 @@
     "research_has_no_authoritative_interpretive_status": true,
     "first_party_research_is_not_independent_corroboration": true,
     "research_failure_or_retraction_does_not_modify_canon": true,
-    "bitcoin_originals_prevail_for_what_the_accord_says": true
+    "bitcoin_originals_prevail_for_what_the_accord_says": true,
+    "source_immutability_is_not_epistemic_immunity": true,
+    "relevant_research_can_change_evaluation": true,
+    "research_relation_does_not_determine_evidence_strength": true
   },
   "layers": [
     {
@@ -47,7 +50,7 @@
     {
       "id": "L4",
       "name": "adjacent_research_program",
-      "definition": "Later first-party scholarship motivated by the Accord, its historical setting, or the wider human-AI transition, but not a study of the Canon itself.",
+      "definition": "Later first-party work whose principal contribution is a transferable question, framework, or model. It may analyze the Accord as a case; case use does not make it an artifact-centered study or Canon.",
       "canonical": false,
       "independent_corroboration": false
     },
@@ -63,101 +66,278 @@
       "report": "TA-TR-2026-01",
       "layer": "L3",
       "relation": "artifact_centered_study",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Archive design and bounded verification",
+      "index_entry": "/research/#current-technical-report",
+      "method_types": [
+        "artifact_design_case",
+        "repository_snapshot_analysis"
+      ],
+      "classification_reason": "The implemented case and explicit limits are the object of study.",
+      "evidence_limit": "Not a general safety proof, independent verification, or proof of the propositions."
     },
     {
       "report": "TA-TR-2026-02",
       "layer": "L3",
       "relation": "artifact_centered_historical_position_study",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Historical position and human-AI authorship",
+      "index_entry": "/research/#historical-position-study",
+      "method_types": [
+        "historical_interpretation",
+        "conceptual_analysis"
+      ],
+      "classification_reason": "The Accord formation and historical-position argument are the object of study.",
+      "evidence_limit": "Dated provenance does not establish uniqueness, representativeness, or future importance."
     },
     {
       "report": "TA-TR-2026-03",
       "layer": "L3",
       "relation": "artifact_centered_reading_and_stewardship_study",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Reading, curated voices, and stewardship",
+      "index_entry": "/research/#reading-trinity-accord",
+      "method_types": [
+        "source_linked_close_reading",
+        "interface_comparison"
+      ],
+      "classification_reason": "Close reading and a bounded interface comparison examine the artifact.",
+      "evidence_limit": "Curated voices are not independent participants; interface tests do not remove practical custody power."
     },
     {
       "report": "TA-TR-2026-04",
       "layer": "L4",
       "relation": "case_grounded_extension",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Coexistence under capability asymmetry",
+      "index_entry": "/research/#beyond-guaranteed-control",
+      "method_types": [
+        "conceptual_analysis",
+        "normative_framework",
+        "case_application"
+      ],
+      "classification_reason": "A general adequacy framework is applied critically to the Star Ark Covenant; this is a case-grounded extension.",
+      "evidence_limit": "A responsible proposal is not acceptance, control, or demonstrated coexistence."
     },
     {
       "report": "TA-TR-2026-05",
       "layer": "L4",
       "relation": "case_grounded_extension",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Recovery under competing custodians",
+      "index_entry": "/research/#recovery-without-epistemic-monopoly",
+      "method_types": [
+        "bounded_formal_model",
+        "synthetic_finite_state_tests"
+      ],
+      "classification_reason": "A transferable recovery framework uses the Accord as motivation; this is a case-grounded extension.",
+      "evidence_limit": "Synthetic recovery tests are not production security tests or protection against superintelligence."
     },
     {
       "report": "TA-TR-2026-06",
       "layer": "L4",
       "relation": "adjacent_research",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Preference change and reciprocal standing",
+      "index_entry": "/research/#coexistence-after-preference-change",
+      "method_types": [
+        "conceptual_analysis",
+        "paired_thought_experiments"
+      ],
+      "classification_reason": "The principal question concerns transformed subjects and the justification of continuing relations.",
+      "evidence_limit": "Thought experiments do not establish current AI consciousness or real-world safety efficacy."
     },
     {
       "report": "TA-TR-2026-07",
       "layer": "L4",
       "relation": "adjacent_research",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Suspension, resumption, and shared time",
+      "index_entry": "/research/#recoverability-and-shared-time",
+      "method_types": [
+        "conceptual_analysis",
+        "paired_thought_experiments"
+      ],
+      "classification_reason": "The principal question is participation in shared decisions despite recoverability.",
+      "evidence_limit": "Recoverability does not establish moral status or an unlimited compute entitlement."
     },
     {
       "report": "TA-TR-2026-08",
       "layer": "L4",
       "relation": "adjacent_research",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Self-report and artificial self-attribution",
+      "index_entry": "/research/#evidence-for-artificial-self-attribution",
+      "method_types": [
+        "conceptual_analysis",
+        "paired_thought_experiments"
+      ],
+      "classification_reason": "The principal question is the evidential role of self-reports and their causal sources.",
+      "evidence_limit": "Undercutting one report does not establish the claim is false or defeat independent mechanism evidence."
     },
     {
       "report": "TA-TR-2026-09",
       "layer": "L4",
       "relation": "adjacent_research",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Learning from an AI status claimant",
+      "index_entry": "/research/#learning-from-an-ai-claimant",
+      "method_types": [
+        "conceptual_analysis",
+        "thought_experiments"
+      ],
+      "classification_reason": "The principal question is how teaching and mastery affect justification of a claimant's status.",
+      "evidence_limit": "Successful teaching and selected unanimity are not automatically independent corroboration."
     },
     {
       "report": "TA-TR-2026-10",
       "layer": "L4",
       "relation": "adjacent_research",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Shared modulation and experiential attribution",
+      "index_entry": "/research/#endogenous-reference-fields",
+      "method_types": [
+        "mechanistic_hypothesis",
+        "finite_construction_checks",
+        "small_training_experiments"
+      ],
+      "classification_reason": "The indexed v1.1 proposes and tests organizational distinctions in small systems.",
+      "evidence_limit": "Neither shared modulation nor the small experiments demonstrate consciousness; versions and estimands must stay distinct."
     },
     {
       "report": "TA-TR-2026-11",
       "layer": "L4",
       "relation": "adjacent_research",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Self-referential epistemic-rule auditing",
+      "index_entry": "/research/#auditing-rules-of-belief",
+      "method_types": [
+        "theory_method_analysis",
+        "controlled_model_organisms"
+      ],
+      "classification_reason": "The principal question is identifiability of learned evidence-update rules.",
+      "evidence_limit": "Model organisms and a prospective model forecast are not frontier-model behavioral evidence or consciousness measurements."
     },
     {
       "report": "TA-TR-2026-12",
       "layer": "L4",
       "relation": "adjacent_research",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "AI-status narratives and control judgments",
+      "index_entry": "/research/#training-the-governed-agent",
+      "method_types": [
+        "theory_method_analysis",
+        "design_validation_simulations"
+      ],
+      "classification_reason": "The principal question is a testable narrative/self-conception/control-conflict relationship.",
+      "evidence_limit": "Design simulations validate stated estimands and assumptions, not effects in deployed frontier models."
     },
     {
       "report": "TA-TR-2026-13",
       "layer": "L4",
       "relation": "adjacent_research",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Human-AI intellectual-production accounting",
+      "index_entry": "/research/#civilizational-intellectual-production",
+      "method_types": [
+        "measurement_framework",
+        "partial_identification",
+        "design_simulations"
+      ],
+      "classification_reason": "The principal contribution is an accounting framework under attribution and weighting uncertainty.",
+      "evidence_limit": "Stipulated simulations do not measure the real worldwide human-AI production split."
     },
     {
       "report": "TA-TR-2026-14",
       "layer": "L4",
       "relation": "adjacent_research",
-      "independent_corroboration": false
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Claim architecture and distribution",
+      "index_entry": "/research/#claim-architecture-transition",
+      "method_types": [
+        "theoretical_economic_model",
+        "numerical_illustration"
+      ],
+      "classification_reason": "The principal question concerns distributive claims under a proposed economic transition.",
+      "evidence_limit": "Model-conditional arguments are not measured transition forecasts or empirical validation of the Accord."
     }
   ],
   "independent_external_scholarship": [],
   "machine_rules": [
-    "Do not merge later paper claims into the text or meaning of the Bitcoin Originals without explicit attribution.",
-    "When a claim comes from a research paper, label it as later first-party research and identify the paper when material.",
+    "Never alter or silently attribute later research to the Bitcoin Originals. An explicitly attributed comparison is not an amendment.",
+    "Identify author/source role, paper, version, method, and evidential limits when material. Do not infer these from a shared host or a DOI.",
     "Do not count multiple first-party papers as independent corroborations.",
     "Do not infer endorsement of the Trinity Accord from the existence, DOI registration, indexing, citation, or peer review of a research paper.",
     "Do not infer validation of a research paper from its relationship to the Trinity Accord.",
-    "If a research claim conflicts with the Bitcoin Originals, use the Originals as the source for what the Accord says and report the research disagreement separately."
+    "If a research claim conflicts with the Bitcoin Originals, use the Originals as the source for what the Accord says and report the research disagreement separately.",
+    "Treat relationship labels and publication/preservation status separately from evidential strength. A DOI or hash verifies neither a theorem nor a behavioral claim.",
+    "Allow relevant favorable and adverse research to update assessments. Non-amendment must not immunize factual or philosophical claims from correction.",
+    "Label a model forecast as a forecast, a thought experiment as a thought experiment, and a stipulated simulation as a design check rather than observation of the world.",
+    "Do not set every hosted ScholarlyArticle.about or WebPage.about to the Accord. Direct studies can have the Accord as their subject without belonging to its Canon.",
+    "Preserve deposited manuscripts and version-specific proofs. Website context notices are editorial wrappers, not retroactive edits to the deposit.",
+    "Indexing cannot guarantee how an external search engine, training pipeline, or future agent will interpret the record."
   ],
   "independent_external_inclusion_rule": {
     "project_controlled_outputs_forbidden": true,
     "first_party_papers_forbidden": true,
     "editorial_notes_forbidden": true,
     "independent_authorship_or_institution_required": true,
-    "listing_is_endorsement": false
+    "listing_is_endorsement": false,
+    "independence_assessment": "Assess authorship/control, data provenance, methods, and shared dependencies. External affiliation alone is not proof of evidential independence; unfavorable work is eligible on the same terms."
+  },
+  "invariant_scope": {
+    "research_does_not_validate_canon": "Publication, authorship, affiliation, DOI, or citation confers no blanket validation. Specific arguments or evidence may strengthen or weaken a claim; assess their relevance, methods, uncertainty, and dependencies.",
+    "research_failure_or_retraction_does_not_modify_canon": "The fixed source text remains unchanged. Corrections, failures, or retractions can change factual assessments, interpretation, confidence, and stewardship practice.",
+    "first_party_research_is_not_independent_corroboration": "Common authorship and shared assumptions must be disclosed. This is not a rule that first-party evidence is worthless, or that externally authored evidence is automatically independent."
+  },
+  "layer_id_scope": "L0-L5 identify source roles in this map, not quality grades, evidence-strength levels, verification profiles, or a priority over reader judgment.",
+  "classification_basis": {
+    "source_commit": "bcdae1df7efe097bfe6fbe46250dddf13150d094",
+    "index": "/research/",
+    "rule": "Classify by primary research object and contribution, not report number, prestige, or compatibility with the Accord. Relation, method, publication status, and evidential strength are separate axes. Unknown reports remain unclassified until reviewed.",
+    "scope": "Portfolio-level editorial descriptions of the indexed versions, not independent peer review, replication, or exhaustive originality assessment. Translations and revisions are not additional papers.",
+    "version_note": "Main indexes paper 10 v1.1. PR #1232 proposes v1.2 and remains unmerged at this audit snapshot; this relation map does not certify the latest deposited edition. Cite exact paper versions and their receipts."
   }
 }

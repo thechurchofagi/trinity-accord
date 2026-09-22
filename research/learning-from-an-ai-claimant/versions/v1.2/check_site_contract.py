@@ -64,7 +64,9 @@ def main():
         data=(SITE_ROOT/'published'/f['name']).read_bytes()
         assert len(data)==f['bytes'] and sha(data)==f['sha256'],'Old published asset changed: '+f['name']
     index=(REPO/'research/index.md').read_text()
-    assert 'thirteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-13)' in index
+    counts = ((13, 'thirteen'), (14, 'fourteen'))
+    assert sum(f'{word} distinct research papers (TA-TR-2026-01 through TA-TR-2026-{number:02d})' in index
+               for number, word in counts) == 1, 'Series count differs'
     assert index.count('  - id: "learning-from-an-ai-claimant"')==1
     assert rec['doi'] in index and f'10.5281/zenodo.{PREVIOUS_RECORD}' in index
     urls=[e.text for e in ET.parse(REPO/'sitemap.xml').findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url/{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
