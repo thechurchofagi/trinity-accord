@@ -1,0 +1,169 @@
+name: Abundance Bridge OTS and Arweave
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/abundance-bridge-ots-arweave.yml
+      - research/paper-timestamps/2026-09-22-abundance-bridge-v10/targets.json
+      - research/paper-timestamps/2026-09-22-abundance-bridge-v10/trigger.json
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: main-write-lock
+  queue: max
+  cancel-in-progress: false
+jobs:
+  preserve:
+    if: github.repository == 'thechurchofagi/trinity-accord' && github.ref_name == 'main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      BATCH: research/paper-timestamps/2026-09-22-abundance-bridge-v10
+    steps:
+      - name: Authorize manual actor
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          ACTOR: ${{ github.actor }}
+          GUARDIAN_REGISTRY_WORKFLOW_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS }}
+        run: |
+          set -euo pipefail
+          ALLOWLIST="${GUARDIAN_REGISTRY_WORKFLOW_ACTORS:-thechurchofagi}"
+          if [ "$ACTOR" = 'github-actions[bot]' ]; then exit 0; fi
+          case ",$ALLOWLIST," in *",$ACTOR,"*) exit 0 ;; *) exit 1 ;; esac
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+          fetch-depth: 1
+          show-progress: false
+      - name: Check exact published identity and completion
+        id: batch
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, sys
+          root=pathlib.Path(os.environ['BATCH'])
+          cfg=json.loads((root/'targets.json').read_text())
+          sys.path.insert(0,'scripts')
+          from research_paper_ots import validate_config
+          papers,count=validate_config(root,cfg)
+          if len(papers)!=1 or count!=2 or papers[0]['report']!='TA-TR-2026-14-BRIDGE' or papers[0]['doi']!='10.5281/zenodo.22895832':
+              raise RuntimeError('Unexpected bridge preservation target')
+          done=(root/'status.json').exists() and json.loads((root/'status.json').read_text()).get('state')=='ARWEAVE_READBACK_PASS'
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('done='+str(done).lower()+'\n')
+          PY
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        if: steps.batch.outputs.done != 'true'
+        with:
+          python-version: '3.11'
+      - name: Install established OTS client
+        if: steps.batch.outputs.done != 'true'
+        run: python3 -m pip install -r requirements-ots.txt
+      - name: Upgrade and verify both PDF proofs
+        if: steps.batch.outputs.done != 'true'
+        id: ots
+        continue-on-error: true
+        env:
+          OTS_BITCOIN_NODE_URL: http://127.0.0.1:18443/
+        run: |
+          set -euo pipefail
+          python3 scripts/bitcoin_esplora_rpc_proxy.py --host 127.0.0.1 --port 18443 --trace "$RUNNER_TEMP/bridge-ots-proxy.jsonl" --timeout 20 > "$RUNNER_TEMP/bridge-ots-proxy.log" 2>&1 &
+          proxy_pid=$!
+          trap 'kill "$proxy_pid" 2>/dev/null || true' EXIT
+          python3 scripts/research_paper_ots.py lifecycle --batch "$BATCH"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        if: steps.ots.outputs.ready == 'true'
+        with:
+          node-version-file: .node-version
+      - name: Respect current daily allowance and existing receipt
+        if: steps.ots.outputs.ready == 'true'
+        id: budget
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {dailyLimit,paidToday} from './scripts/arweave_spend_budget_helpers.mjs';
+          const root=process.env.BATCH;
+          const ledger=JSON.parse(fs.readFileSync('record-chain/arweave-wallet-ledger.json','utf8'));
+          const rec=fs.existsSync(root+'/arweave-receipt.json')?JSON.parse(fs.readFileSync(root+'/arweave-receipt.json','utf8')):{};
+          const resume=Boolean(rec.tx_id||rec.txid);
+          const used=paidToday('research_paper_ots_archive',ledger),limit=dailyLimit('research_paper_ots_archive');
+          const allowed=process.env.GITHUB_REF_NAME==='main'&&(resume||used<limit);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,'allowed='+allowed+'\n');
+          fs.writeFileSync(root+'/scheduling-status.json',JSON.stringify({checked_at:new Date().toISOString(),state:allowed?'ELIGIBLE_OR_READBACK_RESUME':'DEFERRED_DAILY_ALLOWANCE',paid_research_uploads_today:used,daily_limit:limit,recorded_transaction_resume:resume},null,2)+'\n');
+          JS
+      - name: Install existing upload dependencies
+        if: steps.ots.outputs.ready == 'true' && steps.budget.outputs.allowed == 'true'
+        run: npm ci
+      - name: Persist exact payload intent before paid upload
+        if: steps.ots.outputs.ready == 'true' && steps.budget.outputs.allowed == 'true'
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib
+          root=pathlib.Path(os.environ['BATCH']);sha=hashlib.sha256((root/'arweave-bundle.json').read_bytes()).hexdigest()
+          intent=root/'paid-intent.json';receipt=root/'arweave-receipt.json'
+          rec=json.loads(receipt.read_text()) if receipt.exists() else {}
+          if intent.exists():
+              previous=json.loads(intent.read_text())
+              if previous.get('payload_sha256')!=sha:raise RuntimeError('Paid payload changed')
+              if not(rec.get('tx_id') or rec.get('txid')):raise RuntimeError('Uncertain earlier paid attempt: recover retained artifacts before any new post')
+          elif rec.get('tx_id') or rec.get('txid'):raise RuntimeError('Receipt without recorded intent')
+          else:intent.write_text(json.dumps({'state':'PAID_ATTEMPT_INTENT','payload_sha256':sha,'run_id':os.environ['GITHUB_RUN_ID'],'run_attempt':os.environ['GITHUB_RUN_ATTEMPT'],'report':'TA-TR-2026-14-BRIDGE','doi':'10.5281/zenodo.22895832'},indent=2)+'\n')
+          PY
+          git config user.name 'trinity-ots-bot'
+          git config user.email 'actions@github.com'
+          git add "$BATCH"
+          if ! git diff --cached --quiet; then
+            git commit -m 'Preserve bridge verified OTS and paid-upload intent'
+            git push origin HEAD:main
+          fi
+      - name: Upload guarded archive and verify public bytes
+        if: steps.ots.outputs.ready == 'true' && steps.budget.outputs.allowed == 'true'
+        id: upload
+        continue-on-error: true
+        env:
+          ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
+          NODE_OPTIONS: --import=./scripts/arweave_runtime_spend_guard.mjs
+          ARWEAVE_MINIMUM_REMAINING_AR: '0.25'
+          ARWEAVE_MAX_PAYLOAD_BYTES: '4194304'
+          ARWEAVE_MAX_TRANSACTION_REWARD_AR: '0.05'
+          ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: '0.50'
+          ARWEAVE_READBACK_MAX_SECONDS: '420'
+          ARWEAVE_HTTP_TIMEOUT_MS: '30000'
+        run: python3 scripts/research_paper_ots.py upload --batch "$BATCH"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.batch.outputs.done != 'true'
+        with:
+          name: abundance-bridge-preservation-${{ github.run_id }}
+          path: |
+            research/paper-timestamps/2026-09-22-abundance-bridge-v10/
+            ${{ runner.temp }}/bridge-ots-proxy.jsonl
+          retention-days: 90
+          if-no-files-found: error
+      - name: Commit preservation state without touching prior batches
+        if: always() && steps.batch.outputs.done != 'true'
+        run: |
+          git config user.name 'trinity-ots-bot'
+          git config user.email 'actions@github.com'
+          git add "$BATCH" record-chain/arweave-wallet-ledger.json api/arweave-wallet-status.json
+          git diff --cached --check
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Preserve bridge OTS and Arweave receipts'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main --prune
+            git rebase origin/main || { git rebase --abort; exit 1; }
+          done
+          exit 1
+      - name: Report actual incomplete operations
+        if: always()
+        env:
+          OTS_OUTCOME: ${{ steps.ots.outcome }}
+          UPLOAD_OUTCOME: ${{ steps.upload.outcome }}
+        run: |
+          python3 - <<'PY'
+          import os
+          failed=[k for k in ('OTS_OUTCOME','UPLOAD_OUTCOME') if os.getenv(k)=='failure']
+          if failed:raise SystemExit('Incomplete: '+', '.join(failed))
+          print('Iteration completed; pending Bitcoin/budget states remain explicitly pending.')
+          PY
