@@ -1,40 +1,73 @@
 # TA13 v2 critical review checkpoint — 2026-09-22
 
-Status: RESEARCH ONLY / MANUSCRIPT GATE REOPENED. No DOI publication authorization.
+Status: THIS REVIEW ROUND COMPLETED / MANUSCRIPT GATE REOPENED.
+Research only. No DOI publication authorization. No claim of complete theory, empirical validation, or peer review.
 
 ## User instruction
 
-The user requested a careful reassessment of whether the proposed manuscript can responsibly be written this way, with a visible progress report and a durable record after each substantive step. Do not wait until a long session ends before saving work. Do not modify the published v1.0 or the Trinity Accord canon.
+Carefully reassess whether the manuscript can responsibly be written this way. Report each completed substantive step and preserve a durable record immediately. Do not modify published v1.0 or Trinity Accord canonical material.
 
 ## Step 1 — repository readback: completed
 
-Verified branch head before this checkpoint: `69b52ab3b1ea38b7032ccfc05cf5c74a64a3643c`.
-
+Verified baseline: `69b52ab3b1ea38b7032ccfc05cf5c74a64a3643c`.
 Repository: `thechurchofagi/trinity-accord`.
 Branch: `research/ta13-v2-civilizational-epistemic-transition`.
 
-Nine research Markdown files exist under `research/civilizational-intellectual-accounts/v2-theory/`, including `PRE-MANUSCRIPT-COMPRESSION-GATE.md`. The interrupted English manuscript text in the conversation is not a completed, persisted manuscript in that directory at the verified head. Do not report that draft as saved or completed.
+At baseline, nine research Markdown files existed in this directory. The interrupted English manuscript text in the conversation was not a completed, persisted manuscript here. The initial checkpoint was saved as commit `72865fb47314e7c4c85d29362e8ea25d094fe47a` before further work.
 
-## Step 2 — mathematical audit: in progress
+## Step 2 — mathematical audit and conditional repairs: completed
 
-A concrete problem is already established in the compression gate's equivalence between `m_G >= 0` and existence of a feasible policy. If all admissible policies have margins `-1/n` for positive integers n, their supremum is zero but none has a nonnegative margin. The definition needs an explicit feasible-set predicate, an attainment assumption, or a strictly positive-margin certificate.
+Revised `PRE-MANUSCRIPT-COMPRESSION-GATE.md` in commit `b39ec56074a38b67725aba35ed1a9b696c75f0e8`; read back the revised file.
 
-Further items to check before any new manuscript PASS:
+The earlier blanket PASS was withdrawn. The revised file contains explicit counterexamples and repairs for:
 
-- Whether a witness certifies one realized trajectory or a single non-anticipating policy over the full declared drift class.
-- Simultaneous confidence coverage when selecting the best of many tested paths.
-- Uniform negative separation and adaptive-policy coverage for cut upper bounds.
-- Separation of physical/epistemic capability from confidence bounds used to certify it.
-- Whether the STOP and A-Evolve evidence satisfies the same P/V/S definition used in the theorem rather than a weaker proxy definition.
-- Whether S0–S3 are genuinely nested; their labels do not establish an order.
-- Whether a threshold crossing justifies a topological or historical discontinuity claim.
+- unattained supremum at zero versus existence of a viable policy;
+- non-anticipating policy quantifiers and single-trajectory versus robust witnesses;
+- simultaneous confidence coverage after selecting the best tested policy;
+- uniform negative cut bounds and coverage of adaptive alternatives;
+- latent capability versus evidence/certification about capability;
+- an always-reject validator and a missing condition in the common-mode aggregation lemma;
+- non-nested successor criteria and normal versus catastrophic cohort turnover;
+- finite horizons versus indefinite sustainability;
+- model uncertainty versus sensitivity to different estimands;
+- corridor persistence and unjustified topological/historical claims.
 
-## Working assessment
+These are repaired conditional statements, not evidence that all assumptions hold in real AI R&D.
 
-The question—current knowledge contribution versus independent continuation of knowledge production—is worth retaining. The earlier blanket `PRE-MANUSCRIPT THEORY GATE: PASS` is reopened; it must not be treated as an independent validation or as publication readiness. This checkpoint does not yet resolve originality or broad empirical viability.
+## Step 3 — executable logical checks: completed
 
-## Persistence rules for this continuation
+Ran 12 deterministic checks locally; 12 passed, 0 failed. No model API, paid training, autonomous science run, or human-subject experiment was executed.
 
-Each completed substantive stage receives a Git commit and a short user-facing result. Mark unexecuted tasks as unexecuted. A source report, a static code audit, a synthetic counterexample, and a reproduced empirical experiment are different evidence types. Preserve that distinction.
+Source: `critical_checks.py`, commit `a700ae2341d3b42d10e53343b22d65b4fde9f3a7`.
+Results: `checks_results.json`, commit `1698ce061d88cd15b3ecca4e260982771430fbbe`.
 
-No background execution is implied. This checkpoint records work completed during the current interactive response.
+Checks include a quantifier counterexample, selection error, a finite uniform cut, a synthetic certificate interval, a zero-observed-error risk bound, and a renewal-lag deadline. Infinite-sequence claims rely on analytical proofs, not finite numerical enumeration. The synthetic interval [0.06, 0.14] is NOT an estimate of real AI or human viability.
+
+## Step 4 — source and frontier interpretation review: completed
+
+Saved `EVIDENCE-AND-FRONTIER-REVIEW-20260922.md` in commit `5f9c701dba5aaf5a4d1696466220cf2fc625781c`.
+
+Checked primary sources for STOP, A-Evolve-Training, adaptive data analysis, independence-graded auditing, and rate-induced transitions. The first two remain useful reported cases, but neither was independently reproduced in this session. Neither supplies the canonical robust P/V/S certificate claimed too strongly in earlier notes.
+
+A further conceptual issue was established: inability to keep pace with an AI-driven frontier does not itself establish inability to independently produce, validate, and transmit new knowledge. Separate epistemic continuity, relative frontier competitiveness, and absolute erosion of human capability. Specify whether frontier demands are exogenous or change under the removal intervention.
+
+## Current writing decision
+
+Keep the paired removal-counterfactual question. Do not resume the previous abstract as though all gates passed. A defensible manuscript requires the corrected definitions and must make a substantive mechanism or empirically discriminating result central, rather than treating a combination of established concepts as sufficient evidence of foundational originality.
+
+A minimal renewal-delay illustration was derived: a gapless renewal must start by `(h-d0)/r - ell`, before the current-task margin reaches zero at `(h-d0)/r`. This is elementary lead-time logic under stated assumptions, not an originality claim or AGI forecast. A correctly forward-looking viability definition already includes that earlier deadline.
+
+## Remaining research, not yet completed
+
+- Fix one unambiguous epistemic-continuity target and justify its frontier reference.
+- Develop a minimal dynamic model of renewal delay, recoverable inherited knowledge, and validation capacity.
+- Establish a result that distinguishes mechanisms rather than merely naming regimes.
+- Obtain numerical real-system bounds for the same target with documented coverage assumptions.
+- Complete a source-by-source novelty comparison; the earlier bibliography has not all been re-audited.
+- Only then decide whether to write a complete revised manuscript.
+
+No complete v2 manuscript, new DOI, main-branch merge, or canonical change was performed during this round.
+
+## Recordkeeping rule
+
+Every completed substantive stage receives a saved result and a short user-facing report. Distinguish planned, executed, source-reported, reproduced, inferred, and unresolved work. This file records this interactive session; it is not a scheduled background task.
