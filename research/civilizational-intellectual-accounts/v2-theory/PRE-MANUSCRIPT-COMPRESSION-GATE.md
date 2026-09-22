@@ -1,826 +1,204 @@
-# TA-TR-2026-13 v2 — Pre-Manuscript Compression Gate
+# TA-TR-2026-13 v2 — Corrected Pre-Manuscript Gate
 
 Date: 2026-09-22
-Status: RESEARCH ONLY. Formal compression test, not manuscript prose.
+Status: RESEARCH ONLY / GATE REOPENED / NOT READY FOR PUBLICATION.
 Branch: research/ta13-v2-civilizational-epistemic-transition
-Published v1.0 remains unchanged: DOI 10.5281/zenodo.22866775.
+Published v1.0 remains outside the scope of this edit: DOI 10.5281/zenodo.22866775.
 
-## 0. Verdict
+## 0. Revision and verdict
 
-The v2 research program can now be compressed into a small formal core without relying on any one of the broad claims that prior art has already occupied.
+This revision supersedes the blanket PASS in this file at commit `69b52ab3b1ea38b7032ccfc05cf5c74a64a3643c`. That earlier version remains in Git history. It compressed a promising question into propositions, but several propositions omitted necessary assumptions. Compression is not validation.
 
-That is the strongest sign so far that the project is becoming a coherent theory rather than a collection of AGI-transition intuitions.
+Retain the question: current contribution to knowledge production differs from independent capacity to continue production, correction, and renewal after the other substrate's current cognition is removed.
 
-### Compression result
+Do not yet claim a validated civilization-transition theory, a new mathematical theorem family, a demonstrated real-world robust viability bound, or a foundational paper. The interrupted English manuscript in the conversation is not a completed saved manuscript at the reviewed baseline.
 
-PASS for manuscript architecture.
+The corrections below also qualify earlier research notes where they conflict. In particular, qualitative STOP/A-Evolve mappings are not numerical or robust positive certificates under the canonical definition.
 
-NOT YET a publication authorization.
+## 1. Separate the system from evidence about it
 
-The surviving contribution is not:
+Let theta specify the domain, information boundary, infrastructure, resource budget, horizon, evaluation targets, allowed adaptation, successor test, and drift class. Let M specify the actual transition law and latent capabilities. Different possible worlds M can share the same theta.
 
-- AI dependence;
-- human cognitive offloading;
-- autonomous research;
-- recursive self-improvement;
-- successor formation;
-- workflow closure;
-- verification;
-- intergenerational epistemic degradation;
-- open-ended task generation;
-- common-cause validator failure;
-- robust viability mathematics;
-- facultative/obligate dependence;
-- interdependent-network transitions.
+True P/V/S performance belongs to the system model. Confidence bounds belong to evidence E about that performance. Define `m_G(M; theta)` first; estimate or certify it afterward. Otherwise collecting more audit data changes the definition of capability rather than merely our knowledge of it.
 
-All of those have substantial prior art.
+Likewise, separate two uncertainties:
 
-The candidate contribution is instead an **estimand-and-identification architecture**:
+- uncertainty about M at a fixed estimand theta: an identification problem;
+- varying theta, such as choosing stricter floors or a different domain: estimand sensitivity.
 
-> Define human-only and AI-only drift-aware, cross-period epistemic viability under explicit removal interventions; distinguish those counterfactual viability margins from realized coupled intellectual flow; show why coupled-flow observations do not identify the removal margins; partially identify them with constructive path witnesses and structural cut/dominance upper bounds; and use the two margins to define scale- and horizon-indexed sufficiency/dependence transitions.
+Both matter, but they are not automatically the same identified set. Call computable enclosing intervals outer bounds unless their sharpness has been proved.
 
-This core survives the strongest prior-art search performed so far.
+## 2. Intervention boundary
 
-No claim is made that no prior work anywhere contains a similar construction.
+For G in {H,A}, remove the other substrate's post-intervention adaptive cognition. Preserve declared inherited artifacts and services. Allow G to reorganize within a declared budget.
 
-The safe scholarly statement is:
+An inherited artifact's human origin is not continuing human cognition. Conversely, a supposedly fixed service must not conceal current cognitive labor: experiment interpretation, fault diagnosis, data relabeling, infrastructure repair, or research-direction changes.
 
-> We did not identify, in the literature reviewed, a framework that combines these elements into the same bidirectional estimand and identification problem.
+State both the dependency boundary and duration. A finite campaign using existing hardware does not certify indefinite hardware and expertise renewal.
 
----
+A policy is NON-ANTICIPATING: its action at time u can depend only on information available by u, not on the unrevealed future drift sequence.
 
-## 1. Strong prior art matrix
+## 3. Correct definition: feasibility before the supremum
 
-The manuscript must proactively cite and delimit against these streams.
+Let Pi_G(theta) be the admissible non-anticipating policy set. For a policy pi, define
 
-### 1.1 Human-AI dependence and obligate coupling
+`R_G(pi; M, theta) = inf_{xi in Xi(theta)} inf_{u in [t,t+tau]} min_j s_j(u; pi, xi, M, theta)`.
 
-Rainey & Hochberg (2025):
-human-AI obligate dependence and possible higher-level evolutionary individuality.
+Here j ranges over the declared true P/V/S requirements. Time-specific successor requirements apply at their declared renewal checkpoints; do not require a successor to exist at every instant. Use infima unless attainment of a minimum is justified.
 
-Nguyen & van Baalen (2020), Fisher et al. (2017):
-facultative/obligate and asymmetric dependence in symbiosis.
+Define
 
-Therefore:
-the existence of asymmetric dependence regimes is not new.
+`Phi_G(M; theta) = 1 iff there exists pi in Pi_G(theta) with R_G(pi; M, theta) >= 0`.
 
-### 1.2 Educational / individual epistemic dependence
+Then define the quantitative margin
 
-Du & Yuan (2026):
-contestability, recoverability, transfer, traceability, distributed responsibility, epistemic plurality.
+`m_G(M; theta) = sup_{pi in Pi_G(theta)} R_G(pi; M, theta)`.
 
-Trattner (2026):
-tool-removal cost and post-AI unassisted verification performance.
+Correct implications:
 
-Therefore:
-recoverability after AI withdrawal is not new.
+- m_G > 0 implies Phi_G = 1.
+- m_G < 0 implies Phi_G = 0.
+- Phi_G = 1 implies m_G >= 0.
+- m_G = 0 alone does not decide feasibility.
 
-### 1.3 Intergenerational fragility and reproduction
+Counterexample: every admissible policy pi_n has R(pi_n) = -1/n, n = 1,2,... . Then m = 0 but no policy is feasible. A zero-margin equivalence needs attainment, for example a nonempty compact policy space and an upper-semicontinuous R. Those conditions must be verified for the model, not assumed for unrestricted AI/human research policies.
 
-Gallacher (2026), *Recursive Epistemic Fragility*:
-model-training reproduction and human professional-verification reproduction can degrade together across generations.
+## 4. Quantifier order and witness repair
 
-Therefore:
-intergenerational epistemic reproduction/fragility is not new.
+Robust feasibility is
 
-### 1.4 Generation versus validation
+`exists one non-anticipating pi, for every admissible xi: q(pi,xi) >= 0`.
 
-Ma (2026), *Toward an Engineering of Science*:
-AI lowers generation cost relative to verification and can create epistemic pollution.
+It is not
 
-Other 2025-2026 work discusses validation collapse and verification debt.
+`for every xi, there exists a hindsight-selected pi: q(pi,xi) >= 0`.
 
-Therefore:
-the generation/verification imbalance is not new.
+Counterexample: actions left/right are chosen before a hidden scenario is revealed. Their margins in scenarios 1/2 are (1,-1) and (-1,1). Each scenario has a successful action, but max_pi min_xi q = -1 while min_xi max_pi q = 1. A successful realized run does not identify the robust value.
 
-### 1.5 Workflow closure versus scientific closure
+For finitely many tested policies pi_i, suppose simultaneous lower bounds satisfy
 
-Wang et al. (2026), *Workflow Closure Is Not Scientific Closure in Auto-Research Systems*:
-automating idea-to-paper loops does not by itself establish scientific standing; independent validation remains necessary.
+`Pr_E[for all i, ell_i(E) <= R_G(pi_i; M, theta)] >= 1-alpha`.
 
-Therefore:
-"workflow closure is not epistemic/scientific closure" is not new.
+On that event, `L_G = max_i ell_i <= m_G`. If some ell_i >= 0, that particular pi_i is a feasible witness on the same coverage event. This avoids the unattained-supremum problem.
 
-### 1.6 RSI and successor inheritance
+The bounds must cover the WORST-CASE or explicitly stochastic policy target—not merely one realized task trajectory. Finite samples cannot certify an unrestricted drift class without assumptions linking tested and untested cases. Alternatives include exhaustive finite scenario coverage, a sound model-based bound, an explicit Lipschitz/covering argument, or a declared stochastic success-probability target. Each changes the certificate's scope.
 
-Duan et al. (2026), *The Last AI Built by Humans*:
-improver, verifier, successor, inheritance, recursive improvement levels.
+Individual 95% bounds do not automatically give a 95% selected maximum. In a synthetic construction with 20 independent false-certificate events of probability .05, at least one occurs with probability 1-.95^20 = .641514. Use simultaneous coverage, an appropriate correction, a genuinely fresh confirmatory test, or valid sequential inference. Adaptive reuse requires additional care [3].
 
-STOP, Darwin Gödel Machine, A-Evolve:
-bounded real systems already instantiate parts of successor/improvement loops.
+## 5. Cut repair: cover adaptive policies and require a uniform gap
 
-Therefore:
-successor generation or inherited research policy is not new.
+A static list of failed agents does not cover all adaptive ways to reorganize a process.
 
-### 1.7 Validator independence
+For a declared finite task graph, let every admissible successful execution intersect a cut C. Require a sound domination relationship: whenever a path traverses e in C, its viability score is bounded above by r_e. Establish simultaneous upper bounds U_e for all relevant realizations of those functions.
 
-Kohli (2026):
-nine LLM judges can behave like roughly two independent votes because of correlated errors.
+If C is finite and `max_{e in C} U_e <= -epsilon` for epsilon > 0, then every admissible path is blocked and m_G <= -epsilon.
 
-Li et al.:
-preference leakage among related generator/judge models.
+For infinite C, replace max with sup and require the SAME uniform negative gap. Pointwise U_e < 0 is insufficient to infer m_G < 0: values -1/n approach zero.
 
-Ghanem (2026), *Who Audits Whom, on What Substrate, with What Evidence?*:
-principal/substrate/evidence independence grading for agentic AI audits and explicit common-cause-failure modeling.
+For adaptive policies with uncertain environments, a useful sufficient form is:
 
-Therefore:
-graded AI-auditor independence and common-cause modeling are not new.
+`for every pi there exists an admissible xi such that q(pi,xi) <= -epsilon`,
 
-### 1.8 Open-endedness and drift
+with one common epsilon > 0 and a justified model/evidence argument. A cut over selected realized paths is not such a certificate.
 
-AI Scientist, OMNI-EPIC, AutoRedTeamer, GOAT, GPT-Red:
-open-ended idea/task/attack generation and adaptive adversarial expansion.
+An advantaged tested agent is not automatically an upper bound on every possible agent. An oracle upper bound is valid only after proving the relaxation contains or dominates the entire admissible policy class.
 
-Continual-learning literature:
-adaptation under sequential tasks/distribution shift.
+## 6. Validation: error control is not a label or a human signature
 
-Therefore:
-open-ended challenge generation and drift adaptation are not new.
+Define true risks before estimating them. Include at least:
 
-### 1.9 Viability / path / cut mathematics
+- false acceptance conditional on a false input;
+- successful verified repair conditional on a false input, not only on the conveniently detected subset;
+- acceptance of valid useful claims or an explicit throughput/coverage requirement;
+- time and resource cost;
+- common-mode stress classes and evaluation-exposure assumptions.
 
-Viability theory:
-constraint-preserving paths under uncertainty.
+Abstention can be safe, but 'unresolved' is not successful repair. An always-reject system has zero false acceptance while contributing no usable corrected knowledge. Preserve separate safety, usefulness, and correction measures.
 
-Reliability/network theory:
-minimal path sets, cut sets, interdependent networks, common-cause failure.
+The previous common-mode lemma also needs a condition on aggregation. If a common event of probability beta makes all channels endorse a false claim, the aggregate false-acceptance floor is beta only for an aggregation rule that accepts that joint message with probability one. An always-reject rule is a counterexample to the earlier phrase 'any aggregation rule'. More generally the contribution is beta times the conditional acceptance probability of the aggregator on the event.
 
-Therefore:
-the mathematical primitives are borrowed tools.
+Finite ordinary validation accuracy does not establish coverage of untested common-mode errors. Independence grades are disclosures, not continuous numerical slacks unless an explicit meaningful embedding is supplied. Independence-graded AI auditing already has direct prior art [4].
 
----
+## 7. Successor identity and horizon repair
 
-## 2. Canonical intervention
+The earlier S0–S3 list is not automatically a nested ladder. Repeated policy-level renewal and a one-time foundation-model renewal may be incomparable. Represent renewal criteria as a vector, or define a cumulative ladder explicitly before asserting monotonicity.
 
-Let the cognitive substrate be:
+Deleting the entire live human expert population is a catastrophic-turnover test, not ordinary human succession. Separate:
 
-G in {H, A}
+1. normal overlapping-cohort renewal;
+2. designated predecessor retirement after training;
+3. abrupt total active-state loss and recovery.
 
-where H is the human cognitive substrate and A is the AI cognitive substrate.
+Apply comparable interventions to human and AI systems; do not allow effortless AI process copying while silently prohibiting normal human apprenticeship. Make frozen foundation models, human prior education, energy, maintenance, and renewal times visible.
 
-Let bar(G) denote the other substrate.
+Every finite horizon admitting some policy does not imply a single infinite-horizon viable policy. A family of systems with n units of nonrenewable fuel survives any given finite horizon by choosing a large n, while each fixed system eventually fails. Indefinite continuation requires additional consistency, compactness, or invariant-set arguments. A short run without a genuine turnover checkpoint does not test S.
 
-At time t, define a removal intervention R_G(t, tau, theta):
+## 8. Non-identification claim retained, but scoped
 
-- preserve inherited artifact stock K_(t-1);
-- preserve declared noncognitive infrastructure I;
-- preserve the resource budget B allowed by theta;
-- remove all adaptive/current cognitive contribution from bar(G) for the horizon [t, t+tau];
-- do not allow bar(G) to re-enter as a hidden oracle, evaluator, prompt engineer, repairer, research director, or semantic decision maker;
-- allow G to adapt, reorganize, and create successors within the declared budget and inheritance rules.
+In a model class whose unobserved removal branches are unconstrained, construct M+ and M- identical on the observed coupled regime and different after removal. Their feasibility predicates and margins can differ. Thus coupled-regime data alone do not generally point-identify the removal target in that class.
 
-Historical provenance is not the same as current cognition.
+This is an application of familiar observational-equivalence logic, not a new general causal theorem. It does not say that all conceivable observations are forever insufficient: known structural laws, sufficiently informative natural variation, intervention data, or validated simulation can narrow the class.
 
-Human-authored books, code, model weights, instruments, or institutions may remain as inherited stock if theta permits them.
+A finite observed history also does not identify future transition dates without assumptions about future dynamics.
 
-But invoking a removed cognitive substrate after t is disallowed.
+## 9. Monotonicity and corridor repair
 
----
+Scope monotonicity requires aligned state/policy spaces, the same units and normalizations, nested scenario sets, and pointwise ordered constraints. Merely calling a domain 'civilization' rather than 'laboratory', or increasing an S label, does not prove numerical margin monotonicity.
 
-## 3. Canonical theta
+Define exact transition events with Phi, or use strict positive/negative certification thresholds with an explicit uncertainty band. Keep the true event time distinct from the time at which available evidence certifies it.
 
-A viability claim is meaningless without its assumption package.
+Under a declared single-crossing/persistence assumption, the two feasibility predicates can define dual viability or coupled-only operation. Coupled-only additionally requires the joint system's feasibility. Without persistence, report the full state timeline; first-crossing times alone can misdescribe repeated reversals.
 
-Let theta include at least:
+A Boolean indicator changing at a threshold is a regime-classification change. It does not by itself prove a topological bifurcation, an irreversible civilizational rupture, or a historical first. Those stronger claims need their own mechanism, mathematical topology, and historical evidence. Rate-induced transitions and points of no return already have substantial dynamical-systems precedents [5,6].
 
-theta = (
-  scale,
-  domain/frontier family D_t,
-  validation challenge family Omega_t,
-  drift uncertainty class Xi,
-  horizon tau,
-  resource budget B,
-  inherited-stock boundary K,
-  noncognitive infrastructure boundary I,
-  P floor,
-  V false-accept/correction floors,
-  evidence/exposure/provenance rules,
-  S successor-reconstitution level,
-  adaptation permissions,
-  contamination/leakage rules
-).
+## 10. Evidence recalibration
 
-Every reported m_H, m_A, T_S, or T_D is conditional on theta.
+STOP reports scaffold self-improvement with an unchanged underlying language model and downstream task improvements [1]. It is useful evidence for bounded iterative optimization, not automatically for strict frontier P, independently certified V, or robust successor sustainability.
 
-There is no unqualified "the" value.
+A-Evolve reports a multi-round autonomous post-training campaign and a policy adjustment after a development metric ceased to track an external target [2]. This is a useful real-system case. It does not supply, by itself, the simultaneous worst-case P/V/S bounds required above.
 
----
+Earlier notes used weaker engineering-production and process-renewal proxies. These are legitimate separate estimands if explicitly named `engineering-proxy`, but cannot be silently substituted for the original frontier-epistemic estimand. These publications have not been independently reproduced in this session.
 
-## 4. Canonical P, V, and S
+Gate F status: protocol is constructible; qualitative real-system evidence exists; a numerical real-system robust P/V/S certificate has NOT been established. Synthetic certificate intervals test the algebra only.
 
-### P — Frontier production
+## 11. Constructive next direction: renewal time, not threshold rhetoric
 
-At period u, P passes if the surviving substrate produces an epistemic increment that:
+The user's concern is short transition time relative to human renewal time. A minimal deterministic illustration makes this explicit.
 
-- was not already contained in the allowed inherited stock in the relevant sense;
-- addresses the declared moving frontier D_u;
-- clears a preregistered external usefulness/correctness floor.
+Assume unrenewed capability h, frontier demand d0+r*u with r>0, fixed renewal delay ell, no faster alternative path or bridge capacity, and a successor that can meet future floors after completion. A renewal started at s completes at s+ell. Uninterrupted operation until completion requires
 
-Publication count, token count, employment share, or apparent novelty alone do not satisfy P.
+`h-d0-r*(s+ell) >= 0`.
 
-### V — Validation/correction
+Thus the latest feasible start is
 
-At period u, V passes if, on the declared error family Omega_u and evidence/exposure protocol:
+`s_star = (h-d0)/r - ell`,
 
-- the one-sided upper bound on false acceptance is at or below the declared alpha floor;
-- correction/repair performance clears the declared gamma floor;
-- common-mode failures and evaluator leakage do not invalidate those bounds;
-- the evidence structure satisfies the declared independence requirements.
+whereas the current-task margin reaches zero only at `(h-d0)/r`.
 
-Multiple agreeing agents do not by themselves satisfy V.
+For toy values h=10, d0=6, r=1, ell=3, renewal must start by time 1 although current-task performance remains above floor until time 4. Starting at time 2 leaves a positive current margin but is too late for gapless renewal in this model.
 
-### S — Successor reconstitution
+This is elementary lead-time arithmetic, NOT an originality claim, an empirical prediction, or proof of irreversibility under every recovery regime. Under a correctly modeled forward-looking viability kernel, the earlier deadline is already reflected in Phi; do not count it as a newly discovered independent third transition by relabeling a current-performance threshold as T_D.
 
-At a declared generational boundary:
+The research opportunity is a nontrivial domain-specific model of renewal delays, recoverable inherited stock, validation bottlenecks, and moving-frontier demand—not another stack of renamed concepts.
 
-1. remove predecessor active cognitive state Z_u;
-2. preserve only admissible inheritance J_u and noncognitive infrastructure I;
-3. instantiate a fresh successor process Z_(u+1) without live cognitive rescue from the predecessor or excluded substrate;
-4. require Z_(u+1) to re-pass the declared P and V tests on fresh tasks.
+## 12. Current writing decision
 
-S must report its level:
+Do not continue the earlier abstract as though all gates passed. A responsible eventual paper can retain the paired estimand, corrected conditional propositions, and a transparent novelty comparison. Its stronger civilizational interpretation still requires a mechanism and evidence rather than definitional assembly.
 
-- S0 re-instantiation;
-- S1 adaptive reconstitution;
-- S2 core-substrate renewal;
-- S3 recursive multi-generation closure.
+Completed in this review: concrete counterexamples, repaired conditional statements, evidence-level downgrades, and a minimal delay mechanism. Not completed: sharp real-system identified bounds, exhaustive prior-art review, historical-first claim, completed manuscript, peer review, or new DOI.
 
-For civilization-scale claims, S must be drift-aware rather than a snapshot repeat.
+## Primary sources checked in this continuation
 
----
+[1] Zelikman et al., STOP, arXiv:2310.02304v3, 2024 revision, COLM 2024. https://arxiv.org/abs/2310.02304
 
-## 5. Canonical drift-aware viability margin
+[2] Shi et al., A-Evolve-Training, arXiv:2606.20657v3, revised 2026-09-08. https://arxiv.org/html/2606.20657v3
 
-For a candidate human-only or AI-only policy/support path pi and a surprise path xi in Xi, define normalized P/V/S slacks:
+[3] Dwork et al., Generalization in Adaptive Data Analysis and Holdout Reuse, NeurIPS 2015 / arXiv:1506.02629. https://arxiv.org/html/1506.02629v2
 
-s_P(u; pi, xi, theta)
+[4] Ghanem, Who Audits Whom, on What Substrate, with What Evidence?, arXiv:2609.18272v1, submitted 2026-09-16. https://arxiv.org/html/2609.18272v1
 
-s_V(u; pi, xi, theta)
+[5] Wieczorek, Xie, Ashwin, Rate-Induced Tipping: Thresholds, Edge States and Connecting Orbits, arXiv:2111.15497. https://arxiv.org/abs/2111.15497
 
-s_S(u; pi, xi, theta).
+[6] O'Keeffe, Wieczorek, Tipping Phenomena and Points of No Return in Ecosystems: Beyond Classical Bifurcations, arXiv:1902.01796. https://arxiv.org/abs/1902.01796
 
-Define the path bottleneck:
-
-q(pi, xi; t, theta)
-=
-min over u in [t, t+tau]
-min {
-  s_P(u),
-  s_V(u),
-  s_S(u)
-}.
-
-Then define the substrate-specific robust epistemic viability margin:
-
-m_G(t; theta)
-=
-sup over admissible pi in Pi_G(theta)
-inf over xi in Xi(theta)
-q(pi, xi; t, theta).
-
-Interpretation:
-
-m_G >= 0:
-there exists an admissible G-only adaptive path that keeps all P/V/S floors satisfied over the declared horizon and drift class.
-
-m_G < 0:
-no admissible G-only path can keep all required floors satisfied, conditional on theta and on the correctness of the upper-bound argument.
-
-This is robust-viability mathematics applied to an epistemic removal estimand.
-
-The mathematics is not claimed as novel.
-
----
-
-## 6. Scale notation
-
-Use explicit superscripts when needed:
-
-m_G^(lab, static)
-
-m_G^(lab, drift)
-
-m_G^(domain, drift)
-
-m_G^(civ, drift).
-
-Only:
-
-m_G^(civ, drift)
-
-supports a claim about civilizational epistemic independence.
-
-A lab result must never be silently relabeled as a civilizational result.
-
----
-
-## 7. Proposition 1 — Flow–Viability Non-Identification
-
-### Informal statement
-
-Even perfect observation of the realized coupled human-AI intellectual flow does not, by itself, identify the human-only or AI-only viability margin.
-
-### Construction
-
-Let O denote the complete observed trajectory of the coupled H+A system over the measured period, including if desired:
-
-- output shares;
-- task allocations;
-- publication quality;
-- employment;
-- workflow traces;
-- model usage;
-- human signatures;
-- governance rights;
-- observed errors;
-- observed collaboration structure.
-
-Construct two structural worlds M1 and M2 that:
-
-- agree on every realized state/action/output in O;
-- differ only on an unobserved removal branch, such as the fallback policy, hidden training capacity, independent validator, or successor-reconstitution mechanism activated after R_G.
-
-Then it is possible for:
-
-m_G(M1; theta) >= 0
-
-while:
-
-m_G(M2; theta) < 0,
-
-without changing O.
-
-Therefore:
-
-O does not identify m_G
-
-unless additional intervention evidence or structural restrictions link the observed coupled regime to the removal regime.
-
-### Status
-
-This is an application of standard counterfactual/non-identification logic, not a claim of a new theorem form.
-
-The contribution is proposing m_G as the object that current intellectual-flow metrics fail to identify.
-
----
-
-## 8. Proposition 2 — Constructive Witness Lower Bound
-
-Let Pi_test be a tested subset of the admissible G-only paths.
-
-For each tested path pi, let q^-(pi) be a justified one-sided lower confidence bound on its bottleneck score.
-
-Define:
-
-L_G(theta)
-=
-max over pi in Pi_test
-q^-(pi).
-
-Because Pi_test is a subset of Pi_G:
-
-L_G(theta) <= m_G(theta).
-
-Therefore:
-
-if L_G(theta) >= 0,
-
-then:
-
-m_G(theta) >= 0.
-
-### Interpretation
-
-One successful properly isolated path can certify existence.
-
-This is why positive independent viability is empirically easier to establish than universal nonviability.
-
-### Calibration
-
-STOP provides a weak bounded published-evidence example.
-
-A-Evolve provides a substantially stronger bounded AI-R&D example under a process-level S1 and V1-style theta.
-
-Neither identifies m_A^(civ, drift).
-
----
-
-## 9. Proposition 3 — Cut Upper Bound
-
-Represent each admissible viability path p as a set/sequence of required functional elements.
-
-Let the path bottleneck be:
-
-q(p) = min over e in p r_e,
-
-where r_e is the slack of required element e.
-
-Let C be a structural cut such that:
-
-for every admissible path p,
-p intersects C.
-
-Suppose every cut element e in C has a justified upper bound:
-
-U_e < 0.
-
-Then for every admissible path:
-
-q(p) < 0,
-
-and therefore:
-
-m_G
-=
-sup over admissible p q(p)
-<=
-max over e in C U_e
-<
-0.
-
-### Interpretation
-
-A negative viability claim needs evidence that blocks every admissible path.
-
-Failure of several tested systems is not enough.
-
-### Dominance variant
-
-If an intentionally advantaged/oracle-assisted system provably dominates every admissible realization of a necessary function, and even that upper-envelope system cannot clear the required floor, it can support a cut upper bound.
-
-The dominance relation itself must be justified.
-
----
-
-## 10. Proposition 4 — Scope Monotonicity
-
-Let theta_2 be at least as demanding as theta_1, meaning for example:
-
-- D_2 contains all tasks required by D_1 plus more;
-- Omega_2 contains all validation challenges in Omega_1 plus more;
-- Xi_2 contains all drift paths in Xi_1 plus more;
-- floors are no weaker;
-- S level is no weaker;
-- allowed cognition/resources are no greater.
-
-Then:
-
-m_G(theta_2) <= m_G(theta_1).
-
-### Consequence
-
-A pass at:
-
-lab/static
-
-cannot imply a pass at:
-
-domain/drift
-
-or:
-
-civilization/drift.
-
-But a strong pass under the more demanding theta_2 does imply the weaker theta_1 conditions if all nesting assumptions hold.
-
-This gives a formal anti-extrapolation rule.
-
----
-
-## 11. Proposition 5 — Horizon-indexed transition times
-
-Because viability can be temporary, transition times must be horizon-indexed.
-
-Define:
-
-T_S(theta)
-=
-inf { t : m_A(t; theta) >= 0 }.
-
-Define:
-
-T_D(theta)
-=
-inf { t : m_H(t; theta) < 0 }.
-
-Here theta already contains the horizon tau.
-
-For civilizational interpretation, use theta_civ,drift,tau rather than an unqualified threshold.
-
-If transient crossings are a concern, require a persistence window or enlarge tau.
-
-### Important
-
-T_S is NOT "AGI date."
-
-T_D is NOT "human obsolescence date."
-
-They are threshold times for a declared removal-counterfactual epistemic viability test.
-
----
-
-## 12. Proposition 6 — Corridor classification
-
-Assume on an interval of interest:
-
-- m_A crosses from negative to nonnegative once at T_S;
-- m_H crosses from nonnegative to negative once at T_D;
-- the coupled H+A system remains viable throughout the interval.
-
-Then:
-
-### If T_S < T_D
-
-For t in (T_S, T_D):
-
-m_A >= 0
-
-and:
-
-m_H >= 0.
-
-This is a dual-viability / redundancy corridor.
-
-Either substrate has at least one independent viable path under theta.
-
-### If T_D < T_S
-
-For t in (T_D, T_S):
-
-m_H < 0
-
-and:
-
-m_A < 0,
-
-while the coupled H+A system remains viable.
-
-This is a coupled-only corridor.
-
-The civilization has lost both independent fallback paths while the joint system still functions.
-
-### If T_S = T_D
-
-There is no open interval of either type under the idealized single-crossing model.
-
-### Status
-
-The ordering logic is elementary.
-
-The contribution is using the ordering of the two removal estimands to distinguish transition regimes that ordinary "AI capability" or "AI work share" metrics collapse together.
-
----
-
-## 13. Proposition 7 — Robust partial identification over assumption sets
-
-Let Theta be an admissible set of reasonable modeling/threshold assumptions.
-
-For each theta in Theta, compute or bound:
-
-m_G(theta) in [L_G(theta), U_G(theta)].
-
-Then:
-
-### Robust viability
-
-If:
-
-inf over theta in Theta L_G(theta) >= 0,
-
-independent viability is robust over Theta.
-
-### Robust nonviability
-
-If:
-
-sup over theta in Theta U_G(theta) < 0,
-
-independent nonviability is robust over Theta.
-
-### Otherwise
-
-The sign is assumption-sensitive / partially identified.
-
-Do not choose the preferred theta after seeing the result.
-
----
-
-## 14. What the formal core deliberately does NOT claim
-
-The theory does not claim:
-
-- consciousness is required for P/V/S;
-- AI is or is not conscious;
-- humans are uniquely authoritative;
-- AI judges are inherently inferior to humans;
-- autonomy implies truth;
-- recursive self-improvement implies epistemic viability;
-- epistemic viability implies moral legitimacy;
-- a coupled-only corridor is inevitable;
-- T_S or T_D has occurred at civilization scale;
-- AGI has a uniquely correct definition;
-- capability curves must be discontinuous;
-- civilization must hand authority to AI;
-- AI should replace humans.
-
-These exclusions matter.
-
-The framework is descriptive/measurement-oriented.
-
----
-
-## 15. The direct threats that remain
-
-Even after compression, four threats remain.
-
-### Threat A — an exact prior framework may still exist
-
-The search has found many adjacent components but not the exact assembled estimand.
-
-A specialist reviewer may know a closer source.
-
-Mitigation:
-state novelty narrowly and cite the strongest neighbors.
-
-### Threat B — P is hardest to operationalize at frontier scale
-
-V can be seeded with known falsehoods.
-S can be tested with reconstitution.
-P requires deciding what counts as a genuine new epistemic increment.
-
-Mitigation:
-start with bounded domains where protected outcomes are observable.
-
-### Threat C — civilization-scale cut completeness may be unattainable
-
-Positive witnesses can accumulate.
-A civilization-wide proof of nonviability may remain impossible.
-
-Mitigation:
-report one-sided bounds and unresolved status rather than forcing a sign.
-
-### Threat D — theta can hide normative choices
-
-Thresholds, budgets, allowed infrastructure, and horizon matter.
-
-Mitigation:
-predeclare Theta and report robustness rather than one hand-picked scenario.
-
----
-
-## 16. Why the theory is now narrower but stronger
-
-Earlier versions risked centering claims such as:
-
-- AI intellectual share;
-- intelligence sovereignty;
-- civilizational discontinuity;
-- successor AI;
-- human dependence.
-
-Every one of those phrases attracts large prior-art literatures and ambiguous definitions.
-
-The compressed framework asks one cleaner question:
-
-> After removing one cognitive substrate while preserving a declared inherited world, does the other substrate still possess at least one path that can continue producing new knowledge, independently reject and repair substantive error, and reconstitute the next epistemically capable process under bounded frontier drift?
-
-That is an estimand.
-
-It can be wrong, unresolved, or partially identified.
-
-It does not depend on rhetoric about "AGI arrival."
-
----
-
-## 17. Provisional originality verdict
-
-### High confidence: not original individually
-
-- P-like knowledge production;
-- V-like validation;
-- S-like successor/reproduction;
-- dependence;
-- recovery;
-- open-endedness;
-- viability;
-- removal tests;
-- path/cut logic;
-- transition crossings.
-
-### Medium-to-high confidence: composite gap remains
-
-After targeted searches across:
-- AI epistemic dependence;
-- human-AI bidirectionality;
-- AI scientific autonomy;
-- recursive self-improvement;
-- autonomous research;
-- intergenerational epistemic fragility;
-- epistemic infrastructure;
-- common-cause auditing;
-- viability theory;
-- symbiosis;
-- interdependent networks;
-- continual learning;
-- cognitive offloading,
-
-we did not identify a source that makes **bidirectional removal-counterfactual, cross-period P-V-S viability** the central paired estimand and then develops:
-
-- observational non-identification;
-- witness lower bounds;
-- cut/dominance upper bounds;
-- scale/drift monotonicity;
-- T_S/T_D ordering.
-
-This is the plausible original contribution.
-
-Use language such as:
-
-"we propose"
-
-and:
-
-"we did not identify an existing framework that combines..."
-
-Do NOT use:
-
-"the first ever"
-
-unless a formal literature review later justifies it.
-
----
-
-## 18. Manuscript readiness test
-
-The theory passes the pre-manuscript compression gate if all are true:
-
-- one canonical estimand exists — PASS;
-- intervention boundary is explicit — PASS;
-- P/V/S can be operationalized without obvious circularity — PASS;
-- successor identity is explicit — PASS;
-- validator independence is explicit — PASS;
-- drift/scope problem is explicit — PASS;
-- observational non-identification can be stated cleanly — PASS;
-- positive and negative evidence have distinct logical forms — PASS;
-- lab-to-civilization extrapolation is formally blocked — PASS;
-- strongest neighboring literatures have been used to remove false novelty claims — PASS;
-- bounded empirical calibration is non-vacuous — PASS via STOP/A-Evolve;
-- civilization-scale empirical sign is not overclaimed — PASS.
-
-### Result
-
-**PRE-MANUSCRIPT THEORY GATE: PASS.**
-
-This means the project is ready for manuscript architecture.
-
-It does NOT mean the manuscript should be immediately frozen or published.
-
-The next stage should translate this formal core into a paper with a disciplined claim hierarchy and a literature table that makes the novelty boundary transparent.
-
----
-
-## 19. Recommended manuscript spine
-
-When drafting begins, the paper should be organized around the estimand, not around AGI rhetoric.
-
-1. Problem:
-current flow/autonomy metrics answer the wrong counterfactual question.
-
-2. Related work:
-show that all broad primitives are prior art.
-
-3. Estimand:
-define removal intervention and m_H/m_A.
-
-4. Identification:
-Flow-Viability Non-Identification.
-
-5. Partial identification:
-witness lower bound and cut upper bound.
-
-6. Dynamic extension:
-drift, scale, successor reconstitution.
-
-7. Transition regimes:
-T_S/T_D and corridor ordering.
-
-8. Calibration:
-STOP and A-Evolve as bounded examples.
-
-9. Limits:
-P measurement, cut completeness, theta dependence, no civilization-scale sign.
-
-10. Research program:
-how future measurements can progressively tighten the bounds.
-
-This architecture is much stronger than a paper whose headline is merely "AI is taking over intellectual production."
-
----
-
-## 20. Working one-sentence contribution
-
-For research use only:
-
-> We propose a bidirectional removal-counterfactual measure of human and AI epistemic viability, show why realized intellectual flows do not identify it, and give a witness–cut framework for partially identifying when either substrate can independently sustain frontier production, validation, and successor reconstitution under bounded drift.
-
-If the eventual manuscript cannot remain faithful to that sentence, it has drifted away from the strongest surviving contribution.
+These references establish relevant precedents and evidence boundaries, not the correctness or originality of the entire proposed framework. Other bibliography entries in earlier notes were not all re-audited during this continuation.
