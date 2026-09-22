@@ -85,6 +85,19 @@ Recent 2026 work further emphasizes that evaluation scores depend on contaminati
 
 A particularly relevant distinction is **acquired contamination** during evaluation itself: even a test not present in training may become progressively less independent if an adaptive system learns from repeated evaluation feedback.
 
+### 1.6 Independence-graded agentic auditing
+
+Ghanem (2026), *Who Audits Whom, on What Substrate, with What Evidence? An Independence-Graded Audit Protocol for Agentic AI* (arXiv:2609.18272), directly grades agentic-audit independence along principal, substrate, and evidence axes and explicitly imports common-cause-failure reasoning from reliability engineering.
+
+This is a close prior-art hit.
+
+Therefore this project must NOT claim originality for:
+- grading AI-audit independence;
+- distinguishing substrate/provenance independence from evidence independence;
+- applying beta-factor/common-cause reasoning to AI auditors.
+
+The E/X/P taxonomies below remain useful protocol components, but their role is operational. The candidate novelty, if any, lies in embedding validation evidence inside the broader bidirectional removal-counterfactual P-V-S viability estimand and its partial-identification architecture.
+
 ---
 
 ## 2. Validation target
@@ -702,3 +715,4 @@ That should be investigated before the manuscript is drafted.
 - Li, D., Sun, R., Huang, Y., Zhong, M., Jiang, B., Han, J., Zhang, X., Wang, W., & Liu, H. (2025; ICLR 2026). Preference Leakage: A Contamination Problem in LLM-as-a-judge. arXiv:2502.01534.
 - Angulo, J., Yeste, V., & Espinos-Morato, H. (2026). Benchmark Contamination: A Taxonomy Organized by Defeated Mitigation. arXiv:2608.29463.
 - NASA / IEEE reliability literature on common-cause failures and redundancy, including *Common Cause Failures Dominate and Defeat Redundancy* (RAMS 2025).
+- Ghanem, M. C. (2026). Who Audits Whom, on What Substrate, with What Evidence? An Independence-Graded Audit Protocol for Agentic AI. arXiv:2609.18272.
