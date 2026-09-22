@@ -3,7 +3,7 @@
 Uses the repository's existing Zenodo client and paper OTS lifecycle.
 """
 from __future__ import annotations
-import argparse, hashlib, html, importlib.util, json, os, shutil, subprocess, sys, time, urllib.parse, zipfile
+import argparse, hashlib, json, os, subprocess, sys, time, urllib.parse
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent
@@ -38,7 +38,13 @@ def checkpoint(message,paths=None):
     if any(not any(p==a or p.startswith(a+'/') for a in allowed) for p in staged):raise RuntimeError('Unexpected staged file')
     if staged:
         subprocess.run(['git','commit','-m',message+' [skip ci]'],cwd=REPO,check=True)
-        subprocess.run(['git','push','origin','HEAD:'+BRANCH],cwd=REPO,check=True)
+        for _ in range(3):
+            if subprocess.run(['git','push','origin','HEAD:'+BRANCH],cwd=REPO).returncode==0:return
+            subprocess.run(['git','fetch','origin',BRANCH],cwd=REPO,check=True)
+            if subprocess.run(['git','rebase','origin/'+BRANCH],cwd=REPO).returncode:
+                subprocess.run(['git','rebase','--abort'],cwd=REPO)
+                raise RuntimeError('Concurrent change requires reconciliation; artifacts retained')
+        raise RuntimeError('Checkpoint push failed; reconcile exact artifacts before retry')
 def zclient():
     sys.path.insert(0,str(REPO/'research/claim-architecture-transition'))
     from publication_common import client
@@ -59,7 +65,7 @@ def metadata():
       'notes':'TA-TR-2026-14-BRIDGE, v1.0. English Part I and Chinese Part II; mathematical and synthetic examples, not empirical policy estimates. DOI, timestamps and archival receipts are provenance, not truth, authorship or peer-review certifications.'}
 
 def identity(dep):
-    md=dep.get('metadata',{}); rid=dep.get('id')
+    md=dep.get('metadata',{});rid=dep.get('id')
     if type(rid)is not int or rid<=0 or (md.get('title'),str(md.get('version')))!=(TITLE,VERSION):raise RuntimeError('Unrelated record identity')
     if [c.get('name') for c in md.get('creators',[])]!=['Liu, Hongju']:raise RuntimeError('Creator mismatch')
     doi=dep.get('doi') or md.get('prereserve_doi',{}).get('doi') or md.get('doi')
@@ -99,22 +105,21 @@ def build():
     if (ROOT/'EXPECTED-PUBLICATION.json').exists():
         validate();print('Using frozen package; no PDF rebuild');return
     PUB.mkdir(parents=True,exist_ok=True)
-    first=source(SOURCE1).decode()
-    first=first.replace('v1.0-rc1','v1.0')
+    first=source(SOURCE1).decode().replace('v1.0-rc1','v1.0')
     old=first.split('**Status.** ',1)[1].split('\n\n',1)[0]
     first=first.replace(old,'Part I of working-paper release v1.0. Not externally peer reviewed. DOI: '+doi+'. No journal acceptance, foundational-priority certification or securities offering is claimed. This release does not replace earlier TA-TR-2026-14 publications.',1)
     (PUB/'Part-I-Financing-Automation-v1.0.md').write_text(first)
     second=source(SOURCE2).decode()
-    second=second.split('## 1. 第一、二部分的分工',1)[1]
-    second='## 1. 第一、二部分的分工'+second
+    second='## 1. 第一、二部分的分工'+second.split('## 1. 第一、二部分的分工',1)[1]
     second=second.split('## 执行事实',1)[0]
     second=second.replace('第一部分复核见PART-I-PRESERVATION-AUDIT-20260922.md。','第一部分已作最终条件性复核；原v1.0-rc1保留，正式发布版仅更新版本和出处标识。')
+    # xeCJK supplies Chinese layout. Legacy Pandoc 2.9 does not map zh-CN
+    # to a valid polyglossia language; omit that optional LaTeX metadata.
     header='''---
 title: "第二部分：丰裕分层与有限真实收益权"
 subtitle: "自动化转型融资的制度设计与条件性扩展"
 author: "Hongju Liu（刘烘炬）"
 date: "2026年9月22日 · 工作论文 v1.0"
-lang: zh-CN
 mainfont: Liberation Serif
 CJKmainfont: Noto Serif CJK SC
 fontsize: 11pt
