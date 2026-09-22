@@ -1,0 +1,68 @@
+{
+  "conceptrecid": "22871208",
+  "date": "2026-09-22",
+  "doi": "10.5281/zenodo.22886276",
+  "old_doi": "10.5281/zenodo.22885976",
+  "old_files_modified": false,
+  "old_inventory": {
+    "ORIGIN-AND-FUTURE.md": {
+      "checksum": "md5:8ec2909093877d53952a70b8c5e84800",
+      "size": 4196
+    },
+    "README-LICENSE.txt": {
+      "checksum": "md5:1e8e2151dfd4502ac445f344246cc36d",
+      "size": 502
+    },
+    "REPRODUCIBILITY.md": {
+      "checksum": "md5:015edf7b594fe0e2d09a9ebbab355d42",
+      "size": 1084
+    },
+    "REVISION-AND-SOURCES.md": {
+      "checksum": "md5:62e903ea6837688e9b0d212d7650abba",
+      "size": 7827
+    },
+    "SHA256SUMS.txt": {
+      "checksum": "md5:f239644ed5159ab733f506adee341713",
+      "size": 1030
+    },
+    "audit.py": {
+      "checksum": "md5:0e3f64b1bfd25ebad6003207964ece3f",
+      "size": 9981
+    },
+    "build.sh": {
+      "checksum": "md5:e20884d705721bc26f92d30feb04b23d",
+      "size": 309
+    },
+    "checks.json": {
+      "checksum": "md5:e614e20b41e06e0425739bae289a595c",
+      "size": 2664
+    },
+    "citation.bib": {
+      "checksum": "md5:12c74817ac8a93a597fa87d506d85c35",
+      "size": 348
+    },
+    "citation.csl.json": {
+      "checksum": "md5:dbc029f8383523b3df57bc7f58e8b143",
+      "size": 428
+    },
+    "claim-architecture-transition-v1.2.md": {
+      "checksum": "md5:97d9686604f27a3cc10aea25adbd2fca",
+      "size": 36310
+    },
+    "claim-architecture-transition-v1.2.pdf": {
+      "checksum": "md5:53fd396b9839faa16f206d89536d4b51",
+      "size": 144920
+    },
+    "illustration.csv": {
+      "checksum": "md5:61ac794124fb9567fa11c5a158d70e82",
+      "size": 703
+    }
+  },
+  "old_pdf_sha256": "70c3ecaa00632ee4040abe28c3732d9c2b2230a8f2b112e712bf71f078722bfd",
+  "old_record_id": 22885976,
+  "record_id": 22886276,
+  "same_concept": true,
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "title": "The Claim Architecture Transition: An Inverse Access Frontier Beyond Fixed Expenditure Shares",
+  "version": "1.3"
+}

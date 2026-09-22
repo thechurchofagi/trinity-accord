@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "assertions": 10088,
+  "categories": {
+    "inverse_resource": 504,
+    "household_demand_W": 504,
+    "household_demand_O": 504,
+    "income_balance": 504,
+    "independent_forward_price": 504,
+    "forward_access": 504,
+    "service_market": 504,
+    "produced_market": 504,
+    "strict_monotonicity": 504,
+    "analytic_derivative": 504,
+    "subthreshold_failure": 504,
+    "ownership_funding": 1512,
+    "ownership_access": 1512,
+    "binding_ownership_access": 982,
+    "non_power_schedule": 6,
+    "finite_labor_floor": 54,
+    "finite_labor_income": 54,
+    "finite_labor_budget": 54,
+    "finite_labor_price": 40,
+    "finite_labor_binding": 40,
+    "finite_labor_subthreshold": 40,
+    "vanishing_labor_bound": 54,
+    "v12_finite_recovery": 81,
+    "v12_limit_recovery": 81,
+    "tail_regime": 7,
+    "exact_multiplicity_brackets": 4,
+    "exact_middle_root": 1,
+    "multiplicity_original_demand": 3,
+    "multiplicity_service_market": 3,
+    "multiplicity_produced_market": 3,
+    "multiplicity_income": 3,
+    "implementation_not_guarantee": 1,
+    "middle_root_numeric": 1,
+    "exact_negative_derivative": 1,
+    "basket_allocation_limit": 3,
+    "share_not_level": 1,
+    "invalid_inputs_rejected": 3
+  },
+  "default_relative_tolerance": 3e-08,
+  "default_absolute_tolerance": 2e-10,
+  "forward_price_tolerance": 2e-06,
+  "derivative_tolerance": 4e-05,
+  "multiplicity_roots": [
+    {
+      "eta": 0.07048342702919824,
+      "price": 887.4394995976797,
+      "tax": 0.06976744186046512
+    },
+    {
+      "eta": 0.2,
+      "price": 1.0,
+      "tax": 0.06976744186046512
+    },
+    {
+      "eta": 0.23770526092405014,
+      "price": 0.20003291676725227,
+      "tax": 0.06976744186046512
+    }
+  ],
+  "middle_derivative_exact": "-19450/16641",
+  "empirical_data": false,
+  "independent_peer_review": false,
+  "formal_verification_of_entire_paper": false,
+  "scope": "Deterministic internal checks plus exact rational sign certificates; not universal correctness."
+}

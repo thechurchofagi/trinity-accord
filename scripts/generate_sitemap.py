@@ -90,6 +90,7 @@ PUBLICATION_SOURCE_DIRS.add("research/endogenous-reference-fields/versions/v1.1/
 # TA14 v1.2's Pandoc manuscript and deposited source are publication assets,
 # not separate landing pages. The research index links the version DOI and PDF.
 PUBLICATION_SOURCE_DIRS.add("research/claim-architecture-transition/v1.2/")
+PUBLICATION_SOURCE_DIRS.add("research/claim-architecture-transition/v1.3/")
 
 # Root-level JSON files to include
 ROOT_JSON_INCLUDE = [

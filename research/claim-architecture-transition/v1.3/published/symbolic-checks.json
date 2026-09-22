@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "identities": 4,
+  "sympy_version": "1.14.0",
+  "results": {
+    "inverse_derivative": "0",
+    "finite_labor_derivative": "0",
+    "cobb_douglas_recovery": "0",
+    "zero_labor_bound_identity": "0"
+  },
+  "independent_peer_review": false
+}
