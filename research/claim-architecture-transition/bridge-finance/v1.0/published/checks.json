@@ -1,0 +1,452 @@
+{
+  "status": "PASS",
+  "kind": "deterministic mathematical reproduction, not empirical evidence",
+  "environment": {
+    "python": "3.10.12",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3"
+  },
+  "counts": {
+    "passed": 74,
+    "failed": 0
+  },
+  "contract_table": [
+    {
+      "target": 0.0,
+      "payments": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cost": 0.0,
+      "proportional": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "proportional_cost": 0.0
+    },
+    {
+      "target": 5.0,
+      "payments": [
+        0.0,
+        11.764705882352938,
+        0.0
+      ],
+      "cost": 0.03031231090821742,
+      "proportional": [
+        0.0,
+        6.313725311134742,
+        50.509802489077934
+      ],
+      "proportional_cost": 0.03802350873770151
+    },
+    {
+      "target": 10.0,
+      "payments": [
+        0.0,
+        25.0,
+        23.255813953488413
+      ],
+      "cost": 0.07664840600142014,
+      "proportional": [
+        0.0,
+        14.610904556378234,
+        116.88723645102587
+      ],
+      "proportional_cost": 0.09210015673862756
+    },
+    {
+      "target": 14.0,
+      "payments": [
+        0.0,
+        25.0,
+        167.7018633540378
+      ],
+      "cost": 0.1487192397817862,
+      "proportional": [
+        0.0,
+        23.376794658105414,
+        187.0143572648433
+      ],
+      "proportional_cost": 0.15552854976987465
+    },
+    {
+      "target": 14.634146341463413,
+      "payments": [
+        0.0,
+        25.0,
+        200.0
+      ],
+      "cost": 0.16813197333930238,
+      "proportional": [
+        0.0,
+        25.0,
+        200.0
+      ],
+      "proportional_cost": 0.16813197333930238
+    }
+  ],
+  "investment_table": [
+    {
+      "theta": 0.0,
+      "tau": 0.2,
+      "I": 19.125349230146195,
+      "B": 0.0,
+      "F": 437.3253849269008,
+      "D": 0.0,
+      "c0": 80.8746507698538,
+      "cH": 369.86030794152066,
+      "g": 0.0,
+      "v": 0.25,
+      "Q": 2.5,
+      "r": 4.373253849269008
+    },
+    {
+      "theta": 0.5,
+      "tau": 0.2,
+      "I": 16.681002044297227,
+      "B": 4.170250511074307,
+      "F": 408.42382452909413,
+      "D": 40.84238245290942,
+      "c0": 79.14874744462847,
+      "cH": 387.58144207618477,
+      "g": 0.125,
+      "v": 0.25,
+      "Q": 2.875,
+      "r": 4.084238245290941
+    },
+    {
+      "theta": 1.0,
+      "tau": 0.2,
+      "I": 14.792899408284024,
+      "B": 7.396449704142012,
+      "F": 384.61538461538464,
+      "D": 76.92307692307693,
+      "c0": 77.81065088757396,
+      "cH": 404.61538461538464,
+      "g": 0.25,
+      "v": 0.25,
+      "Q": 3.25,
+      "r": 3.8461538461538463
+    }
+  ],
+  "cost_reduction_percent": 16.77711665687842,
+  "checks": [
+    {
+      "name": "exchange_price",
+      "pass": true,
+      "price": 20.0
+    },
+    {
+      "name": "exchange_buyer_foc",
+      "pass": true
+    },
+    {
+      "name": "current_exchange_resources",
+      "pass": true
+    },
+    {
+      "name": "future_exchange_resources",
+      "pass": true
+    },
+    {
+      "name": "voluntary_exchange_example",
+      "pass": true,
+      "investor_utility_gain": 0.12343003896576293,
+      "beneficiary_utility_gain": 1.4655968762082099
+    },
+    {
+      "name": "common_abundance_scale",
+      "pass": true
+    },
+    {
+      "name": "payment_only_increase",
+      "pass": true
+    },
+    {
+      "name": "buyer_only_high_income",
+      "pass": true
+    },
+    {
+      "name": "contract_target_0.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_floor_0.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_cost_vs_proportional_0.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_target_5.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_floor_5.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_cost_vs_proportional_5.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_free_kkt_5.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_independent_optimizer_5.000000",
+      "pass": true,
+      "solver_message": "Optimization terminated successfully"
+    },
+    {
+      "name": "contract_target_10.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_floor_10.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_cost_vs_proportional_10.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_free_kkt_10.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_independent_optimizer_10.000000",
+      "pass": true,
+      "solver_message": "Optimization terminated successfully"
+    },
+    {
+      "name": "contract_target_14.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_floor_14.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_cost_vs_proportional_14.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_free_kkt_14.000000",
+      "pass": true
+    },
+    {
+      "name": "contract_independent_optimizer_14.000000",
+      "pass": true,
+      "solver_message": "Optimization terminated successfully"
+    },
+    {
+      "name": "contract_target_14.634146",
+      "pass": true
+    },
+    {
+      "name": "contract_floor_14.634146",
+      "pass": true
+    },
+    {
+      "name": "contract_cost_vs_proportional_14.634146",
+      "pass": true
+    },
+    {
+      "name": "same_transfer_beneficiary_cost_reduction",
+      "pass": true,
+      "percent": 16.77711665687842
+    },
+    {
+      "name": "reject_infeasible_target",
+      "pass": true
+    },
+    {
+      "name": "production_current_resources_0.0",
+      "pass": true
+    },
+    {
+      "name": "production_high_resources_0.0",
+      "pass": true
+    },
+    {
+      "name": "production_protected_floor_0.0",
+      "pass": true
+    },
+    {
+      "name": "production_current_resources_0.5",
+      "pass": true
+    },
+    {
+      "name": "production_high_resources_0.5",
+      "pass": true
+    },
+    {
+      "name": "production_protected_floor_0.5",
+      "pass": true
+    },
+    {
+      "name": "production_current_resources_1.0",
+      "pass": true
+    },
+    {
+      "name": "production_high_resources_1.0",
+      "pass": true
+    },
+    {
+      "name": "production_protected_floor_1.0",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.05_theta0.25",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.05_theta0.5",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.05_theta0.5_monotonic",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.05_theta1.0",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.05_theta1.0_monotonic",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.2_theta0.25",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.2_theta0.5",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.2_theta0.5_monotonic",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.2_theta1.0",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.2_theta1.0_monotonic",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.8_theta0.25",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.8_theta0.5",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.8_theta0.5_monotonic",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.8_theta1.0",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a20.0_tau0.8_theta1.0_monotonic",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.05_theta0.25",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.05_theta0.5",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.05_theta0.5_monotonic",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.05_theta1.0",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.05_theta1.0_monotonic",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.2_theta0.25",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.2_theta0.5",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.2_theta0.5_monotonic",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.2_theta1.0",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.2_theta1.0_monotonic",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.8_theta0.25",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.8_theta0.5",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.8_theta0.5_monotonic",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.8_theta1.0",
+      "pass": true
+    },
+    {
+      "name": "portfolio_foc_a100.0_tau0.8_theta1.0_monotonic",
+      "pass": true
+    },
+    {
+      "name": "independent_portfolio_optimizer",
+      "pass": true,
+      "optimum": [
+        16.681117318810884,
+        0.9999747979340068
+      ],
+      "message": "Optimization terminated successfully"
+    },
+    {
+      "name": "investment_floor_inverse",
+      "pass": true,
+      "theta_max": 0.21323553010669316,
+      "support_max": 1.9191197709602381
+    },
+    {
+      "name": "four_units_violates_investment_floor",
+      "pass": true
+    },
+    {
+      "name": "tax_base_vanishes_near_one",
+      "pass": true,
+      "prices": [
+        0.015610353086475761,
+        0.0015623533757214917,
+        0.00015624853439602466
+      ]
+    }
+  ]
+}
