@@ -87,8 +87,15 @@ def check_child(dep,concept,rid=None,final=False):
         raise RuntimeError('Unexpected author identity')
     if final:
         if (md.get('title'),md.get('version'))!=(TITLE,VERSION): raise RuntimeError('Child metadata mismatch')
-    elif not md.get('title','').startswith('The Claim Architecture Transition') or md.get('version') not in ('1.1','1.2'):
-        raise RuntimeError('Ambiguous child; do not reuse')
+    else:
+        # A newly created Zenodo version can intentionally have no version label.
+        # This exception is restricted to the verified same-concept child obtained
+        # from the preserved parent's latest_draft, never an unrelated deposit.
+        titles={TITLE,'The Claim Architecture Transition: Transformative AI, Real Claim Closure, and General Equilibrium Beyond Wage-Based Distribution'}
+        if md.get('title') not in titles or md.get('version') not in (None,'','1.1','1.2'):
+            raise RuntimeError('Ambiguous child metadata: '+json.dumps({'id':did,'title':md.get('title'),'version':md.get('version')}))
+        if md.get('version') in (None,'') and dep.get('submitted'):
+            raise RuntimeError('An unlabeled published child cannot be reused')
     return did
 
 def metadata():
