@@ -1,0 +1,53 @@
+{
+  "state": "EXACT_PACKAGE_REVIEWED_AND_PUBLICATION_AUTHORIZED",
+  "record_id": 22885976,
+  "doi": "10.5281/zenodo.22885976",
+  "conceptrecid": "22871208",
+  "prior_record_id": 22871209,
+  "manifest_sha256": "ae20d62d3fba68d39fbf68020624ee73d5002ca192d3bdbe43d85e83680742c4",
+  "reviewer": "GPT-6 Astra Pro",
+  "review_date": "2026-09-22",
+  "independent_peer_review": false,
+  "separate_final_human_line_by_line_review_claimed": false,
+  "authorization_basis": "Hongju Liu explicitly requested completing the latest paper's substantive revision and public DOI deposit, preserving an honest research starting point and substantial AI contribution disclosure rather than targeting a particular journal.",
+  "build_workflow_run_id": 35680008540,
+  "build_artifact_id": 10674201467,
+  "package_files_verified": 13,
+  "source_input_hashes_verified": 5,
+  "pdf_pages_rendered_and_visually_inspected": 14,
+  "pdf_sha256": "70c3ecaa00632ee4040abe28c3732d9c2b2230a8f2b112e712bf71f078722bfd",
+  "pdf_bytes": 144920,
+  "pdf_review": {
+    "rendering": "MuPDF via PyMuPDF, all 14 pages, 1.6x resolution; inspected four page contact sheets",
+    "searchable_text_and_confirmed_doi_present": true,
+    "chinese_abstract_and_math_glyphs_readable": true,
+    "no_visible_clipping_overlap_or_missing_glyphs_detected": true,
+    "word_boxes_outside_page": 0,
+    "typesetting_warning_log_empty": true,
+    "ai_contribution_and_non_amendment_disclosures_present": true
+  },
+  "internal_audit": {
+    "status": "PASS",
+    "deterministic_assertions": 4168,
+    "audit_sha256": "a88672877a1b1be4e1b44c644fe5d597839cb2057267b5b2cd2968a2fecb3183",
+    "additional_exact_symbolic_identities_checked": 8,
+    "symbolic_checks": ["service market clearing", "produced-good market clearing", "disposable-income share", "physical-service share", "price derivative with respect to tax", "worker-income-share derivative with respect to tax", "binding service-floor attainment", "limiting support threshold"],
+    "symbolic_method": "Independent local SymPy cancellation and factorization of each residual to zero",
+    "empirical_validation": false,
+    "independent_external_replication": false,
+    "universal_error_free_certification": false
+  },
+  "scientific_review": {
+    "price_closure_corrected": true,
+    "population_quantifier_corrected": true,
+    "funding_and_physical_constraints_explicit": true,
+    "basket_allocation_and_utility_criteria_distinguished": true,
+    "closest_prior_art_attributed_and_originality_narrowed": true,
+    "equality_boundary_counterexample_included": true,
+    "scope": "Conditional static theoretical example with fixed endowments, heterogeneous Cobb-Douglas demand and a collectable nonlabor-income tax. Not a calibrated forecast, optimal tax, general new economic paradigm, or global-priority certificate."
+  },
+  "publication_scope": "Publish only the 13 exact manifest-bound files into existing unpublished child 22885976 of concept 22871208; preserve public v1.1 files; verify anonymous full-file readback and prior PDF again.",
+  "series_count_change": 0,
+  "bitcoin_originals_modified": false,
+  "v12_ots_or_arweave_attestation_claimed": false
+}
