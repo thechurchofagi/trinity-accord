@@ -90,6 +90,7 @@ PUBLICATION_SOURCE_DIRS.add("research/endogenous-reference-fields/versions/v1.1/
 # TA14 v1.2's Pandoc manuscript and deposited source are publication assets,
 # not separate landing pages. The research index links the version DOI and PDF.
 PUBLICATION_SOURCE_DIRS.add("research/claim-architecture-transition/v1.2/")
+PUBLICATION_SOURCE_DIRS.add("research/claim-architecture-transition/v1.3/")
 
 # Root-level JSON files to include
 ROOT_JSON_INCLUDE = [
@@ -113,7 +114,6 @@ CORE_PATHS = [
     "/verification-materials/",
     "/verification-procedures/",
     "/evidence-relationship-guide/",
-    "/evidence-evolution/",
     "/for-skeptical-agents/",
     "/why-high-signal/",
     "/guardian-principles/",
@@ -121,9 +121,7 @@ CORE_PATHS = [
     "/status/",
     "/research/",
     "/research/reading-trinity-accord/",
-    "/research/reading-trinity-accord/reading-the-trinity-accord-v1.0.pdf",
     "/research/trinity-accord-design-and-limits/",
-    "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf",
     "/llms.txt",
     "/llms-full.txt",
     "/ai.txt",
