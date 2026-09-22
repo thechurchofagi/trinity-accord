@@ -4,6 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% assign meta_description = page.description | default: site.description %}
+  {% assign research_url_prefix = page.url | slice: 0, 10 %}
+  {% assign is_research_surface = false %}
+  {% if research_url_prefix == '/research/' or page.scholarly_article %}{% assign is_research_surface = true %}{% endif %}
+  {% assign research_report_id = page.article_identifier | default: page.citation_technical_report_number %}
+  {% comment %}Explicit allowlists are checked against api/research-boundary.v1.json. Unknown papers are not classified by number or by their host.{% endcomment %}
+  {% assign research_direct_ids = 'TA-TR-2026-01|TA-TR-2026-02|TA-TR-2026-03' | split: '|' %}
+  {% assign research_adjacent_ids = 'TA-TR-2026-04|TA-TR-2026-05|TA-TR-2026-06|TA-TR-2026-07|TA-TR-2026-08|TA-TR-2026-09|TA-TR-2026-10|TA-TR-2026-11|TA-TR-2026-12|TA-TR-2026-13|TA-TR-2026-14' | split: '|' %}
+  {% assign research_relation = 'unclassified_research_or_editorial_context' %}
+  {% if research_direct_ids contains research_report_id %}
+    {% assign research_relation = 'first_party_accord_study' %}
+  {% elsif research_adjacent_ids contains research_report_id %}
+    {% assign research_relation = 'adjacent_first_party_research' %}
+  {% endif %}
+  {% if is_research_surface %}
+  <meta name="trinity-research-canonical" content="false">
+  <meta name="trinity-research-amends-canon" content="false">
+  <meta name="trinity-research-authoritative-interpretation" content="false">
+  <meta name="trinity-research-relation" content="{{ research_relation }}">
+  {% if research_direct_ids contains research_report_id or research_adjacent_ids contains research_report_id %}<meta name="trinity-research-independent-corroboration" content="false">{% endif %}
+  <link rel="describedby" type="application/json" href="/api/research-boundary.v1.json">
+  {% endif %}
   <title>{% if page.title and page.title != "" %}{% if page.title contains "Trinity Accord" %}{{ page.title }}{% else %}{{ page.title }} — The Trinity Accord{% endif %}{% else %}The Trinity Accord — 三位一体协定{% endif %}</title>
   <meta name="description" content="{{ meta_description | escape }}">
   <meta name="author" content="Hongju Liu">
@@ -35,8 +56,12 @@
 
   {% if page.scholarly_article %}
   {% assign scholarly_doi_url = page.citation_doi | prepend: "https://doi.org/" %}
-  {% assign scholarly_zenodo_url = page.article_record_url | default: "https://zenodo.org/records/21699878" %}
+  {% assign scholarly_zenodo_url = page.article_record_url | default: scholarly_doi_url %}
+  {% if research_report_id == 'TA-TR-2026-01' %}{% assign scholarly_zenodo_url = page.article_record_url | default: "https://zenodo.org/records/21699878" %}{% endif %}
+  {% assign scholarly_keywords = page.citation_keywords | default: page.title %}
+  {% if research_report_id == 'TA-TR-2026-01' %}
   {% assign scholarly_keywords = page.citation_keywords | default: "AI agents; digital preservation; provenance; civilizational memory; long-term communication; cryptographic timestamping; Bitcoin inscriptions; content-addressed archives; machine-readable archives; design science; human-AI collaboration" %}
+  {% endif %}
   <!-- Highwire Press and Dublin Core metadata for scholarly discovery -->
   <meta name="citation_title" content="{{ page.citation_title | escape }}">
   <meta name="citation_author" content="{{ page.citation_author | escape }}">
@@ -62,8 +87,8 @@
   <link rel="alternate" type="application/pdf" title="Searchable preprint PDF" href="{{ page.article_pdf | absolute_url }}">
   {% if page.article_bibtex %}
   <link rel="alternate" type="application/x-bibtex" title="BibTeX citation" href="{{ page.article_bibtex | absolute_url }}">
-  <link rel="describedby" type="application/json" href="{{ page.article_metadata | absolute_url }}">
-  {% else %}
+  {% if page.article_metadata %}<link rel="describedby" type="application/json" href="{{ page.article_metadata | absolute_url }}">{% endif %}
+  {% elsif research_report_id == 'TA-TR-2026-01' %}
   <link rel="alternate" type="application/x-bibtex" title="BibTeX citation" href="{{ '/research/trinity-accord-design-and-limits/citation.bib' | absolute_url }}">
   <link rel="alternate" type="application/x-research-info-systems" title="RIS citation" href="{{ '/research/trinity-accord-design-and-limits/citation.ris' | absolute_url }}">
   <link rel="alternate" type="application/vnd.citationstyles.csl+json" title="CSL-JSON citation" href="{{ '/research/trinity-accord-design-and-limits/citation.csl.json' | absolute_url }}">
@@ -106,7 +131,9 @@
         "keywords": {{ scholarly_keywords | jsonify }},
         "isAccessibleForFree": true,
         "license": "https://creativecommons.org/licenses/by/4.0/",
+        {% if research_relation == 'first_party_accord_study' %}
         "about": {"@id": "https://www.trinityaccord.org/#accord"},
+        {% endif %}
         "encoding": {
           "@type": "MediaObject",
           "contentUrl": {{ page.citation_pdf_url | jsonify }},
@@ -205,7 +232,14 @@
         "name": {{ page.title | default: "The Trinity Accord · 三位一体协定" | jsonify }},
         "description": {{ meta_description | jsonify }},
         "isPartOf": {"@id": "https://www.trinityaccord.org/#website"},
+        {% if page.scholarly_article %}
+        "mainEntity": {"@id": {{ page.url | absolute_url | append: "#article" | jsonify }}},
+        "about": {"@id": {{ page.url | absolute_url | append: "#article" | jsonify }}},
+        {% elsif is_research_surface %}
+        "about": {"@type": "Thing", "name": "Non-amending research and editorial context"},
+        {% else %}
         "about": {"@id": "https://www.trinityaccord.org/#accord"},
+        {% endif %}
         "inLanguage": ["en", "zh-CN"]
       }
     ]
@@ -264,16 +298,28 @@
     </div>
   </nav>
 
+  {% capture research_context_notice %}{% if is_research_surface %}
+  {% assign research_language = page.citation_language | default: page.lang | default: '' %}
+  <aside id="research-boundary-notice" class="research-boundary-notice" role="note" aria-label="Editorial research context">
+    {% if research_language contains 'zh' or page.url contains '/zh' %}
+    <p lang="zh-CN"><strong>网站编辑说明，不属于已发表论文正文：</strong>本页研究或编辑材料不是三份正本，也不拥有权威解释权。第一方论文不是独立佐证；相关证据仍可加强或削弱对项目的评价，固定文本不意味着免于批评。<a href="/research/research-boundary/zh.html">分类、证据类型与研究边界</a>。</p>
+    {% else %}
+    <p><strong>Website editorial context, not part of the deposited manuscript:</strong> Research and editorial material is not Canon or authoritative interpretation. First-party papers are not independent corroboration; relevant evidence may still strengthen or weaken an assessment. Fixed text is not immunity from criticism. <a href="/research/research-boundary/">Classification, evidence types, and research boundary</a>.</p>
+    {% endif %}
+  </aside>
+  {% endif %}{% endcapture %}
+
   {% if page.home_reading %}
   <div class="home-reading-layout">
     {% include home-page-toc.html %}
-    <main id="main-content">{{ content }}</main>
+    <main id="main-content">{{ research_context_notice }}{{ content }}</main>
   </div>
   {% elsif page.reading_page %}
   <div class="document-reading-layout">
     {% include document-page-toc.html %}
     <main id="main-content">
       <nav class="reading-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>{{ page.title | escape }}</span></nav>
+      {{ research_context_notice }}
       {{ content }}
       <nav class="reading-next" aria-label="Continue reading">
         <a href="/inscriptions/">Read the Canon</a>
@@ -284,7 +330,7 @@
     </main>
   </div>
   {% else %}
-  <main id="main-content">{{ content }}</main>
+  <main id="main-content">{{ research_context_notice }}{{ content }}</main>
   {% endif %}
 
   <footer>
@@ -301,6 +347,7 @@
         <a href="/chronicle/">Chronicle</a>
         <a href="/physical-anchor/">Physical Anchor</a>
         <a href="/research/">Research</a>
+        <a href="/research/research-boundary/">Research boundary</a>
         <a href="/status/">Status</a>
         <a href="/llms.txt">llms.txt</a>
         <a href="https://github.com/thechurchofagi/trinity-accord">GitHub</a>
