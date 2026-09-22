@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "kind": "deterministic mathematical reproduction, not empirical evidence",
+  "counts": {
+    "passed": 74,
+    "failed": 0
+  },
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "cost_reduction_percent": 16.77711665687842,
+  "investment_floor_theta": 0.21323553010669316,
+  "investment_floor_support": 1.9191197709602381,
+  "full_results_file": "checks.json",
+  "full_results_sha256": "52353dee80d8563715c57e1b051797c042b46e1ec41bb3a43ef56a31e124eee4"
+}
