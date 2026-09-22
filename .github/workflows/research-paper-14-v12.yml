@@ -26,7 +26,7 @@ jobs:
         if: env.MODE == 'prepare'
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-lang-chinese lmodern fonts-texgyre fonts-noto-cjk poppler-utils
+          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-lang-chinese texlive-fonts-recommended lmodern fonts-texgyre fonts-noto-cjk poppler-utils
       - name: Record repository toolchain provenance
         run: python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/ta14-v12-toolchain.json"
       - name: Execute only the selected guarded phase
