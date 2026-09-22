@@ -1,0 +1,101 @@
+{
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "report_number": "TA-TR-2026-14-BRIDGE",
+  "record_id": 22895832,
+  "doi": "10.5281/zenodo.22895832",
+  "concept_doi": "10.5281/zenodo.22895831",
+  "title": "Financing the Automation Transition Without Pledging Subsistence: Public Upside Claims, Prosperity Tiers, and Bounded Real Returns",
+  "version": "1.0",
+  "submitted": true,
+  "public_file_readback_pass": true,
+  "files": [
+    {
+      "name": "Part-I-Financing-Automation-v1.0.pdf",
+      "bytes": 116352,
+      "sha256": "425a405417d23d5fff5bca05f54cfaae4513a87b02484928ab38ed04957f34b3",
+      "matches_local": true,
+      "url": "https://zenodo.org/api/records/22895832/files/Part-I-Financing-Automation-v1.0.pdf/content"
+    },
+    {
+      "name": "Part-I-Financing-Automation-v1.0.md",
+      "bytes": 37773,
+      "sha256": "ef9de1c1d08562a01b689367300b13df847f3fc5cdf9e7d079399dca7d4a0ab8",
+      "matches_local": true,
+      "url": "https://zenodo.org/api/records/22895832/files/Part-I-Financing-Automation-v1.0.md/content"
+    },
+    {
+      "name": "Part-II-Prosperity-Real-Claims-zh-v1.0.pdf",
+      "bytes": 251657,
+      "sha256": "0aa600384b70efcf1e0c56c05f66acb0e990b1467539d2c2ba222708d3021fbc",
+      "matches_local": true,
+      "url": "https://zenodo.org/api/records/22895832/files/Part-II-Prosperity-Real-Claims-zh-v1.0.pdf/content"
+    },
+    {
+      "name": "FINAL-REVIEW.json",
+      "bytes": 294,
+      "sha256": "1d41dfe39555fea22c55450e2707510767471c03e427ebe606e485500088a03c",
+      "matches_local": true,
+      "url": "https://zenodo.org/api/records/22895832/files/FINAL-REVIEW.json/content"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 278,
+      "sha256": "a056862fbb80a77583a071251f9940d276410ddc7cc78b5eeef5233693dde4ec",
+      "matches_local": true,
+      "url": "https://zenodo.org/api/records/22895832/files/citation.bib/content"
+    },
+    {
+      "name": "requirements.txt",
+      "bytes": 27,
+      "sha256": "4b81b6b6a549771115529e6900b9589835cdbfff0c6acf179aef53d283b744d5",
+      "matches_local": true,
+      "url": "https://zenodo.org/api/records/22895832/files/requirements.txt/content"
+    },
+    {
+      "name": "verify.py",
+      "bytes": 8832,
+      "sha256": "8ebb0779eda9866852d37cfd68500db4c834a6fda0047f571329c5138fd02e54",
+      "matches_local": true,
+      "url": "https://zenodo.org/api/records/22895832/files/verify.py/content"
+    },
+    {
+      "name": "PROVENANCE.json",
+      "bytes": 794,
+      "sha256": "6529dcc7db022251aee6339e0a722ba9ce92a99b997e711fa2767ff548e81865",
+      "matches_local": true,
+      "url": "https://zenodo.org/api/records/22895832/files/PROVENANCE.json/content"
+    },
+    {
+      "name": "README.txt",
+      "bytes": 989,
+      "sha256": "e2fb13f3cd262205c3cebecb58e5a923cb307596b30f7ee6716ab396546e5b85",
+      "matches_local": true,
+      "url": "https://zenodo.org/api/records/22895832/files/README.txt/content"
+    },
+    {
+      "name": "Part-II-Prosperity-Real-Claims-zh-v1.0.md",
+      "bytes": 15296,
+      "sha256": "5c72df3cb53cecea1213ac640af71191b65fab2de2f564eec088e29053ca34af",
+      "matches_local": true,
+      "url": "https://zenodo.org/api/records/22895832/files/Part-II-Prosperity-Real-Claims-zh-v1.0.md/content"
+    },
+    {
+      "name": "checks.json",
+      "bytes": 9535,
+      "sha256": "ee10784735ac4d450f43224d5f3d5e242e4b4a6d93a73b2462fe80ea211c7ade",
+      "matches_local": true,
+      "url": "https://zenodo.org/api/records/22895832/files/checks.json/content"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 981,
+      "sha256": "c4f6fdcdd0f7be598406b6861c171571ce5711b7f94623759338d8154c995f9b",
+      "matches_local": true,
+      "url": "https://zenodo.org/api/records/22895832/files/SHA256SUMS.txt/content"
+    }
+  ],
+  "file_count": 12,
+  "workflow_run_id": "35719846445",
+  "prior_records_modified": false,
+  "peer_reviewed": false
+}

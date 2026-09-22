@@ -1,0 +1,16 @@
+{
+  "reviewed_source_commit": "f4c11376c3b84d4e4990ec29228f5c5888c7cf82",
+  "source_git_blobs": {
+    "research/claim-architecture-transition/bridge-finance/v1.0-rc1/manuscript.md": "b103b7c2e380bfecc45771b560dc7f5f049d964f",
+    "research/claim-architecture-transition/bridge-finance/part-ii/PROSPERITY-TIERS-AND-BOUNDED-REAL-CLAIMS-20260922.md": "f900eafac2f9f6aed1f61eb7f5710a66d2942181",
+    "research/claim-architecture-transition/bridge-finance/v1.0-rc1/verify.py": "0a10767113a591c2b875b58fa961bc340fc2727c"
+  },
+  "report_number": "TA-TR-2026-14-BRIDGE",
+  "doi": "10.5281/zenodo.22895832",
+  "version": "1.0",
+  "external_peer_review": false,
+  "canonical": false,
+  "source_of_original_proposal": "Hongju Liu",
+  "substantial_ai_assistance": true,
+  "prior_records_modified": false
+}
