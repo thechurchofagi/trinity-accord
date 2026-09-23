@@ -1,0 +1,68 @@
+{
+  "rows": [
+    {
+      "url": "https://zenodo.org/api/records/22020122",
+      "bytes": 6936,
+      "sha256": "d3e848109ece97e000a69259f7e1297b146e0c1517afeb905c868052392b3ef2",
+      "acquired_at_utc": "2026-09-23T06:25:54.072666+00:00"
+    },
+    {
+      "url": "https://zenodo.org/api/records/22020122/files/trinity-accord-source.tar.gz/content",
+      "bytes": 30374296,
+      "sha256": "ead4878f30a3c2ccc53e143af4a1034364550636d0f31032311c9310376ba12e",
+      "acquired_at_utc": "2026-09-23T06:26:40.782019+00:00"
+    },
+    {
+      "url": "https://zenodo.org/api/records/22020122/files/trinity-accord-recovery.bundle/content",
+      "bytes": 21958755,
+      "sha256": "2211239cb5030184dfbe511768b1a935cc06b8ea1815e216d84e64fe192df76e",
+      "acquired_at_utc": "2026-09-23T06:27:17.524520+00:00"
+    },
+    {
+      "url": "https://zenodo.org/api/records/22020122/files/tracked-files.json/content",
+      "bytes": 1595410,
+      "sha256": "2d092dbfb7320649f261b3457303f0479574a03757082d56ae8d323f0ce889d0",
+      "acquired_at_utc": "2026-09-23T06:27:25.147509+00:00"
+    },
+    {
+      "url": "https://zenodo.org/api/records/22020122/files/preservation-manifest.json/content",
+      "bytes": 6977,
+      "sha256": "14f70f5cd326e29a0f64975ead4314e4ce4c25a19e6be89560397b73cb331bc7",
+      "acquired_at_utc": "2026-09-23T06:27:30.319552+00:00"
+    },
+    {
+      "url": "https://zenodo.org/api/records/22020122/files/checksums.sha256/content",
+      "bytes": 533,
+      "sha256": "a30d9acb0b4f449a27bda11eb59c326f630c7452bf2af82106b10d2ea198f2f8",
+      "acquired_at_utc": "2026-09-23T06:27:35.389620+00:00"
+    },
+    {
+      "url": "https://zenodo.org/api/records/22020122/files/README.txt/content",
+      "bytes": 1396,
+      "sha256": "7a1a1e47878e3e425ff729e5f1b7994f907a0fbbfc5b344d24913ebdfc26d6c0",
+      "acquired_at_utc": "2026-09-23T06:27:40.739114+00:00"
+    },
+    {
+      "url": "https://zenodo.org/api/records/22020122/files/restore-trinity-accord.py/content",
+      "bytes": 24011,
+      "sha256": "81e159e4a2ec62a4e2c6a5dc5d5677f55eb4134688bc7708c307d64f351c0558",
+      "acquired_at_utc": "2026-09-23T06:27:45.631240+00:00"
+    },
+    {
+      "url": "https://zenodo.org/api/records/22020122/files/zenodo-metadata.json/content",
+      "bytes": 1975,
+      "sha256": "8c0ef9d3a23a053729331e8dc7f06baa1297025d3e6c4cac638aaf7819759c36",
+      "acquired_at_utc": "2026-09-23T06:27:50.321813+00:00"
+    }
+  ],
+  "total_bytes": 53970289,
+  "status": "pass",
+  "file_count": 8,
+  "record_id": 22020122,
+  "source_sha": "b61a10e19484d988c4cc3024a3c56af83ad3fe8b",
+  "budget_bytes": 60000000,
+  "budget_seconds": 600,
+  "concurrency": 1,
+  "allowed_host": "zenodo.org",
+  "credentials_used": false
+}
