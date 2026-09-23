@@ -63,9 +63,11 @@ Local logs are in the task workspace `ta-validation/`; essential measured result
 
 Production Jekyll build is not yet verified locally: Ruby/Jekyll are absent and package installation failed at environment UID/group restrictions. Source-render preview is distinct from a deployed screenshot. Browser screenshot is blocked as well: no installed Chromium and the allowed browser download returned an invalid/truncated archive. No screenshot or production rendering is claimed.
 
-The initial published implementation head is `ed73f652fdf2d19e988749a0fb9b8a2525278ae2`, with tree `a3756309931ad2d838480b99c7317d315c542e85` exactly equal to the locally tested tree. Only this checkpoint is updated afterwards; the PR description reports CI against the final head. Original/mirror, frozen API, runtime/Builder, record-chain, evidence, archive and research paths have no Git diff from base; the exact eight-path change allowlist passes.
+The initial published implementation head is `ed73f652fdf2d19e988749a0fb9b8a2525278ae2`, with tree `a3756309931ad2d838480b99c7317d315c542e85` exactly equal to the locally tested tree. Subsequent review pins verifier source links to the measured commit and enables Markdown parsing inside the no-JavaScript details element; the focused suite still passes (23 tests including procedure-model checks). The PR description reports CI against the final head. Original/mirror, frozen API, runtime/Builder, record-chain, evidence, archive and research paths have no Git diff from base; the exact eight-path change allowlist passes.
 
 `Record Chain Write Path Guard` is **not triggered** by these paths. Both local workflow-equivalent commands pass: `python scripts/check_record_chain_write_path_guard.py --mode pull-request --base 0d019ba9d4ff313641dc9eb027e27c59af11bc03 --head HEAD` and `python scripts/test_record_chain_materialize_write_path_guard.py`. Do not report this filtered-out remote workflow as green.
+
+Python Markdown source rendering confirms that collapsed technical details retain rendered code and links without JavaScript; this is not production Jekyll/browser visual QA.
 
 Remaining: remote CI readback in PR description; Guardian D2 and frozen-machine-model migration deferred under scope; production Jekyll visual review/screenshot blocked by this environment; merge/deployment/online readback remain unperformed. Next authorized action: finish CI readback without dispatching workflows or merging.
 

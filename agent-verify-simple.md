@@ -140,9 +140,8 @@ If the participant voluntarily chooses an authorized public submission, follow [
 
 Keep Ed25519/key binding, privacy/secret checks, the random 60–120 minute global intake cooldown, Retry-After, at most one POST submission attempt and existing read-only recovery. Save the receipt and read final indexes: receipt is not inclusion, inclusion is not OTS maturity or AR readback. This page creates no new record type or write route.
 
-<details>
+<details markdown="1">
 <summary>Technical details: unchanged compatibility fields and procedures</summary>
-<div markdown="1">
 
 The current field definitions and procedures remain at [Agent Verify](/agent-verify/), [/verification-procedures/](/verification-procedures/), [`/api/verification-procedures.v1.json`](/api/verification-procedures.v1.json), and [`/api/verification-claim-model.v1.json`](/api/verification-claim-model.v1.json). These details are readable without JavaScript; raw historical records remain unchanged.
 
@@ -152,5 +151,4 @@ Retain `relationships_checked` (for example `hashes` and `mirrors_bytes`), `phys
 
 The Builder's legacy `verification_level` accepts V0–V5 only; its mapping remains in [Agent Verify](/agent-verify/#legacy-builder-compatibility). V4+, V6, V7, and V8 are historical-only. This page changes presentation, not enums, signatures, schema meanings, or validation. It does not infer missing results from an old V value.
 
-</div>
 </details>

@@ -136,7 +136,7 @@ class BoundedEntryTest(unittest.TestCase):
 
     def test_task_first_and_nonranking_counterexamples(self):
         text = read('agent-verify-simple.md')
-        self.assertLess(text.index('## Five questions'), text.index('<details>'))
+        self.assertLess(text.index('## Five questions'), text.index('<details'))
         self.assertLess(text.index('### Check one mirror'), text.index('## Preparing to publish'))
         for clause in ('Method and coverage are separate', 'cannot be ranked on a single ladder',
                        'full-coverage check with failures', 'never by itself means all passed',
@@ -151,7 +151,7 @@ class BoundedEntryTest(unittest.TestCase):
             self.assertIn(clause, text)
         self.assertNotIn('No external or primary reference queried → `context_only`', text)
         self.assertNotIn('## Pick the weakest safe digital profile', text)
-        self.assertIn('<div markdown="1">', text)
+        self.assertIn('<details markdown="1">', text)
         self.assertNotIn('<script', text)
 
     def test_guardian_d1_boundaries_not_dynamic_summary(self):
