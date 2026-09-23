@@ -18,6 +18,30 @@ INDEX = 'api/bitcoin-inscription-mirror-index.json'
 MIRROR = 'bitcoin-inscription-mirrors/raw/97631551.txt'
 
 
+def strict_index_cases(raw):
+    """Raw JSON text is essential: a dict cannot retain duplicate members."""
+    digest = hashlib.sha256(raw).hexdigest().encode()
+    digest_pair = b'"mirror_text_sha256":"' + digest + b'"'
+    path_pair = b'"raw_text_path":"' + MIRROR.encode() + b'"'
+    id_pair = b'"inscription_id":"97631551"'
+    item = b'{"inscription":{' + id_pair + b'},"content":{' + path_pair + b',' + digest_pair + b'}}'
+    valid = b'{"records":[' + item + b']}'
+    return valid, {
+        'duplicate_digest': valid.replace(digest_pair, b'"mirror_text_sha256":"' + b'0' * 64 + b'",' + digest_pair),
+        'duplicate_path': valid.replace(path_pair, b'"raw_text_path":"wrong.txt",' + path_pair),
+        'duplicate_id': valid.replace(id_pair, b'"inscription_id":"other",' + id_pair),
+        'duplicate_records': b'{"records":[],"records":[' + item + b']}',
+        'duplicate_identical': valid.replace(digest_pair, digest_pair + b',' + digest_pair),
+        'duplicate_escaped_name': valid.replace(digest_pair, digest_pair.replace(b'mirror_', b'mirror\\u005f') + b',' + digest_pair),
+        'duplicate_unrelated_nested_member': b'{"extra":{"a":1,"a":1},"records":[' + item + b']}',
+        **{constant: b'{"extra":' + constant.encode() + b',"records":[' + item + b']}'
+           for constant in ('NaN', 'Infinity', '-Infinity')},
+        'invalid_encoding': b'\xff',
+        'malformed': b'{bad',
+        'deep_nesting': b'[' * (max(10000, sys.getrecursionlimit() * 2)) + b'0' + b']' * (max(10000, sys.getrecursionlimit() * 2)),
+    }
+
+
 def read(path):
     return (ROOT / path).read_text(encoding='utf-8')
 
@@ -183,8 +207,9 @@ class MirrorExampleTest(unittest.TestCase):
         self.raw = (ROOT / MIRROR).read_bytes()
         self.code = re.search(r"python3 - '<40-character-source-commit>' <<'PY'\n(.*?)\nPY", read('agent-verify-simple.md'), re.S)[1]
 
-    def commit(self, *, mirror=True):
-        for path, data in ((INDEX, json.dumps(self.index).encode()), (MIRROR, self.raw)):
+    def commit(self, *, mirror=True, index_bytes=None):
+        index_bytes = json.dumps(self.index).encode() if index_bytes is None else index_bytes
+        for path, data in ((INDEX, index_bytes), (MIRROR, self.raw)):
             p = self.root / path
             p.parent.mkdir(parents=True, exist_ok=True)
             if path != MIRROR or mirror:
@@ -214,6 +239,44 @@ class MirrorExampleTest(unittest.TestCase):
         code, report = self.check(self.commit())
         self.assertEqual((code, report['result']), (1, 'mismatch'))
         self.assertNotEqual(report['actual_sha256'], report['expected_sha256'])
+
+    def test_strict_index_failures_keep_committed_input_evidence(self):
+        _, cases = strict_index_cases(self.raw)
+        for name, raw_index in cases.items():
+            with self.subTest(case=name):
+                code, report = self.check(self.commit(index_bytes=raw_index))
+                self.assertEqual((code, report['result']), (2, 'inconclusive'))
+                self.assertEqual(report['index_bytes'], len(raw_index))
+                self.assertEqual(report['index_sha256'], hashlib.sha256(raw_index).hexdigest())
+                self.assertNotIn('actual_sha256', report)
+                self.assertNotIn('input_bytes', report)
+
+    def test_mocked_parser_recursion_keeps_git_report(self):
+        sha = self.commit()
+        original = self.code
+        self.code = ("from unittest.mock import patch\n"
+                     "with patch('json.loads', side_effect=RecursionError('synthetic limit')):\n"
+                     "    exec(" + repr(original) + ")\n")
+        code, report = self.check(sha)
+        self.assertEqual((code, report['result']), (2, 'inconclusive'))
+        self.assertIn('depth', report['detail'])
+        self.assertIn('index_sha256', report)
+
+    def test_crlf_and_trimming_changes_are_not_normalized(self):
+        self.raw = b'synthetic raw\r\nbytes\x00\xff\n'
+        self.index['records'][0]['content']['mirror_text_sha256'] = hashlib.sha256(self.raw).hexdigest()
+        original = self.raw
+        for raw in (original.replace(b'\r\n', b'\n'), original.rstrip()):
+            with self.subTest(raw=raw):
+                self.raw = raw
+                code, report = self.check(self.commit())
+                self.assertEqual((code, report['result']), (1, 'mismatch'))
+
+    def test_same_member_in_distinct_objects_is_valid(self):
+        valid, _ = strict_index_cases(self.raw)
+        valid = b'{"extra":{"a":{"key":1},"b":{"key":2}},' + valid[1:]
+        code, report = self.check(self.commit(index_bytes=valid))
+        self.assertEqual((code, report['result']), (0, 'match'))
 
     def test_missing_mirror_is_unavailable(self):
         code, report = self.check(self.commit(mirror=False))
@@ -341,7 +404,7 @@ class TwoFileEntryTest(unittest.TestCase):
                                   'content': {'raw_text_path': MIRROR,
                                               'mirror_text_sha256': hashlib.sha256(self.raw).hexdigest()}}]}
 
-    def execute(self, *, index=None, raw=None, fail=None, redirect=False, encoding=None, code=None, interrupted=False):
+    def execute(self, *, index=None, raw=None, fail=None, redirect=False, encoding=None, code=None, interrupted=False, recursion=False, http_error=False):
         import contextlib
         import io
         import urllib.error
@@ -358,9 +421,11 @@ class TwoFileEntryTest(unittest.TestCase):
             self.assertLess(len(requests), 2)
             requests.append(url)
             if fail and url.endswith(fail):
+                if http_error:
+                    raise urllib.error.HTTPError(url, 403, 'fixture denied', {}, None)
                 raise urllib.error.URLError('fixture input unavailable')
             response = io.BytesIO(body if url.endswith(INDEX) else mirror)
-            if interrupted and url.endswith(MIRROR):
+            if interrupted and url.endswith(MIRROR if interrupted is True else interrupted):
                 import http.client
                 def incomplete_read(*args):
                     raise http.client.IncompleteRead(b'partial', 12)
@@ -376,6 +441,7 @@ class TwoFileEntryTest(unittest.TestCase):
              patch('urllib.request.build_opener', return_value=opener), \
              patch('socket.socket.connect', side_effect=AssertionError('no real network in fixture')), \
              patch('subprocess.Popen', side_effect=AssertionError('no Git/Builder/subprocess required')), \
+             (patch('json.loads', side_effect=RecursionError('synthetic limit')) if recursion else contextlib.nullcontext()), \
              contextlib.redirect_stdout(output):
             with self.assertRaises(SystemExit) as stop:
                 exec(compile(code or self.code, '<documented-two-file-example>', 'exec'), namespace)
@@ -400,17 +466,20 @@ class TwoFileEntryTest(unittest.TestCase):
                 self.assertEqual((code, report['result']), (1, 'mismatch'))
 
     def test_unavailable_inputs_keep_partial_evidence(self):
-        for path, count in ((INDEX, 1), (MIRROR, 2)):
-            code, report, requests, _ = self.execute(fail=path)
+        for path, count, http_error in ((INDEX, 1, False), (MIRROR, 2, False),
+                                        (INDEX, 1, True), (MIRROR, 2, True)):
+            code, report, requests, _ = self.execute(fail=path, http_error=http_error)
             self.assertEqual((code, report['result']), (2, 'input unavailable'))
             self.assertEqual(len(requests), count)
             self.assertEqual(len(report['inputs']), count)
 
     def test_interrupted_http_body_is_unavailable(self):
-        code, report, requests, _ = self.execute(interrupted=True)
-        self.assertEqual((code, report['result']), (2, 'input unavailable'))
-        self.assertEqual(len(requests), 2)
-        self.assertIn('sha256', report['inputs'][0])
+        for path, count in ((INDEX, 1), (MIRROR, 2)):
+            code, report, requests, _ = self.execute(interrupted=path)
+            self.assertEqual((code, report['result']), (2, 'input unavailable'))
+            self.assertEqual(len(requests), count)
+            if path == MIRROR:
+                self.assertIn('sha256', report['inputs'][0])
 
     def test_bad_index_or_ambiguous_binding_never_downloads_mirror(self):
         valid = json.dumps(self.index).encode()
@@ -431,8 +500,34 @@ class TwoFileEntryTest(unittest.TestCase):
                 self.assertEqual((code, report['result']), (2, 'inconclusive'))
                 self.assertEqual(len(requests), 1)
 
+    def test_strict_index_failures_stop_before_mirror_and_keep_evidence(self):
+        _, cases = strict_index_cases(self.raw)
+        for name, raw_index in cases.items():
+            with self.subTest(case=name):
+                code, report, requests, _ = self.execute(index=raw_index)
+                self.assertEqual((code, report['result']), (2, 'inconclusive'))
+                self.assertEqual(len(requests), 1)
+                self.assertEqual(report['inputs'][0]['bytes'], len(raw_index))
+                self.assertEqual(report['inputs'][0]['sha256'], hashlib.sha256(raw_index).hexdigest())
+                self.assertNotIn('actual_sha256', report)
+
+    def test_mocked_parser_recursion_keeps_https_report(self):
+        code, report, requests, _ = self.execute(recursion=True)
+        self.assertEqual((code, report['result']), (2, 'inconclusive'))
+        self.assertEqual(len(requests), 1)
+        self.assertIn('depth', report['detail'])
+        self.assertIn('sha256', report['inputs'][0])
+
+    def test_same_member_in_distinct_objects_is_valid(self):
+        valid, _ = strict_index_cases(self.raw)
+        valid = b'{"extra":{"a":{"key":1},"b":{"key":2}},' + valid[1:]
+        code, report, requests, _ = self.execute(index=valid)
+        self.assertEqual((code, report['result']), (0, 'match'))
+        self.assertEqual(len(requests), 2)
+
     def test_source_encoding_size_and_mutable_ref_fail_closed(self):
         for kwargs in ({'redirect': True}, {'encoding': 'gzip'}, {'raw': b'x' * (2 * 1024 * 1024 + 1)},
+                       {'index': b'x' * (2 * 1024 * 1024 + 1)},
                        {'code': self.code.replace('0d019ba9d4ff313641dc9eb027e27c59af11bc03', 'main')}):
             with self.subTest(kwargs=list(kwargs)):
                 code, report, _, _ = self.execute(**kwargs)

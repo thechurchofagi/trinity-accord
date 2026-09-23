@@ -26,7 +26,7 @@ Choose a question, do the operation, and report what happened. You may read or p
 
 ### Check one mirror
 
-Choose the route matching your available materials. **Keep the limits next to the result:** both routes compare one raw mirror with an index from the same project. Neither establishes independent chain inclusion, external endorsement, physical identity or philosophical truth. A failed download or uncertain source is not a match.
+Choose the route matching your available materials. **Keep the limits next to the result:** both routes compare one raw mirror with an index from the same project. Neither establishes independent chain inclusion, external endorsement, physical identity or philosophical truth. A failed download or uncertain source is not a match. Both routes reject duplicate JSON member names (including escaped spellings) and non-standard NaN/Infinity constants in the index. Index parsing or depth-limit failure is inconclusive (exit 2): retain acquired index evidence and stop before reading the mirror.
 
 #### Without a checkout: fetch two fixed-snapshot inputs
 
@@ -92,11 +92,25 @@ def fetch_bytes(path):
         raise ValueError('Input exceeds this example\'s 2 MiB per-file limit')
     return raw
 
+def unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError('Duplicate JSON member: ' + key)
+        result[key] = value
+    return result
+
+
+def reject_constant(value):
+    raise ValueError('Non-standard JSON constant: ' + value)
+
+
 try:
     if not re.fullmatch(r'[0-9a-f]{40}', source_commit):
         raise ValueError('An exact lowercase 40-character source commit is required')
     index_bytes = fetch_bytes(index_path)
-    index = json.loads(index_bytes)
+    index = json.loads(index_bytes, object_pairs_hook=unique_object,
+                       parse_constant=reject_constant)
     matches = [r for r in index['records']
                if r['inscription']['inscription_id'] == '97631551']
     if len(matches) != 1:
@@ -112,6 +126,8 @@ try:
                   result='match' if actual == expected else 'mismatch')
 except (urllib.error.URLError, http.client.HTTPException, OSError) as exc:
     report.update(result='input unavailable', detail=str(exc))
+except RecursionError:
+    report.update(result='inconclusive', detail='Index JSON exceeds parser depth/capacity limit')
 except (ValueError, KeyError, TypeError, AttributeError) as exc:
     report.update(result='inconclusive', detail=str(exc))
 report['elapsed_seconds'] = round(time.monotonic() - started, 6)
@@ -160,6 +176,19 @@ def committed_bytes(path):
         check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
     ).stdout
 
+def unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError('Duplicate JSON member: ' + key)
+        result[key] = value
+    return result
+
+
+def reject_constant(value):
+    raise ValueError('Non-standard JSON constant: ' + value)
+
+
 try:
     if not re.fullmatch(r'[0-9a-f]{40}', report['source_commit']):
         raise ValueError('An exact lowercase 40-character source commit is required')
@@ -171,7 +200,9 @@ try:
     if resolved != source:
         raise ValueError('Source must identify a commit, not a tag or mutable ref')
     index_bytes = committed_bytes(index_path)
-    index = json.loads(index_bytes)
+    report.update(index_bytes=len(index_bytes), index_sha256=hashlib.sha256(index_bytes).hexdigest())
+    index = json.loads(index_bytes, object_pairs_hook=unique_object,
+                       parse_constant=reject_constant)
     matches = [r for r in index['records']
                if r['inscription']['inscription_id'] == '97631551']
     if len(matches) != 1:
@@ -182,11 +213,12 @@ try:
         raise ValueError('Missing or invalid expected digest/path binding')
     raw = committed_bytes(mirror_path)
     actual = hashlib.sha256(raw).hexdigest()
-    report.update(index_bytes=len(index_bytes), index_sha256=hashlib.sha256(index_bytes).hexdigest(),
-                  input_bytes=len(raw), expected_sha256=expected, actual_sha256=actual,
+    report.update(input_bytes=len(raw), expected_sha256=expected, actual_sha256=actual,
                   result='match' if actual == expected else 'mismatch')
 except subprocess.CalledProcessError:
     report.update(result='input unavailable', detail='Cannot read the specified local Git commit/input')
+except RecursionError:
+    report.update(result='inconclusive', detail='Index JSON exceeds parser depth/capacity limit')
 except (ValueError, KeyError, TypeError, AttributeError) as exc:
     report.update(result='inconclusive', detail=str(exc))
 except OSError as exc:

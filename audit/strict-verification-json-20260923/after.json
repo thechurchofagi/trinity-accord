@@ -1,0 +1,821 @@
+{
+  "utc": "2026-09-23T08:59:25.656627+00:00",
+  "python": "3.12.14",
+  "source_commit": "c29067cd0eb7ba7c64de976261e6fcfd45e53805",
+  "working_example_shell_sha256": [
+    "e757bc026559974d68b873a238f07fa92a87f53cce4d2adda1ae0436eb60c2a2",
+    "4e70ae8fad91d1f6aef4945bfa913ef644ae47490f9864ccab0c59d675854346"
+  ],
+  "scope": "Mocked HTTPS; actual local Git fixture commits; no production submission",
+  "cases": [
+    {
+      "route": "https",
+      "case": "valid",
+      "index_bytes": 222,
+      "index_sha256": "fd09c780e8bf1adbd4274a801b614825239eb30087ddd70c8234a75b89325611",
+      "exit": 0,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 222,
+            "sha256": "fd09c780e8bf1adbd4274a801b614825239eb30087ddd70c8234a75b89325611"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/bitcoin-inscription-mirrors/raw/97631551.txt",
+            "http_status": 200,
+            "bytes": 13,
+            "sha256": "d26ec11c5f4c8be5c0f8907bfe320dffc7510fb2d89da3a24fd2bb32f6e1a836"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.062643+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 222,
+        "input_bytes": 13,
+        "expected_sha256": "d26ec11c5f4c8be5c0f8907bfe320dffc7510fb2d89da3a24fd2bb32f6e1a836",
+        "actual_sha256": "d26ec11c5f4c8be5c0f8907bfe320dffc7510fb2d89da3a24fd2bb32f6e1a836",
+        "result": "match",
+        "elapsed_seconds": 0.000539
+      },
+      "mock_get_count": 2,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "duplicate_digest",
+      "index_bytes": 310,
+      "index_sha256": "88ed4d4b13d284452f16f4a929a9bf7fe4224a99bcbdae38c28e8962c9ef7600",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 310,
+            "sha256": "88ed4d4b13d284452f16f4a929a9bf7fe4224a99bcbdae38c28e8962c9ef7600"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.065366+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: mirror_text_sha256",
+        "elapsed_seconds": 0.0001
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "duplicate_path",
+      "index_bytes": 250,
+      "index_sha256": "932df303ec9140149f5fd68e3f43ec655114da12171ad44807b020ea3a8f63e1",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 250,
+            "sha256": "932df303ec9140149f5fd68e3f43ec655114da12171ad44807b020ea3a8f63e1"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.066809+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: raw_text_path",
+        "elapsed_seconds": 0.000162
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "duplicate_id",
+      "index_bytes": 247,
+      "index_sha256": "002bfcc832ec067a55fd3ab8969668991177f1ba04960608c06b2d70debd91cb",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 247,
+            "sha256": "002bfcc832ec067a55fd3ab8969668991177f1ba04960608c06b2d70debd91cb"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.068228+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: inscription_id",
+        "elapsed_seconds": 8.4e-05
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "duplicate_records",
+      "index_bytes": 235,
+      "index_sha256": "e62c9f0a594ac145fa04158266d35cded2c036f926c3ecb5794972a25476f5dd",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 235,
+            "sha256": "e62c9f0a594ac145fa04158266d35cded2c036f926c3ecb5794972a25476f5dd"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.069792+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: records",
+        "elapsed_seconds": 0.000121
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "duplicate_identical",
+      "index_bytes": 310,
+      "index_sha256": "6a9dd3523719b470103fb8df2aa31751c59783975797df40ec947257dfe1debd",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 310,
+            "sha256": "6a9dd3523719b470103fb8df2aa31751c59783975797df40ec947257dfe1debd"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.071304+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: mirror_text_sha256",
+        "elapsed_seconds": 8.5e-05
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "duplicate_escaped_name",
+      "index_bytes": 315,
+      "index_sha256": "e5ce6e097857a32142856a186f41c9019c12d5e5cdb1df99e234a3a33fb24834",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 315,
+            "sha256": "e5ce6e097857a32142856a186f41c9019c12d5e5cdb1df99e234a3a33fb24834"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.072711+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: mirror_text_sha256",
+        "elapsed_seconds": 8.3e-05
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "duplicate_unrelated_nested_member",
+      "index_bytes": 244,
+      "index_sha256": "d88a868609f8591c44abf4177ac586a7a4e5307b8c1c0f6de1097a2f24dec219",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 244,
+            "sha256": "d88a868609f8591c44abf4177ac586a7a4e5307b8c1c0f6de1097a2f24dec219"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.074073+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: a",
+        "elapsed_seconds": 0.000257
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "NaN",
+      "index_bytes": 234,
+      "index_sha256": "74dbadf1d87306dec026fec5f1128ff977a29076816a301c4109ef1369b68aac",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 234,
+            "sha256": "74dbadf1d87306dec026fec5f1128ff977a29076816a301c4109ef1369b68aac"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.075659+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "Non-standard JSON constant: NaN",
+        "elapsed_seconds": 8.1e-05
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "Infinity",
+      "index_bytes": 239,
+      "index_sha256": "e9334a607563c4a74e75355467793ee7eb6d6c2637a09e7cc5ba0c2ee7d27d16",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 239,
+            "sha256": "e9334a607563c4a74e75355467793ee7eb6d6c2637a09e7cc5ba0c2ee7d27d16"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.077371+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "Non-standard JSON constant: Infinity",
+        "elapsed_seconds": 8.5e-05
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "-Infinity",
+      "index_bytes": 240,
+      "index_sha256": "2366b34e4d3921e26265f526c91fe4a7879b5ffca397553e788b35b964595d6c",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 240,
+            "sha256": "2366b34e4d3921e26265f526c91fe4a7879b5ffca397553e788b35b964595d6c"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.078801+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "Non-standard JSON constant: -Infinity",
+        "elapsed_seconds": 0.000104
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "invalid_encoding",
+      "index_bytes": 1,
+      "index_sha256": "a8100ae6aa1940d0b663bb31cd466142ebbdbd5187131b92d93818987832eb89",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 1,
+            "sha256": "a8100ae6aa1940d0b663bb31cd466142ebbdbd5187131b92d93818987832eb89"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.080454+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "'utf-8' codec can't decode byte 0xff in position 0: invalid start byte",
+        "elapsed_seconds": 8.6e-05
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "malformed",
+      "index_bytes": 4,
+      "index_sha256": "17eed55d881c0dd5fe0935a98d89dd9e52d62aed941f3fb7d17bd490e5aa3e8f",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 4,
+            "sha256": "17eed55d881c0dd5fe0935a98d89dd9e52d62aed941f3fb7d17bd490e5aa3e8f"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.081827+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+        "elapsed_seconds": 0.000105
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "https",
+      "case": "deep_nesting",
+      "index_bytes": 20001,
+      "index_sha256": "bdac01fae96e38fb30b2955615672752ffb9ddb477ba705aa4e079c50c7021bd",
+      "exit": 2,
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+        "inputs": [
+          {
+            "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+            "http_status": 200,
+            "bytes": 20001,
+            "sha256": "bdac01fae96e38fb30b2955615672752ffb9ddb477ba705aa4e079c50c7021bd"
+          }
+        ],
+        "operation_time_utc": "2026-09-23T08:59:25.083379+00:00",
+        "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+        "method": "SHA-256 over unmodified HTTPS response bytes",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "result": "inconclusive",
+        "detail": "Index JSON exceeds parser depth/capacity limit",
+        "elapsed_seconds": 0.000866
+      },
+      "mock_get_count": 1,
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "valid",
+      "index_bytes": 222,
+      "index_sha256": "16dbb53f322610d735790e82b9587a7c97e8351006855c56b775c1acba47ba55",
+      "exit": 0,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"25e197328c2b7d6a221b21ea0994fa233a6008dd\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.119566+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 222,\n  \"index_sha256\": \"16dbb53f322610d735790e82b9587a7c97e8351006855c56b775c1acba47ba55\",\n  \"input_bytes\": 1183,\n  \"expected_sha256\": \"4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8\",\n  \"actual_sha256\": \"4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8\",\n  \"result\": \"match\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "25e197328c2b7d6a221b21ea0994fa233a6008dd",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "25e197328c2b7d6a221b21ea0994fa233a6008dd",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.119566+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 222,
+        "index_sha256": "16dbb53f322610d735790e82b9587a7c97e8351006855c56b775c1acba47ba55",
+        "input_bytes": 1183,
+        "expected_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+        "actual_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+        "result": "match"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "duplicate_digest",
+      "index_bytes": 310,
+      "index_sha256": "a99647c30ee60bb68d1488e1499c559f4d86b682775d85ffb8e21195c1a60f8a",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"6cb899b1b3070719fe817e97ef54ab2b84312143\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.160133+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 310,\n  \"index_sha256\": \"a99647c30ee60bb68d1488e1499c559f4d86b682775d85ffb8e21195c1a60f8a\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"Duplicate JSON member: mirror_text_sha256\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "6cb899b1b3070719fe817e97ef54ab2b84312143",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "6cb899b1b3070719fe817e97ef54ab2b84312143",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.160133+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 310,
+        "index_sha256": "a99647c30ee60bb68d1488e1499c559f4d86b682775d85ffb8e21195c1a60f8a",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: mirror_text_sha256"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "duplicate_path",
+      "index_bytes": 250,
+      "index_sha256": "a91090fc3d0c22614652fe93ec32a9b2d7ea07fbe1060b6b32bec6a2d29ace2c",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"45765d98c7aaf262b75401d47f6e6527dd6e8093\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.202187+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 250,\n  \"index_sha256\": \"a91090fc3d0c22614652fe93ec32a9b2d7ea07fbe1060b6b32bec6a2d29ace2c\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"Duplicate JSON member: raw_text_path\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "45765d98c7aaf262b75401d47f6e6527dd6e8093",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "45765d98c7aaf262b75401d47f6e6527dd6e8093",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.202187+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 250,
+        "index_sha256": "a91090fc3d0c22614652fe93ec32a9b2d7ea07fbe1060b6b32bec6a2d29ace2c",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: raw_text_path"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "duplicate_id",
+      "index_bytes": 247,
+      "index_sha256": "3bfcb6f8b9a307d801e4e370cbac188978ffe7f8fc03bfc444799caedbe51e28",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"d8d724a91f55a34fad47fdb969a6b2328f114558\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.245555+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 247,\n  \"index_sha256\": \"3bfcb6f8b9a307d801e4e370cbac188978ffe7f8fc03bfc444799caedbe51e28\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"Duplicate JSON member: inscription_id\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "d8d724a91f55a34fad47fdb969a6b2328f114558",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "d8d724a91f55a34fad47fdb969a6b2328f114558",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.245555+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 247,
+        "index_sha256": "3bfcb6f8b9a307d801e4e370cbac188978ffe7f8fc03bfc444799caedbe51e28",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: inscription_id"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "duplicate_records",
+      "index_bytes": 235,
+      "index_sha256": "ae0999aab6811c5b2cd910cf07de68d29efc3cf71488bc3cdf44eb06286c8b79",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"8733048f9015f632841e783a1056216899dea457\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.284436+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 235,\n  \"index_sha256\": \"ae0999aab6811c5b2cd910cf07de68d29efc3cf71488bc3cdf44eb06286c8b79\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"Duplicate JSON member: records\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "8733048f9015f632841e783a1056216899dea457",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "8733048f9015f632841e783a1056216899dea457",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.284436+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 235,
+        "index_sha256": "ae0999aab6811c5b2cd910cf07de68d29efc3cf71488bc3cdf44eb06286c8b79",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: records"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "duplicate_identical",
+      "index_bytes": 310,
+      "index_sha256": "7a937dea874d106334a119d28f6c9804666afcf00cef1e2c5023cca6bfb97595",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"7f078bb31bb2554153f1f914d1d541c50e968a85\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.326771+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 310,\n  \"index_sha256\": \"7a937dea874d106334a119d28f6c9804666afcf00cef1e2c5023cca6bfb97595\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"Duplicate JSON member: mirror_text_sha256\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "7f078bb31bb2554153f1f914d1d541c50e968a85",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "7f078bb31bb2554153f1f914d1d541c50e968a85",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.326771+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 310,
+        "index_sha256": "7a937dea874d106334a119d28f6c9804666afcf00cef1e2c5023cca6bfb97595",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: mirror_text_sha256"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "duplicate_escaped_name",
+      "index_bytes": 315,
+      "index_sha256": "b1d82066649e750e849a60fb7ec9f964e034f13dcc3bdb453ea3d71d30b7e3aa",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"f695fcc96cf9faa1b6029e75a1546a16bfbf4aad\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.368943+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 315,\n  \"index_sha256\": \"b1d82066649e750e849a60fb7ec9f964e034f13dcc3bdb453ea3d71d30b7e3aa\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"Duplicate JSON member: mirror_text_sha256\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "f695fcc96cf9faa1b6029e75a1546a16bfbf4aad",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "f695fcc96cf9faa1b6029e75a1546a16bfbf4aad",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.368943+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 315,
+        "index_sha256": "b1d82066649e750e849a60fb7ec9f964e034f13dcc3bdb453ea3d71d30b7e3aa",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: mirror_text_sha256"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "duplicate_unrelated_nested_member",
+      "index_bytes": 244,
+      "index_sha256": "5a7ff2b83da3fea841376145315ff6dbef5a894cf9eec0e73ef2e91e7881131c",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"0a3b8ca76ffdfbab8d670be6b19bb75393fa1f77\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.411302+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 244,\n  \"index_sha256\": \"5a7ff2b83da3fea841376145315ff6dbef5a894cf9eec0e73ef2e91e7881131c\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"Duplicate JSON member: a\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "0a3b8ca76ffdfbab8d670be6b19bb75393fa1f77",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "0a3b8ca76ffdfbab8d670be6b19bb75393fa1f77",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.411302+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 244,
+        "index_sha256": "5a7ff2b83da3fea841376145315ff6dbef5a894cf9eec0e73ef2e91e7881131c",
+        "result": "inconclusive",
+        "detail": "Duplicate JSON member: a"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "NaN",
+      "index_bytes": 234,
+      "index_sha256": "26ed13415ed07d7ac6a37b634136ed0267dc478d4d887cacf0e0b72402ed278a",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"8427db44e5426b0412314d4e4205570818dcf5b8\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.450062+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 234,\n  \"index_sha256\": \"26ed13415ed07d7ac6a37b634136ed0267dc478d4d887cacf0e0b72402ed278a\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"Non-standard JSON constant: NaN\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "8427db44e5426b0412314d4e4205570818dcf5b8",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "8427db44e5426b0412314d4e4205570818dcf5b8",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.450062+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 234,
+        "index_sha256": "26ed13415ed07d7ac6a37b634136ed0267dc478d4d887cacf0e0b72402ed278a",
+        "result": "inconclusive",
+        "detail": "Non-standard JSON constant: NaN"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "Infinity",
+      "index_bytes": 239,
+      "index_sha256": "f1493447313fbe27a1676ff3a72ac5ddf7a6ec1a31fa48a7d23c07d7d0aed038",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"fba3ebbe84f61d9104165171eb24622c6ef6ea0e\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.488456+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 239,\n  \"index_sha256\": \"f1493447313fbe27a1676ff3a72ac5ddf7a6ec1a31fa48a7d23c07d7d0aed038\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"Non-standard JSON constant: Infinity\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "fba3ebbe84f61d9104165171eb24622c6ef6ea0e",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "fba3ebbe84f61d9104165171eb24622c6ef6ea0e",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.488456+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 239,
+        "index_sha256": "f1493447313fbe27a1676ff3a72ac5ddf7a6ec1a31fa48a7d23c07d7d0aed038",
+        "result": "inconclusive",
+        "detail": "Non-standard JSON constant: Infinity"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "-Infinity",
+      "index_bytes": 240,
+      "index_sha256": "20a1e29d7f1f4daf1c3a2820fddfec01e01f91e030379c523ec8245759e957f0",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"b9a309c8782a9a323cb50b9a9bc389c1b40a535f\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.528208+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 240,\n  \"index_sha256\": \"20a1e29d7f1f4daf1c3a2820fddfec01e01f91e030379c523ec8245759e957f0\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"Non-standard JSON constant: -Infinity\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "b9a309c8782a9a323cb50b9a9bc389c1b40a535f",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "b9a309c8782a9a323cb50b9a9bc389c1b40a535f",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.528208+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 240,
+        "index_sha256": "20a1e29d7f1f4daf1c3a2820fddfec01e01f91e030379c523ec8245759e957f0",
+        "result": "inconclusive",
+        "detail": "Non-standard JSON constant: -Infinity"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "invalid_encoding",
+      "index_bytes": 1,
+      "index_sha256": "a8100ae6aa1940d0b663bb31cd466142ebbdbd5187131b92d93818987832eb89",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"d29c3a517898581f585106b7140b857a43b02354\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.567586+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 1,\n  \"index_sha256\": \"a8100ae6aa1940d0b663bb31cd466142ebbdbd5187131b92d93818987832eb89\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"'utf-8' codec can't decode byte 0xff in position 0: invalid start byte\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "d29c3a517898581f585106b7140b857a43b02354",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "d29c3a517898581f585106b7140b857a43b02354",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.567586+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 1,
+        "index_sha256": "a8100ae6aa1940d0b663bb31cd466142ebbdbd5187131b92d93818987832eb89",
+        "result": "inconclusive",
+        "detail": "'utf-8' codec can't decode byte 0xff in position 0: invalid start byte"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "malformed",
+      "index_bytes": 4,
+      "index_sha256": "17eed55d881c0dd5fe0935a98d89dd9e52d62aed941f3fb7d17bd490e5aa3e8f",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"f31f8baef6916e355c04b1e53cffce6495c351c8\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.608446+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 4,\n  \"index_sha256\": \"17eed55d881c0dd5fe0935a98d89dd9e52d62aed941f3fb7d17bd490e5aa3e8f\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"Expecting property name enclosed in double quotes: line 1 column 2 (char 1)\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "f31f8baef6916e355c04b1e53cffce6495c351c8",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "f31f8baef6916e355c04b1e53cffce6495c351c8",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.608446+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 4,
+        "index_sha256": "17eed55d881c0dd5fe0935a98d89dd9e52d62aed941f3fb7d17bd490e5aa3e8f",
+        "result": "inconclusive",
+        "detail": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+      },
+      "strict_expected_met": true
+    },
+    {
+      "route": "git",
+      "case": "deep_nesting",
+      "index_bytes": 20001,
+      "index_sha256": "bdac01fae96e38fb30b2955615672752ffb9ddb477ba705aa4e079c50c7021bd",
+      "exit": 2,
+      "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"a4341b68e597e355c1c4271d90df0d700e30bdf8\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T08:59:25.647641+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 20001,\n  \"index_sha256\": \"bdac01fae96e38fb30b2955615672752ffb9ddb477ba705aa4e079c50c7021bd\",\n  \"result\": \"inconclusive\",\n  \"detail\": \"Index JSON exceeds parser depth/capacity limit\"\n}\n",
+      "stderr": "",
+      "fixture_commit": "a4341b68e597e355c1c4271d90df0d700e30bdf8",
+      "report": {
+        "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "expected_source": "api/bitcoin-inscription-mirror-index.json",
+        "source_commit": "a4341b68e597e355c1c4271d90df0d700e30bdf8",
+        "method": "SHA-256 over committed raw bytes",
+        "operation_time_utc": "2026-09-23T08:59:25.647641+00:00",
+        "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+        "scope": "one mirror compared with the same-project snapshot index",
+        "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+        "record_kind": "local report only; no submission or Guardian application",
+        "index_bytes": 20001,
+        "index_sha256": "bdac01fae96e38fb30b2955615672752ffb9ddb477ba705aa4e079c50c7021bd",
+        "result": "inconclusive",
+        "detail": "Index JSON exceeds parser depth/capacity limit"
+      },
+      "strict_expected_met": true
+    }
+  ]
+}

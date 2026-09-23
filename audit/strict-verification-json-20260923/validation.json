@@ -1,0 +1,61 @@
+{
+  "utc": "2026-09-23T09:02:23.122583+00:00",
+  "baseline": "c29067cd0eb7ba7c64de976261e6fcfd45e53805",
+  "focused_tests": {
+    "passed": 56
+  },
+  "current_system": "ALL CURRENT SYSTEM TESTS PASSED",
+  "p0_current": "CI_GROUP_P0_CURRENT_OK",
+  "build": "GitHub Pages 232 production configuration; existing HTML/source checker PASS",
+  "visual": [
+    {
+      "viewport": "desktop",
+      "local_link_y": 324.8125,
+      "three_choices_in_first_viewport": true
+    },
+    {
+      "page": "verify",
+      "viewport": "desktop",
+      "http": 200,
+      "no_horizontal_overflow": true,
+      "javascript": false
+    },
+    {
+      "page": "agent-verify-simple",
+      "viewport": "desktop",
+      "http": 200,
+      "no_horizontal_overflow": true,
+      "javascript": false
+    },
+    {
+      "viewport": "mobile",
+      "local_link_y": 617.625,
+      "three_choices_in_first_viewport": true
+    },
+    {
+      "page": "verify",
+      "viewport": "mobile",
+      "http": 200,
+      "no_horizontal_overflow": true,
+      "javascript": false
+    },
+    {
+      "page": "agent-verify-simple",
+      "viewport": "mobile",
+      "http": 200,
+      "no_horizontal_overflow": true,
+      "javascript": false
+    }
+  ],
+  "git_normal": "fixed-git.json",
+  "code_hashes": [
+    "e757bc026559974d68b873a238f07fa92a87f53cce4d2adda1ae0436eb60c2a2",
+    "4e70ae8fad91d1f6aef4945bfa913ef644ae47490f9864ccab0c59d675854346"
+  ],
+  "log_sha256": {
+    "focused-final.log": "467e957cfb0cfc7bf5725e19a33385a0864b918b4d126de61431c9a4c725a549",
+    "current-tests.log": "6ff22f864da7da13ba8609690b59764d1b17464eb7b22bc4d0838d327369a579",
+    "p0-current.log": "3b901d821dab26bf84b630cf6144f9e52a42b0750db5fc1488efa08885a32c9e",
+    "build.log": "dc3ab2bd74ba47ed62c1f9d5a18af1cbc08b16defaf6471de5e05e04eb8f5f2b"
+  }
+}
