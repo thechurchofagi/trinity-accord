@@ -5,10 +5,16 @@
   "final_submission_receipt": {
     "artifact_id": 10302028418,
     "expires_at_utc": "2026-12-11T17:27:26Z",
-    "retention_note": "Artifact metadata and final job log were reread on 2026-09-15. The ZIP has not been durably copied by this publication-record update; preserve the receipt payload before artifact expiry.",
+    "retention_note": "Original 1637-byte ZIP retrieved and SHA-256 verified on 2026-09-23; exact archive preserved at durable_copy. Actions metadata still reports expiry 2026-12-11T17:27:26Z. This is a prepublication submission receipt, not postpublication anonymous readback.",
     "url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/34708278731/artifacts/10302028418",
     "zip_bytes": 1637,
-    "zip_sha256": "8e36ff411fab1827871d4a1ff22a2c1402fb30b79286c91a4739ad5b1de0d68b"
+    "zip_sha256": "8e36ff411fab1827871d4a1ff22a2c1402fb30b79286c91a4739ad5b1de0d68b",
+    "durable_copy": "preservation/epoch-ii/receipts/final-submission-34708278731.zip",
+    "durable_copy_sha256_verified": true,
+    "durable_copy_observed_at_utc": "2026-09-23T06:28:30.401284+00:00",
+    "retention_checked_on_utc": "2026-09-23",
+    "artifact_expired": false,
+    "sensitive_content_review": "No credentials, personal contact data or signed URLs found in the two JSON members; public Dataset/run/source identities and tool versions only."
   },
   "frozen_scope": {
     "control_file_count": 2,
@@ -23,19 +29,25 @@
     "total_bytes_including_controls": 23107308201
   },
   "human_documentation": "preservation/epoch-ii/PUBLICATION-STATUS.md",
-  "observed_on_utc": "2026-09-15",
+  "observed_on_utc": "2026-09-23",
   "persistent_id": "doi:10.7910/DVN/W9Y3IV",
   "postpublication_verification": {
     "anonymous_full_byte_readback_files_verified": 0,
     "exact_publication_timestamp_utc": null,
     "interpretation": "This access failure does not establish Dataset rejection, file corruption, or a Harvard service outage.",
-    "last_attempt_on_utc": "2026-09-15",
-    "last_attempt_result": "The local read-only request to the public Dataset API returned HTTP 403; no public metadata or payload verification completed.",
+    "last_attempt_on_utc": "2026-09-23",
+    "last_attempt_result": "Anonymous GET of latest-published Dataset version returned HTTP 403. No released version, public inventory or file payload was obtained; all 419 anonymous full-byte checks remain unattempted.",
     "public_file_inventory_verified": false,
     "public_readback_verified": false,
     "released_version": null,
     "required_next_check": "Without authentication, read the released Dataset version and exact 419-file inventory, compare every size and SHA-256 to the frozen manifest plus its two controls, stream and hash every public file, and preserve the dated per-file result. Do not upload, edit, resubmit or publish.",
-    "status": "pending"
+    "status": "pending",
+    "last_attempt_at_utc": "2026-09-23T06:22:00.616047+00:00",
+    "last_attempt_url": "https://dataverse.harvard.edu/api/datasets/:persistentId/versions/:latest-published?persistentId=doi:10.7910/DVN/W9Y3IV",
+    "last_attempt_http_status": 403,
+    "public_metadata_verified": false,
+    "anonymous_full_byte_readback_bytes_verified": 0,
+    "attempt_observation": "preservation/epoch-ii/public-readback-observation-20260923.json"
   },
   "prepublication_verification": {
     "all_files_unrestricted": true,

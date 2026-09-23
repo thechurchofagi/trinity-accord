@@ -1,0 +1,33 @@
+{
+  "observed_at_utc": "2026-09-23T06:22:00.616047+00:00",
+  "url": "https://dataverse.harvard.edu/api/datasets/:persistentId/versions/:latest-published?persistentId=doi:10.7910/DVN/W9Y3IV",
+  "authentication": "none",
+  "method": "GET",
+  "http_status": 403,
+  "response_excerpt": "<html>\r\n<head><title>403 Forbidden</title></head>\r\n<body>\r\n<center><h1>403 Forbidden</h1></center>\r\n</body>\r\n</html>\r\n",
+  "source_git_commit_sha": "af013fb70a2f293d4aea9b62160a1d277ed17525",
+  "dataset_id": 14229992,
+  "persistent_id": "doi:10.7910/DVN/W9Y3IV",
+  "frozen_manifest": "preservation/epoch-ii/frozen/DATASET-MANIFEST.json",
+  "frozen_manifest_sha256": "24212072367bdcdd5d550c379433b10bdefe0366f9bec3ddc10ea81e6fadbcad",
+  "frozen_sums_sha256": "fbf5a3cc784683a595c6bb4d2869b209d786029dee184d19be56e0df7039f705",
+  "frozen_file_count": 419,
+  "payload_and_support_file_count": 417,
+  "control_file_count": 2,
+  "total_bytes_including_controls": 23107308201,
+  "public_metadata_verified": false,
+  "public_file_inventory_verified": false,
+  "anonymous_full_byte_readback_files_verified": 0,
+  "anonymous_full_byte_readback_files_unattempted": 419,
+  "anonymous_full_byte_readback_bytes_verified": 0,
+  "postpublication_restore": "not_attempted",
+  "released_version": null,
+  "resource_budget": {
+    "concurrency": 1,
+    "metadata_request_timeout_seconds": 30,
+    "metadata_response_cap_bytes": 8000000,
+    "payload_transfer_bytes": 0,
+    "stop_reason": "HTTP 403 before version/inventory pinning; no payload transfer authorized by a verified inventory"
+  },
+  "interpretation": "Observer access failure only; does not establish rejection, corruption or service outage. Authenticated prepublication 419/419 remains historical evidence, not anonymous postpublication success."
+}

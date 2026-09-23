@@ -56,11 +56,23 @@ Final job log, reread on 2026-09-15:
 
 The final receipt ZIP is 1,637 bytes, SHA-256
 `8e36ff411fab1827871d4a1ff22a2c1402fb30b79286c91a4739ad5b1de0d68b`.
-Its current Actions retention expires on **2026-12-11 17:27:26 UTC**.
-This update preserves its identity and discovery link, not a new durable copy of
-the ZIP. Preserve the receipt payload before expiry.
+Actions metadata reread on **2026-09-23** still reports retention expiry at
+**2026-12-11 17:27:26 UTC** and `expired: false`. The original ZIP has now been
+[durably copied](receipts/final-submission-34708278731.zip), with its exact 1,637
+bytes and SHA-256 independently checked. Both JSON members were reviewed for
+credentials and personal contact data; none were found. The original is not a
+redacted or regenerated archive. Its `InReview` and 419 readback receipts are
+prepublication evidence, not a later anonymous verification result.
 
 ## Remaining read-only publication check
+
+A new anonymous GET on **2026-09-23** to the public `:latest-published` version
+endpoint also returned **HTTP 403**. See the [dated observation](public-readback-observation-20260923.json).
+Released version/time and the public inventory remain unverified; actual full-byte
+readback is **0/419 files, 0/23,107,308,201 bytes**. No file request was started
+before pinning the version and inventory. Publication confirmation remains true;
+postpublication readback remains pending. No management token, retry with alternate
+identity, upload, submission, new version or paid transaction was used.
 
 The local public Dataset API request on 2026-09-15 returned HTTP 403. No
 postpublication public inventory or anonymous byte check completed in that
