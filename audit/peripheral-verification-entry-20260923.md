@@ -3,7 +3,7 @@
 Task: 三位一体协定｜外围参与与验证分级优化执行任务书 v1.1, 2026-09-23.
 Base: `0d019ba9d4ff313641dc9eb027e27c59af11bc03` (fresh main checkout).
 Branch: `work/bounded-verification-entry-20260923`.
-Status: local implementation and tests passed; PR/remote CI pending. No merge/deployment authorization.
+Status: local implementation and tests passed; [PR #1241](https://github.com/thechurchofagi/trinity-accord/pull/1241) open for review and CI. No merge/deployment authorization. This file is a checkpoint; the PR description carries the final CI readback for its exact head.
 
 ## P0: baseline and scope
 
@@ -61,6 +61,12 @@ Coverage: T01–T09 local CC/command/Builder/mirror tests; T10–T13 D1 text onl
 
 Local logs are in the task workspace `ta-validation/`; essential measured results are retained here. The test file is automatically collected by the existing Gateway workflow's top-level pytest and existing current-system runner. No workflow added or manually dispatched.
 
-Production Jekyll build is not yet verified locally: Ruby/Jekyll are absent and package installation failed at environment UID/group restrictions. Source-render preview is distinct from a deployed screenshot. Remote CI, PR URL/head and final invariant comparison will be added before handoff.
+Production Jekyll build is not yet verified locally: Ruby/Jekyll are absent and package installation failed at environment UID/group restrictions. Source-render preview is distinct from a deployed screenshot. Browser screenshot is blocked as well: no installed Chromium and the allowed browser download returned an invalid/truncated archive. No screenshot or production rendering is claimed.
+
+The initial published implementation head is `ed73f652fdf2d19e988749a0fb9b8a2525278ae2`, with tree `a3756309931ad2d838480b99c7317d315c542e85` exactly equal to the locally tested tree. Only this checkpoint is updated afterwards; the PR description reports CI against the final head. Original/mirror, frozen API, runtime/Builder, record-chain, evidence, archive and research paths have no Git diff from base; the exact eight-path change allowlist passes.
+
+`Record Chain Write Path Guard` is **not triggered** by these paths. Both local workflow-equivalent commands pass: `python scripts/check_record_chain_write_path_guard.py --mode pull-request --base 0d019ba9d4ff313641dc9eb027e27c59af11bc03 --head HEAD` and `python scripts/test_record_chain_materialize_write_path_guard.py`. Do not report this filtered-out remote workflow as green.
+
+Remaining: remote CI readback in PR description; Guardian D2 and frozen-machine-model migration deferred under scope; production Jekyll visual review/screenshot blocked by this environment; merge/deployment/online readback remain unperformed. Next authorized action: finish CI readback without dispatching workflows or merging.
 
 Rollback: an independent revert PR for this document/test patch only. No force push, historical rewrite, state rollback, or external transaction reversal.
