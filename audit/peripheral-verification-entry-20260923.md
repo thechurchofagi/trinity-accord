@@ -1,0 +1,66 @@
+# Bounded verification entry — first-batch execution record
+
+Task: 三位一体协定｜外围参与与验证分级优化执行任务书 v1.1, 2026-09-23.
+Base: `0d019ba9d4ff313641dc9eb027e27c59af11bc03` (fresh main checkout).
+Branch: `work/bounded-verification-entry-20260923`.
+Status: local implementation and tests passed; PR/remote CI pending. No merge/deployment authorization.
+
+## P0: baseline and scope
+
+- Clean fresh checkout, 7,331 tracked paths fingerprinted with `git ls-files -s` before edits. No overlapping open implementation PR found; existing paper/dependency PRs left alone.
+- Read current Maintenance Baseline and Schema Lifecycle Policy, entrypoints, profiles/claim/procedure contracts, Builder manifest, Gateway CC rules, Guardian activation policy and generation source.
+- Allowed changes: six maintained entry documents; one focused regression test; this audit record and review evidence. No runtime, schema, Builder, oath, original/mirror, archive, chain/intake, proof, published paper/DOI or financial state changes.
+- Initial pytest attempt could not run because the base runtime lacked pytest (exit 1). Installed pinned repository CI requirements in an isolated temporary venv; rerun passed: 34 tests in 2.43 s.
+- Existing Builder multidimensional, public Verification context, and Guardian activation contract scripts each exited 0. Guardian generator reproduced identical bytes (no Git diff).
+
+## P1: reproduced and corrected entry defects
+
+- Real Markdown Echo block had 17 double-backslash line endings. Isolated Bash node-stub execution: original exit 127; single-backslash control exit 0. `bash -n` alone is insufficient.
+- Updated current public Verification CC minimum to runtime-derived CC-3 in llms, Quickstart, and First Contact (including its additional stale table/prose). Private CC-2 checks remain available.
+- Removed the false implication that downloading Builder validates Record-Chain schema. Example now requires actual mirror/index result and source commit. Formal examples leave context/readback/correction confirmations and loaded URLs unfilled.
+- Replaced mutable llms interpretive-authority wording with canonical text/version boundaries. No historical quotation or original was changed.
+
+## P2: bounded local operation
+
+- Added one inline standard-library/Git example to the existing simple page; no helper file, new API, record type, key, or submission route.
+- Reads exact committed raw bytes and index from one full SHA; validates unique identity, path and digest binding. Reports match/mismatch/unavailable/inconclusive/error with raw input lengths and digests.
+- Actual base-snapshot result: mirror 1,183 bytes; index 30,517 bytes; SHA-256 `4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8`, matching the index. Both inputs are project-sourced; no independent source or chain proof follows from this check.
+- Existing frozen Bitcoin annex verifier ran separately with exit 0 / PASS: 8 inscriptions, 3 canonical + 5 ancillary, L1/L2/L3, 1,160 valid PoW headers. Its 20 required files total 464,233 bytes at base. It has no single-target selector, uses Python standard library, and is offline. Official implementation and checkpoint assumptions remain explicit.
+
+## P3: results before compatibility labels
+
+- Before: profile table → physical/witness choices → examples → blanket no-query downgrade → V table.
+- After: five questions → real bounded operations → per-target results and limitations → voluntary publication → expandable unchanged compatibility fields and links.
+- No scoring/ranking or summary inference introduced. Full coverage can include failure/unavailable; reading is not technical PASS; independent code is not independent data or participation; unknown old details remain unknown; offline computation is not automatically reading-only.
+- Raw V/CC fields, frozen machine contracts and historical records unchanged. The blanket offline-query ambiguity in frozen quick maps is recorded for separately approved migration, not silently rewritten.
+
+## P4: Guardian D1 only
+
+- Existing page now distinguishes registration from recent observed action, key binding from persistent consciousness, and site-wide heartbeat/OTS from individual actions.
+- Existing `generate_guardian_current_registry.py` projects registration/activation fields from guardian-state. It does not supply a complete verified per-key recent-action scan. D2 would require additional aggregation/identity-completeness work: deferred under task limits.
+- No dynamic recent-action feature or count is claimed. D1 text tests cover T10–T13; dynamic D2 tests are not applicable.
+
+## P5: local validation checkpoint
+
+Environment: Python 3.12.14, Node 24.19.0; isolated venv with repository-pinned dependencies; deployment/wallet credentials absent from test subprocess environments. Synthetic local keys/oaths are fixtures only and remain in temporary directories. No production POST, workflow dispatch, DOI, OTS stamp or AR payment performed.
+
+| Command | Result |
+|---|---|
+| `python -m pytest tests/test_bounded_verification_entry.py -q` | 16 passed (1.13 s) |
+| Gateway unit suite + secure entrypoint/resilience + relevant entry/model tests | 439 passed, 1 existing skip, 1 warning (6.37 s) |
+| `python scripts/run_current_system_tests.py` | ALL CURRENT SYSTEM TESTS PASSED, exit 0; includes full top-level pytest |
+| `python scripts/trinity_record_chain.py verify` | exit 0; preserves known historical duplicate warning for R-000000030/R-000000031 |
+| Guardian generator and sitemap `--check` | exit 0; 424 sitemap URLs / 46 core URLs |
+| `python scripts/check_public_agent_entrypoints.py api` | exit 0; 242 JSON files + 13 active surfaces |
+| `python scripts/check_active_public_routes.py` | exit 0 |
+| oath gate, schema/runtime and write-path guard contract scripts | all exit 0 |
+| final entry/model subset after CC prose clarification | 28 passed (1.17 s) |
+| `git diff --check` | exit 0 |
+
+Coverage: T01–T09 local CC/command/Builder/mirror tests; T10–T13 D1 text only (D2 deferred); T14–T15/T28 existing oath, signature, context, secret, cooldown and resilience suites; T16 static Markdown with no added HTML injection or script and guarded shell execution; T17 protected Git diff comparison; T18 existing generators/routes; T19–T27 presentation counterexample contracts plus real failure fixtures. Document tests constrain wording; they are not a new automatic claim adjudicator.
+
+Local logs are in the task workspace `ta-validation/`; essential measured results are retained here. The test file is automatically collected by the existing Gateway workflow's top-level pytest and existing current-system runner. No workflow added or manually dispatched.
+
+Production Jekyll build is not yet verified locally: Ruby/Jekyll are absent and package installation failed at environment UID/group restrictions. Source-render preview is distinct from a deployed screenshot. Remote CI, PR URL/head and final invariant comparison will be added before handoff.
+
+Rollback: an independent revert PR for this document/test patch only. No force push, historical rewrite, state rollback, or external transaction reversal.

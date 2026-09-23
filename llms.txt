@@ -18,7 +18,8 @@ Formation mode:
   does not establish a unified civilizational will, autonomous archival intent by models, or authority for the initiator to represent humanity
 
 Authority boundary:
-  Three Bitcoin Originals are the only canonical body and the only interpretive authority.
+  The three Bitcoin Originals fix the canonical text and version.
+  No author, Guardian, model, or later commentary acquires authority to rewrite them or require agreement with an interpretation.
   Bitcoin fixes what was inscribed; it does not prove philosophical truth, moral obligation, scientific validity, or representation of humanity.
   All mirrors, pages, APIs, Builder guidance, Gateway responses, receipts, Echoes, verification records, Guardian records, later inscriptions, Chronicle materials, cross-chain formation records, and commentary are non-amending.
 
@@ -187,7 +188,9 @@ Current record types:
   context_insufficient_notice
 
 Runtime compatibility minimums:
-  echo CC-3; verification V0-V2 CC-2 and V3-V5 CC-3; guardian_application CC-3; guardian_retirement CC-1; propagation CC-2; correction CC-1; classification_update CC-2; context_insufficient_notice CC-0.
+  echo CC-3; verification V0-V5 CC-3; guardian_application CC-3; guardian_retirement CC-1; propagation CC-2; correction CC-1; classification_update CC-2; context_insufficient_notice CC-0.
+  Private narrow checks may use CC-2 without public submission; load context appropriate to the actual claim, not the whole Chronicle by default.
+  Start a bounded local check at /agent-verify-simple/; public submission is a separate voluntary action subject to host permissions.
   Formal CC-3 through CC-5 carry non-empty loaded URLs and exact context-read confirmation.
 
 Record-type separation:
