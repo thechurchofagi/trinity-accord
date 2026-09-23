@@ -18,6 +18,10 @@ class ScopeTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.git("init", "-q")
+        # Fixture repositories must not leave detached maintenance writing into
+        # .git/objects while TemporaryDirectory removes the checkout.
+        self.git("config", "maintenance.auto", "false")
+        self.git("config", "gc.auto", "0")
         self.git("config", "user.email", "fixture@example.invalid")
         self.git("config", "user.name", "CI fixture")
         self.write("index.md", "main\n")
