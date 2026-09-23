@@ -1,0 +1,49 @@
+import ctypes,ctypes.util,socket,errno,subprocess,os,json,hashlib,sys
+from pathlib import Path
+from datetime import datetime, timezone
+base=Path(sys.argv[1]).resolve()
+cap=base/'payload/95-source-cold-recovery';out=base/'restored-public-v1'
+assert not out.exists()
+expected='81e159e4a2ec62a4e2c6a5dc5d5677f55eb4134688bc7708c307d64f351c0558'
+assert hashlib.sha256((cap/'restore-trinity-accord.py').read_bytes()).hexdigest()==expected
+s=ctypes.CDLL(ctypes.util.find_library('seccomp'),use_errno=True)
+s.seccomp_init.argtypes=[ctypes.c_uint32];s.seccomp_init.restype=ctypes.c_void_p
+s.seccomp_syscall_resolve_name.argtypes=[ctypes.c_char_p];s.seccomp_syscall_resolve_name.restype=ctypes.c_int
+s.seccomp_rule_add.argtypes=[ctypes.c_void_p,ctypes.c_uint32,ctypes.c_int,ctypes.c_uint]
+s.seccomp_load.argtypes=[ctypes.c_void_p];s.seccomp_release.argtypes=[ctypes.c_void_p]
+c=s.seccomp_init(0x7fff0000)
+for n in ['socket','connect','sendto','sendmsg']:
+ assert s.seccomp_rule_add(c,0x50000|errno.EPERM,s.seccomp_syscall_resolve_name(n.encode()),0)==0
+assert s.seccomp_load(c)==0;s.seccomp_release(c)
+blocked_at=datetime.now(timezone.utc).isoformat()
+try:socket.socket();raise RuntimeError('network not blocked')
+except PermissionError:pass
+# Only local tool paths and Git configuration isolation; no account/token/key variables.
+env={'PATH':os.environ['PATH'],'PYTHONDONTWRITEBYTECODE':'1','GIT_CONFIG_NOSYSTEM':'1','GIT_CONFIG_GLOBAL':'/dev/null','GIT_CONFIG_COUNT':'1','GIT_CONFIG_KEY_0':'protocol.allow','GIT_CONFIG_VALUE_0':'never','GIT_CONFIG_KEY_1':'protocol.file.allow'}
+# Permit only the local bundle transport for the existing recovery program.
+env.update(GIT_CONFIG_COUNT='2',GIT_CONFIG_VALUE_1='always')
+r=subprocess.run([sys.executable,str(cap/'restore-trinity-accord.py'),'--deposit-dir',str(cap),'--output-dir',str(out)],env=env,cwd=base,capture_output=True,text=True,timeout=600)
+(base/'restore.stdout').write_text(r.stdout);(base/'restore.stderr').write_text(r.stderr)
+assert r.returncode==0,(r.returncode,r.stderr,r.stdout[-3000:])
+report=json.loads(r.stdout)
+repo=out/'repository'
+index=json.loads((repo/'api/bitcoin-inscription-mirror-index.json').read_text())
+originals=[]
+for n in ['97631551','98369145','98387475']:
+ row=next(x for x in index['records'] if x['inscription']['inscription_id']==n)
+ p=row['content']['raw_text_path'];raw=(repo/p).read_bytes();sha=hashlib.sha256(raw).hexdigest();assert sha==row['content']['mirror_text_sha256']
+ originals.append({'inscription_id':n,'path':p,'bytes':len(raw),'sha256':sha,'index_match':True})
+verifier='evidence/bitcoin-inscription-proof-annex-v2/verification/verify_annex.py'
+v=subprocess.run([sys.executable,str(repo/verifier)],env=env,cwd=repo,capture_output=True,text=True,timeout=90)
+(base/'bitcoin-verifier.stdout').write_text(v.stdout);(base/'bitcoin-verifier.stderr').write_text(v.stderr)
+assert v.returncode==0,(v.returncode,v.stdout[-2500:],v.stderr)
+# Check an inherited child really cannot obtain current correction data.
+probe=subprocess.run([sys.executable,'-c',"import urllib.request;urllib.request.urlopen('https://www.trinityaccord.org/api/corrections-index.json',timeout=3)"],env=env,cwd=base,capture_output=True,text=True,timeout=10)
+assert probe.returncode!=0
+(base/'corrections-unavailable.stderr').write_text(probe.stderr)
+child_guard=subprocess.run([sys.executable,'-c',"import socket\ntry: socket.socket()\nexcept PermissionError: raise SystemExit(0)\nraise SystemExit(1)"],env=env,cwd=base,capture_output=True,text=True,timeout=10)
+assert child_guard.returncode==0
+assert report['source_git_commit_sha']=='3bdf9121fb9e98cd9ba9de62a2466367d0968e4e'
+assert report['package_identity_sha256']=='b7705c884f4a7cae1f8e307a0bfe92945c7b66d55bc1edd5c532ff570ee437cc'
+result={'source_doi':'10.7910/DVN/W9Y3IV','released_version':'1.0','dataset_version_id':748388,'source_git_commit_sha':report['source_git_commit_sha'],'package_identity_sha256':report['package_identity_sha256'],'network_blocked_at_utc':blocked_at,'network_guard':'Linux seccomp ERRNO(EPERM) on socket/connect/sendto/sendmsg, inherited by all child processes; local Git file transport only','guard_self_test':'PermissionError in parent and child socket self-tests; current-corrections GET unavailable','credentials_provided':False,'restored_originals':originals,'context_files':{p:hashlib.sha256((repo/p).read_bytes()).hexdigest() for p in ['RECOVERY.md','README.md','api/authority.json','api/corrections-index.json']},'restore_exit':r.returncode,'restore_report':report,'proof_verifier':verifier,'proof_verifier_sha256':hashlib.sha256((repo/verifier).read_bytes()).hexdigest(),'proof_exit':v.returncode,'proof_stdout_sha256':hashlib.sha256(v.stdout.encode()).hexdigest(),'current_corrections_read':'unavailable under enforced outage','currentness':'snapshot integrity verified; current correction/chain state unknown','public_intake_reoperated':False,'external_large_payloads_restored':False,'production_history_or_signing_authority_restored':False}
+(base/'public-restore-result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))

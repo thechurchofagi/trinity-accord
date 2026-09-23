@@ -1,5 +1,5 @@
 {
-  "confirmation_basis": "Harvard Dataverse publication notification read from the depositor mailbox; not a fresh Dataverse API state observation.",
+  "confirmation_basis": "Harvard publication notification plus anonymous released v1.0 API metadata, exact frozen inventory, and 419 complete size/SHA-256 payload reads on 2026-09-23.",
   "dataset_id": 14229992,
   "dataset_title": "Trinity Accord — Research Corpus and Preservation Mirror · Preservation Epoch II",
   "final_submission_receipt": {
@@ -32,22 +32,32 @@
   "observed_on_utc": "2026-09-23",
   "persistent_id": "doi:10.7910/DVN/W9Y3IV",
   "postpublication_verification": {
-    "anonymous_full_byte_readback_files_verified": 0,
-    "exact_publication_timestamp_utc": null,
-    "interpretation": "This access failure does not establish Dataset rejection, file corruption, or a Harvard service outage.",
+    "status": "pass",
+    "released_version": "1.0",
+    "dataset_version_id": 748388,
+    "exact_publication_timestamp_utc": "2026-09-15T10:40:01Z",
+    "public_metadata_verified": true,
+    "public_file_inventory_verified": true,
+    "public_readback_verified": true,
+    "anonymous_full_byte_readback_files_verified": 419,
+    "anonymous_full_byte_readback_files_unattempted": 0,
+    "anonymous_full_byte_readback_bytes_verified": 23107308201,
     "last_attempt_on_utc": "2026-09-23",
-    "last_attempt_result": "Anonymous GET of latest-published Dataset version returned HTTP 403. No released version, public inventory or file payload was obtained; all 419 anonymous full-byte checks remain unattempted.",
-    "public_file_inventory_verified": false,
-    "public_readback_verified": false,
-    "released_version": null,
-    "required_next_check": "Without authentication, read the released Dataset version and exact 419-file inventory, compare every size and SHA-256 to the frozen manifest plus its two controls, stream and hash every public file, and preserve the dated per-file result. Do not upload, edit, resubmit or publish.",
-    "status": "pending",
-    "last_attempt_at_utc": "2026-09-23T06:22:00.616047+00:00",
-    "last_attempt_url": "https://dataverse.harvard.edu/api/datasets/:persistentId/versions/:latest-published?persistentId=doi:10.7910/DVN/W9Y3IV",
-    "last_attempt_http_status": 403,
-    "public_metadata_verified": false,
-    "anonymous_full_byte_readback_bytes_verified": 0,
-    "attempt_observation": "preservation/epoch-ii/public-readback-observation-20260923.json"
+    "last_attempt_at_utc": "2026-09-23T07:37:54.771624+00:00",
+    "last_attempt_result": "PASS: anonymous fixed-version inventory and all 419 complete file sizes/SHA-256 matched the frozen layout; pinned inventory rechecked after download.",
+    "last_attempt_url": "https://dataverse.harvard.edu/api/datasets/14229992/versions/1.0",
+    "last_attempt_http_status": 200,
+    "attempt_observation": "preservation/epoch-ii/public-readback-20260923.json",
+    "historical_failed_observation": "preservation/epoch-ii/public-readback-observation-20260923.json",
+    "interpretation": "Dated verification of released v1.0 bytes, not perpetual availability, institutional endorsement, or proof that every external archive was unpacked and semantically verified.",
+    "required_next_check": "No pending byte check for this dated v1.0 run. Future users should independently verify downloaded bytes and current corrections.",
+    "postpublication_cold_recovery": {
+      "status": "pass",
+      "report": "audit/harvard-epoch-ii-public-readback-20260923/offline-recovery.json",
+      "git_tracked_files": 6423,
+      "bitcoin_proof_checks": "12/12 PASS",
+      "scope": "Exact source capsule baseline only; large external annexes are byte-verified separately, not all unpacked or semantically revalidated by this recovery."
+    }
   },
   "prepublication_verification": {
     "all_files_unrestricted": true,
@@ -96,5 +106,5 @@
     "sums": "preservation/epoch-ii/frozen/HARVARD-EPOCH-II-SHA256SUMS",
     "sums_sha256": "fbf5a3cc784683a595c6bb4d2869b209d786029dee184d19be56e0df7039f705"
   },
-  "status": "published_notification_confirmed_public_readback_pending"
+  "status": "published_public_readback_verified"
 }
