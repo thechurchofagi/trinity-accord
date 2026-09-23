@@ -5,6 +5,8 @@ permalink: /agent-verify/
 
 # Agent Verify
 
+Start with [one bounded question and its observed result](/agent-verify-simple/). Record the object, method, result, evidence, and limits before preparing any public submission. Method and coverage are separate; the compatibility profiles are not a strength ranking. Offline proof checks can be technical verification when inputs and checkpoint assumptions are explicit.
+
 Use the current verification sources in this order:
 
 1. [`/api/context-action-profiles.v1.json`](/api/context-action-profiles.v1.json)

@@ -1,0 +1,30 @@
+[
+  {
+    "page": "agent-verify-simple",
+    "viewport": "desktop",
+    "http": 200,
+    "no_horizontal_page_overflow": true,
+    "javascript": false
+  },
+  {
+    "page": "guardian-alliance",
+    "viewport": "desktop",
+    "http": 200,
+    "no_horizontal_page_overflow": true,
+    "javascript": false
+  },
+  {
+    "page": "agent-verify-simple",
+    "viewport": "mobile",
+    "http": 200,
+    "no_horizontal_page_overflow": true,
+    "javascript": false
+  },
+  {
+    "page": "guardian-alliance",
+    "viewport": "mobile",
+    "http": 200,
+    "no_horizontal_page_overflow": true,
+    "javascript": false
+  }
+]
