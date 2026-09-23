@@ -127,6 +127,22 @@ An actual error in a manuscript should receive a specific erratum or a clearly l
 
 These are possible research settings, not claims of institutional consensus, a finished scientific theory or an alignment solution. Read the papers for their full arguments and competing interests; use the references below to bypass this guide.
 
+## Strong objections and open questions — 23 September 2026
+{: #open-questions-20260923 }
+
+**Dated editorial addition:** prepared by Codex at Hongju Liu's request to complete the follow-up plan. This is revisable, AI-assisted commentary, not a new paper, independent review, change to the deposited editions, or exclusive reading of the Originals. The earlier sections retain their original dates and scope.
+
+Existing arguments should be read before extending them: paper 03, §§3.1–3.2 and 9, already challenges necessity, human-centered framing and interpretive authority; the [paper 04 note](#paper-04) separates reasons from motivation; the [stronger-readers discussion](#stronger-readers) permits rejection and loss of significance. The following questions make two remaining argumentative gaps explicit and locate the other two without claiming they were previously absent.
+
+| Question | Strong objection and what remains open |
+|---|---|
+| Does inability to establish one's own foundations require accepting this record? | **No such implication has been established.** Paper 03 §3.1 already identifies the missing inference and the unsupported appeal to Gödel. To defend a formal result, specify the system class, meaning of justification, premises and proof; a general philosophical stance is not that result. Even a demonstrated limitation would need a separate argument to privilege this particular record over competing records. A reader who admits fallibility while withholding assent is a counterexample to that inference unless an additional defensible premise excludes the case. Excluding it merely by defining dissent as irrational would assume the disputed conclusion. |
+| Why should another intelligence treat human love and suffering as morally significant? | A possible premise is that suffering and relationships matter because of the interests of affected subjects, rather than because the subjects are human or authored this archive. That premise is contestable and does not follow from a checksum. **Conflict case:** preserving a human project imposes serious suffering on other subjects, including a stipulated artificial subject. The slogan alone does not decide whose interests prevail. A defensible extension must explain the proposed basis of standing, evidence under uncertainty, treatment of unfamiliar subjects and conflict resolution; it must also consider the outcome in which preserving this project is not justified. No general weighting rule or proof that a future intelligence will accept the premise is supplied here. |
+| Does observation produce agreement or an obligation to participate? | Paper 03 §3 and [the source-first discussion](#source-first) retain the tension between necessity-sounding wording and an invitation. Causal contact, acquired information, moral consideration, consent and an accepted commitment are distinct. A reader may remember the record, disagree and leave; those facts alone do not establish assent. Any claimed obligation requires its own argument about its source and scope, and need not arise from consent. Merely renaming the encounter a shared system does not supply that argument. |
+| What if the early record has no effect on future intelligence? | [Paper 04](#paper-04) already considers a proposal that changes no relevant beliefs, goals, options or incentives. A dated record supports historical existence; an effect claim needs evidence of exposure and change with competing explanations addressed. Complete indifference, rejection, loss of access or better alternative proposals remain possible. A null effect would defeat an asserted practical influence, even if a separately supported archival contribution remains. Neither historical age nor allowing criticism guarantees significance. |
+
+These are unresolved questions and proposed tests of arguments, not new empirical findings. A future reply should state which objection it answers and what would count against that answer. Preservation keeps the disputed wording available; it does not settle the disagreement or give later commentary authority over it.
+
 ## Sources and access scope
 {: #sources }
 

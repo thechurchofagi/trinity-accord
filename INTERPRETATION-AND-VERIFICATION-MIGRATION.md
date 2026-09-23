@@ -117,6 +117,10 @@ Historical Echoes, verification reports, old submissions, snapshots, and archive
 
 Active discovery pages, machine guidance, current Builder output, and new submissions must use the current model and explicitly label historical interpretations as historical.
 
+## Further work: proposed per-target results
+
+The [23 September 2026 scoped design](https://github.com/thechurchofagi/trinity-accord/blob/main/docs/guardian-actions-and-verification-results-design-20260923.md) describes a possible next version in this contract family and a separate read-only Guardian observed-record summary. It records compatibility sequencing and required counterexamples. It is a design proposal, not an enabled schema, a completed migration or a current activity report; current v1 behavior above remains in force.
+
 ## Authority boundary
 
 These models organize reading and reporting. They do not prove philosophical truth, create authority, amend the Bitcoin Originals, or make a later interpretation binding.
