@@ -48,10 +48,12 @@ The public Builder accepts V0–V5 only as compatibility metadata:
 - V0/V1 → `context_only`
 - V2 → `reference_checked`
 - V3 → `integrity_checked`
-- V4 → `integrity_checked` with reviewed and executed official scripts
+- V4 → `integrity_checked` with reviewed and executed official scripts, or `independent_reproduction`; `digital_profile` carries the precise current meaning
 - V5 → `full_public_digital`
 
 V4+, V6, V7, and V8 are historical-only. New work uses `independent_reproduction` and the separate physical-observation values instead.
+
+V4 with `independent_reproduction` is a current compatible combination; do not substitute the historical V4+ label. State method independence, source independence and participant independence separately. Independent code can use the same project inputs; model names, key counts, visits and institutional names do not establish a highest verification grade. Format acceptance does not establish that the claimed method was actually performed.
 
 ## Public submission
 

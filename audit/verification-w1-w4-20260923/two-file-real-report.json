@@ -1,0 +1,31 @@
+{
+  "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+  "expected_source": "api/bitcoin-inscription-mirror-index.json",
+  "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+  "inputs": [
+    {
+      "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json",
+      "http_status": 200,
+      "bytes": 30517,
+      "sha256": "bd7174f812267e904cc5696c139c9f531a9ee5ef7fdfbff6260f456d099cd470"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/bitcoin-inscription-mirrors/raw/97631551.txt",
+      "http_status": 200,
+      "bytes": 1183,
+      "sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8"
+    }
+  ],
+  "operation_time_utc": "2026-09-23T04:07:29.127841+00:00",
+  "tool": "Python 3.12.14 / urllib.request / hashlib.sha256",
+  "method": "SHA-256 over unmodified HTTPS response bytes",
+  "scope": "one mirror compared with the same-project snapshot index",
+  "limits": "Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved",
+  "record_kind": "local report only; no submission or Guardian application",
+  "index_bytes": 30517,
+  "input_bytes": 1183,
+  "expected_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+  "actual_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+  "result": "match",
+  "elapsed_seconds": 10.703664
+}

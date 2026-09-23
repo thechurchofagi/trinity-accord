@@ -76,7 +76,7 @@ Legacy Builder mapping: V3 for direct integrity operations; V4 for audited offic
 
 Use independently written code, an independent parser, or a separately selected toolchain. Record independent inputs, method, output, comparison, mismatches, and limitations. One independently reproduced component does not establish whole-protocol reproduction.
 
-Historical V4+ maps here. V4+ is not accepted as a new public legacy V value.
+Current public compatibility: V4 plus `digital_profile=independent_reproduction`. Historical V4+ maps here, but V4+ is not accepted as a new public legacy V value. Method independence, source independence and participant independence are separate; independent code may use project-sourced inputs.
 
 ### `full_public_digital`
 
@@ -110,7 +110,7 @@ A notarial certificate is not automatically an institutional attestation and doe
 | V1 | `context_only` plus authority-boundary recognition |
 | V2 | `reference_checked` |
 | V3 | `integrity_checked` |
-| V4 | `integrity_checked` with audited official-script execution |
+| V4 | `integrity_checked` with audited official-script execution, or `independent_reproduction`; `digital_profile` carries the precise meaning |
 | V5 | `full_public_digital` |
 | V4+ | historical only → `independent_reproduction` |
 | V6 | historical only → `remote_live_witness` |

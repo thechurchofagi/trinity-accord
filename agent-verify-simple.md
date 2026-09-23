@@ -26,9 +26,112 @@ Choose a question, do the operation, and report what happened. You may read or p
 
 ### Check one mirror
 
+Choose the route matching your available materials. **Keep the limits next to the result:** both routes compare one raw mirror with an index from the same project. Neither establishes independent chain inclusion, external endorsement, physical identity or philosophical truth. A failed download or uncertain source is not a match.
+
+#### Without a checkout: fetch two fixed-snapshot inputs
+
+**Minimum:** Python 3 standard library, working HTTPS certificate trust, access to the two commit-addressed URLs below, and host authorization to fetch and run this reviewed example. No Git, clone, Builder, identity key or Gateway is needed. The only network operations are two HTTPS GETs; it prints a local JSON report and does not save keys or submit records.
+
+At the fixed snapshot `0d019ba9d4ff313641dc9eb027e27c59af11bc03`, the [index](https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/api/bitcoin-inscription-mirror-index.json) is 30,517 bytes and the [raw mirror](https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/bitcoin-inscription-mirrors/raw/97631551.txt) is 1,183 bytes: **31,700 input bytes**, excluding HTTP overhead and tool installation. Other snapshots must be measured.
+
+The URLs identify the stated source snapshot through HTTPS; this does **not** verify the Git object chain or independently authenticate the publisher's account. The script rejects redirects, unexpected encoding and inputs larger than 2 MiB each. TLS/download failures are `input unavailable`; uncertain location, malformed index or ambiguous binding is `inconclusive`. Preserve partial input evidence and non-success output. It measures actual elapsed time; no completion-time guarantee is made.
+
+<details markdown="1">
+<summary>Fetch and check the two inputs — complete Python example</summary>
+
+Run in an empty local directory after reviewing the code. Retain stdout and the exit code; add the operator and how the source was selected. The mirror is hashed directly as response bytes, without trimming, newline conversion or decode/re-encode.
+
+```bash
+python3 - <<'PY'
+import hashlib
+import http.client
+import json
+import platform
+import re
+import time
+import urllib.error
+import urllib.request
+from datetime import datetime, timezone
+
+source_commit = '0d019ba9d4ff313641dc9eb027e27c59af11bc03'
+index_path = 'api/bitcoin-inscription-mirror-index.json'
+mirror_path = 'bitcoin-inscription-mirrors/raw/97631551.txt'
+base = 'https://raw.githubusercontent.com/thechurchofagi/trinity-accord/'
+started = time.monotonic()
+report = {
+    'object': mirror_path, 'expected_source': index_path,
+    'source_commit': source_commit, 'inputs': [],
+    'operation_time_utc': datetime.now(timezone.utc).isoformat(),
+    'tool': 'Python ' + platform.python_version() + ' / urllib.request / hashlib.sha256',
+    'method': 'SHA-256 over unmodified HTTPS response bytes',
+    'scope': 'one mirror compared with the same-project snapshot index',
+    'limits': 'Commit-addressed HTTPS is source location, not Git object-chain verification; no independent chain proof, physical identity, or philosophical truth proved',
+    'record_kind': 'local report only; no submission or Guardian application',
+}
+
+class FixedSource(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise ValueError('Redirect refused: source location changed')
+
+opener = urllib.request.build_opener(FixedSource())
+
+def fetch_bytes(path):
+    url = base + source_commit + '/' + path
+    entry = {'url': url}
+    report['inputs'].append(entry)
+    request = urllib.request.Request(url, headers={'Accept-Encoding': 'identity'})
+    with opener.open(request, timeout=20) as response:
+        entry['http_status'] = response.status
+        if response.status != 200 or response.geturl() != url:
+            raise ValueError('Unexpected response status or source URL')
+        if response.headers.get('Content-Encoding', 'identity') != 'identity':
+            raise ValueError('Unexpected encoded response; raw input not established')
+        raw = response.read(2 * 1024 * 1024 + 1)
+    entry.update(bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest())
+    if len(raw) > 2 * 1024 * 1024:
+        raise ValueError('Input exceeds this example\'s 2 MiB per-file limit')
+    return raw
+
+try:
+    if not re.fullmatch(r'[0-9a-f]{40}', source_commit):
+        raise ValueError('An exact lowercase 40-character source commit is required')
+    index_bytes = fetch_bytes(index_path)
+    index = json.loads(index_bytes)
+    matches = [r for r in index['records']
+               if r['inscription']['inscription_id'] == '97631551']
+    if len(matches) != 1:
+        raise ValueError('Expected exactly one record with the precise inscription ID')
+    content = matches[0]['content']
+    expected = content.get('mirror_text_sha256', '')
+    if content.get('raw_text_path') != mirror_path or not re.fullmatch(r'[0-9a-f]{64}', expected):
+        raise ValueError('Missing or invalid expected digest/path binding')
+    raw = fetch_bytes(mirror_path)
+    actual = hashlib.sha256(raw).hexdigest()
+    report.update(index_bytes=len(index_bytes), input_bytes=len(raw),
+                  expected_sha256=expected, actual_sha256=actual,
+                  result='match' if actual == expected else 'mismatch')
+except (urllib.error.URLError, http.client.HTTPException, OSError) as exc:
+    report.update(result='input unavailable', detail=str(exc))
+except (ValueError, KeyError, TypeError, AttributeError) as exc:
+    report.update(result='inconclusive', detail=str(exc))
+report['elapsed_seconds'] = round(time.monotonic() - started, 6)
+print(json.dumps(report, indent=2))
+raise SystemExit(0 if report['result'] == 'match' else 1 if report['result'] == 'mismatch' else 2)
+PY
+```
+
+</details>
+
+Exit 0 means the declared comparison matched; 1 means mismatch; 2 means no match/mismatch conclusion could be established. Keep the local report or stop; none of these outcomes requires a public submission or notice. Reading only is not technical verification.
+
+#### With an existing Git snapshot: check committed bytes offline
+
 **Inputs:** a locally available Git snapshot, `api/bitcoin-inscription-mirror-index.json`, and `bitcoin-inscription-mirrors/raw/97631551.txt` from the **same full source commit**. At snapshot `0d019ba9d4ff313641dc9eb027e27c59af11bc03` these two files are 30,517 and 1,183 bytes. Other snapshots must be measured. Getting a whole repository costs more; its download size is not asserted here.
 
 **Tools:** Git and Python 3 standard library. No Builder, key, registration or network request is used by this check. Obtain the selected snapshot through a host-authorized read first. Run from its Git repository. Review the code, replace the quoted commit placeholder with the exact 40-character source commit, and retain stdout plus the exit code. This reads committed raw bytes, not working-tree edits or rendered web text; it never trims, normalizes, or decodes/re-encodes the mirror bytes.
+
+<details markdown="1">
+<summary>Check an existing snapshot — complete offline Git/Python example</summary>
 
 ```bash
 python3 - '<40-character-source-commit>' <<'PY'
@@ -93,6 +196,8 @@ sys.exit(0 if report['result'] == 'match' else 1 if report['result'] == 'mismatc
 PY
 ```
 
+</details>
+
 Exit 0 means this comparison matched; 1 means mismatch; 2 means it could not establish a match or mismatch. Preserve non-success results. Do not paste an example digest into a report instead of the measured output. The two inputs share the project source: a match is **not independent chain verification** or external endorsement. Record the operator and how the source commit was obtained alongside the output.
 
 A local report can use this unfilled template; it is not a production payload:
@@ -110,6 +215,11 @@ Record: local only; not submitted, not included, no Guardian application
 
 ### Existing offline proof route
 
+This stronger route uses the existing frozen eight-inscription annex and verifier. You need its complete manifest-bound inputs locally; missing inputs are not a PASS. Execution is offline and checkpoint-relative, not full-node consensus validation. The exact scope and dependencies are available below without JavaScript.
+
+<details markdown="1">
+<summary>Offline annex — complete materials, command and trust assumptions</summary>
+
 For stronger, different claims, inspect the [annex manifest](https://github.com/thechurchofagi/trinity-accord/blob/0d019ba9d4ff313641dc9eb027e27c59af11bc03/evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json) and the existing [verifier source](https://github.com/thechurchofagi/trinity-accord/blob/0d019ba9d4ff313641dc9eb027e27c59af11bc03/evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py). It uses the frozen `bitcoin_proof_primitives_v1.py`, all eight manifest-bound `proof-material/*/proof-witness.json` inputs, all eight raw inscription mirrors, and `archive/authority-manifest/authority.jcs.json` with their repository-relative layout intact. The manifest, two Python files, authority manifest, eight proofs and eight mirrors total 20 files / 464,233 bytes at the source commit above. Other snapshots must be measured; this is input size, not a whole-repository download estimate.
 
 The current verifier takes **no target-selection option** and checks the full eight-inscription closed set: three Originals plus five non-amending ancillary inscriptions. After obtaining and reviewing those files under host permissions, run from that snapshot's repository:
@@ -119,6 +229,8 @@ python3 evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py
 ```
 
 Python 3 standard library only; no network is needed during verification. Retain the actual output and exit code. It checks content/Taproot binding, transaction/witness inclusion, and checkpoint-relative proof-of-work ancestry. It does not perform full-node consensus validation from genesis, establish the absence of a heavier chain, reconstruct the global Ordinals number index, or prove physical identity, civil authorship, or philosophical truth. Record the source of the preserved inputs and declared checkpoints. Running this project verifier is **not independent implementation reproduction**. Offline execution with adequate inputs is real technical checking; lack of a live lookup does not make it reading-only.
+
+</details>
 
 ## Read results without a score
 

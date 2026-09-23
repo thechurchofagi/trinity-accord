@@ -245,6 +245,25 @@ class MirrorExampleTest(unittest.TestCase):
         code, report = self.check('HEAD')
         self.assertEqual((code, report['result']), (2, 'inconclusive'))
 
+    def test_git_replace_cannot_substitute_different_bytes(self):
+        original = self.commit()
+        self.raw += b'changed committed bytes'
+        replacement = self.commit()
+        result = run(['git', 'replace', original, replacement], cwd=self.root)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        code, report = self.check(original)
+        self.assertEqual((code, report['result']), (0, 'match'))
+
+    def test_annotated_tag_object_is_not_an_exact_commit(self):
+        self.commit()
+        result = run(['git', '-c', 'user.name=Fixture', '-c',
+                      'user.email=fixture@example.invalid', 'tag', '-a', 'fixture-tag',
+                      '-m', 'fixture'], cwd=self.root)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        tag_object = run(['git', 'rev-parse', 'fixture-tag'], cwd=self.root).stdout.strip()
+        code, report = self.check(tag_object)
+        self.assertEqual((code, report['result']), (2, 'inconclusive'))
+
     def test_unavailable_commit_and_missing_tool_never_match(self):
         self.commit()
         code, report = self.check('0' * 40)
@@ -303,6 +322,188 @@ class WorkflowCleanupBoundaryTest(unittest.TestCase):
                     result = run(['/bin/bash', '--noprofile', '--norc'], cwd=td,
                                  input=script, env={'PATH': '/nonexistent'})
                     self.assertEqual(result.returncode, operation_status, result.stderr)
+
+
+class TwoFileEntryTest(unittest.TestCase):
+    """Follow the actual router to the documented code with only two mocked GETs."""
+    def setUp(self):
+        import urllib.request
+        self.router = json.loads(read('api/agent-first-contact.json'))
+        route = next(r for r in self.router['choose_one'] if r['intent'] == 'verify_current_model')
+        self.assertEqual(route['read'][0], '/agent-verify-simple/')
+        self.assertIn('local work may end here', route['flow'][0])
+        self.assertIn('Only if voluntarily publishing', route['flow'][1])
+        self.assertIn('No identity key, Builder, Gateway, POST', route['note'])
+        self.page = read(route['read'][0].strip('/') + '.md')
+        self.code = re.search(r"python3 - <<'PY'\n(.*?)\nPY", self.page, re.S)[1]
+        self.raw = b'raw\r\nbytes\x00\xff\n'
+        self.index = {'records': [{'inscription': {'inscription_id': '97631551'},
+                                  'content': {'raw_text_path': MIRROR,
+                                              'mirror_text_sha256': hashlib.sha256(self.raw).hexdigest()}}]}
+
+    def execute(self, *, index=None, raw=None, fail=None, redirect=False, encoding=None, code=None, interrupted=False):
+        import contextlib
+        import io
+        import urllib.error
+        from unittest.mock import patch
+        requests = []
+        body = json.dumps(self.index).encode() if index is None else index
+        mirror = self.raw if raw is None else raw
+        def fetch(request, timeout):
+            self.assertEqual(request.get_method(), 'GET')
+            self.assertIsNone(request.data)
+            url = request.full_url
+            prefix = 'https://raw.githubusercontent.com/thechurchofagi/trinity-accord/0d019ba9d4ff313641dc9eb027e27c59af11bc03/'
+            self.assertIn(url, (prefix + INDEX, prefix + MIRROR))
+            self.assertLess(len(requests), 2)
+            requests.append(url)
+            if fail and url.endswith(fail):
+                raise urllib.error.URLError('fixture input unavailable')
+            response = io.BytesIO(body if url.endswith(INDEX) else mirror)
+            if interrupted and url.endswith(MIRROR):
+                import http.client
+                def incomplete_read(*args):
+                    raise http.client.IncompleteRead(b'partial', 12)
+                response.read = incomplete_read
+            response.status = 200
+            response.geturl = lambda: 'https://unconfirmed.invalid/' if redirect else url
+            response.headers = {} if encoding is None else {'Content-Encoding': encoding}
+            return response
+        opener = type('FixtureOpener', (), {'open': staticmethod(fetch)})()
+        output = io.StringIO()
+        namespace = {}
+        with tempfile.TemporaryDirectory() as td, contextlib.chdir(td), \
+             patch('urllib.request.build_opener', return_value=opener), \
+             patch('socket.socket.connect', side_effect=AssertionError('no real network in fixture')), \
+             patch('subprocess.Popen', side_effect=AssertionError('no Git/Builder/subprocess required')), \
+             contextlib.redirect_stdout(output):
+            with self.assertRaises(SystemExit) as stop:
+                exec(compile(code or self.code, '<documented-two-file-example>', 'exec'), namespace)
+            self.assertEqual(list(Path(td).iterdir()), [], 'local path must not create keys or records')
+        return stop.exception.code, json.loads(output.getvalue()), requests, namespace
+
+    def test_machine_route_runs_without_builder_gateway_git_or_key(self):
+        code, report, requests, _ = self.execute()
+        self.assertEqual((code, report['result']), (0, 'match'))
+        self.assertEqual(len(requests), 2)
+        self.assertEqual(report['input_bytes'], len(self.raw))
+        self.assertEqual(report['actual_sha256'], hashlib.sha256(self.raw).hexdigest())
+        self.assertIn('not Git object-chain verification', report['limits'])
+        self.assertIn('no submission', report['record_kind'])
+        self.assertGreaterEqual(report['elapsed_seconds'], 0)
+        self.assertEqual(report['inputs'][1]['bytes'], len(self.raw))
+
+    def test_raw_bytes_mismatch_is_not_normalized_into_match(self):
+        for raw in (self.raw + b'!', self.raw.replace(b'\r\n', b'\n'), self.raw.rstrip()):
+            with self.subTest(raw=raw):
+                code, report, _, _ = self.execute(raw=raw)
+                self.assertEqual((code, report['result']), (1, 'mismatch'))
+
+    def test_unavailable_inputs_keep_partial_evidence(self):
+        for path, count in ((INDEX, 1), (MIRROR, 2)):
+            code, report, requests, _ = self.execute(fail=path)
+            self.assertEqual((code, report['result']), (2, 'input unavailable'))
+            self.assertEqual(len(requests), count)
+            self.assertEqual(len(report['inputs']), count)
+
+    def test_interrupted_http_body_is_unavailable(self):
+        code, report, requests, _ = self.execute(interrupted=True)
+        self.assertEqual((code, report['result']), (2, 'input unavailable'))
+        self.assertEqual(len(requests), 2)
+        self.assertIn('sha256', report['inputs'][0])
+
+    def test_bad_index_or_ambiguous_binding_never_downloads_mirror(self):
+        valid = json.dumps(self.index).encode()
+        variants = [b'{broken', b'null', b'[]', b'\xff']
+        duplicate = json.loads(valid)
+        duplicate['records'].append(duplicate['records'][0])
+        variants.append(json.dumps(duplicate).encode())
+        for field in ('mirror_text_sha256', 'raw_text_path'):
+            invalid = json.loads(valid)
+            del invalid['records'][0]['content'][field]
+            variants.append(json.dumps(invalid).encode())
+        wrong = json.loads(valid)
+        wrong['records'][0]['content']['raw_text_path'] = 'other.txt'
+        variants.append(json.dumps(wrong).encode())
+        for index in variants:
+            with self.subTest(index=index):
+                code, report, requests, _ = self.execute(index=index)
+                self.assertEqual((code, report['result']), (2, 'inconclusive'))
+                self.assertEqual(len(requests), 1)
+
+    def test_source_encoding_size_and_mutable_ref_fail_closed(self):
+        for kwargs in ({'redirect': True}, {'encoding': 'gzip'}, {'raw': b'x' * (2 * 1024 * 1024 + 1)},
+                       {'code': self.code.replace('0d019ba9d4ff313641dc9eb027e27c59af11bc03', 'main')}):
+            with self.subTest(kwargs=list(kwargs)):
+                code, report, _, _ = self.execute(**kwargs)
+                self.assertEqual((code, report['result']), (2, 'inconclusive'))
+        _, _, _, namespace = self.execute()
+        with self.assertRaisesRegex(ValueError, 'Redirect refused'):
+            namespace['FixedSource']().redirect_request(None, None, 302, '', {}, 'https://other.invalid')
+
+    def test_both_human_start_pages_discover_same_local_operation(self):
+        for path in ('verify.md', 'agent-first-contact.md'):
+            text = read(path)
+            first = text.split('## ', 1)[0] if path == 'verify.md' else text.split('## Before any formal action', 1)[0]
+            self.assertIn('/agent-verify-simple/', first)
+            self.assertIn('local', first)
+            self.assertIn('STOP', first)
+        self.assertIn('Stopping creates no public record', self.router['choose_one'][0]['note'])
+
+
+class V4CompatibilityTest(unittest.TestCase):
+    def test_actual_builder_schema_and_gateway_compatibility(self):
+        import copy
+        import jsonschema
+        from apps.record_chain_intake_gateway.gateway.validation import validate_submission, validate_record_type_specific_content
+        builder = str(ROOT / 'downloads/record-chain-builder.mjs')
+        validator = jsonschema.validators.validator_for(json.loads(read('api/record-chain-submission-schema.v1.json')))(json.loads(read('api/record-chain-submission-schema.v1.json')))
+        with tempfile.TemporaryDirectory() as td:
+            temp = Path(td)
+            args = captured_commands(examples()[1], temp)[-1][1:-1]
+            # Synthetic fixture only: never a participant readback or submission.
+            oath = run(['node', builder, 'print-oath', '--record-type', 'verification'], cwd=temp).stdout.strip()
+            for i, value in enumerate(args):
+                if '<true only' in value:
+                    args[i] = 'true'
+                elif 'participant-generated exact oath output' in value:
+                    args[i] = oath
+                elif 'exact URLs actually loaded' in value:
+                    args[i] = 'https://www.trinityaccord.org/api/verification-claim-model.v1.json'
+                elif '<' in value:
+                    args[i] = 'Synthetic local fixture; not a public claim'
+            args[args.index('--verification-level') + 1] = 'V4'
+            output = temp / args[args.index('--out') + 1]
+            for profile in ('integrity_checked', 'independent_reproduction'):
+                with self.subTest(profile=profile):
+                    args[args.index('--digital-profile') + 1] = profile
+                    result = run(['node', builder, *args], cwd=temp)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    submission = json.loads(output.read_text())
+                    validator.validate(submission)
+                    self.assertEqual(validate_submission(submission), [])
+                    doctor = run(['node', builder, 'doctor', '--file', str(output)], cwd=temp)
+                    self.assertEqual(doctor.returncode, 0, doctor.stdout + doctor.stderr)
+                    model = submission['record_draft']['verification_content']['verification_claim_model']
+                    self.assertEqual((model['legacy_v_level'], model['digital_profile']), ('V4', profile))
+                    bad = copy.deepcopy(submission['record_draft'])
+                    bad['verification_content']['verification_claim_model']['legacy_v_level'] = 'V3'
+                    self.assertTrue(validate_record_type_specific_content('verification', bad))
+            for flag, value in (('--verification-level', 'V4+'), ('--verification-level', 'V6'), ('--digital-profile', 'invented_profile')):
+                bad_args = args.copy()
+                bad_args[bad_args.index(flag) + 1] = value
+                bad_args[bad_args.index('--out') + 1] = 'rejected.json'
+                self.assertNotEqual(run(['node', builder, *bad_args], cwd=temp).returncode, 0)
+                self.assertFalse((temp / 'rejected.json').exists())
+                bad = copy.deepcopy(submission)
+                content = bad['record_draft']['verification_content']
+                if flag == '--verification-level':
+                    content['verification_level'] = value
+                    content['verification_claim_model']['legacy_v_level'] = value
+                else:
+                    content['verification_claim_model']['digital_profile'] = value
+                self.assertTrue(list(validator.iter_errors(bad)))
+                self.assertTrue(validate_record_type_specific_content('verification', bad['record_draft']))
 
 
 if __name__ == '__main__':
