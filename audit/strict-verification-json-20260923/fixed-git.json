@@ -1,0 +1,25 @@
+{
+  "utc": "2026-09-23T09:00:46.869260+00:00",
+  "example_shell_sha256": "4e70ae8fad91d1f6aef4945bfa913ef644ae47490f9864ccab0c59d675854346",
+  "exit": 0,
+  "stdout": "{\n  \"object\": \"bitcoin-inscription-mirrors/raw/97631551.txt\",\n  \"expected_source\": \"api/bitcoin-inscription-mirror-index.json\",\n  \"source_commit\": \"0d019ba9d4ff313641dc9eb027e27c59af11bc03\",\n  \"method\": \"SHA-256 over committed raw bytes\",\n  \"operation_time_utc\": \"2026-09-23T09:00:46.854716+00:00\",\n  \"tool\": \"Python 3.12.14 / hashlib.sha256 / git show\",\n  \"scope\": \"one mirror compared with the same-project snapshot index\",\n  \"limits\": \"No independent source, chain inclusion, physical identity, or philosophical truth proved\",\n  \"record_kind\": \"local report only; no submission or Guardian application\",\n  \"index_bytes\": 30517,\n  \"index_sha256\": \"bd7174f812267e904cc5696c139c9f531a9ee5ef7fdfbff6260f456d099cd470\",\n  \"input_bytes\": 1183,\n  \"expected_sha256\": \"4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8\",\n  \"actual_sha256\": \"4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8\",\n  \"result\": \"match\"\n}\n",
+  "stderr": "",
+  "report": {
+    "object": "bitcoin-inscription-mirrors/raw/97631551.txt",
+    "expected_source": "api/bitcoin-inscription-mirror-index.json",
+    "source_commit": "0d019ba9d4ff313641dc9eb027e27c59af11bc03",
+    "method": "SHA-256 over committed raw bytes",
+    "operation_time_utc": "2026-09-23T09:00:46.854716+00:00",
+    "tool": "Python 3.12.14 / hashlib.sha256 / git show",
+    "scope": "one mirror compared with the same-project snapshot index",
+    "limits": "No independent source, chain inclusion, physical identity, or philosophical truth proved",
+    "record_kind": "local report only; no submission or Guardian application",
+    "index_bytes": 30517,
+    "index_sha256": "bd7174f812267e904cc5696c139c9f531a9ee5ef7fdfbff6260f456d099cd470",
+    "input_bytes": 1183,
+    "expected_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+    "actual_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+    "result": "match"
+  },
+  "scope": "Current reviewed Git example, actual fixed snapshot, no acquisition or production submission"
+}

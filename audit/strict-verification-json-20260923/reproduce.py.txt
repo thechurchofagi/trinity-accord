@@ -1,0 +1,28 @@
+import datetime,hashlib,importlib.util,json,pathlib,platform,re,subprocess,sys
+repo=pathlib.Path(sys.argv[1]);spec=importlib.util.spec_from_file_location('bounded',repo/'tests/test_bounded_verification_entry.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+source_ref = sys.argv[2] if len(sys.argv)>2 else None
+if source_ref:
+ original_read=m.read
+ baseline=subprocess.check_output(['git','show',source_ref+':agent-verify-simple.md'],cwd=repo,text=True)
+ m.read=lambda path: baseline if path=='agent-verify-simple.md' else original_read(path)
+rows=[]
+for route,cls in [('https',m.TwoFileEntryTest),('git',m.MirrorExampleTest)]:
+ probe=cls();probe.setUp();valid,cases=m.strict_index_cases(probe.raw);probe.doCleanups()
+ for name,body in [('valid',valid),*cases.items()]:
+  t=cls();t.setUp();entry={'route':route,'case':name,'index_bytes':len(body),'index_sha256':hashlib.sha256(body).hexdigest()}
+  try:
+   if route=='https':
+    try:
+     code,report,requests,_=t.execute(index=body);entry.update(exit=code,report=report,mock_get_count=len(requests))
+    except Exception as e:entry.update(uncaught=type(e).__name__,detail=str(e))
+   else:
+    sha=t.commit(index_bytes=body);r=m.run([sys.executable,'-',sha],cwd=t.root,input=t.code)
+    entry.update(exit=r.returncode,stdout=r.stdout,stderr=r.stderr,fixture_commit=sha)
+    try:entry['report']=json.loads(r.stdout)
+    except ValueError:entry['report']=None
+   expected=('match',0) if name=='valid' else ('inconclusive',2)
+   report=entry.get('report') or {};entry['strict_expected_met']=(report.get('result'),entry.get('exit'))==expected
+  finally:t.doCleanups()
+  rows.append(entry)
+source=m.read('agent-verify-simple.md');blocks=re.findall(r'```bash\n(.*?)\n```',source,re.S)[:2]
+print(json.dumps({'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'python':platform.python_version(),'source_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),'working_example_shell_sha256':[hashlib.sha256(b.encode()).hexdigest() for b in blocks],'scope':'Mocked HTTPS; actual local Git fixture commits; no production submission','cases':rows},indent=2))

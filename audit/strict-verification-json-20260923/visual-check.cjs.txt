@@ -1,0 +1,61 @@
+const {chromium}=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/playwright');
+const fs=require('fs'),http=require('http'),path=require('path');
+(async()=>{
+ const server=http.createServer((req,res)=>{
+  let file=path.join('/tmp/ta-site-parser',decodeURIComponent(new URL(req.url,'http://localhost').pathname));
+  if(fs.existsSync(file)&&fs.statSync(file).isDirectory())file=path.join(file,'index.html');
+  if(!fs.existsSync(file)){res.writeHead(404);res.end();return;}
+  res.setHeader('Content-Type',({'.html':'text/html','.css':'text/css','.js':'application/javascript','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.json':'application/json'})[path.extname(file)]||'application/octet-stream');
+  fs.createReadStream(file).pipe(res);
+ });
+ await new Promise(resolve=>server.listen(8767,'127.0.0.1',resolve));
+ const browser=await chromium.launch({executablePath:'/tmp/ta-render-toolchain/chrome-headless-shell-linux64/chrome-headless-shell',headless:true,args:['--no-sandbox']});
+ const out='/workspace/scratch/d1b15731b516/parser-validation/visual';fs.mkdirSync(out,{recursive:true});
+ const results=[];
+ try{
+  for(const size of [{name:'desktop',width:1280,height:1000},{name:'mobile',width:390,height:844}]){
+   const context=await browser.newContext({viewport:{width:size.width,height:size.height},javaScriptEnabled:false});
+   await context.route('**/*',route=>route.request().url().startsWith('http://127.0.0.1:8767/')?route.continue():route.abort());
+   const page=await context.newPage();
+   for(const target of ['verify','agent-verify-simple']){
+    const response=await page.goto('http://127.0.0.1:8767/'+target+'/',{waitUntil:'load'});
+    if(response.status()!==200)throw Error(target+' status');
+    const dims=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth}));
+    if(dims.scroll>dims.width+1)throw Error(target+' overflow '+JSON.stringify(dims));
+    await page.screenshot({path:out+'/'+target+'-'+size.name+'.jpg',type:'jpeg',quality:75});
+    if(target==='verify'){
+      const start=page.locator('a[href="/agent-verify-simple/"]').filter({hasText:'start one bounded check'});
+      const box=await start.boundingBox();
+      for(const href of ['/inscriptions/','/agent-verify-simple/','/agent-first-contact/']){ const item=page.locator('main li a[href="'+href+'"]').first(); const b=await item.boundingBox(); if(!b||b.y+b.height>size.height)throw Error('three choices must be visible on first screen: '+href+' '+JSON.stringify(b)); }
+      results.push({viewport:size.name,local_link_y:box.y,three_choices_in_first_viewport:true});
+      await start.click();
+      if(!page.url().endsWith('/agent-verify-simple/'))throw Error('human route did not reach local page');
+    }
+    if(target==='agent-verify-simple'){
+      const details=page.locator('details');
+      if(await details.count()!==4)throw Error('expected four native details');
+      if(await page.locator('details[open]').count())throw Error('technical details open by default');
+      await page.locator('#check-one-mirror').scrollIntoViewIfNeeded();
+      await page.screenshot({path:out+'/local-options-'+size.name+'.jpg',type:'jpeg',quality:75});
+      for(let i=0;i<4;i++){
+       const panel=details.nth(i);await panel.locator('summary').click();
+       if(await panel.getAttribute('open')===null)throw Error('details not open');
+       if(!await panel.locator('code').first().isVisible())throw Error('code not visible without JS');
+       const d=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth}));
+       if(d.scroll>d.width+1)throw Error('expanded overflow');
+       if(i===0){
+        const code=await panel.locator('pre').innerText();
+        // Exact code comparison is performed by the existing production checker.
+        fs.writeFileSync(out+'/rendered-two-file.sh',code);
+        await page.screenshot({path:out+'/two-file-expanded-'+size.name+'.jpg',type:'jpeg',quality:75});
+       }
+       await panel.locator('summary').click();
+      }
+    }
+    results.push({page:target,viewport:size.name,http:200,no_horizontal_overflow:true,javascript:false});
+   }
+   await context.close();
+  }
+  fs.writeFileSync(out+'/results.json',JSON.stringify(results,null,2));console.log(JSON.stringify(results));
+ }finally{await browser.close();server.close();}
+})().catch(e=>{console.error(e);process.exit(1)});
