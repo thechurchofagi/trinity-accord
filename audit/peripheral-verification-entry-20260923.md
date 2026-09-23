@@ -3,7 +3,7 @@
 Task: 三位一体协定｜外围参与与验证分级优化执行任务书 v1.1, 2026-09-23.
 Base: `0d019ba9d4ff313641dc9eb027e27c59af11bc03` (fresh main checkout).
 Branch: `work/bounded-verification-entry-20260923`.
-Status: local implementation and tests passed; [PR #1241](https://github.com/thechurchofagi/trinity-accord/pull/1241) open for review and CI. No merge/deployment authorization. This file is a checkpoint; the PR description carries the final CI readback for its exact head.
+Status: implementation, baseline-CI repair, P0 and production-config local visual checks passed (continuation below supersedes earlier blockers); [PR #1241](https://github.com/thechurchofagi/trinity-accord/pull/1241) open for review and CI. No merge/deployment authorization. This file is a checkpoint; the PR description carries the final CI readback for its exact head.
 
 ## P0: baseline and scope
 
@@ -61,7 +61,7 @@ Coverage: T01–T09 local CC/command/Builder/mirror tests; T10–T13 D1 text onl
 
 Local logs are in the task workspace `ta-validation/`; essential measured results are retained here. The test file is automatically collected by the existing Gateway workflow's top-level pytest and existing current-system runner. No workflow added or manually dispatched.
 
-Production Jekyll build is not yet verified locally: Ruby/Jekyll are absent and package installation failed at environment UID/group restrictions. Source-render preview is distinct from a deployed screenshot. Browser screenshot is blocked as well: no installed Chromium and the allowed browser download returned an invalid/truncated archive. No screenshot or production rendering is claimed.
+**Initial checkpoint (resolved by the continuation below):** Production Jekyll build was not yet verified locally: Ruby/Jekyll are absent and package installation failed at environment UID/group restrictions. Source-render preview is distinct from a deployed screenshot. Browser screenshot is blocked as well: no installed Chromium and the allowed browser download returned an invalid/truncated archive. No screenshot or production rendering is claimed.
 
 The initial published implementation head is `ed73f652fdf2d19e988749a0fb9b8a2525278ae2`, with tree `a3756309931ad2d838480b99c7317d315c542e85` exactly equal to the locally tested tree. Subsequent review pins verifier source links to the measured commit and enables Markdown parsing inside the no-JavaScript details element; the focused suite still passes (23 tests including procedure-model checks). The PR description reports CI against the final head. Original/mirror, frozen API, runtime/Builder, record-chain, evidence, archive and research paths have no Git diff from base; the exact eight-path change allowlist passes.
 
@@ -69,6 +69,46 @@ The initial published implementation head is `ed73f652fdf2d19e988749a0fb9b8a2525
 
 Python Markdown source rendering confirms that collapsed technical details retain rendered code and links without JavaScript; this is not production Jekyll/browser visual QA.
 
-Remaining: remote CI readback in PR description; Guardian D2 and frozen-machine-model migration deferred under scope; production Jekyll visual review/screenshot blocked by this environment; merge/deployment/online readback remain unperformed. Next authorized action: finish CI readback without dispatching workflows or merging.
+**Initial remaining items (superseded below):** remote CI readback in PR description; Guardian D2 and frozen-machine-model migration deferred under scope; production Jekyll visual review/screenshot blocked by this environment; merge/deployment/online readback remain unperformed. Next authorized action: finish CI readback without dispatching workflows or merging.
 
 Rollback: an independent revert PR for this document/test patch only. No force push, historical rewrite, state rollback, or external transaction reversal.
+
+
+## Continuation: baseline repair and completed visual acceptance
+
+Authorization: after the initial blocked acceptance report, the user instructed “继续推进完成。” on 2026-09-23. This continuation addresses the disclosed baseline CI blockers and visual acceptance; original merge/deployment and transaction boundaries still apply.
+
+The full P0 group exposed two existing contract mismatches in `abundance-bridge-ots-arweave.yml`:
+
+1. Permit only its exact existing `EXIT` trap for local proxy cleanup in the warning allowlist. The exception is workflow-and-command scoped. Regression checks reject a different workflow, PID variable, warning-only evidence verification and payment command. Actual Bash tests use an in-process `kill` stub and prove all four combinations of operation status 0/23 and cleanup status 0/1 preserve the operation's original exit status.
+2. Add the repository's existing read-only `toolchain_provenance.py` step, guarded by the existing unfinished-batch condition, after dependency installation. No change to proof lifecycle, payment commands, budgets, balances, deduplication, completion guards or scheduling rules.
+
+Validation after both fixes:
+
+| Check | Result |
+|---|---|
+| Full `scripts/run_ci_group.py p0-current` | `CI_GROUP_P0_CURRENT_OK`, exit 0 |
+| Bounded-entry regression suite | 19 passed |
+| Bounded-entry + workflow YAML strictness | 20 passed, 1.46 s |
+| Workflow toolchain provenance contract | exit 0 |
+| `git diff --check` | exit 0 |
+
+### Production-config local rendering
+
+Resolved the environment blockers using a temporary user-space Ruby 3.3.8/libyaml build and official Chrome for Testing 154.0.8037.57. No application dependency or site layout change. Used the Gemfile from the repository's pinned Pages action `actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697`: github-pages 232, jekyll-include-cache 0.2.1, jekyll-octicons ~>14.2. Ran `JEKYLL_ENV=production bundle exec github-pages build` with this repository as source: **exit 0, 14.247 seconds**. Existing warnings in unchanged legacy/raw mirror and audit-planning materials remain; both target pages generated successfully. This is local rendering with production configuration, not deployment or live-site readback.
+
+Real Chromium checks used a local static server, external requests blocked, JavaScript disabled, desktop 1280×1000 and mobile 390×844. Both target routes returned HTTP 200; neither had horizontal page overflow. Native technical details opened and exposed the rendered `context_only` field without JavaScript. All six screenshots were visually inspected; headings, links and body content remain readable at both widths.
+
+| View | Desktop | Mobile |
+|---|---|---|
+| Simple entry, first screen | [Screenshot](peripheral-entry-20260923/agent-verify-simple-desktop.jpg) | [Screenshot](peripheral-entry-20260923/agent-verify-simple-mobile.jpg) |
+| Guardian registration/action distinction | [Screenshot](peripheral-entry-20260923/guardian-alliance-desktop.jpg) | [Screenshot](peripheral-entry-20260923/guardian-alliance-mobile.jpg) |
+| Expanded compatibility details | [Screenshot](peripheral-entry-20260923/technical-details-desktop.jpg) | [Screenshot](peripheral-entry-20260923/technical-details-mobile.jpg) |
+
+[Browser check results](peripheral-entry-20260923/visual-check.json). Review images live under the already-excluded `audit/` directory and do not enter the published site.
+
+### Final scope and release boundary
+
+The continuation additionally changes one existing workflow, its warning checker and this regression suite, plus audit evidence. Protected originals/mirrors, signed/history state, API schemas, runtime/Builder, oath, proofs, published papers and financial state remain unchanged. The PR description records final remote CI against the exact final head; it supersedes the initial blocked readback. Guardian D2 and machine-model migration remain deferred for the previously documented scope reasons.
+
+Before any future authorized merge: this existing bridge workflow includes its own file in `push.paths` on main. Merging its provenance-only change therefore naturally schedules that existing preservation pipeline; existing finished-batch/proof/budget/payment guards remain in effect. No manual dispatch, production preflight/submit, OTS stamp, DOI or AR payment was performed here. Merge, deployment and online post-deployment readback remain unperformed pending the task's required explicit authorization.

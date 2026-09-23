@@ -253,5 +253,57 @@ class MirrorExampleTest(unittest.TestCase):
         self.assertEqual((code, report['result']), (2, 'execution error'))
 
 
+class WorkflowCleanupBoundaryTest(unittest.TestCase):
+    workflow = 'abundance-bridge-ots-arweave.yml'
+
+    def cleanup_line(self):
+        source = read('.github/workflows/' + self.workflow)
+        lines = [line.strip() for line in source.splitlines()
+                 if line.strip().startswith('trap ') and '$proxy_pid' in line]
+        self.assertEqual(len(lines), 1)
+        return lines[0]
+
+    def check_allowlist(self, filename, line):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / 'scripts').mkdir()
+            (root / '.github/workflows').mkdir(parents=True)
+            checker = root / 'scripts/test_workflow_warning_allowlist.py'
+            checker.write_text(read('scripts/test_workflow_warning_allowlist.py'))
+            (root / '.github/workflows' / filename).write_text('run: |\n  ' + line + '\n')
+            return run([sys.executable, str(checker)], cwd=root)
+
+    def test_only_exact_workflow_cleanup_is_allowlisted(self):
+        cleanup = self.cleanup_line()
+        self.assertEqual(self.check_allowlist(self.workflow, cleanup).returncode, 0)
+        self.assertNotEqual(self.check_allowlist('other.yml', cleanup).returncode, 0)
+        self.assertNotEqual(self.check_allowlist(self.workflow, cleanup.replace('proxy_pid', 'other_pid')).returncode, 0)
+
+    def test_evidence_and_payment_failures_remain_rejected(self):
+        for command in (
+            'python3 scripts/research_paper_ots.py lifecycle --batch "$BATCH" || true',
+            'node scripts/arweave-upload.mjs || true',
+            'python3 verifier.py || echo "warning"',
+        ):
+            with self.subTest(command=command):
+                result = self.check_allowlist(self.workflow, command)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn('unexpected warning/fail-open fallback', result.stdout)
+
+    def test_exit_cleanup_preserves_original_success_and_failure(self):
+        # Override kill as an in-process stub. No process is signalled, no proxy
+        # started, and no proof service / wallet / external endpoint is used.
+        for operation_status in (0, 23):
+            for cleanup_status in (0, 1):
+                with self.subTest(operation=operation_status, cleanup=cleanup_status), tempfile.TemporaryDirectory() as td:
+                    script = ('set -euo pipefail\n'
+                              f'kill() {{ return {cleanup_status}; }}\n'
+                              'proxy_pid=123\n' + self.cleanup_line() + '\n'
+                              f'(exit {operation_status})\n')
+                    result = run(['/bin/bash', '--noprofile', '--norc'], cwd=td,
+                                 input=script, env={'PATH': '/nonexistent'})
+                    self.assertEqual(result.returncode, operation_status, result.stderr)
+
+
 if __name__ == '__main__':
     unittest.main()

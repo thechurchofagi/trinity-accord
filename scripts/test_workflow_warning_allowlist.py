@@ -42,6 +42,16 @@ allowed_warning_fragments = {
     '-f target_url="${run_url}#trinity-zenodo?state=public_reconcile_failure" >/dev/null || true',
 }
 
+# The EXIT trap only cleans up the local read-only Bitcoin proof proxy.
+# Bash preserves the lifecycle command's exit status across this trap, including
+# failure. Keep this exception bound to its exact workflow and command; never
+# allow verification, publishing or payment commands to become warning-only.
+allowed_scoped_cleanup_fragments = {
+    "abundance-bridge-ots-arweave.yml": {
+        "trap 'kill \"$proxy_pid\" 2>/dev/null || true' EXIT",
+    },
+}
+
 bad = []
 
 for path in sorted(WF.glob("*.yml")):
@@ -52,7 +62,10 @@ for path in sorted(WF.glob("*.yml")):
         if "|| echo" not in stripped and "|| true" not in stripped:
             continue
 
-        if stripped in allowed_warning_fragments:
+        if (
+            stripped in allowed_warning_fragments
+            or stripped in allowed_scoped_cleanup_fragments.get(path.name, set())
+        ):
             continue
 
         bad.append(f"{path.name}: unexpected warning/fail-open fallback: {stripped}")

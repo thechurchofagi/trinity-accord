@@ -60,6 +60,11 @@ jobs:
       - name: Install established OTS client
         if: steps.batch.outputs.done != 'true'
         run: python3 -m pip install -r requirements-ots.txt
+      - name: Record toolchain provenance
+        if: steps.batch.outputs.done != 'true'
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
       - name: Upgrade and verify both PDF proofs
         if: steps.batch.outputs.done != 'true'
         id: ots
