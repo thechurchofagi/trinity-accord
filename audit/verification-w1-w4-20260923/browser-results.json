@@ -1,0 +1,54 @@
+[
+  {
+    "viewport": "desktop",
+    "local_link_y": 324.8125,
+    "three_choices_in_first_viewport": true
+  },
+  {
+    "page": "verify",
+    "viewport": "desktop",
+    "http": 200,
+    "no_horizontal_overflow": true,
+    "javascript": false
+  },
+  {
+    "page": "agent-first-contact",
+    "viewport": "desktop",
+    "http": 200,
+    "no_horizontal_overflow": true,
+    "javascript": false
+  },
+  {
+    "page": "agent-verify-simple",
+    "viewport": "desktop",
+    "http": 200,
+    "no_horizontal_overflow": true,
+    "javascript": false
+  },
+  {
+    "viewport": "mobile",
+    "local_link_y": 617.625,
+    "three_choices_in_first_viewport": true
+  },
+  {
+    "page": "verify",
+    "viewport": "mobile",
+    "http": 200,
+    "no_horizontal_overflow": true,
+    "javascript": false
+  },
+  {
+    "page": "agent-first-contact",
+    "viewport": "mobile",
+    "http": 200,
+    "no_horizontal_overflow": true,
+    "javascript": false
+  },
+  {
+    "page": "agent-verify-simple",
+    "viewport": "mobile",
+    "http": 200,
+    "no_horizontal_overflow": true,
+    "javascript": false
+  }
+]

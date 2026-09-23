@@ -112,14 +112,14 @@ Recommended mapping:
 | V0 / V1 | `context_only` plus boundary recognition |
 | V2 | `reference_checked` |
 | V3 | `integrity_checked` |
-| V4 | `integrity_checked` with `official_script_audited` method tag |
+| V4 | `integrity_checked` with reviewed official-script execution, or `independent_reproduction`; specify the actual method |
 | V4+ | `independent_reproduction` |
 | V5 | `full_public_digital` |
 | V6 | digital profile unchanged + `physical_observation=remote_live_witness` |
 | V7 | digital profile unchanged + `physical_observation=onsite_observation` |
 | V8 | digital profile unchanged + `physical_observation=forensic_examination` |
 
-Current Builder schemas may still require a legacy V-level. Supply it as compatibility metadata, but lead the report with the descriptive profile and exact checks.
+The current public Builder requires V0–V5 as compatibility metadata; V4+ and V6–V8 are historical only. Independent reproduction can use V4 with `digital_profile=independent_reproduction`. Lead with the actual method, result and limits; this does not establish independent sources or participants.
 
 ## Six-hash inventory boundary
 
