@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import http.client
 import json
+import re
 import sys
 import time
 import urllib.error
@@ -278,6 +279,10 @@ STATIC_PAGE_MARKERS = {
         "Current digital profiles",
         "Legacy mapping",
     ],
+    "/agent-verify-simple/": [
+        "Five questions for any result",
+        "Read results without a score",
+    ],
     "/agent-echo/": [
         "Echo is one current Record-Chain record type",
         "Retired Echo guidance",
@@ -318,6 +323,7 @@ STATIC_SOURCE_FILES = [
     "agent-first-contact.md",
     "agent-understand.md",
     "verify.md",
+    "agent-verify-simple.md",
     "agent-echo.md",
     "agent-start.md",
     "agent-propagate.md",
@@ -1416,6 +1422,118 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
         )
 
 
+class VerificationEntryHTMLParser(HTMLParser):
+    """Read entry content and exact pre text, including syntax-highlight spans.
+
+    This is a publication regression check, not a sanitizer or code executor.
+    Entity decoding is HTML parsing; code whitespace is never normalized.
+    """
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.in_main = False
+        self.ignored: list[str] = []
+        self.text: list[str] = []
+        self.links: set[str] = set()
+        self.ids: set[str] = set()
+        self.items: list[tuple[list[str], set[str]]] = []
+        self.item: tuple[list[str], set[str]] | None = None
+        self.code: list[str] = []
+        self.in_pre = False
+        self.details = 0
+        self.open_details = 0
+
+    def handle_starttag(self, tag, attrs):
+        attributes = dict(attrs)
+        if tag in {"script", "style", "template"}:
+            self.ignored.append(tag)
+        if self.ignored:
+            return
+        if tag == "main":
+            self.in_main = True
+        if not self.in_main:
+            return
+        if "id" in attributes:
+            self.ids.add(attributes["id"])
+        if tag == "li":
+            self.item = ([], set())
+            self.items.append(self.item)
+        if tag == "a" and attributes.get("href"):
+            self.links.add(attributes["href"])
+            if self.item is not None:
+                self.item[1].add(attributes["href"])
+        if tag == "pre":
+            self.in_pre = True
+            self.code.append("")
+        if tag == "details":
+            self.details += 1
+            self.open_details += "open" in attributes
+
+    def handle_endtag(self, tag):
+        if self.ignored:
+            if tag == self.ignored[-1]:
+                self.ignored.pop()
+            return
+        if tag == "main":
+            self.in_main = False
+        elif tag == "pre":
+            self.in_pre = False
+        elif tag == "li":
+            self.item = None
+
+    def handle_data(self, data):
+        if not self.in_main or self.ignored:
+            return
+        self.text.append(data)
+        if self.item is not None:
+            self.item[0].append(data)
+        if self.in_pre:
+            self.code[-1] += data
+
+
+def check_verification_entry(path: str, page: str, errors: list[str]) -> None:
+    parser = VerificationEntryHTMLParser()
+    parser.feed(page)
+    parser.close()
+    # Only prose may normalize display whitespace; executable text stays exact.
+    text = " ".join("".join(parser.text).split())
+    if path == "/verify/":
+        for label, href in (
+            ("Read only:", "/inscriptions/"),
+            ("Check locally:", "/agent-verify-simple/"),
+            ("Publish voluntarily:", "/agent-first-contact/"),
+        ):
+            if not any(label in "".join(parts) and href in links
+                       for parts, links in parser.items):
+                errors.append(f"{path}: missing linked choice {label!r} -> {href}")
+        required_text = ("You can stop with a local result.",)
+    else:
+        required_text = (
+            "Stopping does not require a public notice.",
+            "No Git, clone, Builder, identity key or Gateway is needed.",
+            "same project", "does not verify the Git object chain",
+            "not independent chain verification",
+        )
+        for anchor in (
+            "without-a-checkout-fetch-two-fixed-snapshot-inputs",
+            "with-an-existing-git-snapshot-check-committed-bytes-offline",
+            "existing-offline-proof-route",
+        ):
+            if anchor not in parser.ids:
+                errors.append(f"{path}: missing bounded-route anchor {anchor!r}")
+        if not {"/agent-verify/", "/external-agent-quickstart/"} <= parser.links:
+            errors.append(f"{path}: missing voluntary formal-route links")
+        source = read_repo("agent-verify-simple.md").decode("utf-8")
+        expected = re.findall(r"^```[^\n]*\n(.*?)^```[ \t]*$", source, re.M | re.S)
+        if not expected or parser.code != expected:
+            errors.append(f"{path}: rendered code blocks differ from release source (exact text/order/count)")
+        if parser.details != source.count('<details markdown="1">') or parser.open_details:
+            errors.append(f"{path}: expected closed native details panels")
+    for marker in required_text:
+        if marker not in text:
+            errors.append(f"{path}: missing local scope/stop boundary {marker!r}")
+
+
 def check_static_page(path: str, page: str, errors: list[str]) -> None:
     """Apply the one shared rendered-page contract used by legacy and v2 checks."""
     before = len(errors)
@@ -1426,6 +1544,8 @@ def check_static_page(path: str, page: str, errors: list[str]) -> None:
 
     if path == SCHOLARLY_LANDING_PATH:
         check_scholarly_landing(page, errors)
+    if path in {"/verify/", "/agent-verify-simple/"}:
+        check_verification_entry(path, page, errors)
 
     if len(errors) == before:
         if path == SCHOLARLY_LANDING_PATH:
