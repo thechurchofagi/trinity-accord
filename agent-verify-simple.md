@@ -232,6 +232,18 @@ Python 3 standard library only; no network is needed during verification. Retain
 
 </details>
 
+## A narrow review you can publish elsewhere
+{: #external-review }
+
+**Review question (23 September 2026):** at source commit `0d019ba9d4ff313641dc9eb027e27c59af11bc03`, do the raw bytes of mirror `97631551.txt` match the SHA-256 bound to that exact path and inscription ID by the snapshot's mirror index? This asks about one project's internal byte consistency, not independent Bitcoin inclusion or the truth of the text.
+
+1. Use the two exact input links, lengths and download limits in [Check one mirror](#check-one-mirror). Preserve both responses as raw bytes, or retain the existing example's complete local output. Check that the index has exactly one matching ID, the expected path and a valid digest; do not choose a convenient duplicate or silently change snapshots after a failure.
+2. Use the reviewed example or your own implementation. If you use your own code, identify its source/version and describe how it handles missing, ambiguous and altered inputs. A different hash command is not by itself evidence of an independently designed verification method. Report the observed result even if it is a mismatch or unavailable input; the project does not select a required conclusion.
+3. In your report identify the operator and relationship to the project, date, snapshot, both source URLs, received lengths/digests, expected digest's location in the index, tool/version, raw output and errors. Separately state **operator independence**, **implementation independence** and **input-source independence**; use unknown where evidence is missing. These two project-published inputs do not provide independent input provenance even when an external reviewer downloads them.
+4. You may publish in your own repository, article or report without Guardian registration, an oath, a project account or a Record-Chain submission. Your publication and any later voluntary project ingestion are separate. Preserve negative findings and unresolved discrepancies. If reporting a defect, include the exact snapshot and evidence; do not include private keys or credentials.
+
+**No external result is asserted here.** This is a first-party review brief, not an invitation already sent, a third-party report or a peer-review certificate. An external reviewer controls whether to participate and what to conclude. To investigate actual chain inclusion, use the separately scoped [offline proof route](#existing-offline-proof-route) and disclose its project inputs and checkpoint assumptions; the two-file match cannot stand in for that work.
+
 ## Read results without a score
 
 **Method and coverage are separate.** One deep cryptographic check and a hundred reference lookups cannot be ranked on a single ladder. Report each target's method and result; do not take the maximum V value or profile as an overall strength score. A full-coverage check with failures is useful and must keep those failures visible.

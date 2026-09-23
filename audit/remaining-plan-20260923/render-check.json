@@ -1,0 +1,74 @@
+{
+  "checked_at_utc": "2026-09-23T08:17:37.921376+00:00",
+  "source_baseline": "65b56395c55b2ff8106706050eb453d4e730fdaa",
+  "changes": "this PR candidate; exact tree and head in PR",
+  "render": "github-pages 232, production environment, existing site configuration",
+  "harness_sha256": "9fb8326f3e2ded224d3f2990851b88912de0d1fbcd2ffd799d00dd06b421bff0",
+  "checks": [
+    {
+      "route": "/agent-verify-simple/",
+      "viewport": "desktop",
+      "status": 200,
+      "javascript": false,
+      "no_page_overflow": true,
+      "local_anchors_valid": true
+    },
+    {
+      "route": "/research/research-positioning/",
+      "viewport": "desktop",
+      "status": 200,
+      "javascript": false,
+      "no_page_overflow": true,
+      "local_anchors_valid": true
+    },
+    {
+      "route": "/research/research-positioning/zh.html",
+      "viewport": "desktop",
+      "status": 200,
+      "javascript": false,
+      "no_page_overflow": true,
+      "local_anchors_valid": true
+    },
+    {
+      "route": "/interpretation-verification-migration/",
+      "viewport": "desktop",
+      "status": 200,
+      "javascript": false,
+      "no_page_overflow": true,
+      "local_anchors_valid": true
+    },
+    {
+      "route": "/agent-verify-simple/",
+      "viewport": "mobile",
+      "status": 200,
+      "javascript": false,
+      "no_page_overflow": true,
+      "local_anchors_valid": true
+    },
+    {
+      "route": "/research/research-positioning/",
+      "viewport": "mobile",
+      "status": 200,
+      "javascript": false,
+      "no_page_overflow": true,
+      "local_anchors_valid": true
+    },
+    {
+      "route": "/research/research-positioning/zh.html",
+      "viewport": "mobile",
+      "status": 200,
+      "javascript": false,
+      "no_page_overflow": true,
+      "local_anchors_valid": true
+    },
+    {
+      "route": "/interpretation-verification-migration/",
+      "viewport": "mobile",
+      "status": 200,
+      "javascript": false,
+      "no_page_overflow": true,
+      "local_anchors_valid": true
+    }
+  ],
+  "local_font": "Noto Sans CJK SC supplied to local fontconfig; website fonts unchanged"
+}
