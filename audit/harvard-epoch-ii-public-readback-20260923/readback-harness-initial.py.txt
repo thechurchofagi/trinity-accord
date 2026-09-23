@@ -1,0 +1,249 @@
+"""Dated GET-only acquisition harness; reuses frozen Epoch II validators.
+
+Run: python readback-harness.py.txt REPOSITORY WORK_DIRECTORY
+No management credentials, uploads, challenge solving or user-agent rotation.
+"""
+import concurrent.futures
+import datetime
+import email.utils
+import hashlib
+import json
+import pathlib
+import sys
+import threading
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+
+REPO = pathlib.Path(sys.argv[1]).resolve()
+WORK = pathlib.Path(sys.argv[2]).resolve()
+sys.path.insert(0, str(REPO / 'scripts'))
+import upload_harvard_epoch_ii as existing
+from verify_epoch_ii_content_candidate import safe_relative
+
+UA = 'Trinity-Accord-Public-Access-Diagnostic/1.0'
+VERSION = '1.0'
+VERSION_ID = 748388
+TOTAL = 23107308201
+BYTE_BUDGET = 28000000000
+DEADLINE = time.monotonic() + 10800
+LOCK = threading.Lock()
+STOP = threading.Event()
+WIRE_BYTES = 0
+WORK.mkdir(parents=True, exist_ok=True)
+REPORT = WORK / 'readback.json'
+
+
+def now():
+    return datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+
+class ApprovedRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        check_url(newurl)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+def check_url(url):
+    p = urllib.parse.urlsplit(url)
+    if p.scheme != 'https' or p.hostname not in {
+        'dataverse.harvard.edu', 'dvn-cloud-iqss.s3.amazonaws.com'
+    } or p.username or p.password:
+        raise RuntimeError('Unapproved redirect origin')
+
+
+def open_get(url):
+    check_url(url)
+    return urllib.request.build_opener(ApprovedRedirect()).open(
+        urllib.request.Request(url, headers={'User-Agent': UA, 'Accept-Encoding': 'identity'}),
+        timeout=60,
+    )
+
+
+def count_bytes(n):
+    global WIRE_BYTES
+    with LOCK:
+        WIRE_BYTES += n
+        if WIRE_BYTES > BYTE_BUDGET or time.monotonic() > DEADLINE or STOP.is_set():
+            raise RuntimeError('Resource budget or stop condition reached')
+
+
+def metadata():
+    url = f'{existing.SERVER}/api/datasets/{existing.DATASET_ID}/versions/{VERSION}'
+    with open_get(url) as response:
+        if response.status != 200:
+            raise RuntimeError(f'Metadata HTTP {response.status}')
+        body = response.read(8000001)
+        count_bytes(len(body))
+    if len(body) > 8000000:
+        raise RuntimeError('Metadata size budget exceeded')
+    data = json.loads(body)['data']
+    if (data['datasetId'], data['datasetPersistentId'], data['id'],
+        data['versionNumber'], data['versionMinorNumber'], data['versionState']) != (
+        existing.DATASET_ID, existing.PID, VERSION_ID, 1, 0, 'RELEASED'
+    ):
+        raise RuntimeError('Published version identity changed')
+    actual = existing.dataverse_files(data)
+    if actual.keys() != EXPECTED.keys():
+        raise RuntimeError('Published path set differs from frozen layout')
+    for key, row in EXPECTED.items():
+        existing.verify_existing(actual[key], row)
+        if actual[key].get('restricted') is not False:
+            raise RuntimeError('Unrestricted flag missing')
+    return body, data, actual
+
+
+def save():
+    state['wire_bytes_this_execution'] = WIRE_BYTES
+    state['files_verified'] = len(state['files'])
+    state['bytes_verified'] = sum(x['bytes'] for x in state['files'].values())
+    state['updated_at_utc'] = now()
+    tmp = REPORT.with_suffix('.tmp')
+    tmp.write_text(json.dumps(state, indent=2, sort_keys=True) + '\n')
+    tmp.replace(REPORT)
+
+
+def download(key):
+    row, item = EXPECTED[key], ACTUAL[key]
+    fid = int(item['dataFile']['id'])
+    url = f'{existing.SERVER}/api/access/datafile/{fid}?format=original'
+    target = WORK / 'payload' / safe_relative(key)
+    retain = not (key.startswith('60-') and '.part-' in key)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    partial = target.with_name(target.name + '.partial')
+    for attempt in range(1, 4):
+        if STOP.is_set() or time.monotonic() > DEADLINE:
+            raise RuntimeError('Download stopped before next file')
+        digest, size, started = hashlib.sha256(), 0, now()
+        try:
+            with open_get(url) as response:
+                if response.status != 200:
+                    raise RuntimeError(f'Download HTTP {response.status}')
+                host = urllib.parse.urlsplit(response.geturl()).hostname
+                with partial.open('wb') as output:
+                    while True:
+                        chunk = response.read(1024 * 1024)
+                        if not chunk:
+                            break
+                        count_bytes(len(chunk))
+                        size += len(chunk)
+                        if size > row['bytes']:
+                            raise RuntimeError('Download exceeded pinned size')
+                        digest.update(chunk)
+                        if retain:
+                            output.write(chunk)
+            if (size, digest.hexdigest()) != (row['bytes'], row['sha256']):
+                raise RuntimeError('Full-byte size/SHA-256 mismatch')
+            if retain:
+                partial.replace(target)
+            else:
+                partial.unlink()
+            return {
+                'datafile_id': fid, 'bytes': size, 'sha256': digest.hexdigest(),
+                'started_at_utc': started, 'completed_at_utc': now(),
+                'http_status': 200, 'authentication': 'none', 'attempt': attempt,
+                'final_host': host, 'retained_for_recovery': retain,
+                'full_byte_readback_verified': True,
+            }
+        except urllib.error.HTTPError as exc:
+            partial.unlink(missing_ok=True)
+            safe_headers = {k: v for k, v in exc.headers.items() if k.lower() in
+                            {'server', 'date', 'content-type', 'retry-after', 'x-amzn-waf-action'}}
+            diagnostic = {'path': key, 'attempt': attempt, 'http_status': exc.code,
+                          'observed_at_utc': now(), 'headers': safe_headers}
+            with LOCK:
+                state['attempt_errors'].append(diagnostic)
+                save()
+            if exc.code not in {429, 500, 502, 503, 504} or attempt == 3:
+                raise RuntimeError(f'HTTP {exc.code}; access denial is not retried') from None
+            value = exc.headers.get('Retry-After')
+            delay = min(2 ** attempt, 20)
+            if value:
+                try:
+                    delay = max(delay, float(value))
+                except ValueError:
+                    delay = max(delay, email.utils.parsedate_to_datetime(value).timestamp() - time.time())
+            if delay > 120:
+                raise RuntimeError('Retry-After exceeds bounded run; stop and resume later')
+            STOP.wait(delay)
+        except (urllib.error.URLError, TimeoutError, ConnectionError):
+            partial.unlink(missing_ok=True)
+            if attempt == 3:
+                raise RuntimeError('Network read failed after bounded retries') from None
+            STOP.wait(min(2 ** attempt, 20))
+
+
+frozen = REPO / 'preservation/epoch-ii/frozen'
+manifest = existing.validate_manifest(frozen / 'DATASET-MANIFEST.json', frozen / 'HARVARD-EPOCH-II-SHA256SUMS')
+rows = manifest['files'] + existing.control_rows(frozen / 'DATASET-MANIFEST.json', frozen / 'HARVARD-EPOCH-II-SHA256SUMS')
+EXPECTED = {existing.file_key(r['directory_label'], r['filename']): r for r in rows}
+assert len(EXPECTED) == 419 and sum(r['bytes'] for r in rows) == TOTAL
+body, data, ACTUAL = metadata()
+binding = {
+    'persistent_id': existing.PID, 'dataset_id': existing.DATASET_ID,
+    'released_version': VERSION, 'dataset_version_id': VERSION_ID,
+    'release_time_utc': data['releaseTime'], 'manifest_sha256': existing.MANIFEST_SHA256,
+    'sums_sha256': existing.SUMS_SHA256,
+    'file_ids': {k: int(v['dataFile']['id']) for k, v in sorted(ACTUAL.items())},
+}
+state = {
+    'binding': binding, 'started_at_utc': now(), 'status': 'in_progress',
+    'public_metadata_verified': True, 'public_file_inventory_verified': True,
+    'authentication': 'none', 'method': 'GET', 'user_agent': UA,
+    'resource_budget': {'concurrency': 2, 'maximum_wire_bytes': BYTE_BUDGET,
+                        'maximum_execution_seconds': 10800, 'socket_timeout_seconds': 60,
+                        'maximum_attempts_per_file': 3, 'maximum_retry_after_seconds': 120},
+    'files': {}, 'attempt_errors': [], 'restore': 'not_attempted',
+}
+if REPORT.exists():
+    previous = json.loads(REPORT.read_text())
+    if previous['binding'] != binding:
+        raise RuntimeError('Cannot resume across changed version, manifest or file IDs')
+    state['files'] = previous['files']
+    state['attempt_errors'] = previous['attempt_errors']
+    state['started_at_utc'] = previous['started_at_utc']
+    for key, result in state['files'].items():
+        row = EXPECTED[key]
+        if (result['datafile_id'], result['bytes'], result['sha256'], result['authentication'],
+            result['full_byte_readback_verified']) != (
+            binding['file_ids'][key], row['bytes'], row['sha256'], 'none', True):
+            raise RuntimeError('Resume receipt differs from pinned public file')
+        if result['retained_for_recovery']:
+            existing.verify_local(WORK / 'payload' / safe_relative(key), row)
+(WORK / 'released-version-before.json').write_bytes(body)
+save()
+pending = sorted(set(EXPECTED) - set(state['files']),
+                 key=lambda k: (not k.startswith('95-'), EXPECTED[k]['bytes'], k))
+print(f'Pinned released v1.0; resume={len(state["files"])}/419; remaining={len(pending)}', flush=True)
+try:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+        jobs = {pool.submit(download, key): key for key in pending}
+        for future in concurrent.futures.as_completed(jobs):
+            key = jobs[future]
+            try:
+                result = future.result()
+            except BaseException:
+                STOP.set()
+                for job in jobs:
+                    job.cancel()
+                raise
+            with LOCK:
+                state['files'][key] = result
+                save()
+                print(f'PASS {len(state["files"])}/419 bytes={state["bytes_verified"]}/{TOTAL} {key}', flush=True)
+    body, _, after = metadata()
+    if {k: int(v['dataFile']['id']) for k, v in after.items()} != binding['file_ids']:
+        raise RuntimeError('File IDs changed during readback')
+    (WORK / 'released-version-after.json').write_bytes(body)
+    if len(state['files']) != 419 or state['bytes_verified'] != TOTAL:
+        raise RuntimeError('Incomplete full-byte scope')
+    state['status'] = 'pass'
+    state['version_inventory_rechecked_after_download'] = True
+except BaseException as exc:
+    state['status'] = 'incomplete'
+    state['stop_reason'] = type(exc).__name__ + ': ' + str(exc)[:300]
+    save()
+    raise
+save()
+print('FULL ANONYMOUS READBACK PASS', flush=True)

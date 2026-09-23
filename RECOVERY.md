@@ -211,10 +211,15 @@ The total including two control files is 23,107,308,201 bytes.
 
 See [publication status](https://github.com/thechurchofagi/trinity-accord/blob/main/preservation/epoch-ii/PUBLICATION-STATUS.md) and
 `preservation/harvard-epoch-ii-state.json` for the exact source/candidate identities
-and the separate verification stages. Prepublication authenticated byte readback
-and candidate cold recovery passed. **Postpublication anonymous inventory and
-full-byte verification remain pending.** Publication notification alone must not
-be reported as a fresh public cold-recovery result.
+and the separate verification stages. Prepublication checks remain historical
+evidence. On **2026-09-23**, anonymous reads of released **v1.0 / version ID
+748388** matched all **419 files and 23,107,308,201 bytes** by size and SHA-256.
+The source capsule downloaded from Harvard restored **6,423 tracked files and
+nine checkpoints** with network access blocked; its Bitcoin v2 verifier passed
+**12/12**. See the [dated per-file receipt](preservation/epoch-ii/public-readback-20260923.json).
+This restores source `3bdf9121fb9e98cd9ba9de62a2466367d0968e4e`, not later moving
+main or production history. External archives were byte-verified, not all
+unpacked or semantically reverified. Current corrections remain a separate check.
 
 Start with the deposited `00-start-here/DATASET-MANIFEST.json` and
 `00-start-here/SHA256SUMS`, verify their fixed hashes from the state record, and

@@ -1,0 +1,91 @@
+"""Synthetic boundary checks for the dated acquisition harness; no network."""
+import contextlib
+import hashlib
+import io
+import json
+import pathlib
+import sys
+import tempfile
+import unittest
+import urllib.error
+
+REPO = pathlib.Path(sys.argv[1]).resolve()
+SOURCE = REPO / 'audit/harvard-epoch-ii-public-readback-20260923/readback-harness.py.txt'
+
+
+class Response(io.BytesIO):
+    status = 200
+    def geturl(self):
+        return 'https://dataverse.harvard.edu/api/access/datafile/1'
+
+
+class Boundaries(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        before = sys.argv
+        sys.argv = [str(SOURCE), str(REPO), self.temp.name]
+        try:
+            self.g = {}
+            exec(compile(SOURCE.read_text().split('\nfrozen = ')[0], str(SOURCE), 'exec'), self.g)
+        finally:
+            sys.argv = before
+        row = {'bytes': 3, 'sha256': hashlib.sha256(b'abc').hexdigest()}
+        self.g.update(EXPECTED={'fixture': row}, ACTUAL={'fixture': {'dataFile': {'id': 1}}},
+                      state={'files': {}, 'attempt_errors': []})
+
+    def payload(self, value):
+        self.g['open_get'] = lambda _: Response(value)
+
+    def test_complete_bytes_pass(self):
+        self.payload(b'abc')
+        result = self.g['download']('fixture')
+        self.assertTrue(result['full_byte_readback_verified'])
+        self.assertEqual(result['bytes'], 3)
+        self.assertEqual(result['authentication'], 'none')
+
+    def test_http_200_with_wrong_bytes_fails(self):
+        self.payload(b'bad')
+        with self.assertRaisesRegex(RuntimeError, 'mismatch'):
+            self.g['download']('fixture')
+
+    def test_truncated_file_fails(self):
+        self.payload(b'ab')
+        with self.assertRaisesRegex(RuntimeError, 'mismatch'):
+            self.g['download']('fixture')
+
+    def test_excess_bytes_fail(self):
+        self.payload(b'abcd')
+        with self.assertRaisesRegex(RuntimeError, 'exceeded pinned size'):
+            self.g['download']('fixture')
+
+    def test_403_stops_without_retry(self):
+        calls = []
+        def denied(url):
+            calls.append(url)
+            raise urllib.error.HTTPError(url, 403, 'Forbidden', {}, io.BytesIO(b''))
+        self.g['open_get'] = denied
+        with self.assertRaisesRegex(RuntimeError, 'not retried'):
+            self.g['download']('fixture')
+        self.assertEqual(len(calls), 1)
+
+    def test_unapproved_redirect_fails(self):
+        for url in ['http://dataverse.harvard.edu/', 'https://example.com/',
+                    'https://user:password@dataverse.harvard.edu/']:
+            with self.assertRaises(RuntimeError):
+                self.g['check_url'](url)
+
+    def test_changed_version_rejected_before_inventory(self):
+        data = {'datasetId': 14229992, 'datasetPersistentId': 'doi:10.7910/DVN/W9Y3IV',
+                'id': 748388, 'versionNumber': 2, 'versionMinorNumber': 0, 'versionState': 'RELEASED'}
+        self.payload(json.dumps({'data': data}).encode())
+        with self.assertRaisesRegex(RuntimeError, 'identity changed'):
+            self.g['metadata']()
+
+    def test_transfer_budget_enforced(self):
+        self.g['BYTE_BUDGET'] = 2
+        with self.assertRaisesRegex(RuntimeError, 'budget'):
+            self.g['count_bytes'](3)
+
+
+unittest.main(argv=[sys.argv[0]])

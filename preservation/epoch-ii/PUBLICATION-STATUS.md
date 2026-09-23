@@ -6,8 +6,9 @@ Mirror · Preservation Epoch II**, DOI [10.7910/DVN/W9Y3IV](https://doi.org/10.7
 The publication notification was sent by Harvard Dataverse Support at
 **2026-09-15 10:40:06 UTC** (18:40:06 China Standard Time) and read from the
 depositor mailbox. It names this exact Dataset and states that it “was published
-in Harvard Dataverse.” This is the notification time; the exact release timestamp
-and released version number still require a public API read.
+in Harvard Dataverse.” This is the notification time. Anonymous public API reads on **2026-09-23**
+confirmed released **v1.0**, Dataset version ID **748388**, with exact release time
+**2026-09-15 10:40:01 UTC**.
 
 Machine-readable observation: [preservation/harvard-epoch-ii-state.json](../harvard-epoch-ii-state.json).
 Recovery discovery: [preservation/recovery-catalog.json](../recovery-catalog.json).
@@ -24,8 +25,9 @@ Recovery discovery: [preservation/recovery-catalog.json](../recovery-catalog.jso
 | Prepublication full-byte size/SHA-256 readback | 419/419 PASS; all files unrestricted |
 | Project verifiers and clean candidate cold recovery | PASS in the completed submission evidence |
 | Submission | One submitForReview request; final InReview at 2026-09-12 17:28:14 UTC |
-| Publication | Confirmed by the 2026-09-15 Harvard notification |
-| Postpublication anonymous full-byte readback | Pending; not inferred from prepublication verification |
+| Publication | Notification plus anonymous v1.0 API confirmation |
+| Postpublication anonymous full-byte readback | **419/419 PASS; 23,107,308,201 bytes** on 2026-09-23 |
+| Postpublication source-capsule cold recovery | **6,423 tracked files / 9 checkpoints PASS**, offline; Bitcoin v2 **12/12 PASS** |
 
 The 48 delayed-access files include ciphertext and recovery/integrity/verification
 materials. They are not 48 raw ciphertext files. The frozen scope and exclusions
@@ -64,32 +66,52 @@ credentials and personal contact data; none were found. The original is not a
 redacted or regenerated archive. Its `InReview` and 419 readback receipts are
 prepublication evidence, not a later anonymous verification result.
 
-## Remaining read-only publication check
+## Completed anonymous publication check
 
-A new anonymous GET on **2026-09-23** to the public `:latest-published` version
-endpoint also returned **HTTP 403**. See the [dated observation](public-readback-observation-20260923.json).
-Released version/time and the public inventory remain unverified; actual full-byte
-readback is **0/419 files, 0/23,107,308,201 bytes**. No file request was started
-before pinning the version and inventory. Publication confirmation remains true;
-postpublication readback remains pending. No management token, retry with alternate
-identity, upload, submission, new version or paid transaction was used.
+The [dated per-file receipt](public-readback-20260923.json) records anonymous
+GETs pinned to released **v1.0 / version ID 748388**. All 419 logical paths,
+sizes and SHA-256 identities matched the frozen manifest plus its two controls;
+all files were unrestricted and their Dataverse IDs were pinned to this version.
+Every file was read in full and hashed;
+the version and inventory were checked again after completion. No management
+credentials were sent. This result is separate from prepublication verification.
 
-The local public Dataset API request on 2026-09-15 returned HTTP 403. No
-postpublication public inventory or anonymous byte check completed in that
-attempt. This is an access limitation of the observation, not evidence that
-Harvard rejected the Dataset or that any file is corrupt.
+The earlier [403 observation](public-readback-observation-20260923.json) remains
+unchanged as historical evidence. A follow-up comparison found a 403 response
+from `awselb/2.0` for the default Python client identifier, while a transparent,
+fixed project User-Agent obtained the same public API without authentication.
+The web landing endpoint separately returned an explicit AWS WAF challenge.
+These observations support an ingress/client-classification explanation; the
+exact historical WAF rule cannot be proven without Harvard server logs. No
+identity rotation, challenge solving, permission change or dataset mutation was
+performed.
 
-The next verifier should retrieve the released version anonymously, compare the
-exact logical paths, unrestricted flags, sizes and hashes for all 419 files
-against the frozen manifest and two control files, then stream and hash each
-public payload. Preserve a dated per-file report and update the separate
-postpublication fields only after success. Reuse the existing source-build,
-project-verifier, cold-recovery and prepublication results for their original
-scope.
+The run began with two simultaneous downloads and resumed from 84 verified
+files with a maximum of four, a 28 GB total wire-byte ceiling (including a
+conservative allowance for interrupted in-flight transfers),
+three-hour execution ceiling and bounded transient retries respecting
+Retry-After. Access denials stop the run. Large finality shards were fully
+streamed and hashed without retaining a second local copy. Source and support
+materials needed for the recovery exercise were retained.
 
-Publication is complete. No reminder or resubmission is needed. Do not edit,
-reupload, version-upgrade or republish either Harvard Dataset as part of this
-check.
+The eight anonymously downloaded source-capsule files restored exact source
+`3bdf9121fb9e98cd9ba9de62a2466367d0968e4e`, tree
+`4474b90825253c41bf2e4159c76fde4b4f07b241`, into a fresh directory with network
+syscalls blocked by Linux seccomp. The unchanged standalone recovery program
+verified **6,423 tracked files and nine checkpoints**; the recovered Bitcoin
+v2 verifier passed **12/12**. Current online corrections were deliberately
+unavailable, so currentness is unknown. This does not restore production parent
+history, signing authority or an operational public intake service. Full-file
+hash verification of external archives is not a claim that all archives were
+unpacked or every embedded proof independently rerun.
+
+Detailed recovery evidence and the bounded acquisition harness are in the
+[repository audit](https://github.com/thechurchofagi/trinity-accord/blob/main/audit/harvard-epoch-ii-public-readback-20260923.md).
+
+The dated anonymous full-byte check is complete. Future downloads must still
+be checked against the same frozen identities; this is not a promise of
+perpetual availability. No edit, reupload, resubmission, new DOI or paid
+transaction was part of this check.
 
 ## Authority and historical boundary
 
