@@ -1,10 +1,12 @@
 {
-  "state": "INCOMPLETE_REQUIRES_REVIEW_OR_SAME_RECORD_RESUMPTION",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
   "record_id": 22939808,
   "doi": "10.5281/zenodo.22939808",
-  "phase": "doi_resolver",
+  "phase": "public_doi_reconciled",
   "error_type": "RuntimeError",
   "error": "Published files passed public readback; DOI resolution still propagating",
   "workflow_run_id": "36003909935",
-  "new_record_creation": false
+  "new_record_creation": false,
+  "doi_reconciled_at": "2026-09-24T15:09:30.355260+00:00",
+  "zenodo_record_mutated": false
 }

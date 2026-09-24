@@ -1,5 +1,5 @@
 {
-  "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
   "report_number": "TA-TR-2026-16",
   "title": "General Cross-Substrate Phenomenology: A Type-Safe, Transformation-First Framework for Phenomenal Existence, Structure, Perspective, and Continuation",
   "version": "1.0",
@@ -73,12 +73,15 @@
   "expected_manifest_sha256": "c76fd87d55d317fc4cbcba75cf8951692890fa4e58d61744776a57214dd280f1",
   "public_readback_authenticated": false,
   "doi_resolver": {
-    "state": "RESOLVER_CHECK_UNAVAILABLE",
-    "error_type": "HTTPError",
-    "matches_record": false
+    "state": "RESOLVER_PASS",
+    "http_status": 200,
+    "final_url": "https://zenodo.org/records/22939808",
+    "matches_record": true,
+    "checked_at": "2026-09-24T15:09:30.355260+00:00",
+    "authenticated": false
   },
   "public_file_readback_pass": true,
-  "doi_resolution_pass": false,
+  "doi_resolution_pass": true,
   "source_commit": "4291f2b34f718a877935644de361953542ad8f86",
   "workflow_run_id": "36003909935",
   "was_already_published": true,
