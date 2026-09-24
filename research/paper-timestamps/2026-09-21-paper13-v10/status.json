@@ -1,5 +1,8 @@
 {
+  "arweave_tx_id": "S2Jgb2_sIzwyYxCUW-cRIPSoAtkDYK2Nd70tC_Vud-E",
+  "arweave_url": "https://arweave.net/S2Jgb2_sIzwyYxCUW-cRIPSoAtkDYK2Nd70tC_Vud-E",
   "batch": "2026-09-21-paper13-v10",
+  "bundle_sha256": "c18b2306ea20732f62bad94de053a73e70d3ce79a798caca81046b1ee399e9b7",
   "files": [
     {
       "bitcoin_heights": [
@@ -15,13 +18,12 @@
       "report": "TA-TR-2026-13",
       "role": "Complete Chinese v1.0 theory-method paper with English title and abstract",
       "sha256": "2785b1f7e20be977b883244da0526b144172f2ab6f3c64b5b235f5621fe7a32a",
-      "state": "BITCOIN_ATTESTATION_EMBEDDED",
-      "verification_error": "Bitcoin verification failed; upload blocked"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "ARWEAVE_READBACK_PASS",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }

@@ -1,8 +1,10 @@
 {
-  "checked_at": "2026-09-24T00:50:06.884Z",
   "state": "ELIGIBLE_OR_READBACK_RESUME",
-  "paid_research_uploads_today": 0,
-  "daily_limit": 1,
-  "recorded_transaction_resume": false,
-  "next_action": "Continue guarded upload or readback"
+  "budget_policy": "per-publication-strictly-less-than-0.1-AR",
+  "daily_limit_applies": false,
+  "prior_winston_by_publication": {
+    "TA-TR-2026-13@10.5281/zenodo.22866775": "13077710706"
+  },
+  "recorded_transaction_resume": true,
+  "next_action": "Continue to live quote, cumulative paper budget, reserve and rolling-spend guards or resume readback"
 }
