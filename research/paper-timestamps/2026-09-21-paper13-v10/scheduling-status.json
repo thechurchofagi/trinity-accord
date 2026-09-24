@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-09-23T22:26:22.844Z",
-  "state": "DEFERRED_DAILY_ALLOWANCE",
-  "paid_research_uploads_today": 1,
+  "checked_at": "2026-09-24T00:50:06.884Z",
+  "state": "ELIGIBLE_OR_READBACK_RESUME",
+  "paid_research_uploads_today": 0,
   "daily_limit": 1,
   "recorded_transaction_resume": false,
-  "next_action": "Wait for a later scheduled run; do not raise limits"
+  "next_action": "Continue guarded upload or readback"
 }
