@@ -122,7 +122,7 @@ class ResearchBoundaryTests(unittest.TestCase):
         papers = policy['first_party_papers']
         reports = [p['report'] for p in papers]
         self.assertEqual(len(reports), len(set(reports)))
-        self.assertEqual(set(reports), {f'TA-TR-2026-{n:02d}' for n in range(1, 15)})
+        self.assertEqual(set(reports), {f'TA-TR-2026-{n:02d}' for n in range(1, 16)})
         template = (ROOT / '_layouts/default.html').read_text()
         for variable, layer in (('research_direct_ids', 'L3'), ('research_adjacent_ids', 'L4')):
             match = re.search(r"assign " + variable + r" = '([^']+)'", template)
@@ -159,7 +159,7 @@ class ResearchBoundaryTests(unittest.TestCase):
         self.assertIn('固定文本不等于评价冻结', chinese)
         for text in (english, chinese):
             self.assertIn('/api/research-boundary.v1.json', text)
-            for n in range(1, 15):
+            for n in range(1, 16):
                 self.assertIn(f'| **{n:02d}** |', text)
 
     def test_rendered_research_subjects_and_context(self):
