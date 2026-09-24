@@ -6,9 +6,10 @@ import datetime,json,urllib.request,urllib.parse,urllib.error
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parents[1]
-RID=22934654
-DOI='10.5281/zenodo.22934654'
-def run():
+PAPERS=(('cross-substrate-phenomenal-comparison',22934654),('general-cross-substrate-phenomenology',22939808))
+def reconcile(directory,RID):
+ ROOT=REPO/'research'/directory
+ DOI=f'10.5281/zenodo.{RID}'
  p=ROOT/'publication-record.json';receipt=json.loads(p.read_text())
  if (receipt.get('record_id'),receipt.get('doi'),receipt.get('version'))!=(RID,DOI,'1.0'):
   raise RuntimeError('Paper identity mismatch')
@@ -20,7 +21,7 @@ def run():
  if now.date()>datetime.date(2026,10,1):
   print('Automatic reconciliation window ended; receipt retains unresolved state');return
  try:
-  req=urllib.request.Request('https://doi.org/'+DOI,headers={'User-Agent':'TrinityAccord-TA15-PublicDOIReconciliation/1.0'})
+  req=urllib.request.Request('https://doi.org/'+DOI,headers={'User-Agent':'TrinityAccord-PublicDOIReconciliation/1.1'})
   with urllib.request.urlopen(req,timeout=25) as r:
    u=urllib.parse.urlsplit(r.url)
    ok=(r.status==200 and u.scheme=='https' and u.hostname=='zenodo.org' and not u.username and not u.password and u.port in (None,443) and not u.query and not u.fragment and u.path.rstrip('/') in (f'/records/{RID}',f'/record/{RID}'))
@@ -34,4 +35,7 @@ def run():
  index=REPO/'research/index.md';s=index.read_text();old='DOI registration is assigned; resolver confirmation is still pending. The contribution is a comparison framework'
  s=s.replace(old,'The DOI resolves to the public record. The contribution is a comparison framework');index.write_text(s)
  print('DOI and complete publication now verified; only local receipt/index status updated')
+def run():
+ for directory,rid in PAPERS:
+  reconcile(directory,rid)
 if __name__=='__main__':run()

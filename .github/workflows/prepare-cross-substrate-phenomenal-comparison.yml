@@ -1,10 +1,10 @@
-name: Prepare Cross-Substrate Phenomenal Comparison
+name: Prepare General Cross-Substrate Phenomenology
 on:
   push:
-    branches: [research/cross-substrate-phenomenal-comparison-v1-20260924]
+    branches: [research/general-cross-substrate-phenomenology-v1-20260924]
     paths:
       - '.github/workflows/prepare-cross-substrate-phenomenal-comparison.yml'
-      - 'research/cross-substrate-phenomenal-comparison/prepare_zenodo.py'
+      - 'research/general-cross-substrate-phenomenology/prepare_zenodo.py'
 permissions:
   contents: write
 concurrency:
@@ -12,19 +12,19 @@ concurrency:
   cancel-in-progress: false
 jobs:
   prepare:
-    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta15-prepare]')
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta16-prepare]')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
-          ref: research/cross-substrate-phenomenal-comparison-v1-20260924
+          ref: research/general-cross-substrate-phenomenology-v1-20260924
       - name: Record repository toolchain provenance
         run: python3 scripts/toolchain_provenance.py
       - name: Reserve one new paper record using the established Zenodo client
         env:
           ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
-        run: python3 research/cross-substrate-phenomenal-comparison/prepare_zenodo.py
+        run: python3 research/general-cross-substrate-phenomenology/prepare_zenodo.py
       - name: Preserve reservation including failures
         if: always()
-        run: python3 research/cross-substrate-phenomenal-comparison/publication_common.py --persist-states
+        run: python3 research/general-cross-substrate-phenomenology/publication_common.py --persist-states

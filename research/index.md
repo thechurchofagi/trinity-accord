@@ -39,6 +39,8 @@ reading_toc:
     title: "Claim Architecture Transition"
   - id: "cross-substrate-phenomenal-comparison"
     title: "Cross-Substrate Phenomenal Comparison"
+  - id: "general-cross-substrate-phenomenology"
+    title: "General Cross-Substrate Phenomenology"
   - id: "independent-external-scholarship"
     title: "Independent external scholarship"
   - id: "citation-boundary"
@@ -53,7 +55,7 @@ permalink: /research/
 
 This page separates later scholarship from the fixed artifact. Research papers, technical reports, citations, and repository deposits are **non-amending scholarship**. They do not join, define, validate, or alter the three Bitcoin Originals.
 
-The first-party series currently contains **fifteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-15)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -15 are classified as the Adjacent Research Program.** All fifteen share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
+The first-party series currently contains **sixteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-16)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -16 are classified as the Adjacent Research Program.** All sixteen share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research boundary
 {: #research-boundary }
@@ -151,7 +153,7 @@ Five source-linked creative readings, including First Dawn and Fourth Letter as 
 ## Adjacent Research Program
 {: #adjacent-research-program }
 
-TA-TR-2026-04 through TA-TR-2026-15 are later first-party research outputs that use the Accord, its historical setting, or the wider human–AI transition as a motivating case or problem-space. They are **not part of the Accord**, and their results must not be described as evidence that the Canon is true, important, safe, correct, or historically representative. Papers 04–05 are case-grounded extensions; papers 06–15 are broader adjacent research.
+TA-TR-2026-04 through TA-TR-2026-16 are later first-party research outputs that use the Accord, its historical setting, or the wider human–AI transition as a motivating case or problem-space. They are **not part of the Accord**, and their results must not be described as evidence that the Canon is true, important, safe, correct, or historically representative. Papers 04–05 are case-grounded extensions; papers 06–16 are broader adjacent research.
 
 ## Beyond Guaranteed Control
 {: #beyond-guaranteed-control }
@@ -407,6 +409,22 @@ An English-only theoretical and methodological preprint distinguishing six claim
 
 [Exact-version OTS and Arweave status](/research/paper-timestamps/2026-09-24-paper15-v10/status.json). Four OTS calendar attestations have been saved for the exact English PDF; Bitcoin proof maturity and Arweave readback remain separately pending until verified.
 
+## General Cross-Substrate Phenomenology
+{: #general-cross-substrate-phenomenology }
+
+### General Cross-Substrate Phenomenology: A Type-Safe, Transformation-First Framework for Phenomenal Existence, Structure, Perspective, and Continuation
+
+TA-TR-2026-16 · Version 1.0 · 24 September 2026. Hongju Liu. English theoretical preprint; substantially AI-assisted and not peer reviewed.
+
+A broader architecture for existence, character, perspective and continuation. Common-witness constraints and redundancy-aware causal participation motivate a relational-realization hypothesis. Explicit proofs and finite constructions address graph connectivity, reset artifacts, recoding and error-correcting wrappers. The existence bridge remains a conjecture, not a demonstrated consciousness law. The narrower comparison paper above is cited and remains distinct.
+
+- [DOI: 10.5281/zenodo.22939808](https://doi.org/10.5281/zenodo.22939808) · [Research overview](/research/general-cross-substrate-phenomenology/)
+- [English PDF](/research/general-cross-substrate-phenomenology/published/general-cross-substrate-phenomenology-v1.0.pdf) · [Publication and supplementary files](https://zenodo.org/records/22939808)
+- [Publication receipt](/research/general-cross-substrate-phenomenology/publication-record.json) · [Review and contribution record](/research/general-cross-substrate-phenomenology/published/REVIEW-AND-SOURCES.md)
+- [OTS and Arweave status](/research/paper-timestamps/2026-09-24-paper16-v10/status.json)
+
+This is adjacent first-party research, not Canon or independent corroboration of the Accord. Timestamp submission, Bitcoin maturity and Arweave preservation are separately reported.
+
 ## Independent External Scholarship
 {: #independent-external-scholarship }
 
@@ -417,8 +435,8 @@ This category is reserved for work produced outside project control by independe
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all fifteen studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all sixteen studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the fifteen-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the sixteen-paper series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.

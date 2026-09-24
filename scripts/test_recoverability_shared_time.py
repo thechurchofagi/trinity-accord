@@ -60,7 +60,7 @@ class SeventhPaperTests(unittest.TestCase):
 
     def test_current_studies_and_dated_six_paper_guide(self):
         text = (REPO / 'research/index.md').read_text()
-        counts = [(8, 'eight'), (9, 'nine'), (10, 'ten'), (11, 'eleven'), (12, 'twelve'), (13, 'thirteen'), (14, 'fourteen'), (15, 'fifteen')]
+        counts = [(8, 'eight'), (9, 'nine'), (10, 'ten'), (11, 'eleven'), (12, 'twelve'), (13, 'thirteen'), (14, 'fourteen'), (15, 'fifteen'), (16, 'sixteen')]
         self.assertEqual(sum(f'{word} distinct research papers (TA-TR-2026-01 through TA-TR-2026-{number:02d})'
                              in text for number, word in counts), 1)
         self.assertIn('for the original six papers', text)

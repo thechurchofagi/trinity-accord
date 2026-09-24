@@ -84,7 +84,7 @@ def replace_once(text: str, old: str, new: str) -> str:
 
 def current_series_word(text: str) -> str:
     """Accept the eighth-paper index and subsequent indexed extensions."""
-    matches = [word for number, word in ((8, "eight"), (9, "nine"), (10, "ten"), (11, "eleven"), (12, "twelve"), (13, "thirteen"), (14, "fourteen"), (15, "fifteen"))
+    matches = [word for number, word in ((8, "eight"), (9, "nine"), (10, "ten"), (11, "eleven"), (12, "twelve"), (13, "thirteen"), (14, "fourteen"), (15, "fifteen"), (16, "sixteen"))
                if f"{word} distinct research papers (TA-TR-2026-01 through TA-TR-2026-{number:02d})" in text]
     require(len(matches) == 1, "Series count differs")
     return matches[0]

@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-24-paper16-v10",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-16",
+      "record_id": 22939808,
+      "doi": "10.5281/zenodo.22939808",
+      "version": "1.0",
+      "title": "General Cross-Substrate Phenomenology: A Type-Safe, Transformation-First Framework for Phenomenal Existence, Structure, Perspective, and Continuation",
+      "receipt_path": "research/general-cross-substrate-phenomenology/publication-record.json",
+      "pdfs": [
+        {
+          "name": "general-cross-substrate-phenomenology-v1.0.pdf",
+          "bytes": 206440,
+          "sha256": "ca665b1c55ebf1329bc5c4ee808cc19a7ea1c95b87e6c87ec1f1a2e115e37e1a",
+          "role": "Complete English v1.0 theoretical and methodological preprint"
+        }
+      ]
+    }
+  ]
+}

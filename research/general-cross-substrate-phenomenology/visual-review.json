@@ -1,0 +1,8 @@
+{
+  "state": "EXACT_PUBLICATION_PACKAGE_REVIEW_PASS",
+  "expected_manifest_sha256": "c76fd87d55d317fc4cbcba75cf8951692890fa4e58d61744776a57214dd280f1",
+  "reviewer": "ChatGPT, AI-assisted editorial and visual review; not independent peer review",
+  "pdf_pages": 38,
+  "method": "Rendered all pages in contact sheets; inspected equations, tables, changed appendix pages and references at enlarged scale; checked page text bounds; corrected overflow and orphaned table heading.",
+  "result": "No remaining clipping, overlap, or missing glyphs observed."
+}

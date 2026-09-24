@@ -1,0 +1,141 @@
+{
+  "status": "PASS",
+  "scope": "Constructed causal models only; no phenomenal ground truth",
+  "graph": {
+    "graphs": 4096,
+    "strongly_connected": 1606,
+    "maximum_walk_length": 6,
+    "equivalence_pass": true
+  },
+  "finite": {
+    "reset_artifact_pass": true,
+    "capacity_by_horizon": [
+      {
+        "horizon": 1,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 2,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 3,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 4,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 5,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 6,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 7,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 8,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 9,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 10,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 11,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 12,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 13,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 14,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 15,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      },
+      {
+        "horizon": 16,
+        "parity_bits": 1.0,
+        "reversible_bits": 4.0
+      }
+    ],
+    "common_regime_pass": true,
+    "gated_mediator_pass": true,
+    "recoding_pass": true
+  },
+  "redundancy": {
+    "coalition_cases": 682,
+    "reliability": [
+      {
+        "carriers": 1,
+        "correct_return": 0.9,
+        "singleton_pivotality": 1.0,
+        "reliability_exact": "9/10",
+        "pivotality_exact": "1"
+      },
+      {
+        "carriers": 3,
+        "correct_return": 0.972,
+        "singleton_pivotality": 0.18,
+        "reliability_exact": "243/250",
+        "pivotality_exact": "9/50"
+      },
+      {
+        "carriers": 5,
+        "correct_return": 0.99144,
+        "singleton_pivotality": 0.0486,
+        "reliability_exact": "12393/12500",
+        "pivotality_exact": "243/5000"
+      },
+      {
+        "carriers": 7,
+        "correct_return": 0.997272,
+        "singleton_pivotality": 0.01458,
+        "reliability_exact": "124659/125000",
+        "pivotality_exact": "729/50000"
+      },
+      {
+        "carriers": 9,
+        "correct_return": 0.99910908,
+        "singleton_pivotality": 0.0045927,
+        "reliability_exact": "24977727/25000000",
+        "pivotality_exact": "45927/10000000"
+      }
+    ],
+    "binary_rules": 256,
+    "correctable_wrapper_cases": 16384,
+    "wrapper_pass": true
+  }
+}
