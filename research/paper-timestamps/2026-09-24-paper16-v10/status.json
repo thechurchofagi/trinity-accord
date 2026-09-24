@@ -2,22 +2,26 @@
   "batch": "2026-09-24-paper16-v10",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        968402,
+        968405,
+        968406
+      ],
       "bytes": 206440,
       "doi": "10.5281/zenodo.22939808",
       "name": "general-cross-substrate-phenomenology-v1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-24-paper16-v10/proofs/TA-TR-2026-16/general-cross-substrate-phenomenology-v1.0.pdf.ots",
-      "proof_sha256": "8743064d7f69fb6a3d8396f52ab1828fe6cee74556c6b5b96222f96ecde7547d",
+      "proof_sha256": "a46050471df0a633f03e9fc57a0aae9705ae70279de4a8fb6ae09e938f13e22d",
       "report": "TA-TR-2026-16",
       "role": "Complete English v1.0 theoretical and methodological preprint",
       "sha256": "ca665b1c55ebf1329bc5c4ee808cc19a7ea1c95b87e6c87ec1f1a2e115e37e1a",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
