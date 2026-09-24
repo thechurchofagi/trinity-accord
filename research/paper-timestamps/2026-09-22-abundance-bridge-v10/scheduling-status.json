@@ -3,8 +3,8 @@
   "budget_policy": "per-publication-strictly-less-than-0.1-AR",
   "daily_limit_applies": false,
   "prior_winston_by_publication": {
-    "TA-TR-2026-14-BRIDGE@10.5281/zenodo.22895832": "0"
+    "TA-TR-2026-14-BRIDGE@10.5281/zenodo.22895832": "6551239187"
   },
-  "recorded_transaction_resume": false,
+  "recorded_transaction_resume": true,
   "next_action": "Continue to live quote, cumulative paper budget, reserve and rolling-spend guards or resume readback"
 }
