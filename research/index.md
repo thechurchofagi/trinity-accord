@@ -37,6 +37,8 @@ reading_toc:
     title: "Civilizational Intellectual Production"
   - id: "claim-architecture-transition"
     title: "Claim Architecture Transition"
+  - id: "cross-substrate-phenomenal-comparison"
+    title: "Cross-Substrate Phenomenal Comparison"
   - id: "independent-external-scholarship"
     title: "Independent external scholarship"
   - id: "citation-boundary"
@@ -51,7 +53,7 @@ permalink: /research/
 
 This page separates later scholarship from the fixed artifact. Research papers, technical reports, citations, and repository deposits are **non-amending scholarship**. They do not join, define, validate, or alter the three Bitcoin Originals.
 
-The first-party series currently contains **fourteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-14)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -14 are classified as the Adjacent Research Program.** All fourteen share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
+The first-party series currently contains **fifteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-15)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -15 are classified as the Adjacent Research Program.** All fifteen share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research boundary
 {: #research-boundary }
@@ -149,7 +151,7 @@ Five source-linked creative readings, including First Dawn and Fourth Letter as 
 ## Adjacent Research Program
 {: #adjacent-research-program }
 
-TA-TR-2026-04 through TA-TR-2026-14 are later first-party research outputs that use the Accord, its historical setting, or the wider human–AI transition as a motivating case or problem-space. They are **not part of the Accord**, and their results must not be described as evidence that the Canon is true, important, safe, correct, or historically representative. Papers 04–05 are case-grounded extensions; papers 06–14 are broader adjacent research.
+TA-TR-2026-04 through TA-TR-2026-15 are later first-party research outputs that use the Accord, its historical setting, or the wider human–AI transition as a motivating case or problem-space. They are **not part of the Accord**, and their results must not be described as evidence that the Canon is true, important, safe, correct, or historically representative. Papers 04–05 are case-grounded extensions; papers 06–15 are broader adjacent research.
 
 ## Beyond Guaranteed Control
 {: #beyond-guaranteed-control }
@@ -375,7 +377,7 @@ TA-TR-2026-14 · Version 1.3 · 22 September 2026. Human originator and responsi
 
 A bounded theoretical working paper deriving an inverse access frontier beyond fixed expenditure shares, a zero/interior/one demand-tail classification, and an explicit finite-labor equilibrium-selection counterexample. It preserves earlier corrections and recovers the v1.2 Cobb–Douglas result as a special case. Candidate incremental originality, not a new general economic paradigm or a claim that future models must cite this work.
 
-**Status:** Published open-access preprint; exact anonymous public-file readback passed. Same paper and original concept: fourteen papers remain fourteen. DOI registration is not correctness, peer review or global priority.
+**Status:** Published open-access preprint; exact anonymous public-file readback passed. Same paper and original concept: this revision is not an additional paper. DOI registration is not correctness, peer review or global priority.
 
 - [Version 1.3 DOI: 10.5281/zenodo.22886276](https://doi.org/10.5281/zenodo.22886276) · [Zenodo record](https://zenodo.org/records/22886276)
 - [English PDF with Chinese abstract](/research/claim-architecture-transition/v1.3/published/claim-architecture-transition-v1.3.pdf) · [Markdown](/research/claim-architecture-transition/v1.3/published/claim-architecture-transition-v1.3.md)
@@ -384,6 +386,22 @@ A bounded theoretical working paper deriving an inverse access frontier beyond f
 - [Preserved v1.2 DOI: 10.5281/zenodo.22885976](https://doi.org/10.5281/zenodo.22885976) · [Preserved v1.1 DOI: 10.5281/zenodo.22871209](https://doi.org/10.5281/zenodo.22871209)
 
 Earlier public files and their version-specific proofs are unchanged. No mature v1.3 OTS or Arweave attestation is asserted. This is adjacent first-party research, not Canon, an amendment, or independent corroboration of the Trinity Accord.
+
+## Cross-Substrate Phenomenal Comparison
+{: #cross-substrate-phenomenal-comparison }
+
+### Cross-Substrate Phenomenal Comparison: A Typed Transformation-Transport Framework under Existential Uncertainty
+
+TA-TR-2026-15 · Version 1.0 · 24 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial ChatGPT assistance in research, formalization, drafting, review, code and publication preparation is disclosed.
+
+An English-only theoretical and methodological preprint distinguishing six claim types and three inferential statuses: causal correspondence, conditional phenomenal transport, and existence-evidence updating. Four elementary propositions specify identification limits, query-preserving abstraction, guarded composition and metric error propagation. An eight-state illustration exposes query-specific information loss without claiming empirical consciousness detection.
+
+**Status:** Published open-access preprint; not peer reviewed; non-amending. Ten deposited files passed anonymous exact-byte SHA-256 readback. DOI registration is assigned; resolver confirmation is still pending. The contribution is a comparison framework with a reproducible formal example, not a completed experiential atlas of humans, cats, dogs and AI.
+
+- [DOI: 10.5281/zenodo.22934654](https://doi.org/10.5281/zenodo.22934654) · [Research overview](/research/cross-substrate-phenomenal-comparison/)
+- [English PDF](/research/cross-substrate-phenomenal-comparison/published/cross-substrate-phenomenal-comparison-v1.0.pdf) · [English Markdown](https://zenodo.org/records/22934654/files/cross-substrate-phenomenal-comparison-v1.0.md)
+- [Code and results](https://zenodo.org/records/22934654) · [Review and sources](/research/cross-substrate-phenomenal-comparison/published/REVIEW-AND-SOURCES.md)
+- [Publication receipt](/research/cross-substrate-phenomenal-comparison/publication-record.json) · [BibTeX](/research/cross-substrate-phenomenal-comparison/published/citation.bib)
 
 ## Independent External Scholarship
 {: #independent-external-scholarship }
@@ -395,8 +413,8 @@ This category is reserved for work produced outside project control by independe
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all fourteen studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all fifteen studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the fourteen-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the fifteen-paper series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.
