@@ -81,22 +81,10 @@ jobs:
         if: steps.ots.outputs.ready == 'true'
         with:
           node-version-file: .node-version
-      - name: Respect current daily allowance and existing receipt
+      - name: Check the independent paper publication budget and receipt
         if: steps.ots.outputs.ready == 'true'
         id: budget
-        run: |
-          node --input-type=module <<'JS'
-          import fs from 'node:fs';
-          import {dailyLimit,paidToday} from './scripts/arweave_spend_budget_helpers.mjs';
-          const root=process.env.BATCH;
-          const ledger=JSON.parse(fs.readFileSync('record-chain/arweave-wallet-ledger.json','utf8'));
-          const rec=fs.existsSync(root+'/arweave-receipt.json')?JSON.parse(fs.readFileSync(root+'/arweave-receipt.json','utf8')):{};
-          const resume=Boolean(rec.tx_id||rec.txid);
-          const used=paidToday('research_paper_ots_archive',ledger),limit=dailyLimit('research_paper_ots_archive');
-          const allowed=process.env.GITHUB_REF_NAME==='main'&&(resume||used<limit);
-          fs.appendFileSync(process.env.GITHUB_OUTPUT,'allowed='+allowed+'\n');
-          fs.writeFileSync(root+'/scheduling-status.json',JSON.stringify({checked_at:new Date().toISOString(),state:allowed?'ELIGIBLE_OR_READBACK_RESUME':'DEFERRED_DAILY_ALLOWANCE',paid_research_uploads_today:used,daily_limit:limit,recorded_transaction_resume:resume},null,2)+'\n');
-          JS
+        run: node scripts/research_arweave_allowance.mjs "$BATCH"
       - name: Install existing upload dependencies
         if: steps.ots.outputs.ready == 'true' && steps.budget.outputs.allowed == 'true'
         run: npm ci
@@ -131,7 +119,7 @@ jobs:
           NODE_OPTIONS: --import=./scripts/arweave_runtime_spend_guard.mjs
           ARWEAVE_MINIMUM_REMAINING_AR: '0.25'
           ARWEAVE_MAX_PAYLOAD_BYTES: '4194304'
-          ARWEAVE_MAX_TRANSACTION_REWARD_AR: '0.05'
+          ARWEAVE_MAX_TRANSACTION_REWARD_AR: '0.099999999999'
           ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: '0.50'
           ARWEAVE_READBACK_MAX_SECONDS: '420'
           ARWEAVE_HTTP_TIMEOUT_MS: '30000'

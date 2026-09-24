@@ -89,3 +89,22 @@ try {
 }
 
 console.log("PASS: Arweave runtime reward, payload, and rolling-spend helpers fail closed");
+
+// The paper exception is independent of daily limits and uses exact integers.
+const {assertPaperBudget, payloadPublicationKeys, publicationKeys} = await import('./research_paper_budget.mjs');
+const paper = 'TA-TR-2026-15@10.5281/zenodo.22934654';
+const other = 'TA-TR-2026-14@10.5281/zenodo.22886276';
+const spent = {entries:[{kind:'research_paper_ots_archive',status:'paid',tx_id:'prior',winston:'60000000000'}]};
+assert.equal(dailyLimit('research_paper_ots_archive'), null);
+assert.equal(dailyLimit('native_ots_bundle_archive'), 1);
+assertPaperBudget([paper], {entries:[]}, 99999999999n, ()=>[]);
+assert.throws(()=>assertPaperBudget([paper], {entries:[]}, 100000000000n, ()=>[]), /strictly < 0.1/);
+assertPaperBudget([paper], spent, 39999999999n, ()=>[paper]);
+assert.throws(()=>assertPaperBudget([paper], spent, 40000000000n, ()=>[paper]), /strictly < 0.1/);
+assertPaperBudget([other], spent, 99999999999n, ()=>[paper]);
+assert.throws(()=>assertPaperBudget([paper], {entries:[{...spent.entries[0],winston:null}]}, 1n, ()=>[paper]), /Uncertain/);
+assert.throws(()=>assertPaperBudget([paper], {entries:[...spent.entries,...spent.entries]}, 1n, ()=>[paper]), /duplicate/);
+assert.throws(()=>assertPaperBudget([paper,other], spent, 40000000000n, ()=>[paper,other]), /strictly < 0.1/);
+assert.throws(()=>payloadPublicationKeys(Buffer.from('{}')), /schema/);
+assert.deepEqual(publicationKeys({paper_count:1,papers:[{report:'TA-TR-2026-15',doi:'10.5281/zenodo.22934654'}]}),[paper]);
+console.log('PASS: independent paper budgets, strict boundary, cumulative cost, shared bundles and fail-closed accounting');

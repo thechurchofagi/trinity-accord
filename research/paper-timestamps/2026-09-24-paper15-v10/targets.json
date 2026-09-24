@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-24-paper15-v10",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-15",
+      "record_id": 22934654,
+      "doi": "10.5281/zenodo.22934654",
+      "version": "1.0",
+      "title": "Cross-Substrate Phenomenal Comparison: A Typed Transformation-Transport Framework under Existential Uncertainty",
+      "receipt_path": "research/cross-substrate-phenomenal-comparison/publication-record.json",
+      "pdfs": [
+        {
+          "name": "cross-substrate-phenomenal-comparison-v1.0.pdf",
+          "bytes": 210028,
+          "sha256": "7766c6aaeec82fc34a5fca957f7d1a25616493fb9eb86dc9b3db09e1c8773a5d",
+          "role": "Complete English v1.0 theoretical and methodological preprint"
+        }
+      ]
+    }
+  ]
+}

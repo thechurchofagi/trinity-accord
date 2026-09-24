@@ -1,0 +1,46 @@
+name: Reconcile TA15 public DOI
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/reconcile-cross-substrate-doi.yml'
+      - 'research/cross-substrate-phenomenal-comparison/reconcile_doi.py'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+permissions:
+  contents: write
+concurrency:
+  group: main-write-lock
+  queue: max
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+          fetch-depth: 0
+          sparse-checkout: |
+            research/cross-substrate-phenomenal-comparison
+            scripts
+      - name: Record repository toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
+      - name: Verify public resolver without publication credentials
+        run: python3 research/cross-substrate-phenomenal-comparison/reconcile_doi.py
+      - name: Preserve only a successfully verified status
+        run: |
+          git add research/cross-substrate-phenomenal-comparison/publication-record.json research/cross-substrate-phenomenal-comparison/publication-attempt.json research/index.md
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'research: confirm TA15 public DOI resolution'
+          for attempt in 1 2 3; do
+            git fetch origin main --prune
+            git rebase origin/main || { git rebase --abort; exit 1; }
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          exit 1

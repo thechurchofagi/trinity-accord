@@ -1,5 +1,6 @@
 import importlib.util
 import copy
+import base64
 from pathlib import Path
 import tempfile
 import unittest
@@ -57,6 +58,29 @@ class PaperProofTests(unittest.TestCase):
             proof.serialize(ctx)
             path.write_bytes(ctx.getbytes())
             self.assertEqual(module.proof_details(path, expected), ([900000], 1))
+
+    def test_paid_bundle_resumes_without_upgrading_or_repaying(self):
+        with tempfile.TemporaryDirectory() as directory:
+            batch = Path(directory)
+            item = {'name':'paper.pdf','sha256':module.digest(b'%PDF-example')}
+            config = {'papers':[{'report':'TA-TR-2026-15','doi':'10.5281/zenodo.22934654','pdfs':[item]}]}
+            verified = {'state':'READY_FOR_ARWEAVE','paper_count':1,'pdf_count':1,
+                        'files':[{'report':'TA-TR-2026-15','doi':'10.5281/zenodo.22934654',**item,
+                                  'state':'BITCOIN_VERIFIED_REMOTE_HEADERS'}]}
+            module.write(batch/'targets.json', config)
+            module.write(batch/'arweave-bundle.json', {'targets':config,'verification':verified,
+                         'files':[{'sha256':item['sha256'],'base64':base64.b64encode(b'%PDF-example').decode()}]})
+            sha = module.digest((batch/'arweave-bundle.json').read_bytes())
+            module.write(batch/'arweave-receipt.json', {'tx_id':'already-paid','payload_sha256':sha})
+            module.write(batch/'status.json', {'state':'WAITING'})
+            with patch.object(module, 'validate_config', return_value=(config['papers'],1)), patch.object(module,'run') as runner:
+                module.lifecycle(batch)
+                runner.assert_not_called()
+                self.assertEqual(module.read(batch/'status.json'),verified)
+                module.write(batch/'arweave-receipt.json', {'tx_id':'already-paid','payload_sha256':'wrong'})
+                with self.assertRaisesRegex(ValueError, 'frozen OTS bundle'):
+                    module.lifecycle(batch)
+                runner.assert_not_called()
 
     def test_pending_proofs_cannot_reach_paid_uploader(self):
         with tempfile.TemporaryDirectory() as directory:

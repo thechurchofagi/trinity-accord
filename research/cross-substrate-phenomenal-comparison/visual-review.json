@@ -1,0 +1,9 @@
+{
+  "state": "EXACT_PUBLICATION_PACKAGE_REVIEW_PASS",
+  "expected_manifest_sha256": "5219ad9183465661b628d28599b64619d890875ab829f30a7fe98ebb7ba3e9d3",
+  "review_type": "AI-assisted mathematical, editorial and rendered-PDF review under user instruction",
+  "pages_inspected": 27,
+  "first_page_abstract_and_keywords_complete": true,
+  "tables_equations_code_references_checked": true,
+  "independent_peer_review": false
+}

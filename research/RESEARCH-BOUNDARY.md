@@ -30,9 +30,9 @@ The existing six-role map is retained:
 
 ## Classify by research object and contribution
 
-**TA-TR-2026-01 through -03 remain First-party Accord Studies. TA-TR-2026-04 through -14 remain the Adjacent Research Program.** This classification is based on what each paper principally tries to establish, not simply its number or whether its conclusions favor the project.
+**TA-TR-2026-01 through -03 remain First-party Accord Studies. TA-TR-2026-04 through -15 remain the Adjacent Research Program.** This classification is based on what each paper principally tries to establish, not simply its number or whether its conclusions favor the project.
 
-**Papers 04–05 are case-grounded extensions**, not unrelated work: the fourth applies a general coexistence framework to the Star Ark Covenant; the fifth develops a bounded recovery framework motivated by the archive. Papers 06–14 address broader questions. A mixed paper may have both a general contribution and a case application; these are not competing claims to canonical membership.
+**Papers 04–05 are case-grounded extensions**, not unrelated work: the fourth applies a general coexistence framework to the Star Ark Covenant; the fifth develops a bounded recovery framework motivated by the archive. Papers 06–15 address broader questions. A mixed paper may have both a general contribution and a case application; these are not competing claims to canonical membership.
 
 ### Paper-by-paper topic and evidence map
 
@@ -54,8 +54,9 @@ The following are editorial descriptions of the versions indexed at the audit sn
 | **12** | AI-status narratives and control judgments; broader adjacent research. | Theory-method analysis and design-validation simulations. These are not measured effects in deployed frontier models. |
 | **13** | Human–AI intellectual-production accounting; broader adjacent research. | Measurement framework, partial identification, and stipulated simulations. Not an observed worldwide human–AI production split. |
 | **14** | Claim architecture and distribution; broader adjacent research. | Theoretical economic model and conditional analysis. Not a measured transition forecast or empirical validation of the Accord. |
+| **15** | Cross-substrate phenomenal comparison; broader adjacent research. | Typed transport framework, conditional propositions and a reproducible finite-state illustration. Not an empirical comparison of species or evidence of AI consciousness. |
 
-**Relationship, research method, publication status, and evidential strength are separate axes.** “Adjacent” does not mean unimportant; “direct” does not mean correct; “formal” does not establish empirical applicability; “published” does not mean peer reviewed. Method labels do not certify novelty. The six-paper critical-use guide remains a dated guide to its original scope, not a completed review of fourteen papers.
+**Relationship, research method, publication status, and evidential strength are separate axes.** “Adjacent” does not mean unimportant; “direct” does not mean correct; “formal” does not establish empirical applicability; “published” does not mean peer reviewed. Method labels do not certify novelty. The six-paper critical-use guide remains a dated guide to its original scope, not a completed review of fifteen papers.
 
 ## What can change, and what cannot
 
@@ -65,7 +66,7 @@ Conversely, a sound study may improve understanding, identify a reusable design 
 
 The rule “a paper's failure or retraction does not modify the Canon” protects **source bytes and identity**, not reputation or truth. A failure in an adjacent consciousness hypothesis is not automatically a failure of the archive; a demonstrated error in the archive's own factual claims cannot be dismissed merely because it was found in research.
 
-Shared authorship, AI assistance, inherited premises, reused sources, and reused experiments must remain visible. Fourteen related papers are not fourteen independent witnesses. Equally, first-party evidence is not worthless merely because it is first-party. Evaluate the relevant dependencies rather than counting paper titles.
+Shared authorship, AI assistance, inherited premises, reused sources, and reused experiments must remain visible. Fifteen related papers are not fifteen independent witnesses. Equally, first-party evidence is not worthless merely because it is first-party. Evaluate the relevant dependencies rather than counting paper titles.
 
 ## Independent External Scholarship
 

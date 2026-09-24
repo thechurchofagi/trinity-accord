@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import {dailyLimit, paidToday} from './arweave_spend_budget_helpers.mjs';
+import {PAPER_CAP_WINSTON, publicationKeys, paperPaidWinston, ledgerPublicationKeys} from './research_paper_budget.mjs';
 
 const batch = process.argv[2];
 if (!batch || !process.env.GITHUB_OUTPUT) {
@@ -20,15 +20,17 @@ if (resume) {
     throw new Error('Recorded transaction does not match this frozen payload');
   }
 }
-const used = paidToday('research_paper_ots_archive', ledger);
-const limit = dailyLimit('research_paper_ots_archive');
+const keys = publicationKeys(read(path.join(batch, 'targets.json')));
+const totals = paperPaidWinston(keys, ledger, ledgerPublicationKeys);
 const main = process.env.GITHUB_REF_NAME === 'main';
-const allowed = main && (resume || used < limit);
-const state = allowed ? 'ELIGIBLE_OR_READBACK_RESUME' : main ? 'DEFERRED_DAILY_ALLOWANCE' : 'DEFERRED_MAIN_BRANCH';
+const remaining = Object.values(totals).every(n => n < PAPER_CAP_WINSTON);
+const allowed = main && (resume || remaining);
+const state = allowed ? 'ELIGIBLE_OR_READBACK_RESUME' : main ? 'DEFERRED_PAPER_BUDGET' : 'DEFERRED_MAIN_BRANCH';
 const scheduling = {
-  state, paid_research_uploads_today: used, daily_limit: limit,
+  state, budget_policy: 'per-publication-strictly-less-than-0.1-AR', daily_limit_applies: false,
+  prior_winston_by_publication: Object.fromEntries(Object.entries(totals).map(([k,v])=>[k,String(v)])),
   recorded_transaction_resume: resume,
-  next_action: allowed ? 'Continue guarded upload or readback' : 'Wait for a later scheduled run; do not raise limits',
+  next_action: allowed ? 'Continue to live quote, cumulative paper budget, reserve and rolling-spend guards or resume readback' : 'Resolve paper budget or main-branch eligibility',
 };
 // Stable scheduling receipts avoid hourly no-op commits while waiting.
 fs.writeFileSync(path.join(batch, 'scheduling-status.json'), JSON.stringify(scheduling, null, 2) + '\n');

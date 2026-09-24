@@ -104,29 +104,10 @@ jobs:
         with:
           node-version-file: .node-version
 
-      - name: Respect the existing daily allowance before installing paid-upload dependencies
+      - name: Check the independent paper publication budget and receipt
         if: steps.ots.outputs.ready == 'true'
         id: budget
-        run: |
-          node --input-type=module <<'JS'
-          import fs from 'node:fs';
-          import {dailyLimit, paidToday} from './scripts/arweave_spend_budget_helpers.mjs';
-          const root='research/paper-timestamps/2026-09-21-paper11-v20/';
-          const ledger=JSON.parse(fs.readFileSync('record-chain/arweave-wallet-ledger.json','utf8'));
-          const receipt=fs.existsSync(root+'arweave-receipt.json') ? JSON.parse(fs.readFileSync(root+'arweave-receipt.json','utf8')) : {};
-          const resume=Boolean(receipt.tx_id || receipt.txid);
-          const used=paidToday('research_paper_ots_archive',ledger);
-          const limit=dailyLimit('research_paper_ots_archive');
-          const main=process.env.GITHUB_REF_NAME === 'main';
-          const allowed=main && (resume || used < limit);
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, 'allowed='+allowed+'\n');
-          fs.writeFileSync(root+'scheduling-status.json', JSON.stringify({
-            checked_at:new Date().toISOString(), state:allowed?'ELIGIBLE_OR_READBACK_RESUME':main?'DEFERRED_DAILY_ALLOWANCE':'DEFERRED_MAIN_BRANCH',
-            paid_research_uploads_today:used, daily_limit:limit, recorded_transaction_resume:resume,
-            next_action:allowed?'Continue guarded upload or readback':'Wait for a later scheduled run; do not raise limits'
-          },null,2)+'\n');
-          console.log(allowed?'Existing spend gates remain in force.':'No paid attempt: wait for main branch and available daily allowance.');
-          JS
+        run: node scripts/research_arweave_allowance.mjs research/paper-timestamps/2026-09-21-paper11-v20
 
       - name: Install existing Arweave dependencies
         if: steps.ots.outputs.ready == 'true' && steps.budget.outputs.allowed == 'true'
@@ -173,7 +154,7 @@ jobs:
           NODE_OPTIONS: --import=./scripts/arweave_runtime_spend_guard.mjs
           ARWEAVE_MINIMUM_REMAINING_AR: '0.25'
           ARWEAVE_MAX_PAYLOAD_BYTES: '4194304'
-          ARWEAVE_MAX_TRANSACTION_REWARD_AR: '0.05'
+          ARWEAVE_MAX_TRANSACTION_REWARD_AR: '0.099999999999'
           ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: '0.50'
           ARWEAVE_READBACK_MAX_SECONDS: '420'
           ARWEAVE_HTTP_TIMEOUT_MS: '30000'

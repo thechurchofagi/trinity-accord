@@ -16,6 +16,10 @@ import {
   rollingPaidWinston,
 } from "./arweave_spend_budget_helpers.mjs";
 
+import {assertPaperBudget, payloadPublicationKeys} from "./research_paper_budget.mjs";
+
+const paperTransactions = new WeakMap();
+
 function envTrue(name) {
   return ["1", "true", "yes", "on"].includes(
     String(process.env[name] || "").trim().toLowerCase()
@@ -86,7 +90,9 @@ Arweave.init = function guardedInit(config) {
         );
       }
     }
+    const paperKeys = paidKind() === "research_paper_ots_archive" ? payloadPublicationKeys(args[0]?.data) : null;
     const transaction = await originalCreateTransaction(...args);
+    if (paperKeys) paperTransactions.set(transaction, paperKeys);
     const originalAddTag = transaction.addTag.bind(transaction);
     transaction.addTag = (name, value) => {
       if (
@@ -107,7 +113,7 @@ Arweave.init = function guardedInit(config) {
       const ledger = walletLedger();
       const limit = dailyLimit(kind);
       const count = paidToday(kind, ledger);
-      if (count >= limit) {
+      if (limit !== null && count >= limit) {
         throw new Error(
           `Daily paid Arweave upload limit reached for ${kind}: ${count}/${limit}`
         );
@@ -118,13 +124,15 @@ Arweave.init = function guardedInit(config) {
       const address = await instance.wallets.ownerToAddress(owner);
       const balance = BigInt(await instance.wallets.getBalance(address));
       const reward = BigInt(String(transaction.reward || "0"));
-      // Keep the repository-wide hard maximum at 0.05 AR. The fixed
-      // research-paper OTS archive is a one-off ~2 MiB evidence bundle whose
-      // live reward quote is slightly above that default, so allow only this
-      // recognized kind a narrowly higher ceiling. Daily, rolling-30-day,
-      // payload-size, and minimum-reserve gates still apply unchanged.
+      // Paper publications use their own strict 0.1 AR cumulative budget.
+      // Other upload types retain the existing transaction and daily limits.
       const hardRewardMaximum =
-        kind === "research_paper_ots_archive" ? "0.055" : DEFAULT_MAX_TRANSACTION_REWARD_AR;
+        kind === "research_paper_ots_archive" ? "0.099999999999" : DEFAULT_MAX_TRANSACTION_REWARD_AR;
+      if (kind === "research_paper_ots_archive") {
+        const keys = paperTransactions.get(transaction);
+        if (!keys) throw new Error("Paper transaction lacks payload-bound publication identity");
+        assertPaperBudget(keys, ledger, reward);
+      }
       const maxReward = boundedArBudget(
         "ARWEAVE_MAX_TRANSACTION_REWARD_AR",
         hardRewardMaximum

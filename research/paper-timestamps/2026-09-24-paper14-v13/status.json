@@ -1,0 +1,23 @@
+{
+  "batch": "2026-09-24-paper14-v13",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 135289,
+      "doi": "10.5281/zenodo.22886276",
+      "name": "claim-architecture-transition-v1.3.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-24-paper14-v13/proofs/TA-TR-2026-14/claim-architecture-transition-v1.3.pdf.ots",
+      "proof_sha256": "2303b1c7bb4e23713a6dc085881f12c1f5c104c5aa8f43bf8eb15649ca169874",
+      "report": "TA-TR-2026-14",
+      "role": "Previously published English v1.3 PDF preserved unchanged",
+      "sha256": "693bf3381df151864b00ab382155dd83834f4c0ca1b986a76d31d3081beea119",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 1,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}

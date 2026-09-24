@@ -1,0 +1,23 @@
+{
+  "batch": "2026-09-24-paper15-v10",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 210028,
+      "doi": "10.5281/zenodo.22934654",
+      "name": "cross-substrate-phenomenal-comparison-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-24-paper15-v10/proofs/TA-TR-2026-15/cross-substrate-phenomenal-comparison-v1.0.pdf.ots",
+      "proof_sha256": "1b624cab88e34c384e56bf002bb357cb296f134d611edaf77a557e400862dd21",
+      "report": "TA-TR-2026-15",
+      "role": "Complete English v1.0 theoretical and methodological preprint",
+      "sha256": "7766c6aaeec82fc34a5fca957f7d1a25616493fb9eb86dc9b3db09e1c8773a5d",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 1,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}

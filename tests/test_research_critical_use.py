@@ -39,12 +39,12 @@ class CriticalUseTests(unittest.TestCase):
     def setUp(self):
         self.texts = [(ROOT / 'research' / p).read_text(encoding='utf-8') for p in GUIDES]
         self.index = (ROOT / 'research/index.md').read_text(encoding='utf-8')
-        self.assertIn('fourteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-14)', self.index)
-        self.series_word = 'fourteen'
+        self.assertIn('fifteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-15)', self.index)
+        self.series_word = 'fifteen'
         self.assertIn('TA-TR-2026-01 through -03 are classified as First-party Accord Studies', self.index)
-        self.assertIn('TA-TR-2026-04 through -14 are classified as the Adjacent Research Program', self.index)
+        self.assertIn('TA-TR-2026-04 through -15 are classified as the Adjacent Research Program', self.index)
 
-    def test_fourteen_distinct_paper_sections_have_their_own_current_dois(self):
+    def test_fifteen_distinct_paper_sections_have_their_own_current_dois(self):
         papers = [
             ('Current technical report', '21699878'),
             ('Historical-position study', '21900592'),
@@ -60,6 +60,7 @@ class CriticalUseTests(unittest.TestCase):
             ('Training the Governed Agent', '22866205'),
             ('Civilizational Intellectual Production', '22866775'),
             ('Claim Architecture Transition', '22871209'),
+            ('Cross-Substrate Phenomenal Comparison', '22934654'),
         ]
         section_rows = re.findall(r'^## ([^\n]+)\n(.*?)(?=^## |\Z)', self.index, re.M | re.S)
         sections = dict(section_rows)
@@ -67,7 +68,7 @@ class CriticalUseTests(unittest.TestCase):
         paper_sections = {title: body for title, body in sections.items()
                           if re.search(r'^### ', body, re.M)}
         self.assertEqual(set(paper_sections), {title for title, _ in papers})
-        self.assertEqual(len(paper_sections), 14)
+        self.assertEqual(len(paper_sections), 15)
         for number, (title, record_id) in enumerate(papers, 1):
             body = paper_sections[title]
             self.assertIn('https://doi.org/10.5281/zenodo.' + record_id, body)
@@ -89,7 +90,7 @@ class CriticalUseTests(unittest.TestCase):
         self.assertIn('for the original six papers', self.index)
         self.assertNotIn('six independent research papers', self.index)
         self.assertNotIn(f'{self.series_word} independent research papers', self.index)
-        self.assertIn('All fourteen share a first-party, substantially AI-assisted research context and are not independent corroborations', self.index)
+        self.assertIn('All fifteen share a first-party, substantially AI-assisted research context and are not independent corroborations', self.index)
         self.assertIn('## Independent External Scholarship', self.index)
         self.assertIn('Current indexed independent external scholarship: none', self.index)
 

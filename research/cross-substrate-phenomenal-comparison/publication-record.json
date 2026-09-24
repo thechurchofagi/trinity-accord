@@ -1,0 +1,95 @@
+{
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "report_number": "TA-TR-2026-15",
+  "title": "Cross-Substrate Phenomenal Comparison: A Typed Transformation-Transport Framework under Existential Uncertainty",
+  "version": "1.0",
+  "record_id": 22934654,
+  "doi": "10.5281/zenodo.22934654",
+  "record_url": "https://zenodo.org/records/22934654",
+  "submitted": true,
+  "file_count": 10,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 925,
+      "sha256": "6ceba7008aec34d550af69b1eb0595d1817307f78030c0fd75f9b60d7a223d11",
+      "public_url": "https://zenodo.org/api/records/22934654/files/README-LICENSE.txt/content"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 5898,
+      "sha256": "fd633cbfed3f68c03d085f21588c070977a87e40d58a574bd9211f380801418e",
+      "public_url": "https://zenodo.org/api/records/22934654/files/REVIEW-AND-SOURCES.md/content"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 816,
+      "sha256": "4ebe4f207df81322c448b1019bec9d4afe9a3436a4dc25f370e3471ac62f4f77",
+      "public_url": "https://zenodo.org/api/records/22934654/files/SHA256SUMS.txt/content"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 483,
+      "sha256": "e395706a39da293506218d4cdb2a9bc97dca69b6a396529b8fdaae0191c8be3a",
+      "public_url": "https://zenodo.org/api/records/22934654/files/citation.bib/content"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 537,
+      "sha256": "18d7595ff6f3c9135a18b571a58e0449a5a347eaf63653e440a9bf2a6f5634fb",
+      "public_url": "https://zenodo.org/api/records/22934654/files/citation.csl.json/content"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 374,
+      "sha256": "35c904fe5f9ff99f166becde4efadba0ff674683fea8c7101364a0f8829a3b6e",
+      "public_url": "https://zenodo.org/api/records/22934654/files/citation.ris/content"
+    },
+    {
+      "name": "cross-substrate-phenomenal-comparison-v1.0.md",
+      "bytes": 78742,
+      "sha256": "8643196bd281e88be3cd753297eb846251a855e9d2ac3f576dbd49437cbafc85",
+      "public_url": "https://zenodo.org/api/records/22934654/files/cross-substrate-phenomenal-comparison-v1.0.md/content"
+    },
+    {
+      "name": "cross-substrate-phenomenal-comparison-v1.0.pdf",
+      "bytes": 210028,
+      "sha256": "7766c6aaeec82fc34a5fca957f7d1a25616493fb9eb86dc9b3db09e1c8773a5d",
+      "public_url": "https://zenodo.org/api/records/22934654/files/cross-substrate-phenomenal-comparison-v1.0.pdf/content"
+    },
+    {
+      "name": "transport_example.py",
+      "bytes": 5768,
+      "sha256": "478d119abd120a9ac3ecd5ce14f518fb56ee3378d54118a3b1f5a34ec31a5b67",
+      "public_url": "https://zenodo.org/api/records/22934654/files/transport_example.py/content"
+    },
+    {
+      "name": "transport_results.json",
+      "bytes": 522,
+      "sha256": "8c0c72df29939706250f0ee0ebbe4419f52e9e9c05a6e0deaa741bb729d817c6",
+      "public_url": "https://zenodo.org/api/records/22934654/files/transport_results.json/content"
+    }
+  ],
+  "expected_manifest_sha256": "5219ad9183465661b628d28599b64619d890875ab829f30a7fe98ebb7ba3e9d3",
+  "public_readback_authenticated": false,
+  "doi_resolver": {
+    "state": "RESOLVER_PASS",
+    "http_status": 200,
+    "final_url": "https://zenodo.org/records/22934654",
+    "matches_record": true,
+    "checked_at": "2026-09-24T09:34:41.211083+00:00",
+    "authenticated": false
+  },
+  "public_file_readback_pass": true,
+  "doi_resolution_pass": true,
+  "source_commit": "34a6bb7984767b806b61c4bb19e390d31e34025d",
+  "workflow_run_id": "35978524165",
+  "was_already_published": true,
+  "prior_doi_records_modified": false,
+  "bitcoin_originals_modified": false,
+  "new_research_papers": 1,
+  "peer_reviewed": false,
+  "global_originality_certified": false,
+  "google_scholar_indexing": "NOT_ASSERTED",
+  "manuscript_language": "eng"
+}

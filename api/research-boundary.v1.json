@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.research-boundary.v1",
-  "version": "1.1",
-  "updated_at": "2026-09-22",
+  "version": "1.2",
+  "updated_at": "2026-09-24",
   "status": "active_non_amending_relation_map",
   "canonical_authority": "three Bitcoin Originals only",
   "human_readable": "/research/research-boundary/",
@@ -302,6 +302,24 @@
       ],
       "classification_reason": "The principal question concerns distributive claims under a proposed economic transition.",
       "evidence_limit": "Model-conditional arguments are not measured transition forecasts or empirical validation of the Accord."
+    },
+    {
+      "report": "TA-TR-2026-15",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Cross-substrate phenomenal comparison and conditional transport",
+      "index_entry": "/research/#cross-substrate-phenomenal-comparison",
+      "method_types": [
+        "theoretical_methodological_framework",
+        "conditional_mathematical_propositions",
+        "finite_state_illustration"
+      ],
+      "classification_reason": "The principal contribution concerns claim-specific transport between heterogeneous systems under unresolved phenomenal assumptions.",
+      "evidence_limit": "The formal illustration is not empirical evidence of consciousness, measured species profiles, or independent validation of the Accord."
     }
   ],
   "independent_external_scholarship": [],
@@ -338,6 +356,10 @@
     "index": "/research/",
     "rule": "Classify by primary research object and contribution, not report number, prestige, or compatibility with the Accord. Relation, method, publication status, and evidential strength are separate axes. Unknown reports remain unclassified until reviewed.",
     "scope": "Portfolio-level editorial descriptions of the indexed versions, not independent peer review, replication, or exhaustive originality assessment. Translations and revisions are not additional papers.",
-    "version_note": "Main indexes paper 10 v1.1. PR #1232 proposes v1.2 and remains unmerged at this audit snapshot; this relation map does not certify the latest deposited edition. Cite exact paper versions and their receipts."
+    "version_note": "Main indexes paper 10 v1.1. PR #1232 proposes v1.2 and remains unmerged at this audit snapshot; this relation map does not certify the latest deposited edition. Cite exact paper versions and their receipts.",
+    "paper15_addition": {
+      "date": "2026-09-24",
+      "scope": "TA-TR-2026-15 v1.0 reviewed as adjacent methodological research; earlier classifications retained."
+    }
   }
 }

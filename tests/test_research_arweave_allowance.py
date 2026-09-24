@@ -12,16 +12,22 @@ SCRIPT = Path(__file__).resolve().parents[1] / 'scripts/research_arweave_allowan
 
 
 class AllowanceTests(unittest.TestCase):
-    def check_gate(self, *, paid=True, resume=False, mismatch=False, branch='main', limit='1', malformed=False):
+    def check_gate(self, *, paid=True, resume=False, mismatch=False, branch='main', limit='1', malformed=False, cost='1'):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / 'record-chain').mkdir()
             ledger = root / 'record-chain/arweave-wallet-ledger.json'
             entries = [{'status': 'paid', 'kind': 'research_paper_ots_archive',
-                        'paid_at': datetime.now(timezone.utc).isoformat()}] if paid else []
+                        'paid_at': datetime.now(timezone.utc).isoformat(), 'tx_id':'prior', 'winston':cost,
+                        'source_path':'research/paper-timestamps/prior/arweave-receipt.json'}] if paid else []
             ledger.write_text('invalid' if malformed else json.dumps({'entries': entries}))
             batch = root / 'batch'
             batch.mkdir()
+            targets = {'paper_count':1, 'papers':[{'report':'TA-TR-2026-15','doi':'10.5281/zenodo.22934654'}]}
+            (batch / 'targets.json').write_text(json.dumps(targets))
+            prior = root / 'research/paper-timestamps/prior'
+            prior.mkdir(parents=True)
+            (prior / 'targets.json').write_text(json.dumps(targets))
             (batch / 'status.json').write_text('{"state":"READY_FOR_ARWEAVE"}')
             (batch / 'arweave-bundle.json').write_bytes(b'fixed payload')
             if resume:
@@ -40,11 +46,11 @@ class AllowanceTests(unittest.TestCase):
             return result.returncode, output.read_text() if output.exists() else '', (
                 json.loads(scheduling.read_text()) if scheduling.exists() else {})
 
-    def test_exhausted_allowance_defers_without_claiming_completion(self):
+    def test_daily_allowance_does_not_apply_to_papers(self):
         rc, out, status = self.check_gate()
         self.assertEqual(rc, 0)
-        self.assertEqual(out, 'allowed=false\n')
-        self.assertEqual(status['state'], 'DEFERRED_DAILY_ALLOWANCE')
+        self.assertEqual(out, 'allowed=true\n')
+        self.assertFalse(status['daily_limit_applies'])
 
     def test_unused_allowance_can_reach_existing_guard(self):
         rc, out, _ = self.check_gate(paid=False)
@@ -56,17 +62,26 @@ class AllowanceTests(unittest.TestCase):
         self.assertTrue(status['recorded_transaction_resume'])
 
     def test_payload_mismatch_and_invalid_ledger_fail_closed(self):
-        for kwargs in ({'resume': True, 'mismatch': True}, {'malformed': True}, {'limit': '2'}):
+        for kwargs in ({'resume': True, 'mismatch': True}, {'malformed': True}, {'cost': 'unknown'}):
             with self.subTest(kwargs=kwargs):
                 rc, out, _ = self.check_gate(**kwargs)
                 self.assertNotEqual(rc, 0)
                 self.assertEqual(out, '')
 
-    def test_non_main_and_zero_allowance_do_not_start_paid_uploads(self):
-        for kwargs in ({'branch': 'feature'}, {'limit': '0'}):
+    def test_main_branch_and_cumulative_budget_still_apply(self):
+        for kwargs in ({'branch': 'feature'}, {'cost': '100000000000'}):
             with self.subTest(kwargs=kwargs):
-                rc, out, _ = self.check_gate(paid=False, **kwargs)
+                rc, out, _ = self.check_gate(**kwargs)
                 self.assertEqual((rc, out), (0, 'allowed=false\n'))
+
+    def test_old_daily_environment_does_not_block_papers(self):
+        for limit in ('0', '1', '2'):
+            rc, out, _ = self.check_gate(limit=limit)
+            self.assertEqual((rc, out), (0, 'allowed=true\n'))
+
+    def test_existing_transaction_can_resume_at_budget_ceiling(self):
+        rc, out, _ = self.check_gate(resume=True, cost='100000000000')
+        self.assertEqual((rc, out), (0, 'allowed=true\n'))
 
 
 if __name__ == '__main__':
