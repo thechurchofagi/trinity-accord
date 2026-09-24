@@ -1,5 +1,5 @@
 {
-  "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
   "report_number": "TA-TR-2026-15",
   "title": "Cross-Substrate Phenomenal Comparison: A Typed Transformation-Transport Framework under Existential Uncertainty",
   "version": "1.0",
@@ -73,12 +73,15 @@
   "expected_manifest_sha256": "5219ad9183465661b628d28599b64619d890875ab829f30a7fe98ebb7ba3e9d3",
   "public_readback_authenticated": false,
   "doi_resolver": {
-    "state": "RESOLVER_CHECK_UNAVAILABLE",
-    "error_type": "HTTPError",
-    "matches_record": false
+    "state": "RESOLVER_PASS",
+    "http_status": 200,
+    "final_url": "https://zenodo.org/records/22934654",
+    "matches_record": true,
+    "checked_at": "2026-09-24T09:34:41.211083+00:00",
+    "authenticated": false
   },
   "public_file_readback_pass": true,
-  "doi_resolution_pass": false,
+  "doi_resolution_pass": true,
   "source_commit": "34a6bb7984767b806b61c4bb19e390d31e34025d",
   "workflow_run_id": "35978524165",
   "was_already_published": true,

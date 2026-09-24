@@ -398,7 +398,7 @@ TA-TR-2026-15 · Version 1.0 · 24 September 2026. Human author of record and re
 
 An English-only theoretical and methodological preprint distinguishing six claim types and three inferential statuses: causal correspondence, conditional phenomenal transport, and existence-evidence updating. Four elementary propositions specify identification limits, query-preserving abstraction, guarded composition and metric error propagation. An eight-state illustration exposes query-specific information loss without claiming empirical consciousness detection.
 
-**Status:** Published open-access preprint; not peer reviewed; non-amending. Ten deposited files passed anonymous exact-byte SHA-256 readback. DOI registration is assigned; resolver confirmation is still pending. The contribution is a comparison framework with a reproducible formal example, not a completed experiential atlas of humans, cats, dogs and AI.
+**Status:** Published open-access preprint; not peer reviewed; non-amending. Ten deposited files passed anonymous exact-byte SHA-256 readback. The DOI resolves to the public record. The contribution is a comparison framework with a reproducible formal example, not a completed experiential atlas of humans, cats, dogs and AI.
 
 - [DOI: 10.5281/zenodo.22934654](https://doi.org/10.5281/zenodo.22934654) · [Research overview](/research/cross-substrate-phenomenal-comparison/)
 - [English PDF](/research/cross-substrate-phenomenal-comparison/published/cross-substrate-phenomenal-comparison-v1.0.pdf) · [English Markdown](https://zenodo.org/records/22934654/files/cross-substrate-phenomenal-comparison-v1.0.md)
