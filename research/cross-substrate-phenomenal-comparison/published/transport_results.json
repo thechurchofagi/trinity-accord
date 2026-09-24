@@ -1,0 +1,16 @@
+{
+  "target_states": 8,
+  "causal_commutation_checks": 24,
+  "holdout_projection_checks": 8,
+  "training_transition_agreements": 12,
+  "holdout_change_signature_disagreements": 8,
+  "replay_C_failures_detected": 8,
+  "fiber_constant_character": true,
+  "fiber_constant_valence_1": true,
+  "fiber_constant_valence_2": false,
+  "compatible_relation_path": "PASS",
+  "incompatible_relation_path": "EMPTY_IMAGE_NOT_ABSENCE",
+  "metric_bound_checks": 11,
+  "metric_bound": "13/100",
+  "empirical_consciousness_claim": "NONE"
+}

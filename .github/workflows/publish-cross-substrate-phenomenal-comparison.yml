@@ -1,0 +1,41 @@
+name: Publish Cross-Substrate Phenomenal Comparison
+on:
+  push:
+    branches: [research/cross-substrate-phenomenal-comparison-v1-20260924]
+    paths:
+      - '.github/workflows/publish-cross-substrate-phenomenal-comparison.yml'
+      - 'research/cross-substrate-phenomenal-comparison/PUBLISH-AUTHORIZATION.json'
+permissions:
+  contents: write
+concurrency:
+  group: cross-substrate-phenomenal-comparison-zenodo
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta15-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/cross-substrate-phenomenal-comparison-v1-20260924
+      - name: Check exact package and reproduce the finite model
+        run: |
+          python3 research/cross-substrate-phenomenal-comparison/verify_package.py
+      - name: Publish reserved record and verify anonymous complete file readback
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/cross-substrate-phenomenal-comparison/publish_zenodo.py
+      - name: Preserve actual publication state
+        if: always()
+        run: python3 research/cross-substrate-phenomenal-comparison/publication_common.py --persist-states
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: cross-substrate-phenomenal-comparison-publication
+          path: |
+            research/cross-substrate-phenomenal-comparison/published/
+            research/cross-substrate-phenomenal-comparison/publication-record.json
+            research/cross-substrate-phenomenal-comparison/publication-attempt.json
+            /tmp/ta15-public-readback/
+          retention-days: 90
