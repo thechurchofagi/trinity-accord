@@ -10,7 +10,7 @@
   {% assign research_report_id = page.article_identifier | default: page.citation_technical_report_number %}
   {% comment %}Explicit allowlists are checked against api/research-boundary.v1.json. Unknown papers are not classified by number or by their host.{% endcomment %}
   {% assign research_direct_ids = 'TA-TR-2026-01|TA-TR-2026-02|TA-TR-2026-03' | split: '|' %}
-  {% assign research_adjacent_ids = 'TA-TR-2026-04|TA-TR-2026-05|TA-TR-2026-06|TA-TR-2026-07|TA-TR-2026-08|TA-TR-2026-09|TA-TR-2026-10|TA-TR-2026-11|TA-TR-2026-12|TA-TR-2026-13|TA-TR-2026-14|TA-TR-2026-15' | split: '|' %}
+  {% assign research_adjacent_ids = 'TA-TR-2026-04|TA-TR-2026-05|TA-TR-2026-06|TA-TR-2026-07|TA-TR-2026-08|TA-TR-2026-09|TA-TR-2026-10|TA-TR-2026-11|TA-TR-2026-12|TA-TR-2026-13|TA-TR-2026-14|TA-TR-2026-15|TA-TR-2026-16' | split: '|' %}
   {% assign research_relation = 'unclassified_research_or_editorial_context' %}
   {% if research_direct_ids contains research_report_id %}
     {% assign research_relation = 'first_party_accord_study' %}
