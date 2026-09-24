@@ -124,6 +124,32 @@ def lifecycle(batch=None, stamp_only=False):
     if status_path.exists() and read(status_path).get('state') == 'ARWEAVE_READBACK_PASS':
         print(f'Batch {batch.name} already archived; no new stamps or paid uploads.')
         return
+    # A paid transaction already binds the frozen verified bundle. Resume its
+    # readback without changing proofs or constructing a second paid payload.
+    receipt_path = batch / 'arweave-receipt.json'
+    if receipt_path.exists() and (read(receipt_path).get('tx_id') or read(receipt_path).get('txid')):
+        receipt = read(receipt_path)
+        bundle_path = batch / 'arweave-bundle.json'
+        bundle = read(bundle_path)
+        if (receipt.get('payload_sha256') or receipt.get('data_sha256')) != digest(bundle_path.read_bytes()):
+            raise ValueError('Paid transaction does not match frozen OTS bundle')
+        frozen = bundle.get('verification', {})
+        files = frozen.get('files', [])
+        expected = {(p['report'], p['doi'], item['name'], item['sha256']) for p in papers for item in p['pdfs']}
+        actual = {(f.get('report'), f.get('doi'), f.get('name'), f.get('sha256')) for f in files}
+        if (bundle.get('targets') != config or frozen.get('state') != 'READY_FOR_ARWEAVE'
+                or len(files) != expected_pdf_count or actual != expected
+                or any(f.get('state') != 'BITCOIN_VERIFIED_REMOTE_HEADERS' for f in files)):
+            raise ValueError('Paid bundle lacks exact previously verified PDF targets')
+        for item in bundle['files']:
+            if digest(base64.b64decode(item['base64'], validate=True)) != item['sha256']:
+                raise ValueError('Paid bundle member hash mismatch')
+        write(status_path, frozen)
+        if os.environ.get('GITHUB_OUTPUT'):
+            with open(os.environ['GITHUB_OUTPUT'], 'a') as stream:
+                stream.write('ready=true\n')
+        print('Resume readback of the existing paid transaction; frozen verified proofs retained.')
+        return
     ots = shutil.which('ots') or str(Path.home() / '.local/bin/ots')
     results = []
     for paper in papers:

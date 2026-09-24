@@ -345,6 +345,8 @@ A theory-method preprint asking how AI-status narratives may shape model self-co
 
 - [DOI: 10.5281/zenodo.22866205](https://doi.org/10.5281/zenodo.22866205) · [Zenodo record and eleven files](https://zenodo.org/records/22866205)
 
+[Exact-version OTS and Arweave status](/research/paper-timestamps/2026-09-24-paper12-v12/status.json).
+
 This is a separate twelfth study. It does not amend the three Bitcoin Originals or independently corroborate the preceding studies.
 
 ## Civilizational Intellectual Production
@@ -385,7 +387,7 @@ A bounded theoretical working paper deriving an inverse access frontier beyond f
 - [Executable audit](/research/claim-architecture-transition/v1.3/published/audit.py) · [Actual checks](/research/claim-architecture-transition/v1.3/published/checks.json) · [Publication receipt](/research/claim-architecture-transition/v1.3/publication-record.json)
 - [Preserved v1.2 DOI: 10.5281/zenodo.22885976](https://doi.org/10.5281/zenodo.22885976) · [Preserved v1.1 DOI: 10.5281/zenodo.22871209](https://doi.org/10.5281/zenodo.22871209)
 
-Earlier public files and their version-specific proofs are unchanged. No mature v1.3 OTS or Arweave attestation is asserted. This is adjacent first-party research, not Canon, an amendment, or independent corroboration of the Trinity Accord.
+Earlier public files and their version-specific proofs are unchanged. [Version 1.3 preservation status](/research/paper-timestamps/2026-09-24-paper14-v13/status.json) distinguishes pending OTS receipts, verified Bitcoin proofs, and completed Arweave readback. This is adjacent first-party research, not Canon, an amendment, or independent corroboration of the Trinity Accord.
 
 ## Cross-Substrate Phenomenal Comparison
 {: #cross-substrate-phenomenal-comparison }
@@ -402,6 +404,8 @@ An English-only theoretical and methodological preprint distinguishing six claim
 - [English PDF](/research/cross-substrate-phenomenal-comparison/published/cross-substrate-phenomenal-comparison-v1.0.pdf) · [English Markdown](https://zenodo.org/records/22934654/files/cross-substrate-phenomenal-comparison-v1.0.md)
 - [Code and results](https://zenodo.org/records/22934654) · [Review and sources](/research/cross-substrate-phenomenal-comparison/published/REVIEW-AND-SOURCES.md)
 - [Publication receipt](/research/cross-substrate-phenomenal-comparison/publication-record.json) · [BibTeX](/research/cross-substrate-phenomenal-comparison/published/citation.bib)
+
+[Exact-version OTS and Arweave status](/research/paper-timestamps/2026-09-24-paper15-v10/status.json).
 
 ## Independent External Scholarship
 {: #independent-external-scholarship }

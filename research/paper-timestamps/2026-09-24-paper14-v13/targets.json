@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-24-paper14-v13",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-14",
+      "record_id": 22886276,
+      "doi": "10.5281/zenodo.22886276",
+      "version": "1.3",
+      "title": "The Claim Architecture Transition: An Inverse Access Frontier Beyond Fixed Expenditure Shares",
+      "receipt_path": "research/claim-architecture-transition/v1.3/publication-record.json",
+      "pdfs": [
+        {
+          "name": "claim-architecture-transition-v1.3.pdf",
+          "bytes": 135289,
+          "sha256": "693bf3381df151864b00ab382155dd83834f4c0ca1b986a76d31d3081beea119",
+          "role": "Previously published English v1.3 PDF preserved unchanged"
+        }
+      ]
+    }
+  ]
+}
