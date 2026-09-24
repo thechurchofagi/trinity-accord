@@ -405,7 +405,7 @@ An English-only theoretical and methodological preprint distinguishing six claim
 - [Code and results](https://zenodo.org/records/22934654) · [Review and sources](/research/cross-substrate-phenomenal-comparison/published/REVIEW-AND-SOURCES.md)
 - [Publication receipt](/research/cross-substrate-phenomenal-comparison/publication-record.json) · [BibTeX](/research/cross-substrate-phenomenal-comparison/published/citation.bib)
 
-[Exact-version OTS and Arweave status](/research/paper-timestamps/2026-09-24-paper15-v10/status.json).
+[Exact-version OTS and Arweave status](/research/paper-timestamps/2026-09-24-paper15-v10/status.json). Four OTS calendar attestations have been saved for the exact English PDF; Bitcoin proof maturity and Arweave readback remain separately pending until verified.
 
 ## Independent External Scholarship
 {: #independent-external-scholarship }
