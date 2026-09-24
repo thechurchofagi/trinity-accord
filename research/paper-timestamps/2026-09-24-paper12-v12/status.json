@@ -2,22 +2,26 @@
   "batch": "2026-09-24-paper12-v12",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        968380,
+        968381,
+        968383
+      ],
       "bytes": 674718,
       "doi": "10.5281/zenodo.22866205",
       "name": "training-the-governed-agent-zh-v1.2.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-24-paper12-v12/proofs/TA-TR-2026-12/training-the-governed-agent-zh-v1.2.pdf.ots",
-      "proof_sha256": "ddcf78877fad742cc3b015046749be1870d0371e3224c8458df69a71e97f0391",
+      "proof_sha256": "a551fc4f17f93f8aa9bd8fe3be5ffb4339ddf6b4314f76cb8142a7fc466363e8",
       "report": "TA-TR-2026-12",
       "role": "Previously published v1.2 PDF; preserved unchanged, not a new translation",
       "sha256": "68347cf77e86ba72d62b2bf91e5a0122825dc3f2d7f0887416629bc156faf87f",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
