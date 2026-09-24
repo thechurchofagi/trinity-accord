@@ -1,5 +1,8 @@
 {
+  "arweave_tx_id": "golX6BVOPtomKC5TnqOyV1XCvMqUWapUDFKyiQ1PBCE",
+  "arweave_url": "https://arweave.net/golX6BVOPtomKC5TnqOyV1XCvMqUWapUDFKyiQ1PBCE",
   "batch": "2026-09-21-paper14-v11",
+  "bundle_sha256": "c2ef17f7ec66608347f1a1778a90448f7ce7c0fc49f4b7f6ea5425c3e6547ff6",
   "files": [
     {
       "bitcoin_heights": [
@@ -22,6 +25,6 @@
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "READY_FOR_ARWEAVE",
+  "state": "ARWEAVE_READBACK_PASS",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
