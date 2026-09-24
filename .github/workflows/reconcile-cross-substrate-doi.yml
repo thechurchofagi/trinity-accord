@@ -24,6 +24,9 @@ jobs:
           ref: main
           sparse-checkout: |
             research/cross-substrate-phenomenal-comparison
+            scripts
+      - name: Record repository toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
       - name: Verify public resolver without publication credentials
         run: python3 research/cross-substrate-phenomenal-comparison/reconcile_doi.py
       - name: Preserve only a successfully verified status
