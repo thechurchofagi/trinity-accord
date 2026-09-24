@@ -102,7 +102,7 @@ permalink: /
       <small>Bounded external evidence-provenance records; current index includes 1 notarial record. Not endorsement, philosophical validation, forensic identity proof, or canonical authority.</small>
     </a>
   </div>
-  <p data-home-public-freshness data-status-as-of="2026-09-24T08:38:00.595650+00:00" role="status">Last known counters: 2026-09-24T08:38:00.595650+00:00. Current state unconfirmed.</p>
+  <p data-home-public-freshness data-status-as-of="2026-09-24T10:09:16.402743+00:00" role="status">Last known counters: 2026-09-24T10:09:16.402743+00:00. Current state unconfirmed.</p>
   <p class="home-live-signal-boundary">
     These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception. External witness records do not imply endorsement, philosophical validation, forensic identity proof, or canonical authority. Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.
   </p>
@@ -113,7 +113,7 @@ permalink: /
     <a href="/api/public-home-status.json"><strong>Machine status</strong><span>Current public counters and boundaries</span></a>
     <a href="/api/record-chain-status.json"><strong>Chain API</strong><span>Technical chain tip and durability state</span></a>
   </div>
-  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>f8bc67b5fef9c419</code>. Latest technical record <code>R-000000164</code>.</p>
+  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>307f4902cdd5fd02</code>. Latest technical record <code>R-000000164</code>.</p>
 </section>
 <!-- END GENERATED PUBLIC STATUS -->
 
