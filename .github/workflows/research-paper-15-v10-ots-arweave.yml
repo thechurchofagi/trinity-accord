@@ -1,14 +1,15 @@
 # Paper publication fees use the independent strict 0.1 AR budget.
-name: Research Paper 15 v1.0 OTS and Arweave
+name: Research Papers 15 and 16 v1.0 OTS and Arweave
 
 on:
   push:
-    branches: [main, research/cross-substrate-phenomenal-comparison-v1-20260924]
+    branches: [main, research/cross-substrate-phenomenal-comparison-v1-20260924, research/general-cross-substrate-phenomenology-v1-20260924]
     paths:
       - .github/workflows/research-paper-15-v10-ots-arweave.yml
       - scripts/research_paper_ots.py
       - tests/test_research_paper_ots.py
       - research/paper-timestamps/2026-09-24-paper15-v10/targets.json
+      - research/paper-timestamps/2026-09-24-paper16-v10/targets.json
   schedule:
     - cron: '47 * * * *'
   workflow_dispatch:
@@ -25,6 +26,17 @@ jobs:
   preserve:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        include:
+          - batch: 2026-09-24-paper15-v10
+            report: TA-TR-2026-15
+            doi: 10.5281/zenodo.22934654
+          - batch: 2026-09-24-paper16-v10
+            report: TA-TR-2026-16
+            doi: 10.5281/zenodo.22939808
     steps:
       - name: Authorize write workflow actor
         if: github.event_name == 'workflow_dispatch'
@@ -56,16 +68,16 @@ jobs:
         run: |
           python3 - <<'PY'
           import json, os, pathlib
-          root=pathlib.Path('research/paper-timestamps/2026-09-24-paper15-v10')
+          root=pathlib.Path('research/paper-timestamps/${{ matrix.batch }}')
           targets=json.loads((root/'targets.json').read_text())
-          if targets.get('paper_count') != 1 or [x.get('report') for x in targets.get('papers',[])] != ['TA-TR-2026-15']:
+          if targets.get('paper_count') != 1 or [x.get('report') for x in targets.get('papers',[])] != ['${{ matrix.report }}']:
               raise RuntimeError('Follow-up target identity changed')
           import sys
           sys.path.insert(0, 'scripts')
           from research_paper_ots import validate_config
           papers, count = validate_config(root, targets)
-          if count != 1 or papers[0]['doi'] != '10.5281/zenodo.22934654':
-              raise RuntimeError('Fifteenth-paper PDF identity changed')
+          if count != 1 or papers[0]['doi'] != '${{ matrix.doi }}':
+              raise RuntimeError('Paper PDF identity changed')
           status=root/'status.json'
           done=status.exists() and json.loads(status.read_text()).get('state')=='ARWEAVE_READBACK_PASS'
           with open(os.environ['GITHUB_OUTPUT'],'a') as out:
@@ -92,13 +104,13 @@ jobs:
         run: |
           set -euo pipefail
           python3 scripts/bitcoin_esplora_rpc_proxy.py --host 127.0.0.1 --port 18443 \
-            --trace "$RUNNER_TEMP/paper-15-v10-ots-proxy.jsonl" --timeout 20 > "$RUNNER_TEMP/paper-15-v10-ots-proxy.log" 2>&1 &
+            --trace "$RUNNER_TEMP/paper-v10-ots-proxy.jsonl" --timeout 20 > "$RUNNER_TEMP/paper-v10-ots-proxy.log" 2>&1 &
           proxy_pid=$!
           cleanup_proxy() {
             if kill -0 "$proxy_pid" 2>/dev/null; then kill "$proxy_pid"; fi
           }
           trap cleanup_proxy EXIT
-          python3 scripts/research_paper_ots.py lifecycle --batch research/paper-timestamps/2026-09-24-paper15-v10
+          python3 scripts/research_paper_ots.py lifecycle --batch research/paper-timestamps/${{ matrix.batch }}
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         if: steps.ots.outputs.ready == 'true'
@@ -108,7 +120,7 @@ jobs:
       - name: Check the independent paper publication budget and receipt
         if: steps.ots.outputs.ready == 'true'
         id: budget
-        run: node scripts/research_arweave_allowance.mjs research/paper-timestamps/2026-09-24-paper15-v10
+        run: node scripts/research_arweave_allowance.mjs research/paper-timestamps/${{ matrix.batch }}
 
       - name: Install existing Arweave dependencies
         if: steps.ots.outputs.ready == 'true' && steps.budget.outputs.allowed == 'true'
@@ -120,7 +132,7 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           import hashlib, json, os, pathlib
-          root=pathlib.Path('research/paper-timestamps/2026-09-24-paper15-v10')
+          root=pathlib.Path('research/paper-timestamps/${{ matrix.batch }}')
           sha=hashlib.sha256((root/'arweave-bundle.json').read_bytes()).hexdigest()
           intent=root/'paid-intent.json'
           receipt=root/'arweave-receipt.json'
@@ -136,13 +148,13 @@ jobs:
           else:
               intent.write_text(json.dumps({'state':'PAID_ATTEMPT_INTENT','payload_sha256':sha,
                   'run_id':os.environ['GITHUB_RUN_ID'],'run_attempt':os.environ['GITHUB_RUN_ATTEMPT'],
-                  'report':'TA-TR-2026-15','doi':'10.5281/zenodo.22934654'},indent=2)+'\n')
+                  'report':'${{ matrix.report }}','doi':'${{ matrix.doi }}'},indent=2)+'\n')
           PY
           git config user.name 'trinity-ots-bot'
           git config user.email 'actions@github.com'
-          git add research/paper-timestamps/2026-09-24-paper15-v10/paid-intent.json
+          git add research/paper-timestamps/${{ matrix.batch }}/paid-intent.json
           if ! git diff --cached --quiet; then
-            git commit -m 'Checkpoint fifteenth-paper v1.0 paid preservation intent before upload'
+            git commit -m 'Checkpoint ${{ matrix.report }} v1.0 paid preservation intent before upload'
             git push origin HEAD:"${GITHUB_REF_NAME}"
           fi
 
@@ -159,16 +171,16 @@ jobs:
           ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: '0.50'
           ARWEAVE_READBACK_MAX_SECONDS: '420'
           ARWEAVE_HTTP_TIMEOUT_MS: '30000'
-        run: python3 scripts/research_paper_ots.py upload --batch research/paper-timestamps/2026-09-24-paper15-v10
+        run: python3 scripts/research_paper_ots.py upload --batch research/paper-timestamps/${{ matrix.batch }}
 
       - name: Preserve exact proofs and remote-operation receipts
         if: always() && steps.batch.outputs.done != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: research-paper-15-v10-ots-${{ github.run_id }}
+          name: research-${{ matrix.batch }}-ots-${{ github.run_id }}
           path: |
-            research/paper-timestamps/2026-09-24-paper15-v10/
-            ${{ runner.temp }}/paper-15-v10-ots-proxy.jsonl
+            research/paper-timestamps/${{ matrix.batch }}/
+            ${{ runner.temp }}/paper-v10-ots-proxy.jsonl
           retention-days: 90
           if-no-files-found: error
 
@@ -178,10 +190,10 @@ jobs:
           set -euo pipefail
           git config user.name 'trinity-ots-bot'
           git config user.email 'actions@github.com'
-          git add research/paper-timestamps/2026-09-24-paper15-v10/ record-chain/arweave-wallet-ledger.json api/arweave-wallet-status.json
+          git add research/paper-timestamps/${{ matrix.batch }}/ record-chain/arweave-wallet-ledger.json api/arweave-wallet-status.json
           git diff --cached --check
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Preserve paper 15 v1.0 OTS and Arweave state'
+          git commit -m 'Preserve ${{ matrix.report }} v1.0 OTS and Arweave state'
           for attempt in 1 2 3; do
             if git push origin HEAD:"${GITHUB_REF_NAME}"; then exit 0; fi
             git fetch origin "${GITHUB_REF_NAME}" --prune

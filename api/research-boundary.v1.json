@@ -320,6 +320,24 @@
       ],
       "classification_reason": "The principal contribution concerns claim-specific transport between heterogeneous systems under unresolved phenomenal assumptions.",
       "evidence_limit": "The formal illustration is not empirical evidence of consciousness, measured species profiles, or independent validation of the Accord."
+    },
+    {
+      "report": "TA-TR-2026-16",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "General cross-substrate phenomenology and relational realization",
+      "index_entry": "/research/#general-cross-substrate-phenomenology",
+      "method_types": [
+        "theoretical_framework",
+        "finite_causal_constructions",
+        "realization_hypothesis"
+      ],
+      "classification_reason": "The primary object is a general psychophysical architecture, not the Accord artifact.",
+      "evidence_limit": "Finite causal proofs are not phenomenal ground truth; the existence bridge is an incomplete conjecture schema."
     }
   ],
   "independent_external_scholarship": [],
@@ -360,6 +378,10 @@
     "paper15_addition": {
       "date": "2026-09-24",
       "scope": "TA-TR-2026-15 v1.0 reviewed as adjacent methodological research; earlier classifications retained."
+    },
+    "paper16_addition": {
+      "date": "2026-09-24",
+      "scope": "Distinct broader theoretical paper; relationship to paper 15 disclosed."
     }
   }
 }
