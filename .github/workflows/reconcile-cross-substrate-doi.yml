@@ -1,4 +1,4 @@
-name: Reconcile TA15 public DOI
+name: Reconcile cross-substrate public DOIs
 on:
   push:
     branches: [main]
@@ -26,6 +26,7 @@ jobs:
           fetch-depth: 0
           sparse-checkout: |
             research/cross-substrate-phenomenal-comparison
+            research/general-cross-substrate-phenomenology
             scripts
       - name: Record repository toolchain provenance
         run: python3 scripts/toolchain_provenance.py
@@ -33,11 +34,11 @@ jobs:
         run: python3 research/cross-substrate-phenomenal-comparison/reconcile_doi.py
       - name: Preserve only a successfully verified status
         run: |
-          git add research/cross-substrate-phenomenal-comparison/publication-record.json research/cross-substrate-phenomenal-comparison/publication-attempt.json research/index.md
+          git add research/cross-substrate-phenomenal-comparison/publication-record.json research/cross-substrate-phenomenal-comparison/publication-attempt.json research/general-cross-substrate-phenomenology/publication-record.json research/general-cross-substrate-phenomenology/publication-attempt.json research/index.md
           if git diff --cached --quiet; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'research: confirm TA15 public DOI resolution'
+          git commit -m 'research: confirm cross-substrate public DOI resolution'
           for attempt in 1 2 3; do
             git fetch origin main --prune
             git rebase origin/main || { git rebase --abort; exit 1; }
