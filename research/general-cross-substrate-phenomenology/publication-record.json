@@ -1,0 +1,92 @@
+{
+  "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "report_number": "TA-TR-2026-16",
+  "title": "General Cross-Substrate Phenomenology: A Type-Safe, Transformation-First Framework for Phenomenal Existence, Structure, Perspective, and Continuation",
+  "version": "1.0",
+  "record_id": 22939808,
+  "doi": "10.5281/zenodo.22939808",
+  "record_url": "https://zenodo.org/records/22939808",
+  "submitted": true,
+  "file_count": 10,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 838,
+      "sha256": "7996383645681b87fccbe6013b7cd6cee6005d2d39820baee21c5984f4bddff8",
+      "public_url": "https://zenodo.org/api/records/22939808/files/README-LICENSE.txt/content"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 5025,
+      "sha256": "3fcc67a69b80bfb14f18ba9c681f70870432c7f0ba30061418e51def48572876",
+      "public_url": "https://zenodo.org/api/records/22939808/files/REVIEW-AND-SOURCES.md/content"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 803,
+      "sha256": "0d3a01965344ee6bf4cb15209e05c21154c45619a4af01d76d1c3be419606fad",
+      "public_url": "https://zenodo.org/api/records/22939808/files/SHA256SUMS.txt/content"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 409,
+      "sha256": "80369d538092bad1c6626be4bbb3ff5de2abf35baeb7168d5d9266d4638b8f88",
+      "public_url": "https://zenodo.org/api/records/22939808/files/citation.bib/content"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 559,
+      "sha256": "8c81e3b2ef77749d3a78b5e4a155a64acaf87ce90c905b6167f8495154ab47bf",
+      "public_url": "https://zenodo.org/api/records/22939808/files/citation.csl.json/content"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 339,
+      "sha256": "c3891080240916fd088f4b5cf228ee2c75f35b0f4212f99ffe544f133165a27f",
+      "public_url": "https://zenodo.org/api/records/22939808/files/citation.ris/content"
+    },
+    {
+      "name": "gcp_checks.py",
+      "bytes": 4454,
+      "sha256": "90b966188e97986459db6cf7b8e4e406bc82b08b32803b45fbfd0b26b99f4b01",
+      "public_url": "https://zenodo.org/api/records/22939808/files/gcp_checks.py/content"
+    },
+    {
+      "name": "gcp_results.json",
+      "bytes": 3126,
+      "sha256": "165ea4595577ab0582348339e91fcad1ceabeb6d6864e291cf0258c953cf29ba",
+      "public_url": "https://zenodo.org/api/records/22939808/files/gcp_results.json/content"
+    },
+    {
+      "name": "general-cross-substrate-phenomenology-v1.0.md",
+      "bytes": 87834,
+      "sha256": "041a21d0a0863719188f591b2f51f94b591cc16a795d74ed6df047e058c48360",
+      "public_url": "https://zenodo.org/api/records/22939808/files/general-cross-substrate-phenomenology-v1.0.md/content"
+    },
+    {
+      "name": "general-cross-substrate-phenomenology-v1.0.pdf",
+      "bytes": 206440,
+      "sha256": "ca665b1c55ebf1329bc5c4ee808cc19a7ea1c95b87e6c87ec1f1a2e115e37e1a",
+      "public_url": "https://zenodo.org/api/records/22939808/files/general-cross-substrate-phenomenology-v1.0.pdf/content"
+    }
+  ],
+  "expected_manifest_sha256": "c76fd87d55d317fc4cbcba75cf8951692890fa4e58d61744776a57214dd280f1",
+  "public_readback_authenticated": false,
+  "doi_resolver": {
+    "state": "RESOLVER_CHECK_UNAVAILABLE",
+    "error_type": "HTTPError",
+    "matches_record": false
+  },
+  "public_file_readback_pass": true,
+  "doi_resolution_pass": false,
+  "source_commit": "b1ddfbc0abaa06c09401a3a66f1cabfbbd2e018e",
+  "workflow_run_id": "36003909935",
+  "was_already_published": false,
+  "prior_doi_records_modified": false,
+  "bitcoin_originals_modified": false,
+  "new_research_papers": 1,
+  "peer_reviewed": false,
+  "global_originality_certified": false,
+  "google_scholar_indexing": "NOT_ASSERTED",
+  "manuscript_language": "eng"
+}
