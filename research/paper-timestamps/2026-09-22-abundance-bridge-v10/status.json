@@ -1,5 +1,8 @@
 {
+  "arweave_tx_id": "krOTfYNuNb8lgQbeJHfzIyEerZOwernWlsMRnp_WO40",
+  "arweave_url": "https://arweave.net/krOTfYNuNb8lgQbeJHfzIyEerZOwernWlsMRnp_WO40",
   "batch": "2026-09-22-abundance-bridge-v10",
+  "bundle_sha256": "504573af9ca92878967ab3790c88f3b087f809a338333e5f2566773422992cdc",
   "files": [
     {
       "bitcoin_heights": [
@@ -35,6 +38,6 @@
   "paper_count": 1,
   "pdf_count": 2,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "READY_FOR_ARWEAVE",
+  "state": "ARWEAVE_READBACK_PASS",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
