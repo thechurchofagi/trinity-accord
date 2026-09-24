@@ -15,12 +15,13 @@
       "report": "TA-TR-2026-13",
       "role": "Complete Chinese v1.0 theory-method paper with English title and abstract",
       "sha256": "2785b1f7e20be977b883244da0526b144172f2ab6f3c64b5b235f5621fe7a32a",
-      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
+      "state": "BITCOIN_ATTESTATION_EMBEDDED",
+      "verification_error": "Bitcoin verification failed; upload blocked"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "READY_FOR_ARWEAVE",
+  "state": "WAITING",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }

@@ -1,1 +1,33 @@
-Success! Bitcoin block 967931 attests existence as of 2026-09-21 UTC
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/bin/ots", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/otsclient/ots.py", line 34, in main
+    args.cmd_func(args)
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/otsclient/cmds.py", line 490, in verify_command
+    if not verify_timestamp(detached_timestamp.timestamp, args):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/otsclient/cmds.py", line 412, in verify_timestamp
+    block_count = proxy.getblockcount()
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/bitcoin/rpc.py", line 513, in getblockcount
+    return self._call('getblockcount')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/bitcoin/rpc.py", line 248, in _call
+    response = self._get_response()
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/bitcoin/rpc.py", line 278, in _get_response
+    http_response = self.__conn.getresponse()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/http/client.py", line 1443, in getresponse
+    response.begin()
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/http/client.py", line 337, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/http/client.py", line 298, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/socket.py", line 718, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
