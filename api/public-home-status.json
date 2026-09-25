@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-09-25T08:59:30.325141+00:00",
+  "generated_at": "2026-09-25T09:59:45.297946+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -23,7 +23,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "098f8226522024fb",
+  "source_digest": "92109c20ff5f6863",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 165,
@@ -999,9 +999,9 @@
     },
     "arweave_wallet": {
       "currency": "AR",
-      "total_spent_ar": "0.896002068505",
+      "total_spent_ar": "0.902630113831",
       "balance_known": true,
-      "balance_ar": "14.226844857395",
+      "balance_ar": "14.220290372878",
       "low_balance": false,
       "needs_recharge": false
     }
