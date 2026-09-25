@@ -76,3 +76,5 @@ if __name__=="__main__":
         })
         print(f"{type(e).__name__}: {e}",file=sys.stderr)
         sys.exit(1)
+
+# TA17 prepare trigger marker 2
