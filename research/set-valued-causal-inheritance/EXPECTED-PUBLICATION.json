@@ -19,7 +19,7 @@
     {
       "name": "SHA256SUMS.txt",
       "bytes": 855,
-      "sha256": "1dac7588f7f00a97ae3614dd6fe8df7d2ecdd771e834168a8d118f250b253d15"
+      "sha256": "f2841f124ca23fa41fa1fd7ca2efde36638fe261cbf64b3ab823d29651aaff5b"
     },
     {
       "name": "citation.bib",
@@ -44,7 +44,7 @@
     {
       "name": "set-valued-causal-inheritance-supplement-v1.0.pdf",
       "bytes": 193594,
-      "sha256": "c812fb326bee7c2c9c06c2ad1201e7a3ac46372287dfccc380d1bb6b6b0a51cf"
+      "sha256": "c3ad15c90d2dc90f38c2725a228d7f699cd00a68265547fe65c8681054c2eb6e"
     },
     {
       "name": "set-valued-causal-inheritance-v1.0.md",
@@ -53,8 +53,8 @@
     },
     {
       "name": "set-valued-causal-inheritance-v1.0.pdf",
-      "bytes": 219128,
-      "sha256": "1622a4f36e797f57b3dff6e8428a6ef7d04d7241d160003150061fc86b8f45db"
+      "bytes": 219133,
+      "sha256": "828f30a4cf98e30d78b6ec33fa87ccd02380d9550f85be19f2dda121da202b8b"
     }
   ],
   "prior_records_modified": false
