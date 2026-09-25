@@ -122,7 +122,7 @@ class ResearchBoundaryTests(unittest.TestCase):
         papers = policy['first_party_papers']
         reports = [p['report'] for p in papers]
         self.assertEqual(len(reports), len(set(reports)))
-        self.assertEqual(set(reports), {f'TA-TR-2026-{n:02d}' for n in range(1, 17)})
+        self.assertEqual(set(reports), {f'TA-TR-2026-{n:02d}' for n in range(1, 18)})
         template = (ROOT / '_layouts/default.html').read_text()
         for variable, layer in (('research_direct_ids', 'L3'), ('research_adjacent_ids', 'L4')):
             match = re.search(r"assign " + variable + r" = '([^']+)'", template)
