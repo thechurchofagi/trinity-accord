@@ -1,0 +1,18 @@
+{
+  "report_number": "TA-TR-2026-17",
+  "version": "1.0",
+  "record_id": 22950904,
+  "doi": "10.5281/zenodo.22950904",
+  "authorization": "PUBLISH_EXACT_REVIEWED_PACKAGE",
+  "reviewed_file_count": 10,
+  "review_basis": [
+    "formal and experimental final verification completed",
+    "six-seed contextual-bandit replication retained",
+    "three-stack recurrent lineage replication retained",
+    "failed eight-seed end-to-end process-aware replication retained",
+    "PDF primary format selected by author",
+    "format-checks PASS and exact manifest generated"
+  ],
+  "prior_records_must_remain_unchanged": true,
+  "bitcoin_originals_must_remain_unchanged": true
+}
