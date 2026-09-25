@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-25-paper17-v10",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-17",
+      "record_id": 22950904,
+      "doi": "10.5281/zenodo.22950904",
+      "version": "1.0",
+      "title": "Set-Valued Causal Inheritance for Functional Self-Continuity: Representation Theorems and Persistent-Agent Benchmarks",
+      "receipt_path": "research/set-valued-causal-inheritance/publication-record.json",
+      "pdfs": [
+        {
+          "name": "set-valued-causal-inheritance-v1.0.pdf",
+          "bytes": 219133,
+          "sha256": "828f30a4cf98e30d78b6ec33fa87ccd02380d9550f85be19f2dda121da202b8b",
+          "role": "Complete English v1.0 theoretical/computational preprint"
+        }
+      ]
+    }
+  ]
+}
