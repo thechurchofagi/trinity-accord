@@ -1,0 +1,10 @@
+{
+  "state": "ELIGIBLE_OR_READBACK_RESUME",
+  "budget_policy": "per-publication-strictly-less-than-0.1-AR",
+  "daily_limit_applies": false,
+  "prior_winston_by_publication": {
+    "TA-TR-2026-17@10.5281/zenodo.22950904": "0"
+  },
+  "recorded_transaction_resume": false,
+  "next_action": "Continue to live quote, cumulative paper budget, reserve and rolling-spend guards or resume readback"
+}

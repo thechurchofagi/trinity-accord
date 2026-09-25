@@ -2,22 +2,24 @@
   "batch": "2026-09-25-paper17-v10",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        968505
+      ],
       "bytes": 219133,
       "doi": "10.5281/zenodo.22950904",
       "name": "set-valued-causal-inheritance-v1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-25-paper17-v10/proofs/TA-TR-2026-17/set-valued-causal-inheritance-v1.0.pdf.ots",
-      "proof_sha256": "bccf707a228b1f11dfd24d053419ff550d6a4713010ff5657b1852ea7a7d9d99",
+      "proof_sha256": "31e51f13227c6e50159728c7240df32d135ca7287a4eefb5455361692b618fd3",
       "report": "TA-TR-2026-17",
       "role": "Complete English v1.0 theoretical/computational preprint",
       "sha256": "828f30a4cf98e30d78b6ec33fa87ccd02380d9550f85be19f2dda121da202b8b",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
