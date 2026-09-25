@@ -55,7 +55,7 @@ permalink: /research/
 
 This page separates later scholarship from the fixed artifact. Research papers, technical reports, citations, and repository deposits are **non-amending scholarship**. They do not join, define, validate, or alter the three Bitcoin Originals.
 
-The first-party series currently contains **sixteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-16)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -16 are classified as the Adjacent Research Program.** All sixteen share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
+The first-party series currently contains **seventeen distinct research papers (TA-TR-2026-01 through TA-TR-2026-17)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -17 are classified as the Adjacent Research Program.** All seventeen share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research boundary
 {: #research-boundary }
@@ -425,6 +425,23 @@ A broader architecture for existence, character, perspective and continuation. C
 
 This is adjacent first-party research, not Canon or independent corroboration of the Accord. Timestamp submission, Bitcoin maturity and Arweave preservation are separately reported.
 
+{: #set-valued-causal-inheritance }
+
+### Set-Valued Causal Inheritance for Functional Self-Continuity: Representation Theorems and Persistent-Agent Benchmarks
+
+TA-TR-2026-17 · Version 1.0 · 25 September 2026. Human author of record and responsible depositor: Hongju Liu. English theoretical/computational preprint; substantially ChatGPT-assisted and not peer reviewed.
+
+A functional-continuity framework for branching and distributed successors. The paper separates current self-membership, causal inheritance, successor-set belief, post-branch self-location and motivational stake; proves exact representation limits for categorical and marginal-only successor models; defines representation-disciplined set-valued causal inheritance; and reports controlled persistent-agent benchmarks. Negative results are retained: an eight-seed end-to-end recurrent comparison does not establish a reliable process-aware long-horizon control advantage.
+
+- [DOI: 10.5281/zenodo.22950904](https://doi.org/10.5281/zenodo.22950904) · [Research overview](/research/set-valued-causal-inheritance/)
+- [English PDF](/research/set-valued-causal-inheritance/published/set-valued-causal-inheritance-v1.0.pdf) · [Supplementary PDF](/research/set-valued-causal-inheritance/published/set-valued-causal-inheritance-supplement-v1.0.pdf)
+- [Publication receipt](/research/set-valued-causal-inheritance/publication-record.json) · [Review and sources](/research/set-valued-causal-inheritance/published/REVIEW-AND-SOURCES.md)
+- [OTS and Arweave status](/research/paper-timestamps/2026-09-25-paper17-v10/status.json)
+
+**Status:** Published open-access preprint; all ten Zenodo assets passed anonymous exact-byte SHA-256 public readback. DOI.org resolution may lag the already-public Zenodo record during propagation. OTS submission, Bitcoin maturity and Arweave preservation are reported separately.
+
+This is adjacent first-party research, not Canon, not an amendment to the Trinity Accord, and not independent corroboration of the preceding papers. The paper does not establish phenomenal consciousness, numerical personal identity, moral status, legal identity or a universal measure of survival.
+
 ## Independent External Scholarship
 {: #independent-external-scholarship }
 
@@ -435,8 +452,8 @@ This category is reserved for work produced outside project control by independe
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all sixteen studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all seventeen studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the sixteen-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the seventeen-paper series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.
