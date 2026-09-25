@@ -79,7 +79,7 @@
   },
   "public_file_readback_pass": true,
   "doi_resolution_pass": false,
-  "source_commit": "f400acb7813a6c4d0d52ff35eaf7bb85974d73e1",
+  "source_commit": "724d468e94339db51bfa7966a8168fd314b061e6",
   "workflow_run_id": "36095466602",
   "was_already_published": true,
   "prior_doi_records_modified": false,
