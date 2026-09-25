@@ -41,6 +41,8 @@ reading_toc:
     title: "Cross-Substrate Phenomenal Comparison"
   - id: "general-cross-substrate-phenomenology"
     title: "General Cross-Substrate Phenomenology"
+  - id: "set-valued-causal-inheritance"
+    title: "Set-Valued Causal Inheritance"
   - id: "independent-external-scholarship"
     title: "Independent external scholarship"
   - id: "citation-boundary"
