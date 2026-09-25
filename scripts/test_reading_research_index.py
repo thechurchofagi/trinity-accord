@@ -159,7 +159,7 @@ class ResearchBoundaryTests(unittest.TestCase):
         self.assertIn('固定文本不等于评价冻结', chinese)
         for text in (english, chinese):
             self.assertIn('/api/research-boundary.v1.json', text)
-            for n in range(1, 17):
+            for n in range(1, 18):
                 self.assertIn(f'| **{n:02d}** |', text)
 
     def test_rendered_research_subjects_and_context(self):
