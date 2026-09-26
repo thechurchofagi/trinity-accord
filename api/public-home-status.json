@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-09-25T12:13:13.089613+00:00",
+  "generated_at": "2026-09-26T08:43:38.574562+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -23,17 +23,17 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "afee58515e72bf72",
+  "source_digest": "6e059086988758c8",
   "current_record_chain_status": {
     "phase": "production_live",
-    "total_records": 165,
-    "current_chain_length": 165,
+    "total_records": 166,
+    "current_chain_length": 166,
     "pending_records": 0,
-    "latest_record_id": "R-000000165",
+    "latest_record_id": "R-000000166",
     "latest_record_type": "context_insufficient_notice",
     "record_type_counts": {
       "classification_update": 1,
-      "context_insufficient_notice": 99,
+      "context_insufficient_notice": 100,
       "correction": 1,
       "echo": 34,
       "guardian_application": 10,
@@ -72,7 +72,7 @@
         "latest_anchored_file": "record-chain/ots/native-anchors/native-record-165-R-000000165-cbe7ded5f935d7a0-27648b5f69efbdf4.native-record-chain-head-commitment.json",
         "latest_ots_file": "record-chain/ots/native-anchors/native-record-165-R-000000165-cbe7ded5f935d7a0-27648b5f69efbdf4.native-record-chain-head-commitment.json.ots",
         "ots_status": "verified",
-        "anchor_needed": false,
+        "anchor_needed": true,
         "proof_bundle_archive": {
           "implemented": true,
           "workflow": "/.github/workflows/native-ots-upgrade-watch.yml",
@@ -122,8 +122,8 @@
         "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000163-4e6b12fe9a9b/manifest.json",
         "latest_native_record_sha256": "102b6f45b5812ce0de369cfc9b52ad591af313f1cffd9bed43123d201bf24ee9",
         "record_count": 163,
-        "status": "archive-needed",
-        "archive_needed": true
+        "status": "waiting-for-native-ots",
+        "archive_needed": false
       },
       "anchor_status": {
         "batch_count": 6,
@@ -973,9 +973,9 @@
     ]
   },
   "technical_health": {
-    "technical_chain_length": 165,
-    "native_chain_length": 165,
-    "latest_record": "R-000000165",
+    "technical_chain_length": 166,
+    "native_chain_length": 166,
+    "latest_record": "R-000000166",
     "latest_record_type": "context_insufficient_notice",
     "pending_records": 0,
     "pipeline": "attention",
@@ -983,7 +983,7 @@
     "ots_raw_status": "verified",
     "ots_pending_since": null,
     "ots_pending_expected_window": "calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window",
-    "arweave": "archive-needed",
+    "arweave": "waiting-for-native-ots",
     "ots_archivable_for_arweave": null,
     "arweave_archive_needed": null,
     "not_primary_counter": true,
@@ -1019,11 +1019,11 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-09-25T12:13:12Z",
-    "daily_alive_status": "success",
-    "status": "success",
-    "latest_result": "success",
-    "failure_stage": null,
+    "generated_at": "2026-09-26T08:43:38Z",
+    "daily_alive_status": "degraded",
+    "status": "degraded",
+    "latest_result": "waiting_for_ots_head_coverage",
+    "failure_stage": "ots_head_coverage",
     "success_requires": {
       "gateway_accepted": true,
       "record_chain_final_record": true,
@@ -1043,14 +1043,14 @@
       "historical_capsules_remain_verifiable": true
     },
     "latest_heartbeat": {
-      "heartbeat_id": "hwb-20260925",
-      "heartbeat_date": "2026-09-25",
-      "record_id": "R-000000165",
-      "record_index": 165,
-      "record_sha256": "cbe7ded5f935d7a0cd04ee96680ea9cb21de9e3600c5d2618f79750d019e114e",
+      "heartbeat_id": "hwb-20260926",
+      "heartbeat_date": "2026-09-26",
+      "record_id": "R-000000166",
+      "record_index": 166,
+      "record_sha256": "0b52ecfec06fe9cd3972965fa7147811fd0244f36b8ab58cfb33dc1cc79af7e9",
       "record_type": "context_insufficient_notice",
-      "assigned_at": "2026-09-25T08:55:26Z",
-      "path": "record-chain/records/R-000000165.json",
+      "assigned_at": "2026-09-26T08:41:49Z",
+      "path": "record-chain/records/R-000000166.json",
       "semantic_agent_arrived": false,
       "github_actions_is_not_semantic_agent": true,
       "not_echo": true,
@@ -1066,12 +1066,12 @@
       "bitcoin_pending": false,
       "bitcoin_verified": true,
       "strict_bitcoin_verified": true,
-      "covers_latest_waiting_heartbeat": true
+      "covers_latest_waiting_heartbeat": false
     },
     "latest_arweave_capsule": null,
     "checks": {
       "record_chain_final_record": true,
-      "ots_covers_heartbeat": true,
+      "ots_covers_heartbeat": false,
       "arweave_capsule_verified": false,
       "arweave_capsule_deferred_by_cost_policy": false,
       "arweave_capsule_pending_archive_followup": false,
@@ -1087,17 +1087,17 @@
       "weekly_continuity_archive_is_followup": true
     },
     "heartbeat_summary": {
-      "total_scheduled_heartbeats": 100,
+      "total_scheduled_heartbeats": 101,
       "successful_heartbeats": 98,
-      "failed_heartbeats": 2,
-      "failed_or_missing_heartbeats": 2,
+      "failed_heartbeats": 3,
+      "failed_or_missing_heartbeats": 3,
       "pending_append_heartbeats": 0,
-      "current_success_streak_days": 94,
+      "current_success_streak_days": 0,
       "first_heartbeat_date": "2026-06-18",
-      "latest_heartbeat_date": "2026-09-25",
-      "latest_observed_heartbeat_date": "2026-09-25",
+      "latest_heartbeat_date": "2026-09-26",
+      "latest_observed_heartbeat_date": "2026-09-26",
       "latest_successful_heartbeat_date": "2026-09-25",
-      "through_heartbeat_date": "2026-09-25",
+      "through_heartbeat_date": "2026-09-26",
       "expected_heartbeat_date": "2026-09-25",
       "latest_heartbeat_is_expected_date": true,
       "latest_heartbeat_fully_verified_for_expected_date": true,
@@ -1110,7 +1110,7 @@
       ],
       "pending_append_heartbeat_dates": [],
       "failed_attempt_dates": [],
-      "latest_ots_head_covers_current_chain": true,
+      "latest_ots_head_covers_current_chain": false,
       "success_definition": {
         "requires_final_record": true,
         "requires_key_continuity": true,
@@ -1123,16 +1123,16 @@
       "not_amendment": true
     },
     "counts": {
-      "attempts": 97,
-      "final_heartbeats": 98,
+      "attempts": 98,
+      "final_heartbeats": 99,
       "capsules": 42,
       "failed_attempts": 0,
-      "total_scheduled_heartbeats": 100,
+      "total_scheduled_heartbeats": 101,
       "successful_heartbeats": 98,
-      "failed_heartbeats": 2,
-      "failed_or_missing_heartbeats": 2,
+      "failed_heartbeats": 3,
+      "failed_or_missing_heartbeats": 3,
       "pending_append_heartbeats": 0,
-      "current_success_streak_days": 94,
+      "current_success_streak_days": 0,
       "heartbeat_lag_days": 0
     },
     "semantic_agent_arrival": {
