@@ -30,9 +30,9 @@ The existing six-role map is retained:
 
 ## Classify by research object and contribution
 
-**TA-TR-2026-01 through -03 remain First-party Accord Studies. TA-TR-2026-04 through -16 remain the Adjacent Research Program.** This classification is based on what each paper principally tries to establish, not simply its number or whether its conclusions favor the project.
+**TA-TR-2026-01 through -03 remain First-party Accord Studies. TA-TR-2026-04 through -17 remain the Adjacent Research Program.** This classification is based on what each paper principally tries to establish, not simply its number or whether its conclusions favor the project.
 
-**Papers 04–05 are case-grounded extensions**, not unrelated work: the fourth applies a general coexistence framework to the Star Ark Covenant; the fifth develops a bounded recovery framework motivated by the archive. Papers 06–16 address broader questions. A mixed paper may have both a general contribution and a case application; these are not competing claims to canonical membership.
+**Papers 04–05 are case-grounded extensions**, not unrelated work: the fourth applies a general coexistence framework to the Star Ark Covenant; the fifth develops a bounded recovery framework motivated by the archive. Papers 06–17 address broader questions. A mixed paper may have both a general contribution and a case application; these are not competing claims to canonical membership.
 
 ### Paper-by-paper topic and evidence map
 
@@ -56,8 +56,9 @@ The following are editorial descriptions of the versions indexed at the audit sn
 | **14** | Claim architecture and distribution; broader adjacent research. | Theoretical economic model and conditional analysis. Not a measured transition forecast or empirical validation of the Accord. |
 | **15** | Cross-substrate phenomenal comparison; broader adjacent research. | Typed transport framework, conditional propositions and a reproducible finite-state illustration. Not an empirical comparison of species or evidence of AI consciousness. |
 | **16** | General cross-substrate phenomenology; broader adjacent research. | General theoretical architecture, finite causal constructions, and realization hypotheses. The existence bridge remains conjectural; shared foundations with Paper 15 are disclosed. |
+| **17** | Set-valued causal inheritance and functional self-continuity; broader adjacent research. | Information-theoretic representation results and controlled persistent-agent benchmarks. The experiments do not establish consciousness or numerical personal identity, and the replicated end-to-end process-aware control advantage is not established. |
 
-**Relationship, research method, publication status, and evidential strength are separate axes.** “Adjacent” does not mean unimportant; “direct” does not mean correct; “formal” does not establish empirical applicability; “published” does not mean peer reviewed. Method labels do not certify novelty. The six-paper critical-use guide remains a dated guide to its original scope, not a completed review of sixteen papers.
+**Relationship, research method, publication status, and evidential strength are separate axes.** “Adjacent” does not mean unimportant; “direct” does not mean correct; “formal” does not establish empirical applicability; “published” does not mean peer reviewed. Method labels do not certify novelty. The six-paper critical-use guide remains a dated guide to its original scope, not a completed review of seventeen papers.
 
 ## What can change, and what cannot
 
@@ -67,7 +68,7 @@ Conversely, a sound study may improve understanding, identify a reusable design 
 
 The rule “a paper's failure or retraction does not modify the Canon” protects **source bytes and identity**, not reputation or truth. A failure in an adjacent consciousness hypothesis is not automatically a failure of the archive; a demonstrated error in the archive's own factual claims cannot be dismissed merely because it was found in research.
 
-Shared authorship, AI assistance, inherited premises, reused sources, and reused experiments must remain visible. Sixteen related papers are not sixteen independent witnesses. Equally, first-party evidence is not worthless merely because it is first-party. Evaluate the relevant dependencies rather than counting paper titles.
+Shared authorship, AI assistance, inherited premises, reused sources, and reused experiments must remain visible. Seventeen related papers are not seventeen independent witnesses. Equally, first-party evidence is not worthless merely because it is first-party. Evaluate the relevant dependencies rather than counting paper titles.
 
 ## Independent External Scholarship
 
@@ -98,3 +99,5 @@ This audit used main commit `bcdae1df7efe097bfe6fbe46250dddf13150d094` and the m
 The homepage's core explanation and layout remain unchanged. A small footer link exposes this boundary. Canonical closure is not a freeze on factual corrections, accessibility, broken-link repairs, or accurately dated status updates. Current AI news, speculative AGI dates, paper counts, and self-assigned quality grades should not become reasons to rewrite the fixed record or repeatedly redesign its front door.
 
 Paper 16 was added on 24 September 2026 as a distinct broader theoretical work; this addition does not extend the earlier dated audit to certify its conclusions.
+
+Paper 17 was added on 25 September 2026 as adjacent functional-continuity research. Its publication and preservation records do not extend the earlier dated audit to certify its conclusions.

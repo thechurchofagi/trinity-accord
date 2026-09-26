@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.research-boundary.v1",
   "version": "1.2",
-  "updated_at": "2026-09-24",
+  "updated_at": "2026-09-25",
   "status": "active_non_amending_relation_map",
   "canonical_authority": "three Bitcoin Originals only",
   "human_readable": "/research/research-boundary/",
@@ -338,6 +338,24 @@
       ],
       "classification_reason": "The primary object is a general psychophysical architecture, not the Accord artifact.",
       "evidence_limit": "Finite causal proofs are not phenomenal ground truth; the existence bridge is an incomplete conjecture schema."
+    },
+    {
+      "report": "TA-TR-2026-17",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Set-valued causal inheritance and functional self-continuity",
+      "index_entry": "/research/#set-valued-causal-inheritance",
+      "method_types": [
+        "theoretical_computational_framework",
+        "information_theoretic_theorems",
+        "controlled_recurrent_agent_benchmarks"
+      ],
+      "classification_reason": "The principal contribution concerns general branching functional continuity and persistence-agent decision structure, not the Accord artifact.",
+      "evidence_limit": "Controlled synthetic and recurrent-agent benchmarks do not establish phenomenal consciousness, numerical personal identity, moral or legal status; the end-to-end process-aware long-horizon advantage is not established after replication."
     }
   ],
   "independent_external_scholarship": [],
