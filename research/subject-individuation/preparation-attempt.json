@@ -1,6 +1,8 @@
 {
-  "state": "INCOMPLETE_REQUIRES_REVIEW_OR_SAME_RECORD_RESUMPTION",
-  "error_type": "CalledProcessError",
-  "error": "Command '['pandoc', '/home/runner/work/trinity-accord/trinity-accord/research/subject-individuation/published/selecting-and-tracking-conscious-subjects-v1.0.md', '-o', '/home/runner/work/trinity-accord/trinity-accord/research/subject-individuation/published/selecting-and-tracking-conscious-subjects-v1.0.pdf', '--pdf-engine', 'xelatex', '--from=markdown+tex_math_single_backslash', '-V', 'mainfont=DejaVu Serif', '-V', 'monofont=DejaVu Sans Mono']' returned non-zero exit status 43.",
-  "workflow_run_id": "36353365857"
+  "state": "RESERVED_NOT_PUBLICATION",
+  "record_id": 23002980,
+  "doi": "10.5281/zenodo.23002980",
+  "file_count": 10,
+  "phase": "completed",
+  "workflow_run_id": "36353517001"
 }

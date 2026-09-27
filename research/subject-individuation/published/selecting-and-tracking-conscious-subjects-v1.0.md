@@ -488,7 +488,7 @@ Equivariance generalizes naturally:
 and
 
 \[
-\mu_{gx}=g_\*\mu_x.
+\mu_{gx}=g_{*}\mu_x.
 \]
 
 These broader output types will provide two of the repair strategies in Section 6.

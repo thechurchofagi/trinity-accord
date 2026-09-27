@@ -1,0 +1,61 @@
+{
+  "report_number": "TA-TR-2026-19",
+  "record_id": 23002980,
+  "doi": "10.5281/zenodo.23002980",
+  "title": "Selecting and Tracking Conscious Subjects: Symmetry, Monodromy, and an IIT 4.0 Case Study",
+  "version": "1.0",
+  "file_count": 10,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1080,
+      "sha256": "deb18d9d237b29554af10fcf28955fc563c188e5f2dea2bbd5e7075e5f700956"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 2129,
+      "sha256": "0b81d963b79371e089fada37844b127301616ed2f5da0233060b8458097699aa"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 903,
+      "sha256": "8e95b9ce95e19114e8cc3e161644f9ec93bcca731d4f5bc450811b76f98d7edb"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 342,
+      "sha256": "98ee545dbda6308dd2fe6bdb3e99e28272efb126cbe132b6d79f49f9e68a754d"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 494,
+      "sha256": "7881c66c9ca3b04cd6163d5fa03d543943fcbc3878d68cccaa6f15ad25a85845"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 286,
+      "sha256": "4ad0d22e70e8a0d3f0793e3ea021561a19608c52d1907f347f2246c8979ce129"
+    },
+    {
+      "name": "selecting-and-tracking-conscious-subjects-supplement-v1.0.md",
+      "bytes": 7573,
+      "sha256": "72c23fd9215bd87d96874111854ffc2b192c0349e847e93083bb2b0ee3addcd7"
+    },
+    {
+      "name": "selecting-and-tracking-conscious-subjects-supplement-v1.0.pdf",
+      "bytes": 67200,
+      "sha256": "cef34b29d8fbde6c7c8a8ed979440c71fa833b06822165e1fd333a0fb468a0a9"
+    },
+    {
+      "name": "selecting-and-tracking-conscious-subjects-v1.0.md",
+      "bytes": 43338,
+      "sha256": "53782a354e6dd1b037f8a6021d2a2bad150201cd086a5f6799757074dd21fc7e"
+    },
+    {
+      "name": "selecting-and-tracking-conscious-subjects-v1.0.pdf",
+      "bytes": 108421,
+      "sha256": "c6d990afc9962217f92be31776339f806fb10d1e7a6f12c57c28fca3d5471329"
+    }
+  ],
+  "prior_records_modified": false
+}
