@@ -62,8 +62,8 @@ class CriticalUseTests(unittest.TestCase):
             ('Claim Architecture Transition', '22871209'),
             ('Cross-Substrate Phenomenal Comparison', '22934654'),
             ('General Cross-Substrate Phenomenology', '22939808'),
-            ('Set-Valued Causal Inheritance for Functional Self-Continuity: Representation Theorems and Persistent-Agent Benchmarks', '22950904'),
-            ('Actual Participation Before Counterfactual Capacity: A Token-Level Constraint on Conscious Organization', '22991126'),
+            ('Set-Valued Causal Inheritance', '22950904'),
+            ('Actual Participation Before Counterfactual Capacity', '22991126'),
         ]
         section_rows = re.findall(r'^## ([^\n]+)\n(.*?)(?=^## |\Z)', self.index, re.M | re.S)
         sections = dict(section_rows)
