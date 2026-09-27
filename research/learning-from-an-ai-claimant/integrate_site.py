@@ -87,7 +87,12 @@ def updated_index(before: str, rec: dict) -> str:
     section = paper_section(rec)
     if SECTION_HEADING in before:
         require(before.count(SECTION_HEADING) == 1 and section in before, "Existing ninth-paper entry differs")
-        require("nine distinct research papers (TA-TR-2026-01 through TA-TR-2026-09)" in before,
+        current_counts = (
+            (9, "nine"), (10, "ten"), (11, "eleven"), (12, "twelve"), (13, "thirteen"),
+            (14, "fourteen"), (15, "fifteen"), (16, "sixteen"), (17, "seventeen"), (18, "eighteen")
+        )
+        require(sum(f"{word} distinct research papers (TA-TR-2026-01 through TA-TR-2026-{number:02d})" in before
+                    for number, word in current_counts) == 1,
                 "Series count differs")
         return before
     updated = replace_once(before, '  - id: "citation-boundary"',
