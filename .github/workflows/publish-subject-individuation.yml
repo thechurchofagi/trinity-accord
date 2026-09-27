@@ -1,0 +1,49 @@
+name: Publish Subject Individuation TA19
+on:
+  push:
+    branches: [research/subject-individuation-v1-20260928]
+    paths:
+      - '.github/workflows/publish-actual-participation.yml'
+      - 'research/subject-individuation/PUBLISH-AUTHORIZATION.json'
+permissions:
+  contents: write
+concurrency:
+  group: subject-individuation-zenodo-v1
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta19-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/subject-individuation-v1-20260928
+          fetch-depth: 1
+      - name: Install PDF toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq pandoc texlive-xetex fonts-dejavu-core poppler-utils
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
+      - name: Verify exact reviewed package
+        run: python3 research/subject-individuation/publication.py verify
+      - name: Publish only the reserved TA19 record and verify anonymous exact-byte readback
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/subject-individuation/publication.py publish
+      - name: Preserve actual publication state
+        if: always()
+        run: python3 research/subject-individuation/publication.py persist
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta19-subject-individuation-publication
+          path: |
+            research/subject-individuation/published/
+            research/subject-individuation/EXPECTED-PUBLICATION.json
+            research/subject-individuation/format-checks.json
+            research/subject-individuation/publication-record.json
+            research/subject-individuation/publication-attempt.json
+          retention-days: 90
+          if-no-files-found: warn
