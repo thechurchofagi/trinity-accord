@@ -199,7 +199,47 @@ def prepare():
         if dep is None:
             if (ROOT/"create-intent.json").exists(): raise RuntimeError("Unresolved TA19 create intent")
             save("create-intent.json",{"title":TITLE,"report_number":REPORT,"version":VERSION,"state":"CREATE_ONCE_INTENT","workflow_run_id":os.environ.get("GITHUB_RUN_ID")}); persist()
-            md={"upload_type":"publication","publication_type":"preprint","title":TITLE,"creators":[{"name":"Liu, Hongju","affiliation":"Independent researcher, Shenzhen, China"}],"description":"<p>"+html.escape(extract_abstract(manuscript))+"</p><p>"+REPORT+", version 1.0. Human author of record and responsible depositor: Hongju Liu. Substantial ChatGPT assistance under human direction. Not peer reviewed; no institutional endorsement is claimed.</p><p>Adjacent first-party non-amending scholarship. The paper does not claim new group theory, topology, continuous-choice theory, the first discovery of IIT complex switching, empirical consciousness measurement, or proof of the broader UCT program. Its narrower proposed contribution is the combined local/global selection-tracking framework and official current-IIT realization.</p>","publication_date":DATE,"version":VERSION,"access_right":"open","license":"cc-by-4.0","language":"eng","keywords":["consciousness","subject individuation","integrated information theory","exclusion","symmetry","monodromy","equivariance","PyPhi","subject tracking"]}
+            md={"upload_type":"publication","publication_type":"preprint","title":TITLE,"creators":[{"name":"Liu, Hongju"}],"description":f"<p>{REPORT}, version {VERSION}. English theory/computational preprint formulating conscious-subject individuation as distinct selection and tracking problems, with local stabilizer and global monodromy obstructions and an official IIT 4.0 (2026) PyPhi case study. Substantial AI assistance under human direction. Not peer reviewed.</p>","publication_date":DATE,"version":VERSION,"access_right":"open","license":"cc-by-4.0","language":"eng","keywords":["consciousness","subject individuation","integrated information theory","exclusion","symmetry","monodromy","equivariance","PyPhi","subject tracking"]}
+            dep=z.request("/deposit/depositions","POST",{"metadata":md})
+    rid,doi=check_deposit(dep)
+    rec={"record_id":rid,"doi":doi,"title":TITLE,"report_number":REPORT,"version":VERSION,"submitted":bool(dep.get("submitted")),"state":"ALREADY_SUBMITTED_REQUIRES_READBACK" if dep.get("submitted") else "RESERVED_NOT_PUBLICATION","prior_records_modified":False,"workflow_run_id":os.environ.get("GITHUB_RUN_ID")}
+    save("deposit.json",rec); e=build_package(); save("preparation-attempt.json",{"state":rec["state"],"record_id":rid,"doi":doi,"file_count":e["file_count"],"phase":"completed","workflow_run_id":os.environ.get("GITHUB_RUN_ID")}); print(json.dumps(rec,indent=2))
+
+def extract_abstract(s):
+    rest=s.split("## Abstract",1)[1]
+    return rest.split("\n---\n",1)[0].strip() if "\n---\n" in rest else rest.split("\n# 1.",1)[0].strip()
+
+def download_public(url):
+    p=urllib.parse.urlsplit(url)
+    if p.scheme!="https" or p.hostname!="zenodo.org": raise RuntimeError("Unexpected public file host")
+    req=urllib.request.Request(url,headers={"User-Agent":"TrinityAccord-TA19-Readback/1.0"})
+    with urllib.request.urlopen(req,timeout=45) as r: b=r.read(MAX_FILE_BYTES+1)
+    if len(b)>MAX_FILE_BYTES: raise RuntimeError("Public asset too large")
+    return b
+
+def doi_check(doi,rid):
+    out={"state":"RESOLVER_CHECK_UNAVAILABLE","matches_record":False}
+    for delay in (0,10,20,30,40):
+        if delay: time.sleep(delay)
+        try:
+            req=urllib.request.Request("https://doi.org/"+doi,headers={"User-Agent":"TrinityAccord-TA19-DOICheck/1.0"})
+            with urllib.request.urlopen(req,timeout=20) as r:
+                p=urllib.parse.urlsplit(r.url); ok=r.status==200 and p.hostname=="zenodo.org" and p.path.rstrip("/") in (f"/records/{rid}",f"/record/{rid}")
+                out={"state":"RESOLVER_PASS" if ok else "RESOLVER_TARGET_MISMATCH","http_status":r.status,"final_url":r.url,"matches_record":ok}
+            if ok: return out
+        except Exception as e: out={"state":"RESOLVER_CHECK_UNAVAILABLE","error_type":type(e).__name__,"matches_record":False}
+    return out
+
+def publish():
+    e,manifest_sha=validate_local_package(); rid,doi=e["record_id"],e["doi"]
+    a=load("PUBLISH-AUTHORIZATION.json")
+    req=(REPORT,VERSION,rid,doi,"PUBLISH_EXACT_REVIEWED_PACKAGE")
+    got=(a.get("report_number"),str(a.get("version")),a.get("record_id"),a.get("doi"),a.get("authorization"))
+    if got!=req: raise RuntimeError("Publish authorization mismatch")
+    z=client(); dep=read(z,f"/deposit/depositions/{rid}"); check_deposit(dep,e); already=bool(dep.get("submitted"))
+    if not already:
+        manuscript=(ROOT/"published"/f"{STEM}-v{VERSION}.md").read_text(encoding="utf-8")
+        md={"upload_type":"publication","publication_type":"preprint","title":TITLE,"creators":[{"name":"Liu, Hongju","affiliation":"Independent researcher, Shenzhen, China"}],"description":"<p>"+html.escape(extract_abstract(manuscript))+"</p><p>"+REPORT+", version 1.0. Human author of record and responsible depositor: Hongju Liu. Substantial ChatGPT assistance under human direction. Not peer reviewed; no institutional endorsement is claimed.</p><p>Adjacent first-party non-amending scholarship. The paper does not claim new group theory, topology, continuous-choice theory, the first discovery of IIT complex switching, empirical consciousness measurement, or proof of the broader UCT program. Its narrower proposed contribution is the combined local/global selection-tracking framework and official current-IIT realization.</p>","publication_date":DATE,"version":VERSION,"access_right":"open","license":"cc-by-4.0","language":"eng","keywords":["consciousness","subject individuation","integrated information theory","exclusion","symmetry","monodromy","equivariance","PyPhi","subject tracking"]}
         dep=z.request(f"/deposit/depositions/{rid}","PUT",{"metadata":md}); check_deposit(dep,e)
         remote={x["filename"]:x for x in read(z,f"/deposit/depositions/{rid}/files")}
         bucket=dep["links"]["bucket"]
