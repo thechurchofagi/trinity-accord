@@ -70,3 +70,15 @@ publication. The dedicated workflow runs hourly at minute 57 UTC, preserves
 the existing daily and rolling spend limits, and waits when a prior batch has
 used the daily allowance. See that batch's README and actual `status.json` for
 scope, verification and completion; this entry does not itself claim completion.
+
+
+## Eighteenth-paper batch: 2026-09-27-paper18-v10
+
+TA-TR-2026-18 v1.0 (DOI `10.5281/zenodo.22991126`) has its own one-paper,
+one-primary-PDF batch under `2026-09-27-paper18-v10/`. The exact published
+English PDF is identified by the Zenodo publication receipt and SHA-256 manifest.
+The dedicated workflow submits and upgrades the detached OTS proof, claims
+Bitcoin verification only after the proof actually verifies, and only then
+permits the guarded Arweave archive under the independent per-paper publication
+budget of strictly less than 0.1 AR. Status and public readback are reported in
+the batch's `status.json`; this README entry does not itself claim completion.

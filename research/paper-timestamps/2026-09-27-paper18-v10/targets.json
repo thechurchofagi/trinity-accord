@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-27-paper18-v10",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-18",
+      "record_id": 22991126,
+      "doi": "10.5281/zenodo.22991126",
+      "version": "1.0",
+      "title": "Actual Participation Before Counterfactual Capacity: A Token-Level Constraint on Conscious Organization",
+      "receipt_path": "research/actual-participation/publication-record.json",
+      "pdfs": [
+        {
+          "name": "actual-participation-before-counterfactual-capacity-v1.0.pdf",
+          "bytes": 131366,
+          "sha256": "e41df92513ff31bc7a08f76038ab52f7f5b6f04dca0000d08ae0cfd3d9b9301a",
+          "role": "Complete English v1.0 theory preprint"
+        }
+      ]
+    }
+  ]
+}

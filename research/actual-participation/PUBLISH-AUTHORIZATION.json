@@ -1,0 +1,18 @@
+{
+  "report_number": "TA-TR-2026-18",
+  "version": "1.0",
+  "record_id": 22991126,
+  "doi": "10.5281/zenodo.22991126",
+  "authorization": "PUBLISH_EXACT_REVIEWED_PACKAGE",
+  "reviewed_file_count": 10,
+  "review_basis": [
+    "final theory and originality-boundary review completed",
+    "closest-overlap boundary with 2026 ICF/ICCR explicitly retained",
+    "DOI-bound English PDF and Markdown package generated",
+    "format-checks PASS and exact SHA-256 manifest generated",
+    "formal witnesses and negative limitations retained",
+    "PDF selected as primary publication format by author"
+  ],
+  "prior_records_must_remain_unchanged": true,
+  "bitcoin_originals_must_remain_unchanged": true
+}
