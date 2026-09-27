@@ -1,23 +1,29 @@
 {
+  "arweave_tx_id": "3leoFf2LCKA22M3bWdylKGpC_w1YBfEMLFUodDa5JLU",
+  "arweave_url": "https://arweave.net/3leoFf2LCKA22M3bWdylKGpC_w1YBfEMLFUodDa5JLU",
   "batch": "2026-09-27-paper18-v10",
+  "bundle_sha256": "6335532181912a3e720601cc04ca8b40425571ba3cdfb96d32fa13140b83ef4f",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        968805,
+        968807
+      ],
       "bytes": 131366,
       "doi": "10.5281/zenodo.22991126",
       "name": "actual-participation-before-counterfactual-capacity-v1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-27-paper18-v10/proofs/TA-TR-2026-18/actual-participation-before-counterfactual-capacity-v1.0.pdf.ots",
-      "proof_sha256": "0704bca6c617eebda6d00ea469e5421eeba8d1c7f1c4be69c7700f61a0dc47a5",
+      "proof_sha256": "4bc170b06fe04ce3efb03fd0beedfb58929100610bca6f23d3ec4ecf83b06df5",
       "report": "TA-TR-2026-18",
       "role": "Complete English v1.0 theory preprint",
       "sha256": "e41df92513ff31bc7a08f76038ab52f7f5b6f04dca0000d08ae0cfd3d9b9301a",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "ARWEAVE_READBACK_PASS",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
