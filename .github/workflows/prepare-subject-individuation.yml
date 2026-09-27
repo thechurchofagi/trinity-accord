@@ -3,8 +3,10 @@ on:
   push:
     branches: [research/subject-individuation-v1-20260928]
     paths:
-      - '.github/workflows/prepare-actual-participation.yml'
+      - '.github/workflows/prepare-subject-individuation.yml'
       - 'research/subject-individuation/publication.py'
+      - 'research/subject-individuation/source-main.md'
+      - 'research/subject-individuation/source-supplement.md'
 permissions:
   contents: write
 concurrency:
