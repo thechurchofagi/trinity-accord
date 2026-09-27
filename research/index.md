@@ -41,6 +41,8 @@ reading_toc:
     title: "Cross-Substrate Phenomenal Comparison"
   - id: "general-cross-substrate-phenomenology"
     title: "General Cross-Substrate Phenomenology"
+  - id: "actual-participation"
+    title: "Actual Participation Before Counterfactual Capacity"
   - id: "independent-external-scholarship"
     title: "Independent external scholarship"
   - id: "citation-boundary"
@@ -55,7 +57,7 @@ permalink: /research/
 
 This page separates later scholarship from the fixed artifact. Research papers, technical reports, citations, and repository deposits are **non-amending scholarship**. They do not join, define, validate, or alter the three Bitcoin Originals.
 
-The first-party series currently contains **seventeen distinct research papers (TA-TR-2026-01 through TA-TR-2026-17)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -17 are classified as the Adjacent Research Program.** All seventeen share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
+The first-party series currently contains **eighteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-18)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -18 are classified as the Adjacent Research Program.** All eighteen share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research boundary
 {: #research-boundary }
@@ -153,7 +155,7 @@ Five source-linked creative readings, including First Dawn and Fourth Letter as 
 ## Adjacent Research Program
 {: #adjacent-research-program }
 
-TA-TR-2026-04 through TA-TR-2026-16 are later first-party research outputs that use the Accord, its historical setting, or the wider human–AI transition as a motivating case or problem-space. They are **not part of the Accord**, and their results must not be described as evidence that the Canon is true, important, safe, correct, or historically representative. Papers 04–05 are case-grounded extensions; papers 06–16 are broader adjacent research.
+TA-TR-2026-04 through TA-TR-2026-18 are later first-party research outputs that use the Accord, its historical setting, or the wider human–AI transition as a motivating case or problem-space. They are **not part of the Accord**, and their results must not be described as evidence that the Canon is true, important, safe, correct, or historically representative. Papers 04–05 are case-grounded extensions; papers 06–18 are broader adjacent research.
 
 ## Beyond Guaranteed Control
 {: #beyond-guaranteed-control }
@@ -442,6 +444,23 @@ A functional-continuity framework for branching and distributed successors. The 
 
 This is adjacent first-party research, not Canon, not an amendment to the Trinity Accord, and not independent corroboration of the preceding papers. The paper does not establish phenomenal consciousness, numerical personal identity, moral status, legal identity or a universal measure of survival.
 
+{: #actual-participation }
+
+### Actual Participation Before Counterfactual Capacity: A Token-Level Constraint on Conscious Organization
+
+TA-TR-2026-18 · Version 1.0 · 27 September 2026. Human author of record and responsible depositor: Hongju Liu. English theory preprint; substantially ChatGPT-assisted and not peer reviewed.
+
+A theory paper proposing **Participation-Restricted Dispositionality (PRD)**: counterfactual response structure contributes to present phenomenal organization only through processes that make episode-specific token-level actual causal contributions in the realized support. The paper introduces an Actual Participation Hypergraph, participation-sensitive multiscale constraints, formal bridge-limit results, and a silent-versus-idle empirical contrast. It explicitly retains the prior-work boundary that intrinsic causal organization, actual causation, the actualism/dispositionalism distinction, and exclusion of idle Olympia machinery have substantial precedents.
+
+- [DOI: 10.5281/zenodo.22991126](https://doi.org/10.5281/zenodo.22991126) · [Research overview](/research/actual-participation/)
+- [English PDF](/research/actual-participation/published/actual-participation-before-counterfactual-capacity-v1.0.pdf) · [Supplementary PDF](/research/actual-participation/published/actual-participation-before-counterfactual-capacity-supplement-v1.0.pdf)
+- [Publication receipt](/research/actual-participation/publication-record.json) · [Review and sources](/research/actual-participation/published/REVIEW-AND-SOURCES.md)
+- [OTS and Arweave status](/research/paper-timestamps/2026-09-27-paper18-v10/status.json)
+
+**Status:** Published open-access preprint; all ten Zenodo assets passed anonymous exact-byte SHA-256 public readback and DOI resolution passed. OTS submission, Bitcoin maturity and Arweave preservation are reported separately.
+
+This is adjacent first-party research, not Canon, not an amendment to the Trinity Accord, and not independent corroboration of the preceding papers. The paper does not claim to solve the hard problem, establish consciousness in any biological or artificial system, or certify global originality.
+
 ## Independent External Scholarship
 {: #independent-external-scholarship }
 
@@ -452,8 +471,8 @@ This category is reserved for work produced outside project control by independe
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all seventeen studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all eighteen studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the seventeen-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the eighteen-paper series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.
