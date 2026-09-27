@@ -41,6 +41,8 @@ reading_toc:
     title: "Cross-Substrate Phenomenal Comparison"
   - id: "general-cross-substrate-phenomenology"
     title: "General Cross-Substrate Phenomenology"
+  - id: "set-valued-causal-inheritance"
+    title: "Set-Valued Causal Inheritance"
   - id: "actual-participation"
     title: "Actual Participation Before Counterfactual Capacity"
   - id: "independent-external-scholarship"
@@ -427,6 +429,7 @@ A broader architecture for existence, character, perspective and continuation. C
 
 This is adjacent first-party research, not Canon or independent corroboration of the Accord. Timestamp submission, Bitcoin maturity and Arweave preservation are separately reported.
 
+## Set-Valued Causal Inheritance
 {: #set-valued-causal-inheritance }
 
 ### Set-Valued Causal Inheritance for Functional Self-Continuity: Representation Theorems and Persistent-Agent Benchmarks
@@ -444,6 +447,7 @@ A functional-continuity framework for branching and distributed successors. The 
 
 This is adjacent first-party research, not Canon, not an amendment to the Trinity Accord, and not independent corroboration of the preceding papers. The paper does not establish phenomenal consciousness, numerical personal identity, moral status, legal identity or a universal measure of survival.
 
+## Actual Participation Before Counterfactual Capacity
 {: #actual-participation }
 
 ### Actual Participation Before Counterfactual Capacity: A Token-Level Constraint on Conscious Organization
