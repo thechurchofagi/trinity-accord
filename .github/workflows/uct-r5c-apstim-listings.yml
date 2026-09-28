@@ -1,0 +1,42 @@
+name: UCT R5C APStim listings probe
+
+on:
+  push:
+    branches:
+      - ops/uct-r5c-apstim-listings-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fetch README and directory listings
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          for path in README.txt Matlab/ FreeSurfer/; do
+            safe=$(echo "$path" | tr '/ ' '__')
+            curl --fail --location --connect-timeout 5 --max-time 20               "http://epi.fizica.unibuc.ro/apstim/$path"               -o "out/$safe"
+          done
+          python - <<'PY'
+          from pathlib import Path
+          import re, json
+          rows={}
+          for p in Path("out").iterdir():
+              txt=p.read_text(errors="ignore")
+              rows[p.name]={
+                "bytes":p.stat().st_size,
+                "links":sorted(set(re.findall(r'''(?:href|src)=["']([^"']+)''',txt,re.I)))
+              }
+          Path("out/listings.json").write_text(json.dumps(rows,indent=2))
+          print(json.dumps(rows,indent=2))
+          PY
+      - name: Upload
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: uct-r5c-apstim-listings
+          path: out/
+          retention-days: 7
