@@ -89,7 +89,8 @@ def updated_index(before: str, rec: dict) -> str:
         require(before.count(SECTION_HEADING) == 1 and section in before, "Existing ninth-paper entry differs")
         current_counts = (
             (9, "nine"), (10, "ten"), (11, "eleven"), (12, "twelve"), (13, "thirteen"),
-            (14, "fourteen"), (15, "fifteen"), (16, "sixteen"), (17, "seventeen"), (18, "eighteen")
+            (14, "fourteen"), (15, "fifteen"), (16, "sixteen"), (17, "seventeen"), (18, "eighteen"),
+            (19, "nineteen"), (20, "twenty")
         )
         require(sum(f"{word} distinct research papers (TA-TR-2026-01 through TA-TR-2026-{number:02d})" in before
                     for number, word in current_counts) == 1,
