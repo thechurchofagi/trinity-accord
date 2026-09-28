@@ -1,0 +1,33 @@
+name: UCT R5C recover original APStim Matlab source
+
+on:
+  push:
+    branches:
+      - ops/uct-r5c-apstim-matlab-source-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download original source files
+        run: |
+          set -euo pipefail
+          mkdir -p out/Matlab
+          files=(APSpectrum.m APStim.m APStimPopulation.m APStimSimulation.m CompareThresholds.m NicoletFile.m tdfd.m)
+          for f in "${files[@]}"; do
+            curl --fail --location --retry 5 --connect-timeout 5 --max-time 60               "http://epi.fizica.unibuc.ro/apstim/Matlab/$f"               -o "out/Matlab/$f"
+          done
+          curl --fail --location --retry 5 "http://epi.fizica.unibuc.ro/apstim/README.txt" -o out/README.txt
+          sha256sum out/Matlab/* out/README.txt > out/SHA256SUMS.txt
+          find out -type f -printf '%P\t%s\n' | sort > out/FILE_MANIFEST.tsv
+      - name: Upload source
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: uct-r5c-apstim-original-matlab-source
+          path: out/
+          retention-days: 7
+          compression-level: 6
