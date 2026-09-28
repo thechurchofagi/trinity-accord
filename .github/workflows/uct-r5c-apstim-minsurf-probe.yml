@@ -1,0 +1,42 @@
+name: UCT R5C APStim minimal-surface probe
+
+on:
+  push:
+    branches:
+      - ops/uct-r5c-apstim-minsurf-probe-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Probe Patient3 minimal FreeSurfer files
+        run: |
+          set -euo pipefail
+          mkdir -p out/Patient3
+          base="http://epi.fizica.unibuc.ro/apstim/Patient3/FreeSurfer"
+          files=(
+            "surf/lh.pial"
+            "surf/rh.pial"
+            "surf/lh.sphere.reg"
+            "surf/rh.sphere.reg"
+            "mri/orig/001.mgh"
+            "mri/orig/001.mgz"
+          )
+          : > out/status.tsv
+          for f in "${files[@]}"; do
+            mkdir -p "out/Patient3/$(dirname "$f")"
+            code=$(curl -L --connect-timeout 5 --max-time 120 -sS -w "%{http_code}" -o "out/Patient3/$f" "$base/$f" || true)
+            size=$(stat -c%s "out/Patient3/$f" 2>/dev/null || echo 0)
+            printf "%s\t%s\t%s\n" "$f" "$code" "$size" | tee -a out/status.tsv
+          done
+      - name: Upload probe
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: uct-r5c-apstim-minsurf-probe
+          path: out/
+          retention-days: 7
+          compression-level: 6
