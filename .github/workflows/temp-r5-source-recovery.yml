@@ -1,0 +1,50 @@
+name: R5 source recovery
+
+on:
+  push:
+    branches:
+      - ops/r5-source-recovery-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Recover open paper and method site
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/r5
+          curl --fail --location --retry 5 --retry-delay 2 \
+            "https://www.brainstimjrnl.com/action/showPdf?pii=S1935861X25002505" \
+            -o /tmp/r5/visual_hallucinations_2025.pdf || true
+          curl --location --retry 5 --retry-delay 2 \
+            "http://epi.fizica.unibuc.ro/apstim/" \
+            -o /tmp/r5/apstim_index.html || true
+          curl --location --retry 5 --retry-delay 2 \
+            "https://epi.fizica.unibuc.ro/apstim/" \
+            -o /tmp/r5/apstim_index_https.html || true
+          python - <<'PY'
+from pathlib import Path
+import re, json
+out={}
+for p in Path('/tmp/r5').glob('*'):
+    out[p.name]={'bytes':p.stat().st_size}
+    if p.suffix.lower() in {'.html','.htm','.txt'}:
+        txt=p.read_text(errors='ignore')
+        out[p.name]['links']=re.findall(r'href=["\']([^"\']+)',txt,re.I)[:200]
+Path('/tmp/r5/recovery_index.json').write_text(json.dumps(out,indent=2))
+PY
+          file /tmp/r5/* | tee /tmp/r5/filetypes.txt
+          sha256sum /tmp/r5/* 2>/dev/null | tee /tmp/r5/SHA256SUMS.txt || true
+
+      - name: Upload recovered sources
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r5-recovered-sources
+          path: /tmp/r5/
+          retention-days: 2
+          compression-level: 0
