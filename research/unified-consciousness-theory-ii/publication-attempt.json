@@ -1,0 +1,6 @@
+{
+  "state": "INCOMPLETE_REQUIRES_REVIEW_OR_SAME_RECORD_RESUMPTION",
+  "error_type": "RuntimeError",
+  "error": "Published files passed public readback; DOI resolution still propagating",
+  "workflow_run_id": "36387440893"
+}

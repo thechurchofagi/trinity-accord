@@ -1,0 +1,97 @@
+{
+  "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "report_number": "TA-TR-2026-21",
+  "title": "Unified Consciousness Theory II: Consciousness Theories as Effective Organization Theories",
+  "version": "1.0",
+  "record_id": 23008262,
+  "doi": "10.5281/zenodo.23008262",
+  "record_url": "https://zenodo.org/records/23008262",
+  "submitted": true,
+  "file_count": 11,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1300,
+      "sha256": "3975af288612305fdd506da7368c0dffb43c51f84d5073138f7c0eee29686b49",
+      "public_url": "https://zenodo.org/api/records/23008262/files/README-LICENSE.txt/content"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 1713,
+      "sha256": "dd6fdfcc20cc385c3de2f635891440c5f5f630844c63588ed52b448144a5e7b7",
+      "public_url": "https://zenodo.org/api/records/23008262/files/REVIEW-AND-SOURCES.md/content"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 983,
+      "sha256": "dffaf147a0e572b277c70dd324b9aea62dba5cf3969b3d0938e5adb642bdc514",
+      "public_url": "https://zenodo.org/api/records/23008262/files/SHA256SUMS.txt/content"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 328,
+      "sha256": "961903c983aeb3532fdd31f177d4ff0e3f07b724a0f79e55d8cbcbae0154937e",
+      "public_url": "https://zenodo.org/api/records/23008262/files/citation.bib/content"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 500,
+      "sha256": "7b6b8992baaf67a617af625b60daa37d578348b7e9a3de27a7f47f038437651b",
+      "public_url": "https://zenodo.org/api/records/23008262/files/citation.csl.json/content"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 292,
+      "sha256": "9cf4f4927dd59c47842d97bdd086dde23f83fada6554e167c9b1f80337d34b76",
+      "public_url": "https://zenodo.org/api/records/23008262/files/citation.ris/content"
+    },
+    {
+      "name": "unified-consciousness-theory-ii-audit-bundle-v1.0.zip",
+      "bytes": 77889,
+      "sha256": "78e3feb6f0db32d47e41ef671771cb92a77517a0ae4c49a6070f3bdb05b94228",
+      "public_url": "https://zenodo.org/api/records/23008262/files/unified-consciousness-theory-ii-audit-bundle-v1.0.zip/content"
+    },
+    {
+      "name": "unified-consciousness-theory-ii-supplement-v1.0.md",
+      "bytes": 5452,
+      "sha256": "aa37ff27e26aa348a57c8dff99a50cac4d96760242281eb67ebba12e4271cf6f",
+      "public_url": "https://zenodo.org/api/records/23008262/files/unified-consciousness-theory-ii-supplement-v1.0.md/content"
+    },
+    {
+      "name": "unified-consciousness-theory-ii-supplement-v1.0.pdf",
+      "bytes": 57696,
+      "sha256": "1928b11a6470df27b6613810c1732a603ae43b06b7a982d5b9a02897fce39458",
+      "public_url": "https://zenodo.org/api/records/23008262/files/unified-consciousness-theory-ii-supplement-v1.0.pdf/content"
+    },
+    {
+      "name": "unified-consciousness-theory-ii-v1.0.md",
+      "bytes": 46705,
+      "sha256": "76609b53c4e11da548b48c845db3835c2c14465c8c51d064b86e8a15c36b1bd4",
+      "public_url": "https://zenodo.org/api/records/23008262/files/unified-consciousness-theory-ii-v1.0.md/content"
+    },
+    {
+      "name": "unified-consciousness-theory-ii-v1.0.pdf",
+      "bytes": 139813,
+      "sha256": "270dc803a65c30cf2c3fc84b2e44992a95b4e0871761df8dda96665f70ecee4a",
+      "public_url": "https://zenodo.org/api/records/23008262/files/unified-consciousness-theory-ii-v1.0.pdf/content"
+    }
+  ],
+  "expected_manifest_sha256": "a7b881eef6ebc4bb11bd953ed1c350730b8c357f4fa5512bb25bf4ed8057df7f",
+  "public_readback_authenticated": false,
+  "doi_resolver": {
+    "state": "RESOLVER_CHECK_UNAVAILABLE",
+    "error_type": "HTTPError",
+    "matches_record": false
+  },
+  "public_file_readback_pass": true,
+  "doi_resolution_pass": false,
+  "source_commit": "68c43c4c5cb5e081b5e9a71d351ef6d0e6063fbc",
+  "workflow_run_id": "36387440893",
+  "prior_doi_records_modified": false,
+  "bitcoin_originals_modified": false,
+  "new_research_papers": 1,
+  "peer_reviewed": false,
+  "global_originality_certified": false,
+  "google_scholar_indexing": "NOT_ASSERTED",
+  "manuscript_language": "eng"
+}
