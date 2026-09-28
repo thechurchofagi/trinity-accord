@@ -178,9 +178,9 @@ jobs:
           }
           (out/f"sub-{sub}_registration_qc.json").write_text(json.dumps(qc,indent=2))
           for i,p in enumerate(tx["fwdtransforms"]):
-              shutil.copy2(p,txdir/f"fwd_{i}_"+Path(p).name)
+              shutil.copy2(p,txdir/(f"fwd_{i}_"+Path(p).name))
           for i,p in enumerate(tx["invtransforms"]):
-              shutil.copy2(p,txdir/f"inv_{i}_"+Path(p).name)
+              shutil.copy2(p,txdir/(f"inv_{i}_"+Path(p).name))
           print(json.dumps(qc,indent=2))
           PY
           python work/register_subject.py
