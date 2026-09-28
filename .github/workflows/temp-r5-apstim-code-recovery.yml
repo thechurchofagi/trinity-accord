@@ -1,0 +1,36 @@
+name: R5 APStim code recovery
+
+on:
+  push:
+    branches:
+      - ops/r5-source-recovery-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  recover-code:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Fetch APStim public code and metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/apstim
+          base="http://epi.fizica.unibuc.ro/apstim"
+          curl --max-time 30 -fL "$base/README.txt" -o /tmp/apstim/README.txt
+          curl --max-time 90 -fL "$base/APStimStandalone.zip" -o /tmp/apstim/APStimStandalone.zip
+          curl --max-time 30 -fL "$base/Matlab/" -o /tmp/apstim/Matlab_index.html
+          curl --max-time 30 -fL "$base/FreeSurfer/" -o /tmp/apstim/FreeSurfer_index.html
+          curl --max-time 60 -fL "$base/Supporting%20tables.zip" -o /tmp/apstim/Supporting_tables.zip || true
+          file /tmp/apstim/* > /tmp/apstim/filetypes.txt
+          sha256sum /tmp/apstim/* > /tmp/apstim/SHA256SUMS.txt
+          ls -lah /tmp/apstim > /tmp/apstim/listing.txt
+      - name: Upload APStim sources
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r5-apstim-sources
+          path: /tmp/apstim/
+          retention-days: 2
+          compression-level: 0
