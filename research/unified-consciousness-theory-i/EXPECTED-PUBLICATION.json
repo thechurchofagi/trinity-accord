@@ -19,7 +19,7 @@
     {
       "name": "SHA256SUMS.txt",
       "bytes": 859,
-      "sha256": "905ed28ccfb29def8275f7a7ff80df227c606b6eb95bffaae9072bbf8306030f"
+      "sha256": "ee7cfb7f85308db98be98395ba1ba45e17de1c09e63eaf5aa874cdf1b1b18a1d"
     },
     {
       "name": "citation.bib",
@@ -38,23 +38,23 @@
     },
     {
       "name": "unified-consciousness-theory-i-supplement-v1.0.md",
-      "bytes": 6253,
-      "sha256": "ff2f6021237bc6d56ff67c7558bf43f26f6df0a9fbab94c378eaf9e5e735be69"
+      "bytes": 6447,
+      "sha256": "05e65bf6bcc241e40cf280fcefb7543b72162a7cafdc8023fb235107238a49a8"
     },
     {
       "name": "unified-consciousness-theory-i-supplement-v1.0.pdf",
-      "bytes": 52097,
-      "sha256": "9af76efccb50cff30d03bd42a99ec5e0fbdba39ecc2b07ab01cd6aefc01363e2"
+      "bytes": 43488,
+      "sha256": "aa574f773ed65a000804a2bdee23a32ba6686c234555aaf0d53c26466af71c88"
     },
     {
       "name": "unified-consciousness-theory-i-v1.0.md",
-      "bytes": 24889,
-      "sha256": "ed9c2deedf9db2624ce010bbfe95605ce191e494088430184a541a540208194f"
+      "bytes": 24848,
+      "sha256": "d592642a8c76936d1638544b5840b12d1bd3fba7628168971b89c662d2c62bc5"
     },
     {
       "name": "unified-consciousness-theory-i-v1.0.pdf",
-      "bytes": 89753,
-      "sha256": "761852b925e98b4afb9f5c241c08c1e0df7547be1577e45e46038e3c242a14d8"
+      "bytes": 89725,
+      "sha256": "d59a060d1b03f1eb08e849551b01418a64810557ecd341797b40d4790508fe07"
     }
   ],
   "prior_records_modified": false
