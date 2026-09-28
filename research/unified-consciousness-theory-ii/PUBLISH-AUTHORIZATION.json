@@ -1,0 +1,12 @@
+{
+  "report_number": "TA-TR-2026-21",
+  "version": "1.0",
+  "record_id": 23008262,
+  "doi": "10.5281/zenodo.23008262",
+  "authorization": "PUBLISH_EXACT_REVIEWED_PACKAGE",
+  "exact_manifest_file": "EXPECTED-PUBLICATION.json",
+  "reviewed_pdf_sha256": "270dc803a65c30cf2c3fc84b2e44992a95b4e0871761df8dda96665f70ecee4a",
+  "reviewed_markdown_sha256": "76609b53c4e11da548b48c845db3835c2c14465c8c51d064b86e8a15c36b1bd4",
+  "prior_records_modified": false,
+  "note": "Publish only the already reserved TA21 record after exact-package and visual review."
+}
