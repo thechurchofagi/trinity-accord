@@ -1,0 +1,105 @@
+name: Temporary ds005169 data transfer
+
+on:
+  push:
+    branches:
+      - ops/ds005169-download-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Download official NEMAR v1.0.0 archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/ds005169
+          curl --fail --location --retry 8 --retry-delay 5 --retry-all-errors \
+            "https://data.nemar.org/on005169/v1.0.0.zip" \
+            -o /tmp/ds005169/ds005169_v1.0.0.zip
+          stat -c '%n %s bytes' /tmp/ds005169/ds005169_v1.0.0.zip
+          sha256sum /tmp/ds005169/ds005169_v1.0.0.zip | tee /tmp/ds005169/SHA256SUMS.txt
+          unzip -tq /tmp/ds005169/ds005169_v1.0.0.zip
+          echo "zip_test=PASS" | tee /tmp/ds005169/TRANSFER_STATUS.txt
+          split -b 400M -d -a 2 /tmp/ds005169/ds005169_v1.0.0.zip /tmp/ds005169/ds005169.part.
+          ls -lh /tmp/ds005169/ds005169.part.* | tee /tmp/ds005169/PARTS.txt
+
+      - name: Upload transfer metadata
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ds005169-meta
+          path: |
+            /tmp/ds005169/SHA256SUMS.txt
+            /tmp/ds005169/TRANSFER_STATUS.txt
+            /tmp/ds005169/PARTS.txt
+          retention-days: 1
+          compression-level: 0
+
+      - name: Upload part 00
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ds005169-part-00
+          path: /tmp/ds005169/ds005169.part.00
+          if-no-files-found: ignore
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 01
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ds005169-part-01
+          path: /tmp/ds005169/ds005169.part.01
+          if-no-files-found: ignore
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 02
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ds005169-part-02
+          path: /tmp/ds005169/ds005169.part.02
+          if-no-files-found: ignore
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 03
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ds005169-part-03
+          path: /tmp/ds005169/ds005169.part.03
+          if-no-files-found: ignore
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 04
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ds005169-part-04
+          path: /tmp/ds005169/ds005169.part.04
+          if-no-files-found: ignore
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 05
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ds005169-part-05
+          path: /tmp/ds005169/ds005169.part.05
+          if-no-files-found: ignore
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 06
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ds005169-part-06
+          path: /tmp/ds005169/ds005169.part.06
+          if-no-files-found: ignore
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 07
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ds005169-part-07
+          path: /tmp/ds005169/ds005169.part.07
+          if-no-files-found: ignore
+          retention-days: 1
+          compression-level: 0
