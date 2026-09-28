@@ -7,7 +7,7 @@
 **Version:** 1.0  
 **Date:** 28 September 2026  
 **DOI:** __DOI_RESERVED_AT_RELEASE__  
-**Status:** Foundational theory preprint prepared for open-access DOI publication; not peer reviewed.  
+**Status:** Foundational theory preprint; not peer reviewed.  
 **AI assistance disclosure:** Substantial ChatGPT (OpenAI GPT-5.6 Sol) assistance was used for literature retrieval, formalization, adversarial review, theorem and counterexample checking, drafting, editing, and publication preparation under human direction. The human author of record is responsible for the decision to publish.
 
 ---
