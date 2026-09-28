@@ -1,0 +1,170 @@
+name: UCT R5C reconstruct missing stimulation points
+
+on:
+  push:
+    branches:
+      - ops/uct-r5c-reconstruct7-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  reconstruct:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        subject: ["01","02"]
+    steps:
+      - name: Install registration stack
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install antspyx nibabel nilearn pandas numpy scipy
+
+      - name: Clone metadata and download T1
+        env:
+          SUB: ${{ matrix.subject }}
+        run: |
+          set -euo pipefail
+          mkdir -p work/out
+          git clone --depth 1 --filter=blob:none https://github.com/nemarDatasets/on005169.git work/dataset
+          curl --fail --location --retry 5             "https://data.nemar.org/on005169/v1.0.0/sub-${SUB}/anat/sub-${SUB}_T1w.nii"             -o "work/sub-${SUB}_T1w.nii"
+          sha256sum "work/sub-${SUB}_T1w.nii" > work/out/source_t1_sha256.txt
+
+      - name: Register and reconstruct missing stimulation coordinates
+        env:
+          SUB: ${{ matrix.subject }}
+        run: |
+          cat > work/reconstruct.py <<'PY'
+          import os, re, json
+          from pathlib import Path
+          import numpy as np
+          import pandas as pd
+          import nibabel as nib
+          import ants
+          from nilearn.datasets import load_mni152_template
+
+          sub=os.environ["SUB"]
+          ds=Path("work/dataset")
+          subj=ds/f"sub-{sub}"
+          out=Path("work/out")
+          txdir=out/"tx"; txdir.mkdir(parents=True,exist_ok=True)
+
+          fixed_nii=load_mni152_template(resolution=2)
+          fixed_path=Path("work/MNI152_2mm.nii.gz")
+          nib.save(fixed_nii,fixed_path)
+          fixed=ants.image_read(str(fixed_path))
+          moving=ants.image_read(f"work/sub-{sub}_T1w.nii")
+
+          tx=ants.registration(
+              fixed=fixed,moving=moving,
+              type_of_transform="antsRegistrationSyNQuickRepro[s]",
+              outprefix=str(txdir/f"sub-{sub}_"),
+              verbose=False,
+          )
+
+          efiles=sorted(subj.glob("ses-*/ieeg/*_electrodes.tsv"))
+          if not efiles:
+              raise RuntimeError("no electrode table")
+          elec=pd.read_csv(efiles[0],sep="\t",keep_default_na=False)
+          em=elec.set_index("name")
+
+          def parse_contact(name):
+              m=re.match(r"^(.*?)(\d+)$",str(name).strip())
+              return None if not m else (m.group(1),int(m.group(2)))
+
+          def split_pair(s):
+              s=str(s).strip()
+              if "-" not in s: return None,None
+              return s.rsplit("-",1)
+
+          def coord_for_contact(name):
+              if name in em.index:
+                  return em.loc[name,["x","y","z"]].astype(float).to_numpy(), False, 0.0
+              pc=parse_contact(name)
+              if pc is None: raise RuntimeError(f"cannot parse missing contact {name}")
+              shaft,idx=pc
+              rows=[]
+              for _,r in elec.iterrows():
+                  q=parse_contact(r["name"])
+                  if q is None or q[0]!=shaft: continue
+                  try:
+                      xyz=np.array([float(r.x),float(r.y),float(r.z)])
+                  except Exception:
+                      continue
+                  rows.append((q[1],xyz))
+              if len(rows)<3:
+                  raise RuntimeError(f"not enough contacts to reconstruct {name}: {len(rows)}")
+              inds=np.array([x[0] for x in rows],float)
+              xyz=np.stack([x[1] for x in rows],axis=0)
+              pred=np.array([np.polyval(np.polyfit(inds,xyz[:,k],1),idx) for k in range(3)])
+              fit=np.stack([np.polyval(np.polyfit(inds,xyz[:,k],1),inds) for k in range(3)],axis=1)
+              rmse=float(np.sqrt(np.mean(np.sum((fit-xyz)**2,axis=1))))
+              return pred, True, rmse
+
+          points=[]
+          recon_meta=[]
+          for sesdir in sorted(subj.glob("ses-*")):
+              ieeg=sesdir/"ieeg"
+              evfiles=list(ieeg.glob("*_events.tsv"))
+              if len(evfiles)!=1: raise RuntimeError(f"{sesdir}: events mismatch")
+              ev=pd.read_csv(evfiles[0],sep="\t",keep_default_na=False)
+              stim=ev[pd.to_numeric(ev["stim_intensity"],errors="coerce").notna()]
+              if len(stim)!=1: raise RuntimeError(f"{sesdir}: stim rows {len(stim)}")
+              pair=str(stim.iloc[0]["stim_contacts"])
+              a,b=split_pair(pair)
+              xa,ra,ea=coord_for_contact(a)
+              xb,rb,eb=coord_for_contact(b)
+              mp=(xa+xb)/2
+              reconstructed=bool(ra or rb)
+              rmse=max(ea,eb)
+              points.append(dict(
+                  point_id=f"{sesdir.name}:stim:{pair}",kind="stim",session=sesdir.name,name=pair,
+                  x=mp[0],y=mp[1],z=mp[2],reconstructed=reconstructed,
+                  reconstruction_rmse_mm=rmse
+              ))
+              recon_meta.append(dict(session=sesdir.name,stim_pair=pair,reconstructed=reconstructed,
+                                     reconstruction_rmse_mm=rmse,native_x=mp[0],native_y=mp[1],native_z=mp[2]))
+
+          pts=pd.DataFrame(points)
+          lps=pd.DataFrame({"x":-pts.x.to_numpy(float),
+                            "y":-pts.y.to_numpy(float),
+                            "z": pts.z.to_numpy(float)})
+          out_lps=ants.apply_transforms_to_points(3,lps,tx["invtransforms"])
+          pts["mni_x"]=-out_lps.x.to_numpy()
+          pts["mni_y"]=-out_lps.y.to_numpy()
+          pts["mni_z"]= out_lps.z.to_numpy()
+          pts.to_csv(out/f"sub-{sub}_reconstructed_stim_MNI152.tsv",sep="\t",index=False)
+
+          # transform observed electrodes too, so this rerun can be compared to R5B output
+          obs=[]
+          for _,r in elec.iterrows():
+              try: xyz=np.array([float(r.x),float(r.y),float(r.z)])
+              except Exception: continue
+              obs.append(dict(name=str(r["name"]),x=xyz[0],y=xyz[1],z=xyz[2]))
+          odf=pd.DataFrame(obs)
+          olps=pd.DataFrame({"x":-odf.x.to_numpy(float),"y":-odf.y.to_numpy(float),"z":odf.z.to_numpy(float)})
+          oout=ants.apply_transforms_to_points(3,olps,tx["invtransforms"])
+          odf["mni_x"]=-oout.x.to_numpy(); odf["mni_y"]=-oout.y.to_numpy(); odf["mni_z"]=oout.z.to_numpy()
+          odf.to_csv(out/f"sub-{sub}_electrodes_MNI152_rerun.tsv",sep="\t",index=False)
+
+          (out/f"sub-{sub}_reconstruction_qc.json").write_text(json.dumps({
+              "subject":f"sub-{sub}",
+              "registration":"antsRegistrationSyNQuickRepro[s]",
+              "fixed":"nilearn MNI152 2mm",
+              "sessions":recon_meta,
+              "n_sessions":len(recon_meta),
+              "n_reconstructed":sum(x["reconstructed"] for x in recon_meta),
+              "max_native_shaft_fit_rmse_mm":max(x["reconstruction_rmse_mm"] for x in recon_meta)
+          },indent=2))
+          PY
+          python work/reconstruct.py
+
+      - name: Upload reconstruction artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: uct-r5c-sub-${{ matrix.subject }}-stim-reconstruction
+          path: work/out/
+          retention-days: 7
+          compression-level: 6
