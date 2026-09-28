@@ -513,8 +513,8 @@ This category is reserved for work produced outside project control by independe
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all eighteen studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all twenty studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the eighteen-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the twenty-paper series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.
