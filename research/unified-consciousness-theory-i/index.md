@@ -16,6 +16,7 @@ The paper is adjacent first-party research and does **not** define, amend, valid
 - [English Markdown](./published/unified-consciousness-theory-i-v1.0.md)
 - [Publication supplement PDF](./published/unified-consciousness-theory-i-supplement-v1.0.pdf)
 - [Publication receipt](./publication-record.json)
+- [OTS / Arweave preservation status](/research/paper-timestamps/2026-09-28-paper20-v10/status.json)
 - [Review and sources](./published/REVIEW-AND-SOURCES.md)
 - [BibTeX](./published/citation.bib) · [RIS](./published/citation.ris) · [CSL-JSON](./published/citation.csl.json)
 
