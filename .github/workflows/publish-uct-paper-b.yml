@@ -3,7 +3,7 @@ on:
   push:
     branches: [research/uct-paper-b-v1-20260928]
     paths:
-      - '.github/workflows/publish-uct-paper-a.yml'
+      - '.github/workflows/publish-uct-paper-b.yml'
       - 'research/unified-consciousness-theory-ii/PUBLISH-AUTHORIZATION.json'
 permissions:
   contents: write
