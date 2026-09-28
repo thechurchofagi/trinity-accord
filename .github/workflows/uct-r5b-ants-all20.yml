@@ -1,0 +1,194 @@
+name: UCT R5B ANTs all-20 registration
+
+on:
+  push:
+    branches:
+      - ops/uct-r5b-ants-all20-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        subject: ["01","02","03","04","06","07","08","09","10","11","12","13","14","15","17","18","19","20","21","22"]
+    steps:
+      - name: Install registration stack
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install antspyx nibabel nilearn pandas numpy scipy
+
+      - name: Clone BIDS metadata and download T1
+        env:
+          SUB: ${{ matrix.subject }}
+        run: |
+          set -euo pipefail
+          mkdir -p work/out
+          git clone --depth 1 --filter=blob:none https://github.com/nemarDatasets/on005169.git work/dataset
+          curl --fail --location --retry 5 \
+            "https://data.nemar.org/on005169/v1.0.0/sub-${SUB}/anat/sub-${SUB}_T1w.nii" \
+            -o "work/sub-${SUB}_T1w.nii"
+          sha256sum "work/sub-${SUB}_T1w.nii" > work/out/source_t1_sha256.txt
+
+      - name: Register and transform all subject points
+        env:
+          SUB: ${{ matrix.subject }}
+        run: |
+          cat > work/register_subject.py <<'PY'
+          import os, re, json, shutil, glob
+          from pathlib import Path
+          import numpy as np
+          import pandas as pd
+          import nibabel as nib
+          import ants
+          from nilearn.datasets import load_mni152_template
+
+          sub=os.environ["SUB"]
+          ds=Path("work/dataset")
+          subj=ds/f"sub-{sub}"
+          out=Path("work/out")
+          txdir=out/"tx"; txdir.mkdir(parents=True,exist_ok=True)
+
+          fixed_nii=load_mni152_template(resolution=2)
+          fixed_path=Path("work/MNI152_2mm.nii.gz")
+          nib.save(fixed_nii,fixed_path)
+          fixed=ants.image_read(str(fixed_path))
+          moving=ants.image_read(f"work/sub-{sub}_T1w.nii")
+
+          tx=ants.registration(
+              fixed=fixed,moving=moving,
+              type_of_transform="antsRegistrationSyNQuickRepro[s]",
+              outprefix=str(txdir/f"sub-{sub}_"),
+              verbose=False,
+          )
+          ants.image_write(tx["warpedmovout"],str(out/f"sub-{sub}_T1w_in_MNI152.nii.gz"))
+
+          # electrode table is identical across sessions; use the first.
+          efiles=sorted(subj.glob("ses-*/ieeg/*_electrodes.tsv"))
+          if not efiles:
+              raise RuntimeError("no electrode table")
+          elec=pd.read_csv(efiles[0],sep="\t",keep_default_na=False)
+          em=elec.set_index("name")
+
+          def split_pair(s):
+              s=str(s).strip()
+              if "-" not in s: return None,None
+              return s.rsplit("-",1)
+
+          def midpoint(pair):
+              a,b=split_pair(pair)
+              if a not in em.index or b not in em.index:
+                  return None
+              xa=em.loc[a,["x","y","z"]].astype(float).to_numpy()
+              xb=em.loc[b,["x","y","z"]].astype(float).to_numpy()
+              return (xa+xb)/2
+
+          points=[]
+          # monopolar electrode points
+          for _,r in elec.iterrows():
+              try:
+                  xyz=np.array([float(r.x),float(r.y),float(r.z)])
+              except Exception:
+                  continue
+              points.append(dict(point_id=f"electrode:{r['name']}",kind="electrode",
+                                 session="",name=str(r["name"]),x=xyz[0],y=xyz[1],z=xyz[2]))
+
+          # stimulation and recorded bipolar midpoints for every session
+          for sesdir in sorted(subj.glob("ses-*")):
+              ieeg=sesdir/"ieeg"
+              evfiles=list(ieeg.glob("*_events.tsv"))
+              chfiles=list(ieeg.glob("*_channels.tsv"))
+              if len(evfiles)!=1 or len(chfiles)!=1:
+                  raise RuntimeError(f"{sesdir}: events/channels mismatch")
+              session=sesdir.name
+              ev=pd.read_csv(evfiles[0],sep="\t",keep_default_na=False)
+              stim=ev[pd.to_numeric(ev["stim_intensity"],errors="coerce").notna()]
+              if len(stim)!=1: raise RuntimeError(f"{session}: stim rows {len(stim)}")
+              pair=str(stim.iloc[0]["stim_contacts"])
+              mp=midpoint(pair)
+              if mp is not None:
+                  points.append(dict(point_id=f"{session}:stim:{pair}",kind="stim",
+                                     session=session,name=pair,x=mp[0],y=mp[1],z=mp[2]))
+              ch=pd.read_csv(chfiles[0],sep="\t",keep_default_na=False)
+              for _,r in ch.iterrows():
+                  pair=str(r["name"]); mp=midpoint(pair)
+                  if mp is None: continue
+                  points.append(dict(point_id=f"{session}:channel:{pair}",kind="channel",
+                                     session=session,name=pair,x=mp[0],y=mp[1],z=mp[2]))
+
+          pts=pd.DataFrame(points)
+          # ScanRAS RAS+ -> ANTs LPS+
+          lps=pd.DataFrame({"x":-pts.x.to_numpy(float),
+                            "y":-pts.y.to_numpy(float),
+                            "z": pts.z.to_numpy(float)})
+          # moving native T1 -> fixed MNI for points
+          out_lps=ants.apply_transforms_to_points(3,lps,tx["invtransforms"])
+          pts["mni_x"]=-out_lps.x.to_numpy()
+          pts["mni_y"]=-out_lps.y.to_numpy()
+          pts["mni_z"]= out_lps.z.to_numpy()
+          pts.to_csv(out/f"sub-{sub}_points_MNI152.tsv",sep="\t",index=False)
+
+          # quantitative QC
+          f=fixed.numpy().astype(float); w=tx["warpedmovout"].numpy().astype(float)
+          nonzero=f>np.percentile(f[f>0],5)
+          q=nonzero & np.isfinite(w)
+          ff=f[q]; ww=w[q]
+          corr=float(np.corrcoef(ff,ww)[0,1]) if len(ff)>100 else None
+
+          # electrode-only bounds and fixed-template brain support
+          ep=pts[pts.kind=="electrode"]
+          xyz=ep[["mni_x","mni_y","mni_z"]].to_numpy(float)
+          broad=(
+              (xyz[:,0]>=-100)&(xyz[:,0]<=100)&
+              (xyz[:,1]>=-140)&(xyz[:,1]<=100)&
+              (xyz[:,2]>=-100)&(xyz[:,2]<=120)
+          )
+          inv_aff=np.linalg.inv(fixed_nii.affine)
+          ijk=nib.affines.apply_affine(inv_aff,xyz)
+          ijk_round=np.rint(ijk).astype(int)
+          shape=np.array(fixed_nii.shape[:3])
+          in_img=((ijk_round>=0)&(ijk_round<shape)).all(axis=1)
+          data=np.asanyarray(fixed_nii.dataobj)
+          in_brain=np.zeros(len(xyz),dtype=bool)
+          ii=np.where(in_img)[0]
+          if len(ii):
+              v=ijk_round[ii]
+              in_brain[ii]=data[v[:,0],v[:,1],v[:,2]]>0
+
+          qc={
+              "subject":f"sub-{sub}",
+              "registration":"antsRegistrationSyNQuickRepro[s]",
+              "fixed":"nilearn MNI152 2mm",
+              "n_sessions":len(list(subj.glob("ses-*"))),
+              "n_points_total":int(len(pts)),
+              "n_electrodes":int(len(ep)),
+              "warped_template_pearson":corr,
+              "electrode_broad_bounds_fraction":float(broad.mean()),
+              "electrode_in_template_image_fraction":float(in_img.mean()),
+              "electrode_in_nonzero_mni_template_fraction":float(in_brain.mean()),
+              "mni_min":xyz.min(0).tolist(),
+              "mni_max":xyz.max(0).tolist(),
+              "fwdtransforms":[str(x) for x in tx["fwdtransforms"]],
+              "invtransforms":[str(x) for x in tx["invtransforms"]],
+          }
+          (out/f"sub-{sub}_registration_qc.json").write_text(json.dumps(qc,indent=2))
+          for i,p in enumerate(tx["fwdtransforms"]):
+              shutil.copy2(p,txdir/f"fwd_{i}_"+Path(p).name)
+          for i,p in enumerate(tx["invtransforms"]):
+              shutil.copy2(p,txdir/f"inv_{i}_"+Path(p).name)
+          print(json.dumps(qc,indent=2))
+          PY
+          python work/register_subject.py
+
+      - name: Upload subject common-space artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: uct-r5b-sub-${{ matrix.subject }}-mni
+          path: work/out/
+          retention-days: 7
+          compression-level: 6
