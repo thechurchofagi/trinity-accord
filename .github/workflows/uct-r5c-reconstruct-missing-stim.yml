@@ -7,66 +7,57 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   reconstruct:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
         subject: ["01","02"]
     steps:
-      - name: Install registration stack
+      - name: Install point-transform stack
         run: |
           python -m pip install --upgrade pip
-          python -m pip install antspyx nibabel nilearn pandas numpy scipy
+          python -m pip install antspyx pandas numpy
 
-      - name: Clone metadata and download T1
+      - name: Download original R5B transform artifact
         env:
+          GH_TOKEN: ${{ github.token }}
           SUB: ${{ matrix.subject }}
         run: |
           set -euo pipefail
-          mkdir -p work/out
-          git clone --depth 1 --filter=blob:none https://github.com/nemarDatasets/on005169.git work/dataset
-          curl --fail --location --retry 5             "https://data.nemar.org/on005169/v1.0.0/sub-${SUB}/anat/sub-${SUB}_T1w.nii"             -o "work/sub-${SUB}_T1w.nii"
-          sha256sum "work/sub-${SUB}_T1w.nii" > work/out/source_t1_sha256.txt
+          mkdir -p work/old work/out
+          if [ "$SUB" = "01" ]; then ARTID=10960379588; else ARTID=10961202630; fi
+          curl --fail --location --retry 5             -H "Authorization: Bearer $GH_TOKEN"             -H "X-GitHub-Api-Version: 2022-11-28"             "https://api.github.com/repos/thechurchofagi/trinity-accord/actions/artifacts/${ARTID}/zip"             -o work/old.zip
+          unzip -q work/old.zip -d work/old
+          test -f "work/old/sub-${SUB}_points_MNI152.tsv"
+          test -f "work/old/tx/inv_0_sub-${SUB}_0GenericAffine.mat"
+          test -f "work/old/tx/inv_1_sub-${SUB}_1InverseWarp.nii.gz"
 
-      - name: Register and reconstruct missing stimulation coordinates
+      - name: Clone BIDS metadata
+        run: |
+          git clone --depth 1 --filter=blob:none https://github.com/nemarDatasets/on005169.git work/dataset
+
+      - name: Reconstruct missing native stimulation contacts and apply original transforms
         env:
           SUB: ${{ matrix.subject }}
         run: |
-          cat > work/reconstruct.py <<'PY'
+          cat > work/reconstruct_oldtx.py <<'PY'
           import os, re, json
           from pathlib import Path
           import numpy as np
           import pandas as pd
-          import nibabel as nib
           import ants
-          from nilearn.datasets import load_mni152_template
 
           sub=os.environ["SUB"]
-          ds=Path("work/dataset")
-          subj=ds/f"sub-{sub}"
+          subj=Path("work/dataset")/f"sub-{sub}"
           out=Path("work/out")
-          txdir=out/"tx"; txdir.mkdir(parents=True,exist_ok=True)
-
-          fixed_nii=load_mni152_template(resolution=2)
-          fixed_path=Path("work/MNI152_2mm.nii.gz")
-          nib.save(fixed_nii,fixed_path)
-          fixed=ants.image_read(str(fixed_path))
-          moving=ants.image_read(f"work/sub-{sub}_T1w.nii")
-
-          tx=ants.registration(
-              fixed=fixed,moving=moving,
-              type_of_transform="antsRegistrationSyNQuickRepro[s]",
-              outprefix=str(txdir/f"sub-{sub}_"),
-              verbose=False,
-          )
-
+          old=Path("work/old")
           efiles=sorted(subj.glob("ses-*/ieeg/*_electrodes.tsv"))
-          if not efiles:
-              raise RuntimeError("no electrode table")
+          if not efiles: raise RuntimeError("no electrode table")
           elec=pd.read_csv(efiles[0],sep="\t",keep_default_na=False)
           em=elec.set_index("name")
 
@@ -89,55 +80,44 @@ jobs:
               for _,r in elec.iterrows():
                   q=parse_contact(r["name"])
                   if q is None or q[0]!=shaft: continue
-                  try:
-                      xyz=np.array([float(r.x),float(r.y),float(r.z)])
-                  except Exception:
-                      continue
+                  try: xyz=np.array([float(r.x),float(r.y),float(r.z)])
+                  except Exception: continue
                   rows.append((q[1],xyz))
-              if len(rows)<3:
-                  raise RuntimeError(f"not enough contacts to reconstruct {name}: {len(rows)}")
+              if len(rows)<3: raise RuntimeError(f"not enough contacts for {name}")
               inds=np.array([x[0] for x in rows],float)
-              xyz=np.stack([x[1] for x in rows],axis=0)
-              pred=np.array([np.polyval(np.polyfit(inds,xyz[:,k],1),idx) for k in range(3)])
-              fit=np.stack([np.polyval(np.polyfit(inds,xyz[:,k],1),inds) for k in range(3)],axis=1)
+              xyz=np.stack([x[1] for x in rows])
+              fits=[np.polyfit(inds,xyz[:,k],1) for k in range(3)]
+              pred=np.array([np.polyval(fits[k],idx) for k in range(3)])
+              fit=np.stack([np.polyval(fits[k],inds) for k in range(3)],axis=1)
               rmse=float(np.sqrt(np.mean(np.sum((fit-xyz)**2,axis=1))))
-              return pred, True, rmse
+              return pred,True,rmse
 
-          points=[]
-          recon_meta=[]
+          rows=[]
           for sesdir in sorted(subj.glob("ses-*")):
-              ieeg=sesdir/"ieeg"
-              evfiles=list(ieeg.glob("*_events.tsv"))
-              if len(evfiles)!=1: raise RuntimeError(f"{sesdir}: events mismatch")
+              evfiles=list((sesdir/"ieeg").glob("*_events.tsv"))
               ev=pd.read_csv(evfiles[0],sep="\t",keep_default_na=False)
               stim=ev[pd.to_numeric(ev["stim_intensity"],errors="coerce").notna()]
               if len(stim)!=1: raise RuntimeError(f"{sesdir}: stim rows {len(stim)}")
               pair=str(stim.iloc[0]["stim_contacts"])
               a,b=split_pair(pair)
-              xa,ra,ea=coord_for_contact(a)
-              xb,rb,eb=coord_for_contact(b)
+              xa,ra,ea=coord_for_contact(a); xb,rb,eb=coord_for_contact(b)
               mp=(xa+xb)/2
-              reconstructed=bool(ra or rb)
-              rmse=max(ea,eb)
-              points.append(dict(
-                  point_id=f"{sesdir.name}:stim:{pair}",kind="stim",session=sesdir.name,name=pair,
-                  x=mp[0],y=mp[1],z=mp[2],reconstructed=reconstructed,
-                  reconstruction_rmse_mm=rmse
-              ))
-              recon_meta.append(dict(session=sesdir.name,stim_pair=pair,reconstructed=reconstructed,
-                                     reconstruction_rmse_mm=rmse,native_x=mp[0],native_y=mp[1],native_z=mp[2]))
+              rows.append(dict(point_id=f"{sesdir.name}:stim:{pair}",kind="stim",
+                               session=sesdir.name,name=pair,x=mp[0],y=mp[1],z=mp[2],
+                               reconstructed=bool(ra or rb),reconstruction_rmse_mm=max(ea,eb)))
+          pts=pd.DataFrame(rows)
 
-          pts=pd.DataFrame(points)
-          lps=pd.DataFrame({"x":-pts.x.to_numpy(float),
-                            "y":-pts.y.to_numpy(float),
-                            "z": pts.z.to_numpy(float)})
-          out_lps=ants.apply_transforms_to_points(3,lps,tx["invtransforms"])
-          pts["mni_x"]=-out_lps.x.to_numpy()
-          pts["mni_y"]=-out_lps.y.to_numpy()
-          pts["mni_z"]= out_lps.z.to_numpy()
-          pts.to_csv(out/f"sub-{sub}_reconstructed_stim_MNI152.tsv",sep="\t",index=False)
+          tx=[
+            str(old/f"tx/inv_0_sub-{sub}_0GenericAffine.mat"),
+            str(old/f"tx/inv_1_sub-{sub}_1InverseWarp.nii.gz")
+          ]
+          lps=pd.DataFrame({"x":-pts.x.to_numpy(float),"y":-pts.y.to_numpy(float),"z":pts.z.to_numpy(float)})
+          m=ants.apply_transforms_to_points(3,lps,tx)
+          pts["mni_x"]=-m.x.to_numpy(); pts["mni_y"]=-m.y.to_numpy(); pts["mni_z"]=m.z.to_numpy()
+          pts.to_csv(out/f"sub-{sub}_reconstructed_stim_MNI152_OLDTX.tsv",sep="\t",index=False)
 
-          # transform observed electrodes too, so this rerun can be compared to R5B output
+          # Re-transform observed native electrode points with the old transforms
+          # and compare against the stored original R5B coordinates.
           obs=[]
           for _,r in elec.iterrows():
               try: xyz=np.array([float(r.x),float(r.y),float(r.z)])
@@ -145,26 +125,36 @@ jobs:
               obs.append(dict(name=str(r["name"]),x=xyz[0],y=xyz[1],z=xyz[2]))
           odf=pd.DataFrame(obs)
           olps=pd.DataFrame({"x":-odf.x.to_numpy(float),"y":-odf.y.to_numpy(float),"z":odf.z.to_numpy(float)})
-          oout=ants.apply_transforms_to_points(3,olps,tx["invtransforms"])
-          odf["mni_x"]=-oout.x.to_numpy(); odf["mni_y"]=-oout.y.to_numpy(); odf["mni_z"]=oout.z.to_numpy()
-          odf.to_csv(out/f"sub-{sub}_electrodes_MNI152_rerun.tsv",sep="\t",index=False)
-
-          (out/f"sub-{sub}_reconstruction_qc.json").write_text(json.dumps({
-              "subject":f"sub-{sub}",
-              "registration":"antsRegistrationSyNQuickRepro[s]",
-              "fixed":"nilearn MNI152 2mm",
-              "sessions":recon_meta,
-              "n_sessions":len(recon_meta),
-              "n_reconstructed":sum(x["reconstructed"] for x in recon_meta),
-              "max_native_shaft_fit_rmse_mm":max(x["reconstruction_rmse_mm"] for x in recon_meta)
-          },indent=2))
+          om=ants.apply_transforms_to_points(3,olps,tx)
+          odf["mni_x"]=-om.x.to_numpy(); odf["mni_y"]=-om.y.to_numpy(); odf["mni_z"]=om.z.to_numpy()
+          stored=pd.read_csv(old/f"sub-{sub}_points_MNI152.tsv",sep="\t")
+          stored=stored[stored.kind=="electrode"][["name","mni_x","mni_y","mni_z"]]
+          chk=stored.merge(odf,on="name",suffixes=("_stored","_reapplied"))
+          err=np.sqrt((chk.mni_x_stored-chk.mni_x_reapplied)**2+
+                      (chk.mni_y_stored-chk.mni_y_reapplied)**2+
+                      (chk.mni_z_stored-chk.mni_z_reapplied)**2)
+          qc={
+            "subject":f"sub-{sub}",
+            "transform_source":"original R5B run 36403412676 artifact",
+            "n_sessions":int(len(pts)),
+            "n_reconstructed":int(pts.reconstructed.sum()),
+            "max_native_shaft_fit_rmse_mm":float(pts.reconstruction_rmse_mm.max()),
+            "old_transform_reapplication_check":{
+              "n_electrodes":int(len(chk)),
+              "mean_error_mm":float(err.mean()),
+              "median_error_mm":float(np.median(err)),
+              "max_error_mm":float(err.max())
+            }
+          }
+          (out/f"sub-{sub}_reconstruction_OLDTX_qc.json").write_text(json.dumps(qc,indent=2))
+          print(json.dumps(qc,indent=2))
           PY
-          python work/reconstruct.py
+          python work/reconstruct_oldtx.py
 
-      - name: Upload reconstruction artifact
+      - name: Upload exact old-transform reconstruction
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: uct-r5c-sub-${{ matrix.subject }}-stim-reconstruction
+          name: uct-r5c-sub-${{ matrix.subject }}-stim-reconstruction-oldtx
           path: work/out/
           retention-days: 7
           compression-level: 6
