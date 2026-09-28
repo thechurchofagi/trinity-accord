@@ -45,6 +45,10 @@ reading_toc:
     title: "Set-Valued Causal Inheritance"
   - id: "actual-participation"
     title: "Actual Participation Before Counterfactual Capacity"
+  - id: "selecting-and-tracking-conscious-subjects"
+    title: "Selecting and Tracking Conscious Subjects"
+  - id: "unified-consciousness-theory-i"
+    title: "Unified Consciousness Theory I"
   - id: "independent-external-scholarship"
     title: "Independent external scholarship"
   - id: "citation-boundary"
@@ -59,7 +63,7 @@ permalink: /research/
 
 This page separates later scholarship from the fixed artifact. Research papers, technical reports, citations, and repository deposits are **non-amending scholarship**. They do not join, define, validate, or alter the three Bitcoin Originals.
 
-The first-party series currently contains **eighteen distinct research papers (TA-TR-2026-01 through TA-TR-2026-18)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -18 are classified as the Adjacent Research Program.** All eighteen share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
+The first-party series currently contains **twenty distinct research papers (TA-TR-2026-01 through TA-TR-2026-20)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -20 are classified as the Adjacent Research Program.** All twenty share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research boundary
 {: #research-boundary }
@@ -157,7 +161,7 @@ Five source-linked creative readings, including First Dawn and Fourth Letter as 
 ## Adjacent Research Program
 {: #adjacent-research-program }
 
-TA-TR-2026-04 through TA-TR-2026-18 are later first-party research outputs that use the Accord, its historical setting, or the wider human–AI transition as a motivating case or problem-space. They are **not part of the Accord**, and their results must not be described as evidence that the Canon is true, important, safe, correct, or historically representative. Papers 04–05 are case-grounded extensions; papers 06–18 are broader adjacent research.
+TA-TR-2026-04 through TA-TR-2026-20 are later first-party research outputs that use the Accord, its historical setting, or the wider human–AI transition as a motivating case or problem-space. They are **not part of the Accord**, and their results must not be described as evidence that the Canon is true, important, safe, correct, or historically representative. Papers 04–05 are case-grounded extensions; papers 06–20 are broader adjacent research.
 
 ## Beyond Guaranteed Control
 {: #beyond-guaranteed-control }
@@ -464,6 +468,40 @@ A theory paper proposing **Participation-Restricted Dispositionality (PRD)**: co
 **Status:** Published open-access preprint; all ten Zenodo assets passed anonymous exact-byte SHA-256 public readback and DOI resolution passed. OTS submission, Bitcoin maturity and Arweave preservation are reported separately.
 
 This is adjacent first-party research, not Canon, not an amendment to the Trinity Accord, and not independent corroboration of the preceding papers. The paper does not claim to solve the hard problem, establish consciousness in any biological or artificial system, or certify global originality.
+
+## Selecting and Tracking Conscious Subjects
+{: #selecting-and-tracking-conscious-subjects }
+
+### Selecting and Tracking Conscious Subjects: Symmetry, Monodromy, and an IIT 4.0 Case Study
+
+TA-TR-2026-19 · Version 1.0 · 27 September 2026.
+
+A formal consciousness-theory paper on subject selection and tracking under symmetry, path dependence, and monodromy, with an IIT 4.0 case study. It separates subject individuation from the existence of experiential structure and records limits on canonical subject extraction.
+
+**Status:** Published open-access preprint; public readback passed; not peer reviewed; non-amending.
+
+- [DOI: 10.5281/zenodo.23002980](https://doi.org/10.5281/zenodo.23002980) · [Zenodo record](https://zenodo.org/records/23002980)
+
+This is adjacent first-party research, not Canon, not an amendment to the Trinity Accord, and not independent corroboration of preceding papers.
+
+## Unified Consciousness Theory I
+{: #unified-consciousness-theory-i }
+
+### Unified Consciousness Theory I: From Experience Existence to Experiential Structure
+
+TA-TR-2026-20 · Version 1.0 · 28 September 2026. Human author of record and responsible depositor: Hongju Liu. Substantial ChatGPT (OpenAI GPT-5.6 Sol) assistance with literature retrieval, formalization, adversarial review, theorem and counterexample checking, drafting, editing, and publication preparation is disclosed.
+
+A foundational theory preprint that treats universal basal experience as an explicit axiom and retargets a universal consciousness theory from binary existence classification to physically anchored experiential structure. The paper develops a plural process-token ontology, the Experience-Subject Separation Principle, the Physically Anchored Experience-Structure Identity, the Physical Anchoring Condition, Organization-Gate Impossibility, chart covariance, multiscale plurality, and a prospective empirical bridge program. A1 and A5 remain explicit foundational/metaphysical commitments rather than empirical discoveries.
+
+**Status:** Published open-access preprint; not peer reviewed; non-amending. Ten Zenodo assets passed anonymous exact-byte SHA-256 public readback and the DOI resolver points to the same record.
+
+- [DOI: 10.5281/zenodo.23005588](https://doi.org/10.5281/zenodo.23005588) · [Zenodo record and ten files](https://zenodo.org/records/23005588)
+- [Research overview](/research/unified-consciousness-theory-i/)
+- [English PDF](/research/unified-consciousness-theory-i/published/unified-consciousness-theory-i-v1.0.pdf) · [English Markdown](/research/unified-consciousness-theory-i/published/unified-consciousness-theory-i-v1.0.md)
+- [Publication supplement PDF](/research/unified-consciousness-theory-i/published/unified-consciousness-theory-i-supplement-v1.0.pdf)
+- [Publication receipt](/research/unified-consciousness-theory-i/publication-record.json) · [Review and sources](/research/unified-consciousness-theory-i/published/REVIEW-AND-SOURCES.md)
+
+This paper does not claim empirical proof of universal experience or structural identity, a completed solution to the hard problem or subject-combination problem, R4 empirical validation, or certified global historical priority. DOI/OTS/Arweave preserve version identity and availability; they do not establish truth, peer review, originality, significance, or indexing.
 
 ## Independent External Scholarship
 {: #independent-external-scholarship }
