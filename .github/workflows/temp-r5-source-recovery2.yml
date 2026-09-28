@@ -1,0 +1,33 @@
+name: R5 source recovery 2
+
+on:
+  push:
+    branches:
+      - ops/r5-source-recovery-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Fetch sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/r5
+          curl -L --retry 5 --retry-delay 2 "https://www.brainstimjrnl.com/action/showPdf?pii=S1935861X25002505" -o /tmp/r5/visual_hallucinations_2025.pdf || true
+          curl -L --retry 5 --retry-delay 2 "http://epi.fizica.unibuc.ro/apstim/" -o /tmp/r5/apstim_index_http.html || true
+          curl -L --retry 5 --retry-delay 2 "https://epi.fizica.unibuc.ro/apstim/" -o /tmp/r5/apstim_index_https.html || true
+          file /tmp/r5/* > /tmp/r5/filetypes.txt || true
+          sha256sum /tmp/r5/* > /tmp/r5/SHA256SUMS.txt || true
+          ls -lah /tmp/r5 > /tmp/r5/listing.txt
+      - name: Upload
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r5-recovered-sources
+          path: /tmp/r5/
+          retention-days: 2
+          compression-level: 0
