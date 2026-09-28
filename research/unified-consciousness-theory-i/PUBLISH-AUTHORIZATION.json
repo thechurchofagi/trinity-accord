@@ -1,0 +1,20 @@
+{
+  "report_number": "TA-TR-2026-20",
+  "version": "1.0",
+  "record_id": 23005588,
+  "doi": "10.5281/zenodo.23005588",
+  "authorization": "PUBLISH_EXACT_REVIEWED_PACKAGE",
+  "reviewed_file_count": 10,
+  "review_basis": [
+    "Paper A four-specialist hostile review completed and incorporated",
+    "final sentence-level claim audit PASS",
+    "exact DOI-bound package generated on reserved record 23005588",
+    "format-checks PASS and PDF text extraction PASS",
+    "main PDF 16 pages visually reviewed with no clipping or overlap identified",
+    "supplement PDF 4 pages visually reviewed with release wording corrected",
+    "exact 10-file SHA-256 manifest reviewed",
+    "A1/A5, subject-combination, empirical-validation and historical-priority limitations retained"
+  ],
+  "prior_records_must_remain_unchanged": true,
+  "bitcoin_originals_must_remain_unchanged": true
+}
