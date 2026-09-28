@@ -1,4 +1,4 @@
-name: UCT R5C APStim Patient3 directory probe
+name: UCT R5C APStim remote-zip minimal surface
 
 on:
   push:
@@ -9,31 +9,48 @@ permissions:
   contents: read
 
 jobs:
-  probe:
+  extract:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
-      - name: Fetch patient directory listings
+      - name: Install remotezip
+        run: python -m pip install remotezip
+      - name: Extract Patient3 minimal FreeSurfer assets by HTTP range
         run: |
           set -euo pipefail
           mkdir -p out
-          for path in "Patient3/" "Patient3/FreeSurfer/" "Patient3/FreeSurfer/surf/" "Patient3/FreeSurfer/mri/" "Patient3/FreeSurfer/mri/orig/"; do
-            safe=$(echo "$path" | tr '/ ' '__')
-            curl --fail --location --connect-timeout 5 --max-time 30               "http://epi.fizica.unibuc.ro/apstim/$path"               -o "out/$safe"
-          done
           python - <<'PY'
+          from remotezip import RemoteZip
           from pathlib import Path
-          import re,json
-          out={}
-          for p in Path("out").iterdir():
-              txt=p.read_text(errors="ignore")
-              out[p.name]={"bytes":p.stat().st_size,"links":sorted(set(re.findall(r'''href=["']([^"']+)''',txt,re.I)))}
-          Path("out/listings.json").write_text(json.dumps(out,indent=2))
-          print(json.dumps(out,indent=2))
+          import json, os
+          url="http://epi.fizica.unibuc.ro/apstim/Patient3.zip"
+          wanted_suffixes=[
+            "FreeSurfer/surf/lh.pial","FreeSurfer/surf/rh.pial",
+            "FreeSurfer/surf/lh.sphere.reg","FreeSurfer/surf/rh.sphere.reg",
+            "FreeSurfer/mri/orig/001.mgh","FreeSurfer/mri/orig/001.mgz"
+          ]
+          with RemoteZip(url) as z:
+              names=z.namelist()
+              Path("out/namelist.txt").write_text("\n".join(names))
+              selected=[]
+              for suf in wanted_suffixes:
+                  hits=[n for n in names if n.endswith(suf)]
+                  selected += hits
+              selected=sorted(set(selected))
+              Path("out/selected.json").write_text(json.dumps(selected,indent=2))
+              for n in selected:
+                  data=z.read(n)
+                  p=Path("out/assets")/n
+                  p.parent.mkdir(parents=True,exist_ok=True)
+                  p.write_bytes(data)
+              manifest=[{"name":n,"bytes":(Path("out/assets")/n).stat().st_size} for n in selected]
+              Path("out/manifest.json").write_text(json.dumps(manifest,indent=2))
+              print(json.dumps(manifest,indent=2))
           PY
       - name: Upload
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: uct-r5c-apstim-patient3-listings
+          name: uct-r5c-apstim-patient3-minsurf-range
           path: out/
           retention-days: 7
+          compression-level: 6
