@@ -13,17 +13,39 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Download original source files
+      - name: Install remotezip
+        run: python -m pip install remotezip
+      - name: Extract Matlab source from Software.zip using HTTP range
         run: |
           set -euo pipefail
-          mkdir -p out/Matlab
-          files=(APSpectrum.m APStim.m APStimPopulation.m APStimSimulation.m CompareThresholds.m NicoletFile.m tdfd.m)
-          for f in "${files[@]}"; do
-            curl --fail --location --retry 5 --connect-timeout 5 --max-time 60               "http://epi.fizica.unibuc.ro/apstim/Matlab/$f"               -o "out/Matlab/$f"
-          done
-          curl --fail --location --retry 5 "http://epi.fizica.unibuc.ro/apstim/README.txt" -o out/README.txt
-          sha256sum out/Matlab/* out/README.txt > out/SHA256SUMS.txt
-          find out -type f -printf '%P\t%s\n' | sort > out/FILE_MANIFEST.tsv
+          mkdir -p out
+          python - <<'PY'
+          from remotezip import RemoteZip
+          from pathlib import Path
+          import json,hashlib
+          url="http://epi.fizica.unibuc.ro/apstim/Software.zip"
+          wanted=["APSpectrum.m","APStim.m","APStimPopulation.m","APStimSimulation.m",
+                  "CompareThresholds.m","NicoletFile.m","tdfd.m"]
+          manifest=[]
+          with RemoteZip(url) as z:
+              names=z.namelist()
+              Path("out/NAMELIST.txt").write_text("\n".join(names))
+              for base in wanted:
+                  hits=[n for n in names if n.endswith("/Matlab/"+base) or n.endswith("Matlab/"+base) or n==base]
+                  if len(hits)!=1:
+                      hits=[n for n in names if n.endswith(base)]
+                  if len(hits)!=1:
+                      raise RuntimeError(f"{base}: {hits}")
+                  n=hits[0]
+                  data=z.read(n)
+                  p=Path("out/Matlab")/base
+                  p.parent.mkdir(parents=True,exist_ok=True)
+                  p.write_bytes(data)
+                  manifest.append({"source_zip":url,"member":n,"file":base,"bytes":len(data),
+                                   "sha256":hashlib.sha256(data).hexdigest()})
+          Path("out/MANIFEST.json").write_text(json.dumps(manifest,indent=2))
+          print(json.dumps(manifest,indent=2))
+          PY
       - name: Upload source
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
