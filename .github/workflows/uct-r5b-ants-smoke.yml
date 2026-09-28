@@ -1,0 +1,133 @@
+name: UCT R5B ANTs registration smoke
+
+on:
+  push:
+    branches:
+      - ops/uct-r5b-ants-smoke-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  register-sub08:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Install Python registration stack
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install antspyx nibabel nilearn pandas numpy scipy
+
+      - name: Download source T1 and electrode coordinates
+        run: |
+          set -euo pipefail
+          mkdir -p work/out
+          curl --fail --location --retry 5 \
+            https://data.nemar.org/on005169/v1.0.0/sub-08/anat/sub-08_T1w.nii \
+            -o work/sub-08_T1w.nii
+          curl --fail --location --retry 5 \
+            https://raw.githubusercontent.com/nemarDatasets/on005169/main/sub-08/ses-01/ieeg/sub-08_ses-01_electrodes.tsv \
+            -o work/sub-08_electrodes.tsv
+          ls -lh work/sub-08_T1w.nii work/sub-08_electrodes.tsv
+          sha256sum work/sub-08_T1w.nii work/sub-08_electrodes.tsv | tee work/out/source_sha256.txt
+
+      - name: Register T1 to MNI152 and transform electrodes
+        run: |
+          cat > work/register.py <<'PY'
+          import os, json, shutil
+          import numpy as np
+          import pandas as pd
+          import nibabel as nib
+          import ants
+          from nilearn.datasets import load_mni152_template
+
+          os.makedirs("work/out/tx", exist_ok=True)
+          fixed_img = load_mni152_template(resolution=2)
+          fixed_path = "work/MNI152_2mm.nii.gz"
+          nib.save(fixed_img, fixed_path)
+
+          fixed = ants.image_read(fixed_path)
+          moving = ants.image_read("work/sub-08_T1w.nii")
+
+          tx = ants.registration(
+              fixed=fixed,
+              moving=moving,
+              type_of_transform="antsRegistrationSyNQuickRepro[s]",
+              outprefix="work/out/tx/sub08_",
+              verbose=True,
+          )
+
+          # Save warped T1 for visual/quantitative QC.
+          ants.image_write(tx["warpedmovout"], "work/out/sub-08_T1w_in_MNI152.nii.gz")
+
+          # ScanRAS is RAS+; ANTs point transforms require LPS+.
+          e = pd.read_csv("work/sub-08_electrodes.tsv", sep="\t")
+          good = e[["x","y","z"]].apply(pd.to_numeric, errors="coerce").notna().all(axis=1)
+          pts = e.loc[good, ["name","x","y","z"]].copy()
+          lps = pd.DataFrame({
+              "x": -pts["x"].astype(float).to_numpy(),
+              "y": -pts["y"].astype(float).to_numpy(),
+              "z":  pts["z"].astype(float).to_numpy(),
+          })
+          # For registration(fixed=MNI, moving=T1), invtransforms map moving points -> fixed.
+          out_lps = ants.apply_transforms_to_points(3, lps, tx["invtransforms"])
+          out = pts[["name"]].reset_index(drop=True)
+          out["native_ras_x"] = pts["x"].astype(float).to_numpy()
+          out["native_ras_y"] = pts["y"].astype(float).to_numpy()
+          out["native_ras_z"] = pts["z"].astype(float).to_numpy()
+          out["mni_ras_x"] = -out_lps["x"].to_numpy()
+          out["mni_ras_y"] = -out_lps["y"].to_numpy()
+          out["mni_ras_z"] =  out_lps["z"].to_numpy()
+          out.to_csv("work/out/sub-08_electrodes_MNI152.tsv", sep="\t", index=False)
+
+          # Quantitative registration QC.
+          f = fixed.numpy().astype(float)
+          w = tx["warpedmovout"].numpy().astype(float)
+          mask = np.isfinite(f) & np.isfinite(w) & (f > np.percentile(f[f>0], 5))
+          if mask.sum() > 100:
+              ff=f[mask]; ww=w[mask]
+              ff=(ff-ff.mean())/(ff.std()+1e-12)
+              ww=(ww-ww.mean())/(ww.std()+1e-12)
+              corr=float(np.mean(ff*ww))
+          else:
+              corr=None
+
+          xyz=out[["mni_ras_x","mni_ras_y","mni_ras_z"]].to_numpy(float)
+          plausible=(
+              (xyz[:,0] >= -100)&(xyz[:,0] <= 100)&
+              (xyz[:,1] >= -140)&(xyz[:,1] <= 100)&
+              (xyz[:,2] >= -100)&(xyz[:,2] <= 120)
+          )
+          qc={
+              "subject":"sub-08",
+              "registration":"antsRegistrationSyNQuickRepro[s]",
+              "fixed":"nilearn MNI152 template 2mm",
+              "point_input_convention":"BIDS ScanRAS RAS -> LPS before ANTs",
+              "point_output_convention":"ANTs LPS -> MNI RAS",
+              "n_electrodes":int(len(out)),
+              "warped_fixed_mask_zcorr":corr,
+              "mni_bounds_min":xyz.min(0).tolist(),
+              "mni_bounds_max":xyz.max(0).tolist(),
+              "fraction_points_in_broad_mni_bounds":float(plausible.mean()),
+              "fwdtransforms":[str(x) for x in tx["fwdtransforms"]],
+              "invtransforms":[str(x) for x in tx["invtransforms"]],
+          }
+          with open("work/out/registration_qc.json","w") as fh:
+              json.dump(qc,fh,indent=2)
+
+          # Copy exact transform files into stable names.
+          for i,p in enumerate(tx["fwdtransforms"]):
+              shutil.copy2(p, f"work/out/tx/fwd_{i}_"+os.path.basename(p))
+          for i,p in enumerate(tx["invtransforms"]):
+              shutil.copy2(p, f"work/out/tx/inv_{i}_"+os.path.basename(p))
+          print(json.dumps(qc,indent=2))
+          PY
+          python work/register.py
+
+      - name: Upload registration smoke artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: uct-r5b-sub08-ants-smoke
+          path: work/out/
+          retention-days: 7
+          compression-level: 6
