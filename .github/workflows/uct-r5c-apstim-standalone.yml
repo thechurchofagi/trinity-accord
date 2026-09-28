@@ -1,0 +1,46 @@
+name: UCT R5C download APStimStandalone
+
+on:
+  push:
+    branches:
+      - ops/uct-r5c-apstim-standalone-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Download APStimStandalone
+        run: |
+          set -euo pipefail
+          mkdir -p out/unpacked
+          curl --fail --location --retry 5             "http://epi.fizica.unibuc.ro/apstim/APStimStandalone.zip"             -o out/APStimStandalone.zip
+          sha256sum out/APStimStandalone.zip | tee out/APStimStandalone.sha256
+          unzip -t out/APStimStandalone.zip | tee out/unzip_test.txt
+          unzip -q out/APStimStandalone.zip -d out/unpacked
+          find out/unpacked -type f -printf '%P\t%s\n' | sort > out/file_manifest.tsv
+          grep -Ei '\.(m|mat|annot|sphere|reg|txt|xlsx|xls|nii|mgz)$' out/file_manifest.tsv > out/method_asset_manifest.tsv || true
+          python - <<'PY'
+          import os,json
+          from pathlib import Path
+          root=Path("out/unpacked")
+          rows=[]
+          for p in sorted(root.rglob("*")):
+              if p.is_file():
+                  rows.append({"path":str(p.relative_to(root)),"bytes":p.stat().st_size})
+          Path("out/summary.json").write_text(json.dumps({
+              "n_files":len(rows),
+              "total_unpacked_bytes":sum(x["bytes"] for x in rows),
+              "files":rows
+          },indent=2))
+          PY
+      - name: Upload APStimStandalone recovery
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: uct-r5c-apstim-standalone-recovery
+          path: out/
+          retention-days: 7
+          compression-level: 6
