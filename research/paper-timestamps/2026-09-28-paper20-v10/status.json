@@ -1,23 +1,30 @@
 {
+  "arweave_tx_id": "40ypLopQdOWOaXu1XaJonduyuJh1PM1yAw09im_y_uE",
+  "arweave_url": "https://arweave.net/40ypLopQdOWOaXu1XaJonduyuJh1PM1yAw09im_y_uE",
   "batch": "2026-09-28-paper20-v10",
+  "bundle_sha256": "ac6b56a9e519fe626cccb902cc3984a199e496129fbdad320c68a8aac56239ab",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        968927,
+        968928,
+        968952
+      ],
       "bytes": 89725,
       "doi": "10.5281/zenodo.23005588",
       "name": "unified-consciousness-theory-i-v1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-28-paper20-v10/proofs/TA-TR-2026-20/unified-consciousness-theory-i-v1.0.pdf.ots",
-      "proof_sha256": "b7b74da9f6ea630510eec3ac776522b7876ab58247f36604978a31f01c0600a4",
+      "proof_sha256": "6c380e94ea174b54942e1480de08a4af96a356df88637e445476e26c74824bb9",
       "report": "TA-TR-2026-20",
       "role": "Complete English v1.0 foundational theory preprint",
       "sha256": "d59a060d1b03f1eb08e849551b01418a64810557ecd341797b40d4790508fe07",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "ARWEAVE_READBACK_PASS",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
