@@ -1,3 +1,4 @@
+# TA20 exact-package wording rebuild after reserved DOI review
 #!/usr/bin/env python3
 from __future__ import annotations
 import argparse, hashlib, html, importlib.util, json, os, pathlib, subprocess, sys, time, urllib.error, urllib.parse, urllib.request
