@@ -119,12 +119,41 @@ jobs:
               debug["current_keys"].append([ses.name,pair,cur])
               if pair not in source_by: continue
 
-              el=pd.read_csv(elf[0],sep="\t",keep_default_na=False).set_index("name")
+              eldf=pd.read_csv(elf[0],sep="\t",keep_default_na=False)
+              el=eldf.set_index("name")
               a,b=str(r["stim_contacts"]).split("-")
-              if a not in el.index or b not in el.index: continue
-              xa=el.loc[a,["x","y","z"]].astype(float).to_numpy()
-              xb=el.loc[b,["x","y","z"]].astype(float).to_numpy()
+
+              def parse_contact(name):
+                  m=re.match(r"^(.*?)(\\d+)$",str(name).strip())
+                  return None if not m else (m.group(1),int(m.group(2)))
+
+              def coord_contact(name):
+                  if name in el.index:
+                      return el.loc[name,["x","y","z"]].astype(float).to_numpy(),False,0.0
+                  pc=parse_contact(name)
+                  if pc is None: raise RuntimeError(f"cannot parse contact {name}")
+                  shaft,idx=pc
+                  rr=[]
+                  for _,er in eldf.iterrows():
+                      q=parse_contact(er["name"])
+                      if q is None or q[0]!=shaft: continue
+                      try: xyz=np.array([float(er.x),float(er.y),float(er.z)])
+                      except Exception: continue
+                      rr.append((q[1],xyz))
+                  if len(rr)<3: raise RuntimeError(f"not enough contacts to reconstruct {name}")
+                  inds=np.array([x[0] for x in rr],float)
+                  xyz=np.stack([x[1] for x in rr])
+                  fits=[np.polyfit(inds,xyz[:,k],1) for k in range(3)]
+                  pred=np.array([np.polyval(fits[k],idx) for k in range(3)])
+                  fit=np.stack([np.polyval(fits[k],inds) for k in range(3)],axis=1)
+                  rmse=float(np.sqrt(np.mean(np.sum((fit-xyz)**2,axis=1))))
+                  return pred,True,rmse
+
+              xa,ra,rma=coord_contact(a)
+              xb,rb,rmb=coord_contact(b)
               mid=(xa+xb)/2
+              was_reconstructed=bool(ra or rb)
+              reconstruction_rmse=max(rma,rmb)
 
               # Match source-code convention: prime denotes left.
               h="lh" if "'" in a else "rh"
@@ -143,6 +172,8 @@ jobs:
                       "pair":pair,
                       "current":cur,
                       "mapped_hemi":h,
+                      "stim_coordinate_reconstructed":was_reconstructed,
+                      "stim_reconstruction_rmse_mm":float(reconstruction_rmse),
                       "native_nearest_pial_mm":float(d_native),
                       "sphere_nearest_fsaverage_mm":float(d_sphere),
                       "mapped_template_vertex_0based":int(fsvid),
