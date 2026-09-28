@@ -1,0 +1,37 @@
+name: R5 Matlab source recovery
+
+on:
+  push:
+    branches:
+      - ops/r5-source-recovery-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  recover-matlab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch Matlab sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/matlab
+          base="http://epi.fizica.unibuc.ro/apstim/Matlab"
+          curl --max-time 45 -fL "$base/APSpectrum.m" -o "/tmp/matlab/APSpectrum.m"
+          curl --max-time 45 -fL "$base/APStim.m" -o "/tmp/matlab/APStim.m"
+          curl --max-time 45 -fL "$base/APStimPopulation.m" -o "/tmp/matlab/APStimPopulation.m"
+          curl --max-time 45 -fL "$base/APStimSimulation.m" -o "/tmp/matlab/APStimSimulation.m"
+          curl --max-time 45 -fL "$base/CompareThresholds.m" -o "/tmp/matlab/CompareThresholds.m"
+          curl --max-time 45 -fL "$base/NicoletFile.m" -o "/tmp/matlab/NicoletFile.m"
+          curl --max-time 45 -fL "$base/tdfd.m" -o "/tmp/matlab/tdfd.m"
+          sha256sum /tmp/matlab/* > /tmp/matlab/SHA256SUMS.txt
+          grep -Ein "PLV|phase|HCP|sphere|zscore|rank|Mann|0\.25|2\.25|4 Hz|pass.?band|harmonic" /tmp/matlab/*.m > /tmp/matlab/METHOD_HITS.txt || true
+      - name: Upload Matlab sources
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r5-matlab-sources
+          path: /tmp/matlab/
+          retention-days: 2
+          compression-level: 0
