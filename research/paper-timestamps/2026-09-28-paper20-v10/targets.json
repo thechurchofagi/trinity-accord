@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-28-paper20-v10",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-20",
+      "record_id": 23005588,
+      "doi": "10.5281/zenodo.23005588",
+      "version": "1.0",
+      "title": "Unified Consciousness Theory I: From Experience Existence to Experiential Structure",
+      "receipt_path": "research/unified-consciousness-theory-i/publication-record.json",
+      "pdfs": [
+        {
+          "name": "unified-consciousness-theory-i-v1.0.pdf",
+          "bytes": 89725,
+          "sha256": "d59a060d1b03f1eb08e849551b01418a64810557ecd341797b40d4790508fe07",
+          "role": "Complete English v1.0 foundational theory preprint"
+        }
+      ]
+    }
+  ]
+}
