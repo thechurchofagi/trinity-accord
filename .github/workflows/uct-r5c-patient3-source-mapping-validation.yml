@@ -99,9 +99,12 @@ jobs:
               if pid!=patient_id: continue
               pair=normpair(s.stim_pair)
               cur=float(np.asarray(s.current).reshape(-1)[0])
-              source_by.setdefault((pair,round(cur,6)),[]).append((i,s))
+              symptom=str(s.symptom).lower()
+              if "visual" not in symptom: continue
+              source_by.setdefault(pair,[]).append((i,s,cur,symptom))
 
           rows=[]
+          debug={"source_visual_keys":sorted([(k,[(int(i),float(cur),sym) for i,_,cur,sym in v]) for k,v in source_by.items()]),"current_keys":[]}
           for ses in sorted(subdir.glob("ses-*")):
               ieeg=ses/"ieeg"
               evf=list(ieeg.glob("*_events.tsv"))
@@ -113,8 +116,8 @@ jobs:
               r=st.iloc[0]
               pair=normpair(r["stim_contacts"])
               cur=float(r["stim_intensity"])
-              key=(pair,round(cur,6))
-              if key not in source_by: continue
+              debug["current_keys"].append([ses.name,pair,cur])
+              if pair not in source_by: continue
 
               el=pd.read_csv(elf[0],sep="\t",keep_default_na=False).set_index("name")
               a,b=str(r["stim_contacts"]).split("-")
@@ -131,8 +134,8 @@ jobs:
               lab=int(hemi[h]["labels"][fsvid])
               parcel=hemi[h]["names"][lab] if 0<=lab<len(hemi[h]["names"]) else "UNKNOWN"
 
-              # source exact match should be unique for this pair/current in this visual subset
-              for mat_idx,s in source_by[key]:
+              # source visual match by pair; current equality is audited explicitly
+              for mat_idx,s,source_cur,source_symptom in source_by[pair]:
                   source_vid0=int(np.asarray(s.stim_template_vertice).reshape(-1)[0])-1
                   source_hemi=int(np.asarray(s.stim_hemi).reshape(-1)[0])
                   rows.append({
@@ -149,6 +152,9 @@ jobs:
                       "mapped_hcpmmp":parcel,
                       "source_stim_hemi":source_hemi,
                       "source_mat_idx":int(mat_idx),
+                      "source_current":float(source_cur),
+                      "current_difference_mA":float(cur-source_cur),
+                      "source_symptom":source_symptom,
                   })
 
           out=pd.DataFrame(rows)
@@ -167,6 +173,7 @@ jobs:
               "tk_to_scanner_matrix":tk_to_scanner.tolist(),
           }
           Path("out/Patient3_sub02_surface_mapping_validation.json").write_text(json.dumps(summary,indent=2))
+          Path("out/Patient3_sub02_match_debug.json").write_text(json.dumps(debug,indent=2))
           print(json.dumps(summary,indent=2))
           print(out.to_string(index=False))
           PY
