@@ -1,0 +1,1 @@
+Trigger Patient3 source-surface validation after stimulation-coordinate reconstruction fix.
