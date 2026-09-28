@@ -1,0 +1,77 @@
+name: UCT R5C APStim source probe
+
+on:
+  push:
+    branches:
+      - ops/uct-r5c-apstim-probe-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Probe APStim source site
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          python - <<'PY'
+          import requests, re, json
+          from urllib.parse import urljoin
+          urls=[
+              "https://epi.fizica.unibuc.ro/apstim/",
+              "http://epi.fizica.unibuc.ro/apstim/",
+          ]
+          summary=[]
+          for u in urls:
+              item={"url":u}
+              try:
+                  r=requests.get(u,timeout=30,allow_redirects=True,verify=True)
+                  item.update(status=r.status_code,final_url=r.url,headers=dict(r.headers),text_len=len(r.text))
+                  open("out/index_"+("https" if u.startswith("https") else "http")+".html","w",encoding="utf-8",errors="ignore").write(r.text)
+                  links=sorted(set(urljoin(r.url,x) for x in re.findall(r'''(?:href|src)=["']([^"']+)''',r.text,re.I)))
+                  item["links"]=links
+              except Exception as e:
+                  item["error"]=repr(e)
+              summary.append(item)
+          open("out/probe.json","w").write(json.dumps(summary,indent=2))
+          print(json.dumps(summary,indent=2))
+          PY
+
+      - name: Probe likely package/file names
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import requests, json
+          bases=["https://epi.fizica.unibuc.ro/apstim/","http://epi.fizica.unibuc.ro/apstim/"]
+          names=[
+            "APStimStandalone.zip","APStimStandalone.tar.gz","APStim.zip",
+            "apstim.zip","source.zip","code.zip","Data/stim.mat","Data/stim_all.mat",
+            "APStim/Data/stim.mat","APStim/Data/stim_all.mat","APStimPopulation3.m",
+            "APStim/APStimPopulation3.m"
+          ]
+          rows=[]
+          for b in bases:
+            for n in names:
+              u=b+n
+              try:
+                r=requests.get(u,timeout=20,allow_redirects=True,stream=True)
+                rows.append({"url":u,"status":r.status_code,"final_url":r.url,
+                             "content_type":r.headers.get("content-type"),
+                             "content_length":r.headers.get("content-length")})
+                r.close()
+              except Exception as e:
+                rows.append({"url":u,"error":repr(e)})
+          open("out/likely_files.json","w").write(json.dumps(rows,indent=2))
+          print(json.dumps(rows,indent=2))
+          PY
+
+      - name: Upload probe
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: uct-r5c-apstim-source-probe
+          path: out/
+          retention-days: 7
+          compression-level: 6
