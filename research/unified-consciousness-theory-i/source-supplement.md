@@ -141,16 +141,12 @@ This package reserves **TA-TR-2026-20** for Paper A.
 
 The repository main research index currently lags the wider research sequence. **TA-TR-2026-19 must not be overwritten or reused.** Before merging Paper A into the public research index, reconcile the index so that the sequence remains explicit.
 
-## 8. Release rule
+## 8. Release and preservation rule
 
-This package is **READY FOR DOI RESERVATION**, not publication.
+This supplement is DOI-bound to the same version 1.0 record as the main paper.
 
-After a Zenodo draft DOI is reserved:
+The exact publication package must contain the reviewed DOI-bound files, citation metadata, and SHA-256 manifest. Publication is complete only after anonymous public exact-byte readback matches the reviewed manifest.
 
-1. replace `__DOI_RESERVED_AT_RELEASE__` in DOI-bound source files;
-2. generate the exact v1.0 PDF and citation files;
-3. compute final SHA-256 hashes;
-4. review the exact package;
-5. record explicit publication authorization;
-6. only then publish the existing reserved Zenodo record;
-7. after public exact-byte readback, start the paper-specific OTS → Bitcoin maturity → guarded Arweave workflow.
+OTS submission begins only after the public Zenodo DOI package passes exact-byte readback. Bitcoin maturity must be verified before any guarded Arweave upload, and Arweave status is complete only after public readback passes.
+
+Publication and preservation establish version identity and availability; they do not certify truth, peer review, originality, significance, or indexing.
