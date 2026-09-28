@@ -1,4 +1,4 @@
-name: UCT R5C APStim minimal-surface probe
+name: UCT R5C APStim Patient3 directory probe
 
 on:
   push:
@@ -11,32 +11,29 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
-      - name: Probe Patient3 minimal FreeSurfer files
+      - name: Fetch patient directory listings
         run: |
           set -euo pipefail
-          mkdir -p out/Patient3
-          base="http://epi.fizica.unibuc.ro/apstim/Patient3/FreeSurfer"
-          files=(
-            "surf/lh.pial"
-            "surf/rh.pial"
-            "surf/lh.sphere.reg"
-            "surf/rh.sphere.reg"
-            "mri/orig/001.mgh"
-            "mri/orig/001.mgz"
-          )
-          : > out/status.tsv
-          for f in "${files[@]}"; do
-            mkdir -p "out/Patient3/$(dirname "$f")"
-            code=$(curl -L --connect-timeout 5 --max-time 120 -sS -w "%{http_code}" -o "out/Patient3/$f" "$base/$f" || true)
-            size=$(stat -c%s "out/Patient3/$f" 2>/dev/null || echo 0)
-            printf "%s\t%s\t%s\n" "$f" "$code" "$size" | tee -a out/status.tsv
+          mkdir -p out
+          for path in "Patient3/" "Patient3/FreeSurfer/" "Patient3/FreeSurfer/surf/" "Patient3/FreeSurfer/mri/" "Patient3/FreeSurfer/mri/orig/"; do
+            safe=$(echo "$path" | tr '/ ' '__')
+            curl --fail --location --connect-timeout 5 --max-time 30               "http://epi.fizica.unibuc.ro/apstim/$path"               -o "out/$safe"
           done
-      - name: Upload probe
+          python - <<'PY'
+          from pathlib import Path
+          import re,json
+          out={}
+          for p in Path("out").iterdir():
+              txt=p.read_text(errors="ignore")
+              out[p.name]={"bytes":p.stat().st_size,"links":sorted(set(re.findall(r'''href=["']([^"']+)''',txt,re.I)))}
+          Path("out/listings.json").write_text(json.dumps(out,indent=2))
+          print(json.dumps(out,indent=2))
+          PY
+      - name: Upload
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: uct-r5c-apstim-minsurf-probe
+          name: uct-r5c-apstim-patient3-listings
           path: out/
           retention-days: 7
-          compression-level: 6
