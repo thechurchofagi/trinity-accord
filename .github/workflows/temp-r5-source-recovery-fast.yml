@@ -1,0 +1,39 @@
+name: R5 source recovery fast
+
+on:
+  push:
+    branches:
+      - ops/r5-source-recovery-20260928
+
+permissions:
+  contents: read
+
+jobs:
+  recover-fast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch bounded sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/r5fast
+          curl --max-time 45 -L --retry 2 --retry-delay 2 \
+            "https://www.brainstimjrnl.com/action/showPdf?pii=S1935861X25002505" \
+            -o /tmp/r5fast/visual_hallucinations_2025.pdf || true
+          curl --max-time 30 -L --retry 1 \
+            "http://epi.fizica.unibuc.ro/apstim/" \
+            -o /tmp/r5fast/apstim_index_http.html || true
+          curl --max-time 30 -L --retry 1 \
+            "https://epi.fizica.unibuc.ro/apstim/" \
+            -o /tmp/r5fast/apstim_index_https.html || true
+          file /tmp/r5fast/* > /tmp/r5fast/filetypes.txt || true
+          sha256sum /tmp/r5fast/* > /tmp/r5fast/SHA256SUMS.txt || true
+          ls -lah /tmp/r5fast > /tmp/r5fast/listing.txt
+      - name: Upload bounded sources
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r5-recovered-sources-fast
+          path: /tmp/r5fast/
+          retention-days: 2
+          compression-level: 0
