@@ -268,7 +268,7 @@ ER  -
     txt=subprocess.check_output(["pdftotext",str(pdffile),"-"],text=True)
     if len(txt)<20000 or "A5-OI" not in txt or "No Post-Hoc Token/View Rescue" not in txt:raise RuntimeError("PDF text/readback check failed")
     if "__DOI_RESERVED_AT_RELEASE__" in txt or "to be assigned only at release" in txt:raise RuntimeError("DOI marker remained in PDF")
-    save("format-checks.json",{"state":"FORMAT_CHECKS_PASS","report_number":REPORT,"version":VERSION,"pdf_generated":True,"pdf_text_extractable":True,"page_count":int(pages[0].split(":",1)[1].strip()),"source_sha256":SOURCE_SHA256,"a5_oi_present":True,"no_post_hoc_rescue_present":True,"doi_placeholder_absent":True})
+    save("format-checks.json",{"state":"FORMAT_CHECKS_PASS","report_number":REPORT,"version":VERSION,"pdf_generated":True,"pdf_text_extractable":True,"page_count":int(pages[0].split(":",1)[1].strip()),"source_sha256":sha((ROOT/"source-main.md").read_bytes()),"a5_oi_present":True,"no_post_hoc_rescue_present":True,"doi_placeholder_absent":True})
     return expected
 
 def validate_local_package():
