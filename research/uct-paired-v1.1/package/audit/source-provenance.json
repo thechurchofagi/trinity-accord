@@ -1,0 +1,40 @@
+{
+  "a_sha256": "fb7c2088ae94ae6c7d53f0bd4b34177b5f31489a40517aea6ec6e50afa2c3e05",
+  "a_expected": "ee74a633c098a37142dcf80e5bf2a11ce8018661b81a153da1523ee8ffddfc8e",
+  "b_sha256": "89c36d96909ff7124ca4985b5f743a859da5d412182335d8d7e8f49bb15bf909",
+  "b_expected": "89c36d96909ff7124ca4985b5f743a859da5d412182335d8d7e8f49bb15bf909",
+  "source_b_v1_sha256": "76609b53c4e11da548b48c845db3835c2c14465c8c51d064b86e8a15c36b1bd4",
+  "source_b_commit": "4cfddb377aa585a3447f140ec92fc55163181d4e",
+  "source_b_audit_zip_sha256": "78e3feb6f0db32d47e41ef671771cb92a77517a0ae4c49a6070f3bdb05b94228",
+  "restored_source_trace_sha256": "a7ab735a3dcee366a870cd0439fcfc721100f3f95dfea0eb97651b4dfdfc81d9",
+  "a_parts": {
+    "a01.md": "2f36f4a1c1ec323bcdbcae1b88d482e7102927fa240f8e17c73aef4b3bf2df2d",
+    "a02.md": "3bc18c511aa749630b9f39822b5c6377c9de4833ccb4f138a612e94a2d8dd323",
+    "a03.md": "025241d51f3783345bd51d7fd7c36c998431cdd60e62478390f8e377c9d7b1e8",
+    "a04.md": "9ed87ae9d65bac84bc95377da7d18a2abc62552ac0b99733d86fe380ed321d11",
+    "a05.md": "72831f3d429ff9a96c392cdc470c4d8eece358a0dccc81372af468e371192a9a",
+    "a06refs.md": "d82db40fd7b22ff0db8a35e58a78915dcb7e7042665e5101ee312925e8382268",
+    "a07appendices.md": "5ea1b802761882d9e30afc70aa73f6a6e8bd815cbbb260bd12698c7f045c9ce0"
+  },
+  "baselines": {
+    "baselines/B_v1.0_audit/UCT_Paper_B_v0.55_Compression_Proxy_Sensitivity_20260928.csv": "c810beea3d4a452ad6d1cd85c49dcb75fb5ec18af949e34e28a630543b93d7c4",
+    "baselines/B_v1.0_audit/UCT_Paper_B_v0.55_Nontriviality_Compression_Stress_Test_20260928.md": "bbb6fcf576fb0bc09f45c2a1e591ba440d9dbdbed6f9fc145d4aaf198ab975ca",
+    "baselines/B_v1.0_audit/UCT_Paper_B_v0.57_Quantitative_SharedLaw_DIT_RPT_GNWT_20260928.md": "c08d9885d9b7abe7d08c62df5b8b92fae538e0bc74b929e8855774dce7c7badd",
+    "baselines/B_v1.0_audit/UCT_Paper_B_v0.59_Second_SharedLaw_MToC_HOT_GNWT_20260928.md": "952051186e8c849bf843269f78aa55a2a277277d719fd4da565aaf5a6795878c",
+    "baselines/B_v1.0_audit/UCT_Paper_B_v1.0-rc4_Formal_Dependency_Map_20260928.md": "02ae804690ef18c0e4b5b02d2957860611bab0738311650ec7d88c9580840091",
+    "baselines/B_v1.0_audit/UCT_Paper_B_v1.0-rc4_Formal_Logic_Reaudit_20260928.md": "c8d73de9bc4504a2db1c480f3144d65fbd7df32d66e65ee01f0489a33267a00b",
+    "baselines/B_v1.0_audit/UCT_Paper_B_v1.0-rc4_NineTheory_Formal_Relation_Ledger_20260928.csv": "fc244b2424f46c1c7c5b71f2adf3b346cda9bdd4f5c0c710b4482293fa3ee592",
+    "baselines/B_v1.0_audit/UCT_Paper_B_v1.0-rc4_Reproducibility_Note_20260928.md": "aed217475c69d5bb418708237d2ef512c00cf09e5a93386f33b8f5def46cd913",
+    "baselines/B_v1.0_audit/UCT_v0.57_SharedLaw_DIT_RPT_GNWT_HeldOutSweep.csv": "f57ddce1c4280ef439d1646c596577f9a5f680c13fe801dd0cc5b7be943c30c7",
+    "baselines/B_v1.0_audit/UCT_v0.57_SharedLaw_DIT_RPT_GNWT_MainSweep.csv": "e90af46403b0616dc0b773405ed5ad3895727616c1404c4d3f56648419abc2a9",
+    "baselines/B_v1.0_audit/UCT_v0.57_SharedLaw_DIT_RPT_GNWT_NoReturn_Control.csv": "f2b4ba8e7c80697276e23535a0b6b59ee62b041d875bc9f04bc19e261d968cb1",
+    "baselines/B_v1.0_audit/UCT_v0.59_MToC_HOT_GNWT_ControlSummary.csv": "f96f1bdbe8dc60630e3d9e1e1ae37189f264053433f8e6208f9b113ab3b57c8e",
+    "baselines/B_v1.0_audit/UCT_v0.59_MToC_HOT_GNWT_Cut_HOT_to_Workspace.csv": "6f201748dc309e19d94f78758a887693f3a9bdcbd0f7e2b8e660c24a78240f83",
+    "baselines/B_v1.0_audit/UCT_v0.59_MToC_HOT_GNWT_Cut_Memory_to_HOT.csv": "534059bf727a19e780803662cb017253868b6227b2abaef6d50b5e0982b903ae",
+    "baselines/B_v1.0_audit/UCT_v0.59_MToC_HOT_GNWT_MainSweep.csv": "462b391c67f7666af293299753883b3ab47920e507ccfe01d7506a49606ffcce",
+    "baselines/source-b-v1.0.md": "76609b53c4e11da548b48c845db3835c2c14465c8c51d064b86e8a15c36b1bd4",
+    "baselines/source-trace-v0.54.md": "a7ab735a3dcee366a870cd0439fcfc721100f3f95dfea0eb97651b4dfdfc81d9",
+    "baselines/source-trace-v0.54.zlib.b64": "d578134b817a2adf4891c5227394103cffe37e4bc8de5817efd8c3a6fbb78354"
+  },
+  "state": "FAIL"
+}
