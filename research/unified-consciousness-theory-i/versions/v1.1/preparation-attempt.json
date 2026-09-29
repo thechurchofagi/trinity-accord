@@ -1,7 +1,7 @@
 {
   "state": "INCOMPLETE_REQUIRES_SAME_VERSION_RECONCILIATION",
   "phase": "initialization",
-  "error_type": "BadGzipFile",
-  "error": "Not a gzipped file (b'\\xc9(')",
-  "workflow_run_id": "36517016342"
+  "error_type": "RuntimeError",
+  "error": "frozen source hash mismatch",
+  "workflow_run_id": "36517502950"
 }
