@@ -4,8 +4,10 @@ import hashlib,json,os,urllib.parse,urllib.request
 from pathlib import Path
 import reserve as r
 import publish
+from family_check import verify
 z=r.client()
 try:
+    verify(z)
     expected=r.load('EXPECTED-PUBLICATION.json');recoveries=[]
     for key,rid in [('a',23030207),('b',23030320)]:
         dep=z.request(f'/deposit/depositions/{rid}');rows=z.request(f'/deposit/depositions/{rid}/files')
