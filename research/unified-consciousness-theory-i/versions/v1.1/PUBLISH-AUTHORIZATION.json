@@ -1,0 +1,15 @@
+{
+  "report_number": "TA-TR-2026-20",
+  "version": "1.1",
+  "record_id": 23029358,
+  "doi": "10.5281/zenodo.23029358",
+  "conceptdoi": "10.5281/zenodo.23005587",
+  "previous_record_id": 23005588,
+  "previous_doi": "10.5281/zenodo.23005588",
+  "expected_manifest_sha256": "939216e2b53ae9fe31d3959465ebb13fa59e69a7d5563368245c402dd89f3982",
+  "reviewed_file_count": 10,
+  "authorization": "PUBLISH_EXACT_REVIEWED_LINKED_VERSION",
+  "reviewed_pdf_sha256": "eef7e593e30a9bef8efdd5d3f47f7f89bdd5ce3f2ba4d1a84bc80bf03630115f",
+  "prior_version_must_remain_unchanged": true,
+  "no_new_independent_deposit": true
+}
