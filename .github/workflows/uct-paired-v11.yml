@@ -1,0 +1,36 @@
+name: UCT paired v1.1 guarded release
+on:
+  push:
+    branches: [research/uct-ab-v1-1-20260929]
+    paths:
+      - '.github/workflows/uct-paired-v11.yml'
+      - 'research/uct-paired-v1.1/trigger.json'
+permissions:
+  contents: write
+concurrency:
+  group: uct-paired-v11-release
+  cancel-in-progress: false
+jobs:
+  reserve:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[uct11-reserve]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/uct-ab-v1-1-20260929
+          fetch-depth: 1
+      - name: Reserve only version-family successors; no publication
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/uct-paired-v1.1/reserve.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: uct-v11-reservation
+          path: |
+            research/uct-paired-v1.1/deposit-*.json
+            research/uct-paired-v1.1/newversion-intent-*.json
+            research/uct-paired-v1.1/prior-public-*.json
+          if-no-files-found: warn
+          retention-days: 90
