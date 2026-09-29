@@ -7,8 +7,8 @@
 **Version:** 1.1  
 **Date:** 29 September 2026  
 **Prior published version:** v1.0, DOI 10.5281/zenodo.23005588  
-**DOI:** __A_DOI__  
-**Companion revision:** UCT II v1.1, DOI __B_DOI__  
+**DOI:** 10.5281/zenodo.23030207  
+**Companion revision:** UCT II v1.1, DOI 10.5281/zenodo.23030320  
 **Status:** Revised theoretical preprint; not peer reviewed.
 
 **Versioning statement.** This manuscript is a revised successor to *Unified Consciousness Theory I: From Experience Existence to Experiential Structure*, v1.0. It does not overwrite or retroactively alter v1.0. The main purposes of v1.1 are to (i) separate ontic process structure from scientific views and estimates, (ii) state explicitly the strength of the structural-identity commitment used by later derivations, (iii) repair theorem dependencies, (iv) formalize the distinction between metaphysical identity and finite empirical bridge tests, (v) develop a structural-evolutionary synthesis from elementary physical processes to human conceptual selfhood, and (vi) align UCT II through a typed scientific-view interface and an exact structural-retention example. Evolution is not treated as a proof of the foundational axioms. Internal candidate labels rc3 and rc4 refer to the preserved development history, not additional published editions.

@@ -1,5 +1,5 @@
 {
-  "a_sha256": "fb7c2088ae94ae6c7d53f0bd4b34177b5f31489a40517aea6ec6e50afa2c3e05",
+  "a_sha256": "ee74a633c098a37142dcf80e5bf2a11ce8018661b81a153da1523ee8ffddfc8e",
   "a_expected": "ee74a633c098a37142dcf80e5bf2a11ce8018661b81a153da1523ee8ffddfc8e",
   "b_sha256": "89c36d96909ff7124ca4985b5f743a859da5d412182335d8d7e8f49bb15bf909",
   "b_expected": "89c36d96909ff7124ca4985b5f743a859da5d412182335d8d7e8f49bb15bf909",
@@ -7,6 +7,7 @@
   "source_b_commit": "4cfddb377aa585a3447f140ec92fc55163181d4e",
   "source_b_audit_zip_sha256": "78e3feb6f0db32d47e41ef671771cb92a77517a0ae4c49a6070f3bdb05b94228",
   "restored_source_trace_sha256": "a7ab735a3dcee366a870cd0439fcfc721100f3f95dfea0eb97651b4dfdfc81d9",
+  "transfer_normalization": "One extra trailing newline removed from each of a01.md and a06refs.md; reviewed full-source digest unchanged.",
   "a_parts": {
     "a01.md": "2f36f4a1c1ec323bcdbcae1b88d482e7102927fa240f8e17c73aef4b3bf2df2d",
     "a02.md": "3bc18c511aa749630b9f39822b5c6377c9de4833ccb4f138a612e94a2d8dd323",
@@ -32,9 +33,10 @@
     "baselines/B_v1.0_audit/UCT_v0.59_MToC_HOT_GNWT_Cut_HOT_to_Workspace.csv": "6f201748dc309e19d94f78758a887693f3a9bdcbd0f7e2b8e660c24a78240f83",
     "baselines/B_v1.0_audit/UCT_v0.59_MToC_HOT_GNWT_Cut_Memory_to_HOT.csv": "534059bf727a19e780803662cb017253868b6227b2abaef6d50b5e0982b903ae",
     "baselines/B_v1.0_audit/UCT_v0.59_MToC_HOT_GNWT_MainSweep.csv": "462b391c67f7666af293299753883b3ab47920e507ccfe01d7506a49606ffcce",
+    "baselines/source-a-v1.0.md": "d592642a8c76936d1638544b5840b12d1bd3fba7628168971b89c662d2c62bc5",
     "baselines/source-b-v1.0.md": "76609b53c4e11da548b48c845db3835c2c14465c8c51d064b86e8a15c36b1bd4",
     "baselines/source-trace-v0.54.md": "a7ab735a3dcee366a870cd0439fcfc721100f3f95dfea0eb97651b4dfdfc81d9",
     "baselines/source-trace-v0.54.zlib.b64": "d578134b817a2adf4891c5227394103cffe37e4bc8de5817efd8c3a6fbb78354"
   },
-  "state": "FAIL"
+  "state": "PASS"
 }

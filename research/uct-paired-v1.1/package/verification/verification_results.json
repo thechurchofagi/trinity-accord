@@ -1,0 +1,154 @@
+{
+  "status": "PASS",
+  "exact_checks": 13,
+  "checks": [
+    {
+      "name": "type_injectivity_does_not_preserve_products",
+      "status": "PASS",
+      "scope": "Finite-set isomorphism classes; the 6/7 transposition is analytically a bijection on all positive integers.",
+      "physical_sizes": [
+        2,
+        3,
+        7
+      ],
+      "phenomenal_sizes": [
+        2,
+        3,
+        6
+      ]
+    },
+    {
+      "name": "symmetric_orbit_cannot_supply_nonempty_exclusive_family",
+      "status": "PASS",
+      "scope": "All four subsets of the fixed candidate orbit {ab,bc}.",
+      "equivariant_families": [
+        [],
+        [
+          "ab",
+          "bc"
+        ]
+      ]
+    },
+    {
+      "name": "global_invariant_partitions_remain_possible",
+      "status": "PASS",
+      "scope": "Explicit counterexamples to an unrestricted no-partition claim."
+    },
+    {
+      "name": "lossy_target_does_not_inherit_full_injectivity",
+      "status": "PASS",
+      "scope": "Identity correspondence at the full level, constant phenomenal observation at the finite level."
+    },
+    {
+      "name": "physical_transition_table",
+      "status": "PASS",
+      "scope": "Both circuits, both boundary inputs, all eight states.",
+      "transitions": 32
+    },
+    {
+      "name": "s_projection_exact_closure",
+      "status": "PASS",
+      "scope": "Every same-s state pair under each boundary input and circuit setting.",
+      "cases": 128
+    },
+    {
+      "name": "s_projection_intervention_commutation",
+      "status": "PASS",
+      "scope": "All 27 coordinate-clamp interventions applied immediately before the next transition.",
+      "cases": 864
+    },
+    {
+      "name": "identical_output_recurrence_across_circuits",
+      "status": "PASS",
+      "scope": "The recurrence implies identical s trajectories for every finite input string and common s0 by induction."
+    },
+    {
+      "name": "full_circuits_are_not_transition_isomorphic",
+      "status": "PASS",
+      "scope": "Image cardinality is invariant under every bijective state relabeling.",
+      "image_sizes": {
+        "0": [
+          2,
+          2
+        ],
+        "1": [
+          8,
+          8
+        ]
+      }
+    },
+    {
+      "name": "interventional_dependency_matrices",
+      "status": "PASS",
+      "scope": "Rows are next-state targets (s,a,b); columns are independently resettable current registers (s,a,b).",
+      "matrices": {
+        "0": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "1": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "hidden_pair_factorizes_relative_to_physical_ports_only_at_zero",
+      "status": "PASS",
+      "scope": "Condition on the declared boundary s. This is causal factorization relative to the a|b split, not a statistical independence claim."
+    },
+    {
+      "name": "algebraic_parity_closure_is_not_a_realization_certificate",
+      "status": "PASS",
+      "scope": "Only the algebraic identity is checked. The existence of a separate physical q register is not inferred."
+    },
+    {
+      "name": "arbitrary_projection_can_fail_closure",
+      "status": "PASS",
+      "scope": "Counterexample for r=s XOR a XOR b at lambda=0 and u=0.",
+      "states": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "projected_next": [
+        0,
+        1
+      ]
+    }
+  ],
+  "scope": "Finite mathematical witnesses only; no human/animal data and no empirical validation of consciousness axioms."
+}
