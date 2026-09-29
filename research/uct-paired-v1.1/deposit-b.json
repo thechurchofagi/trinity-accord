@@ -1,5 +1,5 @@
 {
-  "state": "DRAFT_IDENTIFIED_NOT_PUBLISHED",
+  "state": "RESERVED_NOT_PUBLISHED",
   "record_id": 23030320,
   "doi": "10.5281/zenodo.23030320",
   "conceptrecid": "23008261",
@@ -7,5 +7,7 @@
   "report_number": "TA-TR-2026-21",
   "title": "Unified Consciousness Theory II: Consciousness Theories as Effective Organization Theories",
   "version": "1.1",
-  "submitted": false
+  "submitted": false,
+  "old_published_files_modified": false,
+  "run_id": "36524020199"
 }
