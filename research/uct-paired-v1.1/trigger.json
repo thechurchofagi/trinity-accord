@@ -1,7 +1,7 @@
 {
-  "operation": "reserve",
-  "iteration": 2,
-  "reason": "Treat a published deposit's self latest_draft link as no pending successor; no new-version POST occurred in the first run.",
+  "operation": "build",
+  "iteration": 3,
+  "reason": "Exactly two transfer-only terminal newlines repaired; original reviewed source SHA-256 gates retained.",
   "publication_authorized_by_user": true,
   "this_stage_publishes": false,
   "versions": ["TA-TR-2026-20 v1.1", "TA-TR-2026-21 v1.1"]
