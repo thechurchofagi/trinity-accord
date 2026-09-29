@@ -6,3 +6,5 @@ Retry 2: direct UTF-8 frozen source, preserving the first failed attempt in git 
 Retry 3: source frozen by Git blob identity; scientific text unchanged from rc3.
 
 Retry 4: reuse linked record 23029358; normalize all internal rc3 labels to final v1.1 during package build.
+
+Retry 5: same linked record 23029358; rebuild DOI-bound package in A4 page size.
