@@ -1,7 +1,7 @@
 {
   "state": "INCOMPLETE_REQUIRES_SAME_VERSION_RECONCILIATION",
-  "phase": "initialization",
+  "phase": "build_exact_package",
   "error_type": "RuntimeError",
-  "error": "frozen source hash mismatch",
-  "workflow_run_id": "36517502950"
+  "error": "release-candidate marker remained in DOI-bound main source",
+  "workflow_run_id": "36517879788"
 }
