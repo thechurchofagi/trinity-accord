@@ -135,7 +135,8 @@ def inject_identity(text,doi):
     text=text.replace(old,f"**v1.1 DOI:** {doi}")
     text=text.replace("**Version:** 1.1-rc3","**Version:** 1.1")
     text=text.replace("**Status:** Internal release-candidate manuscript after claim, prior-art, and reference-layout audit; not peer reviewed; not yet released as v1.1","**Status:** Foundational theory preprint; not peer reviewed.")
-    if "1.1-rc3" in text:raise RuntimeError("release-candidate marker remained in DOI-bound main source")
+    text=text.replace("v1.1-rc3","v1.1")
+    if "rc3" in text:raise RuntimeError("release-candidate marker remained in DOI-bound main source")
     return text
 
 def version_changes():
