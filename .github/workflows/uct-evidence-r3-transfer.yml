@@ -1,0 +1,52 @@
+name: UCT evidence R3 public source transfer
+on:
+  push:
+    branches: [ops/uct-evidence-r3-20260929]
+    paths: [.github/workflows/uct-evidence-r3-transfer.yml]
+permissions:
+  contents: read
+concurrency:
+  group: uct-evidence-r3-transfer
+  cancel-in-progress: false
+jobs:
+  fetch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Fetch allowlisted public bytes without executing source code
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,pathlib,urllib.request,datetime
+          commit='3f1f3f0cbb4fb7c1956a3a5e230ab84ead68159d'
+          base='https://raw.githubusercontent.com/jgranley/deep_neural_shaping/'+commit+'/'
+          spec={
+           'README.md':('fcba070ed84de5ac6a8e3e0e7ec9b1127f7b6f78',215),
+           'LICENSE':('0480c85cf0003cd9af2976d00bb2bf14e57c48aa',1500),
+           'Data_publish_folder/Dataset_description.docx':('ef2307b3d500df67d9d578aa2c5df2393961f14e',18481),
+           'Data_publish_folder/Code/perception_figure.py':('a7ec53342cc19d49a9deec75a62672321fbc0c0f',7579),
+           'Data_publish_folder/Code/src/utils.py':('09002fa6daaeb9d4fb844ce6316937eea023f9fa',32101),
+           'Data_publish_folder/Code/Fig3-5.ipynb':('116985c1d79f4e7e77d941ff84e5c1ccb2489638',771436),
+           'Data_publish_folder/Data/df_results.pkl':('7ccecd3dc28544becced433998f725e69495d79e',7348728),
+           'Data_publish_folder/Data/binary_perception_results.csv':('7f204ba050a5d2e5cb3a4935a88e6f3b18967db2',777366),
+           'Data_publish_folder/Data/perception_overall_metrics.csv':('b18b91c8c2270593da113cdab2ae856e4d1ce751',3896),
+           'Data_publish_folder/Data/perception_per_day_metrics.csv':('7dad1eb5857acd36cd9fb3163ae2304f10e7f2c8',15373),
+           'Data_publish_folder/Data/pipfreeze.txt':('cea9afbb7a7eb022b2ad2383d0d40476cbd5bb9f',4164)
+          }
+          out=pathlib.Path('source-transfer');manifest=[]
+          for path,(blob,size) in spec.items():
+              req=urllib.request.Request(base+path,headers={'User-Agent':'UCT-public-evidence-audit/1.0'})
+              with urllib.request.urlopen(req,timeout=60) as r:data=r.read(size+1)
+              if len(data)!=size:raise RuntimeError('Source size changed: '+path)
+              actual=hashlib.sha1(b'blob '+str(size).encode()+b'\0'+data).hexdigest()
+              if actual!=blob:raise RuntimeError('Source Git blob mismatch: '+path)
+              p=out/path;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
+              manifest.append({'path':path,'url':base+path,'bytes':size,'git_blob':actual,'sha256':hashlib.sha256(data).hexdigest()})
+              print(path,size,flush=True)
+          (out/'ACQUISITION.json').write_text(json.dumps({'source_repository':'jgranley/deep_neural_shaping','commit':commit,'download_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'files':manifest,'source_code_executed':False,'pickle_deserialized':False,'scope':'Existing public research data; no participant contact, stimulation, publication, or main-branch changes.'},indent=2)+'\n')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: uct-evidence-r3-public-source
+          path: source-transfer/
+          if-no-files-found: error
+          retention-days: 90
