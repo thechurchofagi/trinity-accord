@@ -52,10 +52,21 @@ def main():
     write(P/'manuscripts/source-b.md',b)
     chunks=sorted((P/'source-parts').glob('a*.md'))
     if len(chunks)!=7:raise RuntimeError('A source requires exactly seven parts')
-    a=b''.join(x.read_bytes() for x in chunks);write(P/'manuscripts/source-a.md',a)
+    # Comparing build-1 bytes with the reviewed local manuscript identified
+    # exactly two extra terminal blank lines at text-transfer chunk boundaries.
+    # Remove only those exact bytes; retain the original whole-source hash gate.
+    normalized=[]
+    for x in chunks:
+        data=x.read_bytes()
+        if x.name in ('a01.md','a06refs.md'):
+            if not data.endswith(b'\n\n\n'):raise RuntimeError('Transfer boundary changed')
+            data=data[:-1]
+        normalized.append(data)
+    a=b''.join(normalized);write(P/'manuscripts/source-a.md',a)
     report={'a_sha256':sha(a),'a_expected':A_SHA,'b_sha256':sha(b),'b_expected':B_SHA,
             'source_b_v1_sha256':sha(old),'source_b_commit':B_COMMIT,
             'source_b_audit_zip_sha256':sha(zipbytes),'restored_source_trace_sha256':sha(trace),
+            'transfer_normalization':'One extra trailing newline removed from each of a01.md and a06refs.md; reviewed full-source digest unchanged.',
             'a_parts':{x.name:sha(x.read_bytes()) for x in chunks},
             'baselines':{str(x.relative_to(P)):sha(x.read_bytes()) for x in sorted((P/'baselines').rglob('*')) if x.is_file()},
             'state':'PASS' if sha(a)==A_SHA and sha(b)==B_SHA else 'FAIL'}
