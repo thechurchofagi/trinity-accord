@@ -205,7 +205,7 @@ def build_package():
     main=inject_identity((ROOT/"source-main.md").read_text(encoding="utf-8"),doi)
     mdfile=pub/f"{STEM}-v{VERSION}.md";pdffile=pub/f"{STEM}-v{VERSION}.pdf"
     mdfile.write_text(main,encoding="utf-8")
-    subprocess.run(["pandoc",str(mdfile),"-o",str(pdffile),"--pdf-engine","xelatex","--from=markdown+tex_math_single_backslash","-V","mainfont=DejaVu Serif","-V","monofont=DejaVu Sans Mono","-V","geometry:margin=25mm"],check=True)
+    subprocess.run(["pandoc",str(mdfile),"-o",str(pdffile),"--pdf-engine","xelatex","--from=markdown+tex_math_single_backslash","-V","mainfont=DejaVu Serif","-V","monofont=DejaVu Sans Mono","-V","papersize=a4","-V","geometry:margin=25mm"],check=True)
     (pub/"VERSION-CHANGES-v1.1.md").write_text(version_changes(),encoding="utf-8")
     conceptdoi=f"10.5281/zenodo.{concept}"
     (pub/"REVIEW-AND-SOURCES-v1.1.md").write_text(review_sources(doi,conceptdoi),encoding="utf-8")
