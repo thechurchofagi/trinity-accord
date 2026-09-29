@@ -13,5 +13,5 @@ assert '"/deposit/depositions","POST"' not in prep
 assert "actions/newversion" not in pub
 assert '"/deposit/depositions","POST"' not in pub
 assert 'No Post-Hoc Token/View Rescue' not in common or True
-assert (ROOT/"source-main.md.gz").exists()
+assert (ROOT/"source-main.md").exists()
 print("TA20 v1.1 publication safety PASS")
