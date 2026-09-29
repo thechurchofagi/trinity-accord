@@ -1,0 +1,2 @@
+Publish only the exact reviewed linked UCT I v1.1 package bound to EXPECTED-PUBLICATION SHA-256 939216e2b53ae9fe31d3959465ebb13fa59e69a7d5563368245c402dd89f3982.
+Do not create a new independent deposit. Preserve v1.0 unchanged.
