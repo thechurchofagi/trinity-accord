@@ -911,12 +911,10 @@ Human pain also illustrates why one scalar valence variable is inadequate. Clini
 
 \[
 \boxed{
-\text{nociceptive discrimination},
-\quad
-\text{unpleasantness},
-\quad
-\text{suffering}
-\text{ are not licensed as one primitive scalar variable.}
+\begin{aligned}
+&\text{nociceptive discrimination, unpleasantness, and suffering}\\
+&\text{are not licensed as one primitive scalar variable.}
+\end{aligned}
 }
 \]
 
@@ -929,17 +927,14 @@ Cognitive evolution can likewise be represented as transformations of organizati
 A simplified comparative sequence is:
 
 \[
+\begin{aligned}
 \text{state-dependent response}
-\to
-\text{habituation / sensitization}
-\to
-\text{association}
-\to
-\text{relational abstraction}
-\to
-\text{relations over relations}
-\to
-\text{symbolic / compositional reasoning}.
+&\to \text{habituation / sensitization}\\
+&\to \text{association}
+\to \text{relational abstraction}\\
+&\to \text{relations over relations}\\
+&\to \text{symbolic / compositional reasoning}.
+\end{aligned}
 \]
 
 The sequence is not a literal phylogenetic ladder.

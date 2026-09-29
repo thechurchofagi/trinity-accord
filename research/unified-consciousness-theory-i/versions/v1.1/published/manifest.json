@@ -8,7 +8,7 @@
   "previous_record_id": 23005588,
   "previous_doi": "10.5281/zenodo.23005588",
   "title": "Unified Consciousness Theory I: Ontic Structure, Physical Views, and the Structural Continuity from Physical Process to Conceptual Self",
-  "source_sha256": "ec97c7156caf3c7fe1bddecd657c1d4c8408bcdd695019a500e7a4355a7b99ee",
+  "source_sha256": "f3802c6d85a3fba2f33b1f203baea7f351c4f845e522335386a12eee09e7d976",
   "files": [
     {
       "name": "README-LICENSE.txt",
@@ -23,7 +23,7 @@
     {
       "name": "SHA256SUMS.txt",
       "bytes": 721,
-      "sha256": "b239cf36948e21eee02ebca50fd75d3a56e9122dde99e40e7f1086674b57a658"
+      "sha256": "7cf084bfdbb3fe5601106c0d75227b25af44026a4d75d021d57487c6c1046721"
     },
     {
       "name": "VERSION-CHANGES-v1.1.md",
@@ -47,13 +47,13 @@
     },
     {
       "name": "unified-consciousness-theory-i-v1.1.md",
-      "bytes": 61945,
-      "sha256": "e008f72d8ae831d505f4001cac438f2f34e0a35903c88944d0ca34908780c4f6"
+      "bytes": 61996,
+      "sha256": "5bddf74818812a3600936f9bda0b5c360a6263d0d657dec7402eeb9ba8ce3e94"
     },
     {
       "name": "unified-consciousness-theory-i-v1.1.pdf",
-      "bytes": 144587,
-      "sha256": "2c2eef309c825feda1a4c4e9c16eee597458069402908d07db419a94d65713a4"
+      "bytes": 144554,
+      "sha256": "eef7e593e30a9bef8efdd5d3f47f7f89bdd5ce3f2ba4d1a84bc80bf03630115f"
     }
   ]
 }
