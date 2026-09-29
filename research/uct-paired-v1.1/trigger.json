@@ -1,9 +1,9 @@
 {
   "operation": "reconcile_then_publish",
-  "iteration": 5,
+  "iteration": 6,
   "expected_manifest_sha256": "720de776df3fc2cddb10c2f9ed5037533f06a9d361496a7fce0f66ecdcd6c3ed",
   "publication_authorized_by_user": true,
   "new_record_ids": [23030207, 23030320],
-  "unreviewed_preexisting_draft_files": "Retain in workflow artifact and stop for comparison. No deletion before exact reconciliation approval.",
+  "recovered_candidate_review": "DRAFT-RECONCILIATION.json; exact live draft fingerprint and complete published-family check required",
   "prior_v1_0_files_must_remain_unchanged": true
 }
