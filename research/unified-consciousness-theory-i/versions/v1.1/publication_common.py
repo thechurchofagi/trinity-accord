@@ -11,7 +11,7 @@ VERSION="1.1"
 DATE="2026-09-29"
 PREVIOUS_RECORD=23005588
 STEM="unified-consciousness-theory-i"
-SOURCE_SHA256="3af235979ae95f7bdd62216231ef3f91fb54a241c6ae6fb847ac85d337b00e0c"
+SOURCE_GIT_BLOB_SHA1="a36ac9291ebc82c99bf65764e14b81536f678a86"
 CLIENT_BLOB="a0cbc84cc5fd826c06d16456c4adbaa40dabc788"
 PROTECTED={21675727,21699878,21900592,22761411,22804542,22809019,22830239,22839629,22840604,22842789,22844927,22844928,22846307,22852884,22852885,22854705,22865494,22866205,22866775,22871209,22885976,22886276,22934654,22939808,22950904,23002980,23005588,23008262}
 STATE_FILES={"create-intent.json","deposit.json","preparation-attempt.json","publication-attempt.json","publication-record.json","EXPECTED-PUBLICATION.json","format-checks.json"}
@@ -38,8 +38,8 @@ def save(name,value):
 def ensure_source():
     out=ROOT/"source-main.md"
     if not out.exists(): raise RuntimeError("frozen source missing")
-    data=out.read_bytes()
-    if sha(data)!=SOURCE_SHA256: raise RuntimeError("frozen source hash mismatch")
+    actual_blob=subprocess.check_output(["git","hash-object",str(out)],cwd=REPO,text=True).strip()
+    if actual_blob!=SOURCE_GIT_BLOB_SHA1: raise RuntimeError("frozen source git-blob mismatch")
     return out
 
 def persist(paths=None):
@@ -253,14 +253,14 @@ ER  -
     others=sorted(PACKAGE_FILES-{"SHA256SUMS.txt","manifest.json"})
     sums="\n".join(f"{sha((pub/n).read_bytes())}  {n}" for n in others)+"\n"
     (pub/"SHA256SUMS.txt").write_text(sums,encoding="utf-8")
-    manifest={"report_number":REPORT,"version":VERSION,"record_id":rid,"doi":doi,"conceptrecid":concept,"conceptdoi":conceptdoi,"previous_record_id":PREVIOUS_RECORD,"previous_doi":f"10.5281/zenodo.{PREVIOUS_RECORD}","title":TITLE,"source_sha256":SOURCE_SHA256,"files":[]}
+    manifest={"report_number":REPORT,"version":VERSION,"record_id":rid,"doi":doi,"conceptrecid":concept,"conceptdoi":conceptdoi,"previous_record_id":PREVIOUS_RECORD,"previous_doi":f"10.5281/zenodo.{PREVIOUS_RECORD}","title":TITLE,"source_sha256":sha((ROOT/"source-main.md").read_bytes()),"files":[]}
     for n in sorted(PACKAGE_FILES-{"manifest.json"}):
         b=(pub/n).read_bytes();manifest["files"].append({"name":n,"bytes":len(b),"sha256":sha(b)})
     (pub/"manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     files=[]
     for n in sorted(PACKAGE_FILES):
         b=(pub/n).read_bytes();files.append({"name":n,"bytes":len(b),"sha256":sha(b)})
-    expected={"report_number":REPORT,"version":VERSION,"record_id":rid,"doi":doi,"conceptrecid":concept,"conceptdoi":conceptdoi,"previous_record_id":PREVIOUS_RECORD,"previous_doi":f"10.5281/zenodo.{PREVIOUS_RECORD}","title":TITLE,"file_count":len(files),"files":files,"prior_version_files_modified":False,"source_sha256":SOURCE_SHA256}
+    expected={"report_number":REPORT,"version":VERSION,"record_id":rid,"doi":doi,"conceptrecid":concept,"conceptdoi":conceptdoi,"previous_record_id":PREVIOUS_RECORD,"previous_doi":f"10.5281/zenodo.{PREVIOUS_RECORD}","title":TITLE,"file_count":len(files),"files":files,"prior_version_files_modified":False,"source_sha256":sha((ROOT/"source-main.md").read_bytes())}
     save("EXPECTED-PUBLICATION.json",expected)
     info=subprocess.check_output(["pdfinfo",str(pdffile)],text=True)
     pages=[x for x in info.splitlines() if x.startswith("Pages:")]
