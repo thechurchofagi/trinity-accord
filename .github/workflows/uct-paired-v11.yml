@@ -36,3 +36,45 @@ jobs:
             research/uct-paired-v1.1/prior-public-*.json
           if-no-files-found: warn
           retention-days: 90
+  build:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[uct11-build]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/uct-ab-v1-1-20260929
+          fetch-depth: 1
+          show-progress: false
+      - name: Install document toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended fonts-dejavu poppler-utils
+      - name: Assemble sources, rerun checks and render final DOI PDFs
+        env:
+          SOURCE_DATE_EPOCH: '1790636400'
+          FORCE_SOURCE_DATE: '1'
+          PYTHONHASHSEED: '0'
+        run: python3 research/uct-paired-v1.1/prepare.py
+      - name: Persist prepared artifacts only
+        if: always()
+        run: |
+          find research/uct-paired-v1.1 -type d -name __pycache__ -prune -exec rm -rf {} +
+          git config user.name trinity-research-release-bot
+          git config user.email actions@github.com
+          git add -- research/uct-paired-v1.1
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: preserve UCT v1.1 build and verification [skip ci]'
+          for attempt in 1 2 3; do
+            git push origin HEAD:research/uct-ab-v1-1-20260929 && exit 0
+            git fetch origin research/uct-ab-v1-1-20260929 --prune
+            git rebase origin/research/uct-ab-v1-1-20260929
+          done
+          exit 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: uct-v11-build
+          path: research/uct-paired-v1.1/
+          if-no-files-found: error
+          retention-days: 90
