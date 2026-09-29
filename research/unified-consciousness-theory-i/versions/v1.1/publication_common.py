@@ -1,5 +1,5 @@
 from __future__ import annotations
-import gzip, hashlib, importlib.util, json, os, pathlib, shutil, subprocess, time, urllib.error, urllib.parse, urllib.request
+import hashlib, importlib.util, json, os, pathlib, shutil, subprocess, time, urllib.error, urllib.parse, urllib.request
 
 ROOT=pathlib.Path(__file__).resolve().parent
 REPO=ROOT.parents[3]
@@ -36,12 +36,10 @@ def save(name,value):
     (ROOT/name).write_text(json.dumps(value,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
 def ensure_source():
-    gz=ROOT/"source-main.md.gz"
-    if not gz.exists(): raise RuntimeError("frozen source gzip missing")
-    data=gzip.decompress(gz.read_bytes())
-    if sha(data)!=SOURCE_SHA256: raise RuntimeError("frozen source hash mismatch")
     out=ROOT/"source-main.md"
-    out.write_bytes(data)
+    if not out.exists(): raise RuntimeError("frozen source missing")
+    data=out.read_bytes()
+    if sha(data)!=SOURCE_SHA256: raise RuntimeError("frozen source hash mismatch")
     return out
 
 def persist(paths=None):
