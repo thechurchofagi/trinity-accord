@@ -1,0 +1,102 @@
+{
+  "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "report_number": "TA-TR-2026-20",
+  "title": "Unified Consciousness Theory I: Ontic Structure, Physical Views, and the Structural Continuity from Physical Process to Conceptual Self",
+  "version": "1.1",
+  "record_id": 23029358,
+  "doi": "10.5281/zenodo.23029358",
+  "conceptrecid": "23005587",
+  "conceptdoi": "10.5281/zenodo.23005587",
+  "previous_record_id": 23005588,
+  "previous_doi": "10.5281/zenodo.23005588",
+  "submitted": true,
+  "file_count": 10,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1322,
+      "sha256": "b309a3428c59593051fb20903bfd06f386effeed535cd413d21e733827475319",
+      "public_url": "https://zenodo.org/api/records/23029358/files/README-LICENSE.txt/content",
+      "matches_local": true
+    },
+    {
+      "name": "REVIEW-AND-SOURCES-v1.1.md",
+      "bytes": 1623,
+      "sha256": "5067b820ae839b8ec3db3ee6fefd81b5f1b7be27c4a3d21c4f9039bc7f78b5c5",
+      "public_url": "https://zenodo.org/api/records/23029358/files/REVIEW-AND-SOURCES-v1.1.md/content",
+      "matches_local": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 721,
+      "sha256": "7cf084bfdbb3fe5601106c0d75227b25af44026a4d75d021d57487c6c1046721",
+      "public_url": "https://zenodo.org/api/records/23029358/files/SHA256SUMS.txt/content",
+      "matches_local": true
+    },
+    {
+      "name": "VERSION-CHANGES-v1.1.md",
+      "bytes": 1638,
+      "sha256": "27a7a46524bfcc298e081673f912908ef3703e009d6879264c7b225644a9120c",
+      "public_url": "https://zenodo.org/api/records/23029358/files/VERSION-CHANGES-v1.1.md/content",
+      "matches_local": true
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 424,
+      "sha256": "4d38b832ac4911fe9caa131f18538d8a2a26c41956cc3ae36607ed4adb3ec437",
+      "public_url": "https://zenodo.org/api/records/23029358/files/citation.bib/content",
+      "matches_local": true
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 597,
+      "sha256": "860454ca9e44a99633ce834dcfeefbe2e9f3630e3c84e6fb542bb4b611af1b88",
+      "public_url": "https://zenodo.org/api/records/23029358/files/citation.csl.json/content",
+      "matches_local": true
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 389,
+      "sha256": "06210c3799e8a33c078afcc3ff3c2a10ed4936c478beb50ad0625179654b17c2",
+      "public_url": "https://zenodo.org/api/records/23029358/files/citation.ris/content",
+      "matches_local": true
+    },
+    {
+      "name": "manifest.json",
+      "bytes": 1939,
+      "sha256": "fa522a9237201d6af2a785806122cd73cae4623c237da3582de5bce14b59ebc0",
+      "public_url": "https://zenodo.org/api/records/23029358/files/manifest.json/content",
+      "matches_local": true
+    },
+    {
+      "name": "unified-consciousness-theory-i-v1.1.md",
+      "bytes": 61996,
+      "sha256": "5bddf74818812a3600936f9bda0b5c360a6263d0d657dec7402eeb9ba8ce3e94",
+      "public_url": "https://zenodo.org/api/records/23029358/files/unified-consciousness-theory-i-v1.1.md/content",
+      "matches_local": true
+    },
+    {
+      "name": "unified-consciousness-theory-i-v1.1.pdf",
+      "bytes": 144554,
+      "sha256": "eef7e593e30a9bef8efdd5d3f47f7f89bdd5ce3f2ba4d1a84bc80bf03630115f",
+      "public_url": "https://zenodo.org/api/records/23029358/files/unified-consciousness-theory-i-v1.1.pdf/content",
+      "matches_local": true
+    }
+  ],
+  "expected_manifest_sha256": "939216e2b53ae9fe31d3959465ebb13fa59e69a7d5563368245c402dd89f3982",
+  "public_readback_authenticated": false,
+  "public_file_readback_pass": true,
+  "doi_resolution_pass": false,
+  "doi_resolver": {
+    "matches_record": false,
+    "error_type": "HTTPError"
+  },
+  "prior_version_inventory_unchanged": true,
+  "new_research_papers": 0,
+  "distinct_research_papers_delta": 0,
+  "was_already_published": false,
+  "workflow_run_id": "36519169924",
+  "source_commit": "810f72f21d5cdc7ca7189a94c2ed971803d8c8cb",
+  "peer_reviewed": false,
+  "global_originality_certified": false
+}

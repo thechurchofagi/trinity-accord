@@ -1,0 +1,7 @@
+{
+  "state": "INCOMPLETE_REQUIRES_SAME_RECORD_RESUMPTION",
+  "phase": "doi_resolution",
+  "error_type": "RuntimeError",
+  "error": "published exact bytes passed; DOI resolution pending",
+  "workflow_run_id": "36519169924"
+}
