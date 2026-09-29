@@ -1,0 +1,48 @@
+{
+  "state": "VISUAL_AND_CONTENT_REVIEW_PASS",
+  "report_number": "TA-TR-2026-20",
+  "version": "1.1",
+  "record_id": 23029358,
+  "doi": "10.5281/zenodo.23029358",
+  "expected_manifest_sha256": "939216e2b53ae9fe31d3959465ebb13fa59e69a7d5563368245c402dd89f3982",
+  "reviewed_pdf": "unified-consciousness-theory-i-v1.1.pdf",
+  "reviewed_pdf_sha256": "eef7e593e30a9bef8efdd5d3f47f7f89bdd5ce3f2ba4d1a84bc80bf03630115f",
+  "reviewed_markdown_sha256": "5bddf74818812a3600936f9bda0b5c360a6263d0d657dec7402eeb9ba8ce3e94",
+  "page_count": 28,
+  "page_size": "A4",
+  "preflight": "PASS",
+  "exact_package_hash_check": "PASS",
+  "visual_review": {
+    "rendered_pages_reviewed": 28,
+    "contact_sheets_reviewed": 4,
+    "individual_pages_reviewed": [
+      1,
+      15
+    ],
+    "clipping": false,
+    "overlap": false,
+    "broken_glyphs": false,
+    "black_squares": false,
+    "equation_overflow": false,
+    "table_overflow": false
+  },
+  "regression_check": {
+    "comparison_base": "previous A4 exact package before layout-only equation wrap",
+    "changed_pages": [
+      15,
+      16
+    ],
+    "unchanged_pages": 26,
+    "conclusion": "PASS; changes confined to intended equation wrapping and immediate pagination flow"
+  },
+  "theory_review_basis": [
+    "114-node/197-edge formal-map static audit PASS",
+    "theorem-by-theorem dependency audit PASS",
+    "claim audit PASS",
+    "targeted prior-art audit PASS with narrow novelty posture",
+    "A5-OI explicitly versioned as stronger than v1.0 one-way A5b",
+    "evolutionary synthesis explicitly not used to prove A1/A5",
+    "finite experiments framed as OSC_v bridge tests rather than isolated full A5 proof"
+  ],
+  "prior_version_files_modified": false
+}
