@@ -1,0 +1,24 @@
+{
+  "state": "BOTH_PUBLISHED_PUBLIC_FILES_VERIFIED",
+  "version": "1.1",
+  "papers": [
+    {
+      "report_number": "TA-TR-2026-20",
+      "record_id": 23030207,
+      "doi": "10.5281/zenodo.23030207",
+      "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+      "file_count": 11,
+      "doi_resolution_pass": false
+    },
+    {
+      "report_number": "TA-TR-2026-21",
+      "record_id": 23030320,
+      "doi": "10.5281/zenodo.23030320",
+      "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+      "file_count": 11,
+      "doi_resolution_pass": false
+    }
+  ],
+  "expected_manifest_sha256": "720de776df3fc2cddb10c2f9ed5037533f06a9d361496a7fce0f66ecdcd6c3ed",
+  "ots_arweave": "Separate preservation lifecycle; not claimed by this worker."
+}
