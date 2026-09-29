@@ -88,11 +88,11 @@ jobs:
           fetch-depth: 1
           show-progress: false
       - name: Verify worker syntax
-        run: python3 -m py_compile research/uct-paired-v1.1/publish.py research/uct-paired-v1.1/make_targets.py
+        run: python3 -m py_compile research/uct-paired-v1.1/publish.py research/uct-paired-v1.1/run_publish.py research/uct-paired-v1.1/make_targets.py
       - name: Publish exact reviewed new editions and verify public bytes
         env:
           ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
-        run: python3 research/uct-paired-v1.1/publish.py
+        run: python3 research/uct-paired-v1.1/run_publish.py
       - name: Install pinned timestamp client
         run: python3 -m pip install --user -r requirements-ots.txt
       - name: Submit published PDFs to timestamp calendars
