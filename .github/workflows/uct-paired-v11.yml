@@ -20,17 +20,19 @@ jobs:
         with:
           ref: research/uct-ab-v1-1-20260929
           fetch-depth: 1
-      - name: Reserve only version-family successors; no publication
+          show-progress: false
+      - name: Reconcile and reserve only version-family successors; no publication
         env:
           ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
-        run: python3 research/uct-paired-v1.1/reserve.py
+        run: python3 research/uct-paired-v1.1/reconcile_reservations.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: uct-v11-reservation
           path: |
             research/uct-paired-v1.1/deposit-*.json
-            research/uct-paired-v1.1/newversion-intent-*.json
+            research/uct-paired-v1.1/newversion-*.json
+            research/uct-paired-v1.1/reconciliation-*.json
             research/uct-paired-v1.1/prior-public-*.json
           if-no-files-found: warn
           retention-days: 90
