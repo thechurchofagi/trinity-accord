@@ -1,0 +1,2 @@
+Trigger linked UCT I v1.1 preparation on 2026-09-29.
+This step may reserve exactly one Zenodo new-version draft but must not publish it.
