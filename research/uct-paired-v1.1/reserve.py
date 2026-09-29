@@ -43,6 +43,9 @@ def draft_link(dep):
     url=urllib.parse.urlsplit(link)
     if url.scheme!='https' or url.hostname!='zenodo.org' or not url.path.startswith('/api/deposit/depositions/'):
         raise RuntimeError('Unexpected successor draft link')
+    # Published deposits can expose a latest_draft link pointing to themselves.
+    # It is not evidence that a new unpublished successor already exists.
+    if url.path.rstrip('/').split('/')[-1]==str(dep.get('id')):return None
     return link
 
 def reserve():
