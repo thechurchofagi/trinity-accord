@@ -9,4 +9,4 @@ This directory is a linked-version publication workspace for TA-TR-2026-20 v1.1.
 - Publish requires an exact manifest-matching visual/content review and explicit authorization.
 - OTS and Arweave preservation are version-specific follow-up obligations.
 
-The frozen manuscript input is `source-main.md.gz`; the prepare workflow verifies its SHA-256 before use.
+The frozen manuscript input is `source-main.md`; the prepare workflow verifies its SHA-256 before use.
