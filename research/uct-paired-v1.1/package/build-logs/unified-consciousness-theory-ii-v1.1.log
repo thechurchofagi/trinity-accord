@@ -2,8 +2,8 @@ This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloade
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**unified-consciousness-theory-i-v1.1.tex
-(./unified-consciousness-theory-i-v1.1.tex
+**unified-consciousness-theory-ii-v1.1.tex
+(./unified-consciousness-theory-ii-v1.1.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -1094,8 +1094,8 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 File: bkm-dvipdfm.def 2023-12-10 v1.31 bookmark driver for dvipdfm (HO)
 \BKM@id=\count340
 ))
-(./unified-consciousness-theory-i-v1.1.aux)
-\openout1 = `unified-consciousness-theory-i-v1.1.aux'.
+(./unified-consciousness-theory-ii-v1.1.aux)
+\openout1 = `unified-consciousness-theory-ii-v1.1.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 93.
 LaTeX Font Info:    ... okay on input line 93.
@@ -1425,35 +1425,45 @@ LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/n' will be
 LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/b/n' will be
 (Font)              scaled to size 14.4pt on input line 99.
 LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 105.
+(Font)              scaled to size 12.0pt on input line 104.
 LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 105.
+(Font)              scaled to size 12.0pt on input line 104.
 LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/b/n' will be
-(Font)              scaled to size 10.95pt on input line 107.
+(Font)              scaled to size 10.95pt on input line 106.
 LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/it' will be
-(Font)              scaled to size 10.95pt on input line 119.
+(Font)              scaled to size 10.95pt on input line 113.
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 165.
+[1
+
+]
+Underfull \hbox (badness 2173) in paragraph at lines 165--173
+\TU/DejaVuSerif(0)/m/n/10.95 cept using one fixed parameterization across their
+ theory-linked outputs: a
+ []
+
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 9.23071pt on input line 159.
+(Font)              scaled to size 9.23071pt on input line 196.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.59337pt on input line 159.
+(Font)              scaled to size 6.59337pt on input line 196.
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-59.
+96.
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 13.18808pt on input line 159.
+(Font)              scaled to size 13.18808pt on input line 196.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.23164pt on input line 159.
+(Font)              scaled to size 9.23164pt on input line 196.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.59404pt on input line 159.
+(Font)              scaled to size 6.59404pt on input line 196.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 13.18541pt on input line 159.
+(Font)              scaled to size 13.18541pt on input line 196.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.22977pt on input line 159.
+(Font)              scaled to size 9.22977pt on input line 196.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.59271pt on input line 159.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 159
+(Font)              scaled to size 6.59271pt on input line 196.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 196
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -1462,7 +1472,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 159
+LaTeX Font Info:    Trying to load font information for U+msb on input line 196
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1471,113 +1481,100 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/b/n' will be
-(Font)              scaled to size 10.95pt on input line 164.
-LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/b/n' will be
-(Font)              scaled to size 7.665pt on input line 164.
-LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/b/n' will be
-(Font)              scaled to size 5.475pt on input line 164.
 LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 176.
- [1
-
-]
+(Font)              scaled to size 7.665pt on input line 201.
 LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/n' will be
-(Font)              scaled to size 7.665pt on input line 226.
-LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/n' will be
-(Font)              scaled to size 5.475pt on input line 226.
- [2] [3]
-[4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
-Underfull \hbox (badness 1168) in paragraph at lines 1553--1557
-[]\TU/DejaVuSerif(0)/m/n/10.95 Cuttlefish have shown what-where-when behavioral
- organization meeting stan-
- []
-
-[18] [19] [20] [21]
-LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/m/n' will be
-(Font)              scaled to size 10.95pt on input line 1898.
-LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/m/n' will be
-(Font)              scaled to size 7.665pt on input line 1898.
-LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/m/n' will be
-(Font)              scaled to size 5.475pt on input line 1898.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 12.0427pt on input line 1923.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.42989pt on input line 1923.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.02135pt on input line 1923.
-LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 1923.
-LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 1923.
-LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 1923.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.04391pt on input line 1923.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.43074pt on input line 1923.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.02196pt on input line 1923.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 12.04147pt on input line 1923.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.42903pt on input line 1923.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.02074pt on input line 1923.
+(Font)              scaled to size 5.475pt on input line 201.
+ [2]
 LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 1923.
+(Font)              scaled to size 10.95pt on input line 277.
 LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/b/n' will be
-(Font)              scaled to size 7.0pt on input line 1923.
+(Font)              scaled to size 7.665pt on input line 277.
 LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/b/n' will be
-(Font)              scaled to size 5.0pt on input line 1923.
- [22] [23] [24] [25] [26] [27] [28]
-Underfull \hbox (badness 1609) in paragraph at lines 2550--2552
-\TU/DejaVuSerif(0)/m/n/10.95 A permissive process ontology can yield many weak,
- overlapping, or nested
+(Font)              scaled to size 5.475pt on input line 277.
+ [3]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 12.0427pt on input line 367.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 8.42989pt on input line 367.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.02135pt on input line 367.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 12.04391pt on input line 367.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 8.43074pt on input line 367.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.02196pt on input line 367.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 12.04147pt on input line 367.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 8.42903pt on input line 367.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.02074pt on input line 367.
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/b/n' will be
+(Font)              scaled to size 10.0pt on input line 367.
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/b/n' will be
+(Font)              scaled to size 7.0pt on input line 367.
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/b/n' will be
+(Font)              scaled to size 5.0pt on input line 367.
+ [4]
+Underfull \hbox (badness 1565) in paragraph at lines 494--496
+[]\TU/DejaVuSerif(0)/m/n/10.95 These conditions formalize the anti-lookup and a
+nti-oracle requirements used
  []
 
-[29] [30] [31] [32]
-Underfull \hbox (badness 1082) in paragraph at lines 2813--2821
-[]\TU/DejaVuSerif(0)/b/n/10.95 Reference-status note. \TU/DejaVuSerif(0)/m/n/10
-.95 Literature added specifically for the v1.1 evolution-
+[5]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 14.45123pt on input line 544.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 9.63416pt on input line 544.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.22562pt on input line 544.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 14.4527pt on input line 544.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.63513pt on input line 544.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.22635pt on input line 544.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 14.44977pt on input line 544.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 9.63318pt on input line 544.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.22488pt on input line 544.
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/b/n' will be
+(Font)              scaled to size 12.0pt on input line 544.
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/b/n' will be
+(Font)              scaled to size 8.0pt on input line 544.
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/b/n' will be
+(Font)              scaled to size 6.0pt on input line 544.
+ [6]
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/m/n' will be
+(Font)              scaled to size 10.95pt on input line 669.
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/m/n' will be
+(Font)              scaled to size 7.665pt on input line 669.
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(1)/m/n' will be
+(Font)              scaled to size 5.475pt on input line 669.
+ [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20]
+[21] [22] [23]
+Underfull \hbox (badness 1789) in paragraph at lines 2042--2051
+\TU/DejaVuSerif(0)/m/n/10.95 It additionally includes the restored historical s
+ource-trace ledger, a current
  []
 
-
-Underfull \hbox (badness 1107) in paragraph at lines 2813--2821
-\TU/DejaVuSerif(0)/m/n/10.95 ary/comparative synthesis was checked against publ
-isher, PubMed, or journal
- []
-
-[33] [34] [35] [36] [37
-
-] [38
-
-] [39]
-LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/n' will be
-(Font)              scaled to size 10.3926pt on input line 3281.
-
-Underfull \hbox (badness 4686) in paragraph at lines 3280--3290
-\TU/DejaVuSerif(0)/m/n/10.95 The accompanying standard-library Python script \T
-U/DejaVuSansMono(0)/m/n/10.95 verification/check_rc4.py
- []
-
-[40] [41] [42
-
-] [43
-
-] (./unified-consciousness-theory-i-v1.1.aux)
+[24] [25] [26] [27] (./unified-consciousness-theory-ii-v1.1.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 29922 strings out of 476878
- 590737 string characters out of 5805249
- 1946627 words of memory out of 5000000
- 51320 multiletter control sequences out of 15000+600000
- 566006 words of font info for 131 fonts, out of 8000000 for 9000
+ 29750 strings out of 476878
+ 587194 string characters out of 5805249
+ 1945627 words of memory out of 5000000
+ 51138 multiletter control sequences out of 15000+600000
+ 568717 words of font info for 148 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 102i,13n,122p,1032b,850s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,13n,122p,1033b,493s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on unified-consciousness-theory-i-v1.1.pdf (43 pages).
+Output written on unified-consciousness-theory-ii-v1.1.pdf (27 pages).

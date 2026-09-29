@@ -1,0 +1,24 @@
+{
+  "state": "PASS",
+  "documents": [
+    {
+      "stem": "unified-consciousness-theory-i-v1.1",
+      "pdf_sha256": "b51e37ec02c0889ab3e328608583d69be96543e13f08807bff7d1d133712ccbf",
+      "pdfinfo": "Title:           UCT I v1.1\nSubject:         Revised theoretical preprint; not peer reviewed\nAuthor:          Hongju Liu\nCreator:         LaTeX via pandoc\nProducer:        xdvipdfmx (20220710)\nCreationDate:    Mon Sep 28 23:00:00 2026 UTC\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           43\nEncrypted:       no\nPage size:       595.28 x 841.89 pts (A4)\nPage rot:        0\nFile size:       218982 bytes\nOptimized:       no\nPDF version:     1.5\n",
+      "layout_problems": []
+    },
+    {
+      "stem": "unified-consciousness-theory-ii-v1.1",
+      "pdf_sha256": "ef7522a08042ffbac87d1b5c573a9ccbbab053ba087ce902d2bda6bd2191e0f2",
+      "pdfinfo": "Title:           UCT II v1.1\nSubject:         Revised theoretical preprint; not peer reviewed\nAuthor:          Hongju Liu\nCreator:         LaTeX via pandoc\nProducer:        xdvipdfmx (20220710)\nCreationDate:    Mon Sep 28 23:00:00 2026 UTC\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           27\nEncrypted:       no\nPage size:       595.28 x 841.89 pts (A4)\nPage rot:        0\nFile size:       150224 bytes\nOptimized:       no\nPDF version:     1.5\n",
+      "layout_problems": []
+    },
+    {
+      "stem": "uct-paired-v1.1-supplement",
+      "pdf_sha256": "717d093541ad8a940456e990828d494bf1e9df65b906d904ab512dfe497a43b3",
+      "pdfinfo": "Title:           UCT I and II v1.1 Supplement\nSubject:         Revised theoretical preprint; not peer reviewed\nAuthor:          Hongju Liu\nCreator:         LaTeX via pandoc\nProducer:        xdvipdfmx (20220710)\nCreationDate:    Mon Sep 28 23:00:00 2026 UTC\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           6\nEncrypted:       no\nPage size:       595.28 x 841.89 pts (A4)\nPage rot:        0\nFile size:       67693 bytes\nOptimized:       no\nPDF version:     1.5\n",
+      "layout_problems": []
+    }
+  ],
+  "visual_review": "Pending separate rendered-page review; log checks are not visual review."
+}

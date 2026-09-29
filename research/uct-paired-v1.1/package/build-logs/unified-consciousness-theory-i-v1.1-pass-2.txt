@@ -187,12 +187,9 @@ zlibrarypositioning.code.tex)
 (/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty)
 (/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
 (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def))
-No file unified-consciousness-theory-i-v1.1.aux.
+(./unified-consciousness-theory-i-v1.1.aux)
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
-
 (/usr/share/texmf/tex/latex/lm/omllmm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg)
@@ -218,11 +215,7 @@ isher, PubMed, or journal
 Underfull \hbox (badness 4686) in paragraph at lines 3280--3290
 \TU/DejaVuSerif(0)/m/n/10.95 The accompanying standard-library Python script \T
 U/DejaVuSansMono(0)/m/n/10.95 verification/check_rc4.py
-[40] [41] [42] [43] (./unified-consciousness-theory-i-v1.1.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- )
+[40] [41] [42] [43] (./unified-consciousness-theory-i-v1.1.aux) )
 (see the transcript file for additional information)
 Output written on unified-consciousness-theory-i-v1.1.pdf (43 pages).
 Transcript written on unified-consciousness-theory-i-v1.1.log.
