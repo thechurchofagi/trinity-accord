@@ -1,10 +1,9 @@
 {
-  "operation": "publish",
-  "iteration": 4,
+  "operation": "reconcile_then_publish",
+  "iteration": 5,
   "expected_manifest_sha256": "720de776df3fc2cddb10c2f9ed5037533f06a9d361496a7fce0f66ecdcd6c3ed",
   "publication_authorized_by_user": true,
-  "visual_review_completed": true,
   "new_record_ids": [23030207, 23030320],
-  "versions": ["TA-TR-2026-20 v1.1", "TA-TR-2026-21 v1.1"],
+  "unreviewed_preexisting_draft_files": "Retain in workflow artifact and stop for comparison. No deletion before exact reconciliation approval.",
   "prior_v1_0_files_must_remain_unchanged": true
 }
