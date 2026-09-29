@@ -48,7 +48,7 @@ jobs:
       - name: Install document toolchain
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended fonts-dejavu poppler-utils
+          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended fonts-dejavu lmodern poppler-utils
       - name: Assemble, verify and render final DOI PDFs
         env:
           SOURCE_DATE_EPOCH: '1790636400'
