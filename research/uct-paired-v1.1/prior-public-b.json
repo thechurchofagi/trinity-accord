@@ -1,0 +1,223 @@
+{
+  "created": "2026-09-28T06:40:10.135363+00:00",
+  "modified": "2026-09-28T06:40:10.869725+00:00",
+  "id": 23008262,
+  "conceptrecid": "23008261",
+  "doi": "10.5281/zenodo.23008262",
+  "conceptdoi": "10.5281/zenodo.23008261",
+  "doi_url": "https://doi.org/10.5281/zenodo.23008262",
+  "metadata": {
+    "title": "Unified Consciousness Theory II: Consciousness Theories as Effective Organization Theories",
+    "doi": "10.5281/zenodo.23008262",
+    "publication_date": "2026-09-28",
+    "description": "<p>Unified Consciousness Theory II develops a constrained intertheory framework for reconstructing, embedding, reinterpreting, or explicitly conflicting operational substructures of major consciousness theories inside the physically anchored UCT-I mother formalism.</p><p>TA-TR-2026-21, version 1.0. Human author of record and responsible depositor: Hongju Liu. Substantial ChatGPT (OpenAI GPT-5.6 Sol) assistance under human direction. Not peer reviewed.</p><p>The release separates formal recovery from empirical validation, includes bridge-admissibility and translation-fidelity constraints, audits nine target theories, and preserves two fixed-parameter cross-theory toy-model demonstrations. It does not claim V3/V4 empirical recovery, human-data validation, robust whole-theory compression, or proof of UCT-I axioms.</p>",
+    "access_right": "open",
+    "creators": [
+      {
+        "name": "Liu, Hongju",
+        "affiliation": "Independent researcher, Shenzhen, China"
+      }
+    ],
+    "keywords": [
+      "consciousness",
+      "theory unification",
+      "intertheory translation",
+      "causal organization",
+      "IIT",
+      "global neuronal workspace",
+      "higher-order theory",
+      "recurrent processing",
+      "predictive processing",
+      "memory theory",
+      "temporospatial theory"
+    ],
+    "version": "1.0",
+    "language": "eng",
+    "resource_type": {
+      "title": "Preprint",
+      "type": "publication",
+      "subtype": "preprint"
+    },
+    "license": {
+      "id": "cc-by-4.0"
+    },
+    "relations": {
+      "version": [
+        {
+          "index": 0,
+          "is_last": true,
+          "parent": {
+            "pid_type": "recid",
+            "pid_value": "23008261"
+          }
+        }
+      ]
+    }
+  },
+  "title": "Unified Consciousness Theory II: Consciousness Theories as Effective Organization Theories",
+  "links": {
+    "self": "https://zenodo.org/api/records/23008262",
+    "self_html": "https://zenodo.org/records/23008262",
+    "preview_html": "https://zenodo.org/records/23008262?preview=1",
+    "doi": "https://doi.org/10.5281/zenodo.23008262",
+    "self_doi": "https://doi.org/10.5281/zenodo.23008262",
+    "self_doi_html": "https://zenodo.org/doi/10.5281/zenodo.23008262",
+    "reserve_doi": "https://zenodo.org/api/records/23008262/draft/pids/doi",
+    "parent": "https://zenodo.org/api/records/23008261",
+    "parent_html": "https://zenodo.org/records/23008261",
+    "parent_doi": "https://doi.org/10.5281/zenodo.23008261",
+    "parent_doi_html": "https://zenodo.org/doi/10.5281/zenodo.23008261",
+    "self_iiif_manifest": "https://zenodo.org/api/iiif/record:23008262/manifest",
+    "self_iiif_sequence": "https://zenodo.org/api/iiif/record:23008262/sequence/default",
+    "files": "https://zenodo.org/api/records/23008262/files",
+    "media_files": "https://zenodo.org/api/records/23008262/media-files",
+    "thumbnails": {
+      "10": "https://zenodo.org/api/iiif/record:23008262:unified-consciousness-theory-ii-supplement-v1.0.pdf/full/%5E10,/0/default.jpg",
+      "50": "https://zenodo.org/api/iiif/record:23008262:unified-consciousness-theory-ii-supplement-v1.0.pdf/full/%5E50,/0/default.jpg",
+      "100": "https://zenodo.org/api/iiif/record:23008262:unified-consciousness-theory-ii-supplement-v1.0.pdf/full/%5E100,/0/default.jpg",
+      "250": "https://zenodo.org/api/iiif/record:23008262:unified-consciousness-theory-ii-supplement-v1.0.pdf/full/%5E250,/0/default.jpg",
+      "750": "https://zenodo.org/api/iiif/record:23008262:unified-consciousness-theory-ii-supplement-v1.0.pdf/full/%5E750,/0/default.jpg",
+      "1200": "https://zenodo.org/api/iiif/record:23008262:unified-consciousness-theory-ii-supplement-v1.0.pdf/full/%5E1200,/0/default.jpg"
+    },
+    "archive": "https://zenodo.org/api/records/23008262/files-archive",
+    "archive_media": "https://zenodo.org/api/records/23008262/media-files-archive",
+    "latest": "https://zenodo.org/api/records/23008262/versions/latest",
+    "latest_html": "https://zenodo.org/records/23008262/latest",
+    "versions": "https://zenodo.org/api/records/23008262/versions",
+    "draft": "https://zenodo.org/api/records/23008262/draft",
+    "access_links": "https://zenodo.org/api/records/23008262/access/links",
+    "access_grants": "https://zenodo.org/api/records/23008262/access/grants",
+    "access_users": "https://zenodo.org/api/records/23008262/access/users",
+    "access_request": "https://zenodo.org/api/records/23008262/access/request",
+    "access": "https://zenodo.org/api/records/23008262/access",
+    "communities": "https://zenodo.org/api/records/23008262/communities",
+    "communities-suggestions": "https://zenodo.org/api/records/23008262/communities-suggestions",
+    "request_deletion": "https://zenodo.org/api/records/23008262/request-deletion",
+    "file_modification": "https://zenodo.org/api/records/23008262/file-modification",
+    "quota_increase": "https://zenodo.org/api/records/23008262/quota-increase",
+    "requests": "https://zenodo.org/api/records/23008262/requests"
+  },
+  "updated": "2026-09-28T06:40:10.869725+00:00",
+  "recid": "23008262",
+  "revision": 3,
+  "files": [
+    {
+      "id": "47833bf8-06ca-4c10-8c40-8a6166cb27ec",
+      "key": "unified-consciousness-theory-ii-audit-bundle-v1.0.zip",
+      "size": 77889,
+      "checksum": "md5:0124b91dd8abd0c467827006cdd03578",
+      "links": {
+        "self": "https://zenodo.org/api/records/23008262/files/unified-consciousness-theory-ii-audit-bundle-v1.0.zip/content"
+      }
+    },
+    {
+      "id": "ca3ed1ba-2b0a-4a2f-8658-3681dc2a18cf",
+      "key": "unified-consciousness-theory-ii-supplement-v1.0.pdf",
+      "size": 57696,
+      "checksum": "md5:67a03e6f19f159c3beeb52550be16dcf",
+      "links": {
+        "self": "https://zenodo.org/api/records/23008262/files/unified-consciousness-theory-ii-supplement-v1.0.pdf/content"
+      }
+    },
+    {
+      "id": "aecfd7d6-bfba-40f8-acc6-38a25c3a86ae",
+      "key": "citation.ris",
+      "size": 292,
+      "checksum": "md5:2e83d08886d88f4bb0a38b36d5414c86",
+      "links": {
+        "self": "https://zenodo.org/api/records/23008262/files/citation.ris/content"
+      }
+    },
+    {
+      "id": "a087c2ea-8be5-48ab-9200-5e2051d17046",
+      "key": "README-LICENSE.txt",
+      "size": 1300,
+      "checksum": "md5:b91c744ae1bffdbe2757fb2c5783a6a8",
+      "links": {
+        "self": "https://zenodo.org/api/records/23008262/files/README-LICENSE.txt/content"
+      }
+    },
+    {
+      "id": "1287240b-1e9d-43aa-b7ad-0e01a768778d",
+      "key": "citation.csl.json",
+      "size": 500,
+      "checksum": "md5:36e997d124e9fdd766fba7c8f9b7c129",
+      "links": {
+        "self": "https://zenodo.org/api/records/23008262/files/citation.csl.json/content"
+      }
+    },
+    {
+      "id": "f8efd76e-8c85-42bf-8114-803295e72e06",
+      "key": "unified-consciousness-theory-ii-supplement-v1.0.md",
+      "size": 5452,
+      "checksum": "md5:e161680169fea0d4e96523c2ce28f397",
+      "links": {
+        "self": "https://zenodo.org/api/records/23008262/files/unified-consciousness-theory-ii-supplement-v1.0.md/content"
+      }
+    },
+    {
+      "id": "073f4617-bf22-44df-9b9c-93c255a40166",
+      "key": "SHA256SUMS.txt",
+      "size": 983,
+      "checksum": "md5:165bb00be1af1773f0e136766f1f5126",
+      "links": {
+        "self": "https://zenodo.org/api/records/23008262/files/SHA256SUMS.txt/content"
+      }
+    },
+    {
+      "id": "74f9b387-100e-4345-8245-3b8e878d85fe",
+      "key": "citation.bib",
+      "size": 328,
+      "checksum": "md5:b65dbc2bcd225fa09c7129629d3978da",
+      "links": {
+        "self": "https://zenodo.org/api/records/23008262/files/citation.bib/content"
+      }
+    },
+    {
+      "id": "fc0793f2-b077-4e1f-a9ce-a6fdddc43c49",
+      "key": "unified-consciousness-theory-ii-v1.0.pdf",
+      "size": 139813,
+      "checksum": "md5:eb47fce654b741fdec94d08d8b63fd00",
+      "links": {
+        "self": "https://zenodo.org/api/records/23008262/files/unified-consciousness-theory-ii-v1.0.pdf/content"
+      }
+    },
+    {
+      "id": "ff973a1b-bff9-4a36-af36-e16b79f5fa35",
+      "key": "REVIEW-AND-SOURCES.md",
+      "size": 1713,
+      "checksum": "md5:84ee763fe3f1a30e43a26151a2b97c98",
+      "links": {
+        "self": "https://zenodo.org/api/records/23008262/files/REVIEW-AND-SOURCES.md/content"
+      }
+    },
+    {
+      "id": "ba75d725-aa76-456a-acbc-9db9aba5c3ee",
+      "key": "unified-consciousness-theory-ii-v1.0.md",
+      "size": 46705,
+      "checksum": "md5:bca79bf4c3e206ea289585c3f5061652",
+      "links": {
+        "self": "https://zenodo.org/api/records/23008262/files/unified-consciousness-theory-ii-v1.0.md/content"
+      }
+    }
+  ],
+  "swh": {},
+  "owners": [
+    {
+      "id": "1417872"
+    }
+  ],
+  "status": "published",
+  "stats": {
+    "downloads": 11,
+    "unique_downloads": 11,
+    "views": 0,
+    "unique_views": 0,
+    "version_downloads": 11,
+    "version_unique_downloads": 11,
+    "version_unique_views": 0,
+    "version_views": 0
+  },
+  "state": "done",
+  "submitted": true
+}
