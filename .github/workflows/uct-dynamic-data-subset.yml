@@ -1,0 +1,33 @@
+name: UCT dynamic stimulation public subset
+on:
+  push:
+    branches: [ops/uct-dynamic-data-20260929-r1]
+    paths:
+      - '.github/workflows/uct-dynamic-data-subset.yml'
+      - 'ops/uct-dynamic-data-20260929/**'
+permissions:
+  contents: read
+concurrency:
+  group: uct-dynamic-data-transfer
+  cancel-in-progress: false
+jobs:
+  download:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+          sparse-checkout: ops/uct-dynamic-data-20260929
+          show-progress: false
+      - name: Retrieve selected public files using bounded HTTP ranges
+        run: python3 ops/uct-dynamic-data-20260929/fetch_subset.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: uct-dynamic-stimulation-subset
+          path: |
+            transfer/
+            ops/uct-dynamic-data-20260929/
+          if-no-files-found: error
+          retention-days: 90
