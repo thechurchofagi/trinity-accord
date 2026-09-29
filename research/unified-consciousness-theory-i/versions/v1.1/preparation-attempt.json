@@ -1,7 +1,8 @@
 {
-  "state": "INCOMPLETE_REQUIRES_SAME_VERSION_RECONCILIATION",
-  "phase": "build_exact_package",
-  "error_type": "RuntimeError",
-  "error": "release-candidate marker remained in DOI-bound main source",
-  "workflow_run_id": "36517879788"
+  "state": "RESERVED_AND_EXACT_PACKAGE_BUILT",
+  "record_id": 23029358,
+  "doi": "10.5281/zenodo.23029358",
+  "file_count": 10,
+  "phase": "completed",
+  "workflow_run_id": "36518108654"
 }
