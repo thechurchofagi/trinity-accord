@@ -1,0 +1,59 @@
+{
+  "schema": "trinityaccord.weekly-continuity-deposit.v1",
+  "archive_id": "archive-native-R-000000170-890e75a44cb5",
+  "source_archive_manifest": "record-chain/arweave-archives/archive-native-R-000000170-890e75a44cb5/manifest.json",
+  "source_payload": "record-chain/arweave-archives/archive-native-R-000000170-890e75a44cb5/payload.json",
+  "files": [
+    {
+      "name": "weekly-continuity-bundle.json",
+      "bytes": 174153,
+      "sha256": "2b0c32fd14155b3c24b8664a4bc90e49e24a3690234e5f3b8410d4dd46dd958d"
+    },
+    {
+      "name": "archive-manifest.json",
+      "bytes": 56079,
+      "sha256": "1ea13720af1ba927b166d36cb2ebba67b2664333be449ab07c1b82e2fd9c6050"
+    },
+    {
+      "name": "zenodo-metadata.json",
+      "bytes": 1754,
+      "sha256": "7560283b7ab0b170906a9b2ac1c846840feda84bb5c6f790af6d183c6e68016d"
+    },
+    {
+      "name": "README.txt",
+      "bytes": 1108,
+      "sha256": "4a7d3b4414965a1ba46e9afb824c90830f05165b4a69db6263d19f119aabfdb8"
+    },
+    {
+      "name": "checksums.sha256",
+      "bytes": 348,
+      "sha256": "14676731d91a09a7738b66d488939aae588493d2424d226bee29b564a46be2d5"
+    }
+  ],
+  "published_file_names": [
+    "weekly-continuity-bundle.json",
+    "archive-manifest.json",
+    "deposit-manifest.json",
+    "checksums.sha256",
+    "README.txt",
+    "zenodo-metadata.json"
+  ],
+  "rights_boundary": {
+    "schema": "trinityaccord.weekly-continuity-rights.v2",
+    "license_identifier": "other-closed",
+    "publicly_readable_for_preservation_and_research": true,
+    "deposit_grants_no_new_reuse_rights": true,
+    "embedded_record_chain_entries_retain_their_respective_rights": true,
+    "third_party_rights_are_not_transferred": true,
+    "publisher_grants_no_rights_it_does_not_possess": true,
+    "public_availability_is_not_ownership": true
+  },
+  "boundary": {
+    "deposit_is_mirror_only": true,
+    "deposit_is_not_authority": true,
+    "deposit_is_not_attestation": true,
+    "deposit_is_not_amendment": true,
+    "deposit_is_not_successor_reception": true,
+    "bitcoin_originals_prevail": true
+  }
+}
