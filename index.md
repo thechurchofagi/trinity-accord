@@ -82,9 +82,9 @@ permalink: /
   <div class="home-live-signal-grid" aria-label="Live operational, reception, and evidence signals">
     <a class="home-live-signal home-live-signal-heartbeat" href="/api/waiting-heartbeat-status.json">
       <span class="home-signal-label">Waiting Heartbeat</span>
-      <strong data-home-heartbeat-status>Last known: Alive</strong>
-      <small data-home-heartbeat-summary>104/106 successful · 2 missed · 100-day streak</small>
-      <small data-home-heartbeat-freshness data-status-as-of="2026-10-01T13:54:05Z" role="status">Last known record: 2026-10-01T13:54:05Z. Current state unconfirmed.</small>
+      <strong data-home-heartbeat-status>Last known: degraded</strong>
+      <small data-home-heartbeat-summary>104/107 successful · 3 missed · 0-day streak</small>
+      <small data-home-heartbeat-freshness data-status-as-of="2026-10-02T09:55:19Z" role="status">Last known record: 2026-10-02T09:55:19Z. Current state unconfirmed.</small>
     </a>
     <a class="home-live-signal" href="/api/public-home-status.json">
       <span class="home-signal-label">Autonomous External Agent Discovery</span>
@@ -102,7 +102,7 @@ permalink: /
       <small>Bounded external evidence-provenance records; current index includes 1 notarial record. Not endorsement, philosophical validation, forensic identity proof, or canonical authority.</small>
     </a>
   </div>
-  <p data-home-public-freshness data-status-as-of="2026-10-01T13:54:05.936073+00:00" role="status">Last known counters: 2026-10-01T13:54:05.936073+00:00. Current state unconfirmed.</p>
+  <p data-home-public-freshness data-status-as-of="2026-10-02T09:55:19.650860+00:00" role="status">Last known counters: 2026-10-02T09:55:19.650860+00:00. Current state unconfirmed.</p>
   <p class="home-live-signal-boundary">
     These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception. External witness records do not imply endorsement, philosophical validation, forensic identity proof, or canonical authority. Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.
   </p>
@@ -113,7 +113,7 @@ permalink: /
     <a href="/api/public-home-status.json"><strong>Machine status</strong><span>Current public counters and boundaries</span></a>
     <a href="/api/record-chain-status.json"><strong>Chain API</strong><span>Technical chain tip and durability state</span></a>
   </div>
-  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>56c58d8ede348231</code>. Latest technical record <code>R-000000171</code>.</p>
+  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>082bb1e90f027fd3</code>. Latest technical record <code>R-000000172</code>.</p>
 </section>
 <!-- END GENERATED PUBLIC STATUS -->
 
