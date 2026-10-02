@@ -1,5 +1,22 @@
 # Read-degree concentration and an interleaving obstruction for RLC
 
+## 2026-10-03 update: forward-Gray row-lift ceiling
+
+The forward-Gray candidate now has an explicit all-dimensional additive
+sweep upper bound.  For every (n\ge5), the five high-coordinate weights
+((-1,-14,-4,-12,-20)), followed by a separated binary row lift using
+lower weights (64\,2^j), give exactly
+
+\[
+ R(\gamma_n\circ\pi)=10\,2^{n-5}=\frac{5}{16}2^n,
+ \qquad \gamma_n(x)=x\oplus(x\gg1).
+\]
+
+Hence \(\operatorname{RLC}(\gamma_n)\le(5/16)2^n\).  This is a ceiling
+for the specific candidate, not a matching lower bound and not a resolution
+of the main extremal question.  See `FORWARD_GRAY_ROW_LIFT_CEILING.md` and
+`verify_forward_gray_row_lift.py` for the exact proof and integer receipt.
+
 Date: 2026-10-02. Status: research draft; not a new published version.
 Baseline: TA-TR-2026-22 v1.0, DOI [10.5281/zenodo.23103274](https://doi.org/10.5281/zenodo.23103274).
 This note strengthens its general lower-bound constant and rules out a particular concentration route. The constant-density problem remains open.
@@ -243,4 +260,3 @@ The missing useful statement would be either:
 2. for a genuinely specified conditioned/randomized prefix-separable family, a simultaneously usable bad-sweep bound strong enough to beat \(\log S_n=O(n^2)\) at threshold \(c_0N\), with all conditioning dependencies accounted for.
 
 Merely repeating McDiarmid, replacing it by another uniform fixed-sweep concentration inequality, sampling more weights, or extending the eight five-dimensional Gray cones is not enough. The failed uniform-tail route is now excluded by the all-dimensional certificate (7). Formal v1.0, its DOI, and its archived bytes remain unchanged.
-
