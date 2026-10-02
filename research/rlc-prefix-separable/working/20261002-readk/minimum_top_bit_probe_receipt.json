@@ -1,0 +1,26 @@
+{
+  "state": "EXPLORATORY_ONLY_NO_COUNTEREXAMPLE_IN_SAMPLE",
+  "seed": 202610030659,
+  "draws_per_dimension": 600,
+  "dimensions": [
+    {"n": 2, "accepted": 600, "max_W_minus_D": -4, "max_E_minus_D": -4, "counterexample": null},
+    {"n": 3, "accepted": 600, "max_W_minus_D": -4, "max_E_minus_D": -4, "counterexample": null},
+    {"n": 4, "accepted": 600, "max_W_minus_D": -4, "max_E_minus_D": -4, "counterexample": null},
+    {"n": 5, "accepted": 600, "max_W_minus_D": 0, "max_E_minus_D": 0, "counterexample": null},
+    {"n": 6, "accepted": 600, "max_W_minus_D": -4, "max_E_minus_D": -4, "counterexample": null},
+    {"n": 7, "accepted": 596, "max_W_minus_D": -4, "max_E_minus_D": -4, "counterexample": null},
+    {"n": 8, "accepted": 593, "max_W_minus_D": -12, "max_E_minus_D": -16, "counterexample": null},
+    {"n": 9, "accepted": 583, "max_W_minus_D": -36, "max_E_minus_D": -36, "counterexample": null}
+  ],
+  "accepted_total": 4772,
+  "weight_distribution": "sample n distinct integers from range(1,100000); put smallest at top coordinate and shuffle the rest",
+  "arithmetic": "integer graph and exact sign-orbit optimization",
+  "hypotheses": "E*-D<=0, or stronger W-D<=0, for all generic positive vectors with the smallest magnitude at the top coordinate",
+  "proof_status": "OPEN; negative sample evidence cannot establish either hypothesis",
+  "additional_unhelpful_probe": {
+    "sorted_parent_domain": "combinations(range(2,25), n-1), followed by top weight 1; n=2..7",
+    "minimum_C_printed": {"2": 4, "3": 8, "4": 16, "5": 32},
+    "n6_and_n7": "No generic vector found in this bounded domain",
+    "reason": "For integer parent scores and generic extension by 1, consecutive parent gaps exceed 1, forcing adjacent layer pairs. This domain does not test arbitrary interleaving."
+  }
+}

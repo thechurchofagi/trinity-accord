@@ -1,0 +1,31 @@
+{
+  "state": "EXACT_FACE_LOCAL_RELAXATION_OBSTRUCTION_PASS",
+  "arithmetic": "integer; no LP solver or floating feasibility",
+  "vertices_checked": 415712,
+  "coordinate_sets_checked": 4105,
+  "direct_pairs_checked": 244368,
+  "scope": "Exact nonadditive refinements locally sharing one vector; NOT actual additive sweeps and NOT RLC upper bounds.",
+  "all_dimensional_results": {
+    "parameters": "every n >= k+3, k >= 2",
+    "score_range_bound": "(2*n)**(k+1)",
+    "runs_bound": "4*(sum(weights)+1)",
+    "local_face_dimension": "k",
+    "subexponential_choice": "k=o(n/log(n)), k>=2",
+    "positive_density_target": "OPEN"
+  },
+  "violations": 0,
+  "digest": "cf654cac3a4ee11472ee2e7b51cb43875a05e3c2c3443e0f7b6a9ab4d7885d84",
+  "script_sha256": "1b746e256a7903f107ed4f11b8914769efadfe79c9b7edc7433c2a1cddc00a41",
+  "elapsed_seconds": 0.531
+}
+{"n": 5, "k": 2, "integer_score_range": 15, "nonempty_score_buckets": 16, "cyclic_runs": 20, "run_density": 0.625}
+{"n": 6, "k": 3, "integer_score_range": 37, "nonempty_score_buckets": 38, "cyclic_runs": 48, "run_density": 0.75}
+{"n": 7, "k": 4, "integer_score_range": 100, "nonempty_score_buckets": 101, "cyclic_runs": 88, "run_density": 0.6875}
+{"n": 8, "k": 5, "integer_score_range": 220, "nonempty_score_buckets": 221, "cyclic_runs": 160, "run_density": 0.625}
+{"n": 9, "k": 6, "integer_score_range": 476, "nonempty_score_buckets": 477, "cyclic_runs": 288, "run_density": 0.5625}
+{"n": 10, "k": 3, "integer_score_range": 119, "nonempty_score_buckets": 120, "cyclic_runs": 212, "run_density": 0.20703125}
+{"n": 12, "k": 3, "integer_score_range": 178, "nonempty_score_buckets": 179, "cyclic_runs": 330, "run_density": 0.08056640625}
+{"n": 14, "k": 3, "integer_score_range": 249, "nonempty_score_buckets": 250, "cyclic_runs": 472, "run_density": 0.02880859375}
+{"n": 16, "k": 3, "integer_score_range": 332, "nonempty_score_buckets": 333, "cyclic_runs": 638, "run_density": 0.009735107421875}
+{"n": 18, "k": 3, "integer_score_range": 427, "nonempty_score_buckets": 428, "cyclic_runs": 828, "run_density": 0.0031585693359375}
+{"n": 16, "k": 4, "integer_score_range": 2050, "nonempty_score_buckets": 2051, "cyclic_runs": 3966, "run_density": 0.060516357421875}
