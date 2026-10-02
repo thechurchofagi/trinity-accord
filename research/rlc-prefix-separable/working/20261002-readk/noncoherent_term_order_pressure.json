@@ -1,0 +1,52 @@
+{
+  "source": "Maclagan, arXiv math/9809134v2, Example 2.5",
+  "all_translation_pair_checks": 945,
+  "coordinate_assignments_and_reflections": 3840,
+  "minimum_R_C": [
+    18,
+    18
+  ],
+  "cyclic_histogram": {
+    "18": 160,
+    "20": 1488,
+    "22": 824,
+    "24": 856,
+    "26": 360,
+    "28": 152
+  },
+  "minimizing_order": [
+    5,
+    4,
+    7,
+    21,
+    1,
+    6,
+    13,
+    20,
+    23,
+    0,
+    12,
+    3,
+    15,
+    17,
+    22,
+    2,
+    29,
+    9,
+    14,
+    16,
+    28,
+    19,
+    31,
+    8,
+    11,
+    18,
+    25,
+    30,
+    10,
+    24,
+    27,
+    26
+  ],
+  "interpretation": "This single published noncoherent order does not defeat 1/4 or 5/16 density. No all-dimensional conclusion."
+}

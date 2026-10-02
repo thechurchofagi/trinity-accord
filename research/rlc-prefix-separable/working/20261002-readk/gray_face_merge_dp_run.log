@@ -1,0 +1,278 @@
+{
+  "state": "EXACT_Q5_GRAY_OPTIMUM_AND_HIERARCHY_EXCLUSION_PASS",
+  "all_dimensional_result": "Exact paired cost and shortest-path recurrence for relaxed centrally symmetric same-order face merging; not an additive-chamber reduction.",
+  "brute_force_merge_cases": 6772,
+  "q4_signed_parents": 5376,
+  "q5_relaxed_linear_histogram": {
+    "10": 64,
+    "12": 506,
+    "13": 124,
+    "14": 1554,
+    "15": 504,
+    "16": 2624
+  },
+  "q5_relaxed_cyclic_histogram": {
+    "10": 64,
+    "12": 506,
+    "14": 1678,
+    "16": 3128
+  },
+  "G5": 10,
+  "F5": 10,
+  "additive_witness": {
+    "weights": [
+      1,
+      14,
+      4,
+      12,
+      20
+    ],
+    "order": [
+      0,
+      1,
+      4,
+      5,
+      8,
+      9,
+      2,
+      3,
+      12,
+      13,
+      6,
+      7,
+      16,
+      17,
+      20,
+      21,
+      10,
+      11,
+      14,
+      15,
+      24,
+      25,
+      18,
+      19,
+      28,
+      29,
+      22,
+      23,
+      26,
+      27,
+      30,
+      31
+    ],
+    "R_C": [
+      10,
+      10
+    ]
+  },
+  "actual_fixed_parent_translation_intervals_checked": 105984,
+  "hierarchy_counterexample": {
+    "order": [
+      7,
+      6,
+      5,
+      15,
+      14,
+      23,
+      22,
+      21,
+      39,
+      38,
+      37,
+      47,
+      46,
+      3,
+      4,
+      13,
+      31,
+      30,
+      19,
+      20,
+      55,
+      54,
+      53,
+      35,
+      36,
+      45,
+      29,
+      2,
+      63,
+      62,
+      51,
+      52,
+      11,
+      12,
+      1,
+      0,
+      61,
+      34,
+      18,
+      27,
+      28,
+      10,
+      9,
+      8,
+      43,
+      44,
+      33,
+      32,
+      50,
+      59,
+      60,
+      17,
+      16,
+      26,
+      25,
+      24,
+      42,
+      41,
+      40,
+      49,
+      48,
+      58,
+      57,
+      56
+    ],
+    "R_C": [
+      12,
+      12
+    ],
+    "levels": [
+      {
+        "dimension": 6,
+        "R_C": [
+          12,
+          12
+        ]
+      },
+      {
+        "dimension": 5,
+        "R_C": [
+          10,
+          10
+        ]
+      },
+      {
+        "dimension": 4,
+        "R_C": [
+          8,
+          8
+        ]
+      },
+      {
+        "dimension": 3,
+        "R_C": [
+          4,
+          4
+        ]
+      },
+      {
+        "dimension": 2,
+        "R_C": [
+          2,
+          2
+        ]
+      },
+      {
+        "dimension": 1,
+        "R_C": [
+          1,
+          2
+        ]
+      }
+    ],
+    "uniform_coordinate_edge_signs": [
+      -1,
+      -1,
+      -1,
+      1,
+      1,
+      1
+    ],
+    "nonadditivity_certificate": "0 precedes 10 but 62 precedes 52: the same difference 10=(bit 1)+(bit 3) has opposite signs.",
+    "positions_0_10_52_62": [
+      35,
+      41,
+      31,
+      29
+    ]
+  },
+  "hierarchy_row_lifts": [
+    {
+      "n": 6,
+      "R_C": [
+        12,
+        12
+      ]
+    },
+    {
+      "n": 7,
+      "R_C": [
+        24,
+        24
+      ]
+    },
+    {
+      "n": 8,
+      "R_C": [
+        48,
+        48
+      ]
+    },
+    {
+      "n": 9,
+      "R_C": [
+        96,
+        96
+      ]
+    },
+    {
+      "n": 10,
+      "R_C": [
+        192,
+        192
+      ]
+    },
+    {
+      "n": 11,
+      "R_C": [
+        384,
+        384
+      ]
+    },
+    {
+      "n": 12,
+      "R_C": [
+        768,
+        768
+      ]
+    },
+    {
+      "n": 13,
+      "R_C": [
+        1536,
+        1536
+      ]
+    },
+    {
+      "n": 14,
+      "R_C": [
+        3072,
+        3072
+      ]
+    }
+  ],
+  "coverage_source": {
+    "preprint": "https://arxiv.org/pdf/math/9809134",
+    "section": 4,
+    "chi_H4": "(x-1)(x-11)(x-13)(x-15)",
+    "regions": 5376,
+    "count_is_prior_art": true
+  },
+  "certificate_sha256": "403445d1b5b797c2da0b82140f6b27ec195f0022f8737e4141d7e31d88c51ace",
+  "verification_digest": "2c534f6ef74af4c084331934fe1d783f673cd2e77c1267ad48e584e4fb973a36",
+  "violations": 0,
+  "elapsed_seconds": 25.783,
+  "limitations": "No exact value for M5 or G6, no positive density proof, no n^-2 improvement; new priority unconfirmed."
+}
