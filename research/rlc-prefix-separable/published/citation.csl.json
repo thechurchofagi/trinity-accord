@@ -1,0 +1,25 @@
+{
+  "id": "10.5281/zenodo.23103274",
+  "type": "report",
+  "title": "Exponential Run Complexity of Prefix-Separable Orders on the Boolean Cube",
+  "author": [
+    {
+      "family": "Liu",
+      "given": "Hongju"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2026,
+        10,
+        2
+      ]
+    ]
+  },
+  "version": "1.0",
+  "number": "TA-TR-2026-22",
+  "DOI": "10.5281/zenodo.23103274",
+  "URL": "https://doi.org/10.5281/zenodo.23103274",
+  "note": "Mathematical preprint; not peer reviewed"
+}
