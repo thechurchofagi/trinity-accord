@@ -60,9 +60,9 @@ class SeventhPaperTests(unittest.TestCase):
 
     def test_current_studies_and_dated_six_paper_guide(self):
         text = (REPO / 'research/index.md').read_text()
-        counts = [(8, 'eight'), (9, 'nine'), (10, 'ten'), (11, 'eleven'), (12, 'twelve'), (13, 'thirteen'), (14, 'fourteen'), (15, 'fifteen'), (16, 'sixteen'), (17, 'seventeen'), (18, 'eighteen'), (19, 'nineteen'), (20, 'twenty')]
-        self.assertEqual(sum(f'{word} distinct research papers (TA-TR-2026-01 through TA-TR-2026-{number:02d})'
-                             in text for number, word in counts), 1)
+        self.assertIn('twenty-one distinct first-party research papers (TA-TR-2026-01 through TA-TR-2026-20, and TA-TR-2026-22)', text)
+        paper_sections = re.findall(r'^## ([^\n]+)\n(.*?)(?=^## |\Z)', text, re.M | re.S)
+        self.assertEqual(sum(bool(re.search(r'^### ', body, re.M)) for _, body in paper_sections), 21)
         self.assertIn('for the original six papers', text)
         for record in (21699878, 21900592, 22761411, 22804542, 22809019, 22830239, 22840604):
             self.assertIn('10.5281/zenodo.' + str(record), text)

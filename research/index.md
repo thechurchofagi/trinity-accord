@@ -65,7 +65,7 @@ permalink: /research/
 
 This page separates later scholarship from the fixed artifact. Research papers, technical reports, citations, and repository deposits are **non-amending scholarship**. They do not join, define, validate, or alter the three Bitcoin Originals.
 
-This index currently lists **twenty-one distinct first-party research papers (TA-TR-2026-01 through TA-TR-2026-20, and TA-TR-2026-22)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -20 and TA-TR-2026-22 are classified as the Adjacent Research Program.** All twenty-one indexed papers share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
+This index currently lists **twenty-one distinct first-party research papers (TA-TR-2026-01 through TA-TR-2026-20, and TA-TR-2026-22)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -20 and TA-TR-2026-22 are classified as the Adjacent Research Program.** All twenty-one share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research boundary
 {: #research-boundary }
@@ -534,7 +534,7 @@ This category is reserved for work produced outside project control by independe
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all twenty-one indexed studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all twenty-one studies indexed here. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
 For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the indexed series.
 

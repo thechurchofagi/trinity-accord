@@ -40,7 +40,7 @@ class CriticalUseTests(unittest.TestCase):
         self.texts = [(ROOT / 'research' / p).read_text(encoding='utf-8') for p in GUIDES]
         self.index = (ROOT / 'research/index.md').read_text(encoding='utf-8')
         self.assertIn('twenty-one distinct first-party research papers (TA-TR-2026-01 through TA-TR-2026-20, and TA-TR-2026-22)', self.index)
-        self.series_word = 'twenty-one indexed'
+        self.series_word = 'twenty-one'
         self.assertIn('TA-TR-2026-01 through -03 are classified as First-party Accord Studies', self.index)
         self.assertIn('TA-TR-2026-04 through -20 and TA-TR-2026-22 are classified as the Adjacent Research Program', self.index)
 
@@ -96,7 +96,7 @@ class CriticalUseTests(unittest.TestCase):
         self.assertIn('for the original six papers', self.index)
         self.assertNotIn('six independent research papers', self.index)
         self.assertNotIn(f'{self.series_word} independent research papers', self.index)
-        self.assertIn('All twenty-one indexed papers share a first-party, substantially AI-assisted research context and are not independent corroborations', self.index)
+        self.assertIn('All twenty-one share a first-party, substantially AI-assisted research context and are not independent corroborations', self.index)
         self.assertIn('## Independent External Scholarship', self.index)
         self.assertIn('Current indexed independent external scholarship: none', self.index)
 

@@ -20,6 +20,8 @@ jobs:
         with:
           ref: research/rlc-prefix-separable-v1-20261002
           fetch-depth: 1
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
       - name: Verify publication guards and exact reviewed package
         run: |
           python3 research/rlc-prefix-separable/test_publication.py
