@@ -1,5 +1,33 @@
 # Read-degree concentration and an interleaving obstruction for RLC
 
+## 2026-10-03 update: exact reflection graphs and frustrated merging
+
+GRAY_REFLECTION_GRAPH_AUDIT.md reduces every sign choice of an arbitrary
+generic positive magnitude vector to one exact weighted graph:
+\[
+ \min_z C=(2^n+D-W)/2+\phi,
+\]
+where D counts equal consecutive highest-differing-bit labels, W is the
+absolute off-diagonal coupling weight, and phi is the established weighted
+frustration. All couplings to the highest coordinate cancel by additive
+complement symmetry. The five-dimensional integer vector (2,20,16,5,12)
+is the first possible negative-cycle obstruction: independently satisfying
+all edges predicts 18, whereas the true sign-orbit minimum is 20.
+Its separated row lifts have an error of \(2^{n-4}\), excluding a
+dimension-independent correction to that simplification.
+
+The new independent verifier checks every signed additive sweep through
+Q4 and preserves explicit integer certificates. A translated-face test
+also covers all positive new weights at fixed parent magnitudes
+(1,14,4,12,20), all coordinate assignments and all signs: 34,560 positive
+Q6 chambers, minimum cyclic count 20 within that specified family.
+Neither result gives a lower bound for every magnitude chamber.
+The precise new proof obligation is a uniform positive deficit for
+the net coupling energy E*-D. Central symmetry alone is insufficient:
+there are centrally symmetric vertex permutations with only two runs
+in every dimension, which an exact face contradiction excludes as
+additive scans. The main constant-density target remains open.
+
 ## 2026-10-03 update: exact Gray scan recursion audit
 
 The new note GRAY_SWEEP_RECURSION_AUDIT.md proves an exact count for every

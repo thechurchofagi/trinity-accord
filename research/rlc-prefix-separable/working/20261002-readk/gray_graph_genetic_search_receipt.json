@@ -1,0 +1,25 @@
+{
+  "state": "EXPLORATORY_SEARCH_COMPLETED",
+  "seed": 202610030618,
+  "draws_per_dimension": 12000,
+  "dimensions": [
+    {"n": 4, "max_net_energy": 4, "max_W_minus_D": 4, "min_cyclic_density": 0.375, "best_weights": [1, 976, 571, 640], "first_frustration": null},
+    {"n": 5, "max_net_energy": 12, "max_W_minus_D": 12, "min_cyclic_density": 0.3125, "best_weights": [1, 14, 4, 12, 20], "first_frustration_weights": [227, 311, 341, 148, 453], "first_energy_gap": 4},
+    {"n": 6, "max_net_energy": 24, "max_W_minus_D": 24, "min_cyclic_density": 0.3125, "best_weights": [64, 1, 14, 4, 12, 20], "first_frustration_weights": [279, 720, 957, 662, 1019, 347], "first_energy_gap": 4},
+    {"n": 7, "max_net_energy": 48, "max_W_minus_D": 48, "min_cyclic_density": 0.3125, "best_weights": [64, 128, 1, 14, 4, 12, 20], "first_frustration_weights": [382, 353, 220, 277, 418, 598, 535], "first_energy_gap": 4},
+    {"n": 8, "max_net_energy": 96, "max_W_minus_D": 96, "min_cyclic_density": 0.3125, "best_weights": [64, 128, 256, 1, 14, 4, 12, 20], "first_frustration_weights": [391, 479, 500, 399, 874, 649, 455, 753], "first_energy_gap": 4}
+  ],
+  "parameters": {
+    "population_limit": 24,
+    "exploration_every_fourth_draw": true,
+    "random_magnitudes": [1, 999],
+    "forced_unit_magnitude_every_eighth_draw": true,
+    "single_coordinate_mutation_relative_radius": "about one third",
+    "selection_metric": "W-D",
+    "tie_behavior": "stable list sort",
+    "initial_seeds": "known Q5 5/16 witness and its separated binary row lifts"
+  },
+  "replay": "python3 explore_gray_graph_budget.py --genetic",
+  "provenance": "Condensed transcription of the completed command output; accepted generic-draw counts and elapsed time were not printed and are not claimed.",
+  "scope": "Exploratory, not a chamber enumeration. No density below 5/16 was found; this is not an optimality proof."
+}
