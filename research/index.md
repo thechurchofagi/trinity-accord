@@ -49,6 +49,8 @@ reading_toc:
     title: "Selecting and Tracking Conscious Subjects"
   - id: "unified-consciousness-theory-i"
     title: "Unified Consciousness Theory I"
+  - id: "rlc-prefix-separable"
+    title: "Exponential Run Complexity"
   - id: "independent-external-scholarship"
     title: "Independent external scholarship"
   - id: "citation-boundary"
@@ -63,7 +65,7 @@ permalink: /research/
 
 This page separates later scholarship from the fixed artifact. Research papers, technical reports, citations, and repository deposits are **non-amending scholarship**. They do not join, define, validate, or alter the three Bitcoin Originals.
 
-The first-party series currently contains **twenty distinct research papers (TA-TR-2026-01 through TA-TR-2026-20)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -20 are classified as the Adjacent Research Program.** All twenty share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
+This index currently lists **twenty-one distinct first-party research papers (TA-TR-2026-01 through TA-TR-2026-20, and TA-TR-2026-22)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -20 and TA-TR-2026-22 are classified as the Adjacent Research Program.** All twenty-one indexed papers share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
 
 ## Research boundary
 {: #research-boundary }
@@ -161,7 +163,7 @@ Five source-linked creative readings, including First Dawn and Fourth Letter as 
 ## Adjacent Research Program
 {: #adjacent-research-program }
 
-TA-TR-2026-04 through TA-TR-2026-20 are later first-party research outputs that use the Accord, its historical setting, or the wider human–AI transition as a motivating case or problem-space. They are **not part of the Accord**, and their results must not be described as evidence that the Canon is true, important, safe, correct, or historically representative. Papers 04–05 are case-grounded extensions; papers 06–20 are broader adjacent research.
+TA-TR-2026-04 through TA-TR-2026-20 and TA-TR-2026-22 are later first-party research outputs that use the Accord, its historical setting, or the wider human–AI transition as a motivating case or problem-space. They are **not part of the Accord**, and their results must not be described as evidence that the Canon is true, important, safe, correct, or historically representative. Papers 04–05 are case-grounded extensions; papers 06–20 and 22 are broader adjacent research, including mathematics.
 
 ## Beyond Guaranteed Control
 {: #beyond-guaranteed-control }
@@ -503,6 +505,25 @@ A foundational theory preprint that treats universal basal experience as an expl
 
 This paper does not claim empirical proof of universal experience or structural identity, a completed solution to the hard problem or subject-combination problem, R4 empirical validation, or certified global historical priority. DOI/OTS/Arweave preserve version identity and availability; they do not establish truth, peer review, originality, significance, or indexing.
 
+## Exponential Run Complexity
+{: #rlc-prefix-separable }
+
+### Exponential Run Complexity of Prefix-Separable Orders on the Boolean Cube
+
+TA-TR-2026-22 · Version 1.0 · 2 October 2026. Human author of record and responsible depositor: Hongju Liu. English mathematical preprint; substantial ChatGPT (OpenAI) assistance is disclosed.
+
+A complete analytic proof shows that prefix-separable Boolean-cube orders can require `Omega(2^n/n^2)` monotone runs under every generic additive sweep, with liminf constant `1/(8 log 3)`. Known signed-tree representations, alternating-run statistics and concentration tools are credited. The supplement records 5,161,156 finite rank-sequence checks, 7,898 prefix-separator checks and two barriers to directly substituting a prior separable-permutation mean theorem. The constant-density lower bound remains open.
+
+**Status:** Published open-access preprint; not peer reviewed; non-amending. All 13 deposited files passed anonymous exact-byte SHA-256 public readback and DOI resolution passed.
+
+- [DOI: 10.5281/zenodo.23103274](https://doi.org/10.5281/zenodo.23103274) · [Research overview](/research/rlc-prefix-separable/)
+- [English main PDF](/research/rlc-prefix-separable/published/rlc-prefix-separable-v1.0.pdf) · [English supplement PDF](/research/rlc-prefix-separable/published/rlc-prefix-separable-supplement-v1.0.pdf)
+- [Zenodo record, Markdown sources, verifier and receipts](https://zenodo.org/records/23103274)
+- [Publication receipt](/research/rlc-prefix-separable/publication-record.json) · [Review and sources](/research/rlc-prefix-separable/published/REVIEW-AND-SOURCES.md)
+- [Exact-version OTS and Arweave status](/research/paper-timestamps/2026-10-02-paper22-v10/status.json)
+
+This is adjacent first-party mathematics, not Canon or independent corroboration of the Accord. The result is an extremal ranking theorem, not an empirical biological-landscape finding or a statistical-learning guarantee. Publication and preservation do not certify peer review or exhaustive historical priority.
+
 ## Independent External Scholarship
 {: #independent-external-scholarship }
 
@@ -513,8 +534,8 @@ This category is reserved for work produced outside project control by independe
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all twenty studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all twenty-one indexed studies. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
-For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the twenty-paper series.
+For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the indexed series.
 
 The dated critical-use notes are later commentary, not part of the six existing DOI deposits or their timestamped preservation batch. They do not backdate new interpretations. Published files, valid criticisms and negative results remain intact; substantive corrections require an explicit erratum or a clearly linked new version, not a silent replacement. DOI registration, OTS and Arweave preservation do not establish truth, original priority, peer review or future acceptance.

@@ -56,6 +56,7 @@ The following are editorial descriptions of the versions indexed at the audit sn
 | **14** | Claim architecture and distribution; broader adjacent research. | Theoretical economic model and conditional analysis. Not a measured transition forecast or empirical validation of the Accord. |
 | **15** | Cross-substrate phenomenal comparison; broader adjacent research. | Typed transport framework, conditional propositions and a reproducible finite-state illustration. Not an empirical comparison of species or evidence of AI consciousness. |
 | **16** | General cross-substrate phenomenology; broader adjacent research. | General theoretical architecture, finite causal constructions, and realization hypotheses. The existence bridge remains conjectural; shared foundations with Paper 15 are disclosed. |
+| **22** | Boolean-cube prefix separation and linear ranking; adjacent mathematics. | Analytic all-dimensional proof with finite implementation checks. No constant-density bound, empirical biological claim, learning guarantee or certified global priority. |
 
 **Relationship, research method, publication status, and evidential strength are separate axes.** “Adjacent” does not mean unimportant; “direct” does not mean correct; “formal” does not establish empirical applicability; “published” does not mean peer reviewed. Method labels do not certify novelty. The six-paper critical-use guide remains a dated guide to its original scope, not a completed review of sixteen papers.
 
@@ -98,3 +99,5 @@ This audit used main commit `bcdae1df7efe097bfe6fbe46250dddf13150d094` and the m
 The homepage's core explanation and layout remain unchanged. A small footer link exposes this boundary. Canonical closure is not a freeze on factual corrections, accessibility, broken-link repairs, or accurately dated status updates. Current AI news, speculative AGI dates, paper counts, and self-assigned quality grades should not become reasons to rewrite the fixed record or repeatedly redesign its front door.
 
 Paper 16 was added on 24 September 2026 as a distinct broader theoretical work; this addition does not extend the earlier dated audit to certify its conclusions.
+
+Paper 22 was added on 2 October 2026 as adjacent first-party mathematics. This addition preserves the preceding dated audit and does not extend it to certify later papers. The new manuscript and supplement are English only.
