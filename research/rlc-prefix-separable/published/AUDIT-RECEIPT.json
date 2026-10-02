@@ -1,0 +1,42 @@
+{
+  "state": "INTERNAL_MATHEMATICAL_REVIEW_PASS",
+  "report_number": "TA-TR-2026-22",
+  "version": "1.0",
+  "analytic_proof_reviewed": true,
+  "finite_verification_pass": true,
+  "checks": [
+    "prefix strictness and margin",
+    "LCA sign identity",
+    "deterministic multiplicity bound",
+    "independent unconditioned spins",
+    "bounded difference constants",
+    "small-tail case distinction",
+    "central arrangement sweep count",
+    "union over all generic weights",
+    "floor and liminf constant",
+    "known tree/statistic antecedents cited",
+    "stronger positive-density conjecture retained as open"
+  ],
+  "source_files": [
+    {
+      "name": "source-main.md",
+      "sha256": "e74224edafd48a8d68f263123646351af5147e7d3f2e661784e81cef92e77cf5"
+    },
+    {
+      "name": "source-supplement.md",
+      "sha256": "5ece5d804550ed86d61d42a62fa5d94152a981da5769685a68ca34e32e53c7db"
+    },
+    {
+      "name": "verify_theorem.py",
+      "sha256": "4f9a71da851b7ac5e75b21d43d995fcbcfa81169081cdcb97b62912a086d9fc0"
+    },
+    {
+      "name": "verification-receipt.json",
+      "sha256": "7cfd087f795e500926f432de83a9bbb0cae777dcdea5aaa49811994a79b0f13e"
+    }
+  ],
+  "external_peer_review": false,
+  "separate_final_human_line_by_line_review_claimed": false,
+  "global_originality_certified": false,
+  "pdf_review": "Separately required on DOI-bound files before publication authorization"
+}

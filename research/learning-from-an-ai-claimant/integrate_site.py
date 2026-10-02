@@ -92,9 +92,10 @@ def updated_index(before: str, rec: dict) -> str:
             (14, "fourteen"), (15, "fifteen"), (16, "sixteen"), (17, "seventeen"), (18, "eighteen"),
             (19, "nineteen"), (20, "twenty")
         )
-        require(sum(f"{word} distinct research papers (TA-TR-2026-01 through TA-TR-2026-{number:02d})" in before
-                    for number, word in current_counts) == 1,
-                "Series count differs")
+        series_matches = sum(f"{word} distinct research papers (TA-TR-2026-01 through TA-TR-2026-{number:02d})" in before
+                             for number, word in current_counts)
+        series_matches += "twenty-one distinct first-party research papers (TA-TR-2026-01 through TA-TR-2026-20, and TA-TR-2026-22)" in before
+        require(series_matches == 1, "Series count differs")
         return before
     updated = replace_once(before, '  - id: "citation-boundary"',
                            '  - id: "learning-from-an-ai-claimant"\n'

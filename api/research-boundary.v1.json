@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.research-boundary.v1",
-  "version": "1.2",
-  "updated_at": "2026-09-24",
+  "version": "1.3",
+  "updated_at": "2026-10-02",
   "status": "active_non_amending_relation_map",
   "canonical_authority": "three Bitcoin Originals only",
   "human_readable": "/research/research-boundary/",
@@ -338,6 +338,24 @@
       ],
       "classification_reason": "The primary object is a general psychophysical architecture, not the Accord artifact.",
       "evidence_limit": "Finite causal proofs are not phenomenal ground truth; the existence bridge is an incomplete conjecture schema."
+    },
+    {
+      "report": "TA-TR-2026-22",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Boolean-cube prefix separation and all-sweep run complexity",
+      "index_entry": "/research/#rlc-prefix-separable",
+      "method_types": [
+        "analytic_mathematical_proof",
+        "probabilistic_method",
+        "finite_independent_implementation_checks"
+      ],
+      "classification_reason": "The primary contribution is an extremal theorem about geometric orders and linear ranking, not an analysis of the Accord artifact.",
+      "evidence_limit": "Finite checks supplement the analytic proof. No constant-density bound, empirical biological result, statistical-learning guarantee or certified global priority is claimed."
     }
   ],
   "independent_external_scholarship": [],
@@ -382,6 +400,10 @@
     "paper16_addition": {
       "date": "2026-09-24",
       "scope": "Distinct broader theoretical paper; relationship to paper 15 disclosed."
+    },
+    "paper22_addition": {
+      "date": "2026-10-02",
+      "scope": "Published English mathematical preprint; classified as adjacent first-party mathematics. Earlier classifications and the dated audit scope are retained."
     }
   }
 }

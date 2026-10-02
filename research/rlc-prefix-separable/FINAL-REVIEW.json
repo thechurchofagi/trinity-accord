@@ -1,0 +1,37 @@
+{
+  "state": "EXACT_DOI_BOUND_PACKAGE_REVIEW_PASS",
+  "report_number": "TA-TR-2026-22",
+  "version": "1.0",
+  "record_id": 23103274,
+  "doi": "10.5281/zenodo.23103274",
+  "expected_manifest_sha256": "445252a73b0794252e3441ef954132b31a7ef28d2c9749d51d9252c1c03ea56b",
+  "pdf_visual_review_pass": true,
+  "pdfs": [
+    {
+      "name": "rlc-prefix-separable-supplement-v1.0.pdf",
+      "bytes": 58134,
+      "sha256": "25d1f9cbe944ce69a0aa18a3ed02eed9845406ecf57a43b4632b3ba99be02b03",
+      "pages": 4,
+      "all_pages_visually_reviewed": true
+    },
+    {
+      "name": "rlc-prefix-separable-v1.0.pdf",
+      "bytes": 87331,
+      "sha256": "18cb9d01be138cd6031e563975e768bb5ef8d8c9437bb86eafbd460e663f117e",
+      "pages": 10,
+      "all_pages_visually_reviewed": true
+    }
+  ],
+  "exact_inventory_and_sha256_pass": true,
+  "analytic_proof_internal_review_pass": true,
+  "finite_verification_local_and_github_actions_pass": true,
+  "source_review_hashes_pass": true,
+  "references_and_prior_work_review_pass": true,
+  "math_and_text_extractable": true,
+  "clipped_text_or_equations_found": false,
+  "main_result": "Omega(2^n/n^2), liminf n^2 M_n/2^n >= 1/(8 log 3)",
+  "positive_density_bound_claimed": false,
+  "external_peer_review": false,
+  "separate_final_human_line_by_line_review_claimed": false,
+  "review_date": "2026-10-02"
+}

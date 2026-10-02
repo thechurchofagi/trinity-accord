@@ -52,6 +52,7 @@ permalink: /research/research-boundary/zh.html
 | **14** | 收益请求结构与分配；一般相邻研究。 | 理论经济模型与条件性分析。不是已测得的转型预报，也不验证协定。 |
 | **15** | 跨基质现象体验比较；一般相邻研究。 | 分类传递框架、条件命题与可复现有限状态示例。不是物种体验的实测比较，也不是 AI 意识证据；论文仅有英文版。 |
 | **16** | 一般跨基质现象学；一般相邻研究。 | 一般理论框架、有限因果构造与实现假说。存在桥接仍属猜想；与第 15 篇共有的基础已明确披露。论文仅有英文版。 |
+| **22** | Boolean-cube prefix separation and linear ranking; adjacent mathematics. | Analytic all-dimensional proof with finite implementation checks. No constant-density bound, empirical biological claim, learning guarantee or certified global priority. |
 
 **关系分类、研究方法、发表状态和证据强度是四个不同维度。**“相邻”不等于不重要，“直接”不等于正确，“有形式化”不等于现实适用，“已发表”不等于经过同行评审。方法标签也不认证原创性。此前六篇论文的批判性阅读说明是保留日期与原有范围的材料，不能称为已经覆盖十六篇的审查。
 
@@ -92,3 +93,5 @@ permalink: /research/research-boundary/zh.html
 首页主体解释与布局保持不动，只在页脚增加研究边界入口。正典封存不等于冻结事实纠错、可访问性、失效链接维修或带日期的状态更新。最新 AI 新闻、推测的 AGI 年份、论文数量和自评等级，不应成为重写固定对象或不断重构首页的理由。
 
 2026 年 9 月 24 日补充第 16 篇，作为范围更广的独立理论论文；这一补充不意味着此前的有日期审查已经认证其结论。
+
+Paper 22 was added on 2 October 2026 as adjacent first-party mathematics. This addition preserves the preceding dated audit and does not extend it to certify later papers. The new manuscript and supplement are English only.

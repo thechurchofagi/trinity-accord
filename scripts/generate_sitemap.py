@@ -45,6 +45,10 @@ ROOT_SPECIAL_FILES = [
     "research/learning-from-an-ai-claimant/index.html",
     "research/reading-trinity-accord/reading-the-trinity-accord-v1.0.pdf",
     "research/cross-substrate-phenomenal-comparison/published/cross-substrate-phenomenal-comparison-v1.0.pdf",
+    "research/rlc-prefix-separable/published/rlc-prefix-separable-v1.0.pdf",
+    "research/rlc-prefix-separable/published/rlc-prefix-separable-supplement-v1.0.pdf",
+    "research/rlc-prefix-separable/published/citation.bib",
+    "research/rlc-prefix-separable/publication-record.json",
     "research/reading-trinity-accord/citation.bib",
     "research/reading-trinity-accord/publication-record.json",
     "llms.txt",
@@ -96,6 +100,13 @@ PUBLICATION_SOURCE_DIRS.add("research/claim-architecture-transition/v1.3/")
 # TA15 source and deposited Markdown are assets, not extra landing pages.
 PUBLICATION_SOURCE_DIRS.add("research/cross-substrate-phenomenal-comparison/source/")
 PUBLICATION_SOURCE_DIRS.add("research/cross-substrate-phenomenal-comparison/published/")
+
+# TA22's reviewed Pandoc sources are publication assets, not landing pages.
+PUBLICATION_SOURCE_DIRS.update({
+    "research/rlc-prefix-separable/source-main.md",
+    "research/rlc-prefix-separable/source-supplement.md",
+    "research/rlc-prefix-separable/published/",
+})
 
 # Root-level JSON files to include
 ROOT_JSON_INCLUDE = [

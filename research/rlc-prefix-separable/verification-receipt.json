@@ -1,0 +1,95 @@
+{
+  "state": "FINITE_THEOREM_CHECKS_PASS",
+  "report_number": "TA-TR-2026-22",
+  "version": "1.0",
+  "all_leaf_orders": [
+    {
+      "dimension": 1,
+      "vertices": 2,
+      "tree_sign_assignments": 2,
+      "leaf_permutations": 2,
+      "rank_sequences_checked": 4,
+      "spin_flip_comparisons": 4,
+      "finite_tail_checks": 0,
+      "coverage": "exhaustive"
+    },
+    {
+      "dimension": 2,
+      "vertices": 4,
+      "tree_sign_assignments": 8,
+      "leaf_permutations": 24,
+      "rank_sequences_checked": 192,
+      "spin_flip_comparisons": 576,
+      "finite_tail_checks": 24,
+      "coverage": "exhaustive"
+    },
+    {
+      "dimension": 3,
+      "vertices": 8,
+      "tree_sign_assignments": 128,
+      "leaf_permutations": 40320,
+      "rank_sequences_checked": 5160960,
+      "spin_flip_comparisons": 36126720,
+      "finite_tail_checks": 120960,
+      "coverage": "exhaustive"
+    }
+  ],
+  "strict_prefix_separators": [
+    {
+      "dimension": 1,
+      "sign_assignments_checked": 2,
+      "prefixes_checked": 2,
+      "coverage": "all signs"
+    },
+    {
+      "dimension": 2,
+      "sign_assignments_checked": 8,
+      "prefixes_checked": 24,
+      "coverage": "all signs"
+    },
+    {
+      "dimension": 3,
+      "sign_assignments_checked": 128,
+      "prefixes_checked": 896,
+      "coverage": "all signs"
+    },
+    {
+      "dimension": 4,
+      "sign_assignments_checked": 64,
+      "prefixes_checked": 960,
+      "coverage": "64 reproducibly sampled signs"
+    },
+    {
+      "dimension": 5,
+      "sign_assignments_checked": 64,
+      "prefixes_checked": 1984,
+      "coverage": "64 reproducibly sampled signs"
+    },
+    {
+      "dimension": 6,
+      "sign_assignments_checked": 64,
+      "prefixes_checked": 4032,
+      "coverage": "64 reproducibly sampled signs"
+    }
+  ],
+  "literature_connections": {
+    "statistic_identity_permutations_checked": 5912,
+    "separable_rank_with_inseparable_cube_prefix": [
+      1,
+      3,
+      4,
+      2
+    ],
+    "admissible_identity_rank_after_generic_sweep": [
+      2,
+      4,
+      1,
+      3
+    ]
+  },
+  "numpy_version": "2.3.5",
+  "verification_script_sha256": "4f9a71da851b7ac5e75b21d43d995fcbcfa81169081cdcb97b62912a086d9fc0",
+  "scope": "Finite independent implementation checks; analytic all-dimensional proof is in the manuscript.",
+  "external_peer_review": false,
+  "elapsed_seconds": 4.669
+}
