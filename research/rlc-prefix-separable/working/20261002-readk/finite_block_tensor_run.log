@@ -1,0 +1,198 @@
+exhaustive (2,) 8
+exhaustive (2, 2) 64
+exhaustive (2, 2, 2) 512
+exhaustive (2, 2, 2, 2) 4096
+exhaustive (3, 2) 1024
+exhaustive (2, 3) 1024
+exhaustive (3, 3) 16384
+{
+  "seed": 202610030113,
+  "q3_classification": {
+    "complete_generic_additive_orders": 96,
+    "tree_orientations": 128,
+    "RLC_histogram": {
+      "1": 8,
+      "3": 72,
+      "2": 40,
+      "4": 8
+    },
+    "maximum_RLC": 4,
+    "maximizing_codes": [
+      42,
+      43,
+      44,
+      45,
+      82,
+      83,
+      84,
+      85
+    ]
+  },
+  "theorem_formula": "2^(n-m+1)-1",
+  "exhaustive": [
+    {
+      "dims": [
+        2
+      ],
+      "coverage": "all factor orientations",
+      "cases": 8,
+      "expected_and_actual_runs": 3,
+      "example": {
+        "codes": [
+          0
+        ],
+        "weights": [
+          2,
+          -1
+        ]
+      }
+    },
+    {
+      "dims": [
+        2,
+        2
+      ],
+      "coverage": "all factor orientations",
+      "cases": 64,
+      "expected_and_actual_runs": 7,
+      "example": {
+        "codes": [
+          0,
+          0
+        ],
+        "weights": [
+          8,
+          -1,
+          4,
+          -2
+        ]
+      }
+    },
+    {
+      "dims": [
+        2,
+        2,
+        2
+      ],
+      "coverage": "all factor orientations",
+      "cases": 512,
+      "expected_and_actual_runs": 15,
+      "example": {
+        "codes": [
+          0,
+          0,
+          0
+        ],
+        "weights": [
+          32,
+          -1,
+          16,
+          -2,
+          8,
+          -4
+        ]
+      }
+    },
+    {
+      "dims": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "coverage": "all factor orientations",
+      "cases": 4096,
+      "expected_and_actual_runs": 31,
+      "example": {
+        "codes": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "weights": [
+          128,
+          -1,
+          64,
+          -2,
+          32,
+          -4,
+          16,
+          -8
+        ]
+      }
+    },
+    {
+      "dims": [
+        3,
+        2
+      ],
+      "coverage": "all factor orientations",
+      "cases": 1024,
+      "expected_and_actual_runs": 15,
+      "example": {
+        "codes": [
+          0,
+          0
+        ],
+        "weights": [
+          16,
+          8,
+          -1,
+          4,
+          -2
+        ]
+      }
+    },
+    {
+      "dims": [
+        2,
+        3
+      ],
+      "coverage": "all factor orientations",
+      "cases": 1024,
+      "expected_and_actual_runs": 15,
+      "example": {
+        "codes": [
+          0,
+          0
+        ],
+        "weights": [
+          16,
+          -1,
+          8,
+          4,
+          -2
+        ]
+      }
+    },
+    {
+      "dims": [
+        3,
+        3
+      ],
+      "coverage": "all factor orientations",
+      "cases": 16384,
+      "expected_and_actual_runs": 31,
+      "example": {
+        "codes": [
+          0,
+          0
+        ],
+        "weights": [
+          32,
+          16,
+          -1,
+          8,
+          4,
+          -2
+        ]
+      }
+    }
+  ],
+  "exhaustive_cases": 23112,
+  "sampled_mixed_cases": 383,
+  "violations": 0,
+  "digest_sha256": "d1be38c4256a4357db480bbf1fab535da9622d1753182633be018302020bec4f",
+  "elapsed_seconds": 8.835
+}
