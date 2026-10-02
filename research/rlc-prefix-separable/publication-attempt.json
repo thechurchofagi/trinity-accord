@@ -1,7 +1,6 @@
 {
-  "state": "PUBLICATION_INTENT_FOR_RESERVED_RECORD",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
   "record_id": 23103274,
   "doi": "10.5281/zenodo.23103274",
-  "expected_manifest_sha256": "445252a73b0794252e3441ef954132b31a7ef28d2c9749d51d9252c1c03ea56b",
-  "new_record_creation": false
+  "phase": "completed"
 }
