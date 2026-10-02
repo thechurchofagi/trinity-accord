@@ -1,0 +1,36 @@
+{
+  "batch": "2026-10-02-paper22-v10",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 58134,
+      "doi": "10.5281/zenodo.23103274",
+      "name": "rlc-prefix-separable-supplement-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-10-02-paper22-v10/proofs/TA-TR-2026-22/rlc-prefix-separable-supplement-v1.0.pdf.ots",
+      "proof_sha256": "dcdc323150abb7b8ae24e0d90cb0d90f3164871967494dabcede3539ac82b21d",
+      "report": "TA-TR-2026-22",
+      "role": "English finite-verification and literature supplement",
+      "sha256": "25d1f9cbe944ce69a0aa18a3ed02eed9845406ecf57a43b4632b3ba99be02b03",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "bytes": 87331,
+      "doi": "10.5281/zenodo.23103274",
+      "name": "rlc-prefix-separable-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-10-02-paper22-v10/proofs/TA-TR-2026-22/rlc-prefix-separable-v1.0.pdf.ots",
+      "proof_sha256": "8cbe29416fdc60b84c32254909d478e7dabe2579a11e90e790238974dba95be8",
+      "report": "TA-TR-2026-22",
+      "role": "Complete English mathematical preprint",
+      "sha256": "18cb9d01be138cd6031e563975e768bb5ef8d8c9437bb86eafbd460e663f117e",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 2,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}
