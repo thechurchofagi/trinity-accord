@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "vectors": 576,
+  "vertex_entries": 249472,
+  "interior_mixed_triples": 213076,
+  "violations": 0,
+  "dimensions": [
+    2,
+    12
+  ],
+  "deterministic_sha256": "38dcbad06cf14f24c2c215f309085ce87033442858fde752b2395279202cf46a",
+  "seconds": 1.396,
+  "scope": "Finite checks of the pairing and formula; all-dimensional coverage is the written proof."
+}

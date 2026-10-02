@@ -1,0 +1,162 @@
+{
+  "status": "PASS",
+  "seed": null,
+  "construction_checks": [
+    {
+      "n": 6,
+      "k": 2,
+      "weights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "T": 21,
+      "signed_relation_checks": 36,
+      "contradictory_rows_support": 3
+    },
+    {
+      "n": 8,
+      "k": 3,
+      "weights": [
+        1,
+        2,
+        4,
+        7,
+        10,
+        13,
+        16,
+        19
+      ],
+      "T": 72,
+      "signed_relation_checks": 288,
+      "contradictory_rows_support": 4
+    },
+    {
+      "n": 10,
+      "k": 4,
+      "weights": [
+        1,
+        2,
+        4,
+        8,
+        15,
+        26,
+        44,
+        64,
+        84,
+        115
+      ],
+      "T": 363,
+      "signed_relation_checks": 2260,
+      "contradictory_rows_support": 5
+    },
+    {
+      "n": 12,
+      "k": 5,
+      "weights": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        31,
+        58,
+        100,
+        169,
+        248,
+        369,
+        490
+      ],
+      "T": 1496,
+      "signed_relation_checks": 17656,
+      "contradictory_rows_support": 6
+    },
+    {
+      "n": 13,
+      "k": 6,
+      "weights": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        63,
+        122,
+        228,
+        424,
+        728,
+        1228,
+        1753
+      ],
+      "T": 4609,
+      "signed_relation_checks": 82537,
+      "contradictory_rows_support": 7
+    }
+  ],
+  "exact_entropy_checks": [
+    {
+      "n": 10,
+      "k": 2,
+      "upper_bound_below_N": false,
+      "approx_log2_run_upper_over_N": 2.9950604670327188,
+      "run_upper_sha256": "1f76ff378fde84c8d9861309beadf36c1308fa23591f3c4a1c10819ca3d6f394"
+    },
+    {
+      "n": 20,
+      "k": 4,
+      "upper_bound_below_N": false,
+      "approx_log2_run_upper_over_N": 3.6931606487403137,
+      "run_upper_sha256": "2f5ebce3a1b3bec8ebf52906b2a8ffb8e379fa4fb89272b779ad0092c36b0af8"
+    },
+    {
+      "n": 50,
+      "k": 10,
+      "upper_bound_below_N": false,
+      "approx_log2_run_upper_over_N": 3.3887637370156156,
+      "run_upper_sha256": "3196f64bcfe7eb0319868f2c2cee872a0e02100048f5223f166e1227e73dc105"
+    },
+    {
+      "n": 100,
+      "k": 20,
+      "upper_bound_below_N": false,
+      "approx_log2_run_upper_over_N": 1.0049143934824372,
+      "run_upper_sha256": "704eb8a8b8b8961810d7abb8d1a27efa68115db05fc8d3fea4751dcbaeaab180"
+    },
+    {
+      "n": 200,
+      "k": 40,
+      "upper_bound_below_N": true,
+      "approx_log2_run_upper_over_N": -5.292099236892227,
+      "run_upper_sha256": "f37b2383593b2c13f8a415090f4c6fb666885e416ae5a4889ba724f4c9570826"
+    },
+    {
+      "n": 500,
+      "k": 100,
+      "upper_bound_below_N": true,
+      "approx_log2_run_upper_over_N": -26.72456672513772,
+      "run_upper_sha256": "6688834acebdb4d1d44d1fdb3e34a5f11ea3bb1e76b49940fb71788e6de7a37b"
+    },
+    {
+      "n": 1000,
+      "k": 200,
+      "upper_bound_below_N": true,
+      "approx_log2_run_upper_over_N": -64.258430207934,
+      "run_upper_sha256": "de1ad7350a6c6666cb9c8423f1e0d73cee9170433f0a93ad566de3cd224dc16d"
+    },
+    {
+      "n": 2000,
+      "k": 400,
+      "upper_bound_below_N": true,
+      "approx_log2_run_upper_over_N": -140.82928724498197,
+      "run_upper_sha256": "dcc8fad4f5843ccfcd15c2a2ba0c63e1a9138b29bdc5db0545b43d6e6476b9e4"
+    }
+  ],
+  "violations": 0,
+  "scope": "Finite arithmetic checks support the written all-dimensional proof; no additive RLC bound is claimed.",
+  "seconds": 0.133,
+  "deterministic_sha256": "85eae862ed24941f69e42a8cacd70db4640b6d96ab34550d97aaa54a4808f8aa"
+}
