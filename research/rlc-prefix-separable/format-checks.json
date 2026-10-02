@@ -1,6 +1,10 @@
 {
-  "state": "FORMAT_CHECKS_PASS_PENDING_VISUAL_REVIEW",
+  "state": "FORMAT_AND_VISUAL_REVIEW_PASS",
   "doi": "10.5281/zenodo.23103274",
   "pdf_text_extractable": true,
-  "doi_bound": true
+  "doi_bound": true,
+  "expected_manifest_sha256": "445252a73b0794252e3441ef954132b31a7ef28d2c9749d51d9252c1c03ea56b",
+  "pdf_visual_review_pass": true,
+  "main_pdf_pages": 10,
+  "supplement_pdf_pages": 4
 }

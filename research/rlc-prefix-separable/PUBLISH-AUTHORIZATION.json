@@ -1,0 +1,13 @@
+{
+  "authorization": "PUBLISH_EXACT_REVIEWED_PACKAGE",
+  "report_number": "TA-TR-2026-22",
+  "version": "1.0",
+  "record_id": 23103274,
+  "doi": "10.5281/zenodo.23103274",
+  "expected_manifest_sha256": "445252a73b0794252e3441ef954132b31a7ef28d2c9749d51d9252c1c03ea56b",
+  "user_authority": "The user instructed completion, review and DOI publication of this paper, then instructed continuation after a pause. Internal review has passed.",
+  "new_record_creation_authorized_here": false,
+  "prior_doi_records_may_be_modified": false,
+  "bitcoin_originals_may_be_modified": false,
+  "external_peer_review_claimed": false
+}
