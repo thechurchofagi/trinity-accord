@@ -87,6 +87,16 @@
     ]
   ],
   "labeled_additive_orders": 5376,
+  "completeness_source": {
+    "author": "Diane Maclagan",
+    "title": "Boolean Term Orders and the Root System B_n",
+    "doi": "10.1023/A:1006207716298",
+    "preprint": "https://arxiv.org/abs/math/9809134",
+    "location": "Section 4 characteristic-polynomial table",
+    "chi_H4": "(t-1)(t-11)(t-13)(t-15)",
+    "region_count_via_Zaslavsky": 5376,
+    "count_is_prior_art": true
+  },
   "tree_orientations": 32768,
   "reflection_reversal_orbits": 1088,
   "tree_rlc_histogram": {
@@ -113,5 +123,5 @@
   "implication": "Q4 cannot improve the universal 1/2 tree ceiling, while Q4 already gives a 3/8 forward-Gray row lift; the Q5 certificate improves it to 5/16.",
   "order_digest": "fe673e32ee26292371c0773b47049e1c0c809dbe4b0f174a6bf4991d1f7564d5",
   "violations": 0,
-  "elapsed_seconds": 4.102
+  "elapsed_seconds": 2.058
 }

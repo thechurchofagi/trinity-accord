@@ -4,6 +4,8 @@
 This regenerates the standard 5,376 labeled Q4 additive orders from the 14
 positive sorted chamber representatives.  Its finite conclusions are not
 used to extrapolate the all-dimensional theorem.
+Completeness uses Maclagan, Boolean Term Orders and the Root System B_n,
+Section 4: chi_H4(t)=(t-1)(t-11)(t-13)(t-15). Its value at -1 is 5,376.
 """
 
 from __future__ import annotations
@@ -44,7 +46,8 @@ def additive_orders() -> tuple[list[tuple[int, ...]], list[tuple[int, ...]]]:
                 order = subset_order(signed)
                 assert order is not None
                 labeled.add(order)
-    assert len(labeled) == 5376
+    literature_region_count = 2 * 12 * 14 * 16
+    assert len(labeled) == literature_region_count == 5376
     return sorted(base.values()), sorted(labeled)
 
 
@@ -122,6 +125,16 @@ def main() -> None:
         "scope": "finite Q4 pressure test; not an all-dimensional extrapolation",
         "positive_sorted_representatives": [list(x) for x in base],
         "labeled_additive_orders": len(order_tuples),
+        "completeness_source": {
+            "author": "Diane Maclagan",
+            "title": "Boolean Term Orders and the Root System B_n",
+            "doi": "10.1023/A:1006207716298",
+            "preprint": "https://arxiv.org/abs/math/9809134",
+            "location": "Section 4 characteristic-polynomial table",
+            "chi_H4": "(t-1)(t-11)(t-13)(t-15)",
+            "region_count_via_Zaslavsky": 2 * 12 * 14 * 16,
+            "count_is_prior_art": True,
+        },
         "tree_orientations": 1 << 15,
         "reflection_reversal_orbits": len(representatives),
         "tree_rlc_histogram": dict(sorted(full_run_histogram.items())),

@@ -1,0 +1,458 @@
+{
+  "state": "GRAY_SWEEP_RECURSION_CHECKS_PASS",
+  "seed": 202610030543,
+  "comparison_rule_checks": 5334,
+  "signed_lex_exhaustive": [
+    {
+      "n": 1,
+      "coordinate_permutations": 1,
+      "reflections_each": 2,
+      "scans": 2,
+      "run_histogram": {
+        "1": 2
+      },
+      "boundary_cost_checks": 0,
+      "paired_boundary_checks": 0,
+      "integer_score_realizations": 2,
+      "violations": 0
+    },
+    {
+      "n": 2,
+      "coordinate_permutations": 2,
+      "reflections_each": 4,
+      "scans": 8,
+      "run_histogram": {
+        "2": 4,
+        "3": 4
+      },
+      "boundary_cost_checks": 8,
+      "paired_boundary_checks": 0,
+      "integer_score_realizations": 8,
+      "violations": 0
+    },
+    {
+      "n": 3,
+      "coordinate_permutations": 6,
+      "reflections_each": 8,
+      "scans": 48,
+      "run_histogram": {
+        "4": 24,
+        "6": 8,
+        "7": 16
+      },
+      "boundary_cost_checks": 112,
+      "paired_boundary_checks": 16,
+      "integer_score_realizations": 48,
+      "violations": 0
+    },
+    {
+      "n": 4,
+      "coordinate_permutations": 24,
+      "reflections_each": 16,
+      "scans": 384,
+      "run_histogram": {
+        "8": 192,
+        "12": 64,
+        "14": 32,
+        "15": 96
+      },
+      "boundary_cost_checks": 1856,
+      "paired_boundary_checks": 512,
+      "integer_score_realizations": 384,
+      "violations": 0
+    },
+    {
+      "n": 5,
+      "coordinate_permutations": 120,
+      "reflections_each": 32,
+      "scans": 3840,
+      "run_histogram": {
+        "16": 1920,
+        "24": 640,
+        "28": 320,
+        "30": 192,
+        "31": 768
+      },
+      "boundary_cost_checks": 37504,
+      "paired_boundary_checks": 14464,
+      "integer_score_realizations": 3840,
+      "violations": 0
+    },
+    {
+      "n": 6,
+      "coordinate_permutations": 720,
+      "reflections_each": 64,
+      "scans": 46080,
+      "run_histogram": {
+        "32": 23040,
+        "48": 7680,
+        "56": 3840,
+        "60": 2304,
+        "62": 1536,
+        "63": 7680
+      },
+      "boundary_cost_checks": 903168,
+      "paired_boundary_checks": 427008,
+      "integer_score_realizations": 0,
+      "violations": 0
+    },
+    {
+      "n": 7,
+      "coordinate_permutations": 5040,
+      "reflections_each": 128,
+      "scans": 645120,
+      "run_histogram": {
+        "64": 322560,
+        "96": 107520,
+        "112": 53760,
+        "120": 32256,
+        "124": 21504,
+        "126": 15360,
+        "127": 92160
+      },
+      "boundary_cost_checks": 25319424,
+      "paired_boundary_checks": 13707264,
+      "integer_score_realizations": 0,
+      "violations": 0
+    }
+  ],
+  "signed_lex_scan_count": 695482,
+  "generic_sweep_identities": {
+    "endpoint_checks": 1152,
+    "translated_face_identity_checks": 1152
+  },
+  "minimal_nonlex_obstruction": {
+    "q3_generic_orders": 96,
+    "q3_minimum": 4,
+    "q4_nonlex_witness": {
+      "weights": [
+        1,
+        6,
+        4,
+        8
+      ],
+      "order": [
+        0,
+        1,
+        4,
+        5,
+        2,
+        3,
+        8,
+        9,
+        6,
+        7,
+        12,
+        13,
+        10,
+        11,
+        14,
+        15
+      ],
+      "rank_values": [
+        0,
+        1,
+        6,
+        7,
+        3,
+        2,
+        12,
+        13,
+        5,
+        4,
+        10,
+        11,
+        15,
+        14,
+        9,
+        8
+      ],
+      "runs": 6,
+      "signed_lex_minimum": 8
+    }
+  },
+  "scalar_doubling_counterexamples": [
+    {
+      "parent_dimension": 2,
+      "child_dimension": 3,
+      "parent_weights": [
+        4,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 3,
+      "child_runs": 4,
+      "doubling_loss": 2,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 3,
+      "child_dimension": 4,
+      "parent_weights": [
+        4,
+        8,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 7,
+      "child_runs": 8,
+      "doubling_loss": 6,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 4,
+      "child_dimension": 5,
+      "parent_weights": [
+        4,
+        8,
+        16,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 15,
+      "child_runs": 16,
+      "doubling_loss": 14,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 5,
+      "child_dimension": 6,
+      "parent_weights": [
+        4,
+        8,
+        16,
+        32,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 31,
+      "child_runs": 32,
+      "doubling_loss": 30,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 6,
+      "child_dimension": 7,
+      "parent_weights": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 63,
+      "child_runs": 64,
+      "doubling_loss": 62,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 7,
+      "child_dimension": 8,
+      "parent_weights": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 127,
+      "child_runs": 128,
+      "doubling_loss": 126,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 8,
+      "child_dimension": 9,
+      "parent_weights": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 255,
+      "child_runs": 256,
+      "doubling_loss": 254,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 9,
+      "child_dimension": 10,
+      "parent_weights": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 511,
+      "child_runs": 512,
+      "doubling_loss": 510,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 10,
+      "child_dimension": 11,
+      "parent_weights": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 1023,
+      "child_runs": 1024,
+      "doubling_loss": 1022,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 11,
+      "child_dimension": 12,
+      "parent_weights": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 2047,
+      "child_runs": 2048,
+      "doubling_loss": 2046,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 12,
+      "child_dimension": 13,
+      "parent_weights": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 4095,
+      "child_runs": 4096,
+      "doubling_loss": 4094,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 13,
+      "child_dimension": 14,
+      "parent_weights": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 8191,
+      "child_runs": 8192,
+      "doubling_loss": 8190,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 14,
+      "child_dimension": 15,
+      "parent_weights": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 16383,
+      "child_runs": 16384,
+      "doubling_loss": 16382,
+      "violations": 0
+    },
+    {
+      "parent_dimension": 15,
+      "child_dimension": 16,
+      "parent_weights": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        32768,
+        1
+      ],
+      "new_weight": 2,
+      "parent_runs": 32767,
+      "child_runs": 32768,
+      "doubling_loss": 32766,
+      "violations": 0
+    }
+  ],
+  "cyclic_row_lifts": {
+    "gray_row_lifts": 320,
+    "arbitrary_lower_tree_orientation_row_lifts": 320
+  },
+  "proof_scope": "signed-lex formula, recurrence counterexample, and cyclic density limit; no general positive-density lower bound",
+  "arithmetic": "integer",
+  "violations": 0,
+  "digest": "71bcde3e203962733f88fdbb6ec415337b43c89a1721040b38593629fd659b6e",
+  "elapsed_seconds": 3.094
+}

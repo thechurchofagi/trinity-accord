@@ -1,11 +1,25 @@
 # Read-degree concentration and an interleaving obstruction for RLC
 
+## 2026-10-03 update: exact Gray scan recursion audit
+
+The new note GRAY_SWEEP_RECURSION_AUDIT.md proves an exact count for every
+signed-lex significance permutation and reflection, a same-weight
+doubling-recurrence counterexample with unbounded loss, and existence of the
+forward-Gray minimum-density limit. If \(p_0=f<n-1\) and
+\(\ell=\min\{t\ge1:p_t>f\}\), the signed-lex count is
+\(2^n(1-2^{-\ell})\); if \(f=n-1\), it is \(2^n-1\).
+Thus every such scan has at least \(2^{n-1}\) runs. Generic subset-sum
+scans already improve on that minimum in dimension four, so this theorem
+does not give the required lower bound over all weights.
+The cyclic minimum \(F_n\) satisfies \(F_n\le2^{n-d}F_d\), and therefore
+\(\lim RLC(\gamma_n)/2^n=\inf_d F_d/2^d\). Its positivity remains open.
+
 ## 2026-10-03 update: forward-Gray row-lift ceiling
 
 The forward-Gray candidate now has an explicit all-dimensional additive
-sweep upper bound.  For every (n\ge5), the five high-coordinate weights
-((-1,-14,-4,-12,-20)), followed by a separated binary row lift using
-lower weights (64\,2^j), give exactly
+sweep upper bound.  For every \(n\ge5\), the five high-coordinate weights
+\((-1,-14,-4,-12,-20)\), followed by a separated binary row lift using
+lower weights \(64\,2^j\), give exactly
 
 \[
  R(\gamma_n\circ\pi)=10\,2^{n-5}=\frac{5}{16}2^n,
