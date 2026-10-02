@@ -1,0 +1,146 @@
+m 1 passed 4
+m 2 passed 16
+m 3 passed 64
+m 4 passed 256
+m 5 passed 1024
+{
+  "q2": {
+    "generic_additive_orders": 8,
+    "all_tree_orders": [
+      {
+        "code": 0,
+        "rank": [
+          3,
+          2,
+          1,
+          0
+        ],
+        "RLC": 1
+      },
+      {
+        "code": 1,
+        "rank": [
+          1,
+          0,
+          3,
+          2
+        ],
+        "RLC": 1
+      },
+      {
+        "code": 2,
+        "rank": [
+          2,
+          3,
+          1,
+          0
+        ],
+        "RLC": 2
+      },
+      {
+        "code": 3,
+        "rank": [
+          0,
+          1,
+          3,
+          2
+        ],
+        "RLC": 2
+      },
+      {
+        "code": 4,
+        "rank": [
+          3,
+          2,
+          0,
+          1
+        ],
+        "RLC": 2
+      },
+      {
+        "code": 5,
+        "rank": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "RLC": 2
+      },
+      {
+        "code": 6,
+        "rank": [
+          2,
+          3,
+          0,
+          1
+        ],
+        "RLC": 1
+      },
+      {
+        "code": 7,
+        "rank": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "RLC": 1
+      }
+    ],
+    "optimal_codes": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "tensor": {
+    "rows": [
+      {
+        "m": 1,
+        "dimension": 2,
+        "vertices": 4,
+        "seed_sequences": 4,
+        "expected_and_actual_runs": 3,
+        "density": "3/4"
+      },
+      {
+        "m": 2,
+        "dimension": 4,
+        "vertices": 16,
+        "seed_sequences": 16,
+        "expected_and_actual_runs": 7,
+        "density": "7/16"
+      },
+      {
+        "m": 3,
+        "dimension": 6,
+        "vertices": 64,
+        "seed_sequences": 64,
+        "expected_and_actual_runs": 15,
+        "density": "15/64"
+      },
+      {
+        "m": 4,
+        "dimension": 8,
+        "vertices": 256,
+        "seed_sequences": 256,
+        "expected_and_actual_runs": 31,
+        "density": "31/256"
+      },
+      {
+        "m": 5,
+        "dimension": 10,
+        "vertices": 1024,
+        "seed_sequences": 1024,
+        "expected_and_actual_runs": 63,
+        "density": "63/1024"
+      }
+    ],
+    "cases": 1364,
+    "digest_sha256": "5347d43c3dbfc49f15b892e8b7561c862891f9d60b592bdc2593b0a5f29af53c"
+  },
+  "violations": 0,
+  "elapsed_seconds": 3.277
+}
