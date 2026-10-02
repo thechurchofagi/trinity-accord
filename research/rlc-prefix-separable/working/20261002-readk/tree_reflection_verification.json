@@ -1,0 +1,81 @@
+{
+  "theorem": "R_z + R_(z xor 1) = 2^n for every balanced-tree orientation",
+  "seed": 202610030218,
+  "exhaustive": [
+    {
+      "n": 1,
+      "orientations": 2,
+      "reflected_sweeps_each": 2,
+      "violations": 0
+    },
+    {
+      "n": 2,
+      "orientations": 8,
+      "reflected_sweeps_each": 4,
+      "violations": 0
+    },
+    {
+      "n": 3,
+      "orientations": 128,
+      "reflected_sweeps_each": 8,
+      "violations": 0
+    },
+    {
+      "n": 4,
+      "orientations": 32768,
+      "reflected_sweeps_each": 16,
+      "violations": 0
+    }
+  ],
+  "exhaustive_orientation_count": 32906,
+  "exhaustive_sweep_count": 525348,
+  "exhaustive_turn_indicator_checks": 7346240,
+  "sampled": [
+    {
+      "n": 5,
+      "orientations": 32,
+      "reflections_per_orientation": 32,
+      "paired_checks": 1024,
+      "violations": 0
+    },
+    {
+      "n": 6,
+      "orientations": 32,
+      "reflections_per_orientation": 64,
+      "paired_checks": 2048,
+      "violations": 0
+    },
+    {
+      "n": 7,
+      "orientations": 32,
+      "reflections_per_orientation": 128,
+      "paired_checks": 4096,
+      "violations": 0
+    },
+    {
+      "n": 8,
+      "orientations": 8,
+      "reflections_per_orientation": 64,
+      "paired_checks": 512,
+      "violations": 0
+    },
+    {
+      "n": 9,
+      "orientations": 8,
+      "reflections_per_orientation": 64,
+      "paired_checks": 512,
+      "violations": 0
+    },
+    {
+      "n": 10,
+      "orientations": 8,
+      "reflections_per_orientation": 64,
+      "paired_checks": 512,
+      "violations": 0
+    }
+  ],
+  "integer_score_realization_checked": true,
+  "violations": 0,
+  "digest": "48ee5db3e1e9e0545a4190b11dfb390327dfabf2c24a633bd288de475839c994",
+  "elapsed_seconds": 16.997
+}
