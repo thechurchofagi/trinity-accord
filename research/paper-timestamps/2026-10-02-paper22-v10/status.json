@@ -1,36 +1,43 @@
 {
+  "arweave_tx_id": "GeWFXZl2Wvu9ss6JB0Ypgj1Z5_eh7Iaw36Yi1ed5cu4",
+  "arweave_url": "https://arweave.net/GeWFXZl2Wvu9ss6JB0Ypgj1Z5_eh7Iaw36Yi1ed5cu4",
   "batch": "2026-10-02-paper22-v10",
+  "bundle_sha256": "81de61f72649e6c89dd849fef799ac27a9c9302b97ac729f85620a500eacd305",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        969595
+      ],
       "bytes": 58134,
       "doi": "10.5281/zenodo.23103274",
       "name": "rlc-prefix-separable-supplement-v1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-10-02-paper22-v10/proofs/TA-TR-2026-22/rlc-prefix-separable-supplement-v1.0.pdf.ots",
-      "proof_sha256": "dcdc323150abb7b8ae24e0d90cb0d90f3164871967494dabcede3539ac82b21d",
+      "proof_sha256": "7a05da615cfc252e59798251182b75ae5b3070fa30fc8e7fca3347ddeab427bc",
       "report": "TA-TR-2026-22",
       "role": "English finite-verification and literature supplement",
       "sha256": "25d1f9cbe944ce69a0aa18a3ed02eed9845406ecf57a43b4632b3ba99be02b03",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        969595
+      ],
       "bytes": 87331,
       "doi": "10.5281/zenodo.23103274",
       "name": "rlc-prefix-separable-v1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-10-02-paper22-v10/proofs/TA-TR-2026-22/rlc-prefix-separable-v1.0.pdf.ots",
-      "proof_sha256": "8cbe29416fdc60b84c32254909d478e7dabe2579a11e90e790238974dba95be8",
+      "proof_sha256": "9a8c21ea27c4116d2e85ed6334b0b0a29f4ad76f7aedfa37eb7649a5a2386855",
       "report": "TA-TR-2026-22",
       "role": "Complete English mathematical preprint",
       "sha256": "18cb9d01be138cd6031e563975e768bb5ef8d8c9437bb86eafbd460e663f117e",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 2,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "ARWEAVE_READBACK_PASS",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
