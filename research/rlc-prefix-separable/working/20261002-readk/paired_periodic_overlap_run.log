@@ -1,0 +1,15 @@
+{"n": 5, "D": 0, "K": 2, "W": 26, "cut": 6, "phi": 6, "R_min_family": 9}
+{"n": 6, "D": 0, "K": 2, "W": 58, "cut": 2, "phi": 14, "R_min_family": 17}
+{"n": 7, "D": 0, "K": 2, "W": 122, "cut": 2, "phi": 30, "R_min_family": 33}
+{"n": 8, "D": 0, "K": 2, "W": 250, "cut": 2, "phi": 62, "R_min_family": 65}
+{"n": 9, "D": 0, "K": 2, "W": 506, "cut": 2, "phi": 126, "R_min_family": 129}
+{"n": 10, "D": 0, "K": 2, "W": 1018, "cut": 2, "phi": 254, "R_min_family": 257}
+{"n": 11, "D": 0, "K": 2, "W": 2042, "cut": 2, "phi": 510, "R_min_family": 513}
+{"n": 12, "D": 0, "K": 2, "W": 4090, "cut": 2, "phi": 1022, "R_min_family": 1025}
+{"n": 13, "D": 0, "K": 2, "W": 8186, "cut": 2, "phi": 2046, "R_min_family": 2049}
+{"n": 14, "D": 0, "K": 2, "W": 16378, "cut": 2, "phi": 4094, "R_min_family": 4097}
+{"n": 15, "D": 0, "K": 2, "W": 32762, "cut": 2, "phi": 8190, "R_min_family": 8193}
+{"n": 16, "D": 0, "K": 2, "W": 65530, "cut": 2, "phi": 16382, "R_min_family": 16385}
+{"n": 17, "D": 0, "K": 2, "W": 131066, "cut": 2, "phi": 32766, "R_min_family": 32769}
+{"n": 18, "D": 0, "K": 2, "W": 262138, "cut": 2, "phi": 65534, "R_min_family": 65537}
+{"seconds": 8.479891774011776, "audit_digest": "d95b242bbae8c06730ee8cbb1d3a6a1db9d7e0457e04989318656e81ee1152d4", "scope": "Analytic all-dimensional periodic construction. Finite audits check every vertex and coupling for listed n=5..18, full exact DP through n=12. No main M_n resolution."}

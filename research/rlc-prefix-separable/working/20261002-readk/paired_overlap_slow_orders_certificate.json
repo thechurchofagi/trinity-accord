@@ -1,0 +1,237 @@
+{
+  "seed": 202610031155,
+  "checked": 96,
+  "summaries": [
+    {
+      "n": 6,
+      "genuine_signed_or_permuted_perturbed_orders": 12,
+      "representative": {
+        "n": 6,
+        "weights": [
+          1000,
+          10000,
+          28000,
+          16000,
+          -56200,
+          8000
+        ],
+        "slow_gap_min": 56200,
+        "slow_gap_max": 56200,
+        "D": 0,
+        "K": 2,
+        "W": 58,
+        "phi": 14,
+        "R_min": 17,
+        "C_at_witness": 18,
+        "slow_order_sha256": "fad748aa45cceb7106caff3dd83175c7d1c0a42e88e9faec3b815e53725e65a3",
+        "graph_sha256": "ecead52f39b84bc5072739756d605a96a86a3fa8f009fe57138ac5d9a5a4959c"
+      }
+    },
+    {
+      "n": 7,
+      "genuine_signed_or_permuted_perturbed_orders": 12,
+      "representative": {
+        "n": 7,
+        "weights": [
+          1000,
+          10000,
+          28000,
+          16000,
+          -55941,
+          111951,
+          8000
+        ],
+        "slow_gap_min": 55941,
+        "slow_gap_max": 56010,
+        "D": 0,
+        "K": 2,
+        "W": 122,
+        "phi": 30,
+        "R_min": 33,
+        "C_at_witness": 34,
+        "slow_order_sha256": "7dc88cd704800a8411fa00c1855ac5a2fe97e65bea91a89949307fa8cc547d5a",
+        "graph_sha256": "438e8de11c108ecaef75f73442ced4854ac88ccb14398db6e97e9f44a937aee2"
+      }
+    },
+    {
+      "n": 8,
+      "genuine_signed_or_permuted_perturbed_orders": 12,
+      "representative": {
+        "n": 8,
+        "weights": [
+          1000,
+          10000,
+          28000,
+          16000,
+          112026,
+          -56029,
+          -224028,
+          8000
+        ],
+        "slow_gap_min": 55973,
+        "slow_gap_max": 56029,
+        "D": 0,
+        "K": 2,
+        "W": 250,
+        "phi": 62,
+        "R_min": 65,
+        "C_at_witness": 66,
+        "slow_order_sha256": "fc94f49e32cf6316f1b89967900bd813addb80416b87beebb661ee272ccec096",
+        "graph_sha256": "6839d0ef48d21d3edf605822e7b23620cf0e8f68e68ced3dcb24d0c48fce380e"
+      }
+    },
+    {
+      "n": 9,
+      "genuine_signed_or_permuted_perturbed_orders": 12,
+      "representative": {
+        "n": 9,
+        "weights": [
+          1000,
+          10000,
+          28000,
+          16000,
+          56017,
+          112044,
+          448054,
+          223985,
+          8000
+        ],
+        "slow_gap_min": 55924,
+        "slow_gap_max": 56027,
+        "D": 0,
+        "K": 2,
+        "W": 506,
+        "phi": 126,
+        "R_min": 129,
+        "C_at_witness": 130,
+        "slow_order_sha256": "2ff511a6486d768ae0c042e2960b26a869919d0bc5c1271f83b6bebb17f0f405",
+        "graph_sha256": "8490a3e59b5551bb6622bdb5ba9341e71673523450a7a2813dc23d5196766943"
+      }
+    },
+    {
+      "n": 10,
+      "genuine_signed_or_permuted_perturbed_orders": 12,
+      "representative": {
+        "n": 10,
+        "weights": [
+          1000,
+          10000,
+          28000,
+          16000,
+          55966,
+          224007,
+          112000,
+          -448023,
+          -896033,
+          8000
+        ],
+        "slow_gap_min": 55966,
+        "slow_gap_max": 56050,
+        "D": 0,
+        "K": 2,
+        "W": 1018,
+        "phi": 254,
+        "R_min": 257,
+        "C_at_witness": 258,
+        "slow_order_sha256": "3829e3b2b3090963b625c12b36876dd527a4ad1a18209537a9bb5d2a5b71f57b",
+        "graph_sha256": "2c39e6ea0378fe51c720e3377e00db0b572b20c8c8dfbd4ff6ea9ab1e8cb1b64"
+      }
+    },
+    {
+      "n": 11,
+      "genuine_signed_or_permuted_perturbed_orders": 12,
+      "representative": {
+        "n": 11,
+        "weights": [
+          1000,
+          10000,
+          28000,
+          16000,
+          -895971,
+          1791972,
+          111967,
+          -447983,
+          -56014,
+          -223996,
+          8000
+        ],
+        "slow_gap_min": 55953,
+        "slow_gap_max": 56041,
+        "D": 0,
+        "K": 2,
+        "W": 2042,
+        "phi": 510,
+        "R_min": 513,
+        "C_at_witness": 514,
+        "slow_order_sha256": "7b1106102b47aa7cf3235baebc490baf4b6b92dc8a122f80f69522562d899d3e",
+        "graph_sha256": "28b7a53c6d217cd4c38a767cc6d3dc135cf64f1b42cd2d01dd457c1edb36be78"
+      }
+    },
+    {
+      "n": 12,
+      "genuine_signed_or_permuted_perturbed_orders": 12,
+      "representative": {
+        "n": 12,
+        "weights": [
+          1000,
+          10000,
+          28000,
+          16000,
+          447969,
+          896031,
+          -3584003,
+          56002,
+          224003,
+          -111969,
+          -1792010,
+          8000
+        ],
+        "slow_gap_min": 55967,
+        "slow_gap_max": 56088,
+        "D": 0,
+        "K": 2,
+        "W": 4090,
+        "phi": 1022,
+        "R_min": 1025,
+        "C_at_witness": 1026,
+        "slow_order_sha256": "7f34951547abaa96e8f1f3bb1b163a20764f05d83fb8767b5df3c2a7616b96fc",
+        "graph_sha256": "6a2ff1fbfa3b966a670a41a1ee378b816c1d4fac74de43d4ee3359ffafa5e136"
+      }
+    },
+    {
+      "n": 13,
+      "genuine_signed_or_permuted_perturbed_orders": 12,
+      "representative": {
+        "n": 13,
+        "weights": [
+          1000,
+          10000,
+          28000,
+          16000,
+          7168016,
+          -1791981,
+          447969,
+          56006,
+          -224031,
+          896023,
+          3583985,
+          112028,
+          8000
+        ],
+        "slow_gap_min": 55904,
+        "slow_gap_max": 56022,
+        "D": 0,
+        "K": 2,
+        "W": 8186,
+        "phi": 2046,
+        "R_min": 2049,
+        "C_at_witness": 2050,
+        "slow_order_sha256": "e74e7d80db6a28edc4fff5cbcf1929bd1de0d4efc3e19381e04c78bc39a45b27",
+        "graph_sha256": "82858871c92e732b6d2642af5215dbc160d0aa23473af10eb878697cc4801a8d"
+      }
+    }
+  ],
+  "audit_digest": "928fcd38a9fa19dc5b8bcaef83a5bf8a712d94e4eb2a21d0f37e1699995812b7",
+  "seconds": 2.293183271001908,
+  "scope": "General theorem assumes consecutive slow-score gaps in (55,61) after scaling. Listed fresh signed/perturbed sweeps are implementation audits, not chamber coverage."
+}

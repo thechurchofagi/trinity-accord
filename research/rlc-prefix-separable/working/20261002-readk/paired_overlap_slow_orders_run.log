@@ -1,0 +1,9 @@
+{"n": 6, "checked": 12, "R_min": 17}
+{"n": 7, "checked": 12, "R_min": 33}
+{"n": 8, "checked": 12, "R_min": 65}
+{"n": 9, "checked": 12, "R_min": 129}
+{"n": 10, "checked": 12, "R_min": 257}
+{"n": 11, "checked": 12, "R_min": 513}
+{"n": 12, "checked": 12, "R_min": 1025}
+{"n": 13, "checked": 12, "R_min": 2049}
+{"seed": 202610031155, "checked": 96, "audit_digest": "928fcd38a9fa19dc5b8bcaef83a5bf8a712d94e4eb2a21d0f37e1699995812b7", "seconds": 2.293183271001908, "scope": "General theorem assumes consecutive slow-score gaps in (55,61) after scaling. Listed fresh signed/perturbed sweeps are implementation audits, not chamber coverage."}
