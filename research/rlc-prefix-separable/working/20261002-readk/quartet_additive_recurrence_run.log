@@ -1,0 +1,7 @@
+{"grid_words_completed": 4000, "grid_violations": 80, "real_translation_failures": 0, "infeasible_grid_failures": 80, "elapsed": 1.1254459920019144}
+{"grid_words_completed": 8000, "grid_violations": 87, "real_translation_failures": 0, "infeasible_grid_failures": 87, "elapsed": 2.4748540529981256}
+{"grid_words_completed": 12000, "grid_violations": 100, "real_translation_failures": 0, "infeasible_grid_failures": 100, "elapsed": 3.2887129230075516}
+{"grid_words_completed": 16000, "grid_violations": 102, "real_translation_failures": 0, "infeasible_grid_failures": 102, "elapsed": 4.16762936199666}
+{"grid_words_completed": 20000, "grid_violations": 102, "real_translation_failures": 0, "infeasible_grid_failures": 102, "elapsed": 4.862906630005455}
+{"grid_words_completed": 24000, "grid_violations": 108, "real_translation_failures": 0, "infeasible_grid_failures": 108, "elapsed": 5.652420551006799}
+{"status": "EXACT_COMPLETE_F4_GRID_AUDIT_WITH_RATIONAL_SCORE_CERTIFICATES", "F": 4, "scope": "All24024 grid words,all24 face-block permutations,all256 independent local orientation masks. Score offsets arbitrary, not constrained to a cube subset-sum family. No all-dimensional proof.", "proposed_statement": "R>=min(F+1,4*R_upper-3) for equal-gap positive additive quartet translations.", "grid_words_completed": 24024, "grid_violation_words": 108, "seconds": 5.6561157969990745, "audit_sha256": "129a44d5de608f78d14518dc9a217e5905c653978c8c51c238954d61eb6d2f9c", "real_translation_failures": 0, "infeasible_grid_failures": 108, "first_real_failure": null}
