@@ -1,0 +1,676 @@
+{
+  "seed": 202610031037,
+  "total_evaluated": 7060,
+  "nongeneric_rejections": 2,
+  "summaries": [
+    {
+      "n": 3,
+      "scope": "every coordinate permutation of a superincreasing secondary scan",
+      "evaluated": 6,
+      "minimum_R_witness": {
+        "n": 3,
+        "secondary": [
+          1,
+          2,
+          4
+        ],
+        "weights": [
+          9,
+          10,
+          12
+        ],
+        "D": 2,
+        "K": 1,
+        "W": 2,
+        "phi": 0,
+        "R_min": 4,
+        "attaining_mask": 0,
+        "order_sha256": "56936abf6634e02ea069fc3c4345f49254c76bde78569ab6f276f0bc6e723b2f",
+        "dp_table_sha256": "6b52cfed75c1bbc73043f8c447844578c4fca78a5c8a57e378358fcea5c3ca3a"
+      },
+      "minimum_D_plus_K_witness": {
+        "n": 3,
+        "secondary": [
+          1,
+          2,
+          4
+        ],
+        "weights": [
+          9,
+          10,
+          12
+        ],
+        "D": 2,
+        "K": 1,
+        "W": 2,
+        "phi": 0,
+        "R_min": 4,
+        "attaining_mask": 0,
+        "order_sha256": "56936abf6634e02ea069fc3c4345f49254c76bde78569ab6f276f0bc6e723b2f",
+        "dp_table_sha256": "6b52cfed75c1bbc73043f8c447844578c4fca78a5c8a57e378358fcea5c3ca3a"
+      }
+    },
+    {
+      "n": 4,
+      "scope": "every coordinate permutation of a superincreasing secondary scan",
+      "evaluated": 24,
+      "minimum_R_witness": {
+        "n": 4,
+        "secondary": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "weights": [
+          17,
+          18,
+          20,
+          24
+        ],
+        "D": 2,
+        "K": 4,
+        "W": 4,
+        "phi": 0,
+        "R_min": 7,
+        "attaining_mask": 17,
+        "order_sha256": "cfbe8b907745c5b0753941c232b0b91957fc7dbd6e15d9a3606ab88c837aebd6",
+        "dp_table_sha256": "e18a61043c966e1409fc2a0f8ba02ad18a6fc7dc6817a28384a3be910f55d52a"
+      },
+      "minimum_D_plus_K_witness": {
+        "n": 4,
+        "secondary": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "weights": [
+          17,
+          18,
+          20,
+          24
+        ],
+        "D": 2,
+        "K": 4,
+        "W": 4,
+        "phi": 0,
+        "R_min": 7,
+        "attaining_mask": 17,
+        "order_sha256": "cfbe8b907745c5b0753941c232b0b91957fc7dbd6e15d9a3606ab88c837aebd6",
+        "dp_table_sha256": "e18a61043c966e1409fc2a0f8ba02ad18a6fc7dc6817a28384a3be910f55d52a"
+      }
+    },
+    {
+      "n": 5,
+      "scope": "every coordinate permutation of a superincreasing secondary scan",
+      "evaluated": 120,
+      "minimum_R_witness": {
+        "n": 5,
+        "secondary": [
+          1,
+          2,
+          4,
+          8,
+          16
+        ],
+        "weights": [
+          33,
+          34,
+          36,
+          40,
+          48
+        ],
+        "D": 2,
+        "K": 8,
+        "W": 12,
+        "phi": 1,
+        "R_min": 12,
+        "attaining_mask": 6529,
+        "order_sha256": "3719b312155fe91d091cfc5f7462e77ef0e3d6434772a08c0f3ceb967ac4f337",
+        "dp_table_sha256": "1a8bd89ef8ed96f9d7bc8908fa64f3a88a1f228bd777afc4d8e48a49fcce9394"
+      },
+      "minimum_D_plus_K_witness": {
+        "n": 5,
+        "secondary": [
+          1,
+          2,
+          4,
+          8,
+          16
+        ],
+        "weights": [
+          33,
+          34,
+          36,
+          40,
+          48
+        ],
+        "D": 2,
+        "K": 8,
+        "W": 12,
+        "phi": 1,
+        "R_min": 12,
+        "attaining_mask": 6529,
+        "order_sha256": "3719b312155fe91d091cfc5f7462e77ef0e3d6434772a08c0f3ceb967ac4f337",
+        "dp_table_sha256": "1a8bd89ef8ed96f9d7bc8908fa64f3a88a1f228bd777afc4d8e48a49fcce9394"
+      }
+    },
+    {
+      "n": 6,
+      "scope": "every coordinate permutation of a superincreasing secondary scan",
+      "evaluated": 720,
+      "minimum_R_witness": {
+        "n": 6,
+        "secondary": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32
+        ],
+        "weights": [
+          65,
+          66,
+          68,
+          72,
+          80,
+          96
+        ],
+        "D": 2,
+        "K": 16,
+        "W": 28,
+        "phi": 6,
+        "R_min": 25,
+        "attaining_mask": 293765120,
+        "order_sha256": "54e47ca9cfbc24b5d322b66be7772e7b405f23cdf58ee2ba8ccf84f17e6ff12d",
+        "dp_table_sha256": "9fbf37ed333c3014f6939b8954ca341f08dba126e7d5ee3d35327b4f42b03e7a"
+      },
+      "minimum_D_plus_K_witness": {
+        "n": 6,
+        "secondary": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32
+        ],
+        "weights": [
+          65,
+          66,
+          68,
+          72,
+          80,
+          96
+        ],
+        "D": 2,
+        "K": 16,
+        "W": 28,
+        "phi": 6,
+        "R_min": 25,
+        "attaining_mask": 293765120,
+        "order_sha256": "54e47ca9cfbc24b5d322b66be7772e7b405f23cdf58ee2ba8ccf84f17e6ff12d",
+        "dp_table_sha256": "9fbf37ed333c3014f6939b8954ca341f08dba126e7d5ee3d35327b4f42b03e7a"
+      }
+    },
+    {
+      "n": 7,
+      "scope": "every coordinate permutation of a superincreasing secondary scan",
+      "evaluated": 5040,
+      "minimum_R_witness": {
+        "n": 7,
+        "secondary": [
+          1,
+          32,
+          64,
+          2,
+          4,
+          8,
+          16
+        ],
+        "weights": [
+          129,
+          160,
+          192,
+          130,
+          132,
+          136,
+          144
+        ],
+        "D": 8,
+        "K": 31,
+        "W": 56,
+        "phi": 9,
+        "R_min": 49,
+        "attaining_mask": 1225260573621485569,
+        "order_sha256": "33710e1a7c085ad617467be1b37c927d713a75163f1589fc1c9b68e821609840",
+        "dp_table_sha256": "cc7af9fc5f44c7cd471510c17f3606a0e53e7e05520f256b4183d6dd562be69e"
+      },
+      "minimum_D_plus_K_witness": {
+        "n": 7,
+        "secondary": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64
+        ],
+        "weights": [
+          129,
+          130,
+          132,
+          136,
+          144,
+          160,
+          192
+        ],
+        "D": 2,
+        "K": 32,
+        "W": 60,
+        "phi": 16,
+        "R_min": 51,
+        "attaining_mask": 74749758995955712,
+        "order_sha256": "ae1ba25463362fecfb15f3e04b8efdc4a2f668ae3f6b41a0b08fbc98891b9c9e",
+        "dp_table_sha256": "ea4e48c9f40449b5741f069a76e87438d8171d10cc075c4eaec3b182713d493a"
+      }
+    },
+    {
+      "n": 5,
+      "scope": "fresh signed integer secondary samples; no chamber coverage",
+      "evaluated": 128,
+      "minimum_R_witness": {
+        "n": 5,
+        "secondary": [
+          -94203,
+          44533,
+          58681,
+          31485,
+          -20511
+        ],
+        "weights": [
+          155211,
+          293947,
+          308095,
+          280899,
+          228903
+        ],
+        "D": 4,
+        "K": 8,
+        "W": 10,
+        "phi": 0,
+        "R_min": 13,
+        "attaining_mask": 8320,
+        "order_sha256": "4b25a5aace786a211bf5fd938e2e5be26d876f772c07f349c67f82106829acf4",
+        "dp_table_sha256": "508d72fc5064b58ec1984ba438c149e463264efe3f8c9a38cc354c6f1211b370"
+      },
+      "minimum_D_plus_K_witness": {
+        "n": 5,
+        "secondary": [
+          37964,
+          62466,
+          11216,
+          -32209,
+          -92300
+        ],
+        "weights": [
+          274120,
+          298622,
+          247372,
+          203947,
+          143856
+        ],
+        "D": 2,
+        "K": 8,
+        "W": 12,
+        "phi": 2,
+        "R_min": 13,
+        "attaining_mask": 5120,
+        "order_sha256": "2c4873c22b328d14e2de74d12615eb5d438729b0ec63b858c3bc65c30349e45c",
+        "dp_table_sha256": "d97ec9b3bcbd674d6eaf92f137fbb14dd1dfb97de65bdc95f0b8ae6ec41d7a4a"
+      }
+    },
+    {
+      "n": 6,
+      "scope": "fresh signed integer secondary samples; no chamber coverage",
+      "evaluated": 256,
+      "minimum_R_witness": {
+        "n": 6,
+        "secondary": [
+          -38223,
+          88093,
+          -32122,
+          -14045,
+          -7402,
+          34435
+        ],
+        "weights": [
+          176098,
+          302414,
+          182199,
+          200276,
+          206919,
+          248756
+        ],
+        "D": 4,
+        "K": 16,
+        "W": 26,
+        "phi": 4,
+        "R_min": 25,
+        "attaining_mask": 285212673,
+        "order_sha256": "07693f23124fd465447704133e50ff0a252168872399e436f2575cb25072871c",
+        "dp_table_sha256": "df4bf6a8021080e4285942f60d0b856e47ad7c2d369d6ba68659e209fccf98f4"
+      },
+      "minimum_D_plus_K_witness": {
+        "n": 6,
+        "secondary": [
+          -38223,
+          88093,
+          -32122,
+          -14045,
+          -7402,
+          34435
+        ],
+        "weights": [
+          176098,
+          302414,
+          182199,
+          200276,
+          206919,
+          248756
+        ],
+        "D": 4,
+        "K": 16,
+        "W": 26,
+        "phi": 4,
+        "R_min": 25,
+        "attaining_mask": 285212673,
+        "order_sha256": "07693f23124fd465447704133e50ff0a252168872399e436f2575cb25072871c",
+        "dp_table_sha256": "df4bf6a8021080e4285942f60d0b856e47ad7c2d369d6ba68659e209fccf98f4"
+      }
+    },
+    {
+      "n": 7,
+      "scope": "fresh signed integer secondary samples; no chamber coverage",
+      "evaluated": 256,
+      "minimum_R_witness": {
+        "n": 7,
+        "secondary": [
+          58077,
+          -4984,
+          54658,
+          53955,
+          -32683,
+          10153,
+          -71530
+        ],
+        "weights": [
+          344118,
+          281057,
+          340699,
+          339996,
+          253358,
+          296194,
+          214511
+        ],
+        "D": 6,
+        "K": 36,
+        "W": 48,
+        "phi": 8,
+        "R_min": 51,
+        "attaining_mask": 2399011226504921088,
+        "order_sha256": "041d381c8cd037db8c9200b393fa4fdb63059f7bf0bd1e00ec39dddd6064f559",
+        "dp_table_sha256": "5036bf2d14871d24e20f4203a2a133c0c0d2a7ce045bcbb1f59d837819617b01"
+      },
+      "minimum_D_plus_K_witness": {
+        "n": 7,
+        "secondary": [
+          58077,
+          -4984,
+          54658,
+          53955,
+          -32683,
+          10153,
+          -71530
+        ],
+        "weights": [
+          344118,
+          281057,
+          340699,
+          339996,
+          253358,
+          296194,
+          214511
+        ],
+        "D": 6,
+        "K": 36,
+        "W": 48,
+        "phi": 8,
+        "R_min": 51,
+        "attaining_mask": 2399011226504921088,
+        "order_sha256": "041d381c8cd037db8c9200b393fa4fdb63059f7bf0bd1e00ec39dddd6064f559",
+        "dp_table_sha256": "5036bf2d14871d24e20f4203a2a133c0c0d2a7ce045bcbb1f59d837819617b01"
+      }
+    },
+    {
+      "n": 8,
+      "scope": "fresh signed integer secondary samples; no chamber coverage",
+      "evaluated": 256,
+      "minimum_R_witness": {
+        "n": 8,
+        "secondary": [
+          -73055,
+          75816,
+          75409,
+          24743,
+          19492,
+          -79996,
+          92760,
+          -30694
+        ],
+        "weights": [
+          398911,
+          547782,
+          547375,
+          496709,
+          491458,
+          391970,
+          564726,
+          441272
+        ],
+        "D": 28,
+        "K": 59,
+        "W": 108,
+        "phi": 27,
+        "R_min": 115,
+        "attaining_mask": 33233155492291863931474550808205328384,
+        "order_sha256": "f910b49bd6ed30812ff1ba256a91ff9102037d7ffc79e3aa7fe33f6156a68ee0",
+        "dp_table_sha256": "be0c8bc7bde697e569e9d901e4e69b7e9a2016829b9112d990be16ed55c28388"
+      },
+      "minimum_D_plus_K_witness": {
+        "n": 8,
+        "secondary": [
+          -73055,
+          75816,
+          75409,
+          24743,
+          19492,
+          -79996,
+          92760,
+          -30694
+        ],
+        "weights": [
+          398911,
+          547782,
+          547375,
+          496709,
+          491458,
+          391970,
+          564726,
+          441272
+        ],
+        "D": 28,
+        "K": 59,
+        "W": 108,
+        "phi": 27,
+        "R_min": 115,
+        "attaining_mask": 33233155492291863931474550808205328384,
+        "order_sha256": "f910b49bd6ed30812ff1ba256a91ff9102037d7ffc79e3aa7fe33f6156a68ee0",
+        "dp_table_sha256": "be0c8bc7bde697e569e9d901e4e69b7e9a2016829b9112d990be16ed55c28388"
+      }
+    },
+    {
+      "n": 9,
+      "scope": "fresh signed integer secondary samples; no chamber coverage",
+      "evaluated": 128,
+      "minimum_R_witness": {
+        "n": 9,
+        "secondary": [
+          -50641,
+          -98176,
+          -51886,
+          -49863,
+          6687,
+          -63299,
+          45285,
+          25166,
+          67930
+        ],
+        "weights": [
+          408293,
+          360758,
+          407048,
+          409071,
+          465621,
+          395635,
+          504219,
+          484100,
+          526864
+        ],
+        "D": 52,
+        "K": 129,
+        "W": 200,
+        "phi": 43,
+        "R_min": 225,
+        "attaining_mask": 18206788658760982780335963009888780716000479527147994830532343921242458292224,
+        "order_sha256": "636e2546e961a7847da9c872ba9e42b5b10b47f1d7be8780a731ac69a6b4990c",
+        "dp_table_sha256": "1d8996a50dc36a3c4b2ed6edf8edb979141e18ec7d571d9f3add48f254101b85"
+      },
+      "minimum_D_plus_K_witness": {
+        "n": 9,
+        "secondary": [
+          -50641,
+          -98176,
+          -51886,
+          -49863,
+          6687,
+          -63299,
+          45285,
+          25166,
+          67930
+        ],
+        "weights": [
+          408293,
+          360758,
+          407048,
+          409071,
+          465621,
+          395635,
+          504219,
+          484100,
+          526864
+        ],
+        "D": 52,
+        "K": 129,
+        "W": 200,
+        "phi": 43,
+        "R_min": 225,
+        "attaining_mask": 18206788658760982780335963009888780716000479527147994830532343921242458292224,
+        "order_sha256": "636e2546e961a7847da9c872ba9e42b5b10b47f1d7be8780a731ac69a6b4990c",
+        "dp_table_sha256": "1d8996a50dc36a3c4b2ed6edf8edb979141e18ec7d571d9f3add48f254101b85"
+      }
+    },
+    {
+      "n": 10,
+      "scope": "fresh signed integer secondary samples; no chamber coverage",
+      "evaluated": 126,
+      "minimum_R_witness": {
+        "n": 10,
+        "secondary": [
+          -44799,
+          -2776,
+          -29650,
+          54433,
+          33376,
+          85626,
+          54834,
+          98747,
+          99457,
+          -61640
+        ],
+        "weights": [
+          520540,
+          562563,
+          535689,
+          619772,
+          598715,
+          650965,
+          620173,
+          664086,
+          664796,
+          503699
+        ],
+        "D": 206,
+        "K": 296,
+        "W": 224,
+        "phi": 34,
+        "R_min": 537,
+        "attaining_mask": 1314267927405558722598318131204061279789019165292927572938315269416337357478168823220923688001829199316826999006658736367649034220617337152139542747152384,
+        "order_sha256": "f386d37cf916e37a272d6e7f6fbe2482f592db5cccc9283c7021a2e71f43d886",
+        "dp_table_sha256": "29077b63e34605024291261fa78819c5fdd3bb00bd0c229b94630ed9de51b8d4"
+      },
+      "minimum_D_plus_K_witness": {
+        "n": 10,
+        "secondary": [
+          -88994,
+          -66922,
+          -94317,
+          58712,
+          -86393,
+          -65428,
+          -67573,
+          -6336,
+          82491,
+          -16454
+        ],
+        "weights": [
+          544627,
+          566699,
+          539304,
+          692333,
+          547228,
+          568193,
+          566048,
+          627285,
+          716112,
+          617167
+        ],
+        "D": 230,
+        "K": 272,
+        "W": 248,
+        "phi": 46,
+        "R_min": 549,
+        "attaining_mask": 1384746526840061866444420979058801390371207186896233648812495288554798227356584038971519665810151185836914232442348244569998917572320340472934315730141184,
+        "order_sha256": "509ea24a37206fcd55b7485a22770fd519869f0fab88f75d5c075da879afc460",
+        "dp_table_sha256": "c3c1bc562545bbf2ad45bc65e75f2e2dae1dec1cfc1ff007bde3a7dd1565ee57"
+      }
+    }
+  ],
+  "counterexamples_to_R_N_over_4_plus_2_or_DK_N_over_4_plus_1": [],
+  "evaluated_digest": "3bf9cdde27a82dac8d9e7910ee92a4bf0a07e1ae213eebb30d9b8b5af4835815",
+  "seconds": 215.61426604799635,
+  "scope": "Exact fixed-scan minima. Exhaustive only for listed superincreasing permutations in n<=7. No all-dimensional conclusion from absence of counterexamples."
+}
