@@ -23,7 +23,8 @@
     "old edition protected",
     "ambiguous linked-version action idempotency tests passed",
     "same-lineage unsubmitted drafts with unset inherited version recovered without another newversion action",
-    "Stale predecessor links recover only the pinned, read-only-identified draft in the same concept; ambiguous actions cannot be repeated. Seven publication guard tests pass."
+    "Stale predecessor links recover only the pinned, read-only-identified draft in the same concept; ambiguous actions cannot be repeated. Seven publication guard tests pass.",
+    "Supplement layout revised without changing mathematical text: the full verifier table, finite certificate and integer counterexample remain together on their designated pages."
   ],
   "source_files": [
     {
@@ -32,7 +33,7 @@
     },
     {
       "name": "source-supplement.md",
-      "sha256": "6a408cd41e244ae985116ef6b4596ea40ead87c1a99d07faf3f7234b13a83dbc"
+      "sha256": "eb34bbd1b711efe2b00ae4b9f7d187a0de6fa2ca795f004b48a0ce22b8048c76"
     },
     {
       "name": "VERSION-CHANGES.md",

@@ -39,7 +39,7 @@ python3 verify_conditional_mean_obstruction.py
 
 The ZIP includes scripts, integer chamber/rank helpers, JSON receipts, run logs, a source manifest and the internal mathematical audit. The release summary binds each script to its receipt. Runtime fields may change on rerun; mathematical fields and the deterministic read-k enumeration digest remain reproducible. No Python assert optimization flag should be enabled.
 
-\newpage
+\small
 
 | Check | Actual coverage | Limitation |
 | --- | --- | --- |
@@ -50,6 +50,9 @@ The ZIP includes scripts, integer chamber/rank helpers, JSON receipts, run logs,
 | Conditional extension | All signed chambers on \(Q_2,Q_3,Q_4\), all fixed parents, all fresh assignments: 43,208 contexts, 688,912 states | Chamber completeness is inherited, not inferred from random sampling |
 | Sparse amplification | 108 signed core lifts through dimension 15, direct score/support/count comparisons | Direct ranks checked at every vertex through dimension 10 and 2,048 selected vertices above it; formulas are analytic |
 | Mean-doubling obstruction | All 5,376 signed \(Q_4\) chambers for parent mask 50; all 256 fresh assignments for one actual \(Q_5\) scan | One child chamber suffices to refute the proposed universal lemma |
+
+\normalsize
+\newpage
 
 The support audit also checks 12 nonadditive antipodal poset diagnostic cases. They are explicitly not called actual additive scans. These diagnostics are not used to refute the original \(M_n\) conjecture.
 
@@ -79,6 +82,8 @@ For the restricted support theorem, the base \(3^{144}<2^{240}\) is checked by i
 \qquad 256>2025/8.
 \]
 Both verifiers check that \(2^n/n^2\) increases thereafter. These base checks accompany, rather than replace, the analytic bounds for all subsequent dimensions.
+
+\newpage
 
 ## S4. Fully specified integer conditional-mean counterexample
 

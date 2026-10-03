@@ -8,8 +8,8 @@
   "files": [
     {
       "name": "AUDIT-RECEIPT.json",
-      "bytes": 5001,
-      "sha256": "d5cc04ea697d82c3277fdee19cae88cf7f3b595362d754ace90d3cfecc26f40b"
+      "bytes": 5184,
+      "sha256": "405b3fc3b8c1ed7156d1bacaba1259a0ccef2ab06b3653b45402859fe7be766d"
     },
     {
       "name": "README-LICENSE.txt",
@@ -24,7 +24,7 @@
     {
       "name": "SHA256SUMS.txt",
       "bytes": 1085,
-      "sha256": "e8b9b524a77a7fcf621655b3c63469f8bf19813bdd71916ca7e11639841b1cf1"
+      "sha256": "a61cb527e73856f905e10a2ae9ef05c02d7c5c57dae8a963a8ae1d4bc16c5cb3"
     },
     {
       "name": "VERSION-CHANGES.md",
@@ -48,13 +48,13 @@
     },
     {
       "name": "rlc-prefix-separable-supplement-v1.1.md",
-      "bytes": 10354,
-      "sha256": "8f008dd4cd10297f8acd2d97697bba696fc2216fa47057c316fda66e5567866f"
+      "bytes": 10384,
+      "sha256": "2c48881eb495c7ea435542088abbad7b5a4094cce66cbcd95ad9d26648c3fa93"
     },
     {
       "name": "rlc-prefix-separable-supplement-v1.1.pdf",
-      "bytes": 71423,
-      "sha256": "5c7980a34ffcada27c12f2d02a5bc7a1dd93f100ba5994df9b1879803dada162"
+      "bytes": 71053,
+      "sha256": "9277f26d34e29cedd41e1144668826ed39f49c7019cdd9bbae499af4bbf92aff"
     },
     {
       "name": "rlc-prefix-separable-v1.1.md",
@@ -63,13 +63,13 @@
     },
     {
       "name": "rlc-prefix-separable-v1.1.pdf",
-      "bytes": 109723,
-      "sha256": "3fd767a0acccb4bd095f6e950d97118dc2fc71f12e5e554505486e6ea60a53c9"
+      "bytes": 109719,
+      "sha256": "55e7d965c8e55ac86088cc4234d03a4566f1a130bb40aa51ec1b63789ad04b4f"
     },
     {
       "name": "verification-package-v1.1.zip",
-      "bytes": 69897,
-      "sha256": "71b45fd1e59c54f537b6993507b51156b25fdee68a4b40511c16c8c65f22c973"
+      "bytes": 69994,
+      "sha256": "2ecfb8888e077a28b2332d181f5675936ed854cc7cbbc4d74b54f7520d22330a"
     }
   ],
   "prior_records_modified": false,
