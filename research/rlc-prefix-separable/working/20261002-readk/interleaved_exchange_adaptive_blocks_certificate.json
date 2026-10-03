@@ -1,0 +1,3882 @@
+{
+  "status": "VERIFIED_INTERLEAVED_FIXED_WITNESS_OBSTRUCTION_AND_ADAPTIVE_FOUR_BLOCK_REPAIR",
+  "fixed_family_theorem": "For n=5+m, secondary b=(2^m,2^(m+1),...,2^(m+4),1,2,...,2^(m-1)) and primary B>2sum|b|, the per-prefix(3,5,17)/(11,13,25) interval-witness family has optimum fractional packing between ceil((m+1)/2) and m+1. Exact dual half mass at core6 and14 with each canonical outer cardinality. Some single-position load equals binomial(m+1,l), excluding bounded overlap. No all-weight RLC or M_n upper bound follows.",
+  "repair_theorem": "For ANY contiguous four-input-coordinate block with generic within-cardinality secondary scores and last secondary coefficient extreme among the first, second and last, and outer secondary subset gaps exceeding sum absolute core coefficients, cardinality-primary actual scans have R>=1+2^(n-4) for EVERY paired rank, ALL n>=4. In the adverse fixed-family examples use block5..8 for n>=9; the SAME scan order thus has a different integer witness packing of size2^(n-4).",
+  "arbitrary_five_core_theorem": "For ANY contiguous five-input-coordinate block with generic within-cardinality secondary scores, at least two of b0,b1,b2 lie on the same side of b4. Choose those atoms i<j and atom4, and toggle controller j+1. With outer secondary subset gaps exceeding sum absolute core coefficients, this gives R>=1+2^(n-5) for EVERY paired rank, ALL n>=5. No fixed atom-extreme hypothesis remains.",
+  "scope": "Analytic restricted scan-class results. No finite dimension extrapolation; main constant-density all-weight problem remains OPEN.",
+  "negative_rows": [
+    {
+      "n": 5,
+      "m": 0,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "primary_B": 63,
+      "weights": [
+        64,
+        65,
+        67,
+        71,
+        79
+      ],
+      "fixed_witness_count": 1,
+      "dual_positions": [
+        8,
+        19
+      ],
+      "dual_scaled_mass_per_position": 1,
+      "dual_scale": 2,
+      "fractional_packing_upper_bound": 1,
+      "disjoint_integer_packing_lower_bound": 1,
+      "chosen_outer_prefixes": [
+        0
+      ],
+      "exact_peak_position_load": 0,
+      "peak_vertex": null,
+      "witness_digest": "b7b8af1f945d99c6bd9617889003f2b5fb5dbf55ffc30bd47aa771448e05f9cb"
+    },
+    {
+      "n": 6,
+      "m": 1,
+      "secondary": [
+        2,
+        4,
+        8,
+        16,
+        32,
+        1
+      ],
+      "primary_B": 127,
+      "weights": [
+        129,
+        131,
+        135,
+        143,
+        159,
+        128
+      ],
+      "fixed_witness_count": 2,
+      "dual_positions": [
+        12,
+        31,
+        24,
+        45
+      ],
+      "dual_scaled_mass_per_position": 1,
+      "dual_scale": 2,
+      "fractional_packing_upper_bound": 2,
+      "disjoint_integer_packing_lower_bound": 1,
+      "chosen_outer_prefixes": [
+        0
+      ],
+      "exact_peak_position_load": 2,
+      "peak_vertex": 13,
+      "witness_digest": "05909c0b41f02ef2b253fb42f05224f3f8b18d953c87d69c2aec50e8b496c630"
+    },
+    {
+      "n": 7,
+      "m": 2,
+      "secondary": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        1,
+        2
+      ],
+      "primary_B": 255,
+      "weights": [
+        259,
+        263,
+        271,
+        287,
+        319,
+        256,
+        257
+      ],
+      "fixed_witness_count": 4,
+      "dual_positions": [
+        17,
+        48,
+        36,
+        76,
+        66,
+        102
+      ],
+      "dual_scaled_mass_per_position": 1,
+      "dual_scale": 2,
+      "fractional_packing_upper_bound": 3,
+      "disjoint_integer_packing_lower_bound": 2,
+      "chosen_outer_prefixes": [
+        0,
+        3
+      ],
+      "exact_peak_position_load": 3,
+      "peak_vertex": 13,
+      "witness_digest": "1d9a20bf8424afddf78e793f80fa852ec4265296221b32ef29648cd5f04bb125"
+    },
+    {
+      "n": 8,
+      "m": 3,
+      "secondary": [
+        8,
+        16,
+        32,
+        64,
+        128,
+        1,
+        2,
+        4
+      ],
+      "primary_B": 511,
+      "weights": [
+        519,
+        527,
+        543,
+        575,
+        639,
+        512,
+        513,
+        515
+      ],
+      "fixed_witness_count": 8,
+      "dual_positions": [
+        23,
+        71,
+        53,
+        124,
+        102,
+        178,
+        165,
+        222
+      ],
+      "dual_scaled_mass_per_position": 1,
+      "dual_scale": 2,
+      "fractional_packing_upper_bound": 4,
+      "disjoint_integer_packing_lower_bound": 2,
+      "chosen_outer_prefixes": [
+        0,
+        3
+      ],
+      "exact_peak_position_load": 6,
+      "peak_vertex": 45,
+      "witness_digest": "a76f21d9cd69fcd6f0fbb241afb2bdcbfdc72d0d59b51460da33a5c81c8c06e9"
+    },
+    {
+      "n": 9,
+      "m": 4,
+      "secondary": [
+        16,
+        32,
+        64,
+        128,
+        256,
+        1,
+        2,
+        4,
+        8
+      ],
+      "primary_B": 1023,
+      "weights": [
+        1039,
+        1055,
+        1087,
+        1151,
+        1279,
+        1024,
+        1025,
+        1027,
+        1031
+      ],
+      "fixed_witness_count": 16,
+      "dual_positions": [
+        30,
+        101,
+        76,
+        195,
+        155,
+        302,
+        267,
+        400,
+        384,
+        469
+      ],
+      "dual_scaled_mass_per_position": 1,
+      "dual_scale": 2,
+      "fractional_packing_upper_bound": 5,
+      "disjoint_integer_packing_lower_bound": 3,
+      "chosen_outer_prefixes": [
+        0,
+        3,
+        15
+      ],
+      "exact_peak_position_load": 10,
+      "peak_vertex": 45,
+      "witness_digest": "3e5956d125ca2d3801c5db0edd3e3f9e70cf0d5899e50dd3d44439becc1fe90c"
+    },
+    {
+      "n": 10,
+      "m": 5,
+      "secondary": [
+        32,
+        64,
+        128,
+        256,
+        512,
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "primary_B": 2047,
+      "weights": [
+        2079,
+        2111,
+        2175,
+        2303,
+        2559,
+        2048,
+        2049,
+        2051,
+        2055,
+        2063
+      ],
+      "fixed_witness_count": 32,
+      "dual_positions": [
+        38,
+        139,
+        106,
+        296,
+        231,
+        497,
+        422,
+        702,
+        651,
+        869,
+        850,
+        971
+      ],
+      "dual_scaled_mass_per_position": 1,
+      "dual_scale": 2,
+      "fractional_packing_upper_bound": 6,
+      "disjoint_integer_packing_lower_bound": 3,
+      "chosen_outer_prefixes": [
+        0,
+        3,
+        15
+      ],
+      "exact_peak_position_load": 20,
+      "peak_vertex": 109,
+      "witness_digest": "87a79638e9fea8e7434ff1ec1d9f0b78b2253774e59e6e367854e3ac9dcf850a"
+    },
+    {
+      "n": 11,
+      "m": 6,
+      "secondary": [
+        64,
+        128,
+        256,
+        512,
+        1024,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32
+      ],
+      "primary_B": 4095,
+      "weights": [
+        4159,
+        4223,
+        4351,
+        4607,
+        5119,
+        4096,
+        4097,
+        4099,
+        4103,
+        4111,
+        4127
+      ],
+      "fixed_witness_count": 64,
+      "dual_positions": [
+        47,
+        186,
+        144,
+        435,
+        337,
+        793,
+        653,
+        1199,
+        1073,
+        1571,
+        1501,
+        1840,
+        1818,
+        1984
+      ],
+      "dual_scaled_mass_per_position": 1,
+      "dual_scale": 2,
+      "fractional_packing_upper_bound": 7,
+      "disjoint_integer_packing_lower_bound": 4,
+      "chosen_outer_prefixes": [
+        0,
+        3,
+        15,
+        63
+      ],
+      "exact_peak_position_load": 35,
+      "peak_vertex": 109,
+      "witness_digest": "b3201d537b09396612a975c2621f60ef2101a9d135a1ad0b59a02bdd53342d1c"
+    },
+    {
+      "n": 12,
+      "m": 7,
+      "secondary": [
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "primary_B": 8191,
+      "weights": [
+        8319,
+        8447,
+        8703,
+        9215,
+        10239,
+        8192,
+        8193,
+        8195,
+        8199,
+        8207,
+        8223,
+        8255
+      ],
+      "fixed_witness_count": 128,
+      "dual_positions": [
+        57,
+        243,
+        191,
+        621,
+        481,
+        1228,
+        990,
+        1992,
+        1726,
+        2770,
+        2574,
+        3411,
+        3319,
+        3824,
+        3799,
+        4020
+      ],
+      "dual_scaled_mass_per_position": 1,
+      "dual_scale": 2,
+      "fractional_packing_upper_bound": 8,
+      "disjoint_integer_packing_lower_bound": 4,
+      "chosen_outer_prefixes": [
+        0,
+        3,
+        15,
+        63
+      ],
+      "exact_peak_position_load": 70,
+      "peak_vertex": 237,
+      "witness_digest": "df2fec48d3a124f27e5a19a1a0f72c442625c23cc577cf1205fe9469f7420e10"
+    },
+    {
+      "n": 13,
+      "m": 8,
+      "secondary": [
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "primary_B": 16383,
+      "weights": [
+        16639,
+        16895,
+        17407,
+        18431,
+        20479,
+        16384,
+        16385,
+        16387,
+        16391,
+        16399,
+        16415,
+        16447,
+        16511
+      ],
+      "fixed_witness_count": 256,
+      "dual_positions": [
+        68,
+        311,
+        248,
+        864,
+        672,
+        1849,
+        1471,
+        3220,
+        2716,
+        4762,
+        4300,
+        6181,
+        5893,
+        7235,
+        7118,
+        7844,
+        7816,
+        8103
+      ],
+      "dual_scaled_mass_per_position": 1,
+      "dual_scale": 2,
+      "fractional_packing_upper_bound": 9,
+      "disjoint_integer_packing_lower_bound": 5,
+      "chosen_outer_prefixes": [
+        0,
+        3,
+        15,
+        63,
+        255
+      ],
+      "exact_peak_position_load": 126,
+      "peak_vertex": 237,
+      "witness_digest": "cc97091d700c22b30cd4ff075b82c93fbc2cfdbab12705bcf612d3deca845c4f"
+    },
+    {
+      "n": 14,
+      "m": 9,
+      "secondary": [
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256
+      ],
+      "primary_B": 32767,
+      "weights": [
+        33279,
+        33791,
+        34815,
+        36863,
+        40959,
+        32768,
+        32769,
+        32771,
+        32775,
+        32783,
+        32799,
+        32831,
+        32895,
+        33023
+      ],
+      "fixed_witness_count": 512,
+      "dual_positions": [
+        80,
+        391,
+        316,
+        1175,
+        920,
+        2713,
+        2143,
+        5069,
+        4187,
+        7982,
+        7016,
+        10943,
+        10193,
+        13416,
+        13011,
+        15079,
+        14934,
+        15947,
+        15916,
+        16281
+      ],
+      "dual_scaled_mass_per_position": 1,
+      "dual_scale": 2,
+      "fractional_packing_upper_bound": 10,
+      "disjoint_integer_packing_lower_bound": 5,
+      "chosen_outer_prefixes": [
+        0,
+        3,
+        15,
+        63,
+        255
+      ],
+      "exact_peak_position_load": 252,
+      "peak_vertex": 493,
+      "witness_digest": "69b8d76013414f0f0c825cdfef405d26d55e4446888744e1ff19fbf39b82c8c5"
+    },
+    {
+      "n": 15,
+      "m": 10,
+      "secondary": [
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512
+      ],
+      "primary_B": 65535,
+      "weights": [
+        66559,
+        67583,
+        69631,
+        73727,
+        81919,
+        65536,
+        65537,
+        65539,
+        65543,
+        65551,
+        65567,
+        65599,
+        65663,
+        65791,
+        66047
+      ],
+      "fixed_witness_count": 1024,
+      "dual_positions": [
+        93,
+        484,
+        396,
+        1566,
+        1236,
+        3888,
+        3063,
+        7782,
+        6330,
+        13051,
+        11203,
+        18925,
+        17209,
+        24359,
+        23204,
+        28495,
+        27945,
+        31026,
+        30850,
+        32228,
+        32194,
+        32650
+      ],
+      "dual_scaled_mass_per_position": 1,
+      "dual_scale": 2,
+      "fractional_packing_upper_bound": 11,
+      "disjoint_integer_packing_lower_bound": 6,
+      "chosen_outer_prefixes": [
+        0,
+        3,
+        15,
+        63,
+        255,
+        1023
+      ],
+      "exact_peak_position_load": 462,
+      "peak_vertex": 493,
+      "witness_digest": "079aeac3b5971b24a1d162dcb61c24519f4a4b0ac5ae42aa18629155f05ba2cc"
+    },
+    {
+      "n": 16,
+      "m": 11,
+      "secondary": [
+        2048,
+        4096,
+        8192,
+        16384,
+        32768,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024
+      ],
+      "primary_B": 131071,
+      "weights": [
+        133119,
+        135167,
+        139263,
+        147455,
+        163839,
+        131072,
+        131073,
+        131075,
+        131079,
+        131087,
+        131103,
+        131135,
+        131199,
+        131327,
+        131583,
+        132095
+      ],
+      "fixed_witness_count": 2048,
+      "dual_positions": [
+        107,
+        591,
+        489,
+        2050,
+        1632,
+        5454,
+        4299,
+        11670,
+        9393,
+        20833,
+        17533,
+        31976,
+        28412,
+        43284,
+        40413,
+        52854,
+        51149,
+        59521,
+        58795,
+        63254,
+        63044,
+        64878,
+        64841,
+        65402
+      ],
+      "dual_scaled_mass_per_position": 1,
+      "dual_scale": 2,
+      "fractional_packing_upper_bound": 12,
+      "disjoint_integer_packing_lower_bound": 6,
+      "chosen_outer_prefixes": [
+        0,
+        3,
+        15,
+        63,
+        255,
+        1023
+      ],
+      "exact_peak_position_load": 924,
+      "peak_vertex": 1005,
+      "witness_digest": "5533a9fee81481af31fcb4df30704ed6237df2ec2bb29a7cee365274379f5468"
+    }
+  ],
+  "adverse_scan_repairs": [
+    {
+      "n": 9,
+      "core_start": 5,
+      "secondary": [
+        16,
+        32,
+        64,
+        128,
+        256,
+        1,
+        2,
+        4,
+        8
+      ],
+      "primary_B": 1023,
+      "weights": [
+        1039,
+        1055,
+        1087,
+        1151,
+        1279,
+        1024,
+        1025,
+        1027,
+        1031
+      ],
+      "disjoint_witnesses": 32,
+      "certified_ALL_paired_lower_bound": 33,
+      "occupied_turn_positions": 160,
+      "witness_digest": "d1a04f3807a4fceac9468e88949ea8988482e74af211629a8f5367755b758c86",
+      "rank_audit_runs": [
+        281,
+        297,
+        224,
+        340
+      ]
+    },
+    {
+      "n": 10,
+      "core_start": 5,
+      "secondary": [
+        32,
+        64,
+        128,
+        256,
+        512,
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "primary_B": 2047,
+      "weights": [
+        2079,
+        2111,
+        2175,
+        2303,
+        2559,
+        2048,
+        2049,
+        2051,
+        2055,
+        2063
+      ],
+      "disjoint_witnesses": 64,
+      "certified_ALL_paired_lower_bound": 65,
+      "occupied_turn_positions": 320,
+      "witness_digest": "c89c80a4213aab4419ea647eff4b60a4282deebcd1b2589a6e25f5007826ddac",
+      "rank_audit_runs": [
+        594,
+        601,
+        556,
+        672
+      ]
+    },
+    {
+      "n": 11,
+      "core_start": 5,
+      "secondary": [
+        64,
+        128,
+        256,
+        512,
+        1024,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32
+      ],
+      "primary_B": 4095,
+      "weights": [
+        4159,
+        4223,
+        4351,
+        4607,
+        5119,
+        4096,
+        4097,
+        4099,
+        4103,
+        4111,
+        4127
+      ],
+      "disjoint_witnesses": 128,
+      "certified_ALL_paired_lower_bound": 129,
+      "occupied_turn_positions": 640,
+      "witness_digest": "f07f522cd1aa49eefe3c75d898f5b6a88e4c4f2ae284259b8b09122735190b69",
+      "rank_audit_runs": [
+        1227,
+        1049,
+        1300,
+        1060
+      ]
+    },
+    {
+      "n": 12,
+      "core_start": 5,
+      "secondary": [
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "primary_B": 8191,
+      "weights": [
+        8319,
+        8447,
+        8703,
+        9215,
+        10239,
+        8192,
+        8193,
+        8195,
+        8199,
+        8207,
+        8223,
+        8255
+      ],
+      "disjoint_witnesses": 256,
+      "certified_ALL_paired_lower_bound": 257,
+      "occupied_turn_positions": 1280,
+      "witness_digest": "a2e72ae4933015332ed5b55186bd4792e1c54187549f568936bd386253252a18",
+      "rank_audit_runs": [
+        2137,
+        2271,
+        1898,
+        2023
+      ]
+    },
+    {
+      "n": 13,
+      "core_start": 5,
+      "secondary": [
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "primary_B": 16383,
+      "weights": [
+        16639,
+        16895,
+        17407,
+        18431,
+        20479,
+        16384,
+        16385,
+        16387,
+        16391,
+        16399,
+        16415,
+        16447,
+        16511
+      ],
+      "disjoint_witnesses": 512,
+      "certified_ALL_paired_lower_bound": 513,
+      "occupied_turn_positions": 2560,
+      "witness_digest": "7391825e2b70a342b7efe74bb886606568b5f1d146a42e94edea0f8732b0ea44",
+      "rank_audit_runs": [
+        4129,
+        4054,
+        4057,
+        4231
+      ]
+    },
+    {
+      "n": 14,
+      "core_start": 5,
+      "secondary": [
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256
+      ],
+      "primary_B": 32767,
+      "weights": [
+        33279,
+        33791,
+        34815,
+        36863,
+        40959,
+        32768,
+        32769,
+        32771,
+        32775,
+        32783,
+        32799,
+        32831,
+        32895,
+        33023
+      ],
+      "disjoint_witnesses": 1024,
+      "certified_ALL_paired_lower_bound": 1025,
+      "occupied_turn_positions": 5120,
+      "witness_digest": "4346d89b3b88702305eeb3491d9d3c685aad319b418ec6cce12a353863361235",
+      "rank_audit_runs": [
+        8157,
+        7775,
+        8296,
+        8285
+      ]
+    },
+    {
+      "n": 15,
+      "core_start": 5,
+      "secondary": [
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512
+      ],
+      "primary_B": 65535,
+      "weights": [
+        66559,
+        67583,
+        69631,
+        73727,
+        81919,
+        65536,
+        65537,
+        65539,
+        65543,
+        65551,
+        65567,
+        65599,
+        65663,
+        65791,
+        66047
+      ],
+      "disjoint_witnesses": 2048,
+      "certified_ALL_paired_lower_bound": 2049,
+      "occupied_turn_positions": 10240,
+      "witness_digest": "b4bec99d895942bf5b77a9ab129c3237cf9f5eb4e3d2500a0b01f2a73f0a0a17",
+      "rank_audit_runs": [
+        16164,
+        16870,
+        16475,
+        16735
+      ]
+    },
+    {
+      "n": 16,
+      "core_start": 5,
+      "secondary": [
+        2048,
+        4096,
+        8192,
+        16384,
+        32768,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024
+      ],
+      "primary_B": 131071,
+      "weights": [
+        133119,
+        135167,
+        139263,
+        147455,
+        163839,
+        131072,
+        131073,
+        131075,
+        131079,
+        131087,
+        131103,
+        131135,
+        131199,
+        131327,
+        131583,
+        132095
+      ],
+      "disjoint_witnesses": 4096,
+      "certified_ALL_paired_lower_bound": 4097,
+      "occupied_turn_positions": 20480,
+      "witness_digest": "dd2c06b5fc6db51b06cdbd6cf6f70927e57fa2f262c5a84ae273ccb3388db95b",
+      "rank_audit_runs": [
+        33435,
+        32176,
+        32277,
+        33432
+      ]
+    }
+  ],
+  "arbitrary_block_cases": [
+    {
+      "n": 4,
+      "core_start": 0,
+      "secondary": [
+        -62,
+        -3,
+        -21,
+        32
+      ],
+      "primary_B": 237,
+      "weights": [
+        175,
+        234,
+        216,
+        269
+      ],
+      "disjoint_witnesses": 1,
+      "certified_ALL_paired_lower_bound": 2,
+      "occupied_turn_positions": 5,
+      "witness_digest": "8de2a100169fd22aa51e3c463aec4c72ae6699fb9aa843d44bbe7595fc85471b",
+      "rank_audit_runs": [
+        10,
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "n": 4,
+      "core_start": 0,
+      "secondary": [
+        6,
+        67,
+        -89,
+        -49
+      ],
+      "primary_B": 423,
+      "weights": [
+        429,
+        490,
+        334,
+        374
+      ],
+      "disjoint_witnesses": 1,
+      "certified_ALL_paired_lower_bound": 2,
+      "occupied_turn_positions": 3,
+      "witness_digest": "91bb53708079b706c5a949bfc1a6b4cde9732236ab451589a472d8db1a723614",
+      "rank_audit_runs": [
+        12,
+        12,
+        12,
+        12
+      ]
+    },
+    {
+      "n": 4,
+      "core_start": 0,
+      "secondary": [
+        -2,
+        -41,
+        -67,
+        79
+      ],
+      "primary_B": 379,
+      "weights": [
+        377,
+        338,
+        312,
+        458
+      ],
+      "disjoint_witnesses": 1,
+      "certified_ALL_paired_lower_bound": 2,
+      "occupied_turn_positions": 3,
+      "witness_digest": "80d6bed3432451194b4f7fb17cbfdefe188829b8f4e3a1b0e4386c01277995b5",
+      "rank_audit_runs": [
+        12,
+        12,
+        8,
+        8
+      ]
+    },
+    {
+      "n": 4,
+      "core_start": 0,
+      "secondary": [
+        -67,
+        21,
+        84,
+        82
+      ],
+      "primary_B": 509,
+      "weights": [
+        442,
+        530,
+        593,
+        591
+      ],
+      "disjoint_witnesses": 1,
+      "certified_ALL_paired_lower_bound": 2,
+      "occupied_turn_positions": 3,
+      "witness_digest": "ec6f50cea2c5df2ea54ab47146c5c12b399d40cc0ba57b61093933e300ca7489",
+      "rank_audit_runs": [
+        10,
+        11,
+        11,
+        10
+      ]
+    },
+    {
+      "n": 5,
+      "core_start": 1,
+      "secondary": [
+        -134,
+        23,
+        12,
+        -10,
+        -88
+      ],
+      "primary_B": 535,
+      "weights": [
+        401,
+        558,
+        547,
+        525,
+        447
+      ],
+      "disjoint_witnesses": 2,
+      "certified_ALL_paired_lower_bound": 3,
+      "occupied_turn_positions": 10,
+      "witness_digest": "534b0c0880cad1badbe490b86a3898ed6d3f47f4ee205aec02e18cb4d26e8d6a",
+      "rank_audit_runs": [
+        22,
+        18,
+        22,
+        15
+      ]
+    },
+    {
+      "n": 5,
+      "core_start": 1,
+      "secondary": [
+        261,
+        77,
+        91,
+        -56,
+        -36
+      ],
+      "primary_B": 1043,
+      "weights": [
+        1304,
+        1120,
+        1134,
+        987,
+        1007
+      ],
+      "disjoint_witnesses": 2,
+      "certified_ALL_paired_lower_bound": 3,
+      "occupied_turn_positions": 4,
+      "witness_digest": "9108bc33c8b7c2e695c407bb36e9d2c827eccdf60c4c970726de08430b6561f8",
+      "rank_audit_runs": [
+        22,
+        20,
+        20,
+        22
+      ]
+    },
+    {
+      "n": 5,
+      "core_start": 1,
+      "secondary": [
+        -197,
+        44,
+        -5,
+        -91,
+        56
+      ],
+      "primary_B": 787,
+      "weights": [
+        590,
+        831,
+        782,
+        696,
+        843
+      ],
+      "disjoint_witnesses": 2,
+      "certified_ALL_paired_lower_bound": 3,
+      "occupied_turn_positions": 4,
+      "witness_digest": "cc52a8094df886eb41c9d9901b2e05c4c612411f68d36f8ee6ad3c435fe5a647",
+      "rank_audit_runs": [
+        22,
+        19,
+        18,
+        23
+      ]
+    },
+    {
+      "n": 5,
+      "core_start": 1,
+      "secondary": [
+        247,
+        -72,
+        -42,
+        -84,
+        48
+      ],
+      "primary_B": 987,
+      "weights": [
+        1234,
+        915,
+        945,
+        903,
+        1035
+      ],
+      "disjoint_witnesses": 2,
+      "certified_ALL_paired_lower_bound": 3,
+      "occupied_turn_positions": 6,
+      "witness_digest": "9c92eea8be222f984525f2cc7925459f0dd7ec37bf24cc04821fadc271803aa3",
+      "rank_audit_runs": [
+        20,
+        18,
+        18,
+        22
+      ]
+    },
+    {
+      "n": 6,
+      "core_start": 2,
+      "secondary": [
+        478,
+        239,
+        -36,
+        25,
+        -100,
+        -77
+      ],
+      "primary_B": 1911,
+      "weights": [
+        2389,
+        2150,
+        1875,
+        1936,
+        1811,
+        1834
+      ],
+      "disjoint_witnesses": 4,
+      "certified_ALL_paired_lower_bound": 5,
+      "occupied_turn_positions": 12,
+      "witness_digest": "667c5192d691112b8ca86f1bb4a4ca2f8b38db03afea7d35b201429655b5c291",
+      "rank_audit_runs": [
+        52,
+        46,
+        46,
+        46
+      ]
+    },
+    {
+      "n": 6,
+      "core_start": 1,
+      "secondary": [
+        189,
+        13,
+        26,
+        -82,
+        67,
+        -378
+      ],
+      "primary_B": 1511,
+      "weights": [
+        1700,
+        1524,
+        1537,
+        1429,
+        1578,
+        1133
+      ],
+      "disjoint_witnesses": 4,
+      "certified_ALL_paired_lower_bound": 5,
+      "occupied_turn_positions": 8,
+      "witness_digest": "61f804a97b37d67c43f2ed63924fa5f5e703d3af3c74bd8ddb8af2ec3b2e1852",
+      "rank_audit_runs": [
+        43,
+        39,
+        41,
+        35
+      ]
+    },
+    {
+      "n": 6,
+      "core_start": 2,
+      "secondary": [
+        -294,
+        -147,
+        -19,
+        17,
+        61,
+        -49
+      ],
+      "primary_B": 1175,
+      "weights": [
+        881,
+        1028,
+        1156,
+        1192,
+        1236,
+        1126
+      ],
+      "disjoint_witnesses": 4,
+      "certified_ALL_paired_lower_bound": 5,
+      "occupied_turn_positions": 8,
+      "witness_digest": "9f9e1f85e9907247b6f1d87a58e605688f31c34dde40e6d3004ac4c110b23ed8",
+      "rank_audit_runs": [
+        44,
+        38,
+        46,
+        38
+      ]
+    },
+    {
+      "n": 6,
+      "core_start": 1,
+      "secondary": [
+        -20,
+        -9,
+        -7,
+        1,
+        -2,
+        40
+      ],
+      "primary_B": 159,
+      "weights": [
+        139,
+        150,
+        152,
+        160,
+        157,
+        199
+      ],
+      "disjoint_witnesses": 4,
+      "certified_ALL_paired_lower_bound": 5,
+      "occupied_turn_positions": 8,
+      "witness_digest": "b5eab6286eaabd9776a3afc9b6898b49babea9f01c51e53613d23a843d8f99ba",
+      "rank_audit_runs": [
+        35,
+        39,
+        40,
+        39
+      ]
+    },
+    {
+      "n": 7,
+      "core_start": 2,
+      "secondary": [
+        338,
+        169,
+        -70,
+        -12,
+        83,
+        -3,
+        -676
+      ],
+      "primary_B": 2703,
+      "weights": [
+        3041,
+        2872,
+        2633,
+        2691,
+        2786,
+        2700,
+        2027
+      ],
+      "disjoint_witnesses": 8,
+      "certified_ALL_paired_lower_bound": 9,
+      "occupied_turn_positions": 16,
+      "witness_digest": "5f2ec2095a11ff87049a60a8921229059c86cd92590e1cb680492f12c5cd3981",
+      "rank_audit_runs": [
+        77,
+        81,
+        81,
+        81
+      ]
+    },
+    {
+      "n": 7,
+      "core_start": 0,
+      "secondary": [
+        -81,
+        -99,
+        -37,
+        82,
+        -600,
+        -300,
+        -1200
+      ],
+      "primary_B": 4799,
+      "weights": [
+        4718,
+        4700,
+        4762,
+        4881,
+        4199,
+        4499,
+        3599
+      ],
+      "disjoint_witnesses": 8,
+      "certified_ALL_paired_lower_bound": 9,
+      "occupied_turn_positions": 40,
+      "witness_digest": "a0a8b4b82be62d52030cd66784ffd2041ba8d0dc6898c3bb3c3547c4b19bc0ef",
+      "rank_audit_runs": [
+        61,
+        63,
+        61,
+        69
+      ]
+    },
+    {
+      "n": 7,
+      "core_start": 3,
+      "secondary": [
+        190,
+        -95,
+        380,
+        66,
+        12,
+        -7,
+        9
+      ],
+      "primary_B": 1519,
+      "weights": [
+        1709,
+        1424,
+        1899,
+        1585,
+        1531,
+        1512,
+        1528
+      ],
+      "disjoint_witnesses": 8,
+      "certified_ALL_paired_lower_bound": 9,
+      "occupied_turn_positions": 24,
+      "witness_digest": "c09d24588bb932555d28c4da716201b0e57437ef28d3e2ca4f0a1fc02d715b99",
+      "rank_audit_runs": [
+        102,
+        97,
+        93,
+        97
+      ]
+    },
+    {
+      "n": 7,
+      "core_start": 0,
+      "secondary": [
+        -64,
+        -66,
+        97,
+        -21,
+        249,
+        498,
+        996
+      ],
+      "primary_B": 3983,
+      "weights": [
+        3919,
+        3917,
+        4080,
+        3962,
+        4232,
+        4481,
+        4979
+      ],
+      "disjoint_witnesses": 8,
+      "certified_ALL_paired_lower_bound": 9,
+      "occupied_turn_positions": 16,
+      "witness_digest": "7d425f83b571cc22d07c89cda133b9d255a12bde9f4dff814773a6bb8828f46b",
+      "rank_audit_runs": [
+        75,
+        78,
+        77,
+        76
+      ]
+    },
+    {
+      "n": 8,
+      "core_start": 2,
+      "secondary": [
+        -1024,
+        -128,
+        -52,
+        -50,
+        -25,
+        0,
+        -256,
+        -512
+      ],
+      "primary_B": 4095,
+      "weights": [
+        3071,
+        3967,
+        4043,
+        4045,
+        4070,
+        4095,
+        3839,
+        3583
+      ],
+      "disjoint_witnesses": 16,
+      "certified_ALL_paired_lower_bound": 17,
+      "occupied_turn_positions": 80,
+      "witness_digest": "fa31f1f4d32985ce0131fd6b34289f1b5398bead3d877471ab868d5b47094918",
+      "rank_audit_runs": [
+        145,
+        130,
+        135,
+        142
+      ]
+    },
+    {
+      "n": 8,
+      "core_start": 1,
+      "secondary": [
+        -1408,
+        67,
+        -4,
+        -47,
+        -57,
+        -176,
+        -704,
+        -352
+      ],
+      "primary_B": 5631,
+      "weights": [
+        4223,
+        5698,
+        5627,
+        5584,
+        5574,
+        5455,
+        4927,
+        5279
+      ],
+      "disjoint_witnesses": 16,
+      "certified_ALL_paired_lower_bound": 17,
+      "occupied_turn_positions": 80,
+      "witness_digest": "10ea657243af27f7ef6ffa34e172b1f3082350739b1b74b68f5bd213aa713fbd",
+      "rank_audit_runs": [
+        148,
+        148,
+        141,
+        144
+      ]
+    },
+    {
+      "n": 8,
+      "core_start": 2,
+      "secondary": [
+        -454,
+        227,
+        -57,
+        -88,
+        66,
+        15,
+        -1816,
+        -908
+      ],
+      "primary_B": 7263,
+      "weights": [
+        6809,
+        7490,
+        7206,
+        7175,
+        7329,
+        7278,
+        5447,
+        6355
+      ],
+      "disjoint_witnesses": 16,
+      "certified_ALL_paired_lower_bound": 17,
+      "occupied_turn_positions": 32,
+      "witness_digest": "27a4108f441219908a799cd7076c0d274e4c30f5588cec0f49a1c590d7079a1b",
+      "rank_audit_runs": [
+        168,
+        162,
+        162,
+        164
+      ]
+    },
+    {
+      "n": 8,
+      "core_start": 3,
+      "secondary": [
+        824,
+        103,
+        412,
+        41,
+        20,
+        -24,
+        -17,
+        -206
+      ],
+      "primary_B": 3295,
+      "weights": [
+        4119,
+        3398,
+        3707,
+        3336,
+        3315,
+        3271,
+        3278,
+        3089
+      ],
+      "disjoint_witnesses": 16,
+      "certified_ALL_paired_lower_bound": 17,
+      "occupied_turn_positions": 48,
+      "witness_digest": "b7e59c36e7a9c96ecdeda5176a0f61609ae7db0ea6c00466e85354a127196524",
+      "rank_audit_runs": [
+        181,
+        183,
+        181,
+        179
+      ]
+    },
+    {
+      "n": 9,
+      "core_start": 2,
+      "secondary": [
+        740,
+        -185,
+        60,
+        -3,
+        64,
+        -57,
+        2960,
+        1480,
+        370
+      ],
+      "primary_B": 11839,
+      "weights": [
+        12579,
+        11654,
+        11899,
+        11836,
+        11903,
+        11782,
+        14799,
+        13319,
+        12209
+      ],
+      "disjoint_witnesses": 32,
+      "certified_ALL_paired_lower_bound": 33,
+      "occupied_turn_positions": 96,
+      "witness_digest": "38d17053d25a128366ab3b218ca103dc2f846735bac97b4b2e925eab986e6f25",
+      "rank_audit_runs": [
+        292,
+        310,
+        273,
+        269
+      ]
+    },
+    {
+      "n": 9,
+      "core_start": 1,
+      "secondary": [
+        2320,
+        98,
+        83,
+        66,
+        -42,
+        4640,
+        -580,
+        -290,
+        1160
+      ],
+      "primary_B": 18559,
+      "weights": [
+        20879,
+        18657,
+        18642,
+        18625,
+        18517,
+        23199,
+        17979,
+        18269,
+        19719
+      ],
+      "disjoint_witnesses": 32,
+      "certified_ALL_paired_lower_bound": 33,
+      "occupied_turn_positions": 160,
+      "witness_digest": "7b3d4d94163ef20af6aacc3c99622a2040a472f1240e6e119eaf2573b20f5120",
+      "rank_audit_runs": [
+        272,
+        280,
+        276,
+        265
+      ]
+    },
+    {
+      "n": 9,
+      "core_start": 4,
+      "secondary": [
+        -2608,
+        -326,
+        -163,
+        652,
+        -51,
+        -23,
+        11,
+        77,
+        1304
+      ],
+      "primary_B": 10431,
+      "weights": [
+        7823,
+        10105,
+        10268,
+        11083,
+        10380,
+        10408,
+        10442,
+        10508,
+        11735
+      ],
+      "disjoint_witnesses": 32,
+      "certified_ALL_paired_lower_bound": 33,
+      "occupied_turn_positions": 160,
+      "witness_digest": "5896bcfc7c717badbc7b401538905239d635ae844e17f5823803501c04e0c608",
+      "rank_audit_runs": [
+        297,
+        292,
+        279,
+        279
+      ]
+    },
+    {
+      "n": 9,
+      "core_start": 4,
+      "secondary": [
+        1504,
+        3008,
+        752,
+        -188,
+        -13,
+        -35,
+        -69,
+        -70,
+        -376
+      ],
+      "primary_B": 12031,
+      "weights": [
+        13535,
+        15039,
+        12783,
+        11843,
+        12018,
+        11996,
+        11962,
+        11961,
+        11655
+      ],
+      "disjoint_witnesses": 32,
+      "certified_ALL_paired_lower_bound": 33,
+      "occupied_turn_positions": 160,
+      "witness_digest": "506111ca2ae2e4c10de664b23b9420917940e2ebc162339a7418d5dbfc600ef2",
+      "rank_audit_runs": [
+        343,
+        307,
+        329,
+        305
+      ]
+    },
+    {
+      "n": 10,
+      "core_start": 2,
+      "secondary": [
+        -159,
+        636,
+        3,
+        49,
+        9,
+        97,
+        -1272,
+        -5088,
+        -2544,
+        -318
+      ],
+      "primary_B": 20351,
+      "weights": [
+        20192,
+        20987,
+        20354,
+        20400,
+        20360,
+        20448,
+        19079,
+        15263,
+        17807,
+        20033
+      ],
+      "disjoint_witnesses": 64,
+      "certified_ALL_paired_lower_bound": 65,
+      "occupied_turn_positions": 320,
+      "witness_digest": "143fd26c497aad0b1bb3a9222aad3168ae3d819d4e3da2e3867034c2c9ade314",
+      "rank_audit_runs": [
+        681,
+        693,
+        702,
+        708
+      ]
+    },
+    {
+      "n": 10,
+      "core_start": 0,
+      "secondary": [
+        -39,
+        -33,
+        56,
+        36,
+        -660,
+        -1320,
+        165,
+        2640,
+        330,
+        -5280
+      ],
+      "primary_B": 21119,
+      "weights": [
+        21080,
+        21086,
+        21175,
+        21155,
+        20459,
+        19799,
+        21284,
+        23759,
+        21449,
+        15839
+      ],
+      "disjoint_witnesses": 64,
+      "certified_ALL_paired_lower_bound": 65,
+      "occupied_turn_positions": 128,
+      "witness_digest": "2ae5811befb1620d86e3dc36f62e30b489baf0981caf358c6d8c34260dd88a11",
+      "rank_audit_runs": [
+        571,
+        577,
+        597,
+        583
+      ]
+    },
+    {
+      "n": 10,
+      "core_start": 3,
+      "secondary": [
+        -5472,
+        -171,
+        -1368,
+        1,
+        41,
+        -54,
+        74,
+        684,
+        2736,
+        342
+      ],
+      "primary_B": 21887,
+      "weights": [
+        16415,
+        21716,
+        20519,
+        21888,
+        21928,
+        21833,
+        21961,
+        22571,
+        24623,
+        22229
+      ],
+      "disjoint_witnesses": 64,
+      "certified_ALL_paired_lower_bound": 65,
+      "occupied_turn_positions": 128,
+      "witness_digest": "3a71b3ca827669aabc7e84232b2992812374e28156df765fc021f144549b050e",
+      "rank_audit_runs": [
+        670,
+        656,
+        650,
+        647
+      ]
+    },
+    {
+      "n": 10,
+      "core_start": 6,
+      "secondary": [
+        186,
+        5952,
+        372,
+        -744,
+        1488,
+        2976,
+        -46,
+        -45,
+        -18,
+        -76
+      ],
+      "primary_B": 23807,
+      "weights": [
+        23993,
+        29759,
+        24179,
+        23063,
+        25295,
+        26783,
+        23761,
+        23762,
+        23789,
+        23731
+      ],
+      "disjoint_witnesses": 64,
+      "certified_ALL_paired_lower_bound": 65,
+      "occupied_turn_positions": 192,
+      "witness_digest": "f149077681ecc96d861f54e6f340d2c7d4b1488d4b5c55be1ee4ec6c07498254",
+      "rank_audit_runs": [
+        610,
+        609,
+        476,
+        610
+      ]
+    },
+    {
+      "n": 11,
+      "core_start": 3,
+      "secondary": [
+        390,
+        -6240,
+        -195,
+        -14,
+        62,
+        -77,
+        -41,
+        780,
+        12480,
+        3120,
+        1560
+      ],
+      "primary_B": 49919,
+      "weights": [
+        50309,
+        43679,
+        49724,
+        49905,
+        49981,
+        49842,
+        49878,
+        50699,
+        62399,
+        53039,
+        51479
+      ],
+      "disjoint_witnesses": 128,
+      "certified_ALL_paired_lower_bound": 129,
+      "occupied_turn_positions": 384,
+      "witness_digest": "50d946599013559922612ce7dbac671d61a7da0f07648ee2da98323e51b1caa5",
+      "rank_audit_runs": [
+        1549,
+        1553,
+        1556,
+        1545
+      ]
+    },
+    {
+      "n": 11,
+      "core_start": 6,
+      "secondary": [
+        -1448,
+        -362,
+        -724,
+        181,
+        -5792,
+        2896,
+        18,
+        -21,
+        72,
+        69,
+        11584
+      ],
+      "primary_B": 46335,
+      "weights": [
+        44887,
+        45973,
+        45611,
+        46516,
+        40543,
+        49231,
+        46353,
+        46314,
+        46407,
+        46404,
+        57919
+      ],
+      "disjoint_witnesses": 128,
+      "certified_ALL_paired_lower_bound": 129,
+      "occupied_turn_positions": 384,
+      "witness_digest": "3a64a31dae190af05ef1c61de68dd48ea3cd473db52a29935fca20f8e8942515",
+      "rank_audit_runs": [
+        1607,
+        1573,
+        1613,
+        1580
+      ]
+    },
+    {
+      "n": 11,
+      "core_start": 0,
+      "secondary": [
+        51,
+        20,
+        -99,
+        -51,
+        7104,
+        1776,
+        14208,
+        222,
+        -888,
+        -3552,
+        -444
+      ],
+      "primary_B": 56831,
+      "weights": [
+        56882,
+        56851,
+        56732,
+        56780,
+        63935,
+        58607,
+        71039,
+        57053,
+        55943,
+        53279,
+        56387
+      ],
+      "disjoint_witnesses": 128,
+      "certified_ALL_paired_lower_bound": 129,
+      "occupied_turn_positions": 256,
+      "witness_digest": "cb026dfa6d97908e1f34cbcbd69c0b1279d8b4d51c5e023a1f96baf5f4f2ffee",
+      "rank_audit_runs": [
+        1186,
+        1204,
+        1194,
+        1220
+      ]
+    },
+    {
+      "n": 11,
+      "core_start": 7,
+      "secondary": [
+        5920,
+        -185,
+        370,
+        -11840,
+        1480,
+        -2960,
+        740,
+        31,
+        41,
+        -87,
+        25
+      ],
+      "primary_B": 47359,
+      "weights": [
+        53279,
+        47174,
+        47729,
+        35519,
+        48839,
+        44399,
+        48099,
+        47390,
+        47400,
+        47272,
+        47384
+      ],
+      "disjoint_witnesses": 128,
+      "certified_ALL_paired_lower_bound": 129,
+      "occupied_turn_positions": 256,
+      "witness_digest": "187ba0c817baeb14f941b1f7d18958d005eaf6e0ced531c1bad100724759937d",
+      "rank_audit_runs": [
+        1363,
+        1359,
+        1277,
+        1366
+      ]
+    },
+    {
+      "n": 12,
+      "core_start": 0,
+      "secondary": [
+        43,
+        38,
+        -38,
+        53,
+        11072,
+        -2768,
+        173,
+        -22144,
+        -5536,
+        346,
+        -1384,
+        -692
+      ],
+      "primary_B": 88575,
+      "weights": [
+        88618,
+        88613,
+        88537,
+        88628,
+        99647,
+        85807,
+        88748,
+        66431,
+        83039,
+        88921,
+        87191,
+        87883
+      ],
+      "disjoint_witnesses": 256,
+      "certified_ALL_paired_lower_bound": 257,
+      "occupied_turn_positions": 512,
+      "witness_digest": "1749f471667e948741166c1ff405aa9b5daa0750b370e263e66a0aee73a7bc9a",
+      "rank_audit_runs": [
+        2322,
+        2381,
+        2384,
+        2350
+      ]
+    },
+    {
+      "n": 12,
+      "core_start": 5,
+      "secondary": [
+        -2656,
+        -664,
+        1328,
+        -5312,
+        166,
+        27,
+        -22,
+        -84,
+        32,
+        21248,
+        332,
+        10624
+      ],
+      "primary_B": 84991,
+      "weights": [
+        82335,
+        84327,
+        86319,
+        79679,
+        85157,
+        85018,
+        84969,
+        84907,
+        85023,
+        106239,
+        85323,
+        95615
+      ],
+      "disjoint_witnesses": 256,
+      "certified_ALL_paired_lower_bound": 257,
+      "occupied_turn_positions": 512,
+      "witness_digest": "195ec4771c73702cee09352e63edd3235f37e22656a70a4dc3ac31567844a05b",
+      "rank_audit_runs": [
+        2596,
+        2664,
+        2570,
+        2601
+      ]
+    },
+    {
+      "n": 12,
+      "core_start": 8,
+      "secondary": [
+        -5568,
+        -22272,
+        -174,
+        1392,
+        -696,
+        11136,
+        2784,
+        348,
+        -11,
+        62,
+        -62,
+        -38
+      ],
+      "primary_B": 89087,
+      "weights": [
+        83519,
+        66815,
+        88913,
+        90479,
+        88391,
+        100223,
+        91871,
+        89435,
+        89076,
+        89149,
+        89025,
+        89049
+      ],
+      "disjoint_witnesses": 256,
+      "certified_ALL_paired_lower_bound": 257,
+      "occupied_turn_positions": 768,
+      "witness_digest": "a300310810463abb1f64a254c42ff4896fb053399fc5464ac3c46722e9834940",
+      "rank_audit_runs": [
+        3265,
+        3011,
+        3185,
+        3270
+      ]
+    },
+    {
+      "n": 12,
+      "core_start": 5,
+      "secondary": [
+        -4656,
+        -37248,
+        2328,
+        18624,
+        1164,
+        65,
+        -94,
+        -62,
+        69,
+        582,
+        9312,
+        291
+      ],
+      "primary_B": 148991,
+      "weights": [
+        144335,
+        111743,
+        151319,
+        167615,
+        150155,
+        149056,
+        148897,
+        148929,
+        149060,
+        149573,
+        158303,
+        149282
+      ],
+      "disjoint_witnesses": 256,
+      "certified_ALL_paired_lower_bound": 257,
+      "occupied_turn_positions": 1280,
+      "witness_digest": "5ea778756b97b7b0898ade08022dc6c8e161d844968e7e72cf63a481c14f0661",
+      "rank_audit_runs": [
+        2662,
+        2699,
+        2696,
+        2706
+      ]
+    }
+  ],
+  "arbitrary_five_core_cases": [
+    {
+      "n": 5,
+      "core_start": 0,
+      "secondary": [
+        -83,
+        -11,
+        29,
+        -33,
+        44
+      ],
+      "weights": [
+        318,
+        390,
+        430,
+        368,
+        445
+      ],
+      "primary_B": 401,
+      "selected_atom_coordinates": [
+        0,
+        1,
+        4
+      ],
+      "controller_coordinate": 2,
+      "old_fixed_atom_extreme_hypothesis": true,
+      "disjoint_witnesses": 1,
+      "certified_ALL_paired_lower_bound": 2,
+      "witness_digest": "3def6773fe9ab7f9724eaf33b26d10346fa985370b42bcb1334c46ade6a37a06",
+      "rank_audit_runs": [
+        22,
+        22,
+        24,
+        23
+      ]
+    },
+    {
+      "n": 5,
+      "core_start": 0,
+      "secondary": [
+        -24,
+        -79,
+        20,
+        49,
+        19
+      ],
+      "weights": [
+        359,
+        304,
+        403,
+        432,
+        402
+      ],
+      "primary_B": 383,
+      "selected_atom_coordinates": [
+        0,
+        1,
+        4
+      ],
+      "controller_coordinate": 2,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 1,
+      "certified_ALL_paired_lower_bound": 2,
+      "witness_digest": "125fb1196f3037a49f1a3381cce6003b01ccad88905581cd8bd91ec64e52343b",
+      "rank_audit_runs": [
+        21,
+        22,
+        22,
+        22
+      ]
+    },
+    {
+      "n": 5,
+      "core_start": 0,
+      "secondary": [
+        13,
+        27,
+        81,
+        -18,
+        -95
+      ],
+      "weights": [
+        482,
+        496,
+        550,
+        451,
+        374
+      ],
+      "primary_B": 469,
+      "selected_atom_coordinates": [
+        0,
+        1,
+        4
+      ],
+      "controller_coordinate": 2,
+      "old_fixed_atom_extreme_hypothesis": true,
+      "disjoint_witnesses": 1,
+      "certified_ALL_paired_lower_bound": 2,
+      "witness_digest": "15935569bd68a3d096c4429aad4c2ffb1dd82ca0050031cdb5e0fd4a95aa7cd8",
+      "rank_audit_runs": [
+        17,
+        19,
+        17,
+        17
+      ]
+    },
+    {
+      "n": 5,
+      "core_start": 0,
+      "secondary": [
+        92,
+        88,
+        -8,
+        85,
+        86
+      ],
+      "weights": [
+        811,
+        807,
+        711,
+        804,
+        805
+      ],
+      "primary_B": 719,
+      "selected_atom_coordinates": [
+        0,
+        1,
+        4
+      ],
+      "controller_coordinate": 2,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 1,
+      "certified_ALL_paired_lower_bound": 2,
+      "witness_digest": "ef01411a9e08e5561ade3c4617eaa3db3bb612ce7f5845ced740d00dff1d34a0",
+      "rank_audit_runs": [
+        22,
+        23,
+        24,
+        23
+      ]
+    },
+    {
+      "n": 6,
+      "core_start": 1,
+      "secondary": [
+        -262,
+        -74,
+        -48,
+        22,
+        -41,
+        -76
+      ],
+      "weights": [
+        785,
+        973,
+        999,
+        1069,
+        1006,
+        971
+      ],
+      "primary_B": 1047,
+      "selected_atom_coordinates": [
+        1,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "old_fixed_atom_extreme_hypothesis": true,
+      "disjoint_witnesses": 2,
+      "certified_ALL_paired_lower_bound": 3,
+      "witness_digest": "9a5a0799a548970bd728c8888c758529a6dd763a911ce39e6f020a3215018c4f",
+      "rank_audit_runs": [
+        41,
+        43,
+        41,
+        42
+      ]
+    },
+    {
+      "n": 6,
+      "core_start": 1,
+      "secondary": [
+        -293,
+        -44,
+        -46,
+        73,
+        68,
+        61
+      ],
+      "weights": [
+        878,
+        1127,
+        1125,
+        1244,
+        1239,
+        1232
+      ],
+      "primary_B": 1171,
+      "selected_atom_coordinates": [
+        1,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 2,
+      "certified_ALL_paired_lower_bound": 3,
+      "witness_digest": "bb19fa6df8d724d40541d2cad5b4730c27781d97d0ed91ce15106e68c512b4df",
+      "rank_audit_runs": [
+        35,
+        32,
+        38,
+        32
+      ]
+    },
+    {
+      "n": 6,
+      "core_start": 1,
+      "secondary": [
+        -265,
+        41,
+        -52,
+        -70,
+        -14,
+        -87
+      ],
+      "weights": [
+        794,
+        1100,
+        1007,
+        989,
+        1045,
+        972
+      ],
+      "primary_B": 1059,
+      "selected_atom_coordinates": [
+        1,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "old_fixed_atom_extreme_hypothesis": true,
+      "disjoint_witnesses": 2,
+      "certified_ALL_paired_lower_bound": 3,
+      "witness_digest": "355758fdd800105e1a27e6c0d78ebf22d698802872d7434834a0a0cb3357129d",
+      "rank_audit_runs": [
+        37,
+        37,
+        39,
+        38
+      ]
+    },
+    {
+      "n": 6,
+      "core_start": 0,
+      "secondary": [
+        -82,
+        -29,
+        47,
+        89,
+        5,
+        253
+      ],
+      "weights": [
+        929,
+        982,
+        1058,
+        1100,
+        1016,
+        1264
+      ],
+      "primary_B": 1011,
+      "selected_atom_coordinates": [
+        0,
+        1,
+        4
+      ],
+      "controller_coordinate": 2,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 2,
+      "certified_ALL_paired_lower_bound": 3,
+      "witness_digest": "1a3dfeed96afec8e0f12f9e17a0cba9662e20bbda49d3c24e36c65c7cc9812d9",
+      "rank_audit_runs": [
+        44,
+        49,
+        48,
+        49
+      ]
+    },
+    {
+      "n": 7,
+      "core_start": 2,
+      "secondary": [
+        311,
+        -622,
+        55,
+        85,
+        21,
+        53,
+        96
+      ],
+      "weights": [
+        2798,
+        1865,
+        2542,
+        2572,
+        2508,
+        2540,
+        2583
+      ],
+      "primary_B": 2487,
+      "selected_atom_coordinates": [
+        2,
+        3,
+        6
+      ],
+      "controller_coordinate": 4,
+      "old_fixed_atom_extreme_hypothesis": true,
+      "disjoint_witnesses": 4,
+      "certified_ALL_paired_lower_bound": 5,
+      "witness_digest": "a0d18b49855822f41df051af5ae18ca7d71476798366b6f47f71bd4c0222dff3",
+      "rank_audit_runs": [
+        75,
+        86,
+        71,
+        69
+      ]
+    },
+    {
+      "n": 7,
+      "core_start": 1,
+      "secondary": [
+        -331,
+        -74,
+        53,
+        94,
+        50,
+        59,
+        -662
+      ],
+      "weights": [
+        2316,
+        2573,
+        2700,
+        2741,
+        2697,
+        2706,
+        1985
+      ],
+      "primary_B": 2647,
+      "selected_atom_coordinates": [
+        1,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 4,
+      "certified_ALL_paired_lower_bound": 5,
+      "witness_digest": "fcbfb7cabb75705109096ba0c5ec0368ea758ce6000ef2c117db3e62f7e192fe",
+      "rank_audit_runs": [
+        81,
+        81,
+        81,
+        81
+      ]
+    },
+    {
+      "n": 7,
+      "core_start": 1,
+      "secondary": [
+        191,
+        -27,
+        13,
+        -62,
+        86,
+        2,
+        382
+      ],
+      "weights": [
+        1718,
+        1500,
+        1540,
+        1465,
+        1613,
+        1529,
+        1909
+      ],
+      "primary_B": 1527,
+      "selected_atom_coordinates": [
+        1,
+        3,
+        5
+      ],
+      "controller_coordinate": 4,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 4,
+      "certified_ALL_paired_lower_bound": 5,
+      "witness_digest": "eeb751458f54e615ba079814cbe0724e043fb636d617f2e71b9ca208b0de4c92",
+      "rank_audit_runs": [
+        96,
+        100,
+        97,
+        99
+      ]
+    },
+    {
+      "n": 7,
+      "core_start": 0,
+      "secondary": [
+        -85,
+        98,
+        -28,
+        -61,
+        70,
+        686,
+        -343
+      ],
+      "weights": [
+        2658,
+        2841,
+        2715,
+        2682,
+        2813,
+        3429,
+        2400
+      ],
+      "primary_B": 2743,
+      "selected_atom_coordinates": [
+        0,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 4,
+      "certified_ALL_paired_lower_bound": 5,
+      "witness_digest": "2138b3a69477ae896981ed5c9e1be589da6110ec37d60eff6d4604d10920037f",
+      "rank_audit_runs": [
+        85,
+        87,
+        85,
+        87
+      ]
+    },
+    {
+      "n": 8,
+      "core_start": 3,
+      "secondary": [
+        -868,
+        -1736,
+        -434,
+        -88,
+        -73,
+        80,
+        93,
+        99
+      ],
+      "weights": [
+        6075,
+        5207,
+        6509,
+        6855,
+        6870,
+        7023,
+        7036,
+        7042
+      ],
+      "primary_B": 6943,
+      "selected_atom_coordinates": [
+        3,
+        4,
+        7
+      ],
+      "controller_coordinate": 5,
+      "old_fixed_atom_extreme_hypothesis": true,
+      "disjoint_witnesses": 8,
+      "certified_ALL_paired_lower_bound": 9,
+      "witness_digest": "1ac848b56404ee282e46994d347706ff92f8353c482f822bc23155dbb1769514",
+      "rank_audit_runs": [
+        156,
+        187,
+        163,
+        189
+      ]
+    },
+    {
+      "n": 8,
+      "core_start": 0,
+      "secondary": [
+        -86,
+        -51,
+        48,
+        -27,
+        47,
+        260,
+        -1040,
+        520
+      ],
+      "weights": [
+        4073,
+        4108,
+        4207,
+        4132,
+        4206,
+        4419,
+        3119,
+        4679
+      ],
+      "primary_B": 4159,
+      "selected_atom_coordinates": [
+        0,
+        1,
+        4
+      ],
+      "controller_coordinate": 2,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 8,
+      "certified_ALL_paired_lower_bound": 9,
+      "witness_digest": "bdfa3d34819b3154390ba88f2ac3ac921d463a059f84f43cdbc644b575432110",
+      "rank_audit_runs": [
+        188,
+        188,
+        182,
+        188
+      ]
+    },
+    {
+      "n": 8,
+      "core_start": 1,
+      "secondary": [
+        -404,
+        28,
+        8,
+        -75,
+        -74,
+        -16,
+        808,
+        202
+      ],
+      "weights": [
+        2827,
+        3259,
+        3239,
+        3156,
+        3157,
+        3215,
+        4039,
+        3433
+      ],
+      "primary_B": 3231,
+      "selected_atom_coordinates": [
+        1,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 8,
+      "certified_ALL_paired_lower_bound": 9,
+      "witness_digest": "b52c9c09c8b2dafa74312a2137fc782aca55eccca9d194940212ed00dc747f9f",
+      "rank_audit_runs": [
+        159,
+        151,
+        156,
+        154
+      ]
+    },
+    {
+      "n": 8,
+      "core_start": 0,
+      "secondary": [
+        -2,
+        55,
+        -82,
+        -50,
+        -30,
+        -440,
+        220,
+        880
+      ],
+      "weights": [
+        3517,
+        3574,
+        3437,
+        3469,
+        3489,
+        3079,
+        3739,
+        4399
+      ],
+      "primary_B": 3519,
+      "selected_atom_coordinates": [
+        0,
+        1,
+        4
+      ],
+      "controller_coordinate": 2,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 8,
+      "certified_ALL_paired_lower_bound": 9,
+      "witness_digest": "8c1aedf62aaa1afab5c2807d1b8577cd568496b38989586a2fffbf5f19e623f7",
+      "rank_audit_runs": [
+        192,
+        189,
+        184,
+        192
+      ]
+    },
+    {
+      "n": 9,
+      "core_start": 1,
+      "secondary": [
+        -642,
+        56,
+        -70,
+        -42,
+        -58,
+        -94,
+        -2568,
+        1284,
+        321
+      ],
+      "weights": [
+        9629,
+        10327,
+        10201,
+        10229,
+        10213,
+        10177,
+        7703,
+        11555,
+        10592
+      ],
+      "primary_B": 10271,
+      "selected_atom_coordinates": [
+        1,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "old_fixed_atom_extreme_hypothesis": true,
+      "disjoint_witnesses": 16,
+      "certified_ALL_paired_lower_bound": 17,
+      "witness_digest": "0de7970780035189470532490f34a8f377261f4cb1744647a5b03f6829b5e64f",
+      "rank_audit_runs": [
+        358,
+        351,
+        347,
+        343
+      ]
+    },
+    {
+      "n": 9,
+      "core_start": 3,
+      "secondary": [
+        1624,
+        -203,
+        812,
+        0,
+        76,
+        -44,
+        -65,
+        -17,
+        406
+      ],
+      "weights": [
+        8119,
+        6292,
+        7307,
+        6495,
+        6571,
+        6451,
+        6430,
+        6478,
+        6901
+      ],
+      "primary_B": 6495,
+      "selected_atom_coordinates": [
+        3,
+        4,
+        7
+      ],
+      "controller_coordinate": 5,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 16,
+      "certified_ALL_paired_lower_bound": 17,
+      "witness_digest": "a8b4a30db099df7aa6a27e36d4eb6a8abc13d1ccc50e7df21e5aae7ff69be0c4",
+      "rank_audit_runs": [
+        389,
+        397,
+        388,
+        391
+      ]
+    },
+    {
+      "n": 9,
+      "core_start": 1,
+      "secondary": [
+        338,
+        -33,
+        25,
+        -73,
+        13,
+        24,
+        169,
+        676,
+        1352
+      ],
+      "weights": [
+        5745,
+        5374,
+        5432,
+        5334,
+        5420,
+        5431,
+        5576,
+        6083,
+        6759
+      ],
+      "primary_B": 5407,
+      "selected_atom_coordinates": [
+        1,
+        3,
+        5
+      ],
+      "controller_coordinate": 4,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 16,
+      "certified_ALL_paired_lower_bound": 17,
+      "witness_digest": "19b95f56c6a48cd94bb73686dc20112e1965dc58340938bc3cc16624c718d7df",
+      "rank_audit_runs": [
+        359,
+        362,
+        355,
+        365
+      ]
+    },
+    {
+      "n": 9,
+      "core_start": 3,
+      "secondary": [
+        -327,
+        -2616,
+        -1308,
+        -90,
+        94,
+        49,
+        2,
+        91,
+        -654
+      ],
+      "weights": [
+        10136,
+        7847,
+        9155,
+        10373,
+        10557,
+        10512,
+        10465,
+        10554,
+        9809
+      ],
+      "primary_B": 10463,
+      "selected_atom_coordinates": [
+        3,
+        5,
+        7
+      ],
+      "controller_coordinate": 6,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 16,
+      "certified_ALL_paired_lower_bound": 17,
+      "witness_digest": "8b10e43eb882382c541afb36fd45ce8be28297076e7973961f7696b6241acbcb",
+      "rank_audit_runs": [
+        388,
+        389,
+        387,
+        386
+      ]
+    },
+    {
+      "n": 10,
+      "core_start": 3,
+      "secondary": [
+        4640,
+        -580,
+        -1160,
+        42,
+        52,
+        90,
+        -27,
+        78,
+        -290,
+        -2320
+      ],
+      "weights": [
+        23199,
+        17979,
+        17399,
+        18601,
+        18611,
+        18649,
+        18532,
+        18637,
+        18269,
+        16239
+      ],
+      "primary_B": 18559,
+      "selected_atom_coordinates": [
+        3,
+        4,
+        7
+      ],
+      "controller_coordinate": 5,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 32,
+      "certified_ALL_paired_lower_bound": 33,
+      "witness_digest": "c152fb27a0f78560c8519446bac9dca5648806965e42099d2a510f4ee5f45c58",
+      "rank_audit_runs": [
+        587,
+        583,
+        585,
+        597
+      ]
+    },
+    {
+      "n": 10,
+      "core_start": 0,
+      "secondary": [
+        -47,
+        32,
+        93,
+        -57,
+        63,
+        -2344,
+        1172,
+        4688,
+        -293,
+        586
+      ],
+      "weights": [
+        18704,
+        18783,
+        18844,
+        18694,
+        18814,
+        16407,
+        19923,
+        23439,
+        18458,
+        19337
+      ],
+      "primary_B": 18751,
+      "selected_atom_coordinates": [
+        0,
+        1,
+        4
+      ],
+      "controller_coordinate": 2,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 32,
+      "certified_ALL_paired_lower_bound": 33,
+      "witness_digest": "e4c505472f6ce534be42c3bbd171f6404b0b2bfab755df6d49cd5c7c619c0143",
+      "rank_audit_runs": [
+        627,
+        610,
+        617,
+        624
+      ]
+    },
+    {
+      "n": 10,
+      "core_start": 1,
+      "secondary": [
+        -1556,
+        -43,
+        -89,
+        94,
+        62,
+        100,
+        -389,
+        -3112,
+        778,
+        -6224
+      ],
+      "weights": [
+        23339,
+        24852,
+        24806,
+        24989,
+        24957,
+        24995,
+        24506,
+        21783,
+        25673,
+        18671
+      ],
+      "primary_B": 24895,
+      "selected_atom_coordinates": [
+        1,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "old_fixed_atom_extreme_hypothesis": true,
+      "disjoint_witnesses": 32,
+      "certified_ALL_paired_lower_bound": 33,
+      "witness_digest": "772e0988cb23c96348ae1a30cf259de89e97abbb3aa74e0c37ffa24fa508480d",
+      "rank_audit_runs": [
+        675,
+        679,
+        691,
+        663
+      ]
+    },
+    {
+      "n": 10,
+      "core_start": 4,
+      "secondary": [
+        264,
+        1056,
+        -2112,
+        -528,
+        -75,
+        -34,
+        78,
+        -58,
+        18,
+        -4224
+      ],
+      "weights": [
+        17159,
+        17951,
+        14783,
+        16367,
+        16820,
+        16861,
+        16973,
+        16837,
+        16913,
+        12671
+      ],
+      "primary_B": 16895,
+      "selected_atom_coordinates": [
+        4,
+        5,
+        8
+      ],
+      "controller_coordinate": 6,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 32,
+      "certified_ALL_paired_lower_bound": 33,
+      "witness_digest": "5f93710141dc523a5e847e3eb0da1be6459f39d68becc1383d0dbdb0f6464a54",
+      "rank_audit_runs": [
+        717,
+        725,
+        687,
+        689
+      ]
+    },
+    {
+      "n": 11,
+      "core_start": 0,
+      "secondary": [
+        -68,
+        71,
+        -53,
+        -10,
+        47,
+        2000,
+        4000,
+        8000,
+        -500,
+        -1000,
+        250
+      ],
+      "weights": [
+        31931,
+        32070,
+        31946,
+        31989,
+        32046,
+        33999,
+        35999,
+        39999,
+        31499,
+        30999,
+        32249
+      ],
+      "primary_B": 31999,
+      "selected_atom_coordinates": [
+        0,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 64,
+      "certified_ALL_paired_lower_bound": 65,
+      "witness_digest": "cac68c339293948879d0176d703550ee6009c4b4f6d87af65d6115522f311cb2",
+      "rank_audit_runs": [
+        1264,
+        1256,
+        1242,
+        1244
+      ]
+    },
+    {
+      "n": 11,
+      "core_start": 1,
+      "secondary": [
+        -347,
+        98,
+        57,
+        -69,
+        -95,
+        27,
+        11104,
+        5552,
+        694,
+        -1388,
+        -2776
+      ],
+      "weights": [
+        44068,
+        44513,
+        44472,
+        44346,
+        44320,
+        44442,
+        55519,
+        49967,
+        45109,
+        43027,
+        41639
+      ],
+      "primary_B": 44415,
+      "selected_atom_coordinates": [
+        1,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 64,
+      "certified_ALL_paired_lower_bound": 65,
+      "witness_digest": "dd54f68cb626c82fd586ab62aceb6b9d92658e0128581ba32a4e22a92102050b",
+      "rank_audit_runs": [
+        1281,
+        1253,
+        1293,
+        1295
+      ]
+    },
+    {
+      "n": 11,
+      "core_start": 4,
+      "secondary": [
+        2096,
+        1048,
+        262,
+        8384,
+        67,
+        61,
+        -77,
+        -6,
+        -50,
+        524,
+        4192
+      ],
+      "weights": [
+        35631,
+        34583,
+        33797,
+        41919,
+        33602,
+        33596,
+        33458,
+        33529,
+        33485,
+        34059,
+        37727
+      ],
+      "primary_B": 33535,
+      "selected_atom_coordinates": [
+        4,
+        5,
+        8
+      ],
+      "controller_coordinate": 6,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 64,
+      "certified_ALL_paired_lower_bound": 65,
+      "witness_digest": "1eceaf77b4d829477c2da11aebb8c08a3dd8a1170c932f82f48ec5bbeb78dd97",
+      "rank_audit_runs": [
+        1212,
+        1308,
+        1258,
+        1210
+      ]
+    },
+    {
+      "n": 11,
+      "core_start": 5,
+      "secondary": [
+        -1432,
+        -179,
+        -358,
+        -716,
+        -5728,
+        -12,
+        60,
+        -92,
+        1,
+        -13,
+        -2864
+      ],
+      "weights": [
+        21479,
+        22732,
+        22553,
+        22195,
+        17183,
+        22899,
+        22971,
+        22819,
+        22912,
+        22898,
+        20047
+      ],
+      "primary_B": 22911,
+      "selected_atom_coordinates": [
+        5,
+        6,
+        9
+      ],
+      "controller_coordinate": 7,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 64,
+      "certified_ALL_paired_lower_bound": 65,
+      "witness_digest": "d135c718a156f4dfa8ea84f68718e492e01b650d32cdf6750f1f36ab2bcd383c",
+      "rank_audit_runs": [
+        1381,
+        1443,
+        1406,
+        1405
+      ]
+    },
+    {
+      "n": 12,
+      "core_start": 5,
+      "secondary": [
+        3808,
+        476,
+        1904,
+        238,
+        -15232,
+        -26,
+        31,
+        76,
+        -84,
+        -20,
+        -952,
+        -7616
+      ],
+      "weights": [
+        64735,
+        61403,
+        62831,
+        61165,
+        45695,
+        60901,
+        60958,
+        61003,
+        60843,
+        60907,
+        59975,
+        53311
+      ],
+      "primary_B": 60927,
+      "selected_atom_coordinates": [
+        6,
+        7,
+        9
+      ],
+      "controller_coordinate": 8,
+      "old_fixed_atom_extreme_hypothesis": true,
+      "disjoint_witnesses": 128,
+      "certified_ALL_paired_lower_bound": 129,
+      "witness_digest": "ee5ae5f67c5fce8da06fb4d37d48cec301b4018a89775be373a0d5b5c6b099f0",
+      "rank_audit_runs": [
+        3256,
+        3226,
+        3217,
+        3255
+      ]
+    },
+    {
+      "n": 12,
+      "core_start": 4,
+      "secondary": [
+        -362,
+        5792,
+        2896,
+        724,
+        -11,
+        -73,
+        52,
+        16,
+        28,
+        11584,
+        181,
+        -1448
+      ],
+      "weights": [
+        45973,
+        52127,
+        49231,
+        47059,
+        46324,
+        46262,
+        46387,
+        46351,
+        46363,
+        57919,
+        46516,
+        44887
+      ],
+      "primary_B": 46335,
+      "selected_atom_coordinates": [
+        4,
+        5,
+        8
+      ],
+      "controller_coordinate": 6,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 128,
+      "certified_ALL_paired_lower_bound": 129,
+      "witness_digest": "e5245b9f23598b7fe6494a34a33d9862e782a18224abc216c4e0ae3b802c0d0d",
+      "rank_audit_runs": [
+        2969,
+        2919,
+        2885,
+        2851
+      ]
+    },
+    {
+      "n": 12,
+      "core_start": 3,
+      "secondary": [
+        1752,
+        219,
+        -3504,
+        58,
+        -59,
+        -32,
+        -43,
+        26,
+        -438,
+        -7008,
+        14016,
+        876
+      ],
+      "weights": [
+        57815,
+        56282,
+        52559,
+        56121,
+        56004,
+        56031,
+        56020,
+        56089,
+        55625,
+        49055,
+        70079,
+        56939
+      ],
+      "primary_B": 56063,
+      "selected_atom_coordinates": [
+        4,
+        5,
+        7
+      ],
+      "controller_coordinate": 6,
+      "old_fixed_atom_extreme_hypothesis": true,
+      "disjoint_witnesses": 128,
+      "certified_ALL_paired_lower_bound": 129,
+      "witness_digest": "d88d25bc455f8ecdd5a918365ae43cea51bc315a8bfd8c3f2597926b874a17f1",
+      "rank_audit_runs": [
+        2782,
+        2771,
+        2769,
+        2783
+      ]
+    },
+    {
+      "n": 12,
+      "core_start": 6,
+      "secondary": [
+        -896,
+        -224,
+        -1792,
+        7168,
+        3584,
+        448,
+        -68,
+        61,
+        7,
+        41,
+        46,
+        -14336
+      ],
+      "weights": [
+        56447,
+        57119,
+        55551,
+        64511,
+        60927,
+        57791,
+        57275,
+        57404,
+        57350,
+        57384,
+        57389,
+        43007
+      ],
+      "primary_B": 57343,
+      "selected_atom_coordinates": [
+        6,
+        8,
+        10
+      ],
+      "controller_coordinate": 9,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 128,
+      "certified_ALL_paired_lower_bound": 129,
+      "witness_digest": "d408f04d674e7268449649e3599b14705c752e1d52dbab8a202dd37633d81dc3",
+      "rank_audit_runs": [
+        2993,
+        2839,
+        2851,
+        2815
+      ]
+    },
+    {
+      "n": 13,
+      "core_start": 6,
+      "secondary": [
+        4640,
+        -2320,
+        9280,
+        290,
+        -18560,
+        -1160,
+        -7,
+        -18,
+        -3,
+        -52,
+        64,
+        -580,
+        -145
+      ],
+      "weights": [
+        78879,
+        71919,
+        83519,
+        74529,
+        55679,
+        73079,
+        74232,
+        74221,
+        74236,
+        74187,
+        74303,
+        73659,
+        74094
+      ],
+      "primary_B": 74239,
+      "selected_atom_coordinates": [
+        6,
+        7,
+        10
+      ],
+      "controller_coordinate": 8,
+      "old_fixed_atom_extreme_hypothesis": true,
+      "disjoint_witnesses": 256,
+      "certified_ALL_paired_lower_bound": 257,
+      "witness_digest": "b7fab7ee2c2bb299ef07d2ef1e912b0817c09e2ef31c4061985d2b7186406902",
+      "rank_audit_runs": [
+        4425,
+        4414,
+        3925,
+        4649
+      ]
+    },
+    {
+      "n": 13,
+      "core_start": 5,
+      "secondary": [
+        -888,
+        -14208,
+        -3552,
+        -28416,
+        -7104,
+        22,
+        3,
+        91,
+        29,
+        76,
+        -1776,
+        -444,
+        -222
+      ],
+      "weights": [
+        112775,
+        99455,
+        110111,
+        85247,
+        106559,
+        113685,
+        113666,
+        113754,
+        113692,
+        113739,
+        111887,
+        113219,
+        113441
+      ],
+      "primary_B": 113663,
+      "selected_atom_coordinates": [
+        5,
+        6,
+        9
+      ],
+      "controller_coordinate": 7,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 256,
+      "certified_ALL_paired_lower_bound": 257,
+      "witness_digest": "453b78624c4578d274e4e9a226fcbebd0b93b3a1789a3e1d7082216d0b4a535d",
+      "rank_audit_runs": [
+        4867,
+        5242,
+        5035,
+        5065
+      ]
+    },
+    {
+      "n": 13,
+      "core_start": 5,
+      "secondary": [
+        -166,
+        1328,
+        -5312,
+        2656,
+        -332,
+        -7,
+        -5,
+        -68,
+        45,
+        -40,
+        -664,
+        10624,
+        21248
+      ],
+      "weights": [
+        84825,
+        86319,
+        79679,
+        87647,
+        84659,
+        84984,
+        84986,
+        84923,
+        85036,
+        84951,
+        84327,
+        95615,
+        106239
+      ],
+      "primary_B": 84991,
+      "selected_atom_coordinates": [
+        5,
+        6,
+        9
+      ],
+      "controller_coordinate": 7,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 256,
+      "certified_ALL_paired_lower_bound": 257,
+      "witness_digest": "4eca4f85ef1f39e3790c8ef5a7aaae59cdce7cd1bef6ad9a9fc8859ef6fc97f7",
+      "rank_audit_runs": [
+        4896,
+        4772,
+        4993,
+        4806
+      ]
+    },
+    {
+      "n": 13,
+      "core_start": 3,
+      "secondary": [
+        -40960,
+        640,
+        -20480,
+        -93,
+        91,
+        38,
+        -56,
+        41,
+        1280,
+        -10240,
+        320,
+        -5120,
+        2560
+      ],
+      "weights": [
+        122879,
+        164479,
+        143359,
+        163746,
+        163930,
+        163877,
+        163783,
+        163880,
+        165119,
+        153599,
+        164159,
+        158719,
+        166399
+      ],
+      "primary_B": 163839,
+      "selected_atom_coordinates": [
+        3,
+        5,
+        7
+      ],
+      "controller_coordinate": 6,
+      "old_fixed_atom_extreme_hypothesis": false,
+      "disjoint_witnesses": 256,
+      "certified_ALL_paired_lower_bound": 257,
+      "witness_digest": "c3a02e688f5f429a132649f621ca72d06fde7eeee99c5dcaa47421fadd0e3e5b",
+      "rank_audit_runs": [
+        6005,
+        6005,
+        5996,
+        6013
+      ]
+    }
+  ],
+  "direct_rank_audits": 320,
+  "seed": 202610031535,
+  "violations": 0,
+  "seconds": 4.911116963994573,
+  "audit_sha256": "6d0c4deeaba15749b501aa8db665a0bf6d251c255f38f7007aeed31e10c3dc92"
+}
