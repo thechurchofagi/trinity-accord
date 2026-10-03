@@ -1,0 +1,32 @@
+{
+  "status": "VERIFIED_CONDITIONAL_FRESH_BOTTOM_BLOCK_EXTENSION",
+  "analytic_theorem": "For ANY fixed upper paired parent and ANY permutation, independently randomizing only bottom H layers gives E R>=m_low/2, per-variable affected-turn count<=2^(h+2), sum influences squared<=2^(H+2)*m_low. McDiarmid implies P(R<=m_low/4)<=exp(-m_low/2^(H+5)). Conditioning on all other levels, each level h separately has affine independent costs, E R>=m_h, sum two-state differences squared<=2^(h+3)*m_h and P(R<=m_h/2)<=exp(-m_h/2^(h+4)). H=2,n>=18: ONE child preserving ANY parent satisfies R>N/32 for EVERY generic signed additive sweep with at leastN/8 comparisons leading in levels0 or1. No independence-of-turn assumption.",
+  "scope": "H=1 conditional result belongs to concurrent master55 and is stronger than the generic block estimate; it is credited and not reclaimed. This general-H extension does not prove full feasible-prefix extendability, does not cover all low-mass scans and is not claimed compatible with a separately selected large-q rank.",
+  "signed_chamber_parent_contexts": 16224,
+  "fresh_states_checked": 1377024,
+  "all_arbitrary_q3_permutations_H2": 40320,
+  "rows": [
+    {
+      "n": 3,
+      "H": 2,
+      "all_signed_chambers": 96,
+      "parent_masks": 1
+    },
+    {
+      "n": 4,
+      "H": 2,
+      "all_signed_chambers": 5376,
+      "parent_masks": 2
+    },
+    {
+      "n": 4,
+      "H": 3,
+      "all_signed_chambers": 5376,
+      "parent_masks": 1
+    }
+  ],
+  "audit_stream_sha256": "f144cd0fd6498d27ca097c31710e088f1542a47325a33f7861d6aba692f905ff",
+  "violations": 0,
+  "seconds": 28.17572228499921,
+  "audit_sha256": "25a6c2822bc85112d40c340865601539a446d5b19e3e9218977c65aac78a2f6b"
+}
