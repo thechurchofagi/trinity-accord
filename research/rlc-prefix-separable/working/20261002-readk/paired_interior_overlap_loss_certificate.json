@@ -1,0 +1,526 @@
+{
+  "status": "VERIFIED_ACTUAL_ALL_DIMENSION_INTERIOR_FACE_MERGE_LOSS",
+  "analytic_statement": "For every n>=4, T=2^(n-4), actual positive generic additive scans and paired prefix-separable ranks have two identical translated (n-1)-faces with R_A=R_B=6T-1, but R_full=8T. The lost proposed budget (R_A+R_B-1)-R_full=4T-3=2^n/4-3.",
+  "scope": "Excludes universal lossless interior-overlap compensation, even for actual paired restrictions and genuine common translations. Does NOT refute any constant-density target: actual fullR=2^(n-1). Does NOT assert least dimension or optimized local minima.",
+  "seed_search": {
+    "checked_cases_before_first_failure": 3655,
+    "weights": [
+      4,
+      6,
+      8,
+      9
+    ],
+    "mask": 6,
+    "R": 8,
+    "face_runs": [
+      5,
+      5
+    ],
+    "score_word": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      3,
+      5,
+      9,
+      6,
+      10,
+      12,
+      7,
+      11,
+      13,
+      14,
+      15
+    ],
+    "rank_word": [
+      0,
+      1,
+      3,
+      7,
+      13,
+      2,
+      6,
+      12,
+      4,
+      14,
+      10,
+      5,
+      15,
+      11,
+      9,
+      8
+    ],
+    "coverage": "Exact intervals for fixed Q2/Q3 metric representatives and all masks until first failure; not complete Q4 metric space."
+  },
+  "core_rank": [
+    0,
+    1,
+    3,
+    2,
+    7,
+    6,
+    4,
+    5,
+    13,
+    12,
+    14,
+    15,
+    10,
+    11,
+    9,
+    8
+  ],
+  "core_face_orders": [
+    [
+      0,
+      1,
+      2,
+      4,
+      3,
+      5,
+      6,
+      7
+    ],
+    [
+      8,
+      9,
+      10,
+      12,
+      11,
+      13,
+      14,
+      15
+    ]
+  ],
+  "proof": "Low coordinates have weights28*2^j, exceeding core span27, so the scan is Tcomplete core rows. The shifted paired mask6 has exact rank T*r4(u)+g_m(t) XOR ((T/2)*(u&1)). Core comparisons dominate low bits. Full core rows have7turns, endpoint signs+,- and descending rank-block row joins, each adding1turn: R=7T+1+(T-1)=8T. First face rows have4turns and endpoint signs+,+, but row joins are descending, adding2turns. Second face rows have4turns and endpoint signs-,-, but joins are ascending, also adding2turns. Therefore each faceR=4T+1+2(T-1)=6T-1. Both faces have identical score order, constant translation9 and disjoint contiguous rank intervals.",
+  "actual_dimension_audits": [
+    {
+      "n": 4,
+      "T": 1,
+      "weights": [
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 3,
+      "translation": 9,
+      "full_R": 8,
+      "face_runs": [
+        5,
+        5
+      ],
+      "proposed_lossless_budget": 9,
+      "strict_deficit": 1,
+      "order_sha256": "909417d181e0b6e53e73bb2c2e5414bd8b13f680735f427eb5802775010606f3",
+      "rank_sha256": "e93ea2cce8aaa6c128672fcd52dd9028805e72a5604f971ebf5ad48b51d27242",
+      "strict_prefix_separator_checks": 240
+    },
+    {
+      "n": 5,
+      "T": 2,
+      "weights": [
+        28,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 4,
+      "translation": 9,
+      "full_R": 16,
+      "face_runs": [
+        11,
+        11
+      ],
+      "proposed_lossless_budget": 21,
+      "strict_deficit": 5,
+      "order_sha256": "2b05806e6be73ab6f2088a13a68509ba3d68c594adfb1b1ce162bd2de156194f",
+      "rank_sha256": "9bd9098b03eadd03f2e32961f425bcdbd4f6052df51d932c689587df8d22f233",
+      "strict_prefix_separator_checks": 992
+    },
+    {
+      "n": 6,
+      "T": 4,
+      "weights": [
+        28,
+        56,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 5,
+      "translation": 9,
+      "full_R": 32,
+      "face_runs": [
+        23,
+        23
+      ],
+      "proposed_lossless_budget": 45,
+      "strict_deficit": 13,
+      "order_sha256": "54cae104ad421ba5ac9570968a2da1f76663afcb5c92ccacfbb77b5428dc4002",
+      "rank_sha256": "4ef7f32085b4eb8a86bb2950c9591ba8eab98a052778a4c82529d42d1f7aa8b1",
+      "strict_prefix_separator_checks": 4032
+    },
+    {
+      "n": 7,
+      "T": 8,
+      "weights": [
+        28,
+        56,
+        112,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 6,
+      "translation": 9,
+      "full_R": 64,
+      "face_runs": [
+        47,
+        47
+      ],
+      "proposed_lossless_budget": 93,
+      "strict_deficit": 29,
+      "order_sha256": "600f481be491d72b5fe32215902d9f9d0ac63098ef608d31c198ecacc6b933d3",
+      "rank_sha256": "f809921114c7e010469def4400499d50651c409204c149d1a6a3c8fd3f3fe6b2"
+    },
+    {
+      "n": 8,
+      "T": 16,
+      "weights": [
+        28,
+        56,
+        112,
+        224,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 7,
+      "translation": 9,
+      "full_R": 128,
+      "face_runs": [
+        95,
+        95
+      ],
+      "proposed_lossless_budget": 189,
+      "strict_deficit": 61,
+      "order_sha256": "989f57f5cb6a11b8fa3515aa0b6d86c6272eb8d88ceb91fa4091ae81867b1e95",
+      "rank_sha256": "c85ab931084c24e6024c32dab3357201170622fc95cbd7fc626370c3ee04783b"
+    },
+    {
+      "n": 9,
+      "T": 32,
+      "weights": [
+        28,
+        56,
+        112,
+        224,
+        448,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 8,
+      "translation": 9,
+      "full_R": 256,
+      "face_runs": [
+        191,
+        191
+      ],
+      "proposed_lossless_budget": 381,
+      "strict_deficit": 125,
+      "order_sha256": "2e048c051d4aaad6538bdbdee68eabb56a5a8856558674e53220c25cc1b606a6",
+      "rank_sha256": "09f16cad46f2700fc4f43c69b6c7df80d834d4c591dfb4f796ae503600d4b469"
+    },
+    {
+      "n": 10,
+      "T": 64,
+      "weights": [
+        28,
+        56,
+        112,
+        224,
+        448,
+        896,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 9,
+      "translation": 9,
+      "full_R": 512,
+      "face_runs": [
+        383,
+        383
+      ],
+      "proposed_lossless_budget": 765,
+      "strict_deficit": 253,
+      "order_sha256": "20c0e1c4634cb43da6808721243bd39af81173c4b65e56ee3fa98e085f02cbcc",
+      "rank_sha256": "d087626f9f769b2c76ccf2bb7e8c1b811c15ebba6d225cf5a272338829070f5e"
+    },
+    {
+      "n": 11,
+      "T": 128,
+      "weights": [
+        28,
+        56,
+        112,
+        224,
+        448,
+        896,
+        1792,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 10,
+      "translation": 9,
+      "full_R": 1024,
+      "face_runs": [
+        767,
+        767
+      ],
+      "proposed_lossless_budget": 1533,
+      "strict_deficit": 509,
+      "order_sha256": "cca8012a9a5283de3b1e4647961812d3076a162dd0f169e0edce08c59ce5788f",
+      "rank_sha256": "05f22004b99b8c29e6d40e9640f0c4631ce9422f7133fb16cc3ecc0438f81754"
+    },
+    {
+      "n": 12,
+      "T": 256,
+      "weights": [
+        28,
+        56,
+        112,
+        224,
+        448,
+        896,
+        1792,
+        3584,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 11,
+      "translation": 9,
+      "full_R": 2048,
+      "face_runs": [
+        1535,
+        1535
+      ],
+      "proposed_lossless_budget": 3069,
+      "strict_deficit": 1021,
+      "order_sha256": "0b5db566d747d5f42aac6c0fe3e4fb6aa67039f6bdd33a5ec4c40aeb5501be89",
+      "rank_sha256": "bf31f6353d532c467ce7d78d0ef39a7953cb4d38b8564600550971a796bf7681"
+    },
+    {
+      "n": 13,
+      "T": 512,
+      "weights": [
+        28,
+        56,
+        112,
+        224,
+        448,
+        896,
+        1792,
+        3584,
+        7168,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 12,
+      "translation": 9,
+      "full_R": 4096,
+      "face_runs": [
+        3071,
+        3071
+      ],
+      "proposed_lossless_budget": 6141,
+      "strict_deficit": 2045,
+      "order_sha256": "5f6ea8b826959154175537dc5e906fe873f4ed2d34fb8c73d783f631ff8d6e4d",
+      "rank_sha256": "6b46f151d0bb16551fd7a933f07099067cc4985bfdf3eb1ae0218828edd82697"
+    },
+    {
+      "n": 14,
+      "T": 1024,
+      "weights": [
+        28,
+        56,
+        112,
+        224,
+        448,
+        896,
+        1792,
+        3584,
+        7168,
+        14336,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 13,
+      "translation": 9,
+      "full_R": 8192,
+      "face_runs": [
+        6143,
+        6143
+      ],
+      "proposed_lossless_budget": 12285,
+      "strict_deficit": 4093,
+      "order_sha256": "18a34e76d889afdfbddab65bf64861c96b08074730a8b2fbd29add6d06b404f1",
+      "rank_sha256": "defb1de4b2142ff1e0647c80680fa5d7a4ac0decb225496dfb23d5d7e638f21a"
+    },
+    {
+      "n": 15,
+      "T": 2048,
+      "weights": [
+        28,
+        56,
+        112,
+        224,
+        448,
+        896,
+        1792,
+        3584,
+        7168,
+        14336,
+        28672,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 14,
+      "translation": 9,
+      "full_R": 16384,
+      "face_runs": [
+        12287,
+        12287
+      ],
+      "proposed_lossless_budget": 24573,
+      "strict_deficit": 8189,
+      "order_sha256": "87485ae81622d718faeed2a7c2845f964a679b14a3b40c9de9e6f2b5dfde5c9c",
+      "rank_sha256": "f57112e2f4e01843a4f33b84d55a08bccd2eca9aef568f16962c843d0357c60b"
+    },
+    {
+      "n": 16,
+      "T": 4096,
+      "weights": [
+        28,
+        56,
+        112,
+        224,
+        448,
+        896,
+        1792,
+        3584,
+        7168,
+        14336,
+        28672,
+        57344,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 15,
+      "translation": 9,
+      "full_R": 32768,
+      "face_runs": [
+        24575,
+        24575
+      ],
+      "proposed_lossless_budget": 49149,
+      "strict_deficit": 16381,
+      "order_sha256": "7b2413d61e579345787ade98e1c6724c74ba70dbf5cd25ee5ef8105c81a21332",
+      "rank_sha256": "fdbf499ddd6f0d6bcc510ad46c50af520955d187f10e9b45f7866cf1e0dcc790"
+    },
+    {
+      "n": 17,
+      "T": 8192,
+      "weights": [
+        28,
+        56,
+        112,
+        224,
+        448,
+        896,
+        1792,
+        3584,
+        7168,
+        14336,
+        28672,
+        57344,
+        114688,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 16,
+      "translation": 9,
+      "full_R": 65536,
+      "face_runs": [
+        49151,
+        49151
+      ],
+      "proposed_lossless_budget": 98301,
+      "strict_deficit": 32765,
+      "order_sha256": "1bfa0233980b36c2d3ba17df8cb75323686c4f6acd52287b3c5a590b0f0d7dd5",
+      "rank_sha256": "3e604cdbbe880dc1d944c2545e59c45a141317d38d01ba9ba93f88efa05fa163"
+    },
+    {
+      "n": 18,
+      "T": 16384,
+      "weights": [
+        28,
+        56,
+        112,
+        224,
+        448,
+        896,
+        1792,
+        3584,
+        7168,
+        14336,
+        28672,
+        57344,
+        114688,
+        229376,
+        4,
+        6,
+        8,
+        9
+      ],
+      "face_coordinate": 17,
+      "translation": 9,
+      "full_R": 131072,
+      "face_runs": [
+        98303,
+        98303
+      ],
+      "proposed_lossless_budget": 196605,
+      "strict_deficit": 65533,
+      "order_sha256": "fbec50a9c7cd542ea0f9067d37bc72ce3abdeb6adb68b16e8c7e8d50ad5476b0",
+      "rank_sha256": "bcecf1a09dc47a30e06726d83b79254b2439313c824ffb937c8ae29ea52c0451"
+    }
+  ],
+  "violations": 0,
+  "seconds": 5.7657276739919325,
+  "audit_sha256": "4c9fb4727671ab3686c57e3641db89d462724fd4a5125f0e41b7e34c523dc83e"
+}
