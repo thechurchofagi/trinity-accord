@@ -1,0 +1,15 @@
+{"n": 6, "family": "ones", "accepted": 12, "maximum_net_energy": -4, "minimum_C": 34, "elapsed": 0.002}
+{"n": 6, "family": "k3", "accepted": 12, "maximum_net_energy": 0, "minimum_C": 32, "elapsed": 0.004}
+{"n": 8, "family": "ones", "accepted": 12, "maximum_net_energy": -32, "minimum_C": 144, "elapsed": 0.01}
+{"n": 8, "family": "k3", "accepted": 12, "maximum_net_energy": -44, "minimum_C": 150, "elapsed": 0.016}
+{"n": 10, "family": "ones", "accepted": 12, "maximum_net_energy": -132, "minimum_C": 578, "elapsed": 0.042}
+{"n": 10, "family": "k3", "accepted": 12, "maximum_net_energy": -204, "minimum_C": 614, "elapsed": 0.072}
+{"n": 12, "family": "ones", "accepted": 12, "maximum_net_energy": -296, "minimum_C": 2196, "elapsed": 0.191}
+{"n": 12, "family": "k3", "accepted": 12, "maximum_net_energy": -808, "minimum_C": 2452, "elapsed": 0.312}
+{"n": 14, "family": "ones", "accepted": 12, "maximum_net_energy": -2428, "minimum_C": 9406, "elapsed": 0.741}
+{"n": 14, "family": "k3", "accepted": 12, "maximum_net_energy": -3528, "minimum_C": 9956, "elapsed": 1.155}
+{"n": 16, "family": "ones", "accepted": 12, "maximum_net_energy": -5952, "minimum_C": 35744, "elapsed": 3.251}
+{"n": 16, "family": "k3", "accepted": 12, "maximum_net_energy": -12400, "minimum_C": 38968, "elapsed": 6.3}
+{"n": 18, "family": "ones", "accepted": 12, "maximum_net_energy": -22872, "minimum_C": 142508, "elapsed": 17.147}
+{"n": 18, "family": "k3", "accepted": 12, "maximum_net_energy": -33644, "minimum_C": 147894, "elapsed": 25.586}
+{"state": "EXACT_ARBITRARY_SECONDARY_PRESSURE_COMPLETE_NOT_GLOBAL_PROOF", "accepted": 168, "skipped_ties": 0, "cases_E_exceeds_numerical_bound_2q": 75, "verification_digest": "af07810a6e4a3e19615a4c995c46274cc74dba77fbac113766b76484f8384863", "elapsed_seconds": 25.586}

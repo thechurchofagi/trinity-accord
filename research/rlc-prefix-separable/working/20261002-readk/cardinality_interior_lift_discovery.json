@@ -1,0 +1,1 @@
+{"scope":"Permutation of binary secondary priorities, first witness only; not all coherent secondary chambers.","records":[{"n":3,"permutations_checked":6,"found":false},{"n":4,"permutations_checked":10,"found":true}],"first_witness":{"n":4,"secondary":[2,4,8,1],"interior_edges":[[1,2,2]],"interior_D":2,"full_edges":[[1,2,2]]}}
