@@ -1,0 +1,101 @@
+{
+  "state": "PASS",
+  "implementation": "New v1.1 reimplementation; not original generation or v1.0 audit code.",
+  "parameters": {
+    "consumer_biases": [
+      -5.2,
+      -5.1,
+      -5.0,
+      -4.9,
+      -4.8
+    ],
+    "consumer_gain": 7,
+    "model1_start": [
+      0,
+      0
+    ],
+    "model1_update": "synchronous, each sweep point restarted from zero",
+    "model1_stop_max_change": 1e-13,
+    "model1_max_iterations": 20000,
+    "model2_transitions": 39,
+    "model2_initial": [
+      1,
+      0,
+      0
+    ]
+  },
+  "thresholds": {
+    "model1_first_tested_high_access": 0.4025,
+    "model2_first_tested_HOT": 0.4032960893854749,
+    "model2_first_tested_high_access": 0.7215083798882682,
+    "model1_control_max_access": 0.039713926335911164
+  },
+  "checks": [
+    {
+      "file": "UCT_v0.57_SharedLaw_DIT_RPT_GNWT_MainSweep.csv",
+      "rows": 401,
+      "cells": 3208,
+      "max_abs_error": 6.673739338936002e-11,
+      "mismatches": [],
+      "state": "PASS",
+      "archived_sha256": "e90af46403b0616dc0b773405ed5ad3895727616c1404c4d3f56648419abc2a9"
+    },
+    {
+      "file": "UCT_v0.57_SharedLaw_DIT_RPT_GNWT_NoReturn_Control.csv",
+      "rows": 401,
+      "cells": 3208,
+      "max_abs_error": 1.8841650462064763e-11,
+      "mismatches": [],
+      "state": "PASS",
+      "archived_sha256": "f2b4ba8e7c80697276e23535a0b6b59ee62b041d875bc9f04bc19e261d968cb1"
+    },
+    {
+      "file": "UCT_v0.59_MToC_HOT_GNWT_MainSweep.csv",
+      "rows": 180,
+      "cells": 1620,
+      "max_abs_error": 3.552713678800501e-15,
+      "mismatches": [],
+      "state": "PASS",
+      "archived_sha256": "462b391c67f7666af293299753883b3ab47920e507ccfe01d7506a49606ffcce"
+    },
+    {
+      "file": "UCT_v0.59_MToC_HOT_GNWT_Cut_Memory_to_HOT.csv",
+      "rows": 180,
+      "cells": 1620,
+      "max_abs_error": 3.552713678800501e-15,
+      "mismatches": [],
+      "state": "PASS",
+      "archived_sha256": "534059bf727a19e780803662cb017253868b6227b2abaef6d50b5e0982b903ae"
+    },
+    {
+      "file": "UCT_v0.59_MToC_HOT_GNWT_Cut_HOT_to_Workspace.csv",
+      "rows": 180,
+      "cells": 1620,
+      "max_abs_error": 3.552713678800501e-15,
+      "mismatches": [],
+      "state": "PASS",
+      "archived_sha256": "6f201748dc309e19d94f78758a887693f3a9bdcbd0f7e2b8e660c24a78240f83"
+    },
+    {
+      "file": "UCT_v0.59_MToC_HOT_GNWT_ControlSummary.csv",
+      "rows": 3,
+      "cells": 15,
+      "max_abs_error": 0.0,
+      "mismatches": [],
+      "state": "PASS",
+      "archived_sha256": "f96f1bdbe8dc60630e3d9e1e1ae37189f264053433f8e6208f9b113ab3b57c8e"
+    },
+    {
+      "file": "UCT_v0.57_SharedLaw_DIT_RPT_GNWT_HeldOutSweep.csv",
+      "rows": 9,
+      "cells": 45,
+      "max_abs_error": 8.217093672158171e-12,
+      "mismatches": [],
+      "state": "PASS",
+      "archived_sha256": "f57ddce1c4280ef439d1646c596577f9a5f680c13fe801dd0cc5b7be943c30c7"
+    }
+  ],
+  "tolerance": 1e-09,
+  "empirical_validation": false,
+  "historical_no_tuning_certified": false
+}
