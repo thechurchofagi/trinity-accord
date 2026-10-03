@@ -1,0 +1,14 @@
+{
+  "state": "READ_ONLY_LINKED_DRAFT_IDENTIFIED",
+  "previous_record_id": 23103274,
+  "conceptrecid": "23103273",
+  "record_id": 23118189,
+  "reserved_doi": "10.5281/zenodo.23118189",
+  "title": "Exponential Run Complexity of Prefix-Separable Orders on the Boolean Cube",
+  "submitted": false,
+  "creators": ["Liu, Hongju"],
+  "observed_version": null,
+  "inspection_run_id": 37111617678,
+  "legacy_latest_draft_points_to_predecessor": true,
+  "new_version_action_repeated": false
+}

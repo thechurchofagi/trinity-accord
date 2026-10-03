@@ -49,6 +49,10 @@ ROOT_SPECIAL_FILES = [
     "research/rlc-prefix-separable/published/rlc-prefix-separable-supplement-v1.0.pdf",
     "research/rlc-prefix-separable/published/citation.bib",
     "research/rlc-prefix-separable/publication-record.json",
+    "research/rlc-prefix-separable/versions/v1.1/published/rlc-prefix-separable-v1.1.pdf",
+    "research/rlc-prefix-separable/versions/v1.1/published/rlc-prefix-separable-supplement-v1.1.pdf",
+    "research/rlc-prefix-separable/versions/v1.1/published/citation.bib",
+    "research/rlc-prefix-separable/versions/v1.1/publication-record.json",
     "research/reading-trinity-accord/citation.bib",
     "research/reading-trinity-accord/publication-record.json",
     "llms.txt",
@@ -106,6 +110,9 @@ PUBLICATION_SOURCE_DIRS.update({
     "research/rlc-prefix-separable/source-main.md",
     "research/rlc-prefix-separable/source-supplement.md",
     "research/rlc-prefix-separable/published/",
+    "research/rlc-prefix-separable/versions/v1.1/source-main.md",
+    "research/rlc-prefix-separable/versions/v1.1/source-supplement.md",
+    "research/rlc-prefix-separable/versions/v1.1/published/",
 })
 
 # Root-level JSON files to include

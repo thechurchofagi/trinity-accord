@@ -1,0 +1,12 @@
+{
+  "report_number": "TA-TR-2026-22",
+  "version": "1.1",
+  "record_id": 23118189,
+  "doi": "10.5281/zenodo.23118189",
+  "expected_manifest_sha256": "b82a452c4552502e52fde9181bae60a15760c42d448924e6f21a78a6ce6d9a6a",
+  "authorization": "PUBLISH_EXACT_REVIEWED_PACKAGE",
+  "authorization_basis": "The user directed completion of the proposed English v1.1 revision, linked version publication, and associated repository work on 2026-10-03.",
+  "new_record_creation": false,
+  "previous_record_id": 23103274,
+  "prior_versions_may_be_modified": false
+}

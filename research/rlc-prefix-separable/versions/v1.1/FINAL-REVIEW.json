@@ -1,0 +1,24 @@
+{
+  "report_number": "TA-TR-2026-22",
+  "version": "1.1",
+  "record_id": 23118189,
+  "doi": "10.5281/zenodo.23118189",
+  "expected_manifest_sha256": "b82a452c4552502e52fde9181bae60a15760c42d448924e6f21a78a6ce6d9a6a",
+  "state": "EXACT_DOI_BOUND_PACKAGE_REVIEW_PASS",
+  "pdf_visual_review_pass": true,
+  "pdf_pages": {
+    "rlc-prefix-separable-v1.1.pdf": 12,
+    "rlc-prefix-separable-supplement-v1.1.pdf": 5
+  },
+  "checks": [
+    "All 13 downloaded release files match the exact publication manifest.",
+    "All 12 main pages visually reviewed; final render is pixel-identical to the reviewed rendering.",
+    "All five final supplement pages visually reviewed: complete verifier table, finite certificates, and integer counterexample are readable and unbroken.",
+    "The formal DOI appears in both PDFs; templates do not appear in deposited main or supplement.",
+    "Five finite mathematical verification receipts independently reproduced in the release workflow.",
+    "Seven linked-version publication guard tests pass.",
+    "The general constant-density target remains open; selected routes are refuted only within their stated quantifiers."
+  ],
+  "peer_reviewed": false,
+  "independent_external_review_claimed": false
+}

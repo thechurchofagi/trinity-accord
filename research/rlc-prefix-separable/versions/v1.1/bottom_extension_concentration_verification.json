@@ -1,0 +1,664 @@
+{
+  "status": "VERIFIED_COMPATIBLE_BOTTOM_EXTENSION_CONCENTRATION",
+  "fixed_upper_chamber_contexts": 43208,
+  "all_fresh_states_checked": 688912,
+  "coverage": "ALL signed generic Q2-Q4 chambers, EVERY normalized fixed parent rank and EVERY fresh bottom assignment; completeness inherited from the previously certified chamber generator.",
+  "L_histogram": {
+    "2": 4644,
+    "0": 32388,
+    "4": 3104,
+    "8": 1536,
+    "6": 1536
+  },
+  "examples": [
+    {
+      "n": 2,
+      "weights": [
+        1,
+        2
+      ],
+      "reflection": 0,
+      "parent_mask": 0,
+      "L": 2,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          1,
+          1
+        ]
+      ],
+      "R_distribution": [
+        2,
+        2
+      ]
+    },
+    {
+      "n": 2,
+      "weights": [
+        1,
+        2
+      ],
+      "reflection": 1,
+      "parent_mask": 0,
+      "L": 2,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          1,
+          1
+        ]
+      ],
+      "R_distribution": [
+        2,
+        2
+      ]
+    },
+    {
+      "n": 2,
+      "weights": [
+        1,
+        2
+      ],
+      "reflection": 2,
+      "parent_mask": 0,
+      "L": 2,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          1,
+          1
+        ]
+      ],
+      "R_distribution": [
+        2,
+        2
+      ]
+    },
+    {
+      "n": 2,
+      "weights": [
+        1,
+        2
+      ],
+      "reflection": 3,
+      "parent_mask": 0,
+      "L": 2,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          1,
+          1
+        ]
+      ],
+      "R_distribution": [
+        2,
+        2
+      ]
+    },
+    {
+      "n": 2,
+      "weights": [
+        2,
+        1
+      ],
+      "reflection": 0,
+      "parent_mask": 0,
+      "L": 0,
+      "endpoint_occurrences": 0,
+      "constant": 3,
+      "costs": [
+        [
+          0,
+          0
+        ]
+      ],
+      "R_distribution": [
+        3,
+        3
+      ]
+    },
+    {
+      "n": 2,
+      "weights": [
+        2,
+        1
+      ],
+      "reflection": 1,
+      "parent_mask": 0,
+      "L": 0,
+      "endpoint_occurrences": 0,
+      "constant": 3,
+      "costs": [
+        [
+          0,
+          0
+        ]
+      ],
+      "R_distribution": [
+        3,
+        3
+      ]
+    },
+    {
+      "n": 2,
+      "weights": [
+        2,
+        1
+      ],
+      "reflection": 2,
+      "parent_mask": 0,
+      "L": 0,
+      "endpoint_occurrences": 0,
+      "constant": 3,
+      "costs": [
+        [
+          0,
+          0
+        ]
+      ],
+      "R_distribution": [
+        3,
+        3
+      ]
+    },
+    {
+      "n": 2,
+      "weights": [
+        2,
+        1
+      ],
+      "reflection": 3,
+      "parent_mask": 0,
+      "L": 0,
+      "endpoint_occurrences": 0,
+      "constant": 3,
+      "costs": [
+        [
+          0,
+          0
+        ]
+      ],
+      "R_distribution": [
+        3,
+        3
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 0,
+      "parent_mask": 0,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "R_distribution": [
+        4,
+        3,
+        5,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 0,
+      "parent_mask": 1,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "R_distribution": [
+        4,
+        3,
+        5,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 1,
+      "parent_mask": 0,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "R_distribution": [
+        4,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 1,
+      "parent_mask": 1,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "R_distribution": [
+        4,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 2,
+      "parent_mask": 0,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "R_distribution": [
+        4,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 2,
+      "parent_mask": 1,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "R_distribution": [
+        4,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 3,
+      "parent_mask": 0,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "R_distribution": [
+        4,
+        3,
+        5,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 3,
+      "parent_mask": 1,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "R_distribution": [
+        4,
+        3,
+        5,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 4,
+      "parent_mask": 0,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "R_distribution": [
+        4,
+        3,
+        5,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 4,
+      "parent_mask": 1,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "R_distribution": [
+        4,
+        3,
+        5,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 5,
+      "parent_mask": 0,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "R_distribution": [
+        4,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 5,
+      "parent_mask": 1,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "R_distribution": [
+        4,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 6,
+      "parent_mask": 0,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "R_distribution": [
+        4,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 6,
+      "parent_mask": 1,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "R_distribution": [
+        4,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 7,
+      "parent_mask": 0,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "R_distribution": [
+        4,
+        3,
+        5,
+        4
+      ]
+    },
+    {
+      "n": 3,
+      "weights": [
+        1,
+        2,
+        4
+      ],
+      "reflection": 7,
+      "parent_mask": 1,
+      "L": 4,
+      "endpoint_occurrences": 2,
+      "constant": 1,
+      "costs": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "R_distribution": [
+        4,
+        3,
+        5,
+        4
+      ]
+    }
+  ],
+  "analytic_identity": "Conditional on ANY parent, R=C0+sum_u Y_u(theta_u),Y_u(0)+Y_u(1)=k_u<=4,sum k=2L-e,E R>=L,sum A_u^2<=8L.",
+  "analytic_tail": "For any vertex permutation and ANY fixed parent, P_fresh(R<=L/2)<=exp(-L/16), by cosh(z)<=exp(z^2/2).",
+  "simultaneous_extension": "For ALL n>=15 and ANY fixed paired parent, there is a child preserving it with R>N/16 for EVERY generic signed additive sweep having L>=N/8 lowest-input-bit comparisons.",
+  "infinite_compatible_family": "Choosing one such extension at each n>=15 gives a single compatible family. Its lifts of ANY d>=15 core with L_core>=2^d/8 have R>=2^n/16-1 even when q(lift)/2^n tends to0.",
+  "original_target": "OPEN; scans with few fresh bottom edges and arbitrary multilevel interleavings are not covered.",
+  "n15_chamber_union_margin_positive": true,
+  "violations": 0,
+  "seconds": 3.223986541997874,
+  "audit_sha256": "2781765b3fe3e7a7de295e519906a21180177b3810c3d3c7c2e4820aa1e2b237"
+}

@@ -1,0 +1,12 @@
+{
+  "state": "RESERVED_NOT_PUBLISHED",
+  "record_id": 23118189,
+  "doi": "10.5281/zenodo.23118189",
+  "report_number": "TA-TR-2026-22",
+  "title": "Exponential Run Complexity of Prefix-Separable Orders on the Boolean Cube",
+  "version": "1.1",
+  "previous_record_id": 23103274,
+  "previous_doi": "10.5281/zenodo.23103274",
+  "conceptrecid": "23103273",
+  "prior_records_modified": false
+}

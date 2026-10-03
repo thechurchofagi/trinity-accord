@@ -1,0 +1,41 @@
+{
+  "state": "V11_FROZEN_MATHEMATICAL_RECEIPTS_REPRODUCED",
+  "checks": [
+    {
+      "script": "verify_readk_and_interleaving.py",
+      "script_sha256": "16c6c84c5d9c0cccab2e98d0062b0b011a606d6ea20c5aebfec1a6fcc1c9c875",
+      "receipt": "verification.json",
+      "receipt_sha256": "420551f6ff0fa6ecca7c8582295de4b4bc51265717eaeee6bc752b0d8d5c2fa6",
+      "stable_mathematical_fields_match": true
+    },
+    {
+      "script": "verify_comparison_support_entropy.py",
+      "script_sha256": "7ed464dbb505c4eee94513a81bd2d106d8a372014cb590acb466199fcfce8f0e",
+      "receipt": "comparison_support_entropy_verification.json",
+      "receipt_sha256": "d32f6dc35f6e277d90e1c086c28f72be3fd2702b3bc1abf3f352e05109597387",
+      "stable_mathematical_fields_match": true
+    },
+    {
+      "script": "verify_bottom_extension_concentration.py",
+      "script_sha256": "c876fc70b0f32857b881ca5839345c81bafa096cf1ab35a8d5c00775ca222004",
+      "receipt": "bottom_extension_concentration_verification.json",
+      "receipt_sha256": "97689603b740ed55da1dd8fda09d7a49c4d857a662410d496f453115bf26157c",
+      "stable_mathematical_fields_match": true
+    },
+    {
+      "script": "verify_sparse_support_amplification.py",
+      "script_sha256": "c75fdf1dec763ab63dbd9fe4a5229e47557734054f02ee039e0376b4ff78c3a0",
+      "receipt": "sparse_support_amplification_verification.json",
+      "receipt_sha256": "ffc732a8f433b0d0b55b2eb045b33ecef0c09de34a9c1d3f6ccce51a93ab4b66",
+      "stable_mathematical_fields_match": true
+    },
+    {
+      "script": "verify_conditional_mean_obstruction.py",
+      "script_sha256": "c189817cab61857d3b4eb3e7a80299df9d69df9175d846285a0c34fabcc80389",
+      "receipt": "conditional_mean_obstruction_verification.json",
+      "receipt_sha256": "f83828c3700e2168581d799c4a1aeaeb5c91ff0cbf5304cd33ac1b28490ebd1b",
+      "stable_mathematical_fields_match": true
+    }
+  ],
+  "violations": 0
+}

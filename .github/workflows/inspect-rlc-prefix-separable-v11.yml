@@ -1,0 +1,23 @@
+name: Inspect existing TA22 v1.1 draft
+on:
+  push:
+    branches: [research/rlc-prefix-separable-v1-1-20261003]
+    paths:
+      - .github/workflows/inspect-rlc-prefix-separable-v11.yml
+      - research/rlc-prefix-separable/versions/v1.1/inspect_linked_draft.py
+permissions:
+  contents: read
+jobs:
+  inspect:
+    if: contains(github.event.head_commit.message, '[ta22-v11-inspect]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/rlc-prefix-separable-v1-1-20261003
+          show-progress: false
+      - name: Read existing lineage and draft identities without mutations
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/rlc-prefix-separable/versions/v1.1/inspect_linked_draft.py

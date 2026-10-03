@@ -512,6 +512,8 @@ This paper does not claim empirical proof of universal experience or structural 
 
 TA-TR-2026-22 · Version 1.0 · 2 October 2026. Human author of record and responsible depositor: Hongju Liu. English mathematical preprint; substantial ChatGPT (OpenAI) assistance is disclosed.
 
+**Linked revision, version 1.1 (3 October 2026):** [DOI 10.5281/zenodo.23118189](https://doi.org/10.5281/zenodo.23118189) · [Version overview and PDFs](/research/rlc-prefix-separable/versions/v1.1/). The all-weight liminf coefficient improves by `4 log 2` (about 2.77); scoped paired-family theorems and exact obstructions are added. The general `2^n/n^2` order is retained and the original constant-density target remains open. The version 1.0 record below is preserved.
+
 A complete analytic proof shows that prefix-separable Boolean-cube orders can require `Omega(2^n/n^2)` monotone runs under every generic additive sweep, with liminf constant `1/(8 log 3)`. Known signed-tree representations, alternating-run statistics and concentration tools are credited. The supplement records 5,161,156 finite rank-sequence checks, 7,898 prefix-separator checks and two barriers to directly substituting a prior separable-permutation mean theorem. The constant-density lower bound remains open.
 
 **Status:** Published open-access preprint; not peer reviewed; non-amending. All 13 deposited files passed anonymous exact-byte SHA-256 public readback and DOI resolution passed.

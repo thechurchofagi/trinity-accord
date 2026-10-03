@@ -1,0 +1,380 @@
+{
+  "seed": 202610022315,
+  "readk": {
+    "rows": [
+      {
+        "n": 1,
+        "permutations": 2,
+        "sign_assignments": 2,
+        "rank_sequences": 4,
+        "uniform_tail_checks": 0,
+        "refined_tail_checks": 0,
+        "deterministic_empty_checks": 0,
+        "coverage": "all permutations and all signs"
+      },
+      {
+        "n": 2,
+        "permutations": 24,
+        "sign_assignments": 8,
+        "rank_sequences": 192,
+        "uniform_tail_checks": 8,
+        "refined_tail_checks": 16,
+        "deterministic_empty_checks": 16,
+        "coverage": "all permutations and all signs"
+      },
+      {
+        "n": 3,
+        "permutations": 40320,
+        "sign_assignments": 128,
+        "rank_sequences": 5160960,
+        "uniform_tail_checks": 17920,
+        "refined_tail_checks": 48640,
+        "deterministic_empty_checks": 103040,
+        "coverage": "all permutations and all signs"
+      },
+      {
+        "n": 4,
+        "permutations": 27,
+        "sign_assignments": 32768,
+        "rank_sequences": 884736,
+        "uniform_tail_checks": 36,
+        "refined_tail_checks": 74,
+        "deterministic_empty_checks": 153,
+        "coverage": "selected permutations, all signs"
+      }
+    ],
+    "enumeration_sha256": "379ed2b5a39991152411c95401d94385c8fdbd7319eb4a68ad05dac7ed584f37"
+  },
+  "interleaving": {
+    "identity_cases": 12876,
+    "generic_integer_score_realizations": 39,
+    "coverage": "all top orientations d<=3; all permutations d<=2; 32 selected permutations d=3; lower signs sampled; n<=10 integer sweeps"
+  },
+  "barrier": [
+    {
+      "n": 2,
+      "d": 1,
+      "k": 2,
+      "runs": 3,
+      "event_probability": "1/1",
+      "cases": 8,
+      "coverage": "entire event"
+    },
+    {
+      "n": 2,
+      "d": 2,
+      "k": 4,
+      "runs": 1,
+      "event_probability": "1/4",
+      "cases": 2,
+      "coverage": "entire event"
+    },
+    {
+      "n": 3,
+      "d": 1,
+      "k": 2,
+      "runs": 7,
+      "event_probability": "1/1",
+      "cases": 128,
+      "coverage": "entire event"
+    },
+    {
+      "n": 3,
+      "d": 2,
+      "k": 4,
+      "runs": 3,
+      "event_probability": "1/4",
+      "cases": 32,
+      "coverage": "entire event"
+    },
+    {
+      "n": 3,
+      "d": 3,
+      "k": 8,
+      "runs": 1,
+      "event_probability": "1/64",
+      "cases": 2,
+      "coverage": "entire event"
+    },
+    {
+      "n": 4,
+      "d": 1,
+      "k": 2,
+      "runs": 15,
+      "event_probability": "1/1",
+      "cases": 32768,
+      "coverage": "entire event"
+    },
+    {
+      "n": 4,
+      "d": 2,
+      "k": 4,
+      "runs": 7,
+      "event_probability": "1/4",
+      "cases": 8192,
+      "coverage": "entire event"
+    },
+    {
+      "n": 4,
+      "d": 3,
+      "k": 8,
+      "runs": 3,
+      "event_probability": "1/64",
+      "cases": 512,
+      "coverage": "entire event"
+    },
+    {
+      "n": 4,
+      "d": 4,
+      "k": 16,
+      "runs": 1,
+      "event_probability": "1/16384",
+      "cases": 2,
+      "coverage": "entire event"
+    },
+    {
+      "n": 5,
+      "d": 1,
+      "k": 2,
+      "runs": 31,
+      "event_probability": "1/1",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 5,
+      "d": 2,
+      "k": 4,
+      "runs": 15,
+      "event_probability": "1/4",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 5,
+      "d": 3,
+      "k": 8,
+      "runs": 7,
+      "event_probability": "1/64",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 5,
+      "d": 4,
+      "k": 16,
+      "runs": 3,
+      "event_probability": "1/16384",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 6,
+      "d": 1,
+      "k": 2,
+      "runs": 63,
+      "event_probability": "1/1",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 6,
+      "d": 2,
+      "k": 4,
+      "runs": 31,
+      "event_probability": "1/4",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 6,
+      "d": 3,
+      "k": 8,
+      "runs": 15,
+      "event_probability": "1/64",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 6,
+      "d": 4,
+      "k": 16,
+      "runs": 7,
+      "event_probability": "1/16384",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 7,
+      "d": 1,
+      "k": 2,
+      "runs": 127,
+      "event_probability": "1/1",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 7,
+      "d": 2,
+      "k": 4,
+      "runs": 63,
+      "event_probability": "1/4",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 7,
+      "d": 3,
+      "k": 8,
+      "runs": 31,
+      "event_probability": "1/64",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 7,
+      "d": 4,
+      "k": 16,
+      "runs": 15,
+      "event_probability": "1/16384",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 8,
+      "d": 1,
+      "k": 2,
+      "runs": 255,
+      "event_probability": "1/1",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 8,
+      "d": 2,
+      "k": 4,
+      "runs": 127,
+      "event_probability": "1/4",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 8,
+      "d": 3,
+      "k": 8,
+      "runs": 63,
+      "event_probability": "1/64",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 8,
+      "d": 4,
+      "k": 16,
+      "runs": 31,
+      "event_probability": "1/16384",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 9,
+      "d": 1,
+      "k": 2,
+      "runs": 511,
+      "event_probability": "1/1",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 9,
+      "d": 2,
+      "k": 4,
+      "runs": 255,
+      "event_probability": "1/4",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 9,
+      "d": 3,
+      "k": 8,
+      "runs": 127,
+      "event_probability": "1/64",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 9,
+      "d": 4,
+      "k": 16,
+      "runs": 63,
+      "event_probability": "1/16384",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 10,
+      "d": 1,
+      "k": 2,
+      "runs": 1023,
+      "event_probability": "1/1",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 10,
+      "d": 2,
+      "k": 4,
+      "runs": 511,
+      "event_probability": "1/4",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 10,
+      "d": 3,
+      "k": 8,
+      "runs": 255,
+      "event_probability": "1/64",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    },
+    {
+      "n": 10,
+      "d": 4,
+      "k": 16,
+      "runs": 127,
+      "event_probability": "1/16384",
+      "cases": 16,
+      "coverage": "selected lower signs"
+    }
+  ],
+  "finite_certificates": [
+    {
+      "n": 12,
+      "K": 11,
+      "M_n_at_least": 12,
+      "a": "5/2042",
+      "chamber_bound": "23358828937337110677869601264659654653105993851276288",
+      "left_bits": 48969,
+      "right_bits": 49134,
+      "integer_inequality": "S^(2K)*(A+B)^(N-2)*B^(K-1) < (2B)^(N-2)*A^(K-1)",
+      "left_sha256": "932526b3195742675e0ebb8d04dbfa4a99575b895d0a3bc3452eadd49cda6f45",
+      "right_sha256": "c066117b4c4e5eb1bb0dc3d6d35f5297e383cc2c814731755637ac365170e469"
+    },
+    {
+      "n": 16,
+      "K": 98,
+      "M_n_at_least": 99,
+      "a": "97/65437",
+      "chamber_bound": "150722924528421928854051817376538138885064401298826246417682193317580803661690314590544357011308544",
+      "left_bits": 1114017,
+      "right_bits": 1114576,
+      "integer_inequality": "S^(2K)*(A+B)^(N-2)*B^(K-1) < (2B)^(N-2)*A^(K-1)",
+      "left_sha256": "fb190159cafa89f941fbff9665f4903936959c231d0f7f0b8c8e1c04ae4492f9",
+      "right_sha256": "4f20b89b0f97284263ec69807aa6409ab53232c7952054c534f9d5e5b82b94df"
+    }
+  ],
+  "elapsed_seconds": 5.093,
+  "violations": 0
+}
