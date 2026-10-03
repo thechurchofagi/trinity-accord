@@ -1,0 +1,623 @@
+{
+  "status": "VERIFIED_ALL_DIMENSION_LOCAL_CORNER_TRANSLATION_PACKING_OBSTRUCTION",
+  "analytic_statement": "For every n>=3, actual cardinality-then-numeric weights w_j=2^n+2^j admit ALL local nonadjacent-two-coordinate translation witnesses using ANY3of4corners, but their best possible fractional turn-position packing is at most n-1. Mass1/2 at first AND last of each intermediate cardinality layer is a feasible exact dual. Thus the ENTIRE face-local corner-witness subfamily cannot prove positive density.",
+  "scope": "Excludes all4triples of everylocal two-coordinate face across all h,k,bases, not arbitrary ordered triples spanning different such faces, within-layer witnesses, existing raw cancellation/cycle certificates, or the main M_n target. Audits n3..14 stress the analytic all-n dual.",
+  "proof": "If the triple contains its lowest corner, its interval contains the first-of-layer(r+1) position and its translated interval contains first-of-layer(r+2). This holds even when the last corner has cardinalityr+2; if it has cardinalityr+1 it cannot be first in that layer because the middle vertex precedes it. If the triple omits its lowest corner, its first/middle vertices share cardinalityr+1, so its interval contains the LAST position of that layer; the translated interval contains LASToflayerr+2. Since r<=n-3 both points are valid. Each union contains two distinct dual points. Half mass at2(n-1)points totalsn-1 and covers all4corner triples. Summing primal capacities against this exact dual bounds every fractional packing.",
+  "actual_dimension_audits": [
+    {
+      "n": 3,
+      "actual_positive_generic_weights": [
+        9,
+        10,
+        12
+      ],
+      "all_local_corner_witnesses": 4,
+      "dual_turn_positions": [
+        1,
+        3,
+        4,
+        6
+      ],
+      "each_dual_mass": [
+        1,
+        2
+      ],
+      "exact_fractional_packing_upper_bound": [
+        2,
+        1
+      ],
+      "layer_coverage_counts": [
+        4,
+        4
+      ],
+      "actual_Gray_runs": 4,
+      "order_sha256": "56936abf6634e02ea069fc3c4345f49254c76bde78569ab6f276f0bc6e723b2f"
+    },
+    {
+      "n": 4,
+      "actual_positive_generic_weights": [
+        17,
+        18,
+        20,
+        24
+      ],
+      "all_local_corner_witnesses": 24,
+      "dual_turn_positions": [
+        1,
+        4,
+        5,
+        10,
+        11,
+        14
+      ],
+      "each_dual_mass": [
+        1,
+        2
+      ],
+      "exact_fractional_packing_upper_bound": [
+        3,
+        1
+      ],
+      "layer_coverage_counts": [
+        12,
+        24,
+        12
+      ],
+      "actual_Gray_runs": 8,
+      "order_sha256": "cfbe8b907745c5b0753941c232b0b91957fc7dbd6e15d9a3606ab88c837aebd6"
+    },
+    {
+      "n": 5,
+      "actual_positive_generic_weights": [
+        33,
+        34,
+        36,
+        40,
+        48
+      ],
+      "all_local_corner_witnesses": 96,
+      "dual_turn_positions": [
+        1,
+        5,
+        6,
+        15,
+        16,
+        25,
+        26,
+        30
+      ],
+      "each_dual_mass": [
+        1,
+        2
+      ],
+      "exact_fractional_packing_upper_bound": [
+        4,
+        1
+      ],
+      "layer_coverage_counts": [
+        24,
+        72,
+        72,
+        24
+      ],
+      "actual_Gray_runs": 16,
+      "order_sha256": "3719b312155fe91d091cfc5f7462e77ef0e3d6434772a08c0f3ceb967ac4f337"
+    },
+    {
+      "n": 6,
+      "actual_positive_generic_weights": [
+        65,
+        66,
+        68,
+        72,
+        80,
+        96
+      ],
+      "all_local_corner_witnesses": 320,
+      "dual_turn_positions": [
+        1,
+        6,
+        7,
+        21,
+        22,
+        41,
+        42,
+        56,
+        57,
+        62
+      ],
+      "each_dual_mass": [
+        1,
+        2
+      ],
+      "exact_fractional_packing_upper_bound": [
+        5,
+        1
+      ],
+      "layer_coverage_counts": [
+        40,
+        160,
+        240,
+        160,
+        40
+      ],
+      "actual_Gray_runs": 32,
+      "order_sha256": "54e47ca9cfbc24b5d322b66be7772e7b405f23cdf58ee2ba8ccf84f17e6ff12d"
+    },
+    {
+      "n": 7,
+      "actual_positive_generic_weights": [
+        129,
+        130,
+        132,
+        136,
+        144,
+        160,
+        192
+      ],
+      "all_local_corner_witnesses": 960,
+      "dual_turn_positions": [
+        1,
+        7,
+        8,
+        28,
+        29,
+        63,
+        64,
+        98,
+        99,
+        119,
+        120,
+        126
+      ],
+      "each_dual_mass": [
+        1,
+        2
+      ],
+      "exact_fractional_packing_upper_bound": [
+        6,
+        1
+      ],
+      "layer_coverage_counts": [
+        60,
+        300,
+        600,
+        600,
+        300,
+        60
+      ],
+      "actual_Gray_runs": 64,
+      "order_sha256": "ae1ba25463362fecfb15f3e04b8efdc4a2f668ae3f6b41a0b08fbc98891b9c9e"
+    },
+    {
+      "n": 8,
+      "actual_positive_generic_weights": [
+        257,
+        258,
+        260,
+        264,
+        272,
+        288,
+        320,
+        384
+      ],
+      "all_local_corner_witnesses": 2688,
+      "dual_turn_positions": [
+        1,
+        8,
+        9,
+        36,
+        37,
+        92,
+        93,
+        162,
+        163,
+        218,
+        219,
+        246,
+        247,
+        254
+      ],
+      "each_dual_mass": [
+        1,
+        2
+      ],
+      "exact_fractional_packing_upper_bound": [
+        7,
+        1
+      ],
+      "layer_coverage_counts": [
+        84,
+        504,
+        1260,
+        1680,
+        1260,
+        504,
+        84
+      ],
+      "actual_Gray_runs": 128,
+      "order_sha256": "ea7cf29de32d2a13546ba9d160ed8287b324829731135444b6158c3330c89b84"
+    },
+    {
+      "n": 9,
+      "actual_positive_generic_weights": [
+        513,
+        514,
+        516,
+        520,
+        528,
+        544,
+        576,
+        640,
+        768
+      ],
+      "all_local_corner_witnesses": 7168,
+      "dual_turn_positions": [
+        1,
+        9,
+        10,
+        45,
+        46,
+        129,
+        130,
+        255,
+        256,
+        381,
+        382,
+        465,
+        466,
+        501,
+        502,
+        510
+      ],
+      "each_dual_mass": [
+        1,
+        2
+      ],
+      "exact_fractional_packing_upper_bound": [
+        8,
+        1
+      ],
+      "layer_coverage_counts": [
+        112,
+        784,
+        2352,
+        3920,
+        3920,
+        2352,
+        784,
+        112
+      ],
+      "actual_Gray_runs": 256,
+      "order_sha256": "e1d16f793b5ec6be4d593324c9607ac4908c51d8aa779a8ec5d007b355a2397c"
+    },
+    {
+      "n": 10,
+      "actual_positive_generic_weights": [
+        1025,
+        1026,
+        1028,
+        1032,
+        1040,
+        1056,
+        1088,
+        1152,
+        1280,
+        1536
+      ],
+      "all_local_corner_witnesses": 18432,
+      "dual_turn_positions": [
+        1,
+        10,
+        11,
+        55,
+        56,
+        175,
+        176,
+        385,
+        386,
+        637,
+        638,
+        847,
+        848,
+        967,
+        968,
+        1012,
+        1013,
+        1022
+      ],
+      "each_dual_mass": [
+        1,
+        2
+      ],
+      "exact_fractional_packing_upper_bound": [
+        9,
+        1
+      ],
+      "layer_coverage_counts": [
+        144,
+        1152,
+        4032,
+        8064,
+        10080,
+        8064,
+        4032,
+        1152,
+        144
+      ],
+      "actual_Gray_runs": 512,
+      "order_sha256": "eb1bc5fbdfba2c01d3ef29fd211076f9b80f047d159cd2aba3a50d4ab43ca471"
+    },
+    {
+      "n": 11,
+      "actual_positive_generic_weights": [
+        2049,
+        2050,
+        2052,
+        2056,
+        2064,
+        2080,
+        2112,
+        2176,
+        2304,
+        2560,
+        3072
+      ],
+      "all_local_corner_witnesses": 46080,
+      "dual_turn_positions": [
+        1,
+        11,
+        12,
+        66,
+        67,
+        231,
+        232,
+        561,
+        562,
+        1023,
+        1024,
+        1485,
+        1486,
+        1815,
+        1816,
+        1980,
+        1981,
+        2035,
+        2036,
+        2046
+      ],
+      "each_dual_mass": [
+        1,
+        2
+      ],
+      "exact_fractional_packing_upper_bound": [
+        10,
+        1
+      ],
+      "layer_coverage_counts": [
+        180,
+        1620,
+        6480,
+        15120,
+        22680,
+        22680,
+        15120,
+        6480,
+        1620,
+        180
+      ],
+      "actual_Gray_runs": 1024,
+      "order_sha256": "79d6c1c3042b66995d841fb0533f95c59a8b48bff9e8453cd74b95904ac2e542"
+    },
+    {
+      "n": 12,
+      "actual_positive_generic_weights": [
+        4097,
+        4098,
+        4100,
+        4104,
+        4112,
+        4128,
+        4160,
+        4224,
+        4352,
+        4608,
+        5120,
+        6144
+      ],
+      "all_local_corner_witnesses": 112640,
+      "dual_turn_positions": [
+        1,
+        12,
+        13,
+        78,
+        79,
+        298,
+        299,
+        793,
+        794,
+        1585,
+        1586,
+        2509,
+        2510,
+        3301,
+        3302,
+        3796,
+        3797,
+        4016,
+        4017,
+        4082,
+        4083,
+        4094
+      ],
+      "each_dual_mass": [
+        1,
+        2
+      ],
+      "exact_fractional_packing_upper_bound": [
+        11,
+        1
+      ],
+      "layer_coverage_counts": [
+        220,
+        2200,
+        9900,
+        26400,
+        46200,
+        55440,
+        46200,
+        26400,
+        9900,
+        2200,
+        220
+      ],
+      "actual_Gray_runs": 2048,
+      "order_sha256": "8dabca9fb608c2c0e0ed47ead0362b5b022764a9b731f6caa66c06ad98611342"
+    },
+    {
+      "n": 13,
+      "actual_positive_generic_weights": [
+        8193,
+        8194,
+        8196,
+        8200,
+        8208,
+        8224,
+        8256,
+        8320,
+        8448,
+        8704,
+        9216,
+        10240,
+        12288
+      ],
+      "all_local_corner_witnesses": 270336,
+      "dual_turn_positions": [
+        1,
+        13,
+        14,
+        91,
+        92,
+        377,
+        378,
+        1092,
+        1093,
+        2379,
+        2380,
+        4095,
+        4096,
+        5811,
+        5812,
+        7098,
+        7099,
+        7813,
+        7814,
+        8099,
+        8100,
+        8177,
+        8178,
+        8190
+      ],
+      "each_dual_mass": [
+        1,
+        2
+      ],
+      "exact_fractional_packing_upper_bound": [
+        12,
+        1
+      ],
+      "layer_coverage_counts": [
+        264,
+        2904,
+        14520,
+        43560,
+        87120,
+        121968,
+        121968,
+        87120,
+        43560,
+        14520,
+        2904,
+        264
+      ],
+      "actual_Gray_runs": 4096,
+      "order_sha256": "50484df74207b3cc448a5d4ea42feb23378b7c02da14a56177b8e6666de971a3"
+    },
+    {
+      "n": 14,
+      "actual_positive_generic_weights": [
+        16385,
+        16386,
+        16388,
+        16392,
+        16400,
+        16416,
+        16448,
+        16512,
+        16640,
+        16896,
+        17408,
+        18432,
+        20480,
+        24576
+      ],
+      "all_local_corner_witnesses": 638976,
+      "dual_turn_positions": [
+        1,
+        14,
+        15,
+        105,
+        106,
+        469,
+        470,
+        1470,
+        1471,
+        3472,
+        3473,
+        6475,
+        6476,
+        9907,
+        9908,
+        12910,
+        12911,
+        14912,
+        14913,
+        15913,
+        15914,
+        16277,
+        16278,
+        16368,
+        16369,
+        16382
+      ],
+      "each_dual_mass": [
+        1,
+        2
+      ],
+      "exact_fractional_packing_upper_bound": [
+        13,
+        1
+      ],
+      "layer_coverage_counts": [
+        312,
+        3744,
+        20592,
+        68640,
+        154440,
+        247104,
+        288288,
+        247104,
+        154440,
+        68640,
+        20592,
+        3744,
+        312
+      ],
+      "actual_Gray_runs": 8192,
+      "order_sha256": "9ef636a4cae8abd075dfb969e0bb30ad5345fa0cad1da9c30ce63f06062b76ce"
+    }
+  ],
+  "violations": 0,
+  "seconds": 9.961296706998837,
+  "audit_sha256": "540eb00f625d5a0c9d7633fe8499904d7034848605afd48d2ab21c45643ead3c"
+}

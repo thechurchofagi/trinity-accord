@@ -1,0 +1,3254 @@
+{
+  "status": "VERIFIED_ALL_DIMENSION_CARDINALITY_SUBLAYER_TRANSLATION_PACKING",
+  "analytic_statement": "For any n>=5, choose arbitrary lowest-five secondary b with every cardinality layer generic and b4 extreme among b1,b2,b4. All outer secondary subset-score gaps must exceed sum absolute core secondary coefficients. Let B>2sum|b| and actual positive generic weights w_j=B+b_j. Every paired rank has R>=1+2^(n-5). Each five-face supplies the ordered equal-cardinality exchange triple from(3,5,17), and its toggle8 translate; full-turn supports lie inside two disjoint cardinality sublayers of that face. They are disjoint across ALL faces.",
+  "scope": "A genuine all-dimensional restricted scan CLASS, with arbitrary permitted core secondary and signed/permuted outer secondary. NOT an unrestricted RLC or M_n lower bound. No finite core minimum, ancestor optimizer or LP is used. Existing stronger numerical-cardinality quarter theorem is credited, not reclaimed.",
+  "proof": "The two leading changed bits are2,4 because b4 is extreme. Common bit3 is zero, so toggle8 reverses exactly one paired comparison. Original points all have core cardinality2, translates core cardinality3. Cardinality primary separates layers; outer secondary gaps greater than the complete core range make different faces score-disjoint WITHIN each layer. Thus each interval support contains vertices of just its own face and its own layer. All unions for different face prefixes are disjoint. One forced turn perface gives the lower bound.",
+  "actual_scan_cases": 72,
+  "direct_rank_audits": 576,
+  "seed": 202610031455,
+  "rows": [
+    {
+      "n": 5,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "primary_B": 63,
+      "weights": [
+        64,
+        65,
+        67,
+        71,
+        79
+      ],
+      "certified_ALL_paired_mask_lower_bound": 2,
+      "disjoint_witnesses": 1,
+      "occupied_turn_positions": 10,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "d140c08785fe9ceb366858164da4d41bba12172ed7787fe5fc3a37d6f4645ace",
+      "rank_audit_runs": [
+        16,
+        15,
+        20,
+        19,
+        15,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        75,
+        -61,
+        -80,
+        20,
+        33
+      ],
+      "primary_B": 539,
+      "weights": [
+        614,
+        478,
+        459,
+        559,
+        572
+      ],
+      "certified_ALL_paired_mask_lower_bound": 2,
+      "disjoint_witnesses": 1,
+      "occupied_turn_positions": 6,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "0bb401a089a54a027bbea9e82f096c0b4f05dfa9b1547cbd40634c2a1d2be830",
+      "rank_audit_runs": [
+        24,
+        24,
+        24,
+        24,
+        24,
+        25,
+        24,
+        24
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        -74,
+        81,
+        85,
+        41,
+        9
+      ],
+      "primary_B": 581,
+      "weights": [
+        507,
+        662,
+        666,
+        622,
+        590
+      ],
+      "certified_ALL_paired_mask_lower_bound": 2,
+      "disjoint_witnesses": 1,
+      "occupied_turn_positions": 5,
+      "core_exchange_triple": [
+        17,
+        3,
+        5
+      ],
+      "support_sha256": "3f9793f069af2b64e2e2dd2db4f95b4f92bffb8a4d7baf5c479978462c9ee259",
+      "rank_audit_runs": [
+        22,
+        19,
+        22,
+        17,
+        13,
+        21,
+        21,
+        18
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        -95,
+        -4,
+        -26,
+        71,
+        36
+      ],
+      "primary_B": 465,
+      "weights": [
+        370,
+        461,
+        439,
+        536,
+        501
+      ],
+      "certified_ALL_paired_mask_lower_bound": 2,
+      "disjoint_witnesses": 1,
+      "occupied_turn_positions": 3,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "efbf1fd6320c6a6999e3df618b25719515702c719c8217a1b361a183a4afa6cc",
+      "rank_audit_runs": [
+        19,
+        21,
+        20,
+        19,
+        21,
+        18,
+        18,
+        18
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        -86,
+        -43,
+        -15,
+        21,
+        30
+      ],
+      "primary_B": 391,
+      "weights": [
+        305,
+        348,
+        376,
+        412,
+        421
+      ],
+      "certified_ALL_paired_mask_lower_bound": 2,
+      "disjoint_witnesses": 1,
+      "occupied_turn_positions": 7,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "71e4d6cd52eb8bf16b6c978118b29d529b2647a89f91b9cba96135f84a90e7ae",
+      "rank_audit_runs": [
+        22,
+        25,
+        24,
+        25,
+        24,
+        21,
+        21,
+        21
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        -91,
+        64,
+        81,
+        70,
+        19
+      ],
+      "primary_B": 651,
+      "weights": [
+        560,
+        715,
+        732,
+        721,
+        670
+      ],
+      "certified_ALL_paired_mask_lower_bound": 2,
+      "disjoint_witnesses": 1,
+      "occupied_turn_positions": 5,
+      "core_exchange_triple": [
+        17,
+        3,
+        5
+      ],
+      "support_sha256": "ae7524baee12206bba8e77c66989446b170be6e763484b30fe152f68fe60b519",
+      "rank_audit_runs": [
+        22,
+        23,
+        22,
+        22,
+        22,
+        23,
+        22,
+        23
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        40,
+        75,
+        52,
+        32,
+        41
+      ],
+      "primary_B": 481,
+      "weights": [
+        521,
+        556,
+        533,
+        513,
+        522
+      ],
+      "certified_ALL_paired_mask_lower_bound": 2,
+      "disjoint_witnesses": 1,
+      "occupied_turn_positions": 7,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "97d904bc324711f93bb93781f62d4eb2c1113ea88c7ae419b275ffd59f88a1ab",
+      "rank_audit_runs": [
+        20,
+        22,
+        22,
+        22,
+        20,
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        -41,
+        -44,
+        -95,
+        87,
+        -28
+      ],
+      "primary_B": 591,
+      "weights": [
+        550,
+        547,
+        496,
+        678,
+        563
+      ],
+      "certified_ALL_paired_mask_lower_bound": 2,
+      "disjoint_witnesses": 1,
+      "occupied_turn_positions": 6,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "0d6b1858652b30d8219d0b9061503e69827627fc721e1bfe3b43b0812cbbcfd7",
+      "rank_audit_runs": [
+        19,
+        20,
+        19,
+        20,
+        23,
+        22,
+        19,
+        24
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32
+      ],
+      "primary_B": 127,
+      "weights": [
+        128,
+        129,
+        131,
+        135,
+        143,
+        159
+      ],
+      "certified_ALL_paired_mask_lower_bound": 3,
+      "disjoint_witnesses": 2,
+      "occupied_turn_positions": 20,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "77ec36f7a19bd5f082c5571a1f87595879aa0cfae28090d99301618bc81e9844",
+      "rank_audit_runs": [
+        32,
+        31,
+        33,
+        30,
+        34,
+        38,
+        31,
+        29
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        48,
+        -98,
+        -92,
+        -56,
+        -22,
+        -317
+      ],
+      "primary_B": 1267,
+      "weights": [
+        1315,
+        1169,
+        1175,
+        1211,
+        1245,
+        950
+      ],
+      "certified_ALL_paired_mask_lower_bound": 3,
+      "disjoint_witnesses": 2,
+      "occupied_turn_positions": 10,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "5fea786b0aef6fd3a72fa83d9d58d7337163ae59fd26980b062e206a40fc6c46",
+      "rank_audit_runs": [
+        29,
+        35,
+        33,
+        37,
+        43,
+        29,
+        35,
+        37
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        83,
+        73,
+        53,
+        11,
+        34,
+        255
+      ],
+      "primary_B": 1019,
+      "weights": [
+        1102,
+        1092,
+        1072,
+        1030,
+        1053,
+        1274
+      ],
+      "certified_ALL_paired_mask_lower_bound": 3,
+      "disjoint_witnesses": 2,
+      "occupied_turn_positions": 10,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "bef7d90ef2841345e04d1cad13bbc5dea4511a66170217a2b6219e60539f3b6e",
+      "rank_audit_runs": [
+        41,
+        39,
+        44,
+        41,
+        40,
+        44,
+        43,
+        39
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        -14,
+        0,
+        -81,
+        -88,
+        -92,
+        -276
+      ],
+      "primary_B": 1103,
+      "weights": [
+        1089,
+        1103,
+        1022,
+        1015,
+        1011,
+        827
+      ],
+      "certified_ALL_paired_mask_lower_bound": 3,
+      "disjoint_witnesses": 2,
+      "occupied_turn_positions": 22,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "f86434f2676ae8eff6ad2cff12d7753a4fcc606e63180f06a9d88876c06adff9",
+      "rank_audit_runs": [
+        41,
+        37,
+        43,
+        41,
+        41,
+        45,
+        37,
+        41
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        -9,
+        -59,
+        -98,
+        56,
+        -50,
+        -273
+      ],
+      "primary_B": 1091,
+      "weights": [
+        1082,
+        1032,
+        993,
+        1147,
+        1041,
+        818
+      ],
+      "certified_ALL_paired_mask_lower_bound": 3,
+      "disjoint_witnesses": 2,
+      "occupied_turn_positions": 4,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "edc48b2c0b7e62e187b6ce4b50843079e0fc7c37c0c5a03df5e73ffe4955e16f",
+      "rank_audit_runs": [
+        39,
+        41,
+        43,
+        37,
+        39,
+        41,
+        37,
+        37
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        -18,
+        37,
+        89,
+        -63,
+        -59,
+        267
+      ],
+      "primary_B": 1067,
+      "weights": [
+        1049,
+        1104,
+        1156,
+        1004,
+        1008,
+        1334
+      ],
+      "certified_ALL_paired_mask_lower_bound": 3,
+      "disjoint_witnesses": 2,
+      "occupied_turn_positions": 18,
+      "core_exchange_triple": [
+        17,
+        3,
+        5
+      ],
+      "support_sha256": "eb8c3e29aa5843a4a4805823c99234290f4309c89e4d5f50c2384bad0ef2d48b",
+      "rank_audit_runs": [
+        46,
+        44,
+        44,
+        47,
+        45,
+        44,
+        45,
+        46
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        -13,
+        -31,
+        79,
+        -48,
+        -61,
+        233
+      ],
+      "primary_B": 931,
+      "weights": [
+        918,
+        900,
+        1010,
+        883,
+        870,
+        1164
+      ],
+      "certified_ALL_paired_mask_lower_bound": 3,
+      "disjoint_witnesses": 2,
+      "occupied_turn_positions": 22,
+      "core_exchange_triple": [
+        17,
+        3,
+        5
+      ],
+      "support_sha256": "50fcea600d05397eab546bd0cec2486bf81bea038957bc475d9c8f902013c09c",
+      "rank_audit_runs": [
+        38,
+        38,
+        40,
+        38,
+        38,
+        38,
+        40,
+        40
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        93,
+        -6,
+        -37,
+        -38,
+        -99,
+        274
+      ],
+      "primary_B": 1095,
+      "weights": [
+        1188,
+        1089,
+        1058,
+        1057,
+        996,
+        1369
+      ],
+      "certified_ALL_paired_mask_lower_bound": 3,
+      "disjoint_witnesses": 2,
+      "occupied_turn_positions": 10,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "e4b8db118931af1cc7c50c92036d4a2ce5b9148936c403ccaf5e4a61e71b8984",
+      "rank_audit_runs": [
+        36,
+        34,
+        36,
+        36,
+        32,
+        40,
+        34,
+        34
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        -32,
+        -64
+      ],
+      "primary_B": 255,
+      "weights": [
+        256,
+        257,
+        259,
+        263,
+        271,
+        223,
+        191
+      ],
+      "certified_ALL_paired_mask_lower_bound": 5,
+      "disjoint_witnesses": 4,
+      "occupied_turn_positions": 40,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "85b6a3f5f1b509f8ad9e6bbb4c6dba28ea21d3026000e0cd7c813a5206288c4e",
+      "rank_audit_runs": [
+        71,
+        67,
+        63,
+        69,
+        63,
+        65,
+        67,
+        63
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        38,
+        94,
+        17,
+        29,
+        -24,
+        406,
+        -203
+      ],
+      "primary_B": 1623,
+      "weights": [
+        1661,
+        1717,
+        1640,
+        1652,
+        1599,
+        2029,
+        1420
+      ],
+      "certified_ALL_paired_mask_lower_bound": 5,
+      "disjoint_witnesses": 4,
+      "occupied_turn_positions": 48,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "e05e3a69c839bdee8577e8753b59834dd5f4d79e08eca2275916af0e40cde97a",
+      "rank_audit_runs": [
+        89,
+        85,
+        85,
+        83,
+        83,
+        85,
+        83,
+        89
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        -66,
+        56,
+        -8,
+        12,
+        68,
+        -211,
+        422
+      ],
+      "primary_B": 1687,
+      "weights": [
+        1621,
+        1743,
+        1679,
+        1699,
+        1755,
+        1476,
+        2109
+      ],
+      "certified_ALL_paired_mask_lower_bound": 5,
+      "disjoint_witnesses": 4,
+      "occupied_turn_positions": 20,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "9fcde8c0e01e222080debb99de4fca92691df08425e93afb9a1a51cf8e84bd05",
+      "rank_audit_runs": [
+        86,
+        86,
+        84,
+        92,
+        86,
+        84,
+        84,
+        82
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        -13,
+        -64,
+        -15,
+        42,
+        84,
+        219,
+        438
+      ],
+      "primary_B": 1751,
+      "weights": [
+        1738,
+        1687,
+        1736,
+        1793,
+        1835,
+        1970,
+        2189
+      ],
+      "certified_ALL_paired_mask_lower_bound": 5,
+      "disjoint_witnesses": 4,
+      "occupied_turn_positions": 48,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "9ef67b2cb7aed0c8eccf96ad67d477983140160f70fc15283b3a61b3e036d454",
+      "rank_audit_runs": [
+        73,
+        74,
+        78,
+        74,
+        72,
+        80,
+        75,
+        75
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        86,
+        -22,
+        -6,
+        100,
+        26,
+        482,
+        241
+      ],
+      "primary_B": 1927,
+      "weights": [
+        2013,
+        1905,
+        1921,
+        2027,
+        1953,
+        2409,
+        2168
+      ],
+      "certified_ALL_paired_mask_lower_bound": 5,
+      "disjoint_witnesses": 4,
+      "occupied_turn_positions": 16,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "1b0cff0f037670b8c1c5b9d02c3d019967ea12986d7b369590b69d733770f4f5",
+      "rank_audit_runs": [
+        79,
+        74,
+        80,
+        83,
+        73,
+        79,
+        79,
+        77
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        -12,
+        -1,
+        89,
+        26,
+        -79,
+        416,
+        208
+      ],
+      "primary_B": 1663,
+      "weights": [
+        1651,
+        1662,
+        1752,
+        1689,
+        1584,
+        2079,
+        1871
+      ],
+      "certified_ALL_paired_mask_lower_bound": 5,
+      "disjoint_witnesses": 4,
+      "occupied_turn_positions": 48,
+      "core_exchange_triple": [
+        17,
+        3,
+        5
+      ],
+      "support_sha256": "ca9356140cc0750df033b66a9d7b5debfa89b4f66921342690414d2397c862d0",
+      "rank_audit_runs": [
+        81,
+        74,
+        74,
+        73,
+        85,
+        78,
+        82,
+        87
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        -90,
+        -74,
+        -48,
+        -73,
+        -4,
+        -290,
+        580
+      ],
+      "primary_B": 2319,
+      "weights": [
+        2229,
+        2245,
+        2271,
+        2246,
+        2315,
+        2029,
+        2899
+      ],
+      "certified_ALL_paired_mask_lower_bound": 5,
+      "disjoint_witnesses": 4,
+      "occupied_turn_positions": 36,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "9e29a303b641b47f56cffb167318ca96f8bff20b2ae9d1404fdd812421fe5130",
+      "rank_audit_runs": [
+        74,
+        70,
+        76,
+        72,
+        72,
+        70,
+        68,
+        80
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        -37,
+        14,
+        81,
+        3,
+        -63,
+        398,
+        -199
+      ],
+      "primary_B": 1591,
+      "weights": [
+        1554,
+        1605,
+        1672,
+        1594,
+        1528,
+        1989,
+        1392
+      ],
+      "certified_ALL_paired_mask_lower_bound": 5,
+      "disjoint_witnesses": 4,
+      "occupied_turn_positions": 48,
+      "core_exchange_triple": [
+        17,
+        3,
+        5
+      ],
+      "support_sha256": "fdecaf47b137c7ce229046933d416b7810c1479dd89fd1539bebeae6d6200ebe",
+      "rank_audit_runs": [
+        87,
+        89,
+        87,
+        87,
+        83,
+        85,
+        83,
+        89
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        -64,
+        -32,
+        -128
+      ],
+      "primary_B": 511,
+      "weights": [
+        512,
+        513,
+        515,
+        519,
+        527,
+        447,
+        479,
+        383
+      ],
+      "certified_ALL_paired_mask_lower_bound": 9,
+      "disjoint_witnesses": 8,
+      "occupied_turn_positions": 80,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "50455d84eab65418fe4f1e053265d64d346d7e6997be2d5535eec01523f2a0f5",
+      "rank_audit_runs": [
+        123,
+        129,
+        131,
+        125,
+        129,
+        125,
+        125,
+        125
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        -19,
+        -95,
+        -96,
+        13,
+        -4,
+        -228,
+        912,
+        456
+      ],
+      "primary_B": 3647,
+      "weights": [
+        3628,
+        3552,
+        3551,
+        3660,
+        3643,
+        3419,
+        4559,
+        4103
+      ],
+      "certified_ALL_paired_mask_lower_bound": 9,
+      "disjoint_witnesses": 8,
+      "occupied_turn_positions": 64,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "59eee28bb2218771035fc5a679df47390924ad559ec02823264b5df73d6cc904",
+      "rank_audit_runs": [
+        157,
+        156,
+        159,
+        154,
+        154,
+        155,
+        154,
+        151
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        7,
+        -69,
+        46,
+        -47,
+        -73,
+        -972,
+        243,
+        486
+      ],
+      "primary_B": 3887,
+      "weights": [
+        3894,
+        3818,
+        3933,
+        3840,
+        3814,
+        2915,
+        4130,
+        4373
+      ],
+      "certified_ALL_paired_mask_lower_bound": 9,
+      "disjoint_witnesses": 8,
+      "occupied_turn_positions": 88,
+      "core_exchange_triple": [
+        17,
+        3,
+        5
+      ],
+      "support_sha256": "834419ebd9093730f173c0355ce028337f255f4fc1afa407a716ff9b1548b92b",
+      "rank_audit_runs": [
+        165,
+        168,
+        177,
+        179,
+        173,
+        167,
+        170,
+        176
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        95,
+        -25,
+        84,
+        -64,
+        -35,
+        304,
+        -608,
+        -1216
+      ],
+      "primary_B": 4863,
+      "weights": [
+        4958,
+        4838,
+        4947,
+        4799,
+        4828,
+        5167,
+        4255,
+        3647
+      ],
+      "certified_ALL_paired_mask_lower_bound": 9,
+      "disjoint_witnesses": 8,
+      "occupied_turn_positions": 32,
+      "core_exchange_triple": [
+        17,
+        3,
+        5
+      ],
+      "support_sha256": "bbca23880fbf314ef4876d09b5dafa8462349158b22e38780ff13125a8683b0d",
+      "rank_audit_runs": [
+        179,
+        185,
+        189,
+        183,
+        181,
+        185,
+        189,
+        187
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        43,
+        -37,
+        -5,
+        62,
+        -60,
+        -208,
+        416,
+        -832
+      ],
+      "primary_B": 3327,
+      "weights": [
+        3370,
+        3290,
+        3322,
+        3389,
+        3267,
+        3119,
+        3743,
+        2495
+      ],
+      "certified_ALL_paired_mask_lower_bound": 9,
+      "disjoint_witnesses": 8,
+      "occupied_turn_positions": 32,
+      "core_exchange_triple": [
+        17,
+        3,
+        5
+      ],
+      "support_sha256": "48ef4468718d8bd03dac3c8d7fc5e297e2838ec737f0d091a5affe7d40be96a0",
+      "rank_audit_runs": [
+        165,
+        159,
+        161,
+        161,
+        165,
+        161,
+        161,
+        161
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        -61,
+        -99,
+        19,
+        44,
+        63,
+        574,
+        287,
+        -1148
+      ],
+      "primary_B": 4591,
+      "weights": [
+        4530,
+        4492,
+        4610,
+        4635,
+        4654,
+        5165,
+        4878,
+        3443
+      ],
+      "certified_ALL_paired_mask_lower_bound": 9,
+      "disjoint_witnesses": 8,
+      "occupied_turn_positions": 88,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "d29416738de40dc4e8eb5aeae10c5d61e9f1e0fdf80dc75edd072efd44bbff53",
+      "rank_audit_runs": [
+        161,
+        181,
+        177,
+        175,
+        169,
+        169,
+        171,
+        171
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        44,
+        -38,
+        64,
+        -27,
+        -95,
+        269,
+        1076,
+        -538
+      ],
+      "primary_B": 4303,
+      "weights": [
+        4347,
+        4265,
+        4367,
+        4276,
+        4208,
+        4572,
+        5379,
+        3765
+      ],
+      "certified_ALL_paired_mask_lower_bound": 9,
+      "disjoint_witnesses": 8,
+      "occupied_turn_positions": 88,
+      "core_exchange_triple": [
+        17,
+        3,
+        5
+      ],
+      "support_sha256": "d11a1ce969e5589907a49c1483002f547b7ce9cb4396c4b2f672a32ac81b2a6d",
+      "rank_audit_runs": [
+        175,
+        171,
+        165,
+        173,
+        169,
+        169,
+        173,
+        171
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        -66,
+        34,
+        -36,
+        -31,
+        -56,
+        896,
+        -224,
+        448
+      ],
+      "primary_B": 3583,
+      "weights": [
+        3517,
+        3617,
+        3547,
+        3552,
+        3527,
+        4479,
+        3359,
+        4031
+      ],
+      "certified_ALL_paired_mask_lower_bound": 9,
+      "disjoint_witnesses": 8,
+      "occupied_turn_positions": 72,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "22bef33e7a7ff98255a14acc8a5e247c7b94379c93b20b6d8b86518a9f04edad",
+      "rank_audit_runs": [
+        156,
+        156,
+        154,
+        156,
+        154,
+        154,
+        156,
+        156
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        -256,
+        -128
+      ],
+      "primary_B": 1023,
+      "weights": [
+        1024,
+        1025,
+        1027,
+        1031,
+        1039,
+        1055,
+        1087,
+        767,
+        895
+      ],
+      "certified_ALL_paired_mask_lower_bound": 17,
+      "disjoint_witnesses": 16,
+      "occupied_turn_positions": 160,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "d5e2cbce7a832c8c7fbeb27063aea32413aceac561f417b771a3c367f585acd6",
+      "rank_audit_runs": [
+        246,
+        262,
+        256,
+        270,
+        258,
+        254,
+        250,
+        270
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        -28,
+        84,
+        28,
+        -38,
+        -13,
+        768,
+        384,
+        1536,
+        -192
+      ],
+      "primary_B": 6143,
+      "weights": [
+        6115,
+        6227,
+        6171,
+        6105,
+        6130,
+        6911,
+        6527,
+        7679,
+        5951
+      ],
+      "certified_ALL_paired_mask_lower_bound": 17,
+      "disjoint_witnesses": 16,
+      "occupied_turn_positions": 112,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "28f81fa496a5f435600eb3cfb87c2d4e48977395b3178624ed73d04dfb54f567",
+      "rank_audit_runs": [
+        315,
+        315,
+        311,
+        309,
+        305,
+        319,
+        317,
+        307
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        -29,
+        -14,
+        -100,
+        59,
+        90,
+        -1172,
+        -586,
+        293,
+        -2344
+      ],
+      "primary_B": 9375,
+      "weights": [
+        9346,
+        9361,
+        9275,
+        9434,
+        9465,
+        8203,
+        8789,
+        9668,
+        7031
+      ],
+      "certified_ALL_paired_mask_lower_bound": 17,
+      "disjoint_witnesses": 16,
+      "occupied_turn_positions": 192,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "0173ef5b512b911d9978415bce8ef3b911b0c8e2b3b7779b8ef776839da77dba",
+      "rank_audit_runs": [
+        291,
+        279,
+        277,
+        283,
+        277,
+        269,
+        277,
+        281
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        -54,
+        -52,
+        -73,
+        35,
+        -82,
+        1188,
+        -594,
+        2376,
+        297
+      ],
+      "primary_B": 9503,
+      "weights": [
+        9449,
+        9451,
+        9430,
+        9538,
+        9421,
+        10691,
+        8909,
+        11879,
+        9800
+      ],
+      "certified_ALL_paired_mask_lower_bound": 17,
+      "disjoint_witnesses": 16,
+      "occupied_turn_positions": 96,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "0323483c9725dc5d239d6d74bb543fb5951b1d32bd8951dff998d2cbf187a5c1",
+      "rank_audit_runs": [
+        283,
+        297,
+        287,
+        274,
+        272,
+        295,
+        296,
+        269
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        48,
+        -54,
+        -77,
+        -74,
+        56,
+        2480,
+        -310,
+        -620,
+        -1240
+      ],
+      "primary_B": 9919,
+      "weights": [
+        9967,
+        9865,
+        9842,
+        9845,
+        9975,
+        12399,
+        9609,
+        9299,
+        8679
+      ],
+      "certified_ALL_paired_mask_lower_bound": 17,
+      "disjoint_witnesses": 16,
+      "occupied_turn_positions": 176,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "93faa34708d4996f48a9a215a4ae95b74c8f6ffe168c879baa5410c8ad26a96d",
+      "rank_audit_runs": [
+        345,
+        339,
+        335,
+        327,
+        343,
+        337,
+        331,
+        337
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        -10,
+        25,
+        7,
+        4,
+        46,
+        372,
+        -93,
+        186,
+        -744
+      ],
+      "primary_B": 2975,
+      "weights": [
+        2965,
+        3000,
+        2982,
+        2979,
+        3021,
+        3347,
+        2882,
+        3161,
+        2231
+      ],
+      "certified_ALL_paired_mask_lower_bound": 17,
+      "disjoint_witnesses": 16,
+      "occupied_turn_positions": 112,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "586e775f3cb5dce996e669f5b5671ba1a8fa487d366af48cbdb262e31fb3036a",
+      "rank_audit_runs": [
+        349,
+        353,
+        351,
+        355,
+        357,
+        355,
+        351,
+        357
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        -29,
+        -59,
+        8,
+        -74,
+        67,
+        -1904,
+        -238,
+        476,
+        -952
+      ],
+      "primary_B": 7615,
+      "weights": [
+        7586,
+        7556,
+        7623,
+        7541,
+        7682,
+        5711,
+        7377,
+        8091,
+        6663
+      ],
+      "certified_ALL_paired_mask_lower_bound": 17,
+      "disjoint_witnesses": 16,
+      "occupied_turn_positions": 144,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "bb2e1a0bdfd18934ed50d42c151bf888f44124e24c1de70de2b0bddbe2c48eb7",
+      "rank_audit_runs": [
+        300,
+        313,
+        277,
+        290,
+        294,
+        273,
+        295,
+        301
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        -36,
+        99,
+        98,
+        -33,
+        -44,
+        -622,
+        -311,
+        -2488,
+        -1244
+      ],
+      "primary_B": 9951,
+      "weights": [
+        9915,
+        10050,
+        10049,
+        9918,
+        9907,
+        9329,
+        9640,
+        7463,
+        8707
+      ],
+      "certified_ALL_paired_mask_lower_bound": 17,
+      "disjoint_witnesses": 16,
+      "occupied_turn_positions": 160,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "8e0200d66b1a666197250b927a8c2111edd221ae18c34f905abd7344b4ed0492",
+      "rank_audit_runs": [
+        290,
+        296,
+        292,
+        298,
+        298,
+        298,
+        296,
+        290
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        128,
+        -512,
+        -32,
+        256,
+        -64
+      ],
+      "primary_B": 2047,
+      "weights": [
+        2048,
+        2049,
+        2051,
+        2055,
+        2063,
+        2175,
+        1535,
+        2015,
+        2303,
+        1983
+      ],
+      "certified_ALL_paired_mask_lower_bound": 33,
+      "disjoint_witnesses": 32,
+      "occupied_turn_positions": 320,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "3f31e45c967be184f78e1d4e9797a086209a87b809088245852ece492cbc5c48",
+      "rank_audit_runs": [
+        497,
+        520,
+        507,
+        516,
+        526,
+        517,
+        515,
+        535
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        19,
+        57,
+        20,
+        46,
+        -43,
+        372,
+        186,
+        -2976,
+        744,
+        1488
+      ],
+      "primary_B": 11903,
+      "weights": [
+        11922,
+        11960,
+        11923,
+        11949,
+        11860,
+        12275,
+        12089,
+        8927,
+        12647,
+        13391
+      ],
+      "certified_ALL_paired_mask_lower_bound": 33,
+      "disjoint_witnesses": 32,
+      "occupied_turn_positions": 384,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "5cbd8dad1c6124d1b78210295db0c08982340ed6f66e5ccd73d8dc7ff7650094",
+      "rank_audit_runs": [
+        588,
+        578,
+        581,
+        589,
+        588,
+        586,
+        585,
+        585
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        40,
+        -16,
+        -86,
+        -2,
+        74,
+        -219,
+        -1752,
+        876,
+        -438,
+        3504
+      ],
+      "primary_B": 14015,
+      "weights": [
+        14055,
+        13999,
+        13929,
+        14013,
+        14089,
+        13796,
+        12263,
+        14891,
+        13577,
+        17519
+      ],
+      "certified_ALL_paired_mask_lower_bound": 33,
+      "disjoint_witnesses": 32,
+      "occupied_turn_positions": 384,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "ebad2ae773b645bfbebf0710ae5a54553c48ddd459ee9cbd78f55ad119876a2b",
+      "rank_audit_runs": [
+        678,
+        674,
+        671,
+        686,
+        673,
+        686,
+        681,
+        670
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        47,
+        -34,
+        -12,
+        -63,
+        81,
+        952,
+        238,
+        -476,
+        -3808,
+        1904
+      ],
+      "primary_B": 15231,
+      "weights": [
+        15278,
+        15197,
+        15219,
+        15168,
+        15312,
+        16183,
+        15469,
+        14755,
+        11423,
+        17135
+      ],
+      "certified_ALL_paired_mask_lower_bound": 33,
+      "disjoint_witnesses": 32,
+      "occupied_turn_positions": 288,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "c2809796524021927789e41120105880e7fb31717fb25e04e2f178b37fd40419",
+      "rank_audit_runs": [
+        712,
+        714,
+        710,
+        708,
+        702,
+        716,
+        718,
+        712
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        -54,
+        -40,
+        7,
+        -19,
+        83,
+        -3264,
+        -408,
+        204,
+        -1632,
+        816
+      ],
+      "primary_B": 13055,
+      "weights": [
+        13001,
+        13015,
+        13062,
+        13036,
+        13138,
+        9791,
+        12647,
+        13259,
+        11423,
+        13871
+      ],
+      "certified_ALL_paired_mask_lower_bound": 33,
+      "disjoint_witnesses": 32,
+      "occupied_turn_positions": 288,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "8f1b6bd2ace3b333401fd2d55871b74e5fd8a5aed47f3fe49a1d92f0c8cca32b",
+      "rank_audit_runs": [
+        582,
+        599,
+        594,
+        579,
+        577,
+        578,
+        600,
+        585
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        -28,
+        54,
+        34,
+        -54,
+        -68,
+        239,
+        -1912,
+        3824,
+        956,
+        -478
+      ],
+      "primary_B": 15295,
+      "weights": [
+        15267,
+        15349,
+        15329,
+        15241,
+        15227,
+        15534,
+        13383,
+        19119,
+        16251,
+        14817
+      ],
+      "certified_ALL_paired_mask_lower_bound": 33,
+      "disjoint_witnesses": 32,
+      "occupied_turn_positions": 352,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "cc3fd7e0ef57193f40cb7f7f3dc712befac4c4bab8ce07b0cf8d283461ad5f09",
+      "rank_audit_runs": [
+        714,
+        716,
+        708,
+        714,
+        707,
+        718,
+        722,
+        712
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        17,
+        -84,
+        -82,
+        38,
+        -44,
+        2128,
+        -266,
+        4256,
+        -532,
+        -1064
+      ],
+      "primary_B": 17023,
+      "weights": [
+        17040,
+        16939,
+        16941,
+        17061,
+        16979,
+        19151,
+        16757,
+        21279,
+        16491,
+        15959
+      ],
+      "certified_ALL_paired_mask_lower_bound": 33,
+      "disjoint_witnesses": 32,
+      "occupied_turn_positions": 128,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "18a0c5e05e27a5b6fa05da536407ba87ff21da371ddf298e2f04c7bc8aba62b0",
+      "rank_audit_runs": [
+        555,
+        545,
+        549,
+        551,
+        543,
+        543,
+        553,
+        539
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        -4,
+        49,
+        -24,
+        78,
+        -44,
+        200,
+        1600,
+        3200,
+        400,
+        800
+      ],
+      "primary_B": 12799,
+      "weights": [
+        12795,
+        12848,
+        12775,
+        12877,
+        12755,
+        12999,
+        14399,
+        15999,
+        13199,
+        13599
+      ],
+      "certified_ALL_paired_mask_lower_bound": 33,
+      "disjoint_witnesses": 32,
+      "occupied_turn_positions": 224,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "ea3615df4c39604c2a6603366c904b51cea4aa795c9c7e468482cfccf7bdd2f9",
+      "rank_audit_runs": [
+        640,
+        648,
+        659,
+        643,
+        640,
+        632,
+        631,
+        644
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        -32,
+        512,
+        -64,
+        1024,
+        -256,
+        -128
+      ],
+      "primary_B": 4095,
+      "weights": [
+        4096,
+        4097,
+        4099,
+        4103,
+        4111,
+        4063,
+        4607,
+        4031,
+        5119,
+        3839,
+        3967
+      ],
+      "certified_ALL_paired_mask_lower_bound": 65,
+      "disjoint_witnesses": 64,
+      "occupied_turn_positions": 640,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "27555693d63038519468568a7c1345de06a1e90a4678f66d035a279d9075b4aa",
+      "rank_audit_runs": [
+        1030,
+        1038,
+        1018,
+        1042,
+        1056,
+        1018,
+        1028,
+        1006
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        -49,
+        -1,
+        45,
+        48,
+        52,
+        784,
+        196,
+        -392,
+        1568,
+        6272,
+        -3136
+      ],
+      "primary_B": 25087,
+      "weights": [
+        25038,
+        25086,
+        25132,
+        25135,
+        25139,
+        25871,
+        25283,
+        24695,
+        26655,
+        31359,
+        21951
+      ],
+      "certified_ALL_paired_mask_lower_bound": 65,
+      "disjoint_witnesses": 64,
+      "occupied_turn_positions": 320,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "996ec57c95e4d5916de92fab32928fa9b505d3803e0076c3eb434f205422b4f1",
+      "rank_audit_runs": [
+        1263,
+        1237,
+        1257,
+        1239,
+        1235,
+        1245,
+        1239,
+        1231
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        -78,
+        -28,
+        -26,
+        75,
+        50,
+        8256,
+        -1032,
+        2064,
+        -258,
+        4128,
+        516
+      ],
+      "primary_B": 33023,
+      "weights": [
+        32945,
+        32995,
+        32997,
+        33098,
+        33073,
+        41279,
+        31991,
+        35087,
+        32765,
+        37151,
+        33539
+      ],
+      "certified_ALL_paired_mask_lower_bound": 65,
+      "disjoint_witnesses": 64,
+      "occupied_turn_positions": 320,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "f6f78936102d66865b00867e7908291d5d808a0dfa51d420bf1caab023811b7d",
+      "rank_audit_runs": [
+        1268,
+        1264,
+        1253,
+        1251,
+        1236,
+        1255,
+        1245,
+        1237
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        19,
+        96,
+        23,
+        68,
+        -65,
+        544,
+        272,
+        2176,
+        1088,
+        -4352,
+        -8704
+      ],
+      "primary_B": 34815,
+      "weights": [
+        34834,
+        34911,
+        34838,
+        34883,
+        34750,
+        35359,
+        35087,
+        36991,
+        35903,
+        30463,
+        26111
+      ],
+      "certified_ALL_paired_mask_lower_bound": 65,
+      "disjoint_witnesses": 64,
+      "occupied_turn_positions": 768,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "70f14763d832851a1effc4bd157df2efa91ddd21ff3da3c85def7190b00dfea9",
+      "rank_audit_runs": [
+        1171,
+        1193,
+        1167,
+        1159,
+        1169,
+        1169,
+        1171,
+        1179
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        11,
+        93,
+        8,
+        44,
+        1,
+        -5056,
+        2528,
+        -316,
+        1264,
+        -632,
+        158
+      ],
+      "primary_B": 20223,
+      "weights": [
+        20234,
+        20316,
+        20231,
+        20267,
+        20224,
+        15167,
+        22751,
+        19907,
+        21487,
+        19591,
+        20381
+      ],
+      "certified_ALL_paired_mask_lower_bound": 65,
+      "disjoint_witnesses": 64,
+      "occupied_turn_positions": 768,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "ea82f7dacd1dd93cd99852210f9344702bd14267278dff9709a9acefef0ed94d",
+      "rank_audit_runs": [
+        1308,
+        1296,
+        1323,
+        1326,
+        1306,
+        1317,
+        1324,
+        1313
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        100,
+        -92,
+        14,
+        -100,
+        39,
+        -1384,
+        2768,
+        -692,
+        346,
+        -11072,
+        -5536
+      ],
+      "primary_B": 44287,
+      "weights": [
+        44387,
+        44195,
+        44301,
+        44187,
+        44326,
+        42903,
+        47055,
+        43595,
+        44633,
+        33215,
+        38751
+      ],
+      "certified_ALL_paired_mask_lower_bound": 65,
+      "disjoint_witnesses": 64,
+      "occupied_turn_positions": 384,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "028d7c5251093b8ce1e64ab71a271f6409ae747a165d38a83d1d3b9aebae859b",
+      "rank_audit_runs": [
+        1254,
+        1242,
+        1272,
+        1254,
+        1248,
+        1246,
+        1256,
+        1254
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        75,
+        -39,
+        51,
+        -8,
+        55,
+        -916,
+        -3664,
+        -458,
+        -7328,
+        -229,
+        1832
+      ],
+      "primary_B": 29311,
+      "weights": [
+        29386,
+        29272,
+        29362,
+        29303,
+        29366,
+        28395,
+        25647,
+        28853,
+        21983,
+        29082,
+        31143
+      ],
+      "certified_ALL_paired_mask_lower_bound": 65,
+      "disjoint_witnesses": 64,
+      "occupied_turn_positions": 640,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "13ce5f5602535a1be50e44f99996479ffbbfb67c8d5849ac0aa44775bcede39a",
+      "rank_audit_runs": [
+        1502,
+        1502,
+        1501,
+        1501,
+        1502,
+        1504,
+        1500,
+        1499
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        98,
+        -80,
+        -92,
+        5,
+        82,
+        -5728,
+        358,
+        1432,
+        11456,
+        -2864,
+        -716
+      ],
+      "primary_B": 45823,
+      "weights": [
+        45921,
+        45743,
+        45731,
+        45828,
+        45905,
+        40095,
+        46181,
+        47255,
+        57279,
+        42959,
+        45107
+      ],
+      "certified_ALL_paired_mask_lower_bound": 65,
+      "disjoint_witnesses": 64,
+      "occupied_turn_positions": 384,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "2a065055b4efce5e3f635c643e52c42a0b59ee2b74858bb99e3feb2677712712",
+      "rank_audit_runs": [
+        1235,
+        1250,
+        1233,
+        1235,
+        1234,
+        1241,
+        1229,
+        1236
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        64,
+        32,
+        -1024,
+        256,
+        -128,
+        2048,
+        -512
+      ],
+      "primary_B": 8191,
+      "weights": [
+        8192,
+        8193,
+        8195,
+        8199,
+        8207,
+        8255,
+        8223,
+        7167,
+        8447,
+        8063,
+        10239,
+        7679
+      ],
+      "certified_ALL_paired_mask_lower_bound": 129,
+      "disjoint_witnesses": 128,
+      "occupied_turn_positions": 1280,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "cb458631364b4e1a0e6df350d15ab29c944f0fe5bd9af4b3d4ffcba66fff4712",
+      "rank_audit_runs": [
+        2095,
+        2120,
+        2035,
+        2109,
+        2059,
+        2068,
+        2064,
+        2082
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        74,
+        63,
+        2,
+        71,
+        -54,
+        -1060,
+        2120,
+        8480,
+        530,
+        -4240,
+        16960,
+        -265
+      ],
+      "primary_B": 67839,
+      "weights": [
+        67913,
+        67902,
+        67841,
+        67910,
+        67785,
+        66779,
+        69959,
+        76319,
+        68369,
+        63599,
+        84799,
+        67574
+      ],
+      "certified_ALL_paired_mask_lower_bound": 129,
+      "disjoint_witnesses": 128,
+      "occupied_turn_positions": 896,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "2480415ce8ec49044fe87d6a21ebee48d3c07c1fa603fce554243de3fb4ac505",
+      "rank_audit_runs": [
+        2886,
+        2894,
+        2922,
+        2908,
+        2912,
+        2867,
+        2883,
+        2898
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        -19,
+        59,
+        45,
+        -61,
+        83,
+        -2144,
+        4288,
+        -17152,
+        8576,
+        -1072,
+        -268,
+        -536
+      ],
+      "primary_B": 68607,
+      "weights": [
+        68588,
+        68666,
+        68652,
+        68546,
+        68690,
+        66463,
+        72895,
+        51455,
+        77183,
+        67535,
+        68339,
+        68071
+      ],
+      "certified_ALL_paired_mask_lower_bound": 129,
+      "disjoint_witnesses": 128,
+      "occupied_turn_positions": 256,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "e82ebabbedd6a941df3d87b79b1aa10b7b262d784d5e0ed5783cf5b927817da2",
+      "rank_audit_runs": [
+        2722,
+        2739,
+        2707,
+        2720,
+        2693,
+        2705,
+        2727,
+        2698
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        -90,
+        43,
+        -86,
+        12,
+        68,
+        -600,
+        -1200,
+        -19200,
+        -9600,
+        4800,
+        -2400,
+        300
+      ],
+      "primary_B": 76799,
+      "weights": [
+        76709,
+        76842,
+        76713,
+        76811,
+        76867,
+        76199,
+        75599,
+        57599,
+        67199,
+        81599,
+        74399,
+        77099
+      ],
+      "certified_ALL_paired_mask_lower_bound": 129,
+      "disjoint_witnesses": 128,
+      "occupied_turn_positions": 1024,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "428a3a4f6bd78c22e473ab0ae69b9a32e10ffe5441e488d5b05dc65545733c58",
+      "rank_audit_runs": [
+        2381,
+        2358,
+        2349,
+        2379,
+        2366,
+        2366,
+        2383,
+        2372
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        14,
+        21,
+        -58,
+        -68,
+        30,
+        6144,
+        -768,
+        -12288,
+        192,
+        -1536,
+        -384,
+        3072
+      ],
+      "primary_B": 49151,
+      "weights": [
+        49165,
+        49172,
+        49093,
+        49083,
+        49181,
+        55295,
+        48383,
+        36863,
+        49343,
+        47615,
+        48767,
+        52223
+      ],
+      "certified_ALL_paired_mask_lower_bound": 129,
+      "disjoint_witnesses": 128,
+      "occupied_turn_positions": 896,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "a7764197e5b0d95815cfed443cfd7ea5726e11e89ac6bf5258c04467c000c1a4",
+      "rank_audit_runs": [
+        2550,
+        2590,
+        2612,
+        2553,
+        2622,
+        2574,
+        2622,
+        2558
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        7,
+        -4,
+        -22,
+        95,
+        71,
+        12800,
+        6400,
+        -800,
+        400,
+        -200,
+        3200,
+        -1600
+      ],
+      "primary_B": 51199,
+      "weights": [
+        51206,
+        51195,
+        51177,
+        51294,
+        51270,
+        63999,
+        57599,
+        50399,
+        51599,
+        50999,
+        54399,
+        49599
+      ],
+      "certified_ALL_paired_mask_lower_bound": 129,
+      "disjoint_witnesses": 128,
+      "occupied_turn_positions": 896,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "9212fe3c926609d1ad0a15fc3c00f506e16389c159c0514a8a5287a439c20490",
+      "rank_audit_runs": [
+        2511,
+        2495,
+        2475,
+        2475,
+        2479,
+        2477,
+        2513,
+        2463
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        11,
+        -95,
+        -50,
+        -36,
+        -31,
+        -224,
+        -7168,
+        896,
+        -14336,
+        -448,
+        -3584,
+        1792
+      ],
+      "primary_B": 57343,
+      "weights": [
+        57354,
+        57248,
+        57293,
+        57307,
+        57312,
+        57119,
+        50175,
+        58239,
+        43007,
+        56895,
+        53759,
+        59135
+      ],
+      "certified_ALL_paired_mask_lower_bound": 129,
+      "disjoint_witnesses": 128,
+      "occupied_turn_positions": 1024,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "9998faa9b661428319ccaa97f7c542d076d48f63e9fe2c9809d03113aa70c204",
+      "rank_audit_runs": [
+        2321,
+        2354,
+        2324,
+        2327,
+        2325,
+        2326,
+        2346,
+        2314
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        -70,
+        -91,
+        -95,
+        6,
+        -49,
+        -624,
+        -1248,
+        -2496,
+        -9984,
+        19968,
+        312,
+        4992
+      ],
+      "primary_B": 79871,
+      "weights": [
+        79801,
+        79780,
+        79776,
+        79877,
+        79822,
+        79247,
+        78623,
+        77375,
+        69887,
+        99839,
+        80183,
+        84863
+      ],
+      "certified_ALL_paired_mask_lower_bound": 129,
+      "disjoint_witnesses": 128,
+      "occupied_turn_positions": 768,
+      "core_exchange_triple": [
+        5,
+        3,
+        17
+      ],
+      "support_sha256": "86640b0078114262c396a8082ac01f7ee8197113c86bc4e93ece8dcc7d45bec4",
+      "rank_audit_runs": [
+        2247,
+        2208,
+        2224,
+        2231,
+        2258,
+        2262,
+        2220,
+        2244
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        256,
+        -2048,
+        1024,
+        -4096,
+        512,
+        -128,
+        -32,
+        64
+      ],
+      "primary_B": 16383,
+      "weights": [
+        16384,
+        16385,
+        16387,
+        16391,
+        16399,
+        16639,
+        14335,
+        17407,
+        12287,
+        16895,
+        16255,
+        16351,
+        16447
+      ],
+      "certified_ALL_paired_mask_lower_bound": 257,
+      "disjoint_witnesses": 256,
+      "occupied_turn_positions": 2560,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "802379df422dafb07f9b736e6d01f03b6263ed0f85c51f0dbc5ec62707c81a5b",
+      "rank_audit_runs": [
+        4220,
+        4178,
+        4235,
+        4138,
+        4184,
+        4237,
+        4160,
+        4240
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        0,
+        81,
+        83,
+        -48,
+        -80,
+        586,
+        -293,
+        -9376,
+        37504,
+        4688,
+        -2344,
+        1172,
+        18752
+      ],
+      "primary_B": 150015,
+      "weights": [
+        150015,
+        150096,
+        150098,
+        149967,
+        149935,
+        150601,
+        149722,
+        140639,
+        187519,
+        154703,
+        147671,
+        151187,
+        168767
+      ],
+      "certified_ALL_paired_mask_lower_bound": 257,
+      "disjoint_witnesses": 256,
+      "occupied_turn_positions": 2816,
+      "core_exchange_triple": [
+        17,
+        3,
+        5
+      ],
+      "support_sha256": "3d8c3ef8ff28ab8870f6b93097e922c4601ad6c8475e3bd011d02427f2b9744f",
+      "rank_audit_runs": [
+        4470,
+        4454,
+        4451,
+        4453,
+        4418,
+        4405,
+        4432,
+        4423
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        48,
+        -94,
+        -75,
+        60,
+        -9,
+        36736,
+        574,
+        -2296,
+        18368,
+        4592,
+        -9184,
+        287,
+        -1148
+      ],
+      "primary_B": 146943,
+      "weights": [
+        146991,
+        146849,
+        146868,
+        147003,
+        146934,
+        183679,
+        147517,
+        144647,
+        165311,
+        151535,
+        137759,
+        147230,
+        145795
+      ],
+      "certified_ALL_paired_mask_lower_bound": 257,
+      "disjoint_witnesses": 256,
+      "occupied_turn_positions": 1024,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "1c7ed00b03295ed3fcca7aeb13808a9da0980f2c1a820144ba4bf37713cde0c8",
+      "rank_audit_runs": [
+        4970,
+        4974,
+        4981,
+        4994,
+        4986,
+        4968,
+        5030,
+        4953
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        -18,
+        -53,
+        -26,
+        -82,
+        -1,
+        -11584,
+        -5792,
+        -362,
+        -724,
+        -181,
+        23168,
+        1448,
+        -2896
+      ],
+      "primary_B": 92671,
+      "weights": [
+        92653,
+        92618,
+        92645,
+        92589,
+        92670,
+        81087,
+        86879,
+        92309,
+        91947,
+        92490,
+        115839,
+        94119,
+        89775
+      ],
+      "certified_ALL_paired_mask_lower_bound": 257,
+      "disjoint_witnesses": 256,
+      "occupied_turn_positions": 1536,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "6f7a3f30f71087bc520b0866f09f7f486c83ae66201e9b5572815afbcfb3e75d",
+      "rank_audit_runs": [
+        5478,
+        5419,
+        5455,
+        5479,
+        5466,
+        5445,
+        5468,
+        5468
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        89,
+        26,
+        86,
+        47,
+        93,
+        2736,
+        -43776,
+        1368,
+        -342,
+        -21888,
+        10944,
+        -684,
+        -5472
+      ],
+      "primary_B": 175103,
+      "weights": [
+        175192,
+        175129,
+        175189,
+        175150,
+        175196,
+        177839,
+        131327,
+        176471,
+        174761,
+        153215,
+        186047,
+        174419,
+        169631
+      ],
+      "certified_ALL_paired_mask_lower_bound": 257,
+      "disjoint_witnesses": 256,
+      "occupied_turn_positions": 3072,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "1d150a9c765c08fd4222e62e89205308323e550ee807e8be8948b7d38c00c765",
+      "rank_audit_runs": [
+        5184,
+        5198,
+        5175,
+        5181,
+        5241,
+        5234,
+        5200,
+        5155
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        -69,
+        -68,
+        -32,
+        -21,
+        80,
+        17344,
+        -2168,
+        1084,
+        34688,
+        -271,
+        542,
+        8672,
+        -4336
+      ],
+      "primary_B": 138751,
+      "weights": [
+        138682,
+        138683,
+        138719,
+        138730,
+        138831,
+        156095,
+        136583,
+        139835,
+        173439,
+        138480,
+        139293,
+        147423,
+        134415
+      ],
+      "certified_ALL_paired_mask_lower_bound": 257,
+      "disjoint_witnesses": 256,
+      "occupied_turn_positions": 2560,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "82cfd719ed3ffc72f043d07cc8b4e0e1f1b4a33bf3c4fe077f3f7dedf87a1b6f",
+      "rank_audit_runs": [
+        4243,
+        4207,
+        4201,
+        4119,
+        4227,
+        4157,
+        4113,
+        4157
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        89,
+        23,
+        34,
+        19,
+        75,
+        3856,
+        -241,
+        15424,
+        1928,
+        -482,
+        -30848,
+        -964,
+        7712
+      ],
+      "primary_B": 123391,
+      "weights": [
+        123480,
+        123414,
+        123425,
+        123410,
+        123466,
+        127247,
+        123150,
+        138815,
+        125319,
+        122909,
+        92543,
+        122427,
+        131103
+      ],
+      "certified_ALL_paired_mask_lower_bound": 257,
+      "disjoint_witnesses": 256,
+      "occupied_turn_positions": 1024,
+      "core_exchange_triple": [
+        3,
+        5,
+        17
+      ],
+      "support_sha256": "8b6c59ab139ddeebfeb3aac3fb1197af8011acc0fc0d7211c97de87030ed02d9",
+      "rank_audit_runs": [
+        4899,
+        4936,
+        4935,
+        4898,
+        4868,
+        4886,
+        4939,
+        4912
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        78,
+        74,
+        -5,
+        32,
+        -75,
+        -8480,
+        -4240,
+        1060,
+        -33920,
+        -2120,
+        265,
+        530,
+        16960
+      ],
+      "primary_B": 135679,
+      "weights": [
+        135757,
+        135753,
+        135674,
+        135711,
+        135604,
+        127199,
+        131439,
+        136739,
+        101759,
+        133559,
+        135944,
+        136209,
+        152639
+      ],
+      "certified_ALL_paired_mask_lower_bound": 257,
+      "disjoint_witnesses": 256,
+      "occupied_turn_positions": 2304,
+      "core_exchange_triple": [
+        17,
+        5,
+        3
+      ],
+      "support_sha256": "afe265e3c2281bf114cfae5a1a3499bfbbbe9f88d06bde5c71c60c38cec4cc62",
+      "rank_audit_runs": [
+        4662,
+        4713,
+        4677,
+        4676,
+        4689,
+        4678,
+        4735,
+        4671
+      ]
+    }
+  ],
+  "violations": 0,
+  "seconds": 3.623101809003856,
+  "audit_sha256": "3ad03b567812ec3473416770a7ed3e92962f376bd2558d2832e7483ecbe93880"
+}
