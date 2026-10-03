@@ -1,0 +1,10 @@
+{"orders_done": 1, "best_net_by_position": [68, 68, 0, 4, 0, 64, 56, 72, 72], "elapsed": 2.198}
+{"orders_done": 101, "best_net_by_position": [68, 68, 0, 4, 8, 64, 56, 72, 72], "elapsed": 3.118}
+{"orders_done": 201, "best_net_by_position": [68, 68, 0, 4, 8, 64, 56, 72, 72], "elapsed": 4.019}
+{"orders_done": 301, "best_net_by_position": [68, 68, 28, 4, 8, 64, 56, 72, 72], "elapsed": 4.958}
+{"orders_done": 401, "best_net_by_position": [68, 68, 28, 4, 8, 64, 56, 72, 72], "elapsed": 5.959}
+{"orders_done": 501, "best_net_by_position": [70, 70, 28, 10, 8, 66, 58, 72, 72], "elapsed": 7.553}
+{"orders_done": 601, "best_net_by_position": [70, 70, 28, 10, 8, 66, 58, 72, 72], "elapsed": 9.12}
+{"orders_done": 701, "best_net_by_position": [70, 70, 28, 10, 8, 66, 58, 72, 72], "elapsed": 10.683}
+{"orders_done": 801, "best_net_by_position": [70, 70, 28, 10, 8, 66, 58, 72, 72], "elapsed": 12.26}
+{"state": "COMPLETE_ALL_NINE_POSITIONS_OVER_REAL_PARENT_WEDGE", "regions": 6768, "evaluations": 7218, "best_net_by_position": [70, 70, 28, 10, 8, 66, 58, 72, 72], "best_limit_by_position": [[442, 1024], [442, 1024], [484, 1024], [502, 1024], [504, 1024], [446, 1024], [454, 1024], [440, 1024], [440, 1024]], "verification_digest": "a656e01ee4432bc6989f6e66887316e62ca1c8915fc23eee26808673fef95257", "elapsed_seconds": 12.276}
