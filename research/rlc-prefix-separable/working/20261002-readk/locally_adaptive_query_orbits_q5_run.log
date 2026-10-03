@@ -1,0 +1,17 @@
+orbit 1 960 remaining 33600
+orbit 2 960 remaining 32640
+orbit 3 1920 remaining 30720
+orbit 4 1920 remaining 28800
+orbit 5 960 remaining 27840
+orbit 6 960 remaining 26880
+orbit 7 3840 remaining 23040
+orbit 8 1920 remaining 21120
+orbit 9 1920 remaining 19200
+orbit 10 3840 remaining 15360
+orbit 11 3840 remaining 11520
+orbit 12 3840 remaining 7680
+orbit 13 3840 remaining 3840
+orbit 14 960 remaining 2880
+orbit 15 1920 remaining 960
+orbit 16 960 remaining 0
+{"status": "EXACT_Q5_LOCAL_QUERY_GEOMETRY_ORBITS", "n": 5, "all_tree_count": 34560, "scope": "Complete finite geometry orbit reduction only; no all-weight lower bound in Q5 or all-n theorem.", "seconds": 2.8600593750015832, "receipt_sha256": "3537acbeda6e390b2a3c286d09cb78668597d757ea1da0ccfec311df11e6e05b"}

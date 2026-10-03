@@ -1,0 +1,20 @@
+best 12 orbit 0 attempts 20 solves 1
+best 10 orbit 0 attempts 23 solves 2
+best 8 orbit 0 attempts 604 solves 8
+orbit_done 0 attempts 3096 solves 16 best 8
+orbit_done 1 attempts 6192 solves 38 best 8
+orbit_done 2 attempts 9288 solves 49 best 8
+orbit_done 3 attempts 12384 solves 67 best 8
+orbit_done 4 attempts 15480 solves 85 best 8
+orbit_done 5 attempts 18576 solves 99 best 8
+orbit_done 6 attempts 21672 solves 104 best 8
+orbit_done 7 attempts 24768 solves 111 best 8
+orbit_done 8 attempts 27864 solves 117 best 8
+orbit_done 9 attempts 30960 solves 123 best 8
+orbit_done 10 attempts 34056 solves 126 best 8
+orbit_done 11 attempts 37152 solves 131 best 8
+orbit_done 12 attempts 40248 solves 133 best 8
+orbit_done 13 attempts 43344 solves 135 best 8
+orbit_done 14 attempts 46440 solves 139 best 8
+orbit_done 15 attempts 49536 solves 140 best 8
+{"status": "EXPLORATORY_ACTUAL_WEIGHT_PRESSURE", "seed": 202610031947, "per_seed": 6, "cyclic_objective": true, "complete_orbit_geometry_scope": 16, "INCOMPLETE_signed_weight_scope": true, "attempts": 49536, "milp_calls": 140, "stream_sha256": "02338124f4599a36679c3d5c90e6942bad247bd33405397c83eca1f3942a37f3", "seconds": 4.25999732199125, "scope": "Only exact feasible upper witnesses are claimed; no solver lower bounds or all-weight/all-n theorem."}

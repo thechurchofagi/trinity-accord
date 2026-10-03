@@ -1,0 +1,2 @@
+bestC 16 R 17 repair 0 newweight 1 attempts 1 solves 1
+{"status": "EXPLORATORY_REPAIRED_LOCAL_QUERY_EXTENSION", "n": 6, "actual_attempts": 9728, "milp_calls": 3072, "core_weights": [8, 4, 14, -16, -1], "stream_sha256": "183e9e5158ad0bf3c19140bb5ae761de235ecdbd38b22aae521f3def0eda3f7d", "seconds": 14.989094322008896, "scope": "Incomplete family/weights; feasible witnesses checked exactly. No numerical lower bounds, no all-n claim."}

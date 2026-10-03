@@ -1,0 +1,4 @@
+best 9 orbit 0 attempts 3 solves 1
+best 7 orbit 0 attempts 156 solves 5
+orbit_done 0 attempts 156 solves 5 best 7
+{"status": "EXPLORATORY_ACTUAL_WEIGHT_PRESSURE", "seed": 202610031941, "per_seed": 6, "cyclic_objective": false, "complete_orbit_geometry_scope": 16, "INCOMPLETE_signed_weight_scope": true, "attempts": 156, "milp_calls": 5, "stream_sha256": "edc1e09ae90ba9780dd5dcaad1e81cf0f2df80c37074296f8f70bc81e6e7694b", "seconds": 0.04559605699614622, "scope": "Only exact feasible upper witnesses are claimed; no solver lower bounds or all-weight/all-n theorem."}

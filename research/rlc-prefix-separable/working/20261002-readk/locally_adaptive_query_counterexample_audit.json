@@ -1,0 +1,697 @@
+{
+  "status": "EXACT_ACTUAL_Q5_LINEAR_QUARTER_COUNTEREXAMPLE",
+  "n": 5,
+  "queries": [
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      2
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      5,
+      3
+    ],
+    [
+      6,
+      1
+    ],
+    [
+      7,
+      3
+    ],
+    [
+      8,
+      3
+    ],
+    [
+      9,
+      4
+    ],
+    [
+      10,
+      2
+    ],
+    [
+      11,
+      4
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      13,
+      4
+    ],
+    [
+      14,
+      1
+    ],
+    [
+      15,
+      4
+    ],
+    [
+      16,
+      4
+    ],
+    [
+      17,
+      4
+    ],
+    [
+      18,
+      3
+    ],
+    [
+      19,
+      3
+    ],
+    [
+      20,
+      4
+    ],
+    [
+      21,
+      4
+    ],
+    [
+      22,
+      2
+    ],
+    [
+      23,
+      2
+    ],
+    [
+      24,
+      4
+    ],
+    [
+      25,
+      4
+    ],
+    [
+      26,
+      3
+    ],
+    [
+      27,
+      3
+    ],
+    [
+      28,
+      4
+    ],
+    [
+      29,
+      4
+    ],
+    [
+      30,
+      1
+    ],
+    [
+      31,
+      1
+    ]
+  ],
+  "orientation_bits": [
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      6,
+      0
+    ],
+    [
+      9,
+      1
+    ],
+    [
+      11,
+      1
+    ],
+    [
+      13,
+      0
+    ],
+    [
+      14,
+      0
+    ],
+    [
+      15,
+      1
+    ],
+    [
+      16,
+      1
+    ],
+    [
+      17,
+      1
+    ],
+    [
+      20,
+      1
+    ],
+    [
+      21,
+      1
+    ],
+    [
+      24,
+      0
+    ],
+    [
+      25,
+      1
+    ],
+    [
+      28,
+      1
+    ],
+    [
+      29,
+      1
+    ]
+  ],
+  "signed_weights": [
+    8,
+    4,
+    14,
+    -16,
+    -1
+  ],
+  "scores_by_vertex": [
+    0,
+    8,
+    4,
+    12,
+    14,
+    22,
+    18,
+    26,
+    -16,
+    -8,
+    -12,
+    -4,
+    -2,
+    6,
+    2,
+    10,
+    -1,
+    7,
+    3,
+    11,
+    13,
+    21,
+    17,
+    25,
+    -17,
+    -9,
+    -13,
+    -5,
+    -3,
+    5,
+    1,
+    9
+  ],
+  "scan": [
+    24,
+    8,
+    26,
+    10,
+    25,
+    9,
+    27,
+    11,
+    28,
+    12,
+    16,
+    0,
+    30,
+    14,
+    18,
+    2,
+    29,
+    13,
+    17,
+    1,
+    31,
+    15,
+    19,
+    3,
+    20,
+    4,
+    22,
+    6,
+    21,
+    5,
+    23,
+    7
+  ],
+  "rank_word": [
+    6,
+    7,
+    8,
+    10,
+    18,
+    19,
+    23,
+    21,
+    1,
+    3,
+    4,
+    5,
+    9,
+    11,
+    12,
+    13,
+    28,
+    30,
+    17,
+    16,
+    29,
+    31,
+    22,
+    20,
+    0,
+    2,
+    14,
+    15,
+    24,
+    25,
+    26,
+    27
+  ],
+  "R": 7,
+  "C": 8,
+  "all_strict_prefix_separators": [
+    {
+      "prefix_size": 1,
+      "boundary_vertex": 28,
+      "coefficients": [
+        81,
+        27,
+        -9,
+        1,
+        -3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 2,
+      "boundary_vertex": 4,
+      "coefficients": [
+        81,
+        27,
+        -9,
+        1,
+        -3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 3,
+      "boundary_vertex": 12,
+      "coefficients": [
+        81,
+        27,
+        -9,
+        1,
+        -3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 4,
+      "boundary_vertex": 16,
+      "coefficients": [
+        81,
+        27,
+        -9,
+        3,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 5,
+      "boundary_vertex": 0,
+      "coefficients": [
+        81,
+        27,
+        -9,
+        3,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 6,
+      "boundary_vertex": 24,
+      "coefficients": [
+        81,
+        27,
+        -9,
+        3,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 7,
+      "boundary_vertex": 8,
+      "coefficients": [
+        81,
+        27,
+        -9,
+        3,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 8,
+      "boundary_vertex": 26,
+      "coefficients": [
+        81,
+        27,
+        1,
+        -9,
+        -3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 9,
+      "boundary_vertex": 30,
+      "coefficients": [
+        81,
+        27,
+        1,
+        -9,
+        -3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 10,
+      "boundary_vertex": 10,
+      "coefficients": [
+        81,
+        27,
+        1,
+        -9,
+        -3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 11,
+      "boundary_vertex": 14,
+      "coefficients": [
+        81,
+        27,
+        1,
+        -9,
+        -3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 12,
+      "boundary_vertex": 18,
+      "coefficients": [
+        81,
+        27,
+        3,
+        -9,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 13,
+      "boundary_vertex": 2,
+      "coefficients": [
+        81,
+        27,
+        3,
+        -9,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 14,
+      "boundary_vertex": 22,
+      "coefficients": [
+        81,
+        27,
+        3,
+        -9,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 15,
+      "boundary_vertex": 6,
+      "coefficients": [
+        81,
+        27,
+        3,
+        -9,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 16,
+      "boundary_vertex": 1,
+      "coefficients": [
+        81,
+        9,
+        27,
+        3,
+        1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 17,
+      "boundary_vertex": 17,
+      "coefficients": [
+        81,
+        9,
+        27,
+        3,
+        1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 18,
+      "boundary_vertex": 25,
+      "coefficients": [
+        81,
+        9,
+        27,
+        3,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 19,
+      "boundary_vertex": 9,
+      "coefficients": [
+        81,
+        9,
+        27,
+        3,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 20,
+      "boundary_vertex": 3,
+      "coefficients": [
+        81,
+        9,
+        27,
+        1,
+        3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 21,
+      "boundary_vertex": 11,
+      "coefficients": [
+        81,
+        9,
+        27,
+        1,
+        3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 22,
+      "boundary_vertex": 19,
+      "coefficients": [
+        81,
+        9,
+        27,
+        1,
+        3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 23,
+      "boundary_vertex": 27,
+      "coefficients": [
+        81,
+        9,
+        27,
+        1,
+        3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 24,
+      "boundary_vertex": 21,
+      "coefficients": [
+        81,
+        3,
+        27,
+        9,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 25,
+      "boundary_vertex": 5,
+      "coefficients": [
+        81,
+        3,
+        27,
+        9,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 26,
+      "boundary_vertex": 23,
+      "coefficients": [
+        81,
+        3,
+        27,
+        9,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 27,
+      "boundary_vertex": 7,
+      "coefficients": [
+        81,
+        3,
+        27,
+        9,
+        -1
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 28,
+      "boundary_vertex": 29,
+      "coefficients": [
+        81,
+        1,
+        27,
+        9,
+        -3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 29,
+      "boundary_vertex": 31,
+      "coefficients": [
+        81,
+        1,
+        27,
+        9,
+        -3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 30,
+      "boundary_vertex": 13,
+      "coefficients": [
+        81,
+        1,
+        27,
+        9,
+        -3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    },
+    {
+      "prefix_size": 31,
+      "boundary_vertex": 15,
+      "coefficients": [
+        81,
+        1,
+        27,
+        9,
+        -3
+      ],
+      "threshold_for_centered_score": "-1/2"
+    }
+  ],
+  "scope": "Refutes universal R>=2^n/4 from local child-query inequality. C=8 does NOT refute C>=2^n/4 or asymptotic positive-density existence.",
+  "prefix_vertex_checks": 992,
+  "violations": 0,
+  "receipt_sha256": "d94b9f5be6b166ff8ce65042fdbeed76387dcdb7014dd408bb8219e434eb5717"
+}

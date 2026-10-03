@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/59fe1ba67fc3/rlc_repo/research/rlc-prefix-separable/working/20261002-readk/verify_locally_adaptive_query_trees.py", line 59, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/59fe1ba67fc3/rlc_repo/research/rlc-prefix-separable/working/20261002-readk/verify_locally_adaptive_query_trees.py", line 34, in main
+    assert universalmin=={3:2,4:4}[n]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
