@@ -1,0 +1,7839 @@
+{
+  "status": "VERIFIED_ALL_DIMENSION_PERMUTED_SIGNED_BINARY_CARDINALITY_SCAN_CLASS",
+  "analytic_theorem": "For ALL n>=5, secondary b_j=lambda*epsilon_j*2^(pi(j)) with arbitrary permutation pi and arbitrary signs epsilon, lambda>0, and B>2sum|b|, every paired rank on the genuine generic actual scan w_j=B+b_j satisfies R>=1+ceil(2^n/128). Arbitrary signs of the ACTUAL weights also satisfy the same bound by the inherited paired input-reflection closure.",
+  "proof": "Take five smallest secondary magnitudes, sort their INPUT positions t0<...<t4, and use highest-input atom t4. Two among t0,t1,t2 lie on the same side of its secondary coefficient. Choose them i<j, and controller j+1. Since t3,t4 remain, t4>=j+2. Free set C contains the five low-priority coordinates plus controller, at most6. Atomic diameter<=24lambda. Outside coefficients have powers>=5; same-cardinality outside score differences are nonzero multiples32lambda. Different cardinalities have gap>B-sum_outside|b|>32lambda when outside is nonempty. Thus same-phase windows are disjoint; union depth<=2, one half-weight witness per outside assignment gives R>=1+ceil(2^(n-|C|)/2)>=1+ceil(2^n/128). Genericity and prefix separation are established analytically; no permutation enumeration is used as proof.",
+  "scope": "A broad ALL-permutations/all-secondary-signs/all-dimensions scan-class theorem, but still binary secondary priorities with a cardinality primary. NOT all additive weights, NOT a new M_n general coefficient. Numerical-cardinality and signed-lexicographic quarter results remain prior results.",
+  "actual_positive_scan_cases": 88,
+  "actual_reflected_signed_scan_cases": 88,
+  "direct_rank_audits": 704,
+  "cases_requiring_six_free_coordinates": 39,
+  "rows": [
+    {
+      "n": 5,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "primary_B": 324,
+      "positive_weights": [
+        325,
+        326,
+        328,
+        332,
+        340
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [],
+      "atomic_diameter": 14,
+      "outside_score_gap": null,
+      "witnesses": 1,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 1,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "9aadb1baa635ec03b3f9f1ec556aafa428f12995385d4a0b588e75a2ea2dccc3",
+      "positive_scan_rank_audit_runs": [
+        17,
+        16,
+        19,
+        12
+      ],
+      "actual_input_sign_reflection": 1,
+      "actual_signed_weights": [
+        -325,
+        326,
+        328,
+        332,
+        340
+      ],
+      "signed_scan_rank_audit_runs": [
+        15,
+        14,
+        19,
+        14
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        -16,
+        1,
+        4,
+        -8,
+        2
+      ],
+      "primary_B": 522,
+      "positive_weights": [
+        506,
+        523,
+        526,
+        514,
+        524
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        1,
+        4,
+        2,
+        3,
+        0
+      ],
+      "atomic_coordinates": [
+        0,
+        1,
+        4
+      ],
+      "controller_coordinate": 2,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [],
+      "atomic_diameter": 18,
+      "outside_score_gap": null,
+      "witnesses": 1,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 1,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "5ae4f7bc5acacb42248788d806933cce7b74b5b97811c6cdd05a82476630c578",
+      "positive_scan_rank_audit_runs": [
+        25,
+        25,
+        25,
+        26
+      ],
+      "actual_input_sign_reflection": 16,
+      "actual_signed_weights": [
+        506,
+        523,
+        526,
+        514,
+        -524
+      ],
+      "signed_scan_rank_audit_runs": [
+        25,
+        24,
+        25,
+        26
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        -4,
+        -16,
+        -2,
+        -8,
+        -1
+      ],
+      "primary_B": 306,
+      "positive_weights": [
+        302,
+        290,
+        304,
+        298,
+        305
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        4,
+        2,
+        0,
+        3,
+        1
+      ],
+      "atomic_coordinates": [
+        0,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [],
+      "atomic_diameter": 3,
+      "outside_score_gap": null,
+      "witnesses": 1,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 1,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "1d14012731072c46b1e999c4188374a4639decd748ef727cff17abc48d50e78b",
+      "positive_scan_rank_audit_runs": [
+        20,
+        23,
+        19,
+        23
+      ],
+      "actual_input_sign_reflection": 12,
+      "actual_signed_weights": [
+        302,
+        290,
+        -304,
+        -298,
+        305
+      ],
+      "signed_scan_rank_audit_runs": [
+        19,
+        24,
+        22,
+        20
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        1,
+        2,
+        16,
+        4,
+        -8
+      ],
+      "primary_B": 593,
+      "positive_weights": [
+        594,
+        595,
+        609,
+        597,
+        585
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        1,
+        3,
+        4,
+        2
+      ],
+      "atomic_coordinates": [
+        0,
+        1,
+        4
+      ],
+      "controller_coordinate": 2,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [],
+      "atomic_diameter": 10,
+      "outside_score_gap": null,
+      "witnesses": 1,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 1,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "433ea108f854f424667dbf8b38c23eca35b54da5221576a36ed84010af184b39",
+      "positive_scan_rank_audit_runs": [
+        19,
+        19,
+        19,
+        19
+      ],
+      "actual_input_sign_reflection": 3,
+      "actual_signed_weights": [
+        -594,
+        -595,
+        609,
+        597,
+        585
+      ],
+      "signed_scan_rank_audit_runs": [
+        19,
+        19,
+        19,
+        19
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        4,
+        1,
+        -8,
+        -16,
+        -2
+      ],
+      "primary_B": 590,
+      "positive_weights": [
+        594,
+        591,
+        582,
+        574,
+        588
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        1,
+        4,
+        0,
+        2,
+        3
+      ],
+      "atomic_coordinates": [
+        0,
+        1,
+        4
+      ],
+      "controller_coordinate": 2,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [],
+      "atomic_diameter": 6,
+      "outside_score_gap": null,
+      "witnesses": 1,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 1,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "2d59ce34cb547e9632b33f12532a7c8a5347528fe061224cb2d2d898dd90f511",
+      "positive_scan_rank_audit_runs": [
+        20,
+        20,
+        20,
+        20
+      ],
+      "actual_input_sign_reflection": 9,
+      "actual_signed_weights": [
+        -594,
+        591,
+        582,
+        -574,
+        588
+      ],
+      "signed_scan_rank_audit_runs": [
+        22,
+        22,
+        22,
+        22
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        16,
+        1,
+        2,
+        8,
+        -4
+      ],
+      "primary_B": 495,
+      "positive_weights": [
+        511,
+        496,
+        497,
+        503,
+        491
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        1,
+        2,
+        4,
+        3,
+        0
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [],
+      "atomic_diameter": 6,
+      "outside_score_gap": null,
+      "witnesses": 1,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 1,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "9aea4620395a99fb2f298edd5f6fc690edaca5722a39038909adb45310c32be1",
+      "positive_scan_rank_audit_runs": [
+        23,
+        23,
+        19,
+        23
+      ],
+      "actual_input_sign_reflection": 31,
+      "actual_signed_weights": [
+        -511,
+        -496,
+        -497,
+        -503,
+        -491
+      ],
+      "signed_scan_rank_audit_runs": [
+        23,
+        23,
+        19,
+        19
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        8,
+        1,
+        2,
+        -16,
+        -4
+      ],
+      "primary_B": 810,
+      "positive_weights": [
+        818,
+        811,
+        812,
+        794,
+        806
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        1,
+        2,
+        4,
+        0,
+        3
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [],
+      "atomic_diameter": 6,
+      "outside_score_gap": null,
+      "witnesses": 1,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 1,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "b8d07978fcec5d6d427b94e1bbb34113750820fda7628031933b8624610d0ddb",
+      "positive_scan_rank_audit_runs": [
+        22,
+        22,
+        22,
+        22
+      ],
+      "actual_input_sign_reflection": 19,
+      "actual_signed_weights": [
+        -818,
+        -811,
+        812,
+        794,
+        -806
+      ],
+      "signed_scan_rank_audit_runs": [
+        22,
+        22,
+        22,
+        22
+      ]
+    },
+    {
+      "n": 5,
+      "secondary": [
+        -2,
+        -8,
+        -1,
+        4,
+        16
+      ],
+      "primary_B": 612,
+      "positive_weights": [
+        610,
+        604,
+        611,
+        616,
+        628
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        2,
+        0,
+        3,
+        1,
+        4
+      ],
+      "atomic_coordinates": [
+        0,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [],
+      "atomic_diameter": 18,
+      "outside_score_gap": null,
+      "witnesses": 1,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 1,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "32baae18de47b3c08d46b08bef9b243e509abcaaf363b19e16865eceaa74d479",
+      "positive_scan_rank_audit_runs": [
+        22,
+        21,
+        18,
+        22
+      ],
+      "actual_input_sign_reflection": 16,
+      "actual_signed_weights": [
+        610,
+        604,
+        611,
+        616,
+        -628
+      ],
+      "signed_scan_rank_audit_runs": [
+        21,
+        18,
+        22,
+        19
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32
+      ],
+      "primary_B": 845,
+      "positive_weights": [
+        846,
+        847,
+        849,
+        853,
+        861,
+        877
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [
+        5
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 877,
+      "witnesses": 2,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 2,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "5980cbbdac9c791f1c884ee33f72a476289fdca271ae8b1083da0092f30bdcee",
+      "positive_scan_rank_audit_runs": [
+        34,
+        39,
+        31,
+        33
+      ],
+      "actual_input_sign_reflection": 2,
+      "actual_signed_weights": [
+        846,
+        -847,
+        849,
+        853,
+        861,
+        877
+      ],
+      "signed_scan_rank_audit_runs": [
+        33,
+        31,
+        33,
+        32
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        -16,
+        -2,
+        -4,
+        32,
+        8,
+        -1
+      ],
+      "primary_B": 717,
+      "positive_weights": [
+        701,
+        715,
+        713,
+        749,
+        725,
+        716
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        5,
+        1,
+        2,
+        4,
+        0
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "outside_coordinates": [],
+      "atomic_diameter": 3,
+      "outside_score_gap": null,
+      "witnesses": 1,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 1,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "813502e8917a52a16435dc10ed9d40fc1ee556e0addbcd8cb052441d1be470d9",
+      "positive_scan_rank_audit_runs": [
+        36,
+        41,
+        38,
+        40
+      ],
+      "actual_input_sign_reflection": 16,
+      "actual_signed_weights": [
+        701,
+        715,
+        713,
+        749,
+        -725,
+        716
+      ],
+      "signed_scan_rank_audit_runs": [
+        38,
+        39,
+        38,
+        42
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        8,
+        -32,
+        4,
+        -1,
+        -2,
+        16
+      ],
+      "primary_B": 546,
+      "positive_weights": [
+        554,
+        514,
+        550,
+        545,
+        544,
+        562
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        3,
+        4,
+        2,
+        0,
+        5
+      ],
+      "atomic_coordinates": [
+        0,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "outside_coordinates": [
+        1
+      ],
+      "atomic_diameter": 12,
+      "outside_score_gap": 514,
+      "witnesses": 2,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 2,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "0a589315aefefc0966a4c43236d6b1e21ec8db040ed9780fc4b81b55f0b4f370",
+      "positive_scan_rank_audit_runs": [
+        39,
+        38,
+        31,
+        34
+      ],
+      "actual_input_sign_reflection": 49,
+      "actual_signed_weights": [
+        -554,
+        514,
+        550,
+        545,
+        -544,
+        -562
+      ],
+      "signed_scan_rank_audit_runs": [
+        44,
+        42,
+        38,
+        39
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        -1,
+        32,
+        8,
+        16,
+        4,
+        2
+      ],
+      "primary_B": 904,
+      "positive_weights": [
+        903,
+        936,
+        912,
+        920,
+        908,
+        906
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        5,
+        4,
+        2,
+        3
+      ],
+      "atomic_coordinates": [
+        2,
+        3,
+        5
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "outside_coordinates": [
+        1
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 936,
+      "witnesses": 2,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 2,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "15ec32a6ec6b9876e31f4fe0d7a764c3c493135550803ff5c54f32a810a0d1a9",
+      "positive_scan_rank_audit_runs": [
+        45,
+        47,
+        48,
+        46
+      ],
+      "actual_input_sign_reflection": 9,
+      "actual_signed_weights": [
+        -903,
+        936,
+        912,
+        -920,
+        908,
+        906
+      ],
+      "signed_scan_rank_audit_runs": [
+        45,
+        45,
+        45,
+        46
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        2,
+        -4,
+        -32,
+        -8,
+        16,
+        1
+      ],
+      "primary_B": 677,
+      "positive_weights": [
+        679,
+        673,
+        645,
+        669,
+        693,
+        678
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        5,
+        0,
+        1,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        3,
+        5
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        1,
+        3,
+        4,
+        5
+      ],
+      "outside_coordinates": [
+        2
+      ],
+      "atomic_diameter": 9,
+      "outside_score_gap": 645,
+      "witnesses": 2,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 2,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "e0de72454449914787b78640d80ee8f58515c85ad82d4f13a0890c1c632b4070",
+      "positive_scan_rank_audit_runs": [
+        52,
+        49,
+        51,
+        50
+      ],
+      "actual_input_sign_reflection": 62,
+      "actual_signed_weights": [
+        679,
+        -673,
+        -645,
+        -669,
+        -693,
+        -678
+      ],
+      "signed_scan_rank_audit_runs": [
+        50,
+        51,
+        51,
+        49
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        32,
+        8,
+        -2,
+        16,
+        -1,
+        -4
+      ],
+      "primary_B": 158,
+      "positive_weights": [
+        190,
+        166,
+        156,
+        174,
+        157,
+        154
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        4,
+        2,
+        5,
+        1,
+        3
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "outside_coordinates": [
+        0
+      ],
+      "atomic_diameter": 12,
+      "outside_score_gap": 190,
+      "witnesses": 2,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 2,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "d703d1dbff2937ef64b78669f26ac90a5d78a9123fccb8b20c1ff4c1684d5465",
+      "positive_scan_rank_audit_runs": [
+        45,
+        47,
+        43,
+        45
+      ],
+      "actual_input_sign_reflection": 41,
+      "actual_signed_weights": [
+        -190,
+        166,
+        156,
+        -174,
+        157,
+        -154
+      ],
+      "signed_scan_rank_audit_runs": [
+        43,
+        43,
+        45,
+        47
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        4,
+        -32,
+        2,
+        1,
+        -16,
+        -8
+      ],
+      "primary_B": 828,
+      "positive_weights": [
+        832,
+        796,
+        830,
+        829,
+        812,
+        820
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        3,
+        2,
+        0,
+        5,
+        4
+      ],
+      "atomic_coordinates": [
+        2,
+        3,
+        5
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "outside_coordinates": [
+        1
+      ],
+      "atomic_diameter": 10,
+      "outside_score_gap": 796,
+      "witnesses": 2,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 2,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "80ed6f6eb533704ce469089e9d2efe5fac004ff8dd53317e641735ab705958fc",
+      "positive_scan_rank_audit_runs": [
+        38,
+        28,
+        33,
+        34
+      ],
+      "actual_input_sign_reflection": 45,
+      "actual_signed_weights": [
+        -832,
+        796,
+        -830,
+        -829,
+        812,
+        -820
+      ],
+      "signed_scan_rank_audit_runs": [
+        36,
+        35,
+        31,
+        35
+      ]
+    },
+    {
+      "n": 6,
+      "secondary": [
+        4,
+        -32,
+        -2,
+        -8,
+        -16,
+        1
+      ],
+      "primary_B": 1062,
+      "positive_weights": [
+        1066,
+        1030,
+        1060,
+        1054,
+        1046,
+        1063
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        5,
+        2,
+        0,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        2,
+        3,
+        5
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "outside_coordinates": [
+        1
+      ],
+      "atomic_diameter": 9,
+      "outside_score_gap": 1030,
+      "witnesses": 2,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 2,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "02e79f82063f87958ffdbbefc0ef1bfa0f9add63c8f727436d8d0aa8654ffa89",
+      "positive_scan_rank_audit_runs": [
+        45,
+        50,
+        45,
+        44
+      ],
+      "actual_input_sign_reflection": 25,
+      "actual_signed_weights": [
+        -1066,
+        1030,
+        1060,
+        -1054,
+        -1046,
+        1063
+      ],
+      "signed_scan_rank_audit_runs": [
+        51,
+        52,
+        47,
+        48
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "primary_B": 747,
+      "positive_weights": [
+        748,
+        749,
+        751,
+        755,
+        763,
+        779,
+        811
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [
+        5,
+        6
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 32,
+      "witnesses": 4,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 4,
+      "instance_ALL_paired_lower_bound": 3,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "5387b51eda523623cc67100570964efd2512fb30f3c3063c3c2f67c7a50015ae",
+      "positive_scan_rank_audit_runs": [
+        62,
+        61,
+        66,
+        63
+      ],
+      "actual_input_sign_reflection": 106,
+      "actual_signed_weights": [
+        748,
+        -749,
+        751,
+        -755,
+        763,
+        -779,
+        -811
+      ],
+      "signed_scan_rank_audit_runs": [
+        67,
+        66,
+        65,
+        63
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        -1,
+        -64,
+        16,
+        -32,
+        4,
+        2,
+        8
+      ],
+      "primary_B": 318,
+      "positive_weights": [
+        317,
+        254,
+        334,
+        286,
+        322,
+        320,
+        326
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        5,
+        4,
+        6,
+        2
+      ],
+      "atomic_coordinates": [
+        0,
+        4,
+        6
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        0,
+        2,
+        4,
+        5,
+        6
+      ],
+      "outside_coordinates": [
+        1,
+        3
+      ],
+      "atomic_diameter": 9,
+      "outside_score_gap": 32,
+      "witnesses": 4,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 4,
+      "instance_ALL_paired_lower_bound": 3,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "4bb320766b1daa8f215a42dbce3ad1f343fb5a653ae400c782b7a48fd313d295",
+      "positive_scan_rank_audit_runs": [
+        94,
+        89,
+        94,
+        94
+      ],
+      "actual_input_sign_reflection": 76,
+      "actual_signed_weights": [
+        317,
+        254,
+        -334,
+        -286,
+        322,
+        320,
+        -326
+      ],
+      "signed_scan_rank_audit_runs": [
+        90,
+        93,
+        95,
+        94
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        32,
+        2,
+        -64,
+        8,
+        -16,
+        -1,
+        -4
+      ],
+      "primary_B": 347,
+      "positive_weights": [
+        379,
+        349,
+        283,
+        355,
+        331,
+        346,
+        343
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        5,
+        1,
+        6,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        3,
+        6
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "outside_coordinates": [
+        0,
+        2
+      ],
+      "atomic_diameter": 12,
+      "outside_score_gap": 96,
+      "witnesses": 4,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 4,
+      "instance_ALL_paired_lower_bound": 3,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "59b5d3ae930ce360940e228477f5c48316c4db6e5b1f8d6320e3c78c4e9c4616",
+      "positive_scan_rank_audit_runs": [
+        81,
+        86,
+        77,
+        78
+      ],
+      "actual_input_sign_reflection": 48,
+      "actual_signed_weights": [
+        379,
+        349,
+        283,
+        355,
+        -331,
+        -346,
+        343
+      ],
+      "signed_scan_rank_audit_runs": [
+        85,
+        79,
+        86,
+        81
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        -2,
+        8,
+        32,
+        1,
+        4,
+        64,
+        -16
+      ],
+      "primary_B": 1026,
+      "positive_weights": [
+        1024,
+        1034,
+        1058,
+        1027,
+        1030,
+        1090,
+        1010
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        3,
+        0,
+        4,
+        1,
+        6
+      ],
+      "atomic_coordinates": [
+        0,
+        3,
+        6
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        1,
+        3,
+        4,
+        6
+      ],
+      "outside_coordinates": [
+        2,
+        5
+      ],
+      "atomic_diameter": 17,
+      "outside_score_gap": 32,
+      "witnesses": 4,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 4,
+      "instance_ALL_paired_lower_bound": 3,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "d09e4f996b136fb29fba99f7f72a2f964dc9092cab514e6aa5052c2b1f7b68fe",
+      "positive_scan_rank_audit_runs": [
+        79,
+        73,
+        77,
+        75
+      ],
+      "actual_input_sign_reflection": 127,
+      "actual_signed_weights": [
+        -1024,
+        -1034,
+        -1058,
+        -1027,
+        -1030,
+        -1090,
+        -1010
+      ],
+      "signed_scan_rank_audit_runs": [
+        71,
+        81,
+        69,
+        73
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        16,
+        -2,
+        -1,
+        64,
+        32,
+        -8,
+        -4
+      ],
+      "primary_B": 1113,
+      "positive_weights": [
+        1129,
+        1111,
+        1112,
+        1177,
+        1145,
+        1105,
+        1109
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        2,
+        1,
+        6,
+        5,
+        0
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        6
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6
+      ],
+      "outside_coordinates": [
+        4
+      ],
+      "atomic_diameter": 3,
+      "outside_score_gap": 1145,
+      "witnesses": 2,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 2,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "7878c2e8d47014b04b536708074cd18418957b8deab9b7d1655956326a7804c6",
+      "positive_scan_rank_audit_runs": [
+        80,
+        80,
+        82,
+        80
+      ],
+      "actual_input_sign_reflection": 9,
+      "actual_signed_weights": [
+        -1129,
+        1111,
+        1112,
+        -1177,
+        1145,
+        1105,
+        1109
+      ],
+      "signed_scan_rank_audit_runs": [
+        80,
+        80,
+        82,
+        82
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        -2,
+        4,
+        -1,
+        -32,
+        16,
+        64,
+        8
+      ],
+      "primary_B": 791,
+      "positive_weights": [
+        789,
+        795,
+        790,
+        759,
+        807,
+        855,
+        799
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        2,
+        0,
+        1,
+        6,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        6
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "outside_coordinates": [
+        5
+      ],
+      "atomic_diameter": 9,
+      "outside_score_gap": 855,
+      "witnesses": 2,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 2,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "da4c15e090313370013379ede8df9576e9510461bf744b197ecf296a12323e75",
+      "positive_scan_rank_audit_runs": [
+        91,
+        89,
+        92,
+        89
+      ],
+      "actual_input_sign_reflection": 15,
+      "actual_signed_weights": [
+        -789,
+        -795,
+        -790,
+        -759,
+        807,
+        855,
+        799
+      ],
+      "signed_scan_rank_audit_runs": [
+        90,
+        89,
+        88,
+        91
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        1,
+        64,
+        -8,
+        -16,
+        32,
+        4,
+        -2
+      ],
+      "primary_B": 831,
+      "positive_weights": [
+        832,
+        895,
+        823,
+        815,
+        863,
+        835,
+        829
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        6,
+        5,
+        2,
+        3
+      ],
+      "atomic_coordinates": [
+        2,
+        3,
+        6
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "outside_coordinates": [
+        1
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 895,
+      "witnesses": 2,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 2,
+      "instance_ALL_paired_lower_bound": 2,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "2dea108f89b43c7e03fc837bb5e7d339a8ca62ab50d66364bc6ccd408428c427",
+      "positive_scan_rank_audit_runs": [
+        84,
+        83,
+        81,
+        80
+      ],
+      "actual_input_sign_reflection": 8,
+      "actual_signed_weights": [
+        832,
+        895,
+        823,
+        -815,
+        863,
+        835,
+        829
+      ],
+      "signed_scan_rank_audit_runs": [
+        83,
+        84,
+        80,
+        83
+      ]
+    },
+    {
+      "n": 7,
+      "secondary": [
+        1,
+        -8,
+        4,
+        -64,
+        -16,
+        2,
+        32
+      ],
+      "primary_B": 735,
+      "positive_weights": [
+        736,
+        727,
+        739,
+        671,
+        719,
+        737,
+        767
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        5,
+        2,
+        1,
+        4
+      ],
+      "atomic_coordinates": [
+        0,
+        1,
+        5
+      ],
+      "controller_coordinate": 2,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "outside_coordinates": [
+        3,
+        6
+      ],
+      "atomic_diameter": 10,
+      "outside_score_gap": 96,
+      "witnesses": 4,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 4,
+      "instance_ALL_paired_lower_bound": 3,
+      "universal_ALL_paired_lower_bound": 2,
+      "support_sha256": "dba259b23eed6b1ee74d62c639c07995b8b6576dfd085cc4e93f3003808141da",
+      "positive_scan_rank_audit_runs": [
+        96,
+        95,
+        84,
+        88
+      ],
+      "actual_input_sign_reflection": 82,
+      "actual_signed_weights": [
+        736,
+        -727,
+        739,
+        671,
+        -719,
+        737,
+        -767
+      ],
+      "signed_scan_rank_audit_runs": [
+        90,
+        93,
+        99,
+        83
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "primary_B": 1304,
+      "positive_weights": [
+        1305,
+        1306,
+        1308,
+        1312,
+        1320,
+        1336,
+        1368,
+        1432
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [
+        5,
+        6,
+        7
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 32,
+      "witnesses": 8,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 8,
+      "instance_ALL_paired_lower_bound": 5,
+      "universal_ALL_paired_lower_bound": 3,
+      "support_sha256": "97d3b2f5316f803e0616a871397803a0909363fc78b278f6b969ab881ca6ba25",
+      "positive_scan_rank_audit_runs": [
+        128,
+        133,
+        128,
+        123
+      ],
+      "actual_input_sign_reflection": 164,
+      "actual_signed_weights": [
+        1305,
+        1306,
+        -1308,
+        1312,
+        1320,
+        -1336,
+        1368,
+        -1432
+      ],
+      "signed_scan_rank_audit_runs": [
+        139,
+        133,
+        129,
+        129
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        -1,
+        -64,
+        -2,
+        8,
+        -16,
+        4,
+        128,
+        32
+      ],
+      "primary_B": 1433,
+      "positive_weights": [
+        1432,
+        1369,
+        1431,
+        1441,
+        1417,
+        1437,
+        1561,
+        1465
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        2,
+        5,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        0,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "outside_coordinates": [
+        1,
+        6,
+        7
+      ],
+      "atomic_diameter": 6,
+      "outside_score_gap": 96,
+      "witnesses": 8,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 8,
+      "instance_ALL_paired_lower_bound": 5,
+      "universal_ALL_paired_lower_bound": 3,
+      "support_sha256": "6adee26affa986f065ab2e37113d8219c25440486ebcd9838831fd043ec23d83",
+      "positive_scan_rank_audit_runs": [
+        144,
+        157,
+        141,
+        151
+      ],
+      "actual_input_sign_reflection": 104,
+      "actual_signed_weights": [
+        1432,
+        1369,
+        1431,
+        -1441,
+        1417,
+        -1437,
+        -1561,
+        1465
+      ],
+      "signed_scan_rank_audit_runs": [
+        152,
+        150,
+        149,
+        148
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        128,
+        -64,
+        -1,
+        8,
+        2,
+        -16,
+        -32,
+        4
+      ],
+      "primary_B": 950,
+      "positive_weights": [
+        1078,
+        886,
+        949,
+        958,
+        952,
+        934,
+        918,
+        954
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        2,
+        4,
+        7,
+        3,
+        5
+      ],
+      "atomic_coordinates": [
+        2,
+        4,
+        7
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        6
+      ],
+      "atomic_diameter": 5,
+      "outside_score_gap": 32,
+      "witnesses": 8,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 8,
+      "instance_ALL_paired_lower_bound": 5,
+      "universal_ALL_paired_lower_bound": 3,
+      "support_sha256": "009cb7336a73838c5093a39045b4dc439965e537eef4676cb3f0492b3f6ff8d9",
+      "positive_scan_rank_audit_runs": [
+        152,
+        153,
+        167,
+        149
+      ],
+      "actual_input_sign_reflection": 54,
+      "actual_signed_weights": [
+        1078,
+        -886,
+        -949,
+        958,
+        -952,
+        -934,
+        918,
+        954
+      ],
+      "signed_scan_rank_audit_runs": [
+        169,
+        146,
+        159,
+        159
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        -8,
+        64,
+        -128,
+        -4,
+        -1,
+        -32,
+        -2,
+        16
+      ],
+      "primary_B": 1049,
+      "positive_weights": [
+        1041,
+        1113,
+        921,
+        1045,
+        1048,
+        1017,
+        1047,
+        1065
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        4,
+        6,
+        3,
+        0,
+        7
+      ],
+      "atomic_coordinates": [
+        3,
+        4,
+        7
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "outside_coordinates": [
+        1,
+        2
+      ],
+      "atomic_diameter": 20,
+      "outside_score_gap": 192,
+      "witnesses": 4,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 4,
+      "instance_ALL_paired_lower_bound": 3,
+      "universal_ALL_paired_lower_bound": 3,
+      "support_sha256": "b4dcf6a5075f9cf5eae80e3823a3e3f6916bb222ea916d99f1f7a6a197315341",
+      "positive_scan_rank_audit_runs": [
+        185,
+        186,
+        190,
+        180
+      ],
+      "actual_input_sign_reflection": 113,
+      "actual_signed_weights": [
+        -1041,
+        1113,
+        921,
+        1045,
+        -1048,
+        -1017,
+        -1047,
+        1065
+      ],
+      "signed_scan_rank_audit_runs": [
+        182,
+        181,
+        175,
+        196
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        1,
+        -32,
+        4,
+        8,
+        -64,
+        16,
+        -128,
+        2
+      ],
+      "primary_B": 984,
+      "positive_weights": [
+        985,
+        952,
+        988,
+        992,
+        920,
+        1000,
+        856,
+        986
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        7,
+        2,
+        3,
+        5
+      ],
+      "atomic_coordinates": [
+        2,
+        3,
+        7
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "outside_coordinates": [
+        1,
+        6
+      ],
+      "atomic_diameter": 6,
+      "outside_score_gap": 96,
+      "witnesses": 4,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 4,
+      "instance_ALL_paired_lower_bound": 3,
+      "universal_ALL_paired_lower_bound": 3,
+      "support_sha256": "ca81d309f3b26c1359c46d7390a8583908d402424a5ba3106127146462bd60eb",
+      "positive_scan_rank_audit_runs": [
+        184,
+        184,
+        186,
+        190
+      ],
+      "actual_input_sign_reflection": 199,
+      "actual_signed_weights": [
+        -985,
+        -952,
+        -988,
+        992,
+        920,
+        1000,
+        -856,
+        -986
+      ],
+      "signed_scan_rank_audit_runs": [
+        186,
+        184,
+        190,
+        184
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        128,
+        16,
+        -1,
+        32,
+        64,
+        -8,
+        4,
+        2
+      ],
+      "primary_B": 746,
+      "positive_weights": [
+        874,
+        762,
+        745,
+        778,
+        810,
+        738,
+        750,
+        748
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        2,
+        7,
+        6,
+        5,
+        1
+      ],
+      "atomic_coordinates": [
+        2,
+        5,
+        7
+      ],
+      "controller_coordinate": 6,
+      "free_coordinates": [
+        1,
+        2,
+        5,
+        6,
+        7
+      ],
+      "outside_coordinates": [
+        0,
+        3,
+        4
+      ],
+      "atomic_diameter": 10,
+      "outside_score_gap": 32,
+      "witnesses": 8,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 8,
+      "instance_ALL_paired_lower_bound": 5,
+      "universal_ALL_paired_lower_bound": 3,
+      "support_sha256": "f8ae23f813c8b7219016b0dff1f8a36da4b6f0d7b0a4c9e8576eda5f873a8d52",
+      "positive_scan_rank_audit_runs": [
+        203,
+        190,
+        187,
+        196
+      ],
+      "actual_input_sign_reflection": 252,
+      "actual_signed_weights": [
+        874,
+        762,
+        -745,
+        -778,
+        -810,
+        -738,
+        -750,
+        -748
+      ],
+      "signed_scan_rank_audit_runs": [
+        192,
+        203,
+        194,
+        201
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        -32,
+        -128,
+        -8,
+        16,
+        -4,
+        64,
+        1,
+        -2
+      ],
+      "primary_B": 638,
+      "positive_weights": [
+        606,
+        510,
+        630,
+        654,
+        634,
+        702,
+        639,
+        636
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        6,
+        7,
+        4,
+        2,
+        3
+      ],
+      "atomic_coordinates": [
+        2,
+        4,
+        7
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "outside_coordinates": [
+        0,
+        1
+      ],
+      "atomic_diameter": 6,
+      "outside_score_gap": 96,
+      "witnesses": 4,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 4,
+      "instance_ALL_paired_lower_bound": 3,
+      "universal_ALL_paired_lower_bound": 3,
+      "support_sha256": "21da5ad2cb73df45bebeb36551f91e1cf607708fd8f280df75960fb71bfee75d",
+      "positive_scan_rank_audit_runs": [
+        188,
+        197,
+        193,
+        191
+      ],
+      "actual_input_sign_reflection": 28,
+      "actual_signed_weights": [
+        606,
+        510,
+        -630,
+        -654,
+        -634,
+        702,
+        639,
+        636
+      ],
+      "signed_scan_rank_audit_runs": [
+        194,
+        191,
+        196,
+        195
+      ]
+    },
+    {
+      "n": 8,
+      "secondary": [
+        32,
+        -4,
+        -8,
+        -2,
+        -64,
+        16,
+        1,
+        -128
+      ],
+      "primary_B": 819,
+      "positive_weights": [
+        851,
+        815,
+        811,
+        817,
+        755,
+        835,
+        820,
+        691
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        6,
+        3,
+        1,
+        2,
+        5
+      ],
+      "atomic_coordinates": [
+        1,
+        3,
+        6
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "outside_coordinates": [
+        0,
+        7
+      ],
+      "atomic_diameter": 5,
+      "outside_score_gap": 160,
+      "witnesses": 4,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 4,
+      "instance_ALL_paired_lower_bound": 3,
+      "universal_ALL_paired_lower_bound": 3,
+      "support_sha256": "6143ff993af5d1ae5f7dfa060705a90a66e91661d7b05cc47dfe4df2c6613b32",
+      "positive_scan_rank_audit_runs": [
+        159,
+        151,
+        157,
+        159
+      ],
+      "actual_input_sign_reflection": 196,
+      "actual_signed_weights": [
+        851,
+        815,
+        -811,
+        817,
+        755,
+        835,
+        -820,
+        -691
+      ],
+      "signed_scan_rank_audit_runs": [
+        161,
+        157,
+        155,
+        151
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256
+      ],
+      "primary_B": 1721,
+      "positive_weights": [
+        1722,
+        1723,
+        1725,
+        1729,
+        1737,
+        1753,
+        1785,
+        1849,
+        1977
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 32,
+      "witnesses": 16,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 16,
+      "instance_ALL_paired_lower_bound": 9,
+      "universal_ALL_paired_lower_bound": 5,
+      "support_sha256": "cc4883a2eedfbfa03edccb2ffea447fcc5970d5e3ec347db541933248e7401cd",
+      "positive_scan_rank_audit_runs": [
+        256,
+        248,
+        264,
+        249
+      ],
+      "actual_input_sign_reflection": 305,
+      "actual_signed_weights": [
+        -1722,
+        1723,
+        1725,
+        1729,
+        -1737,
+        -1753,
+        1785,
+        1849,
+        -1977
+      ],
+      "signed_scan_rank_audit_runs": [
+        259,
+        253,
+        258,
+        255
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        1,
+        -4,
+        -2,
+        -8,
+        64,
+        256,
+        -16,
+        128,
+        -32
+      ],
+      "primary_B": 1057,
+      "positive_weights": [
+        1058,
+        1053,
+        1055,
+        1049,
+        1121,
+        1313,
+        1041,
+        1185,
+        1025
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        2,
+        1,
+        3,
+        6
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        6
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        6
+      ],
+      "outside_coordinates": [
+        4,
+        5,
+        7,
+        8
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 32,
+      "witnesses": 16,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 16,
+      "instance_ALL_paired_lower_bound": 9,
+      "universal_ALL_paired_lower_bound": 5,
+      "support_sha256": "c57f9c9641e5e5eac9c9c78610ebc6c2b3825405015b8eb97a1df515bb3f60dd",
+      "positive_scan_rank_audit_runs": [
+        329,
+        327,
+        327,
+        329
+      ],
+      "actual_input_sign_reflection": 391,
+      "actual_signed_weights": [
+        -1058,
+        -1053,
+        -1055,
+        1049,
+        1121,
+        1313,
+        1041,
+        -1185,
+        -1025
+      ],
+      "signed_scan_rank_audit_runs": [
+        329,
+        333,
+        329,
+        329
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        -128,
+        -16,
+        -32,
+        -64,
+        -8,
+        2,
+        -256,
+        4,
+        -1
+      ],
+      "primary_B": 1337,
+      "positive_weights": [
+        1209,
+        1321,
+        1305,
+        1273,
+        1329,
+        1339,
+        1081,
+        1341,
+        1336
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        8,
+        5,
+        7,
+        4,
+        1
+      ],
+      "atomic_coordinates": [
+        1,
+        4,
+        8
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        1,
+        4,
+        5,
+        7,
+        8
+      ],
+      "outside_coordinates": [
+        0,
+        2,
+        3,
+        6
+      ],
+      "atomic_diameter": 15,
+      "outside_score_gap": 32,
+      "witnesses": 16,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 16,
+      "instance_ALL_paired_lower_bound": 9,
+      "universal_ALL_paired_lower_bound": 5,
+      "support_sha256": "51d40af90b4ed5554d0447c8ff12b544c7afcdd01d630b42a84e58184a0fb0d2",
+      "positive_scan_rank_audit_runs": [
+        326,
+        343,
+        334,
+        327
+      ],
+      "actual_input_sign_reflection": 127,
+      "actual_signed_weights": [
+        -1209,
+        -1321,
+        -1305,
+        -1273,
+        -1329,
+        -1339,
+        -1081,
+        1341,
+        1336
+      ],
+      "signed_scan_rank_audit_runs": [
+        334,
+        341,
+        315,
+        339
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        -1,
+        8,
+        128,
+        64,
+        -4,
+        2,
+        -32,
+        256,
+        16
+      ],
+      "primary_B": 1935,
+      "positive_weights": [
+        1934,
+        1943,
+        2063,
+        1999,
+        1931,
+        1937,
+        1903,
+        2191,
+        1951
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        5,
+        4,
+        1,
+        8
+      ],
+      "atomic_coordinates": [
+        0,
+        1,
+        8
+      ],
+      "controller_coordinate": 2,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "outside_coordinates": [
+        3,
+        6,
+        7
+      ],
+      "atomic_diameter": 17,
+      "outside_score_gap": 96,
+      "witnesses": 8,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 8,
+      "instance_ALL_paired_lower_bound": 5,
+      "universal_ALL_paired_lower_bound": 5,
+      "support_sha256": "39154a9c411e46d403e2723fd689148d8cf9c42d4da4b585fe684e04e3074192",
+      "positive_scan_rank_audit_runs": [
+        329,
+        305,
+        313,
+        306
+      ],
+      "actual_input_sign_reflection": 57,
+      "actual_signed_weights": [
+        -1934,
+        1943,
+        2063,
+        -1999,
+        -1931,
+        -1937,
+        1903,
+        2191,
+        1951
+      ],
+      "signed_scan_rank_audit_runs": [
+        300,
+        315,
+        308,
+        321
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        4,
+        -16,
+        -64,
+        -8,
+        32,
+        -256,
+        -2,
+        1,
+        128
+      ],
+      "primary_B": 1700,
+      "positive_weights": [
+        1704,
+        1684,
+        1636,
+        1692,
+        1732,
+        1444,
+        1698,
+        1701,
+        1828
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        7,
+        6,
+        0,
+        3,
+        1
+      ],
+      "atomic_coordinates": [
+        1,
+        3,
+        7
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        1,
+        3,
+        4,
+        6,
+        7
+      ],
+      "outside_coordinates": [
+        2,
+        5,
+        8
+      ],
+      "atomic_diameter": 17,
+      "outside_score_gap": 192,
+      "witnesses": 8,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 8,
+      "instance_ALL_paired_lower_bound": 5,
+      "universal_ALL_paired_lower_bound": 5,
+      "support_sha256": "c485b967371d7879ec700928431e2cc7bcf4bb329fe8ab1982d4e031dcf5452d",
+      "positive_scan_rank_audit_runs": [
+        369,
+        370,
+        364,
+        379
+      ],
+      "actual_input_sign_reflection": 193,
+      "actual_signed_weights": [
+        -1704,
+        1684,
+        1636,
+        1692,
+        1732,
+        1444,
+        -1698,
+        -1701,
+        1828
+      ],
+      "signed_scan_rank_audit_runs": [
+        368,
+        364,
+        361,
+        372
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        64,
+        8,
+        -32,
+        -16,
+        256,
+        2,
+        128,
+        -4,
+        1
+      ],
+      "primary_B": 1776,
+      "positive_weights": [
+        1840,
+        1784,
+        1744,
+        1760,
+        2032,
+        1778,
+        1904,
+        1772,
+        1777
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        8,
+        5,
+        7,
+        1,
+        3
+      ],
+      "atomic_coordinates": [
+        1,
+        5,
+        8
+      ],
+      "controller_coordinate": 6,
+      "free_coordinates": [
+        1,
+        3,
+        5,
+        6,
+        7,
+        8
+      ],
+      "outside_coordinates": [
+        0,
+        2,
+        4
+      ],
+      "atomic_diameter": 7,
+      "outside_score_gap": 96,
+      "witnesses": 8,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 8,
+      "instance_ALL_paired_lower_bound": 5,
+      "universal_ALL_paired_lower_bound": 5,
+      "support_sha256": "c350925234839d58b7a107bc148324d6f5bae2fad6ba96553e8eaac0dc21aa82",
+      "positive_scan_rank_audit_runs": [
+        390,
+        383,
+        387,
+        383
+      ],
+      "actual_input_sign_reflection": 165,
+      "actual_signed_weights": [
+        -1840,
+        1784,
+        -1744,
+        1760,
+        2032,
+        -1778,
+        1904,
+        -1772,
+        1777
+      ],
+      "signed_scan_rank_audit_runs": [
+        384,
+        385,
+        380,
+        390
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        -32,
+        128,
+        -64,
+        4,
+        8,
+        -2,
+        -256,
+        -1,
+        16
+      ],
+      "primary_B": 1081,
+      "positive_weights": [
+        1049,
+        1209,
+        1017,
+        1085,
+        1089,
+        1079,
+        825,
+        1080,
+        1097
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        7,
+        5,
+        3,
+        4,
+        8
+      ],
+      "atomic_coordinates": [
+        3,
+        4,
+        8
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        3,
+        4,
+        5,
+        7,
+        8
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        2,
+        6
+      ],
+      "atomic_diameter": 12,
+      "outside_score_gap": 32,
+      "witnesses": 16,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 16,
+      "instance_ALL_paired_lower_bound": 9,
+      "universal_ALL_paired_lower_bound": 5,
+      "support_sha256": "3fc352ba3d0f6b65e400c4c404b1e37eb86571e787db8a149f61fedfefb4a197",
+      "positive_scan_rank_audit_runs": [
+        367,
+        350,
+        368,
+        371
+      ],
+      "actual_input_sign_reflection": 439,
+      "actual_signed_weights": [
+        -1049,
+        -1209,
+        -1017,
+        1085,
+        -1089,
+        -1079,
+        825,
+        -1080,
+        -1097
+      ],
+      "signed_scan_rank_audit_runs": [
+        338,
+        357,
+        367,
+        372
+      ]
+    },
+    {
+      "n": 9,
+      "secondary": [
+        -8,
+        4,
+        -64,
+        32,
+        1,
+        2,
+        -256,
+        -16,
+        128
+      ],
+      "primary_B": 1693,
+      "positive_weights": [
+        1685,
+        1697,
+        1629,
+        1725,
+        1694,
+        1695,
+        1437,
+        1677,
+        1821
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        4,
+        5,
+        1,
+        0,
+        7
+      ],
+      "atomic_coordinates": [
+        0,
+        4,
+        7
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        0,
+        1,
+        4,
+        5,
+        7
+      ],
+      "outside_coordinates": [
+        2,
+        3,
+        6,
+        8
+      ],
+      "atomic_diameter": 17,
+      "outside_score_gap": 96,
+      "witnesses": 16,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 16,
+      "instance_ALL_paired_lower_bound": 9,
+      "universal_ALL_paired_lower_bound": 5,
+      "support_sha256": "d73d63d363da49b1a6c19d76d1c2e2c63104d2bf691a3f0ae7554f2437fd6f24",
+      "positive_scan_rank_audit_runs": [
+        354,
+        382,
+        357,
+        395
+      ],
+      "actual_input_sign_reflection": 306,
+      "actual_signed_weights": [
+        1685,
+        -1697,
+        1629,
+        1725,
+        -1694,
+        -1695,
+        1437,
+        1677,
+        -1821
+      ],
+      "signed_scan_rank_audit_runs": [
+        366,
+        368,
+        386,
+        367
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512
+      ],
+      "primary_B": 2725,
+      "positive_weights": [
+        2726,
+        2727,
+        2729,
+        2733,
+        2741,
+        2757,
+        2789,
+        2853,
+        2981,
+        3237
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 32,
+      "witnesses": 32,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 32,
+      "instance_ALL_paired_lower_bound": 17,
+      "universal_ALL_paired_lower_bound": 9,
+      "support_sha256": "4bd98b127095970b0296f216ca9ad390fe91d8a085875b381d1d5457706ac507",
+      "positive_scan_rank_audit_runs": [
+        507,
+        509,
+        517,
+        511
+      ],
+      "actual_input_sign_reflection": 423,
+      "actual_signed_weights": [
+        -2726,
+        -2727,
+        -2729,
+        2733,
+        2741,
+        -2757,
+        2789,
+        -2853,
+        -2981,
+        3237
+      ],
+      "signed_scan_rank_audit_runs": [
+        491,
+        534,
+        528,
+        529
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        1,
+        32,
+        -2,
+        64,
+        4,
+        128,
+        -8,
+        256,
+        -16,
+        512
+      ],
+      "primary_B": 2239,
+      "positive_weights": [
+        2240,
+        2271,
+        2237,
+        2303,
+        2243,
+        2367,
+        2231,
+        2495,
+        2223,
+        2751
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        2,
+        4,
+        6,
+        8
+      ],
+      "atomic_coordinates": [
+        0,
+        2,
+        8
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        8
+      ],
+      "outside_coordinates": [
+        1,
+        5,
+        7,
+        9
+      ],
+      "atomic_diameter": 17,
+      "outside_score_gap": 96,
+      "witnesses": 16,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 16,
+      "instance_ALL_paired_lower_bound": 9,
+      "universal_ALL_paired_lower_bound": 9,
+      "support_sha256": "4145eb78eb9822bef3dbc6a19e6c8da0a590505dc89ea3d830e9545344c77164",
+      "positive_scan_rank_audit_runs": [
+        556,
+        560,
+        562,
+        560
+      ],
+      "actual_input_sign_reflection": 125,
+      "actual_signed_weights": [
+        -2240,
+        2271,
+        -2237,
+        -2303,
+        -2243,
+        -2367,
+        -2231,
+        2495,
+        2223,
+        2751
+      ],
+      "signed_scan_rank_audit_runs": [
+        560,
+        560,
+        564,
+        566
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        8,
+        -1,
+        -2,
+        32,
+        16,
+        4,
+        64,
+        -512,
+        -256,
+        128
+      ],
+      "primary_B": 2265,
+      "positive_weights": [
+        2273,
+        2264,
+        2263,
+        2297,
+        2281,
+        2269,
+        2329,
+        1753,
+        2009,
+        2393
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        1,
+        2,
+        5,
+        0,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        5
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "outside_coordinates": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "atomic_diameter": 6,
+      "outside_score_gap": 64,
+      "witnesses": 16,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 16,
+      "instance_ALL_paired_lower_bound": 9,
+      "universal_ALL_paired_lower_bound": 9,
+      "support_sha256": "02ceaa82a2398de6196bfec3926d6a78926b0d6d4375dd6576ff856ee47e1440",
+      "positive_scan_rank_audit_runs": [
+        641,
+        646,
+        638,
+        651
+      ],
+      "actual_input_sign_reflection": 219,
+      "actual_signed_weights": [
+        -2273,
+        -2264,
+        2263,
+        -2297,
+        -2281,
+        2269,
+        -2329,
+        -1753,
+        2009,
+        2393
+      ],
+      "signed_scan_rank_audit_runs": [
+        645,
+        645,
+        650,
+        644
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        1,
+        512,
+        -256,
+        16,
+        -4,
+        -32,
+        -2,
+        -128,
+        -64,
+        -8
+      ],
+      "primary_B": 2158,
+      "positive_weights": [
+        2159,
+        2670,
+        1902,
+        2174,
+        2154,
+        2126,
+        2156,
+        2030,
+        2094,
+        2150
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        6,
+        4,
+        9,
+        3
+      ],
+      "atomic_coordinates": [
+        0,
+        4,
+        9
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        9
+      ],
+      "outside_coordinates": [
+        1,
+        2,
+        7,
+        8
+      ],
+      "atomic_diameter": 9,
+      "outside_score_gap": 64,
+      "witnesses": 16,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 16,
+      "instance_ALL_paired_lower_bound": 9,
+      "universal_ALL_paired_lower_bound": 9,
+      "support_sha256": "8ae6bf6e26d2f0a8f105af6c7bd1bc4f2e5b94c67d1641f73b6ee53a3b83aaa7",
+      "positive_scan_rank_audit_runs": [
+        723,
+        703,
+        714,
+        721
+      ],
+      "actual_input_sign_reflection": 190,
+      "actual_signed_weights": [
+        2159,
+        -2670,
+        -1902,
+        -2174,
+        -2154,
+        -2126,
+        2156,
+        -2030,
+        2094,
+        2150
+      ],
+      "signed_scan_rank_audit_runs": [
+        711,
+        714,
+        705,
+        720
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        2,
+        16,
+        -256,
+        -512,
+        8,
+        -128,
+        -4,
+        -64,
+        32,
+        -1
+      ],
+      "primary_B": 2914,
+      "positive_weights": [
+        2916,
+        2930,
+        2658,
+        2402,
+        2922,
+        2786,
+        2910,
+        2850,
+        2946,
+        2913
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        9,
+        0,
+        6,
+        4,
+        1
+      ],
+      "atomic_coordinates": [
+        0,
+        4,
+        9
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        0,
+        1,
+        4,
+        5,
+        6,
+        9
+      ],
+      "outside_coordinates": [
+        2,
+        3,
+        7,
+        8
+      ],
+      "atomic_diameter": 9,
+      "outside_score_gap": 96,
+      "witnesses": 16,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 16,
+      "instance_ALL_paired_lower_bound": 9,
+      "universal_ALL_paired_lower_bound": 9,
+      "support_sha256": "7146c22c5cc9cb77ff9c6938bd194d999d300ed9bb05f85a21be12a4d9e3db4b",
+      "positive_scan_rank_audit_runs": [
+        780,
+        788,
+        780,
+        784
+      ],
+      "actual_input_sign_reflection": 592,
+      "actual_signed_weights": [
+        2916,
+        2930,
+        2658,
+        2402,
+        -2922,
+        2786,
+        -2910,
+        2850,
+        2946,
+        -2913
+      ],
+      "signed_scan_rank_audit_runs": [
+        787,
+        785,
+        776,
+        791
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        -4,
+        1,
+        2,
+        64,
+        -512,
+        32,
+        256,
+        -8,
+        128,
+        16
+      ],
+      "primary_B": 2638,
+      "positive_weights": [
+        2634,
+        2639,
+        2640,
+        2702,
+        2126,
+        2670,
+        2894,
+        2630,
+        2766,
+        2654
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        1,
+        2,
+        0,
+        7,
+        9
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        9
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        9
+      ],
+      "outside_coordinates": [
+        4,
+        5,
+        6,
+        8
+      ],
+      "atomic_diameter": 15,
+      "outside_score_gap": 96,
+      "witnesses": 16,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 16,
+      "instance_ALL_paired_lower_bound": 9,
+      "universal_ALL_paired_lower_bound": 9,
+      "support_sha256": "f64a1dba1bdccfd8398534dba86fe163963796e69de8485115e31487988e2eab",
+      "positive_scan_rank_audit_runs": [
+        538,
+        553,
+        539,
+        549
+      ],
+      "actual_input_sign_reflection": 774,
+      "actual_signed_weights": [
+        2634,
+        -2639,
+        -2640,
+        2702,
+        2126,
+        2670,
+        2894,
+        2630,
+        -2766,
+        -2654
+      ],
+      "signed_scan_rank_audit_runs": [
+        552,
+        541,
+        542,
+        563
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        -16,
+        4,
+        64,
+        -8,
+        -256,
+        -32,
+        128,
+        512,
+        1,
+        2
+      ],
+      "primary_B": 2219,
+      "positive_weights": [
+        2203,
+        2223,
+        2283,
+        2211,
+        1963,
+        2187,
+        2347,
+        2731,
+        2220,
+        2221
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        8,
+        9,
+        1,
+        3,
+        0
+      ],
+      "atomic_coordinates": [
+        0,
+        3,
+        9
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        1,
+        3,
+        4,
+        8,
+        9
+      ],
+      "outside_coordinates": [
+        2,
+        5,
+        6,
+        7
+      ],
+      "atomic_diameter": 18,
+      "outside_score_gap": 64,
+      "witnesses": 16,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 16,
+      "instance_ALL_paired_lower_bound": 9,
+      "universal_ALL_paired_lower_bound": 9,
+      "support_sha256": "a5994812889f527d0e29541237cfcb68c7c28bb45db36a5b7c63b476420ad304",
+      "positive_scan_rank_audit_runs": [
+        738,
+        745,
+        739,
+        738
+      ],
+      "actual_input_sign_reflection": 787,
+      "actual_signed_weights": [
+        -2203,
+        -2223,
+        2283,
+        2211,
+        -1963,
+        2187,
+        2347,
+        2731,
+        -2220,
+        -2221
+      ],
+      "signed_scan_rank_audit_runs": [
+        737,
+        729,
+        744,
+        740
+      ]
+    },
+    {
+      "n": 10,
+      "secondary": [
+        2,
+        -64,
+        -128,
+        4,
+        256,
+        -1,
+        -512,
+        32,
+        -8,
+        16
+      ],
+      "primary_B": 2605,
+      "positive_weights": [
+        2607,
+        2541,
+        2477,
+        2609,
+        2861,
+        2604,
+        2093,
+        2637,
+        2597,
+        2621
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        5,
+        0,
+        3,
+        8,
+        9
+      ],
+      "atomic_coordinates": [
+        0,
+        3,
+        9
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        3,
+        4,
+        5,
+        8,
+        9
+      ],
+      "outside_coordinates": [
+        1,
+        2,
+        6,
+        7
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 64,
+      "witnesses": 16,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 16,
+      "instance_ALL_paired_lower_bound": 9,
+      "universal_ALL_paired_lower_bound": 9,
+      "support_sha256": "754a873cb761217bf7f83040dd837c41b5375ced7336fe42707e8ad05cee4af2",
+      "positive_scan_rank_audit_runs": [
+        556,
+        563,
+        560,
+        564
+      ],
+      "actual_input_sign_reflection": 312,
+      "actual_signed_weights": [
+        2607,
+        2541,
+        2477,
+        -2609,
+        -2861,
+        -2604,
+        2093,
+        2637,
+        -2597,
+        2621
+      ],
+      "signed_scan_rank_audit_runs": [
+        557,
+        560,
+        558,
+        558
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024
+      ],
+      "primary_B": 5011,
+      "positive_weights": [
+        5012,
+        5013,
+        5015,
+        5019,
+        5027,
+        5043,
+        5075,
+        5139,
+        5267,
+        5523,
+        6035
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 32,
+      "witnesses": 64,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 64,
+      "instance_ALL_paired_lower_bound": 33,
+      "universal_ALL_paired_lower_bound": 17,
+      "support_sha256": "460d68cf865d1d7cfdfbefd5aca320dc7cab872a94b0d29ef6615018127e6a7b",
+      "positive_scan_rank_audit_runs": [
+        1036,
+        1004,
+        1045,
+        1024
+      ],
+      "actual_input_sign_reflection": 930,
+      "actual_signed_weights": [
+        5012,
+        -5013,
+        5015,
+        5019,
+        5027,
+        -5043,
+        5075,
+        -5139,
+        -5267,
+        -5523,
+        6035
+      ],
+      "signed_scan_rank_audit_runs": [
+        1026,
+        1011,
+        1049,
+        1048
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        -1,
+        32,
+        -2,
+        64,
+        -4,
+        128,
+        8,
+        256,
+        -16,
+        512,
+        1024
+      ],
+      "primary_B": 4504,
+      "positive_weights": [
+        4503,
+        4536,
+        4502,
+        4568,
+        4500,
+        4632,
+        4512,
+        4760,
+        4488,
+        5016,
+        5528
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        2,
+        4,
+        6,
+        8
+      ],
+      "atomic_coordinates": [
+        2,
+        4,
+        8
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        8
+      ],
+      "outside_coordinates": [
+        1,
+        3,
+        7,
+        9,
+        10
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 32,
+      "witnesses": 32,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 32,
+      "instance_ALL_paired_lower_bound": 17,
+      "universal_ALL_paired_lower_bound": 17,
+      "support_sha256": "95b2f6a40b5466b154f39260418cd3eca31ca339b699191248c5d80542471ecf",
+      "positive_scan_rank_audit_runs": [
+        1121,
+        1120,
+        1118,
+        1119
+      ],
+      "actual_input_sign_reflection": 1420,
+      "actual_signed_weights": [
+        4503,
+        4536,
+        -4502,
+        -4568,
+        4500,
+        4632,
+        4512,
+        -4760,
+        -4488,
+        5016,
+        -5528
+      ],
+      "signed_scan_rank_audit_runs": [
+        1121,
+        1110,
+        1120,
+        1103
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        512,
+        16,
+        1024,
+        64,
+        -8,
+        2,
+        -128,
+        -256,
+        -1,
+        -4,
+        32
+      ],
+      "primary_B": 4634,
+      "positive_weights": [
+        5146,
+        4650,
+        5658,
+        4698,
+        4626,
+        4636,
+        4506,
+        4378,
+        4633,
+        4630,
+        4666
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        8,
+        5,
+        9,
+        4,
+        1
+      ],
+      "atomic_coordinates": [
+        1,
+        5,
+        9
+      ],
+      "controller_coordinate": 6,
+      "free_coordinates": [
+        1,
+        4,
+        5,
+        6,
+        8,
+        9
+      ],
+      "outside_coordinates": [
+        0,
+        2,
+        3,
+        7,
+        10
+      ],
+      "atomic_diameter": 20,
+      "outside_score_gap": 32,
+      "witnesses": 32,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 32,
+      "instance_ALL_paired_lower_bound": 17,
+      "universal_ALL_paired_lower_bound": 17,
+      "support_sha256": "38e8658e9ff6a8385dc0b8a82d0a875c510cbbd9cc49c1172d992a0a12ea725b",
+      "positive_scan_rank_audit_runs": [
+        1122,
+        1201,
+        1255,
+        1192
+      ],
+      "actual_input_sign_reflection": 1875,
+      "actual_signed_weights": [
+        -5146,
+        -4650,
+        5658,
+        4698,
+        -4626,
+        4636,
+        -4506,
+        4378,
+        -4633,
+        -4630,
+        -4666
+      ],
+      "signed_scan_rank_audit_runs": [
+        1269,
+        1191,
+        1199,
+        1253
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        8,
+        256,
+        -128,
+        -2,
+        64,
+        16,
+        -1,
+        -512,
+        1024,
+        -4,
+        32
+      ],
+      "primary_B": 4581,
+      "positive_weights": [
+        4589,
+        4837,
+        4453,
+        4579,
+        4645,
+        4597,
+        4580,
+        4069,
+        5605,
+        4577,
+        4613
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        6,
+        3,
+        9,
+        0,
+        5
+      ],
+      "atomic_coordinates": [
+        0,
+        3,
+        9
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        9
+      ],
+      "outside_coordinates": [
+        1,
+        2,
+        7,
+        8,
+        10
+      ],
+      "atomic_diameter": 12,
+      "outside_score_gap": 160,
+      "witnesses": 32,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 32,
+      "instance_ALL_paired_lower_bound": 17,
+      "universal_ALL_paired_lower_bound": 17,
+      "support_sha256": "869a36be97f8cb70c5d62ffaa60c4b06eb6b4d1fa7c87f987c8f3a153a3dd1e5",
+      "positive_scan_rank_audit_runs": [
+        1389,
+        1407,
+        1391,
+        1391
+      ],
+      "actual_input_sign_reflection": 462,
+      "actual_signed_weights": [
+        4589,
+        -4837,
+        -4453,
+        -4579,
+        4645,
+        4597,
+        -4580,
+        -4069,
+        -5605,
+        4577,
+        4613
+      ],
+      "signed_scan_rank_audit_runs": [
+        1391,
+        1358,
+        1375,
+        1384
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        2,
+        1,
+        128,
+        1024,
+        -16,
+        -512,
+        -8,
+        256,
+        -32,
+        64,
+        -4
+      ],
+      "primary_B": 4187,
+      "positive_weights": [
+        4189,
+        4188,
+        4315,
+        5211,
+        4171,
+        3675,
+        4179,
+        4443,
+        4155,
+        4251,
+        4183
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        1,
+        0,
+        10,
+        6,
+        4
+      ],
+      "atomic_coordinates": [
+        0,
+        1,
+        10
+      ],
+      "controller_coordinate": 2,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        10
+      ],
+      "outside_coordinates": [
+        3,
+        5,
+        7,
+        8,
+        9
+      ],
+      "atomic_diameter": 6,
+      "outside_score_gap": 96,
+      "witnesses": 32,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 32,
+      "instance_ALL_paired_lower_bound": 17,
+      "universal_ALL_paired_lower_bound": 17,
+      "support_sha256": "1c571466dbf14f6b9ce61ebc2fe152e82cc313202b314c79399816f28b0a71cf",
+      "positive_scan_rank_audit_runs": [
+        1283,
+        1266,
+        1262,
+        1319
+      ],
+      "actual_input_sign_reflection": 1866,
+      "actual_signed_weights": [
+        4189,
+        -4188,
+        4315,
+        -5211,
+        4171,
+        3675,
+        -4179,
+        4443,
+        -4155,
+        -4251,
+        -4183
+      ],
+      "signed_scan_rank_audit_runs": [
+        1294,
+        1292,
+        1289,
+        1321
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        1024,
+        256,
+        8,
+        -32,
+        2,
+        128,
+        -4,
+        512,
+        16,
+        1,
+        64
+      ],
+      "primary_B": 4398,
+      "positive_weights": [
+        5422,
+        4654,
+        4406,
+        4366,
+        4400,
+        4526,
+        4394,
+        4910,
+        4414,
+        4399,
+        4462
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        9,
+        4,
+        6,
+        2,
+        8
+      ],
+      "atomic_coordinates": [
+        2,
+        4,
+        9
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        2,
+        4,
+        5,
+        6,
+        8,
+        9
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        3,
+        7,
+        10
+      ],
+      "atomic_diameter": 7,
+      "outside_score_gap": 96,
+      "witnesses": 32,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 32,
+      "instance_ALL_paired_lower_bound": 17,
+      "universal_ALL_paired_lower_bound": 17,
+      "support_sha256": "e67945db81d37cedb3293f66391280802975ba472fd9973db9f5fd67d7b77a06",
+      "positive_scan_rank_audit_runs": [
+        1466,
+        1427,
+        1429,
+        1462
+      ],
+      "actual_input_sign_reflection": 1485,
+      "actual_signed_weights": [
+        -5422,
+        4654,
+        -4406,
+        -4366,
+        4400,
+        4526,
+        -4394,
+        -4910,
+        -4414,
+        4399,
+        -4462
+      ],
+      "signed_scan_rank_audit_runs": [
+        1455,
+        1432,
+        1428,
+        1458
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        -4,
+        -64,
+        1024,
+        1,
+        32,
+        2,
+        -128,
+        -256,
+        -512,
+        16,
+        -8
+      ],
+      "primary_B": 4112,
+      "positive_weights": [
+        4108,
+        4048,
+        5136,
+        4113,
+        4144,
+        4114,
+        3984,
+        3856,
+        3600,
+        4128,
+        4104
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        3,
+        5,
+        0,
+        10,
+        9
+      ],
+      "atomic_coordinates": [
+        0,
+        3,
+        10
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        3,
+        4,
+        5,
+        9,
+        10
+      ],
+      "outside_coordinates": [
+        1,
+        2,
+        6,
+        7,
+        8
+      ],
+      "atomic_diameter": 9,
+      "outside_score_gap": 64,
+      "witnesses": 32,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 32,
+      "instance_ALL_paired_lower_bound": 17,
+      "universal_ALL_paired_lower_bound": 17,
+      "support_sha256": "f6800c45f30e758f1be0c0842c6e2a0dbd1cbc5e7e6cf8121e4c796bb907ed88",
+      "positive_scan_rank_audit_runs": [
+        1185,
+        1192,
+        1184,
+        1187
+      ],
+      "actual_input_sign_reflection": 84,
+      "actual_signed_weights": [
+        4108,
+        4048,
+        -5136,
+        4113,
+        -4144,
+        4114,
+        -3984,
+        3856,
+        3600,
+        4128,
+        4104
+      ],
+      "signed_scan_rank_audit_runs": [
+        1192,
+        1183,
+        1190,
+        1184
+      ]
+    },
+    {
+      "n": 11,
+      "secondary": [
+        -512,
+        1024,
+        -32,
+        -256,
+        8,
+        -4,
+        128,
+        -1,
+        -2,
+        -16,
+        64
+      ],
+      "primary_B": 4738,
+      "positive_weights": [
+        4226,
+        5762,
+        4706,
+        4482,
+        4746,
+        4734,
+        4866,
+        4737,
+        4736,
+        4722,
+        4802
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        7,
+        8,
+        5,
+        4,
+        9
+      ],
+      "atomic_coordinates": [
+        5,
+        7,
+        9
+      ],
+      "controller_coordinate": 8,
+      "free_coordinates": [
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        10
+      ],
+      "atomic_diameter": 15,
+      "outside_score_gap": 64,
+      "witnesses": 64,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 64,
+      "instance_ALL_paired_lower_bound": 33,
+      "universal_ALL_paired_lower_bound": 17,
+      "support_sha256": "8599bada6ca4cdd2a086a473e027fd85408b4bc5ee578d42cd471ded548256a3",
+      "positive_scan_rank_audit_runs": [
+        1495,
+        1408,
+        1400,
+        1398
+      ],
+      "actual_input_sign_reflection": 1607,
+      "actual_signed_weights": [
+        -4226,
+        -5762,
+        -4706,
+        4482,
+        4746,
+        4734,
+        -4866,
+        4737,
+        4736,
+        -4722,
+        -4802
+      ],
+      "signed_scan_rank_audit_runs": [
+        1528,
+        1458,
+        1491,
+        1461
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048
+      ],
+      "primary_B": 8616,
+      "positive_weights": [
+        8617,
+        8618,
+        8620,
+        8624,
+        8632,
+        8648,
+        8680,
+        8744,
+        8872,
+        9128,
+        9640,
+        10664
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 32,
+      "witnesses": 128,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 128,
+      "instance_ALL_paired_lower_bound": 65,
+      "universal_ALL_paired_lower_bound": 33,
+      "support_sha256": "1768292156732e48eaf7efe73b62379b1ff7769126b9b95a20146af416dbc4cd",
+      "positive_scan_rank_audit_runs": [
+        2036,
+        2061,
+        2014,
+        2073
+      ],
+      "actual_input_sign_reflection": 780,
+      "actual_signed_weights": [
+        8617,
+        8618,
+        -8620,
+        -8624,
+        8632,
+        8648,
+        8680,
+        8744,
+        -8872,
+        -9128,
+        9640,
+        10664
+      ],
+      "signed_scan_rank_audit_runs": [
+        2071,
+        2052,
+        2054,
+        2031
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        1,
+        32,
+        -2,
+        64,
+        4,
+        128,
+        8,
+        256,
+        16,
+        512,
+        1024,
+        2048
+      ],
+      "primary_B": 8206,
+      "positive_weights": [
+        8207,
+        8238,
+        8204,
+        8270,
+        8210,
+        8334,
+        8214,
+        8462,
+        8222,
+        8718,
+        9230,
+        10254
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        2,
+        4,
+        6,
+        8
+      ],
+      "atomic_coordinates": [
+        0,
+        4,
+        8
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        8
+      ],
+      "outside_coordinates": [
+        1,
+        3,
+        7,
+        9,
+        10,
+        11
+      ],
+      "atomic_diameter": 15,
+      "outside_score_gap": 32,
+      "witnesses": 64,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 64,
+      "instance_ALL_paired_lower_bound": 33,
+      "universal_ALL_paired_lower_bound": 33,
+      "support_sha256": "b93f1536ae68d9a073eb414796a475194ab96cdc454bfa05698f9af2cee6a0e2",
+      "positive_scan_rank_audit_runs": [
+        2169,
+        2180,
+        2163,
+        2170
+      ],
+      "actual_input_sign_reflection": 472,
+      "actual_signed_weights": [
+        8207,
+        8238,
+        8204,
+        -8270,
+        -8210,
+        8334,
+        -8214,
+        -8462,
+        -8222,
+        8718,
+        9230,
+        10254
+      ],
+      "signed_scan_rank_audit_runs": [
+        2161,
+        2196,
+        2174,
+        2193
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        1,
+        32,
+        -1024,
+        4,
+        -256,
+        -64,
+        16,
+        -2,
+        -128,
+        -512,
+        8,
+        2048
+      ],
+      "primary_B": 8366,
+      "positive_weights": [
+        8367,
+        8398,
+        7342,
+        8370,
+        8110,
+        8302,
+        8382,
+        8364,
+        8238,
+        7854,
+        8374,
+        10414
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        7,
+        3,
+        10,
+        6
+      ],
+      "atomic_coordinates": [
+        0,
+        3,
+        10
+      ],
+      "controller_coordinate": 4,
+      "free_coordinates": [
+        0,
+        3,
+        4,
+        6,
+        7,
+        10
+      ],
+      "outside_coordinates": [
+        1,
+        2,
+        5,
+        8,
+        9,
+        11
+      ],
+      "atomic_diameter": 7,
+      "outside_score_gap": 64,
+      "witnesses": 64,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 64,
+      "instance_ALL_paired_lower_bound": 33,
+      "universal_ALL_paired_lower_bound": 33,
+      "support_sha256": "e611ec54e16bb5d7300717021df3f11ed489d1e6d386a8ac8165605280dec4e7",
+      "positive_scan_rank_audit_runs": [
+        2306,
+        2278,
+        2308,
+        2297
+      ],
+      "actual_input_sign_reflection": 3009,
+      "actual_signed_weights": [
+        -8367,
+        8398,
+        7342,
+        8370,
+        8110,
+        8302,
+        -8382,
+        -8364,
+        -8238,
+        -7854,
+        8374,
+        -10414
+      ],
+      "signed_scan_rank_audit_runs": [
+        2322,
+        2292,
+        2325,
+        2325
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        512,
+        -1,
+        128,
+        32,
+        64,
+        8,
+        256,
+        4,
+        16,
+        -2,
+        -1024,
+        -2048
+      ],
+      "primary_B": 8523,
+      "positive_weights": [
+        9035,
+        8522,
+        8651,
+        8555,
+        8587,
+        8531,
+        8779,
+        8527,
+        8539,
+        8521,
+        7499,
+        6475
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        1,
+        9,
+        7,
+        5,
+        8
+      ],
+      "atomic_coordinates": [
+        1,
+        7,
+        9
+      ],
+      "controller_coordinate": 8,
+      "free_coordinates": [
+        1,
+        5,
+        7,
+        8,
+        9
+      ],
+      "outside_coordinates": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        10,
+        11
+      ],
+      "atomic_diameter": 6,
+      "outside_score_gap": 32,
+      "witnesses": 128,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 128,
+      "instance_ALL_paired_lower_bound": 65,
+      "universal_ALL_paired_lower_bound": 33,
+      "support_sha256": "5457db5273805195adf1bcc9160f4f75ba2466942f686f4085f9a4fb71e2d327",
+      "positive_scan_rank_audit_runs": [
+        3033,
+        2823,
+        2845,
+        2827
+      ],
+      "actual_input_sign_reflection": 2885,
+      "actual_signed_weights": [
+        -9035,
+        8522,
+        -8651,
+        8555,
+        8587,
+        8531,
+        -8779,
+        8527,
+        -8539,
+        -8521,
+        7499,
+        -6475
+      ],
+      "signed_scan_rank_audit_runs": [
+        2835,
+        2899,
+        2899,
+        2895
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        -1,
+        512,
+        -4,
+        16,
+        2048,
+        -128,
+        -2,
+        -1024,
+        8,
+        32,
+        64,
+        -256
+      ],
+      "primary_B": 8474,
+      "positive_weights": [
+        8473,
+        8986,
+        8470,
+        8490,
+        10522,
+        8346,
+        8472,
+        7450,
+        8482,
+        8506,
+        8538,
+        8218
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        6,
+        2,
+        8,
+        3
+      ],
+      "atomic_coordinates": [
+        0,
+        2,
+        8
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        2,
+        3,
+        6,
+        8
+      ],
+      "outside_coordinates": [
+        1,
+        4,
+        5,
+        7,
+        9,
+        10,
+        11
+      ],
+      "atomic_diameter": 12,
+      "outside_score_gap": 32,
+      "witnesses": 128,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 128,
+      "instance_ALL_paired_lower_bound": 65,
+      "universal_ALL_paired_lower_bound": 33,
+      "support_sha256": "6d93400ae3f7cb660b043d8635b21945af6cd0d905af6b0cb72fea28e4495598",
+      "positive_scan_rank_audit_runs": [
+        2715,
+        2739,
+        2718,
+        2703
+      ],
+      "actual_input_sign_reflection": 4083,
+      "actual_signed_weights": [
+        -8473,
+        -8986,
+        8470,
+        8490,
+        -10522,
+        -8346,
+        -8472,
+        -7450,
+        -8482,
+        -8506,
+        -8538,
+        -8218
+      ],
+      "signed_scan_rank_audit_runs": [
+        2727,
+        2701,
+        2719,
+        2700
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        64,
+        1,
+        -32,
+        4,
+        -2048,
+        -2,
+        -1024,
+        -8,
+        -16,
+        -256,
+        -128,
+        -512
+      ],
+      "primary_B": 8468,
+      "positive_weights": [
+        8532,
+        8469,
+        8436,
+        8472,
+        6420,
+        8466,
+        7444,
+        8460,
+        8452,
+        8212,
+        8340,
+        7956
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        1,
+        5,
+        3,
+        7,
+        8
+      ],
+      "atomic_coordinates": [
+        1,
+        5,
+        8
+      ],
+      "controller_coordinate": 6,
+      "free_coordinates": [
+        1,
+        3,
+        5,
+        6,
+        7,
+        8
+      ],
+      "outside_coordinates": [
+        0,
+        2,
+        4,
+        9,
+        10,
+        11
+      ],
+      "atomic_diameter": 17,
+      "outside_score_gap": 32,
+      "witnesses": 64,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 64,
+      "instance_ALL_paired_lower_bound": 33,
+      "universal_ALL_paired_lower_bound": 33,
+      "support_sha256": "081d8ee17df82e67858b40fa2589b264327355253d54217e878970bab7aabe20",
+      "positive_scan_rank_audit_runs": [
+        2195,
+        2186,
+        2172,
+        2180
+      ],
+      "actual_input_sign_reflection": 2835,
+      "actual_signed_weights": [
+        -8532,
+        -8469,
+        8436,
+        8472,
+        -6420,
+        8466,
+        7444,
+        8460,
+        -8452,
+        -8212,
+        8340,
+        -7956
+      ],
+      "signed_scan_rank_audit_runs": [
+        2196,
+        2186,
+        2180,
+        2189
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        -2048,
+        -32,
+        -1,
+        512,
+        1024,
+        2,
+        16,
+        -128,
+        64,
+        -8,
+        -256,
+        4
+      ],
+      "primary_B": 8715,
+      "positive_weights": [
+        6667,
+        8683,
+        8714,
+        9227,
+        9739,
+        8717,
+        8731,
+        8587,
+        8779,
+        8707,
+        8459,
+        8719
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        2,
+        5,
+        11,
+        9,
+        6
+      ],
+      "atomic_coordinates": [
+        2,
+        5,
+        11
+      ],
+      "controller_coordinate": 6,
+      "free_coordinates": [
+        2,
+        5,
+        6,
+        9,
+        11
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        3,
+        4,
+        7,
+        8,
+        10
+      ],
+      "atomic_diameter": 5,
+      "outside_score_gap": 32,
+      "witnesses": 128,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 128,
+      "instance_ALL_paired_lower_bound": 65,
+      "universal_ALL_paired_lower_bound": 33,
+      "support_sha256": "7407d8fe3cc76392c138de93f1ddd807167811417ba6f36f7f46ffdcd81f9dde",
+      "positive_scan_rank_audit_runs": [
+        2612,
+        2646,
+        2582,
+        2663
+      ],
+      "actual_input_sign_reflection": 1229,
+      "actual_signed_weights": [
+        -6667,
+        8683,
+        -8714,
+        -9227,
+        9739,
+        8717,
+        -8731,
+        -8587,
+        8779,
+        8707,
+        -8459,
+        8719
+      ],
+      "signed_scan_rank_audit_runs": [
+        2616,
+        2636,
+        2574,
+        2618
+      ]
+    },
+    {
+      "n": 12,
+      "secondary": [
+        -512,
+        256,
+        64,
+        -2048,
+        16,
+        1,
+        -2,
+        32,
+        128,
+        -4,
+        -1024,
+        8
+      ],
+      "primary_B": 9165,
+      "positive_weights": [
+        8653,
+        9421,
+        9229,
+        7117,
+        9181,
+        9166,
+        9163,
+        9197,
+        9293,
+        9161,
+        8141,
+        9173
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        5,
+        6,
+        9,
+        11,
+        4
+      ],
+      "atomic_coordinates": [
+        5,
+        6,
+        11
+      ],
+      "controller_coordinate": 7,
+      "free_coordinates": [
+        4,
+        5,
+        6,
+        7,
+        9,
+        11
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        8,
+        10
+      ],
+      "atomic_diameter": 10,
+      "outside_score_gap": 64,
+      "witnesses": 64,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 64,
+      "instance_ALL_paired_lower_bound": 33,
+      "universal_ALL_paired_lower_bound": 33,
+      "support_sha256": "26374be73992a3608db285964cff6157b5bff59f08e04223ccaef2f22e53c367",
+      "positive_scan_rank_audit_runs": [
+        2356,
+        2382,
+        2399,
+        2392
+      ],
+      "actual_input_sign_reflection": 2235,
+      "actual_signed_weights": [
+        -8653,
+        -9421,
+        9229,
+        -7117,
+        -9181,
+        -9166,
+        9163,
+        -9197,
+        9293,
+        9161,
+        8141,
+        -9173
+      ],
+      "signed_scan_rank_audit_runs": [
+        2395,
+        2411,
+        2414,
+        2400
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096
+      ],
+      "primary_B": 17270,
+      "positive_weights": [
+        17271,
+        17272,
+        17274,
+        17278,
+        17286,
+        17302,
+        17334,
+        17398,
+        17526,
+        17782,
+        18294,
+        19318,
+        21366
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 32,
+      "witnesses": 256,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 256,
+      "instance_ALL_paired_lower_bound": 129,
+      "universal_ALL_paired_lower_bound": 65,
+      "support_sha256": "a33f9de9c1aba3845fa17dc13c165d607b08e0d117013ad01f3a9e1a041992a7",
+      "positive_scan_rank_audit_runs": [
+        4154,
+        4140,
+        4075,
+        4085
+      ],
+      "actual_input_sign_reflection": 4994,
+      "actual_signed_weights": [
+        17271,
+        -17272,
+        17274,
+        17278,
+        17286,
+        17302,
+        17334,
+        -17398,
+        -17526,
+        -17782,
+        18294,
+        19318,
+        -21366
+      ],
+      "signed_scan_rank_audit_runs": [
+        4073,
+        4082,
+        4058,
+        4122
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        1,
+        32,
+        -2,
+        64,
+        4,
+        128,
+        8,
+        256,
+        -16,
+        512,
+        1024,
+        2048,
+        4096
+      ],
+      "primary_B": 16866,
+      "positive_weights": [
+        16867,
+        16898,
+        16864,
+        16930,
+        16870,
+        16994,
+        16874,
+        17122,
+        16850,
+        17378,
+        17890,
+        18914,
+        20962
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        2,
+        4,
+        6,
+        8
+      ],
+      "atomic_coordinates": [
+        0,
+        2,
+        8
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        8
+      ],
+      "outside_coordinates": [
+        1,
+        5,
+        7,
+        9,
+        10,
+        11,
+        12
+      ],
+      "atomic_diameter": 17,
+      "outside_score_gap": 96,
+      "witnesses": 128,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 128,
+      "instance_ALL_paired_lower_bound": 65,
+      "universal_ALL_paired_lower_bound": 65,
+      "support_sha256": "82dd75c6c2f5b4f2b5f0496faabcafa5cbc6f5d1e3b3153c0c42561ccb8b5b53",
+      "positive_scan_rank_audit_runs": [
+        4459,
+        4450,
+        4476,
+        4480
+      ],
+      "actual_input_sign_reflection": 751,
+      "actual_signed_weights": [
+        -16867,
+        -16898,
+        -16864,
+        -16930,
+        16870,
+        -16994,
+        -16874,
+        -17122,
+        16850,
+        -17378,
+        17890,
+        18914,
+        20962
+      ],
+      "signed_scan_rank_audit_runs": [
+        4452,
+        4462,
+        4460,
+        4474
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        -2048,
+        32,
+        -256,
+        -1,
+        -1024,
+        4,
+        512,
+        -64,
+        2,
+        -4096,
+        -16,
+        -8,
+        128
+      ],
+      "primary_B": 16483,
+      "positive_weights": [
+        14435,
+        16515,
+        16227,
+        16482,
+        15459,
+        16487,
+        16995,
+        16419,
+        16485,
+        12387,
+        16467,
+        16475,
+        16611
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        3,
+        8,
+        5,
+        11,
+        10
+      ],
+      "atomic_coordinates": [
+        3,
+        8,
+        11
+      ],
+      "controller_coordinate": 9,
+      "free_coordinates": [
+        3,
+        5,
+        8,
+        9,
+        10,
+        11
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        7,
+        12
+      ],
+      "atomic_diameter": 10,
+      "outside_score_gap": 64,
+      "witnesses": 128,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 128,
+      "instance_ALL_paired_lower_bound": 65,
+      "universal_ALL_paired_lower_bound": 65,
+      "support_sha256": "931b1031cd804c690f8bc2f878b640230a85fa05afb6f1f36a6c3565850bd455",
+      "positive_scan_rank_audit_runs": [
+        5577,
+        5579,
+        5625,
+        5641
+      ],
+      "actual_input_sign_reflection": 1438,
+      "actual_signed_weights": [
+        14435,
+        -16515,
+        -16227,
+        -16482,
+        -15459,
+        16487,
+        16995,
+        -16419,
+        -16485,
+        12387,
+        -16467,
+        16475,
+        16611
+      ],
+      "signed_scan_rank_audit_runs": [
+        5600,
+        5605,
+        5561,
+        5607
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        -4,
+        -8,
+        16,
+        64,
+        -128,
+        256,
+        -1,
+        4096,
+        -1024,
+        512,
+        32,
+        -2,
+        -2048
+      ],
+      "primary_B": 16463,
+      "positive_weights": [
+        16459,
+        16455,
+        16479,
+        16527,
+        16335,
+        16719,
+        16462,
+        20559,
+        15439,
+        16975,
+        16495,
+        16461,
+        14415
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        6,
+        11,
+        0,
+        1,
+        2
+      ],
+      "atomic_coordinates": [
+        0,
+        1,
+        11
+      ],
+      "controller_coordinate": 2,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        6,
+        11
+      ],
+      "outside_coordinates": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        12
+      ],
+      "atomic_diameter": 6,
+      "outside_score_gap": 32,
+      "witnesses": 256,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 256,
+      "instance_ALL_paired_lower_bound": 129,
+      "universal_ALL_paired_lower_bound": 65,
+      "support_sha256": "d0110ef637bd144f875e1979e6b40727ac19c521ba27c69047e80e43e35faaeb",
+      "positive_scan_rank_audit_runs": [
+        6143,
+        6173,
+        6123,
+        6133
+      ],
+      "actual_input_sign_reflection": 648,
+      "actual_signed_weights": [
+        16459,
+        16455,
+        16479,
+        -16527,
+        16335,
+        16719,
+        16462,
+        -20559,
+        15439,
+        -16975,
+        16495,
+        16461,
+        14415
+      ],
+      "signed_scan_rank_audit_runs": [
+        6171,
+        6135,
+        6151,
+        6187
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        -32,
+        64,
+        4096,
+        -8,
+        16,
+        -512,
+        -4,
+        -1,
+        -2,
+        -128,
+        2048,
+        256,
+        1024
+      ],
+      "primary_B": 17040,
+      "positive_weights": [
+        17008,
+        17104,
+        21136,
+        17032,
+        17056,
+        16528,
+        17036,
+        17039,
+        17038,
+        16912,
+        19088,
+        17296,
+        18064
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        7,
+        8,
+        6,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        3,
+        6,
+        8
+      ],
+      "controller_coordinate": 7,
+      "free_coordinates": [
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        2,
+        5,
+        9,
+        10,
+        11,
+        12
+      ],
+      "atomic_diameter": 6,
+      "outside_score_gap": 32,
+      "witnesses": 256,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 256,
+      "instance_ALL_paired_lower_bound": 129,
+      "universal_ALL_paired_lower_bound": 65,
+      "support_sha256": "9eaeb65268eda46d4311573e574909d146f143354bb58f8c0ec81661d45390c6",
+      "positive_scan_rank_audit_runs": [
+        6138,
+        6039,
+        6173,
+        6171
+      ],
+      "actual_input_sign_reflection": 4381,
+      "actual_signed_weights": [
+        -17008,
+        17104,
+        -21136,
+        -17032,
+        -17056,
+        16528,
+        17036,
+        17039,
+        -17038,
+        16912,
+        19088,
+        17296,
+        -18064
+      ],
+      "signed_scan_rank_audit_runs": [
+        6024,
+        6045,
+        6116,
+        6016
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        128,
+        4,
+        -16,
+        1024,
+        2048,
+        -512,
+        -32,
+        256,
+        -64,
+        -1,
+        8,
+        4096,
+        -2
+      ],
+      "primary_B": 17102,
+      "positive_weights": [
+        17230,
+        17106,
+        17086,
+        18126,
+        19150,
+        16590,
+        17070,
+        17358,
+        17038,
+        17101,
+        17110,
+        21198,
+        17100
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        9,
+        12,
+        1,
+        10,
+        2
+      ],
+      "atomic_coordinates": [
+        1,
+        9,
+        12
+      ],
+      "controller_coordinate": 10,
+      "free_coordinates": [
+        1,
+        2,
+        9,
+        10,
+        12
+      ],
+      "outside_coordinates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        11
+      ],
+      "atomic_diameter": 6,
+      "outside_score_gap": 32,
+      "witnesses": 256,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 256,
+      "instance_ALL_paired_lower_bound": 129,
+      "universal_ALL_paired_lower_bound": 65,
+      "support_sha256": "ca7b1d371a219c59fe4aa7a2a4836c288edc0b73b360bfa426dbceb6340ae47f",
+      "positive_scan_rank_audit_runs": [
+        4793,
+        4787,
+        5234,
+        4656
+      ],
+      "actual_input_sign_reflection": 6897,
+      "actual_signed_weights": [
+        -17230,
+        17106,
+        17086,
+        18126,
+        -19150,
+        -16590,
+        -17070,
+        -17358,
+        17038,
+        -17101,
+        17110,
+        -21198,
+        -17100
+      ],
+      "signed_scan_rank_audit_runs": [
+        5194,
+        5234,
+        4695,
+        5674
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        -4,
+        -1,
+        256,
+        32,
+        -1024,
+        64,
+        16,
+        2048,
+        -4096,
+        2,
+        128,
+        -512,
+        8
+      ],
+      "primary_B": 17288,
+      "positive_weights": [
+        17284,
+        17287,
+        17544,
+        17320,
+        16264,
+        17352,
+        17304,
+        19336,
+        13192,
+        17290,
+        17416,
+        16776,
+        17296
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        1,
+        9,
+        0,
+        12,
+        6
+      ],
+      "atomic_coordinates": [
+        0,
+        1,
+        12
+      ],
+      "controller_coordinate": 2,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        6,
+        9,
+        12
+      ],
+      "outside_coordinates": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11
+      ],
+      "atomic_diameter": 12,
+      "outside_score_gap": 32,
+      "witnesses": 128,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 128,
+      "instance_ALL_paired_lower_bound": 65,
+      "universal_ALL_paired_lower_bound": 65,
+      "support_sha256": "995900cef6746555138f625781fb4f663a12521db41ca17e06deb26e69cb9cb4",
+      "positive_scan_rank_audit_runs": [
+        4650,
+        4620,
+        4631,
+        4638
+      ],
+      "actual_input_sign_reflection": 786,
+      "actual_signed_weights": [
+        17284,
+        -17287,
+        17544,
+        17320,
+        -16264,
+        17352,
+        17304,
+        19336,
+        -13192,
+        -17290,
+        17416,
+        16776,
+        17296
+      ],
+      "signed_scan_rank_audit_runs": [
+        4597,
+        4611,
+        4592,
+        4628
+      ]
+    },
+    {
+      "n": 13,
+      "secondary": [
+        1024,
+        32,
+        2048,
+        -512,
+        1,
+        64,
+        -256,
+        -8,
+        4,
+        -128,
+        -2,
+        -16,
+        -4096
+      ],
+      "primary_B": 16787,
+      "positive_weights": [
+        17811,
+        16819,
+        18835,
+        16275,
+        16788,
+        16851,
+        16531,
+        16779,
+        16791,
+        16659,
+        16785,
+        16771,
+        12691
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        4,
+        10,
+        8,
+        7,
+        11
+      ],
+      "atomic_coordinates": [
+        4,
+        7,
+        11
+      ],
+      "controller_coordinate": 8,
+      "free_coordinates": [
+        4,
+        7,
+        8,
+        10,
+        11
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6,
+        9,
+        12
+      ],
+      "atomic_diameter": 17,
+      "outside_score_gap": 32,
+      "witnesses": 256,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 256,
+      "instance_ALL_paired_lower_bound": 129,
+      "universal_ALL_paired_lower_bound": 65,
+      "support_sha256": "ce5d834bdd483aac1c33d025ca7b2ca37b3fbe830cb2a8a7481f4ab616f6d60a",
+      "positive_scan_rank_audit_runs": [
+        5013,
+        4995,
+        4995,
+        5021
+      ],
+      "actual_input_sign_reflection": 1767,
+      "actual_signed_weights": [
+        -17811,
+        -16819,
+        -18835,
+        16275,
+        16788,
+        -16851,
+        -16531,
+        -16779,
+        16791,
+        -16659,
+        -16785,
+        16771,
+        12691
+      ],
+      "signed_scan_rank_audit_runs": [
+        5023,
+        5019,
+        4975,
+        4949
+      ]
+    },
+    {
+      "n": 14,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        8192
+      ],
+      "primary_B": 33694,
+      "positive_weights": [
+        33695,
+        33696,
+        33698,
+        33702,
+        33710,
+        33726,
+        33758,
+        33822,
+        33950,
+        34206,
+        34718,
+        35742,
+        37790,
+        41886
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 32,
+      "witnesses": 512,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 512,
+      "instance_ALL_paired_lower_bound": 257,
+      "universal_ALL_paired_lower_bound": 129,
+      "support_sha256": "043a8c1ee016447d85fb909f15e9296922ca0e9e1802381ef01f62bc5f0184ca",
+      "positive_scan_rank_audit_runs": [
+        8240,
+        8208,
+        8171,
+        8205
+      ],
+      "actual_input_sign_reflection": 11335,
+      "actual_signed_weights": [
+        -33695,
+        -33696,
+        -33698,
+        33702,
+        33710,
+        33726,
+        -33758,
+        33822,
+        33950,
+        34206,
+        -34718,
+        -35742,
+        37790,
+        -41886
+      ],
+      "signed_scan_rank_audit_runs": [
+        8114,
+        8276,
+        8266,
+        8319
+      ]
+    },
+    {
+      "n": 14,
+      "secondary": [
+        -1,
+        32,
+        -2,
+        64,
+        4,
+        128,
+        8,
+        256,
+        16,
+        512,
+        1024,
+        2048,
+        4096,
+        8192
+      ],
+      "primary_B": 33318,
+      "positive_weights": [
+        33317,
+        33350,
+        33316,
+        33382,
+        33322,
+        33446,
+        33326,
+        33574,
+        33334,
+        33830,
+        34342,
+        35366,
+        37414,
+        41510
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        2,
+        4,
+        6,
+        8
+      ],
+      "atomic_coordinates": [
+        0,
+        4,
+        8
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        8
+      ],
+      "outside_coordinates": [
+        1,
+        3,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "atomic_diameter": 17,
+      "outside_score_gap": 32,
+      "witnesses": 256,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 256,
+      "instance_ALL_paired_lower_bound": 129,
+      "universal_ALL_paired_lower_bound": 129,
+      "support_sha256": "aac84a97e0a8ad37f9b9a27e02a2263a795191d8a5eed2500f70edec410c65a1",
+      "positive_scan_rank_audit_runs": [
+        8663,
+        8679,
+        8687,
+        8675
+      ],
+      "actual_input_sign_reflection": 7379,
+      "actual_signed_weights": [
+        -33317,
+        -33350,
+        33316,
+        33382,
+        -33322,
+        33446,
+        -33326,
+        -33574,
+        33334,
+        33830,
+        -34342,
+        -35366,
+        -37414,
+        41510
+      ],
+      "signed_scan_rank_audit_runs": [
+        8686,
+        8659,
+        8658,
+        8644
+      ]
+    },
+    {
+      "n": 14,
+      "secondary": [
+        128,
+        -8,
+        -64,
+        -32,
+        2,
+        1024,
+        512,
+        -4096,
+        -256,
+        16,
+        -2048,
+        4,
+        1,
+        8192
+      ],
+      "primary_B": 33742,
+      "positive_weights": [
+        33870,
+        33734,
+        33678,
+        33710,
+        33744,
+        34766,
+        34254,
+        29646,
+        33486,
+        33758,
+        31694,
+        33746,
+        33743,
+        41934
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        12,
+        4,
+        11,
+        1,
+        9
+      ],
+      "atomic_coordinates": [
+        4,
+        9,
+        12
+      ],
+      "controller_coordinate": 10,
+      "free_coordinates": [
+        1,
+        4,
+        9,
+        10,
+        11,
+        12
+      ],
+      "outside_coordinates": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        13
+      ],
+      "atomic_diameter": 15,
+      "outside_score_gap": 32,
+      "witnesses": 256,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 256,
+      "instance_ALL_paired_lower_bound": 129,
+      "universal_ALL_paired_lower_bound": 129,
+      "support_sha256": "c41eff90deb268c1987387466360b6c9fdb7b6f8d3d0cc4287a904ec720f5e4d",
+      "positive_scan_rank_audit_runs": [
+        10468,
+        10471,
+        10519,
+        10404
+      ],
+      "actual_input_sign_reflection": 12643,
+      "actual_signed_weights": [
+        -33870,
+        -33734,
+        33678,
+        33710,
+        33744,
+        -34766,
+        -34254,
+        29646,
+        -33486,
+        33758,
+        31694,
+        33746,
+        -33743,
+        -41934
+      ],
+      "signed_scan_rank_audit_runs": [
+        10478,
+        10497,
+        10468,
+        10448
+      ]
+    },
+    {
+      "n": 14,
+      "secondary": [
+        32,
+        2048,
+        -64,
+        128,
+        1024,
+        -4096,
+        512,
+        1,
+        -2,
+        -8,
+        -16,
+        -256,
+        8192,
+        4
+      ],
+      "primary_B": 33360,
+      "positive_weights": [
+        33392,
+        35408,
+        33296,
+        33488,
+        34384,
+        29264,
+        33872,
+        33361,
+        33358,
+        33352,
+        33344,
+        33104,
+        41552,
+        33364
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        7,
+        8,
+        13,
+        9,
+        10
+      ],
+      "atomic_coordinates": [
+        7,
+        8,
+        13
+      ],
+      "controller_coordinate": 9,
+      "free_coordinates": [
+        7,
+        8,
+        9,
+        10,
+        13
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        11,
+        12
+      ],
+      "atomic_diameter": 6,
+      "outside_score_gap": 32,
+      "witnesses": 512,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 512,
+      "instance_ALL_paired_lower_bound": 257,
+      "universal_ALL_paired_lower_bound": 129,
+      "support_sha256": "91bb32c0a6a0909dbef7e535cdcea465114fa9fc4e8bd27213815017a98517a4",
+      "positive_scan_rank_audit_runs": [
+        10474,
+        9444,
+        10241,
+        9822
+      ],
+      "actual_input_sign_reflection": 300,
+      "actual_signed_weights": [
+        33392,
+        35408,
+        -33296,
+        -33488,
+        34384,
+        -29264,
+        33872,
+        33361,
+        -33358,
+        33352,
+        33344,
+        33104,
+        41552,
+        33364
+      ],
+      "signed_scan_rank_audit_runs": [
+        10660,
+        10809,
+        10182,
+        9885
+      ]
+    },
+    {
+      "n": 14,
+      "secondary": [
+        -512,
+        32,
+        -4096,
+        64,
+        -8192,
+        128,
+        -2,
+        16,
+        4,
+        8,
+        1024,
+        256,
+        -1,
+        2048
+      ],
+      "primary_B": 33273,
+      "positive_weights": [
+        32761,
+        33305,
+        29177,
+        33337,
+        25081,
+        33401,
+        33271,
+        33289,
+        33277,
+        33281,
+        34297,
+        33529,
+        33272,
+        35321
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        12,
+        6,
+        8,
+        9,
+        7
+      ],
+      "atomic_coordinates": [
+        7,
+        8,
+        12
+      ],
+      "controller_coordinate": 9,
+      "free_coordinates": [
+        6,
+        7,
+        8,
+        9,
+        12
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        11,
+        13
+      ],
+      "atomic_diameter": 17,
+      "outside_score_gap": 32,
+      "witnesses": 512,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 512,
+      "instance_ALL_paired_lower_bound": 257,
+      "universal_ALL_paired_lower_bound": 129,
+      "support_sha256": "d985eb0e80b00f4ae42bc8c53956915b0f1647937088d8a7ad8899d017afdd01",
+      "positive_scan_rank_audit_runs": [
+        12588,
+        12255,
+        12572,
+        12687
+      ],
+      "actual_input_sign_reflection": 5110,
+      "actual_signed_weights": [
+        32761,
+        -33305,
+        -29177,
+        33337,
+        -25081,
+        -33401,
+        -33271,
+        -33289,
+        -33277,
+        -33281,
+        34297,
+        33529,
+        -33272,
+        35321
+      ],
+      "signed_scan_rank_audit_runs": [
+        12644,
+        12494,
+        12566,
+        12452
+      ]
+    },
+    {
+      "n": 14,
+      "secondary": [
+        256,
+        16,
+        128,
+        -8192,
+        -1024,
+        -4096,
+        -8,
+        32,
+        -512,
+        4,
+        -2,
+        -1,
+        -64,
+        -2048
+      ],
+      "primary_B": 33258,
+      "positive_weights": [
+        33514,
+        33274,
+        33386,
+        25066,
+        32234,
+        29162,
+        33250,
+        33290,
+        32746,
+        33262,
+        33256,
+        33257,
+        33194,
+        31210
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        11,
+        10,
+        9,
+        6,
+        1
+      ],
+      "atomic_coordinates": [
+        1,
+        9,
+        11
+      ],
+      "controller_coordinate": 10,
+      "free_coordinates": [
+        1,
+        6,
+        9,
+        10,
+        11
+      ],
+      "outside_coordinates": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        12,
+        13
+      ],
+      "atomic_diameter": 17,
+      "outside_score_gap": 32,
+      "witnesses": 512,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 512,
+      "instance_ALL_paired_lower_bound": 257,
+      "universal_ALL_paired_lower_bound": 129,
+      "support_sha256": "f59ccdf48db49b337ef29eafa1ff1023f39d3b7fa1c4587ccbe64afa1894949b",
+      "positive_scan_rank_audit_runs": [
+        12093,
+        12158,
+        11569,
+        13124
+      ],
+      "actual_input_sign_reflection": 7258,
+      "actual_signed_weights": [
+        33514,
+        -33274,
+        33386,
+        -25066,
+        -32234,
+        29162,
+        -33250,
+        33290,
+        32746,
+        33262,
+        -33256,
+        -33257,
+        -33194,
+        31210
+      ],
+      "signed_scan_rank_audit_runs": [
+        12620,
+        12281,
+        11453,
+        12651
+      ]
+    },
+    {
+      "n": 14,
+      "secondary": [
+        -32,
+        -8192,
+        -256,
+        -8,
+        -2048,
+        16,
+        1024,
+        512,
+        -2,
+        4,
+        4096,
+        64,
+        -128,
+        1
+      ],
+      "primary_B": 33298,
+      "positive_weights": [
+        33266,
+        25106,
+        33042,
+        33290,
+        31250,
+        33314,
+        34322,
+        33810,
+        33296,
+        33302,
+        37394,
+        33362,
+        33170,
+        33299
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        13,
+        8,
+        9,
+        3,
+        5
+      ],
+      "atomic_coordinates": [
+        3,
+        8,
+        13
+      ],
+      "controller_coordinate": 9,
+      "free_coordinates": [
+        3,
+        5,
+        8,
+        9,
+        13
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        7,
+        10,
+        11,
+        12
+      ],
+      "atomic_diameter": 9,
+      "outside_score_gap": 32,
+      "witnesses": 512,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 512,
+      "instance_ALL_paired_lower_bound": 257,
+      "universal_ALL_paired_lower_bound": 129,
+      "support_sha256": "1297bfff4acab40ead97c3aefeb0eadbf2a52dec82e755a3ac464e6c356a843f",
+      "positive_scan_rank_audit_runs": [
+        12108,
+        12762,
+        12221,
+        12602
+      ],
+      "actual_input_sign_reflection": 8973,
+      "actual_signed_weights": [
+        -33266,
+        25106,
+        -33042,
+        -33290,
+        31250,
+        33314,
+        34322,
+        33810,
+        -33296,
+        -33302,
+        37394,
+        33362,
+        33170,
+        -33299
+      ],
+      "signed_scan_rank_audit_runs": [
+        12441,
+        11997,
+        12306,
+        12320
+      ]
+    },
+    {
+      "n": 14,
+      "secondary": [
+        32,
+        -1,
+        -64,
+        16,
+        2048,
+        8,
+        256,
+        -512,
+        4,
+        1024,
+        -8192,
+        4096,
+        -2,
+        -128
+      ],
+      "primary_B": 33236,
+      "positive_weights": [
+        33268,
+        33235,
+        33172,
+        33252,
+        35284,
+        33244,
+        33492,
+        32724,
+        33240,
+        34260,
+        25044,
+        37332,
+        33234,
+        33108
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        1,
+        12,
+        8,
+        5,
+        3
+      ],
+      "atomic_coordinates": [
+        1,
+        5,
+        12
+      ],
+      "controller_coordinate": 6,
+      "free_coordinates": [
+        1,
+        3,
+        5,
+        6,
+        8,
+        12
+      ],
+      "outside_coordinates": [
+        0,
+        2,
+        4,
+        7,
+        9,
+        10,
+        11,
+        13
+      ],
+      "atomic_diameter": 10,
+      "outside_score_gap": 64,
+      "witnesses": 256,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 256,
+      "instance_ALL_paired_lower_bound": 129,
+      "universal_ALL_paired_lower_bound": 129,
+      "support_sha256": "ab896b7d32289f33d1832b8dfdeed4510fa3317f791b94b28df31656c5e75343",
+      "positive_scan_rank_audit_runs": [
+        11211,
+        11207,
+        11210,
+        11199
+      ],
+      "actual_input_sign_reflection": 6487,
+      "actual_signed_weights": [
+        -33268,
+        -33235,
+        -33172,
+        33252,
+        -35284,
+        33244,
+        -33492,
+        32724,
+        -33240,
+        34260,
+        25044,
+        -37332,
+        -33234,
+        33108
+      ],
+      "signed_scan_rank_audit_runs": [
+        11204,
+        11212,
+        11200,
+        11209
+      ]
+    },
+    {
+      "n": 15,
+      "secondary": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384
+      ],
+      "primary_B": 65634,
+      "positive_weights": [
+        65635,
+        65636,
+        65638,
+        65642,
+        65650,
+        65666,
+        65698,
+        65762,
+        65890,
+        66146,
+        66658,
+        67682,
+        69730,
+        73826,
+        82018
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "atomic_coordinates": [
+        1,
+        2,
+        4
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "outside_coordinates": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 32,
+      "witnesses": 1024,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 1024,
+      "instance_ALL_paired_lower_bound": 513,
+      "universal_ALL_paired_lower_bound": 257,
+      "support_sha256": "5a98d38c5851021bd24c93dd311da37de34be975086b03b666923ff9a22935be",
+      "positive_scan_rank_audit_runs": [
+        16399,
+        16353,
+        16362,
+        16340
+      ],
+      "actual_input_sign_reflection": 10300,
+      "actual_signed_weights": [
+        65635,
+        65636,
+        -65638,
+        -65642,
+        -65650,
+        -65666,
+        65698,
+        65762,
+        65890,
+        66146,
+        66658,
+        -67682,
+        69730,
+        -73826,
+        82018
+      ],
+      "signed_scan_rank_audit_runs": [
+        16443,
+        16309,
+        16258,
+        16388
+      ]
+    },
+    {
+      "n": 15,
+      "secondary": [
+        -1,
+        32,
+        2,
+        64,
+        -4,
+        128,
+        8,
+        256,
+        16,
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384
+      ],
+      "primary_B": 66080,
+      "positive_weights": [
+        66079,
+        66112,
+        66082,
+        66144,
+        66076,
+        66208,
+        66088,
+        66336,
+        66096,
+        66592,
+        67104,
+        68128,
+        70176,
+        74272,
+        82464
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        2,
+        4,
+        6,
+        8
+      ],
+      "atomic_coordinates": [
+        0,
+        2,
+        8
+      ],
+      "controller_coordinate": 3,
+      "free_coordinates": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        8
+      ],
+      "outside_coordinates": [
+        1,
+        5,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "atomic_diameter": 17,
+      "outside_score_gap": 96,
+      "witnesses": 512,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 512,
+      "instance_ALL_paired_lower_bound": 257,
+      "universal_ALL_paired_lower_bound": 257,
+      "support_sha256": "27e8455cfa67781e2de3857e0451ae713254f546f8bb677385542cd2c7987b85",
+      "positive_scan_rank_audit_runs": [
+        17312,
+        17309,
+        17335,
+        17363
+      ],
+      "actual_input_sign_reflection": 26825,
+      "actual_signed_weights": [
+        -66079,
+        66112,
+        66082,
+        -66144,
+        66076,
+        66208,
+        -66088,
+        -66336,
+        66096,
+        66592,
+        67104,
+        -68128,
+        70176,
+        -74272,
+        -82464
+      ],
+      "signed_scan_rank_audit_runs": [
+        17385,
+        17345,
+        17354,
+        17364
+      ]
+    },
+    {
+      "n": 15,
+      "secondary": [
+        -1,
+        -8192,
+        2048,
+        -32,
+        -4,
+        8,
+        -512,
+        16384,
+        -16,
+        2,
+        -4096,
+        -128,
+        -256,
+        -1024,
+        64
+      ],
+      "primary_B": 66333,
+      "positive_weights": [
+        66332,
+        58141,
+        68381,
+        66301,
+        66329,
+        66341,
+        65821,
+        82717,
+        66317,
+        66335,
+        62237,
+        66205,
+        66077,
+        65309,
+        66397
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        0,
+        9,
+        4,
+        5,
+        8
+      ],
+      "atomic_coordinates": [
+        0,
+        4,
+        9
+      ],
+      "controller_coordinate": 5,
+      "free_coordinates": [
+        0,
+        4,
+        5,
+        8,
+        9
+      ],
+      "outside_coordinates": [
+        1,
+        2,
+        3,
+        6,
+        7,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "atomic_diameter": 6,
+      "outside_score_gap": 32,
+      "witnesses": 1024,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 1024,
+      "instance_ALL_paired_lower_bound": 513,
+      "universal_ALL_paired_lower_bound": 257,
+      "support_sha256": "6c054948c092003bf6c8132443bfa9794e188277c4fc040defdd95d7c3c7b1c3",
+      "positive_scan_rank_audit_runs": [
+        19659,
+        19864,
+        19793,
+        19569
+      ],
+      "actual_input_sign_reflection": 32153,
+      "actual_signed_weights": [
+        -66332,
+        58141,
+        68381,
+        -66301,
+        -66329,
+        66341,
+        65821,
+        -82717,
+        -66317,
+        66335,
+        -62237,
+        -66205,
+        -66077,
+        -65309,
+        -66397
+      ],
+      "signed_scan_rank_audit_runs": [
+        19764,
+        19588,
+        19951,
+        19761
+      ]
+    },
+    {
+      "n": 15,
+      "secondary": [
+        8192,
+        -128,
+        -4096,
+        2,
+        -64,
+        -4,
+        -32,
+        -1,
+        -16384,
+        -256,
+        -2048,
+        -1024,
+        16,
+        8,
+        512
+      ],
+      "primary_B": 65909,
+      "positive_weights": [
+        74101,
+        65781,
+        61813,
+        65911,
+        65845,
+        65905,
+        65877,
+        65908,
+        49525,
+        65653,
+        63861,
+        64885,
+        65925,
+        65917,
+        66421
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        7,
+        3,
+        5,
+        13,
+        12
+      ],
+      "atomic_coordinates": [
+        3,
+        7,
+        13
+      ],
+      "controller_coordinate": 8,
+      "free_coordinates": [
+        3,
+        5,
+        7,
+        8,
+        12,
+        13
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        9,
+        10,
+        11,
+        14
+      ],
+      "atomic_diameter": 9,
+      "outside_score_gap": 32,
+      "witnesses": 512,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 512,
+      "instance_ALL_paired_lower_bound": 257,
+      "universal_ALL_paired_lower_bound": 257,
+      "support_sha256": "0e37fd52976b79b2c034d937f055555bc557735063ae574068f9518b4337abb9",
+      "positive_scan_rank_audit_runs": [
+        22714,
+        22663,
+        22790,
+        22725
+      ],
+      "actual_input_sign_reflection": 6580,
+      "actual_signed_weights": [
+        74101,
+        65781,
+        -61813,
+        65911,
+        -65845,
+        -65905,
+        65877,
+        -65908,
+        -49525,
+        65653,
+        63861,
+        -64885,
+        -65925,
+        65917,
+        66421
+      ],
+      "signed_scan_rank_audit_runs": [
+        22727,
+        22702,
+        22740,
+        22709
+      ]
+    },
+    {
+      "n": 15,
+      "secondary": [
+        -16384,
+        2048,
+        64,
+        256,
+        -1,
+        -16,
+        32,
+        1024,
+        -4,
+        -8192,
+        -512,
+        -2,
+        -8,
+        128,
+        -4096
+      ],
+      "primary_B": 65607,
+      "positive_weights": [
+        49223,
+        67655,
+        65671,
+        65863,
+        65606,
+        65591,
+        65639,
+        66631,
+        65603,
+        57415,
+        65095,
+        65605,
+        65599,
+        65735,
+        61511
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        4,
+        11,
+        8,
+        12,
+        5
+      ],
+      "atomic_coordinates": [
+        4,
+        8,
+        12
+      ],
+      "controller_coordinate": 9,
+      "free_coordinates": [
+        4,
+        5,
+        8,
+        9,
+        11,
+        12
+      ],
+      "outside_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        7,
+        10,
+        13,
+        14
+      ],
+      "atomic_diameter": 7,
+      "outside_score_gap": 32,
+      "witnesses": 512,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 512,
+      "instance_ALL_paired_lower_bound": 257,
+      "universal_ALL_paired_lower_bound": 257,
+      "support_sha256": "07e8da342fbd6248a7b47137b607ca153c7a98a13039527c0774ae402203cead",
+      "positive_scan_rank_audit_runs": [
+        23187,
+        23181,
+        23214,
+        23221
+      ],
+      "actual_input_sign_reflection": 20023,
+      "actual_signed_weights": [
+        -49223,
+        -67655,
+        -65671,
+        65863,
+        -65606,
+        -65591,
+        65639,
+        66631,
+        65603,
+        -57415,
+        -65095,
+        -65605,
+        65599,
+        65735,
+        -61511
+      ],
+      "signed_scan_rank_audit_runs": [
+        23203,
+        23167,
+        23171,
+        23256
+      ]
+    },
+    {
+      "n": 15,
+      "secondary": [
+        8192,
+        -16,
+        8,
+        -512,
+        128,
+        -32,
+        16384,
+        4,
+        1,
+        4096,
+        -256,
+        -1024,
+        2,
+        -64,
+        -2048
+      ],
+      "primary_B": 66441,
+      "positive_weights": [
+        74633,
+        66425,
+        66449,
+        65929,
+        66569,
+        66409,
+        82825,
+        66445,
+        66442,
+        70537,
+        66185,
+        65417,
+        66443,
+        66377,
+        64393
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        8,
+        12,
+        7,
+        2,
+        1
+      ],
+      "atomic_coordinates": [
+        2,
+        7,
+        12
+      ],
+      "controller_coordinate": 8,
+      "free_coordinates": [
+        1,
+        2,
+        7,
+        8,
+        12
+      ],
+      "outside_coordinates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        9,
+        10,
+        11,
+        13,
+        14
+      ],
+      "atomic_diameter": 6,
+      "outside_score_gap": 32,
+      "witnesses": 1024,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 1024,
+      "instance_ALL_paired_lower_bound": 513,
+      "universal_ALL_paired_lower_bound": 257,
+      "support_sha256": "12dff5a98892cd74b1ad1e852a18c35b6c45b1eaa7d4ee9a2de70670c61ec216",
+      "positive_scan_rank_audit_runs": [
+        24565,
+        24249,
+        24053,
+        24419
+      ],
+      "actual_input_sign_reflection": 31459,
+      "actual_signed_weights": [
+        -74633,
+        -66425,
+        66449,
+        65929,
+        66569,
+        -66409,
+        -82825,
+        -66445,
+        66442,
+        -70537,
+        66185,
+        -65417,
+        -66443,
+        -66377,
+        -64393
+      ],
+      "signed_scan_rank_audit_runs": [
+        24287,
+        24661,
+        24281,
+        24173
+      ]
+    },
+    {
+      "n": 15,
+      "secondary": [
+        -512,
+        4,
+        -1,
+        -32,
+        256,
+        -1024,
+        2,
+        8192,
+        8,
+        16,
+        128,
+        64,
+        2048,
+        16384,
+        -4096
+      ],
+      "primary_B": 65839,
+      "positive_weights": [
+        65327,
+        65843,
+        65838,
+        65807,
+        66095,
+        64815,
+        65841,
+        74031,
+        65847,
+        65855,
+        65967,
+        65903,
+        67887,
+        82223,
+        61743
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        2,
+        6,
+        1,
+        8,
+        9
+      ],
+      "atomic_coordinates": [
+        1,
+        6,
+        9
+      ],
+      "controller_coordinate": 7,
+      "free_coordinates": [
+        1,
+        2,
+        6,
+        7,
+        8,
+        9
+      ],
+      "outside_coordinates": [
+        0,
+        3,
+        4,
+        5,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "atomic_diameter": 14,
+      "outside_score_gap": 32,
+      "witnesses": 512,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 512,
+      "instance_ALL_paired_lower_bound": 257,
+      "universal_ALL_paired_lower_bound": 257,
+      "support_sha256": "be557b03aab00efb1ba0888860c8093765da04bb14c287bdf107d1574ae667a0",
+      "positive_scan_rank_audit_runs": [
+        21223,
+        21329,
+        21259,
+        21307
+      ],
+      "actual_input_sign_reflection": 24391,
+      "actual_signed_weights": [
+        -65327,
+        -65843,
+        -65838,
+        65807,
+        66095,
+        64815,
+        -65841,
+        74031,
+        -65847,
+        -65855,
+        -65967,
+        -65903,
+        -67887,
+        82223,
+        -61743
+      ],
+      "signed_scan_rank_audit_runs": [
+        21367,
+        21363,
+        21213,
+        21209
+      ]
+    },
+    {
+      "n": 15,
+      "secondary": [
+        8,
+        2,
+        -16384,
+        16,
+        1,
+        -256,
+        -32,
+        -8192,
+        4096,
+        -2048,
+        512,
+        1024,
+        -4,
+        -128,
+        64
+      ],
+      "primary_B": 66495,
+      "positive_weights": [
+        66503,
+        66497,
+        50111,
+        66511,
+        66496,
+        66239,
+        66463,
+        58303,
+        70591,
+        64447,
+        67007,
+        67519,
+        66491,
+        66367,
+        66559
+      ],
+      "five_smallest_magnitude_input_coordinates": [
+        4,
+        1,
+        12,
+        0,
+        3
+      ],
+      "atomic_coordinates": [
+        0,
+        1,
+        12
+      ],
+      "controller_coordinate": 2,
+      "free_coordinates": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        12
+      ],
+      "outside_coordinates": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        13,
+        14
+      ],
+      "atomic_diameter": 12,
+      "outside_score_gap": 32,
+      "witnesses": 512,
+      "maximum_union_support_load": 1,
+      "packing_scale": 2,
+      "scaled_fractional_packing_objective": 512,
+      "instance_ALL_paired_lower_bound": 257,
+      "universal_ALL_paired_lower_bound": 257,
+      "support_sha256": "080fc005ccd125e1af6ba3032c4a4fbd64f2c414980a8e538e89925d82f15c0a",
+      "positive_scan_rank_audit_runs": [
+        20206,
+        20168,
+        20453,
+        20216
+      ],
+      "actual_input_sign_reflection": 11507,
+      "actual_signed_weights": [
+        -66503,
+        -66497,
+        50111,
+        66511,
+        -66496,
+        -66239,
+        -66463,
+        -58303,
+        70591,
+        64447,
+        -67007,
+        -67519,
+        66491,
+        -66367,
+        66559
+      ],
+      "signed_scan_rank_audit_runs": [
+        20487,
+        20327,
+        20381,
+        20161
+      ]
+    }
+  ],
+  "seed": 202610031700,
+  "violations": 0,
+  "seconds": 19.453938696999103,
+  "audit_sha256": "23e181a9db2756e1a20ad42e98519230fdbee2c9df9edb75247f0cd8192fab0b"
+}
