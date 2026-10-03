@@ -1,0 +1,10 @@
+candidate 7 R 33 C 34 budget 31 quarter 32
+dimension_done 7 bestC 34 minimum_budget 31
+candidate 8 R 72 C 72 budget 57 quarter 64
+candidate 8 R 65 C 66 budget 59 quarter 64
+dimension_done 8 bestC 66 minimum_budget 57
+candidate 9 R 137 C 138 budget 101 quarter 128
+dimension_done 9 bestC 138 minimum_budget 101
+candidate 10 R 287 C 286 budget 155 quarter 256
+dimension_done 10 bestC 286 minimum_budget 155
+{"status": "EXPLORATORY_SPARSE_BUDGET_TARGETING", "seed": 202610032015, "trees": 60, "scans": 50, "milp_calls": 80, "stream_sha256": "5537fc53d10db49690bbd41990dd464716a113b7ec3af241cd60a641b68516e6", "seconds": 46.4487342479988, "scope": "Only sampled scans and exact feasible upper witnesses. No optimization lower bounds or all-dimensional claim."}

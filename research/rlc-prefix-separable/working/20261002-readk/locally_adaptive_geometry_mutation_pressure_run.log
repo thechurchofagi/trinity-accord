@@ -1,0 +1,63 @@
+new_minimum 6 C 30 R 31 restart 0 step 8 cases 2
+restart_done 6 0 bestC 30 cases 29
+restart_done 6 1 bestC 30 cases 58
+restart_done 6 2 bestC 30 cases 94
+restart_done 6 3 bestC 30 cases 126
+restart_done 6 4 bestC 30 cases 161
+restart_done 6 5 bestC 30 cases 198
+restart_done 6 6 bestC 30 cases 231
+restart_done 6 7 bestC 30 cases 258
+restart_done 6 8 bestC 30 cases 288
+restart_done 6 9 bestC 30 cases 326
+restart_done 6 10 bestC 30 cases 357
+restart_done 6 11 bestC 30 cases 384
+restart_done 6 12 bestC 30 cases 412
+restart_done 6 13 bestC 30 cases 446
+restart_done 6 14 bestC 30 cases 478
+restart_done 6 15 bestC 30 cases 510
+restart_done 6 16 bestC 30 cases 543
+restart_done 6 17 bestC 30 cases 575
+new_minimum 6 C 28 R 29 restart 18 step 3 cases 577
+new_minimum 6 C 26 R 27 restart 18 step 23 cases 586
+new_minimum 6 C 24 R 25 restart 18 step 26 cases 587
+restart_done 6 18 bestC 24 cases 608
+restart_done 6 19 bestC 24 cases 646
+restart_done 6 20 bestC 24 cases 669
+restart_done 6 21 bestC 24 cases 694
+restart_done 6 22 bestC 24 cases 730
+restart_done 6 23 bestC 24 cases 763
+restart_done 6 24 bestC 24 cases 787
+restart_done 6 25 bestC 24 cases 812
+restart_done 6 26 bestC 24 cases 848
+restart_done 6 27 bestC 24 cases 888
+restart_done 6 28 bestC 24 cases 917
+restart_done 6 29 bestC 24 cases 946
+restart_done 6 30 bestC 24 cases 977
+restart_done 6 31 bestC 24 cases 1011
+restart_done 6 32 bestC 24 cases 1044
+restart_done 6 33 bestC 24 cases 1077
+restart_done 6 34 bestC 24 cases 1107
+restart_done 6 35 bestC 24 cases 1136
+restart_done 6 36 bestC 24 cases 1169
+restart_done 6 37 bestC 24 cases 1194
+restart_done 6 38 bestC 24 cases 1223
+new_minimum 6 C 22 R 22 restart 39 step 54 cases 1241
+restart_done 6 39 bestC 22 cases 1251
+new_minimum 8 C 178 R 179 restart 0 step 0 cases 1253
+new_minimum 8 C 176 R 177 restart 0 step 1 cases 1254
+restart_done 8 0 bestC 176 cases 1280
+new_minimum 8 C 162 R 162 restart 1 step 1 cases 1282
+new_minimum 8 C 158 R 159 restart 1 step 11 cases 1286
+new_minimum 8 C 154 R 154 restart 1 step 56 cases 1301
+restart_done 8 1 bestC 154 cases 1307
+new_minimum 8 C 114 R 114 restart 2 step 1 cases 1309
+new_minimum 8 C 112 R 112 restart 2 step 57 cases 1333
+restart_done 8 2 bestC 112 cases 1342
+restart_done 8 3 bestC 112 cases 1378
+restart_done 8 4 bestC 112 cases 1403
+restart_done 8 5 bestC 112 cases 1428
+restart_done 8 6 bestC 112 cases 1454
+restart_done 8 7 bestC 112 cases 1486
+restart_done 8 8 bestC 112 cases 1529
+restart_done 8 9 bestC 112 cases 1555
+{"status": "EXPLORATORY_GEOMETRY_WITH_EXACT_ORIENTATION_MINIMA", "seed": 202610032030, "exact_contexts": 1555, "seconds": 2.0833471240039216, "scope": "Each orientation minimum is exact; query geometries/weights sampled. NOT an all-weight lower or all-n theorem."}

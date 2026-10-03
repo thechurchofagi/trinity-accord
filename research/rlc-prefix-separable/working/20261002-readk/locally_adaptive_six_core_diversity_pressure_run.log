@@ -1,0 +1,20 @@
+bestC 24 R 25 orbit 0 case 35 solves 1
+bestC 20 R 20 orbit 0 case 79 solves 2
+bestC 16 R 17 orbit 0 case 1110 solves 6
+orbit_done 0 attempts 4128 solves 8 bestC 16
+orbit_done 1 attempts 8256 solves 21 bestC 16
+orbit_done 2 attempts 12384 solves 37 bestC 16
+orbit_done 3 attempts 16512 solves 43 bestC 16
+orbit_done 4 attempts 20640 solves 60 bestC 16
+orbit_done 5 attempts 24768 solves 73 bestC 16
+orbit_done 6 attempts 28896 solves 84 bestC 16
+orbit_done 7 attempts 33024 solves 93 bestC 16
+orbit_done 8 attempts 37152 solves 106 bestC 16
+orbit_done 9 attempts 41280 solves 113 bestC 16
+orbit_done 10 attempts 45408 solves 114 bestC 16
+orbit_done 11 attempts 49536 solves 120 bestC 16
+orbit_done 12 attempts 53664 solves 126 bestC 16
+orbit_done 13 attempts 57792 solves 127 bestC 16
+orbit_done 14 attempts 61920 solves 127 bestC 16
+orbit_done 15 attempts 66048 solves 127 bestC 16
+{"status": "EXPLORATORY_DIVERSE_ACTUAL_Q6_EXTENSION", "seed": 202610031956, "draws_per_seed": 8, "attempts": 66048, "milp_calls": 127, "stream_sha256": "84811eb223575ee62e8c4265b9d98ae4deb737d5547b61c7e249cb643244928b", "seconds": 15.839137310002116, "scope": "INCOMPLETE sweep/geometry pressure. Only feasible integer witnesses; no numerical lower certificate or all-n conclusion."}
