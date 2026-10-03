@@ -1,0 +1,33 @@
+name: Promptly stamp published TA22 v1.1 PDFs
+on:
+  push:
+    branches: [research/rlc-v11-prompt-stamp-20261003]
+    paths: [.github/workflows/stamp-rlc-v11-once.yml]
+permissions:
+  contents: read
+concurrency:
+  group: ta22-v11-public-hash-stamp
+  cancel-in-progress: false
+jobs:
+  stamp:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          show-progress: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install pinned OTS client
+        run: python3 -m pip install -r requirements-ots.txt
+      - name: Submit hash-bound stamps for the two exact public PDF files
+        run: python3 scripts/research_paper_ots.py stamp --batch research/paper-timestamps/2026-10-03-paper22-v11
+      - name: Retain submitted proofs and exact target identity
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ta22-v11-initial-ots
+          path: research/paper-timestamps/2026-10-03-paper22-v11/
+          if-no-files-found: error
+          retention-days: 90
