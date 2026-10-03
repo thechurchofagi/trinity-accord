@@ -1,0 +1,18 @@
+{"new_min_n": 5, "D_plus_K": 8, "N_over_8": 4, "weights": [1, 2, 4, 8, 16], "R_min": 11, "tag": ["exact_real_new_weight_slice", [1, 2, 4, 8], 0, 1]}
+{"new_min_n": 5, "D_plus_K": 2, "N_over_8": 4, "weights": [32, 2, 12, 16, 8], "R_min": 9, "tag": ["exact_real_new_weight_slice", [1, 6, 8, 4], 0, 32]}
+{"completed_exact_slices": 1680, "evaluated_so_far": 33120, "counterexamples_so_far": 6}
+{"new_min_n": 6, "D_plus_K": 8, "N_over_8": 8, "weights": [1, 6, 8, 4, 20, 40], "R_min": 19, "tag": ["sharp_seed", 6]}
+{"completed_dimension": 6, "best_D_plus_K": 8, "counterexamples_total": 6}
+{"new_min_n": 7, "D_plus_K": 16, "N_over_8": 16, "weights": [1, 6, 8, 4, 20, 40, 80], "R_min": 38, "tag": ["sharp_seed", 7]}
+{"completed_dimension": 7, "best_D_plus_K": 16, "counterexamples_total": 6}
+{"new_min_n": 8, "D_plus_K": 32, "N_over_8": 32, "weights": [1, 6, 8, 4, 20, 40, 80, 160], "R_min": 75, "tag": ["sharp_seed", 8]}
+{"completed_dimension": 8, "best_D_plus_K": 32, "counterexamples_total": 6}
+{"new_min_n": 9, "D_plus_K": 64, "N_over_8": 64, "weights": [1, 6, 8, 4, 20, 40, 80, 160, 320], "R_min": 150, "tag": ["sharp_seed", 9]}
+{"completed_dimension": 9, "best_D_plus_K": 64, "counterexamples_total": 6}
+{"new_min_n": 10, "D_plus_K": 128, "N_over_8": 128, "weights": [1, 6, 8, 4, 20, 40, 80, 160, 320, 640], "R_min": 299, "tag": ["sharp_seed", 10]}
+{"completed_dimension": 10, "best_D_plus_K": 128, "counterexamples_total": 6}
+{"new_min_n": 11, "D_plus_K": 256, "N_over_8": 256, "weights": [1, 6, 8, 4, 20, 40, 80, 160, 320, 640, 1280], "R_min": 598, "tag": ["sharp_seed", 11]}
+{"completed_dimension": 11, "best_D_plus_K": 256, "counterexamples_total": 6}
+{"new_min_n": 12, "D_plus_K": 512, "N_over_8": 512, "weights": [1, 6, 8, 4, 20, 40, 80, 160, 320, 640, 1280, 2560], "R_min": 1195, "tag": ["sharp_seed", 12]}
+{"completed_dimension": 12, "best_D_plus_K": 512, "counterexamples_total": 6}
+{"seed": 202610031124, "total_generic_evaluations": 35641, "nongeneric_rejections": 3686, "evaluated_digest": "aabed2c3b3cb41f0f02615cfb33159a6b54d5b81488a7771ac4fdd6e7b8ca2ac", "seconds": 2.4986096379871015, "scope": "Complete generic real insertion parameter only for the listed fixed four-dimensional integer parent vectors and each insertion position. Fresh higher-dimensional samples/local moves do not cover chambers. All claimed fixed-scan rank optima are exact."}

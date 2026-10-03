@@ -1,0 +1,26 @@
+{"n": 6, "new_DK_min": 28, "weights": [1, 32, 2, 12, 16, 8], "N_over_16": 4}
+{"n": 6, "new_DK_min": 10, "weights": [31, 32, 2, 12, 16, 8], "N_over_16": 4}
+{"n": 6, "new_DK_min": 8, "weights": [59, 32, 2, 12, 16, 8], "N_over_16": 4}
+{"n": 6, "new_DK_min": 2, "weights": [32, 16, 1, 6, 8, 4], "N_over_16": 4}
+{"completed_n": 6, "fixed_parents_next": [[32, 16, 1, 6, 8, 4], [16, 32, 1, 6, 8, 4], [16, 1, 6, 32, 8, 4], [16, 1, 6, 8, 32, 4]], "DK_min": 2, "total_evaluated": 630}
+{"n": 7, "new_DK_min": 60, "weights": [1, 64, 32, 2, 12, 16, 8], "N_over_16": 8}
+{"n": 7, "new_DK_min": 42, "weights": [31, 64, 32, 2, 12, 16, 8], "N_over_16": 8}
+{"n": 7, "new_DK_min": 34, "weights": [63, 64, 32, 2, 12, 16, 8], "N_over_16": 8}
+{"n": 7, "new_DK_min": 33, "weights": [91, 64, 32, 2, 12, 16, 8], "N_over_16": 8}
+{"n": 7, "new_DK_min": 10, "weights": [95, 64, 32, 2, 12, 16, 8], "N_over_16": 8}
+{"n": 7, "new_DK_min": 8, "weights": [123, 64, 32, 2, 12, 16, 8], "N_over_16": 8}
+{"n": 7, "new_DK_min": 2, "weights": [64, 32, 16, 1, 6, 8, 4], "N_over_16": 8}
+{"completed_n": 7, "fixed_parents_next": [[64, 32, 16, 1, 6, 8, 4], [32, 64, 16, 1, 6, 8, 4], [32, 16, 64, 1, 6, 8, 4], [32, 16, 1, 6, 64, 8, 4]], "DK_min": 2, "total_evaluated": 2506}
+{"n": 8, "new_DK_min": 124, "weights": [1, 128, 64, 32, 2, 12, 16, 8], "N_over_16": 16}
+{"n": 8, "new_DK_min": 106, "weights": [31, 128, 64, 32, 2, 12, 16, 8], "N_over_16": 16}
+{"n": 8, "new_DK_min": 98, "weights": [63, 128, 64, 32, 2, 12, 16, 8], "N_over_16": 16}
+{"n": 8, "new_DK_min": 74, "weights": [95, 128, 64, 32, 2, 12, 16, 8], "N_over_16": 16}
+{"n": 8, "new_DK_min": 66, "weights": [127, 128, 64, 32, 2, 12, 16, 8], "N_over_16": 16}
+{"n": 8, "new_DK_min": 42, "weights": [159, 128, 64, 32, 2, 12, 16, 8], "N_over_16": 16}
+{"n": 8, "new_DK_min": 34, "weights": [191, 128, 64, 32, 2, 12, 16, 8], "N_over_16": 16}
+{"n": 8, "new_DK_min": 33, "weights": [219, 128, 64, 32, 2, 12, 16, 8], "N_over_16": 16}
+{"n": 8, "new_DK_min": 10, "weights": [223, 128, 64, 32, 2, 12, 16, 8], "N_over_16": 16}
+{"n": 8, "new_DK_min": 8, "weights": [251, 128, 64, 32, 2, 12, 16, 8], "N_over_16": 16}
+{"n": 8, "new_DK_min": 2, "weights": [128, 64, 32, 16, 1, 6, 8, 4], "N_over_16": 16}
+{"completed_n": 8, "fixed_parents_next": [[128, 64, 32, 16, 1, 6, 8, 4], [64, 128, 32, 16, 1, 6, 8, 4], [64, 32, 128, 16, 1, 6, 8, 4], [64, 32, 16, 128, 1, 6, 8, 4]], "DK_min": 2, "total_evaluated": 6698}
+{"generic_evaluations": 6698, "seconds": 0.9492064049991313, "evaluated_digest": "41d6d10c90444d609ebc94c1685d952e33812d5db2e011ea7bc8cabb897fef39", "scope": "Exact full real insertion parameter for the displayed metrics only. Parent chambers and arbitrary old-coordinate permutations are not covered. Fixed-scan optima in witnesses are exact."}
