@@ -1,0 +1,17 @@
+{"D": 2, "K": 1, "certified_all_family_lower_bound": 4, "matching_count": 1, "n": 3}
+{"D": 2, "K": 4, "certified_all_family_lower_bound": 6, "matching_count": 3, "n": 4}
+{"D": 2, "K": 8, "certified_all_family_lower_bound": 10, "matching_count": 7, "n": 5}
+{"D": 2, "K": 16, "certified_all_family_lower_bound": 18, "matching_count": 15, "n": 6}
+{"D": 2, "K": 32, "certified_all_family_lower_bound": 34, "matching_count": 31, "n": 7}
+{"D": 2, "K": 64, "certified_all_family_lower_bound": 66, "matching_count": 63, "n": 8}
+{"D": 2, "K": 128, "certified_all_family_lower_bound": 130, "matching_count": 127, "n": 9}
+{"D": 2, "K": 256, "certified_all_family_lower_bound": 258, "matching_count": 255, "n": 10}
+{"D": 2, "K": 512, "certified_all_family_lower_bound": 514, "matching_count": 511, "n": 11}
+{"D": 2, "K": 1024, "certified_all_family_lower_bound": 1026, "matching_count": 1023, "n": 12}
+{"D": 2, "K": 2048, "certified_all_family_lower_bound": 2050, "matching_count": 2047, "n": 13}
+{"D": 2, "K": 4096, "certified_all_family_lower_bound": 4098, "matching_count": 4095, "n": 14}
+{"D": 2, "K": 8192, "certified_all_family_lower_bound": 8194, "matching_count": 8191, "n": 15}
+{"D": 2, "K": 16384, "certified_all_family_lower_bound": 16386, "matching_count": 16383, "n": 16}
+{"D": 2, "K": 32768, "certified_all_family_lower_bound": 32770, "matching_count": 32767, "n": 17}
+{"D": 2, "K": 65536, "certified_all_family_lower_bound": 65538, "matching_count": 65535, "n": 18}
+{"rows_sha256": "fc7d0df09b1c3f9fd01748a62fdd2bdb068c3e3f01a18beffd068a259fec03eb", "scope": "This is one restricted scan class. Arbitrary cardinality perturbations and arbitrary generic additive scans remain open.", "seconds": 5.35034430900123, "status": "VERIFIED_ALL_DIMENSION_RESTRICTED_SCAN_THEOREM", "theorem": "Every paired-sibling rank has at least 2^(n-2)+2 runs for n>=3 on the cardinality-first, within-layer numerical scan, and its coordinate reflections.", "violations": 0}
