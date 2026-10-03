@@ -1,0 +1,15 @@
+{"n": 6, "trial": 0, "net": 8, "D": 4, "E": 12, "limit": [56, 128], "secondary": [4, 6, 3, 0, 8, 32]}
+{"n": 6, "complete": true, "distinct_sampled_orders": 1771, "best_net": 8, "elapsed": 0.548}
+{"n": 7, "trial": 0, "net": 16, "D": 8, "E": 24, "limit": [112, 256], "secondary": [4, 6, 3, 0, 8, 32, 64]}
+{"n": 7, "complete": true, "distinct_sampled_orders": 2241, "best_net": 16, "elapsed": 1.58}
+{"n": 8, "trial": 0, "net": 32, "D": 16, "E": 48, "limit": [224, 512], "secondary": [4, 6, 3, 0, 8, 32, 64, 128]}
+{"n": 8, "trial": 242, "net": 36, "D": 18, "E": 54, "limit": [220, 512], "secondary": [19596, 20109, 19343, 18579, 20635, 26795, 35019, 0]}
+{"n": 8, "complete": true, "distinct_sampled_orders": 1988, "best_net": 36, "elapsed": 2.915}
+{"n": 9, "trial": 0, "net": 64, "D": 32, "E": 96, "limit": [448, 1024], "secondary": [4, 6, 3, 0, 8, 32, 64, 128, 256]}
+{"n": 9, "trial": 1, "net": 72, "D": 36, "E": 108, "limit": [440, 1024], "secondary": [19596, 20109, 19343, 18579, 20635, 26795, 35019, 0, 160077]}
+{"n": 9, "trial": 1845, "net": 76, "D": 40, "E": 116, "limit": [436, 1024], "secondary": [190379, 189866, 189613, 188849, 190905, 197065, 45537, 330347, 0]}
+{"n": 9, "complete": true, "distinct_sampled_orders": 1165, "best_net": 76, "elapsed": 4.265}
+{"n": 10, "trial": 0, "net": 128, "D": 64, "E": 192, "limit": [896, 2048], "secondary": [4, 6, 3, 0, 8, 32, 64, 128, 256, 512]}
+{"n": 10, "trial": 1, "net": 152, "D": 80, "E": 232, "limit": [872, 2048], "secondary": [190379, 189866, 189613, 188849, 190905, 197065, 45537, 330347, 0, 1522562]}
+{"n": 10, "complete": true, "distinct_sampled_orders": 656, "best_net": 152, "elapsed": 5.737}
+{"state": "TARGETED_PRESSURE_COMPLETE_NOT_CHAMBER_CLASSIFICATION", "seed": 202610030845, "budgets": {"6": 6000, "7": 6000, "8": 4000, "9": 2000, "10": 1000}, "violations": 0, "elapsed_seconds": 5.737, "verification_digest": "aa31446c97b04fbe34b47209f75d05334546ed59b5f58b839b29b28136db886c", "limitations": "All displayed interior graphs and sign energies are exact. Secondary chambers are sampled. Only the independently proved general core extension justifies an all-dimensional family for a chosen vector."}
