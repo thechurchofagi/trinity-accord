@@ -1,0 +1,58 @@
+name: Prepare RLC Paper TA22 v1.1
+on:
+  push:
+    branches: [research/rlc-prefix-separable-v1-1-20261003]
+    paths:
+      - '.github/workflows/prepare-rlc-prefix-separable-v11.yml'
+      - 'research/rlc-prefix-separable/versions/v1.1/publication.py'
+      - 'research/rlc-prefix-separable/versions/v1.1/source-*.md'
+      - 'research/rlc-prefix-separable/versions/v1.1/AUDIT-RECEIPT.json'
+permissions:
+  contents: write
+concurrency:
+  group: rlc-ta22-zenodo-v11
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta22-v11-prepare]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/rlc-prefix-separable-v1-1-20261003
+          fetch-depth: 1
+      - name: Install PDF and finite-verification toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq pandoc texlive-xetex fonts-dejavu-core poppler-utils
+          python3 -m pip install numpy==2.3.5
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
+      - name: Check publication guards and independently rerun finite verification
+        run: |
+          python3 research/rlc-prefix-separable/versions/v1.1/test_publication.py
+          python3 research/rlc-prefix-separable/versions/v1.1/verify_release.py > "$RUNNER_TEMP/ta22-v11-finite-checks.json"
+      - name: Reserve exactly one TA22 record and build its DOI-bound package
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/rlc-prefix-separable/versions/v1.1/publication.py prepare
+      - name: Verify exact package inventory and hashes
+        run: python3 research/rlc-prefix-separable/versions/v1.1/publication.py verify
+      - name: Persist reservation, generated package and operation receipts
+        if: always()
+        run: python3 research/rlc-prefix-separable/versions/v1.1/publication.py persist
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta22-rlc-v11-preparation
+          path: |
+            research/rlc-prefix-separable/versions/v1.1/published/
+            research/rlc-prefix-separable/versions/v1.1/create-intent.json
+            research/rlc-prefix-separable/versions/v1.1/deposit.json
+            research/rlc-prefix-separable/versions/v1.1/EXPECTED-PUBLICATION.json
+            research/rlc-prefix-separable/versions/v1.1/format-checks.json
+            research/rlc-prefix-separable/versions/v1.1/preparation-attempt.json
+            ${{ runner.temp }}/ta22-v11-finite-checks.json
+          retention-days: 90
+          if-no-files-found: warn

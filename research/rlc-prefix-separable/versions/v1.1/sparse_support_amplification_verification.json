@@ -1,0 +1,4111 @@
+{
+  "status": "VERIFIED_SPARSE_SUPPORT_AMPLIFICATION_AND_QUANTIFIER_REDUCTION",
+  "seed": 202610031545,
+  "actual_lift_cases": 108,
+  "actual_lifts": [
+    {
+      "core_weights": [
+        -4407,
+        -32151
+      ],
+      "d": 2,
+      "m": 0,
+      "N": 4,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 2,
+      "core_C": 2,
+      "B": 1,
+      "full_R": 2,
+      "full_C": 2,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -4407,
+        -32151
+      ],
+      "d": 2,
+      "m": 1,
+      "N": 8,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 2,
+      "core_C": 2,
+      "B": 1,
+      "full_R": 4,
+      "full_C": 4,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -4407,
+        -32151
+      ],
+      "d": 2,
+      "m": 3,
+      "N": 32,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 2,
+      "core_C": 2,
+      "B": 1,
+      "full_R": 16,
+      "full_C": 16,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -4407,
+        -32151
+      ],
+      "d": 2,
+      "m": 6,
+      "N": 256,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 2,
+      "core_C": 2,
+      "B": 1,
+      "full_R": 128,
+      "full_C": 128,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -2614,
+        -26374
+      ],
+      "d": 2,
+      "m": 0,
+      "N": 4,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 2,
+      "core_C": 2,
+      "B": 1,
+      "full_R": 2,
+      "full_C": 2,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -2614,
+        -26374
+      ],
+      "d": 2,
+      "m": 1,
+      "N": 8,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 2,
+      "core_C": 2,
+      "B": 1,
+      "full_R": 4,
+      "full_C": 4,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -2614,
+        -26374
+      ],
+      "d": 2,
+      "m": 3,
+      "N": 32,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 2,
+      "core_C": 2,
+      "B": 1,
+      "full_R": 16,
+      "full_C": 16,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -2614,
+        -26374
+      ],
+      "d": 2,
+      "m": 6,
+      "N": 256,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 2,
+      "core_C": 2,
+      "B": 1,
+      "full_R": 128,
+      "full_C": 128,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        63429,
+        16942
+      ],
+      "d": 2,
+      "m": 0,
+      "N": 4,
+      "q_core": 0,
+      "q_full": 0,
+      "core_R": 3,
+      "core_C": 4,
+      "B": 2,
+      "full_R": 3,
+      "full_C": 4,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        63429,
+        16942
+      ],
+      "d": 2,
+      "m": 1,
+      "N": 8,
+      "q_core": 0,
+      "q_full": 0,
+      "core_R": 3,
+      "core_C": 4,
+      "B": 2,
+      "full_R": 7,
+      "full_C": 8,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        63429,
+        16942
+      ],
+      "d": 2,
+      "m": 3,
+      "N": 32,
+      "q_core": 0,
+      "q_full": 0,
+      "core_R": 3,
+      "core_C": 4,
+      "B": 2,
+      "full_R": 31,
+      "full_C": 32,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        63429,
+        16942
+      ],
+      "d": 2,
+      "m": 6,
+      "N": 256,
+      "q_core": 0,
+      "q_full": 0,
+      "core_R": 3,
+      "core_C": 4,
+      "B": 2,
+      "full_R": 255,
+      "full_C": 256,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -8949,
+        76483,
+        37709
+      ],
+      "d": 3,
+      "m": 0,
+      "N": 8,
+      "q_core": 2,
+      "q_full": 2,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 4,
+      "full_C": 4,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -8949,
+        76483,
+        37709
+      ],
+      "d": 3,
+      "m": 1,
+      "N": 16,
+      "q_core": 2,
+      "q_full": 2,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 8,
+      "full_C": 8,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -8949,
+        76483,
+        37709
+      ],
+      "d": 3,
+      "m": 3,
+      "N": 64,
+      "q_core": 2,
+      "q_full": 2,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 32,
+      "full_C": 32,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -8949,
+        76483,
+        37709
+      ],
+      "d": 3,
+      "m": 6,
+      "N": 512,
+      "q_core": 2,
+      "q_full": 2,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 256,
+      "full_C": 256,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -417,
+        -18139,
+        -16808
+      ],
+      "d": 3,
+      "m": 0,
+      "N": 8,
+      "q_core": 2,
+      "q_full": 2,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 4,
+      "full_C": 4,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -417,
+        -18139,
+        -16808
+      ],
+      "d": 3,
+      "m": 1,
+      "N": 16,
+      "q_core": 2,
+      "q_full": 2,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 8,
+      "full_C": 8,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -417,
+        -18139,
+        -16808
+      ],
+      "d": 3,
+      "m": 3,
+      "N": 64,
+      "q_core": 2,
+      "q_full": 2,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 32,
+      "full_C": 32,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -417,
+        -18139,
+        -16808
+      ],
+      "d": 3,
+      "m": 6,
+      "N": 512,
+      "q_core": 2,
+      "q_full": 2,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 256,
+      "full_C": 256,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -3184,
+        -49146,
+        -53414
+      ],
+      "d": 3,
+      "m": 0,
+      "N": 8,
+      "q_core": 3,
+      "q_full": 3,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 4,
+      "full_C": 4,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -3184,
+        -49146,
+        -53414
+      ],
+      "d": 3,
+      "m": 1,
+      "N": 16,
+      "q_core": 3,
+      "q_full": 3,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 8,
+      "full_C": 8,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -3184,
+        -49146,
+        -53414
+      ],
+      "d": 3,
+      "m": 3,
+      "N": 64,
+      "q_core": 3,
+      "q_full": 3,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 32,
+      "full_C": 32,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -3184,
+        -49146,
+        -53414
+      ],
+      "d": 3,
+      "m": 6,
+      "N": 512,
+      "q_core": 3,
+      "q_full": 3,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 256,
+      "full_C": 256,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -83407,
+        33761,
+        14951,
+        -35601
+      ],
+      "d": 4,
+      "m": 0,
+      "N": 16,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 12,
+      "core_C": 12,
+      "B": 1,
+      "full_R": 12,
+      "full_C": 12,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -83407,
+        33761,
+        14951,
+        -35601
+      ],
+      "d": 4,
+      "m": 1,
+      "N": 32,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 12,
+      "core_C": 12,
+      "B": 1,
+      "full_R": 24,
+      "full_C": 24,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -83407,
+        33761,
+        14951,
+        -35601
+      ],
+      "d": 4,
+      "m": 3,
+      "N": 128,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 12,
+      "core_C": 12,
+      "B": 1,
+      "full_R": 96,
+      "full_C": 96,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -83407,
+        33761,
+        14951,
+        -35601
+      ],
+      "d": 4,
+      "m": 6,
+      "N": 1024,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 12,
+      "core_C": 12,
+      "B": 1,
+      "full_R": 768,
+      "full_C": 768,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        19594,
+        4279,
+        -98059,
+        -19945
+      ],
+      "d": 4,
+      "m": 0,
+      "N": 16,
+      "q_core": 2,
+      "q_full": 2,
+      "core_R": 13,
+      "core_C": 12,
+      "B": 0,
+      "full_R": 13,
+      "full_C": 12,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        19594,
+        4279,
+        -98059,
+        -19945
+      ],
+      "d": 4,
+      "m": 1,
+      "N": 32,
+      "q_core": 2,
+      "q_full": 2,
+      "core_R": 13,
+      "core_C": 12,
+      "B": 0,
+      "full_R": 25,
+      "full_C": 24,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        19594,
+        4279,
+        -98059,
+        -19945
+      ],
+      "d": 4,
+      "m": 3,
+      "N": 128,
+      "q_core": 2,
+      "q_full": 2,
+      "core_R": 13,
+      "core_C": 12,
+      "B": 0,
+      "full_R": 97,
+      "full_C": 96,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        19594,
+        4279,
+        -98059,
+        -19945
+      ],
+      "d": 4,
+      "m": 6,
+      "N": 1024,
+      "q_core": 2,
+      "q_full": 2,
+      "core_R": 13,
+      "core_C": 12,
+      "B": 0,
+      "full_R": 769,
+      "full_C": 768,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        65579,
+        75693,
+        -51350,
+        -5597
+      ],
+      "d": 4,
+      "m": 0,
+      "N": 16,
+      "q_core": 0,
+      "q_full": 0,
+      "core_R": 15,
+      "core_C": 16,
+      "B": 2,
+      "full_R": 15,
+      "full_C": 16,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        65579,
+        75693,
+        -51350,
+        -5597
+      ],
+      "d": 4,
+      "m": 1,
+      "N": 32,
+      "q_core": 0,
+      "q_full": 0,
+      "core_R": 15,
+      "core_C": 16,
+      "B": 2,
+      "full_R": 31,
+      "full_C": 32,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        65579,
+        75693,
+        -51350,
+        -5597
+      ],
+      "d": 4,
+      "m": 3,
+      "N": 128,
+      "q_core": 0,
+      "q_full": 0,
+      "core_R": 15,
+      "core_C": 16,
+      "B": 2,
+      "full_R": 127,
+      "full_C": 128,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        65579,
+        75693,
+        -51350,
+        -5597
+      ],
+      "d": 4,
+      "m": 6,
+      "N": 1024,
+      "q_core": 0,
+      "q_full": 0,
+      "core_R": 15,
+      "core_C": 16,
+      "B": 2,
+      "full_R": 1023,
+      "full_C": 1024,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -15604,
+        -79752,
+        67807,
+        37944,
+        -78251
+      ],
+      "d": 5,
+      "m": 0,
+      "N": 32,
+      "q_core": 7,
+      "q_full": 7,
+      "core_R": 21,
+      "core_C": 22,
+      "B": 2,
+      "full_R": 21,
+      "full_C": 22,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -15604,
+        -79752,
+        67807,
+        37944,
+        -78251
+      ],
+      "d": 5,
+      "m": 1,
+      "N": 64,
+      "q_core": 7,
+      "q_full": 7,
+      "core_R": 21,
+      "core_C": 22,
+      "B": 2,
+      "full_R": 43,
+      "full_C": 44,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -15604,
+        -79752,
+        67807,
+        37944,
+        -78251
+      ],
+      "d": 5,
+      "m": 3,
+      "N": 256,
+      "q_core": 7,
+      "q_full": 7,
+      "core_R": 21,
+      "core_C": 22,
+      "B": 2,
+      "full_R": 175,
+      "full_C": 176,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -15604,
+        -79752,
+        67807,
+        37944,
+        -78251
+      ],
+      "d": 5,
+      "m": 6,
+      "N": 2048,
+      "q_core": 7,
+      "q_full": 7,
+      "core_R": 21,
+      "core_C": 22,
+      "B": 2,
+      "full_R": 1407,
+      "full_C": 1408,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        42310,
+        -30598,
+        94726,
+        -5672,
+        -70695
+      ],
+      "d": 5,
+      "m": 0,
+      "N": 32,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 26,
+      "core_C": 26,
+      "B": 1,
+      "full_R": 26,
+      "full_C": 26,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        42310,
+        -30598,
+        94726,
+        -5672,
+        -70695
+      ],
+      "d": 5,
+      "m": 1,
+      "N": 64,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 26,
+      "core_C": 26,
+      "B": 1,
+      "full_R": 52,
+      "full_C": 52,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        42310,
+        -30598,
+        94726,
+        -5672,
+        -70695
+      ],
+      "d": 5,
+      "m": 3,
+      "N": 256,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 26,
+      "core_C": 26,
+      "B": 1,
+      "full_R": 208,
+      "full_C": 208,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        42310,
+        -30598,
+        94726,
+        -5672,
+        -70695
+      ],
+      "d": 5,
+      "m": 6,
+      "N": 2048,
+      "q_core": 1,
+      "q_full": 1,
+      "core_R": 26,
+      "core_C": 26,
+      "B": 1,
+      "full_R": 1664,
+      "full_C": 1664,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -78484,
+        -38180,
+        -7726,
+        -86486,
+        -92788
+      ],
+      "d": 5,
+      "m": 0,
+      "N": 32,
+      "q_core": 3,
+      "q_full": 3,
+      "core_R": 28,
+      "core_C": 28,
+      "B": 1,
+      "full_R": 28,
+      "full_C": 28,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -78484,
+        -38180,
+        -7726,
+        -86486,
+        -92788
+      ],
+      "d": 5,
+      "m": 1,
+      "N": 64,
+      "q_core": 3,
+      "q_full": 3,
+      "core_R": 28,
+      "core_C": 28,
+      "B": 1,
+      "full_R": 56,
+      "full_C": 56,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -78484,
+        -38180,
+        -7726,
+        -86486,
+        -92788
+      ],
+      "d": 5,
+      "m": 3,
+      "N": 256,
+      "q_core": 3,
+      "q_full": 3,
+      "core_R": 28,
+      "core_C": 28,
+      "B": 1,
+      "full_R": 224,
+      "full_C": 224,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -78484,
+        -38180,
+        -7726,
+        -86486,
+        -92788
+      ],
+      "d": 5,
+      "m": 6,
+      "N": 2048,
+      "q_core": 3,
+      "q_full": 3,
+      "core_R": 28,
+      "core_C": 28,
+      "B": 1,
+      "full_R": 1792,
+      "full_C": 1792,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -93601,
+        95394,
+        71385,
+        66704,
+        -15940,
+        -51661
+      ],
+      "d": 6,
+      "m": 0,
+      "N": 64,
+      "q_core": 9,
+      "q_full": 9,
+      "core_R": 40,
+      "core_C": 40,
+      "B": 1,
+      "full_R": 40,
+      "full_C": 40,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -93601,
+        95394,
+        71385,
+        66704,
+        -15940,
+        -51661
+      ],
+      "d": 6,
+      "m": 1,
+      "N": 128,
+      "q_core": 9,
+      "q_full": 9,
+      "core_R": 40,
+      "core_C": 40,
+      "B": 1,
+      "full_R": 80,
+      "full_C": 80,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -93601,
+        95394,
+        71385,
+        66704,
+        -15940,
+        -51661
+      ],
+      "d": 6,
+      "m": 3,
+      "N": 512,
+      "q_core": 9,
+      "q_full": 9,
+      "core_R": 40,
+      "core_C": 40,
+      "B": 1,
+      "full_R": 320,
+      "full_C": 320,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -93601,
+        95394,
+        71385,
+        66704,
+        -15940,
+        -51661
+      ],
+      "d": 6,
+      "m": 6,
+      "N": 4096,
+      "q_core": 9,
+      "q_full": 9,
+      "core_R": 40,
+      "core_C": 40,
+      "B": 1,
+      "full_R": 2560,
+      "full_C": 2560,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -18642,
+        -18311,
+        -58156,
+        18959,
+        91221,
+        52982
+      ],
+      "d": 6,
+      "m": 0,
+      "N": 64,
+      "q_core": 11,
+      "q_full": 11,
+      "core_R": 41,
+      "core_C": 42,
+      "B": 2,
+      "full_R": 41,
+      "full_C": 42,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -18642,
+        -18311,
+        -58156,
+        18959,
+        91221,
+        52982
+      ],
+      "d": 6,
+      "m": 1,
+      "N": 128,
+      "q_core": 11,
+      "q_full": 11,
+      "core_R": 41,
+      "core_C": 42,
+      "B": 2,
+      "full_R": 83,
+      "full_C": 84,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -18642,
+        -18311,
+        -58156,
+        18959,
+        91221,
+        52982
+      ],
+      "d": 6,
+      "m": 3,
+      "N": 512,
+      "q_core": 11,
+      "q_full": 11,
+      "core_R": 41,
+      "core_C": 42,
+      "B": 2,
+      "full_R": 335,
+      "full_C": 336,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -18642,
+        -18311,
+        -58156,
+        18959,
+        91221,
+        52982
+      ],
+      "d": 6,
+      "m": 6,
+      "N": 4096,
+      "q_core": 11,
+      "q_full": 11,
+      "core_R": 41,
+      "core_C": 42,
+      "B": 2,
+      "full_R": 2687,
+      "full_C": 2688,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -60872,
+        -94565,
+        -53780,
+        21512,
+        78564,
+        -67717
+      ],
+      "d": 6,
+      "m": 0,
+      "N": 64,
+      "q_core": 7,
+      "q_full": 7,
+      "core_R": 41,
+      "core_C": 42,
+      "B": 2,
+      "full_R": 41,
+      "full_C": 42,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -60872,
+        -94565,
+        -53780,
+        21512,
+        78564,
+        -67717
+      ],
+      "d": 6,
+      "m": 1,
+      "N": 128,
+      "q_core": 7,
+      "q_full": 7,
+      "core_R": 41,
+      "core_C": 42,
+      "B": 2,
+      "full_R": 83,
+      "full_C": 84,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -60872,
+        -94565,
+        -53780,
+        21512,
+        78564,
+        -67717
+      ],
+      "d": 6,
+      "m": 3,
+      "N": 512,
+      "q_core": 7,
+      "q_full": 7,
+      "core_R": 41,
+      "core_C": 42,
+      "B": 2,
+      "full_R": 335,
+      "full_C": 336,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -60872,
+        -94565,
+        -53780,
+        21512,
+        78564,
+        -67717
+      ],
+      "d": 6,
+      "m": 6,
+      "N": 4096,
+      "q_core": 7,
+      "q_full": 7,
+      "core_R": 41,
+      "core_C": 42,
+      "B": 2,
+      "full_R": 2687,
+      "full_C": 2688,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -80536,
+        14383,
+        -18748,
+        -87486,
+        -11793,
+        21675,
+        16043
+      ],
+      "d": 7,
+      "m": 0,
+      "N": 128,
+      "q_core": 5,
+      "q_full": 5,
+      "core_R": 92,
+      "core_C": 92,
+      "B": 1,
+      "full_R": 92,
+      "full_C": 92,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -80536,
+        14383,
+        -18748,
+        -87486,
+        -11793,
+        21675,
+        16043
+      ],
+      "d": 7,
+      "m": 1,
+      "N": 256,
+      "q_core": 5,
+      "q_full": 5,
+      "core_R": 92,
+      "core_C": 92,
+      "B": 1,
+      "full_R": 184,
+      "full_C": 184,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -80536,
+        14383,
+        -18748,
+        -87486,
+        -11793,
+        21675,
+        16043
+      ],
+      "d": 7,
+      "m": 3,
+      "N": 1024,
+      "q_core": 5,
+      "q_full": 5,
+      "core_R": 92,
+      "core_C": 92,
+      "B": 1,
+      "full_R": 736,
+      "full_C": 736,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -80536,
+        14383,
+        -18748,
+        -87486,
+        -11793,
+        21675,
+        16043
+      ],
+      "d": 7,
+      "m": 6,
+      "N": 8192,
+      "q_core": 5,
+      "q_full": 5,
+      "core_R": 92,
+      "core_C": 92,
+      "B": 1,
+      "full_R": 5888,
+      "full_C": 5888,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        852,
+        -81704,
+        -47564,
+        10652,
+        78690,
+        -43616,
+        81855
+      ],
+      "d": 7,
+      "m": 0,
+      "N": 128,
+      "q_core": 33,
+      "q_full": 33,
+      "core_R": 90,
+      "core_C": 90,
+      "B": 1,
+      "full_R": 90,
+      "full_C": 90,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        852,
+        -81704,
+        -47564,
+        10652,
+        78690,
+        -43616,
+        81855
+      ],
+      "d": 7,
+      "m": 1,
+      "N": 256,
+      "q_core": 33,
+      "q_full": 33,
+      "core_R": 90,
+      "core_C": 90,
+      "B": 1,
+      "full_R": 180,
+      "full_C": 180,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        852,
+        -81704,
+        -47564,
+        10652,
+        78690,
+        -43616,
+        81855
+      ],
+      "d": 7,
+      "m": 3,
+      "N": 1024,
+      "q_core": 33,
+      "q_full": 33,
+      "core_R": 90,
+      "core_C": 90,
+      "B": 1,
+      "full_R": 720,
+      "full_C": 720,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        852,
+        -81704,
+        -47564,
+        10652,
+        78690,
+        -43616,
+        81855
+      ],
+      "d": 7,
+      "m": 6,
+      "N": 8192,
+      "q_core": 33,
+      "q_full": 33,
+      "core_R": 90,
+      "core_C": 90,
+      "B": 1,
+      "full_R": 5760,
+      "full_C": 5760,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -54453,
+        -29079,
+        -28281,
+        39517,
+        -20239,
+        -40473,
+        -69610
+      ],
+      "d": 7,
+      "m": 0,
+      "N": 128,
+      "q_core": 13,
+      "q_full": 13,
+      "core_R": 76,
+      "core_C": 76,
+      "B": 1,
+      "full_R": 76,
+      "full_C": 76,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -54453,
+        -29079,
+        -28281,
+        39517,
+        -20239,
+        -40473,
+        -69610
+      ],
+      "d": 7,
+      "m": 1,
+      "N": 256,
+      "q_core": 13,
+      "q_full": 13,
+      "core_R": 76,
+      "core_C": 76,
+      "B": 1,
+      "full_R": 152,
+      "full_C": 152,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -54453,
+        -29079,
+        -28281,
+        39517,
+        -20239,
+        -40473,
+        -69610
+      ],
+      "d": 7,
+      "m": 3,
+      "N": 1024,
+      "q_core": 13,
+      "q_full": 13,
+      "core_R": 76,
+      "core_C": 76,
+      "B": 1,
+      "full_R": 608,
+      "full_C": 608,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -54453,
+        -29079,
+        -28281,
+        39517,
+        -20239,
+        -40473,
+        -69610
+      ],
+      "d": 7,
+      "m": 6,
+      "N": 8192,
+      "q_core": 13,
+      "q_full": 13,
+      "core_R": 76,
+      "core_C": 76,
+      "B": 1,
+      "full_R": 4864,
+      "full_C": 4864,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -73510,
+        -75452,
+        -99511,
+        -67643,
+        89102,
+        -47418,
+        94949,
+        -54941
+      ],
+      "d": 8,
+      "m": 0,
+      "N": 256,
+      "q_core": 25,
+      "q_full": 25,
+      "core_R": 172,
+      "core_C": 172,
+      "B": 1,
+      "full_R": 172,
+      "full_C": 172,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -73510,
+        -75452,
+        -99511,
+        -67643,
+        89102,
+        -47418,
+        94949,
+        -54941
+      ],
+      "d": 8,
+      "m": 1,
+      "N": 512,
+      "q_core": 25,
+      "q_full": 25,
+      "core_R": 172,
+      "core_C": 172,
+      "B": 1,
+      "full_R": 344,
+      "full_C": 344,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -73510,
+        -75452,
+        -99511,
+        -67643,
+        89102,
+        -47418,
+        94949,
+        -54941
+      ],
+      "d": 8,
+      "m": 3,
+      "N": 2048,
+      "q_core": 25,
+      "q_full": 25,
+      "core_R": 172,
+      "core_C": 172,
+      "B": 1,
+      "full_R": 1376,
+      "full_C": 1376,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -73510,
+        -75452,
+        -99511,
+        -67643,
+        89102,
+        -47418,
+        94949,
+        -54941
+      ],
+      "d": 8,
+      "m": 6,
+      "N": 16384,
+      "q_core": 25,
+      "q_full": 25,
+      "core_R": 172,
+      "core_C": 172,
+      "B": 1,
+      "full_R": 11008,
+      "full_C": 11008,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -50352,
+        -77174,
+        -63602,
+        -48974,
+        -41370,
+        4940,
+        -23929,
+        58964
+      ],
+      "d": 8,
+      "m": 0,
+      "N": 256,
+      "q_core": 15,
+      "q_full": 15,
+      "core_R": 186,
+      "core_C": 186,
+      "B": 1,
+      "full_R": 186,
+      "full_C": 186,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -50352,
+        -77174,
+        -63602,
+        -48974,
+        -41370,
+        4940,
+        -23929,
+        58964
+      ],
+      "d": 8,
+      "m": 1,
+      "N": 512,
+      "q_core": 15,
+      "q_full": 15,
+      "core_R": 186,
+      "core_C": 186,
+      "B": 1,
+      "full_R": 372,
+      "full_C": 372,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -50352,
+        -77174,
+        -63602,
+        -48974,
+        -41370,
+        4940,
+        -23929,
+        58964
+      ],
+      "d": 8,
+      "m": 3,
+      "N": 2048,
+      "q_core": 15,
+      "q_full": 15,
+      "core_R": 186,
+      "core_C": 186,
+      "B": 1,
+      "full_R": 1488,
+      "full_C": 1488,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -50352,
+        -77174,
+        -63602,
+        -48974,
+        -41370,
+        4940,
+        -23929,
+        58964
+      ],
+      "d": 8,
+      "m": 6,
+      "N": 16384,
+      "q_core": 15,
+      "q_full": 15,
+      "core_R": 186,
+      "core_C": 186,
+      "B": 1,
+      "full_R": 11904,
+      "full_C": 11904,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -40038,
+        -23357,
+        -26109,
+        10245,
+        -82304,
+        51876,
+        -82488,
+        -5817
+      ],
+      "d": 8,
+      "m": 0,
+      "N": 256,
+      "q_core": 15,
+      "q_full": 15,
+      "core_R": 171,
+      "core_C": 172,
+      "B": 2,
+      "full_R": 171,
+      "full_C": 172,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -40038,
+        -23357,
+        -26109,
+        10245,
+        -82304,
+        51876,
+        -82488,
+        -5817
+      ],
+      "d": 8,
+      "m": 1,
+      "N": 512,
+      "q_core": 15,
+      "q_full": 15,
+      "core_R": 171,
+      "core_C": 172,
+      "B": 2,
+      "full_R": 343,
+      "full_C": 344,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -40038,
+        -23357,
+        -26109,
+        10245,
+        -82304,
+        51876,
+        -82488,
+        -5817
+      ],
+      "d": 8,
+      "m": 3,
+      "N": 2048,
+      "q_core": 15,
+      "q_full": 15,
+      "core_R": 171,
+      "core_C": 172,
+      "B": 2,
+      "full_R": 1375,
+      "full_C": 1376,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -40038,
+        -23357,
+        -26109,
+        10245,
+        -82304,
+        51876,
+        -82488,
+        -5817
+      ],
+      "d": 8,
+      "m": 6,
+      "N": 16384,
+      "q_core": 15,
+      "q_full": 15,
+      "core_R": 171,
+      "core_C": 172,
+      "B": 2,
+      "full_R": 11007,
+      "full_C": 11008,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        3589,
+        5137,
+        44395,
+        54056,
+        -99396,
+        57833,
+        -46796,
+        -17700,
+        74374
+      ],
+      "d": 9,
+      "m": 0,
+      "N": 512,
+      "q_core": 37,
+      "q_full": 37,
+      "core_R": 360,
+      "core_C": 360,
+      "B": 1,
+      "full_R": 360,
+      "full_C": 360,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        3589,
+        5137,
+        44395,
+        54056,
+        -99396,
+        57833,
+        -46796,
+        -17700,
+        74374
+      ],
+      "d": 9,
+      "m": 1,
+      "N": 1024,
+      "q_core": 37,
+      "q_full": 37,
+      "core_R": 360,
+      "core_C": 360,
+      "B": 1,
+      "full_R": 720,
+      "full_C": 720,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        3589,
+        5137,
+        44395,
+        54056,
+        -99396,
+        57833,
+        -46796,
+        -17700,
+        74374
+      ],
+      "d": 9,
+      "m": 3,
+      "N": 4096,
+      "q_core": 37,
+      "q_full": 37,
+      "core_R": 360,
+      "core_C": 360,
+      "B": 1,
+      "full_R": 2880,
+      "full_C": 2880,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        3589,
+        5137,
+        44395,
+        54056,
+        -99396,
+        57833,
+        -46796,
+        -17700,
+        74374
+      ],
+      "d": 9,
+      "m": 6,
+      "N": 32768,
+      "q_core": 37,
+      "q_full": 37,
+      "core_R": 360,
+      "core_C": 360,
+      "B": 1,
+      "full_R": 23040,
+      "full_C": 23040,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        18317,
+        92761,
+        -41181,
+        -34651,
+        18322,
+        -49010,
+        45410,
+        11484,
+        70805
+      ],
+      "d": 9,
+      "m": 0,
+      "N": 512,
+      "q_core": 15,
+      "q_full": 15,
+      "core_R": 306,
+      "core_C": 306,
+      "B": 1,
+      "full_R": 306,
+      "full_C": 306,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        18317,
+        92761,
+        -41181,
+        -34651,
+        18322,
+        -49010,
+        45410,
+        11484,
+        70805
+      ],
+      "d": 9,
+      "m": 1,
+      "N": 1024,
+      "q_core": 15,
+      "q_full": 15,
+      "core_R": 306,
+      "core_C": 306,
+      "B": 1,
+      "full_R": 612,
+      "full_C": 612,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        18317,
+        92761,
+        -41181,
+        -34651,
+        18322,
+        -49010,
+        45410,
+        11484,
+        70805
+      ],
+      "d": 9,
+      "m": 3,
+      "N": 4096,
+      "q_core": 15,
+      "q_full": 15,
+      "core_R": 306,
+      "core_C": 306,
+      "B": 1,
+      "full_R": 2448,
+      "full_C": 2448,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        18317,
+        92761,
+        -41181,
+        -34651,
+        18322,
+        -49010,
+        45410,
+        11484,
+        70805
+      ],
+      "d": 9,
+      "m": 6,
+      "N": 32768,
+      "q_core": 15,
+      "q_full": 15,
+      "core_R": 306,
+      "core_C": 306,
+      "B": 1,
+      "full_R": 19584,
+      "full_C": 19584,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -96356,
+        70425,
+        -17679,
+        -25257,
+        44382,
+        44485,
+        44112,
+        -54965,
+        64936
+      ],
+      "d": 9,
+      "m": 0,
+      "N": 512,
+      "q_core": 13,
+      "q_full": 13,
+      "core_R": 304,
+      "core_C": 304,
+      "B": 1,
+      "full_R": 304,
+      "full_C": 304,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -96356,
+        70425,
+        -17679,
+        -25257,
+        44382,
+        44485,
+        44112,
+        -54965,
+        64936
+      ],
+      "d": 9,
+      "m": 1,
+      "N": 1024,
+      "q_core": 13,
+      "q_full": 13,
+      "core_R": 304,
+      "core_C": 304,
+      "B": 1,
+      "full_R": 608,
+      "full_C": 608,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -96356,
+        70425,
+        -17679,
+        -25257,
+        44382,
+        44485,
+        44112,
+        -54965,
+        64936
+      ],
+      "d": 9,
+      "m": 3,
+      "N": 4096,
+      "q_core": 13,
+      "q_full": 13,
+      "core_R": 304,
+      "core_C": 304,
+      "B": 1,
+      "full_R": 2432,
+      "full_C": 2432,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        -96356,
+        70425,
+        -17679,
+        -25257,
+        44382,
+        44485,
+        44112,
+        -54965,
+        64936
+      ],
+      "d": 9,
+      "m": 6,
+      "N": 32768,
+      "q_core": 13,
+      "q_full": 13,
+      "core_R": 304,
+      "core_C": 304,
+      "B": 1,
+      "full_R": 19456,
+      "full_C": 19456,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        1,
+        2,
+        4
+      ],
+      "d": 3,
+      "m": 0,
+      "N": 8,
+      "q_core": 3,
+      "q_full": 3,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 4,
+      "full_C": 4,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        1,
+        2,
+        4
+      ],
+      "d": 3,
+      "m": 1,
+      "N": 16,
+      "q_core": 3,
+      "q_full": 3,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 8,
+      "full_C": 8,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        1,
+        2,
+        4
+      ],
+      "d": 3,
+      "m": 3,
+      "N": 64,
+      "q_core": 3,
+      "q_full": 3,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 32,
+      "full_C": 32,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        1,
+        2,
+        4
+      ],
+      "d": 3,
+      "m": 6,
+      "N": 512,
+      "q_core": 3,
+      "q_full": 3,
+      "core_R": 4,
+      "core_C": 4,
+      "B": 1,
+      "full_R": 256,
+      "full_C": 256,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        1,
+        6,
+        8,
+        4
+      ],
+      "d": 4,
+      "m": 0,
+      "N": 16,
+      "q_core": 5,
+      "q_full": 5,
+      "core_R": 5,
+      "core_C": 6,
+      "B": 2,
+      "full_R": 5,
+      "full_C": 6,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        1,
+        6,
+        8,
+        4
+      ],
+      "d": 4,
+      "m": 1,
+      "N": 32,
+      "q_core": 5,
+      "q_full": 5,
+      "core_R": 5,
+      "core_C": 6,
+      "B": 2,
+      "full_R": 11,
+      "full_C": 12,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        1,
+        6,
+        8,
+        4
+      ],
+      "d": 4,
+      "m": 3,
+      "N": 128,
+      "q_core": 5,
+      "q_full": 5,
+      "core_R": 5,
+      "core_C": 6,
+      "B": 2,
+      "full_R": 47,
+      "full_C": 48,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        1,
+        6,
+        8,
+        4
+      ],
+      "d": 4,
+      "m": 6,
+      "N": 1024,
+      "q_core": 5,
+      "q_full": 5,
+      "core_R": 5,
+      "core_C": 6,
+      "B": 2,
+      "full_R": 383,
+      "full_C": 384,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        65,
+        66,
+        68,
+        72,
+        80
+      ],
+      "d": 5,
+      "m": 0,
+      "N": 32,
+      "q_core": 9,
+      "q_full": 9,
+      "core_R": 16,
+      "core_C": 16,
+      "B": 1,
+      "full_R": 16,
+      "full_C": 16,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        65,
+        66,
+        68,
+        72,
+        80
+      ],
+      "d": 5,
+      "m": 1,
+      "N": 64,
+      "q_core": 9,
+      "q_full": 9,
+      "core_R": 16,
+      "core_C": 16,
+      "B": 1,
+      "full_R": 32,
+      "full_C": 32,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        65,
+        66,
+        68,
+        72,
+        80
+      ],
+      "d": 5,
+      "m": 3,
+      "N": 256,
+      "q_core": 9,
+      "q_full": 9,
+      "core_R": 16,
+      "core_C": 16,
+      "B": 1,
+      "full_R": 128,
+      "full_C": 128,
+      "rank_bit_checks": "every vertex",
+      "all_score_rank_comparisons_checked": true
+    },
+    {
+      "core_weights": [
+        65,
+        66,
+        68,
+        72,
+        80
+      ],
+      "d": 5,
+      "m": 6,
+      "N": 2048,
+      "q_core": 9,
+      "q_full": 9,
+      "core_R": 16,
+      "core_C": 16,
+      "B": 1,
+      "full_R": 1024,
+      "full_C": 1024,
+      "rank_bit_checks": "2048 seeded vertices",
+      "all_score_rank_comparisons_checked": true
+    }
+  ],
+  "finite_complete_cyclic_minimax": [
+    {
+      "n": 1,
+      "normalized_masks": 1,
+      "signed_chambers": 2,
+      "complete_cyclic_maxmin": 2,
+      "density": "2/2",
+      "optimal_masks": [
+        0
+      ],
+      "minima": [
+        2
+      ],
+      "worst_weight_witnesses": [
+        null
+      ]
+    },
+    {
+      "n": 2,
+      "normalized_masks": 2,
+      "signed_chambers": 8,
+      "complete_cyclic_maxmin": 2,
+      "density": "2/4",
+      "optimal_masks": [
+        0,
+        1
+      ],
+      "minima": [
+        2,
+        2
+      ],
+      "worst_weight_witnesses": [
+        {
+          "weights": [
+            1,
+            2
+          ],
+          "C": 2,
+          "R": 2
+        },
+        {
+          "weights": [
+            1,
+            2
+          ],
+          "C": 2,
+          "R": 2
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "normalized_masks": 8,
+      "signed_chambers": 96,
+      "complete_cyclic_maxmin": 4,
+      "density": "4/8",
+      "optimal_masks": [
+        0,
+        3,
+        4,
+        7
+      ],
+      "minima": [
+        4,
+        2,
+        2,
+        4,
+        4,
+        2,
+        2,
+        4
+      ],
+      "worst_weight_witnesses": [
+        {
+          "weights": [
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 4
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4
+          ],
+          "C": 2,
+          "R": 3
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4
+          ],
+          "C": 2,
+          "R": 3
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 4
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 4
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4
+          ],
+          "C": 2,
+          "R": 3
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4
+          ],
+          "C": 2,
+          "R": 3
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 4
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "normalized_masks": 128,
+      "signed_chambers": 5376,
+      "complete_cyclic_maxmin": 6,
+      "density": "6/16",
+      "optimal_masks": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        13,
+        14,
+        15,
+        48,
+        49,
+        50,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        77,
+        78,
+        79,
+        112,
+        113,
+        114,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        125,
+        126,
+        127
+      ],
+      "minima": [
+        6,
+        6,
+        6,
+        4,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        4,
+        6,
+        6,
+        6,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        6,
+        6,
+        6,
+        4,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        4,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        4,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        4,
+        6,
+        6,
+        6,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        6,
+        6,
+        6,
+        4,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        4,
+        6,
+        6,
+        6
+      ],
+      "worst_weight_witnesses": [
+        {
+          "weights": [
+            1,
+            6,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            4,
+            6,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            4,
+            6,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            -1,
+            6,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            1,
+            6,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            4,
+            6,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            4,
+            6,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            -1,
+            6,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            6,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            4,
+            6,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            4,
+            6,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            6,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            8,
+            -1,
+            2,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            6,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            4,
+            6,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            4,
+            6,
+            8
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 4,
+          "R": 5
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        },
+        {
+          "weights": [
+            -1,
+            2,
+            8,
+            4
+          ],
+          "C": 6,
+          "R": 7
+        },
+        {
+          "weights": [
+            1,
+            6,
+            4,
+            8
+          ],
+          "C": 6,
+          "R": 6
+        }
+      ]
+    }
+  ],
+  "nonadditive_diagnostics": [
+    {
+      "d": 5,
+      "m": 1,
+      "N": 64,
+      "q": 15,
+      "R": 24,
+      "C": 24,
+      "antipodal": true,
+      "all_positive_coordinate_edges_checked": 192,
+      "nonadditive_requirements": [
+        "w_3<w_4",
+        "w_4<w_3"
+      ]
+    },
+    {
+      "d": 5,
+      "m": 4,
+      "N": 512,
+      "q": 15,
+      "R": 192,
+      "C": 192,
+      "antipodal": true,
+      "all_positive_coordinate_edges_checked": 2304,
+      "nonadditive_requirements": [
+        "w_6<w_7",
+        "w_7<w_6"
+      ]
+    },
+    {
+      "d": 6,
+      "m": 1,
+      "N": 128,
+      "q": 29,
+      "R": 32,
+      "C": 32,
+      "antipodal": true,
+      "all_positive_coordinate_edges_checked": 448,
+      "nonadditive_requirements": [
+        "w_3<w_4",
+        "w_4<w_3"
+      ]
+    },
+    {
+      "d": 6,
+      "m": 4,
+      "N": 1024,
+      "q": 29,
+      "R": 256,
+      "C": 256,
+      "antipodal": true,
+      "all_positive_coordinate_edges_checked": 5120,
+      "nonadditive_requirements": [
+        "w_6<w_7",
+        "w_7<w_6"
+      ]
+    },
+    {
+      "d": 7,
+      "m": 1,
+      "N": 256,
+      "q": 57,
+      "R": 40,
+      "C": 40,
+      "antipodal": true,
+      "all_positive_coordinate_edges_checked": 1024,
+      "nonadditive_requirements": [
+        "w_3<w_4",
+        "w_4<w_3"
+      ]
+    },
+    {
+      "d": 7,
+      "m": 4,
+      "N": 2048,
+      "q": 57,
+      "R": 320,
+      "C": 320,
+      "antipodal": true,
+      "all_positive_coordinate_edges_checked": 11264,
+      "nonadditive_requirements": [
+        "w_6<w_7",
+        "w_7<w_6"
+      ]
+    },
+    {
+      "d": 8,
+      "m": 1,
+      "N": 512,
+      "q": 113,
+      "R": 48,
+      "C": 48,
+      "antipodal": true,
+      "all_positive_coordinate_edges_checked": 2304,
+      "nonadditive_requirements": [
+        "w_3<w_4",
+        "w_4<w_3"
+      ]
+    },
+    {
+      "d": 8,
+      "m": 4,
+      "N": 4096,
+      "q": 113,
+      "R": 384,
+      "C": 384,
+      "antipodal": true,
+      "all_positive_coordinate_edges_checked": 24576,
+      "nonadditive_requirements": [
+        "w_6<w_7",
+        "w_7<w_6"
+      ]
+    },
+    {
+      "d": 9,
+      "m": 1,
+      "N": 1024,
+      "q": 225,
+      "R": 56,
+      "C": 56,
+      "antipodal": true,
+      "all_positive_coordinate_edges_checked": 5120,
+      "nonadditive_requirements": [
+        "w_3<w_4",
+        "w_4<w_3"
+      ]
+    },
+    {
+      "d": 9,
+      "m": 4,
+      "N": 8192,
+      "q": 225,
+      "R": 448,
+      "C": 448,
+      "antipodal": true,
+      "all_positive_coordinate_edges_checked": 53248,
+      "nonadditive_requirements": [
+        "w_6<w_7",
+        "w_7<w_6"
+      ]
+    },
+    {
+      "d": 10,
+      "m": 1,
+      "N": 2048,
+      "q": 449,
+      "R": 64,
+      "C": 64,
+      "antipodal": true,
+      "all_positive_coordinate_edges_checked": 11264,
+      "nonadditive_requirements": [
+        "w_3<w_4",
+        "w_4<w_3"
+      ]
+    },
+    {
+      "d": 10,
+      "m": 4,
+      "N": 16384,
+      "q": 449,
+      "R": 512,
+      "C": 512,
+      "antipodal": true,
+      "all_positive_coordinate_edges_checked": 114688,
+      "nonadditive_requirements": [
+        "w_6<w_7",
+        "w_7<w_6"
+      ]
+    }
+  ],
+  "analytic_identity": "q(lift)=q(core),C(lift)=2^m*C(core),R(lift)=2^m*C(core)-B+1;B in{0,1,2}. Every lower paired completion allowed.",
+  "scope": "Original all-weight M_n target remains OPEN. Support-defect inequality for EVERY paired rank is equivalent up to constants to a universal paired constant-density theorem, not merely a sparse easy case. The poset diagnostics are explicitly NONADDITIVE.",
+  "violations": 0,
+  "seconds": 3.8051295399927767,
+  "audit_sha256": "0ad1ed60cbaf16391d8161770151c7cb63b7f784c700f39694626330c709bada"
+}

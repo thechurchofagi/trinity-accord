@@ -1,0 +1,128 @@
+{
+  "state": "INTERNAL_MATHEMATICAL_REVIEW_PASS",
+  "report_number": "TA-TR-2026-22",
+  "version": "1.1",
+  "analytic_proof_reviewed": true,
+  "finite_verification_pass": true,
+  "external_peer_review": false,
+  "global_originality_certified": false,
+  "original_positive_density_target": "OPEN",
+  "checks": [
+    "strict separators inherited unchanged",
+    "read-k theorem primary source Theorem1.1 checked",
+    "deterministic multiplicity before random assignment",
+    "no conditioning or false turn independence",
+    "entropy transition injection at fixed top sign",
+    "bottom nonadjacency and influence four",
+    "any-parent one-child simultaneous union",
+    "separate existential rank classes not falsely combined",
+    "actual additive row lifts and raw label shift",
+    "uniform-tail counterexample all dimensions",
+    "mean doubling counterexample actual integer weights",
+    "controlled loss mean and paired seed explicitly unproved",
+    "old edition protected",
+    "ambiguous linked-version action idempotency tests passed"
+  ],
+  "source_files": [
+    {
+      "name": "source-main.md",
+      "sha256": "b697a0062703a0495df6d220d264bdc07d3e1486f9345ee38178380e823da6d4"
+    },
+    {
+      "name": "source-supplement.md",
+      "sha256": "6a408cd41e244ae985116ef6b4596ea40ead87c1a99d07faf3f7234b13a83dbc"
+    },
+    {
+      "name": "VERSION-CHANGES.md",
+      "sha256": "ddc8073764e136102a399af253e8a56fb7492ead9172c314a3473440004cef25"
+    },
+    {
+      "name": "verify_release.py",
+      "sha256": "3b12c1387b6540309e5854e52accaa4d7bfa2c98fca50329ec1271cec819b00a"
+    },
+    {
+      "name": "test_publication.py",
+      "sha256": "05d65452c07986c8eae08c9eec125151e1b203596db2e067ff57a0f61b21c334"
+    },
+    {
+      "name": "publication.py",
+      "sha256": "4cea59cdb21f3a2deefe29dba84be6a12ed80f69ef55e33fec5ee3bd27847270"
+    },
+    {
+      "name": "release-verification.json",
+      "sha256": "28567ffd2119d039c700926c689703b24a599fe85b0777df0bbe0d17800644d7"
+    },
+    {
+      "name": "publication-guard-tests.log",
+      "sha256": "3fcce7af2bad2e1c9919ee2b10a1829504a55155eb4edca395d9b1a6a69e3305"
+    },
+    {
+      "name": "verification.json",
+      "sha256": "420551f6ff0fa6ecca7c8582295de4b4bc51265717eaeee6bc752b0d8d5c2fa6"
+    },
+    {
+      "name": "comparison_support_entropy_verification.json",
+      "sha256": "d32f6dc35f6e277d90e1c086c28f72be3fd2702b3bc1abf3f352e05109597387"
+    },
+    {
+      "name": "bottom_extension_concentration_verification.json",
+      "sha256": "97689603b740ed55da1dd8fda09d7a49c4d857a662410d496f453115bf26157c"
+    },
+    {
+      "name": "sparse_support_amplification_verification.json",
+      "sha256": "ffc732a8f433b0d0b55b2eb045b33ecef0c09de34a9c1d3f6ccce51a93ab4b66"
+    },
+    {
+      "name": "conditional_mean_obstruction_verification.json",
+      "sha256": "f83828c3700e2168581d799c4a1aeaeb5c91ff0cbf5304cd33ac1b28490ebd1b"
+    },
+    {
+      "name": "verify_readk_and_interleaving.py",
+      "sha256": "16c6c84c5d9c0cccab2e98d0062b0b011a606d6ea20c5aebfec1a6fcc1c9c875"
+    },
+    {
+      "name": "verify_comparison_support_entropy.py",
+      "sha256": "7ed464dbb505c4eee94513a81bd2d106d8a372014cb590acb466199fcfce8f0e"
+    },
+    {
+      "name": "verify_bottom_extension_concentration.py",
+      "sha256": "c876fc70b0f32857b881ca5839345c81bafa096cf1ab35a8d5c00775ca222004"
+    },
+    {
+      "name": "verify_sparse_support_amplification.py",
+      "sha256": "c75fdf1dec763ab63dbd9fe4a5229e47557734054f02ee039e0376b4ff78c3a0"
+    },
+    {
+      "name": "verify_conditional_mean_obstruction.py",
+      "sha256": "c189817cab61857d3b4eb3e7a80299df9d69df9175d846285a0c34fabcc80389"
+    },
+    {
+      "name": "dependencies/verify_gray_reflection_graph.py",
+      "sha256": "809a345c7c51e23266ff0e369148aa6964b693185c34e81c5479583e01f8794d"
+    },
+    {
+      "name": "dependencies/verify_paired_sibling_ranks.py",
+      "sha256": "35a19d9b4034325cec2ccb4746864cbf089aa7ebeb14a00187ee50700a13b318"
+    },
+    {
+      "name": "readk_run.log",
+      "sha256": "26ae3a8f5f0caff58fa9d731a559a6feb91c148d9351051e840bafcf7c39c581"
+    },
+    {
+      "name": "comparison_support_entropy_run.log",
+      "sha256": "f015d29d2bbce8d9b889519cec14c66ee4fd53c7a1544d398d47d15bbab2bd22"
+    },
+    {
+      "name": "bottom_extension_concentration_run.log",
+      "sha256": "d65b82217dd2cf3a8951a83662697c47293fc95fcb13fa1df14033be5731b036"
+    },
+    {
+      "name": "sparse_support_amplification_run.log",
+      "sha256": "13bb8ef3ba447f192ec97e01822c2c953dd926d88beef7799b7cfb8c10619fa6"
+    },
+    {
+      "name": "conditional_mean_obstruction_run.log",
+      "sha256": "afb9ed5d8785e03044d9ebea21b5522e6766aa8a5e28cdfeb8efafa85a136530"
+    }
+  ]
+}

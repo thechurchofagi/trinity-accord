@@ -1,0 +1,29 @@
+{
+  "files": [
+    "source-main.md",
+    "source-supplement.md",
+    "VERSION-CHANGES.md",
+    "verify_release.py",
+    "test_publication.py",
+    "publication.py",
+    "release-verification.json",
+    "publication-guard-tests.log",
+    "verification.json",
+    "comparison_support_entropy_verification.json",
+    "bottom_extension_concentration_verification.json",
+    "sparse_support_amplification_verification.json",
+    "conditional_mean_obstruction_verification.json",
+    "verify_readk_and_interleaving.py",
+    "verify_comparison_support_entropy.py",
+    "verify_bottom_extension_concentration.py",
+    "verify_sparse_support_amplification.py",
+    "verify_conditional_mean_obstruction.py",
+    "dependencies/verify_gray_reflection_graph.py",
+    "dependencies/verify_paired_sibling_ranks.py",
+    "readk_run.log",
+    "comparison_support_entropy_run.log",
+    "bottom_extension_concentration_run.log",
+    "sparse_support_amplification_run.log",
+    "conditional_mean_obstruction_run.log"
+  ]
+}

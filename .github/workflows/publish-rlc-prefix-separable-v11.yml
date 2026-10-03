@@ -1,0 +1,48 @@
+name: Publish RLC Paper TA22 v1.1
+on:
+  push:
+    branches: [research/rlc-prefix-separable-v1-1-20261003]
+    paths:
+      - '.github/workflows/publish-rlc-prefix-separable-v11.yml'
+      - 'research/rlc-prefix-separable/versions/v1.1/PUBLISH-AUTHORIZATION.json'
+permissions:
+  contents: write
+concurrency:
+  group: rlc-ta22-zenodo-v11
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta22-v11-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/rlc-prefix-separable-v1-1-20261003
+          fetch-depth: 1
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
+      - name: Verify publication guards and exact reviewed package
+        run: |
+          python3 research/rlc-prefix-separable/versions/v1.1/test_publication.py
+          python3 research/rlc-prefix-separable/versions/v1.1/publication.py verify
+      - name: Publish the same reserved record and verify anonymous exact-byte readback
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/rlc-prefix-separable/versions/v1.1/publication.py publish
+      - name: Persist publication and readback receipts
+        if: always()
+        run: python3 research/rlc-prefix-separable/versions/v1.1/publication.py persist
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta22-rlc-v11-publication
+          path: |
+            research/rlc-prefix-separable/versions/v1.1/published/
+            research/rlc-prefix-separable/versions/v1.1/EXPECTED-PUBLICATION.json
+            research/rlc-prefix-separable/versions/v1.1/FINAL-REVIEW.json
+            research/rlc-prefix-separable/versions/v1.1/PUBLISH-AUTHORIZATION.json
+            research/rlc-prefix-separable/versions/v1.1/publication-record.json
+            research/rlc-prefix-separable/versions/v1.1/publication-attempt.json
+          retention-days: 90
+          if-no-files-found: warn
