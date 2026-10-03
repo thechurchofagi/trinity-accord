@@ -1,0 +1,18 @@
+{"kind": "open_strip", "t": "1/16", "t_bounds": [[0, 1], [1, 8]], "intervals": 146, "max_net": 32, "elapsed": 0.052}
+{"kind": "open_strip", "t": "3/16", "t_bounds": [[1, 8], [1, 4]], "intervals": 146, "max_net": 32, "elapsed": 0.093}
+{"kind": "open_strip", "t": "5/16", "t_bounds": [[1, 4], [3, 8]], "intervals": 146, "max_net": 32, "elapsed": 0.135}
+{"kind": "open_strip", "t": "7/16", "t_bounds": [[3, 8], [1, 2]], "intervals": 146, "max_net": 32, "elapsed": 0.186}
+{"kind": "open_strip", "t": "9/16", "t_bounds": [[1, 2], [5, 8]], "intervals": 146, "max_net": 32, "elapsed": 0.257}
+{"kind": "open_strip", "t": "11/16", "t_bounds": [[5, 8], [3, 4]], "intervals": 146, "max_net": 32, "elapsed": 0.3}
+{"kind": "open_strip", "t": "13/16", "t_bounds": [[3, 4], [7, 8]], "intervals": 146, "max_net": 36, "elapsed": 0.343}
+{"kind": "open_strip", "t": "15/16", "t_bounds": [[7, 8], [1, 1]], "intervals": 146, "max_net": 36, "elapsed": 0.387}
+{"kind": "critical_section", "t": "0", "t_bounds": [[0, 1], [0, 1]], "intervals": 88, "max_net": 32, "elapsed": 0.415}
+{"kind": "critical_section", "t": "1/8", "t_bounds": [[1, 8], [1, 8]], "intervals": 93, "max_net": 32, "elapsed": 0.445}
+{"kind": "critical_section", "t": "1/4", "t_bounds": [[1, 4], [1, 4]], "intervals": 96, "max_net": 32, "elapsed": 0.477}
+{"kind": "critical_section", "t": "3/8", "t_bounds": [[3, 8], [3, 8]], "intervals": 99, "max_net": 32, "elapsed": 0.511}
+{"kind": "critical_section", "t": "1/2", "t_bounds": [[1, 2], [1, 2]], "intervals": 103, "max_net": 32, "elapsed": 0.541}
+{"kind": "critical_section", "t": "5/8", "t_bounds": [[5, 8], [5, 8]], "intervals": 107, "max_net": 32, "elapsed": 0.575}
+{"kind": "critical_section", "t": "3/4", "t_bounds": [[3, 4], [3, 4]], "intervals": 109, "max_net": 32, "elapsed": 0.606}
+{"kind": "critical_section", "t": "7/8", "t_bounds": [[7, 8], [7, 8]], "intervals": 113, "max_net": 36, "elapsed": 0.639}
+{"kind": "critical_section", "t": "1", "t_bounds": [[1, 1], [1, 1]], "intervals": 116, "max_net": 36, "elapsed": 0.676}
+{"state": "COMPLETE_REAL_TWO_PARAMETER_PARENT_CHAMBER_LINE", "generic_insertion_intervals_evaluated": 2092, "distinct_child_orders": 448, "verification_digest": "08a165b02737ce991b276e8fec9e4ee8cb034e0e4797cc9b4e9b8a7bcce4260a", "elapsed_seconds": 0.677}
