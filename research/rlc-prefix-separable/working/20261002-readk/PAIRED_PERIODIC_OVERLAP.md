@@ -230,6 +230,15 @@ path capacities are (1,2,2,1), giving lambda=6.
 
 The path capacity in this family is already used in the full cycle
 certificate. Counting the terminal flow again would double-count edges.
+Retaining only the z=0 cycles gives a compatible negative-cycle packing
+INSIDE the half H of mass C_H=3T+(T-1)=4T-1, with path mass P=0.
+Thus the half joint certificate P+2C_H=8T-2 equals the proved full
+frustration. Since every valid joint certificate is bounded above by
+phi, its optimal fractional joint-packing value is EXACTLY phi in this
+family. The same equality follows in the conditional slow-order class
+below. No general integrality or exactness claim follows from these
+specific certificates.
+
 The exact conclusion is that no positive uniform density can be obtained
 from the raw D+K budget or that budget plus the ordinary terminal cut.
 Internal cycle information is necessary. The combined full frustration
