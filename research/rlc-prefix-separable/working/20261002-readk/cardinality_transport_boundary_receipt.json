@@ -1,0 +1,278 @@
+{
+  "seed": 202610030832,
+  "rows": [
+    {
+      "n": 5,
+      "draws": 300,
+      "min_C_seen": 16,
+      "first_W_gt_2q": null,
+      "counterexample_to_unqualified_cost": null
+    },
+    {
+      "n": 6,
+      "draws": 300,
+      "min_C_seen": 30,
+      "first_W_gt_2q": null,
+      "counterexample_to_unqualified_cost": null
+    },
+    {
+      "n": 7,
+      "draws": 300,
+      "min_C_seen": 60,
+      "first_W_gt_2q": {
+        "draw": 20,
+        "secondary": [
+          -50687,
+          -39422,
+          9732,
+          -28152,
+          5136,
+          -24032,
+          32832
+        ],
+        "graph_and_defect": {
+          "n": 7,
+          "q": 8,
+          "F": [
+            0,
+            28,
+            60,
+            74,
+            66,
+            32
+          ],
+          "eligible_F": [
+            0,
+            0,
+            60,
+            74,
+            66,
+            32
+          ],
+          "active": [
+            false,
+            false,
+            true,
+            true,
+            true,
+            true
+          ],
+          "orphans": [
+            0,
+            0,
+            0,
+            4,
+            0,
+            18
+          ],
+          "D": 64,
+          "W": 20,
+          "minimum_C": 88
+        }
+      },
+      "counterexample_to_unqualified_cost": null
+    },
+    {
+      "n": 8,
+      "draws": 300,
+      "min_C_seen": 132,
+      "first_W_gt_2q": {
+        "draw": 8,
+        "secondary": [
+          -35839,
+          83970,
+          -40956,
+          -101368,
+          68624,
+          -992,
+          -51136,
+          10368
+        ],
+        "graph_and_defect": {
+          "n": 8,
+          "q": 9,
+          "F": [
+            0,
+            64,
+            98,
+            146,
+            174,
+            174,
+            122
+          ],
+          "eligible_F": [
+            0,
+            0,
+            98,
+            146,
+            174,
+            174,
+            122
+          ],
+          "active": [
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "orphans": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            14,
+            22
+          ],
+          "D": 106,
+          "W": 22,
+          "minimum_C": 172
+        }
+      },
+      "counterexample_to_unqualified_cost": null
+    },
+    {
+      "n": 9,
+      "draws": 300,
+      "min_C_seen": 278,
+      "first_W_gt_2q": {
+        "draw": 0,
+        "secondary": [
+          -165887,
+          180226,
+          124932,
+          -202744,
+          53264,
+          198688,
+          137280,
+          65664,
+          194816
+        ],
+        "graph_and_defect": {
+          "n": 9,
+          "q": 10,
+          "F": [
+            0,
+            128,
+            256,
+            348,
+            408,
+            444,
+            376,
+            254
+          ],
+          "eligible_F": [
+            0,
+            0,
+            256,
+            348,
+            408,
+            444,
+            376,
+            254
+          ],
+          "active": [
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "orphans": [
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            76
+          ],
+          "D": 252,
+          "W": 28,
+          "minimum_C": 368
+        }
+      },
+      "counterexample_to_unqualified_cost": null
+    },
+    {
+      "n": 10,
+      "draws": 300,
+      "min_C_seen": 576,
+      "first_W_gt_2q": {
+        "draw": 0,
+        "secondary": [
+          -20479,
+          303106,
+          -393212,
+          286728,
+          352272,
+          270368,
+          -311232,
+          -331648,
+          33024,
+          -318976
+        ],
+        "graph_and_defect": {
+          "n": 10,
+          "q": 11,
+          "F": [
+            0,
+            256,
+            512,
+            676,
+            792,
+            838,
+            816,
+            682,
+            494
+          ],
+          "eligible_F": [
+            0,
+            0,
+            512,
+            676,
+            792,
+            838,
+            816,
+            682,
+            494
+          ],
+          "active": [
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "orphans": [
+            0,
+            0,
+            0,
+            0,
+            4,
+            28,
+            2,
+            10,
+            98
+          ],
+          "D": 342,
+          "W": 38,
+          "minimum_C": 668
+        }
+      },
+      "counterexample_to_unqualified_cost": null
+    }
+  ],
+  "scope": "Exact counterexamples only; finite negative searches do not imply coverage."
+}

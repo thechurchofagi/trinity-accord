@@ -1,0 +1,55 @@
+{
+  "rng_seed": 202610030843,
+  "domain": "Seven distinct integers sampled from 1..60; reject nongeneric joint scores.",
+  "max_draws": 3000,
+  "trial_index": 534,
+  "secondary": [
+    16,
+    59,
+    15,
+    4,
+    49,
+    11,
+    7
+  ],
+  "result": {
+    "n": 7,
+    "q": 8,
+    "F": [
+      0,
+      32,
+      32,
+      56,
+      54,
+      50
+    ],
+    "eligible_F": [
+      0,
+      0,
+      32,
+      56,
+      54,
+      50
+    ],
+    "active": [
+      false,
+      false,
+      true,
+      true,
+      true,
+      true
+    ],
+    "orphans": [
+      0,
+      0,
+      0,
+      0,
+      4,
+      18
+    ],
+    "D": 30,
+    "W": 22,
+    "minimum_C": 68
+  },
+  "scope": "First retained witness only; no minimality or chamber coverage claim."
+}

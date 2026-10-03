@@ -1,0 +1,137 @@
+{
+  "status": "PASS",
+  "seed_secondary": [
+    16,
+    59,
+    15,
+    4,
+    49,
+    11,
+    7
+  ],
+  "seed_actual_weights": [
+    178,
+    221,
+    177,
+    166,
+    211,
+    173,
+    169
+  ],
+  "seed_interior_edges": [
+    [
+      2,
+      4,
+      -4
+    ],
+    [
+      2,
+      5,
+      12
+    ],
+    [
+      4,
+      5,
+      -6
+    ]
+  ],
+  "seed_interior_D": 28,
+  "seed_signs_sorted": 128,
+  "seed_min_R_and_C": 68,
+  "seed_joint_score_sha256": "a21d48c1f549e30d911406c870cc3bd5791af8fd99c186197537e71e3b8c55f8",
+  "rows": [
+    {
+      "n": 7,
+      "q": 8,
+      "D": 30,
+      "W": 22,
+      "E": 22,
+      "interior_J25": 12,
+      "total_J25": 12,
+      "minimum_C": 68
+    },
+    {
+      "n": 8,
+      "q": 9,
+      "D": 58,
+      "W": 46,
+      "E": 46,
+      "interior_J25": 24,
+      "total_J25": 24,
+      "minimum_C": 134
+    },
+    {
+      "n": 9,
+      "q": 10,
+      "D": 114,
+      "W": 90,
+      "E": 90,
+      "interior_J25": 48,
+      "total_J25": 48,
+      "minimum_C": 268
+    },
+    {
+      "n": 10,
+      "q": 11,
+      "D": 226,
+      "W": 178,
+      "E": 178,
+      "interior_J25": 96,
+      "total_J25": 96,
+      "minimum_C": 536
+    },
+    {
+      "n": 11,
+      "q": 12,
+      "D": 450,
+      "W": 354,
+      "E": 354,
+      "interior_J25": 192,
+      "total_J25": 192,
+      "minimum_C": 1072
+    },
+    {
+      "n": 12,
+      "q": 13,
+      "D": 898,
+      "W": 706,
+      "E": 706,
+      "interior_J25": 384,
+      "total_J25": 384,
+      "minimum_C": 2144
+    },
+    {
+      "n": 13,
+      "q": 14,
+      "D": 1794,
+      "W": 1410,
+      "E": 1410,
+      "interior_J25": 768,
+      "total_J25": 768,
+      "minimum_C": 4288
+    },
+    {
+      "n": 14,
+      "q": 15,
+      "D": 3586,
+      "W": 2818,
+      "E": 2818,
+      "interior_J25": 1536,
+      "total_J25": 1536,
+      "minimum_C": 8576
+    },
+    {
+      "n": 15,
+      "q": 16,
+      "D": 7170,
+      "W": 5634,
+      "E": 5634,
+      "interior_J25": 3072,
+      "total_J25": 3072,
+      "minimum_C": 17152
+    }
+  ],
+  "violations": 0,
+  "scope": "Proves failure of W=O(q) for arbitrary coherent secondary orders, not failure of positive run density.",
+  "deterministic_sha256": "ad73b68c82fb8850061a2da16134eae9c2bcb1bd7b8a2f722d8f1f69f4088e65"
+}
