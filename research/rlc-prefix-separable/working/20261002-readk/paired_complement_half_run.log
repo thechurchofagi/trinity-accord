@@ -1,0 +1,10 @@
+{"n": 2, "checked": 40, "balanced": 40, "strict_cut_gap": 0, "cut_quarter_failures": 0}
+{"n": 3, "checked": 40, "balanced": 40, "strict_cut_gap": 0, "cut_quarter_failures": 0}
+{"n": 4, "checked": 40, "balanced": 40, "strict_cut_gap": 0, "cut_quarter_failures": 0}
+{"n": 5, "checked": 40, "balanced": 36, "strict_cut_gap": 1, "cut_quarter_failures": 0}
+{"n": 6, "checked": 40, "balanced": 22, "strict_cut_gap": 7, "cut_quarter_failures": 0}
+{"n": 7, "checked": 40, "balanced": 17, "strict_cut_gap": 13, "cut_quarter_failures": 0}
+{"n": 8, "checked": 40, "balanced": 6, "strict_cut_gap": 28, "cut_quarter_failures": 0}
+{"n": 9, "checked": 40, "balanced": 3, "strict_cut_gap": 31, "cut_quarter_failures": 0}
+{"n": 10, "checked": 40, "balanced": 0, "strict_cut_gap": 33, "cut_quarter_failures": 0}
+{"seed": 202610031153, "checked_scans": 360, "rejected_ties": 0, "strict_cut_gaps": 113, "digest_sha256": "707557f827bb51525f0191229e29a878568dd5328aedb1529f030cd6e242b743", "seconds": 2.7763767930009635, "scope": "General identities have analytic proofs; audit coverage is listed finite samples, not chambers. No universal quarter or main M_n theorem claimed."}
