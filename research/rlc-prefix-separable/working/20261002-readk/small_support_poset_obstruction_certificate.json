@@ -1,0 +1,1195 @@
+{
+  "status": "VERIFIED_ALL_DIMENSION_SMALL_SUPPORT_NONADDITIVE_POSET_OBSTRUCTION",
+  "analytic_theorem": "For EVERY paired rank on Q_n, choose d with n-d>=3. Order lower input assignments numerically; within each fixed lower assignment, order upper Hamming-weight layers increasingly and rank-sort each layer. This is a Boolean-poset linear extension, has R<=2*2^d*(n-d+1)-1 and RAW NON-TOP comparison support q<=2^(n-d-1)-1. For d=floor(n/2), both R/2^n and q/2^n tend to0. It violates common disjoint addition at singleton input coordinates d,d+1 translated by d+2, for EVERY paired orientation, so is not ANY signed additive scan.",
+  "consequence": "No absolute a>0 and finite b>=0 can make R>=a*2^n-b*q hold for ALL coordinatewise Boolean-poset extensions and paired ranks. The proposed inequality for GENUINE additive scans is NOT refuted. A direction-only relaxation of the original-target small-support mass theorem is rigorously excluded; common-addition consistency or stronger true additive geometry is necessary.",
+  "scope": "All-dimensional analytic exclusion, not finite extrapolation. Prefix separability of the target ranks is inherited; the constructed scan permutations are explicitly nonadditive. Main M_n target remains OPEN.",
+  "rows": [
+    {
+      "n": 6,
+      "d": 3,
+      "upper_dimension_m": 3,
+      "paired_mask_decimal": "0",
+      "runs": 32,
+      "analytic_run_upper_bound": 63,
+      "raw_non_top_support_q": 2,
+      "analytic_support_upper_bound": 3,
+      "comparison_leading_bit_counts": {
+        "3": 8,
+        "4": 24,
+        "5": 31
+      },
+      "cube_edges_checked": 192,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        8,
+        16
+      ],
+      "common_added_coordinate": 5,
+      "reversed_translated_preference": [
+        48,
+        40
+      ],
+      "order_sha256": "945661bfaa5d1f12588c6aaf8dcb19d65b0a9ea70e2572773c1ddd24bda5736e"
+    },
+    {
+      "n": 6,
+      "d": 3,
+      "upper_dimension_m": 3,
+      "paired_mask_decimal": "1602529084",
+      "runs": 33,
+      "analytic_run_upper_bound": 63,
+      "raw_non_top_support_q": 2,
+      "analytic_support_upper_bound": 3,
+      "comparison_leading_bit_counts": {
+        "4": 24,
+        "5": 31,
+        "3": 8
+      },
+      "cube_edges_checked": 192,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        16,
+        8
+      ],
+      "common_added_coordinate": 5,
+      "reversed_translated_preference": [
+        40,
+        48
+      ],
+      "order_sha256": "156512a47167da8e2bc056724a444dc3edb6fb97b941e5fef8a82178fc82645b"
+    },
+    {
+      "n": 6,
+      "d": 3,
+      "upper_dimension_m": 3,
+      "paired_mask_decimal": "1757448215",
+      "runs": 32,
+      "analytic_run_upper_bound": 63,
+      "raw_non_top_support_q": 2,
+      "analytic_support_upper_bound": 3,
+      "comparison_leading_bit_counts": {
+        "4": 24,
+        "5": 31,
+        "3": 8
+      },
+      "cube_edges_checked": 192,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        16,
+        8
+      ],
+      "common_added_coordinate": 5,
+      "reversed_translated_preference": [
+        40,
+        48
+      ],
+      "order_sha256": "156512a47167da8e2bc056724a444dc3edb6fb97b941e5fef8a82178fc82645b"
+    },
+    {
+      "n": 6,
+      "d": 3,
+      "upper_dimension_m": 3,
+      "paired_mask_decimal": "282031116",
+      "runs": 33,
+      "analytic_run_upper_bound": 63,
+      "raw_non_top_support_q": 2,
+      "analytic_support_upper_bound": 3,
+      "comparison_leading_bit_counts": {
+        "3": 8,
+        "4": 24,
+        "5": 31
+      },
+      "cube_edges_checked": 192,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        8,
+        16
+      ],
+      "common_added_coordinate": 5,
+      "reversed_translated_preference": [
+        48,
+        40
+      ],
+      "order_sha256": "945661bfaa5d1f12588c6aaf8dcb19d65b0a9ea70e2572773c1ddd24bda5736e"
+    },
+    {
+      "n": 6,
+      "d": 3,
+      "upper_dimension_m": 3,
+      "paired_mask_decimal": "1643563469",
+      "runs": 32,
+      "analytic_run_upper_bound": 63,
+      "raw_non_top_support_q": 2,
+      "analytic_support_upper_bound": 3,
+      "comparison_leading_bit_counts": {
+        "4": 24,
+        "5": 31,
+        "3": 8
+      },
+      "cube_edges_checked": 192,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        16,
+        8
+      ],
+      "common_added_coordinate": 5,
+      "reversed_translated_preference": [
+        40,
+        48
+      ],
+      "order_sha256": "156512a47167da8e2bc056724a444dc3edb6fb97b941e5fef8a82178fc82645b"
+    },
+    {
+      "n": 7,
+      "d": 3,
+      "upper_dimension_m": 4,
+      "paired_mask_decimal": "0",
+      "runs": 48,
+      "analytic_run_upper_bound": 79,
+      "raw_non_top_support_q": 4,
+      "analytic_support_upper_bound": 7,
+      "comparison_leading_bit_counts": {
+        "3": 8,
+        "4": 32,
+        "5": 40,
+        "6": 47
+      },
+      "cube_edges_checked": 448,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        8,
+        16
+      ],
+      "common_added_coordinate": 5,
+      "reversed_translated_preference": [
+        48,
+        40
+      ],
+      "order_sha256": "706bb75fa1248d329094c6db00fb0a514ccd3f19efebb4dc3a82cd6c79431a4c"
+    },
+    {
+      "n": 7,
+      "d": 3,
+      "upper_dimension_m": 4,
+      "paired_mask_decimal": "7508829839760658895",
+      "runs": 48,
+      "analytic_run_upper_bound": 79,
+      "raw_non_top_support_q": 4,
+      "analytic_support_upper_bound": 7,
+      "comparison_leading_bit_counts": {
+        "5": 40,
+        "4": 32,
+        "6": 47,
+        "3": 8
+      },
+      "cube_edges_checked": 448,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        8,
+        16
+      ],
+      "common_added_coordinate": 5,
+      "reversed_translated_preference": [
+        48,
+        40
+      ],
+      "order_sha256": "52e5b1c36e417572c518f6722336764f5b686f3382a679662166f79154626440"
+    },
+    {
+      "n": 7,
+      "d": 3,
+      "upper_dimension_m": 4,
+      "paired_mask_decimal": "6119554855102193830",
+      "runs": 49,
+      "analytic_run_upper_bound": 79,
+      "raw_non_top_support_q": 3,
+      "analytic_support_upper_bound": 7,
+      "comparison_leading_bit_counts": {
+        "5": 40,
+        "4": 40,
+        "6": 47
+      },
+      "cube_edges_checked": 448,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        16,
+        8
+      ],
+      "common_added_coordinate": 5,
+      "reversed_translated_preference": [
+        40,
+        48
+      ],
+      "order_sha256": "46fc8117d1e47ab29c41be033ba00d18a642e66669bf08d7c2406c69f14d0e13"
+    },
+    {
+      "n": 7,
+      "d": 3,
+      "upper_dimension_m": 4,
+      "paired_mask_decimal": "1241349177194736476",
+      "runs": 49,
+      "analytic_run_upper_bound": 79,
+      "raw_non_top_support_q": 3,
+      "analytic_support_upper_bound": 7,
+      "comparison_leading_bit_counts": {
+        "4": 40,
+        "5": 40,
+        "6": 47
+      },
+      "cube_edges_checked": 448,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        16,
+        8
+      ],
+      "common_added_coordinate": 5,
+      "reversed_translated_preference": [
+        40,
+        48
+      ],
+      "order_sha256": "e14c63353bb8c19ae9bb4155a431099e2e78dab4825ed3e46f34e638a6d123c5"
+    },
+    {
+      "n": 7,
+      "d": 3,
+      "upper_dimension_m": 4,
+      "paired_mask_decimal": "8469164268447174573",
+      "runs": 49,
+      "analytic_run_upper_bound": 79,
+      "raw_non_top_support_q": 4,
+      "analytic_support_upper_bound": 7,
+      "comparison_leading_bit_counts": {
+        "5": 40,
+        "4": 32,
+        "6": 47,
+        "3": 8
+      },
+      "cube_edges_checked": 448,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        16,
+        8
+      ],
+      "common_added_coordinate": 5,
+      "reversed_translated_preference": [
+        40,
+        48
+      ],
+      "order_sha256": "2f290d57e63c2e815363c191e00fc8aeb463d43f25c6f460acad3ea5ff7f529d"
+    },
+    {
+      "n": 8,
+      "d": 4,
+      "upper_dimension_m": 4,
+      "paired_mask_decimal": "0",
+      "runs": 96,
+      "analytic_run_upper_bound": 159,
+      "raw_non_top_support_q": 4,
+      "analytic_support_upper_bound": 7,
+      "comparison_leading_bit_counts": {
+        "4": 16,
+        "5": 64,
+        "6": 80,
+        "7": 95
+      },
+      "cube_edges_checked": 1024,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        16,
+        32
+      ],
+      "common_added_coordinate": 6,
+      "reversed_translated_preference": [
+        96,
+        80
+      ],
+      "order_sha256": "b39ccc68c822d2ecc0361fec9e6efb3e17bd15598ec9068db0d9f06e2e7d30b2"
+    },
+    {
+      "n": 8,
+      "d": 4,
+      "upper_dimension_m": 4,
+      "paired_mask_decimal": "150537174946300863797376160654951399010",
+      "runs": 97,
+      "analytic_run_upper_bound": 159,
+      "raw_non_top_support_q": 4,
+      "analytic_support_upper_bound": 7,
+      "comparison_leading_bit_counts": {
+        "6": 80,
+        "5": 64,
+        "7": 95,
+        "4": 16
+      },
+      "cube_edges_checked": 1024,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        32,
+        16
+      ],
+      "common_added_coordinate": 6,
+      "reversed_translated_preference": [
+        80,
+        96
+      ],
+      "order_sha256": "aa7185f099ec127a99d6bad27f3ae19895c8e502f83234ae6add1c83896f27ce"
+    },
+    {
+      "n": 8,
+      "d": 4,
+      "upper_dimension_m": 4,
+      "paired_mask_decimal": "10999755528813497021784591464270355331",
+      "runs": 96,
+      "analytic_run_upper_bound": 159,
+      "raw_non_top_support_q": 4,
+      "analytic_support_upper_bound": 7,
+      "comparison_leading_bit_counts": {
+        "4": 16,
+        "5": 64,
+        "6": 80,
+        "7": 95
+      },
+      "cube_edges_checked": 1024,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        16,
+        32
+      ],
+      "common_added_coordinate": 6,
+      "reversed_translated_preference": [
+        96,
+        80
+      ],
+      "order_sha256": "b39ccc68c822d2ecc0361fec9e6efb3e17bd15598ec9068db0d9f06e2e7d30b2"
+    },
+    {
+      "n": 8,
+      "d": 4,
+      "upper_dimension_m": 4,
+      "paired_mask_decimal": "47189462208010519756284070915096918600",
+      "runs": 97,
+      "analytic_run_upper_bound": 159,
+      "raw_non_top_support_q": 4,
+      "analytic_support_upper_bound": 7,
+      "comparison_leading_bit_counts": {
+        "4": 16,
+        "5": 64,
+        "6": 80,
+        "7": 95
+      },
+      "cube_edges_checked": 1024,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        16,
+        32
+      ],
+      "common_added_coordinate": 6,
+      "reversed_translated_preference": [
+        96,
+        80
+      ],
+      "order_sha256": "6c02022186986517530e554ec2c34616b5b1f6be6aaac77554deb8a1b0f3b871"
+    },
+    {
+      "n": 8,
+      "d": 4,
+      "upper_dimension_m": 4,
+      "paired_mask_decimal": "83072668806550003602550015143635362279",
+      "runs": 97,
+      "analytic_run_upper_bound": 159,
+      "raw_non_top_support_q": 3,
+      "analytic_support_upper_bound": 7,
+      "comparison_leading_bit_counts": {
+        "5": 80,
+        "6": 80,
+        "7": 95
+      },
+      "cube_edges_checked": 1024,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        32,
+        16
+      ],
+      "common_added_coordinate": 6,
+      "reversed_translated_preference": [
+        80,
+        96
+      ],
+      "order_sha256": "569795783f4069dbcf8b65ca3d6c5e17778bf9f7f944effa73782f384b8d99b7"
+    },
+    {
+      "n": 9,
+      "d": 4,
+      "upper_dimension_m": 5,
+      "paired_mask_decimal": "0",
+      "runs": 128,
+      "analytic_run_upper_bound": 191,
+      "raw_non_top_support_q": 8,
+      "analytic_support_upper_bound": 15,
+      "comparison_leading_bit_counts": {
+        "4": 16,
+        "5": 128,
+        "6": 128,
+        "7": 112,
+        "8": 127
+      },
+      "cube_edges_checked": 2304,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        16,
+        32
+      ],
+      "common_added_coordinate": 6,
+      "reversed_translated_preference": [
+        96,
+        80
+      ],
+      "order_sha256": "b2a7e70e81fb09c8b1882b9d8eaff45b41952bdd1b1f0aa88829b5bfb4299816"
+    },
+    {
+      "n": 9,
+      "d": 4,
+      "upper_dimension_m": 5,
+      "paired_mask_decimal": "38811296725376728412820860162209849696097890942522303062617398101060826943111",
+      "runs": 129,
+      "analytic_run_upper_bound": 191,
+      "raw_non_top_support_q": 7,
+      "analytic_support_upper_bound": 15,
+      "comparison_leading_bit_counts": {
+        "7": 112,
+        "6": 144,
+        "5": 128,
+        "8": 127
+      },
+      "cube_edges_checked": 2304,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        32,
+        16
+      ],
+      "common_added_coordinate": 6,
+      "reversed_translated_preference": [
+        80,
+        96
+      ],
+      "order_sha256": "34169405c4090bfa70246b49a69b019fc65337702fe808b62184b6d0f7134aa4"
+    },
+    {
+      "n": 9,
+      "d": 4,
+      "upper_dimension_m": 5,
+      "paired_mask_decimal": "28030251457234302154987016296470116673401402157035898004628121373831502221527",
+      "runs": 129,
+      "analytic_run_upper_bound": 191,
+      "raw_non_top_support_q": 7,
+      "analytic_support_upper_bound": 15,
+      "comparison_leading_bit_counts": {
+        "6": 144,
+        "5": 128,
+        "7": 112,
+        "8": 127
+      },
+      "cube_edges_checked": 2304,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        32,
+        16
+      ],
+      "common_added_coordinate": 6,
+      "reversed_translated_preference": [
+        80,
+        96
+      ],
+      "order_sha256": "4d751f61ba6df7c1cbef6bc0154e243a9bb66901c48b4e0b2bf8b4653141c2dc"
+    },
+    {
+      "n": 9,
+      "d": 4,
+      "upper_dimension_m": 5,
+      "paired_mask_decimal": "44571571888149071238993105244800829434176104467942335404910028275256759992974",
+      "runs": 129,
+      "analytic_run_upper_bound": 191,
+      "raw_non_top_support_q": 7,
+      "analytic_support_upper_bound": 15,
+      "comparison_leading_bit_counts": {
+        "7": 112,
+        "5": 144,
+        "6": 128,
+        "8": 127
+      },
+      "cube_edges_checked": 2304,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        16,
+        32
+      ],
+      "common_added_coordinate": 6,
+      "reversed_translated_preference": [
+        96,
+        80
+      ],
+      "order_sha256": "40c367f0d82e624c7fb554a7e287cfbc3588d9aa1849407267643b73c5de1706"
+    },
+    {
+      "n": 9,
+      "d": 4,
+      "upper_dimension_m": 5,
+      "paired_mask_decimal": "57864353669024369550321178439217272317481263124405301078134373751048607171904",
+      "runs": 128,
+      "analytic_run_upper_bound": 191,
+      "raw_non_top_support_q": 8,
+      "analytic_support_upper_bound": 15,
+      "comparison_leading_bit_counts": {
+        "7": 112,
+        "6": 128,
+        "5": 128,
+        "8": 127,
+        "4": 16
+      },
+      "cube_edges_checked": 2304,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        32,
+        16
+      ],
+      "common_added_coordinate": 6,
+      "reversed_translated_preference": [
+        80,
+        96
+      ],
+      "order_sha256": "6edab387de28d6f12624726e4d1055d8b5d3add21f23ca4a4c578679c4429bfd"
+    },
+    {
+      "n": 10,
+      "d": 5,
+      "upper_dimension_m": 5,
+      "paired_mask_decimal": "0",
+      "runs": 256,
+      "analytic_run_upper_bound": 383,
+      "raw_non_top_support_q": 8,
+      "analytic_support_upper_bound": 15,
+      "comparison_leading_bit_counts": {
+        "5": 32,
+        "6": 256,
+        "7": 256,
+        "8": 224,
+        "9": 255
+      },
+      "cube_edges_checked": 5120,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        32,
+        64
+      ],
+      "common_added_coordinate": 7,
+      "reversed_translated_preference": [
+        192,
+        160
+      ],
+      "order_sha256": "885c83f1aa6dd03692398bcbb9bfa6114e5d8b4ba6cd4e7582e7ebd9fb727693"
+    },
+    {
+      "n": 10,
+      "d": 5,
+      "upper_dimension_m": 5,
+      "paired_mask_decimal": "6114681018602813756485755135961295667016009283547502109325192333756385567318091202944997386219626846132688064513616648617752358469503215756686317465897359",
+      "runs": 257,
+      "analytic_run_upper_bound": 383,
+      "raw_non_top_support_q": 7,
+      "analytic_support_upper_bound": 15,
+      "comparison_leading_bit_counts": {
+        "8": 224,
+        "7": 256,
+        "6": 288,
+        "9": 255
+      },
+      "cube_edges_checked": 5120,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        32,
+        64
+      ],
+      "common_added_coordinate": 7,
+      "reversed_translated_preference": [
+        192,
+        160
+      ],
+      "order_sha256": "1d648fc16d7280650a19dc05c1fef7d99ad63f3e069c7a758c500999e2981cc8"
+    },
+    {
+      "n": 10,
+      "d": 5,
+      "upper_dimension_m": 5,
+      "paired_mask_decimal": "4944945065396031658759458777741801900421936308268935384708221466857337376198463038579906109394687130468810277122515281792790746818043415056709865155770967",
+      "runs": 257,
+      "analytic_run_upper_bound": 383,
+      "raw_non_top_support_q": 7,
+      "analytic_support_upper_bound": 15,
+      "comparison_leading_bit_counts": {
+        "8": 224,
+        "7": 288,
+        "6": 256,
+        "9": 255
+      },
+      "cube_edges_checked": 5120,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        32,
+        64
+      ],
+      "common_added_coordinate": 7,
+      "reversed_translated_preference": [
+        192,
+        160
+      ],
+      "order_sha256": "fe214b97935361ff14e1498705b840601ba92f2f9a86df969147060fe19f39b6"
+    },
+    {
+      "n": 10,
+      "d": 5,
+      "upper_dimension_m": 5,
+      "paired_mask_decimal": "277125322321766280161295247410522302425705435302537307029128134954667803824280465936679772382905691362351777748187164532777007221316681601559133316992197",
+      "runs": 257,
+      "analytic_run_upper_bound": 383,
+      "raw_non_top_support_q": 7,
+      "analytic_support_upper_bound": 15,
+      "comparison_leading_bit_counts": {
+        "6": 288,
+        "7": 256,
+        "8": 224,
+        "9": 255
+      },
+      "cube_edges_checked": 5120,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        64,
+        32
+      ],
+      "common_added_coordinate": 7,
+      "reversed_translated_preference": [
+        160,
+        192
+      ],
+      "order_sha256": "50766a0fcb5aabe311b9aea2dbd063dd555a3fc05e012b8890a0e67eea13febf"
+    },
+    {
+      "n": 10,
+      "d": 5,
+      "upper_dimension_m": 5,
+      "paired_mask_decimal": "2434471645424434707250941928297912035806855593875064788768890180732580603643930746267558414648893128011684825998598219860282468510180563600955760170434961",
+      "runs": 257,
+      "analytic_run_upper_bound": 383,
+      "raw_non_top_support_q": 8,
+      "analytic_support_upper_bound": 15,
+      "comparison_leading_bit_counts": {
+        "5": 32,
+        "6": 256,
+        "7": 256,
+        "8": 224,
+        "9": 255
+      },
+      "cube_edges_checked": 5120,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        32,
+        64
+      ],
+      "common_added_coordinate": 7,
+      "reversed_translated_preference": [
+        192,
+        160
+      ],
+      "order_sha256": "86bb82d937f64e7cfa6c9ffef75fea5e125480e6f0d06d85a29f7a84f4f07e23"
+    },
+    {
+      "n": 11,
+      "d": 5,
+      "upper_dimension_m": 6,
+      "paired_mask_decimal": "0",
+      "runs": 320,
+      "analytic_run_upper_bound": 447,
+      "raw_non_top_support_q": 16,
+      "analytic_support_upper_bound": 31,
+      "comparison_leading_bit_counts": {
+        "5": 32,
+        "6": 512,
+        "7": 512,
+        "8": 384,
+        "9": 288,
+        "10": 319
+      },
+      "cube_edges_checked": 11264,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        32,
+        64
+      ],
+      "common_added_coordinate": 7,
+      "reversed_translated_preference": [
+        192,
+        160
+      ],
+      "order_sha256": "94df1ffddfb53ab74b1ccab233a58bc796fea65065b0a0abfd96e778b2c3938c"
+    },
+    {
+      "n": 11,
+      "d": 5,
+      "upper_dimension_m": 6,
+      "paired_mask_decimal": "38687826497100144380214703668967992729716192246293283175457000611667304241003996856889366549348362933138046127853229670212439818731515966965772939900048062872247511623048424075233948267736249692943535224975083301194683044107748708043941428189970498073706235450999065685426721062624742825078314047163060369203",
+      "runs": 321,
+      "analytic_run_upper_bound": 447,
+      "raw_non_top_support_q": 15,
+      "analytic_support_upper_bound": 31,
+      "comparison_leading_bit_counts": {
+        "8": 416,
+        "7": 512,
+        "6": 512,
+        "9": 288,
+        "10": 319
+      },
+      "cube_edges_checked": 11264,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        64,
+        32
+      ],
+      "common_added_coordinate": 7,
+      "reversed_translated_preference": [
+        160,
+        192
+      ],
+      "order_sha256": "a16ff71bd917d1dc1481f3b6b275a5779799d9e6758cfe7fd65f536be88ff14a"
+    },
+    {
+      "n": 11,
+      "d": 5,
+      "upper_dimension_m": 6,
+      "paired_mask_decimal": "6307783106536585542538304784028166020208488767193548762033510814373781823066192312914567232461022595482363746886914279183181159089070348682839248406981099813318198192422977353107891693825009664522833411656234682947013871214661490441640905936509952048586026747542274365121065768816114055879511034686440543600",
+      "runs": 321,
+      "analytic_run_upper_bound": 447,
+      "raw_non_top_support_q": 15,
+      "analytic_support_upper_bound": 31,
+      "comparison_leading_bit_counts": {
+        "6": 544,
+        "7": 512,
+        "8": 384,
+        "9": 288,
+        "10": 319
+      },
+      "cube_edges_checked": 11264,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        64,
+        32
+      ],
+      "common_added_coordinate": 7,
+      "reversed_translated_preference": [
+        160,
+        192
+      ],
+      "order_sha256": "1914dde617158c0e53361712934546301e2ffad73b862c6f0a0b37852a56263d"
+    },
+    {
+      "n": 11,
+      "d": 5,
+      "upper_dimension_m": 6,
+      "paired_mask_decimal": "77680997480998179970185504179737951314941019637968317998534140518445288683475018070178990933729395337982078913837061340355031447779074875847524321006958066631689705950243054963578752334606636856793614514097908857433423458716809511031603407974560662346110710920923040904721805579300646812445506486371644891293",
+      "runs": 321,
+      "analytic_run_upper_bound": 447,
+      "raw_non_top_support_q": 16,
+      "analytic_support_upper_bound": 31,
+      "comparison_leading_bit_counts": {
+        "9": 288,
+        "6": 512,
+        "7": 512,
+        "8": 384,
+        "10": 319,
+        "5": 32
+      },
+      "cube_edges_checked": 11264,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        64,
+        32
+      ],
+      "common_added_coordinate": 7,
+      "reversed_translated_preference": [
+        160,
+        192
+      ],
+      "order_sha256": "0362345c484fdb28507919588dbc8a9ef0ab7c59c25288cdd7e95bb905c07d88"
+    },
+    {
+      "n": 11,
+      "d": 5,
+      "upper_dimension_m": 6,
+      "paired_mask_decimal": "14160501602917232420556371341571110402859951426382941639634555272341565647571592817788190160378216196679831034183587064660539098266917235067625513404484811202314600190473348987353382293698390066167176023530569359612208880220389794715552799292046397376733819947096909575079867479972088887606805481591046004913",
+      "runs": 321,
+      "analytic_run_upper_bound": 447,
+      "raw_non_top_support_q": 15,
+      "analytic_support_upper_bound": 31,
+      "comparison_leading_bit_counts": {
+        "8": 416,
+        "6": 512,
+        "7": 512,
+        "9": 288,
+        "10": 319
+      },
+      "cube_edges_checked": 11264,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        32,
+        64
+      ],
+      "common_added_coordinate": 7,
+      "reversed_translated_preference": [
+        192,
+        160
+      ],
+      "order_sha256": "6dd6fc31d704edb47dc826cef15078615551cf98e7feb303cfe38146f2890a71"
+    },
+    {
+      "n": 12,
+      "d": 6,
+      "upper_dimension_m": 6,
+      "paired_mask_decimal": "0",
+      "runs": 640,
+      "analytic_run_upper_bound": 895,
+      "raw_non_top_support_q": 16,
+      "analytic_support_upper_bound": 31,
+      "comparison_leading_bit_counts": {
+        "6": 64,
+        "7": 1024,
+        "8": 1024,
+        "9": 768,
+        "10": 576,
+        "11": 639
+      },
+      "cube_edges_checked": 24576,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        64,
+        128
+      ],
+      "common_added_coordinate": 8,
+      "reversed_translated_preference": [
+        384,
+        320
+      ],
+      "order_sha256": "4613960afecfb0f07b4af9c65f8d57e76c5aba4d8f31bb646398769e6dd060f1"
+    },
+    {
+      "n": 12,
+      "d": 6,
+      "upper_dimension_m": 6,
+      "paired_mask_decimal": "14686755884286402653613986557819815657424765661544236370700241730802271528245469126826109462442774267837606573825826732107064783146651240938435158493227506401523136106475314290086617697968538773526505816649900661578239447652615597330138341391335218613499167672936706025872024603301426464244003031975853391427715330781399501346918081422090070763923789662282840250015296058932165840108620655596345262836391376631436730871632312228962963270371591922422078183754883684409755583826394243567401872020561381483047264730781198781714606131424866629491845281800192236598145569342346933532057389817064592537356644701726001451156",
+      "runs": 641,
+      "analytic_run_upper_bound": 895,
+      "raw_non_top_support_q": 15,
+      "analytic_support_upper_bound": 31,
+      "comparison_leading_bit_counts": {
+        "10": 576,
+        "9": 768,
+        "7": 1024,
+        "8": 1088,
+        "11": 639
+      },
+      "cube_edges_checked": 24576,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        128,
+        64
+      ],
+      "common_added_coordinate": 8,
+      "reversed_translated_preference": [
+        320,
+        384
+      ],
+      "order_sha256": "7099029a5e01a75c304a7a2928b6b9c16147b8ce9eeb99f325218c7016b21dd6"
+    },
+    {
+      "n": 12,
+      "d": 6,
+      "upper_dimension_m": 6,
+      "paired_mask_decimal": "3051069904583981397307805428203917573796952117945971733997427727490519676445845339759819614053984131920298131977790224204817033661685044381701523743766540154369691412810977804225094189833687210715752174814195803937995589299144929214813126291594551654790116245301742936107884848066311334127053993064200502737758340310708420758984672024946008409324292122571511958729360240838998604250798491050582778908588041750892344316405122899647112132616784423663302519887331007498372849649856084990988447935769681770869081950784890075445369640509934908425700908512197277927731309095336050145701759129706939166392022993768193418560",
+      "runs": 641,
+      "analytic_run_upper_bound": 895,
+      "raw_non_top_support_q": 15,
+      "analytic_support_upper_bound": 31,
+      "comparison_leading_bit_counts": {
+        "9": 832,
+        "7": 1024,
+        "8": 1024,
+        "10": 576,
+        "11": 639
+      },
+      "cube_edges_checked": 24576,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        128,
+        64
+      ],
+      "common_added_coordinate": 8,
+      "reversed_translated_preference": [
+        320,
+        384
+      ],
+      "order_sha256": "017a7ce996ea1e5e314c5dfa6b9a61821d3cabcf097595a2b4cc4b4c923fc181"
+    },
+    {
+      "n": 12,
+      "d": 6,
+      "upper_dimension_m": 6,
+      "paired_mask_decimal": "740220830342070203100501731096069497720691651132681229064325674788391249027835604237168055154677542921808624367594802958474315634372831070772790516732173285681678096778545787848845234436765866723028256236554119199002862338195811437285343645497748138903388025680057897583430726551327639670569239902701005000568032379827802900682536189281881201993135618186319056347365949350099784801766028932217705549235486340176105620301879387688670400826424421490780011076939822264771734184166714511742892958302180653164237306002433397973395499374921014976535424692979237912861399615440783726079841410197643637983565630639727403758",
+      "runs": 641,
+      "analytic_run_upper_bound": 895,
+      "raw_non_top_support_q": 15,
+      "analytic_support_upper_bound": 31,
+      "comparison_leading_bit_counts": {
+        "8": 1088,
+        "7": 1024,
+        "9": 768,
+        "10": 576,
+        "11": 639
+      },
+      "cube_edges_checked": 24576,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        128,
+        64
+      ],
+      "common_added_coordinate": 8,
+      "reversed_translated_preference": [
+        320,
+        384
+      ],
+      "order_sha256": "d3aff3ffd2c36bb4811d6db21474d775f8e15c1729a8ff86b769685060692e9f"
+    },
+    {
+      "n": 12,
+      "d": 6,
+      "upper_dimension_m": 6,
+      "paired_mask_decimal": "15496183781905921020602717760806788461023935069390973952286268983180072482468124925514640225590245968156985934031939924423229737296384166693755038465215576929724402341905631422092949796880766078519986639370245326537243891844668331280783978132000687673911024522400504406656815720509571401616109689133647109994249908706711423823129136300706718572441510135028482501442619001007946148283242699662426473716595907094256139500826662491972301516734887805566168899874372651437638358528740596882373136551593103525853182771299015523403710360488478463846253960394052318686500487089528179164968532854976819630230857108616486221754",
+      "runs": 640,
+      "analytic_run_upper_bound": 895,
+      "raw_non_top_support_q": 16,
+      "analytic_support_upper_bound": 31,
+      "comparison_leading_bit_counts": {
+        "10": 576,
+        "9": 768,
+        "7": 1024,
+        "8": 1024,
+        "11": 639,
+        "6": 64
+      },
+      "cube_edges_checked": 24576,
+      "edge_audit_scope": "ALL cube edges",
+      "first_preference": [
+        64,
+        128
+      ],
+      "common_added_coordinate": 8,
+      "reversed_translated_preference": [
+        384,
+        320
+      ],
+      "order_sha256": "fa97799607eff6dce8869d59e3e2722f92ac3ad9eb0b291cece18d9dca279267"
+    },
+    {
+      "n": 13,
+      "d": 6,
+      "upper_dimension_m": 7,
+      "paired_mask_decimal": "0",
+      "runs": 768,
+      "analytic_run_upper_bound": 1023,
+      "raw_non_top_support_q": 32,
+      "analytic_support_upper_bound": 63,
+      "comparison_leading_bit_counts": {
+        "6": 64,
+        "7": 2048,
+        "8": 2048,
+        "9": 1536,
+        "10": 1024,
+        "11": 704,
+        "12": 767
+      },
+      "cube_edges_checked": 2048,
+      "edge_audit_scope": "2048 sampled cube edges; analytic proof covers ALL",
+      "first_preference": [
+        64,
+        128
+      ],
+      "common_added_coordinate": 8,
+      "reversed_translated_preference": [
+        384,
+        320
+      ],
+      "order_sha256": "6fabfa7d11d712d8efd8985f473fa03c02db81766e3cd12326fe1e71e15826a8"
+    },
+    {
+      "n": 14,
+      "d": 7,
+      "upper_dimension_m": 7,
+      "paired_mask_decimal": "0",
+      "runs": 1536,
+      "analytic_run_upper_bound": 2047,
+      "raw_non_top_support_q": 32,
+      "analytic_support_upper_bound": 63,
+      "comparison_leading_bit_counts": {
+        "7": 128,
+        "8": 4096,
+        "9": 4096,
+        "10": 3072,
+        "11": 2048,
+        "12": 1408,
+        "13": 1535
+      },
+      "cube_edges_checked": 2048,
+      "edge_audit_scope": "2048 sampled cube edges; analytic proof covers ALL",
+      "first_preference": [
+        128,
+        256
+      ],
+      "common_added_coordinate": 9,
+      "reversed_translated_preference": [
+        768,
+        640
+      ],
+      "order_sha256": "9248e6806ca55edb44e062e06f35fad2ce558d1a240c303f276dc95a60e2eda2"
+    },
+    {
+      "n": 15,
+      "d": 7,
+      "upper_dimension_m": 8,
+      "paired_mask_decimal": "0",
+      "runs": 1792,
+      "analytic_run_upper_bound": 2303,
+      "raw_non_top_support_q": 64,
+      "analytic_support_upper_bound": 127,
+      "comparison_leading_bit_counts": {
+        "7": 128,
+        "8": 8192,
+        "9": 8192,
+        "10": 6144,
+        "11": 4096,
+        "12": 2560,
+        "13": 1664,
+        "14": 1791
+      },
+      "cube_edges_checked": 2048,
+      "edge_audit_scope": "2048 sampled cube edges; analytic proof covers ALL",
+      "first_preference": [
+        128,
+        256
+      ],
+      "common_added_coordinate": 9,
+      "reversed_translated_preference": [
+        768,
+        640
+      ],
+      "order_sha256": "735ee7198bdfbf09fdc592befd42d5367b2ca0d07d54f996047acbff5faf5068"
+    },
+    {
+      "n": 16,
+      "d": 8,
+      "upper_dimension_m": 8,
+      "paired_mask_decimal": "0",
+      "runs": 3584,
+      "analytic_run_upper_bound": 4607,
+      "raw_non_top_support_q": 64,
+      "analytic_support_upper_bound": 127,
+      "comparison_leading_bit_counts": {
+        "8": 256,
+        "9": 16384,
+        "10": 16384,
+        "11": 12288,
+        "12": 8192,
+        "13": 5120,
+        "14": 3328,
+        "15": 3583
+      },
+      "cube_edges_checked": 2048,
+      "edge_audit_scope": "2048 sampled cube edges; analytic proof covers ALL",
+      "first_preference": [
+        256,
+        512
+      ],
+      "common_added_coordinate": 10,
+      "reversed_translated_preference": [
+        1536,
+        1280
+      ],
+      "order_sha256": "98d024a5800577b5f369fbd6957ba166bdb4cd5f4c8150527bc818c0e09eaeeb"
+    },
+    {
+      "n": 17,
+      "d": 8,
+      "upper_dimension_m": 9,
+      "paired_mask_decimal": "0",
+      "runs": 4096,
+      "analytic_run_upper_bound": 5119,
+      "raw_non_top_support_q": 128,
+      "analytic_support_upper_bound": 255,
+      "comparison_leading_bit_counts": {
+        "8": 256,
+        "9": 32768,
+        "10": 32768,
+        "11": 24576,
+        "12": 16384,
+        "13": 10240,
+        "14": 6144,
+        "15": 3840,
+        "16": 4095
+      },
+      "cube_edges_checked": 2048,
+      "edge_audit_scope": "2048 sampled cube edges; analytic proof covers ALL",
+      "first_preference": [
+        256,
+        512
+      ],
+      "common_added_coordinate": 10,
+      "reversed_translated_preference": [
+        1536,
+        1280
+      ],
+      "order_sha256": "b227b31cd207b5137773bc6c3297e6b27955e66c79688ee6e61ceb576cff75b6"
+    },
+    {
+      "n": 18,
+      "d": 9,
+      "upper_dimension_m": 9,
+      "paired_mask_decimal": "0",
+      "runs": 8192,
+      "analytic_run_upper_bound": 10239,
+      "raw_non_top_support_q": 128,
+      "analytic_support_upper_bound": 255,
+      "comparison_leading_bit_counts": {
+        "9": 512,
+        "10": 65536,
+        "11": 65536,
+        "12": 49152,
+        "13": 32768,
+        "14": 20480,
+        "15": 12288,
+        "16": 7680,
+        "17": 8191
+      },
+      "cube_edges_checked": 2048,
+      "edge_audit_scope": "2048 sampled cube edges; analytic proof covers ALL",
+      "first_preference": [
+        512,
+        1024
+      ],
+      "common_added_coordinate": 11,
+      "reversed_translated_preference": [
+        3072,
+        2560
+      ],
+      "order_sha256": "cd08218307228c132e2445610c249752a51ce89a40c55bceb78e0c003b0ddeee"
+    }
+  ],
+  "cases": 41,
+  "seed": 202610031745,
+  "violations": 0,
+  "seconds": 3.6120425360131776,
+  "audit_sha256": "f285a777474552f0dc77b111658719eb6b288a701adc03b1faa968e0b9571148"
+}
