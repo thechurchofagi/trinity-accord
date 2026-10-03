@@ -1,0 +1,17 @@
+{"cell": 0, "representative": [[187, 192], [307, 8]], "intervals": 423, "max_net": 72, "elapsed": 1.384}
+{"cell": 1, "representative": [[71, 72], [229, 6]], "intervals": 423, "max_net": 72, "elapsed": 1.675}
+{"cell": 2, "representative": [[133, 144], [113, 3]], "intervals": 423, "max_net": 72, "elapsed": 1.952}
+{"cell": 3, "representative": [[17, 18], [113, 3]], "intervals": 423, "max_net": 72, "elapsed": 2.236}
+{"cell": 4, "representative": [[67, 72], [112, 3]], "intervals": 423, "max_net": 72, "elapsed": 2.512}
+{"cell": 5, "representative": [[8, 9], [221, 6]], "intervals": 423, "max_net": 72, "elapsed": 2.809}
+{"cell": 6, "representative": [[137, 144], [112, 3]], "intervals": 423, "max_net": 72, "elapsed": 3.089}
+{"cell": 7, "representative": [[173, 192], [293, 8]], "intervals": 423, "max_net": 72, "elapsed": 3.369}
+{"cell": 8, "representative": [[187, 192], [299, 8]], "intervals": 423, "max_net": 72, "elapsed": 3.648}
+{"cell": 9, "representative": [[71, 72], [223, 6]], "intervals": 423, "max_net": 72, "elapsed": 3.926}
+{"cell": 10, "representative": [[133, 144], [110, 3]], "intervals": 423, "max_net": 72, "elapsed": 4.215}
+{"cell": 11, "representative": [[17, 18], [110, 3]], "intervals": 423, "max_net": 72, "elapsed": 4.49}
+{"cell": 12, "representative": [[163, 192], [291, 8]], "intervals": 423, "max_net": 72, "elapsed": 4.8}
+{"cell": 13, "representative": [[115, 144], [107, 3]], "intervals": 423, "max_net": 72, "elapsed": 5.087}
+{"cell": 14, "representative": [[31, 36], [217, 6]], "intervals": 423, "max_net": 72, "elapsed": 5.372}
+{"cell": 15, "representative": [[59, 72], [107, 3]], "intervals": 423, "max_net": 72, "elapsed": 5.657}
+{"state": "COMPLETE_THREE_REAL_PARAMETER_INSERTION_OVER_PARENT_WEDGE", "cell_count": 16, "total_generic_H_intervals": 6768, "distinct_child_orders": 802, "global_maximum_net": 72, "verification_digest": "d9307beb8bd84a64c57a16df08f0d9fb1b4fee60399f1383b945131a8a03e3c2", "elapsed_seconds": 5.657}
