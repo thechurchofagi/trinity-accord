@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/59fe1ba67fc3/rlc_repo/research/rlc-prefix-separable/working/20261002-readk/verify_paired_actual_joint_gap.py", line 181, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/59fe1ba67fc3/rlc_repo/research/rlc-prefix-separable/working/20261002-readk/verify_paired_actual_joint_gap.py", line 167, in main
+    rows=[lift_audit(n,edges,p,limit_opts) for n in range(10,19)]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/59fe1ba67fc3/rlc_repo/research/rlc-prefix-separable/working/20261002-readk/verify_paired_actual_joint_gap.py", line 120, in lift_audit
+    assert E==54*T+2
+           ^^^^^^^^^
+AssertionError
