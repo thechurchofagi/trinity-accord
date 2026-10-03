@@ -1,0 +1,30 @@
+{"n": 4, "T": 1, "D": 0, "K": 2, "W": 10, "phi": 2, "R_min": 5}
+{"n": 5, "T": 2, "D": 0, "K": 2, "W": 26, "phi": 6, "R_min": 9}
+{"n": 6, "T": 4, "D": 0, "K": 2, "W": 58, "phi": 14, "R_min": 17}
+{"n": 7, "T": 8, "D": 0, "K": 2, "W": 122, "phi": 30, "R_min": 33}
+{"n": 8, "T": 16, "D": 0, "K": 2, "W": 250, "phi": 62, "R_min": 65}
+{"n": 9, "T": 32, "D": 0, "K": 2, "W": 506, "phi": 126, "R_min": 129}
+{"n": 10, "T": 64, "D": 0, "K": 2, "W": 1018, "phi": 254, "R_min": 257}
+{"n": 11, "T": 128, "D": 0, "K": 2, "W": 2042, "phi": 510, "R_min": 513}
+{"n": 12, "T": 256, "D": 0, "K": 2, "W": 4090, "phi": 1022, "R_min": 1025}
+{"n": 13, "T": 512, "D": 0, "K": 2, "W": 8186, "phi": 2046, "R_min": 2049}
+{"n": 14, "T": 1024, "D": 0, "K": 2, "W": 16378, "phi": 4094, "R_min": 4097}
+{"n": 15, "T": 2048, "D": 0, "K": 2, "W": 32762, "phi": 8190, "R_min": 8193}
+{"n": 16, "T": 4096, "D": 0, "K": 2, "W": 65530, "phi": 16382, "R_min": 16385}
+{"n": 17, "T": 8192, "D": 0, "K": 2, "W": 131066, "phi": 32766, "R_min": 32769}
+{"n": 18, "T": 16384, "D": 0, "K": 2, "W": 262138, "phi": 65534, "R_min": 65537}
+{"n": 5, "T": 1, "D": 0, "K": 4, "W": 22, "cut_only_budget": 5, "phi": 5, "R_min": 10}
+{"n": 6, "T": 2, "D": 0, "K": 4, "W": 54, "cut_only_budget": 5, "phi": 13, "R_min": 18}
+{"n": 7, "T": 4, "D": 0, "K": 4, "W": 118, "cut_only_budget": 5, "phi": 29, "R_min": 34}
+{"n": 8, "T": 8, "D": 0, "K": 4, "W": 246, "cut_only_budget": 5, "phi": 61, "R_min": 66}
+{"n": 9, "T": 16, "D": 0, "K": 4, "W": 502, "cut_only_budget": 5, "phi": 125, "R_min": 130}
+{"n": 10, "T": 32, "D": 0, "K": 4, "W": 1014, "cut_only_budget": 5, "phi": 253, "R_min": 258}
+{"n": 11, "T": 64, "D": 0, "K": 4, "W": 2038, "cut_only_budget": 5, "phi": 509, "R_min": 514}
+{"n": 12, "T": 128, "D": 0, "K": 4, "W": 4086, "cut_only_budget": 5, "phi": 1021, "R_min": 1026}
+{"n": 13, "T": 256, "D": 0, "K": 4, "W": 8182, "cut_only_budget": 5, "phi": 2045, "R_min": 2050}
+{"n": 14, "T": 512, "D": 0, "K": 4, "W": 16374, "cut_only_budget": 5, "phi": 4093, "R_min": 4098}
+{"n": 15, "T": 1024, "D": 0, "K": 4, "W": 32758, "cut_only_budget": 5, "phi": 8189, "R_min": 8194}
+{"n": 16, "T": 2048, "D": 0, "K": 4, "W": 65526, "cut_only_budget": 5, "phi": 16381, "R_min": 16386}
+{"n": 17, "T": 4096, "D": 0, "K": 4, "W": 131062, "cut_only_budget": 5, "phi": 32765, "R_min": 32770}
+{"n": 18, "T": 8192, "D": 0, "K": 4, "W": 262134, "cut_only_budget": 5, "phi": 65533, "R_min": 65538}
+{"status": "VERIFIED_ALL_DIMENSION_CONSTANT_CUT_BUDGET_AND_EXACT_CYCLE_REPAIR", "core_theorem": "For k>=4, v_k=(16*2^(k-5),...,16,1,6,8,4) has D=0,K=2, phi=2^(k-2)-2, R_min=2^(k-2)+1.", "high_theorem": "For n>=5, append H=1+sum(v_(n-1)). Then D=0,K=4,lambda=1, phi=2^(n-2)-3, R_min=2^(n-2)+2.", "scope": "No positive-density D+K-only or D+K+lambda-only inequality can hold uniformly over genuine generic scans. The main M_n and universal paired quarter problems remain open.", "violations": 0, "seconds": 1.6772213429940166, "audit_sha256": "801de14ec9409a97751d2534ff5341cbe92d295b143b697c94b86934b7177729"}
