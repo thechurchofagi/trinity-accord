@@ -1,0 +1,17 @@
+{
+  "status": "VERIFIED_INTEGER_BOOLEAN_TERM_ORDER_CERTIFICATES_AND_INDEPENDENT_PAIRED_MINIMA",
+  "scope": "Exact listed546-order flip-component closure, ALL integer coherence/noncoherence certificates, ALL3600noncoherentQ5 priorities plus1440specifiedQ6priorities. This verifier invokes no LP or ancestor optimizer. Not an all-dimensional lower bound.",
+  "n5_orders": 546,
+  "coherent": 516,
+  "noncoherent": 30,
+  "new_Q5_priority_cases": 3600,
+  "noncoherent_Q5_minimum": 12,
+  "two_Q6_minima": [
+    33,
+    26
+  ],
+  "certificate_raw_sha256": "e15823266371b9792d2ef45a2cae6627066b7468fc53e9d94d35e9668d4b449f",
+  "violations": 0,
+  "seconds": 11.004429225999047,
+  "audit_sha256": "1e20f58c5bcc0b1ecd314eeafac46d2a3300cc42f6cd7a4251899d07294afb19"
+}
