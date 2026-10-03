@@ -1,0 +1,6 @@
+{"positive_chambers_completed": 12000}
+{"positive_chambers_completed": 24000}
+{"positive_chambers_completed": 36000}
+{"positive_chambers_completed": 48000}
+{"positive_chambers_completed": 60000}
+{"status": "COMPLETE_FIXED_NATURAL_PARENT_CHILD_MINIMAX", "scope": "Every one of256 normalized Q5 children of Q4 parent0, all1981440 signed additive chambers; inherited516 positive sorted chambers with exact integer coherence certificates times120 coordinate permutations times32 reflections. Finite only.", "source_sha256": "e00dba962c76e8ad0031c53f4ed2e9a643f8ae0312e3a7531c8415cacd63933c", "positive_chambers": 61920, "full_reflection_closure_size": 2048, "best_child_cyclic_minimum": 12, "best_child_masks": [2, 3, 10, 16, 18, 19, 48, 50, 51, 68, 69, 72, 80, 84, 85, 86, 87, 90, 100, 101, 105, 117, 118, 119, 123, 132, 136, 137, 138, 150, 154, 155, 165, 168, 169, 170, 171, 175, 183, 186, 187, 204, 205, 207, 236, 237, 239, 245, 252, 253], "audit_stream_sha256": "94e5dea7ad5158c90a06a767f7bef4606679eecc5410d12c114e3ce51e972a3c", "violations": 0, "seconds": 21.88857669600111, "audit_sha256": "0c604e89f2c67f81d9f9bf84100a676fb7ec29f3b0e3626ce8b03258cd65e581"}

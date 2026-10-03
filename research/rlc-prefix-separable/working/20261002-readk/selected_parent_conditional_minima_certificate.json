@@ -1,0 +1,2069 @@
+{
+  "status": "COMPLETE_SELECTED_PARENT_CONDITIONAL_MINIMA",
+  "scope": "Q4 all128 normalized paired parents; Q4 complete5376 signed chambers; Q5 inherited516 certified positive sorted chambers times120 coordinate permutations and32 sign reflections. Conditional averaging over ALL256 fresh bottom labels. Finite-dimensional only; no all-n controlled-loss claim.",
+  "source_sha256": "e00dba962c76e8ad0031c53f4ed2e9a643f8ae0312e3a7531c8415cacd63933c",
+  "positive_q5_cases": 61920,
+  "signed_q5_chambers": 1981440,
+  "upper_reflection_classes_used": 16,
+  "lowest_reflection_invariance": "A lowest-input reflection only permutes/complements fresh labels, hence preserves their uniform mean.",
+  "max_parent_conditional_minimum": 12,
+  "optimal_parent_conditional_minima": [
+    10,
+    12
+  ],
+  "largest_doubling_loss": 2,
+  "all_parent_records": [
+    {
+      "parent_mask": 0,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 1,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 2,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        10,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 3,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 4,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 5,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        6,
+        16,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 6,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        6,
+        4,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 7,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        10,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 8,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        6,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 9,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 10,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        12,
+        20,
+        6
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 11,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 12,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        -1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 13,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        6,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 14,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        12,
+        20,
+        6
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 15,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        -1,
+        16,
+        6,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 16,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 17,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 18,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 19,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 20,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 21,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 22,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 23,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 24,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 25,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 26,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 27,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 28,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 29,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 30,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 31,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 32,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 33,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 34,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 35,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 36,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 37,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 38,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 39,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 40,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 41,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 42,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 43,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 44,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        -1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 45,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 46,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 47,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 48,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 49,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 50,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        10,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 51,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 52,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 53,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        6,
+        16,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 54,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        6,
+        4,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 55,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        10,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 56,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        6,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 57,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 58,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        12,
+        20,
+        6
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 59,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 60,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        -1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 61,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        6,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 62,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        12,
+        20,
+        6
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 63,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        -1,
+        16,
+        6,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 64,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        -1,
+        16,
+        6,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 65,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        10,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 66,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 67,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 68,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        6,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 69,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        6,
+        16,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 70,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 71,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 72,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        12,
+        20,
+        6
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 73,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        6,
+        4,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 74,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        12,
+        20,
+        6
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 75,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        10,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 76,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        -1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 77,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 78,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        6,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 79,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 80,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 81,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 82,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 83,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 84,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 85,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 86,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 87,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 88,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 89,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 90,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 91,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 92,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 93,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 94,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 95,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 96,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 97,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 98,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 99,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 100,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 101,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 102,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 103,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 104,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 105,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 106,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 107,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 108,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        -1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 109,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 110,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 111,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        16,
+        -1,
+        2,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 112,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        -1,
+        16,
+        6,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 113,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        10,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 114,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 115,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 116,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        6,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 117,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        6,
+        16,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 118,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 119,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 120,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        12,
+        20,
+        6
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 121,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        6,
+        4,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 122,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        12,
+        20,
+        6
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 123,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        10,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 124,
+      "parent_all_signed_cyclic_minimum": 4,
+      "all_signed_conditional_mean_minimum": 8,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        -1,
+        2,
+        16,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 8,
+      "child_cyclic_maximum_on_witness": 8
+    },
+    {
+      "parent_mask": 125,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    },
+    {
+      "parent_mask": 126,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 10,
+      "exact_mean_doubling_loss": 2,
+      "attaining_actual_signed_weights": [
+        16,
+        1,
+        6,
+        8,
+        4
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 10,
+      "child_cyclic_maximum_on_witness": 10
+    },
+    {
+      "parent_mask": 127,
+      "parent_all_signed_cyclic_minimum": 6,
+      "all_signed_conditional_mean_minimum": 12,
+      "exact_mean_doubling_loss": 0,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "fresh_assignments": 256,
+      "child_cyclic_minimum_on_witness": 12,
+      "child_cyclic_maximum_on_witness": 12
+    }
+  ],
+  "audit_stream_sha256": "a669ff55241f3d8de98e46119d317199ae0257618c39f779a3cf523126db4ae9",
+  "violations": 0,
+  "seconds": 6.570810641002026,
+  "audit_sha256": "69c419a2c9af29638a1968c450d780e86e5392fd48f658e99952c84064502e49"
+}

@@ -1,0 +1,961 @@
+{
+  "status": "SIGNED_Q6_SELECTED_PARENT_PRESSURE",
+  "scope": "All46080 signed permuted-binary sweeps followed by100000 generated weights; ties rejected. NOT completeQ6. Exact mean witnesses, independent known Q5 parent minima.",
+  "seed": 202610031647,
+  "cases": 117061,
+  "ties": 29019,
+  "rejected_count": 5,
+  "surviving_masks": [
+    2,
+    3,
+    10,
+    16,
+    18,
+    19,
+    50,
+    51,
+    68,
+    69,
+    72,
+    80,
+    84,
+    85,
+    86,
+    87,
+    90,
+    101,
+    105,
+    117,
+    119,
+    123,
+    132,
+    136,
+    138,
+    150,
+    154,
+    165,
+    168,
+    169,
+    170,
+    171,
+    175,
+    183,
+    186,
+    187,
+    204,
+    205,
+    207,
+    236,
+    237,
+    239,
+    245,
+    252,
+    253
+  ],
+  "rows": [
+    {
+      "parent_mask": 2,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 3,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        8,
+        1,
+        2,
+        16,
+        4,
+        32
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 10,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        8,
+        1,
+        2,
+        16,
+        32,
+        4
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 16,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 18,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 19,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 48,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 22,
+      "loss_below24": 2,
+      "actual_signed_weights": [
+        -306,
+        -3,
+        -269,
+        -131,
+        -198,
+        -385
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 22,
+      "allfresh1_cyclic": 22,
+      "status": "REJECTED"
+    },
+    {
+      "parent_mask": 50,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 51,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 68,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 69,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 72,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 80,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        8,
+        -1,
+        2,
+        16,
+        32,
+        4
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 84,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        1193,
+        -10,
+        17,
+        -191,
+        105,
+        -238
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 85,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 86,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 87,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 90,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 100,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 22,
+      "loss_below24": 2,
+      "actual_signed_weights": [
+        8,
+        -1,
+        2,
+        4,
+        16,
+        32
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 22,
+      "allfresh1_cyclic": 22,
+      "status": "REJECTED"
+    },
+    {
+      "parent_mask": 101,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 105,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 117,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        1193,
+        -10,
+        17,
+        -191,
+        105,
+        -238
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 118,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 22,
+      "loss_below24": 2,
+      "actual_signed_weights": [
+        8,
+        -1,
+        2,
+        4,
+        16,
+        32
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 22,
+      "allfresh1_cyclic": 22,
+      "status": "REJECTED"
+    },
+    {
+      "parent_mask": 119,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 123,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 132,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 136,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 137,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 22,
+      "loss_below24": 2,
+      "actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16,
+        32
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 22,
+      "allfresh1_cyclic": 22,
+      "status": "REJECTED"
+    },
+    {
+      "parent_mask": 138,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 150,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 154,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 155,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 22,
+      "loss_below24": 2,
+      "actual_signed_weights": [
+        8,
+        1,
+        2,
+        4,
+        16,
+        32
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 22,
+      "allfresh1_cyclic": 22,
+      "status": "REJECTED"
+    },
+    {
+      "parent_mask": 165,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 168,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 169,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 170,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 171,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 175,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        8,
+        1,
+        2,
+        16,
+        32,
+        4
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 183,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 186,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 187,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 204,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 205,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 207,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        8,
+        1,
+        2,
+        16,
+        4,
+        32
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 236,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 237,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 239,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 245,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        8,
+        -1,
+        2,
+        16,
+        32,
+        4
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 252,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        8,
+        -1,
+        2,
+        16,
+        4,
+        32
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    },
+    {
+      "parent_mask": 253,
+      "certified_cyclic_minimum": 12,
+      "pressure_conditional_minimum": 24,
+      "loss_below24": 0,
+      "actual_signed_weights": [
+        299,
+        950,
+        2,
+        -72,
+        -54,
+        90
+      ],
+      "fresh_comparisons": 0,
+      "allfresh0_cyclic": 24,
+      "allfresh1_cyclic": 24,
+      "status": "UNRESOLVED"
+    }
+  ],
+  "audit_stream_sha256": "458a3f433c17261f3a4fb34344c6e5263d69562133b8bf2763f8ea281da6153c",
+  "violations": 0,
+  "seconds": 12.84150941799453,
+  "audit_sha256": "8f33ba940a790db6c75651879d695a02b9efe10cbcffb16e8acfdfc25246aa12"
+}

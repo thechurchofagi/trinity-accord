@@ -1,0 +1,3138 @@
+{
+  "status": "COMPLETE_FIXED_NATURAL_PARENT_CHILD_MINIMAX",
+  "scope": "Every one of256 normalized Q5 children of Q4 parent0, all1981440 signed additive chambers; inherited516 positive sorted chambers with exact integer coherence certificates times120 coordinate permutations times32 reflections. Finite only.",
+  "source_sha256": "e00dba962c76e8ad0031c53f4ed2e9a643f8ae0312e3a7531c8415cacd63933c",
+  "positive_chambers": 61920,
+  "full_reflection_closure_size": 2048,
+  "best_child_cyclic_minimum": 12,
+  "best_child_masks": [
+    2,
+    3,
+    10,
+    16,
+    18,
+    19,
+    48,
+    50,
+    51,
+    68,
+    69,
+    72,
+    80,
+    84,
+    85,
+    86,
+    87,
+    90,
+    100,
+    101,
+    105,
+    117,
+    118,
+    119,
+    123,
+    132,
+    136,
+    137,
+    138,
+    150,
+    154,
+    155,
+    165,
+    168,
+    169,
+    170,
+    171,
+    175,
+    183,
+    186,
+    187,
+    204,
+    205,
+    207,
+    236,
+    237,
+    239,
+    245,
+    252,
+    253
+  ],
+  "child_records": [
+    {
+      "child_mask": 0,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 1,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 2,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        4,
+        20,
+        12
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 3,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 13
+    },
+    {
+      "child_mask": 4,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 5,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 6,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 7,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 8,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 9,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 10,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 11,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 12,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 13,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 14,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 15,
+      "all_signed_cyclic_minimum": 8,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 16,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        20,
+        4,
+        8,
+        14
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 17,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        12,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 18,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        8,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 19,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        6,
+        12,
+        20
+      ],
+      "witness_linear_runs": 13
+    },
+    {
+      "child_mask": 20,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        -8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 21,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        -8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 22,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        -16,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 23,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        -12,
+        20,
+        6
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 24,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        4,
+        8,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 25,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        4,
+        8,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 26,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        12,
+        -14,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 27,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 28,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 29,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 30,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 31,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 32,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 33,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 34,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        8,
+        -12,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 35,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        8,
+        -12,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 36,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 37,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 38,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 39,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 40,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 41,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 42,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        16,
+        -8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 43,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        12,
+        20,
+        6
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 44,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 45,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 46,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 47,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 48,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        20,
+        4,
+        8,
+        14
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 49,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        12,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 50,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        8,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 51,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        16,
+        20
+      ],
+      "witness_linear_runs": 13
+    },
+    {
+      "child_mask": 52,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        2,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 53,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        -8,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 54,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        -8,
+        -16,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 55,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        -8,
+        -16,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 56,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        4,
+        8,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 57,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        4,
+        8,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 58,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        4,
+        12,
+        -6,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 59,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        16,
+        -8,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 60,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 61,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 62,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 63,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 64,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        14,
+        4,
+        -12,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 65,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 66,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        -8,
+        4,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 67,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 68,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        20,
+        6,
+        16,
+        8
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 69,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        20,
+        6,
+        12
+      ],
+      "witness_linear_runs": 13
+    },
+    {
+      "child_mask": 70,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 71,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 72,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        20,
+        14,
+        8
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 73,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        20,
+        14,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 74,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        8,
+        -6,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 75,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 76,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        -8,
+        16,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 77,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        20,
+        12,
+        6
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 78,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        12,
+        4,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 79,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 80,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 81,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 82,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        4,
+        12,
+        14,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 83,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        12,
+        6,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 84,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 85,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        20
+      ],
+      "witness_linear_runs": 13
+    },
+    {
+      "child_mask": 86,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 87,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        12,
+        6,
+        20
+      ],
+      "witness_linear_runs": 13
+    },
+    {
+      "child_mask": 88,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        8,
+        -6,
+        16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 89,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 90,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        8,
+        4,
+        14,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 91,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        -8,
+        -12,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 92,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 93,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 94,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 95,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 96,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        -20,
+        16,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 97,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 98,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        -8,
+        4,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 99,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 100,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        20,
+        6,
+        16,
+        8
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 101,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        20,
+        16,
+        8
+      ],
+      "witness_linear_runs": 13
+    },
+    {
+      "child_mask": 102,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 103,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 104,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        4,
+        -14,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 105,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        14,
+        20,
+        8
+      ],
+      "witness_linear_runs": 13
+    },
+    {
+      "child_mask": 106,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        8,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 107,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        14,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 108,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        -8,
+        16,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 109,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        20,
+        16,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 110,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        12,
+        4,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 111,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        20,
+        16,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 112,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 113,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 114,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        2,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 115,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 116,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        2,
+        12,
+        8,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 117,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 13
+    },
+    {
+      "child_mask": 118,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 119,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 13
+    },
+    {
+      "child_mask": 120,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        2,
+        -8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 121,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 122,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        2,
+        -8,
+        12,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 123,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        14,
+        20,
+        8
+      ],
+      "witness_linear_runs": 13
+    },
+    {
+      "child_mask": 124,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 125,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 126,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 127,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        8,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 128,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        10,
+        8,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 129,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        10,
+        8,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 130,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 131,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 132,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 133,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        -8,
+        12,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 134,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 135,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        -8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 136,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 137,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 138,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        12,
+        8,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 139,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        12,
+        8,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 140,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        16,
+        8,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 141,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 142,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 143,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 144,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        12,
+        16,
+        8
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 145,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        12,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 146,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        20,
+        16,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 147,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        -8,
+        16,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 148,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        4,
+        14,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 149,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 150,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 151,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        -14,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 152,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        12,
+        16,
+        8
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 153,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        12,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 154,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 155,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 156,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        16,
+        8,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 157,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        -8,
+        4,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 158,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        16,
+        8,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 159,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        -20,
+        16,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 160,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        10,
+        8,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 161,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        10,
+        8,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 162,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 163,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        16,
+        6,
+        8,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 164,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        2,
+        -8,
+        -12,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 165,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 166,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 167,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        8,
+        -6,
+        16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 168,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        16,
+        6,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 169,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        6,
+        20,
+        12
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 170,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 171,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        6,
+        20,
+        12
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 172,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        4,
+        12,
+        6,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 173,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        12,
+        14,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 174,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        16,
+        8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 175,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 176,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        12,
+        16,
+        8
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 177,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        12,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 178,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        4,
+        20,
+        12,
+        6
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 179,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        -8,
+        16,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 180,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        2,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 181,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        8,
+        -6,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 182,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        4,
+        20,
+        14,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 183,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 184,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        10,
+        12,
+        16,
+        8
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 185,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        12,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 186,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 187,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        6,
+        20,
+        12
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 188,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        2,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 189,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        -8,
+        4,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 190,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        16,
+        8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 191,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        14,
+        4,
+        -12,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 192,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 193,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 194,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 195,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 196,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        -8,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 197,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        12,
+        -6,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 198,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        14,
+        4,
+        8,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 199,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        14,
+        4,
+        8,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 200,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        -8,
+        -16,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 201,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        -8,
+        -16,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 202,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        16,
+        6,
+        -8,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 203,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 204,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 205,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        20,
+        6,
+        12
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 206,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        8,
+        12,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 207,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        2,
+        8,
+        4,
+        16
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 208,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 209,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 210,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 211,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        4,
+        12,
+        6,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 212,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        4,
+        12,
+        20,
+        6
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 213,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        -8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 214,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        16,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 215,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 216,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 217,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 218,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        10,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 219,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        10,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 220,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        -12,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 221,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        -12,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 222,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 223,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 224,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 225,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 226,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 227,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 228,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        2,
+        8,
+        -16,
+        12
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 229,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        4,
+        12,
+        -14,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 230,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        14,
+        4,
+        8,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 231,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        14,
+        4,
+        8,
+        16
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 232,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        4,
+        -12,
+        20,
+        6
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 233,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        -16,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 234,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        16,
+        6,
+        -8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 235,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        16,
+        6,
+        -8,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 236,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 237,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        20,
+        16,
+        8
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 238,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        8,
+        12,
+        16
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 239,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        20,
+        16,
+        8
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 240,
+      "all_signed_cyclic_minimum": 8,
+      "attaining_actual_signed_weights": [
+        -1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 241,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 242,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 243,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        16,
+        8,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 244,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        2,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 245,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 246,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        6,
+        16,
+        20,
+        8
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 247,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 248,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 9
+    },
+    {
+      "child_mask": 249,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        1,
+        6,
+        8,
+        16,
+        4
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 250,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        10,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 251,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        10,
+        8,
+        16,
+        12
+      ],
+      "witness_linear_runs": 10
+    },
+    {
+      "child_mask": 252,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 253,
+      "all_signed_cyclic_minimum": 12,
+      "attaining_actual_signed_weights": [
+        8,
+        1,
+        16,
+        6,
+        20
+      ],
+      "witness_linear_runs": 12
+    },
+    {
+      "child_mask": 254,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 11
+    },
+    {
+      "child_mask": 255,
+      "all_signed_cyclic_minimum": 10,
+      "attaining_actual_signed_weights": [
+        -1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "witness_linear_runs": 10
+    }
+  ],
+  "audit_stream_sha256": "94e5dea7ad5158c90a06a767f7bef4606679eecc5410d12c114e3ce51e972a3c",
+  "violations": 0,
+  "seconds": 21.88857669600111,
+  "audit_sha256": "0c604e89f2c67f81d9f9bf84100a676fb7ec29f3b0e3626ce8b03258cd65e581"
+}

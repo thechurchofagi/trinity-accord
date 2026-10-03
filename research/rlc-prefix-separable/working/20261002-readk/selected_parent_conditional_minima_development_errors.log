@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/59fe1ba67fc3/rlc_repo/research/rlc-prefix-separable/working/20261002-readk/probe_selected_parent_conditional_minima.py", line 96, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/59fe1ba67fc3/rlc_repo/research/rlc-prefix-separable/working/20261002-readk/probe_selected_parent_conditional_minima.py", line 49, in main
+    assert np.sum(z==6)==56
+           ^^^^^^^^^^^^^^^^
+AssertionError
+Traceback (most recent call last):
+  File "/workspace/scratch/59fe1ba67fc3/rlc_repo/research/rlc-prefix-separable/working/20261002-readk/probe_selected_parent_conditional_minima.py", line 96, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/59fe1ba67fc3/rlc_repo/research/rlc-prefix-separable/working/20261002-readk/probe_selected_parent_conditional_minima.py", line 60, in main
+    assert np.all(mu%2==0)
+           ^^^^^^^^^^^^^^^
+AssertionError

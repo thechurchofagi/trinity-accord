@@ -1,0 +1,6 @@
+{"positive_chambers_completed": 12000}
+{"positive_chambers_completed": 24000}
+{"positive_chambers_completed": 36000}
+{"positive_chambers_completed": 48000}
+{"positive_chambers_completed": 60000}
+{"status": "COMPLETE_SELECTED_PARENT_CONDITIONAL_MINIMA", "scope": "Q4 all128 normalized paired parents; Q4 complete5376 signed chambers; Q5 inherited516 certified positive sorted chambers times120 coordinate permutations and32 sign reflections. Conditional averaging over ALL256 fresh bottom labels. Finite-dimensional only; no all-n controlled-loss claim.", "source_sha256": "e00dba962c76e8ad0031c53f4ed2e9a643f8ae0312e3a7531c8415cacd63933c", "positive_q5_cases": 61920, "signed_q5_chambers": 1981440, "upper_reflection_classes_used": 16, "lowest_reflection_invariance": "A lowest-input reflection only permutes/complements fresh labels, hence preserves their uniform mean.", "max_parent_conditional_minimum": 12, "optimal_parent_conditional_minima": [10, 12], "largest_doubling_loss": 2, "audit_stream_sha256": "a669ff55241f3d8de98e46119d317199ae0257618c39f779a3cf523126db4ae9", "violations": 0, "seconds": 6.570810641002026, "audit_sha256": "69c419a2c9af29638a1968c450d780e86e5392fd48f658e99952c84064502e49"}
