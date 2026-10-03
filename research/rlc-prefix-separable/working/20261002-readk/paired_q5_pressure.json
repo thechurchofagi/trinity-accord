@@ -1,0 +1,646 @@
+{
+  "seed": 202610030929,
+  "rank_masks_exhausted_per_scan": 32768,
+  "weight_draws": 81,
+  "rows": [
+    {
+      "w": [
+        1,
+        14,
+        4,
+        12,
+        20
+      ],
+      "minimum_over_all_paired_ranks": 10,
+      "mask": 0
+    },
+    {
+      "w": [
+        97,
+        44,
+        100,
+        43,
+        93
+      ],
+      "minimum_over_all_paired_ranks": 22,
+      "mask": 0
+    },
+    {
+      "w": [
+        78,
+        13,
+        9,
+        12,
+        47
+      ],
+      "minimum_over_all_paired_ranks": 23,
+      "mask": 4096
+    },
+    {
+      "w": [
+        27,
+        51,
+        100,
+        13,
+        93
+      ],
+      "minimum_over_all_paired_ranks": 30,
+      "mask": 0
+    },
+    {
+      "w": [
+        72,
+        83,
+        32,
+        63,
+        6
+      ],
+      "minimum_over_all_paired_ranks": 31,
+      "mask": 0
+    },
+    {
+      "w": [
+        97,
+        23,
+        82,
+        20,
+        48
+      ],
+      "minimum_over_all_paired_ranks": 26,
+      "mask": 0
+    },
+    {
+      "w": [
+        44,
+        25,
+        63,
+        77,
+        78
+      ],
+      "minimum_over_all_paired_ranks": 20,
+      "mask": 12288
+    },
+    {
+      "w": [
+        77,
+        56,
+        62,
+        17,
+        91
+      ],
+      "minimum_over_all_paired_ranks": 24,
+      "mask": 8192
+    },
+    {
+      "w": [
+        30,
+        45,
+        88,
+        56,
+        42
+      ],
+      "minimum_over_all_paired_ranks": 23,
+      "mask": 128
+    },
+    {
+      "w": [
+        60,
+        21,
+        18,
+        17,
+        76
+      ],
+      "minimum_over_all_paired_ranks": 20,
+      "mask": 0
+    },
+    {
+      "w": [
+        46,
+        48,
+        70,
+        26,
+        16
+      ],
+      "minimum_over_all_paired_ranks": 17,
+      "mask": 2048
+    },
+    {
+      "w": [
+        83,
+        90,
+        19,
+        63,
+        57
+      ],
+      "minimum_over_all_paired_ranks": 19,
+      "mask": 8448
+    },
+    {
+      "w": [
+        40,
+        71,
+        96,
+        39,
+        63
+      ],
+      "minimum_over_all_paired_ranks": 22,
+      "mask": 0
+    },
+    {
+      "w": [
+        15,
+        68,
+        88,
+        43,
+        29
+      ],
+      "minimum_over_all_paired_ranks": 23,
+      "mask": 128
+    },
+    {
+      "w": [
+        89,
+        34,
+        37,
+        31,
+        9
+      ],
+      "minimum_over_all_paired_ranks": 15,
+      "mask": 8192
+    },
+    {
+      "w": [
+        35,
+        99,
+        42,
+        63,
+        16
+      ],
+      "minimum_over_all_paired_ranks": 19,
+      "mask": 0
+    },
+    {
+      "w": [
+        4,
+        20,
+        73,
+        17,
+        2
+      ],
+      "minimum_over_all_paired_ranks": 27,
+      "mask": 0
+    },
+    {
+      "w": [
+        42,
+        3,
+        78,
+        70,
+        9
+      ],
+      "minimum_over_all_paired_ranks": 15,
+      "mask": 2560
+    },
+    {
+      "w": [
+        28,
+        51,
+        94,
+        81,
+        80
+      ],
+      "minimum_over_all_paired_ranks": 21,
+      "mask": 1
+    },
+    {
+      "w": [
+        89,
+        87,
+        92,
+        50,
+        81
+      ],
+      "minimum_over_all_paired_ranks": 14,
+      "mask": 3072
+    },
+    {
+      "w": [
+        44,
+        18,
+        46,
+        1,
+        14
+      ],
+      "minimum_over_all_paired_ranks": 20,
+      "mask": 0
+    },
+    {
+      "w": [
+        85,
+        95,
+        92,
+        75,
+        51
+      ],
+      "minimum_over_all_paired_ranks": 21,
+      "mask": 0
+    },
+    {
+      "w": [
+        28,
+        68,
+        83,
+        11,
+        21
+      ],
+      "minimum_over_all_paired_ranks": 22,
+      "mask": 0
+    },
+    {
+      "w": [
+        94,
+        93,
+        6,
+        4,
+        42
+      ],
+      "minimum_over_all_paired_ranks": 18,
+      "mask": 2048
+    },
+    {
+      "w": [
+        47,
+        91,
+        62,
+        34,
+        80
+      ],
+      "minimum_over_all_paired_ranks": 24,
+      "mask": 8192
+    },
+    {
+      "w": [
+        2,
+        10,
+        96,
+        48,
+        78
+      ],
+      "minimum_over_all_paired_ranks": 10,
+      "mask": 139
+    },
+    {
+      "w": [
+        68,
+        27,
+        38,
+        80,
+        85
+      ],
+      "minimum_over_all_paired_ranks": 18,
+      "mask": 0
+    },
+    {
+      "w": [
+        50,
+        75,
+        17,
+        20,
+        29
+      ],
+      "minimum_over_all_paired_ranks": 22,
+      "mask": 0
+    },
+    {
+      "w": [
+        53,
+        63,
+        20,
+        42,
+        29
+      ],
+      "minimum_over_all_paired_ranks": 25,
+      "mask": 8192
+    },
+    {
+      "w": [
+        89,
+        87,
+        25,
+        17,
+        35
+      ],
+      "minimum_over_all_paired_ranks": 18,
+      "mask": 2048
+    },
+    {
+      "w": [
+        9,
+        28,
+        71,
+        84,
+        46
+      ],
+      "minimum_over_all_paired_ranks": 19,
+      "mask": 5
+    },
+    {
+      "w": [
+        92,
+        19,
+        79,
+        20,
+        31
+      ],
+      "minimum_over_all_paired_ranks": 19,
+      "mask": 2048
+    },
+    {
+      "w": [
+        97,
+        93,
+        83,
+        32,
+        25
+      ],
+      "minimum_over_all_paired_ranks": 19,
+      "mask": 256
+    },
+    {
+      "w": [
+        6,
+        98,
+        34,
+        72,
+        17
+      ],
+      "minimum_over_all_paired_ranks": 13,
+      "mask": 128
+    },
+    {
+      "w": [
+        98,
+        80,
+        54,
+        22,
+        8
+      ],
+      "minimum_over_all_paired_ranks": 23,
+      "mask": 0
+    },
+    {
+      "w": [
+        2,
+        47,
+        6,
+        9,
+        92
+      ],
+      "minimum_over_all_paired_ranks": 14,
+      "mask": 8
+    },
+    {
+      "w": [
+        92,
+        8,
+        37,
+        36,
+        74
+      ],
+      "minimum_over_all_paired_ranks": 24,
+      "mask": 0
+    },
+    {
+      "w": [
+        48,
+        40,
+        20,
+        50,
+        71
+      ],
+      "minimum_over_all_paired_ranks": 20,
+      "mask": 14592
+    },
+    {
+      "w": [
+        73,
+        69,
+        17,
+        34,
+        8
+      ],
+      "minimum_over_all_paired_ranks": 23,
+      "mask": 0
+    },
+    {
+      "w": [
+        70,
+        63,
+        46,
+        83,
+        93
+      ],
+      "minimum_over_all_paired_ranks": 17,
+      "mask": 4352
+    },
+    {
+      "w": [
+        6,
+        91,
+        22,
+        89,
+        99
+      ],
+      "minimum_over_all_paired_ranks": 18,
+      "mask": 0
+    },
+    {
+      "w": [
+        43,
+        11,
+        10,
+        9,
+        15
+      ],
+      "minimum_over_all_paired_ranks": 16,
+      "mask": 4096
+    },
+    {
+      "w": [
+        1,
+        45,
+        16,
+        49,
+        18
+      ],
+      "minimum_over_all_paired_ranks": 11,
+      "mask": 128
+    },
+    {
+      "w": [
+        58,
+        73,
+        29,
+        66,
+        11
+      ],
+      "minimum_over_all_paired_ranks": 23,
+      "mask": 0
+    },
+    {
+      "w": [
+        40,
+        41,
+        36,
+        73,
+        66
+      ],
+      "minimum_over_all_paired_ranks": 15,
+      "mask": 5120
+    },
+    {
+      "w": [
+        92,
+        34,
+        75,
+        2,
+        28
+      ],
+      "minimum_over_all_paired_ranks": 18,
+      "mask": 0
+    },
+    {
+      "w": [
+        49,
+        97,
+        27,
+        17,
+        42
+      ],
+      "minimum_over_all_paired_ranks": 24,
+      "mask": 0
+    },
+    {
+      "w": [
+        44,
+        63,
+        74,
+        29,
+        49
+      ],
+      "minimum_over_all_paired_ranks": 24,
+      "mask": 0
+    },
+    {
+      "w": [
+        51,
+        15,
+        81,
+        6,
+        61
+      ],
+      "minimum_over_all_paired_ranks": 28,
+      "mask": 0
+    },
+    {
+      "w": [
+        50,
+        77,
+        26,
+        33,
+        41
+      ],
+      "minimum_over_all_paired_ranks": 15,
+      "mask": 8192
+    },
+    {
+      "w": [
+        79,
+        82,
+        33,
+        89,
+        4
+      ],
+      "minimum_over_all_paired_ranks": 23,
+      "mask": 0
+    },
+    {
+      "w": [
+        25,
+        45,
+        72,
+        83,
+        22
+      ],
+      "minimum_over_all_paired_ranks": 19,
+      "mask": 0
+    },
+    {
+      "w": [
+        27,
+        73,
+        59,
+        22,
+        88
+      ],
+      "minimum_over_all_paired_ranks": 22,
+      "mask": 0
+    },
+    {
+      "w": [
+        93,
+        32,
+        13,
+        29,
+        50
+      ],
+      "minimum_over_all_paired_ranks": 26,
+      "mask": 0
+    },
+    {
+      "w": [
+        53,
+        94,
+        75,
+        88,
+        30
+      ],
+      "minimum_over_all_paired_ranks": 21,
+      "mask": 0
+    },
+    {
+      "w": [
+        81,
+        80,
+        67,
+        3,
+        6
+      ],
+      "minimum_over_all_paired_ranks": 16,
+      "mask": 0
+    },
+    {
+      "w": [
+        100,
+        84,
+        58,
+        52,
+        12
+      ],
+      "minimum_over_all_paired_ranks": 21,
+      "mask": 0
+    }
+  ],
+  "best": {
+    "w": [
+      1,
+      14,
+      4,
+      12,
+      20
+    ],
+    "minimum_over_all_paired_ranks": 10,
+    "mask": 0
+  },
+  "scope": "Complete paired family for sampled weights, not full weight chamber coverage."
+}

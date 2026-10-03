@@ -1,0 +1,83 @@
+{
+  "seed": 202610030944,
+  "policy": "one-coordinate positive mutation at five scales; nonincreasing witness R with 20 percent plateau moves; occasional restart to best",
+  "nongeneric_rejections": 2014,
+  "rows": [
+    {
+      "n": 6,
+      "budget": 2000,
+      "best": {
+        "n": 6,
+        "weights": [
+          8,
+          16,
+          32,
+          1,
+          2,
+          4
+        ],
+        "solver_status": 0,
+        "mask": 268435456,
+        "R": 17,
+        "C": 16,
+        "linear_forced_D": 0,
+        "linear_graph_energy": 30,
+        "violates_N_over_4": false,
+        "violates_N_over_4_plus_1": false
+      }
+    },
+    {
+      "n": 7,
+      "budget": 1000,
+      "best": {
+        "n": 7,
+        "weights": [
+          8,
+          16,
+          32,
+          64,
+          1,
+          2,
+          4
+        ],
+        "solver_status": 0,
+        "mask": 1152921504606846976,
+        "R": 33,
+        "C": 32,
+        "linear_forced_D": 0,
+        "linear_graph_energy": 62,
+        "violates_N_over_4": false,
+        "violates_N_over_4_plus_1": false
+      }
+    },
+    {
+      "n": 8,
+      "budget": 500,
+      "best": {
+        "n": 8,
+        "weights": [
+          8,
+          16,
+          32,
+          64,
+          128,
+          1,
+          2,
+          4
+        ],
+        "solver_status": 0,
+        "mask": 21267647932558653966460912964485513216,
+        "R": 65,
+        "C": 64,
+        "linear_forced_D": 0,
+        "linear_graph_energy": 126,
+        "violates_N_over_4": false,
+        "violates_N_over_4_plus_1": false
+      }
+    }
+  ],
+  "improvements": [],
+  "evaluated_witness_digest": "30f3ca92165c6cc11a36446713d864790380694125ded83109fe9e63627df634",
+  "elapsed_seconds": 2.474750829002005,
+  "scope": "Floating MILP proposals checked by exact integer ranks and additive orders; no bound inferred from lack of counterexamples."
+}
