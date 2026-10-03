@@ -1,0 +1,78 @@
+{
+  "report_number": "TA-TR-2026-22",
+  "title": "Exponential Run Complexity of Prefix-Separable Orders on the Boolean Cube",
+  "version": "1.1",
+  "record_id": 23118189,
+  "doi": "10.5281/zenodo.23118189",
+  "file_count": 13,
+  "files": [
+    {
+      "name": "AUDIT-RECEIPT.json",
+      "bytes": 5001,
+      "sha256": "d5cc04ea697d82c3277fdee19cae88cf7f3b595362d754ace90d3cfecc26f40b"
+    },
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1052,
+      "sha256": "25eb835c2edde100cf03183486078af02f9c867de293b3cb12a9297e3f93eb5e"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 1020,
+      "sha256": "2d74e8382bb12a1e407b07b33920382bc9058d826fa4b98fd7025fe0bb3856b7"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1085,
+      "sha256": "e8b9b524a77a7fcf621655b3c63469f8bf19813bdd71916ca7e11639841b1cf1"
+    },
+    {
+      "name": "VERSION-CHANGES.md",
+      "bytes": 1599,
+      "sha256": "ddc8073764e136102a399af253e8a56fb7492ead9172c314a3473440004cef25"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 334,
+      "sha256": "4082cab805862339750998ffbeec83e88673f4f2ea7fbe080360a86177ef2030"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 512,
+      "sha256": "8b9f2aab24f7b651998dd7db0e0cffec1fefa9aef64fe08b015c9f743f7e70c0"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 291,
+      "sha256": "ef85072d8b8849f76e9ca4618970ce8833e1cf7a456985bd712873ec70514946"
+    },
+    {
+      "name": "rlc-prefix-separable-supplement-v1.1.md",
+      "bytes": 10354,
+      "sha256": "8f008dd4cd10297f8acd2d97697bba696fc2216fa47057c316fda66e5567866f"
+    },
+    {
+      "name": "rlc-prefix-separable-supplement-v1.1.pdf",
+      "bytes": 71423,
+      "sha256": "5c7980a34ffcada27c12f2d02a5bc7a1dd93f100ba5994df9b1879803dada162"
+    },
+    {
+      "name": "rlc-prefix-separable-v1.1.md",
+      "bytes": 32010,
+      "sha256": "493c1bdba3ed24a9615fd2fde4b014c87281b131a03d2efd91ece346fc1a843c"
+    },
+    {
+      "name": "rlc-prefix-separable-v1.1.pdf",
+      "bytes": 109723,
+      "sha256": "3fd767a0acccb4bd095f6e950d97118dc2fc71f12e5e554505486e6ea60a53c9"
+    },
+    {
+      "name": "verification-package-v1.1.zip",
+      "bytes": 69897,
+      "sha256": "71b45fd1e59c54f537b6993507b51156b25fdee68a4b40511c16c8c65f22c973"
+    }
+  ],
+  "prior_records_modified": false,
+  "previous_record_id": 23103274,
+  "conceptrecid": "23103273"
+}
