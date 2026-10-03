@@ -58,7 +58,7 @@ def save(name, value):
 
 def persist():
     paths = [str((ROOT / name).relative_to(REPO)) for name in
-             ["create-intent.json","deposit.json","preparation-attempt.json",
+             ["create-intent.json","linked-draft-recovery.json","deposit.json","preparation-attempt.json",
               "publication-attempt.json","publication-record.json","EXPECTED-PUBLICATION.json",
               "format-checks.json","published"] if (ROOT / name).exists()]
     if not paths:
@@ -246,12 +246,22 @@ def prepare():
     else:
         latest=previous.get("links",{}).get("latest_draft")
         rid=draft_id(latest) if latest else PREVIOUS_RECORD
+        if (ROOT/"linked-draft-recovery.json").exists():
+            recovery=load("linked-draft-recovery.json")
+            if recovery.get("previous_record_id")!=PREVIOUS_RECORD or str(recovery.get("conceptrecid"))!=concept:
+                raise RuntimeError("Recovered draft lineage mismatch")
+            rid=recovery.get("record_id")
+            if not (ROOT/"create-intent.json").exists():raise RuntimeError("Recovery lacks original version intent")
         if rid==PREVIOUS_RECORD:
             if (ROOT/"create-intent.json").exists():raise RuntimeError("Uncertain prior version action: reconcile before retry")
             save("create-intent.json",{"state":"CREATE_ONE_LINKED_VERSION_INTENT","previous_record_id":PREVIOUS_RECORD,"conceptrecid":concept,"version":VERSION,"workflow_run_id":os.environ.get("GITHUB_RUN_ID")})
             persist()
             answer=z.request(f"/deposit/depositions/{PREVIOUS_RECORD}/actions/newversion","POST")
             rid=draft_id(answer["links"]["latest_draft"]) if answer.get("id")==PREVIOUS_RECORD else answer.get("id")
+            if type(rid) is not int or rid in PROTECTED:raise RuntimeError("Invalid linked descendant action response")
+            save("linked-draft-recovery.json",{"state":"ACTION_RETURNED_CANDIDATE_PENDING_IDENTITY_CHECK","record_id":rid,
+                 "previous_record_id":PREVIOUS_RECORD,"conceptrecid":concept})
+            persist()
         if type(rid) is not int or rid in PROTECTED:raise RuntimeError("Invalid linked descendant")
         dep=read(z,f"/deposit/depositions/{rid}")
         md=dep.get("metadata",{})

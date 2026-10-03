@@ -54,5 +54,20 @@ class Guards(unittest.TestCase):
         with self.assertRaises(RuntimeError):p.check_deposit({'id':p.PREVIOUS_RECORD})
         with self.assertRaises(RuntimeError):p.draft_id('https://example.org/api/deposit/depositions/23109999')
         with self.assertRaises(RuntimeError):p.draft_id('https://zenodo.org/api/deposit/depositions/23109999?other=1')
+    def test_stale_predecessor_link_recovers_only_pinned_existing_draft(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);f=Fake();f.version=None
+            (root/'create-intent.json').write_text('{}')
+            (root/'linked-draft-recovery.json').write_text(json.dumps({'previous_record_id':p.PREVIOUS_RECORD,'conceptrecid':'23103273','record_id':f.rid}))
+            self.run_prepare(f,root)
+            self.assertFalse(any(method=='POST' for method,url in f.calls))
+            self.assertEqual(f.version,'1.1')
+    def test_recovery_from_other_lineage_cannot_mutate(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);f=Fake()
+            (root/'create-intent.json').write_text('{}')
+            (root/'linked-draft-recovery.json').write_text(json.dumps({'previous_record_id':p.PREVIOUS_RECORD,'conceptrecid':'wrong','record_id':f.rid}))
+            with self.assertRaisesRegex(RuntimeError,'Recovered draft lineage'):self.run_prepare(f,root)
+            self.assertFalse(any(method!='GET' for method,url in f.calls))
 
 if __name__=='__main__':unittest.main()

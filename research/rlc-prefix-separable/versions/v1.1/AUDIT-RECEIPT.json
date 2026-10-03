@@ -22,7 +22,8 @@
     "controlled loss mean and paired seed explicitly unproved",
     "old edition protected",
     "ambiguous linked-version action idempotency tests passed",
-    "same-lineage unsubmitted drafts with unset inherited version recovered without another newversion action"
+    "same-lineage unsubmitted drafts with unset inherited version recovered without another newversion action",
+    "Stale predecessor links recover only the pinned, read-only-identified draft in the same concept; ambiguous actions cannot be repeated. Seven publication guard tests pass."
   ],
   "source_files": [
     {
@@ -43,11 +44,11 @@
     },
     {
       "name": "test_publication.py",
-      "sha256": "b0766ba37bd002832315a02ba67c2e008b911c3e03372220ffbb761aac2a2765"
+      "sha256": "ef7a3f8030f8b46a9029df14276a0a1492ddb6ed8334006fa92c3cb699f52543"
     },
     {
       "name": "publication.py",
-      "sha256": "649237407d296a4a75b9401c5bf8737ea6cca0a401712612d66456017298e5b5"
+      "sha256": "6d75c89f0eb8fc27b4bef9bc4555dfda4b41b98e7b63079945b453deec51e525"
     },
     {
       "name": "release-verification.json",
@@ -55,7 +56,7 @@
     },
     {
       "name": "publication-guard-tests.log",
-      "sha256": "3deb585e0666346179433cc934fbd49e42db094b110981785d89d44130630004"
+      "sha256": "f7f5af96d9731d141863786ac1753b19fb634d7500760a08b7f5deafd5aa25d7"
     },
     {
       "name": "verification.json",
