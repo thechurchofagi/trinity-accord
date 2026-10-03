@@ -1,0 +1,616 @@
+{
+  "state": "ADAPTIVE_COORDINATE_TREE_TAIL_OBSTRUCTION_PASS",
+  "seed": 202610030740,
+  "exhaustive_event_counts": [
+    {
+      "n": 2,
+      "d": 1,
+      "configurations": 16,
+      "selected": 4,
+      "event_probability": "1/4"
+    },
+    {
+      "n": 2,
+      "d": 2,
+      "configurations": 16,
+      "selected": 1,
+      "event_probability": "1/16"
+    },
+    {
+      "n": 3,
+      "d": 1,
+      "configurations": 1536,
+      "selected": 256,
+      "event_probability": "1/6"
+    },
+    {
+      "n": 3,
+      "d": 2,
+      "configurations": 1536,
+      "selected": 16,
+      "event_probability": "1/96"
+    },
+    {
+      "n": 3,
+      "d": 3,
+      "configurations": 1536,
+      "selected": 1,
+      "event_probability": "1/1536"
+    }
+  ],
+  "conditional_completion_cases": [
+    {
+      "n": 4,
+      "d": 1,
+      "generic_weights": [
+        2,
+        4,
+        8,
+        1
+      ],
+      "R_C": [
+        15,
+        16
+      ],
+      "exact_event_probability": "1/8",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "b92b7dc5cfa2548d9437374c6c413c80f46032889e8d8a9ac1ef3a878af051a3"
+    },
+    {
+      "n": 4,
+      "d": 3,
+      "generic_weights": [
+        8,
+        1,
+        2,
+        4
+      ],
+      "R_C": [
+        3,
+        4
+      ],
+      "exact_event_probability": "1/73728",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "84b4fde4f652130bee98cd894a9a3707eb901dde44afd854352c9b9ddeea2e20"
+    },
+    {
+      "n": 4,
+      "d": 4,
+      "generic_weights": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "R_C": [
+        1,
+        2
+      ],
+      "exact_event_probability": "1/18874368",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "be2af200787b297ae18de0235bf1aa1e93bc1a2a398a7a6ab592f8dd6fdf67a9"
+    },
+    {
+      "n": 5,
+      "d": 1,
+      "generic_weights": [
+        2,
+        4,
+        8,
+        16,
+        1
+      ],
+      "R_C": [
+        31,
+        32
+      ],
+      "exact_event_probability": "1/10",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "f41ec01789f0fcbf187ce4c9cc841fcb0b2336f3206826ad0aa88483f61ae292"
+    },
+    {
+      "n": 5,
+      "d": 3,
+      "generic_weights": [
+        8,
+        16,
+        1,
+        2,
+        4
+      ],
+      "R_C": [
+        7,
+        8
+      ],
+      "exact_event_probability": "1/829440",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "1b65b728c70d865bf291a3ea4645e4ddb755b4802c5f417a53a9080fa9c41177"
+    },
+    {
+      "n": 5,
+      "d": 5,
+      "generic_weights": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "R_C": [
+        1,
+        2
+      ],
+      "exact_event_probability": "1/3562417673994240",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "02631793446ba2fdec361263e03697504cacc7f408974ff620ae7843df37b843"
+    },
+    {
+      "n": 6,
+      "d": 1,
+      "generic_weights": [
+        2,
+        4,
+        8,
+        16,
+        32,
+        1
+      ],
+      "R_C": [
+        63,
+        64
+      ],
+      "exact_event_probability": "1/12",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "4fcf02637d2f361690a56ab54b88e08b3ed8f48e96adeb681502bda405297f24"
+    },
+    {
+      "n": 6,
+      "d": 3,
+      "generic_weights": [
+        8,
+        16,
+        32,
+        1,
+        2,
+        4
+      ],
+      "R_C": [
+        15,
+        16
+      ],
+      "exact_event_probability": "1/4915200",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "725ee6302efab9e7e22a4e69c8d980ec3d16641e80d6eabe133729e76a464493"
+    },
+    {
+      "n": 6,
+      "d": 5,
+      "generic_weights": [
+        32,
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "R_C": [
+        3,
+        4
+      ],
+      "exact_event_probability": "1/35457740586213389107200",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "9bb2495777c2b160811dd420df39ab9e3fefd5b6b6b26b00cd2fd015a04a219b"
+    },
+    {
+      "n": 7,
+      "d": 1,
+      "generic_weights": [
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        1
+      ],
+      "R_C": [
+        127,
+        128
+      ],
+      "exact_event_probability": "1/14",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "4fb3807e51eca1f78feca8b90e36bf0bbc942b7b29d74054b79469ac82e1fa73"
+    },
+    {
+      "n": 7,
+      "d": 3,
+      "generic_weights": [
+        8,
+        16,
+        32,
+        64,
+        1,
+        2,
+        4
+      ],
+      "R_C": [
+        31,
+        32
+      ],
+      "exact_event_probability": "1/20160000",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "09d5a021dd78459cfc253304a06d011de3f73e5d212352adeb30823808531dc2"
+    },
+    {
+      "n": 7,
+      "d": 5,
+      "generic_weights": [
+        32,
+        64,
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "R_C": [
+        7,
+        8
+      ],
+      "exact_event_probability": "1/954180264786927141519360000",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "966dae069dd89c0c39f4b8b7809f1d99e709ece115f8fceaaf4ee0091580e6c3"
+    },
+    {
+      "n": 8,
+      "d": 1,
+      "generic_weights": [
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        1
+      ],
+      "R_C": [
+        255,
+        256
+      ],
+      "exact_event_probability": "1/16",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "281211749a373042ba772450f8e478ba76e64dca5ff32bda9312f27be8d827e8"
+    },
+    {
+      "n": 8,
+      "d": 3,
+      "generic_weights": [
+        8,
+        16,
+        32,
+        64,
+        128,
+        1,
+        2,
+        4
+      ],
+      "R_C": [
+        63,
+        64
+      ],
+      "exact_event_probability": "1/65028096",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "8f3224d7116a8b15541b55af2529b0d28bcaf007ac7a788bbdc053b78c3d2a9e"
+    },
+    {
+      "n": 8,
+      "d": 5,
+      "generic_weights": [
+        32,
+        64,
+        128,
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "R_C": [
+        15,
+        16
+      ],
+      "exact_event_probability": "1/1830378180713830259097600000000",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "57b2fd53f07cdf736e6b341e73bb09a004697ccd854dd2efa114223c1cdfe652"
+    },
+    {
+      "n": 9,
+      "d": 1,
+      "generic_weights": [
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        1
+      ],
+      "R_C": [
+        511,
+        512
+      ],
+      "exact_event_probability": "1/18",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "ecb744afe6c56b41620314a4306aaca82a48b96181d5d1343f0733657f7db2c1"
+    },
+    {
+      "n": 9,
+      "d": 3,
+      "generic_weights": [
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        1,
+        2,
+        4
+      ],
+      "R_C": [
+        127,
+        128
+      ],
+      "exact_event_probability": "1/177020928",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "8048f332b19a30c4ed8bbdba6c727dcfc1b46872d855ecb0e736b3e067ad408b"
+    },
+    {
+      "n": 9,
+      "d": 5,
+      "generic_weights": [
+        32,
+        64,
+        128,
+        256,
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "R_C": [
+        31,
+        32
+      ],
+      "exact_event_probability": "1/761157588489338880000000000000000",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "785aa54078c2d189fb16150ea5f11d615c51250b24fa07b578f2ce1269e6e9cf"
+    },
+    {
+      "n": 10,
+      "d": 1,
+      "generic_weights": [
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1
+      ],
+      "R_C": [
+        1023,
+        1024
+      ],
+      "exact_event_probability": "1/20",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "3946d4112af322afdd4a55ba822593c392e8e106190d75959d9b4e77c9b66af2"
+    },
+    {
+      "n": 10,
+      "d": 3,
+      "generic_weights": [
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1,
+        2,
+        4
+      ],
+      "R_C": [
+        255,
+        256
+      ],
+      "exact_event_probability": "1/424673280",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "f2c4dce0c54c90706110a29f832247d35958b99468cbcfd2f5503597f2848a2a"
+    },
+    {
+      "n": 10,
+      "d": 5,
+      "generic_weights": [
+        32,
+        64,
+        128,
+        256,
+        512,
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "R_C": [
+        63,
+        64
+      ],
+      "exact_event_probability": "1/115872174902981149494059083895930880",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "3144ab931395a54c12ed16ff119fdf8329f28465ca79c30af032af2224d423fe"
+    },
+    {
+      "n": 11,
+      "d": 1,
+      "generic_weights": [
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        1
+      ],
+      "R_C": [
+        2047,
+        2048
+      ],
+      "exact_event_probability": "1/22",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "be05c17e1f1c8d6d131ae2e1eafd14f5fd1fbb433057d288910b6d5cf8153fac"
+    },
+    {
+      "n": 11,
+      "d": 3,
+      "generic_weights": [
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        1,
+        2,
+        4
+      ],
+      "R_C": [
+        511,
+        512
+      ],
+      "exact_event_probability": "1/923788800",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "6f0e518aab593a642765d12f24038a09bacd2386ea089e2c353ef0db8bcf07c3"
+    },
+    {
+      "n": 11,
+      "d": 5,
+      "generic_weights": [
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "R_C": [
+        127,
+        128
+      ],
+      "exact_event_probability": "1/8641340627748055486673866795568332800",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "456e8d8b35a8b0072b796684226ac40dbfd47d959d7e86f4665895148ab8b37a"
+    },
+    {
+      "n": 12,
+      "d": 1,
+      "generic_weights": [
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        1
+      ],
+      "R_C": [
+        4095,
+        4096
+      ],
+      "exact_event_probability": "1/24",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "c9a9a01f6e9cd17b0743ff58bcab04502720953e4c7077c45870c49131bfcbe5"
+    },
+    {
+      "n": 12,
+      "d": 3,
+      "generic_weights": [
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        1,
+        2,
+        4
+      ],
+      "R_C": [
+        1023,
+        1024
+      ],
+      "exact_event_probability": "1/1858560000",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "fd180af84c33c41436ac18b7f207e96ef0a356f6b3dc9c3fa4ac4e8d609de055"
+    },
+    {
+      "n": 12,
+      "d": 5,
+      "generic_weights": [
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "R_C": [
+        255,
+        256
+      ],
+      "exact_event_probability": "1/377812523307859177310788730706984960000",
+      "unrestricted_subtree_seed": 202610030740,
+      "rank_sha256": "7326372b66dee46c0113701410df32a7d35505cb394dd4b2681179558fc0efd8"
+    }
+  ],
+  "prefix_vertex_checks": 720688,
+  "all_dimensional_theorem": "For the specified independent random coordinate/sign model, a fixed genuine row sweep has R=2^(n-d+1)-1 with probability at least product_l [2(n-l)]^(-2^l) >= (2n)^(-(2^d-1)).",
+  "violations": 0,
+  "verification_digest": "97279bb0383376175d4f6523e7c9db99faf6dde209aa45fcd04f647c939b8ae4",
+  "elapsed_seconds": 0.982,
+  "limitations": "This excludes a strong uniform fixed-sweep lower tail for the UNCONDITIONED adaptive model. It does not exclude existence of good trees, a conditioned model, or the primary constant-density target."
+}
