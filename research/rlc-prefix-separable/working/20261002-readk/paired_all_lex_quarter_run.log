@@ -1,0 +1,7 @@
+{"n": 2, "coordinate_orders": 2, "minimum_D_K": 1, "case_histogram": {"adjacent_controller": 1, "fastest_above_second": 1}, "elapsed": 0.0}
+{"n": 3, "coordinate_orders": 6, "minimum_D_K": 2, "case_histogram": {"adjacent_controller": 2, "nonadjacent_paired_blocks": 1, "fastest_above_second": 3}, "elapsed": 0.002}
+{"n": 4, "coordinate_orders": 24, "minimum_D_K": 4, "case_histogram": {"adjacent_controller": 6, "nonadjacent_paired_blocks": 6, "fastest_above_second": 12}, "elapsed": 0.025}
+{"n": 5, "coordinate_orders": 120, "minimum_D_K": 8, "case_histogram": {"adjacent_controller": 24, "nonadjacent_paired_blocks": 36, "fastest_above_second": 60}, "elapsed": 0.308}
+{"n": 6, "coordinate_orders": 720, "minimum_D_K": 16, "case_histogram": {"adjacent_controller": 120, "nonadjacent_paired_blocks": 240, "fastest_above_second": 360}, "elapsed": 0.401}
+{"n": 7, "coordinate_orders": 5040, "minimum_D_K": 32, "case_histogram": {"adjacent_controller": 720, "nonadjacent_paired_blocks": 1800, "fastest_above_second": 2520}, "elapsed": 1.745}
+{"state": "VERIFIED_ALL_DIMENSION_ALL_SIGNED_LEX_QUARTER_THEOREM", "positive_orders_exhausted": 5912, "additional_signed_orders_audited": 4184, "violations": 0, "verification_digest": "da13ae7cfe73473ef842094c7003524981ff98193db458b5d53440a3e79ca7d0", "elapsed_seconds": 2.271}
