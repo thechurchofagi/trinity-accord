@@ -1,0 +1,29 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-10-03-paper22-v11",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-22",
+      "record_id": 23118189,
+      "doi": "10.5281/zenodo.23118189",
+      "version": "1.1",
+      "title": "Exponential Run Complexity of Prefix-Separable Orders on the Boolean Cube",
+      "receipt_path": "research/rlc-prefix-separable/versions/v1.1/publication-record.json",
+      "pdfs": [
+        {
+          "name": "rlc-prefix-separable-supplement-v1.1.pdf",
+          "bytes": 71053,
+          "sha256": "9277f26d34e29cedd41e1144668826ed39f49c7019cdd9bbae499af4bbf92aff",
+          "role": "English finite-verification and literature supplement"
+        },
+        {
+          "name": "rlc-prefix-separable-v1.1.pdf",
+          "bytes": 109719,
+          "sha256": "55e7d965c8e55ac86088cc4234d03a4566f1a130bb40aa51ec1b63789ad04b4f",
+          "role": "Complete English mathematical preprint"
+        }
+      ]
+    }
+  ]
+}

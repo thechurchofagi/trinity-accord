@@ -24,6 +24,8 @@ article_abstract: "An order on the vertices of the Boolean cube is prefix-separa
 
 TA-TR-2026-22 · Version 1.0 · 2 October 2026
 
+**New linked revision:** [Version 1.1](/research/rlc-prefix-separable/versions/v1.1/) · [DOI 10.5281/zenodo.23118189](https://doi.org/10.5281/zenodo.23118189). It improves the general liminf coefficient by a factor `4 log 2` (about 2.77), adds scoped paired-family results and exact proof-route obstructions, and keeps the constant-density target open. The v1.0 citation, deposited files and receipts below remain available.
+
 Human author of record and responsible depositor: Hongju Liu.
 
 **Published DOI:** [10.5281/zenodo.23103274](https://doi.org/10.5281/zenodo.23103274)

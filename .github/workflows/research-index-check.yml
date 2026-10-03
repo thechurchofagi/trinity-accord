@@ -25,6 +25,7 @@ jobs:
           python3 scripts/test_recoverability_shared_time.py
           python3 tests/test_research_critical_use.py
           python3 research/rlc-prefix-separable/check_site_contract.py
+          python3 research/rlc-prefix-separable/versions/v1.1/check_site_contract.py
           python3 research/artificial-self-attribution/check_site_contract.py
           python3 research/learning-from-an-ai-claimant/check_site_contract.py
       - name: Build the existing Jekyll site without deploying
@@ -36,5 +37,6 @@ jobs:
         run: |
           python3 scripts/test_reading_research_index.py --site-dir _site
           python3 research/rlc-prefix-separable/check_site_contract.py --site-dir _site
+          python3 research/rlc-prefix-separable/versions/v1.1/check_site_contract.py --site-dir _site
           python3 research/artificial-self-attribution/check_site_contract.py --site-dir _site
           python3 research/learning-from-an-ai-claimant/check_site_contract.py --site-dir _site
