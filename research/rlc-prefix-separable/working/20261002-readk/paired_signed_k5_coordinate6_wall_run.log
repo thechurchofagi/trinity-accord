@@ -1,0 +1,8 @@
+{"completed_intervals": 20, "counts": {"exact_rational_optimum": 18, "enumeration_limited": 2}, "elapsed": 2.4353931869991357}
+{"completed_intervals": 40, "counts": {"exact_rational_optimum": 34, "enumeration_limited": 6}, "elapsed": 4.732032184998388}
+{"completed_intervals": 60, "counts": {"exact_rational_optimum": 48, "enumeration_limited": 12}, "elapsed": 8.739141094003571}
+{"completed_intervals": 80, "counts": {"exact_rational_optimum": 66, "enumeration_limited": 14}, "elapsed": 10.619971924010315}
+{"completed_intervals": 100, "counts": {"exact_rational_optimum": 86, "enumeration_limited": 14}, "elapsed": 12.922669442006736}
+{"completed_intervals": 120, "counts": {"exact_rational_optimum": 106, "enumeration_limited": 14}, "elapsed": 13.743737252007122}
+{"status": "COMPLETE_ONE_COORDINATE_GENERIC_INTERVAL_AUDIT_IN_0_128", "base_weights": [216, 246, 244, 442, 248, 642, 6, 601, 128], "varied_coordinate": 6, "range": [0, 128], "scope": "Exhaustive intervals for one real coefficient in the stated range, with all other eight coefficients fixed. Other coefficient slices, endpoints, all nine-dimensional chambers and all higher dimensions are not covered.", "intervals": 124, "unique_graphs": 124, "counts": {"exact_rational_optimum": 110, "enumeration_limited": 14}, "actual_packing_gaps": [{"gap": [1, 2], "interval": [4, 5]}], "seconds": 13.765806865005288}
+sha256 ba7b8baa00c94d83fbc020856bc42a40f03cb1ac872133e8297236eca708faff

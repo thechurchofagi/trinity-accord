@@ -1,0 +1,4282 @@
+{
+  "status": "BOUNDED_REAL_HALF_SIGNED_K5_SEARCH",
+  "seed": 202610031330,
+  "counts": {
+    "generic": 244
+  },
+  "scope": "Each hit has an exact independently checked branch/gauge/tree/bridge certificate. No-hit rows do not certify signed minor exclusion.",
+  "rows": [
+    {
+      "n": 8,
+      "weights": [
+        3998575,
+        4578511,
+        42715,
+        7899299,
+        2129239,
+        2794740,
+        3504965,
+        7382886
+      ],
+      "half_vertices": 12,
+      "half_edges": 22,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        65,
+        66,
+        80,
+        96,
+        72,
+        68
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        87951099,
+        76696427,
+        23534450,
+        38884128,
+        75329193,
+        85121466
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        45853082,
+        46230719,
+        97235518,
+        21610077,
+        88719174,
+        75045857
+      ],
+      "half_vertices": 7,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        83385887,
+        33817196,
+        98639992,
+        21692285,
+        48641295,
+        69560017
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        68,
+        72,
+        66,
+        80,
+        96,
+        65
+      ],
+      "half_vertices": 9,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        1513487,
+        51498699,
+        62561036,
+        85989927,
+        76447424,
+        76240729
+      ],
+      "half_vertices": 6,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        99107828,
+        75921224,
+        59806706,
+        34210936,
+        2938405,
+        70845355
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        21910179,
+        49851169,
+        40927758,
+        42879601,
+        28327744,
+        58688040
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        96,
+        72,
+        65,
+        68,
+        80,
+        66
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        95794221,
+        93252969,
+        34323591,
+        56548634,
+        50907967,
+        53804512
+      ],
+      "half_vertices": 6,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        16604143,
+        99771238,
+        73346670,
+        21542559,
+        75613968,
+        4589032
+      ],
+      "half_vertices": 0,
+      "half_edges": 0,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        34841741,
+        90009291,
+        24678724,
+        91921934,
+        44990611,
+        40368833
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        66,
+        68,
+        80,
+        96,
+        72,
+        65
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        61535303,
+        6697090,
+        15073384,
+        47954342,
+        44806948,
+        51731705
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        6306689,
+        99062131,
+        90150833,
+        54868706,
+        76734380,
+        61930720
+      ],
+      "half_vertices": 9,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        84596471,
+        47604081,
+        9089806,
+        38256344,
+        54700060,
+        58593509
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        80,
+        66,
+        96,
+        65,
+        68,
+        72
+      ],
+      "half_vertices": 4,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        27365789,
+        86099407,
+        53873112,
+        34572998,
+        74012935,
+        98473705
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        46835673,
+        79786605,
+        79243523,
+        28630880,
+        93618082,
+        73874282
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        65136889,
+        46162031,
+        69919621,
+        77631516,
+        17685854,
+        30281039
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        96,
+        65,
+        66,
+        68,
+        72,
+        80
+      ],
+      "half_vertices": 6,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        81885553,
+        49491592,
+        32871238,
+        20980982,
+        95328946,
+        23137315
+      ],
+      "half_vertices": 5,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        79310589,
+        69403597,
+        19574998,
+        41655363,
+        60850152,
+        7216314
+      ],
+      "half_vertices": 0,
+      "half_edges": 0,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        41943336,
+        737980,
+        25826927,
+        40599686,
+        9017185,
+        56208770
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        96,
+        80,
+        65,
+        72,
+        66,
+        68
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        85684794,
+        73556854,
+        21595505,
+        59393539,
+        82128999,
+        55815755
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        61177203,
+        59506039,
+        22552331,
+        13657570,
+        6914193,
+        36710126
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        33563465,
+        10618514,
+        91590427,
+        57462797,
+        19253957,
+        79089482
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        80,
+        66,
+        68,
+        72,
+        65,
+        96
+      ],
+      "half_vertices": 5,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        34516354,
+        30749398,
+        11595439,
+        46992955,
+        8413549,
+        40469130
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        16244558,
+        21503412,
+        10729425,
+        62367425,
+        14549278,
+        68401822
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        81963006,
+        89959940,
+        86880441,
+        1598038,
+        99446622,
+        31507421
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        65,
+        72,
+        96,
+        80,
+        68,
+        66
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        76273834,
+        8414611,
+        5962541,
+        13661778,
+        33163637,
+        75923800
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        27817399,
+        91226519,
+        27290249,
+        34701222,
+        1408752,
+        74910006
+      ],
+      "half_vertices": 4,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        10516522,
+        77927246,
+        55011995,
+        89452234,
+        24355598,
+        56871461
+      ],
+      "half_vertices": 4,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        65,
+        72,
+        96,
+        66,
+        68,
+        80
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        52915025,
+        92389741,
+        67510148,
+        78308666,
+        6582763,
+        34216173
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        95404906,
+        56237414,
+        90126032,
+        19948033,
+        86486929,
+        22561616
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        32089904,
+        32147546,
+        84542271,
+        35158958,
+        8176907,
+        29772028
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        72,
+        68,
+        65,
+        80,
+        66,
+        96
+      ],
+      "half_vertices": 8,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        4245395,
+        54314376,
+        41611908,
+        36616579,
+        81923930,
+        34886779
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        850432,
+        53610260,
+        44215426,
+        73509464,
+        79644415,
+        59281277
+      ],
+      "half_vertices": 10,
+      "half_edges": 12,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        46985871,
+        64149595,
+        10392524,
+        40204774,
+        72509828,
+        94295057
+      ],
+      "half_vertices": 4,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        65,
+        66,
+        68,
+        80,
+        72,
+        96
+      ],
+      "half_vertices": 9,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        93615830,
+        35011158,
+        17916045,
+        99752116,
+        76292341,
+        96690060
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        32220182,
+        69005613,
+        92058053,
+        30590543,
+        57493238,
+        6933233
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        13922324,
+        36365337,
+        66968800,
+        64188572,
+        47988010,
+        83141412
+      ],
+      "half_vertices": 5,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        66,
+        65,
+        96,
+        72,
+        80,
+        68
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        6302279,
+        16726660,
+        29934952,
+        58914265,
+        20046133,
+        27626563
+      ],
+      "half_vertices": 5,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        75320159,
+        99755681,
+        62016096,
+        80423540,
+        4044124,
+        18763547
+      ],
+      "half_vertices": 0,
+      "half_edges": 0,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        4864426,
+        23158751,
+        97287387,
+        33776586,
+        7596259,
+        30785200
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        80,
+        68,
+        72,
+        96,
+        66,
+        65
+      ],
+      "half_vertices": 3,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        33756164,
+        43172275,
+        30738403,
+        20773519,
+        85152764,
+        88262583
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        38461100,
+        58317285,
+        68822152,
+        66309633,
+        40481892,
+        44380680
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        25308986,
+        36091068,
+        22149408,
+        55645903,
+        14535295,
+        79971550
+      ],
+      "half_vertices": 6,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        68,
+        66,
+        72,
+        96,
+        80,
+        65
+      ],
+      "half_vertices": 7,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        31333408,
+        86973111,
+        8675956,
+        74154275,
+        13699852,
+        65515633
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        10366672,
+        27068343,
+        5886130,
+        12037758,
+        52880957,
+        94259096
+      ],
+      "half_vertices": 5,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        81854011,
+        11979804,
+        43765042,
+        41606489,
+        73920099,
+        29028208
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        80,
+        72,
+        65,
+        66,
+        96,
+        68
+      ],
+      "half_vertices": 5,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        27816870,
+        18219499,
+        14259914,
+        1245218,
+        29887024,
+        92360251
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        12831766,
+        68006786,
+        21499379,
+        71079651,
+        82808278,
+        65742963
+      ],
+      "half_vertices": 6,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        59751656,
+        78407122,
+        10688971,
+        32985952,
+        39723759,
+        90858283
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        66,
+        80,
+        72,
+        96,
+        68,
+        65
+      ],
+      "half_vertices": 3,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        34564316,
+        18870338,
+        91171661,
+        69484676,
+        80279309,
+        82337687
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        76827126,
+        70345277,
+        16697813,
+        96115128,
+        1380700,
+        1869096
+      ],
+      "half_vertices": 0,
+      "half_edges": 0,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        10628695,
+        59943830,
+        31890252,
+        31589905,
+        76126135,
+        32589609
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        65,
+        68,
+        96,
+        66,
+        80,
+        72
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        46080886,
+        64666530,
+        89209313,
+        83478551,
+        52037439,
+        77169748
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        58844352,
+        1056729,
+        28003742,
+        47223429,
+        70442720,
+        74317545
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        11580139,
+        48026431,
+        82729447,
+        19043475,
+        96840558,
+        31600718
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        72,
+        80,
+        96,
+        68,
+        65,
+        66
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        49627570,
+        83195867,
+        73877681,
+        19544835,
+        32237694,
+        32685363
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        28528505,
+        16764065,
+        79473358,
+        31174552,
+        92558797,
+        57219403
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        39135915,
+        39707278,
+        8327429,
+        32110638,
+        57030867,
+        68908982
+      ],
+      "half_vertices": 7,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        66,
+        72,
+        68,
+        65,
+        96,
+        80
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        45083634,
+        78273148,
+        93112562,
+        93212995,
+        77638713,
+        34458814
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        12953584,
+        64537964,
+        17428298,
+        82597827,
+        90235441,
+        52867279
+      ],
+      "half_vertices": 7,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 6,
+      "weights": [
+        86090299,
+        557716,
+        34331542,
+        78471500,
+        28043306,
+        17768948
+      ],
+      "half_vertices": 6,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        144,
+        132,
+        130,
+        129,
+        160,
+        192,
+        136
+      ],
+      "half_vertices": 9,
+      "half_edges": 9,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        7004297,
+        91014166,
+        4574001,
+        57756347,
+        51946896,
+        81540656,
+        54160953
+      ],
+      "half_vertices": 5,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        44604451,
+        57875117,
+        59941516,
+        71093987,
+        602534,
+        49226715,
+        6748408
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        63947721,
+        11378567,
+        97697764,
+        76648537,
+        52674476,
+        86287595,
+        98239670
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        132,
+        129,
+        192,
+        136,
+        160,
+        130,
+        144
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        8983728,
+        56001543,
+        17194999,
+        99001410,
+        61603510,
+        63151264,
+        37246273
+      ],
+      "half_vertices": 8,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        25734104,
+        39437440,
+        39500061,
+        42136513,
+        71553820,
+        69943314,
+        50223885
+      ],
+      "half_vertices": 11,
+      "half_edges": 16,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        17619750,
+        23957288,
+        70761981,
+        25541884,
+        19000613,
+        53865980,
+        38769530
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        192,
+        129,
+        130,
+        144,
+        136,
+        132,
+        160
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        23652034,
+        56049306,
+        66689235,
+        85562817,
+        40959584,
+        31387548,
+        30589309
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        68721946,
+        794008,
+        48454330,
+        99518943,
+        2338369,
+        23390345,
+        78684583
+      ],
+      "half_vertices": 9,
+      "half_edges": 14,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        38615897,
+        97943989,
+        82328064,
+        6041074,
+        48172755,
+        66960630,
+        18321994
+      ],
+      "half_vertices": 4,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        136,
+        144,
+        192,
+        132,
+        160,
+        129,
+        130
+      ],
+      "half_vertices": 4,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        69184448,
+        74713913,
+        15864615,
+        18915927,
+        5370734,
+        99834605,
+        42392903
+      ],
+      "half_vertices": 5,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        16546577,
+        88547320,
+        48729740,
+        63967937,
+        33259002,
+        56916743,
+        25464625
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        26090622,
+        65177149,
+        16972827,
+        13072752,
+        17891479,
+        85843512,
+        48182931
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        130,
+        144,
+        160,
+        192,
+        136,
+        132,
+        129
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        45545994,
+        67894461,
+        57913496,
+        66851516,
+        40557069,
+        16895944,
+        68745237
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        5011598,
+        45957717,
+        28795926,
+        65490958,
+        43369138,
+        63645803,
+        16341598
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        96808650,
+        74307176,
+        50568270,
+        14366435,
+        6287259,
+        30216808,
+        73675490
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        192,
+        160,
+        130,
+        136,
+        132,
+        129,
+        144
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        14586597,
+        76199729,
+        69790587,
+        94323931,
+        77950325,
+        66806937,
+        69915557
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        81284793,
+        79045099,
+        79009384,
+        20939049,
+        72469846,
+        23696267,
+        58563989
+      ],
+      "half_vertices": 13,
+      "half_edges": 20,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        45542270,
+        60294653,
+        55549601,
+        26552153,
+        3767264,
+        71032418,
+        57488676
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        130,
+        136,
+        144,
+        160,
+        129,
+        132,
+        192
+      ],
+      "half_vertices": 6,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        46749224,
+        62433666,
+        52961916,
+        87613934,
+        99552714,
+        32310960,
+        29833985
+      ],
+      "half_vertices": 4,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        1110408,
+        31890915,
+        21959206,
+        59960459,
+        93888146,
+        52499890,
+        73975653
+      ],
+      "half_vertices": 18,
+      "half_edges": 28,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        91425740,
+        3035289,
+        85931964,
+        51757894,
+        18258151,
+        80005699,
+        89550081
+      ],
+      "half_vertices": 8,
+      "half_edges": 12,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        132,
+        129,
+        144,
+        160,
+        192,
+        130,
+        136
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        43868309,
+        22395253,
+        42360821,
+        78788432,
+        7230239,
+        23111956,
+        61368316
+      ],
+      "half_vertices": 5,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        76059563,
+        44110673,
+        28298496,
+        69682828,
+        12423496,
+        1352240,
+        96827970
+      ],
+      "half_vertices": 0,
+      "half_edges": 0,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        13045202,
+        14161698,
+        97470686,
+        73409938,
+        48343933,
+        12780081,
+        78633452
+      ],
+      "half_vertices": 7,
+      "half_edges": 9,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        192,
+        132,
+        136,
+        130,
+        144,
+        160,
+        129
+      ],
+      "half_vertices": 9,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        28585461,
+        25070107,
+        37768289,
+        49123883,
+        89602001,
+        42725987,
+        64349152
+      ],
+      "half_vertices": 6,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        38104846,
+        66943370,
+        18913027,
+        87760708,
+        15626876,
+        27525886,
+        67916166
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        14552298,
+        7996149,
+        40571213,
+        29607012,
+        24624545,
+        70707461,
+        47705568
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        160,
+        130,
+        129,
+        144,
+        132,
+        136,
+        192
+      ],
+      "half_vertices": 7,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        33402524,
+        6216563,
+        20709834,
+        91297645,
+        25018251,
+        37458475,
+        80172133
+      ],
+      "half_vertices": 7,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        95075435,
+        34126654,
+        65198559,
+        27293610,
+        5571141,
+        41973588,
+        83563636
+      ],
+      "half_vertices": 4,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        95878668,
+        72204647,
+        61261204,
+        8184703,
+        9140362,
+        26382056,
+        56234360
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        192,
+        130,
+        144,
+        129,
+        132,
+        136,
+        160
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        8806233,
+        94725140,
+        59736380,
+        52059317,
+        74276845,
+        28043453,
+        96595314
+      ],
+      "half_vertices": 6,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        8416223,
+        84284293,
+        19316106,
+        53036032,
+        38030546,
+        33046569,
+        83239112
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        40474851,
+        61652186,
+        11690506,
+        15931036,
+        97473919,
+        36761576,
+        11836503
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        192,
+        144,
+        160,
+        132,
+        129,
+        136,
+        130
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        19981798,
+        42610234,
+        97800593,
+        76964931,
+        66180680,
+        40666197,
+        17347493
+      ],
+      "half_vertices": 4,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        61938794,
+        95546860,
+        3531045,
+        38210339,
+        76373924,
+        95645843,
+        37902345
+      ],
+      "half_vertices": 6,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        70928948,
+        70829645,
+        26328331,
+        37627085,
+        98817212,
+        47650837,
+        67975682
+      ],
+      "half_vertices": 14,
+      "half_edges": 20,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        144,
+        130,
+        192,
+        129,
+        136,
+        160,
+        132
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        38572348,
+        76658973,
+        16824369,
+        80437907,
+        34670759,
+        229280,
+        30703903
+      ],
+      "half_vertices": 0,
+      "half_edges": 0,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        24011658,
+        85173899,
+        47953133,
+        74234984,
+        88118263,
+        66466977,
+        68828750
+      ],
+      "half_vertices": 7,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        98193374,
+        69295559,
+        48523245,
+        52297782,
+        80792537,
+        2205863,
+        10782043
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        160,
+        136,
+        129,
+        132,
+        192,
+        130,
+        144
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        42697724,
+        44112381,
+        74425568,
+        77327834,
+        76680456,
+        63241811,
+        74120853
+      ],
+      "half_vertices": 9,
+      "half_edges": 11,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        27433845,
+        68459321,
+        77892635,
+        7722829,
+        37798840,
+        60705668,
+        66812038
+      ],
+      "half_vertices": 5,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        54815454,
+        89058525,
+        94894669,
+        84677373,
+        99427522,
+        83878785,
+        43166418
+      ],
+      "half_vertices": 9,
+      "half_edges": 13,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        144,
+        132,
+        192,
+        130,
+        129,
+        136,
+        160
+      ],
+      "half_vertices": 5,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        4497792,
+        68096797,
+        95149423,
+        95906849,
+        57944811,
+        43526425,
+        90471076
+      ],
+      "half_vertices": 8,
+      "half_edges": 11,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        69774518,
+        9176728,
+        74122028,
+        43384334,
+        75663201,
+        10443304,
+        25494939
+      ],
+      "half_vertices": 9,
+      "half_edges": 12,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        80397005,
+        92563987,
+        64480667,
+        90627125,
+        33765456,
+        87376996,
+        4697839
+      ],
+      "half_vertices": 0,
+      "half_edges": 0,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        129,
+        136,
+        130,
+        192,
+        144,
+        160,
+        132
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        39141185,
+        67621207,
+        18504318,
+        29434238,
+        8874800,
+        83688019,
+        24007016
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        50186874,
+        88987133,
+        57837336,
+        32535889,
+        54811134,
+        72303890,
+        46366985
+      ],
+      "half_vertices": 5,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        54459839,
+        37660238,
+        1023427,
+        11330713,
+        21241162,
+        42785737,
+        68877725
+      ],
+      "half_vertices": 6,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        136,
+        130,
+        129,
+        160,
+        192,
+        144,
+        132
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        24955020,
+        40933875,
+        33227145,
+        30317838,
+        68729483,
+        28243740,
+        26135547
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        91228879,
+        26108896,
+        89687936,
+        20757738,
+        17192339,
+        94219123,
+        39371322
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        81090199,
+        25516514,
+        94408517,
+        97379192,
+        95830134,
+        5985582,
+        79645522
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        192,
+        144,
+        129,
+        132,
+        160,
+        136,
+        130
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        12340489,
+        72473413,
+        12182457,
+        79277925,
+        3276453,
+        65159736,
+        61007119
+      ],
+      "half_vertices": 6,
+      "half_edges": 9,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        22808540,
+        65367844,
+        62530534,
+        82133069,
+        13499434,
+        58790044,
+        98186285
+      ],
+      "half_vertices": 9,
+      "half_edges": 14,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        9771796,
+        73600449,
+        8651760,
+        5803868,
+        87346459,
+        62207998,
+        68378431
+      ],
+      "half_vertices": 9,
+      "half_edges": 14,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        160,
+        132,
+        136,
+        192,
+        130,
+        144,
+        129
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        90829984,
+        32980045,
+        36620388,
+        7276361,
+        64358266,
+        35914473,
+        63107090
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        8993569,
+        60047010,
+        76372760,
+        52160869,
+        53835735,
+        57481309,
+        70895138
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        3603923,
+        6487884,
+        74014501,
+        46431703,
+        82895822,
+        77258122,
+        52859245
+      ],
+      "half_vertices": 10,
+      "half_edges": 12,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        130,
+        132,
+        192,
+        144,
+        136,
+        160,
+        129
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        58768056,
+        79713514,
+        8191796,
+        78810152,
+        30330106,
+        40253864,
+        27330794
+      ],
+      "half_vertices": 6,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        61555576,
+        96362267,
+        117240,
+        47393716,
+        91786789,
+        65261140,
+        77046598
+      ],
+      "half_vertices": 7,
+      "half_edges": 9,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 7,
+      "weights": [
+        17045928,
+        79321738,
+        44162451,
+        1936512,
+        75774810,
+        10467747,
+        44042206
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        264,
+        320,
+        384,
+        258,
+        272,
+        257,
+        260,
+        288
+      ],
+      "half_vertices": 6,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        50140323,
+        22942974,
+        99724635,
+        56877953,
+        49730291,
+        23321679,
+        64271139,
+        77058401
+      ],
+      "half_vertices": 8,
+      "half_edges": 13,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        53149194,
+        75148911,
+        93293881,
+        11071633,
+        22873764,
+        53954556,
+        19579510,
+        57587141
+      ],
+      "half_vertices": 6,
+      "half_edges": 9,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        73311102,
+        37208453,
+        4038194,
+        55511826,
+        35702089,
+        81481654,
+        87893319,
+        31421227
+      ],
+      "half_vertices": 7,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        288,
+        260,
+        320,
+        272,
+        384,
+        257,
+        264,
+        258
+      ],
+      "half_vertices": 7,
+      "half_edges": 9,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        37001603,
+        56627948,
+        80500129,
+        24500451,
+        74100739,
+        89084621,
+        38874242,
+        2857989
+      ],
+      "half_vertices": 7,
+      "half_edges": 9,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        93881125,
+        88286147,
+        9975838,
+        65970215,
+        28284260,
+        25940498,
+        41080267,
+        90661252
+      ],
+      "half_vertices": 7,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        3448518,
+        86363633,
+        43562880,
+        26165547,
+        18115044,
+        57150934,
+        49208126,
+        13311844
+      ],
+      "half_vertices": 10,
+      "half_edges": 14,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        288,
+        384,
+        260,
+        258,
+        272,
+        320,
+        257,
+        264
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        44497406,
+        43915827,
+        7177617,
+        47304915,
+        25825317,
+        7634695,
+        47798182,
+        51928435
+      ],
+      "half_vertices": 9,
+      "half_edges": 9,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        98094263,
+        94228554,
+        16256731,
+        33682713,
+        60672817,
+        43000686,
+        49622313,
+        30892793
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        45133194,
+        81531655,
+        20402470,
+        40607415,
+        93121430,
+        23995479,
+        99783952,
+        4095874
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        260,
+        320,
+        288,
+        257,
+        272,
+        258,
+        264,
+        384
+      ],
+      "half_vertices": 8,
+      "half_edges": 12,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        74067139,
+        44083236,
+        81868131,
+        54299111,
+        95217218,
+        35515458,
+        78932948,
+        62861714
+      ],
+      "half_vertices": 6,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        33440425,
+        70474771,
+        34623857,
+        98939395,
+        79553594,
+        82592312,
+        20776454,
+        61045180
+      ],
+      "half_vertices": 11,
+      "half_edges": 15,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        81326394,
+        86853676,
+        5089969,
+        62123067,
+        92562635,
+        83174802,
+        1120394,
+        62533468
+      ],
+      "half_vertices": 0,
+      "half_edges": 0,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        260,
+        384,
+        257,
+        320,
+        258,
+        288,
+        272,
+        264
+      ],
+      "half_vertices": 6,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        6449055,
+        13783843,
+        2236123,
+        17127834,
+        31210791,
+        28049115,
+        83070475,
+        68280898
+      ],
+      "half_vertices": 8,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        91644126,
+        23660129,
+        96866491,
+        7754278,
+        841757,
+        94450055,
+        92379364,
+        5831134
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        38251729,
+        20133665,
+        57846070,
+        20738386,
+        22120159,
+        42414389,
+        68493531,
+        47211566
+      ],
+      "half_vertices": 13,
+      "half_edges": 20,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        384,
+        260,
+        264,
+        288,
+        272,
+        258,
+        320,
+        257
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        64551564,
+        44074008,
+        97026886,
+        82674411,
+        58574330,
+        15774155,
+        35515024,
+        10707333
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        13028698,
+        62560197,
+        78256116,
+        4705391,
+        15241145,
+        68478777,
+        38820621,
+        701155
+      ],
+      "half_vertices": 0,
+      "half_edges": 0,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        18593177,
+        64555789,
+        96332525,
+        67808409,
+        65635565,
+        14107066,
+        19875666,
+        45376225
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        264,
+        260,
+        272,
+        384,
+        258,
+        257,
+        320,
+        288
+      ],
+      "half_vertices": 17,
+      "half_edges": 21,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        83368919,
+        58722807,
+        75830373,
+        8105435,
+        50151109,
+        85848329,
+        5761575,
+        97042374
+      ],
+      "half_vertices": 9,
+      "half_edges": 14,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        1430423,
+        33231800,
+        64853995,
+        35810668,
+        13847328,
+        25629713,
+        44436890,
+        58052436
+      ],
+      "half_vertices": 17,
+      "half_edges": 28,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        6151079,
+        20468405,
+        25176969,
+        28454930,
+        52469720,
+        896230,
+        45540294,
+        55273562
+      ],
+      "half_vertices": 5,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        288,
+        264,
+        320,
+        260,
+        257,
+        384,
+        258,
+        272
+      ],
+      "half_vertices": 10,
+      "half_edges": 15,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        76036268,
+        84202779,
+        99992349,
+        81652111,
+        45655200,
+        75126660,
+        18733839,
+        63797777
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        6093452,
+        30103337,
+        191242,
+        78839469,
+        26590791,
+        3804599,
+        9477764,
+        78485836
+      ],
+      "half_vertices": 13,
+      "half_edges": 19,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        93522026,
+        25828398,
+        53429803,
+        35277100,
+        81160086,
+        30380930,
+        46672417,
+        38577006
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        257,
+        272,
+        320,
+        264,
+        288,
+        258,
+        260,
+        384
+      ],
+      "half_vertices": 8,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        52697353,
+        48988067,
+        91564872,
+        68993216,
+        72531909,
+        26439994,
+        83056779,
+        52393087
+      ],
+      "half_vertices": 6,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        74254029,
+        62486284,
+        90908833,
+        23188615,
+        32381330,
+        4536762,
+        92955091,
+        29577548
+      ],
+      "half_vertices": 4,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        59654232,
+        61360458,
+        60332978,
+        31764007,
+        66362973,
+        65450342,
+        69512696,
+        42483999
+      ],
+      "half_vertices": 9,
+      "half_edges": 12,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        320,
+        258,
+        288,
+        272,
+        260,
+        384,
+        257,
+        264
+      ],
+      "half_vertices": 7,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        81712023,
+        72734417,
+        10406253,
+        3241367,
+        17767499,
+        96937150,
+        41082350,
+        14454353
+      ],
+      "half_vertices": 8,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        85664838,
+        16736161,
+        58238364,
+        11228659,
+        18683894,
+        22196471,
+        9343685,
+        32557135
+      ],
+      "half_vertices": 8,
+      "half_edges": 12,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        95065326,
+        537215,
+        48522751,
+        63517359,
+        63672570,
+        59631687,
+        26072291,
+        53756661
+      ],
+      "half_vertices": 11,
+      "half_edges": 15,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        272,
+        257,
+        320,
+        264,
+        288,
+        384,
+        260,
+        258
+      ],
+      "half_vertices": 6,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        60008554,
+        88269991,
+        50042791,
+        12934842,
+        97727198,
+        20303537,
+        48084482,
+        3694827
+      ],
+      "half_vertices": 5,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        42437177,
+        85204889,
+        36065227,
+        88031429,
+        39329167,
+        55288511,
+        12125290,
+        65948516
+      ],
+      "half_vertices": 6,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        23664967,
+        2710164,
+        65472679,
+        49122244,
+        87013883,
+        34216361,
+        67894671,
+        60121086
+      ],
+      "half_vertices": 7,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        258,
+        272,
+        320,
+        260,
+        264,
+        384,
+        288,
+        257
+      ],
+      "half_vertices": 9,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        66189244,
+        22904356,
+        32056879,
+        20940720,
+        58872841,
+        98288950,
+        33018796,
+        17213140
+      ],
+      "half_vertices": 5,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        9720678,
+        75186434,
+        44294693,
+        3384349,
+        34474189,
+        91165088,
+        82921224,
+        41983311
+      ],
+      "half_vertices": 7,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        66780033,
+        50024002,
+        66350303,
+        42254577,
+        94833760,
+        59627496,
+        42076700,
+        10511967
+      ],
+      "half_vertices": 10,
+      "half_edges": 17,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        264,
+        257,
+        272,
+        288,
+        384,
+        258,
+        320,
+        260
+      ],
+      "half_vertices": 10,
+      "half_edges": 13,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        48369901,
+        51432481,
+        46397742,
+        54887083,
+        8912498,
+        51897893,
+        42243138,
+        35803397
+      ],
+      "half_vertices": 11,
+      "half_edges": 15,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        26960385,
+        35673053,
+        53642502,
+        42819574,
+        79881403,
+        92201281,
+        39688590,
+        78878189
+      ],
+      "half_vertices": 9,
+      "half_edges": 13,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        28654731,
+        6418831,
+        77901139,
+        79505773,
+        60427657,
+        52626551,
+        56938398,
+        30428465
+      ],
+      "half_vertices": 7,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        384,
+        264,
+        257,
+        258,
+        288,
+        320,
+        272,
+        260
+      ],
+      "half_vertices": 5,
+      "half_edges": 6,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        40002850,
+        2446497,
+        69746610,
+        33025176,
+        49932150,
+        79901332,
+        41044083,
+        57591090
+      ],
+      "half_vertices": 6,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        54755147,
+        21712357,
+        69404615,
+        52256637,
+        91077691,
+        38914154,
+        85081054,
+        71937755
+      ],
+      "half_vertices": 9,
+      "half_edges": 12,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        39015733,
+        82472354,
+        31839382,
+        80605614,
+        39621898,
+        5672311,
+        23483675,
+        4595423
+      ],
+      "half_vertices": 6,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        260,
+        272,
+        384,
+        258,
+        288,
+        264,
+        257,
+        320
+      ],
+      "half_vertices": 7,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        48879483,
+        63592857,
+        59873065,
+        20789876,
+        91385873,
+        50720412,
+        29101513,
+        95699898
+      ],
+      "half_vertices": 7,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        11100368,
+        92423234,
+        97123678,
+        15308442,
+        62624737,
+        29630164,
+        51883889,
+        384682
+      ],
+      "half_vertices": 2,
+      "half_edges": 1,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        2305504,
+        46867051,
+        45343669,
+        52698072,
+        59966569,
+        10111519,
+        94902759,
+        88934365
+      ],
+      "half_vertices": 19,
+      "half_edges": 28,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        288,
+        384,
+        258,
+        320,
+        257,
+        260,
+        264,
+        272
+      ],
+      "half_vertices": 6,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        30353872,
+        6992539,
+        84504072,
+        22353473,
+        83029413,
+        69913229,
+        30924080,
+        61167704
+      ],
+      "half_vertices": 8,
+      "half_edges": 10,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        360791,
+        92664644,
+        95032276,
+        43416218,
+        6378033,
+        8057747,
+        52074466,
+        48538883
+      ],
+      "half_vertices": 32,
+      "half_edges": 54,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        54778947,
+        38298943,
+        96887706,
+        70415455,
+        64052666,
+        69801946,
+        6786129,
+        54476172
+      ],
+      "half_vertices": 4,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        288,
+        257,
+        260,
+        264,
+        384,
+        258,
+        320,
+        272
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        69115290,
+        23812688,
+        34284222,
+        14411671,
+        62437374,
+        18954759,
+        56952628,
+        94615708
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        46594271,
+        66982238,
+        27794926,
+        26160012,
+        20360767,
+        19364852,
+        80143470,
+        52445814
+      ],
+      "half_vertices": 6,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        76170057,
+        72095962,
+        66409661,
+        4176321,
+        729033,
+        3493365,
+        61067700,
+        4250490
+      ],
+      "half_vertices": 6,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        257,
+        258,
+        320,
+        272,
+        288,
+        264,
+        384,
+        260
+      ],
+      "half_vertices": 8,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        32743966,
+        72154364,
+        79081102,
+        91417276,
+        56161427,
+        64422503,
+        64888427,
+        5215849
+      ],
+      "half_vertices": 4,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        30565109,
+        38913417,
+        94367657,
+        50943418,
+        28589858,
+        87349930,
+        52303157,
+        20446944
+      ],
+      "half_vertices": 5,
+      "half_edges": 7,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        16900213,
+        67365512,
+        83663787,
+        68427982,
+        50420130,
+        32885776,
+        55010464,
+        24007543
+      ],
+      "half_vertices": 18,
+      "half_edges": 26,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        272,
+        264,
+        384,
+        258,
+        320,
+        288,
+        257,
+        260
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        4110109,
+        8391860,
+        12414982,
+        72047861,
+        28230543,
+        93750286,
+        39996553,
+        70626452
+      ],
+      "half_vertices": 19,
+      "half_edges": 29,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        15213473,
+        24020890,
+        39625522,
+        31588901,
+        35293155,
+        78820432,
+        13317187,
+        89556303
+      ],
+      "half_vertices": 8,
+      "half_edges": 12,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        80587893,
+        55179858,
+        43955665,
+        63998628,
+        22197947,
+        94149432,
+        33740188,
+        30271324
+      ],
+      "half_vertices": 5,
+      "half_edges": 5,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        384,
+        272,
+        260,
+        257,
+        264,
+        258,
+        288,
+        320
+      ],
+      "half_vertices": 3,
+      "half_edges": 2,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        56463465,
+        6934410,
+        4774697,
+        36424039,
+        79454079,
+        78167021,
+        51469466,
+        61181499
+      ],
+      "half_vertices": 4,
+      "half_edges": 3,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        86545587,
+        37319417,
+        15462883,
+        82972151,
+        3625043,
+        78864999,
+        85996246,
+        60708391
+      ],
+      "half_vertices": 5,
+      "half_edges": 8,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 8,
+      "weights": [
+        61085315,
+        81352239,
+        89254528,
+        72973181,
+        43929873,
+        4535221,
+        5687874,
+        80594969
+      ],
+      "half_vertices": 4,
+      "half_edges": 4,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 9,
+      "weights": [
+        516,
+        640,
+        514,
+        513,
+        768,
+        528,
+        520,
+        576,
+        544
+      ],
+      "half_vertices": 21,
+      "half_edges": 28,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 9,
+      "weights": [
+        19736313,
+        2503218,
+        14856256,
+        42995338,
+        20448436,
+        29196027,
+        79509450,
+        12022162,
+        20258898
+      ],
+      "half_vertices": 10,
+      "half_edges": 15,
+      "trials": 32,
+      "found": false
+    },
+    {
+      "n": 9,
+      "weights": [
+        32839405,
+        37622620,
+        37555007,
+        67589735,
+        37835205,
+        98178771,
+        902781,
+        92167916,
+        19595755
+      ],
+      "half_vertices": 17,
+      "half_edges": 33,
+      "trials": 0,
+      "found": true,
+      "half_signed_edges": [
+        [
+          194,
+          254,
+          -1
+        ],
+        [
+          194,
+          255,
+          1
+        ],
+        [
+          199,
+          252,
+          1
+        ],
+        [
+          199,
+          255,
+          1
+        ],
+        [
+          200,
+          242,
+          1
+        ],
+        [
+          200,
+          252,
+          1
+        ],
+        [
+          201,
+          242,
+          1
+        ],
+        [
+          201,
+          255,
+          1
+        ],
+        [
+          202,
+          242,
+          -1
+        ],
+        [
+          202,
+          255,
+          -1
+        ],
+        [
+          203,
+          242,
+          -1
+        ],
+        [
+          203,
+          255,
+          1
+        ],
+        [
+          204,
+          243,
+          1
+        ],
+        [
+          204,
+          255,
+          -1
+        ],
+        [
+          205,
+          243,
+          1
+        ],
+        [
+          205,
+          252,
+          1
+        ],
+        [
+          205,
+          254,
+          1
+        ],
+        [
+          205,
+          255,
+          1
+        ],
+        [
+          206,
+          243,
+          -1
+        ],
+        [
+          206,
+          252,
+          -1
+        ],
+        [
+          207,
+          243,
+          -1
+        ],
+        [
+          207,
+          255,
+          1
+        ],
+        [
+          240,
+          252,
+          -3
+        ],
+        [
+          240,
+          254,
+          3
+        ],
+        [
+          241,
+          252,
+          -1
+        ],
+        [
+          241,
+          254,
+          -2
+        ],
+        [
+          241,
+          255,
+          1
+        ],
+        [
+          242,
+          252,
+          2
+        ],
+        [
+          242,
+          254,
+          1
+        ],
+        [
+          242,
+          255,
+          3
+        ],
+        [
+          243,
+          252,
+          -2
+        ],
+        [
+          243,
+          254,
+          -2
+        ],
+        [
+          252,
+          255,
+          -3
+        ]
+      ],
+      "certificate": {
+        "branches": [
+          {
+            "gauges": [
+              [
+                194,
+                1
+              ],
+              [
+                254,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                194,
+                254
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                199,
+                -1
+              ],
+              [
+                202,
+                1
+              ],
+              [
+                255,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                199,
+                255
+              ],
+              [
+                202,
+                255
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                205,
+                1
+              ]
+            ],
+            "positive_tree": []
+          },
+          {
+            "gauges": [
+              [
+                207,
+                1
+              ],
+              [
+                243,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                207,
+                243
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                200,
+                -1
+              ],
+              [
+                240,
+                1
+              ],
+              [
+                252,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                200,
+                252
+              ],
+              [
+                240,
+                252
+              ]
+            ]
+          }
+        ],
+        "negative_bridges": [
+          [
+            0,
+            1,
+            [
+              194,
+              255,
+              1
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              254,
+              205,
+              1
+            ]
+          ],
+          [
+            0,
+            3,
+            [
+              254,
+              243,
+              -1
+            ]
+          ],
+          [
+            0,
+            4,
+            [
+              254,
+              240,
+              1
+            ]
+          ],
+          [
+            1,
+            2,
+            [
+              255,
+              205,
+              1
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              255,
+              207,
+              1
+            ]
+          ],
+          [
+            1,
+            4,
+            [
+              255,
+              252,
+              -1
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              205,
+              243,
+              1
+            ]
+          ],
+          [
+            2,
+            4,
+            [
+              205,
+              252,
+              1
+            ]
+          ],
+          [
+            3,
+            4,
+            [
+              243,
+              252,
+              -1
+            ]
+          ]
+        ]
+      }
+    }
+  ],
+  "seconds": 2.0902236070105573
+}

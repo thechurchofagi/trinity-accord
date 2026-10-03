@@ -1,0 +1,2585 @@
+{
+  "status": "VERIFIED_REAL_ODD_K5_SUPPORT_IN_EVERY_N_GE_9_AND_EXACT_SCAN_PACKING",
+  "analytic_statement": "For every n>=9, dominant new low coordinates lift a genuine signed odd-K5 minor. On the same genuine scan family, a capacity-respecting integral negative-cycle packing of mass 24T-2 attain the exact frustration and R_min=266T-1, T=2^(n-9).",
+  "scope": "Refutes universal weak bipartiteness of genuine half/full supports. The diagnostic capacity gap is not an actual-scan packing gap. The primary constant-density M_n theorem remains open.",
+  "seed_weights": [
+    216,
+    246,
+    244,
+    442,
+    248,
+    642,
+    6,
+    601,
+    128
+  ],
+  "diagnostic": {
+    "signed_edges": [
+      [
+        194,
+        254,
+        -208
+      ],
+      [
+        194,
+        255,
+        52
+      ],
+      [
+        199,
+        252,
+        1
+      ],
+      [
+        199,
+        255,
+        208
+      ],
+      [
+        200,
+        242,
+        1
+      ],
+      [
+        200,
+        252,
+        208
+      ],
+      [
+        201,
+        242,
+        1
+      ],
+      [
+        201,
+        255,
+        1
+      ],
+      [
+        202,
+        242,
+        -1
+      ],
+      [
+        202,
+        255,
+        -208
+      ],
+      [
+        203,
+        242,
+        -1
+      ],
+      [
+        203,
+        255,
+        1
+      ],
+      [
+        204,
+        243,
+        1
+      ],
+      [
+        204,
+        255,
+        -1
+      ],
+      [
+        205,
+        243,
+        52
+      ],
+      [
+        205,
+        252,
+        52
+      ],
+      [
+        205,
+        254,
+        52
+      ],
+      [
+        205,
+        255,
+        52
+      ],
+      [
+        206,
+        243,
+        -1
+      ],
+      [
+        206,
+        252,
+        -1
+      ],
+      [
+        207,
+        243,
+        -208
+      ],
+      [
+        207,
+        255,
+        52
+      ],
+      [
+        240,
+        252,
+        -208
+      ],
+      [
+        240,
+        254,
+        52
+      ],
+      [
+        241,
+        252,
+        -1
+      ],
+      [
+        241,
+        254,
+        -1
+      ],
+      [
+        241,
+        255,
+        1
+      ],
+      [
+        242,
+        252,
+        1
+      ],
+      [
+        242,
+        254,
+        1
+      ],
+      [
+        242,
+        255,
+        1
+      ],
+      [
+        243,
+        252,
+        -52
+      ],
+      [
+        243,
+        254,
+        -52
+      ],
+      [
+        252,
+        255,
+        -52
+      ]
+    ],
+    "all_simple_negative_cycles": 437,
+    "active_spin_assignments": 65536,
+    "integer_frustration": 211,
+    "integer_attaining_negative_vertices": [
+      194,
+      202,
+      204,
+      240,
+      241,
+      243
+    ],
+    "fractional_optimum": "535/3",
+    "integrality_gap": "98/3",
+    "scope": "Positive integral alternative capacities on a genuine signed support; these capacities are not actual scan couplings."
+  },
+  "general_packing_reduction_audit": {
+    "full_original_mass": "2",
+    "half_projected_value": "2",
+    "relifted_full_mass": "2",
+    "projected_paths": [
+      [
+        [
+          0,
+          2,
+          1
+        ],
+        "1/2"
+      ],
+      [
+        [
+          0,
+          3,
+          1
+        ],
+        "1/2"
+      ]
+    ],
+    "projected_cycles": [
+      [
+        [
+          2,
+          3,
+          4
+        ],
+        "1/2"
+      ]
+    ],
+    "scope": "Audits both directions of the general analytic fractional packing identity, including an unsymmetric full packing and mixed terminal paths."
+  },
+  "ancestor_budget_obstruction": {
+    "rows": [
+      {
+        "n": 2,
+        "D": 0,
+        "K": 1,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": false
+      },
+      {
+        "n": 3,
+        "D": 0,
+        "K": 0,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": true
+      },
+      {
+        "n": 4,
+        "D": 0,
+        "K": 0,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": true
+      },
+      {
+        "n": 5,
+        "D": 0,
+        "K": 0,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": true
+      },
+      {
+        "n": 6,
+        "D": 0,
+        "K": 0,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": true
+      },
+      {
+        "n": 7,
+        "D": 0,
+        "K": 0,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": true
+      },
+      {
+        "n": 8,
+        "D": 0,
+        "K": 0,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": true
+      },
+      {
+        "n": 9,
+        "D": 0,
+        "K": 0,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": true
+      },
+      {
+        "n": 10,
+        "D": 0,
+        "K": 0,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": true
+      },
+      {
+        "n": 11,
+        "D": 0,
+        "K": 0,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": true
+      },
+      {
+        "n": 12,
+        "D": 0,
+        "K": 0,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": true
+      },
+      {
+        "n": 13,
+        "D": 0,
+        "K": 0,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": true
+      },
+      {
+        "n": 14,
+        "D": 0,
+        "K": 0,
+        "R_at_Gray": 2,
+        "ancestor_budget_passed": true,
+        "antipodal_order": true,
+        "nonadditive_for_n_ge_3": true
+      }
+    ],
+    "analytic_statement": "Ancestor incident budgets hold for every vertex permutation. Even adding ancestor support and antipodal order permits a nonadditive all-dimensional R=2 scan. This does not satisfy additive coordinate-direction consistency."
+  },
+  "rows": [
+    {
+      "n": 9,
+      "weights": [
+        216,
+        246,
+        244,
+        442,
+        248,
+        642,
+        6,
+        601,
+        128
+      ],
+      "T": 1,
+      "shift": 0,
+      "D": 64,
+      "K": 178,
+      "W": 90,
+      "half_negative_cycle_mass": "11",
+      "full_negative_cycle_mass": "22",
+      "E_max_certified": 46,
+      "phi_certified": "22",
+      "R_min_certified": 265,
+      "odd_K5_minor": {
+        "branches": [
+          {
+            "gauges": [
+              [
+                194,
+                1
+              ],
+              [
+                254,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                194,
+                254
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                199,
+                -1
+              ],
+              [
+                202,
+                1
+              ],
+              [
+                255,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                199,
+                255
+              ],
+              [
+                202,
+                255
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                205,
+                1
+              ]
+            ],
+            "positive_tree": []
+          },
+          {
+            "gauges": [
+              [
+                207,
+                1
+              ],
+              [
+                243,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                207,
+                243
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                200,
+                -1
+              ],
+              [
+                240,
+                1
+              ],
+              [
+                252,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                200,
+                252
+              ],
+              [
+                240,
+                252
+              ]
+            ]
+          }
+        ],
+        "negative_bridges": [
+          [
+            0,
+            1,
+            [
+              194,
+              255,
+              1
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              254,
+              205,
+              1
+            ]
+          ],
+          [
+            0,
+            3,
+            [
+              254,
+              243,
+              -1
+            ]
+          ],
+          [
+            0,
+            4,
+            [
+              254,
+              240,
+              1
+            ]
+          ],
+          [
+            1,
+            2,
+            [
+              255,
+              205,
+              1
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              255,
+              207,
+              1
+            ]
+          ],
+          [
+            1,
+            4,
+            [
+              255,
+              252,
+              -1
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              205,
+              243,
+              1
+            ]
+          ],
+          [
+            2,
+            4,
+            [
+              205,
+              252,
+              1
+            ]
+          ],
+          [
+            3,
+            4,
+            [
+              243,
+              252,
+              -1
+            ]
+          ]
+        ]
+      },
+      "order_sha256": "4357b76050709ca186a46ca5ee03cefd3e5845b9d299c2edce75546803822b12"
+    },
+    {
+      "n": 10,
+      "weights": [
+        2774,
+        216,
+        246,
+        244,
+        442,
+        248,
+        642,
+        6,
+        601,
+        128
+      ],
+      "T": 2,
+      "shift": 256,
+      "D": 128,
+      "K": 356,
+      "W": 182,
+      "half_negative_cycle_mass": "23",
+      "full_negative_cycle_mass": "46",
+      "E_max_certified": 90,
+      "phi_certified": "46",
+      "R_min_certified": 531,
+      "odd_K5_minor": {
+        "branches": [
+          {
+            "gauges": [
+              [
+                450,
+                1
+              ],
+              [
+                510,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                450,
+                510
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                455,
+                -1
+              ],
+              [
+                458,
+                1
+              ],
+              [
+                511,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                455,
+                511
+              ],
+              [
+                458,
+                511
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                461,
+                1
+              ]
+            ],
+            "positive_tree": []
+          },
+          {
+            "gauges": [
+              [
+                463,
+                1
+              ],
+              [
+                499,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                463,
+                499
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                456,
+                -1
+              ],
+              [
+                496,
+                1
+              ],
+              [
+                508,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                456,
+                508
+              ],
+              [
+                496,
+                508
+              ]
+            ]
+          }
+        ],
+        "negative_bridges": [
+          [
+            0,
+            1,
+            [
+              450,
+              511,
+              1
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              510,
+              461,
+              1
+            ]
+          ],
+          [
+            0,
+            3,
+            [
+              510,
+              499,
+              -1
+            ]
+          ],
+          [
+            0,
+            4,
+            [
+              510,
+              496,
+              1
+            ]
+          ],
+          [
+            1,
+            2,
+            [
+              511,
+              461,
+              1
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              511,
+              463,
+              1
+            ]
+          ],
+          [
+            1,
+            4,
+            [
+              511,
+              508,
+              -1
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              461,
+              499,
+              1
+            ]
+          ],
+          [
+            2,
+            4,
+            [
+              461,
+              508,
+              1
+            ]
+          ],
+          [
+            3,
+            4,
+            [
+              499,
+              508,
+              -1
+            ]
+          ]
+        ]
+      },
+      "order_sha256": "efd5ef665f00c89a743fa5b8e05b86e876eef2ba167602bd147e65fe3a16d00b"
+    },
+    {
+      "n": 11,
+      "weights": [
+        2774,
+        5548,
+        216,
+        246,
+        244,
+        442,
+        248,
+        642,
+        6,
+        601,
+        128
+      ],
+      "T": 4,
+      "shift": 768,
+      "D": 256,
+      "K": 712,
+      "W": 366,
+      "half_negative_cycle_mass": "47",
+      "full_negative_cycle_mass": "94",
+      "E_max_certified": 178,
+      "phi_certified": "94",
+      "R_min_certified": 1063,
+      "odd_K5_minor": {
+        "branches": [
+          {
+            "gauges": [
+              [
+                962,
+                1
+              ],
+              [
+                1022,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                962,
+                1022
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                967,
+                -1
+              ],
+              [
+                970,
+                1
+              ],
+              [
+                1023,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                967,
+                1023
+              ],
+              [
+                970,
+                1023
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                973,
+                1
+              ]
+            ],
+            "positive_tree": []
+          },
+          {
+            "gauges": [
+              [
+                975,
+                1
+              ],
+              [
+                1011,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                975,
+                1011
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                968,
+                -1
+              ],
+              [
+                1008,
+                1
+              ],
+              [
+                1020,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                968,
+                1020
+              ],
+              [
+                1008,
+                1020
+              ]
+            ]
+          }
+        ],
+        "negative_bridges": [
+          [
+            0,
+            1,
+            [
+              962,
+              1023,
+              1
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              1022,
+              973,
+              1
+            ]
+          ],
+          [
+            0,
+            3,
+            [
+              1022,
+              1011,
+              -1
+            ]
+          ],
+          [
+            0,
+            4,
+            [
+              1022,
+              1008,
+              1
+            ]
+          ],
+          [
+            1,
+            2,
+            [
+              1023,
+              973,
+              1
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              1023,
+              975,
+              1
+            ]
+          ],
+          [
+            1,
+            4,
+            [
+              1023,
+              1020,
+              -1
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              973,
+              1011,
+              1
+            ]
+          ],
+          [
+            2,
+            4,
+            [
+              973,
+              1020,
+              1
+            ]
+          ],
+          [
+            3,
+            4,
+            [
+              1011,
+              1020,
+              -1
+            ]
+          ]
+        ]
+      },
+      "order_sha256": "42eaae728f89013c003f795dc49a547aeef8319adfa27fc21eb13ba26c520b1b"
+    },
+    {
+      "n": 12,
+      "weights": [
+        2774,
+        5548,
+        11096,
+        216,
+        246,
+        244,
+        442,
+        248,
+        642,
+        6,
+        601,
+        128
+      ],
+      "T": 8,
+      "shift": 1792,
+      "D": 512,
+      "K": 1424,
+      "W": 734,
+      "half_negative_cycle_mass": "95",
+      "full_negative_cycle_mass": "190",
+      "E_max_certified": 354,
+      "phi_certified": "190",
+      "R_min_certified": 2127,
+      "odd_K5_minor": {
+        "branches": [
+          {
+            "gauges": [
+              [
+                1986,
+                1
+              ],
+              [
+                2046,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                1986,
+                2046
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                1991,
+                -1
+              ],
+              [
+                1994,
+                1
+              ],
+              [
+                2047,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                1991,
+                2047
+              ],
+              [
+                1994,
+                2047
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                1997,
+                1
+              ]
+            ],
+            "positive_tree": []
+          },
+          {
+            "gauges": [
+              [
+                1999,
+                1
+              ],
+              [
+                2035,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                1999,
+                2035
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                1992,
+                -1
+              ],
+              [
+                2032,
+                1
+              ],
+              [
+                2044,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                1992,
+                2044
+              ],
+              [
+                2032,
+                2044
+              ]
+            ]
+          }
+        ],
+        "negative_bridges": [
+          [
+            0,
+            1,
+            [
+              1986,
+              2047,
+              1
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              2046,
+              1997,
+              1
+            ]
+          ],
+          [
+            0,
+            3,
+            [
+              2046,
+              2035,
+              -1
+            ]
+          ],
+          [
+            0,
+            4,
+            [
+              2046,
+              2032,
+              1
+            ]
+          ],
+          [
+            1,
+            2,
+            [
+              2047,
+              1997,
+              1
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              2047,
+              1999,
+              1
+            ]
+          ],
+          [
+            1,
+            4,
+            [
+              2047,
+              2044,
+              -1
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              1997,
+              2035,
+              1
+            ]
+          ],
+          [
+            2,
+            4,
+            [
+              1997,
+              2044,
+              1
+            ]
+          ],
+          [
+            3,
+            4,
+            [
+              2035,
+              2044,
+              -1
+            ]
+          ]
+        ]
+      },
+      "order_sha256": "72d8eb5f01c2bd88a74db0bd6f0f2c41efc87642f4d777c572b072a0ac5845df"
+    },
+    {
+      "n": 13,
+      "weights": [
+        2774,
+        5548,
+        11096,
+        22192,
+        216,
+        246,
+        244,
+        442,
+        248,
+        642,
+        6,
+        601,
+        128
+      ],
+      "T": 16,
+      "shift": 3840,
+      "D": 1024,
+      "K": 2848,
+      "W": 1470,
+      "half_negative_cycle_mass": "191",
+      "full_negative_cycle_mass": "382",
+      "E_max_certified": 706,
+      "phi_certified": "382",
+      "R_min_certified": 4255,
+      "odd_K5_minor": {
+        "branches": [
+          {
+            "gauges": [
+              [
+                4034,
+                1
+              ],
+              [
+                4094,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                4034,
+                4094
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                4039,
+                -1
+              ],
+              [
+                4042,
+                1
+              ],
+              [
+                4095,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                4039,
+                4095
+              ],
+              [
+                4042,
+                4095
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                4045,
+                1
+              ]
+            ],
+            "positive_tree": []
+          },
+          {
+            "gauges": [
+              [
+                4047,
+                1
+              ],
+              [
+                4083,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                4047,
+                4083
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                4040,
+                -1
+              ],
+              [
+                4080,
+                1
+              ],
+              [
+                4092,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                4040,
+                4092
+              ],
+              [
+                4080,
+                4092
+              ]
+            ]
+          }
+        ],
+        "negative_bridges": [
+          [
+            0,
+            1,
+            [
+              4034,
+              4095,
+              1
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              4094,
+              4045,
+              1
+            ]
+          ],
+          [
+            0,
+            3,
+            [
+              4094,
+              4083,
+              -1
+            ]
+          ],
+          [
+            0,
+            4,
+            [
+              4094,
+              4080,
+              1
+            ]
+          ],
+          [
+            1,
+            2,
+            [
+              4095,
+              4045,
+              1
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              4095,
+              4047,
+              1
+            ]
+          ],
+          [
+            1,
+            4,
+            [
+              4095,
+              4092,
+              -1
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              4045,
+              4083,
+              1
+            ]
+          ],
+          [
+            2,
+            4,
+            [
+              4045,
+              4092,
+              1
+            ]
+          ],
+          [
+            3,
+            4,
+            [
+              4083,
+              4092,
+              -1
+            ]
+          ]
+        ]
+      },
+      "order_sha256": "bb2b164cd06862d8222e258cbe305c769593d2f57008b20f15588ce7e02fae90"
+    },
+    {
+      "n": 14,
+      "weights": [
+        2774,
+        5548,
+        11096,
+        22192,
+        44384,
+        216,
+        246,
+        244,
+        442,
+        248,
+        642,
+        6,
+        601,
+        128
+      ],
+      "T": 32,
+      "shift": 7936,
+      "D": 2048,
+      "K": 5696,
+      "W": 2942,
+      "half_negative_cycle_mass": "383",
+      "full_negative_cycle_mass": "766",
+      "E_max_certified": 1410,
+      "phi_certified": "766",
+      "R_min_certified": 8511,
+      "odd_K5_minor": {
+        "branches": [
+          {
+            "gauges": [
+              [
+                8130,
+                1
+              ],
+              [
+                8190,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                8130,
+                8190
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                8135,
+                -1
+              ],
+              [
+                8138,
+                1
+              ],
+              [
+                8191,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                8135,
+                8191
+              ],
+              [
+                8138,
+                8191
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                8141,
+                1
+              ]
+            ],
+            "positive_tree": []
+          },
+          {
+            "gauges": [
+              [
+                8143,
+                1
+              ],
+              [
+                8179,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                8143,
+                8179
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                8136,
+                -1
+              ],
+              [
+                8176,
+                1
+              ],
+              [
+                8188,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                8136,
+                8188
+              ],
+              [
+                8176,
+                8188
+              ]
+            ]
+          }
+        ],
+        "negative_bridges": [
+          [
+            0,
+            1,
+            [
+              8130,
+              8191,
+              1
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              8190,
+              8141,
+              1
+            ]
+          ],
+          [
+            0,
+            3,
+            [
+              8190,
+              8179,
+              -1
+            ]
+          ],
+          [
+            0,
+            4,
+            [
+              8190,
+              8176,
+              1
+            ]
+          ],
+          [
+            1,
+            2,
+            [
+              8191,
+              8141,
+              1
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              8191,
+              8143,
+              1
+            ]
+          ],
+          [
+            1,
+            4,
+            [
+              8191,
+              8188,
+              -1
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              8141,
+              8179,
+              1
+            ]
+          ],
+          [
+            2,
+            4,
+            [
+              8141,
+              8188,
+              1
+            ]
+          ],
+          [
+            3,
+            4,
+            [
+              8179,
+              8188,
+              -1
+            ]
+          ]
+        ]
+      },
+      "order_sha256": "22517786b974876909a7e72958c389584e5ae557bded1eeadb92fbc08fb2c5b8"
+    },
+    {
+      "n": 15,
+      "weights": [
+        2774,
+        5548,
+        11096,
+        22192,
+        44384,
+        88768,
+        216,
+        246,
+        244,
+        442,
+        248,
+        642,
+        6,
+        601,
+        128
+      ],
+      "T": 64,
+      "shift": 16128,
+      "D": 4096,
+      "K": 11392,
+      "W": 5886,
+      "half_negative_cycle_mass": "767",
+      "full_negative_cycle_mass": "1534",
+      "E_max_certified": 2818,
+      "phi_certified": "1534",
+      "R_min_certified": 17023,
+      "odd_K5_minor": {
+        "branches": [
+          {
+            "gauges": [
+              [
+                16322,
+                1
+              ],
+              [
+                16382,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                16322,
+                16382
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                16327,
+                -1
+              ],
+              [
+                16330,
+                1
+              ],
+              [
+                16383,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                16327,
+                16383
+              ],
+              [
+                16330,
+                16383
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                16333,
+                1
+              ]
+            ],
+            "positive_tree": []
+          },
+          {
+            "gauges": [
+              [
+                16335,
+                1
+              ],
+              [
+                16371,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                16335,
+                16371
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                16328,
+                -1
+              ],
+              [
+                16368,
+                1
+              ],
+              [
+                16380,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                16328,
+                16380
+              ],
+              [
+                16368,
+                16380
+              ]
+            ]
+          }
+        ],
+        "negative_bridges": [
+          [
+            0,
+            1,
+            [
+              16322,
+              16383,
+              1
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              16382,
+              16333,
+              1
+            ]
+          ],
+          [
+            0,
+            3,
+            [
+              16382,
+              16371,
+              -1
+            ]
+          ],
+          [
+            0,
+            4,
+            [
+              16382,
+              16368,
+              1
+            ]
+          ],
+          [
+            1,
+            2,
+            [
+              16383,
+              16333,
+              1
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              16383,
+              16335,
+              1
+            ]
+          ],
+          [
+            1,
+            4,
+            [
+              16383,
+              16380,
+              -1
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              16333,
+              16371,
+              1
+            ]
+          ],
+          [
+            2,
+            4,
+            [
+              16333,
+              16380,
+              1
+            ]
+          ],
+          [
+            3,
+            4,
+            [
+              16371,
+              16380,
+              -1
+            ]
+          ]
+        ]
+      },
+      "order_sha256": "ec45fb199a29b61378e453b46aa2e66d649308b93cb28c00734379ff488d41bc"
+    },
+    {
+      "n": 16,
+      "weights": [
+        2774,
+        5548,
+        11096,
+        22192,
+        44384,
+        88768,
+        177536,
+        216,
+        246,
+        244,
+        442,
+        248,
+        642,
+        6,
+        601,
+        128
+      ],
+      "T": 128,
+      "shift": 32512,
+      "D": 8192,
+      "K": 22784,
+      "W": 11774,
+      "half_negative_cycle_mass": "1535",
+      "full_negative_cycle_mass": "3070",
+      "E_max_certified": 5634,
+      "phi_certified": "3070",
+      "R_min_certified": 34047,
+      "odd_K5_minor": {
+        "branches": [
+          {
+            "gauges": [
+              [
+                32706,
+                1
+              ],
+              [
+                32766,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                32706,
+                32766
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                32711,
+                -1
+              ],
+              [
+                32714,
+                1
+              ],
+              [
+                32767,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                32711,
+                32767
+              ],
+              [
+                32714,
+                32767
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                32717,
+                1
+              ]
+            ],
+            "positive_tree": []
+          },
+          {
+            "gauges": [
+              [
+                32719,
+                1
+              ],
+              [
+                32755,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                32719,
+                32755
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                32712,
+                -1
+              ],
+              [
+                32752,
+                1
+              ],
+              [
+                32764,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                32712,
+                32764
+              ],
+              [
+                32752,
+                32764
+              ]
+            ]
+          }
+        ],
+        "negative_bridges": [
+          [
+            0,
+            1,
+            [
+              32706,
+              32767,
+              1
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              32766,
+              32717,
+              1
+            ]
+          ],
+          [
+            0,
+            3,
+            [
+              32766,
+              32755,
+              -1
+            ]
+          ],
+          [
+            0,
+            4,
+            [
+              32766,
+              32752,
+              1
+            ]
+          ],
+          [
+            1,
+            2,
+            [
+              32767,
+              32717,
+              1
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              32767,
+              32719,
+              1
+            ]
+          ],
+          [
+            1,
+            4,
+            [
+              32767,
+              32764,
+              -1
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              32717,
+              32755,
+              1
+            ]
+          ],
+          [
+            2,
+            4,
+            [
+              32717,
+              32764,
+              1
+            ]
+          ],
+          [
+            3,
+            4,
+            [
+              32755,
+              32764,
+              -1
+            ]
+          ]
+        ]
+      },
+      "order_sha256": "f564e4daf8ff7e9ff642f7d5c025ffbe5d5ab0c228d6a9c790dafc7471a50dc5"
+    },
+    {
+      "n": 17,
+      "weights": [
+        2774,
+        5548,
+        11096,
+        22192,
+        44384,
+        88768,
+        177536,
+        355072,
+        216,
+        246,
+        244,
+        442,
+        248,
+        642,
+        6,
+        601,
+        128
+      ],
+      "T": 256,
+      "shift": 65280,
+      "D": 16384,
+      "K": 45568,
+      "W": 23550,
+      "half_negative_cycle_mass": "3071",
+      "full_negative_cycle_mass": "6142",
+      "E_max_certified": 11266,
+      "phi_certified": "6142",
+      "R_min_certified": 68095,
+      "odd_K5_minor": {
+        "branches": [
+          {
+            "gauges": [
+              [
+                65474,
+                1
+              ],
+              [
+                65534,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                65474,
+                65534
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                65479,
+                -1
+              ],
+              [
+                65482,
+                1
+              ],
+              [
+                65535,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                65479,
+                65535
+              ],
+              [
+                65482,
+                65535
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                65485,
+                1
+              ]
+            ],
+            "positive_tree": []
+          },
+          {
+            "gauges": [
+              [
+                65487,
+                1
+              ],
+              [
+                65523,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                65487,
+                65523
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                65480,
+                -1
+              ],
+              [
+                65520,
+                1
+              ],
+              [
+                65532,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                65480,
+                65532
+              ],
+              [
+                65520,
+                65532
+              ]
+            ]
+          }
+        ],
+        "negative_bridges": [
+          [
+            0,
+            1,
+            [
+              65474,
+              65535,
+              1
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              65534,
+              65485,
+              1
+            ]
+          ],
+          [
+            0,
+            3,
+            [
+              65534,
+              65523,
+              -1
+            ]
+          ],
+          [
+            0,
+            4,
+            [
+              65534,
+              65520,
+              1
+            ]
+          ],
+          [
+            1,
+            2,
+            [
+              65535,
+              65485,
+              1
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              65535,
+              65487,
+              1
+            ]
+          ],
+          [
+            1,
+            4,
+            [
+              65535,
+              65532,
+              -1
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              65485,
+              65523,
+              1
+            ]
+          ],
+          [
+            2,
+            4,
+            [
+              65485,
+              65532,
+              1
+            ]
+          ],
+          [
+            3,
+            4,
+            [
+              65523,
+              65532,
+              -1
+            ]
+          ]
+        ]
+      },
+      "order_sha256": "a74eeb410c38c0c5b66dd58dd8f9ac2ce627df8425a1c12d96147bf90c08f565"
+    },
+    {
+      "n": 18,
+      "weights": [
+        2774,
+        5548,
+        11096,
+        22192,
+        44384,
+        88768,
+        177536,
+        355072,
+        710144,
+        216,
+        246,
+        244,
+        442,
+        248,
+        642,
+        6,
+        601,
+        128
+      ],
+      "T": 512,
+      "shift": 130816,
+      "D": 32768,
+      "K": 91136,
+      "W": 47102,
+      "half_negative_cycle_mass": "6143",
+      "full_negative_cycle_mass": "12286",
+      "E_max_certified": 22530,
+      "phi_certified": "12286",
+      "R_min_certified": 136191,
+      "odd_K5_minor": {
+        "branches": [
+          {
+            "gauges": [
+              [
+                131010,
+                1
+              ],
+              [
+                131070,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                131010,
+                131070
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                131015,
+                -1
+              ],
+              [
+                131018,
+                1
+              ],
+              [
+                131071,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                131015,
+                131071
+              ],
+              [
+                131018,
+                131071
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                131021,
+                1
+              ]
+            ],
+            "positive_tree": []
+          },
+          {
+            "gauges": [
+              [
+                131023,
+                1
+              ],
+              [
+                131059,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                131023,
+                131059
+              ]
+            ]
+          },
+          {
+            "gauges": [
+              [
+                131016,
+                -1
+              ],
+              [
+                131056,
+                1
+              ],
+              [
+                131068,
+                -1
+              ]
+            ],
+            "positive_tree": [
+              [
+                131016,
+                131068
+              ],
+              [
+                131056,
+                131068
+              ]
+            ]
+          }
+        ],
+        "negative_bridges": [
+          [
+            0,
+            1,
+            [
+              131010,
+              131071,
+              1
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              131070,
+              131021,
+              1
+            ]
+          ],
+          [
+            0,
+            3,
+            [
+              131070,
+              131059,
+              -1
+            ]
+          ],
+          [
+            0,
+            4,
+            [
+              131070,
+              131056,
+              1
+            ]
+          ],
+          [
+            1,
+            2,
+            [
+              131071,
+              131021,
+              1
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              131071,
+              131023,
+              1
+            ]
+          ],
+          [
+            1,
+            4,
+            [
+              131071,
+              131068,
+              -1
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              131021,
+              131059,
+              1
+            ]
+          ],
+          [
+            2,
+            4,
+            [
+              131021,
+              131068,
+              1
+            ]
+          ],
+          [
+            3,
+            4,
+            [
+              131059,
+              131068,
+              -1
+            ]
+          ]
+        ]
+      },
+      "order_sha256": "d15efaef4a5e0da817513eac29d08b77793dd993b5c3d2311df04eeaacd56d45"
+    }
+  ],
+  "violations": 0,
+  "seconds": 3.3203239729919005,
+  "audit_sha256": "a1861f91e9cf37121503ab75ae2ca9cf2c5c46390ea664ee400d1d8146272417"
+}
