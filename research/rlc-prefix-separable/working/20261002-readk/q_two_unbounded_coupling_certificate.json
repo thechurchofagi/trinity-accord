@@ -1,0 +1,272 @@
+{
+  "status": "VERIFIED_ALL_DIMENSION_ACTUAL_Q_TWO_UNBOUNDED_ROOT_COUPLING",
+  "analytic_theorem": "For every n=5+d, T=2^d, actual positive integer weights (46,92,...,46*2^(d-1),3,22,2,12,6) have raw q=2, D=16T, root couplings +(2T+1),-(2T+1), W=4T+2, K=6T-2 and min over EVERY paired mask/root equal22T-1. Hence no dimension-free bound on root-coupling size depending only on fixed raw q. Run density tends11/16; no counterexample to positive-density main target.",
+  "source_core_weights": [
+    3,
+    22,
+    2,
+    12,
+    6
+  ],
+  "core_minimizing_mask_decimal": "8192",
+  "all_dimension_proof": "Exact base integer order/coefficients plus independently derived join contributions to the genuine q-invariant row lift. Rows replicate core J=3; each join subtracts1 from labelA and adds1 to labelB. All lower labels are absent from RAW support; full spin optimization has only two active variables.",
+  "rows": [
+    {
+      "n": 5,
+      "d": 0,
+      "T": 1,
+      "weights": [
+        3,
+        22,
+        2,
+        12,
+        6
+      ],
+      "q": 2,
+      "D": 16,
+      "W": 6,
+      "K": 4,
+      "root_coupling_abs": 3,
+      "exact_minimum_over_all_paired_masks": 21,
+      "distinct_runs": [
+        21,
+        24,
+        27
+      ],
+      "order_sha256": "b6ebaa5c7a676267b202ae3712dea54e9fae1db709f14d676b459a3ec0a4bb0b"
+    },
+    {
+      "n": 6,
+      "d": 1,
+      "T": 2,
+      "weights": [
+        46,
+        3,
+        22,
+        2,
+        12,
+        6
+      ],
+      "q": 2,
+      "D": 32,
+      "W": 10,
+      "K": 10,
+      "root_coupling_abs": 5,
+      "exact_minimum_over_all_paired_masks": 43,
+      "distinct_runs": [
+        43,
+        48,
+        53
+      ],
+      "order_sha256": "548e34b1cf243f344fa32cea903596e4f30e624d262f97514ad7908ea7fac604"
+    },
+    {
+      "n": 7,
+      "d": 2,
+      "T": 4,
+      "weights": [
+        46,
+        92,
+        3,
+        22,
+        2,
+        12,
+        6
+      ],
+      "q": 2,
+      "D": 64,
+      "W": 18,
+      "K": 22,
+      "root_coupling_abs": 9,
+      "exact_minimum_over_all_paired_masks": 87,
+      "distinct_runs": [
+        87,
+        96,
+        105
+      ],
+      "order_sha256": "d71fe22e494974b6d82755beca0c858da510698ae0233425680db8bb39f9d626"
+    },
+    {
+      "n": 8,
+      "d": 3,
+      "T": 8,
+      "weights": [
+        46,
+        92,
+        184,
+        3,
+        22,
+        2,
+        12,
+        6
+      ],
+      "q": 2,
+      "D": 128,
+      "W": 34,
+      "K": 46,
+      "root_coupling_abs": 17,
+      "exact_minimum_over_all_paired_masks": 175,
+      "distinct_runs": [
+        175,
+        192,
+        209
+      ],
+      "order_sha256": "9c7270d87a36adff42e39acd04f454ed7a3d57dc4e4c0bbcf1b7392b30acae2c"
+    },
+    {
+      "n": 9,
+      "d": 4,
+      "T": 16,
+      "weights": [
+        46,
+        92,
+        184,
+        368,
+        3,
+        22,
+        2,
+        12,
+        6
+      ],
+      "q": 2,
+      "D": 256,
+      "W": 66,
+      "K": 94,
+      "root_coupling_abs": 33,
+      "exact_minimum_over_all_paired_masks": 351,
+      "distinct_runs": [
+        351,
+        384,
+        417
+      ],
+      "order_sha256": "ab627e2e28286022b28589e7964102e4bed338cfaad5bd89bf715d0c0d8d2d63"
+    },
+    {
+      "n": 10,
+      "d": 5,
+      "T": 32,
+      "weights": [
+        46,
+        92,
+        184,
+        368,
+        736,
+        3,
+        22,
+        2,
+        12,
+        6
+      ],
+      "q": 2,
+      "D": 512,
+      "W": 130,
+      "K": 190,
+      "root_coupling_abs": 65,
+      "exact_minimum_over_all_paired_masks": 703,
+      "distinct_runs": [
+        703,
+        768,
+        833
+      ],
+      "order_sha256": "332c515fc312cb0721bac4c4ba55c513084e7213bc63b022acc560f756632353"
+    },
+    {
+      "n": 11,
+      "d": 6,
+      "T": 64,
+      "weights": [
+        46,
+        92,
+        184,
+        368,
+        736,
+        1472,
+        3,
+        22,
+        2,
+        12,
+        6
+      ],
+      "q": 2,
+      "D": 1024,
+      "W": 258,
+      "K": 382,
+      "root_coupling_abs": 129,
+      "exact_minimum_over_all_paired_masks": 1407,
+      "distinct_runs": [
+        1407,
+        1536,
+        1665
+      ],
+      "order_sha256": "530968e66f1220cd97788ecb2f46d25996dcb416ee39376d2b18c27f19bc06b4"
+    },
+    {
+      "n": 12,
+      "d": 7,
+      "T": 128,
+      "weights": [
+        46,
+        92,
+        184,
+        368,
+        736,
+        1472,
+        2944,
+        3,
+        22,
+        2,
+        12,
+        6
+      ],
+      "q": 2,
+      "D": 2048,
+      "W": 514,
+      "K": 766,
+      "root_coupling_abs": 257,
+      "exact_minimum_over_all_paired_masks": 2815,
+      "distinct_runs": [
+        2815,
+        3072,
+        3329
+      ],
+      "order_sha256": "1679a1075f8c5a46b9be68a6381f7e69d642ea78a93ff0213370d4017086415a"
+    },
+    {
+      "n": 13,
+      "d": 8,
+      "T": 256,
+      "weights": [
+        46,
+        92,
+        184,
+        368,
+        736,
+        1472,
+        2944,
+        5888,
+        3,
+        22,
+        2,
+        12,
+        6
+      ],
+      "q": 2,
+      "D": 4096,
+      "W": 1026,
+      "K": 1534,
+      "root_coupling_abs": 513,
+      "exact_minimum_over_all_paired_masks": 5631,
+      "distinct_runs": [
+        5631,
+        6144,
+        6657
+      ],
+      "order_sha256": "a64e3618627f01099c93f0e77654098bb9ba7329de627a49644e8a789d876a79"
+    }
+  ],
+  "finite_dimensions": "Q5..Q13",
+  "direct_rank_audits": 216,
+  "violations": 0,
+  "seconds": 1.1179496170079801,
+  "audit_sha256": "536b1ec79d69fe242c15dfa7b2b4073c028bed6026420f01999b683984b9e6cf"
+}
