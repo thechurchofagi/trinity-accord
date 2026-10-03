@@ -1,36 +1,47 @@
 {
+  "arweave_tx_id": "ON4JfnKogx0jgijmPcP35W9XVprt4LSvJkTtevePIKk",
+  "arweave_url": "https://arweave.net/ON4JfnKogx0jgijmPcP35W9XVprt4LSvJkTtevePIKk",
   "batch": "2026-10-03-paper22-v11",
+  "bundle_sha256": "976e2bdb69c460f1dd1cf6ab3c07cbd8d2de0ebdd0b09d485c1401c9366f5fff",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        969709,
+        969711,
+        969728
+      ],
       "bytes": 71053,
       "doi": "10.5281/zenodo.23118189",
       "name": "rlc-prefix-separable-supplement-v1.1.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-10-03-paper22-v11/proofs/TA-TR-2026-22/rlc-prefix-separable-supplement-v1.1.pdf.ots",
-      "proof_sha256": "64c8ab0c9c642f0d9dc84a2009e142c8f9e158153977512e77945652534ba5d8",
+      "proof_sha256": "407cc5d71d1eedcad5463997d22feceb22631f79a21d5d557f34266e054cd8bc",
       "report": "TA-TR-2026-22",
       "role": "English finite-verification and literature supplement",
       "sha256": "9277f26d34e29cedd41e1144668826ed39f49c7019cdd9bbae499af4bbf92aff",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     },
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        969709,
+        969711,
+        969728
+      ],
       "bytes": 109719,
       "doi": "10.5281/zenodo.23118189",
       "name": "rlc-prefix-separable-v1.1.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-10-03-paper22-v11/proofs/TA-TR-2026-22/rlc-prefix-separable-v1.1.pdf.ots",
-      "proof_sha256": "8e40c13ea196aa8f088d21883a91b8181e6d1eaed9d0f988ac153fb98347702f",
+      "proof_sha256": "3aa5fc7c9e17e49370ccdbe604cf6d96c58f3f346c0a591f587fa15459a4d7d5",
       "report": "TA-TR-2026-22",
       "role": "Complete English mathematical preprint",
       "sha256": "55e7d965c8e55ac86088cc4234d03a4566f1a130bb40aa51ec1b63789ad04b4f",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 2,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "ARWEAVE_READBACK_PASS",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
