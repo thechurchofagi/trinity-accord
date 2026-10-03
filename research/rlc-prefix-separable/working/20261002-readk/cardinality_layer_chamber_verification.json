@@ -1,0 +1,37 @@
+{
+  "state": "COMPLETE_Q6_CARDINALITY_LAYER_SUBCLASS_PASS",
+  "feasible_comparison_patterns": 12,
+  "strict_infeasibility_certificates": 20,
+  "distinct_positive_model_orders": 1440,
+  "actual_signed_integer_scans": 92160,
+  "minimum_R_C": [
+    29,
+    30
+  ],
+  "cyclic_minimum_histogram": {
+    "30": 8,
+    "34": 124,
+    "36": 160,
+    "38": 192,
+    "40": 240,
+    "42": 168,
+    "44": 264,
+    "46": 84,
+    "48": 184,
+    "52": 16
+  },
+  "attaining_signed_weights": [
+    176,
+    -178,
+    175,
+    172,
+    180,
+    43
+  ],
+  "certificate_sha256": "d5dc0023ff5c9bad8f381488f054752562be269637584788362c718bcf67ca52",
+  "verification_digest": "43a7784c566462b19a5cb2bf572cbe12a5d99450942323dbd3f1612578eb66b9",
+  "violations": 0,
+  "elapsed_seconds": 3.315,
+  "limitations": "Exact finite subclass conclusion. No exact G6 or M6, and no proof of all-dimensional positive density.",
+  "certificate_encoding": "Parallel cost/graph/reflection arrays in deterministic generator order, plus an aggregate order-hash chain. Packing checked against all original records; mathematical verification unchanged."
+}
