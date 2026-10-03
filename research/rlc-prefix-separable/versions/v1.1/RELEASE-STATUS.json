@@ -1,0 +1,21 @@
+{
+  "schema": "ta22.version-release-status.v1",
+  "report_number": "TA-TR-2026-22",
+  "version": "1.1",
+  "doi": "10.5281/zenodo.23118189",
+  "record_url": "https://zenodo.org/records/23118189",
+  "publication_state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "public_file_count": 13,
+  "public_readback_authenticated": false,
+  "publication_receipt": "publication-record.json",
+  "expected_manifest_sha256": "b82a452c4552502e52fde9181bae60a15760c42d448924e6f21a78a6ce6d9a6a",
+  "repository_pr": 1257,
+  "repository_merge_commit": "1c5226a081f94a80141c905873e23689e72783fc",
+  "ots_submission_state": "SUBMITTED_FOR_BOTH_EXACT_PDFS_PENDING_BITCOIN",
+  "ots_status_receipt": "research/paper-timestamps/2026-10-03-paper22-v11/status.json",
+  "preservation_state": "BITCOIN_VERIFICATION_AND_ARWEAVE_READBACK_PENDING",
+  "preservation_continuation": "The installed exact-version hourly workflow upgrades proofs, verifies Bitcoin headers, and archives only after verification within the strict cumulative fee below 0.1 AR. Paid transactions are reused for readback.",
+  "unrestricted_constant_density_target": "OPEN",
+  "peer_reviewed": false,
+  "status_note": "This release checkpoint records submission, not Bitcoin verification or completed Arweave preservation. Consult the linked preservation receipt for subsequent states."
+}
