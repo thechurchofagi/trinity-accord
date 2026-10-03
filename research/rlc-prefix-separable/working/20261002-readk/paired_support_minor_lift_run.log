@@ -1,0 +1,25 @@
+{"base_dimension": 6, "n": 6, "kind": "K4_minor", "T": 1, "D": 16, "K": 11, "W": 24}
+{"base_dimension": 6, "n": 7, "kind": "K4_minor", "T": 2, "D": 32, "K": 22, "W": 50}
+{"base_dimension": 6, "n": 8, "kind": "K4_minor", "T": 4, "D": 64, "K": 44, "W": 102}
+{"base_dimension": 6, "n": 9, "kind": "K4_minor", "T": 8, "D": 128, "K": 88, "W": 206}
+{"base_dimension": 6, "n": 10, "kind": "K4_minor", "T": 16, "D": 256, "K": 176, "W": 414}
+{"base_dimension": 6, "n": 11, "kind": "K4_minor", "T": 32, "D": 512, "K": 352, "W": 830}
+{"base_dimension": 6, "n": 12, "kind": "K4_minor", "T": 64, "D": 1024, "K": 704, "W": 1662}
+{"base_dimension": 6, "n": 13, "kind": "K4_minor", "T": 128, "D": 2048, "K": 1408, "W": 3326}
+{"base_dimension": 6, "n": 14, "kind": "K4_minor", "T": 256, "D": 4096, "K": 2816, "W": 6654}
+{"base_dimension": 6, "n": 15, "kind": "K4_minor", "T": 512, "D": 8192, "K": 5632, "W": 13310}
+{"base_dimension": 6, "n": 16, "kind": "K4_minor", "T": 1024, "D": 16384, "K": 11264, "W": 26622}
+{"base_dimension": 6, "n": 17, "kind": "K4_minor", "T": 2048, "D": 32768, "K": 22528, "W": 53246}
+{"base_dimension": 6, "n": 18, "kind": "K4_minor", "T": 4096, "D": 65536, "K": 45056, "W": 106494}
+{"base_dimension": 8, "n": 8, "kind": "K33_subgraph", "T": 1, "D": 80, "K": 62, "W": 50}
+{"base_dimension": 8, "n": 9, "kind": "K33_subgraph", "T": 2, "D": 160, "K": 124, "W": 102}
+{"base_dimension": 8, "n": 10, "kind": "K33_subgraph", "T": 4, "D": 320, "K": 248, "W": 206}
+{"base_dimension": 8, "n": 11, "kind": "K33_subgraph", "T": 8, "D": 640, "K": 496, "W": 414}
+{"base_dimension": 8, "n": 12, "kind": "K33_subgraph", "T": 16, "D": 1280, "K": 992, "W": 830}
+{"base_dimension": 8, "n": 13, "kind": "K33_subgraph", "T": 32, "D": 2560, "K": 1984, "W": 1662}
+{"base_dimension": 8, "n": 14, "kind": "K33_subgraph", "T": 64, "D": 5120, "K": 3968, "W": 3326}
+{"base_dimension": 8, "n": 15, "kind": "K33_subgraph", "T": 128, "D": 10240, "K": 7936, "W": 6654}
+{"base_dimension": 8, "n": 16, "kind": "K33_subgraph", "T": 256, "D": 20480, "K": 15872, "W": 13310}
+{"base_dimension": 8, "n": 17, "kind": "K33_subgraph", "T": 512, "D": 40960, "K": 31744, "W": 26622}
+{"base_dimension": 8, "n": 18, "kind": "K33_subgraph", "T": 1024, "D": 81920, "K": 63488, "W": 53246}
+{"status": "VERIFIED_ALL_DIMENSION_SIGNED_SUPPORT_LIFT_AND_UNSIGNED_MINOR_OBSTRUCTIONS", "analytic_statement": "For any positive generic d-coordinate base weights, adding m lowest coordinates with coefficients (sum(base)+1)*2^j preserves every old coupling sign under shift 2^(d+m-1)-2^(d-1). Hence a genuine K4 half-graph minor exists in every n>=6 and a genuine K33 half-graph subgraph exists in every n>=8.", "scope": "Excludes universal series-parallel/treewidth-two and planar half-graph shortcuts. No odd-K5 signed minor, failure of weak bipartiteness, or failure of a positive-density RLC lower bound is inferred.", "violations": 0, "seconds": 1.3347272190003423, "audit_sha256": "a7b3f4aedf6f6d1a4adc6555ac096453a5e20952462599c97457c35ea3f6cdfe"}

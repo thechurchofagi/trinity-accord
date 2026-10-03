@@ -1,0 +1,13 @@
+{"completed": 1, "counts": {"exact_rational_optimum": 1}, "exactness_gaps": 0, "quarter_failures": 0, "elapsed": 0.019587279006373137}
+{"completed": 65, "counts": {"exact_rational_optimum": 65}, "exactness_gaps": 0, "quarter_failures": 0, "elapsed": 0.06715813100163359}
+{"completed": 129, "counts": {"exact_rational_optimum": 129}, "exactness_gaps": 0, "quarter_failures": 0, "elapsed": 0.08047654200345278}
+{"completed": 193, "counts": {"exact_rational_optimum": 193}, "exactness_gaps": 0, "quarter_failures": 0, "elapsed": 0.09530672499386128}
+{"completed": 257, "counts": {"exact_rational_optimum": 257}, "exactness_gaps": 0, "quarter_failures": 0, "elapsed": 0.1260825140052475}
+{"completed": 321, "counts": {"exact_rational_optimum": 321}, "exactness_gaps": 0, "quarter_failures": 0, "elapsed": 0.14873325699591078}
+{"completed": 385, "counts": {"exact_rational_optimum": 384, "nongeneric": 1}, "exactness_gaps": 0, "quarter_failures": 0, "elapsed": 0.21414131400524639}
+{"completed": 449, "counts": {"exact_rational_optimum": 448, "nongeneric": 1}, "exactness_gaps": 0, "quarter_failures": 0, "elapsed": 0.2765459980000742}
+{"completed": 513, "counts": {"exact_rational_optimum": 512, "nongeneric": 1}, "exactness_gaps": 0, "quarter_failures": 0, "elapsed": 0.3363313890004065}
+{"completed": 577, "counts": {"exact_rational_optimum": 576, "nongeneric": 1}, "exactness_gaps": 0, "quarter_failures": 0, "elapsed": 0.4211942719994113}
+{"completed": 641, "counts": {"exact_rational_optimum": 640, "nongeneric": 1}, "exactness_gaps": 0, "quarter_failures": 0, "elapsed": 0.5207508710009279}
+{"completed": 705, "counts": {"exact_rational_optimum": 704, "nongeneric": 1}, "exactness_gaps": 0, "quarter_failures": 0, "elapsed": 0.637011769998935}
+{"status": "EXACT_RATIONAL_JOINT_PACKING_PRESSURE_ONLY", "seed": 202610031145, "counts": {"exact_rational_optimum": 755, "nongeneric": 1}, "all_positive_Q4_representative_metrics": 336, "coverage_warning": "Higher dimensions are finite samples; enumeration-limited cases certify no packing optimum.", "seconds": 0.7624563650024356, "audit_sha256": "9e01a2896803896efbebbb21a29c6d035a00eb89ff68a87c09b70ebb45a0595d"}

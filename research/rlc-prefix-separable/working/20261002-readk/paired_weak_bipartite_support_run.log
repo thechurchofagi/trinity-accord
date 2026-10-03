@@ -1,0 +1,14 @@
+{"completed_scans": 1, "status_counts": {"exact_rational_optimum": 2}, "exact_cover_gaps": 0, "elapsed": 0.010275891007040627}
+{"completed_scans": 33, "status_counts": {"exact_rational_optimum": 66}, "exact_cover_gaps": 0, "elapsed": 0.05510030800360255}
+{"completed_scans": 65, "status_counts": {"exact_rational_optimum": 130}, "exact_cover_gaps": 0, "elapsed": 0.11181054900225718}
+{"completed_scans": 97, "status_counts": {"exact_rational_optimum": 194}, "exact_cover_gaps": 0, "elapsed": 0.25542269500147086}
+{"completed_scans": 129, "status_counts": {"exact_rational_optimum": 258}, "exact_cover_gaps": 0, "elapsed": 0.3695861920132302}
+{"completed_scans": 161, "status_counts": {"exact_rational_optimum": 322}, "exact_cover_gaps": 0, "elapsed": 0.8007519910024712}
+{"completed_scans": 193, "status_counts": {"exact_rational_optimum": 386}, "exact_cover_gaps": 0, "elapsed": 1.1606626610009698}
+{"completed_scans": 225, "status_counts": {"exact_rational_optimum": 450}, "exact_cover_gaps": 0, "elapsed": 1.7022535990108736}
+{"completed_scans": 257, "status_counts": {"exact_rational_optimum": 514}, "exact_cover_gaps": 0, "elapsed": 2.478799317002995}
+{"completed_scans": 289, "status_counts": {"exact_rational_optimum": 574, "enumeration_limited": 4}, "exact_cover_gaps": 0, "elapsed": 5.039997431013035}
+{"completed_scans": 321, "status_counts": {"exact_rational_optimum": 630, "enumeration_limited": 12}, "exact_cover_gaps": 0, "elapsed": 7.929602508011158}
+{"completed_scans": 353, "status_counts": {"exact_rational_optimum": 684, "enumeration_limited": 22}, "exact_cover_gaps": 0, "elapsed": 12.680077717013774}
+{"completed_scans": 385, "status_counts": {"exact_rational_optimum": 716, "enumeration_limited": 54}, "exact_cover_gaps": 0, "elapsed": 24.435601958000916}
+{"status": "WEAK_BIPARTITE_SUPPORT_PRESSURE_WITH_UNSIGNED_K4_EXCLUSION", "seed": 202610031202, "K4_minor_certificate": {"weights": [36014, 4119, 36488, 65387, 58395, 45969], "half_edges": [[16, 24, -1], [16, 28, 1], [16, 31, -1], [17, 28, -1], [17, 30, -1], [18, 28, -1], [18, 31, -1], [19, 28, 1], [19, 31, -1], [24, 30, 1], [25, 30, -1], [25, 31, -1]], "branch_sets": [[16, 24], [28, 17, 18], [30, 25], [31]], "bridges": [[0, 1, [16, 28]], [0, 2, [24, 30]], [0, 3, [16, 31]], [1, 2, [17, 30]], [1, 3, [18, 31]], [2, 3, [25, 31]]], "scope": "Genuine generic Q6 half graph contains an unsigned K4 minor; rules out uniform series-parallel/treewidth-two structure, not weak bipartiteness or RLC density."}, "counts": {"exact_rational_optimum": 716, "enumeration_limited": 54}, "min_degree_fill_width_histogram": {"3": 117, "1": 63, "0": 12, "2": 150, "4": 39, "5": 4}, "scope": "Alternative-capacity cover gaps would refute signed-support idealness, not actual scan frustration. Absence of sampled gaps proves no all-dimensional structural theorem.", "seconds": 24.43566293299955, "audit_sha256": "fc17acbce8c546ba1c6b3125b4a70d7bb5c2c7fa9943589e3b912881d12dfb21"}
