@@ -255,7 +255,8 @@ def prepare():
         if type(rid) is not int or rid in PROTECTED:raise RuntimeError("Invalid linked descendant")
         dep=read(z,f"/deposit/depositions/{rid}")
         md=dep.get("metadata",{})
-        if str(dep.get("conceptrecid"))!=concept or md.get("title")!=TITLE or str(md.get("version")) not in ("1.0",VERSION):raise RuntimeError("Unexpected linked descendant")
+        if str(dep.get("conceptrecid"))!=concept or md.get("title")!=TITLE or md.get("version") not in (None,"1.0",VERSION):
+            raise RuntimeError("Unexpected linked descendant: "+json.dumps({'record_id':rid,'title':md.get('title'),'version':md.get('version'),'conceptrecid':dep.get('conceptrecid'),'expected_conceptrecid':concept}))
         if [x.get("name") for x in md.get("creators",[])]!=["Liu, Hongju"]:raise RuntimeError("Descendant creator changed")
         if dep.get("submitted"):raise RuntimeError("Descendant already published: reconcile, do not create")
         dep=z.request(f"/deposit/depositions/{rid}","PUT",{"metadata":metadata()})

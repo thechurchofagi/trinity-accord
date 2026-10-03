@@ -2,11 +2,24 @@ test_first_action_then_reuse_same_reserved_descendant (test_publication.Guards.t
 test_predecessor_is_protected_and_draft_url_is_strict (test_publication.Guards.test_predecessor_is_protected_and_draft_url_is_strict) ... ok
 test_uncertain_prior_action_is_not_repeated (test_publication.Guards.test_uncertain_prior_action_is_not_repeated) ... ok
 test_unrelated_linked_draft_is_not_adopted (test_publication.Guards.test_unrelated_linked_draft_is_not_adopted) ... ok
+test_valid_linked_draft_with_unset_version_is_recovered (test_publication.Guards.test_valid_linked_draft_with_unset_version_is_recovered) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.005s
+Ran 5 tests in 0.008s
 
 OK
+{
+  "state": "RESERVED_NOT_PUBLISHED",
+  "record_id": 23109999,
+  "doi": "10.5281/zenodo.23109999",
+  "report_number": "TA-TR-2026-22",
+  "title": "Exponential Run Complexity of Prefix-Separable Orders on the Boolean Cube",
+  "version": "1.1",
+  "previous_record_id": 23103274,
+  "previous_doi": "10.5281/zenodo.23103274",
+  "conceptrecid": "23103273",
+  "prior_records_modified": false
+}
 {
   "state": "RESERVED_NOT_PUBLISHED",
   "record_id": 23109999,

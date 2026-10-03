@@ -21,7 +21,8 @@
     "mean doubling counterexample actual integer weights",
     "controlled loss mean and paired seed explicitly unproved",
     "old edition protected",
-    "ambiguous linked-version action idempotency tests passed"
+    "ambiguous linked-version action idempotency tests passed",
+    "same-lineage unsubmitted drafts with unset inherited version recovered without another newversion action"
   ],
   "source_files": [
     {
@@ -42,11 +43,11 @@
     },
     {
       "name": "test_publication.py",
-      "sha256": "05d65452c07986c8eae08c9eec125151e1b203596db2e067ff57a0f61b21c334"
+      "sha256": "b0766ba37bd002832315a02ba67c2e008b911c3e03372220ffbb761aac2a2765"
     },
     {
       "name": "publication.py",
-      "sha256": "4cea59cdb21f3a2deefe29dba84be6a12ed80f69ef55e33fec5ee3bd27847270"
+      "sha256": "649237407d296a4a75b9401c5bf8737ea6cca0a401712612d66456017298e5b5"
     },
     {
       "name": "release-verification.json",
@@ -54,7 +55,7 @@
     },
     {
       "name": "publication-guard-tests.log",
-      "sha256": "3fcce7af2bad2e1c9919ee2b10a1829504a55155eb4edca395d9b1a6a69e3305"
+      "sha256": "3deb585e0666346179433cc934fbd49e42db094b110981785d89d44130630004"
     },
     {
       "name": "verification.json",

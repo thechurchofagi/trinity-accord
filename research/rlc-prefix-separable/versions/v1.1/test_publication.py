@@ -44,6 +44,12 @@ class Guards(unittest.TestCase):
             f=Fake();f.has_draft=True;f.wrong=True
             with self.assertRaisesRegex(RuntimeError,'Unexpected linked'):self.run_prepare(f,Path(td))
             self.assertFalse(any(method!='GET' for method,url in f.calls))
+    def test_valid_linked_draft_with_unset_version_is_recovered(self):
+        with tempfile.TemporaryDirectory() as td:
+            f=Fake();f.has_draft=True;f.version=None
+            self.run_prepare(f,Path(td))
+            self.assertFalse(any(method=='POST' for method,url in f.calls))
+            self.assertEqual(f.version,'1.1')
     def test_predecessor_is_protected_and_draft_url_is_strict(self):
         with self.assertRaises(RuntimeError):p.check_deposit({'id':p.PREVIOUS_RECORD})
         with self.assertRaises(RuntimeError):p.draft_id('https://example.org/api/deposit/depositions/23109999')
