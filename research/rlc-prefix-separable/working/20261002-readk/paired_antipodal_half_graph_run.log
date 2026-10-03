@@ -1,0 +1,13 @@
+{"n": 2, "all_signed_scan_chambers": 8, "half_cut_histogram": {"0": 8}, "balanced_unbalanced_histogram": {"true": 8}}
+{"n": 3, "all_signed_scan_chambers": 96, "half_cut_histogram": {"0": 96}, "balanced_unbalanced_histogram": {"true": 96}}
+{"n": 4, "all_signed_scan_chambers": 5376, "half_cut_histogram": {"1": 544, "0": 4816, "2": 16}, "balanced_unbalanced_histogram": {"true": 5344, "false": 32}}
+{"lift_n": 4, "cycle": [7, 0, 6, 1], "cycle_signed_edges": [[7, 0, 2], [0, 6, -1], [6, 1, 1], [1, 7, 1]], "R_min": 5}
+{"lift_n": 5, "cycle": [14, 0, 12, 1], "cycle_signed_edges": [[14, 0, 2], [0, 12, -1], [12, 1, 1], [1, 14, 1]], "R_min": 10}
+{"lift_n": 6, "cycle": [28, 0, 24, 1], "cycle_signed_edges": [[28, 0, 2], [0, 24, -1], [24, 1, 1], [1, 28, 1]], "R_min": 19}
+{"lift_n": 7, "cycle": [56, 0, 48, 1], "cycle_signed_edges": [[56, 0, 2], [0, 48, -1], [48, 1, 1], [1, 56, 1]], "R_min": 38}
+{"lift_n": 8, "cycle": [112, 0, 96, 1], "cycle_signed_edges": [[112, 0, 2], [0, 96, -1], [96, 1, 1], [1, 112, 1]], "R_min": 75}
+{"lift_n": 9, "cycle": [224, 0, 192, 1], "cycle_signed_edges": [[224, 0, 2], [0, 192, -1], [192, 1, 1], [1, 224, 1]], "R_min": 150}
+{"lift_n": 10, "cycle": [448, 0, 384, 1], "cycle_signed_edges": [[448, 0, 2], [0, 384, -1], [384, 1, 1], [1, 448, 1]], "R_min": 299}
+{"lift_n": 11, "cycle": [896, 0, 768, 1], "cycle_signed_edges": [[896, 0, 2], [0, 768, -1], [768, 1, 1], [1, 896, 1]], "R_min": 598}
+{"lift_n": 12, "cycle": [1792, 0, 1536, 1], "cycle_signed_edges": [[1792, 0, 2], [0, 1536, -1], [1536, 1, 1], [1, 1792, 1]], "R_min": 1195}
+{"status": "VERIFIED_ANALYTIC_HALF_REDUCTION_AND_GENERAL_CUT_PACKING", "scope": "The identities and cut packing hold in all dimensions by proof. Complete signed scan chambers audited through n=4. The already known genuine four-dimensional negative cycle is the dimension-minimal unbalanced half and lifts to every n>=4. No universal positive-density lower bound proved.", "random_seed": 202610031101, "random_generic_scans": 140, "random_nongeneric_rejections": 4, "random_balanced": 51, "random_unbalanced": 89, "violations": 0, "seconds": 12.25989474200469, "audit_sha256": "01c40a2bd1d1451aeb25b038e327f4760396f29d4024eeea2c3eefb8d345039c"}
