@@ -1,0 +1,19 @@
+{
+  "state": "VISUAL_REVIEW_PASS",
+  "expected_manifest_sha256": "c7e6c5b5617c10abd0f31258626bf29aa900104648baf1d90cd718801f1bbe2c",
+  "pdf_sha256": "219d566368207a77fc122cc3112bd6906d6e5a7366aa00806e418cb1168d2e33",
+  "page_count": 30,
+  "pdf_bytes": 202073,
+  "review_type": "AI-assisted rendered-page visual quality inspection",
+  "human_review_claimed": false,
+  "scientific_peer_review_claimed": false,
+  "review_notes": [
+    "Inspected the actual DOI-bound prepared PDF bytes without rebuilding or modifying the PDF.",
+    "Rasterized all 30 pages and visually inspected four complete contact sheets.",
+    "Inspected full-size cover/DOI/license, mountain-cell table (page 6), section 9.1 and its continuation (pages 18-19), displayed equations (page 24), declarations (pages 27-28), and references (pages 28-30).",
+    "No clipped or overlapping text, missing glyphs, unreadable equations or tables, or out-of-page text blocks were observed.",
+    "Confirmed the displayed DOI 10.5281/zenodo.23137088, version 1.0, report TA-TR-2026-23, theoretical-preprint/not-peer-reviewed status, and CC BY 4.0 notice.",
+    "Section 9.1 retains the curated distinction between the full type-change implication and improvement-only NESIG; formulas are legible.",
+    "No rebuild, publication, or empirical validation was performed by this visual review."
+  ]
+}
