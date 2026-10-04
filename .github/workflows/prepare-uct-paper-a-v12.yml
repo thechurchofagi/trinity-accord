@@ -1,7 +1,7 @@
 name: Prepare UCT Paper A v1.2
 on:
   push:
-    branches: [research/uct-paper-a-v1-2-20261004]
+    branches: [main, research/uct-paper-a-v1-2-20261004]
     paths:
       - '.github/workflows/prepare-uct-paper-a-v12.yml'
       - 'research/unified-consciousness-theory-i/versions/v1.2/publication_common.py'
