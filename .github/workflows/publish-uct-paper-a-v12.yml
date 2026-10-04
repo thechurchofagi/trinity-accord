@@ -1,0 +1,63 @@
+name: Publish UCT Paper A v1.2
+on:
+  push:
+    branches: [research/uct-paper-a-v1-2-20261004]
+    paths:
+      - '.github/workflows/publish-uct-paper-a-v12.yml'
+      - 'research/unified-consciousness-theory-i/versions/v1.2/publish_zenodo.py'
+      - 'research/unified-consciousness-theory-i/versions/v1.2/PUBLISH-AUTHORIZATION.json'
+      - 'research/unified-consciousness-theory-i/versions/v1.2/visual-review.json'
+      - 'research/unified-consciousness-theory-i/versions/v1.2/TRIGGER-PUBLISH.txt'
+permissions:
+  contents: write
+concurrency:
+  group: uct-paper-a-zenodo-v1-2
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta20-v12-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/uct-paper-a-v1-2-20261004
+          fetch-depth: 1
+      - name: Install PDF tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Safety checks and exact reviewed package validation
+        run: |
+          python3 research/unified-consciousness-theory-i/versions/v1.2/test_publication_safety.py
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'research/unified-consciousness-theory-i/versions/v1.2')
+          from publication_common import validate_local_package
+          e,d=validate_local_package()
+          print(e['doi'],e['file_count'],d)
+          PY
+      - name: Publish only reserved linked v1.2 and verify anonymous exact-byte readback
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/unified-consciousness-theory-i/versions/v1.2/publish_zenodo.py
+      - name: Preserve publication state
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'research/unified-consciousness-theory-i/versions/v1.2')
+          from publication_common import persist
+          persist()
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta20-uct-paper-a-v1.2-publication
+          path: |
+            research/unified-consciousness-theory-i/versions/v1.2/published/
+            research/unified-consciousness-theory-i/versions/v1.2/EXPECTED-PUBLICATION.json
+            research/unified-consciousness-theory-i/versions/v1.2/visual-review.json
+            research/unified-consciousness-theory-i/versions/v1.2/format-checks.json
+            research/unified-consciousness-theory-i/versions/v1.2/publication-record.json
+            research/unified-consciousness-theory-i/versions/v1.2/publication-attempt.json
+          retention-days: 90
+          if-no-files-found: warn
