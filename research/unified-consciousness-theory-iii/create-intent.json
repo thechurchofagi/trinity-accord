@@ -1,0 +1,16 @@
+{
+  "state": "CREATE_ONCE_INTENT",
+  "report_number": "TA-TR-2026-23",
+  "title": "Unified Consciousness Theory III: Organization, Intelligence, and Experience—From Inorganic Processes to Artificial Agents",
+  "version": "1.0",
+  "reservation_token": "61912742-a672-4873-b1ba-a002e96eee38",
+  "source_inputs": {
+    "source-main.md": "2e64cd771549684a73ad1a4c689ab80d9e0c3b5da2371ea3838be8e683e861b5",
+    "build_uct_c_pdf.py": "e3cf261c48e2508dbf78ccea145ba579c6b8b3774d30f64ab7c270f51e4a2de2",
+    "reproducibility-v1.0.zip": "7755220fa667e9a11e964188c4042aac461fe6b931a47da8d4741aace74fd88d",
+    "REVIEW-AND-SOURCES.md": "f318ebae00249c954e3ffca276f501c1ecbf5ddf06e13a028d94724fe677e04c",
+    "publication.py": "21bc76f83bfc14ba273a1899a93d6a735ae26a72e570ef2020973e99062fcb6b"
+  },
+  "source_commit": "b86aecb4f3f83c11298f0715a11f5523b395e921",
+  "workflow_run_id": "37203319313"
+}
