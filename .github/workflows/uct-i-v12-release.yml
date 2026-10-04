@@ -2,7 +2,7 @@ name: Release UCT I v1.2 TA20
 
 on:
   push:
-    branches: [research/uct-paper-a-v1-2-20261004]
+    branches: [main, research/uct-paper-a-v1-2-20261004]
     paths:
       - '.github/workflows/uct-i-v12-release.yml'
       - 'research/uct-paper-a-v1.2/**'
