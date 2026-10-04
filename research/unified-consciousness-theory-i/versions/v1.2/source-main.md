@@ -1921,7 +1921,7 @@ Finite scientific measurements can discard distinctions even when complete exper
 
 # 15. Claim-status summary
 
-| Claim | Status in v1.2 RC6 |
+| Claim | Status in v1.2 |
 |---|---|
 | Actual valid process-token domain | Process ontology |
 | Persistence under embedding | P3 process-ontology rule |
@@ -1998,7 +1998,7 @@ The next scientific burden is not to add more existence axioms, but to identify 
 
 UCT II v1.1 remains interpretable without rerunning its formal toy calculations. Its UCT-I dependencies migrate as follows:
 
-| UCT II v1.1 dependency | UCT I v1.2 RC6 interpretation |
+| UCT II v1.1 dependency | UCT I v1.2 interpretation |
 |---|---|
 | A1 Universal Experience | U1 Universal Nonempty Experience |
 | A3 Persistence Under Embedding | P3 Persistence, cessation, and embedding |
