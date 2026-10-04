@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-10-04-paper23-v10",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-23",
+      "record_id": 23137088,
+      "doi": "10.5281/zenodo.23137088",
+      "version": "1.0",
+      "title": "Unified Consciousness Theory III: Organization, Intelligence, and Experience—From Inorganic Processes to Artificial Agents",
+      "receipt_path": "research/unified-consciousness-theory-iii/publication-record.json",
+      "pdfs": [
+        {
+          "name": "unified-consciousness-theory-iii-v1.0.pdf",
+          "bytes": 202073,
+          "sha256": "219d566368207a77fc122cc3112bd6906d6e5a7366aa00806e418cb1168d2e33",
+          "role": "Complete English theoretical preprint"
+        }
+      ]
+    }
+  ]
+}
