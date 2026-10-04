@@ -4,17 +4,40 @@ from publication_common import *
 PHASE="initialization"
 
 def existing_concept_drafts(z,concept):
-    rows=read(z,"/deposit/depositions?"+urllib.parse.urlencode({"size":100}))
     hits=[]
-    for dep in rows:
-        if str(dep.get("conceptrecid",""))!=concept or dep.get("submitted") or dep.get("id")==PREVIOUS_RECORD:
-            continue
-        md=dep.get("metadata",{})
-        creators=[c.get("name") for c in md.get("creators",[])]
-        title=md.get("title"); version=str(md.get("version") or "")
-        if "Liu, Hongju" in creators and title in {PREVIOUS_TITLE,TITLE} and version in {"","1.1","1.2"}:
-            hits.append(dep)
+    seen=set()
+    for page in range(1,21):
+        rows=read(z,"/deposit/depositions?"+urllib.parse.urlencode({"size":100,"page":page}))
+        if not isinstance(rows,list): raise RuntimeError("unexpected deposition listing")
+        for dep in rows:
+            rid=dep.get("id")
+            if rid in seen: continue
+            seen.add(rid)
+            if str(dep.get("conceptrecid",""))!=concept or dep.get("submitted") or rid==PREVIOUS_RECORD:
+                continue
+            md=dep.get("metadata",{})
+            creators=[c.get("name") for c in md.get("creators",[])]
+            title=md.get("title"); version=str(md.get("version") or "")
+            if "Liu, Hongju" in creators and title in {PREVIOUS_TITLE,TITLE} and version in {"","1.1","1.2"}:
+                hits.append(dep)
+        if len(rows)<100: break
     return hits
+
+def predecessor_latest_draft(z,concept):
+    prev=read(z,f"/deposit/depositions/{PREVIOUS_RECORD}")
+    link=prev.get("links",{}).get("latest_draft")
+    if not link: return None
+    rid=draft_id(link)
+    if rid==PREVIOUS_RECORD: return None
+    dep=read(z,link)
+    if dep.get("submitted"): return None
+    if str(dep.get("conceptrecid",""))!=concept: raise RuntimeError("latest_draft concept lineage mismatch")
+    md=dep.get("metadata",{})
+    if "Liu, Hongju" not in [x.get("name") for x in md.get("creators",[])]:
+        raise RuntimeError("latest_draft creator mismatch")
+    if md.get("title") not in {PREVIOUS_TITLE,TITLE} or str(md.get("version") or "1.1") not in {"1.1","1.2"}:
+        raise RuntimeError("latest_draft metadata mismatch")
+    return dep
 
 def adopt_or_none(z,concept):
     hits=existing_concept_drafts(z,concept)
@@ -32,7 +55,7 @@ def run():
             raise RuntimeError("local lineage mismatch")
         dep=read(z,f"/deposit/depositions/{rid}")
     else:
-        PHASE="reconcile_existing_draft"; dep=adopt_or_none(z,concept)
+        PHASE="reconcile_existing_draft"; dep=predecessor_latest_draft(z,concept) or adopt_or_none(z,concept)
         if dep is None:
             if not (ROOT/"create-intent.json").exists():
                 save("create-intent.json",{"state":"CREATE_ONE_LINKED_VERSION_INTENT","previous_record_id":PREVIOUS_RECORD,"conceptrecid":concept,"version":VERSION,"workflow_run_id":os.environ.get("GITHUB_RUN_ID")})
@@ -42,10 +65,11 @@ def run():
                 resp=z.request(f"/deposit/depositions/{PREVIOUS_RECORD}/actions/newversion","POST")
                 latest=resp.get("links",{}).get("latest_draft")
                 dep=read(z,latest) if latest else resp
-            except Exception:
+            except Exception as original:
                 PHASE="reconcile_after_newversion_error"
-                dep=adopt_or_none(z,concept)
-                if dep is None: raise
+                dep=predecessor_latest_draft(z,concept) or adopt_or_none(z,concept)
+                if dep is None:
+                    raise RuntimeError("newversion failed and no matching successor draft was discoverable: "+repr(original))
     rid=descendant_ok(dep,concept)
     if dep.get("submitted"): raise RuntimeError("v1.2 descendant already submitted before exact-package review")
     PHASE="set_metadata"; dep=z.request(f"/deposit/depositions/{rid}","PUT",{"metadata":zenodo_metadata()})
