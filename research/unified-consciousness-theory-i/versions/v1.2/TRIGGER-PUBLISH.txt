@@ -1,4 +1,5 @@
 UCT I v1.2 exact reviewed linked-version package authorized for publication by the author on 2026-10-04.
 Record: 23131575
 DOI: 10.5281/zenodo.23131575
-Manifest SHA256: 60a035b328b16ceae69ef6c3afe3bd3080c7be62a6ec123f80fd5b14780bfa84
+Manifest SHA256: 51ade36f063551e4173ff72000eac0937a2c2e96199d4043ca5f256a5063d9ed
+Retry after exact-manifest review binding correction.
