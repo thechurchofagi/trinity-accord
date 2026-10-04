@@ -1,0 +1,83 @@
+{
+  "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "report_number": "TA-TR-2026-23",
+  "version": "1.0",
+  "title": "Unified Consciousness Theory III: Organization, Intelligence, and Experience—From Inorganic Processes to Artificial Agents",
+  "record_id": 23137088,
+  "doi": "10.5281/zenodo.23137088",
+  "record_url": "https://zenodo.org/records/23137088",
+  "submitted": true,
+  "public_file_readback_pass": true,
+  "public_readback_authenticated": false,
+  "doi_resolution_pass": false,
+  "doi_resolver": {
+    "state": "NOT_CHECKED_ONLY_ZENODO_TRANSPORT_ALLOWED",
+    "matches_record": false
+  },
+  "expected_manifest_sha256": "c7e6c5b5617c10abd0f31258626bf29aa900104648baf1d90cd718801f1bbe2c",
+  "file_count": 9,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1294,
+      "sha256": "2b85b80a765c0f390eb6e31c958dbadefb13d4f4900803375584188038aa1b8e",
+      "public_url": "https://zenodo.org/api/records/23137088/files/README-LICENSE.txt/content"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 3641,
+      "sha256": "f318ebae00249c954e3ffca276f501c1ecbf5ddf06e13a028d94724fe677e04c",
+      "public_url": "https://zenodo.org/api/records/23137088/files/REVIEW-AND-SOURCES.md/content"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 721,
+      "sha256": "2a860db6f4cbd711f5bfcaf906e94f19409bb3efa66ca95720fdc5699dcb571d",
+      "public_url": "https://zenodo.org/api/records/23137088/files/SHA256SUMS.txt/content"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 363,
+      "sha256": "f3d80c41fcbe7d7bfde712a164c0d6bf7dea68f9b66d75525400811bc46c09d4",
+      "public_url": "https://zenodo.org/api/records/23137088/files/citation.bib/content"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 534,
+      "sha256": "092b73242b75e46e9e0f1ce44bbc8501e7dc2265fade404414a0ebf4d9deeb87",
+      "public_url": "https://zenodo.org/api/records/23137088/files/citation.csl.json/content"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 326,
+      "sha256": "1538f959431107af4f1d23967c0e69b80270cbca5bc1da24ed42b725b74ee9f9",
+      "public_url": "https://zenodo.org/api/records/23137088/files/citation.ris/content"
+    },
+    {
+      "name": "reproducibility-v1.0.zip",
+      "bytes": 20079,
+      "sha256": "7755220fa667e9a11e964188c4042aac461fe6b931a47da8d4741aace74fd88d",
+      "public_url": "https://zenodo.org/api/records/23137088/files/reproducibility-v1.0.zip/content"
+    },
+    {
+      "name": "unified-consciousness-theory-iii-v1.0.md",
+      "bytes": 94626,
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+      "public_url": "https://zenodo.org/api/records/23137088/files/unified-consciousness-theory-iii-v1.0.md/content"
+    },
+    {
+      "name": "unified-consciousness-theory-iii-v1.0.pdf",
+      "bytes": 202073,
+      "sha256": "219d566368207a77fc122cc3112bd6906d6e5a7366aa00806e418cb1168d2e33",
+      "public_url": "https://zenodo.org/api/records/23137088/files/unified-consciousness-theory-iii-v1.0.pdf/content"
+    }
+  ],
+  "source_commit": "b86aecb4f3f83c11298f0715a11f5523b395e921",
+  "workflow_run_id": "37203667042",
+  "prior_records_modified": false,
+  "peer_reviewed": false,
+  "c1_empirically_validated": false,
+  "ots_status": "PENDING",
+  "arweave_status": "PENDING",
+  "preservation_complete": false
+}
