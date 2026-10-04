@@ -12,7 +12,7 @@ DATE="2026-10-04"
 PREVIOUS_RECORD=23030207
 EXPECTED_CONCEPT="23005587"
 STEM="unified-consciousness-theory-i"
-SOURCE_GIT_BLOB_SHA1="fd58d9a7113f68e09b034627440c72584671b9d9"
+SOURCE_GIT_BLOB_SHA1="310204d4e83c5478bf18d34274bcdba996ffda28"
 CLIENT_BLOB="a0cbc84cc5fd826c06d16456c4adbaa40dabc788"
 PROTECTED={23005588,23029358,23030207,23030320}
 STATE_FILES={"create-intent.json","deposit.json","preparation-attempt.json","publication-attempt.json","publication-record.json","EXPECTED-PUBLICATION.json","format-checks.json"}
@@ -36,7 +36,7 @@ def ensure_source():
     actual=subprocess.check_output(["git","hash-object",str(p)],cwd=REPO,text=True).strip()
     if actual!=SOURCE_GIT_BLOB_SHA1: raise RuntimeError("frozen source git-blob mismatch")
     s=p.read_text(encoding="utf-8")
-    if s.count("__DOI_RESERVED_AT_RELEASE__")!=1: raise RuntimeError("expected exactly one DOI placeholder")
+    if s.count("__DOI_RESERVED_AT_RELEASE__")!=2: raise RuntimeError("expected exactly two DOI placeholders")
     if "1.2-RC" in s or "publication paused" in s: raise RuntimeError("release-candidate marker remained")
     for x in ("Corollary E1 — No First Conscious Ancestor","Corollary E2 — Fine-Grained Structural Chains","Conditional Lemma E3 — Connected Existence Constancy","# Appendix C. Revision-specific dependency ledger"):
         if x not in s: raise RuntimeError("frozen source missing required content: "+x)
@@ -123,7 +123,7 @@ def zenodo_metadata():
     }
 
 def inject_identity(text,doi):
-    if text.count("__DOI_RESERVED_AT_RELEASE__")!=1: raise RuntimeError("DOI release marker missing/duplicated")
+    if text.count("__DOI_RESERVED_AT_RELEASE__")!=2: raise RuntimeError("DOI release markers missing/duplicated")
     out=text.replace("__DOI_RESERVED_AT_RELEASE__",doi)
     if "__DOI_RESERVED_AT_RELEASE__" in out: raise RuntimeError("DOI marker remained")
     return out
