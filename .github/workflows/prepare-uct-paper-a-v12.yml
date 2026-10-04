@@ -1,0 +1,65 @@
+name: Prepare UCT Paper A v1.2
+on:
+  push:
+    branches: [research/uct-paper-a-v1-2-20261004]
+    paths:
+      - '.github/workflows/prepare-uct-paper-a-v12.yml'
+      - 'research/unified-consciousness-theory-i/versions/v1.2/publication_common.py'
+      - 'research/unified-consciousness-theory-i/versions/v1.2/prepare_zenodo.py'
+      - 'research/unified-consciousness-theory-i/versions/v1.2/test_publication_safety.py'
+      - 'research/unified-consciousness-theory-i/versions/v1.2/TRIGGER-PREPARE.txt'
+permissions:
+  contents: write
+concurrency:
+  group: uct-paper-a-zenodo-v1-2
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta20-v12-prepare]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381d4e7c5fcc2f2d3d
+        with:
+          ref: research/uct-paper-a-v1-2-20261004
+          fetch-depth: 1
+      - name: Install PDF toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq pandoc texlive-xetex texlive-pictures fonts-dejavu-core poppler-utils
+      - name: Safety checks
+        run: python3 research/unified-consciousness-theory-i/versions/v1.2/test_publication_safety.py
+      - name: Reserve linked v1.2 and build exact DOI-bound package
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/unified-consciousness-theory-i/versions/v1.2/prepare_zenodo.py
+      - name: Verify exact local package
+        run: |
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'research/unified-consciousness-theory-i/versions/v1.2')
+          from publication_common import validate_local_package
+          e,d=validate_local_package()
+          print(e['doi'],e['file_count'],d)
+          PY
+      - name: Persist reservation and exact package
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'research/unified-consciousness-theory-i/versions/v1.2')
+          from publication_common import persist
+          persist()
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ta20-uct-paper-a-v1.2-preparation
+          path: |
+            research/unified-consciousness-theory-i/versions/v1.2/published/
+            research/unified-consciousness-theory-i/versions/v1.2/deposit.json
+            research/unified-consciousness-theory-i/versions/v1.2/EXPECTED-PUBLICATION.json
+            research/unified-consciousness-theory-i/versions/v1.2/format-checks.json
+            research/unified-consciousness-theory-i/versions/v1.2/preparation-attempt.json
+          retention-days: 90
+          if-no-files-found: warn
