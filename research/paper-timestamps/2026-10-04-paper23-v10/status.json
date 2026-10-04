@@ -1,0 +1,23 @@
+{
+  "batch": "2026-10-04-paper23-v10",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 202073,
+      "doi": "10.5281/zenodo.23137088",
+      "name": "unified-consciousness-theory-iii-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-10-04-paper23-v10/proofs/TA-TR-2026-23/unified-consciousness-theory-iii-v1.0.pdf.ots",
+      "proof_sha256": "95ac630f89043daa11a6618fac003b735427161b2d826d242a85e6a6e240663a",
+      "report": "TA-TR-2026-23",
+      "role": "Complete English theoretical preprint",
+      "sha256": "219d566368207a77fc122cc3112bd6906d6e5a7366aa00806e418cb1168d2e33",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 1,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}

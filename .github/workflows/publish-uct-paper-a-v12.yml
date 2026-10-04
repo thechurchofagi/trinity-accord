@@ -25,6 +25,10 @@ jobs:
           fetch-depth: 1
       - name: Install PDF tools
         run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
       - name: Safety checks and exact reviewed package validation
         run: |
           python3 research/unified-consciousness-theory-i/versions/v1.2/test_publication_safety.py

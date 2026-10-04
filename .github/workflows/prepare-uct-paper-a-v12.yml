@@ -27,6 +27,10 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq pandoc texlive-xetex texlive-pictures fonts-dejavu-core poppler-utils
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
       - name: Safety checks
         run: python3 research/unified-consciousness-theory-i/versions/v1.2/test_publication_safety.py
       - name: Reserve linked v1.2 and build exact DOI-bound package
