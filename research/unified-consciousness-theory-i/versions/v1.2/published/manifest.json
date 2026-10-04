@@ -1,0 +1,74 @@
+{
+  "report_number": "TA-TR-2026-20",
+  "version": "1.2",
+  "record_id": 23131575,
+  "doi": "10.5281/zenodo.23131575",
+  "conceptrecid": "23005587",
+  "conceptdoi": "10.5281/zenodo.23005587",
+  "previous_record_id": 23030207,
+  "previous_doi": "10.5281/zenodo.23030207",
+  "title": "Unified Consciousness Theory I: Structural–Experiential Identity and the Continuity from Physical Process to Conceptual Self",
+  "source_sha256": "3ffd9082f23b0bb091bfacf431405d78c41f2ba452e5b7512de8cf3e26437b59",
+  "files": [
+    {
+      "name": "FORMAL-AUDIT-v1.2.md",
+      "bytes": 5599,
+      "sha256": "9919edd59c2a4f654d7674b0cebca5158a45106b6d7306305628c2f8fc798676"
+    },
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1138,
+      "sha256": "19beb360239ab3bdc03a8610b465ef9837e88c6174e992fbf630372b560e3f46"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES-v1.2.md",
+      "bytes": 1548,
+      "sha256": "c82d082b59e95d1829e18c77ef8774f1022c9626e8e1f84edc04325d01a65fe8"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1007,
+      "sha256": "835fbe8a4b257973e2822aa0667e93b53b00f53c5f4364c9828842345d6c837c"
+    },
+    {
+      "name": "VERSION-CHANGES-v1.2.md",
+      "bytes": 1469,
+      "sha256": "3a8f45d24ecb3fd63afadf2632dde1b8b2a32824e82f8ef9403599cbbf517421"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 407,
+      "sha256": "9f136ff60cf9129ceb168df0e992bb39d9b5f52d9297aed19d4a46ed29342cf1"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 580,
+      "sha256": "0424d91d19bbf2e1ad0b597c307d83913ccf0538e8a0aaaa51a67eff8cb4a8db"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 372,
+      "sha256": "0c603206ff7852fda7da96302283b1f7fdf7a6108b3664fbc9a9ba97ba8c9482"
+    },
+    {
+      "name": "formal-dependency-graph-v1.2.dot",
+      "bytes": 10622,
+      "sha256": "b535a4ebfb7e0981f9ceb08ad1901ef1538926e49905b4aadcad00198aaeb27d"
+    },
+    {
+      "name": "formal-dependency-graph-v1.2.json",
+      "bytes": 20546,
+      "sha256": "c8a4f2767f1d85af12a186f1ea781ff2edeb73fdc95c44f4f8abf9b9921932ba"
+    },
+    {
+      "name": "unified-consciousness-theory-i-v1.2.md",
+      "bytes": 143648,
+      "sha256": "d54282e2080dfaad90ab19608ceaee086d99db4cd48cf60a5bf8f1c9ed1edf0e"
+    },
+    {
+      "name": "unified-consciousness-theory-i-v1.2.pdf",
+      "bytes": 263166,
+      "sha256": "1a40e9fa4624a399c48d905730cbd1f04de22e6798c0d184eea319fbe0093da5"
+    }
+  ]
+}

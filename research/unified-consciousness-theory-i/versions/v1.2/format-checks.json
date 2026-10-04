@@ -1,0 +1,11 @@
+{
+  "state": "FORMAT_CHECKS_PASS",
+  "report_number": "TA-TR-2026-20",
+  "version": "1.2",
+  "pdf_generated": true,
+  "pdf_text_extractable": true,
+  "page_count": 54,
+  "source_sha256": "3ffd9082f23b0bb091bfacf431405d78c41f2ba452e5b7512de8cf3e26437b59",
+  "doi_placeholder_absent": true,
+  "required_sections_present": true
+}

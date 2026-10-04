@@ -1,0 +1,132 @@
+name: Release UCT I v1.2 TA20
+
+on:
+  push:
+    branches: [main, research/uct-paper-a-v1-2-20261004]
+    paths:
+      - '.github/workflows/uct-i-v12-release.yml'
+      - 'research/uct-paper-a-v1.2/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uct-paper-a-v12
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[uct12-prepare]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/uct-paper-a-v1-2-20261004
+          fetch-depth: 1
+          show-progress: false
+      - name: Install PDF toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq pandoc texlive-xetex fonts-dejavu-core poppler-utils
+      - name: Verify release worker syntax
+        run: python3 -m py_compile research/uct-paper-a-v1.2/release.py
+      - name: Reserve successor DOI and build exact DOI-bound draft package
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/uct-paper-a-v1.2/release.py prepare
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: uct-i-v12-prepared
+          path: |
+            research/uct-paper-a-v1.2/
+          retention-days: 90
+          if-no-files-found: error
+
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[uct12-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/uct-paper-a-v1-2-20261004
+          fetch-depth: 1
+          show-progress: false
+      - name: Verify release worker syntax
+        run: python3 -m py_compile research/uct-paper-a-v1.2/release.py
+      - name: Publish exact authorized Zenodo v1.2 and verify anonymous public bytes
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/uct-paper-a-v1.2/release.py publish
+      - name: Install pinned OpenTimestamps client
+        run: python3 -m pip install --user -r requirements-ots.txt
+      - name: Submit exact published PDF to OTS calendars
+        run: python3 scripts/research_paper_ots.py stamp --batch research/paper-timestamps/2026-10-04-uct-i-v12
+      - name: Persist publication and OTS submission state
+        run: |
+          git config user.name trinity-research-release-bot
+          git config user.email actions@github.com
+          git add -- research/uct-paper-a-v1.2 research/paper-timestamps/2026-10-04-uct-i-v12
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: preserve UCT I v1.2 publication and OTS submission [skip ci]'
+          for attempt in 1 2 3; do
+            git push origin HEAD:research/uct-paper-a-v1-2-20261004 && exit 0
+            git fetch origin research/uct-paper-a-v1-2-20261004 --prune
+            git rebase origin/research/uct-paper-a-v1-2-20261004
+          done
+          exit 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: uct-i-v12-published
+          path: |
+            research/uct-paper-a-v1.2/
+            research/paper-timestamps/2026-10-04-uct-i-v12/
+          retention-days: 90
+          if-no-files-found: error
+
+  preserve:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[uct12-preserve]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/uct-paper-a-v1-2-20261004
+          fetch-depth: 1
+          show-progress: false
+      - name: Install preservation dependencies
+        run: |
+          python3 -m pip install --user -r requirements-ots.txt
+          npm ci --ignore-scripts
+      - name: Upgrade and verify OTS proofs
+        env:
+          OTS_BITCOIN_NODE_URL: ${{ secrets.OTS_BITCOIN_NODE_URL }}
+        run: python3 scripts/research_paper_ots.py lifecycle --batch research/paper-timestamps/2026-10-04-uct-i-v12
+      - name: Upload guarded Arweave archive when OTS is mature
+        env:
+          ARKEY: ${{ secrets.ARKEY }}
+        run: |
+          state="$(python3 - <<'PY'
+          import json
+          print(json.load(open('research/paper-timestamps/2026-10-04-uct-i-v12/status.json'))['state'])
+          PY
+          )"
+          if [ "$state" = "READY_FOR_ARWEAVE" ]; then
+            python3 scripts/research_paper_ots.py upload --batch research/paper-timestamps/2026-10-04-uct-i-v12
+          else
+            echo "OTS not mature yet: $state"
+          fi
+      - name: Persist preservation state
+        run: |
+          git config user.name trinity-research-release-bot
+          git config user.email actions@github.com
+          git add -- research/paper-timestamps/2026-10-04-uct-i-v12 api/arweave-wallet-status.json record-chain/arweave-wallet-ledger.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: preserve UCT I v1.2 OTS and Arweave state [skip ci]'
+          for attempt in 1 2 3; do
+            git push origin HEAD:research/uct-paper-a-v1-2-20261004 && exit 0
+            git fetch origin research/uct-paper-a-v1-2-20261004 --prune
+            git rebase origin/research/uct-paper-a-v1-2-20261004
+          done
+          exit 1

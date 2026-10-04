@@ -1,0 +1,10 @@
+{
+  "operation": "prepare",
+  "iteration": 1,
+  "publication_authorized_by_user": true,
+  "authorization_basis": "User explicitly requested publication of UCT I v1.2 on 2026-10-04.",
+  "prior_record_id": 23030207,
+  "prior_version": "1.1",
+  "target_version": "1.2",
+  "prior_published_files_must_remain_unchanged": true
+}

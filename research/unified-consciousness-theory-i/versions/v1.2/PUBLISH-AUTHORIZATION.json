@@ -1,0 +1,21 @@
+{
+  "report_number": "TA-TR-2026-20",
+  "version": "1.2",
+  "record_id": 23131575,
+  "doi": "10.5281/zenodo.23131575",
+  "conceptdoi": "10.5281/zenodo.23005587",
+  "previous_record_id": 23030207,
+  "previous_doi": "10.5281/zenodo.23030207",
+  "expected_manifest_sha256": "51ade36f063551e4173ff72000eac0937a2c2e96199d4043ca5f256a5063d9ed",
+  "reviewed_file_count": 13,
+  "reviewed_pdf_sha256": "8e1f89b9ed5b1e90333c769ad3382ce259a122379dcf1634534b2343402afaa4",
+  "reviewed_markdown_sha256": "d54282e2080dfaad90ab19608ceaee086d99db4cd48cf60a5bf8f1c9ed1edf0e",
+  "authorization": "PUBLISH_EXACT_REVIEWED_LINKED_VERSION",
+  "author_explicit_release_request": "发布 v1.2",
+  "authorization_basis": "The author explicitly requested publication of UCT I v1.2 in this conversation on 2026-10-04 after the final formal/conceptual dependency audit.",
+  "prior_version_must_remain_unchanged": true,
+  "no_new_independent_deposit": true,
+  "visual_review_pass": true,
+  "rebuild_after_authorization": "Any changed DOI-bound publication file requires a new exact manifest and renewed visual/content review; this authorization cannot be reused for different bytes.",
+  "scientific_status": "Theoretical preprint. No claim of peer review, empirical proof of C1, certified historical priority, unique subject selection, or unique consciousness metric."
+}

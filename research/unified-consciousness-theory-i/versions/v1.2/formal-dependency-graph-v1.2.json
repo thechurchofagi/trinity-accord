@@ -1,0 +1,945 @@
+{
+  "nodes": [
+    {
+      "id": "TOKEN_CRITERIA",
+      "type": "ONTO_DEF",
+      "label": "Actual-token criteria"
+    },
+    {
+      "id": "ACTUAL_TOKEN",
+      "type": "ONTO_DOMAIN",
+      "label": "Actual valid process token"
+    },
+    {
+      "id": "NONEMPTY_CARRIER",
+      "type": "ONTO_CONSEQ",
+      "label": "Nonempty constitutive carrier"
+    },
+    {
+      "id": "P3",
+      "type": "ONTO_RULE",
+      "label": "Persistence / cessation / embedding"
+    },
+    {
+      "id": "P6",
+      "type": "ONTO_DEF",
+      "label": "Token / type / lineage"
+    },
+    {
+      "id": "D_ONTIC",
+      "type": "DEF",
+      "label": "Complete token-relative ontic organization"
+    },
+    {
+      "id": "K",
+      "type": "DEF",
+      "label": "Common structural signature K"
+    },
+    {
+      "id": "QSPACE",
+      "type": "DEF",
+      "label": "Structural-type quotient space"
+    },
+    {
+      "id": "GEOMETRY",
+      "type": "METHOD_DEF",
+      "label": "Predeclared invariant topology / pseudometric"
+    },
+    {
+      "id": "VIEW",
+      "type": "EPI_DEF",
+      "label": "Finite physical view D_v"
+    },
+    {
+      "id": "ESTIMATE",
+      "type": "EPI_DEF",
+      "label": "Scientific estimate D-hat_v"
+    },
+    {
+      "id": "SUBJECT_FIREWALL",
+      "type": "BOUNDARY",
+      "label": "Experience-bearing process != canonical subject"
+    },
+    {
+      "id": "C1",
+      "type": "AX_C",
+      "label": "Structural-Experiential Identity"
+    },
+    {
+      "id": "C1_OI",
+      "type": "LEMMA",
+      "label": "Pairwise type equivalence"
+    },
+    {
+      "id": "C1_W",
+      "type": "LEMMA",
+      "label": "One-way phenomenal completeness"
+    },
+    {
+      "id": "U1",
+      "type": "THM",
+      "label": "Universal Nonempty Experience"
+    },
+    {
+      "id": "U2",
+      "type": "THM",
+      "label": "Structural Continuity transfer"
+    },
+    {
+      "id": "SELF_WITNESS",
+      "type": "EMP_WITNESS",
+      "label": "Actual non-self token witness"
+    },
+    {
+      "id": "U3",
+      "type": "COR",
+      "label": "Selfhood Non-Prerequisite"
+    },
+    {
+      "id": "U0",
+      "type": "META_THM",
+      "label": "Foundational Compression"
+    },
+    {
+      "id": "NONUNIV_WITNESS",
+      "type": "EMP_WITNESS",
+      "label": "Nonuniversality witness"
+    },
+    {
+      "id": "ORG_GATE",
+      "type": "THM",
+      "label": "Organization-Gate Impossibility"
+    },
+    {
+      "id": "COMPLETE_EQ",
+      "type": "PREMISE",
+      "label": "Complete current ontic equivalence"
+    },
+    {
+      "id": "PROBE_ONLY",
+      "type": "PREMISE",
+      "label": "Only external probe choice changes"
+    },
+    {
+      "id": "FUTURE_ONLY",
+      "type": "PREMISE",
+      "label": "Only future divergence changes"
+    },
+    {
+      "id": "HISTORY_DIFF",
+      "type": "PREMISE",
+      "label": "Different histories"
+    },
+    {
+      "id": "LABEL_ONLY",
+      "type": "PREMISE",
+      "label": "Only external label changes"
+    },
+    {
+      "id": "NO_HIDDEN",
+      "type": "THM",
+      "label": "No Hidden Quale"
+    },
+    {
+      "id": "PROBE_INV",
+      "type": "THM",
+      "label": "Probe Invariance"
+    },
+    {
+      "id": "NO_FUTURE",
+      "type": "THM",
+      "label": "No Future Contamination"
+    },
+    {
+      "id": "GHOST_EQ",
+      "type": "THM",
+      "label": "Causally Screened History experiential equivalence"
+    },
+    {
+      "id": "GHOST_TOKEN_NOTE",
+      "type": "COR",
+      "label": "Numerically distinct tokens may remain"
+    },
+    {
+      "id": "REWARD_NONID",
+      "type": "THM",
+      "label": "External reward-label non-identity"
+    },
+    {
+      "id": "PRODUCT_DEF",
+      "type": "DEF",
+      "label": "Declared independent constituent product"
+    },
+    {
+      "id": "ACTUAL_WHOLE_PARTS",
+      "type": "PREMISE",
+      "label": "Actual whole and constituent tokens"
+    },
+    {
+      "id": "PHYS_NONPRODUCT",
+      "type": "PREMISE",
+      "label": "Whole physical organization is nonproduct"
+    },
+    {
+      "id": "NONSUM",
+      "type": "THM",
+      "label": "Non-Summative Combination"
+    },
+    {
+      "id": "MACRO_EQ",
+      "type": "PREMISE",
+      "label": "Macro ontic equivalence"
+    },
+    {
+      "id": "MICRO_NONISO",
+      "type": "PREMISE",
+      "label": "Lower-scale ontic nonisomorphism"
+    },
+    {
+      "id": "MACRO_EXP_EQ",
+      "type": "THM",
+      "label": "Macro experiential equivalence"
+    },
+    {
+      "id": "MICRO_EXP_DIFF",
+      "type": "THM",
+      "label": "Lower experiential difference"
+    },
+    {
+      "id": "SYM_PREM",
+      "type": "PREMISE",
+      "label": "Symmetry orbit premises"
+    },
+    {
+      "id": "EQUIV_SELECTOR",
+      "type": "PREMISE",
+      "label": "Equivariant deterministic selector"
+    },
+    {
+      "id": "OVERLAP_NONEMPTY_EXCL",
+      "type": "PREMISE",
+      "label": "Overlap + nonempty exclusive-output"
+    },
+    {
+      "id": "ORBIT_LEMMA",
+      "type": "MATH",
+      "label": "Orbit lemma"
+    },
+    {
+      "id": "SELECTION_OBSTRUCTION",
+      "type": "THM",
+      "label": "Restricted selection obstruction"
+    },
+    {
+      "id": "ALL_ANC_ACTUAL",
+      "type": "SCENARIO",
+      "label": "All-ancestors family actualized"
+    },
+    {
+      "id": "E1",
+      "type": "COR",
+      "label": "No First Conscious Ancestor"
+    },
+    {
+      "id": "EPS_CHAIN",
+      "type": "PREMISE",
+      "label": "epsilon-fine physical chain"
+    },
+    {
+      "id": "E2",
+      "type": "COR",
+      "label": "Fine-Grained Structural Chains"
+    },
+    {
+      "id": "PHYS_CONT_PATH",
+      "type": "PREMISE",
+      "label": "Physical path continuity"
+    },
+    {
+      "id": "U2_APP",
+      "type": "APP",
+      "label": "Experiential continuity on path"
+    },
+    {
+      "id": "CONNECTED_LAMBDA",
+      "type": "MATH_PREMISE",
+      "label": "Connected parameter space"
+    },
+    {
+      "id": "CONT_BINARY_E",
+      "type": "EXTERNAL_PREMISE",
+      "label": "Continuous binary experience-existence predicate"
+    },
+    {
+      "id": "HUMAN_ENDPOINT",
+      "type": "EMP_PREMISE",
+      "label": "Human endpoint E=1"
+    },
+    {
+      "id": "E3",
+      "type": "COND_MATH",
+      "label": "Connected Existence Constancy"
+    },
+    {
+      "id": "EVOL_SYNTH",
+      "type": "APP",
+      "label": "Evolutionary synthesis"
+    },
+    {
+      "id": "PHYS_TRANSFORM_NONISO",
+      "type": "PREMISE",
+      "label": "Physical structural nonisomorphism"
+    },
+    {
+      "id": "STRUCT_TRANSFORM",
+      "type": "THM",
+      "label": "Structural transformation consequence"
+    },
+    {
+      "id": "TOY_MATH",
+      "type": "MATH",
+      "label": "Three-register / four-setting mathematics"
+    },
+    {
+      "id": "TOY_WHOLE_DIFF",
+      "type": "MATH_RESULT",
+      "label": "Whole-model structural divergence"
+    },
+    {
+      "id": "TOY_SUB_EQ",
+      "type": "MATH_RESULT",
+      "label": "Implemented sub-process invariance"
+    },
+    {
+      "id": "ACTUAL_COMPLETE_TOY",
+      "type": "PREMISE",
+      "label": "Toy realization actual + complete"
+    },
+    {
+      "id": "TOY_EXP_WHOLE",
+      "type": "APP",
+      "label": "Conditional whole experiential divergence"
+    },
+    {
+      "id": "TOY_EXP_SUB",
+      "type": "APP",
+      "label": "Conditional sub-process experiential equivalence"
+    },
+    {
+      "id": "PHEN_TARGET",
+      "type": "EPI_DEF",
+      "label": "Finite phenomenal/psychophysical target"
+    },
+    {
+      "id": "BRIDGE_FWD",
+      "type": "BRIDGE",
+      "label": "One-way bridge"
+    },
+    {
+      "id": "BRIDGE_REV",
+      "type": "BRIDGE",
+      "label": "Reflection bridge"
+    },
+    {
+      "id": "MEAS",
+      "type": "METHOD",
+      "label": "Measurement/error assumptions"
+    },
+    {
+      "id": "OSC_FWD",
+      "type": "BRIDGE_PKG",
+      "label": "One-way OSC package"
+    },
+    {
+      "id": "OSC_TWO",
+      "type": "BRIDGE_PKG",
+      "label": "Two-way OSC package"
+    },
+    {
+      "id": "PTVSP",
+      "type": "METHOD",
+      "label": "Physical Token/View Selection Protocol"
+    },
+    {
+      "id": "FAIL_ONE",
+      "type": "TEST",
+      "label": "One-way bridge failure pattern"
+    },
+    {
+      "id": "FAIL_TWO",
+      "type": "TEST",
+      "label": "Reflection bridge failure pattern"
+    },
+    {
+      "id": "BAC_TFR",
+      "type": "METHOD",
+      "label": "UCT II BAC/TFR constraints"
+    },
+    {
+      "id": "UCTII_RECON",
+      "type": "METHOD_RESULT",
+      "label": "UCT II formal reconstruction"
+    },
+    {
+      "id": "UCTII_GATE",
+      "type": "APP",
+      "label": "UCT II no-gate relocation"
+    },
+    {
+      "id": "UCTII_EXP",
+      "type": "APP",
+      "label": "UCT II experiential interpretation"
+    }
+  ],
+  "edges": [
+    {
+      "source": "TOKEN_CRITERIA",
+      "target": "ACTUAL_TOKEN",
+      "relation": "defines"
+    },
+    {
+      "source": "TOKEN_CRITERIA",
+      "target": "P3",
+      "relation": "types"
+    },
+    {
+      "source": "TOKEN_CRITERIA",
+      "target": "P6",
+      "relation": "types"
+    },
+    {
+      "source": "ACTUAL_TOKEN",
+      "target": "NONEMPTY_CARRIER",
+      "relation": "actual support"
+    },
+    {
+      "source": "ACTUAL_TOKEN",
+      "target": "D_ONTIC",
+      "relation": "defines"
+    },
+    {
+      "source": "ACTUAL_TOKEN",
+      "target": "SUBJECT_FIREWALL",
+      "relation": "process side"
+    },
+    {
+      "source": "ACTUAL_TOKEN",
+      "target": "C1",
+      "relation": "domain"
+    },
+    {
+      "source": "NONEMPTY_CARRIER",
+      "target": "U1",
+      "relation": "nonempty carrier"
+    },
+    {
+      "source": "P3",
+      "target": "U0",
+      "relation": "compression"
+    },
+    {
+      "source": "P6",
+      "target": "U0",
+      "relation": "compression"
+    },
+    {
+      "source": "P6",
+      "target": "GHOST_TOKEN_NOTE",
+      "relation": "token distinction"
+    },
+    {
+      "source": "D_ONTIC",
+      "target": "VIEW",
+      "relation": "projection"
+    },
+    {
+      "source": "D_ONTIC",
+      "target": "C1",
+      "relation": "physical term"
+    },
+    {
+      "source": "K",
+      "target": "QSPACE",
+      "relation": "quotient"
+    },
+    {
+      "source": "K",
+      "target": "C1",
+      "relation": "common signature"
+    },
+    {
+      "source": "QSPACE",
+      "target": "GEOMETRY",
+      "relation": "geometry on quotient"
+    },
+    {
+      "source": "QSPACE",
+      "target": "U2",
+      "relation": "common comparison space"
+    },
+    {
+      "source": "QSPACE",
+      "target": "E2",
+      "relation": "common quotient"
+    },
+    {
+      "source": "GEOMETRY",
+      "target": "U2",
+      "relation": "predeclared geometry"
+    },
+    {
+      "source": "GEOMETRY",
+      "target": "E2",
+      "relation": "pseudometric"
+    },
+    {
+      "source": "VIEW",
+      "target": "ESTIMATE",
+      "relation": "estimation"
+    },
+    {
+      "source": "VIEW",
+      "target": "SUBJECT_FIREWALL",
+      "relation": "view side"
+    },
+    {
+      "source": "VIEW",
+      "target": "BRIDGE_FWD",
+      "relation": "physical input"
+    },
+    {
+      "source": "VIEW",
+      "target": "BRIDGE_REV",
+      "relation": "physical input"
+    },
+    {
+      "source": "VIEW",
+      "target": "UCTII_RECON",
+      "relation": "frozen physical view"
+    },
+    {
+      "source": "ESTIMATE",
+      "target": "SUBJECT_FIREWALL",
+      "relation": "estimate side"
+    },
+    {
+      "source": "C1",
+      "target": "C1_OI",
+      "relation": "derives"
+    },
+    {
+      "source": "C1",
+      "target": "C1_W",
+      "relation": "derives"
+    },
+    {
+      "source": "C1",
+      "target": "U1",
+      "relation": "identity"
+    },
+    {
+      "source": "C1",
+      "target": "U2",
+      "relation": "same structural type"
+    },
+    {
+      "source": "C1",
+      "target": "U0",
+      "relation": "compression"
+    },
+    {
+      "source": "C1",
+      "target": "NONSUM",
+      "relation": "tokenwise identity"
+    },
+    {
+      "source": "C1",
+      "target": "E2",
+      "relation": "same structural type"
+    },
+    {
+      "source": "C1",
+      "target": "OSC_FWD",
+      "relation": "theoretical interpretation"
+    },
+    {
+      "source": "C1",
+      "target": "OSC_TWO",
+      "relation": "theoretical interpretation"
+    },
+    {
+      "source": "C1",
+      "target": "UCTII_EXP",
+      "relation": "experiential interpretation"
+    },
+    {
+      "source": "C1_OI",
+      "target": "MICRO_EXP_DIFF",
+      "relation": "type reflection"
+    },
+    {
+      "source": "C1_OI",
+      "target": "STRUCT_TRANSFORM",
+      "relation": "type reflection"
+    },
+    {
+      "source": "C1_OI",
+      "target": "TOY_EXP_WHOLE",
+      "relation": "experiential interpretation"
+    },
+    {
+      "source": "C1_W",
+      "target": "NO_HIDDEN",
+      "relation": "sufficiency"
+    },
+    {
+      "source": "C1_W",
+      "target": "PROBE_INV",
+      "relation": "sufficiency"
+    },
+    {
+      "source": "C1_W",
+      "target": "NO_FUTURE",
+      "relation": "sufficiency"
+    },
+    {
+      "source": "C1_W",
+      "target": "GHOST_EQ",
+      "relation": "sufficiency"
+    },
+    {
+      "source": "C1_W",
+      "target": "REWARD_NONID",
+      "relation": "structure fixed"
+    },
+    {
+      "source": "C1_W",
+      "target": "MACRO_EXP_EQ",
+      "relation": "macro equivalence"
+    },
+    {
+      "source": "C1_W",
+      "target": "TOY_EXP_SUB",
+      "relation": "experiential interpretation"
+    },
+    {
+      "source": "U1",
+      "target": "U3",
+      "relation": "nonempty experience"
+    },
+    {
+      "source": "U1",
+      "target": "U0",
+      "relation": "compression"
+    },
+    {
+      "source": "U1",
+      "target": "ORG_GATE",
+      "relation": "universal existence"
+    },
+    {
+      "source": "U1",
+      "target": "E1",
+      "relation": "all actual tokens nonempty"
+    },
+    {
+      "source": "U1",
+      "target": "UCTII_GATE",
+      "relation": "universal experience"
+    },
+    {
+      "source": "U2",
+      "target": "U0",
+      "relation": "compression"
+    },
+    {
+      "source": "U2",
+      "target": "U2_APP",
+      "relation": "transfer theorem"
+    },
+    {
+      "source": "SELF_WITNESS",
+      "target": "U3",
+      "relation": "witness"
+    },
+    {
+      "source": "U3",
+      "target": "U0",
+      "relation": "compression"
+    },
+    {
+      "source": "NONUNIV_WITNESS",
+      "target": "ORG_GATE",
+      "relation": "nonuniversal candidate"
+    },
+    {
+      "source": "NONUNIV_WITNESS",
+      "target": "UCTII_GATE",
+      "relation": "nonuniversality"
+    },
+    {
+      "source": "COMPLETE_EQ",
+      "target": "NO_HIDDEN",
+      "relation": "same complete structure"
+    },
+    {
+      "source": "COMPLETE_EQ",
+      "target": "PROBE_INV",
+      "relation": "same complete structure"
+    },
+    {
+      "source": "COMPLETE_EQ",
+      "target": "NO_FUTURE",
+      "relation": "same present structure"
+    },
+    {
+      "source": "COMPLETE_EQ",
+      "target": "GHOST_EQ",
+      "relation": "same current structure"
+    },
+    {
+      "source": "PROBE_ONLY",
+      "target": "PROBE_INV",
+      "relation": "probe-only change"
+    },
+    {
+      "source": "FUTURE_ONLY",
+      "target": "NO_FUTURE",
+      "relation": "future-only divergence"
+    },
+    {
+      "source": "HISTORY_DIFF",
+      "target": "GHOST_EQ",
+      "relation": "history differs"
+    },
+    {
+      "source": "HISTORY_DIFF",
+      "target": "GHOST_TOKEN_NOTE",
+      "relation": "lineage difference"
+    },
+    {
+      "source": "LABEL_ONLY",
+      "target": "REWARD_NONID",
+      "relation": "external label only"
+    },
+    {
+      "source": "GHOST_EQ",
+      "target": "GHOST_TOKEN_NOTE",
+      "relation": "equivalence established"
+    },
+    {
+      "source": "PRODUCT_DEF",
+      "target": "NONSUM",
+      "relation": "product typing"
+    },
+    {
+      "source": "ACTUAL_WHOLE_PARTS",
+      "target": "NONSUM",
+      "relation": "actuality"
+    },
+    {
+      "source": "PHYS_NONPRODUCT",
+      "target": "NONSUM",
+      "relation": "physical premise"
+    },
+    {
+      "source": "MACRO_EQ",
+      "target": "MACRO_EXP_EQ",
+      "relation": "macro premise"
+    },
+    {
+      "source": "MICRO_NONISO",
+      "target": "MICRO_EXP_DIFF",
+      "relation": "micro premise"
+    },
+    {
+      "source": "SYM_PREM",
+      "target": "ORBIT_LEMMA",
+      "relation": "symmetry"
+    },
+    {
+      "source": "EQUIV_SELECTOR",
+      "target": "ORBIT_LEMMA",
+      "relation": "equivariance"
+    },
+    {
+      "source": "OVERLAP_NONEMPTY_EXCL",
+      "target": "SELECTION_OBSTRUCTION",
+      "relation": "exclusive constraint"
+    },
+    {
+      "source": "ORBIT_LEMMA",
+      "target": "SELECTION_OBSTRUCTION",
+      "relation": "orbit closure"
+    },
+    {
+      "source": "ALL_ANC_ACTUAL",
+      "target": "E1",
+      "relation": "actualized family"
+    },
+    {
+      "source": "E1",
+      "target": "EVOL_SYNTH",
+      "relation": "nonempty throughout"
+    },
+    {
+      "source": "EPS_CHAIN",
+      "target": "E2",
+      "relation": "fine-chain premise"
+    },
+    {
+      "source": "E2",
+      "target": "EVOL_SYNTH",
+      "relation": "fine-chain route"
+    },
+    {
+      "source": "PHYS_CONT_PATH",
+      "target": "U2_APP",
+      "relation": "path continuity"
+    },
+    {
+      "source": "U2_APP",
+      "target": "EVOL_SYNTH",
+      "relation": "strict-continuity route"
+    },
+    {
+      "source": "CONNECTED_LAMBDA",
+      "target": "E3",
+      "relation": "connectedness"
+    },
+    {
+      "source": "CONT_BINARY_E",
+      "target": "E3",
+      "relation": "continuity of E"
+    },
+    {
+      "source": "HUMAN_ENDPOINT",
+      "target": "E3",
+      "relation": "endpoint selects 1"
+    },
+    {
+      "source": "PHYS_TRANSFORM_NONISO",
+      "target": "STRUCT_TRANSFORM",
+      "relation": "physical nonisomorphism"
+    },
+    {
+      "source": "TOY_MATH",
+      "target": "TOY_WHOLE_DIFF",
+      "relation": "exact calculation"
+    },
+    {
+      "source": "TOY_MATH",
+      "target": "TOY_SUB_EQ",
+      "relation": "exact calculation"
+    },
+    {
+      "source": "TOY_WHOLE_DIFF",
+      "target": "TOY_EXP_WHOLE",
+      "relation": "physical result"
+    },
+    {
+      "source": "TOY_SUB_EQ",
+      "target": "TOY_EXP_SUB",
+      "relation": "physical result"
+    },
+    {
+      "source": "ACTUAL_COMPLETE_TOY",
+      "target": "TOY_EXP_WHOLE",
+      "relation": "actuality/completeness"
+    },
+    {
+      "source": "ACTUAL_COMPLETE_TOY",
+      "target": "TOY_EXP_SUB",
+      "relation": "actuality/completeness"
+    },
+    {
+      "source": "PHEN_TARGET",
+      "target": "BRIDGE_FWD",
+      "relation": "target relation"
+    },
+    {
+      "source": "PHEN_TARGET",
+      "target": "BRIDGE_REV",
+      "relation": "target relation"
+    },
+    {
+      "source": "BRIDGE_FWD",
+      "target": "OSC_FWD",
+      "relation": "operational bridge"
+    },
+    {
+      "source": "BRIDGE_FWD",
+      "target": "OSC_TWO",
+      "relation": "one-way bridge"
+    },
+    {
+      "source": "BRIDGE_REV",
+      "target": "OSC_TWO",
+      "relation": "reflection bridge"
+    },
+    {
+      "source": "MEAS",
+      "target": "OSC_FWD",
+      "relation": "measurement assumptions"
+    },
+    {
+      "source": "MEAS",
+      "target": "OSC_TWO",
+      "relation": "measurement assumptions"
+    },
+    {
+      "source": "OSC_FWD",
+      "target": "FAIL_ONE",
+      "relation": "tested package"
+    },
+    {
+      "source": "OSC_TWO",
+      "target": "FAIL_TWO",
+      "relation": "tested package"
+    },
+    {
+      "source": "PTVSP",
+      "target": "FAIL_ONE",
+      "relation": "freeze"
+    },
+    {
+      "source": "PTVSP",
+      "target": "FAIL_TWO",
+      "relation": "freeze"
+    },
+    {
+      "source": "BAC_TFR",
+      "target": "UCTII_RECON",
+      "relation": "translation constraints"
+    },
+    {
+      "source": "UCTII_RECON",
+      "target": "UCTII_EXP",
+      "relation": "recovered physical organization"
+    }
+  ],
+  "audit": {
+    "node_count": 78,
+    "edge_count": 105,
+    "dag": true,
+    "cycle_count": 0,
+    "transitive_reduction_edges": 97,
+    "backflow_violations": [],
+    "tests": {
+      "DAG": true,
+      "cycle_count_zero": true,
+      "single_consciousness_specific_axiom": true,
+      "no_forbidden_backflow_to_C1_U1_U2": true,
+      "E1_depends_on_U1": true,
+      "E1_not_on_U2": true,
+      "E2_depends_on_C1": true,
+      "E2_not_on_U1": true,
+      "E3_independent_of_C1_U1_U2": true,
+      "selection_obstruction_independent_of_C1_U1": true,
+      "toy_math_independent_of_C1_U1": true,
+      "uctii_reconstruction_independent_of_C1_U1": true,
+      "ghost_experiential_equivalence_not_on_P6": true,
+      "ghost_numeric_addendum_uses_P6": true
+    }
+  }
+}

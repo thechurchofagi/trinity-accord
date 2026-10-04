@@ -1,0 +1,7 @@
+UCT I v1.2 linked-version preparation requested by author on 2026-10-04.
+Reserve exactly one Zenodo successor of v1.1 and build the DOI-bound exact package.
+Workflow registered on main; retrigger 2026-10-04.
+Retry after safe latest-draft reconciliation patch; iteration 2.
+Retry after exact safe draft-reconciliation patch; iteration 3.
+Rebuild exact DOI-bound package from the reviewed public RC6 source; iteration 4.
+Final rebuild against canonical reviewed public source blob 310204d4; iteration 5.
