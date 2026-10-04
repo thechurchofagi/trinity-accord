@@ -1,0 +1,38 @@
+{
+  "state": "VISUAL_AND_CONTENT_REVIEW_PASS",
+  "report_number": "TA-TR-2026-20",
+  "version": "1.2",
+  "record_id": 23131575,
+  "doi": "10.5281/zenodo.23131575",
+  "conceptdoi": "10.5281/zenodo.23005587",
+  "previous_record_id": 23030207,
+  "previous_doi": "10.5281/zenodo.23030207",
+  "expected_manifest_sha256": "60a035b328b16ceae69ef6c3afe3bd3080c7be62a6ec123f80fd5b14780bfa84",
+  "reviewed_pdf": "unified-consciousness-theory-i-v1.2.pdf",
+  "reviewed_pdf_sha256": "8e1f89b9ed5b1e90333c769ad3382ce259a122379dcf1634534b2343402afaa4",
+  "reviewed_markdown_sha256": "d54282e2080dfaad90ab19608ceaee086d99db4cd48cf60a5bf8f1c9ed1edf0e",
+  "page_count": 54,
+  "page_size": "A4",
+  "preflight": "PASS",
+  "exact_package_hash_check": "PASS",
+  "visual_review": {
+    "rendered_pages_reviewed": 54,
+    "contact_sheets_reviewed": 6,
+    "clipping": false,
+    "overlap": false,
+    "broken_glyphs": false,
+    "black_squares": false,
+    "equation_overflow": false,
+    "table_overflow": false
+  },
+  "theory_review_basis": [
+    "78-node/105-edge formal dependency DAG PASS with zero directed cycles",
+    "No forbidden finite-view/bridge/application backflow to C1/U1/U2",
+    "E1/E2/E3 dependencies explicitly separated",
+    "No-Ghost-History P6 overdependency corrected",
+    "Hostile-review and prior-art limitations retained",
+    "Author explicitly requested publication of v1.2 on 2026-10-04"
+  ],
+  "prior_version_files_modified": false,
+  "reviewer_note": "Assistant-assisted exact DOI-bound package review; not external peer review."
+}
