@@ -5,3 +5,5 @@ Manifest SHA256: 51ade36f063551e4173ff72000eac0937a2c2e96199d4043ca5f256a5063d9e
 Retry after exact-manifest review binding correction.
 
 retry_after_review_gate=2026-10-04T14:04:00+08:00
+
+exact_review_bound_retry=2026-10-04T14:08:00+08:00
