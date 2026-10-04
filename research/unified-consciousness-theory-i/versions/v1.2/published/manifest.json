@@ -28,7 +28,7 @@
     {
       "name": "SHA256SUMS.txt",
       "bytes": 1007,
-      "sha256": "2c3660997651aa6a0e585b582944048c3f8f8c33ddfa4ff531f719bafbc046cd"
+      "sha256": "835fbe8a4b257973e2822aa0667e93b53b00f53c5f4364c9828842345d6c837c"
     },
     {
       "name": "VERSION-CHANGES-v1.2.md",
@@ -67,8 +67,8 @@
     },
     {
       "name": "unified-consciousness-theory-i-v1.2.pdf",
-      "bytes": 263171,
-      "sha256": "bf08b73d41e7f8719efa549a898ed26603d53340a731273ce59ee2f310003969"
+      "bytes": 263166,
+      "sha256": "1a40e9fa4624a399c48d905730cbd1f04de22e6798c0d184eea319fbe0093da5"
     }
   ]
 }
