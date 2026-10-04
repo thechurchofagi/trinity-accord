@@ -21,12 +21,12 @@
 \textbf{Date:} & 4 October 2026 \\
 \textbf{Prior published versions:} & v1.0, DOI 10.5281/zenodo.23005588 \\
  & v1.1, DOI 10.5281/zenodo.23030207 \\
-\textbf{v1.2 DOI:} & __DOI_RESERVED_AT_RELEASE__ \\
+\textbf{DOI:} & __DOI_RESERVED_AT_RELEASE__ \\
 \end{tabular}
 
 \vfill
 
-{\small Foundational theory preprint; not peer reviewed.\par}
+{\small Revised theoretical preprint; not peer reviewed. This version supersedes v1.1 while preserving prior published editions.\par}
 
 \end{titlepage}
 
@@ -36,10 +36,10 @@
 \pagenumbering{arabic}
 
 \section*{Versioning statement}
-This manuscript is version 1.2, succeeding *Unified Consciousness Theory I* v1.1 (DOI 10.5281/zenodo.23030207). It does not overwrite or retroactively alter v1.0 or v1.1. The principal change is architectural rather than empirical: the v1.1 foundational list is reclassified according to logical role. Persistence under embedding and token/type/lineage move to process ontology; Universal Experience and Selfhood Non-Prerequisite become derived results; Scoped Structural Continuity is derived after placing physical and experiential organization in a shared isomorphism-class space with a predeclared invariant topology; the strong tokenwise Structural–Experiential Identity remains the single consciousness-specific core axiom. Evolutionary continuity remains an explanatory application and threshold-pressure argument, not a proof of the core identity principle.
+Version 1.2 is a revised successor to *Unified Consciousness Theory I* v1.1 (DOI 10.5281/zenodo.23030207) and v1.0 (DOI 10.5281/zenodo.23005588). It does not overwrite or retroactively alter either prior edition. The main change is architectural: persistence and token/type/lineage are treated as process ontology; Universal Nonempty Experience, Structural Continuity, and Selfhood Non-Prerequisite are derived results; Structural--Experiential Identity is the single consciousness-specific core axiom. The revision also formalizes the No First Conscious Ancestor result, fine-grained structural chains, conditional connected-existence constancy, a stricter dependency map, and expanded prior-art/hostile-review boundaries. Evolutionary continuity remains an application and explanatory pressure test rather than an independent proof of the core identity principle.
 
 \section*{AI assistance disclosure}
-Substantial ChatGPT (OpenAI GPT-5.6 Sol) assistance was used for literature/source retrieval, formalization, adversarial review, dependency auditing, theorem checking, code-based static checks, drafting, and editing under human direction. The human author of record is responsible for the theory commitments and any publication decision. Version 1.2 additionally used ChatGPT to minimize independent commitments, formalize the structural quotient-space continuity result, migrate theorem dependencies, and construct cross-version compatibility tables. These checks are not independent peer review; no separate final human line-by-line verification is claimed.
+Substantial ChatGPT (OpenAI GPT-5.6 Sol) assistance was used for literature/source retrieval, formalization, adversarial review, dependency auditing, theorem checking, code-based static checks, drafting, editing, and publication preparation under human direction. The human author of record is responsible for the theory commitments and the decision to publish. The v1.2 revision additionally used ChatGPT for axiom minimization, structural quotient-space formalization, machine-readable dependency-graph auditing, hostile-review synthesis, source checking, and release preparation. These checks are not independent peer review; no separate final human line-by-line verification is claimed.
 
 ## Abstract
 
@@ -75,7 +75,7 @@ UCT no longer treats the first question as an independent axiom. Instead, both e
 
 The single consciousness-specific starting point is tokenwise structural–experiential identity. Universal experience is a direct internal consequence, while process identity and persistence are handled in the process ontology. Internal derivations are assessed by whether they follow from those commitments. The substantive comparative task is to constrain structured differences, multiscale relations, and transformations; empirical applications additionally require declared bridge predictions. Human and cellular experience do not require different existence mechanisms within this framework.
 
-The principal clarification of version 1.2 is that the strong identity commitment makes part of the v1.1 axiom list logically redundant. The second is that continuity must be stated in a common structural-type space, not by silently assigning unrelated topologies to physical and experiential descriptions. A central evolutionary consequence is then explicit: within UCT there is no first conscious ancestor. Thresholds may occur for particular forms of organization, but not for the existence of experience itself. Finite experiments still do not directly observe complete ontic organization or complete phenomenology; operational tests therefore target explicitly declared finite bridge hypotheses.
+The principal clarification of this v1.2 revision is that the strong identity commitment makes part of the v1.1 axiom list logically redundant. The second is that continuity must be stated in a common structural-type space, not by silently assigning unrelated topologies to physical and experiential descriptions. A central evolutionary consequence is then explicit: within UCT there is no first conscious ancestor. Thresholds may occur for particular forms of organization, but not for the existence of experience itself. Finite experiments still do not directly observe complete ontic organization or complete phenomenology; operational tests therefore target explicitly declared finite bridge hypotheses.
 
 
 # 2. Ontological domain: actual process tokens
@@ -1687,7 +1687,7 @@ In the v1.2 dependency architecture, Paper II's former references to A1, A3, and
 
 UCT II introduced explicit Bridge Admissibility Conditions, Translation Fidelity Requirements, formal recovery classes, and separate empirical-validation levels. Those constraints remain essential for preventing a rich mother formalism from trivially “containing” other theories by lookup.
 
-Version 1.2 does not claim novelty for:
+This v1.2 revision does not claim novelty for:
 
 - panexperientialism or panpsychism;
 - process-oriented metaphysics of experience;
@@ -1709,7 +1709,7 @@ Recent structural work narrows the originality claim further. Kleiner (2020a) fo
 
 The v1.2-specific role of \(\mathfrak S_{\mathcal K}\) is correspondingly narrow: it is a bookkeeping space of isomorphism classes used to express the consequence that, under C1, the physical and experiential descriptions of the same token trace the same structural-type path. This does not compete with a principal-bundle theory of perceptual content and does not independently solve the problem of selecting the empirically correct topology.
 
-The contribution claimed here is therefore not any single ingredient. Version 1.2 reorganizes the dependency architecture around one tokenwise identity axiom while retaining established mathematics for products, quotient spaces, symmetry, and causal abstraction. The constrained conjunction is now:
+The contribution claimed here is therefore not any single ingredient. This v1.2 revision reorganizes the dependency architecture around one tokenwise identity axiom while retaining established mathematics for products, quotient spaces, symmetry, and causal abstraction. The constrained conjunction is now:
 
 \[
 \boxed{
@@ -1735,7 +1735,7 @@ The prior-art boundary is narrower still when panpsychist and neutral-monist tra
 
 The narrower difference claimed for UCT is that C1 makes the **complete token-relative organization itself** the intrinsic experiential organization, without adding a second quiddistic phenomenal variable, while the actual-process ontology permits overlapping and nested experiential tokens and the bridge methodology keeps finite scientific views distinct from the ontic identity claim. Whether that package is ultimately preferable to Russellian or neutral-structuralist alternatives remains an open comparative question.
 
-The same comparison must include recent criticism. Negro (2025) argues against metaphysical phenomenal structuralism while preserving methodological structuralism; Kleiner (2024) argues that the structural turn can proceed independently of metaphysical commitments and cautions against overloading isomorphism; Aldé (2026) presents additional geometrical objections to similarity structuralism. These publication records and DOIs were rechecked against publisher pages during the v1.2 prepublication audit. These works do not straightforwardly refute C1 because UCT's structural signature is broader than similarity geometry, but they directly challenge any claim that structural equivalence by itself closes the metaphysical explanatory gap.
+The same comparison must include recent criticism. Negro (2025) argues against metaphysical phenomenal structuralism while preserving methodological structuralism; Kleiner (2024) argues that the structural turn can proceed independently of metaphysical commitments and cautions against overloading isomorphism; Aldé (2026) presents additional geometrical objections to similarity structuralism. These publication records and DOIs were rechecked against publisher pages during the v1.2 audit. These works do not straightforwardly refute C1 because UCT's structural signature is broader than similarity geometry, but they directly challenge any claim that structural equivalence by itself closes the metaphysical explanatory gap.
 
 # 14. Strong objections and limitations
 
@@ -1921,7 +1921,7 @@ Finite scientific measurements can discard distinctions even when complete exper
 
 # 15. Claim-status summary
 
-| Claim | Status in v1.2 |
+| Claim | Status in v1.2 v1.2 |
 |---|---|
 | Actual valid process-token domain | Process ontology |
 | Persistence under embedding | P3 process-ontology rule |
@@ -1992,13 +1992,13 @@ The resulting architecture is therefore:
 }
 \]
 
-The next scientific burden is not to add more existence axioms, but to identify actual organization faithfully, construct finite bridges that can fail, and compare the resulting predictions with neighboring theories under fixed protocols. Version 1.2 freezes the foundational architecture and moves the project to author review and release decision rather than further axiom expansion.
+The next scientific burden is not to add more existence axioms, but to identify actual organization faithfully, construct finite bridges that can fail, and compare the resulting predictions with neighboring theories under fixed protocols. v1.2 freezes the foundational architecture and moves the project to author review and release decision rather than further axiom expansion.
 
 ## 16.1 Cross-version compatibility with UCT II v1.1
 
 UCT II v1.1 remains interpretable without rerunning its formal toy calculations. Its UCT-I dependencies migrate as follows:
 
-| UCT II v1.1 dependency | UCT I v1.2 interpretation |
+| UCT II v1.1 dependency | UCT I v1.2 v1.2 interpretation |
 |---|---|
 | A1 Universal Experience | U1 Universal Nonempty Experience |
 | A3 Persistence Under Embedding | P3 Persistence, cessation, and embedding |
@@ -2013,7 +2013,7 @@ No claim is made here that UCT II v1.1 has itself been version-updated. A future
 # References
 
 
-**Reference and version note.** Existing v1.1 references are retained for citation continuity. No identifier has been assigned to version 1.2, and publication remains paused. Source use does not imply empirical support for C1.
+**Reference and version note.** Existing v1.1 references are retained for citation continuity. This v1.2 edition is DOI-bound to __DOI_RESERVED_AT_RELEASE__. Prior published editions remain unchanged. Source use does not imply empirical support for C1.
 
 **Reference-status note.** Literature added specifically for the v1.1 evolutionary/comparative synthesis was checked against publisher, PubMed, or journal records during the 29 September 2026 claim audit. Basri et al. (2026) was indexed by PubMed as ahead-of-print on 8 September 2026 even though the journal issue is dated November 2026. The prior-art audit also added Rosenberg (2004) as an explicit panexperientialist comparison and Nagae (2026) as a recent preprint-level structural-subjectivity comparator. The v1.2 prior-art update additionally verified Kleiner (2020a), Kleiner (2024), Kleiner and Ludwig (2024), Fink, Kob and Lyre (2021), Lyre (2022), Nešić (2022), Alter and Pereboom (2023), Negro (2025), Aldé (2026), Anderson and Piccinini (2024), and Oizumi, Lim and Kanai (2026) against journal/publisher or authoritative bibliographic records. Oizumi et al. has a 29 September 2026 production correction affecting supplementary material and Figure 4 orientation; the main article DOI remains pgag261. The correction does not alter the relational/symmetry/quotient-space point for which the article is cited here.
 
@@ -2110,68 +2110,60 @@ Yaron, I., Melloni, L., Pitts, M., et al. (2022). The ConTraSt database for anal
 
 # Appendix A. Main changes relative to v1.1
 
-1. Reclassifies the v1.1 axiom list by logical role rather than preserving six parallel foundational labels.
+1. Reclassifies the v1.1 foundations into process ontology, one consciousness-specific core axiom (C1), derived theorems, and empirical bridge assumptions.
 
-2. Retains one consciousness-specific core commitment:
+2. Retains Structural--Experiential Identity as the sole consciousness-specific core axiom:
 
-   \[
-   \forall P\in\mathcal P,\ 
-   \exists\Phi_{\mathcal K}(P),h_P:
-   \mathbf D^{ontic}_{\mathcal K}(P)
-   \cong
-   \Phi_{\mathcal K}(P).
-   \]
+\[
+\forall P\in\mathcal P,\quad
+\exists\Phi_{\mathcal K}(P),h_P:
+\mathbf D^{ontic}_{\mathcal K}(P)
+\cong
+\Phi_{\mathcal K}(P).
+\]
 
 3. Derives Universal Nonempty Experience (U1) from actual-token nonempty physical organization plus C1.
 
-4. Introduces the common structural-type space:
-
-   \[
-   \mathfrak S_{\mathcal K}
-   =
-   \mathrm{Obj}(\mathcal C_{\mathcal K})/\cong
-   \]
-
-   and derives Structural Continuity (U2) by showing that physical and experiential quotient-valued trajectories are the same function.
+4. Introduces the common structural-type space
+\[
+\mathfrak S_{\mathcal K}
+=
+\mathrm{Obj}(\mathcal C_{\mathcal K})/\cong
+\]
+and derives Structural Continuity (U2) as a transfer theorem on a predeclared invariant topology/pseudometric.
 
 5. Moves Persistence Under Embedding to process ontology as P3.
 
 6. Moves Token / Type / Lineage to process ontology as P6.
 
-7. Demotes Selfhood Non-Prerequisite to Corollary U3, conditional on an actual non-self token witness.
+7. Recasts Selfhood Non-Prerequisite as Corollary U3, conditional on an actual non-self token witness.
 
-8. Renames the weaker identity consequences C1-W and C1-OI and preserves their scoped theorem dependencies.
+8. Adds Proposition U0 (Foundational Compression) to make the axiom-minimization dependency explicit without treating logical compression as empirical evidence.
 
-9. Preserves the v1.1 firewall:
+9. Adds Corollary E1 (No First Conscious Ancestor), Corollary E2 (Fine-Grained Structural Chains), and Conditional Lemma E3 (Connected Existence Constancy).
 
-   \[
-   \mathbf D^{ontic}
-   \neq
-   D_v
-   \neq
-   \widehat D_v
-   \neq
-   Subject.
-   \]
+10. Re-centers the evolutionary synthesis on nonempty experience throughout plus changing experiential organization, while retaining the explicit boundary that evolutionary continuity alone does not prove C1.
 
-10. Preserves the Non-Summative Combination theorem, symmetry-orbit result, finite bridge architecture, and Physical Token/View Selection Protocol under updated dependencies.
+11. Preserves and sharpens the ontic/view/estimate/subject firewall:
+\[
+\mathbf D^{ontic}
+\neq
+D_v
+\neq
+\widehat D_v
+\neq
+Subject.
+\]
 
-11. Preserves and incorporates the four-setting causal-retention family, while explicitly separating its mathematics from the experiential interpretation supplied by C1.
+12. Preserves the Non-Summative Combination theorem, symmetry-orbit selection obstruction, finite bridge architecture, Physical Token/View Selection Protocol, and three-register/four-setting exact models under corrected dependencies.
 
-12. Recasts evolutionary continuity as an application of U1/U2 plus a physical path premise, not as evidence that independently proves C1.
+13. Adds deeper comparison with IIT, neurophenomenal structuralism, panexperientialism, Russellian monism, neutral-structuralism, and recent objections to metaphysical structuralism.
 
-13. Adds a migration table so references to v1.1 A1–A6 remain traceable.
+14. Makes topology/metric underdetermination, process-token proliferation, non-vacuity of experiential interpretation, and fundamental-physics completion explicit limitations.
 
-14. Preserves v1.0 and v1.1 as immutable historical editions and publishes v1.2 only as a linked successor version.
-15. Adds an explicit smooth-threshold countermodel showing why evolutionary/structural continuity alone cannot derive universal nonempty experience; C1 remains the required physical–experiential commitment.
-16. Re-centers the evolutionary synthesis on Corollary E1 (No First Conscious Ancestor): within UCT, experience is nonempty from the simplest actual processes onward, while evolution transforms experiential organization rather than experience existence.
-17. Adds Proposition U0 to state the exact foundational compression, clarifies that minimization is not evidence, and corrects/updates the structural-prior-art bibliography for publication review.
-18. Restores the exact three-register circuit figure omitted during migration and promotes the continuity-alone countermodel to a numbered subsection.
-19. Performs publication-layout cleanup, including a stable Figure 1 reference for Markdown/PDF portability and a dedicated title-page build.
-20. Repairs the All-Ancestors-Survive formalization so U1 applies only to actualized tokens in the stipulated scenario; adds the fine-grained-chain Corollary E2 and the conditional connected-existence Lemma E3.
-21. Adds an explicit hostile-review discussion of metaphysical structuralism, definition-vacuity, process proliferation, and the fact that UCT does not solve subject summation by composing micro-subjects.
-22. Adds a non-novelty boundary for No First Conscious Ancestor, clarifies elementary-process language, and freezes E2/E3 as the precise graduality/connected-existence results for release review.
-23. Version 1.2 freezes the foundational architecture, shortens the abstract, records publisher rechecks for the latest structuralist objections, and prepares the manuscript for final author review without initiating publication.
+15. Replaces the revision-specific dependency ledger with a machine-audited graph that separates E1/E2/E3 and blocks application/measurement backflow into C1/U1/U2.
+
+16. Preserves v1.0 and v1.1 as immutable prior published editions and supplies an explicit UCT II v1.1 compatibility map.
 
 # Appendix B. An exact three-register thought experiment
 
@@ -2398,7 +2390,7 @@ D_v
 }
 \]
 
-A machine-readable graph and edge ledger are supplied separately in the v1.2 prepublication audit package.
+A machine-readable graph and edge ledger are supplied separately in the v1.2 audit package.
 
 # Appendix D. Optional checks on a finite coarse description
 
