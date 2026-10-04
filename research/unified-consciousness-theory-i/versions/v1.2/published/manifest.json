@@ -8,7 +8,7 @@
   "previous_record_id": 23030207,
   "previous_doi": "10.5281/zenodo.23030207",
   "title": "Unified Consciousness Theory I: Structural–Experiential Identity and the Continuity from Physical Process to Conceptual Self",
-  "source_sha256": "3ffd9082f23b0bb091bfacf431405d78c41f2ba452e5b7512de8cf3e26437b59",
+  "source_sha256": "0f4a9f2066a9a38d98d0976caf0fbb4acace405e10f996811eaf983f6db194d7",
   "files": [
     {
       "name": "FORMAL-AUDIT-v1.2.md",
@@ -28,7 +28,7 @@
     {
       "name": "SHA256SUMS.txt",
       "bytes": 1007,
-      "sha256": "835fbe8a4b257973e2822aa0667e93b53b00f53c5f4364c9828842345d6c837c"
+      "sha256": "c5d43055895a84215c6cd95a33fe44672741db40b520d5bf4f28f6a5ec6d3490"
     },
     {
       "name": "VERSION-CHANGES-v1.2.md",
@@ -62,13 +62,13 @@
     },
     {
       "name": "unified-consciousness-theory-i-v1.2.md",
-      "bytes": 143648,
-      "sha256": "d54282e2080dfaad90ab19608ceaee086d99db4cd48cf60a5bf8f1c9ed1edf0e"
+      "bytes": 142624,
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4"
     },
     {
       "name": "unified-consciousness-theory-i-v1.2.pdf",
-      "bytes": 263166,
-      "sha256": "1a40e9fa4624a399c48d905730cbd1f04de22e6798c0d184eea319fbe0093da5"
+      "bytes": 261906,
+      "sha256": "d98e856245dcf9cd39c88c425d5f91edca3a02291331603d69f54fddf9547868"
     }
   ]
 }
