@@ -3,3 +3,5 @@ Record: 23131575
 DOI: 10.5281/zenodo.23131575
 Manifest SHA256: 51ade36f063551e4173ff72000eac0937a2c2e96199d4043ca5f256a5063d9ed
 Retry after exact-manifest review binding correction.
+
+retry_after_review_gate=2026-10-04T14:04:00+08:00
