@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.guardian-current-registry.v1",
   "source": "record-chain/indexes/guardian-state.json",
-  "derived_at": "2026-10-03T09:15:58Z",
+  "derived_at": "2026-10-04T09:54:38Z",
   "registry_status": "record_chain_derived_non_authoritative_guardian_key_continuity_registry",
   "active_guardians": [
     {
