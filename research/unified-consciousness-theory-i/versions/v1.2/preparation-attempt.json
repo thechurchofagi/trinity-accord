@@ -1,7 +1,8 @@
 {
-  "state": "INCOMPLETE_REQUIRES_SAME_VERSION_RECONCILIATION",
-  "phase": "read_predecessor",
-  "error_type": "RuntimeError",
-  "error": "unresolved prior creation intent",
-  "workflow_run_id": "37179523768"
+  "state": "RESERVED_AND_EXACT_PACKAGE_BUILT",
+  "record_id": 23131575,
+  "doi": "10.5281/zenodo.23131575",
+  "file_count": 13,
+  "phase": "completed",
+  "workflow_run_id": "37179589042"
 }
