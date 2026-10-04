@@ -8,4 +8,4 @@ c82d082b59e95d1829e18c77ef8774f1022c9626e8e1f84edc04325d01a65fe8  REVIEW-AND-SOU
 b535a4ebfb7e0981f9ceb08ad1901ef1538926e49905b4aadcad00198aaeb27d  formal-dependency-graph-v1.2.dot
 c8a4f2767f1d85af12a186f1ea781ff2edeb73fdc95c44f4f8abf9b9921932ba  formal-dependency-graph-v1.2.json
 d54282e2080dfaad90ab19608ceaee086d99db4cd48cf60a5bf8f1c9ed1edf0e  unified-consciousness-theory-i-v1.2.md
-8e1f89b9ed5b1e90333c769ad3382ce259a122379dcf1634534b2343402afaa4  unified-consciousness-theory-i-v1.2.pdf
+bf08b73d41e7f8719efa549a898ed26603d53340a731273ce59ee2f310003969  unified-consciousness-theory-i-v1.2.pdf
