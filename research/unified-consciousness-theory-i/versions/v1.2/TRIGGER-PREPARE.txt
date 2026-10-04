@@ -1,0 +1,2 @@
+UCT I v1.2 linked-version preparation requested by author on 2026-10-04.
+Reserve exactly one Zenodo successor of v1.1 and build the DOI-bound exact package.
