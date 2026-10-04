@@ -1,0 +1,7 @@
+{
+  "state": "INCOMPLETE_REQUIRES_SAME_RECORD_RESUMPTION",
+  "phase": "local_review_gate",
+  "error_type": "RuntimeError",
+  "error": "exact visual/content review missing",
+  "workflow_run_id": "37179898424"
+}
