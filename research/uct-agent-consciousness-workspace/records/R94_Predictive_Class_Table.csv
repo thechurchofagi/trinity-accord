@@ -1,0 +1,7 @@
+family,queries,classes,Q_required,O_required,QO_swap_changes,drop_Q_regret_nats,drop_O_regret_nats
+world_task,"world+task",4,false,false,false,0,0
+world_task_any,"world+task+any_avail",8,true,true,false,0.061344034528083,0.061344034528083
+world_task_self,"world+task+self",8,true,false,true,0.122688069056166,0
+world_task_other,"world+task+other",8,false,true,true,0,0.122688069056166
+world_task_count,"world+task+count_avail",12,true,true,false,,
+role_resolved,"world+task+self+other",16,true,true,true,0.092016051792124,0.092016051792124

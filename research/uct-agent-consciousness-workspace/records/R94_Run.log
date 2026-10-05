@@ -1,0 +1,27 @@
+R94 exact finite check
+Date: 2026-10-06
+States: 16
+epsilon: 0.1
+Assertions: PASS
+Predictive classes:
+world_task 4
+world_task_any 8
+world_task_self 8
+world_task_other 8
+world_task_count 12
+role_resolved 16
+Drop-Q regret nats:
+world_task ~0
+world_task_any 0.06134403452808279
+world_task_self 0.1226880690561657
+world_task_other ~0
+role_resolved 0.09201605179212413
+Distributed code invertible: true
+No single code bit equals Q globally: true
+No single code bit equals O globally: true
+Confounding witness observational difference: 0.8
+Confounding witness causal do(Q) difference: 0.0
+Observational log-loss regret dropping Q: 0.3680642071684971
+Execution failures: none
+Negative/counterexample cases retained: yes
+Scope: exact virtual finite-state check only; no training, real shutdown/copy/resource action, model API, or subjective measurement.

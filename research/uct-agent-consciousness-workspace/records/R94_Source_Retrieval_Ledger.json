@@ -1,0 +1,55 @@
+{
+  "round": "R94",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "Computational Mechanics: Pattern and Prediction, Structure and Simplicity",
+      "authors": "Cosma Rohilla Shalizi; James P. Crutchfield",
+      "year": 2001,
+      "url": "https://arxiv.org/abs/cond-mat/9907176",
+      "scope": "Read current indexed abstract plus author publication listing and a CMU predictive-state lecture summary. Used only for the established minimal predictive-state / causal-state precedent; no claim of full-paper rereading in this round."
+    },
+    {
+      "title": "Predictive Representations of State",
+      "authors": "Michael L. Littman; Richard S. Sutton; Satinder Singh",
+      "year": 2001,
+      "url": "https://proceedings.neurips.cc/paper/2001/file/1e4d36177d71bbb3558e43af9577d70e-Paper.pdf",
+      "scope": "Read indexed abstract/metadata and formulation summary. Used as direct action-conditional predictive-state precedent."
+    },
+    {
+      "title": "Equivalence notions and model minimization in Markov decision processes",
+      "authors": "Robert Givan; Thomas Dean; Matthew Greig",
+      "year": 2003,
+      "doi": "10.1016/S0004-3702(02)00376-4",
+      "scope": "Read bibliographic and search summary only. Used as state-abstraction/bisimulation prior-art lead, not for a detailed theorem attribution."
+    },
+    {
+      "title": "Language Models Represent Space and Time",
+      "authors": "Wes Gurnee; Max Tegmark",
+      "venue": "ICLR 2024",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/0a6059857ae5c82ea9726ee9282a7145-Abstract-Conference.html",
+      "scope": "Read conference abstract. Used as empirical evidence that LLM internal representations can encode world-related spatial and temporal variables."
+    },
+    {
+      "title": "I Predict Therefore I Am: Is Next Token Prediction Enough to Learn Human-Interpretable Concepts from Data?",
+      "authors": "Yuhang Liu et al.",
+      "venue": "ICLR 2026",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/db7c4a8a0c1bf8b405f21c783bbf9eae-Abstract-Conference.html",
+      "scope": "Read conference abstract and indexed OpenReview/arXiv summary. Used as strong recent prior art for latent-concept identifiability from next-token prediction under explicit generative assumptions."
+    },
+    {
+      "title": "Toward Consistent World Models with Multi-Token Prediction and Latent Semantic Enhancement",
+      "authors": "Qimin Zhong et al.",
+      "venue": "ACL 2026",
+      "url": "https://aclanthology.org/2026.acl-long.618/",
+      "scope": "Read indexed abstract. Used as recent prior art that multi-token objectives can impose stronger belief-state structure; no detailed theorem imported."
+    }
+  ],
+  "uct": {
+    "A": "Directly reread v1.2 sections 3.5-4 in branch research/uct-paper-a-v1-2-20261004: pointed/port-aware signature, C1, U1, U2, U3.",
+    "B": "Directly reread source formalism, BAC and section 5.6 from branch research/uct-paper-b-v1-20260928 source-main.md. This branch file is v1.0; the workspace's prior v1.1 audit remains inherited rather than falsely re-labeled.",
+    "C": "Directly reread sections 2, 3.5, 4 and 5.1-5.4 from branch research/uct-paper-c-v1-20261004."
+  },
+  "novelty_status": "Strong prior art for predictive equivalence/minimal sufficient states and next-token representation learning. R94 claims a project-specific UCT decomposition and exact counterexample audit, not historical-first predictive-state mathematics.",
+  "third_party_fulltexts_uploaded": false
+}

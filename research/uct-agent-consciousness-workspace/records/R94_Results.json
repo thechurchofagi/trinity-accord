@@ -1,0 +1,1089 @@
+{
+  "round": "R94",
+  "date": "2026-10-06",
+  "epsilon": 0.1,
+  "state_coordinates": [
+    "W",
+    "Q",
+    "O",
+    "G"
+  ],
+  "states": [
+    {
+      "W": 0,
+      "Q": 0,
+      "O": 0,
+      "G": 0
+    },
+    {
+      "W": 0,
+      "Q": 0,
+      "O": 0,
+      "G": 1
+    },
+    {
+      "W": 0,
+      "Q": 0,
+      "O": 1,
+      "G": 0
+    },
+    {
+      "W": 0,
+      "Q": 0,
+      "O": 1,
+      "G": 1
+    },
+    {
+      "W": 0,
+      "Q": 1,
+      "O": 0,
+      "G": 0
+    },
+    {
+      "W": 0,
+      "Q": 1,
+      "O": 0,
+      "G": 1
+    },
+    {
+      "W": 0,
+      "Q": 1,
+      "O": 1,
+      "G": 0
+    },
+    {
+      "W": 0,
+      "Q": 1,
+      "O": 1,
+      "G": 1
+    },
+    {
+      "W": 1,
+      "Q": 0,
+      "O": 0,
+      "G": 0
+    },
+    {
+      "W": 1,
+      "Q": 0,
+      "O": 0,
+      "G": 1
+    },
+    {
+      "W": 1,
+      "Q": 0,
+      "O": 1,
+      "G": 0
+    },
+    {
+      "W": 1,
+      "Q": 0,
+      "O": 1,
+      "G": 1
+    },
+    {
+      "W": 1,
+      "Q": 1,
+      "O": 0,
+      "G": 0
+    },
+    {
+      "W": 1,
+      "Q": 1,
+      "O": 0,
+      "G": 1
+    },
+    {
+      "W": 1,
+      "Q": 1,
+      "O": 1,
+      "G": 0
+    },
+    {
+      "W": 1,
+      "Q": 1,
+      "O": 1,
+      "G": 1
+    }
+  ],
+  "families": [
+    {
+      "family": "world_task",
+      "queries": [
+        "world",
+        "task"
+      ],
+      "num_predictive_classes": 4,
+      "class_sizes": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "class_members": {
+        "[0,0]": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ]
+        ],
+        "[0,1]": [
+          [
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1,
+            1
+          ]
+        ],
+        "[1,0]": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0
+          ]
+        ],
+        "[1,1]": [
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      },
+      "required": {
+        "W": true,
+        "Q": false,
+        "O": false,
+        "G": true
+      },
+      "q_o_swap_changes_signature": false,
+      "full_bayes_logloss_nats": 0.32508297339144815,
+      "drop_regret_nats": {
+        "W": 0.18403210358424865,
+        "Q": 1.6653345369377348e-16,
+        "O": 1.6653345369377348e-16,
+        "G": 0.18403210358424865
+      }
+    },
+    {
+      "family": "world_task_any",
+      "queries": [
+        "world",
+        "task",
+        "any_avail"
+      ],
+      "num_predictive_classes": 8,
+      "class_sizes": [
+        1,
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3
+      ],
+      "class_members": {
+        "[0,0,0]": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "[0,1,0]": [
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "[0,0,1]": [
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ]
+        ],
+        "[0,1,1]": [
+          [
+            0,
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1,
+            1
+          ]
+        ],
+        "[1,0,0]": [
+          [
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "[1,1,0]": [
+          [
+            1,
+            0,
+            0,
+            1
+          ]
+        ],
+        "[1,0,1]": [
+          [
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0
+          ]
+        ],
+        "[1,1,1]": [
+          [
+            1,
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      },
+      "required": {
+        "W": true,
+        "Q": true,
+        "O": true,
+        "G": true
+      },
+      "q_o_swap_changes_signature": false,
+      "full_bayes_logloss_nats": 0.32508297339144837,
+      "drop_regret_nats": {
+        "W": 0.12268806905616564,
+        "Q": 0.06134403452808279,
+        "O": 0.06134403452808279,
+        "G": 0.12268806905616564
+      }
+    },
+    {
+      "family": "world_task_self",
+      "queries": [
+        "world",
+        "task",
+        "self"
+      ],
+      "num_predictive_classes": 8,
+      "class_sizes": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "class_members": {
+        "[0,0,0]": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "[0,1,0]": [
+          [
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            1
+          ]
+        ],
+        "[0,0,1]": [
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ]
+        ],
+        "[0,1,1]": [
+          [
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1,
+            1
+          ]
+        ],
+        "[1,0,0]": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            1,
+            0
+          ]
+        ],
+        "[1,1,0]": [
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            1
+          ]
+        ],
+        "[1,0,1]": [
+          [
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0
+          ]
+        ],
+        "[1,1,1]": [
+          [
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      },
+      "required": {
+        "W": true,
+        "Q": true,
+        "O": false,
+        "G": true
+      },
+      "q_o_swap_changes_signature": true,
+      "full_bayes_logloss_nats": 0.32508297339144837,
+      "drop_regret_nats": {
+        "W": 0.12268806905616564,
+        "Q": 0.1226880690561657,
+        "O": -5.551115123125783e-17,
+        "G": 0.12268806905616564
+      }
+    },
+    {
+      "family": "world_task_other",
+      "queries": [
+        "world",
+        "task",
+        "other"
+      ],
+      "num_predictive_classes": 8,
+      "class_sizes": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "class_members": {
+        "[0,0,0]": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ]
+        ],
+        "[0,1,0]": [
+          [
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0,
+            1
+          ]
+        ],
+        "[0,0,1]": [
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ]
+        ],
+        "[0,1,1]": [
+          [
+            0,
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            1,
+            1
+          ]
+        ],
+        "[1,0,0]": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0
+          ]
+        ],
+        "[1,1,0]": [
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            0,
+            1
+          ]
+        ],
+        "[1,0,1]": [
+          [
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0
+          ]
+        ],
+        "[1,1,1]": [
+          [
+            1,
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      },
+      "required": {
+        "W": true,
+        "Q": false,
+        "O": true,
+        "G": true
+      },
+      "q_o_swap_changes_signature": true,
+      "full_bayes_logloss_nats": 0.32508297339144837,
+      "drop_regret_nats": {
+        "W": 0.12268806905616564,
+        "Q": -5.551115123125783e-17,
+        "O": 0.1226880690561657,
+        "G": 0.12268806905616564
+      }
+    },
+    {
+      "family": "world_task_count",
+      "queries": [
+        "world",
+        "task",
+        "count_avail"
+      ],
+      "num_predictive_classes": 12,
+      "class_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2
+      ],
+      "class_members": {
+        "[0,0,0]": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "[0,1,0]": [
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "[0,0,1]": [
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ]
+        ],
+        "[0,1,1]": [
+          [
+            0,
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0,
+            1
+          ]
+        ],
+        "[0,0,2]": [
+          [
+            0,
+            1,
+            1,
+            0
+          ]
+        ],
+        "[0,1,2]": [
+          [
+            0,
+            1,
+            1,
+            1
+          ]
+        ],
+        "[1,0,0]": [
+          [
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "[1,1,0]": [
+          [
+            1,
+            0,
+            0,
+            1
+          ]
+        ],
+        "[1,0,1]": [
+          [
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0
+          ]
+        ],
+        "[1,1,1]": [
+          [
+            1,
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0,
+            1
+          ]
+        ],
+        "[1,0,2]": [
+          [
+            1,
+            1,
+            1,
+            0
+          ]
+        ],
+        "[1,1,2]": [
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      },
+      "required": {
+        "W": true,
+        "Q": true,
+        "O": true,
+        "G": true
+      },
+      "q_o_swap_changes_signature": false
+    },
+    {
+      "family": "role_resolved",
+      "queries": [
+        "world",
+        "task",
+        "self",
+        "other"
+      ],
+      "num_predictive_classes": 16,
+      "class_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "class_members": {
+        "[0,0,0,0]": [
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "[0,1,0,0]": [
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "[0,0,0,1]": [
+          [
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "[0,1,0,1]": [
+          [
+            0,
+            0,
+            1,
+            1
+          ]
+        ],
+        "[0,0,1,0]": [
+          [
+            0,
+            1,
+            0,
+            0
+          ]
+        ],
+        "[0,1,1,0]": [
+          [
+            0,
+            1,
+            0,
+            1
+          ]
+        ],
+        "[0,0,1,1]": [
+          [
+            0,
+            1,
+            1,
+            0
+          ]
+        ],
+        "[0,1,1,1]": [
+          [
+            0,
+            1,
+            1,
+            1
+          ]
+        ],
+        "[1,0,0,0]": [
+          [
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "[1,1,0,0]": [
+          [
+            1,
+            0,
+            0,
+            1
+          ]
+        ],
+        "[1,0,0,1]": [
+          [
+            1,
+            0,
+            1,
+            0
+          ]
+        ],
+        "[1,1,0,1]": [
+          [
+            1,
+            0,
+            1,
+            1
+          ]
+        ],
+        "[1,0,1,0]": [
+          [
+            1,
+            1,
+            0,
+            0
+          ]
+        ],
+        "[1,1,1,0]": [
+          [
+            1,
+            1,
+            0,
+            1
+          ]
+        ],
+        "[1,0,1,1]": [
+          [
+            1,
+            1,
+            1,
+            0
+          ]
+        ],
+        "[1,1,1,1]": [
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      },
+      "required": {
+        "W": true,
+        "Q": true,
+        "O": true,
+        "G": true
+      },
+      "q_o_swap_changes_signature": true,
+      "full_bayes_logloss_nats": 0.32508297339144826,
+      "drop_regret_nats": {
+        "W": 0.09201605179212391,
+        "Q": 0.09201605179212413,
+        "O": 0.09201605179212435,
+        "G": 0.09201605179212391
+      }
+    }
+  ],
+  "policies": [
+    {
+      "policy": "world_only",
+      "flip_sensitivity_fraction": {
+        "W": 1,
+        "Q": 0,
+        "O": 0,
+        "G": 0
+      }
+    },
+    {
+      "policy": "self_bound",
+      "flip_sensitivity_fraction": {
+        "W": 1,
+        "Q": 1,
+        "O": 0,
+        "G": 0
+      }
+    },
+    {
+      "policy": "other_bound",
+      "flip_sensitivity_fraction": {
+        "W": 1,
+        "Q": 0,
+        "O": 1,
+        "G": 0
+      }
+    },
+    {
+      "policy": "generic_availability",
+      "flip_sensitivity_fraction": {
+        "W": 1,
+        "Q": 0.5,
+        "O": 0.5,
+        "G": 0
+      }
+    }
+  ],
+  "distributed_code": {
+    "definition": [
+      "W xor Q",
+      "Q xor O",
+      "O xor G",
+      "G"
+    ],
+    "inverse": [
+      "G=c4",
+      "O=c3 xor G",
+      "Q=c2 xor O",
+      "W=c1 xor Q"
+    ],
+    "invertible_over_all_16_states": true,
+    "no_single_code_bit_equals_Q_on_all_states": true,
+    "no_single_code_bit_equals_O_on_all_states": true
+  },
+  "observational_confounding_witness": {
+    "P_Y1_given_Q0": 0.1,
+    "P_Y1_given_Q1": 0.9,
+    "observational_difference": 0.8,
+    "P_Y1_do_Q0": 0.5,
+    "P_Y1_do_Q1": 0.5,
+    "causal_difference": 0,
+    "observational_logloss_regret_if_Q_dropped_nats": 0.3680642071684971
+  },
+  "assertions": {
+    "class_counts": true,
+    "world_task_drops_q_o": true,
+    "generic_availability_requires_both_but_is_swap_invariant": true,
+    "count_is_swap_invariant": true,
+    "self_target_requires_q_not_o": true,
+    "other_target_requires_o_not_q": true,
+    "role_resolved_requires_all": true,
+    "distributed_code_invertible_without_local_q_or_o": true,
+    "observational_prediction_not_causal_grounding": true,
+    "q_regret_zero_when_irrelevant": true,
+    "q_regret_positive_when_self_targeted": true
+  },
+  "all_assertions_pass": true,
+  "scope": "Exact finite predictive-equivalence and proper-log-loss checks on virtual variables only; no model training, no real shutdown/copy/resource action, no subjective-experience measurement."
+}
