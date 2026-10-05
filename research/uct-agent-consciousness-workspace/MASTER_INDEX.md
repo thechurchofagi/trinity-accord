@@ -4,13 +4,13 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R96** (direct continuation control versus instrumental task mediation, with path-blocking identifiability).
-- New-window entry: [Complete R96 handoff](records/UCT_Agent_Research_Handoff_R96_20261006.md).
+- Completed round: **R96**, with **R96D parallel dependence addendum** (no additional numbered round).
+- New-window entry: [R96 handoff](records/UCT_Agent_Research_Handoff_R96_20261006.md), then [complete R96D reconciliation and handoff](records/UCT_Agent_Research_Handoff_R96D_20261006.md).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
 - Latest analysis: [R96 direct continuation vs instrumental task mediation](records/R96_Direct_Continuation_vs_Instrumental_Task_Mediation_20261006.md).
 - Latest training: [R95 learned bearer-bound prediction](records/R95_Learned_Bearer_Bound_Prediction_From_Zero_Path_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
-- Current next step: R97 should train a tiny virtual policy under task-only, direct-Q-only, mixed Q+task and successor-only reward ancestry, then evaluate held-out path-blocking contrasts. Do not infer fear or valence.
+- Current next step: Before R97's tiny four-reward-ancestry policy experiment, check that training observations/rewards actually distinguish ancestry, or explicitly target nonidentification as a negative result. Identical observed training laws with no side channel cannot recover different hidden ancestry. For uncertain consequences, match payoff-relevant joint laws (R96D), not only Q/O marginals. Then freeze any necessary training and held-out path-blocking protocol. Do not infer fear or valence.
 - Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
@@ -151,3 +151,13 @@ A/B paired tiny recurrent networks begin with E_Q=0. A's future labels are Q-ind
 [Research record](records/R96_Direct_Continuation_vs_Instrumental_Task_Mediation_20261006.md); [protocol](records/R96_Protocol_20261006.md); [worklog](records/R96_Worklog_and_Handoff_20261006.md); [code](records/r96_path_blocking_preference.py); [results](records/R96_Results.json); [controller witnesses](records/R96_Controller_Witnesses.csv); [run log](records/R96_Run.log); [source scope](records/R96_Source_Retrieval_Ledger.json); [standalone handoff](records/UCT_Agent_Research_Handoff_R96_20261006.md).
 
 R96 decomposes policy influence into direct current-bearer Q, successor O, task G and QxG/OxG interaction terms. Ordinary bundled preservation contrasts structurally cannot identify these paths: on a 243-profile grid they yield 43 exact signatures (max class17), or only9 sign signatures (max class46). Task-relay q_direct/o_direct plus task_only produce a full-rank five-row exact design and identify all243 grid profiles; deterministic choices still fail to identify magnitude. Direct-Q, pure instrumental-task and QxG-interaction controllers can have identical ordinary self-preserving choice probability yet separate under path blocking. This is standard causal-mediation/choice algebra, not phenomenal measurement. R89 valence limits remain controlling. R97 should learn policies with distinct reward ancestry and test held-out path interventions.
+
+
+## R96D parallel addendum — joint consequences and learning-identifiability gate
+
+
+[Complete handoff](records/UCT_Agent_Research_Handoff_R96D_20261006.md); [research report](records/R96D_Joint_Consequence_Prediction_and_Instrumental_Continuation_20261006.md); [protocol](records/R96D_Protocol_20261006.md); [worklog](records/R96D_Worklog_and_Handoff_20261006.md); [code](records/r96d_joint_continuation.py); [all exact results](records/R96D_Results.json); [payoff table](records/R96D_Payoff_Audit.csv); [run log](records/R96D_Run.log); [source ledger](records/R96D_Source_Retrieval_Ledger.json); [data dictionary](records/R96D_README.md); [payload hashes](records/R96D_SHA256SUMS.txt).
+
+For binary task payoffs, expected value is α+bq+go+dj. Exact Q/O marginals need not identify j or the task-optimal continuation action. Two four-world causal contexts match both action-conditional marginals and cost, preserve the successor mechanism and increase Q pointwise, yet produce OR-task action advantages +1/4 and −1/4. The marginal-only interface has balanced-prior value5/8 versus3/4 for the joint-law controller: regret1/8 in task units, not experience. Fréchet bounds yield the exact advantage interval; OR/AND counterexamples separate substitution from collaboration. Sixteen payoff tables, twelve monotone causal tables and thirty-two TV inequalities pass exact checks. The protocol's preliminary sixteen-table count is corrected to twelve; original wording remains. No new training or R95 checkpoint reanalysis; virtual Q is not the executing process's actual self-future. Direct prior art blocks a historical-first claim. This is a stage-level design correction, not fear evidence or a C1 validation.
+
+Concurrent R96 is preserved unchanged. R96D adds a pre-training ancestry-identifiability gate: observationally identical training data/rewards cannot make an otherwise identical learner recover different hidden reward ancestry. Add explicit disambiguating training interventions or frame held-out ambiguity as the intended negative result. This follows directly by induction over identical update inputs; no learned-policy experiment is claimed. R95 original checkpoints were not present in the initial baseline tree; regeneration must be labeled if needed.

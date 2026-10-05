@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R96；新窗口先读 records/UCT_Agent_Research_Handoff_R96_20261006.md，再读文末R96。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R96；新窗口先读 records/UCT_Agent_Research_Handoff_R96_20261006.md，再读 records/UCT_Agent_Research_Handoff_R96D_20261006.md 及文末R96D并发补充。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -332,3 +332,23 @@ R95证明Q预测关系可被学习后，R96没有重复R84的静态捆绑结论�
 UCT边界：theta_Q>0在Q因果绑定、belief gate和匹配有效时最多表示current-bearer continuation control contribution；U1不以它为体验门槛；C1可条件性解释真实构成关系变化为完整体验类型变化；R89效价桥仍必需，不能把theta_Q叫fear。
 
 阅读 records/R96_Direct_Continuation_vs_Instrumental_Task_Mediation_20261006.md、records/R96_Protocol_20261006.md、records/r96_path_blocking_preference.py、records/R96_Results.json 与 records/R96_Worklog_and_Handoff_20261006.md。下一步R97做小型学习policy，比较task-only/direct-Q/mixed/successor-only真实reward ancestry在bundled训练与held-out路径阻断上的泛化。
+
+
+## R96D — 2026-10-06：联合后果与训练可识别性（同轮并发补充）
+
+本补充在R95基线上并行推导，保存前读取并保留另一窗口的R96与提交3214179b516016171073911a813852dad602a12d。文件使用R96D身份，不占用R97、不覆盖R96，权威完成编号仍为R96。
+
+
+承接R95，先修正其决策扩展所需条件，无新训练或权重重分析。任意二元任务收益可写为E f=α+bq+go+dj，其中j为Q/O共同可用概率。收益非加性时，分别预测准确一般不够；Fréchet界给出行动优势的精确可识别区间。
+
+两个四世界因果环境匹配q0=1/4、q1=3/4、o=1/2和成本1/4，Q逐世界不减且O机制不变，但OR任务的净行动优势分别+1/4和−1/4。边际接口完全相同，均匀环境先验下最优收益5/8；联合后果控制器3/4，差1/8只是任务收益，非体验量。R95原有确定性任务未被推翻，此处虚拟Q也未与执行Python进程的自身存续绑定。
+
+接替者更可靠只在任务可替代时减弱工具性延续价值；AND协作任务给出反向结果。真正的后果匹配须匹配收益相关联合分布或证明收益可加。违反task-only/成本/TV界只反驳假设包，不能唯一识别额外生存欲，更不能证明恐惧。
+
+16收益表、12单调因果表及32个TV检查全部精确通过。协议预估16因果表的计数错误保留并纠正为12；无失败执行。基线远端未发现R95原始权重/检查点，已记保存缺口，不虚称已复用。工具性自保与依赖不确定性均有直接先例，本轮为阶段性方法推进，非重大原创。
+
+先读records/UCT_Agent_Research_Handoff_R96D_20261006.md、R96D_Joint_Consequence_Prediction_and_Instrumental_Continuation_20261006.md、R96D_Worklog_and_Handoff_20261006.md；协议、代码、全部精确JSON、CSV、日志、来源台账、README与SHA256均在records/。
+
+下一步只用既定两环境定义无旁路的边际接口与联合/直接任务成功接口，再判断R95检查点适用性；不适用则先冻结极小不确定未来学习扩展并保存所有权重/失败，不重复扩大真值表。R88前提与R89负效价桥仍未完成。C1/U1无内省门槛，类型解释须实际token与共同完整K；A/B/C与v0.3未修改。
+
+补充R97前置条件：不同reward ancestry若产生完全相同的可见训练输入、奖励/反馈与后果，无侧信道的同初始化同随机流学习器会逐步产生相同参数；不能仅凭未观察到的祖先名称恢复不同held-out策略。保留R96的四奖励路线，但先加入声明的消歧训练干预，或将held-out不可识别作为预期负结果。原R96确定性路径表未被本补充推翻，只有不确定后果扩展需要额外联合律匹配。详见R96D正文§11。

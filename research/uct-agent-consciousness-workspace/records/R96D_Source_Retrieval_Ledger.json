@@ -1,0 +1,80 @@
+{
+  "round": "R96D",
+  "date": "2026-10-06",
+  "baseline": "035668f4773a5872cc5f9c6f53d2a7f12bc87d69",
+  "status": "targeted prior-art review; no historical-first claim",
+  "internal": [
+    {
+      "file": "UCT I v1.2",
+      "doi": "10.5281/zenodo.23131575",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "scope": "local preserved source: section3.5, C1, C1-OI, U1/U2/U3 read directly"
+    },
+    {
+      "file": "UCT II v1.1",
+      "doi": "10.5281/zenodo.23030320",
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+      "scope": "local preserved source: section5.6 directly; adjacent sections6–13 returned incidentally; no full-paper audit claimed"
+    },
+    {
+      "file": "UCT III v1.0",
+      "doi": "10.5281/zenodo.23137088",
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+      "scope": "local preserved source: sections4.1/4.2 and5.1–5.4 directly"
+    },
+    {
+      "file": "R84, R94, R95",
+      "scope": "repository research reports; R95 protocol,pilots,code,results,worklog,handoff. R82 continuity via index; not claiming new full-source reread"
+    }
+  ],
+  "external": [
+    {
+      "title": "The Off-Switch Game",
+      "url": "https://arxiv.org/abs/1611.08219",
+      "version_date": "2017-06-16",
+      "scope": "abstract",
+      "role": "instrumental self-preservation prior"
+    },
+    {
+      "title": "Optimal Policies Tend To Seek Power",
+      "url": "https://proceedings.neurips.cc/paper/2021/hash/c26820b8a4c1b3c2aa868d6d57e14a79-Abstract.html",
+      "year": 2021,
+      "scope": "official proceedings abstract only",
+      "role": "conditional incentive tendencies, not all agents/all tasks"
+    },
+    {
+      "title": "Occam's razor is insufficient to infer the preferences of irrational agents",
+      "url": "https://arxiv.org/abs/1712.05812",
+      "version_date": "2019-01-11",
+      "scope": "abstract only",
+      "role": "policy/planner/reward ambiguity"
+    },
+    {
+      "title": "Marginal and dependence uncertainty: bounds, optimal transport, and sharpness",
+      "url": "https://arxiv.org/html/1709.00641v2",
+      "version_date": "2018-08-17",
+      "scope": "abstract and introduction through equation1.4 and discussion, web lines41–68",
+      "role": "direct prior art for dependence uncertainty and Frechet expectation bounds; no full technical proof audit"
+    },
+    {
+      "title": "Comparison of Experiments (Blackwell)",
+      "url": "https://digicoll.lib.berkeley.edu/record/112749/files/math_s2_article-08.pdf",
+      "scope": "search snippet only; open403; not relied on as full-text evidence",
+      "status": "retrieval_failed"
+    }
+  ],
+  "limits": [
+    "No comprehensive priority search",
+    "Search-result dates may be crawler dates; publication dates above from primary records",
+    "No new review of empirical shutdown datasets this round; formal prediction-to-decision interface takes precedence",
+    "Only links and own notes retained, no third-party full texts uploaded"
+  ],
+  "concurrent_reconciliation": {
+    "commit": "3214179b516016171073911a813852dad602a12d",
+    "read_in_full": [
+      "R96_Direct_Continuation_vs_Instrumental_Task_Mediation_20261006.md",
+      "R96_Worklog_and_Handoff_20261006.md"
+    ],
+    "designation": "R96D parallel dependence addendum; R96 files preserved; no extra numbered round"
+  }
+}

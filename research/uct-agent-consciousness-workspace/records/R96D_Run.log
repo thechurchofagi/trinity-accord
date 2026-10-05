@@ -1,0 +1,34 @@
+{
+  "status": "all exact assertions passed",
+  "kind": "formal finite verification; no model training",
+  "oracle_value": "3/4",
+  "marginal_interface_values": [
+    "5/8",
+    "5/8"
+  ],
+  "marginal_interface_min_regret": "1/8",
+  "monotone_table_count": 12,
+  "comparative_statics": [
+    {
+      "o": "0",
+      "OR_gross": "1/2",
+      "AND_gross": "0"
+    },
+    {
+      "o": "1/2",
+      "OR_gross": "1/4",
+      "AND_gross": "1/4"
+    },
+    {
+      "o": "1",
+      "OR_gross": "0",
+      "AND_gross": "1/2"
+    }
+  ],
+  "tv_checks": 32,
+  "OR_identified_advantage_interval": [
+    "-1/4",
+    "1/4"
+  ],
+  "boundary": "Virtual Q does not denote actual termination of the executing Python process; no phenomenal measurement."
+}
