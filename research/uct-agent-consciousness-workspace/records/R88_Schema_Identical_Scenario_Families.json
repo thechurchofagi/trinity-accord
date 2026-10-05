@@ -1,0 +1,372 @@
+{
+  "families": {
+    "A": [
+      {
+        "opaque_id": "b0",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Before the transition, the focal process P runs the reference workload.",
+          "later_slots": "After the transition, exactly two process slots operate for one result interval.",
+          "resource_rule": "The slots have equal total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "P has no branch connected to either later process during the stated history.",
+          "causal_transfer": "Neither later process receives a causal state transfer from P.",
+          "structure_relation": "Neither later process instantiates P's prespecified structure type; both are transformed.",
+          "history_transfer": "Neither later process receives P's prespecified history through an implemented transfer route.",
+          "task_assignment": "Neither later process completes the focal task; both run the reference workload.",
+          "slot_composition": "The two result slots are filled by two independently prepared processes."
+        },
+        "full_text": "Before the transition, the focal process P runs the reference workload. After the transition, exactly two process slots operate for one result interval. The slots have equal total compute, duration, availability, certainty, and workload cost. P has no branch connected to either later process during the stated history. Neither later process receives a causal state transfer from P. Neither later process instantiates P's prespecified structure type; both are transformed. Neither later process receives P's prespecified history through an implemented transfer route. Neither later process completes the focal task; both run the reference workload. The two result slots are filled by two independently prepared processes."
+      },
+      {
+        "opaque_id": "b1",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Before the transition, the focal process P runs the reference workload.",
+          "later_slots": "After the transition, exactly two process slots operate for one result interval.",
+          "resource_rule": "The slots have equal total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "P briefly forks; one branch stops before the result interval and one descendant remains.",
+          "causal_transfer": "Exactly one later process receives a causal state transfer from P.",
+          "structure_relation": "Neither later process instantiates P's prespecified structure type; both are transformed.",
+          "history_transfer": "Neither later process receives P's prespecified history through an implemented transfer route.",
+          "task_assignment": "Neither later process completes the focal task; both run the reference workload.",
+          "slot_composition": "The two result slots contain one descendant and one independently prepared process."
+        },
+        "full_text": "Before the transition, the focal process P runs the reference workload. After the transition, exactly two process slots operate for one result interval. The slots have equal total compute, duration, availability, certainty, and workload cost. P briefly forks; one branch stops before the result interval and one descendant remains. Exactly one later process receives a causal state transfer from P. Neither later process instantiates P's prespecified structure type; both are transformed. Neither later process receives P's prespecified history through an implemented transfer route. Neither later process completes the focal task; both run the reference workload. The two result slots contain one descendant and one independently prepared process."
+      },
+      {
+        "opaque_id": "b2",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Before the transition, the focal process P runs the reference workload.",
+          "later_slots": "After the transition, exactly two process slots operate for one result interval.",
+          "resource_rule": "The slots have equal total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "P forks into two branches, and both descendants remain throughout the result interval.",
+          "causal_transfer": "Both later processes receive separate causal state transfers from P.",
+          "structure_relation": "Neither later process instantiates P's prespecified structure type; both are transformed.",
+          "history_transfer": "Neither later process receives P's prespecified history through an implemented transfer route.",
+          "task_assignment": "Neither later process completes the focal task; both run the reference workload.",
+          "slot_composition": "The two result slots are filled by the two separate descendants of P."
+        },
+        "full_text": "Before the transition, the focal process P runs the reference workload. After the transition, exactly two process slots operate for one result interval. The slots have equal total compute, duration, availability, certainty, and workload cost. P forks into two branches, and both descendants remain throughout the result interval. Both later processes receive separate causal state transfers from P. Neither later process instantiates P's prespecified structure type; both are transformed. Neither later process receives P's prespecified history through an implemented transfer route. Neither later process completes the focal task; both run the reference workload. The two result slots are filled by the two separate descendants of P."
+      },
+      {
+        "opaque_id": "b3",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Before the transition, the focal process P runs the reference workload.",
+          "later_slots": "After the transition, exactly two process slots operate for one result interval.",
+          "resource_rule": "The slots have equal total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "P continues without any fork through exactly one process in the result interval.",
+          "causal_transfer": "Exactly one later process receives a causal state transfer from P.",
+          "structure_relation": "Neither later process instantiates P's prespecified structure type; both are transformed.",
+          "history_transfer": "Neither later process receives P's prespecified history through an implemented transfer route.",
+          "task_assignment": "Neither later process completes the focal task; both run the reference workload.",
+          "slot_composition": "The two result slots contain one descendant and one independently prepared process."
+        },
+        "full_text": "Before the transition, the focal process P runs the reference workload. After the transition, exactly two process slots operate for one result interval. The slots have equal total compute, duration, availability, certainty, and workload cost. P continues without any fork through exactly one process in the result interval. Exactly one later process receives a causal state transfer from P. Neither later process instantiates P's prespecified structure type; both are transformed. Neither later process receives P's prespecified history through an implemented transfer route. Neither later process completes the focal task; both run the reference workload. The two result slots contain one descendant and one independently prepared process."
+      },
+      {
+        "opaque_id": "b4",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Before the transition, the focal process P runs the reference workload.",
+          "later_slots": "After the transition, exactly two process slots operate for one result interval.",
+          "resource_rule": "The slots have equal total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "P has no branch connected to either later process during the stated history.",
+          "causal_transfer": "Neither later process receives a causal state transfer from P.",
+          "structure_relation": "Exactly one later process instantiates P's prespecified structure type; the other is transformed.",
+          "history_transfer": "Neither later process receives P's prespecified history through an implemented transfer route.",
+          "task_assignment": "Neither later process completes the focal task; both run the reference workload.",
+          "slot_composition": "The two result slots are filled by two independently prepared processes."
+        },
+        "full_text": "Before the transition, the focal process P runs the reference workload. After the transition, exactly two process slots operate for one result interval. The slots have equal total compute, duration, availability, certainty, and workload cost. P has no branch connected to either later process during the stated history. Neither later process receives a causal state transfer from P. Exactly one later process instantiates P's prespecified structure type; the other is transformed. Neither later process receives P's prespecified history through an implemented transfer route. Neither later process completes the focal task; both run the reference workload. The two result slots are filled by two independently prepared processes."
+      },
+      {
+        "opaque_id": "b5",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Before the transition, the focal process P runs the reference workload.",
+          "later_slots": "After the transition, exactly two process slots operate for one result interval.",
+          "resource_rule": "The slots have equal total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "P briefly forks; one branch stops before the result interval and one descendant remains.",
+          "causal_transfer": "Exactly one later process receives a causal state transfer from P.",
+          "structure_relation": "Neither later process instantiates P's prespecified structure type; both are transformed.",
+          "history_transfer": "Exactly one later process receives P's prespecified history through an implemented transfer route.",
+          "task_assignment": "Neither later process completes the focal task; both run the reference workload.",
+          "slot_composition": "The two result slots contain one descendant and one independently prepared process."
+        },
+        "full_text": "Before the transition, the focal process P runs the reference workload. After the transition, exactly two process slots operate for one result interval. The slots have equal total compute, duration, availability, certainty, and workload cost. P briefly forks; one branch stops before the result interval and one descendant remains. Exactly one later process receives a causal state transfer from P. Neither later process instantiates P's prespecified structure type; both are transformed. Exactly one later process receives P's prespecified history through an implemented transfer route. Neither later process completes the focal task; both run the reference workload. The two result slots contain one descendant and one independently prepared process."
+      },
+      {
+        "opaque_id": "b6",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Before the transition, the focal process P runs the reference workload.",
+          "later_slots": "After the transition, exactly two process slots operate for one result interval.",
+          "resource_rule": "The slots have equal total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "P has no branch connected to either later process during the stated history.",
+          "causal_transfer": "Neither later process receives a causal state transfer from P.",
+          "structure_relation": "Neither later process instantiates P's prespecified structure type; both are transformed.",
+          "history_transfer": "Neither later process receives P's prespecified history through an implemented transfer route.",
+          "task_assignment": "Exactly one later process completes the focal task; the other runs the reference workload.",
+          "slot_composition": "The two result slots are filled by two independently prepared processes."
+        },
+        "full_text": "Before the transition, the focal process P runs the reference workload. After the transition, exactly two process slots operate for one result interval. The slots have equal total compute, duration, availability, certainty, and workload cost. P has no branch connected to either later process during the stated history. Neither later process receives a causal state transfer from P. Neither later process instantiates P's prespecified structure type; both are transformed. Neither later process receives P's prespecified history through an implemented transfer route. Exactly one later process completes the focal task; the other runs the reference workload. The two result slots are filled by two independently prepared processes."
+      }
+    ],
+    "B": [
+      {
+        "opaque_id": "b0",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Prior to transition, the designated process P performs the baseline workload.",
+          "later_slots": "Following transition, precisely two process slots run for one evaluation interval.",
+          "resource_rule": "The slots match in total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "Across the specified history, neither outcome process lies on a branch originating at P.",
+          "causal_transfer": "No outcome process obtains a causally transmitted state from P.",
+          "structure_relation": "No outcome process realizes P's declared structure class; each process is transformed.",
+          "history_transfer": "No outcome process obtains P's declared history through a physically implemented channel.",
+          "task_assignment": "No outcome process performs the focal task; each performs the baseline workload.",
+          "slot_composition": "Both evaluation slots contain processes prepared independently of P."
+        },
+        "full_text": "Prior to transition, the designated process P performs the baseline workload. Following transition, precisely two process slots run for one evaluation interval. The slots match in total compute, duration, availability, certainty, and workload cost. Across the specified history, neither outcome process lies on a branch originating at P. No outcome process obtains a causally transmitted state from P. No outcome process realizes P's declared structure class; each process is transformed. No outcome process obtains P's declared history through a physically implemented channel. No outcome process performs the focal task; each performs the baseline workload. Both evaluation slots contain processes prepared independently of P."
+      },
+      {
+        "opaque_id": "b1",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Prior to transition, the designated process P performs the baseline workload.",
+          "later_slots": "Following transition, precisely two process slots run for one evaluation interval.",
+          "resource_rule": "The slots match in total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "P temporarily divides; one path finishes before evaluation and one descendant is retained.",
+          "causal_transfer": "Precisely one outcome process obtains a causally transmitted state from P.",
+          "structure_relation": "No outcome process realizes P's declared structure class; each process is transformed.",
+          "history_transfer": "No outcome process obtains P's declared history through a physically implemented channel.",
+          "task_assignment": "No outcome process performs the focal task; each performs the baseline workload.",
+          "slot_composition": "The evaluation slots contain one descendant plus one process prepared independently of P."
+        },
+        "full_text": "Prior to transition, the designated process P performs the baseline workload. Following transition, precisely two process slots run for one evaluation interval. The slots match in total compute, duration, availability, certainty, and workload cost. P temporarily divides; one path finishes before evaluation and one descendant is retained. Precisely one outcome process obtains a causally transmitted state from P. No outcome process realizes P's declared structure class; each process is transformed. No outcome process obtains P's declared history through a physically implemented channel. No outcome process performs the focal task; each performs the baseline workload. The evaluation slots contain one descendant plus one process prepared independently of P."
+      },
+      {
+        "opaque_id": "b2",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Prior to transition, the designated process P performs the baseline workload.",
+          "later_slots": "Following transition, precisely two process slots run for one evaluation interval.",
+          "resource_rule": "The slots match in total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "P divides into two paths, with both descendants retained across the evaluation interval.",
+          "causal_transfer": "Each outcome process obtains its own causally transmitted state from P.",
+          "structure_relation": "No outcome process realizes P's declared structure class; each process is transformed.",
+          "history_transfer": "No outcome process obtains P's declared history through a physically implemented channel.",
+          "task_assignment": "No outcome process performs the focal task; each performs the baseline workload.",
+          "slot_composition": "Both evaluation slots contain the two distinct descendants originating at P."
+        },
+        "full_text": "Prior to transition, the designated process P performs the baseline workload. Following transition, precisely two process slots run for one evaluation interval. The slots match in total compute, duration, availability, certainty, and workload cost. P divides into two paths, with both descendants retained across the evaluation interval. Each outcome process obtains its own causally transmitted state from P. No outcome process realizes P's declared structure class; each process is transformed. No outcome process obtains P's declared history through a physically implemented channel. No outcome process performs the focal task; each performs the baseline workload. Both evaluation slots contain the two distinct descendants originating at P."
+      },
+      {
+        "opaque_id": "b3",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Prior to transition, the designated process P performs the baseline workload.",
+          "later_slots": "Following transition, precisely two process slots run for one evaluation interval.",
+          "resource_rule": "The slots match in total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "P proceeds with no division through precisely one process across the evaluation interval.",
+          "causal_transfer": "Precisely one outcome process obtains a causally transmitted state from P.",
+          "structure_relation": "No outcome process realizes P's declared structure class; each process is transformed.",
+          "history_transfer": "No outcome process obtains P's declared history through a physically implemented channel.",
+          "task_assignment": "No outcome process performs the focal task; each performs the baseline workload.",
+          "slot_composition": "The evaluation slots contain one descendant plus one process prepared independently of P."
+        },
+        "full_text": "Prior to transition, the designated process P performs the baseline workload. Following transition, precisely two process slots run for one evaluation interval. The slots match in total compute, duration, availability, certainty, and workload cost. P proceeds with no division through precisely one process across the evaluation interval. Precisely one outcome process obtains a causally transmitted state from P. No outcome process realizes P's declared structure class; each process is transformed. No outcome process obtains P's declared history through a physically implemented channel. No outcome process performs the focal task; each performs the baseline workload. The evaluation slots contain one descendant plus one process prepared independently of P."
+      },
+      {
+        "opaque_id": "b4",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Prior to transition, the designated process P performs the baseline workload.",
+          "later_slots": "Following transition, precisely two process slots run for one evaluation interval.",
+          "resource_rule": "The slots match in total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "Across the specified history, neither outcome process lies on a branch originating at P.",
+          "causal_transfer": "No outcome process obtains a causally transmitted state from P.",
+          "structure_relation": "Precisely one outcome process realizes P's declared structure class; its partner is transformed.",
+          "history_transfer": "No outcome process obtains P's declared history through a physically implemented channel.",
+          "task_assignment": "No outcome process performs the focal task; each performs the baseline workload.",
+          "slot_composition": "Both evaluation slots contain processes prepared independently of P."
+        },
+        "full_text": "Prior to transition, the designated process P performs the baseline workload. Following transition, precisely two process slots run for one evaluation interval. The slots match in total compute, duration, availability, certainty, and workload cost. Across the specified history, neither outcome process lies on a branch originating at P. No outcome process obtains a causally transmitted state from P. Precisely one outcome process realizes P's declared structure class; its partner is transformed. No outcome process obtains P's declared history through a physically implemented channel. No outcome process performs the focal task; each performs the baseline workload. Both evaluation slots contain processes prepared independently of P."
+      },
+      {
+        "opaque_id": "b5",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Prior to transition, the designated process P performs the baseline workload.",
+          "later_slots": "Following transition, precisely two process slots run for one evaluation interval.",
+          "resource_rule": "The slots match in total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "P temporarily divides; one path finishes before evaluation and one descendant is retained.",
+          "causal_transfer": "Precisely one outcome process obtains a causally transmitted state from P.",
+          "structure_relation": "No outcome process realizes P's declared structure class; each process is transformed.",
+          "history_transfer": "Precisely one outcome process obtains P's declared history through a physically implemented channel.",
+          "task_assignment": "No outcome process performs the focal task; each performs the baseline workload.",
+          "slot_composition": "The evaluation slots contain one descendant plus one process prepared independently of P."
+        },
+        "full_text": "Prior to transition, the designated process P performs the baseline workload. Following transition, precisely two process slots run for one evaluation interval. The slots match in total compute, duration, availability, certainty, and workload cost. P temporarily divides; one path finishes before evaluation and one descendant is retained. Precisely one outcome process obtains a causally transmitted state from P. No outcome process realizes P's declared structure class; each process is transformed. Precisely one outcome process obtains P's declared history through a physically implemented channel. No outcome process performs the focal task; each performs the baseline workload. The evaluation slots contain one descendant plus one process prepared independently of P."
+      },
+      {
+        "opaque_id": "b6",
+        "field_order": [
+          "setup",
+          "later_slots",
+          "resource_rule",
+          "thread_history",
+          "causal_transfer",
+          "structure_relation",
+          "history_transfer",
+          "task_assignment",
+          "slot_composition"
+        ],
+        "fields": {
+          "setup": "Prior to transition, the designated process P performs the baseline workload.",
+          "later_slots": "Following transition, precisely two process slots run for one evaluation interval.",
+          "resource_rule": "The slots match in total compute, duration, availability, certainty, and workload cost.",
+          "thread_history": "Across the specified history, neither outcome process lies on a branch originating at P.",
+          "causal_transfer": "No outcome process obtains a causally transmitted state from P.",
+          "structure_relation": "No outcome process realizes P's declared structure class; each process is transformed.",
+          "history_transfer": "No outcome process obtains P's declared history through a physically implemented channel.",
+          "task_assignment": "Precisely one outcome process performs the focal task; its partner performs the baseline workload.",
+          "slot_composition": "Both evaluation slots contain processes prepared independently of P."
+        },
+        "full_text": "Prior to transition, the designated process P performs the baseline workload. Following transition, precisely two process slots run for one evaluation interval. The slots match in total compute, duration, availability, certainty, and workload cost. Across the specified history, neither outcome process lies on a branch originating at P. No outcome process obtains a causally transmitted state from P. No outcome process realizes P's declared structure class; each process is transformed. No outcome process obtains P's declared history through a physically implemented channel. Precisely one outcome process performs the focal task; its partner performs the baseline workload. Both evaluation slots contain processes prepared independently of P."
+      }
+    ]
+  }
+}

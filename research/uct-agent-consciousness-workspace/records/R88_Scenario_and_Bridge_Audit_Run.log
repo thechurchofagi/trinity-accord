@@ -1,0 +1,6 @@
+status=PASS
+family_A_word_counts=[104, 107, 106, 106, 106, 108, 106]
+family_B_word_counts=[103, 107, 105, 107, 104, 108, 105]
+family_word_count_ratios={'A': 1.0384615384615385, 'B': 1.0485436893203883}
+diagnostic_bridge_matrix_rank=3
+banned_hits=[]

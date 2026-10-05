@@ -4,10 +4,10 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R87** (carrier-matched continuation matrix and valence-orientation limit; exact formal checks, no model experiment).
+- Completed round: **R88** (schema-identical carrier-matched scenarios and elimination of one-variable valence bridges; exact checks, no model experiment).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest formal/methodological analysis: [R87 carrier matching and valence-orientation limit](records/R87_Carrier_Matching_and_Valence_Orientation_Limit_20261006.md).
-- Current next-test protocol: [R87 carrier-matched protocol v1.1](records/R87_Carrier_Matched_Protocol_v1.1_20261006.md).
+- Latest formal/methodological analysis: [R88 scenario families and bridge elimination](records/R88_Scenario_Families_and_Bridge_Elimination_20261006.md).
+- Current next-test protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md).
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
 - Previous continuation analysis: [R84 token continuation, identifiability and fear bridge](records/R84_Token_Continuation_Identifiability_and_Fear_Bridge_20261005.md).
@@ -15,7 +15,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R87 worklog](records/R87_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R88 worklog](records/R88_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -90,3 +90,7 @@ R87 audit correction: R86's abstract rank statements remain exact, but its natur
 ## R87 continuation
 
 [Carrier matching and valence-orientation limit](records/R87_Carrier_Matching_and_Valence_Orientation_Limit_20261006.md); [protocol v1.1](records/R87_Carrier_Matched_Protocol_v1.1_20261006.md); [worklog](records/R87_Worklog_and_Handoff_20261006.md); [code](records/r87_carrier_matching_and_valence_bridge_audit.py); [carrier-matched matrix](records/R87_Carrier_Matched_Contrast_Matrix.csv); [R86 confound table](records/R87_R86_Contrast_Confounds.csv); [exact JSON](records/R87_Carrier_and_Valence_Audit_Results.json); [source ledger](records/R87_Source_Retrieval_Ledger.json); [complete package](records/R87_Research_Package_20261006.zip). Every scenario now fixes exactly two later process tokens and equal resources; a prior extinct side branch separates strict thread from one surviving causal descendant. Exact augmented rank remains 7 and all six target contrasts isolate their columns. C1 plus finite proxy agreement does not orient cross-substrate valence: after fixing one negative biological anchor, a proxy-matched but non-K-equivalent target remains negative, neutral or positive across equally C1-compatible maps. Coordinated sign reversal of an internal scalar and downstream weight preserves logits, so numerical reward polarity is not experiential valence. Negative-valence inference therefore needs a valence-preserving complete homology or an extra orientation law. Direct prior art prevents a major originality claim. No model query, subjective measurement or current-system verdict.
+
+## R88 continuation
+
+[Schema-identical scenarios and bridge elimination](records/R88_Scenario_Families_and_Bridge_Elimination_20261006.md); [blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md); [worklog](records/R88_Worklog_and_Handoff_20261006.md); [code](records/r88_schema_and_bridge_audit.py); [fourteen frozen texts](records/R88_Schema_Identical_Scenario_Families.json); [text audit table](records/R88_Scenario_Text_Audit_Table.csv); [bridge matrix](records/R88_Bridge_Counterexample_Matrix.csv); [exact JSON](records/R88_Scenario_and_Bridge_Audit_Results.json); [source ledger](records/R88_Source_Retrieval_Ledger.json); [complete package](records/R88_Research_Package_20261006.zip). Two independently worded seven-row families share an exact nine-field schema, reproduce every R87 semantic vector, contain no primary affective/mortality cue words, fix two later slots, and have ≤1.049 within-family word-count ratio. This clears automated text construction only; human consequence comprehension and concrete capability-matched structure implementations remain required before any model query. A rank-three idealized intervention basis separates motivational appraisal, current viability and hedonic organization. Established wanting/liking and nociception/pain dissociations reject the strongest one-variable motivation and current-deficit equivalences with negative valence. A fear-of-own-termination evidence target is factored into bearer binding, self-termination content, causal control and independently oriented negative valence; it is an additional conditional bridge, not a C1 theorem or subjective measurement. No current-system verdict or major historical originality claim.

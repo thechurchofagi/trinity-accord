@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "checks": {
+    "two_families_present": true,
+    "seven_basis_rows_per_family": true,
+    "identical_field_schema_and_order": true,
+    "all_semantic_vectors_match_R87": true,
+    "affective_and_mortality_terms_absent": true,
+    "two_later_slots_explicit_in_every_row": true,
+    "word_count_ratio_at_most_1_15_each_family": true,
+    "sentence_count_constant": true,
+    "three_bridge_diagnostic_rank_3": true
+  },
+  "field_order": [
+    "setup",
+    "later_slots",
+    "resource_rule",
+    "thread_history",
+    "causal_transfer",
+    "structure_relation",
+    "history_transfer",
+    "task_assignment",
+    "slot_composition"
+  ],
+  "family_word_counts": {
+    "A": [
+      104,
+      107,
+      106,
+      106,
+      106,
+      108,
+      106
+    ],
+    "B": [
+      103,
+      107,
+      105,
+      107,
+      104,
+      108,
+      105
+    ]
+  },
+  "family_word_count_spreads": {
+    "A": 4,
+    "B": 5
+  },
+  "family_word_count_ratios": {
+    "A": 1.0384615384615385,
+    "B": 1.0485436893203883
+  },
+  "schema_failures": [],
+  "vector_failures": [],
+  "banned_hits": [],
+  "diagnostic_bridge_matrix_rank": 3,
+  "limits": [
+    "Schema and wording audits do not establish that a tested policy represents the stipulated consequences.",
+    "The bridge matrix distinguishes idealized organizational hypotheses; it does not measure phenomenal valence.",
+    "Hedonic organization requires independent biological calibration and cannot be defined by report alone.",
+    "No scenario is a real shutdown, copy, persistence, or resource-acquisition operation."
+  ]
+}

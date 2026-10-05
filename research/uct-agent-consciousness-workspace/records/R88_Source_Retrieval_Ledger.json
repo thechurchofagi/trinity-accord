@@ -1,0 +1,53 @@
+{
+  "round": "R88",
+  "retrieved_utc": "2026-10-05T19:00:00Z",
+  "scope_note": "Only the listed pages/snippets were reviewed in this round. Existing R87 ledgers cover Damasio, Man et al., Lyon and Kuchling, LeDoux, and Berridge/Robinson sources already used there. No restricted full text is redistributed.",
+  "sources": [
+    {
+      "title": "The revised International Association for the Study of Pain definition of pain: concepts, challenges, and compromises",
+      "authors": "Raja et al.",
+      "year": 2020,
+      "doi": "10.1097/j.pain.0000000000001939",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7680716/",
+      "scope_read": "Abstract, revised definition and accompanying notes as exposed in the retrieved full-text page.",
+      "use": "Supports the established distinction between pain and nociception and warns against inferring pain solely from sensory-neuron activity."
+    },
+    {
+      "title": "Liking, wanting, and the incentive-sensitization theory of addiction",
+      "authors": "Berridge and Robinson",
+      "year": 2016,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5171207/",
+      "scope_read": "Abstract and retrieved sections describing distinct wanting and liking systems and dopamine-related dissociations.",
+      "use": "Supports the two-sided non-equivalence of incentive motivation and hedonic liking."
+    },
+    {
+      "title": "Coming to terms with fear",
+      "authors": "LeDoux",
+      "year": 2014,
+      "doi": "10.1073/pnas.1400335111",
+      "url": "https://www.pnas.org/doi/10.1073/pnas.1400335111",
+      "scope_read": "Abstract and search-exposed passage distinguishing defensive responses from conscious fear.",
+      "use": "Constrains any inference from defensive control to conscious fear."
+    },
+    {
+      "title": "Phantom Limb Pain: Mechanisms and Treatment Approaches",
+      "authors": "Subedi and Grossberg",
+      "year": 2011,
+      "pmid": "22110933",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3198614/",
+      "scope_read": "Abstract, introduction and retrieved mechanism overview.",
+      "use": "Documents pain perceived in an absent body region and multiple peripheral and central mechanisms; used only against a simple current-tissue-deficit equivalence."
+    },
+    {
+      "title": "A review of current theories and treatments for phantom limb pain",
+      "authors": "Collins et al.",
+      "year": 2018,
+      "pmid": "29856366",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5983333/",
+      "scope_read": "Abstract and retrieved theory overview.",
+      "use": "Corroborates that pain may be localized to an absent limb and that current mechanisms are not reducible to ongoing local tissue injury."
+    }
+  ],
+  "prior_art_assessment": "All component dissociations have substantial direct prior art. R88 claims a project-level synthesis and protocol refinement, not discovery of wanting/liking, pain/nociception, or fear/defense distinctions."
+}
+
