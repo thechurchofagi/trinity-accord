@@ -19,3 +19,9 @@ This storage migration does not count as R77 or as a scientific result. The late
 Initial migration commit: `39beffa5ee14248bb0b94f71dface1074b919c40`. The remote research branch was created successfully. All 62 committed file blob identities matched the local staged bytes; the original-artifact SHA-256 manifest is retained separately. See `MIGRATION_VERIFICATION.json` for the checked commit and tree.
 
 The existing recurring UCT research task was updated successfully to read the latest GitHub handoff/index first and commit future outputs here. Its schedule, enabled state, and scientific constraints were preserved. No additional task was created. Historical Library failure receipts remain unchanged; current GitHub persistence resolves the available recent-artifact recovery gap.
+
+## 2026-10-05 — No CI for routine research storage
+
+The user clarified that saving academic research in this separate directory should not require CI. The research branch had zero Actions runs at inspection. Targeted workflow inspection showed Repository Integrity pushes limited to main and Research Index checks triggered by pull requests. No new CI was installed for the workspace.
+
+Decision: direct storage-only branch commits carry `[skip ci]`; no storage PR, workflow dispatch, site build, deployment, or repetitive validation. Add the rule to the handoff, README, and workspace instructions, and to the existing research task. Existing repository workflow files and main remain unchanged. Confirm only the remote save; scientific validation remains independent. GitHub documents that the marker skips push/pull_request workflows, not all event types: https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs .

@@ -24,3 +24,7 @@ The migration preserves the available R71–R76 texts, code, results, logs, manu
 Earlier records remain in Library `/UCT_Paper_C_Workspace_20261004`. The last verified persistent master there was version 39 through R70. The local older master had an uncommitted R71 insertion; it is preserved under `legacy/` with that status in its filename and must not be mistaken for the current index. Historical R71–R76 statements saying “Library save failed” remain accurate historical records; successful GitHub migration does not rewrite those failed attempts.
 
 Published UCT I/II/III are baselines. Do not modify their released files or initiate DOI/Zenodo/OTS/Arweave publication from this workspace without a new explicit publication instruction.
+
+## Routine saves do not run CI
+
+Per the user's 2026-10-05 instruction, storage-only changes in this directory are committed directly to the research branch with `[skip ci]`. No PR, website build, deployment, or workflow dispatch is needed for a research checkpoint. Confirm the commit exists; do not repeat expensive checks just to store it. Necessary scientific validation remains part of research, independent of storage. Other projects' CI and published-release requirements are unchanged.
