@@ -8,7 +8,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - New-window entry: [Complete R95 handoff](records/UCT_Agent_Research_Handoff_R95_20261006.md).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
 - Latest analysis: [R95 learned bearer-bound prediction](records/R95_Learned_Bearer_Bound_Prediction_From_Zero_Path_20261006.md).
-- Latest training: [R92 learned retention and installed use](records/R92_Learned_Retention_Installed_Use_and_Experience_20261006.md).
+- Latest training: [R95 learned bearer-bound prediction](records/R95_Learned_Bearer_Bound_Prediction_From_Zero_Path_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
 - Current next step: R95 completed the zero-Q-path acquisition test. R96 should move to a matched virtual decision controller that separates predicting Q/O from actually using Q in action selection and from instrumental continuation preference. Do not infer fear or valence.
 - Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
