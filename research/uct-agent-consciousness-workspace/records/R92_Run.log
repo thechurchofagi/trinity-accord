@@ -1,0 +1,41 @@
+linear_d1_full_s0 N= 0.5 Jerr= 1 both= False
+linear_d1_full_s1 N= 0.5 Jerr= 1 both= False
+linear_d1_full_s2 N= 0.5 Jerr= 1 both= False
+linear_d1_full_s3 N= 0.5 Jerr= 1 both= False
+linear_d1_readout_s0 N= 0.50020655 Jerr= 1 both= False
+linear_d1_readout_s1 N= 0.5 Jerr= 1 both= False
+linear_d1_readout_s2 N= 0.5 Jerr= 1 both= False
+linear_d1_readout_s3 N= 0.5 Jerr= 1 both= False
+linear_d2_full_s0 N= 1.2637769e-32 Jerr= 1.17272e-16 both= True
+linear_d2_full_s1 N= 1.6737248e-32 Jerr= 1.52968e-16 both= True
+linear_d2_full_s2 N= 1.8351361e-32 Jerr= 1.19312e-16 both= True
+linear_d2_full_s3 N= 3.7739056e-32 Jerr= 3.14781e-16 both= True
+linear_d2_readout_s0 N= 0.040793447 Jerr= 0.285634 both= False
+linear_d2_readout_s1 N= 3.5341506e-14 Jerr= 2.64305e-07 both= True
+linear_d2_readout_s2 N= 1.8304642e-06 Jerr= 0.00191216 both= True
+linear_d2_readout_s3 N= 0.41232529 Jerr= 0.908103 both= False
+tanh_d1_full_s0 N= 0.50022455 Jerr= 1.00001 both= False
+tanh_d1_full_s1 N= 0.50034806 Jerr= 1 both= False
+tanh_d1_full_s2 N= 0.50020393 Jerr= 1 both= False
+tanh_d1_full_s3 N= 0.50046329 Jerr= 1.00006 both= False
+tanh_d1_readout_s0 N= 0.50019291 Jerr= 1 both= False
+tanh_d1_readout_s1 N= 0.50052872 Jerr= 1.00007 both= False
+tanh_d1_readout_s2 N= 0.50006926 Jerr= 1.00001 both= False
+tanh_d1_readout_s3 N= 0.52449316 Jerr= 1.00231 both= False
+tanh_d2_full_s0 N= 0.00079384683 Jerr= 0.0813585 both= True
+tanh_d2_full_s1 N= 0.0020303051 Jerr= 0.102434 both= True
+tanh_d2_full_s2 N= 0.00069377651 Jerr= 0.0758112 both= True
+tanh_d2_full_s3 N= 0.00059559777 Jerr= 0.0850947 both= True
+tanh_d2_readout_s0 N= 0.041573125 Jerr= 0.29218 both= False
+tanh_d2_readout_s1 N= 0.0055161697 Jerr= 0.427733 both= False
+tanh_d2_readout_s2 N= 0.045443262 Jerr= 1.14194 both= False
+tanh_d2_readout_s3 N= 0.48558624 Jerr= 1.07962 both= False
+{
+  "all_32_runs_completed": true,
+  "all_one_state_obey_half_error_bound": true,
+  "all_jacobians_validated": true,
+  "all_complete_state_resets_zero_output": true,
+  "all_restorations_exact": true,
+  "all_disconnected_readouts_preserve_hidden": true,
+  "all_readout_only_hidden_weights_unchanged": true
+}

@@ -1,0 +1,64 @@
+{
+  "round": "R92",
+  "date_local": "2026-10-06",
+  "parent_commit": "b7216371757da38eb12af873bba864fc4f9123ca",
+  "sources": [
+    {
+      "title": "Short-Term Memory in Orthogonal Neural Networks",
+      "authors": "White, Lee, Sompolinsky",
+      "year": 2004,
+      "url": "https://arxiv.org/abs/cond-mat/0402452",
+      "pdf": "https://arxiv.org/pdf/cond-mat/0402452",
+      "doi": "10.1103/PhysRevLett.92.148102",
+      "read_scope": "Abstract and extracted PDF pages 0–1, model, linear readout, memory function equations 1–4 and DSR comparison; not full paper. Tool extraction lines 0–256.",
+      "use": "Direct precedent for recurrent retention and optimal linear reconstruction; distinct stream/noise/capacity setting.",
+      "metadata_note": "Extracted PDF displayed a regenerated 2024 date; publication year follows arXiv/journal metadata, 2004."
+    },
+    {
+      "title": "Exact solutions to the nonlinear dynamics of learning in deep linear neural networks",
+      "authors": "Saxe, McClelland, Ganguli",
+      "year": "2013 preprint / 2014 conference",
+      "url": "https://arxiv.org/abs/1312.6120",
+      "pdf": "https://arxiv.org/pdf/1312.6120",
+      "read_scope": "Abstract; PDF introduction, section 1/1.1 through beginning of 1.2, pages 0–3, extraction lines 28–280. No full-paper reading claimed.",
+      "use": "Direct precedent for factorized linear learning and singular modes; no novelty claim for this mechanism."
+    },
+    {
+      "title": "Neural networks and principal component analysis: Learning from examples without local minima",
+      "authors": "Baldi, Hornik",
+      "year": 1989,
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/0893608089900142",
+      "status": "publisher open failed HTTP403",
+      "read_scope": "Search-result title/abstract snippet only; no full text read.",
+      "use": "Prior-art lead only, not authority for a detailed theorem in this report."
+    }
+  ],
+  "uct_sources": [
+    {
+      "paper": "A v1.2",
+      "branch": "research/uct-paper-a-v1-2-20261004",
+      "path": "research/uct-paper-a-v1.2/source-template.md",
+      "blob": "310204d4e83c5478bf18d34274bcdba996ffda28",
+      "scope": "Inherited R91 direct audit: C1/U1/U2, sections3.5/3.6 actual ports, pointed states, predeclared topology, 5.3 observation versus actual organization. Not newly fetched in R92."
+    },
+    {
+      "paper": "C v1",
+      "branch": "research/uct-paper-c-v1-20261004",
+      "path": "research/unified-consciousness-theory-iii/source-main.md",
+      "blob": "fca5d157acb11e5093d617d162d55d4de4fb6961",
+      "scope": "Inherited R91 direct audit, section5.1 NESIG and5.2 scalar codomain caution; no fresh full reread."
+    },
+    {
+      "paper": "B v1.1",
+      "scope": "Inherited R81 section5.6 audit, no new retrieval or new attributed clause."
+    }
+  ],
+  "claims_not_made": [
+    "historical first",
+    "C1 experimentally verified",
+    "LLM or neural data experiment",
+    "subjective fear measured",
+    "all sources fully read"
+  ],
+  "third_party_fulltext_saved": false
+}
