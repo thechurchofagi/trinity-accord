@@ -1,0 +1,8 @@
+status=PASS
+augmented_rank=7
+feature_rank=6
+gauge_case_count=16
+c1_valence_map_count=81
+maps_after_one_negative_anchor=27
+target_sign_counts_after_anchor={'-1': 9, '0': 9, '1': 9}
+maps_after_complete_valence_homology=9

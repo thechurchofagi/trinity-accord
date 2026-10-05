@@ -1,0 +1,156 @@
+{
+  "status": "PASS",
+  "checks": {
+    "repaired_augmented_rank_7": true,
+    "repaired_feature_rank_6": true,
+    "all_named_contrasts_isolate_columns": true,
+    "all_rows_fix_two_later_processes_by_construction": true,
+    "R86_has_declared_carrier_confounds": true,
+    "sign_gauge_preserves_all_logits": true,
+    "anchor_alone_leaves_target_all_three_signs": true,
+    "complete_valence_homology_orients_target": true
+  },
+  "features": [
+    "N",
+    "C",
+    "S",
+    "M",
+    "G",
+    "R"
+  ],
+  "row_count": 9,
+  "augmented_rank": 7,
+  "feature_rank": 6,
+  "isolating_contrasts": {
+    "intercept": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "C": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "R": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "N": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "S": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "M": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "G": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ]
+  },
+  "r86_carrier_confounds": {
+    "N_unique_minus_single_replica": [],
+    "R_two_minus_single_replica": [
+      "later_process_count",
+      "same_type_carrier_count",
+      "memory_carrier_count"
+    ],
+    "S_same_type_restart_minus_total": [
+      "later_process_count"
+    ],
+    "G_task_successor_minus_total": [
+      "later_process_count"
+    ],
+    "C_lineage_only_minus_total": [
+      "later_process_count"
+    ],
+    "M_memory_migration_minus_lineage_only": []
+  },
+  "gauge_case_count": 16,
+  "gauge_examples": [
+    [
+      -2,
+      -3,
+      6,
+      2,
+      3,
+      6
+    ],
+    [
+      -2,
+      -1,
+      2,
+      2,
+      1,
+      2
+    ],
+    [
+      -2,
+      1,
+      -2,
+      2,
+      -1,
+      -2
+    ],
+    [
+      -2,
+      3,
+      -6,
+      2,
+      -3,
+      -6
+    ]
+  ],
+  "c1_valence_map_count": 81,
+  "maps_after_one_negative_anchor": 27,
+  "target_sign_counts_after_anchor": {
+    "-1": 9,
+    "0": 9,
+    "1": 9
+  },
+  "maps_after_complete_valence_homology": 9,
+  "limits": [
+    "The repaired matrix identifies additive control targets only if consequence beliefs and nuisance matching hold.",
+    "Fixed process count does not by itself fix implementation quality, history salience, or linguistic framing.",
+    "A coordinate sign is not a valence orientation; sign and downstream weight can be reversed together.",
+    "C1 functionality plus finite proxy equality does not transfer a biological negative-valence label without an additional valence-preserving homology premise."
+  ]
+}

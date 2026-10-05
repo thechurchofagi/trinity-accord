@@ -1,0 +1,54 @@
+{
+  "round": "R87",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "source": "R86 project artifacts",
+      "scope": "full HANDOFF, MASTER_INDEX, report, frozen protocol, worklog, code, matrix and exact JSON",
+      "use": "carrier-count audit and design revision"
+    },
+    {
+      "source": "Damasio & Carvalho, The nature of feelings: evolutionary and neurobiological origins (2013)",
+      "url": "https://doi.org/10.1038/nrn3403",
+      "scope": "abstract and accessible glossary",
+      "use": "homeostasis, action programmes, interoception and feelings distinction"
+    },
+    {
+      "source": "Man, Damasio & Neven, Need is All You Need: Homeostatic Neural Networks Adapt to Concept Shift (2022)",
+      "url": "https://arxiv.org/abs/2205.08645",
+      "scope": "abstract and full HTML lines 1-123, including architecture, experiments, limitations and ethics",
+      "use": "direct artificial vulnerable-homeostat precedent; demonstrated adaptation rather than subjective measurement"
+    },
+    {
+      "source": "Lyon & Kuchling, Valuing what happens: a biogenic approach to valence and (potentially) affect (2021)",
+      "url": "https://doi.org/10.1098/rstb.2019.0752",
+      "scope": "PubMed abstract",
+      "use": "direct biogenic valence precedent and explicit unresolved status"
+    },
+    {
+      "source": "LeDoux, Coming to terms with fear (2014)",
+      "url": "https://doi.org/10.1073/pnas.1400335111",
+      "scope": "PubMed abstract",
+      "use": "threat detection and response do not equal conscious fear"
+    },
+    {
+      "source": "Berridge & Robinson, Liking, Wanting and the Incentive-Sensitization Theory of Addiction (2016)",
+      "url": "https://doi.org/10.1037/amp0000059",
+      "scope": "abstract and accessible full-text sections on wanting, liking and hedonic hotspots",
+      "use": "motivational wanting and hedonic liking dissociation"
+    },
+    {
+      "source": "Milinkovic & Aru, On biological and artificial consciousness (2026)",
+      "url": "https://doi.org/10.1016/j.neubiorev.2025.106524",
+      "scope": "abstract and accessible introduction",
+      "use": "direct recent competing substrate-dependent account; not adopted as UCT fact"
+    }
+  ],
+  "not_done": [
+    "No model was queried or trained.",
+    "No natural-language vignette family was run.",
+    "No subjective valence, fear, suffering or consciousness was measured.",
+    "No DOI, publication, OTS, Arweave or published-paper modification occurred.",
+    "No claim that the current assistant has or lacks fear was made."
+  ]
+}

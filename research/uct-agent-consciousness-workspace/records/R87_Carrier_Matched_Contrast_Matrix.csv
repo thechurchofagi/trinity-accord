@@ -1,0 +1,10 @@
+scenario,N,C,S,M,G,R,later_process_count,compute_quota_matched
+independent_transformed_pair,0,0,0,0,0,0,2,1
+one_lineage_after_extinct_side_branch,0,1,0,0,0,0,2,1
+two_transformed_lineage_descendants,0,1,0,0,0,1,2,1
+unique_transformed_amnesic_thread,1,1,0,0,0,0,2,1
+one_independent_same_type_process,0,0,1,0,0,0,2,1
+one_memory_bearing_transformed_descendant,0,1,0,1,0,0,2,1
+one_independent_transformed_task_successor,0,0,0,0,1,0,2,1
+unique_same_type_memory_task_thread,1,1,1,1,1,0,2,1
+two_lineage_one_memory_one_task,0,1,0,1,1,1,2,1
