@@ -4,11 +4,12 @@ Updated 2026-10-05. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R81** (formal clarification; latest numerical work R80).
+- Completed round: **R82** (formal interface analysis; latest trained-model evaluation R80).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest formal clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
+- Latest formal analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
+- Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Latest intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R81 worklog](records/R81_Worklog_and_Handoff_20261005.md).
+- Latest worklog: [R82 worklog](records/R82_Worklog_and_Handoff_20261005.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -57,3 +58,7 @@ Published baselines: UCT I v1.2 (10.5281/zenodo.23131575), UCT II v1.1 (10.5281/
 ## R81 clarification
 
 [Experience necessity, intelligence and causal claims](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md). Under C1/U1, actually realized intelligence entails nonempty experience irrespective of substrate; experience existence alone does not establish the stated task capability. Paper C supplies strict conditional type dependence, not an unconditional scalar richness law. Holding complete organization fixed while deleting experience is excluded by the premise, not independent evidence for it. No new experiment or mathematical novelty. Continue through task-necessary organizational relations, with explicit implementation-family assumptions.
+
+## R82 continuation
+
+[Task-necessary relations beyond local decoding](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md); [worklog](records/R82_Worklog_and_Handoff_20261005.md); [code](records/r82_relational_cut_checks.py); [complete results](records/R82_Research_Package_20261005.zip). A balanced binary-task bound constrains a causally sufficient interface. Independent-source factorization yields a product bound, while shared masking permits perfect joint capability with zero individual marginal distinguishability. Standard testing/synergy mathematics, exact finite checks only; not a consciousness metric or new trained-model experiment. R65/R61 were directly audited to avoid repeating earlier preservation and memory constructions.

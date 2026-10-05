@@ -1,0 +1,102 @@
+{
+  "independent_channel_cases": 81,
+  "shared_mask": {
+    "conditional_joint": {
+      "00": [
+        "1/2",
+        "0",
+        "0",
+        "1/2"
+      ],
+      "01": [
+        "0",
+        "1/2",
+        "1/2",
+        "0"
+      ],
+      "10": [
+        "0",
+        "1/2",
+        "1/2",
+        "0"
+      ],
+      "11": [
+        "1/2",
+        "0",
+        "0",
+        "1/2"
+      ]
+    },
+    "target_conditional_laws": [
+      [
+        "1/2",
+        "0",
+        "0",
+        "1/2"
+      ],
+      [
+        "0",
+        "1/2",
+        "1/2",
+        "0"
+      ]
+    ],
+    "local_delta_A": "0",
+    "local_delta_B": "0",
+    "joint_delta": "1",
+    "best_accuracy": "1",
+    "installed_xor_accuracy": "1"
+  },
+  "broken_correlation": {
+    "conditional_joint": {
+      "00": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "01": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "10": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "11": [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ]
+    },
+    "target_conditional_laws": [
+      [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      [
+        "1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ]
+    ],
+    "local_delta_A": "0",
+    "local_delta_B": "0",
+    "joint_delta": "0",
+    "best_accuracy": "1/2",
+    "installed_xor_accuracy": "1/2"
+  },
+  "readout_control": {
+    "joint_delta": "1",
+    "coin_consumer_accuracy": "1/2",
+    "parity_consumer_accuracy": "1"
+  }
+}
