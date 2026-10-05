@@ -4,7 +4,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R96** (learned bearer-bound predictive organization from an initially zero Q path).
+- Completed round: **R96** (direct continuation control versus instrumental task mediation, with path-blocking identifiability).
 - New-window entry: [Complete R96 handoff](records/UCT_Agent_Research_Handoff_R96_20261006.md).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
 - Latest analysis: [R96 direct continuation vs instrumental task mediation](records/R96_Direct_Continuation_vs_Instrumental_Task_Mediation_20261006.md).
