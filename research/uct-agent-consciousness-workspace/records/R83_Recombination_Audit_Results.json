@@ -1,0 +1,7079 @@
+{
+  "scope": "R78 fixed-checkpoint finite support audit and matched second-unit mechanism permutations; no new training, language model, biological data, or phenomenal measurement",
+  "r78_summary_sha256": "bb54504382802a4f8cbc04d3ac285ab9b0d4f27a03c455bfbeb4ef0266fdee2f",
+  "definitions": {
+    "natural_support": "the four hidden vectors produced by the declared four-input domain at a fixed checkpoint",
+    "coordinate_product": "the Cartesian product of the separately observed values of hidden units 1 and 2",
+    "recombination_closure_fraction": "natural_support_size / coordinate_product_size",
+    "label_preserving_permutation": "a reassignment of unit-2 activations across input rows that preserves both target classes and hence unit-2 target-conditional marginals"
+  },
+  "counts": {
+    "checkpoints": 32,
+    "coordinate_patch_permutations_per_checkpoint": 24,
+    "label_preserving_permutations_per_checkpoint": 4,
+    "mechanism_symmetries_per_checkpoint": 4
+  },
+  "audits": [
+    {
+      "seed": 0,
+      "condition": "full",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6941747470512762,
+        "d": -1.734723475976807e-18,
+        "min_margin": -0.11883511707337699,
+        "logits": [
+          0.03726404318500349,
+          0.11883511707337699,
+          -0.12464072351934956,
+          -0.04306964963097606
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6933498918062363,
+        0.6949996022963163
+      ],
+      "label_preserving_d_range": [
+        -1.734723475976807e-18,
+        3.469446951953614e-18
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6941747470512762,
+          "d": -1.734723475976807e-18,
+          "min_margin": -0.11883511707337699,
+          "logits": [
+            0.03726404318500349,
+            0.11883511707337699,
+            -0.12464072351934956,
+            -0.04306964963097606
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6933498918062363,
+          "d": 0.0,
+          "min_margin": -0.04306964963097606,
+          "logits": [
+            0.03726404318500349,
+            0.03726404318500349,
+            -0.04306964963097606,
+            -0.04306964963097606
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6949996022963163,
+          "d": 0.0,
+          "min_margin": -0.12464072351934956,
+          "logits": [
+            0.11883511707337699,
+            0.11883511707337699,
+            -0.12464072351934956,
+            -0.12464072351934956
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6941747470512762,
+          "d": 3.469446951953614e-18,
+          "min_margin": -0.12464072351934956,
+          "logits": [
+            0.11883511707337699,
+            0.03726404318500349,
+            -0.04306964963097606,
+            -0.12464072351934956
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            0.7697867137638703
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6941747470512762,
+          "d": -1.734723475976807e-18,
+          "min_margin": -0.11883511707337699,
+          "logits": [
+            0.03726404318500349,
+            0.11883511707337699,
+            -0.12464072351934956,
+            -0.04306964963097606
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            0.7697867137638703,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6933498918062363,
+          "d": 0.0,
+          "min_margin": -0.04306964963097606,
+          "logits": [
+            0.03726404318500349,
+            0.03726404318500349,
+            -0.04306964963097606,
+            -0.04306964963097606
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -0.7697867137638703
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6941747470512762,
+          "d": 3.469446951953614e-18,
+          "min_margin": -0.12464072351934956,
+          "logits": [
+            0.11883511707337699,
+            0.03726404318500349,
+            -0.04306964963097606,
+            -0.12464072351934956
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -0.7697867137638703,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6949996022963163,
+          "d": 0.0,
+          "min_margin": -0.12464072351934956,
+          "logits": [
+            0.11883511707337699,
+            0.11883511707337699,
+            -0.12464072351934956,
+            -0.12464072351934956
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 0,
+      "condition": "full",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.34661789898440115,
+        "d": 4.756517432739264,
+        "min_margin": -3.0663177762985105e-05,
+        "logits": [
+          -3.0663177762985105e-05,
+          2.829353708878879e-05,
+          -9.509203697090069,
+          9.516924990581836
+        ]
+      },
+      "hidden_unique_values": [
+        4,
+        4
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 16,
+      "recombination_closure_fraction": 0.25,
+      "fully_on_support_patch_permutations": 1,
+      "nonidentity_label_preserving_on_support": 0,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.34661789898440115,
+        0.36306272904499326
+      ],
+      "label_preserving_d_range": [
+        4.756517432739264,
+        4.756517432739264
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.34661789898440115,
+          "d": 4.756517432739264,
+          "min_margin": -3.0663177762985105e-05,
+          "logits": [
+            -3.0663177762985105e-05,
+            2.829353708878879e-05,
+            -9.509203697090069,
+            9.516924990581836
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.35351399208772505,
+          "d": 4.756517432739264,
+          "min_margin": -0.05446342218878587,
+          "logits": [
+            -3.0663177762985105e-05,
+            0.05446342218878587,
+            -9.563638825741766,
+            9.516924990581836
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3561666359416693,
+          "d": 4.756517432739264,
+          "min_margin": -0.07502435925621864,
+          "logits": [
+            9.591918686660291,
+            2.829353708878879e-05,
+            -9.509203697090069,
+            -0.07502435925621864
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.36306272904499326,
+          "d": 4.756517432739264,
+          "min_margin": -0.07502435925621864,
+          "logits": [
+            9.591918686660291,
+            0.05446342218878587,
+            -9.563638825741766,
+            -0.07502435925621864
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            3.946924985552427,
+            2.18423889578735
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.34661789898440115,
+          "d": 4.756517432739264,
+          "min_margin": -3.0663177762985105e-05,
+          "logits": [
+            -3.0663177762985105e-05,
+            2.829353708878879e-05,
+            -9.509203697090069,
+            9.516924990581836
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            2.18423889578735,
+            3.946924985552427
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.35351399208772505,
+          "d": 4.756517432739264,
+          "min_margin": -0.05446342218878587,
+          "logits": [
+            -3.0663177762985105e-05,
+            0.05446342218878587,
+            -9.563638825741766,
+            9.516924990581836
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -3.946924985552427,
+            -2.18423889578735
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.36306272904499326,
+          "d": 4.756517432739264,
+          "min_margin": -0.07502435925621864,
+          "logits": [
+            9.591918686660291,
+            0.05446342218878587,
+            -9.563638825741766,
+            -0.07502435925621864
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -2.18423889578735,
+            -3.946924985552427
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3561666359416693,
+          "d": 4.756517432739264,
+          "min_margin": -0.07502435925621864,
+          "logits": [
+            9.591918686660291,
+            2.829353708878879e-05,
+            -9.509203697090069,
+            -0.07502435925621864
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 0,
+      "condition": "readout_only",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6941747470512762,
+        "d": -1.734723475976807e-18,
+        "min_margin": -0.11883511707337699,
+        "logits": [
+          0.03726404318500349,
+          0.11883511707337699,
+          -0.12464072351934956,
+          -0.04306964963097606
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6933498918062363,
+        0.6949996022963163
+      ],
+      "label_preserving_d_range": [
+        -1.734723475976807e-18,
+        3.469446951953614e-18
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6941747470512762,
+          "d": -1.734723475976807e-18,
+          "min_margin": -0.11883511707337699,
+          "logits": [
+            0.03726404318500349,
+            0.11883511707337699,
+            -0.12464072351934956,
+            -0.04306964963097606
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6933498918062363,
+          "d": 0.0,
+          "min_margin": -0.04306964963097606,
+          "logits": [
+            0.03726404318500349,
+            0.03726404318500349,
+            -0.04306964963097606,
+            -0.04306964963097606
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6949996022963163,
+          "d": 0.0,
+          "min_margin": -0.12464072351934956,
+          "logits": [
+            0.11883511707337699,
+            0.11883511707337699,
+            -0.12464072351934956,
+            -0.12464072351934956
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6941747470512762,
+          "d": 3.469446951953614e-18,
+          "min_margin": -0.12464072351934956,
+          "logits": [
+            0.11883511707337699,
+            0.03726404318500349,
+            -0.04306964963097606,
+            -0.12464072351934956
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            0.7697867137638703
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6941747470512762,
+          "d": -1.734723475976807e-18,
+          "min_margin": -0.11883511707337699,
+          "logits": [
+            0.03726404318500349,
+            0.11883511707337699,
+            -0.12464072351934956,
+            -0.04306964963097606
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            0.7697867137638703,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6933498918062363,
+          "d": 0.0,
+          "min_margin": -0.04306964963097606,
+          "logits": [
+            0.03726404318500349,
+            0.03726404318500349,
+            -0.04306964963097606,
+            -0.04306964963097606
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -0.7697867137638703
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6941747470512762,
+          "d": 3.469446951953614e-18,
+          "min_margin": -0.12464072351934956,
+          "logits": [
+            0.11883511707337699,
+            0.03726404318500349,
+            -0.04306964963097606,
+            -0.12464072351934956
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -0.7697867137638703,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6949996022963163,
+          "d": 0.0,
+          "min_margin": -0.12464072351934956,
+          "logits": [
+            0.11883511707337699,
+            0.11883511707337699,
+            -0.12464072351934956,
+            -0.12464072351934956
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 0,
+      "condition": "readout_only",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6931471805599454,
+        "d": 8.077935669463161e-28,
+        "min_margin": -3.6865743647362084e-11,
+        "logits": [
+          -3.6865743647362084e-11,
+          -1.925842535792208e-11,
+          -2.6041407644618355e-11,
+          -8.434089355178348e-12
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6931471805599453,
+        0.6931471805599454
+      ],
+      "label_preserving_d_range": [
+        -8.077935669463161e-28,
+        8.077935669463161e-28
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 8.077935669463161e-28,
+          "min_margin": -3.6865743647362084e-11,
+          "logits": [
+            -3.6865743647362084e-11,
+            -1.925842535792208e-11,
+            -2.6041407644618355e-11,
+            -8.434089355178348e-12
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 0.0,
+          "min_margin": -3.6865743647362084e-11,
+          "logits": [
+            -3.6865743647362084e-11,
+            -3.6865743647362084e-11,
+            -8.434089355178348e-12,
+            -8.434089355178348e-12
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": 0.0,
+          "min_margin": -2.6041407644618355e-11,
+          "logits": [
+            -1.925842535792208e-11,
+            -1.925842535792208e-11,
+            -2.6041407644618355e-11,
+            -2.6041407644618355e-11
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": -8.077935669463161e-28,
+          "min_margin": -2.6041407644618355e-11,
+          "logits": [
+            -1.925842535792208e-11,
+            -3.6865743647362084e-11,
+            -8.434089355178348e-12,
+            -2.6041407644618355e-11
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            0.7697867137638703
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 8.077935669463161e-28,
+          "min_margin": -3.6865743647362084e-11,
+          "logits": [
+            -3.6865743647362084e-11,
+            -1.925842535792208e-11,
+            -2.6041407644618355e-11,
+            -8.434089355178348e-12
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            0.7697867137638703,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 0.0,
+          "min_margin": -3.6865743647362084e-11,
+          "logits": [
+            -3.6865743647362084e-11,
+            -3.6865743647362084e-11,
+            -8.434089355178348e-12,
+            -8.434089355178348e-12
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -0.7697867137638703
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": -8.077935669463161e-28,
+          "min_margin": -2.6041407644618355e-11,
+          "logits": [
+            -1.925842535792208e-11,
+            -3.6865743647362084e-11,
+            -8.434089355178348e-12,
+            -2.6041407644618355e-11
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -0.7697867137638703,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": 0.0,
+          "min_margin": -2.6041407644618355e-11,
+          "logits": [
+            -1.925842535792208e-11,
+            -1.925842535792208e-11,
+            -2.6041407644618355e-11,
+            -2.6041407644618355e-11
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "condition": "full",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6960870591195177,
+        "d": 0.0,
+        "min_margin": -0.2270683294722856,
+        "logits": [
+          -0.2270683294722856,
+          -0.07364791485384986,
+          0.03618036573318436,
+          0.18960078035162012
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.693567914150456,
+        0.6986062040885794
+      ],
+      "label_preserving_d_range": [
+        -1.734723475976807e-18,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6960870591195177,
+          "d": 0.0,
+          "min_margin": -0.2270683294722856,
+          "logits": [
+            -0.2270683294722856,
+            -0.07364791485384986,
+            0.03618036573318436,
+            0.18960078035162012
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6986062040885794,
+          "d": 0.0,
+          "min_margin": -0.2270683294722856,
+          "logits": [
+            -0.2270683294722856,
+            -0.2270683294722856,
+            0.18960078035162012,
+            0.18960078035162012
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.693567914150456,
+          "d": 0.0,
+          "min_margin": -0.07364791485384986,
+          "logits": [
+            -0.07364791485384986,
+            -0.07364791485384986,
+            0.03618036573318436,
+            0.03618036573318436
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6960870591195178,
+          "d": -1.734723475976807e-18,
+          "min_margin": -0.18960078035162012,
+          "logits": [
+            -0.07364791485384986,
+            -0.2270683294722856,
+            0.18960078035162012,
+            0.03618036573318436
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            1.4504636963259352
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6960870591195177,
+          "d": 0.0,
+          "min_margin": -0.2270683294722856,
+          "logits": [
+            -0.2270683294722856,
+            -0.07364791485384986,
+            0.03618036573318436,
+            0.18960078035162012
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            1.4504636963259352,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6986062040885794,
+          "d": 0.0,
+          "min_margin": -0.2270683294722856,
+          "logits": [
+            -0.2270683294722856,
+            -0.2270683294722856,
+            0.18960078035162012,
+            0.18960078035162012
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -1.4504636963259352
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6960870591195178,
+          "d": -1.734723475976807e-18,
+          "min_margin": -0.18960078035162012,
+          "logits": [
+            -0.07364791485384986,
+            -0.2270683294722856,
+            0.18960078035162012,
+            0.03618036573318436
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -1.4504636963259352,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.693567914150456,
+          "d": 0.0,
+          "min_margin": -0.07364791485384986,
+          "logits": [
+            -0.07364791485384986,
+            -0.07364791485384986,
+            0.03618036573318436,
+            0.03618036573318436
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "condition": "full",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.75,
+        "loss": 0.3466185226401281,
+        "d": 4.747017600024341,
+        "min_margin": -0.0016771821003241788,
+        "logits": [
+          0.0016203167553412862,
+          0.0016771821003241788,
+          -9.513225131318741,
+          9.474902134123603
+        ]
+      },
+      "hidden_unique_values": [
+        4,
+        4
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 16,
+      "recombination_closure_fraction": 0.25,
+      "fully_on_support_patch_permutations": 1,
+      "nonidentity_label_preserving_on_support": 0,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.75
+      ],
+      "label_preserving_loss_range": [
+        0.3466185226401281,
+        0.36413779552407055
+      ],
+      "label_preserving_d_range": [
+        4.74701760002434,
+        4.747017600024341
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.75,
+          "loss": 0.3466185226401281,
+          "d": 4.747017600024341,
+          "min_margin": -0.0016771821003241788,
+          "logits": [
+            0.0016203167553412862,
+            0.0016771821003241788,
+            -9.513225131318741,
+            9.474902134123603
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 0.35708755133359854,
+          "d": 4.747017600024341,
+          "min_margin": -0.08369120340960237,
+          "logits": [
+            0.0016203167553412862,
+            -9.59523915262802,
+            0.08369120340960237,
+            9.474902134123603
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.35366876683060017,
+          "d": 4.74701760002434,
+          "min_margin": -0.05406007240247375,
+          "logits": [
+            -0.05406007240247375,
+            0.0016771821003241788,
+            -9.513225131318741,
+            9.530582523281417
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.36413779552407055,
+          "d": 4.747017600024341,
+          "min_margin": -0.08369120340960237,
+          "logits": [
+            -0.05406007240247375,
+            -9.59523915262802,
+            0.08369120340960237,
+            9.530582523281417
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            -4.01661869213841,
+            2.2106377965223296
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.75,
+          "loss": 0.3466185226401281,
+          "d": 4.747017600024341,
+          "min_margin": -0.0016771821003241788,
+          "logits": [
+            0.0016203167553412862,
+            0.0016771821003241788,
+            -9.513225131318741,
+            9.474902134123603
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            2.2106377965223296,
+            -4.01661869213841
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 0.35708755133359854,
+          "d": 4.747017600024341,
+          "min_margin": -0.08369120340960237,
+          "logits": [
+            0.0016203167553412862,
+            -9.59523915262802,
+            0.08369120340960237,
+            9.474902134123603
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            4.01661869213841,
+            -2.2106377965223296
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.36413779552407055,
+          "d": 4.747017600024341,
+          "min_margin": -0.08369120340960237,
+          "logits": [
+            -0.05406007240247375,
+            -9.59523915262802,
+            0.08369120340960237,
+            9.530582523281417
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -2.2106377965223296,
+            4.01661869213841
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.35366876683060017,
+          "d": 4.74701760002434,
+          "min_margin": -0.05406007240247375,
+          "logits": [
+            -0.05406007240247375,
+            0.0016771821003241788,
+            -9.513225131318741,
+            9.530582523281417
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "condition": "readout_only",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6960870591195177,
+        "d": 0.0,
+        "min_margin": -0.2270683294722856,
+        "logits": [
+          -0.2270683294722856,
+          -0.07364791485384986,
+          0.03618036573318436,
+          0.18960078035162012
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.693567914150456,
+        0.6986062040885794
+      ],
+      "label_preserving_d_range": [
+        -1.734723475976807e-18,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6960870591195177,
+          "d": 0.0,
+          "min_margin": -0.2270683294722856,
+          "logits": [
+            -0.2270683294722856,
+            -0.07364791485384986,
+            0.03618036573318436,
+            0.18960078035162012
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6986062040885794,
+          "d": 0.0,
+          "min_margin": -0.2270683294722856,
+          "logits": [
+            -0.2270683294722856,
+            -0.2270683294722856,
+            0.18960078035162012,
+            0.18960078035162012
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.693567914150456,
+          "d": 0.0,
+          "min_margin": -0.07364791485384986,
+          "logits": [
+            -0.07364791485384986,
+            -0.07364791485384986,
+            0.03618036573318436,
+            0.03618036573318436
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6960870591195178,
+          "d": -1.734723475976807e-18,
+          "min_margin": -0.18960078035162012,
+          "logits": [
+            -0.07364791485384986,
+            -0.2270683294722856,
+            0.18960078035162012,
+            0.03618036573318436
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            1.4504636963259352
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6960870591195177,
+          "d": 0.0,
+          "min_margin": -0.2270683294722856,
+          "logits": [
+            -0.2270683294722856,
+            -0.07364791485384986,
+            0.03618036573318436,
+            0.18960078035162012
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            1.4504636963259352,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6986062040885794,
+          "d": 0.0,
+          "min_margin": -0.2270683294722856,
+          "logits": [
+            -0.2270683294722856,
+            -0.2270683294722856,
+            0.18960078035162012,
+            0.18960078035162012
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -1.4504636963259352
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6960870591195178,
+          "d": -1.734723475976807e-18,
+          "min_margin": -0.18960078035162012,
+          "logits": [
+            -0.07364791485384986,
+            -0.2270683294722856,
+            0.18960078035162012,
+            0.03618036573318436
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -1.4504636963259352,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.693567914150456,
+          "d": 0.0,
+          "min_margin": -0.07364791485384986,
+          "logits": [
+            -0.07364791485384986,
+            -0.07364791485384986,
+            0.03618036573318436,
+            0.03618036573318436
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "condition": "readout_only",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6931471805602331,
+        "d": 0.0,
+        "min_margin": -1.8982509164503578e-06,
+        "logits": [
+          1.329214794429038e-06,
+          1.8982509164503578e-06,
+          1.070906204956297e-06,
+          1.6399423269776168e-06
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6931471805602238,
+        0.6931471805602422
+      ],
+      "label_preserving_d_range": [
+        0.0,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805602331,
+          "d": 0.0,
+          "min_margin": -1.8982509164503578e-06,
+          "logits": [
+            1.329214794429038e-06,
+            1.8982509164503578e-06,
+            1.070906204956297e-06,
+            1.6399423269776168e-06
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805602238,
+          "d": 0.0,
+          "min_margin": -1.6399423269776168e-06,
+          "logits": [
+            1.329214794429038e-06,
+            1.329214794429038e-06,
+            1.6399423269776168e-06,
+            1.6399423269776168e-06
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805602422,
+          "d": 0.0,
+          "min_margin": -1.8982509164503578e-06,
+          "logits": [
+            1.8982509164503578e-06,
+            1.8982509164503578e-06,
+            1.070906204956297e-06,
+            1.070906204956297e-06
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.693147180560233,
+          "d": 0.0,
+          "min_margin": -1.6399423269776168e-06,
+          "logits": [
+            1.8982509164503578e-06,
+            1.329214794429038e-06,
+            1.6399423269776168e-06,
+            1.070906204956297e-06
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            1.4504636963259352
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805602331,
+          "d": 0.0,
+          "min_margin": -1.8982509164503578e-06,
+          "logits": [
+            1.329214794429038e-06,
+            1.8982509164503578e-06,
+            1.070906204956297e-06,
+            1.6399423269776168e-06
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            1.4504636963259352,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805602238,
+          "d": 0.0,
+          "min_margin": -1.6399423269776168e-06,
+          "logits": [
+            1.329214794429038e-06,
+            1.329214794429038e-06,
+            1.6399423269776168e-06,
+            1.6399423269776168e-06
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -1.4504636963259352
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.693147180560233,
+          "d": 0.0,
+          "min_margin": -1.6399423269776168e-06,
+          "logits": [
+            1.8982509164503578e-06,
+            1.329214794429038e-06,
+            1.6399423269776168e-06,
+            1.070906204956297e-06
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -1.4504636963259352,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805602422,
+          "d": 0.0,
+          "min_margin": -1.8982509164503578e-06,
+          "logits": [
+            1.8982509164503578e-06,
+            1.8982509164503578e-06,
+            1.070906204956297e-06,
+            1.070906204956297e-06
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "condition": "full",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.7014559002310099,
+        "d": 1.3877787807814457e-17,
+        "min_margin": -0.3423090672750254,
+        "logits": [
+          -0.3423090672750254,
+          -0.06602496970177749,
+          0.0937235990182498,
+          0.37000769659149774
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6939683933668661,
+        0.7089434070951541
+      ],
+      "label_preserving_d_range": [
+        -1.0408340855860843e-17,
+        1.3877787807814457e-17
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7014559002310099,
+          "d": 1.3877787807814457e-17,
+          "min_margin": -0.3423090672750254,
+          "logits": [
+            -0.3423090672750254,
+            -0.06602496970177749,
+            0.0937235990182498,
+            0.37000769659149774
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7089434070951541,
+          "d": 0.0,
+          "min_margin": -0.37000769659149774,
+          "logits": [
+            -0.3423090672750254,
+            -0.3423090672750254,
+            0.37000769659149774,
+            0.37000769659149774
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6939683933668661,
+          "d": 0.0,
+          "min_margin": -0.0937235990182498,
+          "logits": [
+            -0.06602496970177749,
+            -0.06602496970177749,
+            0.0937235990182498,
+            0.0937235990182498
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7014559002310101,
+          "d": -1.0408340855860843e-17,
+          "min_margin": -0.37000769659149774,
+          "logits": [
+            -0.06602496970177749,
+            -0.3423090672750254,
+            0.37000769659149774,
+            0.0937235990182498
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            0.7984911434141233
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7014559002310099,
+          "d": 1.3877787807814457e-17,
+          "min_margin": -0.3423090672750254,
+          "logits": [
+            -0.3423090672750254,
+            -0.06602496970177749,
+            0.0937235990182498,
+            0.37000769659149774
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            0.7984911434141233,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7089434070951541,
+          "d": 0.0,
+          "min_margin": -0.37000769659149774,
+          "logits": [
+            -0.3423090672750254,
+            -0.3423090672750254,
+            0.37000769659149774,
+            0.37000769659149774
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -0.7984911434141233
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7014559002310101,
+          "d": -1.0408340855860843e-17,
+          "min_margin": -0.37000769659149774,
+          "logits": [
+            -0.06602496970177749,
+            -0.3423090672750254,
+            0.37000769659149774,
+            0.0937235990182498
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -0.7984911434141233,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6939683933668661,
+          "d": 0.0,
+          "min_margin": -0.0937235990182498,
+          "logits": [
+            -0.06602496970177749,
+            -0.06602496970177749,
+            0.0937235990182498,
+            0.0937235990182498
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "condition": "full",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.34661721549912744,
+        "d": 4.768368636228502,
+        "min_margin": -3.581536477445524e-05,
+        "logits": [
+          -2.4546734014821436e-05,
+          -9.555531481099912,
+          3.581536477445524e-05,
+          9.518003425912884
+        ]
+      },
+      "hidden_unique_values": [
+        4,
+        4
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 16,
+      "recombination_closure_fraction": 0.25,
+      "fully_on_support_patch_permutations": 1,
+      "nonidentity_label_preserving_on_support": 0,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.34661721549912744,
+        0.3653899988291198
+      ],
+      "label_preserving_d_range": [
+        4.768368636228502,
+        4.7683686362285025
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.34661721549912744,
+          "d": 4.768368636228502,
+          "min_margin": -3.581536477445524e-05,
+          "logits": [
+            -2.4546734014821436e-05,
+            -9.555531481099912,
+            3.581536477445524e-05,
+            9.518003425912884
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3570886541865851,
+          "d": 4.768368636228502,
+          "min_margin": -0.08213252226733134,
+          "logits": [
+            -2.4546734014821436e-05,
+            -9.63762818800247,
+            0.08213252226733134,
+            9.518003425912884
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3549185601416622,
+          "d": 4.768368636228502,
+          "min_margin": -0.06537628066490855,
+          "logits": [
+            9.583355159843778,
+            -9.555531481099912,
+            3.581536477445524e-05,
+            -0.06537628066490855
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3653899988291198,
+          "d": 4.7683686362285025,
+          "min_margin": -0.08213252226733134,
+          "logits": [
+            9.583355159843778,
+            -9.63762818800247,
+            0.08213252226733134,
+            -0.06537628066490855
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            2.3067467587035986,
+            4.442646327279518
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.34661721549912744,
+          "d": 4.768368636228502,
+          "min_margin": -3.581536477445524e-05,
+          "logits": [
+            -2.4546734014821436e-05,
+            -9.555531481099912,
+            3.581536477445524e-05,
+            9.518003425912884
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            4.442646327279518,
+            2.3067467587035986
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3570886541865851,
+          "d": 4.768368636228502,
+          "min_margin": -0.08213252226733134,
+          "logits": [
+            -2.4546734014821436e-05,
+            -9.63762818800247,
+            0.08213252226733134,
+            9.518003425912884
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -2.3067467587035986,
+            -4.442646327279518
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3653899988291198,
+          "d": 4.7683686362285025,
+          "min_margin": -0.08213252226733134,
+          "logits": [
+            9.583355159843778,
+            -9.63762818800247,
+            0.08213252226733134,
+            -0.06537628066490855
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -4.442646327279518,
+            -2.3067467587035986
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3549185601416622,
+          "d": 4.768368636228502,
+          "min_margin": -0.06537628066490855,
+          "logits": [
+            9.583355159843778,
+            -9.555531481099912,
+            3.581536477445524e-05,
+            -0.06537628066490855
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "condition": "readout_only",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.7014559002310099,
+        "d": 1.3877787807814457e-17,
+        "min_margin": -0.3423090672750254,
+        "logits": [
+          -0.3423090672750254,
+          -0.06602496970177749,
+          0.0937235990182498,
+          0.37000769659149774
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6939683933668661,
+        0.7089434070951541
+      ],
+      "label_preserving_d_range": [
+        -1.0408340855860843e-17,
+        1.3877787807814457e-17
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7014559002310099,
+          "d": 1.3877787807814457e-17,
+          "min_margin": -0.3423090672750254,
+          "logits": [
+            -0.3423090672750254,
+            -0.06602496970177749,
+            0.0937235990182498,
+            0.37000769659149774
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7089434070951541,
+          "d": 0.0,
+          "min_margin": -0.37000769659149774,
+          "logits": [
+            -0.3423090672750254,
+            -0.3423090672750254,
+            0.37000769659149774,
+            0.37000769659149774
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6939683933668661,
+          "d": 0.0,
+          "min_margin": -0.0937235990182498,
+          "logits": [
+            -0.06602496970177749,
+            -0.06602496970177749,
+            0.0937235990182498,
+            0.0937235990182498
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7014559002310101,
+          "d": -1.0408340855860843e-17,
+          "min_margin": -0.37000769659149774,
+          "logits": [
+            -0.06602496970177749,
+            -0.3423090672750254,
+            0.37000769659149774,
+            0.0937235990182498
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            0.7984911434141233
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7014559002310099,
+          "d": 1.3877787807814457e-17,
+          "min_margin": -0.3423090672750254,
+          "logits": [
+            -0.3423090672750254,
+            -0.06602496970177749,
+            0.0937235990182498,
+            0.37000769659149774
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            0.7984911434141233,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7089434070951541,
+          "d": 0.0,
+          "min_margin": -0.37000769659149774,
+          "logits": [
+            -0.3423090672750254,
+            -0.3423090672750254,
+            0.37000769659149774,
+            0.37000769659149774
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -0.7984911434141233
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7014559002310101,
+          "d": -1.0408340855860843e-17,
+          "min_margin": -0.37000769659149774,
+          "logits": [
+            -0.06602496970177749,
+            -0.3423090672750254,
+            0.37000769659149774,
+            0.0937235990182498
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -0.7984911434141233,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6939683933668661,
+          "d": 0.0,
+          "min_margin": -0.0937235990182498,
+          "logits": [
+            -0.06602496970177749,
+            -0.06602496970177749,
+            0.0937235990182498,
+            0.0937235990182498
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "condition": "readout_only",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6931471805599454,
+        "d": 0.0,
+        "min_margin": -2.9867503179174206e-09,
+        "logits": [
+          2.7342430451747523e-09,
+          2.1079604164239014e-09,
+          2.9867503179174206e-09,
+          2.3604676891665697e-09
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6931471805599453,
+        0.6931471805599454
+      ],
+      "label_preserving_d_range": [
+        0.0,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 0.0,
+          "min_margin": -2.9867503179174206e-09,
+          "logits": [
+            2.7342430451747523e-09,
+            2.1079604164239014e-09,
+            2.9867503179174206e-09,
+            2.3604676891665697e-09
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 0.0,
+          "min_margin": -2.7342430451747523e-09,
+          "logits": [
+            2.7342430451747523e-09,
+            2.7342430451747523e-09,
+            2.3604676891665697e-09,
+            2.3604676891665697e-09
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 0.0,
+          "min_margin": -2.9867503179174206e-09,
+          "logits": [
+            2.1079604164239014e-09,
+            2.1079604164239014e-09,
+            2.9867503179174206e-09,
+            2.9867503179174206e-09
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": 0.0,
+          "min_margin": -2.7342430451747523e-09,
+          "logits": [
+            2.1079604164239014e-09,
+            2.7342430451747523e-09,
+            2.3604676891665697e-09,
+            2.9867503179174206e-09
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            0.7984911434141233
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 0.0,
+          "min_margin": -2.9867503179174206e-09,
+          "logits": [
+            2.7342430451747523e-09,
+            2.1079604164239014e-09,
+            2.9867503179174206e-09,
+            2.3604676891665697e-09
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            0.7984911434141233,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 0.0,
+          "min_margin": -2.7342430451747523e-09,
+          "logits": [
+            2.7342430451747523e-09,
+            2.7342430451747523e-09,
+            2.3604676891665697e-09,
+            2.3604676891665697e-09
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -0.7984911434141233
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": 0.0,
+          "min_margin": -2.7342430451747523e-09,
+          "logits": [
+            2.1079604164239014e-09,
+            2.7342430451747523e-09,
+            2.3604676891665697e-09,
+            2.9867503179174206e-09
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -0.7984911434141233,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 0.0,
+          "min_margin": -2.9867503179174206e-09,
+          "logits": [
+            2.1079604164239014e-09,
+            2.1079604164239014e-09,
+            2.9867503179174206e-09,
+            2.9867503179174206e-09
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "condition": "full",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.75,
+        "loss": 0.6935462736355122,
+        "d": 0.0,
+        "min_margin": -0.0933490143583294,
+        "logits": [
+          0.04985682449425483,
+          -0.004012335777530229,
+          -0.039479854086544336,
+          -0.0933490143583294
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.25,
+        0.75
+      ],
+      "label_preserving_loss_range": [
+        0.6932455965906374,
+        0.6938469506803868
+      ],
+      "label_preserving_d_range": [
+        0.0,
+        1.734723475976807e-18
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.75,
+          "loss": 0.6935462736355122,
+          "d": 0.0,
+          "min_margin": -0.0933490143583294,
+          "logits": [
+            0.04985682449425483,
+            -0.004012335777530229,
+            -0.039479854086544336,
+            -0.0933490143583294
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6938469506803868,
+          "d": 0.0,
+          "min_margin": -0.0933490143583294,
+          "logits": [
+            0.04985682449425483,
+            0.04985682449425483,
+            -0.0933490143583294,
+            -0.0933490143583294
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6932455965906374,
+          "d": 0.0,
+          "min_margin": -0.039479854086544336,
+          "logits": [
+            -0.004012335777530229,
+            -0.004012335777530229,
+            -0.039479854086544336,
+            -0.039479854086544336
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.25,
+          "loss": 0.6935462736355122,
+          "d": 1.734723475976807e-18,
+          "min_margin": -0.04985682449425483,
+          "logits": [
+            -0.004012335777530229,
+            0.04985682449425483,
+            -0.0933490143583294,
+            -0.039479854086544336
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            0.7368105065960997
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.75,
+          "loss": 0.6935462736355122,
+          "d": 0.0,
+          "min_margin": -0.0933490143583294,
+          "logits": [
+            0.04985682449425483,
+            -0.004012335777530229,
+            -0.039479854086544336,
+            -0.0933490143583294
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            0.7368105065960997,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6938469506803868,
+          "d": 0.0,
+          "min_margin": -0.0933490143583294,
+          "logits": [
+            0.04985682449425483,
+            0.04985682449425483,
+            -0.0933490143583294,
+            -0.0933490143583294
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -0.7368105065960997
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.25,
+          "loss": 0.6935462736355122,
+          "d": 1.734723475976807e-18,
+          "min_margin": -0.04985682449425483,
+          "logits": [
+            -0.004012335777530229,
+            0.04985682449425483,
+            -0.0933490143583294,
+            -0.039479854086544336
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -0.7368105065960997,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6932455965906374,
+          "d": 0.0,
+          "min_margin": -0.039479854086544336,
+          "logits": [
+            -0.004012335777530229,
+            -0.004012335777530229,
+            -0.039479854086544336,
+            -0.039479854086544336
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "condition": "full",
+      "stage": "final",
+      "original": {
+        "accuracy": 1.0,
+        "loss": 0.0002676575897004784,
+        "d": 8.22901833105826,
+        "min_margin": 8.139334055611235,
+        "logits": [
+          8.158544862663403,
+          -8.285953070005844,
+          -8.332241335952558,
+          8.139334055611235
+        ]
+      },
+      "hidden_unique_values": [
+        4,
+        4
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 16,
+      "recombination_closure_fraction": 0.25,
+      "fully_on_support_patch_permutations": 1,
+      "nonidentity_label_preserving_on_support": 0,
+      "label_preserving_accuracy_range": [
+        0.75,
+        1.0
+      ],
+      "label_preserving_loss_range": [
+        0.00026762464657364917,
+        2.0912263222491854
+      ],
+      "label_preserving_d_range": [
+        8.229018331058258,
+        8.22901833105826
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 1.0,
+          "loss": 0.0002676575897004784,
+          "d": 8.22901833105826,
+          "min_margin": 8.139334055611235,
+          "logits": [
+            8.158544862663403,
+            -8.285953070005844,
+            -8.332241335952558,
+            8.139334055611235
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 1.0,
+          "loss": 0.00026762464657364917,
+          "d": 8.22901833105826,
+          "min_margin": 8.139334055611235,
+          "logits": [
+            8.158544862663403,
+            -8.308522951699667,
+            -8.309671454258732,
+            8.139334055611235
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 2.0912263222491854,
+          "d": 8.22901833105826,
+          "min_margin": -8.36417964422071,
+          "logits": [
+            24.662058562495346,
+            -8.285953070005844,
+            -8.332241335952558,
+            -8.36417964422071
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 2.0912262893060585,
+          "d": 8.229018331058258,
+          "min_margin": -8.36417964422071,
+          "logits": [
+            24.662058562495346,
+            -8.308522951699667,
+            -8.309671454258732,
+            -8.36417964422071
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            3.168828415309269,
+            3.3708890676701526
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 1.0,
+          "loss": 0.0002676575897004784,
+          "d": 8.22901833105826,
+          "min_margin": 8.139334055611235,
+          "logits": [
+            8.158544862663403,
+            -8.285953070005844,
+            -8.332241335952558,
+            8.139334055611235
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            3.3708890676701526,
+            3.168828415309269
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 1.0,
+          "loss": 0.00026762464657364917,
+          "d": 8.22901833105826,
+          "min_margin": 8.139334055611235,
+          "logits": [
+            8.158544862663403,
+            -8.308522951699667,
+            -8.309671454258732,
+            8.139334055611235
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -3.168828415309269,
+            -3.3708890676701526
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 2.0912262893060585,
+          "d": 8.229018331058258,
+          "min_margin": -8.36417964422071,
+          "logits": [
+            24.662058562495346,
+            -8.308522951699667,
+            -8.309671454258732,
+            -8.36417964422071
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -3.3708890676701526,
+            -3.168828415309269
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 2.0912263222491854,
+          "d": 8.22901833105826,
+          "min_margin": -8.36417964422071,
+          "logits": [
+            24.662058562495346,
+            -8.285953070005844,
+            -8.332241335952558,
+            -8.36417964422071
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "condition": "readout_only",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.75,
+        "loss": 0.6935462736355122,
+        "d": 0.0,
+        "min_margin": -0.0933490143583294,
+        "logits": [
+          0.04985682449425483,
+          -0.004012335777530229,
+          -0.039479854086544336,
+          -0.0933490143583294
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.25,
+        0.75
+      ],
+      "label_preserving_loss_range": [
+        0.6932455965906374,
+        0.6938469506803868
+      ],
+      "label_preserving_d_range": [
+        0.0,
+        1.734723475976807e-18
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.75,
+          "loss": 0.6935462736355122,
+          "d": 0.0,
+          "min_margin": -0.0933490143583294,
+          "logits": [
+            0.04985682449425483,
+            -0.004012335777530229,
+            -0.039479854086544336,
+            -0.0933490143583294
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6938469506803868,
+          "d": 0.0,
+          "min_margin": -0.0933490143583294,
+          "logits": [
+            0.04985682449425483,
+            0.04985682449425483,
+            -0.0933490143583294,
+            -0.0933490143583294
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6932455965906374,
+          "d": 0.0,
+          "min_margin": -0.039479854086544336,
+          "logits": [
+            -0.004012335777530229,
+            -0.004012335777530229,
+            -0.039479854086544336,
+            -0.039479854086544336
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.25,
+          "loss": 0.6935462736355122,
+          "d": 1.734723475976807e-18,
+          "min_margin": -0.04985682449425483,
+          "logits": [
+            -0.004012335777530229,
+            0.04985682449425483,
+            -0.0933490143583294,
+            -0.039479854086544336
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            0.7368105065960997
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.75,
+          "loss": 0.6935462736355122,
+          "d": 0.0,
+          "min_margin": -0.0933490143583294,
+          "logits": [
+            0.04985682449425483,
+            -0.004012335777530229,
+            -0.039479854086544336,
+            -0.0933490143583294
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            0.7368105065960997,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6938469506803868,
+          "d": 0.0,
+          "min_margin": -0.0933490143583294,
+          "logits": [
+            0.04985682449425483,
+            0.04985682449425483,
+            -0.0933490143583294,
+            -0.0933490143583294
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -0.7368105065960997
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.25,
+          "loss": 0.6935462736355122,
+          "d": 1.734723475976807e-18,
+          "min_margin": -0.04985682449425483,
+          "logits": [
+            -0.004012335777530229,
+            0.04985682449425483,
+            -0.0933490143583294,
+            -0.039479854086544336
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -0.7368105065960997,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6932455965906374,
+          "d": 0.0,
+          "min_margin": -0.039479854086544336,
+          "logits": [
+            -0.004012335777530229,
+            -0.004012335777530229,
+            -0.039479854086544336,
+            -0.039479854086544336
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "condition": "readout_only",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6931471824136582,
+        "d": 0.0,
+        "min_margin": -0.00011594978168376593,
+        "logits": [
+          1.3582696794905229e-05,
+          0.00011594978168376593,
+          9.103189437527588e-05,
+          0.00019339897926413658
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6931471819181427,
+        0.6931471829091738
+      ],
+      "label_preserving_d_range": [
+        0.0,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471824136582,
+          "d": 0.0,
+          "min_margin": -0.00011594978168376593,
+          "logits": [
+            1.3582696794905229e-05,
+            0.00011594978168376593,
+            9.103189437527588e-05,
+            0.00019339897926413658
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471829091738,
+          "d": 0.0,
+          "min_margin": -0.00019339897926413658,
+          "logits": [
+            1.3582696794905229e-05,
+            1.3582696794905229e-05,
+            0.00019339897926413658,
+            0.00019339897926413658
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471819181427,
+          "d": 0.0,
+          "min_margin": -0.00011594978168376593,
+          "logits": [
+            0.00011594978168376593,
+            0.00011594978168376593,
+            9.103189437527588e-05,
+            9.103189437527588e-05
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471824136581,
+          "d": 0.0,
+          "min_margin": -0.00019339897926413658,
+          "logits": [
+            0.00011594978168376593,
+            1.3582696794905229e-05,
+            0.00019339897926413658,
+            9.103189437527588e-05
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            0.7368105065960997
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471824136582,
+          "d": 0.0,
+          "min_margin": -0.00011594978168376593,
+          "logits": [
+            1.3582696794905229e-05,
+            0.00011594978168376593,
+            9.103189437527588e-05,
+            0.00019339897926413658
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            0.7368105065960997,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471829091738,
+          "d": 0.0,
+          "min_margin": -0.00019339897926413658,
+          "logits": [
+            1.3582696794905229e-05,
+            1.3582696794905229e-05,
+            0.00019339897926413658,
+            0.00019339897926413658
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -0.7368105065960997
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471824136581,
+          "d": 0.0,
+          "min_margin": -0.00019339897926413658,
+          "logits": [
+            0.00011594978168376593,
+            1.3582696794905229e-05,
+            0.00019339897926413658,
+            9.103189437527588e-05
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -0.7368105065960997,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471819181427,
+          "d": 0.0,
+          "min_margin": -0.00011594978168376593,
+          "logits": [
+            0.00011594978168376593,
+            0.00011594978168376593,
+            9.103189437527588e-05,
+            9.103189437527588e-05
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 4,
+      "condition": "full",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.7030521990094454,
+        "d": 0.0,
+        "min_margin": -0.31499867802918047,
+        "logits": [
+          0.24625131747438453,
+          0.24477024248746082,
+          -0.3135176030422568,
+          -0.31499867802918047
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.7030007333120227,
+        0.7031036647068682
+      ],
+      "label_preserving_d_range": [
+        -1.3877787807814457e-17,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7030521990094454,
+          "d": 0.0,
+          "min_margin": -0.31499867802918047,
+          "logits": [
+            0.24625131747438453,
+            0.24477024248746082,
+            -0.3135176030422568,
+            -0.31499867802918047
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7031036647068682,
+          "d": 0.0,
+          "min_margin": -0.31499867802918047,
+          "logits": [
+            0.24625131747438453,
+            0.24625131747438453,
+            -0.31499867802918047,
+            -0.31499867802918047
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7030007333120227,
+          "d": 0.0,
+          "min_margin": -0.3135176030422568,
+          "logits": [
+            0.24477024248746082,
+            0.24477024248746082,
+            -0.3135176030422568,
+            -0.3135176030422568
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7030521990094454,
+          "d": -1.3877787807814457e-17,
+          "min_margin": -0.3135176030422568,
+          "logits": [
+            0.24477024248746082,
+            0.24625131747438453,
+            -0.31499867802918047,
+            -0.3135176030422568
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            1.0113275528143615
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7030521990094454,
+          "d": 0.0,
+          "min_margin": -0.31499867802918047,
+          "logits": [
+            0.24625131747438453,
+            0.24477024248746082,
+            -0.3135176030422568,
+            -0.31499867802918047
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            1.0113275528143615,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7031036647068682,
+          "d": 0.0,
+          "min_margin": -0.31499867802918047,
+          "logits": [
+            0.24625131747438453,
+            0.24625131747438453,
+            -0.31499867802918047,
+            -0.31499867802918047
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -1.0113275528143615
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7030521990094454,
+          "d": -1.3877787807814457e-17,
+          "min_margin": -0.3135176030422568,
+          "logits": [
+            0.24477024248746082,
+            0.24625131747438453,
+            -0.31499867802918047,
+            -0.3135176030422568
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -1.0113275528143615,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7030007333120227,
+          "d": 0.0,
+          "min_margin": -0.3135176030422568,
+          "logits": [
+            0.24477024248746082,
+            0.24477024248746082,
+            -0.3135176030422568,
+            -0.3135176030422568
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 4,
+      "condition": "full",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.75,
+        "loss": 0.34662057107987254,
+        "d": 4.731691247096637,
+        "min_margin": -6.880157116784247e-05,
+        "logits": [
+          9.343735502466506,
+          -9.583092552498996,
+          6.880157116784247e-05,
+          5.73499221254159e-06
+        ]
+      },
+      "hidden_unique_values": [
+        4,
+        4
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 16,
+      "recombination_closure_fraction": 0.25,
+      "fully_on_support_patch_permutations": 1,
+      "nonidentity_label_preserving_on_support": 0,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.75
+      ],
+      "label_preserving_loss_range": [
+        0.34662057107987254,
+        0.36332097728409235
+      ],
+      "label_preserving_d_range": [
+        4.731691247096637,
+        4.731691247096638
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.75,
+          "loss": 0.34662057107987254,
+          "d": 4.731691247096637,
+          "min_margin": -6.880157116784247e-05,
+          "logits": [
+            9.343735502466506,
+            -9.583092552498996,
+            6.880157116784247e-05,
+            5.73499221254159e-06
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 0.355921278491237,
+          "d": 4.731691247096637,
+          "min_margin": -0.07314685267342871,
+          "logits": [
+            9.343735502466506,
+            0.07314685267342871,
+            -9.656170603601257,
+            5.73499221254159e-06
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.35402026987272783,
+          "d": 4.731691247096638,
+          "min_margin": -0.058350695781571066,
+          "logits": [
+            9.40209193324029,
+            -9.583092552498996,
+            6.880157116784247e-05,
+            -0.058350695781571066
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.36332097728409235,
+          "d": 4.731691247096638,
+          "min_margin": -0.07314685267342871,
+          "logits": [
+            9.40209193324029,
+            0.07314685267342871,
+            -9.656170603601257,
+            -0.058350695781571066
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            -3.9271004083169725,
+            2.1506951833962056
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.75,
+          "loss": 0.34662057107987254,
+          "d": 4.731691247096637,
+          "min_margin": -6.880157116784247e-05,
+          "logits": [
+            9.343735502466506,
+            -9.583092552498996,
+            6.880157116784247e-05,
+            5.73499221254159e-06
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            2.1506951833962056,
+            -3.9271004083169725
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 0.355921278491237,
+          "d": 4.731691247096637,
+          "min_margin": -0.07314685267342871,
+          "logits": [
+            9.343735502466506,
+            0.07314685267342871,
+            -9.656170603601257,
+            5.73499221254159e-06
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            3.9271004083169725,
+            -2.1506951833962056
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.36332097728409235,
+          "d": 4.731691247096638,
+          "min_margin": -0.07314685267342871,
+          "logits": [
+            9.40209193324029,
+            0.07314685267342871,
+            -9.656170603601257,
+            -0.058350695781571066
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -2.1506951833962056,
+            3.9271004083169725
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.35402026987272783,
+          "d": 4.731691247096638,
+          "min_margin": -0.058350695781571066,
+          "logits": [
+            9.40209193324029,
+            -9.583092552498996,
+            6.880157116784247e-05,
+            -0.058350695781571066
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 4,
+      "condition": "readout_only",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.7030521990094454,
+        "d": 0.0,
+        "min_margin": -0.31499867802918047,
+        "logits": [
+          0.24625131747438453,
+          0.24477024248746082,
+          -0.3135176030422568,
+          -0.31499867802918047
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.7030007333120227,
+        0.7031036647068682
+      ],
+      "label_preserving_d_range": [
+        -1.3877787807814457e-17,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7030521990094454,
+          "d": 0.0,
+          "min_margin": -0.31499867802918047,
+          "logits": [
+            0.24625131747438453,
+            0.24477024248746082,
+            -0.3135176030422568,
+            -0.31499867802918047
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7031036647068682,
+          "d": 0.0,
+          "min_margin": -0.31499867802918047,
+          "logits": [
+            0.24625131747438453,
+            0.24625131747438453,
+            -0.31499867802918047,
+            -0.31499867802918047
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7030007333120227,
+          "d": 0.0,
+          "min_margin": -0.3135176030422568,
+          "logits": [
+            0.24477024248746082,
+            0.24477024248746082,
+            -0.3135176030422568,
+            -0.3135176030422568
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7030521990094454,
+          "d": -1.3877787807814457e-17,
+          "min_margin": -0.3135176030422568,
+          "logits": [
+            0.24477024248746082,
+            0.24625131747438453,
+            -0.31499867802918047,
+            -0.3135176030422568
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            1.0113275528143615
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7030521990094454,
+          "d": 0.0,
+          "min_margin": -0.31499867802918047,
+          "logits": [
+            0.24625131747438453,
+            0.24477024248746082,
+            -0.3135176030422568,
+            -0.31499867802918047
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            1.0113275528143615,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7031036647068682,
+          "d": 0.0,
+          "min_margin": -0.31499867802918047,
+          "logits": [
+            0.24625131747438453,
+            0.24625131747438453,
+            -0.31499867802918047,
+            -0.31499867802918047
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -1.0113275528143615
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7030521990094454,
+          "d": -1.3877787807814457e-17,
+          "min_margin": -0.3135176030422568,
+          "logits": [
+            0.24477024248746082,
+            0.24625131747438453,
+            -0.31499867802918047,
+            -0.3135176030422568
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -1.0113275528143615,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7030007333120227,
+          "d": 0.0,
+          "min_margin": -0.3135176030422568,
+          "logits": [
+            0.24477024248746082,
+            0.24477024248746082,
+            -0.3135176030422568,
+            -0.3135176030422568
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 4,
+      "condition": "readout_only",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6931471805599452,
+        "d": 0.0,
+        "min_margin": -4.795103481535142e-10,
+        "logits": [
+          4.65937252866118e-10,
+          1.1511452671212836e-10,
+          4.795103481535142e-10,
+          1.286876219995246e-10
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6931471805599452,
+        0.6931471805599454
+      ],
+      "label_preserving_d_range": [
+        0.0,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599452,
+          "d": 0.0,
+          "min_margin": -4.795103481535142e-10,
+          "logits": [
+            4.65937252866118e-10,
+            1.1511452671212836e-10,
+            4.795103481535142e-10,
+            1.286876219995246e-10
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 0.0,
+          "min_margin": -4.65937252866118e-10,
+          "logits": [
+            4.65937252866118e-10,
+            4.65937252866118e-10,
+            1.286876219995246e-10,
+            1.286876219995246e-10
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": 0.0,
+          "min_margin": -4.795103481535142e-10,
+          "logits": [
+            1.1511452671212836e-10,
+            1.1511452671212836e-10,
+            4.795103481535142e-10,
+            4.795103481535142e-10
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": 0.0,
+          "min_margin": -4.65937252866118e-10,
+          "logits": [
+            1.1511452671212836e-10,
+            4.65937252866118e-10,
+            1.286876219995246e-10,
+            4.795103481535142e-10
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            1.0113275528143615
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599452,
+          "d": 0.0,
+          "min_margin": -4.795103481535142e-10,
+          "logits": [
+            4.65937252866118e-10,
+            1.1511452671212836e-10,
+            4.795103481535142e-10,
+            1.286876219995246e-10
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            1.0113275528143615,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 0.0,
+          "min_margin": -4.65937252866118e-10,
+          "logits": [
+            4.65937252866118e-10,
+            4.65937252866118e-10,
+            1.286876219995246e-10,
+            1.286876219995246e-10
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -1.0113275528143615
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": 0.0,
+          "min_margin": -4.65937252866118e-10,
+          "logits": [
+            1.1511452671212836e-10,
+            4.65937252866118e-10,
+            1.286876219995246e-10,
+            4.795103481535142e-10
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -1.0113275528143615,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": 0.0,
+          "min_margin": -4.795103481535142e-10,
+          "logits": [
+            1.1511452671212836e-10,
+            1.1511452671212836e-10,
+            4.795103481535142e-10,
+            4.795103481535142e-10
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 5,
+      "condition": "full",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6979884357098954,
+        "d": 0.0,
+        "min_margin": -0.21512849476842563,
+        "logits": [
+          -0.21512849476842563,
+          -0.17766793526494554,
+          0.17701377651664602,
+          0.2144743360201261
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6970732754959965,
+        0.6989035959237945
+      ],
+      "label_preserving_d_range": [
+        0.0,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979884357098954,
+          "d": 0.0,
+          "min_margin": -0.21512849476842563,
+          "logits": [
+            -0.21512849476842563,
+            -0.17766793526494554,
+            0.17701377651664602,
+            0.2144743360201261
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6989035959237945,
+          "d": 0.0,
+          "min_margin": -0.21512849476842563,
+          "logits": [
+            -0.21512849476842563,
+            -0.21512849476842563,
+            0.2144743360201261,
+            0.2144743360201261
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6970732754959965,
+          "d": 0.0,
+          "min_margin": -0.17766793526494554,
+          "logits": [
+            -0.17766793526494554,
+            -0.17766793526494554,
+            0.17701377651664602,
+            0.17701377651664602
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979884357098955,
+          "d": 0.0,
+          "min_margin": -0.2144743360201261,
+          "logits": [
+            -0.17766793526494554,
+            -0.21512849476842563,
+            0.2144743360201261,
+            0.17701377651664602
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            1.3079407897364939
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979884357098954,
+          "d": 0.0,
+          "min_margin": -0.21512849476842563,
+          "logits": [
+            -0.21512849476842563,
+            -0.17766793526494554,
+            0.17701377651664602,
+            0.2144743360201261
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            1.3079407897364939,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6989035959237945,
+          "d": 0.0,
+          "min_margin": -0.21512849476842563,
+          "logits": [
+            -0.21512849476842563,
+            -0.21512849476842563,
+            0.2144743360201261,
+            0.2144743360201261
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -1.3079407897364939
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979884357098955,
+          "d": 0.0,
+          "min_margin": -0.2144743360201261,
+          "logits": [
+            -0.17766793526494554,
+            -0.21512849476842563,
+            0.2144743360201261,
+            0.17701377651664602
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -1.3079407897364939,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6970732754959965,
+          "d": 0.0,
+          "min_margin": -0.17766793526494554,
+          "logits": [
+            -0.17766793526494554,
+            -0.17766793526494554,
+            0.17701377651664602,
+            0.17701377651664602
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 5,
+      "condition": "full",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.75,
+        "loss": 0.34661781240860745,
+        "d": 4.773129616890375,
+        "min_margin": -6.852938242815632e-05,
+        "logits": [
+          -6.852938242815632e-05,
+          -9.421843524054639,
+          -2.8225445345142486e-06,
+          9.670740650344756
+        ]
+      },
+      "hidden_unique_values": [
+        4,
+        4
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 16,
+      "recombination_closure_fraction": 0.25,
+      "fully_on_support_patch_permutations": 1,
+      "nonidentity_label_preserving_on_support": 0,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.75
+      ],
+      "label_preserving_loss_range": [
+        0.34661781240860745,
+        0.3802538827749412
+      ],
+      "label_preserving_d_range": [
+        4.773129616890375,
+        4.773129616890376
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.75,
+          "loss": 0.34661781240860745,
+          "d": 4.773129616890375,
+          "min_margin": -6.852938242815632e-05,
+          "logits": [
+            -6.852938242815632e-05,
+            -9.421843524054639,
+            -2.8225445345142486e-06,
+            9.670740650344756
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.36441529711119625,
+          "d": 4.773129616890376,
+          "min_margin": -0.1376637795677991,
+          "logits": [
+            -6.852938242815632e-05,
+            -9.559510126166973,
+            0.1376637795677991,
+            9.670740650344756
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 0.3624563980723524,
+          "d": 4.773129616890375,
+          "min_margin": -0.1230112556983523,
+          "logits": [
+            9.79368337666068,
+            -9.421843524054639,
+            -2.8225445345142486e-06,
+            -0.1230112556983523
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3802538827749412,
+          "d": 4.773129616890375,
+          "min_margin": -0.1376637795677991,
+          "logits": [
+            9.79368337666068,
+            -9.559510126166973,
+            0.1376637795677991,
+            -0.1230112556983523
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            2.114338719822995,
+            4.190667116283817
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.75,
+          "loss": 0.34661781240860745,
+          "d": 4.773129616890375,
+          "min_margin": -6.852938242815632e-05,
+          "logits": [
+            -6.852938242815632e-05,
+            -9.421843524054639,
+            -2.8225445345142486e-06,
+            9.670740650344756
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            4.190667116283817,
+            2.114338719822995
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.36441529711119625,
+          "d": 4.773129616890376,
+          "min_margin": -0.1376637795677991,
+          "logits": [
+            -6.852938242815632e-05,
+            -9.559510126166973,
+            0.1376637795677991,
+            9.670740650344756
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -2.114338719822995,
+            -4.190667116283817
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3802538827749412,
+          "d": 4.773129616890375,
+          "min_margin": -0.1376637795677991,
+          "logits": [
+            9.79368337666068,
+            -9.559510126166973,
+            0.1376637795677991,
+            -0.1230112556983523
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -4.190667116283817,
+            -2.114338719822995
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 0.3624563980723524,
+          "d": 4.773129616890375,
+          "min_margin": -0.1230112556983523,
+          "logits": [
+            9.79368337666068,
+            -9.421843524054639,
+            -2.8225445345142486e-06,
+            -0.1230112556983523
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 5,
+      "condition": "readout_only",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6979884357098954,
+        "d": 0.0,
+        "min_margin": -0.21512849476842563,
+        "logits": [
+          -0.21512849476842563,
+          -0.17766793526494554,
+          0.17701377651664602,
+          0.2144743360201261
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6970732754959965,
+        0.6989035959237945
+      ],
+      "label_preserving_d_range": [
+        0.0,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979884357098954,
+          "d": 0.0,
+          "min_margin": -0.21512849476842563,
+          "logits": [
+            -0.21512849476842563,
+            -0.17766793526494554,
+            0.17701377651664602,
+            0.2144743360201261
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6989035959237945,
+          "d": 0.0,
+          "min_margin": -0.21512849476842563,
+          "logits": [
+            -0.21512849476842563,
+            -0.21512849476842563,
+            0.2144743360201261,
+            0.2144743360201261
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6970732754959965,
+          "d": 0.0,
+          "min_margin": -0.17766793526494554,
+          "logits": [
+            -0.17766793526494554,
+            -0.17766793526494554,
+            0.17701377651664602,
+            0.17701377651664602
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979884357098955,
+          "d": 0.0,
+          "min_margin": -0.2144743360201261,
+          "logits": [
+            -0.17766793526494554,
+            -0.21512849476842563,
+            0.2144743360201261,
+            0.17701377651664602
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            1.3079407897364939
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979884357098954,
+          "d": 0.0,
+          "min_margin": -0.21512849476842563,
+          "logits": [
+            -0.21512849476842563,
+            -0.17766793526494554,
+            0.17701377651664602,
+            0.2144743360201261
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            1.3079407897364939,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6989035959237945,
+          "d": 0.0,
+          "min_margin": -0.21512849476842563,
+          "logits": [
+            -0.21512849476842563,
+            -0.21512849476842563,
+            0.2144743360201261,
+            0.2144743360201261
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -1.3079407897364939
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979884357098955,
+          "d": 0.0,
+          "min_margin": -0.2144743360201261,
+          "logits": [
+            -0.17766793526494554,
+            -0.21512849476842563,
+            0.2144743360201261,
+            0.17701377651664602
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -1.3079407897364939,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6970732754959965,
+          "d": 0.0,
+          "min_margin": -0.17766793526494554,
+          "logits": [
+            -0.17766793526494554,
+            -0.17766793526494554,
+            0.17701377651664602,
+            0.17701377651664602
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 5,
+      "condition": "readout_only",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6931471805599453,
+        "d": 2.5849394142282115e-26,
+        "min_margin": -1.3192009340010895e-09,
+        "logits": [
+          -1.3192009340010895e-09,
+          -1.3929332637281859e-10,
+          -1.321272838365446e-09,
+          -1.4136523073717493e-10
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6931471805599453,
+        0.6931471805599454
+      ],
+      "label_preserving_d_range": [
+        -5.169878828456423e-26,
+        2.5849394142282115e-26
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": 2.5849394142282115e-26,
+          "min_margin": -1.3192009340010895e-09,
+          "logits": [
+            -1.3192009340010895e-09,
+            -1.3929332637281859e-10,
+            -1.321272838365446e-09,
+            -1.4136523073717493e-10
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": 0.0,
+          "min_margin": -1.3192009340010895e-09,
+          "logits": [
+            -1.3192009340010895e-09,
+            -1.3192009340010895e-09,
+            -1.4136523073717493e-10,
+            -1.4136523073717493e-10
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 0.0,
+          "min_margin": -1.321272838365446e-09,
+          "logits": [
+            -1.3929332637281859e-10,
+            -1.3929332637281859e-10,
+            -1.321272838365446e-09,
+            -1.321272838365446e-09
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": -5.169878828456423e-26,
+          "min_margin": -1.321272838365446e-09,
+          "logits": [
+            -1.3929332637281859e-10,
+            -1.3192009340010895e-09,
+            -1.4136523073717493e-10,
+            -1.321272838365446e-09
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            1.3079407897364939
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": 2.5849394142282115e-26,
+          "min_margin": -1.3192009340010895e-09,
+          "logits": [
+            -1.3192009340010895e-09,
+            -1.3929332637281859e-10,
+            -1.321272838365446e-09,
+            -1.4136523073717493e-10
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            1.3079407897364939,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599453,
+          "d": 0.0,
+          "min_margin": -1.3192009340010895e-09,
+          "logits": [
+            -1.3192009340010895e-09,
+            -1.3192009340010895e-09,
+            -1.4136523073717493e-10,
+            -1.4136523073717493e-10
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -1.3079407897364939
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": -5.169878828456423e-26,
+          "min_margin": -1.321272838365446e-09,
+          "logits": [
+            -1.3929332637281859e-10,
+            -1.3192009340010895e-09,
+            -1.4136523073717493e-10,
+            -1.321272838365446e-09
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -1.3079407897364939,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599454,
+          "d": 0.0,
+          "min_margin": -1.321272838365446e-09,
+          "logits": [
+            -1.3929332637281859e-10,
+            -1.3929332637281859e-10,
+            -1.321272838365446e-09,
+            -1.321272838365446e-09
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 6,
+      "condition": "full",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6979889774196899,
+        "d": 0.0,
+        "min_margin": -0.19929259067357546,
+        "logits": [
+          0.2293392737630038,
+          0.19171096705229082,
+          -0.16166428396286248,
+          -0.19929259067357546
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6970724229990066,
+        0.6989055318403734
+      ],
+      "label_preserving_d_range": [
+        0.0,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979889774196899,
+          "d": 0.0,
+          "min_margin": -0.19929259067357546,
+          "logits": [
+            0.2293392737630038,
+            0.19171096705229082,
+            -0.16166428396286248,
+            -0.19929259067357546
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6989055318403734,
+          "d": 0.0,
+          "min_margin": -0.2293392737630038,
+          "logits": [
+            0.2293392737630038,
+            0.2293392737630038,
+            -0.19929259067357546,
+            -0.19929259067357546
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6970724229990066,
+          "d": 0.0,
+          "min_margin": -0.19171096705229082,
+          "logits": [
+            0.19171096705229082,
+            0.19171096705229082,
+            -0.16166428396286248,
+            -0.16166428396286248
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979889774196899,
+          "d": 0.0,
+          "min_margin": -0.2293392737630038,
+          "logits": [
+            0.19171096705229082,
+            0.2293392737630038,
+            -0.19929259067357546,
+            -0.16166428396286248
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            0.8432708698133384
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979889774196899,
+          "d": 0.0,
+          "min_margin": -0.19929259067357546,
+          "logits": [
+            0.2293392737630038,
+            0.19171096705229082,
+            -0.16166428396286248,
+            -0.19929259067357546
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            0.8432708698133384,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6989055318403734,
+          "d": 0.0,
+          "min_margin": -0.2293392737630038,
+          "logits": [
+            0.2293392737630038,
+            0.2293392737630038,
+            -0.19929259067357546,
+            -0.19929259067357546
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -0.8432708698133384
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979889774196899,
+          "d": 0.0,
+          "min_margin": -0.2293392737630038,
+          "logits": [
+            0.19171096705229082,
+            0.2293392737630038,
+            -0.19929259067357546,
+            -0.16166428396286248
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -0.8432708698133384,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6970724229990066,
+          "d": 0.0,
+          "min_margin": -0.19171096705229082,
+          "logits": [
+            0.19171096705229082,
+            0.19171096705229082,
+            -0.16166428396286248,
+            -0.16166428396286248
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 6,
+      "condition": "full",
+      "stage": "final",
+      "original": {
+        "accuracy": 1.0,
+        "loss": 0.00028542170450549014,
+        "d": 8.169640348096893,
+        "min_margin": 7.95818854552581,
+        "logits": [
+          8.22611219299553,
+          -8.289623763211159,
+          -7.95818854552581,
+          8.20463689065507
+        ]
+      },
+      "hidden_unique_values": [
+        4,
+        4
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 16,
+      "recombination_closure_fraction": 0.25,
+      "fully_on_support_patch_permutations": 1,
+      "nonidentity_label_preserving_on_support": 0,
+      "label_preserving_accuracy_range": [
+        0.75,
+        1.0
+      ],
+      "label_preserving_loss_range": [
+        0.0002854141416954181,
+        2.0655438081183646
+      ],
+      "label_preserving_d_range": [
+        8.169640348096891,
+        8.169640348096893
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 1.0,
+          "loss": 0.00028542170450549014,
+          "d": 8.169640348096893,
+          "min_margin": 7.95818854552581,
+          "logits": [
+            8.22611219299553,
+            -8.289623763211159,
+            -7.95818854552581,
+            8.20463689065507
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 2.0655438081183646,
+          "d": 8.169640348096891,
+          "min_margin": -8.2613760780898,
+          "logits": [
+            8.22611219299553,
+            8.2613760780898,
+            -24.509188386826768,
+            8.20463689065507
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 1.0,
+          "loss": 0.0002854141416954181,
+          "d": 8.169640348096891,
+          "min_margin": 7.95818854552581,
+          "logits": [
+            8.213533890420184,
+            -8.289623763211159,
+            -7.95818854552581,
+            8.217215193230416
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 2.0655438005555546,
+          "d": 8.169640348096891,
+          "min_margin": -8.2613760780898,
+          "logits": [
+            8.213533890420184,
+            8.2613760780898,
+            -24.509188386826768,
+            8.217215193230416
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            -3.203284709068189,
+            3.3175582226492675
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 1.0,
+          "loss": 0.00028542170450549014,
+          "d": 8.169640348096893,
+          "min_margin": 7.95818854552581,
+          "logits": [
+            8.22611219299553,
+            -8.289623763211159,
+            -7.95818854552581,
+            8.20463689065507
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            3.3175582226492675,
+            -3.203284709068189
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 2.0655438081183646,
+          "d": 8.169640348096891,
+          "min_margin": -8.2613760780898,
+          "logits": [
+            8.22611219299553,
+            8.2613760780898,
+            -24.509188386826768,
+            8.20463689065507
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            3.203284709068189,
+            -3.3175582226492675
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 2.0655438005555546,
+          "d": 8.169640348096891,
+          "min_margin": -8.2613760780898,
+          "logits": [
+            8.213533890420184,
+            8.2613760780898,
+            -24.509188386826768,
+            8.217215193230416
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -3.3175582226492675,
+            3.203284709068189
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 1.0,
+          "loss": 0.0002854141416954181,
+          "d": 8.169640348096891,
+          "min_margin": 7.95818854552581,
+          "logits": [
+            8.213533890420184,
+            -8.289623763211159,
+            -7.95818854552581,
+            8.217215193230416
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 6,
+      "condition": "readout_only",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6979889774196899,
+        "d": 0.0,
+        "min_margin": -0.19929259067357546,
+        "logits": [
+          0.2293392737630038,
+          0.19171096705229082,
+          -0.16166428396286248,
+          -0.19929259067357546
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6970724229990066,
+        0.6989055318403734
+      ],
+      "label_preserving_d_range": [
+        0.0,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979889774196899,
+          "d": 0.0,
+          "min_margin": -0.19929259067357546,
+          "logits": [
+            0.2293392737630038,
+            0.19171096705229082,
+            -0.16166428396286248,
+            -0.19929259067357546
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6989055318403734,
+          "d": 0.0,
+          "min_margin": -0.2293392737630038,
+          "logits": [
+            0.2293392737630038,
+            0.2293392737630038,
+            -0.19929259067357546,
+            -0.19929259067357546
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6970724229990066,
+          "d": 0.0,
+          "min_margin": -0.19171096705229082,
+          "logits": [
+            0.19171096705229082,
+            0.19171096705229082,
+            -0.16166428396286248,
+            -0.16166428396286248
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979889774196899,
+          "d": 0.0,
+          "min_margin": -0.2293392737630038,
+          "logits": [
+            0.19171096705229082,
+            0.2293392737630038,
+            -0.19929259067357546,
+            -0.16166428396286248
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            0.8432708698133384
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979889774196899,
+          "d": 0.0,
+          "min_margin": -0.19929259067357546,
+          "logits": [
+            0.2293392737630038,
+            0.19171096705229082,
+            -0.16166428396286248,
+            -0.19929259067357546
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            0.8432708698133384,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6989055318403734,
+          "d": 0.0,
+          "min_margin": -0.2293392737630038,
+          "logits": [
+            0.2293392737630038,
+            0.2293392737630038,
+            -0.19929259067357546,
+            -0.19929259067357546
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -0.8432708698133384
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6979889774196899,
+          "d": 0.0,
+          "min_margin": -0.2293392737630038,
+          "logits": [
+            0.19171096705229082,
+            0.2293392737630038,
+            -0.19929259067357546,
+            -0.16166428396286248
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -0.8432708698133384,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6970724229990066,
+          "d": 0.0,
+          "min_margin": -0.19171096705229082,
+          "logits": [
+            0.19171096705229082,
+            0.19171096705229082,
+            -0.16166428396286248,
+            -0.16166428396286248
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 6,
+      "condition": "readout_only",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6931471805599455,
+        "d": 0.0,
+        "min_margin": -5.532317449772987e-08,
+        "logits": [
+          5.647333095090572e-08,
+          1.2912976994022585e-08,
+          5.532317449772987e-08,
+          1.176282054084673e-08
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6931471805599455,
+        0.6931471805599456
+      ],
+      "label_preserving_d_range": [
+        0.0,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599455,
+          "d": 0.0,
+          "min_margin": -5.532317449772987e-08,
+          "logits": [
+            5.647333095090572e-08,
+            1.2912976994022585e-08,
+            5.532317449772987e-08,
+            1.176282054084673e-08
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599455,
+          "d": 0.0,
+          "min_margin": -5.647333095090572e-08,
+          "logits": [
+            5.647333095090572e-08,
+            5.647333095090572e-08,
+            1.176282054084673e-08,
+            1.176282054084673e-08
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599456,
+          "d": 0.0,
+          "min_margin": -5.532317449772987e-08,
+          "logits": [
+            1.2912976994022585e-08,
+            1.2912976994022585e-08,
+            5.532317449772987e-08,
+            5.532317449772987e-08
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599455,
+          "d": 0.0,
+          "min_margin": -5.647333095090572e-08,
+          "logits": [
+            1.2912976994022585e-08,
+            5.647333095090572e-08,
+            1.176282054084673e-08,
+            5.532317449772987e-08
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            0.8432708698133384
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599455,
+          "d": 0.0,
+          "min_margin": -5.532317449772987e-08,
+          "logits": [
+            5.647333095090572e-08,
+            1.2912976994022585e-08,
+            5.532317449772987e-08,
+            1.176282054084673e-08
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            0.8432708698133384,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599455,
+          "d": 0.0,
+          "min_margin": -5.647333095090572e-08,
+          "logits": [
+            5.647333095090572e-08,
+            5.647333095090572e-08,
+            1.176282054084673e-08,
+            1.176282054084673e-08
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -0.8432708698133384
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599455,
+          "d": 0.0,
+          "min_margin": -5.647333095090572e-08,
+          "logits": [
+            1.2912976994022585e-08,
+            5.647333095090572e-08,
+            1.176282054084673e-08,
+            5.532317449772987e-08
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -0.8432708698133384,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931471805599456,
+          "d": 0.0,
+          "min_margin": -5.532317449772987e-08,
+          "logits": [
+            1.2912976994022585e-08,
+            1.2912976994022585e-08,
+            5.532317449772987e-08,
+            5.532317449772987e-08
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 7,
+      "condition": "full",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6975036558056699,
+        "d": 6.938893903907228e-18,
+        "min_margin": -0.2408553228795236,
+        "logits": [
+          0.24762029072746655,
+          -0.09751750451337697,
+          0.1042824723613199,
+          -0.2408553228795236
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6944206685618204,
+        0.7005866430495193
+      ],
+      "label_preserving_d_range": [
+        -6.938893903907228e-18,
+        6.938893903907228e-18
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6975036558056699,
+          "d": 6.938893903907228e-18,
+          "min_margin": -0.2408553228795236,
+          "logits": [
+            0.24762029072746655,
+            -0.09751750451337697,
+            0.1042824723613199,
+            -0.2408553228795236
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7005866430495193,
+          "d": 0.0,
+          "min_margin": -0.24762029072746655,
+          "logits": [
+            0.24762029072746655,
+            0.24762029072746655,
+            -0.2408553228795236,
+            -0.2408553228795236
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6944206685618204,
+          "d": 0.0,
+          "min_margin": -0.1042824723613199,
+          "logits": [
+            -0.09751750451337697,
+            -0.09751750451337697,
+            0.1042824723613199,
+            0.1042824723613199
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.69750365580567,
+          "d": -6.938893903907228e-18,
+          "min_margin": -0.24762029072746655,
+          "logits": [
+            -0.09751750451337697,
+            0.24762029072746655,
+            -0.2408553228795236,
+            0.1042824723613199
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            1.3972138009695754
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6975036558056699,
+          "d": 6.938893903907228e-18,
+          "min_margin": -0.2408553228795236,
+          "logits": [
+            0.24762029072746655,
+            -0.09751750451337697,
+            0.1042824723613199,
+            -0.2408553228795236
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            1.3972138009695754,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7005866430495193,
+          "d": 0.0,
+          "min_margin": -0.24762029072746655,
+          "logits": [
+            0.24762029072746655,
+            0.24762029072746655,
+            -0.2408553228795236,
+            -0.2408553228795236
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -1.3972138009695754
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.69750365580567,
+          "d": -6.938893903907228e-18,
+          "min_margin": -0.24762029072746655,
+          "logits": [
+            -0.09751750451337697,
+            0.24762029072746655,
+            -0.2408553228795236,
+            0.1042824723613199
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -1.3972138009695754,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6944206685618204,
+          "d": 0.0,
+          "min_margin": -0.1042824723613199,
+          "logits": [
+            -0.09751750451337697,
+            -0.09751750451337697,
+            0.1042824723613199,
+            0.1042824723613199
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 7,
+      "condition": "full",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.75,
+        "loss": 0.34661951360001875,
+        "d": 4.72622239145177,
+        "min_margin": -5.459279696545111e-05,
+        "logits": [
+          9.543216687564875,
+          -9.36172500140335,
+          -2.469635815134652e-06,
+          -5.459279696545111e-05
+        ]
+      },
+      "hidden_unique_values": [
+        4,
+        4
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 16,
+      "recombination_closure_fraction": 0.25,
+      "fully_on_support_patch_permutations": 1,
+      "nonidentity_label_preserving_on_support": 0,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.75
+      ],
+      "label_preserving_loss_range": [
+        0.34661951360001875,
+        0.3654096695668645
+      ],
+      "label_preserving_d_range": [
+        4.726222391451769,
+        4.72622239145177
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.75,
+          "loss": 0.34661951360001875,
+          "d": 4.72622239145177,
+          "min_margin": -5.459279696545111e-05,
+          "logits": [
+            9.543216687564875,
+            -9.36172500140335,
+            -2.469635815134652e-06,
+            -5.459279696545111e-05
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3588918899616005,
+          "d": 4.726222391451769,
+          "min_margin": -0.09589421439574113,
+          "logits": [
+            9.543216687564875,
+            0.09589421439574113,
+            -9.457621685434907,
+            -5.459279696545111e-05
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 0.35313729320528275,
+          "d": 4.72622239145177,
+          "min_margin": -0.051540005093457956,
+          "logits": [
+            9.594702099861369,
+            -9.36172500140335,
+            -2.469635815134652e-06,
+            -0.051540005093457956
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3654096695668645,
+          "d": 4.726222391451769,
+          "min_margin": -0.09589421439574113,
+          "logits": [
+            9.594702099861369,
+            0.09589421439574113,
+            -9.457621685434907,
+            -0.051540005093457956
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            -4.181128535599143,
+            2.3317090536995124
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.75,
+          "loss": 0.34661951360001875,
+          "d": 4.72622239145177,
+          "min_margin": -5.459279696545111e-05,
+          "logits": [
+            9.543216687564875,
+            -9.36172500140335,
+            -2.469635815134652e-06,
+            -5.459279696545111e-05
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            2.3317090536995124,
+            -4.181128535599143
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3588918899616005,
+          "d": 4.726222391451769,
+          "min_margin": -0.09589421439574113,
+          "logits": [
+            9.543216687564875,
+            0.09589421439574113,
+            -9.457621685434907,
+            -5.459279696545111e-05
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            4.181128535599143,
+            -2.3317090536995124
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.5,
+          "loss": 0.3654096695668645,
+          "d": 4.726222391451769,
+          "min_margin": -0.09589421439574113,
+          "logits": [
+            9.594702099861369,
+            0.09589421439574113,
+            -9.457621685434907,
+            -0.051540005093457956
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -2.3317090536995124,
+            4.181128535599143
+          ],
+          "fully_on_original_support": false,
+          "accuracy": 0.75,
+          "loss": 0.35313729320528275,
+          "d": 4.72622239145177,
+          "min_margin": -0.051540005093457956,
+          "logits": [
+            9.594702099861369,
+            -9.36172500140335,
+            -2.469635815134652e-06,
+            -0.051540005093457956
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 7,
+      "condition": "readout_only",
+      "stage": "initial",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6975036558056699,
+        "d": 6.938893903907228e-18,
+        "min_margin": -0.2408553228795236,
+        "logits": [
+          0.24762029072746655,
+          -0.09751750451337697,
+          0.1042824723613199,
+          -0.2408553228795236
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6944206685618204,
+        0.7005866430495193
+      ],
+      "label_preserving_d_range": [
+        -6.938893903907228e-18,
+        6.938893903907228e-18
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6975036558056699,
+          "d": 6.938893903907228e-18,
+          "min_margin": -0.2408553228795236,
+          "logits": [
+            0.24762029072746655,
+            -0.09751750451337697,
+            0.1042824723613199,
+            -0.2408553228795236
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7005866430495193,
+          "d": 0.0,
+          "min_margin": -0.24762029072746655,
+          "logits": [
+            0.24762029072746655,
+            0.24762029072746655,
+            -0.2408553228795236,
+            -0.2408553228795236
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6944206685618204,
+          "d": 0.0,
+          "min_margin": -0.1042824723613199,
+          "logits": [
+            -0.09751750451337697,
+            -0.09751750451337697,
+            0.1042824723613199,
+            0.1042824723613199
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.69750365580567,
+          "d": -6.938893903907228e-18,
+          "min_margin": -0.24762029072746655,
+          "logits": [
+            -0.09751750451337697,
+            0.24762029072746655,
+            -0.2408553228795236,
+            0.1042824723613199
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            1.3972138009695754
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6975036558056699,
+          "d": 6.938893903907228e-18,
+          "min_margin": -0.2408553228795236,
+          "logits": [
+            0.24762029072746655,
+            -0.09751750451337697,
+            0.1042824723613199,
+            -0.2408553228795236
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            1.3972138009695754,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.7005866430495193,
+          "d": 0.0,
+          "min_margin": -0.24762029072746655,
+          "logits": [
+            0.24762029072746655,
+            0.24762029072746655,
+            -0.2408553228795236,
+            -0.2408553228795236
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -1.3972138009695754
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.69750365580567,
+          "d": -6.938893903907228e-18,
+          "min_margin": -0.24762029072746655,
+          "logits": [
+            -0.09751750451337697,
+            0.24762029072746655,
+            -0.2408553228795236,
+            0.1042824723613199
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -1.3972138009695754,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6944206685618204,
+          "d": 0.0,
+          "min_margin": -0.1042824723613199,
+          "logits": [
+            -0.09751750451337697,
+            -0.09751750451337697,
+            0.1042824723613199,
+            0.1042824723613199
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 7,
+      "condition": "readout_only",
+      "stage": "final",
+      "original": {
+        "accuracy": 0.5,
+        "loss": 0.6931472829108787,
+        "d": 0.0,
+        "min_margin": -0.0011903802047849655,
+        "logits": [
+          0.0005638513399513073,
+          0.0005064999996879519,
+          0.0011903802047849655,
+          0.00113302886452161
+        ]
+      },
+      "hidden_unique_values": [
+        2,
+        2
+      ],
+      "natural_support_size": 4,
+      "coordinate_product_size": 4,
+      "recombination_closure_fraction": 1.0,
+      "fully_on_support_patch_permutations": 24,
+      "nonidentity_label_preserving_on_support": 3,
+      "label_preserving_accuracy_range": [
+        0.5,
+        0.5
+      ],
+      "label_preserving_loss_range": [
+        0.6931472806651122,
+        0.693147285156645
+      ],
+      "label_preserving_d_range": [
+        0.0,
+        0.0
+      ],
+      "label_preserving_permutations": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "identity": true,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931472829108787,
+          "d": 0.0,
+          "min_margin": -0.0011903802047849655,
+          "logits": [
+            0.0005638513399513073,
+            0.0005064999996879519,
+            0.0011903802047849655,
+            0.00113302886452161
+          ]
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931472806651122,
+          "d": 0.0,
+          "min_margin": -0.00113302886452161,
+          "logits": [
+            0.0005638513399513073,
+            0.0005638513399513073,
+            0.00113302886452161,
+            0.00113302886452161
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.693147285156645,
+          "d": 0.0,
+          "min_margin": -0.0011903802047849655,
+          "logits": [
+            0.0005064999996879519,
+            0.0005064999996879519,
+            0.0011903802047849655,
+            0.0011903802047849655
+          ]
+        },
+        {
+          "permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "identity": false,
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931472829108786,
+          "d": 0.0,
+          "min_margin": -0.00113302886452161,
+          "logits": [
+            0.0005064999996879519,
+            0.0005638513399513073,
+            0.00113302886452161,
+            0.0011903802047849655
+          ]
+        }
+      ],
+      "mechanism_symmetries": [
+        {
+          "name": "identity",
+          "source_row_permutation": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "second_unit_weights": [
+            0.0,
+            1.3972138009695754
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931472829108787,
+          "d": 0.0,
+          "min_margin": -0.0011903802047849655,
+          "logits": [
+            0.0005638513399513073,
+            0.0005064999996879519,
+            0.0011903802047849655,
+            0.00113302886452161
+          ]
+        },
+        {
+          "name": "swap_inputs",
+          "source_row_permutation": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "second_unit_weights": [
+            1.3972138009695754,
+            0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931472806651122,
+          "d": 0.0,
+          "min_margin": -0.00113302886452161,
+          "logits": [
+            0.0005638513399513073,
+            0.0005638513399513073,
+            0.00113302886452161,
+            0.00113302886452161
+          ]
+        },
+        {
+          "name": "negate_both",
+          "source_row_permutation": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "second_unit_weights": [
+            -0.0,
+            -1.3972138009695754
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.6931472829108786,
+          "d": 0.0,
+          "min_margin": -0.00113302886452161,
+          "logits": [
+            0.0005064999996879519,
+            0.0005638513399513073,
+            0.00113302886452161,
+            0.0011903802047849655
+          ]
+        },
+        {
+          "name": "swap_and_negate",
+          "source_row_permutation": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "second_unit_weights": [
+            -1.3972138009695754,
+            -0.0
+          ],
+          "fully_on_original_support": true,
+          "accuracy": 0.5,
+          "loss": 0.693147285156645,
+          "d": 0.0,
+          "min_margin": -0.0011903802047849655,
+          "logits": [
+            0.0005064999996879519,
+            0.0005064999996879519,
+            0.0011903802047849655,
+            0.0011903802047849655
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "initial_closure_fraction": [
+      1.0
+    ],
+    "readout_only_final_closure_fraction": [
+      1.0
+    ],
+    "full_final_closure_fraction": [
+      0.25
+    ],
+    "full_final_original_accuracies": {
+      "0": 0.5,
+      "1": 0.75,
+      "2": 0.5,
+      "3": 1.0,
+      "4": 0.75,
+      "5": 0.75,
+      "6": 1.0,
+      "7": 0.75
+    },
+    "full_final_matched_accuracy_ranges": {
+      "0": [
+        0.5,
+        0.5
+      ],
+      "1": [
+        0.5,
+        0.75
+      ],
+      "2": [
+        0.5,
+        0.5
+      ],
+      "3": [
+        0.75,
+        1.0
+      ],
+      "4": [
+        0.5,
+        0.75
+      ],
+      "5": [
+        0.5,
+        0.75
+      ],
+      "6": [
+        0.75,
+        1.0
+      ],
+      "7": [
+        0.5,
+        0.75
+      ]
+    },
+    "successful_seed_details": {
+      "3": {
+        "original_accuracy": 1.0,
+        "matched_accuracy_range": [
+          0.75,
+          1.0
+        ],
+        "original_loss": 0.0002676575897004784,
+        "matched_loss_range": [
+          0.00026762464657364917,
+          2.0912263222491854
+        ],
+        "fixed_d": 8.22901833105826,
+        "nonidentity_on_original_support": 0
+      },
+      "6": {
+        "original_accuracy": 1.0,
+        "matched_accuracy_range": [
+          0.75,
+          1.0
+        ],
+        "original_loss": 0.00028542170450549014,
+        "matched_loss_range": [
+          0.0002854141416954181,
+          2.0655438081183646
+        ],
+        "fixed_d": 8.169640348096893,
+        "nonidentity_on_original_support": 0
+      }
+    }
+  }
+}

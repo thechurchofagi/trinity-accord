@@ -1,0 +1,36 @@
+{
+  "round": "R83",
+  "date": "2026-10-05",
+  "sources": [
+    {
+      "title": "Addressing Divergent Representations from Causal Interventions on Neural Networks",
+      "authors": "Satchel Grant, Simon Jerome Han, Alexa R. Tartaglini, Christopher Potts",
+      "venue": "ICLR 2026",
+      "url": "https://arxiv.org/html/2511.04638v5",
+      "read_scope": "Abstract and introduction; section 4 opening and behavioral-null-space discussion; appendix A.2 patch-closure theorem, proof, corollary, and implication.",
+      "used_for": "Direct prior art on off-support coordinate patching and the product-support closure theorem."
+    },
+    {
+      "title": "Causal Abstractions of Neural Networks",
+      "authors": "Atticus Geiger, Hanson Lu, Thomas Icard, Christopher Potts",
+      "venue": "NeurIPS 2021",
+      "url": "https://arxiv.org/abs/2106.02997",
+      "read_scope": "Abstract, introduction, Figure 1 description, and opening interchange-intervention definition; overlaps the partial R80 audit.",
+      "used_for": "Established intervention methodology and the distinction between source/base hybrid states and causal alignment."
+    },
+    {
+      "title": "Interventional Causal Representation Learning",
+      "authors": "Kartik Ahuja, Divyat Mahajan, Yixin Wang, Yoshua Bengio",
+      "venue": "ICML 2023",
+      "url": "https://proceedings.mlr.press/v202/ahuja23a.html",
+      "read_scope": "Official PMLR abstract and metadata only.",
+      "used_for": "Context that support geometry and dependency-breaking interventions are established causal-representation topics; no theorem imported."
+    }
+  ],
+  "project_sources": [
+    "R78 frozen protocol, code, regenerated full summary, and archived results table",
+    "R80 constituent reorganization report",
+    "R82 task-necessary joint relations report and worklog"
+  ],
+  "redistribution": "No third-party full text is included."
+}

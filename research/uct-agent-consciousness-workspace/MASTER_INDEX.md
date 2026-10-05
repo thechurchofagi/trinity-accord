@@ -4,12 +4,13 @@ Updated 2026-10-05. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R82** (formal interface analysis; latest trained-model evaluation R80).
+- Completed round: **R83** (fixed-checkpoint support and intervention audit; no new training).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest formal analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
+- Latest formal/mechanistic analysis: [R83 recombination closure and intervention limits](records/R83_Recombination_Closure_and_Intervention_Limits_20261005.md).
+- Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
-- Latest intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R82 worklog](records/R82_Worklog_and_Handoff_20261005.md).
+- Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
+- Latest worklog: [R83 worklog](records/R83_Worklog_and_Handoff_20261005.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -62,3 +63,7 @@ Published baselines: UCT I v1.2 (10.5281/zenodo.23131575), UCT II v1.1 (10.5281/
 ## R82 continuation
 
 [Task-necessary relations beyond local decoding](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md); [worklog](records/R82_Worklog_and_Handoff_20261005.md); [code](records/r82_relational_cut_checks.py); [complete results](records/R82_Research_Package_20261005.zip). A balanced binary-task bound constrains a causally sufficient interface. Independent-source factorization yields a product bound, while shared masking permits perfect joint capability with zero individual marginal distinguishability. Standard testing/synergy mathematics, exact finite checks only; not a consciousness metric or new trained-model experiment. R65/R61 were directly audited to avoid repeating earlier preservation and memory constructions.
+
+## R83 continuation
+
+[Recombination closure and intervention limits](records/R83_Recombination_Closure_and_Intervention_Limits_20261005.md); [worklog](records/R83_Worklog_and_Handoff_20261005.md); [code](records/r83_recombination_closure_audit.py); [full JSON](records/R83_Recombination_Audit_Results.json); [summary table](records/R83_Recombination_Audit_Table.csv); [source ledger](records/R83_Source_Retrieval_Ledger.json); [complete package](records/R83_Research_Package_20261005.zip). No new training: all 32 R78 initial/final checkpoints were audited. Initial and frozen-hidden supports are coordinate-product closed; every fully trained final support occupies 4/16 coordinate combinations, and only the identity of 24 unit-2 reassignments remains wholly on the original support. Exact input-symmetry mechanism variants preserve unit-2 unconditional and target-conditioned marginals and fixed (d=E[s\ell]), yet successful seeds can fall from 1 to .75 accuracy. This proves local-statistic insufficiency but not a relation-only lesion: the same-model patches are off-support and the executable variants change local source mapping. The general patch-closure theorem has direct ICLR 2026 prior art. No phenomenal metric, fear result or major-originality claim.
