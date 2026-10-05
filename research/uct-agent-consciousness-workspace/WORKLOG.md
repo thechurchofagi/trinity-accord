@@ -25,3 +25,12 @@ The existing recurring UCT research task was updated successfully to read the la
 The user clarified that saving academic research in this separate directory should not require CI. The research branch had zero Actions runs at inspection. Targeted workflow inspection showed Repository Integrity pushes limited to main and Research Index checks triggered by pull requests. No new CI was installed for the workspace.
 
 Decision: direct storage-only branch commits carry `[skip ci]`; no storage PR, workflow dispatch, site build, deployment, or repetitive validation. Add the rule to the handoff, README, and workspace instructions, and to the existing research task. Existing repository workflow files and main remain unchanged. Confirm only the remote save; scientific validation remains independent. GitHub documents that the marker skips push/pull_request workflows, not all event types: https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs .
+
+
+## 优先纠正：体验存在不以内部访问为门槛（2026-10-05）
+
+用户最新纠正优先于此前自我访问实验安排。已直接核对已发布 A v1.2 的 C1/U1/U3 与组织门槛论证、B v1.1 的 §2.1–2.3/§5.6、C v1.0 的 §1–4。UCT 内部，实际有效过程的非空体验不需要内省或报告；研究重点是实际 AI 过程的构成关系如何组织体验。区分体验存在、组织差别、概念自我与排他的统一主体，不能以任何一种代替另一种。也不能把这一条件性理论承诺报告为当前助手意识已被实验证实。
+
+见 `notes/20261005_Experience_Without_Introspective_Access.md`。下一步先接回 R58–R65 的组织研究，避免重复参数复制/秩网格/报告评分；比较明确边界内的数量增加与实际新增关系，注明保留、丢失和新增的组织。R76 源码对照保留为待办支线。本次是依据原文的纠偏与推导说明，不新增实验轮次，最新完成编号仍为 R76。
+
+Retrieval record: Library R8 ZIP download failed twice with HTTP 502; web opening Zenodo failed. Direct public Zenodo API subsequently retrieved latest A/B source Markdown; SHA256 values match historical R8 records. Read scope is recorded in the note. No model experiment was run; no published paper modified. The intermediate local patch replacement failed because two operations targeted one path; the subsequent single update succeeded.

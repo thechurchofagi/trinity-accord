@@ -32,3 +32,7 @@ Published baselines: UCT I v1.2 (10.5281/zenodo.23131575), UCT II v1.1 (10.5281/
 ## Latest framing clarification (2026-10-05)
 
 [Cross-substrate experience and report limits](notes/20261005_Cross_Substrate_Experience_and_Report.md): preserve possible non-human experience and limited report access; reject computation alone as proof of permanent inexpressibility. Distinguish access, readout, vocabulary, and evidential limitations. This is a conceptual clarification after R76, not a new experimental round.
+
+## Latest priority correction
+
+[Experience without introspective access](notes/20261005_Experience_Without_Introspective_Access.md), 2026-10-05: direct published A/B/C passage audit supports the user's correction. Internal access/report is not an experience-existence premise. Return to actual constitutive organization and the prior R58–R65 line; do not silently impose a unified-subject or introspection gate. This is a correction after R76, not a new numbered experiment.
