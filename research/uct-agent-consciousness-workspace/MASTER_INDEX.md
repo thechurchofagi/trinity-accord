@@ -4,10 +4,10 @@ Updated 2026-10-05. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R79**.
+- Completed round: **R80**.
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest derivation and checkpoint analysis: [R79 preservation and tradeoff](records/R79_Preservation_Tradeoff_and_Robust_Task_Order_20261005.md).
-- Latest worklog: [R79 worklog](records/R79_Worklog_and_Handoff_20261005.md).
+- Latest derivation and intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
+- Latest worklog: [R80 worklog](records/R80_Worklog_and_Handoff_20261005.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -48,3 +48,7 @@ Published baselines: UCT I v1.2 (10.5281/zenodo.23131575), UCT II v1.1 (10.5281/
 ## R79 continuation
 
 [Preservation, tradeoff and robust task order](records/R79_Preservation_Tradeoff_and_Robust_Task_Order_20261005.md); [worklog](records/R79_Worklog_and_Handoff_20261005.md); [code](records/r79_robust_task_order.py); [summary table](records/R79_Robust_Task_Order_Table.csv); [complete reproducible package](records/R79_Research_Package_20261005.zip). All 16 archived runs reanalysed across 112 joint threshold regimes; no new training. A 4-to-8 task-count increase can lose old tasks. Task-set preservation is a partition-refinement property at a declared uncertainty scope, not complete ontic or experiential enrichment. Return next to actual constituent relationships; do not substitute observer resolution for experience or ideal decoding for an installed computation.
+
+## R80 continuation
+
+[Information preservation and constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md); [worklog](records/R80_Worklog_and_Handoff_20261005.md); [code](records/r80_constituent_audit.py); [table](records/R80_Constituent_Audit_Table.csv); [complete package](records/R80_Research_Package_20261005.zip). Global input recovery can coexist with loss of constituent-local independence and actual use of new joint dependencies. All 32 archived initial/final checkpoints evaluated with activation replacements and clamps; no new training. Affine-readout premise, finite-precision limits, direct precedents and counterexamples are explicit. This is not complete experiential enrichment or a subjective measurement.
