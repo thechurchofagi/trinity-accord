@@ -4,11 +4,13 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R92** (32 actual tiny-network training runs; retention versus installed use; no subjective measurement).
+- Completed round: **R93** (fixed-port state-noise comparison on existing checkpoints; standalone complete handoff).
+- New-window entry: [Complete R93 handoff](records/UCT_Agent_Research_Handoff_R93_20261006.md).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest experimental analysis: [R92 learned retention and installed use](records/R92_Learned_Retention_Installed_Use_and_Experience_20261006.md).
+- Latest analysis: [R93 fixed-port robustness](records/R93_Fixed_Port_Robustness_and_Organizational_Comparison_20261006.md).
+- Latest training: [R92 learned retention and installed use](records/R92_Learned_Retention_Installed_Use_and_Experience_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
-- Current next step: derive matched clean-task but different state-noise sensitivity using existing R92 checkpoints, fixed ports/units and explicit readout gains; distinguish retention, robust retention and installed use. No larger training or repeated R79 observer-noise grid. The R90 six-axis-emergence endpoint remains withdrawn.
+- Current next step: the R93 noise audit is closed. Define a minimal causally grounded predictive task separating world state and self/other future availability; derive required distinctions before any small experiment. Do not extend noise grids or training. The R90 six-axis-emergence endpoint remains withdrawn.
 - Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
@@ -17,7 +19,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R91 worklog](records/R91_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R93 worklog](records/R93_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -120,4 +122,11 @@ The replacement is a conditional local Jacobian bottleneck bound with explicit c
 Thirty-two 5/12-weight recurrent networks were trained under a locally frozen protocol on two-variable delayed reconstruction, with full-training/readout-only controls. All one-state runs obey the linear-decoder error bound N≥1/2. All eight two-state full-training runs pass the fixed held-out and sampled local criteria. Yet all two-state models already have sampled local rank two initially. One fixed-hidden linear model improves N from 1.0377 to 3.53e−14 by changing B alone; another condition passes mean error but fails the local derivative criterion. Neither performance nor local rank is experiential magnitude.
 
 All original failures remain. An explicitly post-hoc training-only least-squares readout solves all four fixed-hidden linear cases and tanh seed0, showing that finite optimization failure need not mean no retained information. Remaining nonlinear cases do not rule out nonlinear decoding. The archive preserves all 96,000 loss rows, 32 complete runs, nine optimizer/weight checkpoints per run, interventions and logs. The restore control is an unchanged-state baseline, not an independent damage/repair demonstration. This is a real tiny synthetic-data experiment with direct prior art, not an LLM/animal study, C1 validation, fear measurement or major historical-first claim. Complete organization includes the installed decoder, so fixed hidden trajectories do not imply fixed complete experiential type under C1.
+
+
+## R93 continuation and complete transfer handoff
+
+[Standalone complete handoff](records/UCT_Agent_Research_Handoff_R93_20261006.md); [English analysis](records/R93_Fixed_Port_Robustness_and_Organizational_Comparison_20261006.md); [protocol](records/R93_Protocol_20261006.md); [worklog](records/R93_Worklog_and_Handoff_20261006.md); [code](records/r93_state_noise.py); [inputs](records/R93_Inputs.json); [results](records/R93_Results.json); [log](records/R93_Run.log); [source scope](records/R93_Source_Retrieval_Ledger.json); [all-output package](records/R93_Research_Package_20261006.zip); [payload hashes](records/R93_SHA256SUMS.txt); [package hash](records/R93_Package_SHA256.txt).
+
+All eight R92 linear two-state models at initial/final checkpoints were replayed under three matched-state-amplitude transformations: 48 comparisons, no new training. Fixed software-state perturbations expose different installed noise sensitivity despite equal clean output; transporting perturbations with coordinates preserves outputs pointwise. A constructed exact-reconstruction pair has equal state squared amplitude and a 50.251 noise-error ratio, but downstream gains1 and10, not equal gains. A bounded-gain reconstruction premise yields a minimum retained singular-value bound; this is standard mathematics, not experiential measurement or historical-first theory. State amplitude is not physical energy. All numerical checks pass; unsuccessful prior task models, counterexamples, sources and retrieval failures remain. C1 interpretation requires actual tokens/common complete K; no current-assistant verdict. The user-requested single-file handoff is ready for a new window; future rounds must fetch the branch head rather than freezing at R93.
 

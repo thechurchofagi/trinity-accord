@@ -1,0 +1,30 @@
+{
+  "round": "R93",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "The linear model",
+      "author": "Sanjay Lall, Stanford EE263",
+      "url": "https://ee263.stanford.edu/lectures/linear_model.pdf",
+      "scope": "Read extracted covariance propagation, estimator gain and posterior MSE discussion, PDF pages1–11; not claiming complete22-page reading.",
+      "use": "Standard covariance and gain background, not a novelty claim."
+    },
+    {
+      "title": "Principal component analysis in linear systems: Controllability, observability, and model reduction",
+      "author": "B. C. Moore",
+      "year": 1981,
+      "doi": "10.1109/TAC.1981.1102568",
+      "url_attempted": "https://algos.inesc-id.pt/projects/mor4less/Moore_81.pdf",
+      "status": "PDF retrieval timeout; only search title/abstract snippets read. Follow-up system1 search returned irrelevant PDF-service results; excluded.",
+      "use": "Uncompleted prior-art lead, no detailed theorem attribution."
+    }
+  ],
+  "uct": {
+    "A": "Reread preserved published v1.2 sections3.5–3.6, actual ports/pointed state and invariant topology.",
+    "A_local_source_sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+    "B": "R81 section5.6 audit inherited, not newly reread.",
+    "C": "R91 section5.1/5.2 audit inherited, not newly reread."
+  },
+  "novelty_status": "Standard linear systems/matrix inequality application; R77 andR79 are direct project antecedents. No historical-first or exhaustive novelty clearance.",
+  "third_party_fulltexts_uploaded": false
+}
