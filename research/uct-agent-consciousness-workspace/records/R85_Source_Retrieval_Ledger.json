@@ -1,0 +1,61 @@
+{
+  "round": "R85",
+  "date": "2026-10-06",
+  "scope_note": "Only the listed abstract, metadata, or specified sections were read. No third-party full text is redistributed.",
+  "sources": [
+    {
+      "title": "Personal Identity",
+      "author": "Derek Parfit",
+      "year": 1971,
+      "url": "https://www.jstor.org/stable/2184309",
+      "read_scope": "search-accessible text of opening, Wiggins fission case, one-one identity and nonbranching continuity passages",
+      "used_for": "branching survival versus numerical identity"
+    },
+    {
+      "title": "Survival and Identity",
+      "author": "David Lewis",
+      "year": 1976,
+      "url": "https://doi.org/10.1525/9780520353060-002",
+      "read_scope": "bibliographic record only; full chapter inaccessible",
+      "used_for": "priority scope only, no detailed claim"
+    },
+    {
+      "title": "Uploading and Branching Identity",
+      "author": "Michael A. Cerullo",
+      "year": 2015,
+      "url": "https://doi.org/10.1007/s11023-014-9352-8",
+      "read_scope": "abstract and article framing",
+      "used_for": "direct competing branching-identity account"
+    },
+    {
+      "title": "Artificial General Intelligence as Process: A Trajectory-First Constraint on Agenthood",
+      "author": "Aleksandr Bagdasarov",
+      "year": 2026,
+      "url": "https://doi.org/10.2139/ssrn.6303061",
+      "read_scope": "abstract",
+      "used_for": "snapshot insufficiency and causal-trajectory precedent"
+    },
+    {
+      "title": "The Artificial Self: Characterising the landscape of AI identity",
+      "author": "Raymond Douglas et al.",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2603.11353",
+      "read_scope": "abstract, executive summary, sections 2 and 3 opening, identity-boundary and continuity passages",
+      "used_for": "instance/model/persona/lineage plurality and framing sensitivity"
+    },
+    {
+      "title": "Runtime-Independent Persistent Agents: Preserving Identity, Memory, and Code Across Models, Harnesses, and Servers",
+      "author": "Zhenyu Zhao and Roy Zhao",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2609.00546",
+      "read_scope": "abstract",
+      "used_for": "engineering continuity and continuation-authority precedent"
+    },
+    {
+      "title": "UCT I v1.2, UCT II v1.1 and UCT III v1.0",
+      "url": "records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md",
+      "read_scope": "preserved direct clause audit",
+      "used_for": "conditional token/type and NESIG baseline"
+    }
+  ]
+}

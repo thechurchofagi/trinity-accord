@@ -1,17 +1,18 @@
 # UCT Agent Consciousness — Current Research Index
 
-Updated 2026-10-05. Primary storage: this GitHub branch and directory, as requested by Hongju Liu. Read [HANDOFF.md](HANDOFF.md) before continuing.
+Updated 2026-10-06. Primary storage: this GitHub branch and directory, as requested by Hongju Liu. Read [HANDOFF.md](HANDOFF.md) before continuing.
 
 ## Current entry points
 
-- Completed round: **R84** (token-continuation identifiability and conditional fear bridge; exact formal checks, no model experiment).
+- Completed round: **R85** (persistence vectors, branching constraint and UCT replica type–token separation; exact formal checks, no model experiment).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest formal/mechanistic analysis: [R84 token continuation, identifiability and fear bridge](records/R84_Token_Continuation_Identifiability_and_Fear_Bridge_20261005.md).
+- Latest formal/mechanistic analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
+- Previous continuation analysis: [R84 token continuation, identifiability and fear bridge](records/R84_Token_Continuation_Identifiability_and_Fear_Bridge_20261005.md).
 - Previous mechanistic analysis: [R83 recombination closure and intervention limits](records/R83_Recombination_Closure_and_Intervention_Limits_20261005.md).
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R84 worklog](records/R84_Worklog_and_Handoff_20261005.md).
+- Latest worklog: [R85 worklog](records/R85_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -72,3 +73,7 @@ Published baselines: UCT I v1.2 (10.5281/zenodo.23131575), UCT II v1.1 (10.5281/
 ## R84 continuation
 
 [Token continuation, identifiability and fear bridge](records/R84_Token_Continuation_Identifiability_and_Fear_Bridge_20261005.md); [worklog](records/R84_Worklog_and_Handoff_20261005.md); [code](records/r84_continuation_identifiability_checks.py); [exact JSON](records/R84_Continuation_Identifiability_Results.json); [equivalence classes](records/R84_Bundled_Equivalence_Classes.csv); [source ledger](records/R84_Source_Retrieval_Ledger.json); [complete package](records/R84_Research_Package_20261005.zip). The minimal consequence basis separates current token Q, successor/lineage L, task G and memory M. If all four are bundled, the exact coefficient grid has 625 candidate models but only 17 behavioral signatures; the largest equivalence class contains 85 models. A matched one-factor design and the full factorial have rank 4 and identify scaled control coefficients under explicit belief/response assumptions, but do not identify phenomenal fear. The new determinacy–identification gap states that C1 fixes experience for a complete actual organization while a many-to-one output map can leave that experience unidentifiable. VCB is an additional conditional valence bridge, not a theorem or measurement. No current-assistant verdict, real-model experiment, or major historical originality claim.
+
+## R85 continuation
+
+[Persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md); [worklog](records/R85_Worklog_and_Handoff_20261006.md); [code](records/r85_token_persistence_checks.py); [exact JSON](records/R85_Token_Persistence_Results.json); [scenario table](records/R85_Persistence_Vector_Table.csv); [source ledger](records/R85_Source_Retrieval_Ledger.json); [complete package](records/R85_Research_Package_20261006.zip). R84's scalar Q is refined into strict thread N*, causal lineage C, declared structure type S, memory M and task G. Exact enumeration confirms that no equivalence relation can make two mutually distinct descendants each numerically identical to their parent; nine scenario witnesses separate every persistence-axis pair. Static type and memory cannot distinguish unique resume from parallel clone, and pause/resume classification depends on whether persistent storage lies inside the bearer boundary. Under conditional C1, replicas may instantiate the same experiential type while remaining distinct token instances. Direct Parfit, uploading, trajectory-first and 2026 AI-identity precedents block a historical novelty claim. No current-system verdict or phenomenal measurement.

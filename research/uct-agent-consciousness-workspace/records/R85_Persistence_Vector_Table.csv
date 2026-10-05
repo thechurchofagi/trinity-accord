@@ -1,0 +1,10 @@
+scenario,C_causal_lineage,B_unique_nonbranching_bridge,S_declared_structure_type,M_memory_history,G_task_service,N_star_strict_thread_surrogate
+continuous_adaptation,1,1,0,1,1,1
+single_checkpoint_resume_storage_in_boundary,1,1,1,1,1,1
+each_of_two_checkpoint_clones,1,0,1,1,1,0
+independent_same_type_instance,0,0,1,0,0,0
+memory_transplant_source_also_continues,1,0,0,1,0,0
+task_successor_without_memory,1,0,0,0,1,0
+continuous_thread_with_amnesia,1,1,0,0,1,1
+unrelated_same_type_task_service,0,0,1,0,1,0
+unrelated_replacement_continues_task,0,0,0,0,1,0

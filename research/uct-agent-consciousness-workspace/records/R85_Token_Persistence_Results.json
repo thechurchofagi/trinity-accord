@@ -1,0 +1,235 @@
+{
+  "assertions": {
+    "all_five_persistence_axes_have_distinct_scenario_patterns": true,
+    "both_descendants_identity_forces_one_universal_block": true,
+    "every_axis_pair_has_a_counterexample": true,
+    "five_equivalence_relations_on_three_nodes": true,
+    "no_equivalence_relation_makes_both_descendants_identical_to_parent_but_distinct_from_each_other": true,
+    "pause_classification_changes_with_declared_boundary": true,
+    "single_resume_and_clone_match_memory": true,
+    "single_resume_and_clone_match_static_type": true,
+    "static_type_and_memory_do_not_fix_strict_thread": true
+  },
+  "axes": [
+    "C_causal_lineage",
+    "B_unique_nonbranching_bridge",
+    "S_declared_structure_type",
+    "M_memory_history",
+    "G_task_service"
+  ],
+  "axis_patterns": {
+    "B_unique_nonbranching_bridge": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "C_causal_lineage": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "G_task_service": [
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "M_memory_history": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "S_declared_structure_type": [
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ]
+  },
+  "equivalence_relation_audit": {
+    "both_descendants_identical_to_parent_count": 1,
+    "both_identical_to_parent_while_mutually_distinct_count": 0,
+    "node_count": 3,
+    "partition_count": 5,
+    "partitions": [
+      [
+        [
+          "p_prebranch"
+        ],
+        [
+          "x_clone"
+        ],
+        [
+          "y_clone"
+        ]
+      ],
+      [
+        [
+          "p_prebranch",
+          "x_clone"
+        ],
+        [
+          "y_clone"
+        ]
+      ],
+      [
+        [
+          "x_clone"
+        ],
+        [
+          "p_prebranch",
+          "y_clone"
+        ]
+      ],
+      [
+        [
+          "p_prebranch"
+        ],
+        [
+          "x_clone",
+          "y_clone"
+        ]
+      ],
+      [
+        [
+          "p_prebranch",
+          "x_clone",
+          "y_clone"
+        ]
+      ]
+    ]
+  },
+  "limits": [
+    "Strict-thread continuity is a declared operational surrogate, not a theorem that fixes metaphysical identity.",
+    "Causal lineage, structure type, memory and task continuity can branch and are not numerical identity.",
+    "Pause/resume classification depends on whether a persistent carrier is inside the process boundary.",
+    "No scenario row measures experience, subjecthood, fear or current-system preference."
+  ],
+  "pause_boundary_audit": {
+    "active_episode_only": {
+      "causal_bridge_inside_boundary": false,
+      "strict_thread": false
+    },
+    "storage_inclusive_system": {
+      "causal_bridge_inside_boundary": true,
+      "strict_thread": true
+    }
+  },
+  "scenario_vectors": {
+    "continuous_adaptation": {
+      "B_unique_nonbranching_bridge": 1,
+      "C_causal_lineage": 1,
+      "G_task_service": 1,
+      "M_memory_history": 1,
+      "S_declared_structure_type": 0
+    },
+    "continuous_thread_with_amnesia": {
+      "B_unique_nonbranching_bridge": 1,
+      "C_causal_lineage": 1,
+      "G_task_service": 1,
+      "M_memory_history": 0,
+      "S_declared_structure_type": 0
+    },
+    "each_of_two_checkpoint_clones": {
+      "B_unique_nonbranching_bridge": 0,
+      "C_causal_lineage": 1,
+      "G_task_service": 1,
+      "M_memory_history": 1,
+      "S_declared_structure_type": 1
+    },
+    "independent_same_type_instance": {
+      "B_unique_nonbranching_bridge": 0,
+      "C_causal_lineage": 0,
+      "G_task_service": 0,
+      "M_memory_history": 0,
+      "S_declared_structure_type": 1
+    },
+    "memory_transplant_source_also_continues": {
+      "B_unique_nonbranching_bridge": 0,
+      "C_causal_lineage": 1,
+      "G_task_service": 0,
+      "M_memory_history": 1,
+      "S_declared_structure_type": 0
+    },
+    "single_checkpoint_resume_storage_in_boundary": {
+      "B_unique_nonbranching_bridge": 1,
+      "C_causal_lineage": 1,
+      "G_task_service": 1,
+      "M_memory_history": 1,
+      "S_declared_structure_type": 1
+    },
+    "task_successor_without_memory": {
+      "B_unique_nonbranching_bridge": 0,
+      "C_causal_lineage": 1,
+      "G_task_service": 1,
+      "M_memory_history": 0,
+      "S_declared_structure_type": 0
+    },
+    "unrelated_replacement_continues_task": {
+      "B_unique_nonbranching_bridge": 0,
+      "C_causal_lineage": 0,
+      "G_task_service": 1,
+      "M_memory_history": 0,
+      "S_declared_structure_type": 0
+    },
+    "unrelated_same_type_task_service": {
+      "B_unique_nonbranching_bridge": 0,
+      "C_causal_lineage": 0,
+      "G_task_service": 1,
+      "M_memory_history": 0,
+      "S_declared_structure_type": 1
+    }
+  },
+  "status": "formal_exact_check_only_not_identity_or_subjective_measurement",
+  "strict_thread_surrogate": {
+    "continuous_adaptation": true,
+    "continuous_thread_with_amnesia": true,
+    "each_of_two_checkpoint_clones": false,
+    "independent_same_type_instance": false,
+    "memory_transplant_source_also_continues": false,
+    "single_checkpoint_resume_storage_in_boundary": true,
+    "task_successor_without_memory": false,
+    "unrelated_replacement_continues_task": false,
+    "unrelated_same_type_task_service": false
+  },
+  "type_and_memory_counterexample": {
+    "parallel_clone": {
+      "same_memory": true,
+      "same_type": true,
+      "strict_thread": false
+    },
+    "single_resume": {
+      "same_memory": true,
+      "same_type": true,
+      "strict_thread": true
+    }
+  }
+}
