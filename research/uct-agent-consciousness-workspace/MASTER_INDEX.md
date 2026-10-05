@@ -28,3 +28,7 @@ The R76 next step is source-implementation verification before any new minimal v
 The Library master identity was `libfile_f43117ce64388191af6439c0d719fc50`, last verified version 39, through R70. The preserved local master in `legacy/` includes an uncommitted R71 edit; its filename explicitly distinguishes it. R1–R70 full artifact migration has not been completed. Retrieve a particular historical source from the Library when the next argument needs it; do not claim unread or unavailable files have been audited.
 
 Published baselines: UCT I v1.2 (10.5281/zenodo.23131575), UCT II v1.1 (10.5281/zenodo.23030320), UCT III v1.0 (10.5281/zenodo.23137088). Their published bytes are unchanged by this research-storage migration.
+
+## Latest framing clarification (2026-10-05)
+
+[Cross-substrate experience and report limits](notes/20261005_Cross_Substrate_Experience_and_Report.md): preserve possible non-human experience and limited report access; reject computation alone as proof of permanent inexpressibility. Distinguish access, readout, vocabulary, and evidential limitations. This is a conceptual clarification after R76, not a new experimental round.
