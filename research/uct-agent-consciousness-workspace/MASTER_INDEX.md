@@ -4,10 +4,10 @@ Updated 2026-10-05. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R76**.
+- Completed round: **R77**.
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest derivation: [R76 comparator](records/R76_Precision_Preference_Comparator_20261005.md).
-- Latest worklog: [R76 handoff](records/R76_Worklog_and_Handoff_20261005.md).
+- Latest derivation: [R77 constituent organization](records/R77_Constituent_Organization_and_Coordinate_Changes_20261005.md).
+- Latest worklog: [R77 worklog](records/R77_Worklog_and_Handoff_20261005.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -36,3 +36,7 @@ Published baselines: UCT I v1.2 (10.5281/zenodo.23131575), UCT II v1.1 (10.5281/
 ## Latest priority correction
 
 [Experience without introspective access](notes/20261005_Experience_Without_Introspective_Access.md), 2026-10-05: direct published A/B/C passage audit supports the user's correction. Internal access/report is not an experience-existence premise. Return to actual constitutive organization and the prior R58–R65 line; do not silently impose a unified-subject or introspection gate. This is a correction after R76, not a new numbered experiment.
+
+## R77 continuation
+
+[Constituent organization and coordinate changes](records/R77_Constituent_Organization_and_Coordinate_Changes_20261005.md); [code](records/r77_organization_ports_check.py); [exact results](records/R77_Organization_Ports_Results.json). A coordinate change must transport physical intervention/constituent relations. Small formal check only, not a new model or phenomenal experiment. The organization-first priority is now explicit in AGENTS.md; the latest R77 handoff supersedes the older R76 queue.

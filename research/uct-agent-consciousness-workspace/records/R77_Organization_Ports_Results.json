@@ -1,0 +1,153 @@
+{
+  "status": "formal checks only; no trained model or subjective data",
+  "checks": {
+    "dynamics_conjugacy": true,
+    "reset_transport": true,
+    "mixed_reset_not_local": true,
+    "physical_cross_effects": true,
+    "same_eigenvalue_invariants": true,
+    "matched_zero_trajectory": true
+  },
+  "matrices": {
+    "coupled": [
+      [
+        "1/2",
+        "1/4"
+      ],
+      [
+        "1/4",
+        "1/2"
+      ]
+    ],
+    "independent_physical_registers": [
+      [
+        "3/4",
+        "0"
+      ],
+      [
+        "0",
+        "1/4"
+      ]
+    ],
+    "coordinate_map": [
+      [
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "-1"
+      ]
+    ]
+  },
+  "reset_cases": [
+    {
+      "state": [
+        "0",
+        "0"
+      ],
+      "reset": "0",
+      "transported_result": [
+        "0",
+        "0"
+      ],
+      "equal": true
+    },
+    {
+      "state": [
+        "0",
+        "0"
+      ],
+      "reset": "1",
+      "transported_result": [
+        "1",
+        "1"
+      ],
+      "equal": true
+    },
+    {
+      "state": [
+        "1",
+        "0"
+      ],
+      "reset": "0",
+      "transported_result": [
+        "0",
+        "0"
+      ],
+      "equal": true
+    },
+    {
+      "state": [
+        "1",
+        "0"
+      ],
+      "reset": "1",
+      "transported_result": [
+        "1",
+        "1"
+      ],
+      "equal": true
+    },
+    {
+      "state": [
+        "0",
+        "1"
+      ],
+      "reset": "0",
+      "transported_result": [
+        "1",
+        "-1"
+      ],
+      "equal": true
+    },
+    {
+      "state": [
+        "0",
+        "1"
+      ],
+      "reset": "1",
+      "transported_result": [
+        "2",
+        "0"
+      ],
+      "equal": true
+    },
+    {
+      "state": [
+        "2",
+        "-1"
+      ],
+      "reset": "0",
+      "transported_result": [
+        "-1",
+        "1"
+      ],
+      "equal": true
+    },
+    {
+      "state": [
+        "2",
+        "-1"
+      ],
+      "reset": "1",
+      "transported_result": [
+        "0",
+        "2"
+      ],
+      "equal": true
+    }
+  ],
+  "physical_cross_effects": {
+    "coupled_x_to_y": "1/4",
+    "coupled_y_to_x": "1/4",
+    "separate_x_to_y": "0",
+    "separate_y_to_x": "0"
+  },
+  "failed_inferences": [
+    "Diagonal update alone proves physical independence.",
+    "Equal state dimension and spectrum identify constituent organization.",
+    "Cross-part coupling proves a unified subject or a scalar increase in experience."
+  ],
+  "interpretation": "First two failed inferences have explicit counterexamples; the third is not entailed by this construction or C1."
+}
