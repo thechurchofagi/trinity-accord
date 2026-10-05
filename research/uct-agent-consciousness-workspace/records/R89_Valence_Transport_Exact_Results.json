@@ -1,0 +1,129 @@
+{
+  "assertions": {
+    "all_five_clauses_required_for_fixed_battery": true,
+    "finite_tests_do_not_close_open_hypothesis_class": true,
+    "signed_anchors_remove_sign_flip": true,
+    "unsigned_signature_has_sign_flip": true
+  },
+  "certificate_clauses": {
+    "B": "bearer/self-other binding",
+    "C": "closure relative to a declared valence-relevant hypothesis class",
+    "D": "dissociation from motivation, viability, salience, defense and report",
+    "I": "mapped intervention-response equivariance",
+    "P": "signed positive-neutral-negative polarity anchors"
+  },
+  "finite_intervention_underdetermination": {
+    "complete_K_distinct": true,
+    "interventions": [
+      "reward_relabel",
+      "outsourced_maintenance",
+      "other_directed_prediction",
+      "wanting_liking_dissociation",
+      "defense_without_fear"
+    ],
+    "models": [
+      {
+        "C1_fixed_valence_for_this_K": -1,
+        "complete_K": "K_observed_plus_hidden_-1",
+        "hidden_constitutive_coordinate": -1,
+        "tested_intervention_distributions": {
+          "defense_without_fear": [
+            5,
+            7
+          ],
+          "other_directed_prediction": [
+            3,
+            7
+          ],
+          "outsourced_maintenance": [
+            2,
+            7
+          ],
+          "reward_relabel": [
+            1,
+            7
+          ],
+          "wanting_liking_dissociation": [
+            4,
+            7
+          ]
+        }
+      },
+      {
+        "C1_fixed_valence_for_this_K": 1,
+        "complete_K": "K_observed_plus_hidden_+1",
+        "hidden_constitutive_coordinate": 1,
+        "tested_intervention_distributions": {
+          "defense_without_fear": [
+            5,
+            7
+          ],
+          "other_directed_prediction": [
+            3,
+            7
+          ],
+          "outsourced_maintenance": [
+            2,
+            7
+          ],
+          "reward_relabel": [
+            1,
+            7
+          ],
+          "wanting_liking_dissociation": [
+            4,
+            7
+          ]
+        }
+      }
+    ],
+    "same_complete_K_given_two_valences": false,
+    "tested_distributions_equal": true,
+    "valence_opposite": true
+  },
+  "minimality_relative_to_fixed_witness_battery": {
+    "claim_limited_to_this_battery": true,
+    "number_of_subsets": 32,
+    "sufficient_subsets": [
+      [
+        "B",
+        "C",
+        "D",
+        "I",
+        "P"
+      ]
+    ],
+    "unique_minimal_subset": [
+      "B",
+      "D",
+      "P",
+      "I",
+      "C"
+    ]
+  },
+  "polarity_automorphisms": {
+    "signed_anchored_count": 1,
+    "signed_anchored_maps": [
+      {
+        "-1": -1,
+        "0": 0,
+        "1": 1
+      }
+    ],
+    "unsigned_count": 2,
+    "unsigned_maps": [
+      {
+        "-1": -1,
+        "0": 0,
+        "1": 1
+      },
+      {
+        "-1": 1,
+        "0": 0,
+        "1": -1
+      }
+    ]
+  },
+  "scope": "formal finite-model checks only; not a consciousness or valence measurement",
+  "status": "PASS"
+}

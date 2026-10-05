@@ -1,0 +1,3 @@
+{"all_five_clauses_required_for_fixed_battery": false, "finite_tests_do_not_close_open_hypothesis_class": true, "signed_anchors_remove_sign_flip": true, "unsigned_signature_has_sign_flip": true}
+status=FAIL
+wrote=R89_Valence_Transport_Exact_Results.json,R89_Certificate_Subset_Audit.csv

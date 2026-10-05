@@ -1,0 +1,70 @@
+{
+  "round": "R89",
+  "date": "2026-10-06",
+  "scope_note": "Primary or author-hosted materials read for the claims used in R89. URLs record public locations; no restricted full text is redistributed.",
+  "sources": [
+    {
+      "title": "Unified Consciousness Theory I v1.2 source template",
+      "authors": ["Hongju Liu"],
+      "location": "GitHub branch research/uct-paper-a-v1-2-20261004, research/uct-paper-a-v1.2/source-template.md",
+      "url": "https://github.com/thechurchofagi/trinity-accord/blob/research/uct-paper-a-v1-2-20261004/research/uct-paper-a-v1.2/source-template.md",
+      "used_for": "C1, U1, complete-signature and finite-view constraints",
+      "read_scope": "C1/U1, finite process criterion, structural comparison, completeness cautions and continuity limitations"
+    },
+    {
+      "title": "Unified Consciousness Theory III v1.0 source",
+      "authors": ["Hongju Liu"],
+      "location": "GitHub branch research/uct-paper-c-v1-20261004, research/unified-consciousness-theory-iii/source-main.md",
+      "url": "https://github.com/thechurchofagi/trinity-accord/blob/research/uct-paper-c-v1-20261004/research/unified-consciousness-theory-iii/source-main.md",
+      "used_for": "stone-to-cell-to-agent organization, NESIG and nonmonotonicity",
+      "read_scope": "sections 2-5 and relevant evolution/selection qualifications"
+    },
+    {
+      "title": "A General Algorithm for Deciding Transportability of Experimental Results",
+      "authors": ["Elias Bareinboim", "Judea Pearl"],
+      "year": 2013,
+      "url": "https://arxiv.org/abs/1312.7485",
+      "used_for": "transportability requires explicit assumptions about source-target similarities and differences",
+      "read_scope": "abstract, problem statement and claimed transportability result"
+    },
+    {
+      "title": "Causal Consistency of Structural Equation Models",
+      "authors": ["Paul K. Rubenstein", "Sebastian Weichwald", "Stephan Bongers", "Joris M. Mooij", "Dominik Janzing", "Moritz Grosse-Wentrup", "Bernhard Schölkopf"],
+      "year": 2017,
+      "url": "https://arxiv.org/abs/1707.00819",
+      "used_for": "causal transformation must preserve declared intervention effects",
+      "read_scope": "abstract and exact-transformation definitions/results"
+    },
+    {
+      "title": "Abstracting Causal Models",
+      "authors": ["Sander Beckers", "Joseph Y. Halpern"],
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1812.03789",
+      "used_for": "exact and uniform causal abstraction with intervention mappings",
+      "read_scope": "abstract, definitions and hierarchy of abstraction notions"
+    },
+    {
+      "title": "Pleasure systems in the brain",
+      "authors": ["Kent C. Berridge", "Morten L. Kringelbach"],
+      "year": 2015,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4425246/",
+      "used_for": "liking, wanting and learning dissociation; localized causal hedonic hotspots",
+      "read_scope": "abstract and sections on pleasure components and hotspot causal evidence"
+    },
+    {
+      "title": "Neural Circuit Motifs in Valence Processing",
+      "authors": ["Kay M. Tye"],
+      "year": 2018,
+      "doi": "10.1016/j.neuron.2018.10.001",
+      "url": "https://doi.org/10.1016/j.neuron.2018.10.001",
+      "used_for": "distributed and context-dependent causal organization of valence",
+      "read_scope": "abstract and article-level circuit-motif claims"
+    }
+  ],
+  "not_read_or_not_claimed": [
+    "No exhaustive historical-priority search was completed.",
+    "No restricted paper PDF was uploaded.",
+    "No human, animal, neural or model trial data were newly analyzed.",
+    "UCT II v1.1 was not re-read in full this round; the finite-view constraint is carried forward from the documented R81/R84 direct audits."
+  ]
+}
