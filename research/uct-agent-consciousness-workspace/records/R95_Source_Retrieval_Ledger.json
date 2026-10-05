@@ -1,0 +1,43 @@
+{
+  "round": "R95",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "Language Models Represent Space and Time",
+      "authors": "Wes Gurnee; Max Tegmark",
+      "venue": "ICLR 2024",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/0a6059857ae5c82ea9726ee9282a7145-Abstract-Conference.html",
+      "scope": "Conference abstract reread in this round. Used as empirical prior art for prediction-trained language models containing world-related spatial/temporal representations."
+    },
+    {
+      "title": "I Predict Therefore I Am: Is Next Token Prediction Enough to Learn Human-Interpretable Concepts from Data?",
+      "authors": "Yuhang Liu et al.",
+      "venue": "ICLR 2026",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/db7c4a8a0c1bf8b405f21c783bbf9eae-Abstract-Conference.html",
+      "scope": "Conference abstract reread. Strong recent prior art for identifiability of latent discrete concepts under a generative next-token model."
+    },
+    {
+      "title": "Toward Consistent World Models with Multi-Token Prediction and Latent Semantic Enhancement",
+      "authors": "Qimin Zhong et al.",
+      "venue": "ACL 2026",
+      "doi": "10.18653/v1/2026.acl-long.618",
+      "url": "https://aclanthology.org/2026.acl-long.618/",
+      "scope": "ACL abstract and bibliographic record reread. Used as recent prior art for stronger internal belief-state pressure under multi-token prediction."
+    },
+    {
+      "title": "Evaluating Self-Orienting in Language and Reasoning Models",
+      "authors": "Eric Bigelow et al.",
+      "url": "https://openreview.net/pdf?id=hPdUQnQrUu",
+      "scope": "Search-returned paper text/abstract inspected only; used as a nearby self/agent-orientation research lead, not as a basis for a detailed theorem or publication-status claim."
+    },
+    {
+      "title": "Time, Identity and Consciousness in Language Model Agents",
+      "authors": "Elija Perrier; Michael Timothy Bennett",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2603.09043",
+      "scope": "ArXiv abstract read. Relevant to separating stable-self talk from jointly instantiated identity organization; preprint, not treated as established validation of UCT."
+    }
+  ],
+  "novelty_status": "Prediction-induced representation and self-orienting have strong prior art. R95 is a controlled project-specific acquisition/causal-use witness, not a historical-first theorem or AI-consciousness measurement.",
+  "third_party_fulltexts_uploaded": false
+}

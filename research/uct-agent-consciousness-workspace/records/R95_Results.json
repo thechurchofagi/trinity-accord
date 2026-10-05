@@ -1,0 +1,516 @@
+{
+  "round": "R95",
+  "date": "2026-10-06",
+  "numpy_version": "2.3.5",
+  "formal_seeds": [
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107
+  ],
+  "variables": [
+    "W",
+    "Q",
+    "O",
+    "G"
+  ],
+  "input_states": "all 16 states in {-1,+1}^4, full-batch",
+  "environment_A_targets": [
+    "W",
+    "G",
+    "O",
+    "W"
+  ],
+  "environment_B_targets": [
+    "W",
+    "G",
+    "O",
+    "Q"
+  ],
+  "architecture": "4-state tanh recurrent encoder reading W,Q,O,G sequentially; four affine sigmoid readouts",
+  "initialization": "same seed paired across A/B; Q input column exactly zero in both; all other weights iid Normal(0,0.3); output bias zero",
+  "optimizer": {
+    "name": "Adam",
+    "steps": 3000,
+    "learning_rate": 0.02,
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "epsilon": 1e-8
+  },
+  "initial_q_gradient_norm": {
+    "A": [
+      1.0299920638612292e-18,
+      9.69739903612216e-19,
+      2.3354429532350846e-18,
+      2.23785078732851e-19,
+      6.21054815506299e-20,
+      8.677851511149104e-19,
+      3.8332335417084353e-19,
+      4.336808689942018e-19
+    ],
+    "B": [
+      0.022660784738101306,
+      0.019206045375462978,
+      0.041286070740916926,
+      0.04175928525922004,
+      0.010049879941300867,
+      0.031049105073885218,
+      0.01318211098210889,
+      0.02500784713782941
+    ]
+  },
+  "runs": {
+    "A": [
+      {
+        "seed": 100,
+        "loss": 0.00011014887572998235,
+        "q_input_norm": 1.2530741735241921,
+        "q_hidden_pair_mean": 0.0014823784703165658,
+        "q_probe": 0.5,
+        "q_single": 0.5625,
+        "q_target4_tv": 4.620478289779307e-7,
+        "q_othermax_tv": 0.0000010448199484038353,
+        "zero_q_loss": 0.00011389469942449447,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "zero_q_path_accuracy": 1,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "seed": 101,
+        "loss": 0.0002723664048223819,
+        "q_input_norm": 3.773329180033264e-15,
+        "q_hidden_pair_mean": 4.39366650418031e-15,
+        "q_probe": 0.5,
+        "q_single": 0.5625,
+        "q_target4_tv": 2.8697476252975695e-18,
+        "q_othermax_tv": 3.530433324155924e-18,
+        "zero_q_loss": 0.00027236640482238185,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "zero_q_path_accuracy": 1,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "seed": 102,
+        "loss": 0.00025695702031798925,
+        "q_input_norm": 0.007692444815606823,
+        "q_hidden_pair_mean": 0.0000015485107719532446,
+        "q_probe": 0.5,
+        "q_single": 0.5625,
+        "q_target4_tv": 1.1622828395564634e-9,
+        "q_othermax_tv": 1.9729285054527143e-9,
+        "zero_q_loss": 0.000256957017564095,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "zero_q_path_accuracy": 1,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "seed": 103,
+        "loss": 0.0002225341182765051,
+        "q_input_norm": 0.2806485275391958,
+        "q_hidden_pair_mean": 0.0000026244480467264326,
+        "q_probe": 0.5,
+        "q_single": 0.5625,
+        "q_target4_tv": 2.1480029851922872e-9,
+        "q_othermax_tv": 3.5778237978626587e-9,
+        "zero_q_loss": 0.0002225340759544228,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "zero_q_path_accuracy": 1,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "seed": 104,
+        "loss": 0.00026615657478207315,
+        "q_input_norm": 1.0157357672494012,
+        "q_hidden_pair_mean": 0.002114973811958686,
+        "q_probe": 0.5,
+        "q_single": 0.5625,
+        "q_target4_tv": 0.0000011609460784107718,
+        "q_othermax_tv": 0.0000028335932317302643,
+        "zero_q_loss": 0.0002665712194302365,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "zero_q_path_accuracy": 1,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "seed": 105,
+        "loss": 0.0001504832248954514,
+        "q_input_norm": 4.163060661016137,
+        "q_hidden_pair_mean": 0.0029847075412368904,
+        "q_probe": 0.5,
+        "q_single": 0.5625,
+        "q_target4_tv": 0.00000148294669899511,
+        "q_othermax_tv": 0.000002037016055853039,
+        "zero_q_loss": 0.10152355117947373,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "zero_q_path_accuracy": 1,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "seed": 106,
+        "loss": 0.00017869350690639366,
+        "q_input_norm": 0.00014286437977449338,
+        "q_hidden_pair_mean": 7.133631886904185e-8,
+        "q_probe": 0.5,
+        "q_single": 0.5625,
+        "q_target4_tv": 3.209773028964302e-11,
+        "q_othermax_tv": 7.57931170091019e-11,
+        "zero_q_loss": 0.00017869350690584483,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "zero_q_path_accuracy": 1,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "seed": 107,
+        "loss": 0.00022454708435920974,
+        "q_input_norm": 0.9319377001615209,
+        "q_hidden_pair_mean": 0.0002769115571700885,
+        "q_probe": 0.5,
+        "q_single": 0.5625,
+        "q_target4_tv": 8.756072690101506e-8,
+        "q_othermax_tv": 3.3383255772828266e-7,
+        "zero_q_loss": 0.00022542502825770373,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "zero_q_path_accuracy": 1,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    ],
+    "B": [
+      {
+        "seed": 100,
+        "loss": 0.0004738954667697932,
+        "q_input_norm": 1.2516938786120513,
+        "q_hidden_pair_mean": 1.3743058550176213,
+        "q_probe": 1,
+        "q_single": 0.8125,
+        "q_target4_tv": 0.9989908684433626,
+        "q_othermax_tv": 0.0008419562386165541,
+        "zero_q_loss": 0.5391100724528171,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "zero_q_path_accuracy": 0.875,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          0.5
+        ]
+      },
+      {
+        "seed": 101,
+        "loss": 0.0004067384613120397,
+        "q_input_norm": 1.4461181810109758,
+        "q_hidden_pair_mean": 1.6876299368350018,
+        "q_probe": 1,
+        "q_single": 0.8125,
+        "q_target4_tv": 0.9991184403225538,
+        "q_othermax_tv": 0.0007341668957243486,
+        "zero_q_loss": 0.9765474854553979,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "zero_q_path_accuracy": 0.875,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          0.5
+        ]
+      },
+      {
+        "seed": 102,
+        "loss": 0.0005131236767864166,
+        "q_input_norm": 1.6290573807349615,
+        "q_hidden_pair_mean": 1.3057448462550805,
+        "q_probe": 1,
+        "q_single": 0.75,
+        "q_target4_tv": 0.9990342972654425,
+        "q_othermax_tv": 0.0011227246739998588,
+        "zero_q_loss": 0.5015663187317227,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "zero_q_path_accuracy": 0.875,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          0.5
+        ]
+      },
+      {
+        "seed": 103,
+        "loss": 0.00027497861322611,
+        "q_input_norm": 1.3131183436908351,
+        "q_hidden_pair_mean": 1.543520475606387,
+        "q_probe": 1,
+        "q_single": 1,
+        "q_target4_tv": 0.9994432115306515,
+        "q_othermax_tv": 0.0004718248009655771,
+        "zero_q_loss": 0.7339898000737846,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "zero_q_path_accuracy": 0.875,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          0.5
+        ]
+      },
+      {
+        "seed": 104,
+        "loss": 0.00042793735235822905,
+        "q_input_norm": 1.448030659195111,
+        "q_hidden_pair_mean": 1.3158054281605962,
+        "q_probe": 1,
+        "q_single": 0.75,
+        "q_target4_tv": 0.9990599982226698,
+        "q_othermax_tv": 0.0008443537489619654,
+        "zero_q_loss": 0.619246114869348,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "zero_q_path_accuracy": 0.875,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          0.5
+        ]
+      },
+      {
+        "seed": 105,
+        "loss": 0.0004412437937453958,
+        "q_input_norm": 1.0505415445453672,
+        "q_hidden_pair_mean": 1.4974333209526842,
+        "q_probe": 1,
+        "q_single": 0.875,
+        "q_target4_tv": 0.9992762756236753,
+        "q_othermax_tv": 0.0006841595095782307,
+        "zero_q_loss": 0.7769293118866828,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "zero_q_path_accuracy": 0.875,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          0.5
+        ]
+      },
+      {
+        "seed": 106,
+        "loss": 0.00022776832607729358,
+        "q_input_norm": 1.263752174038961,
+        "q_hidden_pair_mean": 1.2622205132025242,
+        "q_probe": 1,
+        "q_single": 0.875,
+        "q_target4_tv": 0.9996218855635014,
+        "q_othermax_tv": 0.00046210412926230243,
+        "zero_q_loss": 0.8752786084819406,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "zero_q_path_accuracy": 0.875,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          0.5
+        ]
+      },
+      {
+        "seed": 107,
+        "loss": 0.00039136321418390096,
+        "q_input_norm": 1.3964503686211684,
+        "q_hidden_pair_mean": 1.4317245283141584,
+        "q_probe": 1,
+        "q_single": 0.8125,
+        "q_target4_tv": 0.9991548365982715,
+        "q_othermax_tv": 0.0006475404411448796,
+        "zero_q_loss": 0.9745410405998359,
+        "accuracy": 1,
+        "q_output_sign_flip_fraction": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "zero_q_path_accuracy": 0.875,
+        "zero_q_path_per_output_accuracy": [
+          1,
+          1,
+          1,
+          0.5
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "A": {
+      "success_runs": "8/8",
+      "loss_range": [
+        0.00011014887572998235,
+        0.0002723664048223819
+      ],
+      "q_probe_accuracy": "0.5 in 8/8",
+      "q_hidden_pair_mean_range": [
+        4.39366650418031e-15,
+        0.0029847075412368904
+      ],
+      "q_input_norm_range": [
+        3.773329180033264e-15,
+        4.163060661016137
+      ],
+      "q_target4_probability_tv_range": [
+        2.8697476252975695e-18,
+        0.00000148294669899511
+      ]
+    },
+    "B": {
+      "success_runs": "8/8",
+      "loss_range": [
+        0.00022776832607729358,
+        0.0005131236767864166
+      ],
+      "q_probe_accuracy": "1.0 in 8/8",
+      "q_hidden_pair_mean_range": [
+        1.2622205132025242,
+        1.6876299368350018
+      ],
+      "q_input_norm_range": [
+        1.0505415445453672,
+        1.6290573807349615
+      ],
+      "q_target4_probability_tv_range": [
+        0.9989908684433626,
+        0.9996218855635014
+      ],
+      "single_unit_not_perfect_runs": "7/8"
+    }
+  },
+  "scope": "Tiny synthetic paired acquisition experiment only. No LLM/animal/human data, no real shutdown/copy/resource action, no subjective-experience or valence measurement."
+}

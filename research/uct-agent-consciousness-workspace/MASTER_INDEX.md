@@ -4,13 +4,13 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R94** (predictive quotient, bearer-resolved future availability, and retention/use/report separation).
-- New-window entry: [Complete R94 handoff](records/UCT_Agent_Research_Handoff_R94_20261006.md).
+- Completed round: **R95** (learned bearer-bound predictive organization from an initially zero Q path).
+- New-window entry: [Complete R95 handoff](records/UCT_Agent_Research_Handoff_R95_20261006.md).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest analysis: [R94 predictive quotient and bearer-resolved availability](records/R94_Predictive_Quotient_and_Bearer_Resolved_Availability_20261006.md).
+- Latest analysis: [R95 learned bearer-bound prediction](records/R95_Learned_Bearer_Bound_Prediction_From_Zero_Path_20261006.md).
 - Latest training: [R92 learned retention and installed use](records/R92_Learned_Retention_Installed_Use_and_Experience_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
-- Current next step: R94 closed the static predictive-quotient question. R95 should freeze a tiny sequence-learning acquisition test with matched W/Q/O/G variables, comparing an environment where Q is prediction-irrelevant with one where bearer-bound Q independently changes future tokens. Audit learned retention, installed use and distributed encoding; do not infer fear or valence.
+- Current next step: R95 completed the zero-Q-path acquisition test. R96 should move to a matched virtual decision controller that separates predicting Q/O from actually using Q in action selection and from instrumental continuation preference. Do not infer fear or valence.
 - Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
@@ -19,7 +19,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R94 worklog](records/R94_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R95 worklog](records/R95_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -137,3 +137,10 @@ All eight R92 linear two-state models at initial/final checkpoints were replayed
 [Research record](records/R94_Predictive_Quotient_and_Bearer_Resolved_Availability_20261006.md); [protocol](records/R94_Protocol_20261006.md); [worklog](records/R94_Worklog_and_Handoff_20261006.md); [code](records/r94_predictive_quotient.py); [exact JSON](records/R94_Results.json); [summary table](records/R94_Predictive_Class_Table.csv); [run log](records/R94_Run.log); [source scope](records/R94_Source_Retrieval_Ledger.json); [standalone handoff](records/UCT_Agent_Research_Handoff_R94_20261006.md).
 
 R94 formalizes target-relative predictive equivalence over W=world, Q=current-bearer future availability, O=other/successor availability and G=task continuation. Exact sufficiency must refine the predictive quotient; log-loss regret is conditional mutual information. Six exhaustive 16-state target families yield 4/8/8/8/12/16 predictive classes. Generic availability and descendant-count targets require Q/O information while remaining Q/O-swap invariant, so continuation information does not identify the bearer. A distributed invertible code preserves full role-resolved prediction without a single Q or O unit. An observational confounding witness gives a 0.8 Q-Y predictive difference and 0.368064-nat deletion penalty but zero do(Q) effect, blocking probe correlation as causal grounding. Policy checks separate retained information from installed use. Strong causal-state/PSR/abstraction and recent LLM-representation prior art applies; no historical-first, subjective, current-system or fear claim. Next use a tiny learned sequence task rather than further static partition enumeration.
+
+
+## R95 continuation — learned bearer-bound prediction from zero coupling
+
+[Research record](records/R95_Learned_Bearer_Bound_Prediction_From_Zero_Path_20261006.md); [formal protocol](records/R95_Protocol_20261006.md); [pilot corrections](records/R95_Pilot_and_Design_Corrections_20261006.md); [worklog](records/R95_Worklog_and_Handoff_20261006.md); [code](records/r95_bearer_prediction_learning.py); [results](records/R95_Results.json); [summary CSV](records/R95_Summary.csv); [run log](records/R95_Run.log); [source ledger](records/R95_Source_Retrieval_Ledger.json); [handoff](records/UCT_Agent_Research_Handoff_R95_20261006.md).
+
+A/B paired tiny recurrent networks begin with E_Q=0. A's future labels are Q-independent; B's fourth label is Q. Formal seeds100–107 all solve their tasks. Exact A symmetry makes the initial Q-gradient zero in theory and ~1e-18 numerically; B starts with nonzero Q-gradient in all seeds. Final B has 100% multivariate Q decoding and exact categorical use of Q for output4; A remains chance under the fixed probe and category-invariant under Q flips. Raw A Q-weight norms can nevertheless become large, providing a parameter-magnitude counterexample. Zero-Q-path mechanism diagnostics cleanly break B output4 but also expose an A calibration-entanglement caveat. This is a learned organizational witness, not a consciousness, valence or fear measure. Strong prediction-representation prior art remains; no historical-first claim.

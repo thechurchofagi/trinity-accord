@@ -1,0 +1,27 @@
+R95 formal confirmation
+Date: 2026-10-06
+NumPy: 2.3.5
+Formal seeds: 100..107
+Pilot seeds excluded from confirmation: 0..7
+A target: W,G,O,W
+B target: W,G,O,Q
+Initial E_Q: exactly zero in every A/B pair
+A initial ||dL/dE_Q||: 6.21e-20 .. 2.34e-18
+B initial ||dL/dE_Q||: 0.01005 .. 0.04176
+A final success: 8/8, 100% labels
+B final success: 8/8, 100% labels
+A multivariate Q probe: 0.5 in 8/8
+B multivariate Q probe: 1.0 in 8/8
+A Q-flip class effect: none in every run
+B Q-flip class effect: only future output 4, fraction 1.0 in every run
+A output-4 Bernoulli TV under Q flip: <=1.48295e-6
+B output-4 Bernoulli TV under Q flip: 0.998991 .. 0.999622
+A final mean Q-pair hidden distance: 4.39e-15 .. 2.9847e-3
+B final mean Q-pair hidden distance: 1.26222 .. 1.68763
+B single raw unit not perfectly sufficient for Q in 7/8 seeds
+Diagnostic zero-Q-path accuracy: A 1.0 in 8/8; B 0.875 in 8/8
+Diagnostic zero-Q-path output4 accuracy: A 1.0; B 0.5
+Important negative result: A final ||E_Q|| can reach 4.163 while Q is chance by fixed multivariate probe and categorical predictions are Q-invariant. Raw parameter magnitude is not functional semantic use.
+A seed105 ablation caution: zeroing E_Q keeps all labels correct but BCE rises 0.00015048 -> 0.10152355; mechanism lesions can affect calibration without changing categorical task.
+Formal execution failures: none
+Pilot/design failures retained separately.

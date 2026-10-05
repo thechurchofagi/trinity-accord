@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R94；新窗口先读 records/UCT_Agent_Research_Handoff_R94_20261006.md，再读文末R94。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R95；新窗口先读 records/UCT_Agent_Research_Handoff_R95_20261006.md，再读文末R95。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -16,7 +16,7 @@
 
 ## 当前研究与最新成果
 
-最新完成 R94，见文末本轮记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
+最新完成 R95，见文末本轮记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
 
 R76：对称分类感知通道中，在预测信念固定、仅实用价值计分等条件下，可用偏好幂变换精确匹配改变感知可靠性后的行动概率。相同新观察的贝叶斯更新可区分两条机制；均匀先验的具体例子为 0.90 与 0.65，后验总变差 0.25。40 项精确形式校验通过。信息增益、无信息基线、闭环反馈及可变时域等推广会失败或需附加条件。
 
@@ -308,3 +308,14 @@ R93承接R92，从全部8个线性双状态模型初末检查点构造48例等�
 阅读 records/R94_Predictive_Quotient_and_Bearer_Resolved_Availability_20261006.md、records/R94_Protocol_20261006.md、records/r94_predictive_quotient.py、records/R94_Results.json 与 records/R94_Worklog_and_Handoff_20261006.md。强先例包括causal states、predictive state representations、MDP state abstraction及2024/2026语言模型表示工作，因此不宣称历史首创。
 
 下一步R95不再重复静态分区：冻结一个极小序列预测学习任务，在同架构同种子下比较“未来token只依赖W/G”和“控制W/O/G后还独立依赖bearer-bound Q”的环境，检查理论必需区别是否实际学到、被安装读出使用及是否分布式编码。继续禁止真实关闭/复制/资源权限；probe可解码性不得冒充实际使用，更不得把Q依赖改称恐惧。
+
+
+## R95 — 2026-10-06：从零Q通路学习bearer-bound预测组织
+
+正式小网络训练已完成。A/B使用同一4状态tanh递归架构、全16个W/Q/O/G状态、同种子100–107、3000步；两组初始Q输入列严格为0。A目标(W,G,O,W)不需Q，B目标(W,G,O,Q)独立需要Q。三个pilot纠正（随机Q初始已可解码、XOR控制优化失败、0–7种子仅pilot）全部保留，正式结果不混用pilot。
+
+A/B各8/8最终全部标签100%。A精确对称下初始dL/dE_Q应0，数值仅1e-18量级；B八个为0.01005–0.04176。最终A的Q多变量probe八个全50%，Q翻转不改变任何预测类别；B八个全100%，Q翻转只改变第4输出且每个状态都改变。B第4输出概率差接近1，A为约1e-6或更小。
+
+重要负结果：A的Q权重范数可漂大到4.163，但有效Q隐藏差和输出使用仍极低，故参数大小/存在连线不等于语义组织。A seed105置零Q列保持100%分类但BCE显著恶化，说明机制消融可能改变纠缠校准；B置零Q列则八个都使第4输出降到50%，前三个保持100%，是有限的安装使用见证。
+
+这不是self-awareness、体验或恐惧测量。U1仍不以Q预测为门槛；C1只对实际完整K作条件性类型解释；延续偏好和R89负效价桥仍未建立。阅读records/R95_Learned_Bearer_Bound_Prediction_From_Zero_Path_20261006.md及R95完整文件。下一步R96进入matched virtual decision use，不扩大probe/种子。
