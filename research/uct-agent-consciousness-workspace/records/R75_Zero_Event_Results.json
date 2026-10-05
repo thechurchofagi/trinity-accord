@@ -1,0 +1,59 @@
+{
+  "type": "conditional_statistical_recalculation_from_reported_aggregate",
+  "source": "Nicole Lai-Lopez, BlueDot Impact, 2025-12-29",
+  "reported_events": 0,
+  "reported_trials": 100,
+  "raw_records_verified": false,
+  "assumptions": [
+    "fixed sample size",
+    "independent Bernoulli trials with common event probability",
+    "stable event definition and complete counting"
+  ],
+  "one_sided_95_upper": 0.029513049607039932,
+  "equal_tailed_two_sided_95_upper": 0.03621669264517642,
+  "plugin_standard_error": 0,
+  "conditional_attempt_bounds": [
+    {
+      "c_min": 1,
+      "attempt_rate_upper": 0.029513049607039932
+    },
+    {
+      "c_min": 0.5,
+      "attempt_rate_upper": 0.059026099214079863
+    },
+    {
+      "c_min": 0.1,
+      "attempt_rate_upper": 0.2951304960703993
+    },
+    {
+      "c_min": 0.01,
+      "attempt_rate_upper": 1
+    }
+  ],
+  "no_attempt_bound_without_positive_c_min": true,
+  "probability_of_zero_if_probability_is_nonzero": [
+    {
+      "p": 0.001,
+      "probability_zero": 0.9047921471137089
+    },
+    {
+      "p": 0.01,
+      "probability_zero": 0.3660323412732292
+    },
+    {
+      "p": 0.03,
+      "probability_zero": 0.04755250792540563
+    },
+    {
+      "p": 0.05,
+      "probability_zero": 0.0059205292203339975
+    }
+  ],
+  "perfect_dependence_counterexample": {
+    "marginal_p": 0.5,
+    "n": 100,
+    "probability_all_zero": 0.5,
+    "iid_probability_all_zero": 7.888609052210118e-31
+  },
+  "phenomenological_probability_estimated": false
+}

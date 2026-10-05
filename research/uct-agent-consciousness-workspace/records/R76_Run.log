@@ -1,0 +1,20 @@
+R76 | 2026-10-05
+Command: python3 r76_precision_preference_checks.py > R76_Precision_Preference_Results.json
+Exit code: 0
+Exact Fraction score identities: 40 / 40
+Normalized preference/policy maximum absolute discrepancy: 1.1102230246251565e-16
+Uniform-prior common-observation posterior total variation: 1/4
+Uninformative baseline counterexample: passed
+Information-gain counterexample: passed
+No external model call or external source code executed.
+No source-agent replication; no consciousness/fear measurement.
+Proof scope reviewed: frozen predictive beliefs, pragmatic-only score, positive preferences,
+common policy prior/cost/temperature, policy-independent reliability, baseline above chance.
+Full closed-loop equivalence explicitly rejected.
+Originality: established utility/probability algebra; source already requests comparator.
+S2 simplified bad-news refutation rejected after original-source reading.
+Persistent master rechecked: version 39, unchanged, through R70.
+R76 save status: inspect r76_upload_receipt.json when available; no inferred success.
+Save outcome: all 8 ordered items failed with transfer_failed; no Library IDs returned.
+Master-index replacement not attempted; authoritative master remains version 39.
+Local recovery archive updated with exact upload request/receipt and this outcome.

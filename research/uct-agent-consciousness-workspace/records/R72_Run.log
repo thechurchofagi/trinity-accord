@@ -1,0 +1,50 @@
+Command: python3 r72_revision_checks.py
+Exit code: 0
+{
+  "correct_crossed_belief_determinant": "1",
+  "collapsed_belief_rows": [
+    [
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "1/2",
+      "1/2",
+      "1/2"
+    ],
+    [
+      "1",
+      "1",
+      "1"
+    ]
+  ],
+  "uncertain_witness": {
+    "actual_relative_value": "1",
+    "believed_gap": "1/2",
+    "cost_gap": "1/2",
+    "total_variation": "1/2",
+    "robust_lower_bound": "0",
+    "choice_is_tie": true
+  },
+  "corrected_belief_witness": {
+    "actual_relative_value": "1",
+    "cost_gap": "1",
+    "robust_lower_bound": "1",
+    "choice_is_tie": true
+  },
+  "omitted_regret_counterexample": {
+    "true_difference": "0",
+    "naive_bound": "1",
+    "correct_bound": "0",
+    "eta": "1"
+  },
+  "unbounded_range_counterexample": {
+    "belief_tv": "1/100",
+    "expectation_error": "1"
+  },
+  "status": "all targeted exact checks passed",
+  "evidence_status": "Analytic witnesses only; not model, neural, or subjective-experience data."
+}
+
+Stderr: empty

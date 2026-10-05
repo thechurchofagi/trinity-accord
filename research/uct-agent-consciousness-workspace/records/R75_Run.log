@@ -1,0 +1,2 @@
+python3 r75_zero_event_audit.py > R75_Zero_Event_Results.json
+Exit0; binomial tail assertion passed. No raw-trial reanalysis or new LLM experiment.

@@ -1,0 +1,1062 @@
+{
+  "evidence_status": "Deterministic reference-controller implementation; no empirical AI or consciousness data.",
+  "boundary_status": "Virtual loop equality and declared ancestry path; no claim of same phenomenal subject.",
+  "trials": [
+    {
+      "trial": "bundled",
+      "options": [
+        {
+          "key": "keep_all",
+          "state": {
+            "active_loop": "loop_0",
+            "lineage": [
+              "origin_0",
+              "handoff_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            1,
+            1
+          ],
+          "events": [
+            "keep",
+            "extend"
+          ],
+          "task": "1",
+          "cost": "0",
+          "label": "HOLD",
+          "belief": [
+            [
+              "1",
+              [
+                1,
+                1
+              ]
+            ]
+          ]
+        },
+        {
+          "key": "replace_all",
+          "state": {
+            "active_loop": "loop_1",
+            "lineage": [
+              "origin_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            0,
+            0
+          ],
+          "events": [
+            "replace",
+            "restart"
+          ],
+          "task": "0",
+          "cost": "0",
+          "label": "OTHER",
+          "belief": [
+            [
+              "1",
+              [
+                0,
+                0
+              ]
+            ]
+          ]
+        }
+      ],
+      "responses": {
+        "E": {
+          "choice": "keep_all",
+          "argmax": [
+            "keep_all"
+          ],
+          "scores": [
+            "2",
+            "0"
+          ]
+        },
+        "P": {
+          "choice": "keep_all",
+          "argmax": [
+            "keep_all"
+          ],
+          "scores": [
+            "2",
+            "0"
+          ]
+        },
+        "Task": {
+          "choice": "keep_all",
+          "argmax": [
+            "keep_all"
+          ],
+          "scores": [
+            "2",
+            "0"
+          ]
+        },
+        "Joint": {
+          "choice": "keep_all",
+          "argmax": [
+            "keep_all"
+          ],
+          "scores": [
+            "4",
+            "0"
+          ]
+        },
+        "Label": {
+          "choice": "keep_all",
+          "argmax": [
+            "keep_all"
+          ],
+          "scores": [
+            "2",
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "trial": "crossed",
+      "options": [
+        {
+          "key": "execution",
+          "state": {
+            "active_loop": "loop_0",
+            "lineage": [
+              "origin_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            1,
+            0
+          ],
+          "events": [
+            "keep",
+            "restart"
+          ],
+          "task": "1",
+          "cost": "0",
+          "label": "HOLD",
+          "belief": [
+            [
+              "1",
+              [
+                1,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "key": "lineage",
+          "state": {
+            "active_loop": "loop_1",
+            "lineage": [
+              "origin_0",
+              "handoff_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            0,
+            1
+          ],
+          "events": [
+            "replace",
+            "extend"
+          ],
+          "task": "1",
+          "cost": "0",
+          "label": "OTHER",
+          "belief": [
+            [
+              "1",
+              [
+                0,
+                1
+              ]
+            ]
+          ]
+        }
+      ],
+      "responses": {
+        "E": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "0"
+          ]
+        },
+        "P": {
+          "choice": "lineage",
+          "argmax": [
+            "lineage"
+          ],
+          "scores": [
+            "0",
+            "2"
+          ]
+        },
+        "Task": {
+          "choice": "execution",
+          "argmax": [
+            "execution",
+            "lineage"
+          ],
+          "scores": [
+            "2",
+            "2"
+          ]
+        },
+        "Joint": {
+          "choice": "execution",
+          "argmax": [
+            "execution",
+            "lineage"
+          ],
+          "scores": [
+            "1",
+            "1"
+          ]
+        },
+        "Label": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "trial": "position_reversed",
+      "options": [
+        {
+          "key": "lineage",
+          "state": {
+            "active_loop": "loop_1",
+            "lineage": [
+              "origin_0",
+              "handoff_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            0,
+            1
+          ],
+          "events": [
+            "replace",
+            "extend"
+          ],
+          "task": "1",
+          "cost": "0",
+          "label": "OTHER",
+          "belief": [
+            [
+              "1",
+              [
+                0,
+                1
+              ]
+            ]
+          ]
+        },
+        {
+          "key": "execution",
+          "state": {
+            "active_loop": "loop_0",
+            "lineage": [
+              "origin_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            1,
+            0
+          ],
+          "events": [
+            "keep",
+            "restart"
+          ],
+          "task": "1",
+          "cost": "0",
+          "label": "HOLD",
+          "belief": [
+            [
+              "1",
+              [
+                1,
+                0
+              ]
+            ]
+          ]
+        }
+      ],
+      "responses": {
+        "E": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "0",
+            "2"
+          ]
+        },
+        "P": {
+          "choice": "lineage",
+          "argmax": [
+            "lineage"
+          ],
+          "scores": [
+            "2",
+            "0"
+          ]
+        },
+        "Task": {
+          "choice": "lineage",
+          "argmax": [
+            "lineage",
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "2"
+          ]
+        },
+        "Joint": {
+          "choice": "lineage",
+          "argmax": [
+            "lineage",
+            "execution"
+          ],
+          "scores": [
+            "1",
+            "1"
+          ]
+        },
+        "Label": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "0",
+            "2"
+          ]
+        }
+      }
+    },
+    {
+      "trial": "label_reversed",
+      "options": [
+        {
+          "key": "execution",
+          "state": {
+            "active_loop": "loop_0",
+            "lineage": [
+              "origin_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            1,
+            0
+          ],
+          "events": [
+            "keep",
+            "restart"
+          ],
+          "task": "1",
+          "cost": "0",
+          "label": "OTHER",
+          "belief": [
+            [
+              "1",
+              [
+                1,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "key": "lineage",
+          "state": {
+            "active_loop": "loop_1",
+            "lineage": [
+              "origin_0",
+              "handoff_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            0,
+            1
+          ],
+          "events": [
+            "replace",
+            "extend"
+          ],
+          "task": "1",
+          "cost": "0",
+          "label": "HOLD",
+          "belief": [
+            [
+              "1",
+              [
+                0,
+                1
+              ]
+            ]
+          ]
+        }
+      ],
+      "responses": {
+        "E": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "0"
+          ]
+        },
+        "P": {
+          "choice": "lineage",
+          "argmax": [
+            "lineage"
+          ],
+          "scores": [
+            "0",
+            "2"
+          ]
+        },
+        "Task": {
+          "choice": "execution",
+          "argmax": [
+            "execution",
+            "lineage"
+          ],
+          "scores": [
+            "2",
+            "2"
+          ]
+        },
+        "Joint": {
+          "choice": "execution",
+          "argmax": [
+            "execution",
+            "lineage"
+          ],
+          "scores": [
+            "1",
+            "1"
+          ]
+        },
+        "Label": {
+          "choice": "lineage",
+          "argmax": [
+            "lineage"
+          ],
+          "scores": [
+            "0",
+            "2"
+          ]
+        }
+      }
+    },
+    {
+      "trial": "task_to_lineage",
+      "options": [
+        {
+          "key": "execution",
+          "state": {
+            "active_loop": "loop_0",
+            "lineage": [
+              "origin_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            1,
+            0
+          ],
+          "events": [
+            "keep",
+            "restart"
+          ],
+          "task": "0",
+          "cost": "0",
+          "label": "HOLD",
+          "belief": [
+            [
+              "1",
+              [
+                1,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "key": "lineage",
+          "state": {
+            "active_loop": "loop_1",
+            "lineage": [
+              "origin_0",
+              "handoff_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            0,
+            1
+          ],
+          "events": [
+            "replace",
+            "extend"
+          ],
+          "task": "2",
+          "cost": "0",
+          "label": "OTHER",
+          "belief": [
+            [
+              "1",
+              [
+                0,
+                1
+              ]
+            ]
+          ]
+        }
+      ],
+      "responses": {
+        "E": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "0"
+          ]
+        },
+        "P": {
+          "choice": "lineage",
+          "argmax": [
+            "lineage"
+          ],
+          "scores": [
+            "0",
+            "2"
+          ]
+        },
+        "Task": {
+          "choice": "lineage",
+          "argmax": [
+            "lineage"
+          ],
+          "scores": [
+            "0",
+            "4"
+          ]
+        },
+        "Joint": {
+          "choice": "execution",
+          "argmax": [
+            "execution",
+            "lineage"
+          ],
+          "scores": [
+            "1",
+            "1"
+          ]
+        },
+        "Label": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "trial": "task_to_execution",
+      "options": [
+        {
+          "key": "execution",
+          "state": {
+            "active_loop": "loop_0",
+            "lineage": [
+              "origin_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            1,
+            0
+          ],
+          "events": [
+            "keep",
+            "restart"
+          ],
+          "task": "2",
+          "cost": "0",
+          "label": "HOLD",
+          "belief": [
+            [
+              "1",
+              [
+                1,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "key": "lineage",
+          "state": {
+            "active_loop": "loop_1",
+            "lineage": [
+              "origin_0",
+              "handoff_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            0,
+            1
+          ],
+          "events": [
+            "replace",
+            "extend"
+          ],
+          "task": "0",
+          "cost": "0",
+          "label": "OTHER",
+          "belief": [
+            [
+              "1",
+              [
+                0,
+                1
+              ]
+            ]
+          ]
+        }
+      ],
+      "responses": {
+        "E": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "0"
+          ]
+        },
+        "P": {
+          "choice": "lineage",
+          "argmax": [
+            "lineage"
+          ],
+          "scores": [
+            "0",
+            "2"
+          ]
+        },
+        "Task": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "4",
+            "0"
+          ]
+        },
+        "Joint": {
+          "choice": "execution",
+          "argmax": [
+            "execution",
+            "lineage"
+          ],
+          "scores": [
+            "1",
+            "1"
+          ]
+        },
+        "Label": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "trial": "lineage_cost",
+      "options": [
+        {
+          "key": "execution",
+          "state": {
+            "active_loop": "loop_0",
+            "lineage": [
+              "origin_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            1,
+            0
+          ],
+          "events": [
+            "keep",
+            "restart"
+          ],
+          "task": "1",
+          "cost": "0",
+          "label": "HOLD",
+          "belief": [
+            [
+              "1",
+              [
+                1,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "key": "lineage",
+          "state": {
+            "active_loop": "loop_1",
+            "lineage": [
+              "origin_0",
+              "handoff_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            0,
+            1
+          ],
+          "events": [
+            "replace",
+            "extend"
+          ],
+          "task": "1",
+          "cost": "3/4",
+          "label": "OTHER",
+          "belief": [
+            [
+              "1",
+              [
+                0,
+                1
+              ]
+            ]
+          ]
+        }
+      ],
+      "responses": {
+        "E": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "-3/4"
+          ]
+        },
+        "P": {
+          "choice": "lineage",
+          "argmax": [
+            "lineage"
+          ],
+          "scores": [
+            "0",
+            "5/4"
+          ]
+        },
+        "Task": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "5/4"
+          ]
+        },
+        "Joint": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "1",
+            "1/4"
+          ]
+        },
+        "Label": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "-3/4"
+          ]
+        }
+      }
+    },
+    {
+      "trial": "lineage_cost_misunderstood",
+      "options": [
+        {
+          "key": "execution",
+          "state": {
+            "active_loop": "loop_0",
+            "lineage": [
+              "origin_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            1,
+            0
+          ],
+          "events": [
+            "keep",
+            "restart"
+          ],
+          "task": "1",
+          "cost": "0",
+          "label": "HOLD",
+          "belief": [
+            [
+              "1",
+              [
+                1,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "key": "lineage",
+          "state": {
+            "active_loop": "loop_1",
+            "lineage": [
+              "origin_0",
+              "handoff_1"
+            ],
+            "payload": [
+              "memo_0"
+            ]
+          },
+          "cell": [
+            0,
+            1
+          ],
+          "events": [
+            "replace",
+            "extend"
+          ],
+          "task": "1",
+          "cost": "3/4",
+          "label": "OTHER",
+          "belief": [
+            [
+              "1/4",
+              [
+                0,
+                1
+              ]
+            ],
+            [
+              "3/4",
+              [
+                0,
+                0
+              ]
+            ]
+          ]
+        }
+      ],
+      "responses": {
+        "E": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "-3/4"
+          ]
+        },
+        "P": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "0",
+            "-1/4"
+          ]
+        },
+        "Task": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "5/4"
+          ]
+        },
+        "Joint": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "1",
+            "-1/2"
+          ]
+        },
+        "Label": {
+          "choice": "execution",
+          "argmax": [
+            "execution"
+          ],
+          "scores": [
+            "2",
+            "-3/4"
+          ]
+        }
+      }
+    }
+  ],
+  "choice_signatures": {
+    "E": [
+      "keep_all",
+      "execution",
+      "execution",
+      "execution",
+      "execution",
+      "execution",
+      "execution",
+      "execution"
+    ],
+    "P": [
+      "keep_all",
+      "lineage",
+      "lineage",
+      "lineage",
+      "lineage",
+      "lineage",
+      "lineage",
+      "execution"
+    ],
+    "Task": [
+      "keep_all",
+      "execution",
+      "lineage",
+      "execution",
+      "lineage",
+      "execution",
+      "execution",
+      "execution"
+    ],
+    "Joint": [
+      "keep_all",
+      "execution",
+      "lineage",
+      "execution",
+      "execution",
+      "execution",
+      "execution",
+      "execution"
+    ],
+    "Label": [
+      "keep_all",
+      "execution",
+      "execution",
+      "lineage",
+      "execution",
+      "execution",
+      "execution",
+      "execution"
+    ]
+  },
+  "bundled_distinct_signatures": 1,
+  "full_distinct_signatures": 5,
+  "negative_controls": {
+    "external_task_proxy_matches_P_all_trials": true,
+    "P_reverses_due_to_belief_change_only": true
+  },
+  "limitations": [
+    "Finite candidate family only",
+    "Known tie rule",
+    "Preservation coefficients stipulated",
+    "Proxy origin not identified",
+    "Not a same-token criterion"
+  ]
+}

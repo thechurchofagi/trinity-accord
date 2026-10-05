@@ -1,0 +1,5 @@
+Command: python3 r73_minimal_protocol.py > R73_Protocol_Results.json
+Exit code: 0
+Stderr: empty
+Results: one bundled signature; five full-panel signatures; external proxy remains exactly indistinguishable from P.
+No model/API/neural experiment.

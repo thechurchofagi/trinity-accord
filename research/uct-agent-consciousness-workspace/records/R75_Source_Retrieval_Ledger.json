@@ -1,0 +1,28 @@
+{
+  "corrected_paper_code_url": "https://github.com/PalisadeResearch/shutdown_avoidance/tree/paper_version",
+  "retrieval": [
+    {
+      "name": "paper_branch",
+      "url": "https://api.github.com/repos/PalisadeResearch/shutdown_avoidance/commits/paper_version",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "name": "scorer",
+      "url": "https://raw.githubusercontent.com/PalisadeResearch/shutdown_avoidance/paper_version/shutdown.py",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "name": "readme",
+      "url": "https://raw.githubusercontent.com/PalisadeResearch/shutdown_avoidance/paper_version/README.md",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "name": "results",
+      "url": "https://docs.google.com/spreadsheets/d/1FdD4zk45D1fe5qZ7_U7nhPWs3LtVUY6G3igNREM2ofQ/export?format=csv",
+      "error": "<urlopen error timed out>"
+    }
+  ],
+  "replication_index_error": "<urlopen error timed out>",
+  "raw_trials_recovered": false,
+  "paper_branch_commit_recovered": false
+}

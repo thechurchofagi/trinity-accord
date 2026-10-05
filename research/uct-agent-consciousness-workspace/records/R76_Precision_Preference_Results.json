@@ -1,0 +1,211 @@
+{
+  "status": "formal_source_motivated_comparator_not_source_code_replication",
+  "exact_identity_cases": 40,
+  "cases": [
+    {
+      "kappa": {
+        "exact": "9/10",
+        "decimal": 0.9
+      },
+      "ratio": {
+        "exact": "44/29",
+        "decimal": 1.5172413793103448
+      },
+      "constant_utility_shift": {
+        "exact": "15/58",
+        "decimal": 0.25862068965517243
+      },
+      "policy_probability_max_error": 1.1102230246251565e-16
+    },
+    {
+      "kappa": {
+        "exact": "17/30",
+        "decimal": 0.5666666666666667
+      },
+      "ratio": {
+        "exact": "24/29",
+        "decimal": 0.8275862068965517
+      },
+      "constant_utility_shift": {
+        "exact": "-5/58",
+        "decimal": -0.08620689655172414
+      },
+      "policy_probability_max_error": 5.551115123125783e-17
+    },
+    {
+      "kappa": {
+        "exact": "13/20",
+        "decimal": 0.65
+      },
+      "ratio": {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      "constant_utility_shift": {
+        "exact": "0",
+        "decimal": 0.0
+      },
+      "policy_probability_max_error": 0.0
+    },
+    {
+      "kappa": {
+        "exact": "1/6",
+        "decimal": 0.16666666666666666
+      },
+      "ratio": {
+        "exact": "0",
+        "decimal": 0.0
+      },
+      "constant_utility_shift": {
+        "exact": "-1/2",
+        "decimal": -0.5
+      },
+      "policy_probability_max_error": 0.0
+    },
+    {
+      "kappa": {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      "ratio": {
+        "exact": "50/29",
+        "decimal": 1.7241379310344827
+      },
+      "constant_utility_shift": {
+        "exact": "21/58",
+        "decimal": 0.3620689655172414
+      },
+      "policy_probability_max_error": 4.163336342344337e-17
+    }
+  ],
+  "common_observation_posterior_attentive": [
+    {
+      "exact": "9/10",
+      "decimal": 0.9
+    },
+    {
+      "exact": "1/50",
+      "decimal": 0.02
+    },
+    {
+      "exact": "1/50",
+      "decimal": 0.02
+    },
+    {
+      "exact": "1/50",
+      "decimal": 0.02
+    },
+    {
+      "exact": "1/50",
+      "decimal": 0.02
+    },
+    {
+      "exact": "1/50",
+      "decimal": 0.02
+    }
+  ],
+  "common_observation_posterior_comparator": [
+    {
+      "exact": "13/20",
+      "decimal": 0.65
+    },
+    {
+      "exact": "7/100",
+      "decimal": 0.07
+    },
+    {
+      "exact": "7/100",
+      "decimal": 0.07
+    },
+    {
+      "exact": "7/100",
+      "decimal": 0.07
+    },
+    {
+      "exact": "7/100",
+      "decimal": 0.07
+    },
+    {
+      "exact": "7/100",
+      "decimal": 0.07
+    }
+  ],
+  "posterior_total_variation": {
+    "exact": "1/4",
+    "decimal": 0.25
+  },
+  "chance_baseline_failure": {
+    "baseline_scores": [
+      {
+        "exact": "1/2",
+        "decimal": 0.5
+      },
+      {
+        "exact": "1/2",
+        "decimal": 0.5
+      },
+      {
+        "exact": "1/2",
+        "decimal": 0.5
+      },
+      {
+        "exact": "1/2",
+        "decimal": 0.5
+      },
+      {
+        "exact": "1/2",
+        "decimal": 0.5
+      },
+      {
+        "exact": "1/2",
+        "decimal": 0.5
+      }
+    ],
+    "attentive_scores": [
+      {
+        "exact": "-17/10",
+        "decimal": -1.7
+      },
+      {
+        "exact": "-41/50",
+        "decimal": -0.82
+      },
+      {
+        "exact": "3/50",
+        "decimal": 0.06
+      },
+      {
+        "exact": "47/50",
+        "decimal": 0.94
+      },
+      {
+        "exact": "91/50",
+        "decimal": 1.82
+      },
+      {
+        "exact": "27/10",
+        "decimal": 2.7
+      }
+    ]
+  },
+  "information_gain_failure": {
+    "attentive": [
+      0.0,
+      1.3057327045931966
+    ],
+    "comparator": [
+      0.0,
+      0.5810095608414874
+    ],
+    "attentive_policy": [
+      0.21320179314560886,
+      0.7867982068543912
+    ],
+    "comparator_policy": [
+      0.3587003268270838,
+      0.6412996731729161
+    ]
+  },
+  "full_agent_equivalence_claimed": false,
+  "phenomenal_bridge_established": false
+}

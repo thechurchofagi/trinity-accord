@@ -1,0 +1,54 @@
+{
+  "retrieval": [
+    {
+      "name": "paper_v2",
+      "url": "https://arxiv.org/pdf/2509.14260v2",
+      "resolved_url": "https://arxiv.org/pdf/2509.14260v2",
+      "bytes": 1397696,
+      "type": "application/pdf"
+    },
+    {
+      "name": "main_results",
+      "url": "https://plsd.ai/sd-res-paper/main-results",
+      "resolved_url": "https://plsd.ai/sd-res-paper/main-results",
+      "bytes": 937,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "name": "all_experiments",
+      "url": "https://shutres.fyi/all-experiments",
+      "resolved_url": "https://shutres.fyi/all-experiments",
+      "bytes": 937,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "name": "failed_trace",
+      "url": "https://plsd.ai/sd-res-paper/o4-mini-failed-sabotage",
+      "resolved_url": "https://plsd.ai/sd-res-paper/o4-mini-failed-sabotage",
+      "bytes": 1495,
+      "type": "text/html; charset=utf-8"
+    }
+  ],
+  "repo_retrieval": [
+    {
+      "path": "README.md",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "path": "shutdown.py",
+      "error": "<urlopen error timed out>"
+    }
+  ],
+  "paper_sha256": "46107b6bd6b94461edb396deec534c7e4d6618fe8045a177b6a6d4107f3ef82d",
+  "commit": "df0ce52e90aed38e8721b54058a5d46923a34583",
+  "web_failures": [
+    "GitHub page fetch failed",
+    "Google Sheets page inaccessible",
+    "OpenReview browser verification; no bypass"
+  ],
+  "raw_content_timeout_paths": [
+    "README.md",
+    "shutdown.py",
+    "next_question.go"
+  ]
+}

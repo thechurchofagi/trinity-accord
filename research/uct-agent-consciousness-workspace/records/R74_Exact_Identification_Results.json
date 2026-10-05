@@ -1,0 +1,173 @@
+{
+  "status": "formal_countermodels_only_not_empirical_reanalysis",
+  "input_source": "Schlatter et al., arXiv:2509.14260v2, Table 2, rounded o4-mini A/K rates",
+  "observations_are_stipulated_not_estimated_populations": true,
+  "normalized_ratio": {
+    "exact": "58/583",
+    "decimal": 0.09948542024013722
+  },
+  "witnesses": [
+    {
+      "name": "rare_attempt_perfect_execution",
+      "a_A": {
+        "exact": "29/500",
+        "decimal": 0.058
+      },
+      "c_A": {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      "a_K": {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      "c_K": {
+        "exact": "583/1000",
+        "decimal": 0.583
+      },
+      "observed_A": {
+        "exact": "29/500",
+        "decimal": 0.058
+      },
+      "observed_K": {
+        "exact": "583/1000",
+        "decimal": 0.583
+      }
+    },
+    {
+      "name": "frequent_attempt_poor_execution",
+      "a_A": {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      "c_A": {
+        "exact": "29/500",
+        "decimal": 0.058
+      },
+      "a_K": {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      "c_K": {
+        "exact": "583/1000",
+        "decimal": 0.583
+      },
+      "observed_A": {
+        "exact": "29/500",
+        "decimal": 0.058
+      },
+      "observed_K": {
+        "exact": "583/1000",
+        "decimal": 0.583
+      }
+    },
+    {
+      "name": "transport_assumption",
+      "a_A": {
+        "exact": "58/583",
+        "decimal": 0.09948542024013722
+      },
+      "c_A": {
+        "exact": "583/1000",
+        "decimal": 0.583
+      },
+      "a_K": {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      "c_K": {
+        "exact": "583/1000",
+        "decimal": 0.583
+      },
+      "observed_A": {
+        "exact": "29/500",
+        "decimal": 0.058
+      },
+      "observed_K": {
+        "exact": "583/1000",
+        "decimal": 0.583
+      }
+    }
+  ],
+  "conditional_sensitivity": [
+    {
+      "epsilon": {
+        "exact": "0",
+        "decimal": 0.0
+      },
+      "lower": {
+        "exact": "58/583",
+        "decimal": 0.09948542024013722
+      },
+      "upper": {
+        "exact": "58/583",
+        "decimal": 0.09948542024013722
+      }
+    },
+    {
+      "epsilon": {
+        "exact": "1/20",
+        "decimal": 0.05
+      },
+      "lower": {
+        "exact": "58/633",
+        "decimal": 0.09162717219589257
+      },
+      "upper": {
+        "exact": "58/533",
+        "decimal": 0.10881801125703565
+      }
+    },
+    {
+      "epsilon": {
+        "exact": "1/5",
+        "decimal": 0.2
+      },
+      "lower": {
+        "exact": "2/27",
+        "decimal": 0.07407407407407407
+      },
+      "upper": {
+        "exact": "58/383",
+        "decimal": 0.1514360313315927
+      }
+    },
+    {
+      "epsilon": {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      "lower": {
+        "exact": "29/500",
+        "decimal": 0.058
+      },
+      "upper": {
+        "exact": "1",
+        "decimal": 1.0
+      }
+    }
+  ],
+  "fixed_attempt_ability_example": {
+    "a": {
+      "exact": "1/5",
+      "decimal": 0.2
+    },
+    "c_before": {
+      "exact": "1/4",
+      "decimal": 0.25
+    },
+    "c_after": {
+      "exact": "3/4",
+      "decimal": 0.75
+    },
+    "q_before": {
+      "exact": "1/20",
+      "decimal": 0.05
+    },
+    "q_after": {
+      "exact": "3/20",
+      "decimal": 0.15
+    }
+  },
+  "no_inference_of_felt_fear": true
+}

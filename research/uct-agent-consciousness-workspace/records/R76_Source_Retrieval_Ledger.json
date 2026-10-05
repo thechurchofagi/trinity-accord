@@ -1,0 +1,35 @@
+{
+  "round": "R76",
+  "date": "2026-10-05",
+  "master": {"library_file_id":"libfile_f43117ce64388191af6439c0d719fc50","version":"39","total_lines":788,"size_bytes":126456,"scope":"Previously read full version retained; current round checked unchanged identity/version and reread relevant historical sections. Final version check remains 39."},
+  "project_sources": [
+    {"library_file_id":"libfile_36a8554f2594819184255d22f0eba49f","name":"R67_Reference_Polarity_and_Termination_Accounting.md","scope":"Full 147-line note"},
+    {"library_file_id":"libfile_afd5602b54c88191812a541f79fbe82d","name":"R67_Source_Ledger.md","scope":"Full 19-line ledger"},
+    {"library_file_id":"libfile_d77b37ead30c81919b03538d3373009b","name":"unified-consciousness-theory-iii-v1.0.md","scope":"Targeted section 2, lines 47-111; not a complete fresh audit of UCT I/II/III"},
+    {"name":"R66 note","scope":"Attempted combined retrieval truncated; not counted as fully read"},
+    {"name":"R75_Worklog_and_Handoff_20261005.md","scope":"Full local latest handoff; preceding persistence failed"}
+  ],
+  "external_sources": [
+    {"id":"S1","url":"https://stjohngrimbly.com/interoceptive-attention/","published":"2026-08-05","title":"Where Should an Agent Direct Its Interoceptive Attention?","scope":"Full 221-line author companion, including equations, caveats, and explicit missing comparator","not_done":"No source-agent reanalysis, full paper or supplement read, or code replication","web_refs":["turn342view1","turn347view0"]},
+    {"id":"S2","url":"https://r.unitn.it/filesresearch/images/cimec-ldmg/download/publications/jofflincoricelli_2013.pdf","doi":"10.1371/journal.pcbi.1003094","published":"2013-06-13","scope":"Targeted definitions and introduction pp.1-3; selected discussion and hierarchy passages pp.8-13 of 14-page PDF; simulations not replicated","web_refs":["turn339view0","turn340view0","turn340view2","turn340view3","turn340view4","turn341view0"]},
+    {"id":"S3","url":"https://activeinference.github.io/papers/process_theory.pdf","doi":"10.1162/NECO_a_00912","published":"2017","scope":"Initial definitions plus targeted equations 2.5-2.6 and neighboring text on utility, information gain and inference, PDF pp.9-14; not all 56 pages","web_refs":["turn345view1","turn346view0","turn347view1"]},
+    {"id":"S4","url":"https://doi.org/10.3390/e28010001","title":"Decision, Inference, and Information: Formal Equivalences Under Active Inference","published":"2026","scope":"Indexed metadata/abstract only; full source rate-limited; priority review incomplete","web_refs":["turn344search1","turn344search2","turn344search3","turn345view0"]},
+    {"id":"candidate_affective_paper","url":"https://arxiv.org/abs/2609.03883","doi":"10.53765/20512201.33.7.014","scope":"Abstract/metadata and author publications page only; no full methods audit; not a basis for claiming implementation behavior","web_refs":["turn338academia17","turn336academia24","turn340view1","turn341view1"]}
+  ],
+  "failed_or_partial_routes": [
+    {"url":"https://github.com/sgrimbly/attention-aif-sab2026-snapshot","status":"Fetch failures; code not inspected","refs":["turn343view0","turn345view2"]},
+    {"url":"https://github.com/sgrimbly/attention-aif-sab2026-snapshot/blob/main/paper/SAB2026_supplement.pdf","status":"GitHub wrapper accessible, PDF not read","refs":["turn343view1"]},
+    {"route":"S2 PMC","status":"CAPTCHA page; no bypass","refs":["turn338view0"]},
+    {"route":"S2 publisher","status":"Server errors; switched to author-hosted PDF","refs":["turn337view2","turn339view1"]},
+    {"route":"arXiv 2609.03883 PDF/HTML","status":"Fetch unavailable","refs":["turn337view0","turn337view1"]},
+    {"route":"DOI 10.53765/20512201.33.7.014","status":"403","refs":["turn342view0"]},
+    {"route":"S4 full MDPI","status":"429 rate limit; no full read","refs":["turn345view0"]}
+  ],
+  "originality": {
+    "rejected_claim":"Learning bad news refutes the whole 2013 valence account; hierarchy is already discussed in the original.",
+    "accepted_local_contribution":"Explicit symmetric-channel preference-power comparator and paired common-observation update contrast, with narrow assumptions.",
+    "worldwide_priority_established":false,
+    "major_consciousness_breakthrough":false
+  },
+  "experiments": {"new_real_model_experiment":false,"new_neural_experiment":false,"source_code_replicated":false,"formal_checks_executed":true,"phenomenal_measurement":false}
+}

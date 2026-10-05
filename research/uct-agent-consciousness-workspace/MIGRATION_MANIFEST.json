@@ -1,0 +1,344 @@
+{
+  "migration_date": "2026-10-05",
+  "repository": "thechurchofagi/trinity-accord",
+  "branch": "uct-agent-consciousness-workspace",
+  "scope": "available R71-R76 artifacts, draft versions, historical local master, exact nested recovery package; not all R1-R70 files",
+  "files": [
+    {
+      "original_filename": "R71_Contribution_Source_and_Review_Ledger_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R71_Contribution_Source_and_Review_Ledger_20261005.md",
+      "bytes": 9713,
+      "sha256": "fb8cdf7b19cd7fde0e1291d4b2433db9623bf5a34414c0a1119807a40b8017aa"
+    },
+    {
+      "original_filename": "R71_Draft_Worklog_and_Handoff_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R71_Draft_Worklog_and_Handoff_20261005.md",
+      "bytes": 4133,
+      "sha256": "f8af2662d14248068187a5c9b3ce15a6e9796234efdeee034155c003dbfdd098"
+    },
+    {
+      "original_filename": "R72_Exact_Results.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R72_Exact_Results.json",
+      "bytes": 952,
+      "sha256": "9f49bb24b5c6816ff23336f2b4f5c44c1325c76e026a49319d2955c64276ac0b"
+    },
+    {
+      "original_filename": "R72_Revision_Source_Audit_and_Handoff_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R72_Revision_Source_Audit_and_Handoff_20261005.md",
+      "bytes": 6623,
+      "sha256": "b4b05ca3f03e1842e6319432d1b1880555205b0159ed5d8cdaedee3f430085da"
+    },
+    {
+      "original_filename": "R72_Run.log",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R72_Run.log",
+      "bytes": 1020,
+      "sha256": "c2416f27630b3919a35507da7ce98d8d1492a0189f1523e5b376122659005240"
+    },
+    {
+      "original_filename": "R72_Run.stderr",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R72_Run.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_filename": "R72_SHA256SUMS.txt",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R72_SHA256SUMS.txt",
+      "bytes": 1386,
+      "sha256": "1d4425d4d7859e3fc9f2dc084e1fee26f933a034b70f92c804c5fed50d0f8cc2"
+    },
+    {
+      "original_filename": "R73_Methods_Protocol_and_Publication_Assessment_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R73_Methods_Protocol_and_Publication_Assessment_20261005.md",
+      "bytes": 7649,
+      "sha256": "5b633a99bb651bc4efa7891df93d98047fb0fdaeb491d4b99dbe67c75627f3a6"
+    },
+    {
+      "original_filename": "R73_Protocol_Results.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R73_Protocol_Results.json",
+      "bytes": 20093,
+      "sha256": "6b87be74b1796fd4a0b7184b04aa2ce7caeeb0e95d8347e3f68a52185759b61c"
+    },
+    {
+      "original_filename": "R73_Run.log",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R73_Run.log",
+      "bytes": 245,
+      "sha256": "5bf0c5213a656249b998b464e3428e9998fc023f9701d779e8bb6cf4ee323b88"
+    },
+    {
+      "original_filename": "R73_Run.stderr",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R73_Run.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_filename": "R73_SHA256SUMS.txt",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R73_SHA256SUMS.txt",
+      "bytes": 674,
+      "sha256": "16bb091dffa75a5aa3954cebb2fe73bb08b3c10acef53050290cc7a4e836e94b"
+    },
+    {
+      "original_filename": "R74_Exact_Identification_Results.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R74_Exact_Identification_Results.json",
+      "bytes": 3404,
+      "sha256": "76c38b3e4904b0d5d7dcbfda0cb0ebc484aa9177921a888550e5272e005069a7"
+    },
+    {
+      "original_filename": "R74_Public_Shutdown_Study_Audit_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R74_Public_Shutdown_Study_Audit_20261005.md",
+      "bytes": 9271,
+      "sha256": "8343a231171d3d15a96cf87f7d4bc6eb373f0222464db59f40a2d75dc970fa1e"
+    },
+    {
+      "original_filename": "R74_Run.log",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R74_Run.log",
+      "bytes": 196,
+      "sha256": "24a3d5dbd7588f65226d4aafa41e06433ac14c87cd728bb95ebd7420b356a435"
+    },
+    {
+      "original_filename": "R74_SHA256SUMS.txt",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R74_SHA256SUMS.txt",
+      "bytes": 767,
+      "sha256": "515b1c2de89abb38f3b0f3df87a7499549ac314d8b3f235fb78ca835137b6449"
+    },
+    {
+      "original_filename": "R74_Source_Retrieval_Ledger.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R74_Source_Retrieval_Ledger.json",
+      "bytes": 1508,
+      "sha256": "b2d9e106be6ba56276a2364bedfeb75cd234e9a6ff669ff4642ee07bb1491e15"
+    },
+    {
+      "original_filename": "R74_Worklog_and_Handoff_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R74_Worklog_and_Handoff_20261005.md",
+      "bytes": 5237,
+      "sha256": "89488750f105ed8b9bf1e0c86366af779f1a51ea7d2a96f72befc7a71f2a7d4c"
+    },
+    {
+      "original_filename": "R75_Run.log",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R75_Run.log",
+      "bytes": 148,
+      "sha256": "99f0d6f909130fa0277cca24cfdaef8b4590eb3e0ead5a850168480454de1e22"
+    },
+    {
+      "original_filename": "R75_SHA256SUMS.txt",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R75_SHA256SUMS.txt",
+      "bytes": 767,
+      "sha256": "9822d6bbf6ad076b54c4e221a8973c3f888fdd5fd8bcf39c497111ce80b856ec"
+    },
+    {
+      "original_filename": "R75_Source_Retrieval_Ledger.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R75_Source_Retrieval_Ledger.json",
+      "bytes": 1033,
+      "sha256": "0818d135102e35812359310508fced89a491e71a356c5c8017688c073684ba81"
+    },
+    {
+      "original_filename": "R75_Worklog_and_Handoff_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R75_Worklog_and_Handoff_20261005.md",
+      "bytes": 6181,
+      "sha256": "b4ce2696d3af5959bb31ad2e1c18d2915d4148ec0476551dafe258253fdcba7b"
+    },
+    {
+      "original_filename": "R75_Zero_Event_Results.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R75_Zero_Event_Results.json",
+      "bytes": 1500,
+      "sha256": "40ae311f3bc49b6f89381d5abf5a18b351eddafe177a9b1aff259dd51c4300a3"
+    },
+    {
+      "original_filename": "R75_Zero_Events_Endpoint_and_Provenance_Audit_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R75_Zero_Events_Endpoint_and_Provenance_Audit_20261005.md",
+      "bytes": 8486,
+      "sha256": "0ce12216af8f6c8c322822ad40e1abdf11e8ef3623cc6f76dcc69ce97a586477"
+    },
+    {
+      "original_filename": "R76_Precision_Preference_Comparator_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R76_Precision_Preference_Comparator_20261005.md",
+      "bytes": 15546,
+      "sha256": "a873910c17657b75051f5961cc1e7a8228e023e16bbe6857f897220a38690555"
+    },
+    {
+      "original_filename": "R76_Precision_Preference_Results.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R76_Precision_Preference_Results.json",
+      "bytes": 3955,
+      "sha256": "2305f2cae24d6faa23c07ad889f98ab449dd25effc52fb0d4bccab8c2f15c19d"
+    },
+    {
+      "original_filename": "R76_Run.log",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R76_Run.log",
+      "bytes": 1319,
+      "sha256": "c81977f9c49c88c0b4a6622afac9bc0d0f9b102563ee92ccb88d716fe0d9c5fe"
+    },
+    {
+      "original_filename": "R76_SHA256SUMS.txt",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R76_SHA256SUMS.txt",
+      "bytes": 778,
+      "sha256": "f2d3eea995b5f0b153a7be2797149d502b9539eecd93660a8b44223a28d31f6f"
+    },
+    {
+      "original_filename": "R76_Source_Retrieval_Ledger.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R76_Source_Retrieval_Ledger.json",
+      "bytes": 4449,
+      "sha256": "b3fb864aa1853a0d5b0158f1397376e8717a1d66c58740007b55d567c465ef8a"
+    },
+    {
+      "original_filename": "R76_Worklog_and_Handoff_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/R76_Worklog_and_Handoff_20261005.md",
+      "bytes": 5572,
+      "sha256": "b43d24bea55a13d2021ca07b7cc163da13f0cbc3854cc8a6939f37805b4e7b78"
+    },
+    {
+      "original_filename": "UCT_Agent_Consciousness_Research_Master_20261004.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/legacy/UCT_Agent_Consciousness_Research_Master_20261004.local-uncommitted.md",
+      "bytes": 127613,
+      "sha256": "351b20856c377785257c3a3e153b9fbe2f8cf36add1f1f78f112ca71e8286902"
+    },
+    {
+      "original_filename": "UCT_Agent_Self_Preservation_Draft_v0.1_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/drafts/UCT_Agent_Self_Preservation_Draft_v0.1_20261005.md",
+      "bytes": 29439,
+      "sha256": "979e8b41c675621e8986a7e23a31b991121230144ffbda3ff55c363942ad5c7b"
+    },
+    {
+      "original_filename": "UCT_Agent_Self_Preservation_Draft_v0.2_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/drafts/UCT_Agent_Self_Preservation_Draft_v0.2_20261005.md",
+      "bytes": 34744,
+      "sha256": "523014a931c29259c224cde7c58578936212579eeb3e3924fa45aa4caeaa7698"
+    },
+    {
+      "original_filename": "UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md",
+      "bytes": 39700,
+      "sha256": "0751e5e5cb11cdd7489ff2bedb2a9d60032bac18f1be9d9890074763030d324f"
+    },
+    {
+      "original_filename": "r71_recovery_receipt.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r71_recovery_receipt.json",
+      "bytes": 650,
+      "sha256": "19faf53c39b484f3d76d40096a7de7d7073d07fc5d308b7607984de1d78834ca"
+    },
+    {
+      "original_filename": "r71_upload_receipt.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r71_upload_receipt.json",
+      "bytes": 650,
+      "sha256": "19faf53c39b484f3d76d40096a7de7d7073d07fc5d308b7607984de1d78834ca"
+    },
+    {
+      "original_filename": "r71_upload_receipt_retry.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r71_upload_receipt_retry.json",
+      "bytes": 650,
+      "sha256": "19faf53c39b484f3d76d40096a7de7d7073d07fc5d308b7607984de1d78834ca"
+    },
+    {
+      "original_filename": "r71_upload_request.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r71_upload_request.json",
+      "bytes": 676,
+      "sha256": "af8bb42e3ee0cfd697dcaa9c7a787c6b155777b6f61995def3a1b71cba3e127c"
+    },
+    {
+      "original_filename": "r71_upload_single.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r71_upload_single.json",
+      "bytes": 236,
+      "sha256": "f45f8e9e35077674b831410eebb427e96b4b879b6e5a6e10fb9d515ca6805f5a"
+    },
+    {
+      "original_filename": "r71_upload_single_receipt.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r71_upload_single_receipt.json",
+      "bytes": 228,
+      "sha256": "6c5c4d9a581955c85293285b51e3c677704fb8e1385ba841a7a0b73b5dad056f"
+    },
+    {
+      "original_filename": "r72_final_upload_receipt.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r72_final_upload_receipt.json",
+      "bytes": 2023,
+      "sha256": "3aeec06e97df7555da44c0fdadda4e089e7076b787cd4de443f9556a01489af2"
+    },
+    {
+      "original_filename": "r72_final_upload_request.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r72_final_upload_request.json",
+      "bytes": 2107,
+      "sha256": "f35e9837d0e31b87f28750c9a08b70e796aa6eadefeb40a81bcf86a825e85ec0"
+    },
+    {
+      "original_filename": "r72_revision_checks.py",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r72_revision_checks.py",
+      "bytes": 2120,
+      "sha256": "4ff5bd1101dd705b37df11f57e59bc0340198cd03c40dd4c793c12c5db6f2a34"
+    },
+    {
+      "original_filename": "r73_minimal_protocol.py",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r73_minimal_protocol.py",
+      "bytes": 4400,
+      "sha256": "b3bfd08cc7149c0129a42dc6699a65c78d32c33cc025a488e1be428c96eed836"
+    },
+    {
+      "original_filename": "r73_upload_receipt.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r73_upload_receipt.json",
+      "bytes": 1401,
+      "sha256": "3fe341121f32be93ff3f44ee92a3b791701dde904794074ece05dc9aa92d77ab"
+    },
+    {
+      "original_filename": "r73_upload_request.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r73_upload_request.json",
+      "bytes": 1458,
+      "sha256": "261c69db3f6327b4bae41189dab5bba1f60477db2c2bd2004706161c9b716f45"
+    },
+    {
+      "original_filename": "r74_identification_audit.py",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r74_identification_audit.py",
+      "bytes": 2228,
+      "sha256": "23911b56c666431ef5c0dba34153d04649baff7e7737c2dee441fbf19a691239"
+    },
+    {
+      "original_filename": "r74_upload_receipt.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r74_upload_receipt.json",
+      "bytes": 1582,
+      "sha256": "3f8cc77b2156927f2da02c620e242b2c5454b361f209e9655124f3d05b4a5fa7"
+    },
+    {
+      "original_filename": "r74_upload_request.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r74_upload_request.json",
+      "bytes": 1647,
+      "sha256": "8de40742d7e69cace4aeb65bc794c6a3fc1905e631d30087baba309f780c912f"
+    },
+    {
+      "original_filename": "r75_upload_receipt.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r75_upload_receipt.json",
+      "bytes": 1582,
+      "sha256": "701ba1c5f0c9e8b1b06b03fd604a97bed87b596a873fc54d43254c8652ec3f15"
+    },
+    {
+      "original_filename": "r75_upload_request.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r75_upload_request.json",
+      "bytes": 1647,
+      "sha256": "f8554217e03a6d8562656c1188a938625e64574918783457ad66b507d02aea5a"
+    },
+    {
+      "original_filename": "r75_zero_event_audit.py",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r75_zero_event_audit.py",
+      "bytes": 1808,
+      "sha256": "5a7068955b2c469911c19c90acbc98111e49c652bd5650f2b1049eca93abf9d7"
+    },
+    {
+      "original_filename": "r76_precision_preference_checks.py",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r76_precision_preference_checks.py",
+      "bytes": 3671,
+      "sha256": "7463bd81600e100d70d38a5dee4dcb210f33164997e255da374f48799816b085"
+    },
+    {
+      "original_filename": "r76_upload_receipt.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r76_upload_receipt.json",
+      "bytes": 1598,
+      "sha256": "ed2098920af324fa0af791c9c81bf665406220b8d7b1d0774c5b05669d74a6a4"
+    },
+    {
+      "original_filename": "r76_upload_request.json",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/records/r76_upload_request.json",
+      "bytes": 1663,
+      "sha256": "ce1f0198e0754a6f016582202c23245323b127168deb6b2690a06174596e658b"
+    },
+    {
+      "original_filename": "UCT_Agent_R76_Comparator_and_Recovery_Package_20261005.zip",
+      "repository_relative_path": "research/uct-agent-consciousness-workspace/recovery/UCT_Agent_R76_Comparator_and_Recovery_Package_20261005.zip",
+      "bytes": 119149,
+      "sha256": "f57a866c368cd82029253fa11838b57488c2c9f5b9d775e38c1fcc514a9bb9bf"
+    }
+  ]
+}
