@@ -4,9 +4,9 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R89** (anchored interventional valence-transport certificate and finite-closure limit; exact checks, no model experiment).
+- Completed round: **R90** (rodent source-anchor family, interventional-rank lower bound and exact recurrent microcontroller stress test; no subjective measurement).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest formal/methodological analysis: [R89 anchored interventional valence transport](records/R89_Anchored_Interventional_Valence_Transport_20261006.md).
+- Latest formal/methodological analysis: [R90 rodent anchor, interventional rank and microcontroller](records/R90_Rodent_Anchor_Interventional_Rank_and_Microcontroller_20261006.md).
 - Current next-test protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md).
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
@@ -15,7 +15,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R89 worklog](records/R89_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R90 worklog](records/R90_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -98,3 +98,7 @@ R87 audit correction: R86's abstract rank statements remain exact, but its natur
 ## R89 continuation
 
 [Anchored interventional valence transport](records/R89_Anchored_Interventional_Valence_Transport_20261006.md); [worklog](records/R89_Worklog_and_Handoff_20261006.md); [code](records/r89_valence_transport_certificate.py); [exact JSON](records/R89_Valence_Transport_Exact_Results.json); [32-subset audit](records/R89_Certificate_Subset_Audit.csv); [successful run](records/R89_Valence_Transport_Run.log); [retained initial failure](records/R89_Valence_Transport_Run.initial_failed.log); [source ledger](records/R89_Source_Retrieval_Ledger.json); [complete package](records/R89_Research_Package_20261006.zip). The conditional `AIVT_H` certificate makes bearer binding, competitor dissociation, signed polarity anchors, intervention equivariance and hypothesis-class closure explicit; an additional `VI_H` premise is still required because C1 does not orient valence across substrates. FIVU extends the prior proxy limit: any finite intervention table remains compatible with opposite-valence, distinct complete `K` models if the hypothesis class permits an unobserved valence-relevant coordinate. All 32 clause subsets were enumerated; only all five clauses reject the fixed five-witness battery. Unsigned three-state structure admits sign reversal, while signed anchors remove it. This is a conditional bridge specification and identification limit, not subjective measurement, C1 validation, a current-system verdict or a major historical-first claim.
+
+## R90 continuation
+
+[Rodent anchor, interventional rank and recurrent microcontroller](records/R90_Rodent_Anchor_Interventional_Rank_and_Microcontroller_20261006.md); [frozen protocol](records/R90_Rodent_Anchor_and_Microcontroller_Protocol_Frozen_20261006.md); [worklog](records/R90_Worklog_and_Handoff_20261006.md); [code](records/r90_anchor_transport_stress_test.py); [exact JSON](records/R90_Anchor_Transport_Stress_Results.json); [scenario audit](records/R90_Anchor_Transport_Scenario_Audit.csv); [run log](records/R90_Anchor_Transport_Stress_Run.log); [source ledger](records/R90_Source_Retrieval_Ledger.json); [complete package](records/R90_Research_Package_20261006.zip). Primary rat taste-reactivity/accumbens studies motivate a multi-relation source family rather than one reward scalar. Two one-state bundled recurrent controllers match the visible signed-anchor projection but pass only 2/10 and 3/10 full scenarios and have exact response rank 2. A five-state factorized controller passes 10/10 and has rank 6. Exact mapped response requires target rank at least source rank; tied duplication to 100 copies leaves the bundled rank unchanged. This is a necessary finite organizational exclusion and a direct parameter-redundancy result, not an experience magnitude, source phenomenology proof, full `AIVT_H`, current-system verdict or major historical-first claim.

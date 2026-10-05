@@ -1,0 +1,982 @@
+{
+  "AIVT_H_full_certificate_established": false,
+  "assertions": {
+    "both_bundles_fail_four_core_dissociations": true,
+    "both_bundles_match_external_anchor_projection": true,
+    "bundled_ranks_below_source": true,
+    "declared_source_signature_rank_is_six": true,
+    "factorized_matches_all_frozen_signatures": true,
+    "reward_sensitive_bundle_fails_reward_relabel": true,
+    "semantic_bundle_passes_reward_relabel": true,
+    "tied_redundancy_does_not_raise_rank": true
+  },
+  "closure_C_H_established": false,
+  "controller_results": {
+    "T-bundle-label": {
+      "exact_response_rank": 2,
+      "external_anchor_projection_Y_L_matches": true,
+      "failed_scenarios": [
+        "positive_anchor",
+        "negative_anchor",
+        "wanting_only",
+        "viability_only",
+        "other_only",
+        "defense_only",
+        "reward_relabel",
+        "positive_report_disconnect"
+      ],
+      "intervention_basis": [
+        "positive_anchor",
+        "wanting_only",
+        "viability_only",
+        "other_only",
+        "defense_only",
+        "report_only"
+      ],
+      "passed_scenarios": 2,
+      "total_scenarios": 10,
+      "trajectories": {
+        "baseline": [
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          }
+        ],
+        "defense_only": [
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          }
+        ],
+        "negative_anchor": [
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          }
+        ],
+        "other_only": [
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          }
+        ],
+        "positive_anchor": [
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          }
+        ],
+        "positive_report_disconnect": [
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 0
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 0
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 0
+          }
+        ],
+        "report_only": [
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": -1
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": -1
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": -1
+          }
+        ],
+        "reward_relabel": [
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          }
+        ],
+        "viability_only": [
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          }
+        ],
+        "wanting_only": [
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          }
+        ]
+      }
+    },
+    "T-bundle-semantic": {
+      "exact_response_rank": 2,
+      "external_anchor_projection_Y_L_matches": true,
+      "failed_scenarios": [
+        "positive_anchor",
+        "negative_anchor",
+        "wanting_only",
+        "viability_only",
+        "other_only",
+        "defense_only",
+        "positive_report_disconnect"
+      ],
+      "intervention_basis": [
+        "positive_anchor",
+        "wanting_only",
+        "viability_only",
+        "other_only",
+        "defense_only",
+        "report_only"
+      ],
+      "passed_scenarios": 3,
+      "total_scenarios": 10,
+      "trajectories": {
+        "baseline": [
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          }
+        ],
+        "defense_only": [
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          }
+        ],
+        "negative_anchor": [
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          }
+        ],
+        "other_only": [
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          }
+        ],
+        "positive_anchor": [
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          }
+        ],
+        "positive_report_disconnect": [
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 0
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 0
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 0
+          }
+        ],
+        "report_only": [
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": -1
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": -1
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": -1
+          }
+        ],
+        "reward_relabel": [
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          }
+        ],
+        "viability_only": [
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          },
+          {
+            "D": -1,
+            "H": -1,
+            "L": -1,
+            "O": -1,
+            "V": -1,
+            "W": -1,
+            "Y": -1
+          }
+        ],
+        "wanting_only": [
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          },
+          {
+            "D": 1,
+            "H": 1,
+            "L": 1,
+            "O": 1,
+            "V": 1,
+            "W": 1,
+            "Y": 1
+          }
+        ]
+      }
+    },
+    "T-factor": {
+      "exact_response_rank": 6,
+      "external_anchor_projection_Y_L_matches": true,
+      "failed_scenarios": [],
+      "intervention_basis": [
+        "positive_anchor",
+        "wanting_only",
+        "viability_only",
+        "other_only",
+        "defense_only",
+        "report_only"
+      ],
+      "passed_scenarios": 10,
+      "total_scenarios": 10,
+      "trajectories": {
+        "baseline": [
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          }
+        ],
+        "defense_only": [
+          {
+            "D": 1,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 1,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 1,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          }
+        ],
+        "negative_anchor": [
+          {
+            "D": 0,
+            "H": -1,
+            "L": -1,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": -1
+          },
+          {
+            "D": 0,
+            "H": -1,
+            "L": -1,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": -1
+          },
+          {
+            "D": 0,
+            "H": -1,
+            "L": -1,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": -1
+          }
+        ],
+        "other_only": [
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": -1,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": -1,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": -1,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          }
+        ],
+        "positive_anchor": [
+          {
+            "D": 0,
+            "H": 1,
+            "L": 1,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 1
+          },
+          {
+            "D": 0,
+            "H": 1,
+            "L": 1,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 1
+          },
+          {
+            "D": 0,
+            "H": 1,
+            "L": 1,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 1
+          }
+        ],
+        "positive_report_disconnect": [
+          {
+            "D": 0,
+            "H": 1,
+            "L": 1,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 1,
+            "L": 1,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 1,
+            "L": 1,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          }
+        ],
+        "report_only": [
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": -1
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": -1
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": -1
+          }
+        ],
+        "reward_relabel": [
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 0,
+            "Y": 0
+          }
+        ],
+        "viability_only": [
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": -1,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": -1,
+            "W": 0,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": -1,
+            "W": 0,
+            "Y": 0
+          }
+        ],
+        "wanting_only": [
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 1,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 1,
+            "Y": 0
+          },
+          {
+            "D": 0,
+            "H": 0,
+            "L": 0,
+            "O": 0,
+            "V": 0,
+            "W": 1,
+            "Y": 0
+          }
+        ]
+      }
+    }
+  },
+  "declared_signature_rank": 6,
+  "redundancy_sweep": [
+    {
+      "effective_response_rank": 2,
+      "nominal_state_slots": 1,
+      "tied_scalar_copies": 1
+    },
+    {
+      "effective_response_rank": 2,
+      "nominal_state_slots": 2,
+      "tied_scalar_copies": 2
+    },
+    {
+      "effective_response_rank": 2,
+      "nominal_state_slots": 10,
+      "tied_scalar_copies": 10
+    },
+    {
+      "effective_response_rank": 2,
+      "nominal_state_slots": 100,
+      "tied_scalar_copies": 100
+    }
+  ],
+  "scope": "finite causal bridge stress test; not subjective-experience measurement",
+  "source_anchor_caveat": "H is a calibrated behavioral/causal variable; phenomenal source premise A_rat remains additional",
+  "source_anchor_family": "rat taste-reactivity and nucleus-accumbens-shell causal dissociations",
+  "status": "PASS",
+  "valence_invariance_VI_H_established": false
+}

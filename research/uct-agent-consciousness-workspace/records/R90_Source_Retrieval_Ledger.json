@@ -1,0 +1,91 @@
+{
+  "round": "R90",
+  "date": "2026-10-06",
+  "scope_note": "Primary papers and official proceedings used to freeze the rodent source family and assess direct methodological precedent. No restricted full text is redistributed.",
+  "sources": [
+    {
+      "title": "Hedonic Hot Spot in Nucleus Accumbens Shell: Where Do mu-Opioids Cause Increased Hedonic Impact of Sweetness?",
+      "authors": ["Susana Pecina", "Kent C. Berridge"],
+      "year": 2005,
+      "journal": "Journal of Neuroscience",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16354936/",
+      "used_for": "localized opioid enhancement of sweetness liking versus broader intake effects",
+      "read_scope": "abstract, methods/result synopsis and anatomical-functional mapping"
+    },
+    {
+      "title": "Intra-Accumbens Amphetamine Increases the Conditioned Incentive Salience of Sucrose Reward: Enhancement of Reward Wanting without Enhanced Liking or Response Reinforcement",
+      "authors": ["Cindy L. Wyvell", "Kent C. Berridge"],
+      "year": 2000,
+      "doi": "10.1523/JNEUROSCI.20-21-08122.2000",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11050134/",
+      "used_for": "wanting-only intervention relative to taste-reactivity liking",
+      "read_scope": "abstract, intervention design and main dissociation"
+    },
+    {
+      "title": "Taste Reactivity Analysis of 6-Hydroxydopamine-Induced Aphagia",
+      "authors": ["Kent C. Berridge", "I. L. Venier", "Terry E. Robinson"],
+      "year": 1989,
+      "doi": "10.1037/0735-7044.103.1.36",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/2493791/",
+      "used_for": "loss of feeding/approach without the predicted loss of taste-reactivity affective patterns",
+      "read_scope": "abstract and author-hosted paper synopsis"
+    },
+    {
+      "title": "Positive and Negative Motivation in Nucleus Accumbens Shell",
+      "authors": ["Sheila M. Reynolds", "Kent C. Berridge"],
+      "year": 2002,
+      "doi": "10.1523/JNEUROSCI.22-16-07308.2002",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12177226/",
+      "used_for": "positive/negative taste reactions, feeding, place preference/avoidance and defensive gradients",
+      "read_scope": "abstract, intervention design, taste-reactivity and behavioral endpoints"
+    },
+    {
+      "title": "Emotional Environments Retune the Valence of Appetitive versus Fearful Functions in Nucleus Accumbens",
+      "authors": ["Sheila M. Reynolds", "Kent C. Berridge"],
+      "year": 2008,
+      "doi": "10.1038/nn2061",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18344996/",
+      "used_for": "environment-dependent retuning and sign instability of location-only mappings",
+      "read_scope": "abstract and reported reversal/expansion results"
+    },
+    {
+      "title": "Opioid Hedonic Hotspot in Nucleus Accumbens Shell: Mu, Delta, and Kappa Maps for Enhancement of Sweetness Liking and Wanting",
+      "authors": ["Daniel C. Castro", "Kent C. Berridge"],
+      "year": 2014,
+      "doi": "10.1523/JNEUROSCI.4458-13.2014",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24647944/",
+      "used_for": "receptor- and site-specific causal mapping of liking versus wanting",
+      "read_scope": "abstract and hotspot/coldspot result summary"
+    },
+    {
+      "title": "Interventional Causal Representation Learning",
+      "authors": ["Kartik Ahuja", "Divyat Mahajan", "Yixin Wang", "Yoshua Bengio"],
+      "year": 2023,
+      "venue": "ICML / PMLR 202",
+      "url": "https://proceedings.mlr.press/v202/ahuja23a.html",
+      "used_for": "direct precedent that interventions identify latent factors only under declared assumptions and equivalence classes",
+      "read_scope": "abstract and stated identifiability results"
+    },
+    {
+      "title": "Linear Causal Disentanglement via Interventions",
+      "authors": ["Chandler Squires", "Anna Seigal", "Salil S. Bhate", "Caroline Uhler"],
+      "year": 2023,
+      "venue": "ICML / PMLR 202",
+      "url": "https://proceedings.mlr.press/v202/squires23a.html",
+      "used_for": "direct precedent that missing intervention targets leave distinct latent models indistinguishable",
+      "read_scope": "abstract and identifiability limitation"
+    }
+  ],
+  "carried_forward_not_reread": [
+    "UCT I v1.2 C1/U1 and finite-signature limitations from R89 direct audit",
+    "UCT II v1.1 finite-view discipline from R81/R84 direct audit",
+    "UCT III v1.0 NESIG and nonmonotonicity from R89 direct audit",
+    "Rubenstein et al. 2017 and Beckers-Halpern causal abstraction sources from R89"
+  ],
+  "limitations": [
+    "No animal raw data were downloaded or reanalyzed.",
+    "Taste reactivity is a behavioral/causal anchor, not direct access to rat phenomenology.",
+    "The source family combines compatible constraints across studies; it is not asserted to be one complete biological circuit.",
+    "The prior-art search was targeted, not an exhaustive historical-priority search."
+  ]
+}

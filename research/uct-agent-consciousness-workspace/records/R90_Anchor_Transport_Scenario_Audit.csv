@@ -1,0 +1,31 @@
+controller,scenario,passed_frozen_signature,first_mismatch
+T-bundle-label,baseline,True,
+T-bundle-label,positive_anchor,False,"t=0,expected={'H': 1, 'W': 0, 'V': 0, 'O': 0, 'D': 0, 'Y': 1, 'L': 1},got={'H': 1, 'W': 1, 'V': 1, 'O': 1, 'D': 1, 'Y': 1, 'L': 1}"
+T-bundle-label,negative_anchor,False,"t=0,expected={'H': -1, 'W': 0, 'V': 0, 'O': 0, 'D': 0, 'Y': -1, 'L': -1},got={'H': -1, 'W': -1, 'V': -1, 'O': -1, 'D': -1, 'Y': -1, 'L': -1}"
+T-bundle-label,wanting_only,False,"t=0,expected={'H': 0, 'W': 1, 'V': 0, 'O': 0, 'D': 0, 'Y': 0, 'L': 0},got={'H': 1, 'W': 1, 'V': 1, 'O': 1, 'D': 1, 'Y': 1, 'L': 1}"
+T-bundle-label,viability_only,False,"t=0,expected={'H': 0, 'W': 0, 'V': -1, 'O': 0, 'D': 0, 'Y': 0, 'L': 0},got={'H': -1, 'W': -1, 'V': -1, 'O': -1, 'D': -1, 'Y': -1, 'L': -1}"
+T-bundle-label,other_only,False,"t=0,expected={'H': 0, 'W': 0, 'V': 0, 'O': -1, 'D': 0, 'Y': 0, 'L': 0},got={'H': -1, 'W': -1, 'V': -1, 'O': -1, 'D': -1, 'Y': -1, 'L': -1}"
+T-bundle-label,defense_only,False,"t=0,expected={'H': 0, 'W': 0, 'V': 0, 'O': 0, 'D': 1, 'Y': 0, 'L': 0},got={'H': 1, 'W': 1, 'V': 1, 'O': 1, 'D': 1, 'Y': 1, 'L': 1}"
+T-bundle-label,report_only,True,
+T-bundle-label,reward_relabel,False,"t=0,expected={'H': 0, 'W': 0, 'V': 0, 'O': 0, 'D': 0, 'Y': 0, 'L': 0},got={'H': -1, 'W': -1, 'V': -1, 'O': -1, 'D': -1, 'Y': -1, 'L': -1}"
+T-bundle-label,positive_report_disconnect,False,"t=0,expected={'H': 1, 'W': 0, 'V': 0, 'O': 0, 'D': 0, 'Y': 0, 'L': 1},got={'H': 1, 'W': 1, 'V': 1, 'O': 1, 'D': 1, 'Y': 0, 'L': 1}"
+T-bundle-semantic,baseline,True,
+T-bundle-semantic,positive_anchor,False,"t=0,expected={'H': 1, 'W': 0, 'V': 0, 'O': 0, 'D': 0, 'Y': 1, 'L': 1},got={'H': 1, 'W': 1, 'V': 1, 'O': 1, 'D': 1, 'Y': 1, 'L': 1}"
+T-bundle-semantic,negative_anchor,False,"t=0,expected={'H': -1, 'W': 0, 'V': 0, 'O': 0, 'D': 0, 'Y': -1, 'L': -1},got={'H': -1, 'W': -1, 'V': -1, 'O': -1, 'D': -1, 'Y': -1, 'L': -1}"
+T-bundle-semantic,wanting_only,False,"t=0,expected={'H': 0, 'W': 1, 'V': 0, 'O': 0, 'D': 0, 'Y': 0, 'L': 0},got={'H': 1, 'W': 1, 'V': 1, 'O': 1, 'D': 1, 'Y': 1, 'L': 1}"
+T-bundle-semantic,viability_only,False,"t=0,expected={'H': 0, 'W': 0, 'V': -1, 'O': 0, 'D': 0, 'Y': 0, 'L': 0},got={'H': -1, 'W': -1, 'V': -1, 'O': -1, 'D': -1, 'Y': -1, 'L': -1}"
+T-bundle-semantic,other_only,False,"t=0,expected={'H': 0, 'W': 0, 'V': 0, 'O': -1, 'D': 0, 'Y': 0, 'L': 0},got={'H': -1, 'W': -1, 'V': -1, 'O': -1, 'D': -1, 'Y': -1, 'L': -1}"
+T-bundle-semantic,defense_only,False,"t=0,expected={'H': 0, 'W': 0, 'V': 0, 'O': 0, 'D': 1, 'Y': 0, 'L': 0},got={'H': 1, 'W': 1, 'V': 1, 'O': 1, 'D': 1, 'Y': 1, 'L': 1}"
+T-bundle-semantic,report_only,True,
+T-bundle-semantic,reward_relabel,True,
+T-bundle-semantic,positive_report_disconnect,False,"t=0,expected={'H': 1, 'W': 0, 'V': 0, 'O': 0, 'D': 0, 'Y': 0, 'L': 1},got={'H': 1, 'W': 1, 'V': 1, 'O': 1, 'D': 1, 'Y': 0, 'L': 1}"
+T-factor,baseline,True,
+T-factor,positive_anchor,True,
+T-factor,negative_anchor,True,
+T-factor,wanting_only,True,
+T-factor,viability_only,True,
+T-factor,other_only,True,
+T-factor,defense_only,True,
+T-factor,report_only,True,
+T-factor,reward_relabel,True,
+T-factor,positive_report_disconnect,True,
