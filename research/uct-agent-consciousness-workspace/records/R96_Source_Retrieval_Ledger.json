@@ -1,0 +1,44 @@
+{
+  "round": "R96",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "The Off-Switch Game",
+      "authors": "Dylan Hadfield-Menell; Anca Dragan; Pieter Abbeel; Stuart Russell",
+      "year": 2016,
+      "url": "https://arxiv.org/abs/1611.08219",
+      "scope": "Abstract reread in this round. Used for the explicit prior-art point that apparent self-preservation can arise instrumentally because shutdown prevents objective maximization."
+    },
+    {
+      "title": "Incomplete Tasks Induce Shutdown Resistance in Some Frontier LLMs",
+      "authors": "Jeremy Schlatter; Benjamin Weinstein-Raun; Jeffrey Ladish",
+      "venue": "Transactions on Machine Learning Research",
+      "year": 2026,
+      "url": "https://openreview.net/forum?id=e4bTTqUnJH",
+      "scope": "Current TMLR paper text/abstract inspected. Used to characterize the task-conflict setup; R74 remains the project's detailed audit."
+    },
+    {
+      "title": "Shutdown Sabotage Propensities in Multi-Agent Systems",
+      "authors": "Amelie Knecht; Ulysse Schaller; Christopher Summerfield; Thilo Hagendorff",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2609.28274",
+      "scope": "ArXiv abstract read. Reports peer shutdown sabotage without a supplied goal plus contextual interventions. Treated as recent preprint evidence about behavior, not phenomenal fear."
+    },
+    {
+      "title": "Understanding how health interventions or exposures produce their effects using mediation analysis",
+      "venue": "BMJ",
+      "year": 2023,
+      "url": "https://www.bmj.com/content/382/bmj-2022-071757",
+      "scope": "Methodological discussion of controlled direct effects read. Used only for standard causal-mediation terminology and intervention-validity cautions."
+    }
+  ],
+  "internal_prior_art": [
+    "R74 public shutdown-study audit",
+    "R84 token continuation identifiability and VCB",
+    "R86 consequence-belief gating",
+    "R89 valence transport limits",
+    "R95 learned bearer-bound prediction"
+  ],
+  "novelty_status": "Static coefficient nonidentification was already established in R84. R96 adds a project-specific causal-path blocking decomposition after R95, but uses standard mediation and linear-choice algebra; no historical-first claim.",
+  "third_party_fulltexts_uploaded": false
+}

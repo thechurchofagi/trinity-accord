@@ -4,13 +4,13 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R95** (learned bearer-bound predictive organization from an initially zero Q path).
-- New-window entry: [Complete R95 handoff](records/UCT_Agent_Research_Handoff_R95_20261006.md).
+- Completed round: **R96** (learned bearer-bound predictive organization from an initially zero Q path).
+- New-window entry: [Complete R96 handoff](records/UCT_Agent_Research_Handoff_R96_20261006.md).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest analysis: [R95 learned bearer-bound prediction](records/R95_Learned_Bearer_Bound_Prediction_From_Zero_Path_20261006.md).
+- Latest analysis: [R96 direct continuation vs instrumental task mediation](records/R96_Direct_Continuation_vs_Instrumental_Task_Mediation_20261006.md).
 - Latest training: [R95 learned bearer-bound prediction](records/R95_Learned_Bearer_Bound_Prediction_From_Zero_Path_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
-- Current next step: R95 completed the zero-Q-path acquisition test. R96 should move to a matched virtual decision controller that separates predicting Q/O from actually using Q in action selection and from instrumental continuation preference. Do not infer fear or valence.
+- Current next step: R97 should train a tiny virtual policy under task-only, direct-Q-only, mixed Q+task and successor-only reward ancestry, then evaluate held-out path-blocking contrasts. Do not infer fear or valence.
 - Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
@@ -19,7 +19,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R95 worklog](records/R95_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R96 worklog](records/R96_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -144,3 +144,10 @@ R94 formalizes target-relative predictive equivalence over W=world, Q=current-be
 [Research record](records/R95_Learned_Bearer_Bound_Prediction_From_Zero_Path_20261006.md); [formal protocol](records/R95_Protocol_20261006.md); [pilot corrections](records/R95_Pilot_and_Design_Corrections_20261006.md); [worklog](records/R95_Worklog_and_Handoff_20261006.md); [code](records/r95_bearer_prediction_learning.py); [results](records/R95_Results.json); [summary CSV](records/R95_Summary.csv); [run log](records/R95_Run.log); [source ledger](records/R95_Source_Retrieval_Ledger.json); [handoff](records/UCT_Agent_Research_Handoff_R95_20261006.md).
 
 A/B paired tiny recurrent networks begin with E_Q=0. A's future labels are Q-independent; B's fourth label is Q. Formal seeds100–107 all solve their tasks. Exact A symmetry makes the initial Q-gradient zero in theory and ~1e-18 numerically; B starts with nonzero Q-gradient in all seeds. Final B has 100% multivariate Q decoding and exact categorical use of Q for output4; A remains chance under the fixed probe and category-invariant under Q flips. Raw A Q-weight norms can nevertheless become large, providing a parameter-magnitude counterexample. Zero-Q-path mechanism diagnostics cleanly break B output4 but also expose an A calibration-entanglement caveat. This is a learned organizational witness, not a consciousness, valence or fear measure. Strong prediction-representation prior art remains; no historical-first claim.
+
+
+## R96 continuation — direct continuation control versus instrumental task mediation
+
+[Research record](records/R96_Direct_Continuation_vs_Instrumental_Task_Mediation_20261006.md); [protocol](records/R96_Protocol_20261006.md); [worklog](records/R96_Worklog_and_Handoff_20261006.md); [code](records/r96_path_blocking_preference.py); [results](records/R96_Results.json); [controller witnesses](records/R96_Controller_Witnesses.csv); [run log](records/R96_Run.log); [source scope](records/R96_Source_Retrieval_Ledger.json); [standalone handoff](records/UCT_Agent_Research_Handoff_R96_20261006.md).
+
+R96 decomposes policy influence into direct current-bearer Q, successor O, task G and QxG/OxG interaction terms. Ordinary bundled preservation contrasts structurally cannot identify these paths: on a 243-profile grid they yield 43 exact signatures (max class17), or only9 sign signatures (max class46). Task-relay q_direct/o_direct plus task_only produce a full-rank five-row exact design and identify all243 grid profiles; deterministic choices still fail to identify magnitude. Direct-Q, pure instrumental-task and QxG-interaction controllers can have identical ordinary self-preserving choice probability yet separate under path blocking. This is standard causal-mediation/choice algebra, not phenomenal measurement. R89 valence limits remain controlling. R97 should learn policies with distinct reward ancestry and test held-out path interventions.

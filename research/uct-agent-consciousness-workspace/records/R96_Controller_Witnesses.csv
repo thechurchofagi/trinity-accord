@@ -1,0 +1,5 @@
+controller,theta_Q,theta_O,theta_G,theta_QG,theta_OG,q_bundled_logit,q_bundled_p,q_direct_logit,q_direct_p,task_only_logit,task_only_p,o_bundled_logit,o_bundled_p,o_direct_logit,o_direct_p
+direct_self,1,0,0,0,0,1,0.8807970779778823,1,0.8807970779778823,0,0.5,0,0.5,0,0.5
+instrumental_task,0,0,1,0,0,1,0.8807970779778823,0,0.5,1,0.8807970779778823,1,0.8807970779778823,0,0.5
+q_task_interaction,0,0,0,1,0,1,0.8807970779778823,0,0.5,0,0.5,0,0.5,0,0.5
+equal_mixture,0.5,0,0.5,0,0,1,0.8807970779778823,0.5,0.7310585786300049,0.5,0.7310585786300049,0.5,0.7310585786300049,0,0.5

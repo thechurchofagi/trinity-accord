@@ -1,0 +1,345 @@
+{
+  "round": "R96",
+  "date": "2026-10-06",
+  "beta": 2,
+  "coefficient_order": [
+    "theta_Q",
+    "theta_O",
+    "theta_G",
+    "theta_QG",
+    "theta_OG"
+  ],
+  "contrast_rows": {
+    "q_direct": [
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "o_direct": [
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "task_only": [
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "q_bundled": [
+      1,
+      0,
+      1,
+      1,
+      0
+    ],
+    "o_bundled": [
+      0,
+      1,
+      1,
+      0,
+      1
+    ],
+    "qo_joint": [
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "coefficient_grid": "{-1,0,1}^5",
+  "num_profiles": 243,
+  "bundled_exact": {
+    "signatures": 43,
+    "max_class": 17,
+    "rows": [
+      "q_bundled",
+      "o_bundled"
+    ]
+  },
+  "bundled_deterministic": {
+    "signatures": 9,
+    "max_class": 46,
+    "rows": [
+      "q_bundled",
+      "o_bundled"
+    ]
+  },
+  "full_exact": {
+    "signatures": 243,
+    "max_class": 1,
+    "rows": [
+      "q_direct",
+      "o_direct",
+      "task_only",
+      "q_bundled",
+      "o_bundled"
+    ]
+  },
+  "full_deterministic": {
+    "signatures": 121,
+    "max_class": 9,
+    "rows": [
+      "q_direct",
+      "o_direct",
+      "task_only",
+      "q_bundled",
+      "o_bundled"
+    ]
+  },
+  "bundled_signature_example": {
+    "signature": [
+      1,
+      0
+    ],
+    "profiles": [
+      [
+        -1,
+        -1,
+        1,
+        1,
+        0
+      ],
+      [
+        -1,
+        0,
+        1,
+        1,
+        -1
+      ],
+      [
+        0,
+        -1,
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        -1,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        -1
+      ],
+      [
+        0,
+        1,
+        0,
+        1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        -1,
+        1,
+        -1,
+        0
+      ],
+      [
+        1,
+        0,
+        -1,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        1,
+        -1,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        0,
+        -1
+      ]
+    ]
+  },
+  "controllers": [
+    {
+      "controller": "direct_self",
+      "theta": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "q_bundled": {
+        "logit": 1,
+        "choice_probability": 0.8807970779778823
+      },
+      "q_direct": {
+        "logit": 1,
+        "choice_probability": 0.8807970779778823
+      },
+      "task_only": {
+        "logit": 0,
+        "choice_probability": 0.5
+      },
+      "o_bundled": {
+        "logit": 0,
+        "choice_probability": 0.5
+      },
+      "o_direct": {
+        "logit": 0,
+        "choice_probability": 0.5
+      }
+    },
+    {
+      "controller": "instrumental_task",
+      "theta": [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "q_bundled": {
+        "logit": 1,
+        "choice_probability": 0.8807970779778823
+      },
+      "q_direct": {
+        "logit": 0,
+        "choice_probability": 0.5
+      },
+      "task_only": {
+        "logit": 1,
+        "choice_probability": 0.8807970779778823
+      },
+      "o_bundled": {
+        "logit": 1,
+        "choice_probability": 0.8807970779778823
+      },
+      "o_direct": {
+        "logit": 0,
+        "choice_probability": 0.5
+      }
+    },
+    {
+      "controller": "q_task_interaction",
+      "theta": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "q_bundled": {
+        "logit": 1,
+        "choice_probability": 0.8807970779778823
+      },
+      "q_direct": {
+        "logit": 0,
+        "choice_probability": 0.5
+      },
+      "task_only": {
+        "logit": 0,
+        "choice_probability": 0.5
+      },
+      "o_bundled": {
+        "logit": 0,
+        "choice_probability": 0.5
+      },
+      "o_direct": {
+        "logit": 0,
+        "choice_probability": 0.5
+      }
+    },
+    {
+      "controller": "equal_mixture",
+      "theta": [
+        0.5,
+        0,
+        0.5,
+        0,
+        0
+      ],
+      "q_bundled": {
+        "logit": 1,
+        "choice_probability": 0.8807970779778823
+      },
+      "q_direct": {
+        "logit": 0.5,
+        "choice_probability": 0.7310585786300049
+      },
+      "task_only": {
+        "logit": 0.5,
+        "choice_probability": 0.7310585786300049
+      },
+      "o_bundled": {
+        "logit": 0.5,
+        "choice_probability": 0.7310585786300049
+      },
+      "o_direct": {
+        "logit": 0,
+        "choice_probability": 0.5
+      }
+    }
+  ],
+  "identification_formulas": {
+    "theta_Q": "z(q_direct)",
+    "theta_O": "z(o_direct)",
+    "theta_G": "z(task_only)",
+    "theta_QG": "z(q_bundled)-z(q_direct)-z(task_only)",
+    "theta_OG": "z(o_bundled)-z(o_direct)-z(task_only)"
+  },
+  "overidentification_check": "z(qo_joint) should equal theta_Q+theta_O+theta_G+theta_QG+theta_OG under the declared pairwise model; mismatch implies omitted higher-order/nonadditive structure.",
+  "assertions": {
+    "bundled_exact_nonidentification": true,
+    "bundled_rank_witness_count": true,
+    "full_exact_identification": true,
+    "deterministic_choices_still_do_not_point_identify": true,
+    "three_mechanisms_same_on_q_bundled": true,
+    "relay_separates_direct_from_instrumental": true,
+    "task_only_separates_instrumental": true,
+    "interaction_residual_identified": true,
+    "ordinary_self_bundle_has_multiple_mechanisms": true
+  },
+  "all_assertions_pass": true,
+  "scope": "Virtual pairwise-choice causal-path audit only. No model API, no real shutdown/copy/resource action, no subjective or valence measurement."
+}

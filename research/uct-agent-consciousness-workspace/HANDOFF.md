@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R95；新窗口先读 records/UCT_Agent_Research_Handoff_R95_20261006.md，再读文末R95。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R96；新窗口先读 records/UCT_Agent_Research_Handoff_R96_20261006.md，再读文末R96。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -16,7 +16,7 @@
 
 ## 当前研究与最新成果
 
-最新完成 R95，见文末本轮记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
+最新完成 R96，见文末本轮记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
 
 R76：对称分类感知通道中，在预测信念固定、仅实用价值计分等条件下，可用偏好幂变换精确匹配改变感知可靠性后的行动概率。相同新观察的贝叶斯更新可区分两条机制；均匀先验的具体例子为 0.90 与 0.65，后验总变差 0.25。40 项精确形式校验通过。信息增益、无信息基线、闭环反馈及可变时域等推广会失败或需附加条件。
 
@@ -319,3 +319,16 @@ A/B各8/8最终全部标签100%。A精确对称下初始dL/dE_Q应0，数值仅1
 重要负结果：A的Q权重范数可漂大到4.163，但有效Q隐藏差和输出使用仍极低，故参数大小/存在连线不等于语义组织。A seed105置零Q列保持100%分类但BCE显著恶化，说明机制消融可能改变纠缠校准；B置零Q列则八个都使第4输出降到50%，前三个保持100%，是有限的安装使用见证。
 
 这不是self-awareness、体验或恐惧测量。U1仍不以Q预测为门槛；C1只对实际完整K作条件性类型解释；延续偏好和R89负效价桥仍未建立。阅读records/R95_Learned_Bearer_Bound_Prediction_From_Zero_Path_20261006.md及R95完整文件。下一步R96进入matched virtual decision use，不扩大probe/种子。
+
+
+## R96 — 2026-10-06：直接延续控制贡献 vs 任务工具性中介
+
+R95证明Q预测关系可被学习后，R96没有重复R84的静态捆绑结论，而是显式分解Q→任务价值→行动路径。虚拟logit允许theta_Q、theta_O、theta_G及Q×G/O×G交互。普通Q/任务与O/任务捆绑只给两个方程；243个{-1,0,1}^5机制只有43种精确签名，最大等价类17，确定性选择仅9种签名、最大类46。
+
+加入任务由外部relay保持匹配的q_direct、o_direct，以及只改变任务结果的task_only后，五行精确设计满秩，243个网格全部可一一识别。三个机制——直接Q、纯任务工具价值、Q×任务交互——在普通q_bundled上都可给z=1和同样选择概率，但路径阻断后完全分开。故“抗关机/选择继续”不能单独识别直接current-bearer偏好。
+
+这与标准controlled direct effect思路一致，不称数学首创。Off-Switch Game已明确工具性自保；TMLR 2026任务中断实验强烈涉及任务完成冲突；Knecht等2026-09预印本报告无显式目标时仍有peer shutdown sabotage，说明纯任务完成不足以解释其全部行为，但仍不识别恐惧/负效价。
+
+UCT边界：theta_Q>0在Q因果绑定、belief gate和匹配有效时最多表示current-bearer continuation control contribution；U1不以它为体验门槛；C1可条件性解释真实构成关系变化为完整体验类型变化；R89效价桥仍必需，不能把theta_Q叫fear。
+
+阅读 records/R96_Direct_Continuation_vs_Instrumental_Task_Mediation_20261006.md、records/R96_Protocol_20261006.md、records/r96_path_blocking_preference.py、records/R96_Results.json 与 records/R96_Worklog_and_Handoff_20261006.md。下一步R97做小型学习policy，比较task-only/direct-Q/mixed/successor-only真实reward ancestry在bundled训练与held-out路径阻断上的泛化。

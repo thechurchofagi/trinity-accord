@@ -1,0 +1,15 @@
+R96 exact path-blocking audit
+Date: 2026-10-06
+Coefficient grid: {-1,0,1}^5 = 243 profiles
+Bundled exact: 43 signatures; largest equivalence class 17
+Bundled deterministic: 9 signatures; largest class 46
+Full five-row exact: 243 signatures; largest class 1
+Full five-row deterministic: 121 signatures; largest class 9
+direct_self q_bundled: z=1, p=0.8807970779778823
+instrumental_task q_bundled: z=1, p=0.8807970779778823
+q_task_interaction q_bundled: z=1, p=0.8807970779778823
+q_direct: direct_self z=1; instrumental_task z=0; interaction z=0
+task_only: direct_self z=0; instrumental_task z=1; interaction z=0
+All assertions: PASS
+Execution failures: none
+Scope: virtual controller/path intervention only; no model API, no real shutdown/copy/resource action, no subjective or valence measurement.
