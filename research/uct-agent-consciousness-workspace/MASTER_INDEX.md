@@ -4,10 +4,11 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R90** (rodent source-anchor family, interventional-rank lower bound and exact recurrent microcontroller stress test; no subjective measurement).
+- Completed round: **R91** (nonlinear encoding counterexamples, R90 scope correction and conditional local bottleneck criterion; no subjective measurement).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest formal/methodological analysis: [R90 rodent anchor, interventional rank and microcontroller](records/R90_Rodent_Anchor_Interventional_Rank_and_Microcontroller_20261006.md).
-- Current next-test protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md).
+- Latest formal/methodological analysis: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
+- Current next step: freeze a two-variable delayed-retention learning task as specified by R91; the R90 six-axis-emergence endpoint is withdrawn.
+- Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
 - Previous continuation analysis: [R84 token continuation, identifiability and fear bridge](records/R84_Token_Continuation_Identifiability_and_Fear_Bridge_20261005.md).
@@ -15,7 +16,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R90 worklog](records/R90_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R91 worklog](records/R91_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -102,3 +103,11 @@ R87 audit correction: R86's abstract rank statements remain exact, but its natur
 ## R90 continuation
 
 [Rodent anchor, interventional rank and recurrent microcontroller](records/R90_Rodent_Anchor_Interventional_Rank_and_Microcontroller_20261006.md); [frozen protocol](records/R90_Rodent_Anchor_and_Microcontroller_Protocol_Frozen_20261006.md); [worklog](records/R90_Worklog_and_Handoff_20261006.md); [code](records/r90_anchor_transport_stress_test.py); [exact JSON](records/R90_Anchor_Transport_Stress_Results.json); [scenario audit](records/R90_Anchor_Transport_Scenario_Audit.csv); [run log](records/R90_Anchor_Transport_Stress_Run.log); [source ledger](records/R90_Source_Retrieval_Ledger.json); [complete package](records/R90_Research_Package_20261006.zip). Primary rat taste-reactivity/accumbens studies motivate a multi-relation source family rather than one reward scalar. Two one-state bundled recurrent controllers match the visible signed-anchor projection but pass only 2/10 and 3/10 full scenarios and have exact response rank 2. A five-state factorized controller passes 10/10 and has rank 6. Exact mapped response requires target rank at least source rank; tied duplication to 100 copies leaves the bundled rank unchanged. This is a necessary finite organizational exclusion and a direct parameter-redundancy result, not an experience magnitude, source phenomenology proof, full `AIVT_H`, current-system verdict or major historical-first claim.
+
+## R91 continuation and correction to R90
+
+[Nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md); [audit protocol](records/R91_Audit_Protocol_20261006.md); [worklog](records/R91_Worklog_and_Handoff_20261006.md); [code](records/r91_nonlinear_rank_audit.py); [full results](records/R91_Nonlinear_Rank_Results.json); [all 3,645 reset checks](records/R91_Encoded_Reset_Checks.csv); [run log](records/R91_Run.log); [source scope](records/R91_Source_Retrieval_Ledger.json); [file hashes](records/R91_SHA256SUMS.txt).
+
+A 243-valued scalar register preserves five ternary coordinates and all declared resets, matching all ten R90 scenarios after nonlinear decoding. Its raw register-plus-report response rank is 2 and its decoded rank is 6. A smooth scalar curve has finite secant rank 6 but tangent rank 1. Finite response rank therefore cannot be read as nonlinear latent dimension, physical component count or experiential dimension. R90's rank-six reference was stipulated, not measured in rodents; its duplication loop assigned rather than recomputed ranks. R91 actually constructs repeated-column matrices for 1/2/10/100 copies and confirms rank 2.
+
+The replacement is a conditional local Jacobian bottleneck bound with explicit common-context, smoothness and no-bypass assumptions, plus a derivative-error/singular-value criterion. Exact rank can change discontinuously along a continuous parameter path while sensitivity varies continuously. This is a scope correction and standard-mathematics application, not a major originality claim, new training or phenomenal measurement. It supersedes broad R90 rank interpretations and the proposed six-axis-emergence training endpoint. Next first freeze a two-variable delayed-retention task and matched local derivative analysis; no preassigned affect labels. C1 remains conditional on actual valid tokens and a common complete K; report access is not an existence requirement.

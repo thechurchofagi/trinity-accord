@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "tests": {
+    "all_243_states_decode": true,
+    "all_3645_local_reset_conjugacies": true,
+    "all_ten_R90_scenarios_match_after_decoding": true,
+    "nonlinear_readout_changes_finite_response_rank": true,
+    "smooth_scalar_has_rank_six_secants_but_rank_one_tangent": true,
+    "materialized_repeated_columns_keep_rank_two": true,
+    "continuous_path_has_discontinuous_rank": true
+  },
+  "ranks": {
+    "encoded_register_only": 1,
+    "encoded_register_plus_report": 2,
+    "decoded_signature": 6
+  },
+  "curve": {
+    "finite_secant": 6,
+    "derivative_at_two": 1
+  },
+  "resets": 3645,
+  "replicas": [
+    {
+      "copies": 1,
+      "shape": [
+        6,
+        18
+      ],
+      "calculated_rank": 2
+    },
+    {
+      "copies": 2,
+      "shape": [
+        6,
+        36
+      ],
+      "calculated_rank": 2
+    },
+    {
+      "copies": 10,
+      "shape": [
+        6,
+        180
+      ],
+      "calculated_rank": 2
+    },
+    {
+      "copies": 100,
+      "shape": [
+        6,
+        1800
+      ],
+      "calculated_rank": 2
+    }
+  ]
+}

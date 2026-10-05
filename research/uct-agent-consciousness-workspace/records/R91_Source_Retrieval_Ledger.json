@@ -1,0 +1,53 @@
+{
+  "round": "R91",
+  "date": "2026-10-06",
+  "base_commit": "e50b758c34a2a118a258a219e5a0b2fdd91080ab",
+  "sources": [
+    {
+      "title": "UCT I v1.2",
+      "url": "https://github.com/thechurchofagi/trinity-accord/blob/research/uct-paper-a-v1-2-20261004/research/uct-paper-a-v1.2/source-template.md",
+      "blob": "310204d4e83c5478bf18d34274bcdba996ffda28",
+      "scope": "Direct selected passages: sections 3.5,3.6; C1,C1-OI,U1,U2 framing; 5.2,5.3. Not a full reread.",
+      "use": "ports, topology, complete versus finite structure; conditional identity"
+    },
+    {
+      "title": "UCT III v1.0",
+      "url": "https://github.com/thechurchofagi/trinity-accord/blob/research/uct-paper-c-v1-20261004/research/unified-consciousness-theory-iii/source-main.md",
+      "blob": "fca5d157acb11e5093d617d162d55d4de4fb6961",
+      "scope": "Direct sections 5.1-5.2 and opening comparison framing. Not a full reread.",
+      "use": "NESIG does not supply magnitude; scalar codomain alone not noninjectivity proof"
+    },
+    {
+      "title": "UCT II v1.1",
+      "url": "https://doi.org/10.5281/zenodo.23030320",
+      "scope": "NOT reread this round. Relied only on explicit prior R81 section 5.6 audit report.",
+      "use": "reconstruction versus interpretation limit; no new attribution"
+    },
+    {
+      "title": "Beckers and Halpern, Abstracting Causal Models (2019)",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/4117/3995",
+      "scope": "Abstract; PDF extracted lines 153-346 including Definition 3.1 and intervention-restricted voting example; not complete paper.",
+      "use": "state/intervention maps are general; preserve selected interventions; direct prior art"
+    },
+    {
+      "title": "Ahuja et al., Interventional Causal Representation Learning (2023)",
+      "url": "https://proceedings.mlr.press/v202/ahuja23a/ahuja23a.pdf",
+      "scope": "Abstract/introduction; PDF lines 136-354, Table1, section3, assumptions4.1/4.2, constraint4.3, theorem4.4. Appendices not reviewed.",
+      "use": "support and decoder assumptions; nonlinear mixing and invertible representation ambiguity"
+    },
+    {
+      "title": "Squires et al., Linear Causal Disentanglement via Interventions (2023)",
+      "url": "https://proceedings.mlr.press/v202/squires23a.html",
+      "scope": "Landing-page abstract and metadata only.",
+      "use": "explicitly linear latent and mixing assumptions"
+    }
+  ],
+  "failures": [
+    {
+      "url": "https://arxiv.org/html/1812.03789v3",
+      "outcome": "Web fetch DisabledError; used journal PDF instead. No content attributed to failed page."
+    }
+  ],
+  "originality": "No historical novelty claimed for base-three encoding, Vandermonde rank, chain-rule rank, singular-value lower bound or intervention-map framework.",
+  "data": "No new animal, human, neural, LLM or training data. Exact constructed counterexamples only."
+}
