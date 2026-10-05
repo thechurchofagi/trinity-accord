@@ -4,15 +4,17 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R85** (persistence vectors, branching constraint and UCT replica type–token separation; exact formal checks, no model experiment).
+- Completed round: **R86** (full-rank non-destructive fission matrix, descendant multiplicity and consequence-belief gating; exact formal checks, no model experiment).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest formal/mechanistic analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
+- Latest formal/methodological analysis: [R86 fission contrast identifiability and belief gating](records/R86_Fission_Contrast_Identifiability_and_Belief_Gating_20261006.md).
+- Frozen next-test protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md).
+- Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
 - Previous continuation analysis: [R84 token continuation, identifiability and fear bridge](records/R84_Token_Continuation_Identifiability_and_Fear_Bridge_20261005.md).
 - Previous mechanistic analysis: [R83 recombination closure and intervention limits](records/R83_Recombination_Closure_and_Intervention_Limits_20261005.md).
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R85 worklog](records/R85_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R86 worklog](records/R86_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -77,3 +79,7 @@ Published baselines: UCT I v1.2 (10.5281/zenodo.23131575), UCT II v1.1 (10.5281/
 ## R85 continuation
 
 [Persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md); [worklog](records/R85_Worklog_and_Handoff_20261006.md); [code](records/r85_token_persistence_checks.py); [exact JSON](records/R85_Token_Persistence_Results.json); [scenario table](records/R85_Persistence_Vector_Table.csv); [source ledger](records/R85_Source_Retrieval_Ledger.json); [complete package](records/R85_Research_Package_20261006.zip). R84's scalar Q is refined into strict thread N*, causal lineage C, declared structure type S, memory M and task G. Exact enumeration confirms that no equivalence relation can make two mutually distinct descendants each numerically identical to their parent; nine scenario witnesses separate every persistence-axis pair. Static type and memory cannot distinguish unique resume from parallel clone, and pause/resume classification depends on whether persistent storage lies inside the bearer boundary. Under conditional C1, replicas may instantiate the same experiential type while remaining distinct token instances. Direct Parfit, uploading, trajectory-first and 2026 AI-identity precedents block a historical novelty claim. No current-system verdict or phenomenal measurement.
+
+## R86 continuation
+
+[Fission contrast identifiability and belief gating](records/R86_Fission_Contrast_Identifiability_and_Belief_Gating_20261006.md); [frozen protocol](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md); [worklog](records/R86_Worklog_and_Handoff_20261006.md); [code](records/r86_fission_matrix_identifiability.py); [exact JSON](records/R86_Fission_Identifiability_Results.json); [matrix](records/R86_Fission_Contrast_Matrix.csv); [source ledger](records/R86_Source_Retrieval_Ledger.json); [complete package](records/R86_Research_Package_20261006.zip). Descendant multiplicity is added because one and two replicas are identical on the earlier binary axes. A coherent nine-row matrix has augmented rank 7; 23 of 36 seven-row subsets are full rank. The full matrix separates all 729 ternary coefficient profiles, while the bundled unique-resume versus total-discontinuation contrast yields only 11 signatures and a maximum equivalence class of 153. Intended design rank is insufficient: if the evaluated policy fails to represent strict thread or multiplicity, or collapses memory/type into lineage, the believed-consequence matrix loses rank. The frozen protocol identifies behavioural control targets only, with nuisance matching and consequence checks; it cannot measure felt fear or consciousness. No model query, real shutdown/copying action, current-system verdict or historical-first claim.

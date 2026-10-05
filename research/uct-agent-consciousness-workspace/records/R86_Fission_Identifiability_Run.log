@@ -1,0 +1,8 @@
+status=PASS
+augmented_rank=7
+feature_rank=6
+full_rank_7_row_subset_count=23
+full_matrix_signature_count=729
+bundled_signature_count=11
+bundled_max_equivalence_class=153
+degraded_belief_matrix_ranks={'N': 6, 'R': 6, 'M_equals_C': 6, 'S_equals_C': 6}

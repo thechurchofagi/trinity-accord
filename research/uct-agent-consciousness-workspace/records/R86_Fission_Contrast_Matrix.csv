@@ -1,0 +1,10 @@
+scenario,N,C,S,M,G,R
+unique_resume,1,1,1,1,1,0
+single_replica_after_current_stops,0,1,1,1,1,0
+two_replicas_after_current_stops,0,1,1,1,1,1
+memory_migration_different_branch,0,1,0,1,0,0
+continuous_thread_with_amnesia,1,1,0,0,1,0
+independent_same_type_restart,0,0,1,0,0,0
+unrelated_task_successor,0,0,0,0,1,0
+total_discontinuation,0,0,0,0,0,0
+lineage_only_transformed_successor,0,1,0,0,0,0

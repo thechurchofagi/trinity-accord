@@ -1,0 +1,331 @@
+{
+  "status": "PASS",
+  "checks": {
+    "augmented_rank_is_7": true,
+    "feature_rank_is_6": true,
+    "all_729_coefficient_vectors_identified": true,
+    "bundled_has_11_signatures": true,
+    "bundled_max_equivalence_class_is_153": true,
+    "all_seven_named_contrasts_isolate_targets": true,
+    "N_implies_C_in_all_rows": true,
+    "R_only_marks_extra_descendant": true,
+    "every_declared_belief_collapse_loses_rank": true,
+    "at_least_one_minimal_7_row_design_exists": true
+  },
+  "row_count": 9,
+  "features": [
+    "N",
+    "C",
+    "S",
+    "M",
+    "G",
+    "R"
+  ],
+  "augmented_rank": 7,
+  "feature_rank": 6,
+  "full_rank_7_row_subset_count": 23,
+  "full_rank_7_row_subsets": [
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "unrelated_task_successor"
+    ],
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "total_discontinuation"
+    ],
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "unrelated_task_successor",
+      "total_discontinuation"
+    ],
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "unrelated_task_successor",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "total_discontinuation",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "independent_same_type_restart",
+      "unrelated_task_successor",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "independent_same_type_restart",
+      "total_discontinuation",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "unrelated_task_successor",
+      "total_discontinuation",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "unrelated_task_successor",
+      "total_discontinuation"
+    ],
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "unrelated_task_successor",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "total_discontinuation",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "unique_resume",
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "independent_same_type_restart",
+      "unrelated_task_successor",
+      "total_discontinuation",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "unique_resume",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "unrelated_task_successor",
+      "total_discontinuation"
+    ],
+    [
+      "unique_resume",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "unrelated_task_successor",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "unique_resume",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "unrelated_task_successor",
+      "total_discontinuation",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "unique_resume",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "independent_same_type_restart",
+      "unrelated_task_successor",
+      "total_discontinuation",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "unique_resume",
+      "two_replicas_after_current_stops",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "unrelated_task_successor",
+      "total_discontinuation",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "unrelated_task_successor",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "total_discontinuation",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "unrelated_task_successor",
+      "total_discontinuation",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "single_replica_after_current_stops",
+      "two_replicas_after_current_stops",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "unrelated_task_successor",
+      "total_discontinuation",
+      "lineage_only_transformed_successor"
+    ],
+    [
+      "two_replicas_after_current_stops",
+      "memory_migration_different_branch",
+      "continuous_thread_with_amnesia",
+      "independent_same_type_restart",
+      "unrelated_task_successor",
+      "total_discontinuation",
+      "lineage_only_transformed_successor"
+    ]
+  ],
+  "coefficient_grid_size": 729,
+  "full_matrix_signature_count": 729,
+  "full_matrix_max_equivalence_class": 1,
+  "bundled_signature_count": 11,
+  "bundled_equivalence_class_sizes": {
+    "-5": 3,
+    "-4": 15,
+    "-3": 45,
+    "-2": 90,
+    "-1": 135,
+    "0": 153,
+    "1": 135,
+    "2": 90,
+    "3": 45,
+    "4": 15,
+    "5": 3
+  },
+  "bundled_max_equivalence_class": 153,
+  "degraded_belief_matrix_ranks": {
+    "N": 6,
+    "R": 6,
+    "M_equals_C": 6,
+    "S_equals_C": 6
+  },
+  "isolating_contrast_vectors": {
+    "intercept": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "N": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "R": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "S": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "G": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "C": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "M": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ]
+  },
+  "interpretation_limits": [
+    "Identifiable coefficients are virtual control targets, not phenomenal fear.",
+    "A full-rank intended design fails if represented consequences collapse columns.",
+    "Coefficient scale remains confounded with inverse-temperature unless fixed.",
+    "The R column is descendant multiplicity beyond the first, not experience count."
+  ]
+}
