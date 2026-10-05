@@ -4,10 +4,10 @@ Updated 2026-10-05. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R78**.
+- Completed round: **R79**.
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest derivation and training: [R78 fixed-size learning](records/R78_Learned_Organization_at_Fixed_Size_20261005.md).
-- Latest worklog: [R78 worklog](records/R78_Worklog_and_Handoff_20261005.md).
+- Latest derivation and checkpoint analysis: [R79 preservation and tradeoff](records/R79_Preservation_Tradeoff_and_Robust_Task_Order_20261005.md).
+- Latest worklog: [R79 worklog](records/R79_Worklog_and_Handoff_20261005.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -44,3 +44,7 @@ Published baselines: UCT I v1.2 (10.5281/zenodo.23131575), UCT II v1.1 (10.5281/
 ## R78 continuation
 
 [Fixed-size learned organization](records/R78_Learned_Organization_at_Fixed_Size_20261005.md); [frozen protocol](records/R78_Protocol_Frozen_20261005.md); [all runs and checkpoints](records/R78_Research_Package_20261005.zip); [results table](records/R78_Results_Table.csv). Actual tiny neural-network training: 2/8 complete successes and 6/8 incomplete solutions, all retained; 8 readout-only controls. Learned effective combination can coexist with weaker robust discrimination of input detail. Conditional organizational interpretation, no phenomenal measurement or large-model claim.
+
+## R79 continuation
+
+[Preservation, tradeoff and robust task order](records/R79_Preservation_Tradeoff_and_Robust_Task_Order_20261005.md); [worklog](records/R79_Worklog_and_Handoff_20261005.md); [code](records/r79_robust_task_order.py); [summary table](records/R79_Robust_Task_Order_Table.csv); [complete reproducible package](records/R79_Research_Package_20261005.zip). All 16 archived runs reanalysed across 112 joint threshold regimes; no new training. A 4-to-8 task-count increase can lose old tasks. Task-set preservation is a partition-refinement property at a declared uncertainty scope, not complete ontic or experiential enrichment. Return next to actual constituent relationships; do not substitute observer resolution for experience or ideal decoding for an installed computation.
