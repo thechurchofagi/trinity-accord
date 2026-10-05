@@ -1,0 +1,140 @@
+{
+  "status": "exploratory analytic follow-up chosen after the frozen training experiment; no rerun or new training",
+  "noise_model": "additive Euclidean perturbation of the two recorded tanh activations, bounded by epsilon; no physical or phenomenal calibration claimed",
+  "cases": [
+    {
+      "seed": 0,
+      "nearest_pair_indices": [
+        1,
+        0
+      ],
+      "nearest_pair_targets": [
+        0.0,
+        1.0
+      ],
+      "v_norm": 6.899042671984445,
+      "old_input_reconstruction_radius": 0.5639670176683731,
+      "new_input_obstruction_radius": 4.955728114837366e-06,
+      "new_target_margin_radius": -4.444555458035039e-06,
+      "coexistence_epsilon_interval": null
+    },
+    {
+      "seed": 1,
+      "nearest_pair_indices": [
+        1,
+        0
+      ],
+      "nearest_pair_targets": [
+        0.0,
+        1.0
+      ],
+      "v_norm": 6.88007300562364,
+      "old_input_reconstruction_radius": 0.7269204986013442,
+      "new_input_obstruction_radius": 4.472354101016433e-06,
+      "new_target_margin_radius": -0.00024377388131685264,
+      "coexistence_epsilon_interval": null
+    },
+    {
+      "seed": 2,
+      "nearest_pair_indices": [
+        2,
+        0
+      ],
+      "nearest_pair_targets": [
+        0.0,
+        1.0
+      ],
+      "v_norm": 6.9321076566275295,
+      "old_input_reconstruction_radius": 0.6036801663235114,
+      "new_input_obstruction_radius": 4.762619951574535e-06,
+      "new_target_margin_radius": -5.166590963170271e-06,
+      "coexistence_epsilon_interval": null
+    },
+    {
+      "seed": 3,
+      "nearest_pair_indices": [
+        2,
+        1
+      ],
+      "nearest_pair_targets": [
+        0.0,
+        0.0
+      ],
+      "v_norm": 11.692636199699562,
+      "old_input_reconstruction_radius": 0.49341002039500115,
+      "new_input_obstruction_radius": 0.0019799196648313546,
+      "new_target_margin_radius": 0.6961076968956215,
+      "coexistence_epsilon_interval": [
+        0.0019799196648313546,
+        0.49341002039500115
+      ]
+    },
+    {
+      "seed": 4,
+      "nearest_pair_indices": [
+        3,
+        2
+      ],
+      "nearest_pair_targets": [
+        1.0,
+        0.0
+      ],
+      "v_norm": 6.8757831082401974,
+      "old_input_reconstruction_radius": 0.711608587409936,
+      "new_input_obstruction_radius": 5.087957345552302e-06,
+      "new_target_margin_radius": -1.0006361469632176e-05,
+      "coexistence_epsilon_interval": null
+    },
+    {
+      "seed": 5,
+      "nearest_pair_indices": [
+        2,
+        0
+      ],
+      "nearest_pair_targets": [
+        0.0,
+        1.0
+      ],
+      "v_norm": 6.9347942513235425,
+      "old_input_reconstruction_radius": 0.8536548399878399,
+      "new_input_obstruction_radius": 4.738708930372433e-06,
+      "new_target_margin_radius": -9.881963320696518e-06,
+      "coexistence_epsilon_interval": null
+    },
+    {
+      "seed": 6,
+      "nearest_pair_indices": [
+        3,
+        0
+      ],
+      "nearest_pair_targets": [
+        1.0,
+        1.0
+      ],
+      "v_norm": 11.600788344566695,
+      "old_input_reconstruction_radius": 0.6818448514205121,
+      "new_input_obstruction_radius": 0.000936092597128696,
+      "new_target_margin_radius": 0.6860041153369616,
+      "coexistence_epsilon_interval": [
+        0.000936092597128696,
+        0.6818448514205121
+      ]
+    },
+    {
+      "seed": 7,
+      "nearest_pair_indices": [
+        3,
+        2
+      ],
+      "nearest_pair_targets": [
+        1.0,
+        0.0
+      ],
+      "v_norm": 6.824185813578858,
+      "old_input_reconstruction_radius": 0.7881406890482858,
+      "new_input_obstruction_radius": 3.9146212080726445e-06,
+      "new_target_margin_radius": -7.999898955978253e-06,
+      "coexistence_epsilon_interval": null
+    }
+  ]
+}
