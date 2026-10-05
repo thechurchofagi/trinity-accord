@@ -1,0 +1,14 @@
+{
+  "commit": "39beffa5ee14248bb0b94f71dface1074b919c40",
+  "workspace_tree": "9f0475a84643bb928e37a14fcc2ccb1f79760df9",
+  "files_verified": 62,
+  "method": "All local Git blob SHA-1 identities match the remote committed tree; migration manifest separately preserves SHA-256 for each original artifact.",
+  "mismatches": [],
+  "repository": "thechurchofagi/trinity-accord",
+  "branch": "uct-agent-consciousness-workspace",
+  "directory": "research/uct-agent-consciousness-workspace",
+  "migration_date": "2026-10-05",
+  "recurring_research_storage_instruction_updated": true,
+  "published_papers_modified": false,
+  "all_library_history_migrated": false
+}

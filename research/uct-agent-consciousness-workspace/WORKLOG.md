@@ -13,3 +13,9 @@ The locally edited old master is explicitly marked uncommitted/historical. The n
 Future workflow: fetch branch; read handoff and index; perform substantive work; save manuscript/code/results/failures/source scope; update index and handoff; commit; verify remote branch and file identities; then report. Concurrent updates must be reconciled without force-pushing. A failed commit is logged and reported as a failure rather than a successful save.
 
 This storage migration does not count as R77 or as a scientific result. The latest completed scientific work remains R76. The existing recurring research task should read this GitHub entry point first; its research scope and schedule remain unchanged.
+
+### Completion evidence
+
+Initial migration commit: `39beffa5ee14248bb0b94f71dface1074b919c40`. The remote research branch was created successfully. All 62 committed file blob identities matched the local staged bytes; the original-artifact SHA-256 manifest is retained separately. See `MIGRATION_VERIFICATION.json` for the checked commit and tree.
+
+The existing recurring UCT research task was updated successfully to read the latest GitHub handoff/index first and commit future outputs here. Its schedule, enabled state, and scientific constraints were preserved. No additional task was created. Historical Library failure receipts remain unchanged; current GitHub persistence resolves the available recent-artifact recovery gap.
