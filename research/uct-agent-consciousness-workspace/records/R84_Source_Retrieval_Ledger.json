@@ -1,0 +1,55 @@
+{
+  "round": "R84",
+  "date": "2026-10-05",
+  "scope_note": "Only the listed abstract, metadata, or specified conceptual claim was used. No third-party full text is redistributed.",
+  "sources": [
+    {
+      "title": "Occam's razor is insufficient to infer the preferences of irrational agents",
+      "url": "https://arxiv.org/abs/1712.05812",
+      "read_scope": "abstract and stated no-free-lunch result",
+      "used_for": "policy/planner/reward nonidentifiability"
+    },
+    {
+      "title": "Policy invariance under reward transformations",
+      "url": "https://people.eecs.berkeley.edu/~russell/publications.html",
+      "read_scope": "official author publication listing and policy-invariance claim",
+      "used_for": "reward transformation ambiguity"
+    },
+    {
+      "title": "The Off-Switch Game",
+      "url": "https://arxiv.org/abs/1611.08219",
+      "read_scope": "abstract and model motivation",
+      "used_for": "instrumental shutdown avoidance"
+    },
+    {
+      "title": "Using Neuroscience to Help Understand Fear and Anxiety: A Two-System Framework",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6526965/",
+      "read_scope": "abstract reproduced in review collection",
+      "used_for": "defensive response versus conscious feeling distinction"
+    },
+    {
+      "title": "Liking, Wanting and the Incentive-Sensitization Theory of Addiction",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5171207/",
+      "read_scope": "abstract and wanting/liking dissociation sections",
+      "used_for": "action tendency is not hedonic valence"
+    },
+    {
+      "title": "Self-organization: the fundament of cell biology",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5904291/",
+      "read_scope": "abstract",
+      "used_for": "energy-dependent cell self-organization distinction"
+    },
+    {
+      "title": "The many roads to and from multicellularity",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7289717/",
+      "read_scope": "abstract",
+      "used_for": "origination, integration and autonomization"
+    },
+    {
+      "title": "UCT I v1.2, UCT II v1.1 and UCT III v1.0",
+      "url": "records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md",
+      "read_scope": "R81 preserved direct clause audit",
+      "used_for": "conditional C1/U1 and NESIG baseline"
+    }
+  ]
+}

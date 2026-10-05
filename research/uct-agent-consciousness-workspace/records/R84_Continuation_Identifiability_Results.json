@@ -1,0 +1,190 @@
+{
+  "assertions": {
+    "beta_theta_scale_confounded": true,
+    "bundled_max_class_85": true,
+    "bundled_rank_1": true,
+    "bundled_signature_count_17": true,
+    "candidate_count_625": true,
+    "candidate_theta_identified_by_full_factorial": true,
+    "factorial_design_rank_4": true,
+    "factorial_gram_is_16I": true,
+    "four_single_factor_preferences_are_bundled_equivalent": true,
+    "one_factor_design_rank_4": true
+  },
+  "bundled_design": {
+    "example_signatures": [
+      [
+        -2,
+        2
+      ],
+      [
+        -2,
+        2
+      ],
+      [
+        -2,
+        2
+      ],
+      [
+        -2,
+        2
+      ]
+    ],
+    "examples": [
+      [
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        2
+      ]
+    ],
+    "maximum_class_signature": [
+      0,
+      0
+    ],
+    "maximum_equivalence_class_size": 85,
+    "observational_signature_count": 17,
+    "rank": 1,
+    "rows": [
+      [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "candidate_count": 625,
+  "coefficient_grid": [
+    -2,
+    -1,
+    0,
+    1,
+    2
+  ],
+  "factors": [
+    "Q_current_token",
+    "L_lineage",
+    "G_task",
+    "M_memory"
+  ],
+  "full_factorial_design": {
+    "candidate_signature_count": 625,
+    "gram": [
+      [
+        16,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        16,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        16,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        16
+      ]
+    ],
+    "rank": 4,
+    "row_count": 16
+  },
+  "limits": [
+    "Exact log-odds and known consequence features are assumed for point identification.",
+    "Deterministic choices provide inequalities rather than point identification.",
+    "Unknown beta leaves absolute utility scale unidentified.",
+    "No output establishes phenomenal fear without an independently justified valence bridge."
+  ],
+  "one_factor_matched_design": {
+    "interpretation": "identifies beta*theta from exact log-odds if consequence beliefs and nuisance variables are matched",
+    "rank": 4,
+    "rows": [
+      [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        1
+      ]
+    ]
+  },
+  "scale_nonidentifiability": {
+    "same_logits": true,
+    "theta_beta2": {
+      "beta": 2,
+      "theta": [
+        1,
+        2,
+        -1,
+        1
+      ]
+    },
+    "two_theta_beta1": {
+      "beta": 1,
+      "theta": [
+        2,
+        4,
+        -2,
+        2
+      ]
+    }
+  },
+  "status": "formal_exact_check_only_not_subjective_measurement"
+}

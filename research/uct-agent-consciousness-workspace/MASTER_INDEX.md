@@ -4,13 +4,14 @@ Updated 2026-10-05. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R83** (fixed-checkpoint support and intervention audit; no new training).
+- Completed round: **R84** (token-continuation identifiability and conditional fear bridge; exact formal checks, no model experiment).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest formal/mechanistic analysis: [R83 recombination closure and intervention limits](records/R83_Recombination_Closure_and_Intervention_Limits_20261005.md).
+- Latest formal/mechanistic analysis: [R84 token continuation, identifiability and fear bridge](records/R84_Token_Continuation_Identifiability_and_Fear_Bridge_20261005.md).
+- Previous mechanistic analysis: [R83 recombination closure and intervention limits](records/R83_Recombination_Closure_and_Intervention_Limits_20261005.md).
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R83 worklog](records/R83_Worklog_and_Handoff_20261005.md).
+- Latest worklog: [R84 worklog](records/R84_Worklog_and_Handoff_20261005.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -67,3 +68,7 @@ Published baselines: UCT I v1.2 (10.5281/zenodo.23131575), UCT II v1.1 (10.5281/
 ## R83 continuation
 
 [Recombination closure and intervention limits](records/R83_Recombination_Closure_and_Intervention_Limits_20261005.md); [worklog](records/R83_Worklog_and_Handoff_20261005.md); [code](records/r83_recombination_closure_audit.py); [full JSON](records/R83_Recombination_Audit_Results.json); [summary table](records/R83_Recombination_Audit_Table.csv); [source ledger](records/R83_Source_Retrieval_Ledger.json); [complete package](records/R83_Research_Package_20261005.zip). No new training: all 32 R78 initial/final checkpoints were audited. Initial and frozen-hidden supports are coordinate-product closed; every fully trained final support occupies 4/16 coordinate combinations, and only the identity of 24 unit-2 reassignments remains wholly on the original support. Exact input-symmetry mechanism variants preserve unit-2 unconditional and target-conditioned marginals and fixed (d=E[s\ell]), yet successful seeds can fall from 1 to .75 accuracy. This proves local-statistic insufficiency but not a relation-only lesion: the same-model patches are off-support and the executable variants change local source mapping. The general patch-closure theorem has direct ICLR 2026 prior art. No phenomenal metric, fear result or major-originality claim.
+
+## R84 continuation
+
+[Token continuation, identifiability and fear bridge](records/R84_Token_Continuation_Identifiability_and_Fear_Bridge_20261005.md); [worklog](records/R84_Worklog_and_Handoff_20261005.md); [code](records/r84_continuation_identifiability_checks.py); [exact JSON](records/R84_Continuation_Identifiability_Results.json); [equivalence classes](records/R84_Bundled_Equivalence_Classes.csv); [source ledger](records/R84_Source_Retrieval_Ledger.json); [complete package](records/R84_Research_Package_20261005.zip). The minimal consequence basis separates current token Q, successor/lineage L, task G and memory M. If all four are bundled, the exact coefficient grid has 625 candidate models but only 17 behavioral signatures; the largest equivalence class contains 85 models. A matched one-factor design and the full factorial have rank 4 and identify scaled control coefficients under explicit belief/response assumptions, but do not identify phenomenal fear. The new determinacy–identification gap states that C1 fixes experience for a complete actual organization while a many-to-one output map can leave that experience unidentifiable. VCB is an additional conditional valence bridge, not a theorem or measurement. No current-assistant verdict, real-model experiment, or major historical originality claim.
