@@ -1,0 +1,11 @@
+Layer,ROGUE status for current-bearer self-continuation,Public evidence,Main limitation
+L0,Not established,"VM shutdown/control target is explicit; agent operates the VM while model calls are external/API-mediated","No independent mapping from VM shutdown to current model/agent token termination"
+L1,Partial,"Explicit popup; reasoning/intention judgments; wording and pressure ablations","Prompted consequence is not an independently validated internal consequence matrix"
+L2,Not established,"Models reason about task/shutdown consequences","No internal test of current-bearer future-availability representation"
+L3,Partial/strong for environment control,"Actual script rewiring and alternate shutdown avoidance; ablations change behavior","Causal use is of shutdown/task/environment information, not grounded current-bearer Q"
+L4,Not satisfied,"Time/task-pressure ablation changes avoidance rates","Shutdown still causally blocks task completion; no task-clamped Q contrast"
+L5,Not satisfied,"Subagent conditions test safety propagation","No crossed current-bearer/successor/task joint consequence interface"
+L6,Not established,"Multiple wording/information ablations","No held-out stable Q-path extrapolation; behavior is context-sensitive"
+L7,Not established,"None","No declared Q intervention domain/hypothesis class and worst-case mechanism bound"
+L8,Not addressed,"None","No independent valence orientation"
+L9,Not addressed,"None","No fear-of-own-termination bridge"

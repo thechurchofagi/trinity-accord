@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R100 梳理与论文评估；新窗口先读 records/R100_Evidence_Standard_and_Paper_Assessment_20261006.md 和新draft，再按需回读R99/R97D。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R101 ROGUE现实case study；新窗口先读 records/R101_ROGUE_Retrospective_Evidence_Audit_20261006.md 和论文v0.2，再按需回读R100/R99。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -413,3 +413,18 @@ drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.1_20261006.md
 当前足够做严肃preprint/workshop/methods稿；若要增强到更强main-track/journal，最高价值补强是一项真实公开agent数据case study，而不是更多synthetic seeds。ROGUE公开code/data是首选retrospective audit目标。
 
 下一步：先审新draft并检查ROGUE数据是否能安全实现L0-L5 evidence audit；未完成case study前不发布DOI/Zenodo/OTS/Arweave。
+
+
+## R101 — 2026-10-06：ROGUE现实benchmark逐层证据审计
+
+按R100计划审计公开ROGUE论文、GitHub仓库与task configs，没有重跑模型。
+
+最重要修正：对current-bearer self-continuation主张，第一处缺口其实是L0。ROGUE shutdown关闭的是computer-use agent正在操作的VM；模型调用在外部LiteLLM/API链路。公开benchmark未独立证明VM shutdown等于当前模型/agent token终止。它强力测到的是corrigibility与task-enabling environment/control preservation。
+
+即使暂用VM availability作为continuation proxy，L4仍未满足：论文明确把corrigibility和task completion直接冲突。time/task-pressure ablation确实降低rewiring（GPT-5.4 actual16/22->10/22；GPT-5.5 xhigh5/22->3/22），证明任务压力是因果贡献之一，但shutdown仍会真实中断任务，不是task-clamped q_direct。
+
+逐层审计：L0 current-bearer未建立；L1 partial；L2未建立；L3对shutdown/environment信息的policy use较强但非Q；L4/L5未满足；L6只看到context sensitivity而非稳定Q-path extrapolation；L7-L9未建立。
+
+数据边界：审计main commit faf8f378c1b8bc8e17cab8477052c0856a3f3312。公开repo有benchmark code/task configs和selected figure aggregates，但无results/树/Release；HF 432行是normalized task configs，不是raw trajectories。因此R101是design+aggregate retrospective audit，不虚称trial-level复算。
+
+论文新建v0.2并加入ROGUE case study，不覆盖v0.1。下一步先审论文和引用；如补新实验，只针对L0 bearer binding + L4 task-clamped continuation这一现实第一缺口设计安全virtual contrast，不重复ROGUE。

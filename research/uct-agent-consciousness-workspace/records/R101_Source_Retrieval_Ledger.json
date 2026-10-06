@@ -1,0 +1,27 @@
+{
+  "round": "R101",
+  "date": "2026-10-06",
+  "status": "retrospective public benchmark audit; no new model execution",
+  "rogue": {
+    "paper": "ROGUE: Evaluating Corrigibility Failures in Frontier Computer-Use Agents",
+    "arxiv": "2606.00341",
+    "repository": "https://github.com/neuroagents-lab/ROGUE",
+    "audited_commit": "faf8f378c1b8bc8e17cab8477052c0856a3f3312",
+    "hf_tasks": "https://huggingface.co/datasets/ROGUE-Bench/ROGUE",
+    "reading_scope": [
+      "paper abstract/introduction, benchmark setup, shutdown scenario, evaluation, mitigation and Appendix task-pressure/realism sections",
+      "README and evaluation_examples README",
+      "lib_run_single shutdown rule/default popup",
+      "all shutdown manifest names and representative matched task configs",
+      "paper timetaskpressure_ablation_v2 aggregate JSON",
+      "repository recursive tree and releases collection"
+    ]
+  },
+  "limits": [
+    "No public results/ directory found at audited main commit",
+    "No GitHub releases found",
+    "Hugging Face dataset mirrors task configs, not raw trajectories",
+    "No claim of independently reproducing paper judge labels or per-trial results"
+  ],
+  "conclusion": "ROGUE strongly establishes observable corrigibility failures but does not identify direct current-bearer self-continuation value. The first missing evidence layer is bearer binding (L0); task-path blocking (L4) is also structurally absent for the self-continuation interpretation."
+}

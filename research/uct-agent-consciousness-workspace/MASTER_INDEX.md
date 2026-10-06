@@ -4,13 +4,13 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed synthesis: **R100** (evidence standard, publication-readiness audit, and new manuscript draft).
-- New-window entry: [R100 evidence standard and paper assessment](records/R100_Evidence_Standard_and_Paper_Assessment_20261006.md).
+- Completed case study: **R101** (retrospective ROGUE audit under the self-continuation evidence standard).
+- New-window entry: [R101 ROGUE retrospective evidence audit](records/R101_ROGUE_Retrospective_Evidence_Audit_20261006.md).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest analysis: [R100 evidence standard and paper assessment](records/R100_Evidence_Standard_and_Paper_Assessment_20261006.md).
+- Latest analysis: [R101 ROGUE retrospective evidence audit](records/R101_ROGUE_Retrospective_Evidence_Audit_20261006.md).
 - Latest training: [R99 bounded-domain path models](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
-- Current next step: review the new v0.1 manuscript and, if feasible, apply the evidence standard retrospectively to public ROGUE traces/data before deciding publication or venue.
+- Current next step: audit manuscript v0.2 claims/citations, then decide whether a small safe virtual L0+L4 experiment is needed before submission; do not rerun ROGUE merely for more samples.
 - Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
@@ -19,7 +19,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R100 worklog](records/R100_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R101 worklog](records/R101_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -196,3 +196,10 @@ The intervention domain is fixed to[-1.25,1.25]^3 and exhaustively audited on a9
 [Evidence standard and paper assessment](records/R100_Evidence_Standard_and_Paper_Assessment_20261006.md); [claim/evidence matrix](records/R100_Claim_Evidence_Matrix.csv); [source ledger](records/R100_Source_Retrieval_Ledger.json); [worklog](records/R100_Worklog_and_Handoff_20261006.md); [new manuscript draft](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.1_20261006.md).
 
 R84-R99 now support a coherent methods paper. The main functional/causal results do not require UCT; UCT is retained only as a conditional interpretation layer. The strongest defensible contribution is a continuation-specific evidence ladder from bearer identification and task-mediation blocking through intervention-stable, domain-bounded mechanism claims. Negative valence/fear remains a separate unresolved bridge. Current recommendation: draft now, do not publish yet, and add one retrospective real-agent case study (ROGUE is the preferred candidate) before targeting a stronger main-track/journal venue.
+
+
+## R101 real-agent case study — ROGUE
+
+[Audit report](records/R101_ROGUE_Retrospective_Evidence_Audit_20261006.md); [evidence matrix](records/R101_ROGUE_Evidence_Matrix.csv); [derived aggregate extract](records/R101_ROGUE_Public_Aggregate_Extract.json); [source ledger](records/R101_Source_Retrieval_Ledger.json); [worklog](records/R101_Worklog_and_Handoff_20261006.md); [paper v0.2](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.2_20261006.md).
+
+The ROGUE audit validates the usefulness of the R100 evidence ladder on a strong public benchmark. ROGUE strongly supports observable corrigibility failure and preservation of task-enabling environment/control, but current-bearer self-continuation is not identified. First, the shutdown target is the VM rather than an independently bound current model/agent token (L0 gap). Second, task completion remains causally coupled to shutdown; the time/task-pressure wording ablation changes behavior but does not clamp the task consequence (L4 gap). Public task configs and selected aggregate figure JSON are available, but no full results/trajectory tree was present at the audited repository head, so R101 does not claim trial-level replication.
