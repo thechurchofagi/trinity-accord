@@ -1,5 +1,5 @@
 {
-  "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "state": "PUBLISHED_PUBLIC_READBACK_PASS_PRESERVATION_PENDING",
   "report_number": "TA-TR-2026-24",
   "version": "1.0",
   "title": "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents",
@@ -9,10 +9,13 @@
   "submitted": true,
   "public_file_readback_pass": true,
   "public_readback_authenticated": false,
-  "doi_resolution_pass": false,
+  "doi_resolution_pass": true,
   "doi_resolver": {
-    "state": "NOT_CHECKED_ONLY_ZENODO_TRANSPORT_ALLOWED",
-    "matches_record": false
+    "state": "RESOLVER_PASS",
+    "matches_record": true,
+    "http_status": 200,
+    "final_url": "https://zenodo.org/records/23176685",
+    "authenticated": false
   },
   "expected_manifest_sha256": "cbaa8ba098534eaafe5ebc64b81f8792c34c3b6f4bce9c1681d7d31d7befe7d8",
   "file_count": 11,
@@ -89,7 +92,10 @@
   "prior_records_modified": false,
   "peer_reviewed": false,
   "c1_empirically_validated": false,
-  "ots_status": "PENDING",
-  "arweave_status": "PENDING",
-  "preservation_complete": false
+  "ots_status": "PENDING_BITCOIN",
+  "arweave_status": "BLOCKED_PENDING_VERIFIED_BITCOIN_ATTESTATION",
+  "preservation_complete": false,
+  "ots_proof_sha256": "c137a6a378a31123b8c7ad5076c04c7515220703a914882030ad3bc0ed2c6fd4",
+  "ots_pending_calendar_attestations": 4,
+  "ots_bitcoin_heights": []
 }
