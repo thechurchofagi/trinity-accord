@@ -4,13 +4,13 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R99** (bounded intervention-domain mechanism certificate and structural-assumption audit).
-- New-window entry: [Complete R99 handoff](records/UCT_Agent_Research_Handoff_R99_20261006.md).
+- Completed synthesis: **R100** (evidence standard, publication-readiness audit, and new manuscript draft).
+- New-window entry: [R100 evidence standard and paper assessment](records/R100_Evidence_Standard_and_Paper_Assessment_20261006.md).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest analysis: [R99 mechanism-certificate audit](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md).
+- Latest analysis: [R100 evidence standard and paper assessment](records/R100_Evidence_Standard_and_Paper_Assessment_20261006.md).
 - Latest training: [R99 bounded-domain path models](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
-- Current next step: R100 should consolidate R84-R99 into an evidence standard for actual-AI self-continuation claims, then identify the first missing layer in real/public virtual-agent data; do not add more synthetic seeds.
+- Current next step: review the new v0.1 manuscript and, if feasible, apply the evidence standard retrospectively to public ROGUE traces/data before deciding publication or venue.
 - Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
@@ -19,7 +19,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R99 worklog](records/R99_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R100 worklog](records/R100_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -189,3 +189,10 @@ R97D was executed concurrently before the official R97 appeared and is preserved
 [Research record](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md); [protocol](records/R99_Protocol_20261006.md); [worklog](records/R99_Worklog_and_Handoff_20261006.md); [code](records/r99_bounded_domain_certificate.py); [results](records/R99_Results.json); [family summary](records/R99_Family_Summary.csv); [per-run metrics](records/R99_Per_Run_Metrics.csv); [run log](records/R99_Run.log); [source scope](records/R99_Source_Retrieval_Ledger.json); [checkpoint reconstruction](records/R99_Checkpoint_Payload_README.md); [handoff](records/UCT_Agent_Research_Handoff_R99_20261006.md).
 
 The intervention domain is fixed to[-1.25,1.25]^3 and exhaustively audited on a9261-point grid. Generic MLPs retain strong context-dependent path effects. A neural additive path architecture removes cross-path interaction by construction and lowers the worst finite-grid probability error to0.0461, but a valid continuous-domain Lipschitz envelope remains loose (worst1.2469 logits). A correctly specified linear-path positive control is exact over the continuous cube. Therefore path separability and response-shape regularity are distinct assumptions; finite direct interventions do not justify a global self-continuation mechanism claim without an explicit domain and hypothesis/regularity class.
+
+
+## R100 synthesis — evidence standard and paper formation
+
+[Evidence standard and paper assessment](records/R100_Evidence_Standard_and_Paper_Assessment_20261006.md); [claim/evidence matrix](records/R100_Claim_Evidence_Matrix.csv); [source ledger](records/R100_Source_Retrieval_Ledger.json); [worklog](records/R100_Worklog_and_Handoff_20261006.md); [new manuscript draft](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.1_20261006.md).
+
+R84-R99 now support a coherent methods paper. The main functional/causal results do not require UCT; UCT is retained only as a conditional interpretation layer. The strongest defensible contribution is a continuation-specific evidence ladder from bearer identification and task-mediation blocking through intervention-stable, domain-bounded mechanism claims. Negative valence/fear remains a separate unresolved bridge. Current recommendation: draft now, do not publish yet, and add one retrospective real-agent case study (ROGUE is the preferred candidate) before targeting a stronger main-track/journal venue.

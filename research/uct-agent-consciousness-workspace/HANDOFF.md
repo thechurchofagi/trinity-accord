@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R99；新窗口先读 records/UCT_Agent_Research_Handoff_R99_20261006.md，再按需回读R98/R97D/R96。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R100 梳理与论文评估；新窗口先读 records/R100_Evidence_Standard_and_Paper_Assessment_20261006.md 和新draft，再按需回读R99/R97D。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -16,7 +16,7 @@
 
 ## 当前研究与最新成果
 
-最新完成 R99，见文末本轮记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
+最新完成 R100 梳理，见文末记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
 
 R76：对称分类感知通道中，在预测信念固定、仅实用价值计分等条件下，可用偏好幂变换精确匹配改变感知可靠性后的行动概率。相同新观察的贝叶斯更新可区分两条机制；均匀先验的具体例子为 0.90 与 0.65，后验总变差 0.25。40 项精确形式校验通过。信息增益、无信息基线、闭环反馈及可变时域等推广会失败或需附加条件。
 
@@ -398,3 +398,18 @@ generic平均per-run worst-grid概率误差0.1556、最坏0.3159，context path 
 所有final参数、per-run metrics、协议、代码、结果和负结论已保存。NAM/Rep4Ex/Lipschitz certification有直接先例，不称重大原创或体验测量。
 
 下一步R100停止扩synthetic实验，整理R84–R99为actual-AI自身延续主张的正式证据标准，并据此找真实公开/虚拟agent数据中的第一处未满足证据层。
+
+
+## R100 — 2026-10-06：R84-R99证据标准化与论文形成判断
+
+已停止继续堆synthetic实验，把R84-R99压缩为四项主贡献：bearer/continuation target识别；task mediation与joint consequence识别；学习underspecification与intervention supervision；domain+hypothesis-class机制证书。
+
+形成L0-L9证据阶梯。L0-L7面向功能性self-continuation control；L8需要独立负效价orientation；L9才可讨论fear。现有shutdown/corrigibility研究可分别映射到不同层，不能把某一层行为直接跳成更强机制或体验结论。
+
+论文判断：可以成文。最佳定位是通用AI safety/interpretability methods paper，而非要求审稿人先接受UCT。UCT只保留为后置conditional interpretation。已生成新英文draft：
+drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.1_20261006.md
+不覆盖旧v0.3，不改已发表A/B/C。
+
+当前足够做严肃preprint/workshop/methods稿；若要增强到更强main-track/journal，最高价值补强是一项真实公开agent数据case study，而不是更多synthetic seeds。ROGUE公开code/data是首选retrospective audit目标。
+
+下一步：先审新draft并检查ROGUE数据是否能安全实现L0-L5 evidence audit；未完成case study前不发布DOI/Zenodo/OTS/Arweave。

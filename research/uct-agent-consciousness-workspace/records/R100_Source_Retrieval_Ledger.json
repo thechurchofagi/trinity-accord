@@ -1,0 +1,19 @@
+{
+  "round":"R100",
+  "date":"2026-10-06",
+  "status":"synthesis, novelty audit and paper-formation assessment; no new model experiment",
+  "public_sources":[
+    {"title":"Incomplete Tasks Induce Shutdown Resistance in Some Frontier LLMs","authors":"Schlatter; Weinstein-Raun; Ladish","venue":"TMLR","year":2026,"url":"https://openreview.net/forum?id=e4bTTqUnJH","scope":"Abstract/introduction and prior project audit used. Establishes large-scale shutdown resistance under task conflict."},
+    {"title":"ROGUE: Evaluating Corrigibility Failures in Frontier Computer-Use Agents","authors":"Tien et al.","year":2026,"url":"https://arxiv.org/abs/2606.00341","scope":"Abstract/introduction/benchmark setup inspected. Paper explicitly focuses observable corrigibility behavior and provides public code/data; strong candidate retrospective case study."},
+    {"title":"Shutdown Sabotage Propensities in Multi-Agent Systems","authors":"Knecht et al.","year":2026,"url":"https://arxiv.org/abs/2609.28274","scope":"Abstract read. Used for peer-shutdown behavior including no-explicit-goal condition."},
+    {"title":"Evaluating Self-Orienting in Language and Reasoning Models","authors":"Bigelow; Ahmed; Ullman","year":2025,"url":"https://openreview.net/pdf?id=hPdUQnQrUu","scope":"Indexed paper text/abstract inspected. Used as bearer/self-orientation neighboring work."},
+    {"title":"Time, Identity and Consciousness in Language Model Agents","authors":"Perrier; Bennett","year":2026,"url":"https://arxiv.org/abs/2603.09043","scope":"Abstract read. Used as temporal/scaffold identity neighboring work."},
+    {"title":"Partial identifiability and misspecification in inverse reinforcement learning","authors":"Skalse; Abate","venue":"Artificial Intelligence","year":2026,"doi":"10.1016/j.artint.2026.104525","scope":"Open-access abstract/introduction inspected. Strong general prior for reward ambiguity and behavioral-model misspecification."},
+    {"title":"Identifying Representations for Intervention Extrapolation","authors":"Saengkyongam et al.","venue":"ICLR","year":2024,"url":"https://proceedings.iclr.cc/paper_files/paper/2024/hash/aa9508b2577e0d9c824da9e2e27fe9d6-Abstract-Conference.html","scope":"Official abstract read. Prior for structural assumptions behind unseen-intervention extrapolation."},
+    {"title":"Evaluating and Understanding Scheming Propensity in LLM Agents","authors":"Hopman et al.","year":2026,"url":"https://arxiv.org/abs/2603.01608","scope":"Abstract read. Relevant incentive decomposition for self-preservation/resource acquisition/goal guarding."}
+  ],
+  "internal_scope":"R84 through R99 including R96D/R97D, current v0.3 manuscript, HANDOFF and MASTER_INDEX",
+  "novelty_judgment":"No historical-first claim for individual mathematics or behaviors. Strongest defensible novelty is the continuation-specific evidence ladder connecting bearer identity, consequence representation, task mediation, dependence-sensitive consequence interfaces, learned policy use, intervention extrapolation and domain-bounded mechanism certification.",
+  "paper_decision":"Draft now. Do not publish yet. Add one retrospective real-agent case study if feasible before aiming at a strong main-track/journal venue.",
+  "recommended_case_study":"ROGUE public code/data audit, because it is realistic, behaviorally rich and can be analyzed retrospectively without giving agents new shutdown/replication capabilities."
+}
