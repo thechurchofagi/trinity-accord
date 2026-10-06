@@ -1,0 +1,25 @@
+{
+  "checkpoint": "R126",
+  "date": "2026-10-06",
+  "work_type": "analytic_theory_and_priority_correction",
+  "prior_head": "17866792ea0c52e88ab2587702f36b015a8ef9a9",
+  "user_priority": "theory_before_additional_experiments",
+  "theoretical_outputs": [
+    "automatic_transport_commutation_does_not_select_content",
+    "finite_deterministic_causal_state_closure_iff_class_consistency",
+    "within_class_successor_diameter_half_lower_bound",
+    "coarsest_operation_stable_refinement_with_termination_and_minimality_proofs"
+  ],
+  "proof_status": "hand_derived_and_assumption_audited_not_machine_verified",
+  "historical_originality_claimed": false,
+  "new_empirical_runs": 0,
+  "new_simulations": 0,
+  "theory_complete": false,
+  "constitutive_substructure_identification": "OPEN",
+  "T2": "OPEN",
+  "C3": "NOT_TESTED",
+  "E_measured": false,
+  "canonical_T2_clauses": "R119; C1 baseline, C5 nuisance stability, C6 mapping discipline",
+  "next_focus": "actual capability-support membership and boundary conditions",
+  "experiments_queued": false
+}

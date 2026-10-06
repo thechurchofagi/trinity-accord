@@ -1,0 +1,43 @@
+{
+  "method": "analytic proof and scope audit; no numerical experiments",
+  "checks": [
+    {
+      "claim": "transported projection commutes",
+      "reason": "substitution through bijective complete-type correspondence; applies to every projection",
+      "ceiling": "does not independently identify phenomenal target"
+    },
+    {
+      "claim": "summary update exists iff successor values agree within each class",
+      "reason": "necessity by equal arguments; sufficiency by representative independence",
+      "assumptions": "finite sufficient model, total fixed labeled operation maps; partial operations additionally need enabledness consistency"
+    },
+    {
+      "claim": "worst-case error at least half within-class successor diameter",
+      "reason": "triangle inequality and maximization over pairs",
+      "ceiling": "worst-case model bound, not mean held-out error; necessary 2-epsilon condition not generally sufficient"
+    },
+    {
+      "claim": "finite refinement terminates and is coarsest stable refinement",
+      "reason": "strict refinements increase class count; induction compares every stable refinement",
+      "ceiling": "at most N-b0 strict refinements, not a complexity improvement or actual-model identification"
+    },
+    {
+      "claim": "mechanism closure implies unique subject",
+      "assessment": "NOT_DERIVED"
+    },
+    {
+      "claim": "C1 implies arbitrary summary is an actual constitutive sub-process",
+      "assessment": "NOT_DERIVED"
+    },
+    {
+      "claim": "published Paper C claims reproduced as new",
+      "assessment": "AVOIDED; section 6.4 and Appendix E explicitly acknowledged"
+    }
+  ],
+  "residual_risks": [
+    "no independent peer review",
+    "actual state and constitutive boundary not identified",
+    "general mathematical ingredients already have prior art",
+    "no empirical or phenomenal validation"
+  ]
+}

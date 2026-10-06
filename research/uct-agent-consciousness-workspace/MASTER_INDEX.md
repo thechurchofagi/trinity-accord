@@ -1,23 +1,29 @@
-# UCT agent-consciousness workspace — MASTER INDEX through R125
+# UCT research master index — R126
 
-Updated 2026-10-06. Current checkpoint: executed real-data R124-J joint fits and R125 frozen observed-state correspondence test. Selected point-map candidate FAIL_SCOPED; latent biological C2 unidentified; C3 not tested; T2 OPEN. No experience measurement or major consciousness breakthrough claimed.
+Updated 2026-10-06. Current direction: theory before additional experiments, explicitly reaffirmed by the user. R121/R125 empirical-first queue suggestions are superseded. Published foundations and all empirical results remain unchanged.
 
-## Current handoff
+## Current theoretical checkpoint
+
 - [HANDOFF.md](HANDOFF.md)
-- [Self-contained R125 Chinese handoff](records/UCT_Cross_Substrate_R125_Executed_Raw_Data_Handoff_20261006.md)
-- [R125 report](records/R125_Frozen_Observed_State_Correspondence_20261006/R125_Report.md)
-- [R125 status](records/R125_Frozen_Observed_State_Correspondence_20261006/STATUS.json)
-- [T2 certificate](records/R125_Frozen_Observed_State_Correspondence_20261006/T2_Certificate.csv)
-- [Source, reading scope and concurrency ledger](records/R125_Frozen_Observed_State_Correspondence_20261006/source_and_concurrency_ledger.json)
+- [R126 theory note with four analytic proofs](records/R126_Theory_First_Projection_and_Causal_State_20261006/R126_Theory_Note.md)
+- [R126 Chinese handoff](records/R126_Theory_First_Projection_and_Causal_State_20261006/HANDOFF_ZH.md)
+- [Status](records/R126_Theory_First_Projection_and_Causal_State_20261006/STATUS.json)
+- [Proof and scope audit](records/R126_Theory_First_Projection_and_Causal_State_20261006/PROOF_SCOPE_AUDIT.json)
+- [Source-reading ledger](records/R126_Theory_First_Projection_and_Causal_State_20261006/SOURCE_LEDGER.json)
 
-## Executed evidence and replay
-- [R124-J raw/filtered baseline, neural and joint fits](records/R124_Observation_Qualified_Neural_Increment_20261006/README.md): 12 real sessions, 5 rats, 3,319 trials, 32,656 held-out bins. Derived real features, frozen maps and all OOF predictions retained.
-- [R125 frozen transition and shared output-law test](records/R125_Frozen_Observed_State_Correspondence_20261006/README.md): 29,337 adjacent within-trial pairs and 3,319 endpoints; no new decoder fitted.
-- [Independent saved-result audit](records/R125_Frozen_Observed_State_Correspondence_20261006/saved_result_audit.json) and [audit source](records/R125_Frozen_Observed_State_Correspondence_20261006/audit_saved_results.py).
-- [Exact summary figure PNG](records/R125_Frozen_Observed_State_Correspondence_20261006/R125_Summary.png) / [PDF](records/R125_Frozen_Observed_State_Correspondence_20261006/R125_Summary.pdf).
-- [Concurrent R124 original-R122 transition audit](records/R124_Transition_Commutation_Audit_20261006/R124_Report.md), preserved through parent f2f34ca5f5a9738659780729c8a7e8aefe01dbf3. Different maps on the same animals; cohort sizes cannot be added.
+The note distinguishes an arbitrary descriptive projection, an operation-closed causal-state description, and a physically justified constitutive interpretation. It proves automatic transported commutation, exact closure conditions, a worst-case class-ambiguity lower bound, and finite coarsest stable refinement. General quotient/refinement mathematics is not claimed as new. The actual constitutive-substructure bridge remains open.
 
-## Full historical continuity
-[MASTER_INDEX_THROUGH_R123.md](MASTER_INDEX_THROUGH_R123.md) and [HANDOFF_THROUGH_R123.md](HANDOFF_THROUGH_R123.md) preserve the previous complete index/handoff byte-for-byte at the same level. They link R122 and all earlier records without rewriting published theory or legacy results. Historical latest/next-step wording is superseded by the R125 entries above; still-applicable constraints remain in force.
+No new empirical fit, simulation or experience measurement was performed. Proofs are hand-derived and scope-audited, not machine verified. Next theoretical focus: capability-support relations, actual process membership, boundary conditions and selected interpretation.
 
-All substantive work stays on uct-agent-consciousness-workspace with [skip ci], concurrency-safe non-force updates, no PR/CI/deployment/publication actions, and all failures/negative results retained.
+## Core source trail
+
+- [R106 first-principles map](records/R106_Experience_Access_Intelligence_Self_Behavior_Report_First_Principles_Map_20261006.md)
+- [R119 canonical T2 certificate](records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md)
+- [R120 bridge schema](records/R120_Experience_Intelligence_Bridge_Theorem_Schema_20261006.md)
+- [R121 historical closure audit](records/R121_Experience_Intelligence_Closure_Audit_20261006.md), whose empirical-first priority is revised by R126.
+- [R125 complete historical handoff](HANDOFF_THROUGH_R125.md)
+- [R125 complete historical index](MASTER_INDEX_THROUGH_R125.md), retaining the links to real-data R122–R125 and earlier work.
+
+T2 stays open. Its clauses retain R119 meanings; UCT axiom C1 is distinct from T2 checklist C1. The R125 shorthand labeling correction is recorded in R126 without changing its numerical results.
+
+Save on uct-agent-consciousness-workspace with [skip ci], current-head lease and no force. Preserve concurrency. No PR, CI, deployment or publication actions for these checkpoints.
