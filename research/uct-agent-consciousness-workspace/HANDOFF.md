@@ -16,7 +16,7 @@
 
 ## 当前研究与最新成果
 
-最新完成 R96，见文末本轮记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
+最新完成 R97，见文末本轮记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
 
 R76：对称分类感知通道中，在预测信念固定、仅实用价值计分等条件下，可用偏好幂变换精确匹配改变感知可靠性后的行动概率。相同新观察的贝叶斯更新可区分两条机制；均匀先验的具体例子为 0.90 与 0.65，后验总变差 0.25。40 项精确形式校验通过。信息增益、无信息基线、闭环反馈及可变时域等推广会失败或需附加条件。
 
@@ -352,3 +352,14 @@ UCT边界：theta_Q>0在Q因果绑定、belief gate和匹配有效时最多表�
 下一步只用既定两环境定义无旁路的边际接口与联合/直接任务成功接口，再判断R95检查点适用性；不适用则先冻结极小不确定未来学习扩展并保存所有权重/失败，不重复扩大真值表。R88前提与R89负效价桥仍未完成。C1/U1无内省门槛，类型解释须实际token与共同完整K；A/B/C与v0.3未修改。
 
 补充R97前置条件：不同reward ancestry若产生完全相同的可见训练输入、奖励/反馈与后果，无侧信道的同初始化同随机流学习器会逐步产生相同参数；不能仅凭未观察到的祖先名称恢复不同held-out策略。保留R96的四奖励路线，但先加入声明的消歧训练干预，或将held-out不可识别作为预期负结果。原R96确定性路径表未被本补充推翻，只有不确定后果扩展需要额外联合律匹配。详见R96D正文§11。
+
+
+## R97 — 2026-10-06：reward ancestry学习与干预外推的欠确定性
+
+R97先吸收R96D的learning-identifiability gate。训练支持q_bundled/o_bundled/qo_joint在声明(q,o,g)线性路径空间满秩，四种reward ancestry在可见target上真正可区分；q_direct/o_direct/task_only全部held-out。
+
+结构化linear-logit能几乎精确恢复held-out路径。自由3-unit tanh MLP共32次正式运行，训练拟合都很好，但held-out路径效应明显且种子依赖地偏离真实ancestry。最强负例是task-only模型会出现很大的伪Q/O direct effect；mixed Q+task也系统性外推错误。没有为了成功调参。
+
+因此实验设计“在某声明模型类满秩”不等于“自由学习器恢复该模型类”。训练行为不能单独识别direct self-continuation preference；必须说明hypothesis class/inductive bias并用未见干预检验。与underspecification/IRL misspecification强先例一致，不称历史首创。
+
+阅读records/R97_Reward_Ancestry_Learning_and_Intervention_Extrapolation_20261006.md及R97交接。R89效价桥不变。下一步R98只加最小direct intervention训练，检查能否减少generic MLP的路径外推欠确定性。

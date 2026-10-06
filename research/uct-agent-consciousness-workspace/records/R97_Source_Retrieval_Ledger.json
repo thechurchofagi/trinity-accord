@@ -1,0 +1,13 @@
+{
+ "round":"R97",
+ "date":"2026-10-06",
+ "sources":[
+  {"title":"Underspecification Presents Challenges for Credibility in Modern Machine Learning","authors":"D'Amour et al.","year":2020,"url":"https://arxiv.org/abs/2011.03395","scope":"Abstract/current indexed summary read; used as direct prior art for equivalent in-domain fit with divergent deployment behavior."},
+  {"title":"Partial identifiability and misspecification in inverse reinforcement learning","authors":"Joar Skalse; Alessandro Abate","year":2026,"url":"https://www.sciencedirect.com/science/article/pii/S0004370226000512","scope":"Current abstract and indexed section summary read; used for reward ambiguity and behavioral-model misspecification."},
+  {"title":"Occam's razor is insufficient to infer the preferences of irrational agents","authors":"Stuart Armstrong; Soren Mindermann","year":2018,"url":"https://papers.neurips.cc/paper_files/paper/2018/hash/d89a66c7c80a29b1bdbab0f2a1a94af8-Abstract.html","scope":"Official abstract read; prior art for policy/planner/reward nonidentifiability."},
+  {"title":"Identifying Representations for Intervention Extrapolation","authors":"Saengkyongam et al.","year":2023,"url":"https://arxiv.org/abs/2310.04295","scope":"Indexed abstract read; relevant prior art for intervention extrapolation and identifiable representations."}
+ ],
+ "internal":["R96 direct continuation vs task mediation","R96D joint-consequence and learning-identifiability audit"],
+ "novelty_status":"Project-specific negative experiment; strong prior art for underspecification, reward ambiguity and intervention extrapolation. No historical-first claim.",
+ "third_party_fulltexts_uploaded":false
+}

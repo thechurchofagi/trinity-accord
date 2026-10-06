@@ -1,0 +1,13 @@
+R97 learned reward-ancestry extrapolation audit
+Date: 2026-10-06
+Structured linear held-out effect error: all < 2.1e-6
+Generic MLP training max probability error: all < 0.01
+Generic MLP held-out effect-error ranges:
+task_only 1.1380806322 .. 1.7770517827
+direct_Q 0.0066321535 .. 0.7678898371
+mixed_Q_task 1.0143318257 .. 1.5590453302
+successor_only 0.0371376135 .. 0.5949052154
+No seed replacement.
+No post-result architecture tuning.
+Execution failures: none.
+Main negative result: in-domain fit plus ancestry-distinguishing training support does not force a generic nonlinear policy to recover the declared causal path on held-out interventions.

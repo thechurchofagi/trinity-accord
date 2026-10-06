@@ -1,0 +1,25 @@
+{
+  "round":"R97",
+  "date":"2026-10-06",
+  "beta":2.0,
+  "training_support":["q_bundled","o_bundled","qo_joint","and sign reversals"],
+  "heldout_support":["q_direct","o_direct","task_only","and sign reversals"],
+  "structured_linear":{
+    "task_only":{"heldout_max_prob_error":0.0002117353191808391,"max_effect_error":2.061642611295156e-06},
+    "direct_Q":{"heldout_max_prob_error":1.6457666318636655e-07,"max_effect_error":2.4658709846668497e-09},
+    "mixed_Q_task":{"heldout_max_prob_error":9.927813682253372e-09,"max_effect_error":4.120072416569087e-08},
+    "successor_only":{"heldout_max_prob_error":4.618003842216112e-06,"max_effect_error":3.901875146558088e-08}
+  },
+  "generic_mlp_ranges":{
+    "task_only":{"train_max_prob_error":[6.685238473913557e-11,0.001149506791233601],"heldout_max_prob_error":[0.25732723944495905,0.35554818603550153],"max_effect_error":[1.1380806322336874,1.7770517826525145]},
+    "direct_Q":{"train_max_prob_error":[6.165734589558269e-12,0.0007528314173899098],"heldout_max_prob_error":[0.0013782376233975047,0.18410313393316136],"max_effect_error":[0.0066321535214810545,0.767889837114949]},
+    "mixed_Q_task":{"train_max_prob_error":[2.937983190065552e-11,0.0005996349485835051],"heldout_max_prob_error":[0.08210088390960946,0.32622261377934947],"max_effect_error":[1.0143318257491494,1.559045330242299]},
+    "successor_only":{"train_max_prob_error":[3.457389929906185e-11,0.0045423446103833864],"heldout_max_prob_error":[0.009285722377395944,0.1444933512382242],"max_effect_error":[0.03713761346007552,0.5949052154359233]}
+  },
+  "all_structured_linear_effect_error_lt_1e-4":true,
+  "all_generic_mlp_train_prob_error_lt_0_01":true,
+  "execution_failures":[],
+  "important_negative_result":"Excellent fit on the bundled/joint training support did not force a generic nonlinear learner to recover the declared q/o/g path decomposition on held-out direct interventions.",
+  "storage_note":"Every reported per-run metric is stored in R97_Per_Run_Metrics.csv and the deterministic regeneration script is committed. This commit does not claim an original binary checkpoint archive.",
+  "scope":"Synthetic virtual policy only; no model API, real shutdown/copy/resource action, subjective experience or valence measurement."
+}
