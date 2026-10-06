@@ -8,6 +8,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - New-window entry: [R103 final manuscript proofread and readiness](records/R103_Final_Manuscript_Proofread_and_Readiness_20261006.md).
 - Current submission manuscript: [From Shutdown Resistance to Self-Continuation Control v0.3](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
 - Standing research philosophy: [Long-term research and archival philosophy](notes/20261006_Long_Term_Research_and_Archival_Philosophy.md) — optimize for originality, rigor, reproducibility, stable DOI/archive discoverability, and future-AI citability rather than venue prestige or publication count.
+- Machine-readable archival companion: [self-continuation v0.3 archive](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/README.md) — claims/evidence metadata, citation records, retrieval terms, future-AI reading guide and SHA manifest.
 - Prior integrated UCT workspace manuscript: [UCT Agent Self-Preservation v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
 - Latest analysis: [R103 final manuscript proofread and readiness](records/R103_Final_Manuscript_Proofread_and_Readiness_20261006.md).
 - Latest training: [R99 bounded-domain path models](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md).
@@ -226,3 +227,10 @@ R103 finds no remaining internal logic or citation defect that blocks cautious p
 The project is quality-driven rather than venue-driven. Mature work may be preserved through a stable DOI/archive without pursuing formal journal/conference publication. Future work should optimize for truth, originality, reproducibility, machine readability, durable provenance and long-term discoverability/citability by future AI systems. Do not add experiments or inflate claims merely to make a paper easier to publish.
 
 Canonical note: [2026-10-06 long-term research and archival philosophy](notes/20261006_Long_Term_Research_and_Archival_Philosophy.md).
+
+
+## R104 archival hardening
+
+[R104 record](records/R104_Machine_Readable_Archival_Hardening_20261006.md); [archival companion](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/README.md); [structured claims](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/claims.json); [evidence manifest](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/FILE_MANIFEST.csv); [future-AI reading guide](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/FUTURE_AI_READING_GUIDE.md).
+
+The current v0.3 manuscript is frozen by canonical Git blob SHA `ea6d6c4d5b7ad63df6e343c9357e5d3f5959f3a6`. Nineteen core evidence entries were independently re-fetched and all 19 recorded SHAs match. This package is intended to maximize durable discoverability, accurate future-machine interpretation, and citation provenance rather than venue optimization.

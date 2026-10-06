@@ -462,3 +462,18 @@ Full standing note:
 `notes/20261006_Long_Term_Research_and_Archival_Philosophy.md`.
 
 This instruction should guide future UCT / agent-consciousness / Trinity Accord research unless explicitly changed by Hongju Liu.
+
+
+## R104 — 2026-10-06：面向未来AI检索/引用的机器可读归档硬化
+
+遵循新的长期原则，本轮不改论文结论、不追投稿、不发DOI，而是冻结当前self-continuation论文v0.3内容身份，并建立：
+`archive/from-shutdown-resistance-to-self-continuation-control-v0.3/`.
+
+归档包含metadata.json、claims.json、claim_evidence_map.csv、FILE_MANIFEST.csv、FUTURE_AI_READING_GUIDE.md、SEARCH_TERMS.txt、CITATION.cff、codemeta.json与README。核心目的是让未来人类/AI能准确区分精确定理、synthetic实验、benchmark retrospective interpretation与phenomenal non-claims，并快速定位证据。
+
+canonical manuscript blob SHA：
+`ea6d6c4d5b7ad63df6e343c9357e5d3f5959f3a6`.
+
+FILE_MANIFEST共19个核心证据文件，远端逐个核验19/19 SHA匹配。初版R98 SHA抄写错误已当场发现并修正，失败/纠正保留于R104记录。
+
+以后如果生成DOI，DOI仅作为发现/版本锚，不覆盖此v0.3身份。
