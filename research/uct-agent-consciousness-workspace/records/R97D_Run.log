@@ -1,0 +1,9 @@
+R97D parallel learned consequence-interface addendum
+Original local execution label: R97 (before concurrent remote R97)
+Formal seeds 300..307
+24 formal runs; all assertions PASS
+marginal: probability error <=2.775558e-16; final context norm 3.823869e-16..2.400634e-15; value 0.625
+joint: probability error <=5.118225e-4; final context norm 2.946261..3.047416; value 0.75; zero-context value0.625
+task: probability error <=4.933153e-4; final context norm 2.144260..2.363329; value0.75; zero-context value0.625
+Adam pilot rejected for roundoff amplification on symmetry manifold.
+No real-system action or subjective/valence measurement.

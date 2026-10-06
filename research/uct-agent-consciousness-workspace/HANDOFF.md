@@ -372,3 +372,16 @@ R97先吸收R96D的learning-identifiability gate。训练支持q_bundled/o_bundl
 干预监督使31/32的平均测试误差下降、25/32的最坏测试误差下降；task-only与mixed Q+task改善尤大。所有family在所有测试幅度的平均direct-effect误差都下降，但距离监督幅度越远改善越弱，direct-Q和successor-only在幅度1.25仍有最坏约0.95的路径误差。
 
 因此targeted intervention supervision确实减少R97的underspecification，但有限干预样本不能自动成为全域因果机制证书。机制声明必须写清干预域、假设类/结构正则和外推范围。强CRL先例存在，不称首创。下一步R99固定干预域并比较unconstrained与path-constrained实现。
+
+
+## R97D — 2026-10-06 并行补充：学习到依赖敏感的后果接口
+
+R97D与官方R97并发完成，保存时经预期头检查发现冲突，未覆盖R97。官方完成轮次仍为R97；R97D只作并行依赖补充。
+
+R96D的A/B环境具有完全相同Q/O边际但不同Q/O联合关系和相反task-optimal动作。R97D训练24个正式小网络：边际Q/O目标8/8达到机器精度却保持context路径约1e-15、任务值5/8；joint和direct-task目标各8/8从zero context path学出依赖敏感关系，全部达到3/4；训练后单独清零context输入路径，joint/task全部退回5/8。
+
+因此“分别准确预测自己/接替者是否继续”仍可能缺失任务决策所需的联合后果关系。预测目标要求联合或reward-relevant task consequence时，该关系可以被学习并实际使用。
+
+这与官方R97互补：R97D解决consequence interface是否含必要依赖；官方R97证明即使训练支持区分reward ancestry，自由MLP仍可能在held-out path intervention上underspecify。R98应同时满足这两个要求：reward-relevant consequence interface + 最小干预监督。
+
+R97D仍是task-only工具性组织，不是direct Q preference；R96路径阻断仍必需。负效价和fear仍受R89约束。

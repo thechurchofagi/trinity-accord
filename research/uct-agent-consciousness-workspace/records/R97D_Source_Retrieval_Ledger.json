@@ -1,0 +1,13 @@
+{
+  "round": "R97D",
+  "date": "2026-10-06",
+  "reconciliation": "Executed concurrently under local label R97; renumbered R97D after official remote R97 appeared. Scientific payload preserved unchanged.",
+  "sources": [
+    {"title":"Strictly Proper Scoring Rules, Prediction, and Estimation","authors":"Tilmann Gneiting; Adrian E. Raftery","year":2007,"doi":"10.1198/016214506000001437","scope":"Abstract/summary read; classical proper-scoring background."},
+    {"title":"Proper scoring rules for multivariate probabilistic forecasts based on aggregation and transformation","authors":"Romain Pic; Clément Dombry; Philippe Naveau; Maxime Taillardat","year":2025,"url":"https://ascmo.copernicus.org/articles/11/23/2025/","scope":"Section 2.3/projection discussion read; direct prior art that marginal scores need not identify dependence."},
+    {"title":"Multivariate Forecasting Evaluation: On Sensitive and Strictly Proper Scoring Rules","authors":"Florian Ziel; Kevin Berk","year":2019,"url":"https://arxiv.org/abs/1910.07325","scope":"Abstract read; dependence-sensitive multivariate forecast evaluation prior art."}
+  ],
+  "internal":["R96D joint-consequence audit","R96 direct continuation/task mediation","official concurrent R97 underspecification experiment"],
+  "novelty_status":"Project-specific learned interface witness; strong prior art for multivariate forecast dependence. No historical-first claim.",
+  "third_party_fulltexts_uploaded":false
+}
