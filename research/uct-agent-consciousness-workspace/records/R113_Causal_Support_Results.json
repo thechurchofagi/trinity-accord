@@ -1,0 +1,22 @@
+{
+  "round": "R113",
+  "enumerated_relation_sets": 32,
+  "minimal_core_support_sets": [["g","r1"],["g","r2"]],
+  "minimal_report_support_sets": [["g","h","r1"],["g","h","r2"]],
+  "single_lesions": {
+    "g": {"core_accuracy":0.5,"report_accuracy":0.5,"correlate_accuracy":1.0},
+    "r1": {"core_accuracy":1.0,"report_accuracy":1.0,"correlate_accuracy":1.0},
+    "r2": {"core_accuracy":1.0,"report_accuracy":1.0,"correlate_accuracy":1.0},
+    "h": {"core_accuracy":1.0,"report_accuracy":0.5,"correlate_accuracy":1.0},
+    "c": {"core_accuracy":1.0,"report_accuracy":1.0,"correlate_accuracy":0.5}
+  },
+  "joint_route_lesion": {"core_accuracy":0.5,"report_accuracy":0.5},
+  "classification": {
+    "g": "shared indispensable/permissive support for core and report",
+    "r1": "degenerate alternative content-bearing core route",
+    "r2": "degenerate alternative content-bearing core route",
+    "h": "downstream report/readout support; not core-task support",
+    "c": "perfect task correlate but not causal support in tested system"
+  },
+  "scope": "Exact toy causal-support witness. Necessity/sufficiency are background-relative; not a consciousness measurement."
+}

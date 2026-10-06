@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R112 第一版cross-substrate capability-support atlas；新窗口先读 records/R112_Cross_Substrate_Capability_Support_Atlas_20261006.md 与R112交接，再按需回读R106-R111。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R113 causal support identification protocol；新窗口先读 records/R113_Causal_Support_Identification_Protocol_20261006.md 与R113交接，再按需回读R111/R112。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -554,3 +554,12 @@ pairwise topology仍可能丢失direct-vs-indirect机制，因此下一步R111�
 核心桥：capability T -> verified actual support relation R_T -> C1条件下selected experiential organization relation。不是intelligence score直接映射experience score。
 
 下一步R113做causal support identification：区分necessary、alternative sufficient、degenerate/redundant、downstream readout与mere correlate。
+
+
+## R113 — 2026-10-06：能力支撑的causal identification
+
+用g共享gate、r1/r2替代计算路、h report head、c纯correlate的透明系统穷举32种relation subsets。证明single lesion无效不代表irrelevant；必要节点也可能只是permissive gate而非content carrier；report head可影响R不影响core；完美decode的correlate可无因果用。
+
+冻结support taxonomy与8-step intervention protocol。以后只有actual causal support relation才有资格进入UCT experience-intelligence bridge，probe/correlation不够。
+
+下一步R114回套到working memory/evidence integration/bearer estimation。

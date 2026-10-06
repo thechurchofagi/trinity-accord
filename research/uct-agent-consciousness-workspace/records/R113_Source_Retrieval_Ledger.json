@@ -1,0 +1,46 @@
+{
+  "round": "R113",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "Claims of necessity, sufficiency don’t work well for studies of complex systems",
+      "author": "Grace Lindsay",
+      "venue": "The Transmitter",
+      "year": 2025,
+      "doi": "10.53053/IHMY3378",
+      "scope": "Methods commentary read; used for current systems-neuroscience caution that necessity/sufficiency claims are background-dependent in complex systems."
+    },
+    {
+      "title": "Degenerate neuronal systems sustaining cognitive functions",
+      "authors": "Noppeney; Friston; Price",
+      "venue": "Journal of Anatomy",
+      "year": 2004,
+      "doi": "10.1111/j.0021-8782.2004.00343.x",
+      "scope": "Previously read; used for alternative neural support and lesion compensation."
+    },
+    {
+      "title": "Causal Abstraction: A Theoretical Foundation for Mechanistic Interpretability",
+      "authors": "Geiger et al.",
+      "venue": "JMLR",
+      "year": 2025,
+      "url": "https://www.jmlr.org/papers/v26/23-0058.html",
+      "scope": "Previously read; intervention-faithful AI mechanism analysis prior."
+    },
+    {
+      "title": "Auditory Cortex Contributes to Discrimination of Pure Tones",
+      "venue": "eNeuro",
+      "year": 2019,
+      "url": "https://www.eneuro.org/content/6/5/ENEURO.0340-19.2019",
+      "scope": "Result summary read as an example where substantial lesions did not abolish behavior, illustrating alternative circuits/degeneracy caution."
+    }
+  ],
+  "internal_sources": [
+    "R80 decodability versus causal use",
+    "R95 large weight/trace without semantic use",
+    "R108 report-head dissociation",
+    "R111 degeneracy support hypergraph",
+    "R112 capability-support atlas"
+  ],
+  "novelty_status": "Necessity/sufficiency, degeneracy and causal intervention logic are established. Project contribution is the support taxonomy required before UCT experiential interpretation.",
+  "no_third_party_fulltexts_redistributed": true
+}
