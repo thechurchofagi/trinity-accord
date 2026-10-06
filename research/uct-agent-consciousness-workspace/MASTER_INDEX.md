@@ -4,6 +4,8 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
+- Cross-window master handoff: [R121 experience–intelligence cross-substrate master handoff](records/UCT_Experience_Intelligence_Cross_Substrate_Master_Handoff_R121_20261006.md).
+
 - Completed DOI release: **R105** (TA-TR-2026-24 v1.0 published to Zenodo; OTS submitted and awaiting Bitcoin attestation before Arweave).
 - Latest first-principles research: **R119** (T2 intervention-preserving support-correspondence certificate).
 - New-window entry: [R119 T2 support-correspondence certificate](records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md).
