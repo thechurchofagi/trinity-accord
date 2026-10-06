@@ -1,0 +1,6 @@
+{
+  "state": "FORMAT_CHECKS_PASS",
+  "pdf_sha256": "368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104",
+  "visual_review_required": true,
+  "formal_release_audit": "PASS"
+}

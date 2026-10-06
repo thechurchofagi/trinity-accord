@@ -1,0 +1,78 @@
+{
+  "report_number": "TA-TR-2026-24",
+  "record_id": 23176685,
+  "doi": "10.5281/zenodo.23176685",
+  "title": "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents",
+  "version": "1.0",
+  "file_count": 11,
+  "files": [
+    {
+      "name": "FORMAL-MAP-AND-AUDIT.md",
+      "bytes": 3245,
+      "sha256": "a7c951a5f9f0789c9625352bcf9d981c4df0575fe217ee1fb7de4cde80cab3f9"
+    },
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 934,
+      "sha256": "1f071f41e63613976bdf7f18ce0f895ddeb02e925ed9aeb3e942ee770a2dc66d"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 933,
+      "sha256": "00a2e8a09ee0445dc7cf903325e0d7a0e0c3f6152bbbb6e906f89c6a6cd7f1a2"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 401,
+      "sha256": "705384956afc5a984d03e1c134bdbb1c7a59118b6992434e038233c90507c1e7"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 555,
+      "sha256": "d9c67c2b9cab8febbc933c98c06d77151115032e9d50eb38777c9a1cf51fc5dc"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 347,
+      "sha256": "65abdccc0821f784d65c19f3af33443bbb5e077ba36fcda509c730d4d8db4f87"
+    },
+    {
+      "name": "claims-v1.0.json",
+      "bytes": 2766,
+      "sha256": "a5b28e9a5b26e5321e8e4e54ce00fa86382302273415506d5c72ef04cef47173"
+    },
+    {
+      "name": "from-shutdown-resistance-to-self-continuation-control-v1.0.md",
+      "bytes": 36208,
+      "sha256": "af0eb63cca099b3d913218f503bc978c705f0fb9f065cca9ed472e5161d67490"
+    },
+    {
+      "name": "from-shutdown-resistance-to-self-continuation-control-v1.0.pdf",
+      "bytes": 86272,
+      "sha256": "368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104"
+    },
+    {
+      "name": "metadata-v1.0.json",
+      "bytes": 1141,
+      "sha256": "8b2c34b79ba6d45ecc23b9c13c6cdeb79756f8ee45e2be0078ca941b0a7f494a"
+    },
+    {
+      "name": "reproducibility-v1.0.zip",
+      "bytes": 28398,
+      "sha256": "13cfe641397f312dbc313362921da8ed2d0e26127dcf7c5df5e71ab319348065"
+    }
+  ],
+  "source_inputs": {
+    "source-main.md": "63988747c1d3928588b70e965bd3c2865cd2c1e5c6230de1bd32db190c99a8dd",
+    "build_pdf.py": "93dd698ec48fa784dfd32cf52ab7ddbac63cc8d80b91ecff83b83012fc4716d8",
+    "REPRODUCIBILITY-SOURCES.json": "2d0a0e734aa6a74a2fb0e06f74fe452bc086d61e2e671b659ed387c716c01b8d",
+    "FORMAL-MAP-AND-AUDIT.md": "a7c951a5f9f0789c9625352bcf9d981c4df0575fe217ee1fb7de4cde80cab3f9",
+    "FORMAL-MAP.json": "8c0aa3db42336c8aa8c6b2be1cbe6ffa3e4a6fb54e6478dddfe411f353be4fec",
+    "claims-release.json": "a5b28e9a5b26e5321e8e4e54ce00fa86382302273415506d5c72ef04cef47173",
+    "metadata-release.json": "bbc62a1d7ad28e4b95aa1ae1ec3552bf85edd668effd778473d26c15c0916500",
+    "publication.py": "7f35cbc0c0f35783ea84cac6f37056e7d15ccf4ec376f6f1693e6ce5636fd191"
+  },
+  "source_commit": "dd053b42fe0254e75c9b689578a992810a7e05f2",
+  "frozen_v03_blob_sha": "ea6d6c4d5b7ad63df6e343c9357e5d3f5959f3a6",
+  "prior_records_modified": false
+}

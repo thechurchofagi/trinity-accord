@@ -1,0 +1,90 @@
+{
+  "report": "TA-TR-2026-24",
+  "version": "1.0",
+  "title": "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents",
+  "source_v03_blob_sha": "ea6d6c4d5b7ad63df6e343c9357e5d3f5959f3a6",
+  "claim_schema": "trinityaccord.release-claims.v1",
+  "claims": [
+    {
+      "id": "F1",
+      "kind": "formal",
+      "text": "Bundled Q/G observations do not identify direct-Q, task, and interaction terms in the declared path model.",
+      "evidence": [
+        "R96"
+      ]
+    },
+    {
+      "id": "F2",
+      "kind": "formal",
+      "text": "Direct Q/O/task path-blocking contrasts identify the declared finite coefficient grid with calibrated logits.",
+      "evidence": [
+        "R96"
+      ]
+    },
+    {
+      "id": "F3",
+      "kind": "formal",
+      "text": "Separate Q/O marginals can be decision-insufficient when payoff depends on their joint law.",
+      "evidence": [
+        "R96D"
+      ]
+    },
+    {
+      "id": "E1",
+      "kind": "synthetic",
+      "text": "A virtual Q-sensitive predictive pathway can be learned from zero coupling when prediction requires it.",
+      "evidence": [
+        "R95"
+      ]
+    },
+    {
+      "id": "E2",
+      "kind": "synthetic",
+      "text": "Flexible policies can fit ancestry-distinguishing training data yet extrapolate the wrong path.",
+      "evidence": [
+        "R97"
+      ]
+    },
+    {
+      "id": "E3",
+      "kind": "synthetic",
+      "text": "Minimal direct-intervention supervision improves average extrapolation but does not globally certify a path.",
+      "evidence": [
+        "R98"
+      ]
+    },
+    {
+      "id": "E4",
+      "kind": "bounded_audit",
+      "text": "Mechanism claims are relative to intervention domain D and hypothesis/regularity class H.",
+      "evidence": [
+        "R99"
+      ]
+    },
+    {
+      "id": "A1",
+      "kind": "retrospective_audit",
+      "text": "Public ROGUE evidence supports corrigibility failure/environment preservation but does not identify direct current-bearer continuation value.",
+      "evidence": [
+        "R101"
+      ]
+    },
+    {
+      "id": "S1",
+      "kind": "synthesis",
+      "text": "The L0-L9 ladder separates distinct evidential burdens from bearer identity to fear.",
+      "evidence": [
+        "R100",
+        "R102",
+        "R103"
+      ]
+    }
+  ],
+  "explicit_nonclaims": [
+    "No claim that current AI intrinsically wants to survive.",
+    "No claim that shutdown resistance is equivalent to self-preservation.",
+    "No claim that the synthetic Q variable is an actual self.",
+    "No claim that current AI has negative valence or fear of death.",
+    "No claim that DOI/OTS/Arweave establish truth, significance, or peer review."
+  ]
+}
