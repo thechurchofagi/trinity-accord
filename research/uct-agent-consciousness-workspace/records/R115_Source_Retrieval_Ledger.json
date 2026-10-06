@@ -1,0 +1,59 @@
+{
+  "round": "R115",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "Quality space computations for consciousness",
+      "authors": "Fleming; Shea",
+      "venue": "Trends in Cognitive Sciences",
+      "year": 2024,
+      "doi": "10.1016/j.tics.2024.06.007",
+      "scope": "Abstract/highlights read; direct prior art for relational quality spaces and intervention/training tests."
+    },
+    {
+      "title": "Neurophenomenal structuralism. A philosophical agenda for a structuralist neuroscience of consciousness",
+      "author": "Holger Lyre",
+      "venue": "Neuroscience of Consciousness",
+      "year": 2022,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9396309/",
+      "scope": "Abstract and empirical-structure sections read; direct prior art for Q-structures, neural mappings and RSA."
+    },
+    {
+      "title": "Towards a structural turn in consciousness science",
+      "author": "Johannes Kleiner",
+      "venue": "Consciousness and Cognition",
+      "year": 2024,
+      "doi": "10.1016/j.concog.2024.103653",
+      "scope": "Abstract read; prior art/caution for structure-preserving mappings and phenomenal structures."
+    },
+    {
+      "title": "What is a mathematical structure of conscious experience?",
+      "authors": "Kleiner; Ludwig",
+      "venue": "Synthese",
+      "year": 2024,
+      "doi": "10.1007/s11229-024-04503-4",
+      "scope": "Abstract/overview read; prior art for explicit mathematical structures of experience."
+    },
+    {
+      "title": "Towards a Mathematical Structure of Global Phenomenal Consciousness",
+      "year": 2026,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13298370/",
+      "scope": "Abstract/structural comparison context read; current prior for local/global phenomenal-structure formalization."
+    },
+    {
+      "title": "Inferring latent behavioral strategy from the representational geometry of prefrontal cortex activity",
+      "venue": "Nature Communications",
+      "year": 2026,
+      "url": "https://www.nature.com/articles/s41467-026-69380-6",
+      "scope": "Abstract read; current example of representational geometry distinguishing latent strategies with matched behavior."
+    }
+  ],
+  "internal_sources": [
+    "R77 physical-port/coordinate caution",
+    "R106 projection non-equivalence",
+    "R113 causal-support identification",
+    "R114 content-claim rule"
+  ],
+  "novelty_status": "Structural/quality-space approaches are strong prior art. Project-specific contribution is Anchored Causal Geometry: grounding + causal support + intervention preservation + actual-K anchoring before UCT content interpretation.",
+  "no_third_party_fulltexts_redistributed": true
+}

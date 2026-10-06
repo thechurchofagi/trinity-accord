@@ -1,0 +1,20 @@
+{
+  "round": "R115",
+  "grounded_label_swap": {
+    "A_hamming": [[0,1,2],[1,0,1],[2,1,0]],
+    "B_hamming": [[0,2,1],[2,0,1],[1,1,0]],
+    "same_unlabeled_distance_multiset": true,
+    "unlabeled_distance_multiset": [1,1,2],
+    "same_grounded_distance_matrix": false
+  },
+  "coordinate_scale": {
+    "A_euclidean": [[0.0,1.0,1.4142135623730951],[1.0,0.0,1.0],[1.4142135623730951,1.0,0.0]],
+    "C_euclidean": [[0.0,2.0,2.8284271247461903],[2.0,0.0,2.0],[2.8284271247461903,2.0,0.0]],
+    "same_raw_euclidean_matrix": false,
+    "A_causal_signatures": {"x0":[0,0],"x1":[1,0],"x2":[1,1]},
+    "C_causal_signatures": {"x0":[0,0],"x1":[1,0],"x2":[1,1]},
+    "same_causal_signature_geometry": true,
+    "causal_hamming": [[0,1,2],[1,0,1],[2,1,0]]
+  },
+  "interpretation": "Unanchored geometry can preserve abstract distances while swapping grounded meanings; raw coordinate scale can change while selected causal discrimination structure is preserved. Not a consciousness measurement."
+}

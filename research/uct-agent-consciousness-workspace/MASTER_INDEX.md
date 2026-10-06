@@ -5,14 +5,14 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 ## Current entry points
 
 - Completed DOI release: **R105** (TA-TR-2026-24 v1.0 published to Zenodo; OTS submitted and awaiting Bitcoin attestation before Arweave).
-- Latest first-principles research: **R114** (cross-substrate support taxonomy audit).
-- New-window entry: [R114 cross-substrate support taxonomy audit](records/R114_Cross_Substrate_Support_Taxonomy_Audit_20261006.md).
+- Latest first-principles research: **R115** (Anchored Causal Geometry for label-free content comparison).
+- New-window entry: [R115 Anchored Causal Content Geometry](records/R115_Anchored_Causal_Content_Geometry_20261006.md).
 - Current submission manuscript: [From Shutdown Resistance to Self-Continuation Control v0.3](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
 - Archival DOI release: **TA-TR-2026-24 v1.0**, DOI `10.5281/zenodo.23176685`, Zenodo record `23176685`; [v1 release anchor](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/V1_RELEASE_ANCHOR.json).
 - Standing research philosophy: [Long-term research and archival philosophy](notes/20261006_Long_Term_Research_and_Archival_Philosophy.md) — optimize for originality, rigor, reproducibility, stable DOI/archive discoverability, and future-AI citability rather than venue prestige or publication count.
 - Machine-readable archival companion: [self-continuation v0.3 archive](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/README.md) — claims/evidence metadata, citation records, retrieval terms, future-AI reading guide and SHA manifest.
 - Prior integrated UCT workspace manuscript: [UCT Agent Self-Preservation v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest analysis: [R114 cross-substrate support taxonomy audit](records/R114_Cross_Substrate_Support_Taxonomy_Audit_20261006.md).
+- Latest analysis: [R115 Anchored Causal Content Geometry](records/R115_Anchored_Causal_Content_Geometry_20261006.md).
 - Latest training: [R99 bounded-domain path models](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
 - Current next step: preserve exact v1.0; wait for OTS Bitcoin attestation through the existing scheduler, then allow guarded Arweave upload/readback. Do not claim completion before ARWEAVE_READBACK_PASS.
@@ -24,7 +24,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R114 handoff](records/R114_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R115 handoff](records/R115_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -306,3 +306,10 @@ A five-relation transparent system separates a shared permissive gate, two degen
 [Research report](records/R114_Cross_Substrate_Support_Taxonomy_Audit_20261006.md); [support map](records/R114_Support_Category_Map.csv); [source ledger](records/R114_Source_Retrieval_Ledger.json); [handoff](records/R114_Worklog_and_Handoff_20261006.md).
 
 R114 distinguishes content-bearing support, access/permissive support, degenerate alternatives, readouts and correlates for the three R112 atlas functions. It freezes a stricter content-claim rule: causal necessity alone is insufficient to identify experiential content. Content-specific distinctions, interventions, access/readout controls, generalization and actual-K anchoring are required before a selected UCT content interpretation.
+
+
+## R115 Anchored Causal Geometry
+
+[Research report](records/R115_Anchored_Causal_Content_Geometry_20261006.md); [exact checks](records/r115_anchored_causal_geometry.py); [results](records/R115_Anchored_Causal_Geometry_Results.json); [source ledger](records/R115_Source_Retrieval_Ledger.json); [handoff](records/R115_Worklog_and_Handoff_20261006.md).
+
+R115 integrates structural-consciousness prior art with UCT's actual-K and intervention constraints. It shows why ungrounded geometric isomorphism can swap content meanings and why raw activation scale can change while selected causal discrimination relations remain fixed. Cross-substrate content evidence is graded G1 behavioral geometry, G2 representation geometry, G3 anchored causal geometry and G4 constitutive content homology.

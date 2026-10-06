@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R114 support taxonomy回套cross-substrate atlas；新窗口先读 records/R114_Cross_Substrate_Support_Taxonomy_Audit_20261006.md 与R114交接，再按需回读R112/R113。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R115 Anchored Causal Geometry；新窗口先读 records/R115_Anchored_Causal_Content_Geometry_20261006.md 与R115交接，再按需回读R113/R114。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -570,3 +570,12 @@ pairwise topology仍可能丢失direct-vs-indirect机制，因此下一步R111�
 working memory、evidence integration、bearer estimation均完成support-category审计。最重要新增规则：causal necessity只证明relation属于支持能力T的组织，不自动证明它承载特定体验内容；content claim需要distinction coding + content-specific intervention + access/output controls + generalization + actual K anchoring。
 
 下一步R115转向无qualia标签的experiential content structure / relational geometry。
+
+
+## R115 — 2026-10-06：无qualia标签的Anchored Causal Geometry
+
+不再用共享语言词或raw activation geometry直接比较体验内容。ACG要求grounded conditions、actual content-bearing support、intervention family、causal response ports和relational structure同时保存。
+
+exact witnesses证明：未锚定的几何可在交换grounded meanings后仍保持抽象距离；raw Euclidean尺度也可改变而causal signature geometry不变。冻结G1 behavioral -> G2 representation -> G3 anchored causal -> G4 constitutive content homology四级证据。只有G4才进入C1 selected experiential-content structure解释。
+
+下一步R116做四层可控的人工proof-of-concept：behavior/report/content geometry/valence分开操纵。
