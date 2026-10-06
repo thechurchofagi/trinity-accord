@@ -1,0 +1,31 @@
+{
+  "round": "R124",
+  "execution_status": "EXECUTED_ON_RETAINED_REAL_OOF_DATA",
+  "execution_environment": "GitHub connector code isolate",
+  "method": [
+    "Fetched all 12 R122 *_B2_predictions.csv.gz files from repository branch as base64.",
+    "Decoded base64 and gzip/DEFLATE with an independent pure-JS reader because runtime DecompressionStream/TextDecoder were unavailable.",
+    "Parsed all 32656 held-out rows.",
+    "Primary transition audit formed 29337 same-trial adjacent-bin pairs and computed per-rat/equal-rat/pooled metrics.",
+    "Independent lag-scan pass re-fetched and re-decoded all 12 files, re-formed within-trial transitions, and reproduced zero-lag FOF/ADS correlations before scanning -300..+300 ms.",
+    "Leave-one-rat-out meta-stacking diagnostic was separately executed on the same retained OOF prediction streams.",
+    "Exact counterexample formula was independently numerically checked at T=1000,a=2."
+  ],
+  "reproducibility_note": "r124_transition_commutation_audit.py is a repository-native reproduction script for a local checkout; it mirrors the executed primary/lag audit but was not the runtime used for the connector-side execution.",
+  "integrity_checks": {
+    "expected_rows": 32656,
+    "observed_rows": 32656,
+    "expected_sessions": 12,
+    "observed_sessions": 12,
+    "expected_rats": 5,
+    "observed_rats": 5,
+    "adjacent_transitions": 29337,
+    "zero_lag_crosscheck": "PASS"
+  },
+  "limitations": [
+    "No raw MAT refit in R124.",
+    "No causal intervention data added.",
+    "C2 failure is scoped to the current R122 mapping/view.",
+    "Post-hoc stacking is not the frozen raw-feature joint model."
+  ]
+}
