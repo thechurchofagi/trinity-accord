@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R96；新窗口先读 records/UCT_Agent_Research_Handoff_R96_20261006.md，再读 records/UCT_Agent_Research_Handoff_R96D_20261006.md 及文末R96D并发补充。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R97；新窗口先读 records/UCT_Agent_Research_Handoff_R97_20261006.md，再按需回读R96/R96D。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
