@@ -24,7 +24,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R120 handoff](records/R120_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R121 handoff](records/R121_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -348,3 +348,10 @@ R119 makes cross-substrate mechanism correspondence coordinate-aware but interve
 [Research report](records/R120_Experience_Intelligence_Bridge_Theorem_Schema_20261006.md); [finite checks](records/r120_bridge_theorem_witnesses.py); [results](records/R120_Bridge_Theorem_Results.json); [source ledger](records/R120_Source_Retrieval_Ledger.json); [handoff](records/R120_Worklog_and_Handoff_20261006.md).
 
 R120 consolidates the first-principles answer: actual realized intelligence is experience-bearing under UCT, genuine fixed-condition capability differences refine complete experiential type, but equal intelligence/performance/report is non-identifying because capability and behavior are many-to-one projections of organization. Cross-substrate T2 supports selected mechanism correspondence only; T3/G4 selected constitutive homology is required before a selected experiential-structure correspondence can be claimed under C1.
+
+
+## R121 closure audit
+
+[Closure report](records/R121_Experience_Intelligence_Closure_Audit_20261006.md); [status matrix](records/R121_Closure_Status_Matrix.csv); [handoff](records/R121_Worklog_and_Handoff_20261006.md).
+
+R121 concludes that the generic experience–intelligence relation is largely formally closed conditional on UCT: actual intelligence is experience-bearing, intelligence is not identical to experience, genuine capability differences can refine complete experiential type, and equality/increase of capability does not identify equality/increase of experience. Remaining high-value work is empirical T2/T3 closure plus genuinely separate phenomenal-content, valence, subject-boundary and foundational-C1/U1 validation problems.

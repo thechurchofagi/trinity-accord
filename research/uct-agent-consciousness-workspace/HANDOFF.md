@@ -619,3 +619,14 @@ T2证书要求grounding、baseline、transition commutation、intervention trans
 把整条关系正式分成：存在桥、能力差异桥、support membership、multiple realization、T2 selected mechanism、T3/G4 selected constitutive homology、complete K equivalence。最关键非对称性：真实能力差异在固定完整比较下可推出complete E-type差异；能力相同不能反推E相同；能力增加不能推出experience scalar增加。
 
 跨底物T2只够selected mechanism correspondence；T3/G4才够selected experiential-structure homology；complete K correspondence才够complete E-type equivalence。下一步R121做closure audit，明确剩余真正未知。
+
+
+## R121 — 2026-10-06：experience/intelligence closure audit
+
+审计后确认：条件于UCT，E与I的基本关系已经形式化闭合，不应继续重复堆toy。已闭合：E!=I但共享K；realized I必experience-bearing；capability difference可refine complete E-type；same I/B/R不能反推same E；I增加不推出scalar E增加；self/access/report不是体验存在gate。
+
+真正剩余分两类：
+empirical：T2 biology↔AI support correspondence、selected T3/G4；
+deep bridge：phenomenal-content translation、valence、subject unity/boundary、C1/U1外部验证。
+
+下一步优先拿rat Cells.zip做R117 B1/B2，不再增加generic formal layer。
