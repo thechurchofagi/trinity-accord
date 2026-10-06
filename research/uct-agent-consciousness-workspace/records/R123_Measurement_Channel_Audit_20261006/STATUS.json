@@ -1,0 +1,20 @@
+{
+  "round": "R123",
+  "checkpoint": "EXECUTED_MEASUREMENT_AND_RETAINED_DATA_AUDIT",
+  "overall_user_task_complete": false,
+  "major_empirical_breakthrough": false,
+  "executed": [
+    "measurement_channel_check.py",
+    "retained_data_audit.py"
+  ],
+  "prospective_not_executed": [
+    "neural_joint_model",
+    "transition_commutation",
+    "intervention_transport"
+  ],
+  "B3_independently_replicated": false,
+  "T2_closed": false,
+  "E": "latent",
+  "fourth_medical_paper": "not identified",
+  "published_files_changed": false
+}

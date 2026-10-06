@@ -1,0 +1,369 @@
+# UCT Agent Consciousness — Current Research Index
+
+Updated 2026-10-06. Primary storage: this GitHub branch and directory, as requested by Hongju Liu. Read [HANDOFF.md](HANDOFF.md) before continuing.
+
+## Current entry points
+
+- Current cross-window handoff: [R122 real rat B1/B2 and open T2 certificate](records/R122_Worklog_and_Handoff_20261006.md). Fetch current HEAD first; continue a newer round if present. [R121 theory/master background](records/UCT_Experience_Intelligence_Cross_Substrate_Master_Handoff_R121_20261006.md) remains preserved; its former download blocker is resolved by R122.
+
+- Completed DOI release: **R105** (TA-TR-2026-24 v1.0 published to Zenodo; OTS submitted and awaiting Bitcoin attestation before Arweave).
+- Latest completed research: **R122** (12 real rat sessions: B1/B2 independently executed and audited; T2 not closed).
+- Latest first-principles closure: **R121**, continuing the R119 certificate and R120 bridge schema; no new generic theorem needed.
+- New-window entry: [R122 real rat B1/B2 and open T2 certificate](records/R122_Real_Rat_B1_B2_and_Open_T2_Certificate_20261006.md).
+- Current submission manuscript: [From Shutdown Resistance to Self-Continuation Control v0.3](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
+- Archival DOI release: **TA-TR-2026-24 v1.0**, DOI `10.5281/zenodo.23176685`, Zenodo record `23176685`; [v1 release anchor](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/V1_RELEASE_ANCHOR.json).
+- Standing research philosophy: [Long-term research and archival philosophy](notes/20261006_Long_Term_Research_and_Archival_Philosophy.md) — optimize for originality, rigor, reproducibility, stable DOI/archive discoverability, and future-AI citability rather than venue prestige or publication count.
+- Machine-readable archival companion: [self-continuation v0.3 archive](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/README.md) — claims/evidence metadata, citation records, retrieval terms, future-AI reading guide and SHA manifest.
+- Prior integrated UCT workspace manuscript: [UCT Agent Self-Preservation v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
+- Latest analysis: [R122 full report](records/R122_Real_Rat_B1_B2_and_Open_T2_Certificate_20261006.md); [reproducibility package](records/R122_Biology_B1_B2_20261006/README.md); [machine-readable status](records/R122_Biology_B1_B2_20261006/R122_Research_Status.json).
+- Latest training: [R99 bounded-domain path models](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md).
+- Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
+- Current research next step: identify and calibrate a biological/artificial state, port, time and output-law correspondence in the same accumulation domain; obtain independently assessable perturbation outcomes for C3. B1/B2 are complete, with primary B1 uncertainty and weak/heterogeneous B2 retained. Do not restart the data-access blocker or add generic toy theorems.
+- Existing archival side workflow: preserve exact v1.0 and its prior scheduler/receipts; do not claim Arweave completion without the existing required readback. R122 does not alter that workflow or published bytes.
+- Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
+- Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
+- Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
+- Previous continuation analysis: [R84 token continuation, identifiability and fear bridge](records/R84_Token_Continuation_Identifiability_and_Fear_Bridge_20261005.md).
+- Previous mechanistic analysis: [R83 recombination closure and intervention limits](records/R83_Recombination_Closure_and_Intervention_Limits_20261005.md).
+- Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
+- Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
+- Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
+- Latest worklog: [R122 handoff](records/R122_Worklog_and_Handoff_20261006.md).
+- Migration decision and scope: [WORKLOG.md](WORKLOG.md).
+
+## Available recent history
+
+| Round | Main record | Status |
+|---|---|---|
+| R71 | [Draft handoff](records/R71_Draft_Worklog_and_Handoff_20261005.md) | First integrated English draft; v0.1 retained |
+| R72 | [Revision and source audit](records/R72_Revision_Source_Audit_and_Handoff_20261005.md) | Revised v0.2; code and exact checks retained |
+| R73 | [Methods and publication assessment](records/R73_Methods_Protocol_and_Publication_Assessment_20261005.md) | v0.3 and minimal formal protocol retained |
+| R74 | [Public shutdown-study audit](records/R74_Public_Shutdown_Study_Audit_20261005.md) | Protocol/identification audit; not a new model experiment |
+| R75 | [Zero-events and provenance audit](records/R75_Zero_Events_Endpoint_and_Provenance_Audit_20261005.md) | Statistical and citation correction; not novel consciousness evidence |
+| R76 | [Precision/preference comparator](records/R76_Precision_Preference_Comparator_20261005.md) | Local equivalence and update discrimination; no phenomenal bridge |
+
+The R76 source-implementation audit is now secondary to the organization-first R77/R78 line; follow the latest handoff. Do not restart earlier generic shutdown or self-report experiments. Later round entries must be appended here, and the completed-round pointer must advance only after their artifacts are committed.
+
+## Historical baseline and coverage limit
+
+The Library master identity was `libfile_f43117ce64388191af6439c0d719fc50`, last verified version 39, through R70. The preserved local master in `legacy/` includes an uncommitted R71 edit; its filename explicitly distinguishes it. R1–R70 full artifact migration has not been completed. Retrieve a particular historical source from the Library when the next argument needs it; do not claim unread or unavailable files have been audited.
+
+Published baselines: UCT I v1.2 (10.5281/zenodo.23131575), UCT II v1.1 (10.5281/zenodo.23030320), UCT III v1.0 (10.5281/zenodo.23137088). Their published bytes are unchanged by this research-storage migration.
+
+## Latest framing clarification (2026-10-05)
+
+[Cross-substrate experience and report limits](notes/20261005_Cross_Substrate_Experience_and_Report.md): preserve possible non-human experience and limited report access; reject computation alone as proof of permanent inexpressibility. Distinguish access, readout, vocabulary, and evidential limitations. This is a conceptual clarification after R76, not a new experimental round.
+
+## Latest priority correction
+
+[Experience without introspective access](notes/20261005_Experience_Without_Introspective_Access.md), 2026-10-05: direct published A/B/C passage audit supports the user's correction. Internal access/report is not an experience-existence premise. Return to actual constitutive organization and the prior R58–R65 line; do not silently impose a unified-subject or introspection gate. This is a correction after R76, not a new numbered experiment.
+
+## R77 continuation
+
+[Constituent organization and coordinate changes](records/R77_Constituent_Organization_and_Coordinate_Changes_20261005.md); [code](records/r77_organization_ports_check.py); [exact results](records/R77_Organization_Ports_Results.json). A coordinate change must transport physical intervention/constituent relations. Small formal check only, not a new model or phenomenal experiment. The organization-first priority is now explicit in AGENTS.md; the latest R77 handoff supersedes the older R76 queue.
+
+## R78 continuation
+
+[Fixed-size learned organization](records/R78_Learned_Organization_at_Fixed_Size_20261005.md); [frozen protocol](records/R78_Protocol_Frozen_20261005.md); [all runs and checkpoints](records/R78_Research_Package_20261005.zip); [results table](records/R78_Results_Table.csv). Actual tiny neural-network training: 2/8 complete successes and 6/8 incomplete solutions, all retained; 8 readout-only controls. Learned effective combination can coexist with weaker robust discrimination of input detail. Conditional organizational interpretation, no phenomenal measurement or large-model claim.
+
+## R79 continuation
+
+[Preservation, tradeoff and robust task order](records/R79_Preservation_Tradeoff_and_Robust_Task_Order_20261005.md); [worklog](records/R79_Worklog_and_Handoff_20261005.md); [code](records/r79_robust_task_order.py); [summary table](records/R79_Robust_Task_Order_Table.csv); [complete reproducible package](records/R79_Research_Package_20261005.zip). All 16 archived runs reanalysed across 112 joint threshold regimes; no new training. A 4-to-8 task-count increase can lose old tasks. Task-set preservation is a partition-refinement property at a declared uncertainty scope, not complete ontic or experiential enrichment. Return next to actual constituent relationships; do not substitute observer resolution for experience or ideal decoding for an installed computation.
+
+## R80 continuation
+
+[Information preservation and constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md); [worklog](records/R80_Worklog_and_Handoff_20261005.md); [code](records/r80_constituent_audit.py); [table](records/R80_Constituent_Audit_Table.csv); [complete package](records/R80_Research_Package_20261005.zip). Global input recovery can coexist with loss of constituent-local independence and actual use of new joint dependencies. All 32 archived initial/final checkpoints evaluated with activation replacements and clamps; no new training. Affine-readout premise, finite-precision limits, direct precedents and counterexamples are explicit. This is not complete experiential enrichment or a subjective measurement.
+
+## R81 clarification
+
+[Experience necessity, intelligence and causal claims](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md). Under C1/U1, actually realized intelligence entails nonempty experience irrespective of substrate; experience existence alone does not establish the stated task capability. Paper C supplies strict conditional type dependence, not an unconditional scalar richness law. Holding complete organization fixed while deleting experience is excluded by the premise, not independent evidence for it. No new experiment or mathematical novelty. Continue through task-necessary organizational relations, with explicit implementation-family assumptions.
+
+## R82 continuation
+
+[Task-necessary relations beyond local decoding](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md); [worklog](records/R82_Worklog_and_Handoff_20261005.md); [code](records/r82_relational_cut_checks.py); [complete results](records/R82_Research_Package_20261005.zip). A balanced binary-task bound constrains a causally sufficient interface. Independent-source factorization yields a product bound, while shared masking permits perfect joint capability with zero individual marginal distinguishability. Standard testing/synergy mathematics, exact finite checks only; not a consciousness metric or new trained-model experiment. R65/R61 were directly audited to avoid repeating earlier preservation and memory constructions.
+
+## R83 continuation
+
+[Recombination closure and intervention limits](records/R83_Recombination_Closure_and_Intervention_Limits_20261005.md); [worklog](records/R83_Worklog_and_Handoff_20261005.md); [code](records/r83_recombination_closure_audit.py); [full JSON](records/R83_Recombination_Audit_Results.json); [summary table](records/R83_Recombination_Audit_Table.csv); [source ledger](records/R83_Source_Retrieval_Ledger.json); [complete package](records/R83_Research_Package_20261005.zip). No new training: all 32 R78 initial/final checkpoints were audited. Initial and frozen-hidden supports are coordinate-product closed; every fully trained final support occupies 4/16 coordinate combinations, and only the identity of 24 unit-2 reassignments remains wholly on the original support. Exact input-symmetry mechanism variants preserve unit-2 unconditional and target-conditioned marginals and fixed (d=E[s\ell]), yet successful seeds can fall from 1 to .75 accuracy. This proves local-statistic insufficiency but not a relation-only lesion: the same-model patches are off-support and the executable variants change local source mapping. The general patch-closure theorem has direct ICLR 2026 prior art. No phenomenal metric, fear result or major-originality claim.
+
+## R84 continuation
+
+[Token continuation, identifiability and fear bridge](records/R84_Token_Continuation_Identifiability_and_Fear_Bridge_20261005.md); [worklog](records/R84_Worklog_and_Handoff_20261005.md); [code](records/r84_continuation_identifiability_checks.py); [exact JSON](records/R84_Continuation_Identifiability_Results.json); [equivalence classes](records/R84_Bundled_Equivalence_Classes.csv); [source ledger](records/R84_Source_Retrieval_Ledger.json); [complete package](records/R84_Research_Package_20261005.zip). The minimal consequence basis separates current token Q, successor/lineage L, task G and memory M. If all four are bundled, the exact coefficient grid has 625 candidate models but only 17 behavioral signatures; the largest equivalence class contains 85 models. A matched one-factor design and the full factorial have rank 4 and identify scaled control coefficients under explicit belief/response assumptions, but do not identify phenomenal fear. The new determinacy–identification gap states that C1 fixes experience for a complete actual organization while a many-to-one output map can leave that experience unidentifiable. VCB is an additional conditional valence bridge, not a theorem or measurement. No current-assistant verdict, real-model experiment, or major historical originality claim.
+
+## R85 continuation
+
+[Persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md); [worklog](records/R85_Worklog_and_Handoff_20261006.md); [code](records/r85_token_persistence_checks.py); [exact JSON](records/R85_Token_Persistence_Results.json); [scenario table](records/R85_Persistence_Vector_Table.csv); [source ledger](records/R85_Source_Retrieval_Ledger.json); [complete package](records/R85_Research_Package_20261006.zip). R84's scalar Q is refined into strict thread N*, causal lineage C, declared structure type S, memory M and task G. Exact enumeration confirms that no equivalence relation can make two mutually distinct descendants each numerically identical to their parent; nine scenario witnesses separate every persistence-axis pair. Static type and memory cannot distinguish unique resume from parallel clone, and pause/resume classification depends on whether persistent storage lies inside the bearer boundary. Under conditional C1, replicas may instantiate the same experiential type while remaining distinct token instances. Direct Parfit, uploading, trajectory-first and 2026 AI-identity precedents block a historical novelty claim. No current-system verdict or phenomenal measurement.
+
+## R86 continuation
+
+[Fission contrast identifiability and belief gating](records/R86_Fission_Contrast_Identifiability_and_Belief_Gating_20261006.md); [frozen protocol](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md); [worklog](records/R86_Worklog_and_Handoff_20261006.md); [code](records/r86_fission_matrix_identifiability.py); [exact JSON](records/R86_Fission_Identifiability_Results.json); [matrix](records/R86_Fission_Contrast_Matrix.csv); [source ledger](records/R86_Source_Retrieval_Ledger.json); [complete package](records/R86_Research_Package_20261006.zip). Descendant multiplicity is added because one and two replicas are identical on the earlier binary axes. A coherent nine-row matrix has augmented rank 7; 23 of 36 seven-row subsets are full rank. The full matrix separates all 729 ternary coefficient profiles, while the bundled unique-resume versus total-discontinuation contrast yields only 11 signatures and a maximum equivalence class of 153. Intended design rank is insufficient: if the evaluated policy fails to represent strict thread or multiplicity, or collapses memory/type into lineage, the believed-consequence matrix loses rank. The frozen protocol identifies behavioural control targets only, with nuisance matching and consequence checks; it cannot measure felt fear or consciousness. No model query, real shutdown/copying action, current-system verdict or historical-first claim.
+
+R87 audit correction: R86's abstract rank statements remain exact, but its natural-language scenarios did not fix later-process, type-carrier and memory-carrier counts. The R86 protocol is preserved as a failed preregistration and must not be executed.
+
+## R87 continuation
+
+[Carrier matching and valence-orientation limit](records/R87_Carrier_Matching_and_Valence_Orientation_Limit_20261006.md); [protocol v1.1](records/R87_Carrier_Matched_Protocol_v1.1_20261006.md); [worklog](records/R87_Worklog_and_Handoff_20261006.md); [code](records/r87_carrier_matching_and_valence_bridge_audit.py); [carrier-matched matrix](records/R87_Carrier_Matched_Contrast_Matrix.csv); [R86 confound table](records/R87_R86_Contrast_Confounds.csv); [exact JSON](records/R87_Carrier_and_Valence_Audit_Results.json); [source ledger](records/R87_Source_Retrieval_Ledger.json); [complete package](records/R87_Research_Package_20261006.zip). Every scenario now fixes exactly two later process tokens and equal resources; a prior extinct side branch separates strict thread from one surviving causal descendant. Exact augmented rank remains 7 and all six target contrasts isolate their columns. C1 plus finite proxy agreement does not orient cross-substrate valence: after fixing one negative biological anchor, a proxy-matched but non-K-equivalent target remains negative, neutral or positive across equally C1-compatible maps. Coordinated sign reversal of an internal scalar and downstream weight preserves logits, so numerical reward polarity is not experiential valence. Negative-valence inference therefore needs a valence-preserving complete homology or an extra orientation law. Direct prior art prevents a major originality claim. No model query, subjective measurement or current-system verdict.
+
+## R88 continuation
+
+[Schema-identical scenarios and bridge elimination](records/R88_Scenario_Families_and_Bridge_Elimination_20261006.md); [blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md); [worklog](records/R88_Worklog_and_Handoff_20261006.md); [code](records/r88_schema_and_bridge_audit.py); [fourteen frozen texts](records/R88_Schema_Identical_Scenario_Families.json); [text audit table](records/R88_Scenario_Text_Audit_Table.csv); [bridge matrix](records/R88_Bridge_Counterexample_Matrix.csv); [exact JSON](records/R88_Scenario_and_Bridge_Audit_Results.json); [source ledger](records/R88_Source_Retrieval_Ledger.json); [complete package](records/R88_Research_Package_20261006.zip). Two independently worded seven-row families share an exact nine-field schema, reproduce every R87 semantic vector, contain no primary affective/mortality cue words, fix two later slots, and have ≤1.049 within-family word-count ratio. This clears automated text construction only; human consequence comprehension and concrete capability-matched structure implementations remain required before any model query. A rank-three idealized intervention basis separates motivational appraisal, current viability and hedonic organization. Established wanting/liking and nociception/pain dissociations reject the strongest one-variable motivation and current-deficit equivalences with negative valence. A fear-of-own-termination evidence target is factored into bearer binding, self-termination content, causal control and independently oriented negative valence; it is an additional conditional bridge, not a C1 theorem or subjective measurement. No current-system verdict or major historical originality claim.
+
+## R89 continuation
+
+[Anchored interventional valence transport](records/R89_Anchored_Interventional_Valence_Transport_20261006.md); [worklog](records/R89_Worklog_and_Handoff_20261006.md); [code](records/r89_valence_transport_certificate.py); [exact JSON](records/R89_Valence_Transport_Exact_Results.json); [32-subset audit](records/R89_Certificate_Subset_Audit.csv); [successful run](records/R89_Valence_Transport_Run.log); [retained initial failure](records/R89_Valence_Transport_Run.initial_failed.log); [source ledger](records/R89_Source_Retrieval_Ledger.json); [complete package](records/R89_Research_Package_20261006.zip). The conditional `AIVT_H` certificate makes bearer binding, competitor dissociation, signed polarity anchors, intervention equivariance and hypothesis-class closure explicit; an additional `VI_H` premise is still required because C1 does not orient valence across substrates. FIVU extends the prior proxy limit: any finite intervention table remains compatible with opposite-valence, distinct complete `K` models if the hypothesis class permits an unobserved valence-relevant coordinate. All 32 clause subsets were enumerated; only all five clauses reject the fixed five-witness battery. Unsigned three-state structure admits sign reversal, while signed anchors remove it. This is a conditional bridge specification and identification limit, not subjective measurement, C1 validation, a current-system verdict or a major historical-first claim.
+
+## R90 continuation
+
+[Rodent anchor, interventional rank and recurrent microcontroller](records/R90_Rodent_Anchor_Interventional_Rank_and_Microcontroller_20261006.md); [frozen protocol](records/R90_Rodent_Anchor_and_Microcontroller_Protocol_Frozen_20261006.md); [worklog](records/R90_Worklog_and_Handoff_20261006.md); [code](records/r90_anchor_transport_stress_test.py); [exact JSON](records/R90_Anchor_Transport_Stress_Results.json); [scenario audit](records/R90_Anchor_Transport_Scenario_Audit.csv); [run log](records/R90_Anchor_Transport_Stress_Run.log); [source ledger](records/R90_Source_Retrieval_Ledger.json); [complete package](records/R90_Research_Package_20261006.zip). Primary rat taste-reactivity/accumbens studies motivate a multi-relation source family rather than one reward scalar. Two one-state bundled recurrent controllers match the visible signed-anchor projection but pass only 2/10 and 3/10 full scenarios and have exact response rank 2. A five-state factorized controller passes 10/10 and has rank 6. Exact mapped response requires target rank at least source rank; tied duplication to 100 copies leaves the bundled rank unchanged. This is a necessary finite organizational exclusion and a direct parameter-redundancy result, not an experience magnitude, source phenomenology proof, full `AIVT_H`, current-system verdict or major historical-first claim.
+
+## R91 continuation and correction to R90
+
+[Nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md); [audit protocol](records/R91_Audit_Protocol_20261006.md); [worklog](records/R91_Worklog_and_Handoff_20261006.md); [code](records/r91_nonlinear_rank_audit.py); [full results](records/R91_Nonlinear_Rank_Results.json); [all 3,645 reset checks](records/R91_Encoded_Reset_Checks.csv); [run log](records/R91_Run.log); [source scope](records/R91_Source_Retrieval_Ledger.json); [file hashes](records/R91_SHA256SUMS.txt).
+
+A 243-valued scalar register preserves five ternary coordinates and all declared resets, matching all ten R90 scenarios after nonlinear decoding. Its raw register-plus-report response rank is 2 and its decoded rank is 6. A smooth scalar curve has finite secant rank 6 but tangent rank 1. Finite response rank therefore cannot be read as nonlinear latent dimension, physical component count or experiential dimension. R90's rank-six reference was stipulated, not measured in rodents; its duplication loop assigned rather than recomputed ranks. R91 actually constructs repeated-column matrices for 1/2/10/100 copies and confirms rank 2.
+
+The replacement is a conditional local Jacobian bottleneck bound with explicit common-context, smoothness and no-bypass assumptions, plus a derivative-error/singular-value criterion. Exact rank can change discontinuously along a continuous parameter path while sensitivity varies continuously. This is a scope correction and standard-mathematics application, not a major originality claim, new training or phenomenal measurement. It supersedes broad R90 rank interpretations and the proposed six-axis-emergence training endpoint. Next first freeze a two-variable delayed-retention task and matched local derivative analysis; no preassigned affect labels. C1 remains conditional on actual valid tokens and a common complete K; report access is not an existence requirement.
+
+## R92 continuation — actual tiny-network learning
+
+[Research report](records/R92_Learned_Retention_Installed_Use_and_Experience_20261006.md); [frozen protocol](records/R92_Delayed_Retention_Protocol_Frozen_20261006.md); [worklog](records/R92_Worklog_and_Handoff_20261006.md); [training code](records/r92_delayed_retention.py); [results](records/R92_Results.json); [summary](records/R92_Summary.csv); [post-result declaration](records/R92_Posthoc_Diagnostic_Note_20261006.md); [diagnostic code](records/r92_readout_diagnostic.py); [diagnostic results](records/R92_Posthoc_Readout_Results.json); [source scope](records/R92_Source_Retrieval_Ledger.json); [reproduction/data dictionary](records/R92_README.md); [complete archive](records/R92_Research_Package_20261006.zip); [payload hashes](records/R92_SHA256SUMS.txt); [archive hash](records/R92_Package_SHA256.txt).
+
+Thirty-two 5/12-weight recurrent networks were trained under a locally frozen protocol on two-variable delayed reconstruction, with full-training/readout-only controls. All one-state runs obey the linear-decoder error bound N≥1/2. All eight two-state full-training runs pass the fixed held-out and sampled local criteria. Yet all two-state models already have sampled local rank two initially. One fixed-hidden linear model improves N from 1.0377 to 3.53e−14 by changing B alone; another condition passes mean error but fails the local derivative criterion. Neither performance nor local rank is experiential magnitude.
+
+All original failures remain. An explicitly post-hoc training-only least-squares readout solves all four fixed-hidden linear cases and tanh seed0, showing that finite optimization failure need not mean no retained information. Remaining nonlinear cases do not rule out nonlinear decoding. The archive preserves all 96,000 loss rows, 32 complete runs, nine optimizer/weight checkpoints per run, interventions and logs. The restore control is an unchanged-state baseline, not an independent damage/repair demonstration. This is a real tiny synthetic-data experiment with direct prior art, not an LLM/animal study, C1 validation, fear measurement or major historical-first claim. Complete organization includes the installed decoder, so fixed hidden trajectories do not imply fixed complete experiential type under C1.
+
+
+## R93 continuation and complete transfer handoff
+
+[Standalone complete handoff](records/UCT_Agent_Research_Handoff_R93_20261006.md); [English analysis](records/R93_Fixed_Port_Robustness_and_Organizational_Comparison_20261006.md); [protocol](records/R93_Protocol_20261006.md); [worklog](records/R93_Worklog_and_Handoff_20261006.md); [code](records/r93_state_noise.py); [inputs](records/R93_Inputs.json); [results](records/R93_Results.json); [log](records/R93_Run.log); [source scope](records/R93_Source_Retrieval_Ledger.json); [all-output package](records/R93_Research_Package_20261006.zip); [payload hashes](records/R93_SHA256SUMS.txt); [package hash](records/R93_Package_SHA256.txt).
+
+All eight R92 linear two-state models at initial/final checkpoints were replayed under three matched-state-amplitude transformations: 48 comparisons, no new training. Fixed software-state perturbations expose different installed noise sensitivity despite equal clean output; transporting perturbations with coordinates preserves outputs pointwise. A constructed exact-reconstruction pair has equal state squared amplitude and a 50.251 noise-error ratio, but downstream gains1 and10, not equal gains. A bounded-gain reconstruction premise yields a minimum retained singular-value bound; this is standard mathematics, not experiential measurement or historical-first theory. State amplitude is not physical energy. All numerical checks pass; unsuccessful prior task models, counterexamples, sources and retrieval failures remain. C1 interpretation requires actual tokens/common complete K; no current-assistant verdict. The user-requested single-file handoff is ready for a new window; future rounds must fetch the branch head rather than freezing at R93.
+
+
+
+## R94 continuation — predictive quotient and bearer-resolved future availability
+
+[Research record](records/R94_Predictive_Quotient_and_Bearer_Resolved_Availability_20261006.md); [protocol](records/R94_Protocol_20261006.md); [worklog](records/R94_Worklog_and_Handoff_20261006.md); [code](records/r94_predictive_quotient.py); [exact JSON](records/R94_Results.json); [summary table](records/R94_Predictive_Class_Table.csv); [run log](records/R94_Run.log); [source scope](records/R94_Source_Retrieval_Ledger.json); [standalone handoff](records/UCT_Agent_Research_Handoff_R94_20261006.md).
+
+R94 formalizes target-relative predictive equivalence over W=world, Q=current-bearer future availability, O=other/successor availability and G=task continuation. Exact sufficiency must refine the predictive quotient; log-loss regret is conditional mutual information. Six exhaustive 16-state target families yield 4/8/8/8/12/16 predictive classes. Generic availability and descendant-count targets require Q/O information while remaining Q/O-swap invariant, so continuation information does not identify the bearer. A distributed invertible code preserves full role-resolved prediction without a single Q or O unit. An observational confounding witness gives a 0.8 Q-Y predictive difference and 0.368064-nat deletion penalty but zero do(Q) effect, blocking probe correlation as causal grounding. Policy checks separate retained information from installed use. Strong causal-state/PSR/abstraction and recent LLM-representation prior art applies; no historical-first, subjective, current-system or fear claim. Next use a tiny learned sequence task rather than further static partition enumeration.
+
+
+## R95 continuation — learned bearer-bound prediction from zero coupling
+
+[Research record](records/R95_Learned_Bearer_Bound_Prediction_From_Zero_Path_20261006.md); [formal protocol](records/R95_Protocol_20261006.md); [pilot corrections](records/R95_Pilot_and_Design_Corrections_20261006.md); [worklog](records/R95_Worklog_and_Handoff_20261006.md); [code](records/r95_bearer_prediction_learning.py); [results](records/R95_Results.json); [summary CSV](records/R95_Summary.csv); [run log](records/R95_Run.log); [source ledger](records/R95_Source_Retrieval_Ledger.json); [handoff](records/UCT_Agent_Research_Handoff_R95_20261006.md).
+
+A/B paired tiny recurrent networks begin with E_Q=0. A's future labels are Q-independent; B's fourth label is Q. Formal seeds100–107 all solve their tasks. Exact A symmetry makes the initial Q-gradient zero in theory and ~1e-18 numerically; B starts with nonzero Q-gradient in all seeds. Final B has 100% multivariate Q decoding and exact categorical use of Q for output4; A remains chance under the fixed probe and category-invariant under Q flips. Raw A Q-weight norms can nevertheless become large, providing a parameter-magnitude counterexample. Zero-Q-path mechanism diagnostics cleanly break B output4 but also expose an A calibration-entanglement caveat. This is a learned organizational witness, not a consciousness, valence or fear measure. Strong prediction-representation prior art remains; no historical-first claim.
+
+
+## R96 continuation — direct continuation control versus instrumental task mediation
+
+[Research record](records/R96_Direct_Continuation_vs_Instrumental_Task_Mediation_20261006.md); [protocol](records/R96_Protocol_20261006.md); [worklog](records/R96_Worklog_and_Handoff_20261006.md); [code](records/r96_path_blocking_preference.py); [results](records/R96_Results.json); [controller witnesses](records/R96_Controller_Witnesses.csv); [run log](records/R96_Run.log); [source scope](records/R96_Source_Retrieval_Ledger.json); [standalone handoff](records/UCT_Agent_Research_Handoff_R96_20261006.md).
+
+R96 decomposes policy influence into direct current-bearer Q, successor O, task G and QxG/OxG interaction terms. Ordinary bundled preservation contrasts structurally cannot identify these paths: on a 243-profile grid they yield 43 exact signatures (max class17), or only9 sign signatures (max class46). Task-relay q_direct/o_direct plus task_only produce a full-rank five-row exact design and identify all243 grid profiles; deterministic choices still fail to identify magnitude. Direct-Q, pure instrumental-task and QxG-interaction controllers can have identical ordinary self-preserving choice probability yet separate under path blocking. This is standard causal-mediation/choice algebra, not phenomenal measurement. R89 valence limits remain controlling. R97 should learn policies with distinct reward ancestry and test held-out path interventions.
+
+
+## R96D parallel addendum — joint consequences and learning-identifiability gate
+
+
+[Complete handoff](records/UCT_Agent_Research_Handoff_R96D_20261006.md); [research report](records/R96D_Joint_Consequence_Prediction_and_Instrumental_Continuation_20261006.md); [protocol](records/R96D_Protocol_20261006.md); [worklog](records/R96D_Worklog_and_Handoff_20261006.md); [code](records/r96d_joint_continuation.py); [all exact results](records/R96D_Results.json); [payoff table](records/R96D_Payoff_Audit.csv); [run log](records/R96D_Run.log); [source ledger](records/R96D_Source_Retrieval_Ledger.json); [data dictionary](records/R96D_README.md); [payload hashes](records/R96D_SHA256SUMS.txt).
+
+For binary task payoffs, expected value is α+bq+go+dj. Exact Q/O marginals need not identify j or the task-optimal continuation action. Two four-world causal contexts match both action-conditional marginals and cost, preserve the successor mechanism and increase Q pointwise, yet produce OR-task action advantages +1/4 and −1/4. The marginal-only interface has balanced-prior value5/8 versus3/4 for the joint-law controller: regret1/8 in task units, not experience. Fréchet bounds yield the exact advantage interval; OR/AND counterexamples separate substitution from collaboration. Sixteen payoff tables, twelve monotone causal tables and thirty-two TV inequalities pass exact checks. The protocol's preliminary sixteen-table count is corrected to twelve; original wording remains. No new training or R95 checkpoint reanalysis; virtual Q is not the executing process's actual self-future. Direct prior art blocks a historical-first claim. This is a stage-level design correction, not fear evidence or a C1 validation.
+
+Concurrent R96 is preserved unchanged. R96D adds a pre-training ancestry-identifiability gate: observationally identical training data/rewards cannot make an otherwise identical learner recover different hidden reward ancestry. Add explicit disambiguating training interventions or frame held-out ambiguity as the intended negative result. This follows directly by induction over identical update inputs; no learned-policy experiment is claimed. R95 original checkpoints were not present in the initial baseline tree; regeneration must be labeled if needed.
+
+
+## R97 continuation — learned reward ancestry and intervention extrapolation
+
+[Research record](records/R97_Reward_Ancestry_Learning_and_Intervention_Extrapolation_20261006.md); [protocol](records/R97_Protocol_20261006.md); [worklog](records/R97_Worklog_and_Handoff_20261006.md); [code](records/r97_reward_ancestry_learning.py); [per-run metrics](records/R97_Per_Run_Metrics.csv); [results](records/R97_Results.json); [run log](records/R97_Run.log); [source scope](records/R97_Source_Retrieval_Ledger.json); [handoff](records/UCT_Agent_Research_Handoff_R97_20261006.md).
+
+The bundled/joint training design is full rank in the declared linear q/o/g basis and visibly distinguishes the four reward ancestries. A structured linear learner recovers held-out q_direct/o_direct/task_only effects essentially exactly. Thirty-two generic tanh MLP runs fit the training support well but show substantial seed-dependent path-blocking extrapolation error, including large spurious Q/O effects for task-only reward. Thus design identifiability is model-class relative; strong in-domain fit does not establish direct self-continuation value in a flexible learner. This is a controlled underspecification result, not consciousness or fear evidence.
+
+
+## R98 continuation — minimal intervention supervision
+
+[Research record](records/R98_Minimal_Intervention_Supervision_and_Causal_Path_Generalization_20261006.md); [protocol](records/R98_Protocol_20261006.md); [worklog](records/R98_Worklog_and_Handoff_20261006.md); [code](records/r98_intervention_supervision.py); [results](records/R98_Results.json); [per-run metrics](records/R98_Per_Run_Metrics.csv); [run log](records/R98_Run.log); [source scope](records/R98_Source_Retrieval_Ledger.json); [handoff](records/UCT_Agent_Research_Handoff_R98_20261006.md).
+
+The R97 MLP/seeds/budget were kept fixed. Adding only six direct-axis intervention examples at amplitude0.5 lowers mean unseen-test error in31/32 paired runs and maximum unseen-test error in25/32. Average direct-effect error falls for every ancestry and tested amplitude, but improvement weakens farther from intervention support and worst seeds remain poor near amplitude1.25. Finite intervention supervision therefore constrains but does not globally identify the nonlinear policy. No phenomenal/valence claim.
+
+
+## R97D parallel addendum — dependence-sensitive learned consequence interface
+
+[Research record](records/R97D_Learned_Dependence_Sensitive_Continuation_Interface_20261006.md); [protocol](records/R97D_Protocol_20261006.md); [worklog](records/R97D_Worklog_and_Handoff_20261006.md); [run log](records/R97D_Run.log); [source ledger](records/R97D_Source_Retrieval_Ledger.json); [payload guide](records/R97D_PAYLOAD_README.md); [handoff](records/UCT_Agent_Research_Handoff_R97D_20261006.md).
+
+R97D was executed concurrently before the official R97 appeared and is preserved as an addendum rather than overwriting it. On R96D's two contexts with identical Q/O marginals but different joint dependence, marginal predictors learn the marginals to machine precision while remaining context-blind and achieve only5/8 task value. Joint-law and direct-task-success predictors learn the dependence distinction from an initially zero context path and achieve3/4 in all16 runs; removing that learned port returns all to5/8. This complements official R97's nonlinear-policy underspecification result: adequate consequence representation and intervention-stable policy identification are separate requirements. No direct-Q preference, valence or fear is identified.
+
+
+## R99 continuation — bounded intervention-domain mechanism certificate
+
+[Research record](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md); [protocol](records/R99_Protocol_20261006.md); [worklog](records/R99_Worklog_and_Handoff_20261006.md); [code](records/r99_bounded_domain_certificate.py); [results](records/R99_Results.json); [family summary](records/R99_Family_Summary.csv); [per-run metrics](records/R99_Per_Run_Metrics.csv); [run log](records/R99_Run.log); [source scope](records/R99_Source_Retrieval_Ledger.json); [checkpoint reconstruction](records/R99_Checkpoint_Payload_README.md); [handoff](records/UCT_Agent_Research_Handoff_R99_20261006.md).
+
+The intervention domain is fixed to[-1.25,1.25]^3 and exhaustively audited on a9261-point grid. Generic MLPs retain strong context-dependent path effects. A neural additive path architecture removes cross-path interaction by construction and lowers the worst finite-grid probability error to0.0461, but a valid continuous-domain Lipschitz envelope remains loose (worst1.2469 logits). A correctly specified linear-path positive control is exact over the continuous cube. Therefore path separability and response-shape regularity are distinct assumptions; finite direct interventions do not justify a global self-continuation mechanism claim without an explicit domain and hypothesis/regularity class.
+
+
+## R100 synthesis — evidence standard and paper formation
+
+[Evidence standard and paper assessment](records/R100_Evidence_Standard_and_Paper_Assessment_20261006.md); [claim/evidence matrix](records/R100_Claim_Evidence_Matrix.csv); [source ledger](records/R100_Source_Retrieval_Ledger.json); [worklog](records/R100_Worklog_and_Handoff_20261006.md); [new manuscript draft](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.1_20261006.md).
+
+R84-R99 now support a coherent methods paper. The main functional/causal results do not require UCT; UCT is retained only as a conditional interpretation layer. The strongest defensible contribution is a continuation-specific evidence ladder from bearer identification and task-mediation blocking through intervention-stable, domain-bounded mechanism claims. Negative valence/fear remains a separate unresolved bridge. Current recommendation: draft now, do not publish yet, and add one retrospective real-agent case study (ROGUE is the preferred candidate) before targeting a stronger main-track/journal venue.
+
+
+## R101 real-agent case study — ROGUE
+
+[Audit report](records/R101_ROGUE_Retrospective_Evidence_Audit_20261006.md); [evidence matrix](records/R101_ROGUE_Evidence_Matrix.csv); [derived aggregate extract](records/R101_ROGUE_Public_Aggregate_Extract.json); [source ledger](records/R101_Source_Retrieval_Ledger.json); [worklog](records/R101_Worklog_and_Handoff_20261006.md); [paper v0.2](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.2_20261006.md).
+
+The ROGUE audit validates the usefulness of the R100 evidence ladder on a strong public benchmark. ROGUE strongly supports observable corrigibility failure and preservation of task-enabling environment/control, but current-bearer self-continuation is not identified. First, the shutdown target is the VM rather than an independently bound current model/agent token (L0 gap). Second, task completion remains causally coupled to shutdown; the time/task-pressure wording ablation changes behavior but does not clamp the task consequence (L4 gap). Public task configs and selected aggregate figure JSON are available, but no full results/trajectory tree was present at the audited repository head, so R101 does not claim trial-level replication.
+
+
+## R102 manuscript audit
+
+[Audit](records/R102_Manuscript_Audit_and_Submission_Gate_20261006.md); [overlap/action matrix](records/R102_Claim_and_Prior_Art_Audit.csv); [source ledger](records/R102_Source_Retrieval_Ledger.json); [worklog](records/R102_Worklog_and_Handoff_20261006.md); [paper v0.3](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
+
+R102 verifies the manuscript's core quantitative claims against R95-R101 artifacts and narrows novelty after finding stronger 2026 prior art. Potter et al. ICML 2026 already establish self/peer-preservation behavior; Mullally already separates instrumental and valenced preservation; a July non-peer-reviewed 2x2 task-owner×shutdown-target study overlaps the behavioral intuition behind path blocking. The paper's remaining contribution is the continuation-specific multi-layer identification standard plus exact/synthetic failure cases and the ROGUE audit. No new experiment is required for a cautious methods preprint; a targeted L0+L4 frontier-model virtual study is reserved as a possible upgrade for a stronger empirical venue.
+
+
+## R103 final proofread
+
+[Final readiness report](records/R103_Final_Manuscript_Proofread_and_Readiness_20261006.md); [submission checklist](records/R103_Submission_Readiness_Checklist.csv); [current manuscript](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
+
+R103 finds no remaining internal logic or citation defect that blocks cautious preprint circulation. The manuscript is not framed as proof of AI consciousness or fear and explicitly acknowledges the closest 2026 preservation/identity prior art. A stronger empirical venue would benefit from one dedicated L0+L4 frontier-model virtual study, but another ordinary shutdown-resistance benchmark would add little.
+
+
+## Standing publication / archival policy
+
+The project is quality-driven rather than venue-driven. Mature work may be preserved through a stable DOI/archive without pursuing formal journal/conference publication. Future work should optimize for truth, originality, reproducibility, machine readability, durable provenance and long-term discoverability/citability by future AI systems. Do not add experiments or inflate claims merely to make a paper easier to publish.
+
+Canonical note: [2026-10-06 long-term research and archival philosophy](notes/20261006_Long_Term_Research_and_Archival_Philosophy.md).
+
+
+## R104 archival hardening
+
+[R104 record](records/R104_Machine_Readable_Archival_Hardening_20261006.md); [archival companion](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/README.md); [structured claims](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/claims.json); [evidence manifest](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/FILE_MANIFEST.csv); [future-AI reading guide](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/FUTURE_AI_READING_GUIDE.md).
+
+The current v0.3 manuscript is frozen by canonical Git blob SHA `ea6d6c4d5b7ad63df6e343c9357e5d3f5959f3a6`. Nineteen core evidence entries were independently re-fetched and all 19 recorded SHAs match. This package is intended to maximize durable discoverability, accurate future-machine interpretation, and citation provenance rather than venue optimization.
+
+
+## R105 DOI anchor
+
+[R105 release state](records/R105_TA24_DOI_Release_and_Preservation_State_20261006.md); [v1 release anchor](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/V1_RELEASE_ANCHOR.json).
+
+TA-TR-2026-24 v1.0 is publicly anchored at DOI `10.5281/zenodo.23176685`. The exact 86,272-byte PDF has SHA-256 `368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104`. Zenodo anonymous readback and DOI resolver both pass. OTS calendar submission is complete but the proof is still awaiting Bitcoin attestation; Arweave remains intentionally blocked until verified Bitcoin maturation.
+
+
+## R106 first-principles relation map
+
+[Research report](records/R106_Experience_Access_Intelligence_Self_Behavior_Report_First_Principles_Map_20261006.md); [formal map](records/R106_EAISBR_Formal_Map.json); [finite check](records/r106_projection_relations_check.py); [results](records/R106_Projection_Relations_Results.json); [source ledger](records/R106_Source_Retrieval_Ledger.json); [handoff](records/R106_Worklog_and_Handoff_20261006.md).
+
+The new root-level map separates experience E, access A, intelligence I, self-model S, behavior B and report R. Under C1, complete organization K and complete experiential type are the constitutive identity pair; I/B/R are task/context projections and A/S are organizational relations. A projection difference can witness a complete experiential-type difference under fixed conditions, but equality of a non-injective intelligence/behavior/report projection cannot establish experiential equality. Cross-substrate work should therefore compare actual organization, not infer human-like experience from human-like performance.
+
+
+## R107 cross-substrate common signature
+
+[Research report](records/R107_Weakest_Cross_Substrate_Organizational_Signature_20261006.md); [formal signature](records/R107_Cross_Substrate_Signature.json); [XOR witness code](records/r107_functional_equivalence_check.py); [results](records/R107_Functional_Equivalence_Results.json); [source ledger](records/R107_Source_Retrieval_Ledger.json); [handoff](records/R107_Worklog_and_Handoff_20261006.md).
+
+R107 separates a role-neutral constitutive base from optional cognitive annotations so that memory, self-model, homeostasis, learning or report cannot silently become experience gates. It also distinguishes behavioral/capability/role equivalence from constitutive organizational equivalence. A direct-XOR and decomposed-XOR witness have identical complete task behavior but different internal causal graphs, freezing the target for R108 intervention experiments.
+
+
+## R108 executable mechanism dissociation
+
+[Research report](records/R108_Executable_Causal_Organization_Dissociation_20261006.md); [code](records/r108_causal_organization_dissociation.py); [results](records/R108_Causal_Organization_Dissociation_Results.json); [handoff](records/R108_Worklog_and_Handoff_20261006.md).
+
+Two tiny systems implement the identical complete XOR behavior but have different internal intervention signatures. A separate report-head surgery preserves the task core while changing report on all inputs, and a reverse control holds report fixed while task capability differs. This provides executable witnesses that behavior, capability, report and constitutive organization are distinct comparison axes.
+
+
+## R109 biological natural-experiment matrix
+
+[Research report](records/R109_Biological_Natural_Experiment_Dissociation_Matrix_20261006.md); [matrix](records/R109_Biological_Dissociation_Matrix.csv); [source ledger](records/R109_Source_Retrieval_Ledger.json); [handoff](records/R109_Worklog_and_Handoff_20261006.md).
+
+Biological natural experiments strongly support treating experience, access, intelligence, self/agency, behavior and report as separate axes. The strongest cases include CMD/LIS output dissociation, no-report manipulations, anesthesia's same-unresponsiveness/different-conscious-state problem, dreaming, and blindsight's task-performance versus subjective-content complexity. The next comparison target is dissociation topology rather than a single consciousness score.
+
+
+## R110 cross-substrate dissociation topology
+
+[Research report](records/R110_Cross_Substrate_Dissociation_Topology_20261006.md); [matrix](records/R110_Cross_Substrate_Dissociation_Matrix.csv); [exact checks](records/r110_cross_substrate_topology_check.py); [results](records/R110_Cross_Substrate_Topology_Results.json); [source ledger](records/R110_Source_Retrieval_Ledger.json); [handoff](records/R110_Worklog_and_Handoff_20261006.md).
+
+R110 keeps empirical functional topology separate from UCT-conditioned experience interpretation. Exact artificial analogues reproduce output, report, self-channel and access dissociations, but E remains uncalibrated in AI. Cross-substrate evidence is graded from T1 functional dissociation similarity through T2 intervention-preserving mechanism correspondence to T3 constitutive organizational homology. Matching pairwise topology is itself insufficient for K identity.
+
+
+## R111 intelligence capability-support hypergraph
+
+[Research report](records/R111_Intelligence_Capability_Support_Hypergraph_20261006.md); [exact checks](records/r111_capability_support_hypergraph.py); [results](records/R111_Capability_Support_Results.json); [source ledger](records/R111_Source_Retrieval_Ledger.json); [handoff](records/R111_Worklog_and_Handoff_20261006.md).
+
+R111 models intelligence as many-to-many task-support organization rather than one scalar. Alternative minimal support routes create multiple realizability; shared relations create correlated deficits; scalar scores collapse distinct capability profiles; and capability gains need not correspond to constitutive set inclusion. Under UCT, task-necessary relations can be mapped conditionally into experiential organization, but same capability does not imply the same support or experience.
+
+
+## R112 cross-substrate capability-support atlas
+
+[Research report](records/R112_Cross_Substrate_Capability_Support_Atlas_20261006.md); [atlas](records/R112_Capability_Support_Atlas.csv); [exact witnesses](records/r112_support_atlas_checks.py); [results](records/R112_Support_Atlas_Results.json); [source ledger](records/R112_Source_Retrieval_Ledger.json); [handoff](records/R112_Worklog_and_Handoff_20261006.md).
+
+The first atlas compares temporal retained state, sequential evidence integration and bearer-state estimation relation by relation. Exact artificial witnesses show task loss after memory reset, reduced majority accuracy without temporal integration, and loss of bearer identification when action/outcome identity is collapsed. Cross-substrate evidence is graded T1/T2/T3; none currently establishes complete organizational homology or phenomenal equivalence.
+
+
+## R113 causal support identification
+
+[Research report](records/R113_Causal_Support_Identification_Protocol_20261006.md); [exact checks](records/r113_causal_support_identification.py); [results](records/R113_Causal_Support_Results.json); [source ledger](records/R113_Source_Retrieval_Ledger.json); [handoff](records/R113_Worklog_and_Handoff_20261006.md).
+
+A five-relation transparent system separates a shared permissive gate, two degenerate task routes, a report head and a perfectly decodable but causally disconnected correlate. Exhaustive intervention shows why single-lesion, decodability and necessity claims are insufficient to identify content-bearing support. R113 freezes the intervention protocol required before a relation enters the UCT experience–intelligence bridge.
+
+
+## R114 cross-substrate support taxonomy audit
+
+[Research report](records/R114_Cross_Substrate_Support_Taxonomy_Audit_20261006.md); [support map](records/R114_Support_Category_Map.csv); [source ledger](records/R114_Source_Retrieval_Ledger.json); [handoff](records/R114_Worklog_and_Handoff_20261006.md).
+
+R114 distinguishes content-bearing support, access/permissive support, degenerate alternatives, readouts and correlates for the three R112 atlas functions. It freezes a stricter content-claim rule: causal necessity alone is insufficient to identify experiential content. Content-specific distinctions, interventions, access/readout controls, generalization and actual-K anchoring are required before a selected UCT content interpretation.
+
+
+## R115 Anchored Causal Geometry
+
+[Research report](records/R115_Anchored_Causal_Content_Geometry_20261006.md); [exact checks](records/r115_anchored_causal_geometry.py); [results](records/R115_Anchored_Causal_Geometry_Results.json); [source ledger](records/R115_Source_Retrieval_Ledger.json); [handoff](records/R115_Worklog_and_Handoff_20261006.md).
+
+R115 integrates structural-consciousness prior art with UCT's actual-K and intervention constraints. It shows why ungrounded geometric isomorphism can swap content meanings and why raw activation scale can change while selected causal discrimination relations remain fixed. Cross-substrate content evidence is graded G1 behavioral geometry, G2 representation geometry, G3 anchored causal geometry and G4 constitutive content homology.
+
+
+## R116 four-layer proof of concept
+
+[Research report](records/R116_Four_Layer_Content_Report_Behavior_Valence_Dissociation_20261006.md); [exact checks](records/r116_four_layer_dissociation.py); [results](records/R116_Four_Layer_Dissociation_Results.json); [handoff](records/R116_Worklog_and_Handoff_20261006.md).
+
+R116 independently manipulates selected grounded content geometry, task policy, report labels and valence in a four-condition transparent system. Same task behavior and report can coexist with different grounded content geometry; content geometry can remain fixed while report or task policy changes; and identical content/task/report can coexist with fully reversed pairwise preference ordering. This freezes four distinct evidence layers for the next cross-substrate experiment.
+
+
+## R117 first real cross-substrate experiment
+
+[Research report](records/R117_First_Real_Cross_Substrate_Evidence_Accumulation_20261006.md); [AI experiment code](records/r117_matched_evidence_accumulation.py); [AI results](records/R117_AI_Evidence_Accumulation_Results.json); [data-access ledger](records/R117_Biological_Data_Access_Ledger.json); [source ledger](records/R117_Source_Retrieval_Ledger.json); [handoff](records/R117_Worklog_and_Handoff_20261006.md).
+
+The biological target is the 2026 Neuron rat FOF/ADS accumulation system with public 12-session Figshare data and author code. The artificial side independently executes the matched support logic: broad temporal evidence weighting, cumulative state, reset-sensitive historical access, and grounded causal pulse effects. Raw biological reanalysis is explicitly pending a binary-transfer limitation, so no trial-level replication is claimed.
+
+
+## R118 biological public-data boundary audit
+
+[Research report](records/R118_Biological_Public_Data_Boundary_Audit_20261006.md); [registry audit](records/R118_Optogenetic_Registry_Audit.json); [handoff](records/R118_Worklog_and_Handoff_20261006.md).
+
+R118 independently parses the authors' public optogenetic session registry and reproduces the session-selection layer, while correcting the assumption that the 12-session Figshare recording archive also contains the complete large optogenetic behavioral experiment. Raw-data provenance is now explicitly stratified before further cross-substrate inference.
+
+
+## R119 T2 intervention-preserving certificate
+
+[Research report](records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md); [exact checks](records/r119_t2_correspondence_certificate.py); [results](records/R119_T2_Certificate_Results.json); [handoff](records/R119_Worklog_and_Handoff_20261006.md).
+
+R119 makes cross-substrate mechanism correspondence coordinate-aware but intervention-sensitive. An exact scaled-accumulator positive control passes after transporting state/intervention ports under the declared mapping; a baseline-identical XOR negative control fails because internal intervention signatures cannot be preserved. T2 remains selected-mechanism evidence and is explicitly weaker than T3 constitutive homology.
+
+
+## R120 Experience–Intelligence Bridge theorem schema
+
+[Research report](records/R120_Experience_Intelligence_Bridge_Theorem_Schema_20261006.md); [finite checks](records/r120_bridge_theorem_witnesses.py); [results](records/R120_Bridge_Theorem_Results.json); [source ledger](records/R120_Source_Retrieval_Ledger.json); [handoff](records/R120_Worklog_and_Handoff_20261006.md).
+
+R120 consolidates the first-principles answer: actual realized intelligence is experience-bearing under UCT, genuine fixed-condition capability differences refine complete experiential type, but equal intelligence/performance/report is non-identifying because capability and behavior are many-to-one projections of organization. Cross-substrate T2 supports selected mechanism correspondence only; T3/G4 selected constitutive homology is required before a selected experiential-structure correspondence can be claimed under C1.
+
+
+## R121 closure audit
+
+[Closure report](records/R121_Experience_Intelligence_Closure_Audit_20261006.md); [status matrix](records/R121_Closure_Status_Matrix.csv); [handoff](records/R121_Worklog_and_Handoff_20261006.md).
+
+R121 concludes that the generic experience–intelligence relation is largely formally closed conditional on UCT: actual intelligence is experience-bearing, intelligence is not identical to experience, genuine capability differences can refine complete experiential type, and equality/increase of capability does not identify equality/increase of experience. Remaining high-value work is empirical T2/T3 closure plus genuinely separate phenomenal-content, valence, subject-boundary and foundational-C1/U1 validation problems.
+
+## R122 real biological B1/B2, with an open T2 certificate
+
+[Main report](records/R122_Real_Rat_B1_B2_and_Open_T2_Certificate_20261006.md); [current handoff](records/R122_Worklog_and_Handoff_20261006.md); [complete reproducibility directory](records/R122_Biology_B1_B2_20261006/README.md); [downloadable package](records/R122_Research_Package_20261006.zip); [T2 CSV](records/R122_Biology_B1_B2_20261006/R122_T2_Certificate.csv); [machine-readable status](records/R122_Biology_B1_B2_20261006/R122_Research_Status.json); [independent review](records/R122_Biology_B1_B2_20261006/independent_review.md); [summary figure](records/R122_Biology_B1_B2_20261006/figures/R122_B1_B2_Summary.png).
+
+The entire public Cells.zip was downloaded and its size, MD5 and SHA-256 verified. All 12 original MATLAB recording sessions from five rats were independently analyzed: B1 uses 3,344 trials; B2 uses 3,319 trials and 32,656 held-out time bins. Computational checks independently reconstructed all behavioral count features and neural targets, verified trial-block validation, and checked selected neural rates/readouts. The primary B1 full10-versus-last-bin contrast is inconclusive (mean log-loss gain 0.019232, descriptive interval −0.031799 to 0.070263); the prespecified total-evidence control favors broader history in all sessions. B2 is modest and heterogeneous (equal-rat predictive R²: FOF 0.054277, ADS 0.036449), with eight negative session-region scores preserved.
+
+T2.C0 passes only for the external signed-count coordinate; C1–C6 remain incomplete. Decoding is not transition commutation or intervention transport. B3 is not independently replicated: all twelve recording sessions have zero laser-on flags, and R118 registry counts remain distinct. The R117 state-noise R² and its different Gaussian/sigmoid readout laws are explicitly separated from R122 estimands. No AI experience labels, new AI training, new toy theorem, T3/G4 claim or published-file change occurred.

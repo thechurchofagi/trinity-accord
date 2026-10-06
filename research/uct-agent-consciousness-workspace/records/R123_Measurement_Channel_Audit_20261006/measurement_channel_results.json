@@ -1,0 +1,81 @@
+{
+  "analysis": "R123 measurement-channel calibration",
+  "source_commit": "bf55557992b84f6df4dfc6a924f291dfde7b976b",
+  "source_file": "research/uct-agent-consciousness-workspace/records/R122_Biology_B1_B2_20261006/b2_decode.py",
+  "source_blob_sha1": "df4c15e2ab0b184a9bea9cdf41091be3b4c3044a",
+  "parameters": {
+    "bin_s": 0.05,
+    "sigma_s": 0.075,
+    "lag_s": 0.1,
+    "truncate": 4.0
+  },
+  "weights": [
+    0.420176566054869,
+    0.33645109226927844,
+    0.1727397504882617,
+    0.05686471457642295,
+    0.012002554027290035,
+    0.0016243690488460432,
+    0.00014095353503181923
+  ],
+  "tap_count": 7,
+  "relative_support_to_target_endpoint_s": [
+    -0.25000000000000006,
+    0.1
+  ],
+  "population_white_input_ACF_lags_0_to_8": [
+    1.0,
+    0.6502595391649062,
+    0.2906822172643642,
+    0.08737765610584111,
+    0.01738276848163933,
+    0.0022601248182442055,
+    0.0001833790091901754,
+    0.0,
+    0.0
+  ],
+  "lag1_linear_prediction_population_R2": 0.42283746827495616,
+  "effective_raw_bin_center_minus_target_endpoint_s": 0.029524874023067416,
+  "simulation_runs": [
+    {
+      "seed": 123,
+      "n_rows": 399900,
+      "acf_lags_1_to_8": [
+        0.6492764460014029,
+        0.2868892792967236,
+        0.08262341097409044,
+        0.012756585177537418,
+        -0.002086278812812727,
+        -0.003605768915372884,
+        -0.0035949106432055,
+        -0.004321265056648585
+      ],
+      "raw_lag1_r": 0.0014129101137334795,
+      "lag1_linear_prediction_population_R2_estimate": 0.42155990333221266
+    },
+    {
+      "seed": 124,
+      "n_rows": 399900,
+      "acf_lags_1_to_8": [
+        0.649458699126374,
+        0.29007867607192234,
+        0.08852027443740791,
+        0.019312429006998685,
+        0.003186401441179116,
+        -0.0012709036413900792,
+        -0.0027333299536908507,
+        -0.0017873599567202704
+      ],
+      "raw_lag1_r": -0.0012681424500155059,
+      "lag1_linear_prediction_population_R2_estimate": 0.421796601870922
+    }
+  ],
+  "limits": [
+    "Not new neural data",
+    "Does not change R122 results",
+    "Does not prove biological memory is artifactual",
+    "Lag1 null formula assumes independent equal-variance raw bins",
+    "T2 C2/C3 remain untested; E remains latent"
+  ],
+  "executed_script_sha256": "b7cad84c279d74c217fef3336ad95b58b179edf17d8a09b5193fed86874ce624"
+}

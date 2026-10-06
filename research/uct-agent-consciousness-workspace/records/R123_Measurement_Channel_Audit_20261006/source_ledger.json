@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-06",
+  "research_baseline": "bf55557992b84f6df4dfc6a924f291dfde7b976b",
+  "source_scope": "Primary manuscripts and retained original project results; not a new full literature review.",
+  "papers": [
+    {
+      "name": "A",
+      "version": "1.2",
+      "doi": "10.5281/zenodo.23131575",
+      "ref": "f8750d32afeea9209e6d53ad3cfbd5bbde7a8126",
+      "path": "research/unified-consciousness-theory-i/versions/v1.2/published/unified-consciousness-theory-i-v1.2.md",
+      "blob": "7a980c86b8f94ce787d358dab3529903eb822f8f",
+      "read_scope": "Main text through section 16.1 (lines 1-2020, overlapping portions for truncation); appendices/reference list not fully re-audited.",
+      "release_receipt_blob": "bb6cfbe801f7c198c55d852f61ffc6dfa37df6df"
+    },
+    {
+      "name": "B",
+      "version": "1.1",
+      "doi": "10.5281/zenodo.23030320",
+      "ref": "562a5d16745e5e7e6cb4bc8f2c53a2f62e05875a",
+      "path": "research/uct-paired-v1.1/release/b/unified-consciousness-theory-ii-v1.1.md",
+      "blob": "c4734243b6dfd75255c14b99f333c52e7d7b7a58",
+      "read_scope": "Main argument through section 24 conclusion; not a new audit of every source-trace/reproducibility artifact."
+    },
+    {
+      "name": "C",
+      "version": "1.0",
+      "doi": "10.5281/zenodo.23137088",
+      "ref": "bf55557992b84f6df4dfc6a924f291dfde7b976b",
+      "path": "research/unified-consciousness-theory-iii/published/unified-consciousness-theory-iii-v1.0.md",
+      "blob": "be7c7a952aa88831c6660187586d92a3da707cdf",
+      "read_scope": "Main text through section 12 plus appendix A/B; remaining appendices not fully audited."
+    },
+    {
+      "name": "requested medical/clinical fourth paper",
+      "status": "NOT_IDENTIFIED",
+      "read_scope": "none",
+      "constraint": "Do not substitute RLC, TA-TR-2026-24 or patient records; incomplete search is not evidence of absence."
+    }
+  ],
+  "data": {
+    "path": "research/uct-agent-consciousness-workspace/records/R122_Biology_B1_B2_20261006/b2_results/B2_session_metrics.csv",
+    "blob": "5d398ea4fc530b5418ba84fd133ba6fd03cedba3",
+    "sha256": "750e68df8b04bffaa3151cbb17efd27dcd9f6e9abbf956295ee9291ad7ecfdb4",
+    "local_transfer": "Connector text reconstructed locally; exact Git blob hash verified before analysis",
+    "scope": "All 12 retained session summaries, not raw MAT fits"
+  },
+  "implementation": {
+    "path": "research/uct-agent-consciousness-workspace/records/R122_Biology_B1_B2_20261006/b2_decode.py",
+    "blob": "df4c15e2ab0b184a9bea9cdf41091be3b4c3044a",
+    "read_scope": "lines 1-390; smoothing and complete build_arrays return path; not full decoder source"
+  },
+  "failure_ledger": [
+    {
+      "route": "container HTTPS requests to raw.githubusercontent.com",
+      "outcome": "DNS NameResolutionError; no file downloaded"
+    },
+    {
+      "route": "web raw GitHub URL",
+      "outcome": "Internal Error / cache miss"
+    },
+    {
+      "route": "container download relay",
+      "outcome": "prior-view precondition rejected in this session; not public-data unavailability"
+    },
+    {
+      "route": "GitHub connector fetch_file for retained CSV",
+      "outcome": "success; local exact blob/SHA256 verified"
+    },
+    {
+      "route": "extra plugin search for execution",
+      "outcome": "no directly usable connected execution provider identified; not made a blocking prerequisite"
+    }
+  ],
+  "inference_limits": [
+    "No new raw biological fit",
+    "Measurement null is synthetic",
+    "No major breakthrough claim",
+    "No T2 closure",
+    "E remains latent",
+    "No fourth-paper reading claim"
+  ]
+}

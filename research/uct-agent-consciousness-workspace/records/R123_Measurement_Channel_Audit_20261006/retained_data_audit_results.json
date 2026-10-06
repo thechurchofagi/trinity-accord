@@ -1,0 +1,150 @@
+{
+  "source_commit": "bf55557992b84f6df4dfc6a924f291dfde7b976b",
+  "input_git_blob_sha1": "5d398ea4fc530b5418ba84fd133ba6fd03cedba3",
+  "input_sha256": "750e68df8b04bffaa3151cbb17efd27dcd9f6e9abbf956295ee9291ad7ecfdb4",
+  "n_sessions": 12,
+  "n_rats": 5,
+  "B2_trials": 3319,
+  "heldout_bins": 32656,
+  "aggregation": "session means within rat; equal rats; post-hoc sensitivity only",
+  "rat_means": [
+    {
+      "rat": "A294",
+      "FOF_R2": -0.0480764296815485,
+      "ADS_R2": -0.0184162638251574,
+      "FOF_r": -0.0258264843054797,
+      "ADS_r": -0.1738560078484434,
+      "FOF_wc_r": -0.090827090042726,
+      "ADS_wc_r": -0.1873413085402075,
+      "nuisance_R2": -0.0078653056264648,
+      "nuisance_recent_R2": 0.3854401628211938
+    },
+    {
+      "rat": "A297",
+      "FOF_R2": 0.219357838802631,
+      "ADS_R2": 0.1019880964337871,
+      "FOF_r": 0.4703950901288178,
+      "ADS_r": 0.3287827446191268,
+      "FOF_wc_r": 0.2749096932808778,
+      "ADS_wc_r": 0.2612036838488043,
+      "nuisance_R2": 0.2878475822305704,
+      "nuisance_recent_R2": 0.5434272349015616
+    },
+    {
+      "rat": "X046",
+      "FOF_R2": 0.007952602124736046,
+      "ADS_R2": 0.0196983253373425,
+      "FOF_r": 0.09685835218481052,
+      "ADS_r": 0.13143567771518044,
+      "FOF_wc_r": 0.015889292675497626,
+      "ADS_wc_r": 0.0304342250409249,
+      "nuisance_R2": 0.3067453681005129,
+      "nuisance_recent_R2": 0.5351099735739115
+    },
+    {
+      "rat": "X062",
+      "FOF_R2": 0.015516288699724864,
+      "ADS_R2": 0.032644735649959365,
+      "FOF_r": 0.10550121159752908,
+      "ADS_r": 0.18207662726922644,
+      "FOF_wc_r": -0.009619844227939767,
+      "ADS_wc_r": 0.0539480739167762,
+      "nuisance_R2": 0.21823610423650744,
+      "nuisance_recent_R2": 0.514832591695258
+    },
+    {
+      "rat": "X087",
+      "FOF_R2": 0.07663410546072867,
+      "ADS_R2": 0.046329265118411005,
+      "FOF_r": 0.277020723602221,
+      "ADS_r": 0.21436536282837806,
+      "FOF_wc_r": 0.05583605594658197,
+      "ADS_wc_r": 0.05227294433642687,
+      "nuisance_R2": 0.19790219979442533,
+      "nuisance_recent_R2": 0.500593351985981
+    }
+  ],
+  "equal_rat_choice_time_control_R2": 0.20057318974711022,
+  "equal_rat_choice_time_recent_control_R2": 0.4958806629955812,
+  "region_audit": {
+    "FOF": {
+      "equal_rat_R2": 0.05427688108125441,
+      "negative_session_R2": 4,
+      "session_wins_over_choice_time_control": 0,
+      "rat_wins_over_choice_time_control": 0,
+      "equal_rat_R2_minus_choice_time_control": -0.14629630866585586,
+      "equal_rat_centered_r": 0.049237621526458324,
+      "leave_one_rat_out": [
+        {
+          "excluded_rat": "A294",
+          "FOF_R2": 0.07986520877195515,
+          "FOF_wc_r": 0.0842537994187544
+        },
+        {
+          "excluded_rat": "A297",
+          "FOF_R2": 0.01300664165091027,
+          "FOF_wc_r": -0.007180396412146543
+        },
+        {
+          "excluded_rat": "X046",
+          "FOF_R2": 0.06585795082038401,
+          "FOF_wc_r": 0.0575747037391985
+        },
+        {
+          "excluded_rat": "X062",
+          "FOF_R2": 0.0639670291766368,
+          "FOF_wc_r": 0.06395198796505784
+        },
+        {
+          "excluded_rat": "X087",
+          "FOF_R2": 0.048687574986385845,
+          "FOF_wc_r": 0.04758801292142741
+        }
+      ]
+    },
+    "ADS": {
+      "equal_rat_R2": 0.03644883174286852,
+      "negative_session_R2": 4,
+      "session_wins_over_choice_time_control": 0,
+      "rat_wins_over_choice_time_control": 0,
+      "equal_rat_R2_minus_choice_time_control": -0.16412435800424172,
+      "equal_rat_centered_r": 0.04210352372054496,
+      "leave_one_rat_out": [
+        {
+          "excluded_rat": "A294",
+          "ADS_R2": 0.050165105634874994,
+          "ADS_wc_r": 0.09946473178573308
+        },
+        {
+          "excluded_rat": "A297",
+          "ADS_R2": 0.020064015570138868,
+          "ADS_wc_r": -0.012671516311519882
+        },
+        {
+          "excluded_rat": "X046",
+          "ADS_R2": 0.04063645834425002,
+          "ADS_wc_r": 0.04502084839044997
+        },
+        {
+          "excluded_rat": "X062",
+          "ADS_R2": 0.0373998557660958,
+          "ADS_wc_r": 0.039142386171487145
+        },
+        {
+          "excluded_rat": "X087",
+          "ADS_R2": 0.03397872339898289,
+          "ADS_wc_r": 0.03956116856657448
+        }
+      ]
+    }
+  },
+  "interpretation_limits": [
+    "A standalone neural model losing to a control is not a test of conditional neural increment.",
+    "Do not call the eventual-choice baseline an online memoryless accumulator.",
+    "Do not subtract R2 values and call the difference conditional information.",
+    "Centered correlations are descriptive, not conditional causal effects.",
+    "Small N=5, exploratory analyses; no significance or equivalence claim.",
+    "No T2 closure or experiential measurement."
+  ],
+  "script_sha256": "261dd4128bb9b56f569786eef5720a976b7370a8594c4f5a0ea99848f71adf76"
+}
