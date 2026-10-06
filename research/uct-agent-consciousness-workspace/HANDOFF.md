@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R111 intelligence capability-support hypergraph；新窗口先读 records/R111_Intelligence_Capability_Support_Hypergraph_20261006.md 与R111交接，再按需回读R106-R110。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R112 第一版cross-substrate capability-support atlas；新窗口先读 records/R112_Cross_Substrate_Capability_Support_Atlas_20261006.md 与R112交接，再按需回读R106-R111。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -545,3 +545,12 @@ pairwise topology仍可能丢失direct-vs-indirect机制，因此下一步R111�
 每项能力T对应minimal support relation family M_T；同一能力可有多条不同实现路径，不同能力可共享关系。精确toy显示same profile可对应不同support、same scalar可对应不同profile、能力提高也可发生在relation sets不可比较的替换+新增过程中。shared relation lesion可同时打掉多项能力。
 
 因此experience-intelligence coupling应按task-necessary relation逐项研究，而不是找一个dExperience/dIntelligence全局系数。下一步R112做temporal memory、evidence integration、self/bearer estimation的跨底物support atlas。
+
+
+## R112 — 2026-10-06：第一版跨底物capability-support atlas
+
+完成temporal working memory、evidence integration、self/bearer-state estimation三项relation-specific比较。每项均记录weakest support relation、生物候选实现、AI候选实现、matched intervention和T1/T2/T3证据等级；当前没有任何一项达到T3完整constitutive homology。
+
+核心桥：capability T -> verified actual support relation R_T -> C1条件下selected experiential organization relation。不是intelligence score直接映射experience score。
+
+下一步R113做causal support identification：区分necessary、alternative sufficient、degenerate/redundant、downstream readout与mere correlate。

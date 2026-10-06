@@ -1,0 +1,74 @@
+{
+  "round": "R112",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "Working Memory as Persistent Neural Activity",
+      "authors": "Foster; Vogel; Awh",
+      "venue": "Oxford Handbook of Human Memory",
+      "year": 2024,
+      "doi": "10.1093/oxfordhb/9780190917982.013.13",
+      "scope": "Abstract read; one side of current working-memory mechanism debate."
+    },
+    {
+      "title": "Is There an Activity-silent Working Memory?",
+      "year": 2023,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10158524/",
+      "scope": "Abstract read; evidence that retained working-memory information need not map trivially to continuously measured activity."
+    },
+    {
+      "title": "Rapid connectivity modulations unify long-term and working memory",
+      "venue": "Trends in Cognitive Sciences",
+      "year": 2025,
+      "doi": "10.1016/j.tics.2025.02.006",
+      "scope": "Abstract read; recent connectivity-based retention prior."
+    },
+    {
+      "title": "A multi-region recurrent circuit for evidence accumulation in rats",
+      "venue": "Neuron",
+      "year": 2026,
+      "doi": "10.1016/j.neuron.2025.12.029",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41570823/",
+      "scope": "Summary/highlights read; biology evidence for distributed recurrent evidence accumulation and perturbation."
+    },
+    {
+      "title": "A recurrent neural network model for a decision-making task based on sequential evidence accumulation",
+      "venue": "Cognitive Neurodynamics",
+      "year": 2026,
+      "doi": "10.1007/s11571-026-10484-6",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42389046/",
+      "scope": "Abstract read; artificial recurrent support and lesion/connection disruption prior."
+    },
+    {
+      "title": "A systematic review and meta-analysis on the neural correlates of bodily self-consciousness",
+      "venue": "Neuroscience and Biobehavioral Reviews",
+      "year": 2025,
+      "doi": "10.1016/j.neubiorev.2025.106420",
+      "scope": "Abstract/highlights read; body ownership and agency are distributed multisensory/self-attribution processes."
+    },
+    {
+      "title": "Interoception, network physiology and the emergence of bodily self-awareness",
+      "venue": "Neuroscience and Biobehavioral Reviews",
+      "year": 2024,
+      "doi": "10.1016/j.neubiorev.2024.105864",
+      "scope": "Abstract and self-location/self-attribution sections read; prior for interoceptive and multisensory support relations."
+    },
+    {
+      "title": "Evaluating Self-Orienting in Language and Reasoning Models",
+      "authors": "Bigelow; Ahmed; Ullman",
+      "venue": "ICML 2025 Workshop on Assessing World Models",
+      "year": 2025,
+      "url": "https://openreview.net/pdf?id=hPdUQnQrUu",
+      "scope": "Abstract/introduction read; artificial minimal self-orienting prior."
+    },
+    {
+      "title": "Self Model for Embodied Artificial Intelligence",
+      "venue": "Journal of Computer Science and Technology",
+      "year": 2026,
+      "doi": "10.1007/s11390-026-6289-3",
+      "scope": "Abstract read; AI self-model components including body schema, forward/inverse models, memory and agency."
+    }
+  ],
+  "novelty_status": "None of the individual mechanisms are claimed as new. Project-specific contribution is the graded cross-substrate support atlas and relation-specific UCT bridge.",
+  "no_third_party_fulltexts_redistributed": true
+}

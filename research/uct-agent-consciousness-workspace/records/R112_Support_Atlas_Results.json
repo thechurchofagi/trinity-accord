@@ -1,0 +1,21 @@
+{
+  "round": "R112",
+  "temporal_working_memory": {
+    "intact_accuracy": 1.0,
+    "reset_before_query_accuracy": 0.5,
+    "interpretation": "Delayed task requires a retained cue distinction in this toy family."
+  },
+  "evidence_integration": {
+    "sequence_count": 8,
+    "integrated_accuracy": 1.0,
+    "last_sample_only_accuracy": 0.75,
+    "interpretation": "Using only the final sample loses performance relative to temporal integration."
+  },
+  "bearer_estimation": {
+    "bearer_cases": 2,
+    "entity_specific_action_outcome_accuracy": 1.0,
+    "identity_collapsed_accuracy": 0.5,
+    "interpretation": "Bearer inference requires entity-specific action/outcome binding in this toy world."
+  },
+  "scope": "Exact finite artificial witnesses only; no consciousness measurement."
+}
