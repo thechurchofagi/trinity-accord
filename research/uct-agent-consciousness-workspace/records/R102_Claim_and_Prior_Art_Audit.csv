@@ -1,0 +1,14 @@
+Area,Audit result,Action in v0.3
+Core formal claims,Pass against R95-R99 result files,Keep
+ROGUE aggregate numbers,Pass against preserved public aggregate extract,Keep
+ROGUE bearer interpretation,L0 not established,Keep conservative language
+Instrumental vs valenced preservation novelty,Already explicit in Mullally 2026,Remove novelty implication
+Self/peer preservation behavior novelty,Peer-reviewed Potter et al. ICML 2026,Remove novelty implication
+Task-owner x shutdown-target crossing,Rhea July 2026 informal study overlaps,Explicitly acknowledge
+Self-concern/identity theory,Dung & Register; Nisius; Perrier & Bennett; Zhao & Zhao,Expand related work
+Consciousness-linked preference cluster,Chua et al. 2026,Add as evidence that preference clusters can arise without settling phenomenology
+Virtual Q semantics,R95 Q is evaluator-defined role,Add explicit caveat
+Experimental reproducibility,Too terse,Add R95-R99 summary table
+Section 14,Outdated after R101,Replace with decisive-next-experiment requirements
+New experiment before preprint,Not necessary,Defer
+New experiment for strong empirical venue,Potentially valuable,Specify L0+L4 design only

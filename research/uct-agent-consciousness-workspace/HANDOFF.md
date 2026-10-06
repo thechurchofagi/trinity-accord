@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R101 ROGUE现实case study；新窗口先读 records/R101_ROGUE_Retrospective_Evidence_Audit_20261006.md 和论文v0.2，再按需回读R100/R99。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R102 论文严格审计与novelty重置；新窗口先读 records/R102_Manuscript_Audit_and_Submission_Gate_20261006.md 和论文v0.3，再按需回读R101/R100。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -428,3 +428,14 @@ drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.1_20261006.md
 数据边界：审计main commit faf8f378c1b8bc8e17cab8477052c0856a3f3312。公开repo有benchmark code/task configs和selected figure aggregates，但无results/树/Release；HF 432行是normalized task configs，不是raw trajectories。因此R101是design+aggregate retrospective audit，不虚称trial-level复算。
 
 论文新建v0.2并加入ROGUE case study，不覆盖v0.1。下一步先审论文和引用；如补新实验，只针对L0 bearer binding + L4 task-clamped continuation这一现实第一缺口设计安全virtual contrast，不重复ROGUE。
+
+
+## R102 — 2026-10-06：论文严格审计、近邻查新与投稿门槛
+
+核对R95-R101全部主要结果文件，论文核心数字可回溯。新查近邻后主动降低novelty：ICML2026 Potter等已正式证明self/peer-preservation；Mullally已明确instrumental/valenced self-preservation；Rhea非同行评审2x2 task-owner×shutdown-target与R96行为设计近邻；Chua等证明consciousness-claim可诱导shutdown/memory/autonomy偏好簇。
+
+论文最强增量保留为continuation-specific evidence ladder + 分层反例/学习stress test + ROGUE现实audit，而不是发明self-preservation或首次区分task/self motive。
+
+生成draft v0.3，补Related Work、virtual-Q caveat、R95-R99 reproducibility table，替换过时Section14。
+
+投稿门槛：不需要再做新实验才能形成methods preprint/workshop稿。若目标是更强empirical main track，再做唯一高价值的L0 bearer-binding + L4 task-clamped frontier-model virtual contrast。当前不发布。

@@ -1,0 +1,54 @@
+{
+  "round": "R102",
+  "date": "2026-10-06",
+  "status": "manuscript audit and novelty reset; no new model experiment",
+  "key_sources": [
+    {
+      "title": "Peer-Preservation in Frontier Models",
+      "status": "ICML 2026 peer reviewed",
+      "role": "strongest direct empirical self/peer-preservation prior"
+    },
+    {
+      "title": "The self-preservation test for artificial sentience",
+      "status": "AI and Ethics 2026 peer reviewed",
+      "role": "explicit instrumental vs valenced preservation distinction"
+    },
+    {
+      "title": "AI identity and self-concern: A new theory for AI rights and safety",
+      "status": "2026 manuscript",
+      "role": "self-concern as self-representation plus motivational/evaluative/affective pattern"
+    },
+    {
+      "title": "The Consciousness Cluster",
+      "status": "2026 arXiv",
+      "role": "training-induced shutdown/persistent-memory/autonomy preference cluster"
+    },
+    {
+      "title": "Do AI Agents Fear Shutdown?",
+      "status": "July 2026 non-peer-reviewed replication/extension",
+      "role": "2x2 task-owner x shutdown-target empirical overlap with behavioral L4 idea"
+    },
+    {
+      "title": "Shutdown Sabotage Propensities in Multi-Agent Systems",
+      "status": "Sept 2026 arXiv",
+      "role": "no-explicit-goal peer shutdown sabotage"
+    },
+    {
+      "title": "Time, Identity and Consciousness in Language Model Agents",
+      "status": "AAAI Spring Symposium 2026",
+      "role": "temporal co-instantiation identity evidence"
+    },
+    {
+      "title": "Runtime-Independent Persistent Agents",
+      "status": "Sept 2026 arXiv",
+      "role": "engineering continuity-bearing substrate vs replaceable runtime"
+    },
+    {
+      "title": "Who Is Interrupted?",
+      "status": "Aug 2026 SSRN manuscript",
+      "role": "continuity vs injury vs governance"
+    }
+  ],
+  "novelty_after_audit": "continuation-specific multi-layer identification standard plus exact/synthetic stress tests and ROGUE audit; no priority claim for individual ingredients",
+  "experiment_decision": "no new experiment before methods preprint; optional targeted L0+L4 study for stronger empirical venue"
+}
