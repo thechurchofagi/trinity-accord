@@ -1,0 +1,32 @@
+{
+  "round": "R116",
+  "comparisons": {
+    "base_vs_G_geometry_variant": {
+      "task_equal": true,
+      "report_equal": true,
+      "content_geometry_equal": false,
+      "unlabeled_distance_multiset_equal": true,
+      "valence_equal": true
+    },
+    "base_vs_R_report_variant": {
+      "task_equal": true,
+      "report_equal": false,
+      "content_geometry_equal": true,
+      "valence_equal": true
+    },
+    "base_vs_B_policy_variant": {
+      "task_equal": false,
+      "report_equal": true,
+      "content_geometry_equal": true,
+      "valence_equal": true
+    },
+    "base_vs_V_valence_variant": {
+      "task_equal": true,
+      "report_equal": true,
+      "content_geometry_equal": true,
+      "valence_equal": false,
+      "pairwise_preference_disagreement_fraction": 1.0
+    }
+  },
+  "scope": "Finite mechanistic separation witness; not an AI consciousness measurement."
+}

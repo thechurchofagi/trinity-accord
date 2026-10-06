@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R115 Anchored Causal Geometry；新窗口先读 records/R115_Anchored_Causal_Content_Geometry_20261006.md 与R115交接，再按需回读R113/R114。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R116 task/report/content geometry/valence四层proof-of-concept；新窗口先读 records/R116_Four_Layer_Content_Report_Behavior_Valence_Dissociation_20261006.md 与R116交接，再按需回读R114/R115。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -579,3 +579,15 @@ working memory、evidence integration、bearer estimation均完成support-catego
 exact witnesses证明：未锚定的几何可在交换grounded meanings后仍保持抽象距离；raw Euclidean尺度也可改变而causal signature geometry不变。冻结G1 behavioral -> G2 representation -> G3 anchored causal -> G4 constitutive content homology四级证据。只有G4才进入C1 selected experiential-content structure解释。
 
 下一步R116做四层可控的人工proof-of-concept：behavior/report/content geometry/valence分开操纵。
+
+
+## R116 — 2026-10-06：task/report/content geometry/valence四层可控解离
+
+4-condition transparent proof-of-concept：
+G变体保持task/report/valence但改变grounded content geometry；
+R变体只改report；
+B变体只改task policy；
+V变体只翻valence，6/6 pairwise preferences反转。
+因此这四层不能互相当同义词。G3 Anchored Causal Geometry也只比较selected content，不涵盖valence/完整E。
+
+下一步R117把四层设计转成真实可做的cross-substrate minimal experiment。
