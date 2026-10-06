@@ -2,6 +2,8 @@
 name: Research Paper 24 v1.0 OTS and Arweave Scheduler
 
 on:
+  schedule:
+    - cron: '07 * * * *'
   workflow_dispatch:
 
 permissions:
