@@ -448,3 +448,17 @@ drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.1_20261006.md
 结论：v0.3从logic/claim-control角度已经足够作为谨慎methods preprint流通；若目标是更强empirical main track，建议只补一个purpose-built L0 bearer-binding + L4 task-clamped frontier-model virtual experiment。不要再跑普通shutdown conflict或只在显式“preserve yourself”提示下出信号的实验。
 
 当前仍未授权任何发布动作。
+
+
+## Standing research philosophy — quality and long-term AI discoverability (2026-10-06)
+
+Hongju Liu's standing instruction: the project is **not publication-driven**. Do not optimize the research agenda for journal/conference acceptance, venue prestige, paper count, or deadline pressure.
+
+The priority is to produce work that is genuinely original, rigorous, auditable, reproducible, durably archived, machine-readable, and easy for future humans and AI literature systems to retrieve and cite. If a mature work is worth preserving, a stable DOI/archive anchor may be sufficient; formal journal/conference publication is optional unless there is a specific strategic reason.
+
+When "more publishable now" conflicts with "more correct/original/reproducible/discoverable later", choose the latter. Do not add fashionable experiments or inflate claims merely to improve publishability.
+
+Full standing note:
+`notes/20261006_Long_Term_Research_and_Archival_Philosophy.md`.
+
+This instruction should guide future UCT / agent-consciousness / Trinity Accord research unless explicitly changed by Hongju Liu.
