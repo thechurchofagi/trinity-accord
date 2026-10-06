@@ -1,0 +1,46 @@
+name: Prepare Self-Continuation Control exact Zenodo package
+on:
+  push:
+    branches: [research/self-continuation-control-v1-20261006]
+    paths:
+      - research/self-continuation-control/**
+      - .github/workflows/prepare-self-continuation-control.yml
+permissions:
+  contents: write
+concurrency:
+  group: self-continuation-control-zenodo-v1
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ta24-prepare]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/self-continuation-control-v1-20261006
+          fetch-depth: 1
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.11'}
+      - name: Install exact-package PDF tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y pandoc texlive-xetex fonts-lmodern fonts-dejavu-core poppler-utils
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
+      - name: Run strict formal release audit
+        run: python3 research/self-continuation-control/release_audit.py
+      - name: Run focused offline publication gate tests
+        run: python3 research/self-continuation-control/test_publication.py
+      - name: Reserve once and prepare same-record package
+        env: {ZENODO_ACCESS_TOKEN: "${{ secrets.ZENODO_ACCESS_TOKEN }}"}
+        run: python3 research/self-continuation-control/publication.py prepare
+      - name: Preserve state even after incomplete attempt
+        if: always()
+        run: python3 research/self-continuation-control/publication.py persist
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: self-continuation-control-preparation-${{ github.run_id }}
+          path: research/self-continuation-control/
+          retention-days: 30

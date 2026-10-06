@@ -1,0 +1,10 @@
+{
+  "state": "FORMAL_AUDIT_COMPLETE_AWAITING_PREPARE_TRIGGER",
+  "report_number": "TA-TR-2026-24",
+  "version": "1.0",
+  "title": "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents",
+  "frozen_v03_blob_sha": "ea6d6c4d5b7ad63df6e343c9357e5d3f5959f3a6",
+  "formal_release_audit": "PASS",
+  "user_instruction": "Explicit author instruction on 6 October 2026 to complete DOI, OTS and Arweave using the repository's mature publication flow after strict formal-map review.",
+  "publication_not_yet_irreversible": true
+}

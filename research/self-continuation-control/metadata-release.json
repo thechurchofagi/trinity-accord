@@ -1,0 +1,28 @@
+{
+  "schema": "trinityaccord.release-metadata.v1",
+  "report": "TA-TR-2026-24",
+  "version": "1.0",
+  "date": "2026-10-06",
+  "title": "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents",
+  "author": "Hongju Liu",
+  "affiliation": "Independent researcher",
+  "language": "eng",
+  "publication_type": "preprint",
+  "peer_reviewed": false,
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "AI shutdown resistance",
+    "self-continuation control",
+    "corrigibility",
+    "artificial agent self-preservation",
+    "current-bearer continuation",
+    "task mediation",
+    "causal identification",
+    "reward identifiability",
+    "intervention extrapolation",
+    "AI identity",
+    "machine consciousness evidence standards"
+  ],
+  "archival_policy": "DOI, OTS, and Arweave attest identity/availability/provenance; they do not attest truth or peer review.",
+  "substantive_source_blob_sha": "ea6d6c4d5b7ad63df6e343c9357e5d3f5959f3a6"
+}
