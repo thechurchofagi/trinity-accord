@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-10-06-paper24-v10",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-24",
+      "record_id": 23176685,
+      "doi": "10.5281/zenodo.23176685",
+      "version": "1.0",
+      "title": "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents",
+      "receipt_path": "research/self-continuation-control/publication-record.json",
+      "pdfs": [
+        {
+          "name": "from-shutdown-resistance-to-self-continuation-control-v1.0.pdf",
+          "bytes": 86272,
+          "sha256": "368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104",
+          "role": "Complete English archival methods preprint"
+        }
+      ]
+    }
+  ]
+}
