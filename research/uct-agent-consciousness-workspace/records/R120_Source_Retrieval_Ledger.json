@@ -1,0 +1,42 @@
+{
+  "round": "R120",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "Causal Abstraction: A Theoretical Foundation for Mechanistic Interpretability",
+      "authors": "Geiger et al.",
+      "venue": "JMLR",
+      "year": 2025,
+      "url": "https://www.jmlr.org/papers/v26/23-0058.html",
+      "scope": "Abstract/framework used as prior art for intervention-faithful selected mechanism correspondence."
+    },
+    {
+      "title": "Calibration and transfer in indicator-based assessments of artificial consciousness",
+      "author": "Florentin Koch",
+      "venue": "Neuroscience of Consciousness",
+      "year": 2026,
+      "doi": "10.1093/nc/niag061",
+      "url": "https://academic.oup.com/nc/article/2026/1/niag061/8827745",
+      "scope": "Full accessible article sections on calibration/transfer read; direct current prior for why cross-substrate functional property correspondence does not by itself validate consciousness-indicator transfer."
+    },
+    {
+      "title": "Addressing degeneracy in rodent studies of cognition",
+      "author": "Christine M Constantinople",
+      "venue": "Current Opinion in Neurobiology",
+      "year": 2026,
+      "doi": "10.1016/j.conb.2026.103190",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13089310/",
+      "scope": "Abstract/context read; current neuroscience prior for degeneracy and strategy/support identification."
+    }
+  ],
+  "internal_sources": [
+    "Published UCT I/II/III as previously audited in R81",
+    "R106 Projection Lemma",
+    "R111 capability-support hypergraph",
+    "R113 support-identification protocol",
+    "R115 Anchored Causal Geometry",
+    "R119 T2 certificate"
+  ],
+  "novelty_status": "The individual logical/causal ingredients are prior art or elementary. Project contribution is the explicit UCT bridge hierarchy from actual K and support relations through T2/T3 to conditional selected experiential-organization claims.",
+  "no_third_party_fulltexts_redistributed": true
+}

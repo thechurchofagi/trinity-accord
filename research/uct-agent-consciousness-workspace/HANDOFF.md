@@ -612,3 +612,10 @@ V变体只翻valence，6/6 pairwise preferences反转。
 T2证书要求grounding、baseline、transition commutation、intervention transport、temporal correspondence、nuisance stability和anti-trivial mapping discipline。坐标缩放的两个accumulator在正确phi_Z/phi_I下16 sequences+80 interventions误差全0；错误用same numeric intervention时max mismatch0.122459。direct/decomposed XOR baseline相同但internal signatures不同，被证书正确拒绝。
 
 下一步R120写根本的experience-intelligence bridge theorem schema。
+
+
+## R120 — 2026-10-06：Experience–Intelligence Bridge theorem schema
+
+把整条关系正式分成：存在桥、能力差异桥、support membership、multiple realization、T2 selected mechanism、T3/G4 selected constitutive homology、complete K equivalence。最关键非对称性：真实能力差异在固定完整比较下可推出complete E-type差异；能力相同不能反推E相同；能力增加不能推出experience scalar增加。
+
+跨底物T2只够selected mechanism correspondence；T3/G4才够selected experiential-structure homology；complete K correspondence才够complete E-type equivalence。下一步R121做closure audit，明确剩余真正未知。

@@ -1,0 +1,17 @@
+{
+  "round": "R120",
+  "type_count": 32,
+  "pair_count": 496,
+  "checks": {
+    "same_capability_different_complete_experience_pairs": 240,
+    "different_capability_same_complete_experience_pairs": 0,
+    "capability_gain_candidate_richness_decline_pairs": 64,
+    "same_selected_T2_mechanism_different_complete_type_pairs": 496
+  },
+  "witnesses": {
+    "same_capability_different_complete_experience": {"K1":[0,0,0,0,0],"K2":[0,0,0,0,1]},
+    "capability_gain_richness_decline": {"K1":[0,0,0,0,1],"K2":[0,1,0,0,0]},
+    "same_selected_mechanism_different_complete_type": {"K1":[0,0,0,0,0],"K2":[0,0,0,0,1]}
+  },
+  "interpretation": "Finite logical witness for bridge asymmetries; not a consciousness model."
+}

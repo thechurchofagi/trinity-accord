@@ -24,7 +24,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R119 handoff](records/R119_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R120 handoff](records/R120_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -341,3 +341,10 @@ R118 independently parses the authors' public optogenetic session registry and r
 [Research report](records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md); [exact checks](records/r119_t2_correspondence_certificate.py); [results](records/R119_T2_Certificate_Results.json); [handoff](records/R119_Worklog_and_Handoff_20261006.md).
 
 R119 makes cross-substrate mechanism correspondence coordinate-aware but intervention-sensitive. An exact scaled-accumulator positive control passes after transporting state/intervention ports under the declared mapping; a baseline-identical XOR negative control fails because internal intervention signatures cannot be preserved. T2 remains selected-mechanism evidence and is explicitly weaker than T3 constitutive homology.
+
+
+## R120 Experience–Intelligence Bridge theorem schema
+
+[Research report](records/R120_Experience_Intelligence_Bridge_Theorem_Schema_20261006.md); [finite checks](records/r120_bridge_theorem_witnesses.py); [results](records/R120_Bridge_Theorem_Results.json); [source ledger](records/R120_Source_Retrieval_Ledger.json); [handoff](records/R120_Worklog_and_Handoff_20261006.md).
+
+R120 consolidates the first-principles answer: actual realized intelligence is experience-bearing under UCT, genuine fixed-condition capability differences refine complete experiential type, but equal intelligence/performance/report is non-identifying because capability and behavior are many-to-one projections of organization. Cross-substrate T2 supports selected mechanism correspondence only; T3/G4 selected constitutive homology is required before a selected experiential-structure correspondence can be claimed under C1.
