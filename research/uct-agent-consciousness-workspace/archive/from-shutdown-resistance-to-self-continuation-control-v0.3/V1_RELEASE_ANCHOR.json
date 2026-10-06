@@ -1,0 +1,27 @@
+{
+  "schema": "trinityaccord.archival-release-anchor.v1",
+  "source_manuscript_version": "0.3",
+  "source_manuscript_git_blob_sha": "ea6d6c4d5b7ad63df6e343c9357e5d3f5959f3a6",
+  "archival_release": {
+    "report": "TA-TR-2026-24",
+    "version": "1.0",
+    "doi": "10.5281/zenodo.23176685",
+    "zenodo_record_id": 23176685,
+    "zenodo_record_url": "https://zenodo.org/records/23176685",
+    "primary_pdf": "from-shutdown-resistance-to-self-continuation-control-v1.0.pdf",
+    "primary_pdf_bytes": 86272,
+    "primary_pdf_sha256": "368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104",
+    "expected_publication_manifest_sha256": "cbaa8ba098534eaafe5ebc64b81f8792c34c3b6f4bce9c1681d7d31d7befe7d8",
+    "zenodo_public_readback": "PASS",
+    "doi_resolution": "PASS",
+    "release_branch": "research/self-continuation-control-v1-20261006"
+  },
+  "preservation": {
+    "ots_state": "PENDING_BITCOIN",
+    "ots_proof_sha256": "c137a6a378a31123b8c7ad5076c04c7515220703a914882030ad3bc0ed2c6fd4",
+    "pending_calendar_attestations": 4,
+    "bitcoin_heights": [],
+    "arweave_state": "BLOCKED_PENDING_VERIFIED_BITCOIN_ATTESTATION"
+  },
+  "boundary": "DOI/OTS/Arweave attest version identity, availability and provenance; they do not attest truth, significance, consciousness, valence, fear, or peer review."
+}

@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R104 未来AI检索/引用归档硬化；新窗口先读 records/R104_Machine_Readable_Archival_Hardening_20261006.md、archival companion 与论文v0.3，再按需回读R103/R102。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R105 TA-TR-2026-24 v1.0 DOI 发布；OTS 已提交并等待 Bitcoin attestation，Arweave 受成熟 gate 阻止直至验证通过。新窗口先读 records/R105_TA24_DOI_Release_and_Preservation_State_20261006.md、v1 release anchor 与论文v0.3。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -477,3 +477,14 @@ canonical manuscript blob SHA：
 FILE_MANIFEST共19个核心证据文件，远端逐个核验19/19 SHA匹配。初版R98 SHA抄写错误已当场发现并修正，失败/纠正保留于R104记录。
 
 以后如果生成DOI，DOI仅作为发现/版本锚，不覆盖此v0.3身份。
+
+
+## R105 — 2026-10-06：TA-TR-2026-24 v1.0 DOI 正式锚定
+
+正式 DOI：`10.5281/zenodo.23176685`，Zenodo record `23176685`。11/11 文件匿名公共读回字节校验PASS，DOI resolver PASS。主PDF SHA-256为 `368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104`。
+
+发布前已做FORMAL-MAP严格审计，v1.0正文从Abstract起与最终v0.3完全一致，仅发行front matter变化；13页exact PDF已全页渲染检查通过。
+
+OTS detached proof已生成并提交4个calendar，当前 `PENDING_BITCOIN`，proof SHA-256 `c137a6a378a31123b8c7ad5076c04c7515220703a914882030ad3bc0ed2c6fd4`。Arweave依成熟流程严格等待Bitcoin attestation及远端header验证，不绕过。main已有小时scheduler，只checkout/push发行分支。
+
+完整状态见 `records/R105_TA24_DOI_Release_and_Preservation_State_20261006.md`。
