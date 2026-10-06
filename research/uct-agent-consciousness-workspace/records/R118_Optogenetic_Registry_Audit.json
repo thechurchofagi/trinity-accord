@@ -1,0 +1,55 @@
+{
+  "round": "R118",
+  "source_repository": "Brody-Lab/fof_ads_interactions",
+  "source_commit": "39d056fb12f688034b543d9ac8b7406a58ad0f77",
+  "optodata_blob_sha": "bd94bed6af1ef59929615001fa6d2d4c21814eb1",
+  "raw_registry_rows": 309,
+  "author_exclusion_rule": {
+    "probe_not_equal": 0.6,
+    "excluded_rats": [
+      "X025",
+      "X038",
+      "X011"
+    ]
+  },
+  "retained_sessions": 222,
+  "retained_by_control_status": {
+    "inactivation_cntrl_0": 165,
+    "control_cntrl_1": 57
+  },
+  "retained_by_inactivation_side": {
+    "left": 139,
+    "right": 83
+  },
+  "retained_by_rat": {
+    "X008": 24,
+    "X002": 48,
+    "X013": 9,
+    "X026": 21,
+    "X033": 35,
+    "X044": 26,
+    "X042": 5,
+    "X048": 17,
+    "X050": 19,
+    "X037": 18
+  },
+  "optoval_mapping_from_package_code": {
+    "0": "none",
+    "1": "whole_trial_2s",
+    "2": "pre_stimulus",
+    "3": "first_half",
+    "4": "second_half",
+    "5": "memory_period",
+    "6": "movement_epoch"
+  },
+  "figure3_primary_optoval": [
+    1,
+    3,
+    4
+  ],
+  "reproducibility_status": {
+    "B1_psychophysical_kernel": "public recording data exist; local binary transfer pending",
+    "B2_neural_evidence_decoding": "public recording data exist; local binary transfer pending",
+    "B3_opto_trial_effect": "session registry/code public; full trial-level behavior not found in inspected public package"
+  }
+}

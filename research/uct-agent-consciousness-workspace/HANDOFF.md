@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R117 第一套真实cross-substrate evidence-accumulation实验（AI侧已实跑，生物raw复算受当前binary transfer阻塞）；新窗口先读 records/R117_First_Real_Cross_Substrate_Evidence_Accumulation_20261006.md 与R117交接，再按需回读R112-R116。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R118 biological public-data boundary audit与opto session-registry独立复算；新窗口先读 records/R118_Biological_Public_Data_Boundary_Audit_20261006.md 与R118交接，再按需回读R117。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -598,3 +598,10 @@ V变体只翻valence，6/6 pairwise preferences反转。
 锁定Neuron 2026 rat FOF/ADS公开数据和作者代码；AI侧完成59,571 trial matched sequential-evidence实跑，psychophysical kernel、state reset和grounded pulse干预均给出清晰支持关系。生物raw 1.8GB Figshare包因当前短时效S3 redirect无法拉入执行环境，故只使用同行评审机制事实，不冒充raw复算。
 
 当前T1强、T2部分/有前景、T3未建立。下一步优先B1-B3 biological reanalysis。
+
+
+## R118 — 2026-10-06：生物数据公开边界纠正
+
+独立解析Gupta et al.公开opto registry并复算作者exclusion/session counts。关键纠正：Figshare recording data与Figure3大样本opto行为不是同一数据层；B1/B2可由12 recording sessions复算，B3完整trial behavior在当前public GitHub/Figshare审计中未找到。以后严格区分paper evidence、registry/code audit、raw recording replication和opto trial replication。
+
+下一步R119形式化T2 intervention-preserving support correspondence certificate。
