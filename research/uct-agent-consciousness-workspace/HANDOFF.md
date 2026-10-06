@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R103 最终论文校对与preprint-readiness判定；新窗口先读 records/R103_Final_Manuscript_Proofread_and_Readiness_20261006.md 和论文v0.3，再按需回读R102/R101。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R104 未来AI检索/引用归档硬化；新窗口先读 records/R104_Machine_Readable_Archival_Hardening_20261006.md、archival companion 与论文v0.3，再按需回读R103/R102。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
