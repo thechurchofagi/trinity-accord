@@ -1,0 +1,9 @@
+criterion,status_after_R124,evidence_or_gap
+C0, LIMITED_PASS,"External signed-click coordinate e_t=#R-#L is grounded; it is not a complete biological latent state."
+C1, PARTIAL,"R122 weak/heterogeneous held-out level decoding: equal-rat R2 FOF=0.0542768811, ADS=0.0364488317."
+C2, FAIL_FOR_CURRENT_R122_MAPPING,"29337 adjacent held-out transitions. Equal-rat corr(delta_pred,delta_target): FOF=0.0570577587 ADS=0.0511520176. Skill vs persistence: FOF=-0.4755674679 ADS=-0.3511325569. Lag scan +/-300ms does not rescue."
+C3, OPEN,"No source-faithful intervention transport computed. Recording sessions contain no laser-on trials; B3 still not independently recomputed."
+C4, PARTIAL,"R123 fixed filter support approximately [t-250ms,t+100ms); R124 +/-300ms sensitivity scan. Biological encoding delay/state time remains underidentified."
+C5, OPEN_PARTIAL,"Cross-rat/post-hoc stacking and lag sensitivities run; no preregistered robustness/equivalence certificate."
+C6, PROCEDURAL_ONLY,"No E labels, no lookup/oracle, failure preserved rather than bridge-retuned. Anti-triviality of a future biological state map still requires independent justification."
+T2, OPEN,"Current mapping cannot close T2 because C2 fails and C3 is open."
