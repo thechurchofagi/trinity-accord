@@ -1,0 +1,113 @@
+{
+  "round": "R124",
+  "date": "2026-10-06",
+  "foundational_papers": [
+    {
+      "name": "UCT I / Paper A",
+      "verified_version": "1.2",
+      "doi": "10.5281/zenodo.23131575",
+      "ref": "f8750d32afeea9209e6d53ad3cfbd5bbde7a8126",
+      "path": "research/unified-consciousness-theory-i/versions/v1.2/published/unified-consciousness-theory-i-v1.2.md",
+      "blob": "7a980c86b8f94ce787d358dab3529903eb822f8f",
+      "note": "No v1.3 manuscript/path/branch verified in the audited repository."
+    },
+    {
+      "name": "UCT II / Paper B",
+      "verified_version": "1.1",
+      "doi": "10.5281/zenodo.23030320",
+      "ref": "562a5d16745e5e7e6cb4bc8f2c53a2f62e05875a",
+      "path": "research/uct-paired-v1.1/release/b/unified-consciousness-theory-ii-v1.1.md",
+      "blob": "c4734243b6dfd75255c14b99f333c52e7d7b7a58"
+    },
+    {
+      "name": "UCT III / Paper C",
+      "verified_version": "1.0",
+      "doi": "10.5281/zenodo.23137088",
+      "ref": "uct-agent-consciousness-workspace",
+      "path": "research/unified-consciousness-theory-iii/published/unified-consciousness-theory-iii-v1.0.md",
+      "blob": "be7c7a952aa88831c6660187586d92a3da707cdf"
+    }
+  ],
+  "reread_scope": {
+    "A": [
+      "§3 ontic/view/estimate/subject and §3.5 pointed port-aware signature",
+      "§4 C1/U1/U2/U3",
+      "§10 scientific bridge architecture",
+      "§11 PTVSP",
+      "§12 empirical failure conditions",
+      "§14.8-14.10 quality/cross-species/identity limits"
+    ],
+    "B": [
+      "§4 BAC-1 through BAC-7",
+      "§16 cross-theory consequences",
+      "§17 empirical program",
+      "§18 faithfulness constraint"
+    ],
+    "C": [
+      "§4 artificial agents/report",
+      "§5 intelligence-experience refinement/NESIG/fibers",
+      "§9 competitor discrimination",
+      "§10 empirical interfaces",
+      "Appendix B residual prediction"
+    ]
+  },
+  "empirical_inputs": {
+    "R122_commit": "bf55557992b84f6df4dfc6a924f291dfde7b976b",
+    "prediction_glob": "research/uct-agent-consciousness-workspace/records/R122_Biology_B1_B2_20261006/b2_results/*_B2_predictions.csv.gz",
+    "expected_rows": 32656,
+    "sessions": 12,
+    "rats": 5,
+    "execution": "All 12 gzipped OOF prediction files fetched from GitHub connector and decompressed inside the execution isolate with an independent pure-JS gzip/DEFLATE reader. Primary transition audit and a second lag-scan pass independently reloaded all files; zero-lag correlations matched."
+  },
+  "medical_repository_evidence": [
+    {
+      "branch": "ops/ds005169-download-20260928",
+      "path": ".github/workflows/temp-download-ds005169.yml",
+      "role": "downloads official NEMAR on005169/ds005169 archive"
+    },
+    {
+      "branch": "ops/uct-r5c-apstim-patient3-validate-20260928",
+      "path": ".github/workflows/uct-r5c-patient3-source-mapping-validation.yml",
+      "role": "maps Patient3 stimulation coordinates/surfaces and visual-symptom source fields"
+    },
+    {
+      "branch": "ops/uct-r5c-apstim-minsurf-all-20260928",
+      "path": ".github/workflows/uct-r5c-apstim-minsurf-all.yml",
+      "role": "recovers historical patient FreeSurfer assets"
+    }
+  ],
+  "medical_external_source": {
+    "title": "Multi-modal connectivity of the brain underlying visual hallucinations evoked by high-frequency intracranial stimulations",
+    "authors": "Felicia Mihai et al.",
+    "journal": "Brain Stimulation 18(4):1141-1149",
+    "publication_date": "2025-05-31",
+    "doi": "10.1016/j.brs.2025.05.138",
+    "PMID": "40456440",
+    "public_dataset": {
+      "nemar_doi": "10.82901/nemar.on005169",
+      "openneuro_doi": "10.18112/openneuro.ds005169.v1.0.0"
+    },
+    "scope_read": "Public abstract/full-index record and dataset description; repository workflows inspected. A first-party UCT medical manuscript was not found and is not claimed as read."
+  },
+  "prior_art_scope": [
+    {
+      "work": "King & Dehaene temporal generalization framework",
+      "role": "Established distinction between decodability and temporal/dynamical stability; no priority claim here."
+    },
+    {
+      "work": "Ritchie et al., Decoding the Brain",
+      "role": "General warning that decoding success does not by itself establish representation/mechanism."
+    },
+    {
+      "work": "Torbati 2026, Learning neural evolution operators: from decoding to identifiable causal state-space models, J Neural Eng 23(4), DOI 10.1088/1741-2552/ae9345",
+      "role": "Direct contemporary prior art that predictive latent trajectories do not guarantee mechanistic validity and that interventions are needed for causal identification."
+    }
+  ],
+  "failure_and_limit_ledger": [
+    "ScienceDirect live open returned 403 in one route; indexed abstract remained available from ScienceDirect/PubMed/DOAJ.",
+    "No verified Paper A v1.3 was found.",
+    "No first-party fourth UCT medical/clinical manuscript was located; external APStim companion paper identified instead.",
+    "R124 did not refit raw neural features or original MAT files.",
+    "R124 transition failure is specific to the existing R122 mapping/view."
+  ]
+}
