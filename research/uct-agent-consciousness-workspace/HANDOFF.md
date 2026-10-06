@@ -1,5 +1,7 @@
 # UCT 智能体意识研究交接
 
+**跨窗口总交接（R121）：** `records/UCT_Experience_Intelligence_Cross_Substrate_Master_Handoff_R121_20261006.md`。新窗口优先读此文件，再核对最新 HEAD；若已有 R122+，以更新轮次为准。
+
 更新：2026-10-06（北京时间）。已完成 R119 T2 intervention-preserving support-correspondence certificate；新窗口先读 records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md 与R119交接，再按需回读R117/R118。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
