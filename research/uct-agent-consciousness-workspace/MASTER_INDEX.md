@@ -23,7 +23,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R103 final proofread](records/R103_Final_Manuscript_Proofread_and_Readiness_20261006.md).
+- Latest worklog: [R106 handoff](records/R106_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -242,3 +242,10 @@ The current v0.3 manuscript is frozen by canonical Git blob SHA `ea6d6c4d5b7ad63
 [R105 release state](records/R105_TA24_DOI_Release_and_Preservation_State_20261006.md); [v1 release anchor](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/V1_RELEASE_ANCHOR.json).
 
 TA-TR-2026-24 v1.0 is publicly anchored at DOI `10.5281/zenodo.23176685`. The exact 86,272-byte PDF has SHA-256 `368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104`. Zenodo anonymous readback and DOI resolver both pass. OTS calendar submission is complete but the proof is still awaiting Bitcoin attestation; Arweave remains intentionally blocked until verified Bitcoin maturation.
+
+
+## R106 first-principles relation map
+
+[Research report](records/R106_Experience_Access_Intelligence_Self_Behavior_Report_First_Principles_Map_20261006.md); [formal map](records/R106_EAISBR_Formal_Map.json); [finite check](records/r106_projection_relations_check.py); [results](records/R106_Projection_Relations_Results.json); [source ledger](records/R106_Source_Retrieval_Ledger.json); [handoff](records/R106_Worklog_and_Handoff_20261006.md).
+
+The new root-level map separates experience E, access A, intelligence I, self-model S, behavior B and report R. Under C1, complete organization K and complete experiential type are the constitutive identity pair; I/B/R are task/context projections and A/S are organizational relations. A projection difference can witness a complete experiential-type difference under fixed conditions, but equality of a non-injective intelligence/behavior/report projection cannot establish experiential equality. Cross-substrate work should therefore compare actual organization, not infer human-like experience from human-like performance.

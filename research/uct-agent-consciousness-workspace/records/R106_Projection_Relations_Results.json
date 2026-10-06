@@ -1,0 +1,21 @@
+{
+  "round": "R106",
+  "purpose": "Finite witness for projection non-equivalence under E=K toy identity; not a biological or AI consciousness measurement.",
+  "structural_types": 16,
+  "unordered_pairs": 120,
+  "checks": {
+    "same_I_distinct_E_pairs": 56,
+    "same_B_distinct_E_pairs": 56,
+    "same_R_distinct_E_pairs": 56,
+    "different_I_same_E_pairs": 0,
+    "intelligence_gain_richness_decline_pairs": 16,
+    "report_only_change_preserved_core_pairs": 8
+  },
+  "witnesses": {
+    "same_I_distinct_E": {"K1": [0,0,0,0], "K2": [0,0,0,1]},
+    "same_B_distinct_E": {"K1": [0,0,0,0], "K2": [0,0,0,1]},
+    "same_R_distinct_E": {"K1": [0,0,0,0], "K2": [0,0,1,0]},
+    "intelligence_gain_richness_decline": {"K1": [0,1,0,0], "K2": [1,0,0,0]},
+    "report_only_change_preserved_core": {"K1": [0,0,0,0], "K2": [0,0,0,1]}
+  }
+}

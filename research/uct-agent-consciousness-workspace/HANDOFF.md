@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R105 TA-TR-2026-24 v1.0 DOI 发布；OTS 已提交并等待 Bitcoin attestation，Arweave 受成熟 gate 阻止直至验证通过。新窗口先读 records/R105_TA24_DOI_Release_and_Preservation_State_20261006.md、v1 release anchor 与论文v0.3。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R106 体验/访问/智能/自我/行为/报告第一性原理地图；新窗口先读 records/R106_Experience_Access_Intelligence_Self_Behavior_Report_First_Principles_Map_20261006.md 与R106交接，再按需回读R81/R82。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -495,3 +495,12 @@ OTS detached proof已生成并提交4个calendar，当前 `PENDING_BITCOIN`，pr
 TA-TR-2026-24 v1.0 DOI已正式发布：`10.5281/zenodo.23176685`。精确PDF SHA-256 `368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104`，Zenodo 11文件公共精确回读与DOI resolver均PASS。形式化地图严格审计PASS，v1.0正文从Abstract起与最终v0.3逐字一致。
 
 OTS已提交但当前仍为`PENDING_BITCOIN`（4 calendar attestations、暂无Bitcoin height）；Arweave按成熟流程正确阻塞在`BLOCKED_PENDING_VERIFIED_BITCOIN_ATTESTATION`。不得提前声称OTS Bitcoin/AR闭环完成。Paper24 scheduler已主动触发，条件监控继续等待Bitcoin验证后再做受预算保护的AR上传与匿名readback。
+
+
+## R106 — 2026-10-06：体验、访问、智能、自我、行为、报告的第一性原理分解
+
+新主线不再问一个含混的“意识和智能是否同步”，而是把E/A/I/S/B/R六项分开。核心图：完整实际组织K在C1下与完整体验类型E相对应；A/S是组织关系，I/B/R是任务/环境/接口相对的组织投影。体验不是可从同一K上单独拔掉的额外因子。
+
+Projection Lemma：任何固定条件下良定义的K投影F都有“F不同 => 完整体验类型不同”，但“F相同 => 体验相同”只在F对现实域单射时成立。因此同行为、同报告、同能力一般不能证明同体验；能力真差异则在Paper C/NESIG条件下可推出完整体验类型差异。无标量richness同步律。
+
+精确有限witness与生物压力测试已保存。下一步R107构造最弱跨底物common signature，再R108做小型AI机制解离实验，不先做大模型自报告评分。

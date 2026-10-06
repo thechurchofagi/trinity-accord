@@ -1,0 +1,63 @@
+{
+  "round": "R106",
+  "date": "2026-10-06",
+  "internal_sources": [
+    "R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md",
+    "R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md",
+    "published UCT I/II/III clauses previously directly audited in R81"
+  ],
+  "external_sources": [
+    {
+      "title": "Cognitive Motor Dissociation in Disorders of Consciousness",
+      "venue": "New England Journal of Medicine",
+      "year": 2024,
+      "doi": "10.1056/NEJMoa2400645",
+      "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2400645",
+      "scope": "Abstract, methods/results summary and CMD prevalence read. Used only as behavior-vs-covert-cognition stress test."
+    },
+    {
+      "title": "Sleuthing subjectivity: a review of covert measures of consciousness",
+      "venue": "Nature Reviews Neuroscience",
+      "year": 2025,
+      "url": "https://www.nature.com/articles/s41583-025-00934-1",
+      "scope": "Abstract and report-limit framing read."
+    },
+    {
+      "title": "Report-modulated prefrontal activity and consistent posterior representations during conscious visual perception",
+      "venue": "Consciousness and Cognition",
+      "year": 2026,
+      "doi": "10.1016/j.concog.2026.104075",
+      "scope": "Abstract/highlights read. Used only as report/no-report dissociation stress test."
+    },
+    {
+      "title": "Adversarial testing of global neuronal workspace and integrated information theories of consciousness",
+      "venue": "Nature",
+      "year": 2025,
+      "doi": "10.1038/s41586-025-08888-1",
+      "scope": "Abstract and high-level conclusion read; used to avoid importing theory-specific experience gates."
+    },
+    {
+      "title": "How to study subjective experience in an animal model of blindsight?",
+      "venue": "Neuroscience Research",
+      "year": 2024,
+      "doi": "10.1016/j.neures.2023.09.001",
+      "scope": "Abstract/highlights read; used as a cautious dissociation case."
+    },
+    {
+      "title": "Consciousness after split-brain surgery: The recent challenge to the classical picture",
+      "venue": "Neuroscience of Consciousness / indexed PubMed source",
+      "year": 2021,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34371067/",
+      "scope": "Abstract read; used for agency-unity versus experience-unity distinction."
+    },
+    {
+      "title": "Reconceptualizing consciousness as an intelligence: A five-level model of access consciousness",
+      "venue": "Intelligence",
+      "year": 2026,
+      "doi": "10.1016/j.intell.2026.102039",
+      "scope": "Abstract read. Important prior art for treating access consciousness as a cognitive capacity; R106 keeps phenomenal experience separate from access."
+    }
+  ],
+  "novelty_status": "The projection mathematics is elementary and not claimed as historical-first. The value is the UCT-specific first-principles separation and cross-substrate research program.",
+  "no_third_party_fulltexts_redistributed": true
+}

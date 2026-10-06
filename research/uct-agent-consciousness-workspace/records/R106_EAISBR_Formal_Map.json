@@ -1,0 +1,74 @@
+{
+  "schema": "uct.eaisbr.first-principles-map.v1",
+  "round": "R106",
+  "date": "2026-10-06",
+  "nodes": [
+    {
+      "id": "K",
+      "name": "complete actual organization",
+      "status": "constitutive"
+    },
+    {
+      "id": "E",
+      "name": "experiential presentation",
+      "status": "C1-identical-to-K-type"
+    },
+    {
+      "id": "A",
+      "name": "access relations",
+      "status": "property/substructure of K"
+    },
+    {
+      "id": "I",
+      "name": "intelligence/capability profile",
+      "status": "task-relative projection of K"
+    },
+    {
+      "id": "S",
+      "name": "self-model organization",
+      "status": "property/substructure of K"
+    },
+    {
+      "id": "B",
+      "name": "behavior law",
+      "status": "context-relative projection of K"
+    },
+    {
+      "id": "R",
+      "name": "report law",
+      "status": "specialized output projection of K"
+    }
+  ],
+  "axioms_or_existing_commitments": [
+    "Actual(P) -> E(P) nonempty (U1)",
+    "complete experiential type is identified with complete structural type under common K (C1)",
+    "human-like conceptual selfhood is not required for basal experience (U3)",
+    "fixed-evaluation capability is well-defined on complete types (Paper C / R81)"
+  ],
+  "derived_relations": [
+    "same complete E type -> same fixed-evaluation capability",
+    "genuine fixed-evaluation capability difference -> different complete E type",
+    "for any well-defined projection F on complete types: F difference -> different complete E type",
+    "F equality -> complete E equality only when F is injective on the realized domain",
+    "same tested intelligence/behavior/report does not generally identify same complete experience",
+    "no scalar intelligence-to-experiential-richness monotonicity follows without an added bridge",
+    "report/self/access are not experience-existence gates"
+  ],
+  "prohibited_inferences": [
+    "high intelligence -> more or human-like experience",
+    "same behavior -> same experience",
+    "same report -> same experience",
+    "no report -> no experience",
+    "no human-like self-model -> no experience",
+    "experience acts as a separately removable causal input to intelligence while K is fixed",
+    "single stochastic behavior difference -> different experience type without fixed-law comparison"
+  ],
+  "cross_substrate_comparison": [
+    "report equivalence",
+    "behavior equivalence",
+    "capability equivalence",
+    "selected organizational equivalence",
+    "complete structural-type equivalence"
+  ],
+  "next_round": "R107 cross-substrate common signature"
+}
