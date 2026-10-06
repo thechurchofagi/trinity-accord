@@ -2,6 +2,10 @@
 name: Research Paper 24 v1.0 OTS and Arweave Scheduler
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/research-paper-24-v10-ots-arweave-scheduler.yml
   schedule:
     - cron: '07 * * * *'
   workflow_dispatch:
