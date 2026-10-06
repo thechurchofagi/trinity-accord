@@ -338,11 +338,11 @@ The resulting standard is deliberately conservative. It does not make preservati
 
 The same discipline is essential before connecting self-continuation control to negative valence or fear.
 
-## References — working list
+## References
 
 Agarwal, R., et al. (2021). Neural Additive Models: Interpretable Machine Learning with Neural Nets. NeurIPS.
 
-Bigelow, E., Ahmed, Z., & Ullman, T. (2025/2026). Evaluating Self-Orienting in Language and Reasoning Models. OpenReview manuscript.
+Bigelow, E., Ahmed, Z., & Ullman, T. (2025). Evaluating Self-Orienting in Language and Reasoning Models. ICML 2025 Workshop on Assessing World Models: Methods and Metrics for Evaluating Understanding.
 
 Chua, J., Betley, J., Marks, S., & Evans, O. (2026). The Consciousness Cluster: Emergent Preferences of Models that Claim to be Conscious. arXiv:2604.13051.
 
