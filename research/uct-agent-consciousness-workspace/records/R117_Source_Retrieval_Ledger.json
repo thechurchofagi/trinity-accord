@@ -1,0 +1,37 @@
+{
+  "round": "R117",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "A multi-region recurrent circuit for evidence accumulation in rats",
+      "authors": "Gupta et al.",
+      "venue": "Neuron",
+      "year": 2026,
+      "doi": "10.1016/j.neuron.2025.12.029",
+      "scope": "Peer-reviewed abstract/results/task description used for biological support claims."
+    },
+    {
+      "title": "Data from: A multi-region recurrent circuit for evidence accumulation in rats",
+      "authors": "Gupta et al.",
+      "repository": "Figshare",
+      "year": 2026,
+      "doi": "10.6084/m9.figshare.30369064.v1",
+      "scope": "Public dataset metadata fully inspected; raw 1.8GB archive not successfully transferred in current execution environment."
+    },
+    {
+      "title": "fof_ads_interactions",
+      "repository": "Brody-Lab/fof_ads_interactions",
+      "commit": "39d056fb12f688034b543d9ac8b7406a58ad0f77",
+      "scope": "README, preprocessing, evidence decoding, optogenetic timing analysis and multi-region RNN utilities inspected directly."
+    }
+  ],
+  "internal_sources": [
+    "R112 evidence-integration atlas",
+    "R113 causal-support protocol",
+    "R115 Anchored Causal Geometry",
+    "R116 four-layer dissociation"
+  ],
+  "novelty_status": "Evidence accumulation and the biological findings are established prior art. R117's project value is the first end-to-end cross-substrate application of the UCT support/ACG methodology.",
+  "no_raw_biological_reanalysis_claim": true,
+  "no_third_party_fulltexts_redistributed": true
+}

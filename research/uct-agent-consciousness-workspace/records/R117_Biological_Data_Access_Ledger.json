@@ -1,0 +1,55 @@
+{
+  "round": "R117",
+  "date": "2026-10-06",
+  "biological_dataset": {
+    "title": "Data from: A multi-region recurrent circuit for evidence accumulation in rats",
+    "figshare_doi": "10.6084/m9.figshare.30369064.v1",
+    "page": "https://figshare.com/articles/dataset/Data_from_A_multi-region_recurrent_circuit_for_evidence_accumulation_in_rats/30369064",
+    "download_file_id": "58773835",
+    "advertised_download_size": "1.8 GB",
+    "archive_name": "Cells.zip",
+    "matlab_session_files": 12,
+    "license": "MIT",
+    "key_trial_fields": [
+      "leftBups",
+      "rightBups",
+      "click_diff",
+      "click_diff_hz",
+      "pokedR",
+      "is_hit",
+      "stim_dur_s_actual",
+      "stateTimes"
+    ],
+    "key_neural_fields": [
+      "raw_spike_time_s",
+      "regions",
+      "hemisphere",
+      "recorded",
+      "AP",
+      "ML",
+      "DV"
+    ]
+  },
+  "author_code": {
+    "repository": "Brody-Lab/fof_ads_interactions",
+    "audited_commit": "39d056fb12f688034b543d9ac8b7406a58ad0f77",
+    "relevant_files": [
+      "helpers/physdata_preprocessing.py",
+      "figure2/fig2_helpers/evidencedecoding.py",
+      "figure3/figure1_metaopto.m",
+      "figure3/optodata_FOFSTR.xlsx",
+      "figure4_6/multiregion_RNN_utils.py"
+    ]
+  },
+  "current_transfer_attempt": {
+    "status": "BLOCKED_BY_EXECUTION_ENVIRONMENT",
+    "stable_url_attempted": "https://figshare.com/ndownloader/files/58773835",
+    "reason": "Available binary downloader did not complete Figshare's short-lived signed S3 redirect.",
+    "scientific_consequence": "No raw biological trial/neural recomputation is claimed in R117."
+  },
+  "frozen_minimal_reanalysis": [
+    "B1 psychophysical temporal kernel",
+    "B2 FOF/ADS cumulative-evidence decoding",
+    "B3 whole/first-half/second-half optogenetic timing signature"
+  ]
+}
