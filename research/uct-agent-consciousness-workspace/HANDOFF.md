@@ -1,15 +1,13 @@
-# UCT 研究交接 — R132：共同实现与部分随机接口
+# UCT 研究交接 — R133：可观察共同控制
 
-2026-10-07 Asia/Shanghai；父提交 5b1eb8b5425e9505582aa44e0ed3f96ba4aea827。仓库 thechurchofagi/trinity-accord，分支 uct-agent-consciousness-workspace。当前图 262 节点、119 规则。
+2026-10-07 Asia/Shanghai。父提交 e381fa5a84ea7696447940319331be04b4f63a92；仓库 thechurchofagi/trinity-accord，分支 uct-agent-consciousness-workspace。当前 276 节点、127 规则。
 
-本轮用户“继续下一步”：已沿 R131 的共同实现问题完成一轮严格推导。[中文进展](records/R132_Common_Realization_and_Partial_Closure_20261007/RESEARCH_UPDATE_ZH.md)、[完整英文证明](records/R132_Common_Realization_and_Partial_Closure_20261007/R132_Common_Realization_Theorems.md)、[完整台账](records/R132_Common_Realization_and_Partial_Closure_20261007/PROOF_LEDGER.md)。
+[完整英文证明](records/R133_Observable_Common_Control_20261007/R133_Observable_Common_Control.md)、[中文增量](records/R133_Observable_Common_Control_20261007/RESEARCH_UPDATE_ZH.md)、[完整证明台账](records/R133_Observable_Common_Control_20261007/PROOF_LEDGER.md)。
 
-新增：单位任务/资源时隙的共同匹配与 Hall 缺口；全体 proper coalitions 成功仍不能保证整体；指定模型中各项 99% 与整体 0% 可并存；同一摘要的可执行菜单和下一摘要/输出联合律必须一起闭合；有限固定模型存在保留初始区分的最粗稳定细化。
+新增 14 节点、8 规则：持续机制的精确支持更新；固定有限时限的概率一共同策略充要条件；观察单元共同成功动作；理想最少消息数＝动作覆盖数；一个 bit 足够而无需完全识别的指定反例；任务充分划分可不唯一；诊断与剩余行动机会的区别；逐步换模型可虚构失败。
 
-全部 249 旧节点、112 旧规则和四篇论文来源不改。新模型不是一般多资源调度；每种实际映射须单独验证资源充分性与调度者。不同可行匹配不自动给出唯一输出律。现有经典数学和 R126 已有提示正确归属；没有历史首创声明。历史思想实验完整清单的未核验状态不变。
+全部 262 旧节点、119 旧规则、四篇源文不改。22 项具名数学检查、756 策略比较、1715 观察划分检查；图审计见 MAP_CHECK.json，全部验证范围见 VALIDATION_LOG.md。不是机器证明或新经验数据。经典 POMDP/覆盖方法正确归属；附近 2026 全文比较尚未完成。
 
-检查：见本轮 MAP_CHECK.json / EXACT_CHECK.json / VALIDATION_LOG.md。数学检查为有理数精确计算，无新经验数据。所有新增证明均为条件手工证明，非证明助手认证。
+下一轮：在有限时限和持续未知机制下，把概率一放宽为最坏成功率 1-epsilon，明确诊断成本和机会损失。支持集不足以给定量值；考虑保留模型索引的延续收益向量，避免每步独立选最坏模型。先读证明第 10 节，并继续接入当前总图。
 
-下一轮：同一持续机制下的模型不确定性。区分 forall model exists policy 与 exists observable-history policy forall model。需规定观察信息、可适应策略和资源；先读本轮第 9 节与查新范围，不能默许按隐藏模型选择策略。理论优先，C1/U1 不改，T2 OPEN、C3 NOT_TESTED、valence OPEN。
-
-启动读取 AGENTS/MEMORY/当前总图/审计/相关源文。研究正文英文，中文讨论交接。仅存储 [skip ci]，保留最新 HEAD 和并发，不 force；不发布 DOI/论文 release/PR/CI。[R131 交接](HANDOFF_THROUGH_R131.md)、[R131 索引](MASTER_INDEX_THROUGH_R131.md) 保留。
+启动先读 AGENTS/MEMORY/总图/审计/相关四篇源文。C1/U1 不改；不设自省、报告或共同控制为体验存在门槛。T2 OPEN、C3 NOT_TESTED、valence OPEN。历史思想实验数千条原始清单仍未完整核验。只存储 [skip ci]，最新 HEAD lease、非 force、保留并发；不发 DOI/release/PR/CI。前轮 [交接](HANDOFF_THROUGH_R132.md) / [索引](MASTER_INDEX_THROUGH_R132.md) 保留。

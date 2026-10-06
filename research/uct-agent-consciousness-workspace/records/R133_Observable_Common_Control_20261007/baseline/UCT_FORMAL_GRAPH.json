@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R133-v1.0",
+  "revision": "R132-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "e381fa5a84ea7696447940319331be04b4f63a92",
+  "base_commit": "5b1eb8b5425e9505582aa44e0ed3f96ba4aea827",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -2154,132 +2154,6 @@
       "source": "R132_Common_Realization_Theorems.md §8",
       "status": "MANUAL_CONDITIONAL_PASS",
       "scope": "Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. Compression can be trivial; this is not a minimal physical circuit or model-independent state."
-    },
-    {
-      "id": "R133:PERSISTENT_MODEL",
-      "kind": "DEFINITION",
-      "label": "Persistent finite mechanism and observable-history policy",
-      "statement": "Augment the partial kernel state to (m,s) with immutable m. For support B use common menu A(B)=intersection E_m(s) and successor support B_(a,o)={(m,s_prime):exists (m,s) in B with K_m(s,a;s_prime,o)>0}.",
-      "source": "R133_Observable_Common_Control.md §2",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate."
-    },
-    {
-      "id": "R133:SUPPORT",
-      "kind": "THEOREM",
-      "label": "Exact model-indexed support invariant",
-      "statement": "Recursively updating B along a feasible finite observable action/output history gives exactly its attainable current (m,s) pairs without repasting model choices.",
-      "source": "R133_Observable_Common_Control.md §2",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate. No Bayesian probabilities or quantitative value sufficiency is asserted."
-    },
-    {
-      "id": "R133:COMMON_POLICY",
-      "kind": "THEOREM",
-      "label": "Bounded-horizon probability-one common-policy certificate",
-      "statement": "W_0(B)=[B subset G]; W_(h+1)(B)=[B subset G] OR [exists a in A(B), all nonempty B_(a,o) satisfy W_h]. W_H(B) iff one observation-history policy succeeds from every x in B within H transitions with probability one. Deterministic (B,h) policies suffice even when randomization is allowed.",
-      "source": "R133_Observable_Common_Control.md §3",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate. Not a claim about infinite-horizon almost-sure winning or success probabilities below one."
-    },
-    {
-      "id": "R133:DECISION_MODEL",
-      "kind": "DEFINITION",
-      "label": "One-shot successful-action family and observed cells",
-      "statement": "Each m has nonempty G_m subset U of enabled probability-one successful actions. A deterministic fixed observation h:M->Y arrives without changing this decision problem.",
-      "source": "R133_Observable_Common_Control.md §4",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion."
-    },
-    {
-      "id": "R133:CELL_ACTION",
-      "kind": "THEOREM",
-      "label": "Each observed cell must share a successful action",
-      "statement": "A successful observation-based decision rule exists iff each nonempty h fiber has nonempty intersection of its G_m sets. Probability-one randomization cannot repair an empty intersection.",
-      "source": "R133_Observable_Common_Control.md §4",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion. Pairwise intersections are not sufficient for a larger cell."
-    },
-    {
-      "id": "R133:ENCODER",
-      "kind": "ASSUMPTION",
-      "label": "Freely selectable ideal deterministic encoder",
-      "statement": "For the one-shot decision family, any deterministic h(m) may be selected; count used messages; no side information or sensing cost. The encoder must be supplied for physical application.",
-      "source": "R133_Observable_Common_Control.md §4",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion. Ideal access to m is a premise, not an inferred physical ability."
-    },
-    {
-      "id": "R133:MESSAGE_COVER",
-      "kind": "THEOREM",
-      "label": "Minimum ideal task message count equals an action cover",
-      "statement": "Let C_a={m:a in G_m}. The minimum used-message count is tau=min{|V|:union_(a in V) C_a=M}; minimum fixed-length bits are ceil(log2 tau).",
-      "source": "R133_Observable_Common_Control.md §4",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion. Requires ENCODER. No noisy channel, entropy, variable-length coding, adaptive protocol or sensor construction is covered."
-    },
-    {
-      "id": "R133:AVOIDANCE_MODEL",
-      "kind": "MODEL",
-      "label": "Avoid the one action forbidden by the hidden mechanism",
-      "statement": "M=U={1,...,n}, n>=2, G_m=U minus {m}; initial observation is constant. An ideal yes/no observation of m=1 is also considered.",
-      "source": "R133_Observable_Common_Control.md §5",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion."
-    },
-    {
-      "id": "R133:AVOIDANCE",
-      "kind": "THEOREM",
-      "label": "High robust success, no perfect blind action, and one sufficient bit",
-      "statement": "In AVOIDANCE_MODEL, every proper candidate subset has a common good action and the whole family has none; randomized blind minimax success is 1-1/n. Exactly two ideal messages suffice for perfect task success, whereas exact model identification requires n.",
-      "source": "R133_Observable_Common_Control.md §5",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion. Mutually exclusive candidate mechanisms, not simultaneous tasks; n=100 is a specified example, not measured AI accuracy."
-    },
-    {
-      "id": "R133:NONUNIQUE",
-      "kind": "THEOREM",
-      "label": "A task need not have a unique coarsest sufficient observation partition",
-      "statement": "For the avoidance family at n=3, each of the three two-cell partitions is successful; all are incomparable and their only common coarsening is the failing one-cell partition.",
-      "source": "R133_Observable_Common_Control.md §5",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion. Does not contradict R132 coarsest stable refinement for a fixed full interface."
-    },
-    {
-      "id": "R133:PROBE_MODELS",
-      "kind": "MODEL",
-      "label": "Preserving, uninformative and destructive diagnostic interfaces",
-      "statement": "Two persistent models require opposite terminal actions. Each probe consumes one step; preserving probe reports m and preserves choices; uninformative probe reports a common symbol with no effect; destructive probe reports m but enters absorbing failure. Terminal choices consume one step.",
-      "source": "R133_Observable_Common_Control.md §6",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate. Mathematical devices only. Probing is optional unless explicitly conditioned on it."
-    },
-    {
-      "id": "R133:PROBE_BOUNDARY",
-      "kind": "THEOREM",
-      "label": "Task information needs remaining successful action opportunities",
-      "statement": "For the specified two-model probe systems at H=2, preserving diagnosis gives worst-case success one; uninformative and optional destructive probes leave optimal randomized worst-case success one half. A destructive probe conditional on use has value zero; the preserving diagnostic cannot assure success at H=1.",
-      "source": "R133_Observable_Common_Control.md §6",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate. Free extra information in C:P7 is a different fixed decision problem; finite uninformative probes cannot improve the one-half bound."
-    },
-    {
-      "id": "R133:SWITCH_MODEL",
-      "kind": "MODEL",
-      "label": "Two persistent forced traces and an at-least-one-success target",
-      "statement": "One fixed model emits (1,0); the other emits (0,1) under the same forced two-stage protocol. The target is at least one 1, tracked by a persistent success flag.",
-      "source": "R133_Observable_Common_Control.md §7",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate."
-    },
-    {
-      "id": "R133:PERSISTENCE",
-      "kind": "THEOREM",
-      "label": "Stagewise envelope can fabricate an impossible failure trace",
-      "statement": "Both persistent traces satisfy the target, while the Cartesian product of stagewise output possibilities contains (0,0). After first output 0 the exact support retains only the model whose next output is 1.",
-      "source": "R133_Observable_Common_Control.md §7",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate. Conservative model switching need not be exact; some other envelopes may be exact. No prior over models is required."
     }
   ],
   "rules": [
@@ -3864,116 +3738,6 @@
       "source": "R132_Common_Realization_Theorems.md §8",
       "kind": "DEDUCTIVE",
       "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r133_support",
-      "all_of": [
-        "R133:PERSISTENT_MODEL"
-      ],
-      "conclusion": "R133:SUPPORT",
-      "statement": "The observable support update retains exactly feasible persistent model/state pairs.",
-      "proof_sketch": "Induct on finite history: positive transition iff a feasible predecessor exists; immutable m and finite products of positive factors preserve exact possibility.",
-      "source": "R133_Observable_Common_Control.md §2",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r133_common",
-      "all_of": [
-        "R133:PERSISTENT_MODEL",
-        "R133:SUPPORT"
-      ],
-      "conclusion": "R133:COMMON_POLICY",
-      "statement": "The AND/OR support recurrence is equivalent to a common finite-horizon probability-one policy.",
-      "proof_sketch": "Base case is goal containment. A successful first action is common-enabled; every possible output must admit a successful continuation. Conversely combine those continuations. Positive-probability randomized failing branches would contradict the guarantee, so purify recursively.",
-      "source": "R133_Observable_Common_Control.md §3",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r133_cell",
-      "all_of": [
-        "R133:DECISION_MODEL",
-        "C:P2_COORD"
-      ],
-      "conclusion": "R133:CELL_ACTION",
-      "statement": "Decision rules must choose a shared successful action on each observation fiber.",
-      "proof_sketch": "A rule is constant on each observed cell, giving necessity; choose an action from each finite nonempty intersection for sufficiency. Every action in a successful randomized rule support must satisfy the same condition.",
-      "source": "R133_Observable_Common_Control.md §4",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r133_cover",
-      "all_of": [
-        "R133:DECISION_MODEL",
-        "R133:CELL_ACTION",
-        "R133:ENCODER"
-      ],
-      "conclusion": "R133:MESSAGE_COVER",
-      "statement": "The ideal minimum message count is exactly the minimum successful-action cover size.",
-      "proof_sketch": "Each decoded message action covers its cell, giving a cover lower bound. Conversely assign every mechanism to one action in a minimum cover and send its index.",
-      "source": "R133_Observable_Common_Control.md §4",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r133_avoid",
-      "all_of": [
-        "R133:DECISION_MODEL",
-        "R133:CELL_ACTION",
-        "R133:ENCODER",
-        "R133:MESSAGE_COVER",
-        "R133:AVOIDANCE_MODEL"
-      ],
-      "conclusion": "R133:AVOIDANCE",
-      "statement": "A large candidate family can require only a one-bit task diagnostic while having no perfect unobserved action.",
-      "proof_sketch": "Worst-case success for action law p is 1-max p_m, at most 1-1/n, attained uniformly. Test m=1 and choose action 2 or 1. Full identification instead requires injective messages.",
-      "source": "R133_Observable_Common_Control.md §5",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r133_nonunique",
-      "all_of": [
-        "R133:DECISION_MODEL",
-        "R133:CELL_ACTION",
-        "R133:AVOIDANCE_MODEL"
-      ],
-      "conclusion": "R133:NONUNIQUE",
-      "statement": "Task-relative sufficient observation partitions need not have a unique coarsest element.",
-      "proof_sketch": "At n=3 all two-element candidate cells share an allowed action, but the triple does not. The three two-cell partitions are incomparable and force the universal cell in any common coarsening.",
-      "source": "R133_Observable_Common_Control.md §5",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r133_probe",
-      "all_of": [
-        "R133:PERSISTENT_MODEL",
-        "R133:COMMON_POLICY",
-        "R133:PROBE_MODELS"
-      ],
-      "conclusion": "R133:PROBE_BOUNDARY",
-      "statement": "A diagnostic helps only through continuations still possible in the declared action/time model.",
-      "proof_sketch": "Preserving output identifies the right terminal action in two steps. Uninformative histories give identical terminal-action distributions with summed two-model success at most one. A destructive probe has no successful continuation. Immediate half-half action selection attains one half.",
-      "source": "R133_Observable_Common_Control.md §6",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r133_persistence",
-      "all_of": [
-        "R133:PERSISTENT_MODEL",
-        "R133:SUPPORT",
-        "R133:SWITCH_MODEL"
-      ],
-      "conclusion": "R133:PERSISTENCE",
-      "statement": "Independent stagewise model choices can add failure histories absent from every fixed model.",
-      "proof_sketch": "The two allowed traces each contain 1; (0,0) belongs to the stagewise product but requires switching models. The exact first-output update eliminates that switch.",
-      "source": "R133_Observable_Common_Control.md §7",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
     }
   ],
   "context_links": [
@@ -4161,41 +3925,6 @@
       "from": "R132:HIGH_ORDER",
       "to": "C:P1",
       "relation": "A grounded difference in well-defined joint capability can enter C:P1; no scalar richness or existence gate follows"
-    },
-    {
-      "from": "R132:PARTIAL_MODEL",
-      "to": "R133:PERSISTENT_MODEL",
-      "relation": "Specialize partial joint kernels to a fixed unknown member of a finite family; explicit new information contract"
-    },
-    {
-      "from": "B:VIEW",
-      "to": "R133:PERSISTENT_MODEL",
-      "relation": "Observation/time/port/scheduler grounding obligation, not automatic physical adequacy"
-    },
-    {
-      "from": "C:P7",
-      "to": "R133:CELL_ACTION",
-      "relation": "Common successful actions relate to the published common-optimum condition"
-    },
-    {
-      "from": "C:P7",
-      "to": "R133:PROBE_BOUNDARY",
-      "relation": "Costly state-changing probes must not be treated as free information with fixed actions/payoff"
-    },
-    {
-      "from": "D:PAYOFF",
-      "to": "R133:DECISION_MODEL",
-      "relation": "Success is target-relative; no universal utility or valence inferred"
-    },
-    {
-      "from": "R131:TARGET_SPAN",
-      "to": "R133:MESSAGE_COVER",
-      "relation": "Action selection sufficiency differs from identifying all expected payoffs"
-    },
-    {
-      "from": "R132:REFINEMENT",
-      "to": "R133:NONUNIQUE",
-      "relation": "Full-interface stable refinement and task-relative sufficient partitions have different uniqueness properties"
     }
   ],
   "prohibited_inferences_D": [
@@ -4242,11 +3971,6 @@
       "id": "R132-ATTR-03",
       "prior_source": "Hall 1935; Givan/Dean/Greig 2003; R126 partial-operation caveat; R128/PLT parity; nearby Takahashi 2026 abstract",
       "current_scope": "Finite resource obstruction plus complete partial interface certificate, connected to R131. No historical novelty for matching, bisimulation, current-versus-reusable-state distinction or partition refinement. Actual support and general scheduling remain open."
-    },
-    {
-      "id": "R133-ATTR-04",
-      "prior_source": "Chatterjee/Doyen/Henzinger 2010 qualitative POMDPs; elementary finite set covering; C:P2_COORD/C:P7; Takahashi 2026 abstract on globally coupled models",
-      "current_scope": "Project extension with explicit persistent-model, information, enabledness, horizon and probe-cost conditions. No historical novelty for support constructions, set covering or nonrectangular uncertainty. Nearby 2026 full text not retrieved; complete literature comparison remains open."
     }
   ],
   "audit_amendments": [

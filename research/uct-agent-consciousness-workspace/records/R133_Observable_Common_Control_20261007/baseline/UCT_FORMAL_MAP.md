@@ -1,6 +1,6 @@
-# UCT A–B–C–D unified formal map — R133
+# UCT A–B–C–D unified formal map — R132
 
-**Canonical working map, revision R133-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R133. It does not supersede or edit the published papers.
+**Canonical working map, revision R132-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R132. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
@@ -21,7 +21,7 @@ A's 78-node graph and B's historical 43-node map are preserved as sources. B's o
 
 ## 2. How to read an implication
 
-The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **276 nodes and 127 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R133_Observable_Common_Control_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
+The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **262 nodes and 119 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R132_Common_Realization_and_Partial_Closure_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
 
 - All premises inside one rule's **all_of** must hold together.
 - Separate rules concluding the same node are alternative sufficient routes.
@@ -220,22 +220,7 @@ Recovered sources include 47 overlapping historical regression families and the 
 
 R126 already flagged the partial-operation obligation; R132 now proves and instantiates it. Matching, bisimulation and refinement are established mathematics. These are project-level connections, not a new consciousness existence criterion or a proof of actual physical grounding.
 
-## 10. R133: observable common control
-
-[Complete proofs](records/R133_Observable_Common_Control_20261007/R133_Observable_Common_Control.md), [Chinese assessment](records/R133_Observable_Common_Control_20261007/RESEARCH_UPDATE_ZH.md), [exact checks](records/R133_Observable_Common_Control_20261007/EXACT_CHECK.json).
-
-| Stable result | Content | Required boundary |
-|---|---|---|
-| R133:SUPPORT / COMMON_POLICY | Exact persistent-model support plus finite-horizon AND/OR recursion characterizes a shared observable probability-one policy | Finite known family; common enabled actions; closed goal; fixed horizon; support is not a quantitative posterior |
-| R133:CELL_ACTION | Each observed cell must share an enabled successful action | Fixed one-shot problem; full-cell intersection, not pairwise only |
-| R133:MESSAGE_COVER | Minimum ideal diagnostic message count equals a minimum cover by successful actions | Freely selectable deterministic encoder; no sensor construction or free physical access assumed |
-| R133:AVOIDANCE / NONUNIQUE | One bit can suffice for a task among n candidate models; a unique coarsest task-sufficient partition need not exist | Specified avoidance family; distinct from full identification and R132 full-interface refinement |
-| R133:PROBE_BOUNDARY | Accurate diagnosis can be useless after action opportunities expire or disappear | Explicit probe dynamics and horizon; does not contradict C:P7 free-signal value |
-| R133:PERSISTENCE | Per-step model repasting can fabricate a failure absent under every fixed mechanism | Two specified traces; exact model support preserves compatibility |
-
-Standard partial-observation control and finite covering are credited. This extends the project proof obligations, not the consciousness-existence axioms. No actual mechanism, subject count, experience intensity or T2 correspondence is established by the finite certificate.
-
-## 11. Open obligations and next derivation
+## 10. Open obligations and next derivation
 
 Keep the following open rather than treating them as implied edges:
 
@@ -246,9 +231,9 @@ Keep the following open rather than treating them as implied edges:
 - Structural experiential interpretation → a familiar phenomenal label, valence or scalar richness.
 - Biological/AI decoder similarity → full mechanism correspondence or T2 closure.
 
-R133 now supplies the finite-horizon probability-one common-policy criterion under persistent model uncertainty. Next: quantitative worst-case success below one with costly probes, preserving model-indexed continuation values instead of independently minimizing over models at each step. Support alone does not retain these probabilities. General physical adequacy and multi-resource scheduling remain open. Continue theory first; no empirical run is queued.
+R132 supplies a unit-slot common-realization certificate and a finite partial stochastic interface criterion. General multi-resource scheduling and actual implementation adequacy remain open. Next: distinguish a separate successful policy for each possible mechanism from one observation-admissible policy that works across a persistent uncertain mechanism. Define observation access, adaptation and model coupling before deriving. This remains theory-first work; no empirical run is queued.
 
-## 12. Mandatory future-map protocol
+## 11. Mandatory future-map protocol
 
 Read AGENTS.md, MEMORY.md and the latest handoff first. Before accepting any new derivation:
 
@@ -266,5 +251,3 @@ Current four-paper [graph/source checks](records/R129_Four_Paper_Integration_202
 Current R130 [dependency/source checks](records/R130_Formal_Foundation_Second_Review_20261006/MAP_CHECK.json) and [targeted boundary checks](records/R130_Formal_Foundation_Second_Review_20261006/BOUNDARY_CHECK.json) supersede the current-state role of older check reports; historical outputs remain unchanged.
 
 Current R132 graph/source checks: [MAP_CHECK.json](records/R132_Common_Realization_and_Partial_Closure_20261007/MAP_CHECK.json). Earlier reports above are historical snapshots.
-
-Current R133 graph/source checks: [MAP_CHECK.json](records/R133_Observable_Common_Control_20261007/MAP_CHECK.json). Earlier reports remain historical snapshots.

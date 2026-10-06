@@ -1,0 +1,100 @@
+{
+  "round": "R133",
+  "checks": [
+    {
+      "check": "support recursion agrees with exhaustive direct policy trees in 756 cases",
+      "pass": true
+    },
+    {
+      "check": "preserving diagnosis wins in two steps but not one",
+      "pass": true
+    },
+    {
+      "check": "uninformative and destructive probes cannot guarantee two-step success",
+      "pass": true
+    },
+    {
+      "check": "known individual mechanisms each win in one step",
+      "pass": true
+    },
+    {
+      "check": "noisy diagnostic has exact best deterministic worst-case value four fifths, not one",
+      "pass": true
+    },
+    {
+      "check": "uninformative all deterministic policies have sum of two successes at most one",
+      "pass": true
+    },
+    {
+      "check": "destructive all deterministic policies have sum of two successes at most one",
+      "pass": true
+    },
+    {
+      "check": "half-half immediate commitment attains minimax one half",
+      "pass": true
+    },
+    {
+      "check": "enumerated all five partitions of three candidates",
+      "pass": true
+    },
+    {
+      "check": "cell criterion matches direct decisions for 1715 observation partitions",
+      "pass": true
+    },
+    {
+      "check": "minimum message count equals action cover for all 343 nonempty-row 3x3 families",
+      "pass": true
+    },
+    {
+      "check": "pairwise successful-action intersection does not imply full intersection",
+      "pass": true
+    },
+    {
+      "check": "three incomparable minimal two-cell successful partitions, no one-cell solution",
+      "pass": true
+    },
+    {
+      "check": "avoidance n=2: uniform minimax witness and two-message decoder",
+      "pass": true
+    },
+    {
+      "check": "avoidance n=3: uniform minimax witness and two-message decoder",
+      "pass": true
+    },
+    {
+      "check": "avoidance n=10: uniform minimax witness and two-message decoder",
+      "pass": true
+    },
+    {
+      "check": "avoidance n=100: uniform minimax witness and two-message decoder",
+      "pass": true
+    },
+    {
+      "check": "persistent mechanisms always succeed but rectangular envelope fabricates failure",
+      "pass": true
+    },
+    {
+      "check": "correct output update retains only the persistent compatible mechanism",
+      "pass": true
+    },
+    {
+      "check": "finite fair-trial failure remains positive at every checked horizon",
+      "pass": true
+    },
+    {
+      "check": "separate enabled successful actions do not provide a common executable action",
+      "pass": true
+    },
+    {
+      "check": "identical outcome support can have distinct success probabilities",
+      "pass": true
+    }
+  ],
+  "all_pass": true,
+  "policy_comparisons": 756,
+  "observation_partitions_checked": 1715,
+  "success_families_checked": 343,
+  "horizon_two_policy_trees_per_probe_model": 193,
+  "arithmetic": "Python standard-library Fraction; exact integer/set operations",
+  "scope": "Small finite mathematical checks; general statements rely on the written conditional proofs. Not proof-assistant certification or empirical evidence."
+}

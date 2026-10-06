@@ -131,17 +131,3 @@ The checks validate exact witnesses, source identities and graph preservation, n
 - F30: Classical matching and probabilistic refinement, plus nearby 2026 reusable-state work, preclude broad historical novelty claims. The project increment is the explicit connection and missing-premise repair, not a new consciousness axiom.
 
 New proof statements were manually reviewed. Exact checks cover every three-by-three task-slot graph (512), resource witnesses, independent menu/joint-law failures and all 52 partitions of a five-state refinement witness. These are mathematical boundary checks, not empirical confirmation. C1/U1 unchanged, T2 OPEN, C3 NOT_TESTED, independent valence OPEN.
-
-
-## R133 — observation-admissible control and persistent uncertainty
-
-7 October 2026. Added 14 nodes and 8 rules; all 262 prior nodes and 119 rules retained field-for-field. [Full proofs](records/R133_Observable_Common_Control_20261007/R133_Observable_Common_Control.md).
-
-- F31: The common-policy quantifier cannot be obtained by selecting a different policy using a hidden model label. Observation history, common enabledness and finite horizon are explicit.
-- F32: Support recursion is exact here for probability one within a fixed finite horizon; it does not provide quantitative values or arbitrary infinite-horizon almost-sure guarantees. The fair-trial counterlimit is explicit.
-- F33: Minimum ideal task messages are a set-cover quantity, not full identification or a physically constructed sensor. Pairwise action compatibility is insufficient; sufficient task partitions need not have a unique coarsest member.
-- F34: Free information with fixed actions/payoff is distinct from a probe that consumes time or destroys successful continuations. Both diagnosis and viability are represented; no real destructive intervention is proposed.
-- F35: Persistent model labels cannot be repasted independently across stages. A local uncertainty envelope may be conservative. This observation is not historically new; nearby Takahashi 2026 full text remains unread after retrieval failed.
-- F36: Classical POMDP/support and covering methods are credited. This is a project-level formal extension with a manuscript direction, not a new mathematical-priority or consciousness-specific empirical claim.
-
-Exact checks: 756 direct-policy/support comparisons including noisy observations, 1715 decision-partition checks over 343 success families, and 22 named boundary checks. These are finite checks supporting the handwritten proofs, not proof-assistant certification. C1/U1 unchanged; T2 OPEN, C3 NOT_TESTED, valence OPEN.

@@ -1,0 +1,15 @@
+{
+  "round": "R133",
+  "revision": "R133-v1.0",
+  "date": "2026-10-07",
+  "timezone": "Asia/Shanghai",
+  "base_commit": "e381fa5a84ea7696447940319331be04b4f63a92",
+  "nodes": 276,
+  "rules": 127,
+  "new_nodes": 14,
+  "new_rules": 8,
+  "proof_status": "Manual conditional proofs; standard partial-observation/control and covering ingredients; project extension, not historical priority",
+  "T2": "OPEN",
+  "C3_intervention_transport": "NOT_TESTED",
+  "valence_bridge": "OPEN"
+}
