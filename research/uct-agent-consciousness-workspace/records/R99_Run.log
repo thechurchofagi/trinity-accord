@@ -1,0 +1,26 @@
+R99 bounded intervention-domain audit
+Date: 2026-10-06
+Domain: [-1.25,1.25]^3
+Grid spacing: 0.125
+Grid points: 9261
+Covering radius: 0.10825317547305482
+Training support: R98 intervention-enriched support
+Seeds: 200..207 for neural models
+Models: generic_mlp, path_additive_mlp, path_linear
+
+Overall:
+generic_mlp mean per-run worst grid probability error = 0.1556429562
+generic_mlp worst grid probability error = 0.3159209288
+generic_mlp worst context effect variation = 1.5045877776
+generic_mlp worst continuous logit upper bound = 2.6423954279
+
+path_additive_mlp mean per-run worst grid probability error = 0.0132464683
+path_additive_mlp worst grid probability error = 0.0460956597
+path_additive_mlp worst context effect variation <= 1.7763568394e-15
+path_additive_mlp worst continuous logit upper bound = 1.2469291470
+
+path_linear worst grid probability error <= 1.2212453271e-15
+path_linear exact continuous cube logit error <= 4.7750953381e-15
+
+Execution failures: none
+Main negative result: additive path separation removes interaction ambiguity but does not by itself give a tight continuous-amplitude certificate.

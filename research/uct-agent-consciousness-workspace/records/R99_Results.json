@@ -1,0 +1,30 @@
+{
+  "round": "R99",
+  "date": "2026-10-06",
+  "domain": {"cube": [-1.25,1.25],"grid_spacing":0.125,"grid_points":9261,"covering_radius":0.10825317547305482},
+  "training_support":"R98 intervention-enriched support: bundled/joint ±1 plus direct Q/O/G ±0.5",
+  "models":["generic_mlp","path_additive_mlp","path_linear"],
+  "overall_summary":[
+    {"model":"generic_mlp","grid_prob_mean":0.1556429562,"grid_prob_worst":0.3159209288,"context_var_mean":0.6732902318,"context_var_worst":1.5045877776,"cont_bound_mean":1.8374641898,"cont_bound_worst":2.6423954279},
+    {"model":"path_additive_mlp","grid_prob_mean":0.0132464683,"grid_prob_worst":0.0460956597,"context_var_mean":9.506284648e-16,"context_var_worst":1.7763568394e-15,"cont_bound_mean":0.772150287,"cont_bound_worst":1.246929147},
+    {"model":"path_linear","grid_prob_mean":5.273559367e-16,"grid_prob_worst":1.2212453271e-15,"context_var_mean":0.0,"context_var_worst":0.0,"cont_bound_mean":2.102139e-15,"cont_bound_worst":4.7750953381e-15}
+  ],
+  "family_summary":[
+    {"family":"task_only","model":"generic_mlp","grid_max_prob_error_mean":0.1433745122,"grid_max_prob_error_max":0.2390889291,"max_context_effect_variation_mean":0.6081631686,"max_context_effect_variation_max":1.0730156387,"continuous_cube_logit_upper_max":2.3841092528},
+    {"family":"task_only","model":"path_additive_mlp","grid_max_prob_error_mean":0.0072134953,"grid_max_prob_error_max":0.0125536661,"max_context_effect_variation_max":8.881784197e-16,"continuous_cube_logit_upper_max":0.7812597781},
+    {"family":"task_only","model":"path_linear","grid_max_prob_error_max":3.330669074e-16,"max_context_effect_variation_max":0.0,"continuous_cube_logit_upper_max":1.5934246462e-15},
+    {"family":"direct_Q","model":"generic_mlp","grid_max_prob_error_mean":0.1834206546,"grid_max_prob_error_max":0.2988865943,"max_context_effect_variation_mean":0.6297452959,"max_context_effect_variation_max":0.8899655999,"continuous_cube_logit_upper_max":2.6423954279},
+    {"family":"direct_Q","model":"path_additive_mlp","grid_max_prob_error_mean":0.0077977381,"grid_max_prob_error_max":0.0133779749,"max_context_effect_variation_max":8.881784197e-16,"continuous_cube_logit_upper_max":0.8043002836},
+    {"family":"direct_Q","model":"path_linear","grid_max_prob_error_max":3.330669074e-16,"max_context_effect_variation_max":0.0,"continuous_cube_logit_upper_max":1.6948096656e-15},
+    {"family":"mixed_Q_task","model":"generic_mlp","grid_max_prob_error_mean":0.1119176707,"grid_max_prob_error_max":0.2635847447,"max_context_effect_variation_mean":0.8118246144,"max_context_effect_variation_max":1.5045877776,"continuous_cube_logit_upper_max":2.1253620734},
+    {"family":"mixed_Q_task","model":"path_additive_mlp","grid_max_prob_error_mean":0.0303373867,"grid_max_prob_error_max":0.0460956597,"max_context_effect_variation_max":1.7763568394e-15,"continuous_cube_logit_upper_max":1.246929147},
+    {"family":"mixed_Q_task","model":"path_linear","grid_max_prob_error_max":1.2212453271e-15,"max_context_effect_variation_max":0.0,"continuous_cube_logit_upper_max":4.7750953381e-15},
+    {"family":"successor_only","model":"generic_mlp","grid_max_prob_error_mean":0.1838589872,"grid_max_prob_error_max":0.3159209288,"max_context_effect_variation_mean":0.6434278482,"max_context_effect_variation_max":0.9652704131,"continuous_cube_logit_upper_max":2.6416666728},
+    {"family":"successor_only","model":"path_additive_mlp","grid_max_prob_error_mean":0.0076372531,"grid_max_prob_error_max":0.0138617362,"max_context_effect_variation_max":1.110223025e-15,"continuous_cube_logit_upper_max":0.7271036595},
+    {"family":"successor_only","model":"path_linear","grid_max_prob_error_max":2.220446049e-16,"max_context_effect_variation_max":0.0,"continuous_cube_logit_upper_max":3.452262856e-16}
+  ],
+  "continuous_bound_definition":"max_grid_logit_error + L_error*sqrt(3)*h/2 for neural models; exact |b|+1.25*sum|w-2theta| for path-linear.",
+  "execution_failures":[],
+  "main_negative_result":"Path additivity removes cross-path interaction ambiguity but a flexible one-dimensional response shape still does not yield a tight continuous-amplitude certificate from sparse interventions.",
+  "scope":"synthetic virtual policy; no model API, real shutdown/copy/resource action, subjective experience or valence measurement"
+}

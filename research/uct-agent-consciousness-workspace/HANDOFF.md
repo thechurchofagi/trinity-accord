@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R98；新窗口先读 records/UCT_Agent_Research_Handoff_R98_20261006.md，再按需回读R97/R96D。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R99；新窗口先读 records/UCT_Agent_Research_Handoff_R99_20261006.md，再按需回读R98/R97D/R96。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -16,7 +16,7 @@
 
 ## 当前研究与最新成果
 
-最新完成 R98，见文末本轮记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
+最新完成 R99，见文末本轮记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
 
 R76：对称分类感知通道中，在预测信念固定、仅实用价值计分等条件下，可用偏好幂变换精确匹配改变感知可靠性后的行动概率。相同新观察的贝叶斯更新可区分两条机制；均匀先验的具体例子为 0.90 与 0.65，后验总变差 0.25。40 项精确形式校验通过。信息增益、无信息基线、闭环反馈及可变时域等推广会失败或需附加条件。
 
@@ -385,3 +385,16 @@ R96D的A/B环境具有完全相同Q/O边际但不同Q/O联合关系和相反task
 这与官方R97互补：R97D解决consequence interface是否含必要依赖；官方R97证明即使训练支持区分reward ancestry，自由MLP仍可能在held-out path intervention上underspecify。R98应同时满足这两个要求：reward-relevant consequence interface + 最小干预监督。
 
 R97D仍是task-only工具性组织，不是direct Q preference；R96路径阻断仍必需。负效价和fear仍受R89约束。
+
+
+## R99 — 2026-10-06：有限干预证据升级为机制证书需要哪些额外结构
+
+固定D=[-1.25,1.25]^3及9261点网格，不增加R98种子。generic MLP、path-additive MLP、path-linear三类在同一R98训练支持上比较。R97D的reward-relevant consequence interface前提继续有效。
+
+generic平均per-run worst-grid概率误差0.1556、最坏0.3159，context path effect variation最坏1.5046。path-additive通过结构禁止cross-path interaction，平均worst-grid误差降至0.01325、最坏0.04610，context variation数值零。linear matched-class正对照在整个连续立方域近机器精度。
+
+严格Lipschitz连续域界显示另一限制：path-additive最坏上界仍1.2469 logits。故path separability只解决交互混淆，不自动控制幅度外推；紧全域机制声明还需response-shape/regularity假设、更紧验证器或更强干预覆盖。
+
+所有final参数、per-run metrics、协议、代码、结果和负结论已保存。NAM/Rep4Ex/Lipschitz certification有直接先例，不称重大原创或体验测量。
+
+下一步R100停止扩synthetic实验，整理R84–R99为actual-AI自身延续主张的正式证据标准，并据此找真实公开/虚拟agent数据中的第一处未满足证据层。

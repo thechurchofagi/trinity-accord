@@ -1,0 +1,37 @@
+{
+  "round":"R99",
+  "date":"2026-10-06",
+  "sources":[
+    {
+      "title":"Neural Additive Models: Interpretable Machine Learning with Neural Nets",
+      "authors":"Rishabh Agarwal et al.",
+      "venue":"NeurIPS 2021",
+      "url":"https://proceedings.neurips.cc/paper/2021/hash/251bd0442dfcc53b5a761e050f8022b8-Abstract.html",
+      "scope":"Official proceedings abstract read. Direct prior art for a sum of one-input neural subnetworks as an additive structural restriction."
+    },
+    {
+      "title":"Identifying Representations for Intervention Extrapolation",
+      "authors":"Sorawit Saengkyongam et al.",
+      "venue":"ICLR 2024",
+      "url":"https://proceedings.iclr.cc/paper_files/paper/2024/hash/aa9508b2577e0d9c824da9e2e27fe9d6-Abstract-Conference.html",
+      "scope":"Official conference abstract read. Direct prior art that unseen-intervention extrapolation requires identifiable representation plus explicit structural assumptions."
+    },
+    {
+      "title":"Lipschitz verification of neural networks through training",
+      "authors":"Simon Kuang; Yuezhu Xu; S. Sivaranjani; Xinfan Lin",
+      "year":2026,
+      "url":"https://arxiv.org/abs/2603.28113",
+      "scope":"ArXiv abstract read. Used only for current prior-art context that cheap layerwise/global Lipschitz bounds can be loose and architecture can be designed for verifiability."
+    },
+    {
+      "title":"Training Certifiably Robust Neural Networks with Efficient Local Lipschitz Bounds",
+      "authors":"Yujia Huang et al.",
+      "year":2021,
+      "url":"https://arxiv.org/abs/2111.01395",
+      "scope":"Abstract read. Used for established distinction between loose global Lipschitz bounds and tighter local certification."
+    }
+  ],
+  "internal":["R96 path blocking","R96D dependence uncertainty","R97/R97D learning and consequence interface","R98 minimal intervention supervision"],
+  "novelty_status":"Strong prior art for additive architectures, intervention extrapolation and Lipschitz certification. R99 is a project-specific synthesis and finite audit; no historical-first claim.",
+  "third_party_fulltexts_uploaded":false
+}
