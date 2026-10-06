@@ -1,0 +1,18 @@
+{
+  "checkpoint": "R125",
+  "execution": "COMPLETED_AND_AUDITED",
+  "sessions": 12,
+  "rats": 5,
+  "trials": 3319,
+  "held_out_bins": 32656,
+  "within_trial_transitions": 29337,
+  "selected_point_map_candidate": "FAIL_SCOPED",
+  "latent_biological_kernel": "UNIDENTIFIED",
+  "C3": "NOT_TESTED",
+  "T2": "OPEN",
+  "E_measured": false,
+  "major_consciousness_breakthrough_claimed": false,
+  "previous_remote_head_read": "f2f34ca5f5a9738659780729c8a7e8aefe01dbf3",
+  "concurrent_R124_preserved": true,
+  "all_negative_results_retained": true
+}

@@ -1,0 +1,17 @@
+{
+  "rejected": {
+    "file": "X087_2021_07_25_g0_t0.imec0.ap_res.Cells_predictions.csv.gz",
+    "expected_sha256": "58a232258f836ec654eb8b2442c439fc6a4e0ef06cc256595b9809adcf692212",
+    "expected_bytes": 638075,
+    "observed_bytes": 0,
+    "observed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "repair": "reconstructed solely from already-saved features, selected neurons and frozen coefficients",
+  "refitted_models": false,
+  "max_saved_R2_discrepancy": 1.1102230246251565e-16,
+  "repaired_artifact": {
+    "file": "X087_2021_07_25_g0_t0.imec0.ap_res.Cells_predictions.csv.gz",
+    "sha256": "5eb29e5c4fe6d85bcfe28dbe30d1f874ca2711ee5b710944aa0e34f817bebce8",
+    "bytes": 637875
+  }
+}

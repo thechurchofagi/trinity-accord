@@ -1,0 +1,206 @@
+{
+  "source_blob": "6b6ec8199a3b6ba3588abce5beb33ee5df85f833",
+  "folds": [
+    {
+      "outer": 0,
+      "selected_unit_ids": {
+        "FOF": [
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00050",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00052",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00053",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00054",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00055",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00056",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00057",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00058",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00059",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00060",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00061",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00064",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00065",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00066",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00067"
+        ],
+        "ADS": [
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00002",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00007",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00010",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00011",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00014",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00016",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00024",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00032",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00035",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00036",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00039",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00041",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00042",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00043",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00044"
+        ]
+      }
+    },
+    {
+      "outer": 1,
+      "selected_unit_ids": {
+        "FOF": [
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00050",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00052",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00053",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00054",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00055",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00056",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00057",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00058",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00059",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00060",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00061",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00062",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00064",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00065",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00066",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00067"
+        ],
+        "ADS": [
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00002",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00007",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00008",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00011",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00014",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00016",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00029",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00032",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00034",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00035",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00037",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00039",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00041",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00042",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00043",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00048"
+        ]
+      }
+    },
+    {
+      "outer": 2,
+      "selected_unit_ids": {
+        "FOF": [
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00050",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00052",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00053",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00054",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00055",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00056",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00057",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00058",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00059",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00060",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00061",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00062",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00064",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00065",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00066",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00067"
+        ],
+        "ADS": [
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00002",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00007",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00008",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00010",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00011",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00015",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00020",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00029",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00032",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00034",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00037",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00039",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00042",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00043",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00044",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00048"
+        ]
+      }
+    },
+    {
+      "outer": 3,
+      "selected_unit_ids": {
+        "FOF": [
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00050",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00052",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00053",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00054",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00055",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00056",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00057",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00058",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00059",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00060",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00061",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00062",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00064",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00065",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00066",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00067"
+        ],
+        "ADS": [
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00002",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00007",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00008",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00010",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00011",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00013",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00016",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00017",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00020",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00024",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00035",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00036",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00037",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00039",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00044",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00048"
+        ]
+      }
+    },
+    {
+      "outer": 4,
+      "selected_unit_ids": {
+        "FOF": [
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00050",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00052",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00053",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00054",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00055",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00056",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00057",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00058",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00059",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00060",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00061",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00062",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00064",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00065",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00066"
+        ],
+        "ADS": [
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00002",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00007",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00010",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00011",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00013",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00014",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00015",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00016",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00020",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00029",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00032",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00034",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00035",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00039",
+          "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat:unit_00043"
+        ]
+      }
+    }
+  ]
+}

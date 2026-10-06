@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-06",
+  "baseline_commit": "2f358ac0cb29c4dddc53933fa709ca8aec03be1f",
+  "concurrent_base_commit": "f2f34ca5f5a9738659780729c8a7e8aefe01dbf3",
+  "original_user_report_commit": "bf55557992b84f6df4dfc6a924f291dfde7b976b",
+  "reading": [
+    {
+      "path": "HANDOFF.md",
+      "ref": "2f358ac0cb29c4dddc53933fa709ca8aec03be1f",
+      "scope": "complete"
+    },
+    {
+      "path": "MASTER_INDEX.md",
+      "ref": "2f358ac0cb29c4dddc53933fa709ca8aec03be1f",
+      "scope": "complete"
+    },
+    {
+      "path": "records/UCT_Experience_Intelligence_Cross_Substrate_Master_Handoff_R121_20261006.md",
+      "scope": "complete Library copy, libfile_7324df819c948191979bf4b928061924"
+    },
+    {
+      "path": "records/R123_Measurement_Channel_Audit_20261006/R123_Report.md",
+      "ref": "2f358ac0cb29c4dddc53933fa709ca8aec03be1f",
+      "scope": "complete report and NEXT_EXPERIMENT"
+    },
+    {
+      "path": "records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md",
+      "ref": "2f358ac0cb29c4dddc53933fa709ca8aec03be1f",
+      "scope": "complete retrieved report"
+    },
+    {
+      "path": "records/R122_Biology_B1_B2_20261006/b2_decode.py",
+      "blob": "df4c15e2ab0b184a9bea9cdf41091be3b4c3044a",
+      "scope": "complete decoder source; copied byte-for-byte after patch newline normalization"
+    },
+    {
+      "path": "records/R122_Biology_B1_B2_20261006/rat_cells.py",
+      "blob": "daf7f3a6d76a2e2fd5f30d8cab2daf4f54b416d5",
+      "scope": "loader contract and executed whole source; no algorithm modification"
+    },
+    {
+      "path": "research/unified-consciousness-theory-iii/published/unified-consciousness-theory-iii-v1.0.md",
+      "ref": "bf55557992b84f6df4dfc6a924f291dfde7b976b",
+      "blob": "be7c7a952aa88831c6660187586d92a3da707cdf",
+      "scope": "sections 10-12 and Appendices A/B; earlier A/B full main-text reading inherited from R123, not claimed anew"
+    },
+    {
+      "path": "records/R124_Transition_Commutation_Audit_20261006/",
+      "ref": "f2f34ca5f5a9738659780729c8a7e8aefe01dbf3",
+      "scope": "report, results, execution provenance and worklog; no new execution of its separate connector-side runtime or its Python reproduction"
+    }
+  ],
+  "data": {
+    "dataset_doi": "10.6084/m9.figshare.30369064.v1",
+    "primary_article_doi": "10.1016/j.neuron.2025.12.029",
+    "primary_article_pubmed": "https://pubmed.ncbi.nlm.nih.gov/41570823/",
+    "article_read_scope": "abstract/metadata rechecked; no new full article audit",
+    "public_metadata": "https://api.figshare.com/v2/articles/30369064/versions/1",
+    "official_md5": "3b0ab5c964fb492ec36ee0f55a5d53de",
+    "pinned_archive_sha256": "e23a5c281b828c5d9545576ebc9197f37dbc20bd16c616aa2eda55d220fe9494",
+    "archive_bytes": 1929137550,
+    "version_metadata_license": "MIT",
+    "schema_pin": "Brody-Lab/fof_ads_interactions@39d056fb12f688034b543d9ac8b7406a58ad0f77",
+    "raw_sessions": "All twelve pinned MATLAB sessions used and individually SHA-256 verified at accepted loading",
+    "cohort": {
+      "sessions": 12,
+      "rats": 5,
+      "trials": 3319,
+      "bins": 32656,
+      "adjacent_pairs": 29337
+    }
+  },
+  "prior_art_scope": {
+    "nested_cv": "Varoquaux et al., Assessing and tuning brain decoders: cross-validation, caveats, and guidelines, arXiv:1606.05201; primary author paper checked for block-wise and nested-CV discipline",
+    "neural_dynamics": "Sani et al., Nature Neuroscience 2024, DOI 10.1038/s41593-024-01731-2; metadata/search context only, full page retrieval failed",
+    "novelty": "No historical novelty claim for ridge residualization, state estimation, ARX, logistic output calibration or decoding-versus-dynamics distinction"
+  },
+  "medical_line": {
+    "first_party_fourth_paper": "NOT_IDENTIFIED",
+    "external_APStim": "Identified in concurrent R124; not newly read, not analyzed here, not imported into rat certificate"
+  },
+  "limits": [
+    "Same original animals in all analyses; biological sample sizes cannot be added",
+    "No matched internal biological interventions",
+    "No frontier LLM experiments",
+    "No E/valence/fear measurements",
+    "No T2/T3/G4 closure",
+    "No new publication actions"
+  ]
+}

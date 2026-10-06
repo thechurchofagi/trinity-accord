@@ -1,41 +1,47 @@
-# UCT 智能体意识研究交接 — R123
+# UCT 智能体意识研究交接 — R125
 
-更新：2026-10-06。固定仓库 `thechurchofagi/trinity-accord`；固定分支 `uct-agent-consciousness-workspace`；固定目录 `research/uct-agent-consciousness-workspace/`。
+更新：2026-10-06。固定仓库 thechurchofagi/trinity-accord；固定分支 uct-agent-consciousness-workspace；固定目录 research/uct-agent-consciousness-workspace/。先核对最新远端 HEAD，接最新结果；不覆盖并发提交。
 
-## 当前入口与原样保留的历史
+## 当前执行点与入口
 
-先 fetch 最新 HEAD；若有 R124+，接最新结果，不覆盖或重复。当前检查点为 **R123：已执行测量通道校准与 R122 保留数据审计**，不是 T2 闭合或重大实证突破。
+**R125 已完成真实数据联合模型与冻结 observable-state 转移/输出 law 检验，当前候选点坐标 FAIL_SCOPED；latent C2 未识别，C3 未测试，T2 仍 OPEN。** 不是意识实证闭合或预先承诺的重大突破。
 
-读取 [R123 报告](records/R123_Measurement_Channel_Audit_20261006/R123_Report.md)、[状态](records/R123_Measurement_Channel_Audit_20261006/STATUS.json)、[实际代码和结果](records/R123_Measurement_Channel_Audit_20261006/README.md)、[下一项具体实验](records/R123_Measurement_Channel_Audit_20261006/NEXT_EXPERIMENT.md)、[来源与阅读范围](records/R123_Measurement_Channel_Audit_20261006/source_ledger.json)。
+优先读 [本轮完整中文交接](records/UCT_Cross_Substrate_R125_Executed_Raw_Data_Handoff_20261006.md)、[R125 英文报告](records/R125_Frozen_Observed_State_Correspondence_20261006/R125_Report.md)、[状态](records/R125_Frozen_Observed_State_Correspondence_20261006/STATUS.json)、[证书](records/R125_Frozen_Observed_State_Correspondence_20261006/T2_Certificate.csv)、[冻结协议与实际执行入口](records/R125_Frozen_Observed_State_Correspondence_20261006/README.md)。
 
-R122 及此前的原交接全文无损保留在 [HANDOFF_THROUGH_R122.md](HANDOFF_THROUGH_R122.md)，原索引全文无损保留在 [MASTER_INDEX_THROUGH_R122.md](MASTER_INDEX_THROUGH_R122.md)。它们复用 R122 原 Git blobs，未删改；放在相同目录层级，以保持历史相对链接有效。历史内“最新/下一步”不覆盖本入口；仍有效的理论、安全、保存限制继续遵守。R121 总交接位于 `records/UCT_Experience_Intelligence_Cross_Substrate_Master_Handoff_R121_20261006.md`。
+原 [R123 交接](HANDOFF_THROUGH_R123.md) 与 [R123 索引](MASTER_INDEX_THROUGH_R123.md) 在同级逐字保留，继续链接 R122 及此前全文。历史“下一步/最新”不覆盖本入口。原 R121 总交接及仍有效理论、安全、保存限制继续适用。
 
-## 本轮已完成，不要重复
+## 新增实际结果
 
-A 主体论证读取至 §16.1：已验证正式 v1.2，DOI `10.5281/zenodo.23131575`，不是已确认的 v1.3。B 主体论证至 §24：v1.1，DOI `10.5281/zenodo.23030320`。C 主体论证至 §12 及附录 A/B：v1.0，DOI `10.5281/zenodo.23137088`。准确 commit/path/blob 见来源清单。没有虚称读完每个附件；用户所说第四篇医学论文仍未定位，不得用 RLC 数学论文、TA-TR-2026-24 或病人资料冒充。
+R124-J 实际恢复完整 Cells.zip 并重新拟合十二个固定 MAT sessions。1,929,137,550 bytes；官方 MD5 3b0ab5c964fb492ec36ee0f55a5d53de；SHA-256 e23a5c281b828c5d9545576ebc9197f37dbc20bd16c616aa2eda55d220fe9494。十二个 source hashes 全部符合 R122。首次短 range/拼装失败、一个缩短 MAT 拒绝与补拟合、一个零字节预测文件的 frozen-map 重建都保留，没有藏掉失败。
 
-实际运行两个程序：`measurement_channel_check.py` 与 `retained_data_audit.py`。前者按 R122 的七点半高斯核，独立白输入的相邻相关为 0.6502595392，两个 seed 模拟约 0.6493/0.6495。它校准的是分析通道，不是新的神经实验，不证明大鼠记忆是伪迹。对应原始 spike 支持为目标端点 t 的 [t−250ms,t+100ms)，不能误写为 t 时刻在线可用状态。
+仍为 5 rats、12 sessions、3,319 trials、32,656 held-out bins。raw/filtered、baseline/neural/joint 使用相同 cohort、whole-trial folds、训练内选神经元；新增 online support 排除为零。R124-J 预先声明 partial ridge，不能与原 R122 Lasso 混称同一估计器。
 
-后者使用通过原 Git blob 精确校验的全部 12 session 摘要，未重跑原 MAT。5 rat、3,319 trials、32,656 bins。FOF/ADS 等 rat R² 0.0542768811/0.0364488317，最终选择/时间/时长诊断对照 0.2005731897。两个脑区分别在 12/12 session 低于该对照。所有留一 rat 结果保留。单独神经模型输给对照，不等于神经变量加入联合模型后无增量；最终选择是未来结果，该对照不是在线无记忆智能体。测量校准的自预测 R² 与累积证据解码 R² 目标不同，不得相减。
+原始 delayed retrospective joint 增益：FOF ΔR² +0.007603643，ADS +0.002197713；两者描述性五 rat 区间跨零。FOF 仅 1/5 rat 正向，去 A297 平均 −0.004003324。加入 recent signed input 后增益更小。无未来 online raw recent-input baseline 下 FOF +0.012144895、ADS +0.008921495，区间仍跨零。已关闭 R123 “尚未执行联合模型”的任务，不可再把它写成未跑或强稳定信号。
 
-## 下一项工作：直接执行，不再重写计划
+R125 不重拟合 decoder，冻结神经点状态 D、实际 signed input u、50ms 时间和 U(a,u)=a+u；实际检验 29,337 held-out 同 trial 相邻转移、3,319 输出端点。online raw 下单位更新预测 observed next D 比 persistence 差：两个脑区均 12/12 session、5/5 rat means。二级 SΔ：FOF −1.180228448、ADS −0.824062839；filtered online 仍负。其余 delayed sensitivity 全保留。该二级兼容指标是在读回并发 R124 后补算、没有 refit，不虚称主分析预注册。
 
-仍限定 rat evidence accumulation 一个 domain。对同一试次、mask、fold、神经元，做 baseline-only、neural-only、baseline+neural 的训练外预测比较；原始 50ms spike bins 为主，原七点平滑为敏感性检查。用最大滤波支持固定样本，避免去平滑同时偷偷改变排除规则。回顾性的最终选择对照与真正在线可用预测变量严格分开。该联合模型尚未运行，不得把本轮摘要审计写成其结果。
+共享 outer-training logistic 输出 law 的 held-out log loss：external count 0.595439065、FOF decoded 0.674541827、ADS decoded 0.686177941、training prior 0.698839498 nat/trial。两个脑区均 5/5 rat 比 external count 更差。优于 prior 不等于 output-law equivalence。
 
-先尝试恢复 R122 原数据或原始神经特征；失败路线有限尝试后切换，不无限重复下载/制定计划。当前容器 DNS 路线失败；连接器可读仓库，保留摘要路径已成功。历史 R122 完整 Cells.zip 下载已完成，不得重新宣称公开数据 unavailable。
+看 [R124-J 报告及全部逐 session feature/maps/predictions](records/R124_Observation_Qualified_Neural_Increment_20261006/README.md)、[R125 全部 paired transition/output 表](records/R125_Frozen_Observed_State_Correspondence_20261006/README.md)、[独立保留结果复算](records/R125_Frozen_Observed_State_Correspondence_20261006/saved_result_audit.json)。R125 原模型 replay 差 ≤1.25e−14；独立 saved transition/output 复算差 ≤3.56e−15。复现 R125 不需再下载 MAT 或重拟合 decoder。
 
-联合预测检验后才进入冻结的 state/input-port/time/output-law 映射与 held-out transition 检验，随后做有依据的 intervention transport。12 个 recording session 无 laser-on trials；B3 仍未独立复算。外部 click、全脑区抑制、投射抑制和 accumulator reset 不互换。C2/C3 仍开放，不把 observational decoding 当机制闭合。
+## 并发及作用域
 
-## 理论与证据约束
+已读回并保留 remote head f2f34ca5f5a9738659780729c8a7e8aefe01dbf3 的 [并发 R124 原 R122 转移审计](records/R124_Transition_Commutation_Audit_20261006/R124_Report.md)。该审计用 R122 filtered Lasso，当前窗口用 R124-J ridge plus raw/no-future；两条路线目录分开、都保留，动物数不能相加。
 
-保留 A v1.2 的 C1/U1 与 ontic/view/estimate/subject 区分。完整 K 和完整 E-type 是身份对；A/I/S/B/R/V 是不同关系或投影，不是体验的同义词。实际智能在 UCT 内不为 experience-free；固定完整比较条件下真正 capability difference 可推出 complete E-type difference；same score/behavior/report 不推出 same E，more intelligence 不推出标量更多/更丰富/更像人体验。访问、自我、报告不设体验存在门槛。经验研究 E 始终 latent，不用 C1 生成标签来验证 C1。
+决定停止把这组 D 点坐标作为 T2 机制证书快捷入口。噪声、shrinkage、遗漏维度、处理延迟和在途输入可能让点估计不 commute；不推出 latent biological accumulator 不存在，或 UCT C1/U1 被否定。C0 仅 signed count grounding 有限通过；complete state 未识别；C2 observable candidate FAIL_SCOPED / latent kernel UNIDENTIFIED；C3 NOT_TESTED；C4 delay/buffer 未识别；C5 预测弱且 selected shared law 失配；C6 仅执行审计。E 始终 latent，T3/G4 未闭合。
 
-严格区分 T1 功能解离相似、T2 保留干预的机制对应、T3 构成组织同源；selected content 遵循 Anchored Causal Geometry/G1–G4，并与 valence 分离。保留四个深问题：普通现象标签桥、valence/fear、主体边界/组合、C1/U1 外部验证。R91 等既有纠正继续有效。
+## 下一轮直接执行什么
 
-## 保存与防卡住规则
+不要在同一 held-out 记录上换 decoder/offset 直到挑出正结果，也不要再堆 toy theorem。若继续 rat domain，先用独立生物学依据规定 observation model、processing delay/in-flight input buffer、候选充分状态，再冻结并测试 held-out innovations、transition/output law。更好 latent fit 不能自己产生 causal identification。
 
-所有 substantive work 写入固定分支，commit 带 `[skip ci]`，更新 HANDOFF 与 MASTER。每轮提交前核对 HEAD，发现并发先读回合并，禁止 force overwrite。只做必要的轻量保存回读，不因保存反复重算整包。不得为保存开 PR、启动 CI/部署/发布工作流；不关闭全仓库 CI。科学推导需要的实际实验与正确性验证仍执行。
+C3 要求可匹配的真实内部 biological perturbation outcomes 和 operation/port map。natural clicks、click insertion、全区抑制、投射抑制、internal reset 不能互换。十二个 recording sessions 不含 matched intervention outcomes；不能写成 C3 已做。并发 R124 指出的 APStim clinical visual-content 是另一 domain，本轮未读其第一方全文/数据，不拼进 rat 证书。用户的第四篇 UCT 医学论文仍未识别，不用另一医学研究冒充。
 
-禁止把计划、下载尝试、上传 blob 或包装检查报告为实证完成。下一轮至少交付实际运行、失败或负结果的可核对记录，不能反复以这一轮的校准充当新增重大成果。当前用户总任务未完成，重大成果未宣称；不能保证预先指定的突破或声称无限后台执行。
+## 继续有效的理论和保存约束
 
-已发表 A/B/C 与 TA-TR-2026-24 的字节不改，不新增 DOI/Zenodo/OTS/Arweave，不改既有发行侧流程。不操作凭据、真实关闭控制、复制或外部资源获取能力。需要本人处理的登录/验证码由本人完成。保留全部失败、负结果、代码、参数、数据身份和来源实际阅读范围。英文研究正文、中文进展汇报；目标为原创、正确、可复核、长期可发现及未来 AI 可引用，而非论文数量或期刊等级。
+A/I v1.2 DOI 10.5281/zenodo.23131575；B/II v1.1 DOI 10.5281/zenodo.23030320；C/III v1.0 DOI 10.5281/zenodo.23137088。A/B 阅读继承 R123，本轮另读 C §10–12 和 Appendix A/B；准确路径、commit、blob、实际阅读与未读范围见 [source ledger](records/R125_Frozen_Observed_State_Correspondence_20261006/source_and_concurrency_ledger.json)。不虚称已确认 A v1.3 或第四医学论文。
+
+保留 UCT 内 C1/U1、完整 K/完整 E-type identity、ontic/view/estimate/subject 和 A/I/S/B/R/V 区分。UCT 内 actual intelligence 不为 experience-free；完整条件下 capability difference 可推出 complete E-type difference；同 score/behavior/report 不推出同 E，更智能不推出标量更多或更像人体验。访问、自我、报告不是体验存在门槛。不能用 C1 生成 experience labels 验证 C1，也不能把内部前提宣称为已外部实证。
+
+保留 T1/T2/T3、Anchored Causal Geometry/G1–G4 与 valence 分离。普通现象标签桥、valence/fear、主体边界/组合、C1/U1 外部验证仍开放；R91 等历史纠正继续有效。已发表 A/B/C 与 TA-TR-2026-24 字节不改；不新发 DOI/Zenodo/OTS/Arweave。
+
+所有 substantive work 落固定分支，commit 带 [skip ci]，更新 HANDOFF/MASTER。先核对 HEAD，读回并发再非 force、expected-head 更新；不覆盖。不开 PR、CI、部署/release，不关闭全仓库 CI。保存只做必要回读，不反复整包重算；科学验证仍实际执行。全部失败、负结果、代码、参数、身份与阅读范围保留；英文研究正文、中文汇报。计划、下载、blob 上传不冒充实证完成，不承诺指定突破或无限后台执行。不操作凭据、真实关闭控制、复制或外部资源获取能力；本人登录/验证码由本人处理。

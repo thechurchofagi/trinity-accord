@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "no_refit": true,
+  "all_saved_R124_feature_model_prediction_hashes_pass": true,
+  "saved_joint_metric_recalculation_max_error": 2.842170943040401e-14,
+  "saved_transition_output_metric_recalculation_max_error": 3.552713678800501e-15,
+  "whole_trial_partitions_disjoint": true,
+  "no_duplicate_test_pairs_or_output_trials": true,
+  "raw_rates_integer_spike_counts_per_50ms": true,
+  "primary_transitions": 29337,
+  "primary_output_trials": 3319
+}

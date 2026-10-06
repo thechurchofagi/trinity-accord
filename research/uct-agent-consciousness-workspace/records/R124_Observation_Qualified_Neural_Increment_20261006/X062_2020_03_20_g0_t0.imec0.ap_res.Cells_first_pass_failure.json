@@ -1,0 +1,7 @@
+{
+  "status": "FAILED",
+  "file": "X062_2020_03_20_g0_t0.imec0.ap_res.Cells.mat",
+  "error_type": "SchemaError",
+  "error": "Neural loading requires raw_spike_time_s, regions, penetration",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/57a6ec9cccb0/trinity-accord/research/uct-agent-consciousness-workspace/records/R124_Observation_Qualified_Neural_Increment_20261006/joint_decode.py\", line 369, in main\n    session=load_session(path,load_neural=True)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/57a6ec9cccb0/trinity-accord/research/uct-agent-consciousness-workspace/records/R122_Biology_B1_B2_20261006/rat_cells.py\", line 369, in load_session\n    units = _load_units(d, n, path.name, audit) if load_neural else []\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/57a6ec9cccb0/trinity-accord/research/uct-agent-consciousness-workspace/records/R122_Biology_B1_B2_20261006/rat_cells.py\", line 212, in _load_units\n    raise SchemaError(\"Neural loading requires raw_spike_time_s, regions, penetration\")\nrat_cells.SchemaError: Neural loading requires raw_spike_time_s, regions, penetration\n"
+}

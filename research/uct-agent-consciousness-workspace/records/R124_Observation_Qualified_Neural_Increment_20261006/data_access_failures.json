@@ -1,0 +1,1 @@
+{"attempt":1,"route":"Six parallel ranges to one public-download redirect","outcome":"FAILED_AFTER_PARTIAL_RECOVERY","retained_part_bytes":33554432,"failed_part":5,"error_type":"HTTPError","signed_urls_recorded":false,"next_route":"Refresh the public redirect independently per byte range; bounded retry"}

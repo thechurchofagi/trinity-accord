@@ -1,0 +1,21 @@
+{
+  "rejected": {
+    "file": "X062_2020_03_20_g0_t0.imec0.ap_res.Cells.mat",
+    "observed_bytes": 444596224,
+    "observed_sha256": "b6e10e0dc9eca791bfab2c6e0057b8af6c629591cd876d935bbc4479edd27a11",
+    "expected_bytes": 493558256,
+    "expected_sha256": "e3858458b9136b1d201ebfab91ad1f5c8c48475c3f675d892592b813c607fa8f",
+    "outcome": "REJECTED_BEFORE_MODEL_FIT",
+    "cause": "local copy is truncated; cause of post-recovery truncation not established",
+    "not_a_biological_exclusion": true
+  },
+  "repair_status": "VERIFIED_AND_ANALYZED",
+  "all_twelve_artifact_digests_checked": true,
+  "final_cohort": [
+    12,
+    5,
+    3319,
+    32656
+  ],
+  "repaired_sha256": "e3858458b9136b1d201ebfab91ad1f5c8c48475c3f675d892592b813c607fa8f"
+}

@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "augmented_least_squares_max_errors": [
+    2.3092638912203256e-14,
+    1.4654943925052066e-14,
+    3.552713678800501e-14,
+    5.3290705182007514e-14
+  ],
+  "exact_baseline_nesting": true,
+  "whole_trial_split_disjoint": true,
+  "biological_data_tested": false
+}

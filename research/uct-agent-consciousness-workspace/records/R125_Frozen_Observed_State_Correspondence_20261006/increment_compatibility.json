@@ -1,0 +1,372 @@
+{
+  "status": "COMPUTED",
+  "scope": "secondary metric harmonization after concurrent R124 was read; no new decoder or map",
+  "concurrent_commit": "f2f34ca5f5a9738659780729c8a7e8aefe01dbf3",
+  "denominator": "E[(actual signed input increment)^2], matching R124; distinct from observed-state persistence error",
+  "n_sessions": 12,
+  "n_rats": 5,
+  "primary_pairs": 29337,
+  "results": [
+    {
+      "channel": "delayed_filtered",
+      "region": "ADS",
+      "equal_rat_skill": -0.37641336426380656,
+      "equal_rat_correlation": 0.047191059765464505,
+      "rats_positive_skill": 0,
+      "sessions_positive_skill": 0,
+      "rat_records": [
+        {
+          "channel": "delayed_filtered",
+          "region": "ADS",
+          "rat": "A294",
+          "increment_skill_vs_zero": -0.032385992387378826,
+          "increment_correlation": 0.009036164229395502
+        },
+        {
+          "channel": "delayed_filtered",
+          "region": "ADS",
+          "rat": "A297",
+          "increment_skill_vs_zero": -0.574775442202861,
+          "increment_correlation": 0.0636498450012441
+        },
+        {
+          "channel": "delayed_filtered",
+          "region": "ADS",
+          "rat": "X046",
+          "increment_skill_vs_zero": -0.28108785892263516,
+          "increment_correlation": 0.06873105462743409
+        },
+        {
+          "channel": "delayed_filtered",
+          "region": "ADS",
+          "rat": "X062",
+          "increment_skill_vs_zero": -0.40872877322757106,
+          "increment_correlation": 0.037356166986688276
+        },
+        {
+          "channel": "delayed_filtered",
+          "region": "ADS",
+          "rat": "X087",
+          "increment_skill_vs_zero": -0.5850887545785869,
+          "increment_correlation": 0.05718206798256057
+        }
+      ]
+    },
+    {
+      "channel": "delayed_filtered",
+      "region": "FOF",
+      "equal_rat_skill": -0.43369578952332144,
+      "equal_rat_correlation": 0.05584899360061949,
+      "rats_positive_skill": 0,
+      "sessions_positive_skill": 0,
+      "rat_records": [
+        {
+          "channel": "delayed_filtered",
+          "region": "FOF",
+          "rat": "A294",
+          "increment_skill_vs_zero": -0.09948851065432374,
+          "increment_correlation": 0.03222128102232009
+        },
+        {
+          "channel": "delayed_filtered",
+          "region": "FOF",
+          "rat": "A297",
+          "increment_skill_vs_zero": -0.8467079041243566,
+          "increment_correlation": 0.12192105416399615
+        },
+        {
+          "channel": "delayed_filtered",
+          "region": "FOF",
+          "rat": "X046",
+          "increment_skill_vs_zero": -0.25468167988390084,
+          "increment_correlation": 0.005039984025424854
+        },
+        {
+          "channel": "delayed_filtered",
+          "region": "FOF",
+          "rat": "X062",
+          "increment_skill_vs_zero": -0.3514993399320465,
+          "increment_correlation": 0.054767006827304975
+        },
+        {
+          "channel": "delayed_filtered",
+          "region": "FOF",
+          "rat": "X087",
+          "increment_skill_vs_zero": -0.6161015130219797,
+          "increment_correlation": 0.06529564196405137
+        }
+      ]
+    },
+    {
+      "channel": "delayed_raw",
+      "region": "ADS",
+      "equal_rat_skill": -1.0020727771562314,
+      "equal_rat_correlation": 0.010760636125758543,
+      "rats_positive_skill": 0,
+      "sessions_positive_skill": 0,
+      "rat_records": [
+        {
+          "channel": "delayed_raw",
+          "region": "ADS",
+          "rat": "A294",
+          "increment_skill_vs_zero": -0.11554509485754716,
+          "increment_correlation": -0.0086666505900877
+        },
+        {
+          "channel": "delayed_raw",
+          "region": "ADS",
+          "rat": "A297",
+          "increment_skill_vs_zero": -1.434691810687493,
+          "increment_correlation": -0.0008128913152300208
+        },
+        {
+          "channel": "delayed_raw",
+          "region": "ADS",
+          "rat": "X046",
+          "increment_skill_vs_zero": -0.638772145500246,
+          "increment_correlation": 0.03318429171533668
+        },
+        {
+          "channel": "delayed_raw",
+          "region": "ADS",
+          "rat": "X062",
+          "increment_skill_vs_zero": -1.2848259935872113,
+          "increment_correlation": 0.006226964793998657
+        },
+        {
+          "channel": "delayed_raw",
+          "region": "ADS",
+          "rat": "X087",
+          "increment_skill_vs_zero": -1.5365288411486604,
+          "increment_correlation": 0.023871466024775096
+        }
+      ]
+    },
+    {
+      "channel": "delayed_raw",
+      "region": "FOF",
+      "equal_rat_skill": -1.4967388467609652,
+      "equal_rat_correlation": 0.024957566526576918,
+      "rats_positive_skill": 0,
+      "sessions_positive_skill": 0,
+      "rat_records": [
+        {
+          "channel": "delayed_raw",
+          "region": "FOF",
+          "rat": "A294",
+          "increment_skill_vs_zero": -0.4523460804333639,
+          "increment_correlation": 0.0001671941145156563
+        },
+        {
+          "channel": "delayed_raw",
+          "region": "FOF",
+          "rat": "A297",
+          "increment_skill_vs_zero": -3.9377234726961694,
+          "increment_correlation": 0.06247557572820957
+        },
+        {
+          "channel": "delayed_raw",
+          "region": "FOF",
+          "rat": "X046",
+          "increment_skill_vs_zero": -0.3815085512752756,
+          "increment_correlation": -0.0026275992234335707
+        },
+        {
+          "channel": "delayed_raw",
+          "region": "FOF",
+          "rat": "X062",
+          "increment_skill_vs_zero": -1.0328297472762982,
+          "increment_correlation": 0.02564007273639377
+        },
+        {
+          "channel": "delayed_raw",
+          "region": "FOF",
+          "rat": "X087",
+          "increment_skill_vs_zero": -1.6792863821237185,
+          "increment_correlation": 0.03913258927719917
+        }
+      ]
+    },
+    {
+      "channel": "online_filtered",
+      "region": "ADS",
+      "equal_rat_skill": -0.3618211884279958,
+      "equal_rat_correlation": 0.013728327790656544,
+      "rats_positive_skill": 0,
+      "sessions_positive_skill": 0,
+      "rat_records": [
+        {
+          "channel": "online_filtered",
+          "region": "ADS",
+          "rat": "A294",
+          "increment_skill_vs_zero": -0.002626626975676949,
+          "increment_correlation": -0.04228449952771983
+        },
+        {
+          "channel": "online_filtered",
+          "region": "ADS",
+          "rat": "A297",
+          "increment_skill_vs_zero": -0.6345880997000739,
+          "increment_correlation": 0.04309814905760715
+        },
+        {
+          "channel": "online_filtered",
+          "region": "ADS",
+          "rat": "X046",
+          "increment_skill_vs_zero": -0.35705959667117526,
+          "increment_correlation": 0.011685693945816398
+        },
+        {
+          "channel": "online_filtered",
+          "region": "ADS",
+          "rat": "X062",
+          "increment_skill_vs_zero": -0.3290897084438095,
+          "increment_correlation": 0.027361723640365224
+        },
+        {
+          "channel": "online_filtered",
+          "region": "ADS",
+          "rat": "X087",
+          "increment_skill_vs_zero": -0.4857419103492436,
+          "increment_correlation": 0.028780571837213772
+        }
+      ]
+    },
+    {
+      "channel": "online_filtered",
+      "region": "FOF",
+      "equal_rat_skill": -0.3275628050721626,
+      "equal_rat_correlation": 0.047774031171289075,
+      "rats_positive_skill": 0,
+      "sessions_positive_skill": 0,
+      "rat_records": [
+        {
+          "channel": "online_filtered",
+          "region": "FOF",
+          "rat": "A294",
+          "increment_skill_vs_zero": -0.08041093525846388,
+          "increment_correlation": 0.029784556968855194
+        },
+        {
+          "channel": "online_filtered",
+          "region": "FOF",
+          "rat": "A297",
+          "increment_skill_vs_zero": -0.7464880902292459,
+          "increment_correlation": 0.12414174275176681
+        },
+        {
+          "channel": "online_filtered",
+          "region": "FOF",
+          "rat": "X046",
+          "increment_skill_vs_zero": -0.17103515916358691,
+          "increment_correlation": 0.000576664377157844
+        },
+        {
+          "channel": "online_filtered",
+          "region": "FOF",
+          "rat": "X062",
+          "increment_skill_vs_zero": -0.1330504085997084,
+          "increment_correlation": 0.03725209223961932
+        },
+        {
+          "channel": "online_filtered",
+          "region": "FOF",
+          "rat": "X087",
+          "increment_skill_vs_zero": -0.5068294321098082,
+          "increment_correlation": 0.04711509951904622
+        }
+      ]
+    },
+    {
+      "channel": "online_raw",
+      "region": "ADS",
+      "equal_rat_skill": -0.8240628386532659,
+      "equal_rat_correlation": 0.004513880469684088,
+      "rats_positive_skill": 0,
+      "sessions_positive_skill": 0,
+      "rat_records": [
+        {
+          "channel": "online_raw",
+          "region": "ADS",
+          "rat": "A294",
+          "increment_skill_vs_zero": -0.005976222427315658,
+          "increment_correlation": -0.017734585122934188
+        },
+        {
+          "channel": "online_raw",
+          "region": "ADS",
+          "rat": "A297",
+          "increment_skill_vs_zero": -1.3774636989900024,
+          "increment_correlation": 0.008125152916990726
+        },
+        {
+          "channel": "online_raw",
+          "region": "ADS",
+          "rat": "X046",
+          "increment_skill_vs_zero": -0.5989490342938817,
+          "increment_correlation": 0.012830776076434458
+        },
+        {
+          "channel": "online_raw",
+          "region": "ADS",
+          "rat": "X062",
+          "increment_skill_vs_zero": -0.757361914677872,
+          "increment_correlation": 0.012218962360423996
+        },
+        {
+          "channel": "online_raw",
+          "region": "ADS",
+          "rat": "X087",
+          "increment_skill_vs_zero": -1.3805633228772576,
+          "increment_correlation": 0.007129096117505449
+        }
+      ]
+    },
+    {
+      "channel": "online_raw",
+      "region": "FOF",
+      "equal_rat_skill": -1.180228448480342,
+      "equal_rat_correlation": 0.027883097749270648,
+      "rats_positive_skill": 0,
+      "sessions_positive_skill": 0,
+      "rat_records": [
+        {
+          "channel": "online_raw",
+          "region": "FOF",
+          "rat": "A294",
+          "increment_skill_vs_zero": -0.18253205551934926,
+          "increment_correlation": 0.032028301583394474
+        },
+        {
+          "channel": "online_raw",
+          "region": "FOF",
+          "rat": "A297",
+          "increment_skill_vs_zero": -3.6009820151776886,
+          "increment_correlation": 0.06900774248348159
+        },
+        {
+          "channel": "online_raw",
+          "region": "FOF",
+          "rat": "X046",
+          "increment_skill_vs_zero": -0.29445874150034135,
+          "increment_correlation": -0.002726853347356063
+        },
+        {
+          "channel": "online_raw",
+          "region": "FOF",
+          "rat": "X062",
+          "increment_skill_vs_zero": -0.3466682817608564,
+          "increment_correlation": 0.014755223243933855
+        },
+        {
+          "channel": "online_raw",
+          "region": "FOF",
+          "rat": "X087",
+          "increment_skill_vs_zero": -1.476501148443474,
+          "increment_correlation": 0.02635107478289939
+        }
+      ]
+    }
+  ],
+  "C2_scope": "candidate point-map increment criterion only; latent biological kernel remains unidentified"
+}

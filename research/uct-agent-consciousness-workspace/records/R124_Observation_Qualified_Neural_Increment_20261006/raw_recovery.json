@@ -1,0 +1,84 @@
+{
+  "status": "VERIFIED",
+  "source": "https://ndownloader.figshare.com/files/58773835",
+  "archive_bytes": 1929137550,
+  "archive_md5": "3b0ab5c964fb492ec36ee0f55a5d53de",
+  "archive_sha256": "e23a5c281b828c5d9545576ebc9197f37dbc20bd16c616aa2eda55d220fe9494",
+  "parts": [],
+  "sessions": [
+    {
+      "file": "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat",
+      "bytes": 71539896,
+      "sha256": "a17919bf74db077a9d892ed361ebc6548d812bb33c5785c79c8a7b2b21534dba",
+      "verified": true
+    },
+    {
+      "file": "A297_2021_07_19_01_g0_t0.imec0.ap_res.Cells.mat",
+      "bytes": 284408176,
+      "sha256": "92054834d05b71454044e6c5b3498e17407a7ea0d4afd622ed172b5223c6bbef",
+      "verified": true
+    },
+    {
+      "file": "X046_2019-09-23_g0_t0.imec0.ap_res.Cells.mat",
+      "bytes": 372881528,
+      "sha256": "a5765d86882410a895eca6c069aa17739cd519a1887750bf2b06fc12df84118a",
+      "verified": true
+    },
+    {
+      "file": "X046_2019-09-26_g0_t0.imec0.ap_res.Cells.mat",
+      "bytes": 327018264,
+      "sha256": "eaaa9a8e0362517c3e63c5f4a545f38b7d3a2da20087ccdb0d4b26101c98235b",
+      "verified": true
+    },
+    {
+      "file": "X046_2019-10-01_g0_t0.imec0.ap_res.Cells.mat",
+      "bytes": 173286160,
+      "sha256": "faef1cce4c8169ed62f001fb8aeb48d91b1c05466f345a5b94f422f9c635add7",
+      "verified": true
+    },
+    {
+      "file": "X046_2019-10-03_g0_t0.imec0.ap_res.Cells.mat",
+      "bytes": 275968456,
+      "sha256": "58f1dbf6864dd7c0c845b5dd394cf715a50be30ecf91a9da1417325e8d128f5d",
+      "verified": true
+    },
+    {
+      "file": "X062_2020_03_19_g0_t0.imec0.ap_res.Cells.mat",
+      "bytes": 298431192,
+      "sha256": "6d42cb55cc4a1e1e45c400290b986b1658bee2f06c7bcee93994a17f16b00be7",
+      "verified": true
+    },
+    {
+      "file": "X062_2020_03_20_g0_t0.imec0.ap_res.Cells.mat",
+      "bytes": 493558256,
+      "sha256": "e3858458b9136b1d201ebfab91ad1f5c8c48475c3f675d892592b813c607fa8f",
+      "verified": true
+    },
+    {
+      "file": "X062_2020_03_21_g0_t0.imec0.ap_res.Cells.mat",
+      "bytes": 320139136,
+      "sha256": "a2856dc2e6bd642797696a0294840afdc23b3b08008e1f0c5d504a6017c2ed86",
+      "verified": true
+    },
+    {
+      "file": "X087_2021_07_25_g0_t0.imec0.ap_res.Cells.mat",
+      "bytes": 486612008,
+      "sha256": "106644e013b57f88898df8fdf03800da7a3b531bac37de19a211abb43375d5f4",
+      "verified": true
+    },
+    {
+      "file": "X087_2021_07_30_g0_t0.imec0.ap_res.Cells.mat",
+      "bytes": 906769472,
+      "sha256": "ac04224059c8927ec1e808c806a75db3482fd7557d6588a73f8dcbb83431da3e",
+      "verified": true
+    },
+    {
+      "file": "X087_2021_08_03_g0_t0.imec0.ap_res.Cells.mat",
+      "bytes": 889633752,
+      "sha256": "d94bb75511a423b5579db825bfba46863af89a92a4061ba11ac6bb4a658b8367",
+      "verified": true
+    }
+  ],
+  "elapsed_seconds": 40.51810099800059,
+  "signed_urls_recorded": false
+}

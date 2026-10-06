@@ -1,0 +1,9 @@
+clause,status,scope
+C0,LIMITED_PASS,external signed-click coordinate only
+C1,PARTIAL_UNIDENTIFIED,weak readout; complete biological state not identified; not UCT axiom C1
+C2,FAIL_SCOPED_LATENT_UNIDENTIFIED,frozen point-map unit-update candidate fails; latent kernel unidentified
+C3,NOT_TESTED,no matched internal intervention outcomes
+C4,PARTIAL,support availability audited; biological delay and in-flight buffer unidentified
+C5,PARTIAL_SELECTED_LAW_EQUIVALENCE_FAILED,shared-law held-out scores weaker than count reference
+C6,PROCEDURAL_ONLY,replay and source identities; no global mechanism isomorphism
+T2,OPEN,no intervention-preserving biological-algorithmic mechanism correspondence
