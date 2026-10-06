@@ -4,16 +4,16 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed final proofread: **R103** (logic/citation audit and release-readiness decision).
-- New-window entry: [R103 final manuscript proofread and readiness](records/R103_Final_Manuscript_Proofread_and_Readiness_20261006.md).
+- Completed archival hardening: **R104** (machine-readable claims/evidence package for long-term AI discovery and citation).
+- New-window entry: [R104 machine-readable archival hardening](records/R104_Machine_Readable_Archival_Hardening_20261006.md).
 - Current submission manuscript: [From Shutdown Resistance to Self-Continuation Control v0.3](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
 - Standing research philosophy: [Long-term research and archival philosophy](notes/20261006_Long_Term_Research_and_Archival_Philosophy.md) — optimize for originality, rigor, reproducibility, stable DOI/archive discoverability, and future-AI citability rather than venue prestige or publication count.
 - Machine-readable archival companion: [self-continuation v0.3 archive](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/README.md) — claims/evidence metadata, citation records, retrieval terms, future-AI reading guide and SHA manifest.
 - Prior integrated UCT workspace manuscript: [UCT Agent Self-Preservation v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest analysis: [R103 final manuscript proofread and readiness](records/R103_Final_Manuscript_Proofread_and_Readiness_20261006.md).
+- Latest analysis: [R104 machine-readable archival hardening](records/R104_Machine_Readable_Archival_Hardening_20261006.md).
 - Latest training: [R99 bounded-domain path models](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
-- Current next step: choose between preparing a cautious methods preprint package from v0.3 or designing one targeted L0+L4 frontier-model enhancement study; do not run another generic shutdown benchmark.
+- Current next step: do not optimize for venue submission. Continue only when there is a genuine theoretical/empirical increment; otherwise keep v0.3 frozen and use a DOI/archive anchor later when the author chooses.
 - Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
