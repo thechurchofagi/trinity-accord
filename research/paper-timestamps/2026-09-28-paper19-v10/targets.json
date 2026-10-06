@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-28-paper19-v10",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-19",
+      "record_id": 23002980,
+      "doi": "10.5281/zenodo.23002980",
+      "version": "1.0",
+      "title": "Selecting and Tracking Conscious Subjects: Symmetry, Monodromy, and an IIT 4.0 Case Study",
+      "receipt_path": "research/subject-individuation/publication-record.json",
+      "pdfs": [
+        {
+          "name": "selecting-and-tracking-conscious-subjects-v1.0.pdf",
+          "bytes": 108421,
+          "sha256": "c6d990afc9962217f92be31776339f806fb10d1e7a6f12c57c28fca3d5471329",
+          "role": "Complete English v1.0 formal consciousness-theory preprint"
+        }
+      ]
+    }
+  ]
+}
