@@ -1,12 +1,10 @@
-# Unified formal-map audit — R129
+# Unified formal-map audit — R128
 
 ## Verdict
 
-The reviewed principal A/B/C/D proof branches are **conditionally valid**, with explicit scope and dependency repairs below. No contradiction requiring withdrawal of their core conditional results was identified in this round. This is not a claim that every statement in every paper is proven, that all empirical premises hold, or that a proof assistant has certified the system.
+The reviewed principal A/B/C proof branches are **conditionally valid**, with explicit scope and dependency repairs below. No contradiction requiring withdrawal of their core conditional results was identified in this round. This is not a claim that every statement in every paper is proven, that all empirical premises hold, or that a proof assistant has certified the system.
 
 C1 is the fixed internal consciousness-specific axiom. Definitions of actual tokenhood, common signature and allowed comparisons remain part of the foundation. Audit of consequence validity must not be confused with independent physical validation of those premises.
-
-The A/B/C audit below is retained from R128. R129 adds D and its scoped audit in the final section; it does not claim to have reread every older source in this integration.
 
 ## Findings and repairs
 
@@ -69,25 +67,3 @@ No biological/AI experiment, training, release, DOI registration or subject-expe
 The new contribution to this project is a single versioned proof map with auditable conjunctive dependencies, recorded qualifications, and a compositional closure result/counterresult directly connected to the earlier theory. Established quotient, information and lumpability mathematics is not claimed as historical novelty.
 
 Open work remains: physical support identification in specified systems, composition under common resource/port/time constraints, independently justified selected phenomenal targets, subject criteria and complete cross-substrate correspondence. T2 remains OPEN; C3 intervention transport remains NOT_TESTED. These are not silently converted into theorem conclusions.
-
-## R129: fourth-paper integration, dependency audit and attribution correction
-
-The omitted fourth paper is TA-TR-2026-24 v1.0, DOI 10.5281/zenodo.23176685, locally D. The pinned publication record and published text agree on its identity. A remains the located published v1.2; no A-v1.3 source was located in the earlier inventory. D does not silently change the editions or titles of A/B/C.
-
-| ID | Finding | Current treatment |
-|---|---|---|
-| F13 | Three-paper map omitted already published TA24 | Preserve exact D source/map/audit/claims and add all 17 original definition/claim IDs |
-| F14 | Original allowed arrows do not consistently denote logical implication | Preserve 18 arrows as context; add explicit conjunctive mathematical rules, including the full model/calibration premises for F2 |
-| F15 | Nonadditive payoff could be misread as universally requiring an explicit joint table | Preserve existential F3; record degenerate, constrained, robust-ranking and sufficient-payoff-interface limits |
-| F16 | Finite grid or path-additive fit could be promoted to a global certificate | Separate exact separability and Lipschitz lemmas from numerical evidence; require domain, coverage and justified global regularity |
-| F17 | Evidence ladder/control certificate could be treated as an experience gate or valence proof | D:D7 remains OPEN; D evidence has no deductive route into C1/U1/U2 or negative valence |
-| F18 | Broad R128 novelty language could duplicate D §4/R96D | Credit D's earlier decision-level joint-dependence result; retain R128's narrower dynamical-closure increment |
-| F19 | Behavioural/model change could be mistaken for changed actual complete organization | D:ACTUAL_CHANGE separately requires grounded actual tokens and genuine complete-type nonisomorphism before C1 interpretation |
-
-F14–F17/F19 mainly constrain cross-paper use; they do not allege that the published D paper makes the prohibited inference. No contradiction in the reviewed conditional D algebra was found. The graph now has 236 nodes and 106 rules. Adding nodes does not mean 32 new research discoveries or nine new historically original theorems.
-
-Reading covered the full D manuscript, original map, published audit and claims; complete R96/R99 supporting records; R96D's mathematical argument sections. The publication record verifies the exact published Markdown/audit/claims hashes. External cited literature, raw R95/R97/R98/R99 runs and current ROGUE data were not independently revalidated. Recorded DOI resolution is not a new resolver readback. Historic publication/preservation flags are preserved as historical source fields, not asserted as today's preservation status.
-
-Exact checks enumerate the finite coefficient grid and the matched-marginal decision witness. Manual proofs establish the general linear reconstruction, binary payoff expansion, Fréchet interval, additive cancellation and Lipschitz extension under their declared premises. Mechanical graph checks establish only reference/dependency bookkeeping and exact source identity. They are not a proof assistant, an exhaustive audit of every sentence, or physical validation.
-
-See [D integration proof audit](records/R129_Four_Paper_Integration_20261006/R129_Integration_and_Proof_Audit.md), [complete current ledger](records/R129_Four_Paper_Integration_20261006/PROOF_LEDGER.md), [source manifest](records/R129_Four_Paper_Integration_20261006/SOURCE_MANIFEST.json) and [validation](records/R129_Four_Paper_Integration_20261006/VALIDATION_LOG.md). R128 originals and baseline map snapshots remain unchanged. All future work uses this four-paper map. T2 OPEN; C3 NOT_TESTED.

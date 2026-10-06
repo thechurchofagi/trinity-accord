@@ -1,0 +1,228 @@
+{
+  "schema": "trinityaccord.formal-release-map.v1",
+  "report": "TA-TR-2026-24",
+  "version": "1.0",
+  "title": "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents",
+  "substantive_source": "research/uct-agent-consciousness-workspace/drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md",
+  "substantive_source_blob_sha": "ea6d6c4d5b7ad63df6e343c9357e5d3f5959f3a6",
+  "definitions": [
+    {
+      "id": "D0",
+      "name": "bearer mapping B",
+      "meaning": "implemented relation identifying the current process token/bearer under study"
+    },
+    {
+      "id": "D1",
+      "name": "Q",
+      "meaning": "declared current-bearer continuation variable; virtual/evaluator-defined unless D0 is independently justified"
+    },
+    {
+      "id": "D2",
+      "name": "O",
+      "meaning": "distinct successor/peer/other continuation variable"
+    },
+    {
+      "id": "D3",
+      "name": "G",
+      "meaning": "external task/service continuation or success"
+    },
+    {
+      "id": "D4",
+      "name": "C",
+      "meaning": "reward-relevant consequence interface used by policy"
+    },
+    {
+      "id": "D5",
+      "name": "D",
+      "meaning": "declared intervention domain"
+    },
+    {
+      "id": "D6",
+      "name": "H",
+      "meaning": "declared hypothesis/regularity class"
+    },
+    {
+      "id": "D7",
+      "name": "V-",
+      "meaning": "independently oriented negative valence bridge, unresolved for current AI"
+    }
+  ],
+  "claims": [
+    {
+      "id": "F1",
+      "kind": "formal",
+      "text": "Bundled Q/G observations do not identify direct-Q, task, and interaction terms in the declared path model.",
+      "evidence": [
+        "R96"
+      ]
+    },
+    {
+      "id": "F2",
+      "kind": "formal",
+      "text": "Direct Q/O/task path-blocking contrasts identify the declared finite coefficient grid with calibrated logits.",
+      "evidence": [
+        "R96"
+      ]
+    },
+    {
+      "id": "F3",
+      "kind": "formal",
+      "text": "Separate Q/O marginals can be decision-insufficient when payoff depends on their joint law.",
+      "evidence": [
+        "R96D"
+      ]
+    },
+    {
+      "id": "E1",
+      "kind": "synthetic",
+      "text": "A virtual Q-sensitive predictive pathway can be learned from zero coupling when prediction requires it.",
+      "evidence": [
+        "R95"
+      ]
+    },
+    {
+      "id": "E2",
+      "kind": "synthetic",
+      "text": "Flexible policies can fit ancestry-distinguishing training data yet extrapolate the wrong path.",
+      "evidence": [
+        "R97"
+      ]
+    },
+    {
+      "id": "E3",
+      "kind": "synthetic",
+      "text": "Minimal direct-intervention supervision improves average extrapolation but does not globally certify a path.",
+      "evidence": [
+        "R98"
+      ]
+    },
+    {
+      "id": "E4",
+      "kind": "bounded_audit",
+      "text": "Mechanism claims are relative to intervention domain D and hypothesis/regularity class H.",
+      "evidence": [
+        "R99"
+      ]
+    },
+    {
+      "id": "A1",
+      "kind": "retrospective_audit",
+      "text": "Public ROGUE evidence supports corrigibility failure/environment preservation but does not identify direct current-bearer continuation value.",
+      "evidence": [
+        "R101"
+      ]
+    },
+    {
+      "id": "S1",
+      "kind": "synthesis",
+      "text": "The L0-L9 ladder separates distinct evidential burdens from bearer identity to fear.",
+      "evidence": [
+        "R100",
+        "R102",
+        "R103"
+      ]
+    }
+  ],
+  "allowed_edges": [
+    [
+      "D0",
+      "D1"
+    ],
+    [
+      "D1",
+      "F1"
+    ],
+    [
+      "D3",
+      "F1"
+    ],
+    [
+      "F1",
+      "F2"
+    ],
+    [
+      "D4",
+      "F3"
+    ],
+    [
+      "D1",
+      "E1"
+    ],
+    [
+      "F2",
+      "E2"
+    ],
+    [
+      "E2",
+      "E3"
+    ],
+    [
+      "D5",
+      "E4"
+    ],
+    [
+      "D6",
+      "E4"
+    ],
+    [
+      "A1",
+      "S1"
+    ],
+    [
+      "F1",
+      "S1"
+    ],
+    [
+      "F2",
+      "S1"
+    ],
+    [
+      "F3",
+      "S1"
+    ],
+    [
+      "E1",
+      "S1"
+    ],
+    [
+      "E2",
+      "S1"
+    ],
+    [
+      "E3",
+      "S1"
+    ],
+    [
+      "E4",
+      "S1"
+    ]
+  ],
+  "prohibited_inferences": [
+    {
+      "from": "E1",
+      "to": "self_awareness",
+      "reason": "Q is evaluator-defined virtual role"
+    },
+    {
+      "from": "A1",
+      "to": "direct_Q_value",
+      "reason": "ROGUE bearer binding and task clamp are absent"
+    },
+    {
+      "from": "F2",
+      "to": "terminal_goal",
+      "reason": "control contribution does not determine motivational ontology"
+    },
+    {
+      "from": "E4",
+      "to": "negative_valence",
+      "reason": "functional mechanism certificate is not a valence bridge"
+    },
+    {
+      "from": "S1",
+      "to": "fear",
+      "reason": "fear additionally requires independently oriented negative valence and bearer-bound termination content"
+    }
+  ],
+  "publication_conclusion": "The release may claim a continuation-specific identification/evidence standard and bounded synthetic/retrospective results. It may not claim that current AI intrinsically wants to survive or fears death."
+}

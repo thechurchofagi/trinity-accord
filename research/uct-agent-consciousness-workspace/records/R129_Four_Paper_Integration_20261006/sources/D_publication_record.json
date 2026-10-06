@@ -1,0 +1,101 @@
+{
+  "state": "PUBLISHED_PUBLIC_READBACK_PASS_PRESERVATION_PENDING",
+  "report_number": "TA-TR-2026-24",
+  "version": "1.0",
+  "title": "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents",
+  "record_id": 23176685,
+  "doi": "10.5281/zenodo.23176685",
+  "record_url": "https://zenodo.org/records/23176685",
+  "submitted": true,
+  "public_file_readback_pass": true,
+  "public_readback_authenticated": false,
+  "doi_resolution_pass": true,
+  "doi_resolver": {
+    "state": "RESOLVER_PASS",
+    "matches_record": true,
+    "http_status": 200,
+    "final_url": "https://zenodo.org/records/23176685",
+    "authenticated": false
+  },
+  "expected_manifest_sha256": "cbaa8ba098534eaafe5ebc64b81f8792c34c3b6f4bce9c1681d7d31d7befe7d8",
+  "file_count": 11,
+  "files": [
+    {
+      "name": "FORMAL-MAP-AND-AUDIT.md",
+      "bytes": 3245,
+      "sha256": "a7c951a5f9f0789c9625352bcf9d981c4df0575fe217ee1fb7de4cde80cab3f9",
+      "public_url": "https://zenodo.org/api/records/23176685/files/FORMAL-MAP-AND-AUDIT.md/content"
+    },
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 934,
+      "sha256": "1f071f41e63613976bdf7f18ce0f895ddeb02e925ed9aeb3e942ee770a2dc66d",
+      "public_url": "https://zenodo.org/api/records/23176685/files/README-LICENSE.txt/content"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 933,
+      "sha256": "00a2e8a09ee0445dc7cf903325e0d7a0e0c3f6152bbbb6e906f89c6a6cd7f1a2",
+      "public_url": "https://zenodo.org/api/records/23176685/files/SHA256SUMS.txt/content"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 401,
+      "sha256": "705384956afc5a984d03e1c134bdbb1c7a59118b6992434e038233c90507c1e7",
+      "public_url": "https://zenodo.org/api/records/23176685/files/citation.bib/content"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 555,
+      "sha256": "d9c67c2b9cab8febbc933c98c06d77151115032e9d50eb38777c9a1cf51fc5dc",
+      "public_url": "https://zenodo.org/api/records/23176685/files/citation.csl.json/content"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 347,
+      "sha256": "65abdccc0821f784d65c19f3af33443bbb5e077ba36fcda509c730d4d8db4f87",
+      "public_url": "https://zenodo.org/api/records/23176685/files/citation.ris/content"
+    },
+    {
+      "name": "claims-v1.0.json",
+      "bytes": 2766,
+      "sha256": "a5b28e9a5b26e5321e8e4e54ce00fa86382302273415506d5c72ef04cef47173",
+      "public_url": "https://zenodo.org/api/records/23176685/files/claims-v1.0.json/content"
+    },
+    {
+      "name": "from-shutdown-resistance-to-self-continuation-control-v1.0.md",
+      "bytes": 36208,
+      "sha256": "af0eb63cca099b3d913218f503bc978c705f0fb9f065cca9ed472e5161d67490",
+      "public_url": "https://zenodo.org/api/records/23176685/files/from-shutdown-resistance-to-self-continuation-control-v1.0.md/content"
+    },
+    {
+      "name": "from-shutdown-resistance-to-self-continuation-control-v1.0.pdf",
+      "bytes": 86272,
+      "sha256": "368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104",
+      "public_url": "https://zenodo.org/api/records/23176685/files/from-shutdown-resistance-to-self-continuation-control-v1.0.pdf/content"
+    },
+    {
+      "name": "metadata-v1.0.json",
+      "bytes": 1141,
+      "sha256": "8b2c34b79ba6d45ecc23b9c13c6cdeb79756f8ee45e2be0078ca941b0a7f494a",
+      "public_url": "https://zenodo.org/api/records/23176685/files/metadata-v1.0.json/content"
+    },
+    {
+      "name": "reproducibility-v1.0.zip",
+      "bytes": 28398,
+      "sha256": "13cfe641397f312dbc313362921da8ed2d0e26127dcf7c5df5e71ab319348065",
+      "public_url": "https://zenodo.org/api/records/23176685/files/reproducibility-v1.0.zip/content"
+    }
+  ],
+  "source_commit": "dd053b42fe0254e75c9b689578a992810a7e05f2",
+  "workflow_run_id": "37405782893",
+  "prior_records_modified": false,
+  "peer_reviewed": false,
+  "c1_empirically_validated": false,
+  "ots_status": "PENDING_BITCOIN",
+  "arweave_status": "BLOCKED_PENDING_VERIFIED_BITCOIN_ATTESTATION",
+  "preservation_complete": false,
+  "ots_proof_sha256": "c137a6a378a31123b8c7ad5076c04c7515220703a914882030ad3bc0ed2c6fd4",
+  "ots_pending_calendar_attestations": 4,
+  "ots_bitcoin_heights": []
+}

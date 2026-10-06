@@ -1,6 +1,6 @@
-# UCT A–B–C–D unified formal map — R129
+# UCT A–B–C unified formal map — R128
 
-**Canonical working map, revision R129-v1.0, 6 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R129. It does not supersede or edit the published papers.
+**Canonical working map, revision R128-v1.0, 6 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R128. It does not supersede or edit the published papers.
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
 
@@ -11,15 +11,14 @@
 | A / UCT I | v1.2; DOI 10.5281/zenodo.23131575 | [A exact source](records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md) | Process ontology; C1 identity; U1/U2/U3; consequences and bridge limits |
 | B / UCT II | v1.1; DOI 10.5281/zenodo.23030320 | [B exact source](records/R128_Unified_Formal_Map_Audit_20261006/sources/B_UCT_II_v1_1.md) | Finite mechanism language; admissible translation; nine conditional reconstructions |
 | C / UCT III | v1.0; DOI 10.5281/zenodo.23137088 | [C exact source](records/R128_Unified_Formal_Map_Audit_20261006/sources/C_UCT_III_v1_0.md) | Capability/experience distinctions; identification; selection, transmission and information |
-| D / TA-TR-2026-24 | v1.0; DOI 10.5281/zenodo.23176685 | [D exact source](records/R129_Four_Paper_Integration_20261006/sources/D_TA24_v1_0.md) | Self-continuation control; causal identification; consequence sufficiency; domain-relative evidence standards |
 
-The [four-paper manifest](records/R129_Four_Paper_Integration_20261006/SOURCE_MANIFEST.json) pins all four editions and the newly preserved D materials; the [R128 manifest](records/R128_Unified_Formal_Map_Audit_20261006/SOURCE_MANIFEST.json) retains detailed A/B/C provenance. D is a local namespace for the published report, not an official “UCT IV” title. Its publication record reports release on 6 October 2026. Exact commit, path, Git blob, byte count and SHA-256 are retained. Main alone was not a valid latest-version inventory: newer A and B sources reside on their research branches. The search covered the repository's 983 returned branch refs and relevant recursive trees; “latest” means latest located in that inventory, not all possible external drafts. Publication records document their own earlier readbacks. This round did not freshly confirm the DOI resolver.
+Exact commit, path, Git blob, byte count and SHA-256 appear in [source manifest](records/R128_Unified_Formal_Map_Audit_20261006/SOURCE_MANIFEST.json). Main alone was not a valid latest-version inventory: newer A and B sources reside on their research branches. The search covered the repository's 983 returned branch refs and relevant recursive trees; “latest” means latest located in that inventory, not all possible external drafts. Publication records document their own earlier readbacks. This round did not freshly confirm the DOI resolver.
 
 A's 78-node graph and B's historical 43-node map are preserved as sources. B's old map is not silently promoted to a current A-v1.2 map. C's formal ledger is Appendix A, with proofs in the body and appendices.
 
 ## 2. How to read an implication
 
-The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **236 nodes and 106 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R129_Four_Paper_Integration_20261006/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
+The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **204 nodes and 97 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R128_Unified_Formal_Map_Audit_20261006/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
 
 - All premises inside one rule's **all_of** must hold together.
 - Separate rules concluding the same node are alternative sufficient routes.
@@ -111,36 +110,7 @@ C1 is not needed for this factorization fact. Full experiential identification a
 | Sensory partitions | Same indexing family + C1 → matching complete-type partitions; selected sensory coordinates need their own map |
 | Transcript/log-loss/TV | Standard information and probability bounds under fixed measurement/predictor assumptions; not experience measurements |
 
-## 6. D: self-continuation identification and evidence standards
-
-The fourth paper is *From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents*. Its original eight definitions and nine claims are retained as D:D0–D7 and D:F1–F3/E1–E4/A1/S1. Read the [integration and proof audit](records/R129_Four_Paper_Integration_20261006/R129_Integration_and_Proof_Audit.md) for precise assumptions, proofs and counterlimits.
-
-| Branch | Premises and conclusion | Link to the other papers |
-|---|---|---|
-| D:F1 | Fixed five-coefficient path model + two bundled observations → nonidentification | Concrete observation-fiber problem under C:P2_COORD |
-| D:F2 | Same model + five independent calibrated logit contrasts → coefficient identification | Model-relative recovery; F1 alone does not imply it |
-| D:F3 | Binary payoff + matched-marginal counterexample → marginals can be decision-insufficient | C:P7 gives an exact 1/8 information-value gap in the fixed example |
-| D:PAYOFF / FRECHET | Supplied joint law, payoff and admissible family → exact value formula and sharp marginal ambiguity interval | A sufficient consequence interface depends on the target payoff |
-| D:SEPARABLE | Path-additive functional class → context-independent path effect | Architecture does not prove accurate response shape |
-| D:GRID_BOUND | Covered domain + justified global Lipschitz error bound → continuous-domain envelope | Finite tests alone do not establish the regularity premise |
-| D:E1–E4 / A1 | Published synthetic/retrospective evidence, preserved and not rerun | Evidence records are not derived theorems or universal mechanism claims |
-| D:S1 | L0–L9 distinguish bearer mapping, control, stability and independent valence obligations | No new existence gate for A:U1 |
-| D:UCT_INTERPRETATION | A:C1-OI + independently grounded nonisomorphic actual organization → complete experiential-type difference | No automatic valence, fear, scalar richness or unique-subject conclusion |
-
-For binary Q,O, the payoff-relevant formula is
-
-\[
-V(a)=\alpha+bq_a+co_a+dj_a-c_a,
-\qquad j_a=P(Q=1,O=1\mid do(a)).
-\]
-
-An additive payoff (d=0) needs only marginals. Nonzero d can make dependence matter, but does not force an explicit joint table in every case: a sufficient expected-payoff score, constrained law or robust ranking may suffice. Mathematical analysis of virtual Q does not independently establish a current physical bearer.
-
-D's original 18 allowed arrows are preserved as contextual relations. Deductive rules separately state all premises. In particular, F1→F2 is a research progression, E1/E2/E3 are separately sourced results, and the L0–L9 ladder is an evidence standard rather than a proof that current AI satisfies it. Its valence bridge remains OPEN.
-
-**Attribution correction:** D §4/R96D already establish marginal decision insufficiency and joint-consequence reasoning. R128 must not be credited with originating that general insight. Its narrower project increment is the deterministic/stochastic dynamical-closure distinction below. Neither result alone implies the other; no historical novelty is claimed for the standard mathematics.
-
-## 7. The shared continuation: R126–R128
+## 6. The shared continuation: R126–R128
 
 The following is a navigation diagram. Labels on arrows name additional premises; the precise conjunctive rules are in the ledger.
 
@@ -184,7 +154,7 @@ p(s)=p(t)\Rightarrow p_*K_a(s,\cdot)=p_*K_a(t,\cdot)
 
 Conditional independence plus marginal closure is sufficient, not necessary. These are standard closure principles used to block an unsafe cross-paper inference. No historical novelty for lumpability is claimed.
 
-## 8. Open obligations and next derivation
+## 7. Open obligations and next derivation
 
 Keep the following open rather than treating them as implied edges:
 
@@ -195,13 +165,13 @@ Keep the following open rather than treating them as implied edges:
 - Structural experiential interpretation → a familiar phenomenal label, valence or scalar richness.
 - Biological/AI decoder similarity → full mechanism correspondence or T2 closure.
 
-The next theoretical task distinguishes D's payoff-relative decision sufficiency from dynamic sufficiency and extends **N128:JOINT_CRITERION** and **R127's support alternatives** to resource-compatible joint use: define the operation schedule, shared carriers, allowed concurrency, actual boundary and output law; derive which coordination distinctions must be retained. This is still theory-first work. No new empirical run is queued.
+The next theoretical task extends **N128:JOINT_CRITERION** and **R127's support alternatives** to resource-compatible joint use: define the operation schedule, shared carriers, allowed concurrency, actual boundary and output law; derive which coordination distinctions must be retained. This is still theory-first work. No new empirical run is queued.
 
-## 9. Mandatory future-map protocol
+## 8. Mandatory future-map protocol
 
 Before accepting any new derivation:
 
-1. Pin the A/B/C/D versions and read this map, audit and relevant source proof.
+1. Pin the A/B/C versions and read this map, audit and relevant source proof.
 2. Assign a stable node ID; write its typed statement and all simultaneous premises. Use separate rules for alternative routes.
 3. State whether it is a definition, axiom, mathematical consequence, supplied model result, conditional interpretation, empirical bridge or open obligation.
 4. Supply the proof, counterexample/edge cases, source lineage and exact domain limits. Connect to existing nodes; do not create a disconnected narrative theorem.
@@ -209,5 +179,3 @@ Before accepting any new derivation:
 6. Preserve published originals and old IDs; record amendments explicitly. Do not infer scientific proof from an acyclic graph.
 
 Machine checks have a narrow scope; [validation output](records/R128_Unified_Formal_Map_Audit_20261006/MAP_CHECK.json) and the [exact counterexample result](records/R128_Unified_Formal_Map_Audit_20261006/JOINT_CLOSURE_CHECK.json) document it.
-
-Current four-paper [graph/source checks](records/R129_Four_Paper_Integration_20261006/MAP_CHECK.json) and [exact D algebra checks](records/R129_Four_Paper_Integration_20261006/EXACT_MATH_CHECK.json) supplement the preserved R128 checks. Source evidence is not freshly rerun by integrating its nodes.

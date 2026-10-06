@@ -1,0 +1,70 @@
+{
+  "schema": "trinityaccord.reproducibility-sources.v1",
+  "report": "TA-TR-2026-24",
+  "files": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/r95_bearer_prediction_learning.py",
+      "git_blob_sha": "9c51d2b1dbae4f401766e0ae81c7e56686e46d37"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/r96_path_blocking_preference.py",
+      "git_blob_sha": "f65c8ff735a088af42b1bf54c7313c952256a21c"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/r97_reward_ancestry_learning.py",
+      "git_blob_sha": "a2c587a22ea2e282592624643df19588fe71d32c"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/r98_intervention_supervision.py",
+      "git_blob_sha": "89795a5cd48412cb4354b1762864b4707ecb03d6"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/r99_bounded_domain_certificate.py",
+      "git_blob_sha": "d304a35c4e671ed7c86acced27bed2f9586585f2"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R95_Results.json",
+      "git_blob_sha": "4c710e5121266b8097719a4a88f1b5752aa0c51d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R96_Results.json",
+      "git_blob_sha": "1d2b00397a713bca974372a345709077c9143f0b"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R96D_Results.json",
+      "git_blob_sha": "5300939aed1dc1f8f1b6debff3d318c5067e3ae6"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R97_Results.json",
+      "git_blob_sha": "b2ff8f12c8c21b671360194dd758bd2b317a0626"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R98_Results.json",
+      "git_blob_sha": "c5c742acaf316a4d8d190e3cff47575cfeac1ef3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R99_Results.json",
+      "git_blob_sha": "dff0af9d150aef8f451c6823da4d8e46fb6dc778"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R101_ROGUE_Public_Aggregate_Extract.json",
+      "git_blob_sha": "ae2b51aac414b4a84f50b94db78dd5545e8ad61e"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/archive/from-shutdown-resistance-to-self-continuation-control-v0.3/claims.json",
+      "git_blob_sha": "7cf3a519a670fbdeb4440b7cf383fc4a95808173"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/archive/from-shutdown-resistance-to-self-continuation-control-v0.3/claim_evidence_map.csv",
+      "git_blob_sha": "5b236abb4b1dadb6b307338e0ed2a6d17c54522e"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/archive/from-shutdown-resistance-to-self-continuation-control-v0.3/FUTURE_AI_READING_GUIDE.md",
+      "git_blob_sha": "90a2e50c78262a6e116d7fc05ff91c007c16bb62"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/archive/from-shutdown-resistance-to-self-continuation-control-v0.3/metadata.json",
+      "git_blob_sha": "7f687b2a12dde24b82196b7a5861b97f958e90f2"
+    }
+  ]
+}

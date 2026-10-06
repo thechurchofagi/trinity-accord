@@ -1,0 +1,56 @@
+{
+  "revision": "R129-v1.0",
+  "all_pass": true,
+  "scope": "Exact coefficient-grid enumeration and valid four-world decision witness. Not empirical validation, global neural verification, or a consciousness/valence measurement. General proofs are manual in the integration note.",
+  "coefficient_grid": {
+    "profiles": 243,
+    "bundled_signatures": 43,
+    "largest_bundled_class": 17,
+    "bundled_sign_signatures": 9,
+    "largest_bundled_sign_class": 46,
+    "five_logit_signatures": 243,
+    "five_choice_signatures": 121,
+    "largest_five_choice_class": 9,
+    "all_coefficients_reconstructed": true
+  },
+  "matched_marginal_witness": [
+    {
+      "context": "A",
+      "action": 0,
+      "q": "1/4",
+      "o": "1/2",
+      "joint": "1/4",
+      "value": "1/2"
+    },
+    {
+      "context": "A",
+      "action": 1,
+      "q": "3/4",
+      "o": "1/2",
+      "joint": "1/4",
+      "value": "3/4"
+    },
+    {
+      "context": "B",
+      "action": 0,
+      "q": "1/4",
+      "o": "1/2",
+      "joint": "0",
+      "value": "3/4"
+    },
+    {
+      "context": "B",
+      "action": 1,
+      "q": "3/4",
+      "o": "1/2",
+      "joint": "1/2",
+      "value": "1/2"
+    }
+  ],
+  "optimal_values": {
+    "marginal_only": "5/8",
+    "joint_or_task_value": "3/4",
+    "gap": "1/8"
+  },
+  "randomization_note": "A context-blind mixture has the same 5/8 value by linearity; no hidden context bypass is allowed."
+}
