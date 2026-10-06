@@ -174,12 +174,12 @@ jobs:
         run: python3 scripts/research_paper_ots.py upload
 
       - name: Check daily allowance for editorial_budget
-        if: steps.editorial.outputs.editorial_ready == 'true'
+        if: ${{ steps.editorial.outputs.editorial_ready == 'true' && hashFiles('research/editorial-supplement/2026-09-19/targets.json') != '' }}
         id: editorial_budget
         run: node scripts/research_arweave_allowance.mjs research/editorial-supplement/2026-09-19
 
       - name: Archive editorial sources independently of the DOI service
-        if: steps.editorial.outputs.editorial_ready == 'true' && steps.editorial_budget.outputs.allowed == 'true'
+        if: ${{ steps.editorial.outputs.editorial_ready == 'true' && hashFiles('research/editorial-supplement/2026-09-19/targets.json') != '' && steps.editorial_budget.outputs.allowed == 'true' }}
         id: editorial_upload
         continue-on-error: true
         env:
