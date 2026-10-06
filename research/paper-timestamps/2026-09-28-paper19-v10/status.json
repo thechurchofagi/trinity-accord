@@ -1,0 +1,23 @@
+{
+  "batch": "2026-09-28-paper19-v10",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 108421,
+      "doi": "10.5281/zenodo.23002980",
+      "name": "selecting-and-tracking-conscious-subjects-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-28-paper19-v10/proofs/TA-TR-2026-19/selecting-and-tracking-conscious-subjects-v1.0.pdf.ots",
+      "proof_sha256": "1c7ba9dd9208318b4cc8b11eca583e14ee8a6c4b67b35219aacf522bc260fc5b",
+      "report": "TA-TR-2026-19",
+      "role": "Complete English v1.0 formal consciousness-theory preprint",
+      "sha256": "c6d990afc9962217f92be31776339f806fb10d1e7a6f12c57c28fca3d5471329",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 1,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}
