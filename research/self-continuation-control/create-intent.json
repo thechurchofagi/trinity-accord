@@ -1,0 +1,19 @@
+{
+  "state": "CREATE_ONCE_INTENT",
+  "report_number": "TA-TR-2026-24",
+  "title": "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents",
+  "version": "1.0",
+  "reservation_token": "956c61f8-4d25-4575-ad7a-1666e8cf74ff",
+  "source_inputs": {
+    "source-main.md": "63988747c1d3928588b70e965bd3c2865cd2c1e5c6230de1bd32db190c99a8dd",
+    "build_pdf.py": "93dd698ec48fa784dfd32cf52ab7ddbac63cc8d80b91ecff83b83012fc4716d8",
+    "REPRODUCIBILITY-SOURCES.json": "2d0a0e734aa6a74a2fb0e06f74fe452bc086d61e2e671b659ed387c716c01b8d",
+    "FORMAL-MAP-AND-AUDIT.md": "a7c951a5f9f0789c9625352bcf9d981c4df0575fe217ee1fb7de4cde80cab3f9",
+    "FORMAL-MAP.json": "8c0aa3db42336c8aa8c6b2be1cbe6ffa3e4a6fb54e6478dddfe411f353be4fec",
+    "claims-release.json": "a5b28e9a5b26e5321e8e4e54ce00fa86382302273415506d5c72ef04cef47173",
+    "metadata-release.json": "bbc62a1d7ad28e4b95aa1ae1ec3552bf85edd668effd778473d26c15c0916500",
+    "publication.py": "7f35cbc0c0f35783ea84cac6f37056e7d15ccf4ec376f6f1693e6ce5636fd191"
+  },
+  "source_commit": "dd053b42fe0254e75c9b689578a992810a7e05f2",
+  "workflow_run_id": "37405375714"
+}
