@@ -1,0 +1,48 @@
+family_id,historical_family,historical_treatment,current_reading
+F01,perfect first-person report without phenomenality,report and phenomenality remain different types,Old neutral-framework possibility; excluded for admitted nonempty actual processes under current A:C1/U1. Other quality/subject questions remain open.
+F02,perfect color discrimination,discrimination does not solve existence,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F03,reward reversal,reward sign is not phenomenal valence,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F04,damage detection and avoidance,neither defines suffering,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F05,fluent language without experience,"language is evidential, not constitutive by definition",Old neutral-framework possibility; excluded for admitted nonempty actual processes under current A:C1/U1. Other quality/subject questions remain open.
+F06,phenomenality without self-model,permitted,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F07,superintelligence without phenomenality,permitted,Old neutral-framework possibility; excluded for admitted nonempty actual processes under current A:C1/U1. Other quality/subject questions remain open.
+F08,silent phenomenality,permitted,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F09,static source code,not an active implementation of the described process,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F10,fixed replay,may reproduce trajectory without live counterfactual generation,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F11,full transition lookup,may preserve a causal process if it truly realizes the transition/intervention law,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F12,identical independent copies,type identity does not collapse token provenance,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F13,millions of software labels,logical multiplicity does not determine process or phenomenal multiplicity,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F14,shared computation,must be represented once at the causal provenance level; phenomenal sharing remains a bridge question,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F15,external memory,"internal/external status depends on causal role and regime, not API location",Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F16,one CPU/many processes,hardware count does not determine process count,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F17,many machines/one distributed process,distributed realization is allowed,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F18,uniform slowing,pure temporal reindexing may preserve relations; physical slowing may not,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F19,differential delay,can change dynamics and bridge predictions,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F20,gradual substrate replacement,causal preservation is conditional; finer-physical theories remain competitors,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F21,pause/resume,causal continuity and phenomenal continuation remain distinct,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F22,checkpoint restore,memory restoration does not settle lineage,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F23,nondestructive copy,branching without unique identity is representable,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F24,destructive upload,information preservation does not by itself establish patient preservation,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F25,fission,one-to-many continuation can be represented,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F26,fusion,many-to-one continuation can be represented,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F27,local perspectives/global perspective,"coexistence, absorption, and exclusion remain distinct theories",Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F28,local pain/global happiness,value cannot be naively summed across unresolved mereology,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F29,weak coupling,finite-horizon structural effects can vanish continuously; no arbitrary subject threshold follows,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F30,strong connectivity,rejected as a sufficient existence criterion,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F31,reset-created return,blocked by uninterrupted/common-mode controls,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F32,coordinate recoding creating dense graph,blocked by intervention-preserving recoding,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F33,large capacity from independent modules,does not establish a new global whole,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F34,random high entropy,does not establish preparation-dependent differentiation,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F35,high return/low repertoire parity broadcaster,blocks return magnitude as richness,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F36,incompatible modes donating different maxima,blocked by common-witness requirement,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F37,unused mediator activated by reset,blocked by natural-mode mediator replacement,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F38,redundant returning carriers,requires coalition-sensitive interventions,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F39,single-carrier insensitivity in robust code,not interpreted as absence of causal participation,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F40,error correction,not a consciousness selector,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F41,same decoded content/different robustness margin,coarse state can be inadequate for future response,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F42,physically rebuilt recoding,distinguished from mere redescription,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F43,hidden higher-order relation,pairwise nulls do not prove higher-order absence,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F44,dream without current sensory input,current external input not required by framework,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F45,stable simple phenomenal content,low current content diversity does not imply inactive mechanism,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F46,memory loss with current experience,allowed; memory and manifestation are different targets,Historical scope only; use X01-X38 crosswalk and current A/B/C/D premises. This row is not itself a theorem.
+F47,perfect zombie world,"ruled in or out only by the selected existence bridge, not by the neutral framework",Old neutral-framework possibility; excluded for admitted nonempty actual processes under current A:C1/U1. Other quality/subject questions remain open.

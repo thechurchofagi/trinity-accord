@@ -1,6 +1,6 @@
-# UCT A–B–C–D unified formal map — R131
+# UCT A–B–C–D unified formal map — R130
 
-**Canonical working map, revision R131-v1.0, 6 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R131. It does not supersede or edit the published papers.
+**Canonical working map, revision R130-v1.0, 6 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R130. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
@@ -21,7 +21,7 @@ A's 78-node graph and B's historical 43-node map are preserved as sources. B's o
 
 ## 2. How to read an implication
 
-The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **249 nodes and 112 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R131_Theorem_Synthesis_and_Archive_20261006/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
+The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **236 nodes and 106 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R130_Formal_Foundation_Second_Review_20261006/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
 
 - All premises inside one rule's **all_of** must hold together.
 - Separate rules concluding the same node are alternative sufficient routes.
@@ -186,26 +186,7 @@ p(s)=p(t)\Rightarrow p_*K_a(s,\cdot)=p_*K_a(t,\cdot)
 
 Conditional independence plus marginal closure is sufficient, not necessary. These are standard closure principles used to block an unsafe cross-paper inference. No historical novelty for lumpability is claimed.
 
-## 8. R131: target sufficiency, separating probes and historical regression
-
-[Full proof](records/R131_Theorem_Synthesis_and_Archive_20261006/R131_Probe_Completeness_Theorem.md), [theorem catalog](records/R131_Theorem_Synthesis_and_Archive_20261006/THEOREM_CATALOG.md), [38-case crosswalk](records/R131_Theorem_Synthesis_and_Archive_20261006/THOUGHT_EXPERIMENT_CROSSWALK.csv), and [historical migration audit](records/R131_Theorem_Synthesis_and_Archive_20261006/SOURCE_MIGRATION_AUDIT.md).
-
-For a finite n-outcome space and fixed exact expectation probes, let A have rows 1^T,f_1^T,...,f_m^T. Over the unrestricted probability simplex:
-
-| Stable node | Exact result |
-|---|---|
-| R131:TARGET_SPAN | E g is identified by A mu iff g is in row(A); argmax identification is a different target. |
-| R131:COMPLETE_LAW | Complete-law identification iff rank(A)=n. If deficient, some equal-probe laws have TV=1; n-1 scalar probes are necessary in this interface class. |
-| R131:CLOSURE | With full rank, matching next-probe expectations within present fibers for every operation is equivalent to a controlled quotient. |
-| R131:BLIND_KERNEL | Deficiency admits an explicit hidden-bit kernel with equal probes but maximally different within-fiber next-summary laws. |
-| R131:DECISION_GAP | A specified fair-context, two-action decision witness loses exactly 1/2 expected payoff through the deficient interface. |
-| R131:ROBUST | A supplied left inverse bounds TV by probe error times a declared operator norm. |
-
-These are elementary conditional results joining C's fiber criterion, D's target dependence and N128's closure condition. They do not identify complete actual organization or phenomenal content. Restricted law families can require fewer probes. Exact expectation agreement is stronger than finite empirical agreement. The 1/2 witness is distinct from D's 1/8 witness.
-
-Recovered sources include 47 overlapping historical regression families and the 38 consecutive X01–X38 cases. A raw thousands-entry inventory has not been recovered and counted. PLT §§753–755 already prove parity-based marginal blindness; old results must not be presented as new. TA16's published edition explicitly declines to certify the archive total. Older neutral-framework zombie/existence alternatives require migration under current A:C1/U1; original documents remain unchanged.
-
-## 9. Open obligations and next derivation
+## 8. Open obligations and next derivation
 
 Keep the following open rather than treating them as implied edges:
 
@@ -216,9 +197,9 @@ Keep the following open rather than treating them as implied edges:
 - Structural experiential interpretation → a familiar phenomenal label, valence or scalar richness.
 - Biological/AI decoder similarity → full mechanism correspondence or T2 closure.
 
-R131 now supplies a finite probe-span/rank connection between D's payoff-relative sufficiency and dynamic sufficiency. The next theoretical task extends **N128:JOINT_CRITERION** and **R127's support alternatives** to resource-compatible joint use: define the operation schedule, shared carriers, allowed concurrency, actual boundary and output law; derive which coordination distinctions must be retained. This is still theory-first work. No new empirical run is queued.
+The next theoretical task distinguishes D's payoff-relative decision sufficiency from dynamic sufficiency and extends **N128:JOINT_CRITERION** and **R127's support alternatives** to resource-compatible joint use: define the operation schedule, shared carriers, allowed concurrency, actual boundary and output law; derive which coordination distinctions must be retained. This is still theory-first work. No new empirical run is queued.
 
-## 10. Mandatory future-map protocol
+## 9. Mandatory future-map protocol
 
 Read AGENTS.md, MEMORY.md and the latest handoff first. Before accepting any new derivation:
 

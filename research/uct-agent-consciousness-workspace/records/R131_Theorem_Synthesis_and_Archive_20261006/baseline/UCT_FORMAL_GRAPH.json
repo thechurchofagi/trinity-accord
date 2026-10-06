@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R131-v1.0",
+  "revision": "R130-v1.0",
   "date": "2026-10-06",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "e9346dee824b8db58a648d3f1fba091c8151e7e7",
+  "base_commit": "2e1d77748bc4a0db24c9068a68c8d110bae2b783",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -1920,123 +1920,6 @@
       "statement": "Under A:C1 and the grounded nonisomorphic actual comparison, complete experiential types differ. No scalar richness, valence, familiar feeling label or unique subject follows.",
       "source": "D §11 / A C1-OI",
       "status": "MANUAL_CONDITIONAL_PASS"
-    },
-    {
-      "id": "R131:PROBES",
-      "kind": "DEFINITION",
-      "label": "Finite exact expectation interface",
-      "statement": "Z finite, n>=2; fixed real f_1,...,f_m; A rows are 1^T,f_1^T,...,f_m^T; y(mu)=A mu for all mu in Delta(Z).",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §2",
-      "status": "EXPLICIT_CONDITIONAL_PREMISE",
-      "scope": "Finite outcome set; fixed exact scalar expectation probes and normalization; universal identification over the full probability simplex. Not complete physical or experiential identification."
-    },
-    {
-      "id": "R131:TARGET_SPAN",
-      "kind": "THEOREM",
-      "label": "Target expectation identifiable iff in probe span",
-      "statement": "For fixed g, E_mu g factors through A mu on all Delta(Z) iff g belongs to row(A). This is not an iff for argmax identification.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §3",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite outcome set; fixed exact scalar expectation probes and normalization; universal identification over the full probability simplex. Not complete physical or experiential identification."
-    },
-    {
-      "id": "R131:COMPLETE_LAW",
-      "kind": "THEOREM",
-      "label": "Complete law rank criterion and sharp ambiguous fiber",
-      "statement": "A mu identifies all mu in Delta(Z) iff rank(A)=n; if deficient, some u,v have Au=Av and TV(u,v)=1. At least n-1 scalar probes are needed in this interface class.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §4",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite outcome set; fixed exact scalar expectation probes and normalization; universal identification over the full probability simplex. Not complete physical or experiential identification."
-    },
-    {
-      "id": "R131:FULL_RANK",
-      "kind": "ASSUMPTION",
-      "label": "Separating probe family",
-      "statement": "rank(A)=n for the fixed probe matrix.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §5",
-      "status": "EXPLICIT_CONDITIONAL_PREMISE",
-      "scope": "Finite outcome set; fixed exact scalar expectation probes and normalization; universal identification over the full probability simplex. Not complete physical or experiential identification."
-    },
-    {
-      "id": "R131:DEFICIENT",
-      "kind": "ASSUMPTION",
-      "label": "Nonseparating probe family",
-      "statement": "rank(A)<n for the fixed probe matrix.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §5",
-      "status": "EXPLICIT_CONDITIONAL_PREMISE",
-      "scope": "Finite outcome set; fixed exact scalar expectation probes and normalization; universal identification over the full probability simplex. Not complete physical or experiential identification."
-    },
-    {
-      "id": "R131:KERNEL",
-      "kind": "DEFINITION",
-      "label": "Fixed controlled finite summary",
-      "statement": "Finite S; p:S->Z onto; total Markov kernels K_a for declared common operation ports and time grain; mu_s,a=p_*K_a(s,.).",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §5",
-      "status": "EXPLICIT_CONDITIONAL_PREMISE",
-      "scope": "State, action and time semantics are fixed. All states and all allowed total operations, not only one observed trajectory; enabledness for partial operations is outside this theorem."
-    },
-    {
-      "id": "R131:PROBE_MATCH",
-      "kind": "ASSUMPTION",
-      "label": "Within-fiber expectation agreement",
-      "statement": "For every s,t,a,i with p(s)=p(t), E_mu_s,a f_i = E_mu_t,a f_i.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §5",
-      "status": "EXPLICIT_CONDITIONAL_PREMISE",
-      "scope": "Finite outcome set; fixed exact scalar expectation probes and normalization; universal identification over the full probability simplex. Not complete physical or experiential identification."
-    },
-    {
-      "id": "R131:CLOSURE",
-      "kind": "THEOREM",
-      "label": "Separating tests certify controlled closure",
-      "statement": "Under full rank, within-fiber probe agreement is equivalent to a well-defined kernel bar K_a satisfying p_*K_a(s,.)=bar K_a(p(s),.) for all s,a.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §5",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite fixed model, all states and operations. This does not certify interventions outside the family, hidden-state-dependent policy equivalence, complete organization or a subject."
-    },
-    {
-      "id": "R131:BLIND_KERNEL",
-      "kind": "THEOREM",
-      "label": "Maximally different hidden transition laws",
-      "statement": "For every deficient probe interface there exists a kernel on Z x {0,1}, with persistent b and next-Z law u_b, whose probe expectations all agree while the summary p(z,b)=z fails closure and within-fiber next laws have TV=1.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §5",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Existential construction over the full state domain. Rank deficiency does not force every given kernel to fail closure. Agreement is of measured expectations, not all unmeasured output laws."
-    },
-    {
-      "id": "R131:DECISION_SETUP",
-      "kind": "ASSUMPTION",
-      "label": "Matched decision witness",
-      "statement": "A fair hidden b selects disjoint u,v; observer sees only common A u=A v before acting; action does not alter the outcome; same actions/payoffs h_0=1_supp(u), h_1=1_complement and no side information.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §6",
-      "status": "EXPLICIT_CONDITIONAL_PREMISE",
-      "scope": "Finite outcome set; fixed exact scalar expectation probes and normalization; universal identification over the full probability simplex. Not complete physical or experiential identification."
-    },
-    {
-      "id": "R131:DECISION_GAP",
-      "kind": "THEOREM",
-      "label": "Exact hidden decision value gap",
-      "statement": "In the declared decision witness, context-informed optimal score is 1, every probe-only randomized policy scores 1/2, and the gap is 1/2.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §6",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Specified fair prior, two bounded indicator payoffs and same action set. Possible loss, not universal task loss or the numerical value of D separate witness."
-    },
-    {
-      "id": "R131:LEFT_INVERSE",
-      "kind": "ASSUMPTION",
-      "label": "Calibrated stable inversion premise",
-      "statement": "Fix L with LA=I_n; B drops the normalization column of L. True probe expectation differences have sup norm at most epsilon.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §7",
-      "status": "EXPLICIT_CONDITIONAL_PREMISE",
-      "scope": "Finite outcome set; fixed exact scalar expectation probes and normalization; universal identification over the full probability simplex. Not complete physical or experiential identification."
-    },
-    {
-      "id": "R131:ROBUST",
-      "kind": "THEOREM",
-      "label": "Conditioned TV error envelope",
-      "statement": "TV(mu,nu)<=min(1,||B||_(infty->1) epsilon/2). Statistical confidence requires a separate justified expectation-error bound.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §7",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite outcome set; fixed exact scalar expectation probes and normalization; universal identification over the full probability simplex. Not complete physical or experiential identification."
     }
   ],
   "rules": [
@@ -3442,91 +3325,6 @@
       "source": "D §11; A C1-OI",
       "kind": "DEDUCTIVE",
       "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r131_target",
-      "all_of": [
-        "R131:PROBES",
-        "C:P2_COORD"
-      ],
-      "conclusion": "R131:TARGET_SPAN",
-      "statement": "Target expectation factors through the probe interface exactly for targets in its row span.",
-      "proof_sketch": "In-span targets are linear combinations of observed expectations; otherwise choose d in ker(A) with g^T d!=0 and normalize its positive/negative parts to equal-interface probability laws.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §3",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r131_complete",
-      "all_of": [
-        "R131:PROBES",
-        "R131:TARGET_SPAN"
-      ],
-      "conclusion": "R131:COMPLETE_LAW",
-      "statement": "Full-law identification iff full column rank, with a TV=1 witness for any deficient matrix.",
-      "proof_sketch": "Full rank is injectivity; a nonzero null vector has zero sum and its normalized positive/negative parts are disjoint probability laws with identical probes. Indicator probes attain the n-1 bound.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §4",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r131_closure",
-      "all_of": [
-        "R131:PROBES",
-        "R131:COMPLETE_LAW",
-        "R131:FULL_RANK",
-        "R131:KERNEL",
-        "R131:PROBE_MATCH",
-        "N128:JOINT_CRITERION"
-      ],
-      "conclusion": "R131:CLOSURE",
-      "statement": "Full-rank matching probes establish the exact controlled quotient; a closed quotient conversely matches probes.",
-      "proof_sketch": "Normalization and matching f_i give equal A mu within each fiber; full rank gives equal mu. Define the quotient using any representative; closure implies all expected probe equalities in reverse.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §5",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r131_blind",
-      "all_of": [
-        "R131:PROBES",
-        "R131:COMPLETE_LAW",
-        "R131:DEFICIENT",
-        "N128:JOINT_CRITERION"
-      ],
-      "conclusion": "R131:BLIND_KERNEL",
-      "statement": "A deficient interface admits an exact countermodel with maximally distinct hidden next laws.",
-      "proof_sketch": "Choose disjoint u,v with equal probes; on S=Z x {0,1} persist b and draw next z from u_b under each operation. Same present z can have different b and hence different next laws.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §5",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r131_decision",
-      "all_of": [
-        "R131:BLIND_KERNEL",
-        "R131:DECISION_SETUP",
-        "C:P7"
-      ],
-      "conclusion": "R131:DECISION_GAP",
-      "statement": "The constructed hidden context yields exact information value 1/2.",
-      "proof_sketch": "The informed observer chooses the supported event, scoring 1. A context-blind action-0 mixture r scores (r+1-r)/2=1/2.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §6",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r131_robust",
-      "all_of": [
-        "R131:PROBES",
-        "R131:LEFT_INVERSE"
-      ],
-      "conclusion": "R131:ROBUST",
-      "statement": "A fixed left inverse transfers probe residuals to a TV bound.",
-      "proof_sketch": "d=mu-nu=LAd=B r since normalization cancels. Apply ||B r||_1<=||B||_(infty->1)||r||_infty and TV=||d||_1/2.",
-      "source": "R131 R131_Probe_Completeness_Theorem.md §7",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
     }
   ],
   "context_links": [
@@ -3674,21 +3472,6 @@
       "from": "D:D7",
       "to": "D:S1",
       "relation": "L8/L9 require independent valence evidence; neither the standard nor control establishes it"
-    },
-    {
-      "from": "D:PAYOFF",
-      "to": "R131:TARGET_SPAN",
-      "relation": "Published binary special case and motivation; not an additional deductive premise"
-    },
-    {
-      "from": "B:REP",
-      "to": "R131:CLOSURE",
-      "relation": "A translated finite view still needs a grounded operation family and closure; not proof of actual support"
-    },
-    {
-      "from": "R131:CLOSURE",
-      "to": "D:UCT_INTERPRETATION",
-      "relation": "Finite closure does not discharge the independent actual complete-organization premise"
     }
   ],
   "prohibited_inferences_D": [
@@ -3725,11 +3508,6 @@
       "prior_source": "D TA-TR-2026-24 v1.0 §4; R96D",
       "current_scope": "R128 contributes explicit deterministic versus stochastic summary composition and its concrete state-transition countermodel within this project. No historical novelty for lumpability or marginal insufficiency is claimed.",
       "historical_files": "R128 records are preserved unchanged; this canonical amendment governs future attribution."
-    },
-    {
-      "id": "R131-ATTR-02",
-      "prior_source": "TA-TR-2026-16 and PLT ledger §§753–755; D §4/R96D",
-      "current_scope": "High-order marginal blindness and binary payoff insufficiency predate this round. R131 supplies a general finite probe-span/rank certificate linked to controlled closure; elementary mathematics, no historical novelty claim."
     }
   ],
   "audit_amendments": [
@@ -3748,10 +3526,5 @@
       "counterexample": "Existing fair-mask model C=X XOR B with fair independent B: marginal C laws have TV=0; joint (C,B) or common-b conditional C laws have TV=1 and perfect recovery.",
       "baseline": "records/R130_Formal_Foundation_Second_Review_20261006/baseline/UCT_FORMAL_GRAPH.json"
     }
-  ],
-  "historical_provenance_R131": {
-    "manifest": "records/R131_Theorem_Synthesis_and_Archive_20261006/RECOVERED_SOURCE_MANIFEST.json",
-    "crosswalk": "records/R131_Theorem_Synthesis_and_Archive_20261006/THOUGHT_EXPERIMENT_CROSSWALK.csv",
-    "warning": "TA16 and PLT contain prior related results; old neutral existence-bridge alternatives are not current A:C1/U1 consequences. No exact thousands count certified."
-  }
+  ]
 }

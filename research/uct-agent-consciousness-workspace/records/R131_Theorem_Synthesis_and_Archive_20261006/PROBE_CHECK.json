@@ -1,0 +1,241 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "check": "binary marginal matrix rank is three",
+      "pass": true
+    },
+    {
+      "check": "nonnegative normalized witness",
+      "pass": true
+    },
+    {
+      "check": "equal probes with maximally different joint law",
+      "pass": true
+    },
+    {
+      "check": "joint payoff outside marginal span and not identified",
+      "pass": true
+    },
+    {
+      "check": "additive payoff identified",
+      "pass": true
+    },
+    {
+      "check": "adding joint probe spans all four outcomes",
+      "pass": true
+    },
+    {
+      "check": "constructed full-state kernel stochastic",
+      "pass": true
+    },
+    {
+      "check": "all next measured expectations agree",
+      "pass": true
+    },
+    {
+      "check": "every present fiber has TV one next-law disagreement",
+      "pass": true
+    },
+    {
+      "check": "informed score one and both blind pure actions score half",
+      "pass": true
+    },
+    {
+      "check": "affine mixture has zero slope and constant half",
+      "pass": true
+    },
+    {
+      "check": "n=2,m=0: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=2: n-1 indicators attain full rank",
+      "pass": true
+    },
+    {
+      "check": "n=3,m=0: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=3,m=1: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=3: n-1 indicators attain full rank",
+      "pass": true
+    },
+    {
+      "check": "n=4,m=0: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=4,m=1: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=4,m=2: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=4: n-1 indicators attain full rank",
+      "pass": true
+    },
+    {
+      "check": "n=5,m=0: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=5,m=1: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=5,m=2: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=5,m=3: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=5: n-1 indicators attain full rank",
+      "pass": true
+    },
+    {
+      "check": "n=6,m=0: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=6,m=1: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=6,m=2: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=6,m=3: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=6,m=4: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=6: n-1 indicators attain full rank",
+      "pass": true
+    },
+    {
+      "check": "n=7,m=0: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=7,m=1: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=7,m=2: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=7,m=3: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=7,m=4: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=7,m=5: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=7: n-1 indicators attain full rank",
+      "pass": true
+    },
+    {
+      "check": "n=8,m=0: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=8,m=1: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=8,m=2: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=8,m=3: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=8,m=4: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=8,m=5: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=8,m=6: disjoint equal-probe witness",
+      "pass": true
+    },
+    {
+      "check": "n=8: n-1 indicators attain full rank",
+      "pass": true
+    },
+    {
+      "check": "nonnegative zero-marginal constraints leave only outcome 00",
+      "pass": true
+    },
+    {
+      "check": "deficient probes can coexist with a closed identity kernel",
+      "pass": true
+    },
+    {
+      "check": "computed left inverse exact",
+      "pass": true
+    },
+    {
+      "check": "left-inverse norm bound on 100 exact law pairs",
+      "pass": true
+    }
+  ],
+  "check_count": 50,
+  "rational_law_pairs": 100,
+  "binary_probe_matrix": [
+    [
+      1,
+      1,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      1
+    ],
+    [
+      0,
+      1,
+      0,
+      1
+    ]
+  ],
+  "witness_u": [
+    "1/2",
+    "0",
+    "0",
+    "1/2"
+  ],
+  "witness_v": [
+    "0",
+    "1/2",
+    "1/2",
+    "0"
+  ],
+  "left_inverse_B_norm_infty_to_1": "8",
+  "scope": "Exact finite witnesses only; general proofs are manual. No empirical or phenomenological validation."
+}

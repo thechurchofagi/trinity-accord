@@ -1,0 +1,69 @@
+{
+  "recovered_sources": [
+    {
+      "filename": "General_Cross_Substrate_Phenomenology_v1.0_EN_20260924.md",
+      "library_file_id": "libfile_4d567bdbef2c8191ab8c25df10a1f0d5",
+      "bytes": 66822,
+      "sha256": "d85c5ceafe62dcc04e99770295cace8bfc67c10e0304f6fbca6c7574181f10fe",
+      "origin": "Recovered original; full unchanged bytes included in the downloadable R131 package",
+      "reading_scope": "Case sections and relevant provenance read; not a fresh audit of all appended programs"
+    },
+    {
+      "filename": "Extreme_Thought_Experiments_and_Joint_Causal_Realization_v0.4_EN_20260924.md",
+      "library_file_id": "libfile_d7484f6064d48191a1732a56a1cf7bef",
+      "bytes": 77921,
+      "sha256": "f3de3abe17136ef81062e68a571e6c3716e8e0984312e9fade0e82294b8234e0",
+      "origin": "Recovered original; full unchanged bytes included in the downloadable R131 package",
+      "reading_scope": "Case sections and relevant provenance read; not a fresh audit of all appended programs"
+    },
+    {
+      "filename": "Coalitional_Return_and_Protected_Distinctions_v0.5_EN_20260924.md",
+      "library_file_id": "libfile_f24354b99f1c81918b9659fdf8d06676",
+      "bytes": 66699,
+      "sha256": "226ebb7474495fb47fd704c1118fe5529cc172b3def1ded5bddea48590a85d95",
+      "origin": "Recovered original; full unchanged bytes included in the downloadable R131 package",
+      "reading_scope": "Case sections and relevant provenance read; not a fresh audit of all appended programs"
+    },
+    {
+      "filename": "PLT_Research_Ledger_20260926_Round68.md",
+      "library_file_id": "libfile_da24e9eecef48191ab6887e0d50f547d",
+      "bytes": 1512933,
+      "sha256": "e34a4b9704c6d3dd69f1f933ff46ac721778e2fc7034ffdf358639bd93031098",
+      "origin": "Recovered original; full unchanged bytes included in the downloadable R131 package",
+      "reading_scope": "Selected relevant sections; no whole-ledger proof audit"
+    },
+    {
+      "filename": "UCT_Extreme_Theory_Tournament_R3_20260929.md",
+      "library_file_id": "libfile_f327532d181c81918b328f21454b8f7e",
+      "bytes": 23791,
+      "sha256": "a234dbe08868869de81e4f44eec2ca4856ff05a050e1c8737eb21800c3382136",
+      "origin": "Recovered original; full unchanged bytes included in the downloadable R131 package",
+      "reading_scope": "Recovered and indexed; no full content audit this round"
+    },
+    {
+      "filename": "UCT_R9_Human_Brain_Consciousness_Localization_20260929.md",
+      "library_file_id": "libfile_ca5eae148a688191b0608df267ea63d9",
+      "bytes": 18690,
+      "sha256": "8acb9ca2708dba5e1131249fcfde148f270fa1ec75116e54e49f2268a748e47f",
+      "origin": "Recovered original; full unchanged bytes included in the downloadable R131 package",
+      "reading_scope": "Recovered and indexed; no full content audit this round"
+    },
+    {
+      "filename": "TA16_published_v1_0.md",
+      "origin": "GitHub published edition; historical source, not a replacement for A/B/C/D",
+      "ref": "e9346dee824b8db58a648d3f1fba091c8151e7e7",
+      "path": "research/general-cross-substrate-phenomenology/published/general-cross-substrate-phenomenology-v1.0.md",
+      "blob_sha": "51f022b438710c6b9e27141a4a67234e6e158cf0",
+      "bytes": 87834,
+      "sha256": "041a21d0a0863719188f591b2f51f94b591cc16a795d74ed6df047e058c48360",
+      "doi": "10.5281/zenodo.22939808",
+      "reading_scope": "Version metadata and selected relevant sections, especially the archive-count qualification; no new audit of all published claims"
+    }
+  ],
+  "counts": {
+    "working_manuscript_regression_families": 47,
+    "continuous_numbered_cases": 38,
+    "raw_thousands_inventory_verified": false
+  },
+  "scope": "Preserve historical originals. Selected excerpts support this review; historical scripts were not rerun."
+}

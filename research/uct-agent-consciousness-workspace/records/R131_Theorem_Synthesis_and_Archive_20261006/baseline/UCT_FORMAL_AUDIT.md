@@ -106,15 +106,3 @@ The fair-mask counterexample gives marginal internal TV=0 but conditional/joint 
 The baseline is preserved under records/R130_Formal_Foundation_Second_Review_20261006/baseline; R129 handoff/index snapshots are also retained. Root MEMORY.md records the user's map-first/theory-first instruction, version basis, exact boundaries, novelty attribution and startup sequence; AGENTS.md requires reading it. This is a project memory file, not a claim of an unavailable hidden account-memory update.
 
 Review status: suitable for continued conditional theoretical work after these repairs. No declaration that all physical premises, all external literature or every sentence is verified. T2 OPEN; C3 NOT_TESTED; independent negative valence OPEN. Published source bytes and all previous weak/negative results remain unchanged.
-
-
-## R131 — finite probe certificate and historical recovery (2026-10-06)
-
-13 nodes and 6 conjunctive rules added; all 236 prior nodes and 106 rules preserved byte-for-field. Four pinned papers unchanged. See [full proofs](records/R131_Theorem_Synthesis_and_Archive_20261006/R131_Probe_Completeness_Theorem.md) and [migration audit](records/R131_Theorem_Synthesis_and_Archive_20261006/SOURCE_MIGRATION_AUDIT.md).
-
-- F22, provenance: low-order marginal blindness is already in PLT §§753–755 and prior binary payoff insufficiency is in D/R96D. New status is a project-level general finite certificate, not historical mathematical novelty.
-- F23, counting: recovered 47 overlapping family rows and 38 consecutive cases. The original thousands-entry inventory is incomplete; file sections, parameter enumerations and families are not independent experiments. TA16's published archive-count qualification controls claims about that paper.
-- F24, migration: older neutral-framework no-experience options for actual intelligent systems cannot be imported under fixed C1/U1. Preserve originals, separate qualitative/valence/subject unknowns, add no new experience gate.
-- F25, new proof scope: rank necessity concerns all probability laws and exact linear expectation probes, not every constrained law family. A particular deficient interface can still identify a selected target or close a particular kernel. Not every fiber has TV diameter one. Argmax identification does not require every score to be identified. The decision prior/payoffs/ports are explicit; stability requires a supplied inverse and true error bound.
-
-The checks validate exact witnesses, source identities and graph preservation, not all archived claims or consciousness-specific physical premises. T2 and valence remain open. No new empirical data, training, DOI or paper release.

@@ -1,0 +1,20 @@
+{
+  "round": "R131",
+  "revision": "R131-v1.0",
+  "date": "2026-10-06",
+  "base_commit": "e9346dee824b8db58a648d3f1fba091c8151e7e7",
+  "nodes": 249,
+  "rules": 112,
+  "new_nodes": 13,
+  "new_rules": 6,
+  "map_checks_passed": 110,
+  "exact_checks_passed": 50,
+  "rational_law_pairs": 100,
+  "numbered_cases": 38,
+  "historical_families": 47,
+  "raw_thousands_count_verified": false,
+  "mathematical_status": "Manual conditional proofs with exact finite witnesses; not historical originality certification",
+  "T2": "OPEN",
+  "C3_intervention_transport": "NOT_TESTED",
+  "valence_bridge": "OPEN"
+}
