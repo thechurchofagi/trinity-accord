@@ -1,5 +1,5 @@
 {
-  "state": "PREPARE_AUTHORIZED",
+  "state": "PREPARE_REAUTHORIZED_AFTER_PRE_ZENODO_GATE_CORRECTION",
   "report_number": "TA-TR-2026-24",
   "version": "1.0",
   "title": "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents",
@@ -8,5 +8,8 @@
   "user_instruction": "Explicit author instruction on 6 October 2026 to complete DOI, OTS and Arweave using the repository's mature publication flow after strict formal-map review.",
   "publication_not_yet_irreversible": true,
   "authorized_at": "2026-10-06",
-  "next_step": "Reserve exactly one Zenodo draft and build exact v1.0 package; do not publish before visual review."
+  "next_step": "Reserve exactly one Zenodo draft and build exact v1.0 package; do not publish before visual review.",
+  "previous_run_id": 37405185977,
+  "previous_run_zenodo_mutation": false,
+  "correction": "Formal audit nonclaim matcher now uses the exact reviewed phrase 'Nothing above establishes consciousness.'"
 }
