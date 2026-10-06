@@ -6,7 +6,8 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 - Completed manuscript audit: **R102** (novelty reset, claim verification, and submission-gate decision).
 - New-window entry: [R102 manuscript audit and submission gate](records/R102_Manuscript_Audit_and_Submission_Gate_20261006.md).
-- Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
+- Current submission manuscript: [From Shutdown Resistance to Self-Continuation Control v0.3](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
+- Prior integrated UCT workspace manuscript: [UCT Agent Self-Preservation v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
 - Latest analysis: [R102 manuscript audit and submission gate](records/R102_Manuscript_Audit_and_Submission_Gate_20261006.md).
 - Latest training: [R99 bounded-domain path models](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
