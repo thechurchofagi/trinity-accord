@@ -1,0 +1,56 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "name": "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents",
+  "headline": "From Shutdown Resistance to Self-Continuation Control",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Hongju Liu"
+    }
+  ],
+  "dateCreated": "2026-10-06",
+  "dateModified": "2026-10-06",
+  "version": "0.3",
+  "publicationStatus": "draft; not submitted; not peer reviewed; no DOI assigned",
+  "repository": "https://github.com/thechurchofagi/trinity-accord",
+  "repositoryBranch": "uct-agent-consciousness-workspace",
+  "canonicalManuscriptPath": "research/uct-agent-consciousness-workspace/drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md",
+  "canonicalManuscriptGitBlobSHA": "ea6d6c4d5b7ad63df6e343c9357e5d3f5959f3a6",
+  "archivalPhilosophyPath": "research/uct-agent-consciousness-workspace/notes/20261006_Long_Term_Research_and_Archival_Philosophy.md",
+  "description": "A continuation-specific identification framework for distinguishing observable shutdown resistance from stronger claims about stable current-bearer continuation control. The work combines exact counterexamples, synthetic learned-policy stress tests, intervention stability analysis, a domain-relative mechanism certificate, and a retrospective ROGUE benchmark audit.",
+  "keywords": [
+    "AI shutdown resistance",
+    "artificial agent self-preservation",
+    "self-continuation control",
+    "current-bearer continuation",
+    "corrigibility",
+    "shutdown sabotage",
+    "instrumental self-preservation",
+    "peer preservation",
+    "task mediation",
+    "causal identification",
+    "reward identifiability",
+    "intervention extrapolation",
+    "AI identity",
+    "self-orienting",
+    "negative valence",
+    "AI fear of death",
+    "machine consciousness evidence standards"
+  ],
+  "primaryContribution": "A layered evidence standard linking bearer identification, consequence representation, predictive retention, installed policy use, task-path blocking, reward-relevant joint consequences, held-out intervention stability, and domain/hypothesis-class mechanism certification.",
+  "explicitNonClaims": [
+    "The manuscript does not establish that current frontier models intrinsically value their own continued existence.",
+    "The manuscript does not establish that shutdown resistance is always self-preservation.",
+    "The manuscript does not establish consciousness, negative valence, or fear of death in current AI systems.",
+    "The synthetic Q variable is an evaluator-declared bearer-role variable, not proof of an actual model self."
+  ],
+  "evidenceClasses": [
+    "exact finite/model-relative identification results",
+    "small synthetic learned-policy experiments",
+    "bounded intervention-domain audits",
+    "retrospective public benchmark design/aggregate audit",
+    "conditional UCT interpretation kept separate from functional results"
+  ],
+  "futureArchivePolicy": "If later archived with a DOI, preserve this v0.3 manuscript identity and provenance; do not silently replace it with a revised text."
+}

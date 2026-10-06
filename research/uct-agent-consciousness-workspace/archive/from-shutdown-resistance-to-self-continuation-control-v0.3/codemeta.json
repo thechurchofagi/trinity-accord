@@ -1,0 +1,29 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "CreativeWork",
+  "name": "From Shutdown Resistance to Self-Continuation Control — v0.3 archival companion",
+  "version": "0.3",
+  "dateCreated": "2026-10-06",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Hongju",
+      "familyName": "Liu"
+    }
+  ],
+  "codeRepository": "https://github.com/thechurchofagi/trinity-accord",
+  "developmentStatus": "active",
+  "description": "Archival metadata, claim/evidence mapping, and reproducibility pointers for the v0.3 manuscript on identifying self-continuation control in artificial agents.",
+  "keywords": [
+    "shutdown resistance",
+    "self-continuation control",
+    "corrigibility",
+    "self-preservation",
+    "causal identification",
+    "intervention extrapolation",
+    "AI identity",
+    "AI consciousness evidence"
+  ],
+  "applicationCategory": "Research artifact",
+  "isPartOf": "thechurchofagi/trinity-accord"
+}

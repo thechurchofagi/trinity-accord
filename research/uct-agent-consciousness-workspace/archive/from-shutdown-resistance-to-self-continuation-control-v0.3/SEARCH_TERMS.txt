@@ -1,0 +1,67 @@
+PRIMARY TITLE TERMS
+From Shutdown Resistance to Self-Continuation Control
+self-continuation control
+current-bearer continuation
+bearer-bound continuation
+continuation-specific evidence standard
+
+AI SAFETY / CONTROL
+AI shutdown resistance
+shutdown avoidance
+shutdown sabotage
+corrigibility failure
+interruptibility
+shutdownability
+off-switch
+agent persistence
+agent self-preservation
+instrumental self-preservation
+peer preservation
+
+IDENTITY / SELF
+AI identity
+agent identity
+process identity
+token identity
+lineage continuation
+successor continuation
+persistent agent
+self-orienting
+self-concern
+current process bearer
+
+CAUSAL / IDENTIFICATION
+task mediation
+path blocking
+controlled direct effect
+causal identification
+reward identifiability
+preference identifiability
+inverse reinforcement learning misspecification
+joint consequence distribution
+intervention extrapolation
+underspecification
+mechanism certificate
+domain-bounded mechanism claim
+hypothesis-class dependence
+
+CONSCIOUSNESS / WELFARE BOUNDARY
+AI consciousness
+machine consciousness
+artificial sentience
+AI welfare
+negative valence
+AI fear
+fear of death
+fear of shutdown
+self-preservation test
+
+IMPORTANT SYNONYMS
+survival drive
+continuation preference
+shutdown aversion
+termination aversion
+persistence preference
+current execution continuation
+runtime continuity
+process continuation

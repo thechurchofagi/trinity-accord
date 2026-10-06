@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this research artifact, cite the manuscript version shown below and preserve the version/date distinction."
+title: "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents"
+type: article
+version: "0.3"
+date-released: "2026-10-06"
+authors:
+  - family-names: "Liu"
+    given-names: "Hongju"
+repository-code: "https://github.com/thechurchofagi/trinity-accord"
+license: "NOASSERTION"
+keywords:
+  - "shutdown resistance"
+  - "self-continuation control"
+  - "corrigibility"
+  - "self-preservation"
+  - "causal identification"
+  - "task mediation"
+  - "intervention extrapolation"
+  - "AI identity"
+  - "machine consciousness evidence"
+abstract: >-
+  A continuation-specific identification framework for distinguishing observable
+  shutdown or preservation behavior from stronger claims about stable current-bearer
+  continuation control. The work combines exact counterexamples, synthetic learned-policy
+  stress tests, intervention stability analysis, a domain-relative mechanism certificate,
+  and a retrospective audit of the ROGUE benchmark. It does not establish AI consciousness,
+  negative valence, or fear of death.

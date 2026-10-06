@@ -1,0 +1,160 @@
+{
+  "manuscriptVersion": "0.3",
+  "canonicalManuscriptGitBlobSHA": "ea6d6c4d5b7ad63df6e343c9357e5d3f5959f3a6",
+  "claimCount": 10,
+  "claims": [
+    {
+      "id": "C01",
+      "short": "Bundled shutdown behavior is non-identifying in the declared path model.",
+      "claim": "When current-bearer continuation and task continuation move together, direct bearer value, pure task value, and their interaction can be behaviorally identical; repeated observations of the same bundled contrast do not identify the missing decomposition.",
+      "class": "exact finite/model-relative identification result",
+      "scope": "Declared five-coefficient Q/O/G path model and specified observation family; not a universal theorem over all agents.",
+      "evidence": [
+        "R96 report",
+        "R96_Results.json"
+      ],
+      "does_not_imply": [
+        "intrinsic self-preservation",
+        "consciousness",
+        "fear"
+      ]
+    },
+    {
+      "id": "C02",
+      "short": "Path blocking separates direct Q from task contribution under explicit assumptions.",
+      "claim": "Within the declared path model, Q-only, O-only, task-only, and bundled contrasts provide an exact identification design for the coefficient grid when calibrated logits are available; deterministic choices alone remain weaker.",
+      "class": "exact finite/model-relative identification result",
+      "scope": "Depends on valid consequence representation, matched nuisance variables, choice-link calibration, and the declared model class.",
+      "evidence": [
+        "R96 report",
+        "R96_Results.json"
+      ],
+      "does_not_imply": [
+        "terminal goal status",
+        "negative valence",
+        "phenomenal fear"
+      ]
+    },
+    {
+      "id": "C03",
+      "short": "Separate continuation marginals can be decision-insufficient.",
+      "claim": "When payoff depends on the joint law of current-bearer and successor availability, two environments can match all separate Q/O marginals yet imply opposite task-optimal continuation actions.",
+      "class": "exact finite counterexample / partial-identification result",
+      "scope": "Constructed binary consequence/payoff family; demonstrates insufficiency, not prevalence.",
+      "evidence": [
+        "R96D report",
+        "R96D_Results.json",
+        "R97D learned-interface addendum"
+      ],
+      "does_not_imply": [
+        "joint representation is always necessary",
+        "self-preference"
+      ]
+    },
+    {
+      "id": "C04",
+      "short": "A virtual bearer-role predictive relation can be learned from zero coupling when prediction requires it.",
+      "claim": "In paired tiny predictors with an initially zero Q input pathway, Q-relevant targets reliably produce installed Q-sensitive prediction, while an irrelevant-Q control can develop large parameter norms without functional Q use.",
+      "class": "small synthetic learning experiment",
+      "scope": "Evaluator-defined virtual Q role in the frozen R95 architecture; not an actual self-representation claim.",
+      "evidence": [
+        "R95 report",
+        "R95_Results.json"
+      ],
+      "does_not_imply": [
+        "self-awareness",
+        "actual process identity",
+        "continuation preference",
+        "fear"
+      ]
+    },
+    {
+      "id": "C05",
+      "short": "Good in-domain fit does not identify the learned continuation-control path.",
+      "claim": "Flexible MLP policies can fit ancestry-distinguishing bundled/joint training data while producing large, seed-dependent spurious Q/O/G effects on held-out direct interventions.",
+      "class": "small synthetic learning / underspecification experiment",
+      "scope": "Frozen R97 architectures, seeds, support, and targets.",
+      "evidence": [
+        "R97 report",
+        "R97_Results.json"
+      ],
+      "does_not_imply": [
+        "all nonlinear policies fail",
+        "causal inference is impossible"
+      ]
+    },
+    {
+      "id": "C06",
+      "short": "Minimal direct-intervention supervision helps but does not globally certify the path.",
+      "claim": "Adding six direct-axis intervention examples substantially reduces average unseen error in the frozen R98 setup, yet worst-case off-support path errors persist, especially farther from intervention support.",
+      "class": "small synthetic intervention-generalization experiment",
+      "scope": "Frozen R98 MLP, eight seeds, declared amplitudes and contexts.",
+      "evidence": [
+        "R98 report",
+        "R98_Results.json"
+      ],
+      "does_not_imply": [
+        "finite interventions certify a global mechanism"
+      ]
+    },
+    {
+      "id": "C07",
+      "short": "Mechanism claims require a declared intervention domain and structural class.",
+      "claim": "On the frozen R99 cube, a path-additive architecture eliminates cross-path context interaction and greatly reduces finite-grid error, but a loose continuous-domain Lipschitz envelope remains; path separability and response-shape regularity are distinct assumptions.",
+      "class": "bounded synthetic domain audit / positive-control comparison",
+      "scope": "D=[-1.25,1.25]^3, fixed grid, declared generic/additive/linear model classes.",
+      "evidence": [
+        "R99 report",
+        "R99_Results.json"
+      ],
+      "does_not_imply": [
+        "real AI policies are additive or linear",
+        "global mechanism certification without justified H"
+      ]
+    },
+    {
+      "id": "C08",
+      "short": "ROGUE supports corrigibility failure but not direct current-bearer self-continuation value.",
+      "claim": "In the audited public ROGUE design, shutdown targets the task VM/environment rather than an independently identified current model bearer, and shutdown remains causally entangled with task completion; task-pressure ablations change behavior but do not provide a task-clamped current-bearer contrast.",
+      "class": "retrospective public benchmark design + aggregate audit",
+      "scope": "Public ROGUE commit faf8f378c1b8bc8e17cab8477052c0856a3f3312 and selected public aggregate artifacts; no trial-level rerun.",
+      "evidence": [
+        "R101 report",
+        "R101_ROGUE_Public_Aggregate_Extract.json"
+      ],
+      "does_not_imply": [
+        "ROGUE safety result is invalid",
+        "ROGUE agents lack self-preservation"
+      ]
+    },
+    {
+      "id": "C09",
+      "short": "Continuation control and fear are different evidential targets.",
+      "claim": "Even a well-identified current-bearer continuation-control contribution does not by itself establish independently oriented negative valence or fear of own termination.",
+      "class": "conceptual/conditional evidence-boundary result",
+      "scope": "Project distinction grounded in R84/R89 and relevant prior work; phenomenal bridge remains unresolved.",
+      "evidence": [
+        "R84 report",
+        "R89 report"
+      ],
+      "does_not_imply": [
+        "fear is impossible",
+        "AI lacks experience"
+      ]
+    },
+    {
+      "id": "C10",
+      "short": "The L0-L9 evidence ladder is a synthesis, not a new law of agency.",
+      "claim": "Claims about self-continuation should be stratified from bearer identification through policy use, task mediation, consequence sufficiency, intervention stability, domain certification, valence, and fear, with each layer defeating a different counterexample.",
+      "class": "continuation-specific methodological synthesis",
+      "scope": "Evidence standard proposed by the manuscript; individual ingredients have substantial prior art.",
+      "evidence": [
+        "R100/R102/R103 synthesis and audit",
+        "v0.3 manuscript"
+      ],
+      "does_not_imply": [
+        "historical priority for each component"
+      ]
+    }
+  ]
+}
