@@ -35,6 +35,52 @@ class PaperProofTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             module.validate_config(batch, tampered)
 
+    def test_preservation_pending_receipt_remains_strictly_valid(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            receipt_path = root / 'publication-record.json'
+            pdf = {
+                'name': 'paper.pdf',
+                'bytes': 123,
+                'sha256': 'ab' * 32,
+                'role': 'test',
+            }
+            receipt = {
+                'state': 'PUBLISHED_PUBLIC_READBACK_PASS_PRESERVATION_PENDING',
+                'report_number': 'TA-TR-TEST',
+                'record_id': 12345,
+                'doi': '10.5281/zenodo.12345',
+                'version': '1.0',
+                'title': 'Test Paper',
+                'submitted': True,
+                'public_file_readback_pass': True,
+                'doi_resolution_pass': True,
+                'doi_resolver': {'state': 'RESOLVER_PASS', 'matches_record': True},
+                'files': [{'name': pdf['name'], 'bytes': pdf['bytes'], 'sha256': pdf['sha256']}],
+            }
+            module.write(receipt_path, receipt)
+            config = {
+                'paper_count': 1,
+                'papers': [{
+                    'report': receipt['report_number'],
+                    'record_id': receipt['record_id'],
+                    'doi': receipt['doi'],
+                    'version': receipt['version'],
+                    'title': receipt['title'],
+                    'receipt_path': str(receipt_path),
+                    'pdfs': [pdf],
+                }],
+            }
+            papers, pdf_count = module.validate_config(root, config)
+            self.assertEqual([paper['report'] for paper in papers], ['TA-TR-TEST'])
+            self.assertEqual(pdf_count, 1)
+
+            bad = copy.deepcopy(receipt)
+            bad['doi_resolver']['matches_record'] = False
+            module.write(receipt_path, bad)
+            with self.assertRaisesRegex(ValueError, 'Published receipt identity mismatch'):
+                module.validate_config(root, config)
+
     @unittest.skipUnless(importlib.util.find_spec('opentimestamps'), 'OTS is installed in the dedicated paper workflow')
     def test_detached_proof_must_match_published_bytes(self):
         from opentimestamps.core.op import OpSHA256
