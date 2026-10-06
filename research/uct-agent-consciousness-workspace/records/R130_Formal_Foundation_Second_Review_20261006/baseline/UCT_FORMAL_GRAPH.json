@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R130-v1.0",
+  "revision": "R129-v1.0",
   "date": "2026-10-06",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "2e1d77748bc4a0db24c9068a68c8d110bae2b783",
+  "base_commit": "c9116c7b107fbf86f53f729e75eb50b530649e6e",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -1437,11 +1437,9 @@
     {
       "id": "R127:MEDIATION",
       "kind": "ASSUMPTION",
-      "label": "Complete physical cut C with external B; compare two supported preparations at the SAME fixed b and q, with the same downstream kernel W_q(.|c,b) and corresponding conditional errors",
+      "label": "Complete physical cut C with all declared external B; same downstream Wq; queries externally fixed or independent of encoding/noise; errors specified",
       "source": "R127 theory note §§2,4",
-      "status": "DECLARED_ASSUMPTION",
-      "statement": "For common b,q supported under both preparations x,xprime, mu_x=P(C|x,b,q), mu_xprime=P(C|xprime,b,q), and P(Y|x,c,b,q)=W_q(Y|c,b). Queries are externally fixed or independent of encoding/noise. If B is not fixed, use the full joint cut (C,B) with a common downstream kernel instead of marginal C alone.",
-      "amendment": "R130-F20: restore the common-side-information qualification already explicit in R127 §4."
+      "status": "DECLARED_ASSUMPTION"
     },
     {
       "id": "R127:RECOVERY",
@@ -1508,8 +1506,7 @@
       "label": "Complete-cut discrimination necessity and TV lower bound",
       "source": "R127 theory note §4",
       "status": "MANUAL_CONDITIONAL_PASS",
-      "statement": "At the same supported b,q and for different correct answers, TV(P(C|x,b,q),P(C|xprime,b,q)) >= 1-epsilon_(x,b,q)-epsilon_(xprime,b,q). Without conditioning on B the applicable cut law is joint (C,B), not C alone.",
-      "amendment": "R130-F20: explicit conditional/joint distinction; theorem ID and original proof retained."
+      "statement": "For differing correct answers TV(mu_x,mu_xprime)≥1−epsilon_x−epsilon_xprime"
     },
     {
       "id": "R127:P3",
@@ -3060,9 +3057,9 @@
         "R127:MEDIATION"
       ],
       "conclusion": "R127:P2",
-      "statement": "At the same supported b,q and for different correct answers, TV(P(C|x,b,q),P(C|xprime,b,q)) >= 1-epsilon_(x,b,q)-epsilon_(xprime,b,q). Without conditioning on B the applicable cut law is joint (C,B), not C alone.",
-      "proof_sketch": "Fix common supported b,q and use the SAME W_q(.|c,b). Total variation contracts from the conditional cut laws to outputs. The correct-answer event has probability at least 1-epsilon_(x,b,q) for x and at most epsilon_(xprime,b,q) for xprime. For unfixed B, sum over the JOINT cut (C,B); averaging away B can destroy the relevant dependence.",
-      "source": "R127 theory note §§2,4–5; R130 second review §2",
+      "statement": "For differing correct answers TV(mu_x,mu_xprime)≥1−epsilon_x−epsilon_xprime",
+      "proof_sketch": "Shared kernel contracts TV; correct-answer event lower-bounds output TV. Exact finite case forces disjoint cut supports.",
+      "source": "R127 theory note §4",
       "kind": "DEDUCTIVE",
       "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
     },
@@ -3508,23 +3505,6 @@
       "prior_source": "D TA-TR-2026-24 v1.0 §4; R96D",
       "current_scope": "R128 contributes explicit deterministic versus stochastic summary composition and its concrete state-transition countermodel within this project. No historical novelty for lumpability or marginal insufficiency is claimed.",
       "historical_files": "R128 records are preserved unchanged; this canonical amendment governs future attribution."
-    }
-  ],
-  "audit_amendments": [
-    {
-      "id": "R130-F20",
-      "affected_nodes": [
-        "R127:MEDIATION",
-        "R127:P2"
-      ],
-      "affected_rules": [
-        "r127_2"
-      ],
-      "kind": "MAP_PREMISE_CLARIFICATION",
-      "source_result_withdrawn": false,
-      "reason": "Original R127 proof conditions on common b,q. The map abbreviated this qualification and could be misused for marginal internal C when the decoder also uses external B.",
-      "counterexample": "Existing fair-mask model C=X XOR B with fair independent B: marginal C laws have TV=0; joint (C,B) or common-b conditional C laws have TV=1 and perfect recovery.",
-      "baseline": "records/R130_Formal_Foundation_Second_Review_20261006/baseline/UCT_FORMAL_GRAPH.json"
     }
   ]
 }

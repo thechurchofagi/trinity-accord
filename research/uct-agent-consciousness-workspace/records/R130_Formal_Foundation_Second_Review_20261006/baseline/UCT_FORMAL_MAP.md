@@ -1,8 +1,6 @@
-# UCT A–B–C–D unified formal map — R130
+# UCT A–B–C–D unified formal map — R129
 
-**Canonical working map, revision R130-v1.0, 6 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R130. It does not supersede or edit the published papers.
-
-**Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
+**Canonical working map, revision R129-v1.0, 6 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R129. It does not supersede or edit the published papers.
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
 
@@ -21,7 +19,7 @@ A's 78-node graph and B's historical 43-node map are preserved as sources. B's o
 
 ## 2. How to read an implication
 
-The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **236 nodes and 106 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R130_Formal_Foundation_Second_Review_20261006/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
+The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **236 nodes and 106 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R129_Four_Paper_Integration_20261006/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
 
 - All premises inside one rule's **all_of** must hold together.
 - Separate rules concluding the same node are alternative sufficient routes.
@@ -160,7 +158,7 @@ flowchart TD
 
 **R126** proves arbitrary transported projections commute automatically; this cannot select content. A supplied deterministic causal quotient closes iff successor summaries agree within each present fiber. Hidden disagreement gives a half-diameter worst-case error floor. Iterated finite refinement produces the coarsest stable refinement retaining outputs.
 
-**R127** proves task-response profiles determine necessary distinctions. Under physical mediation, every complete cut must retain them; shared downstream channels contract TV. R127:P2 compares conditional cut laws at the SAME supported external b and query q. If B varies, the applicable law is the joint cut (C,B), not marginal internal C alone. Fano/data-processing bounds allocate the remaining information requirement conditional on external support. Relations can retain information absent in individual marginals. Applying A's actual-event criterion establishes a candidate actual subhistory only after physical grounding. C1 preserves its inherited relations without assigning a familiar feeling label or unique subject.
+**R127** proves task-response profiles determine necessary distinctions. Under physical mediation, every complete cut must retain them; shared downstream channels contract TV. Fano/data-processing bounds allocate the remaining information requirement conditional on external support. Relations can retain information absent in individual marginals. Applying A's actual-event criterion establishes a candidate actual subhistory only after physical grounding. C1 preserves its inherited relations without assigning a familiar feeling label or unique subject.
 
 **R128**, proved [in full here](records/R128_Unified_Formal_Map_Audit_20261006/R128_Joint_State_Derivation.md), adds:
 
@@ -201,7 +199,7 @@ The next theoretical task distinguishes D's payoff-relative decision sufficiency
 
 ## 9. Mandatory future-map protocol
 
-Read AGENTS.md, MEMORY.md and the latest handoff first. Before accepting any new derivation:
+Before accepting any new derivation:
 
 1. Pin the A/B/C/D versions and read this map, audit and relevant source proof.
 2. Assign a stable node ID; write its typed statement and all simultaneous premises. Use separate rules for alternative routes.
@@ -213,5 +211,3 @@ Read AGENTS.md, MEMORY.md and the latest handoff first. Before accepting any new
 Machine checks have a narrow scope; [validation output](records/R128_Unified_Formal_Map_Audit_20261006/MAP_CHECK.json) and the [exact counterexample result](records/R128_Unified_Formal_Map_Audit_20261006/JOINT_CLOSURE_CHECK.json) document it.
 
 Current four-paper [graph/source checks](records/R129_Four_Paper_Integration_20261006/MAP_CHECK.json) and [exact D algebra checks](records/R129_Four_Paper_Integration_20261006/EXACT_MATH_CHECK.json) supplement the preserved R128 checks. Source evidence is not freshly rerun by integrating its nodes.
-
-Current R130 [dependency/source checks](records/R130_Formal_Foundation_Second_Review_20261006/MAP_CHECK.json) and [targeted boundary checks](records/R130_Formal_Foundation_Second_Review_20261006/BOUNDARY_CHECK.json) supersede the current-state role of older check reports; historical outputs remain unchanged.

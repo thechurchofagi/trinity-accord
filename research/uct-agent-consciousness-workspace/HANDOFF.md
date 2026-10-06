@@ -1,61 +1,41 @@
-# UCT 研究交接 — R129：补齐四篇论文的统一形式地图
+# UCT 研究交接 — R130：四篇形式化成果二次复审与工作记忆
 
-2026-10-06。仓库 thechurchofagi/trinity-accord；分支 uct-agent-consciousness-workspace。本轮基于 R128 commit c9116c7b107fbf86f53f729e75eb50b530649e6e。后续刷新 HEAD、保留并发、expected-head lease 非 force 保存。
+2026-10-06。仓库 thechurchofagi/trinity-accord；分支 uct-agent-consciousness-workspace；目录 research/uct-agent-consciousness-workspace/。本轮父提交 2e1d77748bc4a0db24c9068a68c8d110bae2b783。后续刷新 HEAD 并保留并发，不 force。
 
-用户纠正总计四篇，并要求最近发表的一篇及其形式化也进入地图。已定位并纳入 **TA-TR-2026-24 v1.0**，*From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents*。2026-10-06 发布，DOI 10.5281/zenodo.23176685。这里用 D 作地图命名空间，不擅自改成正式题名 UCT IV。
+用户最新要求：再次仔细审核形式化成果，确认可继续使用后保存到 GitHub 和工作空间，修改记忆文件；以后所有相关工作都必须在此基础上继续。
 
-## 必须读取的当前入口
+## 当前入口
 
-- [四篇统一地图](UCT_FORMAL_MAP.md)
-- [机器依赖图](UCT_FORMAL_GRAPH.json)：236 节点、106 条规则；同条 all_of 是同时前提，多条同结论规则是替代证明路线。
-- [形式审计](UCT_FORMAL_AUDIT.md)：保留 R128 发现，新增 F13–F19。
-- [第四篇接入与证明审查](records/R129_Four_Paper_Integration_20261006/R129_Integration_and_Proof_Audit.md)
-- [完整证明台账](records/R129_Four_Paper_Integration_20261006/PROOF_LEDGER.md)
-- [四篇版本及新增来源哈希](records/R129_Four_Paper_Integration_20261006/SOURCE_MANIFEST.json)
-- [图与来源检查](records/R129_Four_Paper_Integration_20261006/MAP_CHECK.json)、[精确数学检查](records/R129_Four_Paper_Integration_20261006/EXACT_MATH_CHECK.json)、[验证范围](records/R129_Four_Paper_Integration_20261006/VALIDATION_LOG.md)
+1. [MEMORY.md](MEMORY.md)：长期项目记忆，已写入 AGENTS.md 的启动必读要求。
+2. [四篇总图](UCT_FORMAL_MAP.md)、[机器图](UCT_FORMAL_GRAPH.json)、[审计](UCT_FORMAL_AUDIT.md)。当前 R130-v1.0，236 节点、106 条规则。
+3. [二次审查报告](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md)、[逐规则复审记录](records/R130_Formal_Foundation_Second_Review_20261006/REVIEW_MATRIX.json)、[完整证明台账](records/R130_Formal_Foundation_Second_Review_20261006/PROOF_LEDGER.md)。
+4. [来源/依赖检查](records/R130_Formal_Foundation_Second_Review_20261006/MAP_CHECK.json)、[边界检查](records/R130_Formal_Foundation_Second_Review_20261006/BOUNDARY_CHECK.json)、[验证记录](records/R130_Formal_Foundation_Second_Review_20261006/VALIDATION_LOG.md)。
 
-## 固定版本
+## 结论与实际修正
 
-| 论文 | 版本 | DOI |
-|---|---|---|
-| A / UCT I | 1.2 | 10.5281/zenodo.23131575 |
-| B / UCT II | 1.1 | 10.5281/zenodo.23030320 |
-| C / UCT III | 1.0 | 10.5281/zenodo.23137088 |
-| D / TA-TR-2026-24 | 1.0 | 10.5281/zenodo.23176685 |
+复审了 106 条规则的陈述、前提、证明摘要和范围。九个 B 理论专用桥接复审的是条件和残余义务，不宣称重新验证了九个目标理论的全部原文。已审查的条件主干可继续作为研究基础，未发现需要撤回其核心条件结论的矛盾；不等于所有句子、物理前提或外部理论都已证实。
 
-D 源分支 research/self-continuation-control-v1-20261006，固定 ref ae1d8965ef99df9d8a725c540bd8c0a79f2c4e70。正文 36,208 bytes；SHA-256 af0eb63cca099b3d913218f503bc978c705f0fb9f065cca9ed472e5161d67490，与发布记录一致。公开回读/DOI 成功是发布记录的既有状态，不冒充本轮重新 resolver 检查，也不将旧 preservation_pending 字段当当前保存状态。
+- **F20：**R127 原证明已有“固定共同 b 和 q”，总图省略过多。已明确 mu_x=P(C|x,b,q)，误差也按同一条件计算；不固定 B 时必须用联合 cut (C,B)，不能套到内部边际 C。修改两个已有节点和一条已有规则，保留 ID、旧快照和理由。
+- **F21：**旧版可读证明台账没有导出图中 13 个 scope 字段。现在完整显示这些范围条件及来源/修正 metadata，避免读台账时丢失前提。
+- 公平掩码反例精确验证：内部边际 TV=0，联合/共同 b 条件 TV=1，且可零误差解码，说明 F20 不能忽略。
+- 共检查 1,728 个三状态确定性模型/摘要组合，其中 840 对各自闭合，联合闭合及像空间不变均通过；243 个有限决策情形验证信息价值及共同最优动作的等号条件，包括并列最优。一般证明仍是手工推导，枚举不代替一般证明。
 
-A/B/C 继续用 R128 精确源快照。本轮没有发现或引入 A1.3，不应把 D 新发表误当 A 版本更新。main 索引不足以确定最新版本；所有来源均 pin commit。
+## 四篇固定版本与归属
 
-## 完成的接入
+A/I v1.2，B/II v1.1，C/III v1.0，D/TA-TR-2026-24 v1.0。DOI、精确 ref/path/blob/SHA-256 在机器图 source_versions 中。原论文、R128/R129 历史结果和弱负实验结果都不改。D 仅是本地图命名空间，不擅自命名为 UCT IV。A 未定位到正式 v1.3；若出现新来源重新核对。
 
-1. 原图 8 个定义、9 个主张全部保留为 D:D0–D7、F1–F3、E1–E4、A1、S1。合计新增 32 节点、9 条明确数学规则，不等于发现 32 个新定理。
-2. 原图 18 条 allowed edges 保存为 context_links，不能把研究顺序当逻辑证明。F1 非识别不自动推出 F2；F2 需要同一五参数模型、独立干预对比和校准 logits。
-3. 分开数学、已发表 synthetic/retrospective 证据和 L0–L9 方法标准；没有重新运行实验，也没有把证据条目当定理推出来。
-4. 与 C:P2_COORD 接模型内识别，与 C:P7 接固定反例的 1/8 决策价值差；与 A:P6 接 bearer 的 token/type/lineage 区分；与 B 接有类型的 consequence interface。
-5. 体验解释必须通过 A:C1-OI + 独立实际组织非同构前提，不能从 virtual Q、延续行为、控制系数、模型拟合直接推出 valence/fear。
-6. 明确 finite grid→连续域界需要全局 Lipschitz 前提，path-additive 消除交互不等于已知响应形状。
+D §4/R96D 已有边际预测不足以决定联合后果的结果，不算 R128 新发现。R128 较窄增量是联合动力学闭合条件与反例；R129 是四篇接入和归属修正；R130 是再审、条件补明和长期工作规则。标准数学不宣称历史首创。
 
-## 必须纠正的增量归属
+## 以后必须遵守
 
-**D §4 / R96D 已经有“分别准确的 Q/O 边际预测不一定足以决定联合后果”的结论。不能把这个一般洞见重复报成 R128 新发现。**
+先读 AGENTS/MEMORY/HANDOFF/MASTER_INDEX/总图/审计和相关源文。每条新推导接稳定节点，明确全部前提、定义域、端口、时间、输出和资源条件，给出证明、反例、来源、状态；同步维护图/台账/审计/交接/索引。技术实现须忠实于声明的数学对象。
 
-R128 的较窄增量是同一确定性动力学下摘要组合闭合、随机系统下的具体不闭合反例，以及联合推前分布判据。D 是决策充分性，R128 是动力学充分性；相互有关但不能互相替代证明。
+理论优先，不用堆实验替代推导；先定义要区分的理论备选。C1 是研究内部公设，U1 不增加 self/report/recurrence/integration 门槛。实际过程、完整组织、投影、估计、摘要、主体分开。能力变化不自动推出体验数量/valence/fear。T2 OPEN、C3 NOT_TESTED、独立负性 valence 桥 OPEN。
 
-R129 的增量是遗漏论文补入、版本/形式材料统一、证明前提显式化、跨文依赖和归属修正。标准线性代数、Fréchet 界、Lipschitz 界不宣称历史首创。R128 历史文件不改，当前地图的 attribution_amendments 生效。
+下一步仍是四篇地图内的目标相对充分性：一个 payoff、payoff 族、受控转移律，以及同一资源/时间/端口下多能力的联合使用。不得绕开总图另堆无依赖定理。
 
-## 审计边界与下一步
+## 保存与历史
 
-已阅读 D 全文、原图、发布 audit/claims，完整 R96/R99 以及 R96D 数学部分。未重验全部外部文献、原始训练或现时 ROGUE 数据。当前审查支持所列条件数学，不是每篇每句完全形式验证，更不是 C1 独立经验验证。
+[R129 交接](HANDOFF_THROUGH_R129.md)、[R129 索引](MASTER_INDEX_THROUGH_R129.md) 与 records/R130_Formal_Foundation_Second_Review_20261006/baseline 保存本轮之前状态。MEMORY.md 是可持久保存的项目记忆文件；未声称更新平台隐藏的跨会话账户记忆。
 
-下一步全部在四篇总图上推导：区分对一个 payoff 的决策充分性、对一族 payoff 的充分性、完整受控转移律的闭合，再考虑同一资源/时间/端口下联合使用。必须给出目标、共同状态域、操作调度、实际支持与证明。仍然理论优先，未排新实验。
-
-C1/U1 为研究内部固定承诺；不新增 self/report/recurrence/integration 体验存在门槛。实际过程可简单、稀疏、嵌套和重叠；实际支持、有限投影、因果摘要、测量、主体不是一回事。不对当前助手有无意识或死亡恐惧作定论。
-
-R122–R125 弱/负结果不变；T2 OPEN，C3 NOT_TESTED。T2:C1 与 A:C1 继续隔离。后续只能按明确证书条件推进，不能以模型成功自动闭合。
-
-## 历史与存储
-
-[R128 交接原件](HANDOFF_THROUGH_R128.md)、[R128 索引原件](MASTER_INDEX_THROUGH_R128.md) 及 records/R129_Four_Paper_Integration_20261006/baseline/ 保存本轮修改前地图/图/审计/规则。所有旧节点和旧规则保持原内容。
-
-正文英文，交接/讨论中文。不得修改任何已发表论文或创建论文 release/DOI/Zenodo/OTS/AR；保存本研究用 [skip ci]，不触发 PR/CI/部署。远端成功需轻量回读后再告知用户。不要操作实际 shutdown 控制、凭据或实验智能体外部资源。
+研究正文英文、讨论交接中文。工作保存到指定研究分支，使用 [skip ci]、expected-head lease，轻量回读；不创建 PR/CI/部署或新论文 release/DOI/OTS/AR。用户同时要求的可下载工作空间包保留四篇来源、当前地图、证明、审查、记忆及必要历史，不包含大型实验二进制数据。

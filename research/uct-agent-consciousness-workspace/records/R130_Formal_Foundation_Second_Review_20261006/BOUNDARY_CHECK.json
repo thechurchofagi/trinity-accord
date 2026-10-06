@@ -1,0 +1,37 @@
+{
+  "revision": "R130-v1.0",
+  "all_pass": true,
+  "scope": "Exact finite checks of the documented scope risks. General claims remain analytically proved; no empirical model or subjective state is measured.",
+  "F20_mask_witness": {
+    "internal_marginal_TV": "0",
+    "joint_cut_TV": "1",
+    "output_TV": "1",
+    "common_b_conditional_TV": [
+      "1",
+      "1"
+    ],
+    "decoding_errors": [
+      0,
+      0
+    ],
+    "unqualified_marginal_bound_fails": true,
+    "conditional_and_joint_bounds_hold": true
+  },
+  "deterministic_composition": {
+    "states": 3,
+    "total_maps": 27,
+    "binary_summaries": 8,
+    "map_summary_pair_cases": 1728,
+    "individually_closed_pairs": 840,
+    "joint_closure_and_image_invariance_pass": true
+  },
+  "information_value": {
+    "payoff_tables": 81,
+    "strictly_positive_weight_pairs": 3,
+    "cases": 243,
+    "zero_gain_cases": 189,
+    "strict_gain_cases": 54,
+    "cases_with_conditional_ties": 135,
+    "common_optimum_iff_zero_gain": true
+  }
+}

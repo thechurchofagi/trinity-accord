@@ -1,0 +1,822 @@
+{
+  "revision": "R130-v1.0",
+  "reviewer": "Single assistant review; not independent peer review or proof-assistant verification",
+  "rules_reviewed": 106,
+  "source_snapshot_pins": [
+    {
+      "paper": "A",
+      "version": "1.2",
+      "ref": "f8750d32afeea9209e6d53ad3cfbd5bbde7a8126",
+      "path": "research/unified-consciousness-theory-i/versions/v1.2/published/unified-consciousness-theory-i-v1.2.md",
+      "snapshot": "sources/A_UCT_I_v1_2.md",
+      "doi": "10.5281/zenodo.23131575",
+      "blob_sha": "7a980c86b8f94ce787d358dab3529903eb822f8f",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "bytes": 142624,
+      "publication_manifest_blob": "bb6cfbe801f7c198c55d852f61ffc6dfa37df6df",
+      "snapshot_workspace_path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md"
+    },
+    {
+      "paper": "B",
+      "version": "1.1",
+      "ref": "562a5d16745e5e7e6cb4bc8f2c53a2f62e05875a",
+      "path": "research/uct-paired-v1.1/release/b/unified-consciousness-theory-ii-v1.1.md",
+      "snapshot": "sources/B_UCT_II_v1_1.md",
+      "doi": "10.5281/zenodo.23030320",
+      "blob_sha": "c4734243b6dfd75255c14b99f333c52e7d7b7a58",
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+      "bytes": 59958,
+      "publication_manifest_blob": "85679465dbf2c536d5c4e07eadc7cf6dc4e5270e",
+      "snapshot_workspace_path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/B_UCT_II_v1_1.md"
+    },
+    {
+      "paper": "C",
+      "version": "1.0",
+      "ref": "771530abfd14275ce8c579f5a524814563da495d",
+      "path": "research/unified-consciousness-theory-iii/published/unified-consciousness-theory-iii-v1.0.md",
+      "snapshot": "sources/C_UCT_III_v1_0.md",
+      "doi": "10.5281/zenodo.23137088",
+      "blob_sha": "be7c7a952aa88831c6660187586d92a3da707cdf",
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+      "bytes": 94626,
+      "publication_manifest_blob": "69882c2cb2825ea82478b6df3790ca82dc1724b5",
+      "snapshot_workspace_path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/C_UCT_III_v1_0.md"
+    },
+    {
+      "paper": "D",
+      "version": "1.0",
+      "report": "TA-TR-2026-24",
+      "title": "From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents",
+      "ref": "ae1d8965ef99df9d8a725c540bd8c0a79f2c4e70",
+      "path": "research/self-continuation-control/published/from-shutdown-resistance-to-self-continuation-control-v1.0.md",
+      "snapshot": "sources/D_TA24_v1_0.md",
+      "snapshot_workspace_path": "records/R129_Four_Paper_Integration_20261006/sources/D_TA24_v1_0.md",
+      "doi": "10.5281/zenodo.23176685",
+      "blob_sha": "020b56ec3523f452c17e2fd1578f633b27467149",
+      "sha256": "af0eb63cca099b3d913218f503bc978c705f0fb9f065cca9ed472e5161d67490",
+      "bytes": 36208,
+      "publication_manifest_blob": "ae5e8d42aa583b411c32f5fe2dd2feab9a6b541d"
+    }
+  ],
+  "map_amendments": [
+    {
+      "id": "R130-F20",
+      "affected_nodes": [
+        "R127:MEDIATION",
+        "R127:P2"
+      ],
+      "affected_rules": [
+        "r127_2"
+      ],
+      "kind": "MAP_PREMISE_CLARIFICATION",
+      "source_result_withdrawn": false,
+      "reason": "Original R127 proof conditions on common b,q. The map abbreviated this qualification and could be misused for marginal internal C when the decoder also uses external B.",
+      "counterexample": "Existing fair-mask model C=X XOR B with fair independent B: marginal C laws have TV=0; joint (C,B) or common-b conditional C laws have TV=1 and perfect recovery.",
+      "baseline": "records/R130_Formal_Foundation_Second_Review_20261006/baseline/UCT_FORMAL_GRAPH.json"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "a01",
+      "conclusion": "A:C1_OI",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a02",
+      "conclusion": "A:C1_W",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a03",
+      "conclusion": "A:U1",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a04",
+      "conclusion": "A:U2",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a05",
+      "conclusion": "A:U3",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a06",
+      "conclusion": "A:U0",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a07",
+      "conclusion": "A:ORG_GATE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §5.1",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a08",
+      "conclusion": "A:NO_HIDDEN",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §5.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a09",
+      "conclusion": "A:PROBE_INV",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §5.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a10",
+      "conclusion": "A:NO_FUTURE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §5.4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a11",
+      "conclusion": "A:GHOST_EQ",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §5.5",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a12",
+      "conclusion": "A:REWARD_NONID",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §5.6",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a13",
+      "conclusion": "A:GHOST_TOKEN_NOTE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §5.5",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a14",
+      "conclusion": "A:NONSUM",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §6.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a15",
+      "conclusion": "A:MACRO_EXP_EQ",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §6.4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a16",
+      "conclusion": "A:MICRO_EXP_DIFF",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §6.4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a17",
+      "conclusion": "A:ORBIT_LEMMA",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §7.1",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a18",
+      "conclusion": "A:SELECTION_OBSTRUCTION",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §7.1",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a19",
+      "conclusion": "A:E1",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §8.1",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a20",
+      "conclusion": "A:E2",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §8.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a21",
+      "conclusion": "A:E3",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §8.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a22",
+      "conclusion": "A:U2_APP",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §8.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a23a",
+      "conclusion": "A:EVOL_SYNTH",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §8",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a23b",
+      "conclusion": "A:EVOL_SYNTH",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §8",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a24",
+      "conclusion": "A:STRUCT_TRANSFORM",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §9",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a25",
+      "conclusion": "A:TOY_WHOLE_DIFF",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §9 and Appendix B",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a26",
+      "conclusion": "A:TOY_SUB_EQ",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A Appendix B",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a27",
+      "conclusion": "A:TOY_EXP_WHOLE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §9.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a28",
+      "conclusion": "A:TOY_EXP_SUB",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §9.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a29",
+      "conclusion": "A:OSC_FWD",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §10",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a30",
+      "conclusion": "A:OSC_TWO",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §10",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a31",
+      "conclusion": "A:FAIL_ONE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §12.1",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a32",
+      "conclusion": "A:FAIL_TWO",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §12.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a33",
+      "conclusion": "A:COEXISTENCE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §§2.4,6.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a34",
+      "conclusion": "A:COARSE_CLOSURE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A Appendix D",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "b01",
+      "conclusion": "B:REP",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "B §4.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "b02",
+      "conclusion": "B:GATE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "B §5.5",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "b03",
+      "conclusion": "B:EXCLUSION_CONFLICT",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "B §6",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "b_IIT",
+      "conclusion": "B:IIT",
+      "review": "CONDITIONAL_BRIDGE_SCOPE_REVIEW",
+      "source": "B §6",
+      "scope": "Supplied bridge and residual obligations checked for explicitness; target theories not independently revalidated."
+    },
+    {
+      "rule_id": "b_RPT",
+      "conclusion": "B:RPT",
+      "review": "CONDITIONAL_BRIDGE_SCOPE_REVIEW",
+      "source": "B §7",
+      "scope": "Supplied bridge and residual obligations checked for explicitness; target theories not independently revalidated."
+    },
+    {
+      "rule_id": "b_GNWT",
+      "conclusion": "B:GNWT",
+      "review": "CONDITIONAL_BRIDGE_SCOPE_REVIEW",
+      "source": "B §8",
+      "scope": "Supplied bridge and residual obligations checked for explicitness; target theories not independently revalidated."
+    },
+    {
+      "rule_id": "b_HOT",
+      "conclusion": "B:HOT",
+      "review": "CONDITIONAL_BRIDGE_SCOPE_REVIEW",
+      "source": "B §9",
+      "scope": "Supplied bridge and residual obligations checked for explicitness; target theories not independently revalidated."
+    },
+    {
+      "rule_id": "b_AST",
+      "conclusion": "B:AST",
+      "review": "CONDITIONAL_BRIDGE_SCOPE_REVIEW",
+      "source": "B §9",
+      "scope": "Supplied bridge and residual obligations checked for explicitness; target theories not independently revalidated."
+    },
+    {
+      "rule_id": "b_PP_AI",
+      "conclusion": "B:PP_AI",
+      "review": "CONDITIONAL_BRIDGE_SCOPE_REVIEW",
+      "source": "B §10",
+      "scope": "Supplied bridge and residual obligations checked for explicitness; target theories not independently revalidated."
+    },
+    {
+      "rule_id": "b_DIT",
+      "conclusion": "B:DIT",
+      "review": "CONDITIONAL_BRIDGE_SCOPE_REVIEW",
+      "source": "B §11",
+      "scope": "Supplied bridge and residual obligations checked for explicitness; target theories not independently revalidated."
+    },
+    {
+      "rule_id": "b_MTOC",
+      "conclusion": "B:MTOC",
+      "review": "CONDITIONAL_BRIDGE_SCOPE_REVIEW",
+      "source": "B §12",
+      "scope": "Supplied bridge and residual obligations checked for explicitness; target theories not independently revalidated."
+    },
+    {
+      "rule_id": "b_TTC",
+      "conclusion": "B:TTC",
+      "review": "CONDITIONAL_BRIDGE_SCOPE_REVIEW",
+      "source": "B §13",
+      "scope": "Supplied bridge and residual obligations checked for explicitness; target theories not independently revalidated."
+    },
+    {
+      "rule_id": "b04",
+      "conclusion": "B:CYCLE_PRIMITIVE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "B §7 / R128",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "b05",
+      "conclusion": "B:EDGE_CYCLE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "B §16",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "b06",
+      "conclusion": "B:SPECTRAL",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "B §19.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "b07",
+      "conclusion": "B:RECURRENCE_ENABLES",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "B §§16,19",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a35",
+      "conclusion": "A:UCTII_RECON",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §16.1; B §§2–5",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a36",
+      "conclusion": "A:UCTII_GATE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §16.1; B §5.5",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a37",
+      "conclusion": "A:NONEMPTY_CARRIER",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "A §2.1",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c01",
+      "conclusion": "C:P1",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §5.1",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c02",
+      "conclusion": "C:P2_COORD",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §5.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c03",
+      "conclusion": "C:P2_FULL",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §5.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c04",
+      "conclusion": "C:OBS_REFINEMENT",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §5.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c05",
+      "conclusion": "C:LOCAL_FIBER",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §5.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c06",
+      "conclusion": "C:P3",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §5.4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c07",
+      "conclusion": "C:P4",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §6.1",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c08",
+      "conclusion": "C:P5",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §6.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c09",
+      "conclusion": "C:PRICE_SELECTION",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §6.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c10",
+      "conclusion": "C:PRICE_TRANSMISSION",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §6.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c11",
+      "conclusion": "C:P6",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §6.4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c12",
+      "conclusion": "C:P7",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §7.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c13",
+      "conclusion": "C:CIRCUIT_LAWS",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §7.2; Appendix C",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c14",
+      "conclusion": "C:MEMORY_VALUE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §7.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c15",
+      "conclusion": "C:MEMORY_SELECTION",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §7.3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c16",
+      "conclusion": "C:REPERTOIRE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §8.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c17",
+      "conclusion": "C:SENSORY_PARTITION",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C Appendix E",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c18",
+      "conclusion": "C:RIVAL_CONTRAST",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §9.1",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c19",
+      "conclusion": "C:RIVAL_NESIG",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §9.1",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c20",
+      "conclusion": "C:SCORE_TV",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §9.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c21",
+      "conclusion": "C:LOGLOSS",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C Appendix B",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c22",
+      "conclusion": "C:RESIDUAL_BOUND",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C Appendix B",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c23",
+      "conclusion": "C:PROFILE_PSEUDOMETRIC",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §10.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "c24",
+      "conclusion": "C:PUBLIC_NULL",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "C §10.2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r126_1",
+      "conclusion": "R126:P1",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R126 theory note §3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r126_2",
+      "conclusion": "R126:P2",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R126 theory note §4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r126_3",
+      "conclusion": "R126:P3",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R126 theory note §5",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r126_4",
+      "conclusion": "R126:P4",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R126 theory note §6",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r127_1",
+      "conclusion": "R127:P1",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R127 theory note §3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r127_1a",
+      "conclusion": "R127:QUERY_REFINEMENT",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R127 theory note §3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r127_1b",
+      "conclusion": "R127:FUTURE_EQ",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R127 theory note §3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r127_2",
+      "conclusion": "R127:P2",
+      "review": "PASS_AFTER_MAP_PREMISE_CLARIFICATION",
+      "source": "R127 theory note §§2,4–5; R130 second review §2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r127_3",
+      "conclusion": "R127:P3",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R127 theory note §5",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r127_3a",
+      "conclusion": "R127:JOINT_INFORMATION",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R127 theory note §5",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r127_3b",
+      "conclusion": "R127:LOCALIZATION_LIMIT",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R127 theory note §6",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r127_4",
+      "conclusion": "R127:P4",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R127 theory note §7",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "r127_5",
+      "conclusion": "R127:P5",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R127 theory note §8",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "a38",
+      "conclusion": "A:UCTII_EXP",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R127 theory note §8; A Appendix C; B §5",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "n128_1",
+      "conclusion": "N128:DET_JOIN",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R128 joint-state derivation §2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "n128_2",
+      "conclusion": "N128:MARKOV_JOIN",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R128 joint-state derivation §3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "n128_3",
+      "conclusion": "N128:JOINT_CRITERION",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R128 joint-state derivation §4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "n128_4",
+      "conclusion": "N128:INDEPENDENCE_SUFFICES",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R128 joint-state derivation §4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "n128_5",
+      "conclusion": "N128:SEPARATION",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R128 joint-state derivation §5",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "d129_bundled",
+      "conclusion": "D:F1",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "D §3; R96; R129 §2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "d129_direct",
+      "conclusion": "D:F2",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "D §3; R96; R129 §2",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "d129_payoff",
+      "conclusion": "D:PAYOFF",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "D §4; R96D §5",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "d129_marginal_counter",
+      "conclusion": "D:F3",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "D §4; R96D §§3–5",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "d129_value_gap",
+      "conclusion": "D:VALUE_GAP",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "D §4; R96D §§3–4; C P7",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "d129_frechet",
+      "conclusion": "D:FRECHET",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "R96D §6; R129 §3",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "d129_grid",
+      "conclusion": "D:GRID_BOUND",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "D §§7–8; R99 §4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "d129_separable",
+      "conclusion": "D:SEPARABLE",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "D §7; R99 §§3–4",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    },
+    {
+      "rule_id": "d129_uct",
+      "conclusion": "D:UCT_INTERPRETATION",
+      "review": "MANUAL_CONDITIONAL_REVIEW",
+      "source": "D §11; A C1-OI",
+      "scope": "Stated argument/dependencies checked; physical premises not independently established."
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-# Unified formal-map audit — R130
+# Unified formal-map audit — R129
 
 ## Verdict
 
@@ -91,18 +91,3 @@ Reading covered the full D manuscript, original map, published audit and claims;
 Exact checks enumerate the finite coefficient grid and the matched-marginal decision witness. Manual proofs establish the general linear reconstruction, binary payoff expansion, Fréchet interval, additive cancellation and Lipschitz extension under their declared premises. Mechanical graph checks establish only reference/dependency bookkeeping and exact source identity. They are not a proof assistant, an exhaustive audit of every sentence, or physical validation.
 
 See [D integration proof audit](records/R129_Four_Paper_Integration_20261006/R129_Integration_and_Proof_Audit.md), [complete current ledger](records/R129_Four_Paper_Integration_20261006/PROOF_LEDGER.md), [source manifest](records/R129_Four_Paper_Integration_20261006/SOURCE_MANIFEST.json) and [validation](records/R129_Four_Paper_Integration_20261006/VALIDATION_LOG.md). R128 originals and baseline map snapshots remain unchanged. All future work uses this four-paper map. T2 OPEN; C3 NOT_TESTED.
-
-## R130: second review and durable foundation
-
-All 106 rule entries were re-examined at the statement/premise/proof-ledger level. Targeted primary-source rereading and review limits are recorded in [SECOND_REVIEW.md](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md); the nine B theory-specific bridges retain their explicit source-fidelity obligations. No contradiction requiring withdrawal of the reviewed core conditional arguments was found. Two documentation issues were repaired:
-
-| ID | Finding | Repair |
-|---|---|---|
-| F20 | The graph abbreviated R127's shared external b/q condition, risking application to marginal C when the decoder uses (C,B) | Restore common supported b,q and conditional errors/laws; otherwise require the full joint cut. Two node records and one rule amended with IDs retained; original theorem unchanged |
-| F21 | R129's readable node ledger omitted the graph's explicit `scope` fields | Render all 13 existing scope fields, source-ID/evidence metadata and amendment notes. No underlying graph premise is removed or newly invented |
-
-The fair-mask counterexample gives marginal internal TV=0 but conditional/joint cut TV=1 with perfect recovery, demonstrating why F20 matters. Finite deterministic-composition and decision-value checks retain image restrictions, ties and zero-gain cases. Their finite verification is not a general proof or an empirical measurement. The current graph remains 236 nodes / 106 rules.
-
-The baseline is preserved under records/R130_Formal_Foundation_Second_Review_20261006/baseline; R129 handoff/index snapshots are also retained. Root MEMORY.md records the user's map-first/theory-first instruction, version basis, exact boundaries, novelty attribution and startup sequence; AGENTS.md requires reading it. This is a project memory file, not a claim of an unavailable hidden account-memory update.
-
-Review status: suitable for continued conditional theoretical work after these repairs. No declaration that all physical premises, all external literature or every sentence is verified. T2 OPEN; C3 NOT_TESTED; independent negative valence OPEN. Published source bytes and all previous weak/negative results remain unchanged.
