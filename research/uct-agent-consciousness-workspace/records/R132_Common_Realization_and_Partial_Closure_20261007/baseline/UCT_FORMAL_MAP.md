@@ -1,6 +1,6 @@
-# UCT A–B–C–D unified formal map — R132
+# UCT A–B–C–D unified formal map — R131
 
-**Canonical working map, revision R132-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R132. It does not supersede or edit the published papers.
+**Canonical working map, revision R131-v1.0, 6 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R131. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
@@ -21,7 +21,7 @@ A's 78-node graph and B's historical 43-node map are preserved as sources. B's o
 
 ## 2. How to read an implication
 
-The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **262 nodes and 119 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R132_Common_Realization_and_Partial_Closure_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
+The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **249 nodes and 112 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R131_Theorem_Synthesis_and_Archive_20261006/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
 
 - All premises inside one rule's **all_of** must hold together.
 - Separate rules concluding the same node are alternative sufficient routes.
@@ -205,22 +205,7 @@ These are elementary conditional results joining C's fiber criterion, D's target
 
 Recovered sources include 47 overlapping historical regression families and the 38 consecutive X01–X38 cases. A raw thousands-entry inventory has not been recovered and counted. PLT §§753–755 already prove parity-based marginal blindness; old results must not be presented as new. TA16's published edition explicitly declines to certify the archive total. Older neutral-framework zombie/existence alternatives require migration under current A:C1/U1; original documents remain unchanged.
 
-## 9. R132: common realization and partial controlled interfaces
-
-[Complete proof](records/R132_Common_Realization_and_Partial_Closure_20261007/R132_Common_Realization_Theorems.md), [research assessment](records/R132_Common_Realization_and_Partial_Closure_20261007/RESEARCH_UPDATE_ZH.md), [exact checks](records/R132_Common_Realization_and_Partial_Closure_20261007/EXACT_CHECK.json).
-
-| Stable result | Content | Scope |
-|---|---|---|
-| R132:HALL / DEFICIT | A joint unit-slot assignment exists iff every task coalition has enough eligible slots; maximum completion is n minus the largest Hall deficit | Classical matching; no omitted physical constraints |
-| R132:HIGH_ORDER | n tasks sharing n-1 universal slots realize every proper coalition, but not the full one; marginal completion 1-1/n can coexist with zero joint completion | Specified random-omission counterexample |
-| R132:PARTIAL_CLOSURE | A partial stochastic quotient requires both the same enabled menu and the same joint next-summary/output law in each fiber | Every represented state and fixed operation/scheduler |
-| R132:PROBE_CERTIFICATE | R131 separating probes on Z x O certify the joint law after enabledness is separately preserved | Exact full-rank expectations; not separate marginal probes |
-| R132:TWO_OBSTRUCTIONS | Matching responses on common actions does not repair different menus; matching state/output marginals does not repair different joint laws | Two explicit countermodels |
-| R132:REFINEMENT | Split by menus and joint block/output masses to obtain the coarsest stable refinement retaining P0 | Finite fixed model; no useful compression guaranteed |
-
-R126 already flagged the partial-operation obligation; R132 now proves and instantiates it. Matching, bisimulation and refinement are established mathematics. These are project-level connections, not a new consciousness existence criterion or a proof of actual physical grounding.
-
-## 10. Open obligations and next derivation
+## 9. Open obligations and next derivation
 
 Keep the following open rather than treating them as implied edges:
 
@@ -231,9 +216,9 @@ Keep the following open rather than treating them as implied edges:
 - Structural experiential interpretation → a familiar phenomenal label, valence or scalar richness.
 - Biological/AI decoder similarity → full mechanism correspondence or T2 closure.
 
-R132 supplies a unit-slot common-realization certificate and a finite partial stochastic interface criterion. General multi-resource scheduling and actual implementation adequacy remain open. Next: distinguish a separate successful policy for each possible mechanism from one observation-admissible policy that works across a persistent uncertain mechanism. Define observation access, adaptation and model coupling before deriving. This remains theory-first work; no empirical run is queued.
+R131 now supplies a finite probe-span/rank connection between D's payoff-relative sufficiency and dynamic sufficiency. The next theoretical task extends **N128:JOINT_CRITERION** and **R127's support alternatives** to resource-compatible joint use: define the operation schedule, shared carriers, allowed concurrency, actual boundary and output law; derive which coordination distinctions must be retained. This is still theory-first work. No new empirical run is queued.
 
-## 11. Mandatory future-map protocol
+## 10. Mandatory future-map protocol
 
 Read AGENTS.md, MEMORY.md and the latest handoff first. Before accepting any new derivation:
 
@@ -249,5 +234,3 @@ Machine checks have a narrow scope; [validation output](records/R128_Unified_For
 Current four-paper [graph/source checks](records/R129_Four_Paper_Integration_20261006/MAP_CHECK.json) and [exact D algebra checks](records/R129_Four_Paper_Integration_20261006/EXACT_MATH_CHECK.json) supplement the preserved R128 checks. Source evidence is not freshly rerun by integrating its nodes.
 
 Current R130 [dependency/source checks](records/R130_Formal_Foundation_Second_Review_20261006/MAP_CHECK.json) and [targeted boundary checks](records/R130_Formal_Foundation_Second_Review_20261006/BOUNDARY_CHECK.json) supersede the current-state role of older check reports; historical outputs remain unchanged.
-
-Current R132 graph/source checks: [MAP_CHECK.json](records/R132_Common_Realization_and_Partial_Closure_20261007/MAP_CHECK.json). Earlier reports above are historical snapshots.

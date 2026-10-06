@@ -1,0 +1,15 @@
+{
+  "round": "R132",
+  "revision": "R132-v1.0",
+  "date": "2026-10-07",
+  "timezone": "Asia/Shanghai",
+  "base_commit": "5b1eb8b5425e9505582aa44e0ed3f96ba4aea827",
+  "nodes": 262,
+  "rules": 119,
+  "new_nodes": 13,
+  "new_rules": 7,
+  "proof_status": "Manual conditional proofs; classical mathematical ingredients; project-level extension",
+  "T2": "OPEN",
+  "C3_intervention_transport": "NOT_TESTED",
+  "valence_bridge": "OPEN"
+}

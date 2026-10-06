@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R132-v1.0",
-  "date": "2026-10-07",
+  "revision": "R131-v1.0",
+  "date": "2026-10-06",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "5b1eb8b5425e9505582aa44e0ed3f96ba4aea827",
+  "base_commit": "e9346dee824b8db58a648d3f1fba091c8151e7e7",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -2037,123 +2037,6 @@
       "source": "R131 R131_Probe_Completeness_Theorem.md §7",
       "status": "MANUAL_CONDITIONAL_PASS",
       "scope": "Finite outcome set; fixed exact scalar expectation probes and normalization; universal identification over the full probability simplex. Not complete physical or experiential identification."
-    },
-    {
-      "id": "R132:SLOT_MODEL",
-      "kind": "DEFINITION",
-      "label": "Unit-slot common realization model",
-      "statement": "Tasks I have eligible slot sets N(i); admissible partial executions are exactly injective assignments on subsets of I. For actual use, matching must faithfully represent the entire within-horizon execution constraint.",
-      "source": "R132_Common_Realization_Theorems.md §2",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "One fixed horizon/boundary/port model; unit tasks, one indivisible slot per served task, one task per slot, no other constraints. Actual implementation needs independent adequacy; no general multi-resource scheduling or experience criterion."
-    },
-    {
-      "id": "R132:HALL",
-      "kind": "THEOREM",
-      "label": "Hall common-witness certificate",
-      "statement": "All requested tasks have a common schedule iff |N(J)|>=|J| for every subset J of I. This is Hall's classical theorem.",
-      "source": "R132_Common_Realization_Theorems.md §3",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "One fixed horizon/boundary/port model; unit tasks, one indivisible slot per served task, one task per slot, no other constraints. Actual implementation needs independent adequacy; no general multi-resource scheduling or experience criterion."
-    },
-    {
-      "id": "R132:DEFICIT",
-      "kind": "THEOREM",
-      "label": "Exact resource deficit and completion bound",
-      "statement": "delta=max_J(|J|-|N(J)|); maximum completed tasks=n-delta. Every randomized legal schedule satisfies sum_i P(X_i=1)<=n-delta and min_(i in J)P(X_i=1)<=|N(J)|/|J| for nonempty J.",
-      "source": "R132_Common_Realization_Theorems.md §3",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "One fixed horizon/boundary/port model; unit tasks, one indivisible slot per served task, one task per slot, no other constraints. Actual implementation needs independent adequacy; no general multi-resource scheduling or experience criterion. X_i means valid scheduled completion, not correctness by guessing."
-    },
-    {
-      "id": "R132:UNIFORM_BOTTLENECK",
-      "kind": "MODEL",
-      "label": "n tasks share n-1 universal slots",
-      "statement": "n>=3; all task neighbor sets equal the same n-1 slots. Randomized protocol uniformly omits one task and executes the rest.",
-      "source": "R132_Common_Realization_Theorems.md §4",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "One fixed horizon/boundary/port model; unit tasks, one indivisible slot per served task, one task per slot, no other constraints. Actual implementation needs independent adequacy; no general multi-resource scheduling or experience criterion."
-    },
-    {
-      "id": "R132:HIGH_ORDER",
-      "kind": "THEOREM",
-      "label": "All proper coalitions and high marginals do not certify joint success",
-      "statement": "In the specified bottleneck, every proper task subset is executable, the full set is not; each task completes with probability 1-1/n while all-at-once completion has probability zero.",
-      "source": "R132_Common_Realization_Theorems.md §4",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "One fixed horizon/boundary/port model; unit tasks, one indivisible slot per served task, one task per slot, no other constraints. Actual implementation needs independent adequacy; no general multi-resource scheduling or experience criterion. Existential family, not a statement about every high-accuracy system."
-    },
-    {
-      "id": "R132:PARTIAL_MODEL",
-      "kind": "DEFINITION",
-      "label": "Finite partial stochastic interface",
-      "statement": "S,O finite nonempty; U finite; enabled E(s); fixed kernel L_a(s;s_prime,o) normalized only for a in E(s); p:S->Z onto. Scheduler selection is fixed or remains explicitly indexed.",
-      "source": "R132_Common_Realization_Theorems.md §5",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject."
-    },
-    {
-      "id": "R132:PARTIAL_CLOSURE",
-      "kind": "THEOREM",
-      "label": "Enabledness plus joint law is exact quotient criterion",
-      "statement": "An exact p quotient exists iff equal-summary states have equal enabled menus and, for every enabled action, equal joint p(next-state)/output laws. Shared summary/output-history policies preserve finite-horizon histories, halting at empty menus.",
-      "source": "R132_Common_Realization_Theorems.md §6",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. Policy preservation excludes hidden-state-dependent policies."
-    },
-    {
-      "id": "R132:PROBE_SETUP",
-      "kind": "ASSUMPTION",
-      "label": "Joint separating probes and common enabled menu",
-      "statement": "In the partial model, |Z x O|>=2; fix full-column-rank exact expectation probes with normalization on Z x O; menus agree within every p fiber.",
-      "source": "R132_Common_Realization_Theorems.md §6",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. Finite statistical estimates are not exact expectations. Singleton outcome alphabet is handled directly by the closure theorem."
-    },
-    {
-      "id": "R132:PROBE_CERTIFICATE",
-      "kind": "THEOREM",
-      "label": "R131 probes certify the law half of the partial interface",
-      "statement": "Under PROBE_SETUP, within-fiber matching of all next-summary/output probe expectations for every enabled action is equivalent to exact interface closure.",
-      "source": "R132_Common_Realization_Theorems.md §6",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. Separate state/output marginal probes can miss their dependence."
-    },
-    {
-      "id": "R132:WITNESS_MODELS",
-      "kind": "MODEL",
-      "label": "Independent failures of menu and joint-law preservation",
-      "statement": "Availability: hidden s0/s1 have 2/3 universal slots for 3 tasks, constant summary/output and self transitions. Joint law: S={0,1}^2, p(x,b)=x, one common action, x_next=U, b_next=b, output=U XOR b with fresh fair U.",
-      "source": "R132_Common_Realization_Theorems.md §7",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. Specified mathematical examples; parity idea already in R128/PLT."
-    },
-    {
-      "id": "R132:TWO_OBSTRUCTIONS",
-      "kind": "THEOREM",
-      "label": "Availability and joint-law conditions are independently necessary",
-      "statement": "The availability model agrees on every common enabled response but has different full-task enabledness. The joint-law model has the same menu and separate next-state/output marginals but within-fiber joint TV=1.",
-      "source": "R132_Common_Realization_Theorems.md §7",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject."
-    },
-    {
-      "id": "R132:REFINEMENT_SETUP",
-      "kind": "ASSUMPTION",
-      "label": "Fixed retained partition and exact iterative signatures",
-      "statement": "A fixed initial partition P0 of finite S is given. Split each block by E(s) and all L_a(s;B,o) for current blocks B and outputs o, with the same fixed partial model throughout.",
-      "source": "R132_Common_Realization_Theorems.md §8",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. No model uncertainty or representative-dependent support-only omission."
-    },
-    {
-      "id": "R132:REFINEMENT",
-      "kind": "THEOREM",
-      "label": "Unique coarsest exact retained-interface refinement",
-      "statement": "Signature splitting terminates after at most |S|-|P0| strict steps at the unique coarsest stable refinement of P0 preserving menus and joint block/output probabilities.",
-      "source": "R132_Common_Realization_Theorems.md §8",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. Compression can be trivial; this is not a minimal physical circuit or model-independent state."
     }
   ],
   "rules": [
@@ -3644,100 +3527,6 @@
       "source": "R131 R131_Probe_Completeness_Theorem.md §7",
       "kind": "DEDUCTIVE",
       "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r132_hall",
-      "all_of": [
-        "R132:SLOT_MODEL"
-      ],
-      "conclusion": "R132:HALL",
-      "statement": "Every coalition has enough eligible slots iff a joint assignment exists.",
-      "proof_sketch": "Necessity counts assigned neighbors. Induct: match a tight proper coalition and its remainder, or remove any task/neighbor when every proper coalition has a surplus.",
-      "source": "R132_Common_Realization_Theorems.md §3",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r132_deficit",
-      "all_of": [
-        "R132:SLOT_MODEL",
-        "R132:HALL"
-      ],
-      "conclusion": "R132:DEFICIT",
-      "statement": "The worst Hall deficit is exactly the number of unavoidable unmatched tasks.",
-      "proof_sketch": "Any matching misses at least delta tasks in a deficient coalition. Adding delta universal dummy slots restores Hall; remove their matches. Take expectations for completion bounds.",
-      "source": "R132_Common_Realization_Theorems.md §3",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r132_high",
-      "all_of": [
-        "R132:SLOT_MODEL",
-        "R132:DEFICIT",
-        "R132:UNIFORM_BOTTLENECK"
-      ],
-      "conclusion": "R132:HIGH_ORDER",
-      "statement": "Every proper coalition succeeds although the full set cannot; randomized omission gives high marginals and zero joint success.",
-      "proof_sketch": "All subsets of size <=n-1 inject into slots. The full set has deficit one. Uniform omission misses each named task on exactly one of n equally likely branches.",
-      "source": "R132_Common_Realization_Theorems.md §4",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r132_closure",
-      "all_of": [
-        "R132:PARTIAL_MODEL",
-        "C:P2_COORD"
-      ],
-      "conclusion": "R132:PARTIAL_CLOSURE",
-      "statement": "Menu and joint-kernel factorization are jointly necessary and sufficient for the declared quotient.",
-      "proof_sketch": "Apply fiber constancy to the menu map and each enabled joint row law. Necessity follows from one abstract value per summary; sufficiency defines representative-independent menus and kernels. Induct over shared observable-history policies.",
-      "source": "R132_Common_Realization_Theorems.md §6",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r132_probes",
-      "all_of": [
-        "R132:PARTIAL_MODEL",
-        "R132:PARTIAL_CLOSURE",
-        "R132:PROBE_SETUP",
-        "R131:COMPLETE_LAW"
-      ],
-      "conclusion": "R132:PROBE_CERTIFICATE",
-      "statement": "The full-rank joint probe interface supplies the law clause after menu equality is separately met.",
-      "proof_sketch": "R131 injectivity on probability laws on Z x O makes equal probe expectations equivalent to equal joint laws; combine with exact enabledness.",
-      "source": "R132_Common_Realization_Theorems.md §6",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r132_obstructions",
-      "all_of": [
-        "R132:PARTIAL_CLOSURE",
-        "R132:WITNESS_MODELS"
-      ],
-      "conclusion": "R132:TWO_OBSTRUCTIONS",
-      "statement": "Neither menu preservation nor separate next-state/output laws can replace the full quotient criterion.",
-      "proof_sketch": "The full three-task request is enabled only with three slots. The hidden-bit joint witness yields diagonal versus off-diagonal next-state/output laws while both marginals are fair.",
-      "source": "R132_Common_Realization_Theorems.md §7",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r132_refine",
-      "all_of": [
-        "R132:PARTIAL_MODEL",
-        "R132:PARTIAL_CLOSURE",
-        "R132:REFINEMENT_SETUP"
-      ],
-      "conclusion": "R132:REFINEMENT",
-      "statement": "Finite signature refinement gives the unique coarsest exact refinement preserving the initial partition.",
-      "proof_sketch": "Each strict step adds blocks. A stable refining partition cannot be split at any stage because coarse block sums are sums of its equal finer block masses and menus agree. The fixed point is stable and coarser than every such partition.",
-      "source": "R132_Common_Realization_Theorems.md §8",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
     }
   ],
   "context_links": [
@@ -3900,31 +3689,6 @@
       "from": "R131:CLOSURE",
       "to": "D:UCT_INTERPRETATION",
       "relation": "Finite closure does not discharge the independent actual complete-organization premise"
-    },
-    {
-      "from": "B:VIEW",
-      "to": "R132:SLOT_MODEL",
-      "relation": "Time/resource/port grounding discipline; not a proof of actual schedule adequacy"
-    },
-    {
-      "from": "R126:P2",
-      "to": "R132:PARTIAL_CLOSURE",
-      "relation": "Completes the earlier partial-operation caveat in a finite stochastic joint-output setting"
-    },
-    {
-      "from": "R126:P4",
-      "to": "R132:REFINEMENT",
-      "relation": "Existing deterministic refinement generalized within this project; classical probabilistic refinement is prior art"
-    },
-    {
-      "from": "D:PAYOFF",
-      "to": "R132:TWO_OBSTRUCTIONS",
-      "relation": "Target-relative and joint-dependence motivation, not a new payoff decomposition"
-    },
-    {
-      "from": "R132:HIGH_ORDER",
-      "to": "C:P1",
-      "relation": "A grounded difference in well-defined joint capability can enter C:P1; no scalar richness or existence gate follows"
     }
   ],
   "prohibited_inferences_D": [
@@ -3966,11 +3730,6 @@
       "id": "R131-ATTR-02",
       "prior_source": "TA-TR-2026-16 and PLT ledger §§753–755; D §4/R96D",
       "current_scope": "High-order marginal blindness and binary payoff insufficiency predate this round. R131 supplies a general finite probe-span/rank certificate linked to controlled closure; elementary mathematics, no historical novelty claim."
-    },
-    {
-      "id": "R132-ATTR-03",
-      "prior_source": "Hall 1935; Givan/Dean/Greig 2003; R126 partial-operation caveat; R128/PLT parity; nearby Takahashi 2026 abstract",
-      "current_scope": "Finite resource obstruction plus complete partial interface certificate, connected to R131. No historical novelty for matching, bisimulation, current-versus-reusable-state distinction or partition refinement. Actual support and general scheduling remain open."
     }
   ],
   "audit_amendments": [

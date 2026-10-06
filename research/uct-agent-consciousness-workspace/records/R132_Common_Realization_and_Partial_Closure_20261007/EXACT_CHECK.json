@@ -1,0 +1,120 @@
+{
+  "all_pass": true,
+  "named_checks": [
+    {
+      "name": "Hall equivalence on all 512 three-by-three bipartite graphs",
+      "pass": true
+    },
+    {
+      "name": "exact matching deficit on those 512 independent enumerations",
+      "pass": true
+    },
+    {
+      "name": "n=3: exact marginal completion and zero joint completion",
+      "pass": true
+    },
+    {
+      "name": "n=4: exact marginal completion and zero joint completion",
+      "pass": true
+    },
+    {
+      "name": "n=100: exact marginal completion and zero joint completion",
+      "pass": true
+    },
+    {
+      "name": "three tasks: every proper coalition fits two slots but full coalition does not",
+      "pass": true
+    },
+    {
+      "name": "availability witness differs only on the full three-task request",
+      "pass": true
+    },
+    {
+      "name": "availability witness cannot remain in a single quotient block",
+      "pass": true
+    },
+    {
+      "name": "joint witness preserves both separate marginals",
+      "pass": true
+    },
+    {
+      "name": "joint witness has exact TV one",
+      "pass": true
+    },
+    {
+      "name": "joint-law refinement retains the hidden parity distinction",
+      "pass": true
+    },
+    {
+      "name": "delayed resource/menu distinctions propagate across multiple rounds",
+      "pass": true
+    },
+    {
+      "name": "nontrivial stable compression keeps equivalent states three and four",
+      "pass": true
+    },
+    {
+      "name": "all 52 candidate partitions covered",
+      "pass": true
+    },
+    {
+      "name": "every stable partition refines the computed quotient",
+      "pass": true
+    }
+  ],
+  "count": 15,
+  "matching_graphs": 512,
+  "candidate_partitions": 52,
+  "stable_partitions_in_witness": 2,
+  "refinement_history": [
+    [
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    ],
+    [
+      [
+        0
+      ],
+      [
+        1,
+        2,
+        3,
+        4
+      ]
+    ],
+    [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2,
+        3,
+        4
+      ]
+    ],
+    [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3,
+        4
+      ]
+    ]
+  ],
+  "scope": "Exact finite boundary checks, not general proof, empirical data or subjective-experience measurement."
+}

@@ -118,16 +118,3 @@ Review status: suitable for continued conditional theoretical work after these r
 - F25, new proof scope: rank necessity concerns all probability laws and exact linear expectation probes, not every constrained law family. A particular deficient interface can still identify a selected target or close a particular kernel. Not every fiber has TV diameter one. Argmax identification does not require every score to be identified. The decision prior/payoffs/ports are explicit; stability requires a supplied inverse and true error bound.
 
 The checks validate exact witnesses, source identities and graph preservation, not all archived claims or consciousness-specific physical premises. T2 and valence remain open. No new empirical data, training, DOI or paper release.
-
-
-## R132 — resource compatibility and partial interface closure
-
-7 October 2026 (Asia/Shanghai). Added 13 nodes and 7 rules; all 249 prior nodes and 112 rules preserved without amendment. See [proof](records/R132_Common_Realization_and_Partial_Closure_20261007/R132_Common_Realization_Theorems.md).
-
-- F26: A common operation law presupposes enabledness. R126 mentioned this, while R131's proved domain used total operations. R132 supplies the explicit partial-interface theorem without changing those earlier claims.
-- F27: Separate output and successor-summary marginals need not preserve their joint law. The parity witness is credited to existing R128/PLT reasoning and applied to the enlarged interface.
-- F28: Hall feasibility is exact only for the declared unit-slot model. Omitted interference, durations, precedences, resources or scheduler restrictions block physical promotion. An existing assignment alone does not determine the output kernel.
-- F29: Coarsest refinement is proved for the fixed exact model with preserved menus and all joint masses, not model uncertainty or representative-dependent positive-support-only updating.
-- F30: Classical matching and probabilistic refinement, plus nearby 2026 reusable-state work, preclude broad historical novelty claims. The project increment is the explicit connection and missing-premise repair, not a new consciousness axiom.
-
-New proof statements were manually reviewed. Exact checks cover every three-by-three task-slot graph (512), resource witnesses, independent menu/joint-law failures and all 52 partitions of a five-state refinement witness. These are mathematical boundary checks, not empirical confirmation. C1/U1 unchanged, T2 OPEN, C3 NOT_TESTED, independent valence OPEN.

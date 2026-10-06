@@ -1,0 +1,11 @@
+# R132 validation and review record
+
+7 October 2026, Asia/Shanghai. General proofs are manual conditional proofs.
+
+- validate_formal_map.py: 111 checks passed. Current graph 262 nodes / 119 rules; all 249 R131 nodes and 112 rules preserved field-for-field. All four pinned paper byte counts, SHA-256 hashes and Git blob identities match. All 39 explicit node scope fields appear in the current readable ledger. The seven new mathematical conclusions have no C1 dependency.
+- check_common_realization.py: 15 named checks passed. It independently enumerates legal partial assignments for all 512 three-task/three-slot graphs and compares maximum cardinality against Hall/deficit formulas. It checks the exact random-omission witnesses, separate availability and joint-law counterexamples, and a three-round refinement example with a nontrivial surviving two-state block. All 52 partitions of that five-state example are compared to verify the coarsest conclusion for the example.
+- Calculations use standard-library exact Fraction arithmetic. No numerical fitting, dependency install, biological analysis or AI training was performed. The finite checks do not replace the proofs for general finite sets.
+- Review boundaries: matching is valid only for the unit-slot constraint class; actual schedule feasibility and fixed scheduler interpretation are separate premises. Partial closure retains enabledness and the joint successor-summary/output law, not just marginals. Finite coarsest refinement concerns the fixed full state model and exact criterion; it need not compress, and does not imply a model-independent minimal state.
+- Source scope: current project entry points, relevant C and B source sections, D/R96D interface, R126 caveat and recovered X01 were read. Hall publisher metadata and relevant original Givan/Dean/Greig PDF sections were checked. Takahashi 2026 was reviewed only at the author/SSRN abstract level; it is a prior-art lead, not a fully verified comparative theorem. No claim of mathematical historical novelty.
+
+No substantive proof-test failure was observed. No old source or evidence was altered. C1/U1 remain unchanged; T2, intervention transport and valence are not closed by this round.
