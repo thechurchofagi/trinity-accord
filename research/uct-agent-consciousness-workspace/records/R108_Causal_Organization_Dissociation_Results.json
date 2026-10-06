@@ -1,0 +1,43 @@
+{
+  "round": "R108",
+  "inputs": [[0,0],[0,1],[1,0],[1,1]],
+  "target": [0,1,1,0],
+  "baseline": {
+    "system_A": [0,1,1,0],
+    "system_B": [0,1,1,0],
+    "behavior_equal": true,
+    "task_accuracy_A": 1.0,
+    "task_accuracy_B": 1.0
+  },
+  "internal_intervention_signatures": {
+    "system_A": {"xor=0":"0000","xor=1":"1111"},
+    "system_B": {
+      "a=0":"0000",
+      "a=1":"1110",
+      "b=0":"0111",
+      "b=1":"0000",
+      "nb=0":"0000",
+      "nb=1":"0111",
+      "y=0":"0000",
+      "y=1":"1111"
+    },
+    "unique_A": ["0000","1111"],
+    "unique_B": ["0000","0111","1110","1111"],
+    "B_signatures_not_in_A": ["0111","1110"]
+  },
+  "report_head_surgery": {
+    "core_task_output": [0,1,1,0],
+    "identity_report": [0,1,1,0],
+    "inverted_report": [1,0,0,1],
+    "task_output_unchanged": true,
+    "report_disagreement_fraction": 1.0
+  },
+  "reverse_report_control": {
+    "constant_report_XOR_core": [0,0,0,0],
+    "constant_report_zero_core": [0,0,0,0],
+    "reports_equal": true,
+    "xor_core_accuracy": 1.0,
+    "zero_core_accuracy": 0.5
+  },
+  "interpretation": "Natural task equivalence does not identify interventional causal equivalence; report and selected task capability can be dissociated in both directions. Not a consciousness measurement."
+}

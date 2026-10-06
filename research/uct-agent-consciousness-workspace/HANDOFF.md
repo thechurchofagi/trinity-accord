@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R107 生物/AI最弱跨底物组织签名；新窗口先读 records/R107_Weakest_Cross_Substrate_Organizational_Signature_20261006.md 与R107交接，再按需回读R106。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R108 可执行causal-organization dissociation与report-head surgery；新窗口先读 records/R108_Executable_Causal_Organization_Dissociation_20261006.md 与R108交接，再按需回读R106/R107。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -513,3 +513,12 @@ Projection Lemma：任何固定条件下良定义的K投影F都有“F不同 => 
 区分behavior/capability/role/constitutive四类等价。相同功能与benchmark不等于相同实际组织。direct-XOR与OR/AND分解XOR的完整truth table完全一致但因果/干预图不同，作为R108执行实验的冻结见证。
 
 下一步R108做可执行causal-organization dissociation和report-head surgery。
+
+
+## R108 — 2026-10-06：同功能不同组织 + report/core双向解离
+
+direct XOR与decomposed XOR在完整4输入任务上100%行为相同，但内部节点clamp产生不同intervention signatures；decomposed系统出现0111和1110，direct系统内部clamp只能0000/1111。由此冻结observational task equivalence与interventional organizational equivalence之分。
+
+固定task core更换report head可使task完全不变而report 100%改变；固定constant report也可掩盖task accuracy 1.0与0.5的差异。report与能力不是同一轴。
+
+下一步R109做生物natural-experiment matrix。
