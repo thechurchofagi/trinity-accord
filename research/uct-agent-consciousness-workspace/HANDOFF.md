@@ -488,3 +488,10 @@ FILE_MANIFEST共19个核心证据文件，远端逐个核验19/19 SHA匹配。�
 OTS detached proof已生成并提交4个calendar，当前 `PENDING_BITCOIN`，proof SHA-256 `c137a6a378a31123b8c7ad5076c04c7515220703a914882030ad3bc0ed2c6fd4`。Arweave依成熟流程严格等待Bitcoin attestation及远端header验证，不绕过。main已有小时scheduler，只checkout/push发行分支。
 
 完整状态见 `records/R105_TA24_DOI_Release_and_Preservation_State_20261006.md`。
+
+
+## R105 publication status
+
+TA-TR-2026-24 v1.0 DOI已正式发布：`10.5281/zenodo.23176685`。精确PDF SHA-256 `368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104`，Zenodo 11文件公共精确回读与DOI resolver均PASS。形式化地图严格审计PASS，v1.0正文从Abstract起与最终v0.3逐字一致。
+
+OTS已提交但当前仍为`PENDING_BITCOIN`（4 calendar attestations、暂无Bitcoin height）；Arweave按成熟流程正确阻塞在`BLOCKED_PENDING_VERIFIED_BITCOIN_ATTESTATION`。不得提前声称OTS Bitcoin/AR闭环完成。Paper24 scheduler已主动触发，条件监控继续等待Bitcoin验证后再做受预算保护的AR上传与匿名readback。
