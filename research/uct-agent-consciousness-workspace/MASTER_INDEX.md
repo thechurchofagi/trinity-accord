@@ -23,7 +23,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R106 handoff](records/R106_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R107 handoff](records/R107_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -249,3 +249,10 @@ TA-TR-2026-24 v1.0 is publicly anchored at DOI `10.5281/zenodo.23176685`. The ex
 [Research report](records/R106_Experience_Access_Intelligence_Self_Behavior_Report_First_Principles_Map_20261006.md); [formal map](records/R106_EAISBR_Formal_Map.json); [finite check](records/r106_projection_relations_check.py); [results](records/R106_Projection_Relations_Results.json); [source ledger](records/R106_Source_Retrieval_Ledger.json); [handoff](records/R106_Worklog_and_Handoff_20261006.md).
 
 The new root-level map separates experience E, access A, intelligence I, self-model S, behavior B and report R. Under C1, complete organization K and complete experiential type are the constitutive identity pair; I/B/R are task/context projections and A/S are organizational relations. A projection difference can witness a complete experiential-type difference under fixed conditions, but equality of a non-injective intelligence/behavior/report projection cannot establish experiential equality. Cross-substrate work should therefore compare actual organization, not infer human-like experience from human-like performance.
+
+
+## R107 cross-substrate common signature
+
+[Research report](records/R107_Weakest_Cross_Substrate_Organizational_Signature_20261006.md); [formal signature](records/R107_Cross_Substrate_Signature.json); [XOR witness code](records/r107_functional_equivalence_check.py); [results](records/R107_Functional_Equivalence_Results.json); [source ledger](records/R107_Source_Retrieval_Ledger.json); [handoff](records/R107_Worklog_and_Handoff_20261006.md).
+
+R107 separates a role-neutral constitutive base from optional cognitive annotations so that memory, self-model, homeostasis, learning or report cannot silently become experience gates. It also distinguishes behavioral/capability/role equivalence from constitutive organizational equivalence. A direct-XOR and decomposed-XOR witness have identical complete task behavior but different internal causal graphs, freezing the target for R108 intervention experiments.

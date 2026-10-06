@@ -1,0 +1,91 @@
+{
+  "schema": "uct.cross-substrate-signature.v1",
+  "round": "R107",
+  "date": "2026-10-06",
+  "tier0": {
+    "name": "constitutive base",
+    "coordinates": [
+      {
+        "id": "C",
+        "meaning": "constituents, bearer boundary and incidence relations"
+      },
+      {
+        "id": "Z",
+        "meaning": "endogenous state space"
+      },
+      {
+        "id": "z_star",
+        "meaning": "distinguished current state/point"
+      },
+      {
+        "id": "X",
+        "meaning": "incoming boundary ports/inputs; may be empty"
+      },
+      {
+        "id": "U",
+        "meaning": "actual transition/update relations"
+      },
+      {
+        "id": "Y",
+        "meaning": "outgoing boundary effects/outputs; may be empty"
+      },
+      {
+        "id": "Pi",
+        "meaning": "physically meaningful intervention/reset/lesion ports"
+      },
+      {
+        "id": "order",
+        "meaning": "temporal/causal ordering"
+      }
+    ],
+    "experience_gate": false
+  },
+  "tier1": {
+    "name": "optional functional annotations",
+    "coordinates": [
+      {
+        "id": "M",
+        "meaning": "memory/temporal retention"
+      },
+      {
+        "id": "W",
+        "meaning": "predictive/world-model role"
+      },
+      {
+        "id": "S",
+        "meaning": "self/bearer model"
+      },
+      {
+        "id": "V",
+        "meaning": "evaluative/homeostatic control"
+      },
+      {
+        "id": "L",
+        "meaning": "learning/plasticity"
+      },
+      {
+        "id": "A",
+        "meaning": "action/control selection"
+      },
+      {
+        "id": "R",
+        "meaning": "report/communication"
+      }
+    ],
+    "experience_gate": false
+  },
+  "comparison_relations": [
+    "behavioral equivalence C-B",
+    "capability equivalence C-I",
+    "role equivalence C-R",
+    "constitutive organizational equivalence C-K"
+  ],
+  "implications": [
+    "complete C-K -> complete experiential-type equivalence under C1",
+    "selected C-K + justified commuting projection -> selected experiential-substructure equivalence",
+    "C-B alone does not imply C-K",
+    "C-I alone does not imply C-K",
+    "C-R alone does not imply C-K"
+  ],
+  "next_round": "R108 executable causal-organization dissociation"
+}

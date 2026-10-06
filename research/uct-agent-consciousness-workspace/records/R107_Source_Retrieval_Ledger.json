@@ -1,0 +1,41 @@
+{
+  "round": "R107",
+  "date": "2026-10-06",
+  "external_sources": [
+    {
+      "title": "A cybernetic framework for synthetic biological intelligence in the era of neural tissue engineering",
+      "venue": "npj Unconventional Computing",
+      "year": 2026,
+      "url": "https://www.nature.com/articles/s44335-026-00077-1",
+      "scope": "Abstract read; prior art for substrate-agnostic cybernetic comparison."
+    },
+    {
+      "title": "De-anthropomorphizing the mind: life as a cognitive spectrum in a unified framework for biological minds",
+      "venue": "Frontiers in Systems Neuroscience",
+      "year": 2026,
+      "url": "https://www.frontiersin.org/journals/systems-neuroscience/articles/10.3389/fnsys.2026.1730097/full",
+      "scope": "Abstract/introduction-level framing read; prior art for organizational cognition across biological scales."
+    },
+    {
+      "title": "Life-inspired interoceptive artificial intelligence for autonomous and adaptive agents",
+      "venue": "Nature Machine Intelligence",
+      "year": 2026,
+      "url": "https://www.nature.com/articles/s42256-026-01296-8",
+      "scope": "Abstract read; prior art for cross-substrate internal/external state factorization and homeostatic roles."
+    },
+    {
+      "title": "Can artificial systems become conscious?—Recursive embodied closure as an integrative framework",
+      "venue": "Frontiers in Psychology",
+      "year": 2026,
+      "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2026.1950309/full",
+      "scope": "High-level framework/figure context read; prior art for substrate-independent cognitive-role comparison."
+    }
+  ],
+  "internal_sources": [
+    "R106 first-principles E/A/I/S/B/R map",
+    "Paper A port-aware complete-signature constraints as preserved in project handoff",
+    "R65/R77 preservation and physical-port cautions as summarized in R82/HANDOFF"
+  ],
+  "novelty_status": "Substrate-neutral/cybernetic comparison is established prior art. R107's project-specific increment is the two-tier constitutive-vs-role separation under UCT no-gate constraints.",
+  "no_third_party_fulltexts_redistributed": true
+}

@@ -1,0 +1,16 @@
+{
+  "round": "R107",
+  "truth_table_equal": true,
+  "input_count": 4,
+  "system_A_graph": "x1,x2 -> XOR -> y",
+  "system_B_graph": "x1,x2 -> OR/AND -> AND(NOT) -> y",
+  "same_behavior_on_complete_binary_task": true,
+  "same_internal_constitutive_graph": false,
+  "rows": [
+    {"x1":0,"x2":0,"direct_xor":0,"or_node":0,"and_node":0,"decomposed_xor":0,"same_output":true},
+    {"x1":0,"x2":1,"direct_xor":1,"or_node":1,"and_node":0,"decomposed_xor":1,"same_output":true},
+    {"x1":1,"x2":0,"direct_xor":1,"or_node":1,"and_node":0,"decomposed_xor":1,"same_output":true},
+    {"x1":1,"x2":1,"direct_xor":0,"or_node":1,"and_node":1,"decomposed_xor":0,"same_output":true}
+  ],
+  "interpretation": "Functional/behavioral equivalence does not identify constitutive organizational equivalence. This is not a consciousness measurement."
+}

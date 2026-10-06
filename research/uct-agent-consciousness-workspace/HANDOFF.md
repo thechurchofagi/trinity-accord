@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R106 体验/访问/智能/自我/行为/报告第一性原理地图；新窗口先读 records/R106_Experience_Access_Intelligence_Self_Behavior_Report_First_Principles_Map_20261006.md 与R106交接，再按需回读R81/R82。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R107 生物/AI最弱跨底物组织签名；新窗口先读 records/R107_Weakest_Cross_Substrate_Organizational_Signature_20261006.md 与R107交接，再按需回读R106。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -504,3 +504,12 @@ OTS已提交但当前仍为`PENDING_BITCOIN`（4 calendar attestations、暂无B
 Projection Lemma：任何固定条件下良定义的K投影F都有“F不同 => 完整体验类型不同”，但“F相同 => 体验相同”只在F对现实域单射时成立。因此同行为、同报告、同能力一般不能证明同体验；能力真差异则在Paper C/NESIG条件下可推出完整体验类型差异。无标量richness同步律。
 
 精确有限witness与生物压力测试已保存。下一步R107构造最弱跨底物common signature，再R108做小型AI机制解离实验，不先做大模型自报告评分。
+
+
+## R107 — 2026-10-06：跨生物/AI的two-tier组织签名
+
+提出Tier0 constitutive base与Tier1 optional roles。Tier0只含实际部件/边界、状态、ports、更新、输出、干预和时间；Tier1才标记memory/world-model/self/value/learning/action/report，且允许缺失，绝不作为体验存在门槛。
+
+区分behavior/capability/role/constitutive四类等价。相同功能与benchmark不等于相同实际组织。direct-XOR与OR/AND分解XOR的完整truth table完全一致但因果/干预图不同，作为R108执行实验的冻结见证。
+
+下一步R108做可执行causal-organization dissociation和report-head surgery。
