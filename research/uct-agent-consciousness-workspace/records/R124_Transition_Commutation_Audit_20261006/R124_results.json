@@ -1,0 +1,215 @@
+{
+  "round": "R124",
+  "date": "2026-10-06",
+  "parent_commit": "2f358ac0cb29c4dddc53933fa709ca8aec03be1f",
+  "biology_source_commit": "bf55557992b84f6df4dfc6a924f291dfde7b976b",
+  "input": {
+    "sessions": 12,
+    "rats": 5,
+    "heldout_state_rows": 32656,
+    "adjacent_transitions": 29337,
+    "nonzero_increments": 22846,
+    "coordinate": "cumulative signed clicks (#R-#L)",
+    "transition": "delta e_t = e_(t+1)-e_t"
+  },
+  "prior_state_decoding_equal_rat_r2": {
+    "FOF": 0.05427688108125441,
+    "ADS": 0.03644883174286852
+  },
+  "transition_primary": {
+    "persistence_mse_pooled": 3.9776391587415207,
+    "FOF": {
+      "equal_rat_corr": 0.05705775872532568,
+      "equal_rat_skill_vs_persistence": -0.4755674679313301,
+      "equal_rat_nonzero_sign_accuracy": 0.4507194784225825,
+      "positive_skill_rats": 0,
+      "pooled": {
+        "transition_mse": 5.73160405330383,
+        "skill_vs_persistence": -0.4409562618840577,
+        "corr": 0.056297341908235925,
+        "sign_accuracy": 0.4690098923225072
+      },
+      "per_rat_skill": {
+        "A294": -0.20873240081008948,
+        "A297": -0.9189173537330424,
+        "X046": -0.3165694033464854,
+        "X062": -0.41735006975186373,
+        "X087": -0.5162681120151693
+      }
+    },
+    "ADS": {
+      "equal_rat_corr": 0.05115201764168072,
+      "equal_rat_skill_vs_persistence": -0.3511325569143191,
+      "equal_rat_nonzero_sign_accuracy": 0.43048057830466,
+      "positive_skill_rats": 1,
+      "pooled": {
+        "transition_mse": 5.701512697575041,
+        "skill_vs_persistence": -0.43339113228635195,
+        "corr": 0.05221248758625599,
+        "sign_accuracy": 0.49137704631007617
+      },
+      "per_rat_skill": {
+        "A294": 0.00042639171293146205,
+        "A297": -0.3429331873019821,
+        "X046": -0.32680206980274473,
+        "X062": -0.650208439337308,
+        "X087": -0.4361454798424922
+      }
+    }
+  },
+  "lag_scan_equal_rat_corr": {
+    "lag_ms": [
+      -300,
+      -250,
+      -200,
+      -150,
+      -100,
+      -50,
+      0,
+      50,
+      100,
+      150,
+      200,
+      250,
+      300
+    ],
+    "FOF": [
+      0.007956636532747283,
+      0.013658485226166073,
+      0.014457559583677634,
+      0.028795710120028045,
+      0.033308461881510674,
+      0.05199293338021822,
+      0.057057758725326355,
+      0.05324266473406325,
+      0.06383769605290607,
+      0.03953432257498821,
+      0.032436025476884976,
+      0.029663183731176934,
+      0.0606021001244222
+    ],
+    "ADS": [
+      0.007106020504801251,
+      -0.026958572186745695,
+      0.0030606786620840888,
+      0.0129249891781792,
+      0.029415136301325584,
+      0.0537948809931801,
+      0.051152017641681494,
+      0.044413740678905377,
+      0.027870895345865548,
+      0.03543890287886141,
+      0.0406324399503795,
+      0.034079817135224,
+      0.05457840040333393
+    ],
+    "best": {
+      "FOF": {
+        "lag_ms": 100,
+        "corr": 0.06383769605290607
+      },
+      "ADS": {
+        "lag_ms": 300,
+        "corr": 0.05457840040333393
+      }
+    }
+  },
+  "stacking_diagnostic": {
+    "protocol": "leave-one-rat-out linear meta-model on existing R122 OOF prediction streams; equal-rat training weights; post-hoc diagnostic, not raw-feature joint model",
+    "equal_rat_mean": {
+      "nuisance": {
+        "mse": 91.7536762829139,
+        "r2": 0.21146155245573056
+      },
+      "nuisance_plus_FOF": {
+        "mse": 91.49956361255906,
+        "r2": 0.21320895240804863
+      },
+      "nuisance_plus_ADS": {
+        "mse": 91.41602404252883,
+        "r2": 0.21445637465848835
+      },
+      "nuisance_plus_both": {
+        "mse": 91.48695882788356,
+        "r2": 0.2132453312278238
+      },
+      "recent": {
+        "mse": 57.89682008483959,
+        "r2": 0.5017746785265595
+      },
+      "recent_plus_FOF": {
+        "mse": 57.87596132431493,
+        "r2": 0.5015417537764154
+      },
+      "recent_plus_ADS": {
+        "mse": 57.848821369135464,
+        "r2": 0.5020349163340319
+      },
+      "recent_plus_both": {
+        "mse": 57.899944008798265,
+        "r2": 0.5012470100183836
+      }
+    },
+    "mean_mse_gain": {
+      "nuisance_to_FOF": 0.2541126703548343,
+      "nuisance_to_ADS": 0.3376522403850629,
+      "nuisance_to_both": 0.26671745503034006,
+      "recent_to_FOF": 0.020858760524663466,
+      "recent_to_ADS": 0.0479987157041208,
+      "recent_to_both": -0.003123923958671071
+    },
+    "positive_gain_rats": {
+      "nuisance_to_FOF": 2,
+      "nuisance_to_ADS": 3,
+      "nuisance_to_both": 2,
+      "recent_to_FOF": 2,
+      "recent_to_ADS": 3,
+      "recent_to_both": 2
+    }
+  },
+  "exact_counterexample": {
+    "family": "e_t=t; ehat_t=t+a(-1)^t",
+    "level_r2_formula": "1 - 12 a^2/[T(T+2)]",
+    "transition_mse_formula": "4 a^2",
+    "persistence_mse": 1,
+    "transition_skill_formula": "1 - 4 a^2",
+    "example": {
+      "T": 1000,
+      "a": 2,
+      "level_r2": 0.9999520958083832,
+      "transition_skill": -15
+    }
+  },
+  "certificate_update": {
+    "C0": "LIMITED_PASS",
+    "C1": "PARTIAL",
+    "C2": "FAIL_FOR_CURRENT_R122_MAPPING",
+    "C3": "OPEN",
+    "C4": "PARTIAL",
+    "C5": "OPEN_PARTIAL",
+    "C6": "PROCEDURAL_ONLY",
+    "T2": "OPEN"
+  },
+  "medical_line": {
+    "first_party_fourth_manuscript": "NOT_VERIFIED",
+    "external_article": {
+      "title": "Multi-modal connectivity of the brain underlying visual hallucinations evoked by high-frequency intracranial stimulations",
+      "journal": "Brain Stimulation",
+      "year": 2025,
+      "doi": "10.1016/j.brs.2025.05.138"
+    },
+    "dataset": {
+      "openneuro": "ds005169 v1.0.0",
+      "openneuro_doi": "10.18112/openneuro.ds005169.v1.0.0",
+      "nemar": "on005169",
+      "nemar_doi": "10.82901/nemar.on005169"
+    }
+  },
+  "inference_ceiling": [
+    "C2 failure applies to current R122 mapping/view, not to FOF/ADS biology in general",
+    "No experience labels or phenomenal measurements",
+    "No C3/T2/T3/G4 closure",
+    "No B3 completion",
+    "No general historical priority claim for decoding-versus-dynamics distinction"
+  ]
+}
