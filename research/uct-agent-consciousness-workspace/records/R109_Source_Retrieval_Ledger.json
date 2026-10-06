@@ -1,0 +1,77 @@
+{
+  "round": "R109",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "Cognitive Motor Dissociation in Disorders of Consciousness",
+      "venue": "New England Journal of Medicine",
+      "year": 2024,
+      "doi": "10.1056/NEJMoa2400645",
+      "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2400645"
+    },
+    {
+      "title": "Sleuthing subjectivity: a review of covert measures of consciousness",
+      "venue": "Nature Reviews Neuroscience",
+      "year": 2025,
+      "url": "https://www.nature.com/articles/s41583-025-00934-1"
+    },
+    {
+      "title": "Report-modulated prefrontal activity and consistent posterior representations during conscious visual perception",
+      "venue": "Consciousness and Cognition",
+      "year": 2026,
+      "doi": "10.1016/j.concog.2026.104075"
+    },
+    {
+      "title": "Anesthesia and the neurobiology of consciousness",
+      "venue": "Neuron",
+      "year": 2024,
+      "doi": "10.1016/j.neuron.2024.03.002",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38579714/"
+    },
+    {
+      "title": "Dreaming during anaesthesia: a scoping review",
+      "venue": "British Journal of Anaesthesia",
+      "year": 2026,
+      "doi": "10.1016/j.bja.2026.05.002",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42270528/"
+    },
+    {
+      "title": "Update on How to Approach a Patient with Locked-In Syndrome and Their Communication Ability",
+      "venue": "Brain Sciences",
+      "year": 2024,
+      "doi": "10.3390/brainsci14010092",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38248307/"
+    },
+    {
+      "title": "How to study subjective experience in an animal model of blindsight?",
+      "venue": "Neuroscience Research",
+      "year": 2024,
+      "doi": "10.1016/j.neures.2023.09.001"
+    },
+    {
+      "title": "Measuring metacognition in hemianopic and blindsight patients",
+      "year": 2025,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41123189/"
+    },
+    {
+      "title": "Consciousness after split-brain surgery: The recent challenge to the classical picture",
+      "year": 2021,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34371067/"
+    },
+    {
+      "title": "The 70 years since the discovery of rapid eye movement sleep",
+      "year": 2024,
+      "doi": "10.1111/jsr.14342",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39284581/"
+    },
+    {
+      "title": "A review of the sufficient conditions for consciousness",
+      "venue": "Neuroscience and Biobehavioral Reviews",
+      "year": 2025,
+      "doi": "10.1016/j.neubiorev.2025.106333",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40816661/"
+    }
+  ],
+  "interpretation_boundary": "Clinical/behavioral evidence is used to map dissociations among E/A/I/S/B/R, not to directly validate UCT C1 or assign experiential magnitudes.",
+  "no_third_party_fulltexts_redistributed": true
+}

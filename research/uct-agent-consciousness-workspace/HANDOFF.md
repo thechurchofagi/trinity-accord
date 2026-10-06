@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R108 可执行causal-organization dissociation与report-head surgery；新窗口先读 records/R108_Executable_Causal_Organization_Dissociation_20261006.md 与R108交接，再按需回读R106/R107。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R109 生物natural-experiment E/A/I/S/B/R矩阵；新窗口先读 records/R109_Biological_Natural_Experiment_Dissociation_Matrix_20261006.md 与R109交接，再按需回读R106-R108。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -522,3 +522,10 @@ direct XOR与decomposed XOR在完整4输入任务上100%行为相同，但内部
 固定task core更换report head可使task完全不变而report 100%改变；固定constant report也可掩盖task accuracy 1.0与0.5的差异。report与能力不是同一轴。
 
 下一步R109做生物natural-experiment matrix。
+
+
+## R109 — 2026-10-06：生物natural-experiment六轴解离矩阵
+
+CMD、locked-in、no-report、anesthesia、blindsight、split-brain、dreaming、aphasia/language impairment及cerebellum/cortex/subcortex证据已按E/A/I/S/B/R重排。最稳的共同结论是：B/R不是E的透明同义词；同样的unresponsiveness可对应不同体验状态；task-specific I可与主观内容/报告部分解离；agency unity与experience unity不是一个问题。
+
+提出dissociation topology作为跨底物比较对象。下一步R110做biology↔AI analogue 6x6 dependency matrix。

@@ -23,7 +23,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R108 handoff](records/R108_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R109 handoff](records/R109_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -263,3 +263,10 @@ R107 separates a role-neutral constitutive base from optional cognitive annotati
 [Research report](records/R108_Executable_Causal_Organization_Dissociation_20261006.md); [code](records/r108_causal_organization_dissociation.py); [results](records/R108_Causal_Organization_Dissociation_Results.json); [handoff](records/R108_Worklog_and_Handoff_20261006.md).
 
 Two tiny systems implement the identical complete XOR behavior but have different internal intervention signatures. A separate report-head surgery preserves the task core while changing report on all inputs, and a reverse control holds report fixed while task capability differs. This provides executable witnesses that behavior, capability, report and constitutive organization are distinct comparison axes.
+
+
+## R109 biological natural-experiment matrix
+
+[Research report](records/R109_Biological_Natural_Experiment_Dissociation_Matrix_20261006.md); [matrix](records/R109_Biological_Dissociation_Matrix.csv); [source ledger](records/R109_Source_Retrieval_Ledger.json); [handoff](records/R109_Worklog_and_Handoff_20261006.md).
+
+Biological natural experiments strongly support treating experience, access, intelligence, self/agency, behavior and report as separate axes. The strongest cases include CMD/LIS output dissociation, no-report manipulations, anesthesia's same-unresponsiveness/different-conscious-state problem, dreaming, and blindsight's task-performance versus subjective-content complexity. The next comparison target is dissociation topology rather than a single consciousness score.
