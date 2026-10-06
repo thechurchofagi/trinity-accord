@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R113 causal support identification protocol；新窗口先读 records/R113_Causal_Support_Identification_Protocol_20261006.md 与R113交接，再按需回读R111/R112。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R114 support taxonomy回套cross-substrate atlas；新窗口先读 records/R114_Cross_Substrate_Support_Taxonomy_Audit_20261006.md 与R114交接，再按需回读R112/R113。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -563,3 +563,10 @@ pairwise topology仍可能丢失direct-vs-indirect机制，因此下一步R111�
 冻结support taxonomy与8-step intervention protocol。以后只有actual causal support relation才有资格进入UCT experience-intelligence bridge，probe/correlation不够。
 
 下一步R114回套到working memory/evidence integration/bearer estimation。
+
+
+## R114 — 2026-10-06：content/access/readout/correlate分层
+
+working memory、evidence integration、bearer estimation均完成support-category审计。最重要新增规则：causal necessity只证明relation属于支持能力T的组织，不自动证明它承载特定体验内容；content claim需要distinction coding + content-specific intervention + access/output controls + generalization + actual K anchoring。
+
+下一步R115转向无qualia标签的experiential content structure / relational geometry。

@@ -1,0 +1,58 @@
+{
+  "round": "R114",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "Working Memory as Persistent Neural Activity",
+      "year": 2024,
+      "doi": "10.1093/oxfordhb/9780190917982.013.13",
+      "scope": "Previously read; active-retention candidate."
+    },
+    {
+      "title": "Rapid connectivity modulations unify long-term and working memory",
+      "year": 2025,
+      "doi": "10.1016/j.tics.2025.02.006",
+      "scope": "Previously read; connectivity-based alternative candidate."
+    },
+    {
+      "title": "A multi-region recurrent circuit for evidence accumulation in rats",
+      "venue": "Neuron",
+      "year": 2026,
+      "doi": "10.1016/j.neuron.2025.12.029",
+      "scope": "Previously read; pathway silencing and distributed recurrence used to distinguish content from routing/support."
+    },
+    {
+      "title": "Disentangling sources of variability in decision-making",
+      "venue": "Nature Reviews Neuroscience",
+      "year": 2025,
+      "url": "https://www.nature.com/articles/s41583-025-00916-3",
+      "scope": "Summary/glossary read; current prior for separating evidence accumulation, drift, boundary, urgency and other decision components."
+    },
+    {
+      "title": "A systematic review and meta-analysis on the neural correlates of bodily self-consciousness",
+      "year": 2025,
+      "doi": "10.1016/j.neubiorev.2025.106420",
+      "scope": "Previously read; distributed ownership/agency candidate supports."
+    },
+    {
+      "title": "Interoception, network physiology and the emergence of bodily self-awareness",
+      "year": 2024,
+      "doi": "10.1016/j.neubiorev.2024.105864",
+      "scope": "Previously read; multisensory/interoceptive support relations."
+    },
+    {
+      "title": "Evaluating Self-Orienting in Language and Reasoning Models",
+      "year": 2025,
+      "url": "https://openreview.net/pdf?id=hPdUQnQrUu",
+      "scope": "Previously read; behavioral/functional AI self-orienting evidence."
+    }
+  ],
+  "internal_sources": [
+    "R112 support atlas",
+    "R113 causal support taxonomy",
+    "R108 report-head surgery",
+    "R110 access/self/output lesion analogues"
+  ],
+  "novelty_status": "Content/access/readout distinctions are established ideas in neuroscience and AI interpretability. Project contribution is their explicit use as a gate before UCT experiential-content claims.",
+  "no_third_party_fulltexts_redistributed": true
+}
