@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R118 biological public-data boundary audit与opto session-registry独立复算；新窗口先读 records/R118_Biological_Public_Data_Boundary_Audit_20261006.md 与R118交接，再按需回读R117。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R119 T2 intervention-preserving support-correspondence certificate；新窗口先读 records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md 与R119交接，再按需回读R117/R118。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -605,3 +605,10 @@ V变体只翻valence，6/6 pairwise preferences反转。
 独立解析Gupta et al.公开opto registry并复算作者exclusion/session counts。关键纠正：Figshare recording data与Figure3大样本opto行为不是同一数据层；B1/B2可由12 recording sessions复算，B3完整trial behavior在当前public GitHub/Figshare审计中未找到。以后严格区分paper evidence、registry/code audit、raw recording replication和opto trial replication。
 
 下一步R119形式化T2 intervention-preserving support correspondence certificate。
+
+
+## R119 — 2026-10-06：T2机制对应正式证书
+
+T2证书要求grounding、baseline、transition commutation、intervention transport、temporal correspondence、nuisance stability和anti-trivial mapping discipline。坐标缩放的两个accumulator在正确phi_Z/phi_I下16 sequences+80 interventions误差全0；错误用same numeric intervention时max mismatch0.122459。direct/decomposed XOR baseline相同但internal signatures不同，被证书正确拒绝。
+
+下一步R120写根本的experience-intelligence bridge theorem schema。

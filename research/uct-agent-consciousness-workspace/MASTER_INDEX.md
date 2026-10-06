@@ -5,14 +5,14 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 ## Current entry points
 
 - Completed DOI release: **R105** (TA-TR-2026-24 v1.0 published to Zenodo; OTS submitted and awaiting Bitcoin attestation before Arweave).
-- Latest first-principles research: **R118** (biological public-data boundary and optogenetic registry audit).
-- New-window entry: [R118 biological public-data boundary audit](records/R118_Biological_Public_Data_Boundary_Audit_20261006.md).
+- Latest first-principles research: **R119** (T2 intervention-preserving support-correspondence certificate).
+- New-window entry: [R119 T2 support-correspondence certificate](records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md).
 - Current submission manuscript: [From Shutdown Resistance to Self-Continuation Control v0.3](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
 - Archival DOI release: **TA-TR-2026-24 v1.0**, DOI `10.5281/zenodo.23176685`, Zenodo record `23176685`; [v1 release anchor](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/V1_RELEASE_ANCHOR.json).
 - Standing research philosophy: [Long-term research and archival philosophy](notes/20261006_Long_Term_Research_and_Archival_Philosophy.md) — optimize for originality, rigor, reproducibility, stable DOI/archive discoverability, and future-AI citability rather than venue prestige or publication count.
 - Machine-readable archival companion: [self-continuation v0.3 archive](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/README.md) — claims/evidence metadata, citation records, retrieval terms, future-AI reading guide and SHA manifest.
 - Prior integrated UCT workspace manuscript: [UCT Agent Self-Preservation v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest analysis: [R118 biological public-data boundary audit](records/R118_Biological_Public_Data_Boundary_Audit_20261006.md).
+- Latest analysis: [R119 T2 support-correspondence certificate](records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md).
 - Latest training: [R99 bounded-domain path models](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
 - Current next step: preserve exact v1.0; wait for OTS Bitcoin attestation through the existing scheduler, then allow guarded Arweave upload/readback. Do not claim completion before ARWEAVE_READBACK_PASS.
@@ -24,7 +24,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R118 handoff](records/R118_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R119 handoff](records/R119_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -334,3 +334,10 @@ The biological target is the 2026 Neuron rat FOF/ADS accumulation system with pu
 [Research report](records/R118_Biological_Public_Data_Boundary_Audit_20261006.md); [registry audit](records/R118_Optogenetic_Registry_Audit.json); [handoff](records/R118_Worklog_and_Handoff_20261006.md).
 
 R118 independently parses the authors' public optogenetic session registry and reproduces the session-selection layer, while correcting the assumption that the 12-session Figshare recording archive also contains the complete large optogenetic behavioral experiment. Raw-data provenance is now explicitly stratified before further cross-substrate inference.
+
+
+## R119 T2 intervention-preserving certificate
+
+[Research report](records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md); [exact checks](records/r119_t2_correspondence_certificate.py); [results](records/R119_T2_Certificate_Results.json); [handoff](records/R119_Worklog_and_Handoff_20261006.md).
+
+R119 makes cross-substrate mechanism correspondence coordinate-aware but intervention-sensitive. An exact scaled-accumulator positive control passes after transporting state/intervention ports under the declared mapping; a baseline-identical XOR negative control fails because internal intervention signatures cannot be preserved. T2 remains selected-mechanism evidence and is explicitly weaker than T3 constitutive homology.

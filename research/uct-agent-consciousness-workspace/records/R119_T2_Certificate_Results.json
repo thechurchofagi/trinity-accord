@@ -1,0 +1,19 @@
+{
+  "round": "R119",
+  "scaled_accumulator_positive_control": {
+    "sequence_count": 16,
+    "baseline_max_probability_error": 0.0,
+    "transition_commutation_max_state_error": 0.0,
+    "matched_intervention_count": 80,
+    "matched_intervention_max_probability_error": 0.0,
+    "naive_same_numeric_intervention_max_probability_error": 0.1224593312018546,
+    "naive_same_numeric_intervention_mean_probability_error": 0.05653518319571684
+  },
+  "xor_negative_control": {
+    "baseline_truth_table_equal": true,
+    "direct_xor_internal_clamp_signatures": ["0000","1111"],
+    "decomposed_xor_internal_clamp_signatures": ["0000","0111","1110","1111"],
+    "full_declared_internal_intervention_signature_equal": false
+  },
+  "interpretation": "T2 correspondence must transport intervention ports under the declared state mapping. Baseline behavior alone is insufficient. Not a consciousness measurement."
+}
