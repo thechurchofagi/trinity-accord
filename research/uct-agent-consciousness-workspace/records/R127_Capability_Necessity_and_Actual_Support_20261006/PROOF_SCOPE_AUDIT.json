@@ -1,0 +1,152 @@
+{
+  "round": "R127",
+  "method": "Manual derivation and adversarial assumption review; no numerical experiment and no formal verification",
+  "claims": [
+    {
+      "id": "P1",
+      "claim": "Exact delayed-query code exists iff code equality implies response-profile equality",
+      "proof": "Necessity by equal decoder arguments; sufficiency by representative-independent decoder; state count by distinct profiles",
+      "assumptions": [
+        "finite nonempty H,Q,Y",
+        "single prescribed answer f(x,q)",
+        "all H x Q pairs admitted",
+        "encoding precedes query",
+        "no extra unrepresented history-bearing resource"
+      ],
+      "limits": [
+        "logical representation is not physical implementability",
+        "set-valued acceptable outputs need another result",
+        "count is not experiential quantity"
+      ],
+      "corollaries": [
+        "larger query families refine response equivalence",
+        "R126 stable equivalence equals agreement after all finite operation words"
+      ]
+    },
+    {
+      "id": "P2",
+      "claim": "Complete cut distributions must separate histories whose required answers differ",
+      "proof": "Shared downstream kernel contracts total variation; correct-answer event yields lower bound 1-epsilon_x-epsilon_xprime",
+      "assumptions": [
+        "same physically justified downstream channel",
+        "declared boundary resources fixed/accounted",
+        "query exogenous; no encoder-seed leakage",
+        "past-future exogenous correlations included"
+      ],
+      "limits": [
+        "not a bound on a partial neural measurement",
+        "a graph cut alone is insufficient with omitted shared causes",
+        "randomness retained in the channel law"
+      ],
+      "corollaries": [
+        "zero-error response classes require disjoint cut-state supports",
+        "required information persists across each complete cut, while physical carriers may change"
+      ]
+    },
+    {
+      "id": "P3",
+      "claim": "Internal conditional information at least H(X|B)-h2(epsilon)-epsilon log2(m-1)",
+      "proof": "Conditional data processing; error-indicator entropy bound; entropy upper bounded by finite log alphabet",
+      "assumptions": [
+        "finite target with m>=2",
+        "actual estimator error epsilon",
+        "X to (C,B) to output mediation",
+        "base-two entropy"
+      ],
+      "limits": [
+        "negative RHS gives only trivial bound",
+        "no finite dimension bound for unrestricted real precision",
+        "no conversion from bits to experience"
+      ],
+      "corollaries": [
+        "independent fair indexed n-bit recall jointly needs n[1-h2(mean error)] information with per-bit errors<=1/2",
+        "XOR/key example has zero individual and positive joint information",
+        "external archive can remove internal pre-retrieval retention requirement"
+      ]
+    },
+    {
+      "id": "P4",
+      "claim": "Grounded induced connected actual subhistory with accounted ports meets published finite token criterion",
+      "proof": "Direct verification of inherited UCT I v1.2 section 2 token conditions",
+      "assumptions": [
+        "physical grounding of graph",
+        "actual nonempty occurrences",
+        "inherited causal continuity",
+        "material cross-boundary relations and lineage recorded"
+      ],
+      "limits": [
+        "definitional application, not new ontology or consciousness threshold",
+        "a disconnected causal cut is not automatically a token",
+        "counterfactual route union is not an actual episode",
+        "no unique boundary or subject selected"
+      ]
+    },
+    {
+      "id": "P5",
+      "claim": "C1 preserves independently identified actual support relations within the chosen token's intrinsic organization",
+      "proof": "Restriction of the common-signature isomorphism to inherited relational facts",
+      "assumptions": [
+        "actual token and support independently grounded",
+        "fixed C1",
+        "common typed signature",
+        "retain operation outputs or use relational reduct"
+      ],
+      "limits": [
+        "no familiar qualia label",
+        "no independent validation of C1",
+        "no task-quotient-to-token inference",
+        "subtoken experience and phenomenal parthood require coherent inclusion and boundary maps",
+        "no complete type identity across task-equivalent implementations"
+      ]
+    }
+  ],
+  "counterexamples": [
+    {
+      "case": "parity versus delayed indexed-bit query",
+      "blocks": "one physical code state per raw history without task qualification"
+    },
+    {
+      "case": "query supplied before encoding",
+      "blocks": "applying delayed-query lower bound to a different task"
+    },
+    {
+      "case": "internal storage versus external archive with identical exposed interface laws",
+      "blocks": "localizing support from those laws alone"
+    },
+    {
+      "case": "C=X XOR N, B=N",
+      "blocks": "zero single-site information implies zero joint retention"
+    },
+    {
+      "case": "successive relays",
+      "blocks": "memory capability requires recurrence or one fixed carrier"
+    },
+    {
+      "case": "external power removal",
+      "blocks": "necessity under lesion entails internal membership"
+    },
+    {
+      "case": "redundant internal route",
+      "blocks": "absence of individual necessity entails nonmembership"
+    },
+    {
+      "case": "disconnected cut on parallel paths",
+      "blocks": "informational sufficiency creates an actual unified process"
+    }
+  ],
+  "review_refinements": [
+    "Made exogenous-query/no-encoder-seed-leak assumption explicit.",
+    "Distinguished statistical cut mediation from a mere directed graph separator.",
+    "Separated complete cut and noisy partial observation.",
+    "Kept operation-closure requirement explicit when restricting a structural isomorphism.",
+    "Separated actual event history from architecture-wide counterfactual route repertoire.",
+    "Kept actual process membership distinct from necessity, actual use, sufficiency and subjecthood."
+  ],
+  "open": [
+    "which actual biological/AI carrier realizes these conditions",
+    "compositional compatibility of multiple capabilities",
+    "familiar experiential labels",
+    "exclusive subject boundaries",
+    "complete cross-substrate constitutive correspondence"
+  ]
+}

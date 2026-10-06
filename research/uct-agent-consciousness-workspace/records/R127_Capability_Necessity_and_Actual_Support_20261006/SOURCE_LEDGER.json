@@ -1,0 +1,95 @@
+{
+  "round": "R127",
+  "retrieved_date": "2026-10-06",
+  "scope": "targeted source verification, not exhaustive prior-art audit",
+  "project": [
+    {
+      "source": "UCT I v1.2",
+      "doi": "10.5281/zenodo.23131575",
+      "ref": "f8750d32afeea9209e6d53ad3cfbd5bbde7a8126",
+      "path": "research/unified-consciousness-theory-i/versions/v1.2/published/unified-consciousness-theory-i-v1.2.md",
+      "sha": "7a980c86b8f94ce787d358dab3529903eb822f8f",
+      "read": "Full file fetched; section 2.1-2.5, section 3.1, and C1 re-read; heading/token-definition scan; no new full-reading claim"
+    },
+    {
+      "source": "UCT II v1.1",
+      "doi": "10.5281/zenodo.23030320",
+      "read": "Inherited fixed foundation; not newly retrieved/read in this round"
+    },
+    {
+      "source": "UCT III v1.0",
+      "doi": "10.5281/zenodo.23137088",
+      "sha": "be7c7a952aa88831c6660187586d92a3da707cdf",
+      "read": "Full file fetched; section 2 and section 7 re-read; no new full-reading claim"
+    },
+    {
+      "source": "R111",
+      "sha": "4669ec88a556d85b72b03d5a18e91cfb0cf4f3c9",
+      "read": "Full note fetched and support/alternative-realization/constitutive conditional argument read"
+    },
+    {
+      "source": "R115",
+      "sha": "b52e653c8d095c53840e7432d03f3a2f1133b22d",
+      "read": "Full note fetched; displayed selected sections on grounding and G3/G4 read"
+    },
+    {
+      "source": "R126",
+      "read": "Local theory note and current HANDOFF/MASTER_INDEX read; branch HEAD verified as R126"
+    }
+  ],
+  "external": [
+    {
+      "url": "https://courses.cs.cornell.edu/cs4120/2023sp/notes/leximpl/index.html",
+      "ref": "turn9view1",
+      "read": "DFA minimization section, suffix-distinguishability and refinement argument",
+      "use": "explicit automata antecedent, no originality claim"
+    },
+    {
+      "url": "https://arxiv.org/abs/cond-mat/9907176",
+      "ref": "turn5view1",
+      "read": "Author abstract and metadata only",
+      "use": "predictive-state minimality antecedent"
+    },
+    {
+      "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/5c0b5a8a544cb2320778e4c9e5dea64f_MIT6_441S10_lec02.pdf",
+      "ref": "turn10view0",
+      "read": "PDF text extraction; data processing and Fano proof especially pages 11-14",
+      "use": "standard information-theoretic antecedents; equations independently derived due OCR damage"
+    },
+    {
+      "url": "https://digitalcommons.butler.edu/facsch_papers/1201/",
+      "ref": "turn5view0",
+      "read": "Institutional abstract and metadata only",
+      "use": "constitutive relevance versus causal manipulation, existing debate"
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11013376/",
+      "ref": "turn7view0",
+      "read": "Abstract/introduction/opening critique retrieved; later targeted find requests returned bot challenge",
+      "use": "existing critique of minimal sufficiency; not used as new empirical evidence"
+    }
+  ],
+  "retrieval_limits": [
+    {
+      "item": "root AGENTS.md",
+      "result": "GitHub 404; parent research/AGENTS.md and workspace AGENTS.md read"
+    },
+    {
+      "item": "first system1 automata/Fano query batch",
+      "result": "irrelevant results; discarded"
+    },
+    {
+      "item": "Cornell 2026 notes URL",
+      "result": "insufficient extract; used accessible 2023 course section"
+    },
+    {
+      "item": "Scholarpedia Fano page on var and www hosts",
+      "result": "open timed out; search excerpt not used as proof source; MIT lecture obtained"
+    },
+    {
+      "item": "Mckilliam targeted followup retrieval",
+      "result": "bot challenge; do not claim full article read"
+    }
+  ],
+  "no_independent_empirical_evidence_for_C1": true
+}
