@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-06",
+  "scope": "Latest editions located among repository refs, not a claim about all external drafts",
+  "repository": "thechurchofagi/trinity-accord",
+  "refs_examined": 983,
+  "versions": [
+    {
+      "paper": "A",
+      "version": "1.2",
+      "ref": "f8750d32afeea9209e6d53ad3cfbd5bbde7a8126",
+      "path": "research/unified-consciousness-theory-i/versions/v1.2/published/unified-consciousness-theory-i-v1.2.md",
+      "snapshot": "sources/A_UCT_I_v1_2.md",
+      "doi": "10.5281/zenodo.23131575",
+      "blob_sha": "7a980c86b8f94ce787d358dab3529903eb822f8f",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "bytes": 142624,
+      "publication_manifest_blob": "bb6cfbe801f7c198c55d852f61ffc6dfa37df6df"
+    },
+    {
+      "paper": "B",
+      "version": "1.1",
+      "ref": "562a5d16745e5e7e6cb4bc8f2c53a2f62e05875a",
+      "path": "research/uct-paired-v1.1/release/b/unified-consciousness-theory-ii-v1.1.md",
+      "snapshot": "sources/B_UCT_II_v1_1.md",
+      "doi": "10.5281/zenodo.23030320",
+      "blob_sha": "c4734243b6dfd75255c14b99f333c52e7d7b7a58",
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+      "bytes": 59958,
+      "publication_manifest_blob": "85679465dbf2c536d5c4e07eadc7cf6dc4e5270e"
+    },
+    {
+      "paper": "C",
+      "version": "1.0",
+      "ref": "771530abfd14275ce8c579f5a524814563da495d",
+      "path": "research/unified-consciousness-theory-iii/published/unified-consciousness-theory-iii-v1.0.md",
+      "snapshot": "sources/C_UCT_III_v1_0.md",
+      "doi": "10.5281/zenodo.23137088",
+      "blob_sha": "be7c7a952aa88831c6660187586d92a3da707cdf",
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+      "bytes": 94626,
+      "publication_manifest_blob": "69882c2cb2825ea82478b6df3790ca82dc1724b5"
+    }
+  ],
+  "direct_doi_readback_this_round": "NOT_CONFIRMED: web tool could not access the resolver pages",
+  "publication_metadata": "Pinned records preserve earlier publication/readback; no fresh archival state inferred",
+  "source_reading_scope": "See UCT_FORMAL_AUDIT.md",
+  "supplementary_sources": [
+    {
+      "snapshot": "sources/A_original_formal_graph_v1_2.json",
+      "expected_git_blob": "be9175224a564eb665baeb123756f45c651ebf6b",
+      "source_url": "https://github.com/thechurchofagi/trinity-accord/blob/f8750d32afeea9209e6d53ad3cfbd5bbde7a8126/research/unified-consciousness-theory-i/versions/v1.2/published/formal-dependency-graph-v1.2.json"
+    },
+    {
+      "snapshot": "sources/A_original_formal_audit_v1_2.md",
+      "expected_git_blob": "48dc26b9c0d0ff01c1612c182344909f5b9eb179",
+      "source_url": "https://github.com/thechurchofagi/trinity-accord/blob/f8750d32afeea9209e6d53ad3cfbd5bbde7a8126/research/unified-consciousness-theory-i/versions/v1.2/published/FORMAL-AUDIT-v1.2.md"
+    },
+    {
+      "snapshot": "sources/B_current_dependency_ledger_v1_1.md",
+      "expected_git_blob": "07e8de270ca2acaa5cb09039ce906e02626b5938",
+      "source_url": "https://github.com/thechurchofagi/trinity-accord/blob/562a5d16745e5e7e6cb4bc8f2c53a2f62e05875a/research/uct-paired-v1.1/package/audit/current-source-and-dependency-ledger.md"
+    },
+    {
+      "snapshot": "sources/B_historical_formal_map_v1_0_rc4.md",
+      "expected_git_blob": "7c346500e6b46d067ca62975edc41497f4e3a783",
+      "source_url": "https://github.com/thechurchofagi/trinity-accord/blob/562a5d16745e5e7e6cb4bc8f2c53a2f62e05875a/research/uct-paired-v1.1/package/baselines/B_v1.0_audit/UCT_Paper_B_v1.0-rc4_Formal_Dependency_Map_20260928.md"
+    },
+    {
+      "snapshot": "sources/A_publication_record.json",
+      "expected_git_blob": "bb6cfbe801f7c198c55d852f61ffc6dfa37df6df",
+      "source_url": "https://github.com/thechurchofagi/trinity-accord/blob/f8750d32afeea9209e6d53ad3cfbd5bbde7a8126/research/unified-consciousness-theory-i/versions/v1.2/publication-record.json"
+    },
+    {
+      "snapshot": "sources/B_publication_record.json",
+      "expected_git_blob": "85679465dbf2c536d5c4e07eadc7cf6dc4e5270e",
+      "source_url": "https://github.com/thechurchofagi/trinity-accord/blob/562a5d16745e5e7e6cb4bc8f2c53a2f62e05875a/research/uct-paired-v1.1/publication-b.json"
+    },
+    {
+      "snapshot": "sources/C_publication_record.json",
+      "expected_git_blob": "69882c2cb2825ea82478b6df3790ca82dc1724b5",
+      "source_url": "https://github.com/thechurchofagi/trinity-accord/blob/771530abfd14275ce8c579f5a524814563da495d/research/unified-consciousness-theory-iii/publication-record.json"
+    }
+  ]
+}

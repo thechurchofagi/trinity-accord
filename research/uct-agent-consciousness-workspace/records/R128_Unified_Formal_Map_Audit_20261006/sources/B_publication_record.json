@@ -1,0 +1,120 @@
+{
+  "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "report_number": "TA-TR-2026-21",
+  "record_id": 23030320,
+  "doi": "10.5281/zenodo.23030320",
+  "title": "Unified Consciousness Theory II: Consciousness Theories as Effective Organization Theories",
+  "version": "1.1",
+  "conceptrecid": "23008261",
+  "record_url": "https://zenodo.org/records/23030320",
+  "submitted": true,
+  "public_file_readback_pass": true,
+  "public_readback_authenticated": false,
+  "file_count": 11,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 642,
+      "sha256": "7e9e97f201d0511265988558da09e513d009dda5504d4fc059f8358f887b638c",
+      "public_url": "https://zenodo.org/api/records/23030320/files/README-LICENSE.txt/content",
+      "matches_local": true
+    },
+    {
+      "name": "uct-paired-v1.1-supplement.pdf",
+      "bytes": 67693,
+      "sha256": "717d093541ad8a940456e990828d494bf1e9df65b906d904ab512dfe497a43b3",
+      "public_url": "https://zenodo.org/api/records/23030320/files/uct-paired-v1.1-supplement.pdf/content",
+      "matches_local": true
+    },
+    {
+      "name": "uct-paired-v1.1-supplement.md",
+      "bytes": 15770,
+      "sha256": "dee22ebed609ef9aa050dfbb5198cfdc658eab0b25a3ea5c32c0dbcb7418b993",
+      "public_url": "https://zenodo.org/api/records/23030320/files/uct-paired-v1.1-supplement.md/content",
+      "matches_local": true
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 717,
+      "sha256": "d7250a02de4c5ef0fa8b1644a27b5e5f5a044ef4c2c77147d881312ea07c60ff",
+      "public_url": "https://zenodo.org/api/records/23030320/files/REVIEW-AND-SOURCES.md/content",
+      "matches_local": true
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 260,
+      "sha256": "b10489c9ae992e34b2735448b626fcf8cf7df86e0518b7aaf25ee02ae47c5eae",
+      "public_url": "https://zenodo.org/api/records/23030320/files/citation.ris/content",
+      "matches_local": true
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 279,
+      "sha256": "aa9bddf2aac29dee3a9010f797b87c43d50a6d900d142b2d66a28d1bfce308fe",
+      "public_url": "https://zenodo.org/api/records/23030320/files/citation.bib/content",
+      "matches_local": true
+    },
+    {
+      "name": "unified-consciousness-theory-ii-v1.1.md",
+      "bytes": 59958,
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+      "public_url": "https://zenodo.org/api/records/23030320/files/unified-consciousness-theory-ii-v1.1.md/content",
+      "matches_local": true
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 471,
+      "sha256": "640d8974580db9e7844052555d938fe314d109cc1c6a42f2a44f6ebde3f91774",
+      "public_url": "https://zenodo.org/api/records/23030320/files/citation.csl.json/content",
+      "matches_local": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 913,
+      "sha256": "1361642f92b11856626a3e90b79c623023fe64231cff6b6b13f9672e416decb2",
+      "public_url": "https://zenodo.org/api/records/23030320/files/SHA256SUMS.txt/content",
+      "matches_local": true
+    },
+    {
+      "name": "uct-paired-v1.1-audit.zip",
+      "bytes": 379781,
+      "sha256": "ba79ed1beaa2af5ec970618bd924add6cddf47a227d08bd4d69783bce1b09aee",
+      "public_url": "https://zenodo.org/api/records/23030320/files/uct-paired-v1.1-audit.zip/content",
+      "matches_local": true
+    },
+    {
+      "name": "unified-consciousness-theory-ii-v1.1.pdf",
+      "bytes": 150224,
+      "sha256": "ef7522a08042ffbac87d1b5c573a9ccbbab053ba087ce902d2bda6bd2191e0f2",
+      "public_url": "https://zenodo.org/api/records/23030320/files/unified-consciousness-theory-ii-v1.1.pdf/content",
+      "matches_local": true
+    }
+  ],
+  "doi_resolver": {
+    "state": "RESOLVER_CHECK_UNAVAILABLE",
+    "errors": [
+      "HTTPError",
+      "HTTPError",
+      "HTTPError"
+    ],
+    "pass": false
+  },
+  "doi_resolution_pass": false,
+  "prior_edition_check": {
+    "prior_record_id": 23008262,
+    "prior_doi": "10.5281/zenodo.23008262",
+    "file_count": 11,
+    "file_fingerprints_unchanged": true,
+    "title_and_version_unchanged": true,
+    "scope": "Published file checksums, sizes and names plus title/version/identity; version-family links may change."
+  },
+  "prior_published_files_modified": false,
+  "was_already_published": false,
+  "publication_source_commit": "04129f90630038cc3f8a39587b4f03eb61e099f5",
+  "workflow_run_id": "36526443534",
+  "public_record_created": "2026-09-29T05:31:22.194904+00:00",
+  "public_record_modified": "2026-09-29T05:31:22.878093+00:00",
+  "peer_reviewed": false,
+  "human_data_validation": false,
+  "global_originality_certified": false
+}

@@ -1,0 +1,21 @@
+{
+  "round": "R128",
+  "date": "2026-10-06",
+  "base_commit": "7592219d826f1f76a58b07bcee3ffef4f9de0431",
+  "status": "THEORETICAL_AUDIT_COMPLETE_WITH_EXPLICIT_LIMITS",
+  "map_revision": "R128-v1.0",
+  "versions": "A1.2/B1.1/C1.0",
+  "nodes": 204,
+  "rules": 97,
+  "graph_source_checks_passed": 51,
+  "proof_assistant_verified": false,
+  "empirical_runs": 0,
+  "training_runs": 0,
+  "experience_measurements": 0,
+  "finite_exact_counterexample_checked": true,
+  "core_result": "Reviewed principal formal deductions conditionally retained; dependency/wording repairs documented; joint stochastic closure counterexample integrated",
+  "T2": "OPEN",
+  "C3": "NOT_TESTED",
+  "next": "Mapped derivation of resource/time/port-compatible joint capability use",
+  "publication_changes": false
+}

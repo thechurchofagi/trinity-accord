@@ -1,38 +1,48 @@
-# UCT research master index — R127
+# UCT research master index — R128
 
-Updated 2026-10-06. Theory-first continuation; no new empirical fitting, simulation or experience measurement. The user's priority overrides the historical empirical-first queues.
+Updated 2026-10-06. **Theory-first, map-first.** The user's latest instruction requires all subsequent derivations to extend the unified A–B–C formal map. No new empirical experiment is queued.
 
-## Current checkpoint
+## Canonical current theory
 
-- [HANDOFF.md](HANDOFF.md)
-- [R127 theory note: capability necessity and actual support](records/R127_Capability_Necessity_and_Actual_Support_20261006/R127_Theory_Note.md)
-- [R127 Chinese handoff](records/R127_Capability_Necessity_and_Actual_Support_20261006/HANDOFF_ZH.md)
-- [Status](records/R127_Capability_Necessity_and_Actual_Support_20261006/STATUS.json)
-- [Proof, assumptions and counterexample audit](records/R127_Capability_Necessity_and_Actual_Support_20261006/PROOF_SCOPE_AUDIT.json)
-- [Source-reading ledger and retrieval limits](records/R127_Capability_Necessity_and_Actual_Support_20261006/SOURCE_LEDGER.json)
+- [Unified formal map](UCT_FORMAL_MAP.md)
+- [Typed dependency graph](UCT_FORMAL_GRAPH.json)
+- [Formal audit and corrections](UCT_FORMAL_AUDIT.md)
+- [Complete rule/node proof ledger](records/R128_Unified_Formal_Map_Audit_20261006/PROOF_LEDGER.md)
+- [R128 joint-state composition derivation](records/R128_Unified_Formal_Map_Audit_20261006/R128_Joint_State_Derivation.md)
+- [Source versions, refs and hashes](records/R128_Unified_Formal_Map_Audit_20261006/SOURCE_MANIFEST.json)
+- [Graph and exact-source checks](records/R128_Unified_Formal_Map_Audit_20261006/MAP_CHECK.json)
+- [Exact rational counterexample check](records/R128_Unified_Formal_Map_Audit_20261006/JOINT_CLOSURE_CHECK.json)
+- [Validation history and limits](records/R128_Unified_Formal_Map_Audit_20261006/VALIDATION_LOG.md)
+- [Status](records/R128_Unified_Formal_Map_Audit_20261006/STATUS.json)
+- [Current Chinese handoff](HANDOFF.md)
 
-R127 connects delayed-query task equivalence, complete causal cuts, noisy discrimination, conditional internal/external information requirements, physically grounded actual subhistories, and the C1 interpretation of their inherited relations. It proves five principal conditional propositions and associated corollaries; general automata/information/isomorphism mathematics is not claimed as historically novel. Proofs are hand-derived and scope-audited, not proof-assistant verified.
+The version-pinned basis is A1.2/B1.1/C1.0. Their exact published texts, A's original graph/audit, B's historical map/current ledger and publication records are preserved in the R128 sources directory. Main alone does not contain all newest source paths.
 
-Actual membership uses the existing UCT I v1.2 finite token criterion; it is not a new experience-existence gate. A task quotient is not itself an actual token. Information bits do not measure experience. Actual support identification for specific biological or AI systems, phenomenal labels and unique subject boundaries remain open.
+The map has 204 nodes and 97 conjunctive/alternative rules. Core reviewed deductions are conditionally valid; the audit records residual dependency/wording repairs and limits of review. This is not unconditional validation of all premises or a proof-assistant certificate.
 
-Next theoretical focus: simultaneous/compositional capability use under fixed resources and operation compatibility, including alternative and overlapping support. No experiment is queued.
+R128 adds a deterministic joint-closure theorem, a stochastic counterexample, and the exact joint-law criterion. More observation information does not automatically give a closed joint dynamics. The mathematics is established in general; the project increment is its explicit cross-paper placement and blocked invalid inference.
 
-## Direct theoretical trail
+## Next mapped theoretical task
 
-- [R126 causal-state closure and projection proofs](records/R126_Theory_First_Projection_and_Causal_State_20261006/R126_Theory_Note.md)
-- [R111 capability-support hypergraph](records/R111_Intelligence_Capability_Support_Hypergraph_20261006.md)
-- [R115 anchored causal content geometry](records/R115_Anchored_Causal_Content_Geometry_20261006.md)
+Resource-, time- and port-compatible composition of capabilities, starting from N128:JOINT_CRITERION, R126 closure and R127 alternative/overlapping supports. Separate availability and joint dynamical closure do not by themselves establish simultaneous physical execution.
+
+## Direct prior theory
+
+- [R127 capability necessity and actual support](records/R127_Capability_Necessity_and_Actual_Support_20261006/R127_Theory_Note.md)
+- [R126 projection, causal-state closure and refinement](records/R126_Theory_First_Projection_and_Causal_State_20261006/R126_Theory_Note.md)
+- [R111 support hypergraph](records/R111_Intelligence_Capability_Support_Hypergraph_20261006.md)
+- [R115 anchored content geometry](records/R115_Anchored_Causal_Content_Geometry_20261006.md)
 - [R106 first-principles map](records/R106_Experience_Access_Intelligence_Self_Behavior_Report_First_Principles_Map_20261006.md)
-- [R119 canonical T2 definitions](records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md)
-- [R120 conditional bridge schema](records/R120_Experience_Intelligence_Bridge_Theorem_Schema_20261006.md)
+- [R119 canonical T2 certificate](records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md)
+- [R120 bridge schema](records/R120_Experience_Intelligence_Bridge_Theorem_Schema_20261006.md)
 
 ## Preserved history
 
-- [Exact R126 handoff snapshot](HANDOFF_THROUGH_R126.md)
-- [Exact R126 index snapshot](MASTER_INDEX_THROUGH_R126.md)
-- [R125 full empirical handoff](HANDOFF_THROUGH_R125.md)
-- [R125 full historical index](MASTER_INDEX_THROUGH_R125.md)
+- [Exact R127 handoff](HANDOFF_THROUGH_R127.md)
+- [Exact R127 index](MASTER_INDEX_THROUGH_R127.md)
+- [R126 handoff](HANDOFF_THROUGH_R126.md)
+- [R126 index](MASTER_INDEX_THROUGH_R126.md)
+- [R125 empirical handoff](HANDOFF_THROUGH_R125.md)
+- [R125 historical index](MASTER_INDEX_THROUGH_R125.md)
 
-All R122–R125 results remain unchanged. T2 stays OPEN, C3 NOT_TESTED; its clause meanings remain R119's, with UCT axiom C1 kept distinct.
-
-Save on uct-agent-consciousness-workspace with [skip ci], expected-head lease and no force; preserve concurrent work and published sources. No PR, CI, deployment or release for research checkpoints.
+All R122–R125 results remain unchanged. T2 OPEN; C3 NOT_TESTED. No experience measurement, new empirical fitting, release or publication. Save research with [skip ci], fresh-head lease and no force; preserve concurrent work.

@@ -1,0 +1,24 @@
+{
+  "states": 8,
+  "nonzero_transition_entries": 16,
+  "arithmetic": "fractions.Fraction",
+  "random_samples": 0,
+  "marginal_x_closed": true,
+  "marginal_y_closed": true,
+  "joint_closed_on_all_eight_states": false,
+  "joint_closed_on_four_state_invariant_subset": true,
+  "joint_partition_blocks": 4,
+  "blocks_forced_to_split": 4,
+  "minimum_stable_refinement_blocks": 8,
+  "witness_rows": {
+    "(0, 0, 0)": {
+      "(0, 0)": "1/2",
+      "(1, 1)": "1/2"
+    },
+    "(0, 0, 1)": {
+      "(0, 1)": "1/2",
+      "(1, 0)": "1/2"
+    }
+  },
+  "scope": "finite exact countermodel; not proof-assistant validation or empirical evidence"
+}
