@@ -1,0 +1,15 @@
+{
+  "authorization": "PUBLISH_EXACT_REVIEWED_PACKAGE",
+  "report_number": "TA-TR-2026-24",
+  "version": "1.0",
+  "record_id": 23176685,
+  "doi": "10.5281/zenodo.23176685",
+  "expected_manifest_sha256": "cbaa8ba098534eaafe5ebc64b81f8792c34c3b6f4bce9c1681d7d31d7befe7d8",
+  "pdf_sha256": "368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104",
+  "authorization_basis": "Explicit author instruction on 6 October 2026 to complete DOI, OpenTimestamps and Arweave using the repository's mature publication flow after strict formal-map review.",
+  "publication_type": "archival methods preprint",
+  "peer_reviewed": false,
+  "preserve_prior_editions": true,
+  "formal_release_audit": "PASS",
+  "arweave_cumulative_fee_limit": "strictly less than 0.1 AR, existing reserve and rolling-spend controls retained"
+}

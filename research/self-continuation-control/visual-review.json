@@ -1,0 +1,20 @@
+{
+  "state": "VISUAL_REVIEW_PASS",
+  "expected_manifest_sha256": "cbaa8ba098534eaafe5ebc64b81f8792c34c3b6f4bce9c1681d7d31d7befe7d8",
+  "pdf_sha256": "368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104",
+  "page_count": 13,
+  "pdf_bytes": 86272,
+  "review_type": "AI-assisted rendered-page visual quality inspection",
+  "human_review_claimed": false,
+  "scientific_peer_review_claimed": false,
+  "review_notes": [
+    "Inspected the exact DOI-bound prepared PDF bytes from GitHub Actions artifact run 37405375714 without rebuilding or modifying the PDF.",
+    "Verified PDF SHA-256 against EXPECTED-PUBLICATION.json before rendering.",
+    "Rasterized all 13 pages at 160 DPI and visually inspected four complete contact sheets covering every page.",
+    "No clipped or overlapping text, missing glyphs, unreadable tables, broken references, or out-of-page content was observed.",
+    "Confirmed cover displays Version 1.0, Report TA-TR-2026-24, DOI 10.5281/zenodo.23176685, archival-preprint/not-peer-reviewed status, and the expected title/author.",
+    "The R95-R99 reproducibility table, L0-L9 evidence table, ROGUE audit, limitations, conclusion, and complete references are legible.",
+    "Build log contained one Underfull hbox warning; rendered pages show no material visual defect.",
+    "No scientific peer review, empirical validation, or truth claim is implied by this visual review."
+  ]
+}
