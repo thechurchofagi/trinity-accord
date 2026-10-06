@@ -1,0 +1,44 @@
+{
+  "round": "R111",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "Degenerate neuronal systems sustaining cognitive functions",
+      "authors": "Noppeney; Friston; Price",
+      "venue": "Journal of Anatomy",
+      "year": 2004,
+      "doi": "10.1111/j.0021-8782.2004.00343.x",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1571441/",
+      "scope": "Abstract/introduction and degeneracy-over-subjects sections read; direct prior art for structurally distinct neuronal systems supporting the same function."
+    },
+    {
+      "title": "Improving the study of brain-behavior relationships by revisiting basic assumptions",
+      "year": 2023,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10012342/",
+      "scope": "Many-to-one mapping/degeneracy section read; used as modern methodological prior."
+    },
+    {
+      "title": "Ion Channel Degeneracy, Variability, and Covariation in Neuron and Circuit Resilience",
+      "venue": "Annual Review of Neuroscience",
+      "year": 2021,
+      "doi": "10.1146/annurev-neuro-092920-121538",
+      "scope": "Degeneracy/redundancy/functional-overlap summary read; used to distinguish alternative nonidentical supports from literal redundancy."
+    },
+    {
+      "title": "Task-structured modularity emerges in artificial networks and aligns with brain architecture",
+      "venue": "Nature Machine Intelligence",
+      "year": 2026,
+      "doi": "10.1038/s42256-026-01306-9",
+      "url": "https://www.nature.com/articles/s42256-026-01306-9",
+      "scope": "Current search-result metadata/abstract-level context read; nearby prior for task-structured modularity across artificial networks and brain organization."
+    }
+  ],
+  "internal_sources": [
+    "R79 preservation/tradeoff distinction",
+    "R81 intelligence/experience type relation",
+    "R82 task-necessary joint relations",
+    "R106-R110 first-principles cross-substrate program"
+  ],
+  "novelty_status": "Multiple realizability, degeneracy and many-to-many brain-function mapping are established prior art. Project-specific contribution is the UCT capability-support hypergraph and its explicit bridge to experiential organization without scalar synchrony.",
+  "no_third_party_fulltexts_redistributed": true
+}

@@ -1,0 +1,38 @@
+{
+  "round": "R111",
+  "relation_universe": ["g","v","m","s","x"],
+  "minimal_support_families": {
+    "T1_world": [["g","v"],["x"]],
+    "T2_memory": [["g","m"]],
+    "T3_self": [["g","s"]]
+  },
+  "enumerated_relation_sets": 32,
+  "unordered_pairs": 496,
+  "same_capability_profile_different_support_pairs": 100,
+  "same_scalar_score_different_profile_pairs": 38,
+  "witnesses": {
+    "same_full_profile_different_support": [
+      {"S":["g","m","s","v"],"C":[1,1,1],"J":3},
+      {"S":["g","m","s","x"],"C":[1,1,1],"J":3}
+    ],
+    "same_scalar_different_profile": [
+      {"S":["g","v"],"C":[1,0,0],"J":1},
+      {"S":["g","m"],"C":[0,1,0],"J":1}
+    ],
+    "capability_gain_with_incomparable_relation_sets": [
+      {"S":["g","v"],"C":[1,0,0],"J":1},
+      {"S":["g","m","x"],"C":[1,1,0],"J":2}
+    ]
+  },
+  "shared_relation_lesions": {
+    "base": ["g","m","s","v"],
+    "base_capabilities": [1,1,1],
+    "lesions": {
+      "g": [0,0,0],
+      "m": [1,0,1],
+      "s": [1,1,0],
+      "v": [0,1,1]
+    }
+  },
+  "interpretation": "Capability profile and scalar intelligence are many-to-one projections of support organization. Exact toy model only; not a consciousness measurement."
+}

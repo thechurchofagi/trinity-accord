@@ -5,14 +5,14 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 ## Current entry points
 
 - Completed DOI release: **R105** (TA-TR-2026-24 v1.0 published to Zenodo; OTS submitted and awaiting Bitcoin attestation before Arweave).
-- Latest first-principles research: **R110** (cross-substrate dissociation topology and latent-experience separation).
-- New-window entry: [R110 cross-substrate dissociation topology](records/R110_Cross_Substrate_Dissociation_Topology_20261006.md).
+- Latest first-principles research: **R111** (intelligence capability-support hypergraph).
+- New-window entry: [R111 intelligence capability-support hypergraph](records/R111_Intelligence_Capability_Support_Hypergraph_20261006.md).
 - Current submission manuscript: [From Shutdown Resistance to Self-Continuation Control v0.3](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
 - Archival DOI release: **TA-TR-2026-24 v1.0**, DOI `10.5281/zenodo.23176685`, Zenodo record `23176685`; [v1 release anchor](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/V1_RELEASE_ANCHOR.json).
 - Standing research philosophy: [Long-term research and archival philosophy](notes/20261006_Long_Term_Research_and_Archival_Philosophy.md) — optimize for originality, rigor, reproducibility, stable DOI/archive discoverability, and future-AI citability rather than venue prestige or publication count.
 - Machine-readable archival companion: [self-continuation v0.3 archive](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/README.md) — claims/evidence metadata, citation records, retrieval terms, future-AI reading guide and SHA manifest.
 - Prior integrated UCT workspace manuscript: [UCT Agent Self-Preservation v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest analysis: [R110 cross-substrate dissociation topology](records/R110_Cross_Substrate_Dissociation_Topology_20261006.md).
+- Latest analysis: [R111 intelligence capability-support hypergraph](records/R111_Intelligence_Capability_Support_Hypergraph_20261006.md).
 - Latest training: [R99 bounded-domain path models](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
 - Current next step: preserve exact v1.0; wait for OTS Bitcoin attestation through the existing scheduler, then allow guarded Arweave upload/readback. Do not claim completion before ARWEAVE_READBACK_PASS.
@@ -24,7 +24,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R110 handoff](records/R110_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R111 handoff](records/R111_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -278,3 +278,10 @@ Biological natural experiments strongly support treating experience, access, int
 [Research report](records/R110_Cross_Substrate_Dissociation_Topology_20261006.md); [matrix](records/R110_Cross_Substrate_Dissociation_Matrix.csv); [exact checks](records/r110_cross_substrate_topology_check.py); [results](records/R110_Cross_Substrate_Topology_Results.json); [source ledger](records/R110_Source_Retrieval_Ledger.json); [handoff](records/R110_Worklog_and_Handoff_20261006.md).
 
 R110 keeps empirical functional topology separate from UCT-conditioned experience interpretation. Exact artificial analogues reproduce output, report, self-channel and access dissociations, but E remains uncalibrated in AI. Cross-substrate evidence is graded from T1 functional dissociation similarity through T2 intervention-preserving mechanism correspondence to T3 constitutive organizational homology. Matching pairwise topology is itself insufficient for K identity.
+
+
+## R111 intelligence capability-support hypergraph
+
+[Research report](records/R111_Intelligence_Capability_Support_Hypergraph_20261006.md); [exact checks](records/r111_capability_support_hypergraph.py); [results](records/R111_Capability_Support_Results.json); [source ledger](records/R111_Source_Retrieval_Ledger.json); [handoff](records/R111_Worklog_and_Handoff_20261006.md).
+
+R111 models intelligence as many-to-many task-support organization rather than one scalar. Alternative minimal support routes create multiple realizability; shared relations create correlated deficits; scalar scores collapse distinct capability profiles; and capability gains need not correspond to constitutive set inclusion. Under UCT, task-necessary relations can be mapped conditionally into experiential organization, but same capability does not imply the same support or experience.
