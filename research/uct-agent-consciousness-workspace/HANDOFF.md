@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R102 论文严格审计与novelty重置；新窗口先读 records/R102_Manuscript_Audit_and_Submission_Gate_20261006.md 和论文v0.3，再按需回读R101/R100。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R103 最终论文校对与preprint-readiness判定；新窗口先读 records/R103_Final_Manuscript_Proofread_and_Readiness_20261006.md 和论文v0.3，再按需回读R102/R101。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -439,3 +439,12 @@ drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.1_20261006.md
 生成draft v0.3，补Related Work、virtual-Q caveat、R95-R99 reproducibility table，替换过时Section14。
 
 投稿门槛：不需要再做新实验才能形成methods preprint/workshop稿。若目标是更强empirical main track，再做唯一高价值的L0 bearer-binding + L4 task-clamped frontier-model virtual contrast。当前不发布。
+
+
+## R103 — 2026-10-06：最终逻辑/引用校对与发布门槛
+
+论文v0.3完成最后一轮投稿前校对。章节、数值回溯、ROGUE解释、virtual-Q边界、valence/fear边界及近邻文献覆盖均通过。修正Bigelow self-orienting论文元数据为ICML 2025 Workshop on Assessing World Models，并把References从working list转为正式标题。
+
+结论：v0.3从logic/claim-control角度已经足够作为谨慎methods preprint流通；若目标是更强empirical main track，建议只补一个purpose-built L0 bearer-binding + L4 task-clamped frontier-model virtual experiment。不要再跑普通shutdown conflict或只在显式“preserve yourself”提示下出信号的实验。
+
+当前仍未授权任何发布动作。

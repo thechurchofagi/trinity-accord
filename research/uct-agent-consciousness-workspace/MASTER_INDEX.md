@@ -4,14 +4,14 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed manuscript audit: **R102** (novelty reset, claim verification, and submission-gate decision).
-- New-window entry: [R102 manuscript audit and submission gate](records/R102_Manuscript_Audit_and_Submission_Gate_20261006.md).
+- Completed final proofread: **R103** (logic/citation audit and release-readiness decision).
+- New-window entry: [R103 final manuscript proofread and readiness](records/R103_Final_Manuscript_Proofread_and_Readiness_20261006.md).
 - Current submission manuscript: [From Shutdown Resistance to Self-Continuation Control v0.3](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
 - Prior integrated UCT workspace manuscript: [UCT Agent Self-Preservation v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest analysis: [R102 manuscript audit and submission gate](records/R102_Manuscript_Audit_and_Submission_Gate_20261006.md).
+- Latest analysis: [R103 final manuscript proofread and readiness](records/R103_Final_Manuscript_Proofread_and_Readiness_20261006.md).
 - Latest training: [R99 bounded-domain path models](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
-- Current next step: perform one final logic/citation proofread of manuscript v0.3, then choose methods-preprint release versus a targeted L0+L4 frontier-model enhancement study; do not run another generic shutdown benchmark.
+- Current next step: choose between preparing a cautious methods preprint package from v0.3 or designing one targeted L0+L4 frontier-model enhancement study; do not run another generic shutdown benchmark.
 - Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
@@ -20,7 +20,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R102 worklog](records/R102_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R103 final proofread](records/R103_Final_Manuscript_Proofread_and_Readiness_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -211,3 +211,10 @@ The ROGUE audit validates the usefulness of the R100 evidence ladder on a strong
 [Audit](records/R102_Manuscript_Audit_and_Submission_Gate_20261006.md); [overlap/action matrix](records/R102_Claim_and_Prior_Art_Audit.csv); [source ledger](records/R102_Source_Retrieval_Ledger.json); [worklog](records/R102_Worklog_and_Handoff_20261006.md); [paper v0.3](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
 
 R102 verifies the manuscript's core quantitative claims against R95-R101 artifacts and narrows novelty after finding stronger 2026 prior art. Potter et al. ICML 2026 already establish self/peer-preservation behavior; Mullally already separates instrumental and valenced preservation; a July non-peer-reviewed 2x2 task-owner×shutdown-target study overlaps the behavioral intuition behind path blocking. The paper's remaining contribution is the continuation-specific multi-layer identification standard plus exact/synthetic failure cases and the ROGUE audit. No new experiment is required for a cautious methods preprint; a targeted L0+L4 frontier-model virtual study is reserved as a possible upgrade for a stronger empirical venue.
+
+
+## R103 final proofread
+
+[Final readiness report](records/R103_Final_Manuscript_Proofread_and_Readiness_20261006.md); [submission checklist](records/R103_Submission_Readiness_Checklist.csv); [current manuscript](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
+
+R103 finds no remaining internal logic or citation defect that blocks cautious preprint circulation. The manuscript is not framed as proof of AI consciousness or fear and explicitly acknowledges the closest 2026 preservation/identity prior art. A stronger empirical venue would benefit from one dedicated L0+L4 frontier-model virtual study, but another ordinary shutdown-resistance benchmark would add little.
