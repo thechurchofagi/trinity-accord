@@ -118,6 +118,7 @@ direct XOR 与 decomposed XOR：自然 truth table 完全一样，但内部 clam
 另：task core 不变可 100% 改 report；report 相同可隐藏 1.0 vs 0.5 的 task capability。
 
 ### R109 — 生物 natural-experiment 解离矩阵
+
 关键例子：
 - CMD：241 名无 bedside command response 患者中 60（25%）有 EEG/fMRI command following；
 - locked-in：B/R 几乎崩溃但 E/I 可保存；
@@ -236,6 +237,7 @@ Valence flip 时 6/6 pairwise preferences 全反转。
 结论：content、policy、report、valence 不能互相当同义词。
 
 ### R117 — 第一套真实 biology↔AI evidence-accumulation 实验
+
 生物对象：Gupta et al., Neuron 2026，_A multi-region recurrent circuit for evidence accumulation in rats_。
 
 公开数据：
@@ -355,7 +357,8 @@ scaled-accumulator positive control：正确 state/port mapping 时 baseline / t
 
 拿到公开 `Cells.zip` 后只先做：
 
-**B1** psychophysical temporal kernel  **B2** FOF/ADS cumulative-evidence decoding
+**B1** psychophysical temporal kernel  
+**B2** FOF/ADS cumulative-evidence decoding
 
 然后把 biology 结果塞进 R119 certificate，逐项给 C0–C6：PASS / FAIL / UNCERTAIN。
 
@@ -475,6 +478,7 @@ Canonical note：
 ---
 
 # 9. 新窗口直接复制的接管提示词
+
 ```text
 请接管刘烘炬的 UCT 体验—智能跨底物研究，直接从现有 GitHub 工作区最新状态继续，不要从头重复。
 
