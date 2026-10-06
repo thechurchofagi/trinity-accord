@@ -1,23 +1,30 @@
 {
+  "arweave_tx_id": "71E8EpqNeXKmAnbn48ggr2o44kf5VAOkjswD2Ovb27k",
+  "arweave_url": "https://arweave.net/71E8EpqNeXKmAnbn48ggr2o44kf5VAOkjswD2Ovb27k",
   "batch": "2026-09-28-paper19-v10",
+  "bundle_sha256": "3b0f946b7da46f7d97156d69ec698ecbc225ea52ecd2969412c069e544babdae",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        970170,
+        970174,
+        970187
+      ],
       "bytes": 108421,
       "doi": "10.5281/zenodo.23002980",
       "name": "selecting-and-tracking-conscious-subjects-v1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-09-28-paper19-v10/proofs/TA-TR-2026-19/selecting-and-tracking-conscious-subjects-v1.0.pdf.ots",
-      "proof_sha256": "1c7ba9dd9208318b4cc8b11eca583e14ee8a6c4b67b35219aacf522bc260fc5b",
+      "proof_sha256": "a35137b30e96bfad4f7862fa7c9b1a80329b920624dc3102f5b413f016850f67",
       "report": "TA-TR-2026-19",
       "role": "Complete English v1.0 formal consciousness-theory preprint",
       "sha256": "c6d990afc9962217f92be31776339f806fb10d1e7a6f12c57c28fca3d5471329",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "ARWEAVE_READBACK_PASS",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
