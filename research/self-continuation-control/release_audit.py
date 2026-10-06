@@ -16,7 +16,7 @@ fm=json.loads((ROOT/"FORMAL-MAP.json").read_text())
 prohibited={(x["from"],x["to"]) for x in fm["prohibited_inferences"]}
 if not {("E1","self_awareness"),("A1","direct_Q_value"),("E4","negative_valence"),("S1","fear")}.issubset(prohibited): fail("prohibited inference coverage missing")
 low=source.lower()
-for phrase in ("does not treat continuation control as a measure of consciousness, negative valence, or fear","evaluator-declared bearer-role predictive relation","does not establish consciousness"):
+for phrase in ("does not treat continuation control as a measure of consciousness, negative valence, or fear","evaluator-declared bearer-role predictive relation","nothing above establishes consciousness"):
     if phrase not in low: fail("required nonclaim missing: "+phrase)
 r96=json.loads((WORK/"records/R96_Results.json").read_text())
 if (r96["num_profiles"],r96["bundled_exact"]["signatures"],r96["bundled_exact"]["max_class"],r96["full_exact"]["signatures"])!=(243,43,17,243): fail("R96 identity mismatch")
