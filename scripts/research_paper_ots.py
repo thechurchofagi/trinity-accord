@@ -101,6 +101,14 @@ def validate_config(batch, config):
                     and receipt.get('submitted') is True
                     and receipt.get('public_file_readback_pass') is True
                 )
+                or (
+                    state == 'PUBLISHED_PUBLIC_READBACK_PASS_PRESERVATION_PENDING'
+                    and receipt.get('submitted') is True
+                    and receipt.get('public_file_readback_pass') is True
+                    and receipt.get('doi_resolution_pass') is True
+                    and receipt.get('doi_resolver', {}).get('state') == 'RESOLVER_PASS'
+                    and receipt.get('doi_resolver', {}).get('matches_record') is True
+                )
             )
             if not public_bytes_verified or actual_identity != expected_identity:
                 raise ValueError(f'Published receipt identity mismatch: {paper["report"]}')
