@@ -1,0 +1,41 @@
+{
+  "round": "R110",
+  "output_gate": {
+    "internal_decision_accuracy": 1.0,
+    "behavior_accuracy_gate_on": 1.0,
+    "behavior_accuracy_gate_off": 0.5,
+    "internal_decision_preserved": true
+  },
+  "report_gate": {
+    "task_accuracy_report_on": 1.0,
+    "task_accuracy_report_off": 1.0,
+    "report_accuracy_on": 1.0,
+    "report_accuracy_off": 0.5
+  },
+  "self_channel_lesion": {
+    "world_accuracy_intact": 1.0,
+    "self_accuracy_intact": 1.0,
+    "world_accuracy_after_self_lesion": 1.0,
+    "self_accuracy_after_self_lesion": 0.5
+  },
+  "access_gate": {
+    "encoding_accuracy_gate_on": 1.0,
+    "encoding_accuracy_gate_off": 1.0,
+    "decision_accuracy_access_on": 1.0,
+    "decision_accuracy_access_off": 0.5
+  },
+  "same_external_different_internal": {
+    "external_equal": true,
+    "internal_equal": false,
+    "internal_hamming_fraction": 1.0
+  },
+  "topology_insufficiency": {
+    "G1_edges": [["A","B"],["A","I"],["I","B"]],
+    "G2_edges": [["A","I"],["I","B"]],
+    "same_transitive_reachability": true,
+    "reachability": [["A","B"],["A","I"],["I","B"]],
+    "graphs_equal": false,
+    "distinguishing_intervention": "Set A=1 and intervene I=0: a direct A->B path can remain in G1 but not G2."
+  },
+  "interpretation": "Functional dissociation topology is an intermediate comparator. Matching behavior or pairwise reachability does not establish constitutive organizational identity or experience."
+}

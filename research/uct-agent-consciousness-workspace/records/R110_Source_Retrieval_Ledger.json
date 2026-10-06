@@ -1,0 +1,48 @@
+{
+  "round": "R110",
+  "date": "2026-10-06",
+  "sources": [
+    {
+      "title": "Causal Abstraction: A Theoretical Foundation for Mechanistic Interpretability",
+      "authors": "Geiger et al.",
+      "venue": "JMLR",
+      "year": 2025,
+      "url": "https://www.jmlr.org/papers/v26/23-0058.html",
+      "scope": "Abstract and framework summary read. Used as prior art for intervention-faithful causal mappings."
+    },
+    {
+      "title": "The Non-Linear Representation Dilemma: Is Causal Abstraction Enough for Mechanistic Interpretability?",
+      "authors": "Sutter, Minder, Hofmann, Pimentel",
+      "venue": "NeurIPS",
+      "year": 2025,
+      "url": "https://mlanthology.org/neurips/2025/sutter2025neurips-nonlinear/",
+      "scope": "Abstract read. Used as prior art/caution that overly flexible alignment maps can make causal-abstraction claims vacuous."
+    },
+    {
+      "title": "Calibration and transfer in indicator-based assessments of artificial consciousness",
+      "author": "Florentin Koch",
+      "venue": "Neuroscience of Consciousness",
+      "year": 2026,
+      "doi": "10.1093/nc/niag061",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42775162/",
+      "scope": "Abstract read. Direct prior art for distinguishing calibration from cross-substrate transfer of consciousness indicators."
+    },
+    {
+      "title": "Can artificial systems become conscious?—Recursive embodied closure as an integrative framework",
+      "authors": "Schilling; Krauss",
+      "venue": "Frontiers in Psychology",
+      "year": 2026,
+      "doi": "10.3389/fpsyg.2026.1950309",
+      "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2026.1950309/full",
+      "scope": "Abstract and central thesis read. Used as nearby substrate-independent organizational consciousness framework; R110 does not adopt its closure requirement as a UCT experience gate."
+    }
+  ],
+  "internal_sources": [
+    "R106 first-principles E/A/I/S/B/R map",
+    "R107 two-tier cross-substrate signature",
+    "R108 executable organization/report dissociation",
+    "R109 biological natural-experiment matrix"
+  ],
+  "novelty_status": "Causal abstraction, double dissociation and cross-substrate transfer concerns are prior art. Project-specific contribution is the Latent-E Separation Rule plus T1/T2/T3 evidence levels under UCT C1.",
+  "no_third_party_fulltexts_redistributed": true
+}

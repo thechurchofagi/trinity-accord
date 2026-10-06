@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R109 生物natural-experiment E/A/I/S/B/R矩阵；新窗口先读 records/R109_Biological_Natural_Experiment_Dissociation_Matrix_20261006.md 与R109交接，再按需回读R106-R108。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R110 跨底物解离拓扑与Latent-E Separation Rule；新窗口先读 records/R110_Cross_Substrate_Dissociation_Topology_20261006.md 与R110交接，再按需回读R106-R109。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -529,3 +529,12 @@ direct XOR与decomposed XOR在完整4输入任务上100%行为相同，但内部
 CMD、locked-in、no-report、anesthesia、blindsight、split-brain、dreaming、aphasia/language impairment及cerebellum/cortex/subcortex证据已按E/A/I/S/B/R重排。最稳的共同结论是：B/R不是E的透明同义词；同样的unresponsiveness可对应不同体验状态；task-specific I可与主观内容/报告部分解离；agency unity与experience unity不是一个问题。
 
 提出dissociation topology作为跨底物比较对象。下一步R110做biology↔AI analogue 6x6 dependency matrix。
+
+
+## R110 — 2026-10-06：跨底物解离拓扑与Latent-E Separation
+
+经验比较先限制在A/I/S/B/R功能轴；E不作为AI直接测量节点。先识别K，再由C1条件性解释E，避免理论自证循环。
+
+新增output/report/self/access四类exact artificial lesions，与CMD/LIS/no-report/blindsight等生物解离建立功能拓扑类比。跨底物证据分T1 functional topology、T2 intervention-preserving mechanism、T3 constitutive homology；只有T3足以在C1下直接谈完整体验类型等价。
+
+pairwise topology仍可能丢失direct-vs-indirect机制，因此下一步R111转向capability-support lattice而非单一智能/意识分数。

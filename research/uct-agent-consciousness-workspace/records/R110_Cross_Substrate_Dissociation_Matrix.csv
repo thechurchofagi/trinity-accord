@@ -1,0 +1,9 @@
+relation,biology_status,biology_examples,artificial_status,artificial_witness,interpretive_limit
+I vs B,strong_dissociation,"CMD; locked-in",strong_dissociation,"output-gate lesion: internal decision 1.0, behavior falls to 0.5","does not directly measure E"
+I vs R,strong_dissociation,"locked-in; aphasia; no-report",strong_dissociation,"report gate: task remains 1.0, report falls to 0.5","report is a specialized output relation, not complete organization"
+S vs general I,partial/heterogeneous,"split-brain; dreaming/metacognitive changes",exact selected artificial dissociation,"self-channel lesion preserves world task 1.0, self task falls to 0.5","does not show self-model is irrelevant to all intelligence"
+encoded information vs A,indirect support,"covert cognition; report-limit literature",exact artificial dissociation,"encoding remains 1.0, downstream decision falls to 0.5 with access gate","encoding quality is not the same as downstream causal access"
+B/R vs internal state,strong non-injectivity,"anesthesia; CMD; dreaming",exact artificial non-injectivity,"same external 0000 with internal trajectories differing on all inputs","internal difference alone does not label phenomenal content"
+E vs B/R,indirect biological evidence,"dreaming; anesthesia; LIS; no-report",not independently calibrated in AI,"kept out of empirical AI matrix","AI E remains theory-conditioned under UCT, not empirically read off"
+E vs I,partial/indirect,"blindsight; anesthesia; varied cognition with consciousness-state changes",not independently calibrated in AI,"no direct empirical AI E comparison","do not infer human-like experience from capability"
+pairwise topology vs full K,not a biological claim,,"exact insufficiency witness","G1/G2 have same reachability but different direct edge structure","dissociation topology is intermediate, not constitutive identity"
