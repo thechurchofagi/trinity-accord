@@ -1,0 +1,286 @@
+{
+  "schema_version": "1.0",
+  "round": "R122",
+  "date": "2026-10-06",
+  "repository": "thechurchofagi/trinity-accord",
+  "branch": "uct-agent-consciousness-workspace",
+  "research_directory": "research/uct-agent-consciousness-workspace",
+  "continuation_parent_at_start": "ab02cb6ea51442aa434bdfbe3ef69d52d2877996",
+  "archive_status": "COMPLETE_DOWNLOAD_SIZE_MD5_SHA256_VERIFIED",
+  "B1": {
+    "status": "COMPLETE_12_SESSIONS",
+    "n_sessions": 12,
+    "n_rats": 5,
+    "n_trials": 3344,
+    "primary_contrast": "full10 versus lastbin held-out log-loss improvement",
+    "primary_conclusion": "INCONCLUSIVE_ACROSS_FIVE_RATS",
+    "model_metrics_equal_rat": {
+      "full10": {
+        "log_loss": {
+          "n": 5,
+          "mean": 0.5873072150678543,
+          "sd": 0.06174967816690304,
+          "descriptive_t95": [
+            0.5106348627873418,
+            0.6639795673483668
+          ]
+        },
+        "brier": {
+          "n": 5,
+          "mean": 0.19533270330890343,
+          "sd": 0.026949882418537616,
+          "descriptive_t95": [
+            0.16187000455398068,
+            0.22879540206382618
+          ]
+        },
+        "accuracy": {
+          "n": 5,
+          "mean": 0.7103562528984754,
+          "sd": 0.056346326879842125,
+          "descriptive_t95": [
+            0.6403930473807544,
+            0.7803194584161963
+          ]
+        }
+      },
+      "lastbin": {
+        "log_loss": {
+          "n": 5,
+          "mean": 0.6065391384114784,
+          "sd": 0.032735113272386575,
+          "descriptive_t95": [
+            0.5658931267840338,
+            0.6471851500389231
+          ]
+        },
+        "brier": {
+          "n": 5,
+          "mean": 0.20909342173480736,
+          "sd": 0.01437199598933004,
+          "descriptive_t95": [
+            0.19124823173252736,
+            0.22693861173708735
+          ]
+        },
+        "accuracy": {
+          "n": 5,
+          "mean": 0.6784901436445647,
+          "sd": 0.04291883555706974,
+          "descriptive_t95": [
+            0.6251993706885236,
+            0.7317809166006058
+          ]
+        }
+      },
+      "total": {
+        "log_loss": {
+          "n": 5,
+          "mean": 0.5621476441341238,
+          "sd": 0.059645724455848606,
+          "descriptive_t95": [
+            0.4880876954305148,
+            0.6362075928377328
+          ]
+        },
+        "brier": {
+          "n": 5,
+          "mean": 0.18829871408997567,
+          "sd": 0.026307400659079726,
+          "descriptive_t95": [
+            0.1556337618052744,
+            0.22096366637467693
+          ]
+        },
+        "accuracy": {
+          "n": 5,
+          "mean": 0.7253281200466272,
+          "sd": 0.04772352402328071,
+          "descriptive_t95": [
+            0.6660715383995071,
+            0.7845847016937473
+          ]
+        }
+      },
+      "nuisance": {
+        "log_loss": {
+          "n": 5,
+          "mean": 0.6913980861010786,
+          "sd": 0.020306197908795964,
+          "descriptive_t95": [
+            0.6661846112173261,
+            0.716611560984831
+          ]
+        },
+        "brier": {
+          "n": 5,
+          "mean": 0.24861928422873572,
+          "sd": 0.009831906377646476,
+          "descriptive_t95": [
+            0.2364113600459021,
+            0.2608272084115693
+          ]
+        },
+        "accuracy": {
+          "n": 5,
+          "mean": 0.561456216234632,
+          "sd": 0.05362440774933503,
+          "descriptive_t95": [
+            0.4948727197072838,
+            0.6280397127619803
+          ]
+        }
+      }
+    },
+    "prespecified_loss_contrasts": {
+      "loss_gain_full10_over_lastbin": {
+        "n": 5,
+        "mean": 0.01923192334362418,
+        "sd": 0.04109917027038463,
+        "descriptive_t95": [
+          -0.031799436737158876,
+          0.07026328342440723
+        ]
+      },
+      "loss_gain_total_over_lastbin": {
+        "n": 5,
+        "mean": 0.04439149427735471,
+        "sd": 0.030928203507247724,
+        "descriptive_t95": [
+          0.0059890574532858246,
+          0.0827939311014236
+        ]
+      },
+      "loss_gain_full10_over_total": {
+        "n": 5,
+        "mean": -0.02515957093373052,
+        "sd": 0.02315870747148848,
+        "descriptive_t95": [
+          -0.05391490424601029,
+          0.00359576237854925
+        ]
+      }
+    },
+    "accuracy_target": "observed rat choice, not objective task correctness"
+  },
+  "B2": {
+    "status": "COMPLETED_INDEPENDENT_CONSERVATIVE_REANALYSIS",
+    "n_sessions": 12,
+    "n_failed_sessions": 0,
+    "n_rats": 5,
+    "n_trials": 3319,
+    "n_held_out_bins": 32656,
+    "equal_rat_means": [
+      {
+        "region": "ADS",
+        "pearson_r": 0.1365608809166937,
+        "r2": 0.03644883174286852,
+        "rmse": 10.435567812563923,
+        "within_choice_time_r": 0.04210352372054497
+      },
+      {
+        "region": "FOF",
+        "pearson_r": 0.18478977864157975,
+        "r2": 0.054276881081254426,
+        "rmse": 10.324037088163015,
+        "within_choice_time_r": 0.04923762152645833
+      }
+    ],
+    "paired_rat_contrasts": [
+      {
+        "metric": "pearson_r",
+        "contrast": "FOF minus ADS",
+        "n_rats": 5,
+        "rat_contrasts": [
+          0.14802952354296364,
+          0.14161234550969104,
+          -0.03457732553036991,
+          -0.07657541567169743,
+          0.0626553607738429
+        ],
+        "mean": 0.04822889772488605,
+        "descriptive_cluster_bootstrap_95": [
+          -0.031930024326058355,
+          0.12838781977583044
+        ]
+      },
+      {
+        "metric": "r2",
+        "contrast": "FOF minus ADS",
+        "n_rats": 5,
+        "rat_contrasts": [
+          -0.029660165856391085,
+          0.1173697423688439,
+          -0.011745723212606446,
+          -0.01712844695023452,
+          0.030304840342317695
+        ],
+        "mean": 0.017828049338385908,
+        "descriptive_cluster_bootstrap_95": [
+          -0.021064589765171532,
+          0.07305712409972297
+        ]
+      },
+      {
+        "metric": "rmse",
+        "contrast": "FOF minus ADS",
+        "n_rats": 5,
+        "rat_contrasts": [
+          0.13558074706097756,
+          -0.6273816406310466,
+          0.06283429877166569,
+          0.08160578519438566,
+          -0.21029281240051745
+        ],
+        "mean": -0.11153072440090703,
+        "descriptive_cluster_bootstrap_95": [
+          -0.39137139744653593,
+          0.09944147265647843
+        ]
+      },
+      {
+        "metric": "within_choice_time_r",
+        "contrast": "FOF minus ADS",
+        "n_rats": 5,
+        "rat_contrasts": [
+          0.0965142184974815,
+          0.013706009432073452,
+          -0.014544932365427265,
+          -0.06356791814471598,
+          0.003563111610155101
+        ],
+        "mean": 0.007134097805913361,
+        "descriptive_cluster_bootstrap_95": [
+          -0.03671550624276755,
+          0.05774074651181813
+        ]
+      }
+    ],
+    "conclusion": "MODEST_HETEROGENEOUS_STIMULUS_DECODABILITY",
+    "exact_reproduction_of_Figure_2C": false,
+    "negative_session_region_R2": 8,
+    "session_region_pairs": 24
+  },
+  "independent_computational_review": "PASS_WITH_DECLARED_SCIENTIFIC_LIMITS",
+  "code_sha256": {
+    "rat_cells.py": "21a84a802ded32bb73d59316332c838ff84b4e5a14e6363d975b09db39009ca4",
+    "b1_kernel.py": "776e7e92a130bc9b29235f8382541d5b65398779d85f1c01e109f87027fdafd7",
+    "b2_decode.py": "7db8c365282f3560eee07c39d2cf460f854b5af4c70608b949d0e8dcf34b610a"
+  },
+  "externally_preregistered": false,
+  "new_AI_runs": 0,
+  "new_theorems": 0,
+  "B3_trial_replication": false,
+  "T2": "NOT_CLOSED",
+  "T3": "NOT_ESTABLISHED",
+  "G4": "NOT_ESTABLISHED",
+  "E": "LATENT",
+  "V": "NOT_MEASURED",
+  "R117_readout_caveat": "Accuracy uses Gaussian decision noise sigma3; pulse probability uses sigmoid temperature3; state R2 is cum versus cum+Gaussian noise, not a trained held-out decoder.",
+  "next_narrow_step": "Declare biological state/port/time maps and common output law with error tolerances; pursue auditable biological perturbation outcomes. If needed, a predeclared one-factor sensitivity on the same sessions, without altering R122.",
+  "source_and_read_scope": [
+    "R122_Continuity_Read_Ledger.json",
+    "R122_Methods_Source_Ledger.json",
+    "R122_B1_Source_Schema_Ledger.json"
+  ]
+}

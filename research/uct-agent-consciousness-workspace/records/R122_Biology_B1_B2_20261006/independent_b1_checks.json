@@ -1,0 +1,140 @@
+{
+  "status": "passed",
+  "scope": "B1 raw counts/history, blocked purge, OOF metrics and equal-rat aggregation",
+  "code_sha256": {
+    "b1_kernel.py": "776e7e92a130bc9b29235f8382541d5b65398779d85f1c01e109f87027fdafd7",
+    "rat_cells.py": "21a84a802ded32bb73d59316332c838ff84b4e5a14e6363d975b09db39009ca4",
+    "independent_b1_checks.py": "6b01ab81e8f0ddf2b005559180efc20802aae62b65b2d2406182f1360e05ca59"
+  },
+  "n_eligible_trials": 3344,
+  "n_temporal_counts_checked": 33440,
+  "aggregate_mean_max_error": 0.0,
+  "session_checks": [
+    {
+      "session": "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat",
+      "n_source_trials": 250,
+      "n_eligible_trials": 160,
+      "n_temporal_counts_checked": 1600,
+      "raw_previous_source_history_checks": 160,
+      "folds_purge_validated": 5,
+      "max_metric_error": 1.1102230246251565e-16,
+      "first_fold_independent_refit_max_probability_errors": {
+        "full10": 1.1102230246251565e-16,
+        "lastbin": 5.551115123125783e-17,
+        "total": 1.1102230246251565e-16,
+        "nuisance": 5.551115123125783e-17
+      }
+    },
+    {
+      "session": "A297_2021_07_19_01_g0_t0.imec0.ap_res.Cells.mat",
+      "n_source_trials": 364,
+      "n_eligible_trials": 176,
+      "n_temporal_counts_checked": 1760,
+      "raw_previous_source_history_checks": 176,
+      "folds_purge_validated": 5,
+      "max_metric_error": 2.7755575615628914e-17,
+      "first_fold_independent_refit_max_probability_errors": null
+    },
+    {
+      "session": "X046_2019-09-23_g0_t0.imec0.ap_res.Cells.mat",
+      "n_source_trials": 502,
+      "n_eligible_trials": 323,
+      "n_temporal_counts_checked": 3230,
+      "raw_previous_source_history_checks": 323,
+      "folds_purge_validated": 5,
+      "max_metric_error": 1.6653345369377348e-16,
+      "first_fold_independent_refit_max_probability_errors": null
+    },
+    {
+      "session": "X046_2019-09-26_g0_t0.imec0.ap_res.Cells.mat",
+      "n_source_trials": 472,
+      "n_eligible_trials": 283,
+      "n_temporal_counts_checked": 2830,
+      "raw_previous_source_history_checks": 283,
+      "folds_purge_validated": 5,
+      "max_metric_error": 1.1102230246251565e-16,
+      "first_fold_independent_refit_max_probability_errors": null
+    },
+    {
+      "session": "X046_2019-10-01_g0_t0.imec0.ap_res.Cells.mat",
+      "n_source_trials": 365,
+      "n_eligible_trials": 193,
+      "n_temporal_counts_checked": 1930,
+      "raw_previous_source_history_checks": 193,
+      "folds_purge_validated": 5,
+      "max_metric_error": 5.551115123125783e-17,
+      "first_fold_independent_refit_max_probability_errors": null
+    },
+    {
+      "session": "X046_2019-10-03_g0_t0.imec0.ap_res.Cells.mat",
+      "n_source_trials": 554,
+      "n_eligible_trials": 252,
+      "n_temporal_counts_checked": 2520,
+      "raw_previous_source_history_checks": 252,
+      "folds_purge_validated": 5,
+      "max_metric_error": 1.6653345369377348e-16,
+      "first_fold_independent_refit_max_probability_errors": null
+    },
+    {
+      "session": "X062_2020_03_19_g0_t0.imec0.ap_res.Cells.mat",
+      "n_source_trials": 279,
+      "n_eligible_trials": 226,
+      "n_temporal_counts_checked": 2260,
+      "raw_previous_source_history_checks": 226,
+      "folds_purge_validated": 5,
+      "max_metric_error": 2.7755575615628914e-17,
+      "first_fold_independent_refit_max_probability_errors": null
+    },
+    {
+      "session": "X062_2020_03_20_g0_t0.imec0.ap_res.Cells.mat",
+      "n_source_trials": 444,
+      "n_eligible_trials": 353,
+      "n_temporal_counts_checked": 3530,
+      "raw_previous_source_history_checks": 353,
+      "folds_purge_validated": 5,
+      "max_metric_error": 0.0,
+      "first_fold_independent_refit_max_probability_errors": null
+    },
+    {
+      "session": "X062_2020_03_21_g0_t0.imec0.ap_res.Cells.mat",
+      "n_source_trials": 415,
+      "n_eligible_trials": 327,
+      "n_temporal_counts_checked": 3270,
+      "raw_previous_source_history_checks": 327,
+      "folds_purge_validated": 5,
+      "max_metric_error": 2.7755575615628914e-17,
+      "first_fold_independent_refit_max_probability_errors": null
+    },
+    {
+      "session": "X087_2021_07_25_g0_t0.imec0.ap_res.Cells.mat",
+      "n_source_trials": 300,
+      "n_eligible_trials": 204,
+      "n_temporal_counts_checked": 2040,
+      "raw_previous_source_history_checks": 204,
+      "folds_purge_validated": 5,
+      "max_metric_error": 5.551115123125783e-17,
+      "first_fold_independent_refit_max_probability_errors": null
+    },
+    {
+      "session": "X087_2021_07_30_g0_t0.imec0.ap_res.Cells.mat",
+      "n_source_trials": 507,
+      "n_eligible_trials": 355,
+      "n_temporal_counts_checked": 3550,
+      "raw_previous_source_history_checks": 355,
+      "folds_purge_validated": 5,
+      "max_metric_error": 0.0,
+      "first_fold_independent_refit_max_probability_errors": null
+    },
+    {
+      "session": "X087_2021_08_03_g0_t0.imec0.ap_res.Cells.mat",
+      "n_source_trials": 778,
+      "n_eligible_trials": 492,
+      "n_temporal_counts_checked": 4920,
+      "raw_previous_source_history_checks": 492,
+      "folds_purge_validated": 5,
+      "max_metric_error": 0.0,
+      "first_fold_independent_refit_max_probability_errors": null
+    }
+  ],
+  "inference_limit": "Verifies specified observational analysis. Does not establish neural causal use, exclusive accumulator strategy, T2 closure or experience."
+}

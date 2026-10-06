@@ -4,20 +4,22 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Cross-window master handoff: [R121 experience–intelligence cross-substrate master handoff](records/UCT_Experience_Intelligence_Cross_Substrate_Master_Handoff_R121_20261006.md).
+- Current cross-window handoff: [R122 real rat B1/B2 and open T2 certificate](records/R122_Worklog_and_Handoff_20261006.md). Fetch current HEAD first; continue a newer round if present. [R121 theory/master background](records/UCT_Experience_Intelligence_Cross_Substrate_Master_Handoff_R121_20261006.md) remains preserved; its former download blocker is resolved by R122.
 
 - Completed DOI release: **R105** (TA-TR-2026-24 v1.0 published to Zenodo; OTS submitted and awaiting Bitcoin attestation before Arweave).
-- Latest first-principles research: **R119** (T2 intervention-preserving support-correspondence certificate).
-- New-window entry: [R119 T2 support-correspondence certificate](records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md).
+- Latest completed research: **R122** (12 real rat sessions: B1/B2 independently executed and audited; T2 not closed).
+- Latest first-principles closure: **R121**, continuing the R119 certificate and R120 bridge schema; no new generic theorem needed.
+- New-window entry: [R122 real rat B1/B2 and open T2 certificate](records/R122_Real_Rat_B1_B2_and_Open_T2_Certificate_20261006.md).
 - Current submission manuscript: [From Shutdown Resistance to Self-Continuation Control v0.3](drafts/From_Shutdown_Resistance_to_Self_Continuation_Control_v0.3_20261006.md).
 - Archival DOI release: **TA-TR-2026-24 v1.0**, DOI `10.5281/zenodo.23176685`, Zenodo record `23176685`; [v1 release anchor](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/V1_RELEASE_ANCHOR.json).
 - Standing research philosophy: [Long-term research and archival philosophy](notes/20261006_Long_Term_Research_and_Archival_Philosophy.md) — optimize for originality, rigor, reproducibility, stable DOI/archive discoverability, and future-AI citability rather than venue prestige or publication count.
 - Machine-readable archival companion: [self-continuation v0.3 archive](archive/from-shutdown-resistance-to-self-continuation-control-v0.3/README.md) — claims/evidence metadata, citation records, retrieval terms, future-AI reading guide and SHA manifest.
 - Prior integrated UCT workspace manuscript: [UCT Agent Self-Preservation v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest analysis: [R119 T2 support-correspondence certificate](records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md).
+- Latest analysis: [R122 full report](records/R122_Real_Rat_B1_B2_and_Open_T2_Certificate_20261006.md); [reproducibility package](records/R122_Biology_B1_B2_20261006/README.md); [machine-readable status](records/R122_Biology_B1_B2_20261006/R122_Research_Status.json).
 - Latest training: [R99 bounded-domain path models](records/R99_What_Extra_Structure_Yields_a_Mechanism_Certificate_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
-- Current next step: preserve exact v1.0; wait for OTS Bitcoin attestation through the existing scheduler, then allow guarded Arweave upload/readback. Do not claim completion before ARWEAVE_READBACK_PASS.
+- Current research next step: identify and calibrate a biological/artificial state, port, time and output-law correspondence in the same accumulation domain; obtain independently assessable perturbation outcomes for C3. B1/B2 are complete, with primary B1 uncertainty and weak/heterogeneous B2 retained. Do not restart the data-access blocker or add generic toy theorems.
+- Existing archival side workflow: preserve exact v1.0 and its prior scheduler/receipts; do not claim Arweave completion without the existing required readback. R122 does not alter that workflow or published bytes.
 - Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
@@ -26,7 +28,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R121 handoff](records/R121_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R122 handoff](records/R122_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -357,3 +359,11 @@ R120 consolidates the first-principles answer: actual realized intelligence is e
 [Closure report](records/R121_Experience_Intelligence_Closure_Audit_20261006.md); [status matrix](records/R121_Closure_Status_Matrix.csv); [handoff](records/R121_Worklog_and_Handoff_20261006.md).
 
 R121 concludes that the generic experience–intelligence relation is largely formally closed conditional on UCT: actual intelligence is experience-bearing, intelligence is not identical to experience, genuine capability differences can refine complete experiential type, and equality/increase of capability does not identify equality/increase of experience. Remaining high-value work is empirical T2/T3 closure plus genuinely separate phenomenal-content, valence, subject-boundary and foundational-C1/U1 validation problems.
+
+## R122 real biological B1/B2, with an open T2 certificate
+
+[Main report](records/R122_Real_Rat_B1_B2_and_Open_T2_Certificate_20261006.md); [current handoff](records/R122_Worklog_and_Handoff_20261006.md); [complete reproducibility directory](records/R122_Biology_B1_B2_20261006/README.md); [downloadable package](records/R122_Research_Package_20261006.zip); [T2 CSV](records/R122_Biology_B1_B2_20261006/R122_T2_Certificate.csv); [machine-readable status](records/R122_Biology_B1_B2_20261006/R122_Research_Status.json); [independent review](records/R122_Biology_B1_B2_20261006/independent_review.md); [summary figure](records/R122_Biology_B1_B2_20261006/figures/R122_B1_B2_Summary.png).
+
+The entire public Cells.zip was downloaded and its size, MD5 and SHA-256 verified. All 12 original MATLAB recording sessions from five rats were independently analyzed: B1 uses 3,344 trials; B2 uses 3,319 trials and 32,656 held-out time bins. Computational checks independently reconstructed all behavioral count features and neural targets, verified trial-block validation, and checked selected neural rates/readouts. The primary B1 full10-versus-last-bin contrast is inconclusive (mean log-loss gain 0.019232, descriptive interval −0.031799 to 0.070263); the prespecified total-evidence control favors broader history in all sessions. B2 is modest and heterogeneous (equal-rat predictive R²: FOF 0.054277, ADS 0.036449), with eight negative session-region scores preserved.
+
+T2.C0 passes only for the external signed-count coordinate; C1–C6 remain incomplete. Decoding is not transition commutation or intervention transport. B3 is not independently replicated: all twelve recording sessions have zero laser-on flags, and R118 registry counts remain distinct. The R117 state-noise R² and its different Gaussian/sigmoid readout laws are explicitly separated from R122 estimands. No AI experience labels, new AI training, new toy theorem, T3/G4 claim or published-file change occurred.

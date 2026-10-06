@@ -1,0 +1,11 @@
+{
+  "reviewer": "independent_review subtask; separate raw-data audit and final text review",
+  "disposition": "ACCEPT_WITH_ONE_WORDING_CORRECTION_RESOLVED",
+  "scientific_checks": "See independent_review.md and executed independent_*_checks.json",
+  "final_text_correction": "Replaced ambiguous capability-difference refines E-type wording with difference implies difference under fixed complete conditions; no refinement/richness ordering implied.",
+  "coordinator_additions": [
+    "R117 distinct Gaussian/sigmoid readout laws disclosed",
+    "Figure script path corrected to figures/plot_r122_summary.py"
+  ],
+  "additional_fits_or_tests_for_integration": 0
+}

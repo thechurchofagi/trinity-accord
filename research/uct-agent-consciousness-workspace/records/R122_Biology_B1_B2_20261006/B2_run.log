@@ -1,0 +1,85 @@
+{"event": "loading_session", "path": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat"}
+{"session": "821234", "outer_fold": 0, "n_train_trials": 124, "n_test_trials": 31}
+{"session": "821234", "outer_fold": 1, "n_train_trials": 124, "n_test_trials": 31}
+{"session": "821234", "outer_fold": 2, "n_train_trials": 124, "n_test_trials": 31}
+{"session": "821234", "outer_fold": 3, "n_train_trials": 124, "n_test_trials": 31}
+{"session": "821234", "outer_fold": 4, "n_train_trials": 124, "n_test_trials": 31}
+{"event": "session_complete", "rat": "A294", "session_id": "821234", "metrics": {"FOF": {"n_rows": 1517, "pearson_r": -0.02582648430547976, "r2": -0.04807642968154857, "rmse": 9.513529628466987}, "ADS": {"n_rows": 1517, "pearson_r": -0.1738560078484434, "r2": -0.018416263825157486, "rmse": 9.37794888140601}}}
+{"event": "loading_session", "path": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/A297_2021_07_19_01_g0_t0.imec0.ap_res.Cells.mat"}
+{"session": "825669", "outer_fold": 0, "n_train_trials": 138, "n_test_trials": 35}
+{"session": "825669", "outer_fold": 1, "n_train_trials": 138, "n_test_trials": 35}
+{"session": "825669", "outer_fold": 2, "n_train_trials": 138, "n_test_trials": 35}
+{"session": "825669", "outer_fold": 3, "n_train_trials": 139, "n_test_trials": 34}
+{"session": "825669", "outer_fold": 4, "n_train_trials": 139, "n_test_trials": 34}
+{"event": "session_complete", "rat": "A297", "session_id": "825669", "metrics": {"FOF": {"n_rows": 1526, "pearson_r": 0.47039509012881786, "r2": 0.21935783880263104, "rmse": 8.648312601987692}, "ADS": {"n_rows": 1526, "pearson_r": 0.3287827446191268, "r2": 0.10198809643378715, "rmse": 9.275694242618739}}}
+{"event": "loading_session", "path": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/X046_2019-09-23_g0_t0.imec0.ap_res.Cells.mat"}
+{"session": "733984", "outer_fold": 0, "n_train_trials": 256, "n_test_trials": 65}
+{"session": "733984", "outer_fold": 1, "n_train_trials": 257, "n_test_trials": 64}
+{"session": "733984", "outer_fold": 2, "n_train_trials": 257, "n_test_trials": 64}
+{"session": "733984", "outer_fold": 3, "n_train_trials": 257, "n_test_trials": 64}
+{"session": "733984", "outer_fold": 4, "n_train_trials": 257, "n_test_trials": 64}
+{"event": "session_complete", "rat": "X046", "session_id": "733984", "metrics": {"FOF": {"n_rows": 2751, "pearson_r": 0.14151555489379403, "r2": 0.015203561914735153, "rmse": 10.367729393162366}, "ADS": {"n_rows": 2751, "pearson_r": 0.25764242885679917, "r2": 0.06192563182136013, "rmse": 10.118800962816458}}}
+{"event": "loading_session", "path": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/X046_2019-09-26_g0_t0.imec0.ap_res.Cells.mat"}
+{"session": "734639", "outer_fold": 0, "n_train_trials": 224, "n_test_trials": 57}
+{"session": "734639", "outer_fold": 1, "n_train_trials": 225, "n_test_trials": 56}
+{"session": "734639", "outer_fold": 2, "n_train_trials": 225, "n_test_trials": 56}
+{"session": "734639", "outer_fold": 3, "n_train_trials": 225, "n_test_trials": 56}
+{"session": "734639", "outer_fold": 4, "n_train_trials": 225, "n_test_trials": 56}
+{"event": "session_complete", "rat": "X046", "session_id": "734639", "metrics": {"FOF": {"n_rows": 2361, "pearson_r": 0.03960208014484894, "r2": -3.863755429511784e-05, "rmse": 10.226022021711758}, "ADS": {"n_rows": 2361, "pearson_r": 0.10187990455663569, "r2": 0.010206997031886655, "rmse": 10.173503139812636}}}
+{"event": "loading_session", "path": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/X046_2019-10-01_g0_t0.imec0.ap_res.Cells.mat"}
+{"session": "735578", "outer_fold": 0, "n_train_trials": 154, "n_test_trials": 39}
+{"session": "735578", "outer_fold": 1, "n_train_trials": 154, "n_test_trials": 39}
+{"session": "735578", "outer_fold": 2, "n_train_trials": 154, "n_test_trials": 39}
+{"session": "735578", "outer_fold": 3, "n_train_trials": 155, "n_test_trials": 38}
+{"session": "735578", "outer_fold": 4, "n_train_trials": 155, "n_test_trials": 38}
+{"event": "session_complete", "rat": "X046", "session_id": "735578", "metrics": {"FOF": {"n_rows": 1615, "pearson_r": 0.11388991398209129, "r2": 0.009468323396790379, "rmse": 9.97772273424181}, "ADS": {"n_rows": 1615, "pearson_r": 0.05515032885602676, "r2": -0.0012139095102148278, "rmse": 10.031380047386856}}}
+{"event": "loading_session", "path": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/X046_2019-10-03_g0_t0.imec0.ap_res.Cells.mat"}
+{"session": "736200", "outer_fold": 0, "n_train_trials": 200, "n_test_trials": 50}
+{"session": "736200", "outer_fold": 1, "n_train_trials": 200, "n_test_trials": 50}
+{"session": "736200", "outer_fold": 2, "n_train_trials": 200, "n_test_trials": 50}
+{"session": "736200", "outer_fold": 3, "n_train_trials": 200, "n_test_trials": 50}
+{"session": "736200", "outer_fold": 4, "n_train_trials": 200, "n_test_trials": 50}
+{"event": "session_complete", "rat": "X046", "session_id": "736200", "metrics": {"FOF": {"n_rows": 2242, "pearson_r": 0.09242585971850803, "r2": 0.007177160741713928, "rmse": 10.0975372802007}, "ADS": {"n_rows": 2242, "pearson_r": 0.11107004859126031, "r2": 0.007874582006338171, "rmse": 10.093990084214019}}}
+{"event": "loading_session", "path": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/X062_2020_03_19_g0_t0.imec0.ap_res.Cells.mat"}
+{"session": "779404", "outer_fold": 0, "n_train_trials": 179, "n_test_trials": 45}
+{"session": "779404", "outer_fold": 1, "n_train_trials": 179, "n_test_trials": 45}
+{"session": "779404", "outer_fold": 2, "n_train_trials": 179, "n_test_trials": 45}
+{"session": "779404", "outer_fold": 3, "n_train_trials": 179, "n_test_trials": 45}
+{"session": "779404", "outer_fold": 4, "n_train_trials": 180, "n_test_trials": 44}
+{"event": "session_complete", "rat": "X062", "session_id": "779404", "metrics": {"FOF": {"n_rows": 1995, "pearson_r": -0.03037103115143686, "r2": -0.06657677759154379, "rmse": 10.35064107891093}, "ADS": {"n_rows": 1995, "pearson_r": 0.17050956956277027, "r2": -0.00913911751619323, "rmse": 10.06808116319843}}}
+{"event": "loading_session", "path": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/X062_2020_03_20_g0_t0.imec0.ap_res.Cells.mat"}
+{"session": "779405", "outer_fold": 0, "n_train_trials": 282, "n_test_trials": 71}
+{"session": "779405", "outer_fold": 1, "n_train_trials": 282, "n_test_trials": 71}
+{"session": "779405", "outer_fold": 2, "n_train_trials": 282, "n_test_trials": 71}
+{"session": "779405", "outer_fold": 3, "n_train_trials": 283, "n_test_trials": 70}
+{"session": "779405", "outer_fold": 4, "n_train_trials": 283, "n_test_trials": 70}
+{"event": "session_complete", "rat": "X062", "session_id": "779405", "metrics": {"FOF": {"n_rows": 3159, "pearson_r": 0.3893134737530717, "r2": 0.14591130092528093, "rmse": 9.537266138287047}, "ADS": {"n_rows": 3159, "pearson_r": 0.3430182841924415, "r2": 0.11656549497253366, "rmse": 9.699728827699161}}}
+{"event": "loading_session", "path": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/X062_2020_03_21_g0_t0.imec0.ap_res.Cells.mat"}
+{"session": "779406", "outer_fold": 0, "n_train_trials": 258, "n_test_trials": 65}
+{"session": "779406", "outer_fold": 1, "n_train_trials": 258, "n_test_trials": 65}
+{"session": "779406", "outer_fold": 2, "n_train_trials": 258, "n_test_trials": 65}
+{"session": "779406", "outer_fold": 3, "n_train_trials": 259, "n_test_trials": 64}
+{"session": "779406", "outer_fold": 4, "n_train_trials": 259, "n_test_trials": 64}
+{"event": "session_complete", "rat": "X062", "session_id": "779406", "metrics": {"FOF": {"n_rows": 2913, "pearson_r": -0.042438807809047616, "r2": -0.032785657234562615, "rmse": 10.99695622833261}, "ADS": {"n_rows": 2913, "pearson_r": 0.032702028052467656, "r2": -0.009492170506462339, "rmse": 10.872236099049843}}}
+{"event": "loading_session", "path": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/X087_2021_07_25_g0_t0.imec0.ap_res.Cells.mat"}
+{"session": "826310", "outer_fold": 0, "n_train_trials": 163, "n_test_trials": 41}
+{"session": "826310", "outer_fold": 1, "n_train_trials": 163, "n_test_trials": 41}
+{"session": "826310", "outer_fold": 2, "n_train_trials": 163, "n_test_trials": 41}
+{"session": "826310", "outer_fold": 3, "n_train_trials": 163, "n_test_trials": 41}
+{"session": "826310", "outer_fold": 4, "n_train_trials": 164, "n_test_trials": 40}
+{"event": "session_complete", "rat": "X087", "session_id": "826310", "metrics": {"FOF": {"n_rows": 2986, "pearson_r": 0.2795095676882445, "r2": 0.07686543607893737, "rmse": 13.85448948859887}, "ADS": {"n_rows": 2986, "pearson_r": 0.22044750548474584, "r2": 0.04784431129108724, "rmse": 14.07058015984235}}}
+{"event": "loading_session", "path": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/X087_2021_07_30_g0_t0.imec0.ap_res.Cells.mat"}
+{"session": "826993", "outer_fold": 0, "n_train_trials": 284, "n_test_trials": 71}
+{"session": "826993", "outer_fold": 1, "n_train_trials": 284, "n_test_trials": 71}
+{"session": "826993", "outer_fold": 2, "n_train_trials": 284, "n_test_trials": 71}
+{"session": "826993", "outer_fold": 3, "n_train_trials": 284, "n_test_trials": 71}
+{"session": "826993", "outer_fold": 4, "n_train_trials": 284, "n_test_trials": 71}
+{"event": "session_complete", "rat": "X087", "session_id": "826993", "metrics": {"FOF": {"n_rows": 5287, "pearson_r": 0.3042990425275891, "r2": 0.09218677677411591, "rmse": 14.357239109918904}, "ADS": {"n_rows": 5287, "pearson_r": 0.25303571756517873, "r2": 0.06310763864647484, "rmse": 14.58537266768413}}}
+{"event": "loading_session", "path": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/X087_2021_08_03_g0_t0.imec0.ap_res.Cells.mat"}
+{"session": "827623", "outer_fold": 0, "n_train_trials": 389, "n_test_trials": 98}
+{"session": "827623", "outer_fold": 1, "n_train_trials": 389, "n_test_trials": 98}
+{"session": "827623", "outer_fold": 2, "n_train_trials": 390, "n_test_trials": 97}
+{"session": "827623", "outer_fold": 3, "n_train_trials": 390, "n_test_trials": 97}
+{"session": "827623", "outer_fold": 4, "n_train_trials": 390, "n_test_trials": 97}
+{"event": "session_complete", "rat": "X087", "session_id": "827623", "metrics": {"FOF": {"n_rows": 4304, "pearson_r": 0.24725356059082948, "r2": 0.06085010352913289, "rmse": 10.776679015045364}, "ADS": {"n_rows": 4304, "pearson_r": 0.1696128654352098, "r2": 0.028035845417671013, "rmse": 10.96333322323821}}}
+{"event": "run_finished", "n_sessions": 12, "n_computed": 12, "n_failed": 0}

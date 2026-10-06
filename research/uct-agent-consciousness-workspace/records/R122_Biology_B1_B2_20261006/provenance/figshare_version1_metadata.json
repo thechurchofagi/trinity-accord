@@ -1,0 +1,173 @@
+{
+  "url_public_html": "https://figshare.com/articles/dataset/Data_from_A_multi-region_recurrent_circuit_for_evidence_accumulation_in_rats/30369064/1",
+  "files": [
+    {
+      "id": 58773835,
+      "name": "Cells.zip",
+      "size": 1929137550,
+      "is_link_only": false,
+      "download_url": "https://ndownloader.figshare.com/files/58773835",
+      "supplied_md5": "3b0ab5c964fb492ec36ee0f55a5d53de",
+      "computed_md5": "3b0ab5c964fb492ec36ee0f55a5d53de",
+      "mimetype": "application/zip"
+    }
+  ],
+  "folder_structure": {},
+  "authors": [
+    {
+      "id": 16958151,
+      "full_name": "Diksha Gupta",
+      "first_name": "Diksha",
+      "last_name": "Gupta",
+      "is_active": true,
+      "url_name": "Diksha_Gupta",
+      "orcid_id": "0000-0002-8811-3311"
+    },
+    {
+      "id": 19333108,
+      "full_name": "Charles Kopec",
+      "first_name": "Charles",
+      "last_name": "Kopec",
+      "is_active": true,
+      "url_name": "Charles_Kopec",
+      "orcid_id": ""
+    },
+    {
+      "id": 19428943,
+      "full_name": "Adrian Bondy",
+      "first_name": "Adrian",
+      "last_name": "Bondy",
+      "is_active": false,
+      "url_name": "_",
+      "orcid_id": ""
+    },
+    {
+      "id": 19428947,
+      "full_name": "Thomas Zhihao Luo",
+      "first_name": "Thomas",
+      "last_name": "Zhihao Luo",
+      "is_active": false,
+      "url_name": "_",
+      "orcid_id": ""
+    },
+    {
+      "id": 19428953,
+      "full_name": "Verity Elliott",
+      "first_name": "Verity",
+      "last_name": "Elliott",
+      "is_active": false,
+      "url_name": "_",
+      "orcid_id": ""
+    },
+    {
+      "id": 14522924,
+      "full_name": "Carlos Brody",
+      "first_name": "Carlos",
+      "last_name": "Brody",
+      "is_active": true,
+      "url_name": "Carlos_Brody",
+      "orcid_id": ""
+    }
+  ],
+  "custom_fields": [],
+  "figshare_url": "https://figshare.com/articles/dataset/Data_from_A_multi-region_recurrent_circuit_for_evidence_accumulation_in_rats/30369064",
+  "download_disabled": false,
+  "description": "<h2>Description of the data</h2><p dir=\"ltr\">All data are stored in MATLAB (.mat) files. There are 12 files in total, each corresponding to a recording session from a rat performing an auditory decision-making task. Each file is named as \u201csubjectID_YYYY_MM_DD_*.mat,\u201d based on the subject ID and the recording date.</p><p dir=\"ltr\">Each file contains spike times for all recorded units along with information about trial events.</p><p dir=\"ltr\">Key fields include:</p><ul><li><i>AP</i>, <i>ML</i>, <i>DV</i>: Anterior-posterior (AP), medial-lateral (ML), and dorsal-ventral (DV) distance of each unit relative to the bregma skull landmark</li><li><i>bank</i>: The recording electrodes of Neuropixels 1.0 probes are organized into different banks, and this indicates the bank of each unit.</li><li><i>penetration</i>: A struct containing neuropixels targeting information and regions targeted.</li><li><ul><li>DMS : anterior dorsal striatum</li><li>FOF, M2 : frontal orienting fields</li><li>NAc : Nucleus accumbens</li><li>VS : ventral striatum</li></ul></li><li><i>regions</i>: brain region of each unit, as an index of penetrations.regions</li><li><i>hemisphere</i>: hemisphere of each unit</li><li><i>clusterNotes</i>: notes added during manual curation of spike sorted clusters</li><li><i>distance_from_tip</i> : distance of each unit from the tip of the Neuropixels 1.0 probe, in cms</li><li><i>electrode</i>: Neuropixels 1.0 recording site of each unit</li><li><i>rat</i>: name of the rat subject</li><li><i>raw_spike_time_s</i> : cell array containing the spike times of each unit</li><li><i>recorded</i>: cell array indicating whether usable spiking data could be recorded for each unit on each trial (i.e., the signal was not obscured by artifacts)</li><li><i>sessid</i> : identification of the session in the BControl behavioral control platform</li></ul><p dir=\"ltr\">Metrics of cluster isolation quality:</p><ul><li><i>unitCount</i>: total number of spikes</li><li><i>unitISIRatio</i>: The ratio of the number of interspike intervals (ISI) less than 2ms to the number of interspike interval less than 20ms</li><li><i>unitIsoDist</i> : Isolation distance: This is another quality metric of spikesorted clusters described in Neymotion et al., 2011 J. Neurosci (PMID: 22072690)</li><li><i>unitLRatio</i> : L-ratio</li><li><i>unitVppRaw</i>: Peak-to-peak voltage (uV) of the mean raw waveform at the recording electrode with the largest amplitude</li><li><i>waveform</i> : mean raw waveform at the peak recording site. This has the format of number-of-units by number-of-samples.</li><li><i>meanWfGlobalRaw</i> : mean raw waveform across all recording sites</li><li><i>frac_isi_violation</i>: Fraction of spikes for which ISI violations were recorded for each unit.</li><li>Trials: this is a MATLAB structure with information about the task and behavior on each of N trials. Key fields include:</li><li><i>rat</i> : name of the rat subject</li><li><i>sess_date</i> : session date</li><li><i>sessid</i> : session ID in the BControl system</li><li><i>violated</i> : whether the rat prematurely ended nose fixation</li><li><i>is_probe_trial</i> : whether the duration of the click train stimulus is fixed at 1s rather than randomly sampled from a uniform distribution.</li><li><i>is_hit</i> : a boolean vector of length N stating whether reward was delivered on each trial.</li><li><i>sides</i> : the left or right side port where the reward was baited</li><li><i>gamma</i> : a vector of length N stating what the signal level was on each trial (the log of the ratio of right / left click generative rates)</li><li><i>trial_type</i> : a character vector of length N indicating the type of trial (\"a\" = accumulation, \"f\" = free choice, \"s\" = side LED)</li><li><i>reward_loc</i> : left or right side port where the reward was baited</li><li><i>pokedR</i> : a boolean vector of length N indicating the animal's choice on each trial</li><li><i>stim_dur_s_theoretical</i> : a vector of length N stating the stimulus durations of each trial including temporal delay before the first click is sampled.</li><li><i>leftBups</i>,<i>rightBups</i> : a cell array of length N listing the times (in seconds relative to stimulus onset, i.e., <i>stateTimes.clicks_on</i>) of the left and right clicks on each trial</li><li><i>click_diff</i> : the difference between the total number of right and left clicks</li><li><i>stim_dur_s_actual :</i> duration (in seconds) of the click train stimulus</li><li><i>click_diff_hz</i> : the difference between the total number right and left clicks, divided by the duration of the click train stimulus</li><li><i>stateTimes</i> : a structure with fields of length N for each task event, giving the times according to the BControl clock, when they occurred on each trial.</li><li><ul><li><i>sending_trialnum</i>: beginning of the in which the trial number (encoded as an eight bit number) is emitted through the digital output</li><li><i>wait_for_cpoke</i>: beginning of the a state that waits for the animal to poke into the center port</li><li><i>cpoke_in</i>: beginning of the state in which the animal inserts its nose into the center poke.</li><li><i>cpoke_req_end</i>: end of the required time when the animal must insert its nose into the center poke</li><li><i>break</i>: beginning of the violation state, which corresponds to the animal removing its nose from the center port before the minimum required time is up</li><li><i>clicks_on</i>: beginning of the sound wave</li><li><i>clicks_off</i>: end of the sound wave</li><li><i>wait_for_spoke</i>: beginning of the state waiting for the animal to poke either the left or right port</li><li><i>feedback</i>: beginning of either a reward or error state</li><li><i>error</i>: beginning of an error state</li><li><i>left_reward</i>: beginning of a reward state occurring at the left port</li><li><i>right_reward</i>: beginning of a reward state occurring at the right port</li><li><i>spoke</i>: beginning of the state when the animal pokes left or right</li><li><i>cpoke_out</i>:<a href=\"https://github.com/Brody-Lab/labwide_PBups_analysis/blob/master/get_cpoke_out_time.m\" target=\"_blank\"> </a>inferred time when the animal removes its nose from the center port and begins its movement toward a side port</li><li><i>cleaned_up</i>: beginning of the final state in each trial during which waves are turned off</li><li><i>laser_on</i> : onset time of the photostimulus</li><li><i>laser_off</i> : offset time of the photostimulus</li><li><i>laser_pulses</i> : timestamps of individual pulses within the photostimulus</li></ul></li></ul><h2>Code/software</h2><p dir=\"ltr\"><a href=\"https://github.com/Brody-Lab/fof_ads_interactions\" target=\"_blank\">https://github.com/Brody-Lab/fof_ads_interactions</a></p>",
+  "funding": "NIH grant (R01MH108358)",
+  "funding_list": [
+    {
+      "id": 29253094,
+      "title": "NIH grant (R01MH108358)",
+      "grant_code": "",
+      "funder_name": null,
+      "is_user_defined": 1
+    },
+    {
+      "id": 29253097,
+      "title": "Simons Foundation (NC-GB-CULM-00003118-03)",
+      "grant_code": "",
+      "funder_name": null,
+      "is_user_defined": 1
+    }
+  ],
+  "version": 1,
+  "status": "public",
+  "size": 1929137550,
+  "created_date": "2026-02-09T09:18:26Z",
+  "modified_date": "2026-02-09T09:18:27Z",
+  "is_public": true,
+  "is_confidential": false,
+  "is_metadata_record": false,
+  "confidential_reason": "",
+  "metadata_reason": "",
+  "license": {
+    "value": 3,
+    "name": "MIT",
+    "url": "https://opensource.org/licenses/MIT"
+  },
+  "tags": [
+    "Recurrent Neural Network Model (RNN)",
+    "Perceptual Decision-Making",
+    "cortico-striatal circuits"
+  ],
+  "keywords": [
+    "Recurrent Neural Network Model (RNN)",
+    "Perceptual Decision-Making",
+    "cortico-striatal circuits"
+  ],
+  "categories": [
+    {
+      "id": 24415,
+      "title": "Animal neurobiology",
+      "parent_id": 24397,
+      "path": "/24130/24397/24415",
+      "source_id": "310906",
+      "taxonomy_id": 100
+    },
+    {
+      "id": 30373,
+      "title": "Cognition",
+      "parent_id": 30370,
+      "path": "/30292/30370/30373",
+      "source_id": "520401",
+      "taxonomy_id": 100
+    },
+    {
+      "id": 30376,
+      "title": "Decision making",
+      "parent_id": 30370,
+      "path": "/30292/30370/30376",
+      "source_id": "520402",
+      "taxonomy_id": 100
+    }
+  ],
+  "references": [],
+  "has_linked_file": false,
+  "citation": "Gupta, Diksha; Kopec, Charles; Bondy, Adrian; Zhihao Luo, Thomas; Elliott, Verity; Brody, Carlos (2026). Data from: A multi-region recurrent circuit for evidence accumulation in rats. figshare. Dataset. https://doi.org/10.6084/m9.figshare.30369064.v1",
+  "related_materials": [],
+  "is_embargoed": false,
+  "embargo_date": null,
+  "embargo_type": null,
+  "embargo_title": "",
+  "embargo_reason": "",
+  "embargo_options": [],
+  "id": 30369064,
+  "title": "Data from: A multi-region recurrent circuit for evidence accumulation in rats",
+  "doi": "10.6084/m9.figshare.30369064.v1",
+  "handle": "",
+  "url": "https://api.figshare.com/v2/articles/30369064",
+  "published_date": "2026-02-09T09:18:26Z",
+  "thumb": "",
+  "defined_type": 3,
+  "defined_type_name": "dataset",
+  "group_id": null,
+  "url_private_api": "https://api.figshare.com/v2/account/articles/30369064",
+  "url_public_api": "https://api.figshare.com/v2/articles/30369064",
+  "url_private_html": "https://figshare.com/account/articles/30369064",
+  "timeline": {
+    "posted": "2026-02-09T09:18:26",
+    "firstOnline": "2026-02-09"
+  },
+  "resource_title": null,
+  "resource_doi": null
+}

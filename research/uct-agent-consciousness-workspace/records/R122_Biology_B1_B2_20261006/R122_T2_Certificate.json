@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "round": "R122",
+  "date": "2026-10-06",
+  "framework": "R119 T2 intervention-preserving support correspondence",
+  "foundational_UCT_C1_is_distinct_from_certificate_C1": true,
+  "candidate_domain": "Audited rat left/right click histories and historical R117 signed evidence-count task coordinate",
+  "maps": {
+    "phi_X": "restricted signed-count semantics only; common input domain still required",
+    "phi_Y": "candidate left/right-choice coordinate; output laws uncalibrated",
+    "phi_Z": null,
+    "phi_I": null,
+    "phi_tau": null
+  },
+  "accepted_error_bounds": {
+    "epsilon_base": null,
+    "epsilon_update": null,
+    "epsilon_int": null
+  },
+  "components": [
+    {
+      "component": "C0",
+      "requirement": "grounding consistency",
+      "status": "PASS",
+      "scope": "Restricted external signed-count task coordinate",
+      "evidence": "All eligible raw click identities, signs, times and source rows checked; R117 uses signed evidence history.",
+      "remaining_gap": "Does not pass input-distribution matching, internal-state identity, temporal transport or phenomenal labeling.",
+      "artifact_refs": "R122_Input_Manifest.json; independent_b1_checks.json; independent_analysis_checks.json"
+    },
+    {
+      "component": "C1",
+      "requirement": "baseline correspondence",
+      "status": "UNCERTAIN",
+      "scope": "Biology to AI output-law comparison",
+      "evidence": "R122 real rat choice predictions and historical R117 artificial behavior are available.",
+      "remaining_gap": "Declare matched inputs/nuisances, common output law and epsilon_base. R117 accuracy and pulse use different readout laws.",
+      "artifact_refs": "b1_results/B1_results.json; R122_Continuity_Read_Ledger.json"
+    },
+    {
+      "component": "C2",
+      "requirement": "transition commutation",
+      "status": "UNCERTAIN",
+      "scope": "Selected causally used state transition",
+      "evidence": "Modest/heterogeneous held-out external cumulative-evidence decoding.",
+      "remaining_gap": "Identify biological causal state, update law, state map and epsilon_update; decoding does not establish these.",
+      "artifact_refs": "b2_results/B2_aggregate.json; R122_Primary_Methods_and_T2_Audit.md"
+    },
+    {
+      "component": "C3",
+      "requirement": "intervention transport",
+      "status": "UNCERTAIN",
+      "scope": "Actual part/port-specific causal operations",
+      "evidence": "Historical R117 interventions; independently read published biology; all twelve recording laser flags are zero.",
+      "remaining_gap": "Obtain independently assessable biological perturbation outcomes; establish phi_I and epsilon_int. Registry is not trial behavior.",
+      "artifact_refs": "independent_raw_audit.json; R122_Methods_Source_Ledger.json"
+    },
+    {
+      "component": "C4",
+      "requirement": "temporal correspondence",
+      "status": "UNCERTAIN",
+      "scope": "Matched state/update/intervention timing",
+      "evidence": "Biological clocks, actual stimulus durations, 50 ms bins and 100 ms observation lag audited.",
+      "remaining_gap": "Declare phi_tau; normalized fractions, abstract AI bins, sustained inhibition and instantaneous reset are not already matched.",
+      "artifact_refs": "B2_PROTOCOL_FROZEN.md; independent_analysis_checks.json"
+    },
+    {
+      "component": "C5",
+      "requirement": "nuisance stability",
+      "status": "UNCERTAIN",
+      "scope": "Declared cross-substrate nuisance domain",
+      "evidence": "All five rats/twelve sessions, blocked trial validation, population-count matching and controls retained.",
+      "remaining_gap": "Establish correspondence error bounds across difficulty, laterality, intervention conditions and model realizations; current heterogeneity remains.",
+      "artifact_refs": "b1_results/B1_results.json; b2_results/B2_session_metrics.csv"
+    },
+    {
+      "component": "C6",
+      "requirement": "anti-triviality / mapping discipline",
+      "status": "UNCERTAIN",
+      "scope": "Analysis discipline passed; mechanism map incomplete",
+      "evidence": "External target, locally frozen low-complexity estimators, training-only preprocessing and fixed controls.",
+      "remaining_gap": "Justify an actual part/port-grounded state map and test correlate-only or wrong-port alternatives; successful decoding alone is insufficient.",
+      "artifact_refs": "R122_B1_Frozen_Protocol.md; B2_PROTOCOL_FROZEN.md; independent_review.md"
+    }
+  ],
+  "overall": "T2_NOT_CLOSED",
+  "T3": "NOT_ESTABLISHED",
+  "G4": "NOT_ESTABLISHED",
+  "cross_substrate_G2_geometry_comparison": "NOT_ESTABLISHED_BY_DECODER_SCORE",
+  "B3": "NOT_INDEPENDENTLY_REPLICATED",
+  "AI_experience_E": "LATENT_NOT_LABELED",
+  "valence_V": "NOT_MEASURED",
+  "subject_boundary": "NOT_ESTABLISHED",
+  "status_semantics": "PASS applies only to stated scope; UNCERTAIN is missing/insufficient evidence, not an invented failed quantitative bound."
+}

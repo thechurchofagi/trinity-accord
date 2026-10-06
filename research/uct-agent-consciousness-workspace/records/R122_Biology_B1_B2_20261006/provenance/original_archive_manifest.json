@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Cells_upload/",
+    "size": 0,
+    "compressed": 0,
+    "crc32": "00000000"
+  },
+  {
+    "name": "Cells_upload/X087_2021_08_03_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 889633752,
+    "compressed": 351568997,
+    "crc32": "2253564f"
+  },
+  {
+    "name": "Cells_upload/X046_2019-09-23_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 372881528,
+    "compressed": 143825000,
+    "crc32": "4075bb19"
+  },
+  {
+    "name": "Cells_upload/A297_2021_07_19_01_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 284408176,
+    "compressed": 122823453,
+    "crc32": "e7a86818"
+  },
+  {
+    "name": "Cells_upload/X062_2020_03_20_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 493558256,
+    "compressed": 201636357,
+    "crc32": "213ea61e"
+  },
+  {
+    "name": "Cells_upload/.DS_Store",
+    "size": 6148,
+    "compressed": 178,
+    "crc32": "6d88006a"
+  },
+  {
+    "name": "__MACOSX/Cells_upload/._.DS_Store",
+    "size": 120,
+    "compressed": 53,
+    "crc32": "38c0880b"
+  },
+  {
+    "name": "Cells_upload/X046_2019-10-01_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 173286160,
+    "compressed": 79677338,
+    "crc32": "37f36e03"
+  },
+  {
+    "name": "Cells_upload/A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 71539896,
+    "compressed": 31446657,
+    "crc32": "6a77bcc5"
+  },
+  {
+    "name": "__MACOSX/Cells_upload/._A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 219,
+    "compressed": 126,
+    "crc32": "8a513d5f"
+  },
+  {
+    "name": "Cells_upload/X087_2021_07_25_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 486612008,
+    "compressed": 169335069,
+    "crc32": "1f20adc3"
+  },
+  {
+    "name": "Cells_upload/X087_2021_07_30_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 906769472,
+    "compressed": 327512324,
+    "crc32": "c7c7c928"
+  },
+  {
+    "name": "Cells_upload/X046_2019-09-26_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 327018264,
+    "compressed": 141955158,
+    "crc32": "c4bdc885"
+  },
+  {
+    "name": "Cells_upload/X062_2020_03_19_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 298431192,
+    "compressed": 128272614,
+    "crc32": "9909633d"
+  },
+  {
+    "name": "Cells_upload/X062_2020_03_21_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 320139136,
+    "compressed": 128771824,
+    "crc32": "946e213a"
+  },
+  {
+    "name": "Cells_upload/X046_2019-10-03_g0_t0.imec0.ap_res.Cells.mat",
+    "size": 275968456,
+    "compressed": 102308242,
+    "crc32": "b715bfb3"
+  }
+]

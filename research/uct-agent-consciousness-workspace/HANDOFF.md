@@ -1,8 +1,8 @@
 # UCT 智能体意识研究交接
 
-**跨窗口总交接（R121）：** `records/UCT_Experience_Intelligence_Cross_Substrate_Master_Handoff_R121_20261006.md`。新窗口优先读此文件，再核对最新 HEAD；若已有 R122+，以更新轮次为准。
+**当前交接（R122）：** [真实 rat B1/B2 完成与开放 T2 证书](records/R122_Worklog_and_Handoff_20261006.md)。先 fetch 最新 HEAD，再读当前轮次；若已有 R123+，接更新结果。理论背景保留 [R121 总交接](records/UCT_Experience_Intelligence_Cross_Substrate_Master_Handoff_R121_20261006.md)，其中旧的数据下载 blocker 已被 R122 解决。
 
-更新：2026-10-06（北京时间）。已完成 R119 T2 intervention-preserving support-correspondence certificate；新窗口先读 records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md 与R119交接，再按需回读R117/R118。TA-TR-2026-24 DOI状态按R105保留。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。R122 已完整取得 Cells.zip，完成 12 session/5 rat 的 B1/B2，并通过独立原始数据与数值复核。B1 主 full10 对 lastbin 比较不确定，预定 total control 有利；B2 较弱且异质，负结果保留。T2 尚未闭合，C2/C3 仍为核心缺口；B3 未独立复算。先读 [R122 主报告](records/R122_Real_Rat_B1_B2_and_Open_T2_Certificate_20261006.md) 与 [可复算材料](records/R122_Biology_B1_B2_20261006/README.md)。TA-TR-2026-24 DOI 状态按既有档案保留，已发表文件不改。R91 对 R90 的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -18,7 +18,7 @@
 
 ## 当前研究与最新成果
 
-最新完成 R100 梳理，见文末记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
+最新完成 R122，见当前交接与文末记录；以下 R76 起的叙述保留各轮当时状态，其“下一步/最新”不覆盖当前入口。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
 
 R76：对称分类感知通道中，在预测信念固定、仅实用价值计分等条件下，可用偏好幂变换精确匹配改变感知可靠性后的行动概率。相同新观察的贝叶斯更新可区分两条机制；均匀先验的具体例子为 0.90 与 0.65，后验总变差 0.25。40 项精确形式校验通过。信息增益、无信息基线、闭环反馈及可变时域等推广会失败或需附加条件。
 
@@ -632,3 +632,13 @@ empirical：T2 biology↔AI support correspondence、selected T3/G4；
 deep bridge：phenomenal-content translation、valence、subject unity/boundary、C1/U1外部验证。
 
 下一步优先拿rat Cells.zip做R117 B1/B2，不再增加generic formal layer。
+
+## R122 — 2026-10-06：真实 rat B1/B2 已执行，T2 仍未闭合
+
+完整下载公开 `Cells.zip`（1,929,137,550 bytes，MD5与Figshare一致，SHA-256 `e23a5c281b828c5d9545576ebc9197f37dbc20bd16c616aa2eda55d220fe9494`）。作者代码固定 `39d056fb12f688034b543d9ac8b7406a58ad0f77`。12 session、5 rat、5,230 raw trials 全部解析；B1 3,344 trials，B2 3,319 trials/32,656 held-out bins，零拟合失败/收敛警告。全部派生数据、代码、固定协议、来源范围、失败与独立复核已保存。
+
+B1 主 full10 对 lastbin 的等rat log-loss gain 0.019232，描述性95% t区间[−0.031799,0.070263]，仍不确定；预定total control gain 0.044391，12/12session及5/5rat方向一致。不能将control替代主比较。B2等rat held-out R²：FOF0.054277、ADS0.036449；24个session-region分数中8个为负。方法与作者Figure2C存在多项已披露差异，不能将低分唯一归因于某一差异或宣称推翻论文。
+
+T2.C0仅外部signed-count task coordinate通过，C1–C6未满足完整证书。下一步限定同一domain的实际state/port/time mapping、共同读出律和可独立审查的干预结果。R117 accuracy用Gaussianσ3，pulse probabilities用sigmoid temperature3；state R²也不是训练后held-out神经decoder，须先校准再比较。没有新增AI运行。12个recording session的laser.isOn全部0，B3仍未复算，registry不当trial behavior。
+
+读取 [主报告](records/R122_Real_Rat_B1_B2_and_Open_T2_Certificate_20261006.md)、[交接](records/R122_Worklog_and_Handoff_20261006.md)、[完整材料](records/R122_Biology_B1_B2_20261006/README.md)、[T2证书](records/R122_Biology_B1_B2_20261006/R122_T2_Certificate.csv)。E始终latent；T3/G4、ordinary phenomenal labels、valence/fear、统一主体边界及C1/U1外部验证均未建立。不再将数据描述为unavailable，不增加toy theorem或同时扩展多个方向。

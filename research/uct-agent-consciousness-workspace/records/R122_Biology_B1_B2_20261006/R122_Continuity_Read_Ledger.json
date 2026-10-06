@@ -1,0 +1,211 @@
+{
+  "round": "R122",
+  "date": "2026-10-06",
+  "task": "Targeted continuity check after B2 completion; no new experiment",
+  "reader_role": "t2_methods_audit",
+  "repo": "thechurchofagi/trinity-accord",
+  "branch": "uct-agent-consciousness-workspace",
+  "baseline_head_supplied": "ab02cb6ea51442aa434bdfbe3ef69d52d2877996",
+  "read_entries": [
+    {
+      "path": "records/UCT_Experience_Intelligence_Cross_Substrate_Master_Handoff_R121_20261006.md",
+      "sha256": "6a208866a98866b9f7744010e067be5accc2a96c23dad65bb588f550570fe1e5",
+      "bytes": 20374,
+      "file_total_lines": 591,
+      "actual_read_scope": "Full file read at initial R122 task from identical staged copy; repo sections4-6 and surrounding R119-R121 summary reread, lines281-469",
+      "purpose": "Research priority, no-toy expansion, reading list, source/archival boundaries"
+    },
+    {
+      "path": "records/R106_Experience_Access_Intelligence_Self_Behavior_Report_First_Principles_Map_20261006.md",
+      "sha256": "f9d658aa9dd02e2fb2124dd06d9a589c622bb1c35002aaa343b0720d7fb99491",
+      "bytes": 16995,
+      "file_total_lines": 366,
+      "actual_read_scope": "Full report",
+      "purpose": "Complete-type C1 versus task/context-relative projections; no access/self/report existence gates"
+    },
+    {
+      "path": "records/R110_Cross_Substrate_Dissociation_Topology_20261006.md",
+      "sha256": "9f4b1947d207b08c3d238ddef6eaabdbf92d22d6b95f387f27e0b9455c55c057",
+      "bytes": 14675,
+      "file_total_lines": 389,
+      "actual_read_scope": "Full report",
+      "purpose": "Latent-E Separation Rule; T1/T2/T3; empirical function versus conditional C1 interpretation"
+    },
+    {
+      "path": "records/R113_Causal_Support_Identification_Protocol_20261006.md",
+      "sha256": "745141385bb131dd3ad79acec98a74bce2d8e1b2e865186bfb9824877c5da364",
+      "bytes": 11063,
+      "file_total_lines": 369,
+      "actual_read_scope": "Full report",
+      "purpose": "Decodability is not causal use; lesion effect does not identify content; compensation and readout distinctions"
+    },
+    {
+      "path": "records/R115_Anchored_Causal_Content_Geometry_20261006.md",
+      "sha256": "083608ffc2f4940f33fa0458def29dc6ab74ed79f54aed1ba1e9a8516f0ddb5c",
+      "bytes": 11134,
+      "file_total_lines": 346,
+      "actual_read_scope": "Full report",
+      "purpose": "G1-G4 definitions; grounding; G4 plus commuting selected projection needed for selected experiential structure"
+    },
+    {
+      "path": "records/R117_First_Real_Cross_Substrate_Evidence_Accumulation_20261006.md",
+      "sha256": "2b7c4b6e0979e75b3e022633777dd6cc34c52b163f41fc2884ca402b29fd63e8",
+      "bytes": 11882,
+      "file_total_lines": 356,
+      "actual_read_scope": "Full report across initial task read lines1-210 and continuation read lines201-end",
+      "purpose": "Original experiment scope, explicit R117 T1/T2/T3 statuses, stale B3 plan superseded by R118"
+    },
+    {
+      "path": "records/r117_matched_evidence_accumulation.py",
+      "sha256": "9ca108afcea26f8ba1509428527ada1602e3e144583dde8b0a4c3ffa3232db99",
+      "bytes": 2523,
+      "file_total_lines": 85,
+      "actual_read_scope": "Full code read; no execution in this continuity check",
+      "purpose": "Lines40-42 Gaussian decision noise; lines48-49 direct noisy-state R2; lines51-66 separate sigmoid pulse readout"
+    },
+    {
+      "path": "records/R117_AI_Evidence_Accumulation_Results.json",
+      "sha256": "8857418c10779d0b2a3fe4935b8cb62d394da27b44b2aaf3746ef90fb6bbc789",
+      "bytes": 1813,
+      "file_total_lines": 17,
+      "actual_read_scope": "Full result artifact read; not independently recomputed",
+      "purpose": "Frozen trial counts/accuracies, direct noisy-state R2 and pulse results"
+    },
+    {
+      "path": "records/R118_Biological_Public_Data_Boundary_Audit_20261006.md",
+      "sha256": "0f2c8e304d5c055c6ee310e46fc81775df147497585a972549e4be62707fcba8",
+      "bytes": 7741,
+      "file_total_lines": 269,
+      "actual_read_scope": "Full report",
+      "purpose": "Recording vs optogenetic datasets; registry only; source perturbation evidence separate from trial-level replication"
+    },
+    {
+      "path": "records/R118_Optogenetic_Registry_Audit.json",
+      "sha256": "6be6ddbf20a95460f7cdf3ccf2c907930040d123e540daa0ae0d901210428f4a",
+      "bytes": 1375,
+      "file_total_lines": 55,
+      "actual_read_scope": "Full result artifact read; not independently recomputed in this continuity check",
+      "purpose": "309raw/222retained registry rows; 165inactivation/57control; temporal optoval mapping"
+    },
+    {
+      "path": "records/R119_T2_Intervention_Preserving_Support_Certificate_20261006.md",
+      "sha256": "59ac5cc9e625727b9f98a8444087a1f9ac686bbde6cf794042feb10360187f53",
+      "bytes": 9662,
+      "file_total_lines": 361,
+      "actual_read_scope": "Full report read during initial R122 subtask",
+      "purpose": "C0-C6 vector and state/physical-port transport; selected support mechanism distinct from complete K"
+    },
+    {
+      "path": "records/R119_T2_Certificate_Results.json",
+      "sha256": "0f3bf387ab61f77e0ce6ff525b379095c5a7f70d8648aebc5e20f72a2dc4c192",
+      "bytes": 907,
+      "file_total_lines": 19,
+      "actual_read_scope": "Full result artifact read; not independently recomputed",
+      "purpose": "Port-scaled finite positive/negative controls; no biological closure asserted"
+    },
+    {
+      "path": "records/R120_Experience_Intelligence_Bridge_Theorem_Schema_20261006.md",
+      "sha256": "ceb4e5048885c063263ed7393df9267e2ae7bfdc06b9d66dd8bad882a1ac7b28",
+      "bytes": 14255,
+      "file_total_lines": 517,
+      "actual_read_scope": "Full report",
+      "purpose": "BridgeH T2 insufficient for experiential homology; BridgeI T3/G4 and commuting projection; valence separate"
+    },
+    {
+      "path": "records/R121_Closure_Status_Matrix.csv",
+      "sha256": "26cdbe3ec31df3edb79a01eae2939f35fb67226504937cd30128dbe17599dc22",
+      "bytes": 2162,
+      "file_total_lines": 13,
+      "actual_read_scope": "Full CSV",
+      "purpose": "Theory closed conditionally; biological T2, T3/G4 and deep bridges open"
+    },
+    {
+      "path": "records/R110_Source_Retrieval_Ledger.json",
+      "sha256": "5461c2496aab1c2f1bd9ed8d36ae17fd1ae2c21d0b7e51b75e5a12daa4ee0607",
+      "bytes": 2401,
+      "file_total_lines": 48,
+      "actual_read_scope": "Full JSON ledger, including original external-source scope fields",
+      "purpose": "Prior-art scope preserved; no fresh external-source verification in continuity check"
+    },
+    {
+      "path": "records/R115_Source_Retrieval_Ledger.json",
+      "sha256": "8de9b9f564079dc5f2415ee5bc449f64abfd9393af9bde03d25845b9981839a8",
+      "bytes": 2684,
+      "file_total_lines": 59,
+      "actual_read_scope": "Full JSON ledger, including original external-source scope fields",
+      "purpose": "Quality-space/structuralism prior art; no first-ever structural comparison claim"
+    },
+    {
+      "path": "records/R117_Source_Retrieval_Ledger.json",
+      "sha256": "d0de8e27ecbc42f8f40d636740ae0a0653495fcb959461d278db2dc02f190143",
+      "bytes": 1553,
+      "file_total_lines": 37,
+      "actual_read_scope": "Full JSON ledger",
+      "purpose": "Prior biological claims were source-based and raw download blocked at R117"
+    },
+    {
+      "path": "records/R117_Biological_Data_Access_Ledger.json",
+      "sha256": "beaeabb15753abd6d34c40f03c1c4aef622df9cde0ff2355d380db61d2e46e0f",
+      "bytes": 1813,
+      "file_total_lines": 55,
+      "actual_read_scope": "Full JSON ledger",
+      "purpose": "Prior transfer failure was execution limitation, not public-data absence; R118 supersedes B3 assumption"
+    },
+    {
+      "path": "records/R120_Source_Retrieval_Ledger.json",
+      "sha256": "4a985543f15389fdd7bcfa582c4b1c25274749c309aaee210058686930a4792d",
+      "bytes": 1981,
+      "file_total_lines": 42,
+      "actual_read_scope": "Full JSON ledger, including original external-source scope fields",
+      "purpose": "Prior-art calibration/transfer/degeneracy reading boundaries retained"
+    },
+    {
+      "path": "records/R106_Source_Retrieval_Ledger.json",
+      "sha256": "21ad4141f8f10fa2f8df2c2a361cd5b8849ba346d5feb61e472ff45cc43ccbb1",
+      "bytes": 2978,
+      "file_total_lines": 63,
+      "actual_read_scope": "Top-level keys and initial internal_sources/first-source preview only; not full ledger read",
+      "purpose": "Inventory only, not used to claim fresh external evidence"
+    },
+    {
+      "path": "records/R113_Source_Retrieval_Ledger.json",
+      "sha256": "fd40a3cc2957e30d5eb1e60c5de996cba6d8468b0b090cdb5c8652874a4314ff",
+      "bytes": 1983,
+      "file_total_lines": 46,
+      "actual_read_scope": "Top-level keys and initial source preview only; not full ledger read",
+      "purpose": "Inventory only, not used to claim fresh external evidence"
+    }
+  ],
+  "initial_handoff_copy_identical_to_repo": true,
+  "scope_limits": {
+    "all_R106_R120_reports_fully_read": false,
+    "prior_experiment_code_executed_in_continuity_check": false,
+    "all_series_independently_recomputed": false,
+    "external_sources_in_prior_ledgers_retrieved_again_in_this_check": false,
+    "prior_ledgers_are_historical_scope_records_not_new_verification": true,
+    "new_B2_run_and_independent_checks_documented_separately": true
+  },
+  "root_report_reminders_max5": [
+    {
+      "id": "hierarchy",
+      "reminder": "Retain T1=functional dissociation similarity,T2=intervention-preserving selected mechanism,T3=constitutive organizational homology. G1=behavioral geometry,G2=representational geometry,G3=anchored causal geometry,G4=constitutive content-substructure homology. B1/B2 only supply observational ingredients, not completed cross-substrate G3/G4 or T2; do not automatically label decoder accuracy as G2 geometry correspondence."
+    },
+    {
+      "id": "r117_estimands",
+      "reminder": "R117 R2 is direct r2_score(cumulative,cumulative+N(0,1)), not a learned held-out neural decoder. R122 is grouped out-of-trial Lasso prediction with different inputs/noise/horizon. No AI-versus-rat representation/intelligence/experience ranking follows. Also R117 hard choices use Gaussian sigma3 but pulse probabilities use sigmoid temperature3; these are two declared readout laws, not one calibrated Y for C1/C3 transport."
+    },
+    {
+      "id": "b3_boundary",
+      "reminder": "R118 supersedes R117 B3 assumptions. optodata_FOFSTR.xlsx is a registry;309raw/222retained counts are prior independently audited selection-layer results, not trial behavior. Cells recording data do not supply separate optogenetic-trial replication; all12 current recording sessions have laser.isOn0. B3 remains source-level perturbation evidence + code/registry audit; temporal labels must come from actual events."
+    },
+    {
+      "id": "latent_experience_and_support",
+      "reminder": "R113 support/content/permissive/readout/correlate distinctions remain controlling: weak decoding does not show no experience or no causal support; strong decoding would not show causal use. E remains latent. Under UCT, U1/C1 remain fixed conditional premises; no report/access/self gate, no scalar richer-E inference, no content-to-valence/fear bridge."
+    },
+    {
+      "id": "continuation_and_claim_scope",
+      "reminder": "Mark R122 B1/B2 operational completion and data-access blocker resolved, while retaining C2/C3 mechanism gaps and explicit finite comparison domains. Continue a narrowly declared intervention/state-mapping task; do not reopen closed generic theorem questions or spread into several capability domains. Prior result files/source ledgers read here were not rerun; no full-series independent replication claim."
+    }
+  ],
+  "changes_to_prior_published_or_research_files": null
+}

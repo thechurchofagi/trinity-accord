@@ -1,0 +1,22 @@
+{
+  "round": "R122",
+  "archive": "R122_Research_Package_20261006.zip",
+  "bytes": 4068213,
+  "sha256": "1ab69dd56d3e21a1aa2ca2e46703eea51ecc6ddf190cfc7b727ea5d6da5b0641",
+  "files_in_export": 152,
+  "uncompressed_bytes": 13824461,
+  "package_manifest": "R122_Biology_B1_B2_20261006/SHA256SUMS.txt",
+  "package_manifest_sha256": "090703410dd1951146efa20c64a12a83e14e6a4d4102a877ec7622727ba99e2e",
+  "main_reports": [
+    {
+      "path": "R122_Real_Rat_B1_B2_and_Open_T2_Certificate_20261006.md",
+      "sha256": "a7335f2bcea1a7fa2f7a493a6ccb8ca273c48de3587f870ff2480e5a14013bd5"
+    },
+    {
+      "path": "R122_Worklog_and_Handoff_20261006.md",
+      "sha256": "d2df0478afb6936f69ef2424ec7768e1f8e20acff5960fe0e23de439f3f58dfc"
+    }
+  ],
+  "scope": "All R122 reports, scripts, derived results, source/review ledgers and provenance; upstream raw MAT and article PDF are not embedded.",
+  "archive_layout": "Main reports and R122_Biology_B1_B2_20261006 directory at archive root; prior-round context remains in the cited research repository."
+}

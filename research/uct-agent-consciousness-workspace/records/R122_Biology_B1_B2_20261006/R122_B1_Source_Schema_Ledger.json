@@ -1,0 +1,128 @@
+{
+  "round": "R122",
+  "scope": "B1 source/schema/implementation audit",
+  "sources": [
+    {
+      "kind": "pinned_author_code",
+      "repository": "Brody-Lab/fof_ads_interactions",
+      "commit": "39d056fb12f688034b543d9ac8b7406a58ad0f77",
+      "path": "helpers/physdata_preprocessing.py",
+      "git_blob_sha1": "a6a63ae9efa381beb9128296bdd8219753d5c263",
+      "sha256": "48bbfb5866a9a76f4ad78a1af609483110f2b32ef56cdcd7007726235ddfab12",
+      "url": "https://github.com/Brody-Lab/fof_ads_interactions/blob/39d056fb12f688034b543d9ac8b7406a58ad0f77/helpers/physdata_preprocessing.py",
+      "reading_scope": "Trial parsing, click transform, exclusion, neuron-region mapping; full file inspected"
+    },
+    {
+      "kind": "pinned_author_code",
+      "repository": "Brody-Lab/fof_ads_interactions",
+      "commit": "39d056fb12f688034b543d9ac8b7406a58ad0f77",
+      "path": "helpers/rasters_and_psths.py",
+      "git_blob_sha1": "7bacf0b7d775d2b412c34130c250924b4a07ac83",
+      "sha256": "80a19c2a496c2a9c4764f7646027ed101ee3b8d5590c0168b424109636a0a89f",
+      "url": "https://github.com/Brody-Lab/fof_ads_interactions/blob/39d056fb12f688034b543d9ac8b7406a58ad0f77/helpers/rasters_and_psths.py",
+      "reading_scope": "Raster alignment and bin/mask handling; key functions inspected"
+    },
+    {
+      "kind": "pinned_author_code",
+      "repository": "Brody-Lab/fof_ads_interactions",
+      "commit": "39d056fb12f688034b543d9ac8b7406a58ad0f77",
+      "path": "figure2/fig2_helpers/evidencedecoding.py",
+      "git_blob_sha1": "3b661cb8382e52f69185df6ec391bafcafe3628e",
+      "sha256": "7da69a9d942cf0291e270caf2e3a3d7b93c54d9e3330c2b722c05ae22d622213",
+      "url": "https://github.com/Brody-Lab/fof_ads_interactions/blob/39d056fb12f688034b543d9ac8b7406a58ad0f77/figure2/fig2_helpers/evidencedecoding.py",
+      "reading_scope": "Full file inspected, flatten-row CV and declared lag pipeline audited"
+    },
+    {
+      "kind": "pinned_author_code",
+      "repository": "Brody-Lab/fof_ads_interactions",
+      "commit": "39d056fb12f688034b543d9ac8b7406a58ad0f77",
+      "path": "figure3/package_pbups_opto_DG.m",
+      "git_blob_sha1": "654940b214252792f04a146d0cc2b71856e18634",
+      "sha256": "58220510d75efce963bf3c8b855fca8b5e1ff7372b88c66ab07cb1d594089bcc",
+      "url": "https://github.com/Brody-Lab/fof_ads_interactions/blob/39d056fb12f688034b543d9ac8b7406a58ad0f77/figure3/package_pbups_opto_DG.m",
+      "reading_scope": "Behavior packaging/source boundary and first-stereo counts inspected"
+    },
+    {
+      "kind": "pinned_author_code",
+      "repository": "Brody-Lab/fof_ads_interactions",
+      "commit": "39d056fb12f688034b543d9ac8b7406a58ad0f77",
+      "path": "run_params.py",
+      "git_blob_sha1": "afcab9e16fbe90d2d05f9b12ab5014d10ce7fdc1",
+      "sha256": "55ab2950e1278781ca01d950a99a69feb84e0960c2d19d170f3b5449f89b85fe",
+      "url": "https://github.com/Brody-Lab/fof_ads_interactions/blob/39d056fb12f688034b543d9ac8b7406a58ad0f77/run_params.py",
+      "reading_scope": "Rats and regions inspected"
+    },
+    {
+      "kind": "pinned_author_code",
+      "repository": "Brody-Lab/fof_ads_interactions",
+      "commit": "39d056fb12f688034b543d9ac8b7406a58ad0f77",
+      "path": "README.md",
+      "git_blob_sha1": "6cf890c22dea3a84243f620c2ba6abdd631b6614",
+      "sha256": "014798cbcb521de73a19485fab2f2a1584cc86adf7594ccebc3fbd89196e5e3f",
+      "url": "https://github.com/Brody-Lab/fof_ads_interactions/blob/39d056fb12f688034b543d9ac8b7406a58ad0f77/README.md",
+      "reading_scope": "Full repository overview inspected"
+    },
+    {
+      "kind": "author_hosted_final_paper_and_supplements",
+      "doi": "10.1016/j.neuron.2025.12.029",
+      "url": "https://dikshagup.github.io/publication/multiregion-accumulation/multiregion-accumulation.pdf",
+      "link_source": "https://dikshagup.github.io/publication/",
+      "sha256": "8daabdb02884a87b51c0c618f64c7f14a53e92b20eda7eaf70132ff640f24789",
+      "bytes": 11663991,
+      "pdf_pages": 38,
+      "reading_scope": "Full text extracted and searched for behavioral-kernel methods; acquisition/decoding methods and Supplementary Figure1 read directly; no matching author behavioral temporal-kernel estimator located",
+      "redistribution": "PDF excluded from project outputs; pinned source URL and hash retained"
+    }
+  ],
+  "new_empirical_inputs": {
+    "dataset_doi": "10.6084/m9.figshare.30369064.v1",
+    "files": "12 Cells .mat recording sessions; each SHA256 in schema_audit files",
+    "n_rats": 5,
+    "n_raw_trials": 5230,
+    "n_eligible_trials": 3344,
+    "n_ties_kept": 45
+  },
+  "negative_source_findings": [
+    {
+      "resource": "https://github.com/Brody-Lab/npx-utils",
+      "observation": "Author loader docstring references this repository; API repository and tree reads returned404 in this session",
+      "consequence": "Not used to define raw schema; actual archived MAT files and pinned author source used instead"
+    },
+    {
+      "resource": "author repository and full final manuscript+supplements",
+      "observation": "No behavioral psychophysical temporal-kernel estimator located",
+      "consequence": "B1 labeled independent analysis; no author kernel replication claimed"
+    }
+  ],
+  "schema_failures_and_resolution": [
+    {
+      "stage": "initial strict neural loader on A294",
+      "observed_error": "SchemaError: Nonfinite raw spikes for unit2",
+      "resolution": "Retain nonfinite count and conservative bracketing intervals in unit metadata; return finite spikes for counting; B2 excludes overlapping windows; full raw bytes retained by immutable input SHA",
+      "scientific_limit": "Conservative intervals are inferred exclusions, not observed recorded-mask flags"
+    },
+    {
+      "stage": "scipy.io.whosmat on A294 after raw-field inspection",
+      "observed_error": "TypeError: 'NoneType' object is not iterable",
+      "resolution": "Use selective scipy.io.loadmat with explicit variable_names; all12 sessions load",
+      "cause_status": "Encountered while listing this complex MATLAB file; no unverified root-cause claim"
+    },
+    {
+      "stage": "identity schema inspection",
+      "observation": "Trials.rat and Trials.sess_date opaque MATLAB classes; Trials.sessid repeated by row",
+      "resolution": "Cross-check plain top-level rat/date/sessid and rec metadata; confirm repeated sessid constant; never decode opaque bytes as human identity"
+    },
+    {
+      "stage": "recording flags",
+      "observation": "recorded absent in A294,A297,threeX087 files; present in sevenX046/X062 files",
+      "resolution": "Preserve explicit absence; B2 logs availability and conservative NaN exclusions"
+    }
+  ],
+  "boundaries": [
+    "No published A/B/C or TA-TR-2026-24 change",
+    "NoB3 trial-level replication",
+    "Noexperience labels from C1",
+    "No new AI run",
+    "No outcome-driven parameter changes after B1 results"
+  ]
+}

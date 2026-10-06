@@ -1,0 +1,9 @@
+{
+  "repository": "thechurchofagi/trinity-accord",
+  "branch": "uct-agent-consciousness-workspace",
+  "head_at_takeover": "ab02cb6ea51442aa434bdfbe3ef69d52d2877996",
+  "tree_at_takeover": "5517bc8203347fc61cad036f3da6e84cf9263054",
+  "latest_round_at_takeover": "R121",
+  "method": "GitHub branch read followed by real git clone/fetch; no R122+ at takeover",
+  "historical_R121_master_handoff_bytes": "preserved unchanged"
+}

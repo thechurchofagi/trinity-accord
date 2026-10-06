@@ -1,0 +1,164 @@
+{
+  "status": "passed",
+  "analysis_scope": "B2 arithmetic/clock/output provenance only; no refitting",
+  "code_sha256": {
+    "b2_decode.py": "7db8c365282f3560eee07c39d2cf460f854b5af4c70608b949d0e8dcf34b610a",
+    "rat_cells.py": "21a84a802ded32bb73d59316332c838ff84b4e5a14e6363d975b09db39009ca4",
+    "independent_analysis_checks.py": "27abf994c0648d5daa91cacdba061d97d3618a2b045e7616a3cc6adf87269ad3"
+  },
+  "all_session_checks": [
+    {
+      "session": "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat",
+      "n_trials": 155,
+      "n_target_rows_checked": 1517,
+      "outer_folds": 5,
+      "nested_trial_disjointness": true,
+      "matched_outer_unit_counts": true,
+      "artifact_hashes_match": true,
+      "max_saved_metric_error": 0.0,
+      "source_of_target_check": "direct raw MAT click-array comparisons"
+    },
+    {
+      "session": "A297_2021_07_19_01_g0_t0.imec0.ap_res.Cells.mat",
+      "n_trials": 173,
+      "n_target_rows_checked": 1526,
+      "outer_folds": 5,
+      "nested_trial_disjointness": true,
+      "matched_outer_unit_counts": true,
+      "artifact_hashes_match": true,
+      "max_saved_metric_error": 0.0,
+      "source_of_target_check": "direct raw MAT click-array comparisons"
+    },
+    {
+      "session": "X046_2019-09-23_g0_t0.imec0.ap_res.Cells.mat",
+      "n_trials": 321,
+      "n_target_rows_checked": 2751,
+      "outer_folds": 5,
+      "nested_trial_disjointness": true,
+      "matched_outer_unit_counts": true,
+      "artifact_hashes_match": true,
+      "max_saved_metric_error": 1.1102230246251565e-16,
+      "source_of_target_check": "direct raw MAT click-array comparisons"
+    },
+    {
+      "session": "X046_2019-09-26_g0_t0.imec0.ap_res.Cells.mat",
+      "n_trials": 281,
+      "n_target_rows_checked": 2361,
+      "outer_folds": 5,
+      "nested_trial_disjointness": true,
+      "matched_outer_unit_counts": true,
+      "artifact_hashes_match": true,
+      "max_saved_metric_error": 2.7755575615628914e-17,
+      "source_of_target_check": "direct raw MAT click-array comparisons"
+    },
+    {
+      "session": "X046_2019-10-01_g0_t0.imec0.ap_res.Cells.mat",
+      "n_trials": 193,
+      "n_target_rows_checked": 1615,
+      "outer_folds": 5,
+      "nested_trial_disjointness": true,
+      "matched_outer_unit_counts": true,
+      "artifact_hashes_match": true,
+      "max_saved_metric_error": 1.1102230246251565e-16,
+      "source_of_target_check": "direct raw MAT click-array comparisons"
+    },
+    {
+      "session": "X046_2019-10-03_g0_t0.imec0.ap_res.Cells.mat",
+      "n_trials": 250,
+      "n_target_rows_checked": 2242,
+      "outer_folds": 5,
+      "nested_trial_disjointness": true,
+      "matched_outer_unit_counts": true,
+      "artifact_hashes_match": true,
+      "max_saved_metric_error": 1.1102230246251565e-16,
+      "source_of_target_check": "direct raw MAT click-array comparisons"
+    },
+    {
+      "session": "X062_2020_03_19_g0_t0.imec0.ap_res.Cells.mat",
+      "n_trials": 224,
+      "n_target_rows_checked": 1995,
+      "outer_folds": 5,
+      "nested_trial_disjointness": true,
+      "matched_outer_unit_counts": true,
+      "artifact_hashes_match": true,
+      "max_saved_metric_error": 2.220446049250313e-16,
+      "source_of_target_check": "direct raw MAT click-array comparisons"
+    },
+    {
+      "session": "X062_2020_03_20_g0_t0.imec0.ap_res.Cells.mat",
+      "n_trials": 353,
+      "n_target_rows_checked": 3159,
+      "outer_folds": 5,
+      "nested_trial_disjointness": true,
+      "matched_outer_unit_counts": true,
+      "artifact_hashes_match": true,
+      "max_saved_metric_error": 0.0,
+      "source_of_target_check": "direct raw MAT click-array comparisons"
+    },
+    {
+      "session": "X062_2020_03_21_g0_t0.imec0.ap_res.Cells.mat",
+      "n_trials": 323,
+      "n_target_rows_checked": 2913,
+      "outer_folds": 5,
+      "nested_trial_disjointness": true,
+      "matched_outer_unit_counts": true,
+      "artifact_hashes_match": true,
+      "max_saved_metric_error": 6.938893903907228e-18,
+      "source_of_target_check": "direct raw MAT click-array comparisons"
+    },
+    {
+      "session": "X087_2021_07_25_g0_t0.imec0.ap_res.Cells.mat",
+      "n_trials": 204,
+      "n_target_rows_checked": 2986,
+      "outer_folds": 5,
+      "nested_trial_disjointness": true,
+      "matched_outer_unit_counts": true,
+      "artifact_hashes_match": true,
+      "max_saved_metric_error": 1.1102230246251565e-16,
+      "source_of_target_check": "direct raw MAT click-array comparisons"
+    },
+    {
+      "session": "X087_2021_07_30_g0_t0.imec0.ap_res.Cells.mat",
+      "n_trials": 355,
+      "n_target_rows_checked": 5287,
+      "outer_folds": 5,
+      "nested_trial_disjointness": true,
+      "matched_outer_unit_counts": true,
+      "artifact_hashes_match": true,
+      "max_saved_metric_error": 1.1102230246251565e-16,
+      "source_of_target_check": "direct raw MAT click-array comparisons"
+    },
+    {
+      "session": "X087_2021_08_03_g0_t0.imec0.ap_res.Cells.mat",
+      "n_trials": 487,
+      "n_target_rows_checked": 4304,
+      "outer_folds": 5,
+      "nested_trial_disjointness": true,
+      "matched_outer_unit_counts": true,
+      "artifact_hashes_match": true,
+      "max_saved_metric_error": 0.0,
+      "source_of_target_check": "direct raw MAT click-array comparisons"
+    }
+  ],
+  "manual_neural_checks": [
+    {
+      "session": "A294_2021_06_22_02_g0_t0.imec0.ap_res.Cells.mat",
+      "manual_neural_rate_checks": 189,
+      "max_rate_error": 3.552713678800501e-15,
+      "first_outer_fold_scaler_recomputed_from_training_only": true,
+      "max_scaler_error": 9.947598300641403e-14,
+      "max_saved_readout_error": 0.0,
+      "n_first_fold_heldout_neural_rows": 319
+    },
+    {
+      "session": "A297_2021_07_19_01_g0_t0.imec0.ap_res.Cells.mat",
+      "manual_neural_rate_checks": 189,
+      "max_rate_error": 2.1316282072803006e-14,
+      "first_outer_fold_scaler_recomputed_from_training_only": true,
+      "max_scaler_error": 7.815970093361102e-14,
+      "max_saved_readout_error": 1.9317880628477724e-14,
+      "n_first_fold_heldout_neural_rows": 318
+    }
+  ],
+  "total_target_rows_checked": 32656
+}

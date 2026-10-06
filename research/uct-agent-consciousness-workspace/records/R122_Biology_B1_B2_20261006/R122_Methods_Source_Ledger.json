@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-06",
+  "author_commit": "39d056fb12f688034b543d9ac8b7406a58ad0f77",
+  "primary_sources": [
+    {
+      "title": "A multi-region recurrent circuit for evidence accumulation in rats",
+      "publication_status": "peer reviewed, Neuron 2026",
+      "doi": "10.1016/j.neuron.2025.12.029",
+      "url": "https://dikshagup.github.io/publication/multiregion-accumulation/multiregion-accumulation.pdf",
+      "downloaded_bytes": 11663991,
+      "sha256": "8daabdb02884a87b51c0c618f64c7f14a53e92b20eda7eaf70132ff640f24789",
+      "read_scope_pdf_pages1": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        11,
+        12,
+        17,
+        18,
+        19,
+        20,
+        21,
+        26
+      ],
+      "web_refs": [
+        "turn4search2",
+        "turn4search3",
+        "turn2view1"
+      ],
+      "note": "Full PDF actually downloaded locally; web open of publisher403 and authorPDF11MB exceeds webtool size. Source DOI/title/year verified independently."
+    },
+    {
+      "title": "Figshare Cells recording-session data",
+      "doi": "10.6084/m9.figshare.30369064.v1",
+      "url": "https://figshare.com/articles/dataset/Data_from_A_multi-region_recurrent_circuit_for_evidence_accumulation_in_rats/30369064",
+      "read_scope": "Entire public dataset description and field schema",
+      "web_ref": "turn0search2",
+      "limitation": "Advertised recorded field not present in every actual MATLAB session; actual-file audits govern availability."
+    },
+    {
+      "title": "To integrate or not to integrate: Testing degenerate strategies for solving an accumulation of perceptual evidence decision-making task",
+      "publication_status": "primary preprint, inspected version 2024-08-22",
+      "doi": "10.1101/2024.08.21.609064",
+      "url": "https://dikshagup.github.io/publication/degenerate-strategies/degenerate-strategies.pdf",
+      "read_scope_pdf_pages1": [
+        7,
+        8,
+        9,
+        14,
+        15,
+        16,
+        17,
+        18,
+        37,
+        38
+      ],
+      "web_refs": [
+        "turn10view1",
+        "turn11view0",
+        "turn11view1"
+      ],
+      "use": "Kernel identifiability and snapshot/sampling confounds only; no new dataset analyzed."
+    }
+  ],
+  "author_code": [
+    {
+      "path": "figure2/fig2_helpers/evidencedecoding.py",
+      "url": "https://github.com/Brody-Lab/fof_ads_interactions/blob/39d056fb12f688034b543d9ac8b7406a58ad0f77/figure2/fig2_helpers/evidencedecoding.py",
+      "sha256": "7da69a9d942cf0291e270caf2e3a3d7b93c54d9e3330c2b722c05ae22d622213",
+      "read_scope": "complete source file"
+    },
+    {
+      "path": "figure2/figure2_decodingfigs.py",
+      "url": "https://github.com/Brody-Lab/fof_ads_interactions/blob/39d056fb12f688034b543d9ac8b7406a58ad0f77/figure2/figure2_decodingfigs.py",
+      "sha256": "3384ddd07d2f65dcd1d0665972ad6259ab54f8a684da9632b5f7df6c6b03ef3e",
+      "read_scope": "complete source file"
+    },
+    {
+      "path": "helpers/physdata_preprocessing.py",
+      "url": "https://github.com/Brody-Lab/fof_ads_interactions/blob/39d056fb12f688034b543d9ac8b7406a58ad0f77/helpers/physdata_preprocessing.py",
+      "sha256": "48bbfb5866a9a76f4ad78a1af609483110f2b32ef56cdcd7007726235ddfab12",
+      "read_scope": "complete source file"
+    },
+    {
+      "path": "helpers/phys_helpers.py",
+      "url": "https://github.com/Brody-Lab/fof_ads_interactions/blob/39d056fb12f688034b543d9ac8b7406a58ad0f77/helpers/phys_helpers.py",
+      "sha256": "596bea871313bdd898632505c12317ad50c0c8ceb83e54a45b88de585be8d5e7",
+      "read_scope": "complete source file"
+    },
+    {
+      "path": "helpers/rasters_and_psths.py",
+      "url": "https://github.com/Brody-Lab/fof_ads_interactions/blob/39d056fb12f688034b543d9ac8b7406a58ad0f77/helpers/rasters_and_psths.py",
+      "sha256": "80a19c2a496c2a9c4764f7646027ed101ee3b8d5590c0168b424109636a0a89f",
+      "read_scope": "raster, smoothing, population loader, and get_neural_activity execution path; lines1-480 and822-872"
+    }
+  ],
+  "failures": [
+    {
+      "url": "https://www.cell.com/neuron/fulltext/S0896-6273(25)00985-7",
+      "status": "web retrieval HTTP403"
+    },
+    {
+      "url": "https://www.sciencedirect.com/science/article/pii/S0896627325009857",
+      "status": "web open HTTP403; search excerpt available"
+    },
+    {
+      "url": "https://dikshagup.github.io/publication/multiregion-accumulation/multiregion-accumulation.pdf",
+      "status": "web tool size failure then direct authorized public HTTP download succeeded"
+    }
+  ],
+  "scope_limits": [
+    "No claim all paper figures were read or reproduced",
+    "B1/B2 observational reanalysis does not close C2/C3",
+    "No experience labels, T3 or valence inference",
+    "Root independently acquired Cells.zip; this subagent did not download Cells.zip"
+  ]
+}

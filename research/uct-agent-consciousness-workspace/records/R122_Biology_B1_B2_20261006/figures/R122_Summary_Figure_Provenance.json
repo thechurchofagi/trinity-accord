@@ -1,0 +1,32 @@
+{
+  "purpose": "Figure compilation only; no new fitting, statistical testing, or existing result changes",
+  "inputs": [
+    {
+      "path": "b1_results/B1_results.json",
+      "sha256": "34f925d7f674a842ba1b2eed93d62b656e9a528936e4a2f6bc481b9c7e220242"
+    },
+    {
+      "path": "b2_results/B2_aggregate.json",
+      "sha256": "830fcc518ca275f384e6eda29bb9ba8c1306c4677251c0b5842d93e6cc2eb527"
+    },
+    {
+      "path": "b2_results/B2_session_metrics.csv",
+      "sha256": "750e68df8b04bffaa3151cbb17efd27dcd9f6e9abbf956295ee9291ad7ecfdb4"
+    }
+  ],
+  "script_sha256": "665d40311282a22cdea270c547c3efc2390c8da9554766489d2377a560702a35",
+  "figure_files": [
+    {
+      "name": "R122_B1_B2_Summary.png",
+      "sha256": "4a87313acc57517a8699909c8b0a4a38c8505f62180c46a948b4349f8f2c286d"
+    },
+    {
+      "name": "R122_B1_B2_Summary.pdf",
+      "sha256": "b3d3524d5ee92e73bc0d208b18a210fc11b6c77a7988831e09a1b40abd22db38"
+    }
+  ],
+  "b1_primary": "full10 versus lastbin; descriptive interval includes zero",
+  "b1_control": "total evidence versus lastbin; favorable in all five rats and twelve sessions",
+  "b2_display": "Already-reported FOF/ADS rat R2 means plus session R2 values; no R117 overlay",
+  "coverage_csv": "R122_session_coverage.csv"
+}

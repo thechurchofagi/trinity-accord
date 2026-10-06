@@ -1,0 +1,18 @@
+[
+  {
+    "attempt": 1,
+    "started_utc": "2026-10-06T07:29:22Z",
+    "source": "https://ndownloader.figshare.com/files/58773835",
+    "cache_revalidation": false,
+    "resume_offset": 0,
+    "status": 200,
+    "final_host": "s3-eu-west-1.amazonaws.com",
+    "content_type": "application/zip",
+    "content_length": "1929137550",
+    "content_range": null,
+    "bytes_downloaded_total": 1929137550,
+    "md5": "3b0ab5c964fb492ec36ee0f55a5d53de",
+    "sha256": "e23a5c281b828c5d9545576ebc9197f37dbc20bd16c616aa2eda55d220fe9494",
+    "outcome": "VERIFIED_FULL_DOWNLOAD"
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "round": "R122",
+  "analysis": "B1 independent psychophysical temporal kernel",
+  "started_utc": "2026-10-06T07:37:19.163199+00:00",
+  "protocol_sha256": "559fb4c7dc0dbbf44c09cb083d35dc36f04c3a5ac9a82b4a3c9973f2ff5e5f91",
+  "code_sha256": "776e7e92a130bc9b29235f8382541d5b65398779d85f1c01e109f87027fdafd7",
+  "loader_sha256": "21a84a802ded32bb73d59316332c838ff84b4e5a14e6363d975b09db39009ca4",
+  "parameters": {
+    "bins": 10,
+    "folds": 5,
+    "C_fixed": 1.0,
+    "solver": "lbfgs",
+    "max_iter": 2000,
+    "tolerance": 1e-08,
+    "nuisance": [
+      "duration_s",
+      "previous_rewarded_choice",
+      "previous_error_choice",
+      "previous_history_missing"
+    ],
+    "seed": null,
+    "randomization": "none; deterministic contiguous source-trial blocks"
+  },
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "sklearn": "1.8.0"
+  },
+  "sessions": [],
+  "session_failures": [],
+  "scope_limits": [
+    "No author behavioral-kernel replication claimed",
+    "No out-of-rat generalization tested",
+    "No neural intervention or T2 closure established",
+    "AI experience E remains latent",
+    "No new AI run in this analysis"
+  ]
+}

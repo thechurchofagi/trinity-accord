@@ -1,0 +1,121 @@
+{
+  "schema_version": "r122-gupta-cells-v1",
+  "author_commit": "39d056fb12f688034b543d9ac8b7406a58ad0f77",
+  "source_file": "/workspace/scratch/42800b14a096/data/rat_sessions/Cells_upload/X062_2020_03_19_g0_t0.imec0.ap_res.Cells.mat",
+  "source_sha256": "6d42cb55cc4a1e1e45c400290b986b1658bee2f06c7bcee93994a17f16b00be7",
+  "source_bytes": 298431192,
+  "source_trials_fields": [
+    "click_diff",
+    "click_diff_hz",
+    "gamma",
+    "is_hit",
+    "laser",
+    "leftBups",
+    "pharma",
+    "pokedR",
+    "rat",
+    "reward_loc",
+    "rightBups",
+    "sess_date",
+    "sessid",
+    "sides",
+    "stateTimes",
+    "stim_dur_s_actual",
+    "stim_dur_s_theoretical",
+    "trial_type",
+    "violated"
+  ],
+  "source_stateTimes_fields": [
+    "break",
+    "cleaned_up",
+    "clicks_off",
+    "clicks_on",
+    "cpoke_in",
+    "cpoke_out",
+    "error",
+    "iti",
+    "laser_off",
+    "laser_on",
+    "laser_pulses",
+    "left_click_times",
+    "left_click_trial",
+    "left_clicks",
+    "left_reward",
+    "right_click_times",
+    "right_click_trial",
+    "right_clicks",
+    "right_reward",
+    "sending_trialnum",
+    "shuffled_left_click_times",
+    "shuffled_left_clicks",
+    "shuffled_right_click_times",
+    "shuffled_right_clicks",
+    "spoke",
+    "wait_for_cpoke",
+    "wait_for_spoke"
+  ],
+  "rat_sources": {
+    "parsed": {
+      "rec.rat": "X062",
+      "rat": "X062"
+    },
+    "skipped": {
+      "Trials.rat": "MATLAB opaque field not decoded; use explicit plain source metadata"
+    }
+  },
+  "session_sources": {
+    "parsed": {
+      "sessid": "779404",
+      "Trials.sessid": "779404"
+    },
+    "skipped": {}
+  },
+  "date_sources": {
+    "parsed": {
+      "rec.sessiondate": "2020-03-19",
+      "sess_date": "2020-03-19"
+    },
+    "skipped": {
+      "Trials.sess_date": "MATLAB opaque field not decoded; use explicit plain source metadata"
+    }
+  },
+  "n_source_trials": 279,
+  "click_transform": "onset-relative = raw[1:] - raw[0] separately per side; audit shared initial stereo click",
+  "duration_definition": "Trials.stim_dur_s_actual; compare to stateTimes.clicks_off - clicks_on",
+  "trial_identity_definition": "source filename plus source MATLAB row (1-based); never renumbered after exclusions",
+  "ties": "retained in behavior fitting; only omitted from majority-target accuracy denominator",
+  "warnings": [],
+  "n_author_eligible_trials": 226,
+  "n_eligible_trials": 226,
+  "n_source_ties": 54,
+  "n_eligible_ties": 1,
+  "exclusion_counts_overlapping": {
+    "left_empty_click_field": 53,
+    "nonpositive_or_missing_duration": 53,
+    "nonpositive_or_missing_event_duration": 40,
+    "right_empty_click_field": 53,
+    "violation_or_missing_flag": 53
+  },
+  "eligible_duration_range_s": [
+    0.14454066036006413,
+    0.9838471343915919
+  ],
+  "eligible_duration_discrepancy_max_abs_s": 0.0009851299890041298,
+  "source_region_names": [
+    "VS",
+    "DMS",
+    "M2"
+  ],
+  "recorded_raw_shape": [
+    285
+  ],
+  "recorded_availability": "present; explicit source unit/trial flags",
+  "neural_unit_count": 285,
+  "neural_region_counts": {
+    "ADS": 160,
+    "VS": 76,
+    "FOF": 49
+  },
+  "nonfinite_spike_count": 0,
+  "units_with_nonfinite_spikes": 0
+}
