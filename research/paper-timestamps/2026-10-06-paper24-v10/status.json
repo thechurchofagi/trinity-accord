@@ -1,0 +1,23 @@
+{
+  "batch": "2026-10-06-paper24-v10",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 86272,
+      "doi": "10.5281/zenodo.23176685",
+      "name": "from-shutdown-resistance-to-self-continuation-control-v1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-10-06-paper24-v10/proofs/TA-TR-2026-24/from-shutdown-resistance-to-self-continuation-control-v1.0.pdf.ots",
+      "proof_sha256": "c137a6a378a31123b8c7ad5076c04c7515220703a914882030ad3bc0ed2c6fd4",
+      "report": "TA-TR-2026-24",
+      "role": "Complete English archival methods preprint",
+      "sha256": "368e80b07be1d25ec542971352b9067206aaba9cfff82945c7286c5a281ba104",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 1,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}
