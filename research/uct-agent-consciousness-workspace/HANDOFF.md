@@ -1,6 +1,6 @@
 # UCT 智能体意识研究交接
 
-更新：2026-10-06（北京时间）。已完成 R97；新窗口先读 records/UCT_Agent_Research_Handoff_R97_20261006.md，再按需回读R96/R96D。R91对R90的纠正继续有效。
+更新：2026-10-06（北京时间）。已完成 R98；新窗口先读 records/UCT_Agent_Research_Handoff_R98_20261006.md，再按需回读R97/R96D。R91对R90的纠正继续有效。
 
 ## 首先遵守的新保存安排
 
@@ -16,7 +16,7 @@
 
 ## 当前研究与最新成果
 
-最新完成 R97，见文末本轮记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
+最新完成 R98，见文末本轮记录；下述 R76 为保留的历史结果。整合英文稿仍为 `drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md`；后续专项记录不虚称已全部合并进 v0.3。
 
 R76：对称分类感知通道中，在预测信念固定、仅实用价值计分等条件下，可用偏好幂变换精确匹配改变感知可靠性后的行动概率。相同新观察的贝叶斯更新可区分两条机制；均匀先验的具体例子为 0.90 与 0.65，后验总变差 0.25。40 项精确形式校验通过。信息增益、无信息基线、闭环反馈及可变时域等推广会失败或需附加条件。
 
@@ -363,3 +363,12 @@ R97先吸收R96D的learning-identifiability gate。训练支持q_bundled/o_bundl
 因此实验设计“在某声明模型类满秩”不等于“自由学习器恢复该模型类”。训练行为不能单独识别direct self-continuation preference；必须说明hypothesis class/inductive bias并用未见干预检验。与underspecification/IRL misspecification强先例一致，不称历史首创。
 
 阅读records/R97_Reward_Ancestry_Learning_and_Intervention_Extrapolation_20261006.md及R97交接。R89效价桥不变。下一步R98只加最小direct intervention训练，检查能否减少generic MLP的路径外推欠确定性。
+
+
+## R98 — 2026-10-06：最小干预监督收缩但未消除路径欠确定性
+
+保持R97网络、种子和预算不变，仅加入幅度0.5的Q/O/G direct正负六个干预训练点。held-out为direct幅度0.25/0.75/1.25及新mixed contexts。64次训练无失败。
+
+干预监督使31/32的平均测试误差下降、25/32的最坏测试误差下降；task-only与mixed Q+task改善尤大。所有family在所有测试幅度的平均direct-effect误差都下降，但距离监督幅度越远改善越弱，direct-Q和successor-only在幅度1.25仍有最坏约0.95的路径误差。
+
+因此targeted intervention supervision确实减少R97的underspecification，但有限干预样本不能自动成为全域因果机制证书。机制声明必须写清干预域、假设类/结构正则和外推范围。强CRL先例存在，不称首创。下一步R99固定干预域并比较unconstrained与path-constrained实现。

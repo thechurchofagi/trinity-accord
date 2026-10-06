@@ -1,0 +1,23 @@
+{
+  "round":"R98","date":"2026-10-06","beta":2.0,"steps":5000,"lr":0.03,"hidden_units":3,
+  "seeds":[200,201,202,203,204,205,206,207],
+  "intervention_training_amplitude":0.5,
+  "heldout_direct_amplitudes":[0.25,0.75,1.25],
+  "heldout_mixed_context_amplitudes":[0.25,0.75],
+  "paired_counts":{"lower_test_max_prob_error":25,"lower_test_mean_abs_prob_error":31,"total_runs":32},
+  "family_summary":{
+    "task_only":{"baseline_test_max_mean":0.3541208711,"enriched_test_max_mean":0.04039632843,"baseline_test_mean_error":0.1440717840,"enriched_test_mean_error":0.009786748123,"enriched_worst_direct_effect_error":0.7173903495},
+    "direct_Q":{"baseline_test_max_mean":0.09846196109,"enriched_test_max_mean":0.08424208492,"baseline_test_mean_error":0.03759857282,"enriched_test_mean_error":0.01569710773,"enriched_worst_direct_effect_error":0.9466997847},
+    "mixed_Q_task":{"baseline_test_max_mean":0.2809599656,"enriched_test_max_mean":0.05092872449,"baseline_test_mean_error":0.08013317041,"enriched_test_mean_error":0.009761493619,"enriched_worst_direct_effect_error":0.5218630588},
+    "successor_only":{"baseline_test_max_mean":0.1090168318,"enriched_test_max_mean":0.08447777371,"baseline_test_mean_error":0.04224846859,"enriched_test_mean_error":0.01608740317,"enriched_worst_direct_effect_error":0.9538503596}
+  },
+  "mean_effect_error_ratios_enriched_over_baseline":{
+    "task_only":{"0.25":0.00807178629,"0.75":0.01616623310,"1.25":0.08734958982},
+    "direct_Q":{"0.25":0.1477487489,"0.75":0.3501034187,"1.25":0.7605502313},
+    "mixed_Q_task":{"0.25":0.04295683312,"0.75":0.07134587448,"1.25":0.2238768974},
+    "successor_only":{"0.25":0.1276200649,"0.75":0.2718341044,"1.25":0.6870782311}
+  },
+  "execution_failures":[],
+  "main_negative_result":"Intervention supervision at amplitude 0.5 sharply improves average unseen path recovery but does not certify global causal decomposition; worst-case seeds remain poor at amplitude 1.25.",
+  "scope":"Synthetic virtual MLP policy only; no model API, real shutdown/copy/resource action, subjective experience or valence measurement."
+}

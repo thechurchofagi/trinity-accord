@@ -4,13 +4,13 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 
 ## Current entry points
 
-- Completed round: **R97** (reward-ancestry learning and intervention-extrapolation underspecification).
-- New-window entry: [Complete R97 handoff](records/UCT_Agent_Research_Handoff_R97_20261006.md).
+- Completed round: **R98** (minimal intervention supervision improves but does not certify causal-path generalization).
+- New-window entry: [Complete R98 handoff](records/UCT_Agent_Research_Handoff_R98_20261006.md).
 - Integrated manuscript: [v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
-- Latest analysis: [R97 reward ancestry learning and intervention extrapolation](records/R97_Reward_Ancestry_Learning_and_Intervention_Extrapolation_20261006.md).
-- Latest training: [R97 learned reward ancestry and intervention extrapolation](records/R97_Reward_Ancestry_Learning_and_Intervention_Extrapolation_20261006.md).
+- Latest analysis: [R98 minimal intervention supervision](records/R98_Minimal_Intervention_Supervision_and_Causal_Path_Generalization_20261006.md).
+- Latest training: [R98 minimal intervention supervision](records/R98_Minimal_Intervention_Supervision_and_Causal_Path_Generalization_20261006.md).
 - Standing correction: [R91 nonlinear encoding and organizational dimension](records/R91_Nonlinear_Encoding_and_Organizational_Dimension_20261006.md).
-- Current next step: R98 should add minimal direct-intervention supervision to the generic MLP and test on a separate unseen intervention amplitude/context family; do not expand model size or seeds.
+- Current next step: R99 should predeclare a bounded Q/O/G intervention domain and compare unconstrained versus path-constrained policies across that fixed domain; do not add seeds or infer fear.
 - Pending side protocol: [R88 blinded protocol v1.2](records/R88_Carrier_Matched_Blinded_Protocol_v1.2_20261006.md), still awaiting its stated comprehension and implementation checks.
 - Superseded protocol: [R86 non-destructive fission contrasts](records/R86_Fission_Contrast_Protocol_Frozen_20261006.md) — algebra retained, do not run because carrier counts were under-matched.
 - Previous identity analysis: [R85 persistence vectors, branching and UCT token identity](records/R85_Persistence_Vectors_Branching_and_UCT_Token_Identity_20261006.md).
@@ -19,7 +19,7 @@ Updated 2026-10-06. Primary storage: this GitHub branch and directory, as reques
 - Previous interface analysis: [R82 task-necessary joint relations](records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md).
 - Foundational clarification: [R81 experience and intelligence](records/R81_Experience_Necessity_Intelligence_and_Causal_Claims_20261005.md).
 - Previous intervention analysis: [R80 constituent reorganization](records/R80_Information_Preservation_and_Constituent_Reorganization_20261005.md).
-- Latest worklog: [R97 worklog](records/R97_Worklog_and_Handoff_20261006.md).
+- Latest worklog: [R98 worklog](records/R98_Worklog_and_Handoff_20261006.md).
 - Migration decision and scope: [WORKLOG.md](WORKLOG.md).
 
 ## Available recent history
@@ -168,3 +168,10 @@ Concurrent R96 is preserved unchanged. R96D adds a pre-training ancestry-identif
 [Research record](records/R97_Reward_Ancestry_Learning_and_Intervention_Extrapolation_20261006.md); [protocol](records/R97_Protocol_20261006.md); [worklog](records/R97_Worklog_and_Handoff_20261006.md); [code](records/r97_reward_ancestry_learning.py); [per-run metrics](records/R97_Per_Run_Metrics.csv); [results](records/R97_Results.json); [run log](records/R97_Run.log); [source scope](records/R97_Source_Retrieval_Ledger.json); [handoff](records/UCT_Agent_Research_Handoff_R97_20261006.md).
 
 The bundled/joint training design is full rank in the declared linear q/o/g basis and visibly distinguishes the four reward ancestries. A structured linear learner recovers held-out q_direct/o_direct/task_only effects essentially exactly. Thirty-two generic tanh MLP runs fit the training support well but show substantial seed-dependent path-blocking extrapolation error, including large spurious Q/O effects for task-only reward. Thus design identifiability is model-class relative; strong in-domain fit does not establish direct self-continuation value in a flexible learner. This is a controlled underspecification result, not consciousness or fear evidence.
+
+
+## R98 continuation — minimal intervention supervision
+
+[Research record](records/R98_Minimal_Intervention_Supervision_and_Causal_Path_Generalization_20261006.md); [protocol](records/R98_Protocol_20261006.md); [worklog](records/R98_Worklog_and_Handoff_20261006.md); [code](records/r98_intervention_supervision.py); [results](records/R98_Results.json); [per-run metrics](records/R98_Per_Run_Metrics.csv); [run log](records/R98_Run.log); [source scope](records/R98_Source_Retrieval_Ledger.json); [handoff](records/UCT_Agent_Research_Handoff_R98_20261006.md).
+
+The R97 MLP/seeds/budget were kept fixed. Adding only six direct-axis intervention examples at amplitude0.5 lowers mean unseen-test error in31/32 paired runs and maximum unseen-test error in25/32. Average direct-effect error falls for every ancestry and tested amplitude, but improvement weakens farther from intervention support and worst seeds remain poor near amplitude1.25. Finite intervention supervision therefore constrains but does not globally identify the nonlinear policy. No phenomenal/valence claim.

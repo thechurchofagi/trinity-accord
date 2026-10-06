@@ -1,0 +1,12 @@
+{
+ "round":"R98","date":"2026-10-06",
+ "sources":[
+  {"title":"Identifying Representations for Intervention Extrapolation","authors":"Saengkyongam et al.","venue":"ICLR 2024","url":"https://proceedings.iclr.cc/paper_files/paper/2024/hash/aa9508b2577e0d9c824da9e2e27fe9d6-Abstract-Conference.html","scope":"Official conference abstract read. Direct prior art: extrapolation to unseen interventions requires identifiable representation plus explicit structural assumptions."},
+  {"title":"Identifying Linearly-Mixed Causal Representations from Multi-Node Interventions","authors":"Bing et al.","venue":"CLeaR 2024","url":"https://proceedings.mlr.press/v236/bing24a.html","scope":"Official PMLR abstract read. Used for the role of intervention diversity/coverage in causal representation identifiability."},
+  {"title":"Score-based Causal Representation Learning: Linear and General Transformations","authors":"Varici et al.","venue":"JMLR 2025","url":"https://jmlr.org/papers/v26/24-0194.html","scope":"JMLR abstract read. Used for intervention-count/type conditions behind causal representation identifiability guarantees."},
+  {"title":"Beyond identifiability: Learning causal representations with few environments and finite samples","authors":"Lee, Jin, Aragam","year":2026,"url":"https://arxiv.org/abs/2603.25796","scope":"ArXiv abstract read. Used as current finite-sample prior art; no detailed theorem imported."}
+ ],
+ "internal":["R97 reward-ancestry underspecification","R96/R96D path and learning identifiability"],
+ "novelty_status":"Strong prior art for intervention-based causal representation and extrapolation. R98 is a project-specific finite synthetic stress test, not a historical-first theorem.",
+ "third_party_fulltexts_uploaded":false
+}

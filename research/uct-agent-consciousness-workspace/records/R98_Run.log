@@ -1,0 +1,15 @@
+R98 minimal intervention supervision
+Date: 2026-10-06
+Model: generic tanh MLP, hidden=3
+Seeds: 200..207
+Families: task_only, direct_Q, mixed_Q_task, successor_only
+Conditions per family/seed: baseline and intervention_enriched
+Total trainings: 64
+Intervention training: Q/O/G direct axes at amplitude 0.5, both signs
+Held-out direct amplitudes: 0.25, 0.75, 1.25
+Held-out mixed-context amplitudes: 0.25, 0.75
+Paired lower mean absolute test error: 31/32
+Paired lower maximum test error: 25/32
+Worst enriched direct-effect error: task_only 0.717390; direct_Q 0.946700; mixed_Q_task 0.521863; successor_only 0.953850
+Execution failures: none
+Conclusion: targeted intervention supervision strongly improves average extrapolation but does not certify global causal-path recovery.
