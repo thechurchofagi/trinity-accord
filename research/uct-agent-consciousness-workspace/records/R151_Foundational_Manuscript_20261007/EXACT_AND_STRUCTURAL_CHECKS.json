@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "t2_finite_assignments": 128,
+  "rewiring_pairings": 40,
+  "rewiring_state_command_rows": 2368,
+  "rewiring_law_classes": {
+    "2": {
+      "laws": 2,
+      "pairs_per_law": 2
+    },
+    "3": {
+      "laws": 6,
+      "pairs_per_law": 6
+    }
+  },
+  "joint_inconsistency_control": "PASS",
+  "nodes": 391,
+  "rules": 188,
+  "source_hashes": 9,
+  "limits": "Finite checks plus graph bookkeeping; general proofs are in the manuscript. No global semantic consistency, actual realization, phenomenology or independent review is certified."
+}

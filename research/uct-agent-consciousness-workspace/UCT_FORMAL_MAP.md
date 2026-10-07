@@ -6,6 +6,14 @@
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
 
+## R151 manuscript, mandatory guide and audit layer
+
+Read [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) before each research turn. It adds concept, joint-premise and purpose checks to dependency bookkeeping. The integrated [v0.2 manuscript](records/R151_Foundational_Manuscript_20261007/Experience_Intelligence_and_Self_v0_2.md) treats self-related feeling within experience, with T1/T2/T3 and four thought-experiment families. No extra owner or self-model gate is introduced.
+
+[Full-node inventory](records/R151_Foundational_Manuscript_20261007/NODE_REVIEW_INDEX.json) covers 391 nodes; [rule index](records/R151_Foundational_Manuscript_20261007/RULE_REVIEW_INDEX.json) covers 188 rules. 107 legacy nodes lack an inline statement and 223 lack inline scope/domain; source context may supply them, but graph-only interpretation is incomplete. [Claim and cross-relation ledger](records/R151_Foundational_Manuscript_20261007/PROOF_AND_SOURCE_LEDGER.md) supplies the current manuscript scopes and 24 manual relation reviews. Other historical claims are not newly certified. Pairwise consistency is not global joint consistency.
+
+R149 mathematical revision, old nodes/rules/context links and nine source texts are retained unchanged. R151 contributes an editorial/audit metadata layer. Future work follows the master guide and integrated self-experience question; older next-task paragraphs below are archival, not automatic instructions.
+
 ## R150 authoritative editorial clarification
 
 The author prioritizes original, durable, citable human–AI foundational work over submission. [Source rereading and replacement passage](records/R150_Self_Experience_and_Research_Purpose_20261007/SELF_EXPERIENCE_AND_PURPOSE.md) restore A §§8.12–8.14/14.7: the conceptual I is organization within experience, not an additional owner producing it. Distinguish felt mineness, conceptual selfhood, functional self-modeling, reports and actual-process parameters. A:U3 is not expanded beyond its witness-qualified conceptual-self claim. No unique subject or accurate self-model becomes a basal-experience requirement.

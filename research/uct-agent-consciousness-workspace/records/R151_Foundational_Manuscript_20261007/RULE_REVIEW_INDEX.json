@@ -1,0 +1,2305 @@
+[
+  {
+    "id": "a01",
+    "all_of": [
+      "A:C1"
+    ],
+    "conclusion": "A:C1_OI",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §4"
+  },
+  {
+    "id": "a02",
+    "all_of": [
+      "A:C1_OI"
+    ],
+    "conclusion": "A:C1_W",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §4"
+  },
+  {
+    "id": "a03",
+    "all_of": [
+      "A:C1",
+      "A:NONEMPTY_CARRIER"
+    ],
+    "conclusion": "A:U1",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §4"
+  },
+  {
+    "id": "a04",
+    "all_of": [
+      "A:C1",
+      "A:QSPACE",
+      "A:GEOMETRY"
+    ],
+    "conclusion": "A:U2",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §4"
+  },
+  {
+    "id": "a05",
+    "all_of": [
+      "A:U1",
+      "A:SELF_WITNESS"
+    ],
+    "conclusion": "A:U3",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §4"
+  },
+  {
+    "id": "a06",
+    "all_of": [
+      "A:C1",
+      "A:P3",
+      "A:P6",
+      "A:U1",
+      "A:U2",
+      "A:U3"
+    ],
+    "conclusion": "A:U0",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §4"
+  },
+  {
+    "id": "a07",
+    "all_of": [
+      "A:U1",
+      "A:NONUNIV_WITNESS"
+    ],
+    "conclusion": "A:ORG_GATE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §5.1"
+  },
+  {
+    "id": "a08",
+    "all_of": [
+      "A:C1_W",
+      "A:COMPLETE_EQ"
+    ],
+    "conclusion": "A:NO_HIDDEN",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §5.2"
+  },
+  {
+    "id": "a09",
+    "all_of": [
+      "A:C1_W",
+      "A:COMPLETE_EQ",
+      "A:PROBE_ONLY"
+    ],
+    "conclusion": "A:PROBE_INV",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §5.3"
+  },
+  {
+    "id": "a10",
+    "all_of": [
+      "A:C1_W",
+      "A:COMPLETE_EQ",
+      "A:FUTURE_ONLY"
+    ],
+    "conclusion": "A:NO_FUTURE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §5.4"
+  },
+  {
+    "id": "a11",
+    "all_of": [
+      "A:C1_W",
+      "A:COMPLETE_EQ",
+      "A:HISTORY_DIFF"
+    ],
+    "conclusion": "A:GHOST_EQ",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §5.5"
+  },
+  {
+    "id": "a12",
+    "all_of": [
+      "A:C1_W",
+      "A:COMPLETE_EQ",
+      "A:LABEL_ONLY"
+    ],
+    "conclusion": "A:REWARD_NONID",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §5.6"
+  },
+  {
+    "id": "a13",
+    "all_of": [
+      "A:GHOST_EQ",
+      "A:P6",
+      "A:HISTORY_DIFF"
+    ],
+    "conclusion": "A:GHOST_TOKEN_NOTE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §5.5"
+  },
+  {
+    "id": "a14",
+    "all_of": [
+      "A:C1",
+      "A:PRODUCT_DEF",
+      "A:ACTUAL_WHOLE_PARTS",
+      "A:PHYS_NONPRODUCT"
+    ],
+    "conclusion": "A:NONSUM",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §6.3"
+  },
+  {
+    "id": "a15",
+    "all_of": [
+      "A:C1_W",
+      "A:MACRO_EQ"
+    ],
+    "conclusion": "A:MACRO_EXP_EQ",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §6.4"
+  },
+  {
+    "id": "a16",
+    "all_of": [
+      "A:C1_OI",
+      "A:MICRO_NONISO"
+    ],
+    "conclusion": "A:MICRO_EXP_DIFF",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §6.4"
+  },
+  {
+    "id": "a17",
+    "all_of": [
+      "A:SYM_PREM",
+      "A:EQUIV_SELECTOR"
+    ],
+    "conclusion": "A:ORBIT_LEMMA",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §7.1"
+  },
+  {
+    "id": "a18",
+    "all_of": [
+      "A:ORBIT_LEMMA",
+      "A:OVERLAP_NONEMPTY_EXCL"
+    ],
+    "conclusion": "A:SELECTION_OBSTRUCTION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §7.1"
+  },
+  {
+    "id": "a19",
+    "all_of": [
+      "A:U1",
+      "A:ALL_ANC_ACTUAL"
+    ],
+    "conclusion": "A:E1",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §8.1"
+  },
+  {
+    "id": "a20",
+    "all_of": [
+      "A:C1",
+      "A:QSPACE",
+      "A:GEOMETRY",
+      "A:EPS_CHAIN"
+    ],
+    "conclusion": "A:E2",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §8.2"
+  },
+  {
+    "id": "a21",
+    "all_of": [
+      "A:CONNECTED_LAMBDA",
+      "A:CONT_BINARY_E",
+      "A:HUMAN_ENDPOINT"
+    ],
+    "conclusion": "A:E3",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §8.3"
+  },
+  {
+    "id": "a22",
+    "all_of": [
+      "A:U2",
+      "A:PHYS_CONT_PATH"
+    ],
+    "conclusion": "A:U2_APP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §8.2"
+  },
+  {
+    "id": "a23a",
+    "all_of": [
+      "A:E1",
+      "A:E2"
+    ],
+    "conclusion": "A:EVOL_SYNTH",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §8"
+  },
+  {
+    "id": "a23b",
+    "all_of": [
+      "A:E1",
+      "A:U2_APP"
+    ],
+    "conclusion": "A:EVOL_SYNTH",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §8"
+  },
+  {
+    "id": "a24",
+    "all_of": [
+      "A:C1_OI",
+      "A:PHYS_TRANSFORM_NONISO"
+    ],
+    "conclusion": "A:STRUCT_TRANSFORM",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §9"
+  },
+  {
+    "id": "a25",
+    "all_of": [
+      "A:TOY_MATH"
+    ],
+    "conclusion": "A:TOY_WHOLE_DIFF",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §9 and Appendix B"
+  },
+  {
+    "id": "a26",
+    "all_of": [
+      "A:TOY_MATH"
+    ],
+    "conclusion": "A:TOY_SUB_EQ",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A Appendix B"
+  },
+  {
+    "id": "a27",
+    "all_of": [
+      "A:TOY_WHOLE_DIFF",
+      "A:ACTUAL_COMPLETE_TOY",
+      "A:C1_OI"
+    ],
+    "conclusion": "A:TOY_EXP_WHOLE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §9.3"
+  },
+  {
+    "id": "a28",
+    "all_of": [
+      "A:TOY_SUB_EQ",
+      "A:ACTUAL_COMPLETE_TOY",
+      "A:C1_W"
+    ],
+    "conclusion": "A:TOY_EXP_SUB",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §9.3"
+  },
+  {
+    "id": "a29",
+    "all_of": [
+      "A:C1",
+      "A:BRIDGE_FWD",
+      "A:MEAS"
+    ],
+    "conclusion": "A:OSC_FWD",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §10"
+  },
+  {
+    "id": "a30",
+    "all_of": [
+      "A:C1",
+      "A:BRIDGE_FWD",
+      "A:BRIDGE_REV",
+      "A:MEAS"
+    ],
+    "conclusion": "A:OSC_TWO",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §10"
+  },
+  {
+    "id": "a31",
+    "all_of": [
+      "A:FROZEN_SCOPE",
+      "A:FORWARD_MISMATCH",
+      "A:MEAS"
+    ],
+    "conclusion": "A:FAIL_ONE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §12.1"
+  },
+  {
+    "id": "a32",
+    "all_of": [
+      "A:FROZEN_SCOPE",
+      "A:REVERSE_MISMATCH",
+      "A:MEAS"
+    ],
+    "conclusion": "A:FAIL_TWO",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §12.2"
+  },
+  {
+    "id": "a33",
+    "all_of": [
+      "A:P3",
+      "A:ACTUAL_PERSISTING_PARTS",
+      "A:U1"
+    ],
+    "conclusion": "A:COEXISTENCE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §§2.4,6.3"
+  },
+  {
+    "id": "a34",
+    "all_of": [
+      "A:FINITE_COARSE_SETUP"
+    ],
+    "conclusion": "A:COARSE_CLOSURE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A Appendix D"
+  },
+  {
+    "id": "b01",
+    "all_of": [
+      "B:VIEW",
+      "B:LANGUAGE",
+      "B:BAC",
+      "B:EXPRESSIBLE"
+    ],
+    "conclusion": "B:REP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §4.2"
+  },
+  {
+    "id": "b02",
+    "all_of": [
+      "A:U1",
+      "B:TARGET_DOMAIN"
+    ],
+    "conclusion": "B:GATE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §5.5"
+  },
+  {
+    "id": "b03",
+    "all_of": [
+      "A:P3",
+      "A:U1",
+      "B:OVERLAP_WITNESS"
+    ],
+    "conclusion": "B:EXCLUSION_CONFLICT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §6"
+  },
+  {
+    "id": "b_IIT",
+    "all_of": [
+      "B:VIEW",
+      "B:BAC",
+      "B:TFR",
+      "B:IIT_BRIDGE"
+    ],
+    "conclusion": "B:IIT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §6"
+  },
+  {
+    "id": "b_RPT",
+    "all_of": [
+      "B:VIEW",
+      "B:BAC",
+      "B:TFR",
+      "B:RPT_BRIDGE"
+    ],
+    "conclusion": "B:RPT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §7"
+  },
+  {
+    "id": "b_GNWT",
+    "all_of": [
+      "B:VIEW",
+      "B:BAC",
+      "B:TFR",
+      "B:GNWT_BRIDGE"
+    ],
+    "conclusion": "B:GNWT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §8"
+  },
+  {
+    "id": "b_HOT",
+    "all_of": [
+      "B:VIEW",
+      "B:BAC",
+      "B:TFR",
+      "B:HOT_BRIDGE"
+    ],
+    "conclusion": "B:HOT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §9"
+  },
+  {
+    "id": "b_AST",
+    "all_of": [
+      "B:VIEW",
+      "B:BAC",
+      "B:TFR",
+      "B:AST_BRIDGE"
+    ],
+    "conclusion": "B:AST",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §9"
+  },
+  {
+    "id": "b_PP_AI",
+    "all_of": [
+      "B:VIEW",
+      "B:BAC",
+      "B:TFR",
+      "B:PP_AI_BRIDGE"
+    ],
+    "conclusion": "B:PP_AI",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §10"
+  },
+  {
+    "id": "b_DIT",
+    "all_of": [
+      "B:VIEW",
+      "B:BAC",
+      "B:TFR",
+      "B:DIT_BRIDGE"
+    ],
+    "conclusion": "B:DIT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §11"
+  },
+  {
+    "id": "b_MTOC",
+    "all_of": [
+      "B:VIEW",
+      "B:BAC",
+      "B:TFR",
+      "B:MTOC_BRIDGE"
+    ],
+    "conclusion": "B:MTOC",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §12"
+  },
+  {
+    "id": "b_TTC",
+    "all_of": [
+      "B:VIEW",
+      "B:BAC",
+      "B:TFR",
+      "B:TTC_BRIDGE"
+    ],
+    "conclusion": "B:TTC",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §13"
+  },
+  {
+    "id": "b04",
+    "all_of": [
+      "B:GRAPH"
+    ],
+    "conclusion": "B:CYCLE_PRIMITIVE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §7 / R128"
+  },
+  {
+    "id": "b05",
+    "all_of": [
+      "B:GRAPH",
+      "B:NEW_EDGE_RETURN"
+    ],
+    "conclusion": "B:EDGE_CYCLE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §16"
+  },
+  {
+    "id": "b06",
+    "all_of": [
+      "B:MODEL19"
+    ],
+    "conclusion": "B:SPECTRAL",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §19.2"
+  },
+  {
+    "id": "b07",
+    "all_of": [
+      "B:MODEL19",
+      "B:NONLINEAR_WORKSPACE"
+    ],
+    "conclusion": "B:RECURRENCE_ENABLES",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "B §§16,19"
+  },
+  {
+    "id": "a35",
+    "all_of": [
+      "B:VIEW",
+      "B:BAC",
+      "B:TFR",
+      "B:REP"
+    ],
+    "conclusion": "A:UCTII_RECON",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §16.1; B §§2–5"
+  },
+  {
+    "id": "a36",
+    "all_of": [
+      "A:U1",
+      "B:TARGET_DOMAIN"
+    ],
+    "conclusion": "A:UCTII_GATE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §16.1; B §5.5"
+  },
+  {
+    "id": "a37",
+    "all_of": [
+      "A:ACTUAL_TOKEN"
+    ],
+    "conclusion": "A:NONEMPTY_CARRIER",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "A §2.1"
+  },
+  {
+    "id": "c01",
+    "all_of": [
+      "A:C1_OI",
+      "C:FIXED_J"
+    ],
+    "conclusion": "C:P1",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §5.1"
+  },
+  {
+    "id": "c02",
+    "all_of": [
+      "C:SET_MAPS"
+    ],
+    "conclusion": "C:P2_COORD",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §5.2"
+  },
+  {
+    "id": "c03",
+    "all_of": [
+      "A:C1_OI",
+      "C:FIXED_J",
+      "C:P2_COORD"
+    ],
+    "conclusion": "C:P2_FULL",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §5.2"
+  },
+  {
+    "id": "c04",
+    "all_of": [
+      "C:SET_MAPS"
+    ],
+    "conclusion": "C:OBS_REFINEMENT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §5.3"
+  },
+  {
+    "id": "c05",
+    "all_of": [
+      "C:CONST_RANK"
+    ],
+    "conclusion": "C:LOCAL_FIBER",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §5.3"
+  },
+  {
+    "id": "c06",
+    "all_of": [
+      "C:PAIR_COUNTERMODEL"
+    ],
+    "conclusion": "C:P3",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §5.4"
+  },
+  {
+    "id": "c07",
+    "all_of": [
+      "C:SMOOTH_FITNESS"
+    ],
+    "conclusion": "C:P4",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §6.1"
+  },
+  {
+    "id": "c08",
+    "all_of": [
+      "C:SELECTION",
+      "C:CLASS_WEIGHTS"
+    ],
+    "conclusion": "C:P5",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §6.2"
+  },
+  {
+    "id": "c09",
+    "all_of": [
+      "C:SELECTION"
+    ],
+    "conclusion": "C:PRICE_SELECTION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §6.3"
+  },
+  {
+    "id": "c10",
+    "all_of": [
+      "C:SELECTION",
+      "C:DESCENDANT_ATTRIBUTION"
+    ],
+    "conclusion": "C:PRICE_TRANSMISSION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §6.3"
+  },
+  {
+    "id": "c11",
+    "all_of": [
+      "C:MARKOV_SELECTION"
+    ],
+    "conclusion": "C:P6",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §6.4"
+  },
+  {
+    "id": "c12",
+    "all_of": [
+      "C:DECISION"
+    ],
+    "conclusion": "C:P7",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §7.3"
+  },
+  {
+    "id": "c13",
+    "all_of": [
+      "C:CIRCUIT_SPEC"
+    ],
+    "conclusion": "C:CIRCUIT_LAWS",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §7.2; Appendix C"
+  },
+  {
+    "id": "c14",
+    "all_of": [
+      "C:ENV_MEMORY",
+      "C:DECISION"
+    ],
+    "conclusion": "C:MEMORY_VALUE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §7.3"
+  },
+  {
+    "id": "c15",
+    "all_of": [
+      "C:MEMORY_COST",
+      "C:SELECTION"
+    ],
+    "conclusion": "C:MEMORY_SELECTION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §7.3"
+  },
+  {
+    "id": "c16",
+    "all_of": [
+      "A:C1",
+      "C:ACTUAL_ENSEMBLE"
+    ],
+    "conclusion": "C:REPERTOIRE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §8.2"
+  },
+  {
+    "id": "c17",
+    "all_of": [
+      "A:C1_OI",
+      "C:ACTUAL_INDEX_FAMILY"
+    ],
+    "conclusion": "C:SENSORY_PARTITION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C Appendix E"
+  },
+  {
+    "id": "c18",
+    "all_of": [
+      "A:C1_OI",
+      "B:TFR",
+      "C:RIVAL_DESCRIPTOR"
+    ],
+    "conclusion": "C:RIVAL_CONTRAST",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §9.1"
+  },
+  {
+    "id": "c19",
+    "all_of": [
+      "C:SET_MAPS",
+      "C:P2_COORD"
+    ],
+    "conclusion": "C:RIVAL_NESIG",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §9.1"
+  },
+  {
+    "id": "c20",
+    "all_of": [
+      "C:TRANSCRIPT"
+    ],
+    "conclusion": "C:SCORE_TV",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §9.2"
+  },
+  {
+    "id": "c21",
+    "all_of": [
+      "C:FINITE_LOSS"
+    ],
+    "conclusion": "C:LOGLOSS",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C Appendix B"
+  },
+  {
+    "id": "c22",
+    "all_of": [
+      "C:FINITE_LOSS",
+      "C:NUISANCE_BOUNDS",
+      "C:LOGLOSS"
+    ],
+    "conclusion": "C:RESIDUAL_BOUND",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C Appendix B"
+  },
+  {
+    "id": "c23",
+    "all_of": [
+      "C:TV_PROFILES"
+    ],
+    "conclusion": "C:PROFILE_PSEUDOMETRIC",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §10.2"
+  },
+  {
+    "id": "c24",
+    "all_of": [
+      "C:PUBLIC_NULL_PREMISE"
+    ],
+    "conclusion": "C:PUBLIC_NULL",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "C §10.2"
+  },
+  {
+    "id": "r126_1",
+    "all_of": [
+      "A:C1",
+      "R126:PROJECTION"
+    ],
+    "conclusion": "R126:P1",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R126 theory note §3"
+  },
+  {
+    "id": "r126_2",
+    "all_of": [
+      "R126:MODEL"
+    ],
+    "conclusion": "R126:P2",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R126 theory note §4"
+  },
+  {
+    "id": "r126_3",
+    "all_of": [
+      "R126:MODEL",
+      "R126:METRIC"
+    ],
+    "conclusion": "R126:P3",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R126 theory note §5"
+  },
+  {
+    "id": "r126_4",
+    "all_of": [
+      "R126:MODEL",
+      "R126:P2"
+    ],
+    "conclusion": "R126:P4",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R126 theory note §6"
+  },
+  {
+    "id": "r127_1",
+    "all_of": [
+      "R127:TASK"
+    ],
+    "conclusion": "R127:P1",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R127 theory note §3"
+  },
+  {
+    "id": "r127_1a",
+    "all_of": [
+      "R127:TASK"
+    ],
+    "conclusion": "R127:QUERY_REFINEMENT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R127 theory note §3"
+  },
+  {
+    "id": "r127_1b",
+    "all_of": [
+      "R126:MODEL",
+      "R126:P4"
+    ],
+    "conclusion": "R127:FUTURE_EQ",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R127 theory note §3"
+  },
+  {
+    "id": "r127_2",
+    "all_of": [
+      "R127:TASK",
+      "R127:MEDIATION"
+    ],
+    "conclusion": "R127:P2",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R127 theory note §§2,4–5; R130 second review §2"
+  },
+  {
+    "id": "r127_3",
+    "all_of": [
+      "R127:RECOVERY"
+    ],
+    "conclusion": "R127:P3",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R127 theory note §5"
+  },
+  {
+    "id": "r127_3a",
+    "all_of": [
+      "R127:PAIR_MODEL"
+    ],
+    "conclusion": "R127:JOINT_INFORMATION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R127 theory note §5"
+  },
+  {
+    "id": "r127_3b",
+    "all_of": [
+      "R127:LOCALIZATION_PAIR"
+    ],
+    "conclusion": "R127:LOCALIZATION_LIMIT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R127 theory note §6"
+  },
+  {
+    "id": "r127_4",
+    "all_of": [
+      "A:ACTUAL_TOKEN",
+      "R127:EVENT_SUPPORT"
+    ],
+    "conclusion": "R127:P4",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R127 theory note §7"
+  },
+  {
+    "id": "r127_5",
+    "all_of": [
+      "A:C1",
+      "R127:RELATIONAL_SUPPORT"
+    ],
+    "conclusion": "R127:P5",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R127 theory note §8"
+  },
+  {
+    "id": "a38",
+    "all_of": [
+      "A:C1",
+      "B:REP",
+      "B:BAC",
+      "B:TFR",
+      "R127:RELATIONAL_SUPPORT",
+      "R127:P5"
+    ],
+    "conclusion": "A:UCTII_EXP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R127 theory note §8; A Appendix C; B §5"
+  },
+  {
+    "id": "n128_1",
+    "all_of": [
+      "R126:P2",
+      "N128:COMMON_DETERMINISTIC"
+    ],
+    "conclusion": "N128:DET_JOIN",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R128 joint-state derivation §2"
+  },
+  {
+    "id": "n128_2",
+    "all_of": [
+      "N128:MARKOV_WITNESS"
+    ],
+    "conclusion": "N128:MARKOV_JOIN",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R128 joint-state derivation §3"
+  },
+  {
+    "id": "n128_3",
+    "all_of": [
+      "N128:KERNEL"
+    ],
+    "conclusion": "N128:JOINT_CRITERION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R128 joint-state derivation §4"
+  },
+  {
+    "id": "n128_4",
+    "all_of": [
+      "N128:KERNEL",
+      "N128:PRODUCT_LAW",
+      "N128:JOINT_CRITERION"
+    ],
+    "conclusion": "N128:INDEPENDENCE_SUFFICES",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R128 joint-state derivation §4"
+  },
+  {
+    "id": "n128_5",
+    "all_of": [
+      "C:OBS_REFINEMENT",
+      "N128:MARKOV_JOIN"
+    ],
+    "conclusion": "N128:SEPARATION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R128 joint-state derivation §5"
+  },
+  {
+    "id": "d129_bundled",
+    "all_of": [
+      "D:PATH_MODEL",
+      "D:BUNDLED_ROWS"
+    ],
+    "conclusion": "D:F1",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "D §3; R96; R129 §2"
+  },
+  {
+    "id": "d129_direct",
+    "all_of": [
+      "D:PATH_MODEL",
+      "D:DIRECT_ROWS"
+    ],
+    "conclusion": "D:F2",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "D §3; R96; R129 §2"
+  },
+  {
+    "id": "d129_payoff",
+    "all_of": [
+      "D:BINARY_PAYOFF"
+    ],
+    "conclusion": "D:PAYOFF",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "D §4; R96D §5"
+  },
+  {
+    "id": "d129_marginal_counter",
+    "all_of": [
+      "D:BINARY_PAYOFF",
+      "D:PAYOFF",
+      "D:MATCHED_WITNESS"
+    ],
+    "conclusion": "D:F3",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "D §4; R96D §§3–5"
+  },
+  {
+    "id": "d129_value_gap",
+    "all_of": [
+      "D:F3",
+      "D:MATCHED_WITNESS",
+      "C:P7"
+    ],
+    "conclusion": "D:VALUE_GAP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "D §4; R96D §§3–4; C P7"
+  },
+  {
+    "id": "d129_frechet",
+    "all_of": [
+      "D:BINARY_PAYOFF",
+      "D:PAYOFF",
+      "D:FRECHET_ASSUMPTIONS"
+    ],
+    "conclusion": "D:FRECHET",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R96D §6; R129 §3"
+  },
+  {
+    "id": "d129_grid",
+    "all_of": [
+      "D:REGULAR_GRID"
+    ],
+    "conclusion": "D:GRID_BOUND",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "D §§7–8; R99 §4"
+  },
+  {
+    "id": "d129_separable",
+    "all_of": [
+      "D:ADDITIVE_CLASS"
+    ],
+    "conclusion": "D:SEPARABLE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "D §7; R99 §§3–4"
+  },
+  {
+    "id": "d129_uct",
+    "all_of": [
+      "A:C1_OI",
+      "D:ACTUAL_CHANGE"
+    ],
+    "conclusion": "D:UCT_INTERPRETATION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "D §11; A C1-OI"
+  },
+  {
+    "id": "r131_target",
+    "all_of": [
+      "R131:PROBES",
+      "C:P2_COORD"
+    ],
+    "conclusion": "R131:TARGET_SPAN",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R131 R131_Probe_Completeness_Theorem.md §3"
+  },
+  {
+    "id": "r131_complete",
+    "all_of": [
+      "R131:PROBES",
+      "R131:TARGET_SPAN"
+    ],
+    "conclusion": "R131:COMPLETE_LAW",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R131 R131_Probe_Completeness_Theorem.md §4"
+  },
+  {
+    "id": "r131_closure",
+    "all_of": [
+      "R131:PROBES",
+      "R131:COMPLETE_LAW",
+      "R131:FULL_RANK",
+      "R131:KERNEL",
+      "R131:PROBE_MATCH",
+      "N128:JOINT_CRITERION"
+    ],
+    "conclusion": "R131:CLOSURE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R131 R131_Probe_Completeness_Theorem.md §5"
+  },
+  {
+    "id": "r131_blind",
+    "all_of": [
+      "R131:PROBES",
+      "R131:COMPLETE_LAW",
+      "R131:DEFICIENT",
+      "N128:JOINT_CRITERION"
+    ],
+    "conclusion": "R131:BLIND_KERNEL",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R131 R131_Probe_Completeness_Theorem.md §5"
+  },
+  {
+    "id": "r131_decision",
+    "all_of": [
+      "R131:BLIND_KERNEL",
+      "R131:DECISION_SETUP",
+      "C:P7"
+    ],
+    "conclusion": "R131:DECISION_GAP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R131 R131_Probe_Completeness_Theorem.md §6"
+  },
+  {
+    "id": "r131_robust",
+    "all_of": [
+      "R131:PROBES",
+      "R131:LEFT_INVERSE"
+    ],
+    "conclusion": "R131:ROBUST",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R131 R131_Probe_Completeness_Theorem.md §7"
+  },
+  {
+    "id": "r132_hall",
+    "all_of": [
+      "R132:SLOT_MODEL"
+    ],
+    "conclusion": "R132:HALL",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R132_Common_Realization_Theorems.md §3"
+  },
+  {
+    "id": "r132_deficit",
+    "all_of": [
+      "R132:SLOT_MODEL",
+      "R132:HALL"
+    ],
+    "conclusion": "R132:DEFICIT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R132_Common_Realization_Theorems.md §3"
+  },
+  {
+    "id": "r132_high",
+    "all_of": [
+      "R132:SLOT_MODEL",
+      "R132:DEFICIT",
+      "R132:UNIFORM_BOTTLENECK"
+    ],
+    "conclusion": "R132:HIGH_ORDER",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R132_Common_Realization_Theorems.md §4"
+  },
+  {
+    "id": "r132_closure",
+    "all_of": [
+      "R132:PARTIAL_MODEL",
+      "C:P2_COORD"
+    ],
+    "conclusion": "R132:PARTIAL_CLOSURE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R132_Common_Realization_Theorems.md §6"
+  },
+  {
+    "id": "r132_probes",
+    "all_of": [
+      "R132:PARTIAL_MODEL",
+      "R132:PARTIAL_CLOSURE",
+      "R132:PROBE_SETUP",
+      "R131:COMPLETE_LAW"
+    ],
+    "conclusion": "R132:PROBE_CERTIFICATE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R132_Common_Realization_Theorems.md §6"
+  },
+  {
+    "id": "r132_obstructions",
+    "all_of": [
+      "R132:PARTIAL_CLOSURE",
+      "R132:WITNESS_MODELS"
+    ],
+    "conclusion": "R132:TWO_OBSTRUCTIONS",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R132_Common_Realization_Theorems.md §7"
+  },
+  {
+    "id": "r132_refine",
+    "all_of": [
+      "R132:PARTIAL_MODEL",
+      "R132:PARTIAL_CLOSURE",
+      "R132:REFINEMENT_SETUP"
+    ],
+    "conclusion": "R132:REFINEMENT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R132_Common_Realization_Theorems.md §8"
+  },
+  {
+    "id": "r133_support",
+    "all_of": [
+      "R133:PERSISTENT_MODEL"
+    ],
+    "conclusion": "R133:SUPPORT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R133_Observable_Common_Control.md §2"
+  },
+  {
+    "id": "r133_common",
+    "all_of": [
+      "R133:PERSISTENT_MODEL",
+      "R133:SUPPORT"
+    ],
+    "conclusion": "R133:COMMON_POLICY",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R133_Observable_Common_Control.md §3"
+  },
+  {
+    "id": "r133_cell",
+    "all_of": [
+      "R133:DECISION_MODEL",
+      "C:P2_COORD"
+    ],
+    "conclusion": "R133:CELL_ACTION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R133_Observable_Common_Control.md §4"
+  },
+  {
+    "id": "r133_cover",
+    "all_of": [
+      "R133:DECISION_MODEL",
+      "R133:CELL_ACTION",
+      "R133:ENCODER"
+    ],
+    "conclusion": "R133:MESSAGE_COVER",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R133_Observable_Common_Control.md §4"
+  },
+  {
+    "id": "r133_avoid",
+    "all_of": [
+      "R133:DECISION_MODEL",
+      "R133:CELL_ACTION",
+      "R133:ENCODER",
+      "R133:MESSAGE_COVER",
+      "R133:AVOIDANCE_MODEL"
+    ],
+    "conclusion": "R133:AVOIDANCE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R133_Observable_Common_Control.md §5"
+  },
+  {
+    "id": "r133_nonunique",
+    "all_of": [
+      "R133:DECISION_MODEL",
+      "R133:CELL_ACTION",
+      "R133:AVOIDANCE_MODEL"
+    ],
+    "conclusion": "R133:NONUNIQUE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R133_Observable_Common_Control.md §5"
+  },
+  {
+    "id": "r133_probe",
+    "all_of": [
+      "R133:PERSISTENT_MODEL",
+      "R133:COMMON_POLICY",
+      "R133:PROBE_MODELS"
+    ],
+    "conclusion": "R133:PROBE_BOUNDARY",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R133_Observable_Common_Control.md §6"
+  },
+  {
+    "id": "r133_persistence",
+    "all_of": [
+      "R133:PERSISTENT_MODEL",
+      "R133:SUPPORT",
+      "R133:SWITCH_MODEL"
+    ],
+    "conclusion": "R133:PERSISTENCE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R133_Observable_Common_Control.md §7"
+  },
+  {
+    "id": "r134_vectors",
+    "all_of": [
+      "R133:PERSISTENT_MODEL",
+      "R133:SUPPORT",
+      "R134:QUANT_MODEL"
+    ],
+    "conclusion": "R134:VECTOR_RECURSION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R134_Quantitative_Control.md §3"
+  },
+  {
+    "id": "r134_lp",
+    "all_of": [
+      "R134:QUANT_MODEL",
+      "R134:VECTOR_RECURSION"
+    ],
+    "conclusion": "R134:ROBUST_LP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R134_Quantitative_Control.md §4"
+  },
+  {
+    "id": "r134_zero",
+    "all_of": [
+      "R134:QUANT_MODEL",
+      "R134:VECTOR_RECURSION",
+      "R134:ROBUST_LP",
+      "R133:COMMON_POLICY"
+    ],
+    "conclusion": "R134:ZERO_ERROR",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R134_Quantitative_Control.md §4"
+  },
+  {
+    "id": "r134_scalar",
+    "all_of": [
+      "R134:QUANT_MODEL",
+      "R134:VECTOR_RECURSION",
+      "R134:SCALAR_MODELS"
+    ],
+    "conclusion": "R134:SCALAR_FAILURE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R134_Quantitative_Control.md §5"
+  },
+  {
+    "id": "r134_probe",
+    "all_of": [
+      "R134:QUANT_MODEL",
+      "R134:ROBUST_LP",
+      "R134:PROBE_MODEL"
+    ],
+    "conclusion": "R134:PROBE_DUAL",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R134_Quantitative_Control.md §6"
+  },
+  {
+    "id": "r134_tv",
+    "all_of": [
+      "R134:PROBE_MODEL",
+      "R134:PROBE_DUAL",
+      "R134:COMMON_SURVIVAL"
+    ],
+    "conclusion": "R134:TV_OPPORTUNITY",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R134_Quantitative_Control.md §6"
+  },
+  {
+    "id": "r134_optional",
+    "all_of": [
+      "R134:QUANT_MODEL",
+      "R134:ROBUST_LP",
+      "R134:PROBE_MODEL",
+      "R134:PROBE_DUAL",
+      "R134:OPTIONAL_MODEL"
+    ],
+    "conclusion": "R134:OPTIONAL_PROBE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R134_Quantitative_Control.md §7"
+  },
+  {
+    "id": "r134_mix",
+    "all_of": [
+      "R134:PROBE_MODEL",
+      "R134:PROBE_DUAL",
+      "R134:COMMON_SURVIVAL",
+      "R134:OPTIONAL_MODEL",
+      "R134:OPTIONAL_PROBE",
+      "R134:ASYM_MODEL"
+    ],
+    "conclusion": "R134:MIXING_WITNESS",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R134_Quantitative_Control.md §7"
+  },
+  {
+    "id": "r135_deficiency",
+    "all_of": [
+      "R135:PROFILE_PAIR"
+    ],
+    "conclusion": "R135:DEFICIENCY",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R135_Capability_Preservation.md §3"
+  },
+  {
+    "id": "r135_equality",
+    "all_of": [
+      "R135:PROFILE_PAIR",
+      "R135:DEFICIENCY"
+    ],
+    "conclusion": "R135:GUARANTEE_EQ",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R135_Capability_Preservation.md §3"
+  },
+  {
+    "id": "r135_value",
+    "all_of": [
+      "R135:PROFILE_PAIR"
+    ],
+    "conclusion": "R135:VALUE_BOUND",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R135_Capability_Preservation.md §4"
+  },
+  {
+    "id": "r135_hierarchy",
+    "all_of": [
+      "R135:PROFILE_PAIR",
+      "R135:HIERARCHY_MODELS"
+    ],
+    "conclusion": "R135:HIERARCHY",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R135_Capability_Preservation.md §5"
+  },
+  {
+    "id": "r135_policy",
+    "all_of": [
+      "R135:SIMULATION_SETUP"
+    ],
+    "conclusion": "R135:POLICY_BOUND",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R135_Capability_Preservation.md §7"
+  },
+  {
+    "id": "r135_transfer",
+    "all_of": [
+      "R135:PROFILE_PAIR",
+      "R135:VALUE_BOUND",
+      "R135:SIMULATION_SETUP",
+      "R135:POLICY_BOUND"
+    ],
+    "conclusion": "R135:TRANSFER_BOUND",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R135_Capability_Preservation.md §7"
+  },
+  {
+    "id": "r135_legality",
+    "all_of": [
+      "R135:LEGALITY_MODEL"
+    ],
+    "conclusion": "R135:LEGALITY_JUMP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R135_Capability_Preservation.md §8"
+  },
+  {
+    "id": "r135_uct",
+    "all_of": [
+      "A:C1",
+      "C:P1",
+      "C:P2_FULL",
+      "C:P2_COORD",
+      "R135:ACTUAL_PROFILE",
+      "R135:GUARANTEE_EQ"
+    ],
+    "conclusion": "R135:UCT_INTERPRETATION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R135_Capability_Preservation.md §9"
+  },
+  {
+    "id": "r136_blackwell",
+    "all_of": [
+      "R136:STATIC_SETUP"
+    ],
+    "conclusion": "R136:BLACKWELL",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R136_Causal_Translation.md §2"
+  },
+  {
+    "id": "r136_causal",
+    "all_of": [
+      "R136:STREAM_SETUP"
+    ],
+    "conclusion": "R136:CAUSAL_LP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R136_Causal_Translation.md §3"
+  },
+  {
+    "id": "r136_composition",
+    "all_of": [
+      "R136:STREAM_SETUP",
+      "R136:CAUSAL_LP"
+    ],
+    "conclusion": "R136:COMPOSITION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R136_Causal_Translation.md §4"
+  },
+  {
+    "id": "r136_prefix",
+    "all_of": [
+      "R136:STREAM_SETUP",
+      "R136:CAUSAL_LP",
+      "R136:DETERMINISTIC",
+      "C:P2_COORD"
+    ],
+    "conclusion": "R136:PREFIX",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R136_Causal_Translation.md §5"
+  },
+  {
+    "id": "r136_delay",
+    "all_of": [
+      "R136:STREAM_SETUP",
+      "R136:DELAY_MODEL",
+      "R136:PREFIX"
+    ],
+    "conclusion": "R136:DELAY_GAP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R136_Causal_Translation.md §6"
+  },
+  {
+    "id": "r136_query",
+    "all_of": [
+      "R136:QUERY_MODEL"
+    ],
+    "conclusion": "R136:QUERY_BOUND",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R136_Causal_Translation.md §7"
+  },
+  {
+    "id": "r136_order",
+    "all_of": [
+      "R136:QUERY_MODEL",
+      "R136:QUERY_BOUND",
+      "R135:PROFILE_PAIR"
+    ],
+    "conclusion": "R136:TASK_ORDER",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R136_Causal_Translation.md §8"
+  },
+  {
+    "id": "r137_local",
+    "all_of": [
+      "R137:CONTROL_MODEL"
+    ],
+    "conclusion": "R137:LOCAL_LP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R137_Executable_Feedback.md §3"
+  },
+  {
+    "id": "r137_loop",
+    "all_of": [
+      "R137:CONTROL_MODEL",
+      "R137:EXACT_INTERFACE",
+      "R137:LOCAL_LP"
+    ],
+    "conclusion": "R137:CLOSED_LOOP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R137_Executable_Feedback.md §4"
+  },
+  {
+    "id": "r137_approx",
+    "all_of": [
+      "R137:CONTROL_MODEL",
+      "R137:APPROX_INTERFACE"
+    ],
+    "conclusion": "R137:APPROX",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R137_Executable_Feedback.md §5"
+  },
+  {
+    "id": "r137_obstruction",
+    "all_of": [
+      "R137:CONTROL_MODEL",
+      "R137:LOCAL_LP"
+    ],
+    "conclusion": "R137:OBSTRUCTION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R137_Executable_Feedback.md §6"
+  },
+  {
+    "id": "r137_sharp",
+    "all_of": [
+      "R137:CONTROL_MODEL",
+      "R137:LOCAL_LP",
+      "R137:OBSTRUCTION",
+      "R137:FORBIDDEN_MODEL"
+    ],
+    "conclusion": "R137:SHARP_OBSTRUCTION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R137_Executable_Feedback.md §7"
+  },
+  {
+    "id": "r137_observation",
+    "all_of": [
+      "R137:CONTROL_MODEL",
+      "R137:LOCAL_LP",
+      "R137:BLIND_MODEL"
+    ],
+    "conclusion": "R137:OBSERVATION_GAP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R137_Executable_Feedback.md §7"
+  },
+  {
+    "id": "r137_seed",
+    "all_of": [
+      "R137:SEED_MODEL"
+    ],
+    "conclusion": "R137:SEED_GAP",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "R137_Executable_Feedback.md §8"
+  },
+  {
+    "id": "r145_transport",
+    "all_of": [
+      "R145:TRANSPORT_SETUP",
+      "A:COARSE_CLOSURE"
+    ],
+    "conclusion": "R145:TRANSPORT_BLIND",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md §2"
+  },
+  {
+    "id": "r145_separation",
+    "all_of": [
+      "R145:FAMILY",
+      "R145:TRANSPORT_BLIND"
+    ],
+    "conclusion": "R145:SEPARATION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md Theorem 1"
+  },
+  {
+    "id": "r145_affine",
+    "all_of": [
+      "R145:FAMILY",
+      "R145:AFFINE_SETUP"
+    ],
+    "conclusion": "R145:AFFINE_DIAGNOSTIC",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md Proposition 2"
+  },
+  {
+    "id": "r145_type",
+    "all_of": [
+      "R145:SEPARATION",
+      "R145:ACTUAL_BRIDGE",
+      "A:C1_OI"
+    ],
+    "conclusion": "R145:TYPE_LIMIT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md §5.2"
+  },
+  {
+    "id": "r146_centered",
+    "all_of": [
+      "R146:SYMMETRY_SETUP",
+      "A:ORBIT_LEMMA"
+    ],
+    "conclusion": "R146:CENTERED_REFERENCE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md Proposition 1"
+  },
+  {
+    "id": "r146_duplicate",
+    "all_of": [
+      "R146:DUPLICATE_SETUP"
+    ],
+    "conclusion": "R146:DUPLICATE_SEPARATION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md §§4.2-4.3"
+  },
+  {
+    "id": "r146_self_target",
+    "all_of": [
+      "R146:SELF_CONTRACT",
+      "C:P2_COORD"
+    ],
+    "conclusion": "R146:SELF_TARGET_SUFFICIENCY",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md Proposition 2"
+  },
+  {
+    "id": "r147_routing",
+    "all_of": [
+      "R147:ROUTING_MODEL"
+    ],
+    "conclusion": "R147:ROUTING_LIMIT",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §§3-4"
+  },
+  {
+    "id": "r147_memory",
+    "all_of": [
+      "R147:ROUTING_MODEL",
+      "R147:MEMORY_ISOLATION"
+    ],
+    "conclusion": "R147:MEMORY_LIMIT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §5"
+  },
+  {
+    "id": "r147_type",
+    "all_of": [
+      "R147:ROUTING_LIMIT",
+      "R147:ACTUAL_BRIDGE",
+      "A:C1_OI"
+    ],
+    "conclusion": "R147:TYPE_LIMIT",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_VALID_UNDER_STATED_PREMISES",
+    "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §§4,7"
+  },
+  {
+    "id": "r149_ta15_nonident",
+    "all_of": [
+      "TA15:OBS_EQ_PREM"
+    ],
+    "conclusion": "TA15:NONIDENT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 1"
+  },
+  {
+    "id": "r149_ta15_fiber",
+    "all_of": [
+      "TA15:MAPS"
+    ],
+    "conclusion": "TA15:FIBER",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 2"
+  },
+  {
+    "id": "r149_ta15_composition",
+    "all_of": [
+      "TA15:RELATION_PREM"
+    ],
+    "conclusion": "TA15:COMPOSITION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 3"
+  },
+  {
+    "id": "r149_ta15_error",
+    "all_of": [
+      "TA15:METRIC_PREM"
+    ],
+    "conclusion": "TA15:ERROR",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 4"
+  },
+  {
+    "id": "r149_ta16_causal_limits",
+    "all_of": [
+      "TA16:FINITE_CONTRACT"
+    ],
+    "conclusion": "TA16:CAUSAL_LIMITS",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA16_v1_0.md Appendix G.1–G.4"
+  },
+  {
+    "id": "r149_ta17_quotient",
+    "all_of": [
+      "TA17:FUNCTIONAL_CONTRACT"
+    ],
+    "conclusion": "TA17:QUOTIENT",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §§4.2,5.3–5.5; Proposition 12"
+  },
+  {
+    "id": "r149_ta17_inheritance",
+    "all_of": [
+      "TA17:FUNCTIONAL_CONTRACT"
+    ],
+    "conclusion": "TA17:INHERITANCE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Propositions 1–4,11; Theorem 1; Corollary 4"
+  },
+  {
+    "id": "r149_ta17_set_limits",
+    "all_of": [
+      "TA17:FUNCTIONAL_CONTRACT"
+    ],
+    "conclusion": "TA17:SET_LIMITS",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Propositions 5–10,13"
+  },
+  {
+    "id": "r149_ta17_kl_cost",
+    "all_of": [
+      "TA17:FUNCTIONAL_CONTRACT"
+    ],
+    "conclusion": "TA17:KL_COST",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Theorem 2; Corollary 5; §12"
+  },
+  {
+    "id": "r149_ta17_regret",
+    "all_of": [
+      "TA17:DECISION_PREM"
+    ],
+    "conclusion": "TA17:REGRET",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Theorem 3"
+  },
+  {
+    "id": "r149_ta18_germ_nonfactor",
+    "all_of": [
+      "TA18:JOINT_WITNESS"
+    ],
+    "conclusion": "TA18:GERM_NONFACTOR",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_WITH_EXPLICIT_SIGNATURE_REPAIR",
+    "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 1; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4"
+  },
+  {
+    "id": "r149_ta18_phen_nonfactor",
+    "all_of": [
+      "TA18:JOINT_WITNESS",
+      "TA18:PAIR_SEPARATION"
+    ],
+    "conclusion": "TA18:PHEN_NONFACTOR",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_SOURCE_INFERENCE_REPAIRED",
+    "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 1, narrowed; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4"
+  },
+  {
+    "id": "r149_ta18_idle",
+    "all_of": [
+      "TA18:PRD",
+      "TA18:ISO_BRIDGE"
+    ],
+    "conclusion": "TA18:IDLE",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_WITH_COVARIANCE_PREMISE",
+    "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 2"
+  },
+  {
+    "id": "r149_ta18_factor",
+    "all_of": [
+      "TA18:NULL_EQ"
+    ],
+    "conclusion": "TA18:FACTOR",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 4"
+  },
+  {
+    "id": "r149_ta18_underdetermination",
+    "all_of": [
+      "TA18:GERM"
+    ],
+    "conclusion": "TA18:UNDERDETERMINATION",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_WITH_EXPLICIT_COUNTERMODEL",
+    "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 3, repaired witness; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4"
+  },
+  {
+    "id": "r149_ta19_local",
+    "all_of": [
+      "TA19:GROUP_SETUP"
+    ],
+    "conclusion": "TA19:LOCAL",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md Propositions 1–2; records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md S1–S2"
+  },
+  {
+    "id": "r149_ta19_monodromy",
+    "all_of": [
+      "TA19:COVER"
+    ],
+    "conclusion": "TA19:MONODROMY",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+    "source": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md Proposition 3 and Corollary 2"
+  },
+  {
+    "id": "r149_ta19_regularity",
+    "all_of": [
+      "TA19:TOPOLOGY"
+    ],
+    "conclusion": "TA19:REGULARITY",
+    "endpoints_valid": true,
+    "current_review": "STRUCTURAL_CHECK_ONLY",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_SUPPLEMENT_PROOFS_EXPLICIT",
+    "source": "records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md S3–S4,S6"
+  },
+  {
+    "id": "r149_r149_compatibility",
+    "all_of": [
+      "R149:COMPARISON",
+      "A:C1_OI",
+      "TA15:FIBER"
+    ],
+    "conclusion": "R149:COMPATIBILITY",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PROJECT_SYNTHESIS",
+    "source": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §3"
+  },
+  {
+    "id": "r149_r149_null_target",
+    "all_of": [
+      "R149:COMPARISON",
+      "A:C1_OI",
+      "TA15:FIBER"
+    ],
+    "conclusion": "R149:NULL_TARGET",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PROJECT_SYNTHESIS",
+    "source": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §§3.2–3.3"
+  },
+  {
+    "id": "r149_r149_self_application",
+    "all_of": [
+      "R147:ROUTING_LIMIT",
+      "R147:ACTUAL_BRIDGE",
+      "R149:COMPARISON",
+      "R149:COMPATIBILITY"
+    ],
+    "conclusion": "R149:SELF_APPLICATION",
+    "endpoints_valid": true,
+    "current_review": "SELECTED_MANUSCRIPT_DEPENDENCY_REVIEW",
+    "inherited_review": "MANUAL_CONDITIONAL_PASS_PROJECT_SYNTHESIS",
+    "source": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §6.4"
+  }
+]

@@ -1,3 +1,17 @@
+# R151 当前交接：综合稿与防偏移总指导
+
+每轮先读 [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md)。目标是原创、可引用、可扩展的基础工作；“我感/概念我在体验内部形成”是主线，不先寻找额外主人。
+
+- [英文综合稿 v0.2](records/R151_Foundational_Manuscript_20261007/Experience_Intelligence_and_Self_v0_2.md)
+- [PDF](records/R151_Foundational_Manuscript_20261007/output/pdf/UCT_Experience_Intelligence_Self_v0_2.pdf)
+- [审查与质量判断](records/R151_Foundational_Manuscript_20261007/REVIEW_ZH.md)
+- [命题及来源台账](records/R151_Foundational_Manuscript_20261007/PROOF_AND_SOURCE_LEDGER.md)
+- [全节点检查索引](records/R151_Foundational_Manuscript_20261007/NODE_REVIEW_INDEX.json)、[规则索引](records/R151_Foundational_Manuscript_20261007/RULE_REVIEW_INDEX.json)、[检查摘要](records/R151_Foundational_Manuscript_20261007/AUDIT_SUMMARY.json)
+
+正文包含定义、公设、三个核心条件结果的完整证明、四族思想实验、AI 应用、反对意见、来源和人机协作方法。0新数学节点；图仍 R149-v1.0，391/188。旧图 107 缺独立命题字段、223 缺独立范围字段，已明确报告；13 稿件命题卡/27 相关节点/24 组交叉关系做了本轮主线核查。全图语义一致性尚未穷尽证明。
+
+下一轮从稿件 §4/§10 的具体我感组织解释继续，并按总指导核查新增或受影响关系。不要重开目录盘点、堆定理、唯一主体或投稿优先任务。已写成综合研究版本；正式 DOI/发布流程未启动。下方旧交接仅供技术历史追溯，不能当作当前自动队列。
+
 # R150 交接：目的与我感澄清
 
 用户明确：追求可供未来 AI 引用、质疑与扩展的原创基础工作；论文是载体，投稿不是目标。已回读 A v1.2 U3、§§8.12–8.14、14.7、14.15，TA17 和 R146/R149 对应段落。前作确实把概念我放在体验内部，不要求额外的体验主人。

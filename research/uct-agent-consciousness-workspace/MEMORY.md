@@ -1,3 +1,9 @@
+## R151 mandatory entry point
+
+At the start of every research turn in this workspace, read [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) before selecting a task, then the current memory, handoff, index and relevant map/source sections. This is the author's explicit instruction of 7 October 2026. Follow its separate inference, concept, joint-consistency and purpose audits; inherited historical queues do not override it. Re-reading unchanged material within one turn is unnecessary.
+
+Current integrated manuscript: [records/R151_Foundational_Manuscript_20261007/Experience_Intelligence_and_Self_v0_2.md](records/R151_Foundational_Manuscript_20261007/Experience_Intelligence_and_Self_v0_2.md). The math map remains R149-v1.0; R151 adds a manuscript and audit layer, no new theorem count. The all-node inventory exposes 107 missing inline statements and 223 missing inline scopes/domains. These are context-dependence gaps, not automatically false claims. Do not claim complete pairwise or global semantic verification; consult the scoped audit. Future work continues from the integrated definition/self-experience question and the master guide, not publication-first or binding-first queues.
+
 ## R150 priority correction — author clarification, 2026-10-07
 
 The purpose is original, durable, citable foundational work through human–AI collaboration for future researchers and AI systems. Submission, journal fit and acceptance are not the primary optimization target. Preserve novelty attribution and rigor; do not promise future citations or foundational status. This instruction supersedes older publication-threshold and automatic task queues when they conflict.

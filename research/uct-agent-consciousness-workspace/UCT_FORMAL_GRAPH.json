@@ -6928,5 +6928,22 @@
     "clarification": "Self-experience and conceptual I are higher-order explanatory targets within experience under UCT; no additional owner, universal exclusive subject, or successful self-model is required for basal experience.",
     "limits": "A:U3 retains conceptual-self witness scope. Nonverbal mineness and conceptual I differ. No universal temporal onset or particular phenomenal bridge is established.",
     "supersedes_queue": "Target-binding-first and publication-threshold-first agendas; mathematical claims retained."
+  },
+  "manuscript_and_audit_R151": {
+    "kind": "INTEGRATED_MANUSCRIPT_AND_PURPOSE_AUDIT",
+    "new_nodes": 0,
+    "new_rules": 0,
+    "guide": "RESEARCH_MASTER_GUIDE.md",
+    "manuscript": "records/R151_Foundational_Manuscript_20261007/Experience_Intelligence_and_Self_v0_2.md",
+    "proof_ledger": "records/R151_Foundational_Manuscript_20261007/PROOF_AND_SOURCE_LEDGER.md",
+    "full_historical_ledger": "records/R149_Nine_Source_Integration_20261007/PROOF_LEDGER.md",
+    "node_inventory": "records/R151_Foundational_Manuscript_20261007/NODE_REVIEW_INDEX.json",
+    "rule_inventory": "records/R151_Foundational_Manuscript_20261007/RULE_REVIEW_INDEX.json",
+    "summary": "records/R151_Foundational_Manuscript_20261007/AUDIT_SUMMARY.json",
+    "claims": "records/R151_Foundational_Manuscript_20261007/MANUSCRIPT_CLAIMS.json",
+    "manual_relation_cards": "records/R151_Foundational_Manuscript_20261007/CROSS_CONSISTENCY_REVIEW.json",
+    "global_semantic_consistency": "NOT_CERTIFIED",
+    "interpretation": "Self-experience within experience; no additional owner or successful self-model existence gate.",
+    "purpose": "Original and reusable human-AI foundational work, not submission optimization."
   }
 }

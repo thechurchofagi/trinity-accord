@@ -1,3 +1,9 @@
+# R151 latest audit disposition
+
+The current [scope/quality review](records/R151_Foundational_Manuscript_20261007/REVIEW_ZH.md) and [machine inventory summary](records/R151_Foundational_Manuscript_20261007/AUDIT_SUMMARY.json) separate full structural indexing from scoped semantic review. 391 nodes and 188 rules have valid references and an acyclic recorded dependency graph. This does not prove global consistency. The 107 absent inline statements and 223 absent inline scope/domain fields are explicit legacy context-dependence gaps.
+
+The manuscript has 13 claim cards and 24 manually reviewed cross-concept/joint-premise relations, linked in [the proof/source ledger](records/R151_Foundational_Manuscript_20261007/PROOF_AND_SOURCE_LEDGER.md). New mathematical claims are not added; the R149 full historical ledger remains intact. Future research must read [the master guide](RESEARCH_MASTER_GUIDE.md). Historical audit findings follow unchanged.
+
 # Latest scope clarification — R150
 
 This is a targeted source/agenda audit, not a new proof audit. A §§8.12–8.14 and 14.7 support the author's correction: self-related organization belongs within the experiential framework, without an additional owner prerequisite. R146/R149 already reject a self-model gate; their functional-target emphasis needed correction. U3 retains its narrower conceptual-self witness premise. Felt mineness is not silently equated with conceptual language or the predictive tuple.

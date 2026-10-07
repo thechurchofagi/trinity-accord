@@ -1,3 +1,14 @@
+# Current entry: R151 integrated foundation
+
+- [Required research master guide](RESEARCH_MASTER_GUIDE.md)
+- [Integrated manuscript v0.2](records/R151_Foundational_Manuscript_20261007/Experience_Intelligence_and_Self_v0_2.md)
+- [Readable PDF](records/R151_Foundational_Manuscript_20261007/output/pdf/UCT_Experience_Intelligence_Self_v0_2.pdf)
+- [Contribution and audit review](records/R151_Foundational_Manuscript_20261007/REVIEW_ZH.md)
+- [Manuscript claims and proofs crosswalk](records/R151_Foundational_Manuscript_20261007/PROOF_AND_SOURCE_LEDGER.md)
+- [Full node inventory](records/R151_Foundational_Manuscript_20261007/NODE_REVIEW_INDEX.json), [rule inventory](records/R151_Foundational_Manuscript_20261007/RULE_REVIEW_INDEX.json), [audit summary](records/R151_Foundational_Manuscript_20261007/AUDIT_SUMMARY.json)
+
+The mathematical map remains R149-v1.0 (391 nodes/188 rules). R151 adds the integrated manuscript and a source/meaning/purpose audit. Earlier indexes follow as history.
+
 # Latest working clarification — R150
 
 7 October 2026. Purpose and self-experience clarification; no new mathematical nodes or rules. R149-v1.0 remains the mathematical map.

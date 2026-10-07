@@ -1,0 +1,170 @@
+[
+  {
+    "id": "S01",
+    "relation": "C1 and U1",
+    "target_distinction": "Identity and nonempty actual support",
+    "assessment": "Conditional consistency",
+    "reason": "C1 is not derived from U1 or observations; a03 retains both premises."
+  },
+  {
+    "id": "S02",
+    "relation": "U3 and felt self",
+    "target_distinction": "Conceptual self versus minimal mineness",
+    "assessment": "Scope repaired in prose",
+    "reason": "a05 needs A:SELF_WITNESS. No extension to every possible felt-self property."
+  },
+  {
+    "id": "S03",
+    "relation": "A §§8.12–8.14 and R146 self contract",
+    "target_distinction": "Experience-internal organization versus functional model",
+    "assessment": "Interpretation repaired",
+    "reason": "D4 restricted to functional role; §4 now precedes it with felt/conceptual distinction."
+  },
+  {
+    "id": "S04",
+    "relation": "A §14.7 and beta attachment",
+    "target_distinction": "Actual process versus extra owner",
+    "assessment": "Conditional consistency",
+    "reason": "Actual assembly relation is not a universal exclusive subject selector."
+  },
+  {
+    "id": "S05",
+    "relation": "C:P1 and exact empirical score",
+    "target_distinction": "Underlying capability versus sampled estimate",
+    "assessment": "No substitution allowed",
+    "reason": "T1 concerns exact type-invariant J; noise or altered tasks may explain a score difference."
+  },
+  {
+    "id": "S06",
+    "relation": "Complete identity and selected r",
+    "target_distinction": "Complete versus selected target",
+    "assessment": "Joint incompatibility test",
+    "reason": "T2 requires same process/time/signature; equal-r/different-k refutes complete sufficiency under C1."
+  },
+  {
+    "id": "S07",
+    "relation": "T2 and external labels",
+    "target_distinction": "Descriptor versus invariant function of type",
+    "assessment": "Extra premise retained",
+    "reason": "r=bk required only for the injectivity formulation, not the general three-way theorem."
+  },
+  {
+    "id": "S08",
+    "relation": "Partial prediction and full reconstruction",
+    "target_distinction": "Target accuracy versus completeness",
+    "assessment": "Compatible with different scope",
+    "reason": "Equation (7) needs only ker(r) subset ker(f), not complete k recovery."
+  },
+  {
+    "id": "S09",
+    "relation": "T3 and synchronized commands",
+    "target_distinction": "All legal commands versus restricted tests",
+    "assessment": "Counterlimit retained",
+    "reason": "Single swaps may be concealed when u1=u2; universal iff needs independent commands."
+  },
+  {
+    "id": "S10",
+    "relation": "T3 and coordinate change",
+    "target_distinction": "Rewiring versus renaming",
+    "assessment": "Counterlimit retained",
+    "reason": "Renaming transports beta/sigma/tau together; physical swap leaves beta fixed."
+  },
+  {
+    "id": "S11",
+    "relation": "T3 mathematical relation and experiential type",
+    "target_distinction": "Model versus actual constitutive relation",
+    "assessment": "Physical bridge OPEN in applications",
+    "reason": "R147:ACTUAL_BRIDGE is not inferred from predictor accuracy or naming."
+  },
+  {
+    "id": "S12",
+    "relation": "Wrong attribution and feeling",
+    "target_distinction": "Internal content truth versus occurrence of experience",
+    "assessment": "Distinct targets",
+    "reason": "Wrong attribution is actual organization; a particular felt illusion is not proved by this fact."
+  },
+  {
+    "id": "S13",
+    "relation": "Memory-copy example and biological memory",
+    "target_distinction": "Isolated register versus causally active memory",
+    "assessment": "Domain restriction retained",
+    "reason": "No general claim that memory cannot alter policy, calibration or self-experience."
+  },
+  {
+    "id": "S14",
+    "relation": "E1 and E3",
+    "target_distinction": "UCT universal consequence versus continuity route",
+    "assessment": "Alternative premises separated",
+    "reason": "All-ancestor physical graduality does not supply continuous binary E."
+  },
+  {
+    "id": "S15",
+    "relation": "Calculator and operator",
+    "target_distinction": "Instrument versus interacting whole",
+    "assessment": "Object change exposed",
+    "reason": "D3 fixes evaluated process; an isolated abacus is not assigned the external operator policy."
+  },
+  {
+    "id": "S16",
+    "relation": "Human computer and program",
+    "target_distinction": "Actual process versus algorithmic representation",
+    "assessment": "Bridge remains required",
+    "reason": "Same program/output is not complete organization identity; nesting is not one exclusive owner."
+  },
+  {
+    "id": "S17",
+    "relation": "TA16 RRH-E and U1",
+    "target_distinction": "Historical gate conjecture versus basal existence",
+    "assessment": "Potential conflict explicitly conditional",
+    "reason": "Same-domain basal gate plus an actual witness failing it conflicts with U1; historical hypothesis not silently imported."
+  },
+  {
+    "id": "S18",
+    "relation": "TA18 germ and PRD output",
+    "target_distinction": "Distinct causal summaries versus distinct target values",
+    "assessment": "Separating premise required",
+    "reason": "Constant Phi counterexample retained; enriched germ alone does not establish target nonfactorization."
+  },
+  {
+    "id": "S19",
+    "relation": "TA18 idle quotient and C1",
+    "target_distinction": "Selected target invariance versus complete type invariance",
+    "assessment": "Target contract required",
+    "reason": "No automatic upgrade of selected null equivalence to whole complete-type equivalence."
+  },
+  {
+    "id": "S20",
+    "relation": "TA19 selector and local self relations",
+    "target_distinction": "Uncentered singleton choice versus a supplied local process",
+    "assessment": "Scope separated",
+    "reason": "Selector obstruction neither blocks every local reference nor proves no meaningful subject exists."
+  },
+  {
+    "id": "S21",
+    "relation": "D control ladder and self-experience",
+    "target_distinction": "Continuation control versus fear/phenomenology",
+    "assessment": "Bridge OPEN",
+    "reason": "No route from functional continuation evidence to independently established fear or basal C1."
+  },
+  {
+    "id": "S22",
+    "relation": "Pairwise and global consistency",
+    "target_distinction": "Two-at-a-time versus simultaneous constraints",
+    "assessment": "Methodological counterexample",
+    "reason": "x=y, y=z, x!=z are pairwise satisfiable but jointly inconsistent; no claim exhaustive global satisfiability was decided."
+  },
+  {
+    "id": "S23",
+    "relation": "Full map and manuscript novelty",
+    "target_distinction": "Previously published nodes versus current contribution",
+    "assessment": "Attribution corrected",
+    "reason": "391 entries are not 391 new claims; T1 inherited, T2 application, T3 counterexample, integration/method explicit."
+  },
+  {
+    "id": "S24",
+    "relation": "Purpose and auxiliary control mathematics",
+    "target_distinction": "Foundational self-experience versus tractable side questions",
+    "assessment": "Agenda corrected",
+    "reason": "Guide is read first; selected-result proof and next-action relevance are audited separately."
+  }
+]

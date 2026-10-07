@@ -1,0 +1,153 @@
+[
+  {
+    "id": "D1",
+    "label": "Actual process and organizational structure",
+    "map_nodes": [
+      "A:C1",
+      "R146:DEFINITION_CONTRACT"
+    ],
+    "manuscript_section": "§3 D1",
+    "scope": "Actual occurrence, common constitutive signature; finite K is a model, not proof of completeness.",
+    "status": "Definition/source consolidation, not a discovered universal boundary algorithm."
+  },
+  {
+    "id": "C1",
+    "label": "Structural-experiential identity",
+    "map_nodes": [
+      "A:C1",
+      "A:C1_OI"
+    ],
+    "manuscript_section": "§3 C1",
+    "scope": "Same actual token; complete common sorts/relations; experiential interpretation explicitly assumed.",
+    "status": "Current axiom, not independently established by constructing an isomorphic object."
+  },
+  {
+    "id": "D2",
+    "label": "Basal phenomenal consciousness",
+    "map_nodes": [
+      "A:U1",
+      "A:U3",
+      "A:SELF_WITNESS"
+    ],
+    "manuscript_section": "§3 D2",
+    "scope": "Nonempty distinguished support; conceptual-self nonnecessity needs an actual non-self witness.",
+    "status": "Definition and inherited conditional consequences; not clinical consciousness or all minimal-self claims."
+  },
+  {
+    "id": "D3",
+    "label": "Fixed-contract capability",
+    "map_nodes": [
+      "C:FIXED_J",
+      "C:P1"
+    ],
+    "manuscript_section": "§3 D3",
+    "scope": "Tasks, environments, timing, resources, adaptation, evaluated process and scoring fixed; type-invariant well-defined expectation.",
+    "status": "Definition; not unique universal intelligence or a richness scale."
+  },
+  {
+    "id": "D4",
+    "label": "Functional self-model",
+    "map_nodes": [
+      "R146:SELF_CONTRACT",
+      "R149:SELF_TARGET"
+    ],
+    "manuscript_section": "§4 D4",
+    "scope": "Grounded actual target and attachments, common legal plans, installed m/d; accuracy, use and internal attribution separate.",
+    "status": "Restricted functional definition, not definition of every felt self."
+  },
+  {
+    "id": "D5",
+    "label": "Selected self-experiential question",
+    "map_nodes": [
+      "R149:NULL_TARGET",
+      "R146:DEFINITION_CONTRACT"
+    ],
+    "manuscript_section": "§4 D5",
+    "scope": "A selected experiential query q must first be specified; q(e) is only a target-typing convention.",
+    "status": "No new phenomenal bridge or measured mineness is supplied."
+  },
+  {
+    "id": "T1",
+    "label": "Complete type and fixed capability",
+    "map_nodes": [
+      "A:C1_OI",
+      "C:FIXED_J",
+      "C:P1",
+      "C:P2_FULL"
+    ],
+    "manuscript_section": "§5 T1",
+    "scope": "Exact underlying profiles on realized complete-type image.",
+    "status": "Inherited result; proof included. Noninjectivity is required for a full-identification failure witness."
+  },
+  {
+    "id": "T2",
+    "label": "Complete-target compatibility",
+    "map_nodes": [
+      "R149:COMPARISON",
+      "R149:COMPATIBILITY"
+    ],
+    "manuscript_section": "§5 T2",
+    "scope": "Same actual comparison processes, intervals and complete signature; functions defined on realized images; injectivity form separately assumes r=bk.",
+    "status": "Classical factorization application; complete proof included; no historical novelty for factorization."
+  },
+  {
+    "id": "T2-selected",
+    "label": "Selected targets and error obstruction",
+    "map_nodes": [
+      "C:P2_COORD",
+      "R146:SELF_TARGET_SUFFICIENCY",
+      "R149:NULL_TARGET"
+    ],
+    "manuscript_section": "§5 selected targets",
+    "scope": "Common target law and legal plan; abstract decoder existence separate from installation.",
+    "status": "Classical factorization and triangle-inequality applications; proofs included."
+  },
+  {
+    "id": "T3",
+    "label": "Prediction versus assembly attachment",
+    "map_nodes": [
+      "R147:ROUTING_MODEL",
+      "R147:ROUTING_LIMIT"
+    ],
+    "manuscript_section": "§6 T3",
+    "scope": "n>=2, bijections, all commands independently legal, fixed timing/no additional coupling; beta fixed independently.",
+    "status": "Project counterexample using elementary algebra; no ownership phenomenology inferred."
+  },
+  {
+    "id": "T3-actual",
+    "label": "Conditional complete-type interpretation",
+    "map_nodes": [
+      "R147:ACTUAL_BRIDGE",
+      "R147:TYPE_LIMIT",
+      "R149:SELF_APPLICATION"
+    ],
+    "manuscript_section": "§6 interpretation",
+    "scope": "Actual comparison tokens and genuinely constitutive beta-retaining roles; complete isomorphisms must preserve represented distinction.",
+    "status": "Additional physical premise explicit; no proof of unique subject or transfer of feeling."
+  },
+  {
+    "id": "E-ancestors",
+    "label": "All ancestors and intermediate formation",
+    "map_nodes": [
+      "A:E1",
+      "A:ALL_ANC_ACTUAL",
+      "A:E3",
+      "A:CONT_BINARY_E"
+    ],
+    "manuscript_section": "§2.1 and §9",
+    "scope": "E1 uses U1 and actual comparison family; E3 separately assumes continuous binary predicate.",
+    "status": "Motivation and existing conditional routes; no physical-graduality-only proof."
+  },
+  {
+    "id": "M-audit",
+    "label": "Inference and purpose audit",
+    "map_nodes": [
+      "R149:COMPATIBILITY",
+      "TA18:JOINT_WITNESS",
+      "TA18:PAIR_SEPARATION"
+    ],
+    "manuscript_section": "§8",
+    "scope": "Declared relation types, simultaneous premises, source versions and research question.",
+    "status": "Research method and worked failure analysis, not a new theorem about all possible theories."
+  }
+]

@@ -1,0 +1,71 @@
+{
+  "round": "R151",
+  "mathematical_revision": "R149-v1.0",
+  "nodes": 391,
+  "rules": 188,
+  "unique_ids_endpoints_and_dag": "PASS",
+  "all_node_inventory": 391,
+  "all_rule_inventory": 188,
+  "missing_inline_statement": 107,
+  "missing_inline_scope_or_domain": 223,
+  "selected_manuscript_nodes": 27,
+  "manual_cross_relation_cards": 24,
+  "manuscript_claim_cards": 13,
+  "global_semantic_consistency": "NOT_CERTIFIED",
+  "all_pairs_semantically_reviewed": false,
+  "old_graph_nodes_rules_preserved": true,
+  "source_hashes": [
+    {
+      "paper": "A",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "unchanged": true
+    },
+    {
+      "paper": "B",
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+      "unchanged": true
+    },
+    {
+      "paper": "C",
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+      "unchanged": true
+    },
+    {
+      "paper": "D",
+      "sha256": "af0eb63cca099b3d913218f503bc978c705f0fb9f065cca9ed472e5161d67490",
+      "unchanged": true
+    },
+    {
+      "paper": "TA15",
+      "sha256": "8643196bd281e88be3cd753297eb846251a855e9d2ac3f576dbd49437cbafc85",
+      "unchanged": true
+    },
+    {
+      "paper": "TA16",
+      "sha256": "041a21d0a0863719188f591b2f51f94b591cc16a795d74ed6df047e058c48360",
+      "unchanged": true
+    },
+    {
+      "paper": "TA17",
+      "sha256": "bec4944db161db725648a18962b8a6c069aacf7512a259483f9d81e646e36a78",
+      "unchanged": true
+    },
+    {
+      "paper": "TA18",
+      "sha256": "22ef09cb373a7f364ee2a12c503be8768057684d78eb0e2593d8398b5fe7ae13",
+      "unchanged": true
+    },
+    {
+      "paper": "TA19",
+      "sha256": "53782a354e6dd1b037f8a6021d2a2bad150201cd086a5f6799757074dd21fc7e",
+      "unchanged": true
+    }
+  ],
+  "limitations": [
+    "Inline missing fields may be supplied by source context, but graph-only reading is insufficient.",
+    "Structural checks cannot establish proof validity or physical premises.",
+    "Manual rereview is scoped to the manuscript claims and 24 cross-relations, not every historical theorem.",
+    "TA19 main PDF was not examined; prior Markdown/supplement coverage limitation remains.",
+    "No independent review or universal prior-art search has been completed."
+  ]
+}
