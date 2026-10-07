@@ -1,0 +1,15 @@
+{
+  "round": "R134",
+  "revision": "R134-v1.0",
+  "date": "2026-10-07",
+  "timezone": "Asia/Shanghai",
+  "base_commit": "ed729027709a571a2c6c2594a3a92c396a505f5d",
+  "nodes": 290,
+  "rules": 135,
+  "new_nodes": 14,
+  "new_rules": 8,
+  "proof_status": "Conditional manual proofs; classical policy vectors, finite minimax and binary testing; no historical-priority claim",
+  "T2": "OPEN",
+  "C3_intervention_transport": "NOT_TESTED",
+  "valence_bridge": "OPEN"
+}

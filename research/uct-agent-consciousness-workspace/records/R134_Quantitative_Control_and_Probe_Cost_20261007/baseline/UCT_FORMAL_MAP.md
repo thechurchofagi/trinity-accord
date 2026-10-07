@@ -1,6 +1,6 @@
-# UCT A–B–C–D unified formal map — R134
+# UCT A–B–C–D unified formal map — R133
 
-**Canonical working map, revision R134-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R134. It does not supersede or edit the published papers.
+**Canonical working map, revision R133-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R133. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
@@ -21,7 +21,7 @@ A's 78-node graph and B's historical 43-node map are preserved as sources. B's o
 
 ## 2. How to read an implication
 
-The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **290 nodes and 135 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R134_Quantitative_Control_and_Probe_Cost_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
+The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **276 nodes and 127 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R133_Observable_Common_Control_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
 
 - All premises inside one rule's **all_of** must hold together.
 - Separate rules concluding the same node are alternative sufficient routes.
@@ -235,21 +235,7 @@ R126 already flagged the partial-operation obligation; R132 now proves and insta
 
 Standard partial-observation control and finite covering are credited. This extends the project proof obligations, not the consciousness-existence axioms. No actual mechanism, subject count, experience intensity or T2 correspondence is established by the finite certificate.
 
-## 11. R134: quantitative profiles and diagnostic opportunity
-
-[Complete proofs](records/R134_Quantitative_Control_and_Probe_Cost_20261007/R134_Quantitative_Control.md), [Chinese assessment](records/R134_Quantitative_Control_and_Probe_Cost_20261007/RESEARCH_UPDATE_ZH.md), [exact checks](records/R134_Quantitative_Control_and_Probe_Cost_20261007/EXACT_CHECK.json).
-
-| Stable result | Content | Required boundary |
-|---|---|---|
-| R134:VECTOR_RECURSION | Preserve one full success vector per shared observable policy; child-profile backup is exact; private mixtures give the convex hull | Persistent finite family, common legal actions, finite horizon, retained private random seed |
-| R134:ROBUST_LP / ZERO_ERROR | Coordinatewise epsilon guarantee has a finite LP and least-favorable-weight dual; value one recovers R133 | Nature chooses before observing the private coin; dual weighting is not an assumed prior |
-| R134:SCALAR_FAILURE | Same-support histories can require different quantitative actions; coordinatewise maxima can invent an oracle | Explicit blind and noisy-signal examples |
-| R134:PROBE_DUAL / TV_OPPORTUNITY | Weighted transcript/opportunity laws give an exact binary certificate and a TV upper bound | Fixed probe then terminal action; the equal-prior bound need not equal the robust value |
-| R134:OPTIONAL_PROBE / MIXING_WITNESS | A forced probe worse than the blind baseline can still improve an optional mixed plan | Asymmetric family: at rho=7/10, blind=1/2, forced=7/15, optional=14/27 |
-
-Finite-horizon policy vectors, minimax and hidden-model robust control have direct prior art. The project increment is the typed quantitative connection and counterexamples, not a new constitutive consciousness claim or improved POMDP algorithm.
-
-## 12. Open obligations and next derivation
+## 11. Open obligations and next derivation
 
 Keep the following open rather than treating them as implied edges:
 
@@ -260,9 +246,9 @@ Keep the following open rather than treating them as implied edges:
 - Structural experiential interpretation → a familiar phenomenal label, valence or scalar richness.
 - Biological/AI decoder similarity → full mechanism correspondence or T2 closure.
 
-R134 supplies the finite-horizon quantitative common-policy profile and epsilon certificate, plus an exact fixed-probe opportunity model. Next: characterize operation/observation-preserving compression of the attainable continuation-profile set and bound the resulting guarantee error. Distinguish a useful UCT-specific organizational inference from standard control mathematics before proposing a paper. Actual physical adequacy and general multi-resource scheduling remain open. Continue theory first.
+R133 now supplies the finite-horizon probability-one common-policy criterion under persistent model uncertainty. Next: quantitative worst-case success below one with costly probes, preserving model-indexed continuation values instead of independently minimizing over models at each step. Support alone does not retain these probabilities. General physical adequacy and multi-resource scheduling remain open. Continue theory first; no empirical run is queued.
 
-## 13. Mandatory future-map protocol
+## 12. Mandatory future-map protocol
 
 Read AGENTS.md, MEMORY.md and the latest handoff first. Before accepting any new derivation:
 
@@ -282,5 +268,3 @@ Current R130 [dependency/source checks](records/R130_Formal_Foundation_Second_Re
 Current R132 graph/source checks: [MAP_CHECK.json](records/R132_Common_Realization_and_Partial_Closure_20261007/MAP_CHECK.json). Earlier reports above are historical snapshots.
 
 Current R133 graph/source checks: [MAP_CHECK.json](records/R133_Observable_Common_Control_20261007/MAP_CHECK.json). Earlier reports remain historical snapshots.
-
-Current R134 graph/source checks: [MAP_CHECK.json](records/R134_Quantitative_Control_and_Probe_Cost_20261007/MAP_CHECK.json). Earlier reports remain historical snapshots.

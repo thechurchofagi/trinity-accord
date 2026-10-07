@@ -1,0 +1,75 @@
+{
+  "round": "R134",
+  "all_pass": true,
+  "checks": [
+    {
+      "check": "2025 weighted binary families: primal equals both probe dual computations",
+      "pass": true
+    },
+    {
+      "check": "2025 weighted binary families: optional primal equals dual and never loses available baseline",
+      "pass": true
+    },
+    {
+      "check": "weighted diagnostic/opportunity upper bound checked in every family",
+      "pass": true
+    },
+    {
+      "check": "asymmetric closed-form forced/optional values hold at 22 rational survival levels",
+      "pass": true
+    },
+    {
+      "check": "strict mixing witness has exact common success 14/27",
+      "pass": true
+    },
+    {
+      "check": "dual 13/27 proves the strict mixing witness optimal",
+      "pass": true
+    },
+    {
+      "check": "forced probing loses versus baseline while optional mixture strictly improves",
+      "pass": true
+    },
+    {
+      "check": "same TV one half does not imply same robust accuracy",
+      "pass": true
+    },
+    {
+      "check": "perfect-value purification boundary differs from subunit mixing",
+      "pass": true
+    },
+    {
+      "check": "coordinatewise oracle is outside blind attainable hull",
+      "pass": true
+    },
+    {
+      "check": "144 dynamic cases: vector recursion matches direct full policy-tree evaluation",
+      "pass": true
+    },
+    {
+      "check": "eight dynamic optional-probe models match their independent decision-hull calculation",
+      "pass": true
+    },
+    {
+      "check": "informative observations can leave the same model support",
+      "pass": true
+    },
+    {
+      "check": "same-support history-dependent decisions beat a support-only terminal decision",
+      "pass": true
+    }
+  ],
+  "weighted_binary_families": 2025,
+  "dynamic_profile_comparisons": 144,
+  "policy_trees_at_horizon_two": 193,
+  "rational_survival_levels": 22,
+  "arithmetic": "Python Fraction; no numerical LP solver or simulation",
+  "strict_witness": {
+    "forced": "7/15",
+    "blind": "1/2",
+    "optional": "14/27",
+    "probe_weight": "20/27",
+    "dual_q": "13/27"
+  },
+  "scope": "Finite exact witnesses and independent primal/dual comparisons; general proofs remain manual and conditional."
+}

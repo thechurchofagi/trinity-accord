@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R134-v1.0",
+  "revision": "R133-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "ed729027709a571a2c6c2594a3a92c396a505f5d",
+  "base_commit": "e381fa5a84ea7696447940319331be04b4f63a92",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -2280,132 +2280,6 @@
       "source": "R133_Observable_Common_Control.md §7",
       "status": "MANUAL_CONDITIONAL_PASS",
       "scope": "Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate. Conservative model switching need not be exact; some other envelopes may be exact. No prior over models is required."
-    },
-    {
-      "id": "R134:QUANT_MODEL",
-      "kind": "DEFINITION",
-      "label": "Persistent model-indexed success profiles",
-      "statement": "For each legal pure observable policy tree, keep the vector v(x)=P_x(success by H) for every initial x in B. Mixed policies are private distributions on complete pure trees; robust value is max_policy min_x v(x).",
-      "source": "R134_Quantitative_Control.md §2",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "R133 finite persistent model and joint action/output kernels, sufficient state including resources/clock, common enabled actions, closed goal and fixed finite horizon. Same observable policy across all initial model/state pairs; private randomness independent of the hidden mechanism, retained memory permitted. Nature cannot choose after seeing the private seed. No actual complete-type or experience inference. A known state distribution inside each model would define an explicitly averaged alternative, not this worst-initial-state objective."
-    },
-    {
-      "id": "R134:VECTOR_RECURSION",
-      "kind": "THEOREM",
-      "label": "Exact attainable continuation-vector recursion",
-      "statement": "F_0(B)={1_G restricted to B}; F_(h+1) contains stopping and every common-action backup T_a(w)(x)=sum K(x,a;x_prime,o)w_o(x_prime) with one child vector per output. These are exactly pure-policy profiles; mixed profiles equal conv F_h(B).",
-      "source": "R134_Quantitative_Control.md §3",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "R133 finite persistent model and joint action/output kernels, sufficient state including resources/clock, common enabled actions, closed goal and fixed finite horizon. Same observable policy across all initial model/state pairs; private randomness independent of the hidden mechanism, retained memory permitted. Nature cannot choose after seeing the private seed. No actual complete-type or experience inference. A set indexed by support is not a claim that a deployed quantitative policy may discard observation history; no efficient compression asserted."
-    },
-    {
-      "id": "R134:ROBUST_LP",
-      "kind": "THEOREM",
-      "label": "Epsilon common-control certificate and minimax dual",
-      "statement": "With pure profiles as columns of A, success >=1-epsilon is feasible iff A lambda >=(1-epsilon)1 for some simplex lambda. Optimal robust value equals min_(q in simplex B) max_j q dot v_j.",
-      "source": "R134_Quantitative_Control.md §4",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "R133 finite persistent model and joint action/output kernels, sufficient state including resources/clock, common enabled actions, closed goal and fixed finite horizon. Same observable policy across all initial model/state pairs; private randomness independent of the hidden mechanism, retained memory permitted. Nature cannot choose after seeing the private seed. No actual complete-type or experience inference. Dual q is a proof weighting, not a supplied prior; standard finite LP/minimax duality."
-    },
-    {
-      "id": "R134:ZERO_ERROR",
-      "kind": "THEOREM",
-      "label": "Value-one corner recovers R133 purification",
-      "statement": "Robust value one iff a pure profile is one at every coordinate, iff R133 COMMON_POLICY holds. Below one, randomization may improve the best guaranteed success.",
-      "source": "R134_Quantitative_Control.md §4",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "R133 finite persistent model and joint action/output kernels, sufficient state including resources/clock, common enabled actions, closed goal and fixed finite horizon. Same observable policy across all initial model/state pairs; private randomness independent of the hidden mechanism, retained memory permitted. Nature cannot choose after seeing the private seed. No actual complete-type or experience inference. Positive-mass mixture columns must all be one to attain an all-one vector."
-    },
-    {
-      "id": "R134:SCALAR_MODELS",
-      "kind": "MODEL",
-      "label": "Blind opposite actions and a same-support noisy signal",
-      "statement": "Blind terminal action profiles are (1,0),(0,1). In a second case the free binary signal laws are (3/4,1/4) and (1/4,3/4), followed by the action naming the model; both outputs leave both models possible.",
-      "source": "R134_Quantitative_Control.md §5",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "R133 finite persistent model and joint action/output kernels, sufficient state including resources/clock, common enabled actions, closed goal and fixed finite horizon. Same observable policy across all initial model/state pairs; private randomness independent of the hidden mechanism, retained memory permitted. Nature cannot choose after seeing the private seed. No actual complete-type or experience inference."
-    },
-    {
-      "id": "R134:SCALAR_FAILURE",
-      "kind": "THEOREM",
-      "label": "Scalar collapse can invent or discard control capability",
-      "statement": "Coordinatewise maxima of blind profiles fabricate unattainable (1,1); half-half mixing instead guarantees 1/2. In the noisy-signal case, using observed output attains (3/4,3/4), while any terminal policy retaining only identical support/time guarantees at most 1/2.",
-      "source": "R134_Quantitative_Control.md §5",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "R133 finite persistent model and joint action/output kernels, sufficient state including resources/clock, common enabled actions, closed goal and fixed finite horizon. Same observable policy across all initial model/state pairs; private randomness independent of the hidden mechanism, retained memory permitted. Nature cannot choose after seeing the private seed. No actual complete-type or experience inference. Counterexamples to scalar/support-only quantitative reduction, not to R133 probability-one theorem."
-    },
-    {
-      "id": "R134:PROBE_MODEL",
-      "kind": "DEFINITION",
-      "label": "Weighted binary diagnostic and opportunity model",
-      "statement": "Probe law P_m(y) and conditional correct-completion survival r_m(y) give a_y=P_0(y)r_0(y), b_y=P_1(y)r_1(y). A randomized decision d_y produces success pair (sum a_y d_y, sum b_y(1-d_y)).",
-      "source": "R134_Quantitative_Control.md §6",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. Survival is not an additional observable decision signal unless included in Y."
-    },
-    {
-      "id": "R134:PROBE_DUAL",
-      "kind": "THEOREM",
-      "label": "Exact weighted binary probe guarantee",
-      "statement": "Forced-probe robust success equals min_(0<=q<=1) F(q), F(q)=sum_y max(q a_y,(1-q)b_y). Endpoints and q=b_y/(a_y+b_y) suffice to find this minimum.",
-      "source": "R134_Quantitative_Control.md §6",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. One fixed probe followed by one terminal choice; not a solution of unrestricted adaptive sensing."
-    },
-    {
-      "id": "R134:COMMON_SURVIVAL",
-      "kind": "ASSUMPTION",
-      "label": "Model-independent constant surviving opportunity",
-      "statement": "In PROBE_MODEL, r_m(y)=rho in [0,1] for every mechanism and transcript.",
-      "source": "R134_Quantitative_Control.md §6",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. This multiplicative completion probability is not a generic additive money, energy or fitness cost."
-    },
-    {
-      "id": "R134:TV_OPPORTUNITY",
-      "kind": "THEOREM",
-      "label": "Distinguishability times opportunity gives a necessary upper bound",
-      "statement": "Generally V_probe <=(sum a+sum b+norm1(a-b))/4. Under COMMON_SURVIVAL, V_probe <=rho(1+TV(P_0,P_1))/2; tight for symmetric binary errors, not every pair. Equal TV can give unequal robust values.",
-      "source": "R134_Quantitative_Control.md §6",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. Equal-prior average discrimination must not be substituted for the minimum over mechanisms; necessary epsilon bounds need not be sufficient."
-    },
-    {
-      "id": "R134:OPTIONAL_MODEL",
-      "kind": "ASSUMPTION",
-      "label": "Immediate blind actions remain available before a probe",
-      "statement": "In the binary task, before observing any signal the policy may choose immediate profiles (1,0),(0,1) or the specified probe, and privately mix these choices. Blind actions avoid probe-induced opportunity loss.",
-      "source": "R134_Quantitative_Control.md §7",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. No private coin revealed to nature before mechanism selection; no later extra choice class omitted."
-    },
-    {
-      "id": "R134:OPTIONAL_PROBE",
-      "kind": "THEOREM",
-      "label": "Optional probing requires convexifying full profiles before minimax",
-      "statement": "Optional robust value is min_q max(q,1-q,F(q)). This may strictly exceed max(1/2,V_probe).",
-      "source": "R134_Quantitative_Control.md §7",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. Requires OPTIONAL_MODEL; scalar robust values of separate strategy classes are insufficient for their randomized union."
-    },
-    {
-      "id": "R134:ASYM_MODEL",
-      "kind": "MODEL",
-      "label": "Asymmetric diagnostic with uniform opportunity survival",
-      "statement": "P_0=(1,0), P_1=(1/2,1/2); probe survival is the same rho in [0,1] for both mechanisms; immediate blind actions remain available.",
-      "source": "R134_Quantitative_Control.md §7",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility."
-    },
-    {
-      "id": "R134:MIXING_WITNESS",
-      "kind": "THEOREM",
-      "label": "An individually inferior probe can improve a randomized robust plan",
-      "statement": "In ASYM_MODEL, forced value=2rho/3; optional value=max(1/2,2rho/(2+rho)). For 2/3<rho<3/4 probing alone is inferior, while optimal optional mixing improves on blind value 1/2. At rho=7/10 the exact optimum is 14/27, attained with probe probability 20/27 and dual weight q=13/27.",
-      "source": "R134_Quantitative_Control.md §7",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. Specified family and order of play only; no historical novelty or measured AI/biological performance claim."
     }
   ],
   "rules": [
@@ -4100,123 +3974,6 @@
       "source": "R133_Observable_Common_Control.md §7",
       "kind": "DEDUCTIVE",
       "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r134_vectors",
-      "all_of": [
-        "R133:PERSISTENT_MODEL",
-        "R133:SUPPORT",
-        "R134:QUANT_MODEL"
-      ],
-      "conclusion": "R134:VECTOR_RECURSION",
-      "statement": "A pure tree is exactly an action plus one legal subtree per possible observation; randomization convexifies its profile set.",
-      "proof_sketch": "Induct on horizon and condition on the joint successor/output. Conversely assemble each tuple of subtrees. Independent private tree sampling implements every convex combination; product branch-mixture weights justify convex backups.",
-      "source": "R134_Quantitative_Control.md §3",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r134_lp",
-      "all_of": [
-        "R134:QUANT_MODEL",
-        "R134:VECTOR_RECURSION"
-      ],
-      "conclusion": "R134:ROBUST_LP",
-      "statement": "The common success guarantee is a finite feasible-mixture LP with a least-favorable-weight dual.",
-      "proof_sketch": "Primal is maximize t with A lambda >=t1 and simplex lambda. Nonnegative multipliers on model/state rows must sum to one; finite feasible bounded LP duality gives min_q max_column q dot v.",
-      "source": "R134_Quantitative_Control.md §4",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r134_zero",
-      "all_of": [
-        "R134:QUANT_MODEL",
-        "R134:VECTOR_RECURSION",
-        "R134:ROBUST_LP",
-        "R133:COMMON_POLICY"
-      ],
-      "conclusion": "R134:ZERO_ERROR",
-      "statement": "The quantitative certificate exactly recovers the earlier probability-one corner.",
-      "proof_sketch": "Each success entry lies in [0,1]. An all-one convex average forces every positive-weight column to be all-one; R133 supplies the equivalent pure common-policy criterion.",
-      "source": "R134_Quantitative_Control.md §4",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r134_scalar",
-      "all_of": [
-        "R134:QUANT_MODEL",
-        "R134:VECTOR_RECURSION",
-        "R134:SCALAR_MODELS"
-      ],
-      "conclusion": "R134:SCALAR_FAILURE",
-      "statement": "Independent coordinate maximization and premature scalar minimization both lose the shared-policy constraint.",
-      "proof_sketch": "Blind profiles have coordinate sum one, excluding (1,1), but mixing yields (1/2,1/2). Symmetric observation-specific opposite actions yield (3/4,3/4), while identical-support terminal policies are blind.",
-      "source": "R134_Quantitative_Control.md §5",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r134_probe",
-      "all_of": [
-        "R134:QUANT_MODEL",
-        "R134:ROBUST_LP",
-        "R134:PROBE_MODEL"
-      ],
-      "conclusion": "R134:PROBE_DUAL",
-      "statement": "The forced diagnostic value is the minimum of a weighted sum-of-maxima envelope.",
-      "proof_sketch": "For fixed q, independently optimize the affine decision d_y at each transcript; obtain max(q a_y,(1-q)b_y). Finite minimax interchanges extrema. Convex piecewise-affine minima occur at endpoints or breakpoints.",
-      "source": "R134_Quantitative_Control.md §6",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r134_tv",
-      "all_of": [
-        "R134:PROBE_MODEL",
-        "R134:PROBE_DUAL",
-        "R134:COMMON_SURVIVAL"
-      ],
-      "conclusion": "R134:TV_OPPORTUNITY",
-      "statement": "Transcript separation limits success only after opportunity survival is specified; the equal-weight bound need not be attained robustly.",
-      "proof_sketch": "Evaluate the dual at q=1/2 and use max(a,b)=(a+b+abs(a-b))/2. Substitute constant rho. Symmetric decisions equalize the two successes; asymmetric laws with the same TV instead have optimum 2rho/3.",
-      "source": "R134_Quantitative_Control.md §6",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r134_optional",
-      "all_of": [
-        "R134:QUANT_MODEL",
-        "R134:ROBUST_LP",
-        "R134:PROBE_MODEL",
-        "R134:PROBE_DUAL",
-        "R134:OPTIONAL_MODEL"
-      ],
-      "conclusion": "R134:OPTIONAL_PROBE",
-      "statement": "The randomized optional-probe value is determined by the full convex union, not the maximum of separate robust scalar values.",
-      "proof_sketch": "The maximum q-weighted value over the convex union is max(q,1-q,F(q)); apply finite minimax. The explicit mixing witness gives strictness.",
-      "source": "R134_Quantitative_Control.md §7",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r134_mix",
-      "all_of": [
-        "R134:PROBE_MODEL",
-        "R134:PROBE_DUAL",
-        "R134:COMMON_SURVIVAL",
-        "R134:OPTIONAL_MODEL",
-        "R134:OPTIONAL_PROBE",
-        "R134:ASYM_MODEL"
-      ],
-      "conclusion": "R134:MIXING_WITNESS",
-      "statement": "Asymmetric probe and blind-action profiles can complement each other enough to improve the worst-case guarantee.",
-      "proof_sketch": "Dominance leaves (1,0),(0,1),(rho,rho/2). Below rho=2/3 all coordinate sums <=1. Above it mix the probe with (0,1) at weight 2/(2+rho); dual q=(2-rho)/(2+rho) matches the guarantee.",
-      "source": "R134_Quantitative_Control.md §7",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
     }
   ],
   "context_links": [
@@ -4439,36 +4196,6 @@
       "from": "R132:REFINEMENT",
       "to": "R133:NONUNIQUE",
       "relation": "Full-interface stable refinement and task-relative sufficient partitions have different uniqueness properties"
-    },
-    {
-      "from": "C:P7",
-      "to": "R134:PROBE_MODEL",
-      "relation": "The source already treats fixed-problem value of information and warns about costs; R134 changes to a robust target with explicit survival"
-    },
-    {
-      "from": "D:PAYOFF",
-      "to": "R134:PROBE_MODEL",
-      "relation": "Joint target-relevant consequences include transcript and viable completion"
-    },
-    {
-      "from": "B:VIEW",
-      "to": "R134:QUANT_MODEL",
-      "relation": "Physical time/port/scheduler adequacy remains an independent premise"
-    },
-    {
-      "from": "R133:PROBE_BOUNDARY",
-      "to": "R134:TV_OPPORTUNITY",
-      "relation": "Quantitative continuation of the probe/opportunity distinction"
-    },
-    {
-      "from": "R133:NONUNIQUE",
-      "to": "R134:VECTOR_RECURSION",
-      "relation": "A task-relative representation must preserve the selected control object; no unique coarsest task compression inferred"
-    },
-    {
-      "from": "R132:PARTIAL_CLOSURE",
-      "to": "R134:VECTOR_RECURSION",
-      "relation": "Full-interface preservation is stronger than retaining a selected attainable task profile set"
     }
   ],
   "prohibited_inferences_D": [
@@ -4520,11 +4247,6 @@
       "id": "R133-ATTR-04",
       "prior_source": "Chatterjee/Doyen/Henzinger 2010 qualitative POMDPs; elementary finite set covering; C:P2_COORD/C:P7; Takahashi 2026 abstract on globally coupled models",
       "current_scope": "Project extension with explicit persistent-model, information, enabledness, horizon and probe-cost conditions. No historical novelty for support constructions, set covering or nonrectangular uncertainty. Nearby 2026 full text not retrieved; complete literature comparison remains open."
-    },
-    {
-      "id": "R134-ATTR-05",
-      "prior_source": "Smallwood/Sondik 1973; Osogami 2015; Galesloot et al. 2025 hidden-model POMDPs (abstract); finite minimax/LP and binary testing; C:P7/D:PAYOFF",
-      "current_scope": "No novelty claim for hidden-model common control, policy vectors, robust minimax or costs of information. Project-level exact vector bridge and optional-probe mixing counterexample. Full technical comparison with recent hidden-model work remains open; no new UCT-specific constitutive theorem established."
     }
   ],
   "audit_amendments": [

@@ -145,17 +145,3 @@ New proof statements were manually reviewed. Exact checks cover every three-by-t
 - F36: Classical POMDP/support and covering methods are credited. This is a project-level formal extension with a manuscript direction, not a new mathematical-priority or consciousness-specific empirical claim.
 
 Exact checks: 756 direct-policy/support comparisons including noisy observations, 1715 decision-partition checks over 343 success families, and 22 named boundary checks. These are finite checks supporting the handwritten proofs, not proof-assistant certification. C1/U1 unchanged; T2 OPEN, C3 NOT_TESTED, valence OPEN.
-
-
-## R134 — quantitative profiles, opportunity and mixed control
-
-7 October 2026. Added 14 nodes and 8 rules. All 276 prior nodes and 127 rules retained field-for-field; four source editions unchanged. [Proofs](records/R134_Quantitative_Control_and_Probe_Cost_20261007/R134_Quantitative_Control.md).
-
-- F37: Quantitative support-indexed continuation sets are not a support-only deployed policy. Different observed histories with identical support can require different selected vectors.
-- F38: Randomization is private, independent of model selection and may retain a sampled pure tree. An adversary that sees the realized coin before choosing a mechanism is a different game. The dual model weighting is a certificate, not an assumed empirical prior.
-- F39: Taking coordinatewise maxima fabricates a model oracle; taking worst-case scalars before mixtures or output backups can discard complementary profiles. R133's probability-one theorem remains valid and is recovered as a corner case.
-- F40: Weighted opportunity/transcript laws determine the declared task. TV gives an equal-weight upper bound, not generally the exact robust guarantee. Common survival rho is explicit, not an additive cost or medical outcome claim.
-- F41: Optional probing requires the convex union of complete profiles. The strict 7/15, 1/2, 14/27 example blocks an incorrect max-of-separate-minima formula.
-- F42: Direct hidden-model POMDP prior art located (Galesloot et al. 2025). Abstract checked; full-text attempts blocked. Standard policy-vector/minimax work is credited. No new UCT-specific constitutive result, algorithmic superiority or historical priority is asserted.
-
-Exact checks cover 2025 weighted binary families, 144 direct-policy/recursive-profile comparisons, 22 rational survival levels and 14 named checks. General theorems remain conditional handwritten proofs. C1/U1 unchanged; T2 OPEN, C3 NOT_TESTED, valence OPEN.
