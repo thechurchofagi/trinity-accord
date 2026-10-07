@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R168-v1.0",
+  "revision": "R169-v1.0",
   "date": "2026-10-08",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -20309,6 +20309,341 @@
           }
         ]
       }
+    },
+    {
+      "id": "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+      "kind": "ACTUAL_CONTEXT_INTERVENTION_GRAPH_CONTRACT",
+      "label": "Actual Nodes, Executable Edges, and Same-Lineage Provenance",
+      "statement": "A declared route graph has actual admissible context states as typed nodes and only reversible, safe, fidelity-checked same-lineage context interventions as edges; task-label, fitted-latent or report adjacency is not an edge, and disconnected or omitted actual contexts receive no finite path bound.",
+      "domain": "One R167 episode, one pre-compensation interval, one fixed consumer and one declared actual-context inventory.",
+      "scope": "One R167 episode, one pre-compensation interval, one fixed consumer and one declared actual-context inventory.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §2",
+      "source_lineage": "UCT-I physical-witness criterion plus R166-R168 actuality and closure boundaries, specialized as an intervention graph.",
+      "status": "DECLARED_PHYSICAL_CALIBRATION_CONTRACT_NOT_INSTANTIATED",
+      "proof": "Contract definition; positive consequences require separate valid local edge budgets.",
+      "counterexamples_and_limits": "An analyst embedding can place two labels nearby while an unlogged route gate changes; a finite graph does not cover omitted nodes or continuum interiors.",
+      "formal_contract_R169": {
+        "object_domain": "actual contexts and local physical interventions",
+        "quantifiers": "every used node and edge has actual typed provenance; no claim outside the declared connected component",
+        "bearer_time_signature": "same bearer lineage, fixed consumer, pre-compensation subinterval and realization map",
+        "source_anchor": {
+          "path": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md",
+          "sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+          "locator": "§2"
+        },
+        "purpose": "Replace fitted adjacency by executable physical adjacency",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R169-G1",
+          "R169-G2",
+          "R169-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE",
+      "kind": "LOCAL_CONSUMER_LAW_TRANSPORT_CERTIFICATE",
+      "label": "Uniform Local Consumer-Law Upper Budget",
+      "statement": "For every used actual edge {a,b}, a valid structural or simultaneous statistical certificate B(a,b) must upper-bound sup over fixed mediator interventions k in K0 of d_F(Q_{k,a},Q_{k,b}); point estimates, post-result F/K0 changes and shadow-model fit do not qualify.",
+      "domain": "Edges of one R169 actual route graph, one frozen K0/F/consumer/timing contract.",
+      "scope": "Edges of one R169 actual route graph, one frozen K0/F/consumer/timing contract.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §§2,6",
+      "source_lineage": "R168 fixed discriminator/effect definition plus standard upper-bound discipline.",
+      "status": "DECLARED_FALSIFIABLE_LOCAL_CERTIFICATE_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Certificate premise; route composition is registered separately.",
+      "counterexamples_and_limits": "A fitted kernel can reproduce calibration data while remaining off the actual consumer route; uncorrected multiple edge intervals do not form a simultaneous graph certificate.",
+      "formal_contract_R169": {
+        "object_domain": "consumer laws on actual local route edges",
+        "quantifiers": "every used edge and every k in frozen K0 under one simultaneous-validity event",
+        "bearer_time_signature": "same actual edge intervention, consumer and time window",
+        "source_anchor": {
+          "path": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md",
+          "sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+          "locator": "§§2,6"
+        },
+        "purpose": "Ground route length in consumer-law units rather than arbitrary labels",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R169-G2",
+          "R169-G3",
+          "R169-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R169:COMPOSITIONAL_EFFECT_BOUND",
+      "kind": "EXACT_SHORTEST_PATH_EFFECT_THEOREM",
+      "label": "Local Channel Budgets Bound Contextual Effect Along Actual Paths",
+      "statement": "If every edge has a valid uniform local budget B and D_B is shortest-path budget, then d_F(Q_{k,z},Q_{k,z'})<=D_B(z,z') for every fixed k and |e(z)-e(z')|<=2D_B(z,z') on each certified component; intervention-specific D_k yield the tighter D_k+D_k' form.",
+      "domain": "One certified connected component and the same fixed R168 stochastic effect family.",
+      "scope": "One certified connected component and the same fixed R168 stochastic effect family.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §3",
+      "source_lineage": "Standard triangle inequality, shortest-path pseudometric and supremum stability, typed to the R168 effect.",
+      "status": "PROVED_EXACTLY_WITH_FINITE_ENUMERATION",
+      "proof": "Compose local law bounds along a path; apply the four-law triangle inequality to every mediator pair and supremum stability; minimize over paths.",
+      "counterexamples_and_limits": "No bound across disconnected/omitted contexts; the factor-two uniform form can be conservative; actual edge validity remains a premise.",
+      "formal_contract_R169": {
+        "object_domain": "R168 consumer-law family on a certified actual route component",
+        "quantifiers": "every fixed k and every context pair joined by certified paths; supremum over the same K0",
+        "bearer_time_signature": "same actual consumer, lineage, pre-compensation interval and discriminator class",
+        "source_anchor": {
+          "path": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md",
+          "sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+          "locator": "§3"
+        },
+        "purpose": "Derive effect regularity from local actual routes",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R169-G2",
+          "R169-G3",
+          "R169-G5"
+        ],
+        "machine_formalized": true,
+        "premise_routes": [
+          {
+            "rule": "r169_compositional_effect_bound",
+            "all_of": [
+              "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+              "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+              "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R169:DIRECT_ROUTE_ENVELOPE",
+      "kind": "CONDITIONAL_ROUTE_COMPOSITIONAL_ENVELOPE",
+      "label": "Finite-Test Envelope in Actual Path-Budget Units",
+      "statement": "With tested upper bounds e(s_i)<=U_i, E_B(z)=min{M,inf_i[U_i+2D_B(z,s_i)]} validly upper-bounds e on the certified component; common eta and direct route fill h_B give sup e<=min{M,eta+2h_B}.",
+      "domain": "One common graph component, local certificate family and valid tested-effect upper bounds.",
+      "scope": "One common graph component, local certificate family and valid tested-effect upper bounds.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §3",
+      "source_lineage": "R169 shortest-path theorem inserted into the R168 envelope argument.",
+      "status": "PROVED_CONDITIONALLY_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Apply the R169 effect bound from each tested context and take the infimum/cap; then maximize using the direct graph fill radius.",
+      "counterexamples_and_limits": "Not claimed sharp within the kernel-realizable subclass; finite nodes do not cover a continuum without within-cell bounds.",
+      "formal_contract_R169": {
+        "object_domain": "tested and untested nodes in one certified actual route component",
+        "quantifiers": "every node in the declared component under all simultaneous edge and test-bound certificates",
+        "bearer_time_signature": "same effect definition, route graph and bound-validity event",
+        "source_anchor": {
+          "path": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md",
+          "sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+          "locator": "§3"
+        },
+        "purpose": "Provide a falsifiable alternative to a fitted global L",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R169-G3",
+          "R169-G4",
+          "R169-G5"
+        ],
+        "machine_formalized": true,
+        "premise_routes": [
+          {
+            "rule": "r169_direct_route_envelope",
+            "all_of": [
+              "R168:SHARP_METRIC_ENVELOPE",
+              "R169:COMPOSITIONAL_EFFECT_BOUND",
+              "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R169:METRIC_SCALE_GAUGE_NONENTAILMENT",
+      "kind": "EXACT_SCALE_NONIDENTIFICATION_RESULT",
+      "label": "Envelope Evidence Does Not Identify d and L Separately",
+      "statement": "For every c>0, d'=c d and L'=L/c leave every Ld product and the full R168 cone envelope unchanged; envelope data therefore do not separately identify metric scale and Lipschitz constant, while route budgets record their operational product directly in d_F units.",
+      "domain": "Any R168 metric-envelope application and positive scalar rescaling.",
+      "scope": "Any R168 metric-envelope application and positive scalar rescaling.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §4",
+      "source_lineage": "Elementary scale invariance applied to R168's metric envelope.",
+      "status": "PROVED_EXACTLY",
+      "proof": "(L/c)(c d)=Ld pointwise; all cone terms and their infimum/cap are unchanged.",
+      "counterexamples_and_limits": "A unit convention can choose one representative but adds no physical evidence; the discriminator class F remains scientifically substantive.",
+      "formal_contract_R169": {
+        "object_domain": "metric and regularity representations of the same envelope",
+        "quantifiers": "every positive rescaling c",
+        "bearer_time_signature": "representation-level statement; no new actual bearer inferred",
+        "source_anchor": {
+          "path": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md",
+          "sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+          "locator": "§4"
+        },
+        "purpose": "Prevent a small reported L from masquerading as stronger evidence",
+        "thought_experiments": "§8.5",
+        "open_obligations": [
+          "R169-G4"
+        ],
+        "machine_formalized": true,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R169:PARTIAL_VIEW_DIRECT_RADIUS_BOUND",
+      "kind": "CONDITIONAL_PARTIAL_VIEW_ROUTE_BOUND",
+      "label": "Direct Route Radius Dominates the Section Decomposition",
+      "statement": "If an actual section r satisfies D_B(z,r(q(z)))<=delta and D_B(r(x),r(x'))<=C d_X(x,x'), then the direct actual-route fill h_B is at most delta+C h_X; a complete actual graph may use h_B directly, but observed labels alone identify neither the graph nor h_B.",
+      "domain": "One common R168 partial-view application whose actual contexts and section are nodes of the certified R169 graph.",
+      "scope": "One common R168 partial-view application whose actual contexts and section are nodes of the certified R169 graph.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §5",
+      "source_lineage": "R168 lift triangle inequality specialized to the R169 route pseudometric.",
+      "status": "PROVED_CONDITIONALLY_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Choose the nearest tested observed label and compose fiber and section paths; minimize directly for h_B.",
+      "counterexamples_and_limits": "Without hidden-node/edge inventory the R168 two-point obstruction remains; continuum interiors require an additional structural range bound.",
+      "formal_contract_R169": {
+        "object_domain": "actual hidden contexts, observed labels, an actual section and a common route pseudometric",
+        "quantifiers": "every hidden context under all R168 and R169 lift premises",
+        "bearer_time_signature": "same actual graph, section nodes, tested nodes and episode interval",
+        "source_anchor": {
+          "path": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md",
+          "sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+          "locator": "§5"
+        },
+        "purpose": "Use actual route distance without erasing hidden-fiber obligations",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R169-G1",
+          "R169-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r169_partial_view_direct_radius",
+            "all_of": [
+              "R168:PARTIAL_VIEW_NONENTAILMENT",
+              "R168:PARTIAL_VIEW_LIFT_CONTRACT",
+              "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+              "R169:DIRECT_ROUTE_ENVELOPE"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R169:HELDOUT_CALIBRATION_FALSIFIER",
+      "kind": "PROSPECTIVE_CERTIFICATE_FALSIFIER",
+      "label": "Valid Held-Out Lower Evidence Can Refute an Edge or Path Budget",
+      "statement": "If an independently challenged actual edge/path has a valid consumer-law lower bound larger than its declared upper budget, the calibration certificate is refuted; this is distinct from a valid mediator-effect envelope refuting effects above tau.",
+      "domain": "One frozen route certificate and an independent actual challenge under the same K0/F/consumer/time contract.",
+      "scope": "One frozen route certificate and an independent actual challenge under the same K0/F/consumer/time contract.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §6",
+      "source_lineage": "Prospective falsification discipline from R161-R168, applied to local route upper budgets.",
+      "status": "DECLARED_FALSIFIER_NOT_EXECUTED",
+      "proof": "A simultaneously valid lower bound above a claimed upper bound makes the certificate conjunction false.",
+      "counterexamples_and_limits": "Invalid challenge delivery or a post-hoc discriminator cannot refute the certificate; passing finitely many challenges does not prove omitted-route completeness.",
+      "formal_contract_R169": {
+        "object_domain": "one frozen local/path upper certificate and independent lower-bound challenge",
+        "quantifiers": "existential valid violation refutes the certificate; no converse completeness inference",
+        "bearer_time_signature": "same actual route variables, consumer and pre-compensation timing",
+        "source_anchor": {
+          "path": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md",
+          "sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+          "locator": "§6"
+        },
+        "purpose": "Make physical calibration rejectable rather than decorative",
+        "thought_experiments": "§8",
+        "open_obligations": [
+          "R169-G2",
+          "R169-G6"
+        ],
+        "machine_formalized": true,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R169:ROUTE_CALIBRATION_TRIAGE",
+      "kind": "FOUR_WAY_PHYSICAL_CALIBRATION_DECISION_CONTRACT",
+      "label": "Invalid, Calibration-Refuted, Route-Certified, or Unresolved",
+      "statement": "Invalid identity/edge/timing/measurement gives INVALID_ROUTE_PROTOCOL; a valid held-out lower violation gives CALIBRATION_REFUTED; simultaneous valid local upper and coverage clauses give ROUTE_ENVELOPE_CERTIFIED; all other cases, including omitted or continuum contexts, are UNRESOLVED.",
+      "domain": "One named route graph and frozen calibration/challenge plan.",
+      "scope": "One named route graph and frozen calibration/challenge plan.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §7",
+      "source_lineage": "R168 closure-relative triage refined to separate calibration failure from mediator-effect refutation.",
+      "status": "DECLARED_BOUNDED_DECISION_CONTRACT",
+      "proof": "Priority logic is exhaustively checked over 32 Boolean assignments; mathematical consequences come from preceding nodes while empirical premises remain open.",
+      "counterexamples_and_limits": "A failed calibration is not a null mediator or no-experience result; route certification is domain-relative.",
+      "formal_contract_R169": {
+        "object_domain": "one actual route certificate and challenge record",
+        "quantifiers": "all validity premises precede status; one valid violation refutes; certification is universal only over declared nodes/edges",
+        "bearer_time_signature": "same episode lineage, consumer geometry, timing and frozen calibration split",
+        "source_anchor": {
+          "path": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md",
+          "sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+          "locator": "§7"
+        },
+        "purpose": "Prevent calibration invalidity from becoming substantive absence",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R169-G1",
+          "R169-G2",
+          "R169-G3",
+          "R169-G5",
+          "R169-G6"
+        ],
+        "machine_formalized": true,
+        "premise_routes": [
+          {
+            "rule": "r169_route_calibration_triage",
+            "all_of": [
+              "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+              "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE",
+              "R169:DIRECT_ROUTE_ENVELOPE",
+              "R169:HELDOUT_CALIBRATION_FALSIFIER"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R169:R168_ROUTE_APPLICATION_BOUNDARY",
+      "kind": "CONDITIONAL_ROUTE_REFINEMENT_AND_EXPERIENTIAL_BOUNDARY",
+      "label": "Route Certificate Refines R168 Regularity Only",
+      "statement": "If the complete R166/R167 actual witness, R168 stochastic effect/triage and an R169 route certificate all hold on one common episode, the route envelope may discharge part of R168's metric/regularity obligations for that declared component; it does not establish omitted-route completeness, neural realization, C1, B_min, basal experience or an exclusive owner.",
+      "domain": "One common actual P/I/K/D/rho episode and one fixed R168-R169 certificate package.",
+      "scope": "One common actual P/I/K/D/rho episode and one fixed R168-R169 certificate package.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §§7,10",
+      "source_lineage": "Conditional refinement of the R168 witness boundary with UCT-I physical-witness limits retained.",
+      "status": "MANUAL_CONDITIONAL_APPLICATION_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Bind every graph node, edge, law, bound and challenge to the same actual episode; substitute the route envelope only for the declared regularity role and retain all other premises.",
+      "counterexamples_and_limits": "Passing a graph checker or fitted model does not install a route; no inference reaches experience existence or familiar mineness.",
+      "formal_contract_R169": {
+        "object_domain": "one actual operational mediator relation and route certificate",
+        "quantifiers": "every all-of premise holds on one application; no necessity or global-completeness conclusion",
+        "bearer_time_signature": "same P/I/K/D/rho lineage, consumer, interval and signature across R166-R169",
+        "source_anchor": {
+          "path": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md",
+          "sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+          "locator": "§§7,10"
+        },
+        "purpose": "Advance actual-organization evidence without changing C1 or mineness semantics",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R169-G1",
+          "R169-G2",
+          "R169-G5",
+          "R169-G7"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r169_route_application_boundary",
+            "all_of": [
+              "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+              "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+              "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+              "R169:ROUTE_CALIBRATION_TRIAGE"
+            ]
+          }
+        ]
+      }
     }
   ],
   "rules": [
@@ -33215,6 +33550,146 @@
         "source_sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r169_compositional_effect_bound",
+      "all_of": [
+        "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+        "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+        "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE"
+      ],
+      "conclusion": "R169:COMPOSITIONAL_EFFECT_BOUND",
+      "statement": "The fixed stochastic effect, actual route graph and valid local channel budgets jointly yield the shortest-path effect bound.",
+      "proof_sketch": "Compose local law bounds along actual paths, then apply the four-law triangle inequality and supremum stability.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §3",
+      "kind": "EXACT_COMPOSITIONAL_DEDUCTION",
+      "review": "MANUAL_ALL_OF_ACTUAL_GRAPH_LOCAL_BOUND_AND_EFFECT_AUDIT",
+      "formal_contract_R169": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same actual graph component",
+          "same K0/F/consumer",
+          "simultaneous valid edge budgets",
+          "same pre-compensation interval"
+        ],
+        "quantification": "every joined context pair and every fixed intervention in K0",
+        "proof_location": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §3",
+        "source_sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r169_direct_route_envelope",
+      "all_of": [
+        "R168:SHARP_METRIC_ENVELOPE",
+        "R169:COMPOSITIONAL_EFFECT_BOUND",
+        "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE"
+      ],
+      "conclusion": "R169:DIRECT_ROUTE_ENVELOPE",
+      "statement": "R168 valid tested upper bounds plus the compositional effect bound and local certificates jointly yield the direct route envelope.",
+      "proof_sketch": "Use 2D_B as the certified modulus in every test-point cone and take the infimum/cap.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §3",
+      "kind": "CONDITIONAL_ENVELOPE_DEDUCTION",
+      "review": "MANUAL_ALL_OF_TEST_BOUND_ROUTE_MODULUS_AND_SCOPE_AUDIT",
+      "formal_contract_R169": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same tested nodes and valid U_i",
+          "same actual graph and D_B",
+          "same R168 effect definition",
+          "no claim outside certified component"
+        ],
+        "quantification": "every node in the certified component",
+        "proof_location": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §3",
+        "source_sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r169_partial_view_direct_radius",
+      "all_of": [
+        "R168:PARTIAL_VIEW_NONENTAILMENT",
+        "R168:PARTIAL_VIEW_LIFT_CONTRACT",
+        "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+        "R169:DIRECT_ROUTE_ENVELOPE"
+      ],
+      "conclusion": "R169:PARTIAL_VIEW_DIRECT_RADIUS_BOUND",
+      "statement": "The hidden-fiber obstruction, valid lift, actual graph and direct envelope jointly license the h_B<=delta+C h_X comparison without erasing the obstruction.",
+      "proof_sketch": "Triangle inequality in D_B and nearest observed tested label; actual graph inventory remains an independent premise.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §5",
+      "kind": "CONDITIONAL_PARTIAL_VIEW_DEDUCTION",
+      "review": "MANUAL_ALL_OF_HIDDEN_FIBER_SECTION_GRAPH_AND_RADIUS_AUDIT",
+      "formal_contract_R169": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same q/r/actual Z",
+          "same D_B and section nodes",
+          "valid delta/C/h_X",
+          "continuum interiors separately bounded if claimed"
+        ],
+        "quantification": "every declared hidden context only",
+        "proof_location": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §5",
+        "source_sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r169_route_calibration_triage",
+      "all_of": [
+        "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+        "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE",
+        "R169:DIRECT_ROUTE_ENVELOPE",
+        "R169:HELDOUT_CALIBRATION_FALSIFIER"
+      ],
+      "conclusion": "R169:ROUTE_CALIBRATION_TRIAGE",
+      "statement": "The actual graph, simultaneous local upper certificates, route envelope and independent falsifier jointly require the four-way calibration status logic.",
+      "proof_sketch": "Invalidity dominates; valid lower violation refutes; complete declared upper/coverage package certifies; the complement remains unresolved.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §§6-7",
+      "kind": "DECISION_CONTRACT_SYNTHESIS",
+      "review": "MANUAL_ALL_OF_CALIBRATION_AND_STATUS_PRIORITY_AUDIT",
+      "formal_contract_R169": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same frozen graph/certificate/challenge plan",
+          "valid lower and upper bounds kept distinct",
+          "coverage over exact declared domain",
+          "invalid calibration not promoted to mediator null"
+        ],
+        "quantification": "one certificate; existential valid violation; certification universal only over declared graph",
+        "proof_location": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §§6-7",
+        "source_sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r169_route_application_boundary",
+      "all_of": [
+        "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+        "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+        "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+        "R169:ROUTE_CALIBRATION_TRIAGE"
+      ],
+      "conclusion": "R169:R168_ROUTE_APPLICATION_BOUNDARY",
+      "statement": "The complete R166 witness, R167 actual architecture, R168 stochastic boundary and R169 calibration triage jointly permit only a route-regularity refinement for the same declared relation.",
+      "proof_sketch": "Bind all objects to one episode and substitute the route envelope only for the metric/regularity evidence role; preserve every physical and semantic boundary.",
+      "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §§7,10",
+      "kind": "CONDITIONAL_APPLICATION_DEDUCTION",
+      "review": "MANUAL_ALL_OF_R166_R169_ACTUALITY_AND_SEMANTIC_BOUNDARY_AUDIT",
+      "formal_contract_R169": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same actual P/I/K/D/rho",
+          "all R166 W1-W6",
+          "R167 live routes",
+          "R168 fixed stochastic effect",
+          "R169 valid route certificate",
+          "no reverse inference to C1/B_min/basal experience/unique owner"
+        ],
+        "quantification": "every premise on one common application; no global completeness",
+        "proof_location": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §§7,10",
+        "source_sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -33842,6 +34317,26 @@
       "from": "R168:ENVELOPE_RELATIVE_TRIAGE",
       "to": "A:U1",
       "relation": "no envelope, sensitivity, or detection clause is added to basal-experience existence"
+    },
+    {
+      "from": "R169:R168_ROUTE_APPLICATION_BOUNDARY",
+      "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+      "relation": "context only: route calibration refines physical evidence and does not replace C1 or B_min"
+    },
+    {
+      "from": "R169:METRIC_SCALE_GAUGE_NONENTAILMENT",
+      "to": "R168:SHARP_METRIC_ENVELOPE",
+      "relation": "non-deductive representation warning: envelope evidence fixes Ld products, not separate physical meanings"
+    },
+    {
+      "from": "R169:PARTIAL_VIEW_DIRECT_RADIUS_BOUND",
+      "to": "R168:PARTIAL_VIEW_NONENTAILMENT",
+      "relation": "obstruction retained: direct radius requires actual hidden graph inventory, not observed-label equality"
+    },
+    {
+      "from": "R169:ROUTE_CALIBRATION_TRIAGE",
+      "to": "A:U1",
+      "relation": "no route validity, smoothness or coverage clause is added to basal-experience existence"
     }
   ],
   "prohibited_inferences_D": [
@@ -34553,6 +35048,23 @@
     "lipschitz_constant_validated": false,
     "partial_view_lift_validated": false,
     "sampling_measure_validated": false,
+    "B_min_validated": false,
+    "C1_derived": false,
+    "basal_experience_gate_added": false
+  },
+  "research_R169": {
+    "start_head": "b2fde21589a733fe108cc41b8548f5a6fa9cbae0",
+    "checkpoint_head": "516155484c1bbcb7f3479076e8c48be334e22f74",
+    "parent_graph_sha256": "5d715c5782f49396bb8b70432d5b43a918f3607f5e5293ce5148ebce9a912d10",
+    "note": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md",
+    "new_nodes": 9,
+    "new_rules": 5,
+    "new_context_links": 4,
+    "status": "COMPOSITIONAL_ACTUAL_ROUTE_CALIBRATION_AND_FALSIFICATION_BOUNDARY",
+    "actual_route_graph_validated": false,
+    "actual_edge_interventions_validated": false,
+    "continuum_coverage_validated": false,
+    "complete_route_inventory_validated": false,
     "B_min_validated": false,
     "C1_derived": false,
     "basal_experience_gate_added": false

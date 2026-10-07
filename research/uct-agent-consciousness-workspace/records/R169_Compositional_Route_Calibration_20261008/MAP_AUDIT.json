@@ -1,0 +1,288 @@
+{
+  "schema": "UCT_R169_MAP_AUDIT/v1",
+  "round": "R169",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "note_hash_frozen",
+      "status": "PASS",
+      "detail": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1"
+    },
+    {
+      "name": "graph_revision",
+      "status": "PASS",
+      "detail": "R169-v1.0"
+    },
+    {
+      "name": "graph_counts",
+      "status": "PASS",
+      "detail": {
+        "nodes": 477,
+        "rules": 227,
+        "context_links": 129
+      }
+    },
+    {
+      "name": "unique_ids",
+      "status": "PASS",
+      "detail": {
+        "nodes": 477,
+        "rules": 227
+      }
+    },
+    {
+      "name": "all_endpoints_exist",
+      "status": "PASS",
+      "detail": {
+        "rules": [],
+        "links": []
+      }
+    },
+    {
+      "name": "dag",
+      "status": "PASS",
+      "detail": {
+        "visited": 477,
+        "total": 477
+      }
+    },
+    {
+      "name": "exact_parent_reconstruction",
+      "status": "PASS",
+      "detail": "5d715c5782f49396bb8b70432d5b43a918f3607f5e5293ce5148ebce9a912d10"
+    },
+    {
+      "name": "new_node_contract_fields",
+      "status": "PASS",
+      "detail": [
+        "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+        "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE",
+        "R169:COMPOSITIONAL_EFFECT_BOUND",
+        "R169:DIRECT_ROUTE_ENVELOPE",
+        "R169:METRIC_SCALE_GAUGE_NONENTAILMENT",
+        "R169:PARTIAL_VIEW_DIRECT_RADIUS_BOUND",
+        "R169:HELDOUT_CALIBRATION_FALSIFIER",
+        "R169:ROUTE_CALIBRATION_TRIAGE",
+        "R169:R168_ROUTE_APPLICATION_BOUNDARY"
+      ]
+    },
+    {
+      "name": "new_rules_explicit_all_of",
+      "status": "PASS",
+      "detail": {
+        "r169_compositional_effect_bound": [
+          "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+          "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+          "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE"
+        ],
+        "r169_direct_route_envelope": [
+          "R168:SHARP_METRIC_ENVELOPE",
+          "R169:COMPOSITIONAL_EFFECT_BOUND",
+          "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE"
+        ],
+        "r169_partial_view_direct_radius": [
+          "R168:PARTIAL_VIEW_NONENTAILMENT",
+          "R168:PARTIAL_VIEW_LIFT_CONTRACT",
+          "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+          "R169:DIRECT_ROUTE_ENVELOPE"
+        ],
+        "r169_route_calibration_triage": [
+          "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+          "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE",
+          "R169:DIRECT_ROUTE_ENVELOPE",
+          "R169:HELDOUT_CALIBRATION_FALSIFIER"
+        ],
+        "r169_route_application_boundary": [
+          "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+          "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+          "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+          "R169:ROUTE_CALIBRATION_TRIAGE"
+        ]
+      }
+    },
+    {
+      "name": "joint_premises_exact",
+      "status": "PASS",
+      "detail": {
+        "r169_compositional_effect_bound": [
+          "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+          "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+          "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE"
+        ],
+        "r169_direct_route_envelope": [
+          "R168:SHARP_METRIC_ENVELOPE",
+          "R169:COMPOSITIONAL_EFFECT_BOUND",
+          "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE"
+        ],
+        "r169_partial_view_direct_radius": [
+          "R168:PARTIAL_VIEW_NONENTAILMENT",
+          "R168:PARTIAL_VIEW_LIFT_CONTRACT",
+          "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+          "R169:DIRECT_ROUTE_ENVELOPE"
+        ],
+        "r169_route_calibration_triage": [
+          "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+          "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE",
+          "R169:DIRECT_ROUTE_ENVELOPE",
+          "R169:HELDOUT_CALIBRATION_FALSIFIER"
+        ],
+        "r169_route_application_boundary": [
+          "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+          "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+          "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+          "R169:ROUTE_CALIBRATION_TRIAGE"
+        ]
+      }
+    },
+    {
+      "name": "route_bound_requires_actual_graph_and_local_cert",
+      "status": "PASS",
+      "detail": [
+        "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+        "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+        "R169:LOCAL_CHANNEL_UPPER_CERTIFICATE"
+      ]
+    },
+    {
+      "name": "partial_view_obstruction_retained",
+      "status": "PASS",
+      "detail": [
+        "R168:PARTIAL_VIEW_NONENTAILMENT",
+        "R168:PARTIAL_VIEW_LIFT_CONTRACT",
+        "R169:ACTUAL_ROUTE_GRAPH_CONTRACT",
+        "R169:DIRECT_ROUTE_ENVELOPE"
+      ]
+    },
+    {
+      "name": "application_keeps_R166_R168_package",
+      "status": "PASS",
+      "detail": [
+        "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+        "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+        "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+        "R169:ROUTE_CALIBRATION_TRIAGE"
+      ]
+    },
+    {
+      "name": "no_reverse_to_C1_basal_gate_or_familiar_mineness",
+      "status": "PASS",
+      "detail": [
+        "R169:COMPOSITIONAL_EFFECT_BOUND",
+        "R169:DIRECT_ROUTE_ENVELOPE",
+        "R169:PARTIAL_VIEW_DIRECT_RADIUS_BOUND",
+        "R169:ROUTE_CALIBRATION_TRIAGE",
+        "R169:R168_ROUTE_APPLICATION_BOUNDARY"
+      ]
+    },
+    {
+      "name": "context_links_non_deductive",
+      "status": "PASS",
+      "detail": [
+        {
+          "from": "R169:R168_ROUTE_APPLICATION_BOUNDARY",
+          "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+          "relation": "context only: route calibration refines physical evidence and does not replace C1 or B_min"
+        },
+        {
+          "from": "R169:METRIC_SCALE_GAUGE_NONENTAILMENT",
+          "to": "R168:SHARP_METRIC_ENVELOPE",
+          "relation": "non-deductive representation warning: envelope evidence fixes Ld products, not separate physical meanings"
+        },
+        {
+          "from": "R169:PARTIAL_VIEW_DIRECT_RADIUS_BOUND",
+          "to": "R168:PARTIAL_VIEW_NONENTAILMENT",
+          "relation": "obstruction retained: direct radius requires actual hidden graph inventory, not observed-label equality"
+        },
+        {
+          "from": "R169:ROUTE_CALIBRATION_TRIAGE",
+          "to": "A:U1",
+          "relation": "no route validity, smoothness or coverage clause is added to basal-experience existence"
+        }
+      ]
+    },
+    {
+      "name": "finite_route_enumeration",
+      "status": "PASS",
+      "detail": {
+        "node_sizes": [
+          2,
+          3,
+          4
+        ],
+        "connected_graphs": 43,
+        "graphs_by_nodes": {
+          "2": 1,
+          "3": 4,
+          "4": 38
+        },
+        "bernoulli_law_assignments": 252315,
+        "effect_pair_checks": 4015656,
+        "route_envelope_checks": 4050810,
+        "intervention_specific_checks": 4015656,
+        "probability_grid": [
+          "0",
+          "1/2",
+          "1"
+        ]
+      }
+    },
+    {
+      "name": "metric_gauge",
+      "status": "PASS",
+      "detail": {
+        "exact_rational_cases": 512,
+        "identity": "(L/c)*(c*d)=L*d"
+      }
+    },
+    {
+      "name": "status_priority",
+      "status": "PASS",
+      "detail": {
+        "boolean_assignments": 32,
+        "counts": {
+          "UNRESOLVED": 9,
+          "ROUTE_ENVELOPE_CERTIFIED": 3,
+          "CALIBRATION_REFUTED": 4,
+          "INVALID_ROUTE_PROTOCOL": 16
+        }
+      }
+    },
+    {
+      "name": "claim_limits",
+      "status": "PASS",
+      "detail": {
+        "actual_graph": false,
+        "actual_edge_interventions": false,
+        "physical_route_coverage": false,
+        "continuum_cell_bound": false,
+        "consumer_geometry_validated": false,
+        "complete_organization_identified": false,
+        "C1_derived": false,
+        "B_min_validated": false,
+        "basal_experience_gate": false
+      }
+    },
+    {
+      "name": "required_core_artifacts_present",
+      "status": "PASS",
+      "detail": [
+        "ROUND_RECORD.md",
+        "Compositional_Route_Calibration_and_Falsification_v0_1.md",
+        "PROOF_LEDGER.json",
+        "GAP_LEDGER.json",
+        "SOURCE_LEDGER.json",
+        "MAP_EXTENSION.json",
+        "verify_route_bounds.py",
+        "EXACT_CHECKS.json",
+        "build_map.py"
+      ]
+    }
+  ],
+  "graph_sha256": "86b9140520d773fbf8e31543b6517d21896330f484b6590f2b50b9f3321669ad",
+  "exact_results_sha256": "cfb099482fc28bb3757a04a6a34bf28df9d84f31ef0d4931d4f0cb31624f5e5c",
+  "limitations": [
+    "DAG and finite exhaustive checks do not establish physical route validity, graph completeness or theory truth.",
+    "Every actual node, executable edge, upper budget, challenge lower bound and continuum-cell claim remains an application obligation.",
+    "No neural completeness, C1 derivation, B_min validation, basal-experience gate or unique owner follows."
+  ]
+}

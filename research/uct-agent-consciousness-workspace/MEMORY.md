@@ -1,3 +1,11 @@
+## R169 current priority — compositional route calibration and its open-world limit
+
+R169 turns R168's free regularity assumptions into a prospective falsifiable certificate over actual local context interventions. For an actual route graph with valid edgewise uniform consumer-law bounds `B`, shortest-path distance `D_B` gives the exact conditional implication `|e(z)-e(z')| <= 2D_B(z,z')`; finite tested upper bounds therefore yield `min{M,inf_i[U_i+2D_B(z,s_i)]}`. Intervention-pair-specific budgets can be tighter than the uniform factor-two route. Held-out lower bounds above certified budgets refute the calibration package.
+
+The metric-scale gauge is a substantive limitation: `(d,L)` and `(cd,L/c)` generate the same R168 envelope, so envelope evidence cannot identify their scales separately. Finite graph coverage also does not cover omitted contexts or continuum interiors without a separate within-cell/unknown-region premise. Map R169-v1.0 has 477 nodes / 227 rules / 129 context links; all 20 round checks pass, alongside 43 graphs, 252,315 law assignments and millions of exact bound checks.
+
+No actual intervention study, neural route closure, complete organization, C1 derivation, `B_min`, basal-experience gate or unique owner is claimed. Next: formulate an open-world remainder certificate that reports what remains unbounded instead of assuming unknown routes are absent.
+
 ## R167 current priority — operational mediator with redundancy and compensation
 
 R167 supplies the requested ethical prospective W2–W5 architecture: one continuous participant-device lineage, report-independent physical anchor, live logged controller mediator, declared backup routes, consumers, and reversible anchor/mediator/route interventions. It does not claim an executed experiment or identify a neural body representation.

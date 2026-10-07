@@ -1,3 +1,9 @@
+## R169 current priority — actual route budgets, not fitted geometry
+
+Read `records/R169_Compositional_Route_Calibration_20261008/CURRENT_HANDOFF.md`, the R169 note and its ledgers before continuing. R169 replaces ungrounded `d,L` calibration by an actual intervention graph with frozen consumer geometry and valid edgewise law-distance upper bounds. The factor-two effect bound and shortest-path envelope require every edge premise simultaneously; a fitted distance, point estimate, shared label or unexecuted transition is not a certificate. A held-out lower effect exceeding a valid route budget refutes only the calibration package, not the mediator, C1 or experience.
+
+Current map R169-v1.0: 477 nodes / 227 rules / 129 context links; exact R168 prefixes preserved. Metric rescaling proves `d` and `L` are not separately identified by the R168 envelope. Finite route coverage does not silently cover omitted contexts or cell interiors. Next: a minimal open-world remainder certificate with explicit unknown mass/radius rather than zero-filled unknowns. Keep actual intervention, abstract graph, fitted model, complete organization, experience and report distinct; add no basal gate, unique owner or assistant-consciousness claim. Save research only with `[skip ci]` and verify both durable copies.
+
 ## R168 current priority — do not confuse finite coverage with actual route closure
 
 Read `records/R168_Stochastic_Continuous_Redundancy_20261008/CURRENT_HANDOFF.md`, the R168 note and its ledgers before continuing. The sharp cone envelope requires the same frozen effect definition, a physically grounded context metric, a valid Lipschitz constant and valid pointwise test bounds. A shared observation label supplies none of these. Hidden-context control additionally requires an actually realizable section, fiber deviation and section regularity. Random sampling only bounds affected mass under its own measure/independence/sensitivity premises.

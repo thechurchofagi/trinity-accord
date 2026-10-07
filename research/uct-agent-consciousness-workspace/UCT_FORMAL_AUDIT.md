@@ -1,3 +1,11 @@
+## R169 audit — actual route composition without open-world or semantic promotion
+
+R169 passes the selection, result and pre-save direction checks. The graph has 477 nodes, 227 rules and 129 context links; the inherited R168 node/rule/context prefixes reconstruct exactly. The compositional rule requires the actual route graph and valid local channel budgets together. The direct envelope additionally requires the compositional theorem and tested pointwise bounds. The final R166–R169 application boundary requires the inherited complete witness, operational architecture, R168 stochastic object and R169 calibration package simultaneously.
+
+Objects, quantifiers, bearer/time/signature/realization IDs, actuality and evidence levels are explicit. No fitted distance becomes an actual intervention; no graph reachability becomes safe executability; no point estimate becomes a uniform upper certificate; no held-out refutation becomes evidence against C1 or experience. Exact checks cover 43 connected graphs, 252,315 Bernoulli law assignments, 4,015,656 effect-pair inequalities, 4,050,810 route-envelope inequalities, 4,015,656 intervention-specific inequalities, 512 gauge cases and 32 status assignments. The aggregate round checker passes 20/20.
+
+Gaps R169-G1–G7 retain omitted routes and contexts, simultaneous edge validity, factor-two conservatism, metric-scale nonidentification, continuum interiors, challenge-test bias and the complete-organization/C1/`B_min` boundary. DAG/code success is not theory truth, physical calibration or a global proof. No basal-experience gate, exclusive owner or claim about the current assistant is added.
+
 ## R168 audit — sharpness without physical-calibration shortcuts
 
 R168 passes the selection, result and pre-save direction checks after one retained checker-vocabulary repair. The graph has 468 nodes, 222 rules and 125 context links; the inherited R167 node/rule/context prefixes reconstruct exactly. The lifted hidden-context rule requires sharp envelope, exact partial-view obstruction and actual lift contract simultaneously. The triage rule keeps stochastic effect, amplitude, mass, coverage and R167 closure premises separate. No mass result is promoted to amplitude, no abstract section to actual installation, and no output distribution to experience.

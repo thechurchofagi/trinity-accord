@@ -1,3 +1,11 @@
+## R169 current handoff — actual-route calibration and falsification
+
+R169 is the latest substantive round. Its actual-context graph uses safe reversible fidelity-checked same-lineage interventions and frozen consumer-law geometry. Uniform valid edge budgets compose by shortest paths; for the R168 intervention effect, `|e(z)-e(z')| <= 2D_B(z,z')`, yielding the direct finite route envelope. Held-out lower effects above a certified edge/path budget falsify the calibration certificate. The separate gauge theorem blocks identification of `d` and `L` scales from envelope data alone.
+
+Map R169-v1.0 has 477 nodes, 227 rules and 129 context links; the exact R168 prefix is preserved. Round audit: 20/20 PASS. Exact enumeration covers 43 connected graphs, 252,315 Bernoulli consumer-law assignments, 4,015,656 effect pairs, 4,050,810 envelope checks, 4,015,656 intervention-specific checks, 512 gauge cases and 32 status assignments. See `records/R169_Compositional_Route_Calibration_20261008/CURRENT_HANDOFF.md` for exact recovery and durable-save coordinates.
+
+Next question: what minimal open-world remainder certificate can bound or explicitly isolate omitted/continuum contexts without complete-mechanism assumptions and without setting unknown routes to zero? Preserve the R169 object/time/signature/actuality contract. Do not infer actual neural closure, C1, `B_min`, basal experience, exclusive ownership or current-assistant consciousness.
+
 ## R168 current priority — stochastic envelope, hidden fibers and mass/amplitude separation
 
 R168-v1.0 has 468 nodes / 222 rules / 125 context links. It proves the pointwise sharp bounded-Lipschitz envelope for undetected contextual effects, gives an exact counterexample to partial-view closure, and states the additional actual section/fiber premises needed to lift observed coverage to hidden contexts. A separate binomial result bounds affected mass after random no-detection, but cannot bound maximum amplitude or physically admissible zero-measure contexts.

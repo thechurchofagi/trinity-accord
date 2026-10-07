@@ -1,3 +1,14 @@
+## R169 — compositional route calibration and falsification
+
+- English result: `records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md`
+- Exact checker/results: `verify_route_bounds.py`, `EXACT_CHECKS.json`
+- Proof/source/gap ledgers: `PROOF_LEDGER.json`, `SOURCE_LEDGER.json`, `GAP_LEDGER.json`
+- Formal extension/audit/validation: `MAP_EXTENSION.json`, `MAP_AUDIT.json`, `verify_round.py`
+- Chinese review/current handoff: `REVIEW_ZH.md`, `CURRENT_HANDOFF.md`
+- Map: R169-v1.0, 477 nodes / 227 rules / 129 context links; new 9/5/4, exact R168 prefixes preserved
+- Result boundary: valid actual edgewise consumer-law budgets compose into route bounds and are held-out falsifiable; fitted geometry and finite labels do not supply edge validity or open-world closure
+- Next: explicit open-world remainder certificate for omitted and continuum contexts
+
 ## R168 — stochastic/continuous redundancy and partial observation
 
 - English result: `records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md`
