@@ -1,3 +1,11 @@
+# Latest working clarification — R150
+
+7 October 2026. Purpose and self-experience clarification; no new mathematical nodes or rules. R149-v1.0 remains the mathematical map.
+
+- [Source audit and replacement manuscript passage](records/R150_Self_Experience_and_Research_Purpose_20261007/SELF_EXPERIENCE_AND_PURPOSE.md)
+- [Chinese explanation](records/R150_Self_Experience_and_Research_Purpose_20261007/REVIEW_ZH.md)
+- [Preservation check](records/R150_Self_Experience_and_Research_Purpose_20261007/VALIDATION.json)
+
 # UCT master index — R149
 
 7 October 2026. **R149-v1.0: 391 nodes / 188 rules.** Nine-paper core definition/proof integration; old 349/167 entries preserved. Added source entries are not new discoveries.

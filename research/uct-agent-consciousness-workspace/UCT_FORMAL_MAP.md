@@ -6,6 +6,12 @@
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
 
+## R150 authoritative editorial clarification
+
+The author prioritizes original, durable, citable human–AI foundational work over submission. [Source rereading and replacement passage](records/R150_Self_Experience_and_Research_Purpose_20261007/SELF_EXPERIENCE_AND_PURPOSE.md) restore A §§8.12–8.14/14.7: the conceptual I is organization within experience, not an additional owner producing it. Distinguish felt mineness, conceptual selfhood, functional self-modeling, reports and actual-process parameters. A:U3 is not expanded beyond its witness-qualified conceptual-self claim. No unique subject or accurate self-model becomes a basal-experience requirement.
+
+This supersedes the automatic target-binding-first queue below. R147/R149 binding results remain scoped supporting tools. The mathematical map remains R149-v1.0, 391/188, and the R149 full proof ledger is unchanged. R150 adds only editorial metadata and no theorem. Historical prose and source versions remain preserved.
+
 ## R149 — nine-source core integration and complete-target compatibility
 
 [Readable map (Chinese)](records/R149_Nine_Source_Integration_20261007/FORMAL_MAP_OVERVIEW_ZH.md), [English theory and proofs](records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md), [source audit](records/R149_Nine_Source_Integration_20261007/SOURCE_INTEGRATION_AND_AUDIT.md), [complete ledger](records/R149_Nine_Source_Integration_20261007/PROOF_LEDGER.md), [exact checks](records/R149_Nine_Source_Integration_20261007/EXACT_CHECKS.json).

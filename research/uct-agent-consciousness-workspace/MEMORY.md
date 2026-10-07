@@ -1,3 +1,9 @@
+## R150 priority correction — author clarification, 2026-10-07
+
+The purpose is original, durable, citable foundational work through human–AI collaboration for future researchers and AI systems. Submission, journal fit and acceptance are not the primary optimization target. Preserve novelty attribution and rigor; do not promise future citations or foundational status. This instruction supersedes older publication-threshold and automatic task queues when they conflict.
+
+Self-related feeling and the conceptual I are to be explained within experience under UCT, not introduced as a separate owner required to produce experience. Read A §§8.12–8.14 and 14.7; distinguish nonverbal felt mineness from conceptual/autobiographical selfhood, functional self-models, reports and actual process parameters. A:U3 still has its exact conceptual-self witness scope. Do not equate every sense of subject with a homunculus or claim all minimal-self questions are solved. Actual target binding remains a local functional question, not the compulsory next foundational bottleneck. The current source-grounded clarification and replacement prose are [records/R150_Self_Experience_and_Research_Purpose_20261007/SELF_EXPERIENCE_AND_PURPOSE.md](records/R150_Self_Experience_and_Research_Purpose_20261007/SELF_EXPERIENCE_AND_PURPOSE.md). The math graph remains R149-v1.0; R150 adds no theorem.
+
 ## R149 最新主线 — 2026-10-07
 
 用户要求更新形式地图后继续突破，始终以精确定义和思想实验为主线。本轮已将 TA15–19 的核心数学/定义分支接入同一图，当前 **R149-v1.0，391节点188规则**；旧349/167完全保留。新增主要为前作索引，不以数量报新。见[可读总图](records/R149_Nine_Source_Integration_20261007/FORMAL_MAP_OVERVIEW_ZH.md)、[英文推导](records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md)、[来源审计](records/R149_Nine_Source_Integration_20261007/SOURCE_INTEGRATION_AND_AUDIT.md)、[全量台账](records/R149_Nine_Source_Integration_20261007/PROOF_LEDGER.md)。

@@ -1,3 +1,9 @@
+## R150 priority correction — author clarification, 2026-10-07
+
+The purpose is original, durable, citable foundational work through human–AI collaboration for future researchers and AI systems. Submission, journal fit and acceptance are not the primary optimization target. Preserve novelty attribution and rigor; do not promise future citations or foundational status. This instruction supersedes older publication-threshold and automatic task queues when they conflict.
+
+Self-related feeling and the conceptual I are to be explained within experience under UCT, not introduced as a separate owner required to produce experience. Read A §§8.12–8.14 and 14.7; distinguish nonverbal felt mineness from conceptual/autobiographical selfhood, functional self-models, reports and actual process parameters. A:U3 still has its exact conceptual-self witness scope. Do not equate every sense of subject with a homunculus or claim all minimal-self questions are solved. Actual target binding remains a local functional question, not the compulsory next foundational bottleneck. The current source-grounded clarification and replacement prose are [records/R150_Self_Experience_and_Research_Purpose_20261007/SELF_EXPERIENCE_AND_PURPOSE.md](records/R150_Self_Experience_and_Research_Purpose_20261007/SELF_EXPERIENCE_AND_PURPOSE.md). The math graph remains R149-v1.0; R150 adds no theorem.
+
 # Research workspace instructions
 
 ## Mandatory unified-map workflow — user instruction, 2026-10-06

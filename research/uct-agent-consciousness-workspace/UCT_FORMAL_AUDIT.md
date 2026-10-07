@@ -1,3 +1,9 @@
+# Latest scope clarification — R150
+
+This is a targeted source/agenda audit, not a new proof audit. A §§8.12–8.14 and 14.7 support the author's correction: self-related organization belongs within the experiential framework, without an additional owner prerequisite. R146/R149 already reject a self-model gate; their functional-target emphasis needed correction. U3 retains its narrower conceptual-self witness premise. Felt mineness is not silently equated with conceptual language or the predictive tuple.
+
+See [audit, distinctions and replacement text](records/R150_Self_Experience_and_Research_Purpose_20261007/SELF_EXPERIENCE_AND_PURPOSE.md). No existing node, rule or source text is changed. The [R149 complete proof ledger](records/R149_Nine_Source_Integration_20261007/PROOF_LEDGER.md) remains authoritative. Submission readiness is not the primary research criterion; novelty, validity and reusable conceptual consequences remain criteria. Earlier audit findings below are retained.
+
 # Unified formal-map audit — R130
 
 ## Verdict

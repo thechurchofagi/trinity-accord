@@ -6903,5 +6903,30 @@
     "new_rules": 21,
     "meaning": "Most additions index existing publications; R149 compatibility is a classical application, not theorem-count novelty.",
     "coverage": "Core mathematical and definition branches of TA15–19 imported; numerical studies remain reported and unrerun. TA19 main source ends in §5; supplement supplies additional results. No claim of exhaustive empirical or entire-text certification."
+  },
+  "editorial_clarification_R150": {
+    "kind": "SOURCE_AND_PURPOSE_CLARIFICATION_NOT_NEW_DEDUCTION",
+    "record": "records/R150_Self_Experience_and_Research_Purpose_20261007/SELF_EXPERIENCE_AND_PURPOSE.md",
+    "review": "records/R150_Self_Experience_and_Research_Purpose_20261007/REVIEW_ZH.md",
+    "date": "2026-10-07",
+    "new_nodes": 0,
+    "new_rules": 0,
+    "mathematical_revision": "R149-v1.0",
+    "reviewed_base_commit": "04e41a37331c8e78126883d2d86053aab4886752",
+    "anchors": [
+      "A:C1",
+      "A:U1",
+      "A:U3",
+      "R146:DEFINITION_CONTRACT",
+      "R146:SELF_CONTRACT",
+      "R146:CENTERED_REFERENCE",
+      "R149:SELF_TARGET",
+      "R149:SELF_APPLICATION"
+    ],
+    "full_proof_ledger": "records/R149_Nine_Source_Integration_20261007/PROOF_LEDGER.md",
+    "purpose": "Original, durable, citable human-AI foundational work for future inquiry; submission is not the primary objective.",
+    "clarification": "Self-experience and conceptual I are higher-order explanatory targets within experience under UCT; no additional owner, universal exclusive subject, or successful self-model is required for basal experience.",
+    "limits": "A:U3 retains conceptual-self witness scope. Nonverbal mineness and conceptual I differ. No universal temporal onset or particular phenomenal bridge is established.",
+    "supersedes_queue": "Target-binding-first and publication-threshold-first agendas; mathematical claims retained."
   }
 }
