@@ -6,6 +6,12 @@
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
 
+## R148 bibliographic scope correction — no new deduction
+
+The four pinned A/B/C/D sources are not the author's entire publication corpus. [R148 census and novelty review](records/R148_Publication_Census_20261007/PUBLICATION_CENSUS_AND_NOVELTY_ZH.md) verifies five additional published predecessors, TA15–19, and archives exact manuscript bytes. The [nine-paper inventory](records/R148_Publication_Census_20261007/PUBLICATION_INVENTORY.json) is a review set, not an exhaustive bibliography. TA17 already formalizes multi-source self-membership; TA19 already proves the local fixed-point obstruction to equivariant subject selection. TA15–18 also constrain attribution of abstraction, typed targets and actual participation. These are contextual source obligations, not new deductive premises automatically added to UCT.
+
+The formal revision and 349/167 node/rule contents remain R147-v1.0; the R147 proof ledger remains current. New original-paper readiness is not established. R146/R147 manuscript integration must include these direct predecessors and distinguish internal self-attribution from actual bearer binding. No new published fifth paper after D was verified.
+
 ## R147 current extension - thought experiments repair the self definition
 
 [English research extension](records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md), [Chinese thought experiment and review](records/R147_Self_Reference_Rewiring_20261007/THOUGHT_EXPERIMENT_AND_REVIEW_ZH.md), [full proof ledger](records/R147_Self_Reference_Rewiring_20261007/PROOF_LEDGER.md), [exact checks](records/R147_Self_Reference_Rewiring_20261007/EXACT_CHECKS.json). The R146 definitions-first manuscript remains the base; this note is its current extension.

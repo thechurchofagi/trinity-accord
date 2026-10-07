@@ -1,0 +1,93 @@
+{
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "report_number": "TA-TR-2026-18",
+  "title": "Actual Participation Before Counterfactual Capacity: A Token-Level Constraint on Conscious Organization",
+  "version": "1.0",
+  "record_id": 22991126,
+  "doi": "10.5281/zenodo.22991126",
+  "record_url": "https://zenodo.org/records/22991126",
+  "submitted": true,
+  "file_count": 10,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1047,
+      "sha256": "fac9aed59f81a58297af26e656243f213af250037f5edcdfae84d575b3fdc059",
+      "public_url": "https://zenodo.org/api/records/22991126/files/README-LICENSE.txt/content"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 1723,
+      "sha256": "f792a63c3c917907eac571f3525cca971ffddc8f13610d6712b56e1dfbb30044",
+      "public_url": "https://zenodo.org/api/records/22991126/files/REVIEW-AND-SOURCES.md/content"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 943,
+      "sha256": "7754e5d1acd2696a8fe5ff297b10efa0a06aa3f722e37f8942c3a78add6e8d88",
+      "public_url": "https://zenodo.org/api/records/22991126/files/SHA256SUMS.txt/content"
+    },
+    {
+      "name": "actual-participation-before-counterfactual-capacity-supplement-v1.0.md",
+      "bytes": 2538,
+      "sha256": "93e75d257797c8ecb0193a11c19528c4ceee84c309b5767a4e6b36e34ca054cb",
+      "public_url": "https://zenodo.org/api/records/22991126/files/actual-participation-before-counterfactual-capacity-supplement-v1.0.md/content"
+    },
+    {
+      "name": "actual-participation-before-counterfactual-capacity-supplement-v1.0.pdf",
+      "bytes": 38011,
+      "sha256": "c2323fb753348eec4d4fafd15233b047f7f7047bec6cb8e3527a71385415faa6",
+      "public_url": "https://zenodo.org/api/records/22991126/files/actual-participation-before-counterfactual-capacity-supplement-v1.0.pdf/content"
+    },
+    {
+      "name": "actual-participation-before-counterfactual-capacity-v1.0.md",
+      "bytes": 52233,
+      "sha256": "22ef09cb373a7f364ee2a12c503be8768057684d78eb0e2593d8398b5fe7ae13",
+      "public_url": "https://zenodo.org/api/records/22991126/files/actual-participation-before-counterfactual-capacity-v1.0.md/content"
+    },
+    {
+      "name": "actual-participation-before-counterfactual-capacity-v1.0.pdf",
+      "bytes": 131366,
+      "sha256": "e41df92513ff31bc7a08f76038ab52f7f5b6f04dca0000d08ae0cfd3d9b9301a",
+      "public_url": "https://zenodo.org/api/records/22991126/files/actual-participation-before-counterfactual-capacity-v1.0.pdf/content"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 350,
+      "sha256": "165d76668498d043cd5162512cfe13e64b91929b4910acaa600ac5f7b46a6251",
+      "public_url": "https://zenodo.org/api/records/22991126/files/citation.bib/content"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 508,
+      "sha256": "19748016e00e3939976df046a5011e5a7c3a76b85a8bf83cc4f9037f879598e7",
+      "public_url": "https://zenodo.org/api/records/22991126/files/citation.csl.json/content"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 300,
+      "sha256": "225f7eb119db4b92bce75f98e280570214c1120ffdbf03713805a18d804af04d",
+      "public_url": "https://zenodo.org/api/records/22991126/files/citation.ris/content"
+    }
+  ],
+  "expected_manifest_sha256": "ec791dce5acb56a8c2fe2409e8e27259cd4f3a918aacc34f87a61ac314b29bbe",
+  "public_readback_authenticated": false,
+  "doi_resolver": {
+    "state": "RESOLVER_PASS",
+    "http_status": 200,
+    "final_url": "https://zenodo.org/records/22991126",
+    "matches_record": true
+  },
+  "public_file_readback_pass": true,
+  "doi_resolution_pass": true,
+  "source_commit": "907dd19ac93e50acd8320466a8a592acf05982f7",
+  "workflow_run_id": "36304007971",
+  "prior_doi_records_modified": false,
+  "bitcoin_originals_modified": false,
+  "new_research_papers": 1,
+  "peer_reviewed": false,
+  "global_originality_certified": false,
+  "google_scholar_indexing": "NOT_ASSERTED",
+  "manuscript_language": "eng"
+}
+

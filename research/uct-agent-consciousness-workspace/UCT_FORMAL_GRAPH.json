@@ -5898,5 +5898,80 @@
     "increment": "Exact bearer-versus-loop distinction and swap controls; repairs an overstrong uncentered-grounding research question.",
     "novelty": "Classical permutation/identification tools; no major or historical novelty certified.",
     "next": "Integrate bearer-relative own-state/constituent/tool targets into the definitions-first manuscript using the four retained thought experiments; no automatic unrelated control models or experiments."
+  },
+  "bibliographic_review": {
+    "revision": "R148",
+    "date": "2026-10-07",
+    "inventory": "records/R148_Publication_Census_20261007/PUBLICATION_INVENTORY.json",
+    "note": "records/R148_Publication_Census_20261007/PUBLICATION_CENSUS_AND_NOVELTY_ZH.md",
+    "formal_revision_unchanged": true,
+    "additional_contextual_sources": [
+      {
+        "id": "TA15",
+        "report_number": "TA-TR-2026-15",
+        "title": "Cross-Substrate Phenomenal Comparison: A Typed Transformation-Transport Framework under Existential Uncertainty",
+        "version": "1.0",
+        "doi": "10.5281/zenodo.22934654",
+        "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+        "snapshot": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md",
+        "sha256": "8643196bd281e88be3cd753297eb846251a855e9d2ac3f576dbd49437cbafc85",
+        "bytes": 78742,
+        "receipt": "records/R148_Publication_Census_20261007/sources/TA15_publication_record.json",
+        "status": "published_preprint_receipt_verified; selected_passages_reviewed; not_fully_integrated_into_deductive_graph"
+      },
+      {
+        "id": "TA16",
+        "report_number": "TA-TR-2026-16",
+        "title": "General Cross-Substrate Phenomenology: A Type-Safe, Transformation-First Framework for Phenomenal Existence, Structure, Perspective, and Continuation",
+        "version": "1.0",
+        "doi": "10.5281/zenodo.22939808",
+        "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+        "snapshot": "records/R148_Publication_Census_20261007/sources/TA16_v1_0.md",
+        "sha256": "041a21d0a0863719188f591b2f51f94b591cc16a795d74ed6df047e058c48360",
+        "bytes": 87834,
+        "receipt": "records/R148_Publication_Census_20261007/sources/TA16_publication_record.json",
+        "status": "published_preprint_receipt_verified; selected_passages_reviewed; not_fully_integrated_into_deductive_graph"
+      },
+      {
+        "id": "TA17",
+        "report_number": "TA-TR-2026-17",
+        "title": "Set-Valued Causal Inheritance for Functional Self-Continuity: Representation Theorems and Persistent-Agent Benchmarks",
+        "version": "1.0",
+        "doi": "10.5281/zenodo.22950904",
+        "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+        "snapshot": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md",
+        "sha256": "bec4944db161db725648a18962b8a6c069aacf7512a259483f9d81e646e36a78",
+        "bytes": 99093,
+        "receipt": "records/R148_Publication_Census_20261007/sources/TA17_publication_record.json",
+        "status": "published_preprint_receipt_verified; selected_passages_reviewed; not_fully_integrated_into_deductive_graph"
+      },
+      {
+        "id": "TA18",
+        "report_number": "TA-TR-2026-18",
+        "title": "Actual Participation Before Counterfactual Capacity: A Token-Level Constraint on Conscious Organization",
+        "version": "1.0",
+        "doi": "10.5281/zenodo.22991126",
+        "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+        "snapshot": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md",
+        "sha256": "22ef09cb373a7f364ee2a12c503be8768057684d78eb0e2593d8398b5fe7ae13",
+        "bytes": 52233,
+        "receipt": "records/R148_Publication_Census_20261007/sources/TA18_publication_record.json",
+        "status": "published_preprint_receipt_verified; selected_passages_reviewed; not_fully_integrated_into_deductive_graph"
+      },
+      {
+        "id": "TA19",
+        "report_number": "TA-TR-2026-19",
+        "title": "Selecting and Tracking Conscious Subjects: Symmetry, Monodromy, and an IIT 4.0 Case Study",
+        "version": "1.0",
+        "doi": "10.5281/zenodo.23002980",
+        "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+        "snapshot": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md",
+        "sha256": "53782a354e6dd1b037f8a6021d2a2bad150201cd086a5f6799757074dd21fc7e",
+        "bytes": 43338,
+        "receipt": "records/R148_Publication_Census_20261007/sources/TA19_publication_record.json",
+        "status": "published_preprint_receipt_verified; selected_passages_reviewed; not_fully_integrated_into_deductive_graph"
+      }
+    ],
+    "integration_status": "source census and selected-passage overlap review only; not full theorem integration; no added deductive edges"
   }
 }
