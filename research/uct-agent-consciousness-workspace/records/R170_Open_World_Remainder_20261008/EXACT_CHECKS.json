@@ -1,0 +1,48 @@
+{
+  "schema": "UCT_R170_EXACT_CHECKS/v1",
+  "status": "PASS",
+  "probability_effect_grid": [
+    "0",
+    "1/2",
+    "1"
+  ],
+  "threshold_grid": [
+    "0",
+    "1/2"
+  ],
+  "domain_sizes": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "domains": 62,
+  "covered_envelopes": 1364,
+  "compatible_effects": 66429,
+  "pointwise_checks": 323847,
+  "integral_checks": 66429,
+  "exceedance_checks": 132858,
+  "supremum_witnesses": 1001,
+  "sharp_envelope_witnesses": 1364,
+  "status_assignments": 32,
+  "status_counts": {
+    "INVALID_OPEN_WORLD_PROTOCOL": 16,
+    "UNRESOLVED": 5,
+    "OPEN_WORLD_MASS_CERTIFIED": 1,
+    "CLOSED_DOMAIN_AMPLITUDE_CERTIFIED": 2,
+    "COVERAGE_CERTIFICATE_REFUTED": 8
+  },
+  "verified": [
+    "sharp piecewise pointwise envelope over the declared information class",
+    "nonempty unknown remainder preserves global supremum one",
+    "exact uniform-measure integral remainder bound",
+    "exact exceedance-set inclusion bound",
+    "five-way status priority is total and exclusive"
+  ],
+  "limits": [
+    "Finite enumeration checks bounded consequences, not physical target coverage or theory truth.",
+    "Sharpness is over the declared envelope information class, not a consumer-kernel realizability theorem.",
+    "Uniform finite weights do not establish any real target measure."
+  ]
+}
