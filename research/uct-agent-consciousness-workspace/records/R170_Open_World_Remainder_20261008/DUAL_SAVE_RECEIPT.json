@@ -1,0 +1,63 @@
+{
+  "schema": "UCT_R170_DUAL_SAVE_RECEIPT/v1",
+  "round": "R170",
+  "status": "DUAL_SAVE_VERIFIED",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "research_commit": "487b02cc5eccdc81e64818155e1e13f9e35a2517",
+    "research_tree": "09ff6247d78c2b840165f255db88d5f60d07c427",
+    "recovery_builder_commit": "5ff5a9f730f14582bceac98e30421f02f57cb655",
+    "recovery_builder_tree": "9d8abf6482fe74436d32be17aad69b7d2438ebb5",
+    "final_receipt_commit": "SELF",
+    "save_mode": "normal fast-forward with expected-SHA safeguards; [skip ci]"
+  },
+  "fixed_master_handoff": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000d7fc82308e99b1b2207bc8db",
+    "version": 14,
+    "bytes": 73185,
+    "sha256": "0c1fb21529f60be8eb7abfc477b8983526b38edb794fd008f241cee0835e6479",
+    "exact_readback": true
+  },
+  "cumulative_increment": {
+    "library_file_id": "libfile_6b00d93e71388191b404e76c1874a551",
+    "file_id": "file_00000000d52481f6b83820b0e4d387ac",
+    "version": 0,
+    "bytes": 886655,
+    "sha256": "238cde0d7d4fb29b07bd4a17593fe3ddcf4105f9210528848b7fd58dbb368a30",
+    "payload_members": 220,
+    "zip_members": 221,
+    "member_hashes_pass": true,
+    "exact_readback": true,
+    "scope": "R157-R170 cumulative increment over the exact R156 working-set baseline; not a full backup."
+  },
+  "verification_record": {
+    "library_file_id": "libfile_103c33aa61ac819193ee6094c7e5a8a8",
+    "file_id": "file_00000000399081fb8305f71d64855a3b",
+    "version": 0,
+    "bytes": 3082,
+    "sha256": "16c09cc4a7d4ed3404f1d2d675619b0e72fdd57f663ae99521aedd2c3fd7d6ea",
+    "exact_readback": true
+  },
+  "formal_state": {
+    "revision": "R170-v1.0",
+    "nodes": 487,
+    "rules": 234,
+    "context_links": 133,
+    "graph_sha256": "057c99a365940433579a765c2e52e5d4c5ce5b0bc4796cefef7b628c741e762b",
+    "exact_checks_sha256": "6bbdbc817710eca35ad4aa56f85ba6eb91165c5f480b0c690e4ee577ef018176"
+  },
+  "restore": "Verify/extract R156 baseline; overlay the 220 cumulative payload members; verify manifest hashes; fetch the current GitHub branch for this receipt-only commit; then materialize fixed handoff version 14.",
+  "prohibited_actions_confirmed_absent": [
+    "DOI",
+    "Zenodo",
+    "OTS",
+    "Arweave",
+    "email",
+    "Slack",
+    "pull request",
+    "CI",
+    "deployment"
+  ]
+}
