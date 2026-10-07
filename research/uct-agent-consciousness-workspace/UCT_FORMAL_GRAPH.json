@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R145-v1.0",
+  "revision": "R146-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "2d27c0b1848d3a3f005c85325a0c6533004d82dd",
+  "base_commit": "2ce8102966e935f508a01eada8a5db7294af02f0",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -2820,6 +2820,69 @@
       "scope": "Same actual bearers and constitutive signature throughout; conditional UCT interpretation, not evidence for C1. No inference of human phenomenology, scalar richness, valence, fear, unique subject or absence of constituent experience. Macro equality requires A:MACRO_EQ separately and is not proved by the quotient.",
       "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md §5.2; A:C1_OI, A:MACRO_EXP_EQ",
       "status": "MANUAL_CONDITIONAL_PASS"
+    },
+    {
+      "id": "R146:DEFINITION_CONTRACT",
+      "kind": "DEFINITION_CONSOLIDATION",
+      "label": "Common typed vocabulary for organization, experience, capability and self",
+      "statement": "Actual token, complete organization, model, view, estimate and type are distinguished. Experience retains C1 interpretive identity; basal phenomenal consciousness abbreviates nonempty experiential carrier. Intelligence is a well-defined isomorphism-invariant fixed-contract capability profile. Functional self targets are distinct from conceptual and phenomenal selfhood.",
+      "scope": "Consolidation of A/B/C/D and R138, not independent validation of C1 or a universal constitutive-selection algorithm. No self-model, report, recurrence, intelligence or continuation-control condition is added to experience existence. No claim to first mathematical definitions in the literature.",
+      "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md §§1-3",
+      "status": "SOURCE_ALIGNED_DEFINITIONS_AND_EXPLICIT_OPEN_BRIDGES"
+    },
+    {
+      "id": "R146:SELF_CONTRACT",
+      "kind": "DEFINITION_AND_DOMAIN",
+      "label": "Grounded target-relative predictive self-model",
+      "statement": "Admissible nonempty centered configuration domain Omega; grounded bearer b and physical attachment alpha; installed representation m:Omega->M; nonempty finite target alphabet Z; common nonempty legal plan set A0; own-target law Q:Omega x A0->Delta(Z); installed predictor d:M x A0->Delta(Z), error sup TV(d(m(omega),a),Q(omega,a)); optional separately specified installed causal use.",
+      "scope": "Restricted predictive functional model, not a universal semantic or phenomenal self definition. Grounding is an independent premise, not inferred from accuracy, correlation or naming. Coordinate renaming transports b/alpha/ports/targets together; physical sensor reassignment changes the model. Erroneous self-models are allowed. Common legal plans and fixed horizons are required. For decoder-existence mathematics, arbitrary abstract rows are permitted; installation/resources remain separate. No experience-existence gate.",
+      "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md §3.2",
+      "status": "EXPLICIT_MODEL_DEFINITION_WITH_OPEN_PHYSICAL_SEMANTIC_GROUNDING"
+    },
+    {
+      "id": "R146:SYMMETRY_SETUP",
+      "kind": "MODEL_PREMISE",
+      "label": "Uncentered selector versus a family indexed by centers",
+      "statement": "Finite nonempty candidate family B(W), invariant under automorphism group Gamma of W; each candidate is moved by at least one group element. A singleton selector is deterministic and equivariant and receives only W. A centered reference family instead receives P in B(W) as an argument.",
+      "scope": "No fixed candidate in the declared candidate domain. Extra labels, realized seeds, asymmetry or distinguished centers change the available structure. Candidate tokens need actual grounding for a physical application. Taking a center as argument is explicitly not deriving it from W.",
+      "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md Proposition 1",
+      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE"
+    },
+    {
+      "id": "R146:CENTERED_REFERENCE",
+      "kind": "THEOREM_APPLICATION",
+      "label": "No uncentered singleton does not prevent equivariant local reference",
+      "statement": "Under SYMMETRY_SETUP there is no equivariant singleton selector, while iota_W(P)=P is an equivariant family. Therefore that selector obstruction does not imply an obstruction to every centered reference relation.",
+      "scope": "Elementary application of A orbit lemma and identity-map covariance, not a new symmetry theorem or historical indexicality claim. The identity map itself does not install a self-model or establish a unique phenomenal subject.",
+      "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md Proposition 1",
+      "status": "MANUAL_CONDITIONAL_PASS_CLASSICAL_APPLICATION"
+    },
+    {
+      "id": "R146:DUPLICATE_SETUP",
+      "kind": "MODEL",
+      "label": "Locally attached XOR prediction and separately hidden external identity",
+      "statement": "n>=2 identical cells z_i in {0,1}, local inputs a_i, update z_i prime=z_i XOR a_i, installed local sensor m_i=z_i and predictor delta_(m_i XOR a_i). In a separate identification protocol, external label B is uniform over n cells and independent of complete available history H and private seed R; guesses are labels. For a two-coordinate witness, independent external bit c and separate task/predictor branches optionally complement their correct outputs.",
+      "scope": "Finite exact model; no empirical or complete-ontic realization claim. Cell permutations transport attachments together. External-label protocol excludes every label-correlated signal/history; local-prediction protocol retains its local sensor. The four-pair witness fixes independent task and prediction ports/resources and concerns external accuracy and selected prediction error only.",
+      "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md §§4.2-4.3",
+      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE"
+    },
+    {
+      "id": "R146:DUPLICATE_SEPARATION",
+      "kind": "CONSTRUCTIVE_PROPOSITION",
+      "label": "Perfect local self-target prediction can coexist with unidentified external name",
+      "statement": "DUPLICATE_SETUP has zero local prediction error for every state/action and permutation covariance, while every external-label guess has success 1/n under the independent-label protocol. The independent branch example realizes all four pairs external accuracy in {0,1} and self-prediction TV error in {0,1}.",
+      "scope": "Does not equate local target access with external numerical identity knowledge. Does not prove that all intelligence and all self-modeling are independent, that a wrong predictor lacks self organization, or that any model has phenomenal selfhood. XOR and no-information decision principles are classical; the combination is a project-level clarifying example.",
+      "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md §§4.2-4.3",
+      "status": "MANUAL_CONDITIONAL_PASS_PROJECT_EXAMPLE_NO_PRIORITY_CLAIM"
+    },
+    {
+      "id": "R146:SELF_TARGET_SUFFICIENCY",
+      "kind": "THEOREM_APPLICATION",
+      "label": "Self-target information fibers and minimax error radius",
+      "statement": "Under SELF_CONTRACT, an abstract zero-error decoder exists iff Q(omega,a) is constant on each m fiber for every common plan a. Two same-fiber targets at TV distance delta force worst-case error >=delta/2. With unrestricted rows, optimal worst-case error equals the supremum over (m,a) of the smallest TV radius covering that fiber target set.",
+      "scope": "Finite nonempty target alphabet, common legal plans, nonempty domain, exact target laws, arbitrary uncoupled decoder rows. No computability, resource, installation, statistical-estimation or semantic guarantee. Half-diameter is only a lower bound; three distinct point masses have radius 2/3 and diameter 1. Classical factorization/metric application of C:P2_COORD, not new consciousness mathematics.",
+      "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md Proposition 2",
+      "status": "MANUAL_CONDITIONAL_PASS_CLASSICAL_APPLICATION"
     }
   ],
   "rules": [
@@ -4975,6 +5038,44 @@
       "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md §5.2",
       "kind": "CONDITIONAL_INTERPRETATION",
       "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
+    },
+    {
+      "id": "r146_centered",
+      "all_of": [
+        "R146:SYMMETRY_SETUP",
+        "A:ORBIT_LEMMA"
+      ],
+      "conclusion": "R146:CENTERED_REFERENCE",
+      "statement": "Singleton choice needs a fixed point; the diagonal family is equivariant without a global choice.",
+      "proof_sketch": "A singleton selector obeys s(W)=g s(W) for every automorphism, contradicting no fixed candidate. iota_W(gP)=gP=g iota_W(P). These are different domains; no installation is inferred.",
+      "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md Proposition 1",
+      "kind": "DEDUCTIVE_APPLICATION",
+      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
+    },
+    {
+      "id": "r146_duplicate",
+      "all_of": [
+        "R146:DUPLICATE_SETUP"
+      ],
+      "conclusion": "R146:DUPLICATE_SEPARATION",
+      "statement": "Local target access, external identification and another task coordinate have different information requirements.",
+      "proof_sketch": "Substitute m_i=z_i into XOR predictor for exact local law; coordinate permutation commutes with componentwise XOR. Condition on (H,R); uniform independent B makes every guessed label probability 1/n. Independently complement the task answer and local prediction to realize the four coordinate pairs.",
+      "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md §§4.2-4.3",
+      "kind": "DEDUCTIVE_MODEL_EXAMPLE",
+      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
+    },
+    {
+      "id": "r146_self_target",
+      "all_of": [
+        "R146:SELF_CONTRACT",
+        "C:P2_COORD"
+      ],
+      "conclusion": "R146:SELF_TARGET_SUFFICIENCY",
+      "statement": "A family of own-target laws factors through an internal representation exactly when constant on its fibers.",
+      "proof_sketch": "Apply fiber constancy to the law-valued map omega -> (Q(omega,a))_a. The triangle inequality yields delta/2. Unrestricted decoder rows optimize separately; each fiber radius attains its minimum on the finite probability simplex because the supremum-TV objective is Lipschitz. Three point masses have optimal uniform center radius 2/3.",
+      "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md Proposition 2",
+      "kind": "DEDUCTIVE_APPLICATION",
+      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
     }
   ],
   "context_links": [
@@ -5352,6 +5453,31 @@
       "from": "R137:CLOSED_LOOP",
       "to": "R145:TRANSPORT_BLIND",
       "relation": "same scoped-feedback principle; R145 is deterministic specialization, not contradiction"
+    },
+    {
+      "from": "A:SUBJECT_FIREWALL",
+      "to": "R146:DEFINITION_CONTRACT",
+      "relation": "bearer versus exclusive subject; contextual source"
+    },
+    {
+      "from": "A:U3",
+      "to": "R146:SELF_CONTRACT",
+      "relation": "self-model contract is not an experience prerequisite"
+    },
+    {
+      "from": "D:D0",
+      "to": "R146:SELF_CONTRACT",
+      "relation": "grounded bearer antecedent, not deduction of full semantics"
+    },
+    {
+      "from": "D:S1",
+      "to": "R146:SELF_CONTRACT",
+      "relation": "installed functional evidence distinct from valence/fear"
+    },
+    {
+      "from": "R146:DUPLICATE_SEPARATION",
+      "to": "C:P3",
+      "relation": "two-coordinate non-ordering example, not a new proof of general phenomenal claims"
     }
   ],
   "prohibited_inferences_D": [
@@ -5636,5 +5762,17 @@
     "checks": "records/R145_Intervention_Transport_and_Identification_20261007/EXACT_CHECKS.json",
     "novelty": "Explicit project-level construction; quotient, binary sharing and rank principles have prior art. Exact historical priority not certified.",
     "next": "Focused external novelty/relevance review of this exact result and author revision; no automatic unrelated theorem expansion or publication."
+  },
+  "research_R146": {
+    "kind": "DEFINITIONS_FIRST_SELF_MODEL_EXTENSION",
+    "record": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md",
+    "pdf": "records/R146_Experience_Intelligence_and_Self_20261007/output/pdf/UCT_Experience_Intelligence_Self_v0_1.pdf",
+    "review": "records/R146_Experience_Intelligence_and_Self_20261007/SOURCE_AND_CONTRIBUTION_AUDIT.md",
+    "proof_ledger": "records/R146_Experience_Intelligence_and_Self_20261007/PROOF_LEDGER.md",
+    "new_nodes": 7,
+    "new_rules": 3,
+    "priority": "User reaffirms exact experience/intelligence/self definitions and thought experiments; supersedes R145 control-focused queue.",
+    "publication": "Conceptual/methodological candidate and foundation; original-results submission not justified as a major breakthrough. Classical antecedents explicit.",
+    "next": "Grounded self-reference versus equally accurate other-models in a specified implementation class; compare direct semantic/self-model antecedents before further claims. No automatic control-theorem expansion or experiments."
   }
 }

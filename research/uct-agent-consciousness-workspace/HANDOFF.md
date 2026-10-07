@@ -1,17 +1,17 @@
-# UCT 交接 - R145：干预对应不等于实现识别
+# UCT 交接 - R146：回到体验、智能与自我的精确定义
 
-2026-10-07；父提交 2d27c0b1848d3a3f005c85325a0c6533004d82dd。仓库 thechurchofagi/trinity-accord，分支 uct-agent-consciousness-workspace。
+2026-10-07；父提交 2ce8102966e935f508a01eada8a5db7294af02f0；仓库 thechurchofagi/trinity-accord，分支 uct-agent-consciousness-workspace。
 
-用户最新要求继续完善直到形成可以发论文的成果，已授权聚焦理论推进与改稿；不等于要求现在公开发表。上一轮判断R144与A/C重叠过高，本轮改成一个具体问题和构造，而非重新规划。
+最新用户要求：判断发表价值，不忘精确定义意识/体验/智能/自我/组织，保留思想实验，并继续形成真正重要的贡献。此方向覆盖 R145 控制识别优先队列。无自动发布授权。
 
-交付：[英文候选稿v0.2](records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md)、[PDF](records/R145_Intervention_Transport_and_Identification_20261007/output/pdf/UCT_Intervention_Transport_v0_2.pdf)、[中文说明](records/R145_Intervention_Transport_and_Identification_20261007/REVIEW_ZH.md)、[贡献与反对意见审查](records/R145_Intervention_Transport_and_Identification_20261007/CONTRIBUTION_AND_REVIEW.md)、[全量证明台账](records/R145_Intervention_Transport_and_Identification_20261007/PROOF_LEDGER.md)、[精确脚本](records/R145_Intervention_Transport_and_Identification_20261007/verify_exact.py)。
+完成：[英文定义主稿](records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md)、[PDF](records/R146_Experience_Intelligence_and_Self_20261007/output/pdf/UCT_Experience_Intelligence_Self_v0_1.pdf)、[中文审查](records/R146_Experience_Intelligence_and_Self_20261007/REVIEW_ZH.md)、[来源与贡献审核](records/R146_Experience_Intelligence_and_Self_20261007/SOURCE_AND_CONTRIBUTION_AUDIT.md)、[当前全量台账](records/R146_Experience_Intelligence_and_Self_20261007/PROOF_LEDGER.md)、[精确核查](records/R146_Experience_Intelligence_and_Self_20261007/EXACT_CHECKS.json)。四篇源文不改。
 
-主要结果：固定参数k的双寄存器T^k_u(x,y)=(y+k,x+u+k)均实现pi=x+y的同一逻辑累积器。所有状态可达，每位影响输出，更新跨寄存器；任意共同可下降干预（含全部独立逐位翻转）下的自适应逻辑反馈律相同。固定标签下非同构；零/非零指向状态自环区分不靠字母表标签。一拍后局部复位可完整识别k；一般仿射试验给矩阵秩识别条件。两拍端点动态则完全相同。
+图 R146-v1.0：343节点164规则。新增7节点3规则，旧336/161完整保留。自我模型规范补实际承担者、连接、目标律、内部表征、安装的预测/使用、误差；这不是普遍语义或主观自我定义。自我模型不成为 U1 的体验门槛。错误模型仍允许，准确他者预测不自动成为自身预测。
 
-图R145-v1.0：336节点161规则；8节点4规则新增，旧节点/规则和四篇源文未改。旧R137台账作为历史保留，当前全量入口改为R145；新证明在论文§§2–5。数学身份、全可达、产品自动机闭合、仿射判据/秩经精确核查。有限枚举不取代一般证明。
+两项命题：无中心单一选择受对称性阻碍，不阻止各中心的协变自指；同型复制体能精确预测自身局部位，但独立外部编号只可1/n猜中。自身目标的信息充分性应用 C 的纤维判据；两目标距离delta给误差下界delta/2，一般精确值为纤维最小包围半径。n=2..5置换/更新、独立编号、四组能力/误差以及4096纤维模型核查通过。不是实证实验或主观意识测试。
 
-必须保留限制：n>1为n组耦合对，不声称全局强连通；固定标签的pairwise强结论不可冒充任意重命名；C1解释必须另加实际构成性桥；命名测量端口不自动构成实际组织；宏观实际过程不从商坐标自动产生。未证明意识量/效价/恐惧，未闭合biology–AI T2。
+发表判断：已完成有实质内容的概念/方法候选稿和更强共同基础；尚不足以宣称重大突破或第五篇原创结果稿已经值得投稿。Legg-Hutter、Kleiner、Perry、Metzinger 已有直接先例；Metzinger 2008 原文后续取得并审读选定部分，不能沿用失败时的“未读”状态。A/C 重叠透明保留。思想实验仍是正文论证的组成部分。
 
-外部近邻已核对：Kanai/Ma2026明确内部机制实现；Li等2025识别定理的平滑可逆观测/干预前提与本模型不同；商映射、XOR分担、矩阵秩均非原创。当前是具体项目增量+理论方法候选稿，不能承诺历史优先权或期刊接收。下一步围绕精确构造的新颖性和解释意义做聚焦审核，不扩展不相关玩具定理。R144稿保留。未独立同行评审，作者未最终逐句批准。
+下一项重要理论目标：自身指称如何从实际组织/实现关系中得到，而非仅把预定承担者写入定义；如何区别同样准确的他者模型并容纳错误自我模型。先检验直接语义/自我模型先例，避免重复声明经典因果/纤维结论。不要自动堆控制论小例子或实验。继续研究不保证重大突破，不能为了满足目标而虚报。
 
-保存：HEAD lease、force=false、[skip ci]、blob回读。不创建DOI/release/PR/CI。[R144交接](HANDOFF_THROUGH_R144.md)。
+保存按 HEAD lease、force=false、[skip ci]，远端逐blob核对。历史交接：[R145](HANDOFF_THROUGH_R145.md)。T2与valence保持OPEN；无新DOI/release/PR/CI。

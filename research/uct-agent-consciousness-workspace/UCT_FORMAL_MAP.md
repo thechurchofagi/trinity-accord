@@ -1,12 +1,22 @@
-# UCT A–B–C–D unified formal map — R145
+# UCT A–B–C–D unified formal map — R146
 
-**Canonical working map, revision R145-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137 and R145. It does not supersede or edit the published papers.
+**Canonical working map, revision R146-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137 and R145–R146. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
 
-## R145 current result - transported interventions need not identify realizers
+## R146 current priority - precise definitions of experience, intelligence and self
+
+[English definition-first draft](records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md), [PDF](records/R146_Experience_Intelligence_and_Self_20261007/output/pdf/UCT_Experience_Intelligence_Self_v0_1.pdf), [Chinese assessment](records/R146_Experience_Intelligence_and_Self_20261007/REVIEW_ZH.md), [source/contribution audit](records/R146_Experience_Intelligence_and_Self_20261007/SOURCE_AND_CONTRIBUTION_AUDIT.md), [full proof ledger](records/R146_Experience_Intelligence_and_Self_20261007/PROOF_LEDGER.md), [exact checks](records/R146_Experience_Intelligence_and_Self_20261007/EXACT_CHECKS.json).
+
+The user's renewed priority supersedes R145's intervention-focused queue. A already defines the identity framework and C the fixed-contract capability profile; A's self-model account was mainly verbal and D treated continuation control. R146 adds a target-relative self-model contract: grounded bearer and attachment, target law, installed representation/predictor/use, and error. Conceptual meaning and phenomenal ownership remain distinct open bridges. No new experience gate is added.
+
+The centered-reference proposition applies A's orbit lemma: absence of an uncentered singleton selector does not preclude the equivariant family P->P. The duplicate example allows exact local self-state prediction with external-name accuracy 1/n under explicitly independent naming information. C's fiber theorem yields exact selected self-target sufficiency and a TV minimax-radius expression; delta/2 is only a pairwise lower bound. These are classical applications and a new project specification, not historically new consciousness mathematics.
+
+**343 nodes / 164 rules**, with 7 new nodes and 3 conjunctive rules; every prior node/rule and four source files are unchanged. All-ancestors/formation, abacus/calculator, human computer and duplicate/branching cases remain in the body. Direct Legg-Hutter, Kleiner, Perry and selected Metzinger source comparisons narrow originality claims. This is a substantive conceptual/methodological draft and stronger foundation, not yet a major-breakthrough original-results submission. Next substantive question: can own-reference versus equally accurate other-reference be grounded in a specified implementation class without merely stipulating the referent? Do not automatically resume unrelated control lemmas or experiments.
+
+## R145 historical result - transported interventions need not identify realizers
 
 [Focused manuscript v0.2](records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md), [PDF](records/R145_Intervention_Transport_and_Identification_20261007/output/pdf/UCT_Intervention_Transport_v0_2.pdf), [full updated proof ledger](records/R145_Intervention_Transport_and_Identification_20261007/PROOF_LEDGER.md), [contribution and adversarial review](records/R145_Intervention_Transport_and_Identification_20261007/CONTRIBUTION_AND_REVIEW.md), [exact verification](records/R145_Intervention_Transport_and_Identification_20261007/EXACT_CHECKS.json).
 
@@ -85,7 +95,7 @@ A's 78-node graph and B's historical 43-node map are preserved as sources. B's o
 
 ## 2. How to read an implication
 
-The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **336 nodes and 161 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R145_Intervention_Transport_and_Identification_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
+The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **343 nodes and 164 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R146_Experience_Intelligence_and_Self_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
 
 - All premises inside one rule's **all_of** must hold together.
 - Separate rules concluding the same node are alternative sufficient routes.

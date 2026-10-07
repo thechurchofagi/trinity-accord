@@ -1,0 +1,25 @@
+{
+  "parent": "2ce8102966e935f508a01eada8a5db7294af02f0",
+  "revision": "R146-v1.0",
+  "nodes": 343,
+  "rules": 164,
+  "checks": {
+    "old_nodes_preserved": true,
+    "old_rules_preserved": true,
+    "source_versions_preserved": true,
+    "old_context_links_preserved": true,
+    "four_source_sha256": true,
+    "unique_ids": true,
+    "references": true,
+    "acyclic_bookkeeping_only": true,
+    "all_fields_exported": true,
+    "exact_examples_pass": true,
+    "pdf_text_no_replacement_char": true,
+    "pdf_has_core_sections": true,
+    "new_local_links_resolve": true
+  },
+  "pdf_pages": 12,
+  "pdf_sha256": "0c60104a06d80361911b99c356cbc04c3e9ce655dad5dd141e6806a23444af63",
+  "limits": "Manual conditional proofs plus small exact examples and graph/source checks; not a proof assistant, empirical validation, independent review or publication certification.",
+  "visual_review": "All 12 final pages inspected in three rendered contact sheets; no clipping/overlap found."
+}

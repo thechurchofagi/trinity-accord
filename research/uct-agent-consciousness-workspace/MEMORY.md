@@ -1,8 +1,20 @@
 # UCT 项目长期工作记忆
 
-更新时间：2026-10-07；当前形式化基础：**R145-v1.0**。
+更新时间：2026-10-07；当前形式化基础：**R146-v1.0**。
 
-## R145 最新结果：可运输干预与实现识别分开
+## R146 最新最高优先级：精确定义体验、智能、自我
+
+用户再次提醒初心，要求判断发表价值并继续实质研究。当前主稿为[Experience, Intelligence, and Self](records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md)、[PDF](records/R146_Experience_Intelligence_and_Self_20261007/output/pdf/UCT_Experience_Intelligence_Self_v0_1.pdf)、[中文审查](records/R146_Experience_Intelligence_and_Self_20261007/REVIEW_ZH.md)。这条方向覆盖 R145 的“只精修干预识别稿”，后者保留为辅助技术结果。
+
+已核实：A 已有组织、C1体验身份和基础意识；C 已有任务条件下的能力向量；A 对自我模型主要为文字刻画，D 为当前执行体延续控制。本轮补充承担者/实际连接/自身目标/内部表征/安装预测及使用/误差的统一规范。概念我和主观所有感仍需语义/现象桥，不能说所有自我问题已被定义解决。
+
+新图 **R146-v1.0：343节点164规则**，7节点3规则；全量[台账](records/R146_Experience_Intelligence_and_Self_20261007/PROOF_LEDGER.md)。中心化自指与无中心唯一选择不同；局部自身预测与外部编号识别不同。精确自我目标恢复用 C 已有纤维定理；TV 最坏误差用纤维包围半径，半直径只是下界。不要把经典数学改名当突破。四组思想实验留正文，祖先动机不是 C1 的独立证明。
+
+查新已读 Legg-Hutter/Kleiner/Perry 和 Metzinger 2008 原文选定段落，已有先例必须承认。目前值得作为概念/方法稿继续完善并作为共同基础，不足以宣称重大突破或独立原创结果稿已具备投稿条件。持续研究不保证重大突破，更不能虚报。下一项实质问题是：在明确实现类中，能否不靠预先命名而确定自身指称，并区别同样准确的他者模型，同时容纳错误自我模型？先查直接先例；若只是纤维定理换名，就放弃作为原创卖点。
+
+用户授权理论推进与保存，不自动启动实验或发表。此段优先于所有历史队列。项目记忆是本文件，不声称修改隐藏账户记忆。
+
+## R145 历史结果：可运输干预与实现识别分开
 
 用户要求继续完善到形成可发论文成果。本轮已完成[聚焦英文稿v0.2](records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md)、[PDF](records/R145_Intervention_Transport_and_Identification_20261007/output/pdf/UCT_Intervention_Transport_v0_2.pdf)、[贡献/反对意见审查](records/R145_Intervention_Transport_and_Identification_20261007/CONTRIBUTION_AND_REVIEW.md)。不要把R144综合稿误说成原创已足够；本轮有具体新构造，但历史优先权仍未认证。
 
@@ -60,7 +72,7 @@
 
 下一步精修初稿并判断独立整合稿或技术附录；不为凑原创性默认重启有限记忆等支线。有限执行对应不证明完整组织/体验同一。同一助手复核不等于独立审稿。
 
-## 当前最高优先级 — 2026-10-07 用户收束指令
+## 历史 R138 收束指令（当前以 R146 为准）
 
 用户认为推导数量已多，要求严格定义意识、体验、智能、组织、组织结构，并筛选少数主定理作为下一篇论文主轴。当前执行入口：[R138 定义与论文主轴](records/R138_Definitions_and_Theorem_Consolidation_20261007/DEFINITION_CONTRACT_AND_PAPER_SPINE.md)、[三条证明](records/R138_Definitions_and_Theorem_Consolidation_20261007/PROOF_SPINE.md)。
 
