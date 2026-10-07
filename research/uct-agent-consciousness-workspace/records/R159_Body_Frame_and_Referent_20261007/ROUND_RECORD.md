@@ -1,0 +1,11 @@
+# ROUND_RECORD — R159
+
+7 October 2026. Fresh remote head b536254cff1472cf43657323b9a6046092028e01; graph R158-v1.0, 414/199; all eight local entrypoint Git blobs match that head. Fixed master handoff read at version 2. R158 storage receipt confirms both copies and the restored 406-file working set; no missing previous save is assumed.
+
+1. **User goal:** explain experience, intelligence and self from actual organization; make a substantive, auditable continuation preserving the founding commitments and both durable copies.
+2. **One concrete question:** in the declared moving-rubber-hand domain, can a body-frame attribution refer to a nonmember without moving the actual bearer, and what distinguishes an ownership-oriented candidate from an action-source-oriented candidate?
+3. **Nodes/sources:** A:C1/U1/U3, B:BAC, R146:SELF_CONTRACT, R155:MINENESS_OBLIGATION, R156:SNAPSHOT_USE_LIMIT, R157:COORDINATE_TRANSPORT and R158 target/profile. Pinned UCT I v1.2 §§8.11–8.14,14.7–14.10; R158 §§2,5–8. Recheck Kalckert/Ehrsson 2012 experiment 3 methods/results as the actual protocol domain; primary prior-art scope must remain explicit.
+4. **Proposed addition:** specify distinct actual-bearer anchoring, represented referent binding and commanded consequence routes; compare two fixed ownership interpretations, declare admissible remapping/active-passive interventions and confounds; give a positive erroneous-attribution explanation conditional on grounding and target bridge. No Bayesian repeat, cortical-owner identification, basal gate or report-to-experience proof.
+5. **Deliverables:** English note with exact domain/bridge contracts, conditional proof cards, counterexamples and failure ledger, map update and direction audit, bounded checks only where they inspect a precise claim, Chinese handoff; expected-SHA storage checkpoint and fixed Library master plus recovery increment.
+
+Topic direction check: PASS. The target is bodily mineness inside experience; complete actual organization, finite functional architecture, actual membership, internal attribution, particular feeling, belief and report remain separate. No novelty is claimed for body-frame models or ownership/agency dissociation.
