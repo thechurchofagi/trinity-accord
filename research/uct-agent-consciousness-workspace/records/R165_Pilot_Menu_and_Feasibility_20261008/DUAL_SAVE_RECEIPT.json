@@ -1,0 +1,59 @@
+{
+  "schema": "UCT_R165_DUAL_SAVE_RECEIPT/v1",
+  "round": "R165",
+  "date": "2026-10-08",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "start_head": "d279782dd4df05ef913a2413eacb5bd116b327fa",
+    "research_commit": "b4846a59c3cea8a254875d7df4e3bdd165533b75",
+    "research_tree": "2061ea4e92a5dfc764e6e4a53b64937a39f4825a",
+    "expected_sha_fast_forward": true,
+    "remote_research_readback": true,
+    "receipt_commit_parent": "b4846a59c3cea8a254875d7df4e3bdd165533b75",
+    "receipt_commit": "POPULATED_BY_REMOTE_COMMIT_RESULT"
+  },
+  "formal_state": {
+    "revision": "R165-v1.0",
+    "nodes": 446,
+    "rules": 215,
+    "context_links": 117,
+    "graph_sha256": "3911f7bc9720c3568b81ab30638bac7f49bb596679ab1bf13e1c017b3c3fa1ba",
+    "exact_checks_sha256": "4ae697d392c818785a08783285e5138e51e745c1c644c9994236b89aaa11bb9d",
+    "validation_sha256": "d4ce191f76640898a6c2f6ea212390dec3a90f8db513001880263e120ad02b6f",
+    "validation_status": "PASS",
+    "validation_checks": 19
+  },
+  "fixed_handoff": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000f554820ebcb86ae06ab222e6",
+    "version": 9,
+    "bytes": 47375,
+    "sha256": "9b09322cfdc369fdf435fb8b82ade95e4a80dea80b5a0bf380a322651ebcb87a",
+    "exact_byte_readback": true
+  },
+  "cumulative_increment": {
+    "library_file_id": "libfile_e71fc3c562b481919c8e8e34afdeb5d8",
+    "file_id": "file_0000000020a481f686919e318c9e5077",
+    "version": 0,
+    "filename": "UCT_R157_R165_Cumulative_Increment_20261008.zip",
+    "bytes": 658981,
+    "sha256": "7ec530339f221f26453af6699633635d0792169c01d36dca674e4c89c7cce008",
+    "payload_members": 142,
+    "zip_members": 143,
+    "exact_byte_readback": true,
+    "restore_files_excluding_current_increment_manifest": 518,
+    "restore_member_hashes": "PASS",
+    "scope": "Cumulative increment relative to exact R156 baseline; not a standalone full backup, repository or Git history."
+  },
+  "verification_file": {
+    "library_file_id": "libfile_bfc11a0b15a0819199dc8a97592a248a",
+    "file_id": "file_00000000cd4481f69587149709bd9b9d",
+    "version": 0,
+    "bytes": 2624,
+    "sha256": "f761de8a0bb092a8d81c90f3b93b38251f3e16716a9290e6b098f358ab8aa579",
+    "exact_byte_readback": true
+  },
+  "next_question": "What independently specified organization-level evidence would make a valid R161 physical role profile support an actually installed body-frame relation inside one token, rather than merely a population effect, without using ownership report as its definition or turning that relation into a basal-experience gate?",
+  "status": "DUAL_SAVE_VERIFIED_BEFORE_RECEIPT_COMMIT"
+}

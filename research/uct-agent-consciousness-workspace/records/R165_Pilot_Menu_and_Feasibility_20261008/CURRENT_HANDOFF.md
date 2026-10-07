@@ -37,4 +37,6 @@ Retain actual token, complete organization, finite view, abstract model, physica
 
 ## Storage state
 
-Populate this section only after the GitHub research commit, cumulative R157–R165 increment, fixed-handoff update and receipt-bearing storage commit have all been read back. Until then the local worktree is a recoverable working copy, not verified dual storage.
+The validated research tree is remotely verified at commit `b4846a59c3cea8a254875d7df4e3bdd165533b75`, tree `2061ea4e92a5dfc764e6e4a53b64937a39f4825a`. The fixed handoff retained identity `libfile_4175a81748fc819187fa8f5771f056fa` and advanced from version 8 to 9 with exact byte readback (SHA-256 `9b09322cfdc369fdf435fb8b82ade95e4a80dea80b5a0bf380a322651ebcb87a`).
+
+The R157–R165 cumulative increment is `libfile_e71fc3c562b481919c8e8e34afdeb5d8`, SHA-256 `7ec530339f221f26453af6699633635d0792169c01d36dca674e4c89c7cce008`, 658981 bytes, 142 payload files plus manifest. It is relative to the exact R156 baseline and is not a standalone full backup. Exact byte readbacks and the 518-file restore probe passed. Verification file: `libfile_bfc11a0b15a0819199dc8a97592a248a`, SHA-256 `f761de8a0bb092a8d81c90f3b93b38251f3e16716a9290e6b098f358ab8aa579`. Fetch the branch before continuing because the receipt-bearing storage commit follows the research commit.
