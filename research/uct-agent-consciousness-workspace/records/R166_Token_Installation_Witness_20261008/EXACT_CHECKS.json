@@ -1,0 +1,57 @@
+{
+  "schema": "UCT_R166_EXACT_CHECKS/v1",
+  "population_token_obstruction": {
+    "nonconstant_vectors_checked": 114,
+    "named_token_swap_witnesses": 114
+  },
+  "finite_trace_obstruction": {
+    "indistinguishable_natural_or_anchor_cases": 6,
+    "mediator_discriminations": [
+      {
+        "b": 0,
+        "do_k": 1,
+        "path": [
+          0,
+          1,
+          1
+        ],
+        "bypass": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "b": 1,
+        "do_k": 0,
+        "path": [
+          1,
+          0,
+          0
+        ],
+        "bypass": [
+          1,
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "installation_contract_conjunction": {
+    "boolean_assignments": 64,
+    "supporting_assignments": 1
+  },
+  "interpretation": [
+    "Permutation-invariant population summaries do not identify a named token property.",
+    "Natural and anchor-intervention traces do not distinguish an operative k-mediated path from a bypass.",
+    "Mediator intervention distinguishes the two declared models, but only relative to their variables and intervention semantics.",
+    "The witness contract is an all-of sufficient package; a missing clause never defaults to no experience."
+  ],
+  "claim_limits": {
+    "actual_data": false,
+    "actual_apparatus": false,
+    "complete_mechanism_identified": false,
+    "B_min_validated": false,
+    "basal_experience_gate": false
+  }
+}
