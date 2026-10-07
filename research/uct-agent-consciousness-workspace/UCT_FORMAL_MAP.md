@@ -1,10 +1,18 @@
-# UCT A–B–C–D unified formal map — R140
+# UCT A–B–C–D unified formal map — R141
 
-**Canonical working map, revision R140-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
+**Canonical working map, revision R141-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
+
+## R141 current argument review
+
+[Argument audit and selected existing proofs](records/R141_Organizational_Formation_Argument_20261007/ARGUMENT_AUDIT.md), [Chinese plan](records/R141_Organizational_Formation_Argument_20261007/PLAN_AND_REVIEW_ZH.md).
+
+Retain the All-Ancestors-Survive thought experiment and expand the formation history of any proposed gate organization. A:E1/E2/E3 remain distinct routes; gradual formation does not supply A:CONT_BINARY_E. A §8.3's existing smooth-onset countermodel survives this proposed strengthening. B:MODEL19/B:SPECTRAL illustrate why cycle existence, gain crossings and nonlinear stability must be distinguished. C's matched-storage mechanism already covers much of the proposed record/use question.
+
+This is an editorial argument/overlap audit, not a new theorem or manuscript. All 328 nodes and 157 rules remain unchanged; R140's companion disposition stands. Thought-experiment motivation is not a deductive edge. Next: one original-source, scope-faithful recurrent-processing comparison. The current plan supersedes historical expansion/drafting queues below.
 
 ## Current companion — R140
 

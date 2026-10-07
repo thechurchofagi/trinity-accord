@@ -239,3 +239,13 @@ No new nodes or rules; 328/157 preserved. [Text](records/R140_Formal_Companion_2
 - F74: Source-preserving editorial consistency and PDF inspection do not establish C1, physical completeness or independent peer review.
 
 The definition/consolidation task is complete. Additional work must name a specific unresolved claim and prospective nonredundant increment; control and empirical expansions are not restarted automatically.
+
+## R141 — Organizational-formation argument review
+
+
+[Argument audit and selected existing proofs](records/R141_Organizational_Formation_Argument_20261007/ARGUMENT_AUDIT.md), [Chinese plan](records/R141_Organizational_Formation_Argument_20261007/PLAN_AND_REVIEW_ZH.md).
+
+Retain the All-Ancestors-Survive thought experiment and expand the formation history of any proposed gate organization. A:E1/E2/E3 remain distinct routes; gradual formation does not supply A:CONT_BINARY_E. A §8.3's existing smooth-onset countermodel survives this proposed strengthening. B:MODEL19/B:SPECTRAL illustrate why cycle existence, gain crossings and nonlinear stability must be distinguished. C's matched-storage mechanism already covers much of the proposed record/use question.
+
+This is an editorial argument/overlap audit, not a new theorem or manuscript. All 328 nodes and 157 rules remain unchanged; R140's companion disposition stands. Thought-experiment motivation is not a deductive edge. Next: one original-source, scope-faithful recurrent-processing comparison. The current plan supersedes historical expansion/drafting queues below.
+
