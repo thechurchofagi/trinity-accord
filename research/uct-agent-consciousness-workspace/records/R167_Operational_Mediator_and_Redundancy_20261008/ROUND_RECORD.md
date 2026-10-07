@@ -1,0 +1,11 @@
+# R167 ROUND RECORD — Operational mediator, redundancy, and compensation
+
+1. **User goal.** Continue the UCT experience–intelligence–self research from the latest verified state, make one substantive advance on bodily/action-related mineness, audit the formal map, and preserve recoverable copies without turning publication or storage metrics into the research goal.
+2. **One concrete unresolved question.** How can R166 witnesses W2–W5 be instantiated in one ethically admissible, token-preserving anchor–mediator–consumer architecture that explicitly separates primary mediation, redundant bypass, and time-dependent compensation, while keeping ownership reports out of the physical-role definition?
+3. **Relevant nodes and fixed sources.** `R157:FRAME_RELATION_IS_DEFINABLE`, `R159:BODY_FRAME_RELATION_SCHEMA`, `R161:INTERVENTION_POLICY_OBJECT`, `R166:TOKEN_INSTALLATION_WITNESS_CONTRACT`, `R166:WITNESSED_FRAME_INSTALLATION`, `C1`, `B_min`; the fixed R157, R159, R161, and R166 notes, maps, ledgers, and exact checks. R155's finite attribution model is background only and will not be recomputed.
+4. **Planned addition or correction.** Define a same-episode operational mediator architecture; prove an exact contextual redundancy criterion and two false-negative obstructions (single-cut redundancy and delayed compensation); define closure-relative triage; state precisely which R166 witness obligations this can discharge and which semantic/neural claims remain open.
+5. **Deliverable.** An English research note, executable exhaustive checks with machine-readable results, stable formal-map nodes/rules/context links, proof/source/gap ledgers, Chinese handoff, validation outputs, and verified GitHub plus persistent-workspace recovery records.
+
+## Direction check at selection
+
+The selected question begins with an actual organized process and tests whether a concrete relation is physically installed and used. It does not add report, language, introspection, self-model, integration, recurrence, prediction accuracy, or continuation control as a threshold for basal experience. It preserves C1 as a consciousness-specific explanatory axiom, treats familiar bodily mineness as a further bridge problem, allows overlapping/nested processes, and does not seek a unique extra owner.

@@ -1,0 +1,111 @@
+{
+  "schema": "UCT_R167_EXACT_CHECKS/v1",
+  "contextual_redundancy": {
+    "by_backup_count": {
+      "0": {
+        "declared_backups": 0,
+        "contexts": 1,
+        "boolean_functions": 4,
+        "contextually_relevant": 2,
+        "contextually_indispensable": 2
+      },
+      "1": {
+        "declared_backups": 1,
+        "contexts": 2,
+        "boolean_functions": 16,
+        "contextually_relevant": 12,
+        "contextually_indispensable": 4
+      },
+      "2": {
+        "declared_backups": 2,
+        "contexts": 4,
+        "boolean_functions": 256,
+        "contextually_relevant": 240,
+        "contextually_indispensable": 16
+      },
+      "3": {
+        "declared_backups": 3,
+        "contexts": 8,
+        "boolean_functions": 65536,
+        "contextually_relevant": 65280,
+        "contextually_indispensable": 256
+      }
+    },
+    "functions_checked": 65812
+  },
+  "single_cut_false_negative": {
+    "model": "u = k OR z",
+    "tested_only_with_backup_on": [
+      1,
+      1
+    ],
+    "tested_with_backup_off": [
+      1,
+      0
+    ],
+    "single_context_null_is_false_negative": true
+  },
+  "compensation_timing_obstruction": {
+    "dynamics": "u_t=k_t OR z_t; z_(t+1)=z_t OR cut_t",
+    "baseline": {
+      "k": 1,
+      "z": 0,
+      "u": 1
+    },
+    "cut_pre_adaptation": {
+      "k": 0,
+      "z": 0,
+      "u": 0
+    },
+    "cut_post_compensation": {
+      "k": 0,
+      "z": 1,
+      "u": 1
+    },
+    "late_endpoint_masks_initial_contribution": true
+  },
+  "status_priority": {
+    "boolean_assignments": 128,
+    "counts": {
+      "CANDIDATE_REFUTED_RELATIVE_TO_CLOSURE": 1,
+      "INVALID_PROTOCOL": 112,
+      "PRIMARY_USE_SUPPORTED_RELATIVE_TO_CLOSURE": 8,
+      "UNRESOLVED": 7
+    },
+    "priority": [
+      "invalidity",
+      "support",
+      "closure-qualified refutation",
+      "unresolved"
+    ]
+  },
+  "joint_satisfiability_witness": {
+    "one_bearer_lineage": true,
+    "physical_anchor": true,
+    "live_mediator_read": true,
+    "valid_anchor_pulse": true,
+    "valid_mediator_pulse": true,
+    "declared_backup_contexts_tested": true,
+    "pre_compensation_effect": true,
+    "report_used_as_physical_definition": false,
+    "c1_derived": false,
+    "b_min_validated": false
+  },
+  "interpretation": [
+    "For a declared finite Boolean consumer, contextual relevance is exactly existence of a backup context with a nonzero controlled contrast.",
+    "A single cut with an active redundant backup can be a false negative.",
+    "A late endpoint after compensation can match baseline despite an immediate causal contribution.",
+    "Refutation is permitted only relative to declared intervention closure and adequate sensitivity."
+  ],
+  "claim_limits": {
+    "actual_data": false,
+    "actual_apparatus": false,
+    "ethics_approval": false,
+    "hidden_routes_excluded": false,
+    "neural_mediator_identified": false,
+    "complete_organization_identified": false,
+    "C1_derived": false,
+    "B_min_validated": false,
+    "basal_experience_gate": false
+  }
+}
