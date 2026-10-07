@@ -1,0 +1,79 @@
+{
+  "schema": "UCT_DUAL_SAVE_RECEIPT/v1",
+  "round": "R159",
+  "saved_at_utc": "2026-10-07T14:31:44.626399+00:00",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "start_head": "b536254cff1472cf43657323b9a6046092028e01",
+    "first_substantive_checkpoint": "f612babf8e536ddffe26632a3a6bad2eb3fa7e26",
+    "research_commit": "bb238573287c3c1f24656fd5ea9ccd13f56f292d",
+    "research_files_verified": 21,
+    "expected_sha_fast_forward": true,
+    "remote_blob_hashes": "PASS"
+  },
+  "workspace": {
+    "master_handoff": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_00000000ab2881f5a5b7e04873097cb0",
+      "version": 3,
+      "identity_preserved": true,
+      "filename": "UCT_Hourly_Research_Master_Handoff.md",
+      "bytes": 15809,
+      "sha256": "4420ebfbe5da2b558e842602284f1d6234a3f9ef6fe96dad48cb14d1a450fbe2",
+      "byte_readback": "PASS"
+    },
+    "cumulative_increment": {
+      "library_file_id": "libfile_99c25fa067188191bc3758f19a675db7",
+      "file_id": "file_00000000d3e8820c82e2c297d373fbe1",
+      "version": 0,
+      "filename": "UCT_R157_R159_Cumulative_Increment_20261007.zip",
+      "sha256": "bb08504f47df19a060cc149d284898c5b9b3a4d21ba8875a65cb1ae0646b4ad6",
+      "bytes": 373866,
+      "members": 45,
+      "payload_files": 44,
+      "scope": "Cumulative increment relative to exact recovered R156 working-set base; not full working-set, repository or history backup.",
+      "research_commit": "bb238573287c3c1f24656fd5ea9ccd13f56f292d",
+      "byte_readback": "PASS",
+      "crc_and_member_hashes": "PASS"
+    }
+  },
+  "required_baseline": {
+    "library_file_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
+    "filename": "UCT_R156_Working_Set_20261007.zip",
+    "bytes": 3493643,
+    "sha256": "95cc3ea1ec45eb273531c25525edcb7f8e6f2088c650a39b97d24817704ec40a",
+    "working_set_files": 384
+  },
+  "restore_probe": {
+    "status": "PASS",
+    "restored_working_set_files": 420,
+    "exact_file_set_and_hash_match": true,
+    "scope": "Recovered working set only; not whole repository/history; post-save R159 receipt excluded."
+  },
+  "save_failure_and_recovery": "One exec-server transport disconnection before any final blob upload. A fresh scratch read succeeded; upload restarted from frozen manifest, every blob SHA checked; no duplicate branch ref update or force push.",
+  "map": {
+    "revision": "R159-v1.0",
+    "nodes": 418,
+    "rules": 200,
+    "new_nodes": 4,
+    "new_rules": 1,
+    "status": "SCOPED_DIRECTION_AND_TYPING_AUDIT_PASS_BRIDGE_OPEN",
+    "empirical_F_witness": false,
+    "global_semantic_proof": false
+  },
+  "unfinished": [
+    "Independent actual body-slot/tool-slot discriminant",
+    "Complete actual realization and admissible perturbation package",
+    "Fixed selected ownership interpretation and fallible measurement including nonreporters"
+  ],
+  "next": "Specify independent body-slot versus external-tool perturbation/readout in fixed human domain, allowing coupling, before using target reports.",
+  "restore": [
+    "Verify/extract exact R156 baseline.",
+    "Overlay all nonmanifest R157–R159 cumulative increment files at research-workspace root.",
+    "Verify all44 payload hashes; recovered set420 files excludes this future receipt.",
+    "Fetch latest GitHub head/master version; retrieve post-save receipt or newer work and reconcile."
+  ],
+  "ongoing_research_complete": false,
+  "history": "Scientific checkpoint files retained; this post-readback receipt is outside the increment, available separately in the remote branch and workspace verification file."
+}
