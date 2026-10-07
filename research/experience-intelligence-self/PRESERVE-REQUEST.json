@@ -3,5 +3,5 @@
   "doi": "10.5281/zenodo.23206492",
   "pdf_sha256": "b4f456014213c5d4f34f41ed2bac8873fd9d90e38398d77daebdb787872b1c1a",
   "purpose": "Upgrade and verify the existing OTS proof, then guarded Arweave upload and anonymous exact-byte readback",
-  "iteration": 1
+  "iteration": 2
 }
