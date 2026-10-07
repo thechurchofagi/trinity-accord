@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R157-v1.0",
+  "revision": "R158-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "7af49dad7491910d3c6aa205fc4f89ba4b1c5134",
+  "base_commit": "d6ee6c53d28d4e6d03822b731307621ab1edad70",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -17622,6 +17622,23 @@
           "F153-17"
         ],
         "machine_formalized": false
+      },
+      "formal_contract_R158": {
+        "amends": "formal_contract_R157 terminology/scope only; historical statement and contract retained",
+        "effective_reading": "The transported selector is a definable relation / tuple support. Do not infer carrier closure, autonomous process or substructure without additional conditions.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§§2,5,6,8"
+        },
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
       }
     },
     {
@@ -17689,6 +17706,23 @@
         "thought_experiments": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §7",
         "open_obligations": [
           "F153-11",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      },
+      "formal_contract_R158": {
+        "amends": "formal_contract_R157 terminology/scope only; historical statement and contract retained",
+        "effective_reading": "Replace the historical word substructure by selected experiential relation / tuple support in the semantic-naming argument. No varying experience of a fixed complete organization is asserted.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§§2,5,6,8"
+        },
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
           "F153-17"
         ],
         "machine_formalized": false
@@ -17788,6 +17822,241 @@
         "premise_routes": [],
         "purpose": "Locate the exact conditional step from actual body-centered organization to an experiential substructure, while keeping mineness semantics and measurement explicit.",
         "thought_experiments": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      },
+      "formal_contract_R158": {
+        "amends": "formal_contract_R157 terminology/scope only; historical statement and contract retained",
+        "effective_reading": "The four-way conjunction is only an unproved joint functional body-use schema; distinguish ownership and agency targets, narrow membership and broad coupling, performed action and available/efficacious routes. Use R158 target profile for current priority.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§§2,5,6,8"
+        },
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R158:TARGET_SPLIT",
+      "kind": "DEFINITION",
+      "label": "Target Split",
+      "statement": "Distinguish actual bearer P/support s from represented candidate c; distinguish actual membership M, coupling C, body-frame binding B, installed use U, intervention-relative efficacy E, internal judgments J, selected felt targets F, beliefs Q and reports R. Undefined membership is not false membership.",
+      "domain": "Declared actual token/candidate domain with typed partial membership and protocol-relative reports.",
+      "scope": "Declared actual token/candidate domain with typed partial membership and protocol-relative reports.",
+      "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §2",
+      "source_lineage": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §2",
+      "status": "DECLARED_TARGET_CONTRACT",
+      "proof": "Typed definitions, with candidate/implementation distinction and intervention convention.",
+      "counterexamples_and_limits": "A model hand and a virtual referent require different membership typing; R is not F.",
+      "formal_contract_R158": {
+        "object_domain": "Declared actual token/candidate domain with typed partial membership and protocol-relative reports.",
+        "quantifiers": "Fixed P,c,I,K per instance; each coordinate has its declared type; no universal F equivalence is asserted.",
+        "bearer_time_signature": "As specified per claim; actual token P, candidate c and interval I never conflated. Abstract K-witnesses are not asserted to be actual organisms.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§2"
+        },
+        "premise_routes": [],
+        "purpose": "Separate bodily ownership and action agency within experience and correct selector closure without adding basal gates.",
+        "thought_experiments": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R158:NECESSITY_WITNESS_SETUP",
+      "kind": "ASSUMPTION_PACKAGE",
+      "label": "Necessity Witness Setup",
+      "statement": "Fix nonempty Omega, total Boolean F and n>=1 total Boolean g_i; define Theta=AND_i g_i. Require jointly an admissible w* in Omega and j in {1,...,n} with F(w*)=1 and g_j(w*)=0. F interpretation is independent of Theta.",
+      "domain": "Classical two-valued scoped domain; actual application additionally requires physical admissibility and independent target evidence.",
+      "scope": "Classical two-valued scoped domain; actual application additionally requires physical admissibility and independent target evidence.",
+      "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T1",
+      "source_lineage": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T1",
+      "status": "DECLARED_CONJUNCTIVE_ASSUMPTIONS",
+      "proof": "A one-element abstract domain with F=1 and g_1=0 is jointly satisfiable; not an actual phenomenal witness.",
+      "counterexamples_and_limits": "Report-only evidence does not establish F_O; undefined predicates require domain repair, not zero fill.",
+      "formal_contract_R158": {
+        "object_domain": "Classical two-valued scoped domain; actual application additionally requires physical admissibility and independent target evidence.",
+        "quantifiers": "For each fixed n,Omega,F,(g_i) satisfying all listed premises, select one declared witness w* and j.",
+        "bearer_time_signature": "As specified per claim; actual token P, candidate c and interval I never conflated. Abstract K-witnesses are not asserted to be actual organisms.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§5 T1"
+        },
+        "premise_routes": [],
+        "purpose": "Separate bodily ownership and action agency within experience and correct selector closure without adding basal gates.",
+        "thought_experiments": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R158:CONJUNCTION_REJECTION",
+      "kind": "CONDITIONAL_LIMIT",
+      "label": "Conjunction Rejection",
+      "statement": "Under NECESSITY_WITNESS_SETUP, not forall w in Omega: F(w)->Theta(w); hence not forall w: F(w)<->Theta(w).",
+      "domain": "Exactly the fixed classical domain and all simultaneous setup premises.",
+      "scope": "Exactly the fixed classical domain and all simultaneous setup premises.",
+      "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T1",
+      "source_lineage": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T1",
+      "status": "MANUAL_CLASSICAL_CONDITIONAL_ARGUMENT",
+      "proof": "g_j(w*)=0 makes Theta(w*)=0; F(w*)=1 falsifies necessity implication and thus biconditional.",
+      "counterexamples_and_limits": "Elementary prior mathematics. Requires an independently warranted target witness and admissibility, not arbitrary gate assignments.",
+      "formal_contract_R158": {
+        "object_domain": "Exactly the fixed classical domain and all simultaneous setup premises.",
+        "quantifiers": "Every setup satisfying all premises; existential counterexample w*; no assertion that any actual F_O witness has been established.",
+        "bearer_time_signature": "As specified per claim; actual token P, candidate c and interval I never conflated. Abstract K-witnesses are not asserted to be actual organisms.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§5 T1"
+        },
+        "premise_routes": [
+          {
+            "rule": "r158_conjunction_rejection",
+            "all_of": [
+              "R158:NECESSITY_WITNESS_SETUP"
+            ]
+          }
+        ],
+        "purpose": "Separate bodily ownership and action agency within experience and correct selector closure without adding basal gates.",
+        "thought_experiments": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R158:RELATIONAL_SELECTION_SETUP",
+      "kind": "ABSTRACT_WITNESS_PACKAGE",
+      "label": "Relational Selection Setup",
+      "statement": "Let K have one sort, constant a and unary f. D has carrier {0,1}, a=0, f(0)=1, f(1)=0; theta(x) is x=a and S={0}.",
+      "domain": "One fully specified finite abstract K-structure.",
+      "scope": "One fully specified finite abstract K-structure.",
+      "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T2",
+      "source_lineage": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T2",
+      "status": "SPECIFIED_FINITE_COUNTERMODEL",
+      "proof": "All carrier, constant and function assignments are explicit and jointly satisfiable.",
+      "counterexamples_and_limits": "Not a human or experiential observation; arbitrary relational selectors of higher arity are tuple relations.",
+      "formal_contract_R158": {
+        "object_domain": "One fully specified finite abstract K-structure.",
+        "quantifiers": "This concrete abstract structure; h, when used, is any K-isomorphism transporting a and f.",
+        "bearer_time_signature": "As specified per claim; actual token P, candidate c and interval I never conflated. Abstract K-witnesses are not asserted to be actual organisms.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§5 T2"
+        },
+        "premise_routes": [],
+        "purpose": "Separate bodily ownership and action agency within experience and correct selector closure without adding basal gates.",
+        "thought_experiments": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R158:SELECTION_CLOSURE_LIMIT",
+      "kind": "COUNTEREXAMPLE_LIMIT",
+      "label": "Selection Closure Limit",
+      "statement": "Definability alone does not guarantee substructure closure: in RELATIONAL_SELECTION_SETUP, f(0)=1 is outside S. R157 formula transport remains valid for the selected relation; closure/physical autonomy are additional obligations.",
+      "domain": "General not-guaranteed claim witnessed by one finite structure; closure means contains constants and closed under functions in a fixed signature.",
+      "scope": "General not-guaranteed claim witnessed by one finite structure; closure means contains constants and closed under functions in a fixed signature.",
+      "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T2",
+      "source_lineage": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T2",
+      "status": "MANUAL_FINITE_COUNTEREXAMPLE",
+      "proof": "0 belongs to S while its f-image does not; this refutes the general entailment. Isomorphism carries both selected set and function, preserving the failure.",
+      "counterexamples_and_limits": "Purely relational induced substructures may be available; an arbitrary tuple relation still is not itself a carrier. C1 is not refuted.",
+      "formal_contract_R158": {
+        "object_domain": "General not-guaranteed claim witnessed by one finite structure; closure means contains constants and closed under functions in a fixed signature.",
+        "quantifiers": "There exists a definable selection not closed under a K-function; not every selection is claimed nonclosed.",
+        "bearer_time_signature": "As specified per claim; actual token P, candidate c and interval I never conflated. Abstract K-witnesses are not asserted to be actual organisms.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§5 T2"
+        },
+        "premise_routes": [
+          {
+            "rule": "r158_selection_closure",
+            "all_of": [
+              "R158:RELATIONAL_SELECTION_SETUP"
+            ]
+          }
+        ],
+        "purpose": "Separate bodily ownership and action agency within experience and correct selector closure without adding basal gates.",
+        "thought_experiments": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R158:TARGET_SPECIFIC_BRIDGE_PROFILE",
+      "kind": "OPEN_BRIDGE_SCHEMA",
+      "label": "Target Specific Bridge Profile",
+      "statement": "Retain the R157 conjunction only as an unproved joint functional body-use configuration. Compare ownership-oriented body-frame binding/use and agency-oriented source-attribution/use on separately declared target domains. Actual membership and efficacy are separate from judgments; optional coordinates have no proved universal necessity.",
+      "domain": "Declared actual intervention domain and independently fixed F_O/F_A interpretation, still to be supplied.",
+      "scope": "Declared actual intervention domain and independently fixed F_O/F_A interpretation, still to be supplied.",
+      "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §6",
+      "source_lineage": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §6",
+      "status": "OPEN_REFINED_SCHEMA",
+      "proof": "Explanatory proposal informed by scoped primary evidence and counterexamples; not deduced as a phenomenal theorem.",
+      "counterexamples_and_limits": "Reports, drift and threat measures are fallible; B+U is not established sufficient for familiar mineness; broad route deletion is not supplied.",
+      "formal_contract_R158": {
+        "object_domain": "Declared actual intervention domain and independently fixed F_O/F_A interpretation, still to be supplied.",
+        "quantifiers": "Candidate comparison only; no universal necessity, sufficiency, equivalence or basal-experience threshold.",
+        "bearer_time_signature": "As specified per claim; actual token P, candidate c and interval I never conflated. Abstract K-witnesses are not asserted to be actual organisms.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§6"
+        },
+        "premise_routes": [],
+        "purpose": "Separate bodily ownership and action agency within experience and correct selector closure without adding basal gates.",
+        "thought_experiments": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §7",
         "open_obligations": [
           "F153-09",
           "F153-10",
@@ -29979,6 +30248,65 @@
         "source_sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
         "review_status": "MANUAL_DOMAIN_ARGUMENT",
         "machine_proof": false
+      },
+      "formal_contract_R158": {
+        "amends": "generic binding checklist only",
+        "bindings_required": [
+          "same Omega,Omega_rep,Omega_norep and partial M_rep",
+          "Omega_norep nonempty for two-extension witness",
+          "same codomain with at least two distinct values when two extensions are asserted"
+        ],
+        "effective_reading": "Domain result needs no K-formula or C1 premise. No report-to-F inference.",
+        "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §8",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r158_conjunction_rejection",
+      "all_of": [
+        "R158:NECESSITY_WITNESS_SETUP"
+      ],
+      "conclusion": "R158:CONJUNCTION_REJECTION",
+      "statement": "Under NECESSITY_WITNESS_SETUP, not forall w in Omega: F(w)->Theta(w); hence not forall w: F(w)<->Theta(w).",
+      "proof_sketch": "g_j(w*)=0 makes Theta(w*)=0; F(w*)=1 falsifies necessity implication and thus biconditional.",
+      "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T1",
+      "kind": "SCOPED_CLASSICAL_ARGUMENT",
+      "review": "MANUAL_CLASSICAL_CONDITIONAL_ARGUMENT",
+      "formal_contract_R158": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same Omega,n,F,g_i and Theta throughout",
+          "w* admissible in Omega; j in declared index set",
+          "F independently interpreted; all predicates total Boolean"
+        ],
+        "quantification": "Every setup satisfying all premises; existential counterexample w*; no assertion that any actual F_O witness has been established.",
+        "proof_location": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T1",
+        "source_sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r158_selection_closure",
+      "all_of": [
+        "R158:RELATIONAL_SELECTION_SETUP"
+      ],
+      "conclusion": "R158:SELECTION_CLOSURE_LIMIT",
+      "statement": "Definability alone does not guarantee substructure closure: in RELATIONAL_SELECTION_SETUP, f(0)=1 is outside S. R157 formula transport remains valid for the selected relation; closure/physical autonomy are additional obligations.",
+      "proof_sketch": "0 belongs to S while its f-image does not; this refutes the general entailment. Isomorphism carries both selected set and function, preserving the failure.",
+      "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T2",
+      "kind": "SCOPED_CLASSICAL_ARGUMENT",
+      "review": "MANUAL_FINITE_COUNTEREXAMPLE",
+      "formal_contract_R158": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same declared K,D,a,f,theta,S",
+          "substructure closure uses all K functions and constants",
+          "counterexample abstract; no actual experience premise"
+        ],
+        "quantification": "There exists a definable selection not closed under a K-function; not every selection is claimed nonclosed.",
+        "proof_location": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T2",
+        "source_sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+        "machine_proof": false
       }
     }
   ],
@@ -30517,6 +30845,31 @@
       "from": "A:U1",
       "to": "R157:REPORT_COVERAGE_LIMIT",
       "relation": "context: undefined/no report cannot be made an experience-existence or mineness conclusion from U1"
+    },
+    {
+      "from": "R157:MINENESS_BRIDGE_SCHEMA",
+      "to": "R158:TARGET_SPECIFIC_BRIDGE_PROFILE",
+      "relation": "scope refinement, not inference"
+    },
+    {
+      "from": "R157:COORDINATE_TRANSPORT",
+      "to": "R158:SELECTION_CLOSURE_LIMIT",
+      "relation": "terminology correction; coordinate theorem retained"
+    },
+    {
+      "from": "R158:TARGET_SPLIT",
+      "to": "R158:TARGET_SPECIFIC_BRIDGE_PROFILE",
+      "relation": "target typing for candidate comparison; not proof"
+    },
+    {
+      "from": "R156:SNAPSHOT_USE_LIMIT",
+      "to": "R158:TARGET_SPECIFIC_BRIDGE_PROFILE",
+      "relation": "functional installed-use limit remains; no phenomenal witness"
+    },
+    {
+      "from": "R157:REPORT_COVERAGE_LIMIT",
+      "to": "R158:CONJUNCTION_REJECTION",
+      "relation": "independent target witness cannot be supplied by report partiality"
     }
   ],
   "prohibited_inferences_D": [
@@ -31076,6 +31429,17 @@
     "current_contract": "formal_contract_R157 for new entries only; inherited layers unchanged",
     "validation": "records/R157_Structural_Coordinate_and_Mineness_20261007/VALIDATION.json",
     "gap_ledger": "records/R157_Structural_Coordinate_and_Mineness_20261007/GAP_LEDGER.json",
+    "proof_assistant_certified": false,
+    "empirical_validation": false
+  },
+  "research_R158": {
+    "parent_branch_head": "d6ee6c53d28d4e6d03822b731307621ab1edad70",
+    "parent_graph_sha256": "ef2bd5a765024a5c2fb9f65422265497c5a5970d5b34f0e12b6aa80df44ba752",
+    "note": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+    "new_nodes": 6,
+    "new_rules": 2,
+    "current_contract": "formal_contract_R158 for new entries and four explicitly scoped amendments only; all historical fields retained",
+    "status": "OWNERSHIP_AGENCY_TARGET_SPLIT_AND_SELECTOR_CLOSURE_REPAIRED_BRIDGE_OPEN",
     "proof_assistant_certified": false,
     "empirical_validation": false
   }

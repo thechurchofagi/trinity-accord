@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-07",
+  "prior_art_not_original": true,
+  "pinned_A_sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+  "pinned_read_scope": "UCT I v1.2 §§8.11–8.14; 14.7–14.10 targeted windows; R157 note §§1–8",
+  "all_ten_hash_checks": "VALIDATION.json",
+  "full_ten_papers_reread": false,
+  "raw_data_reanalysis": false,
+  "sources": [
+    {
+      "id": "S1",
+      "doi": "10.3389/fnhum.2012.00040",
+      "url": "https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2012.00040/full",
+      "read_scope": "Abstract, moving-hand apparatus/methods, experiment 3 conditions/results",
+      "evidence": "Ownership/agency report dissociation; passive condition retained apparatus and latent motor capability."
+    },
+    {
+      "id": "S2",
+      "doi": "10.1371/journal.pone.0156591",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0156591",
+      "read_scope": "Abstract, imitation BCI methods, questionnaire and threat response results/discussion",
+      "evidence": "Declared EEG command link absent; cue and visual pathways retained. Reports are not direct F observation."
+    },
+    {
+      "id": "S3",
+      "doi": "10.1371/journal.pone.0021659",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0021659",
+      "read_scope": "Abstract, methods, drift/ownership result and discussion windows",
+      "evidence": "Proprioceptive drift and ownership ratings dissociated in specified protocols."
+    },
+    {
+      "id": "S4",
+      "doi": "10.1371/journal.pone.0206367",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6198980/",
+      "read_scope": "Abstract and feeling/belief discussion, not numerical sample reanalysis",
+      "evidence": "Instruction-dependent feeling/belief reports motivate distinct operational definitions."
+    }
+  ]
+}

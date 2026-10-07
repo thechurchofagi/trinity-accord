@@ -1,0 +1,28 @@
+{
+  "status": "PASS_SCOPED_AUDIT",
+  "nodes": 414,
+  "rules": 199,
+  "new_nodes": 6,
+  "new_rules": 2,
+  "unique_ids": true,
+  "endpoints_and_all_of_present": true,
+  "acyclic": true,
+  "inherited_fields_preserved_except_additive_amendments": true,
+  "inherited_context_links_preserved": true,
+  "semantic_review": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §8",
+  "joint_premise_review": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5",
+  "global_semantic_proof": false,
+  "empirical_F_witness": false,
+  "basal_gate_added": false,
+  "checks_after_selection_result_before_save": [
+    "PASS",
+    "PASS",
+    "PASS"
+  ],
+  "effective_amendments": [
+    "R157:COORDINATE_TRANSPORT",
+    "R157:SEMANTIC_RESIDUAL",
+    "R157:MINENESS_BRIDGE_SCHEMA",
+    "r157_report_coverage"
+  ]
+}

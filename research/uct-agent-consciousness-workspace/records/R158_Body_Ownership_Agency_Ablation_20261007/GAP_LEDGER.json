@@ -1,0 +1,69 @@
+{
+  "inherited": "records/R157_Structural_Coordinate_and_Mineness_20261007/GAP_LEDGER.json",
+  "closed_inherited_families": [],
+  "entries": [
+    {
+      "id": "R158-G1",
+      "status": "REPAIRED_TERMINOLOGY",
+      "location": "R157 note §§1–4 and entrypoint prefixes",
+      "affected": "R157:COORDINATE_TRANSPORT / SEMANTIC_RESIDUAL; any downstream substructure or autonomy reading",
+      "counterexample": "{0} selected by x=a in toggle-function structure is not closed.",
+      "repaired": "Use selected relation/tuple support; transport proof retained.",
+      "unresolved": "Any substructure claim must establish constants/function closure; autonomy needs physical premises."
+    },
+    {
+      "id": "R158-G2",
+      "status": "REPAIRED_SCOPE_BRIDGE_OPEN",
+      "location": "R157 theta_body four-conjunction",
+      "affected": "R157:MINENESS_BRIDGE_SCHEMA and selected ownership/agency interpretation",
+      "counterexample": "S1 passive/active condition dissociation; report domain only.",
+      "repaired": "Distinguish F_O/F_A and performed action/available route; conjunction only joint functional case.",
+      "unresolved": "Universal necessity/sufficiency of any phenomenal selector remains open."
+    },
+    {
+      "id": "R158-G3",
+      "status": "OPEN",
+      "location": "ActualAttachment ambiguity",
+      "affected": "Ownership bridge; actual bearer/candidate relation",
+      "counterexample": "Model hand outside anatomy remains causally coupled.",
+      "repaired": "Separate anatomical M from specified coupling C.",
+      "unresolved": "No general zero-coupling selected-mineness witness or complete grounding supplied."
+    },
+    {
+      "id": "R158-G4",
+      "status": "OPEN",
+      "location": "Seven-ablation admissibility and target witness",
+      "affected": "R158:CONJUNCTION_REJECTION application to F_O/F_A",
+      "counterexample": "Abstract zero-bit setting is not a physical intervention; report is not F.",
+      "repaired": "Require all_of domain, totality, admissibility, independent interpretation and witness together.",
+      "unresolved": "Actual target witness and independent measurement bridge not supplied."
+    },
+    {
+      "id": "R158-G5",
+      "status": "OPEN",
+      "location": "U / interoception / affect / persistence necessity",
+      "affected": "R158:TARGET_SPECIFIC_BRIDGE_PROFILE",
+      "counterexample": "Toy deletes declared port/consumer but retains other routes; no phenomenal outcome assigned.",
+      "repaired": "Separate architecture omission from total absence and selected target.",
+      "unresolved": "Specify actual intervention domain and convergent evidence; no forced node closure."
+    },
+    {
+      "id": "R158-G6",
+      "status": "REPAIRED_BINDINGS",
+      "location": "r157_report_coverage formal_contract_R157",
+      "affected": "Partial report extension limit",
+      "counterexample": "Generic theta/K checklist did not describe the actual partial-map proof.",
+      "repaired": "R158 effective checklist states Omega/report subdomains/codomain; no new premise edge.",
+      "unresolved": "Cross-domain phenomenal measurement remains open."
+    },
+    {
+      "id": "R158-G7",
+      "status": "OPEN",
+      "location": "Complete K and C1 experiential interpretation",
+      "affected": "All actual application and transported selected-target claims",
+      "counterexample": "Finite toy/report views omit physical organization; C1 remains stipulated.",
+      "repaired": "Preserve signature/source/actuality levels; no semantic promotion.",
+      "unresolved": "Complete physical grounding, C1 empirical justification, B_min and formal proof certification remain separate."
+    }
+  ]
+}

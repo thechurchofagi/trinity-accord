@@ -1,0 +1,36 @@
+{
+  "entries": [
+    {
+      "id": "R157:COORDINATE_TRANSPORT",
+      "repair": "The transported selector is a definable relation / tuple support. Do not infer carrier closure, autonomous process or substructure without additional conditions.",
+      "old_history_preserved": true
+    },
+    {
+      "id": "R157:SEMANTIC_RESIDUAL",
+      "repair": "Replace the historical word substructure by selected experiential relation / tuple support in the semantic-naming argument. No varying experience of a fixed complete organization is asserted.",
+      "old_history_preserved": true
+    },
+    {
+      "id": "R157:MINENESS_BRIDGE_SCHEMA",
+      "repair": "The four-way conjunction is only an unproved joint functional body-use schema; distinguish ownership and agency targets, narrow membership and broad coupling, performed action and available/efficacious routes. Use R158 target profile for current priority.",
+      "old_history_preserved": true
+    },
+    {
+      "id": "r157_report_coverage",
+      "repair": {
+        "amends": "generic binding checklist only",
+        "bindings_required": [
+          "same Omega,Omega_rep,Omega_norep and partial M_rep",
+          "Omega_norep nonempty for two-extension witness",
+          "same codomain with at least two distinct values when two extensions are asserted"
+        ],
+        "effective_reading": "Domain result needs no K-formula or C1 premise. No report-to-F inference.",
+        "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §8",
+        "machine_proof": false
+      },
+      "old_history_preserved": true
+    }
+  ],
+  "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+  "history_policy": "No inherited field removed or rewritten; effective repairs recorded explicitly."
+}
