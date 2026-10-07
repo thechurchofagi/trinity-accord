@@ -1,3 +1,9 @@
+## R164 extension — constant-bet target preservation and bounded-martingale coverage
+
+R164-v1.0 contains **440 nodes / 212 rules** (new 4/3), preserving all 436 R163 nodes, 209 rules and 117 context links fieldwise. It separates classical i.i.d. empirical Bernstein, common-conditional-mean betting, weighted means and the R163 unweighted finite-design target. A frozen constant bet per component makes the bounded-supermartingale exponent target the average conditional mean; independent participant vectors identify this with R163 theta_N.
+
+The new simultaneous interval is exact finite-sample, variance-adaptive through predictable residuals and compatible with the inherited R161 interval-image/min/max decision. It is not uniformly narrower than Hoeffding. The exact rare-spike obstruction requires additive protection; at N=36,m=8, any coordinatewise rule excluding zero on a no-spike component has simultaneous coverage at most `.2531673184308581`. Missingness endpoint adaptation reduces only sampling uncertainty, not the support-identification width. Full audit: [R164 MAP_AUDIT](records/R164_Frozen_Bounded_Martingale_20261008/MAP_AUDIT.json).
+
 ## R163 extension — bounded planwise coverage and target boundaries
 
 R163-v1.0 contains **436 nodes / 209 rules** (new 6/3), preserving all 430 R162 nodes, 206 rules and 117 context links fieldwise. It records an actual correction: exact non-degenerate Gaussianity is incompatible with the declared observed bound `W_i in [-1,1]^8`. R162's planwise premise and tower-property theorem remain; its Gaussian Student discharge is no longer effective for non-degenerate observed bounded W.

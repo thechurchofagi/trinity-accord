@@ -1,0 +1,80 @@
+{
+  "schema": "UCT_R164_MAP_AUDIT/v1",
+  "revision": "R164-v1.0",
+  "parent_revision": "R163-v1.0",
+  "counts": {
+    "parent_nodes": 436,
+    "parent_rules": 209,
+    "current_nodes": 440,
+    "current_rules": 212,
+    "context_links_preserved": 117
+  },
+  "audit": [
+    {
+      "dimension": "concepts_objects_quantifiers_scope",
+      "status": "PASS_WITH_OPEN_PREMISES",
+      "finding": "Observed W, scaled X, time-specific conditional mean mu_ij, average conditional mean, fixed finite-design mean, weighted mean, endpoint mean, population statistic and experience token are distinct. N,m,two tails and the 2m missingness endpoints are explicit.",
+      "open": "Participant independence and the practical pilot choice of constant bets/predictors require external justification."
+    },
+    {
+      "dimension": "all_of_simultaneous_premises",
+      "status": "PASS",
+      "finding": "The coverage rule requires the concrete R161 protocol, R162 independent-pilot freeze, R163 bounded target and R164 constant-bet target lemma together. The missingness rule requires both the inherited endpoint construction and R164 coverage. No edge label discharges a premise.",
+      "open": "Every actual selected plan still needs range, predictability, independence, target and no-selection checks."
+    },
+    {
+      "dimension": "related_and_unlinked_concepts",
+      "status": "PASS",
+      "finding": "Classical i.i.d. empirical Bernstein and common-conditional-mean betting are source precedents, not graph consequences for unequal means. Variable-bet weighted targets, post-abort undefined outcomes, order invariance, latent unclipped effects, B_min, F_O and C1 are intentionally not linked as consequences.",
+      "open": "A future adaptive-bet method needs its own unweighted-target theorem."
+    },
+    {
+      "dimension": "joint_satisfiability",
+      "status": "PASS",
+      "finding": "Independent bounded non-identical participant vectors, a disjoint pilot, constant bets and pilot-frozen predictors are jointly satisfiable; the R163 rare-spike product law with c=.5 and lambda=.9 is an explicit witness. Variable bets are not silently added.",
+      "open": "Scientific usefulness and apparatus feasibility are not implied by satisfiability."
+    },
+    {
+      "dimension": "object_time_signature_actuality_evidence",
+      "status": "PASS",
+      "finding": "Pilot precedes confirmation; each predictor precedes its observation; within-vector dependence differs from between-participant independence. Analytic proof, exact enumeration, finite grid checks, unrun protocol, actual organization and phenomenal interpretation carry separate statuses.",
+      "open": "No actual data, apparatus, recruitment, ethics approval or empirical experience-level witness exists."
+    },
+    {
+      "dimension": "inference_direction",
+      "status": "PASS",
+      "finding": "Bounded supermartingale premises imply interval coverage; participant independence identifies its target with theta_N; endpoint ordering implies a band. No interval-to-organization, population-to-token, precision-to-mineness, report-to-experience or classifier-to-owner reverse edge exists.",
+      "open": "Experience-level interpretation remains an independently evidenced bridge obligation."
+    },
+    {
+      "dimension": "finite_limits",
+      "status": "PASS",
+      "finding": "Finite N,m, alpha, lambda range, log factors and formulas are explicit. N=257 is only a zero-residual width consequence; N=99 controls only one rare-event obstruction. Neither is a practical sample-size recommendation.",
+      "open": "No minimax optimality or uniform improvement theorem is claimed."
+    },
+    {
+      "dimension": "multi_premise_satisfaction_and_decision",
+      "status": "PASS",
+      "finding": "On the one simultaneous signed-component event, the inherited exact absolute-value interval image and monotone R161 min/max aggregation remain conservative. The six physical/measurement gates and epsilon remain independent premises.",
+      "open": "No apparatus/readout validity or scientifically chosen margin is supplied."
+    },
+    {
+      "dimension": "purpose_and_beginner_principle",
+      "status": "PASS",
+      "finding": "The round strengthens one finite bodily/action-related evidential bridge while preserving C1's role and keeping basic experience free of introspection, self-model, report, language, integration, recursion, accurate prediction or continuation-control gates. Nested/overlapping actual processes and nonexclusive subjects remain allowed.",
+      "open": "Positive phenomenal semantics of felt mineness remain open."
+    }
+  ],
+  "direction_checks": {
+    "after_topic_selection": "PASS",
+    "after_result_formation": "PASS",
+    "before_save": "PASS",
+    "reason": "R164 remains a scoped precision repair for the bodily/tool protocol and records failures instead of inflating a method result into a consciousness claim."
+  },
+  "global_nonclaims": [
+    "DAG and executable checks are not proofs of theory truth, global semantics or apparatus fidelity.",
+    "No current assistant consciousness or death-fear claim is made.",
+    "No basal-experience threshold, familiar ownership, complete organization or exclusive owner is established.",
+    "No experiment, recruitment, ethics approval, publication or preservation workflow occurred."
+  ]
+}

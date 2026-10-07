@@ -1,0 +1,73 @@
+{
+  "schema": "UCT_R164_PROOF_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R164-P1",
+      "node": "R164:CONSTANT_BET_AVERAGE_TARGET",
+      "type": "target_preservation_lemma",
+      "full_claim": "Replacing the common conditional mean in each bounded predictable-plug-in factor by its time-specific conditional mean preserves the one-step supermartingale inequality; a constant component bet makes the linear sum target the unweighted average conditional mean.",
+      "domain": "Finite adapted [0,1]-valued observations, predictable [0,1] predictors and one constant lambda in (0,1).",
+      "all_premises": [
+        "X_i is [0,1]-valued",
+        "mu_i=E[X_i|F_{i-1}] exists",
+        "c_i is F_{i-1}-measurable and in [0,1]",
+        "one lambda in (0,1) is used for every confirmatory i"
+      ],
+      "proof_or_source": "Frozen_Bounded_Martingale_Coverage_v0_1.md §§2-4; algebraic specialization of the Waudby-Smith–Ramdas Theorem 2 one-step proof.",
+      "counterexample_or_limit": "Varying lambda_i with unequal mu_i yields a weighted target. General dependence makes the average conditional mean potentially random.",
+      "status": "PROVED_MANUALLY",
+      "thought_experiment_role": "Copy/swap: changing bet weights while keeping observations can change the inferred target."
+    },
+    {
+      "id": "R164-P2",
+      "node": "R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE",
+      "type": "conditional_finite_sample_theorem",
+      "full_claim": "The displayed R164 intervals cover all m average conditional means simultaneously with probability at least 1-alpha; under independent participant vectors these are the exact R163 finite-design means and independent pilot selection transports the guarantee planwise.",
+      "domain": "Fixed finite N,m, bounded W, constant pilot-frozen component bets, predictable predictors, frozen procedure and participant independence for the fixed-target specialization.",
+      "all_premises": [
+        "all R164-P1 premises",
+        "two tail allocations per component and union over m components",
+        "confirmatory participant vectors are independent when identifying theta_N",
+        "pilot and confirmation samples are independent",
+        "no same-confirmatory-data interval-family or target selection"
+      ],
+      "proof_or_source": "Frozen_Bounded_Martingale_Coverage_v0_1.md §§4-5; nonnegative supermartingale, fixed-time Markov bound, two-tail/m-component union bound and R162 tower argument.",
+      "counterexample_or_limit": "Can be wider than Hoeffding; dependence or adaptive method search invalidates the stated finite-design route.",
+      "status": "PROVED_MANUALLY_WITH_EXECUTABLE_CONSTANT_CHECKS",
+      "thought_experiment_role": "Human-realized agent: coordinated participant records test the independence premise."
+    },
+    {
+      "id": "R164-P3",
+      "node": "R164:RARE_SPIKE_ADDITIVE_OBSTRUCTION",
+      "type": "exact_necessary_obstruction",
+      "full_claim": "Under the R163 rare-spike product law, coordinatewise procedures that exclude zero on an all-no-spike component have simultaneous coverage at most (1-.95^N)^m; at N=36,m=8 this is 0.2531673184308581 and controlling that event alone at alpha=.05 requires N>=99.",
+      "domain": "Explicit independent m-component two-point law and procedures with the stated no-spike failure property.",
+      "all_premises": [
+        "P(W=-1/19)=.95 and P(W=1)=.05 independently across observations and components",
+        "the component interval excludes zero on the all-low sample",
+        "simultaneous success requires success in every component"
+      ],
+      "proof_or_source": "Frozen_Bounded_Martingale_Coverage_v0_1.md §7 and EXACT_CHECKS.json; exact product-event probability and logarithmic threshold calculation.",
+      "counterexample_or_limit": "Not a sufficient N theorem and not a minimax theorem for procedures without the stated coordinatewise failure property.",
+      "status": "PROVED_EXACTLY_AND_ENUMERATED",
+      "thought_experiment_role": "Abacus/calculator: apparently stable outputs can hide rare deviations; zero empirical variance is not certainty."
+    },
+    {
+      "id": "R164-P4",
+      "node": "R164:MISSINGNESS_ENDPOINT_MARTINGALE_BAND",
+      "type": "conditional_partial_identification_theorem",
+      "full_claim": "R164 intervals for all 2m R163 support endpoints simultaneously cover the all-enrollee finite-design means while leaving the pointwise identification width 2(1-bar R_j) unchanged.",
+      "domain": "Well-defined bounded would-be outcomes, arbitrary observation indicators, independent participant records for the fixed target, and frozen endpoint procedures.",
+      "all_premises": [
+        "L_ij<=Y_ij<=U_ij pointwise",
+        "all endpoint variables meet R164-P2 premises",
+        "per-endpoint interval error alpha/(2m)",
+        "would-be Y_ij exists even when unobserved"
+      ],
+      "proof_or_source": "Frozen_Bounded_Martingale_Coverage_v0_1.md §8; endpoint coverage, union bound and expectation monotonicity.",
+      "counterexample_or_limit": "Does not apply to physically undefined post-abort outcomes and cannot shrink the support identification width.",
+      "status": "PROVED_MANUALLY_WITH_POINTWISE_GRID_CHECK",
+      "thought_experiment_role": "Copy/swap/memory: deleting high outcomes changes observation pattern and identification width without changing the recorded support."
+    }
+  ]
+}

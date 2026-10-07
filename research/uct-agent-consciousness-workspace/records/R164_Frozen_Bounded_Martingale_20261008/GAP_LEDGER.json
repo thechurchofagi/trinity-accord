@@ -1,0 +1,55 @@
+{
+  "schema": "UCT_R164_GAP_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R164-G1",
+      "location": "Frozen_Bounded_Martingale_Coverage_v0_1.md §§2-6; R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE",
+      "gap": "No scientifically justified pilot rule yet chooses the constant bets and predictor centers under a predeclared practical-width objective.",
+      "impact": "Efficiency and feasibility of R161; not validity conditional on a frozen admissible choice.",
+      "counterexample": "A predictor far from confirmatory observations makes the residual penalty large enough to exceed Hoeffding width.",
+      "corrected_now": "The theorem is conditional on frozen choices and explicitly rejects uniform superiority.",
+      "unresolved_premise": "Define and test a finite pilot-selection menu with a maximum-width/regret criterion and a DESIGN_NOT_FEASIBLE output.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R164-G2",
+      "location": "§§2-4; R164:CONSTANT_BET_AVERAGE_TARGET",
+      "gap": "General predictable varying bets do not preserve the unweighted target when conditional means differ.",
+      "impact": "Any future attempt to use fully adaptive bets in the R163 non-identical design can silently change the estimand.",
+      "counterexample": "Two unequal conditional means with two unequal positive bets have a weighted mean different from their arithmetic mean.",
+      "corrected_now": "R164 freezes one constant bet per component and records the target identity explicitly.",
+      "unresolved_premise": "A different adaptive-bet procedure would need an explicit unweighted-target theorem or must declare a weighted target.",
+      "status": "PARTIALLY_REPAIRED_WITH_SCOPE_LIMIT"
+    },
+    {
+      "id": "R164-G3",
+      "location": "§7; R164:RARE_SPIKE_ADDITIVE_OBSTRUCTION",
+      "gap": "Variance adaptation cannot remove rare-event protection; exact optimal finite-sample width for the declared decision is not characterized.",
+      "impact": "Sample size and practical resolution; prevents zero-width claims from zero sample variance.",
+      "counterexample": "At N=36,m=8 at least one no-spike component occurs with probability 0.746832681569142.",
+      "corrected_now": "Exact necessary event bound and N>=99 event-only threshold are recorded.",
+      "unresolved_premise": "No minimax or optimality theorem for the R161 decision family is supplied.",
+      "status": "OPEN_BEYOND_NECESSARY_BOUND"
+    },
+    {
+      "id": "R164-G4",
+      "location": "§8; R164:MISSINGNESS_ENDPOINT_MARTINGALE_BAND",
+      "gap": "Arbitrary missingness leaves a support identification width and safety abort can make the full-data outcome undefined.",
+      "impact": "All-enrollee effects may remain uninformative or not well-posed despite narrower endpoint sampling intervals.",
+      "counterexample": "Ubar-Lbar=2(1-Rbar) regardless of concentration method.",
+      "corrected_now": "Endpoint sampling error and identification width are separately typed; undefined outcomes are excluded.",
+      "unresolved_premise": "A narrower scientific target needs a defended missingness model or a different treatment-policy estimand.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R164-G5",
+      "location": "§§5,10-11 and downstream UCT interpretation",
+      "gap": "No actual apparatus, participant independence audit, physical-role witness, phenomenal target bridge, B_min or F_O observation exists.",
+      "impact": "R164 cannot establish bodily mineness, familiar ownership, C1, complete organization or an exclusive owner.",
+      "counterexample": "A perfectly calibrated population interval can describe a statistic without belonging to any particular experience token.",
+      "corrected_now": "Population, finite view, actual token and experience-level interpretation remain separate in every contract and rule.",
+      "unresolved_premise": "Empirical implementation and independently justified experience-level bridge evidence.",
+      "status": "OPEN"
+    }
+  ]
+}

@@ -1,3 +1,9 @@
+## R164 audit — variance adaptation without target weighting
+
+R164-v1.0 has **440 nodes / 212 rules** (new 4/3); the inherited 436 nodes, 209 rules and 117 context links reconstruct exactly. Unique IDs, endpoints, parent hash and DAG pass. Exact checks cover the one-step exponential constants, all rare-spike counts, rare-event thresholds, width constants and pointwise missingness endpoints.
+
+The audit blocks two domain slips: an i.i.d. sample-variance theorem is not a non-identical finite-design theorem, and varying predictable bets generally target a weighted mean when conditional means differ. The replacement rule requires the concrete protocol, independent pilot freeze, bounded finite-design target and constant-bet target identity simultaneously. Population coverage, actual organization and experience remain separate; no coverage-to-C1, B_min, F_O, basal gate or exclusive-owner edge is added. Pilot selection, participant independence, apparatus fidelity, missingness identification and positive mineness semantics remain open. Full result: [MAP_AUDIT.json](records/R164_Frozen_Bounded_Martingale_20261008/MAP_AUDIT.json).
+
 ## R163 audit — bounded coverage after repairing an inconsistent premise package
 
 R163-v1.0 has **436 nodes / 209 rules** (new 6/3); the inherited 430 nodes, 206 rules and 117 context links reconstruct exactly. Unique IDs, endpoints, parent hash and DAG pass. Seventeen bounded checks pass, including exact rare-spike enumeration, target countermodels and pointwise missingness bounds.

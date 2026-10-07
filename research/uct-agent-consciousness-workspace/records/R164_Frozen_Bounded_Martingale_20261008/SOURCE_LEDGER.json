@@ -1,0 +1,40 @@
+{
+  "schema": "UCT_R164_SOURCE_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R164-S1",
+      "source": "Maurer, A. and Pontil, M. (2009), Empirical Bernstein Bounds and Sample Variance Penalization, COLT; arXiv:0907.3740",
+      "primary": true,
+      "used_for": "Classical sample-variance empirical-Bernstein bound and its i.i.d. domain boundary.",
+      "scope_limit": "Does not by itself cover unequal participant means in the R163 finite-design target."
+    },
+    {
+      "id": "R164-S2",
+      "source": "Howard, S. R., Ramdas, A., McAuliffe, J. and Sekhon, J. (2021), Time-uniform, nonparametric, nonasymptotic confidence sequences, Annals of Statistics 49(2), DOI 10.1214/20-AOS1991",
+      "primary": true,
+      "used_for": "Bounded empirical-Bernstein supermartingale lineage and predictable variance processes.",
+      "scope_limit": "Does not supply R161 targets, pilot independence, apparatus validity or UCT semantics."
+    },
+    {
+      "id": "R164-S3",
+      "source": "Waudby-Smith, I. and Ramdas, A. (2024), Estimating means of bounded random variables by betting, JRSS B 86(1):1-27; arXiv:2010.09686v7 (2022)",
+      "primary": true,
+      "used_for": "Theorem 2 predictable-plug-in interval and the exact one-step exponential proof used in the constant-bet extension.",
+      "scope_limit": "Their stated Theorem 2 assumes a common conditional mean. R164 separately proves the constant-bet average-conditional-mean corollary and does not attribute the protocol-specific result to them."
+    },
+    {
+      "id": "R164-S4",
+      "source": "UCT I v1.2 fixed repository source, sections 8.11-8.14, 10.1-10.3, 11, 12.1-12.4, 14.6-14.10",
+      "primary": true,
+      "used_for": "Physical witness, declared target, bridge, no-rescue, body/self/conceptual-I and subject boundaries.",
+      "scope_limit": "Does not entail the statistical theorem or validate the R161 apparatus."
+    },
+    {
+      "id": "R164-S5",
+      "source": "Fixed R161-R163 repository records",
+      "primary": true,
+      "used_for": "Eight bounded components, exact min/max decision, pilot-freeze contract, finite-design target, rare-spike witness and arbitrary-missingness endpoints.",
+      "scope_limit": "R164 preserves their target boundaries and adds no actual empirical evidence."
+    }
+  ]
+}

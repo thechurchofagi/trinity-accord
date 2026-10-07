@@ -1,0 +1,122 @@
+{
+  "schema": "UCT_R164_EXACT_CHECKS/v1",
+  "round": "R164",
+  "parameters": {
+    "alpha": 0.05,
+    "components": 8,
+    "lambda": 0.9,
+    "predictor_on_X_scale": 0.5,
+    "log_2m_over_alpha": 5.768320995793772,
+    "g_lambda": 1.402585092994046
+  },
+  "rare_spike": {
+    "law": "W=1 with probability .05; W=-1/19 with probability .95; E[W]=0",
+    "rows": [
+      {
+        "n": 24,
+        "covered_success_count_min": 0,
+        "covered_success_count_max": 24,
+        "covered_success_count_total": 25,
+        "all_success_counts_covered": true,
+        "marginal_coverage_exact_enumeration": 1.0,
+        "simultaneous_coverage_8_independent_components": 1.0,
+        "expected_half_width": 0.575115055935896,
+        "minimum_half_width": 0.5362622832767815,
+        "hoeffding_half_width": 0.6933205725464575,
+        "no_spike_half_width": 0.5362622832767815,
+        "no_spike_probability": 0.2919890243387724
+      },
+      {
+        "n": 36,
+        "covered_success_count_min": 0,
+        "covered_success_count_max": 36,
+        "covered_success_count_total": 37,
+        "all_success_counts_covered": true,
+        "marginal_coverage_exact_enumeration": 1.0,
+        "simultaneous_coverage_8_independent_components": 1.0,
+        "expected_half_width": 0.3970804573002857,
+        "minimum_half_width": 0.3582276846411714,
+        "hoeffding_half_width": 0.566093876971036,
+        "no_spike_half_width": 0.3582276846411714,
+        "no_spike_probability": 0.1577792147882268
+      },
+      {
+        "n": 60,
+        "covered_success_count_min": 0,
+        "covered_success_count_max": 58,
+        "covered_success_count_total": 59,
+        "all_success_counts_covered": false,
+        "marginal_coverage_exact_enumeration": 1.0,
+        "simultaneous_coverage_8_independent_components": 1.0,
+        "expected_half_width": 0.25465277839180656,
+        "minimum_half_width": 0.21580000573268313,
+        "hoeffding_half_width": 0.4384944315797626,
+        "no_spike_half_width": 0.21580000573268313,
+        "no_spike_probability": 0.046069798986951946
+      },
+      {
+        "n": 120,
+        "covered_success_count_min": 0,
+        "covered_success_count_max": 70,
+        "covered_success_count_total": 71,
+        "all_success_counts_covered": false,
+        "marginal_coverage_exact_enumeration": 0.9999999999999197,
+        "simultaneous_coverage_8_independent_components": 0.9999999999993578,
+        "expected_half_width": 0.14783201921041997,
+        "minimum_half_width": 0.10897924655131697,
+        "hoeffding_half_width": 0.3100623860825907,
+        "no_spike_half_width": 0.10897924655131697,
+        "no_spike_probability": 0.0021224263786981585
+      },
+      {
+        "n": 4615,
+        "covered_success_count_min": 121,
+        "covered_success_count_max": 964,
+        "covered_success_count_total": 844,
+        "all_success_counts_covered": false,
+        "marginal_coverage_exact_enumeration": 1.0,
+        "simultaneous_coverage_8_independent_components": 1.0,
+        "expected_half_width": 0.043788831232265533,
+        "minimum_half_width": 0.004936058572933265,
+        "hoeffding_half_width": 0.04999814079227538,
+        "no_spike_half_width": 0.004936058572933265,
+        "no_spike_probability": 1.5647263928231594e-103
+      }
+    ],
+    "coordinatewise_simultaneous_coverage_upper_if_no_spike_excludes_mean_at_n36": 0.2531673184308581,
+    "probability_at_least_one_no_spike_component_at_n36": 0.746832681569142,
+    "per_component_no_spike_probability_needed_for_familywise_005": 0.006391150954545011,
+    "minimum_n_to_control_this_event_alone": 99,
+    "scope": "Necessary obstruction for coordinatewise procedures with the stated all-no-spike failure property; not a sufficient sample-size theorem."
+  },
+  "zero_residual": {
+    "half_width_formula": "2*log(2m/alpha)/(N*lambda)",
+    "n_for_half_width_at_most_005": 257,
+    "half_width_n120": 0.10682075918136615,
+    "hoeffding_half_width_n120": 0.3100623860825907
+  },
+  "checks": {
+    "one_step_exponential_grid": {
+      "grid": "21 means x 21 predictors x 6 bets; Bernoulli endpoint laws",
+      "maximum_conditional_expectation": 1.0,
+      "argmax": {
+        "mu": 0.0,
+        "c": 0.0,
+        "lambda": 0.05
+      },
+      "pass_leq_one_with_tolerance": true
+    },
+    "rare_spike_all_counts_covered_n36": true,
+    "rare_event_min_n_is_99": true,
+    "rare_event_upper_n36_matches": true,
+    "zero_residual_n_for_half_width_005_is_257": true,
+    "missingness_pointwise_bounds": true,
+    "constant_bet_preserves_unweighted_target": true
+  },
+  "status": "PASS",
+  "limitations": [
+    "The analytic supermartingale proof, not this finite grid, establishes coverage.",
+    "Distribution-specific enumeration does not prove uniform coverage.",
+    "Width comparisons do not validate apparatus, targets, missingness assumptions or experience-level bridges."
+  ]
+}

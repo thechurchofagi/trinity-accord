@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R163-v1.0",
+  "revision": "R164-v1.0",
   "date": "2026-10-08",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -19027,6 +19027,215 @@
           }
         ]
       }
+    },
+    {
+      "id": "R164:CONSTANT_BET_AVERAGE_TARGET",
+      "kind": "TARGET_PRESERVATION_LEMMA",
+      "label": "Constant Bet Preserves the Unweighted Average Target",
+      "statement": "For bounded adapted X_ij with conditional means mu_ij, a predictable empirical-Bernstein exponent with one frozen constant positive bet lambda_j over i has linear term N lambda_j (bar X_j - N^-1 sum_i mu_ij); varying bets instead generally target a weighted average when the conditional means differ.",
+      "domain": "Finite N, one component j, X_ij in [0,1], predictable residual predictors in [0,1], constant lambda_j in (0,1), and the average conditional mean; no independence is required for this algebraic/martingale target identity.",
+      "scope": "Finite N, one component j, X_ij in [0,1], predictable residual predictors in [0,1], constant lambda_j in (0,1), and the average conditional mean; no independence is required for this algebraic/martingale target identity.",
+      "source": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md §§2-4",
+      "source_lineage": "Waudby-Smith and Ramdas predictable plug-in inequality plus an explicit constant-bet specialization to unequal conditional means.",
+      "status": "MANUAL_EXACT_DERIVATION",
+      "proof": "Replace the common conditional mean in each centered one-step factor by mu_ij. The one-step proof is unchanged. Constancy of lambda_j factors it from the sum, leaving the unweighted average conditional mean.",
+      "counterexamples_and_limits": "With varying lambda_ij and unequal mu_ij the exponent controls a lambda-weighted target. Under dependence the average conditional mean can be random and is not silently a fixed superpopulation mean.",
+      "formal_contract_R164": {
+        "object_domain": "One fixed R161 bounded eight-component confirmatory protocol, R162 independent-pilot freezing, and R163 finite-design/missingness targets; no human work occurred.",
+        "quantifiers": "Finite N and m; every component and two tails; every pilot-selected constant bet/predictor plan; every well-defined lower/upper missingness endpoint when that target is invoked.",
+        "bearer_time_signature": "Participant vectors, within-participant components, pilot and confirmatory samples, conditional means, finite-design means, endpoint means, actual token organization and experience remain differently typed.",
+        "source_anchor": {
+          "path": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md",
+          "sha256": "8047751407789ebd6fee5122109c6605c0e8296b92fefed43e042fa91ff747aa",
+          "locator": "sections 2-11"
+        },
+        "purpose": "Improve finite bounded protocol precision without target weighting, i.i.d. inflation, rare-event erasure, missingness identification inflation or experience-level reversal.",
+        "thought_experiments": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md section 9",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R163-G2",
+          "R163-G3",
+          "R163-G6",
+          "R163-G8",
+          "R164-G1",
+          "R164-G2",
+          "R164-G3",
+          "R164-G4",
+          "R164-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE",
+      "kind": "FINITE_SAMPLE_SIMULTANEOUS_COVERAGE_THEOREM",
+      "label": "Frozen Constant-Bet Bounded-Martingale Coverage",
+      "statement": "For m frozen bounded components, constant pilot-frozen bets lambda_j in (0,1), predictable predictors c_ij in [0,1], and L=log(2m/alpha), the W-scale intervals centered at bar W_j with half-width 2[L+g(lambda_j) sum_i(X_ij-c_ij)^2]/(N lambda_j) simultaneously cover all average conditional means with probability at least 1-alpha; for independent participant vectors these are exactly the R163 finite-design means.",
+      "domain": "One fixed R161/R163 confirmatory plan, finite N and m, W_ij in [-1,1], pilot-frozen constant bets, predictable predictors, no same-confirmatory-data family selection, and independent participants for identification with the fixed R163 target.",
+      "scope": "One fixed R161/R163 confirmatory plan, finite N and m, W_ij in [-1,1], pilot-frozen constant bets, predictable predictors, no same-confirmatory-data family selection, and independent participants for identification with the fixed R163 target.",
+      "source": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md §§4-6",
+      "source_lineage": "Fan/Howard bounded exponential inequality, Waudby-Smith-Ramdas predictable plug-in construction, two-tail and m-component union bounds, and the R162 independent-pilot tower contract.",
+      "status": "MANUAL_GENERAL_PROOF_WITH_EXECUTABLE_CONSTANT_CHECKS",
+      "proof": "Multiply the centered one-step exponential factors to obtain a nonnegative supermartingale, apply fixed-time Markov bounds to X and 1-X, union-bound two tails and m components, scale from X to W, and condition on every independent-pilot-selected plan.",
+      "counterexamples_and_limits": "Not uniformly narrower than Hoeffding; bad predictors or large residuals can widen it. Variable bets generally change the target. Participant dependence, same-data family selection or invalid range assumptions break the R163 finite-design specialization.",
+      "formal_contract_R164": {
+        "object_domain": "One fixed R161 bounded eight-component confirmatory protocol, R162 independent-pilot freezing, and R163 finite-design/missingness targets; no human work occurred.",
+        "quantifiers": "Finite N and m; every component and two tails; every pilot-selected constant bet/predictor plan; every well-defined lower/upper missingness endpoint when that target is invoked.",
+        "bearer_time_signature": "Participant vectors, within-participant components, pilot and confirmatory samples, conditional means, finite-design means, endpoint means, actual token organization and experience remain differently typed.",
+        "source_anchor": {
+          "path": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md",
+          "sha256": "8047751407789ebd6fee5122109c6605c0e8296b92fefed43e042fa91ff747aa",
+          "locator": "sections 2-11"
+        },
+        "purpose": "Improve finite bounded protocol precision without target weighting, i.i.d. inflation, rare-event erasure, missingness identification inflation or experience-level reversal.",
+        "thought_experiments": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md section 9",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R163-G2",
+          "R163-G3",
+          "R163-G6",
+          "R163-G8",
+          "R164-G1",
+          "R164-G2",
+          "R164-G3",
+          "R164-G4",
+          "R164-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r164_frozen_bounded_martingale_coverage",
+            "all_of": [
+              "R161:CONCRETE_CROSSED_PROTOCOL",
+              "R162:INDEPENDENT_PILOT_FREEZE_CONTRACT",
+              "R163:BOUNDED_FINITE_DESIGN_TARGET",
+              "R164:CONSTANT_BET_AVERAGE_TARGET"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R164:RARE_SPIKE_ADDITIVE_OBSTRUCTION",
+      "kind": "FINITE_SAMPLE_NECESSARY_OBSTRUCTION",
+      "label": "Rare-Spike Additive Protection Is Necessary",
+      "statement": "For the R163 rare-spike law, any coordinatewise interval that excludes mean zero whenever a component has no spikes has m-component simultaneous coverage at most (1-.95^N)^m; at N=36,m=8 this is 0.2531673184308581, and controlling this event alone at familywise alpha=.05 requires N at least 99.",
+      "domain": "The explicit independent m-component rare-spike product law and coordinatewise procedures having the stated all-no-spike exclusion property.",
+      "scope": "The explicit independent m-component rare-spike product law and coordinatewise procedures having the stated all-no-spike exclusion property.",
+      "source": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md §7",
+      "source_lineage": "Exact probability calculation extending the R163 rare-spike witness; no general minimax optimality claim.",
+      "status": "EXACT_FINITE_PROOF_AND_ENUMERATION",
+      "proof": "A no-spike component occurs with probability .95^N and forces failure by hypothesis. Independent components give probability (1-.95^N)^m of avoiding all such failures; solving 1-(1-.95^N)^m<=.05 yields N>=99.",
+      "counterexamples_and_limits": "This is necessary only for procedures with the stated coordinatewise failure property and is not a sufficient sample-size theorem. Other spike counts can still cause failure.",
+      "formal_contract_R164": {
+        "object_domain": "One fixed R161 bounded eight-component confirmatory protocol, R162 independent-pilot freezing, and R163 finite-design/missingness targets; no human work occurred.",
+        "quantifiers": "Finite N and m; every component and two tails; every pilot-selected constant bet/predictor plan; every well-defined lower/upper missingness endpoint when that target is invoked.",
+        "bearer_time_signature": "Participant vectors, within-participant components, pilot and confirmatory samples, conditional means, finite-design means, endpoint means, actual token organization and experience remain differently typed.",
+        "source_anchor": {
+          "path": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md",
+          "sha256": "8047751407789ebd6fee5122109c6605c0e8296b92fefed43e042fa91ff747aa",
+          "locator": "sections 2-11"
+        },
+        "purpose": "Improve finite bounded protocol precision without target weighting, i.i.d. inflation, rare-event erasure, missingness identification inflation or experience-level reversal.",
+        "thought_experiments": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md section 9",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R163-G2",
+          "R163-G3",
+          "R163-G6",
+          "R163-G8",
+          "R164-G1",
+          "R164-G2",
+          "R164-G3",
+          "R164-G4",
+          "R164-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r164_rare_spike_additive_obstruction",
+            "all_of": [
+              "R163:STUDENT_BOUNDED_COUNTEREXAMPLE"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R164:MISSINGNESS_ENDPOINT_MARTINGALE_BAND",
+      "kind": "FINITE_SAMPLE_PARTIAL_IDENTIFICATION_COVERAGE_THEOREM",
+      "label": "Bounded-Martingale Missingness Endpoint Band",
+      "statement": "When every bounded would-be outcome is well-defined, applying the frozen constant-bet theorem to all 2m lower/upper missingness endpoints with log(4m/alpha) gives simultaneous coverage of every all-enrollee finite-design mean, but leaves the support-identification width 2(1-bar R_j) unchanged.",
+      "domain": "R163 well-defined would-be bounded outcomes, arbitrary observation indicators, independent participant records for fixed finite-design means, frozen endpoint bets/predictors, and no claim for physically undefined post-abort outcomes.",
+      "scope": "R163 well-defined would-be bounded outcomes, arbitrary observation indicators, independent participant records for fixed finite-design means, frozen endpoint bets/predictors, and no claim for physically undefined post-abort outcomes.",
+      "source": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md §8",
+      "source_lineage": "R163 pointwise support endpoints plus R164 bounded-martingale endpoint coverage and a union bound over 2m endpoint means.",
+      "status": "MANUAL_GENERAL_PROOF_WITH_POINTWISE_GRID_CHECK",
+      "proof": "Pointwise L_ij<=Y_ij<=U_ij. Simultaneously cover each endpoint mean with per-endpoint error alpha/(2m), then bracket the all-enrollee mean. Endpoint separation remains Ubar-Lbar=2(1-Rbar).",
+      "counterexamples_and_limits": "Does not point-identify MNAR outcomes, reduce the support width or define outcomes that a safety abort makes physically nonexistent.",
+      "formal_contract_R164": {
+        "object_domain": "One fixed R161 bounded eight-component confirmatory protocol, R162 independent-pilot freezing, and R163 finite-design/missingness targets; no human work occurred.",
+        "quantifiers": "Finite N and m; every component and two tails; every pilot-selected constant bet/predictor plan; every well-defined lower/upper missingness endpoint when that target is invoked.",
+        "bearer_time_signature": "Participant vectors, within-participant components, pilot and confirmatory samples, conditional means, finite-design means, endpoint means, actual token organization and experience remain differently typed.",
+        "source_anchor": {
+          "path": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md",
+          "sha256": "8047751407789ebd6fee5122109c6605c0e8296b92fefed43e042fa91ff747aa",
+          "locator": "sections 2-11"
+        },
+        "purpose": "Improve finite bounded protocol precision without target weighting, i.i.d. inflation, rare-event erasure, missingness identification inflation or experience-level reversal.",
+        "thought_experiments": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md section 9",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R163-G2",
+          "R163-G3",
+          "R163-G6",
+          "R163-G8",
+          "R164-G1",
+          "R164-G2",
+          "R164-G3",
+          "R164-G4",
+          "R164-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r164_missingness_endpoint_martingale_band",
+            "all_of": [
+              "R163:ARBITRARY_MISSINGNESS_BAND",
+              "R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE"
+            ]
+          }
+        ]
+      }
     }
   ],
   "rules": [
@@ -31531,6 +31740,97 @@
         "source_sha256": "313d7c90f491cf2a3456ac517d671acd296432dab27e08711f1efce2336229cb",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r164_frozen_bounded_martingale_coverage",
+      "all_of": [
+        "R161:CONCRETE_CROSSED_PROTOCOL",
+        "R162:INDEPENDENT_PILOT_FREEZE_CONTRACT",
+        "R163:BOUNDED_FINITE_DESIGN_TARGET",
+        "R164:CONSTANT_BET_AVERAGE_TARGET"
+      ],
+      "conclusion": "R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE",
+      "statement": "The concrete bounded protocol, independent pilot-freeze contract, explicit finite-design target and constant-bet target-preservation lemma jointly yield finite-sample simultaneous bounded-martingale coverage for the exact R163 means.",
+      "proof_sketch": "Apply the one-step bounded exponential inequality with constant component bets, union-bound two tails and m components, identify average conditional means with finite-design means under participant independence, then use the pilot tower argument.",
+      "source": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md §§2-5",
+      "kind": "CONDITIONAL_FINITE_SAMPLE_DEDUCTION",
+      "review": "MANUAL_ALL_OF_TARGET_BET_PREDICTOR_INDEPENDENCE_AND_SELECTION_AUDIT",
+      "formal_contract_R164": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same fixed R161 components, signs, order, normalization and decision margin",
+          "same R163 finite-design or explicitly declared average-conditional-mean target",
+          "constant component bet across confirmatory i for the unweighted target",
+          "predictor rule measurable before the observation it predicts",
+          "independent pilot selection and no confirmatory-outcome method search",
+          "independent participant vectors for the fixed R163 target; within-vector component dependence allowed",
+          "well-defined would-be outcomes only when the missingness endpoint route is invoked",
+          "population coverage kept distinct from actual organization and experience-level interpretation"
+        ],
+        "quantification": "Every selected confirmatory plan and frozen component must satisfy the boundedness, constant-bet, predictability, target and independence premises simultaneously.",
+        "proof_location": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md sections 4-8",
+        "source_sha256": "8047751407789ebd6fee5122109c6605c0e8296b92fefed43e042fa91ff747aa",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r164_rare_spike_additive_obstruction",
+      "all_of": [
+        "R163:STUDENT_BOUNDED_COUNTEREXAMPLE"
+      ],
+      "conclusion": "R164:RARE_SPIKE_ADDITIVE_OBSTRUCTION",
+      "statement": "The fixed rare-spike witness yields an exact necessary obstruction for every coordinatewise procedure that excludes the mean on an all-no-spike component.",
+      "proof_sketch": "Compute the independent probability of avoiding every componentwise no-spike failure and solve the resulting familywise inequality.",
+      "source": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md §7",
+      "kind": "FINITE_COUNTEREXAMPLE_CONSEQUENCE",
+      "review": "EXACT_SCOPE_AND_QUANTIFIER_AUDIT",
+      "formal_contract_R164": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same fixed R161 components, signs, order, normalization and decision margin",
+          "same R163 finite-design or explicitly declared average-conditional-mean target",
+          "constant component bet across confirmatory i for the unweighted target",
+          "predictor rule measurable before the observation it predicts",
+          "independent pilot selection and no confirmatory-outcome method search",
+          "independent participant vectors for the fixed R163 target; within-vector component dependence allowed",
+          "well-defined would-be outcomes only when the missingness endpoint route is invoked",
+          "population coverage kept distinct from actual organization and experience-level interpretation"
+        ],
+        "quantification": "Every selected confirmatory plan and frozen component must satisfy the boundedness, constant-bet, predictability, target and independence premises simultaneously.",
+        "proof_location": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md sections 4-8",
+        "source_sha256": "8047751407789ebd6fee5122109c6605c0e8296b92fefed43e042fa91ff747aa",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r164_missingness_endpoint_martingale_band",
+      "all_of": [
+        "R163:ARBITRARY_MISSINGNESS_BAND",
+        "R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE"
+      ],
+      "conclusion": "R164:MISSINGNESS_ENDPOINT_MARTINGALE_BAND",
+      "statement": "R163 pointwise missingness endpoints and R164 endpoint-mean coverage jointly yield a variance-adaptive sampling layer without changing the arbitrary-missingness identification region.",
+      "proof_sketch": "Apply R164 separately to 2m endpoint variables at per-endpoint error alpha/(2m), union-bound, and retain the pointwise endpoint ordering and exact support width.",
+      "source": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md §8",
+      "kind": "CONDITIONAL_PARTIAL_IDENTIFICATION_DEDUCTION",
+      "review": "MANUAL_ALL_OF_ENDPOINT_TARGET_AND_UNDEFINED_OUTCOME_AUDIT",
+      "formal_contract_R164": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same fixed R161 components, signs, order, normalization and decision margin",
+          "same R163 finite-design or explicitly declared average-conditional-mean target",
+          "constant component bet across confirmatory i for the unweighted target",
+          "predictor rule measurable before the observation it predicts",
+          "independent pilot selection and no confirmatory-outcome method search",
+          "independent participant vectors for the fixed R163 target; within-vector component dependence allowed",
+          "well-defined would-be outcomes only when the missingness endpoint route is invoked",
+          "population coverage kept distinct from actual organization and experience-level interpretation"
+        ],
+        "quantification": "Every selected confirmatory plan and frozen component must satisfy the boundedness, constant-bet, predictability, target and independence premises simultaneously.",
+        "proof_location": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md sections 4-8",
+        "source_sha256": "8047751407789ebd6fee5122109c6605c0e8296b92fefed43e042fa91ff747aa",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -32747,6 +33047,19 @@
     "new_nodes": 6,
     "new_rules": 3,
     "status": "BOUNDED_PLANWISE_COVERAGE_AND_TARGET_BOUNDARIES",
+    "actual_apparatus": false,
+    "actual_participants": false,
+    "ethics_approval": false,
+    "empirical_F_witness": false,
+    "global_semantic_proof": false
+  },
+  "research_R164": {
+    "start_head": "41ae6f6df1f7db8c0d0c799ab010638c5e6555b4",
+    "parent_graph_sha256": "f9f71505f4fc59f8b679bf803f28510be6e2548ec3c61103d485fecea0692471",
+    "note": "records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md",
+    "new_nodes": 4,
+    "new_rules": 3,
+    "status": "FROZEN_BOUNDED_MARTINGALE_COVERAGE_WITH_TARGET_DISCIPLINE",
     "actual_apparatus": false,
     "actual_participants": false,
     "ethics_approval": false,

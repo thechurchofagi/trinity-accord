@@ -1,3 +1,9 @@
+## R164 current priority — frozen bounded-martingale coverage
+
+R164-v1.0 has 440 nodes / 212 rules / 117 context links. It freezes one constant bet per component so a bounded predictable-plug-in supermartingale targets the unweighted average conditional mean; under independent confirmatory participants this is exactly R163's finite-design target. The simultaneous eight-component interval is exact finite-sample and retains R161's inherited interval-image/min/max decision, but is not uniformly narrower than Hoeffding.
+
+Read [current handoff](records/R164_Frozen_Bounded_Martingale_20261008/CURRENT_HANDOFF.md), [English note](records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md), [proof ledger](records/R164_Frozen_Bounded_Martingale_20261008/PROOF_LEDGER.json), [gap ledger](records/R164_Frozen_Bounded_Martingale_20261008/GAP_LEDGER.json), [audit](records/R164_Frozen_Bounded_Martingale_20261008/MAP_AUDIT.json), and [checks](records/R164_Frozen_Bounded_Martingale_20261008/EXACT_CHECKS.json). Next: independent-pilot finite bet/predictor menu with a frozen maximum-width/regret rule and `DESIGN_NOT_FEASIBLE`. Do not use variable bets without an unweighted-target theorem; do not erase the rare-spike additive term or arbitrary-missingness identification width.
+
 ## R163 current priority — exact bounded coverage without target inflation
 
 R163 corrects the main R162 stress-test defect. Observed `W_i in [-1,1]^8` cannot also be non-degenerate exact Gaussian. The R162 independent-freeze/tower theorem remains, but Student-Gaussian intervals no longer provide its exact observed-target discharge. An exact two-point bounded law gives only `.2531493944` simultaneous Student-Bonferroni coverage at `N=36,m=8`.

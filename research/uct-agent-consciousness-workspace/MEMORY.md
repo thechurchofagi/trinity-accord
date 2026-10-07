@@ -1,3 +1,11 @@
+## R164 current priority — constant-bet bounded-martingale target preservation
+
+R164 separates classical i.i.d. empirical Bernstein, common-conditional-mean betting, weighted means and the R163 unweighted finite-design target. A constant confirmatory bet per component makes the bounded-supermartingale linear term target the average conditional mean; participant independence identifies it with R163 theta_N.
+
+Map R164-v1.0: 440 nodes / 212 rules / 117 context links, new 4/3. With lambda=.9,c=.5, the R163 rare-spike expected half-width at N=36 is `.3970804573002857` versus Hoeffding `.566093876971036`; at least one no-spike component occurs with probability `.746832681569142`. N=99 controls only this event, while N=257 is only the zero-residual `.05` width threshold. Neither is an actual sample-size recommendation.
+
+Open: finite pilot selection menu, maximum-width/regret objective, same-data-selection guard, participant independence, arbitrary-missingness identification, apparatus and B_min/F_O. Next: predeclare the pilot menu and `DESIGN_NOT_FEASIBLE` rule without changing the target or removing additive protection.
+
 ## R163 current priority — bounded finite-sample coverage and explicit estimands
 
 R163 repaired a joint premise contradiction: the observed R161/R162 vector is exactly bounded in `[-1,1]^8`, so it cannot be a non-degenerate exact Gaussian vector. Preserve R162 history and its independent-pilot tower theorem, but do not use exact Gaussian Student intervals as a finite-sample certificate for observed bounded W.

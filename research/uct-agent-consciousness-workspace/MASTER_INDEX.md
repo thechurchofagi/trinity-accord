@@ -1,3 +1,14 @@
+## R164 — frozen constant-bet bounded-martingale coverage
+
+- English result: `records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md`
+- Chinese review/current handoff: `REVIEW_ZH.md`, `CURRENT_HANDOFF.md` in the same directory
+- Proof/gap/source/amendment ledgers: same directory
+- Exact checks/results: `exact_checks.py`, `EXACT_CHECKS.json`
+- Formal extension/audit/validation: `MAP_EXTENSION.json`, `MAP_AUDIT.json`, `VALIDATION.json`
+- Map: R164-v1.0, 440 nodes / 212 rules, new 4/3; R163 prefix and 117 context links preserved
+- Result boundary: constant bets preserve the unweighted average target; low-residual width can improve, but no uniform gain, no same-data method selection and no missingness-identification shrinkage
+- Next: independent-pilot finite bet/predictor menu, maximum-width/regret criterion and `DESIGN_NOT_FEASIBLE`
+
 ## R163 — bounded planwise coverage, order/clipping boundary and arbitrary missingness
 
 - English result: `records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md`

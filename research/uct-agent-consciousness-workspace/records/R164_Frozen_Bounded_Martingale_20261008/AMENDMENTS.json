@@ -1,0 +1,16 @@
+{
+  "schema": "UCT_R164_AMENDMENTS/v1",
+  "entries": [
+    {
+      "id": "R164-A1",
+      "targets": [
+        "R163 next-question candidate: empirical-Bernstein or bounded-martingale interval",
+        "any future use of common-mean predictable betting for R163:BOUNDED_FINITE_DESIGN_TARGET"
+      ],
+      "problem": "Classical sample-variance empirical Bernstein requires i.i.d. data, while the common-conditional-mean predictable-plug-in theorem permits non-i.i.d. laws only when their conditional means are equal. Neither premise is identical to R163's independent, possibly unequal finite-design means.",
+      "effective_correction": "Use R164's constant-bet average-conditional-mean theorem. Under independent participants it targets the exact unweighted R163 finite-design mean. Varying-bet methods require a separate unweighted-target proof or an explicitly weighted estimand.",
+      "downstream_rule_effect": "No inherited rule is deleted. R164 adds an alternative exact planwise discharge. R163 Hoeffding remains the range-only fallback and the R162 tower theorem remains unchanged.",
+      "status": "EFFECTIVE_FROM_R164"
+    }
+  ]
+}

@@ -1,3 +1,9 @@
+## R164 current priority — preserve the unweighted target while adapting width
+
+Read `records/R164_Frozen_Bounded_Martingale_20261008/CURRENT_HANDOFF.md` and the R164 note/ledgers before continuing. The valid non-identical route uses one pilot-frozen constant bet per component; variable bets generally target a weighted mean when participant conditional means differ. Predictors must be pre-observation measurable and all method/target selection must precede confirmatory outcomes. R163 Hoeffding remains the range-only fallback.
+
+Current map R164-v1.0: 440 nodes / 212 rules, new 4/3; the R163 prefix and 117 context links are preserved. The rare-spike obstruction and additive protection term must remain. Endpoint adaptation cannot erase arbitrary-missingness identification width or define a physically nonexistent post-abort outcome. Next: a finite pilot menu plus predeclared maximum-width/regret and `DESIGN_NOT_FEASIBLE` rules. Do not claim uniform superiority, practical N, apparatus validity, B_min/F_O, consciousness status or publication. Research save only with `[skip ci]`; verify both durable copies.
+
 ## R162 current priority — covariance object and explicit coverage premise
 
 Read `records/R162_Blinded_Pilot_and_Simultaneous_Design_20261008/CURRENT_HANDOFF.md` and the R162 note/ledgers before continuing. The required uncertainty object is one jointly observed eight-component participant vector; never splice marginal variances from separate samples into a covariance matrix. The candidate pilot is disjoint and nuisance-only, but independence alone does not establish calibration. Every future interval family must discharge `R162:PLANWISE_COVERAGE_PREMISE` for every selected frozen plan under a declared target/model.
