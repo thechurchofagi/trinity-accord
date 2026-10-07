@@ -1,0 +1,15 @@
+{
+  "status": "STRUCTURAL_EXTENSION_CHECKS_PASS",
+  "nodes": 399,
+  "rules": 193,
+  "new_nodes": 8,
+  "new_rules": 5,
+  "inherited_nodes_rules_and_links_unchanged": true,
+  "all_rule_endpoints_present": true,
+  "unique_ids": true,
+  "dependency_acyclic": true,
+  "manual_joint_audit": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md \u00a78",
+  "source_sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+  "global_semantic_consistency_certified": false,
+  "proof_assistant_certified": false
+}

@@ -1,0 +1,62 @@
+{
+  "inherited_ledger": "records/R154_All_Rule_Proof_Review_20261007/GAP_LEDGER.json",
+  "inherited_families_closed": [],
+  "entries": [
+    {
+      "id": "R155-G1",
+      "status": "OPEN",
+      "family": "F153-11",
+      "issue": "Independent selected felt-mineness target and fixed interpretation not supplied.",
+      "consequence": "No P1–P4 to felt-mineness theorem.",
+      "next": "Compare candidate selected-target bridges on a fixed domain; reject any that define their target from their predictor."
+    },
+    {
+      "id": "R155-G2",
+      "status": "OPEN",
+      "family": "F153-09/F153-10",
+      "issue": "Actual realization and constitutive descriptor adequacy are not established.",
+      "consequence": "Functional toy is not a complete physical organization or unique bearer criterion.",
+      "next": "Specify physically witnessed typed roles and retained/omitted structure for each proposed realization."
+    },
+    {
+      "id": "R155-G3",
+      "status": "DECLARED_LIMIT",
+      "family": "M",
+      "issue": "Factorized prior/noise, fixed likelihoods and unbiased schedule are restrictive.",
+      "consequence": "Dependent H=K witness breaks separate posterior update.",
+      "next": "Use joint updating only for a specified relevant coupled case; do not silently reuse P1."
+    },
+    {
+      "id": "R155-G4",
+      "status": "DECLARED_LIMIT",
+      "family": "M",
+      "issue": "Passive/no-action observation is missing evidence, not a failed command.",
+      "consequence": "Neutral agency estimate implies no phenomenal absence.",
+      "next": "Separate passive agency target and its evidence protocol if required."
+    },
+    {
+      "id": "R155-G5",
+      "status": "OPEN",
+      "family": "F153-12",
+      "issue": "No human-data fit or independent mineness measurement bridge.",
+      "consequence": "Four functional outcomes are not a new empirical dissociation.",
+      "next": "Use cited work as antecedent and constraint; test specified bridge without outcome-driven refitting."
+    },
+    {
+      "id": "R155-G6",
+      "status": "RESOLVED_SCOPE_ONLY",
+      "family": "finite memory",
+      "issue": "Unbounded exact update conflicts with finite state-only storage.",
+      "consequence": "Finite-T claim retained; no unbounded exact finite-state claim.",
+      "next": "Declare approximation/forgetting/storage change before extending horizon."
+    },
+    {
+      "id": "R155-G7",
+      "status": "OPEN",
+      "family": "F153-16/F153-17",
+      "issue": "No proof-assistant certification or derivation of experiential interpretation from uninterpreted mathematics.",
+      "consequence": "Manual conditional arguments only; C1 remains an axiom.",
+      "next": "Keep semantic and mathematical obligations separate."
+    }
+  ]
+}

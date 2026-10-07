@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R154-v1.0",
+  "revision": "R155-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "06dcd7606daeb1ccc5e9640f4dadf45c41dc2879",
+  "base_commit": "5123c4c20d09fc7102225376ac30c943ed48090d",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -17166,6 +17166,317 @@
         "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
         "machine_formalized": false
       }
+    },
+    {
+      "id": "R155:MODEL",
+      "kind": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "label": "Model",
+      "statement": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct.",
+      "domain": "Finite stochastic acquisition device M, not a definition of basal experience.",
+      "scope": "Finite stochastic acquisition device M, not a definition of basal experience.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §§2–3",
+      "source_lineage": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §§2–3",
+      "status": "DECLARED_MODEL_NOT_PHYSIOLOGICAL_VALIDATION",
+      "proof": "Explicit definitions and simultaneous assumptions; no deduction of their physical truth.",
+      "counterexamples_and_limits": "Coupled priors/noise, biased selection, drifting laws, alternative efficacy mappings and unbounded acquisition require a changed contract.",
+      "formal_contract_R155": {
+        "object_domain": "Finite stochastic acquisition device M, not a definition of basal experience.",
+        "quantifiers": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "bearer_time_signature": "Same bearer/candidate/ports, temporal grain, trial schedule and typed state/use roles within each comparison; actual realization is separately required.",
+        "source_anchor": {
+          "path": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md",
+          "sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+          "locator": "§§2–3"
+        },
+        "purpose": "Positive formation model for bodily/action attribution, with explicit limits on interpreting it as felt mineness.",
+        "machine_formalized": false,
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-16",
+          "F153-17"
+        ],
+        "thought_experiments": "Note §7: formation, abacus/calculator, human implementation, memory/rewiring.",
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R155:FORMATION",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Formation",
+      "statement": "For every legal M history, q_O=3^(2r-n_O)/(1+3^(2r-n_O)) and q_A=3^s/(3^s+2^n_A) equal their model posteriors; finite counter updates realize them. For a fixed finite history, posterior dependence on positive prior/likelihood parameters is continuous; threshold consumption may be discontinuous.",
+      "domain": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct.",
+      "scope": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P1",
+      "source_lineage": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P1",
+      "status": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+      "proof": "Multiply likelihood ratios 3 or 1/3 and 3/2 or 1/2; independent priors/noises cancel other-channel evidence. Normalize positive odds. Finite state counts and positive-denominator ratios give the realization/continuity claims.",
+      "counterexamples_and_limits": "Correct relative to M, not guaranteed latent truth. Missing channel data retain prior 1/2. No experiential onset claim.",
+      "formal_contract_R155": {
+        "object_domain": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct.",
+        "quantifiers": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "bearer_time_signature": "Same bearer/candidate/ports, temporal grain, trial schedule and typed state/use roles within each comparison; actual realization is separately required.",
+        "source_anchor": {
+          "path": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md",
+          "sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+          "locator": "§4 P1"
+        },
+        "purpose": "Positive formation model for bodily/action attribution, with explicit limits on interpreting it as felt mineness.",
+        "machine_formalized": false,
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-16",
+          "F153-17"
+        ],
+        "thought_experiments": "Note §7: formation, abacus/calculator, human implementation, memory/rewiring.",
+        "premise_routes": [
+          {
+            "rule": "r155_formation",
+            "all_of": [
+              "R155:MODEL"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R155:SEPARATION",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Separation",
+      "statement": "At n_O=n_A=2, X in {11,00} and Z in {11,00} give q_O in {9/10,1/10}, q_A in {9/13,1/5}; theta=2/3 realizes all four consumer pairs, each with positive conditional probability for every H,K.",
+      "domain": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct.",
+      "scope": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P2",
+      "source_lineage": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P2",
+      "status": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+      "proof": "Substitute counts in P1 and compare with fixed theta; positive likelihoods and independence give support.",
+      "counterexamples_and_limits": "Functional source/efficacy attribution only. Not a universal phenomenal dissociation or actual attachment change.",
+      "formal_contract_R155": {
+        "object_domain": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct.",
+        "quantifiers": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "bearer_time_signature": "Same bearer/candidate/ports, temporal grain, trial schedule and typed state/use roles within each comparison; actual realization is separately required.",
+        "source_anchor": {
+          "path": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md",
+          "sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+          "locator": "§4 P2"
+        },
+        "purpose": "Positive formation model for bodily/action attribution, with explicit limits on interpreting it as felt mineness.",
+        "machine_formalized": false,
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-16",
+          "F153-17"
+        ],
+        "thought_experiments": "Note §7: formation, abacus/calculator, human implementation, memory/rewiring.",
+        "premise_routes": [
+          {
+            "rule": "r155_separation",
+            "all_of": [
+              "R155:MODEL",
+              "R155:FORMATION"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R155:ERROR",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Error",
+      "statement": "Every finite legal history leaves positive posterior mass on every latent pair H,K. The high/high specified history has conditional probability 1/64 when H=K=0 and joint prior-weighted probability 1/256.",
+      "domain": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct.",
+      "scope": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P3",
+      "source_lineage": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P3",
+      "status": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+      "proof": "Products of positive likelihoods and priors remain positive; normalize. The false-high witness is (1/4)^2(1/2)^2, multiplied by prior 1/4 for the joint event.",
+      "counterexamples_and_limits": "No inference from posterior confidence to actual membership or felt mineness; even a correctly inferred shared external source need not belong to the containing assembly.",
+      "formal_contract_R155": {
+        "object_domain": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct.",
+        "quantifiers": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "bearer_time_signature": "Same bearer/candidate/ports, temporal grain, trial schedule and typed state/use roles within each comparison; actual realization is separately required.",
+        "source_anchor": {
+          "path": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md",
+          "sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+          "locator": "§4 P3"
+        },
+        "purpose": "Positive formation model for bodily/action attribution, with explicit limits on interpreting it as felt mineness.",
+        "machine_formalized": false,
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-16",
+          "F153-17"
+        ],
+        "thought_experiments": "Note §7: formation, abacus/calculator, human implementation, memory/rewiring.",
+        "premise_routes": [
+          {
+            "rule": "r155_error",
+            "all_of": [
+              "R155:MODEL",
+              "R155:FORMATION"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R155:MEMORY_BOUNDARY",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Memory boundary",
+      "statement": "Copying installed state (2,2,2,2) over (2,0,2,2), with ports/attachment fixed, changes q_O and its consumer while q_A remains 9/13. Separately, no deterministic finite-state updater with state-only fixed readout and no external unbounded clock/memory can reproduce exact q_O for all unbounded all-success histories.",
+      "domain": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct. The unbounded clause deliberately drops the finite horizon and tests a separate finite-state exactness demand.",
+      "scope": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct. The unbounded clause deliberately drops the finite horizon and tests a separate finite-state exactness demand.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P4",
+      "source_lineage": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P4",
+      "status": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+      "proof": "Substitute copied counters. For the separate impossibility, outputs 3^n/(1+3^n) are infinitely many distinct numbers; a finite-state fixed readout has finitely many outputs.",
+      "counterexamples_and_limits": "Installed memory differs from R147 report-isolated records. Copying breaks automatic posterior/provenance validity and proves no numerical identity or experience transfer.",
+      "formal_contract_R155": {
+        "object_domain": "Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct. The unbounded clause deliberately drops the finite horizon and tests a separate finite-state exactness demand.",
+        "quantifiers": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "bearer_time_signature": "Same bearer/candidate/ports, temporal grain, trial schedule and typed state/use roles within each comparison; actual realization is separately required.",
+        "source_anchor": {
+          "path": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md",
+          "sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+          "locator": "§4 P4"
+        },
+        "purpose": "Positive formation model for bodily/action attribution, with explicit limits on interpreting it as felt mineness.",
+        "machine_formalized": false,
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-16",
+          "F153-17"
+        ],
+        "thought_experiments": "Note §7: formation, abacus/calculator, human implementation, memory/rewiring.",
+        "premise_routes": [
+          {
+            "rule": "r155_memory_boundary",
+            "all_of": [
+              "R155:MODEL",
+              "R155:FORMATION"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R155:SELECTED_TARGET",
+      "kind": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "label": "Selected target",
+      "statement": "Fix nonempty actual configuration domain Omega, common bearer/window/signature/target convention, finite descriptor J:Omega->Jspace and independently specified selected experiential target F:Omega->Fspace. Do not define F from J or from a report to make the desired bridge true.",
+      "domain": "Actual configurations with a fixed target convention; no claim that a physically adequate J or identifiable mineness F has already been supplied.",
+      "scope": "Actual configurations with a fixed target convention; no claim that a physically adequate J or identifiable mineness F has already been supplied.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §5",
+      "source_lineage": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §5",
+      "status": "DECLARED_TARGET_CONTRACT",
+      "proof": "Typed target contract, not evidence that its phenomenological instantiation is known.",
+      "counterexamples_and_limits": "A mathematical target can be stipulated, but its mineness interpretation remains open.",
+      "formal_contract_R155": {
+        "object_domain": "Actual configurations with a fixed target convention; no claim that a physically adequate J or identifiable mineness F has already been supplied.",
+        "quantifiers": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "bearer_time_signature": "Same bearer/candidate/ports, temporal grain, trial schedule and typed state/use roles within each comparison; actual realization is separately required.",
+        "source_anchor": {
+          "path": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md",
+          "sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+          "locator": "§5"
+        },
+        "purpose": "Positive formation model for bodily/action attribution, with explicit limits on interpreting it as felt mineness.",
+        "machine_formalized": false,
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-16",
+          "F153-17"
+        ],
+        "thought_experiments": "Note §7: formation, abacus/calculator, human implementation, memory/rewiring.",
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R155:BRIDGE_CRITERION",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Bridge criterion",
+      "statement": "A fixed decoder psi on the realized descriptor image with F=psi∘J exists iff F is constant on every J-fiber. This criterion supplies no selected mineness semantics, injectivity, monotonicity or empirical measurement bridge.",
+      "domain": "The shared Omega,J,F contract of R155:SELECTED_TARGET; decoder required only on realized J values.",
+      "scope": "The shared Omega,J,F contract of R155:SELECTED_TARGET; decoder required only on realized J values.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §5",
+      "source_lineage": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §5",
+      "status": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+      "proof": "Necessity follows by equal decoder input. For sufficiency assign each realized J the unique F value of its nonempty fiber. Application of existing C:P2_COORD.",
+      "counterexamples_and_limits": "No premises in the acquisition device establish the required phenomenal F or its fiber constancy.",
+      "formal_contract_R155": {
+        "object_domain": "The shared Omega,J,F contract of R155:SELECTED_TARGET; decoder required only on realized J values.",
+        "quantifiers": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "bearer_time_signature": "Same bearer/candidate/ports, temporal grain, trial schedule and typed state/use roles within each comparison; actual realization is separately required.",
+        "source_anchor": {
+          "path": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md",
+          "sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+          "locator": "§5"
+        },
+        "purpose": "Positive formation model for bodily/action attribution, with explicit limits on interpreting it as felt mineness.",
+        "machine_formalized": false,
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-16",
+          "F153-17"
+        ],
+        "thought_experiments": "Note §7: formation, abacus/calculator, human implementation, memory/rewiring.",
+        "premise_routes": [
+          {
+            "rule": "r155_selected_bridge",
+            "all_of": [
+              "R155:SELECTED_TARGET",
+              "C:P2_COORD"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R155:MINENESS_OBLIGATION",
+      "kind": "OPEN_OBLIGATION",
+      "label": "Mineness obligation",
+      "statement": "To interpret the acquisition device as a model of selected felt mineness, independently ground actual realization, selected experiential target, fixed output-blind interpretation, descriptor sufficiency/fiber constancy on a specified domain and an empirical measurement bridge when observations are used. These conditions remain open.",
+      "domain": "Restricted bodily/action-related mineness; neither all selfhood nor basal consciousness.",
+      "scope": "Restricted bodily/action-related mineness; neither all selfhood nor basal consciousness.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §§5,8",
+      "source_lineage": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §§5,8",
+      "status": "OPEN_NOT_DERIVED",
+      "proof": "Obligation ledger only; no proof edge from functional acquisition to felt mineness.",
+      "counterexamples_and_limits": "C1 complete experiential identity does not by itself select this coordinate; naming a register ownership is insufficient.",
+      "formal_contract_R155": {
+        "object_domain": "Restricted bodily/action-related mineness; neither all selfhood nor basal consciousness.",
+        "quantifiers": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "bearer_time_signature": "Same bearer/candidate/ports, temporal grain, trial schedule and typed state/use roles within each comparison; actual realization is separately required.",
+        "source_anchor": {
+          "path": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md",
+          "sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+          "locator": "§§5,8"
+        },
+        "purpose": "Positive formation model for bodily/action attribution, with explicit limits on interpreting it as felt mineness.",
+        "machine_formalized": false,
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-16",
+          "F153-17"
+        ],
+        "thought_experiments": "Note §7: formation, abacus/calculator, human implementation, memory/rewiring.",
+        "premise_routes": []
+      }
     }
   ],
   "rules": [
@@ -29101,6 +29412,150 @@
         "review_status": "R153_EXPANDED_ARGUMENT_AND_BOUNDARY_REVIEW",
         "carried_from": "R153 expanded argument, not reclassified as a new R154 proof"
       }
+    },
+    {
+      "id": "r155_formation",
+      "all_of": [
+        "R155:MODEL"
+      ],
+      "conclusion": "R155:FORMATION",
+      "statement": "For every legal M history, q_O=3^(2r-n_O)/(1+3^(2r-n_O)) and q_A=3^s/(3^s+2^n_A) equal their model posteriors; finite counter updates realize them. For a fixed finite history, posterior dependence on positive prior/likelihood parameters is continuous; threshold consumption may be discontinuous.",
+      "proof_sketch": "Multiply likelihood ratios 3 or 1/3 and 3/2 or 1/2; independent priors/noises cancel other-channel evidence. Normalize positive odds. Finite state counts and positive-denominator ratios give the realization/continuity claims.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P1",
+      "kind": "DEDUCTIVE_APPLICATION",
+      "review": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+      "formal_contract_R155": {
+        "relation_type": "DEDUCTIVE_APPLICATION",
+        "premise_connective": "AND",
+        "alternative_routes": "Separate rule IDs denote OR alternatives; no unstated physiological or experiential premise is discharged.",
+        "bindings_required": [
+          "same model parameters and legal histories",
+          "same target/bearer/ports/time grain where shared",
+          "fixed consumer and evidence protocol",
+          "no observational/interventional substitution"
+        ],
+        "quantification": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "proof_location": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P1",
+        "source_sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+        "review_status": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r155_separation",
+      "all_of": [
+        "R155:MODEL",
+        "R155:FORMATION"
+      ],
+      "conclusion": "R155:SEPARATION",
+      "statement": "At n_O=n_A=2, X in {11,00} and Z in {11,00} give q_O in {9/10,1/10}, q_A in {9/13,1/5}; theta=2/3 realizes all four consumer pairs, each with positive conditional probability for every H,K.",
+      "proof_sketch": "Substitute counts in P1 and compare with fixed theta; positive likelihoods and independence give support.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P2",
+      "kind": "DEDUCTIVE_APPLICATION",
+      "review": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+      "formal_contract_R155": {
+        "relation_type": "DEDUCTIVE_APPLICATION",
+        "premise_connective": "AND",
+        "alternative_routes": "Separate rule IDs denote OR alternatives; no unstated physiological or experiential premise is discharged.",
+        "bindings_required": [
+          "same model parameters and legal histories",
+          "same target/bearer/ports/time grain where shared",
+          "fixed consumer and evidence protocol",
+          "no observational/interventional substitution"
+        ],
+        "quantification": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "proof_location": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P2",
+        "source_sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+        "review_status": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r155_error",
+      "all_of": [
+        "R155:MODEL",
+        "R155:FORMATION"
+      ],
+      "conclusion": "R155:ERROR",
+      "statement": "Every finite legal history leaves positive posterior mass on every latent pair H,K. The high/high specified history has conditional probability 1/64 when H=K=0 and joint prior-weighted probability 1/256.",
+      "proof_sketch": "Products of positive likelihoods and priors remain positive; normalize. The false-high witness is (1/4)^2(1/2)^2, multiplied by prior 1/4 for the joint event.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P3",
+      "kind": "DEDUCTIVE_APPLICATION",
+      "review": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+      "formal_contract_R155": {
+        "relation_type": "DEDUCTIVE_APPLICATION",
+        "premise_connective": "AND",
+        "alternative_routes": "Separate rule IDs denote OR alternatives; no unstated physiological or experiential premise is discharged.",
+        "bindings_required": [
+          "same model parameters and legal histories",
+          "same target/bearer/ports/time grain where shared",
+          "fixed consumer and evidence protocol",
+          "no observational/interventional substitution"
+        ],
+        "quantification": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "proof_location": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P3",
+        "source_sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+        "review_status": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r155_memory_boundary",
+      "all_of": [
+        "R155:MODEL",
+        "R155:FORMATION"
+      ],
+      "conclusion": "R155:MEMORY_BOUNDARY",
+      "statement": "Copying installed state (2,2,2,2) over (2,0,2,2), with ports/attachment fixed, changes q_O and its consumer while q_A remains 9/13. Separately, no deterministic finite-state updater with state-only fixed readout and no external unbounded clock/memory can reproduce exact q_O for all unbounded all-success histories.",
+      "proof_sketch": "Substitute copied counters. For the separate impossibility, outputs 3^n/(1+3^n) are infinitely many distinct numbers; a finite-state fixed readout has finitely many outputs.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P4",
+      "kind": "DEDUCTIVE_APPLICATION",
+      "review": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+      "formal_contract_R155": {
+        "relation_type": "DEDUCTIVE_APPLICATION",
+        "premise_connective": "AND",
+        "alternative_routes": "Separate rule IDs denote OR alternatives; no unstated physiological or experiential premise is discharged.",
+        "bindings_required": [
+          "same model parameters and legal histories",
+          "same target/bearer/ports/time grain where shared",
+          "fixed consumer and evidence protocol",
+          "no observational/interventional substitution"
+        ],
+        "quantification": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "proof_location": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §4 P4",
+        "source_sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+        "review_status": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r155_selected_bridge",
+      "all_of": [
+        "R155:SELECTED_TARGET",
+        "C:P2_COORD"
+      ],
+      "conclusion": "R155:BRIDGE_CRITERION",
+      "statement": "A fixed decoder psi on the realized descriptor image with F=psi∘J exists iff F is constant on every J-fiber. This criterion supplies no selected mineness semantics, injectivity, monotonicity or empirical measurement bridge.",
+      "proof_sketch": "Necessity follows by equal decoder input. For sufficiency assign each realized J the unique F value of its nonempty fiber. Application of existing C:P2_COORD.",
+      "source": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §5",
+      "kind": "DEDUCTIVE_APPLICATION",
+      "review": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+      "formal_contract_R155": {
+        "relation_type": "DEDUCTIVE_APPLICATION",
+        "premise_connective": "AND",
+        "alternative_routes": "Separate rule IDs denote OR alternatives; no unstated physiological or experiential premise is discharged.",
+        "bindings_required": [
+          "same model parameters and legal histories",
+          "same target/bearer/ports/time grain where shared",
+          "fixed consumer and evidence protocol",
+          "no observational/interventional substitution"
+        ],
+        "quantification": "Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims.",
+        "proof_location": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md §5",
+        "source_sha256": "2e878cfd1ada72b0090dd64f08eb69187b00cd392542523fc0a372184dad4977",
+        "review_status": "MANUAL_CONDITIONAL_MATHEMATICAL_ARGUMENT",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -29558,6 +30013,36 @@
       "from": "TA18:FACTOR",
       "to": "R149:COMPATIBILITY",
       "relation": "compatibility of a selected germ quotient with a complete target needs type reflection"
+    },
+    {
+      "from": "A:C1",
+      "to": "R155:MINENESS_OBLIGATION",
+      "relation": "experiential axiom does not independently identify the selected mineness coordinate"
+    },
+    {
+      "from": "A:U1",
+      "to": "R155:MODEL",
+      "relation": "consumer threshold is not a basal experience gate"
+    },
+    {
+      "from": "R146:SELF_CONTRACT",
+      "to": "R155:MODEL",
+      "relation": "target/grounding/use distinctions; source estimate is not automatically an own-target estimator"
+    },
+    {
+      "from": "R147:ROUTING_LIMIT",
+      "to": "R155:ERROR",
+      "relation": "grounded routing counterexample motivates separation of prediction and attachment; context not a Bayes proof premise"
+    },
+    {
+      "from": "R147:MEMORY_LIMIT",
+      "to": "R155:MEMORY_BOUNDARY",
+      "relation": "different isolation assumptions: active consumer memory versus report-only record"
+    },
+    {
+      "from": "R155:BRIDGE_CRITERION",
+      "to": "R155:MINENESS_OBLIGATION",
+      "relation": "criterion states the unfulfilled selected-target sufficiency obligation"
     }
   ],
   "prohibited_inferences_D": [
@@ -30083,5 +30568,17 @@
     "global_semantic_consistency_certified": false,
     "records": "records/R154_All_Rule_Proof_Review_20261007",
     "joint_audit": "records/R154_All_Rule_Proof_Review_20261007/JOINT_AUDIT.md"
+  },
+  "research_R155": {
+    "parent_commit": "5123c4c20d09fc7102225376ac30c943ed48090d",
+    "parent_graph_sha256": "e7e447cb7bbd9e22e0516326985cdb125021d1f6fd53235bcb77d9524c2eda77",
+    "record": "records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md",
+    "new_nodes": 8,
+    "new_rules": 5,
+    "status": "FINITE_FUNCTIONAL_FORMATION_MODEL_WITH_OPEN_MINENESS_BRIDGE",
+    "current_contract": "R155 for new nodes/rules only; inherited R154/R153 effective contracts unchanged",
+    "claims": "Classical Bayesian construction and finite-state arguments; no broad novelty, physiological or phenomenal validation.",
+    "gap_ledger": "records/R155_Bodily_Attribution_Formation_20261007/GAP_LEDGER.json",
+    "validation": "records/R155_Bodily_Attribution_Formation_20261007/VALIDATION.json"
   }
 }

@@ -1,0 +1,129 @@
+{
+  "status": "BOUNDED_EXACT_CHECKS_PASS",
+  "checks": [
+    {
+      "name": "posterior_vs_direct_joint_Bayes",
+      "passed": true,
+      "scope": "961 paired histories, each channel length 0..4, exact rational arithmetic"
+    },
+    {
+      "name": "all_latent_pairs_retain_positive_posterior",
+      "passed": true,
+      "scope": "same 961 histories; general proof in P3"
+    },
+    {
+      "name": "four_consumer_pairs",
+      "passed": true,
+      "scope": "T=2 theta=2/3 with one common contract"
+    },
+    {
+      "name": "wrong_high_high_event_probability",
+      "passed": true,
+      "scope": "conditional on H=K=0; unconditional joint event 1/256"
+    },
+    {
+      "name": "missing_is_not_failure",
+      "passed": true,
+      "scope": "no intervention vs one failed match"
+    },
+    {
+      "name": "dependent_prior_breaks_separate_updates",
+      "passed": true,
+      "scope": "H=K prior; source evidence must inform K"
+    },
+    {
+      "name": "installed_memory_copy_changes_consumer",
+      "passed": true,
+      "scope": "source state copy; action state and ports unchanged"
+    },
+    {
+      "name": "finite_state_bound",
+      "passed": true,
+      "scope": "count enumeration T=2..6; general counting expression in M"
+    },
+    {
+      "name": "all_success_outputs_strictly_distinct",
+      "passed": true,
+      "scope": "30 comparisons only; unbounded impossibility proved in P4"
+    },
+    {
+      "name": "observation_does_not_replace_intervention",
+      "passed": true,
+      "scope": "binary common-cause countermodel, outside M randomized protocol"
+    },
+    {
+      "name": "selected_target_fiber_test",
+      "passed": true,
+      "scope": "three abstract configurations; no phenomenal target claimed"
+    }
+  ],
+  "check_count": 11,
+  "four_rows": [
+    {
+      "X": [
+        1,
+        1
+      ],
+      "Z": [
+        1,
+        1
+      ],
+      "q_O": "9/10",
+      "q_A": "9/13",
+      "consumers": [
+        1,
+        1
+      ]
+    },
+    {
+      "X": [
+        1,
+        1
+      ],
+      "Z": [
+        0,
+        0
+      ],
+      "q_O": "9/10",
+      "q_A": "1/5",
+      "consumers": [
+        1,
+        0
+      ]
+    },
+    {
+      "X": [
+        0,
+        0
+      ],
+      "Z": [
+        1,
+        1
+      ],
+      "q_O": "1/10",
+      "q_A": "9/13",
+      "consumers": [
+        0,
+        1
+      ]
+    },
+    {
+      "X": [
+        0,
+        0
+      ],
+      "Z": [
+        0,
+        0
+      ],
+      "q_O": "1/10",
+      "q_A": "1/5",
+      "consumers": [
+        0,
+        0
+      ]
+    }
+  ],
+  "proof_assistant_certified": false,
+  "physical_or_phenomenal_validation": false
+}

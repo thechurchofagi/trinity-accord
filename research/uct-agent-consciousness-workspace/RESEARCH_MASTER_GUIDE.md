@@ -1,3 +1,15 @@
+## R155 current research — bodily/action attribution formation, 7 October 2026
+
+The author approved advancing the positive bodily/action-mineness direction. [R155 note](records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md) supplies a fixed finite acquisition mechanism, four local mathematical arguments, installed consumers, error/memory witnesses and all four thought-experiment families. [Chinese review](records/R155_Bodily_Attribution_Formation_20261007/REVIEW_ZH.md), [handoff](records/R155_Bodily_Attribution_Formation_20261007/CURRENT_HANDOFF.md), [gaps](records/R155_Bodily_Attribution_Formation_20261007/GAP_LEDGER.json), [checks](records/R155_Bodily_Attribution_Formation_20261007/VALIDATION.json).
+
+Current map: **R155-v1.0, 399 nodes / 193 rules**. Eight new nodes and five conditional routes; all inherited 391 nodes / 188 rules and context links are unchanged. `formal_contract_R155` governs new entries only; inherited R154/R153 effective contracts remain. Eleven bounded checks pass, including 961 exact history-pair comparisons. This is not proof-assistant certification, physiological validation or a new theory of all selfhood.
+
+The positive result concerns formation of **functional source/efficacy attribution**. Actual attachment, source inference, action efficacy, felt mineness, conceptual I and numerical persistence remain distinct. Classical Bayesian updating and finite-state counting are not claimed as new discoveries. The main unresolved obligation is an **independently specified selected-mineness target and fixed organizational/measurement bridge**. C1 does not by itself name that selected coordinate. No basal-experience gate or closure of F153-11/F153-17 was added.
+
+Next substantive work should compare a few candidate selected-mineness bridges on a fixed actual domain, with fiber counterexamples and independent target semantics. Do not substitute node growth or generic control extensions for this task. Retain frequent concrete progress reports. Research storage only, with [skip ci]; frozen publications remain unchanged. Separate TA25 preservation is unchanged from the R154 hard-blocker record below.
+
+Earlier records below are historical where superseded.
+
 ## R154 current priority — all registered rule arguments reviewed, 7 October 2026
 
 The author asked to finish the strict formal map and report progress frequently. Current graph is **R154-v1.0: 391 concepts / 188 rules**. R154 supplies individual argument/boundary cards for all **128** rules that still had inherited sketches at R153; the other **60** retain their expanded R153 arguments. All registered rules now have an explicit argument-review route. This is finite-map manual review, **not 188 proved theorems, proof-assistant certification or complete physical/phenomenological validation**.
