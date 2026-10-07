@@ -1,0 +1,71 @@
+{
+  "schema": "UCT_R164_DUAL_SAVE_RECEIPT/v1",
+  "round": "R164",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "start_head": "41ae6f6df1f7db8c0d0c799ab010638c5e6555b4",
+    "research_commit": "d474dfb525429b587cbd5efbfa3a3fb280519961",
+    "research_tree": "45d57331c887f50d4d3b1820c28bee5db0146fa6",
+    "expected_sha_fast_forward": true,
+    "remote_tree_readback": "PASS",
+    "direct_local_git_push": "FAILED_NO_CREDENTIAL_PROMPT_CHANNEL; authorized expected-SHA Git data path used without force"
+  },
+  "fixed_handoff": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000e4788230b914436f8ce4a320",
+    "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+    "previous_version_read": 7,
+    "current_version": 8,
+    "bytes": 41518,
+    "sha256": "a227153baa2c3f702dcfcbcd98e5fe37eb7d5b1f482a13afe5196a00b93b5990",
+    "exact_materialized_readback": "PASS"
+  },
+  "cumulative_recovery_increment": {
+    "library_file_id": "libfile_2b19b033c5588191ac0a73aaea05ee18",
+    "file_id": "file_00000000d56481f5883ff3bf22ca4ba2",
+    "file_name": "UCT_R157_R164_Cumulative_Increment_20261008.zip",
+    "version": 0,
+    "bytes": 611848,
+    "sha256": "808a3b2442abb39e7879e08d2f696d4df88d5c296a07864bfb305a2458ac0687",
+    "payload_files": 125,
+    "zip_members": 126,
+    "restored_working_set_files": 510,
+    "crc_member_hash_and_restore_probe": "PASS",
+    "exact_materialized_readback": "PASS",
+    "scope": "Cumulative increment relative to exact R156 working-set base; not full repository, full history or standalone complete backup."
+  },
+  "save_verification": {
+    "library_file_id": "libfile_e7e380136d30819195b1e09ed01ec96e",
+    "file_id": "file_00000000f75081f682ba2587ed11ef16",
+    "file_name": "UCT_R164_Save_Verification_20261008.json",
+    "version": 0,
+    "bytes": 2572,
+    "sha256": "03796807deeabe6c6362e3ea76739775449e43a33d7251e90e9cf9324c38b7ec",
+    "exact_materialized_readback": "PASS"
+  },
+  "required_restore_baseline": {
+    "library_file_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
+    "file_name": "UCT_R156_Working_Set_20261007.zip",
+    "bytes": 3493643,
+    "sha256": "95cc3ea1ec45eb273531c25525edcb7f8e6f2088c650a39b97d24817704ec40a",
+    "working_set_files": 384
+  },
+  "latest_completed_step": "R164 target-preserving bounded-martingale theorem, rare-spike obstruction and missingness-endpoint audit passed; GitHub research tree, fixed handoff version 8, cumulative increment and save-verification file were each remotely read back.",
+  "unfinished": [
+    "finite pilot menu and predeclared maximum-width or regret criterion",
+    "same-confirmatory-data selection guard and DESIGN_NOT_FEASIBLE rule",
+    "actual participant independence and apparatus fidelity",
+    "arbitrary-missingness identification and undefined post-abort outcomes",
+    "R161 physical/measurement gates and experience-level B_min/F_O bridge"
+  ],
+  "failures": [
+    "i.i.d. empirical Bernstein is not a non-identical finite-design theorem",
+    "varying bets generally change the unweighted target",
+    "rare-spike additive protection cannot be removed",
+    "direct local git credential push was unavailable"
+  ],
+  "recovery_action": "Fetch the latest branch head and read fixed handoff version 8. Verify/extract the exact R156 base, overlay all 125 non-manifest members from the R157-R164 increment, verify hashes, then reconcile this later receipt commit before starting the next round.",
+  "status": "TWO_DESTINATION_SAVE_AND_READBACK_PASS",
+  "continuation": "R164 is a verified checkpoint, not completion of the ongoing research program."
+}

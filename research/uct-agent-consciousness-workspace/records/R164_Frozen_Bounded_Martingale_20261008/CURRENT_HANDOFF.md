@@ -36,4 +36,4 @@ Do not use varying bets without a separate unweighted-target theorem. Do not del
 
 ## Storage state
 
-The research checkpoint is ready for a `[skip ci]` fast-forward commit. Durable GitHub and fixed-handoff/package identities must be filled only after remote and Library readback; local files alone do not establish double-save success.
+The research tree is remotely verified at commit `d474dfb525429b587cbd5efbfa3a3fb280519961`, tree `45d57331c887f50d4d3b1820c28bee5db0146fa6`. The fixed handoff retained identity `libfile_4175a81748fc819187fa8f5771f056fa` and advanced from version 7 to 8 with exact byte readback. The R157–R164 cumulative increment is `libfile_2b19b033c5588191ac0a73aaea05ee18`, SHA-256 `808a3b2442abb39e7879e08d2f696d4df88d5c296a07864bfb305a2458ac0687`, 611848 bytes, 125 payload files plus manifest; it is relative to the exact R156 baseline and is not a standalone full backup. Exact identities and verification-file readback are in `DUAL_SAVE_RECEIPT.json`. Fetch the branch before continuing because the receipt-bearing storage commit follows the research commit.
