@@ -181,6 +181,7 @@
         "exact_checks.py",
         "EXACT_CHECKS.json",
         "build_map.py",
+        "make_cumulative_increment.py",
         "REVIEW_ZH.md",
         "CURRENT_HANDOFF.md"
       ]

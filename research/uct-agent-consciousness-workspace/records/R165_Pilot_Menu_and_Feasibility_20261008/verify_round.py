@@ -94,7 +94,7 @@ record("counterexample", results["checks"]["no_transport_reversal"]["pass"], res
 record("same_data_selection_guard", results["checks"]["same_data_selection_inflation"]["pass"], results["checks"]["same_data_selection_inflation"])
 record("worked_menu", results["checks"]["worked_menu"]["pass"], results["checks"]["worked_menu"]["states"])
 
-required = ["ROUND_RECORD.md", "Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md", "PROOF_LEDGER.json", "GAP_LEDGER.json", "AMENDMENTS.json", "SOURCE_LEDGER.json", "MAP_EXTENSION.json", "MAP_AUDIT.json", "exact_checks.py", "EXACT_CHECKS.json", "build_map.py", "REVIEW_ZH.md", "CURRENT_HANDOFF.md"]
+required = ["ROUND_RECORD.md", "Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md", "PROOF_LEDGER.json", "GAP_LEDGER.json", "AMENDMENTS.json", "SOURCE_LEDGER.json", "MAP_EXTENSION.json", "MAP_AUDIT.json", "exact_checks.py", "EXACT_CHECKS.json", "build_map.py", "make_cumulative_increment.py", "REVIEW_ZH.md", "CURRENT_HANDOFF.md"]
 record("required_artifacts_present", all((HERE / name).exists() for name in required), required)
 
 payload = {

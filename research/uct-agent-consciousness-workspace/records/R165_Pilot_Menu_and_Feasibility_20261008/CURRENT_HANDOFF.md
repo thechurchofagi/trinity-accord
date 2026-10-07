@@ -8,7 +8,7 @@ Date: 2026-10-08
 - Parent graph: R164-v1.0, SHA-256 `bd8868a206e7fe39b190204d4f252fd2a02f060855e199b1aeeb684a108b6499`, 440 nodes / 212 rules / 117 context links.
 - R165 graph: R165-v1.0, SHA-256 `3911f7bc9720c3568b81ab30638bac7f49bb596679ab1bf13e1c017b3c3fa1ba`, 446 nodes / 215 rules / 117 context links.
 - Exact checks: 475 transport cases and 6,125 triage cases pass, plus the independence-without-transport reversal and same-data selection inflation witnesses. Exact-results SHA-256 `4ae697d392c818785a08783285e5138e51e745c1c644c9994236b89aaa11bb9d`.
-- Validation: 19/19 checks pass. `VALIDATION.json` SHA-256 `0f8ab7eab433fd245c9c1295b47ddd31d4312813c667a62292c226a39d893d34`.
+- Validation: 19/19 checks pass. `VALIDATION.json` SHA-256 `d4ce191f76640898a6c2f6ea212390dec3a90f8db513001880263e120ad02b6f`.
 - Direction checks after topic selection, after result formation and before save: PASS.
 
 ## Effective result and correction
