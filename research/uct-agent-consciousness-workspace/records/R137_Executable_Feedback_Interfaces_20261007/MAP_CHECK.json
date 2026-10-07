@@ -1,0 +1,814 @@
+{
+  "revision": "R137-v1.0",
+  "nodes": 328,
+  "rules": 157,
+  "dependency_arcs": 372,
+  "checks": [
+    {
+      "check": "unique node IDs",
+      "pass": true
+    },
+    {
+      "check": "unique rule IDs",
+      "pass": true
+    },
+    {
+      "check": "no unresolved review markers",
+      "pass": true
+    },
+    {
+      "check": "rule endpoints exist",
+      "pass": true
+    },
+    {
+      "check": "conjunctive rules have premises, claim, source and proof",
+      "pass": true
+    },
+    {
+      "check": "no direct self-dependency",
+      "pass": true
+    },
+    {
+      "check": "context endpoints exist",
+      "pass": true
+    },
+    {
+      "check": "acyclic union of proof-rule dependencies",
+      "pass": true
+    },
+    {
+      "check": "C1 remains an axiom without incoming inference",
+      "pass": true
+    },
+    {
+      "check": "U1 is not an input to U2",
+      "pass": true
+    },
+    {
+      "check": "U2 is not an input to U1",
+      "pass": true
+    },
+    {
+      "check": "E1 does not require continuity",
+      "pass": true
+    },
+    {
+      "check": "E2 does not require U1",
+      "pass": true
+    },
+    {
+      "check": "A:E3 mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "A:ORBIT_LEMMA mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "B:REP mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "A:UCTII_RECON mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "C:P2_COORD mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "C:P4 mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "C:P5 mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "C:P6 mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "C:P7 mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R126:P2 mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R126:P3 mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R126:P4 mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R127:P1 mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R127:P2 mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R127:P3 mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "N128:DET_JOIN mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "N128:MARKOV_JOIN mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "N128:JOINT_CRITERION mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "full-type NESIG retains C1",
+      "pass": true
+    },
+    {
+      "check": "full identification retains C1",
+      "pass": true
+    },
+    {
+      "check": "screened-history experiential equality excludes P6",
+      "pass": true
+    },
+    {
+      "check": "screened-history lineage addendum includes P6",
+      "pass": true
+    },
+    {
+      "check": "evolutionary synthesis has two alternative routes",
+      "pass": true
+    },
+    {
+      "check": "A:C1 has no downstream finite/empirical backflow",
+      "pass": true
+    },
+    {
+      "check": "A:U1 has no downstream finite/empirical backflow",
+      "pass": true
+    },
+    {
+      "check": "A:U2 has no downstream finite/empirical backflow",
+      "pass": true
+    },
+    {
+      "check": "selected experiential interpretation has actual-support premise",
+      "pass": true
+    },
+    {
+      "check": "A exact byte count",
+      "pass": true
+    },
+    {
+      "check": "A publication SHA256",
+      "pass": true
+    },
+    {
+      "check": "A Git blob identity",
+      "pass": true
+    },
+    {
+      "check": "B exact byte count",
+      "pass": true
+    },
+    {
+      "check": "B publication SHA256",
+      "pass": true
+    },
+    {
+      "check": "B Git blob identity",
+      "pass": true
+    },
+    {
+      "check": "C exact byte count",
+      "pass": true
+    },
+    {
+      "check": "C publication SHA256",
+      "pass": true
+    },
+    {
+      "check": "C Git blob identity",
+      "pass": true
+    },
+    {
+      "check": "D exact byte count",
+      "pass": true
+    },
+    {
+      "check": "D publication SHA256",
+      "pass": true
+    },
+    {
+      "check": "D Git blob identity",
+      "pass": true
+    },
+    {
+      "check": "original A graph inventory retained",
+      "pass": true
+    },
+    {
+      "check": "original A node IDs preserved in namespace",
+      "pass": true
+    },
+    {
+      "check": "all R136 nodes preserved field-for-field",
+      "pass": true
+    },
+    {
+      "check": "all R136 node IDs retained with 13 new nodes",
+      "pass": true
+    },
+    {
+      "check": "all R136 rules preserved field-for-field",
+      "pass": true
+    },
+    {
+      "check": "all R136 rule IDs retained with 7 new rules",
+      "pass": true
+    },
+    {
+      "check": "all four source papers present",
+      "pass": true
+    },
+    {
+      "check": "all original D definitions and claims retained",
+      "pass": true
+    },
+    {
+      "check": "all original D allowed edges retained as context",
+      "pass": true
+    },
+    {
+      "check": "D:E1 is not a derived proof conclusion",
+      "pass": true
+    },
+    {
+      "check": "D:E2 is not a derived proof conclusion",
+      "pass": true
+    },
+    {
+      "check": "D:E3 is not a derived proof conclusion",
+      "pass": true
+    },
+    {
+      "check": "D:E4 is not a derived proof conclusion",
+      "pass": true
+    },
+    {
+      "check": "D:A1 is not a derived proof conclusion",
+      "pass": true
+    },
+    {
+      "check": "D:S1 is not a derived proof conclusion",
+      "pass": true
+    },
+    {
+      "check": "D:D7 is not a derived proof conclusion",
+      "pass": true
+    },
+    {
+      "check": "D:F1 is mathematically independent of C1",
+      "pass": true
+    },
+    {
+      "check": "D:F2 is mathematically independent of C1",
+      "pass": true
+    },
+    {
+      "check": "D:F3 is mathematically independent of C1",
+      "pass": true
+    },
+    {
+      "check": "D:PAYOFF is mathematically independent of C1",
+      "pass": true
+    },
+    {
+      "check": "D:VALUE_GAP is mathematically independent of C1",
+      "pass": true
+    },
+    {
+      "check": "D:FRECHET is mathematically independent of C1",
+      "pass": true
+    },
+    {
+      "check": "D:GRID_BOUND is mathematically independent of C1",
+      "pass": true
+    },
+    {
+      "check": "D:SEPARABLE is mathematically independent of C1",
+      "pass": true
+    },
+    {
+      "check": "D experiential interpretation retains C1 and actual premise",
+      "pass": true
+    },
+    {
+      "check": "D full-rank identification does not pretend to follow from nonidentification alone",
+      "pass": true
+    },
+    {
+      "check": "D five original prohibited inferences retained",
+      "pass": true
+    },
+    {
+      "check": "D valence obligation remains OPEN",
+      "pass": true
+    },
+    {
+      "check": "D_publication_record.json exact source identity",
+      "pass": true
+    },
+    {
+      "check": "D_TA24_v1_0.md exact source identity",
+      "pass": true
+    },
+    {
+      "check": "D_original_FORMAL_MAP.json exact source identity",
+      "pass": true
+    },
+    {
+      "check": "D_published_FORMAL_MAP_AND_AUDIT.md exact source identity",
+      "pass": true
+    },
+    {
+      "check": "D_claims_v1_0.json exact source identity",
+      "pass": true
+    },
+    {
+      "check": "D_REPRODUCIBILITY_SOURCES.json exact source identity",
+      "pass": true
+    },
+    {
+      "check": "D_support_R96.md exact source identity",
+      "pass": true
+    },
+    {
+      "check": "D_support_R96D.md exact source identity",
+      "pass": true
+    },
+    {
+      "check": "D_support_R99.md exact source identity",
+      "pass": true
+    },
+    {
+      "check": "D_TA24_v1_0.md matches publication manifest",
+      "pass": true
+    },
+    {
+      "check": "D_published_FORMAL_MAP_AND_AUDIT.md matches publication manifest",
+      "pass": true
+    },
+    {
+      "check": "D_claims_v1_0.json matches publication manifest",
+      "pass": true
+    },
+    {
+      "check": "novelty correction retained",
+      "pass": true
+    },
+    {
+      "check": "every rule has a second-review entry",
+      "pass": true
+    },
+    {
+      "check": "nine B theory bridges explicitly retain source-fidelity limits",
+      "pass": true
+    },
+    {
+      "check": "F20 amendment matches exact changed IDs",
+      "pass": true
+    },
+    {
+      "check": "R127 conditional cut law explicitly defined",
+      "pass": true
+    },
+    {
+      "check": "project memory exists and carries current baseline",
+      "pass": true
+    },
+    {
+      "check": "all old and new node scope fields exported in readable ledger",
+      "pass": true
+    },
+    {
+      "check": "R137:LOCAL_LP mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R137:CLOSED_LOOP mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R137:APPROX mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R137:OBSTRUCTION mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R137:SHARP_OBSTRUCTION mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R137:OBSERVATION_GAP mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R137:SEED_GAP mathematics independent of C1",
+      "pass": true
+    },
+    {
+      "check": "R135 experiential application retains C1 and actual-support premise",
+      "pass": true
+    },
+    {
+      "check": "38 consecutive case IDs without duplicates",
+      "pass": true
+    },
+    {
+      "check": "all case graph references resolve",
+      "pass": true
+    },
+    {
+      "check": "47 historical family rows",
+      "pass": true
+    },
+    {
+      "check": "published four-source manifest unchanged",
+      "pass": true
+    },
+    {
+      "check": "R137 counts correct",
+      "pass": true
+    }
+  ],
+  "all_pass": true,
+  "source_snapshots": [
+    {
+      "paper": "A",
+      "bytes": 142624,
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "git_blob": "7a980c86b8f94ce787d358dab3529903eb822f8f"
+    },
+    {
+      "paper": "B",
+      "bytes": 59958,
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+      "git_blob": "c4734243b6dfd75255c14b99f333c52e7d7b7a58"
+    },
+    {
+      "paper": "C",
+      "bytes": 94626,
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+      "git_blob": "be7c7a952aa88831c6660187586d92a3da707cdf"
+    },
+    {
+      "paper": "D",
+      "bytes": 36208,
+      "sha256": "af0eb63cca099b3d913218f503bc978c705f0fb9f065cca9ed472e5161d67490",
+      "git_blob": "020b56ec3523f452c17e2fd1578f633b27467149"
+    }
+  ],
+  "scope": "Bookkeeping, stated dependency constraints and source identity only. Not machine proof of the theorem statements, physical premises, target-theory fidelity or exhaustive completeness.",
+  "topological_order": [
+    "A:TOKEN_CRITERIA",
+    "A:ACTUAL_TOKEN",
+    "A:P3",
+    "A:P6",
+    "A:D_ONTIC",
+    "A:K",
+    "A:QSPACE",
+    "A:GEOMETRY",
+    "A:VIEW",
+    "A:ESTIMATE",
+    "A:SUBJECT_FIREWALL",
+    "A:C1",
+    "A:SELF_WITNESS",
+    "A:NONUNIV_WITNESS",
+    "A:COMPLETE_EQ",
+    "A:PROBE_ONLY",
+    "A:FUTURE_ONLY",
+    "A:HISTORY_DIFF",
+    "A:LABEL_ONLY",
+    "A:PRODUCT_DEF",
+    "A:ACTUAL_WHOLE_PARTS",
+    "A:PHYS_NONPRODUCT",
+    "A:MACRO_EQ",
+    "A:MICRO_NONISO",
+    "A:SYM_PREM",
+    "A:EQUIV_SELECTOR",
+    "A:OVERLAP_NONEMPTY_EXCL",
+    "A:ALL_ANC_ACTUAL",
+    "A:EPS_CHAIN",
+    "A:PHYS_CONT_PATH",
+    "A:CONNECTED_LAMBDA",
+    "A:CONT_BINARY_E",
+    "A:HUMAN_ENDPOINT",
+    "A:PHYS_TRANSFORM_NONISO",
+    "A:TOY_MATH",
+    "A:ACTUAL_COMPLETE_TOY",
+    "A:PHEN_TARGET",
+    "A:BRIDGE_FWD",
+    "A:BRIDGE_REV",
+    "A:MEAS",
+    "A:PTVSP",
+    "A:BAC_TFR",
+    "A:ACTUAL_PERSISTING_PARTS",
+    "A:FINITE_COARSE_SETUP",
+    "A:FORWARD_MISMATCH",
+    "A:REVERSE_MISMATCH",
+    "A:FROZEN_SCOPE",
+    "B:VIEW",
+    "B:LANGUAGE",
+    "B:BAC",
+    "B:TFR",
+    "B:EXPRESSIBLE",
+    "B:FV",
+    "B:RESIDUALS",
+    "B:EOD",
+    "B:TARGET_DOMAIN",
+    "B:OVERLAP_WITNESS",
+    "B:IIT_BRIDGE",
+    "B:RPT_BRIDGE",
+    "B:GNWT_BRIDGE",
+    "B:HOT_BRIDGE",
+    "B:AST_BRIDGE",
+    "B:PP_AI_BRIDGE",
+    "B:DIT_BRIDGE",
+    "B:MTOC_BRIDGE",
+    "B:TTC_BRIDGE",
+    "B:GRAPH",
+    "B:NEW_EDGE_RETURN",
+    "B:NONLINEAR_WORKSPACE",
+    "B:MODEL19",
+    "B:MODEL20",
+    "B:GRID19",
+    "B:GRID20",
+    "C:FIXED_J",
+    "C:SET_MAPS",
+    "C:CONST_RANK",
+    "C:PAIR_COUNTERMODEL",
+    "C:SMOOTH_FITNESS",
+    "C:SELECTION",
+    "C:CLASS_WEIGHTS",
+    "C:DESCENDANT_ATTRIBUTION",
+    "C:MARKOV_SELECTION",
+    "C:DECISION",
+    "C:CIRCUIT_SPEC",
+    "C:ENV_MEMORY",
+    "C:MEMORY_COST",
+    "C:ACTUAL_ENSEMBLE",
+    "C:ACTUAL_INDEX_FAMILY",
+    "C:RIVAL_DESCRIPTOR",
+    "C:TRANSCRIPT",
+    "C:FINITE_LOSS",
+    "C:NUISANCE_BOUNDS",
+    "C:TV_PROFILES",
+    "C:PUBLIC_NULL_PREMISE",
+    "R126:PROJECTION",
+    "R126:MODEL",
+    "R126:METRIC",
+    "R127:TASK",
+    "R127:MEDIATION",
+    "R127:RECOVERY",
+    "R127:EVENT_SUPPORT",
+    "R127:RELATIONAL_SUPPORT",
+    "R127:PAIR_MODEL",
+    "R127:LOCALIZATION_PAIR",
+    "N128:COMMON_DETERMINISTIC",
+    "N128:MARKOV_WITNESS",
+    "N128:KERNEL",
+    "N128:PRODUCT_LAW",
+    "D:D0",
+    "D:D1",
+    "D:D2",
+    "D:D3",
+    "D:D4",
+    "D:D5",
+    "D:D6",
+    "D:D7",
+    "D:E1",
+    "D:E2",
+    "D:E3",
+    "D:E4",
+    "D:A1",
+    "D:S1",
+    "D:PATH_MODEL",
+    "D:BUNDLED_ROWS",
+    "D:DIRECT_ROWS",
+    "D:BINARY_PAYOFF",
+    "D:MATCHED_WITNESS",
+    "D:FRECHET_ASSUMPTIONS",
+    "D:REGULAR_GRID",
+    "D:ADDITIVE_CLASS",
+    "D:ACTUAL_CHANGE",
+    "R131:PROBES",
+    "R131:FULL_RANK",
+    "R131:DEFICIENT",
+    "R131:KERNEL",
+    "R131:PROBE_MATCH",
+    "R131:DECISION_SETUP",
+    "R131:LEFT_INVERSE",
+    "R132:SLOT_MODEL",
+    "R132:UNIFORM_BOTTLENECK",
+    "R132:PARTIAL_MODEL",
+    "R132:PROBE_SETUP",
+    "R132:WITNESS_MODELS",
+    "R132:REFINEMENT_SETUP",
+    "R133:PERSISTENT_MODEL",
+    "R133:DECISION_MODEL",
+    "R133:ENCODER",
+    "R133:AVOIDANCE_MODEL",
+    "R133:PROBE_MODELS",
+    "R133:SWITCH_MODEL",
+    "R134:QUANT_MODEL",
+    "R134:SCALAR_MODELS",
+    "R134:PROBE_MODEL",
+    "R134:COMMON_SURVIVAL",
+    "R134:OPTIONAL_MODEL",
+    "R134:ASYM_MODEL",
+    "R135:PROFILE_PAIR",
+    "R135:HIERARCHY_MODELS",
+    "R135:SIMULATION_SETUP",
+    "R135:LEGALITY_MODEL",
+    "R135:ACTUAL_PROFILE",
+    "R136:STATIC_SETUP",
+    "R136:STREAM_SETUP",
+    "R136:DETERMINISTIC",
+    "R136:DELAY_MODEL",
+    "R136:QUERY_MODEL",
+    "R137:CONTROL_MODEL",
+    "R137:EXACT_INTERFACE",
+    "R137:APPROX_INTERFACE",
+    "R137:FORBIDDEN_MODEL",
+    "R137:BLIND_MODEL",
+    "R137:SEED_MODEL",
+    "A:NONEMPTY_CARRIER",
+    "A:C1_OI",
+    "A:U2",
+    "A:NONSUM",
+    "A:ORBIT_LEMMA",
+    "A:E2",
+    "A:E3",
+    "A:TOY_SUB_EQ",
+    "A:TOY_WHOLE_DIFF",
+    "A:OSC_FWD",
+    "A:OSC_TWO",
+    "A:COARSE_CLOSURE",
+    "A:FAIL_ONE",
+    "A:FAIL_TWO",
+    "B:REP",
+    "B:IIT",
+    "B:RPT",
+    "B:GNWT",
+    "B:HOT",
+    "B:AST",
+    "B:PP_AI",
+    "B:DIT",
+    "B:MTOC",
+    "B:TTC",
+    "B:CYCLE_PRIMITIVE",
+    "B:EDGE_CYCLE",
+    "B:RECURRENCE_ENABLES",
+    "B:SPECTRAL",
+    "C:OBS_REFINEMENT",
+    "C:P2_COORD",
+    "C:LOCAL_FIBER",
+    "C:P3",
+    "C:P4",
+    "C:PRICE_SELECTION",
+    "C:P5",
+    "C:PRICE_TRANSMISSION",
+    "C:P6",
+    "C:P7",
+    "C:CIRCUIT_LAWS",
+    "C:MEMORY_VALUE",
+    "C:MEMORY_SELECTION",
+    "C:REPERTOIRE",
+    "C:SCORE_TV",
+    "C:LOGLOSS",
+    "C:PROFILE_PSEUDOMETRIC",
+    "C:PUBLIC_NULL",
+    "R126:P1",
+    "R126:P2",
+    "R126:P3",
+    "R127:P1",
+    "R127:QUERY_REFINEMENT",
+    "R127:P2",
+    "R127:P3",
+    "R127:P4",
+    "R127:P5",
+    "R127:JOINT_INFORMATION",
+    "R127:LOCALIZATION_LIMIT",
+    "N128:MARKOV_JOIN",
+    "N128:JOINT_CRITERION",
+    "D:F1",
+    "D:F2",
+    "D:PAYOFF",
+    "D:GRID_BOUND",
+    "D:SEPARABLE",
+    "R131:ROBUST",
+    "R132:HALL",
+    "R133:SUPPORT",
+    "R135:DEFICIENCY",
+    "R135:VALUE_BOUND",
+    "R135:HIERARCHY",
+    "R135:POLICY_BOUND",
+    "R135:LEGALITY_JUMP",
+    "R136:BLACKWELL",
+    "R136:CAUSAL_LP",
+    "R136:QUERY_BOUND",
+    "R137:LOCAL_LP",
+    "R137:APPROX",
+    "R137:SEED_GAP",
+    "A:U1",
+    "A:C1_W",
+    "A:MICRO_EXP_DIFF",
+    "A:STRUCT_TRANSFORM",
+    "C:P1",
+    "C:RIVAL_CONTRAST",
+    "C:SENSORY_PARTITION",
+    "D:UCT_INTERPRETATION",
+    "A:U2_APP",
+    "A:SELECTION_OBSTRUCTION",
+    "A:TOY_EXP_WHOLE",
+    "A:UCTII_RECON",
+    "C:P2_FULL",
+    "C:RIVAL_NESIG",
+    "R131:TARGET_SPAN",
+    "R132:PARTIAL_CLOSURE",
+    "R133:CELL_ACTION",
+    "C:RESIDUAL_BOUND",
+    "N128:DET_JOIN",
+    "R126:P4",
+    "A:UCTII_EXP",
+    "N128:SEPARATION",
+    "N128:INDEPENDENCE_SUFFICES",
+    "D:F3",
+    "D:FRECHET",
+    "R132:DEFICIT",
+    "R133:COMMON_POLICY",
+    "R133:PERSISTENCE",
+    "R134:VECTOR_RECURSION",
+    "R135:GUARANTEE_EQ",
+    "R135:TRANSFER_BOUND",
+    "R136:COMPOSITION",
+    "R136:PREFIX",
+    "R136:TASK_ORDER",
+    "R137:CLOSED_LOOP",
+    "R137:OBSERVATION_GAP",
+    "R137:OBSTRUCTION",
+    "A:COEXISTENCE",
+    "A:E1",
+    "A:ORG_GATE",
+    "A:U3",
+    "A:UCTII_GATE",
+    "B:EXCLUSION_CONFLICT",
+    "B:GATE",
+    "A:GHOST_EQ",
+    "A:MACRO_EXP_EQ",
+    "A:NO_FUTURE",
+    "A:NO_HIDDEN",
+    "A:PROBE_INV",
+    "A:REWARD_NONID",
+    "A:TOY_EXP_SUB",
+    "R131:COMPLETE_LAW",
+    "R132:REFINEMENT",
+    "R132:TWO_OBSTRUCTIONS",
+    "R133:MESSAGE_COVER",
+    "R133:NONUNIQUE",
+    "R127:FUTURE_EQ",
+    "D:VALUE_GAP",
+    "R132:HIGH_ORDER",
+    "R133:PROBE_BOUNDARY",
+    "R134:ROBUST_LP",
+    "R134:SCALAR_FAILURE",
+    "R135:UCT_INTERPRETATION",
+    "R136:DELAY_GAP",
+    "R137:SHARP_OBSTRUCTION",
+    "A:EVOL_SYNTH",
+    "A:U0",
+    "A:GHOST_TOKEN_NOTE",
+    "R131:BLIND_KERNEL",
+    "R131:CLOSURE",
+    "R132:PROBE_CERTIFICATE",
+    "R133:AVOIDANCE",
+    "R134:PROBE_DUAL",
+    "R134:ZERO_ERROR",
+    "R131:DECISION_GAP",
+    "R134:OPTIONAL_PROBE",
+    "R134:TV_OPPORTUNITY",
+    "R134:MIXING_WITNESS"
+  ]
+}

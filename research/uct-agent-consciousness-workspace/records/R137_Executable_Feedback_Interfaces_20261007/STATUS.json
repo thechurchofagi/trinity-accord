@@ -1,0 +1,15 @@
+{
+  "round": "R137",
+  "revision": "R137-v1.0",
+  "date": "2026-10-07",
+  "timezone": "Asia/Shanghai",
+  "base_commit": "f7a85c373b34e5726482de26e927f87b629db520",
+  "nodes": 328,
+  "rules": 157,
+  "new_nodes": 13,
+  "new_rules": 7,
+  "proof_status": "Conditional manual proofs within the declared randomized action-decoder class; prior feedback/Helly/coupling methods credited",
+  "T2": "OPEN",
+  "C3_intervention_transport": "NOT_TESTED",
+  "valence_bridge": "OPEN"
+}

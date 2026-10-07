@@ -1,0 +1,64 @@
+{
+  "round": "R137",
+  "all_pass": true,
+  "checks": [
+    {
+      "check": "6561 three-state binary-row families satisfy the two-action Helly certificate",
+      "pass": true
+    },
+    {
+      "check": "6561 menu-constrained two-state intersections retain exact legal weights",
+      "pass": true
+    },
+    {
+      "check": "opposite singleton action menus remain infeasible even with zero row mismatch",
+      "pass": true
+    },
+    {
+      "check": "hidden-state oracle can succeed but common deterministic-success decoder cannot",
+      "pass": true
+    },
+    {
+      "check": "common opposite-action optimum is exactly one-half error",
+      "pass": true
+    },
+    {
+      "check": "fair target has an exact mixture but no deterministic decoder",
+      "pass": true
+    },
+    {
+      "check": "all 501 proper hidden-state subsets in sharp m=2..8 families admit exact action",
+      "pass": true
+    },
+    {
+      "check": "780 rational mixtures respect the sharp 1/m error obstruction",
+      "pass": true
+    },
+    {
+      "check": "32 translated joint rows satisfy their exact conditional error premises",
+      "pass": true
+    },
+    {
+      "check": "556 exact adaptive feedback-policy path comparisons preserve joint histories",
+      "pass": true
+    },
+    {
+      "check": "2224 adaptive feedback-policy comparisons obey the finite-horizon TV bound",
+      "pass": true
+    },
+    {
+      "check": "8 seed-reuse witnesses preserve single-time marginals but attain the path-law gap",
+      "pass": true
+    }
+  ],
+  "binary_helly_families": 6561,
+  "menu_intersections": 6561,
+  "sharp_proper_subsets": 501,
+  "rational_mixtures": 780,
+  "joint_rows": 32,
+  "exact_feedback_paths": 556,
+  "approximate_feedback_paths": 2224,
+  "seed_reuse_horizons": 8,
+  "arithmetic": "Exact integers and Python Fraction; no numerical LP solver, Monte Carlo or empirical data",
+  "scope": "Finite checks of stated examples and algebra; general theorems rely on the handwritten conditional proofs, not proof-assistant or independent certification."
+}

@@ -187,17 +187,3 @@ Exact checks: 961 convex-profile pairs, 343 composition triples, 64 compressed j
 - F54: Blackwell randomization, causal transport and selective retrieval are prior art. No new constitutive theorem or mathematical priority is claimed. Published C's experiential identification criterion still needs actual support and a complete common signature.
 
 Exact checks: 256 deterministic path maps,4096 causal compositions,2080 mixed factorizations,256 deterministic experiment pairs,10000 static utility comparisons,650 adaptive read trees and4088 attained coordinate guarantees;13 named checks. General theorems remain conditional manual proofs. C1/U1 unchanged; T2 OPEN, C3 NOT_TESTED, valence OPEN.
-
-
-## R137 — executable feedback and interface incompatibility
-
-7 October 2026. Added 13 nodes and 7 rules. All 315 prior nodes and 150 rules retained field-for-field; four source editions unchanged. [Proofs](records/R137_Executable_Feedback_Interfaces_20261007/R137_Executable_Feedback.md).
-
-- F55: A statewise action witness can require hidden information. The decoder has one common mixture for every state sharing the available observation; alpha must be actually observable in the model.
-- F56: The LP is complete only for the specified memoryless randomized action-decoder class and all represented starts. It does not rule out history-dependent, diagnostic or multi-step implementations.
-- F57: Feedback transport requires conditional joint controlled rows, not a passive trajectory kernel. Legal concrete support and legal request choices on all histories remain explicit, including nominally impossible histories after approximation error.
-- F58: Fresh conditional randomization is an implementation premise. Reusing a seed can match all one-time marginals yet violate the projected path law; persistent interface memory must be represented.
-- F59: The at-most-m hidden-state witness is classical finite Helly/Radon geometry in an m-action simplex, with a sharp m-state family. It is not an empirical sample bound or a theorem about arbitrary action encodings.
-- F60: Feedback-refinement, output-feedback and stochastic controller-transfer prior art directly cover this research neighborhood. No broad novelty or algorithmic superiority claim is warranted. R134's blind-action witness is reused with explicit attribution.
-
-Exact checks: 6561 binary Helly families, 6561 menu intersections, 501 sharp-family proper subsets, 780 rational mixtures, 32 joint rows, 556 exact and 2224 approximate feedback path comparisons, and 8 seed-reuse horizons; 12 named checks. General theorems remain conditional manual proofs. C1/U1 unchanged; T2 OPEN, C3 NOT_TESTED, valence OPEN.

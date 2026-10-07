@@ -1,18 +1,17 @@
-# UCT 研究交接 — R136：统一因果翻译与任务揭晓顺序
+# UCT 研究交接 — R137：可执行反馈接口与相容性见证
 
-2026-10-07 Asia/Shanghai；父提交44f730df32dc01c0556d1242e8140c17f3ac738b。仓库 thechurchofagi/trinity-accord，分支 uct-agent-consciousness-workspace。总图315节点150规则；新增12节点7规则，旧303节点143规则逐字段保留，四篇源文不改。
+2026-10-07 Asia/Shanghai；父提交 f7a85c373b34e5726482de26e927f87b629db520。仓库 thechurchofagi/trinity-accord，分支 uct-agent-consciousness-workspace。总图328节点157规则；新增13节点7规则，原315节点150规则逐字段保留，四篇源文不改。
 
-[完整证明](records/R136_Causal_Translation_and_Query_Order_20261007/R136_Causal_Translation.md)、[中文进展](records/R136_Causal_Translation_and_Query_Order_20261007/RESEARCH_UPDATE_ZH.md)、[全量台账](records/R136_Causal_Translation_and_Query_Order_20261007/PROOF_LEDGER.md)。
+[完整证明](records/R137_Executable_Feedback_Interfaces_20261007/R137_Executable_Feedback.md)、[中文进展](records/R137_Executable_Feedback_Interfaces_20261007/RESEARCH_UPDATE_ZH.md)、[全量台账](records/R137_Executable_Feedback_Interfaces_20261007/PROOF_LEDGER.md)。
 
-1. 静态正面结果：固定有限观察实验、满支撑先验、所有效用表下决策支配 iff 存在一个统一随机翻译器；这是经典Blackwell，不能说任务等价永远不能推出翻译。
-2. 有限外生流：前缀非预知约束+行随机性+逐参数路径律匹配，是可执行因果翻译的充要线性证书；误差可组合。
-3. 确定性前缀纤维条件；最终记录完整不等于及时可用。比特延迟例离线误差0、因果误差1/2。
-4. 延后查询：n隐藏比特，查询前最多读k个，适应随机最优最坏成功率1/2+k/(2n)。每个提前告知任务可100%，两个比特预读一个后的未知任务最多75%。全读到受限读的保证方向损失(n-k)/(2n)。
+主要结果：可观察z/请求u驱动的随机动作接口，存在 iff 所有隐藏纤维状态的合法联合行匹配集合有共同交集；这是有限LP。精确证书运输任意抽象历史反馈策略的投影路径律；合法近似证书给有限时域TV界。m动作时失败最多m隐藏状态可见证；m状态尖锐例最优错误1/m。一次随机种子复用与逐步独立随机的边际相同，却有路径差1-2^(1-H)。
 
-边界：读取预算不是k-bit内存编码；私有种子不能与隐藏状态或未来查询相关；外生路径核不能用于动作影响后续观察的受控反馈。因果统计模拟不等于实际完整组织同构。意识解释沿论文C和R135实际支撑前提，不加体验存在门槛。
+重点：alpha必须实际可观察；同一w不能暗用隐藏s；接口每一步需满足条件随机律；策略在名义零概率历史也须有合法请求。证书只对声明的无记忆随机动作接口类完备，不代表所有历史/传感/多步实现都不可能。成本与隐藏动作未纳入投影收益就不自动保存。
 
-精确检查13项：256路径映射、4096因果组合、2080混合分解、256确定实验对、10000静态价值比较、650读取树、4088坐标。图与源文检查见MAP_CHECK；手写条件证明，非独立审稿。
+检查：12项精确数学检查，6561相容性族、6561菜单交集、501真子集、780有理混合、32联合行、556精确反馈路径、2224近似路径、8种复用时域。开发中的枚举数量断言修正记在VALIDATION_LOG。一般证明是同一助手手工审查，非独立审稿或证明助手。
 
-下一步：受控反馈机制的统一翻译证书。保留实际指向状态、共同合法操作、时序以及联合后继状态/输出交换条件；查清哪些属于已有alternating/probabilistic simulation，不改名冒称原创。尚未证明新的UCT构成定理。
+已有反馈精化/输出反馈/随机迁移文献直接相关；Helly/Radon/耦合是标准数学，不声称首创。意识解释沿A/C及R135实际支撑前提，成功接口不证明体验同一，失败也不否定体验存在。
 
-读AGENTS/MEMORY/总图/审计及相关源文后接续。T2 OPEN，C3 NOT_TESTED，valence OPEN；理论先行；38命名思想实验及47族已核，数千原档未全恢复。存储最新HEAD lease、force=false、[skip ci]，不做发布/PR/CI。历史交接：[R135](HANDOFF_THROUGH_R135.md)，[索引](MASTER_INDEX_THROUGH_R135.md)。
+下一步：有限因果记忆何时解除当前观察纤维冲突？必须给出由实际观察更新的记忆、资源/时间和物理支撑，不给隐藏状态oracle。继续在总图上推进，理论先行。T2 OPEN，C3 NOT_TESTED，valence OPEN。
+
+启动先读AGENTS/MEMORY/总图/审计及相关源文。历史仍38案例47族；数千原档未恢复完整。存储最新HEAD lease、force=false、[skip ci]；不发DOI/release/PR/CI。保留[R136交接](HANDOFF_THROUGH_R136.md)和[索引](MASTER_INDEX_THROUGH_R136.md)。
