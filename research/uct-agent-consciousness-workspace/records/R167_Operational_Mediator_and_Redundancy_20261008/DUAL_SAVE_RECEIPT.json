@@ -1,0 +1,62 @@
+{
+  "schema": "UCT_R167_DUAL_SAVE_RECEIPT/v1",
+  "round": "R167",
+  "status": "BOTH_PERSISTENT_DESTINATIONS_VERIFIED",
+  "github_research_state": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "research_commit": "7888e6e2f995f1b8c4489e302bf249a44db60010",
+    "research_tree": "4d8c8fd4a90da8e95223ff4aaad705e659c38b2a",
+    "expected_sha_fast_forward": true,
+    "remote_graph_sha256": "0ed7d225a8bc3260ae9fca042fc1f1316167e9fe0842129c1c9eb54c5ac48f71",
+    "remote_exact_checks_sha256": "45c83c2f66478d2f13e17fcb998bbd49daa7af67064ef6526a087732324119b1",
+    "receipt_commit_boundary": "This file is added in a later receipt-only [skip ci] commit; fetch the latest branch head after restoring the research commit."
+  },
+  "persistent_master_handoff": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000d5d481f5a0addc2c2600ac15",
+    "filename": "UCT_Hourly_Research_Master_Handoff.md",
+    "version": 11,
+    "bytes": 57483,
+    "sha256": "2d3fca53b18eed5a81333b529e6ffde5698efbad829fd55ceff845f91527a2c3",
+    "exact_readback": true,
+    "stable_identity_preserved": true
+  },
+  "persistent_cumulative_increment": {
+    "library_file_id": "libfile_02227a00ef008191990650df1856595b",
+    "file_id": "file_00000000fc9081f7b7ec3819989ede81",
+    "filename": "UCT_R157_R167_Cumulative_Increment_20261008.zip",
+    "version": 0,
+    "scope": "Cumulative increment relative to exact R156 baseline; not a full backup of the workspace, repository, or history.",
+    "bytes": 745985,
+    "payload_members": 175,
+    "zip_members": 176,
+    "sha256": "766a1a6b67982b2097de2850a4191b21802a9937a34731f96a2c097b4902480a",
+    "exact_readback": true,
+    "zip_and_manifest_hash_checks": "PASS"
+  },
+  "persistent_verification_record": {
+    "library_file_id": "libfile_201af2844f708191b95ea51e8e49e619",
+    "file_id": "file_00000000d36081f8b41ece831361ddff",
+    "filename": "UCT_R167_Dual_Save_Verification_20261008.json",
+    "version": 0,
+    "bytes": 3036,
+    "sha256": "ce89c949045368b24c83fcf338e00e114b88844d63c8624338676d590ed0feca",
+    "exact_readback": true
+  },
+  "required_baseline": {
+    "library_file_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
+    "filename": "UCT_R156_Working_Set_20261007.zip",
+    "bytes": 3493643,
+    "sha256": "95cc3ea1ec45eb273531c25525edcb7f8e6f2088c650a39b97d24817704ec40a",
+    "working_set_files": 384
+  },
+  "restore": [
+    "Verify and extract the exact R156 baseline.",
+    "Overlay the 175 payload members from the R157-R167 cumulative increment and apply its deleted_paths list.",
+    "Verify every manifest hash.",
+    "Fetch the latest uct-agent-consciousness-workspace branch head to obtain this receipt-only commit and any later concurrent changes.",
+    "Read fixed master handoff version 11 or later before continuing."
+  ],
+  "not_done": ["No apparatus or participant study", "No ethics approval", "No actual route-closure verification", "No neural mediator identification", "No continuous/stochastic generalization", "No C1 derivation", "No B_min validation", "No publication or TA25 operation"]
+}
