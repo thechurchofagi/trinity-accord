@@ -1,0 +1,73 @@
+{
+  "inherited": "records/R156_Mineness_Bridge_Comparison_20261007/GAP_LEDGER.json",
+  "closed_inherited_families": [],
+  "entries": [
+    {
+      "id": "R157-G1",
+      "status": "OPEN_REFINED",
+      "family": "F153-11",
+      "issue": "B_min semantic interpretation of the transported theta_body substructure is not supplied.",
+      "affected": [
+        "R157:SEMANTIC_RESIDUAL",
+        "R157:MINENESS_BRIDGE_SCHEMA"
+      ],
+      "forbidden": "T1 therefore felt bodily mineness",
+      "next": "Specify and criticize a fixed semantic bridge; seek independent fiber contrasts."
+    },
+    {
+      "id": "R157-G2",
+      "status": "OPEN",
+      "family": "F153-09/F153-10",
+      "issue": "Completeness and physical realization of candidate theta_body relations are not established.",
+      "affected": [
+        "R157:DEFINABLE_SELECTOR_SETUP",
+        "R157:COORDINATE_TRANSPORT",
+        "R157:MINENESS_BRIDGE_SCHEMA"
+      ],
+      "next": "For a concrete substrate, state the complete K relations and admissible perturbations; do not promote a finite view."
+    },
+    {
+      "id": "R157-G3",
+      "status": "OPEN",
+      "family": "F153-12",
+      "issue": "No cross-domain measurement identifies F_O independently of report.",
+      "affected": [
+        "R157:REPORT_COVERAGE_LIMIT",
+        "R157:MINENESS_BRIDGE_SCHEMA"
+      ],
+      "next": "Keep report as partial evidence and compare convergent fallible measures only after B_min is fixed."
+    },
+    {
+      "id": "R157-G4",
+      "status": "DECLARED_BOUNDARY",
+      "family": "semantic vocabulary",
+      "issue": "Adding the word mineness to K would not ground its interpretation by syntax alone.",
+      "affected": [
+        "R157:SEMANTIC_VOCABULARY_SETUP",
+        "R157:SEMANTIC_RESIDUAL"
+      ],
+      "next": "Any expanded signature must declare physical and semantic interpretation, not rename theta."
+    },
+    {
+      "id": "R157-G5",
+      "status": "RESOLVED_SCOPE_ONLY",
+      "family": "report coverage",
+      "issue": "Report protocol was at risk of being used outside its domain.",
+      "affected": [
+        "R157:REPORT_COVERAGE_LIMIT"
+      ],
+      "resolution": "Represented as a partial map; total extension and no-report/no-mineness rule are separate assumptions."
+    },
+    {
+      "id": "R157-G6",
+      "status": "OPEN",
+      "family": "F153-16/F153-17",
+      "issue": "Manual classical proof and C1 axiom remain uncertified/unvalidated.",
+      "affected": [
+        "R157:COORDINATE_TRANSPORT",
+        "R157:SEMANTIC_RESIDUAL"
+      ],
+      "next": "Preserve conditional status; proof assistant would certify syntax only, not C1 truth or mineness semantics."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "status": "BOUNDED_CHECKS_PASS",
+  "check_count": 6,
+  "checks": [
+    {
+      "name": "definable_selector_covariant_under_all_renamings",
+      "passed": true,
+      "scope": "all 6 permutations of the finite witness; general proof is formula induction"
+    },
+    {
+      "name": "frozen_external_label_fails_covariance",
+      "passed": true,
+      "scope": "one transposition; demonstrates need for declared parameter transport"
+    },
+    {
+      "name": "semantic_name_not_fixed_by_K_structure",
+      "passed": true,
+      "scope": "metalinguistic witness only; not two experiences"
+    },
+    {
+      "name": "report_measure_not_total",
+      "passed": true,
+      "scope": "declared mixed domain"
+    },
+    {
+      "name": "report_extension_not_unique",
+      "passed": true,
+      "scope": "two total Boolean extensions agree on reporter"
+    },
+    {
+      "name": "candidate_conjunction_has_explicit_all_of",
+      "passed": true,
+      "scope": "four Boolean role components; method witness, not biological law"
+    }
+  ],
+  "proof_assistant_certified": false,
+  "physical_realization_validated": false,
+  "phenomenal_target_measured": false
+}

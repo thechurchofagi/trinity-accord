@@ -1,0 +1,16 @@
+{
+  "status": "SCOPED_DIRECTION_AND_STRUCTURE_AUDIT_PASS",
+  "nodes": 408,
+  "rules": 197,
+  "new_nodes": 7,
+  "new_rules": 3,
+  "inherited_nodes_rules_context_unchanged": true,
+  "all_rule_endpoints_present": true,
+  "unique_ids": true,
+  "dependency_acyclic": true,
+  "joint_premise_audit": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md \u00a78",
+  "no_deduction_from_report_to_C1_or_U1": true,
+  "no_deduction_from_transport_to_mineness": true,
+  "global_semantic_consistency_certified": false,
+  "proof_assistant_certified": false
+}

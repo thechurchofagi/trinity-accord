@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R156-v1.0",
+  "revision": "R157-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "9c8b36836facba39a7eb761b163fd6e253979182",
+  "base_commit": "7af49dad7491910d3c6aa205fc4f89ba4b1c5134",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -17548,6 +17548,255 @@
         ],
         "machine_formalized": false
       }
+    },
+    {
+      "id": "R157:DEFINABLE_SELECTOR_SETUP",
+      "kind": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "label": "Definable Selector Setup",
+      "statement": "Fix a parameter-free K-formula theta(x_bar), or declared parameters p_bar transported by h. S_theta(D,p_bar) is the set of tuples satisfying theta. The claimed relations are internal to the complete K-structure and independently physically grounded; analyst-only labels are excluded.",
+      "domain": "One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately.",
+      "scope": "One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately.",
+      "source": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §2",
+      "source_lineage": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §2",
+      "status": "DECLARED_SELECTOR_CONTRACT",
+      "proof": "Definition plus physical-grounding obligation; no claim that theta denotes mineness.",
+      "counterexamples_and_limits": "Arbitrary complete-type projections, frozen external labels and omitted relations do not satisfy this internal-selector contract. Definability alone does not establish semantic correctness.",
+      "formal_contract_R157": {
+        "object_domain": "One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately.",
+        "quantifiers": "Fixed P,I,K and declared parameters per instance. Formula quantifiers range over the correctly sorted carriers of that instance. Semantic vocabulary outside K is never silently quantified as a K-relation.",
+        "bearer_time_signature": "Same actual bearer token, interval, complete K, formula and parameter transport throughout one T1 instance.",
+        "source_anchor": {
+          "path": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md",
+          "sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+          "locator": "§2"
+        },
+        "premise_routes": [],
+        "purpose": "Locate the exact conditional step from actual body-centered organization to an experiential substructure, while keeping mineness semantics and measurement explicit.",
+        "thought_experiments": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R157:COORDINATE_TRANSPORT",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Coordinate Transport",
+      "statement": "For every K-formula theta and correctly sorted tuple a_bar, D |= theta(a_bar,p_bar) iff Phi |= theta(h(a_bar),h(p_bar)); hence h[S_theta(D,p_bar)]=S_theta(Phi,h(p_bar)).",
+      "domain": "One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately.",
+      "scope": "One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately.",
+      "source": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §3 T1",
+      "source_lineage": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §3 T1",
+      "status": "MANUAL_CONDITIONAL_MODEL_THEORETIC_ARGUMENT",
+      "proof": "Induction on formulas: K-isomorphism preserves/refects atomic formulas and equality; Boolean cases follow; existential witnesses map by h and return by surjectivity; universal follows; tuplewise equivalence yields set equality.",
+      "counterexamples_and_limits": "Standard isomorphism preservation. Tokenwise and K-relative; no empirical identification of h, complete-signature validation or mineness semantics.",
+      "formal_contract_R157": {
+        "object_domain": "One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately.",
+        "quantifiers": "Fixed P,I,K and declared parameters per instance. Formula quantifiers range over the correctly sorted carriers of that instance. Semantic vocabulary outside K is never silently quantified as a K-relation.",
+        "bearer_time_signature": "Same actual bearer token, interval, complete K, formula and parameter transport throughout one T1 instance.",
+        "source_anchor": {
+          "path": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md",
+          "sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+          "locator": "§3 T1"
+        },
+        "premise_routes": [
+          {
+            "rule": "r157_coordinate_transport",
+            "all_of": [
+              "A:C1",
+              "R157:DEFINABLE_SELECTOR_SETUP"
+            ]
+          }
+        ],
+        "purpose": "Locate the exact conditional step from actual body-centered organization to an experiential substructure, while keeping mineness semantics and measurement explicit.",
+        "thought_experiments": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-16",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R157:SEMANTIC_VOCABULARY_SETUP",
+      "kind": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "label": "Semantic Vocabulary Setup",
+      "statement": "Let L be a semantic vocabulary outside K containing the expression felt bodily mineness. Metalinguistic assignments nu interpret L without changing D,Phi,h,theta or any K-fact.",
+      "domain": "One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately. L and nu are metalinguistic, not new relations in K.",
+      "scope": "One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately. L and nu are metalinguistic, not new relations in K.",
+      "source": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §4",
+      "source_lineage": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §4",
+      "status": "DECLARED_METASEMANTIC_COMPARISON",
+      "proof": "Definition of two-level structural/semantic comparison.",
+      "counterexamples_and_limits": "If the mineness predicate is explicitly added to complete K with independently fixed interpretation, this setup changes; its physical/semantic grounding must then be supplied rather than assumed.",
+      "formal_contract_R157": {
+        "object_domain": "One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately. L and nu are metalinguistic, not new relations in K.",
+        "quantifiers": "Fixed P,I,K and declared parameters per instance. Formula quantifiers range over the correctly sorted carriers of that instance. Semantic vocabulary outside K is never silently quantified as a K-relation.",
+        "bearer_time_signature": "Same actual bearer token, interval, complete K, formula and parameter transport throughout one T1 instance.",
+        "source_anchor": {
+          "path": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md",
+          "sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+          "locator": "§4"
+        },
+        "premise_routes": [],
+        "purpose": "Locate the exact conditional step from actual body-centered organization to an experiential substructure, while keeping mineness semantics and measurement explicit.",
+        "thought_experiments": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §7",
+        "open_obligations": [
+          "F153-11",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R157:SEMANTIC_RESIDUAL",
+      "kind": "CONDITIONAL_LIMIT",
+      "label": "Semantic Residual",
+      "statement": "A:C1 plus a K-definable transported coordinate does not uniquely determine which external L-name denotes that experiential substructure. In particular, the name felt bodily mineness requires an additional fixed bridge B_min.",
+      "domain": "One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately. Same K-structure and experiential structure; only L-assignments differ.",
+      "scope": "One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately. Same K-structure and experiential structure; only L-assignments differ.",
+      "source": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §4 T2",
+      "source_lineage": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §4 T2",
+      "status": "MANUAL_METATHEORETIC_NONENTAILMENT_ARGUMENT",
+      "proof": "Keep D,Phi,h,theta and the transported support fixed. One nu names it felt bodily mineness; another names it only body-related experiential role and leaves the former undefined or separately assigned. Both preserve every K-fact, so uniqueness is not entailed.",
+      "counterexamples_and_limits": "This does not assign different experiences to identical complete organization. It varies metalinguistic interpretation only; it does not show all names are equally empirically adequate.",
+      "formal_contract_R157": {
+        "object_domain": "One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately. Same K-structure and experiential structure; only L-assignments differ.",
+        "quantifiers": "Fixed P,I,K and declared parameters per instance. Formula quantifiers range over the correctly sorted carriers of that instance. Semantic vocabulary outside K is never silently quantified as a K-relation.",
+        "bearer_time_signature": "Same actual bearer token, interval, complete K, formula and parameter transport throughout one T1 instance.",
+        "source_anchor": {
+          "path": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md",
+          "sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+          "locator": "§4 T2"
+        },
+        "premise_routes": [
+          {
+            "rule": "r157_semantic_residual",
+            "all_of": [
+              "R157:COORDINATE_TRANSPORT",
+              "R157:SEMANTIC_VOCABULARY_SETUP"
+            ]
+          }
+        ],
+        "purpose": "Locate the exact conditional step from actual body-centered organization to an experiential substructure, while keeping mineness semantics and measurement explicit.",
+        "thought_experiments": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §7",
+        "open_obligations": [
+          "F153-11",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R157:REPORT_DOMAIN_SETUP",
+      "kind": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "label": "Report Domain Setup",
+      "statement": "Let Omega=Omega_rep union Omega_norep include admitted actual tokens with and without a typed report channel. An operational report measure M_rep has domain Omega_rep because its protocol requires that channel.",
+      "domain": "Mixed declared actual domain Omega; report protocol and channel typing fixed. Omega_norep is nonempty for the coverage witness.",
+      "scope": "Mixed declared actual domain Omega; report protocol and channel typing fixed. Omega_norep is nonempty for the coverage witness.",
+      "source": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §5",
+      "source_lineage": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §5",
+      "status": "DECLARED_MEASUREMENT_DOMAIN",
+      "proof": "Definition of a partial operational measure.",
+      "counterexamples_and_limits": "A structural predicate ReportPresent can be total and false outside Omega_rep; that is not the same object as executing the partial measurement protocol.",
+      "formal_contract_R157": {
+        "object_domain": "Mixed declared actual domain Omega; report protocol and channel typing fixed. Omega_norep is nonempty for the coverage witness.",
+        "quantifiers": "Fixed P,I,K and declared parameters per instance. Formula quantifiers range over the correctly sorted carriers of that instance. Semantic vocabulary outside K is never silently quantified as a K-relation.",
+        "bearer_time_signature": "Same actual bearer token, interval, complete K, formula and parameter transport throughout one T1 instance.",
+        "source_anchor": {
+          "path": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md",
+          "sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+          "locator": "§5"
+        },
+        "premise_routes": [],
+        "purpose": "Locate the exact conditional step from actual body-centered organization to an experiential substructure, while keeping mineness semantics and measurement explicit.",
+        "thought_experiments": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §7",
+        "open_obligations": [
+          "F153-11",
+          "F153-12"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R157:REPORT_COVERAGE_LIMIT",
+      "kind": "CONDITIONAL_LIMIT",
+      "label": "Report Coverage Limit",
+      "statement": "M_rep alone cannot evaluate a target quantified over all Omega. Every total extension requires separately assigned values on Omega_norep; assigning no report to no mineness is an extra rule, not a consequence of the partial measure, A:C1 or A:U1.",
+      "domain": "Exactly R157:REPORT_DOMAIN_SETUP; mathematical conclusion concerns the partial map. C1/U1 are interpretation context, not premises needed for the set-theoretic domain fact.",
+      "scope": "Exactly R157:REPORT_DOMAIN_SETUP; mathematical conclusion concerns the partial map. C1/U1 are interpretation context, not premises needed for the set-theoretic domain fact.",
+      "source": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §5 T3",
+      "source_lineage": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §5 T3",
+      "status": "MANUAL_DOMAIN_ARGUMENT",
+      "proof": "M_rep is undefined outside Omega_rep. A total function on Omega must add values there; at least two Boolean extensions agree on Omega_rep and differ on a nonreporter. The partial map does not choose between them.",
+      "counterexamples_and_limits": "Does not assert or deny bodily mineness for nonreporters. A report-based bridge may be valid on Omega_rep; universal extension remains additional.",
+      "formal_contract_R157": {
+        "object_domain": "Exactly R157:REPORT_DOMAIN_SETUP; mathematical conclusion concerns the partial map. C1/U1 are interpretation context, not premises needed for the set-theoretic domain fact.",
+        "quantifiers": "Fixed P,I,K and declared parameters per instance. Formula quantifiers range over the correctly sorted carriers of that instance. Semantic vocabulary outside K is never silently quantified as a K-relation.",
+        "bearer_time_signature": "Same actual bearer token, interval, complete K, formula and parameter transport throughout one T1 instance.",
+        "source_anchor": {
+          "path": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md",
+          "sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+          "locator": "§5 T3"
+        },
+        "premise_routes": [
+          {
+            "rule": "r157_report_coverage",
+            "all_of": [
+              "R157:REPORT_DOMAIN_SETUP"
+            ]
+          }
+        ],
+        "purpose": "Locate the exact conditional step from actual body-centered organization to an experiential substructure, while keeping mineness semantics and measurement explicit.",
+        "thought_experiments": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §7",
+        "open_obligations": [
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R157:MINENESS_BRIDGE_SCHEMA",
+      "kind": "OPEN_BRIDGE_SCHEMA",
+      "label": "Mineness Bridge Schema",
+      "statement": "A candidate B_min must jointly specify: grounded theta_body; T1 transport; independently fixed target semantics; common bearer/body/time/signature/operation domain; separate fallible measurement; and explicit failure criteria. Missing report is not target absence. The candidate theta_body conjunction uses attachment, body-directed sensory routing, body-directed action-consequence routing and installed attribution use; interoception, affect and persistence are named optional extensions.",
+      "domain": "Candidate selected bodily-mineness interpretation on a declared actual domain. This is not a basal-experience gate or a proved necessary/sufficient condition.",
+      "scope": "Candidate selected bodily-mineness interpretation on a declared actual domain. This is not a basal-experience gate or a proved necessary/sufficient condition.",
+      "source": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §6",
+      "source_lineage": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §6",
+      "status": "OPEN_METHOD_PACKAGE_NOT_DERIVED",
+      "proof": "Obligation/schema only. B:BAC supplies admissibility requirements; T1 supplies structural transport but not the semantic or empirical premises.",
+      "counterexamples_and_limits": "No proof that theta_body is complete, necessary, sufficient or realized biologically. A fiber counterexample with independently warranted F_O would refute sufficiency on that domain.",
+      "formal_contract_R157": {
+        "object_domain": "Candidate selected bodily-mineness interpretation on a declared actual domain. This is not a basal-experience gate or a proved necessary/sufficient condition.",
+        "quantifiers": "Fixed P,I,K and declared parameters per instance. Formula quantifiers range over the correctly sorted carriers of that instance. Semantic vocabulary outside K is never silently quantified as a K-relation.",
+        "bearer_time_signature": "Same actual bearer token, interval, complete K, formula and parameter transport throughout one T1 instance.",
+        "source_anchor": {
+          "path": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md",
+          "sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+          "locator": "§6"
+        },
+        "premise_routes": [],
+        "purpose": "Locate the exact conditional step from actual body-centered organization to an experiential substructure, while keeping mineness semantics and measurement explicit.",
+        "thought_experiments": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
     }
   ],
   "rules": [
@@ -29651,6 +29900,86 @@
         "source_sha256": "b4cc3a51195ad8e525b249e3896556d8cf3b711d1bcdb90ebdcbc93dd36e1a35",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r157_coordinate_transport",
+      "all_of": [
+        "A:C1",
+        "R157:DEFINABLE_SELECTOR_SETUP"
+      ],
+      "conclusion": "R157:COORDINATE_TRANSPORT",
+      "statement": "For every K-formula theta and correctly sorted tuple a_bar, D |= theta(a_bar,p_bar) iff Phi |= theta(h(a_bar),h(p_bar)); hence h[S_theta(D,p_bar)]=S_theta(Phi,h(p_bar)).",
+      "proof_sketch": "Induction on formulas: K-isomorphism preserves/refects atomic formulas and equality; Boolean cases follow; existential witnesses map by h and return by surjectivity; universal follows; tuplewise equivalence yields set equality.",
+      "source": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §3 T1",
+      "kind": "DEDUCTIVE_APPLICATION",
+      "review": "MANUAL_CONDITIONAL_MODEL_THEORETIC_ARGUMENT",
+      "formal_contract_R157": {
+        "premise_connective": "AND",
+        "alternative_routes": "Other rule IDs would be OR; no alternate route is asserted here.",
+        "bindings_required": [
+          "same P,I,K and sorted carriers",
+          "same theta and parameter transport",
+          "structural and semantic vocabularies not conflated"
+        ],
+        "quantification": "Fixed P,I,K and declared parameters per instance. Formula quantifiers range over the correctly sorted carriers of that instance. Semantic vocabulary outside K is never silently quantified as a K-relation.",
+        "proof_location": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §3 T1",
+        "source_sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+        "review_status": "MANUAL_CONDITIONAL_MODEL_THEORETIC_ARGUMENT",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r157_semantic_residual",
+      "all_of": [
+        "R157:COORDINATE_TRANSPORT",
+        "R157:SEMANTIC_VOCABULARY_SETUP"
+      ],
+      "conclusion": "R157:SEMANTIC_RESIDUAL",
+      "statement": "A:C1 plus a K-definable transported coordinate does not uniquely determine which external L-name denotes that experiential substructure. In particular, the name felt bodily mineness requires an additional fixed bridge B_min.",
+      "proof_sketch": "Keep D,Phi,h,theta and the transported support fixed. One nu names it felt bodily mineness; another names it only body-related experiential role and leaves the former undefined or separately assigned. Both preserve every K-fact, so uniqueness is not entailed.",
+      "source": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §4 T2",
+      "kind": "META_THEORETIC_LIMIT",
+      "review": "MANUAL_METATHEORETIC_NONENTAILMENT_ARGUMENT",
+      "formal_contract_R157": {
+        "premise_connective": "AND",
+        "alternative_routes": "Other rule IDs would be OR; no alternate route is asserted here.",
+        "bindings_required": [
+          "same P,I,K and sorted carriers",
+          "same theta and parameter transport",
+          "structural and semantic vocabularies not conflated"
+        ],
+        "quantification": "Fixed P,I,K and declared parameters per instance. Formula quantifiers range over the correctly sorted carriers of that instance. Semantic vocabulary outside K is never silently quantified as a K-relation.",
+        "proof_location": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §4 T2",
+        "source_sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+        "review_status": "MANUAL_METATHEORETIC_NONENTAILMENT_ARGUMENT",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r157_report_coverage",
+      "all_of": [
+        "R157:REPORT_DOMAIN_SETUP"
+      ],
+      "conclusion": "R157:REPORT_COVERAGE_LIMIT",
+      "statement": "M_rep alone cannot evaluate a target quantified over all Omega. Every total extension requires separately assigned values on Omega_norep; assigning no report to no mineness is an extra rule, not a consequence of the partial measure, A:C1 or A:U1.",
+      "proof_sketch": "M_rep is undefined outside Omega_rep. A total function on Omega must add values there; at least two Boolean extensions agree on Omega_rep and differ on a nonreporter. The partial map does not choose between them.",
+      "source": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §5 T3",
+      "kind": "DOMAIN_LIMIT",
+      "review": "MANUAL_DOMAIN_ARGUMENT",
+      "formal_contract_R157": {
+        "premise_connective": "AND",
+        "alternative_routes": "Other rule IDs would be OR; no alternate route is asserted here.",
+        "bindings_required": [
+          "same P,I,K and sorted carriers",
+          "same theta and parameter transport",
+          "structural and semantic vocabularies not conflated"
+        ],
+        "quantification": "Fixed P,I,K and declared parameters per instance. Formula quantifiers range over the correctly sorted carriers of that instance. Semantic vocabulary outside K is never silently quantified as a K-relation.",
+        "proof_location": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md §5 T3",
+        "source_sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+        "review_status": "MANUAL_DOMAIN_ARGUMENT",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -30153,6 +30482,41 @@
       "from": "R147:MEMORY_LIMIT",
       "to": "R156:INSTALLATION_WITNESS",
       "relation": "causal installation versus record-only isolation comparison"
+    },
+    {
+      "from": "R126:P1",
+      "to": "R157:DEFINABLE_SELECTOR_SETUP",
+      "relation": "contrast: arbitrary transported type projection versus internally definable physically grounded selector"
+    },
+    {
+      "from": "B:BAC",
+      "to": "R157:MINENESS_BRIDGE_SCHEMA",
+      "relation": "methodological admissibility requirements for the still-open semantic/measurement bridge"
+    },
+    {
+      "from": "R155:MINENESS_OBLIGATION",
+      "to": "R157:MINENESS_BRIDGE_SCHEMA",
+      "relation": "R157 refines the open obligation into structural, semantic and measurement layers"
+    },
+    {
+      "from": "R156:SNAPSHOT_USE_LIMIT",
+      "to": "R157:DEFINABLE_SELECTOR_SETUP",
+      "relation": "installed use is one possible K-relation, not itself a mineness conclusion"
+    },
+    {
+      "from": "R157:COORDINATE_TRANSPORT",
+      "to": "R157:MINENESS_BRIDGE_SCHEMA",
+      "relation": "conditional structural transport discharges only the middle layer"
+    },
+    {
+      "from": "R157:SEMANTIC_RESIDUAL",
+      "to": "R157:MINENESS_BRIDGE_SCHEMA",
+      "relation": "semantic residual remains to be supplied and tested"
+    },
+    {
+      "from": "A:U1",
+      "to": "R157:REPORT_COVERAGE_LIMIT",
+      "relation": "context: undefined/no report cannot be made an experience-existence or mineness conclusion from U1"
     }
   ],
   "prohibited_inferences_D": [
@@ -30700,5 +31064,19 @@
     "end_of_round_audit": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md §7",
     "hourly_protocol": "HOURLY_RESEARCH_PROTOCOL.md",
     "no_inherited_open_family_closed": true
+  },
+  "research_R157": {
+    "parent_research_commit": "d80d08a4c0c09559e2122da38e24956b17bb711b",
+    "parent_branch_head": "7af49dad7491910d3c6aa205fc4f89ba4b1c5134",
+    "parent_graph_sha256": "74ded4ed8b36373d334ccda2a46626163878d0887e58c95cb6920ebf4f5ab519",
+    "note": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md",
+    "new_nodes": 7,
+    "new_rules": 3,
+    "status": "STRUCTURAL_COORDINATE_TRANSPORT_PROVED_SEMANTIC_MINENESS_BRIDGE_OPEN",
+    "current_contract": "formal_contract_R157 for new entries only; inherited layers unchanged",
+    "validation": "records/R157_Structural_Coordinate_and_Mineness_20261007/VALIDATION.json",
+    "gap_ledger": "records/R157_Structural_Coordinate_and_Mineness_20261007/GAP_LEDGER.json",
+    "proof_assistant_certified": false,
+    "empirical_validation": false
   }
 }
