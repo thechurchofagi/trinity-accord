@@ -1,3 +1,9 @@
+## R161 audit — concrete falsification without experimental or phenomenal promotion
+
+R161-v1.0 has **425 nodes / 204 rules** (new 3/2). The inherited 422 nodes, 202 rules and 117 context links are field-for-field preserved. Unique IDs, endpoints and DAG pass. `r161_admissibility_gate` requires the concrete protocol; `r161_three_way_body_decision` requires all of the R160 profile, concrete estimands and admissibility gate simultaneously.
+
+Manual audit: objects, sessions, quantifiers and evidence levels are explicit; interaction-robust min/max estimands are jointly satisfiable; confirm/exclude/unresolved are disjoint; failed fidelity maps to invalid rather than a substantive negative. No cross-session h, profile-to-C1 inference, experience gate, exclusive owner, anatomy claim or F_O promotion is present. Tendon-vibration impurity, response confounds, normalization dependence, readout order, impractical worst-case power and B_min remain in the gap ledger. Exact checks cover 225 interval pairs, 4,900 nested cases and 64 gate assignments; they do not establish human effects or global theory truth. Full result: [MAP_AUDIT.json](records/R161_Concrete_Intervention_and_Falsification_20261008/MAP_AUDIT.json).
+
 ## R160 audit — relative causal discrimination without semantic promotion
 
 R160-v1.0 has **422 nodes / 202 rules** (new 4/2). Unique IDs, endpoints and DAG checks pass. The classifier rule requires the entire intervention/readout/normalization/error contract. The C1-boundary rule requires both R159 tokenwise transport and the R160 trial-family contract; it explicitly refuses a common h across trials.

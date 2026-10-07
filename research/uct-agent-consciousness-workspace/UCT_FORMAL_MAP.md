@@ -1,3 +1,11 @@
+## R161 current priority — concrete crossed protocol and strong exclusion
+
+R161 adds `R161:CONCRETE_CROSSED_PROTOCOL`, `R161:ADMISSIBILITY_GATE` and `R161:THREE_WAY_BODY_DECISION`, with two conjunctive rules. The candidate crosses logged 100 Hz wrist-tendon vibration with a 30-degree cursor/tool transform, uses separately reinduced body/tool readouts, and defines diagonal minima/cross-effect maxima over the other factor. See the [English note](records/R161_Concrete_Intervention_and_Falsification_20261008/Concrete_Body_Tool_Protocol_and_Falsifier_v0_1.md) and [proof ledger](records/R161_Concrete_Intervention_and_Falsification_20261008/PROOF_LEDGER.json).
+
+All six delivery, cross-invariance, washout and sensitivity gates must pass. Otherwise the result is `INVALID_PROTOCOL`, not neither. With simultaneous intervals, body dominance is confirmed by `L(a)>epsilon` and `L(a)-U(x)>epsilon`, strongly excluded by `U(a)<=epsilon` or `U(a)-L(x)<=epsilon`, and otherwise unresolved. The terminal states are disjoint and stable under nested interval refinement. Current map: **R161-v1.0, 425 nodes / 204 rules**; parent 422/202 and 117 context links are preserved.
+
+Exact checks do not validate the intervention, practical power, C1, B_min or F_O. Tendon vibration remains mixed rather than pathway-pure; no experiment or complete organization is claimed. The next task is a practical independently grounded simultaneous measurement/error model, not another classifier or ownership-report substitution.
+
 ## R160 current priority — protocol-relative body/tool profile
 
 R160 adds four scoped nodes and two conjunctive rules: `R160:INTERVENTION_PROFILE_CONTRACT`, `R160:FOUR_WAY_PROFILE`, `R160:LATENT_LABEL_NONIDENTIFICATION`, and `R160:TOKENWISE_APPLICATION_BOUNDARY`. The full statements, domains, quantifiers, proofs and limits are in the graph and [proof ledger](records/R160_Body_Tool_Intervention_Profile_20261007/PROOF_LEDGER.json).

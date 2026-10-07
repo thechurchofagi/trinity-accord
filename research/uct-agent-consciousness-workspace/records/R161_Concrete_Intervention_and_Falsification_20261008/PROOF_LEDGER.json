@@ -1,0 +1,52 @@
+{
+  "schema": "UCT_R161_PROOF_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R161:CONCRETE_CROSSED_PROTOCOL",
+      "kind": "DEFINITION_AND_CANDIDATE_IMPLEMENTATION_CONTRACT",
+      "statement": "Fix four counterbalanced human sessions q,r in {0,1}: q contrasts logged 100 Hz wrist-tendon vibration with a matched bony-site control; r contrasts a logged 30-degree cursor/tool transform with the identity transform. After separately reinduced blocks, obtain tool-released angular body localization Y_B and tool-held no-cursor angular endpoint Y_T. Normalize both by a frozen 30-degree physical reference to [0,1]. Define conditional simple-effect magnitudes and set a=min_r d_B^B(r), x=max_q d_B^T(q), b=max_r d_T^B(r), y=min_q d_T^T(q).",
+      "domain": "Prospective, ethics-approved healthy-adult upper-limb protocol only; no participant was recruited and no intervention was executed in R161.",
+      "all_premises": [],
+      "proof_or_source": "Definition. Component feasibility is motivated by Ruttle et al. 2016, Mostafa et al. 2019 and PMC7678999; none validates the complete crossed protocol.",
+      "counterexamples_and_limits": "Tendon vibration is not afferent-pure; localization and no-cursor reaches are finite psychophysical/behavioral responses; normalization is protocol-relative; min/max robustness does not recover complete organization.",
+      "status": "DECLARED_EXECUTABLE_CANDIDATE_NOT_RUN",
+      "thought_experiment_role": "Concrete_Body_Tool_Protocol_and_Falsifier_v0_1.md §10"
+    },
+    {
+      "id": "R161:ADMISSIBILITY_GATE",
+      "kind": "CONDITIONAL_SCOPE_AND_FAILURE_RESULT",
+      "statement": "For the R161 candidate, classification is admissible iff all six preregistered delivery, cross-invariance, washout and manipulation-sensitivity gates pass. If any gate fails, the only profile output is INVALID_PROTOCOL; failure may not be counted as a neither profile or evidence against basal experience.",
+      "domain": "Exactly the fixed R161 protocol and six named gates; the gate does not prove selective spindle causation, complete neural realization or F_O.",
+      "all_premises": [
+        {
+          "rule": "r161_admissibility_gate",
+          "all_of": ["R161:CONCRETE_CROSSED_PROTOCOL"]
+        }
+      ],
+      "proof_or_source": "Definition of admissibility plus exhaustive six-Boolean case split. The verifier checks all 64 assignments and confirms that every failed assignment is blocked.",
+      "counterexamples_and_limits": "A mechanically delivered vibration can still have mixed cutaneous/proprioceptive effects; a manipulation check can pass without anatomical selectivity.",
+      "status": "MANUAL_SCOPE_RESULT_WITH_EXACT_FINITE_CHECK",
+      "thought_experiment_role": "Human-realized-agent and ancestry cases test whether a semantic role is being substituted for a physical gate."
+    },
+    {
+      "id": "R161:THREE_WAY_BODY_DECISION",
+      "kind": "CONDITIONAL_INTERVAL_THEOREM_AND_FALSIFIER",
+      "statement": "Under the valid R161 gate and simultaneous bounds for the interaction-robust a,x estimands, fix epsilon>0. Confirm body dominance if L(a)>epsilon and L(a)-U(x)>epsilon. Strongly exclude the fixed candidate if U(a)<=epsilon or U(a)-L(x)<=epsilon. Otherwise return unresolved. Confirm and exclude are disjoint; both decisions persist under nested interval refinement. The symmetric construction applies to y,b for tool dominance.",
+      "domain": "One fixed protocol, normalization, epsilon, error model and familywise simultaneous coverage statement; not a test of every possible body organization, C1, B_min or F_O.",
+      "all_premises": [
+        {
+          "rule": "r161_three_way_body_decision",
+          "all_of": [
+            "R160:FOUR_WAY_PROFILE",
+            "R161:CONCRETE_CROSSED_PROTOCOL",
+            "R161:ADMISSIBILITY_GATE"
+          ]
+        }
+      ],
+      "proof_or_source": "From L<=U, confirmation implies a lower feasible margin greater than epsilon while exclusion states that every feasible a or a-x fails one required inequality; hence both cannot hold. Tightening by interval inclusion raises lower bounds and lowers upper bounds, preserving either terminal decision. Exact enumeration covers 225 interval pairs and 4,900 nested pairs on the five-point rational grid.",
+      "counterexamples_and_limits": "Wide intervals return unresolved. Failed fidelity returns invalid, not exclude. Strong exclusion concerns the fixed R161 candidate only. Finite grid checks illustrate the general inequality proof and are not human frequencies.",
+      "status": "MANUAL_GENERAL_PROOF_WITH_EXACT_BOUNDED_CHECK",
+      "thought_experiment_role": "Copy/swap/report cases show that a profile decision is not a phenomenal-transfer result."
+    }
+  ]
+}

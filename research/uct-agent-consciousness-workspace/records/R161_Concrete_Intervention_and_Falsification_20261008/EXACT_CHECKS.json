@@ -1,0 +1,35 @@
+{
+  "schema": "UCT_R161_EXACT_CHECKS/v1",
+  "grid": ["0", "1/4", "1/2", "3/4", "1"],
+  "epsilon": "1/4",
+  "intervals_per_effect": 15,
+  "interval_pairs_checked": 225,
+  "decision_counts": {
+    "CONFIRM": 15,
+    "EXCLUDE": 114,
+    "UNRESOLVED": 96
+  },
+  "confirm_exclude_disjoint": true,
+  "nested_interval_cases_checked": 4900,
+  "decision_stable_under_nested_precision": true,
+  "fidelity_boolean_assignments_checked": 64,
+  "fidelity_gate_blocks_every_failed_assignment": true,
+  "worst_case_hoeffding_planning_audit": {
+    "alpha_familywise": 0.05,
+    "bounded_simple_contrasts": 8,
+    "formula": "ceil(8*log(2*m/alpha)/gamma^2)",
+    "table": [
+      {"dominance_slack_gamma": 0.10, "n_complete_participants": 4615},
+      {"dominance_slack_gamma": 0.15, "n_complete_participants": 2051},
+      {"dominance_slack_gamma": 0.20, "n_complete_participants": 1154},
+      {"dominance_slack_gamma": 0.25, "n_complete_participants": 739}
+    ],
+    "status": "CONSERVATIVE_AUDIT_NOT_A_FIXED_STUDY_SAMPLE_SIZE"
+  },
+  "all_checks_pass": true,
+  "limits": [
+    "Finite rational interval logic only.",
+    "No manipulation fidelity, human effect, power model, C1, B_min, or F_O is empirically validated.",
+    "The Hoeffding table assumes independent complete participant contrasts in [-1,1] and is intentionally worst-case."
+  ]
+}

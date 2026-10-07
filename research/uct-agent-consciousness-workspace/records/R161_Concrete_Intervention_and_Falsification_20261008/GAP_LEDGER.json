@@ -1,0 +1,77 @@
+{
+  "schema": "UCT_R161_GAP_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R161-G1",
+      "location": "J_B fidelity",
+      "issue": "Wrist-tendon vibration is proprioceptive-sensitive but not afferent-pure; cutaneous and mechanical signals remain.",
+      "downstream_impact": ["R161:CONCRETE_CROSSED_PROTOCOL", "R161:ADMISSIBILITY_GATE", "R159:SELECTED_OWNERSHIP_APPLICATION"],
+      "counterexample": "Tendon and bony-site stimulation can differ in skin geometry or vibration transmission even if device frequency is matched.",
+      "repaired": "Matched contact/acoustic control, acceleration/contact logs and an independent calibration gate are required; the note removes any pure-spindle claim.",
+      "unresolved": "Selective biological pathway attribution requires stronger independent evidence."
+    },
+    {
+      "id": "R161-G2",
+      "location": "Y_B measurement",
+      "issue": "Contralateral pointing is a finite response with attention, motor and response-mapping components.",
+      "downstream_impact": ["R161:CONCRETE_CROSSED_PROTOCOL", "R161:THREE_WAY_BODY_DECISION"],
+      "counterexample": "A localization shift may arise from left-hand pointing bias without a change in the target right-hand representation.",
+      "repaired": "Visible left hand, calibrated surface, baseline correction and fixed artifact rules are declared.",
+      "unresolved": "No direct complete-organization or no-response physiological readout is supplied."
+    },
+    {
+      "id": "R161-G3",
+      "location": "readout order and state decay",
+      "issue": "Y_T probes can wash out J_T before Y_B, and body probes can alter subsequent tool performance.",
+      "downstream_impact": ["all four R160 effects"],
+      "counterexample": "A fixed Y_T-first order can make x artificially small at the later body probe.",
+      "repaired": "Separate matched reinduction blocks and counterbalanced readout order are mandatory; order remains in the model.",
+      "unresolved": "The adequacy of reinduction and the decay model require data."
+    },
+    {
+      "id": "R161-G4",
+      "location": "normalization",
+      "issue": "The 30-degree common scale is physically interpretable but conventional and clipping can hide large effects.",
+      "downstream_impact": ["R160:FOUR_WAY_PROFILE", "R161:THREE_WAY_BODY_DECISION"],
+      "counterexample": "A different preregistered scale can change a numerical dominance margin without changing raw degrees.",
+      "repaired": "Scale, clipping and an unclipped sensitivity analysis are frozen; any alternative is a new protocol version.",
+      "unresolved": "No uniquely privileged commensuration follows from C1."
+    },
+    {
+      "id": "R161-G5",
+      "location": "uncertainty and power",
+      "issue": "Worst-case distribution-free simultaneous bounds are impractically wide at ordinary sample sizes.",
+      "downstream_impact": ["R161:THREE_WAY_BODY_DECISION"],
+      "counterexample": "At alpha=.05 and dominance slack .20, the conservative audit requires 1,154 complete participants.",
+      "repaired": "No sample size is invented; the exact bound is labeled an audit and a separate variance pilot/hierarchical model is required.",
+      "unresolved": "No pilot variance, raw data or practical power model exists in R161."
+    },
+    {
+      "id": "R161-G6",
+      "location": "cross-trial C1 interpretation",
+      "issue": "Four sessions and their distributions do not share one complete K,D,Phi,h.",
+      "downstream_impact": ["R160:TOKENWISE_APPLICATION_BOUNDARY", "R159:SELECTED_OWNERSHIP_APPLICATION"],
+      "counterexample": "Participant lineage can remain fixed while medication, learning, fatigue and neural state change across sessions.",
+      "repaired": "Every trial is typed separately; the profile is explicitly a cross-token scientific estimator.",
+      "unresolved": "A complete correspondence/measurement bridge and fixed phenomenal target remain open."
+    },
+    {
+      "id": "R161-G7",
+      "location": "phenomenal interpretation",
+      "issue": "Confirming or excluding the body-dominant protocol predicate does not identify familiar F_O or close B_min.",
+      "downstream_impact": ["R159:SELECTED_OWNERSHIP_APPLICATION", "F153-11", "F153-17"],
+      "counterexample": "The physical profile can change while ownership sentences remain fixed, or reports can change while the profile is fixed.",
+      "repaired": "Ownership reports are excluded from the classifier and the application bridge is explicitly retained.",
+      "unresolved": "Independent target semantics and reflection/sufficiency evidence are absent."
+    },
+    {
+      "id": "R161-G8",
+      "location": "source and verification scope",
+      "issue": "Component sources do not implement the full crossed protocol; exact checks are not proof-assistant or empirical validation.",
+      "downstream_impact": ["novelty", "feasibility", "global formal confidence"],
+      "counterexample": "A future paper may already combine these manipulations or reveal an unmodeled safety/confound issue.",
+      "repaired": "Source-reading scopes and method provenance are explicit; no exhaustive-priority or neural-mechanism claim is made.",
+      "unresolved": "A broader systematic search, ethics review, pilot and independent formal review remain."
+    }
+  ]
+}

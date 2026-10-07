@@ -1,0 +1,73 @@
+{
+  "schema": "UCT_R161_MAP_EXTENSION/v1",
+  "parent_revision": "R160-v1.0",
+  "parent_sha256": "ade316681ed7a495eceafa26bf0fe84fa9b646fbf9232e1b209613107a3f5202",
+  "note_sha256": "0013caf5e98de9c49a1f70c6611b0f57b408d1968b438323b34af91cd5bbecbb",
+  "new_nodes": [
+    {
+      "id": "R161:CONCRETE_CROSSED_PROTOCOL",
+      "kind": "DEFINITION_AND_CANDIDATE_IMPLEMENTATION_CONTRACT",
+      "label": "Concrete Crossed Body/Tool Protocol",
+      "statement": "Fix four counterbalanced human sessions q,r in {0,1}: q contrasts logged 100 Hz wrist-tendon vibration with a matched bony-site control; r contrasts a logged 30-degree cursor/tool transform with the identity transform. After separately reinduced blocks, obtain tool-released angular body localization Y_B and tool-held no-cursor angular endpoint Y_T. Normalize both by a frozen 30-degree physical reference to [0,1]. Define conditional simple-effect magnitudes and set a=min_r d_B^B(r), x=max_q d_B^T(q), b=max_r d_T^B(r), y=min_q d_T^T(q).",
+      "domain": "Prospective, ethics-approved healthy-adult upper-limb protocol only; no participant was recruited and no intervention was executed in R161.",
+      "scope": "Prospective, ethics-approved healthy-adult upper-limb protocol only; no participant was recruited and no intervention was executed in R161.",
+      "source": "records/R161_Concrete_Intervention_and_Falsification_20261008/Concrete_Body_Tool_Protocol_and_Falsifier_v0_1.md §§2–5",
+      "source_lineage": "R160:INTERVENTION_PROFILE_CONTRACT plus primary component methods; no source implements the complete crossed design.",
+      "status": "DECLARED_EXECUTABLE_CANDIDATE_NOT_RUN",
+      "proof": "Definition; interaction-robust min/max estimands are fixed before outcome inspection.",
+      "counterexamples_and_limits": "Tendon vibration is not afferent-pure; readouts are finite; normalization is conventional; no complete organization or F_O is identified."
+    },
+    {
+      "id": "R161:ADMISSIBILITY_GATE",
+      "kind": "CONDITIONAL_SCOPE_AND_FAILURE_RESULT",
+      "label": "Six-Part Protocol Admissibility Gate",
+      "statement": "For the R161 candidate, classification is admissible iff all six preregistered delivery, cross-invariance, washout and manipulation-sensitivity gates pass. If any gate fails, the only profile output is INVALID_PROTOCOL; failure may not be counted as a neither profile or evidence against basal experience.",
+      "domain": "Exactly the fixed R161 protocol and six named gates; the gate does not prove selective spindle causation, complete neural realization or F_O.",
+      "scope": "Exactly the fixed R161 protocol and six named gates; the gate does not prove selective spindle causation, complete neural realization or F_O.",
+      "source": "records/R161_Concrete_Intervention_and_Falsification_20261008/Concrete_Body_Tool_Protocol_and_Falsifier_v0_1.md §6",
+      "source_lineage": "R161 protocol definition and its explicit failure-state repair.",
+      "status": "MANUAL_SCOPE_RESULT_WITH_EXACT_FINITE_CHECK",
+      "proof": "Exhaustive Boolean split of the six gates; the exact verifier checks all 64 assignments.",
+      "counterexamples_and_limits": "Passing device and manipulation checks does not prove pathway purity or a phenomenal interpretation."
+    },
+    {
+      "id": "R161:THREE_WAY_BODY_DECISION",
+      "kind": "CONDITIONAL_INTERVAL_THEOREM_AND_FALSIFIER",
+      "label": "Three-Way Body-Dominance Decision",
+      "statement": "Under the valid R161 gate and simultaneous bounds for the interaction-robust a,x estimands, fix epsilon>0. Confirm body dominance if L(a)>epsilon and L(a)-U(x)>epsilon. Strongly exclude the fixed candidate if U(a)<=epsilon or U(a)-L(x)<=epsilon. Otherwise return unresolved. Confirm and exclude are disjoint; both decisions persist under nested interval refinement. The symmetric construction applies to y,b for tool dominance.",
+      "domain": "One fixed protocol, normalization, epsilon, error model and familywise simultaneous coverage statement; not a test of every possible body organization, C1, B_min or F_O.",
+      "scope": "One fixed protocol, normalization, epsilon, error model and familywise simultaneous coverage statement; not a test of every possible body organization, C1, B_min or F_O.",
+      "source": "records/R161_Concrete_Intervention_and_Falsification_20261008/Concrete_Body_Tool_Protocol_and_Falsifier_v0_1.md §§7–9",
+      "source_lineage": "R160:FOUR_WAY_PROFILE instantiated with R161's concrete, admissible, interaction-robust estimands.",
+      "status": "MANUAL_GENERAL_PROOF_WITH_EXACT_BOUNDED_CHECK",
+      "proof": "Interval order proves disjointness and nested-refinement stability. Exact enumeration covers 225 rational interval pairs and 4,900 nested cases.",
+      "counterexamples_and_limits": "Wide intervals remain unresolved; failed fidelity is invalid; exclusion is protocol-specific and does not refute C1 or F_O."
+    }
+  ],
+  "new_rules": [
+    {
+      "id": "r161_admissibility_gate",
+      "all_of": ["R161:CONCRETE_CROSSED_PROTOCOL"],
+      "conclusion": "R161:ADMISSIBILITY_GATE",
+      "statement": "The concrete protocol has an exhaustive admissible/invalid status determined by all six predeclared gates; any failed gate blocks profile classification.",
+      "proof_sketch": "Definition plus six-Boolean case split.",
+      "source": "records/R161_Concrete_Intervention_and_Falsification_20261008/Concrete_Body_Tool_Protocol_and_Falsifier_v0_1.md §6",
+      "kind": "DEFINITIONAL_SCOPE_DEDUCTION",
+      "review": "MANUAL_ALL_OF_AND_FAILURE_STATE_AUDIT"
+    },
+    {
+      "id": "r161_three_way_body_decision",
+      "all_of": [
+        "R160:FOUR_WAY_PROFILE",
+        "R161:CONCRETE_CROSSED_PROTOCOL",
+        "R161:ADMISSIBILITY_GATE"
+      ],
+      "conclusion": "R161:THREE_WAY_BODY_DECISION",
+      "statement": "The fixed R160 predicate, concrete interaction-robust estimands, passed fidelity gate and simultaneous intervals jointly yield disjoint confirm/exclude/unresolved decisions.",
+      "proof_sketch": "Use interval order L<=U for disjointness and inclusion-monotonic lower/upper bounds for refinement stability.",
+      "source": "records/R161_Concrete_Intervention_and_Falsification_20261008/Concrete_Body_Tool_Protocol_and_Falsifier_v0_1.md §7",
+      "kind": "CONDITIONAL_INTERVAL_DEDUCTION",
+      "review": "MANUAL_GENERAL_PROOF_AND_EXACT_BOUNDED_CHECK"
+    }
+  ]
+}

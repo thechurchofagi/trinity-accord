@@ -1,0 +1,34 @@
+{
+  "schema": "UCT_R161_VALIDATION/v1",
+  "status": "PASS_WITH_OPEN_EMPIRICAL_AND_SEMANTIC_GAPS",
+  "checks": {
+    "round_record_five_fields": true,
+    "english_note_present": true,
+    "proof_source_gap_ledgers_present": true,
+    "exact_verifier_reproduces_saved_results": true,
+    "graph_parent_sha_matches": true,
+    "graph_revision": "R161-v1.0",
+    "graph_nodes": 425,
+    "graph_rules": 204,
+    "graph_context_links": 117,
+    "parent_prefix_preserved": true,
+    "unique_ids_and_endpoints": true,
+    "dag": true,
+    "three_direction_checks_recorded": true,
+    "no_published_bytes_modified": true,
+    "no_experiment_or_ethics_approval_claimed": true,
+    "no_DOI_OTS_AR_CI_or_deployment": true
+  },
+  "bounded_exact_counts": {
+    "interval_pairs": 225,
+    "nested_interval_cases": 4900,
+    "fidelity_assignments": 64
+  },
+  "nonclaims": [
+    "No human data or practical sample size.",
+    "No selective proprioceptive pathway proof.",
+    "No complete neural organization or phenomenal ownership measurement.",
+    "No proof-assistant or independent peer-review certification.",
+    "No global semantic consistency proof."
+  ]
+}

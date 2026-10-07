@@ -85,6 +85,19 @@ The 14-page final PDF and all nine published assets passed anonymous byte/hash r
 
 Publication branch: `research/experience-intelligence-self-v1-20261007`. Exact state and receipt locations, hashes, workflow runs and continuation instructions: [R152 handoff](records/R152_DOI_Publication_20261007/PUBLICATION_HANDOFF.md). Primary research continues under RESEARCH_MASTER_GUIDE.md; release status does not turn preservation into the theoretical research agenda. The formal graph remains R149-v1.0.
 
+# Current entry: R161 concrete body/tool protocol and falsifier
+
+- [English result](records/R161_Concrete_Intervention_and_Falsification_20261008/Concrete_Body_Tool_Protocol_and_Falsifier_v0_1.md)
+- [Round record](records/R161_Concrete_Intervention_and_Falsification_20261008/ROUND_RECORD.md)
+- [Proof ledger](records/R161_Concrete_Intervention_and_Falsification_20261008/PROOF_LEDGER.json)
+- [Source ledger](records/R161_Concrete_Intervention_and_Falsification_20261008/SOURCE_LEDGER.json)
+- [Gap ledger](records/R161_Concrete_Intervention_and_Falsification_20261008/GAP_LEDGER.json)
+- [Map extension](records/R161_Concrete_Intervention_and_Falsification_20261008/MAP_EXTENSION.json), [map audit](records/R161_Concrete_Intervention_and_Falsification_20261008/MAP_AUDIT.json)
+- [Exact checks](records/R161_Concrete_Intervention_and_Falsification_20261008/EXACT_CHECKS.json), [verifier](records/R161_Concrete_Intervention_and_Falsification_20261008/verify_protocol.py)
+- [Chinese review](records/R161_Concrete_Intervention_and_Falsification_20261008/REVIEW_ZH.md), [current handoff](records/R161_Concrete_Intervention_and_Falsification_20261008/CURRENT_HANDOFF.md)
+
+R161-v1.0 has 425 nodes/204 rules, adding 3/2. It provides a concrete candidate protocol, interaction-robust estimands, a six-part invalidity gate and disjoint strong-confirmation/strong-exclusion rules. It is not a completed human study, practical power result, selective pathway proof or phenomenal-ownership witness. Next is an independently justified practical uncertainty/power model without weakening the gates.
+
 # Current entry: R160 body/tool intervention profile
 
 - [English result](records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md)

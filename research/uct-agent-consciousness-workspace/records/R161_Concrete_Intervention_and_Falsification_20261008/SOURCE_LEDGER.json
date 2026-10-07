@@ -1,0 +1,54 @@
+{
+  "schema": "UCT_R161_SOURCE_LEDGER/v1",
+  "sources": [
+    {
+      "id": "UCT-I-v1.2",
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "scope_read": "§§8.11–8.14, 10.1–10.3, 11, 12.1–12.4, 14.6–14.10",
+      "use": "Physical witness, body/self distinctions, bridge architecture, no post-hoc rescue, empirical failure and subject/quality boundaries."
+    },
+    {
+      "id": "R160",
+      "path": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+      "sha256": "68da64fa1102b335a8a23da548fcad3aa742d1cc829d265e70f7ec928ce50749",
+      "scope_read": "complete note plus proof/gap/source/map ledgers",
+      "use": "Parent J_B/J_T/Y_B/Y_T contract and tokenwise boundary."
+    },
+    {
+      "id": "Ruttle2016",
+      "citation": "Ruttle JE et al. Time Course of Reach Adaptation and Proprioceptive Recalibration during Visuomotor Learning. PLOS ONE 2016;11:e0163695.",
+      "doi": "10.1371/journal.pone.0163695",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5061360/",
+      "scope_read": "full primary report; methods and analysis lines inspected, including 30-degree rotations, no-cursor reaches, proprioceptive localization, one-week retest and angular sign normalization",
+      "use": "Concrete J_T and angular Y_B/Y_T design components.",
+      "limit": "Does not cross tendon vibration with the tool transform or measure ownership."
+    },
+    {
+      "id": "Mostafa2019",
+      "citation": "Mostafa AA et al. Motor learning without moving: Proprioceptive and predictive hand localization after passive visuoproprioceptive discrepancy training. PLOS ONE 2019;14:e0221861.",
+      "doi": "10.1371/journal.pone.0221861",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6715176/",
+      "scope_read": "full-result search extract and primary abstract/method sections",
+      "use": "Shows that visual-proprioceptive discrepancy can recalibrate hand localization without ordinary volitional adaptation; motivates treating x as potentially nonzero.",
+      "limit": "Not the complete crossed protocol."
+    },
+    {
+      "id": "TendonVR2020",
+      "citation": "Influence of virtual reality visual feedback on the illusion of movement induced by tendon vibration of wrist in healthy participants. 2020.",
+      "pmcid": "PMC7678999",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7678999/",
+      "scope_read": "primary abstract and reported methods, including 100 Hz ten-second wrist-tendon vibration and visual-context manipulation",
+      "use": "Candidate J_B implementation and evidence that visual context modulates the induced illusion.",
+      "limit": "Subjective illusion measures and mixed mechanoreceptor stimulation do not prove selective proprioceptive-pathway causation."
+    },
+    {
+      "id": "R160-pinned-tool-use-sources",
+      "path": "records/R160_Body_Tool_Intervention_Profile_20261007/SOURCE_LEDGER.json",
+      "scope_read": "inherited Cardinali, Martel, Maravita, Holmes and Weser entries at their recorded access levels",
+      "use": "Post-tool body effects, distal tool readouts, attention confounds and ownership/tool dissociation.",
+      "limit": "No inherited source supplies this full protocol."
+    }
+  ],
+  "search_limit": "Targeted primary-source search, not a systematic or exhaustive novelty review."
+}

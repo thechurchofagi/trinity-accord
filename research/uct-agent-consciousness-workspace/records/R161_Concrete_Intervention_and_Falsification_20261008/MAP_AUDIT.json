@@ -1,0 +1,87 @@
+{
+  "schema": "UCT_R161_MAP_AUDIT/v1",
+  "revision": "R161-v1.0",
+  "parent": {
+    "revision": "R160-v1.0",
+    "graph_sha256": "ade316681ed7a495eceafa26bf0fe84fa9b646fbf9232e1b209613107a3f5202",
+    "nodes": 422,
+    "rules": 202,
+    "context_links": 117
+  },
+  "current": {
+    "graph_sha256": "30d3b22655b0c94e14ba6234dac6a639b603271624ee426adf832946c8c76112",
+    "nodes": 425,
+    "rules": 204,
+    "context_links": 117,
+    "new_nodes": 3,
+    "new_rules": 2
+  },
+  "structural_checks": {
+    "parent_node_prefix_fieldwise_equal": true,
+    "parent_rule_prefix_fieldwise_equal": true,
+    "context_links_fieldwise_equal": true,
+    "unique_node_ids": true,
+    "unique_rule_ids": true,
+    "all_endpoints_exist": true,
+    "dag": true
+  },
+  "all_of_review": [
+    {
+      "rule": "r161_admissibility_gate",
+      "all_of": ["R161:CONCRETE_CROSSED_PROTOCOL"],
+      "jointly_satisfiable": true,
+      "review": "A physically delivered candidate can have all six gates true or at least one false; invalid is an output state, not a biological or phenomenal conclusion."
+    },
+    {
+      "rule": "r161_three_way_body_decision",
+      "all_of": ["R160:FOUR_WAY_PROFILE", "R161:CONCRETE_CROSSED_PROTOCOL", "R161:ADMISSIBILITY_GATE"],
+      "jointly_satisfiable": true,
+      "review": "At epsilon=1/4, point intervals a=3/4,x=1/4 with passed gates witness confirmation; a=1/4 witnesses exclusion; overlapping wide intervals witness unresolved."
+    }
+  ],
+  "concept_quantifier_scope_review": {
+    "protocol": "One fixed prospective human upper-limb design; not executed.",
+    "effects": "Eight conditional simple effects; min/max aggregation fixed before outcomes.",
+    "uncertainty": "One simultaneous interval family and fixed epsilon; coverage qualification retained.",
+    "trials": "Each token/session has separate P,I,K,D,Phi,h.",
+    "fidelity": "Six named gates; passage does not imply afferent purity.",
+    "phenomenal_target": "B_min/F_O remains external and open; ownership reports do not define Y_B/Y_T."
+  },
+  "joint_consistency": {
+    "confirm_exclude_disjoint_general_proof": true,
+    "nested_precision_stability_general_proof": true,
+    "finite_interval_pairs": 225,
+    "finite_nested_cases": 4900,
+    "fidelity_assignments": 64,
+    "all_finite_checks_pass": true,
+    "note": "Finite checks verify bounded instances and implementation logic, not human feasibility or global semantics."
+  },
+  "object_time_signature_actuality_review": {
+    "pass": true,
+    "detail": "No participant lineage, session average, calibration outcome or confidence interval is substituted for one complete actual organization or one C1 isomorphism."
+  },
+  "inference_direction_review": {
+    "no_profile_to_C1": true,
+    "no_failed_gate_to_neither": true,
+    "no_classifier_to_F_O": true,
+    "no_high_level_gate_for_basal_experience": true,
+    "no_exclusive_owner": true,
+    "no_assistant_consciousness_claim": true
+  },
+  "unlinked_concept_review": {
+    "actual_bearer_vs_candidate_target": "distinct",
+    "proprioceptive_sensitive_vs_selective_pathway": "distinct",
+    "physical_delivery_vs_manipulation_sensitivity": "distinct",
+    "body_localization_vs_ownership_report": "distinct",
+    "protocol_exclusion_vs_theory_falsification": "distinct",
+    "finite_target_vs_complete_experience": "distinct",
+    "tool_transform_vs_anatomical_membership": "distinct"
+  },
+  "direction_checks": {
+    "after_topic_selection": "PASS",
+    "after_result_formation": "PASS_WITH_OPEN_BRIDGE_AND_POWER_GAP",
+    "before_save": "PASS_WITH_OPEN_BRIDGE_AND_POWER_GAP"
+  },
+  "purpose_review": "R161 advances the author's core question by making one body/tool physical-witness proposal prospectively refutable and by preventing failed manipulation from masquerading as a negative result. It does not claim to measure mineness itself.",
+  "open_gaps": ["R161-G1", "R161-G2", "R161-G3", "R161-G4", "R161-G5", "R161-G6", "R161-G7", "R161-G8"]
+}
