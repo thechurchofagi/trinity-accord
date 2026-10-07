@@ -1,0 +1,35 @@
+{
+  "scope": "Exact finite checks supplement symbolic general proofs; no empirical or experiential validation.",
+  "checks": {
+    "n1_transition_bijection_composition_reachability_fixed_points_reset_sensitivity": true,
+    "n2_transition_bijection_composition_reachability_fixed_points_reset_sensitivity": true,
+    "n3_transition_bijection_composition_reachability_fixed_points_reset_sensitivity": true,
+    "all_256_maps_classified_64_descending": true,
+    "unbounded_finite_product_equivalence": true,
+    "n1_every_affine_map_descent_and_probe_formula": true,
+    "n2_every_affine_map_descent_and_probe_formula": true,
+    "all_n2_two_probe_rank_fibers": true
+  },
+  "counts": {
+    "n1": {
+      "models": 2,
+      "states_per_model": 4,
+      "inputs": 2
+    },
+    "n2": {
+      "models": 4,
+      "states_per_model": 16,
+      "inputs": 4
+    },
+    "n3": {
+      "models": 8,
+      "states_per_model": 64,
+      "inputs": 8
+    },
+    "n1_product_states": 8,
+    "n1_affine_maps": 64,
+    "n2_affine_maps": 1048576,
+    "n2_two_probe_cases": 256
+  },
+  "all_passed": true
+}

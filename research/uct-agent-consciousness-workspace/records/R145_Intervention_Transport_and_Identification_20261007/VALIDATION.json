@@ -1,0 +1,29 @@
+{
+  "scope": "Source/graph/ledger and artifact integrity; separate manual symbolic proof and exact finite verifier. Not independent review, a proof-assistant certificate or empirical support for C1.",
+  "checks": {
+    "old_nodes_preserved": true,
+    "old_rules_preserved": true,
+    "source_versions_preserved": true,
+    "old_context_links_preserved": true,
+    "all_source_hashes": true,
+    "unique_ids": true,
+    "all_rule_references": true,
+    "all_context_references": true,
+    "graph_acyclic_not_proof_certification": true,
+    "all_scope_fields_exported": true,
+    "all_exact_checks": true,
+    "manuscript_local_links": true,
+    "pdf_has_core_sections": true,
+    "pdf_no_missing_text_replacement": true,
+    "pdf_text_within_page": true
+  },
+  "parent": "2d27c0b1848d3a3f005c85325a0c6533004d82dd",
+  "new_nodes": 8,
+  "new_rules": 4,
+  "nodes": 336,
+  "rules": 161,
+  "pdf_pages": 11,
+  "whitespace_words": 4119,
+  "pdf_sha256": "b43a8e64645872963bb9b68424be66c7ae0fd42117c016bd49c2e66e18ef7b35",
+  "visual_review": "Every final page inspected after rendering; no clipping, overlapping table text or missing mathematical glyphs found."
+}

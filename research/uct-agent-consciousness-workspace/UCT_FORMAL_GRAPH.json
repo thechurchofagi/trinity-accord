@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R144-v1.0",
+  "revision": "R145-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "95345f15e2b3f8c9c853461d9febdd627372de0f",
+  "base_commit": "2d27c0b1848d3a3f005c85325a0c6533004d82dd",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -2748,6 +2748,78 @@
       "source": "R137_Executable_Feedback.md §8",
       "status": "MANUAL_CONDITIONAL_PASS",
       "scope": "Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. Temporal joint-law counterexample, not a refutation of CLOSED_LOOP. Persistent memory must be represented or the conditional decoder contract verified."
+    },
+    {
+      "id": "R145:TRANSPORT_SETUP",
+      "kind": "DEFINITION_AND_DOMAIN",
+      "label": "Common deterministic quotient and non-oracular feedback contract",
+      "statement": "Finite deterministic implementation family with onto projections to a common logical state space; every named update and admitted intervention has the same descended logical map across models. The observer sees logical state only.",
+      "scope": "Common initial logical state, fixed operation timing, legal observed-history policies and private randomness independent of model/hidden state. No extra state, parameter, energy or timing readout. Equality is of every finite logical-history law.",
+      "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md §2",
+      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE"
+    },
+    {
+      "id": "R145:TRANSPORT_BLIND",
+      "kind": "THEOREM_RESTATEMENT",
+      "label": "Common quotient action preserves all allowed feedback laws",
+      "statement": "Under TRANSPORT_SETUP, all models have the same logical observed-history law for every admitted adaptive policy. More descending interventions need not split the equivalence.",
+      "scope": "Exactly the observation, initial-state, action, randomness and timing contract of TRANSPORT_SETUP. Does not cover non-descending interventions or richer observations. Standard quotient induction, not a new general control theorem.",
+      "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md §2",
+      "status": "MANUAL_CONDITIONAL_PASS"
+    },
+    {
+      "id": "R145:FAMILY",
+      "kind": "MODEL",
+      "label": "Fixed-parameter mutually dependent binary register family",
+      "statement": "For n>=1, G=F2^n, S=GxG, initial (0,0), fixed k in G, input u in G, pi(x,y)=x+y, T^k_u(x,y)=(y+k,x+u+k). Common descending state maps include all translations J_ab(x,y)=(x+a,y+b).",
+      "scope": "Deterministic exact one-tick model; k is mechanism parameter, not per-step noise or an observable label. Pairwise nonisomorphism uses fixed labeled input/output ports; the pointed zero/nonzero distinction survives alphabet permutations. For n>1 there are n elementary coupled pairs, not a globally strongly connected bit graph. This model is not itself a physical token.",
+      "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md §3",
+      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE"
+    },
+    {
+      "id": "R145:SEPARATION",
+      "kind": "THEOREM",
+      "label": "Active reachable realizers can share every descending-intervention law",
+      "statement": "FAMILY realizes z->z+u and is blind to k under the full common descending-intervention feedback class. All states are reachable in two updates and all updates bijective; every bit affects output and register updates mutually depend. Distinct k are nonisomorphic as labeled structures; zero vs nonzero also differ by a pointed self-loop invariant. One zero-input update followed by R_x(x,y)=(0,y) reveals k; R_x does not descend. Two uninterrupted updates satisfy T^k_v T^k_u(x,y)=(x+u,y+v), independent of k.",
+      "scope": "Exactly FAMILY and TRANSPORT_SETUP. All finite-history laws, not all physical observation channels. Labeled pairwise nonisomorphism is not upgraded to unlabeled pairwise nonisomorphism. Reset needs one-tick access; two-tick endpoint statement excludes intermediate observations/interventions. No idle-state padding, but no universal minimality, integration measure or empirical consciousness claim.",
+      "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md Theorem 1",
+      "status": "MANUAL_CONDITIONAL_PASS_PROJECT_EXTENSION_PRIORITY_UNVERIFIED"
+    },
+    {
+      "id": "R145:AFFINE_SETUP",
+      "kind": "DEFINITION_AND_PROTOCOL",
+      "label": "Affine state interventions and independent preparation-probe trials",
+      "statement": "On FAMILY, J(x,y)=(Ax+By+a,Cx+Dy+b) with n-by-n binary blocks; L_J=A+B+C+D. Each probe trial starts at (0,0), uses one zero-input update, then J, then reads pi. Repetitions use the same fixed k and a fixed chosen probe list.",
+      "scope": "Exact known controls/offsets, noiseless n-bit logical readout, fixed independent preparation trials. The setup does not claim optimality over general multistep adaptive experiments. Matrices are intervention maps, not experiential measures.",
+      "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md §4",
+      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE"
+    },
+    {
+      "id": "R145:AFFINE_DIAGNOSTIC",
+      "kind": "THEOREM_APPLICATION",
+      "label": "Affine descent and exact parameter-identification rank",
+      "statement": "J descends iff L_J=0. The stipulated probe returns L_J k+a+b. A fixed probe list identifies all k iff its stacked L matrices have rank n; a consistent response has 2^(n-r) candidate parameters when rank is r.",
+      "scope": "FAMILY plus AFFINE_SETUP. Standard fiber-constancy and binary rank-nullity calculation applied to this construction. Descent criterion holds over all model states, not a selected initial distribution. No general adaptive-optimality, noisy bound or experience measurement.",
+      "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md Proposition 2",
+      "status": "MANUAL_CONDITIONAL_PASS_PROJECT_EXTENSION_PRIORITY_UNVERIFIED"
+    },
+    {
+      "id": "R145:ACTUAL_BRIDGE",
+      "kind": "PHYSICAL_AND_CONSTITUTIVE_PREMISE",
+      "label": "Actual realization with preserved constitutive comparison signature",
+      "statement": "The compared FAMILY members are faithfully realized by actual valid tokens; their represented pointed state/update/port distinctions are genuinely constitutive. Any admitted complete-organization isomorphism induces an isomorphism of the specified represented structures.",
+      "scope": "Independent physical premise. Analyst-assigned labels and successful finite prediction alone do not discharge it. If reset hardware changes the token, a further bridge to the original target is needed. Pairwise labeled conclusion requires constitutive fixed ports; the zero/nonzero pointed route does not depend on alphabet names. Macro quotient tokens require separate actual grounding.",
+      "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md §5.2; A §§2-4 and §6.4",
+      "status": "DECLARED_ASSUMPTION_NOT_EMPIRICALLY_DISCHARGED"
+    },
+    {
+      "id": "R145:TYPE_LIMIT",
+      "kind": "CONDITIONAL_INTERPRETATION",
+      "label": "Matched logical certificates need not identify complete experiential type",
+      "statement": "Under ACTUAL_BRIDGE and A:C1_OI, the represented nonisomorphism in SEPARATION implies inequivalent complete experiential types for the corresponding actual implementation tokens despite matched logical feedback laws.",
+      "scope": "Same actual bearers and constitutive signature throughout; conditional UCT interpretation, not evidence for C1. No inference of human phenomenology, scalar richness, valence, fear, unique subject or absence of constituent experience. Macro equality requires A:MACRO_EQ separately and is not proved by the quotient.",
+      "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md §5.2; A:C1_OI, A:MACRO_EXP_EQ",
+      "status": "MANUAL_CONDITIONAL_PASS"
     }
   ],
   "rules": [
@@ -4850,6 +4922,59 @@
       "source": "R137_Executable_Feedback.md §8",
       "kind": "DEDUCTIVE",
       "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
+    },
+    {
+      "id": "r145_transport",
+      "all_of": [
+        "R145:TRANSPORT_SETUP",
+        "A:COARSE_CLOSURE"
+      ],
+      "conclusion": "R145:TRANSPORT_BLIND",
+      "statement": "Common descended action maps preserve every stipulated finite feedback law.",
+      "proof_sketch": "Fiber constancy defines each logical operation. Couple controller randomness, induct on observed histories, then average. Same histories yield same action distribution and same next logical state.",
+      "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md §2",
+      "kind": "DEDUCTIVE_RESTATEMENT",
+      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
+    },
+    {
+      "id": "r145_separation",
+      "all_of": [
+        "R145:FAMILY",
+        "R145:TRANSPORT_BLIND"
+      ],
+      "conclusion": "R145:SEPARATION",
+      "statement": "The binary family supplies active reachable nonisomorphic realizers with an exact diagnostic outside the descending interface.",
+      "proof_sketch": "pi T^k_u=pi+u supplies TRANSPORT_SETUP. Two updates from zero reach (u,v) and each update is invertible. Zero-input fixed points all have output k, proving labeled nonisomorphism; existence of an input self-loop at pointed zero distinguishes k=0 without alphabet labels. pi R_x T^k_0(0,0)=k; diagonal states witness failed descent. Direct composition gives two-tick cancellation.",
+      "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md Theorem 1",
+      "kind": "DEDUCTIVE",
+      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
+    },
+    {
+      "id": "r145_affine",
+      "all_of": [
+        "R145:FAMILY",
+        "R145:AFFINE_SETUP"
+      ],
+      "conclusion": "R145:AFFINE_DIAGNOSTIC",
+      "statement": "Affine probe design has an exact descent and identification criterion.",
+      "proof_sketch": "Same-fiber state differences are (h,h); output difference after J is L_J h. At prepared (k,k), output is L_J k+a+b. Stack these linear equations; each consistent fiber is a kernel coset of dimension n-r.",
+      "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md Proposition 2",
+      "kind": "DEDUCTIVE",
+      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
+    },
+    {
+      "id": "r145_type",
+      "all_of": [
+        "R145:SEPARATION",
+        "R145:ACTUAL_BRIDGE",
+        "A:C1_OI"
+      ],
+      "conclusion": "R145:TYPE_LIMIT",
+      "statement": "A finite separation becomes a conditional actual experiential-type separation only with the stated constitutive bridge.",
+      "proof_sketch": "An alleged complete actual isomorphism would induce the represented isomorphism excluded by SEPARATION. Thus complete types differ; C1-OI gives different complete experiential types. A separately grounded equal macro pair follows the existing A:MACRO_EXP_EQ route, not this finite quotient alone.",
+      "source": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md §5.2",
+      "kind": "CONDITIONAL_INTERPRETATION",
+      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
     }
   ],
   "context_links": [
@@ -5207,6 +5332,26 @@
       "from": "R137:CLOSED_LOOP",
       "to": "R137:SEED_GAP",
       "relation": "Explicit audit of the conditional-randomness implementation premise"
+    },
+    {
+      "from": "R145:SEPARATION",
+      "to": "C:P2_FULL",
+      "relation": "explicit full-interface nonidentification witness; context, not a new proof of C:P2_FULL"
+    },
+    {
+      "from": "R145:SEPARATION",
+      "to": "A:TOY_MATH",
+      "relation": "compares active-register construction with earlier buffered readout example"
+    },
+    {
+      "from": "R145:TYPE_LIMIT",
+      "to": "A:MACRO_EXP_EQ",
+      "relation": "separate actual macro bearer may be invariant; macro actuality not supplied"
+    },
+    {
+      "from": "R137:CLOSED_LOOP",
+      "to": "R145:TRANSPORT_BLIND",
+      "relation": "same scoped-feedback principle; R145 is deterministic specialization, not contradiction"
     }
   ],
   "prohibited_inferences_D": [
@@ -5479,5 +5624,17 @@
     "authorization": "The latest user explicitly requested progressing to the manuscript draft; earlier discussion-only instructions are superseded for drafting.",
     "contribution": "AI-centered explanatory synthesis of existing A/C results, with ancestry, abacus/calculator, human-formation agent, and implementation-boundary analysis. No new major theorem or established independent novelty.",
     "next": "Revise this actual draft with author feedback; sharpen distinction from published C. Do not repeat planning, add unrelated lemmas, start experiments or publish automatically."
+  },
+  "research_R145": {
+    "kind": "CONSTRUCTIVE_INTERFACE_IDENTIFICATION_EXTENSION",
+    "new_nodes": 8,
+    "new_rules": 4,
+    "record": "records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md",
+    "pdf": "records/R145_Intervention_Transport_and_Identification_20261007/output/pdf/UCT_Intervention_Transport_v0_2.pdf",
+    "proof_ledger": "records/R145_Intervention_Transport_and_Identification_20261007/PROOF_LEDGER.md",
+    "review": "records/R145_Intervention_Transport_and_Identification_20261007/CONTRIBUTION_AND_REVIEW.md",
+    "checks": "records/R145_Intervention_Transport_and_Identification_20261007/EXACT_CHECKS.json",
+    "novelty": "Explicit project-level construction; quotient, binary sharing and rank principles have prior art. Exact historical priority not certified.",
+    "next": "Focused external novelty/relevance review of this exact result and author revision; no automatic unrelated theorem expansion or publication."
   }
 }

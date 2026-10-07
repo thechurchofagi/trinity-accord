@@ -1,10 +1,20 @@
-# UCT A–B–C–D unified formal map — R144
+# UCT A–B–C–D unified formal map — R145
 
-**Canonical working map, revision R144-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
+**Canonical working map, revision R145-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137 and R145. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
+
+## R145 current result - transported interventions need not identify realizers
+
+[Focused manuscript v0.2](records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md), [PDF](records/R145_Intervention_Transport_and_Identification_20261007/output/pdf/UCT_Intervention_Transport_v0_2.pdf), [full updated proof ledger](records/R145_Intervention_Transport_and_Identification_20261007/PROOF_LEDGER.md), [contribution and adversarial review](records/R145_Intervention_Transport_and_Identification_20261007/CONTRIBUTION_AND_REVIEW.md), [exact verification](records/R145_Intervention_Transport_and_Identification_20261007/EXACT_CHECKS.json).
+
+The user requested continued improvement toward a publishable result. R144 was primarily synthesis. R145 constructs equal-size, fully reachable register implementations with the same complete logical feedback laws under every common descending intervention, including all individual bit flips. Each register participates in the output and cross-update. Fixed-point outputs distinguish labeled structures; pointed self-loops distinguish zero from nonzero parameters independently of alphabet labels. A one-tick local reset identifies the parameter. General affine probes give an exact binary-rank criterion; uninterrupted two-tick endpoint dynamics erase the difference.
+
+This adds 8 scoped nodes and 4 conjunctive rules: **336 nodes / 161 rules**. General quotient induction, binary sharing and rank-nullity are established mathematics. The exact construction is a project-level increment, with historical priority unverified. A:C1_OI interpretation requires a separate actual/constitutive bridge; a common logical quotient does not establish an actual macro bearer. For n>1 the model contains separate interacting bit pairs, not a globally integrated subject. The draft does not refute fine-grained functional invariance or ICCR.
+
+Next: focused review of this result's novelty and explanatory value, using the actual manuscript rather than another general outline. Direct 2026 mechanism-realization work and 2025 causal-abstraction identification work are acknowledged. Do not expand unrelated toy families, claim a new major consciousness law, or publish automatically. Four published source files and all prior nodes/rules remain unchanged.
 
 ## R144 current manuscript — from ancestry to artificial agents
 
@@ -75,7 +85,7 @@ A's 78-node graph and B's historical 43-node map are preserved as sources. B's o
 
 ## 2. How to read an implication
 
-The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **328 nodes and 157 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R137_Executable_Feedback_Interfaces_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
+The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **336 nodes and 161 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R145_Intervention_Transport_and_Identification_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
 
 - All premises inside one rule's **all_of** must hold together.
 - Separate rules concluding the same node are alternative sufficient routes.

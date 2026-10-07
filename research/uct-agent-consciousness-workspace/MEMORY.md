@@ -1,6 +1,16 @@
 # UCT 项目长期工作记忆
 
-更新时间：2026-10-07；当前形式化基础：**R144-v1.0**。
+更新时间：2026-10-07；当前形式化基础：**R145-v1.0**。
+
+## R145 最新结果：可运输干预与实现识别分开
+
+用户要求继续完善到形成可发论文成果。本轮已完成[聚焦英文稿v0.2](records/R145_Intervention_Transport_and_Identification_20261007/Intervention_Transport_and_Organization_v0_2.md)、[PDF](records/R145_Intervention_Transport_and_Identification_20261007/output/pdf/UCT_Intervention_Transport_v0_2.pdf)、[贡献/反对意见审查](records/R145_Intervention_Transport_and_Identification_20261007/CONTRIBUTION_AND_REVIEW.md)。不要把R144综合稿误说成原创已足够；本轮有具体新构造，但历史优先权仍未认证。
+
+模型T^k_u(x,y)=(y+k,x+u+k)，pi=x+y。每个寄存器参与输出、更新互相依赖、所有状态两步可达；同一逻辑累积器加全部逐位翻转及任何共同可下降干预，都无法识别k。固定标签下各实现非同构；零/非零还有不靠标签的指向状态自环差异。一拍后局部复位可以识别k；仿射干预的识别量由二元矩阵秩决定。两拍完整端点动态相同，不能省略时间尺度。
+
+图336节点161规则，新增8节点4规则。新[全量台账](records/R145_Intervention_Transport_and_Identification_20261007/PROOF_LEDGER.md)导出全部字段；旧328节点157规则原样保留。全祖先与人列思想实验仍在正文，实际宏观过程/包含它的整个实现/参与者不混同。n>1只是n组耦合对，未声称全局强连通或单一主体。C1类型结论须R145:ACTUAL_BRIDGE，有限程序本身不证明实际体验。
+
+查新找到直接近邻：Kanai/Ma2026机制实现、Li等2025因果抽象识别，以及旧的XOR分担与商映射工具。不能宣称首次提出内部干预或重大新线性代数。已获得可做理论方法短稿的具体内容，是否独立发表仍取决于聚焦的新颖性/意义审核；同一助手不是独立审稿。后续只精修这个结果和针对性查新，不继续堆无关小定理，不默认实验或DOI发布。本段优先于历史待办。
 
 ## R144 最新状态：AI主线英文初稿已经写成
 
