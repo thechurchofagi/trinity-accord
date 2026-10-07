@@ -1,0 +1,25 @@
+{
+  "scope": "Source, graph, anchor and PDF integrity checks; not independent proof verification or evidence for C1. Manual argument review recorded separately.",
+  "parent": "95345f15e2b3f8c9c853461d9febdd627372de0f",
+  "new_nodes": 0,
+  "new_rules": 0,
+  "checks": {
+    "nodes_preserved": true,
+    "rules_preserved": true,
+    "source_versions_preserved": true,
+    "context_links_preserved": true,
+    "counts_preserved": true,
+    "all_manuscript_node_anchors_exist": true,
+    "four_published_source_hashes": true,
+    "three_rule_premise_sets": true,
+    "draft_internal_links_resolve": true,
+    "three_attributed_propositions": true,
+    "pdf_has_all_sections": true,
+    "pdf_no_replacement_character": true,
+    "pdf_text_inside_page": true
+  },
+  "pdf_pages": 12,
+  "manuscript_whitespace_words": 4723,
+  "pdf_sha256": "9952972c5b2cf6b53eedd7a3e5d63e97f281f48377356bec931bcfc944cf3bd6",
+  "visual_review": "All final PDF pages inspected as rendered images; tables and formulas checked, no clipping or overlapping text found."
+}

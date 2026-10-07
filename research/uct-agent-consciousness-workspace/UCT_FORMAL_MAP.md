@@ -1,10 +1,18 @@
-# UCT A–B–C–D unified formal map — R143
+# UCT A–B–C–D unified formal map — R144
 
-**Canonical working map, revision R143-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
+**Canonical working map, revision R144-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
+
+## R144 current manuscript — from ancestry to artificial agents
+
+[English draft v0.1](records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/From_Ancestral_Continuity_to_Artificial_Agents_v0_1.md), [review PDF](records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/output/pdf/UCT_Ancestry_to_Artificial_Agents_v0_1.pdf), [source/argument audit](records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/SOURCE_AND_ARGUMENT_AUDIT.md), [Chinese review](records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/REVIEW_ZH.md).
+
+The latest user request authorizes drafting. The manuscript is now written: ancestral and gate-organization formation motivates the question; abacus/calculator and a human formation running an agent clarify capability bearers, actual implementation and parts/whole; the AI runtime and matched-memory example connect organization, capability and conditional experiential interpretation. Three existing A/C propositions retain their complete premises and source attribution. Physical graduality does not prove binary-existence continuity; equal computation does not establish complete organization; capability gain does not rank experience or valence.
+
+This is an unpublished theoretical synthesis, not a fifth established original-results paper. All 328 nodes and 157 rules remain unchanged. R140 remains the common technical companion; R137 remains the full proof ledger. Drafting is complete; use this artifact for the next editorial pass, rather than repeating the outline. Author review and overlap with C remain editorial priorities. No publication, new experiments or automatic theorem expansion is authorized by the save itself. This current direction supersedes historical discussion-only queues below.
 
 ## R143 completed three-experiment argument blueprint
 

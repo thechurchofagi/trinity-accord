@@ -269,3 +269,14 @@ The plan now connects ancestral/organizational formation, the three-process read
 
 Disposition: a theoretical synthesis/explanatory companion is supported; a fifth original-results paper is not established by this outline. These core results are already published in A/C. All 328 nodes and 157 rules remain unchanged. Planning consolidation is complete. Do not automatically repeat the plan, proliferate lemmas, broaden surveys or start experiments. A requested draft should use this blueprint and retain central thought experiments; new original research needs a named unresolved claim.
 
+
+## R144 — Manuscript synthesis and AI attribution
+
+
+[English draft v0.1](records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/From_Ancestral_Continuity_to_Artificial_Agents_v0_1.md), [review PDF](records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/output/pdf/UCT_Ancestry_to_Artificial_Agents_v0_1.pdf), [source/argument audit](records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/SOURCE_AND_ARGUMENT_AUDIT.md), [Chinese review](records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/REVIEW_ZH.md).
+
+The latest user request authorizes drafting. The manuscript is now written: ancestral and gate-organization formation motivates the question; abacus/calculator and a human formation running an agent clarify capability bearers, actual implementation and parts/whole; the AI runtime and matched-memory example connect organization, capability and conditional experiential interpretation. Three existing A/C propositions retain their complete premises and source attribution. Physical graduality does not prove binary-existence continuity; equal computation does not establish complete organization; capability gain does not rank experience or valence.
+
+This is an unpublished theoretical synthesis, not a fifth established original-results paper. All 328 nodes and 157 rules remain unchanged. R140 remains the common technical companion; R137 remains the full proof ledger. Drafting is complete; use this artifact for the next editorial pass, rather than repeating the outline. Author review and overlap with C remain editorial priorities. No publication, new experiments or automatic theorem expansion is authorized by the save itself. This current direction supersedes historical discussion-only queues below.
+
+Manual review retains a19, a14 and c01 premises. The memory table is C §7.2's existing noiseless subcase, not new data. Block/Chalmers antecedents are credited, and RPT comparison preserves the reviewed target scope. No independent peer review or author final approval is claimed. Graph/source preservation and PDF inspection are artifact checks, not proof of C1 or physical correspondence.

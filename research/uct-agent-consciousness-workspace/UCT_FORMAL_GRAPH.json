@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R143-v1.0",
+  "revision": "R144-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "5bdc0dd4ab18fa2c0fcf2d532a7721e3c52ee201",
+  "base_commit": "95345f15e2b3f8c9c853461d9febdd627372de0f",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -5440,5 +5440,44 @@
     ],
     "decision": "Three thought-experiment blueprint complete. Suitable as theoretical synthesis/explanatory companion; no nonredundant fifth original-results paper established. Existence, nonproduct organization and capability are separate conditional branches, not a deductive ladder.",
     "next": "Do not automatically repeat planning or expand theory. Draft only when requested using this completed blueprint; original research needs a separately identified unresolved claim."
+  },
+  "manuscript_R144": {
+    "kind": "UNPUBLISHED_THEORETICAL_SYNTHESIS_DRAFT",
+    "version": "0.1",
+    "new_nodes": 0,
+    "new_rules": 0,
+    "record": "records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/From_Ancestral_Continuity_to_Artificial_Agents_v0_1.md",
+    "pdf": "records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/output/pdf/UCT_Ancestry_to_Artificial_Agents_v0_1.pdf",
+    "review": "records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/REVIEW_ZH.md",
+    "source_audit": "records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/SOURCE_AND_ARGUMENT_AUDIT.md",
+    "anchors": [
+      "A:ACTUAL_WHOLE_PARTS",
+      "A:ALL_ANC_ACTUAL",
+      "A:C1",
+      "A:C1_OI",
+      "A:E1",
+      "A:NONSUM",
+      "A:PHYS_NONPRODUCT",
+      "A:PRODUCT_DEF",
+      "A:U1",
+      "B:GATE",
+      "B:RPT",
+      "B:TARGET_DOMAIN",
+      "C:CIRCUIT_LAWS",
+      "C:CIRCUIT_SPEC",
+      "C:FIXED_J",
+      "C:P1",
+      "C:P2_COORD",
+      "C:P2_FULL",
+      "C:P3",
+      "R137:CLOSED_LOOP",
+      "R137:CONTROL_MODEL",
+      "R137:EXACT_INTERFACE"
+    ],
+    "selected_proof_ledger": "records/R144_Ancestry_to_Artificial_Agents_Draft_20261007/From_Ancestral_Continuity_to_Artificial_Agents_v0_1.md#appendix-a-source-and-proof-map",
+    "full_proof_ledger": "records/R137_Executable_Feedback_Interfaces_20261007/PROOF_LEDGER.md",
+    "authorization": "The latest user explicitly requested progressing to the manuscript draft; earlier discussion-only instructions are superseded for drafting.",
+    "contribution": "AI-centered explanatory synthesis of existing A/C results, with ancestry, abacus/calculator, human-formation agent, and implementation-boundary analysis. No new major theorem or established independent novelty.",
+    "next": "Revise this actual draft with author feedback; sharpen distinction from published C. Do not repeat planning, add unrelated lemmas, start experiments or publish automatically."
   }
 }
