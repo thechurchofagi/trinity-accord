@@ -1,3 +1,11 @@
+## R152 DOI release — 7 October 2026
+
+Author explicitly authorized review followed by DOI, then OTS, then Arweave. R151 v0.2 is now released as **TA-TR-2026-25 v1.0**, [DOI 10.5281/zenodo.23206492](https://doi.org/10.5281/zenodo.23206492). This is a new independent citable theoretical preprint; prior editions remain unchanged. No new scientific sections or theorem nodes were added by release preparation.
+
+The 14-page final PDF and all nine published assets passed anonymous byte/hash readback; DOI resolution returned HTTP 200 to the correct record. OTS has four pending calendar attestations, **not yet Bitcoin verified**. Arweave has **not yet been uploaded**. An enabled hourly continuation task triggers the guarded TA25 preservation workflow; after verified OTS it proceeds to AR and verifies anonymous SHA-256 readback. Do not call the preservation loop complete until ARWEAVE_READBACK_PASS.
+
+Publication branch: `research/experience-intelligence-self-v1-20261007`. Exact state and receipt locations, hashes, workflow runs and continuation instructions: [R152 handoff](records/R152_DOI_Publication_20261007/PUBLICATION_HANDOFF.md). Primary research continues under RESEARCH_MASTER_GUIDE.md; release status does not turn preservation into the theoretical research agenda. The formal graph remains R149-v1.0.
+
 ## R151 mandatory entry point
 
 At the start of every research turn in this workspace, read [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) before selecting a task, then the current memory, handoff, index and relevant map/source sections. This is the author's explicit instruction of 7 October 2026. Follow its separate inference, concept, joint-consistency and purpose audits; inherited historical queues do not override it. Re-reading unchanged material within one turn is unnecessary.
