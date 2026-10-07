@@ -1,0 +1,56 @@
+{
+  "categories_jointly_nonempty": true,
+  "category_counts": {
+    "body_dominant_only": 114,
+    "neither": 361,
+    "overlap": 36,
+    "tool_dominant_only": 114
+  },
+  "effect_matrices_checked": 625,
+  "epsilon": "1/4",
+  "grid": [
+    "0",
+    "1/4",
+    "1/2",
+    "3/4",
+    "1"
+  ],
+  "interpretation": "Finite profile categories and a standard latent-state label symmetry were checked exactly. This does not establish actual human realization, anatomical membership, familiar ownership, C1, or semantic completeness.",
+  "latent_label_swap_horizon": 3,
+  "latent_label_swap_status": "PASS",
+  "latent_label_swap_trace_checks": 1024,
+  "overlap_allowed": true,
+  "schema": "UCT_R160_EXACT_CHECKS/v1",
+  "strictly_cross_modulated_category_counts": {
+    "body_dominant_only": 51,
+    "neither": 289,
+    "overlap": 9,
+    "tool_dominant_only": 51
+  },
+  "strictly_cross_modulated_examples_a_x_b_y": {
+    "body_dominant_only": [
+      "3/4",
+      "1/4",
+      "1/4",
+      "0"
+    ],
+    "neither": [
+      "0",
+      "1/4",
+      "1/4",
+      "0"
+    ],
+    "overlap": [
+      "3/4",
+      "1/4",
+      "1/4",
+      "3/4"
+    ],
+    "tool_dominant_only": [
+      "0",
+      "1/4",
+      "1/4",
+      "3/4"
+    ]
+  }
+}
