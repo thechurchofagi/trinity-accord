@@ -1,10 +1,18 @@
-# UCT A–B–C–D unified formal map — R137
+# UCT A–B–C–D unified formal map — R138
 
-**Canonical working map, revision R137-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
+**Canonical working map, revision R138-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
+
+## Current priority — R138 consolidation
+
+The user requested fewer exploratory derivations, strict core definitions and a small next-paper spine. [Definition contract](records/R138_Definitions_and_Theorem_Consolidation_20261007/DEFINITION_CONTRACT_AND_PAPER_SPINE.md), [selected proofs](records/R138_Definitions_and_Theorem_Consolidation_20261007/PROOF_SPINE.md), [Chinese review](records/R138_Definitions_and_Theorem_Consolidation_20261007/REVIEW_ZH.md).
+
+All 328 nodes and 157 rules are unchanged. R138 adds editorial selection metadata, not new mathematics. T1 reuses C/R131 identification, T2 reuses R132/R137 executable abstraction, T3 reuses A/C conditional type implications. The full R137 ledger remains authoritative for unselected results. Definition labels are source-aligned editorial handles, not new deductive nodes.
+
+Pause the formerly queued finite-memory extension. Next: compact English manuscript and focused comparison against the four published papers and direct control-theory antecedents. Installed capability versus external policy optimization, report as behavior, and actual/finite/estimated organization must remain distinct. No publication or originality claim follows from consolidation alone.
 
 ## 1. Version basis and authority
 
@@ -305,7 +313,7 @@ Keep the following open rather than treating them as implied edges:
 - Structural experiential interpretation → a familiar phenomenal label, valence or scalar richness.
 - Biological/AI decoder similarity → full mechanism correspondence or T2 closure.
 
-R137 supplies a complete local certificate for the declared visible-state randomized action-decoder class, its feedback guarantee and finite incompatibility witnesses. Next: characterize when causally updated finite memory resolves a visible-fiber conflict without hidden-state access or extra unmodeled sensors. Specify its observation update, time/resources and physical support; distinguish this from the present memoryless interface class. Actual grounding, complete-type identification and biological/AI intervention transport remain open. Continue theory first.
+R137 supplies the declared finite decoder certificate. Its finite-memory continuation is parked by the R138 user-directed consolidation. Current work: definitions, the three-result proof spine, and precise overlap/novelty assessment. Actual grounding, complete-type identification and biological/AI intervention transport remain open. No new experiments are required for this editorial/theoretical task.
 
 ## 16. Mandatory future-map protocol
 

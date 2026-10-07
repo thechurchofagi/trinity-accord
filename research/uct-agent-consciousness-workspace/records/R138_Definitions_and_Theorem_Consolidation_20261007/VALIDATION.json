@@ -1,0 +1,149 @@
+{
+  "revision": "R138-v1.0",
+  "baseline_commit": "d4d9e72b0bd02d53ac257855419b995cc0a69ad6",
+  "scope": "Source bytes, graph preservation, selected references and editorial consistency only; not proof verification.",
+  "proof_review": "Same-assistant manual review of selected existing proofs, not independent review or a proof assistant.",
+  "new_nodes": 0,
+  "new_rules": 0,
+  "checks": [
+    {
+      "name": "nodes_identical_to_R137",
+      "pass": true
+    },
+    {
+      "name": "rules_identical_to_R137",
+      "pass": true
+    },
+    {
+      "name": "source_versions_identical_to_R137",
+      "pass": true
+    },
+    {
+      "name": "counts_328_157",
+      "pass": true
+    },
+    {
+      "name": "revision_R138",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_A:C1",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_A:C1_OI",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_A:U1",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_C:P1",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_C:P2_COORD",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_C:P2_FULL",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_C:P3",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R131:TARGET_SPAN",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R131:COMPLETE_LAW",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R132:PARTIAL_CLOSURE",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R137:CONTROL_MODEL",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R137:LOCAL_LP",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R137:EXACT_INTERFACE",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R137:CLOSED_LOOP",
+      "pass": true
+    },
+    {
+      "name": "pinned_source_A",
+      "pass": true
+    },
+    {
+      "name": "pinned_source_B",
+      "pass": true
+    },
+    {
+      "name": "pinned_source_C",
+      "pass": true
+    },
+    {
+      "name": "pinned_source_D",
+      "pass": true
+    },
+    {
+      "name": "DEFINITION_CONTRACT_AND_PAPER_SPINE.md_math_delimiters",
+      "pass": true
+    },
+    {
+      "name": "DEFINITION_CONTRACT_AND_PAPER_SPINE.md_link_../R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "pass": true
+    },
+    {
+      "name": "DEFINITION_CONTRACT_AND_PAPER_SPINE.md_link_../R128_Unified_Formal_Map_Audit_20261006/sources/B_UCT_II_v1_1.md",
+      "pass": true
+    },
+    {
+      "name": "DEFINITION_CONTRACT_AND_PAPER_SPINE.md_link_../R128_Unified_Formal_Map_Audit_20261006/sources/C_UCT_III_v1_0.md",
+      "pass": true
+    },
+    {
+      "name": "DEFINITION_CONTRACT_AND_PAPER_SPINE.md_link_../R129_Four_Paper_Integration_20261006/sources/D_TA24_v1_0.md",
+      "pass": true
+    },
+    {
+      "name": "PROOF_SPINE.md_math_delimiters",
+      "pass": true
+    },
+    {
+      "name": "REVIEW_ZH.md_math_delimiters",
+      "pass": true
+    },
+    {
+      "name": "REVIEW_ZH.md_link_DEFINITION_CONTRACT_AND_PAPER_SPINE.md",
+      "pass": true
+    },
+    {
+      "name": "REVIEW_ZH.md_link_PROOF_SPINE.md",
+      "pass": true
+    },
+    {
+      "name": "memory_active_revision",
+      "pass": true
+    },
+    {
+      "name": "memory_active_priority",
+      "pass": true
+    }
+  ],
+  "passed": 34,
+  "total": 34,
+  "all_pass": true
+}

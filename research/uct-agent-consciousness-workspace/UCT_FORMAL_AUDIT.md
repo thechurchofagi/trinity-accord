@@ -201,3 +201,17 @@ Exact checks: 256 deterministic path maps,4096 causal compositions,2080 mixed fa
 - F60: Feedback-refinement, output-feedback and stochastic controller-transfer prior art directly cover this research neighborhood. No broad novelty or algorithmic superiority claim is warranted. R134's blind-action witness is reused with explicit attribution.
 
 Exact checks: 6561 binary Helly families, 6561 menu intersections, 501 sharp-family proper subsets, 780 rational mixtures, 32 joint rows, 556 exact and 2224 approximate feedback path comparisons, and 8 seed-reuse horizons; 12 named checks. General theorems remain conditional manual proofs. C1/U1 unchanged; T2 OPEN, C3 NOT_TESTED, valence OPEN.
+
+
+## R138 — definition contract and theorem consolidation
+
+7 October 2026. Editorial/source audit; zero new nodes or rules. All 328 nodes and 157 rules preserved field-for-field. [Definition contract](records/R138_Definitions_and_Theorem_Consolidation_20261007/DEFINITION_CONTRACT_AND_PAPER_SPINE.md), [selected proof ledger](records/R138_Definitions_and_Theorem_Consolidation_20261007/PROOF_SPINE.md).
+
+- F61: A strict mathematical object does not independently establish its experiential reference. C1 remains the fixed interpretation axiom, not a consequence of naming a structure.
+- F62: Organization includes declared pointing, dynamics, ports and time. The full actual organization, finite model, projected view, estimate and structural type are not interchangeable.
+- F63: Installed-system capability, externally optimized controller/plant performance and post-modification capability use different comparison contracts. R134–R137 control results are not withdrawn or automatically interpreted as intrinsic intelligence.
+- F64: Report is generally a behavioral output. The experience/behavior/report slogan must not be read as a disjoint three-way ontology.
+- F65: The selected identification and capability/type results are already in A/C; finite executable abstraction has direct established control antecedents. No novel consciousness theorem or publication readiness is certified by consolidation.
+- F66: MEMORY's lead revision had remained R132 while later appendices reached R137. Update the active revision and queue explicitly; old chronological entries remain historical.
+
+Manual source-based consolidation by the same assistant. No independent review, proof-assistant certification, new physical validation, or exhaustive new literature audit. Constitutive adequacy remains an application premise, not an added experience gate or requirement for a unique universal subject partition. Current next task is manuscript compression and focused overlap assessment, superseding the finite-memory queue.

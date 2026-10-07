@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R137-v1.0",
+  "revision": "R138-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "f7a85c373b34e5726482de26e927f87b629db520",
+  "base_commit": "d4d9e72b0bd02d53ac257855419b995cc0a69ad6",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -5301,5 +5301,32 @@
     "manifest": "records/R131_Theorem_Synthesis_and_Archive_20261006/RECOVERED_SOURCE_MANIFEST.json",
     "crosswalk": "records/R131_Theorem_Synthesis_and_Archive_20261006/THOUGHT_EXPERIMENT_CROSSWALK.csv",
     "warning": "TA16 and PLT contain prior related results; old neutral existence-bridge alternatives are not current A:C1/U1 consequences. No exact thousands count certified."
+  },
+  "consolidation_R138": {
+    "kind": "EDITORIAL_DEFINITION_AND_THEOREM_SELECTION",
+    "new_nodes": 0,
+    "new_rules": 0,
+    "record": "records/R138_Definitions_and_Theorem_Consolidation_20261007/DEFINITION_CONTRACT_AND_PAPER_SPINE.md",
+    "selected_proof_ledger": "records/R138_Definitions_and_Theorem_Consolidation_20261007/PROOF_SPINE.md",
+    "full_ledger": "records/R137_Executable_Feedback_Interfaces_20261007/PROOF_LEDGER.md",
+    "anchors": [
+      "A:C1",
+      "A:C1_OI",
+      "A:U1",
+      "C:P1",
+      "C:P2_COORD",
+      "C:P2_FULL",
+      "C:P3",
+      "R131:TARGET_SPAN",
+      "R131:COMPLETE_LAW",
+      "R132:PARTIAL_CLOSURE",
+      "R137:CONTROL_MODEL",
+      "R137:LOCAL_LP",
+      "R137:EXACT_INTERFACE",
+      "R137:CLOSED_LOOP"
+    ],
+    "priority": "Consolidate definitions and three existing results; audit prior-art overlap before adding further theorem families.",
+    "parked": "Automatic finite-memory-interface expansion",
+    "status": "MANUAL_SOURCE_BASED_CONSOLIDATION_NOT_NEW_THEOREM_OR_PUBLICATION"
   }
 }
