@@ -1,8 +1,14 @@
 # UCT 项目长期工作记忆
 
-更新时间：2026-10-07；当前形式化基础：**R139-v1.0**。
+更新时间：2026-10-07；当前形式化基础：**R140-v1.0**。
 
-## R139 当前交付与接续
+## R140 当前决定与共同基础
+
+已完成 [统一形式化伴随文稿 v0.2](records/R140_Formal_Companion_20261007/Organization_Capability_Experience_v0_2.md) 与 [PDF 审阅版](records/R140_Formal_Companion_20261007/output/pdf/UCT_Formal_Companion_v0_2.pdf)。当前定位明确为四篇的共同技术基础/附录，不另立宣称重大新意识定理的第五篇论文。未发布、不改四篇版本、无新报告号/DOI。
+
+定义收束任务已完成，图仍328/157、零新增。以后采用这套定义和原有地图；控制详细证明在附录，主文集中核心概念。不得把每轮继续解释成自动扩展新定理或实验。新研究先说明具体未解命题、源节点、预期非重复贡献。
+
+## R139 历史交付与接续
 
 已形成 [英文初稿 v0.1](records/R139_Manuscript_and_Prior_Art_20261007/Organization_Capability_Experience_v0_1.md) 和 [直接先例审查](records/R139_Manuscript_and_Prior_Art_20261007/PRIOR_ART_AND_CONTRIBUTION_AUDIT.md)。328/157 不变。A/C 两条主结果已发表；随机接口与反馈律保持有直接控制理论先例，不能称三条新重大意识定理。定位技术整合，未发布，无新报告号/DOI。
 

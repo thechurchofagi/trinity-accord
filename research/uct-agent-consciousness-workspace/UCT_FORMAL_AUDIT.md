@@ -227,3 +227,15 @@ Zero new nodes/rules; 328/157 retained field-for-field. [Draft](records/R139_Man
 - F70: Propositions 1/3 restate A/C; Proposition 2 packages R137. Finite U(z) is explicitly assumed for a globally finite constraint family, narrowing the manuscript model without changing the archived result.
 
 The draft is a technical synthesis, not a claim of three new consciousness theorems. Specific primary passages checked; Nadali et al. abstract only. No exhaustive novelty certification, independent review, new empirical validation or publication.
+
+
+## R140 — companion disposition and readable review edition
+
+No new nodes or rules; 328/157 preserved. [Text](records/R140_Formal_Companion_20261007/Organization_Capability_Experience_v0_2.md), [review](records/R140_Formal_Companion_20261007/DISPOSITION_AND_REVIEW_ZH.md).
+
+- F71: The manuscript's role is now decided: a four-paper formal companion/common technical appendix. It is not a new major-theorem research-paper claim; published editions remain unchanged.
+- F72: Explicit illegal-action row completion has zero weight. Finite menus, all-start necessity, actual observation availability and conditional-randomness premises remain in the main model; the proof relocation does not weaken scope.
+- F73: Pure set factorization, full-simplex row-span identification and conditional type interpretation retain their original provenance. Selected proofs are in the v0.2 body/appendices; the R138 selected ledger and R137 full ledger are unchanged.
+- F74: Source-preserving editorial consistency and PDF inspection do not establish C1, physical completeness or independent peer review.
+
+The definition/consolidation task is complete. Additional work must name a specific unresolved claim and prospective nonredundant increment; control and empirical expansions are not restarted automatically.

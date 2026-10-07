@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R139-v1.0",
+  "revision": "R140-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "17f9a71adb53e5ee9ae7aee0e862177efd24995e",
+  "base_commit": "692a091ede41b0111c0423855a213566460793bc",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -5337,5 +5337,17 @@
     "contribution_audit": "records/R139_Manuscript_and_Prior_Art_20261007/PRIOR_ART_AND_CONTRIBUTION_AUDIT.md",
     "proof_ledger": "records/R138_Definitions_and_Theorem_Consolidation_20261007/PROOF_SPINE.md",
     "status": "DRAFT_NOT_PUBLICATION_OR_GENERAL_NOVELTY_CLAIM"
+  },
+  "companion_R140": {
+    "kind": "EDITORIAL_REVIEW_AND_DISPOSITION",
+    "new_nodes": 0,
+    "new_rules": 0,
+    "manuscript": "records/R140_Formal_Companion_20261007/Organization_Capability_Experience_v0_2.md",
+    "pdf": "records/R140_Formal_Companion_20261007/output/pdf/UCT_Formal_Companion_v0_2.pdf",
+    "review": "records/R140_Formal_Companion_20261007/DISPOSITION_AND_REVIEW_ZH.md",
+    "proof_ledger": "records/R138_Definitions_and_Theorem_Consolidation_20261007/PROOF_SPINE.md",
+    "disposition": "FORMAL_COMPANION_TO_FOUR_PAPERS_NOT_NEW_MAJOR_THEOREM_PAPER",
+    "status": "UNPUBLISHED_REVIEW_VERSION",
+    "next": "Consolidation complete. Any new research must first specify a concrete unsolved claim, source-map anchors and expected nonredundant contribution."
   }
 }
