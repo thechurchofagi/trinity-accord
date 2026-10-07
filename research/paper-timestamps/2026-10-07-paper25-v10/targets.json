@@ -1,0 +1,22 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-10-07-paper25-v10",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-25",
+      "record_id": 23206492,
+      "doi": "10.5281/zenodo.23206492",
+      "version": "1.0",
+      "title": "Experience, Intelligence, and Self Within Experience: Definitions, Conditional Theorems, and Thought Experiments for a Structural Account",
+      "receipt_path": "research/experience-intelligence-self/publication-record.json",
+      "pdfs": [
+        {
+          "name": "experience-intelligence-self-v1.0.pdf",
+          "sha256": "b4f456014213c5d4f34f41ed2bac8873fd9d90e38398d77daebdb787872b1c1a",
+          "bytes": 112138
+        }
+      ]
+    }
+  ]
+}
