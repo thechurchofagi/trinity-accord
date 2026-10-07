@@ -1,12 +1,18 @@
-# UCT A–B–C–D unified formal map — R138
+# UCT A–B–C–D unified formal map — R139
 
-**Canonical working map, revision R138-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
+**Canonical working map, revision R139-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
 
-## Current priority — R138 consolidation
+## Current manuscript — R139
+
+[English v0.1 draft](records/R139_Manuscript_and_Prior_Art_20261007/Organization_Capability_Experience_v0_1.md), [direct prior-art audit](records/R139_Manuscript_and_Prior_Art_20261007/PRIOR_ART_AND_CONTRIBUTION_AUDIT.md), [Chinese review](records/R139_Manuscript_and_Prior_Art_20261007/REVIEW_ZH.md).
+
+Zero new nodes/rules. Direct sources establish randomized interfaces, feedback refinement, output-history refinement and intervention consistency as antecedents. This draft is a technical synthesis, not three newly discovered consciousness theorems. Next: refine the manuscript and decide standalone synthesis versus appendix. Expansion queues remain parked.
+
+## R138 definition baseline
 
 The user requested fewer exploratory derivations, strict core definitions and a small next-paper spine. [Definition contract](records/R138_Definitions_and_Theorem_Consolidation_20261007/DEFINITION_CONTRACT_AND_PAPER_SPINE.md), [selected proofs](records/R138_Definitions_and_Theorem_Consolidation_20261007/PROOF_SPINE.md), [Chinese review](records/R138_Definitions_and_Theorem_Consolidation_20261007/REVIEW_ZH.md).
 
@@ -313,7 +319,7 @@ Keep the following open rather than treating them as implied edges:
 - Structural experiential interpretation → a familiar phenomenal label, valence or scalar richness.
 - Biological/AI decoder similarity → full mechanism correspondence or T2 closure.
 
-R137 supplies the declared finite decoder certificate. Its finite-memory continuation is parked by the R138 user-directed consolidation. Current work: definitions, the three-result proof spine, and precise overlap/novelty assessment. Actual grounding, complete-type identification and biological/AI intervention transport remain open. No new experiments are required for this editorial/theoretical task.
+R137 supplies the declared finite decoder certificate. Its finite-memory continuation is parked by the R138 user-directed consolidation. Current work: refine the R139 manuscript after focused overlap assessment; decide standalone synthesis versus appendix. Actual grounding, complete-type identification and biological/AI intervention transport remain open. No new experiments are required for this editorial/theoretical task.
 
 ## 16. Mandatory future-map protocol
 

@@ -215,3 +215,15 @@ Exact checks: 6561 binary Helly families, 6561 menu intersections, 501 sharp-fam
 - F66: MEMORY's lead revision had remained R132 while later appendices reached R137. Update the active revision and queue explicitly; old chronological entries remain historical.
 
 Manual source-based consolidation by the same assistant. No independent review, proof-assistant certification, new physical validation, or exhaustive new literature audit. Constitutive adequacy remains an application premise, not an added experience gate or requirement for a unique universal subject partition. Current next task is manuscript compression and focused overlap assessment, superseding the finite-memory queue.
+
+
+## R139 — manuscript and direct prior art
+
+Zero new nodes/rules; 328/157 retained field-for-field. [Draft](records/R139_Manuscript_and_Prior_Art_20261007/Organization_Capability_Experience_v0_1.md), [audit](records/R139_Manuscript_and_Prior_Art_20261007/PRIOR_ART_AND_CONTRIBUTION_AUDIT.md). Full ledger R137 and selected ledger R138 remain authoritative.
+
+- F67: Randomized interfaces and closed-loop output distributions have direct prior art: Haesaert/Soudjani/Abate, arXiv:1605.09557v1, Definition 6/Theorem 2. R137 does not invent this general mechanism.
+- F68: Output-history refinement and intervention-consistent abstraction also have direct precedents. A narrower finite LP is not thereby certified historically novel.
+- F69: Same-title Haesaert documents differ in authors/numbering; the draft pins the 36-page arXiv version.
+- F70: Propositions 1/3 restate A/C; Proposition 2 packages R137. Finite U(z) is explicitly assumed for a globally finite constraint family, narrowing the manuscript model without changing the archived result.
+
+The draft is a technical synthesis, not a claim of three new consciousness theorems. Specific primary passages checked; Nadali et al. abstract only. No exhaustive novelty certification, independent review, new empirical validation or publication.

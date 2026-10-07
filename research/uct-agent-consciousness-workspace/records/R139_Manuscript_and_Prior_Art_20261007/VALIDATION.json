@@ -1,0 +1,145 @@
+{
+  "revision": "R139-v1.0",
+  "baseline_commit": "17f9a71adb53e5ee9ae7aee0e862177efd24995e",
+  "scope": "Source bytes, graph preservation, selected references and editorial consistency only; not proof verification.",
+  "proof_review": "Same-assistant selected-source review and manuscript restatement; not independent review or a proof assistant.",
+  "new_nodes": 0,
+  "new_rules": 0,
+  "checks": [
+    {
+      "name": "nodes_identical_to_R137",
+      "pass": true
+    },
+    {
+      "name": "rules_identical_to_R137",
+      "pass": true
+    },
+    {
+      "name": "source_versions_identical_to_R137",
+      "pass": true
+    },
+    {
+      "name": "counts_328_157",
+      "pass": true
+    },
+    {
+      "name": "revision_R139",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_A:C1",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_A:C1_OI",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_A:U1",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_C:P1",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_C:P2_COORD",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_C:P2_FULL",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_C:P3",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R131:TARGET_SPAN",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R131:COMPLETE_LAW",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R132:PARTIAL_CLOSURE",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R137:CONTROL_MODEL",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R137:LOCAL_LP",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R137:EXACT_INTERFACE",
+      "pass": true
+    },
+    {
+      "name": "existing_anchor_R137:CLOSED_LOOP",
+      "pass": true
+    },
+    {
+      "name": "pinned_source_A",
+      "pass": true
+    },
+    {
+      "name": "pinned_source_B",
+      "pass": true
+    },
+    {
+      "name": "pinned_source_C",
+      "pass": true
+    },
+    {
+      "name": "pinned_source_D",
+      "pass": true
+    },
+    {
+      "name": "Organization_Capability_Experience_v0_1.md_math_delimiters",
+      "pass": true
+    },
+    {
+      "name": "Organization_Capability_Experience_v0_1.md_link_../R137_Executable_Feedback_Interfaces_20261007/R137_Executable_Feedback.md",
+      "pass": true
+    },
+    {
+      "name": "Organization_Capability_Experience_v0_1.md_link_../R131_Theorem_Synthesis_and_Archive_20261006/R131_Probe_Completeness_Theorem.md",
+      "pass": true
+    },
+    {
+      "name": "Organization_Capability_Experience_v0_1.md_link_../R138_Definitions_and_Theorem_Consolidation_20261007/PROOF_SPINE.md",
+      "pass": true
+    },
+    {
+      "name": "PRIOR_ART_AND_CONTRIBUTION_AUDIT.md_math_delimiters",
+      "pass": true
+    },
+    {
+      "name": "REVIEW_ZH.md_math_delimiters",
+      "pass": true
+    },
+    {
+      "name": "REVIEW_ZH.md_link_Organization_Capability_Experience_v0_1.md",
+      "pass": true
+    },
+    {
+      "name": "REVIEW_ZH.md_link_PRIOR_ART_AND_CONTRIBUTION_AUDIT.md",
+      "pass": true
+    },
+    {
+      "name": "memory_active_revision",
+      "pass": true
+    },
+    {
+      "name": "memory_active_priority",
+      "pass": true
+    }
+  ],
+  "passed": 33,
+  "total": 33,
+  "all_pass": true
+}

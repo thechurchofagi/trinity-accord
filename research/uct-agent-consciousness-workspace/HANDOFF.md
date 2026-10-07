@@ -1,17 +1,13 @@
-# UCT 研究交接 — R138：定义与主定理收束
+# UCT 交接 — R139：英文初稿与直接先例
 
-2026-10-07 Asia/Shanghai。父提交 d4d9e72b0bd02d53ac257855419b995cc0a69ad6。仓库 thechurchofagi/trinity-accord，分支 uct-agent-consciousness-workspace。
+2026-10-07 Asia/Shanghai；父提交 17f9a71adb53e5ee9ae7aee0e862177efd24995e。仓库 thechurchofagi/trinity-accord，分支 uct-agent-consciousness-workspace。
 
-用户最新指令：推导已多，先严格定义核心概念，选少数重要定理作为下一篇论文主轴。已完成 [英文共同定义稿](records/R138_Definitions_and_Theorem_Consolidation_20261007/DEFINITION_CONTRACT_AND_PAPER_SPINE.md)、[三条现有主结果与证明](records/R138_Definitions_and_Theorem_Consolidation_20261007/PROOF_SPINE.md)、[中文审查说明](records/R138_Definitions_and_Theorem_Consolidation_20261007/REVIEW_ZH.md)。
+交付：[英文技术整合 v0.1](records/R139_Manuscript_and_Prior_Art_20261007/Organization_Capability_Experience_v0_1.md)、[贡献审查](records/R139_Manuscript_and_Prior_Art_20261007/PRIOR_ART_AND_CONTRIBUTION_AUDIT.md)、[中文说明](records/R139_Manuscript_and_Prior_Art_20261007/REVIEW_ZH.md)。含定义、三条命题与证明、反例、程序、局限、引用。未发布，无新报告号/DOI。
 
-R138 是整合审查，零新增节点/规则。总图仍 328/157，全部逐字段保留，四篇固定源文未改。更新图的编辑元数据、审计、索引、项目记忆，并修正记忆首段滞留 R132 的版本标记。完整证明台账仍为 R137；R138 另有选定证明台账。
+直接原文先例：Reissig 反馈精化；Haesaert/Soudjani/Abate 随机接口和输出概率保持；Majumdar 输出历史；Rubenstein 干预一致性。不能把接口迁移本身说成新普遍定理。两个 Haesaert 同标题版本不同，稿件固定36页 arXiv:1605.09557v1。
 
-要点：组织不等于连线图；实际完整组织、有限视图和估计分开；智能固定任务/资源且区分安装机制与外部优化控制；报告属于行为；体验的数学表示不自行证明 C1；有限接口成功不推出完整体验同一。
+归属：命题1 C/R131；命题2 R132/R137及控制理论先例；命题3 A/C。328节点157规则不变，零新增。完整台账 R137，选定证明 R138；四篇源文不改。
 
-拟选 T1 目标识别（C/R131）、T2 可执行反馈抽象（R132/R137）、T3 能力与完整体验类型的条件关系（A/C）。T1/T3 已发表，T2 有直接控制理论先例；不能宣称三条新原创意识定理。下一篇拟围绕“组织、能力与体验的定义和识别界限”，但发表资格需针对性重叠审查。
+下一步精修并确定独立整合稿或附录，不默认添加推导/实验。T2 OPEN，生物/AI C3 NOT_TESTED，valence OPEN。历史仍38案例47族，数千原档未完整恢复。
 
-下一步：紧凑英文初稿及技术中心逐条先例比较。有限记忆接口支线暂存，不自动继续新轮推导；不启动新实验替代缺口。T2 跨底物证书 OPEN，生物/AI C3 NOT_TESTED，valence OPEN。仍仅核实 38 案例、47 族，数千原档未完整恢复。
-
-审查限于相关定义与选定结果，由同一助手手工进行，无独立评审或证明助手认证。[一致性检查](records/R138_Definitions_and_Theorem_Consolidation_20261007/VALIDATION.json) 只验证来源/图保留与引用，不证明现实前提。
-
-启动读 AGENTS/MEMORY/本交接/总图/审计。历史：[R137 交接](HANDOFF_THROUGH_R137.md)、[R137 索引](MASTER_INDEX_THROUGH_R137.md)。保存需最新 HEAD lease、force=false、[skip ci] 并回读；本研究检查点不发 DOI/release/PR/CI。
+同一助手手工复核，非独立审稿/证明助手、非全面查新。见 [验证](records/R139_Manuscript_and_Prior_Art_20261007/VALIDATION.json)。保存用 HEAD lease、force=false、[skip ci]并回读；不发DOI/release/PR/CI。[R138交接](HANDOFF_THROUGH_R138.md)。
