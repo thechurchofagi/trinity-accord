@@ -1,0 +1,92 @@
+{
+  "schema": "UCT_DUAL_SAVE_RECEIPT/v1",
+  "round": "R160",
+  "saved_at_utc": "2026-10-07T15:58:00+00:00",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "start_head": "36e73dda56acb6036d87f20a598e63c3793f24e2",
+    "first_checkpoint": "97fbb37dfe45c2b88cbf10e35fcfe9acf90ed25e",
+    "research_commit": "afa3fae62f87014cf91e4d895bac7eff461dc3fa",
+    "research_files_verified": 19,
+    "expected_sha_fast_forward": true,
+    "remote_blob_hashes": "PASS"
+  },
+  "workspace": {
+    "master_handoff": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_000000007600820c82682c68d58b43b6",
+      "version": 4,
+      "identity_preserved": true,
+      "filename": "UCT_Hourly_Research_Master_Handoff.md",
+      "bytes": 20720,
+      "sha256": "04200355a1c17cf7e1b1d8a0024787ea8bb1f764bd5efc968447286679193857",
+      "byte_readback": "PASS"
+    },
+    "cumulative_increment": {
+      "library_file_id": "libfile_a21d058a18cc8191b99553a1a2850725",
+      "file_id": "file_0000000030c081f5ad1fe37a91b1ea8f",
+      "version": 0,
+      "filename": "UCT_R157_R160_Cumulative_Increment_20261007.zip",
+      "sha256": "ec895a5431c3dc07b4f89d7e12e0723fe1cac45b3549926e4e252e8a56ba9c2e",
+      "bytes": 421524,
+      "members": 60,
+      "payload_files": 59,
+      "scope": "Cumulative increment relative to exact recovered R156 working-set base; not full working-set, repository or history backup.",
+      "research_commit": "afa3fae62f87014cf91e4d895bac7eff461dc3fa",
+      "byte_readback": "PASS",
+      "crc_and_member_hashes": "PASS"
+    },
+    "save_verification": {
+      "library_file_id": "libfile_4065855535bc819182d213de956eb249",
+      "file_id": "file_000000003a4081f5801737175785e095",
+      "version": 0,
+      "filename": "UCT_R160_Save_Verification_20261007.json",
+      "sha256": "288f8b8e0fefe1fb1b6561319f4129bf50467e9341f207eae8179ff24cba4ad9",
+      "bytes": 1357,
+      "byte_readback": "PASS"
+    }
+  },
+  "required_baseline": {
+    "library_file_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
+    "filename": "UCT_R156_Working_Set_20261007.zip",
+    "bytes": 3493643,
+    "sha256": "95cc3ea1ec45eb273531c25525edcb7f8e6f2088c650a39b97d24817704ec40a",
+    "working_set_files": 384
+  },
+  "restore_probe": {
+    "status": "PASS",
+    "restored_working_set_files": 435,
+    "exact_file_set_and_hash_match": true,
+    "scope": "Recovered R156 working-set base plus R157–R160 cumulative increment; not full repository/history; this post-save R160 receipt excluded."
+  },
+  "save_failures_and_recovery": [
+    "Direct local git push lacked credentials and made no remote mutation. The branch head was rechecked; the authorized repository path then wrote an independent checkpoint and final expected-SHA fast-forward without force.",
+    "The first local metadata-helper invocation used relative readback paths and was rejected after bytes were already materialized. It was rerun with absolute paths; all identities were applied and all three byte comparisons passed."
+  ],
+  "map": {
+    "revision": "R160-v1.0",
+    "nodes": 422,
+    "rules": 202,
+    "new_nodes": 4,
+    "new_rules": 2,
+    "status": "PROTOCOL_RELATIVE_BODY_TOOL_DISCRIMINANT_AND_NONIDENTIFICATION_BRIDGE_OPEN",
+    "empirical_F_witness": false,
+    "actual_human_experiment": false,
+    "global_semantic_proof": false
+  },
+  "unfinished": [
+    "Selective concrete J_B/J_T intervention and independent fidelity tests",
+    "Shared normalization, uncertainty and power model for Y_B/Y_T",
+    "Complete neural realization and fixed B_min/F_O measurement including nonreporters"
+  ],
+  "next": "Specify one safe human J_B/J_T protocol with fidelity tests, shared error bounds and a preregistered falsifier for B_Pi, without using ownership report to define physical readouts.",
+  "restore": [
+    "Verify and extract the exact R156 baseline.",
+    "Overlay all 59 nonmanifest members of the R157–R160 cumulative increment at research-workspace root.",
+    "Verify _R157_R160_CUMULATIVE_MANIFEST.json, CRC and all payload hashes.",
+    "Fetch latest GitHub head and fixed handoff version; retrieve this later receipt or newer work before continuing."
+  ],
+  "ongoing_research_complete": false,
+  "history": "All research files and failures are retained. This receipt is intentionally outside the cumulative increment because it records the package's later readback."
+}
