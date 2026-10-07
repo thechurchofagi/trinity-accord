@@ -1,0 +1,68 @@
+{
+  "round": "R136",
+  "all_pass": true,
+  "checks": [
+    {
+      "check": "64 of 256 binary two-step deterministic path maps are causal",
+      "pass": true
+    },
+    {
+      "check": "4096 pure causal-kernel compositions preserve prefix constraints",
+      "pass": true
+    },
+    {
+      "check": "2080 mixed kernels reconstruct by causal conditional factorization",
+      "pass": true
+    },
+    {
+      "check": "256 deterministic experiment pairs satisfy the exact prefix criterion",
+      "pass": true
+    },
+    {
+      "check": "offline delay translator is exact but violates nonanticipation",
+      "pass": true
+    },
+    {
+      "check": "all 64 pure causal translators have delay average success at most one half",
+      "pass": true
+    },
+    {
+      "check": "fair causal translator attains path-TV one half for both hidden states",
+      "pass": true
+    },
+    {
+      "check": "10000 exact garbling/decision-value comparisons respect Blackwell sufficiency",
+      "pass": true
+    },
+    {
+      "check": "identity decision separates perfect and noisy observations exactly",
+      "pass": true
+    },
+    {
+      "check": "all enumerated adaptive read trees meet the uniform-prior optimal-decoder bound",
+      "pass": true
+    },
+    {
+      "check": "uniform-subset protocol attains the bound for every enumerated string/query",
+      "pass": true
+    },
+    {
+      "check": "two-bit one-read delayed guarantee gap is exactly one quarter",
+      "pass": true
+    },
+    {
+      "check": "zero-read and full-read endpoints are one half and one",
+      "pass": true
+    }
+  ],
+  "deterministic_path_maps": 256,
+  "causal_maps": 64,
+  "composition_pairs": 4096,
+  "mixed_factorizations": 2080,
+  "deterministic_experiment_pairs": 256,
+  "static_value_checks": 10000,
+  "adaptive_read_trees": 650,
+  "uniform_subset_coordinates": 4088,
+  "arithmetic": "Python Fraction and exact integer enumeration; no floating point or empirical simulation",
+  "scope": "Finite witnesses and algebraic certificates only. General finite theorems use the stated handwritten proofs; no independent peer review or proof-assistant certification."
+}

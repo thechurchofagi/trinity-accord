@@ -173,17 +173,3 @@ Exact checks cover 2025 weighted binary families, 144 direct-policy/recursive-pr
 - F48: Convex/Pareto comparison and coupling/simulation bounds have prior art. Two primary abstracts and part of a primary simulation-lemma paper were checked; full theorem-level priority comparison and independent review remain open.
 
 Exact checks: 961 convex-profile pairs, 343 composition triples, 64 compressed joint rows, 4448 adaptive-policy evaluations, 45 sharp-bound witnesses, 13 named checks. General claims remain conditional handwritten proofs. C1/U1 unchanged; T2 OPEN, C3 NOT_TESTED, valence OPEN.
-
-
-## R136 — fixed-channel randomization, causal certificates and task order
-
-7 October 2026. Added 12 nodes and 7 rules. All 303 prior nodes and 143 rules retained field-for-field; four source editions unchanged. [Proofs](records/R136_Causal_Translation_and_Query_Order_20261007/R136_Causal_Translation.md).
-
-- F49: Do not turn R135's existential-matching caution into a universal impossibility claim. Classical Blackwell comparison of all utilities for fixed finite experiments does supply one stochastic translator; one fixed weighted success family is weaker.
-- F50: Full-record postprocessing can anticipate future inputs. Every output-prefix marginal must be independent of unseen inputs. Deterministic recovery requires fiber constancy at every deadline, not only at the final time.
-- F51: The causal LP assumes exogenous streams, an independent private seed and one translator for all hidden parameters. It does not describe feedback-controlled intervention transport. Additional raw-input correlations or translator costs are not preserved by an output-law certificate.
-- F52: In the delayed-query example, resource commitment precedes task revelation. Its exact (1+k/n)/2 bound concerns k coordinate reads, not arbitrary k-bit memory compression or quantum encoding. Adaptive reads are included in the proof.
-- F53: Separate pre-announced task guarantees are not silently compared to a different delayed protocol. Within the delayed protocol the full-to-restricted guarantee loss is exactly (n-k)/(2n), proving the specified translator impossible.
-- F54: Blackwell randomization, causal transport and selective retrieval are prior art. No new constitutive theorem or mathematical priority is claimed. Published C's experiential identification criterion still needs actual support and a complete common signature.
-
-Exact checks: 256 deterministic path maps,4096 causal compositions,2080 mixed factorizations,256 deterministic experiment pairs,10000 static utility comparisons,650 adaptive read trees and4088 attained coordinate guarantees;13 named checks. General theorems remain conditional manual proofs. C1/U1 unchanged; T2 OPEN, C3 NOT_TESTED, valence OPEN.

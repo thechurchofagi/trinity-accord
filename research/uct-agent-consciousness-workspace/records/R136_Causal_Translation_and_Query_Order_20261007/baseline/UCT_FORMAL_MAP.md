@@ -1,6 +1,6 @@
-# UCT A–B–C–D unified formal map — R136
+# UCT A–B–C–D unified formal map — R135
 
-**Canonical working map, revision R136-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R136. It does not supersede or edit the published papers.
+**Canonical working map, revision R135-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R135. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
@@ -21,7 +21,7 @@ A's 78-node graph and B's historical 43-node map are preserved as sources. B's o
 
 ## 2. How to read an implication
 
-The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **315 nodes and 150 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R136_Causal_Translation_and_Query_Order_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
+The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **303 nodes and 143 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R135_Capability_Preservation_and_Abstraction_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
 
 - All premises inside one rule's **all_of** must hold together.
 - Separate rules concluding the same node are alternative sufficient routes.
@@ -264,22 +264,7 @@ Finite-horizon policy vectors, minimax and hidden-model robust control have dire
 
 Convex support/minimax and finite-horizon coupling have prior art. The contribution to this map is a precise hierarchy of preservation claims and the missing legality condition. A guarantee-region comparison alone is not an executable mechanism translator.
 
-## 13. R136: universal comparison and causal translation
-
-[Complete proofs](records/R136_Causal_Translation_and_Query_Order_20261007/R136_Causal_Translation.md), [Chinese assessment](records/R136_Causal_Translation_and_Query_Order_20261007/RESEARCH_UPDATE_ZH.md), [exact checks](records/R136_Causal_Translation_and_Query_Order_20261007/EXACT_CHECK.json).
-
-| Stable result | Content | Required boundary |
-|---|---|---|
-| R136:BLACKWELL | All decision problems on fixed finite observation channels admit a common stochastic translator exactly when one channel dominates the other | Classical theorem; fixed full-support prior, all utilities, observation before decision |
-| R136:CAUSAL_LP | Prefix nonanticipation plus row-law matching gives an exact finite causal-stream feasibility certificate; uniform path-TV loss is an LP | One translator for all parameters; exogenous streams, no controlled feedback |
-| R136:COMPOSITION | Causal simulation errors add under composition and bound copied downstream [0,1] decisions | Fixed clock, no action feedback, preserved legal actions and payoff semantics |
-| R136:PREFIX | Deterministic timed recovery iff every observed-prefix fiber determines the required prefix | Final-record recovery alone is insufficient |
-| R136:DELAY_GAP | An offline exact translator can have minimum causal error 1/2 | Hidden bit revealed after the first output deadline |
-| R136:QUERY_BOUND / TASK_ORDER | Pre-read k of n hidden bits before query revelation: optimal worst-case success (1+k/n)/2; full-reader guarantee gap (n-k)/(2n) | Query-access budget, private seed, no further reads; not a generic k-bit memory bound |
-
-This qualifies R135's caution: fixed-channel universal decision equivalence can provide a statistical translator. What remains absent from a task-score certificate is the declared timing/resource/port contract and actual physical interpretation. No new experience-existence gate or constitutive axiom is introduced.
-
-## 14. Open obligations and next derivation
+## 13. Open obligations and next derivation
 
 Keep the following open rather than treating them as implied edges:
 
@@ -290,9 +275,9 @@ Keep the following open rather than treating them as implied edges:
 - Structural experiential interpretation → a familiar phenomenal label, valence or scalar richness.
 - Biological/AI decoder similarity → full mechanism correspondence or T2 closure.
 
-R136 supplies a static universal-comparison theorem, an exogenous causal-stream certificate and sharp deadline/query-order obstructions. Next: extend the certificate to controlled feedback, with actual legal operation translations and joint next-state/output relations, identifying which results are existing alternating/probabilistic simulation theory. Do not multiply a fixed passive path law by a translator when actions change future observations. Actual physical grounding, complete-type identification and T2 intervention transport remain open. Continue theory first.
+R135 supplies task-guarantee preservation, finite-horizon approximation bounds and a support/legality obstruction. Next: determine when an existential profile-by-profile capability comparison admits one declared causal, reusable translator respecting ports, composition and time; otherwise construct a separating example. Keep the distinction between standard decision mathematics and a UCT-specific organizational inference explicit. Actual physical adequacy, T2 intervention transport and general multi-resource scheduling remain open. Continue theory first.
 
-## 15. Mandatory future-map protocol
+## 14. Mandatory future-map protocol
 
 Read AGENTS.md, MEMORY.md and the latest handoff first. Before accepting any new derivation:
 
@@ -316,5 +301,3 @@ Current R133 graph/source checks: [MAP_CHECK.json](records/R133_Observable_Commo
 Current R134 graph/source checks: [MAP_CHECK.json](records/R134_Quantitative_Control_and_Probe_Cost_20261007/MAP_CHECK.json). Earlier reports remain historical snapshots.
 
 Current R135 graph/source checks: [MAP_CHECK.json](records/R135_Capability_Preservation_and_Abstraction_20261007/MAP_CHECK.json). Earlier reports remain historical snapshots.
-
-Current R136 graph/source checks: [MAP_CHECK.json](records/R136_Causal_Translation_and_Query_Order_20261007/MAP_CHECK.json). Earlier reports remain historical snapshots.

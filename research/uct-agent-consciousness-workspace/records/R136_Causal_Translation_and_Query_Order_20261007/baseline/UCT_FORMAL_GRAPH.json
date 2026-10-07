@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R136-v1.0",
+  "revision": "R135-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "44f730df32dc01c0556d1242e8140c17f3ac738b",
+  "base_commit": "d4ce9b5a328048c86a79baa00d15bcb0a25709e6",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -2523,114 +2523,6 @@
       "source": "R135_Capability_Preservation.md §9",
       "status": "MANUAL_CONDITIONAL_PASS",
       "scope": "Direct application of published C:P1/P2, not a new constitutive theorem. Equal guarantees alone do not prove experiential equality; no universal noninjectivity on every actual domain asserted. No new U1 gate."
-    },
-    {
-      "id": "R136:STATIC_SETUP",
-      "kind": "DEFINITION",
-      "label": "Fixed one-shot experiments and universal decision comparison",
-      "statement": "P_theta(x),Q_theta(y) are fixed experiments; V_P(u),V_Q(u) optimize a common finite decision problem after observation with full-support prior p. Translators R(x|y) are independent of theta.",
-      "source": "R136_Causal_Translation.md §2",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite hidden parameter and signal sets; fixed row-stochastic observation experiments P,Q; one terminal decision after observation; full-support fixed prior; all finite randomized decision rules; no omitted costs, deadlines or side effects. A statistical postprocessor is not a physical organization isomorphism."
-    },
-    {
-      "id": "R136:BLACKWELL",
-      "kind": "THEOREM",
-      "label": "Classical all-decision comparison admits one stochastic translator",
-      "statement": "P=QR for a common stochastic R iff V_Q(u)>=V_P(u) for every finite decision problem. It suffices to vary all utilities with action set X. Utilities can be normalized to [0,1].",
-      "source": "R136_Causal_Translation.md §2",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite hidden parameter and signal sets; fixed row-stochastic observation experiments P,Q; one terminal decision after observation; full-support fixed prior; all finite randomized decision rules; no omitted costs, deadlines or side effects. A statistical postprocessor is not a physical organization isomorphism. Classical Blackwell randomization theorem, not a new project theorem. Varying every utility is stronger than reweighting one fixed success-profile family."
-    },
-    {
-      "id": "R136:STREAM_SETUP",
-      "kind": "DEFINITION",
-      "label": "Causal row kernels and uniform path simulation loss",
-      "statement": "Causal(Y,X) contains stochastic full-path kernels whose output-prefix marginal at time t depends only on y_<=t. d_c(P<-Q)=min_R max_theta TV(P_theta,Q_theta R) over that polytope.",
-      "source": "R136_Causal_Translation.md §3",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established. One kernel must work for all parameters, including indistinguishable histories; full-alphabet constraints permit arbitrary causal extension of unused histories."
-    },
-    {
-      "id": "R136:CAUSAL_LP",
-      "kind": "THEOREM",
-      "label": "Finite causal translation is exactly a linear feasibility certificate",
-      "statement": "A common causal transducer exists iff R>=0, row sums one, prefix nonanticipation constraints and P=QR are jointly feasible. Minimum uniform TV error is attained and is a finite LP via absolute-value epigraph variables.",
-      "source": "R136_Causal_Translation.md §3",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established. Construct conditional time kernels by prefix probability ratios; define zero-denominator rows arbitrarily. This is not a certificate for arbitrary controlled feedback."
-    },
-    {
-      "id": "R136:COMPOSITION",
-      "kind": "THEOREM",
-      "label": "Causal translators compose with additive uniform path error",
-      "statement": "d_c(P<-W)<=d_c(P<-Q)+d_c(Q<-W). A copied causal downstream decision rule loses at most d_c in any [0,1] payoff g_theta(translated_stream,action_path), with unchanged legal actions and no feedback.",
-      "source": "R136_Causal_Translation.md §4",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established. No additional raw-Y correlation in payoff; translator costs excluded unless modeled. Independent seeds implement composition; two-way simulation need not be a complete physical isomorphism."
-    },
-    {
-      "id": "R136:DETERMINISTIC",
-      "kind": "ASSUMPTION",
-      "label": "Deterministic parameter-indexed streams",
-      "statement": "Each desired P_theta is concentrated on x(theta), and each available Q_theta on y(theta).",
-      "source": "R136_Causal_Translation.md §5",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established."
-    },
-    {
-      "id": "R136:PREFIX",
-      "kind": "THEOREM",
-      "label": "Timed recovery iff every observed-prefix fiber preserves the desired prefix",
-      "statement": "Exact causal simulation in DETERMINISTIC exists iff y_<=t(theta)=y_<=t(theta_prime) implies x_<=t(theta)=x_<=t(theta_prime), for all pairs and t. A deterministic translator then suffices.",
-      "source": "R136_Causal_Translation.md §5",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established. A full-record fiber condition at H alone does not impose the earlier deadlines."
-    },
-    {
-      "id": "R136:DELAY_MODEL",
-      "kind": "MODEL",
-      "label": "The same hidden bit arrives before versus after the deadline",
-      "statement": "Theta={0,1}, H=2. Desired stream x(theta)=(theta,blank); available stream y(theta)=(blank,theta).",
-      "source": "R136_Causal_Translation.md §6",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established. Both completed records identify theta; the first output has a fixed earlier deadline."
-    },
-    {
-      "id": "R136:DELAY_GAP",
-      "kind": "THEOREM",
-      "label": "Offline perfect translation can have causal loss one half",
-      "statement": "DELAY_MODEL has exact offline translation (y2,blank) but d_c(P<-Q)=1/2. First-deadline guessing has desired value one versus available value one half.",
-      "source": "R136_Causal_Translation.md §6",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established. Fair early guessing attains the lower bound; waiting changes the protocol, so static Blackwell is not contradicted."
-    },
-    {
-      "id": "R136:QUERY_MODEL",
-      "kind": "MODEL",
-      "label": "Pre-query resource commitment with adaptive coordinate reads",
-      "statement": "For n>=2 and 0<=k<=n, read at most k coordinates of b in {0,1}^n before q in {1,...,n} is revealed; then guess b_q. V_nk=sup_policy min_(b,q) success.",
-      "source": "R136_Causal_Translation.md §7",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Fixed hidden n-bit string; at most k distinct adaptive bit reads before the query is revealed; all read transcripts/private state may be retained; no later read; nature does not see the private seed. This is a query-access budget, not arbitrary k-bit encoding of a fully seen string or quantum coding."
-    },
-    {
-      "id": "R136:QUERY_BOUND",
-      "kind": "THEOREM",
-      "label": "Sharp delayed-query capability with a read budget",
-      "statement": "V_nk=1/2+k/(2n). Uniform k-subset reading and fair guessing on unread coordinates attain the bound for every b,q; adaptive preparation cannot improve it.",
-      "source": "R136_Causal_Translation.md §7",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Fixed hidden n-bit string; at most k distinct adaptive bit reads before the query is revealed; all read transcripts/private state may be retained; no later read; nature does not see the private seed. This is a query-access budget, not arbitrary k-bit encoding of a fully seen string or quantum coding. Upper bound averages uniform b,q and conditions on the read transcript, leaving uninspected bits fair. A memory-capacity bound would require a different theorem."
-    },
-    {
-      "id": "R136:TASK_ORDER",
-      "kind": "THEOREM",
-      "label": "Perfect separate pre-announced tasks need not admit a delayed-task translator",
-      "statement": "For 1<=k<n every pre-announced q has full-reader and restricted-reader guarantee region [0,1]^(2^n). Under delayed q, full-to-restricted directional guarantee loss is (n-k)/(2n), reverse zero; no exact response translator respecting the restricted read budget and deadline exists.",
-      "source": "R136_Causal_Translation.md §8",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Fixed hidden n-bit string; at most k distinct adaptive bit reads before the query is revealed; all read transcripts/private state may be retained; no later read; nature does not see the private seed. This is a query-access budget, not arbitrary k-bit encoding of a fully seen string or quantum coding. Each comparison uses a common protocol internally; pre-announced and delayed protocols are explicitly different. This is not a counterexample to R135 or a universal impossibility of translators."
     }
   ],
   "rules": [
@@ -4548,98 +4440,6 @@
       "source": "R135_Capability_Preservation.md §9",
       "kind": "DEDUCTIVE",
       "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r136_blackwell",
-      "all_of": [
-        "R136:STATIC_SETUP"
-      ],
-      "conclusion": "R136:BLACKWELL",
-      "statement": "Universal decision dominance over fixed channels is equivalent to a common stochastic postprocessor.",
-      "proof_sketch": "S={QR} is compact convex. If P is outside, strict separation gives c; choosing actions X and utility c(theta,x)/p_theta makes the identity rule after P outperform every Q rule. Conversely concatenate R and any P decision.",
-      "source": "R136_Causal_Translation.md §2",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r136_causal",
-      "all_of": [
-        "R136:STREAM_SETUP"
-      ],
-      "conclusion": "R136:CAUSAL_LP",
-      "statement": "Prefix-linear constraints exactly characterize implementable exogenous causal translators.",
-      "proof_sketch": "A causal transducer has prefix marginals independent of future input. Conversely ratios of successive prefix marginals give normalized time kernels and telescope to R, with arbitrary zero-probability rows. TV uses linear absolute-value epigraphs.",
-      "source": "R136_Causal_Translation.md §3",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r136_composition",
-      "all_of": [
-        "R136:STREAM_SETUP",
-        "R136:CAUSAL_LP"
-      ],
-      "conclusion": "R136:COMPOSITION",
-      "statement": "Causal composition transports output-law and downstream decision accuracy.",
-      "proof_sketch": "Sequentially compose the two causal implementations using independent seeds. Triangle inequality and TV contraction give the sum bound. Copying an admissible no-feedback decision kernel contracts TV again and bounds its [0,1] payoff.",
-      "source": "R136_Causal_Translation.md §4",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r136_prefix",
-      "all_of": [
-        "R136:STREAM_SETUP",
-        "R136:CAUSAL_LP",
-        "R136:DETERMINISTIC",
-        "C:P2_COORD"
-      ],
-      "conclusion": "R136:PREFIX",
-      "statement": "A deterministic required output is causally recoverable precisely when every deadline has the necessary fiber constancy.",
-      "proof_sketch": "Equal observed prefixes force equal translated-prefix laws; two required point masses must agree. Conversely define each output on the observed-prefix fiber, extending to unused histories arbitrarily.",
-      "source": "R136_Causal_Translation.md §5",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r136_delay",
-      "all_of": [
-        "R136:STREAM_SETUP",
-        "R136:DELAY_MODEL",
-        "R136:PREFIX"
-      ],
-      "conclusion": "R136:DELAY_GAP",
-      "statement": "A complete record can be sufficient offline but inadequate at the first decision deadline.",
-      "proof_sketch": "The offline kernel uses y2. The causal first bit has one common probability p under both parameters, causing errors at least p and 1-p. Fair guessing and a blank second output attain one half.",
-      "source": "R136_Causal_Translation.md §6",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r136_query",
-      "all_of": [
-        "R136:QUERY_MODEL"
-      ],
-      "conclusion": "R136:QUERY_BOUND",
-      "statement": "The exact worst-case delayed-query success is one half plus half the read fraction.",
-      "proof_sketch": "Under uniform independent b,q, condition on seed/read transcript: every unread bit remains fair, while a uniform query hits the inspected set with probability <=k/n. Uniform k-subset selection and fair fallback guessing attain equality in every coordinate.",
-      "source": "R136_Causal_Translation.md §7",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r136_order",
-      "all_of": [
-        "R136:QUERY_MODEL",
-        "R136:QUERY_BOUND",
-        "R135:PROFILE_PAIR"
-      ],
-      "conclusion": "R136:TASK_ORDER",
-      "statement": "Task-specific preparation cannot in general be replaced by one preparation for a later unknown query.",
-      "proof_sketch": "A pre-announced query is read directly, giving the all-one profile. In delayed coordinates the full reader has all ones, so its maximal directed loss equals 1 minus the restricted robust optimum. Any exact deadline/budget-preserving translator would contradict that optimum.",
-      "source": "R136_Causal_Translation.md §8",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
     }
   ],
   "context_links": [
@@ -4922,36 +4722,6 @@
       "from": "A:U2",
       "to": "R135:LEGALITY_JUMP",
       "relation": "Derived hard-feasibility discontinuity is not a constitutive continuity refutation"
-    },
-    {
-      "from": "B:VIEW",
-      "to": "R136:STREAM_SETUP",
-      "relation": "A finite translator must declare time, observation roles and physical adequacy"
-    },
-    {
-      "from": "B:BAC",
-      "to": "R136:TASK_ORDER",
-      "relation": "Task revelation and read ports belong in the declared bridge contract"
-    },
-    {
-      "from": "D:PAYOFF",
-      "to": "R136:DELAY_GAP",
-      "relation": "Decision-relevant consequence sufficiency includes information availability at the deadline"
-    },
-    {
-      "from": "R135:GUARANTEE_EQ",
-      "to": "R136:BLACKWELL",
-      "relation": "Universal utilities for fixed channels differ from weights on one fixed profile set"
-    },
-    {
-      "from": "R135:UCT_INTERPRETATION",
-      "to": "R136:TASK_ORDER",
-      "relation": "Experiential use remains conditional on actual support and a common complete signature"
-    },
-    {
-      "from": "R133:PROBE_BOUNDARY",
-      "to": "R136:DELAY_GAP",
-      "relation": "Information arriving after an action deadline can be useless for that action"
     }
   ],
   "prohibited_inferences_D": [
@@ -5013,11 +4783,6 @@
       "id": "R135-ATTR-06",
       "prior_source": "Convex minimax/support functions; Diakonikolas and Yannakakis 2008 abstract; Bian and Abate 2017 abstract; Lobel and Parr 2024 introduction and overlap argument; published C:P1/P2",
       "current_scope": "No novelty claimed for convex capability comparison or finite-horizon coupling/simulation bounds. Project synthesis gives the guarantee/profile hierarchy, explicit transport conditions and hard-legality discontinuity. Experiential interpretation is an application of C, not a new constitutive theorem; independent review and complete prior-art comparison remain open."
-    },
-    {
-      "id": "R136-ATTR-07",
-      "prior_source": "Blackwell 1953 randomization; Backhoff/Beiglbock/Lin/Zalashko 2016 preprint and 2017 causal-transport paper; selective retrieval/query methods; C:P2 fiber factorization",
-      "current_scope": "Finite static and causal certificates, timed fiber criterion and exact read-budget witness are a project synthesis of established methods. Corrects any overly broad reading that universal decision equivalence can never provide a translator. No mathematical priority or new constitutive consciousness theorem claimed. Controlled feedback translation remains open."
     }
   ],
   "audit_amendments": [

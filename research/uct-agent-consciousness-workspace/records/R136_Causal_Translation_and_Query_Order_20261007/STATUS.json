@@ -1,0 +1,15 @@
+{
+  "round": "R136",
+  "revision": "R136-v1.0",
+  "date": "2026-10-07",
+  "timezone": "Asia/Shanghai",
+  "base_commit": "44f730df32dc01c0556d1242e8140c17f3ac738b",
+  "nodes": 315,
+  "rules": 150,
+  "new_nodes": 12,
+  "new_rules": 7,
+  "proof_status": "Conditional handwritten proofs; classical Blackwell/causal-transport/query methods attributed; no independent peer review",
+  "T2": "OPEN",
+  "C3_intervention_transport": "NOT_TESTED",
+  "valence_bridge": "OPEN"
+}
