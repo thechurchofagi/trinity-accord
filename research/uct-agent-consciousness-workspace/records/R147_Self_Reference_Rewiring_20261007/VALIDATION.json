@@ -1,0 +1,21 @@
+{
+  "parent": "12fd02b5d675c22cb767fd991c1b815bda66562e",
+  "revision": "R147-v1.0",
+  "nodes": 349,
+  "rules": 167,
+  "checks": {
+    "old_nodes_preserved": true,
+    "old_rules_preserved": true,
+    "old_context_preserved": true,
+    "source_metadata_preserved": true,
+    "four_source_hashes": true,
+    "unique_ids": true,
+    "references": true,
+    "acyclic_bookkeeping_only": true,
+    "all_fields_exported": true,
+    "exact_examples_passed": true,
+    "new_links_resolve": true
+  },
+  "workflow_note": "Initial link check ran before writing its own VALIDATION.json; only its two forward references failed. The validation file was then created and all links rechecked.",
+  "limits": "Manual scoped proofs, finite model verification and graph/source integrity; not a proof assistant, independent referee, empirical validation or historical novelty certificate."
+}

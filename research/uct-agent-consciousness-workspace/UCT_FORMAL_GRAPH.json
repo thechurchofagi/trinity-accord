@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R146-v1.0",
+  "revision": "R147-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "2ce8102966e935f508a01eada8a5db7294af02f0",
+  "base_commit": "12fd02b5d675c22cb767fd991c1b815bda66562e",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -2883,6 +2883,60 @@
       "scope": "Finite nonempty target alphabet, common legal plans, nonempty domain, exact target laws, arbitrary uncoupled decoder rows. No computability, resource, installation, statistical-estimation or semantic guarantee. Half-diameter is only a lower bound; three distinct point masses have radius 2/3 and diameter 1. Classical factorization/metric application of C:P2_COORD, not new consciousness mathematics.",
       "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md Proposition 2",
       "status": "MANUAL_CONDITIONAL_PASS_CLASSICAL_APPLICATION"
+    },
+    {
+      "id": "R147:ROUTING_MODEL",
+      "kind": "MODEL_AND_DOMAIN",
+      "label": "Independent bearer, sensory and actuation relations",
+      "statement": "n>=2 controller and body sorts; bijections beta,sigma,tau from controllers to bodies name containing-assembly body, sensed body and acted-on body. Body bits x_j update by x_j prime=x_j XOR u_(tau^-1(j)); m_i=x_sigma(i), installed prediction m_i XOR u_i. All command vectors independently legal. Loop(i) means sigma(i)=tau(i); Own_beta(i) means sigma(i)=tau(i)=beta(i).",
+      "scope": "Finite deterministic model with fixed one-step timing, no omitted couplings/delays, controller-labeled full sensor-response interface and arbitrary state/command comparisons. beta is separate from sigma/tau and grounded independently of accuracy in physical applications. These are restricted relational predicates, not definitions of all selfhood or phenomenal ownership. No new experience gate.",
+      "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §2",
+      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE"
+    },
+    {
+      "id": "R147:ROUTING_LIMIT",
+      "kind": "CONSTRUCTIVE_PROPOSITION",
+      "label": "Exact loop prediction identifies relative binding but not bearer attachment",
+      "statement": "L=tau^-1 sigma yields m_i prime=m_i XOR u_L(i). Installed own-command prediction is universally exact at i iff L(i)=i. Two complete sensor-response laws agree iff L agrees, iff connection pairs differ by one common body postcomposition g; each class has n! pairs. beta=id and sigma=tau=id versus a common fixed-point-free g have identical laws/perfect prediction but opposite Own_beta. Full coordinate renaming transports beta,sigma,tau together and preserves predicates. Restricting two-system commands to u1=u2 conceals single-channel swaps. With beta included, ordinary versus double-swapped role structures are nonisomorphic.",
+      "scope": "Exactly ROUTING_MODEL. Full labeled law, not only one selected policy. History equivalence additionally uses matched initial sensor vectors and no body-indexed side information. Common physical rewiring holds beta fixed; coordinate renaming moves all relations. Nonisomorphism retains body/controller roles and beta, not arbitrary analyst labels. Classical permutation/fiber reasoning; project-level definition diagnostic, no historical-priority or phenomenology claim.",
+      "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §§3-4",
+      "status": "MANUAL_CONDITIONAL_PASS_CLASSICAL_APPLICATION"
+    },
+    {
+      "id": "R147:MEMORY_ISOLATION",
+      "kind": "MODEL_PREMISE",
+      "label": "Autobiographical registers outside current routing and prediction paths",
+      "statement": "Extend ROUTING_MODEL with record register r_i and a report channel reading its autobiographical string. Registers do not enter beta, sigma, tau, current body update or installed predictor. A memory exchange/copy changes only these register states/provenance within the stipulated comparison.",
+      "scope": "Restricted causal-isolation premise, not a claim about real autobiographical memory generally. Future recalibration/policy dependence on records is excluded from this comparison; a model including it requires separate analysis. Numerical token identity is not defined by a string.",
+      "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §5",
+      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE"
+    },
+    {
+      "id": "R147:MEMORY_LIMIT",
+      "kind": "MODEL_COROLLARY",
+      "label": "Record transfer does not alone fix current sensorimotor reference",
+      "statement": "Under MEMORY_ISOLATION, memory exchange/copy leaves L, Loop and Own_beta unchanged, while provenance and potentially reports change. Hence record copying alone does not entail copying current attachment relations or establish numerical identity.",
+      "scope": "Current isolated-register extension only. Does not deny memory effects when installed causal paths exist; does not override A screened-history qualifications, D continuation distinctions, or claim no experiential change from physical memory change.",
+      "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §5",
+      "status": "MANUAL_CONDITIONAL_PASS"
+    },
+    {
+      "id": "R147:ACTUAL_BRIDGE",
+      "kind": "PHYSICAL_AND_CONSTITUTIVE_PREMISE",
+      "label": "Actual realization of the beta-retaining routing comparison",
+      "statement": "The ordinary and fixed-point-free doubly rewired model structures correspond to actual valid comparison tokens; the controller/body roles and beta,sigma,tau relations are genuinely constitutive, so any complete-organization isomorphism induces a role-preserving isomorphism of these represented relations.",
+      "scope": "Independent physical premise; not discharged by drawing boxes, naming beta or successful prediction. Comparison bearers retain all relevant relations; it does not silently switch between local assembly, remote loop and whole world. No universal exclusive bearer requirement.",
+      "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §4; A §§2-4",
+      "status": "DECLARED_ASSUMPTION_NOT_EMPIRICALLY_DISCHARGED"
+    },
+    {
+      "id": "R147:TYPE_LIMIT",
+      "kind": "CONDITIONAL_INTERPRETATION",
+      "label": "Same predictive capability may coexist with differing actual complete types",
+      "statement": "ROUTING_LIMIT and ACTUAL_BRIDGE imply different complete organizational types for the stipulated ordinary/doubly rewired actual tokens despite equal declared sensor-response capability; A:C1_OI gives different complete experiential types conditionally.",
+      "scope": "C1 interpretation only, not independent validation. No identified phenomenal quality, amount, ownership relocation, fear, exclusive subject or experience threshold. If beta is only an external annotation, this route is unavailable.",
+      "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §§4,7",
+      "status": "MANUAL_CONDITIONAL_PASS"
     }
   ],
   "rules": [
@@ -5076,6 +5130,45 @@
       "source": "records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md Proposition 2",
       "kind": "DEDUCTIVE_APPLICATION",
       "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
+    },
+    {
+      "id": "r147_routing",
+      "all_of": [
+        "R147:ROUTING_MODEL"
+      ],
+      "conclusion": "R147:ROUTING_LIMIT",
+      "statement": "Routing algebra distinguishes a closed sensorimotor loop from attachment to the declared bearer.",
+      "proof_sketch": "Substitute j=sigma(i). Independent command basis vectors identify L. Equality of L is equivalent to common postcomposition g=tau prime tau^-1. There are n! choices of tau for each L. beta=id with joint fixed-point-free rewiring gives opposite Own_beta and equal L. Full simultaneous renaming conjugates relations and preserves equality; synchronized commands conceal off-diagonal L. The sentence forall i sigma(i)=beta(i) distinguishes the two full role structures.",
+      "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §§3-4",
+      "kind": "DEDUCTIVE_MODEL_APPLICATION",
+      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
+    },
+    {
+      "id": "r147_memory",
+      "all_of": [
+        "R147:ROUTING_MODEL",
+        "R147:MEMORY_ISOLATION"
+      ],
+      "conclusion": "R147:MEMORY_LIMIT",
+      "statement": "An isolated record exchange cannot alter the stipulated routing relations.",
+      "proof_sketch": "The routing/update equations do not depend on record registers. Holding their other arguments fixed leaves beta,sigma,tau and derived predicates unchanged. Record equality carries no stipulated numerical-identity implication.",
+      "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §5",
+      "kind": "DEDUCTIVE_MODEL_APPLICATION",
+      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
+    },
+    {
+      "id": "r147_type",
+      "all_of": [
+        "R147:ROUTING_LIMIT",
+        "R147:ACTUAL_BRIDGE",
+        "A:C1_OI"
+      ],
+      "conclusion": "R147:TYPE_LIMIT",
+      "statement": "A physically constitutive routing distinction has the existing conditional type interpretation.",
+      "proof_sketch": "Complete isomorphism would induce the forbidden beta-retaining role isomorphism, so complete actual types differ. C1-OI transports this type distinction. Matching the projected capability does not undo the retained relational difference.",
+      "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §§4,7",
+      "kind": "CONDITIONAL_INTERPRETATION",
+      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
     }
   ],
   "context_links": [
@@ -5478,6 +5571,26 @@
       "from": "R146:DUPLICATE_SEPARATION",
       "to": "C:P3",
       "relation": "two-coordinate non-ordering example, not a new proof of general phenomenal claims"
+    },
+    {
+      "from": "R146:SELF_CONTRACT",
+      "to": "R147:ROUTING_MODEL",
+      "relation": "restricted attachment-grounding stress test, not deduction of universal selfhood"
+    },
+    {
+      "from": "R146:CENTERED_REFERENCE",
+      "to": "R147:ROUTING_LIMIT",
+      "relation": "avoid requiring a unique uncentered self before local relational analysis"
+    },
+    {
+      "from": "D:D0",
+      "to": "R147:ACTUAL_BRIDGE",
+      "relation": "bearer must be justified independently of its self label"
+    },
+    {
+      "from": "A:P6",
+      "to": "R147:MEMORY_LIMIT",
+      "relation": "token/type/lineage distinction; contextual antecedent"
     }
   ],
   "prohibited_inferences_D": [
@@ -5774,5 +5887,16 @@
     "priority": "User reaffirms exact experience/intelligence/self definitions and thought experiments; supersedes R145 control-focused queue.",
     "publication": "Conceptual/methodological candidate and foundation; original-results submission not justified as a major breakthrough. Classical antecedents explicit.",
     "next": "Grounded self-reference versus equally accurate other-models in a specified implementation class; compare direct semantic/self-model antecedents before further claims. No automatic control-theorem expansion or experiments."
+  },
+  "research_R147": {
+    "kind": "THOUGHT_EXPERIMENT_DRIVEN_DEFINITION_REPAIR",
+    "record": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md",
+    "review": "records/R147_Self_Reference_Rewiring_20261007/THOUGHT_EXPERIMENT_AND_REVIEW_ZH.md",
+    "proof_ledger": "records/R147_Self_Reference_Rewiring_20261007/PROOF_LEDGER.md",
+    "new_nodes": 6,
+    "new_rules": 3,
+    "increment": "Exact bearer-versus-loop distinction and swap controls; repairs an overstrong uncentered-grounding research question.",
+    "novelty": "Classical permutation/identification tools; no major or historical novelty certified.",
+    "next": "Integrate bearer-relative own-state/constituent/tool targets into the definitions-first manuscript using the four retained thought experiments; no automatic unrelated control models or experiments."
   }
 }

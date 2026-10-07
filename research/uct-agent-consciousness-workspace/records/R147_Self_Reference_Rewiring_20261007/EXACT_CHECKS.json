@@ -1,0 +1,110 @@
+{
+  "scope": "Exact finite model checks; the general proof is in SELF_REFERENCE_REWIRING.md. No phenomenology, physical realization or historical priority certified.",
+  "enumeration": [
+    {
+      "n": 2,
+      "connection_pairs": 4,
+      "response_classes": 2,
+      "class_size": 2,
+      "state_command_pair_checks": 64
+    },
+    {
+      "n": 3,
+      "connection_pairs": 36,
+      "response_classes": 6,
+      "class_size": 6,
+      "state_command_pair_checks": 2304
+    },
+    {
+      "n": 4,
+      "connection_pairs": 576,
+      "response_classes": 24,
+      "class_size": 24,
+      "state_command_pair_checks": 147456
+    }
+  ],
+  "swap_table": [
+    {
+      "sensor": [
+        0,
+        1
+      ],
+      "action": [
+        0,
+        1
+      ],
+      "relative": [
+        0,
+        1
+      ],
+      "perfect_all_actions": true,
+      "perfect_synchronized_actions": true,
+      "own_relative_to_fixed_assembly": [
+        true,
+        true
+      ]
+    },
+    {
+      "sensor": [
+        1,
+        0
+      ],
+      "action": [
+        0,
+        1
+      ],
+      "relative": [
+        1,
+        0
+      ],
+      "perfect_all_actions": false,
+      "perfect_synchronized_actions": true,
+      "own_relative_to_fixed_assembly": [
+        false,
+        false
+      ]
+    },
+    {
+      "sensor": [
+        0,
+        1
+      ],
+      "action": [
+        1,
+        0
+      ],
+      "relative": [
+        1,
+        0
+      ],
+      "perfect_all_actions": false,
+      "perfect_synchronized_actions": true,
+      "own_relative_to_fixed_assembly": [
+        false,
+        false
+      ]
+    },
+    {
+      "sensor": [
+        1,
+        0
+      ],
+      "action": [
+        1,
+        0
+      ],
+      "relative": [
+        0,
+        1
+      ],
+      "perfect_all_actions": true,
+      "perfect_synchronized_actions": true,
+      "own_relative_to_fixed_assembly": [
+        false,
+        false
+      ]
+    }
+  ],
+  "predicate_rename_checks": 23328,
+  "all_checks_passed": true
+}

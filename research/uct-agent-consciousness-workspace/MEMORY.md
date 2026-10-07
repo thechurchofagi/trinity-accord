@@ -1,8 +1,20 @@
 # UCT 项目长期工作记忆
 
-更新时间：2026-10-07；当前形式化基础：**R146-v1.0**。
+更新时间：2026-10-07；当前形式化基础：**R147-v1.0**。
 
-## R146 最新最高优先级：精确定义体验、智能、自我
+## R147 最新进展：思想实验驱动自我定义修正
+
+用户强调不忘主线/初心，重视思想实验和逻辑推论。本轮完成[换接研究正文](records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md)与[中文论证](records/R147_Self_Reference_Rewiring_20261007/THOUGHT_EXPERIMENT_AND_REVIEW_ZH.md)。R146 定义稿是底稿，本轮是实质补充，不另开控制论主线。
+
+区分 beta=实际装置身体关系、sigma=感知目标、tau=行动目标；完整感知响应只识别 L=tau^-1 sigma。感知和行动同时换接，可以维持完美预测，却改变与固定承担者的关系。只测同步行动还会掩盖单通道错配。仅换名字须三关系共同协变，不能等同物理换接。孤立记忆模型下复制回忆不改变当前连接；不能扩展为真实记忆永无因果作用。
+
+图 **R147-v1.0，349节点167规则**；6节点3规则，旧节点/源文不改；[全量台账](records/R147_Self_Reference_Rewiring_20261007/PROOF_LEDGER.md)。实际完整类型解释仍须 beta 等关系真实构成性的独立前提，不能据此声称意识转移、唯一主体或体验存在门槛。数学为经典工具的限定应用，未取得历史原创重大突破。
+
+修正上轮待办：不必先从无中心世界选出唯一的我，才能研究局部自我关系。先明确实际过程与其组成关系，再研究安装的模型指向谁；允许嵌套重叠。不能把这一局部比较要求偷换成新增普遍主体判据。
+
+下一步整合自身状态、自身组成部分和外部工具三个目标，形成带承担者参数的统一关系，并让祖先、算盘/计算器、人列、智能体思想实验贯穿同一主论证。不默认继续堆小模型或开始实验。思想实验必须承担提出问题、检验定义、暴露前提或构造反例的明确作用。本段优先于历史队列。
+
+## R146 定义主线基线：精确定义体验、智能、自我
 
 用户再次提醒初心，要求判断发表价值并继续实质研究。当前主稿为[Experience, Intelligence, and Self](records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md)、[PDF](records/R146_Experience_Intelligence_and_Self_20261007/output/pdf/UCT_Experience_Intelligence_Self_v0_1.pdf)、[中文审查](records/R146_Experience_Intelligence_and_Self_20261007/REVIEW_ZH.md)。这条方向覆盖 R145 的“只精修干预识别稿”，后者保留为辅助技术结果。
 

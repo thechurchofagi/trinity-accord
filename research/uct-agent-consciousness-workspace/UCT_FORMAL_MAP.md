@@ -1,12 +1,22 @@
-# UCT A–B–C–D unified formal map — R146
+# UCT A–B–C–D unified formal map — R147
 
-**Canonical working map, revision R146-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137 and R145–R146. It does not supersede or edit the published papers.
+**Canonical working map, revision R147-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137 and R145–R147. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
 
-## R146 current priority - precise definitions of experience, intelligence and self
+## R147 current extension - thought experiments repair the self definition
+
+[English research extension](records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md), [Chinese thought experiment and review](records/R147_Self_Reference_Rewiring_20261007/THOUGHT_EXPERIMENT_AND_REVIEW_ZH.md), [full proof ledger](records/R147_Self_Reference_Rewiring_20261007/PROOF_LEDGER.md), [exact checks](records/R147_Self_Reference_Rewiring_20261007/EXACT_CHECKS.json). The R146 definitions-first manuscript remains the base; this note is its current extension.
+
+The user reaffirms the importance of thought experiments and logical inference. R147 resolves the five-way name/sensor/actuator/double/record exchange comparison. Independent physical assembly, sensory and action bindings beta,sigma,tau cannot be collapsed. The complete sensor-response law identifies L=tau^-1 sigma; joint rewiring preserves it while changing attachment relative to fixed beta. Synchronized commands conceal even single swaps. Record transfer does not fix routing under the explicitly isolated-memory premise.
+
+**349 nodes / 167 rules**; 6 scoped nodes and 3 rules preserve all 343/164 prior entries. A beta-retaining actual constitutive bridge is required before C1-OI type interpretation. No phenomenal transfer or experience gate follows. Ordinary/doubly rewired structures differ relationally, not merely by names. The proposition uses classical permutation/identification mathematics and remains a project-level definition diagnostic, not a certified major discovery.
+
+R146's grounding question is narrowed: do not demand one uniquely privileged uncentered self as a condition for studying grounded local, nested or overlapping self relations. Actual bearer, operational target, modeled content and phenomenal ownership remain distinct. Next: integrate own-state, constituent and external-tool targets into one bearer-relative specification and a single argument through the retained thought experiments. Do not automatically extend unrelated control examples or initiate experiments.
+
+## R146 definition baseline - precise definitions of experience, intelligence and self
 
 [English definition-first draft](records/R146_Experience_Intelligence_and_Self_20261007/Experience_Intelligence_and_Self_v0_1.md), [PDF](records/R146_Experience_Intelligence_and_Self_20261007/output/pdf/UCT_Experience_Intelligence_Self_v0_1.pdf), [Chinese assessment](records/R146_Experience_Intelligence_and_Self_20261007/REVIEW_ZH.md), [source/contribution audit](records/R146_Experience_Intelligence_and_Self_20261007/SOURCE_AND_CONTRIBUTION_AUDIT.md), [full proof ledger](records/R146_Experience_Intelligence_and_Self_20261007/PROOF_LEDGER.md), [exact checks](records/R146_Experience_Intelligence_and_Self_20261007/EXACT_CHECKS.json).
 
@@ -95,7 +105,7 @@ A's 78-node graph and B's historical 43-node map are preserved as sources. B's o
 
 ## 2. How to read an implication
 
-The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **343 nodes and 164 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R146_Experience_Intelligence_and_Self_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
+The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **349 nodes and 167 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R147_Self_Reference_Rewiring_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
 
 - All premises inside one rule's **all_of** must hold together.
 - Separate rules concluding the same node are alternative sufficient routes.
