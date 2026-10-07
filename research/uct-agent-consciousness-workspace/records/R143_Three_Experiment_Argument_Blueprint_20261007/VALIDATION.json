@@ -1,0 +1,16 @@
+{
+  "scope": "graph/source/history preservation, not independent proof verification",
+  "checks": {
+    "nodes": true,
+    "rules": true,
+    "source_versions": true,
+    "context_links": true,
+    "counts": true,
+    "anchor_integrity": true,
+    "published_source_bytes": true,
+    "history_preserved": true
+  },
+  "parent": "5bdc0dd4ab18fa2c0fcf2d532a7721e3c52ee201",
+  "new_nodes": 0,
+  "new_rules": 0
+}

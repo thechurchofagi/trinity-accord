@@ -259,3 +259,13 @@ The scoped RPT comparison is complete. Keep any-experience existence distinct fr
 
 Source scope: Lamme 2010 selected original-article passages, 2006 metadata/abstract, 2018 abstract; not a full-version or latest-theory audit. No new mathematical claim, manuscript or experiment; 328/157 unchanged. Next: assemble the accepted three thought-experiment roles into a positive argument plan and check source overlap. Do not automatically expand the theory survey. This current direction supersedes historical next-step queues below.
 
+
+## R143 — Three cases, separate proof branches, attribution verdict
+
+
+[English blueprint and selected proof spine](records/R143_Three_Experiment_Argument_Blueprint_20261007/ARGUMENT_BLUEPRINT.md), [Chinese review](records/R143_Three_Experiment_Argument_Blueprint_20261007/BLUEPRINT_REVIEW_ZH.md).
+
+The plan now connects ancestral/organizational formation, the three-process reader/whole comparison, and matched storage with different usable memory. Existence, nonproduct composition and capability/type change have separate premise sets; narrative order is not a deductive ladder. A:NONSUM retains strong tokenwise C1, the common independent product, fixed constituent slots and actual nonproduct whole. Capability gains retain C:FIXED_J and actual/completeness conditions before experiential interpretation.
+
+Disposition: a theoretical synthesis/explanatory companion is supported; a fifth original-results paper is not established by this outline. These core results are already published in A/C. All 328 nodes and 157 rules remain unchanged. Planning consolidation is complete. Do not automatically repeat the plan, proliferate lemmas, broaden surveys or start experiments. A requested draft should use this blueprint and retain central thought experiments; new original research needs a named unresolved claim.
+

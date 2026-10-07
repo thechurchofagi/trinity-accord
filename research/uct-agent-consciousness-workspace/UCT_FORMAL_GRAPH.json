@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R142-v1.0",
+  "revision": "R143-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "df956ba5996d7ad85c4fa7cc3e94f07447ca4049",
+  "base_commit": "5bdc0dd4ab18fa2c0fcf2d532a7721e3c52ee201",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -5406,5 +5406,39 @@
     "decision": "Separate existence of any experience from particular visual content and distinguish architecture formation from episode engagement. Scoped RPT necessity does not alone contradict U1; a universal gate conflict requires the existing same-domain witness rule.",
     "reading_scope": "Lamme 2010 selected original-article passages; 2006 bibliography/abstract only after full-text fetch failure; 2018 abstract only. Not all versions or commentaries.",
     "next": "Single comparison completed; assemble the three accepted thought-experiment roles into a positive argument plan, audit overlap before drafting. No automatic multi-theory survey or experiments."
+  },
+  "argument_blueprint_R143": {
+    "kind": "EDITORIAL_SYNTHESIS_BLUEPRINT_AND_OVERLAP_VERDICT",
+    "new_nodes": 0,
+    "new_rules": 0,
+    "record": "records/R143_Three_Experiment_Argument_Blueprint_20261007/ARGUMENT_BLUEPRINT.md",
+    "review": "records/R143_Three_Experiment_Argument_Blueprint_20261007/BLUEPRINT_REVIEW_ZH.md",
+    "selected_proof_ledger": "records/R143_Three_Experiment_Argument_Blueprint_20261007/ARGUMENT_BLUEPRINT.md#5-selected-existing-proof-spine",
+    "full_proof_ledger": "records/R137_Executable_Feedback_Interfaces_20261007/PROOF_LEDGER.md",
+    "anchors": [
+      "A:C1",
+      "A:C1_OI",
+      "A:U1",
+      "A:E1",
+      "A:E2",
+      "A:E3",
+      "A:PRODUCT_DEF",
+      "A:ACTUAL_WHOLE_PARTS",
+      "A:PHYS_NONPRODUCT",
+      "A:NONSUM",
+      "A:COEXISTENCE",
+      "A:TOY_MATH",
+      "A:TOY_WHOLE_DIFF",
+      "B:TFR",
+      "B:TARGET_DOMAIN",
+      "C:FIXED_J",
+      "C:P1",
+      "C:P2_FULL",
+      "C:P3",
+      "C:CIRCUIT_SPEC",
+      "C:CIRCUIT_LAWS"
+    ],
+    "decision": "Three thought-experiment blueprint complete. Suitable as theoretical synthesis/explanatory companion; no nonredundant fifth original-results paper established. Existence, nonproduct organization and capability are separate conditional branches, not a deductive ladder.",
+    "next": "Do not automatically repeat planning or expand theory. Draft only when requested using this completed blueprint; original research needs a separately identified unresolved claim."
   }
 }

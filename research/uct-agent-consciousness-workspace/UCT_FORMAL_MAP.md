@@ -1,10 +1,18 @@
-# UCT A–B–C–D unified formal map — R142
+# UCT A–B–C–D unified formal map — R143
 
-**Canonical working map, revision R142-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
+**Canonical working map, revision R143-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
+
+## R143 completed three-experiment argument blueprint
+
+[English blueprint and selected proof spine](records/R143_Three_Experiment_Argument_Blueprint_20261007/ARGUMENT_BLUEPRINT.md), [Chinese review](records/R143_Three_Experiment_Argument_Blueprint_20261007/BLUEPRINT_REVIEW_ZH.md).
+
+The plan now connects ancestral/organizational formation, the three-process reader/whole comparison, and matched storage with different usable memory. Existence, nonproduct composition and capability/type change have separate premise sets; narrative order is not a deductive ladder. A:NONSUM retains strong tokenwise C1, the common independent product, fixed constituent slots and actual nonproduct whole. Capability gains retain C:FIXED_J and actual/completeness conditions before experiential interpretation.
+
+Disposition: a theoretical synthesis/explanatory companion is supported; a fifth original-results paper is not established by this outline. These core results are already published in A/C. All 328 nodes and 157 rules remain unchanged. Planning consolidation is complete. Do not automatically repeat the plan, proliferate lemmas, broaden surveys or start experiments. A requested draft should use this blueprint and retain central thought experiments; new original research needs a named unresolved claim.
 
 ## R142 current source-scope comparison
 
