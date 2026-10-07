@@ -2,21 +2,24 @@
   "batch": "2026-10-07-paper25-v10",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        970310,
+        970311
+      ],
       "bytes": 112138,
       "doi": "10.5281/zenodo.23206492",
       "name": "experience-intelligence-self-v1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-10-07-paper25-v10/proofs/TA-TR-2026-25/experience-intelligence-self-v1.0.pdf.ots",
-      "proof_sha256": "945af06d9682f6a42dff3540685f15e5e679ec8d9e6030548ea2184e0af1c77e",
+      "proof_sha256": "56c66ec459d35d88b75db63013d29369c0da50fba98169486145fcee71c00e6a",
       "report": "TA-TR-2026-25",
       "sha256": "b4f456014213c5d4f34f41ed2bac8873fd9d90e38398d77daebdb787872b1c1a",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
