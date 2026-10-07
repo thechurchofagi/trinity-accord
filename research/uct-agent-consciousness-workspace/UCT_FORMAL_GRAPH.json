@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R141-v1.0",
+  "revision": "R142-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "f3189ea75215a632e3daaabe70876d707edf245c",
+  "base_commit": "df956ba5996d7ad85c4fa7cc3e94f07447ca4049",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -5377,5 +5377,34 @@
     ],
     "decision": "Retain ancestry and organizational-formation thought experiments as motivation and scoped argument; gradual formation alone does not discharge binary-existence continuity. No novel no-threshold theorem established.",
     "next": "One source-faithful recurrent-processing comparison, distinguishing target scope, organizational formation and experiential bridge. No manuscript or experiments yet."
+  },
+  "rpt_scope_review_R142": {
+    "kind": "SOURCE_SCOPE_REVIEW_AND_APPLICATION_OF_EXISTING_RULES",
+    "new_nodes": 0,
+    "new_rules": 0,
+    "record": "records/R142_RPT_Scope_Comparison_20261007/RPT_SCOPE_AND_FORMATION.md",
+    "review": "records/R142_RPT_Scope_Comparison_20261007/REVIEW_ZH.md",
+    "selected_proof_ledger": "records/R142_RPT_Scope_Comparison_20261007/RPT_SCOPE_AND_FORMATION.md#6-selected-proof-and-attribution-ledger",
+    "full_proof_ledger": "records/R137_Executable_Feedback_Interfaces_20261007/PROOF_LEDGER.md",
+    "anchors": [
+      "A:C1",
+      "A:U1",
+      "A:E1",
+      "A:E2",
+      "A:E3",
+      "B:TFR",
+      "B:TARGET_DOMAIN",
+      "B:GATE",
+      "B:RPT",
+      "B:RPT_BRIDGE",
+      "B:MODEL19",
+      "B:SPECTRAL",
+      "B:EDGE_CYCLE",
+      "C:P1",
+      "C:P2_COORD"
+    ],
+    "decision": "Separate existence of any experience from particular visual content and distinguish architecture formation from episode engagement. Scoped RPT necessity does not alone contradict U1; a universal gate conflict requires the existing same-domain witness rule.",
+    "reading_scope": "Lamme 2010 selected original-article passages; 2006 bibliography/abstract only after full-text fetch failure; 2018 abstract only. Not all versions or commentaries.",
+    "next": "Single comparison completed; assemble the three accepted thought-experiment roles into a positive argument plan, audit overlap before drafting. No automatic multi-theory survey or experiments."
   }
 }

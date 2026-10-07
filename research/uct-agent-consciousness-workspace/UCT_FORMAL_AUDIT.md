@@ -249,3 +249,13 @@ Retain the All-Ancestors-Survive thought experiment and expand the formation his
 
 This is an editorial argument/overlap audit, not a new theorem or manuscript. All 328 nodes and 157 rules remain unchanged; R140's companion disposition stands. Thought-experiment motivation is not a deductive edge. Next: one original-source, scope-faithful recurrent-processing comparison. The current plan supersedes historical expansion/drafting queues below.
 
+
+## R142 — RPT target and bearer scope
+
+
+[English source/argument review and selected existing proofs](records/R142_RPT_Scope_Comparison_20261007/RPT_SCOPE_AND_FORMATION.md), [Chinese review](records/R142_RPT_Scope_Comparison_20261007/REVIEW_ZH.md).
+
+The scoped RPT comparison is complete. Keep any-experience existence distinct from particular visual phenomenality, and architecture formation distinct from episode engagement. Apply B:TARGET_DOMAIN/B:GATE only to the exact same-domain necessity claim and actual witness; target-content absence does not establish absence of all experience. Preserve the rival's strongest actual interpretation rather than relabeling it as mere behavior. Both sides retain their bridge/axiom explanatory obligations.
+
+Source scope: Lamme 2010 selected original-article passages, 2006 metadata/abstract, 2018 abstract; not a full-version or latest-theory audit. No new mathematical claim, manuscript or experiment; 328/157 unchanged. Next: assemble the accepted three thought-experiment roles into a positive argument plan and check source overlap. Do not automatically expand the theory survey. This current direction supersedes historical next-step queues below.
+

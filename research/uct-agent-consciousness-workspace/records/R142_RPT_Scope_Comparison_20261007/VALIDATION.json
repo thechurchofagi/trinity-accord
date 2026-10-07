@@ -1,0 +1,17 @@
+{
+  "scope": "integrity/source preservation only, not proof-assistant or independent source verification",
+  "checks": {
+    "nodes": true,
+    "rules": true,
+    "source_versions": true,
+    "context_links": true,
+    "counts": true,
+    "anchors": true,
+    "published_source_bytes": true,
+    "history_preserved": true,
+    "records_exist": true
+  },
+  "parent": "df956ba5996d7ad85c4fa7cc3e94f07447ca4049",
+  "new_nodes": 0,
+  "new_rules": 0
+}

@@ -1,15 +1,15 @@
-# UCT 交接 — R141：组织形成思想实验与下一篇论证审查
+# UCT 交接 — R142：递归加工原文对照与目标范围
 
-2026-10-07 Asia/Shanghai；父提交 f3189ea75215a632e3daaabe70876d707edf245c。固定仓库 thechurchofagi/trinity-accord，分支 uct-agent-consciousness-workspace。
+2026-10-07 Asia/Shanghai；父提交 df956ba5996d7ad85c4fa7cc3e94f07447ca4049。仓库 thechurchofagi/trinity-accord，分支 uct-agent-consciousness-workspace。
 
-已完成 [中文方案](records/R141_Organizational_Formation_Argument_20261007/PLAN_AND_REVIEW_ZH.md) 与 [英文论证审查/选定证明台账](records/R141_Organizational_Formation_Argument_20261007/ARGUMENT_AUDIT.md)。用户先讨论方案、暂不写论文；本轮未写正文、未做实验。
+本轮完成 [英文对照/现有证明台账](records/R142_RPT_Scope_Comparison_20261007/RPT_SCOPE_AND_FORMATION.md)、[中文审查](records/R142_RPT_Scope_Comparison_20261007/REVIEW_ZH.md)。这是论证方案审查，不是论文正文、新定理或实验。
 
-核心思想实验保留并展开组织自身形成过程。审查结果：它加强解释要求，但不能从组织渐变独立推出普遍体验。A §8.3 的原有反例仍有效，A:E1/E2/E3 的前提不可替换。B §19 提供现成具体组织场景；C §7.2 表明拟议的记录/使用问题已有较大覆盖。对 Chalmers 1995 原文做了范围明确的比较：保组织替换与改变组织的形成族不能混用。
+结论：区分任意体验存在E与特定视觉内容V；V需要某机制不自动意味着E需要它。直接冲突须满足既有B:GATE的准确命题、同域同承载者及实际反例条件。组织演化形成与单次加工活动中机制被调用也必须区分。对方并非简单报告门禁；不得把完整RPT改写为纯行为描述来制造统一。
 
-当前图 R141-v1.0，328节点157规则不变，仅加编辑定位。四篇源文、全部节点/规则与来源版本不变。R140作为共同形式化附录的决定保留；没有新定理/第五篇原创性或外部全理论反驳宣称。
+原文范围：Lamme2010正文选定段落，大学镜像PDF含评论但未将评论误归作者；2006全文获取失败，只核对元数据/摘要；2018只看摘要，未查全后续版本。源链接与页码在英文记录。双方解释责任均保留，未证明C1或RPT。
 
-下一步：选取一个原文可核对的递归加工主张，区分知觉内容、访问与全部体验，展开候选机制形成过程，再审查体验桥接及UCT自身公设解释责任。先做该比较，不自动新写论文、增设定理或转向实验。
+当前R142-v1.0，328节点157规则与四篇原文不变。地图增加编辑审查入口；b02/b_RPT/b05/b06原证明保留，R137完整台账仍权威。R140共同形式化附录定位不变，未开启第五篇正文或发布。
 
-数学证明仍以R137完整台账与原图为准；本轮论证审查§3摘录a19/a20/a21及原反例。相同助手复核，不是独立同行评审。历史仅恢复38案例47族，不是数千例已全部复核。T2 OPEN、biology/AI C3 NOT_TESTED、valence OPEN。
+本轮单项对照已完成。下一步：组装祖先/组织形成、部分/整体、组织/能力/报告三组思想实验的正面论证；先审查是否超出A/B/C/D已有结论，不自动扩大理论比较或实验。思想实验与形式证明并行保留；动机箭头不是证明。
 
-使用HEAD lease、force=false、[skip ci]并回读。无DOI/release/PR/CI。[R140交接](HANDOFF_THROUGH_R140.md)。
+保存需HEAD lease、force=false、[skip ci]、回读。无DOI/release/PR/CI。T2 OPEN、biology/AI C3 NOT_TESTED、valence OPEN；历史仅38案例47族恢复，不冒称数千复核。[R141交接](HANDOFF_THROUGH_R141.md)。

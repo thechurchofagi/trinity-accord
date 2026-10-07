@@ -1,10 +1,18 @@
-# UCT A–B–C–D unified formal map — R141
+# UCT A–B–C–D unified formal map — R142
 
-**Canonical working map, revision R141-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
+**Canonical working map, revision R142-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
+
+## R142 current source-scope comparison
+
+[English source/argument review and selected existing proofs](records/R142_RPT_Scope_Comparison_20261007/RPT_SCOPE_AND_FORMATION.md), [Chinese review](records/R142_RPT_Scope_Comparison_20261007/REVIEW_ZH.md).
+
+The scoped RPT comparison is complete. Keep any-experience existence distinct from particular visual phenomenality, and architecture formation distinct from episode engagement. Apply B:TARGET_DOMAIN/B:GATE only to the exact same-domain necessity claim and actual witness; target-content absence does not establish absence of all experience. Preserve the rival's strongest actual interpretation rather than relabeling it as mere behavior. Both sides retain their bridge/axiom explanatory obligations.
+
+Source scope: Lamme 2010 selected original-article passages, 2006 metadata/abstract, 2018 abstract; not a full-version or latest-theory audit. No new mathematical claim, manuscript or experiment; 328/157 unchanged. Next: assemble the accepted three thought-experiment roles into a positive argument plan and check source overlap. Do not automatically expand the theory survey. This current direction supersedes historical next-step queues below.
 
 ## R141 current argument review
 
