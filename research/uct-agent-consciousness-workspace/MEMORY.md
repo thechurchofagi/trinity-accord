@@ -418,3 +418,9 @@ Hall、概率双模拟与划分细化是已有数学；R126 已提示 enablednes
 12项精确检查通过；总图源文检查实际见MAP_CHECK。首次脚本有一个枚举数量断言写成>1000，实际有限网格为780，修正为精确780；同时将整数调用统一转换Fraction，终版检查通过，不隐去开发修正。已有反馈精化/输出反馈/随机控制迁移文献已核对，别把标准控制数学包装为新意识构成定理。
 
 下一步不是宣称所有翻译都已解决：研究真实观察驱动的有限记忆能否解除当前可见纤维冲突，给记忆更新、时间/资源和实际支撑条件。不加自省/报告/控制能力的体验存在门槛；T2、C3、效价仍开放；历史档案仍38案例47族，数千原清单未恢复完整。
+## R166 current priority — same-token installation witness
+
+R166 separates E0 population profile, E1 finite token view, E2 actual installed body-frame relation, E3 C1 experiential counterpart and E4 familiar mineness interpretation. Exact permutation and path/bypass models block E0→E2 and E1→E2 shortcuts. A sufficient W1–W6 contract requires one actual instance, report-independent physical anchoring, occurring endogenous binding/use, local propagation and mediator/cut discrimination. It is not necessary and not an experience gate.
+
+Map R166-v1.0: 452 nodes / 217 rules / 117 context links, new 6/2. Conditional installation plus existing R159 transport gives an experience-internal structural counterpart; R157 semantic residual leaves `B_min/F_O` open. No apparatus, actual token, complete mechanism or current-system consciousness conclusion. Next: an ethical same-token W2–W5 architecture with explicit redundancy and compensation tests.
+

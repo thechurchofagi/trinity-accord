@@ -468,3 +468,11 @@ The self contract now distinguishes grounded actual bearer/target/constituent re
 Next research stays on grounded target binding and wrong self-attribution in a specified implementation class, then incorporates this focused result into the manuscript. No automatic experiments, unrelated control-theory expansion or publication. A major independent-paper breakthrough is not yet certified.
 
 See F149-01 through F149-07 in the source audit for precise repairs, source coverage, and historical-premise compatibility. No existing source bytes or prior graph entries were silently changed.
+## R166 audit — actual installation without population, interface or semantic shortcuts
+
+R166 passes the three direction checks. The graph has 452 nodes, 217 rules and 117 context links; the inherited R165 node/rule prefixes and all context links are exact. The two new routes use simultaneous premises: grounded selector + typed Anchor–Bind–Use schema + every witness clause for bounded installation support; witnessed installation + same-instance R159 transport + R157 semantic residual for a structural counterpart with familiar mineness still open.
+
+The audit explicitly rejects three inferences: population profile to named token, natural/upstream finite trace to installed use, and transported structure to familiar label. An abstract jointly satisfiable witness is supplied, but no actual apparatus, participant/system token, complete realization, `B_min`, `F_O`, C1 derivation or global proof is claimed. The exact checks cover 114 nonconstant population vectors, 6 natural/upstream interface cases, 2 mediator discriminations and all 64 W1–W6 Boolean assignments. Passing the DAG and these checks does not establish theoretical truth or empirical installation.
+
+Current open gaps are token-preserving measurement, intervention fidelity and locality, hidden redundancy/compensation, complete realization, necessity of the witness, and independent mineness semantics. C1 remains the consciousness-specific explanatory axiom; the selected body-frame role is not required for basal experience and no exclusive extra owner is introduced.
+

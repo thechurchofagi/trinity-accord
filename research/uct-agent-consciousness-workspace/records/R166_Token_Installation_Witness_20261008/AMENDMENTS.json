@@ -1,0 +1,10 @@
+{
+  "schema": "UCT_R166_AMENDMENTS/v1",
+  "amendments": [
+    {"target": "R159:ANCHOR_BINDING_CONTRACT", "operation": "additive_effective_reading", "effective_reading": "R166 supplies one sufficient evidential contract for supporting the already typed Anchor-Bind-Use relation as actually installed. It does not change R159's statement, make the witness necessary or assert empirical satisfaction."},
+    {"target": "R159:FRAME_RELATION_TRANSPORT", "operation": "additive_effective_reading", "effective_reading": "R166 separates the empirical installation bridge from C1 transport. Transport applies only after the same actual relation and same P/I/K/D/Phi/h are established; it does not turn group statistics into an experiential relation."},
+    {"target": "R161:CONCRETE_CROSSED_PROTOCOL", "operation": "additive_effective_reading", "effective_reading": "A valid R161 population profile is E0 evidence. It does not by itself discharge R166 W1-W5 for any named token."},
+    {"target": "R157:SEMANTIC_RESIDUAL", "operation": "retained_without_change", "effective_reading": "Even witnessed actual installation and C1 transport leave the familiar felt-mineness label dependent on independent B_min and target evidence."}
+  ],
+  "history_policy": "No inherited statement, identifier, rule or published byte is deleted or rewritten. These are additive current-reading notes only."
+}

@@ -1,0 +1,210 @@
+{
+  "schema": "UCT_R166_VALIDATION/v1",
+  "round": "R166",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "note_hash_frozen",
+      "status": "PASS",
+      "detail": "1f0e0d1238e365ddabd85bcea402c1118684b907a031504ea520f9efa971aec7"
+    },
+    {
+      "name": "graph_revision",
+      "status": "PASS",
+      "detail": "R166-v1.0"
+    },
+    {
+      "name": "graph_counts",
+      "status": "PASS",
+      "detail": {
+        "nodes": 452,
+        "rules": 217,
+        "context_links": 117
+      }
+    },
+    {
+      "name": "unique_ids",
+      "status": "PASS",
+      "detail": {
+        "nodes": 452,
+        "rules": 217
+      }
+    },
+    {
+      "name": "all_rule_endpoints_exist",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "name": "dag",
+      "status": "PASS",
+      "detail": {
+        "visited": 452,
+        "total": 452
+      }
+    },
+    {
+      "name": "exact_parent_reconstruction",
+      "status": "PASS",
+      "detail": "3911f7bc9720c3568b81ab30638bac7f49bb596679ab1bf13e1c017b3c3fa1ba"
+    },
+    {
+      "name": "new_node_contract_fields",
+      "status": "PASS",
+      "detail": [
+        "R166:EVIDENCE_LEVEL_LADDER",
+        "R166:POPULATION_TOKEN_NONENTAILMENT",
+        "R166:FINITE_TRACE_INSTALLATION_NONENTAILMENT",
+        "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+        "R166:WITNESSED_FRAME_INSTALLATION",
+        "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY"
+      ]
+    },
+    {
+      "name": "new_rules_are_explicit_all_of",
+      "status": "PASS",
+      "detail": {
+        "r166_witnessed_frame_installation": [
+          "R157:DEFINABLE_SELECTOR_SETUP",
+          "R159:ANCHOR_BINDING_CONTRACT",
+          "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT"
+        ],
+        "r166_experiential_counterpart_boundary": [
+          "R157:SEMANTIC_RESIDUAL",
+          "R159:FRAME_RELATION_TRANSPORT",
+          "R166:WITNESSED_FRAME_INSTALLATION"
+        ]
+      }
+    },
+    {
+      "name": "joint_premises_exact",
+      "status": "PASS",
+      "detail": {
+        "r166_witnessed_frame_installation": [
+          "R157:DEFINABLE_SELECTOR_SETUP",
+          "R159:ANCHOR_BINDING_CONTRACT",
+          "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT"
+        ],
+        "r166_experiential_counterpart_boundary": [
+          "R157:SEMANTIC_RESIDUAL",
+          "R159:FRAME_RELATION_TRANSPORT",
+          "R166:WITNESSED_FRAME_INSTALLATION"
+        ]
+      }
+    },
+    {
+      "name": "no_population_to_token_rule",
+      "status": "PASS",
+      "detail": "counterexample cannot promote a population profile"
+    },
+    {
+      "name": "no_trace_to_installation_rule",
+      "status": "PASS",
+      "detail": "finite trace alone cannot promote installation"
+    },
+    {
+      "name": "semantic_residual_is_joint_premise",
+      "status": "PASS",
+      "detail": [
+        "R157:SEMANTIC_RESIDUAL",
+        "R159:FRAME_RELATION_TRANSPORT",
+        "R166:WITNESSED_FRAME_INSTALLATION"
+      ]
+    },
+    {
+      "name": "no_installation_to_C1_or_familiar_target_reverse_rule",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "name": "population_exact_checks",
+      "status": "PASS",
+      "detail": {
+        "nonconstant_vectors_checked": 114,
+        "named_token_swap_witnesses": 114
+      }
+    },
+    {
+      "name": "finite_trace_exact_checks",
+      "status": "PASS",
+      "detail": {
+        "indistinguishable_natural_or_anchor_cases": 6,
+        "mediator_discriminations": [
+          {
+            "b": 0,
+            "do_k": 1,
+            "path": [
+              0,
+              1,
+              1
+            ],
+            "bypass": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "b": 1,
+            "do_k": 0,
+            "path": [
+              1,
+              0,
+              0
+            ],
+            "bypass": [
+              1,
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "contract_conjunction_checks",
+      "status": "PASS",
+      "detail": {
+        "boolean_assignments": 64,
+        "supporting_assignments": 1
+      }
+    },
+    {
+      "name": "claim_limits",
+      "status": "PASS",
+      "detail": {
+        "actual_data": false,
+        "actual_apparatus": false,
+        "complete_mechanism_identified": false,
+        "B_min_validated": false,
+        "basal_experience_gate": false
+      }
+    },
+    {
+      "name": "required_artifacts_present",
+      "status": "PASS",
+      "detail": [
+        "ROUND_RECORD.md",
+        "Token_Installation_Witness_and_Mineness_Boundary_v0_1.md",
+        "PROOF_LEDGER.json",
+        "GAP_LEDGER.json",
+        "AMENDMENTS.json",
+        "SOURCE_LEDGER.json",
+        "MAP_EXTENSION.json",
+        "MAP_AUDIT.json",
+        "verify_installation.py",
+        "EXACT_CHECKS.json",
+        "build_map.py",
+        "REVIEW_ZH.md",
+        "CURRENT_HANDOFF.md"
+      ]
+    }
+  ],
+  "graph_sha256": "d75785550813ab8a8e9f7eacd13e83eb636ca221d3e95c0c74992d1c30d171b4",
+  "exact_results_sha256": "2a1bc51945a07656468c15be893229ea435ea4512e2535db8ed3d6db38dad7d5",
+  "limitations": [
+    "DAG and finite countermodel checks do not prove theory truth, actual installation or C1.",
+    "The installation result is conditional on empirical realization, fidelity, consistency, locality and exclusion premises.",
+    "No familiar mineness interpretation follows without independent B_min and target evidence."
+  ]
+}

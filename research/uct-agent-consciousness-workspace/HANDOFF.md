@@ -166,3 +166,11 @@ Publication branch: `research/experience-intelligence-self-v1-20261007`. Exact s
 本轮有限精确检查仅针对兼容性与反例，无新实验。没有宣称突破已认证或可以独立原创投稿。下一步不要重做目录核查：集中推进明确实现类别中实际目标绑定/错误归属，再整合R146草稿、R147换接、R149兼容性成稿。语义自指与具体体验桥仍开放。保存不自动发表/DOI/CI。
 
 旧交接：[R148](HANDOFF_THROUGH_R148.md)。
+## R166 current priority — actual installation before C1 transport
+
+R166 closes one conceptual gap without pretending to close its empirical premises. Population profiles and finite same-token traces do not entail installed body-frame use: exact permutation and path/bypass counterexamples prove both limits. A sufficient W1–W6 contract now requires one actual P/I/K/D, a fixed realization map, independently grounded anchor, endogenous binding and occurring consumer use, fidelity-checked propagation, and mediator/cut discrimination under declared causal assumptions.
+
+Map R166-v1.0: **452 nodes / 217 rules / 117 context links**, new 6/2 with exact R165 prefixes. Conditional satisfaction supports only the selected installed relation. Existing R159/C1 transport then supplies its experiential structural counterpart on the same instance; familiar felt mineness still requires independent `B_min`. Missing evidence is unresolved, not no experience. No actual experiment, complete mechanism, unique owner or basal-experience threshold is asserted.
+
+Read `records/R166_Token_Installation_Witness_20261008/`. Next: specify one ethical token-preserving anchor–mediator–consumer architecture, including fidelity, redundancy/compensation alternatives and refute/unresolved boundaries. Do not return to generic statistics, use ownership report to define the path, or treat the witness as necessary for experience.
+

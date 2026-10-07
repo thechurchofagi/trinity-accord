@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R165-v1.0",
+  "revision": "R166-v1.0",
   "date": "2026-10-08",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -19509,6 +19509,232 @@
           }
         ]
       }
+    },
+    {
+      "id": "R166:EVIDENCE_LEVEL_LADDER",
+      "kind": "TYPED_EVIDENCE_AND_INTERPRETATION_SEPARATION",
+      "label": "Population, Token View, Installation, Counterpart, Interpretation",
+      "statement": "Distinguish E0 population/session profile, E1 finite same-token view, E2 actual same-token installed Anchor-Bind-Use relation, E3 its C1 experiential structural counterpart, and E4 a familiar felt-mineness interpretation under independently fixed B_min. No adjacent promotion is automatic, and no level is made a basal-experience gate.",
+      "domain": "One selected body-frame candidate and its fallible evidence/interpretation chain; not a universal hierarchy of every conscious organization.",
+      "scope": "One selected body-frame candidate and its fallible evidence/interpretation chain; not a universal hierarchy of every conscious organization.",
+      "source": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §2",
+      "source_lineage": "Typed synthesis of R157 semantic residual, R159 actual relation, R160-R161 population protocol and UCT I physical-witness boundary.",
+      "status": "DECLARED_TYPED_SEPARATION",
+      "proof": "The five objects have different bearers, quantifiers and evidential roles; the subsequent exact counterexamples refute two automatic promotions.",
+      "counterexamples_and_limits": "The ladder is not a temporal stage theory or a claim that every system passes through all levels.",
+      "formal_contract_R166": {
+        "object_domain": "One selected body-frame relation on one declared actual token plus separately typed population evidence, finite views, experiential counterpart and semantic target.",
+        "quantifiers": "For every admitted application, each claimed promotion must state all bridge premises; existence at a lower level alone is insufficient.",
+        "bearer_time_signature": "Population/session summaries, one actual P/I/K/D token, finite instrument views, Phi/h counterparts, external referents and reports remain distinct.",
+        "source_anchor": {
+          "path": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md",
+          "sha256": "1f0e0d1238e365ddabd85bcea402c1118684b907a031504ea520f9efa971aec7",
+          "locator": "§§1-2"
+        },
+        "purpose": "Prevent population, mechanism, C1 and familiar-mineness claims from being collapsed while giving a positive route between them.",
+        "thought_experiments": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §8",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R166-G1",
+          "R166-G2",
+          "R166-G3",
+          "R166-G4",
+          "R166-G5",
+          "R166-G6",
+          "R166-G7"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R166:POPULATION_TOKEN_NONENTAILMENT",
+      "kind": "EXACT_PERMUTATION_COUNTEREXAMPLE",
+      "label": "Population Profile Does Not Identify a Named Token",
+      "statement": "A nonconstant binary response vector and a permutation that changes a named coordinate have identical multisets and every permutation-invariant population statistic. Therefore even an exact population profile does not by itself entail that a named actual token installs the candidate relation.",
+      "domain": "Finite binary populations of size at least two with a nonconstant response vector; exact enumeration covers sizes two through six.",
+      "scope": "Finite binary populations of size at least two with a nonconstant response vector; exact enumeration covers sizes two through six.",
+      "source": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §3",
+      "source_lineage": "Elementary permutation invariance specialized to the R161 population-to-token gap; no new statistical theorem claimed.",
+      "status": "EXACT_COUNTEREXAMPLE_WITH_BOUNDED_ENUMERATION",
+      "proof": "Swap a 1 and 0 while preserving the response multiset. The exact checker finds a named-coordinate-changing permutation for all 114 nonconstant vectors at sizes two through six.",
+      "counterexamples_and_limits": "Longitudinal or token-specific measurement can add evidence; this result denies only inference from the population summary alone.",
+      "formal_contract_R166": {
+        "object_domain": "One selected body-frame relation on one declared actual token plus separately typed population evidence, finite views, experiential counterpart and semantic target.",
+        "quantifiers": "Every nonconstant binary vector for n>=2 admits the swap; the executable check is bounded to 2<=n<=6.",
+        "bearer_time_signature": "A statistic of a population/session family is not a K-relation in a named actual P/I token.",
+        "source_anchor": {
+          "path": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md",
+          "sha256": "1f0e0d1238e365ddabd85bcea402c1118684b907a031504ea520f9efa971aec7",
+          "locator": "§3"
+        },
+        "purpose": "Block the R161 group-profile to actual-token shortcut.",
+        "thought_experiments": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §8",
+        "open_obligations": [
+          "R166-G1",
+          "R166-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R166:FINITE_TRACE_INSTALLATION_NONENTAILMENT",
+      "kind": "EXACT_STRUCTURAL_CAUSAL_COUNTEREXAMPLE",
+      "label": "Finite Interface Trace Does Not Identify Installed Use",
+      "statement": "The path model r:=b,k:=r,u:=k and bypass model r:=b,k:=r,u:=r agree on all natural binary inputs and every do(r) case, including observed r,k,u, although k mediates u only in the first. A do(k) intervention holding r fixed discriminates them. Hence natural or upstream-intervention traces alone do not entail installed use.",
+      "domain": "The declared deterministic binary structural models and intervention semantics only; not a complete neural model.",
+      "scope": "The declared deterministic binary structural models and intervention semantics only; not a complete neural model.",
+      "source": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §4",
+      "source_lineage": "Elementary structural-model counterexample specialized to the R159 Use relation; causal mediation is not claimed as new.",
+      "status": "EXACT_COUNTEREXAMPLE_WITH_EXHAUSTIVE_BINARY_CHECK",
+      "proof": "Direct substitution shows equality for all natural/do(r) cases and unequal u under the two off-natural do(k) cases; the executable checker exhausts the binary domain.",
+      "counterexamples_and_limits": "A mediator or localized cut is informative only under valid realization, fidelity, consistency and exclusion assumptions; finite tests do not reveal complete organization.",
+      "formal_contract_R166": {
+        "object_domain": "One selected body-frame relation on one declared actual token plus separately typed population evidence, finite views, experiential counterpart and semantic target.",
+        "quantifiers": "All binary b and do(r) settings in the two fixed models; two off-natural do(k) settings supply discrimination.",
+        "bearer_time_signature": "Observed variables in one token remain a finite view; causal equations are candidate abstract models until physically realized and grounded.",
+        "source_anchor": {
+          "path": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md",
+          "sha256": "1f0e0d1238e365ddabd85bcea402c1118684b907a031504ea520f9efa971aec7",
+          "locator": "§4"
+        },
+        "purpose": "Expose dormant/mirrored/bypass states and motivate a same-token mediation witness.",
+        "thought_experiments": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §8",
+        "open_obligations": [
+          "R166-G2",
+          "R166-G3",
+          "R166-G4"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+      "kind": "SUFFICIENT_EMPIRICAL_APPLICATION_CONTRACT",
+      "label": "Same-Token Installation Witness Contract",
+      "statement": "For one actual P,I,K,D and internally sorted r,k,U, require jointly: W1 same-token actuality/typing and a fixed realization map; W2 report-independent physical Anchor grounding; W3 endogenous Bind and actually occurring Use; W4 fidelity-checked local perturbation propagation; W5 mediator or localized-cut discrimination from a live bypass under declared causal assumptions; and W6 bounded four-status discipline. The package is sufficient relative to its premises, not necessary and not a basal-experience criterion.",
+      "domain": "One predeclared candidate Anchor-Bind-Use relation in one actual process token and nonzero interval; no actual apparatus or token was tested in R166.",
+      "scope": "One predeclared candidate Anchor-Bind-Use relation in one actual process token and nonzero interval; no actual apparatus or token was tested in R166.",
+      "source": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §5",
+      "source_lineage": "UCT I §8.11 physical-witness criterion plus R157 grounded selector and R159 Anchor-Bind-Use typing, with bypass discrimination made explicit.",
+      "status": "DECLARED_SUFFICIENT_CONTRACT_NOT_EXECUTED",
+      "proof": "Definition of an application-level evidence package. All 64 Boolean clause assignments are checked; only the all-true assignment supports the contract conclusion.",
+      "counterexamples_and_limits": "Not necessary, not executed, not complete-mechanism identification, and vulnerable to invalid realization, locality or intervention assumptions. Missing clauses yield unresolved, not no experience.",
+      "formal_contract_R166": {
+        "object_domain": "One selected body-frame relation on one declared actual token plus separately typed population evidence, finite views, experiential counterpart and semantic target.",
+        "quantifiers": "There exists one declared actual token/interval and candidate tuple; every W1-W6 clause and every member of nonempty U must satisfy the same binding package where applicable.",
+        "bearer_time_signature": "P,I,K,D,r,k,U and instrument-to-occurrence map are fixed; population/session evidence, abstract equations, external anatomy and reports cannot replace them.",
+        "source_anchor": {
+          "path": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md",
+          "sha256": "1f0e0d1238e365ddabd85bcea402c1118684b907a031504ea520f9efa971aec7",
+          "locator": "§5"
+        },
+        "purpose": "Provide a positive but bounded evidential bridge from finite protocol evidence to actual installed body-frame organization.",
+        "thought_experiments": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §8",
+        "open_obligations": [
+          "R166-G1",
+          "R166-G2",
+          "R166-G3",
+          "R166-G4",
+          "R166-G5",
+          "R166-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R166:WITNESSED_FRAME_INSTALLATION",
+      "kind": "CONDITIONAL_ACTUAL_APPLICATION_RESULT",
+      "label": "Witnessed Actual Body-Frame Installation",
+      "statement": "If the same actual P,I,K,D satisfies the R157 physically grounded selector, the R159 sorted Anchor-Bind-Use schema and every R166 witness clause, then the selected theta_frame(r,k,U) is supported as actually installed during I. The conclusion is relative to the declared realization and causal assumptions and is not a complete-mechanism or necessity theorem.",
+      "domain": "Exactly one common actual instance satisfying all three premise packages simultaneously; empirical truth of the clauses is not supplied by R166.",
+      "scope": "Exactly one common actual instance satisfying all three premise packages simultaneously; empirical truth of the clauses is not supplied by R166.",
+      "source": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §6",
+      "source_lineage": "Conditional application of R157/R159 to the new same-token witness; no general causal-identification novelty claimed.",
+      "status": "MANUAL_CONDITIONAL_APPLICATION_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "W1 fixes the instance and realization; W2-W3 supply actual grounded relation occurrences; W4-W5 discriminate use from the declared bypass; W6 restricts the conclusion and failure states.",
+      "counterexamples_and_limits": "Any false or unsupported witness premise blocks the conclusion. Alternative mechanisms outside the declared model and unmeasured redundancy remain open.",
+      "formal_contract_R166": {
+        "object_domain": "One selected body-frame relation on one declared actual token plus separately typed population evidence, finite views, experiential counterpart and semantic target.",
+        "quantifiers": "For every application instance satisfying all premises on one common P,I,K,D and candidate tuple; no universal realization claim.",
+        "bearer_time_signature": "All premises bind the identical actual bearer, interval, complete signature and sorted occurrences; no cross-trial h or population average is substituted.",
+        "source_anchor": {
+          "path": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md",
+          "sha256": "1f0e0d1238e365ddabd85bcea402c1118684b907a031504ea520f9efa971aec7",
+          "locator": "§6"
+        },
+        "purpose": "Conditionally discharge the actual-installation gap while preserving empirical and type boundaries.",
+        "thought_experiments": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §8",
+        "open_obligations": [
+          "R166-G2",
+          "R166-G3",
+          "R166-G4",
+          "R166-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r166_witnessed_frame_installation",
+            "all_of": [
+              "R157:DEFINABLE_SELECTOR_SETUP",
+              "R159:ANCHOR_BINDING_CONTRACT",
+              "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+      "kind": "CONDITIONAL_C1_APPLICATION_WITH_SEMANTIC_RESIDUAL",
+      "label": "Experiential Body-Frame Counterpart, Familiar Mineness Still Open",
+      "statement": "On the identical admitted P,I,K,D,Phi,h, a witnessed installed theta_frame is transported by the existing R159 C1 result to theta_frame(h(r),h(k),h(U)) in Phi. R157's semantic residual still blocks naming that counterpart familiar felt bodily mineness without independently fixed B_min and target evidence.",
+      "domain": "One common actual C1 instance and selected installed relation; the conclusion does not range over tokens, populations or every experience.",
+      "scope": "One common actual C1 instance and selected installed relation; the conclusion does not range over tokens, populations or every experience.",
+      "source": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §§6-7",
+      "source_lineage": "R159 frame transport plus R157 semantic residual, restricted by the new actual-installation result.",
+      "status": "MANUAL_CONDITIONAL_C1_APPLICATION_WITH_OPEN_B_MIN",
+      "proof": "Apply R159 transport to the witnessed relation on the same instance, then retain R157's model-preserving metalinguistic underdetermination.",
+      "counterexamples_and_limits": "Does not derive C1, validate B_min, identify familiar ownership/agency, require body-frame organization for experience, or assert a unique owner.",
+      "formal_contract_R166": {
+        "object_domain": "One selected body-frame relation on one declared actual token plus separately typed population evidence, finite views, experiential counterpart and semantic target.",
+        "quantifiers": "For every common instance satisfying witnessed installation and R159 transport; every familiar-label claim additionally requires independent B_min.",
+        "bearer_time_signature": "The D/Phi structures and h belong to the same P/I/K instance; external vocabulary, anatomy, measurement and report remain separately typed.",
+        "source_anchor": {
+          "path": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md",
+          "sha256": "1f0e0d1238e365ddabd85bcea402c1118684b907a031504ea520f9efa971aec7",
+          "locator": "§§6-7"
+        },
+        "purpose": "Give a positive experience-internal organization route without a second owner or a semantic shortcut.",
+        "thought_experiments": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §8",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R166-G6",
+          "R166-G7"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r166_experiential_counterpart_boundary",
+            "all_of": [
+              "R157:SEMANTIC_RESIDUAL",
+              "R159:FRAME_RELATION_TRANSPORT",
+              "R166:WITNESSED_FRAME_INSTALLATION"
+            ]
+          }
+        ]
+      }
     }
   ],
   "rules": [
@@ -32193,6 +32419,69 @@
         "source_sha256": "291b0af72c4e34b22c43f7d8eb9c8485d99ac725a5de7c9109ec22fce6a5e37e",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r166_witnessed_frame_installation",
+      "all_of": [
+        "R157:DEFINABLE_SELECTOR_SETUP",
+        "R159:ANCHOR_BINDING_CONTRACT",
+        "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT"
+      ],
+      "conclusion": "R166:WITNESSED_FRAME_INSTALLATION",
+      "statement": "The grounded selector contract, typed Anchor-Bind-Use schema and every same-token witness clause jointly support the selected relation as actually installed on the one declared instance.",
+      "proof_sketch": "Bind all premises to one P/I/K/D tuple; W1-W3 establish actual typed occurrences and W4-W5 discriminate the declared active path from a bypass; W6 bounds status and conclusion.",
+      "source": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §§5-6",
+      "kind": "CONDITIONAL_APPLICATION_DEDUCTION",
+      "review": "MANUAL_ALL_OF_ACTUALITY_TYPING_GROUNDING_AND_CAUSAL_WITNESS_AUDIT",
+      "formal_contract_R166": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same actual P and nonzero I",
+          "same complete K and D",
+          "same internally sorted r,k,U",
+          "fixed instrument-to-occurrence realization map",
+          "independent physical anchor grounding",
+          "actual endogenous binding and consumer use",
+          "valid local perturbation fidelity",
+          "valid mediator/cut discrimination and declared causal assumptions",
+          "bounded status discipline",
+          "no report-defined role or basal-experience promotion"
+        ],
+        "quantification": "Every clause must hold simultaneously on the same instance; population or cross-session evidence cannot fill a missing token premise by itself.",
+        "proof_location": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §§5-6",
+        "source_sha256": "1f0e0d1238e365ddabd85bcea402c1118684b907a031504ea520f9efa971aec7",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r166_experiential_counterpart_boundary",
+      "all_of": [
+        "R157:SEMANTIC_RESIDUAL",
+        "R159:FRAME_RELATION_TRANSPORT",
+        "R166:WITNESSED_FRAME_INSTALLATION"
+      ],
+      "conclusion": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+      "statement": "Witnessed actual installation and the existing same-instance C1 transport jointly yield an experiential structural counterpart, while the semantic residual jointly blocks a familiar-mineness label without B_min.",
+      "proof_sketch": "Apply R159's preservation biconditional to the witnessed tuple, then apply R157's unchanged-structure/different-label argument; neither direction supplies B_min.",
+      "source": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §§6-7",
+      "kind": "CONDITIONAL_C1_AND_SEMANTIC_BOUNDARY_DEDUCTION",
+      "review": "MANUAL_ALL_OF_SAME_INSTANCE_TRANSPORT_AND_SEMANTIC_RESIDUAL_AUDIT",
+      "formal_contract_R166": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same P/I/K/D/Phi/h across installation and transport",
+          "correctly sorted h-images of r,k,U",
+          "actual relation rather than population summary or finite view",
+          "C1 retained as consciousness-specific explanatory axiom",
+          "external anatomical truth kept separate",
+          "independent B_min required for familiar label",
+          "no unique owner or basal-experience threshold"
+        ],
+        "quantification": "Every application is local to one common admitted C1 instance and one selected relation; no universal familiar-mineness interpretation follows.",
+        "proof_location": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §§6-7",
+        "source_sha256": "1f0e0d1238e365ddabd85bcea402c1118684b907a031504ea520f9efa971aec7",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -33442,5 +33731,20 @@
     "ethics_approval": false,
     "empirical_F_witness": false,
     "global_semantic_proof": false
+  },
+  "research_R166": {
+    "start_head": "86c95474d99a9916c4302e6898e045ce141634d4",
+    "checkpoint_head": "6b99b8fc738a997ab06df4c0a58f565a81688a05",
+    "parent_graph_sha256": "3911f7bc9720c3568b81ab30638bac7f49bb596679ab1bf13e1c017b3c3fa1ba",
+    "note": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md",
+    "new_nodes": 6,
+    "new_rules": 2,
+    "status": "SAME_TOKEN_INSTALLATION_WITNESS_WITH_C1_AND_SEMANTIC_BOUNDARY",
+    "actual_apparatus": false,
+    "actual_participant_or_system_token": false,
+    "installation_empirically_witnessed": false,
+    "B_min_validated": false,
+    "C1_derived": false,
+    "basal_experience_gate_added": false
   }
 }

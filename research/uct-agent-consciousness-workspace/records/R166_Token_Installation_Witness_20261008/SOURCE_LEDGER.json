@@ -1,0 +1,12 @@
+{
+  "schema": "UCT_R166_SOURCE_LEDGER/v1",
+  "sources": [
+    {"id": "UCT-I-v1.2", "kind": "fixed_primary_project_source", "locators": ["§8.11", "§8.12", "§8.13", "§8.14", "§14.7", "§14.8", "§14.10"], "use": "Physical witness, body-centered projection, self-model/conceptual-I boundaries, no extra owner, application and noncircular-isomorphism limits.", "limit": "Supplies the project framework, not empirical installation of the R166 candidate."},
+    {"id": "R157-fixed", "kind": "verified_project_derivation", "locators": ["DEFINABLE_SELECTOR_SETUP", "COORDINATE_TRANSPORT", "SEMANTIC_RESIDUAL", "MINENESS_BRIDGE_SCHEMA"], "use": "Grounded definable coordinate, C1 transport and independent B_min requirement.", "limit": "Does not itself supply actual body-frame grounding or familiar mineness semantics."},
+    {"id": "R159-fixed", "kind": "verified_project_derivation", "locators": ["ANCHOR_BINDING_CONTRACT", "FRAME_RELATION_TRANSPORT"], "use": "Sorted actual Anchor-Bind-Use relation and same-instance C1 transport.", "limit": "Assumes actual installation and leaves target interpretation open."},
+    {"id": "R160-R161-fixed", "kind": "verified_project_protocol", "locators": ["INTERVENTION_PROFILE_CONTRACT", "CONCRETE_CROSSED_PROTOCOL", "ADMISSIBILITY_GATE", "THREE_WAY_BODY_DECISION"], "use": "Population role profile, concrete crossed protocol and valid/invalid/confirm/exclude/unresolved discipline.", "limit": "No actual study or token-level installation evidence."},
+    {"id": "elementary-countermodels", "kind": "new_project_specific_counterexamples_using_established_methods", "locators": ["R166 note §§3-4", "verify_installation.py"], "use": "Permutation and deterministic structural-model witnesses.", "limit": "Permutation invariance, causal models and mediation are established methods; no historical novelty claim."}
+  ],
+  "search_scope": "No new literature search was required: this round formalizes a gap against pinned primary project sources and elementary exact counterexamples. It does not make an exhaustive priority claim.",
+  "source_failures": []
+}

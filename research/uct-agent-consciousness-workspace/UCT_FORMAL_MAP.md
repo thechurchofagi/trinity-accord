@@ -577,3 +577,11 @@ Current R135 graph/source checks: [MAP_CHECK.json](records/R135_Capability_Prese
 Current R136 graph/source checks: [MAP_CHECK.json](records/R136_Causal_Translation_and_Query_Order_20261007/MAP_CHECK.json). Earlier reports remain historical snapshots.
 
 Current R137 graph/source checks: [MAP_CHECK.json](records/R137_Executable_Feedback_Interfaces_20261007/MAP_CHECK.json). Earlier reports remain historical snapshots.
+## R166 extension — same-token installation witness and mineness boundary
+
+R166-v1.0 has **452 nodes / 217 rules / 117 context links**. Six nodes and two explicit `all_of` routes extend the exact R165 prefix. The five-level ladder separates population profile, finite same-token view, actual installed relation, C1 experiential counterpart and familiar mineness interpretation. Exact permutation and bypass models prove that neither the first nor second alone entails installation.
+
+The positive route is conditional. A sufficient W1–W6 contract binds one actual `P/I/K/D`, independently grounds the anchor, requires endogenous binding and actual consumer use, and adds fidelity-checked local propagation plus mediator/cut discrimination. Together with the R157 grounded selector and R159 typed schema, it supports only the selected relation as installed on that instance. The existing R159 C1 transport then yields its experiential structural counterpart on the same `P/I/K/D/Phi/h`; R157's semantic residual still requires independent `B_min` before the familiar “felt bodily mineness” label. The contract is not necessary, was not empirically run, identifies no complete mechanism, adds no unique owner and is not a basal-experience gate.
+
+[English note](records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md), [proof ledger](records/R166_Token_Installation_Witness_20261008/PROOF_LEDGER.json), [gap ledger](records/R166_Token_Installation_Witness_20261008/GAP_LEDGER.json), [map audit](records/R166_Token_Installation_Witness_20261008/MAP_AUDIT.json), [exact checks](records/R166_Token_Installation_Witness_20261008/EXACT_CHECKS.json), [Chinese review](records/R166_Token_Installation_Witness_20261008/REVIEW_ZH.md).
+

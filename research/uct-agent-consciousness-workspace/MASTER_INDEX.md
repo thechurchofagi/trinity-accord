@@ -190,3 +190,9 @@ The mathematical map remains R149-v1.0 (391 nodes/188 rules). R151 adds the inte
 - [Previous index](MASTER_INDEX_THROUGH_R148.md), [previous handoff](HANDOFF_THROUGH_R148.md)
 
 No new published paper, empirical study or certified major breakthrough. TA19 source-coverage limitation and TA18 inference repairs remain explicit.
+## R166 — same-token body-frame installation witness
+
+R166 returns from population statistics to actual organization. It separates five levels: group profile, finite token view, actual installed `Anchor–Bind–Use`, C1 experiential counterpart and familiar mineness interpretation. A permutation counterexample blocks group-to-token inference; a path/bypass structural counterexample blocks trace-to-use inference. W1–W6 give a sufficient but non-necessary same-token evidence contract with mediator/cut discrimination. On the same admitted C1 instance, the witnessed relation has an experiential structural counterpart, while independent `B_min` remains required for familiar felt mineness.
+
+Read [current handoff](records/R166_Token_Installation_Witness_20261008/CURRENT_HANDOFF.md), [English note](records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md), [proof ledger](records/R166_Token_Installation_Witness_20261008/PROOF_LEDGER.json), [gap ledger](records/R166_Token_Installation_Witness_20261008/GAP_LEDGER.json), [audit](records/R166_Token_Installation_Witness_20261008/MAP_AUDIT.json) and [checks](records/R166_Token_Installation_Witness_20261008/EXACT_CHECKS.json). Map R166-v1.0: 452/217/117, new 6/2. No apparatus or token was tested; no complete mechanism, B_min/F_O, unique owner or basal-experience gate is claimed. Next: an ethically admissible, token-preserving W2–W5 architecture with explicit redundancy and compensation alternatives.
+

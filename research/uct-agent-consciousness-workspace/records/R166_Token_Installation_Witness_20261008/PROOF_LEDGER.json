@@ -1,0 +1,53 @@
+{
+  "schema": "UCT_R166_PROOF_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R166-P1",
+      "node": "R166:POPULATION_TOKEN_NONENTAILMENT",
+      "type": "exact_permutation_counterexample",
+      "full_claim": "No permutation-invariant population profile alone identifies the truth value of a nonconstant binary response at a named token, because swapping a 1 and 0 preserves the multiset and all such statistics while changing that named coordinate.",
+      "domain": "Every finite nonconstant binary vector of length at least two; executable enumeration covers lengths two through six.",
+      "all_premises": ["the statistic is permutation invariant", "the response vector is nonconstant", "the target is a named token rather than only the multiset"],
+      "proof_or_source": "Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §3; elementary swap argument; 114 exact bounded cases.",
+      "counterexample_or_limit": "A token-specific longitudinal/measurement bridge can add evidence; only population summary alone is blocked.",
+      "status": "PROVED_EXACTLY_WITH_BOUNDED_ENUMERATION",
+      "thought_experiment_role": "Human-realized-agent and copy/swap cases prevent group or report invariants from fixing the actual bearer relation."
+    },
+    {
+      "id": "R166-P2",
+      "node": "R166:FINITE_TRACE_INSTALLATION_NONENTAILMENT",
+      "type": "exact_structural_causal_counterexample",
+      "full_claim": "Natural and upstream-intervention traces can agree completely between a k-mediated path model and an r-to-u bypass, so those traces alone do not entail installed use of k; an off-natural do(k) intervention discriminates the declared pair.",
+      "domain": "Two deterministic binary structural models r:=b,k:=r,u:=k and r:=b,k:=r,u:=r under the stated do semantics.",
+      "all_premises": ["r,k,u are observed in the finite interface view", "natural inputs and do(r) are the available initial evidence", "installed use requires k to contribute to u in the declared candidate"],
+      "proof_or_source": "Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §4; substitution and exhaustive binary check.",
+      "counterexample_or_limit": "do(k) evidence remains relative to realization, fidelity, consistency, locality and exclusion assumptions; complete organization is not identified.",
+      "status": "PROVED_EXACTLY_WITH_EXHAUSTIVE_BINARY_CHECK",
+      "thought_experiment_role": "Abacus/calculator and copy/swap distinguish a mirrored or dormant state from a used state."
+    },
+    {
+      "id": "R166-P3",
+      "node": "R166:WITNESSED_FRAME_INSTALLATION",
+      "type": "conditional_application_theorem",
+      "full_claim": "The R157 grounded selector, R159 typed Anchor-Bind-Use schema and all W1-W6 clauses jointly support the selected relation as actually installed in one fixed P/I/K/D instance.",
+      "domain": "One common actual token and interval with a fixed realization map, physically grounded anchor, actual endogenous binding/use, valid local propagation and bypass discrimination.",
+      "all_premises": ["same actual bearer, interval, complete signature and sorted occurrences", "independent physical grounding", "actual occurrence and consumer use", "valid intervention delivery and measurement", "valid mediation/cut assumptions", "bounded four-status discipline"],
+      "proof_or_source": "Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §§5-6; contract application argument.",
+      "counterexample_or_limit": "Sufficient not necessary; no actual apparatus/token is supplied; false or unsupported clauses leave the application unresolved.",
+      "status": "PROVED_CONDITIONALLY_NOT_EMPIRICALLY_INSTANTIATED",
+      "thought_experiment_role": "All four families test bearer, formation, use and report independence."
+    },
+    {
+      "id": "R166-P4",
+      "node": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+      "type": "conditional_C1_application_and_nonentailment",
+      "full_claim": "On the identical admitted C1 instance, the witnessed K-relation has its experiential structural counterpart by R159 transport, while R157 semantic underdetermination still prevents the familiar felt-mineness label without an independent B_min bridge.",
+      "domain": "One common P/I/K/D/Phi/h instance and one selected relation; familiar target semantics remain external to K.",
+      "all_premises": ["witnessed actual installation", "R159 same-instance C1 transport", "correct sorting and transported parameters", "R157 semantic residual", "independent B_min for any familiar-mineness interpretation"],
+      "proof_or_source": "Token_Installation_Witness_and_Mineness_Boundary_v0_1.md §§6-7; existing R157/R159 arguments.",
+      "counterexample_or_limit": "Does not derive C1, validate B_min, require body-frame organization for experience or select a unique owner.",
+      "status": "PROVED_CONDITIONALLY_WITH_OPEN_SEMANTIC_BRIDGE",
+      "thought_experiment_role": "Ancestor/formation separates selected-coordinate formation from basal experience; human-realized agent preserves nesting and overlap."
+    }
+  ]
+}

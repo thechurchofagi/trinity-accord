@@ -1,0 +1,26 @@
+{
+  "schema": "UCT_R166_MAP_AUDIT/v1",
+  "round": "R166",
+  "direction_checks": [
+    {"stage": "after_topic_selection", "status": "PASS", "detail": "The problem is the actual-organization bridge requested after R165, not another statistical optimization."},
+    {"stage": "after_results", "status": "PASS", "detail": "The positive result is conditional same-token installation plus existing C1 transport; counterexamples and semantic residual remain visible."},
+    {"stage": "before_save", "status": "PASS", "detail": "No rule derives C1, B_min, familiar ownership, unique owner or basal experience from a profile, finite trace or witness status."}
+  ],
+  "node_audit": {
+    "status": "PASS",
+    "checks": ["Every R166 node states object domain, quantifiers, bearer/time/signature, source, proof/status, counterexample/limits and purpose.", "E0 population, E1 finite view, E2 actual installation, E3 experiential counterpart and E4 familiar interpretation are separately typed.", "Actuality is asserted only conditionally after the full witness package; no actual apparatus or participant token is claimed."]
+  },
+  "rule_audit": {
+    "status": "PASS",
+    "rules": [
+      {"id": "r166_witnessed_frame_installation", "all_of": ["R157:DEFINABLE_SELECTOR_SETUP", "R159:ANCHOR_BINDING_CONTRACT", "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT"], "joint_satisfiability": "A physically realized anchor can bind an occurring representation used by a consumer while the mediator intervention discriminates a bypass; this is an abstract consistency witness, not empirical instantiation.", "direction": "grounded selector + typed schema + empirical witness -> bounded installation support only"},
+      {"id": "r166_experiential_counterpart_boundary", "all_of": ["R157:SEMANTIC_RESIDUAL", "R159:FRAME_RELATION_TRANSPORT", "R166:WITNESSED_FRAME_INSTALLATION"], "joint_satisfiability": "The same C1 instance can contain the witnessed relation while multiple metalinguistic label assignments remain possible.", "direction": "actual installed relation + same-instance C1 transport + semantic residual -> structural counterpart and open familiar label"}
+    ]
+  },
+  "unconnected_concept_audit": {"status": "PASS", "detail": "The two counterexample nodes intentionally have no deductive outgoing rule: they block invalid inferences. Their purpose and downstream contract impact are recorded in proof/gap ledgers."},
+  "type_time_signature_audit": {"status": "PASS", "detail": "Population/session summary, named actual token, finite measurement view, abstract SCM, complete K/D instance, Phi/h counterpart, external anatomy, target semantics and reports are not exchanged."},
+  "evidence_direction_audit": {"status": "PASS", "detail": "Finite exact checks prove only the countermodel algebra and conjunction bookkeeping. They do not prove the theory, physical realization, intervention fidelity or experience."},
+  "purpose_audit": {"status": "PASS", "detail": "R166 advances the positive explanation of bodily relation inside experience while preserving C1, B_min openness, nested/overlapping processes and no basal-experience threshold."},
+  "graph_expectation": {"revision": "R166-v1.0", "nodes": 452, "rules": 217, "context_links": 117, "parent_prefix_nodes": 446, "parent_prefix_rules": 215},
+  "global_proof_claim": false
+}
