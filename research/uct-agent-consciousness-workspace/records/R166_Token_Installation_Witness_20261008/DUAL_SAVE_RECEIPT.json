@@ -1,0 +1,60 @@
+{
+  "schema": "UCT_R166_DUAL_SAVE_RECEIPT/v1",
+  "round": "R166",
+  "date": "2026-10-08",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "start_head": "86c95474d99a9916c4302e6898e045ce141634d4",
+    "core_checkpoint": "6b99b8fc738a997ab06df4c0a58f565a81688a05",
+    "map_audit_checkpoint": "bc092370345dabead603ed89505b9ec9555af8d9",
+    "validated_research_commit": "dd34bb9440872ed640285db0c8db50996b4aa02b",
+    "research_tree": "5ac9200ffd9c006f4ca57e4890adbd5c6d3af2fb",
+    "expected_sha_fast_forward": true,
+    "remote_research_readback": true,
+    "storage_receipt_commit_parent": "dd34bb9440872ed640285db0c8db50996b4aa02b"
+  },
+  "formal_state": {
+    "revision": "R166-v1.0",
+    "nodes": 452,
+    "rules": 217,
+    "context_links": 117,
+    "graph_sha256": "d75785550813ab8a8e9f7eacd13e83eb636ca221d3e95c0c74992d1c30d171b4",
+    "exact_checks_sha256": "2a1bc51945a07656468c15be893229ea435ea4512e2535db8ed3d6db38dad7d5",
+    "validation_sha256": "ee3532c740c683a189bc0df6c4067c103bcc50b54c5499c36f4f7215a8dc7ffd",
+    "validation_status": "PASS",
+    "validation_checks": 19
+  },
+  "fixed_handoff": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000f6fc81f99245eb492f2568ca",
+    "version": 10,
+    "bytes": 52869,
+    "sha256": "a30ee9fca1715165c123934ee576beafe5debed6b79213f5409f9dae6e6d82b5",
+    "exact_byte_readback": true
+  },
+  "cumulative_increment": {
+    "library_file_id": "libfile_645bcff68958819195ae2952f70eb6a0",
+    "file_id": "file_00000000315081f5bfe3c70adbe821bd",
+    "version": 0,
+    "filename": "UCT_R157_R166_Cumulative_Increment_20261008.zip",
+    "bytes": 700337,
+    "sha256": "6382fce79ee08f22d6f52f86aa5188d7d9af640397bc2c3dd379604581cc6360",
+    "payload_members": 159,
+    "zip_members": 160,
+    "exact_byte_readback": true,
+    "restore_files_excluding_current_increment_manifest": 535,
+    "restore_member_hashes": "PASS",
+    "scope": "Cumulative increment relative to exact R156 baseline; not a standalone full backup, repository or Git history."
+  },
+  "verification_file": {
+    "library_file_id": "libfile_cbb8a07898708191b4f9e2c9447c666d",
+    "file_id": "file_00000000ac5481f4b2361c2c19339cde",
+    "version": 0,
+    "bytes": 2607,
+    "sha256": "f10a061237749b2f848e8d16e5685cbf263495c4a87b44c83e9c9781cb498677",
+    "exact_byte_readback": true
+  },
+  "next_question": "How can W2-W5 be instantiated in one ethically admissible token-preserving anchor-mediator-consumer architecture with explicit redundancy and compensation alternatives, while keeping ownership report out of the physical-role definition?",
+  "status": "DUAL_SAVE_VERIFIED"
+}

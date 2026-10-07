@@ -14,6 +14,8 @@ Map R166-v1.0 has 452 nodes / 217 rules / 117 context links, new 6/2 with exact 
 
 W1–W6 is sufficient, not shown necessary. Actual realization, fidelity, locality/exclusion, hidden redundancy/compensation, token-preserving intervention order and complete organization are open. R161 population evidence does not automatically satisfy the contract. Missing clauses yield unresolved; valid contradiction refutes only the declared candidate. The next question is one ethical token-preserving W2–W5 architecture with explicit redundancy and compensation alternatives and fixed refute/unresolved boundaries.
 
-## Recovery state
+## Verified recovery state
 
-The core note, round record, exact checker and results are remotely recoverable at the checkpoint head above. The final map/audit commit, fixed Library handoff update and R157–R166 cumulative increment are pending until validation and two-destination verification complete. Fetch the latest remote branch before any continuation; do not overwrite a newer verified head with this interim note.
+The validated GitHub research commit is `dd34bb9440872ed640285db0c8db50996b4aa02b`, tree `5ac9200ffd9c006f4ca57e4890adbd5c6d3af2fb`. The fixed master handoff retained stable identity `libfile_4175a81748fc819187fa8f5771f056fa` and advanced from version 9 to version 10; its 52,869 bytes have SHA256 `a30ee9fca1715165c123934ee576beafe5debed6b79213f5409f9dae6e6d82b5` and exact readback passed.
+
+The R157–R166 cumulative increment is `libfile_645bcff68958819195ae2952f70eb6a0`, 700,337 bytes, SHA256 `6382fce79ee08f22d6f52f86aa5188d7d9af640397bc2c3dd379604581cc6360`; it is an overlay relative to the exact R156 baseline, not a complete standalone backup. Its 159 payload hashes pass and baseline plus overlay restores 535 working files. Independent verification is `libfile_cbb8a07898708191b4f9e2c9447c666d`, SHA256 `f10a061237749b2f848e8d16e5685cbf263495c4a87b44c83e9c9781cb498677`; exact readback passed. Fetch the latest GitHub head and fixed handoff version before continuing because the storage-receipt commit follows the packaged research commit.
