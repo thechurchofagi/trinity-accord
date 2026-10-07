@@ -1,0 +1,13 @@
+{
+  "schema": "UCT_R162_AMENDMENTS/v1",
+  "amendments": [
+    {
+      "id": "R162-A1",
+      "stage": "pre-save formal-map audit",
+      "initial_defect": "r162_independent_freeze_coverage omitted the planwise conditional-coverage premise and could be read as deriving calibration from independence alone.",
+      "correction": "Inserted R162:PLANWISE_COVERAGE_PREMISE into the graph and rule all_of list; documented the restricted Gaussian fallback discharge and counterexample.",
+      "history_policy": "The defect remains recorded in GAP_LEDGER R162-G9; it was corrected before any R162 commit or persistent backup.",
+      "status": "REPAIRED_BEFORE_SAVE"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "schema": "UCT_R162_VALIDATION/v1",
+  "status": "PASS_WITH_OPEN_EMPIRICAL_STATISTICAL_AND_SEMANTIC_GAPS",
+  "checks": {"round_record_five_fields": true, "english_note_present": true, "proof_source_gap_and_amendment_ledgers_present": true, "exact_verifier_reproduces_saved_results": true, "graph_parent_sha_matches": true, "graph_revision": "R162-v1.0", "graph_nodes": 430, "graph_rules": 206, "graph_context_links": 117, "parent_prefix_preserved": true, "unique_ids_and_endpoints": true, "dag": true, "all_of_hidden_premise_repaired": true, "three_direction_checks_recorded": true, "no_published_bytes_modified": true, "no_raw_public_data_reanalysis_claimed": true, "no_experiment_ethics_approval_or_recruitment_claimed": true, "no_DOI_OTS_AR_CI_or_deployment": true},
+  "bounded_exact_counts": {"covariance_psd_cases": 9, "absolute_interval_cases": 165, "finite_pilot_confirm_pairs": 700, "pilot_variance_boundary_cases": 2, "normal_screen_rows": 5},
+  "nonclaims": ["No exact-protocol pilot data, human effect or practical confirmatory sample size.", "No Gaussianity or missingness validation.", "No selective proprioceptive pathway proof or complete neural organization.", "No B_min, F_O or basal-experience witness.", "No proof-assistant, independent statistical review or global semantic consistency proof."]
+}

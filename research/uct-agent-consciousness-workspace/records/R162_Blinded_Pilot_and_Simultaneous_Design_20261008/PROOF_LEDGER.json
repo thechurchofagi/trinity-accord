@@ -1,0 +1,70 @@
+{
+  "schema": "UCT_R162_PROOF_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R162:PUBLIC_COMPONENT_DATA_SCOPE",
+      "kind": "EMPIRICAL_SOURCE_SCOPE_AUDIT",
+      "statement": "The inspected public Ruttle, Mostafa and Le Franc data routes support separate visuomotor/localization or tendon-vibration/visual-context components, but none jointly observes the exact R161 q-by-r crossing, both R161 readouts and active-versus-bony vibration contrast in the same participants.",
+      "domain": "The three primary source/data routes inspected in R162; not an exhaustive registry search or claim that no future/private dataset exists.",
+      "all_premises": [],
+      "proof_or_source": "Primary methods and data-availability statements; SOURCE_LEDGER.json records exact access scope. OSF file endpoints were not enumerable in the available interface and no raw file was reanalysed.",
+      "counterexamples_and_limits": "An undiscovered exact crossed dataset would supersede this finite source audit but not the general separate-marginal theorem.",
+      "status": "SOURCE_SCOPE_RESULT_NOT_EXHAUSTIVE",
+      "thought_experiment_role": "Human-realized-agent case blocks cross-person data from being treated as one joint cluster."
+    },
+    {
+      "id": "R162:COVARIANCE_NONIDENTIFICATION",
+      "kind": "GENERAL_MATHEMATICAL_NONENTAILMENT_RESULT",
+      "statement": "Separate datasets that identify only marginal laws of required contrast blocks do not generally identify their cross covariance or the variance of dominance differences. With unit marginal variances, covariance rho in [-1,1] leaves both marginals fixed while Var(U-V)=2-2rho ranges from 0 to 4.",
+      "domain": "Any two required contrast components or blocks observed only in disjoint samples, absent a supplied joint-coupling assumption.",
+      "all_premises": [
+        {
+          "rule": "r162_covariance_nonidentification",
+          "all_of": ["R161:CONCRETE_CROSSED_PROTOCOL", "R162:PUBLIC_COMPONENT_DATA_SCOPE"]
+        }
+      ],
+      "proof_or_source": "Positive-semidefinite 2-by-2 covariance family Sigma_rho; exact verifier checks nine rational correlations and the full [0,4] variance range.",
+      "counterexamples_and_limits": "A study measuring the full W vector jointly, or a separately justified structural coupling model, can identify/restrict the covariance. Assuming rho=0 is extra, not source-derived.",
+      "status": "MANUAL_GENERAL_PROOF_WITH_EXACT_FINITE_WITNESSES",
+      "thought_experiment_role": "Copy/swap preserves every marginal file while changing unobserved pairing and difference variance."
+    },
+    {
+      "id": "R162:INDEPENDENT_PILOT_FREEZE_CONTRACT",
+      "kind": "PROSPECTIVE_DESIGN_DEFINITION",
+      "statement": "Run the exact R161 protocol in a disjoint external pilot; return only nuisance covariance, variance bounds, completion/fidelity and diagnostic summaries; hide means and R161 labels; freeze the complete confirmatory plan; never pool pilot participants into primary confirmatory intervals. Failed gates yield PILOT_INVALID_PROTOCOL and excessive required N yields DESIGN_NOT_FEASIBLE.",
+      "domain": "Prospective ethics-approved implementation of the fixed R161 protocol. No pilot, ethics approval or recruitment occurred in R162.",
+      "all_premises": [],
+      "proof_or_source": "Design definition motivated by established external/internal-pilot literature and UCT I no-post-hoc-rescue discipline. Gaussian variance-UCB precision is an explicitly conditional component.",
+      "counterexamples_and_limits": "An internal pilot that reuses participants requires separate adaptive calibration. Blinding as a label, without conditional coverage, is insufficient. Gaussianity and missingness remain unvalidated.",
+      "status": "DECLARED_CANDIDATE_DESIGN_NOT_RUN",
+      "thought_experiment_role": "Abacus/calculator and copy/swap distinguish equal marginal summaries from the required joint object."
+    },
+    {
+      "id": "R162:PLANWISE_COVERAGE_PREMISE",
+      "kind": "EXPLICIT_STATISTICAL_PREMISE",
+      "statement": "For every pilot record in the declared support and every frozen plan selected from it, the interval procedure applied to independent confirmatory data has conditional simultaneous coverage at least 1-alpha under the declared model and target population.",
+      "domain": "Every plan in the range of the prospective pilot-selection map for one fixed R161 protocol version and declared target population.",
+      "all_premises": [],
+      "proof_or_source": "This is an explicit premise, not a consequence of independence. Section 6 conditionally discharges it only for complete i.i.d. multivariate-Gaussian vectors and the frozen Bonferroni Student family.",
+      "counterexamples_and_limits": "Independent data do not fix a misspecified interval, invalid missingness rule or unproved adaptive family.",
+      "status": "EXPLICIT_PREMISE_CONDITIONALLY_DISCHARGED_FOR_SIMPLE_GAUSSIAN_FALLBACK_ONLY",
+      "thought_experiment_role": "Copy/swap prevents data-record separation from being mistaken for statistical calibration."
+    },
+    {
+      "id": "R162:INDEPENDENT_FREEZE_COVERAGE",
+      "kind": "CONDITIONAL_COVERAGE_THEOREM",
+      "statement": "If a pilot-selected plan is frozen before independent confirmatory data and every plan in the selection range has conditional simultaneous coverage at least 1-alpha, then the randomly selected plan has unconditional simultaneous coverage at least 1-alpha. Componentwise absolute-value interval transforms preserve coverage and may feed the R161 min/max decision.",
+      "domain": "One fixed R161 protocol version; independent/disjoint pilot and confirmatory records or an equivalent valid conditional-calibration theorem; all six R161 gates; declared complete-vector model and target population.",
+      "all_premises": [
+        {
+          "rule": "r162_independent_freeze_coverage",
+          "all_of": ["R161:THREE_WAY_BODY_DECISION", "R162:INDEPENDENT_PILOT_FREEZE_CONTRACT", "R162:PLANWISE_COVERAGE_PREMISE"]
+        }
+      ],
+      "proof_or_source": "Tower property applied to the plan-conditional coverage statement; deterministic absolute-value image of a covering interval. Exact verifier checks 700 pilot/confirm outcome pairs and 165 rational signed interval/truth cases.",
+      "counterexamples_and_limits": "Same-data adaptive tail choice doubles .05 to .10 in the saved finite witness. The theorem does not validate the Gaussian model, a bootstrap, missingness or physical fidelity.",
+      "status": "MANUAL_GENERAL_PROOF_WITH_EXACT_FINITE_SANITY_CHECKS",
+      "thought_experiment_role": "Copy/swap shows why plan selection and confirmatory evidence must remain distinct records."
+    }
+  ]
+}

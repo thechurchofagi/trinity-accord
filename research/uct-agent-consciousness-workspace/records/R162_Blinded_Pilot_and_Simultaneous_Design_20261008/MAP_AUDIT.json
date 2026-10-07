@@ -1,0 +1,27 @@
+{
+  "schema": "UCT_R162_MAP_AUDIT/v1",
+  "revision": "R162-v1.0",
+  "parent": {"revision": "R161-v1.0", "graph_sha256": "30d3b22655b0c94e14ba6234dac6a639b603271624ee426adf832946c8c76112", "nodes": 425, "rules": 204, "context_links": 117},
+  "current": {"graph_sha256": "56e85bb9a91798a67c26d49488cfa10968e26804c569877e67eeecc47b0fb2e0", "nodes": 430, "rules": 206, "context_links": 117, "new_nodes": 5, "new_rules": 2},
+  "structural_checks": {"parent_node_prefix_fieldwise_equal": true, "parent_rule_prefix_fieldwise_equal": true, "context_links_fieldwise_equal": true, "unique_node_ids": true, "unique_rule_ids": true, "all_endpoints_exist": true, "dag": true},
+  "all_of_review": [
+    {"rule": "r162_covariance_nonidentification", "all_of": ["R161:CONCRETE_CROSSED_PROTOCOL", "R162:PUBLIC_COMPONENT_DATA_SCOPE"], "jointly_satisfiable": true, "review": "The fixed R161 protocol can require a joint eight-component vector while the three inspected source routes contain only separate components. The Sigma_rho family witnesses non-identification without asserting universal data absence."},
+    {"rule": "r162_independent_freeze_coverage", "all_of": ["R161:THREE_WAY_BODY_DECISION", "R162:INDEPENDENT_PILOT_FREEZE_CONTRACT", "R162:PLANWISE_COVERAGE_PREMISE"], "jointly_satisfiable": true, "review": "A fixed R161 decision, disjoint nuisance-only pilot and planwise-valid confirmatory intervals can coexist. The explicit third premise repairs the initial invalid shortcut from independence to calibration."}
+  ],
+  "concept_quantifier_scope_review": {
+    "source_audit": "Exactly three named public routes; no exhaustive absence claim.",
+    "covariance": "One joint participant-level eight-contrast vector; separate marginal samples are not paired observations.",
+    "pilot": "Prospective disjoint participants under the exact protocol; no pilot, ethics approval or recruitment occurred.",
+    "coverage": "Every pilot record and every selected plan in its range; the simple discharge is Gaussian complete-vector only.",
+    "decision": "One frozen simultaneous interval family, fixed contrast order and all six inherited gates.",
+    "phenomenal_target": "C1 remains tokenwise; B_min and F_O are not identified by population covariance or decisions."
+  },
+  "joint_consistency": {"covariance_psd_cases": 9, "absolute_interval_cases": 165, "finite_pilot_confirm_pairs": 700, "same_data_counterexample_fixed_size": "1/20", "same_data_counterexample_adaptive_size": "1/10", "all_exact_checks_pass": true, "note": "Finite checks verify bounded algebra and implementation only; they do not validate Gaussianity, missingness, human effects or global semantics."},
+  "object_time_signature_actuality_review": {"pass": true, "detail": "Pilot and confirmatory participants, marginal source samples, trial tokens, population parameters and one actual C1 organization remain distinct. No common h or cross-token phenomenal bearer is inferred."},
+  "evidence_level_review": {"public_source_scope": "primary methods/data-availability audit without raw-file reanalysis", "mathematics": "manual proof plus exact finite witnesses", "design": "prospective definition not run", "coverage": "conditional theorem with an explicit statistical premise", "phenomenology": "open interpretation boundary"},
+  "inference_direction_review": {"no_independence_to_calibration_shortcut": true, "no_marginals_to_joint_covariance": true, "no_population_statistic_to_C1": true, "no_profile_to_B_min_or_F_O": true, "no_failed_gate_to_exclusion": true, "no_high_level_gate_for_basal_experience": true, "no_exclusive_owner": true, "no_assistant_consciousness_claim": true},
+  "unlinked_concept_review": {"data_availability_vs_joint_identification": "distinct", "independence_vs_interval_validity": "distinct after R162-A1", "pilot_precision_vs_confirmatory_power": "distinct", "completer_target_vs_recruited_target": "distinct", "physical_fidelity_vs_statistical_precision": "distinct", "cross_trial_population_effect_vs_within_experience_relation": "distinct", "body_profile_vs_felt_mineness": "distinct"},
+  "direction_checks": {"after_topic_selection": "PASS", "after_result_formation": "PASS_WITH_OPEN_GAUSSIAN_MISSINGNESS_AND_PHENOMENAL_GAPS", "before_save": "PASS_WITH_OPEN_GAUSSIAN_MISSINGNESS_AND_PHENOMENAL_GAPS"},
+  "purpose_review": "R162 advances the actual-organization program by specifying what joint uncertainty object the concrete body/tool proposal needs, proving why component datasets cannot supply it, and defining a nonleaking prospective route. It does not turn measurement convenience into a consciousness criterion.",
+  "open_gaps": ["R162-G1", "R162-G2", "R162-G3", "R162-G4", "R162-G5", "R162-G6", "R162-G7", "R162-G8", "R162-G9"]
+}

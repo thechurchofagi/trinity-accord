@@ -1,3 +1,9 @@
+## R162 current priority — independent pilot without a calibration shortcut
+
+R162 narrows the next empirical step. Three inspected public data routes contain useful components but not the exact joint R161 eight-contrast vector, so their marginals cannot identify cross covariance. An external, disjoint, nuisance-only pilot is specified, with failure states `PILOT_INVALID_PROTOCOL` and `DESIGN_NOT_FEASIBLE` rather than theoretical exclusion.
+
+Formal audit repaired an initial hidden premise: data independence prevents reuse leakage but does not make an interval valid. `R162:PLANWISE_COVERAGE_PREMISE` is now a separate premise of the coverage theorem; the saved fallback discharges it only for complete i.i.d. Gaussian vectors and fixed Bonferroni Student intervals. Map R162-v1.0: 430/206, new 5/2, inherited 425/204 and 117 context links exact. Continue with a frozen simulation/missingness stress test, not recruitment. See `records/R162_Blinded_Pilot_and_Simultaneous_Design_20261008/CURRENT_HANDOFF.md`.
+
 ## R161 current priority — concrete fidelity and falsification contract
 
 R161 supplies a prospective implementation of the R160 profile: a counterbalanced 100 Hz wrist-tendon-vibration × 30-degree cursor-rotation protocol, independently reinduced body/tool probes, common bounded angular scores and worst-case-over-interaction estimands. Six fidelity/washout gates define an explicit invalid state. Simultaneous intervals support confirm, strong exclusion or unresolved for the fixed body-dominant candidate; no failed manipulation may be relabeled as a negative UCT result.

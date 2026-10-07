@@ -246,6 +246,14 @@ TA17 已形式化非排他当前自我归属 M_t、功能状态和继承等六�
 
 D 是《From Shutdown Resistance to Self-Continuation Control》的本地图标识，不是将论文正式改名为 UCT IV。A 未定位到正式 v1.3；若出现新版必须重新核对来源、版本和差异，不能凭记忆替换。精确 commit/path/blob/SHA-256 见总图 source_versions 与来源清单。main 索引不是唯一版本依据。
 
+## R162 接续更新 — R162-v1.0
+
+2026-10-08：总图 430 节点/206 规则，R161 的 425/204 前缀和 117 条 context link 保留。正文 `records/R162_Blinded_Pilot_and_Simultaneous_Design_20261008/Independent_Pilot_and_Covariance_Identification_v0_1.md`。
+
+分别来自不同参与者的组件数据只给边缘分布，不能恢复 R161 八维对比向量的交叉协方差；单位边缘下 `Var(U-V)=2-2rho` 可遍历 `[0,4]`。候选路线是独立外部试点，只输出干扰参数/门禁摘要并冻结确认方案，不合并样本。
+
+审计发现并修复隐藏前提：独立性不推出区间覆盖率。新增 `R162:PLANWISE_COVERAGE_PREMISE`，要求选择映射值域内每个冻结方案都满足条件同时覆盖；当前只在完整多元高斯向量和固定 Bonferroni-Student 区间下条件性履行。下一轮先做偏态、截断、顺序和缺失的冻结模拟压力测试，不招募，不删除六项门禁，不反推 C1/B_min/F_O。
+
 ## R161 接续更新 — R161-v1.0
 
 2026-10-08：总图 425 节点/204 规则，R160 的 422/202 前缀和 117 条 context link 保留。正文 `records/R161_Concrete_Intervention_and_Falsification_20261008/Concrete_Body_Tool_Protocol_and_Falsifier_v0_1.md`。

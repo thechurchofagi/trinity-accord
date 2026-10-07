@@ -1,3 +1,9 @@
+## R162 extension — covariance non-identification and planwise-valid freezing
+
+R162-v1.0 contains **430 nodes / 206 rules** (new 5/2), preserving all 425 R161 nodes, 204 rules and 117 context links fieldwise. New entries distinguish: a finite three-route source audit; general separate-marginal covariance non-identification; a prospective disjoint nuisance-only pilot contract; an explicit planwise conditional-coverage premise; and the tower-property coverage theorem.
+
+The coverage rule is deliberately three-premise `all_of`: the frozen R161 decision, independent pilot freeze contract and planwise coverage premise. Independence is not interval calibration. The current simple discharge is restricted to complete i.i.d. multivariate-Gaussian participant vectors with fixed Bonferroni Student intervals. No population statistic is linked to C1, B_min or F_O. Full audit: [R162 MAP_AUDIT](records/R162_Blinded_Pilot_and_Simultaneous_Design_20261008/MAP_AUDIT.json).
+
 ## R161 current priority — concrete crossed protocol and strong exclusion
 
 R161 adds `R161:CONCRETE_CROSSED_PROTOCOL`, `R161:ADMISSIBILITY_GATE` and `R161:THREE_WAY_BODY_DECISION`, with two conjunctive rules. The candidate crosses logged 100 Hz wrist-tendon vibration with a 30-degree cursor/tool transform, uses separately reinduced body/tool readouts, and defines diagonal minima/cross-effect maxima over the other factor. See the [English note](records/R161_Concrete_Intervention_and_Falsification_20261008/Concrete_Body_Tool_Protocol_and_Falsifier_v0_1.md) and [proof ledger](records/R161_Concrete_Intervention_and_Falsification_20261008/PROOF_LEDGER.json).

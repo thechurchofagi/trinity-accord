@@ -1,0 +1,67 @@
+{
+  "absolute_interval_transform": {
+    "all_magnitudes_covered": true,
+    "grid": ["-1", "-3/4", "-1/2", "-1/4", "0", "1/4", "1/2", "3/4", "1"],
+    "truth_in_interval_cases_checked": 165
+  },
+  "all_checks_pass": true,
+  "covariance_nonidentification": {
+    "all_covariance_matrices_psd": true,
+    "cases": [
+      {"determinant": "0", "rho": "-1", "variance_u_minus_v": "4"},
+      {"determinant": "7/16", "rho": "-3/4", "variance_u_minus_v": "7/2"},
+      {"determinant": "3/4", "rho": "-1/2", "variance_u_minus_v": "3"},
+      {"determinant": "15/16", "rho": "-1/4", "variance_u_minus_v": "5/2"},
+      {"determinant": "1", "rho": "0", "variance_u_minus_v": "2"},
+      {"determinant": "15/16", "rho": "1/4", "variance_u_minus_v": "3/2"},
+      {"determinant": "3/4", "rho": "1/2", "variance_u_minus_v": "1"},
+      {"determinant": "7/16", "rho": "3/4", "variance_u_minus_v": "1/2"},
+      {"determinant": "0", "rho": "1", "variance_u_minus_v": "0"}
+    ],
+    "rational_correlations_checked": 9,
+    "same_marginal_variances": true,
+    "variance_difference_range": ["0", "4"]
+  },
+  "independent_pilot_coverage": {
+    "conditional_coverage": "19/20",
+    "confirmatory_states": 100,
+    "pilot_states": 7,
+    "unconditional_coverage": "19/20"
+  },
+  "limits": [
+    "Finite rational examples and planning arithmetic only.",
+    "No raw public data file was reanalysed.",
+    "No Gaussianity, missingness, fidelity, human effect, C1, B_min, or F_O validation."
+  ],
+  "normal_screen": {
+    "alpha_familywise": 0.05,
+    "half_width": 0.05,
+    "m": 8,
+    "status": "ILLUSTRATIVE_SCREEN_NOT_SAMPLE_SIZE_RECOMMENDATION",
+    "table": [
+      {"illustrative_sd": 0.1, "normal_screen_n": 30},
+      {"illustrative_sd": 0.15, "normal_screen_n": 68},
+      {"illustrative_sd": 0.2, "normal_screen_n": 120},
+      {"illustrative_sd": 0.25, "normal_screen_n": 187},
+      {"illustrative_sd": 0.3, "normal_screen_n": 270}
+    ],
+    "two_sided_bonferroni_normal_critical": 2.7343687865331767
+  },
+  "pilot_variance_precision": {
+    "alpha_variance": 0.05,
+    "boundary_cases": [
+      {"n_complete": 35, "upper_variance_factor": 2.0121638383889238},
+      {"n_complete": 36, "upper_variance_factor": 1.9889859139403343}
+    ],
+    "m": 8,
+    "model": "i.i.d. complete multivariate Gaussian participant vectors",
+    "smallest_complete_pilot_n": 36,
+    "target_upper_variance_factor": 2.0
+  },
+  "same_data_selection_counterexample": {
+    "adaptive_selected_size": "1/10",
+    "each_fixed_test_size": "1/20"
+  },
+  "schema": "UCT_R162_EXACT_CHECKS/v1",
+  "scipy_version": "1.17.0"
+}

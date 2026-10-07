@@ -1,0 +1,86 @@
+{
+  "schema": "UCT_R162_GAP_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R162-G1",
+      "location": "public component-data audit",
+      "issue": "No inspected public source observes the exact eight-component R161 contrast vector jointly.",
+      "downstream_impact": ["R162:PUBLIC_COMPONENT_DATA_SCOPE", "R162:COVARIANCE_NONIDENTIFICATION", "R161:THREE_WAY_BODY_DECISION"],
+      "counterexample": "Ruttle supplies rotation/localization without vibration; Le Franc supplies tendon vibration without bony control or R161 tool readout.",
+      "repaired": "Sources are typed as component evidence only and covariance borrowing is prohibited.",
+      "unresolved": "An undiscovered/private exact dataset or a new exact-protocol pilot could supply the joint vector."
+    },
+    {
+      "id": "R162-G2",
+      "location": "Gaussian complete-vector model",
+      "issue": "Student and chi-square formulas require i.i.d. complete multivariate Gaussian participant vectors; clipping and min/max effects can violate approximation quality.",
+      "downstream_impact": ["R162:INDEPENDENT_PILOT_FREEZE_CONTRACT", "R162:INDEPENDENT_FREEZE_COVERAGE"],
+      "counterexample": "A point mass at clipping value one plus a skewed continuous component is bounded but non-Gaussian and can distort small-sample t coverage.",
+      "repaired": "Every theorem states the model; no actual coverage is claimed. Bonferroni avoids an independence assumption but not marginal model assumptions.",
+      "unresolved": "Prospective simulations and pilot diagnostics must evaluate robust or randomization-based alternatives."
+    },
+    {
+      "id": "R162-G3",
+      "location": "missingness and target population",
+      "issue": "Four-session completion is uncertain; completer covariance may not transport to all recruited participants.",
+      "downstream_impact": ["R162:INDEPENDENT_PILOT_FREEZE_CONTRACT", "R161:CONCRETE_CROSSED_PROTOCOL"],
+      "counterexample": "Participants with strong vibration discomfort can disproportionately miss later sessions, changing both means and covariance.",
+      "repaired": "The simple proof is explicitly completer-scoped; outcome-dependent deletion is forbidden and excessive attrition yields DESIGN_NOT_FEASIBLE.",
+      "unresolved": "No validated IPW, imputation or pattern-mixture sensitivity contract exists."
+    },
+    {
+      "id": "R162-G4",
+      "location": "pilot blinding and data access",
+      "issue": "A nominally blinded pilot can leak condition means or allow analysts to tune clearances, epsilon or transformations.",
+      "downstream_impact": ["R162:INDEPENDENT_PILOT_FREEZE_CONTRACT", "R162:INDEPENDENT_FREEZE_COVERAGE"],
+      "counterexample": "The saved 100-outcome witness doubles size from .05 to .10 when the same outcome selects its favorable tail.",
+      "repaired": "Pilot outputs are restricted to nuisance/fidelity summaries; confirmatory participants are disjoint; the full plan and code are frozen.",
+      "unresolved": "Operational role separation and an audit trail need implementation and independent oversight."
+    },
+    {
+      "id": "R162-G5",
+      "location": "pilot and confirmatory feasibility",
+      "issue": "Thirty-six complete pilot participants only attain a chosen Gaussian variance-UCB precision factor; it does not ensure practical confirmatory N or ethical feasibility.",
+      "downstream_impact": ["R162:INDEPENDENT_PILOT_FREEZE_CONTRACT"],
+      "counterexample": "At half-width .05, an illustrative SD .30 gives a normal screen of 270 confirmatory completers.",
+      "repaired": "The table is labeled illustrative; N_max and planning clearance must be fixed by scientific/ethical review, and infeasibility is a valid terminal design status.",
+      "unresolved": "No exact-protocol variance, effect clearance, budget or ethics-approved N_max exists."
+    },
+    {
+      "id": "R162-G6",
+      "location": "R161 pathway and measurement fidelity",
+      "issue": "A precise covariance model does not repair tendon impurity, readout confounds, decay or normalization dependence.",
+      "downstream_impact": ["R161:ADMISSIBILITY_GATE", "R161-G1", "R161-G2", "R161-G3", "R161-G4"],
+      "counterexample": "Highly precise localization changes can still be caused by response mapping rather than the intended body pathway.",
+      "repaired": "All six R161 gates and every R161 gap are inherited; pilot gate failure blocks classification.",
+      "unresolved": "Actual selectivity and construct validity require independent evidence."
+    },
+    {
+      "id": "R162-G7",
+      "location": "UCT interpretation boundary",
+      "issue": "Population covariance and profile decisions do not identify one complete organization, B_min or familiar F_O.",
+      "downstream_impact": ["R160:TOKENWISE_APPLICATION_BOUNDARY", "R159:SELECTED_OWNERSHIP_APPLICATION", "F153-11", "F153-17"],
+      "counterexample": "Identical physical contrast statistics can coexist with different unmeasured reports, while reports can change without the physical profile.",
+      "repaired": "The note keeps tokenwise C1, cross-token estimation and phenomenal interpretation separate.",
+      "unresolved": "Independent selected-target semantics and sufficiency/reflection evidence remain absent."
+    },
+    {
+      "id": "R162-G8",
+      "location": "formal and source verification",
+      "issue": "The theorem proofs are manual; the public-data search is targeted and direct raw-file endpoints were not fully accessible.",
+      "downstream_impact": ["global formal confidence", "source exhaustiveness", "novelty"],
+      "counterexample": "A future exact crossed dataset or a formalization error could narrow or revise the present result.",
+      "repaired": "Retrieval failures, finite checks, source scopes and nonclaims are explicit.",
+      "unresolved": "Independent statistical review, broader data registry search and proof-assistant formalization remain open."
+    },
+    {
+      "id": "R162-G9",
+      "location": "initial draft of r162_independent_freeze_coverage",
+      "issue": "The first rule draft treated the independent-pilot contract as if it entailed valid conditional intervals; independence blocks data reuse but does not establish calibration.",
+      "downstream_impact": ["R162:INDEPENDENT_FREEZE_COVERAGE", "r162_independent_freeze_coverage"],
+      "counterexample": "A misspecified 80-percent interval remains an 80-percent interval when applied to data independent of the pilot.",
+      "repaired": "Added R162:PLANWISE_COVERAGE_PREMISE as a separate all_of premise and limited its present discharge to the simple complete Gaussian Bonferroni-Student fallback.",
+      "unresolved": "Any robust, bootstrap, randomization-based or missingness-adjusted alternative still needs its own planwise proof."
+    }
+  ]
+}

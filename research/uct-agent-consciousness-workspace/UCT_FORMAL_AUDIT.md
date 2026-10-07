@@ -1,3 +1,9 @@
+## R162 audit — joint covariance discipline and repaired coverage premise
+
+R162-v1.0 has **430 nodes / 206 rules** (new 5/2). The inherited 425 nodes, 204 rules and 117 context links are field-for-field preserved. Unique IDs, endpoints and DAG pass. `r162_covariance_nonidentification` requires both the joint R161 protocol object and the finite component-source audit. `r162_independent_freeze_coverage` now requires the R161 decision, disjoint pilot contract and explicit planwise conditional-coverage premise simultaneously.
+
+Manual audit caught and repaired an actual hidden premise: independence prevents same-data reuse but does not validate a misspecified interval. Objects, quantifiers, targets, evidence levels and data splits are explicit; nine covariance witnesses, 165 absolute-interval cases and 700 finite pilot/confirm pairs pass. Public data coverage is nonexhaustive, Gaussianity and missingness remain open, and the candidate design is not run. No covariance-to-C1, classifier-to-B_min/F_O, basal gate, exclusive owner or assistant-consciousness inference is present. Full result: [MAP_AUDIT.json](records/R162_Blinded_Pilot_and_Simultaneous_Design_20261008/MAP_AUDIT.json).
+
 ## R161 audit — concrete falsification without experimental or phenomenal promotion
 
 R161-v1.0 has **425 nodes / 204 rules** (new 3/2). The inherited 422 nodes, 202 rules and 117 context links are field-for-field preserved. Unique IDs, endpoints and DAG pass. `r161_admissibility_gate` requires the concrete protocol; `r161_three_way_body_decision` requires all of the R160 profile, concrete estimands and admissibility gate simultaneously.

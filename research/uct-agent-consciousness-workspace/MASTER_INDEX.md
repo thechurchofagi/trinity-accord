@@ -1,3 +1,14 @@
+## R162 — joint covariance non-identification and independent pilot freeze
+
+- English result: `records/R162_Blinded_Pilot_and_Simultaneous_Design_20261008/Independent_Pilot_and_Covariance_Identification_v0_1.md`
+- Current handoff: `records/R162_Blinded_Pilot_and_Simultaneous_Design_20261008/CURRENT_HANDOFF.md`
+- Proof/source/gap/amendment ledgers: same directory
+- Formal audit and validation: `MAP_AUDIT.json`, `VALIDATION.json`
+- Exact verifier/results: `verify_design.py`, `EXACT_CHECKS.json`
+- Map: R162-v1.0, 430 nodes / 206 rules, new 5/2; R161 prefix and 117 context links preserved
+- Result boundary: separate marginals do not identify joint covariance; an independent pilot does not itself imply interval validity; no raw-data reanalysis, human pilot, practical N or phenomenal bridge
+- Next: frozen simulation stress test with explicit planwise coverage proofs/failures under skew, clipping, order and missingness
+
 ## R159 current priority — internal body-frame binding, external reference and coupled roles
 
 R159 gives a positive conditional application: an actually installed body-frame relation between internal frame r and representation k has its C1 structural counterpart even when separately grounded psi(k)=c refers to an anatomical nonmember. External c is not automatically in D(P), so h(c) cannot be assumed. A selected F_O interpretation remains a fixed independent application bridge. See [English note](records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md), [proof ledger](records/R159_Body_Frame_and_Referent_20261007/PROOF_LEDGER.json), [review](records/R159_Body_Frame_and_Referent_20261007/REVIEW_ZH.md), [audit](records/R159_Body_Frame_and_Referent_20261007/MAP_AUDIT.json), [gaps](records/R159_Body_Frame_and_Referent_20261007/GAP_LEDGER.json), [handoff](records/R159_Body_Frame_and_Referent_20261007/CURRENT_HANDOFF.md).
