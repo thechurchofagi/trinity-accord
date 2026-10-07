@@ -1,3 +1,14 @@
+## R167 — operational mediator, redundancy and compensation
+
+- English result: `records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md`
+- Exact checker/results: `verify_redundancy.py`, `EXACT_CHECKS.json`
+- Proof/source/gap ledgers: `PROOF_LEDGER.json`, `SOURCE_LEDGER.json`, `GAP_LEDGER.json`
+- Formal extension/audit/validation: `MAP_EXTENSION.json`, `MAP_AUDIT.json`, `VALIDATION.json`
+- Chinese review/current handoff: `REVIEW_ZH.md`, `CURRENT_HANDOFF.md`
+- Map: R167-v1.0, 459 nodes / 219 rules / 121 context links; new 7/2/4, exact R166 prefixes preserved
+- Result boundary: operational discharge of R166 W2–W5 is conditional and closure-relative; no apparatus, neural completeness, C1 derivation, `B_min`, basal gate or unique owner
+- Next: stochastic/continuous/partially observed contextual relevance and an undetected-redundancy bound
+
 ## R165 — finite pilot menu, residual transport and feasibility triage
 
 - English result: `records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md`

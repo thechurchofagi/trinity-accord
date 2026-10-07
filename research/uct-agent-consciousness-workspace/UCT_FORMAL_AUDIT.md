@@ -1,3 +1,11 @@
+## R167 audit — operational use under redundancy, compensation and same-lineage interventions
+
+R167 passes the selection, result and pre-save direction checks. The graph has 459 nodes, 219 rules and 121 context links; the inherited R166 node/rule/context prefixes are exact. The five-premise triage route and six-premise operational application route are explicit conjunctions. No rule promotes a counterexample to positive evidence, an operational controller state to a neural state, installation to C1, or structural counterpart to familiar mineness.
+
+Every new node fixes its object, quantifiers, time slice, signature, actual/abstract status, evidence level, source and limits. The same-token audit corrected a potential equivocation: the bearer lineage stays continuous while an intervention deliberately changes a local state or route, so complete D need not be identical between intervals. C1 use remains confined to each actual interval satisfying its own complete premises.
+
+Exact checks cover 65,812 Boolean functions and 128 status assignments. They establish the finite criterion and two countermodels only. They do not establish apparatus safety, intervention fidelity, route closure, sensitivity, empirical installation, neural completeness, C1 or `B_min`. Open gaps R167-G1–G7 record identity audit, live-route verification, hidden redundancy, off-target intervention, cross-interval typing, neural/semantic interpretation, and stochastic/continuous generalization. The graph DAG and successful code are not theory truth or a global proof.
+
 ## R165 audit — plan selection without precision transport
 
 R165-v1.0 has **446 nodes / 215 rules** (new 6/3); the inherited 440 nodes, 212 rules and 117 context links reconstruct exactly. Unique IDs, endpoints, parent hash and DAG pass. Exact checks cover 475 residual-transport cases, 6,125 exhaustive trichotomy boundary cases, the independent ranking reversal and same-data selection inflation.

@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R166-v1.0",
+  "revision": "R167-v1.0",
   "date": "2026-10-08",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -19735,6 +19735,257 @@
           }
         ]
       }
+    },
+    {
+      "id": "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+      "kind": "SAME_BEARER_INTERVENTION_CONTRACT",
+      "label": "Token Lineage and Indexed Intervention Intervals",
+      "statement": "A token-preserving intervention series requires one continuous actual bearer lineage and clock, fixed participant/device identity, signature, code, wiring and realization map except for the named intervention, no reset/retraining/copied-run substitution, and explicitly indexed subintervals. Same token means same bearer lineage under controlled local change, not identity of the complete organization across interventions.",
+      "domain": "One uninterrupted participant-device episode and its predeclared reversible intervention subintervals.",
+      "scope": "One uninterrupted participant-device episode and its predeclared reversible intervention subintervals.",
+      "source": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md §2",
+      "source_lineage": "R166 W1 same-token requirement refined to avoid complete-organization identity across interventions.",
+      "status": "DECLARED_APPLICATION_CONTRACT_NOT_EXECUTED",
+      "proof": "Definition and identity bookkeeping requirement; no actual episode is supplied.",
+      "counterexamples_and_limits": "Process lineage can persist while complete microstate and local organization change; cross-subject or reset comparisons do not satisfy the contract.",
+      "formal_contract_R167": {
+        "object_domain": "one actual participant-device bearer lineage",
+        "quantifiers": "every admitted intervention subinterval must satisfy all lineage and indexing clauses",
+        "bearer_time_signature": "P, I, Sigma, K, D, rho and each intervention provenance are explicit",
+        "source_anchor": {
+          "path": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md",
+          "sha256": "ca1e07fea8805a893ee521040986cc46152db848bbef32a352040ad1cca14c47",
+          "locator": "§2"
+        },
+        "purpose": "Prevent a same-token/unchanged-organization equivocation",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R167-G1",
+          "R167-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+      "kind": "PROSPECTIVE_PHYSICAL_ARCHITECTURE",
+      "label": "Instrumented Anchor–Mediator–Backup–Consumer Architecture",
+      "statement": "A prospective non-invasive participant-device loop realizes a report-independent physical anchor r, a logged live controller mediator k, declared backup routes z, and actual consumers u, with independent reversible interventions on r, k and route gates. The operational k is not asserted to be a hidden neural or complete body representation.",
+      "domain": "One instrumented participant-device episode with calibrated safe perturbations; no apparatus or participant was tested in R167.",
+      "scope": "One instrumented participant-device episode with calibrated safe perturbations; no apparatus or participant was tested in R167.",
+      "source": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md §3",
+      "source_lineage": "Concrete realization proposal for R166 W2-W5 using established intervention and route-audit ideas; no mechanism novelty claim.",
+      "status": "PROSPECTIVE_DESIGN_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Constructive specification of physically inspectable states, reads, interventions and route gates.",
+      "counterexamples_and_limits": "Sensory or motor perturbation alone is not do(k); hidden routes, off-target effects, invalid fidelity or safety failure block the application.",
+      "formal_contract_R167": {
+        "object_domain": "one actual instrumented loop with sorted anchor, mediator, backups and consumers",
+        "quantifiers": "there exists one declared candidate architecture; every named state and route must be physically realized and audited",
+        "bearer_time_signature": "controller state and participant-device process are distinct but nested actual occurrences within P/I",
+        "source_anchor": {
+          "path": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md",
+          "sha256": "ca1e07fea8805a893ee521040986cc46152db848bbef32a352040ad1cca14c47",
+          "locator": "§3"
+        },
+        "purpose": "Give W2-W5 a manipulable same-episode realization without report-defined ownership",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R167-G2",
+          "R167-G3",
+          "R167-G4"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R167:CONTEXTUAL_USE_CRITERION",
+      "kind": "EXACT_FINITE_BOOLEAN_THEOREM",
+      "label": "Contextual Relevance Under Declared Redundancy",
+      "statement": "For a declared finite deterministic Boolean consumer u=f(k,z), k contributes relative to the declared intervention closure iff there exists a backup context z with f(1,z) unequal to f(0,z); k is contextually indispensable iff the inequality holds in every declared context. Contribution and indispensability are distinct.",
+      "domain": "All deterministic Boolean functions with one candidate input k and finitely many declared binary backup inputs; executable enumeration covers zero through three backups.",
+      "scope": "All deterministic Boolean functions with one candidate input k and finitely many declared binary backup inputs; executable enumeration covers zero through three backups.",
+      "source": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md §4",
+      "source_lineage": "Elementary extensional dependence criterion specialized to R166 W5; Boolean function theory is not claimed as new.",
+      "status": "PROVED_EXACTLY_WITH_EXHAUSTIVE_BOUNDED_CHECK",
+      "proof": "If all controlled contrasts vanish, f is extensionally independent of k; one nonzero contrast is a witness. The checker enumerates 65,812 functions for m=0..3.",
+      "counterexamples_and_limits": "The theorem is relative to declared variables, deterministic Boolean outputs and intervention semantics; it does not establish closure of the real organization.",
+      "formal_contract_R167": {
+        "object_domain": "finite declared Boolean consumer and backup context set",
+        "quantifiers": "for every f and every declared context; relevance is existential and indispensability universal over z",
+        "bearer_time_signature": "one pre-compensation time slice; abstract f requires separate realization in an actual token",
+        "source_anchor": {
+          "path": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md",
+          "sha256": "ca1e07fea8805a893ee521040986cc46152db848bbef32a352040ad1cca14c47",
+          "locator": "§4"
+        },
+        "purpose": "Prevent redundant masking from being mistaken for no installed use",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R167-G3",
+          "R167-G4",
+          "R167-G7"
+        ],
+        "machine_formalized": true,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R167:SINGLE_CUT_REDUNDANCY_OBSTRUCTION",
+      "kind": "EXACT_CAUSAL_FALSE_NEGATIVE_COUNTEREXAMPLE",
+      "label": "One Active Backup Masks a Real Primary Contribution",
+      "statement": "In u=k OR z, changing k while z=1 leaves u unchanged, although changing k while z=0 changes u. Therefore one null mediator cut in an uncontrolled redundant context does not refute installed use of k.",
+      "domain": "The declared deterministic binary OR consumer under controlled interventions on k and z.",
+      "scope": "The declared deterministic binary OR consumer under controlled interventions on k and z.",
+      "source": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md §4",
+      "source_lineage": "Elementary redundancy countermodel specialized to the R166 mediation witness.",
+      "status": "PROVED_EXACTLY",
+      "proof": "f(1,1)=f(0,1)=1 while f(1,0)=1 and f(0,0)=0.",
+      "counterexamples_and_limits": "A validated contextual matrix can resolve this declared model; omitted backups remain possible.",
+      "formal_contract_R167": {
+        "object_domain": "one Boolean primary and one Boolean backup route",
+        "quantifiers": "there exists a masking context z=1 and a revealing context z=0",
+        "bearer_time_signature": "same modeled consumer and pre-compensation time slice",
+        "source_anchor": {
+          "path": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md",
+          "sha256": "ca1e07fea8805a893ee521040986cc46152db848bbef32a352040ad1cca14c47",
+          "locator": "§4"
+        },
+        "purpose": "Block single-cut null-to-no-use inference",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R167-G3",
+          "R167-G4"
+        ],
+        "machine_formalized": true,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R167:COMPENSATION_TIMING_OBSTRUCTION",
+      "kind": "EXACT_DYNAMIC_FALSE_NEGATIVE_COUNTEREXAMPLE",
+      "label": "Late Recovery Does Not Refute Earlier Primary Use",
+      "statement": "For u_t=k_t OR z_t with z_(t+1)=z_t OR cut_t, cutting an initially active k makes the immediate pre-adaptation output differ from baseline but the later compensated output equal baseline. A late endpoint alone therefore does not refute prior installed use.",
+      "domain": "The declared two-step deterministic binary compensation model.",
+      "scope": "The declared two-step deterministic binary compensation model.",
+      "source": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md §5",
+      "source_lineage": "Elementary finite-state countermodel specialized to timing in R166 W4-W5.",
+      "status": "PROVED_EXACTLY",
+      "proof": "Baseline u0=1; immediate post-cut u0'=0; after z updates to one, u1'=1.",
+      "counterexamples_and_limits": "The model is not asserted as universal physiology; it refutes only the late-null-to-no-prior-use inference.",
+      "formal_contract_R167": {
+        "object_domain": "one two-step primary/backup finite-state model",
+        "quantifiers": "there exists the stated initial state and cut sequence",
+        "bearer_time_signature": "same bearer lineage but distinct pre-adaptation and post-compensation subintervals",
+        "source_anchor": {
+          "path": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md",
+          "sha256": "ca1e07fea8805a893ee521040986cc46152db848bbef32a352040ad1cca14c47",
+          "locator": "§5"
+        },
+        "purpose": "Require temporal indexing and prevent compensation false negatives",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R167-G4",
+          "R167-G7"
+        ],
+        "machine_formalized": true,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R167:CLOSURE_RELATIVE_TRIAGE",
+      "kind": "BOUNDED_INTERVENTION_DECISION_CONTRACT",
+      "label": "Invalid, Supported, Closure-Refuted, or Unresolved",
+      "statement": "For one named candidate: identity, admissibility or fidelity failure yields INVALID_PROTOCOL; a valid pre-compensation contextual contrast yields PRIMARY_USE_SUPPORTED_RELATIVE_TO_CLOSURE; all valid null contrasts yield CANDIDATE_REFUTED_RELATIVE_TO_CLOSURE only with declared route closure and adequate sensitivity; every other case is UNRESOLVED. Compensation is recorded as an additional temporal flag.",
+      "domain": "One predeclared operational mediator candidate, declared finite backup closure and predeclared null/sensitivity bounds.",
+      "scope": "One predeclared operational mediator candidate, declared finite backup closure and predeclared null/sensitivity bounds.",
+      "source": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md §6",
+      "source_lineage": "R161 bounded three-way decision refined for same-token mediation, redundancy and compensation.",
+      "status": "DECLARED_BOUNDED_DECISION_CONTRACT",
+      "proof": "Priority logic is exhaustively checked over 128 Boolean assignments; empirical clauses remain uninstantiated.",
+      "counterexamples_and_limits": "Any omitted route can defeat closure; null without closure/sensitivity is unresolved and never no experience.",
+      "formal_contract_R167": {
+        "object_domain": "one candidate and its declared intervention closure",
+        "quantifiers": "all validity premises precede any support/refutation; refutation universally covers declared contexts only",
+        "bearer_time_signature": "same token lineage with pre-compensation contrasts separated from adapted endpoints",
+        "source_anchor": {
+          "path": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md",
+          "sha256": "ca1e07fea8805a893ee521040986cc46152db848bbef32a352040ad1cca14c47",
+          "locator": "§6"
+        },
+        "purpose": "Preserve falsifiability without overclaiming completeness or no experience",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R167-G1",
+          "R167-G2",
+          "R167-G3",
+          "R167-G4",
+          "R167-G6",
+          "R167-G7"
+        ],
+        "machine_formalized": true,
+        "premise_routes": [
+          {
+            "rule": "r167_closure_relative_triage",
+            "all_of": [
+              "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+              "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+              "R167:CONTEXTUAL_USE_CRITERION",
+              "R167:SINGLE_CUT_REDUNDANCY_OBSTRUCTION",
+              "R167:COMPENSATION_TIMING_OBSTRUCTION"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R167:R166_WITNESS_APPLICATION_BOUNDARY",
+      "kind": "CONDITIONAL_OPERATIONAL_DISCHARGE_AND_BOUNDARY",
+      "label": "Operational Discharge of W2–W5, Neural and Semantic Claims Open",
+      "statement": "If one common actual episode satisfies the grounded selector, typed Anchor–Bind–Use schema, every R166 W1-W6 clause, the R167 token-lineage and operational architecture contracts, and closure-relative support, then W2-W5 are operationally discharged for the declared participant-device relation. This does not identify a hidden neural or complete body representation, prove route completeness, derive C1, validate B_min, or make the relation a basal-experience gate.",
+      "domain": "One common actual P/I/K/D/rho episode and one declared operational relation satisfying all premises simultaneously.",
+      "scope": "One common actual P/I/K/D/rho episode and one declared operational relation satisfying all premises simultaneously.",
+      "source": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md §§7-8",
+      "source_lineage": "Conditional application of R157, R159 and R166 to the new operational architecture and bounded triage.",
+      "status": "MANUAL_CONDITIONAL_APPLICATION_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Bind every premise to the same actual lineage and indexed subintervals; the operational state/read audit supplies W2-W3, valid local interventions W4, and contextual route discrimination W5, while W1 and W6 remain unchanged.",
+      "counterexamples_and_limits": "Failure of any all-of premise blocks the conclusion; C1 transport remains R166/R159 conditional and familiar mineness still requires independent B_min.",
+      "formal_contract_R167": {
+        "object_domain": "one actual declared operational body-frame relation",
+        "quantifiers": "every all-of premise holds simultaneously on the one application; no universal neural or experiential necessity claim",
+        "bearer_time_signature": "same P/I lineage, explicit subintervals, fixed K/D/rho except named interventions; C1 applies tokenwise only where admitted",
+        "source_anchor": {
+          "path": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md",
+          "sha256": "ca1e07fea8805a893ee521040986cc46152db848bbef32a352040ad1cca14c47",
+          "locator": "§§7-8"
+        },
+        "purpose": "Turn the R166 witness sketch into a concrete but strictly bounded application route",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R167-G1",
+          "R167-G2",
+          "R167-G3",
+          "R167-G4",
+          "R167-G5",
+          "R167-G6",
+          "R167-G7"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r167_operational_witness_application",
+            "all_of": [
+              "R157:DEFINABLE_SELECTOR_SETUP",
+              "R159:ANCHOR_BINDING_CONTRACT",
+              "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+              "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+              "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+              "R167:CLOSURE_RELATIVE_TRIAGE"
+            ]
+          }
+        ]
+      }
     }
   ],
   "rules": [
@@ -32482,6 +32733,73 @@
         "source_sha256": "1f0e0d1238e365ddabd85bcea402c1118684b907a031504ea520f9efa971aec7",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r167_closure_relative_triage",
+      "all_of": [
+        "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+        "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+        "R167:CONTEXTUAL_USE_CRITERION",
+        "R167:SINGLE_CUT_REDUNDANCY_OBSTRUCTION",
+        "R167:COMPENSATION_TIMING_OBSTRUCTION"
+      ],
+      "conclusion": "R167:CLOSURE_RELATIVE_TRIAGE",
+      "statement": "Same-lineage bookkeeping, an operationally realized mediator architecture, contextual redundancy criterion, and both false-negative obstructions jointly require the bounded closure-relative status logic.",
+      "proof_sketch": "Invalid identity/fidelity blocks inference; contextual contrast supports use; redundancy and compensation countermodels block unqualified null inference; only closed, sensitive all-context nulls permit bounded refutation.",
+      "source": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md §§2-6",
+      "kind": "CONTRACT_SYNTHESIS",
+      "review": "MANUAL_ALL_OF_SCOPE_TEMPORAL_REDUNDANCY_AND_STATUS_AUDIT",
+      "formal_contract_R167": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same actual bearer lineage",
+          "indexed pre/post-compensation subintervals",
+          "physically realized anchor mediator backups and consumers",
+          "valid intervention delivery and route audit",
+          "all declared backup contexts",
+          "predeclared closure and sensitivity for refutation",
+          "report not used to define physical role"
+        ],
+        "quantification": "All validity clauses precede support/refutation; existential contrast supports contribution, universal declared-context null plus closure/sensitivity supports bounded refutation.",
+        "proof_location": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md §§2-6",
+        "source_sha256": "ca1e07fea8805a893ee521040986cc46152db848bbef32a352040ad1cca14c47",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r167_operational_witness_application",
+      "all_of": [
+        "R157:DEFINABLE_SELECTOR_SETUP",
+        "R159:ANCHOR_BINDING_CONTRACT",
+        "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+        "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+        "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+        "R167:CLOSURE_RELATIVE_TRIAGE"
+      ],
+      "conclusion": "R167:R166_WITNESS_APPLICATION_BOUNDARY",
+      "statement": "The grounded selector, typed relation, entire R166 witness contract, same-lineage bookkeeping, operational architecture and closure-relative support jointly discharge W2-W5 for the declared relation only.",
+      "proof_sketch": "Bind every premise to one actual episode and sorted occurrences; use inspected live reads for W3, independent anchor grounding for W2, valid local pulses for W4, and contextual route discrimination for W5; retain W1/W6 and every stated boundary.",
+      "source": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md §§7-8",
+      "kind": "CONDITIONAL_APPLICATION_DEDUCTION",
+      "review": "MANUAL_ALL_OF_ACTUALITY_TYPING_INTERVENTION_CLOSURE_AND_SEMANTIC_BOUNDARY_AUDIT",
+      "formal_contract_R167": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same P/I/K/D/rho lineage",
+          "explicit intervention subintervals",
+          "same sorted r/k/z/U occurrences",
+          "every R166 W1-W6 clause",
+          "valid physical architecture",
+          "closure-relative supported status",
+          "no neural completeness promotion",
+          "C1 and B_min remain independent",
+          "no basal-experience gate or unique owner"
+        ],
+        "quantification": "Every premise holds on the one common application; no cross-token aggregation or later compensated endpoint replaces a missing premise.",
+        "proof_location": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md §§7-8",
+        "source_sha256": "ca1e07fea8805a893ee521040986cc46152db848bbef32a352040ad1cca14c47",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -33069,6 +33387,26 @@
       "from": "A:U1",
       "to": "R159:SELECTED_OWNERSHIP_APPLICATION",
       "relation": "context: no selected-body clause added to basal existence"
+    },
+    {
+      "from": "R167:R166_WITNESS_APPLICATION_BOUNDARY",
+      "to": "R166:WITNESSED_FRAME_INSTALLATION",
+      "relation": "operational instantiation route; not a replacement for any R166 premise"
+    },
+    {
+      "from": "R167:R166_WITNESS_APPLICATION_BOUNDARY",
+      "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+      "relation": "context only: C1 transport and B_min boundary remain separately governed"
+    },
+    {
+      "from": "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+      "to": "A:U1",
+      "relation": "no operational mediator clause is added to basal-experience existence"
+    },
+    {
+      "from": "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+      "to": "B:BAC",
+      "relation": "identity and level bookkeeping context, not a deduction"
     }
   ],
   "prohibited_inferences_D": [
@@ -33743,6 +34081,24 @@
     "actual_apparatus": false,
     "actual_participant_or_system_token": false,
     "installation_empirically_witnessed": false,
+    "B_min_validated": false,
+    "C1_derived": false,
+    "basal_experience_gate_added": false
+  },
+  "research_R167": {
+    "start_head": "8822679cca73ebb915f037e148cb19ded203aafd",
+    "checkpoint_head": "11924feb613cdc54b999328fbb2d3813de3ecc38",
+    "parent_graph_sha256": "d75785550813ab8a8e9f7eacd13e83eb636ca221d3e95c0c74992d1c30d171b4",
+    "note": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md",
+    "new_nodes": 7,
+    "new_rules": 2,
+    "new_context_links": 4,
+    "status": "OPERATIONAL_MEDIATOR_WITH_REDUNDANCY_AND_COMPENSATION_BOUNDARY",
+    "actual_apparatus": false,
+    "actual_participant_or_system_token": false,
+    "ethics_approval": false,
+    "neural_mediator_identified": false,
+    "route_closure_empirically_verified": false,
     "B_min_validated": false,
     "C1_derived": false,
     "basal_experience_gate_added": false

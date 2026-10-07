@@ -1,3 +1,11 @@
+## R167 current priority — operational mediator with redundancy and compensation
+
+R167 supplies the requested ethical prospective W2–W5 architecture: one continuous participant-device lineage, report-independent physical anchor, live logged controller mediator, declared backup routes, consumers, and reversible anchor/mediator/route interventions. It does not claim an executed experiment or identify a neural body representation.
+
+Exact finite results: for `u=f(k,z)`, candidate contribution is existential over declared backup contexts; indispensability is universal. `u=k OR z` gives a single-cut redundancy false negative, and a two-step backup update gives a late compensation false negative. Therefore refutation is only relative to valid declared closure and sensitivity; otherwise nulls are unresolved. The first checker run contained a function-count typo (65,554), corrected to 65,812 and retained in the failure ledger.
+
+Map R167-v1.0: 459 nodes / 219 rules / 121 context links, new 7/2/4; 19 validation checks pass. Same token is bearer-lineage continuity with indexed subintervals, not unchanged complete organization. No C1 derivation, `B_min`, basal-experience gate, unique owner, actual apparatus, ethics approval or route-closure proof. Next: continuous/stochastic/partially observed generalization with an undetected-redundancy bound.
+
 ## R165 current priority — independent selection is not residual transport
 
 R165 freezes a finite menu of R164 constant-bet/constant-center plans. Pilot-measurable deterministic selection preserves planwise confirmatory coverage, but an exact independent pilot-0 / confirmation-1 example reverses the residual ranking of centers 0 and 1. Width transfer therefore requires separately declared `|rho_C-rho_P|<=tau` radii.

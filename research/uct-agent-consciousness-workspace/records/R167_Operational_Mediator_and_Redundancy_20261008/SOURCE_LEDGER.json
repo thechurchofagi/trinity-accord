@@ -1,0 +1,12 @@
+{
+  "schema": "UCT_R167_SOURCE_LEDGER/v1",
+  "sources": [
+    {"id": "UCT-I-v1.2", "kind": "fixed_primary_project_source", "locators": ["§8.11", "§8.12", "§8.13", "§8.14", "§14.7", "§14.8", "§14.10"], "use": "Physical witness, self-model/conceptual-I boundaries, no extra owner, noncircular application limits.", "limit": "Framework source; no empirical R167 installation."},
+    {"id": "R157-R159-fixed", "kind": "verified_project_derivations", "locators": ["R157 definable selector and semantic residual", "R159 Anchor-Bind-Use and C1 transport"], "use": "Typed body-frame relation, actual installation target, same-instance transport and independent B_min boundary.", "limit": "Do not supply apparatus, route closure or familiar mineness."},
+    {"id": "R161-fixed", "kind": "verified_project_protocol", "locators": ["INTERVENTION_POLICY_OBJECT", "ADMISSIBILITY_GATE", "THREE_WAY_BODY_DECISION"], "use": "Admissibility and bounded status discipline.", "limit": "Population protocol does not identify this actual token."},
+    {"id": "R166-fixed", "kind": "verified_project_derivation", "locators": ["TOKEN_INSTALLATION_WITNESS_CONTRACT", "FINITE_TRACE_INSTALLATION_NONENTAILMENT"], "use": "W1-W6 target and bypass obstruction to be operationally instantiated.", "limit": "Its clauses were not empirically executed."},
+    {"id": "elementary-boolean-and-finite-state-models", "kind": "new_project_specific_exact_countermodels_using_established_methods", "locators": ["R167 note §§4-6", "verify_redundancy.py"], "use": "Contextual dependence, redundant masking, delayed compensation and status priority.", "limit": "Established Boolean/causal reasoning; no historical novelty or empirical generality claim."}
+  ],
+  "search_scope": "No new literature search was required. This round constructs and bounds a project-specific formal architecture from pinned primary project sources and elementary exact models; it makes no exhaustive-priority claim.",
+  "source_failures": []
+}

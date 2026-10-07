@@ -1,0 +1,24 @@
+{
+  "schema": "UCT_R167_MAP_AUDIT/v1",
+  "round": "R167",
+  "status": "PASS_WITH_OPEN_EMPIRICAL_AND_GENERALIZATION_OBLIGATIONS",
+  "graph": {"revision": "R167-v1.0", "nodes": 459, "rules": 219, "context_links": 121, "inherited_node_prefix": 452, "inherited_rule_prefix": 217, "inherited_context_prefix": 117, "sha256": "0ed7d225a8bc3260ae9fca042fc1f1316167e9fe0842129c1c9eb54c5ac48f71"},
+  "node_audit": [
+    {"node": "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT", "quantifier_scope": "all admitted subintervals of one actual lineage", "object_time_signature": "lineage identity is explicitly distinct from complete-organizational equality", "evidence_level": "application contract, not observation", "status": "PASS"},
+    {"node": "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE", "quantifier_scope": "one prospective declared participant-device architecture", "object_time_signature": "physical controller state is not renamed as a neural or phenomenal state", "evidence_level": "constructive design only", "status": "PASS"},
+    {"node": "R167:CONTEXTUAL_USE_CRITERION", "quantifier_scope": "all finite Boolean f; existential relevance and universal indispensability over declared contexts", "object_time_signature": "one pre-compensation abstract slice; realization separate", "evidence_level": "exact finite theorem", "status": "PASS"},
+    {"node": "R167:SINGLE_CUT_REDUNDANCY_OBSTRUCTION", "quantifier_scope": "existential exact OR countermodel", "object_time_signature": "same modeled consumer/context", "evidence_level": "counterexample, not positive empirical evidence", "status": "PASS"},
+    {"node": "R167:COMPENSATION_TIMING_OBSTRUCTION", "quantifier_scope": "existential exact two-step countermodel", "object_time_signature": "same lineage, distinct pre/post-adaptation intervals", "evidence_level": "counterexample, not physiology", "status": "PASS"},
+    {"node": "R167:CLOSURE_RELATIVE_TRIAGE", "quantifier_scope": "one candidate; universal declared-context null only for bounded refutation", "object_time_signature": "validity precedes status; compensation separately timed", "evidence_level": "decision contract", "status": "PASS"},
+    {"node": "R167:R166_WITNESS_APPLICATION_BOUNDARY", "quantifier_scope": "one common actual instance satisfying every premise", "object_time_signature": "same P/I/K/D/rho lineage and indexed subintervals", "evidence_level": "conditional application, not executed", "status": "PASS"}
+  ],
+  "rule_audit": [
+    {"rule": "r167_closure_relative_triage", "all_of_count": 5, "joint_satisfiability": "abstract witness supplied in EXACT_CHECKS.json", "direction": "architecture and obstructions to bounded status logic only", "status": "PASS"},
+    {"rule": "r167_operational_witness_application", "all_of_count": 6, "joint_satisfiability": "abstract witness only; empirical conjunction open", "direction": "conditional discharge for declared relation, no C1/B_min/basal reverse", "status": "PASS"}
+  ],
+  "unlinked_and_context_consistency": {"status": "PASS_WITH_LIMITS", "detail": "Four non-deductive context links connect R167 to R166 installation/experiential boundaries, U1 and BAC. No direct rule turns a counterexample into positive installation, turns operational state into a neural state, or turns installation into familiar mineness."},
+  "all_of_joint_satisfiability": {"status": "ABSTRACT_PASS_EMPIRICAL_OPEN", "detail": "The exact checker supplies a coherent assignment with lineage, physical anchor, live read, valid pulses, declared contexts and a pre-compensation effect while report, C1 derivation and B_min validation stay false. No actual apparatus jointly instantiates it."},
+  "direction_and_purpose": {"status": "PASS", "detail": "The extension advances a positive experience-internal organization route by making installed use testable, while preserving C1 and the semantic bridge boundary. It does not make empirical score, reporting, control, or the selected body-frame role a condition for basal experience."},
+  "machine_check_boundary": "Acyclicity, endpoint integrity, enumeration, and status consistency do not prove theoretical truth, physical closure, ethics approval, empirical installation, C1 or B_min.",
+  "open_gaps": ["R167-G1", "R167-G2", "R167-G3", "R167-G4", "R167-G5", "R167-G6", "R167-G7"]
+}

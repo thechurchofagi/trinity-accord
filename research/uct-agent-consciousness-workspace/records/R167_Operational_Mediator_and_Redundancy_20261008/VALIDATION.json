@@ -1,0 +1,281 @@
+{
+  "schema": "UCT_R167_VALIDATION/v1",
+  "round": "R167",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "note_hash_frozen",
+      "status": "PASS",
+      "detail": "ca1e07fea8805a893ee521040986cc46152db848bbef32a352040ad1cca14c47"
+    },
+    {
+      "name": "graph_revision",
+      "status": "PASS",
+      "detail": "R167-v1.0"
+    },
+    {
+      "name": "graph_counts",
+      "status": "PASS",
+      "detail": {
+        "nodes": 459,
+        "rules": 219,
+        "context_links": 121
+      }
+    },
+    {
+      "name": "unique_ids",
+      "status": "PASS",
+      "detail": {
+        "nodes": 459,
+        "rules": 219
+      }
+    },
+    {
+      "name": "all_rule_and_context_endpoints_exist",
+      "status": "PASS",
+      "detail": {
+        "rules": [],
+        "links": []
+      }
+    },
+    {
+      "name": "dag",
+      "status": "PASS",
+      "detail": {
+        "visited": 459,
+        "total": 459
+      }
+    },
+    {
+      "name": "exact_parent_reconstruction",
+      "status": "PASS",
+      "detail": "d75785550813ab8a8e9f7eacd13e83eb636ca221d3e95c0c74992d1c30d171b4"
+    },
+    {
+      "name": "new_node_contract_fields",
+      "status": "PASS",
+      "detail": [
+        "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+        "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+        "R167:CONTEXTUAL_USE_CRITERION",
+        "R167:SINGLE_CUT_REDUNDANCY_OBSTRUCTION",
+        "R167:COMPENSATION_TIMING_OBSTRUCTION",
+        "R167:CLOSURE_RELATIVE_TRIAGE",
+        "R167:R166_WITNESS_APPLICATION_BOUNDARY"
+      ]
+    },
+    {
+      "name": "new_rules_explicit_all_of",
+      "status": "PASS",
+      "detail": {
+        "r167_closure_relative_triage": [
+          "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+          "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+          "R167:CONTEXTUAL_USE_CRITERION",
+          "R167:SINGLE_CUT_REDUNDANCY_OBSTRUCTION",
+          "R167:COMPENSATION_TIMING_OBSTRUCTION"
+        ],
+        "r167_operational_witness_application": [
+          "R157:DEFINABLE_SELECTOR_SETUP",
+          "R159:ANCHOR_BINDING_CONTRACT",
+          "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+          "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+          "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+          "R167:CLOSURE_RELATIVE_TRIAGE"
+        ]
+      }
+    },
+    {
+      "name": "joint_premises_exact",
+      "status": "PASS",
+      "detail": {
+        "r167_closure_relative_triage": [
+          "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+          "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+          "R167:CONTEXTUAL_USE_CRITERION",
+          "R167:SINGLE_CUT_REDUNDANCY_OBSTRUCTION",
+          "R167:COMPENSATION_TIMING_OBSTRUCTION"
+        ],
+        "r167_operational_witness_application": [
+          "R157:DEFINABLE_SELECTOR_SETUP",
+          "R159:ANCHOR_BINDING_CONTRACT",
+          "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+          "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+          "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+          "R167:CLOSURE_RELATIVE_TRIAGE"
+        ]
+      }
+    },
+    {
+      "name": "no_obstruction_directly_promoted_to_installation",
+      "status": "PASS",
+      "detail": "obstructions act through bounded triage, not positive evidence"
+    },
+    {
+      "name": "no_reverse_to_C1_basal_gate_or_familiar_mineness",
+      "status": "PASS",
+      "detail": [
+        "R167:CLOSURE_RELATIVE_TRIAGE",
+        "R167:R166_WITNESS_APPLICATION_BOUNDARY"
+      ]
+    },
+    {
+      "name": "all_context_links_non_deductive",
+      "status": "PASS",
+      "detail": [
+        {
+          "from": "R167:R166_WITNESS_APPLICATION_BOUNDARY",
+          "to": "R166:WITNESSED_FRAME_INSTALLATION",
+          "relation": "operational instantiation route; not a replacement for any R166 premise"
+        },
+        {
+          "from": "R167:R166_WITNESS_APPLICATION_BOUNDARY",
+          "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+          "relation": "context only: C1 transport and B_min boundary remain separately governed"
+        },
+        {
+          "from": "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+          "to": "A:U1",
+          "relation": "no operational mediator clause is added to basal-experience existence"
+        },
+        {
+          "from": "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+          "to": "B:BAC",
+          "relation": "identity and level bookkeeping context, not a deduction"
+        }
+      ]
+    },
+    {
+      "name": "boolean_function_enumeration",
+      "status": "PASS",
+      "detail": {
+        "by_backup_count": {
+          "0": {
+            "declared_backups": 0,
+            "contexts": 1,
+            "boolean_functions": 4,
+            "contextually_relevant": 2,
+            "contextually_indispensable": 2
+          },
+          "1": {
+            "declared_backups": 1,
+            "contexts": 2,
+            "boolean_functions": 16,
+            "contextually_relevant": 12,
+            "contextually_indispensable": 4
+          },
+          "2": {
+            "declared_backups": 2,
+            "contexts": 4,
+            "boolean_functions": 256,
+            "contextually_relevant": 240,
+            "contextually_indispensable": 16
+          },
+          "3": {
+            "declared_backups": 3,
+            "contexts": 8,
+            "boolean_functions": 65536,
+            "contextually_relevant": 65280,
+            "contextually_indispensable": 256
+          }
+        },
+        "functions_checked": 65812
+      }
+    },
+    {
+      "name": "single_cut_counterexample",
+      "status": "PASS",
+      "detail": {
+        "model": "u = k OR z",
+        "tested_only_with_backup_on": [
+          1,
+          1
+        ],
+        "tested_with_backup_off": [
+          1,
+          0
+        ],
+        "single_context_null_is_false_negative": true
+      }
+    },
+    {
+      "name": "compensation_counterexample",
+      "status": "PASS",
+      "detail": {
+        "dynamics": "u_t=k_t OR z_t; z_(t+1)=z_t OR cut_t",
+        "baseline": {
+          "k": 1,
+          "z": 0,
+          "u": 1
+        },
+        "cut_pre_adaptation": {
+          "k": 0,
+          "z": 0,
+          "u": 0
+        },
+        "cut_post_compensation": {
+          "k": 0,
+          "z": 1,
+          "u": 1
+        },
+        "late_endpoint_masks_initial_contribution": true
+      }
+    },
+    {
+      "name": "status_priority",
+      "status": "PASS",
+      "detail": {
+        "boolean_assignments": 128,
+        "counts": {
+          "CANDIDATE_REFUTED_RELATIVE_TO_CLOSURE": 1,
+          "INVALID_PROTOCOL": 112,
+          "PRIMARY_USE_SUPPORTED_RELATIVE_TO_CLOSURE": 8,
+          "UNRESOLVED": 7
+        },
+        "priority": [
+          "invalidity",
+          "support",
+          "closure-qualified refutation",
+          "unresolved"
+        ]
+      }
+    },
+    {
+      "name": "claim_limits",
+      "status": "PASS",
+      "detail": {
+        "actual_data": false,
+        "actual_apparatus": false,
+        "ethics_approval": false,
+        "hidden_routes_excluded": false,
+        "neural_mediator_identified": false,
+        "complete_organization_identified": false,
+        "C1_derived": false,
+        "B_min_validated": false,
+        "basal_experience_gate": false
+      }
+    },
+    {
+      "name": "required_core_artifacts_present",
+      "status": "PASS",
+      "detail": [
+        "ROUND_RECORD.md",
+        "Operational_Mediator_Redundancy_and_Compensation_v0_1.md",
+        "PROOF_LEDGER.json",
+        "GAP_LEDGER.json",
+        "SOURCE_LEDGER.json",
+        "MAP_EXTENSION.json",
+        "verify_redundancy.py",
+        "EXACT_CHECKS.json",
+        "build_map.py"
+      ]
+    }
+  ],
+  "graph_sha256": "0ed7d225a8bc3260ae9fca042fc1f1316167e9fe0842129c1c9eb54c5ac48f71",
+  "exact_results_sha256": "45c83c2f66478d2f13e17fcb998bbd49daa7af67064ef6526a087732324119b1",
+  "limitations": [
+    "DAG and exhaustive finite checks do not establish theory truth or empirical installation.",
+    "Operational discharge remains conditional on actual token lineage, realization, intervention fidelity, route closure and sensitivity.",
+    "No neural completeness, C1 derivation, B_min validation, basal-experience gate, or unique owner follows."
+  ]
+}
