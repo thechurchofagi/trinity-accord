@@ -1,0 +1,28 @@
+{
+  "status": "BOTH_DESTINATIONS_SAVED",
+  "research_commit": "d80d08a4c0c09559e2122da38e24956b17bb711b",
+  "github_branch": "uct-agent-consciousness-workspace",
+  "github_research_commit_and_graph_readback": "PASS",
+  "workspace_master": {
+    "filename": "UCT_Hourly_Research_Master_Handoff.md",
+    "bytes": 5092,
+    "sha256": "de4958e34f478efd344be2b2e97ebfcc777a99d66ae2e53ccb5e1122ccb729a4",
+    "saved": true,
+    "version": 0
+  },
+  "workspace_backup": {
+    "research_commit": "d80d08a4c0c09559e2122da38e24956b17bb711b",
+    "backup_file": "UCT_R156_Working_Set_20261007.zip",
+    "bytes": 3493643,
+    "sha256": "95cc3ea1ec45eb273531c25525edcb7f8e6f2088c650a39b97d24817704ec40a",
+    "working_set_files": 384,
+    "scope": "Exact snapshot of the currently recovered local research working set, including root guides/map and all locally present records. Not a full Git history or an assertion that all historical remote files were downloaded.",
+    "member_hashes_and_crc": "PASS"
+  },
+  "workspace_backup_saved": true,
+  "workspace_local_metadata_applied": true,
+  "receipt_scope": "Post-save receipt; archive contains the research checkpoint, not this later receipt. No claim of full historical repository backup.",
+  "scheduled_start": "2026-10-07T19:32:41+08:00",
+  "recurrence": "HOURLY",
+  "timezone": "Asia/Shanghai"
+}
