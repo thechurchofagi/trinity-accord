@@ -1,3 +1,9 @@
+## R165 current priority — finite pilot menu and honest width status
+
+R165-v1.0 has 446 nodes / 215 rules / 117 context links. It proves that an independent-pilot selector from a frozen finite constant-bet menu preserves R164 planwise coverage, while an exact counterexample proves that independence alone does not transport residual risk or width. The width theorem therefore requires an explicit empirical transport radius for every component-plan pair.
+
+Read [current handoff](records/R165_Pilot_Menu_and_Feasibility_20261008/CURRENT_HANDOFF.md), [English note](records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md), [proof ledger](records/R165_Pilot_Menu_and_Feasibility_20261008/PROOF_LEDGER.json), [gap ledger](records/R165_Pilot_Menu_and_Feasibility_20261008/GAP_LEDGER.json), [audit](records/R165_Pilot_Menu_and_Feasibility_20261008/MAP_AUDIT.json), and [checks](records/R165_Pilot_Menu_and_Feasibility_20261008/EXACT_CHECKS.json). Use the strict feasible / inconclusive / menu-relative-not-feasible trichotomy. Next: return to the token-level actual-organization bridge for an installed body-frame relation; do not equate statistical precision with mineness, C1 evidence or a basal gate.
+
 ## R164 current priority — frozen bounded-martingale coverage
 
 R164-v1.0 has 440 nodes / 212 rules / 117 context links. It freezes one constant bet per component so a bounded predictable-plug-in supermartingale targets the unweighted average conditional mean; under independent confirmatory participants this is exactly R163's finite-design target. The simultaneous eight-component interval is exact finite-sample and retains R161's inherited interval-image/min/max decision, but is not uniformly narrower than Hoeffding.

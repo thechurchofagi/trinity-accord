@@ -115,6 +115,12 @@ Self-related feeling and the conceptual I are to be explained within experience 
 
 # Research workspace instructions
 
+## R165 current directive — return from design closure to actual organization
+
+R165-v1.0 is the current formal graph: 446 nodes / 215 rules / 117 context links. It permits only an independently selected frozen finite constant-bet/constant-center menu for R164, makes pilot-to-confirmation residual transport an explicit unvalidated premise, and uses feasible / inconclusive / menu-relative-not-feasible status. Never infer infeasibility from an upper bound above threshold or reuse confirmatory data to choose the plan.
+
+The next exact task is organizational, not another generic statistics expansion: define independent evidence that a valid physical role profile is actually installed as a body-frame relation in one token. Keep population effects, token organization, C1 transport, selected felt mineness, report and conceptual I separate. Do not add a basal-experience threshold or exclusive owner.
+
 ## Mandatory unified-map workflow — user instruction, 2026-10-06
 
 All subsequent theoretical derivations must extend UCT_FORMAL_MAP.md and UCT_FORMAL_GRAPH.json. Read those, UCT_FORMAL_AUDIT.md and the relevant pinned A/B/C/D source before deriving. The R130 reviewed baseline is A/I v1.2, B/II v1.1, C/III v1.0, D/TA-TR-2026-24 v1.0; verify any future edition change explicitly. Do not rely on main alone or silently mix older A numbering.

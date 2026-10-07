@@ -1,0 +1,74 @@
+{
+  "schema": "UCT_R165_PROOF_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R165-P1",
+      "node": "R165:PILOT_SELECTION_COVERAGE_INVARIANCE",
+      "type": "conditional_selection_theorem",
+      "full_claim": "Any pilot-measurable deterministic selection from a frozen finite menu preserves R164 simultaneous coverage when every menu plan has the conditional planwise guarantee and uses constant confirmatory bets for the same unweighted target.",
+      "domain": "One fixed R161/R164 protocol, disjoint pilot and confirmatory samples, finite frozen menu, every planwise-valid menu element, and no confirmatory-outcome selection.",
+      "all_premises": [
+        "the menu and deterministic tie-break are frozen before pilot outcomes",
+        "every menu element satisfies all R164 coverage premises",
+        "the selector is pilot-measurable",
+        "confirmatory outcomes are not used for plan, target or report selection"
+      ],
+      "proof_or_source": "Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §3; conditional expectation/tower argument specialized from R162-P2.",
+      "counterexample_or_limit": "Selecting from confirmatory outcomes can inflate error; finiteness alone does not validate an invalid menu element.",
+      "status": "PROVED_MANUALLY",
+      "thought_experiment_role": "Copy/swap separates design selection from the fixed experience token."
+    },
+    {
+      "id": "R165-P2",
+      "node": "R165:RESIDUAL_TRANSPORT_OBSTRUCTION",
+      "type": "exact_counterexample",
+      "full_claim": "Pilot/confirmatory independence alone does not identify or bound confirmatory residual risks or preserve the ranking of predictor centers.",
+      "domain": "One bounded component, two constant centers and independent deterministic pilot/confirmatory samples.",
+      "all_premises": [
+        "pilot X is identically zero",
+        "confirmatory X is identically one",
+        "centers are zero and one",
+        "the common constant bet and target are unchanged"
+      ],
+      "proof_or_source": "Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §4; direct squared-residual calculation.",
+      "counterexample_or_limit": "Does not challenge coverage; it challenges only width transport and pilot ranking.",
+      "status": "PROVED_EXACTLY",
+      "thought_experiment_role": "Abacus/calculator devices expose distribution shift despite data-split independence."
+    },
+    {
+      "id": "R165-P3",
+      "node": "R165:PILOT_WIDTH_REGRET_CERTIFICATE",
+      "type": "finite_menu_width_and_regret_theorem",
+      "full_claim": "Under independent bounded pilot participants and declared pilot-to-confirmatory residual-risk radii, the Hoeffding union band covers all m|Q| confirmatory residual risks with probability at least 1-beta; minimizing its upper width certificate has the displayed menu-relative regret bound.",
+      "domain": "Finite m and Q, finite independent pilot participant vectors, bounded squared residuals, fixed N_q/lambda/c plans, and valid transport radii.",
+      "all_premises": [
+        "pilot residuals lie in [0,1]",
+        "pilot participant vectors are independent",
+        "the complete finite menu is fixed before pilot outcomes",
+        "every declared transport inequality is true",
+        "the planning objective is maximum component expected untruncated half-width"
+      ],
+      "proof_or_source": "Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §§5–6; Hoeffding union bound, monotonicity and deterministic upper-certificate minimization.",
+      "counterexample_or_limit": "No transport premise means no width guarantee; the bound is not a realized-width or power theorem and can be loose.",
+      "status": "PROVED_MANUALLY_WITH_EXECUTABLE_FINITE_CHECKS",
+      "thought_experiment_role": "Human-realized-agent and copy/swap cases isolate independence, transport and selection."
+    },
+    {
+      "id": "R165-P4",
+      "node": "R165:THREE_WAY_FEASIBILITY_TRIAGE",
+      "type": "finite_menu_decision_theorem",
+      "full_claim": "The simultaneous lower/upper width certificates justify certified-feasible when min H_U<=w_max, menu-relative design-not-feasible when min H_L>w_max, and pilot-inconclusive otherwise; an upper bound above threshold alone never proves infeasibility.",
+      "domain": "The exact R165-P3 event, nonempty deterministically admissible menu, fixed threshold and fixed status boundaries.",
+      "all_premises": [
+        "all R165-P3 premises",
+        "protocol gates and hard resource screen are evaluated first",
+        "H_L<=H<=H_U for every admissible plan",
+        "no status is reinterpreted as a substantive UCT or experiential result"
+      ],
+      "proof_or_source": "Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §7; interval ordering and exhaustive trichotomy.",
+      "counterexample_or_limit": "The decision is relative to menu, objective, transport model, resource cap and beta; equality at the lower boundary remains inconclusive unless an upper certificate passes.",
+      "status": "PROVED_MANUALLY_WITH_BOUNDARY_ENUMERATION",
+      "thought_experiment_role": "Ancestor and copy/swap cases prevent a design status from becoming an experience predicate."
+    }
+  ]
+}

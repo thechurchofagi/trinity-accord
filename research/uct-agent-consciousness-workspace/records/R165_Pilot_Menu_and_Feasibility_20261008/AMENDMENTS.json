@@ -1,0 +1,26 @@
+{
+  "schema": "UCT_R165_AMENDMENTS/v1",
+  "entries": [
+    {
+      "id": "R165-A1",
+      "affected": ["R162:INDEPENDENT_PILOT_FREEZE_CONTRACT"],
+      "historical_text": "R162 permitted DESIGN_NOT_FEASIBLE when the precision target would require more than the predeclared maximum sample.",
+      "effective_clarification": "For stochastic pilot width screening, an upper certificate above threshold does not establish infeasibility. Use deterministic resource emptiness or min_q H_L>w_max; otherwise output PILOT_INCONCLUSIVE.",
+      "history_preserved": true
+    },
+    {
+      "id": "R165-A2",
+      "affected": ["R162:INDEPENDENT_PILOT_FREEZE_CONTRACT", "R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE"],
+      "historical_text": "An independent pilot may select a frozen plan while planwise coverage transports by the tower argument.",
+      "effective_clarification": "This remains valid for coverage, but pilot independence does not transport residual risk, expected width or the width-optimal plan. Width claims require R165:RESIDUAL_TRANSPORT_PREMISE.",
+      "history_preserved": true
+    },
+    {
+      "id": "R165-A3",
+      "affected": ["R164-G1"],
+      "historical_text": "R164 left the finite pilot menu and maximum-width/regret rule open.",
+      "effective_clarification": "R165 closes the formal selection and status logic conditional on a finite menu and transport radii; scientific choice of the menu and empirical validation of transport remain open.",
+      "history_preserved": true
+    }
+  ]
+}

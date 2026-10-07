@@ -1,0 +1,90 @@
+{
+  "schema": "UCT_R165_EXACT_CHECKS/v1",
+  "round": "R165",
+  "status": "PASS",
+  "checks": {
+    "transport_band_grid": {
+      "cases": 475,
+      "bounds_cover": true,
+      "upper_gap_bound": true
+    },
+    "no_transport_reversal": {
+      "pilot_selector": "center_0",
+      "confirmatory_oracle": "center_1",
+      "pass": true
+    },
+    "same_data_selection_inflation": {
+      "single_test_error": 0.05,
+      "adaptive_two_test_error": 0.0975,
+      "pass": true
+    },
+    "triage_exhaustive_grid": {
+      "cases": 6125,
+      "state_counts": {
+        "FEASIBLE_CERTIFIED": 3158,
+        "PILOT_INCONCLUSIVE": 2450,
+        "DESIGN_NOT_FEASIBLE": 517
+      },
+      "pass": true
+    },
+    "worked_menu": {
+      "b": 0.042292479700632546,
+      "rows": [
+        {
+          "lambda": 0.25,
+          "risk": 0.04,
+          "H_lower": 0.38455473305291815,
+          "H_true": 0.396612996237488,
+          "H_upper": 0.4153914741037307,
+          "regret_delta": 0.03755695573248523
+        },
+        {
+          "lambda": 0.5,
+          "risk": 0.06,
+          "H_lower": 0.19227736652645908,
+          "H_true": 0.23863268986084596,
+          "H_upper": 0.2867591571579051,
+          "regret_delta": 0.09625293459411842
+        },
+        {
+          "lambda": 0.75,
+          "risk": 0.12,
+          "H_lower": 0.22610216371283703,
+          "H_true": 0.33179910657600437,
+          "H_upper": 0.43749604943917164,
+          "regret_delta": 0.21139388572633463
+        },
+        {
+          "lambda": 0.9,
+          "risk": 0.2,
+          "H_lower": 0.5360352373259613,
+          "H_true": 0.7301919116231644,
+          "H_upper": 0.9243485859203676,
+          "regret_delta": 0.38831334859440636
+        }
+      ],
+      "selected_index": 1,
+      "oracle_index": 1,
+      "regret": 0.0,
+      "oracle_regret_bound": 0.09625293459411842,
+      "states": {
+        "0.3": "FEASIBLE_CERTIFIED",
+        "0.22": "PILOT_INCONCLUSIVE",
+        "0.18": "DESIGN_NOT_FEASIBLE"
+      },
+      "pass": true
+    },
+    "error_budget_separation": {
+      "confirmatory_alpha": 0.05,
+      "pilot_width_beta": 0.05,
+      "coverage_bound": 0.95,
+      "width_certificate_bound": 0.95,
+      "alpha_plus_beta_not_charged_to_planwise_coverage": true
+    }
+  },
+  "limitations": [
+    "Finite grids check algebra, boundaries and counterexamples; analytic proofs carry the general claims.",
+    "Synthetic risk values are not human data or sample-size recommendations.",
+    "No check validates transport radii, apparatus fidelity, participant independence or experience-level interpretation."
+  ]
+}

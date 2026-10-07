@@ -1,3 +1,14 @@
+## R165 — finite pilot menu, residual transport and feasibility triage
+
+- English result: `records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md`
+- Chinese review/current handoff: `REVIEW_ZH.md`, `CURRENT_HANDOFF.md` in the same directory
+- Proof/gap/source/amendment ledgers: same directory
+- Exact checks/results: `exact_checks.py`, `EXACT_CHECKS.json`
+- Formal extension/audit/validation: `MAP_EXTENSION.json`, `MAP_AUDIT.json`, `VALIDATION.json`
+- Map: R165-v1.0, 446 nodes / 215 rules, new 6/3; R164 prefix and 117 context links preserved
+- Result boundary: pilot selection preserves planwise coverage, not residual width; transport radii remain empirical premises; infeasibility is menu/objective/resource/beta relative
+- Next: token-level independent witness for an actually installed body-frame relation, without report circularity or a basal-experience gate
+
 ## R164 — frozen constant-bet bounded-martingale coverage
 
 - English result: `records/R164_Frozen_Bounded_Martingale_20261008/Frozen_Bounded_Martingale_Coverage_v0_1.md`

@@ -1,3 +1,11 @@
+## R165 current priority — independent selection is not residual transport
+
+R165 freezes a finite menu of R164 constant-bet/constant-center plans. Pilot-measurable deterministic selection preserves planwise confirmatory coverage, but an exact independent pilot-0 / confirmation-1 example reverses the residual ranking of centers 0 and 1. Width transfer therefore requires separately declared `|rho_C-rho_P|<=tau` radii.
+
+Map R165-v1.0: 446 nodes / 215 rules / 117 context links, new 6/3. Under valid radii, simultaneous pilot bands yield expected-width bounds, a menu-regret certificate, and strict three-way status. `min H_U<=w_max` is feasible; `min H_L>w_max` is only menu-relative not-feasible; otherwise inconclusive. 475 transport and 6,125 triage checks pass. Beta does not reduce R164 coverage because it certifies width, not coverage.
+
+Open: transport validation, menu science, apparatus, participant independence, token-level physical installation and B_min/F_O. Next: define an independent organization-level witness for an installed body-frame relation in one actual token, without ownership-report circularity or a basal-experience gate.
+
 ## R164 current priority — constant-bet bounded-martingale target preservation
 
 R164 separates classical i.i.d. empirical Bernstein, common-conditional-mean betting, weighted means and the R163 unweighted finite-design target. A constant confirmatory bet per component makes the bounded-supermartingale linear term target the average conditional mean; participant independence identifies it with R163 theta_N.

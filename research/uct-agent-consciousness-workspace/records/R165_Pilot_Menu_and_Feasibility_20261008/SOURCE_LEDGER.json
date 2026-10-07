@@ -1,0 +1,33 @@
+{
+  "schema": "UCT_R165_SOURCE_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R165-S1",
+      "source": "Hoeffding, W. (1963), Probability inequalities for sums of bounded random variables",
+      "primary": true,
+      "used_for": "Simultaneous finite-pilot residual-risk band after a union bound over components and menu plans.",
+      "scope_limit": "Does not supply pilot-to-confirmatory transport, protocol fidelity, target meaning or experience-level interpretation."
+    },
+    {
+      "id": "R165-S2",
+      "source": "Fixed R162 Independent_Pilot_and_Covariance_Identification_v0_1.md §§5–9",
+      "primary": true,
+      "used_for": "External pilot freeze, planwise conditional coverage, tower argument, same-data selection counterexample and pilot status boundaries.",
+      "scope_limit": "Its Gaussian Student fallback was superseded for bounded observed W by R163; only the general freeze/tower/status discipline is inherited."
+    },
+    {
+      "id": "R165-S3",
+      "source": "Fixed R163–R164 repository records",
+      "primary": true,
+      "used_for": "Bounded finite-design target, constant-bet coverage theorem, width formula, rare-spike obstruction and missingness boundary.",
+      "scope_limit": "Do not change the unweighted target, remove additive protection or infer residual-risk transport."
+    },
+    {
+      "id": "R165-S4",
+      "source": "UCT I v1.2 fixed source and current RESEARCH_MASTER_GUIDE.md",
+      "primary": true,
+      "used_for": "Declared-target, physical-witness, no-rescue and experience/self interpretation boundaries.",
+      "scope_limit": "Does not entail the pilot theorem or validate apparatus, transport radii, B_min or F_O."
+    }
+  ]
+}

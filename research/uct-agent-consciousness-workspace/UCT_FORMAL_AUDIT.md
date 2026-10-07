@@ -1,3 +1,9 @@
+## R165 audit — plan selection without precision transport
+
+R165-v1.0 has **446 nodes / 215 rules** (new 6/3); the inherited 440 nodes, 212 rules and 117 context links reconstruct exactly. Unique IDs, endpoints, parent hash and DAG pass. Exact checks cover 475 residual-transport cases, 6,125 exhaustive trichotomy boundary cases, the independent ranking reversal and same-data selection inflation.
+
+The audit isolates the main hidden premise: disjoint pilot data preserve a planwise coverage proof but do not identify confirmatory residual risks. The width/regret rule consequently requires R164 coverage, the finite frozen menu and a separate residual-transport premise simultaneously. The triage rule also requires the R161 admissibility gate. Expected untruncated width, realized width, power, apparatus fidelity, token installation and experience are distinct. No precision/status-to-C1, B_min, F_O, basal gate or exclusive-owner edge is added. Transport radii, menu science and positive token-level mineness semantics remain open. Full result: [MAP_AUDIT.json](records/R165_Pilot_Menu_and_Feasibility_20261008/MAP_AUDIT.json).
+
 ## R164 audit — variance adaptation without target weighting
 
 R164-v1.0 has **440 nodes / 212 rules** (new 4/3); the inherited 436 nodes, 209 rules and 117 context links reconstruct exactly. Unique IDs, endpoints, parent hash and DAG pass. Exact checks cover the one-step exponential constants, all rare-spike counts, rare-event thresholds, width constants and pointwise missingness endpoints.

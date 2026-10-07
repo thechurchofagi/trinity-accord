@@ -1,3 +1,11 @@
+## R165 extension — finite pilot selection, residual transport and honest triage
+
+R165-v1.0 contains **446 nodes / 215 rules** (new 6/3), preserving all 440 R164 nodes, 212 rules and 117 context links fieldwise. A frozen finite menu plus the R162 planwise premise and R164 coverage implies that a pilot-measurable deterministic selector preserves confirmatory coverage and the unweighted target. No multiplicity charge for menu size is added to `alpha` because exactly one independent-selected plan is executed.
+
+Coverage transport is explicitly separated from precision transport. Independent deterministic pilot and confirmation laws can reverse the squared-residual ranking of two centers. A width/regret theorem therefore also requires declared component-plan residual-transport radii. Simultaneous pilot bands then support expected untruncated half-width certificates. Feasibility is a strict trichotomy: an upper certificate supplies a feasible witness, all lower certificates above threshold supply only menu-relative infeasibility, and the complement is inconclusive. Full audit: [R165 MAP_AUDIT](records/R165_Pilot_Menu_and_Feasibility_20261008/MAP_AUDIT.json).
+
+No R165 rule concludes C1, basal experience, B_min, F_O, complete organization or an exclusive owner. Transport validity, actual apparatus, participant independence, token installation and experience-internal mineness remain open.
+
 ## R164 extension — constant-bet target preservation and bounded-martingale coverage
 
 R164-v1.0 contains **440 nodes / 212 rules** (new 4/3), preserving all 436 R163 nodes, 209 rules and 117 context links fieldwise. It separates classical i.i.d. empirical Bernstein, common-conditional-mean betting, weighted means and the R163 unweighted finite-design target. A frozen constant bet per component makes the bounded-supermartingale exponent target the average conditional mean; independent participant vectors identify this with R163 theta_N.

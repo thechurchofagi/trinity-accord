@@ -1,0 +1,65 @@
+{
+  "schema": "UCT_R165_GAP_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R165-G1",
+      "location": "Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §§4-6; R165:RESIDUAL_TRANSPORT_PREMISE",
+      "gap": "No empirical or physical argument validates the pilot-to-confirmatory residual-risk transport radii.",
+      "impact": "Width certificates, regret and feasibility labels; not R164 coverage conditional on a selected valid plan.",
+      "counterexample": "Independent deterministic pilot X=0 and confirmatory X=1 reverse the ranking of centers 0 and 1.",
+      "corrected_now": "Independence and residual transport are separate nodes; the width theorem requires both menu and transport premises explicitly.",
+      "unresolved_premise": "Justify or sensitivity-analyse tau_jq for the actual protocol and participant designs.",
+      "status": "OPEN_EMPIRICAL_PREMISE"
+    },
+    {
+      "id": "R165-G2",
+      "location": "§§2,5-7; R165:PILOT_WIDTH_REGRET_CERTIFICATE",
+      "gap": "The declared objective is maximum component expected untruncated half-width, not realized maximum width, decision power or probability of a decisive R161 outcome.",
+      "impact": "A width-certified plan may still be unresolved or occasionally wide.",
+      "counterexample": "A bounded residual with small expectation can realize a large confirmatory residual sum on some samples.",
+      "corrected_now": "The objective and evidence level are typed exactly and no power claim is made.",
+      "unresolved_premise": "A high-probability realized-width or decision-power criterion needs another frozen theorem and effect scenario.",
+      "status": "OPEN_BEYOND_DECLARED_OBJECTIVE"
+    },
+    {
+      "id": "R165-G3",
+      "location": "§§2,6-7; R165:FINITE_PILOT_MENU_CONTRACT",
+      "gap": "The finite menu may omit the scientifically best or only feasible plan, and its centers/lambdas have no apparatus-specific justification.",
+      "impact": "Regret and DESIGN_NOT_FEASIBLE are menu-relative rather than global.",
+      "counterexample": "A center outside the menu can have zero confirmatory residual while every listed center is poor.",
+      "corrected_now": "Every result states its finite-menu relativity and deterministic resource envelope.",
+      "unresolved_premise": "Predeclare a scientifically justified menu before any actual pilot.",
+      "status": "OPEN_DESIGN_CHOICE"
+    },
+    {
+      "id": "R165-G4",
+      "location": "§7; R165:THREE_WAY_FEASIBILITY_TRIAGE",
+      "gap": "Finite pilot uncertainty can leave neither feasibility nor infeasibility certified.",
+      "impact": "A binary pilot decision would misclassify uncertain cases and invite post-hoc interval switching.",
+      "counterexample": "In the saved synthetic audit, w_max=.22 lies below every upper certificate but not below every lower certificate.",
+      "corrected_now": "PILOT_INCONCLUSIVE is mandatory; DESIGN_NOT_FEASIBLE requires every lower certificate above threshold or deterministic resource emptiness.",
+      "unresolved_premise": "Rules for any new pilot/menu/threshold version must be declared without confirmatory reuse.",
+      "status": "REPAIRED_FOR_CURRENT_CONTRACT"
+    },
+    {
+      "id": "R165-G5",
+      "location": "§8 and downstream R161 implementation",
+      "gap": "Participant-vector independence, gate validity, bounded readout construction, missingness targets and apparatus fidelity remain untested.",
+      "impact": "Neither coverage nor width certificates have an actual human implementation witness.",
+      "counterexample": "Coordinated participants or common session disturbances violate the participant-level independence used by the finite-design specialization.",
+      "corrected_now": "The contracts retain all R161 gates and separate pilot, confirmatory, statistical and actual-organizational objects.",
+      "unresolved_premise": "Ethically approved apparatus validation and participant-level dependence audit.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R165-G6",
+      "location": "§§9-11 and UCT interpretation",
+      "gap": "The auxiliary statistical design still does not show that a population role profile is an actually installed body-frame relation in one token or that such a relation realizes felt mineness.",
+      "impact": "No B_min, F_O, complete organization, consciousness criterion or unique owner follows.",
+      "counterexample": "Two protocols can have identical valid population intervals while differing in whether the measured relation is installed in any participant's operative body-frame organization.",
+      "corrected_now": "R165 is marked auxiliary and the next question returns to the organization-level bridge rather than extending statistics again.",
+      "unresolved_premise": "Independently specified token-level physical-role witness and separately justified experience-internal mineness bridge.",
+      "status": "OPEN_MAIN_LINE"
+    }
+  ]
+}

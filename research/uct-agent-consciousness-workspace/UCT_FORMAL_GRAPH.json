@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R164-v1.0",
+  "revision": "R165-v1.0",
   "date": "2026-10-08",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -19236,6 +19236,279 @@
           }
         ]
       }
+    },
+    {
+      "id": "R165:FINITE_PILOT_MENU_CONTRACT",
+      "kind": "PROSPECTIVE_DESIGN_DEFINITION",
+      "label": "Frozen Finite Pilot Menu Contract",
+      "statement": "Before pilot outcomes, freeze a finite menu of confirmatory plans, each containing N_q, one constant bet and constant center per component, the unchanged R161 target/decision/gates, a deterministic tie-break, alpha, beta, transport radii, width objective, resource cap and status boundaries; confirmatory outcomes may not select the plan, target or report.",
+      "domain": "One fixed R161/R164 bounded protocol, finite nonempty menu after deterministic resource screening, external pilot and disjoint confirmatory sample; no pilot or human study occurred.",
+      "scope": "One fixed R161/R164 bounded protocol, finite nonempty menu after deterministic resource screening, external pilot and disjoint confirmatory sample; no pilot or human study occurred.",
+      "source": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §2",
+      "source_lineage": "R162 external-pilot freeze plus R164 constant-bet target discipline, made finite and auditable for width selection.",
+      "status": "DECLARED_CANDIDATE_DESIGN_NOT_RUN",
+      "proof": "Definition; it fixes the selector's range and all decision inputs before pilot/confirmatory outcomes.",
+      "counterexamples_and_limits": "A finite menu may omit every scientifically useful plan. Freezing does not validate apparatus, participant independence, transport radii or experience-level interpretation.",
+      "formal_contract_R165": {
+        "object_domain": "One fixed R161 bounded body/tool protocol, its R162 external pilot and R164 constant-bet interval family; no human work occurred.",
+        "quantifiers": "Finite m and menu Q, every component-plan pair, every pilot record, every selected plan, finite n_P and N_q, and fixed alpha/beta/width/resource thresholds.",
+        "bearer_time_signature": "Pilot and confirmatory participants, menu plans, statistical targets, actual process tokens, complete organizations, experiences and reports remain differently typed and temporally ordered.",
+        "source_anchor": {
+          "path": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md",
+          "sha256": "291b0af72c4e34b22c43f7d8eb9c8485d99ac725a5de7c9109ec22fce6a5e37e",
+          "locator": "sections 1-12"
+        },
+        "purpose": "Close the pilot-selection loophole without target change, confirmatory reuse, false infeasibility or experience-level promotion.",
+        "thought_experiments": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §9",
+        "open_obligations": [
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R164-G3",
+          "R164-G4",
+          "R164-G5",
+          "R165-G1",
+          "R165-G2",
+          "R165-G3",
+          "R165-G4",
+          "R165-G5",
+          "R165-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R165:PILOT_SELECTION_COVERAGE_INVARIANCE",
+      "kind": "CONDITIONAL_SELECTION_THEOREM",
+      "label": "Pilot Selection Preserves Planwise Coverage",
+      "statement": "Any pilot-measurable deterministic selector from the frozen finite menu preserves R164 simultaneous coverage at level 1-alpha when every selected plan satisfies the R162 planwise premise and uses constant confirmatory bets for the same unweighted finite-design target; menu size is not charged to alpha because exactly one independent-pilot-selected plan is executed.",
+      "domain": "Every pilot record and every selected plan in the fixed menu, with disjoint confirmatory data and all R164 boundedness, target, predictability and participant-independence premises.",
+      "scope": "Every pilot record and every selected plan in the fixed menu, with disjoint confirmatory data and all R164 boundedness, target, predictability and participant-independence premises.",
+      "source": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §3",
+      "source_lineage": "R162 tower theorem specialized to the R164 constant-bet finite menu.",
+      "status": "MANUAL_CONDITIONAL_PROOF",
+      "proof": "Condition on the pilot record, apply the planwise guarantee to the frozen selected plan, and integrate over pilot records. Constant bets preserve the unweighted target plan by plan.",
+      "counterexamples_and_limits": "Selecting from confirmatory outcomes can inflate error; menu finiteness does not repair an invalid plan. The theorem says nothing about precision or feasibility.",
+      "formal_contract_R165": {
+        "object_domain": "One fixed R161 bounded body/tool protocol, its R162 external pilot and R164 constant-bet interval family; no human work occurred.",
+        "quantifiers": "Finite m and menu Q, every component-plan pair, every pilot record, every selected plan, finite n_P and N_q, and fixed alpha/beta/width/resource thresholds.",
+        "bearer_time_signature": "Pilot and confirmatory participants, menu plans, statistical targets, actual process tokens, complete organizations, experiences and reports remain differently typed and temporally ordered.",
+        "source_anchor": {
+          "path": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md",
+          "sha256": "291b0af72c4e34b22c43f7d8eb9c8485d99ac725a5de7c9109ec22fce6a5e37e",
+          "locator": "sections 1-12"
+        },
+        "purpose": "Close the pilot-selection loophole without target change, confirmatory reuse, false infeasibility or experience-level promotion.",
+        "thought_experiments": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §9",
+        "open_obligations": [
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R164-G3",
+          "R164-G4",
+          "R164-G5",
+          "R165-G1",
+          "R165-G2",
+          "R165-G3",
+          "R165-G4",
+          "R165-G5",
+          "R165-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r165_pilot_selection_coverage_invariance",
+            "all_of": [
+              "R162:PLANWISE_COVERAGE_PREMISE",
+              "R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE",
+              "R165:FINITE_PILOT_MENU_CONTRACT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R165:RESIDUAL_TRANSPORT_OBSTRUCTION",
+      "kind": "EXACT_NONIDENTIFICATION_COUNTEREXAMPLE",
+      "label": "Pilot Independence Does Not Transport Width",
+      "statement": "Disjoint pilot and confirmatory samples can be independent while reversing the residual-risk ranking of two predictor centers; therefore pilot independence transports planwise coverage but does not identify confirmatory residual risks, expected widths or the width-optimal plan.",
+      "domain": "One bounded component, two constant centers, one common constant bet and independent deterministic pilot/confirmatory laws.",
+      "scope": "One bounded component, two constant centers, one common constant bet and independent deterministic pilot/confirmatory laws.",
+      "source": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §4",
+      "source_lineage": "New protocol-specific counterexample using elementary squared residuals; no new general probability theory claimed.",
+      "status": "EXACT_COUNTEREXAMPLE",
+      "proof": "Pilot X=0 ranks center 0 ahead of center 1; independent confirmatory X=1 ranks center 1 ahead of center 0. The target and constant bet remain unchanged.",
+      "counterexamples_and_limits": "It does not challenge interval coverage. A defended transport/stability premise or worst-case bound can restore a width statement.",
+      "formal_contract_R165": {
+        "object_domain": "One fixed R161 bounded body/tool protocol, its R162 external pilot and R164 constant-bet interval family; no human work occurred.",
+        "quantifiers": "Finite m and menu Q, every component-plan pair, every pilot record, every selected plan, finite n_P and N_q, and fixed alpha/beta/width/resource thresholds.",
+        "bearer_time_signature": "Pilot and confirmatory participants, menu plans, statistical targets, actual process tokens, complete organizations, experiences and reports remain differently typed and temporally ordered.",
+        "source_anchor": {
+          "path": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md",
+          "sha256": "291b0af72c4e34b22c43f7d8eb9c8485d99ac725a5de7c9109ec22fce6a5e37e",
+          "locator": "sections 1-12"
+        },
+        "purpose": "Close the pilot-selection loophole without target change, confirmatory reuse, false infeasibility or experience-level promotion.",
+        "thought_experiments": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §9",
+        "open_obligations": [
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R164-G3",
+          "R164-G4",
+          "R164-G5",
+          "R165-G1",
+          "R165-G2",
+          "R165-G3",
+          "R165-G4",
+          "R165-G5",
+          "R165-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R165:RESIDUAL_TRANSPORT_PREMISE",
+      "kind": "EXPLICIT_EMPIRICAL_PREMISE",
+      "label": "Pilot-to-Confirmation Residual Transport Premise",
+      "statement": "For every component-plan pair, the absolute difference between the finite-pilot-design and finite-confirmatory-design expected squared residual risks is at most the predeclared nonnegative radius tau_jq.",
+      "domain": "Every component and plan in the frozen menu, fixed pilot and confirmatory designs, constant centers, and explicitly declared sensitivity radii.",
+      "scope": "Every component and plan in the frozen menu, fixed pilot and confirmatory designs, constant centers, and explicitly declared sensitivity radii.",
+      "source": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §5",
+      "source_lineage": "Premise isolated by the R165 nonidentification counterexample; not imported from Hoeffding, independence or C1.",
+      "status": "EXPLICIT_PREMISE_NOT_EMPIRICALLY_VALIDATED",
+      "proof": "No proof is claimed. The radius is a sensitivity/design assumption to be independently justified or varied.",
+      "counterexamples_and_limits": "The zero-pilot/one-confirmatory counterexample violates every radius below one for the corresponding center. Large radii can make the certificate uninformative.",
+      "formal_contract_R165": {
+        "object_domain": "One fixed R161 bounded body/tool protocol, its R162 external pilot and R164 constant-bet interval family; no human work occurred.",
+        "quantifiers": "Finite m and menu Q, every component-plan pair, every pilot record, every selected plan, finite n_P and N_q, and fixed alpha/beta/width/resource thresholds.",
+        "bearer_time_signature": "Pilot and confirmatory participants, menu plans, statistical targets, actual process tokens, complete organizations, experiences and reports remain differently typed and temporally ordered.",
+        "source_anchor": {
+          "path": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md",
+          "sha256": "291b0af72c4e34b22c43f7d8eb9c8485d99ac725a5de7c9109ec22fce6a5e37e",
+          "locator": "sections 1-12"
+        },
+        "purpose": "Close the pilot-selection loophole without target change, confirmatory reuse, false infeasibility or experience-level promotion.",
+        "thought_experiments": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §9",
+        "open_obligations": [
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R164-G3",
+          "R164-G4",
+          "R164-G5",
+          "R165-G1",
+          "R165-G2",
+          "R165-G3",
+          "R165-G4",
+          "R165-G5",
+          "R165-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R165:PILOT_WIDTH_REGRET_CERTIFICATE",
+      "kind": "FINITE_MENU_WIDTH_AND_REGRET_THEOREM",
+      "label": "Pilot Width and Regret Certificate",
+      "statement": "For bounded independent pilot participant vectors, a finite frozen menu and valid residual-transport radii, simultaneous Hoeffding bands cover every confirmatory residual risk with probability at least 1-beta; minimizing the resulting upper expected-width certificate has regret at most max_j 4g(lambda_jq*)[b+tau_jq*]/lambda_jq* relative to the true menu oracle q*.",
+      "domain": "Finite m and menu, bounded pilot squared residuals, independent pilot participant vectors, fixed N_q/lambda/c, valid transport radii and the maximum component expected untruncated half-width objective.",
+      "scope": "Finite m and menu, bounded pilot squared residuals, independent pilot participant vectors, fixed N_q/lambda/c, valid transport radii and the maximum component expected untruncated half-width objective.",
+      "source": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §§5-6",
+      "source_lineage": "Hoeffding bounded-mean union bound plus R164's affine expected-width formula and deterministic upper-certificate minimization.",
+      "status": "MANUAL_GENERAL_PROOF_WITH_EXECUTABLE_FINITE_CHECKS",
+      "proof": "Uniformly bound pilot risks, add declared transport radii, use monotonicity of the affine width formula, and compare the selected upper certificate to the true oracle's certificate.",
+      "counterexamples_and_limits": "The result fails without transport, is menu-relative, may be loose, and does not certify realized width, power, apparatus or experience.",
+      "formal_contract_R165": {
+        "object_domain": "One fixed R161 bounded body/tool protocol, its R162 external pilot and R164 constant-bet interval family; no human work occurred.",
+        "quantifiers": "Finite m and menu Q, every component-plan pair, every pilot record, every selected plan, finite n_P and N_q, and fixed alpha/beta/width/resource thresholds.",
+        "bearer_time_signature": "Pilot and confirmatory participants, menu plans, statistical targets, actual process tokens, complete organizations, experiences and reports remain differently typed and temporally ordered.",
+        "source_anchor": {
+          "path": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md",
+          "sha256": "291b0af72c4e34b22c43f7d8eb9c8485d99ac725a5de7c9109ec22fce6a5e37e",
+          "locator": "sections 1-12"
+        },
+        "purpose": "Close the pilot-selection loophole without target change, confirmatory reuse, false infeasibility or experience-level promotion.",
+        "thought_experiments": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §9",
+        "open_obligations": [
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R164-G3",
+          "R164-G4",
+          "R164-G5",
+          "R165-G1",
+          "R165-G2",
+          "R165-G3",
+          "R165-G4",
+          "R165-G5",
+          "R165-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r165_pilot_width_regret_certificate",
+            "all_of": [
+              "R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE",
+              "R165:FINITE_PILOT_MENU_CONTRACT",
+              "R165:RESIDUAL_TRANSPORT_PREMISE"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R165:THREE_WAY_FEASIBILITY_TRIAGE",
+      "kind": "FINITE_MENU_DECISION_THEOREM",
+      "label": "Certified Feasible, Inconclusive, or Menu-Relative Infeasible",
+      "statement": "After R161 gates and hard resource screening, min_q H_U(q)<=w_max certifies feasibility, min_q H_L(q)>w_max certifies menu-relative DESIGN_NOT_FEASIBLE at width confidence 1-beta, and all remaining cases are PILOT_INCONCLUSIVE; an upper bound above threshold alone never proves infeasibility.",
+      "domain": "A nonempty deterministically admissible R165 menu, simultaneous lower/upper width certificate, fixed w_max and beta; R161 gate failures are evaluated separately.",
+      "scope": "A nonempty deterministically admissible R165 menu, simultaneous lower/upper width certificate, fixed w_max and beta; R161 gate failures are evaluated separately.",
+      "source": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §7",
+      "source_lineage": "Order logic applied to the R165 simultaneous width band, with R161/R162 invalidity and resource boundaries retained.",
+      "status": "MANUAL_PROOF_WITH_EXHAUSTIVE_BOUNDARY_GRID",
+      "proof": "On H_L(q)<=H(q)<=H_U(q) for all plans, an upper certificate below threshold provides a witness; every lower certificate above threshold excludes every menu plan; the complementary region proves neither statement.",
+      "counterexamples_and_limits": "The status is relative to menu, objective, transport radii, resource cap and beta. It is not global study impossibility, theoretical exclusion, no mineness or no experience.",
+      "formal_contract_R165": {
+        "object_domain": "One fixed R161 bounded body/tool protocol, its R162 external pilot and R164 constant-bet interval family; no human work occurred.",
+        "quantifiers": "Finite m and menu Q, every component-plan pair, every pilot record, every selected plan, finite n_P and N_q, and fixed alpha/beta/width/resource thresholds.",
+        "bearer_time_signature": "Pilot and confirmatory participants, menu plans, statistical targets, actual process tokens, complete organizations, experiences and reports remain differently typed and temporally ordered.",
+        "source_anchor": {
+          "path": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md",
+          "sha256": "291b0af72c4e34b22c43f7d8eb9c8485d99ac725a5de7c9109ec22fce6a5e37e",
+          "locator": "sections 1-12"
+        },
+        "purpose": "Close the pilot-selection loophole without target change, confirmatory reuse, false infeasibility or experience-level promotion.",
+        "thought_experiments": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §9",
+        "open_obligations": [
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R164-G3",
+          "R164-G4",
+          "R164-G5",
+          "R165-G1",
+          "R165-G2",
+          "R165-G3",
+          "R165-G4",
+          "R165-G5",
+          "R165-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r165_three_way_feasibility_triage",
+            "all_of": [
+              "R161:ADMISSIBILITY_GATE",
+              "R165:FINITE_PILOT_MENU_CONTRACT",
+              "R165:PILOT_WIDTH_REGRET_CERTIFICATE"
+            ]
+          }
+        ]
+      }
     }
   ],
   "rules": [
@@ -31831,6 +32104,95 @@
         "source_sha256": "8047751407789ebd6fee5122109c6605c0e8296b92fefed43e042fa91ff747aa",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r165_pilot_selection_coverage_invariance",
+      "all_of": [
+        "R162:PLANWISE_COVERAGE_PREMISE",
+        "R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE",
+        "R165:FINITE_PILOT_MENU_CONTRACT"
+      ],
+      "conclusion": "R165:PILOT_SELECTION_COVERAGE_INVARIANCE",
+      "statement": "The explicit planwise premise, R164 constant-bet coverage and frozen finite-menu contract jointly imply that independent pilot selection preserves coverage and the unweighted target.",
+      "proof_sketch": "Condition on every pilot record, apply the selected plan's R164 guarantee, then integrate; constant bets preserve the planwise target.",
+      "source": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §3",
+      "kind": "CONDITIONAL_SELECTION_DEDUCTION",
+      "review": "MANUAL_ALL_OF_SELECTION_TARGET_AND_DATA_SPLIT_AUDIT",
+      "formal_contract_R165": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same fixed R161/R164 target and components",
+          "every menu plan is planwise valid",
+          "constant bets within every confirmatory plan",
+          "selector and tie-break depend only on pilot record",
+          "no confirmatory-outcome family/target/report selection",
+          "population coverage remains distinct from actual organization and experience"
+        ],
+        "quantification": "Every pilot record and every plan in the selector's range must satisfy all premises simultaneously.",
+        "proof_location": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §3",
+        "source_sha256": "291b0af72c4e34b22c43f7d8eb9c8485d99ac725a5de7c9109ec22fce6a5e37e",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r165_pilot_width_regret_certificate",
+      "all_of": [
+        "R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE",
+        "R165:FINITE_PILOT_MENU_CONTRACT",
+        "R165:RESIDUAL_TRANSPORT_PREMISE"
+      ],
+      "conclusion": "R165:PILOT_WIDTH_REGRET_CERTIFICATE",
+      "statement": "R164's width formula, the finite menu and the separately declared residual-transport premise jointly yield simultaneous pilot width bounds and the menu-relative upper-certificate regret result.",
+      "proof_sketch": "Union-bound Hoeffding pilot risks, add transport radii, use affine width monotonicity, and compare the selected upper certificate with the true oracle.",
+      "source": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §§5-6",
+      "kind": "CONDITIONAL_FINITE_MENU_DEDUCTION",
+      "review": "MANUAL_ALL_OF_WIDTH_TRANSPORT_AND_OBJECTIVE_AUDIT",
+      "formal_contract_R165": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same bounded squared-residual objects",
+          "finite menu frozen before pilot outcomes",
+          "independent pilot participant vectors",
+          "valid declared transport radius for every component-plan pair",
+          "maximum component expected untruncated half-width objective",
+          "beta kept separate from confirmatory alpha",
+          "no apparatus or experience-level promotion"
+        ],
+        "quantification": "Every component-plan pair must satisfy boundedness and its declared transport inequality simultaneously.",
+        "proof_location": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §§5-6",
+        "source_sha256": "291b0af72c4e34b22c43f7d8eb9c8485d99ac725a5de7c9109ec22fce6a5e37e",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r165_three_way_feasibility_triage",
+      "all_of": [
+        "R161:ADMISSIBILITY_GATE",
+        "R165:FINITE_PILOT_MENU_CONTRACT",
+        "R165:PILOT_WIDTH_REGRET_CERTIFICATE"
+      ],
+      "conclusion": "R165:THREE_WAY_FEASIBILITY_TRIAGE",
+      "statement": "The physical/measurement admissibility gate, frozen menu/status contract and simultaneous width band jointly imply the honest feasible/inconclusive/menu-relative-infeasible trichotomy.",
+      "proof_sketch": "Apply the lower/true/upper ordering to every plan after protocol and hard-resource screening; the two strict certification conditions are disjoint and the complement is inconclusive.",
+      "source": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §§7-8",
+      "kind": "CONDITIONAL_DECISION_DEDUCTION",
+      "review": "MANUAL_ALL_OF_GATE_RESOURCE_CERTIFICATE_AND_STATUS_AUDIT",
+      "formal_contract_R165": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "all six R161 gates evaluated before width status",
+          "hard resource envelope frozen",
+          "nonempty admissible menu or deterministic infeasibility",
+          "simultaneous H_L<=H<=H_U event",
+          "fixed w_max and beta",
+          "PILOT_INVALID_PROTOCOL, PILOT_INCONCLUSIVE, DESIGN_NOT_FEASIBLE and confirmatory UNRESOLVED remain distinct",
+          "no status-to-mineness/experience inference"
+        ],
+        "quantification": "Every admissible menu plan and all fixed status boundaries must be evaluated in the same protocol version.",
+        "proof_location": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md §§7-8",
+        "source_sha256": "291b0af72c4e34b22c43f7d8eb9c8485d99ac725a5de7c9109ec22fce6a5e37e",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -33062,6 +33424,21 @@
     "status": "FROZEN_BOUNDED_MARTINGALE_COVERAGE_WITH_TARGET_DISCIPLINE",
     "actual_apparatus": false,
     "actual_participants": false,
+    "ethics_approval": false,
+    "empirical_F_witness": false,
+    "global_semantic_proof": false
+  },
+  "research_R165": {
+    "start_head": "d279782dd4df05ef913a2413eacb5bd116b327fa",
+    "parent_graph_sha256": "bd8868a206e7fe39b190204d4f252fd2a02f060855e199b1aeeb684a108b6499",
+    "note": "records/R165_Pilot_Menu_and_Feasibility_20261008/Pilot_Menu_Width_Certification_and_Feasibility_v0_1.md",
+    "new_nodes": 6,
+    "new_rules": 3,
+    "status": "FINITE_PILOT_MENU_WIDTH_CERTIFICATION_WITH_HONEST_TRIAGE",
+    "actual_apparatus": false,
+    "actual_pilot": false,
+    "actual_participants": false,
+    "transport_validated": false,
     "ethics_approval": false,
     "empirical_F_witness": false,
     "global_semantic_proof": false

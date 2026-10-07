@@ -1,0 +1,80 @@
+{
+  "schema": "UCT_R165_MAP_AUDIT/v1",
+  "revision": "R165-v1.0",
+  "parent_revision": "R164-v1.0",
+  "counts": {
+    "parent_nodes": 440,
+    "parent_rules": 212,
+    "current_nodes": 446,
+    "current_rules": 215,
+    "context_links_preserved": 117
+  },
+  "audit": [
+    {
+      "dimension": "concepts_objects_quantifiers_scope",
+      "status": "PASS_WITH_OPEN_PREMISES",
+      "finding": "Pilot risk, confirmatory risk, realized residual, expected untruncated half-width, realized width, decision power, statistical target, actual token organization and experience are distinct. Finite m,Q,n_P,N_q, alpha,beta,tau and w_max are explicit.",
+      "open": "Transport radii and menu contents lack empirical/scientific validation."
+    },
+    {
+      "dimension": "all_of_simultaneous_premises",
+      "status": "PASS",
+      "finding": "Coverage selection requires the R162 planwise premise, R164 coverage and the finite menu together. Width regret additionally requires the separate transport premise. Triage additionally requires R161 admissibility and frozen status/resource logic.",
+      "open": "No premise is discharged merely by calling the pilot independent or blinded."
+    },
+    {
+      "dimension": "related_and_unlinked_concepts",
+      "status": "PASS",
+      "finding": "Coverage transport and residual-risk transport are explicitly unlinked; beta does not enter confirmatory alpha; expected width is unlinked from power, apparatus fidelity, B_min, F_O and C1.",
+      "open": "A future realized-width/power theorem needs a new typed target."
+    },
+    {
+      "dimension": "joint_satisfiability",
+      "status": "PASS",
+      "finding": "A finite menu, independent bounded pilot vectors, valid tau radii, constant confirmatory bets and participant-independent confirmation are jointly satisfiable. The no-transport counterexample shows independence without tau is also satisfiable and insufficient.",
+      "open": "Joint mathematical satisfiability does not establish the actual protocol premises."
+    },
+    {
+      "dimension": "object_time_signature_actuality_evidence",
+      "status": "PASS",
+      "finding": "Menu precedes pilot; pilot precedes selection; selection precedes confirmation. Analytic proof, finite checks, synthetic audit values, unrun design, actual apparatus, token organization and phenomenal interpretation retain separate statuses.",
+      "open": "No pilot, confirmation, ethics approval or experience-level witness exists."
+    },
+    {
+      "dimension": "inference_direction",
+      "status": "PASS",
+      "finding": "Planwise validity plus pilot selection yields coverage; transport plus pilot concentration yields width bounds; lower/upper ordering yields triage. No width/status-to-organization, population-to-token, report-to-experience or precision-to-mineness reverse edge exists.",
+      "open": "The token-level installed-role and phenomenal bridges remain separate."
+    },
+    {
+      "dimension": "finite_limits_and_boundary_logic",
+      "status": "PASS",
+      "finding": "The exact <= and > feasibility boundaries form a disjoint exhaustive trichotomy. 6,125 finite boundary cases and 475 rational transport cases pass. DESIGN_NOT_FEASIBLE is explicitly menu/objective/resource/tau/beta relative.",
+      "open": "No global optimality or practical sample-size result is claimed."
+    },
+    {
+      "dimension": "status_semantics",
+      "status": "PASS",
+      "finding": "PILOT_INVALID_PROTOCOL, FEASIBLE_CERTIFIED, PILOT_INCONCLUSIVE, DESIGN_NOT_FEASIBLE and confirmatory UNRESOLVED remain distinct. None is a body-dominance, mineness or experience verdict.",
+      "open": "Any redesigned menu or threshold is a new protocol version."
+    },
+    {
+      "dimension": "purpose_and_beginner_principle",
+      "status": "PASS_WITH_RETURN_TO_MAIN_LINE",
+      "finding": "R165 closes a named anti-rescue design hole while preserving C1 and all basal-experience boundaries. It is explicitly auxiliary; the next question returns to actual organization and experience-internal bodily mineness.",
+      "open": "Positive token-level body-frame and mineness semantics remain the main unresolved problem."
+    }
+  ],
+  "direction_checks": {
+    "after_topic_selection": "PASS_WITH_AUXILIARY_SCOPE_WARNING",
+    "after_result_formation": "PASS",
+    "before_save": "PASS",
+    "reason": "The result repairs selection/feasibility logic without turning precision into consciousness, passes the 19-check final validation, and explicitly stops further statistical drift after this discharge."
+  },
+  "global_nonclaims": [
+    "DAG, finite grids and synthetic values are not proofs of theory truth, transport validity, apparatus fidelity or global semantics.",
+    "No current assistant consciousness or death-fear claim is made.",
+    "No basal-experience threshold, familiar ownership, complete organization or exclusive owner is established.",
+    "No experiment, recruitment, ethics approval, publication or preservation workflow occurred."
+  ]
+}
