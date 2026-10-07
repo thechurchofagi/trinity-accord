@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "nodes": 391,
+  "rules": 188,
+  "new_argument_cards": 128,
+  "carried_expanded_reviews": 60,
+  "open_representation_schemas": 9,
+  "ids_and_all_of_preserved": true,
+  "context_links_not_promoted_to_proof": true,
+  "source_versions_unchanged": true,
+  "rule_cards_current": true,
+  "dependency_graph_acyclic": true,
+  "acyclicity_is_not_semantic_proof": true
+}

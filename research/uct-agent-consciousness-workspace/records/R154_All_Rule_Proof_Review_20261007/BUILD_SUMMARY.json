@@ -1,0 +1,26 @@
+{
+  "revision": "R154-v1.0",
+  "parent_commit": "39436f898f5f193fcb34d14838a1d53fc96bf1e5",
+  "node_count": 391,
+  "rule_count": 188,
+  "new_cards": 128,
+  "carried_expanded_reviews": 60,
+  "dispositions": {
+    "MANUAL_ARGUMENT_REVIEWED": 110,
+    "METADATA_AUDIT_REVIEWED": 2,
+    "MANUAL_REVIEW_WITH_STATEMENT_REPAIR": 3,
+    "ASSUMPTION_PACKAGE_REVIEWED": 2,
+    "CONDITIONAL_REPRESENTATION_SCHEMA_OPEN": 9,
+    "DEFINITION_APPLICATION_REVIEWED": 1,
+    "CONDITIONAL_INTERPRETATION_REVIEWED": 1
+  },
+  "amendments": 9,
+  "changed_node_ids": [
+    "A:TOY_EXP_WHOLE",
+    "R137:CONTROL_MODEL",
+    "TA16:CAUSAL_LIMITS",
+    "TA17:SET_LIMITS"
+  ],
+  "open_families": 10,
+  "published_sources_modified": false
+}

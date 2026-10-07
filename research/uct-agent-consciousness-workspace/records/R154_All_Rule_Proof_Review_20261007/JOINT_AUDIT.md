@@ -1,0 +1,38 @@
+# R154 — Joint-premise and substitution audit
+
+The object of this audit is the finite map, not a claim of universal semantic consistency. Every rule remains a conditional statement. To apply a route, instantiate all its shared parameters once: bearer/token, interval, signature, ports, permitted interventions, probability law, policy class, target and interpretation. Alternative rules are alternative routes; their premises must not be silently merged or interchanged.
+
+| Rule families | Simultaneous requirement | Result of review / prohibited substitution |
+|---|---|---|
+| a05/a07/b02/a36 | U1 and the absence witness use the same **actual** token/domain and the same proposed gate | The conditional contradiction is valid. An imaginary witness, absence of a report, or absence of conceptual I does not establish absence of every minimal perspective. Actual witness grounding remains open. |
+| a15/a16/a25–a28 | Whole and sublevel conclusions retain their own actual-complete bridges and signatures | Equal s dynamics coexist with whole image sizes 2,4,4,8. There is no contradiction between sublevel equality and whole inequality. The one-link pair is not separated by image size. |
+| a29–a32 | Measurement, structural comparison and forward/reverse commitments refer to the same frozen instance | A mismatch refutes their conjunction. C1 alone is not experimentally isolated by this route; a reverse test requires an actual reverse commitment. |
+| b01 / nine rival schemas / b02–b03 | Fixed expression semantics, BAC and source-fidelity bridges; rival targets distinguish access/content from basal existence | Finite expression evaluation is justified. Nine representation schemas still have imported semantic/biological/measurement obligations. Evaluability cannot certify fidelity or a full theory reduction. |
+| C:P1/P2, c16–c18, r135_uct | One realized complete-type domain and one isomorphism-invariant task/profile map | Different profiles imply different complete types conditionally. Equal coarse profiles do not imply equal types. An abstract profile counterexample does not instantiate an actual experiential pair. |
+| r126_4/r127_1b | Same deterministic model, same initial observation **o=(p,r)**, all input words including empty word | Partition refinement and future-word equivalence agree. Omitting p or the empty word changes the equivalence being proved. |
+| d129/r131/r132 | One joint law, common outcome alphabet and action meanings; enabled menus additionally agree | Matched marginals can hide TV=1 joint differences. Full-rank joint probes identify rows; they cannot infer absent menus. Cross-action Frechet endpoints need independently admissible action laws. |
+| r132_hall/high, r133_cell, r137_obstruction | One shared assignment/action decoder satisfies every member simultaneously | Three proper/pairwise-feasible constraints can have an empty total intersection. For convex decoders with m>=1 actions an obstruction of at most m states exists; state-by-state decoder choices are inadmissible. |
+| r133/r134 | Persistent hidden model, one complete observation-history policy, fixed horizon and legal actions | Exact support recursion excludes model switching. Support suffices for the stated probability-one question; identical supports can require different quantitative actions. Coordinatewise best values do not form a common policy. |
+| r135_policy/legality; r136/r137 | Exact policy/legality contract and causal order, with a common clock and target | The legality-jump example violates the total-action/safe-subset premise. An offline stream translator cannot be substituted for a deadline-respecting translator. Feedback requires conditional controlled rows, not a passive full-path fit. |
+| r146/r147 / self target routes | Installed prediction, internal attribution, actual body attachment and experiential interpretation are separately bound | Perfect local prediction and permutation covariance do not identify an independent external label or establish constitutive mineness. A body reassignment must transport the actual attachment variable before it counts as pure relabeling. |
+| TA16 / TA17 | Same regime and post-separation intervention; distinguish membership, set law and inheritance | Identity-mode retention and parity-mode dependency cannot witness one joint organization. Full-copy inheritance is nonexclusive; categorical probabilities over mutually exclusive outcomes are another object. The unique-full-continuation premise is restored explicitly. |
+| TA18 / current C1 | Declare whether physical classes are complete actual types and whether C1-OI is in the premise set | Constant and separating bridges both satisfy the weak invariance example. They cannot both satisfy C1-OI for two distinct complete actual types. Historical admissibility under weaker assumptions is not current admissibility. |
+| TA19 regularity | Keep the locally fixed finite **all-candidate** landscape separate from winner-only labels | The landscape can be continuous while winner-only probabilities jump. Infinite candidate sets, candidate births/deaths and the unread main-PDF content remain outside this proof. |
+
+## Quantifiers that must not change
+
+1. `for every hidden state, there exists a successful action` does not imply `there exists one observable action, for every compatible hidden state`.
+2. `for every selected task, there exists an optimal encoder/policy` does not imply one encoder/policy works for a later unknown task within the same budget.
+3. `there exists a nontrivial capability fiber` does not imply every fiber is nontrivial.
+4. `there exists a rank-deficient probe countermodel` does not imply every rank-deficient experiment fails its particular target.
+5. `every nontrivial cut, every vertex, some bounded return length` retains all three quantifiers; a single graph cycle is not that assertion.
+6. `local constant rank on a neighborhood` is stronger than `rank at the selected point`; a finite fit cannot certify either physical completeness or a global Lipschitz constant.
+7. `all required premises have records` is not `all those premises hold jointly in a physical application`.
+
+## What has and has not been closed
+
+All 128 formerly inherited rule arguments now have individual review cards; none is left with only its inherited sketch. The nine rival edges are explicitly **open conditional representation schemas**, not completed reductions. The other cards include mathematical deductions, countermodel constructions, definition applications, metadata audits and conditional interpretations; they are not 119 new theorems.
+
+The graph retains all 391 concept IDs and 188 rule IDs. Its finite contracts, named premises and these argument cards now cover all registered rules together with the 60 R153 expanded reviews. Concept grounding, actual complete physical realization, selected self-experiential semantics, empirical measurement, whole-archive numerical reproduction and proof-assistant formalization retain their separate obligations. A mathematical copy of a structure cannot discharge C1's experiential commitment. This audit supplies neither a validated consciousness detector nor a theorem that any current assistant does or does not have experience.
+
+The 16 executable checks exercise concrete vulnerable combinations (joint laws, common assignments, persistent models, opportunity costs, deadlines, affine interventions and inheritance). They are bounded checks of the displayed models; the general arguments remain manual mathematical arguments. No exhaustive satisfiability result for arbitrary combinations of all 391 concepts is claimed.

@@ -1,0 +1,65 @@
+[
+  {
+    "node": "A:TOY_EXP_WHOLE",
+    "field": "statement",
+    "before": "The actual complete whole realizations would differ experientially",
+    "after": "For every pair of TOY_MATH settings separated by the whole transition image cardinality (2 versus 4, 2 versus 8, or 4 versus 8), ACTUAL_COMPLETE_TOY and C1-OI imply distinct complete experiential types for the corresponding actual whole tokens. This image-size route does not separate the two one-link settings (1,0) and (0,1).",
+    "reason": "a27 compressed the pair restriction already present in the R153 whole-structure invariant; restore it in the experiential conclusion."
+  },
+  {
+    "node": "TA17:SET_LIMITS",
+    "field": "statement",
+    "before": "Individual-only categorical labels cannot encode arbitrary successor sets. Under nonnegative membership, co-successor invariance and symmetry of equally full copies, unit-sum normalization fails on two full successors. Equal singleton inclusion marginals need not identify mu; equal singleton inheritance need not identify Gamma. Duplication violates conserved-mass and universal supermodularity; secret sharing violates universal submodularity.",
+    "after": "Individual-only categorical labels cannot encode arbitrary successor sets. For a nonnegative membership relation across unique-continuation and fission scenarios, assume full unique continuation gives q(A,B)=1, adding an equally full co-successor preserves that value, and equally full copies are symmetric. Then two full successors have total membership at least 2, incompatible with unit-sum normalization. Equal singleton inclusion marginals need not identify mu; equal singleton inheritance need not identify Gamma. Duplication violates conserved-mass and universal supermodularity; secret sharing violates universal submodularity.",
+    "reason": "Restore the explicit unique-full-continuation calibration in published TA17 Proposition 6; the prior map summary omitted it."
+  },
+  {
+    "node": "TA17:SET_LIMITS",
+    "field": "scope",
+    "before": "Existence counterexamples under FUNCTIONAL_CONTRACT; normalization includes nonnegativity and symmetry explicitly.",
+    "after": "Existence counterexamples under FUNCTIONAL_CONTRACT. The normalization clause compares singleton/full-continuation and two-full-successor scenarios under the same calibrated membership rule; includes nonnegativity, full-unique value 1, co-successor preservation and symmetry. It is not a no-go for categorical probabilities over mutually exclusive outcomes.",
+    "reason": "Make the cross-scenario calibration domain explicit."
+  },
+  {
+    "node": "TA17:SET_LIMITS",
+    "field": "domain",
+    "before": "Existence counterexamples under FUNCTIONAL_CONTRACT; normalization includes nonnegativity and symmetry explicitly.",
+    "after": "Existence counterexamples under FUNCTIONAL_CONTRACT. The normalization clause compares singleton/full-continuation and two-full-successor scenarios under the same calibrated membership rule; includes nonnegativity, full-unique value 1, co-successor preservation and symmetry. It is not a no-go for categorical probabilities over mutually exclusive outcomes.",
+    "reason": "Keep domain and scope synchronized."
+  },
+  {
+    "node": "TA16:CAUSAL_LIMITS",
+    "field": "statement",
+    "before": "All-cut positive diagonal return iff strong connectivity (a witness walk length <=2(n-1)); strong connectivity alone does not determine retained information; incompatible modes cannot jointly witness different maxima; recoding does not change physics when interventions are transported; every finite Boolean F has an exact wrapper Ftilde=EFD on valid codewords.",
+    "after": "For every nonnegative n-by-n W with n>=2, the positive-edge graph is strongly connected iff for every nontrivial bipartition pi and every vertex i there exists an integer k with 1<=k<=2(n-1) and (W^k-W_pi^k)_[i,i]>0, where W_pi deletes all crossing edges. Strong connectivity alone does not determine retained information; incompatible modes cannot jointly witness different maxima; recoding preserves the physical question when interventions are transported; every finite Boolean F has an exact wrapper Ftilde=EFD on valid codewords with DE=id.",
+    "reason": "Expand the compressed all-cut/every-vertex/existential-walk quantifiers from TA16 Appendix G.1; theorem unchanged."
+  },
+  {
+    "node": "R137:CONTROL_MODEL",
+    "field": "scope",
+    "before": "Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. U(z) is nonempty and controller policies are legally defined on all histories, including nominally zero-probability histories. This is a specified memoryless action-decoder class, not all causal interfaces.",
+    "after": "S,Z,O,A are finite nonempty sets, alpha:S->Z is onto and visible; m=|A|>=1. Concrete state is Markov-sufficient, with partial menus A(s), joint successor/output kernels and paired pointed state/clock. The memoryless decoder w(a|z,u) uses only visible z and request u with fresh conditional randomness. U(z) is nonempty; abstract history policies are legally specified on all projected histories, including nominally zero-probability ones, and cannot read decoder coins/concrete action labels. Every represented start is covered; physical adequacy is independent. This is one specified decoder class, not all causal interfaces.",
+    "reason": "Explicitly retain the source nonempty action alphabet needed for the (m-1)-dimensional simplex/Helly bound."
+  },
+  {
+    "rule": "a27",
+    "field": "statement",
+    "before": "The actual complete whole realizations would differ experientially",
+    "after": "For every pair of TOY_MATH settings separated by the whole transition image cardinality (2 versus 4, 2 versus 8, or 4 versus 8), ACTUAL_COMPLETE_TOY and C1-OI imply distinct complete experiential types for the corresponding actual whole tokens. This image-size route does not separate the two one-link settings (1,0) and (0,1).",
+    "reason": "Synchronize canonical rule conclusion with repaired node."
+  },
+  {
+    "rule": "r149_ta16_causal_limits",
+    "field": "statement",
+    "before": "All-cut positive diagonal return iff strong connectivity (a witness walk length <=2(n-1)); strong connectivity alone does not determine retained information; incompatible modes cannot jointly witness different maxima; recoding does not change physics when interventions are transported; every finite Boolean F has an exact wrapper Ftilde=EFD on valid codewords.",
+    "after": "For every nonnegative n-by-n W with n>=2, the positive-edge graph is strongly connected iff for every nontrivial bipartition pi and every vertex i there exists an integer k with 1<=k<=2(n-1) and (W^k-W_pi^k)_[i,i]>0, where W_pi deletes all crossing edges. Strong connectivity alone does not determine retained information; incompatible modes cannot jointly witness different maxima; recoding preserves the physical question when interventions are transported; every finite Boolean F has an exact wrapper Ftilde=EFD on valid codewords with DE=id.",
+    "reason": "Synchronize canonical rule conclusion with repaired node."
+  },
+  {
+    "rule": "r149_ta17_set_limits",
+    "field": "statement",
+    "before": "Individual-only categorical labels cannot encode arbitrary successor sets. Under nonnegative membership, co-successor invariance and symmetry of equally full copies, unit-sum normalization fails on two full successors. Equal singleton inclusion marginals need not identify mu; equal singleton inheritance need not identify Gamma. Duplication violates conserved-mass and universal supermodularity; secret sharing violates universal submodularity.",
+    "after": "Individual-only categorical labels cannot encode arbitrary successor sets. For a nonnegative membership relation across unique-continuation and fission scenarios, assume full unique continuation gives q(A,B)=1, adding an equally full co-successor preserves that value, and equally full copies are symmetric. Then two full successors have total membership at least 2, incompatible with unit-sum normalization. Equal singleton inclusion marginals need not identify mu; equal singleton inheritance need not identify Gamma. Duplication violates conserved-mass and universal supermodularity; secret sharing violates universal submodularity.",
+    "reason": "Synchronize canonical rule conclusion with repaired node."
+  }
+]

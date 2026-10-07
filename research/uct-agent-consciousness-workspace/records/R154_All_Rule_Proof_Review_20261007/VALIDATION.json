@@ -1,0 +1,248 @@
+{
+  "schema": "uct.r154.bounded-review-checks.v1",
+  "passed": true,
+  "exact_check_count": 16,
+  "checks": [
+    {
+      "name": "toy_pair_quantifier",
+      "passed": true,
+      "detail": {
+        "image_sizes": [
+          2,
+          4,
+          4,
+          8
+        ],
+        "pair_retention": [
+          [
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            4,
+            4,
+            4
+          ]
+        ],
+        "unseparated_pair": [
+          "10",
+          "01"
+        ]
+      }
+    },
+    {
+      "name": "all_cut_every_vertex_quantifiers",
+      "passed": true,
+      "detail": {
+        "graphs": 64,
+        "vertices": 3,
+        "cuts_per_graph": 6,
+        "max_walk_length": 4
+      }
+    },
+    {
+      "name": "constant_rank_point_is_insufficient",
+      "passed": true,
+      "detail": "J(x)=x^2: derivative at 0 is zero, but the zero fiber is a singleton; neighborhood-constant rank is required."
+    },
+    {
+      "name": "bundled_design_grid",
+      "passed": true,
+      "detail": {
+        "points": 243,
+        "signatures": 43,
+        "largest_fiber": 17
+      }
+    },
+    {
+      "name": "direct_design_inverse",
+      "passed": true,
+      "detail": "All 243 grid points reconstructed by the explicitly given linear inverse; proof gives arbitrary real coefficients."
+    },
+    {
+      "name": "joint_payoff_matched_marginals",
+      "passed": true,
+      "detail": {
+        "context_A": [
+          "1/2",
+          "3/4"
+        ],
+        "context_B": [
+          "3/4",
+          "1/2"
+        ],
+        "blind": "5/8",
+        "oracle": "3/4",
+        "regret": "1/8"
+      }
+    },
+    {
+      "name": "joint_not_marginal_closure",
+      "passed": true,
+      "detail": {
+        "joint_TV": "1",
+        "both_binary_marginals": "1/2,1/2"
+      }
+    },
+    {
+      "name": "hall_deficiency_joint_assignments",
+      "passed": true,
+      "detail": {
+        "bipartite_graphs": 64,
+        "tasks": 3,
+        "slots": 2
+      }
+    },
+    {
+      "name": "pairwise_not_joint_good_actions",
+      "passed": true,
+      "detail": "Three candidate constraints have pairwise intersections but no common action; every proper coalition is feasible."
+    },
+    {
+      "name": "persistent_model_not_stagewise_product",
+      "passed": true,
+      "detail": "Stagewise possible sets {0,1} x {0,1} invent the unattainable failing trace (0,0)."
+    },
+    {
+      "name": "optional_probe_primal_dual",
+      "passed": true,
+      "detail": {
+        "forced": "7/15",
+        "optional": "14/27",
+        "probe_probability": "20/27",
+        "dual_weight": "13/27"
+      }
+    },
+    {
+      "name": "delayed_query_attainment",
+      "passed": true,
+      "detail": {
+        "exact_coordinates": 1400,
+        "n_range": [
+          2,
+          5
+        ],
+        "all_k": true
+      }
+    },
+    {
+      "name": "transport_affine_descent_and_reset",
+      "passed": true,
+      "detail": {
+        "affine_maps": 64,
+        "two_tick_cases": 32
+      }
+    },
+    {
+      "name": "successor_set_marginals_not_joint",
+      "passed": true,
+      "detail": {
+        "TV": "1",
+        "marginals": [
+          "1/2",
+          "1/2"
+        ],
+        "restricted_reward": "1/2",
+        "full_reward": "1"
+      }
+    },
+    {
+      "name": "full_copy_calibration_needed_in_proof",
+      "passed": true,
+      "detail": "Unique full continuation q=1 + co-successor preservation + symmetry forces total 2. This checks the restored-premise derivation, not an unqualified no-go."
+    },
+    {
+      "name": "inheritance_duplication_secret_sharing",
+      "passed": true,
+      "detail": "Duplicated one-bit information is not two-bit information; two individually null secret shares jointly identify U."
+    }
+  ],
+  "source_checks": [
+    {
+      "paper": "A",
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "bytes": 142624,
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "passed": true
+    },
+    {
+      "paper": "B",
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/B_UCT_II_v1_1.md",
+      "bytes": 59958,
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+      "passed": true
+    },
+    {
+      "paper": "C",
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/C_UCT_III_v1_0.md",
+      "bytes": 94626,
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+      "passed": true
+    },
+    {
+      "paper": "D",
+      "path": "records/R129_Four_Paper_Integration_20261006/sources/D_TA24_v1_0.md",
+      "bytes": 36208,
+      "sha256": "af0eb63cca099b3d913218f503bc978c705f0fb9f065cca9ed472e5161d67490",
+      "passed": true
+    },
+    {
+      "paper": "TA15",
+      "path": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md",
+      "bytes": 78742,
+      "sha256": "8643196bd281e88be3cd753297eb846251a855e9d2ac3f576dbd49437cbafc85",
+      "passed": true
+    },
+    {
+      "paper": "TA16",
+      "path": "records/R148_Publication_Census_20261007/sources/TA16_v1_0.md",
+      "bytes": 87834,
+      "sha256": "041a21d0a0863719188f591b2f51f94b591cc16a795d74ed6df047e058c48360",
+      "passed": true
+    },
+    {
+      "paper": "TA17",
+      "path": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md",
+      "bytes": 99093,
+      "sha256": "bec4944db161db725648a18962b8a6c069aacf7512a259483f9d81e646e36a78",
+      "passed": true
+    },
+    {
+      "paper": "TA18",
+      "path": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md",
+      "bytes": 52233,
+      "sha256": "22ef09cb373a7f364ee2a12c503be8768057684d78eb0e2593d8398b5fe7ae13",
+      "passed": true
+    },
+    {
+      "paper": "TA19",
+      "path": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md",
+      "bytes": 43338,
+      "sha256": "53782a354e6dd1b037f8a6021d2a2bad150201cd086a5f6799757074dd21fc7e",
+      "passed": true
+    },
+    {
+      "paper": "TA25",
+      "path": "records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md",
+      "bytes": 42068,
+      "sha256": "694856862f75834024cd3e71ffdba95a6be4601c2832285902f7905907e3039c",
+      "passed": true
+    }
+  ],
+  "scope": "Bounded counterexamples and implementation checks only; manual general proofs are in RULE_REVIEW. No physical, phenomenological, numerical-archive or proof-assistant certification."
+}
