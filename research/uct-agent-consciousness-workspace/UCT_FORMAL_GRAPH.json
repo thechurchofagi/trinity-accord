@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R159-v1.0",
+  "revision": "R160-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -18239,6 +18239,179 @@
           "F153-17"
         ],
         "machine_formalized": false
+      },
+      "formal_contract_R160": {
+        "amends": "Application status only; inherited statement/contracts retained.",
+        "effective_reading": "R160 supplies a protocol-relative causal dominance discriminator and its nonidentification limit. It partially advances the body/tool grounding obligation but does not close physical selectivity, complete realization, B_min or F_O measurement.",
+        "source_anchor": {
+          "path": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+          "sha256": "68da64fa1102b335a8a23da548fcad3aa742d1cc829d265e70f7ec928ce50749",
+          "locator": "§§2–5,8–9"
+        },
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R160:INTERVENTION_PROFILE_CONTRACT",
+      "kind": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "label": "Intervention Profile Contract",
+      "statement": "Fix Pi, actual trial tokens P_omega/I_omega, internal slot family k, independently physically grounded J_B and J_T, tool-absent body readouts Y_B and tool-specific readouts Y_T, preregistered normalized effect bounds L/U and epsilon>0. Let a=delta(Y_B;J_B), x=delta(Y_B;J_T), b=delta(Y_T;J_B), y=delta(Y_T;J_T). Undefined or noncommensurable effects block classification rather than count as zero. Reports do not define these roles.",
+      "domain": "Declared finite protocol only; J_B/J_T fidelity, readout semantics, normalization, error bounds and admissibility are simultaneous premises.",
+      "scope": "Declared finite protocol only; J_B/J_T fidelity, readout semantics, normalization, error bounds and admissibility are simultaneous premises.",
+      "source": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+      "source_lineage": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+      "status": "DECLARED_PROTOCOL_RELATIVE_PHYSICAL_WITNESS_CONTRACT",
+      "proof": "Typed definition and preregistration package. The rational grid establishes abstract consistency only.",
+      "counterexamples_and_limits": "No actual dataset or selective intervention is supplied; behavioral names do not ground pathways; unsafe interventions excluded.",
+      "formal_contract_R160": {
+        "object_domain": "Finite preregistered human upper-limb/tool-use trial family with independently grounded intervention and readout roles; actual execution is not claimed.",
+        "quantifiers": "For each fixed protocol Pi, candidate slot family k, declared normalized effect/error model and epsilon>0; no universal necessity, sufficiency, anatomical-membership or F_O equivalence.",
+        "bearer_time_signature": "Each trial fixes its own actual P_omega,I_omega,complete K_omega,D_omega,Phi_omega,h_omega. Participant lineage does not identify complete organizations across trials. Internal tokens and external referents retain different sorts.",
+        "source_anchor": {
+          "path": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+          "sha256": "68da64fa1102b335a8a23da548fcad3aa742d1cc829d265e70f7ec928ce50749",
+          "locator": "§§2–8"
+        },
+        "purpose": "Give the R159 body-slot/tool-slot gap a falsifiable relative causal profile while preserving semantic and phenomenal limits.",
+        "thought_experiments": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R160-G1",
+          "R160-G2",
+          "R160-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R160:FOUR_WAY_PROFILE",
+      "kind": "CONDITIONAL_CLASSIFICATION_RESULT",
+      "label": "Four-Way Body/Tool Profile",
+      "statement": "Under the full profile contract, define B_Pi(k) iff L(a)>epsilon and L(a)-U(x)>epsilon; define T_Pi(k) iff L(y)>epsilon and L(y)-U(b)>epsilon. Exactly one Boolean pair (1,0),(0,1),(1,1),(0,0) holds, interpreted only as body-dominant, tool-dominant, overlap or neither in Pi. Positive off-diagonal effects are compatible with every class.",
+      "domain": "Exactly one fixed Pi/effect/error model satisfying every R160 profile premise.",
+      "scope": "Exactly one fixed Pi/effect/error model satisfying every R160 profile premise.",
+      "source": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+      "source_lineage": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+      "status": "MANUAL_BOOLEAN_CLASSIFICATION_WITH_EXACT_FINITE_CHECK",
+      "proof": "Boolean exhaustiveness gives four cases. The 3/4,1/4,1/4,3/4 matrix at epsilon=1/4 witnesses overlap with positive cross-effects; 625 exact grid matrices show all four classes, including under positive off-diagonals.",
+      "counterexamples_and_limits": "A category is not anatomical membership, complete mechanism, external-reference correctness or F_O. Grid counts are not population frequencies.",
+      "formal_contract_R160": {
+        "object_domain": "Finite preregistered human upper-limb/tool-use trial family with independently grounded intervention and readout roles; actual execution is not claimed.",
+        "quantifiers": "For each fixed protocol Pi, candidate slot family k, declared normalized effect/error model and epsilon>0; no universal necessity, sufficiency, anatomical-membership or F_O equivalence.",
+        "bearer_time_signature": "Each trial fixes its own actual P_omega,I_omega,complete K_omega,D_omega,Phi_omega,h_omega. Participant lineage does not identify complete organizations across trials. Internal tokens and external referents retain different sorts.",
+        "source_anchor": {
+          "path": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+          "sha256": "68da64fa1102b335a8a23da548fcad3aa742d1cc829d265e70f7ec928ce50749",
+          "locator": "§§2–8"
+        },
+        "purpose": "Give the R159 body-slot/tool-slot gap a falsifiable relative causal profile while preserving semantic and phenomenal limits.",
+        "thought_experiments": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R160-G1",
+          "R160-G2",
+          "R160-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r160_four_way_profile",
+            "all_of": [
+              "R160:INTERVENTION_PROFILE_CONTRACT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R160:LATENT_LABEL_NONIDENTIFICATION",
+      "kind": "CONDITIONAL_LIMIT_THEOREM",
+      "label": "Latent Label Nonidentification",
+      "statement": "For any finite latent input/output model and any bijection pi of its latent carrier, transporting the initial law, each intervention kernel and the emission kernel by pi leaves every finite observable input/output law unchanged. Hence an ungrounded latent name body/tool is not identified by the observable profile alone.",
+      "domain": "Finite latent-state models with transported initial, transition and emission laws; semantic/anatomical predicates not included among observed grounded variables.",
+      "scope": "Finite latent-state models with transported initial, transition and emission laws; semantic/anatomical predicates not included among observed grounded variables.",
+      "source": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+      "source_lineage": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+      "status": "STANDARD_RELABELING_ARGUMENT_WITH_EXACT_INSTANCE_CHECK",
+      "proof": "Change variables z_t to pi(z_t) in the finite path sum. The verifier checks 1,024 deterministic two-state/two-input/binary-output length-three instances.",
+      "counterexamples_and_limits": "Independent physical grounding can identify protocol-relative causal roles; it still does not yield anatomy, complete organization or phenomenal ownership. Standard mathematics, no historical novelty claim.",
+      "formal_contract_R160": {
+        "object_domain": "Finite preregistered human upper-limb/tool-use trial family with independently grounded intervention and readout roles; actual execution is not claimed.",
+        "quantifiers": "For each fixed protocol Pi, candidate slot family k, declared normalized effect/error model and epsilon>0; no universal necessity, sufficiency, anatomical-membership or F_O equivalence.",
+        "bearer_time_signature": "Each trial fixes its own actual P_omega,I_omega,complete K_omega,D_omega,Phi_omega,h_omega. Participant lineage does not identify complete organizations across trials. Internal tokens and external referents retain different sorts.",
+        "source_anchor": {
+          "path": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+          "sha256": "68da64fa1102b335a8a23da548fcad3aa742d1cc829d265e70f7ec928ce50749",
+          "locator": "§§2–8"
+        },
+        "purpose": "Give the R159 body-slot/tool-slot gap a falsifiable relative causal profile while preserving semantic and phenomenal limits.",
+        "thought_experiments": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R160-G1",
+          "R160-G2",
+          "R160-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R160:TOKENWISE_APPLICATION_BOUNDARY",
+      "kind": "CONDITIONAL_SCOPE_RESULT",
+      "label": "Tokenwise C1 Application Boundary",
+      "statement": "Given R159 frame-relation transport separately for each admitted trial and the R160 trial-family contract, each trial's grounded internal relation transports under its own h_omega. The cross-trial matrix S_Pi and its class do not thereby become one within-token experiential relation or an F_O contrast; a cross-trial correspondence, measurement bridge and fixed selected target are additional premises.",
+      "domain": "Same declared trial family and per-trial bindings; no common K,D,Phi,h is presumed across different interventions/times.",
+      "scope": "Same declared trial family and per-trial bindings; no common K,D,Phi,h is presumed across different interventions/times.",
+      "source": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+      "source_lineage": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+      "status": "MANUAL_SCOPE_AND_BINDING_DEDUCTION",
+      "proof": "Instantiate R159 tokenwise in each trial. Its quantifiers do not bind a single h across different actual tokens. Cross-trial causal contrasts therefore require an added comparison bridge.",
+      "counterexamples_and_limits": "Does not deny cross-trial science; it blocks an illicit object/time/signature substitution. No report-to-F or C1 verification follows.",
+      "formal_contract_R160": {
+        "object_domain": "Finite preregistered human upper-limb/tool-use trial family with independently grounded intervention and readout roles; actual execution is not claimed.",
+        "quantifiers": "For each fixed protocol Pi, candidate slot family k, declared normalized effect/error model and epsilon>0; no universal necessity, sufficiency, anatomical-membership or F_O equivalence.",
+        "bearer_time_signature": "Each trial fixes its own actual P_omega,I_omega,complete K_omega,D_omega,Phi_omega,h_omega. Participant lineage does not identify complete organizations across trials. Internal tokens and external referents retain different sorts.",
+        "source_anchor": {
+          "path": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+          "sha256": "68da64fa1102b335a8a23da548fcad3aa742d1cc829d265e70f7ec928ce50749",
+          "locator": "§§2–8"
+        },
+        "purpose": "Give the R159 body-slot/tool-slot gap a falsifiable relative causal profile while preserving semantic and phenomenal limits.",
+        "thought_experiments": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R160-G1",
+          "R160-G2",
+          "R160-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r160_tokenwise_application_boundary",
+            "all_of": [
+              "R159:FRAME_RELATION_TRANSPORT",
+              "R160:INTERVENTION_PROFILE_CONTRACT"
+            ]
+          }
+        ]
       }
     }
   ],
@@ -30507,6 +30680,55 @@
         "source_sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r160_four_way_profile",
+      "all_of": [
+        "R160:INTERVENTION_PROFILE_CONTRACT"
+      ],
+      "conclusion": "R160:FOUR_WAY_PROFILE",
+      "statement": "Under the full profile contract, define B_Pi(k) iff L(a)>epsilon and L(a)-U(x)>epsilon; define T_Pi(k) iff L(y)>epsilon and L(y)-U(b)>epsilon. Exactly one Boolean pair (1,0),(0,1),(1,1),(0,0) holds, interpreted only as body-dominant, tool-dominant, overlap or neither in Pi. Positive off-diagonal effects are compatible with every class.",
+      "proof_sketch": "Boolean exhaustiveness gives four cases. The 3/4,1/4,1/4,3/4 matrix at epsilon=1/4 witnesses overlap with positive cross-effects; 625 exact grid matrices show all four classes, including under positive off-diagonals.",
+      "source": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md §§2–3",
+      "kind": "DEFINITIONAL_CLASSIFICATION",
+      "review": "MANUAL_ALL_PREMISES_AND_EXACT_GRID_CHECK",
+      "formal_contract_R160": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same Pi,k,normalized metric,error bounds,epsilon",
+          "J_B/J_T and Y_B/Y_T independently grounded before target outputs",
+          "undefined effects do not default to zero"
+        ],
+        "quantification": "Each jointly admissible protocol instance; no universal body/F_O theorem.",
+        "proof_location": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md §§2–3",
+        "source_sha256": "68da64fa1102b335a8a23da548fcad3aa742d1cc829d265e70f7ec928ce50749",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r160_tokenwise_application_boundary",
+      "all_of": [
+        "R159:FRAME_RELATION_TRANSPORT",
+        "R160:INTERVENTION_PROFILE_CONTRACT"
+      ],
+      "conclusion": "R160:TOKENWISE_APPLICATION_BOUNDARY",
+      "statement": "Given R159 frame-relation transport separately for each admitted trial and the R160 trial-family contract, each trial's grounded internal relation transports under its own h_omega. The cross-trial matrix S_Pi and its class do not thereby become one within-token experiential relation or an F_O contrast; a cross-trial correspondence, measurement bridge and fixed selected target are additional premises.",
+      "proof_sketch": "Instantiate R159 tokenwise in each trial. Its quantifiers do not bind a single h across different actual tokens. Cross-trial causal contrasts therefore require an added comparison bridge.",
+      "source": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md §5",
+      "kind": "CONDITIONAL_SCOPE_DEDUCTION",
+      "review": "MANUAL_OBJECT_TIME_SIGNATURE_AUDIT",
+      "formal_contract_R160": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same trial family Pi",
+          "R159 transport instantiated with each trial's own P_omega,I_omega,K_omega,D_omega,Phi_omega,h_omega",
+          "no silent common h or report/F bridge"
+        ],
+        "quantification": "All admitted trials individually; cross-trial conclusion only with additional declared bridge.",
+        "proof_location": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md §5",
+        "source_sha256": "68da64fa1102b335a8a23da548fcad3aa742d1cc829d265e70f7ec928ce50749",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -31677,5 +31899,18 @@
     "contract": "formal_contract_R159 for four new entries/one rule and three explicit refinements only; historical fields intact",
     "global_semantic_proof": false,
     "empirical_validation": false
+  },
+  "research_R160": {
+    "start_head": "36e73dda56acb6036d87f20a598e63c3793f24e2",
+    "first_checkpoint": "97fbb37dfe45c2b88cbf10e35fcfe9acf90ed25e",
+    "parent_graph_sha256": "d14e7e845e5c122bf3e12d55a078e06be1307cb1f091c7c5d5d2be5388daf32e",
+    "note": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+    "new_nodes": 4,
+    "new_rules": 2,
+    "status": "PROTOCOL_RELATIVE_BODY_TOOL_DISCRIMINANT_AND_NONIDENTIFICATION_BRIDGE_OPEN",
+    "contract": "formal_contract_R160 for four new nodes, two rules and one explicit R159 application amendment only",
+    "actual_experiment": false,
+    "empirical_F_witness": false,
+    "global_semantic_proof": false
   }
 }

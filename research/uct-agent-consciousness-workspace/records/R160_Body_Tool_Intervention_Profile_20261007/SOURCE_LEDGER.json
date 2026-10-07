@@ -1,0 +1,64 @@
+{
+  "schema": "UCT_R160_SOURCE_LEDGER/v1",
+  "fixed_A": {
+    "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+    "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+    "scope": "§§8.11–8.14,10.1–10.3,11,14.7–14.10"
+  },
+  "primary_sources": [
+    {
+      "id": "S1",
+      "citation": "Cardinali et al. 2009",
+      "doi": "10.1016/j.cub.2009.05.009",
+      "scope": "Metadata plus later primary-paper descriptions; PubMed record had no abstract; no raw/full-text claim."
+    },
+    {
+      "id": "S2",
+      "citation": "Cardinali et al. 2011",
+      "doi": "10.1016/j.neuropsychologia.2011.09.033",
+      "scope": "PubMed abstract: tactile-dependent access/localization result; no raw reanalysis."
+    },
+    {
+      "id": "S3",
+      "citation": "Martel et al. 2019",
+      "doi": "10.1038/s41598-019-41928-1",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6445103/",
+      "scope": "Full primary methods/results windows on blindfolded tool use, free-hand transport/grip kinematics and stated controls."
+    },
+    {
+      "id": "S4",
+      "citation": "Maravita et al. 2002",
+      "doi": "10.1016/S0010-0277(02)00003-3",
+      "pmid": "11869727",
+      "scope": "Primary abstract only; crossed-tool visuotactile-interference result."
+    },
+    {
+      "id": "S5",
+      "citation": "Holmes et al. 2007",
+      "pmcid": "PMC1885399",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1885399/",
+      "scope": "Full primary discussion/methodological windows; alternative spatial-attention account and confounds."
+    },
+    {
+      "id": "S6",
+      "citation": "Weser et al. 2017",
+      "doi": "10.1016/j.concog.2017.07.002",
+      "scope": "PubMed abstract plus publisher abstract: chopsticks/teacup contrast, skill/recent-use modulation; no raw reanalysis."
+    },
+    {
+      "id": "S7",
+      "citation": "Martel et al. 2016",
+      "doi": "10.3389/fnhum.2016.00272",
+      "url": "https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2016.00272/full",
+      "scope": "Full case-report methods/results windows; single deafferented patient, longitudinal kinematics."
+    }
+  ],
+  "failed_or_limited": [
+    "PubMed pages for S2/S4 intermittently returned reCAPTCHA on open; search-index abstracts retained.",
+    "S1 full article not retrieved; no unsupported method detail imported.",
+    "No raw datasets or supplements downloaded; no exhaustive priority search."
+  ],
+  "new_neural_mechanism_claim": false,
+  "raw_data_analysis": false,
+  "human_experiment_executed": false
+}

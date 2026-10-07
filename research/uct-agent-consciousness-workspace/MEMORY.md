@@ -1,3 +1,11 @@
+## R160 current priority — body/tool roles are relative causal profiles, not ontological labels
+
+R160 fixes a finite human upper-limb/tool-use protocol before target outputs: independently grounded biological-pathway J_B and tool-transformation J_T interventions; tool-absent body Y_B and tool-specific Y_T readouts; explicit normalization, bounds and epsilon. Body dominance, tool dominance, overlap and neither are all permitted. 625 rational profiles and 1,024 latent-label-swap traces pass exact checks, but they are not human evidence.
+
+Key correction: an observable profile does not by itself name anatomical membership, external-reference truth or familiar felt ownership. Relabeling latent states preserves every finite observable law unless semantic/physical anchors are independently supplied. C1 applies separately to each actual trial; participant continuity is not one common complete K,D,Phi,h. R160-v1.0 has 422 nodes / 202 rules, new 4/2. B_min, selective physical interventions, shared empirical effect scaling, full realization and no-report ownership measurement remain open.
+
+Next exact problem: specify a safe concrete J_B/J_T pair with independent fidelity tests, common error model and an advance falsifier for B_Pi. Keep the four thought-experiment families and all R160 gaps. Do not repeat R155 formation, R159 algebra or generic control work.
+
 ## R159 current priority — internal body-frame binding, external reference and coupled roles
 
 R159 gives a positive conditional application: an actually installed body-frame relation between internal frame r and representation k has its C1 structural counterpart even when separately grounded psi(k)=c refers to an anatomical nonmember. External c is not automatically in D(P), so h(c) cannot be assumed. A selected F_O interpretation remains a fixed independent application bridge. See [English note](records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md), [proof ledger](records/R159_Body_Frame_and_Referent_20261007/PROOF_LEDGER.json), [review](records/R159_Body_Frame_and_Referent_20261007/REVIEW_ZH.md), [audit](records/R159_Body_Frame_and_Referent_20261007/MAP_AUDIT.json), [gaps](records/R159_Body_Frame_and_Referent_20261007/GAP_LEDGER.json), [handoff](records/R159_Body_Frame_and_Referent_20261007/CURRENT_HANDOFF.md).

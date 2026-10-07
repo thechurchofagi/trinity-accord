@@ -1,0 +1,20 @@
+{
+  "schema": "UCT_R160_AMENDMENTS/v1",
+  "amendments": [
+    {
+      "node": "R159:SELECTED_OWNERSHIP_APPLICATION",
+      "kind": "additive_application_status",
+      "effect": {
+        "amends": "Application status only; inherited statement/contracts retained.",
+        "effective_reading": "R160 supplies a protocol-relative causal dominance discriminator and its nonidentification limit. It partially advances the body/tool grounding obligation but does not close physical selectivity, complete realization, B_min or F_O measurement.",
+        "source_anchor": {
+          "path": "records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md",
+          "sha256": "68da64fa1102b335a8a23da548fcad3aa742d1cc829d265e70f7ec928ce50749",
+          "locator": "§§2–5,8–9"
+        },
+        "machine_formalized": false
+      }
+    }
+  ],
+  "historical_text_preserved": true
+}

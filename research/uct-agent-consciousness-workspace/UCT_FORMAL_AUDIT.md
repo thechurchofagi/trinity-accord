@@ -1,3 +1,9 @@
+## R160 audit — relative causal discrimination without semantic promotion
+
+R160-v1.0 has **422 nodes / 202 rules** (new 4/2). Unique IDs, endpoints and DAG checks pass. The classifier rule requires the entire intervention/readout/normalization/error contract. The C1-boundary rule requires both R159 tokenwise transport and the R160 trial-family contract; it explicitly refuses a common h across trials.
+
+Manual audit: concepts/quantifiers scoped; all_of premises simultaneous; rational overlap witness jointly satisfiable; object/time/signature and evidence levels preserved; no profile/report-to-C1 or F_O direction; anatomy, reference, body image, agency, conceptual I and report remain distinct. Exact 625-matrix and 1,024-trace checks do not establish actual selectivity, human realization, B_min, C1 or global semantic truth. Full result: [MAP_AUDIT.json](records/R160_Body_Tool_Intervention_Profile_20261007/MAP_AUDIT.json).
+
 ## R159 current priority — internal body-frame binding, external reference and coupled roles
 
 R159 gives a positive conditional application: an actually installed body-frame relation between internal frame r and representation k has its C1 structural counterpart even when separately grounded psi(k)=c refers to an anatomical nonmember. External c is not automatically in D(P), so h(c) cannot be assumed. A selected F_O interpretation remains a fixed independent application bridge. See [English note](records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md), [proof ledger](records/R159_Body_Frame_and_Referent_20261007/PROOF_LEDGER.json), [review](records/R159_Body_Frame_and_Referent_20261007/REVIEW_ZH.md), [audit](records/R159_Body_Frame_and_Referent_20261007/MAP_AUDIT.json), [gaps](records/R159_Body_Frame_and_Referent_20261007/GAP_LEDGER.json), [handoff](records/R159_Body_Frame_and_Referent_20261007/CURRENT_HANDOFF.md).

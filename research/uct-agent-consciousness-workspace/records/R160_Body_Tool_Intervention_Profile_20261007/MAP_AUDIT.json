@@ -1,0 +1,42 @@
+{
+  "schema": "UCT_R160_MAP_AUDIT/v1",
+  "revision": "R160-v1.0",
+  "counts": {
+    "nodes": 422,
+    "rules": 202,
+    "new_nodes": 4,
+    "new_rules": 2
+  },
+  "structure": {
+    "unique_node_ids": true,
+    "unique_rule_ids": true,
+    "all_endpoints_present": true,
+    "deductive_graph_acyclic": true,
+    "inherited_nodes_rules_retained": true,
+    "context_links_retained": 117
+  },
+  "manual_checks": {
+    "concept_quantifier_scope": "PASS_WITH_PROTOCOL_RELATIVITY",
+    "all_of_simultaneous_premises": "PASS",
+    "joint_satisfiability": "PASS_ABSTRACT_RATIONAL_WITNESS_ONLY",
+    "object_time_signature_actuality": "PASS_PER_TRIAL_COMMON_H_NOT_ASSUMED",
+    "evidence_level": "PASS_EXACT_CHECKS_SEPARATED_FROM_EMPIRICAL_EVIDENCE",
+    "direction": "PASS_NO_REPORT_OR_PROFILE_TO_C1_FO_OR_BASAL_GATE",
+    "unlinked_concept_consistency": "PASS_ANATOMY_REFERENCE_BODY_IMAGE_AGENCY_CONCEPTUAL_I_REPORT_REMAIN_SEPARATE",
+    "purpose": "PASS_DIRECTLY_ADVANCES_R159_BODY_TOOL_GROUNDING_GAP"
+  },
+  "not_established": [
+    "actual selective intervention pair",
+    "complete neural organization",
+    "anatomical membership from profile",
+    "B_min or empirical F_O witness",
+    "C1",
+    "global semantic proof",
+    "proof-assistant certification"
+  ],
+  "direction_checks": {
+    "after_topic": "PASS",
+    "after_result": "PASS_WITH_OPEN_BRIDGE",
+    "before_save": "PASS"
+  }
+}

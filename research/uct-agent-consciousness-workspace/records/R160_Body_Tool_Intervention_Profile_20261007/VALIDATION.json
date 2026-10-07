@@ -1,0 +1,39 @@
+{
+  "schema": "UCT_R160_VALIDATION/v1",
+  "status": "SCOPED_EXACT_AND_INHERITANCE_CHECKS_PASS",
+  "map_revision": "R160-v1.0",
+  "nodes": 422,
+  "rules": 202,
+  "new_nodes": 4,
+  "new_rules": 2,
+  "parent_graph_sha256": "d14e7e845e5c122bf3e12d55a078e06be1307cb1f091c7c5d5d2be5388daf32e",
+  "current_graph_sha256_before_validation_file": "ade316681ed7a495eceafa26bf0fe84fa9b646fbf9232e1b209613107a3f5202",
+  "note_sha256": "68da64fa1102b335a8a23da548fcad3aa742d1cc829d265e70f7ec928ce50749",
+  "fixed_A_sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+  "exact_checks": {
+    "effect_matrices": 625,
+    "all_four_categories_nonempty": true,
+    "all_four_categories_nonempty_with_positive_cross_effects": true,
+    "latent_label_swap_traces": 1024,
+    "status": "PASS"
+  },
+  "graph_checks": {
+    "unique_node_ids": true,
+    "unique_rule_ids": true,
+    "all_endpoints_present": true,
+    "deductive_graph_acyclic": true,
+    "inherited_418_node_prefix_preserved_except_one_additive_R160_contract": true,
+    "inherited_200_rules_field_for_field": true,
+    "context_links_117_preserved": true,
+    "source_versions_preserved": true,
+    "new_rules_all_of_checked": true,
+    "no_reverse_profile_to_C1_U1_FO": true
+  },
+  "direction_checks": {
+    "after_topic": "PASS",
+    "after_result": "PASS_WITH_OPEN_BRIDGE",
+    "before_save": "PASS"
+  },
+  "scope": "Exact definition/symmetry and graph-inheritance checks only; no human experiment, raw-data reanalysis, complete neural realization, F_O observation, C1 test, global semantic proof or proof-assistant certification.",
+  "proof_assistant": false
+}

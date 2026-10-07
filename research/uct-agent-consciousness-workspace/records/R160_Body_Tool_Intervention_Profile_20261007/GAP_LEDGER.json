@@ -1,0 +1,79 @@
+{
+  "schema": "UCT_R160_GAP_LEDGER/v1",
+  "gaps": [
+    {
+      "id": "R160-G1",
+      "location": "Profile contract J_B/J_T",
+      "impact": [
+        "R160:INTERVENTION_PROFILE_CONTRACT",
+        "R160:FOUR_WAY_PROFILE",
+        "R159:SELECTED_OWNERSHIP_APPLICATION"
+      ],
+      "counterexample": "A nominal proprioceptive manipulation also changes attention or tool feedback; a nominal tool perturbation changes biological afference.",
+      "repaired": "Independent intervention-fidelity checks made simultaneous premises; names alone rejected.",
+      "unresolved": "No concrete selective human intervention pair or fidelity data supplied."
+    },
+    {
+      "id": "R160-G2",
+      "location": "Effect normalization/error model",
+      "impact": [
+        "R160:FOUR_WAY_PROFILE"
+      ],
+      "counterexample": "Kinematic latency and crossmodal interference in different units cannot be subtracted without a declared normalization.",
+      "repaired": "Predeclared dimensionless effects, bounds and epsilon required; undefined is not false.",
+      "unresolved": "No empirically calibrated common normalization or power analysis supplied."
+    },
+    {
+      "id": "R160-G3",
+      "location": "Cross-trial C1 use",
+      "impact": [
+        "R160:TOKENWISE_APPLICATION_BOUNDARY"
+      ],
+      "counterexample": "Different intervention trials need not share complete K,D,Phi,h even for one participant.",
+      "repaired": "Per-trial h_omega and an explicit additional cross-trial bridge required.",
+      "unresolved": "No complete actual trial-token correspondence established."
+    },
+    {
+      "id": "R160-G4",
+      "location": "Latent body/tool naming",
+      "impact": [
+        "R160:LATENT_LABEL_NONIDENTIFICATION",
+        "R160:FOUR_WAY_PROFILE"
+      ],
+      "counterexample": "Transport every latent kernel/emission through a state permutation; all finite observations stay fixed while names swap.",
+      "repaired": "Only independently grounded intervention/readout roles receive protocol-relative labels.",
+      "unresolved": "Anatomical membership, external-reference truth and complete constitutive boundaries remain separate."
+    },
+    {
+      "id": "R160-G5",
+      "location": "Selected ownership bridge",
+      "impact": [
+        "R159:SELECTED_OWNERSHIP_APPLICATION",
+        "R160:TOKENWISE_APPLICATION_BOUNDARY"
+      ],
+      "counterexample": "Tool use changes a body-only kinematic measure without establishing familiar felt ownership; tool RHI drift and report can also diverge.",
+      "repaired": "Classifier excludes ownership reports and explicitly refuses F_O equivalence.",
+      "unresolved": "Independent B_min semantics and fallible no-report measurement remain open."
+    },
+    {
+      "id": "R160-G6",
+      "location": "Primary-source scope",
+      "impact": [
+        "R160:INTERVENTION_PROFILE_CONTRACT"
+      ],
+      "counterexample": "One tool effect can admit body-schema, task-learning or attention explanations.",
+      "repaired": "Competing Holmes attention account and source-specific scopes retained.",
+      "unresolved": "No raw-data reanalysis, exhaustive literature review or unified factorial study."
+    },
+    {
+      "id": "R160-G7",
+      "location": "Formal verification level",
+      "impact": [
+        "all R160 nodes/rules"
+      ],
+      "counterexample": "Acyclic references and finite enumerations can pass while physical premises or prose semantics are wrong.",
+      "repaired": "Machine checks and manual arguments labeled separately.",
+      "unresolved": "No proof-assistant certification, independent review or global semantic consistency proof."
+    }
+  ]
+}

@@ -85,7 +85,20 @@ The 14-page final PDF and all nine published assets passed anonymous byte/hash r
 
 Publication branch: `research/experience-intelligence-self-v1-20261007`. Exact state and receipt locations, hashes, workflow runs and continuation instructions: [R152 handoff](records/R152_DOI_Publication_20261007/PUBLICATION_HANDOFF.md). Primary research continues under RESEARCH_MASTER_GUIDE.md; release status does not turn preservation into the theoretical research agenda. The formal graph remains R149-v1.0.
 
-# Current entry: R151 integrated foundation
+# Current entry: R160 body/tool intervention profile
+
+- [English result](records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md)
+- [Round record](records/R160_Body_Tool_Intervention_Profile_20261007/ROUND_RECORD.md)
+- [Proof ledger](records/R160_Body_Tool_Intervention_Profile_20261007/PROOF_LEDGER.json)
+- [Source ledger](records/R160_Body_Tool_Intervention_Profile_20261007/SOURCE_LEDGER.json)
+- [Gap ledger](records/R160_Body_Tool_Intervention_Profile_20261007/GAP_LEDGER.json)
+- [Map extension and audit](records/R160_Body_Tool_Intervention_Profile_20261007/MAP_EXTENSION.json), [audit](records/R160_Body_Tool_Intervention_Profile_20261007/MAP_AUDIT.json)
+- [Exact checks](records/R160_Body_Tool_Intervention_Profile_20261007/EXACT_CHECKS.json), [verifier](records/R160_Body_Tool_Intervention_Profile_20261007/verify_profile.py)
+- [Chinese review](records/R160_Body_Tool_Intervention_Profile_20261007/REVIEW_ZH.md), [current handoff](records/R160_Body_Tool_Intervention_Profile_20261007/CURRENT_HANDOFF.md)
+
+R160-v1.0 has 422 nodes and 202 rules, adding 4/2. It defines a protocol-relative, overlap-permitting body/tool causal profile and proves a finite latent-label nonidentification limit. It does not identify anatomy, complete organization or F_O; no experiment or publication occurred. Next is a concrete safe intervention/fidelity/error contract.
+
+# Previous integrated manuscript entry: R151
 
 - [Required research master guide](RESEARCH_MASTER_GUIDE.md)
 - [Integrated manuscript v0.2](records/R151_Foundational_Manuscript_20261007/Experience_Intelligence_and_Self_v0_2.md)
