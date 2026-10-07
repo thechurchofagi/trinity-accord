@@ -1,0 +1,48 @@
+{
+  "schema": "UCT_R163_SOURCE_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R163-S1",
+      "source": "Hoeffding, W. (1963), Probability Inequalities for Sums of Bounded Random Variables, JASA 58(301):13-30",
+      "doi": "10.1080/01621459.1963.10500830",
+      "primary": true,
+      "used_for": "Independent bounded-variable exponential tail inequality, including non-identically distributed summands.",
+      "scope_limit": "Does not supply participant independence, the R161 target, missingness semantics or UCT interpretation."
+    },
+    {
+      "id": "R163-S2",
+      "source": "Manski, C. F. (1989), Anatomy of the Selection Problem, Journal of Human Resources 24(3):343-360",
+      "primary": true,
+      "used_for": "Prior support-bounds/partial-identification framing under selective observation.",
+      "scope_limit": "R163 proves its own finite bounded L/U construction and simultaneous Hoeffding layer; no claim that Manski studied this protocol."
+    },
+    {
+      "id": "R163-S3",
+      "source": "Canay, I. A., Romano, J. P., and Shaikh, A. M. (2017), Randomization Tests Under an Approximate Symmetry Assumption, Econometrica 85(3):1013-1030",
+      "primary": true,
+      "used_for": "Finite-sample randomization validity depends on invariance under a transformation group; approximate extensions require stated conditions.",
+      "scope_limit": "Does not automatically validate a sign-flip interval for the bounded R161 mean."
+    },
+    {
+      "id": "R163-S4",
+      "source": "Owen, A. B. (2025), Coverage errors for Student's t confidence intervals comparable to those in Hall (1988), arXiv:2501.07645",
+      "primary": true,
+      "used_for": "Modern asymptotic context showing Student coverage error depends on skewness and kurtosis.",
+      "scope_limit": "The decisive R163 rejection of a universal finite bounded guarantee uses exact internal enumeration, not this asymptotic source."
+    },
+    {
+      "id": "R163-S5",
+      "source": "UCT I v1.2 fixed repository source, sections 8.11-8.14, 10.1-10.3, 11, 12.1-12.4, 14.6-14.10",
+      "primary": true,
+      "used_for": "Actual-process, bridge, no-rescue, subject/self, token and method boundaries.",
+      "scope_limit": "Does not entail any statistical interval theorem or validate the R161 apparatus."
+    },
+    {
+      "id": "R163-S6",
+      "source": "R161 and R162 fixed repository records",
+      "primary": true,
+      "used_for": "Eight-component bounded target, six gates, three-way decision, independent-pilot freeze and planwise-coverage premise.",
+      "scope_limit": "R163 preserves historical text while correcting the exact bounded/Gaussian incompatibility."
+    }
+  ]
+}

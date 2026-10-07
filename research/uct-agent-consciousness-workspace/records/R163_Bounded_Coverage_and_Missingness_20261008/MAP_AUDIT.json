@@ -1,0 +1,74 @@
+{
+  "schema": "UCT_R163_MAP_AUDIT/v1",
+  "revision": "R163-v1.0",
+  "parent_revision": "R162-v1.0",
+  "counts": {
+    "parent_nodes": 430,
+    "parent_rules": 206,
+    "current_nodes": 436,
+    "current_rules": 209,
+    "context_links_preserved": 117
+  },
+  "audit": [
+    {
+      "dimension": "concepts_objects_quantifiers_scope",
+      "status": "PASS_WITH_OPEN_PREMISES",
+      "finding": "Observed bounded W, latent pre-clipping Z, finite-design theta_N, randomized-order mixture, canonical-order target, complete-case target, all-enrollee full-data target and token-level organization are distinct. N independent vectors and m frozen components are explicit; identical participant laws and component independence are not assumed.",
+      "open": "Participant independence, target population and scientifically preferred order estimand require external justification."
+    },
+    {
+      "dimension": "all_of_simultaneous_premises",
+      "status": "PASS",
+      "finding": "r163_bounded_planwise_coverage requires the concrete protocol, independent freeze contract and bounded finite-design target together. r163_arbitrary_missingness_band inherits the target's independence/bounds and separately requires well-defined would-be outcomes in its theorem domain. r163_order_clipping_boundary requires both tokenwise discipline and the explicit target.",
+      "open": "No premise is discharged merely by an edge label; machine fields do not prove empirical premises."
+    },
+    {
+      "dimension": "related_and_unlinked_concepts",
+      "status": "PASS",
+      "finding": "R162 planwise coverage remains a premise and tower theorem; R163 corrects only its exact Gaussian discharge for bounded observed W. Sign-flip, bootstrap/max-t, latent effects, order invariance, B_min, F_O and C1 are intentionally not connected as consequences.",
+      "open": "A future efficient bounded interval requires a new rule rather than an informal context link."
+    },
+    {
+      "dimension": "joint_satisfiability",
+      "status": "PASS_AFTER_REPAIR",
+      "finding": "R162's exact bounded plus non-degenerate Gaussian package was inconsistent and is recorded as R163-G1/R163-A1. The replacement package is satisfiable: independent bounded participant vectors exist for any frozen finite design; the rare-spike distribution is one witness.",
+      "open": "Scientific feasibility at useful width is not established."
+    },
+    {
+      "dimension": "object_time_signature_actuality_evidence",
+      "status": "PASS",
+      "finding": "Population coverage, actual participant records, within-participant components, order assignments, missing potential outcomes and experience tokens are not merged. Analytic proof, exact enumeration, Monte Carlo diagnostics, candidate design and unrun apparatus have different evidence statuses.",
+      "open": "No actual R161 data, apparatus, ethics approval or empirical phenomenal witness exists."
+    },
+    {
+      "dimension": "inference_direction",
+      "status": "PASS",
+      "finding": "The map permits bounded premises to imply statistical coverage and countermodels to block stronger targets. It contains no interval-to-C1, population-to-token, clipped-to-latent, mixture-to-invariant, report-to-experience or classifier-to-exclusive-owner reverse inference.",
+      "open": "Experience-level interpretation still requires independent bridge evidence."
+    },
+    {
+      "dimension": "finite_limits",
+      "status": "PASS",
+      "finding": "m=8, finite N, fixed alpha, half-width formula and N=4615 width consequence are explicit. Worst-case missingness identification width equals twice the missing fraction before sampling uncertainty.",
+      "open": "Conservatism may make the protocol infeasible; that is not repaired by changing methods post hoc."
+    },
+    {
+      "dimension": "purpose_and_beginner_principle",
+      "status": "PASS",
+      "finding": "The round improves whether a finite bodily/tool attribution protocol can support its claimed inference while preserving UCT C1 as an experience-specific explanatory postulate and keeping basic experience free of introspection, report, language, self-model, integration, recursion, prediction or control gates.",
+      "open": "The positive phenomenal semantics of felt mineness remain open and are not replaced by statistical precision."
+    }
+  ],
+  "direction_checks": {
+    "after_topic_selection": "PASS",
+    "after_result_formation": "PASS",
+    "before_save": "PASS",
+    "reason": "The repair stays on the body/action-related self-experience programme, tests an actual finite bridge, and records failures instead of inflating a method result into a consciousness claim."
+  },
+  "global_nonclaims": [
+    "DAG PASS is not a proof of theory truth or global semantics.",
+    "No current assistant consciousness or death-fear claim is made.",
+    "No basal-experience threshold, exclusive owner, complete organization or familiar ownership is established.",
+    "No experiment, recruitment, ethics approval, publication or preservation workflow occurred."
+  ]
+}

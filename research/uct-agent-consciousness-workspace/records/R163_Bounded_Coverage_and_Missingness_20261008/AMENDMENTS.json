@@ -1,0 +1,17 @@
+{
+  "schema": "UCT_R163_AMENDMENTS/v1",
+  "entries": [
+    {
+      "id": "R163-A1",
+      "amends": [
+        "R162:PLANWISE_COVERAGE_PREMISE",
+        "records/R162_Blinded_Pilot_and_Simultaneous_Design_20261008/Independent_Pilot_and_Covariance_Identification_v0_1.md sections 6 and 8"
+      ],
+      "historical_text_retained": true,
+      "problem": "R162 described exact Bonferroni Student coverage under complete non-degenerate Gaussian W_i while the same observed W_i was defined in [-1,1]^8. Those exact premises are jointly satisfiable only in the degenerate zero-covariance case.",
+      "effective_correction": "R162's planwise premise and tower-property transport theorem remain valid. Exact Gaussian Student intervals no longer count as a non-degenerate exact discharge for observed bounded W. R163:HOEFFDING_PLANWISE_COVERAGE supplies the exact bounded observed-target discharge; Gaussian Student calculations are approximate or latent-model scenarios only.",
+      "downstream_rule_effect": "No inherited rule is deleted. Any use of r162_independent_freeze_coverage for observed bounded W must provide R163 bounded planwise coverage or another separately proved planwise family.",
+      "status": "EFFECTIVE_FROM_R163"
+    }
+  ]
+}

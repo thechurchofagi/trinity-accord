@@ -1,3 +1,9 @@
+## R163 audit — bounded coverage after repairing an inconsistent premise package
+
+R163-v1.0 has **436 nodes / 209 rules** (new 6/3); the inherited 430 nodes, 206 rules and 117 context links reconstruct exactly. Unique IDs, endpoints, parent hash and DAG pass. Seventeen bounded checks pass, including exact rare-spike enumeration, target countermodels and pointwise missingness bounds.
+
+The audit found a real joint-satisfiability defect in R162: a non-degenerate exact Gaussian law and almost-sure observed support `[-1,1]^8` cannot coexist. History is retained in `R163-A1`; the tower theorem remains, but exact Gaussian Student intervals no longer discharge planwise coverage for observed bounded W. The replacement rule requires the concrete protocol, independent freeze contract and explicit bounded finite-design target simultaneously. Order mixture/canonical order, clipped/latent, completer/full-data and population/token objects remain distinct. No coverage-to-C1, B_min, F_O, basal gate or exclusive-owner edge was introduced. Efficiency, participant independence, missing outcome definition, apparatus fidelity and experience-level semantics remain open. Full result: [MAP_AUDIT.json](records/R163_Bounded_Coverage_and_Missingness_20261008/MAP_AUDIT.json).
+
 ## R162 audit — joint covariance discipline and repaired coverage premise
 
 R162-v1.0 has **430 nodes / 206 rules** (new 5/2). The inherited 425 nodes, 204 rules and 117 context links are field-for-field preserved. Unique IDs, endpoints and DAG pass. `r162_covariance_nonidentification` requires both the joint R161 protocol object and the finite component-source audit. `r162_independent_freeze_coverage` now requires the R161 decision, disjoint pilot contract and explicit planwise conditional-coverage premise simultaneously.

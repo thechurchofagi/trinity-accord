@@ -1,0 +1,95 @@
+{
+  "schema": "UCT_R163_PROOF_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R163:BOUNDED_GAUSSIAN_INCOMPATIBILITY",
+      "kind": "GENERAL_MATHEMATICAL_INCOMPATIBILITY_RESULT",
+      "statement": "An almost-surely bounded multivariate Gaussian vector is degenerate in every component. Therefore a non-degenerate exact Gaussian law cannot be the exact law of the declared observed W_i in [-1,1]^8.",
+      "domain": "Finite-dimensional Gaussian random vectors and the exact observed bounded R161/R162 contrast vector; not a claim against approximate Gaussian working models or explicit unbounded latent variables.",
+      "all_premises": [],
+      "proof_or_source": "Every positive-variance Gaussian marginal assigns positive probability outside [-1,1]; almost-sure boundedness forces every marginal variance, hence the covariance matrix, to zero.",
+      "counterexamples_and_limits": "A degenerate point mass is both bounded and Gaussian. An unbounded latent variable can be Gaussian, but clipping changes the target and observed law.",
+      "status": "MANUAL_GENERAL_PROOF",
+      "thought_experiment_role": "Abacus/calculator cases distinguish bounded displayed output from unbounded latent mechanism."
+    },
+    {
+      "id": "R163:STUDENT_BOUNDED_COUNTEREXAMPLE",
+      "kind": "EXACT_FINITE_COUNTEREXAMPLE",
+      "statement": "Student-Bonferroni intervals do not have uniform finite-sample simultaneous 1-alpha coverage over bounded distributions. For the saved mean-zero two-point law at N=36 and m=8, exact simultaneous coverage is 0.2531493943720002 at nominal 0.95.",
+      "domain": "The fixed Student interval with Bonferroni critical value alpha/(2m), independent components, independent observations, and the explicit two-point law in [-1,1].",
+      "all_premises": [],
+      "proof_or_source": "Exact enumeration over K~Binomial(N,.05); stress_test.py and STRESS_TEST_RESULTS.json record every covered count and exact probability.",
+      "counterexamples_and_limits": "This rejects a universal bounded-data guarantee; it does not say Student intervals are always poor or deny asymptotic validity under additional regularity.",
+      "status": "EXACT_FINITE_ENUMERATION",
+      "thought_experiment_role": "Copy/swap of rare observations shows that bounded range and an estimated variance do not force calibrated tails."
+    },
+    {
+      "id": "R163:BOUNDED_FINITE_DESIGN_TARGET",
+      "kind": "FORMAL_TARGET_DEFINITION",
+      "statement": "For a frozen N-participant design with independent participant vectors and W_ij in [-1,1], theta_Nj=N^{-1} sum_i E[W_ij] is the finite-design component target; any frozen randomization distribution is included in the expectation.",
+      "domain": "One fixed R161 protocol version, fixed component definitions, fixed participant positions/strata/randomization law, and independent participant vectors; participant laws need not be identical.",
+      "all_premises": [],
+      "proof_or_source": "Definition introduced to prevent shifts among an i.i.d. superpopulation mean, a fixed-order average, a randomized-order mixture, a clipped mean and a latent mean.",
+      "counterexamples_and_limits": "Dependent participants or a post-outcome change in randomization/target require another theorem. It is not an experience-level object.",
+      "status": "DECLARED_FORMAL_TARGET",
+      "thought_experiment_role": "Human-realized-agent cases test participant dependence; copy/swap tests order-target changes."
+    },
+    {
+      "id": "R163:HOEFFDING_PLANWISE_COVERAGE",
+      "kind": "FINITE_SAMPLE_SIMULTANEOUS_COVERAGE_THEOREM",
+      "statement": "For independent participant vectors with every frozen component in [-1,1], intervals I_j=[mean_j +/- sqrt(2 log(2m/alpha)/N)] intersect [-1,1] simultaneously cover all finite-design component means with probability at least 1-alpha. Within-participant component independence and identical participant laws are not required.",
+      "domain": "The frozen bounded target R163:BOUNDED_FINITE_DESIGN_TARGET, fixed N and m, independent participant vectors, and no same-data choice among interval families or targets.",
+      "all_premises": [
+        {
+          "rule": "r163_bounded_planwise_coverage",
+          "all_of": [
+            "R161:CONCRETE_CROSSED_PROTOCOL",
+            "R162:INDEPENDENT_PILOT_FREEZE_CONTRACT",
+            "R163:BOUNDED_FINITE_DESIGN_TARGET"
+          ]
+        }
+      ],
+      "proof_or_source": "Hoeffding's inequality with range length two gives alpha/m two-sided error per component; the union bound gives alpha familywise error. R162's tower theorem then applies to independently pilot-selected members of this fixed family.",
+      "counterexamples_and_limits": "At m=8, alpha=.05, half-width .05 requires N>=4615. Dependence across participants, target switching, invalid bounds, or adaptive interval selection invalidate the proof.",
+      "status": "MANUAL_GENERAL_PROOF_WITH_EXECUTABLE_NUMERIC_CHECKS",
+      "thought_experiment_role": "Ancestor/formation keeps statistical estimation from becoming a threshold for experience; human-realized-agent probes participant independence."
+    },
+    {
+      "id": "R163:ARBITRARY_MISSINGNESS_BAND",
+      "kind": "FINITE_SAMPLE_PARTIAL_IDENTIFICATION_COVERAGE_THEOREM",
+      "statement": "If every enrollee has a well-defined would-be outcome Y_ij in [-1,1], then L_ij=R_ijY_ij-(1-R_ij) and U_ij=R_ijY_ij+(1-R_ij) bound Y pointwise. The simultaneous bands [mean L_j-h_N, mean U_j+h_N] intersect [-1,1] cover all full-data finite-design means with probability at least 1-alpha under arbitrary missingness and independent participants.",
+      "domain": "Well-defined bounded would-be outcomes for every enrollee, frozen components and target, arbitrary outcome-dependent observation indicators, independent participant records.",
+      "all_premises": [
+        {
+          "rule": "r163_arbitrary_missingness_band",
+          "all_of": [
+            "R163:BOUNDED_FINITE_DESIGN_TARGET"
+          ]
+        }
+      ],
+      "proof_or_source": "Pointwise support bounds plus 2m one-sided Hoeffding events and a union bound. The sample identification width before sampling uncertainty equals twice the missing fraction.",
+      "counterexamples_and_limits": "If a safety abort makes Y physically undefined, the all-enrollee full-data target is undefined. The band can be vacuous and does not justify MAR, IPW or imputation.",
+      "status": "MANUAL_GENERAL_PROOF_WITH_FIXED_SEED_STRESS_DIAGNOSTIC",
+      "thought_experiment_role": "Copy/delete-high-outcomes demonstrates complete-case target failure without phenomenal claims."
+    },
+    {
+      "id": "R163:ORDER_CLIPPING_TARGET_BOUNDARY",
+      "kind": "TARGET_AND_IDENTIFICATION_BOUNDARY",
+      "statement": "Valid coverage for a frozen randomized-order mixture mean does not entail order invariance or a canonical-order effect; valid coverage for clipped W identifies only the clipped mean and does not identify an unclipped latent mean.",
+      "domain": "R161/R162 observed bounded outcomes under frozen order assignments or randomization, and any latent-variable interpretation linked only through clipping.",
+      "all_premises": [
+        {
+          "rule": "r163_order_clipping_boundary",
+          "all_of": [
+            "R160:TOKENWISE_APPLICATION_BOUNDARY",
+            "R163:BOUNDED_FINITE_DESIGN_TARGET"
+          ]
+        }
+      ],
+      "proof_or_source": "Order witness W=.4O+epsilon has mixture mean 0 and canonical O=+1 mean .4. Clipping witnesses Z=2 and Z=100 generate the same observed W=1 law with different latent means.",
+      "counterexamples_and_limits": "Additional mechanistic assumptions or un-clipped measurements could identify a latent target; replicated conditional-order estimates could test order invariance.",
+      "status": "EXACT_COUNTERMODEL_BOUNDARY",
+      "thought_experiment_role": "Abacus/calculator gives identical outputs with different latent states; copy/swap changes order target while preserving score range."
+    }
+  ]
+}

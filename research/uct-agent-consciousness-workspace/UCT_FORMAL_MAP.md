@@ -1,3 +1,9 @@
+## R163 extension — bounded planwise coverage and target boundaries
+
+R163-v1.0 contains **436 nodes / 209 rules** (new 6/3), preserving all 430 R162 nodes, 206 rules and 117 context links fieldwise. It records an actual correction: exact non-degenerate Gaussianity is incompatible with the declared observed bound `W_i in [-1,1]^8`. R162's planwise premise and tower-property theorem remain; its Gaussian Student discharge is no longer effective for non-degenerate observed bounded W.
+
+The replacement is exact but conservative. For independent participant vectors, frozen bounded components and a fixed finite-design target, Bonferroni-Hoeffding intervals have finite-sample simultaneous coverage without identical participant laws or within-vector component independence. At `m=8`, `alpha=.05`, half-width `.05` requires `N>=4615`. Separate nodes prevent randomized-order mixture from becoming order invariance, clipped means from becoming latent means, and complete-case summaries from becoming all-enrollee effects. Full audit: [R163 MAP_AUDIT](records/R163_Bounded_Coverage_and_Missingness_20261008/MAP_AUDIT.json).
+
 ## R162 extension — covariance non-identification and planwise-valid freezing
 
 R162-v1.0 contains **430 nodes / 206 rules** (new 5/2), preserving all 425 R161 nodes, 204 rules and 117 context links fieldwise. New entries distinguish: a finite three-route source audit; general separate-marginal covariance non-identification; a prospective disjoint nuisance-only pilot contract; an explicit planwise conditional-coverage premise; and the tower-property coverage theorem.

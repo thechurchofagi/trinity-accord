@@ -1,3 +1,14 @@
+## R163 — bounded planwise coverage, order/clipping boundary and arbitrary missingness
+
+- English result: `records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md`
+- Chinese review/current handoff: `REVIEW_ZH.md`, `CURRENT_HANDOFF.md` in the same directory
+- Proof/gap/source/amendment ledgers: same directory
+- Exact stress test/results: `stress_test.py`, `STRESS_TEST_RESULTS.json`
+- Formal extension/audit/validation: `MAP_EXTENSION.json`, `MAP_AUDIT.json`, `VALIDATION.json`
+- Map: R163-v1.0, 436 nodes / 209 rules, new 6/3; R162 prefix and 117 context links preserved
+- Result boundary: exact bounded observed W conflicts with non-degenerate exact Gaussianity; Hoeffding supplies valid but conservative observed-target coverage; order, clipping and missingness do not license stronger targets
+- Next: predeclared efficient bounded intervals with a finite-sample planwise proof, rare-spike test and separately typed missingness target
+
 ## R162 — joint covariance non-identification and independent pilot freeze
 
 - English result: `records/R162_Blinded_Pilot_and_Simultaneous_Design_20261008/Independent_Pilot_and_Covariance_Identification_v0_1.md`

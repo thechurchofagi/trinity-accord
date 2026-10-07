@@ -1,3 +1,9 @@
+## R163 current priority — exact bounded coverage without target inflation
+
+R163 corrects the main R162 stress-test defect. Observed `W_i in [-1,1]^8` cannot also be non-degenerate exact Gaussian. The R162 independent-freeze/tower theorem remains, but Student-Gaussian intervals no longer provide its exact observed-target discharge. An exact two-point bounded law gives only `.2531493944` simultaneous Student-Bonferroni coverage at `N=36,m=8`.
+
+`R163:HOEFFDING_PLANWISE_COVERAGE` gives a distribution-free finite-sample replacement for independent bounded participant vectors and a frozen finite-design target; it is conservative (`N>=4615` for eight-dimensional half-width `.05`). Order-mixture, clipped, latent, completer, full-data and token-experience targets are kept separate. Map R163-v1.0: 436/209, new 6/3, inherited 430/206 and 117 context links exact. Continue with a predeclared efficient bounded interval candidate, tested first against the saved rare-spike law and with missingness target typed separately. See `records/R163_Bounded_Coverage_and_Missingness_20261008/CURRENT_HANDOFF.md`.
+
 ## R162 current priority — independent pilot without a calibration shortcut
 
 R162 narrows the next empirical step. Three inspected public data routes contain useful components but not the exact joint R161 eight-contrast vector, so their marginals cannot identify cross covariance. An external, disjoint, nuisance-only pilot is specified, with failure states `PILOT_INVALID_PROTOCOL` and `DESIGN_NOT_FEASIBLE` rather than theoretical exclusion.

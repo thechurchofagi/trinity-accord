@@ -1,3 +1,11 @@
+## R163 current priority — bounded finite-sample coverage and explicit estimands
+
+R163 repaired a joint premise contradiction: the observed R161/R162 vector is exactly bounded in `[-1,1]^8`, so it cannot be a non-degenerate exact Gaussian vector. Preserve R162 history and its independent-pilot tower theorem, but do not use exact Gaussian Student intervals as a finite-sample certificate for observed bounded W.
+
+The accepted exact fallback is Bonferroni-Hoeffding for independent participant vectors, frozen components and the explicit finite-design mean. It does not need identical participant laws or independence among the eight within-participant components, but it is wide: `N>=4615` for simultaneous half-width `.05` at alpha `.05`. Exact rare-spike Student coverage at `N=36,m=8` is `.2531493944`. Arbitrary missingness has a worst-case support band only when all would-be outcomes remain defined. Random order identifies its declared mixture, not order invariance; clipping identifies clipped, not latent, means.
+
+Map R163-v1.0: 436 nodes / 209 rules; 117 context links preserved; 17 checks PASS. Next: test a predeclared empirical-Bernstein or bounded-martingale simultaneous family for materially smaller width without losing planwise validity or changing targets. Keep R161 gates, C1's status, B_min/F_O openness, four thought-experiment families and all R163 gaps.
+
 ## R160 current priority — body/tool roles are relative causal profiles, not ontological labels
 
 R160 fixes a finite human upper-limb/tool-use protocol before target outputs: independently grounded biological-pathway J_B and tool-transformation J_T interventions; tool-absent body Y_B and tool-specific Y_T readouts; explicit normalization, bounds and epsilon. Body dominance, tool dominance, overlap and neither are all permitted. 625 rational profiles and 1,024 latent-label-swap traces pass exact checks, but they are not human evidence.

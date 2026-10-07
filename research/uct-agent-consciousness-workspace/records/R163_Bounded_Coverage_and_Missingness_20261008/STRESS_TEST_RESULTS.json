@@ -1,0 +1,155 @@
+{
+  "alpha": 0.05,
+  "arbitrary_missingness": {
+    "complete_case_student_simultaneous_coverage_for_full_target_mc": 0.0,
+    "component_failures_due_to_fewer_than_2_observations": 0,
+    "distribution": "Y=2*Beta(0.5,2)-1; R=1[Y<=-0.2]",
+    "m": 8,
+    "n": 36,
+    "replications": 20000,
+    "response_probability_exact": 0.822192191643779,
+    "status": "diagnostic_not_proof",
+    "true_full_data_component_mean": -0.6,
+    "worst_case_bounded_band_simultaneous_coverage_mc": 1.0,
+    "worst_case_hoeffding_half_width": 0.566093876971036
+  },
+  "beta_skew": {
+    "distribution": "2*Beta(0.35,2)-1",
+    "hoeffding_bonferroni_simultaneous_coverage_mc": 1.0,
+    "hoeffding_half_width": 0.566093876971036,
+    "m": 8,
+    "n": 36,
+    "replications": 20000,
+    "status": "diagnostic_not_proof",
+    "student_bonferroni_simultaneous_coverage_mc": 0.8457,
+    "true_component_mean": -0.7021276595744681
+  },
+  "claims": {
+    "exact_counterexample": "Analytic binomial enumeration; no Monte Carlo error.",
+    "hoeffding_guarantee": "For independent participant vectors with each component in [-1,1], the displayed intervals cover all component means simultaneously with probability at least 1-alpha. Component independence is not required.",
+    "monte_carlo": "Diagnostics only; not coverage proofs."
+  },
+  "clipping_nonidentification": {
+    "conclusion": "No estimator of clipped W can identify the latent mean without added assumptions.",
+    "latent_means": [
+      2.0,
+      100.0
+    ],
+    "observed_clipped_distribution_A": "P(W=1)=1 from latent Z=2",
+    "observed_clipped_distribution_B": "P(W=1)=1 from latent Z=100",
+    "observed_laws_equal": true
+  },
+  "components": 8,
+  "hoeffding_widths": {
+    "120": 0.3100623860825907,
+    "24": 0.6933205725464575,
+    "36": 0.566093876971036,
+    "4615": 0.04999814079227538,
+    "60": 0.4384944315797626
+  },
+  "n_for_half_width_at_most_005": 4615,
+  "order_target_boundary": {
+    "balanced_randomized_order_mean": 0.0,
+    "canonical_O_plus_1_mean": 0.4,
+    "conclusion": "Coverage for the randomized-order mixture mean does not cover an order-invariant or canonical-order target by implication.",
+    "model": "W=0.4*O+epsilon, O in {-1,+1}, E[epsilon|O]=0"
+  },
+  "rare_spike_exact": [
+    {
+      "covered_success_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "distribution": {
+        "E[X]": 0.0,
+        "P(X=-1/19)": 0.95,
+        "P(X=1)": 0.05
+      },
+      "marginal_coverage_exact": 0.7080096925103365,
+      "n": 24,
+      "probability_no_spike": 0.2919890243387724,
+      "simultaneous_coverage_exact_for_8_independent_components": 0.06314131538950218
+    },
+    {
+      "covered_success_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "distribution": {
+        "E[X]": 0.0,
+        "P(X=-1/19)": 0.95,
+        "P(X=1)": 0.05
+      },
+      "marginal_coverage_exact": 0.8422133314048236,
+      "n": 36,
+      "probability_no_spike": 0.1577792147882268,
+      "simultaneous_coverage_exact_for_8_independent_components": 0.2531493943720002
+    },
+    {
+      "covered_success_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "distribution": {
+        "E[X]": 0.0,
+        "P(X=-1/19)": 0.95,
+        "P(X=1)": 0.05
+      },
+      "marginal_coverage_exact": 0.9538942240045934,
+      "n": 60,
+      "probability_no_spike": 0.046069798986951946,
+      "simultaneous_coverage_exact_for_8_independent_components": 0.6854909926491232
+    },
+    {
+      "covered_success_counts": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "distribution": {
+        "E[X]": 0.0,
+        "P(X=-1/19)": 0.95,
+        "P(X=1)": 0.05
+      },
+      "marginal_coverage_exact": 0.9423904243055773,
+      "n": 120,
+      "probability_no_spike": 0.0021224263786981585,
+      "simultaneous_coverage_exact_for_8_independent_components": 0.6220809706508869
+    }
+  ],
+  "round": "R163",
+  "seed": 16320261008
+}

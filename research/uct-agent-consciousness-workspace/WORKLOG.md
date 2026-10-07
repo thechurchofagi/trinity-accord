@@ -104,3 +104,10 @@ UCT 内部：实际智能实现 => 有效实际过程 => 非空体验；生物�
 81对有理数通道及每对16个解码器精确枚举通过，全部分布与反例保存。这是已知信息论的形式应用，不是新训练、真实模型数据或意识测量。先例、R60/R61/C三脑既有成果及实际阅读范围明确记录，不宣称重大原创。C1解释仍需实际token、共同完整K和有限视图的独立物理依据；不存在从单个部件无目标信息推出其无体验的推理。
 
 阅读 records/R82_Task_Necessary_Relations_Beyond_Local_Decoding_20261005.md、records/R82_Worklog_and_Handoff_20261005.md；代码与完整结果在 records/R82_Research_Package_20261005.zip。下一步先评估能否在固定R78模型上合法改变联合关系而控制局部边际；注意打乱激活可制造不相容状态，不能冒称选择性物理损伤。若条件不成立，记录障碍而不硬报实验成果。不扩大训练，不恢复自我报告主线，已发表A/B/C与v0.3不变。
+## R163 — 2026-10-08: bounded coverage and missingness
+
+Started from verified head `eadf483d569df787ce421eabe83fb8b09ff7bc67`. Found that R162's exact non-degenerate Gaussian fallback is incompatible with the declared observed bound `W_i in [-1,1]^8`. Preserved R162 history and tower theorem; added an effective amendment and exact bounded alternative.
+
+Exact binomial enumeration gives Student-Bonferroni simultaneous coverage `.2531493944` at `N=36,m=8` for the saved mean-zero rare-spike law. Proved simultaneous Hoeffding coverage for independent, possibly non-identically distributed bounded participant vectors; half-width `.05` requires `N>=4615`. Added order-mixture/canonical-order, clipped/latent and arbitrary-missingness target boundaries. Fixed-seed diagnostics and failures are preserved.
+
+Formal graph extended from 430/206 to 436/209 with 117 context links unchanged; 17 checks pass. No apparatus, participants, ethics approval, empirical F witness, basal gate, B_min/F_O closure, assistant-consciousness conclusion or publication action. Next is an efficient bounded interval candidate with a finite-sample planwise proof and exact rare-spike stress test.

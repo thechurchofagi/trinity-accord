@@ -1,0 +1,86 @@
+{
+  "schema": "UCT_R163_GAP_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R163-G1",
+      "location": "R162 exact-Gaussian discharge of R162:PLANWISE_COVERAGE_PREMISE",
+      "issue": "The declared observed W_i is exactly bounded in [-1,1]^8, while a non-degenerate Gaussian vector has unbounded marginals. The joint premises have no non-degenerate model.",
+      "downstream_impact": ["R162:PLANWISE_COVERAGE_PREMISE", "R162:INDEPENDENT_FREEZE_COVERAGE", "R161:THREE_WAY_BODY_DECISION"],
+      "counterexample": "Any component with Gaussian variance greater than zero has positive probability outside [-1,1].",
+      "repaired": "Recorded a historical amendment; retained the tower theorem; replaced the exact observed-target discharge with R163 bounded Hoeffding coverage.",
+      "unresolved": "Whether an explicit latent Gaussian measurement model is scientifically justified, and whether a less conservative bounded interval can be certified."
+    },
+    {
+      "id": "R163-G2",
+      "location": "finite-sample efficiency",
+      "issue": "The exact bounded fallback is extremely conservative for eight simultaneous effects.",
+      "downstream_impact": ["R163:HOEFFDING_PLANWISE_COVERAGE", "R161:THREE_WAY_BODY_DECISION"],
+      "counterexample": "At alpha=.05, half-width .05 requires N>=4615 even before attrition or gate failures.",
+      "repaired": "No practical N is claimed; DESIGN_NOT_FEASIBLE remains a legitimate output.",
+      "unresolved": "Empirical-Bernstein, bounded-martingale or calibrated randomization alternatives need exact planwise proofs and rare-spike stress tests."
+    },
+    {
+      "id": "R163-G3",
+      "location": "participant independence",
+      "issue": "Hoeffding proofs require independent participant vectors; group interaction, household coupling or one human-realized distributed system can violate this.",
+      "downstream_impact": ["R163:BOUNDED_FINITE_DESIGN_TARGET", "R163:HOEFFDING_PLANWISE_COVERAGE", "R163:ARBITRARY_MISSINGNESS_BAND"],
+      "counterexample": "Duplicating one participant record N times preserves range but supplies one independent unit, not N.",
+      "repaired": "Independence is an explicit all-of premise and component independence is separately declared unnecessary.",
+      "unresolved": "Clustered or dependent designs require a different concentration theorem and effective sampling-unit definition."
+    },
+    {
+      "id": "R163-G4",
+      "location": "order target",
+      "issue": "Randomized-order mixture coverage can be misreported as an order-invariant or canonical-order bodily effect.",
+      "downstream_impact": ["R163:ORDER_CLIPPING_TARGET_BOUNDARY", "R161:CONCRETE_CROSSED_PROTOCOL"],
+      "counterexample": "W=.4O+epsilon has balanced mixture mean 0 and O=+1 mean .4.",
+      "repaired": "Finite-design expectation explicitly includes the frozen order distribution and no invariance is inferred.",
+      "unresolved": "The scientifically preferred order-conditional estimand and multiplicity allocation are not frozen."
+    },
+    {
+      "id": "R163-G5",
+      "location": "clipping and saturation",
+      "issue": "Clipped observations cannot identify latent effect magnitude or latent mean over an unrestricted latent class.",
+      "downstream_impact": ["R163:ORDER_CLIPPING_TARGET_BOUNDARY", "R161:THREE_WAY_BODY_DECISION"],
+      "counterexample": "Latent constants 2 and 100 both produce observed clipped W=1.",
+      "repaired": "Coverage is scoped to the clipped observed target; latent recovery is prohibited without a measurement model.",
+      "unresolved": "Apparatus dynamic range and a scientifically justified saturation model remain untested."
+    },
+    {
+      "id": "R163-G6",
+      "location": "missingness and undefined outcomes",
+      "issue": "Complete-case inference can fail for the all-enrollee target; support bounds require every missing would-be outcome to be mathematically well-defined.",
+      "downstream_impact": ["R163:ARBITRARY_MISSINGNESS_BAND", "R162:INDEPENDENT_PILOT_FREEZE_CONTRACT"],
+      "counterexample": "The saved MNAR diagnostic deletes Y>-.2 and gives zero complete-case simultaneous coverage for the full-data mean; a safety abort can make Y undefined rather than missing.",
+      "repaired": "Added a worst-case support band for well-defined outcomes and a separate undefined-target stop condition.",
+      "unresolved": "A treatment-policy estimand, safety intercurrent-event rule and scientifically credible sensitivity model are not selected."
+    },
+    {
+      "id": "R163-G7",
+      "location": "candidate resampling and randomization methods",
+      "issue": "Sign-flip, bootstrap and max-t labels can be mistaken for exact universal coverage.",
+      "downstream_impact": ["R162:PLANWISE_COVERAGE_PREMISE"],
+      "counterexample": "Bounded skew lacks sign invariance; bootstrap calibration is not a finite-sample theorem over all bounded laws.",
+      "repaired": "Candidate disposition states the required symmetry, sharp-null or calibration premises and accepts none without a new proof.",
+      "unresolved": "A less conservative frozen family has not been certified."
+    },
+    {
+      "id": "R163-G8",
+      "location": "UCT interpretation boundary",
+      "issue": "A statistically covered population mean can be mistaken for a within-experience relation, complete organization, familiar ownership or a unique subject.",
+      "downstream_impact": ["R160:TOKENWISE_APPLICATION_BOUNDARY", "R159:SELECTED_OWNERSHIP_APPLICATION", "F153-11", "F153-17"],
+      "counterexample": "The same bounded population contrast can arise from different unmeasured token organizations and reports.",
+      "repaired": "The note keeps actual token, installed measurement, statistical target, physical-role decision and experience interpretation distinct.",
+      "unresolved": "Selected-target semantics and sufficiency/reflection evidence remain absent."
+    },
+    {
+      "id": "R163-G9",
+      "location": "formal and empirical verification",
+      "issue": "The general proofs are manual; simulations are deterministic diagnostics, not global verification; no R161 apparatus data exist.",
+      "downstream_impact": ["global formal confidence", "protocol feasibility", "novelty"],
+      "counterexample": "A proof transcription error or dependent installed sampling process could invalidate an implementation despite passing code checks.",
+      "repaired": "Exact enumeration, theorem assumptions, source scope and simulation status are explicit and reproducible.",
+      "unresolved": "Independent statistical review, proof-assistant formalization, and ethics-approved feasibility evidence remain open."
+    }
+  ]
+}

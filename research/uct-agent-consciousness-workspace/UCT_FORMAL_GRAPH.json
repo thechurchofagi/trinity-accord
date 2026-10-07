@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R162-v1.0",
+  "revision": "R163-v1.0",
   "date": "2026-10-08",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -18757,6 +18757,276 @@
           }
         ]
       }
+    },
+    {
+      "id": "R163:BOUNDED_GAUSSIAN_INCOMPATIBILITY",
+      "kind": "GENERAL_MATHEMATICAL_INCOMPATIBILITY_RESULT",
+      "label": "Bounded Gaussian Incompatibility",
+      "statement": "An almost-surely bounded multivariate Gaussian vector is degenerate in every component; a non-degenerate exact Gaussian law cannot be the exact law of observed W_i in [-1,1]^8.",
+      "domain": "Finite-dimensional Gaussian vectors and the exact observed bounded R161/R162 contrast vector; approximate or explicit latent Gaussian models are not excluded.",
+      "scope": "Finite-dimensional Gaussian vectors and the exact observed bounded R161/R162 contrast vector; approximate or explicit latent Gaussian models are not excluded.",
+      "source": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md §2",
+      "source_lineage": "Elementary Gaussian marginal support applied to the R161/R162 exact bounded target.",
+      "status": "MANUAL_GENERAL_PROOF",
+      "proof": "Every positive-variance Gaussian marginal has positive probability outside [-1,1]; almost-sure boundedness forces all marginal variances and the covariance matrix to zero.",
+      "counterexamples_and_limits": "A degenerate point mass is both bounded and Gaussian; an unbounded latent Gaussian variable is a different target after clipping.",
+      "formal_contract_R163": {
+        "object_domain": "One fixed R161 bounded eight-contrast protocol, its R162 pilot-freeze contract, and a frozen finite-design statistical target; no human work occurred.",
+        "quantifiers": "N independent participant vectors, m frozen components, every pilot-selected plan in the declared bounded family, and every lower/upper missingness endpoint when full outcomes are defined.",
+        "bearer_time_signature": "Population estimators compare distinct participant/trial tokens; order mixtures, clipped targets, latent variables, complete organization and within-experience relations remain distinct.",
+        "source_anchor": {
+          "path": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md",
+          "sha256": "313d7c90f491cf2a3456ac517d671acd296432dab27e08711f1efce2336229cb",
+          "locator": "sections 2-12"
+        },
+        "purpose": "Repair the bounded/Gaussian contradiction and provide exact but conservative planwise coverage without target, order, clipping, missingness or experience-level inflation.",
+        "thought_experiments": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md section 10",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R163-G2",
+          "R163-G3",
+          "R163-G6",
+          "R163-G8"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R163:STUDENT_BOUNDED_COUNTEREXAMPLE",
+      "kind": "EXACT_FINITE_COUNTEREXAMPLE",
+      "label": "Bounded Student Coverage Counterexample",
+      "statement": "Student-Bonferroni intervals lack uniform finite-sample simultaneous coverage over bounded laws; at N=36 and m=8, the saved mean-zero two-point law has exact simultaneous coverage 0.2531493943720002 at nominal 0.95.",
+      "domain": "The fixed Student interval family, independent observations and components, and the explicit two-point law supported in [-1,1].",
+      "scope": "The fixed Student interval family, independent observations and components, and the explicit two-point law supported in [-1,1].",
+      "source": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md §3",
+      "source_lineage": "Exact binomial enumeration in stress_test.py and STRESS_TEST_RESULTS.json.",
+      "status": "EXACT_FINITE_ENUMERATION",
+      "proof": "Enumerate every binomial success count and sum its exact probability when the Student interval contains the known mean zero; eighth-power gives independent-component simultaneous coverage.",
+      "counterexamples_and_limits": "Rejects a universal bounded guarantee, not all uses or asymptotic approximations of Student intervals.",
+      "formal_contract_R163": {
+        "object_domain": "One fixed R161 bounded eight-contrast protocol, its R162 pilot-freeze contract, and a frozen finite-design statistical target; no human work occurred.",
+        "quantifiers": "N independent participant vectors, m frozen components, every pilot-selected plan in the declared bounded family, and every lower/upper missingness endpoint when full outcomes are defined.",
+        "bearer_time_signature": "Population estimators compare distinct participant/trial tokens; order mixtures, clipped targets, latent variables, complete organization and within-experience relations remain distinct.",
+        "source_anchor": {
+          "path": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md",
+          "sha256": "313d7c90f491cf2a3456ac517d671acd296432dab27e08711f1efce2336229cb",
+          "locator": "sections 2-12"
+        },
+        "purpose": "Repair the bounded/Gaussian contradiction and provide exact but conservative planwise coverage without target, order, clipping, missingness or experience-level inflation.",
+        "thought_experiments": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md section 10",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R163-G2",
+          "R163-G3",
+          "R163-G6",
+          "R163-G8"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R163:BOUNDED_FINITE_DESIGN_TARGET",
+      "kind": "FORMAL_TARGET_DEFINITION",
+      "label": "Frozen Bounded Finite-Design Target",
+      "statement": "For a frozen N-participant design with independent W_i and W_ij in [-1,1], theta_Nj=N^{-1} sum_i E[W_ij] is the finite-design target, including any frozen randomization distribution in the expectation.",
+      "domain": "One fixed R161 protocol, component order, participant positions/strata/randomization law and independent participant vectors; laws need not be identical.",
+      "scope": "One fixed R161 protocol, component order, participant positions/strata/randomization law and independent participant vectors; laws need not be identical.",
+      "source": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md §4",
+      "source_lineage": "Target definition introduced to block i.i.d./finite-design, order-mixture/canonical-order, clipped/latent and statistical/experiential shifts.",
+      "status": "DECLARED_FORMAL_TARGET",
+      "proof": "Definition; no empirical truth or experience-level identity is inferred.",
+      "counterexamples_and_limits": "Participant dependence or post-outcome target changes require another theorem.",
+      "formal_contract_R163": {
+        "object_domain": "One fixed R161 bounded eight-contrast protocol, its R162 pilot-freeze contract, and a frozen finite-design statistical target; no human work occurred.",
+        "quantifiers": "N independent participant vectors, m frozen components, every pilot-selected plan in the declared bounded family, and every lower/upper missingness endpoint when full outcomes are defined.",
+        "bearer_time_signature": "Population estimators compare distinct participant/trial tokens; order mixtures, clipped targets, latent variables, complete organization and within-experience relations remain distinct.",
+        "source_anchor": {
+          "path": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md",
+          "sha256": "313d7c90f491cf2a3456ac517d671acd296432dab27e08711f1efce2336229cb",
+          "locator": "sections 2-12"
+        },
+        "purpose": "Repair the bounded/Gaussian contradiction and provide exact but conservative planwise coverage without target, order, clipping, missingness or experience-level inflation.",
+        "thought_experiments": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md section 10",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R163-G2",
+          "R163-G3",
+          "R163-G6",
+          "R163-G8"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R163:HOEFFDING_PLANWISE_COVERAGE",
+      "kind": "FINITE_SAMPLE_SIMULTANEOUS_COVERAGE_THEOREM",
+      "label": "Bounded Planwise Simultaneous Coverage",
+      "statement": "For independent participant vectors with each frozen component in [-1,1], Bonferroni-Hoeffding intervals with half-width sqrt(2 log(2m/alpha)/N) simultaneously cover all finite-design component means with probability at least 1-alpha; component independence and identical participant laws are unnecessary.",
+      "domain": "R163 bounded finite-design target, fixed N,m and interval family, independent participant vectors, and no same-data target or family selection.",
+      "scope": "R163 bounded finite-design target, fixed N,m and interval family, independent participant vectors, and no same-data target or family selection.",
+      "source": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md §4",
+      "source_lineage": "Hoeffding 1963 plus a union bound, typed through the R162 independent-pilot coverage contract.",
+      "status": "MANUAL_GENERAL_PROOF_WITH_EXECUTABLE_NUMERIC_CHECKS",
+      "proof": "Range-two Hoeffding gives alpha/m two-sided failure for each component; union bound gives alpha; R162 tower property transports coverage across independent pilot-selected plans.",
+      "counterexamples_and_limits": "Conservative: m=8, alpha=.05 and half-width .05 require N>=4615; participant dependence, invalid bounds or adaptive family selection break the proof.",
+      "formal_contract_R163": {
+        "object_domain": "One fixed R161 bounded eight-contrast protocol, its R162 pilot-freeze contract, and a frozen finite-design statistical target; no human work occurred.",
+        "quantifiers": "N independent participant vectors, m frozen components, every pilot-selected plan in the declared bounded family, and every lower/upper missingness endpoint when full outcomes are defined.",
+        "bearer_time_signature": "Population estimators compare distinct participant/trial tokens; order mixtures, clipped targets, latent variables, complete organization and within-experience relations remain distinct.",
+        "source_anchor": {
+          "path": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md",
+          "sha256": "313d7c90f491cf2a3456ac517d671acd296432dab27e08711f1efce2336229cb",
+          "locator": "sections 2-12"
+        },
+        "purpose": "Repair the bounded/Gaussian contradiction and provide exact but conservative planwise coverage without target, order, clipping, missingness or experience-level inflation.",
+        "thought_experiments": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md section 10",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R163-G2",
+          "R163-G3",
+          "R163-G6",
+          "R163-G8"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r163_bounded_planwise_coverage",
+            "all_of": [
+              "R161:CONCRETE_CROSSED_PROTOCOL",
+              "R162:INDEPENDENT_PILOT_FREEZE_CONTRACT",
+              "R163:BOUNDED_FINITE_DESIGN_TARGET"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R163:ARBITRARY_MISSINGNESS_BAND",
+      "kind": "FINITE_SAMPLE_PARTIAL_IDENTIFICATION_COVERAGE_THEOREM",
+      "label": "Arbitrary-Missingness Bounded Confidence Band",
+      "statement": "For well-defined Y_ij in [-1,1], L=RY-(1-R) and U=RY+(1-R) bound Y pointwise; [mean L-h_N, mean U+h_N] intersect [-1,1] simultaneously covers all full-data finite-design means with probability at least 1-alpha under arbitrary missingness and independent participants.",
+      "domain": "Well-defined bounded would-be outcomes for every enrollee, frozen target and components, arbitrary observation indicators, independent participant records.",
+      "scope": "Well-defined bounded would-be outcomes for every enrollee, frozen target and components, arbitrary observation indicators, independent participant records.",
+      "source": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md §8",
+      "source_lineage": "Manski support-bound logic plus 2m one-sided Hoeffding events and a union bound.",
+      "status": "MANUAL_GENERAL_PROOF_WITH_FIXED_SEED_STRESS_DIAGNOSTIC",
+      "proof": "Pointwise E[L]<=E[Y]<=E[U]; one-sided Hoeffding errors alpha/(2m) for every lower and upper endpoint; union bound over 2m events.",
+      "counterexamples_and_limits": "Can be vacuous; if safety makes Y undefined, the full-data target is invalid rather than missing.",
+      "formal_contract_R163": {
+        "object_domain": "One fixed R161 bounded eight-contrast protocol, its R162 pilot-freeze contract, and a frozen finite-design statistical target; no human work occurred.",
+        "quantifiers": "N independent participant vectors, m frozen components, every pilot-selected plan in the declared bounded family, and every lower/upper missingness endpoint when full outcomes are defined.",
+        "bearer_time_signature": "Population estimators compare distinct participant/trial tokens; order mixtures, clipped targets, latent variables, complete organization and within-experience relations remain distinct.",
+        "source_anchor": {
+          "path": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md",
+          "sha256": "313d7c90f491cf2a3456ac517d671acd296432dab27e08711f1efce2336229cb",
+          "locator": "sections 2-12"
+        },
+        "purpose": "Repair the bounded/Gaussian contradiction and provide exact but conservative planwise coverage without target, order, clipping, missingness or experience-level inflation.",
+        "thought_experiments": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md section 10",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R163-G2",
+          "R163-G3",
+          "R163-G6",
+          "R163-G8"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r163_arbitrary_missingness_band",
+            "all_of": [
+              "R163:BOUNDED_FINITE_DESIGN_TARGET"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R163:ORDER_CLIPPING_TARGET_BOUNDARY",
+      "kind": "TARGET_AND_IDENTIFICATION_BOUNDARY",
+      "label": "Order and Clipping Target Boundary",
+      "statement": "Coverage for a frozen randomized-order mixture mean does not entail order invariance or a canonical-order effect; coverage for clipped W identifies only the clipped mean, not an unrestricted unclipped latent mean.",
+      "domain": "R161/R162 observed bounded outcomes under frozen order assignment/randomization and any latent interpretation linked only through clipping.",
+      "scope": "R161/R162 observed bounded outcomes under frozen order assignment/randomization and any latent interpretation linked only through clipping.",
+      "source": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md §§6-7",
+      "source_lineage": "Exact order-target and clipping countermodels plus R160 tokenwise application boundary.",
+      "status": "EXACT_COUNTERMODEL_BOUNDARY",
+      "proof": "W=.4O+epsilon separates mixture mean 0 from canonical-order mean .4; latent constants 2 and 100 induce identical clipped W=1 laws.",
+      "counterexamples_and_limits": "Additional mechanistic assumptions, conditional-order estimation or unclipped measurements may identify narrower targets.",
+      "formal_contract_R163": {
+        "object_domain": "One fixed R161 bounded eight-contrast protocol, its R162 pilot-freeze contract, and a frozen finite-design statistical target; no human work occurred.",
+        "quantifiers": "N independent participant vectors, m frozen components, every pilot-selected plan in the declared bounded family, and every lower/upper missingness endpoint when full outcomes are defined.",
+        "bearer_time_signature": "Population estimators compare distinct participant/trial tokens; order mixtures, clipped targets, latent variables, complete organization and within-experience relations remain distinct.",
+        "source_anchor": {
+          "path": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md",
+          "sha256": "313d7c90f491cf2a3456ac517d671acd296432dab27e08711f1efce2336229cb",
+          "locator": "sections 2-12"
+        },
+        "purpose": "Repair the bounded/Gaussian contradiction and provide exact but conservative planwise coverage without target, order, clipping, missingness or experience-level inflation.",
+        "thought_experiments": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md section 10",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17",
+          "R161-G1",
+          "R161-G5",
+          "R161-G7",
+          "R163-G2",
+          "R163-G3",
+          "R163-G6",
+          "R163-G8"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r163_order_clipping_boundary",
+            "all_of": [
+              "R160:TOKENWISE_APPLICATION_BOUNDARY",
+              "R163:BOUNDED_FINITE_DESIGN_TARGET"
+            ]
+          }
+        ]
+      }
     }
   ],
   "rules": [
@@ -31180,6 +31450,87 @@
         "source_sha256": "5419888d80253acc435f6237b4ccac2fa34e08ed58ad21a04f033f9f56d53ace",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r163_bounded_planwise_coverage",
+      "all_of": [
+        "R161:CONCRETE_CROSSED_PROTOCOL",
+        "R162:INDEPENDENT_PILOT_FREEZE_CONTRACT",
+        "R163:BOUNDED_FINITE_DESIGN_TARGET"
+      ],
+      "conclusion": "R163:HOEFFDING_PLANWISE_COVERAGE",
+      "statement": "The fixed bounded R161 protocol, independent pilot-freeze contract and explicit finite-design target jointly permit a range-based planwise interval whose simultaneous coverage is finite-sample valid for independent participant vectors.",
+      "proof_sketch": "Apply range-two Hoeffding to each frozen component, union-bound m failures, then apply R162's tower theorem to independent pilot-selected plans.",
+      "source": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md §4",
+      "kind": "CONDITIONAL_FINITE_SAMPLE_DEDUCTION",
+      "review": "MANUAL_ALL_OF_TARGET_INDEPENDENCE_BOUND_AND_SELECTION_AUDIT",
+      "formal_contract_R163": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same fixed R161 protocol, bounded component definitions, order and normalization",
+          "same finite-design target and randomization distribution before outcomes",
+          "independent participant vectors, distinct from within-vector component dependence",
+          "same interval and missingness family for every pilot-selected plan",
+          "clipped observed targets distinguished from latent effects and population statistics distinguished from token experience"
+        ],
+        "quantification": "One declared protocol and target; every selected bounded plan and every frozen component must satisfy the stated range and independence premises.",
+        "proof_location": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md sections 4-9",
+        "source_sha256": "313d7c90f491cf2a3456ac517d671acd296432dab27e08711f1efce2336229cb",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r163_arbitrary_missingness_band",
+      "all_of": [
+        "R163:BOUNDED_FINITE_DESIGN_TARGET"
+      ],
+      "conclusion": "R163:ARBITRARY_MISSINGNESS_BAND",
+      "statement": "For the frozen bounded target, pointwise support bounds and simultaneous one-sided Hoeffding errors yield a full-data mean band under arbitrary missingness when every would-be outcome is defined.",
+      "proof_sketch": "L<=Y<=U pointwise; union-bound lower and upper concentration failures across all components.",
+      "source": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md §8",
+      "kind": "CONDITIONAL_PARTIAL_IDENTIFICATION_DEDUCTION",
+      "review": "MANUAL_ALL_OF_DEFINED_OUTCOME_BOUND_AND_TARGET_AUDIT",
+      "formal_contract_R163": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same fixed R161 protocol, bounded component definitions, order and normalization",
+          "same finite-design target and randomization distribution before outcomes",
+          "independent participant vectors, distinct from within-vector component dependence",
+          "same interval and missingness family for every pilot-selected plan",
+          "clipped observed targets distinguished from latent effects and population statistics distinguished from token experience"
+        ],
+        "quantification": "One declared protocol and target; every selected bounded plan and every frozen component must satisfy the stated range and independence premises.",
+        "proof_location": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md sections 4-9",
+        "source_sha256": "313d7c90f491cf2a3456ac517d671acd296432dab27e08711f1efce2336229cb",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r163_order_clipping_boundary",
+      "all_of": [
+        "R160:TOKENWISE_APPLICATION_BOUNDARY",
+        "R163:BOUNDED_FINITE_DESIGN_TARGET"
+      ],
+      "conclusion": "R163:ORDER_CLIPPING_TARGET_BOUNDARY",
+      "statement": "Tokenwise application discipline and an explicit finite-design target jointly block inference from mixture to canonical order and from clipped observation to unrestricted latent effect.",
+      "proof_sketch": "Two exact countermodels preserve the observed analysis object while changing the proposed stronger target.",
+      "source": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md §§6-7",
+      "kind": "CONDITIONAL_NONENTAILMENT_DEDUCTION",
+      "review": "MANUAL_OBJECT_TIME_SIGNATURE_AND_TARGET_AUDIT",
+      "formal_contract_R163": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same fixed R161 protocol, bounded component definitions, order and normalization",
+          "same finite-design target and randomization distribution before outcomes",
+          "independent participant vectors, distinct from within-vector component dependence",
+          "same interval and missingness family for every pilot-selected plan",
+          "clipped observed targets distinguished from latent effects and population statistics distinguished from token experience"
+        ],
+        "quantification": "One declared protocol and target; every selected bounded plan and every frozen component must satisfy the stated range and independence premises.",
+        "proof_location": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md sections 4-9",
+        "source_sha256": "313d7c90f491cf2a3456ac517d671acd296432dab27e08711f1efce2336229cb",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -32385,6 +32736,19 @@
     "status": "COVARIANCE_NONIDENTIFICATION_AND_INDEPENDENT_PILOT_FREEZE_CONTRACT",
     "raw_public_data_reanalysis": false,
     "actual_pilot": false,
+    "ethics_approval": false,
+    "empirical_F_witness": false,
+    "global_semantic_proof": false
+  },
+  "research_R163": {
+    "start_head": "eadf483d569df787ce421eabe83fb8b09ff7bc67",
+    "parent_graph_sha256": "56e85bb9a91798a67c26d49488cfa10968e26804c569877e67eeecc47b0fb2e0",
+    "note": "records/R163_Bounded_Coverage_and_Missingness_20261008/Bounded_Planwise_Coverage_and_Missingness_v0_1.md",
+    "new_nodes": 6,
+    "new_rules": 3,
+    "status": "BOUNDED_PLANWISE_COVERAGE_AND_TARGET_BOUNDARIES",
+    "actual_apparatus": false,
+    "actual_participants": false,
     "ethics_approval": false,
     "empirical_F_witness": false,
     "global_semantic_proof": false

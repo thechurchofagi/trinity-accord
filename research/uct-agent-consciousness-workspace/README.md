@@ -1,5 +1,7 @@
 # UCT Agent Consciousness — Research Workspace
 
+**Current research entry:** R163, [bounded planwise coverage and target boundaries](records/R163_Bounded_Coverage_and_Missingness_20261008/CURRENT_HANDOFF.md). Current formal graph: R163-v1.0, 436 nodes / 209 rules / 117 context links. R163 corrects the exact bounded/non-degenerate-Gaussian conflict and provides a conservative finite-sample alternative; it is not an experiment or an experience-level proof.
+
 **Research owner:** Hongju Liu / 刘烘炬. **Storage policy effective:** 2026-10-05, Asia/Shanghai.
 
 This is the primary working archive for the ongoing UCT agent-consciousness research. It contains unpublished research drafts, derivations, code, results, negative findings, source-reading records, and handoffs. A repository commit is a research checkpoint, not a paper release or an experimental validation of consciousness.

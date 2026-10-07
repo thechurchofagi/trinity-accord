@@ -1,0 +1,157 @@
+{
+  "schema": "UCT_R163_VALIDATION/v1",
+  "round": "R163",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "note_hash_frozen",
+      "status": "PASS",
+      "detail": "313d7c90f491cf2a3456ac517d671acd296432dab27e08711f1efce2336229cb"
+    },
+    {
+      "name": "graph_revision",
+      "status": "PASS",
+      "detail": "R163-v1.0"
+    },
+    {
+      "name": "graph_counts",
+      "status": "PASS",
+      "detail": {
+        "nodes": 436,
+        "rules": 209,
+        "context_links": 117
+      }
+    },
+    {
+      "name": "unique_ids",
+      "status": "PASS",
+      "detail": {
+        "unique_nodes": 436,
+        "unique_rules": 209
+      }
+    },
+    {
+      "name": "all_rule_endpoints_exist",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "name": "dag",
+      "status": "PASS",
+      "detail": {
+        "visited": 436,
+        "total": 436
+      }
+    },
+    {
+      "name": "exact_parent_reconstruction",
+      "status": "PASS",
+      "detail": "56e85bb9a91798a67c26d49488cfa10968e26804c569877e67eeecc47b0fb2e0"
+    },
+    {
+      "name": "new_node_contract_fields",
+      "status": "PASS",
+      "detail": [
+        "R163:BOUNDED_GAUSSIAN_INCOMPATIBILITY",
+        "R163:STUDENT_BOUNDED_COUNTEREXAMPLE",
+        "R163:BOUNDED_FINITE_DESIGN_TARGET",
+        "R163:HOEFFDING_PLANWISE_COVERAGE",
+        "R163:ARBITRARY_MISSINGNESS_BAND",
+        "R163:ORDER_CLIPPING_TARGET_BOUNDARY"
+      ]
+    },
+    {
+      "name": "new_rules_are_explicit_all_of",
+      "status": "PASS",
+      "detail": {
+        "r163_bounded_planwise_coverage": [
+          "R161:CONCRETE_CROSSED_PROTOCOL",
+          "R162:INDEPENDENT_PILOT_FREEZE_CONTRACT",
+          "R163:BOUNDED_FINITE_DESIGN_TARGET"
+        ],
+        "r163_arbitrary_missingness_band": [
+          "R163:BOUNDED_FINITE_DESIGN_TARGET"
+        ],
+        "r163_order_clipping_boundary": [
+          "R160:TOKENWISE_APPLICATION_BOUNDARY",
+          "R163:BOUNDED_FINITE_DESIGN_TARGET"
+        ]
+      }
+    },
+    {
+      "name": "coverage_joint_premises_exact",
+      "status": "PASS",
+      "detail": [
+        "R161:CONCRETE_CROSSED_PROTOCOL",
+        "R162:INDEPENDENT_PILOT_FREEZE_CONTRACT",
+        "R163:BOUNDED_FINITE_DESIGN_TARGET"
+      ]
+    },
+    {
+      "name": "no_r163_statistic_to_experience_reverse_rule",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "name": "rare_spike_exact_value",
+      "status": "PASS",
+      "detail": 0.2531493943720002
+    },
+    {
+      "name": "hoeffding_width_threshold",
+      "status": "PASS",
+      "detail": 4615
+    },
+    {
+      "name": "missingness_pointwise_support_grid",
+      "status": "PASS",
+      "detail": "21 outcomes x 2 observation states"
+    },
+    {
+      "name": "clipping_countermodel",
+      "status": "PASS",
+      "detail": {
+        "observed": [
+          1,
+          1
+        ],
+        "latent_means": [
+          2,
+          100
+        ]
+      }
+    },
+    {
+      "name": "order_target_countermodel",
+      "status": "PASS",
+      "detail": {
+        "balanced_mixture": 0.0,
+        "canonical_plus": 0.4
+      }
+    },
+    {
+      "name": "required_artifacts_present",
+      "status": "PASS",
+      "detail": [
+        "ROUND_RECORD.md",
+        "Bounded_Planwise_Coverage_and_Missingness_v0_1.md",
+        "PROOF_LEDGER.json",
+        "GAP_LEDGER.json",
+        "AMENDMENTS.json",
+        "SOURCE_LEDGER.json",
+        "MAP_EXTENSION.json",
+        "MAP_AUDIT.json",
+        "stress_test.py",
+        "STRESS_TEST_RESULTS.json",
+        "build_map.py"
+      ]
+    }
+  ],
+  "graph_sha256": "f9f71505f4fc59f8b679bf803f28510be6e2548ec3c61103d485fecea0692471",
+  "stress_results_sha256": "68b99a0bb77fda5261c400ecc1cd8214e2fc6db4b6a86e864bc30f17f2e94761",
+  "limitations": [
+    "DAG and executable checks do not prove theory truth, source completeness, apparatus fidelity or global semantics.",
+    "General coverage and incompatibility arguments remain manually reviewed mathematical proofs.",
+    "Monte Carlo blocks are diagnostics only; exact enumeration and analytic inequalities carry the formal claims."
+  ]
+}
