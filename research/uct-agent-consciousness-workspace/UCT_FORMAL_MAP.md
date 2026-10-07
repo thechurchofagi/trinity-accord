@@ -1,16 +1,30 @@
-# UCT A–B–C–D unified formal map — R147
+# UCT unified formal map — nine-source integration R149
 
-**Canonical working map, revision R147-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R137 and R145–R147. It does not supersede or edit the published papers.
+**Canonical working map, revision R149-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It retains the verified A/B/C/D foundation, adds scoped core branches of TA15–19, and includes later project extensions through R149. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
 **Audit conclusion:** the reviewed core deductions remain valid under their stated premises. The map is not an unconditional proof of UCT, and several source/dependency qualifications require correction. Physical grounding, target-theory fidelity, finite bridges and empirical identification remain separate obligations. See [audit](UCT_FORMAL_AUDIT.md).
 
-## R148 bibliographic scope correction — no new deduction
+## R149 — nine-source core integration and complete-target compatibility
+
+[Readable map (Chinese)](records/R149_Nine_Source_Integration_20261007/FORMAL_MAP_OVERVIEW_ZH.md), [English theory and proofs](records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md), [source audit](records/R149_Nine_Source_Integration_20261007/SOURCE_INTEGRATION_AND_AUDIT.md), [complete ledger](records/R149_Nine_Source_Integration_20261007/PROOF_LEDGER.md), [exact checks](records/R149_Nine_Source_Integration_20261007/EXACT_CHECKS.json).
+
+The graph now integrates the core mathematical/definition branches of TA15–19 alongside A/B/C/D: **391 nodes / 188 rules**. The old 349/167 entries are unchanged. Most additions index published results; their number is not new scientific output. All nine source editions remain byte-preserved. TA16 RRH-E remains a historical conjecture; TA18 PRD remains a separate bridge postulate. Neither is silently inserted as a new basal-experience gate.
+
+The main synthesis is exact: for the same actual comparison bearers and complete type signature, C1-OI makes complete experiential type recoverable from a descriptor r iff equal r-values imply equal complete organizational types. A selected feature has only its own weaker fiber criterion. This is a classical factorization application that identifies when inherited proposals can coexist; it does not validate C1, establish historical novelty or solve semantic aboutness.
+
+TA18's trajectory witness needs retained joint-response or equivalent mechanism information. Distinct germs do not force distinct outputs under every PRD bridge: a constant bridge is a countermodel. The corrected phenomenal route requires explicit pair separation; idle invariance needs isomorphism covariance. Source originals are preserved. TA19's hash-matched main Markdown ends in §5; its hash-matched supplement supplies additional proofs and reported numerical tables. Core integration does not claim a complete audit of all empirical evidence, missing source sections or external citations.
+
+The self contract now distinguishes grounded actual bearer/target/constituent relations, internal attribution M_attr, sensor/action binding, prediction accuracy and installed use. Whole, constituent, disjoint external and overlapping targets remain bearer-relative. An accurate sensorimotor loop need not be correctly attributed to the containing body. This is not an experience gate or a proof of felt ownership. The ancestry, abacus/calculator, human-computer and copy/rewiring cases are integral to the argument.
+
+Next research stays on grounded target binding and wrong self-attribution in a specified implementation class, then incorporates this focused result into the manuscript. No automatic experiments, unrelated control-theory expansion or publication. A major independent-paper breakthrough is not yet certified.
+
+## Historical R148 bibliographic correction — followed by R149 core integration
 
 The four pinned A/B/C/D sources are not the author's entire publication corpus. [R148 census and novelty review](records/R148_Publication_Census_20261007/PUBLICATION_CENSUS_AND_NOVELTY_ZH.md) verifies five additional published predecessors, TA15–19, and archives exact manuscript bytes. The [nine-paper inventory](records/R148_Publication_Census_20261007/PUBLICATION_INVENTORY.json) is a review set, not an exhaustive bibliography. TA17 already formalizes multi-source self-membership; TA19 already proves the local fixed-point obstruction to equivariant subject selection. TA15–18 also constrain attribution of abstraction, typed targets and actual participation. These are contextual source obligations, not new deductive premises automatically added to UCT.
 
-The formal revision and 349/167 node/rule contents remain R147-v1.0; the R147 proof ledger remains current. New original-paper readiness is not established. R146/R147 manuscript integration must include these direct predecessors and distinguish internal self-attribution from actual bearer binding. No new published fifth paper after D was verified.
+At R148 the formal revision remained R147-v1.0; R149 above now supplies the source integration and current ledger. New original-paper readiness is not established. R146/R147 manuscript integration must include these direct predecessors and distinguish internal self-attribution from actual bearer binding. No new published fifth paper after D was verified.
 
 ## R147 current extension - thought experiments repair the self definition
 
@@ -111,7 +125,7 @@ A's 78-node graph and B's historical 43-node map are preserved as sources. B's o
 
 ## 2. How to read an implication
 
-The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **349 nodes and 167 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R147_Self_Reference_Rewiring_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
+The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **391 nodes and 188 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R149_Nine_Source_Integration_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
 
 - All premises inside one rule's **all_of** must hold together.
 - Separate rules concluding the same node are alternative sufficient routes.

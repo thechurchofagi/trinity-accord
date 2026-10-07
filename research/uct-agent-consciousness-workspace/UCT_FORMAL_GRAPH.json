@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R147-v1.0",
+  "revision": "R149-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "12fd02b5d675c22cb767fd991c1b815bda66562e",
+  "base_commit": "06dcd7606daeb1ccc5e9640f4dadf45c41dc2879",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -67,6 +67,56 @@
       "sha256": "af0eb63cca099b3d913218f503bc978c705f0fb9f065cca9ed472e5161d67490",
       "bytes": 36208,
       "publication_manifest_blob": "ae5e8d42aa583b411c32f5fe2dd2feab9a6b541d"
+    },
+    {
+      "paper": "TA15",
+      "version": "1.0",
+      "doi": "10.5281/zenodo.22934654",
+      "snapshot_workspace_path": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md",
+      "bytes": 78742,
+      "sha256": "8643196bd281e88be3cd753297eb846251a855e9d2ac3f576dbd49437cbafc85",
+      "publication_receipt": "records/R148_Publication_Census_20261007/sources/TA15_publication_record.json",
+      "integration_status": "core definitions and mathematical branches scoped into R149; source hypotheses retain separate status"
+    },
+    {
+      "paper": "TA16",
+      "version": "1.0",
+      "doi": "10.5281/zenodo.22939808",
+      "snapshot_workspace_path": "records/R148_Publication_Census_20261007/sources/TA16_v1_0.md",
+      "bytes": 87834,
+      "sha256": "041a21d0a0863719188f591b2f51f94b591cc16a795d74ed6df047e058c48360",
+      "publication_receipt": "records/R148_Publication_Census_20261007/sources/TA16_publication_record.json",
+      "integration_status": "core definitions and mathematical branches scoped into R149; source hypotheses retain separate status"
+    },
+    {
+      "paper": "TA17",
+      "version": "1.0",
+      "doi": "10.5281/zenodo.22950904",
+      "snapshot_workspace_path": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md",
+      "bytes": 99093,
+      "sha256": "bec4944db161db725648a18962b8a6c069aacf7512a259483f9d81e646e36a78",
+      "publication_receipt": "records/R148_Publication_Census_20261007/sources/TA17_publication_record.json",
+      "integration_status": "core definitions and mathematical branches scoped into R149; source hypotheses retain separate status"
+    },
+    {
+      "paper": "TA18",
+      "version": "1.0",
+      "doi": "10.5281/zenodo.22991126",
+      "snapshot_workspace_path": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md",
+      "bytes": 52233,
+      "sha256": "22ef09cb373a7f364ee2a12c503be8768057684d78eb0e2593d8398b5fe7ae13",
+      "publication_receipt": "records/R148_Publication_Census_20261007/sources/TA18_publication_record.json",
+      "integration_status": "core definitions and mathematical branches scoped into R149; source hypotheses retain separate status"
+    },
+    {
+      "paper": "TA19",
+      "version": "1.0",
+      "doi": "10.5281/zenodo.23002980",
+      "snapshot_workspace_path": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md",
+      "bytes": 43338,
+      "sha256": "53782a354e6dd1b037f8a6021d2a2bad150201cd086a5f6799757074dd21fc7e",
+      "publication_receipt": "records/R148_Publication_Census_20261007/sources/TA19_publication_record.json",
+      "integration_status": "core definitions and mathematical branches scoped into R149; source hypotheses retain separate status"
     }
   ],
   "namespace_separation": {
@@ -2937,6 +2987,552 @@
       "scope": "C1 interpretation only, not independent validation. No identified phenomenal quality, amount, ownership relocation, fear, exclusive subject or experience threshold. If beta is only an external annotation, this route is unavailable.",
       "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §§4,7",
       "status": "MANUAL_CONDITIONAL_PASS"
+    },
+    {
+      "id": "TA15:TYPED_CONTRACT",
+      "kind": "DEFINITION",
+      "label": "Typed physical, phenomenal and evidence targets",
+      "statement": "Six target kinds E, character, valence, perspective, continuation and multiplicity are distinct query types. A transport certificate records common regime, bearer, interfaces, paired interventions, bridge guards and evidence; it is not proof of the guards.",
+      "domain": "Declared system-in-regime and query semantics.",
+      "scope": "Declared system-in-regime and query semantics.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md §§3–4",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md §§3–4",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+    },
+    {
+      "id": "TA15:OBS_EQ_PREM",
+      "kind": "MODEL_CLASS_PREMISE",
+      "label": "Opposing existence models with identical protocol laws",
+      "statement": "A model class admits m0,m1 with opposite binary existence claims and identical transcript distributions under every complete allowed adaptive protocol, including randomization and stopping.",
+      "domain": "Specified external comparison model class; the pair is assumed admissible, not constructed for every system.",
+      "scope": "Specified external comparison model class; the pair is assumed admissible, not constructed for every system.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md §5.1",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md §5.1",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Opposite claims for the same admitted actual token are not both models of fixed C1/U1. This is a meta-theory/evidence premise."
+    },
+    {
+      "id": "TA15:NONIDENT",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Protocol-relative non-identification",
+      "statement": "No decision rule using only the allowed protocols is almost surely correct for both opposing models.",
+      "domain": "Exactly OBS_EQ_PREM.",
+      "scope": "Exactly OBS_EQ_PREM.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 1",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 1",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "The rule has the same output law in both models. Almost-sure output 0 in one is almost-sure output 0 in the other; it cannot also be almost-sure 1. Shared randomization is part of the law.",
+      "counterexamples_and_limits": "New discriminating protocols or restrictive structural assumptions can remove the premise."
+    },
+    {
+      "id": "TA15:MAPS",
+      "kind": "MATHEMATICAL_DOMAIN",
+      "label": "Query and representation maps",
+      "statement": "Fix sets U,X,Y and maps alpha:U->X and f:U->Y; work on alpha(U).",
+      "domain": "Set maps with a declared query; no empirical target discovery assumed.",
+      "scope": "Set maps with a declared query; no empirical target discovery assumed.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md §5.2",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md §5.2",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+    },
+    {
+      "id": "TA15:FIBER",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Query-preserving factorization",
+      "statement": "There is a unique h on alpha(U) with f=h alpha iff equal alpha-values imply equal f-values.",
+      "domain": "Set maps; equality refers to the declared target semantics.",
+      "scope": "Set maps; equality refers to the declared target semantics.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 2",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 2",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "Necessity follows by substitution. For sufficiency define h(alpha(u))=f(u); fiber constancy gives well-definedness and surjectivity onto the image gives uniqueness.",
+      "counterexamples_and_limits": "Does not show that h equals an already named source query; calibration is separate. Published standard mathematics."
+    },
+    {
+      "id": "TA15:RELATION_PREM",
+      "kind": "MATHEMATICAL_DOMAIN",
+      "label": "Jointly guarded relational transport",
+      "statement": "zS lies in QS, (zS,zT) in RST and (zT,zU) in RTU. Both certificates use the same actual intermediate zT and compatible type, interval, regime and interpretation; all guards jointly hold.",
+      "domain": "Relations between declared interfaces.",
+      "scope": "Relations between declared interfaces.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md §5.3",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md §5.3",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+    },
+    {
+      "id": "TA15:COMPOSITION",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Guarded transport composition",
+      "statement": "zU belongs to RTU[RST[QS]].",
+      "domain": "Exactly RELATION_PREM.",
+      "scope": "Exactly RELATION_PREM.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 3",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 3",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "The first relation sends the actual zS in QS to zT in RST[QS]; the second sends that same zT to zU.",
+      "counterexamples_and_limits": "Incompatible possible models cannot be conjoined; empty images reject a conjunction, not necessarily existence. Statistical likelihood multiplication is not licensed."
+    },
+    {
+      "id": "TA15:METRIC_PREM",
+      "kind": "MATHEMATICAL_DOMAIN",
+      "label": "Calibrated metric transport errors",
+      "statement": "Metric interfaces and maps satisfy dT(zT,gST(zS))<=epsST, dU(zU,gTU(zT))<=epsTU; gTU is L-Lipschitz on all relevant points.",
+      "domain": "Nonnegative finite error bounds; justified common domain and semantics.",
+      "scope": "Nonnegative finite error bounds; justified common domain and semantics.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md §5.4",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md §5.4",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+    },
+    {
+      "id": "TA15:ERROR",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Transport error propagation",
+      "statement": "dU(zU,gTU(gST(zS)))<=epsTU+L epsST. If the two errors hold except on events of probabilities delta1,delta2 and the Lipschitz bound is certain, coverage is at least max(0,1-delta1-delta2).",
+      "domain": "Exactly METRIC_PREM; probability clause has its stated event assumptions.",
+      "scope": "Exactly METRIC_PREM; probability clause has its stated event assumptions.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 4",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 4",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "Insert gTU(zT), apply triangle inequality then Lipschitz. Intersect the two valid events and use the union bound; independence is unnecessary.",
+      "counterexamples_and_limits": "Not a scalar distance between complete experiences without a separately justified metric."
+    },
+    {
+      "id": "TA16:FINITE_CONTRACT",
+      "kind": "MODEL_AND_DOMAIN",
+      "label": "Finite causal diagnostic constructions",
+      "statement": "Finite nonnegative weighted digraphs n>=2 with cuts deleting all crossing edges; Boolean parity/shift maps; invertible recodings with transported interventions; odd repetition encoders E and majority decoders D with DE=id.",
+      "domain": "Each clause applies to its stated family, not every physical system.",
+      "scope": "Each clause applies to its stated family, not every physical system.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA16_v1_0.md Appendix G.1–G.4",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA16_v1_0.md Appendix G.1–G.4",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+    },
+    {
+      "id": "TA16:CAUSAL_LIMITS",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Connectivity, retention, common witness and redundancy limits",
+      "statement": "All-cut positive diagonal return iff strong connectivity (a witness walk length <=2(n-1)); strong connectivity alone does not determine retained information; incompatible modes cannot jointly witness different maxima; recoding does not change physics when interventions are transported; every finite Boolean F has an exact wrapper Ftilde=EFD on valid codewords.",
+      "domain": "Nonnegative matrix clause excludes cancellation/single-vertex vacuity; capacity uses unrestricted deterministic input preparation.",
+      "scope": "Nonnegative matrix clause excludes cancellation/single-vertex vacuity; capacity uses unrestricted deterministic input preparation.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA16_v1_0.md Appendix G.1–G.4",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA16_v1_0.md Appendix G.1–G.4",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "For strong connectivity concatenate paths crossing and returning through each cut. Conversely a source SCC admits no closed crossing walk. Parity broadcast on five bits retains one bit; invertible four-bit shift-XOR retains four. Identity and parity modes do not jointly witness full capacity and complete dependencies. Conjugate both dynamics and interventions. Finally Ftilde E=EF since DE=id; induction gives all horizons and majority corrects up to (n-1)/2 pre-update flips per block.",
+      "counterexamples_and_limits": "Graph/capacity/redundancy claims do not determine experience. Decoder/hardware noise is outside the wrapper guarantee."
+    },
+    {
+      "id": "TA16:RRH_HISTORY",
+      "kind": "HISTORICAL_CONJECTURE",
+      "label": "Common-witness organization and historical RRH-E",
+      "statement": "RRH proposes a common support/regime/time/intervention/provenance witness. RRH-E conjectures E_whole iff Active AND ND_epsilon AND IRR_epsilon,Q with frozen grain, surrogate class and protocol.",
+      "domain": "Historical proposal for a declared whole-level target, not current basal UCT existence.",
+      "scope": "Historical proposal for a declared whole-level target, not current basal UCT existence.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA16_v1_0.md §15",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA16_v1_0.md §15",
+      "status": "HISTORICAL_CONJECTURE_NOT_IMPORTED_AS_C1_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Does not prove either direction; natural units and target bridge remain open. A gate on every admitted actual token requires separate compatibility with A:U1. G.5 is the already published fiber criterion, not a new richness law."
+    },
+    {
+      "id": "TA17:FUNCTIONAL_CONTRACT",
+      "kind": "DEFINITION",
+      "label": "Current attribution and functional continuation objects",
+      "statement": "Keep M_attr, endogenous response quotient Z, intervention channel K, inheritance Gamma(S), successor-set belief mu, post-branch P_loc and motivational stake separate. M_attr is a nonexclusive current-source readout. Define Gamma(S)=I(U;Y_S)/H(U) in the joint interventional experiment p(u)p(y_S|do(U=u)), with finite variables and H(U)>0.",
+      "domain": "Fixed output/intervention family; current-process causal grounding is additional to MI. No numerical identity or phenomenality asserted.",
+      "scope": "Fixed output/intervention family; current-process causal grounding is additional to MI. No numerical identity or phenomenality asserted.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §§4,12–14",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §§4,12–14",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "The source notation I(U;Y|do(U)) is normalized here as MI in a randomized interventional joint law, not conditioning on U, which would make conditional MI zero. Self attribution is not its own truth standard."
+    },
+    {
+      "id": "TA17:QUOTIENT",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Task-relative endogenous quotient and representation invariance",
+      "statement": "Histories equivalent under every declared future intervention/output law define a quotient. Bijective recoding transporting those laws induces a quotient bijection; behaviorally null nuisance dimensions collapse. No noninjective abstraction preserves every conceivable consumer.",
+      "domain": "For the last clause the consumer class must contain a discriminator for each collapsed pair.",
+      "scope": "For the last clause the consumer class must contain a discriminator for each collapsed pair.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §§4.2,5.3–5.5; Proposition 12",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §§4.2,5.3–5.5; Proposition 12",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "Relabeling preserves equality of all declared response laws, hence classes correspond. The nuisance premise makes all same-Z histories equivalent. A consumer with different rewards for a collapsed pair cannot be evaluated from their shared code.",
+      "counterexamples_and_limits": "Does not identify complete physical organization. Intervention-limited learning nonidentification needs two admissible full-model completions with identical observed laws and different unobserved query, not just the word unobserved."
+    },
+    {
+      "id": "TA17:INHERITANCE",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Scoped inheritance algebra and causal limits",
+      "statement": "Gamma is monotone in included outputs; bijective recoding preserves it when intervention distribution/semantics are transported. Readout MI is a lower bound under U->Y->O. Closed-lineage MI cannot increase without violating the specified Markov/no-side-channel premise. Shared-upstream MI alone does not establish current-process descent.",
+      "domain": "Finite interventional variables with common H(U)>0; Markov clauses only under their stated chains.",
+      "scope": "Finite interventional variables with common H(U)>0; Markov clauses only under their stated chains.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Propositions 1–4,11; Theorem 1; Corollary 4",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Propositions 1–4,11; Theorem 1; Corollary 4",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "Projection and data processing prove monotonicity/readout/closed-lineage claims. Bijective entropy and joint entropy invariance prove recoding invariance. Counterexample U fair, A=U and independently stored C=U yields I(U;C)=1 while intervening on A after separation leaves C unchanged.",
+      "counterexamples_and_limits": "A positive inheritance score is not numerical identity, personal survival or negative valence."
+    },
+    {
+      "id": "TA17:SET_LIMITS",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Successor sets and nonadditive inheritance",
+      "statement": "Individual-only categorical labels cannot encode arbitrary successor sets. Under nonnegative membership, co-successor invariance and symmetry of equally full copies, unit-sum normalization fails on two full successors. Equal singleton inclusion marginals need not identify mu; equal singleton inheritance need not identify Gamma. Duplication violates conserved-mass and universal supermodularity; secret sharing violates universal submodularity.",
+      "domain": "Existence counterexamples under FUNCTIONAL_CONTRACT; normalization includes nonnegativity and symmetry explicitly.",
+      "scope": "Existence counterexamples under FUNCTIONAL_CONTRACT; normalization includes nonnegativity and symmetry explicitly.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Propositions 5–10,13",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Propositions 5–10,13",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "Use muE(10)=muE(01)=1/2 versus muJ(00)=muJ(11)=1/2. For U=(U1,U2), B=C=U1 and B=U1,C=U2 share singleton Gamma=1/2 but joint scores 1/2 vs1. For U,R independent fair, B=R,C=U XOR R gives singleton0,joint1. Full copies give singleton1+1,joint1. Cardinality and these values prove the remaining clauses.",
+      "counterexamples_and_limits": "Encoding subsets in categorical labels changes the representational state space and removes the individual-only premise. No phenomenological consequence is imported."
+    },
+    {
+      "id": "TA17:KL_COST",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Dependence penalty for an independent successor model",
+      "statement": "For finite binary inclusion vector X with law mu, min over product q of KL(mu||q)=sum H(X_i)-H(X), attained at product marginals. Expected sum of inclusion indicators equals expected successor cardinality.",
+      "domain": "Finite distribution, extended-real KL for support mismatch.",
+      "scope": "Finite distribution, extended-real KL for support mismatch.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Theorem 2; Corollary 5; §12",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Theorem 2; Corollary 5; §12",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "KL(mu||product q_i)=TC(mu)+sum_i KL(mu_i||q_i); minimize each nonnegative term. Linearity of expectation gives the cardinality identity.",
+      "counterexamples_and_limits": "Known total correlation, not new information theory. Matched two-bit distributions have one bit penalty; logarithm base must be fixed."
+    },
+    {
+      "id": "TA17:DECISION_PREM",
+      "kind": "MODEL_PREMISE",
+      "label": "Matched-marginal decision experiment",
+      "statement": "Equal prior over muE supported on singleton sets and muJ supported on empty/full pair; actions are rewarded for exactly-one or not-exactly-one. The restricted policy observes only their common singleton marginal vector and no further distinguishing side information.",
+      "domain": "One-decision model; independent policy randomization allowed.",
+      "scope": "One-decision model; independent policy randomization allowed.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §8",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §8",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+    },
+    {
+      "id": "TA17:REGRET",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Half-unit matched-marginal regret",
+      "statement": "Every marginal-only policy has average reward 1/2; access to the full set posterior permits reward 1, so regret is 1/2.",
+      "domain": "Exactly DECISION_PREM.",
+      "scope": "Exactly DECISION_PREM.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Theorem 3",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Theorem 3",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "If p is probability of choosing exactly-one, average reward is (p+1-p)/2. Full posterior identifies which action is correct.",
+      "counterexamples_and_limits": "Published antecedent to D marginal-decision examples; not R149 novelty."
+    },
+    {
+      "id": "TA18:GERM",
+      "kind": "DEFINITION",
+      "label": "Episode-relative actual-participation germ",
+      "statement": "An admitted participation module supplies realized tokens, joint enabling/causal hyperedges, preemption sensitivity and static-state eligibility. For a declared region/window, gamma contains selected support, allowed local response profiles and retained implementation information.",
+      "domain": "The participation module, target bearer and depth must be supplied; not a complete universal token-selection algorithm.",
+      "scope": "The participation module, target bearer and depth must be supplied; not a complete universal token-selection algorithm.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md §3",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md §3",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Individual intervention profiles need not encode joint interventions. Joint response or distinguishing mechanism information must be explicitly retained for the AND/XNOR witness."
+    },
+    {
+      "id": "TA18:PRD",
+      "kind": "HISTORICAL_POSTULATE",
+      "label": "Participation-restricted bridge",
+      "statement": "For the selected target, e_PRD=Phi(gamma), with counterfactual profiles restricted to actual support.",
+      "domain": "Source-specific bridge hypothesis; target may not silently change to all complete UCT experience.",
+      "scope": "Source-specific bridge hypothesis; target may not silently change to all complete UCT experience.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md §4.1",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md §4.1",
+      "status": "DECLARED_BRIDGE_NOT_EMPIRICALLY_ESTABLISHED",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+    },
+    {
+      "id": "TA18:JOINT_WITNESS",
+      "kind": "MODEL_PREMISE",
+      "label": "A germ retaining the AND/XNOR joint distinction",
+      "statement": "AND and XNOR at input (1,1) have identical actual/single-reset outputs but different output at (0,0). Gamma retains this joint intervention law with grounded input/output roles, or equivalent distinguishing mechanism data. H retains only the matched trajectory.",
+      "domain": "Finite functions on two binary inputs; explicit enriched joint/implementation signature.",
+      "scope": "Finite functions on two binary inputs; explicit enriched joint/implementation signature.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md §4.2; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md §4.2; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Merely writing singleton rho_h(v) does not discharge the enriched-signature premise."
+    },
+    {
+      "id": "TA18:GERM_NONFACTOR",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Trajectory does not determine the enriched germ",
+      "statement": "The enriched gamma does not factor through H in the stipulated witness.",
+      "domain": "Exactly JOINT_WITNESS.",
+      "scope": "Exactly JOINT_WITNESS.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 1; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 1; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "status": "MANUAL_CONDITIONAL_PASS_WITH_EXPLICIT_SIGNATURE_REPAIR",
+      "proof": "Equal H-values contain different joint-response functions: AND(0,0)=0 and XNOR(0,0)=1, with all specified other observations equal. Thus no single gamma value can be assigned to that H-fiber.",
+      "counterexamples_and_limits": "This is physical/model nonfactorization, not yet phenomenal nonfactorization."
+    },
+    {
+      "id": "TA18:PAIR_SEPARATION",
+      "kind": "BRIDGE_PREMISE",
+      "label": "The bridge separates the witness germs",
+      "statement": "Phi(gamma_AND) != Phi(gamma_XNOR) for the same-trajectory witness in the declared target codomain.",
+      "domain": "A specific bridge and target, not inferred from gamma inequality alone.",
+      "scope": "A specific bridge and target, not inferred from gamma inequality alone.",
+      "source": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "source_lineage": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "status": "ADDITIONAL_PREMISE_REQUIRED_FOR_STRONGER_SOURCE_READING",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+    },
+    {
+      "id": "TA18:PHEN_NONFACTOR",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Corrected bridge-sensitive trajectory inference",
+      "statement": "The target Phi(gamma) does not factor through H.",
+      "domain": "Joint witness and pair-separating bridge.",
+      "scope": "Joint witness and pair-separating bridge.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 1, narrowed; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 1, narrowed; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "status": "MANUAL_CONDITIONAL_PASS_SOURCE_INFERENCE_REPAIRED",
+      "proof": "The same H-fiber contains two different Phi(gamma) values, violating the fiber criterion.",
+      "counterexamples_and_limits": "A constant bridge defeats the conclusion when separation is dropped. Original source bytes retained."
+    },
+    {
+      "id": "TA18:ISO_BRIDGE",
+      "kind": "BRIDGE_PREMISE",
+      "label": "Germ-isomorphism covariance",
+      "statement": "Phi maps isomorphic selected germs to isomorphic target experiential structures.",
+      "domain": "Explicit bridge covariance, or a bridge defined on germ isomorphism classes.",
+      "scope": "Explicit bridge covariance, or a bridge defined on germ isomorphism classes.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 2 and §6",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 2 and §6",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Being a function on raw encodings alone is insufficient."
+    },
+    {
+      "id": "TA18:IDLE",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Scoped idle-support invariance",
+      "statement": "If modifications preserve the selected germ up to isomorphism, their PRD target types agree.",
+      "domain": "The same selected region/interval and bridge target.",
+      "scope": "The same selected region/interval and bridge target.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 2",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 2",
+      "status": "MANUAL_CONDITIONAL_PASS_WITH_COVARIANCE_PREMISE",
+      "proof": "Apply PRD to each selected germ and use ISO_BRIDGE.",
+      "counterexamples_and_limits": "Does not make all idle hardware globally nonexistent; changing the complete bearer requires a separate comparison."
+    },
+    {
+      "id": "TA18:NULL_EQ",
+      "kind": "MATHEMATICAL_DOMAIN",
+      "label": "Declared null equivalence",
+      "statement": "N is an equivalence relation on admitted germs, q the quotient map, and a particular bridge Phi is constant on N-classes.",
+      "domain": "If null transformations are only generators, use the equivalence relation they generate and require invariance throughout.",
+      "scope": "If null transformations are only generators, use the equivalence relation they generate and require invariance throughout.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md §6.2",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md §6.2",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+    },
+    {
+      "id": "TA18:FACTOR",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Bridge factorization through a declared quotient",
+      "statement": "A unique Phi_tilde on the quotient satisfies Phi=Phi_tilde q.",
+      "domain": "Exactly NULL_EQ.",
+      "scope": "Exactly NULL_EQ.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 4",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 4",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "Define Phi_tilde([gamma])=Phi(gamma); invariance gives well-definedness and quotient surjectivity gives uniqueness.",
+      "counterexamples_and_limits": "Does not prove that declared null changes are null for complete C1 experience."
+    },
+    {
+      "id": "TA18:UNDERDETERMINATION",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Existence of bridge-nonunique invariant models",
+      "statement": "Structural invariance requirements do not universally select a unique type-valued bridge: there is a two-physical-class/two-output model with identity scale maps satisfying them and permitting both a constant and a class-separating map.",
+      "domain": "Counterexample to a universal uniqueness claim, not a theorem that every constrained model is nonunique.",
+      "scope": "Counterexample to a universal uniqueness claim, not a theorem that every constrained model is nonunique.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 3, repaired witness; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 3, repaired witness; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "status": "MANUAL_CONDITIONAL_PASS_WITH_EXPLICIT_COUNTERMODEL",
+      "proof": "Take physical classes {a,b}, target types {0,1}, only identity symmetries and scale maps; constant 0 and a->0,b->1 both obey invariance and scale consistency yet differ on b. They cannot both obey current C1-OI for distinct complete physical types.",
+      "counterexamples_and_limits": "Postcomposition by an automorphism alone may change labels only. It needs distinct output on the image and cross-scale compatibility to witness distinct functions, and still need not distinguish isomorphism types."
+    },
+    {
+      "id": "TA19:GROUP_SETUP",
+      "kind": "MATHEMATICAL_DOMAIN",
+      "label": "Physical candidate action and equivariant selector",
+      "statement": "A group G acts on physical configurations and their candidate fibers compatibly. At x0 let H be the stabilizer. A deterministic selector s obeys s(gx)=g s(x). For the orbit clause O is one transitive H-orbit and R is a nonempty H-invariant subset of O.",
+      "domain": "Physical symmetry must preserve the full admitted description; external marking changes H.",
+      "scope": "Physical symmetry must preserve the full admitted description; external marking changes H.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md §§3–4; records/R148_Publication_Census_20261007/sources/TA18_v1_0.md §7",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md §§3–4; records/R148_Publication_Census_20261007/sources/TA18_v1_0.md §7",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+    },
+    {
+      "id": "TA19:LOCAL",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Local fixed-point and orbit constraints",
+      "statement": "s(x0) must be H-fixed; if no candidate is H-fixed no singleton selector exists. On a transitive orbit every nonempty invariant subset is the whole orbit. A finite transitive orbit has a unique invariant probability, the uniform law.",
+      "domain": "Exactly GROUP_SETUP; finite orbit required for the probability clause.",
+      "scope": "Exactly GROUP_SETUP; finite orbit required for the probability clause.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md Propositions 1–2; records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md S1–S2",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md Propositions 1–2; records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md S1–S2",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "s(x0)=s(hx0)=h s(x0). For a set R, any member generates the whole orbit inside R. Invariance makes all point masses equal; normalization gives 1/|O|.",
+      "counterexamples_and_limits": "Does not exclude many subject tokens, prove experience or establish the unique subject criterion. TA18 §7 is an earlier published antecedent."
+    },
+    {
+      "id": "TA19:COVER",
+      "kind": "MATHEMATICAL_DOMAIN",
+      "label": "Regular finite covering of candidate branches",
+      "statement": "pi:E->X is a finite covering on the declared regular region; x0 is a base point. Use unique path lifting and the monodromy action of loops based at x0.",
+      "domain": "No assertion at birth/death, merger, split or singular scale changes.",
+      "scope": "No assertion at birth/death, merger, split or singular scale changes.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md §5",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md §5",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+    },
+    {
+      "id": "TA19:MONODROMY",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Global fixed-sheet necessity",
+      "statement": "A continuous single-valued section selects a point fixed by every monodromy permutation; no common fixed point precludes a section.",
+      "domain": "Exactly COVER.",
+      "scope": "Exactly COVER.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md Proposition 3 and Corollary 2",
+      "source_lineage": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md Proposition 3 and Corollary 2",
+      "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+      "proof": "For each loop gamma, s composed with gamma is a lift starting at s(x0) and ending at the same s(x0); uniqueness of lifting identifies that endpoint with the monodromy image. The double cover z->z^2 exchanges +/-1 and has no such fixed point.",
+      "counterexamples_and_limits": "Tracking a specified initial token along a path is not selecting it uniquely from an unmarked snapshot. Classical topology."
+    },
+    {
+      "id": "TA19:TOPOLOGY",
+      "kind": "MATHEMATICAL_DOMAIN",
+      "label": "Fixed labels and locally finite continuous branches",
+      "statement": "P,Q are distinct fixed Hausdorff labels. Winners are Q for lambda<0, P for lambda>0 and {P,Q} at zero. Separately, a locally fixed finite candidate set has continuous z_P into metric spaces with capped within-label metric and cross-label distance 2.",
+      "domain": "The two clauses have separate explicit premises; no candidate birth/death.",
+      "scope": "The two clauses have separate explicit premises; no candidate birth/death.",
+      "source": "records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md S3–S4,S6",
+      "source_lineage": "records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md S3–S4,S6",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+    },
+    {
+      "id": "TA19:REGULARITY",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Probability obstruction, closed graph and landscape continuity",
+      "statement": "Exact-top-tier supported probability laws cannot be continuous at a strict two-sided winner switch. A closed-graph set completion must contain both side limits at the tie. The finite labeled landscape is Hausdorff-continuous when each branch is continuous.",
+      "domain": "Fixed labels are essential; no physical meaning assigned to the artificial cross-label distance.",
+      "scope": "Fixed labels are essential; no physical meaning assigned to the artificial cross-label distance.",
+      "source": "records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md S3–S4,S6",
+      "source_lineage": "records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md S3–S4,S6",
+      "status": "MANUAL_CONDITIONAL_PASS_SUPPLEMENT_PROOFS_EXPLICIT",
+      "proof": "One-sided probability limits are delta_Q and delta_P and differ. Closed graph contains limits (0,Q),(0,P). For finite landscapes, Hausdorff distance is bounded by max_P min(1,d_P(z_P(x),z_P(x0))), which tends to zero.",
+      "counterexamples_and_limits": "Finite numerical IIT samples do not establish an analytically proven punctured-neighborhood crossing."
+    },
+    {
+      "id": "TA19:NUMERICS",
+      "kind": "REPORTED_EVIDENCE",
+      "label": "Published IIT case study remains reported evidence",
+      "statement": "Supplement reports BC->AC->AB across selected negative/zero/positive parameters and robustness/label checks in a pinned PyPhi version. R149 neither reruns nor promotes those numerical results to analytical or phenomenal evidence.",
+      "domain": "Only the publication report and supplementary tables; no current empirical validation.",
+      "scope": "Only the publication report and supplementary tables; no current empirical validation.",
+      "source": "records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md S2–S5",
+      "source_lineage": "records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md S2–S5",
+      "status": "PUBLISHED_REPORTED_EVIDENCE_NOT_REEXECUTED",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "The hash-matched main Markdown ends at the double-cover example; later claims are not assumed to have a main-text proof. S6 supplies the landscape statement separately."
+    },
+    {
+      "id": "R149:COMPARISON",
+      "kind": "TYPED_DOMAIN",
+      "label": "Same-bearer complete-type comparison",
+      "statement": "Nonempty Omega assigns actual bearers and intervals in a common complete signature. k and e map configurations to complete organizational and experiential isomorphism types. r:Omega->R is any representation. All claims concern these same target bearers and intervals; optional type invariance is r=b k.",
+      "domain": "Type identity is not numerical token identity; complete actual grounding is an independent application obligation.",
+      "scope": "Type identity is not numerical token identity; complete actual grounding is an independent application obligation.",
+      "source": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §2",
+      "source_lineage": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §2",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "No finite descriptor is declared complete merely because it predicts selected outputs."
+    },
+    {
+      "id": "R149:COMPATIBILITY",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Complete-target compatibility and the incompatible triple",
+      "statement": "Under C1-OI, e=h r iff ker(r) subset ker(k) iff k=a r; image-domain functions are unique. If r=b k, this holds iff b is injective on k(Omega). Thus full C1-OI, complete-experience sufficiency of r, and an equal-r/different-k witness cannot all hold.",
+      "domain": "Same bearer/interval/complete type contract.",
+      "scope": "Same bearer/interval/complete type contract.",
+      "source": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §3",
+      "source_lineage": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §3",
+      "status": "MANUAL_CONDITIONAL_PASS_PROJECT_SYNTHESIS",
+      "proof": "C1-OI gives ker(e)=ker(k). Apply the fiber criterion to e and then k. Define F(k(omega))=e(omega); it is well-defined and injective on the realized type image. Optional r=b k makes reflection exactly injectivity of b. A collapsed distinct-k witness contradicts complete e sufficiency.",
+      "counterexamples_and_limits": "Classical factorization application and source-compatibility result; not new general mathematics, empirical C1 proof, or reconstruction algorithm."
+    },
+    {
+      "id": "R149:NULL_TARGET",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Complete and selected null changes have different obligations",
+      "statement": "Under C1-OI an equivalence N preserves complete experiential types iff N subset ker(k). For any selected target f, preservation needs only N subset ker(f); f factors through r iff ker(r) subset ker(f).",
+      "domain": "Exactly COMPARISON; N and f have the same fixed domain.",
+      "scope": "Exactly COMPARISON; N and f have the same fixed domain.",
+      "source": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §§3.2–3.3",
+      "source_lineage": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §§3.2–3.3",
+      "status": "MANUAL_CONDITIONAL_PASS_PROJECT_SYNTHESIS",
+      "proof": "Replace equal e by equal k using C1-OI for the N statement. For f use the ordinary fiber criterion; no complete-type reflection follows unless f itself distinguishes those types.",
+      "counterexamples_and_limits": "A selected phenomenal feature can remain equal while complete experience differs. Complete-type inequality gives neither a magnitude ordering nor a named quale."
+    },
+    {
+      "id": "R149:SELF_TARGET",
+      "kind": "DEFINITION",
+      "label": "Actual membership, internal attribution and target prediction",
+      "statement": "Extend R146 self contract with grounded actual target Q and property f_Q, declared constituent/overlap relations relative to bearer b, and installed M_attr. Whole Q=b, proper constituent Q<b and disjoint external target are distinct roles; overlaps and cross-boundary relations remain explicit additional cases. M_attr is the system attribution, not the truth criterion for Q or membership.",
+      "domain": "Bearer/target identity independent of current property equality or predictive success. Semantic aboutness and felt ownership remain further obligations.",
+      "scope": "Bearer/target identity independent of current property equality or predictive success. Semantic aboutness and felt ownership remain further obligations.",
+      "source": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §5; records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §§4.3,14",
+      "source_lineage": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §5; records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §§4.3,14",
+      "status": "EXPLICIT_DEFINITION_OR_PREMISE",
+      "proof": "Definition or declared premise; not a derived physical fact.",
+      "counterexamples_and_limits": "The classification is not an exhaustive three-way partition and does not impose a unique universal bearer or an experience gate."
+    },
+    {
+      "id": "R149:SELF_APPLICATION",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Accurate selected prediction need not identify actual self binding or complete type",
+      "statement": "R147 ordinary and joint-swapped configurations share full sensor-response representation r but disagree on actual assembly-relative binding. With the beta-retaining actual bridge they have different complete k, so r cannot determine complete e under C1-OI. Selected loop prediction can still be exact.",
+      "domain": "Retain R147 independent commands, fixed timing, matched sensor-coordinate comparison and the same actual bearer class.",
+      "scope": "Retain R147 independent commands, fixed timing, matched sensor-coordinate comparison and the same actual bearer class.",
+      "source": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §6.4",
+      "source_lineage": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §6.4",
+      "status": "MANUAL_CONDITIONAL_PASS_PROJECT_SYNTHESIS",
+      "proof": "R147 supplies equal L=tau^-1 sigma and different beta-retaining type. Apply the incompatible triple to r=L. Its exact loop predictor is already a witness of selected-target sufficiency despite this failure of complete-type sufficiency.",
+      "counterexamples_and_limits": "If beta is an analyst label or a bearer is silently changed, the actual-bridge premise is unavailable. Does not infer felt ownership, transfer of experience or fear."
     }
   ],
   "rules": [
@@ -5169,6 +5765,267 @@
       "source": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md §§4,7",
       "kind": "CONDITIONAL_INTERPRETATION",
       "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
+    },
+    {
+      "id": "r149_ta15_nonident",
+      "all_of": [
+        "TA15:OBS_EQ_PREM"
+      ],
+      "conclusion": "TA15:NONIDENT",
+      "statement": "No decision rule using only the allowed protocols is almost surely correct for both opposing models.",
+      "proof_sketch": "The rule has the same output law in both models. Almost-sure output 0 in one is almost-sure output 0 in the other; it cannot also be almost-sure 1. Shared randomization is part of the law.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 1",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta15_fiber",
+      "all_of": [
+        "TA15:MAPS"
+      ],
+      "conclusion": "TA15:FIBER",
+      "statement": "There is a unique h on alpha(U) with f=h alpha iff equal alpha-values imply equal f-values.",
+      "proof_sketch": "Necessity follows by substitution. For sufficiency define h(alpha(u))=f(u); fiber constancy gives well-definedness and surjectivity onto the image gives uniqueness.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 2",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta15_composition",
+      "all_of": [
+        "TA15:RELATION_PREM"
+      ],
+      "conclusion": "TA15:COMPOSITION",
+      "statement": "zU belongs to RTU[RST[QS]].",
+      "proof_sketch": "The first relation sends the actual zS in QS to zT in RST[QS]; the second sends that same zT to zU.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 3",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta15_error",
+      "all_of": [
+        "TA15:METRIC_PREM"
+      ],
+      "conclusion": "TA15:ERROR",
+      "statement": "dU(zU,gTU(gST(zS)))<=epsTU+L epsST. If the two errors hold except on events of probabilities delta1,delta2 and the Lipschitz bound is certain, coverage is at least max(0,1-delta1-delta2).",
+      "proof_sketch": "Insert gTU(zT), apply triangle inequality then Lipschitz. Intersect the two valid events and use the union bound; independence is unnecessary.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md Proposition 4",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta16_causal_limits",
+      "all_of": [
+        "TA16:FINITE_CONTRACT"
+      ],
+      "conclusion": "TA16:CAUSAL_LIMITS",
+      "statement": "All-cut positive diagonal return iff strong connectivity (a witness walk length <=2(n-1)); strong connectivity alone does not determine retained information; incompatible modes cannot jointly witness different maxima; recoding does not change physics when interventions are transported; every finite Boolean F has an exact wrapper Ftilde=EFD on valid codewords.",
+      "proof_sketch": "For strong connectivity concatenate paths crossing and returning through each cut. Conversely a source SCC admits no closed crossing walk. Parity broadcast on five bits retains one bit; invertible four-bit shift-XOR retains four. Identity and parity modes do not jointly witness full capacity and complete dependencies. Conjugate both dynamics and interventions. Finally Ftilde E=EF since DE=id; induction gives all horizons and majority corrects up to (n-1)/2 pre-update flips per block.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA16_v1_0.md Appendix G.1–G.4",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta17_quotient",
+      "all_of": [
+        "TA17:FUNCTIONAL_CONTRACT"
+      ],
+      "conclusion": "TA17:QUOTIENT",
+      "statement": "Histories equivalent under every declared future intervention/output law define a quotient. Bijective recoding transporting those laws induces a quotient bijection; behaviorally null nuisance dimensions collapse. No noninjective abstraction preserves every conceivable consumer.",
+      "proof_sketch": "Relabeling preserves equality of all declared response laws, hence classes correspond. The nuisance premise makes all same-Z histories equivalent. A consumer with different rewards for a collapsed pair cannot be evaluated from their shared code.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §§4.2,5.3–5.5; Proposition 12",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta17_inheritance",
+      "all_of": [
+        "TA17:FUNCTIONAL_CONTRACT"
+      ],
+      "conclusion": "TA17:INHERITANCE",
+      "statement": "Gamma is monotone in included outputs; bijective recoding preserves it when intervention distribution/semantics are transported. Readout MI is a lower bound under U->Y->O. Closed-lineage MI cannot increase without violating the specified Markov/no-side-channel premise. Shared-upstream MI alone does not establish current-process descent.",
+      "proof_sketch": "Projection and data processing prove monotonicity/readout/closed-lineage claims. Bijective entropy and joint entropy invariance prove recoding invariance. Counterexample U fair, A=U and independently stored C=U yields I(U;C)=1 while intervening on A after separation leaves C unchanged.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Propositions 1–4,11; Theorem 1; Corollary 4",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta17_set_limits",
+      "all_of": [
+        "TA17:FUNCTIONAL_CONTRACT"
+      ],
+      "conclusion": "TA17:SET_LIMITS",
+      "statement": "Individual-only categorical labels cannot encode arbitrary successor sets. Under nonnegative membership, co-successor invariance and symmetry of equally full copies, unit-sum normalization fails on two full successors. Equal singleton inclusion marginals need not identify mu; equal singleton inheritance need not identify Gamma. Duplication violates conserved-mass and universal supermodularity; secret sharing violates universal submodularity.",
+      "proof_sketch": "Use muE(10)=muE(01)=1/2 versus muJ(00)=muJ(11)=1/2. For U=(U1,U2), B=C=U1 and B=U1,C=U2 share singleton Gamma=1/2 but joint scores 1/2 vs1. For U,R independent fair, B=R,C=U XOR R gives singleton0,joint1. Full copies give singleton1+1,joint1. Cardinality and these values prove the remaining clauses.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Propositions 5–10,13",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta17_kl_cost",
+      "all_of": [
+        "TA17:FUNCTIONAL_CONTRACT"
+      ],
+      "conclusion": "TA17:KL_COST",
+      "statement": "For finite binary inclusion vector X with law mu, min over product q of KL(mu||q)=sum H(X_i)-H(X), attained at product marginals. Expected sum of inclusion indicators equals expected successor cardinality.",
+      "proof_sketch": "KL(mu||product q_i)=TC(mu)+sum_i KL(mu_i||q_i); minimize each nonnegative term. Linearity of expectation gives the cardinality identity.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Theorem 2; Corollary 5; §12",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta17_regret",
+      "all_of": [
+        "TA17:DECISION_PREM"
+      ],
+      "conclusion": "TA17:REGRET",
+      "statement": "Every marginal-only policy has average reward 1/2; access to the full set posterior permits reward 1, so regret is 1/2.",
+      "proof_sketch": "If p is probability of choosing exactly-one, average reward is (p+1-p)/2. Full posterior identifies which action is correct.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md Theorem 3",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta18_germ_nonfactor",
+      "all_of": [
+        "TA18:JOINT_WITNESS"
+      ],
+      "conclusion": "TA18:GERM_NONFACTOR",
+      "statement": "The enriched gamma does not factor through H in the stipulated witness.",
+      "proof_sketch": "Equal H-values contain different joint-response functions: AND(0,0)=0 and XNOR(0,0)=1, with all specified other observations equal. Thus no single gamma value can be assigned to that H-fiber.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 1; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_WITH_EXPLICIT_SIGNATURE_REPAIR"
+    },
+    {
+      "id": "r149_ta18_phen_nonfactor",
+      "all_of": [
+        "TA18:JOINT_WITNESS",
+        "TA18:PAIR_SEPARATION"
+      ],
+      "conclusion": "TA18:PHEN_NONFACTOR",
+      "statement": "The target Phi(gamma) does not factor through H.",
+      "proof_sketch": "The same H-fiber contains two different Phi(gamma) values, violating the fiber criterion.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 1, narrowed; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_SOURCE_INFERENCE_REPAIRED"
+    },
+    {
+      "id": "r149_ta18_idle",
+      "all_of": [
+        "TA18:PRD",
+        "TA18:ISO_BRIDGE"
+      ],
+      "conclusion": "TA18:IDLE",
+      "statement": "If modifications preserve the selected germ up to isomorphism, their PRD target types agree.",
+      "proof_sketch": "Apply PRD to each selected germ and use ISO_BRIDGE.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 2",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_WITH_COVARIANCE_PREMISE"
+    },
+    {
+      "id": "r149_ta18_factor",
+      "all_of": [
+        "TA18:NULL_EQ"
+      ],
+      "conclusion": "TA18:FACTOR",
+      "statement": "A unique Phi_tilde on the quotient satisfies Phi=Phi_tilde q.",
+      "proof_sketch": "Define Phi_tilde([gamma])=Phi(gamma); invariance gives well-definedness and quotient surjectivity gives uniqueness.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 4",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta18_underdetermination",
+      "all_of": [
+        "TA18:GERM"
+      ],
+      "conclusion": "TA18:UNDERDETERMINATION",
+      "statement": "Structural invariance requirements do not universally select a unique type-valued bridge: there is a two-physical-class/two-output model with identity scale maps satisfying them and permitting both a constant and a class-separating map.",
+      "proof_sketch": "Take physical classes {a,b}, target types {0,1}, only identity symmetries and scale maps; constant 0 and a->0,b->1 both obey invariance and scale consistency yet differ on b. They cannot both obey current C1-OI for distinct complete physical types.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md Proposition 3, repaired witness; records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §4",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_WITH_EXPLICIT_COUNTERMODEL"
+    },
+    {
+      "id": "r149_ta19_local",
+      "all_of": [
+        "TA19:GROUP_SETUP"
+      ],
+      "conclusion": "TA19:LOCAL",
+      "statement": "s(x0) must be H-fixed; if no candidate is H-fixed no singleton selector exists. On a transitive orbit every nonempty invariant subset is the whole orbit. A finite transitive orbit has a unique invariant probability, the uniform law.",
+      "proof_sketch": "s(x0)=s(hx0)=h s(x0). For a set R, any member generates the whole orbit inside R. Invariance makes all point masses equal; normalization gives 1/|O|.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md Propositions 1–2; records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md S1–S2",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta19_monodromy",
+      "all_of": [
+        "TA19:COVER"
+      ],
+      "conclusion": "TA19:MONODROMY",
+      "statement": "A continuous single-valued section selects a point fixed by every monodromy permutation; no common fixed point precludes a section.",
+      "proof_sketch": "For each loop gamma, s composed with gamma is a lift starting at s(x0) and ending at the same s(x0); uniqueness of lifting identifies that endpoint with the monodromy image. The double cover z->z^2 exchanges +/-1 and has no such fixed point.",
+      "source": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md Proposition 3 and Corollary 2",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT"
+    },
+    {
+      "id": "r149_ta19_regularity",
+      "all_of": [
+        "TA19:TOPOLOGY"
+      ],
+      "conclusion": "TA19:REGULARITY",
+      "statement": "Exact-top-tier supported probability laws cannot be continuous at a strict two-sided winner switch. A closed-graph set completion must contain both side limits at the tie. The finite labeled landscape is Hausdorff-continuous when each branch is continuous.",
+      "proof_sketch": "One-sided probability limits are delta_Q and delta_P and differ. Closed graph contains limits (0,Q),(0,P). For finite landscapes, Hausdorff distance is bounded by max_P min(1,d_P(z_P(x),z_P(x0))), which tends to zero.",
+      "source": "records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md S3–S4,S6",
+      "kind": "SCOPED_DEDUCTIVE_IMPORT",
+      "review": "MANUAL_CONDITIONAL_PASS_SUPPLEMENT_PROOFS_EXPLICIT"
+    },
+    {
+      "id": "r149_r149_compatibility",
+      "all_of": [
+        "R149:COMPARISON",
+        "A:C1_OI",
+        "TA15:FIBER"
+      ],
+      "conclusion": "R149:COMPATIBILITY",
+      "statement": "Under C1-OI, e=h r iff ker(r) subset ker(k) iff k=a r; image-domain functions are unique. If r=b k, this holds iff b is injective on k(Omega). Thus full C1-OI, complete-experience sufficiency of r, and an equal-r/different-k witness cannot all hold.",
+      "proof_sketch": "C1-OI gives ker(e)=ker(k). Apply the fiber criterion to e and then k. Define F(k(omega))=e(omega); it is well-defined and injective on the realized type image. Optional r=b k makes reflection exactly injectivity of b. A collapsed distinct-k witness contradicts complete e sufficiency.",
+      "source": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §3",
+      "kind": "DEDUCTIVE_APPLICATION",
+      "review": "MANUAL_CONDITIONAL_PASS_PROJECT_SYNTHESIS"
+    },
+    {
+      "id": "r149_r149_null_target",
+      "all_of": [
+        "R149:COMPARISON",
+        "A:C1_OI",
+        "TA15:FIBER"
+      ],
+      "conclusion": "R149:NULL_TARGET",
+      "statement": "Under C1-OI an equivalence N preserves complete experiential types iff N subset ker(k). For any selected target f, preservation needs only N subset ker(f); f factors through r iff ker(r) subset ker(f).",
+      "proof_sketch": "Replace equal e by equal k using C1-OI for the N statement. For f use the ordinary fiber criterion; no complete-type reflection follows unless f itself distinguishes those types.",
+      "source": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §§3.2–3.3",
+      "kind": "DEDUCTIVE_APPLICATION",
+      "review": "MANUAL_CONDITIONAL_PASS_PROJECT_SYNTHESIS"
+    },
+    {
+      "id": "r149_r149_self_application",
+      "all_of": [
+        "R147:ROUTING_LIMIT",
+        "R147:ACTUAL_BRIDGE",
+        "R149:COMPARISON",
+        "R149:COMPATIBILITY"
+      ],
+      "conclusion": "R149:SELF_APPLICATION",
+      "statement": "R147 ordinary and joint-swapped configurations share full sensor-response representation r but disagree on actual assembly-relative binding. With the beta-retaining actual bridge they have different complete k, so r cannot determine complete e under C1-OI. Selected loop prediction can still be exact.",
+      "proof_sketch": "R147 supplies equal L=tau^-1 sigma and different beta-retaining type. Apply the incompatible triple to r=L. Its exact loop predictor is already a witness of selected-target sufficiency despite this failure of complete-type sufficiency.",
+      "source": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md §6.4",
+      "kind": "DEDUCTIVE_APPLICATION",
+      "review": "MANUAL_CONDITIONAL_PASS_PROJECT_SYNTHESIS"
     }
   ],
   "context_links": [
@@ -5591,6 +6448,41 @@
       "from": "A:P6",
       "to": "R147:MEMORY_LIMIT",
       "relation": "token/type/lineage distinction; contextual antecedent"
+    },
+    {
+      "from": "TA15:FIBER",
+      "to": "C:P2_COORD",
+      "relation": "earlier standard factorization antecedent; contextual attribution"
+    },
+    {
+      "from": "TA16:CAUSAL_LIMITS",
+      "to": "A:K",
+      "relation": "mechanism/intervention warnings; no automatic physical bridge"
+    },
+    {
+      "from": "TA16:RRH_HISTORY",
+      "to": "A:U1",
+      "relation": "historical whole-target gate must not be imported as basal necessity"
+    },
+    {
+      "from": "TA17:FUNCTIONAL_CONTRACT",
+      "to": "R149:SELF_TARGET",
+      "relation": "internal attribution is distinguished from grounded actual membership"
+    },
+    {
+      "from": "TA19:LOCAL",
+      "to": "A:ORBIT_LEMMA",
+      "relation": "TA18/TA19 antecedents; retained later A scope"
+    },
+    {
+      "from": "TA19:LOCAL",
+      "to": "R146:CENTERED_REFERENCE",
+      "relation": "prior uncentered obstruction; centered extension retains independent installation premise"
+    },
+    {
+      "from": "TA18:FACTOR",
+      "to": "R149:COMPATIBILITY",
+      "relation": "compatibility of a selected germ quotient with a complete target needs type reflection"
     }
   ],
   "prohibited_inferences_D": [
@@ -5972,6 +6864,44 @@
         "status": "published_preprint_receipt_verified; selected_passages_reviewed; not_fully_integrated_into_deductive_graph"
       }
     ],
-    "integration_status": "source census and selected-passage overlap review only; not full theorem integration; no added deductive edges"
+    "integration_status": "Superseded by scoped R149 core integration; see research_R149; broader bibliography still not exhaustive."
+  },
+  "supplement_versions_R149": [
+    {
+      "paper": "TA19",
+      "path": "records/R149_Nine_Source_Integration_20261007/sources/TA19_supplement_v1_0.md",
+      "sha256": "72c23fd9215bd87d96874111854ffc2b192c0349e847e93083bb2b0ee3addcd7",
+      "bytes": 7573
+    }
+  ],
+  "attribution_amendments_R149": [
+    {
+      "target": "R146:CENTERED_REFERENCE",
+      "antecedents": [
+        "TA19:LOCAL",
+        "TA18 §7",
+        "A:ORBIT_LEMMA"
+      ],
+      "deductive": false
+    },
+    {
+      "target": "R146:SELF_TARGET_SUFFICIENCY",
+      "antecedents": [
+        "TA15:FIBER",
+        "TA16 Appendix G.5",
+        "C:P2_COORD"
+      ],
+      "deductive": false
+    }
+  ],
+  "research_R149": {
+    "record": "records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md",
+    "source_audit": "records/R149_Nine_Source_Integration_20261007/SOURCE_INTEGRATION_AND_AUDIT.md",
+    "readable_overview": "records/R149_Nine_Source_Integration_20261007/FORMAL_MAP_OVERVIEW_ZH.md",
+    "proof_ledger": "records/R149_Nine_Source_Integration_20261007/PROOF_LEDGER.md",
+    "new_nodes": 42,
+    "new_rules": 21,
+    "meaning": "Most additions index existing publications; R149 compatibility is a classical application, not theorem-count novelty.",
+    "coverage": "Core mathematical and definition branches of TA15–19 imported; numerical studies remain reported and unrerun. TA19 main source ends in §5; supplement supplies additional results. No claim of exhaustive empirical or entire-text certification."
   }
 }

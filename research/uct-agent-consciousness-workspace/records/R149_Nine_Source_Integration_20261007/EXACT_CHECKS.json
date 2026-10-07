@@ -1,0 +1,9 @@
+{
+  "all_checks_passed": true,
+  "compatibility_assignments": 432,
+  "external_label_counterlimit": true,
+  "partial_target_counterexample": true,
+  "constant_bridge_counterexample": true,
+  "singleton_vs_joint_profile_gap": true,
+  "scope": "Finite mathematical checks only. General proofs are in the theory note. No consciousness measurement, source experiments, or novelty certification."
+}

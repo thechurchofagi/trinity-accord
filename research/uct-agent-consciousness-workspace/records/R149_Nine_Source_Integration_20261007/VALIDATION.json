@@ -1,0 +1,24 @@
+{
+  "revision": "R149-v1.0",
+  "parent": "06dcd7606daeb1ccc5e9640f4dadf45c41dc2879",
+  "nodes": 391,
+  "rules": 188,
+  "checks": {
+    "old_nodes_unchanged": true,
+    "old_rules_unchanged": true,
+    "old_source_metadata_unchanged": true,
+    "unique_ids": true,
+    "rule_references_resolve": true,
+    "context_references_resolve": true,
+    "deductive_graph_acyclic": true,
+    "nine_source_hashes_match": true,
+    "supplement_hash_matches": true,
+    "all_fields_exported": true,
+    "exact_counterexample_checks_pass": true,
+    "new_document_links_resolve": true
+  },
+  "source_limits": "TA19 main Markdown ends in section 5; supplement imported. No full empirical re-audit.",
+  "new_general_math_claimed": false,
+  "empirical_experiments_run": false,
+  "paper_published": false
+}

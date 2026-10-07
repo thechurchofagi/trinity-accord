@@ -1,11 +1,17 @@
-# R148 交接：先纠正论文来源总数
+# R149 交接 — 九篇核心接图与兼容性推导
 
-完成论文数量核查与关键重叠比较，见 [详细报告](records/R148_Publication_Census_20261007/PUBLICATION_CENSUS_AND_NOVELTY_ZH.md) 和 [九篇清单](records/R148_Publication_Census_20261007/PUBLICATION_INVENTORY.json)。四篇是地图固定基线，不是全部发表数；另核实五篇直接前作，均保存正文与发布回执，正文哈希匹配。没有确认另有 D 之后的新第五篇。
+已完成用户本轮要求的核心来源接图，并继续一个集中理论问题。图 **R149-v1.0，391节点188规则**，旧349/167逐字段保留；九篇原文不改。新节点多数是前作已发表结果，不是新增定理数。
 
-TA17 已有多来源自我归属数学定义，TA19 已有主体选择固定点结果；新稿不能重复报新。R146 原稿＋R147 换接证明仍是当前草稿基础。已授权的完整修订稿尚未完成，本轮因来源范围纠正先完成必要的新颖性复核。
+- [可读地图与思想实验](records/R149_Nine_Source_Integration_20261007/FORMAL_MAP_OVERVIEW_ZH.md)
+- [英文研究正文与证明](records/R149_Nine_Source_Integration_20261007/COMPATIBILITY_AND_SELF_TARGETS.md)
+- [来源覆盖和修正](records/R149_Nine_Source_Integration_20261007/SOURCE_INTEGRATION_AND_AUDIT.md)
+- [完整证明台账](records/R149_Nine_Source_Integration_20261007/PROOF_LEDGER.md)
+- [核查](records/R149_Nine_Source_Integration_20261007/VALIDATION.json)
 
-推导图保持 R147-v1.0，349 节点167规则；完整证明台账仍在 R147。R148 新增来源元数据与审查，没有增添定理。A/B/C/D 和历史草稿保留。
+结果：同一实际承担者/完整签名下，C1-OI与r决定完整体验相容iff ker(r)包含于ker(k)。某个选择性目标只需其自身纤维条件。R147闭环/身体归属反例纳入这条推导；内部M_attr不是实际成员真值。祖先、算盘计算器、人列、复制/换接仍贯穿主线。
 
-下一步把内部归属 M_t、实际承担者/组成关系、sigma/tau 绑定、误差/用途分开写入完整稿，并标明与 TA15–19 的承接及剩余增量。主线仍是精确定义与祖先、算盘/计算器、人列、复制/换接思想实验。当前不确认可独立原创投稿，禁止用实验或小定理堆数量来掩盖缺口。
+修正TA18：联合响应必须明确进入germ；germ差异不自动传到任意Phi（常量反例），需区分前提；同构桥协变另列。TA16 RRH-E与当前U1目标区分。TA19正文Markdown在§5结束且与发布哈希一致，补充材料已获取并接入；主PDF未查，不宣称全部原文覆盖完整。
 
-旧交接：[R147](HANDOFF_THROUGH_R147.md)。保存使用 HEAD lease、force=false、[skip ci]，不自动发表/DOI/PR/CI。
+本轮有限精确检查仅针对兼容性与反例，无新实验。没有宣称突破已认证或可以独立原创投稿。下一步不要重做目录核查：集中推进明确实现类别中实际目标绑定/错误归属，再整合R146草稿、R147换接、R149兼容性成稿。语义自指与具体体验桥仍开放。保存不自动发表/DOI/CI。
+
+旧交接：[R148](HANDOFF_THROUGH_R148.md)。
