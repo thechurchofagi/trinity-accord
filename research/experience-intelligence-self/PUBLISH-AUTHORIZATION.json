@@ -1,0 +1,15 @@
+{
+  "authorization": "PUBLISH_EXACT_REVIEWED_PACKAGE",
+  "report_number": "TA-TR-2026-25",
+  "version": "1.0",
+  "record_id": 23206492,
+  "doi": "10.5281/zenodo.23206492",
+  "expected_manifest_sha256": "a61d74734900c731c991f80ecec321c45e1f6e7938497a1afc9914c58b22b48a",
+  "pdf_sha256": "b4f456014213c5d4f34f41ed2bac8873fd9d90e38398d77daebdb787872b1c1a",
+  "authorization_basis": "Explicit author instruction on 7 October 2026: review, publish DOI if no blocking issue, then OTS, finally Arweave.",
+  "publication_type": "theoretical preprint",
+  "peer_reviewed": false,
+  "c1_empirically_validated": false,
+  "preserve_prior_editions": true,
+  "arweave_cumulative_fee_limit": "strictly less than 0.1 AR, existing reserve and rolling controls retained"
+}

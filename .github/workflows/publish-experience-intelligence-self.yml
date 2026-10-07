@@ -36,6 +36,35 @@ jobs:
         env:
           ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
         run: python3 research/experience-intelligence-self/publication.py publish
+      - name: Initialize exact published PDF timestamp targets
+        run: |
+          python3 - <<'PYSTAMP'
+          import json,pathlib
+          root=pathlib.Path('research/experience-intelligence-self')
+          r=json.loads((root/'publication-record.json').read_text())
+          assert r['submitted'] and r['public_file_readback_pass']
+          assert r['report_number']=='TA-TR-2026-25' and r['version']=='1.0'
+          batch=pathlib.Path('research/paper-timestamps/2026-10-07-paper25-v10')
+          batch.mkdir(parents=True,exist_ok=True)
+          target={'schema':'trinityaccord.paper-ots-targets.v1','batch':batch.name,'paper_count':1,'papers':[{'report':r['report_number'],'record_id':r['record_id'],'doi':r['doi'],'version':r['version'],'title':r['title'],'receipt_path':str(root/'publication-record.json'),'pdfs':[{'name':f['name'],'sha256':f['sha256'],'bytes':f['bytes']} for f in r['files'] if f['name'].endswith('.pdf')]}]}
+          path=batch/'targets.json'
+          if path.exists():assert json.loads(path.read_text())==target
+          else:path.write_text(json.dumps(target,indent=2)+'\n')
+          PYSTAMP
+      - name: Submit exact published PDF to OTS calendars promptly
+        run: |
+          python3 -m pip install -r requirements-ots.txt
+          python3 scripts/research_paper_ots.py stamp --batch research/paper-timestamps/2026-10-07-paper25-v10
+      - name: Preserve OTS submission even while Bitcoin is pending
+        if: always()
+        run: |
+          if [ ! -d research/paper-timestamps/2026-10-07-paper25-v10 ]; then exit 0; fi
+          git config user.name 'trinity-ots-bot'
+          git config user.email 'actions@github.com'
+          git add research/paper-timestamps/2026-10-07-paper25-v10/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Preserve TA25 initial OTS submission [skip ci]'
+          git push origin HEAD:research/experience-intelligence-self-v1-20261007
       - name: Preserve same-record state even after uncertainty
         if: always()
         run: python3 research/experience-intelligence-self/publication.py persist
