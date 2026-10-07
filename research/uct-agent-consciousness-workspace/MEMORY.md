@@ -1,3 +1,11 @@
+## R170 current priority — exact open-world remainder boundary
+
+R170 makes the R169 coverage gap explicit. A predeclared target `T` is decomposed into certified `C` and unresolved `U`. The sharp compatible pointwise envelope equals the certified envelope on C and the inherited cap M on U. Therefore any nonempty U preserves global amplitude M, including a nonempty null set. With an independently justified target measure, the mean is bounded by `integral_C E_C + M mu(U)` and threshold-exceedance mass by the covered exceedance plus `mu(U)`.
+
+Continuum cells need a universal physical range plus same-lineage anchor/route or structural-channel radius. Sample density and interpolation are not coverage proofs. Map R170-v1.0 has 487 nodes / 234 rules / 133 context links; 21 round checks and all bounded enumerations pass.
+
+No actual target domain, cell cover, measure, apparatus, neural closure, C1 derivation, `B_min`, basal gate or unique owner is established. Next: compare physically checkable total-range proof forms and define falsifiers that distinguish them from fitted covers.
+
 ## R169 current priority — compositional route calibration and its open-world limit
 
 R169 turns R168's free regularity assumptions into a prospective falsifiable certificate over actual local context interventions. For an actual route graph with valid edgewise uniform consumer-law bounds `B`, shortest-path distance `D_B` gives the exact conditional implication `|e(z)-e(z')| <= 2D_B(z,z')`; finite tested upper bounds therefore yield `min{M,inf_i[U_i+2D_B(z,s_i)]}`. Intervention-pair-specific budgets can be tighter than the uniform factor-two route. Held-out lower bounds above certified budgets refute the calibration package.

@@ -1,0 +1,307 @@
+{
+  "schema": "UCT_R170_MAP_AUDIT/v1",
+  "round": "R170",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "note_hash_frozen",
+      "status": "PASS",
+      "detail": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5"
+    },
+    {
+      "name": "graph_revision",
+      "status": "PASS",
+      "detail": "R170-v1.0"
+    },
+    {
+      "name": "graph_counts",
+      "status": "PASS",
+      "detail": {
+        "nodes": 487,
+        "rules": 234,
+        "context_links": 133
+      }
+    },
+    {
+      "name": "unique_ids",
+      "status": "PASS",
+      "detail": {
+        "nodes": 487,
+        "rules": 234
+      }
+    },
+    {
+      "name": "all_endpoints_exist",
+      "status": "PASS",
+      "detail": {
+        "rules": [],
+        "links": []
+      }
+    },
+    {
+      "name": "dag",
+      "status": "PASS",
+      "detail": {
+        "visited": 487,
+        "total": 487
+      }
+    },
+    {
+      "name": "exact_parent_reconstruction",
+      "status": "PASS",
+      "detail": "86b9140520d773fbf8e31543b6517d21896330f484b6590f2b50b9f3321669ad"
+    },
+    {
+      "name": "new_node_contract_fields",
+      "status": "PASS",
+      "detail": [
+        "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+        "R170:CELL_ROUTE_COVER_CERTIFICATE",
+        "R170:OPEN_WORLD_REMAINDER_PARTITION",
+        "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE",
+        "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+        "R170:MEAN_REMAINDER_BOUND",
+        "R170:EXCEEDANCE_REMAINDER_BOUND",
+        "R170:COVERAGE_CHALLENGE_FALSIFIER",
+        "R170:OPEN_WORLD_COVERAGE_TRIAGE",
+        "R170:R169_OPEN_WORLD_APPLICATION_BOUNDARY"
+      ]
+    },
+    {
+      "name": "new_rules_explicit_all_of",
+      "status": "PASS",
+      "detail": {
+        "r170_remainder_partition": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R170:CELL_ROUTE_COVER_CERTIFICATE"
+        ],
+        "r170_pointwise_remainder_envelope": [
+          "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+          "R169:DIRECT_ROUTE_ENVELOPE",
+          "R170:OPEN_WORLD_REMAINDER_PARTITION"
+        ],
+        "r170_global_supremum_obstruction": [
+          "R170:OPEN_WORLD_REMAINDER_PARTITION",
+          "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+        ],
+        "r170_mean_remainder_bound": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R170:OPEN_WORLD_REMAINDER_PARTITION",
+          "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+        ],
+        "r170_exceedance_remainder_bound": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R170:OPEN_WORLD_REMAINDER_PARTITION",
+          "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+        ],
+        "r170_open_world_coverage_triage": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R170:CELL_ROUTE_COVER_CERTIFICATE",
+          "R170:OPEN_WORLD_REMAINDER_PARTITION",
+          "R170:COVERAGE_CHALLENGE_FALSIFIER"
+        ],
+        "r170_open_world_application_boundary": [
+          "R169:R168_ROUTE_APPLICATION_BOUNDARY",
+          "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+          "R170:MEAN_REMAINDER_BOUND",
+          "R170:EXCEEDANCE_REMAINDER_BOUND",
+          "R170:OPEN_WORLD_COVERAGE_TRIAGE"
+        ]
+      }
+    },
+    {
+      "name": "joint_premises_exact",
+      "status": "PASS",
+      "detail": {
+        "r170_remainder_partition": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R170:CELL_ROUTE_COVER_CERTIFICATE"
+        ],
+        "r170_pointwise_remainder_envelope": [
+          "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+          "R169:DIRECT_ROUTE_ENVELOPE",
+          "R170:OPEN_WORLD_REMAINDER_PARTITION"
+        ],
+        "r170_global_supremum_obstruction": [
+          "R170:OPEN_WORLD_REMAINDER_PARTITION",
+          "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+        ],
+        "r170_mean_remainder_bound": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R170:OPEN_WORLD_REMAINDER_PARTITION",
+          "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+        ],
+        "r170_exceedance_remainder_bound": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R170:OPEN_WORLD_REMAINDER_PARTITION",
+          "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+        ],
+        "r170_open_world_coverage_triage": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R170:CELL_ROUTE_COVER_CERTIFICATE",
+          "R170:OPEN_WORLD_REMAINDER_PARTITION",
+          "R170:COVERAGE_CHALLENGE_FALSIFIER"
+        ],
+        "r170_open_world_application_boundary": [
+          "R169:R168_ROUTE_APPLICATION_BOUNDARY",
+          "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+          "R170:MEAN_REMAINDER_BOUND",
+          "R170:EXCEEDANCE_REMAINDER_BOUND",
+          "R170:OPEN_WORLD_COVERAGE_TRIAGE"
+        ]
+      }
+    },
+    {
+      "name": "partition_requires_target_and_cells",
+      "status": "PASS",
+      "detail": [
+        "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+        "R170:CELL_ROUTE_COVER_CERTIFICATE"
+      ]
+    },
+    {
+      "name": "pointwise_requires_effect_route_and_partition",
+      "status": "PASS",
+      "detail": [
+        "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+        "R169:DIRECT_ROUTE_ENVELOPE",
+        "R170:OPEN_WORLD_REMAINDER_PARTITION"
+      ]
+    },
+    {
+      "name": "amplitude_obstruction_keeps_remainder",
+      "status": "PASS",
+      "detail": [
+        "R170:OPEN_WORLD_REMAINDER_PARTITION",
+        "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+      ]
+    },
+    {
+      "name": "mean_and_exceedance_require_measure_contract",
+      "status": "PASS",
+      "detail": {
+        "mean": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R170:OPEN_WORLD_REMAINDER_PARTITION",
+          "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+        ],
+        "exceedance": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R170:OPEN_WORLD_REMAINDER_PARTITION",
+          "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+        ]
+      }
+    },
+    {
+      "name": "application_keeps_R169_and_all_strength_distinctions",
+      "status": "PASS",
+      "detail": [
+        "R169:R168_ROUTE_APPLICATION_BOUNDARY",
+        "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+        "R170:MEAN_REMAINDER_BOUND",
+        "R170:EXCEEDANCE_REMAINDER_BOUND",
+        "R170:OPEN_WORLD_COVERAGE_TRIAGE"
+      ]
+    },
+    {
+      "name": "no_reverse_to_C1_basal_gate_or_familiar_mineness",
+      "status": "PASS",
+      "detail": [
+        "R170:OPEN_WORLD_REMAINDER_PARTITION",
+        "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE",
+        "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+        "R170:MEAN_REMAINDER_BOUND",
+        "R170:EXCEEDANCE_REMAINDER_BOUND",
+        "R170:OPEN_WORLD_COVERAGE_TRIAGE",
+        "R170:R169_OPEN_WORLD_APPLICATION_BOUNDARY"
+      ]
+    },
+    {
+      "name": "context_links_non_deductive",
+      "status": "PASS",
+      "detail": [
+        {
+          "from": "R170:R169_OPEN_WORLD_APPLICATION_BOUNDARY",
+          "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+          "relation": "context only: domain coverage refines physical evidence and does not replace C1 or B_min"
+        },
+        {
+          "from": "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+          "to": "R168:AMPLITUDE_MASS_SEPARATION",
+          "relation": "obstruction retained: small or zero remainder mass does not imply a nontrivial pointwise amplitude bound"
+        },
+        {
+          "from": "R170:OPEN_WORLD_COVERAGE_TRIAGE",
+          "to": "A:U1",
+          "relation": "no target coverage, cell radius, measure or remainder clause is added to basal-experience existence"
+        },
+        {
+          "from": "R170:CELL_ROUTE_COVER_CERTIFICATE",
+          "to": "R169:PARTIAL_VIEW_DIRECT_RADIUS_BOUND",
+          "relation": "non-deductive application refinement: cell certificates can discharge continuum radius only when their universal physical range premise is valid"
+        }
+      ]
+    },
+    {
+      "name": "exact_open_world_enumeration",
+      "status": "PASS",
+      "detail": {
+        "domains": 62,
+        "covered_envelopes": 1364,
+        "compatible_effects": 66429,
+        "pointwise_checks": 323847,
+        "integral_checks": 66429,
+        "exceedance_checks": 132858,
+        "supremum_witnesses": 1001
+      }
+    },
+    {
+      "name": "status_priority",
+      "status": "PASS",
+      "detail": {
+        "INVALID_OPEN_WORLD_PROTOCOL": 16,
+        "UNRESOLVED": 5,
+        "OPEN_WORLD_MASS_CERTIFIED": 1,
+        "CLOSED_DOMAIN_AMPLITUDE_CERTIFIED": 2,
+        "COVERAGE_CERTIFICATE_REFUTED": 8
+      }
+    },
+    {
+      "name": "claim_limits",
+      "status": "PASS",
+      "detail": {
+        "actual_target_domain_validated": false,
+        "actual_cell_cover_validated": false,
+        "target_measure_validated": false,
+        "remainder_mass_validated": false,
+        "complete_route_inventory_validated": false,
+        "complete_organization_identified": false,
+        "C1_derived": false,
+        "B_min_validated": false,
+        "basal_experience_gate": false
+      }
+    },
+    {
+      "name": "required_core_artifacts_present",
+      "status": "PASS",
+      "detail": [
+        "ROUND_RECORD.md",
+        "Open_World_Remainder_Certificates_v0_1.md",
+        "PROOF_LEDGER.json",
+        "GAP_LEDGER.json",
+        "SOURCE_LEDGER.json",
+        "MAP_EXTENSION.json",
+        "verify_open_world.py",
+        "EXACT_CHECKS.json",
+        "build_map.py"
+      ]
+    }
+  ],
+  "graph_sha256": "057c99a365940433579a765c2e52e5d4c5ce5b0bc4796cefef7b628c741e762b",
+  "exact_results_sha256": "6bbdbc817710eca35ad4aa56f85ba6eb91165c5f480b0c690e4ee577ef018176",
+  "limitations": [
+    "DAG and finite checks do not establish a physical target domain, continuum cell cover, target measure or theory truth.",
+    "Sharpness is over the stated bounded-envelope information class unless a separate consumer-kernel realizability theorem is supplied.",
+    "No neural completeness, C1 derivation, B_min validation, basal-experience gate or unique owner follows."
+  ]
+}

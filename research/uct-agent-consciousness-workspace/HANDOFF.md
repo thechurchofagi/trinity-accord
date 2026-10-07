@@ -1,3 +1,11 @@
+## R170 current handoff — open-world remainder certificates
+
+R170 is the latest substantive round. It retains every omitted context in `U=T\\C`, gives the sharp piecewise envelope `E_C/M`, proves the global-amplitude obstruction for every nonempty U, and derives exact mean and exceedance-mass bounds only under a separately justified target measure. A cell cover requires a universal physical range and actual anchor/route radius; finite successful tests do not prove closure.
+
+Map R170-v1.0 has 487 nodes, 234 rules and 133 context links; the R169 prefix is exact. Round audit: 21/21 PASS. Exact checks cover 62 domains, 1,364 envelopes, 66,429 effects, 323,847 pointwise bounds, 66,429 integral bounds, 132,858 exceedance bounds, 1,001 supremum witnesses and 32 status assignments. See `records/R170_Open_World_Remainder_20261008/CURRENT_HANDOFF.md` for exact recovery coordinates.
+
+Next question: which finite hardware, typed program, bounded sensorimotor or biological safety specifications provide a genuine universal target-range proof rather than a fitted cover? Preserve the object/time/signature/actuality/measure distinctions and all C1/`B_min`/basal/owner boundaries.
+
 ## R169 current handoff — actual-route calibration and falsification
 
 R169 is the latest substantive round. Its actual-context graph uses safe reversible fidelity-checked same-lineage interventions and frozen consumer-law geometry. Uniform valid edge budgets compose by shortest paths; for the R168 intervention effect, `|e(z)-e(z')| <= 2D_B(z,z')`, yielding the direct finite route envelope. Held-out lower effects above a certified edge/path budget falsify the calibration certificate. The separate gauge theorem blocks identification of `d` and `L` scales from envelope data alone.

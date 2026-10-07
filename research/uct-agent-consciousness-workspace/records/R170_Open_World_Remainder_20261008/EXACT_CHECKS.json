@@ -44,5 +44,16 @@
     "Finite enumeration checks bounded consequences, not physical target coverage or theory truth.",
     "Sharpness is over the declared envelope information class, not a consumer-kernel realizability theorem.",
     "Uniform finite weights do not establish any real target measure."
-  ]
+  ],
+  "claim_limits": {
+    "actual_target_domain_validated": false,
+    "actual_cell_cover_validated": false,
+    "target_measure_validated": false,
+    "remainder_mass_validated": false,
+    "complete_route_inventory_validated": false,
+    "complete_organization_identified": false,
+    "C1_derived": false,
+    "B_min_validated": false,
+    "basal_experience_gate": false
+  }
 }

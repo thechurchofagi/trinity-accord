@@ -100,6 +100,17 @@ result = {
         "Sharpness is over the declared envelope information class, not a consumer-kernel realizability theorem.",
         "Uniform finite weights do not establish any real target measure.",
     ],
+    "claim_limits": {
+        "actual_target_domain_validated": False,
+        "actual_cell_cover_validated": False,
+        "target_measure_validated": False,
+        "remainder_mass_validated": False,
+        "complete_route_inventory_validated": False,
+        "complete_organization_identified": False,
+        "C1_derived": False,
+        "B_min_validated": False,
+        "basal_experience_gate": False,
+    },
 }
 out = HERE / "EXACT_CHECKS.json"
 out.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")

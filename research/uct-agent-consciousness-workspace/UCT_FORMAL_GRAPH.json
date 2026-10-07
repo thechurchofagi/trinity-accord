@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R169-v1.0",
+  "revision": "R170-v1.0",
   "date": "2026-10-08",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -20644,6 +20644,384 @@
           }
         ]
       }
+    },
+    {
+      "id": "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+      "kind": "PHYSICAL_TARGET_DOMAIN_AND_MEASURE_CONTRACT",
+      "label": "Predeclared Physical Target Domain and Admission Rule",
+      "statement": "A target claim fixes before outcomes the physically admissible context domain T, an admission rule with bearer/time/sort/realization provenance, and—only for mean or mass claims—an independently justified probability measure mu; observed samples, task labels and post-hoc exclusions do not define T or mu.",
+      "domain": "One named R168-R169 effect application and its intended physical context population.",
+      "scope": "One named R168-R169 effect application and its intended physical context population.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §2",
+      "source_lineage": "UCT-I physical-witness discipline and R169 actual-node identity, extended to target-domain admission and measure typing.",
+      "status": "DECLARED_TARGET_DOMAIN_CONTRACT_NOT_INSTANTIATED",
+      "proof": "Contract definition; every quantitative conclusion requires the separately typed coverage premises below.",
+      "counterexamples_and_limits": "A convenience sample or laboratory distribution can omit a physically admissible safety-critical state; no canonical measure follows from T alone.",
+      "formal_contract_R170": {
+        "object_domain": "actual target contexts and optional target measure",
+        "quantifiers": "every context quantified by the target claim; mu only where explicitly fixed",
+        "bearer_time_signature": "same bearer lineage, consumer, timing, sort and realization identity as R169",
+        "source_anchor": {
+          "path": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md",
+          "sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+          "locator": "§2"
+        },
+        "purpose": "Prevent tested samples from silently becoming the full physical domain",
+        "thought_experiments": "§10",
+        "open_obligations": [
+          "R170-G1",
+          "R170-G4"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R170:CELL_ROUTE_COVER_CERTIFICATE",
+      "kind": "FINITE_STRUCTURAL_CELL_TO_ANCHOR_CERTIFICATE",
+      "label": "Independently Bounded Cells with Actual Routes to Certified Anchors",
+      "statement": "Each certified cell has an independently bounded physical admission range, an actual R169 anchor, and a universal same-lineage route or structural channel budget R_j(z)<=r_j for every admitted context; sampled clouds, fitted interpolation and success-selected cells do not qualify.",
+      "domain": "A finite family of physical cells inside one R170 target domain and one frozen R169 consumer geometry.",
+      "scope": "A finite family of physical cells inside one R170 target domain and one frozen R169 consumer geometry.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §3",
+      "source_lineage": "R169 actual route and upper-budget contract plus a narrower universal range proof for continuum cells.",
+      "status": "DECLARED_CELL_COVER_CERTIFICATE_NOT_INSTANTIATED",
+      "proof": "For every admitted z, the R169 effect modulus transports the anchor envelope by at most 2R_j(z); overlapping valid cells may be minimized.",
+      "counterexamples_and_limits": "Endpoint checks do not bound an interior gate; proving a cell range is a universal structural obligation but need not reconstruct the full mechanism.",
+      "formal_contract_R170": {
+        "object_domain": "actual continuum or finite cells and R169 anchors",
+        "quantifiers": "every context admitted by every used cell under one universal radius event",
+        "bearer_time_signature": "same actual bearer lineage, consumer, pre-compensation interval and discriminator class",
+        "source_anchor": {
+          "path": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md",
+          "sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+          "locator": "§3"
+        },
+        "purpose": "Cover continuum interiors without pretending finite sampled nodes are dense enough",
+        "thought_experiments": "§10",
+        "open_obligations": [
+          "R170-G2",
+          "R170-G3"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R170:OPEN_WORLD_REMAINDER_PARTITION",
+      "kind": "EXPLICIT_COVERED_UNKNOWN_DOMAIN_DECOMPOSITION",
+      "label": "Covered Domain C and Unresolved Remainder U",
+      "statement": "For the frozen target T and certified cells C_j, define C as their union and U=T\\C; U remains part of the target and receives no route or cell conclusion unless a separate certificate applies.",
+      "domain": "One common target-domain contract and cell family.",
+      "scope": "One common target-domain contract and cell family.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §3",
+      "source_lineage": "Set decomposition attached to R169's domain-relative route boundary.",
+      "status": "EXACT_DEFINITION_WITH_OPEN_EMPIRICAL_MEMBERSHIP",
+      "proof": "C=union_j C_j and U=T minus C are disjoint and cover T by definition; physical correctness of membership remains a contract premise.",
+      "counterexamples_and_limits": "Relabeling failed challenges outside T after observation invalidates the target contract; U is not assumed empty or harmless.",
+      "formal_contract_R170": {
+        "object_domain": "covered and unresolved actual target contexts",
+        "quantifiers": "every z in predeclared T belongs to exactly one of C or U",
+        "bearer_time_signature": "same target identity and cell provenance",
+        "source_anchor": {
+          "path": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md",
+          "sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+          "locator": "§3"
+        },
+        "purpose": "Represent unknown contexts explicitly instead of assigning them zero effect",
+        "thought_experiments": "§10",
+        "open_obligations": [
+          "R170-G1",
+          "R170-G2"
+        ],
+        "machine_formalized": true,
+        "premise_routes": [
+          {
+            "rule": "r170_remainder_partition",
+            "all_of": [
+              "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+              "R170:CELL_ROUTE_COVER_CERTIFICATE"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE",
+      "kind": "EXACT_INFORMATION_CLASS_ENVELOPE_THEOREM",
+      "label": "Certified Envelope on C and Range Cap M on U",
+      "statement": "If e<=E_C on C and only 0<=e<=M is known on U, then the sharp pointwise envelope over exactly that information class equals E_C on C and M on U; no smaller pointwise upper follows without an added premise.",
+      "domain": "One frozen bounded R168 effect, R169/cell envelope on C and explicit R170 remainder U.",
+      "scope": "One frozen bounded R168 effect, R169/cell envelope on C and explicit R170 remainder U.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §4",
+      "source_lineage": "Elementary case split and extremal envelope witness typed to the R168-R170 objects.",
+      "status": "PROVED_EXACTLY_OVER_DECLARED_INFORMATION_CLASS",
+      "proof": "Upper validity follows by cases; e=E_C on C and e=M on U attains the envelope within the stated information class.",
+      "counterexamples_and_limits": "Information-class sharpness is not a proof that every extremal function is realized by one consumer-law kernel family.",
+      "formal_contract_R170": {
+        "object_domain": "bounded contextual effect and piecewise domain",
+        "quantifiers": "every z in T and every effect compatible with the declared pointwise premises",
+        "bearer_time_signature": "same effect, target and simultaneous envelope-validity event",
+        "source_anchor": {
+          "path": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md",
+          "sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+          "locator": "§4"
+        },
+        "purpose": "State the strongest honest pointwise result under an explicit remainder",
+        "thought_experiments": "§10",
+        "open_obligations": [
+          "R170-G5"
+        ],
+        "machine_formalized": true,
+        "premise_routes": [
+          {
+            "rule": "r170_pointwise_remainder_envelope",
+            "all_of": [
+              "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+              "R169:DIRECT_ROUTE_ENVELOPE",
+              "R170:OPEN_WORLD_REMAINDER_PARTITION"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+      "kind": "EXACT_OPEN_WORLD_AMPLITUDE_NONENTAILMENT",
+      "label": "Any Nonempty Unbounded Remainder Preserves Supremum M",
+      "statement": "If U is nonempty and has no separate amplitude bridge, the sharp general global bound is sup_T e<=M even when mu(U) is arbitrarily small or zero; a nontrivial global amplitude bound needs U empty or another pointwise certificate on U.",
+      "domain": "Any R170 target with a nonempty unresolved remainder and inherited effect cap M.",
+      "scope": "Any R170 target with a nonempty unresolved remainder and inherited effect cap M.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §§4,6",
+      "source_lineage": "Extremal witness on the unresolved set; preserves R168's mass-versus-amplitude distinction.",
+      "status": "PROVED_EXACTLY",
+      "proof": "Set e=M at one unresolved context and any compatible values on C; its measure does not alter the pointwise supremum.",
+      "counterexamples_and_limits": "Almost-everywhere control is not pointwise control; excluding a null context requires a domain, continuity or amplitude premise.",
+      "formal_contract_R170": {
+        "object_domain": "global amplitude over an open target domain",
+        "quantifiers": "every nonempty U without an added pointwise bound",
+        "bearer_time_signature": "same target T; measure-independent pointwise statement",
+        "source_anchor": {
+          "path": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md",
+          "sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+          "locator": "§§4,6"
+        },
+        "purpose": "Block small unknown mass from becoming small unknown amplitude",
+        "thought_experiments": "§10",
+        "open_obligations": [
+          "R170-G5"
+        ],
+        "machine_formalized": true,
+        "premise_routes": [
+          {
+            "rule": "r170_global_supremum_obstruction",
+            "all_of": [
+              "R170:OPEN_WORLD_REMAINDER_PARTITION",
+              "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R170:MEAN_REMAINDER_BOUND",
+      "kind": "EXACT_MEASURE_WEIGHTED_REMAINDER_THEOREM",
+      "label": "Sharp Mean Bound with Explicit Unknown Mass",
+      "statement": "For a fixed justified target probability measure mu, integral_T e is at most integral_C E_C plus M mu(U); if E_C<=b and mu(U)<=epsilon, it is at most b+(M-b)epsilon, without any conclusion about sup_U e.",
+      "domain": "One R170 target with fixed mu, valid covered envelope and explicit remainder.",
+      "scope": "One R170 target with fixed mu, valid covered envelope and explicit remainder.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §5",
+      "source_lineage": "Elementary integration of the sharp piecewise envelope.",
+      "status": "PROVED_EXACTLY_OVER_DECLARED_INFORMATION_CLASS",
+      "proof": "Integrate e<=E_C on C and e<=M on U; the sharp envelope witness attains equality in the information class.",
+      "counterexamples_and_limits": "A convenience measure, dependent confidence event or sample frequency without a sampling-frame proof cannot discharge mu(U)<=epsilon.",
+      "formal_contract_R170": {
+        "object_domain": "measure-weighted contextual effect",
+        "quantifiers": "mu-almost every z under one fixed target measure and simultaneous bound event",
+        "bearer_time_signature": "same T, mu, effect and envelope validity event",
+        "source_anchor": {
+          "path": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md",
+          "sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+          "locator": "§5"
+        },
+        "purpose": "Permit honest average claims without pretending domain closure",
+        "thought_experiments": "§10",
+        "open_obligations": [
+          "R170-G4",
+          "R170-G6"
+        ],
+        "machine_formalized": true,
+        "premise_routes": [
+          {
+            "rule": "r170_mean_remainder_bound",
+            "all_of": [
+              "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+              "R170:OPEN_WORLD_REMAINDER_PARTITION",
+              "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R170:EXCEEDANCE_REMAINDER_BOUND",
+      "kind": "EXACT_THRESHOLD_MASS_REMAINDER_THEOREM",
+      "label": "Exceeded-Effect Mass Is Covered Exceedance Plus Remainder",
+      "statement": "For tau<M, {e>tau} is contained in {z in C:E_C(z)>tau} union U, so its mu-mass is bounded by the covered-envelope exceedance mass plus mu(U), capped at one; this is not a maximum-effect bound.",
+      "domain": "One fixed R170 target measure, threshold and valid pointwise covered envelope.",
+      "scope": "One fixed R170 target measure, threshold and valid pointwise covered envelope.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §5",
+      "source_lineage": "Set inclusion applied to the R170 sharp piecewise envelope and R168 mass-only boundary.",
+      "status": "PROVED_EXACTLY_OVER_DECLARED_INFORMATION_CLASS",
+      "proof": "A covered point with e>tau must have E_C>tau; every other exceedance lies in U; take mu.",
+      "counterexamples_and_limits": "An epsilon-mass unresolved state may still have effect M; threshold and measure must be frozen.",
+      "formal_contract_R170": {
+        "object_domain": "threshold-exceedance set under target measure",
+        "quantifiers": "every frozen tau<M and every compatible effect",
+        "bearer_time_signature": "same T, mu, effect, threshold and validity event",
+        "source_anchor": {
+          "path": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md",
+          "sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+          "locator": "§5"
+        },
+        "purpose": "Separate affected mass from worst-case amplitude",
+        "thought_experiments": "§10",
+        "open_obligations": [
+          "R170-G4",
+          "R170-G6"
+        ],
+        "machine_formalized": true,
+        "premise_routes": [
+          {
+            "rule": "r170_exceedance_remainder_bound",
+            "all_of": [
+              "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+              "R170:OPEN_WORLD_REMAINDER_PARTITION",
+              "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R170:COVERAGE_CHALLENGE_FALSIFIER",
+      "kind": "PROSPECTIVE_DOMAIN_AND_REMAINDER_FALSIFIER",
+      "label": "Held-Out Boundary Contexts Can Refute Cell or Mass Coverage",
+      "statement": "A predeclared held-out target context refutes a cell certificate if admission, route identity or budget fails, and refutes a remainder-mass certificate if valid target-frame evidence exceeds its frozen epsilon; neither refutation is a no-mediator, no-experience or anti-C1 result.",
+      "domain": "One frozen target/cell/remainder plan and independently generated actual boundary challenges.",
+      "scope": "One frozen target/cell/remainder plan and independently generated actual boundary challenges.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §7",
+      "source_lineage": "R169 held-out calibration falsifier extended from edge budgets to admission and remainder mass.",
+      "status": "DECLARED_FALSIFIER_NOT_EXECUTED",
+      "proof": "A valid challenge violating a universal cell clause or simultaneous mass upper bound makes the corresponding certificate false.",
+      "counterexamples_and_limits": "Passing finitely many challenges does not prove an unbounded target complete; shared bias and post-hoc challenges invalidate the inference.",
+      "formal_contract_R170": {
+        "object_domain": "held-out actual target contexts and frozen coverage claims",
+        "quantifiers": "one valid violation refutes its certificate; no converse completeness inference",
+        "bearer_time_signature": "same target, admission, consumer, timing and challenge frame",
+        "source_anchor": {
+          "path": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md",
+          "sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+          "locator": "§7"
+        },
+        "purpose": "Make open-world coverage rejectable rather than decorative",
+        "thought_experiments": "§10",
+        "open_obligations": [
+          "R170-G6",
+          "R170-G7"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R170:OPEN_WORLD_COVERAGE_TRIAGE",
+      "kind": "FIVE_WAY_DOMAIN_COVERAGE_DECISION_CONTRACT",
+      "label": "Invalid, Refuted, Closed-Amplitude, Open-Mass, or Unresolved",
+      "statement": "Invalid target/admission/measure/measurement gives INVALID_OPEN_WORLD_PROTOCOL; a valid challenge violation gives COVERAGE_CERTIFICATE_REFUTED; proven empty remainder with valid envelopes gives CLOSED_DOMAIN_AMPLITUDE_CERTIFIED; valid mu(U)<=epsilon with retained amplitude M gives OPEN_WORLD_MASS_CERTIFIED; every other case is UNRESOLVED.",
+      "domain": "One named target-domain, cell and optional measure certificate.",
+      "scope": "One named target-domain, cell and optional measure certificate.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §8",
+      "source_lineage": "R169 calibration triage refined to separate domain closure from measure-weighted open-world certification.",
+      "status": "DECLARED_BOUNDED_DECISION_CONTRACT",
+      "proof": "Priority logic is exhaustively checked over 32 Boolean assignments; theorem strength remains tied to the exact certified state.",
+      "counterexamples_and_limits": "OPEN_WORLD_MASS_CERTIFIED is not weaker wording for amplitude closure; it deliberately retains sup_U e<=M only.",
+      "formal_contract_R170": {
+        "object_domain": "one frozen target/cell/remainder certificate",
+        "quantifiers": "validity first, then refutation, then closed or measure-weighted certification, else unresolved",
+        "bearer_time_signature": "same T, cells, mu, effect and challenge plan",
+        "source_anchor": {
+          "path": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md",
+          "sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+          "locator": "§8"
+        },
+        "purpose": "Keep amplitude, mean and mass conclusions separately typed",
+        "thought_experiments": "§10",
+        "open_obligations": [
+          "R170-G1",
+          "R170-G2",
+          "R170-G4",
+          "R170-G6",
+          "R170-G7"
+        ],
+        "machine_formalized": true,
+        "premise_routes": [
+          {
+            "rule": "r170_open_world_coverage_triage",
+            "all_of": [
+              "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+              "R170:CELL_ROUTE_COVER_CERTIFICATE",
+              "R170:OPEN_WORLD_REMAINDER_PARTITION",
+              "R170:COVERAGE_CHALLENGE_FALSIFIER"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R170:R169_OPEN_WORLD_APPLICATION_BOUNDARY",
+      "kind": "CONDITIONAL_OPEN_WORLD_REFINEMENT_AND_EXPERIENTIAL_BOUNDARY",
+      "label": "R170 Refines Route-Coverage Claims Only",
+      "statement": "If the complete R166-R169 witness and a valid R170 target/cell/remainder certificate hold on one common episode, closed-domain amplitude or open-world mean/mass conclusions may be used exactly as typed; no result establishes complete neural organization, derives C1 or B_min, adds a basal gate or selects an exclusive owner.",
+      "domain": "One common actual P/I/K/D/rho episode, target domain and R166-R170 certificate package.",
+      "scope": "One common actual P/I/K/D/rho episode, target domain and R166-R170 certificate package.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §11",
+      "source_lineage": "Conditional refinement of R169's application boundary with UCT-I physical-witness, overlap and semantic limits retained.",
+      "status": "MANUAL_CONDITIONAL_APPLICATION_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Bind target, cells, remainder, measure and all earlier route objects to the same application and use only the conclusion licensed by the triage state.",
+      "counterexamples_and_limits": "A small remainder mass can coexist with a maximal rare effect; neither map/code success nor coverage statistics identify experience or familiar mineness.",
+      "formal_contract_R170": {
+        "object_domain": "one actual route witness plus target-domain remainder certificate",
+        "quantifiers": "every all-of premise on one application; no necessity, global mechanism or semantic conclusion",
+        "bearer_time_signature": "same P/I/K/D/rho lineage, target, consumer, interval and signature across R166-R170",
+        "source_anchor": {
+          "path": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md",
+          "sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+          "locator": "§11"
+        },
+        "purpose": "Advance actual-organization evidence while preserving C1 and experience-internal mineness boundaries",
+        "thought_experiments": "§10",
+        "open_obligations": [
+          "R170-G1",
+          "R170-G2",
+          "R170-G4",
+          "R170-G7",
+          "R170-G8"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r170_open_world_application_boundary",
+            "all_of": [
+              "R169:R168_ROUTE_APPLICATION_BOUNDARY",
+              "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+              "R170:MEAN_REMAINDER_BOUND",
+              "R170:EXCEEDANCE_REMAINDER_BOUND",
+              "R170:OPEN_WORLD_COVERAGE_TRIAGE"
+            ]
+          }
+        ]
+      }
     }
   ],
   "rules": [
@@ -33690,6 +34068,194 @@
         "source_sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r170_remainder_partition",
+      "all_of": [
+        "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+        "R170:CELL_ROUTE_COVER_CERTIFICATE"
+      ],
+      "conclusion": "R170:OPEN_WORLD_REMAINDER_PARTITION",
+      "statement": "The predeclared target and independently certified cell family jointly define the covered domain and explicit unresolved remainder.",
+      "proof_sketch": "Take the cell union inside T and retain its complement without assigning it zero effect.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §3",
+      "kind": "EXACT_DEFINITIONAL_DEDUCTION",
+      "review": "MANUAL_ALL_OF_TARGET_AND_CELL_RANGE_AUDIT",
+      "formal_contract_R170": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same target T",
+          "same physical cell predicates",
+          "no post-hoc exclusion",
+          "same identity fields"
+        ],
+        "quantification": "every z in T",
+        "proof_location": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §3",
+        "source_sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r170_pointwise_remainder_envelope",
+      "all_of": [
+        "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+        "R169:DIRECT_ROUTE_ENVELOPE",
+        "R170:OPEN_WORLD_REMAINDER_PARTITION"
+      ],
+      "conclusion": "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE",
+      "statement": "The bounded effect, valid covered route envelope and explicit remainder jointly yield the sharp piecewise information-class envelope.",
+      "proof_sketch": "Use E_C on C and M on U; the piecewise upper function is the extremal information-class witness.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §4",
+      "kind": "EXACT_INFORMATION_CLASS_DEDUCTION",
+      "review": "MANUAL_ALL_OF_EFFECT_COVERED_ENVELOPE_AND_REMAINDER_AUDIT",
+      "formal_contract_R170": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same effect and M",
+          "same C/U partition",
+          "simultaneous valid E_C",
+          "no kernel-realizability promotion"
+        ],
+        "quantification": "every compatible effect and every z in T",
+        "proof_location": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §4",
+        "source_sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r170_global_supremum_obstruction",
+      "all_of": [
+        "R170:OPEN_WORLD_REMAINDER_PARTITION",
+        "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+      ],
+      "conclusion": "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+      "statement": "A nonempty unresolved remainder plus the sharp piecewise envelope jointly preserve the global amplitude cap M as the best general bound.",
+      "proof_sketch": "Place effect M at one point of U; its measure is irrelevant to the supremum.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §§4,6",
+      "kind": "EXACT_NONENTAILMENT_DEDUCTION",
+      "review": "MANUAL_ALL_OF_NONEMPTY_REMAINDER_AND_AMPLITUDE_AUDIT",
+      "formal_contract_R170": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same nonempty U",
+          "no extra pointwise bridge on U",
+          "same cap M"
+        ],
+        "quantification": "every nonempty unresolved remainder",
+        "proof_location": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §§4,6",
+        "source_sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r170_mean_remainder_bound",
+      "all_of": [
+        "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+        "R170:OPEN_WORLD_REMAINDER_PARTITION",
+        "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+      ],
+      "conclusion": "R170:MEAN_REMAINDER_BOUND",
+      "statement": "The fixed target measure, explicit partition and pointwise envelope jointly yield the exact mean remainder bound.",
+      "proof_sketch": "Integrate the piecewise upper envelope under the same target measure.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §5",
+      "kind": "EXACT_MEASURE_DEDUCTION",
+      "review": "MANUAL_ALL_OF_MEASURE_PARTITION_AND_ENVELOPE_AUDIT",
+      "formal_contract_R170": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same independently justified mu",
+          "same C/U",
+          "same E_C/M",
+          "simultaneous validity"
+        ],
+        "quantification": "mu-almost every target context",
+        "proof_location": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §5",
+        "source_sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r170_exceedance_remainder_bound",
+      "all_of": [
+        "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+        "R170:OPEN_WORLD_REMAINDER_PARTITION",
+        "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE"
+      ],
+      "conclusion": "R170:EXCEEDANCE_REMAINDER_BOUND",
+      "statement": "The fixed target measure, explicit partition and pointwise envelope jointly bound threshold-exceedance mass by covered-envelope exceedance plus the remainder.",
+      "proof_sketch": "Apply the set inclusion {e>tau} subset {C and E_C>tau} union U and take mu.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §5",
+      "kind": "EXACT_SET_INCLUSION_DEDUCTION",
+      "review": "MANUAL_ALL_OF_THRESHOLD_MEASURE_AND_ENVELOPE_AUDIT",
+      "formal_contract_R170": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same frozen tau",
+          "same mu",
+          "same C/U and E_C",
+          "no amplitude promotion"
+        ],
+        "quantification": "every tau<M and compatible effect",
+        "proof_location": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §5",
+        "source_sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r170_open_world_coverage_triage",
+      "all_of": [
+        "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+        "R170:CELL_ROUTE_COVER_CERTIFICATE",
+        "R170:OPEN_WORLD_REMAINDER_PARTITION",
+        "R170:COVERAGE_CHALLENGE_FALSIFIER"
+      ],
+      "conclusion": "R170:OPEN_WORLD_COVERAGE_TRIAGE",
+      "statement": "The target, cell, explicit remainder and challenge contract jointly require five-way open-world status logic with distinct closed-amplitude and open-mass certified states.",
+      "proof_sketch": "Invalidity dominates, then valid refutation; proven closure supports amplitude, valid remainder mass supports only mean/exceedance, and the complement is unresolved.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §§7-8",
+      "kind": "DECISION_CONTRACT_SYNTHESIS",
+      "review": "MANUAL_ALL_OF_DOMAIN_CELL_REMAINDER_AND_CHALLENGE_AUDIT",
+      "formal_contract_R170": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same frozen T/cells/mu/challenges",
+          "closure and mass certificates kept distinct",
+          "invalidity not promoted to absence"
+        ],
+        "quantification": "one certificate; one valid violation refutes; certification uses exact declared scope",
+        "proof_location": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §§7-8",
+        "source_sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r170_open_world_application_boundary",
+      "all_of": [
+        "R169:R168_ROUTE_APPLICATION_BOUNDARY",
+        "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+        "R170:MEAN_REMAINDER_BOUND",
+        "R170:EXCEEDANCE_REMAINDER_BOUND",
+        "R170:OPEN_WORLD_COVERAGE_TRIAGE"
+      ],
+      "conclusion": "R170:R169_OPEN_WORLD_APPLICATION_BOUNDARY",
+      "statement": "The full R169 application and every R170 amplitude/mean/mass/status distinction jointly permit only the exactly typed open-world refinement on one actual episode.",
+      "proof_sketch": "Bind every object to one application, use the status-specific conclusion, and preserve all C1/B_min/basal/owner boundaries.",
+      "source": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §11",
+      "kind": "CONDITIONAL_APPLICATION_DEDUCTION",
+      "review": "MANUAL_ALL_OF_R169_R170_ACTUALITY_MEASURE_AND_SEMANTIC_BOUNDARY_AUDIT",
+      "formal_contract_R170": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same actual P/I/K/D/rho",
+          "same target/cells/remainder/measure",
+          "all earlier route premises",
+          "no reverse inference to C1/B_min/basal experience/unique owner"
+        ],
+        "quantification": "every premise on one common application; no complete-mechanism inference",
+        "proof_location": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md §11",
+        "source_sha256": "ede04b91770c2d5b9b9e54d9f8533e93d7da8ae1bd7fdef92d2f0679489338a5",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -34337,6 +34903,26 @@
       "from": "R169:ROUTE_CALIBRATION_TRIAGE",
       "to": "A:U1",
       "relation": "no route validity, smoothness or coverage clause is added to basal-experience existence"
+    },
+    {
+      "from": "R170:R169_OPEN_WORLD_APPLICATION_BOUNDARY",
+      "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+      "relation": "context only: domain coverage refines physical evidence and does not replace C1 or B_min"
+    },
+    {
+      "from": "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+      "to": "R168:AMPLITUDE_MASS_SEPARATION",
+      "relation": "obstruction retained: small or zero remainder mass does not imply a nontrivial pointwise amplitude bound"
+    },
+    {
+      "from": "R170:OPEN_WORLD_COVERAGE_TRIAGE",
+      "to": "A:U1",
+      "relation": "no target coverage, cell radius, measure or remainder clause is added to basal-experience existence"
+    },
+    {
+      "from": "R170:CELL_ROUTE_COVER_CERTIFICATE",
+      "to": "R169:PARTIAL_VIEW_DIRECT_RADIUS_BOUND",
+      "relation": "non-deductive application refinement: cell certificates can discharge continuum radius only when their universal physical range premise is valid"
     }
   ],
   "prohibited_inferences_D": [
@@ -35064,6 +35650,24 @@
     "actual_route_graph_validated": false,
     "actual_edge_interventions_validated": false,
     "continuum_coverage_validated": false,
+    "complete_route_inventory_validated": false,
+    "B_min_validated": false,
+    "C1_derived": false,
+    "basal_experience_gate_added": false
+  },
+  "research_R170": {
+    "start_head": "021ff63e99aa36b7c795323216628ec205060836",
+    "checkpoint_head": "ed51f5d1eccf4f54fd517bb1056b04f4c189eec2",
+    "parent_graph_sha256": "86b9140520d773fbf8e31543b6517d21896330f484b6590f2b50b9f3321669ad",
+    "note": "records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md",
+    "new_nodes": 10,
+    "new_rules": 7,
+    "new_context_links": 4,
+    "status": "SHARP_OPEN_WORLD_REMAINDER_AMPLITUDE_MEAN_MASS_BOUNDARY",
+    "actual_target_domain_validated": false,
+    "actual_cell_cover_validated": false,
+    "target_measure_validated": false,
+    "remainder_mass_validated": false,
     "complete_route_inventory_validated": false,
     "B_min_validated": false,
     "C1_derived": false,

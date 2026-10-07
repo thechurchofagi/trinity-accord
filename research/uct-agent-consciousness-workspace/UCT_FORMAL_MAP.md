@@ -1,3 +1,11 @@
+## R170 extension — explicit open-world remainder and conclusion-strength separation
+
+R170-v1.0 has **487 nodes / 234 rules / 133 context links**. Ten nodes, seven explicit `all_of` rules and four non-deductive context links extend the exact R169 prefixes. The target-domain contract freezes physically admissible contexts, admission identity and an optional target measure. Certified cells require universal physical ranges and actual anchor/route or structural-channel radii. Their union is `C`; every other target context stays in `U=T\\C`.
+
+The sharp information-class pointwise envelope is `E_C` on C and M on U. Any nonempty U without an added pointwise bridge preserves M as the sharp global supremum bound. A fixed justified measure yields the sharp mean bound `integral_C E_C + M mu(U)` and the exceedance inclusion `{e>tau} subset {C and E_C>tau} union U`. Small unknown mass is therefore not small unknown amplitude.
+
+The five-way triage separates invalid protocol, refuted coverage, closed-domain amplitude certification, open-world mass certification and unresolved cases. The final application retains all R166-R169 premises and neither proves actual domain/measure/route closure nor derives C1 or `B_min`; no basal-experience threshold or exclusive owner is introduced. [English note](records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md), [proof ledger](records/R170_Open_World_Remainder_20261008/PROOF_LEDGER.json), [gap ledger](records/R170_Open_World_Remainder_20261008/GAP_LEDGER.json), [map audit](records/R170_Open_World_Remainder_20261008/MAP_AUDIT.json), [exact checks](records/R170_Open_World_Remainder_20261008/EXACT_CHECKS.json).
+
 ## R169 extension — actual route composition, gauge limit and calibration falsifier
 
 R169-v1.0 has **477 nodes / 227 rules / 129 context links**. Nine nodes, five explicit `all_of` rules and four non-deductive context links extend the exact R168 prefixes. The route object is an actual graph: each node fixes bearer, time, sort and realization identity; each edge is an executable safe reversible fidelity-checked same-lineage context intervention with a valid frozen consumer-law upper budget.

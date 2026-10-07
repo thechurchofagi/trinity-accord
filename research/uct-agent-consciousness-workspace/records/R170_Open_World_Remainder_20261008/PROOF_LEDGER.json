@@ -1,0 +1,89 @@
+{
+  "schema": "UCT_R170_PROOF_LEDGER/v1",
+  "entries": [
+    {
+      "id": "R170-P1",
+      "node": "R170:SHARP_POINTWISE_REMAINDER_ENVELOPE",
+      "type": "exact_information_class_envelope",
+      "full_claim": "The piecewise envelope E_C on covered C and M on unresolved U is valid and pointwise sharp over exactly the declared bounded-envelope information class.",
+      "domain": "One bounded R168 effect, one valid covered envelope and one explicit C/U partition.",
+      "all_premises": ["0<=e<=M on T", "e<=E_C on C", "no further constraint on U"],
+      "proof_or_source": "Note §4; case split and extremal witness; 323,847 exact pointwise checks.",
+      "counterexample_or_limit": "Sharpness is not a consumer-kernel realizability theorem.",
+      "status": "PROVED_EXACTLY_OVER_DECLARED_INFORMATION_CLASS",
+      "thought_experiment_role": "Ancestor/formation keeps a rare new branch in U rather than treating it as absent."
+    },
+    {
+      "id": "R170-P2",
+      "node": "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+      "type": "exact_open_world_nonentailment",
+      "full_claim": "Any nonempty unresolved remainder without an added pointwise bridge preserves M as the sharp global supremum bound, regardless of remainder mass.",
+      "domain": "Every nonempty U under the inherited cap M.",
+      "all_premises": ["U nonempty", "only e<=M on U", "global pointwise supremum target"],
+      "proof_or_source": "Note §§4,6; set e=M at one point of U; 1,001 finite witnesses.",
+      "counterexample_or_limit": "An empty U or a separate pointwise certificate can yield a lower bound.",
+      "status": "PROVED_EXACTLY",
+      "thought_experiment_role": "A rare extreme human/device configuration can have tiny mass and maximal amplitude."
+    },
+    {
+      "id": "R170-P3",
+      "node": "R170:MEAN_REMAINDER_BOUND",
+      "type": "exact_measure_weighted_remainder_theorem",
+      "full_claim": "For fixed mu, integral e is bounded by integral_C E_C plus M mu(U), sharply over the information class; E_C<=b and mu(U)<=epsilon imply b+(M-b)epsilon.",
+      "domain": "One independently justified target probability measure and simultaneous covered/remainder bounds.",
+      "all_premises": ["fixed mu", "valid C/U partition", "pointwise covered envelope", "range cap M"],
+      "proof_or_source": "Note §5; integrate the piecewise envelope; 66,429 exact integral checks.",
+      "counterexample_or_limit": "A convenience or dependent measure does not discharge the premise; mean control does not bound the supremum.",
+      "status": "PROVED_EXACTLY_OVER_DECLARED_INFORMATION_CLASS",
+      "thought_experiment_role": "A finite calculator address distribution can weight undocumented states without erasing them."
+    },
+    {
+      "id": "R170-P4",
+      "node": "R170:EXCEEDANCE_REMAINDER_BOUND",
+      "type": "exact_threshold_set_inclusion",
+      "full_claim": "For tau<M, exceedance mass is bounded by covered-envelope exceedance mass plus remainder mass.",
+      "domain": "One fixed tau, target measure, C/U partition and compatible effect.",
+      "all_premises": ["same fixed mu", "same tau", "e<=E_C on C", "all other points lie in U"],
+      "proof_or_source": "Note §5; set inclusion; 132,858 exact exceedance checks.",
+      "counterexample_or_limit": "The bound permits effect M throughout U and does not imply amplitude control.",
+      "status": "PROVED_EXACTLY_OVER_DECLARED_INFORMATION_CLASS",
+      "thought_experiment_role": "A copied interface can retain small hidden-state mass while those states remain high effect."
+    },
+    {
+      "id": "R170-P5",
+      "node": "R170:CELL_ROUTE_COVER_CERTIFICATE",
+      "type": "conditional_continuum_cell_lift",
+      "full_claim": "A universal actual route/channel radius from every admitted cell context to an R169 anchor transports the anchor envelope by at most twice that radius.",
+      "domain": "One physically bounded cell, matching actual anchor and frozen consumer geometry.",
+      "all_premises": ["independent universal cell range", "same-lineage actual route/channel", "R_j(z)<=r_j for every admitted z", "valid anchor envelope"],
+      "proof_or_source": "Note §3; direct application of R169's effect modulus.",
+      "counterexample_or_limit": "Endpoints or fitted interpolation do not prove the universal within-cell premise.",
+      "status": "PROVED_CONDITIONALLY_NOT_EMPIRICALLY_INSTANTIATED",
+      "thought_experiment_role": "A verified address decoder can cover calculator states without reconstructing the whole device."
+    },
+    {
+      "id": "R170-P6",
+      "node": "R170:COVERAGE_CHALLENGE_FALSIFIER",
+      "type": "prospective_domain_coverage_falsifier",
+      "full_claim": "A valid held-out target context that violates frozen admission/route/budget clauses refutes the cell certificate; valid excess remainder mass refutes its epsilon certificate.",
+      "domain": "One frozen target/cell/mass plan and independent boundary challenges.",
+      "all_premises": ["same target specification", "valid held-out generation", "valid route or mass evidence", "frozen certificate"],
+      "proof_or_source": "Note §7; violation of a universal or simultaneous upper clause falsifies the conjunction.",
+      "counterexample_or_limit": "Passing finite challenges does not prove unbounded-domain completeness; invalid challenges prove nothing.",
+      "status": "DECLARED_FALSIFIER_NOT_EXECUTED",
+      "thought_experiment_role": "Swap/copy cases challenge actual hidden-state admission rather than interface similarity."
+    },
+    {
+      "id": "R170-P7",
+      "node": "R170:R169_OPEN_WORLD_APPLICATION_BOUNDARY",
+      "type": "conditional_application_refinement",
+      "full_claim": "The complete R166-R169 package plus valid R170 triage licenses only the exact closed-amplitude or open-mass conclusion on one common episode.",
+      "domain": "One common actual P/I/K/D/rho, target and certificate package.",
+      "all_premises": ["all R166-R169 physical premises", "valid target/cell/remainder objects", "correct R170 status", "no semantic reverse inference"],
+      "proof_or_source": "Note §§8,11 and the explicit all-of application rule.",
+      "counterexample_or_limit": "No actual target inventory, neural completeness, C1 derivation, B_min, basal gate or unique owner.",
+      "status": "PROVED_CONDITIONALLY_NOT_EMPIRICALLY_INSTANTIATED",
+      "thought_experiment_role": "All four families audit open-world actuality and the exact strength of each conclusion."
+    }
+  ]
+}

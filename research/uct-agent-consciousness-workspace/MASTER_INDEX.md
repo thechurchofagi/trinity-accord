@@ -1,3 +1,14 @@
+## R170 — open-world remainder certificates
+
+- English result: `records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md`
+- Exact checker/results: `verify_open_world.py`, `EXACT_CHECKS.json`
+- Proof/source/gap ledgers: `PROOF_LEDGER.json`, `SOURCE_LEDGER.json`, `GAP_LEDGER.json`
+- Formal extension/audit/validation: `MAP_EXTENSION.json`, `MAP_AUDIT.json`, `verify_round.py`
+- Chinese review/current handoff: `REVIEW_ZH.md`, `CURRENT_HANDOFF.md`
+- Map: R170-v1.0, 487 nodes / 234 rules / 133 context links; new 10/7/4, exact R169 prefixes preserved
+- Result boundary: nonempty unknown remainder preserves global amplitude M; independently bounded remainder mass supports only mean and exceedance-mass conclusions
+- Next: universal physical target-range proofs versus fitted covers
+
 ## R169 — compositional route calibration and falsification
 
 - English result: `records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md`

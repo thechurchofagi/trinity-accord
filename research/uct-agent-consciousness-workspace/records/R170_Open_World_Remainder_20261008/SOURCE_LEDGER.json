@@ -1,0 +1,35 @@
+{
+  "schema": "UCT_R170_SOURCE_LEDGER/v1",
+  "sources": [
+    {
+      "id": "UCT-I-v1.2",
+      "kind": "fixed_primary_project_source",
+      "locators": ["§8.11", "§8.12", "§8.13", "§8.14", "§14.7", "§14.8", "§14.9", "§14.10"],
+      "use": "Physical-witness, body-centered organization, self/conceptual-I, overlap and identity/isomorphism boundaries.",
+      "limit": "Does not supply an actual R170 target domain, cell range, target measure or remainder mass."
+    },
+    {
+      "id": "R168-R169-fixed",
+      "kind": "verified_project_derivations",
+      "locators": ["R168 stochastic effect and amplitude/mass separation", "R169 actual route graph, envelope, continuum gap and calibration falsifier"],
+      "use": "Exact effect, envelope and open coverage obligations refined by R170.",
+      "limit": "No empirical target inventory, continuum cell proof, complete route closure, C1 proof or B_min."
+    },
+    {
+      "id": "established-measure-and-set-methods",
+      "kind": "standard_mathematical_methods",
+      "locators": ["piecewise upper envelope", "integration monotonicity", "set inclusion", "extremal witness"],
+      "use": "Proof of the sharp information-class envelope, mean bound, exceedance bound and amplitude obstruction.",
+      "limit": "No mathematical priority claim and no physical applicability without the target/cell/measure contracts."
+    },
+    {
+      "id": "R170-project-specific-contract",
+      "kind": "new_project_specific_formal_application",
+      "locators": ["R170 note §§2-8", "verify_open_world.py"],
+      "use": "Typed open-world domain/cell/remainder certificate, falsifier and five-way triage.",
+      "limit": "Finite checks do not instantiate an actual domain, cell cover, measure or apparatus."
+    }
+  ],
+  "search_scope": "No new literature search was needed for this exact formal step. It uses pinned UCT-I, verified R168-R169 derivations and explicitly attributed elementary set/measure mathematics; no historical novelty claim is made.",
+  "source_failures": []
+}

@@ -1,3 +1,11 @@
+## R170 audit — open-world honesty without amplitude, measure or semantic promotion
+
+R170 passes the selection, result and pre-save direction checks. The graph has 487 nodes, 234 rules and 133 context links; the inherited R169 node/rule/context prefixes reconstruct exactly. The covered/remainder partition requires target and cell contracts together. The sharp pointwise envelope requires the bounded effect, R169 route envelope and explicit partition. Mean and exceedance rules additionally require the fixed target/measure contract. The final application requires every amplitude, mean, mass, status and R169 boundary premise simultaneously.
+
+Objects, quantifiers, bearer/time/signature/realization IDs, actuality, target measure and evidence levels are explicit. No finite sample becomes a universal cell proof; no small remainder mass becomes a small maximum effect; no convenience measure becomes the physical target measure; no coverage status becomes C1 or experience evidence. Exact checks cover 62 domains, 1,364 envelopes, 66,429 effects, 323,847 pointwise inequalities, 66,429 integral inequalities, 132,858 exceedance inequalities, 1,001 amplitude witnesses and 32 statuses. The aggregate round checker passes 21/21.
+
+Gaps R170-G1–G8 retain target-domain post-selection, continuum interiors, executable safety, measure choice, kernel realizability, joint validity, finite-challenge incompleteness and the complete-organization/C1/`B_min` boundary. DAG/code success is not theory truth, physical coverage or a global proof. No basal gate, exclusive owner or claim about the current assistant is added.
+
 ## R169 audit — actual route composition without open-world or semantic promotion
 
 R169 passes the selection, result and pre-save direction checks. The graph has 477 nodes, 227 rules and 129 context links; the inherited R168 node/rule/context prefixes reconstruct exactly. The compositional rule requires the actual route graph and valid local channel budgets together. The direct envelope additionally requires the compositional theorem and tested pointwise bounds. The final R166–R169 application boundary requires the inherited complete witness, operational architecture, R168 stochastic object and R169 calibration package simultaneously.

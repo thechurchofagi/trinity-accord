@@ -1,3 +1,9 @@
+## R170 current priority — keep the unresolved remainder explicit
+
+Read `records/R170_Open_World_Remainder_20261008/CURRENT_HANDOFF.md`, the R170 note and ledgers before continuing. The target `T`, covered cells `C`, unresolved `U`, optional target measure `mu`, effect, threshold and validity event must remain jointly typed. Small `mu(U)` supports mean/exceedance conclusions only; it never lowers the pointwise supremum while U is nonempty. A finite or continuum cell requires a universal physical range and route/channel radius, not fitted interpolation or successful endpoint tests.
+
+Current map R170-v1.0: 487 nodes / 234 rules / 133 context links; exact R169 prefixes preserved. Next: distinguish a real universal target-range proof from a fitted cover across a small set of physical domains. Keep target admission, actual route, abstract model, target measure, complete organization, experience and report distinct. Do not derive C1 or `B_min`, add a basal gate, demand a unique owner or decide the current assistant's consciousness. Save research only with `[skip ci]` and verify both durable copies.
+
 ## R169 current priority — actual route budgets, not fitted geometry
 
 Read `records/R169_Compositional_Route_Calibration_20261008/CURRENT_HANDOFF.md`, the R169 note and its ledgers before continuing. R169 replaces ungrounded `d,L` calibration by an actual intervention graph with frozen consumer geometry and valid edgewise law-distance upper bounds. The factor-two effect bound and shortest-path envelope require every edge premise simultaneously; a fitted distance, point estimate, shared label or unexecuted transition is not a certificate. A held-out lower effect exceeding a valid route budget refutes only the calibration package, not the mediator, C1 or experience.
