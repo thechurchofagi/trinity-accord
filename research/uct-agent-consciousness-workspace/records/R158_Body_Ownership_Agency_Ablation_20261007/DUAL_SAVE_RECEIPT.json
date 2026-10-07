@@ -1,0 +1,65 @@
+{
+  "schema": "UCT_DUAL_SAVE_RECEIPT/v1",
+  "round": "R158",
+  "saved_at_utc": "2026-10-07T13:54:26.567388+00:00",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "research_commit": "54642afcd2efa774d7cfef27b37877ce4e5a882f",
+    "research_files_verified": 19,
+    "expected_sha_fast_forward": true,
+    "remote_blob_hashes": "PASS"
+  },
+  "workspace": {
+    "master_handoff": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_000000002cfc81f4b78d4071fb685846",
+      "filename": "UCT_Hourly_Research_Master_Handoff.md",
+      "identity_preserved": true,
+      "version": 2,
+      "bytes": 11150,
+      "sha256": "c58a14d0db907b553681583fc6c56fdf16118ed6c33c25f13f260338c77a1e36",
+      "byte_readback": "PASS"
+    },
+    "cumulative_increment": {
+      "library_file_id": "libfile_a7da32e2e09881919665913e58a86ceb",
+      "file_id": "file_0000000053d081f8ad0be3c32edac10e",
+      "version": 0,
+      "filename": "UCT_R157_R158_Cumulative_Increment_20261007.zip",
+      "sha256": "896d56daa0cc4aa86a069980d0d38bc647b21d0c3605a6c0eb28a666f373367f",
+      "bytes": 330919,
+      "members": 31,
+      "payload_files": 30,
+      "scope": "Cumulative R157–R158 increment over the exact recovered R156 working-set baseline; not a full working-set, repository or Git history backup.",
+      "research_commit": "54642afcd2efa774d7cfef27b37877ce4e5a882f",
+      "byte_readback": "PASS",
+      "crc_and_member_hashes": "PASS"
+    }
+  },
+  "required_baseline": {
+    "library_file_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
+    "filename": "UCT_R156_Working_Set_20261007.zip",
+    "bytes": 3493643,
+    "sha256": "95cc3ea1ec45eb273531c25525edcb7f8e6f2088c650a39b97d24817704ec40a",
+    "working_set_files": 384
+  },
+  "restore_probe": {
+    "status": "PASS",
+    "restored_working_set_files": 406,
+    "exact_file_set_and_hash_match": true,
+    "scope": "Recovered working set only; not repository or history; receipt saved later."
+  },
+  "verification_failure_and_resolution": "Text read omits terminal newline; literal text comparison failed. Materialized stored bytes match exactly, preserving newline. No rewrite/retry performed.",
+  "map": {
+    "revision": "R158-v1.0",
+    "nodes": 414,
+    "rules": 199,
+    "new_nodes": 6,
+    "new_rules": 2,
+    "status": "SCOPED_AUDIT_PASS_WITH_OPEN_BRIDGE",
+    "global_semantic_proof": false,
+    "empirical_F_witness": false
+  },
+  "next": "Fix one actual body-frame remapping domain; compare binding/use and source-attribution/use with independent targets and failure criteria.",
+  "history": "Research checkpoint and prior history preserved. This post-readback receipt is not in the cumulative package; retrieve from latest remote branch. Single-round completion does not close continuing research."
+}
