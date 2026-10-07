@@ -1,0 +1,16 @@
+{
+  "state": "CREATE_ONCE_INTENT",
+  "report_number": "TA-TR-2026-25",
+  "title": "Experience, Intelligence, and Self Within Experience: Definitions, Conditional Theorems, and Thought Experiments for a Structural Account",
+  "version": "1.0",
+  "reservation_token": "68d8ceb9-3b68-421e-82e7-dee410235202",
+  "source_inputs": {
+    "source-main.md": "6089556ca9a7c6cdb4ad22072569ea2735edcd4f9e9453815c63a75becad993b",
+    "build_pdf.py": "eec964ac2661e7d07fa0a8eb53c2dc28aaaaf2e0b411561d8ad4d18223ea16b8",
+    "reproducibility-v1.0.zip": "0dd1fac400b3aab236d5b883c3a07d8a493d4e505d6a53a918236dc2f53acc4b",
+    "REVIEW-AND-SOURCES.md": "2086b5ab02443d8ebef30e08ec43013deff6765a661c70178c619bbcef81001b",
+    "publication.py": "0de279b0f7556ba537ccdd5a05ec16892cf99e3c25b66461b814acc5df166964"
+  },
+  "source_commit": "f45c6204024c1186142455b0d1e3557b6e233cf7",
+  "workflow_run_id": "37589033139"
+}
