@@ -1,6 +1,6 @@
-# UCT A–B–C–D unified formal map — R135
+# UCT A–B–C–D unified formal map — R134
 
-**Canonical working map, revision R135-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R135. It does not supersede or edit the published papers.
+**Canonical working map, revision R134-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It unifies the latest repository editions located and verified in this round, plus R126–R134. It does not supersede or edit the published papers.
 
 **Second review:** [R130 report](records/R130_Formal_Foundation_Second_Review_20261006/SECOND_REVIEW.md) re-examines all 106 rule entries, restores the common-b/q condition in R127's cut bound and preserves all 13 explicit node scope fields in the readable ledger. The unchanged nine B theory bridges retain their source-fidelity obligations. [MEMORY.md](MEMORY.md) is the durable project continuation contract.
 
@@ -21,7 +21,7 @@ A's 78-node graph and B's historical 43-node map are preserved as sources. B's o
 
 ## 2. How to read an implication
 
-The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **303 nodes and 143 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R135_Capability_Preservation_and_Abstraction_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
+The [machine-readable graph](UCT_FORMAL_GRAPH.json) contains **290 nodes and 135 rules**. It is a source-anchored dependency index, not a proof-assistant encoding. The [complete proof ledger](records/R134_Quantitative_Control_and_Probe_Cost_20261007/PROOF_LEDGER.md) gives each rule's premises, conclusion, proof sketch and source, followed by every node.
 
 - All premises inside one rule's **all_of** must hold together.
 - Separate rules concluding the same node are alternative sufficient routes.
@@ -249,22 +249,7 @@ Standard partial-observation control and finite covering are credited. This exte
 
 Finite-horizon policy vectors, minimax and hidden-model robust control have direct prior art. The project increment is the typed quantitative connection and counterexamples, not a new constitutive consciousness claim or improved POMDP algorithm.
 
-## 12. R135: capability preservation, approximation and legality
-
-[Complete proofs](records/R135_Capability_Preservation_and_Abstraction_20261007/R135_Capability_Preservation.md), [Chinese assessment](records/R135_Capability_Preservation_and_Abstraction_20261007/RESEARCH_UPDATE_ZH.md), [exact checks](records/R135_Capability_Preservation_and_Abstraction_20261007/EXACT_CHECK.json).
-
-| Stable result | Content | Required boundary |
-|---|---|---|
-| R135:DEFICIENCY / GUARANTEE_EQ | Directional guarantee loss equals the maximum positive gap of nonnegative weighted optima; equality of all weighted optima iff equality of guarantee regions | Compact convex profiles, same evaluation coordinates and permitted private mixtures |
-| R135:VALUE_BOUND | Monotone Lipschitz values and threshold guarantees transfer; errors compose | Does not preserve arbitrary signed objectives or named-policy behavior |
-| R135:HIERARCHY | Same robust score can hide different guarantees; same guarantees can hide different exact profiles | Mathematical examples, not actual experiential noninjectivity witnesses |
-| R135:POLICY_BOUND / TRANSFER_BOUND | Uniform joint row TV error epsilon gives beta_H=1-(1-epsilon)^H; one beta for a known guarantee, two beta plus eta for selected-policy regret | Same total actions, time/outputs/history policies and pulled-back payoff; physical adequacy separately supplied |
-| R135:LEGALITY_JUMP | Arbitrarily small hidden-support change can send the hard-legal guarantee from one to zero | Partial actions violate the total-action theorem premise; no refutation of U2 or new experience gate |
-| R135:UCT_INTERPRETATION | Grounded capability map inherits C's full-type injectivity and selected-coordinate fiber criteria | Actual support/common complete signature and C1; source application, not a new constitutive theorem |
-
-Convex support/minimax and finite-horizon coupling have prior art. The contribution to this map is a precise hierarchy of preservation claims and the missing legality condition. A guarantee-region comparison alone is not an executable mechanism translator.
-
-## 13. Open obligations and next derivation
+## 12. Open obligations and next derivation
 
 Keep the following open rather than treating them as implied edges:
 
@@ -275,9 +260,9 @@ Keep the following open rather than treating them as implied edges:
 - Structural experiential interpretation → a familiar phenomenal label, valence or scalar richness.
 - Biological/AI decoder similarity → full mechanism correspondence or T2 closure.
 
-R135 supplies task-guarantee preservation, finite-horizon approximation bounds and a support/legality obstruction. Next: determine when an existential profile-by-profile capability comparison admits one declared causal, reusable translator respecting ports, composition and time; otherwise construct a separating example. Keep the distinction between standard decision mathematics and a UCT-specific organizational inference explicit. Actual physical adequacy, T2 intervention transport and general multi-resource scheduling remain open. Continue theory first.
+R134 supplies the finite-horizon quantitative common-policy profile and epsilon certificate, plus an exact fixed-probe opportunity model. Next: characterize operation/observation-preserving compression of the attainable continuation-profile set and bound the resulting guarantee error. Distinguish a useful UCT-specific organizational inference from standard control mathematics before proposing a paper. Actual physical adequacy and general multi-resource scheduling remain open. Continue theory first.
 
-## 14. Mandatory future-map protocol
+## 13. Mandatory future-map protocol
 
 Read AGENTS.md, MEMORY.md and the latest handoff first. Before accepting any new derivation:
 
@@ -299,5 +284,3 @@ Current R132 graph/source checks: [MAP_CHECK.json](records/R132_Common_Realizati
 Current R133 graph/source checks: [MAP_CHECK.json](records/R133_Observable_Common_Control_20261007/MAP_CHECK.json). Earlier reports remain historical snapshots.
 
 Current R134 graph/source checks: [MAP_CHECK.json](records/R134_Quantitative_Control_and_Probe_Cost_20261007/MAP_CHECK.json). Earlier reports remain historical snapshots.
-
-Current R135 graph/source checks: [MAP_CHECK.json](records/R135_Capability_Preservation_and_Abstraction_20261007/MAP_CHECK.json). Earlier reports remain historical snapshots.

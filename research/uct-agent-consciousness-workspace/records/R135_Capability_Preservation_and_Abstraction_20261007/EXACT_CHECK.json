@@ -1,0 +1,65 @@
+{
+  "round": "R135",
+  "all_pass": true,
+  "checks": [
+    {
+      "check": "961 compact convex profile-set pairs: direct deficiency equals all-weight gap",
+      "pass": true
+    },
+    {
+      "check": "equal robust score does not imply equal guarantee region",
+      "pass": true
+    },
+    {
+      "check": "all nonnegative optima can agree despite different exact profile sets",
+      "pass": true
+    },
+    {
+      "check": "without mixtures support-function domination need not transfer thresholds",
+      "pass": true
+    },
+    {
+      "check": "directed errors compose on 343 triples",
+      "pass": true
+    },
+    {
+      "check": "robust scalar gap respects the directional guarantee bound on all 961 pairs",
+      "pass": true
+    },
+    {
+      "check": "64 joint compressed kernel rows satisfy their exact uniform TV premise",
+      "pass": true
+    },
+    {
+      "check": "4448 adaptive-policy evaluations respect the finite-horizon error bound",
+      "pass": true
+    },
+    {
+      "check": "zero-error quotient preserves every checked policy exactly",
+      "pass": true
+    },
+    {
+      "check": "45 absorbing-goal witnesses attain the sharp bound, including horizon zero",
+      "pass": true
+    },
+    {
+      "check": "zero rare-state probability permits the successful two-step legal policy",
+      "pass": true
+    },
+    {
+      "check": "arbitrarily small checked support changes destroy the hard-legal guarantee",
+      "pass": true
+    },
+    {
+      "check": "explicitly totalized alternative restores continuous success 1-delta",
+      "pass": true
+    }
+  ],
+  "profile_pairs": 961,
+  "composition_triples": 343,
+  "joint_rows": 64,
+  "policy_evaluations": 4448,
+  "sharp_bound_cases": 45,
+  "arithmetic": "Python Fraction; no simulations or numeric solver",
+  "scope": "Finite witness and exact algebra checks; general theorems rely on stated conditional manual proofs."
+}

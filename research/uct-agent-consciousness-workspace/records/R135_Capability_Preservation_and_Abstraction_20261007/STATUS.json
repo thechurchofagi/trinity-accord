@@ -1,0 +1,15 @@
+{
+  "round": "R135",
+  "revision": "R135-v1.0",
+  "date": "2026-10-07",
+  "timezone": "Asia/Shanghai",
+  "base_commit": "d4ce9b5a328048c86a79baa00d15bcb0a25709e6",
+  "nodes": 303,
+  "rules": 143,
+  "new_nodes": 13,
+  "new_rules": 8,
+  "proof_status": "Conditional manual proofs; classical convex minimax and coupling credited; published C interpretation explicitly conditional",
+  "T2": "OPEN",
+  "C3_intervention_transport": "NOT_TESTED",
+  "valence_bridge": "OPEN"
+}

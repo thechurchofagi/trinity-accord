@@ -159,17 +159,3 @@ Exact checks: 756 direct-policy/support comparisons including noisy observations
 - F42: Direct hidden-model POMDP prior art located (Galesloot et al. 2025). Abstract checked; full-text attempts blocked. Standard policy-vector/minimax work is credited. No new UCT-specific constitutive result, algorithmic superiority or historical priority is asserted.
 
 Exact checks cover 2025 weighted binary families, 144 direct-policy/recursive-profile comparisons, 22 rational survival levels and 14 named checks. General theorems remain conditional handwritten proofs. C1/U1 unchanged; T2 OPEN, C3 NOT_TESTED, valence OPEN.
-
-
-## R135 — guarantee preservation, abstraction and legal policies
-
-7 October 2026. Added 13 nodes and 8 rules; all 290 prior nodes and 135 rules retained field-for-field, with four source editions unchanged. [Proofs](records/R135_Capability_Preservation_and_Abstraction_20261007/R135_Capability_Preservation.md).
-
-- F43: One robust score, the full threshold-guarantee region and the full attainable profile set are distinct objects. Exact finite counterexamples separate them; no actual experiential witness is inferred.
-- F44: All-weights guarantee characterization needs compact convex profiles and aligned evaluation coordinates. Private mixtures must be allowed by the protocol. Existential profile matching is not a causal, reusable policy translator.
-- F45: Approximation uses the joint mapped-next-state/output law, uniformly over represented states/actions, with exactly pulled-back payoff, common time semantics and total common actions. Matching marginals or a sampled fit is insufficient.
-- F46: Hard universal legality can jump after an arbitrarily small support change, despite pointwise menu agreement. Totalizing an attempted action changes the model. This derived feasibility discontinuity is not an experience threshold or a refutation of A:U2.
-- F47: The experiential corollary explicitly requires actual valid support, a common complete signature and a grounded invariant capability map. It applies published C:P1/P2; it does not prove a new constitutive law or universal noninjectivity.
-- F48: Convex/Pareto comparison and coupling/simulation bounds have prior art. Two primary abstracts and part of a primary simulation-lemma paper were checked; full theorem-level priority comparison and independent review remain open.
-
-Exact checks: 961 convex-profile pairs, 343 composition triples, 64 compressed joint rows, 4448 adaptive-policy evaluations, 45 sharp-bound witnesses, 13 named checks. General claims remain conditional handwritten proofs. C1/U1 unchanged; T2 OPEN, C3 NOT_TESTED, valence OPEN.

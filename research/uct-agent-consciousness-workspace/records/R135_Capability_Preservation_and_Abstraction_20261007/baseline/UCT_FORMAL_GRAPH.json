@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R135-v1.0",
+  "revision": "R134-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "d4ce9b5a328048c86a79baa00d15bcb0a25709e6",
+  "base_commit": "ed729027709a571a2c6c2594a3a92c396a505f5d",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -2406,123 +2406,6 @@
       "source": "R134_Quantitative_Control.md §7",
       "status": "MANUAL_CONDITIONAL_PASS",
       "scope": "Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. Specified family and order of play only; no historical novelty or measured AI/biological performance claim."
-    },
-    {
-      "id": "R135:PROFILE_PAIR",
-      "kind": "DEFINITION",
-      "label": "Comparable success profiles and directional guarantee loss",
-      "statement": "G(C)={b in [0,1]^n: some v in C dominates b}; h_C(q)=max_v q dot v for q in Delta_n including zero weights; delta(C->D)=max_v min_w max_i(v_i-w_i)_+.",
-      "source": "R135_Capability_Preservation.md §2",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Nonempty compact convex C,D in [0,1]^n; identical named evaluation coordinates, tasks, time, resources and observation protocol; one policy across coordinates, permitted independent private mixtures. Mathematical task comparison; no actual organization or physical translator inferred. For each source profile there is one target profile, not one policy per coordinate."
-    },
-    {
-      "id": "R135:DEFICIENCY",
-      "kind": "THEOREM",
-      "label": "Exact weighted-optimum certificate for guarantee loss",
-      "statement": "delta(C->D)=max_(q in Delta_n)[h_C(q)-h_D(q)]_+.",
-      "source": "R135_Capability_Preservation.md §3",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Nonempty compact convex C,D in [0,1]^n; identical named evaluation coordinates, tasks, time, resources and observation protocol; one policy across coordinates, permitted independent private mixtures. Mathematical task comparison; no actual organization or physical translator inferred. Standard convex minimax/support-function argument; no historical priority claim."
-    },
-    {
-      "id": "R135:GUARANTEE_EQ",
-      "kind": "THEOREM",
-      "label": "All nonnegative weighted optima characterize the guarantee region",
-      "statement": "G(C) subset G(D) iff delta(C->D)=0 iff h_C(q)<=h_D(q) for all q in Delta_n. Equality of guarantee regions iff equality of all such weighted optima.",
-      "source": "R135_Capability_Preservation.md §3",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Nonempty compact convex C,D in [0,1]^n; identical named evaluation coordinates, tasks, time, resources and observation protocol; one policy across coordinates, permitted independent private mixtures. Mathematical task comparison; no actual organization or physical translator inferred. Convexity cannot be silently dropped if randomization is unavailable."
-    },
-    {
-      "id": "R135:VALUE_BOUND",
-      "kind": "THEOREM",
-      "label": "Monotone value transfer and composable directional errors",
-      "statement": "delta(C->D)<=epsilon transfers thresholds after clipping b-epsilon 1 and bounds sup_C F <=sup_D F+L epsilon for every monotone L-Lipschitz F. delta(C->E)<=delta(C->D)+delta(D->E) for another comparable E.",
-      "source": "R135_Capability_Preservation.md §4",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Nonempty compact convex C,D in [0,1]^n; identical named evaluation coordinates, tasks, time, resources and observation protocol; one policy across coordinates, permitted independent private mixtures. Mathematical task comparison; no actual organization or physical translator inferred. Lipschitz norm is the maximum norm; signed/nonmonotone diagnostics and exact named-policy distributions are not covered."
-    },
-    {
-      "id": "R135:HIERARCHY_MODELS",
-      "kind": "MODEL",
-      "label": "Two finite comparisons separating scalar, guarantee and profile equality",
-      "statement": "C1=conv{(0,0),(1,0),(0,1)}, D1=conv{(0,0),(1/2,1/2)}; C2=conv{(0,0),(1,1)}, D2=conv{(0,0),(1,1),(1,0)}.",
-      "source": "R135_Capability_Preservation.md §5",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Nonempty compact convex C,D in [0,1]^n; identical named evaluation coordinates, tasks, time, resources and observation protocol; one policy across coordinates, permitted independent private mixtures. Mathematical task comparison; no actual organization or physical translator inferred. Explicit mathematical profiles, not actual brain or AI realizations."
-    },
-    {
-      "id": "R135:HIERARCHY",
-      "kind": "THEOREM",
-      "label": "Equal robust values and equal guarantee regions preserve different amounts",
-      "statement": "C1,D1 both have robust value 1/2, but delta(C1->D1)=1/2 and reverse loss zero. C2,D2 have identical square guarantee regions/all nonnegative weighted optima, yet only D2 contains exact profile (1,0).",
-      "source": "R135_Capability_Preservation.md §5",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Nonempty compact convex C,D in [0,1]^n; identical named evaluation coordinates, tasks, time, resources and observation protocol; one policy across coordinates, permitted independent private mixtures. Mathematical task comparison; no actual organization or physical translator inferred. These examples separate selected mathematical summaries; they do not exhibit actual experiential noninjectivity."
-    },
-    {
-      "id": "R135:SIMULATION_SETUP",
-      "kind": "ASSUMPTION",
-      "label": "Uniform joint-law and executable-action abstraction contract",
-      "statement": "For every represented m,s,a, TV((alpha_m,id)_*K_m(s,a),Kbar_m(alpha_m(s),a))<=epsilon; 0<=epsilon<=1. g_m=gbar_m composed with alpha_m; same total actions and observable policy class.",
-      "source": "R135_Capability_Preservation.md §6",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Finite persistent paired models and fixed state maps, common total action set (or a declared globally safe subset), same observable-history policy class/private randomness, time and output labels; joint next-mapped-state/output TV <=epsilon uniformly; terminal [0,1] payoff exactly pulled back; paired initial states. Actual port adequacy separately assumed. A finite fit or matching separate marginals does not establish this premise."
-    },
-    {
-      "id": "R135:POLICY_BOUND",
-      "kind": "THEOREM",
-      "label": "Finite-horizon same-policy error bound",
-      "statement": "Every common observable policy has coordinate error <=beta_H=1-(1-epsilon)^H<=min(1,H epsilon); the uniform terminal-payoff bound is sharp.",
-      "source": "R135_Capability_Preservation.md §7",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite persistent paired models and fixed state maps, common total action set (or a declared globally safe subset), same observable-history policy class/private randomness, time and output labels; joint next-mapped-state/output TV <=epsilon uniformly; terminal [0,1] payoff exactly pulled back; paired initial states. Actual port adequacy separately assumed. Classical finite-horizon coupling/simulation bound; no uniform small-error claim for unbounded time."
-    },
-    {
-      "id": "R135:TRANSFER_BOUND",
-      "kind": "THEOREM",
-      "label": "Guarantee transfer and selected-policy regret",
-      "statement": "For pulled-back comparable profile sets both directed losses and robust optimal-value gap are <=beta_H. Copying an abstract eta-optimal policy gives concrete robust success >=V_star-2 beta_H-eta; a particular abstract guarantee loses only beta_H.",
-      "source": "R135_Capability_Preservation.md §7",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Finite persistent paired models and fixed state maps, common total action set (or a declared globally safe subset), same observable-history policy class/private randomness, time and output labels; joint next-mapped-state/output TV <=epsilon uniformly; terminal [0,1] payoff exactly pulled back; paired initial states. Actual port adequacy separately assumed. A guarantee certificate and regret relative to an unknown optimum are different quantities; neither implies complete-type equality."
-    },
-    {
-      "id": "R135:LEGALITY_MODEL",
-      "kind": "MODEL",
-      "label": "Rare hidden state with an incompatible action menu",
-      "statement": "At start only p is enabled; at good only a leads to goal; at bad no non-stop action is enabled; stop is always available and succeeds only at goal. Outputs are constant. K0:p->good; Kdelta:p->(1-delta)good+delta bad. Other rows and pointwise menus agree; H=2.",
-      "source": "R135_Capability_Preservation.md §8",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Hard legality requires an action enabled at every history-compatible state. Identity state map, common goal payoff, row TV delta. This partial-action model deliberately violates SIMULATION_SETUP."
-    },
-    {
-      "id": "R135:LEGALITY_JUMP",
-      "kind": "THEOREM",
-      "label": "Arbitrarily small kernel perturbations can destroy a hard-legal guarantee",
-      "statement": "For LEGALITY_MODEL, K0 has value one and Kdelta value zero for every delta>0. If attempting a at bad is explicitly made legal with failure, the changed protocol instead has value 1-delta.",
-      "source": "R135_Capability_Preservation.md §8",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Support-based legal policy classes can change discontinuously despite pointwise menu equality. Not a counterexample to POLICY_BOUND or to A:U2; not an experience threshold."
-    },
-    {
-      "id": "R135:ACTUAL_PROFILE",
-      "kind": "ASSUMPTION",
-      "label": "Grounded capability map on complete actual types",
-      "statement": "Actual valid process tokens, a common complete structural signature and fixed grounded tasks/ports/resources/observation rules supply a well-defined guarantee-region map s->G(s) invariant under allowed structural isomorphisms.",
-      "source": "R135_Capability_Preservation.md §9",
-      "status": "EXPLICIT_MODEL_OR_DOMAIN_PREMISE",
-      "scope": "Actual support and complete-type adequacy are independent premises, not certified by finite profile examples, decoder scores or small transition error."
-    },
-    {
-      "id": "R135:UCT_INTERPRETATION",
-      "kind": "CONDITIONAL_INTERPRETATION",
-      "label": "Published identification criteria applied to capability guarantees",
-      "statement": "Under A:C1 and ACTUAL_PROFILE, different G implies different complete experiential types; G identifies full experiential type iff s->G(s) is injective; a selected coordinate is recoverable iff constant on G-fibers.",
-      "source": "R135_Capability_Preservation.md §9",
-      "status": "MANUAL_CONDITIONAL_PASS",
-      "scope": "Direct application of published C:P1/P2, not a new constitutive theorem. Equal guarantees alone do not prove experiential equality; no universal noninjectivity on every actual domain asserted. No new U1 gate."
     }
   ],
   "rules": [
@@ -4334,112 +4217,6 @@
       "source": "R134_Quantitative_Control.md §7",
       "kind": "DEDUCTIVE",
       "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r135_deficiency",
-      "all_of": [
-        "R135:PROFILE_PAIR"
-      ],
-      "conclusion": "R135:DEFICIENCY",
-      "statement": "Weighted optimum gaps exactly certify directional guarantee loss.",
-      "proof_sketch": "For fixed v, max-coordinate positive loss is the positive part of max over simplex weights. Compact convex minimax swaps min_w and max_q; maximize over v and commute the two maxima.",
-      "source": "R135_Capability_Preservation.md §3",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r135_equality",
-      "all_of": [
-        "R135:PROFILE_PAIR",
-        "R135:DEFICIENCY"
-      ],
-      "conclusion": "R135:GUARANTEE_EQ",
-      "statement": "All threshold guarantees are preserved exactly when every nonnegative weighted optimum is preserved in the appropriate direction.",
-      "proof_sketch": "A transferred threshold b=v supplies a dominating target vector. Conversely zero attained loss supplies a dominating vector for every source profile. Apply DEFICIENCY; equality follows in both directions.",
-      "source": "R135_Capability_Preservation.md §3",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r135_value",
-      "all_of": [
-        "R135:PROFILE_PAIR"
-      ],
-      "conclusion": "R135:VALUE_BOUND",
-      "statement": "Directional approximation transfers monotone values and composes.",
-      "proof_sketch": "Match v by w>=v-epsilon 1; put u=min(v,w), use F(v)<=F(u)+L epsilon<=F(w)+L epsilon. Chain two such componentwise matches for composition.",
-      "source": "R135_Capability_Preservation.md §4",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r135_hierarchy",
-      "all_of": [
-        "R135:PROFILE_PAIR",
-        "R135:HIERARCHY_MODELS"
-      ],
-      "conclusion": "R135:HIERARCHY",
-      "statement": "One robust optimum does not identify the guarantee region; the guarantee region need not identify all exact profiles.",
-      "proof_sketch": "The first triangle has coordinate sums <=1 but contains (1,0), unlike the half-diagonal. The second pair both contain (1,1), which dominates every threshold, but only one includes an unequal-coordinate vector.",
-      "source": "R135_Capability_Preservation.md §5",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r135_policy",
-      "all_of": [
-        "R135:SIMULATION_SETUP"
-      ],
-      "conclusion": "R135:POLICY_BOUND",
-      "statement": "Uniform joint-law error bounds every copied common observable policy.",
-      "proof_sketch": "Share the private seed and maximally couple joint mapped-successor/output rows while histories agree. Match probability is at least (1-epsilon)^H; payoff difference is <=1 after a mismatch. Total actions ensure legality throughout. An absorbing-goal hazard attains equality.",
-      "source": "R135_Capability_Preservation.md §7",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r135_transfer",
-      "all_of": [
-        "R135:PROFILE_PAIR",
-        "R135:VALUE_BOUND",
-        "R135:SIMULATION_SETUP",
-        "R135:POLICY_BOUND"
-      ],
-      "conclusion": "R135:TRANSFER_BOUND",
-      "statement": "Same-policy error controls both guarantee directions and selected-policy regret.",
-      "proof_sketch": "Copy policies in either direction on the common history alphabet and pulled-back coordinates. Each profile differs by <=beta_H. Apply monotone min-coordinate value transfer; selected-policy regret adds two approximation errors and eta.",
-      "source": "R135_Capability_Preservation.md §7",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r135_legality",
-      "all_of": [
-        "R135:LEGALITY_MODEL"
-      ],
-      "conclusion": "R135:LEGALITY_JUMP",
-      "statement": "Hard universal action legality can make a derived capability discontinuous under tiny probability changes.",
-      "proof_sketch": "After p, K0 support is {good}, admitting a. Every positive delta gives support {good,bad} and no common non-stop action, so only failing stop remains. Totalizing a changes the protocol and yields 1-delta.",
-      "source": "R135_Capability_Preservation.md §8",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
-    },
-    {
-      "id": "r135_uct",
-      "all_of": [
-        "A:C1",
-        "C:P1",
-        "C:P2_FULL",
-        "C:P2_COORD",
-        "R135:ACTUAL_PROFILE",
-        "R135:GUARANTEE_EQ"
-      ],
-      "conclusion": "R135:UCT_INTERPRETATION",
-      "statement": "The grounded capability map inherits the published full-type and fiber identification criteria.",
-      "proof_sketch": "Well-definedness on complete types forbids different G at the same type. C1 supplies experiential type identity; published C:P2 gives injectivity for full identification and fiber constancy for a selected coordinate.",
-      "source": "R135_Capability_Preservation.md §9",
-      "kind": "DEDUCTIVE",
-      "review": "MANUAL_VALID_UNDER_STATED_PREMISES"
     }
   ],
   "context_links": [
@@ -4692,36 +4469,6 @@
       "from": "R132:PARTIAL_CLOSURE",
       "to": "R134:VECTOR_RECURSION",
       "relation": "Full-interface preservation is stronger than retaining a selected attainable task profile set"
-    },
-    {
-      "from": "R134:VECTOR_RECURSION",
-      "to": "R135:PROFILE_PAIR",
-      "relation": "Finite common-policy vectors supply a motivating compact convex profile set"
-    },
-    {
-      "from": "R134:ROBUST_LP",
-      "to": "R135:HIERARCHY",
-      "relation": "A scalar robust optimum preserves less than all threshold guarantees"
-    },
-    {
-      "from": "B:VIEW",
-      "to": "R135:SIMULATION_SETUP",
-      "relation": "Grounded state/time/port adequacy remains independent of a mathematical approximation bound"
-    },
-    {
-      "from": "D:PAYOFF",
-      "to": "R135:PROFILE_PAIR",
-      "relation": "Capabilities remain relative to declared task consequences"
-    },
-    {
-      "from": "R132:PARTIAL_CLOSURE",
-      "to": "R135:LEGALITY_JUMP",
-      "relation": "Approximation must additionally preserve executability under changed information supports"
-    },
-    {
-      "from": "A:U2",
-      "to": "R135:LEGALITY_JUMP",
-      "relation": "Derived hard-feasibility discontinuity is not a constitutive continuity refutation"
     }
   ],
   "prohibited_inferences_D": [
@@ -4778,11 +4525,6 @@
       "id": "R134-ATTR-05",
       "prior_source": "Smallwood/Sondik 1973; Osogami 2015; Galesloot et al. 2025 hidden-model POMDPs (abstract); finite minimax/LP and binary testing; C:P7/D:PAYOFF",
       "current_scope": "No novelty claim for hidden-model common control, policy vectors, robust minimax or costs of information. Project-level exact vector bridge and optional-probe mixing counterexample. Full technical comparison with recent hidden-model work remains open; no new UCT-specific constitutive theorem established."
-    },
-    {
-      "id": "R135-ATTR-06",
-      "prior_source": "Convex minimax/support functions; Diakonikolas and Yannakakis 2008 abstract; Bian and Abate 2017 abstract; Lobel and Parr 2024 introduction and overlap argument; published C:P1/P2",
-      "current_scope": "No novelty claimed for convex capability comparison or finite-horizon coupling/simulation bounds. Project synthesis gives the guarantee/profile hierarchy, explicit transport conditions and hard-legality discontinuity. Experiential interpretation is an application of C, not a new constitutive theorem; independent review and complete prior-art comparison remain open."
     }
   ],
   "audit_amendments": [
