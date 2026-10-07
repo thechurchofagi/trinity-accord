@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-10-07T13:55:02.412729+00:00",
+  "generated_at": "2026-10-07T18:51:43.561743+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -23,7 +23,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "ef8db8e171fb4090",
+  "source_digest": "38fec0c034da3c04",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 177,
@@ -144,7 +144,7 @@
         "current_upload_mode": "live",
         "live_upload_enabled": true,
         "live_upload_implemented": true,
-        "archive_count": 71,
+        "archive_count": 72,
         "latest_arweave_txid": "EbhyfNfYigMuMoH14ZLtGZjX5Pi8MDiE0VXk3LgnOqU",
         "live_archive_count": 64,
         "arweave_wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e"
@@ -999,9 +999,9 @@
     },
     "arweave_wallet": {
       "currency": "AR",
-      "total_spent_ar": "0.92595291935",
+      "total_spent_ar": "0.929371456806",
       "balance_known": true,
-      "balance_ar": "14.196989202892",
+      "balance_ar": "14.183576999752",
       "low_balance": false,
       "needs_recharge": false
     }
