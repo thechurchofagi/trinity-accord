@@ -1,3 +1,17 @@
+# R153 current audit verdict — 7 October 2026
+
+**Complete finite-map contract coverage; no global semantic or machine-proof certification.** Every one of 391 inherited nodes and 188 rules has a current contract. All source editions are preserved. The prior graph is archived exactly, and fieldwise amendments are inspectable.
+
+[Audit/limitations](records/R153_Complete_Formal_Map_20261007/REVIEW_ZH.md), [18-entry gap ledger](records/R153_Complete_Formal_Map_20261007/GAP_LEDGER.json), [validation](records/R153_Complete_Formal_Map_20261007/VALIDATION.json), [build summary](records/R153_Complete_Formal_Map_20261007/BUILD_SUMMARY.json).
+
+Seven map-defect families are corrected; one sufficient-regularity condition is clarified; ten obligation families remain open. The initial observation omission has a concrete two-state counterexample. A three-constraint example is pairwise satisfiable but jointly impossible. These expose actual scope/quantifier risks; they do not assert inconsistency of all UCT.
+
+The expanded terminal-premise routes are syntactic dependency expansions, not automatic proofs that all substitutions/physical premises hold. Their affected-node propagation is conservative: a reachable obligation may affect only one alternative route. The graph's historical status labels remain for provenance; `formal_contract_R153` is the effective current review layer. Only 60 rules have expanded current-round argument review; 128 retain imported proofs with dependency/contract checks. No blanket all-rules-reproved claim is authorized.
+
+Scope-check outcomes: all inherited node/rule IDs and all_of lists preserved; rule/node statements synchronized; no conclusion derives C1; no context link becomes a proof edge; all 10 source hashes pass; 10 exact bounded checks pass. These tests do not establish experiential interpretation, constitutive completeness, numerical-evidence reproduction or arbitrary semantic satisfiability.
+
+The historical audit follows unchanged.
+
 # R151 latest audit disposition
 
 The current [scope/quality review](records/R151_Foundational_Manuscript_20261007/REVIEW_ZH.md) and [machine inventory summary](records/R151_Foundational_Manuscript_20261007/AUDIT_SUMMARY.json) separate full structural indexing from scoped semantic review. 391 nodes and 188 rules have valid references and an acyclic recorded dependency graph. This does not prove global consistency. The 107 absent inline statements and 223 absent inline scope/domain fields are explicit legacy context-dependence gaps.

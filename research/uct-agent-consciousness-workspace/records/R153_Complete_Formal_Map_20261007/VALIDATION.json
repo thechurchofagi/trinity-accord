@@ -1,0 +1,189 @@
+{
+  "structural_checks": {
+    "nodes": 391,
+    "rules": 188,
+    "DAG": true,
+    "all_source_hashes": true,
+    "prior_ids_and_all_of_preserved": true,
+    "all_rule_conclusions_synchronized": true,
+    "context_links_not_promoted": true,
+    "no_derivation_of_C1": true
+  },
+  "exact_checks": [
+    {
+      "id": "T01",
+      "status": "PASS",
+      "claim": "R126/R127 source correction is material",
+      "details": {
+        "states": 2,
+        "p": "identity",
+        "r": "constant 0",
+        "update": "identity",
+        "joint_initial_blocks": 2,
+        "r_only_blocks": 1,
+        "effect": "The r-only quotient loses required p even at the empty word."
+      }
+    },
+    {
+      "id": "T02",
+      "status": "PASS",
+      "claim": "Strict-fiber quantifier counterexample",
+      "details": {
+        "J": [
+          0,
+          0,
+          1
+        ],
+        "fiber_sizes": [
+          2,
+          2,
+          1
+        ]
+      }
+    },
+    {
+      "id": "T03",
+      "status": "PASS",
+      "claim": "Zero-mass breakpoint guard",
+      "details": {
+        "cases": 3,
+        "exact_values": [
+          "0",
+          "2/3",
+          "3/4"
+        ],
+        "note": "Grid is a regression check; general piecewise-affine proof is in the rule."
+      }
+    },
+    {
+      "id": "T04",
+      "status": "PASS",
+      "claim": "Image sizes distinguish three regimes, not four by themselves",
+      "details": {
+        "image_sizes": [
+          2,
+          4,
+          4,
+          8
+        ]
+      }
+    },
+    {
+      "id": "T05",
+      "status": "PASS",
+      "claim": "Selection/transmission decomposition",
+      "details": {
+        "delta": "-7/15",
+        "selection_term": "2/15",
+        "transmission_term": "-3/5"
+      }
+    },
+    {
+      "id": "T06",
+      "status": "PASS",
+      "claim": "Pairwise consistency does not establish triple consistency",
+      "details": {
+        "assignments": 64,
+        "all_pairs_witnessed": {
+          "(0, 1)": {
+            "k": [
+              0,
+              0
+            ],
+            "e": [
+              0,
+              0
+            ],
+            "r": [
+              0,
+              0
+            ]
+          },
+          "(1, 2)": {
+            "k": [
+              0,
+              1
+            ],
+            "e": [
+              0,
+              0
+            ],
+            "r": [
+              0,
+              0
+            ]
+          },
+          "(0, 2)": {
+            "k": [
+              0,
+              1
+            ],
+            "e": [
+              0,
+              1
+            ],
+            "r": [
+              0,
+              0
+            ]
+          }
+        },
+        "triple_models": 0,
+        "general_argument": "C1 gives e(x)!=e(y); r equality plus e=h r gives e(x)=e(y)."
+      }
+    },
+    {
+      "id": "T07",
+      "status": "PASS",
+      "claim": "Factorization and quantifiers in a complete bounded model class",
+      "details": {
+        "map_pairs": 64,
+        "domain_size": 3,
+        "output_size": 2,
+        "limitation": "General set theorem uses P04, not this enumeration."
+      }
+    },
+    {
+      "id": "T08",
+      "status": "PASS",
+      "claim": "Marginal closure does not entail joint closure",
+      "details": {
+        "joint_TV": "1",
+        "both_coordinate_marginals": "fair"
+      }
+    },
+    {
+      "id": "T09",
+      "status": "PASS",
+      "claim": "Common-policy and joint-intersection obstructions",
+      "details": {
+        "individual_actions_exist": true,
+        "common_action_exists": false,
+        "three_pairwise_intersecting_sets_have_common_element": false
+      }
+    },
+    {
+      "id": "T10",
+      "status": "PASS",
+      "claim": "Three point masses have radius 2/3, diameter one",
+      "details": {
+        "attained_at": [
+          "1/3",
+          "1/3",
+          "1/3"
+        ],
+        "radius": "2/3",
+        "general_lower_bound": "At least one p_i<=1/3, hence max_i(1-p_i)>=2/3."
+      }
+    }
+  ],
+  "all_checks_pass": true,
+  "not_established": [
+    "truth of C1",
+    "actual physical completeness",
+    "specific self-experience bridge",
+    "all-source semantic consistency",
+    "proof-assistant verification",
+    "numerical-record reproduction"
+  ]
+}

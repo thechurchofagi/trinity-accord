@@ -1,3 +1,9 @@
+## R153 author instruction — highest current task priority
+
+On 7 October 2026 the author requests strict formalization of every existing concept and inference, explicit quantifiers, finite/domain boundaries, and a durable defect/repair map. Execute substantive discharges; do not merely re-list missing fields or declare success from node counts. The current R153 contract layer and gap ledger govern over historical next-step queues. An unresolved constitutive/semantic assumption is a recorded obligation, not permission to add a new basal experience gate.
+
+Current map: R153-v1.0, 391/188. Statements/scopes are fully inventoried; 60 rules have expanded present-round argument review and 128 retain inherited proofs. Global semantic and proof-assistant completion are not established. Consult records/R153_Complete_Formal_Map_20261007/FORMAL_FOUNDATION.md and GAP_LEDGER.json. Every future discharge must cite the exact obligation, source, typed premise instance and proof/evidence. Historical published bytes and failures remain preserved.
+
 # UCT 研究总指导：每轮工作开始前必读
 
 版本 1.0，2026-10-07。依据作者在 R150–R151 的直接澄清。本文件是本工作区研究方向、概念解释与质量审查的当前总指导；旧轮次中的“下一步”不是自动执行指令。若与作者的新指令冲突，以作者的新指令为准并记录修订。

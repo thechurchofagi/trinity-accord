@@ -1,0 +1,72 @@
+[
+  {
+    "paper": "A",
+    "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+    "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+    "bytes": 142624,
+    "hash_pass": true
+  },
+  {
+    "paper": "B",
+    "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/B_UCT_II_v1_1.md",
+    "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+    "bytes": 59958,
+    "hash_pass": true
+  },
+  {
+    "paper": "C",
+    "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/C_UCT_III_v1_0.md",
+    "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+    "bytes": 94626,
+    "hash_pass": true
+  },
+  {
+    "paper": "D",
+    "path": "records/R129_Four_Paper_Integration_20261006/sources/D_TA24_v1_0.md",
+    "sha256": "af0eb63cca099b3d913218f503bc978c705f0fb9f065cca9ed472e5161d67490",
+    "bytes": 36208,
+    "hash_pass": true
+  },
+  {
+    "paper": "TA15",
+    "path": "records/R148_Publication_Census_20261007/sources/TA15_v1_0.md",
+    "sha256": "8643196bd281e88be3cd753297eb846251a855e9d2ac3f576dbd49437cbafc85",
+    "bytes": 78742,
+    "hash_pass": true
+  },
+  {
+    "paper": "TA16",
+    "path": "records/R148_Publication_Census_20261007/sources/TA16_v1_0.md",
+    "sha256": "041a21d0a0863719188f591b2f51f94b591cc16a795d74ed6df047e058c48360",
+    "bytes": 87834,
+    "hash_pass": true
+  },
+  {
+    "paper": "TA17",
+    "path": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md",
+    "sha256": "bec4944db161db725648a18962b8a6c069aacf7512a259483f9d81e646e36a78",
+    "bytes": 99093,
+    "hash_pass": true
+  },
+  {
+    "paper": "TA18",
+    "path": "records/R148_Publication_Census_20261007/sources/TA18_v1_0.md",
+    "sha256": "22ef09cb373a7f364ee2a12c503be8768057684d78eb0e2593d8398b5fe7ae13",
+    "bytes": 52233,
+    "hash_pass": true
+  },
+  {
+    "paper": "TA19",
+    "path": "records/R148_Publication_Census_20261007/sources/TA19_v1_0.md",
+    "sha256": "53782a354e6dd1b037f8a6021d2a2bad150201cd086a5f6799757074dd21fc7e",
+    "bytes": 43338,
+    "hash_pass": true
+  },
+  {
+    "paper": "TA25",
+    "path": "records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md",
+    "sha256": "694856862f75834024cd3e71ffdba95a6be4601c2832285902f7905907e3039c",
+    "bytes": 42068,
+    "hash_pass": true
+  }
+]

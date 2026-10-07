@@ -1,3 +1,20 @@
+# Current formal map: R153-v1.0
+
+This current contract layer governs the historical map below. It covers every inherited node and rule with source-linked statements, scopes, typed comparison domains, separate conjunctive routes, effective relation types and unresolved obligations. It preserves 391 node IDs and 188 rule IDs; no theorem count is added for editorial normalization.
+
+- [Readable current review](records/R153_Complete_Formal_Map_20261007/REVIEW_ZH.md)
+- [Concepts, quantifiers, twelve proof sections and joint-consistency boundaries](records/R153_Complete_Formal_Map_20261007/FORMAL_FOUNDATION.md)
+- [391-node complete ledger](records/R153_Complete_Formal_Map_20261007/NODE_LEDGER.md)
+- [188-rule complete ledger](records/R153_Complete_Formal_Map_20261007/RULE_LEDGER.md)
+- [Gaps and affected conclusions](records/R153_Complete_Formal_Map_20261007/GAP_LEDGER.json)
+- [Exact checks](records/R153_Complete_Formal_Map_20261007/VALIDATION.json)
+
+107 previously absent statement fields and 223 scope fields are now present. This is a coverage claim; physical/phenomenal interpretation and global semantic validity do not follow from it. Sixty rules have expanded argument review here; the other 128 retain their source proofs and explicit current contract status. No proof-assistant verification is claimed. Formula variables must be instantiated in the same bearer/time/signature/protocol/target context before using a rule.
+
+Important corrections are recorded, not silently retrofitted into published papers: o=(p,r) in R126/R127; existential strict-fiber quantifier; positive-denominator probe breakpoints; three image-size regimes; selection versus transmission; sufficient C1 regularity. Packages of assumptions are not derivations of their assumptions. Context/source links are not proof edges.
+
+The historical narrative follows for provenance; consult the current graph and R153 amendment ledger wherever wording differs.
+
 # UCT unified formal map — nine-source integration R149
 
 **Canonical working map, revision R149-v1.0, 7 October 2026.** Future theoretical derivations in this workspace must extend this map. It retains the verified A/B/C/D foundation, adds scoped core branches of TA15–19, and includes later project extensions through R149. It does not supersede or edit the published papers.

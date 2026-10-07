@@ -1,0 +1,20 @@
+{
+  "baseline_nodes": 391,
+  "baseline_rules": 188,
+  "nodes": 391,
+  "rules": 188,
+  "missing_statements_before": 107,
+  "missing_scopes_before": 223,
+  "missing_statements_after": 0,
+  "missing_scopes_after": 0,
+  "detailed_proof_review_rules": 60,
+  "inherited_argument_contract_review_rules": 128,
+  "gap_states": {
+    "CORRECTED": 7,
+    "CLARIFIED": 1,
+    "OPEN": 10
+  },
+  "source_hashes_passed": 10,
+  "machine_proof_certification": false,
+  "global_semantic_consistency_certification": false
+}

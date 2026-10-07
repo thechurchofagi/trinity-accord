@@ -1,3 +1,15 @@
+## R153 current priority — strict whole-map formalization, 7 October 2026
+
+The author now explicitly requires precise concept and inference formalization of the entire existing map, including quantifiers, finite/scope boundaries, holes and repairs. This supersedes older next-step queues. Read the master guide first. Current graph is **R153-v1.0, 391 nodes / 188 rules**; all inherited IDs and conjunctive dependencies remain. Published sources are unchanged.
+
+[Chinese review](records/R153_Complete_Formal_Map_20261007/REVIEW_ZH.md), [typed foundation and expanded proofs](records/R153_Complete_Formal_Map_20261007/FORMAL_FOUNDATION.md), [every node](records/R153_Complete_Formal_Map_20261007/NODE_LEDGER.md), [every rule](records/R153_Complete_Formal_Map_20261007/RULE_LEDGER.md), [gap ledger](records/R153_Complete_Formal_Map_20261007/GAP_LEDGER.json), [fieldwise amendments](records/R153_Complete_Formal_Map_20261007/AMENDMENTS.json).
+
+107 missing statements and 223 missing scopes are supplied. Sixty rules have expanded current-round argument/boundary review; 128 retain inherited arguments with contract/dependency review. Ten exact checks and ten pinned-source hashes pass. This is exhaustive contract coverage of the finite map, **not proof-assistant certification or unrestricted global semantic verification**. Ten open obligation families remain; status changes alone cannot discharge them.
+
+Source-faithfulness repairs: R126/R127 refinement starts from o=(p,r); C:P1 strict-fiber noninjectivity is existential; R134 breakpoints omit zero-zero masses; four toy settings have image sizes 2,4,4,8; shared selection reweighting is separate from faithful-copy specialization; local fiber theorem uses explicit sufficient C1 regularity and neighborhood-constant rank. Effective rule classifications distinguish assumption packaging and metadata audits from deduction.
+
+Continue by discharging explicit node/rule obligations, with typed substitutions and source proofs; keep actual-token grounding, complete physical realization and selected self-experience semantics separate from abstract mathematical existence. Do not restart a generic publication queue or claim that the remaining 128 rules were freshly re-proved. The preservation task for published TA25 is separate. Prior handoff material below is historical unless consistent with this priority.
+
 ## R152 DOI release — 7 October 2026
 
 Author explicitly authorized review followed by DOI, then OTS, then Arweave. R151 v0.2 is now released as **TA-TR-2026-25 v1.0**, [DOI 10.5281/zenodo.23206492](https://doi.org/10.5281/zenodo.23206492). This is a new independent citable theoretical preprint; prior editions remain unchanged. No new scientific sections or theorem nodes were added by release preparation.
