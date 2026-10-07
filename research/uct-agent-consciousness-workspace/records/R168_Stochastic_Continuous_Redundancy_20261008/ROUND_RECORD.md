@@ -1,0 +1,11 @@
+# R168 ROUND RECORD — Stochastic, continuous, and partially observed redundancy
+
+1. **User goal.** Continue the UCT experience–intelligence–self research from the latest verified state, make one substantive advance on actual body/action-related organization, audit every new formal dependency, and preserve recoverable copies without making node counts, publication, or scores the goal.
+2. **One concrete unresolved question.** Given a stochastic consumer, a continuous backup-context space, finite noisy intervention points, and only a partial view of hidden contexts, what assumptions yield a sharp quantitative upper bound on mediator effects that could remain undetected, and when is no nontrivial bound possible?
+3. **Relevant nodes and fixed sources.** `R166:TOKEN_INSTALLATION_WITNESS_CONTRACT`, `R167:OPERATIONAL_MEDIATOR_ARCHITECTURE`, `R167:CONTEXTUAL_USE_CRITERION`, `R167:CLOSURE_RELATIVE_TRIAGE`, `R167:R166_WITNESS_APPLICATION_BOUNDARY`, `C1`, and `B_min`; the fixed R157, R159, R166, and R167 notes and ledgers. R155 attribution formation remains background and is not recomputed.
+4. **Planned addition or correction.** Replace Boolean output difference by a declared distributional integral-probability metric; derive a sharp Lipschitz fill-distance envelope; prove a same-observation hidden-fiber non-identification result; separate worst-case effect amplitude from random-context affected mass; and refine closure-relative triage without changing R166/R167 physical or semantic boundaries.
+5. **Deliverable.** An English research note, executable exact finite checks and machine-readable results, stable formal-map nodes/rules/context links, proof/source/gap ledgers, Chinese review/current handoff, validation outputs, and verified GitHub plus persistent-workspace recovery records.
+
+## Direction check at selection
+
+The question concerns evidence for actual installed use of one declared physical relation. It does not require introspection, self-model, report, language, integration, recurrence, prediction accuracy, continuation control, or bodily framing for basal experience. C1 remains the consciousness-specific explanatory axiom; any familiar-mineness interpretation remains dependent on an independent `B_min`. Nested and overlapping actual processes remain allowed, and no unique extra owner is sought.
