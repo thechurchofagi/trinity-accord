@@ -1,0 +1,12 @@
+{
+  "authorization": "Author explicitly requested review and DOI, then OTS, then Arweave on 2026-10-07",
+  "report_number": "TA-TR-2026-25",
+  "version": "1.0",
+  "source_commit": "09074a05337127f78b3a5c1b57edc9d29543df34",
+  "publication_order": [
+    "DOI",
+    "OTS",
+    "Arweave"
+  ],
+  "peer_reviewed": false
+}
