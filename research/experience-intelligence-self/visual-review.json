@@ -1,6 +1,6 @@
 {
   "state": "VISUAL_REVIEW_PASS",
-  "expected_manifest_sha256": "a61d74734900c731c991f80ecec321c45e1f6e7938497a1afc9914c58b22b48a",
+  "expected_manifest_sha256": "590ece65f2c9875942b3c07aef3f7243322bf06da9c8adfc5fae0032ddbca52a",
   "pdf_sha256": "b4f456014213c5d4f34f41ed2bac8873fd9d90e38398d77daebdb787872b1c1a",
   "page_count": 14,
   "review_type": "AI-assisted review of all 14 rasterized pages in four contact sheets",
