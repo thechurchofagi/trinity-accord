@@ -1,0 +1,118 @@
+{
+  "nodes": [
+    {
+      "domain": "Two deterministic typed devices c in {0,1}; current M=D=1; V=c*M+(1-c)*D; identical independent prediction/readout ports; legal do(M=0),do(M=1) keep D=1,c and other ports fixed; snapshot descriptor excludes wiring c. Abstract comparison; physical realization is extra.",
+      "scope": "Two deterministic typed devices c in {0,1}; current M=D=1; V=c*M+(1-c)*D; identical independent prediction/readout ports; legal do(M=0),do(M=1) keep D=1,c and other ports fixed; snapshot descriptor excludes wiring c. Abstract comparison; physical realization is extra.",
+      "source": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md §3",
+      "source_lineage": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md §3",
+      "counterexamples_and_limits": "R is a declared functional consumer sensitivity, not selected mineness F_O. Including wiring in the descriptor or changing D under intervention changes the claim. No actual realization, full-type difference or phenomenal contrast is inferred.",
+      "id": "R156:INSTALLATION_WITNESS",
+      "kind": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "label": "Matched snapshot with two installation choices",
+      "statement": "Two deterministic typed devices c in {0,1}; current M=D=1; V=c*M+(1-c)*D; identical independent prediction/readout ports; legal do(M=0),do(M=1) keep D=1,c and other ports fixed; snapshot descriptor excludes wiring c. Abstract comparison; physical realization is extra.",
+      "status": "DECLARED_FINITE_MODEL",
+      "proof": "Explicit alternative device/operation definitions; c=0 and c=1 are compared worlds, not simultaneous values.",
+      "formal_contract_R156": {
+        "object_domain": "Two deterministic typed devices c in {0,1}; current M=D=1; V=c*M+(1-c)*D; identical independent prediction/readout ports; legal do(M=0),do(M=1) keep D=1,c and other ports fixed; snapshot descriptor excludes wiring c. Abstract comparison; physical realization is extra.",
+        "quantifiers": "Both c=0,1 devices in W and both separately admissible interventions; one equal-input/different-target counterexample is sufficient to refute a universal decoder on W.",
+        "bearer_time_signature": "Fixed typed ports and one pre-intervention instant; actual bearer realization remains extra.",
+        "source_anchor": {
+          "path": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md",
+          "sha256": "b4cc3a51195ad8e525b249e3896556d8cf3b711d1bcdb90ebdcbc93dd36e1a35",
+          "locator": "§3"
+        },
+        "premise_routes": [],
+        "purpose": "Compare candidate descriptors for selected bodily mineness without substituting an operational contrast for a phenomenal contrast.",
+        "thought_experiments": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md §6",
+        "open_obligations": [
+          "R155-G1",
+          "R155-G2",
+          "R155-G5"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "domain": "Two deterministic typed devices c in {0,1}; current M=D=1; V=c*M+(1-c)*D; identical independent prediction/readout ports; legal do(M=0),do(M=1) keep D=1,c and other ports fixed; snapshot descriptor excludes wiring c. Abstract comparison; physical realization is extra.",
+      "scope": "Two deterministic typed devices c in {0,1}; current M=D=1; V=c*M+(1-c)*D; identical independent prediction/readout ports; legal do(M=0),do(M=1) keep D=1,c and other ports fixed; snapshot descriptor excludes wiring c. Abstract comparison; physical realization is extra.",
+      "source": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md §3",
+      "source_lineage": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md §3",
+      "counterexamples_and_limits": "R is a declared functional consumer sensitivity, not selected mineness F_O. Including wiring in the descriptor or changing D under intervention changes the claim. No actual realization, full-type difference or phenomenal contrast is inferred.",
+      "id": "R156:SNAPSHOT_USE_LIMIT",
+      "kind": "CONDITIONAL_RESULT",
+      "label": "Snapshot does not recover installed attribution use",
+      "statement": "The devices have the same declared snapshot including M,D,V and attribution/prediction readouts, but R(c)=1[V(do(M=0))!=V(do(M=1))] equals c. No fixed snapshot decoder recovers R for both; the two-entry response table does recover R on this domain.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT_WITH_EXACT_WITNESS",
+      "proof": "At M=D=1 both outputs are 1. With fixed D=1 the c=0 table is (1,1), c=1 table (0,1), so R differs. Equal decoder inputs cannot give these different R values. Comparing table entries recovers R.",
+      "formal_contract_R156": {
+        "object_domain": "Two deterministic typed devices c in {0,1}; current M=D=1; V=c*M+(1-c)*D; identical independent prediction/readout ports; legal do(M=0),do(M=1) keep D=1,c and other ports fixed; snapshot descriptor excludes wiring c. Abstract comparison; physical realization is extra.",
+        "quantifiers": "Both c=0,1 devices in W and both separately admissible interventions; one equal-input/different-target counterexample is sufficient to refute a universal decoder on W.",
+        "bearer_time_signature": "Fixed typed ports and one pre-intervention instant; actual bearer realization remains extra.",
+        "source_anchor": {
+          "path": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md",
+          "sha256": "b4cc3a51195ad8e525b249e3896556d8cf3b711d1bcdb90ebdcbc93dd36e1a35",
+          "locator": "§3"
+        },
+        "premise_routes": [
+          {
+            "rule": "r156_snapshot_use_limit",
+            "all_of": [
+              "R156:INSTALLATION_WITNESS"
+            ]
+          }
+        ],
+        "purpose": "Compare candidate descriptors for selected bodily mineness without substituting an operational contrast for a phenomenal contrast.",
+        "thought_experiments": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md §6",
+        "open_obligations": [
+          "R155-G1",
+          "R155-G2",
+          "R155-G5"
+        ],
+        "machine_formalized": false
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "r156_snapshot_use_limit",
+      "all_of": [
+        "R156:INSTALLATION_WITNESS"
+      ],
+      "conclusion": "R156:SNAPSHOT_USE_LIMIT",
+      "statement": "The devices have the same declared snapshot including M,D,V and attribution/prediction readouts, but R(c)=1[V(do(M=0))!=V(do(M=1))] equals c. No fixed snapshot decoder recovers R for both; the two-entry response table does recover R on this domain.",
+      "proof_sketch": "At M=D=1 both outputs are 1. With fixed D=1 the c=0 table is (1,1), c=1 table (0,1), so R differs. Equal decoder inputs cannot give these different R values. Comparing table entries recovers R.",
+      "source": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md §3",
+      "kind": "DEDUCTIVE_APPLICATION",
+      "review": "MANUAL_CONDITIONAL_ARGUMENT_WITH_EXACT_WITNESS",
+      "formal_contract_R156": {
+        "premise_connective": "AND",
+        "alternative_routes": "Separate rule IDs would be OR; one route here.",
+        "bindings_required": [
+          "fixed D under both operations",
+          "same snapshot domain excluding c",
+          "same functional R target; never substitute F_O"
+        ],
+        "proof_location": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md §3",
+        "source_sha256": "b4cc3a51195ad8e525b249e3896556d8cf3b711d1bcdb90ebdcbc93dd36e1a35",
+        "machine_proof": false
+      }
+    }
+  ],
+  "context_links": [
+    {
+      "from": "R155:BRIDGE_CRITERION",
+      "to": "R156:SNAPSHOT_USE_LIMIT",
+      "relation": "equal-descriptor contrast for functional R only; not an independently given phenomenal target"
+    },
+    {
+      "from": "R156:SNAPSHOT_USE_LIMIT",
+      "to": "R155:MINENESS_OBLIGATION",
+      "relation": "open selected-mineness interpretation remains; no deductive discharge"
+    },
+    {
+      "from": "R147:MEMORY_LIMIT",
+      "to": "R156:INSTALLATION_WITNESS",
+      "relation": "causal installation versus record-only isolation comparison"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "checks": [
+    "equal_snapshot",
+    "different_fixed_D_use",
+    "table_recovers_defined_R",
+    "changing_D_invalidates_original_operation_contract"
+  ],
+  "rows": [
+    {
+      "c": 0,
+      "current_M": 1,
+      "current_D": 1,
+      "current_V": 1,
+      "intervention_table": [
+        1,
+        1
+      ],
+      "R": 0
+    },
+    {
+      "c": 1,
+      "current_M": 1,
+      "current_D": 1,
+      "current_V": 1,
+      "intervention_table": [
+        0,
+        1
+      ],
+      "R": 1
+    }
+  ],
+  "empirical_validation": false,
+  "phenomenal_values_assigned": false,
+  "proof_assistant_certified": false
+}

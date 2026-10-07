@@ -1,0 +1,36 @@
+{
+  "inherited": "records/R155_Bodily_Attribution_Formation_20261007/GAP_LEDGER.json",
+  "closed": [],
+  "entries": [
+    {
+      "id": "R156-G1",
+      "status": "OPEN",
+      "issue": "No independently established F_O contrast for matched snapshot/different use pair.",
+      "affected": [
+        "R155:MINENESS_OBLIGATION"
+      ],
+      "forbidden_inference": "R differs therefore F_O differs",
+      "next": "Independently specify selected mineness target and fixed interpretation before assigning values."
+    },
+    {
+      "id": "R156-G2",
+      "status": "DECLARED_BOUNDARY",
+      "issue": "Diagnostic M intervention can break q/M consistency; it is a latch disposition test, not a calibrated posterior history.",
+      "affected": [
+        "R156:INSTALLATION_WITNESS",
+        "R156:SNAPSHOT_USE_LIMIT"
+      ],
+      "next": "Retain off-manifold/physical-operation premise explicitly."
+    },
+    {
+      "id": "R156-G3",
+      "status": "OPEN",
+      "issue": "The finite use table omits complete constitutive organization.",
+      "affected": [
+        "A:C1_OI",
+        "R155:BRIDGE_CRITERION"
+      ],
+      "next": "Do not infer complete experiential equality from finite table equality."
+    }
+  ]
+}

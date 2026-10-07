@@ -1,0 +1,11 @@
+{
+  "status": "SCOPED_AUDIT_PASS",
+  "nodes": 401,
+  "rules": 194,
+  "inherited_nodes_rules_context_unchanged": true,
+  "new_edges_acyclic": true,
+  "no_deduction_to_F_O": true,
+  "joint_premise_review": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md \u00a77",
+  "purpose": "Direct candidate-description comparison; next work must address mineness interpretation rather than repeat insufficiency lemmas.",
+  "global_semantic_certification": false
+}

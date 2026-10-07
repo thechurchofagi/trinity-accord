@@ -1,3 +1,13 @@
+## R156 current priority — bridge comparison and durable hourly continuation
+
+The author requests substantive continuation now and hourly thereafter, with an end-of-round formal-map/direction audit and recoverable saves in GitHub plus the ChatGPT workspace. Read [hourly protocol](HOURLY_RESEARCH_PROTOCOL.md). First scheduled continuation: 7 October 2026 19:32:41 Asia/Shanghai. One round is not completion of the ongoing research goal.
+
+[R156 comparison](records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md) distinguishes prediction, attribution confidence and installed use. A matched-snapshot/different-use witness shows why confidence alone omits a causal role. It **does not establish a felt-mineness contrast**. Four finite checks pass; [map audit](records/R156_Mineness_Bridge_Comparison_20261007/MAP_AUDIT.json) records joint-premise, direction and purpose boundaries; [gaps](records/R156_Mineness_Bridge_Comparison_20261007/GAP_LEDGER.json) retain the independent phenomenal-target obligation. [Chinese review](records/R156_Mineness_Bridge_Comparison_20261007/REVIEW_ZH.md).
+
+Current graph R156-v1.0: 401 nodes / 194 rules, new 2/1; inherited 399/193 and context links unchanged. New `formal_contract_R156` applies only to these entries; prior effective contracts retain authority. Next research must specify independent target/interpretation constraints for selected bodily mineness rather than repeat operational insufficiency lemmas. No basal gate, proof-assistant certification, empirical validation or new publication is claimed.
+
+Persistent workspace continuation filename: UCT_Hourly_Research_Master_Handoff.md. Latest successful two-destination save is recorded in the current round's DUAL_SAVE_RECEIPT.json when present; local existence alone is insufficient. Follow fresh GitHub state and versioned backup scope after interruptions, preserving concurrency and failed attempts. Earlier entries below are historical where superseded.
+
 ## R155 current research — bodily/action attribution formation, 7 October 2026
 
 The author approved advancing the positive bodily/action-mineness direction. [R155 note](records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md) supplies a fixed finite acquisition mechanism, four local mathematical arguments, installed consumers, error/memory witnesses and all four thought-experiment families. [Chinese review](records/R155_Bodily_Attribution_Formation_20261007/REVIEW_ZH.md), [handoff](records/R155_Bodily_Attribution_Formation_20261007/CURRENT_HANDOFF.md), [gaps](records/R155_Bodily_Attribution_Formation_20261007/GAP_LEDGER.json), [checks](records/R155_Bodily_Attribution_Formation_20261007/VALIDATION.json).
