@@ -11,7 +11,9 @@
     "expected_sha_fast_forward": true,
     "remote_research_readback": true,
     "receipt_commit_parent": "b4846a59c3cea8a254875d7df4e3bdd165533b75",
-    "receipt_commit": "POPULATED_BY_REMOTE_COMMIT_RESULT"
+    "receipt_commit": "ea365c71a166d2b62127e8462fafddfa16ccb650",
+    "receipt_tree": "83b1fc856431a25ca67110f5b154e58fff9f5ec3",
+    "receipt_remote_readback": true
   },
   "formal_state": {
     "revision": "R165-v1.0",
@@ -55,5 +57,5 @@
     "exact_byte_readback": true
   },
   "next_question": "What independently specified organization-level evidence would make a valid R161 physical role profile support an actually installed body-frame relation inside one token, rather than merely a population effect, without using ownership report as its definition or turning that relation into a basal-experience gate?",
-  "status": "DUAL_SAVE_VERIFIED_BEFORE_RECEIPT_COMMIT"
+  "status": "DUAL_SAVE_VERIFIED"
 }
