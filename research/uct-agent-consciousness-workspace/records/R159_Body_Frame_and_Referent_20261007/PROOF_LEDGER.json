@@ -1,0 +1,62 @@
+{
+  "source": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+  "claims": [
+    {
+      "id": "R159:ANCHOR_BINDING_CONTRACT",
+      "type": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "statement": "For a fixed admitted actual P,I,complete K,D,Phi,h, internal sorted tokens r,k support grounded K-relations Anchor(r),Bind(r,k),Use(r,k). theta_frame is their conjunction, with fixed/transported parameters. A separately grounded partial psi maps representation tokens to external E; organism anatomical membership M(O(P),psi(k)) is not internal Bind. No h(c) is asserted unless c is in its declared carrier.",
+      "scope": "Selected installed body-frame organization on one actual-token domain; external reference/organism-membership interpretation is separately declared.",
+      "quantifiers": "Each instance satisfies every conjunct jointly; no universal necessary/sufficient F_O condition. Logical toy satisfiability does not assert physical realization.",
+      "all_of_routes": [],
+      "argument": "Definition plus independent actual-grounding assumptions; finite r/k/c/member witness demonstrates only abstract consistency.",
+      "limits": "Name/observer meaning does not install Bind/Use; finite protocol condition bits are not complete neural K; undefined psi/M requires domain restriction.",
+      "status": "DECLARED_ACTUAL_APPLICATION_CONTRACT",
+      "thought_experiments": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §7"
+    },
+    {
+      "id": "R159:FRAME_RELATION_TRANSPORT",
+      "type": "CONDITIONAL_STRUCTURAL_APPLICATION",
+      "statement": "Given R157:COORDINATE_TRANSPORT and ANCHOR_BINDING_CONTRACT on the same instance, D|=theta_frame(r,k) iff Phi|=theta_frame(h(r),h(k)). False external anatomical membership does not logically negate the installed internal relation; this does not establish a familiar F_O interpretation.",
+      "scope": "Exactly the common actual P,I,K,D,Phi,h and internally sorted theta_frame from the full contract. External correctness is not a hidden K-premise.",
+      "quantifiers": "For every admitted tuple/instance satisfying the simultaneous contract and transport premises; not every actual organism is asserted to realize that contract.",
+      "all_of_routes": [
+        {
+          "rule": "r159_frame_relation_transport",
+          "all_of": [
+            "R157:COORDINATE_TRANSPORT",
+            "R159:ANCHOR_BINDING_CONTRACT"
+          ]
+        }
+      ],
+      "argument": "Substitute the grounded K-formula and correctly sorted internal tuple into R157 preservation. External c need not be in the h-domain. Conjunction transport yields a selected relation, not autonomous substructure.",
+      "limits": "No h on external c without expanded sorts; no report-to-F, no empirical proof of C1, no claim that reference/world changes preserve every K-fact.",
+      "status": "MANUAL_CONDITIONAL_C1_APPLICATION",
+      "thought_experiments": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §7"
+    },
+    {
+      "id": "R159:COUPLED_ROLE_WITNESS",
+      "type": "ABSTRACT_COUNTEREXAMPLE_SCHEMA",
+      "statement": "For b,a in {0,1}, 0<t_O,t_A<1, lambda,mu>0, o=b-t_O+lambda*b*a and q=a-t_A+mu*a*b dissociate by sign at (1,0) and (0,1), yet o(1,1)-o(1,0)=lambda and q(1,1)-q(0,1)=mu are positive. Therefore this explicit schema has role dissociation and graded cross-modulation simultaneously.",
+      "scope": "Declared finite abstract two-input family with strictly bounded thresholds and positive couplings; not measured neural states or fitted human output laws.",
+      "quantifiers": "For every parameter tuple in the declared domain; nonempty exact witness t_O=t_A=1/2,lambda=mu=1/4. Sign categories apply only to these toy readouts.",
+      "all_of_routes": [],
+      "argument": "At (1,0), o=1-t_O>0,q=-t_A<0; at (0,1),o=-t_O<0,q=1-t_A>0. Subtraction at the fixed other-coordinate corners gives the two positive couplings. All hold together.",
+      "limits": "Classic algebra, not new mechanism; zero coupling retains sign pattern, outside stated positive-coupling claim. No subjective F assignment, group means fit, or universal neural independence conclusion.",
+      "status": "MANUAL_EXPLICIT_COUNTERMODEL_WITH_BOUNDED_CHECKS",
+      "thought_experiments": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §7"
+    },
+    {
+      "id": "R159:SELECTED_OWNERSHIP_APPLICATION",
+      "type": "OPEN_BRIDGE_APPLICATION",
+      "statement": "Compare H_B body-frame binding/use with source modulation and H_A ownership solely determined by a separately grounded source-attribution organization. Actual erroneous Bind can refer via psi to an anatomical nonmember without changing actual bearer by definition. Identifying its intrinsic presentation as familiar ownership requires fixed independent B_min, physical relational witnesses and fallible target evidence.",
+      "scope": "Restricted human body-frame/remapping application motivated by the declared moving-hand protocol, not a universal self or basal-experience gate.",
+      "quantifiers": "Two predeclared candidate explanations, not necessary/sufficient biconditionals. Full hidden source states cannot be equated with questionnaire values.",
+      "all_of_routes": [],
+      "argument": "Proposal places actual internal error organization under C1, with anatomical truth/reference and selected target interpretation separate. Prior protocol constrains reports, not an exhaustive neural realization.",
+      "limits": "Tool tracking may satisfy weak frame/use descriptors; post-hoc target refitting forbidden; body-slot discriminant, complete realization and independent F measurement remain open.",
+      "status": "OPEN_POSITIVE_APPLICATION_WITH_EXPLICIT_FAILURE_CRITERIA",
+      "thought_experiments": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §7"
+    }
+  ],
+  "note": "Only one conditional application rule; definitions, a concrete algebraic witness and an open bridge are not counted as proved physiological theorems."
+}

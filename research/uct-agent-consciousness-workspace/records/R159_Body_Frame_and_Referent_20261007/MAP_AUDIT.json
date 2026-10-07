@@ -1,0 +1,23 @@
+{
+  "status": "PASS_SCOPED_APPLICATION_AUDIT",
+  "nodes": 418,
+  "rules": 200,
+  "new_nodes": 4,
+  "new_rules": 1,
+  "unique_ids": true,
+  "all_rule_endpoints_present": true,
+  "acyclic": true,
+  "inherited_fields_preserved_with_three_additive_refinements": true,
+  "inherited_rules_context_prefix_preserved": true,
+  "semantic_node_rule_review": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §8",
+  "joint_premise_review": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §§3–5",
+  "internal_external_sort_audit": "No h(c) for external c; only internal r,k enter theta_frame",
+  "quantitative_independence_not_inferred": true,
+  "no_report_to_F_or_C1_rule": true,
+  "no_global_semantic_certification": true,
+  "direction_checks": [
+    "PASS_AFTER_SELECTION",
+    "PASS_AFTER_RESULT",
+    "PASS_BEFORE_SAVE"
+  ]
+}

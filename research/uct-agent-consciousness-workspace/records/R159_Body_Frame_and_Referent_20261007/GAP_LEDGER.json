@@ -1,0 +1,60 @@
+{
+  "inherited": "records/R158_Body_Ownership_Agency_Ablation_20261007/GAP_LEDGER.json",
+  "closed_inherited_families": [],
+  "entries": [
+    {
+      "id": "R159-G1",
+      "status": "REPAIRED_TYPING_OPEN_REALIZATION",
+      "location": "R158 bearer/candidate contract and applications of R157 internal selector",
+      "affected": "R158:TARGET_SPLIT; R157:DEFINABLE_SELECTOR_SETUP; R159 frame application",
+      "counterexample": "External c outside D(P) makes h(c) undefined.",
+      "repaired": "Add internal k and reference psi; transport r,k only.",
+      "unresolved": "Reference grounding and any expanded environmental signature remain independent."
+    },
+    {
+      "id": "R159-G2",
+      "status": "CLARIFIED_SCOPE",
+      "location": "Reading qualitative ownership/agency distinction as quantitative independence",
+      "affected": "R158 profile and candidate fit claims",
+      "counterexample": "Coupled exact o/q family dissociates by sign but has positive cross-effects.",
+      "repaired": "Explicit coupled-role family; no isolated-channel law inferred.",
+      "unresolved": "Physiological role measurements and causal cross-modulation architecture not identified."
+    },
+    {
+      "id": "R159-G3",
+      "status": "OPEN",
+      "location": "Body-frame binding versus external-tool tracking",
+      "affected": "R159:ANCHOR_BINDING_CONTRACT / SELECTED_OWNERSHIP_APPLICATION",
+      "counterexample": "An externally interpreted tracking token could be called a body slot without actual body-specific sensitivity.",
+      "repaired": "Require independent physical relational witness and specified consumers; no label-based installation.",
+      "unresolved": "Actual body-slot/tool-slot discriminant not established by the four condition bits."
+    },
+    {
+      "id": "R159-G4",
+      "status": "OPEN",
+      "location": "Specific F_O application and report bridge",
+      "affected": "R159 selected ownership; all phenomenal extrapolation",
+      "counterexample": "Role model and report fit can coexist with ungrounded familiar-label interpretation.",
+      "repaired": "C1 structural application separate from fixed B_min/measurement; error not absence.",
+      "unresolved": "Independent selected target and nonreport measurement remain open."
+    },
+    {
+      "id": "R159-G5",
+      "status": "OPEN",
+      "location": "Within-participant intervention and complete actual organization",
+      "affected": "Actual application of all new clauses",
+      "counterexample": "Same participant at different trials is not same P,I or complete neural K.",
+      "repaired": "Trial-indexed tokens and fixed lineage; mechanical coupling does not imply unique owner.",
+      "unresolved": "Complete physical realization, histories and jointly admissible neural perturbations unresolved."
+    },
+    {
+      "id": "R159-G6",
+      "status": "DECLARED_EVIDENCE_BOUNDARY",
+      "location": "Neural novelty and empirical source scope",
+      "affected": "Prior-art comparisons and data claims",
+      "counterexample": "Robot drift model does not establish subjective ownership; unavailable full text not full review.",
+      "repaired": "Primary protocol windows and robot abstract scope recorded; no neural fit/experiment/priority claim.",
+      "unresolved": "Independent peer validation and broader prior-art review not completed."
+    }
+  ]
+}

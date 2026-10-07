@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-07",
+  "fixed_A_sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+  "fixed_read_scope": "UCT I v1.2 §§8.11–8.14,14.7–14.10 targeted windows; R158 §§2,5–8; current entrypoints",
+  "source_hashes": "VALIDATION.json all ten; not all papers reread",
+  "sources": [
+    {
+      "id": "S1",
+      "doi": "10.3389/fnhum.2012.00040",
+      "url": "https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2012.00040/full",
+      "scope": "Publisher apparatus/conditions/questionnaire, experiment 3 qualitative/graded results; no raw reanalysis"
+    },
+    {
+      "id": "S2",
+      "url": "https://arxiv.org/abs/1806.06809v2",
+      "scope": "Abstract only, prior body-estimation-model boundary; not full methods review"
+    }
+  ],
+  "failed_retrievals": [
+    {
+      "source": "NCBI PMC3303087 / PubMed15709864",
+      "outcome": "Bot check/incomplete page; no full-text claims from these responses",
+      "recovery": "Publisher 2012 protocol used; Tsakiris/Haggard 2005 not relied on"
+    },
+    {
+      "source": "Broad system1 query for 2005 paper",
+      "outcome": "Returned unrelated results; discarded, not used as evidence"
+    }
+  ],
+  "new_neural_mechanism_claim": false,
+  "raw_data_analysis": false,
+  "priority_search_complete": false,
+  "additional_context_read": "Pinned B/II v1.1 §4.1 BAC-1–7, lines165–199; contextual methodology, not an additional deductive premise."
+}

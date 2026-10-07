@@ -1,0 +1,19 @@
+{
+  "entries": [
+    {
+      "id": "R158:TARGET_SPLIT",
+      "effective_reading": "Insert internal representation token k and separately grounded external reference psi(k)=c. Internal K-isomorphism applies to k, not automatically to external c; organism anatomy differs from neural support membership.",
+      "status": "SCOPE_REFINEMENT_WITH_OPEN_GROUNDING"
+    },
+    {
+      "id": "R158:TARGET_SPECIFIC_BRIDGE_PROFILE",
+      "effective_reading": "Ownership/agency roles may be distinguished while strengths cross-modulate. The two candidate directions are not claims of uncoupled laws or sufficient F bridges.",
+      "status": "SCOPE_REFINEMENT_WITH_OPEN_GROUNDING"
+    },
+    {
+      "id": "R157:DEFINABLE_SELECTOR_SETUP",
+      "effective_reading": "For body attribution, correctly sorted internal r,k may enter a K-formula; external candidate c cannot enter h-domain merely by being its represented content. Expanded environmental sorts/realization must be declared separately.",
+      "status": "SCOPE_REFINEMENT_WITH_OPEN_GROUNDING"
+    }
+  ]
+}

@@ -1,10 +1,10 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R158-v1.0",
+  "revision": "R159-v1.0",
   "date": "2026-10-07",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
-  "base_commit": "d6ee6c53d28d4e6d03822b731307621ab1edad70",
+  "base_commit": "b536254cff1472cf43657323b9a6046092028e01",
   "semantics": {
     "all_of": "Every listed premise is required. Global typing/domain conventions and the cited statement remain part of the claim.",
     "multiple_rules": "Alternative sufficient derivations, not a requirement to conjoin all routes.",
@@ -17580,6 +17580,16 @@
           "F153-17"
         ],
         "machine_formalized": false
+      },
+      "formal_contract_R159": {
+        "amends": "Typing/application clarification only; inherited statement and contracts retained.",
+        "effective_reading": "For body attribution, correctly sorted internal r,k may enter a K-formula; external candidate c cannot enter h-domain merely by being its represented content. Expanded environmental sorts/realization must be declared separately.",
+        "source_anchor": {
+          "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+          "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+          "locator": "§§3–6,8"
+        },
+        "machine_formalized": false
       }
     },
     {
@@ -17881,6 +17891,16 @@
           "F153-17"
         ],
         "machine_formalized": false
+      },
+      "formal_contract_R159": {
+        "amends": "Typing/application clarification only; inherited statement and contracts retained.",
+        "effective_reading": "Insert internal representation token k and separately grounded external reference psi(k)=c. Internal K-isomorphism applies to k, not automatically to external c; organism anatomy differs from neural support membership.",
+        "source_anchor": {
+          "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+          "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+          "locator": "§§3–6,8"
+        },
+        "machine_formalized": false
       }
     },
     {
@@ -18057,6 +18077,160 @@
         "premise_routes": [],
         "purpose": "Separate bodily ownership and action agency within experience and correct selector closure without adding basal gates.",
         "thought_experiments": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      },
+      "formal_contract_R159": {
+        "amends": "Typing/application clarification only; inherited statement and contracts retained.",
+        "effective_reading": "Ownership/agency roles may be distinguished while strengths cross-modulate. The two candidate directions are not claims of uncoupled laws or sufficient F bridges.",
+        "source_anchor": {
+          "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+          "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+          "locator": "§§3–6,8"
+        },
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R159:ANCHOR_BINDING_CONTRACT",
+      "kind": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "label": "Anchor Binding Contract",
+      "statement": "For a fixed admitted actual P,I,complete K,D,Phi,h, internal sorted tokens r,k support grounded K-relations Anchor(r),Bind(r,k),Use(r,k). theta_frame is their conjunction, with fixed/transported parameters. A separately grounded partial psi maps representation tokens to external E; organism anatomical membership M(O(P),psi(k)) is not internal Bind. No h(c) is asserted unless c is in its declared carrier.",
+      "domain": "Selected installed body-frame organization on one actual-token domain; external reference/organism-membership interpretation is separately declared.",
+      "scope": "Selected installed body-frame organization on one actual-token domain; external reference/organism-membership interpretation is separately declared.",
+      "source": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §§2–3",
+      "source_lineage": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §§2–3",
+      "status": "DECLARED_ACTUAL_APPLICATION_CONTRACT",
+      "proof": "Definition plus independent actual-grounding assumptions; finite r/k/c/member witness demonstrates only abstract consistency.",
+      "counterexamples_and_limits": "Name/observer meaning does not install Bind/Use; finite protocol condition bits are not complete neural K; undefined psi/M requires domain restriction.",
+      "formal_contract_R159": {
+        "object_domain": "Selected installed body-frame organization on one actual-token domain; external reference/organism-membership interpretation is separately declared.",
+        "quantifiers": "Each instance satisfies every conjunct jointly; no universal necessary/sufficient F_O condition. Logical toy satisfiability does not assert physical realization.",
+        "bearer_time_signature": "Actual instance fixes P,I,complete K; trial tokens differ while lineage may be retained. Internal r,k and external referent c/E have different sorts. Abstract example is not an actual organism.",
+        "source_anchor": {
+          "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+          "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+          "locator": "§§2–3"
+        },
+        "premise_routes": [],
+        "purpose": "Explain erroneous body attribution inside actual/experiential organization while separating reference, anatomical truth and coupled roles.",
+        "thought_experiments": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R159:FRAME_RELATION_TRANSPORT",
+      "kind": "CONDITIONAL_STRUCTURAL_APPLICATION",
+      "label": "Frame Relation Transport",
+      "statement": "Given R157:COORDINATE_TRANSPORT and ANCHOR_BINDING_CONTRACT on the same instance, D|=theta_frame(r,k) iff Phi|=theta_frame(h(r),h(k)). False external anatomical membership does not logically negate the installed internal relation; this does not establish a familiar F_O interpretation.",
+      "domain": "Exactly the common actual P,I,K,D,Phi,h and internally sorted theta_frame from the full contract. External correctness is not a hidden K-premise.",
+      "scope": "Exactly the common actual P,I,K,D,Phi,h and internally sorted theta_frame from the full contract. External correctness is not a hidden K-premise.",
+      "source": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §4",
+      "source_lineage": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §4",
+      "status": "MANUAL_CONDITIONAL_C1_APPLICATION",
+      "proof": "Substitute the grounded K-formula and correctly sorted internal tuple into R157 preservation. External c need not be in the h-domain. Conjunction transport yields a selected relation, not autonomous substructure.",
+      "counterexamples_and_limits": "No h on external c without expanded sorts; no report-to-F, no empirical proof of C1, no claim that reference/world changes preserve every K-fact.",
+      "formal_contract_R159": {
+        "object_domain": "Exactly the common actual P,I,K,D,Phi,h and internally sorted theta_frame from the full contract. External correctness is not a hidden K-premise.",
+        "quantifiers": "For every admitted tuple/instance satisfying the simultaneous contract and transport premises; not every actual organism is asserted to realize that contract.",
+        "bearer_time_signature": "Actual instance fixes P,I,complete K; trial tokens differ while lineage may be retained. Internal r,k and external referent c/E have different sorts. Abstract example is not an actual organism.",
+        "source_anchor": {
+          "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+          "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+          "locator": "§4"
+        },
+        "premise_routes": [
+          {
+            "rule": "r159_frame_relation_transport",
+            "all_of": [
+              "R157:COORDINATE_TRANSPORT",
+              "R159:ANCHOR_BINDING_CONTRACT"
+            ]
+          }
+        ],
+        "purpose": "Explain erroneous body attribution inside actual/experiential organization while separating reference, anatomical truth and coupled roles.",
+        "thought_experiments": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R159:COUPLED_ROLE_WITNESS",
+      "kind": "ABSTRACT_COUNTEREXAMPLE_SCHEMA",
+      "label": "Coupled Role Witness",
+      "statement": "For b,a in {0,1}, 0<t_O,t_A<1, lambda,mu>0, o=b-t_O+lambda*b*a and q=a-t_A+mu*a*b dissociate by sign at (1,0) and (0,1), yet o(1,1)-o(1,0)=lambda and q(1,1)-q(0,1)=mu are positive. Therefore this explicit schema has role dissociation and graded cross-modulation simultaneously.",
+      "domain": "Declared finite abstract two-input family with strictly bounded thresholds and positive couplings; not measured neural states or fitted human output laws.",
+      "scope": "Declared finite abstract two-input family with strictly bounded thresholds and positive couplings; not measured neural states or fitted human output laws.",
+      "source": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §5",
+      "source_lineage": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §5",
+      "status": "MANUAL_EXPLICIT_COUNTERMODEL_WITH_BOUNDED_CHECKS",
+      "proof": "At (1,0), o=1-t_O>0,q=-t_A<0; at (0,1),o=-t_O<0,q=1-t_A>0. Subtraction at the fixed other-coordinate corners gives the two positive couplings. All hold together.",
+      "counterexamples_and_limits": "Classic algebra, not new mechanism; zero coupling retains sign pattern, outside stated positive-coupling claim. No subjective F assignment, group means fit, or universal neural independence conclusion.",
+      "formal_contract_R159": {
+        "object_domain": "Declared finite abstract two-input family with strictly bounded thresholds and positive couplings; not measured neural states or fitted human output laws.",
+        "quantifiers": "For every parameter tuple in the declared domain; nonempty exact witness t_O=t_A=1/2,lambda=mu=1/4. Sign categories apply only to these toy readouts.",
+        "bearer_time_signature": "Actual instance fixes P,I,complete K; trial tokens differ while lineage may be retained. Internal r,k and external referent c/E have different sorts. Abstract example is not an actual organism.",
+        "source_anchor": {
+          "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+          "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+          "locator": "§5"
+        },
+        "premise_routes": [],
+        "purpose": "Explain erroneous body attribution inside actual/experiential organization while separating reference, anatomical truth and coupled roles.",
+        "thought_experiments": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R159:SELECTED_OWNERSHIP_APPLICATION",
+      "kind": "OPEN_BRIDGE_APPLICATION",
+      "label": "Selected Ownership Application",
+      "statement": "Compare H_B body-frame binding/use with source modulation and H_A ownership solely determined by a separately grounded source-attribution organization. Actual erroneous Bind can refer via psi to an anatomical nonmember without changing actual bearer by definition. Identifying its intrinsic presentation as familiar ownership requires fixed independent B_min, physical relational witnesses and fallible target evidence.",
+      "domain": "Restricted human body-frame/remapping application motivated by the declared moving-hand protocol, not a universal self or basal-experience gate.",
+      "scope": "Restricted human body-frame/remapping application motivated by the declared moving-hand protocol, not a universal self or basal-experience gate.",
+      "source": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §§5–6",
+      "source_lineage": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §§5–6",
+      "status": "OPEN_POSITIVE_APPLICATION_WITH_EXPLICIT_FAILURE_CRITERIA",
+      "proof": "Proposal places actual internal error organization under C1, with anatomical truth/reference and selected target interpretation separate. Prior protocol constrains reports, not an exhaustive neural realization.",
+      "counterexamples_and_limits": "Tool tracking may satisfy weak frame/use descriptors; post-hoc target refitting forbidden; body-slot discriminant, complete realization and independent F measurement remain open.",
+      "formal_contract_R159": {
+        "object_domain": "Restricted human body-frame/remapping application motivated by the declared moving-hand protocol, not a universal self or basal-experience gate.",
+        "quantifiers": "Two predeclared candidate explanations, not necessary/sufficient biconditionals. Full hidden source states cannot be equated with questionnaire values.",
+        "bearer_time_signature": "Actual instance fixes P,I,complete K; trial tokens differ while lineage may be retained. Internal r,k and external referent c/E have different sorts. Abstract example is not an actual organism.",
+        "source_anchor": {
+          "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+          "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+          "locator": "§§5–6"
+        },
+        "premise_routes": [],
+        "purpose": "Explain erroneous body attribution inside actual/experiential organization while separating reference, anatomical truth and coupled roles.",
+        "thought_experiments": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §7",
         "open_obligations": [
           "F153-09",
           "F153-10",
@@ -30308,6 +30482,31 @@
         "source_sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r159_frame_relation_transport",
+      "all_of": [
+        "R157:COORDINATE_TRANSPORT",
+        "R159:ANCHOR_BINDING_CONTRACT"
+      ],
+      "conclusion": "R159:FRAME_RELATION_TRANSPORT",
+      "statement": "Given R157:COORDINATE_TRANSPORT and ANCHOR_BINDING_CONTRACT on the same instance, D|=theta_frame(r,k) iff Phi|=theta_frame(h(r),h(k)). False external anatomical membership does not logically negate the installed internal relation; this does not establish a familiar F_O interpretation.",
+      "proof_sketch": "Substitute the grounded K-formula and correctly sorted internal tuple into R157 preservation. External c need not be in the h-domain. Conjunction transport yields a selected relation, not autonomous substructure.",
+      "source": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §4",
+      "kind": "CONDITIONAL_APPLICATION",
+      "review": "MANUAL_SAME_INSTANCE_APPLICATION",
+      "formal_contract_R159": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same P,I,complete K,D,Phi,h in both premises",
+          "theta_frame a grounded K-formula; r,k in internal correctly sorted carriers",
+          "fixed/transported parameters; external psi/E/c not silently mapped by h"
+        ],
+        "quantification": "For each jointly admissible actual instance; physiological premises not discharged by abstract satisfiability.",
+        "proof_location": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §4",
+        "source_sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -30870,6 +31069,31 @@
       "from": "R157:REPORT_COVERAGE_LIMIT",
       "to": "R158:CONJUNCTION_REJECTION",
       "relation": "independent target witness cannot be supplied by report partiality"
+    },
+    {
+      "from": "R159:COUPLED_ROLE_WITNESS",
+      "to": "R159:SELECTED_OWNERSHIP_APPLICATION",
+      "relation": "counterexample to uncoupling shortcut; not evidence that this is a neural law"
+    },
+    {
+      "from": "R158:TARGET_SPECIFIC_BRIDGE_PROFILE",
+      "to": "R159:SELECTED_OWNERSHIP_APPLICATION",
+      "relation": "positive application refinement; target semantics remain open"
+    },
+    {
+      "from": "B:BAC",
+      "to": "R159:SELECTED_OWNERSHIP_APPLICATION",
+      "relation": "methodological criteria and failure obligations, not a deduction"
+    },
+    {
+      "from": "R156:SNAPSHOT_USE_LIMIT",
+      "to": "R159:ANCHOR_BINDING_CONTRACT",
+      "relation": "installed consumers remain independent physical grounding obligation"
+    },
+    {
+      "from": "A:U1",
+      "to": "R159:SELECTED_OWNERSHIP_APPLICATION",
+      "relation": "context: no selected-body clause added to basal existence"
     }
   ],
   "prohibited_inferences_D": [
@@ -31441,6 +31665,17 @@
     "current_contract": "formal_contract_R158 for new entries and four explicitly scoped amendments only; all historical fields retained",
     "status": "OWNERSHIP_AGENCY_TARGET_SPLIT_AND_SELECTOR_CLOSURE_REPAIRED_BRIDGE_OPEN",
     "proof_assistant_certified": false,
+    "empirical_validation": false
+  },
+  "research_R159": {
+    "start_head": "b536254cff1472cf43657323b9a6046092028e01",
+    "parent_graph_sha256": "da73b4d4f655d72887f1a20d2df23f41b47a2a9594864b9f04228285fda60855",
+    "note": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+    "new_nodes": 4,
+    "new_rules": 1,
+    "status": "INTERNAL_FRAME_REFERENT_APPLICATION_AND_COUPLED_ROLE_LIMIT_BRIDGE_OPEN",
+    "contract": "formal_contract_R159 for four new entries/one rule and three explicit refinements only; historical fields intact",
+    "global_semantic_proof": false,
     "empirical_validation": false
   }
 }
