@@ -27,8 +27,7 @@ v^\pi_B(x)=\Pr_x^\pi(\text{success by }H),\qquad x\in B.
 All coordinates use the same pi, while the probabilities are computed in their respective fixed mechanism/state. The robust criterion is
 
 \[
-V_H(B)=\max_{\pi\ {
-m mixed}}\min_{x\in B}v^\pi_B(x).
+V_H(B)=\max_{\pi\ \mathrm{mixed}}\min_{x\in B}v^\pi_B(x).
 \]
 
 This takes a worst case over initial states as well as mechanisms. If the intended contract instead supplies a conditional initial-state distribution inside each model, first average each pure policy vector using that distribution, then take the worst case over model labels. These are different specifications; neither is silently substituted for the other.

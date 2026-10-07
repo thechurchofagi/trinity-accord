@@ -32,3 +32,7 @@ The 2D primal routine examines vertices and segment crossings of the diagonal; t
 This is a manual review by the same assistant, not independent peer review or proof-assistant certification. General validity rests on the stated finite-domain proofs. No failed check was discarded. Full-text retrieval of the recent hidden-model paper was blocked; its abstract was read, and a full technical comparison remains open. Earlier Takahashi reading scope remains unchanged.
 
 T2 OPEN, C3 intervention transport NOT_TESTED, valence OPEN. Storage verification appears separately in the downloadable package save receipt after remote commit creation.
+
+## Storage-time formatting repair
+
+Remote blob verification detected one carriage-return character in the mixed-policy formula caused by a LaTeX escape. It was replaced with an explicit math-font command, and the affected proof and this log were saved in a follow-up storage commit. No mathematical result or check output changed. The final remote read verifies all 23 files against their exact local bytes.
