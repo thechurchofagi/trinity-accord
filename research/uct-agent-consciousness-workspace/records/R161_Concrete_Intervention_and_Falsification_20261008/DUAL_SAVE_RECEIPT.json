@@ -1,0 +1,94 @@
+{
+  "schema": "UCT_DUAL_SAVE_RECEIPT/v1",
+  "round": "R161",
+  "saved_at_utc": "2026-10-07T16:57:21+00:00",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "start_head": "2f8988729ad63b55ba3850b11d421a65a9015fe2",
+    "research_commit": "25f90cf714f5ebf61cadc3eecd9b1467943404d9",
+    "research_files_verified": 22,
+    "expected_sha_fast_forward": true,
+    "force": false,
+    "remote_blob_hashes": "PASS"
+  },
+  "workspace": {
+    "master_handoff": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_0000000009d482098fce0afa6873f2fb",
+      "version": 5,
+      "identity_preserved": true,
+      "filename": "UCT_Hourly_Research_Master_Handoff.md",
+      "bytes": 25081,
+      "sha256": "e5d1ebf4ada8cefed77d8ed0663226f3c1ff5e1c9bee9c8c7da7e18581d78a6f",
+      "byte_readback": "PASS"
+    },
+    "cumulative_increment": {
+      "library_file_id": "libfile_629d1be5c8448191a4e597e6ef371d9f",
+      "file_id": "file_00000000e99c820688fae41b40f17e02",
+      "version": 0,
+      "filename": "UCT_R157_R161_Cumulative_Increment_20261008.zip",
+      "sha256": "a5f202fbdfa440d09eb5a2953bdc0e88b1fde1ae3623228a9f84f1b58a8866ef",
+      "bytes": 456945,
+      "members": 75,
+      "payload_files": 74,
+      "scope": "Cumulative increment relative to exact recovered R156 working-set base; not full working-set, repository or history backup.",
+      "research_commit": "25f90cf714f5ebf61cadc3eecd9b1467943404d9",
+      "byte_readback": "PASS",
+      "crc_and_member_hashes": "PASS"
+    },
+    "save_verification": {
+      "library_file_id": "libfile_e5b0d0cda8448191a8b034214e1f8845",
+      "file_id": "file_000000009618820985dc82fe1b726cc9",
+      "version": 0,
+      "filename": "UCT_R161_Save_Verification_20261008.json",
+      "sha256": "cfd24ac99284d995a1a411a93d77ee70db0f8a4513ce77261fcbc68a1630f82f",
+      "bytes": 3007,
+      "byte_readback": "PASS"
+    }
+  },
+  "required_baseline": {
+    "library_file_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
+    "filename": "UCT_R156_Working_Set_20261007.zip",
+    "bytes": 3493643,
+    "sha256": "95cc3ea1ec45eb273531c25525edcb7f8e6f2088c650a39b97d24817704ec40a",
+    "working_set_files": 384
+  },
+  "restore_probe": {
+    "status": "PASS",
+    "restored_working_set_files": 450,
+    "exact_file_set_and_hash_match": true,
+    "scope": "Recovered R156 working-set base plus R157–R161 cumulative increment; not full repository/history; this post-save R161 receipt is excluded."
+  },
+  "save_failures_and_recovery": [
+    "Initial anonymous git fetch returned HTTP 502; the unchanged branch head was independently verified before the authorized expected-SHA fast-forward.",
+    "The first cumulative comparison included clone files outside the declared R156 working-set scope. That 52.8 MB local candidate was rejected before upload and rebuilt from the prior cumulative manifest plus R160 receipt and R161 payload.",
+    "The first package identity-helper call omitted required JSON stdin after bytes were stored. The prescribed helper was rerun with returned xattrs; identity application and byte readback passed."
+  ],
+  "map": {
+    "revision": "R161-v1.0",
+    "nodes": 425,
+    "rules": 204,
+    "new_nodes": 3,
+    "new_rules": 2,
+    "status": "CONCRETE_PROTOCOL_AND_STRONG_FALSIFIER_WITH_BRIDGE_OPEN",
+    "empirical_F_witness": false,
+    "actual_human_experiment": false,
+    "ethics_approval": false,
+    "global_semantic_proof": false
+  },
+  "unfinished": [
+    "Selective biological-pathway validation beyond proprioceptive-sensitive tendon vibration",
+    "Independent practical covariance/variance and simultaneous power model",
+    "Complete neural realization and fixed B_min/F_O measurement including nonreporters"
+  ],
+  "next": "Find suitable independent raw data or specify a prospective variance pilot for the eight conditional simple effects, then freeze practical simultaneous intervals, power and missingness without weakening the six fidelity gates or importing ownership reports into Y_B/Y_T.",
+  "restore": [
+    "Verify and extract the exact R156 baseline.",
+    "Overlay all 74 nonmanifest members of the R157–R161 cumulative increment at research-workspace root.",
+    "Verify _R157_R161_CUMULATIVE_MANIFEST.json, CRC and all payload hashes.",
+    "Fetch latest GitHub head and fixed handoff version; retrieve this later receipt or newer work before continuing."
+  ],
+  "ongoing_research_complete": false,
+  "history": "All research files and failures are retained. This receipt is intentionally outside the cumulative increment because it records the package and handoff readbacks."
+}
