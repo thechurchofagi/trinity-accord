@@ -432,3 +432,9 @@ R166 separates E0 population profile, E1 finite token view, E2 actual installed 
 
 Map R166-v1.0: 452 nodes / 217 rules / 117 context links, new 6/2. Conditional installation plus existing R159 transport gives an experience-internal structural counterpart; R157 semantic residual leaves `B_min/F_O` open. No apparatus, actual token, complete mechanism or current-system consciousness conclusion. Next: an ethical same-token W2–W5 architecture with explicit redundancy and compensation tests.
 
+## R168 — 2026-10-08 stochastic/continuous redundancy boundary
+
+R168 answered the next R167 question without repeating finite Boolean enumeration. It defines a frozen distributional contextual effect and proves the pointwise sharp bounded-Lipschitz envelope from finite valid test bounds. It also proves that a coarse observed label leaves hidden-fiber amplitude completely unidentified; a positive hidden-context bound needs an actually realized section, fiber deviation and section regularity. Random no-detection bounds affected context mass only and cannot settle maximum amplitude, actual closure or experience.
+
+The map is R168-v1.0 (468 nodes / 222 rules / 125 context links), preserving the exact R167 prefixes. Exact checks pass after one retained validator-vocabulary repair. Do not treat metric smoothness, fitted kernels, interface labels or random prevalence as actual mediator installation. Next question: independent physical calibration/falsification of `d`, `L`, `delta`, `C`. C1 and the `B_min` residual remain separate; no basal-experience gate, exclusive owner or assistant-consciousness verdict was added.
+

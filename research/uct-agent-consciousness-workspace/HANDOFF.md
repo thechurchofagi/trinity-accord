@@ -1,3 +1,9 @@
+## R168 current priority — stochastic envelope, hidden fibers and mass/amplitude separation
+
+R168-v1.0 has 468 nodes / 222 rules / 125 context links. It proves the pointwise sharp bounded-Lipschitz envelope for undetected contextual effects, gives an exact counterexample to partial-view closure, and states the additional actual section/fiber premises needed to lift observed coverage to hidden contexts. A separate binomial result bounds affected mass after random no-detection, but cannot bound maximum amplitude or physically admissible zero-measure contexts.
+
+Read [current handoff](records/R168_Stochastic_Continuous_Redundancy_20261008/CURRENT_HANDOFF.md), [English note](records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md), [proof ledger](records/R168_Stochastic_Continuous_Redundancy_20261008/PROOF_LEDGER.json), [gap ledger](records/R168_Stochastic_Continuous_Redundancy_20261008/GAP_LEDGER.json), [audit](records/R168_Stochastic_Continuous_Redundancy_20261008/MAP_AUDIT.json), and [checks](records/R168_Stochastic_Continuous_Redundancy_20261008/EXACT_CHECKS.json). Next: physically calibrate and try to falsify `d`, `L`, `delta`, `C`; do not let a smooth fitted model replace actual installation or semantic interpretation.
+
 ## R165 current priority — finite pilot menu and honest width status
 
 R165-v1.0 has 446 nodes / 215 rules / 117 context links. It proves that an independent-pilot selector from a frozen finite constant-bet menu preserves R164 planwise coverage, while an exact counterexample proves that independence alone does not transport residual risk or width. The width theorem therefore requires an explicit empirical transport radius for every component-plan pair.

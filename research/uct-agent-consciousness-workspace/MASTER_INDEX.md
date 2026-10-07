@@ -1,3 +1,14 @@
+## R168 — stochastic/continuous redundancy and partial observation
+
+- English result: `records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md`
+- Exact checker/results: `verify_envelope.py`, `EXACT_CHECKS.json`
+- Proof/source/gap ledgers: `PROOF_LEDGER.json`, `SOURCE_LEDGER.json`, `GAP_LEDGER.json`
+- Formal extension/audit: `MAP_EXTENSION.json`, `MAP_AUDIT.json`
+- Chinese review/current handoff: `REVIEW_ZH.md`, `CURRENT_HANDOFF.md`
+- Map: R168-v1.0, 468 nodes / 222 rules / 125 context links; new 9/3/4, exact R167 prefixes preserved
+- Result boundary: sharp effect envelope is conditional on a physical metric/regularity/test-bound package; random no-detection bounds mass only; no actual installation, C1, `B_min`, basal gate or unique owner
+- Next: independent physical calibration and falsification contract for `d`, `L`, `delta`, `C`
+
 ## R167 — operational mediator, redundancy and compensation
 
 - English result: `records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md`

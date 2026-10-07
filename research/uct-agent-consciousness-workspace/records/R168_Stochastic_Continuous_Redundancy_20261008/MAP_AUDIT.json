@@ -1,0 +1,445 @@
+{
+  "schema": "UCT_R168_MAP_AUDIT/v1",
+  "round": "R168",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "note_hash_frozen",
+      "status": "PASS",
+      "detail": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a"
+    },
+    {
+      "name": "graph_revision",
+      "status": "PASS",
+      "detail": "R168-v1.0"
+    },
+    {
+      "name": "graph_counts",
+      "status": "PASS",
+      "detail": {
+        "nodes": 468,
+        "rules": 222,
+        "context_links": 125
+      }
+    },
+    {
+      "name": "unique_ids",
+      "status": "PASS",
+      "detail": {
+        "nodes": 468,
+        "rules": 222
+      }
+    },
+    {
+      "name": "all_rule_and_context_endpoints_exist",
+      "status": "PASS",
+      "detail": {
+        "rules": [],
+        "links": []
+      }
+    },
+    {
+      "name": "dag",
+      "status": "PASS",
+      "detail": {
+        "visited": 468,
+        "total": 468
+      }
+    },
+    {
+      "name": "exact_parent_reconstruction",
+      "status": "PASS",
+      "detail": "0ed7d225a8bc3260ae9fca042fc1f1316167e9fe0842129c1c9eb54c5ac48f71"
+    },
+    {
+      "name": "new_node_contract_fields",
+      "status": "PASS",
+      "detail": [
+        "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+        "R168:SHARP_METRIC_ENVELOPE",
+        "R168:PARTIAL_VIEW_NONENTAILMENT",
+        "R168:PARTIAL_VIEW_LIFT_CONTRACT",
+        "R168:LIFTED_HIDDEN_CONTEXT_BOUND",
+        "R168:RANDOM_CONTEXT_MASS_BOUND",
+        "R168:AMPLITUDE_MASS_SEPARATION",
+        "R168:ENVELOPE_RELATIVE_TRIAGE",
+        "R168:R167_WITNESS_STOCHASTIC_BOUNDARY"
+      ]
+    },
+    {
+      "name": "new_rules_explicit_all_of",
+      "status": "PASS",
+      "detail": {
+        "r168_lifted_hidden_context_bound": [
+          "R168:SHARP_METRIC_ENVELOPE",
+          "R168:PARTIAL_VIEW_NONENTAILMENT",
+          "R168:PARTIAL_VIEW_LIFT_CONTRACT"
+        ],
+        "r168_envelope_relative_triage": [
+          "R167:CLOSURE_RELATIVE_TRIAGE",
+          "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+          "R168:SHARP_METRIC_ENVELOPE",
+          "R168:LIFTED_HIDDEN_CONTEXT_BOUND",
+          "R168:RANDOM_CONTEXT_MASS_BOUND",
+          "R168:AMPLITUDE_MASS_SEPARATION"
+        ],
+        "r168_stochastic_witness_refinement": [
+          "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+          "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+          "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+          "R168:ENVELOPE_RELATIVE_TRIAGE"
+        ]
+      }
+    },
+    {
+      "name": "joint_premises_exact",
+      "status": "PASS",
+      "detail": {
+        "r168_lifted_hidden_context_bound": [
+          "R168:SHARP_METRIC_ENVELOPE",
+          "R168:PARTIAL_VIEW_NONENTAILMENT",
+          "R168:PARTIAL_VIEW_LIFT_CONTRACT"
+        ],
+        "r168_envelope_relative_triage": [
+          "R167:CLOSURE_RELATIVE_TRIAGE",
+          "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+          "R168:SHARP_METRIC_ENVELOPE",
+          "R168:LIFTED_HIDDEN_CONTEXT_BOUND",
+          "R168:RANDOM_CONTEXT_MASS_BOUND",
+          "R168:AMPLITUDE_MASS_SEPARATION"
+        ],
+        "r168_stochastic_witness_refinement": [
+          "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+          "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+          "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+          "R168:ENVELOPE_RELATIVE_TRIAGE"
+        ]
+      }
+    },
+    {
+      "name": "no_partial_view_shortcut",
+      "status": "PASS",
+      "detail": "hidden-fiber bound requires lift contract"
+    },
+    {
+      "name": "mass_never_promoted_to_amplitude",
+      "status": "PASS",
+      "detail": "mass and amplitude remain distinct"
+    },
+    {
+      "name": "no_reverse_to_C1_basal_gate_or_familiar_mineness",
+      "status": "PASS",
+      "detail": [
+        "R168:LIFTED_HIDDEN_CONTEXT_BOUND",
+        "R168:ENVELOPE_RELATIVE_TRIAGE",
+        "R168:R167_WITNESS_STOCHASTIC_BOUNDARY"
+      ]
+    },
+    {
+      "name": "all_context_links_non_deductive",
+      "status": "PASS",
+      "detail": [
+        {
+          "from": "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+          "to": "R167:R166_WITNESS_APPLICATION_BOUNDARY",
+          "relation": "stochastic/continuous refinement of W4-W5 only; not a replacement for R167 premises"
+        },
+        {
+          "from": "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+          "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+          "relation": "context only: same-instance C1 transport and independent B_min remain separately governed"
+        },
+        {
+          "from": "R168:AMPLITUDE_MASS_SEPARATION",
+          "to": "R166:POPULATION_TOKEN_NONENTAILMENT",
+          "relation": "analogous quantifier warning: context mass does not settle a named actual context"
+        },
+        {
+          "from": "R168:ENVELOPE_RELATIVE_TRIAGE",
+          "to": "A:U1",
+          "relation": "no envelope, sensitivity, or detection clause is added to basal-experience existence"
+        }
+      ]
+    },
+    {
+      "name": "metric_envelope_enumeration",
+      "status": "PASS",
+      "detail": {
+        "finite_line_cases": 3896,
+        "pointwise_upper_checks": 18536,
+        "pointwise_sharpness_checks": 18536,
+        "equality_examples": [
+          {
+            "Z": [
+              0,
+              1
+            ],
+            "S": [
+              0
+            ],
+            "U": [
+              0
+            ],
+            "envelope": [
+              0,
+              1
+            ]
+          },
+          {
+            "Z": [
+              0,
+              1
+            ],
+            "S": [
+              0
+            ],
+            "U": [
+              1
+            ],
+            "envelope": [
+              1,
+              2
+            ]
+          },
+          {
+            "Z": [
+              0,
+              1
+            ],
+            "S": [
+              0
+            ],
+            "U": [
+              2
+            ],
+            "envelope": [
+              2,
+              3
+            ]
+          },
+          {
+            "Z": [
+              0,
+              1
+            ],
+            "S": [
+              1
+            ],
+            "U": [
+              0
+            ],
+            "envelope": [
+              1,
+              0
+            ]
+          },
+          {
+            "Z": [
+              0,
+              1
+            ],
+            "S": [
+              1
+            ],
+            "U": [
+              1
+            ],
+            "envelope": [
+              2,
+              1
+            ]
+          },
+          {
+            "Z": [
+              0,
+              1
+            ],
+            "S": [
+              1
+            ],
+            "U": [
+              2
+            ],
+            "envelope": [
+              3,
+              2
+            ]
+          },
+          {
+            "Z": [
+              0,
+              1,
+              2
+            ],
+            "S": [
+              0
+            ],
+            "U": [
+              0
+            ],
+            "envelope": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "Z": [
+              0,
+              1,
+              2
+            ],
+            "S": [
+              0
+            ],
+            "U": [
+              1
+            ],
+            "envelope": [
+              1,
+              2,
+              3
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "fill_distance_sharpness",
+      "status": "PASS",
+      "detail": {
+        "context_sets": 1012,
+        "sharp_equalities": 1012
+      }
+    },
+    {
+      "name": "partial_view_counterexample",
+      "status": "PASS",
+      "detail": {
+        "observation_map": {
+          "a": "x",
+          "b": "x"
+        },
+        "tested_context": "a",
+        "compatible_model_zero": {
+          "a": 0,
+          "b": 0
+        },
+        "compatible_model_hidden": {
+          "a": 0,
+          "b": 1
+        },
+        "max_effect_gap": 1
+      }
+    },
+    {
+      "name": "mass_bound_cases",
+      "status": "PASS",
+      "detail": {
+        "exact_fraction_cases": 1100,
+        "examples": [
+          {
+            "n": 1,
+            "p": "1/10",
+            "s_min": "1/10",
+            "no_detection": "99/100"
+          },
+          {
+            "n": 1,
+            "p": "1/10",
+            "s_min": "1/5",
+            "no_detection": "49/50"
+          },
+          {
+            "n": 1,
+            "p": "1/10",
+            "s_min": "3/10",
+            "no_detection": "97/100"
+          },
+          {
+            "n": 1,
+            "p": "1/10",
+            "s_min": "2/5",
+            "no_detection": "24/25"
+          },
+          {
+            "n": 1,
+            "p": "1/10",
+            "s_min": "1/2",
+            "no_detection": "19/20"
+          },
+          {
+            "n": 1,
+            "p": "1/10",
+            "s_min": "3/5",
+            "no_detection": "47/50"
+          },
+          {
+            "n": 1,
+            "p": "1/10",
+            "s_min": "7/10",
+            "no_detection": "93/100"
+          },
+          {
+            "n": 1,
+            "p": "1/10",
+            "s_min": "4/5",
+            "no_detection": "23/25"
+          }
+        ]
+      }
+    },
+    {
+      "name": "status_priority",
+      "status": "PASS",
+      "detail": {
+        "boolean_assignments": 16,
+        "counts": {
+          "AFFECTED_MASS_BOUNDED_ONLY": 1,
+          "AMPLITUDE_REFUTED_RELATIVE_TO_ENVELOPE": 2,
+          "CONTEXTUAL_USE_SUPPORTED": 4,
+          "INVALID_PROTOCOL": 8,
+          "UNRESOLVED": 1
+        }
+      }
+    },
+    {
+      "name": "claim_limits",
+      "status": "PASS",
+      "detail": {
+        "actual_data": false,
+        "actual_apparatus": false,
+        "physical_metric_validated": false,
+        "lipschitz_constant_validated": false,
+        "partial_view_lift_validated": false,
+        "sampling_measure_validated": false,
+        "complete_organization_identified": false,
+        "C1_derived": false,
+        "B_min_validated": false,
+        "basal_experience_gate": false
+      }
+    },
+    {
+      "name": "required_core_artifacts_present",
+      "status": "PASS",
+      "detail": [
+        "ROUND_RECORD.md",
+        "Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+        "PROOF_LEDGER.json",
+        "GAP_LEDGER.json",
+        "SOURCE_LEDGER.json",
+        "MAP_EXTENSION.json",
+        "verify_envelope.py",
+        "EXACT_CHECKS.json",
+        "build_map.py"
+      ]
+    }
+  ],
+  "graph_sha256": "5d715c5782f49396bb8b70432d5b43a918f3607f5e5293ce5148ebce9a912d10",
+  "exact_results_sha256": "01b58124e2284269a5679dcff12bfb8b157448d762fefe3eeab5988cb7f3c748",
+  "limitations": [
+    "DAG, exact finite checks and a sharp envelope do not establish theory truth or empirical installation.",
+    "The metric, Lipschitz constant, tested upper bounds, hidden-context lift, sampling measure and sensitivity remain application premises.",
+    "No complete neural route, C1 derivation, B_min validation, basal-experience gate or unique owner follows."
+  ]
+}

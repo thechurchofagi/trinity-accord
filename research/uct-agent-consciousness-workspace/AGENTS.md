@@ -1,3 +1,9 @@
+## R168 current priority — do not confuse finite coverage with actual route closure
+
+Read `records/R168_Stochastic_Continuous_Redundancy_20261008/CURRENT_HANDOFF.md`, the R168 note and its ledgers before continuing. The sharp cone envelope requires the same frozen effect definition, a physically grounded context metric, a valid Lipschitz constant and valid pointwise test bounds. A shared observation label supplies none of these. Hidden-context control additionally requires an actually realizable section, fiber deviation and section regularity. Random sampling only bounds affected mass under its own measure/independence/sensitivity premises.
+
+Current map R168-v1.0: 468 nodes / 222 rules / 125 context links; exact R167 prefixes preserved. Next: an independent calibration/falsification contract for `d`, `L`, `delta` and `C`. Keep actual route/read evidence, complete organization, finite view, fitted model, distributional law, particular experience and report distinct. Do not derive C1 or `B_min`, add a basal-experience threshold, demand a unique owner, or decide the current assistant's consciousness. Save research only with `[skip ci]` and verify both durable copies.
+
 ## R164 current priority — preserve the unweighted target while adapting width
 
 Read `records/R164_Frozen_Bounded_Martingale_20261008/CURRENT_HANDOFF.md` and the R164 note/ledgers before continuing. The valid non-identical route uses one pilot-frozen constant bet per component; variable bets generally target a weighted mean when participant conditional means differ. Predictors must be pre-observation measurable and all method/target selection must precede confirmatory outcomes. R163 Hoeffding remains the range-only fallback.

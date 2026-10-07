@@ -1,0 +1,30 @@
+{
+  "schema": "UCT_R168_GAP_LEDGER/v1",
+  "gaps": [
+    {"id": "R168-G1", "location": "STOCHASTIC_CONTEXTUAL_EFFECT", "issue": "The discriminator class F can be too weak or selected after results.", "impact": ["R168:ENVELOPE_RELATIVE_TRIAGE", "R168:R167_WITNESS_STOCHASTIC_BOUNDARY"], "counterexample": "Two output laws differ only on a test outside F and therefore have d_F=0.", "corrected_now": "F and K0 are typed as frozen parts of the claim.", "unresolved_premise": "A physically justified consumer geometry and precommitment."},
+    {"id": "R168-G2", "location": "SHARP_METRIC_ENVELOPE", "issue": "A numerical context metric may not track variation of the actual route.", "impact": ["R168:SHARP_METRIC_ENVELOPE", "R168:ENVELOPE_RELATIVE_TRIAGE"], "counterexample": "Two contexts are metrically close by interface labels but differ by an unrecorded route gate.", "corrected_now": "The metric is an explicit physical premise, not inferred from labels.", "unresolved_premise": "A route-grounded metric witness."},
+    {"id": "R168-G3", "location": "effect regularity", "issue": "The Lipschitz constant L can be unsupported or so large that the envelope is vacuous.", "impact": ["R168:SHARP_METRIC_ENVELOPE", "R168:LIFTED_HIDDEN_CONTEXT_BOUND"], "counterexample": "A discontinuous hidden gate changes effect from zero to M at arbitrarily small declared distance.", "corrected_now": "Unknown/invalid L leaves UNRESOLVED; pointwise sharpness blocks a smaller assumption-free bound.", "unresolved_premise": "Physical/compositional derivation or independent calibration of L."},
+    {"id": "R168-G4", "location": "PARTIAL_VIEW_LIFT_CONTRACT", "issue": "The section r may be abstract rather than an actually realizable tested context.", "impact": ["R168:LIFTED_HIDDEN_CONTEXT_BOUND", "R168:ENVELOPE_RELATIVE_TRIAGE"], "counterexample": "A representative state satisfies a fitted model but cannot be physically instantiated without changing the bearer/route.", "corrected_now": "Actual section realization is an all-of premise.", "unresolved_premise": "Token-level realization and fidelity audit."},
+    {"id": "R168-G5", "location": "hidden-fiber deviation delta", "issue": "Observed labels do not bound within-fiber physical diversity.", "impact": ["R168:LIFTED_HIDDEN_CONTEXT_BOUND"], "counterexample": "The two-point hidden-fiber model has identical x and effects 0 versus M.", "corrected_now": "Exact non-entailment node and explicit delta penalty added.", "unresolved_premise": "Independent fiber-diameter/section-error evidence."},
+    {"id": "R168-G6", "location": "RANDOM_CONTEXT_MASS_BOUND", "issue": "Sampling measure, independence or sensitivity can fail, and zero-measure contexts remain invisible.", "impact": ["R168:RANDOM_CONTEXT_MASS_BOUND", "R168:ENVELOPE_RELATIVE_TRIAGE"], "counterexample": "All large effects lie on a mu-null but physically admissible context.", "corrected_now": "Mass status is separated from amplitude/closure and all sampling premises are explicit.", "unresolved_premise": "A justified mu, dependence model and sensitivity floor."},
+    {"id": "R168-G7", "location": "R168:R167_WITNESS_STOCHASTIC_BOUNDARY", "issue": "Distributional evidence and fitted kernels do not by themselves prove actual physical installation or familiar mineness.", "impact": ["R166:WITNESSED_FRAME_INSTALLATION", "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY", "F153-11", "F153-17"], "counterexample": "A shadow model reproduces every sampled law but is not read by the actual consumer.", "corrected_now": "R166 W1-W3/W6, R167 route actuality, C1 and B_min boundaries are retained.", "unresolved_premise": "Actual route/read audit, same-instance C1 admission and independent B_min."}
+  ],
+  "failures": [
+    {
+      "id": "R168-F1",
+      "stage": "first aggregate map audit",
+      "symptom": "The audit rejected context-link descriptions containing 'not a replacement', 'analogous quantifier warning', and 'no envelope ... added' because it only recognized the literal words context or deduction.",
+      "diagnosis": "Checker vocabulary was narrower than the already explicit non-deductive semantics; the map links themselves were not deductive edges.",
+      "repair": "Require one of four exact non-deductive relation markers and rerun the complete audit.",
+      "scope": "Validation-code false failure only; no theorem, node, rule, source or exact result changed."
+    },
+    {
+      "id": "R168-F2",
+      "stage": "pre-save rerun",
+      "symptom": "build_map.py refused to run after the graph was already at R168 because its parent-hash guard requires the exact R167 input.",
+      "diagnosis": "The one-way builder was invoked twice; its guard correctly prevented applying the extension a second time.",
+      "repair": "Do not rebuild an already extended graph; verify the saved R168 graph with verify_round.py, which reconstructs and hashes the R167 prefix.",
+      "scope": "Expected idempotence safeguard; graph bytes and research claims were unchanged."
+    }
+  ]
+}

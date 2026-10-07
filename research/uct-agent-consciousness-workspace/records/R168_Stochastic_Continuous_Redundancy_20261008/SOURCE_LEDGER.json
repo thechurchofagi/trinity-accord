@@ -1,0 +1,12 @@
+{
+  "schema": "UCT_R168_SOURCE_LEDGER/v1",
+  "sources": [
+    {"id": "UCT-I-v1.2", "kind": "fixed_primary_project_source", "locators": ["§8.11", "§8.12", "§8.13", "§8.14", "§14.7", "§14.8", "§14.10"], "use": "Physical witness, experience/internal-model boundaries, no extra owner and application limits.", "limit": "Does not supply R168's physical metric, regularity or empirical bounds."},
+    {"id": "R157-R159-fixed", "kind": "verified_project_derivations", "locators": ["R157 definable selector and semantic residual", "R159 Anchor-Bind-Use and C1 transport"], "use": "Typed relation, same-instance structural transport and independent B_min boundary.", "limit": "Do not install routes or validate familiar mineness."},
+    {"id": "R166-R167-fixed", "kind": "verified_project_derivations", "locators": ["R166 W1-W6", "R167 operational architecture", "R167 contextual criterion and closure triage"], "use": "Physical application contract and finite Boolean problem being generalized.", "limit": "No actual apparatus or closure certificate."},
+    {"id": "established-metric-probability-methods", "kind": "standard_mathematical_methods", "locators": ["integral probability metrics", "Lipschitz/McShane-style cone extension", "fill distance", "binomial no-hit bound"], "use": "Mathematical basis of the stochastic effect, sharp envelope and mass statement.", "limit": "No historical novelty claim; physical applicability requires independent premises."},
+    {"id": "R168-project-specific-countermodels", "kind": "new_project_specific_formal_application", "locators": ["R168 note §§3-7", "verify_envelope.py"], "use": "Hidden-fiber non-identification, amplitude/mass separation and UCT witness boundary.", "limit": "Finite checks certify instances and logic, not empirical truth or global completeness."}
+  ],
+  "search_scope": "No new literature search was needed for this exact formal extension. It uses pinned primary project sources and explicitly attributed standard metric/probability mathematics; no exhaustive priority claim is made.",
+  "source_failures": []
+}

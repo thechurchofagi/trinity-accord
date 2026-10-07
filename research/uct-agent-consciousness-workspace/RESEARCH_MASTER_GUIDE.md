@@ -1,3 +1,11 @@
+## R168 current priority — sharp stochastic envelope and hidden-context obstruction
+
+R168 generalizes R167's finite Boolean context test to stochastic consumers and metric context spaces. Under a fixed discriminator class, valid tested upper bounds and a physically justified bounded-Lipschitz effect premise, `E(z)=min{M,inf_i[U_i+L d(z,s_i)]}` is the pointwise sharp undetected-effect envelope. A two-hidden-context counterexample proves that a coarse observed label alone gives no nontrivial bound; a realized section/fiber contract adds the explicit `delta+C h_X` coverage penalty. Random no-detection bounds affected mass only, never maximum amplitude, route closure or experience.
+
+Map R168-v1.0: **468 nodes / 222 rules / 125 context links**, new 9/3/4 over the exact R167 prefix. Read the [English note](records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md), [map audit](records/R168_Stochastic_Continuous_Redundancy_20261008/MAP_AUDIT.json), [gaps](records/R168_Stochastic_Continuous_Redundancy_20261008/GAP_LEDGER.json), [Chinese review](records/R168_Stochastic_Continuous_Redundancy_20261008/REVIEW_ZH.md), and [handoff](records/R168_Stochastic_Continuous_Redundancy_20261008/CURRENT_HANDOFF.md).
+
+This is a conditional mathematical result, not physical calibration or an experiment. Do not infer a route metric, smoothness constant, hidden-fiber radius, actual installation, C1 or `B_min` from fitted labels. Next: formulate an independently falsifiable physical calibration contract for `d`, `L`, `delta` and `C`; failed calibration stays `UNRESOLVED`. No statistical or selected-body property becomes a basal-experience gate.
+
 ## R167 current priority — operational mediator, redundancy and compensation
 
 R167 gives R166 W2–W5 one prospective same-episode implementation: a report-independent physical anchor, a logged live controller mediator, declared backup routes and actual consumers, with reversible interventions on anchor, mediator and route gates. An exact contextual criterion shows that mediator contribution is existential over declared backup contexts, not the same as indispensability. Single-cut redundancy and delayed compensation are exact false-negative obstructions; test pre-compensation contrasts and keep every result relative to the declared intervention closure.

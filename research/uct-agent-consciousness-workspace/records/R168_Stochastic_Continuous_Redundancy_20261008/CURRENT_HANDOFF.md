@@ -1,0 +1,13 @@
+# R168 current handoff
+
+- **Latest substantive result:** finite null tests admit the sharp bounded-Lipschitz envelope `E(z)=min{M,inf_i[U_i+L d(z,s_i)]}`; partial observation alone has an exact hidden-fiber obstruction, while a physically realized section/fiber contract yields the conditional penalty `delta+C h_X`.
+- **Amplitude versus mass:** random-context no-detection bounds affected mass only under declared sampling and sensitivity premises; it does not bound maximum effect, zero-mass contexts, actual route closure or experience.
+- **Formal state:** `R168-v1.0`, 468 nodes / 222 rules / 125 context links; graph SHA-256 `5d715c5782f49396bb8b70432d5b43a918f3607f5e5293ce5148ebce9a912d10` before later receipt-only commits.
+- **Exact state:** 3,896 envelope cases, 18,536 upper/sharpness point checks, 1,012 fill sets, 1,100 mass cases and 16 status assignments pass; exact-results SHA is recorded in `MAP_AUDIT.json`.
+- **Failures retained:** the first aggregate audit falsely rejected two explicitly non-deductive link phrasings because its marker list was too narrow; the checker was repaired and rerun. A later accidental second invocation of the one-way map builder was correctly stopped by its parent-hash guard; the already built graph was verified through exact parent reconstruction. The exact mathematical checker passed initially. None of these facts is positive evidence of physical metric validity or theory truth.
+- **GitHub state:** the verified final commit/tree are recorded below after dual save; do not trust this placeholder over fresh remote state.
+- **Persistent state:** the fixed handoff remains `libfile_4175a81748fc819187fa8f5771f056fa`; its verified R168 version and cumulative increment are recorded in `DUAL_SAVE_RECEIPT.json` after completion.
+- **What is not complete:** no apparatus, participant, ethics approval, physical context metric, calibrated `L/delta/C`, complete route, neural mediator, C1 proof or `B_min` validation.
+- **Direction:** C1 remains the consciousness-specific explanatory axiom; no statistical, selected-body, report, control or self-model threshold was added to basal experience; nesting/overlap and no-extra-owner constraints are preserved.
+- **Next exact question:** specify and try to falsify an independent physical calibration contract for `d`, `L`, `delta` and `C`, keeping failure `UNRESOLVED` rather than replacing actual route closure with fitted smoothness.
+- **Recovery order:** fresh-fetch the branch; read the required guide/agent/memory/handoff/index sequence, this file, map/graph/audit, the R168 note and ledgers, then verify the latest dual-save receipt before trusting any workspace copy.

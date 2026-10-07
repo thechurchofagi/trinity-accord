@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R167-v1.0",
+  "revision": "R168-v1.0",
   "date": "2026-10-08",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -19986,6 +19986,329 @@
           }
         ]
       }
+    },
+    {
+      "id": "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+      "kind": "TYPED_DISTRIBUTIONAL_CAUSAL_DEFINITION",
+      "label": "Contextual Interventional Effect in a Declared Consumer Geometry",
+      "statement": "For declared safe mediator interventions K0, actual backup context z and interventional consumer laws Q_{k,z}, define e(z)=sup_{k,k' in K0} d_F(Q_{k,z},Q_{k',z}), where the discriminator class F is fixed before results. Contextual use is existence of z with e(z)>0 relative to K0, Z and F; indispensability is a distinct universal condition.",
+      "domain": "One pre-compensation subinterval of one R167 episode, one declared consumer, one declared intervention set and one fixed integral-probability metric.",
+      "scope": "One pre-compensation subinterval of one R167 episode, one declared consumer, one declared intervention set and one fixed integral-probability metric.",
+      "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §2",
+      "source_lineage": "R167 contextual effect generalized with standard integral-probability-metric notation; no new IPM theorem claimed.",
+      "status": "DECLARED_TYPED_GENERALIZATION",
+      "proof": "Definition; Boolean deterministic output difference is recovered as a special case under a separating discriminator class.",
+      "counterexamples_and_limits": "A weak F can miss distributional changes; changing F after results changes the claim; abstract laws require separate physical realization.",
+      "formal_contract_R168": {
+        "object_domain": "one actual consumer route and declared stochastic intervention family",
+        "quantifiers": "supremum over declared k,k'; existential over z for contribution and universal only for indispensability",
+        "bearer_time_signature": "same actual lineage and pre-compensation interval; random laws remain distinct from samples and fitted latents",
+        "source_anchor": {
+          "path": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+          "sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+          "locator": "§2"
+        },
+        "purpose": "Extend R167 use without conflating output samples, distributions or experience",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R168-G1",
+          "R168-G2",
+          "R168-G7"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R168:SHARP_METRIC_ENVELOPE",
+      "kind": "EXACT_LIPSCHITZ_EXTENSION_THEOREM",
+      "label": "Pointwise Sharp Undetected-Effect Envelope",
+      "statement": "For 0<=e<=M, L-Lipschitz e on declared (Z,d), tested actual contexts s_i and valid upper bounds e(s_i)<=U_i, every compatible e satisfies e(z)<=E(z)=min{M,inf_i[U_i+L d(z,s_i)]}; E itself is compatible, so no uniformly smaller pointwise upper bound follows from those premises alone.",
+      "domain": "Any declared metric context space with nonempty tested set and finite nonnegative M,L,U_i; executable checks cover finite line metrics.",
+      "scope": "Any declared metric context space with nonempty tested set and finite nonnegative M,L,U_i; executable checks cover finite line metrics.",
+      "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §3",
+      "source_lineage": "Standard Lipschitz cone/extension reasoning specialized to closure-relative mediator effects; no historical mathematical novelty claim.",
+      "status": "PROVED_EXACTLY_WITH_BOUNDED_FINITE_CHECKS",
+      "proof": "Lipschitzness gives every cone bound; infimum and cap give E. The infimum of same-constant cones and constant cap are L-Lipschitz, and E(s_i)<=U_i, making E admissible and pointwise sharp.",
+      "counterexamples_and_limits": "The physical metric, L and tested upper bounds are premises, not consequences; without them the numerical envelope has no physical authority.",
+      "formal_contract_R168": {
+        "object_domain": "bounded Lipschitz effect functions on a declared metric context space",
+        "quantifiers": "for every compatible e and every z; sharpness is pointwise over all compatible e",
+        "bearer_time_signature": "mathematical context geometry must be linked separately to actual episode contexts",
+        "source_anchor": {
+          "path": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+          "sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+          "locator": "§3"
+        },
+        "purpose": "Quantify the strongest amplitude claim licensed by finite context tests and regularity",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R168-G2",
+          "R168-G3",
+          "R168-G7"
+        ],
+        "machine_formalized": true,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R168:PARTIAL_VIEW_NONENTAILMENT",
+      "kind": "EXACT_HIDDEN_FIBER_COUNTEREXAMPLE",
+      "label": "Observed Context Label Does Not Bound a Hidden Fiber",
+      "statement": "If q(a)=q(b) and only actual context a is tested with e(a)=0, the compatible models e0(a)=e0(b)=0 and e1(a)=0,e1(b)=M agree on the observed label and tested law but differ maximally at b. Partial observation alone therefore yields no nontrivial hidden-fiber amplitude bound.",
+      "domain": "A two-point hidden context space, one coarse observed label, one tested representative and effect range [0,M].",
+      "scope": "A two-point hidden context space, one coarse observed label, one tested representative and effect range [0,M].",
+      "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §5",
+      "source_lineage": "Elementary partial-identification counterexample specialized to R167 hidden redundancy.",
+      "status": "PROVED_EXACTLY",
+      "proof": "Direct construction; observed/tested objects are equal while hidden maxima are zero and M.",
+      "counterexamples_and_limits": "A physically certified within-fiber regularity/lift premise can add a bound; the counterexample denies inference without it.",
+      "formal_contract_R168": {
+        "object_domain": "one coarse observation fiber with two actual hidden contexts",
+        "quantifiers": "there exist two compatible models with maximal hidden-effect separation",
+        "bearer_time_signature": "same observed label is not identity of actual physical context",
+        "source_anchor": {
+          "path": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+          "sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+          "locator": "§5"
+        },
+        "purpose": "Block observed-label equality from masquerading as route closure",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R168-G4",
+          "R168-G5"
+        ],
+        "machine_formalized": true,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R168:PARTIAL_VIEW_LIFT_CONTRACT",
+      "kind": "SUFFICIENT_HIDDEN_CONTEXT_COVERAGE_CONTRACT",
+      "label": "Section, Fiber Deviation, and Observed Coverage Contract",
+      "statement": "For q:Z->X, require a declared section r, a within-fiber deviation d_Z(z,r(q(z)))<=delta, section regularity d_Z(r(x),r(x'))<=C d_X(x,x'), and tested observed fill distance h_X. These are independent physical/measurement premises, not consequences of sharing an observed label.",
+      "domain": "One declared partial observation map and one actual context space with a chosen physical metric.",
+      "scope": "One declared partial observation map and one actual context space with a chosen physical metric.",
+      "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §5",
+      "source_lineage": "Explicit sufficient contract introduced to discharge the hidden-fiber obstruction; uses standard metric section reasoning.",
+      "status": "DECLARED_SUFFICIENT_CONTRACT_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Contract definition; its consequence is registered separately.",
+      "counterexamples_and_limits": "No section, delta or C is supplied by interface labels alone; a poor section can make the bound vacuous.",
+      "formal_contract_R168": {
+        "object_domain": "actual hidden contexts, observed contexts and a declared section",
+        "quantifiers": "every admissible z satisfies the fiber bound and every x,x' satisfy section regularity",
+        "bearer_time_signature": "r(x) denotes an actual tested-context representative, not an abstract label only",
+        "source_anchor": {
+          "path": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+          "sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+          "locator": "§5"
+        },
+        "purpose": "State exactly what turns a partial interface into bounded actual-context coverage",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R168-G4",
+          "R168-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R168:LIFTED_HIDDEN_CONTEXT_BOUND",
+      "kind": "CONDITIONAL_METRIC_COVERAGE_RESULT",
+      "label": "Hidden-Context Fill Radius and Effect Bound",
+      "statement": "Under the R168 partial-view lift contract, actual-context fill radius is at most delta+C h_X; combined with common tested effect upper eta and L-Lipschitz effect, sup_z e(z)<=min{M,eta+L(delta+C h_X)}.",
+      "domain": "One common actual/observed metric application satisfying the section, fiber, coverage, effect-regularity and tested-bound premises simultaneously.",
+      "scope": "One common actual/observed metric application satisfying the section, fiber, coverage, effect-regularity and tested-bound premises simultaneously.",
+      "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §5",
+      "source_lineage": "Triangle inequality plus R168 sharp metric envelope.",
+      "status": "PROVED_CONDITIONALLY_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "For any z choose nearest tested observed x_i; triangle inequality gives d_Z(z,r(x_i))<=delta+C h_X, then apply the common-upper fill-distance envelope.",
+      "counterexamples_and_limits": "Invalid if the section is not physically realized, the fiber bound fails, or effect regularity does not hold; can be vacuous at M.",
+      "formal_contract_R168": {
+        "object_domain": "one common partial-view physical application",
+        "quantifiers": "for every admissible hidden context z under all simultaneous premises",
+        "bearer_time_signature": "same actual context geometry, section representatives and pre-compensation effect function",
+        "source_anchor": {
+          "path": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+          "sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+          "locator": "§5"
+        },
+        "purpose": "Expose the hidden-fiber penalty instead of silently setting it to zero",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R168-G3",
+          "R168-G4",
+          "R168-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r168_lifted_hidden_context_bound",
+            "all_of": [
+              "R168:SHARP_METRIC_ENVELOPE",
+              "R168:PARTIAL_VIEW_NONENTAILMENT",
+              "R168:PARTIAL_VIEW_LIFT_CONTRACT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R168:RANDOM_CONTEXT_MASS_BOUND",
+      "kind": "EXACT_BINOMIAL_NO_HIT_BOUND",
+      "label": "No Detection Bounds Affected Context Mass Under Sampling",
+      "statement": "If n contexts are sampled independently from declared mu and every sampled context with e(z)>tau is detected with probability at least s_min, no-detection probability is at most (1-s_min p)^n for p=mu{e>tau}; a no-hit 1-alpha upper bound is p<=min{1,(1-alpha^(1/n))/s_min}.",
+      "domain": "Independent context draws, fixed affected set, fixed positive sensitivity lower bound and no adaptive post-result target changes.",
+      "scope": "Independent context draws, fixed affected set, fixed positive sensitivity lower bound and no adaptive post-result target changes.",
+      "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §6",
+      "source_lineage": "Elementary binomial no-hit calculation specialized to contextual mediator detection; no statistical novelty claim.",
+      "status": "PROVED_EXACTLY_WITH_FRACTION_CHECKS",
+      "proof": "Each draw detects with probability at least s_min p; independence multiplies no-detection probabilities, then invert the inequality.",
+      "counterexamples_and_limits": "Bounds mu-mass only, not maximum amplitude or existence; invalid for dependent/adaptive draws, unknown mu, or unsupported sensitivity.",
+      "formal_contract_R168": {
+        "object_domain": "one declared context measure and affected-context event",
+        "quantifiers": "n independent draws; every affected draw has detection probability at least s_min",
+        "bearer_time_signature": "sampling distribution across contexts is not the complete organization of any one context",
+        "source_anchor": {
+          "path": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+          "sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+          "locator": "§6"
+        },
+        "purpose": "Separate prevalence evidence from worst-case effect amplitude",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R168-G6",
+          "R168-G7"
+        ],
+        "machine_formalized": true,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R168:AMPLITUDE_MASS_SEPARATION",
+      "kind": "TYPED_NONENTAILMENT_RESULT",
+      "label": "Affected Mass and Maximum Effect Do Not Determine Each Other",
+      "statement": "A no-hit mass bound does not bound sup_z e(z): arbitrarily large allowed effect can occupy an arbitrarily small or mu-null context. Conversely, large affected mass can have effect only infinitesimally above tau. Amplitude and prevalence are distinct evidence objects.",
+      "domain": "Declared bounded effects and context measures; includes discrete and continuous examples.",
+      "scope": "Declared bounded effects and context measures; includes discrete and continuous examples.",
+      "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §6",
+      "source_lineage": "Elementary measure/amplitude separation specialized to hidden mediator effects.",
+      "status": "PROVED_BY_COUNTEREXAMPLES",
+      "proof": "Put effect M on a set of arbitrarily small measure for high-amplitude/low-mass; put tau+epsilon on the full space for high-mass/low-excess.",
+      "counterexamples_and_limits": "Metric regularity plus coverage can connect neighboring contexts, but only as an additional premise.",
+      "formal_contract_R168": {
+        "object_domain": "bounded effect functions and declared context measures",
+        "quantifiers": "there exist counterexample families in both directions",
+        "bearer_time_signature": "population over contexts remains distinct from an actual effect at a named context",
+        "source_anchor": {
+          "path": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+          "sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+          "locator": "§6"
+        },
+        "purpose": "Prevent random coverage evidence from masquerading as closure or no effect",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R168-G6",
+          "R168-G7"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R168:ENVELOPE_RELATIVE_TRIAGE",
+      "kind": "BOUNDED_CONTINUOUS_STOCHASTIC_DECISION_CONTRACT",
+      "label": "Invalid, Supported, Envelope-Refuted, Mass-Bounded, or Unresolved",
+      "statement": "After all R167 validity gates: a tested lower bound above tau supports contextual use; a valid sharp envelope maximum at most tau refutes effects above tau relative to the declared envelope; a valid random-context no-hit result without amplitude closure bounds affected mass only; every remaining case is unresolved.",
+      "domain": "One named operational mediator candidate, one fixed effect geometry, actual/partial context coverage and predeclared threshold tau.",
+      "scope": "One named operational mediator candidate, one fixed effect geometry, actual/partial context coverage and predeclared threshold tau.",
+      "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §7",
+      "source_lineage": "R167 closure-relative triage refined by sharp amplitude and affected-mass objects.",
+      "status": "DECLARED_BOUNDED_DECISION_CONTRACT",
+      "proof": "Priority logic is exhaustively checked; mathematical bounds are supplied by the preceding nodes while empirical premises remain open.",
+      "counterexamples_and_limits": "No status is a basal-experience status; null without valid regularity/coverage remains unresolved.",
+      "formal_contract_R168": {
+        "object_domain": "one candidate and one frozen closure certificate",
+        "quantifiers": "all validity premises precede status; local support is existential, envelope refutation universal over declared Z, mass bound relative to mu",
+        "bearer_time_signature": "same episode lineage and pre-compensation interval; samples, laws, contexts and experience remain distinct",
+        "source_anchor": {
+          "path": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+          "sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+          "locator": "§7"
+        },
+        "purpose": "Make continuous/stochastic non-detection falsifiable without overclaiming",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R168-G1",
+          "R168-G2",
+          "R168-G3",
+          "R168-G4",
+          "R168-G5",
+          "R168-G6",
+          "R168-G7"
+        ],
+        "machine_formalized": true,
+        "premise_routes": [
+          {
+            "rule": "r168_envelope_relative_triage",
+            "all_of": [
+              "R167:CLOSURE_RELATIVE_TRIAGE",
+              "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+              "R168:SHARP_METRIC_ENVELOPE",
+              "R168:LIFTED_HIDDEN_CONTEXT_BOUND",
+              "R168:RANDOM_CONTEXT_MASS_BOUND",
+              "R168:AMPLITUDE_MASS_SEPARATION"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+      "kind": "CONDITIONAL_WITNESS_REFINEMENT_AND_BOUNDARY",
+      "label": "Stochastic W4–W5 Refinement, Physical and Semantic Premises Retained",
+      "statement": "If the complete R166 witness, R167 token-lineage/operational architecture, and every R168 effect, coverage, regularity and triage premise hold on one common actual episode, the stochastic/continuous evidence refines W4-W5 for that declared relation. It does not replace physical realization, identify neural completeness, derive C1, validate B_min, or create a basal-experience gate.",
+      "domain": "One common actual P/I/K/D/rho episode and one fixed stochastic effect/coverage certificate satisfying all premises simultaneously.",
+      "scope": "One common actual P/I/K/D/rho episode and one fixed stochastic effect/coverage certificate satisfying all premises simultaneously.",
+      "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §8",
+      "source_lineage": "Conditional refinement of R166-R167 application boundary; no reverse inference to experience existence or familiar mineness.",
+      "status": "MANUAL_CONDITIONAL_APPLICATION_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Bind the stochastic laws, physical routes, context geometry and all validity clauses to the same episode; use R168 triage only inside R167 W4-W5 and retain W1-W3/W6 unchanged.",
+      "counterexamples_and_limits": "Any unsupported metric, L, lift, sensitivity, route, identity or upper/lower bound blocks the refinement; abstract kernels do not install themselves.",
+      "formal_contract_R168": {
+        "object_domain": "one actual declared operational relation with stochastic consumer evidence",
+        "quantifiers": "every all-of premise holds on the same application; no universal necessity or familiar-mineness conclusion",
+        "bearer_time_signature": "same P/I lineage and indexed subinterval; actual routes, laws, samples, partial views, Phi/h and reports remain typed separately",
+        "source_anchor": {
+          "path": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+          "sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+          "locator": "§8"
+        },
+        "purpose": "Extend operational installation evidence without weakening physical or semantic boundaries",
+        "thought_experiments": "§9",
+        "open_obligations": [
+          "R168-G1",
+          "R168-G2",
+          "R168-G3",
+          "R168-G4",
+          "R168-G5",
+          "R168-G6",
+          "R168-G7"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "r168_stochastic_witness_refinement",
+            "all_of": [
+              "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+              "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+              "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+              "R168:ENVELOPE_RELATIVE_TRIAGE"
+            ]
+          }
+        ]
+      }
     }
   ],
   "rules": [
@@ -32800,6 +33123,98 @@
         "source_sha256": "ca1e07fea8805a893ee521040986cc46152db848bbef32a352040ad1cca14c47",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r168_lifted_hidden_context_bound",
+      "all_of": [
+        "R168:SHARP_METRIC_ENVELOPE",
+        "R168:PARTIAL_VIEW_NONENTAILMENT",
+        "R168:PARTIAL_VIEW_LIFT_CONTRACT"
+      ],
+      "conclusion": "R168:LIFTED_HIDDEN_CONTEXT_BOUND",
+      "statement": "The sharp effect envelope, explicit hidden-fiber obstruction and a valid lift contract jointly yield the delta+C h_X hidden-context coverage penalty and effect bound.",
+      "proof_sketch": "The lift contract supplies actual-context fill radius by triangle inequality; the sharp envelope converts that radius and tested upper bounds into an amplitude bound, while the obstruction prevents omitting delta.",
+      "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §5",
+      "kind": "CONDITIONAL_METRIC_DEDUCTION",
+      "review": "MANUAL_ALL_OF_ACTUAL_CONTEXT_LIFT_AND_ENVELOPE_AUDIT",
+      "formal_contract_R168": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same actual Z and metric d_Z",
+          "same observed X and q",
+          "actual section representatives",
+          "valid delta and C",
+          "tested observed fill h_X",
+          "same bounded L-Lipschitz effect and tested upper bounds"
+        ],
+        "quantification": "Every hidden context is covered only through all simultaneous premises.",
+        "proof_location": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §5",
+        "source_sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r168_envelope_relative_triage",
+      "all_of": [
+        "R167:CLOSURE_RELATIVE_TRIAGE",
+        "R168:STOCHASTIC_CONTEXTUAL_EFFECT",
+        "R168:SHARP_METRIC_ENVELOPE",
+        "R168:LIFTED_HIDDEN_CONTEXT_BOUND",
+        "R168:RANDOM_CONTEXT_MASS_BOUND",
+        "R168:AMPLITUDE_MASS_SEPARATION"
+      ],
+      "conclusion": "R168:ENVELOPE_RELATIVE_TRIAGE",
+      "statement": "R167 validity discipline plus the typed stochastic effect, sharp actual/partial coverage envelope, random mass bound and amplitude/mass separation jointly require the five-way R168 status logic.",
+      "proof_sketch": "Positive lower evidence supports local use; universal envelope upper evidence supports bounded amplitude refutation; random no-hit evidence alone supports only a mass bound; invalid or incomplete premises block promotion.",
+      "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §§2-7",
+      "kind": "CONTRACT_SYNTHESIS",
+      "review": "MANUAL_ALL_OF_EFFECT_GEOMETRY_COVERAGE_AND_STATUS_AUDIT",
+      "formal_contract_R168": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "all R167 identity/fidelity/route gates",
+          "fixed K0,Z,F,tau",
+          "valid upper/lower bounds",
+          "valid metric and L",
+          "valid actual or lifted context coverage",
+          "fixed mu and sensitivity for mass statements",
+          "amplitude kept distinct from mass"
+        ],
+        "quantification": "Every validity clause precedes status; each conclusion keeps its local, universal-envelope or measure quantifier.",
+        "proof_location": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §§2-7",
+        "source_sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r168_stochastic_witness_refinement",
+      "all_of": [
+        "R166:TOKEN_INSTALLATION_WITNESS_CONTRACT",
+        "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+        "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+        "R168:ENVELOPE_RELATIVE_TRIAGE"
+      ],
+      "conclusion": "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+      "statement": "The complete R166 witness, R167 actual-lineage architecture and R168 bounded stochastic triage jointly refine W4-W5 for the one declared operational relation while retaining every physical and semantic boundary.",
+      "proof_sketch": "Bind the realized routes, stochastic laws, actual contexts, bounds and triage to one episode; insert the result only into W4-W5 and leave W1-W3/W6, C1 and B_min separate.",
+      "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §8",
+      "kind": "CONDITIONAL_APPLICATION_DEDUCTION",
+      "review": "MANUAL_ALL_OF_ACTUALITY_STOCHASTIC_CLOSURE_AND_SEMANTIC_BOUNDARY_AUDIT",
+      "formal_contract_R168": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same actual P/I/K/D/rho lineage",
+          "all R166 W1-W6 clauses",
+          "R167 actual operational state and routes",
+          "fixed R168 stochastic effect and coverage certificate",
+          "no abstract-kernel-to-installation shortcut",
+          "no reverse inference to C1/B_min/basal experience/unique owner"
+        ],
+        "quantification": "Every premise holds on one common application; no sample, population mass or fitted law replaces a missing physical premise.",
+        "proof_location": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §8",
+        "source_sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -33407,6 +33822,26 @@
       "from": "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
       "to": "B:BAC",
       "relation": "identity and level bookkeeping context, not a deduction"
+    },
+    {
+      "from": "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+      "to": "R167:R166_WITNESS_APPLICATION_BOUNDARY",
+      "relation": "stochastic/continuous refinement of W4-W5 only; not a replacement for R167 premises"
+    },
+    {
+      "from": "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+      "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+      "relation": "context only: same-instance C1 transport and independent B_min remain separately governed"
+    },
+    {
+      "from": "R168:AMPLITUDE_MASS_SEPARATION",
+      "to": "R166:POPULATION_TOKEN_NONENTAILMENT",
+      "relation": "analogous quantifier warning: context mass does not settle a named actual context"
+    },
+    {
+      "from": "R168:ENVELOPE_RELATIVE_TRIAGE",
+      "to": "A:U1",
+      "relation": "no envelope, sensitivity, or detection clause is added to basal-experience existence"
     }
   ],
   "prohibited_inferences_D": [
@@ -34099,6 +34534,25 @@
     "ethics_approval": false,
     "neural_mediator_identified": false,
     "route_closure_empirically_verified": false,
+    "B_min_validated": false,
+    "C1_derived": false,
+    "basal_experience_gate_added": false
+  },
+  "research_R168": {
+    "start_head": "fe2a967749c9412b1a957cbfa63ad6beff2ad9df",
+    "checkpoint_head": "5b76923f2cc78bd26682dbad5c72adfd40dfde50",
+    "parent_graph_sha256": "0ed7d225a8bc3260ae9fca042fc1f1316167e9fe0842129c1c9eb54c5ac48f71",
+    "note": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+    "new_nodes": 9,
+    "new_rules": 3,
+    "new_context_links": 4,
+    "status": "SHARP_STOCHASTIC_CONTINUOUS_REDUNDANCY_ENVELOPE_WITH_PARTIAL_VIEW_BOUNDARY",
+    "actual_apparatus": false,
+    "actual_participant_or_system_token": false,
+    "physical_metric_validated": false,
+    "lipschitz_constant_validated": false,
+    "partial_view_lift_validated": false,
+    "sampling_measure_validated": false,
     "B_min_validated": false,
     "C1_derived": false,
     "basal_experience_gate_added": false

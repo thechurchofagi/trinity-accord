@@ -1,3 +1,11 @@
+## R168 audit — sharpness without physical-calibration shortcuts
+
+R168 passes the selection, result and pre-save direction checks after one retained checker-vocabulary repair. The graph has 468 nodes, 222 rules and 125 context links; the inherited R167 node/rule/context prefixes reconstruct exactly. The lifted hidden-context rule requires sharp envelope, exact partial-view obstruction and actual lift contract simultaneously. The triage rule keeps stochastic effect, amplitude, mass, coverage and R167 closure premises separate. No mass result is promoted to amplitude, no abstract section to actual installation, and no output distribution to experience.
+
+Every new node fixes object, quantifiers, time/signature, actual-versus-abstract status, source, proof and limits. Exact checks cover 3,896 envelopes, 18,536 pointwise upper/sharpness cases, 1,012 fill-distance equalities, 1,100 mass cases and 16 status assignments. They establish the mathematical boundary only. Physical validity of `d`, `L`, `delta`, `C`, pointwise test bounds, sampling measure and sensitivity remain open.
+
+Gaps R168-G1–G7 record weak discriminator classes, ungrounded metrics, vacuous smoothness, unrealizable sections, unbounded hidden fibers, invalid random sampling, and model/installation/semantic separation. The first aggregate audit's literal-marker check falsely rejected two clearly non-deductive link descriptions; R168-F1 records the narrow validator repair and full rerun. DAG/code success is not theory truth or a global proof. C1, `B_min`, complete realization, basal experience and unique ownership remain untouched.
+
 ## R167 audit — operational use under redundancy, compensation and same-lineage interventions
 
 R167 passes the selection, result and pre-save direction checks. The graph has 459 nodes, 219 rules and 121 context links; the inherited R166 node/rule/context prefixes are exact. The five-premise triage route and six-premise operational application route are explicit conjunctions. No rule promotes a counterexample to positive evidence, an operational controller state to a neural state, installation to C1, or structural counterpart to familiar mineness.
