@@ -1,0 +1,60 @@
+{
+  "schema": "UCT_DUAL_SAVE_RECEIPT/v1",
+  "round": "R157",
+  "saved_at_utc": "2026-10-07T11:50:00Z",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "research_commit": "512bdd61e2a387fcf5e6eca7a14f7913cb568158",
+    "research_files_verified": 18,
+    "expected_sha_fast_forward": true,
+    "remote_blob_readback": "PASS"
+  },
+  "workspace": {
+    "master_handoff": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_000000003540822fa0cdf4972741f58f",
+      "version": 1,
+      "filename": "UCT_Hourly_Research_Master_Handoff.md",
+      "bytes": 6712,
+      "sha256": "cc3e5665f893cd5f3df3dd63abce20a56184a8ec44c6c8b9e127da7341a53277",
+      "identity_preserved": true,
+      "readback": "PASS"
+    },
+    "increment": {
+      "library_file_id": "libfile_da5e313aec308191a17f2cf42b68ff43",
+      "file_id": "file_000000008344822fb0fbd7380492b589",
+      "version": 0,
+      "filename": "UCT_R157_Increment_20261007.zip",
+      "bytes": 290985,
+      "sha256": "7cb7d0ecca6a5506163950c6c56920d74dc69b96e445e081442a5ccecbd54847",
+      "scope": "R157 increment only; not a complete repository or working-set backup",
+      "members": 19,
+      "payload_files": 18,
+      "byte_identical_readback": "PASS",
+      "crc_and_member_hashes": "PASS"
+    }
+  },
+  "required_baseline": {
+    "library_file_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
+    "filename": "UCT_R156_Working_Set_20261007.zip",
+    "bytes": 3493643,
+    "sha256": "95cc3ea1ec45eb273531c25525edcb7f8e6f2088c650a39b97d24817704ec40a",
+    "files": 384,
+    "research_commit": "d80d08a4c0c09559e2122da38e24956b17bb711b",
+    "receipt_commit": "7af49dad7491910d3c6aa205fc4f89ba4b1c5134"
+  },
+  "restore": [
+    "Verify and extract the exact R156 working-set baseline.",
+    "Overlay every non-manifest member of the R157 increment.",
+    "Verify _R157_INCREMENT_MANIFEST.json.",
+    "Fetch and compare the latest GitHub branch before continuing."
+  ],
+  "map": {
+    "revision": "R157-v1.0",
+    "nodes": 408,
+    "rules": 197,
+    "bounded_checks": 6,
+    "status": "PASS_WITH_OPEN_EXPLANATORY_GAPS"
+  }
+}
