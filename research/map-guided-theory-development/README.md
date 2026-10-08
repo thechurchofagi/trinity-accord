@@ -1,11 +1,31 @@
-# MGTD Paper v1.0.0 — publishing workflow
+# MGTD methods preprint: v1.0.1 is the current corrected version
 
-This is a **standalone methodological preprint** by Hongju Liu, distinct from UCT theoretical papers and distinct from the UCT map's own version.
+Research ID METHOD20261008; author Hongju Liu; not peer reviewed.
 
-**Frozen scholarly files:** `MGTD_Method_Paper_v1.0.0.pdf`, exact SHA256 `ba85c0ff9f2bf4be9e0a29c051c2ad83d1eb72b57e0ca2ba827bd17c28dcc310`, Markdown source and the complete reproducibility ZIP. No PDF rebuild after preflight.
+## Current published version
 
-Author has explicitly instructed publication in the repository's order: **Zenodo DOI and public exact-byte readback → OpenTimestamps proof/Bitcoin verification → guarded paid Arweave bundle/readback.** Publishing stage never stamps pre-DOI, makes an Arweave payment, or claims peer review, originality, or empirical validation. `publication.py` uses the existing GitHub Actions `ZENODO_ACCESS_TOKEN`, stores create-once intent and refuses unknown duplicate POSTs. A separate follow-up batch must be enabled only after an actual successful Zenodo readback receipt, with the DOI and hashes obtained from it.
+Corrected version 1.0.1 DOI: https://doi.org/10.5281/zenodo.23241982
+Historical version 1.0.0 DOI: https://doi.org/10.5281/zenodo.23241205
+Shared concept DOI: https://doi.org/10.5281/zenodo.23241204
 
-Publication is triggered only by an explicit authorization file commit marked `[mgtd-publish]`. If a remote POST outcome is ambiguous, stop and inspect the retained intent and live Zenodo record; do not blindly rerun. The main UCT formal-map releases, other DOI records and Trinity Accord Originals are not amended.
+The v1.0.1 title page and declarations update the stale pre-release DOI/author-review language in v1.0.0; original theorems, finite tests and references are not changed.
 
-The PDF is the primary scholarly file; an attached full reproduction bundle is offered as methodology evidence. The manuscript discloses substantial AI assistance. New contributions are an operational synthesis, not a claim that all elements of argument maps or versioned research were invented here.
+Exact published v1.0.1 PDF SHA256: 98abef0e92d0bb599146cdf525d98acb7045a168912ec9e87ba7723bc958097c (138355 bytes). See v1.0.1/publication-record.json for successful anonymous readback of all five public Zenodo files.
+
+## OTS then Arweave only for v1.0.1
+
+Author directive: old v1.0.0 OTS receipt is historical; NO v1.0.0 Arweave upload. The former v1.0.0 scheduled workflow was disabled in main and can no longer stamp or pay.
+
+The current OTS/AR target is research/paper-timestamps/2026-10-08-mgtd-v101/targets.json. Read its status.json for current stage; the first run had four pending OTS calendar attestations and NO verified Bitcoin block. The workflow can pay for Arweave only after verified OTS and live/latest DOI check plus existing strict wallet/fee limits.
+
+Latest target control: research/map-guided-theory-development/LATEST_AR_VERSION.json.
+Hourly workflow: https://github.com/thechurchofagi/trinity-accord/actions/workflows/research-mgtd-v101-ots-arweave.yml
+First OTS run: https://github.com/thechurchofagi/trinity-accord/actions/runs/37799569091
+New-version preparation run: https://github.com/thechurchofagi/trinity-accord/actions/runs/37797469184
+Public publication/readback run: https://github.com/thechurchofagi/trinity-accord/actions/runs/37798883599
+
+Successful job execution while state is PENDING_BITCOIN is NOT Bitcoin confirmation or Arweave completion. Real completion is ARWEAVE_READBACK_PASS and a recorded verified transaction.
+
+## Research/source organization
+
+Original v1.0.0 sources remain at the root of this folder; the corrected PDF/source/reproducibility ZIP and publisher are in v1.0.1/. Do not overwrite the old Zenodo DOI or treat it as a substitute for the latest scientific edition.
