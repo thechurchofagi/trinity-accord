@@ -1,0 +1,78 @@
+{
+  "schema":"uct-formal-extension-registry-v1",
+  "governing_policy":"FORMAL_MAP_REVIEW_POLICY.json",
+  "canonical_graph":"UCT_FORMAL_GRAPH.json",
+  "scope":"Catalogue of explicitly registered extensions; not a claim that all earlier unregistered supplements have been incorporated.",
+  "entries":[
+    {
+      "id":"EI20261008",
+      "order":1,
+      "base_commit":"2b8deb5a9f816f51ec6bd6961b3bfe8a8a439fcf",
+      "base_graph_blob":"172c254c5f09ce83a5daf67244f36fbc5a3b9254",
+      "path":"records/EI20261008_Architecture_Dependence/MAP_EXTENSION.json",
+      "readable_map":"records/EI20261008_Architecture_Dependence/RESEARCH_CHECKPOINT.md",
+      "status":"PENDING_MAP",
+      "audit_status":"AUDIT_INCOMPLETE",
+      "enabled_as_established_premises":false,
+      "depends_on":[],
+      "merge":"Add unique IDs only after source-ID resolution, whole-current-graph item review and affected-chain rederivation. Reject conflicting IDs and missing imports; reconcile changed base first."
+    },
+    {
+      "id":"R183",
+      "order":2,
+      "base_commit":"d8fe35b450fef523c9d48ded5639ef49bb10a999",
+      "base_graph_sha256":"40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+      "effective_manifest_revision":"R178-SB20261008+CORE20261008",
+      "path":"records/R183_Target_Relative_Experiential_Relevance_20261008/MAP_EXTENSION.json",
+      "map_extension_sha256":"dbacfc7d76da10523dad5533152fe57afabd02ddb3f1c0c660adc77279654e72",
+      "readable_map":"records/R183_Target_Relative_Experiential_Relevance_20261008/Target_Relative_Experiential_Relevance_v0_1.md",
+      "status":"PENDING_MAP",
+      "audit_status":"AUDIT_INCOMPLETE",
+      "enabled_as_established_premises":false,
+      "depends_on":["CORE20261008"],
+      "nonpremise_witnesses":["EI20261008"],
+      "merge":"Inspect only until the whole effective map receives per-item semantic review and the actual bridge remains explicit. Never promote the EI witness or R183 file existence to premise truth."
+    },
+    {
+      "id":"OO20261008",
+      "order":3,
+      "base_graph_sha256":"40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+      "path":"records/OO20261008_Task_Access/MAP_EXTENSION.json",
+      "map_extension_sha256":"96074407c76cf67035e6425535912118e53a4d2189bd637f1afa46b685e0a7c6",
+      "readable_map":"records/OO20261008_Task_Access/RESEARCH_CHECKPOINT.md",
+      "status":"PENDING_MAP",
+      "audit_status":"AUDIT_INCOMPLETE",
+      "enabled_as_established_premises":false,
+      "depends_on":["CORE20261008"],
+      "merge":"Preserved concurrent pending module. Inspect exact task-access results only; do not import them as a named phenomenal result or established premise."
+    },
+    {
+      "id":"RU20261008",
+      "order":4,
+      "base_graph_sha256":"40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+      "path":"records/RU20261008_Reliability_and_Use/MAP_EXTENSION.json",
+      "map_extension_sha256":"3d6d7871acd1e7e058d1c6b8ffee708d693d48fea6833116a960771f2b742145",
+      "readable_map":"records/RU20261008_Reliability_and_Use/RESEARCH_CHECKPOINT.md",
+      "status":"PENDING_MAP",
+      "audit_status":"AUDIT_INCOMPLETE",
+      "enabled_as_established_premises":false,
+      "depends_on":["CORE20261008"],
+      "merge":"Preserved concurrent pending module. Reliability and answer-binding checks are not imported as a named phenomenal result or established premise."
+    },
+    {
+      "id":"R184",
+      "order":5,
+      "base_commit":"7c159777ffde9148f5e99830d844fe9b7139a3fa",
+      "base_graph_sha256":"40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+      "path":"records/R184_Target_Persistence_After_Obstruction_20261008/MAP_EXTENSION.json",
+      "map_extension_sha256":"008fd749487a8fa7512dcbbbc4fda6f32eb2cefa43aef3f8c1204a0755d7ba09",
+      "readable_map":"records/R184_Target_Persistence_After_Obstruction_20261008/Target_Persistence_After_Obstruction_v0_1.md",
+      "status":"PENDING_MAP",
+      "audit_status":"AUDIT_INCOMPLETE",
+      "enabled_as_established_premises":false,
+      "depends_on":["CORE20261008","R183"],
+      "merge":"Inspect only. The finite route-family application and reflex-twin counterexample do not discharge actual bearer, intervention, named-feeling or whole-map semantic obligations."
+    }
+  ],
+  "processing_rule":"Load canonical graph first, then ordered entries for inspection. A pending entry is visible research material but must not supply established premises. Promotion requires recorded full audit and explicit status update; mere file existence never promotes a claim."
+}

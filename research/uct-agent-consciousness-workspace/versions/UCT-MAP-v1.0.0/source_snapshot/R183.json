@@ -1,0 +1,39 @@
+{
+  "schema":"uct-pending-typed-overlay-v1",
+  "record":"R183",
+  "base":{"canonical_path":"UCT_FORMAL_GRAPH.json","canonical_sha256":"40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce","canonical_revision":"R178-SB20261008-v1.0","effective_manifest":"UCT_FORMAL_GRAPH_MODULES.json","effective_revision":"R178-SB20261008+CORE20261008"},
+  "status":"PENDING_MAP",
+  "audit_status":"AUDIT_INCOMPLETE",
+  "enabled_as_established_premises":false,
+  "depends_on":[{"id":"CORE20261008","role":"typed support-family theorem","status":"REGISTERED_ADDITIVE_AUDIT_INCOMPLETE"}],
+  "nonpremise_witnesses":[{"id":"EI20261008","role":"shared/bypass/redundant architecture witness","status":"PENDING_MAP; not used as an established deductive premise"}],
+  "common_scope":"One independently admitted actual token/lineage comparison, fixed interval, complete signature, capability contract, target, boundary, transformation family and allowed compensation. Finite support-family mathematics does not itself establish physical realizability, C1, a named feeling or a universal intelligence core.",
+  "nodes":[
+    {"id":"R183:COUNTERFACTUAL_CLASSES","kind":"definition","statement":"Distinguish fixed-organization experience-off (UCT-inadmissible), constitutive-relation intervention, evidence-channel intervention and boundary/resource change.","scope":"Same declared P/I/K/M/pi/T; no class may silently replace another.","source":"§2","status":"DEFINITION"},
+    {"id":"R183:SUPPORT_CONTRACT","kind":"definition","statement":"F_T^pi is the nonempty finite family of admitted retained relation sets that succeed on target T under one frozen actual-process and evaluation contract.","scope":"Only independently realizable pi(S); absent/undefined actual comparisons are not invented as successes or failures.","source":"§3","status":"DEFINITION"},
+    {"id":"R183:INDIVIDUAL_RELEVANCE","kind":"conditional_theorem","statement":"A relation r is individually unavoidable iff it belongs to the intersection of the inclusion-minimal successful supports, equivalently iff every successful support contains r.","scope":"Finite nonempty SUPPORT_CONTRACT; no monotonicity needed.","source":"§4 R183-T1","status":"MODEL_CONDITIONAL_CHECKED"},
+    {"id":"R183:FULL_DELETION_CRITERION","kind":"conditional_theorem","statement":"For a nonempty upward-closed success family, r is individually unavoidable iff deleting r from full support fails.","scope":"Requires upward closure; false as an unrestricted inference.","source":"§4 R183-T2","status":"MODEL_CONDITIONAL_CHECKED"},
+    {"id":"R183:DISJUNCTIVE_RELEVANCE","kind":"definition","statement":"A relation family R is disjunctively unavoidable iff it intersects every minimal successful support; minimal such R are minimal hitting sets.","scope":"Target/protocol relative; it does not assert that any one member is universally necessary.","source":"§3,§5","status":"DEFINITION_CHECKED"},
+    {"id":"R183:ACTUAL_BRIDGE","kind":"unresolved_premise","statement":"The bearer/lineage, interval, complete signature, relation membership, transformations, boundary and capability target are actual and independently grounded for one application.","scope":"Joint same-instance premise; abstract circuits and labels do not discharge it.","source":"§4 R183-T3","status":"OPEN"},
+    {"id":"R183:TRER","kind":"conditional_application","statement":"Under C1, ACTUAL_BRIDGE, SUPPORT_CONTRACT and INDIVIDUAL_RELEVANCE, the experiential counterpart of r is target-relative constitutively relevant to T because it is the intrinsic presentation of the same unavoidable relation.","scope":"No extra experiential cause, named feeling, scalar richness, basal gate or exclusive owner.","source":"§4 R183-T3","status":"CONDITIONAL_ONLY"},
+    {"id":"R183:FOUR_RELATION_CLASS","kind":"model_specification","statement":"Consider the complete class of nonempty upward-closed success families on one fixed four-relation universe.","scope":"Pure finite family class; all members contain full support, no actual realization inferred.","source":"§4 R183-T4; check_relevance.py","status":"MODEL_SPECIFICATION"},
+    {"id":"R183:INTACT_UNDERIDENTIFICATION","kind":"counterexample_family","statement":"All 167 nonempty upward-closed families on four relations have intact full-support success while their individual unavoidable cores differ.","scope":"Finite selected supports; no actual-instance claim.","source":"§4 R183-T4; MODEL_RESULTS.json","status":"MODEL_CONDITIONAL_CHECKED"},
+    {"id":"R183:TARGET_PRESERVING_WITNESS","kind":"model_specification","statement":"Two declared toy complete signatures differ by a report or bypassed relation while both satisfy the same fixed selected capability target.","scope":"Conditional toy witness; actual complete-token realization and selected relation membership remain open.","source":"§4 R183-T4, §6 TE3","status":"MODEL_SPECIFICATION"},
+    {"id":"R183:EXPERIENCE_CHANGE_NO_TARGET_CHANGE","kind":"counterexample","statement":"Changing a declared report or bypassed relation can change complete organization while the selected capability target remains successful.","scope":"Requires the changed relation to be constitutive of the declared complete token; does not infer reportless absence of experience.","source":"§4 R183-T4, §6 TE3","status":"CONDITIONAL_COUNTEREXAMPLE"},
+    {"id":"R183:NAMED_BRIDGE","kind":"open_problem","statement":"Independently identify a human-scale experiential target and show whether the selected actual relation or disjunctive family realizes it.","scope":"Reports cannot define and validate the target circularly.","source":"§10","status":"OPEN"}
+  ],
+  "rules":[
+    {"id":"r183_individual_relevance","type":"conditional_deduction","all_of":["R183:SUPPORT_CONTRACT","CORE20261008:MINIMA","CORE20261008:REQUIRED_INTERSECTION"],"conclusion":"R183:INDIVIDUAL_RELEVANCE","binding":"Same finite F_T^pi, target and protocol","proof":"§4 R183-T1"},
+    {"id":"r183_full_deletion","type":"conditional_deduction","all_of":["R183:SUPPORT_CONTRACT","CORE20261008:MONOTONE","R183:INDIVIDUAL_RELEVANCE"],"conclusion":"R183:FULL_DELETION_CRITERION","binding":"Same upward-closed family and full retained set","proof":"§4 R183-T2"},
+    {"id":"r183_trer","type":"conditional_UCT_application","all_of":["A:C1","R183:ACTUAL_BRIDGE","R183:SUPPORT_CONTRACT","R183:INDIVIDUAL_RELEVANCE"],"conclusion":"R183:TRER","binding":"Same actual P/I/K/M/pi/T and actual relation r; no abstract-to-actual substitution","proof":"§4 R183-T3"},
+    {"id":"r183_intact_underidentification","type":"model_deduction","all_of":["R183:SUPPORT_CONTRACT","R183:FOUR_RELATION_CLASS"],"conclusion":"R183:INTACT_UNDERIDENTIFICATION","binding":"Same fixed four-relation universe and complete nonempty upward-family class","proof":"Exhaustive enumeration in check_relevance.py"},
+    {"id":"r183_no_target_converse","type":"conditional_counterexample","all_of":["C:FIXED_J","A:C1_OI","R183:ACTUAL_BRIDGE","R183:TARGET_PRESERVING_WITNESS"],"conclusion":"R183:EXPERIENCE_CHANGE_NO_TARGET_CHANGE","binding":"Same J, actual distinct complete organizations, equal selected target result","proof":"§4 R183-T4 and TE3; an instance still requires actual grounding"}
+  ],
+  "non_deductive_relations":[
+    {"from":"EI20261008:CORE_FAMILY","to":"R183:DISJUNCTIVE_RELEVANCE","type":"inherited_witness_not_proof"},
+    {"from":"R183:TRER","to":"R183:NAMED_BRIDGE","type":"open_interpretation_no_entailment"},
+    {"from":"R183:COUNTERFACTUAL_CLASSES","to":"R183:TRER","type":"scope_guard_not_deductive_edge"}
+  ],
+  "promotion_requirements":["Resolve all imported effective IDs and source hashes","Reconcile with any newer branch head and reviewer amendments","Complete per-item semantic review of the full effective map","Keep ACTUAL_BRIDGE and NAMED_BRIDGE open unless independently discharged","Explicitly enable only after review; file existence is not promotion"],
+  "publication_authorized":false
+}

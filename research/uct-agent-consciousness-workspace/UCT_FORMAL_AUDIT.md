@@ -1,19 +1,3 @@
-# Current formal audit — CORE20261008
+# Current full semantic audit
 
-Status: **AUDIT_INCOMPLETE**, not global PASS. The complete prior audit is preserved byte-for-byte at [UCT_FORMAL_AUDIT_BEFORE_CORE20261008.md](UCT_FORMAL_AUDIT_BEFORE_CORE20261008.md), blob `716c1fe185c5a33735658dac3152c1f79c859143`. R182 and reviewer-controlled unresolved issues remain valid.
-
-Read [the effective machine manifest](UCT_FORMAL_GRAPH_MODULES.json) and [this round's audit](records/CORE20261008_Target_Relative_Support/MAP_AUDIT.json). The base graph bytes are unchanged. The new layer has explicit node definitions/statuses, AND-premise rules, source cards and non-deductive context links; no new rule concludes an old node.
-
-Actually completed: source-scope rereading of C1/U1/P3/actual-token and selected-target roots; current general proof and counterexample review; finite success-family and dynamic model checks; mechanical loading of the named seven-anchor slice with 33 additions, eleven rules and six contexts. The synthetic premise-gate check confirms that the new experiential application does not follow without the OPEN actual bridge.
-
-Not completed: full base materialization into the runtime, full current graph structural rerun, every old node/rule/context semantic review, actual human phenomenal target admission, or exhaustive originality clearance. The loader records per-ID structural/semantic statuses when supplied the whole base. Its output must not be confused with a proof assistant or independent peer review.
-
-Errors blocked: dropping surviving local experience; equating any surviving cell with preserved human experience; confusing required intersection and sufficient support; dropping monotonicity from cut duality; treating one-at-a-time deletion as global minimality; equating final parts with full pointed state; relabeling known NCC/minimal-path ideas as new discoveries. See the current [handoff](records/CORE20261008_Target_Relative_Support/CURRENT_HANDOFF_ZH.md) for precise continuation.
-
-R183 adds a **pending, disabled** experience–intelligence synthesis. Its current-round audit traversed all 584 canonical nodes, 284 rules and 178 context links structurally and found no duplicate IDs, unresolved references or deductive cycle. It also found twenty inherited R175–R177 nodes without inline `scope` and five IA rules without inline `statement`; exact IDs are recorded in [R183 MAP_AUDIT](records/R183_Target_Relative_Experiential_Relevance_20261008/MAP_AUDIT.json). These are schema/coverage gaps, not newly inferred falsehoods, and canonical bytes remain frozen.
-
-Only eight base nodes, five affected base rules, seven CORE nodes and five EI witness nodes received current-round semantic rereading. The exact unreviewed complement is 576 base nodes, 279 base rules and all 178 context links for per-item semantic re-proof. Consequently R183 remains `PENDING_MAP`; code PASS and structural traversal do not upgrade it or the open actual/named-experience bridges.
-
-R184 reruns structural traversal over 584 canonical nodes, 284 rules and 178 context links plus the visible CORE, EI, R183, OO, RU and R184 layers. IDs, references, nonempty `all_of` sets and global deductive acyclicity pass. The canonical graph remains byte-identical at SHA256 `40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce`.
-
-Semantic rereading remains scoped to nine base nodes, five base rules, UCT I §§2.1–2.5/C1/U1/6.1, UCT III §§4–5, TA25 §§3–8 and the R181–R183 chain. The exact base complement not semantically re-proved this round is 575 nodes, 279 rules and all 178 context links. The audit also preserves inherited missing-inline-field reports in canonical and pending layers; these are schema gaps, not evidence that their claims are false. `RTR`, actual route membership and the named phenomenal bridge remain open, so R184 is `PENDING_MAP / AUDIT_INCOMPLETE`.
+See versions/UCT-MAP-v1.0.0/AUDIT_REPORT.md and CURRENT_STATE.json. FA20261008 reviews 1,278 items. Coverage complete; explicit corrections active; actual/phenomenal application and reviewer-controlled OPEN findings remain open. The prior audit is preserved in versions/UCT-MAP-v1.0.0/history/UCT_FORMAL_AUDIT.md.

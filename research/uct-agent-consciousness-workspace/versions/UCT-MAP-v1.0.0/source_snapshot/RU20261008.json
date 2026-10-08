@@ -1,0 +1,64 @@
+{
+  "schema":"uct-pending-map-module/1.0",
+  "id":"RU20261008",
+  "status":"PENDING_MAP",
+  "enabled_as_established_premises":false,
+  "base_commit":"116c4846f93d2ef71a023bb1374737606d557f2b",
+  "base_git_blob":"172c254c5f09ce83a5daf67244f36fbc5a3b9254",
+  "effective_entry":"UCT_FORMAL_GRAPH_MODULES.json",
+  "serialization":"Compact remote module; same claim IDs and routes as expanded local module, not byte-identical serialization.",
+  "node_defaults":{
+    "scope":"One declared instance of the finite CONTRACT; actual claims require the explicit actual-instance bridge.",
+    "quantifiers":"Universal only on the stated finite domain; witnesses have their exact construction; open bridges are not asserted true.",
+    "status":"PENDING_MAP",
+    "actuality":"MODEL_ONLY unless explicit actual-process assumptions hold",
+    "origin":"THEORETICAL_APPLICATION_PRIORITY_UNVERIFIED",
+    "proof_or_evidence":"General proof or exact construction in the cited RESEARCH_NOTE.md section; MODEL_RESULTS.json only corroborates finite instances."
+  },
+  "rule_defaults":{
+    "kind":"DEDUCTIVE_CONDITIONAL",
+    "status":"PENDING_MAP",
+    "same_instance_required":true,
+    "all_of_semantics":"Every premise and global contract holds simultaneously on the same typed instance. Presence of a node is not proof of its premise.",
+    "proof_source":"RESEARCH_NOTE.md"
+  },
+  "expansion":"For each node/rule inherit defaults then overlay explicit fields. Pending modules are not automatically established premises.",
+  "nodes":[
+    {"id":"RU20261008:CONTRACT","kind":"ASSUMPTION","statement":"X is uniform on F2^4, A independently uniform on its15 nonzero masks. One source-dependent bit is sent before A is known; decoder and selector see only(A,B), public model and independent randomness. No later source access. Fix clock,boundaries and scoring contract.","source":"RESEARCH_NOTE.md section2","boundary":"No source-dependent side information; models are not complete actual brains."},
+    {"id":"RU20261008:WITNESS","kind":"CONSTRUCTION","statement":"L transmits x1 and returns B on A=1,otherwise0. Q transmits f(X)=x1*x2 XOR x3*x4 and returns B XOR f(A). Both transmit exactly one source-dependent bit.","source":"RESEARCH_NOTE.md section2","boundary":"Source storage may persist outside the isolated downstream comparison."},
+    {"id":"RU20261008:ANSWER_POSTERIOR","kind":"DEFINITION","statement":"For the actual proposed answer Y=d(A,B),q(A,B,Y)=Pr[A dot X=Y|A,B]. Separate this law,an installed estimate,its target binding,its operative use and its report.","source":"RESEARCH_NOTE.md section2","boundary":"The posterior is not defined as felt confidence."},
+    {"id":"RU20261008:POSTERIOR_LAWS","kind":"CONDITIONAL_THEOREM","statement":"Under CONTRACT and WITNESS,L has q1 with mass1/15 and q1/2 with mass14/15;Q has q3/5 with mass5/8 and q2/3 with mass3/8. Forced means are8/15 and5/8.","source":"RESEARCH_NOTE.md section2","boundary":"No normalized human metacognitive-efficiency claim."},
+    {"id":"RU20261008:ALL_CODES","kind":"ASSUMPTION","statement":"Range over all deterministic one-bit Boolean encoders and decoders in CONTRACT. Random strategies have seeds independent of X,A and are mixtures of deterministic protocols.","source":"RESEARCH_NOTE.md section3","boundary":"No variable-size message or post-query source query."},
+    {"id":"RU20261008:EQUALITY_CLASS","kind":"CONDITIONAL_THEOREM","statement":"Forced mean optimum is5/8. Every achieving Boolean encoder has all16 Walsh absolute values4,fiber sizes6 and10 and the same posterior reliability law as Q.","source":"RESEARCH_NOTE.md section3","boundary":"Four-source-bit uniform parity contract only; bent functions are prior mathematics."},
+    {"id":"RU20261008:SELECTION","kind":"ASSUMPTION","statement":"Fix positive coverage c in(0,1]. Acceptance is measurable from the same(A,B) and independent randomness; no truth label or extra evidence. Tie randomization is allowed.","source":"RESEARCH_NOTE.md section4","boundary":"Coverage is an accepted fraction,not an experience threshold."},
+    {"id":"RU20261008:CEILING","kind":"CONDITIONAL_THEOREM","statement":"Every forced-mean-optimal one-bit protocol,including randomized optimal protocols,has accepted accuracy at most2/3 at every positive coverage under SELECTION.","source":"RESEARCH_NOTE.md section3","boundary":"External selection using correctness is outside the contract."},
+    {"id":"RU20261008:FRONTIERS","kind":"CONDITIONAL_THEOREM","statement":"A_L(c)=1 for c<=1/15 else1/2+1/(30c);A_Q(c)=2/3 for c<=3/8 else3/5+1/(40c). Cross at1/5;at c1/10 values5/6 and2/3.","source":"RESEARCH_NOTE.md section4","boundary":"Changed scoring contracts are not silently one fixed J."},
+    {"id":"RU20261008:LOSS","kind":"ASSUMPTION","statement":"Reward1 for correctness,-ell for error,0 for abstention;ell>=0. Same evidence and answer/reject actions for both encoders.","source":"RESEARCH_NOTE.md section5","boundary":"No extra measurements,retries or source access."},
+    {"id":"RU20261008:VALUE_REVERSAL","kind":"CONDITIONAL_THEOREM","statement":"V_L=1/15+(14/15)max(0,(1-ell)/2);V_Q=(5/8)max(0,(3-2ell)/5)+(3/8)max(0,(2-ell)/3). Cross atell67/45;atell2 values1/15 and0.","source":"RESEARCH_NOTE.md section5","boundary":"Not a universal evolutionary/intelligence ranking."},
+    {"id":"RU20261008:WIRING","kind":"CONSTRUCTION","statement":"Fix L raw answers,error loss ell=2 and gate q>2/3. Compare true-q gate,a physical swap attaching q1 to A2 instead of A1,correct q with always-answer bypass,and correct gate with constant displayed8/15. A separate test complements actual answerY.","source":"RESEARCH_NOTE.md section6","boundary":"Routing,target and gate fixed before scoring; not post-hoc role labels."},
+    {"id":"RU20261008:WIRING_RESULTS","kind":"CONDITIONAL_THEOREM","statement":"Atell2 the four utilities are1/15,-1/30,-2/5,1/15. Swap preserves raw answers/confidence histogram but changes conditional accuracy. ComplementingY gives stale-reference utility-2/15 versus0 with correct rebinding.","source":"RESEARCH_NOTE.md section6","boundary":"Only model intervention established; no actual neural or deployed AI instance."},
+    {"id":"RU20261008:CALIBRATION","kind":"CONDITIONAL_OBSERVATION","statement":"Both L and Q permit perfectly calibrated Bayes-posterior reports. Their reliability distributions differ; neither proves dishonesty,loss of subjective experience or lower normalized metacognitive efficiency.","source":"RESEARCH_NOTE.md sections2,6","boundary":"Constant marginal calibration need not discriminate reliable trials."},
+    {"id":"RU20261008:REALIZATION","kind":"OPEN_BRIDGE","statement":"Independently admit actual P,Q with common constitutive signature,time,ports,noise,actual encoder/consumer paths and faithful model-to-actual correspondence.","source":"RESEARCH_NOTE.md section7","boundary":"Execution does not discharge physical or phenomenal admission."},
+    {"id":"RU20261008:ACTUAL_J_DIFFERENCE","kind":"OPEN_BRIDGE","statement":"Establish genuine inequality of the same actual isomorphism-invariant J on this P,Q comparison,not a sample score or changed scoring protocol.","source":"RESEARCH_NOTE.md section7","boundary":"Explicit premise,not true merely because it is in the graph."},
+    {"id":"RU20261008:TYPE_APPLICATION","kind":"CONDITIONAL_UCT_APPLICATION","statement":"REALIZATION,ACTUAL_J_DIFFERENCE,C1 and inherited fixed-J refinement imply distinct complete experiential structural types.No magnitude or named feeling is assigned.","source":"RESEARCH_NOTE.md section7;UCTIII section5.1","origin":"INHERITED_APPLICATION","boundary":"Actual and selected-feeling bridges remain open."},
+    {"id":"RU20261008:PERSISTENCE","kind":"OPEN_BRIDGE","statement":"An admitted local process continues under UCTI P3 over the interval after reader/monitor/report-path change;its constitutive dynamics have not terminated.","source":"RESEARCH_NOTE.md section7;UCTI P3","boundary":"Physical persistence is not implied by an output label."},
+    {"id":"RU20261008:LOCAL_EXPERIENCE","kind":"INHERITED_APPLICATION","statement":"A local process satisfying PERSISTENCE remains under U1;downstream inaccessibility,abstention or missing report does not by itself extinguish basal experience.","source":"RESEARCH_NOTE.md section7;UCTI U1/P3","origin":"INHERITED_APPLICATION","boundary":"Continuing experience need not have unchanged local type."}
+  ],
+  "rules":[
+    {"id":"RU20261008:r_posteriors","all_of":["RU20261008:CONTRACT","RU20261008:WITNESS","RU20261008:ANSWER_POSTERIOR"],"conclusion":"RU20261008:POSTERIOR_LAWS","proof":"section2"},
+    {"id":"RU20261008:r_equality","all_of":["RU20261008:CONTRACT","RU20261008:ALL_CODES"],"conclusion":"RU20261008:EQUALITY_CLASS","proof":"section3"},
+    {"id":"RU20261008:r_ceiling","all_of":["RU20261008:CONTRACT","RU20261008:EQUALITY_CLASS","RU20261008:SELECTION"],"conclusion":"RU20261008:CEILING","proof":"section3"},
+    {"id":"RU20261008:r_frontier","all_of":["RU20261008:CONTRACT","RU20261008:WITNESS","RU20261008:POSTERIOR_LAWS","RU20261008:SELECTION"],"conclusion":"RU20261008:FRONTIERS","proof":"section4"},
+    {"id":"RU20261008:r_value","all_of":["RU20261008:CONTRACT","RU20261008:WITNESS","RU20261008:POSTERIOR_LAWS","RU20261008:LOSS"],"conclusion":"RU20261008:VALUE_REVERSAL","proof":"section5"},
+    {"id":"RU20261008:r_binding","all_of":["RU20261008:CONTRACT","RU20261008:WITNESS","RU20261008:ANSWER_POSTERIOR","RU20261008:POSTERIOR_LAWS","RU20261008:LOSS","RU20261008:WIRING"],"conclusion":"RU20261008:WIRING_RESULTS","proof":"section6"},
+    {"id":"RU20261008:r_calibration","all_of":["RU20261008:CONTRACT","RU20261008:POSTERIOR_LAWS","RU20261008:ANSWER_POSTERIOR"],"conclusion":"RU20261008:CALIBRATION","proof":"sections2,6"},
+    {"id":"RU20261008:r_type","all_of":["RU20261008:REALIZATION","RU20261008:ACTUAL_J_DIFFERENCE","A:C1","C:FIXED_J","C:P1"],"conclusion":"RU20261008:TYPE_APPLICATION","proof":"section7;inherited UCTIII5.1"},
+    {"id":"RU20261008:r_persist","all_of":["RU20261008:PERSISTENCE","A:ACTUAL_TOKEN","A:U1"],"conclusion":"RU20261008:LOCAL_EXPERIENCE","proof":"section7;inherited U1/P3"}
+  ],
+  "context_links":[
+    {"source":"C:P3","target":"RU20261008:CALIBRATION","relation":"Inherited limit on unconditional scalar experiential inference;not proof of a named feeling."},
+    {"source":"OO20261008","target":"RU20261008:EQUALITY_CLASS","relation":"Witness and optimum rederived independently;pending OO is not an established premise."}
+  ],
+  "full_semantic_audit_completed":false,
+  "audit":"AUDIT_COVERAGE.json"
+}

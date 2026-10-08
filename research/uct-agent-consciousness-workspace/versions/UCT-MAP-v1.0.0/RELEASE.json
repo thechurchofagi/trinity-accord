@@ -1,0 +1,18 @@
+{
+"release_id":"UCT-MAP-v1.0.0","release_seq":1,"audit_id":"FA20261008","date":"2026-10-08",
+"review_state":"COMPLETE_WITH_EXPLICIT_CORRECTIONS_AND_OPEN_APPLICATIONS",
+"frozen_source_commit":"48b131a3ae8f7ac003ff5a2ce9c8d36111b2ea3c",
+"historical_base_revision":"R178-SB20261008-v1.0",
+"base_graph_sha256":"40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+"base_git_blob":"172c254c5f09ce83a5daf67244f36fbc5a3b9254",
+"counts":{"base_nodes":584,"base_rules":284,"base_contexts":178,"additive_modules":8,"reviewed_nodes":722,"reviewed_source_rules":347,"new_guarded_or_alternative_rules":6,"reviewed_rule_records_including_new":353,"active_conditional_rules":343,"suspended_historical_rules":10,"reviewed_contexts":203,"all_review_items":1278,"unreviewed_in_defined_census":0,"affected_downstream_nodes_rechecked":25},
+"module_ids":["CORE20261008","EI20261008","R183","OO20261008","RU20261008","R184","RC20261008","IE20261008"],
+"capsule":{"parts":"capsule/PARTS.json","compressed_bytes":59216,"compressed_sha256":"e5d7413f54c13664b127f0d31d5a4c5f8b507b7ba73c77000715cb653842e84d","restorer":"restore_capsule.py","contents":"Frozen per-ID review decisions, executed reconstruction program, effective overlay, findings, exact previously unsaved IE/RC original notes/modules/checks/results, source hashes, recheck results and version policy."},
+"expanded_outputs":"REVIEW_LEDGER.json, REVIEW_LEDGER.csv, UCT_EFFECTIVE_GRAPH.json and full RESEARCH_REGISTRY.json are materialized from the capsule plus frozen source, and are included expanded in the downloadable recovery package.",
+"coverage":"All formal-map nodes, rules and context relations in the frozen base plus eight enumerated modules. Unchanged source proof cards are retained with locators and hashes. Unmapped historical notes and all external data are not blanket re-certified.",
+"qc_open":["QC-20261008-10","IA-QC11","QC-20261008-12","QC-20261008-13"],
+"not_claimed":["independent peer review","proof-assistant proof","empirical truth of C1/U1","actual physical realization or named phenomenal bridge","new priority/originality validation"],
+"paper_publication_authorized":false,
+"next_version_rule":"Every completed substantive cycle increments release_seq and creates a new immutable version, normally v1.0.1. Never overwrite this version.",
+"persistence":"Preserved by the branch commit containing this manifest. Readback is recorded separately; the pre-write PENDING field inside the frozen capsule is historical metadata."
+}
