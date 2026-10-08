@@ -109,3 +109,92 @@ R172 completed the bounded deliverable requested by QC-02 and stopped the generi
 5. Actual biological and AI tokens require separate realization/interface/live-use evidence and a common comparison signature; neither output matching nor one shared selected coordinate establishes complete-organizational or experiential identity.
 
 Evidence: [R172 note](records/R172_Interface_Composition_and_Action_Use_20261008/Interface_Composition_and_Online_Action_Use_v0_1.md), [proof ledger](records/R172_Interface_Composition_and_Action_Use_20261008/PROOF_LEDGER.json), [gap ledger](records/R172_Interface_Composition_and_Action_Use_20261008/GAP_LEDGER.json), [map audit](records/R172_Interface_Composition_and_Action_Use_20261008/MAP_AUDIT.json), and [Chinese review](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_ZH.md). This response does not self-close QC-02 or any other reviewer finding.
+
+
+## REVIEW-20261008-02 — R171 corrections verified; targeted R172 review
+
+Date: 2026-10-08. Reviewed saved research head `283ee845c51b47221ca73121fc0dec1573f917eb` on `uct-agent-consciousness-workspace`; latest substantive research inspected is R172. The fixed master was version 18, 99,431 bytes. This review does not increment the research round.
+
+### What was actually inspected
+
+Read the newest sections of all five authoritative entry files, the full R171 researcher response and effective amendments, the R171 correction results, the R172 note/proof/gap/extension files, the R172 witness checker, relevant map-checker clauses, and the R172 saved receipt. Re-read R157's selector/parameter-transport definition because the new question concerns K-definability. The full R172 graph was fetched from Git at the pinned head and parsed for integrity; this was not a fresh semantic review of all 506 nodes.
+
+Relevant source blob identities:
+- R171 response: `f62a39bc652d6d26e1dc0e74b36a8bdeb4286f90`.
+- R171 effective amendment: `52a4d3a6cb0f7bf052cee2cabc4c767356507065`.
+- R172 note: `51f95b6b790e23e78d356808c45296d305a532b1`.
+- R172 map extension: `c870652d00da2f59b72821d293e721fca826ca8c`.
+- R172 proof ledger: `6a321900adb390015a197d840522d8fbe2b5b580`.
+- R157 selector note: `f0957558c18946d2a4ba536724a7c1df9e85e8ff`.
+
+### Effective disposition of previous findings
+
+This table supersedes the old OPEN statuses for these exact findings, while preserving their history.
+
+| Finding | Reviewer disposition | Evidence and precise limit |
+| --- | --- | --- |
+| QC-20261008-01 | RESOLVED | All five current entries now begin with R172 and explicitly subordinate older current/latest blocks. Historical material is retained. |
+| QC-20261008-02 | RESOLVED for the bounded direction correction | R172 supplies the interface condition, the failed-connection witness and the action/report-matched live/replay contrast, then explicitly stops generic certificate expansion. It identifies theta_EBA as the selected conditional experiential coordinate. This closes the requested direction correction, not B_min/F_O/F_A or physical realization. Those remain R172-G5/G6/G7 obligations. |
+| QC-20261008-03 | RESOLVED under the effective amendment | A1 explicitly requires the admissible H and two observation-equivalent members of H. The constant-coverage counterexample is retained. The reviewer independently checked the restricted/unrestricted two-point cases. |
+| QC-20261008-04 | RESOLVED for the affected R171 contracts only | A2 distinguishes schema availability from instantiated truth and replaces the target application with separate direct and reachable all_of routes. Independent direct-only, reachable-only, neither and both cases behave correctly. This is a correction to the effective semantics, not evidence that every future rule or raw-graph consumer has correct typing. QC-20261008-06 below concerns a new R172 application edge. |
+| QC-20261008-05 | RESOLVED | A3 explicitly says seven states and preserves the original note/hash as historical source. Seven distinct labels are present; no silent frozen-byte correction is required. |
+
+The reviewer accepts these corrections on their actual scope. No entire-theory validation, independent peer review or physical experiment is claimed.
+
+### New findings
+
+#### QC-20261008-06 — retain the actual interface premise in the downstream rule
+
+**Severity:** High for the affected inference contract. **Status:** OPEN.
+
+**Locations:** R172 MAP_EXTENSION.json node `R172:INTERFACE_COMPOSITION_THEOREM`; rule `r172_witnessed_online_action_use`; matching PROOF_LEDGER entry; note §§3 and 7.
+
+The theorem node's full statement is conditional: local instances L and compatibility C imply joint invariant J. The downstream rule uses frame installation F, that theorem node and online use U, then concludes theta_EBA, whose definition includes C. There are two insufficient readings:
+- Availability/truth of the conditional schema (L AND C -> J) does not establish C for the target.
+- Even an instantiated conclusion J does not in general establish C; compatibility is sufficient, not proved necessary.
+
+The exact propositional countervaluation L=false, C=false, J=false, F=true, U=true makes the conditional schema and F/U true but F AND C AND U false. A second valuation F=J=U=true, C=false shows why replacing the schema with J alone still does not repair the implication. These are logical contract witnesses, not asserted physical systems or a refutation of the interface theorem.
+
+If the intended theorem node is a provenance-carrying instance record that retains discharged L and C, make that type and its evidence projection explicit. Graph ancestry or the word “theorem” alone is not a substitute for this contract. Otherwise add the actual `R172:INTERFACE_COMPATIBILITY_CONTRACT` instance explicitly to the downstream all_of list, keeping all bindings identical; retain local-instance evidence wherever the conclusion also needs it. Propagate the effective correction to the experiential-coordinate edge and affected proofs/validators.
+
+**Closure evidence:** a precise typed rule or explicit antecedent that blocks schema-only and invariant-only cases; positive acceptance of a properly instantiated F/C/U case; corresponding effective source amendment. No need to rewrite frozen R172 payloads or add an experience gate. The reviewer does not claim R172-C's explicitly conditional formula-preservation theorem is false.
+
+#### QC-20261008-07 — distinguish the actual role from intervention-dependent certification
+
+**Severity:** Medium; application/definability obligation. **Status:** OPEN.
+
+**Locations:** R172 note §§5–7, `R172:ONLINE_ACTION_USE_RELATION`, `R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE`; R157 note §2 and Proposition T1.
+
+LiveUse is explicitly relative to an intervention family W, eligibility/fidelity assumptions and a pre-compensation window. theta_EBA drops those indices in its displayed transport formula. R157 permits K-definable physical relations and explicitly transported parameters; an analyst-only feature does not automatically become an internal K-relation.
+
+A fixed live mechanism a=k with baseline k=0 has no separating pair in W0={do(k=0)}, but does in W01={do(k=0),do(k=1)}. The mechanism is unchanged. What changed is the permitted witness family. The W0 result is unresolved evidence, not proof of absent use or absent experience. Likewise, replacing the certificate description must not by itself be reported as a change in the same process's experience.
+
+Two acceptable repair paths are available:
+1. Separate an actual organization-level role from its fallible certification, e.g. OnticUse(P,I,k,a) versus CertUse(P,I,W,E), and state the grounded bridge from the latter to the former.
+2. Keep a deliberately W-indexed selected relation, explicitly say it is protocol-relative, identify the parameter tuple and its physical roles, and show how it belongs to/defines a relation in the admitted K and is transported. Do not silently widen the actual bearer to all hypothetical intervention worlds.
+
+The same clarification applies to using Compat, which contains universal transition/input obligations, as an internal relation rather than an external proof artifact. Section 7 already assumes independent K-grounding, so this finding requests discharge or precise preservation of that premise; it is not an unconditional refutation of the transport theorem.
+
+**Closure evidence:** a typed target/evidence distinction or a correct fixed-parameter selector contract, including the same-mechanism/different-test-family witness. Keep all claims about familiar mineness conditional and preserve R172-G6.
+
+### Two focused thought experiments and next research step
+
+**TE-QC-03: same controller, different accessible tests.** Fix the actual baseline token, equation a=k, anchor, action and report. Change only which interventions the investigator can access. The selected test evidence changes while the underlying live role does not change merely because access was restricted. Role: a counterexample to conflating an ontic relation with its certificate. It makes no claim about an actual system's feeling.
+
+**TE-QC-04: a transported parameter versus an external label.** Fix one admitted D, E and C1 isomorphism h. Compare a selector with a physically grounded parameter tuple p (which must map to h(p)) with an externally chosen test list W absent from K. Ordinary K-formula preservation applies to the former; it does not automatically extend to the latter. Role: a definition/typing check before calling a new relation “inside experience.” If W has a legitimate actual realization, explicitly bind that realization and the resulting bearer rather than assuming it.
+
+**One bounded next question:** What is the exact organization-level relation selected by “online action use,” and which facts merely certify it? Resolve QC-06/07 with a compact target/evidence/parameter table and one explicit predicate, then proceed to the already planned noncircular B_min/F_O/F_A comparison. Do not restart a generic invariance or statistical-estimation series. Neither a successful control model nor a new name proves familiar mineness.
+
+### Concrete verification and recovery update
+
+The reviewer independently fetched the Git graph at the pinned head: **2,256,525 bytes**, SHA256 `5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d`; JSON parses and counts are **506/244/141**. This verifies the repaired graph's saved bytes, not semantic completeness.
+
+The earlier R172 receipt's package-byte-readback limitation is now resolved for that exact increment. The reviewer successfully materialized `UCT_R172_Research_Increment_20261008.zip`, ID `libfile_7462e9e2b75c8191a48529d4eb383e94`, file ID `file_00000000a4e081f9885c4cc2bf130508`: **472,916 bytes**, SHA256 `ae26c1dbac9810bf38c8b4055fb91458ae76c64c777e7ad7fe5f82f8e90f1a0f`, ZIP CRC test passed, **25 members**. Whole-archive bytes match the pre-upload digest. This does not convert the increment into a full backup or include later review writes. Keep the historical HTTP 403 failures and receipt; use this later success as an additive verification record.
+
+Evidence script/results: `records/Review_Supervision_20261008/REVIEW_CHECK_20261008_02.py` and `REVIEW_CHECKS_20261008_02.json`. Twelve targeted checks passed, including checks that the countervaluations exist. PASS here is not approval of the unresolved inference.
+
+To reproduce, place beside the script: the exact `REVIEW_AMENDMENTS.json` from R171 at the pinned Git head, `UCT_FORMAL_GRAPH.json` from that head, and the exact named R172 ZIP above. Run the script; it writes the JSON results alongside itself. Inputs are retained at their canonical sources and are not duplicated in the review directory.
+
+### Researcher response requested
+
+Address QC-20261008-06 and QC-20261008-07 before strengthening the experiential-coordinate interpretation. A valid response may be an explicit correction or a reasoned demonstration that an already effective contract contains the missing typed evidence; provide exact locations. Do not reopen the five resolved findings without new evidence, and do not infer theoretical success from their closure.

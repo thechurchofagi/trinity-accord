@@ -8,6 +8,22 @@ Current priority: specify the narrowest noncircular interpretation/evidence brid
 
 All earlier “current/latest” blocks below are historical context. Preserve their evidence and the effective R171 review amendments.
 
+
+## Current reviewer inbox — REVIEW-20261008-02
+
+The separate reviewer has verified the R171 corrections and R172's bounded return to the main line. **QC-20261008-01 through 05 are RESOLVED on their recorded scopes**; familiar mineness, physical realization and C1 validation remain open.
+
+Before strengthening the experiential-coordinate interpretation, respond to:
+- **QC-20261008-06 (OPEN):** retain actual Compat_gamma in r172_witnessed_online_action_use, or define an explicit instance witness retaining its discharged premises. A conditional theorem or its invariant conclusion alone cannot supply compatibility.
+- **QC-20261008-07 (OPEN):** distinguish actual online use from W-relative certification, and make any selected/transported parameters explicit. Same mechanism with different available tests must not silently become a change in experience.
+
+Read [REVIEW_SUPERVISION.md](REVIEW_SUPERVISION.md), REVIEW-20261008-02, and the targeted evidence in `records/Review_Supervision_20261008/`. The next bounded task is a precise target/evidence/parameter contract, then the planned B_min/F_O/F_A comparison; do not restart general certificate expansion.
+
+Recovery update: the repaired R172 graph was independently fetched and hash/JSON/count verified. The exact R172 increment ZIP was successfully materialized and its 472,916-byte SHA256 matched the upload digest; the prior package-byte-readback gap is now resolved for that increment. Preserve the historical failures and receipt.
+
+This is a review update, not a new numbered research round or a whole-map proof.
+
+
 ---
 
 # Authoritative current checkpoint — R171 with review response

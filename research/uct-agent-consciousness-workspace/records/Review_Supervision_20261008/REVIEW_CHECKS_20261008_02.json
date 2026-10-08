@@ -1,0 +1,148 @@
+{
+  "schema": "UCT_REVIEW_CHECKS/v1",
+  "review": "REVIEW-20261008-02",
+  "research_head": "283ee845c51b47221ca73121fc0dec1573f917eb",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "R171_route_0_0",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "name": "R171_route_0_1",
+      "status": "PASS",
+      "detail": [
+        "r171_range_application_boundary_reachable_effective"
+      ]
+    },
+    {
+      "name": "R171_route_1_0",
+      "status": "PASS",
+      "detail": [
+        "r171_range_application_boundary_direct_effective"
+      ]
+    },
+    {
+      "name": "R171_route_1_1",
+      "status": "PASS",
+      "detail": [
+        "r171_range_application_boundary_direct_effective",
+        "r171_range_application_boundary_reachable_effective"
+      ]
+    },
+    {
+      "name": "R171_seven_states",
+      "status": "PASS",
+      "detail": [
+        "INVALID_RANGE_PROTOCOL",
+        "RANGE_CERTIFICATE_REFUTED",
+        "UNIVERSAL_RANGE_CERTIFIED_DIRECT",
+        "UNIVERSAL_RANGE_CERTIFIED_REACHABLE",
+        "SPECIFICATION_ONLY",
+        "EMPIRICAL_COVER_ONLY",
+        "UNRESOLVED"
+      ]
+    },
+    {
+      "name": "R171_H_qualification",
+      "status": "PASS",
+      "detail": {
+        "unrestricted": [
+          [
+            true,
+            false
+          ],
+          [
+            true,
+            true
+          ]
+        ],
+        "constant": [
+          [
+            true,
+            true
+          ]
+        ]
+      }
+    },
+    {
+      "name": "R172_schema_to_Compat_countervaluation",
+      "status": "PASS",
+      "detail": {
+        "L": false,
+        "C": false,
+        "J": false,
+        "F": true,
+        "U": true,
+        "schema": true,
+        "theta": false
+      }
+    },
+    {
+      "name": "R172_joint_invariant_to_Compat_countervaluation",
+      "status": "PASS",
+      "detail": {
+        "F": true,
+        "J": true,
+        "U": true,
+        "C": false,
+        "meaning": "J alone does not entail C; not an actual-system claim"
+      }
+    },
+    {
+      "name": "R172_explicit_Compat_blocks_this_gap",
+      "status": "PASS",
+      "detail": {
+        "countervaluations": []
+      }
+    },
+    {
+      "name": "R172_W_index_changes_witness_not_fixed_equation",
+      "status": "PASS",
+      "detail": {
+        "equation": "a=k",
+        "W0": [
+          0
+        ],
+        "W01": [
+          0,
+          1
+        ],
+        "witness_W0": false,
+        "witness_W01": true,
+        "meaning": "Nondetection stays unresolved; no inference of absence."
+      }
+    },
+    {
+      "name": "R172_remote_graph_integrity",
+      "status": "PASS",
+      "detail": {
+        "bytes": 2256525,
+        "sha256": "5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d",
+        "counts": [
+          506,
+          244,
+          141
+        ]
+      }
+    },
+    {
+      "name": "R172_persistent_package_byte_readback",
+      "status": "PASS",
+      "detail": {
+        "bytes": 472916,
+        "sha256": "ae26c1dbac9810bf38c8b4055fb91458ae76c64c777e7ad7fe5f82f8e90f1a0f",
+        "zip_crc_bad_member": null,
+        "members": 25,
+        "scope": "Exact saved R172 increment, not the entire repository or later reviews."
+      }
+    }
+  ],
+  "limits": [
+    "PASS confirms these scoped reviewer checks, including countervaluations; it does not certify all research.",
+    "The R172-C transport remains valid as a conditional formula-preservation result if its grounded-definability assumptions hold.",
+    "No whole-map semantic proof, physical experiment or phenomenal measurement was performed.",
+    "The rule countervaluation applies unless the theorem node is explicitly a provenance-carrying instance witness."
+  ]
+}
