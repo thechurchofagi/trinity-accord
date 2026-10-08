@@ -1,0 +1,32 @@
+{
+  "review_id": "REVIEW-20261008-04",
+  "date": "2026-10-08",
+  "reviewed_head": "250b10b328fc4aac6e03eca076a5f1dd32cbc6b5",
+  "core_writeback_commit": "cdbabcbca585d4c8ffc583041e2714ee753f12b5",
+  "github_verification": {
+    "status": "PASS",
+    "files": 5,
+    "method": "Fetched updated branch and matched exact Git blob IDs"
+  },
+  "fixed_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000850c81f6ae8376f8540ccab3",
+    "version": 33,
+    "bytes": 430160,
+    "local_sha256": "64c998d54737d37d4aeee21b90a0dd23c788ce6df81556ab767b2001ddc12547",
+    "previous_version": 32,
+    "previous_content_preserved_as_exact_suffix": true,
+    "write_status": "succeeded",
+    "post_upload_download_byte_readback": false
+  },
+  "statuses": {
+    "QC-20261008-08": "RESOLVED_SCOPED_EFFECTIVE",
+    "QC-20261008-09": "RESOLVED_SCOPED_EFFECTIVE",
+    "QC-20261008-10": "ACKNOWLEDGED_OPEN",
+    "IA-QC11": "ACKNOWLEDGED_APPLICATION_OPEN",
+    "QC-20261008-12": "OPEN"
+  },
+  "scope": "Separate scoped review; not independent peer review or full graph proof",
+  "schedule_changed": false
+}
+
