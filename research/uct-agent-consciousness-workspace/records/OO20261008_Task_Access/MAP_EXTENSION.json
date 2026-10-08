@@ -1,0 +1,73 @@
+{
+  "schema": "uct-pending-map-module/1.0",
+  "id": "OO20261008",
+  "status": "PENDING_MAP",
+  "enabled_as_established_premises": false,
+  "base_commit": "d8fe35b450fef523c9d48ded5639ef49bb10a999",
+  "base_git_blob": "172c254c5f09ce83a5daf67244f36fbc5a3b9254",
+  "effective_entry": "UCT_FORMAL_GRAPH_MODULES.json",
+  "node_defaults": {
+    "status": "PENDING_MAP",
+    "scope": "Declared finite classical source/encoder/consumer models. Not an independently established complete brain or AI process.",
+    "quantifiers": "All inputs and independent queries of the stated finite contract. Uniform priors and fixed task weights only where explicitly assumed.",
+    "origin": "Application of established mathematics; historical priority unverified.",
+    "actuality": "Model-level. C1 application needs a separately admitted actual same-P/Q/K/time comparison, installed decoder and true fixed J.",
+    "proof_source": "RESEARCH_CHECKPOINT.md"
+  },
+  "rule_defaults": {
+    "kind": "DEDUCTIVE_CONDITIONAL",
+    "status": "PENDING_MAP",
+    "same_instance_required": true,
+    "all_of_semantics": "Every premise including instantiation guards is simultaneously required; root presence does not establish truth. Alternative rules remain alternative routes."
+  },
+  "expand_defaults": "For every node/rule, inherit corresponding defaults then overlay explicit fields. This pending module is not auto-loaded as established premises.",
+  "nodes": [
+    {"id":"OO20261008:CONTRACT","kind":"DEFINITION","statement":"X is uniform in F2^n; nonzero task a is independent of X; target is a dot X. A pre-query e(X) feeds an installed post-query decoder d(a,e(X)); no other source access. Fix deadline, task weights, policies and process boundary.","proof":"section 1","boundary":"No experiential, report or IQ variable is defined."},
+    {"id":"OO20261008:LINEAR_SETUP","kind":"ASSUMPTION","statement":"Within CONTRACT, e(X)=HX for fixed binary k-by-n H, U=row(H), r=rank(H). Downstream decoding need not be linear.","proof":"section 2","boundary":"The encoder is linear; arbitrary nonlinear encoders are outside this setup."},
+    {"id":"OO20261008:LINEAR_ACCESS","kind":"CONDITIONAL_THEOREM","statement":"Under CONTRACT and LINEAR_SETUP, p*(a)=1 for a in U and 1/2 otherwise; weighted accuracy is 1/2+weight_w(U minus {0})/2; uniform accuracy is 1/2+(2^r-1)/(2(2^n-1)).","proof":"section 2: kernel pairing and rowspace decoder","boundary":"Uniform full-support source and no additional information are essential."},
+    {"id":"OO20261008:DIRECTIONAL_WITNESS","kind":"COUNTEREXAMPLE","statement":"Under GUARD_R_DIRECTION, both rank-two messages have uniform-parity score 3/5, but item accuracies 3/4 versus 1/2 and cross-pair accuracies 1/2 versus 1.","proof":"section 2","boundary":"Equal aggregate performance does not identify equal full profiles; no named feeling established."},
+    {"id":"OO20261008:LINEAR_DOMINANCE","kind":"CONDITIONAL_THEOREM","statement":"Within the linear contract, U weakly dominates V for every weighting of nonzero-parity queries iff V is a subset of U.","proof":"section 2: inclusion or a query in V minus U","boundary":"Not a universal ordering of intelligence or experience."},
+    {"id":"OO20261008:NONLINEAR_SETUP","kind":"ASSUMPTION","statement":"Within CONTRACT, n=2m and tasks are uniform nonzero parities. The one-bit encoder is f_m(X)=XOR_j x_(2j-1)*x_(2j), and the installed decoder is d(a,b)=b XOR f_m(a).","proof":"section 3","boundary":"Classical quadratic coding, not a model of phenomenal content."},
+    {"id":"OO20261008:WALSH_SCORE","kind":"CONDITIONAL_THEOREM","statement":"Under CONTRACT and BOOLEAN_ENCODER, for nonzero a, p_f*(a)=1/2+|W_f(a)|/(2*2^n), where W_f(a)=sum_x (-1)^(f(x) XOR a dot x).","proof":"section 3: two message-cell signed counts","boundary":"No source-dependent side information or post-query source access."},
+    {"id":"OO20261008:FOUR_BIT_OPTIMUM","kind":"CONDITIONAL_THEOREM","statement":"Under GUARD_R_FOUR, any one-bit synopsis encoder/decoder has uniform mean accuracy at most 5/8. Quadratic f_2 attains 5/8 on each nonzero parity, with none answered perfectly.","proof":"section 3: Parseval, Cauchy-Schwarz, even integer Walsh sum at most 60","boundary":"Only the four-variable uniform parity battery. Not a comparison to unrestricted two-bit optimum."},
+    {"id":"OO20261008:EVEN_FAMILY","kind":"CONDITIONAL_THEOREM","statement":"For n=2m, quadratic one-bit f_m scores 1/2+1/(2*2^m), exceeding every rank-m linear code's 1/2+1/[2*(2^m+1)] by 1/[2*2^m*(2^m+1)].","proof":"section 3: tensor Walsh identity and LINEAR_ACCESS","boundary":"Unrestricted m-bit encoders can emulate the one-bit code. Global nonlinear optimum is not asserted for m>2."},
+    {"id":"OO20261008:NOISE_SETUP","kind":"ASSUMPTION","statement":"Within LINEAR_SETUP, H has full row rank and transmitted Y=HX XOR E with independent Bernoulli(epsilon) errors, 0<=epsilon<=1/2, applied after the specified physical encoder.","proof":"section 4","boundary":"Physical error law and basis are fixed; they are transported, not reset, under passive recoding."},
+    {"id":"OO20261008:NOISE_LAW","kind":"CONDITIONAL_THEOREM","statement":"Under CONTRACT and NOISE_SETUP, p*(a)=[1+(1-2epsilon)^weight(lambda)]/2 when a=H^T lambda, and 1/2 otherwise.","proof":"section 4: uniform posterior input and independent parity noise","boundary":"Dependent H rows require separate treatment; the unique-lambda claim uses full row rank."},
+    {"id":"OO20261008:RECODING_LIMIT","kind":"COUNTEREXAMPLE","statement":"Under GUARD_R_NOISE_EXAMPLE, optimal x1 accuracies are 9/10 and 41/50 despite identical noiseless rowspace and equal total mutual information.","proof":"section 4","boundary":"Fresh independent errors after two different encoders define distinct physical channels. Pure coordinate transport restores equivalence."},
+    {"id":"OO20261008:PERSISTENT_SOURCE","kind":"ASSUMPTION","statement":"All n source bits persist after query arrival. An installed reverse route delivers a to a source-side parity circuit within deadline; n backward bits, retained memory and source computation are counted.","proof":"section 5","boundary":"This is not the isolated synopsis contract. Individual-coordinate address needs ceil(log2 n) reverse bits."},
+    {"id":"OO20261008:QUERY_RETURN","kind":"CONSTRUCTION","statement":"Given PERSISTENT_SOURCE, a source-side executing parity circuit returns a dot X exactly using one forward answer bit for every query.","proof":"section 5: compute the requested parity after receiving a","boundary":"One-bit answer is not one-bit total memory. Architecture/time assumptions changed and cannot be passed silently into fixed-contract C:P1."},
+    {"id":"OO20261008:REALIZATION","kind":"OPEN_BRIDGE","statement":"Independently justify actual P/Q, same constitutive K/time and allowed comparison, complete relevant implementation/ports/noise, installed consumer and equality of modeled score laws to the true fixed actual J.","proof":"section 6","boundary":"No finite program, successful enumeration or map entry establishes this real-instance premise.","origin":"OPEN_PHYSICAL_AND_SEMANTIC_APPLICATION"},
+    {"id":"OO20261008:TYPE_CONSEQUENCE","kind":"CONDITIONAL_UCT_APPLICATION","statement":"For a comparison satisfying REALIZATION, C:FIXED_J and GUARD_R_TYPE, inherited C:P1 and C1 imply distinct complete experiential structural types.","proof":"section 6 and UCT III section 5.1","boundary":"No named quale, suffering, subjective magnitude, unique subject or absence of local experience follows.","origin":"INHERITED_UCT_P1_APPLICATION"},
+    {"id":"OO20261008:NO_SCALAR_INFERENCE","kind":"INFERENCE_GUARD","statement":"The displayed functional countermodels and inherited C:P3 block unconditional identification of more task accuracy with more exact distinctions or a universal experiential-richness ranking.","proof":"sections 3 and 6","boundary":"Countermodels constrain inference; they do not compute real phenomenal coordinates.","origin":"INHERITED_C_P3_WITH_NEW_COUNTERMODEL_APPLICATIONS"},
+    {"id":"OO20261008:LOCAL_PERSISTENCE","kind":"INFERENCE_GUARD","statement":"Under GUARD_R_PERSISTENCE, U1 applies to the local actual process after a reader route changes; downstream inaccessibility is not local experiential nonexistence.","proof":"sections 1 and 6; UCT I P3","boundary":"Persistence is a physical premise. Continuing experience is not necessarily unchanged complete local type.","origin":"INHERITED_U1_AND_P3"},
+    {"id":"OO20261008:GUARD_R_DIRECTION","kind":"ASSUMPTION","statement":"Instantiate n=4, H_item rows (1,2), H_relation rows (5,10), item tasks (1,2,4,8) and cross-pair tasks (5,10), each selected battery uniform.","proof":"section 2","boundary":"Required explicit witness domain; not every pair of rank-two matrices has these item scores."},
+    {"id":"OO20261008:GUARD_R_FOUR","kind":"ASSUMPTION","statement":"n=4 (m=2), uniform fifteen nonzero tasks; one-bit synopsis chosen before the query; no side source. Use finite Walsh Parseval and even-integer coefficients.","proof":"section 3","boundary":"No general nonlinear optimality extension beyond this case."},
+    {"id":"OO20261008:GUARD_R_NOISE_EXAMPLE","kind":"ASSUMPTION","statement":"Use the two full-rank source encodings (x1,x2) and (x1 XOR x2,x2); target x1; epsilon=1/10; fresh independent errors after each encoder.","proof":"section 4","boundary":"Not merely two descriptions of one transported physical noise process."},
+    {"id":"OO20261008:GUARD_R_TYPE","kind":"ASSUMPTION","statement":"A genuine inequality of the same actual capability profile J has been established for this same P/Q comparison, not just a sample-score or changed-protocol comparison.","proof":"section 6","boundary":"The mathematical model alone does not discharge this actual comparison."},
+    {"id":"OO20261008:GUARD_R_PERSISTENCE","kind":"ASSUMPTION","statement":"The same local process physically persists over the declared interval under the original UCT I P3 criteria; route modification has not terminated it.","proof":"section 6; UCT I P3","boundary":"No unconditional survival or unchanged-content assumption."},
+    {"id":"OO20261008:BOOLEAN_ENCODER","kind":"ASSUMPTION","statement":"The message under CONTRACT is the single bit f(X) for any deterministic Boolean f; independent/shared random strategies are convex mixtures of deterministic pairs.","proof":"section 3","boundary":"The single-bit Walsh identity is not automatically a vector-message identity."}
+  ],
+  "rules": [
+    {"id":"OO20261008:r_linear","all_of":["OO20261008:CONTRACT","OO20261008:LINEAR_SETUP"],"conclusion":"OO20261008:LINEAR_ACCESS","proof":"section 2"},
+    {"id":"OO20261008:r_direction","all_of":["OO20261008:LINEAR_ACCESS","OO20261008:LINEAR_SETUP","OO20261008:GUARD_R_DIRECTION"],"conclusion":"OO20261008:DIRECTIONAL_WITNESS","proof":"section 2"},
+    {"id":"OO20261008:r_order","all_of":["OO20261008:LINEAR_ACCESS"],"conclusion":"OO20261008:LINEAR_DOMINANCE","proof":"section 2"},
+    {"id":"OO20261008:r_walsh","all_of":["OO20261008:CONTRACT","OO20261008:BOOLEAN_ENCODER"],"conclusion":"OO20261008:WALSH_SCORE","proof":"section 3"},
+    {"id":"OO20261008:r_four","all_of":["OO20261008:CONTRACT","OO20261008:WALSH_SCORE","OO20261008:NONLINEAR_SETUP","OO20261008:GUARD_R_FOUR"],"conclusion":"OO20261008:FOUR_BIT_OPTIMUM","proof":"section 3"},
+    {"id":"OO20261008:r_even","all_of":["OO20261008:LINEAR_ACCESS","OO20261008:WALSH_SCORE","OO20261008:NONLINEAR_SETUP"],"conclusion":"OO20261008:EVEN_FAMILY","proof":"section 3"},
+    {"id":"OO20261008:r_noise","all_of":["OO20261008:CONTRACT","OO20261008:NOISE_SETUP"],"conclusion":"OO20261008:NOISE_LAW","proof":"section 4"},
+    {"id":"OO20261008:r_noise_example","all_of":["OO20261008:NOISE_LAW","OO20261008:GUARD_R_NOISE_EXAMPLE"],"conclusion":"OO20261008:RECODING_LIMIT","proof":"section 4"},
+    {"id":"OO20261008:r_return","all_of":["OO20261008:PERSISTENT_SOURCE"],"conclusion":"OO20261008:QUERY_RETURN","proof":"section 5"},
+    {"id":"OO20261008:r_type","all_of":["OO20261008:REALIZATION","C:FIXED_J","C:P1","A:C1","OO20261008:GUARD_R_TYPE"],"conclusion":"OO20261008:TYPE_CONSEQUENCE","proof":"section 6; inherited c01"},
+    {"id":"OO20261008:r_no_scalar","all_of":["C:P3","OO20261008:DIRECTIONAL_WITNESS","OO20261008:FOUR_BIT_OPTIMUM"],"conclusion":"OO20261008:NO_SCALAR_INFERENCE","proof":"section 6"},
+    {"id":"OO20261008:r_persistence","all_of":["A:ACTUAL_TOKEN","A:U1","OO20261008:GUARD_R_PERSISTENCE"],"conclusion":"OO20261008:LOCAL_PERSISTENCE","proof":"section 6; inherited UCT I P3/U1"}
+  ],
+  "context_links": [
+    {"from":"C:P2_COORD","to":"OO20261008:LINEAR_ACCESS","relation":"Existing constant-on-fiber/sufficiency principle; context not proof."},
+    {"from":"C:P7","to":"OO20261008:EVEN_FAMILY","relation":"No contradiction: richer unrestricted encoders can emulate the smaller code."},
+    {"from":"OO20261008:QUERY_RETURN","to":"OO20261008:PERSISTENT_SOURCE","relation":"Keep actual retained source, reverse bandwidth and timing in the comparison."}
+  ],
+  "full_semantic_audit_completed": false,
+  "audit": "AUDIT_COVERAGE.json",
+  "promotion_requires": ["complete current base and effective modules", "all-node and all-rule semantic review", "same-instance and scope checks", "current CORE/EI and prior-paper overlap review", "fresh manifest reconciliation"],
+  "preservation_boundary": "Remote compact module has the same 24 claim IDs and 12 AND routes as the expanded local pending module, with local proof locators translated to the compact checkpoint. They are not byte-identical serializations. Neither is effective as established premises."
+}
