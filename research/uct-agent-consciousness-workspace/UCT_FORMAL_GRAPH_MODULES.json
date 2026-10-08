@@ -12,5 +12,8 @@
   "node_presence_is_premise_truth":false,
   "full_semantic_audit_completed":false,
   "audit":"records/CORE20261008_Target_Relative_Support/MAP_AUDIT.json",
-  "current_handoff":"records/CORE20261008_Target_Relative_Support/CURRENT_HANDOFF_ZH.md"
+  "current_handoff":"records/CORE20261008_Target_Relative_Support/CURRENT_HANDOFF_ZH.md",
+  "pending_catalogue":"FORMAL_MAP_EXTENSION_INDEX.json",
+  "pending_modules":[{"id":"EI20261008","path":"records/EI20261008_Architecture_Dependence/MAP_EXTENSION.json","git_blob_sha":"a5ba39cef8462ddb85d4aa633b71577ea3e1087b","status":"PENDING_MAP","audit_status":"AUDIT_INCOMPLETE","enabled_as_established_premises":false,"handoff":"records/EI20261008_Architecture_Dependence/CURRENT_HANDOFF_ZH.md","instruction":"Inspection only, not automatically loaded into effective modules. Resolve source IDs, reconcile CORE20261008 overlap and complete whole-map review before promotion."}],
+  "pending_entries_change_active_revision":false
 }
