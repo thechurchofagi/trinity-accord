@@ -1,0 +1,60 @@
+{
+  "record": "R175_DUAL_SAVE_RECEIPT",
+  "date": "2026-10-08",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "parent_commit": "8be163c9c402c3f5f86fed6991b3443d2d7176a9",
+    "core_commit": "868a5c69d69e51d44be9a05448483301f074d51b",
+    "core_tree": "52d2ef44cd00973962923f84a94d0d7788c1638f",
+    "remote_readback_status": "PENDING_FINAL_RECEIPT_COMMIT"
+  },
+  "workspace": {
+    "master": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_000000001bb081f6b337f62f4f1ca916",
+      "version": 29,
+      "bytes": 363362,
+      "sha256": "61408c5492dadb0e19bfe52d466278ef693491c2d504256692949f31deca75c9"
+    },
+    "increment": {
+      "library_file_id": "libfile_c6daa62c08848191aabb2c53cfe2b886",
+      "file_id": "file_00000000ecd081f69553241aff7ef365",
+      "version": 0,
+      "bytes": 481743,
+      "sha256": "a5943804eb27e1b1f68e4ed6c5d9cee294e63bf2bc916ce79507a7d17b230e63",
+      "members": 23,
+      "scope": "increment only"
+    }
+  },
+  "formal": {
+    "revision": "R175-v1.0",
+    "counts": {
+      "nodes": 566,
+      "rules": 273,
+      "context_links": 173
+    },
+    "map_checks": 15,
+    "model_checks": 12,
+    "open_gaps": [
+      "R175-G1",
+      "R175-G2",
+      "R175-G3",
+      "R175-G4",
+      "R175-G5",
+      "R175-G6"
+    ],
+    "review_pending": [
+      "QC-08",
+      "QC-09",
+      "QC-10"
+    ]
+  },
+  "recovery": [
+    "Fetch latest branch and read CURRENT_HANDOFF.md.",
+    "For offline reconstruction checkout parent_commit and overlay the 22 research files from the increment; verify R175_INCREMENT_MANIFEST.json.",
+    "Use the retained R156 baseline for broader workspace recovery."
+  ],
+  "caveat": "Workspace uploads succeeded and local hashes are recorded; no post-upload whole-file byte download is claimed."
+}
+
