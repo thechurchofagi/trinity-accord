@@ -114,7 +114,7 @@ jobs:
           except Exception as exc:
               print('Concept DOI readback pending:',type(exc).__name__)
           with open(os.environ['GITHUB_OUTPUT'],'a') as out:
-              out.write('current='+str(good).lower()+'\\n')
+              out.write('current='+str(good).lower()+'\n')
           print('LATEST_VERSION_CONFIRMED' if good else 'LATEST_DOI_NOT_VERIFIED_ARWEAVE_BLOCKED')
           PY
       - name: Check strictly-limited dedicated paper budget
