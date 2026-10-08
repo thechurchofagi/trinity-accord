@@ -1,0 +1,40 @@
+{
+  "round": "R177",
+  "core_commit": "3fcc57c49bb5f761d4bd8c29131e7c1690aeb18e",
+  "base_commit": "3ac3977360958e78407807bedc8743a7dfdb736c",
+  "github_verification": {
+    "status": "PASS",
+    "files": 21,
+    "method": "Fetched core and compared git show bytes against all local changed files"
+  },
+  "increment": {
+    "id": "libfile_6cf1ee6bf0c081919de5ea55841de9fc",
+    "file_id": "file_00000000b08881f5b68794a8066e1856",
+    "version": 0,
+    "name": "UCT_R177_Increment_20261008.zip",
+    "bytes": 514166,
+    "sha256": "263dc521878df77f729f848b2bab61a9adad7800d50496fb3b20c720274637d8",
+    "members": 22,
+    "scope": "21 changed research files plus manifest; relative to base; not full backup; excludes later receipt and handoff save-status edit",
+    "verification": "Local CRC/member SHA checks and successful persistent upload; no post-upload full byte download claimed"
+  },
+  "master": {
+    "id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000ecc4820d963853ad75142802",
+    "version": 32,
+    "previous_version": 31,
+    "name": "UCT_Hourly_Research_Master_Handoff.md",
+    "bytes": 419996,
+    "sha256": "f953b4ac247d51e89bbf8095358aedf71cfc278431837925979d76ef32de0a04",
+    "verification": "Expected-version replacement succeeded, helper local identity applied; full version31 history preserved"
+  },
+  "recovered_read_failure": "Signed byte retrieval returned403; same-version paged text reconstructed to401934 bytes and SHA256 6df8a489d4f138ebd0b55254e43ec8d5a18e5e244eb494bf0706e67d1764f889 matching prior remote receipt.",
+  "completed": "English note, 12 finite checks/24 executions, scoped map and source audit, review response; no actual named-quality bridge established",
+  "remaining": [
+    "QC-08/09/10 independent disposition",
+    "IA-QC11 actual application",
+    "Actual content/quality interpretation",
+    "Bodily mineness bridge with represented feature held fixed"
+  ],
+  "recovery": "Fetch latest branch and fixed master version; preserve all effective overlays. Resume R177 \u00a79 if no later verified research. Restore base plus increment or fetch core. Retrieve final metadata receipt from latest GitHub."
+}
