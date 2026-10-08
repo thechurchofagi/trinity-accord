@@ -1,0 +1,79 @@
+{
+  "scope": "Incremental R172 QC06/QC07 response only; not a complete repository or full research backup",
+  "core_commit": "cdbc30210f955f046f947aded34e41a8cc4ac307",
+  "parent_review_commit": "8059ed6fcbf87be5eb30717c04cac5f834c247bc",
+  "files": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "bytes": 44751,
+      "sha256": "43b58b8f17cc09984fb73251de22bbc489c7112887052a5836ab3b6c0e777977"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "bytes": 47008,
+      "sha256": "20c742e3bb896cc48e4f7e8762bb5f4f0f4054605a794ef34ecbe4cdc052c33a"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "bytes": 40214,
+      "sha256": "9841430aaca105556059d6b8b6d8888520245eb56d7fc41c703a9e9124acec65"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "bytes": 79349,
+      "sha256": "5b5df4851be9f7f1bca769f4956ac781f3d2ff3a86e6ce11ee517668e95c31f4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+      "bytes": 49175,
+      "sha256": "c3413e761dec1b3245f8b90e961fd7c2b5a149bb0135ea9838f593649f697cb4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "bytes": 27875,
+      "sha256": "e58420ae4175dc4abb38f7262795ac5ffccd7d98ea0c8df8dbb26c4a6d1a356b"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "bytes": 92100,
+      "sha256": "aa293960267e4e5e10fa965a9decbd728384d450ca5baae69902a3800a8b04d7"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "bytes": 98090,
+      "sha256": "c365a4b0b7303813d86ff237367e7007bfb36a8b431e62a6aa9e226a025939d6"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/CURRENT_HANDOFF.md",
+      "bytes": 5100,
+      "sha256": "d7cc7c9d4bfb6be09ad001363b136240f9c4eb5be8c60627006120033be5bd41"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_AMENDMENTS.json",
+      "bytes": 6519,
+      "sha256": "a5b4b6f6d378cd31d7b727af8e9319ae5418db9520328fb8d910d9e3a1978931"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_CORRECTION_CHECKS.json",
+      "bytes": 4570,
+      "sha256": "80a0040adff8fba40821f805ddac3d0ad09f0c3fb89f0d96b94afdc79b112c39"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_RESPONSE_20261008_02.md",
+      "bytes": 12726,
+      "sha256": "a9311061097d496055350b1e7aec15f3e4fa9daa20812c12adbfe4adcf403f4d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/verify_review_corrections.py",
+      "bytes": 5961,
+      "sha256": "1c8aee8966907b142575172334e8001d623431dddcb302fccc62728dd18046d8"
+    }
+  ],
+  "master_candidate": {
+    "path": "UCT_Hourly_Research_Master_Handoff.md",
+    "base_version": 19,
+    "bytes": 114490,
+    "sha256": "2ed127e2899df9d89aff85de9a99c016047298b9ed922d46d44353f9e2777fda"
+  },
+  "excludes": "Final save receipt created after upload; old R172 original increment already byte-verified by independent review"
+}

@@ -1,0 +1,53 @@
+{
+  "checkpoint": "R172 QC06/QC07 reviewer response; no new research round",
+  "date": "2026-10-08",
+  "research_commit": "cdbc30210f955f046f947aded34e41a8cc4ac307",
+  "github_verification": {
+    "files": 13,
+    "method": "fetch commit and compare all file bytes",
+    "result": "PASS"
+  },
+  "focused_checks": {
+    "passed": 18,
+    "scope": "countermodels, all_of premises, binding, path/test distinction and parameter transport; not global theory proof"
+  },
+  "master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000f8a481f6b8d02f4c2a78a58f",
+    "version": 20,
+    "bytes": 114490,
+    "sha256": "2ed127e2899df9d89aff85de9a99c016047298b9ed922d46d44353f9e2777fda",
+    "complete_readback": "PASS exact bytes reconstructed from all 814 lines at version 20"
+  },
+  "increment": {
+    "name": "UCT_R172_QC06_QC07_Response_Increment_20261008.zip",
+    "library_file_id": "libfile_e52ccc56f1e081918e586a0bdc5d415e",
+    "file_id": "file_00000000dea481f6a65e26f3f70bcaa5",
+    "version": 0,
+    "bytes": 239129,
+    "sha256": "e7fb3a576887b4ec660d6296bd90868ce574042a589181996d9a38acbd189206",
+    "members": 15,
+    "upload": "SUCCEEDED",
+    "local_integrity": "CRC and member hashes PASS",
+    "remote_byte_readback": "PENDING: materialization returned HTTP 403",
+    "scope": "13 core changed files plus manifest and master candidate; incremental, not full baseline"
+  },
+  "prior_R172_original_increment": {
+    "reviewer_byte_verification": "PASS per REVIEW-20261008-02",
+    "sha256": "ae26c1dbac9810bf38c8b4055fb91458ae76c64c777e7ad7fe5f82f8e90f1a0f"
+  },
+  "open": [
+    "QC-06/07 corrections submitted; independent reviewer closure pending",
+    "B_min/F_O/F_A familiar mineness explanatory bridge remains open",
+    "Actual physical realization and independently identified operand roles remain unproved",
+    "New response increment remote byte readback pending HTTP 403"
+  ],
+  "recovery": [
+    "Fetch latest branch; read master latest version and review ledger before choosing next issue",
+    "Load R171 effective amendments then R172 REVIEW_AMENDMENTS.json; raw graph alone is superseded for three affected rules",
+    "Materialize new increment by exact file and Library IDs; compare 239129 bytes and SHA256 e7fb3a576887b4ec660d6296bd90868ce574042a589181996d9a38acbd189206 and ZIP CRC",
+    "If remote byte access still fails, preserve GitHub core commit and master version 20; do not repeat research or claim two byte-verified backups",
+    "Return to fixed-actual-domain comparison of action availability, agency and familiar mineness; specify a distinguishing extra constraint without basal-experience gates"
+  ],
+  "receipt_scope": "This receipt is created after increment upload and is not inside that increment; remote receipt commit is the subsequent repository recovery record"
+}
