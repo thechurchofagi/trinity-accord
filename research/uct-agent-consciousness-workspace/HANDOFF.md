@@ -1,3 +1,11 @@
+# Author method directive — 2026-10-08: THEORY FIRST, organization is not directly observable
+
+The author explicitly prioritizes **first principles, adversarial thought experiments, conditional mathematical derivations and small exact countermodels** over designing new large human/animal studies. Existing human/animal/AI experimental literature remains a **constraint and possible source of counterexamples**, not a substitute for a physically anchored, scope-fixed definition of organization. Treat complete actual organization, selected mathematical descriptions, experimental observations and named phenomenal targets as different inference types; mathematical definability does not imply empirical identifiability. Once a substantive theory and noncircular bridge are stable, empirical application can be revisited.
+
+**Permanent project record:** [Theory-first organization and identifiability methodology](records/METHOD_20261008_Theory_First_Organization/METHOD_NOTE.md) (2026-10-08). Its single- versus double-AND illustration was exhaustively checked on four external binary inputs and is **not** a consciousness experiment or novelty theorem. C1 remains axiomatic, no unique subject, basal gate, named experience, current-assistant verdict or new publication follows. R180 remains the latest inherited research checkpoint unless a later numbered round is present; QC10/IA-QC11/QC12 human application remain open. Honor this method when research continues in another conversation; preserve the provenance and negative findings.
+
+---
+
 # Current checkpoint — R180 proposal uptake and author report
 
 Read [R180 v0.2](records/R180_Proposal_Uptake_and_Author_Report_20261008/Proposal_Uptake_and_Author_Report_v0_2.md), [gaps](records/R180_Proposal_Uptake_and_Author_Report_20261008/GAP_LEDGER.json), [handoff](records/R180_Proposal_Uptake_and_Author_Report_20261008/CURRENT_HANDOFF.md). Prior R179 publication-overlap audit remains binding.
