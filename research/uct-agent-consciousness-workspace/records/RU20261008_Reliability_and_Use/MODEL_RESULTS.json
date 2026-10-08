@@ -1,0 +1,110 @@
+{
+  "record": "RU20261008",
+  "status": "ACTUALLY_EXECUTED_EXACT_CHECKS",
+  "scope": "One-bit source synopsis; uniform four-bit source and 15 parity queries. No human or AI experience measurements.",
+  "joint_source_query_cases_per_model": 240,
+  "conditional_cells": {
+    "linear": 30,
+    "quadratic": 30
+  },
+  "posterior_laws": {
+    "linear": {
+      "1": "1/15",
+      "1/2": "14/15"
+    },
+    "quadratic": {
+      "3/5": "5/8",
+      "2/3": "3/8"
+    }
+  },
+  "forced_accuracy": {
+    "linear": "8/15",
+    "quadratic": "5/8"
+  },
+  "coverage_10_percent_accuracy": {
+    "linear": "5/6",
+    "quadratic": "2/3"
+  },
+  "coverage_crossover": "1/5",
+  "coverage_grid_checks": 240,
+  "loss_crossover": "67/45",
+  "loss_grid_checks": 361,
+  "mean_optimum_all_encoders": "5/8",
+  "maximizing_encoders": 896,
+  "all_mean_optimal_encoders_have_same_posterior_law": true,
+  "mean_optimal_best_positive_coverage_accuracy": "2/3",
+  "allcode_utility_maxima_ENUMERATION_ONLY": {
+    "0": {
+      "value": "5/8",
+      "encoders": 896
+    },
+    "1": {
+      "value": "1/4",
+      "encoders": 896
+    },
+    "3/2": {
+      "value": "1/10",
+      "encoders": 840
+    },
+    "2": {
+      "value": "1/15",
+      "encoders": 870
+    }
+  },
+  "binding_experiment": {
+    "aligned": {
+      "utility_L2": "1/15",
+      "report_histogram": {
+        "1": "1/15",
+        "1/2": "14/15"
+      },
+      "true_accuracy_by_wired_confidence": {
+        "1": "1",
+        "1/2": "1/2"
+      }
+    },
+    "misbound": {
+      "utility_L2": "-1/30",
+      "report_histogram": {
+        "1/2": "14/15",
+        "1": "1/15"
+      },
+      "true_accuracy_by_wired_confidence": {
+        "1/2": "15/28",
+        "1": "1/2"
+      }
+    },
+    "correct_but_unused": {
+      "utility_L2": "-2/5",
+      "report_histogram": {
+        "1": "1/15",
+        "1/2": "14/15"
+      },
+      "true_accuracy_by_wired_confidence": {
+        "1": "1",
+        "1/2": "1/2"
+      }
+    },
+    "constant_report": {
+      "utility_L2": "1/15",
+      "report_histogram": {
+        "8/15": "1"
+      },
+      "true_accuracy_by_wired_confidence": {
+        "1": "1",
+        "1/2": "1/2"
+      }
+    }
+  },
+  "changed_candidate_monitoring": {
+    "stale_reference_utility_L2": "-2/15",
+    "correctly_rebound_utility_L2": "0"
+  },
+  "nonclaims": [
+    "No general intelligence ordering",
+    "No calibrated confidence is identified with a feeling",
+    "No basal gate",
+    "No full graph semantic audit",
+    "No historical novelty established"
+  ]
+}
