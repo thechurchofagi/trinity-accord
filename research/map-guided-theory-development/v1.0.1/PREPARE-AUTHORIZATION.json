@@ -1,0 +1,7 @@
+{
+  "authorized": true,
+  "old_record_id": 23241205,
+  "old_doi": "10.5281/zenodo.23241205",
+  "new_version": "1.0.1",
+  "policy": "CREATE_LINKED_VERSION_ONCE_WITHOUT_PUBLISHING"
+}
