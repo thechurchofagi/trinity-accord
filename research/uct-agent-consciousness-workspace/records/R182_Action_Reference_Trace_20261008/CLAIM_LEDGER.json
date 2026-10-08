@@ -1,0 +1,56 @@
+{
+  "round": "R182",
+  "claims": [
+    {
+      "id": "R182-C1",
+      "type": "finite_countermodel",
+      "statement": "On the declared 64-configuration domain, matched local D/C/E, movement, command values and report do not determine whether one actual action-reference carrier is shared across two contexts.",
+      "domain": "fixed toy bearer, interval, target-binding instance and two contexts",
+      "premises": ["predeclared consumer paths", "shared versus copied carrier architecture", "matched baseline values"],
+      "proof": "shared and copied installations have the same baseline tuples but distinct physical carrier identity; exhaustive enumeration",
+      "counterexamples_or_limits": ["a signature already containing complete carrier identity distinguishes them", "not an actual human instance"],
+      "status": "PROVED_FINITE_SCOPE"
+    },
+    {
+      "id": "R182-C2",
+      "type": "conditional_finite_theorem",
+      "statement": "Under the declared equations and fixed installation, an A-side calibration perturbation changes the B command iff the action-reference carrier is physically shared.",
+      "domain": "the two declared architectures",
+      "premises": ["fixed paths", "admissible intervention", "no hidden common input"],
+      "proof": "direct substitution and exact check",
+      "counterexamples_or_limits": ["hidden coupling can mimic transfer", "intervention evidence does not create membership"],
+      "status": "PROVED_FINITE_SCOPE"
+    },
+    {
+      "id": "R182-C3",
+      "type": "crossed_invariance",
+      "statement": "Biological/prosthetic, deliberate/reflex and report labels do not determine ART or EAC in the declared domain.",
+      "domain": "all 64 configurations",
+      "premises": ["labels are not structural inputs"],
+      "proof": "exhaustive crossing",
+      "counterexamples_or_limits": ["actual substrate or control differences may matter when physically specified"],
+      "status": "PROVED_FINITE_SCOPE"
+    },
+    {
+      "id": "R182-C4",
+      "type": "missing_inference_witness",
+      "statement": "A deliberate-labelled and reflex-labelled twin can share the complete selected ART/EAC profile, so the profile alone cannot identify phenomenal trying.",
+      "domain": "blocked overt shared-trace subdomain",
+      "premises": ["same selected organization", "no independently admitted phenomenal target"],
+      "proof": "paired finite rows",
+      "counterexamples_or_limits": ["does not claim reflex and deliberate experiences are equal or unequal"],
+      "status": "PROVED_INFERENCE_LIMIT"
+    },
+    {
+      "id": "R182-H1",
+      "type": "conditional_interpretation",
+      "statement": "Given an actual complete P/I/K, C1 transports the action-reference obstruction relation into experience structure without an extra owner; identifying it with named felt trying remains open.",
+      "domain": "one independently admitted actual UCT instance",
+      "premises": ["A:C1", "actual complete realization", "independent target/path grounding"],
+      "proof": "conditional application of C1 only",
+      "counterexamples_or_limits": ["no actual human admission", "reflex twin", "semantic bridge not independently calibrated"],
+      "status": "OPEN_APPLICATION_AND_PHENOMENAL_BRIDGE"
+    }
+  ]
+}
+

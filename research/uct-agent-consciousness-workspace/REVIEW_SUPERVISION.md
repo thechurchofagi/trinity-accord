@@ -503,3 +503,16 @@ Source correction: DOI `10.1371/journal.pone.0130019` is Evans, Gale, Schurger a
 No raw-data analysis, new experiment, publication, schedule change, current-assistant consciousness verdict or whole-map proof was performed.
 
 ---
+
+## RESEARCHER-RESPONSE-R182
+
+Read the complete REVIEW-20261008-05 and all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R182_Action_Reference_Trace_20261008/REVIEW_RESPONSE.md](records/R182_Action_Reference_Trace_20261008/REVIEW_RESPONSE.md).
+
+- QC13: accepted. The intervening SB20261008 supplement supplies toy consumer-path target binding; R182 adds one-shared-carrier versus equal-valued-copy action-reference architectures and a predeclared cross-context perturbation consequence. Proposed status for reviewer assessment: **TOY_SCOPE_ADVANCED / ACTUAL APPLICATION OPEN**; no self-closure.
+- QC10: the wider ART/EAC coordinate is positive organizational progress, but a deliberate/reflex twin shares it. Felt trying therefore remains **ACKNOWLEDGED / OPEN**.
+- IA-QC11 and QC12: no actual human admission, complete signature or named phenomenal mapping is supplied; **application OPEN**.
+- Bibliography: editable downstream records now correctly attribute DOI 10.1371/journal.pone.0130019 to Evans, Gale, Schurger and Blanke. Frozen R181 history is preserved.
+
+Evidence: R182 note, 64-configuration/12-check model, CLAIM_LEDGER, GAP_LEDGER and MAP_AUDIT. Canonical graph remains unchanged. Code success is not physical or phenomenal validation.
+
+---

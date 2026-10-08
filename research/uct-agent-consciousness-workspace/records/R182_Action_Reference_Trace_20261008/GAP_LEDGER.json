@@ -1,0 +1,66 @@
+{
+  "round": "R182",
+  "gaps": [
+    {
+      "id": "R182-G1",
+      "location": "R182-H1 / note section 6",
+      "problem": "ART/EAC is not independently identified with felt trying.",
+      "impact": ["QC-20261008-10", "IA-QC11", "any named-quality conclusion"],
+      "counterexample": "deliberate/reflex twins share the selected profile",
+      "fixed": "The note names only an organizational coordinate and conditional experience-internal counterpart.",
+      "open_premise": "independent phenomenal interpretation or a further actual organizational discriminator",
+      "status": "OPEN"
+    },
+    {
+      "id": "R182-G2",
+      "location": "R182-C2",
+      "problem": "Cross-context transfer can be mimicked by hidden common input or off-target perturbation.",
+      "impact": ["actual ART admission", "QC-20261008-13"],
+      "counterexample": "two copied registers driven by an unmodelled common calibrator",
+      "fixed": "Finite theorem explicitly assumes fixed paths and no hidden common input.",
+      "open_premise": "actual intervention fidelity and route evidence",
+      "status": "OPEN_ACTUAL_INSTANCE"
+    },
+    {
+      "id": "R182-G3",
+      "location": "target-binding and bearer scope",
+      "problem": "No actual human, prosthetic user or artificial agent P/I/K instance is established.",
+      "impact": ["IA-QC11", "QC12", "QC13 actual application"],
+      "counterexample": "analyst-assigned equal-valued traces without common physical membership",
+      "fixed": "Toy P/I/K and human/application scopes are separated.",
+      "open_premise": "independent physical admission of bearer, carrier and consumer paths",
+      "status": "OPEN"
+    },
+    {
+      "id": "R182-G4",
+      "location": "complete organization boundary",
+      "problem": "The finite signature omits wider organization that may distinguish or confound reflex, deliberate action and trying.",
+      "impact": ["phenomenal interpretation", "global UCT claim"],
+      "counterexample": "two completions of the same finite view with different wider histories or policies",
+      "fixed": "No finite-view equality is promoted to complete-organization equality.",
+      "open_premise": "ontic completeness or bounded application claim",
+      "status": "OPEN"
+    },
+    {
+      "id": "R182-G5",
+      "location": "source evidence",
+      "problem": "No raw human/animal/model dataset was reanalysed and cited studies do not instantiate ART.",
+      "impact": ["empirical validation", "publication readiness"],
+      "counterexample": "agency rating effects can arise from visual goal match without verified common action-reference trace",
+      "fixed": "Sources are used only to constrain shortcuts.",
+      "open_premise": "predeclared source-specific application with actual paths",
+      "status": "OPEN"
+    },
+    {
+      "id": "R182-G6",
+      "location": "bibliography",
+      "problem": "R181 historical text misattributed DOI 10.1371/journal.pone.0130019.",
+      "impact": ["editable source ledgers and future paper"],
+      "counterexample": "PLOS author list names Evans, Gale, Schurger and Blanke",
+      "fixed": "R182 and downstream editable records use the corrected authors; frozen R181 history is retained.",
+      "open_premise": "future compilation must not import the old attribution",
+      "status": "CORRECTED_DOWNSTREAM_HISTORY_PRESERVED"
+    }
+  ]
+}
+

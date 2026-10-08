@@ -1,3 +1,15 @@
+# Current checkpoint — R182 action-reference trace and blocked attempt
+
+Read [the English note](records/R182_Action_Reference_Trace_20261008/Action_Reference_Trace_and_Blocked_Attempt_v0_1.md), [claims](records/R182_Action_Reference_Trace_20261008/CLAIM_LEDGER.json), [gaps](records/R182_Action_Reference_Trace_20261008/GAP_LEDGER.json), [map audit](records/R182_Action_Reference_Trace_20261008/MAP_AUDIT.json), [review response](records/R182_Action_Reference_Trace_20261008/REVIEW_RESPONSE.md), and [handoff](records/R182_Action_Reference_Trace_20261008/CURRENT_HANDOFF.md).
+
+R182 distinguishes one physically shared action-reference carrier from equal-valued copied controllers. In 64 configurations / 12 checks, baseline local D/C/E, movement, command values and report can match while a predeclared calibration perturbation transfers across action contexts only for the shared trace. The resulting EAC coordinate adds a wider body/action relation beyond R181 PC; biological/prosthetic, deliberate/reflex and report labels do not determine it.
+
+The reflex twin is the stopping result: the enriched ART/EAC profile still does not independently identify felt trying. Under actual complete P/I/K plus C1 it has an experience-internal structural counterpart without an extra owner, but the named phenomenal bridge remains OPEN. QC13 advances only at toy/contract scope; QC10, IA-QC11 and QC12 actual application remain OPEN. Canonical graph unchanged at 584/284/178. Correct DOI 10.1371/journal.pone.0130019 attribution is Evans, Gale, Schurger & Blanke. HOLD paper release and DOI/OTS/AR.
+
+Next: test target-specific counterfactual persistence after obstruction against a shared-trace reflex twin; if the twin survives, preserve the negative result and move to cross-scale overlap/subject organization rather than adding feeling labels. Older current notices remain historical where inconsistent.
+
+---
+
 # Dialogue supplement — SB20261008 local-to-global gluing and physical target binding (after R181)
 
 Author requested immediate continuation without another publication threshold. **Read [research note](records/SB20261008_Gluing_and_Target_Binding/RESEARCH_NOTE.md), [exact-check code](records/SB20261008_Gluing_and_Target_Binding/check_models.py) and [check results](records/SB20261008_Gluing_and_Target_Binding/CHECK_RESULTS.json)**. This non-R supplement is complementary to the latest R181 and REVIEW-20261008-05; it does not reserve R182 or supersede R181's author-approved working direction.

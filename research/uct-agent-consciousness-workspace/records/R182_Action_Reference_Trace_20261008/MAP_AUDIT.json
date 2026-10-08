@@ -1,0 +1,53 @@
+{
+  "round": "R182",
+  "canonical_graph_modified": false,
+  "graph_before_and_after": {
+    "sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+    "nodes": 584,
+    "rules": 284,
+    "context_links": 178
+  },
+  "objects_and_scope": {
+    "bearer": "toy P only; human/prosthetic/artificial application separately open",
+    "interval": "one bounded episode with two action contexts",
+    "signature": "directive carrier, actual consumer path, common-or-copied reference carrier, commands, obstruction, mismatch path, report",
+    "target": "induced by predeclared consumer path, not report or label",
+    "actuality": "toy installation stipulated; real installation open",
+    "evidence": "exact finite proof, not phenomenal or empirical validation"
+  },
+  "new_conditional_route_not_added_to_graph": {
+    "all_of": ["A:C1", "R182 actual complete P/I/K", "R182 independently grounded TBI/ART/EAC"],
+    "conclusion": "experience-internal structural counterpart of EAC",
+    "withheld_reason": "actual instance and named phenomenal bridge remain open"
+  },
+  "all_of_review": {
+    "ia_rule_preserved": ["IA20261008:TRACE_IDENTITY_INVARIANT", "IA20261008:ACTUAL_TRACE_INSTANCE", "A:C1"],
+    "same_binding_required": true,
+    "no_premise_splitting": true
+  },
+  "satisfiability": {
+    "shared_blocked_overt_witness": true,
+    "copied_local_twin_witness": true,
+    "shared_reflex_twin_witness": true,
+    "prosthetic_shared_witness": true
+  },
+  "non_equivocation_checks": [
+    "token identity versus equal value",
+    "installed path versus diagnostic test",
+    "overt target versus imagery target",
+    "finite selected view versus complete organization",
+    "organizational coordinate versus felt trying",
+    "control label versus actual organization",
+    "report versus experience",
+    "biological/prosthetic label versus actual embedding"
+  ],
+  "review_status": {
+    "QC-20261008-10": "ACKNOWLEDGED_OPEN",
+    "IA-QC11": "APPLICATION_OPEN",
+    "QC-20261008-12": "MODEL_SCOPE_REPAIRED_APPLICATION_OPEN",
+    "QC-20261008-13": "TOY_SCOPE_ADVANCED_ACTUAL_APPLICATION_OPEN"
+  },
+  "direction": "PASS_MAIN_LINE: explains a positive experience-internal action coordinate while retaining the named-quality gap and C1's axiomatic status",
+  "dag_or_code_warning": "Code success is not theory truth, physical installation, phenomenal identification or global proof."
+}
+

@@ -1,0 +1,34 @@
+{
+  "round": "R182",
+  "sources": [
+    {
+      "id": "Evans2015",
+      "title": "Visual Feedback Dominates the Sense of Agency for Brain-Machine Actions",
+      "doi": "10.1371/journal.pone.0130019",
+      "authors": ["Nathan Evans", "Steven Gale", "Aaron Schurger", "Olaf Blanke"],
+      "use": "Constrains overt-movement and proprioception necessity; visual goal-congruent feedback can dominate agency judgement.",
+      "not_used_for": ["C1 validation", "complete organization", "ART installation", "felt-trying proof"]
+    },
+    {
+      "id": "Bertoni2025",
+      "title": "Pre-movement sensorimotor oscillations shape the sense of agency by gating cortical connectivity",
+      "doi": "10.1038/s41467-025-58683-9",
+      "use": "Constrains collapse of pre-action organization, feedback and later judgement.",
+      "not_used_for": ["unique mechanism", "ART installation", "felt-trying proof"]
+    },
+    {
+      "id": "Imaizumi2017",
+      "title": "Embodied prosthetic arm stabilizes body posture, while unembodied one perturbs it",
+      "doi": "10.1016/j.neuropsychologia.2016.12.028",
+      "use": "Small-sample evidence against a fixed biological-device boundary and for wider postural/action embedding.",
+      "not_used_for": ["universal prosthetic embodiment", "C1 validation", "felt-trying proof"]
+    }
+  ],
+  "prior_work_boundary": {
+    "inherited": ["UCT C1", "TA18 actual participation", "TA25 thought experiments and attribution limits", "R179 mode overlap", "R181 practical centering", "SB20261008 target binding and multi-target paths"],
+    "r182_increment": ["action-reference-trace contract", "shared-versus-copy witness", "cross-context held-out consequence", "reflex-twin stopping result"]
+  },
+  "raw_data_reanalysis": false,
+  "exhaustive_novelty_search": false
+}
+

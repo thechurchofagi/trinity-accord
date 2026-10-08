@@ -1,0 +1,37 @@
+{
+  "round": "R182",
+  "configurations": 64,
+  "checks": 12,
+  "passed": 12,
+  "intervention": {
+    "shared": {
+      "command_a": 0,
+      "command_b": 0
+    },
+    "copied": {
+      "command_a": 0,
+      "command_b": 1
+    }
+  },
+  "claims_supported": [
+    "baseline local D/C/E, movement and report can match while physical action-reference architecture differs",
+    "a predeclared calibration perturbation has a cross-context consequence only for the shared trace",
+    "biological/prosthetic and deliberate/reflex labels do not determine the organizational coordinate",
+    "the reflex twin prevents identifying the coordinate with phenomenal trying"
+  ],
+  "status": "ORGANIZATIONAL_COORDINATE_WITH_OPEN_PHENOMENAL_BRIDGE",
+  "checks_detail": {
+    "matched_baseline_commands": true,
+    "heldout_cross_context_transfer": true,
+    "equal_values_do_not_identify_carrier": true,
+    "blocked_without_movement": true,
+    "local_dce_matched_across_architectures": true,
+    "wider_embedding_changes_eac": true,
+    "tissue_not_determinative": true,
+    "control_label_not_determinative": true,
+    "report_not_determinative": true,
+    "imagery_target_separated": true,
+    "architecture_not_read_from_report": true,
+    "reflex_twin_blocks_felt_trying_inference": true
+  }
+}
