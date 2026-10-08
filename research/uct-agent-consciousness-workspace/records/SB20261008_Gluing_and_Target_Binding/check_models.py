@@ -13,6 +13,16 @@ assert routed("overt",1)==routed("imagery",1)
 assert routed("overt",0)=={"Uo":0,"Hi":1,"plant":1,"report":1}
 assert routed("imagery",0)=={"Uo":1,"Hi":0,"plant":1,"report":1}
 
+# F: one actual source may have zero, one or both consumers, not one-hot.
+profiles={}
+for so,si in itertools.product(B,repeat=2):
+    def profile(q):
+        return (q if so else 1, q if si else 1)
+    profiles[(so,si)]=(profile(1),profile(0))
+assert all(p[0]==(1,1) for p in profiles.values())
+assert len({p[1] for p in profiles.values()})==4
+assert profiles[(1,1)][1]==(0,0)
+
 # B: equal XY and YZ, unequal XZ. All singleton marginals uniform,
 # but no joint assignment can satisfy all 3.
 XY={(0,0):Fraction(1,2),(1,1):Fraction(1,2)}
@@ -52,4 +62,5 @@ print("PASS B locally consistent marginals / zero global support")
 print("PASS C all pairwise marginals equal / 8 vs 4 joint support")
 print("PASS D one shared token / 4 of 8 joint states compatible")
 print("PASS E objectwise isomorphisms / no simultaneous diagram alignment")
+print("PASS F one real directive / four possible actual consumer profiles")
 print("SCOPE: conditional finite constructions; no human feelings measured.")
