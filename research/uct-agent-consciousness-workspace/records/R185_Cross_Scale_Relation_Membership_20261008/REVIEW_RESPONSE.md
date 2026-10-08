@@ -12,3 +12,5 @@ All current OPEN/ACKNOWLEDGED findings were read before selection.
 
 No reviewer-controlled finding is self-closed. No basal gate, report requirement, exclusive owner, current-assistant consciousness verdict, publication, DOI, OTS or Arweave action is introduced.
 
+Concurrent-map reconciliation: UCT-MAP-v1.0.0 became authoritative during save. Its frozen 1,278-item census is preserved unchanged. R185 was retested only as a disabled additive checkpoint against the reconstructed effective graph; structural compatibility passed, but no new semantic-release audit or reviewer closure is claimed.
+

@@ -1,6 +1,23 @@
 {
-"revision":"UCT-MAP-v1.0.0","current_pointer":"CURRENT_STATE.json",
-"reviewed_modules":["CORE20261008","EI20261008","R183","OO20261008","RU20261008","R184","RC20261008","IE20261008"],
-"historical_index":"versions/UCT-MAP-v1.0.0/history/FORMAL_MAP_EXTENSION_INDEX.json",
-"status":"Whole-map schema audit complete for the enumerated modules; actual applications remain OPEN. The effective descriptor and overlay govern, not old pending headers."
+  "revision": "UCT-MAP-v1.0.0",
+  "current_pointer": "CURRENT_STATE.json",
+  "reviewed_modules": ["CORE20261008", "EI20261008", "R183", "OO20261008", "RU20261008", "R184", "RC20261008", "IE20261008"],
+  "historical_index": "versions/UCT-MAP-v1.0.0/history/FORMAL_MAP_EXTENSION_INDEX.json",
+  "status": "Whole-map schema audit complete for the enumerated v1.0.0 modules; actual applications remain OPEN. The effective descriptor and overlay govern, not old pending headers.",
+  "pending_checkpoints": [
+    {
+      "id": "R185",
+      "title": "Cross-scale relation occurrence and token membership",
+      "base_release": "UCT-MAP-v1.0.0",
+      "source_head": "f6445052acb1644fcdd7b2adcdda2307f7b98bc7",
+      "path": "records/R185_Cross_Scale_Relation_Membership_20261008/MAP_EXTENSION.json",
+      "map_extension_sha256": "6583a63c819a97dd53e9f95b0d0757a84cf0f36c0e3e7367335ec71dceaf622f",
+      "compatibility_audit": "records/R185_Cross_Scale_Relation_Membership_20261008/V100_COMPATIBILITY_AUDIT.json",
+      "status": "PENDING_CHECKPOINT",
+      "enabled_as_v1_0_0_established_premises": false,
+      "depends_on": ["CORE20261008", "R183", "R184"],
+      "nonpremise_witnesses": ["CG20261008"],
+      "merge": "A future completed release must semantically review the R185 delta and affected dependents. One grounded occurrence may have several token-relative memberships, but equal-valued copies, tests, reports and synchronizers do not establish occurrence identity or a named phenomenal result."
+    }
+  ]
 }

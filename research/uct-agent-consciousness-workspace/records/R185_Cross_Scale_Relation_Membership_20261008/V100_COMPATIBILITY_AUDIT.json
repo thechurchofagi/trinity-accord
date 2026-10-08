@@ -1,0 +1,37 @@
+{
+  "checks": {
+    "deductive_cycle_after_inspection_addition": false,
+    "duplicate_node_ids": [],
+    "duplicate_rule_ids": [],
+    "nodes_missing_scope": [],
+    "rules_missing_statement": [],
+    "rules_with_empty_all_of": [],
+    "unresolved_rule_references": []
+  },
+  "combined_counts_if_inspected": {
+    "active_conditional_rules": 348,
+    "context_links": 203,
+    "nodes": 734
+  },
+  "completed_counts": {
+    "active_conditional_rules": 343,
+    "context_links": 203,
+    "nodes": 722
+  },
+  "completed_release": "UCT-MAP-v1.0.0",
+  "effective_graph_sha256": "86860c02bb0331ad5e8770da7eeeb86dd63260922c8455fa97a159ab8b791900",
+  "extension_sha256": "6583a63c819a97dd53e9f95b0d0757a84cf0f36c0e3e7367335ec71dceaf622f",
+  "limits": [
+    "R185 is not part of completed UCT-MAP-v1.0.0 and cannot supply its established premises.",
+    "This structural compatibility check does not repeat the 1,278-item semantic audit.",
+    "Actual realization, named phenomenal grounding and reviewer-controlled OPEN items remain open.",
+    "A future completed integration requires a new immutable release and affected-dependency semantic review."
+  ],
+  "r185_counts": {
+    "nodes": 12,
+    "rules": 5
+  },
+  "schema": "uct-r185-v100-compatibility-audit/1.0",
+  "source_head": "f6445052acb1644fcdd7b2adcdda2307f7b98bc7",
+  "status": "STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_INTEGRATION_OPEN"
+}

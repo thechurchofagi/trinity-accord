@@ -1,3 +1,17 @@
+# Current checkpoint — R185 cross-scale occurrence membership
+
+Read [the derivation](records/R185_Cross_Scale_Relation_Membership_20261008/Cross_Scale_Relation_Membership_v0_1.md), [round record](records/R185_Cross_Scale_Relation_Membership_20261008/ROUND_RECORD.md), [claims](records/R185_Cross_Scale_Relation_Membership_20261008/CLAIM_LEDGER.json), [gaps](records/R185_Cross_Scale_Relation_Membership_20261008/GAP_LEDGER.json), [exact results](records/R185_Cross_Scale_Relation_Membership_20261008/MODEL_RESULTS.json), [v1.0.0 compatibility audit](records/R185_Cross_Scale_Relation_Membership_20261008/V100_COMPATIBILITY_AUDIT.json), [review response](records/R185_Cross_Scale_Relation_Membership_20261008/REVIEW_RESPONSE.md), and [handoff](records/R185_Cross_Scale_Relation_Membership_20261008/CURRENT_HANDOFF.md).
+
+R185 distinguishes an actual relation occurrence from its token-relative memberships. One grounded occurrence can be constitutive in overlapping local-retention, effector-loop and whole-organism tokens, so its incidence profile can contain several memberships without multiplying the occurrence. Equal-valued or synchronized copies remain different occurrences; a synchronizer is an additional relation and does not fuse them.
+
+The 16-configuration/15-check finite model contains no phenomenal variable. Under same-instance C1 premises each actual token receives a token-relative structural counterpart, but R185 does not infer one numerically identical phenomenal event across tokens, a unique owner, an additive consciousness amount, felt trying or familiar mineness. QC10/IA-QC11/QC12/QC13 and actual grounding remain OPEN. Completed UCT-MAP-v1.0.0 stays authoritative at 722 nodes, 343 active rules and 203 contexts; R185's 12-node/5-rule delta is structurally compatible but remains a disabled `PENDING_CHECKPOINT`, not part of that release.
+
+Next: test whether an action-centering relation can be grounded invariantly in the one-shared-occurrence architecture while a synchronized copied architecture matches declared values, output and report; otherwise prove the remaining underidentification.
+
+Older current checkpoints below remain historical where inconsistent.
+
+---
+
 # Current checkpoint — R184 target persistence after obstruction
 
 Read [the derivation](records/R184_Target_Persistence_After_Obstruction_20261008/Target_Persistence_After_Obstruction_v0_1.md), [round record](records/R184_Target_Persistence_After_Obstruction_20261008/ROUND_RECORD.md), [claims](records/R184_Target_Persistence_After_Obstruction_20261008/CLAIM_LEDGER.json), [gaps](records/R184_Target_Persistence_After_Obstruction_20261008/GAP_LEDGER.json), [exact results](records/R184_Target_Persistence_After_Obstruction_20261008/MODEL_RESULTS.json), [map audit](records/R184_Target_Persistence_After_Obstruction_20261008/MAP_AUDIT.json), [review response](records/R184_Target_Persistence_After_Obstruction_20261008/REVIEW_RESPONSE.md), and [handoff](records/R184_Target_Persistence_After_Obstruction_20261008/CURRENT_HANDOFF.md).
@@ -11,7 +25,6 @@ Next: construct one cross-scale membership/gluing map for overlapping local rete
 Older current checkpoints below remain historical where inconsistent.
 
 ---
-
 # Current checkpoint — R183 target-relative experiential relevance
 
 Read [the derivation](records/R183_Target_Relative_Experiential_Relevance_20261008/Target_Relative_Experiential_Relevance_v0_1.md), [claims](records/R183_Target_Relative_Experiential_Relevance_20261008/CLAIM_LEDGER.json), [gaps](records/R183_Target_Relative_Experiential_Relevance_20261008/GAP_LEDGER.json), [map audit](records/R183_Target_Relative_Experiential_Relevance_20261008/MAP_AUDIT.json), [review response](records/R183_Target_Relative_Experiential_Relevance_20261008/REVIEW_RESPONSE.md), and [handoff](records/R183_Target_Relative_Experiential_Relevance_20261008/CURRENT_HANDOFF.md).
@@ -45,7 +58,6 @@ R181 defines a target-indexed practical-centering profile: actual directive use 
 Positive UCT application: under C1 plus a separately grounded actual P/I/K, these relations have experience-internal structural counterparts. The interpretation of PC as doing and E as trying remains OPEN with explicit counterexamples/falsifiers. QC08/09 scoped resolution retained; QC10/IA-QC11/QC12 actual application remain OPEN. Canonical graph unchanged at 584/284/178. R179 prior-paper overlap and R180 generation/attribution limits remain binding; existing agency and LLM-intention work is credited. Next: test whether mismatch-consuming closure is specific to felt trying or only generic adaptive control. HOLD paper release and all preservation/publication actions. Historical current notices below are superseded only where inconsistent.
 
 ---
-
 # Current checkpoint — R180 proposal uptake and author report
 
 Read [R180 v0.2](records/R180_Proposal_Uptake_and_Author_Report_20261008/Proposal_Uptake_and_Author_Report_v0_2.md), [gaps](records/R180_Proposal_Uptake_and_Author_Report_20261008/GAP_LEDGER.json), [handoff](records/R180_Proposal_Uptake_and_Author_Report_20261008/CURRENT_HANDOFF.md). Prior R179 publication-overlap audit remains binding.
@@ -428,3 +440,4 @@ R181 defines a target-indexed practical-centering profile: actual directive use 
 Positive UCT application: under C1 plus a separately grounded actual P/I/K, these relations have experience-internal structural counterparts. The interpretation of PC as doing and E as trying remains OPEN with explicit counterexamples/falsifiers. QC08/09 scoped resolution retained; QC10/IA-QC11/QC12 actual application remain OPEN. Canonical graph unchanged at 584/284/178. R179 prior-paper overlap and R180 generation/attribution limits remain binding; existing agency and LLM-intention work is credited. Next: test whether mismatch-consuming closure is specific to felt trying or only generic adaptive control. HOLD paper release and all preservation/publication actions. Historical current notices below are superseded only where inconsistent.
 
 ---
+<!-- file end -->

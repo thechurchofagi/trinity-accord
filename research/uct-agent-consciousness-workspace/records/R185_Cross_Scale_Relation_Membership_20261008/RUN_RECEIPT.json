@@ -1,0 +1,39 @@
+{
+  "round": "R185",
+  "base_branch": "uct-agent-consciousness-workspace",
+  "initial_base_commit": "b6262a1f96d57267581043745f29d5776662a587",
+  "reconciled_base_commit": "f6445052acb1644fcdd7b2adcdda2307f7b98bc7",
+  "completed_base_release": "UCT-MAP-v1.0.0",
+  "canonical_graph_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+  "executed": [
+    {
+      "command": "python records/R185_Cross_Scale_Relation_Membership_20261008/check_cross_scale_membership.py",
+      "result": "PASS",
+      "configurations": 16,
+      "assertion_groups": 15
+    },
+    {
+      "command": "python records/R185_Cross_Scale_Relation_Membership_20261008/audit_map.py",
+      "result": "HISTORICAL_ROOT_STRUCTURAL_PASS_NOT_CURRENT_RELEASE_AUDIT",
+      "canonical_nodes": 584,
+      "canonical_rules": 284,
+      "canonical_context_links": 178,
+      "r185_nodes": 12,
+      "r185_rules": 5
+    },
+    {
+      "command": "restore UCT-MAP-v1.0.0 capsule, rebuild frozen effective graph, then run check_v100_compatibility.py",
+      "result": "STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_INTEGRATION_OPEN",
+      "completed_release_nodes": 722,
+      "completed_release_active_rules": 343,
+      "completed_release_context_links": 203,
+      "combined_inspection_nodes": 734,
+      "combined_inspection_active_rules": 348,
+      "r185_enabled_as_v1_0_0_premises": false
+    }
+  ],
+  "phenomenal_variable_in_model": false,
+  "actual_human_or_ai_instance_tested": false,
+  "publication_action": false,
+  "status": "PENDING_CHECKPOINT_SEMANTIC_INTEGRATION_OPEN"
+}

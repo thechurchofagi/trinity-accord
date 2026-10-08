@@ -543,3 +543,19 @@ Read all current OPEN/ACKNOWLEDGED items before selection. Full response: [recor
 Because the reflex twin survives, the next main-line question moves to cross-scale overlap/membership among local, effector-loop and whole-organism tokens. No exclusive owner, basal gate, publication or assistant-consciousness verdict is introduced.
 
 ---
+
+## RESEARCHER-RESPONSE-R185
+
+Read all current OPEN/ACKNOWLEDGED items before selection. Full response: [records/R185_Cross_Scale_Relation_Membership_20261008/REVIEW_RESPONSE.md](records/R185_Cross_Scale_Relation_Membership_20261008/REVIEW_RESPONSE.md).
+
+- QC10 remains **ACKNOWLEDGED / OPEN**. Occurrence-sensitive cross-scale membership is positive organizational progress, but it does not identify felt trying, agency or familiar mineness.
+- IA-QC11, QC12 and QC13 remain actual-application **OPEN**. The formal contract fixes actual-token, signature, occurrence and boundary obligations together and includes copied/synchronized controls, but no real human or artificial instance is admitted.
+- R185 explicitly preserves the distinction between an actual route's use and evidence that an intervention detected that use. A synchronizer is represented as an additional relation rather than a reason to merge copies.
+- CG20261008 retains priority for general coherent gluing. R185 claims only the occurrence-identity, incidence-count and R184-route-membership application; no known incidence/quotient mathematics is renamed as a discovery.
+- Whole-map structural traversal passes, while semantic reproof remains incomplete. R185 stays `PENDING_MAP` and disabled.
+
+No reviewer-controlled finding is self-closed. No unique owner, basal gate, publication, DOI/OTS/Arweave action or assistant-consciousness verdict is introduced.
+
+Concurrent reconciliation: UCT-MAP-v1.0.0 landed during R185 persistence and remains the authoritative completed release. R185's original root-oriented audit is not represented as a current whole-map audit. The verified v1.0.0 reconstruction plus disabled R185 addition passes structural compatibility only; semantic integration and reviewer disposition remain open for a later version.
+
+---

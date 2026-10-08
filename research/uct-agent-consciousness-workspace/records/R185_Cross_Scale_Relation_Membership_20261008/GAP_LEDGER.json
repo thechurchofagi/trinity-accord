@@ -53,13 +53,23 @@
     },
     {
       "id": "R185-G6",
-      "location": "whole-map audit",
-      "problem": "Whole-map structural traversal does not provide full per-node/per-rule semantic reproof or repair inherited inline schema gaps.",
+      "location": "R185 integration audit",
+      "problem": "UCT-MAP-v1.0.0 completed a frozen 1,278-item semantic census, but R185 landed later and its delta plus affected dependents have not received a new completed semantic release audit.",
       "impact": ["map promotion", "downstream premise use", "publication readiness"],
       "counterexample": "a structurally valid acyclic rule graph can still contain a false or scope-shifted rule",
-      "fixed": "R185 remains PENDING_MAP/AUDIT_INCOMPLETE and records the exact semantic slice.",
-      "open_premise": "complete semantic audit and reviewer-controlled promotion",
+      "fixed": "R185 remains a disabled PENDING_CHECKPOINT. Compatibility against the reconstructed v1.0.0 active graph is recorded separately and does not alter the completed release.",
+      "open_premise": "new-version semantic review of the R185 delta and affected dependents, plus reviewer-controlled disposition",
       "status": "AUDIT_INCOMPLETE"
+    },
+    {
+      "id": "R185-G7",
+      "location": "concurrent branch reconciliation",
+      "problem": "The first R185 audit used the historical 584/284/178 root and named pre-release layers; a concurrent UCT-MAP-v1.0.0 release changed the authoritative effective-map boundary to 722 active nodes, 343 active rules and 203 context links.",
+      "impact": ["current-map claim", "R185 registration", "recovery instructions"],
+      "counterexample": "a clean audit against the unchanged root graph can still miss duplicate IDs or cycles against a newer effective overlay",
+      "fixed": "The v1.0.0 capsule was hash-verified and reconstructed. R185 was retested as a disabled addition: 734 combined unique nodes, 348 active rules, 203 unchanged contexts, with no duplicates, unresolved references, empty all_of sets or cycle. Navigation now keeps v1.0.0 authoritative and labels R185 as a checkpoint.",
+      "open_premise": "semantic integration in a new immutable release; structural compatibility is not semantic truth",
+      "status": "STRUCTURAL_RECONCILIATION_FIXED_SEMANTIC_INTEGRATION_OPEN"
     }
   ]
 }
