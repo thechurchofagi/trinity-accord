@@ -1,0 +1,242 @@
+{
+  "schema": "UCT_REVIEW_CORRECTION_CHECKS/v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "frozen_note_unchanged",
+      "status": "PASS",
+      "detail": "f660d03d7269ba95c458427bf2c20e9a01a6ac994efe2da39750baa9999536e8"
+    },
+    {
+      "name": "restored_raw_graph_hash",
+      "status": "PASS",
+      "detail": "8405565f71629bf04cdb25238666060e6bb9aa8cddfb0617187f7ba1bcf9edb5"
+    },
+    {
+      "name": "authoritative_entry_RESEARCH_MASTER_GUIDE.md",
+      "status": "PASS",
+      "detail": "# Authoritative current checkpoint \u2014 R171 with review response"
+    },
+    {
+      "name": "authoritative_entry_AGENTS.md",
+      "status": "PASS",
+      "detail": "# Authoritative current checkpoint \u2014 R171 with review response"
+    },
+    {
+      "name": "authoritative_entry_MEMORY.md",
+      "status": "PASS",
+      "detail": "# Authoritative current checkpoint \u2014 R171 with review response"
+    },
+    {
+      "name": "authoritative_entry_HANDOFF.md",
+      "status": "PASS",
+      "detail": "# Authoritative current checkpoint \u2014 R171 with review response"
+    },
+    {
+      "name": "authoritative_entry_MASTER_INDEX.md",
+      "status": "PASS",
+      "detail": "# Authoritative current checkpoint \u2014 R171 with review response"
+    },
+    {
+      "name": "unrestricted_H_has_both_completions",
+      "status": "PASS",
+      "detail": [
+        [
+          true,
+          false
+        ],
+        [
+          true,
+          true
+        ]
+      ]
+    },
+    {
+      "name": "constant_H_blocks_hidden_alteration",
+      "status": "PASS",
+      "detail": [
+        [
+          true,
+          true
+        ]
+      ]
+    },
+    {
+      "name": "direct_only_accepted",
+      "status": "PASS",
+      "detail": {
+        "D_discharged": true,
+        "I_discharged": false,
+        "fired": [
+          "r171_range_application_boundary_direct_effective"
+        ]
+      }
+    },
+    {
+      "name": "inductive_only_accepted",
+      "status": "PASS",
+      "detail": {
+        "D_discharged": false,
+        "I_discharged": true,
+        "fired": [
+          "r171_range_application_boundary_reachable_effective"
+        ]
+      }
+    },
+    {
+      "name": "neither_route_unproved_not_certified",
+      "status": "PASS",
+      "detail": {
+        "D_discharged": false,
+        "I_discharged": false,
+        "fired": []
+      }
+    },
+    {
+      "name": "both_routes_available_no_joint_requirement",
+      "status": "PASS",
+      "detail": {
+        "D_discharged": true,
+        "I_discharged": true,
+        "fired": [
+          "r171_range_application_boundary_direct_effective",
+          "r171_range_application_boundary_reachable_effective"
+        ]
+      }
+    },
+    {
+      "name": "all_of_gate_D_R170_application_holds",
+      "status": "PASS",
+      "detail": "R170_application_holds"
+    },
+    {
+      "name": "all_of_gate_D_common_target_binding",
+      "status": "PASS",
+      "detail": "common_target_binding"
+    },
+    {
+      "name": "all_of_gate_D_domain_scope_accepted",
+      "status": "PASS",
+      "detail": "domain_scope_accepted"
+    },
+    {
+      "name": "all_of_gate_D_valid",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "name": "all_of_gate_D_not_refuted",
+      "status": "PASS",
+      "detail": "not_refuted"
+    },
+    {
+      "name": "all_of_gate_I_R170_application_holds",
+      "status": "PASS",
+      "detail": "R170_application_holds"
+    },
+    {
+      "name": "all_of_gate_I_common_target_binding",
+      "status": "PASS",
+      "detail": "common_target_binding"
+    },
+    {
+      "name": "all_of_gate_I_domain_scope_accepted",
+      "status": "PASS",
+      "detail": "domain_scope_accepted"
+    },
+    {
+      "name": "all_of_gate_I_valid",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "name": "all_of_gate_I_not_refuted",
+      "status": "PASS",
+      "detail": "not_refuted"
+    },
+    {
+      "name": "seven_statuses_cover_64_assignments",
+      "status": "PASS",
+      "detail": {
+        "INVALID_RANGE_PROTOCOL": 32,
+        "UNRESOLVED": 1,
+        "EMPIRICAL_COVER_ONLY": 1,
+        "SPECIFICATION_ONLY": 2,
+        "UNIVERSAL_RANGE_CERTIFIED_REACHABLE": 4,
+        "UNIVERSAL_RANGE_CERTIFIED_DIRECT": 8,
+        "RANGE_CERTIFICATE_REFUTED": 16
+      }
+    },
+    {
+      "name": "TE_QC_01_exposes_input_contract_violation",
+      "status": "PASS",
+      "detail": {
+        "initial": [
+          0,
+          0
+        ],
+        "coupled_successor": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "TE_QC_02_matched_trace_distinct_use",
+      "status": "PASS",
+      "detail": [
+        {
+          "b": 0,
+          "baseline_A": 0,
+          "baseline_B": 0,
+          "report_A": 0,
+          "report_B": 0,
+          "do_k_A": 1,
+          "do_k_B": 0
+        },
+        {
+          "b": 1,
+          "baseline_A": 1,
+          "baseline_B": 1,
+          "report_A": 0,
+          "report_B": 0,
+          "do_k_A": 0,
+          "do_k_B": 1
+        }
+      ]
+    }
+  ],
+  "route_cases": [
+    {
+      "D_discharged": false,
+      "I_discharged": false,
+      "fired": []
+    },
+    {
+      "D_discharged": false,
+      "I_discharged": true,
+      "fired": [
+        "r171_range_application_boundary_reachable_effective"
+      ]
+    },
+    {
+      "D_discharged": true,
+      "I_discharged": false,
+      "fired": [
+        "r171_range_application_boundary_direct_effective"
+      ]
+    },
+    {
+      "D_discharged": true,
+      "I_discharged": true,
+      "fired": [
+        "r171_range_application_boundary_direct_effective",
+        "r171_range_application_boundary_reachable_effective"
+      ]
+    }
+  ],
+  "limits": [
+    "Focused finite regression and exact file integrity only; not general/global semantic proof.",
+    "No physical live/replay realization or B_min/F_O validation."
+  ]
+}

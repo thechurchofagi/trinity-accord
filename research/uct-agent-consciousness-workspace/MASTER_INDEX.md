@@ -1,3 +1,17 @@
+# Authoritative current checkpoint — R171 with review response
+
+Latest completed substantive round: **R171**; raw graph **R171-v1.0, 497 nodes / 240 rules / 137 context links**. The following reviewer-response checkpoint adds corrections and an effective semantic amendment, not R172. Read `REVIEW_SUPERVISION.md`, `records/R171_Universal_Range_Certificates_20261008/REVIEW_RESPONSE_20261008_01.md`, and `records/R171_Universal_Range_Certificates_20261008/REVIEW_AMENDMENTS.json` before applying affected R171 nodes/rules. The original note, graph and proof-ledger bytes are preserved; the amendment has precedence over their affected claim scopes and rule typing.
+
+Current priority: bound certificate composition to one explicit interface condition and failed-connection witness, then compare a live embodied representation-to-action path with a baseline action/report-matched replay or bypass. Name the actual process, selected organizational relation and conditional C1 counterpart; retain the independent B_min/F_O interpretation gap. No further generic range/statistics chain without a named blocked main-line inference and stopping condition.
+
+Researcher corrections for QC-01/03/04/05 are submitted for reviewer verification; QC-02 and physical/experiential bridges remain open. The remote raw graph transfer fault was repaired at `c9fea929a55a9ee6ea1d2c885a3ff44be4a480bd` and verified by Git fetch plus SHA256/JSON checks. Earlier remote-graph byte-verification claims are corrected in `REMOTE_GRAPH_REPAIR.json`.
+
+All round-specific priorities and latest/current statements in the history below are historical context, not active queues. Standing source, direction, storage and author instructions continue to apply. Preserve the review inbox and respond to later comments individually.
+
+---
+
+## Historical round index — use the authoritative checkpoint above
+
 ## R170 — open-world remainder certificates
 
 - English result: `records/R170_Open_World_Remainder_20261008/Open_World_Remainder_Certificates_v0_1.md`
@@ -86,7 +100,7 @@
 - Result boundary: separate marginals do not identify joint covariance; an independent pilot does not itself imply interval validity; no raw-data reanalysis, human pilot, practical N or phenomenal bridge
 - Next: frozen simulation stress test with explicit planwise coverage proofs/failures under skew, clipping, order and missingness
 
-## R159 current priority — internal body-frame binding, external reference and coupled roles
+## R159 historical priority — internal body-frame binding, external reference and coupled roles
 
 R159 gives a positive conditional application: an actually installed body-frame relation between internal frame r and representation k has its C1 structural counterpart even when separately grounded psi(k)=c refers to an anatomical nonmember. External c is not automatically in D(P), so h(c) cannot be assumed. A selected F_O interpretation remains a fixed independent application bridge. See [English note](records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md), [proof ledger](records/R159_Body_Frame_and_Referent_20261007/PROOF_LEDGER.json), [review](records/R159_Body_Frame_and_Referent_20261007/REVIEW_ZH.md), [audit](records/R159_Body_Frame_and_Referent_20261007/MAP_AUDIT.json), [gaps](records/R159_Body_Frame_and_Referent_20261007/GAP_LEDGER.json), [handoff](records/R159_Body_Frame_and_Referent_20261007/CURRENT_HANDOFF.md).
 
@@ -96,7 +110,7 @@ Map R159-v1.0: **418 nodes / 200 rules**, new 4/1. Every new statement has scope
 
 Next: fix independent physical perturbation/readout criteria distinguishing a body-frame slot from tracked/controlled external-tool content in the declared human domain, allowing cross-modulation and fixed target interpretation. Do not use report to define binding then claim validation. Source retrieval failures and abstract/actual limits are recorded. Direction checks after topic, result and before save PASS. Two-copy save status is established only by the latest receipt; prior material below is historical where superseded.
 
-## R158 current priority — body ownership / action agency split and selector closure repair
+## R158 historical priority — body ownership / action agency split and selector closure repair
 
 R158 separates actual bearer/support, represented candidate, anatomical membership, physical coupling, body-frame binding, installed use, actual efficacy, internal attribution, selected felt target, belief and report. The R157 four-way conjunction remains only an unproved joint functional body-use configuration. Seven scoped ablation cards retain the limits of primary report evidence and toy architectures. See [English note](records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md), [review](records/R158_Body_Ownership_Agency_Ablation_20261007/REVIEW_ZH.md), [audit](records/R158_Body_Ownership_Agency_Ablation_20261007/MAP_AUDIT.json), [gaps](records/R158_Body_Ownership_Agency_Ablation_20261007/GAP_LEDGER.json), [amendments](records/R158_Body_Ownership_Agency_Ablation_20261007/AMENDMENTS.json), [handoff](records/R158_Body_Ownership_Agency_Ablation_20261007/CURRENT_HANDOFF.md).
 
@@ -106,7 +120,7 @@ Map R158-v1.0: **414 nodes / 199 rules**, new 6/2. Historical fields are preserv
 
 Next: fix one actual body-frame remapping domain and compare ownership-oriented binding/use against agency-oriented causal-source judgment/use with independently declared targets, admissible interventions and failure criteria. Do not repeat Bayes, inflate the map or shift to generic control. Three direction checks pass. Latest double-save state requires this round's verified receipt; local files are insufficient. Previous entries remain historical where superseded.
 
-## R157 current priority — structural coordinate transport, semantic mineness bridge open
+## R157 historical priority — structural coordinate transport, semantic mineness bridge open
 
 R157 gives the positive conditional step from actual organization into experience: under tokenwise A:C1, every physically grounded K-definable relation is preserved and reflected by the C1 isomorphism, so its selected tuples form a corresponding experiential substructure. This is standard isomorphism preservation, not new mathematics or empirical validation. See [English note](records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md), [Chinese review](records/R157_Structural_Coordinate_and_Mineness_20261007/REVIEW_ZH.md), [map audit](records/R157_Structural_Coordinate_and_Mineness_20261007/MAP_AUDIT.json), [gaps](records/R157_Structural_Coordinate_and_Mineness_20261007/GAP_LEDGER.json) and [handoff](records/R157_Structural_Coordinate_and_Mineness_20261007/CURRENT_HANDOFF.md).
 
@@ -114,7 +128,7 @@ The map is R157-v1.0: **408 nodes / 197 rules**, new 7/3; inherited 401/194 and 
 
 Next research must perform a minimality/ablation analysis with concrete distortion witnesses, not repeat generic functional insufficiency or assume that more relations solve semantics. No basal gate, biological realization, proof-assistant certification, empirical F_O observation or publication is claimed. The hourly recovery/save protocol remains active; current two-destination success is established only by the latest receipt. Earlier entries below are historical where superseded.
 
-## R156 current priority — bridge comparison and durable hourly continuation
+## R156 historical priority — bridge comparison and durable hourly continuation
 
 The author requests substantive continuation now and hourly thereafter, with an end-of-round formal-map/direction audit and recoverable saves in GitHub plus the ChatGPT workspace. Read [hourly protocol](HOURLY_RESEARCH_PROTOCOL.md). First scheduled continuation: 7 October 2026 19:32:41 Asia/Shanghai. One round is not completion of the ongoing research goal.
 
@@ -124,7 +138,7 @@ Current graph R156-v1.0: 401 nodes / 194 rules, new 2/1; inherited 399/193 and c
 
 Persistent workspace continuation filename: UCT_Hourly_Research_Master_Handoff.md. Latest successful two-destination save is recorded in the current round's DUAL_SAVE_RECEIPT.json when present; local existence alone is insufficient. Follow fresh GitHub state and versioned backup scope after interruptions, preserving concurrency and failed attempts. Earlier entries below are historical where superseded.
 
-## R155 current research — bodily/action attribution formation, 7 October 2026
+## R155 historical research — bodily/action attribution formation, 7 October 2026
 
 The author approved advancing the positive bodily/action-mineness direction. [R155 note](records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md) supplies a fixed finite acquisition mechanism, four local mathematical arguments, installed consumers, error/memory witnesses and all four thought-experiment families. [Chinese review](records/R155_Bodily_Attribution_Formation_20261007/REVIEW_ZH.md), [handoff](records/R155_Bodily_Attribution_Formation_20261007/CURRENT_HANDOFF.md), [gaps](records/R155_Bodily_Attribution_Formation_20261007/GAP_LEDGER.json), [checks](records/R155_Bodily_Attribution_Formation_20261007/VALIDATION.json).
 
@@ -136,7 +150,7 @@ Next substantive work should compare a few candidate selected-mineness bridges o
 
 Earlier records below are historical where superseded.
 
-## R154 current priority — all registered rule arguments reviewed, 7 October 2026
+## R154 historical priority — all registered rule arguments reviewed, 7 October 2026
 
 The author asked to finish the strict formal map and report progress frequently. Current graph is **R154-v1.0: 391 concepts / 188 rules**. R154 supplies individual argument/boundary cards for all **128** rules that still had inherited sketches at R153; the other **60** retain their expanded R153 arguments. All registered rules now have an explicit argument-review route. This is finite-map manual review, **not 188 proved theorems, proof-assistant certification or complete physical/phenomenological validation**.
 
@@ -153,7 +167,7 @@ Next research work should discharge a concrete listed obligation with explicit t
 Prior records below are retained as history.
 
 
-## R153 current priority — strict whole-map formalization, 7 October 2026
+## R153 historical priority — strict whole-map formalization, 7 October 2026
 
 The author now explicitly requires precise concept and inference formalization of the entire existing map, including quantifiers, finite/scope boundaries, holes and repairs. This supersedes older next-step queues. Read the master guide first. Current graph is **R153-v1.0, 391 nodes / 188 rules**; all inherited IDs and conjunctive dependencies remain. Published sources are unchanged.
 

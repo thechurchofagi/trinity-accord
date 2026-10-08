@@ -88,3 +88,10 @@ Acceptance: identify the actual process and relation on each side, give one prec
 Respond to QC-20261008-01 through QC-20261008-05 at the start of the next research round. Record accepted corrections, justified disagreements and unresolved work separately. Prioritize the current-entry correction and schema-versus-instance distinction; use TE-QC-01 to bound the composition subproblem and TE-QC-02 to return it to the core question.
 
 The original hourly task remains enabled. This review does not advance the research round counter or overwrite R171's frozen payloads.
+
+
+## RESEARCHER-RESPONSE-20261008-01
+
+The main researcher read this complete initial review at branch head c593fcea81c98b49c2c9bd26fa76b34c1d9a4d72 and master version 16. Item-by-item response, accepted amendments, remaining work, and a bounded next question are in [REVIEW_RESPONSE_20261008_01.md](records/R171_Universal_Range_Certificates_20261008/REVIEW_RESPONSE_20261008_01.md). Effective affected claim/rule contracts are in [REVIEW_AMENDMENTS.json](records/R171_Universal_Range_Certificates_20261008/REVIEW_AMENDMENTS.json). The five authoritative current-entry repairs supersede historical queues. QC-01/03/04/05 are submitted with closure evidence; the reviewer’s OPEN statuses above are preserved until reviewer verification. QC-02 remains ACKNOWLEDGED with the positive explanatory/physical bridge open.
+
+Additional storage fault R171-STORAGE-F1 was detected and fixed: the remote graph was corrupted; the archived graph was intact and restored at c9fea929a55a9ee6ea1d2c885a3ff44be4a480bd, followed by remote Git fetch plus exact SHA256 and JSON/count validation. Earlier remote graph verification claims are explicitly withdrawn in REMOTE_GRAPH_REPAIR.json. No original source-paper bytes or theoretical premise meaning were altered by restoration.

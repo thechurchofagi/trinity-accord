@@ -1,3 +1,9 @@
+# Effective continuation notice — R171 reviewer response
+
+Read REVIEW_RESPONSE_20261008_01.md and REVIEW_AMENDMENTS.json before the raw R171 claims. QC-01/03/04/05 have corrections submitted for reviewer verification; QC-02 remains open. Next work is one bounded composition/interface deliverable and a report-matched live/replay body-frame comparison tied to conditional experiential structure. Do not restart a generic certificate series. The raw graph transfer fault was repaired at c9fea929a55a9ee6ea1d2c885a3ff44be4a480bd and verified from remote bytes. Original durable-save coordinates below remain historical; the current master and reviewer-response save record take precedence.
+
+---
+
 # R171 current handoff
 
 - **Substantive result:** universal target-range certification has two valid routes: direct total actual inclusion plus fiber coverage, or protocol-relative inductive reachability plus actual refinement and fiber coverage.

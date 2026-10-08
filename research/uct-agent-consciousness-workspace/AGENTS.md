@@ -1,46 +1,58 @@
-## R170 current priority — keep the unresolved remainder explicit
+# Authoritative current checkpoint — R171 with review response
+
+Latest completed substantive round: **R171**; raw graph **R171-v1.0, 497 nodes / 240 rules / 137 context links**. The following reviewer-response checkpoint adds corrections and an effective semantic amendment, not R172. Read `REVIEW_SUPERVISION.md`, `records/R171_Universal_Range_Certificates_20261008/REVIEW_RESPONSE_20261008_01.md`, and `records/R171_Universal_Range_Certificates_20261008/REVIEW_AMENDMENTS.json` before applying affected R171 nodes/rules. The original note, graph and proof-ledger bytes are preserved; the amendment has precedence over their affected claim scopes and rule typing.
+
+Current priority: bound certificate composition to one explicit interface condition and failed-connection witness, then compare a live embodied representation-to-action path with a baseline action/report-matched replay or bypass. Name the actual process, selected organizational relation and conditional C1 counterpart; retain the independent B_min/F_O interpretation gap. No further generic range/statistics chain without a named blocked main-line inference and stopping condition.
+
+Researcher corrections for QC-01/03/04/05 are submitted for reviewer verification; QC-02 and physical/experiential bridges remain open. The remote raw graph transfer fault was repaired at `c9fea929a55a9ee6ea1d2c885a3ff44be4a480bd` and verified by Git fetch plus SHA256/JSON checks. Earlier remote-graph byte-verification claims are corrected in `REMOTE_GRAPH_REPAIR.json`.
+
+All round-specific priorities and latest/current statements in the history below are historical context, not active queues. Standing source, direction, storage and author instructions continue to apply. Preserve the review inbox and respond to later comments individually.
+
+---
+
+## R170 historical priority — keep the unresolved remainder explicit
 
 Read `records/R170_Open_World_Remainder_20261008/CURRENT_HANDOFF.md`, the R170 note and ledgers before continuing. The target `T`, covered cells `C`, unresolved `U`, optional target measure `mu`, effect, threshold and validity event must remain jointly typed. Small `mu(U)` supports mean/exceedance conclusions only; it never lowers the pointwise supremum while U is nonempty. A finite or continuum cell requires a universal physical range and route/channel radius, not fitted interpolation or successful endpoint tests.
 
 Current map R170-v1.0: 487 nodes / 234 rules / 133 context links; exact R169 prefixes preserved. Next: distinguish a real universal target-range proof from a fitted cover across a small set of physical domains. Keep target admission, actual route, abstract model, target measure, complete organization, experience and report distinct. Do not derive C1 or `B_min`, add a basal gate, demand a unique owner or decide the current assistant's consciousness. Save research only with `[skip ci]` and verify both durable copies.
 
-## R169 current priority — actual route budgets, not fitted geometry
+## R169 historical priority — actual route budgets, not fitted geometry
 
 Read `records/R169_Compositional_Route_Calibration_20261008/CURRENT_HANDOFF.md`, the R169 note and its ledgers before continuing. R169 replaces ungrounded `d,L` calibration by an actual intervention graph with frozen consumer geometry and valid edgewise law-distance upper bounds. The factor-two effect bound and shortest-path envelope require every edge premise simultaneously; a fitted distance, point estimate, shared label or unexecuted transition is not a certificate. A held-out lower effect exceeding a valid route budget refutes only the calibration package, not the mediator, C1 or experience.
 
 Current map R169-v1.0: 477 nodes / 227 rules / 129 context links; exact R168 prefixes preserved. Metric rescaling proves `d` and `L` are not separately identified by the R168 envelope. Finite route coverage does not silently cover omitted contexts or cell interiors. Next: a minimal open-world remainder certificate with explicit unknown mass/radius rather than zero-filled unknowns. Keep actual intervention, abstract graph, fitted model, complete organization, experience and report distinct; add no basal gate, unique owner or assistant-consciousness claim. Save research only with `[skip ci]` and verify both durable copies.
 
-## R168 current priority — do not confuse finite coverage with actual route closure
+## R168 historical priority — do not confuse finite coverage with actual route closure
 
 Read `records/R168_Stochastic_Continuous_Redundancy_20261008/CURRENT_HANDOFF.md`, the R168 note and its ledgers before continuing. The sharp cone envelope requires the same frozen effect definition, a physically grounded context metric, a valid Lipschitz constant and valid pointwise test bounds. A shared observation label supplies none of these. Hidden-context control additionally requires an actually realizable section, fiber deviation and section regularity. Random sampling only bounds affected mass under its own measure/independence/sensitivity premises.
 
 Current map R168-v1.0: 468 nodes / 222 rules / 125 context links; exact R167 prefixes preserved. Next: an independent calibration/falsification contract for `d`, `L`, `delta` and `C`. Keep actual route/read evidence, complete organization, finite view, fitted model, distributional law, particular experience and report distinct. Do not derive C1 or `B_min`, add a basal-experience threshold, demand a unique owner, or decide the current assistant's consciousness. Save research only with `[skip ci]` and verify both durable copies.
 
-## R164 current priority — preserve the unweighted target while adapting width
+## R164 historical priority — preserve the unweighted target while adapting width
 
 Read `records/R164_Frozen_Bounded_Martingale_20261008/CURRENT_HANDOFF.md` and the R164 note/ledgers before continuing. The valid non-identical route uses one pilot-frozen constant bet per component; variable bets generally target a weighted mean when participant conditional means differ. Predictors must be pre-observation measurable and all method/target selection must precede confirmatory outcomes. R163 Hoeffding remains the range-only fallback.
 
 Current map R164-v1.0: 440 nodes / 212 rules, new 4/3; the R163 prefix and 117 context links are preserved. The rare-spike obstruction and additive protection term must remain. Endpoint adaptation cannot erase arbitrary-missingness identification width or define a physically nonexistent post-abort outcome. Next: a finite pilot menu plus predeclared maximum-width/regret and `DESIGN_NOT_FEASIBLE` rules. Do not claim uniform superiority, practical N, apparatus validity, B_min/F_O, consciousness status or publication. Research save only with `[skip ci]`; verify both durable copies.
 
-## R162 current priority — covariance object and explicit coverage premise
+## R162 historical priority — covariance object and explicit coverage premise
 
 Read `records/R162_Blinded_Pilot_and_Simultaneous_Design_20261008/CURRENT_HANDOFF.md` and the R162 note/ledgers before continuing. The required uncertainty object is one jointly observed eight-component participant vector; never splice marginal variances from separate samples into a covariance matrix. The candidate pilot is disjoint and nuisance-only, but independence alone does not establish calibration. Every future interval family must discharge `R162:PLANWISE_COVERAGE_PREMISE` for every selected frozen plan under a declared target/model.
 
 Current map R162-v1.0: 430 nodes / 206 rules, new 5/2; inherited R161 prefix and 117 context links preserved. Next: frozen simulation stress test of skew, clipping, order and missingness, with explicit counterexamples and rejection criteria. Keep all six R161 gates and the C1/B_min/F_O boundary. Do not claim human data, ethics approval, practical N, consciousness status or publication. Save research only with `[skip ci]` and verify both durable copies.
 
-## R161 current priority — executable candidate and falsification discipline
+## R161 historical priority — executable candidate and falsification discipline
 
 R161 turns R160's abstract profile into a prospective wrist-tendon-vibration × cursor-rotation protocol. It uses separate reinduction blocks, body-only localization and tool-specific no-cursor probes, fixed normalization, interaction-robust min/max estimands, a six-part admissibility gate, and disjoint confirm/exclude/unresolved decisions. Read [note](records/R161_Concrete_Intervention_and_Falsification_20261008/Concrete_Body_Tool_Protocol_and_Falsifier_v0_1.md), [proof ledger](records/R161_Concrete_Intervention_and_Falsification_20261008/PROOF_LEDGER.json), [audit](records/R161_Concrete_Intervention_and_Falsification_20261008/MAP_AUDIT.json), [gaps](records/R161_Concrete_Intervention_and_Falsification_20261008/GAP_LEDGER.json), and [handoff](records/R161_Concrete_Intervention_and_Falsification_20261008/CURRENT_HANDOFF.md).
 
 Map R161-v1.0 is **425/204**, new 3/2. A failed delivery, washout or manipulation check is `INVALID_PROTOCOL`, not evidence for neither, no mineness or no experience. Tendon vibration is proprioceptive-sensitive rather than afferent-pure. No participants, ethics approval, raw data, practical sample size, complete neural realization, B_min or F_O witness exist. Next work must justify a practical simultaneous uncertainty/power model using independent data, without dropping gates or importing ownership reports into Y_B/Y_T. Do not repeat R160's classifier enumeration or claim that a protocol decision proves C1.
 
-## R160 current priority — protocol-relative body/tool intervention profile
+## R160 historical priority — protocol-relative body/tool intervention profile
 
 R160 defines independently grounded J_B/J_T perturbations, tool-absent Y_B and tool-specific Y_T readouts, preregistered normalized effects/error bounds and a four-way body/tool dominance classifier that permits overlap. Read [note](records/R160_Body_Tool_Intervention_Profile_20261007/Body_Tool_Intervention_Profile_v0_1.md), [map audit](records/R160_Body_Tool_Intervention_Profile_20261007/MAP_AUDIT.json), [gaps](records/R160_Body_Tool_Intervention_Profile_20261007/GAP_LEDGER.json), and [handoff](records/R160_Body_Tool_Intervention_Profile_20261007/CURRENT_HANDOFF.md).
 
 Map R160-v1.0 is **422/202**, new 4/2. Profile labels remain protocol-relative; finite observations do not identify anatomy or F_O. Each trial has its own complete organization/isomorphism, so no cross-trial C1 conclusion without an added bridge. Next work must make one concrete safe intervention pair and fidelity/error contract testable in advance. Preserve overlap, do not define physical roles by report, and do not add an experience gate or exclusive extra owner.
 
-## R159 current priority — internal body-frame binding, external reference and coupled roles
+## R159 historical priority — internal body-frame binding, external reference and coupled roles
 
 R159 gives a positive conditional application: an actually installed body-frame relation between internal frame r and representation k has its C1 structural counterpart even when separately grounded psi(k)=c refers to an anatomical nonmember. External c is not automatically in D(P), so h(c) cannot be assumed. A selected F_O interpretation remains a fixed independent application bridge. See [English note](records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md), [proof ledger](records/R159_Body_Frame_and_Referent_20261007/PROOF_LEDGER.json), [review](records/R159_Body_Frame_and_Referent_20261007/REVIEW_ZH.md), [audit](records/R159_Body_Frame_and_Referent_20261007/MAP_AUDIT.json), [gaps](records/R159_Body_Frame_and_Referent_20261007/GAP_LEDGER.json), [handoff](records/R159_Body_Frame_and_Referent_20261007/CURRENT_HANDOFF.md).
 
@@ -50,7 +62,7 @@ Map R159-v1.0: **418 nodes / 200 rules**, new 4/1. Every new statement has scope
 
 Next: fix independent physical perturbation/readout criteria distinguishing a body-frame slot from tracked/controlled external-tool content in the declared human domain, allowing cross-modulation and fixed target interpretation. Do not use report to define binding then claim validation. Source retrieval failures and abstract/actual limits are recorded. Direction checks after topic, result and before save PASS. Two-copy save status is established only by the latest receipt; prior material below is historical where superseded.
 
-## R158 current priority — body ownership / action agency split and selector closure repair
+## R158 historical priority — body ownership / action agency split and selector closure repair
 
 R158 separates actual bearer/support, represented candidate, anatomical membership, physical coupling, body-frame binding, installed use, actual efficacy, internal attribution, selected felt target, belief and report. The R157 four-way conjunction remains only an unproved joint functional body-use configuration. Seven scoped ablation cards retain the limits of primary report evidence and toy architectures. See [English note](records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md), [review](records/R158_Body_Ownership_Agency_Ablation_20261007/REVIEW_ZH.md), [audit](records/R158_Body_Ownership_Agency_Ablation_20261007/MAP_AUDIT.json), [gaps](records/R158_Body_Ownership_Agency_Ablation_20261007/GAP_LEDGER.json), [amendments](records/R158_Body_Ownership_Agency_Ablation_20261007/AMENDMENTS.json), [handoff](records/R158_Body_Ownership_Agency_Ablation_20261007/CURRENT_HANDOFF.md).
 
@@ -60,7 +72,7 @@ Map R158-v1.0: **414 nodes / 199 rules**, new 6/2. Historical fields are preserv
 
 Next: fix one actual body-frame remapping domain and compare ownership-oriented binding/use against agency-oriented causal-source judgment/use with independently declared targets, admissible interventions and failure criteria. Do not repeat Bayes, inflate the map or shift to generic control. Three direction checks pass. Latest double-save state requires this round's verified receipt; local files are insufficient. Previous entries remain historical where superseded.
 
-## R157 current priority — structural coordinate transport, semantic mineness bridge open
+## R157 historical priority — structural coordinate transport, semantic mineness bridge open
 
 R157 gives the positive conditional step from actual organization into experience: under tokenwise A:C1, every physically grounded K-definable relation is preserved and reflected by the C1 isomorphism, so its selected tuples form a corresponding experiential substructure. This is standard isomorphism preservation, not new mathematics or empirical validation. See [English note](records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md), [Chinese review](records/R157_Structural_Coordinate_and_Mineness_20261007/REVIEW_ZH.md), [map audit](records/R157_Structural_Coordinate_and_Mineness_20261007/MAP_AUDIT.json), [gaps](records/R157_Structural_Coordinate_and_Mineness_20261007/GAP_LEDGER.json) and [handoff](records/R157_Structural_Coordinate_and_Mineness_20261007/CURRENT_HANDOFF.md).
 
@@ -68,7 +80,7 @@ The map is R157-v1.0: **408 nodes / 197 rules**, new 7/3; inherited 401/194 and 
 
 Next research must perform a minimality/ablation analysis with concrete distortion witnesses, not repeat generic functional insufficiency or assume that more relations solve semantics. No basal gate, biological realization, proof-assistant certification, empirical F_O observation or publication is claimed. The hourly recovery/save protocol remains active; current two-destination success is established only by the latest receipt. Earlier entries below are historical where superseded.
 
-## R156 current priority — bridge comparison and durable hourly continuation
+## R156 historical priority — bridge comparison and durable hourly continuation
 
 The author requests substantive continuation now and hourly thereafter, with an end-of-round formal-map/direction audit and recoverable saves in GitHub plus the ChatGPT workspace. Read [hourly protocol](HOURLY_RESEARCH_PROTOCOL.md). First scheduled continuation: 7 October 2026 19:32:41 Asia/Shanghai. One round is not completion of the ongoing research goal.
 
@@ -78,7 +90,7 @@ Current graph R156-v1.0: 401 nodes / 194 rules, new 2/1; inherited 399/193 and c
 
 Persistent workspace continuation filename: UCT_Hourly_Research_Master_Handoff.md. Latest successful two-destination save is recorded in the current round's DUAL_SAVE_RECEIPT.json when present; local existence alone is insufficient. Follow fresh GitHub state and versioned backup scope after interruptions, preserving concurrency and failed attempts. Earlier entries below are historical where superseded.
 
-## R155 current research — bodily/action attribution formation, 7 October 2026
+## R155 historical research — bodily/action attribution formation, 7 October 2026
 
 The author approved advancing the positive bodily/action-mineness direction. [R155 note](records/R155_Bodily_Attribution_Formation_20261007/Bodily_Action_Attribution_v0_1.md) supplies a fixed finite acquisition mechanism, four local mathematical arguments, installed consumers, error/memory witnesses and all four thought-experiment families. [Chinese review](records/R155_Bodily_Attribution_Formation_20261007/REVIEW_ZH.md), [handoff](records/R155_Bodily_Attribution_Formation_20261007/CURRENT_HANDOFF.md), [gaps](records/R155_Bodily_Attribution_Formation_20261007/GAP_LEDGER.json), [checks](records/R155_Bodily_Attribution_Formation_20261007/VALIDATION.json).
 
@@ -90,7 +102,7 @@ Next substantive work should compare a few candidate selected-mineness bridges o
 
 Earlier records below are historical where superseded.
 
-## R154 current priority — all registered rule arguments reviewed, 7 October 2026
+## R154 historical priority — all registered rule arguments reviewed, 7 October 2026
 
 The author asked to finish the strict formal map and report progress frequently. Current graph is **R154-v1.0: 391 concepts / 188 rules**. R154 supplies individual argument/boundary cards for all **128** rules that still had inherited sketches at R153; the other **60** retain their expanded R153 arguments. All registered rules now have an explicit argument-review route. This is finite-map manual review, **not 188 proved theorems, proof-assistant certification or complete physical/phenomenological validation**.
 
@@ -107,7 +119,7 @@ Next research work should discharge a concrete listed obligation with explicit t
 Prior records below are retained as history.
 
 
-## R153 current priority — strict whole-map formalization, 7 October 2026
+## R153 historical priority — strict whole-map formalization, 7 October 2026
 
 The author now explicitly requires precise concept and inference formalization of the entire existing map, including quantifiers, finite/scope boundaries, holes and repairs. This supersedes older next-step queues. Read the master guide first. Current graph is **R153-v1.0, 391 nodes / 188 rules**; all inherited IDs and conjunctive dependencies remain. Published sources are unchanged.
 
@@ -133,7 +145,7 @@ Self-related feeling and the conceptual I are to be explained within experience 
 
 # Research workspace instructions
 
-## R165 current directive — return from design closure to actual organization
+## R165 historical directive — return from design closure to actual organization
 
 R165-v1.0 is the current formal graph: 446 nodes / 215 rules / 117 context links. It permits only an independently selected frozen finite constant-bet/constant-center menu for R164, makes pilot-to-confirmation residual transport an explicit unvalidated premise, and uses feasible / inconclusive / menu-relative-not-feasible status. Never infer infeasibility from an upper bound above threshold or reuse confirmatory data to choose the plan.
 
@@ -177,7 +189,7 @@ Do not describe the four pinned A/B/C/D sources as the author's total publicatio
 ## R149 nine-source integration and inference repairs
 
 Current formal map is R149-v1.0. TA15–19 core branches are now indexed alongside A/B/C/D with source-specific statuses. Do not promote TA16 RRH-E or TA18 PRD into new basal UCT axioms. In TA18's trajectory argument retain a joint-response/implementation distinction explicitly, and require bridge separation before inferring a phenomenal difference; isomorphism covariance is an additional bridge premise. Distinguish raw label changes from experiential type differences. TA19's recovered published main Markdown ends in §5; its supplement is separately pinned; do not invent proof coverage for missing main sections. Read the R149 audit for current limits. Preserve the actual-bearer / internal-attribution / prediction distinction and the four thought-experiment families.
-## R171 current priority — require actual range grounding and refinement
+## R171 historical priority — require actual range grounding and refinement
 
 Read `records/R171_Universal_Range_Certificates_20261008/CURRENT_HANDOFF.md`, the R171 note, audit, and ledgers before continuing. A direct certificate needs a frozen actual target, total grounded abstraction, universal actual inclusion, and universal actual fiber/route coverage. An inductive certificate is only protocol-relative and additionally needs initial inclusion, specification closure for every admitted input/mode, actual-to-spec forward refinement, and invariant fiber/route coverage. Type preservation, exhaustive abstract enumeration, dense fitting, and nominal safety barriers are not substitutes for those premises.
 

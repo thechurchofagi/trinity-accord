@@ -1,3 +1,11 @@
+# Effective R171 correction layer — REVIEW-20261008-01
+
+The archived raw graph remains R171-v1.0 (497/240/137), SHA256 `8405565f71629bf04cdb25238666060e6bb9aa8cddfb0617187f7ba1bcf9edb5`; the remote corrupted transfer has been restored to those exact bytes. This layer adds no numbered research round or new theorem nodes. Read [review response](records/R171_Universal_Range_Certificates_20261008/REVIEW_RESPONSE_20261008_01.md) and [effective amendments](records/R171_Universal_Range_Certificates_20261008/REVIEW_AMENDMENTS.json) before using the affected nodes/rules.
+
+Effective R171-C requires both indistinguishable completions to belong to a stated admissible H; a proper F alone cannot supply that premise. The four-domain and triage synthesis edges refer to conditional-schema availability. The target-level application edge is suspended in favor of two explicit AND-premise routes, with OR between the direct and reachable routes. Seven status labels are retained. The original 23 structural checks do not validate these semantic distinctions or physical premises. Focused regressions are recorded in REVIEW_CORRECTION_CHECKS.json; the reviewer must assess the correction independently. The preserved historical audits below are not current universal proof claims.
+
+---
+
 ## R170 audit — open-world honesty without amplitude, measure or semantic promotion
 
 R170 passes the selection, result and pre-save direction checks. The graph has 487 nodes, 234 rules and 133 context links; the inherited R169 node/rule/context prefixes reconstruct exactly. The covered/remainder partition requires target and cell contracts together. The sharp pointwise envelope requires the bounded effect, R169 route envelope and explicit partition. Mean and exceedance rules additionally require the fixed target/measure contract. The final application requires every amplitude, mean, mass, status and R169 boundary premise simultaneously.

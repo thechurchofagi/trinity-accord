@@ -1,0 +1,83 @@
+{
+  "schema": "UCT_EFFECTIVE_REVIEW_AMENDMENT/v1",
+  "id": "R171-QC-A1-A3",
+  "status": "RESEARCHER_CORRECTIONS_SUBMITTED_FOR_REVIEW",
+  "precedence": "Apply this explicit semantic amendment before using the affected archived R171 claims/nodes/rules. Raw v1.0 traversal alone is not an effective proof engine.",
+  "provenance": {
+    "frozen_note": "Universal_Target_Range_Certificates_v0_1.md",
+    "note_sha256": "f660d03d7269ba95c458427bf2c20e9a01a6ac994efe2da39750baa9999536e8",
+    "archived_graph_revision": "R171-v1.0",
+    "graph_sha256": "8405565f71629bf04cdb25238666060e6bb9aa8cddfb0617187f7ba1bcf9edb5",
+    "original_proof_ledger_unchanged": true,
+    "original_map_extension_unchanged": true
+  },
+  "A1": {
+    "review_id": "QC-20261008-03",
+    "claim": "R171-C",
+    "node": "R171:FITTED_COVER_NONENTAILMENT",
+    "rule": "r171_fitted_cover_nonentailment",
+    "effective_statement": "For a fixed target T, proper observed subset F, admissible-world class H and observation map O_F, if H contains h_plus and h_minus with equal O_F, full coverage in h_plus and at least one uncovered z_star in T minus F in h_minus, the common observations do not entail universal coverage over H. Unrestricted sample-only Boolean completions supply such a pair; a proper F alone does not guarantee it in a structurally restricted H.",
+    "all_of": [
+      "fixed T and proper observed F",
+      "fixed admissible-world class H and observation map O_F",
+      "h_plus and h_minus both admitted in H",
+      "O_F(h_plus) equals O_F(h_minus)",
+      "coverage holds at every target in h_plus",
+      "coverage fails at some z_star in T minus F in h_minus"
+    ],
+    "quantifiers": "For every fixed T/F/H/O_F and every admissible pair satisfying all simultaneous premises.",
+    "proof": "The same observation has one admissible universally covered completion and one admissible noncovered completion; hence observation does not entail universal coverage.",
+    "counterexample_to_overbroad_original": "In H containing only constant Boolean coverage functions, any nonempty observed true F forces full coverage.",
+    "physical_scope": "No hidden alteration is claimed physically realizable unless the independently specified H admits it."
+  },
+  "A2": {
+    "review_id": "QC-20261008-04",
+    "types": {
+      "schema_available(route)": "Availability of a valid conditional theorem schema; not truth of its antecedent for any target.",
+      "holds(route,target)": "Every premise of the selected certificate is discharged for one named actual target/time/signature/realization.",
+      "not_discharged": "Evidence does not establish an instance predicate; not a proof that the certificate is impossible."
+    },
+    "schema_only_rules": ["r171_four_domain_application", "r171_range_certificate_triage"],
+    "schema_only_nodes": ["R171:FOUR_DOMAIN_APPLICATION_BOUNDARY", "R171:RANGE_CERTIFICATE_TRIAGE"],
+    "schema_only_interpretation": "The synthesis all_of clauses combine available conditional schemas and scope/countermodel information. They do not require holds(D,t) and holds(I,t) together and cannot certify an actual target.",
+    "suspended_target_rule": "r171_range_application_boundary",
+    "effective_instance_routes": [
+      {
+        "id": "r171_range_application_boundary_direct_effective",
+        "type": "conditional instantiated rule",
+        "all_of": ["R170_application_holds", "common_target_binding", "D_discharged", "domain_scope_accepted", "valid", "not_refuted"],
+        "conclusion_node": "R171:R170_RANGE_APPLICATION_BOUNDARY",
+        "conclusion": "U is empty only for this declared direct target; retain complete-organization/C1/B_min boundaries."
+      },
+      {
+        "id": "r171_range_application_boundary_reachable_effective",
+        "type": "conditional instantiated rule",
+        "all_of": ["R170_application_holds", "common_target_binding", "I_discharged", "domain_scope_accepted", "valid", "not_refuted"],
+        "conclusion_node": "R171:R170_RANGE_APPLICATION_BOUNDARY",
+        "conclusion": "U is empty only for this declared protocol-reachable target; retain complete-organization/C1/B_min boundaries."
+      }
+    ],
+    "route_connective": "OR between effective routes; AND within each all_of route",
+    "target_binding": "One common actual R166-R171 bearer/time/signature/realization, target, cell family, consumer and validity event; no cross-target mixing.",
+    "status_priority": [
+      {"all_of": ["invalid"], "status": "INVALID_RANGE_PROTOCOL"},
+      {"all_of": ["valid", "refuted"], "status": "RANGE_CERTIFICATE_REFUTED"},
+      {"all_of": ["valid", "not_refuted", "D_discharged"], "status": "UNIVERSAL_RANGE_CERTIFIED_DIRECT"},
+      {"all_of": ["valid", "not_refuted", "I_discharged"], "status": "UNIVERSAL_RANGE_CERTIFIED_REACHABLE"},
+      {"all_of": ["valid", "not_refuted", "neither_route_discharged", "specification_evidence"], "status": "SPECIFICATION_ONLY"},
+      {"all_of": ["valid", "not_refuted", "neither_route_discharged", "no_specification_evidence", "empirical_evidence"], "status": "EMPIRICAL_COVER_ONLY"},
+      {"all_of": ["valid", "not_refuted", "neither_route_discharged", "no_specification_evidence", "no_empirical_evidence"], "status": "UNRESOLVED"}
+    ]
+  },
+  "A3": {
+    "review_id": "QC-20261008-05",
+    "source_locator": "Frozen note section 7, phrase Use six states",
+    "effective_wording": "Use seven states, including the UNRESOLVED fallback.",
+    "states": ["INVALID_RANGE_PROTOCOL", "RANGE_CERTIFICATE_REFUTED", "UNIVERSAL_RANGE_CERTIFIED_DIRECT", "UNIVERSAL_RANGE_CERTIFIED_REACHABLE", "SPECIFICATION_ONLY", "EMPIRICAL_COVER_ONLY", "UNRESOLVED"]
+  },
+  "limits": [
+    "No new global proof, real-system instantiation, or new numbered research round.",
+    "No automatic physical grounding from an abstract countermodel.",
+    "No range-certificate-to-complete-organization, C1, B_min, basal experience or unique-owner inference."
+  ]
+}

@@ -1,3 +1,11 @@
+# Effective R171 correction layer — REVIEW-20261008-01
+
+The archived raw graph remains R171-v1.0 (497/240/137), SHA256 `8405565f71629bf04cdb25238666060e6bb9aa8cddfb0617187f7ba1bcf9edb5`; the remote corrupted transfer has been restored to those exact bytes. This layer adds no numbered research round or new theorem nodes. Read [review response](records/R171_Universal_Range_Certificates_20261008/REVIEW_RESPONSE_20261008_01.md) and [effective amendments](records/R171_Universal_Range_Certificates_20261008/REVIEW_AMENDMENTS.json) before using the affected nodes/rules.
+
+Effective R171-C requires both indistinguishable completions to belong to a stated admissible H; a proper F alone cannot supply that premise. The four-domain and triage synthesis edges refer to conditional-schema availability. The target-level application edge is suspended in favor of two explicit AND-premise routes, with OR between the direct and reachable routes. Seven status labels are retained. The original 23 structural checks do not validate these semantic distinctions or physical premises. Focused regressions are recorded in REVIEW_CORRECTION_CHECKS.json; the reviewer must assess the correction independently. The preserved historical audits below are not current universal proof claims.
+
+---
+
 ## R170 extension — explicit open-world remainder and conclusion-strength separation
 
 R170-v1.0 has **487 nodes / 234 rules / 133 context links**. Ten nodes, seven explicit `all_of` rules and four non-deductive context links extend the exact R169 prefixes. The target-domain contract freezes physically admissible contexts, admission identity and an optional target measure. Certified cells require universal physical ranges and actual anchor/route or structural-channel radii. Their union is `C`; every other target context stays in `U=T\\C`.
