@@ -1,0 +1,39 @@
+{
+  "doi": "10.5281/zenodo.23241205",
+  "files": [
+    {
+      "bytes": 50855,
+      "name": "MGTD_Method_Paper_v1.0.0.md",
+      "sha256": "cc57e4c750db767b7320b5c2f3f76dd98d7ab4b01db1d69557c2e2c33de53f47"
+    },
+    {
+      "bytes": 138256,
+      "name": "MGTD_Method_Paper_v1.0.0.pdf",
+      "sha256": "ba85c0ff9f2bf4be9e0a29c051c2ad83d1eb72b57e0ca2ba827bd17c28dcc310"
+    },
+    {
+      "bytes": 871653,
+      "name": "MGTD_Method_Paper_v1.0.0_Complete_Package.zip",
+      "sha256": "83f1df8fb4fb63a799152a5ef9dcd3e1c8817b82b72fba61ee9f4f12d4500e2a"
+    },
+    {
+      "bytes": 743,
+      "name": "README-LICENSE.txt",
+      "sha256": "1b1c54dc031e81a1c7f70722c47e3ea6b0b2f819afec75002be54aec9e0a6aaa"
+    },
+    {
+      "bytes": 332,
+      "name": "citation.bib",
+      "sha256": "0acb427ea684b33de918a392e6f3367999d3bbe38e69ad3dfbbf6afd3d63276d"
+    }
+  ],
+  "peer_reviewed": false,
+  "public_file_readback_pass": true,
+  "publication_type": "preprint",
+  "record_id": 23241205,
+  "report_number": "METHOD20261008",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "submitted": true,
+  "title": "Map-Guided Theory Development: A Versioned Protocol for Thought Experiments, Semantic Audits, and Human-AI Research",
+  "version": "1.0.0"
+}
