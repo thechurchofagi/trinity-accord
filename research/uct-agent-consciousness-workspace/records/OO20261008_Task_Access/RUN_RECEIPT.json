@@ -1,0 +1,39 @@
+{
+  "record":"OO20261008",
+  "date":"2026-10-08",
+  "status":"ACTUALLY_EXECUTED_EXACT_FINITE_CHECKS",
+  "local_directory":"UCT_Operative_Organization_20261008",
+  "expanded_programs":["check_access.py","check_generalization.py","build_map.py"],
+  "compact_program":"check_core.py",
+  "compact_program_git_blob_expected":"90caaebac08dc15cbd7352dfc4d081bb63a5ab7a",
+  "results":{
+    "linear_matrix_cases":5054,
+    "all_four_input_single_bit_encoders":65536,
+    "single_bit_uniform_parity_optimum":"5/8",
+    "maximizing_encoders":896,
+    "profiles_item":{"coordinate_queries":"3/4","cross_pair_queries":"1/2","uniform_all_queries":"3/5"},
+    "profiles_relation":{"coordinate_queries":"1/2","cross_pair_queries":"1","uniform_all_queries":"3/5"},
+    "rational_noise_cases":300,
+    "epsilon_one_tenth_x1_accuracies":["9/10","41/50"],
+    "even_family_dimensions":[2,4,6,8,10,12],
+    "binary_four_dimensional_subspaces":67,
+    "subspace_dominance_comparisons":4489,
+    "additional_query_return_cases":4284,
+    "local_pending_module_nodes":24,
+    "local_pending_module_rules":12
+  },
+  "historical_regression":"Copied prior IE verifier rerun passed; inherited result, not a new discovery.",
+  "core_program_executed":true,
+  "core_program_outcome":"PASS",
+  "proof_boundary":"Finite checks corroborate the displayed analytic proofs; they are not universal proof by enumeration or any experiment measuring experience.",
+  "remote_objects_created":{
+    "RESEARCH_CHECKPOINT.md":"0daf0a8ed27b05ec6187d90624dcbbf32dade1b5",
+    "check_core.py":"6548625ddbe2e1eda346c98ee8f1829578f065db",
+    "MAP_EXTENSION.json":"90321480d50423befb8d822c01dde9665c72eb21",
+    "AUDIT_COVERAGE.json":"4274f4a21887e62bac1b2f051f5c8032648cdeaa"
+  },
+  "preservation_boundary":"Remote compact proofs, core code, pending module and audit are self-contained. Expanded local package contains additional outputs and long-form arguments and is not claimed to be the same remote bytes. No Library update or complete repository backup is claimed.",
+  "full_canonical_audit":"AUDIT_INCOMPLETE",
+  "map_promotion":false,
+  "new_publication":false
+}
