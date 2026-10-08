@@ -1,0 +1,47 @@
+{
+  "round": "R180",
+  "research_core_commit": "379f5b2e488094cc62175966f60afbc852a5339d",
+  "base_commit": "b53f1d41cb7d6586d004c1a7c7687a79cf5e7657",
+  "github_core_byte_verification": "22/22 files equal local bytes and manifest hashes",
+  "canonical_graph_changed": false,
+  "master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_000000008d9881f5b5924bd7f1256509",
+    "version": 37,
+    "bytes": 537555,
+    "sha256_of_uploaded_local_bytes": "b5822947af2082c184714c565e1980266229482f2af2035d3268d80b81859149",
+    "save_status": "succeeded; metadata identity/version/size confirmed; local metadata applied"
+  },
+  "increment": {
+    "library_file_id": "libfile_2bfd201a6f808191a7504196e7faf00c",
+    "file_id": "file_00000000fac481f8bc22ed9c8c395c1a",
+    "version": 0,
+    "name": "UCT_R180_Increment_20261008.zip",
+    "bytes": 285669,
+    "sha256_of_uploaded_local_bytes": "0da1c379296c2c8c95994c2aa9ce24a6276af86141ffa8a6db596876bbed35f8",
+    "scope": "22 changed/new files relative to base; not complete repository/history",
+    "save_status": "succeeded; metadata identity/size confirmed; local metadata applied"
+  },
+  "additional_readback": {
+    "status": "NOT_COMPLETED",
+    "error": "Download helper HTTP403; not an upload failure. No claim of remote package SHA256 verification.",
+    "next_action": "First restore increment and same-ID master through current supported materialization, verify bytes/hash against this receipt; preserve version37 or later concurrent changes. Do not reupload blindly."
+  },
+  "completed": [
+    "English note v0.2",
+    "preserved failed v0.1",
+    "216 toy rows and16 checks",
+    "source/claim/gap/map/review records",
+    "source-role distinction and clamped/free counterexample",
+    "GitHub core byte check",
+    "same-ID master replacement and increment upload"
+  ],
+  "not_completed": [
+    "named phenomenal bridge",
+    "actual human/LLM grounded P/I/K",
+    "paired free-generation/attribution empirical test",
+    "raw-data reanalysis",
+    "publication",
+    "additional persistent-download byte verification"
+  ]
+}
