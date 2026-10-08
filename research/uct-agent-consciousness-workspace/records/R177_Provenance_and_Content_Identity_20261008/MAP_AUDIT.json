@@ -1,0 +1,29 @@
+{
+  "checks": {
+    "parent_nodes_unchanged": true,
+    "parent_rules_unchanged": true,
+    "context_unchanged": true,
+    "unique_ids": true,
+    "finite_model_pass": true,
+    "rule_endpoints_resolve": true
+  },
+  "passed": true,
+  "counts": [
+    584,
+    284,
+    178
+  ],
+  "graph_sha256": "f1b3d5acceeb10f249f0964c970350e4ede24e2b96daee24601e13ff3e4cc5d8",
+  "manual_audit": {
+    "concepts": "New four nodes specify source occurrences, selected use, code and feature types; Q is not assigned. Historical nodes not freshly re-proved.",
+    "quantifiers": "Every c only on admitted finite C; legal retimings only under fixed stateless operations. Binary independence is constructed, not transferred to biological self-targets.",
+    "all_of": "Compensation is installed, not just mathematically available; each application shares bindings. Alternative circuits are not conjunctions of incompatible actual states.",
+    "joint_satisfiability": "24 executed alternatives with causal schedules; no fixed-complete-organization/different-qualia pair asserted.",
+    "unconnected_targets": "No edge to F_O/F_A/F_F, conceptual I or report; same Match does not establish felt familiarity.",
+    "actuality": "Stipulated execution in toy model distinguished from actual human realization; C1 attachment reuses R157 conditionally.",
+    "inference_direction": "Organizational/functional preservation only; no behavioral correctness implies experience identity.",
+    "failure": "Uncompensated/noninjective transfer and time-dependent decoder counterexamples retained.",
+    "purpose": "Bounded identity repair supports action-prediction/feedback comparison; return to bodily mineness target next."
+  },
+  "limitations": "No proof assistant certification, fresh global semantic proof, actual complete instance, or independent review."
+}

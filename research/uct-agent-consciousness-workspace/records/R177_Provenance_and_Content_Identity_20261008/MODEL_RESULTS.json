@@ -1,0 +1,549 @@
+{
+  "status": "FINITE_MODEL_CHECKS_ONLY",
+  "checks": {
+    "24_explicit_executions": true,
+    "all_inputs_compensated_decode": true,
+    "uncompensated_same_source_changed_feature": true,
+    "source_cross_feature": true,
+    "distinct_sources_equal_features": true,
+    "retiming_preserves_selected_binding": true,
+    "retiming_reverses_use_order": true,
+    "compensated_preserves_match": true,
+    "uncompensated_reverses_match": true,
+    "three_code_all_permutations": true,
+    "noninjective_failure": true,
+    "stateful_timing_boundary": true
+  },
+  "passed": true,
+  "cases": [
+    {
+      "source_features": [
+        0,
+        0
+      ],
+      "mode": "identity",
+      "schedule": "baseline",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 0,
+        "C": 0
+      },
+      "decoded": {
+        "B": 0,
+        "C": 0
+      },
+      "match": true,
+      "B_used_before_C": true
+    },
+    {
+      "source_features": [
+        0,
+        0
+      ],
+      "mode": "identity",
+      "schedule": "delayed",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 0,
+        "C": 0
+      },
+      "decoded": {
+        "B": 0,
+        "C": 0
+      },
+      "match": true,
+      "B_used_before_C": false
+    },
+    {
+      "source_features": [
+        0,
+        0
+      ],
+      "mode": "compensated",
+      "schedule": "baseline",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 1,
+        "C": 0
+      },
+      "decoded": {
+        "B": 0,
+        "C": 0
+      },
+      "match": true,
+      "B_used_before_C": true
+    },
+    {
+      "source_features": [
+        0,
+        0
+      ],
+      "mode": "compensated",
+      "schedule": "delayed",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 1,
+        "C": 0
+      },
+      "decoded": {
+        "B": 0,
+        "C": 0
+      },
+      "match": true,
+      "B_used_before_C": false
+    },
+    {
+      "source_features": [
+        0,
+        0
+      ],
+      "mode": "uncompensated",
+      "schedule": "baseline",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 1,
+        "C": 0
+      },
+      "decoded": {
+        "B": 1,
+        "C": 0
+      },
+      "match": false,
+      "B_used_before_C": true
+    },
+    {
+      "source_features": [
+        0,
+        0
+      ],
+      "mode": "uncompensated",
+      "schedule": "delayed",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 1,
+        "C": 0
+      },
+      "decoded": {
+        "B": 1,
+        "C": 0
+      },
+      "match": false,
+      "B_used_before_C": false
+    },
+    {
+      "source_features": [
+        0,
+        1
+      ],
+      "mode": "identity",
+      "schedule": "baseline",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 0,
+        "C": 1
+      },
+      "decoded": {
+        "B": 0,
+        "C": 1
+      },
+      "match": false,
+      "B_used_before_C": true
+    },
+    {
+      "source_features": [
+        0,
+        1
+      ],
+      "mode": "identity",
+      "schedule": "delayed",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 0,
+        "C": 1
+      },
+      "decoded": {
+        "B": 0,
+        "C": 1
+      },
+      "match": false,
+      "B_used_before_C": false
+    },
+    {
+      "source_features": [
+        0,
+        1
+      ],
+      "mode": "compensated",
+      "schedule": "baseline",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 1,
+        "C": 1
+      },
+      "decoded": {
+        "B": 0,
+        "C": 1
+      },
+      "match": false,
+      "B_used_before_C": true
+    },
+    {
+      "source_features": [
+        0,
+        1
+      ],
+      "mode": "compensated",
+      "schedule": "delayed",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 1,
+        "C": 1
+      },
+      "decoded": {
+        "B": 0,
+        "C": 1
+      },
+      "match": false,
+      "B_used_before_C": false
+    },
+    {
+      "source_features": [
+        0,
+        1
+      ],
+      "mode": "uncompensated",
+      "schedule": "baseline",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 1,
+        "C": 1
+      },
+      "decoded": {
+        "B": 1,
+        "C": 1
+      },
+      "match": true,
+      "B_used_before_C": true
+    },
+    {
+      "source_features": [
+        0,
+        1
+      ],
+      "mode": "uncompensated",
+      "schedule": "delayed",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 1,
+        "C": 1
+      },
+      "decoded": {
+        "B": 1,
+        "C": 1
+      },
+      "match": true,
+      "B_used_before_C": false
+    },
+    {
+      "source_features": [
+        1,
+        0
+      ],
+      "mode": "identity",
+      "schedule": "baseline",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 1,
+        "C": 0
+      },
+      "decoded": {
+        "B": 1,
+        "C": 0
+      },
+      "match": false,
+      "B_used_before_C": true
+    },
+    {
+      "source_features": [
+        1,
+        0
+      ],
+      "mode": "identity",
+      "schedule": "delayed",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 1,
+        "C": 0
+      },
+      "decoded": {
+        "B": 1,
+        "C": 0
+      },
+      "match": false,
+      "B_used_before_C": false
+    },
+    {
+      "source_features": [
+        1,
+        0
+      ],
+      "mode": "compensated",
+      "schedule": "baseline",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 0,
+        "C": 0
+      },
+      "decoded": {
+        "B": 1,
+        "C": 0
+      },
+      "match": false,
+      "B_used_before_C": true
+    },
+    {
+      "source_features": [
+        1,
+        0
+      ],
+      "mode": "compensated",
+      "schedule": "delayed",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 0,
+        "C": 0
+      },
+      "decoded": {
+        "B": 1,
+        "C": 0
+      },
+      "match": false,
+      "B_used_before_C": false
+    },
+    {
+      "source_features": [
+        1,
+        0
+      ],
+      "mode": "uncompensated",
+      "schedule": "baseline",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 0,
+        "C": 0
+      },
+      "decoded": {
+        "B": 0,
+        "C": 0
+      },
+      "match": true,
+      "B_used_before_C": true
+    },
+    {
+      "source_features": [
+        1,
+        0
+      ],
+      "mode": "uncompensated",
+      "schedule": "delayed",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 0,
+        "C": 0
+      },
+      "decoded": {
+        "B": 0,
+        "C": 0
+      },
+      "match": true,
+      "B_used_before_C": false
+    },
+    {
+      "source_features": [
+        1,
+        1
+      ],
+      "mode": "identity",
+      "schedule": "baseline",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 1,
+        "C": 1
+      },
+      "decoded": {
+        "B": 1,
+        "C": 1
+      },
+      "match": true,
+      "B_used_before_C": true
+    },
+    {
+      "source_features": [
+        1,
+        1
+      ],
+      "mode": "identity",
+      "schedule": "delayed",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 1,
+        "C": 1
+      },
+      "decoded": {
+        "B": 1,
+        "C": 1
+      },
+      "match": true,
+      "B_used_before_C": false
+    },
+    {
+      "source_features": [
+        1,
+        1
+      ],
+      "mode": "compensated",
+      "schedule": "baseline",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 0,
+        "C": 1
+      },
+      "decoded": {
+        "B": 1,
+        "C": 1
+      },
+      "match": true,
+      "B_used_before_C": true
+    },
+    {
+      "source_features": [
+        1,
+        1
+      ],
+      "mode": "compensated",
+      "schedule": "delayed",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 0,
+        "C": 1
+      },
+      "decoded": {
+        "B": 1,
+        "C": 1
+      },
+      "match": true,
+      "B_used_before_C": false
+    },
+    {
+      "source_features": [
+        1,
+        1
+      ],
+      "mode": "uncompensated",
+      "schedule": "baseline",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 0,
+        "C": 1
+      },
+      "decoded": {
+        "B": 0,
+        "C": 1
+      },
+      "match": false,
+      "B_used_before_C": true
+    },
+    {
+      "source_features": [
+        1,
+        1
+      ],
+      "mode": "uncompensated",
+      "schedule": "delayed",
+      "provenance": {
+        "B": "B",
+        "C": "C"
+      },
+      "payload": {
+        "B": 0,
+        "C": 1
+      },
+      "decoded": {
+        "B": 0,
+        "C": 1
+      },
+      "match": false,
+      "B_used_before_C": false
+    }
+  ],
+  "scope": "Causal event schedules and executed interpretation equations; no actual neural or phenomenal observations."
+}

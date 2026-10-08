@@ -1,0 +1,118 @@
+{
+  "nodes": [
+    {
+      "id": "R177:EXECUTED_FEATURE_DOMAIN",
+      "kind": "FINITE_MODEL_CONTRACT",
+      "statement": "Fix finite C,Z,Zprime, encoder e:C->Z, executed decoder d:Z->C with d(e(c))=c for every admitted c, bijection g:Z->Zprime and installed dprime=d composed with inverse(g). Source and selected-use occurrences are independently bound; feature output is a physical task variable, not an experiential label.",
+      "domain": "Stateless finite interpreted transducers on declared source/use roles; source paths, values, operations and time-independent decoding fixed per instance.",
+      "premises": [
+        "Finite typed carriers",
+        "Universal left-inverse condition on admitted C",
+        "Bijective g",
+        "Actual dprime execution stipulated in model, not analyst relabeling"
+      ],
+      "proof": "Declared construction §3; not a realized biological mechanism.",
+      "status": "DECLARED_MODEL",
+      "source": "records/R177_Provenance_and_Content_Identity_20261008/Provenance_Feature_and_Experiential_Identity_v0_1.md",
+      "source_sha256": "8ff003ae128eac001ec8eeba9e65e88c368bbdefb05f905c84a4ba711b004605",
+      "quantifiers": "Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim.",
+      "limits": "No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict.",
+      "thought_experiment_role": "Tests same-source/different-feature, different-source/same-feature, faithful recoding and delayed use; §8 connects four inherited families."
+    },
+    {
+      "id": "R177:COMPENSATED_FEATURE_PRESERVATION",
+      "kind": "CONDITIONAL_ELEMENTARY_THEOREM",
+      "statement": "For every admitted c, dprime(g(e(c)))=c. Without installed compensation, bit inversion with the fixed identity decoder changes c; noninjective transmission need not admit any decoder recovering all c.",
+      "domain": "Exactly EXECUTED_FEATURE_DOMAIN; binary omitted-premise counterexample and noninjective alternative are separate models.",
+      "premises": [
+        "R177:EXECUTED_FEATURE_DOMAIN"
+      ],
+      "proof": "Function composition and the left-inverse equation; §4 P1.",
+      "status": "MANUAL_PROOF_AND_EXACT_FINITE_CHECK",
+      "source": "records/R177_Provenance_and_Content_Identity_20261008/Provenance_Feature_and_Experiential_Identity_v0_1.md",
+      "source_sha256": "8ff003ae128eac001ec8eeba9e65e88c368bbdefb05f905c84a4ba711b004605",
+      "quantifiers": "Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim.",
+      "limits": "No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict.",
+      "thought_experiment_role": "Tests same-source/different-feature, different-source/same-feature, faithful recoding and delayed use; §8 connects four inherited families."
+    },
+    {
+      "id": "R177:JOINT_SOURCE_FEATURE_DOMAIN",
+      "kind": "APPLICATION_AND_COMPARISON_CONTRACT",
+      "statement": "In the IA singleton-source trace convention, bind one selected use per nominated source per episode and J(u)=(s(u),c(u)). Freeze source values and stateless encoder/transmission/decoder operations under legal retiming. For recoding comparisons admit the finite feature contract and the same source/use role mapping.",
+      "domain": "Declared abstract trace/transducer comparisons. Multiple-source use or repeated descendants require refined binding; no phenomenal identity supplied.",
+      "premises": [
+        "IA trace domain interpreted on the same source/use binding",
+        "Singleton source for each nominated use",
+        "One nominated use per source",
+        "Executed time-independent feature operations",
+        "Fixed source-state and role correspondence"
+      ],
+      "proof": "Explicit product of provenance and decoded feature definitions; §2–4.",
+      "status": "DECLARED_COMPARISON_DOMAIN",
+      "source": "records/R177_Provenance_and_Content_Identity_20261008/Provenance_Feature_and_Experiential_Identity_v0_1.md",
+      "source_sha256": "8ff003ae128eac001ec8eeba9e65e88c368bbdefb05f905c84a4ba711b004605",
+      "quantifiers": "Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim.",
+      "limits": "No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict.",
+      "thought_experiment_role": "Tests same-source/different-feature, different-source/same-feature, faithful recoding and delayed use; §8 connects four inherited families."
+    },
+    {
+      "id": "R177:SOURCE_FEATURE_SEPARATION",
+      "kind": "CONDITIONAL_CONSTRUCTION_AND_BOUNDARY",
+      "statement": "On JOINT_SOURCE_FEATURE_DOMAIN legal retiming preserves J while incomparable use order may reverse; compensated recoding preserves J; uncorrected bit inversion preserves s but changes c and J. Distinct sources may have equal c. This fixes only a selected functional identity and entails no named-quality or felt-mineness identity.",
+      "domain": "All legal retimings satisfying the fixed stateless contract; recoding clause under P1; counterexamples in explicit four-case binary domain, not universal biological independence.",
+      "premises": [
+        "R177:JOINT_SOURCE_FEATURE_DOMAIN",
+        "IA20261008:TRACE_IDENTITY_INVARIANT",
+        "R177:COMPENSATED_FEATURE_PRESERVATION"
+      ],
+      "proof": "IA reachability invariance plus time-free executed interpretation; P1; explicit cross-source and inversion witnesses §3–4.",
+      "status": "MANUAL_ARGUMENT_AND_EXACT_WITNESSES",
+      "source": "records/R177_Provenance_and_Content_Identity_20261008/Provenance_Feature_and_Experiential_Identity_v0_1.md",
+      "source_sha256": "8ff003ae128eac001ec8eeba9e65e88c368bbdefb05f905c84a4ba711b004605",
+      "quantifiers": "Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim.",
+      "limits": "No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict.",
+      "thought_experiment_role": "Tests same-source/different-feature, different-source/same-feature, faithful recoding and delayed use; §8 connects four inherited families."
+    }
+  ],
+  "rules": [
+    {
+      "id": "r177_compensated_feature",
+      "all_of": [
+        "R177:EXECUTED_FEATURE_DOMAIN"
+      ],
+      "conclusion": "R177:COMPENSATED_FEATURE_PRESERVATION",
+      "proof": "d(g^-1(g(e(c))))=d(e(c))=c; no neuronal or phenomenological premise.",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "source": "records/R177_Provenance_and_Content_Identity_20261008/Provenance_Feature_and_Experiential_Identity_v0_1.md",
+      "source_sha256": "8ff003ae128eac001ec8eeba9e65e88c368bbdefb05f905c84a4ba711b004605",
+      "statement": "d(g^-1(g(e(c))))=d(e(c))=c; no neuronal or phenomenological premise.",
+      "formal_contract_R177": {
+        "connective": "AND",
+        "bindings": "Same finite domain, admitted values, source/use roles, stateless maps and role correspondence; actual applications need independent grounding.",
+        "phenomenal_target": "No rule concludes a Q/F_O/F_A/F_F value.",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r177_joint_binding",
+      "all_of": [
+        "R177:JOINT_SOURCE_FEATURE_DOMAIN",
+        "IA20261008:TRACE_IDENTITY_INVARIANT",
+        "R177:COMPENSATED_FEATURE_PRESERVATION"
+      ],
+      "conclusion": "R177:SOURCE_FEATURE_SEPARATION",
+      "proof": "All operations share one source/use/feature signature; alternative circuits are compared rather than jointly installed; provenance invariance and P1 preserve each component.",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "source": "records/R177_Provenance_and_Content_Identity_20261008/Provenance_Feature_and_Experiential_Identity_v0_1.md",
+      "source_sha256": "8ff003ae128eac001ec8eeba9e65e88c368bbdefb05f905c84a4ba711b004605",
+      "statement": "All operations share one source/use/feature signature; alternative circuits are compared rather than jointly installed; provenance invariance and P1 preserve each component.",
+      "formal_contract_R177": {
+        "connective": "AND",
+        "bindings": "Same finite domain, admitted values, source/use roles, stateless maps and role correspondence; actual applications need independent grounding.",
+        "phenomenal_target": "No rule concludes a Q/F_O/F_A/F_F value.",
+        "machine_proof": false
+      }
+    }
+  ],
+  "context_links": []
+}

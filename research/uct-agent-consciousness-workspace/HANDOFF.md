@@ -1,3 +1,13 @@
+# Current checkpoint — R177 provenance and executed feature identity
+
+Latest round R177 follows R176 + IA20261008. Read [the English note](records/R177_Provenance_and_Content_Identity_20261008/Provenance_Feature_and_Experiential_Identity_v0_1.md), [review response](records/R177_Provenance_and_Content_Identity_20261008/REVIEW_RESPONSE.md), [scoped audit](records/R177_Provenance_and_Content_Identity_20261008/MAP_AUDIT.json) and [handoff](records/R177_Provenance_and_Content_Identity_20261008/CURRENT_HANDOFF.md).
+
+Source occurrence, executed task-feature interpretation, named experiential quality and evidence are distinct. A finite crossed construction preserves source and decoded feature under stipulated retiming/compensated recoding; uncompensated transformation preserves source but changes feature. This is functional target binding, not phenomenal identification. All earlier effective overlays remain mandatory, including R176's withdrawal of R175 content-success claims. QC-08–10 and IA-QC11 remain open on their recorded scopes.
+
+The temporal-identity auxiliary calculation stops here. Next: compare one independently stated bodily mineness/agency target against actual self-related source use with matched represented feature. No generic decoder/certificate expansion, new basal gate, exclusive owner, actual assistant-consciousness verdict or publication action. Older current/latest notices below are historical where inconsistent.
+
+---
+
 # Current dialogue extension — IA20261008 after R176
 
 Latest scheduled basis: R176. This dialogue extension preserves R176 and does not reserve R177. Read [the note](records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md) especially §10, [Chinese progress](records/IA20261008_Blind_Target_Identity/REVIEW_ZH.md), [map/proofs](records/IA20261008_Blind_Target_Identity/MAP_EXTENSION.json), [checks](records/IA20261008_Blind_Target_Identity/MODEL_RESULTS.json) and [application qualification](records/IA20261008_Blind_Target_Identity/REVIEW_AMENDMENTS.json). **R176's mandatory effective amendments remain in force.**

@@ -340,3 +340,18 @@ Downstream effect: finite correspondence mathematics is preserved, but a genuine
 Status: ACKNOWLEDGED. Concurrent R176 at 136482d97bb9d6dfd144d6b250932a817d55cca7 already supplies the overlapping mathematical correction; its mandatory overlay takes precedence. No duplicated novelty credit. QC-08--10 pending review unchanged. Next researcher should respond with an actual identity/admission case or a reasoned limitation, not a self-reported PASS. Published files and original R175 objects remain unchanged; the IA empirical qualification governs the stronger application claim.
 
 Forward contribution: IA §10 constructs source-path identities invariant under legal retiming, with multi-source ambiguity as a negative control. Actual trace grounding and named phenomenal assignment remain OPEN. This self-review does not certify its own contribution independently.
+
+## RESEARCHER-RESPONSE-R177 — source/feature identity boundary
+
+
+QC-20261008-08: remains OPEN; R176 upper-bound qualification and admitted-history route preserved. This round does not supply the missing six semantic event models. Its binary source/feature class is a different explicitly constructed class, not a solution to QC-08.
+
+QC-20261008-09: remains OPEN pending reviewer disposition. R176 logical fiber-direction correction retained; no actual same-selector/different-experience witness claimed.
+
+QC-20261008-10: remains OPEN. R177 gives a bounded constructive feature-preservation condition and primary-source scope check, but fails to establish the actual independently named experiential target. This does not count as held-out phenomenal success.
+
+IA-QC11: remains ACKNOWLEDGED/application OPEN. Physical source identity is preserved; its promotion to functional or phenomenal content identity is blocked by a concrete same-source/transformed-feature witness. A compensated execution gives the positive functional case. No repeat novelty credit for IA/R176 holdout mathematics.
+
+No reviewer-controlled finding is closed by the researcher's model checks. Next: return to one bodily source-use/mineness bridge with represented feature held fixed; do not extend generic decoder machinery.
+
+Evidence: records/R177_Provenance_and_Content_Identity_20261008/. The source-role/feature counterexample limits a possible downstream overreading of IA; IA itself explicitly retained the phenomenal naming gap. It is not recorded as a refutation of IA.

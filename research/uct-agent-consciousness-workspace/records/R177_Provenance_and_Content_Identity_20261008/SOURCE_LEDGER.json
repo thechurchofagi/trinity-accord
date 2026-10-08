@@ -1,0 +1,46 @@
+{
+  "base_commit": "3ac3977360958e78407807bedc8743a7dfdb736c",
+  "master_version": 31,
+  "internal": [
+    {
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4"
+    },
+    {
+      "path": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md",
+      "sha256": "025f6abd832f7bb2f9066207a9f469fd7d199458d81b17e7ff5c2d8861ade5f9"
+    },
+    {
+      "path": "records/R176_Content_Holdout_and_Delayed_Use_20261008/REVIEW_AMENDMENTS.json",
+      "sha256": "8a8a8f4ece31dee628cf43dfda3be9ca03744792e47898e2b958e1859c8d203f"
+    },
+    {
+      "path": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md",
+      "sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97"
+    }
+  ],
+  "external": [
+    {
+      "authors": "Nishida and Johnston",
+      "year": 2002,
+      "doi": "10.1016/S0960-9822(02)00698-X",
+      "url": "https://www.sciencedirect.com/science/article/pii/S096098220200698X",
+      "scope": "Publisher abstract only; full text unavailable in this run",
+      "use": "Scoped precedent; not evidence for the toy decoder or all temporal targets"
+    },
+    {
+      "authors": "Huang, Su and Zhou",
+      "year": 2023,
+      "doi": "10.1167/jov.23.1.6",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9838589/",
+      "scope": "Abstract, task methods, relevant results; no raw-data analysis",
+      "use": "Task/measure specificity caution; no actual C1 restriction identified"
+    }
+  ],
+  "search_failure": "One verification search returned unrelated results; discarded. Publisher full-text opening failed; source scope not inflated.",
+  "no_claims": [
+    "No exhaustive novelty survey",
+    "No neural decoder measurement",
+    "No phenomenal experiment"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": "R177-G1",
+      "location": "IA source identity used as named-content binding; R177 §2–4",
+      "impact": "Any inference from source constancy alone to fixed feature/Q/order target",
+      "counterexample": "Same source with bit-inverted payload and uncompensated decoder",
+      "corrected": "Explicit source/feature/quality/evidence type separation and joint selected binding",
+      "remaining": "Actual decoder semantics and quality bridge",
+      "status": "OPEN_APPLICATION"
+    },
+    {
+      "id": "R177-G2",
+      "location": "R177 P2 stateless retiming premise",
+      "impact": "Transport of selected identity across delays",
+      "counterexample": "Clock-dependent decoder changes output when delay crosses its threshold",
+      "corrected": "Time-independent executed maps and fixed source state made simultaneous premises",
+      "remaining": "No evidence for stateless human decoding",
+      "status": "OPEN_APPLICATION"
+    },
+    {
+      "id": "R177-G3",
+      "location": "R177 §6–7 independently named Q",
+      "impact": "H_prod/H_use and familiar-mineness applications",
+      "counterexample": "Functional task identity supplies no unique phenomenal naming under R157",
+      "corrected": "No empirical selection or new experience claim; explicit failed admission attempt",
+      "remaining": "A specific independently supported target and interpretation on one actual episode",
+      "status": "OPEN"
+    },
+    {
+      "id": "R177-G4",
+      "location": "Occurrence vs feature type binding",
+      "impact": "Repeated equal features or multiple descendants",
+      "counterexample": "Two source events carry equal c; one source has two uses",
+      "corrected": "One nominated use per source; J retains source and feature; no c-only event identity",
+      "remaining": "Actual repeated-content and mixed-source episodes need separate binding",
+      "status": "OPEN_SCOPE"
+    }
+  ]
+}
