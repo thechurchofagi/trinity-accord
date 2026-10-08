@@ -1,0 +1,35 @@
+{
+  "checkpoint": "CD20261008",
+  "date": "2026-10-08",
+  "status": "ACTUALLY_EXECUTED_FINITE_MATHEMATICAL_CHECKS",
+  "expanded_local_verifier": {
+    "file": "check_collective.py",
+    "exact_matrix_cases": 28,
+    "adaptive_protocol_steps": 3,
+    "adaptive_kernels_compared": 4,
+    "transcripts_per_kernel": 64,
+    "each_transcript_probability": "1/64",
+    "macro_binary_product_realizations": {"hold": 24, "cycle": 0},
+    "rational_retention_and_optimal_bayes_cases": 25,
+    "q4_n3_traces_lags_1_to_4": {
+      "hold": ["4", "4", "4", "4"],
+      "cycle": ["0", "0", "0", "4"],
+      "forget": ["1", "1", "1", "1"]
+    }
+  },
+  "failure_controls": {
+    "reusing_fixed_masks": "A single last-coordinate repeat has probability 1 under hold and 0 under cycle; freshness premise is essential.",
+    "pooling_aligned_pairs": "Same-time (x1,x2) and (x2,x3) records reconstruct all 64 states; separate marginal tables are not the aligned joint record."
+  },
+  "compact_core_verifier": {
+    "location": "RESEARCH_CHECKPOINT.md section 11",
+    "executed_locally": true,
+    "outcome": "CORE PASS; trace sequences and product counts matched",
+    "scope": "Smaller standard-library check, not the complete expanded output and not independent empirical corroboration."
+  },
+  "expanded_local_note_sha256": "d47d7a0515b7e18a3d47fafe7d9e5275923bfe8c2a7796c259f0db900d5309c1",
+  "core_commit": "ee1f9287d00620d5cc4387e6831042b1d970f6eb",
+  "R181_appended_handoff_commit": "475c2f0c346eba1ef895427ae684bc0b2a940c82",
+  "preservation_boundary": "Remote compact checkpoint is self-contained; no claim of byte-identical remote preservation of the expanded local ZIP, root index changes, or Library update.",
+  "epistemic_boundary": "No actual brain or AI subjective experiment, named feeling, subject count, C1 validation, general historical-priority clearance, or paper publication."
+}
