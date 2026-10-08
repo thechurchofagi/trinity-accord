@@ -1,0 +1,99 @@
+{
+  "record": "TO20261008_SAVE_RECEIPT",
+  "core_commit": "5b3302cdae81a038295076d9dd641bf6ed320a5f",
+  "core_tree": "14a4604338d3be8a1967374c0d3a08fb36d8fcca",
+  "git_remote_verification": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "git_blob_sha": "e1707142370f4fe9cb2b3be31b04bbe92ece0fec"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "git_blob_sha": "506b8962f74c8a5f24774dcdd171c818c259d823"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "git_blob_sha": "347dc55342ebf6b769119a45e2859933ef94b7da"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "git_blob_sha": "af540a16a8fae97867e6d9a83e78f8fcff742c00"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+      "git_blob_sha": "2eb725eac6d758c48e90bea2b192a69f4deb270c"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "git_blob_sha": "8e299bee5ec7648344ee9ab13d56dfadc987d806"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "git_blob_sha": "3121e272105ad8d7ce3ba929301fb91acf385bc4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH.json",
+      "git_blob_sha": "e20b2998df66d5a8b2deb168f4d2ca0a9b1c0e3b"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "git_blob_sha": "f84eab37a8b0d6f5ab652ca62aaff88a3b4539d4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TO20261008_Temporal_Reference_and_Order/CURRENT_HANDOFF.md",
+      "git_blob_sha": "d4b048b93bf541672dac1e69546a731ea7a21d05"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TO20261008_Temporal_Reference_and_Order/GAP_LEDGER.json",
+      "git_blob_sha": "d0bd77b5ccfcf8101a29ec9db42cd75cdee0025e"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TO20261008_Temporal_Reference_and_Order/MAP_AUDIT.json",
+      "git_blob_sha": "0157d15f12ae55a8b0930ad91003778b91810c93"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TO20261008_Temporal_Reference_and_Order/MAP_CHECK.py",
+      "git_blob_sha": "99d1f85eb3c34c19f8d04f34ba78b91bad7f8262"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TO20261008_Temporal_Reference_and_Order/MAP_EXTENSION.json",
+      "git_blob_sha": "e876d8341ed5404ab376666f87a4aec4073da1a4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TO20261008_Temporal_Reference_and_Order/MODEL.py",
+      "git_blob_sha": "e92657c4486d6cd2a55e06573042082ed8bf0f10"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TO20261008_Temporal_Reference_and_Order/MODEL_RESULTS.json",
+      "git_blob_sha": "988179a0f9a31aaa7d1e90b36331c94efc068b8f"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TO20261008_Temporal_Reference_and_Order/PROOF_LEDGER.json",
+      "git_blob_sha": "e67a1546fd8489fae32082e9db605c96b8655cbd"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TO20261008_Temporal_Reference_and_Order/REVIEW_ZH.md",
+      "git_blob_sha": "07852f1fc552e010ec75157ea2dbef7088c1b7e0"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md",
+      "git_blob_sha": "76d1fb7d57c220f58de59b7a52b681167a4d4bdc"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TO20261008_Temporal_Reference_and_Order/SAVE_MANIFEST.json",
+      "git_blob_sha": "2bd238c579cc95c324ce0860eaf0205718be3062"
+    }
+  ],
+  "master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000207c820cb7cb1f81e1a98cf1",
+    "input_version": 24,
+    "saved_version": 25,
+    "bytes": 267009,
+    "sha256": "c61a7db294e74c74c14e2fe4f348c7521efe99bb88ceee850a20402910f2259a",
+    "expected_current_version_used": 24,
+    "prior_history_preserved": true,
+    "status": "REPLACE_SUCCEEDED"
+  },
+  "scope": "Research-only checkpoint and master synchronization; no publication, schedule changes, independent review, empirical validation or global map proof. Core manifest excludes this later receipt."
+}
