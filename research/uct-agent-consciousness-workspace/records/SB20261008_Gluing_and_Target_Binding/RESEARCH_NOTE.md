@@ -2,7 +2,7 @@
 
 **UCT non-R dialogue supplement — 2026-10-08, Asia/Shanghai.**
 Status: **conditional formal analysis + exact finite-model checks; no claim of novel general mathematics, independent phenomenal validation, or a consciousness verdict**.
-Research branch: \`uct-agent-consciousness-workspace\`.
+Research branch: `uct-agent-consciousness-workspace`.
 Baseline: UCT I v1.2 (TA-TR-2026-20), UCT II v1.1, UCT III v1.0, Actual Participation (TA18), Experience–Intelligence–Self (TA25), R178–R181, REVIEW-20261008-05 including open QC-20261008-13.
 This note responds to the author's insistence that theoretical organization be defined and audited *before* interpreting neural recordings or designing new large experiments. It also transfers the previous dialogue's 3-component shared-update thought experiment into a recoverable research checkpoint, without claiming that earlier local calculation is a new discovery.
 
@@ -100,9 +100,9 @@ An exact four-object set-model illustrates the issue:
 
 ## 6. T4: an explicit crossed physical consumer, repairing QC-20261008-13 *at toy scope*
 
-R181's named target parameter was an independent input; its positive meaning remained stipulated. Build a concrete finite implementation where **physical endpoint and counterfactual response** determine the target. Fix a bounded assembly P_T, interval I=[0,2], and a recorded q bit. Two installed ports connect to different physically declared destinations: \`U_o\` is a proximal effector-command port; \`H_i\` is an internal rehearsal register. The actual route is chosen **before the episode** by a physical two-position switch \`s\`; no semantic feeling label or inferred subject is wired in.
+R181's named target parameter was an independent input; its positive meaning remained stipulated. Build a concrete finite implementation where **physical endpoint and counterfactual response** determine the target. Fix a bounded assembly P_T, interval I=[0,2], and a recorded q bit. Two installed ports connect to different physically declared destinations: `U_o` is a proximal effector-command port; `H_i` is an internal rehearsal register. The actual route is chosen **before the episode** by a physical two-position switch `s`; no semantic feeling label or inferred subject is wired in.
 
-Let \`e_o=e_i=1\` be a fixed alternative value for each off-route destination. Define:
+Let `e_o=e_i=1` be a fixed alternative value for each off-route destination. Define:
 
 \[
 U_o = \begin{cases}q &s=o\\ 1&s=i\end{cases},
@@ -110,7 +110,7 @@ U_o = \begin{cases}q &s=o\\ 1&s=i\end{cases},
 H_i = \begin{cases}1 &s=o\\ q&s=i.\end{cases}
 \]
 
-An **externally forced** plant displacement \`B=1\` and a report \`R=1\` are held fixed by separate stipulated sources, so they do not trivially reveal which port actually received q. At q=1 the internal register values, displacement and report are all matched for both switch settings; but under the physically admissible fixed-mechanism content change do(q=0):
+An **externally forced** plant displacement `B=1` and a report `R=1` are held fixed by separate stipulated sources, so they do not trivially reveal which port actually received q. At q=1 the internal register values, displacement and report are all matched for both switch settings; but under the physically admissible fixed-mechanism content change do(q=0):
 - If s=o: (U_o,H_i)=(0,1);
 - If s=i: (U_o,H_i)=(1,0).
 
@@ -122,7 +122,7 @@ A **physical route/path signature** together with this perturbation distinguishe
 
 Freeze a local control motif (directive used, consequence fed back, mismatch consumed) \((D,C,E)=(1,1,1)\) in two hypothetical physically realizable devices. In the first, the local policy routes commands to an effector embedded in a broader human body reference and proprioceptive regulatory history; in the second, the **same local equations** regulate a simulated visual cursor or an artificial actuator.
 
-Any proposed classifier of named \`F_try\` from **only** the triple \((D,C,E)\) must give the same classification in both cases. That fact does not prove the actual feelings differ. It proves that if one wants the two feelings distinguished, the local triple cannot be sufficient; an independently characterized physical embedding, additional bodily reference relations, or a different interpretation is required.
+Any proposed classifier of named `F_try` from **only** the triple \((D,C,E)\) must give the same classification in both cases. That fact does not prove the actual feelings differ. It proves that if one wants the two feelings distinguished, the local triple cannot be sufficient; an independently characterized physical embedding, additional bodily reference relations, or a different interpretation is required.
 
 A naive fix "biological tissue rather than artifact" is not safe: human prosthesis/robotic-limb embodiment findings and conceptual separations of agency, body representation and ownership are established independently (e.g. Graczyk et al., 2023, PMID 36590084; research synthesis in Frontiers in Neurorobotics 2022 DOI 10.3389/fnbot.2022.902162). A prosthesis may become action-relevant to the person's body model. Biological composition cannot be smuggled in as a universal consciousness threshold. Nor does generic goal-directed control prove familiar mineness.
 
@@ -130,7 +130,7 @@ Therefore **R181's PC_tau remains an organizational coordinate** rather than a d
 
 ## 8. A checkable roadmap back to the UCT core
 
-**Proposed audit contract \`BIND_AND_GLUE(P,I,K,tau)\`**, not asserted a universal law:
+**Proposed audit contract `BIND_AND_GLUE(P,I,K,tau)`**, not asserted a universal law:
 1. Freeze actual bearer P, interval I, physical grain g, signature K and source provenance;
 2. Physical carrier identity for shared events is fixed (not inferred from equal output);
 3. One joint physical mechanism/transition/episode supports the claimed local descriptions, with open-port and joint-constraint semantics where required;
@@ -162,7 +162,7 @@ Completion tests: a realizable toy witness, its crosswired negative control, one
 
 An exact finite program checked: A matched crosswire and do(q=0) contrast; B impossible global assignment despite pairwise overlap equality; C pairwise-marginal underdetermination with 8 vs 4 full supports; D shared update conflict; E objectwise isomorphism without coherent diagram identifications. All checked within declared finite toy scopes. No theorem proving actual consciousness was tested.
 
-**Open:** QC10 named content/feeling, IA-QC11 actual bearer, QC12 actual human source/mineness, QC13 actual motor/imagery target binding; whether any \`BIND_AND_GLUE\` contract is ontically complete for a real human; full subject individuation and overlap extension.
+**Open:** QC10 named content/feeling, IA-QC11 actual bearer, QC12 actual human source/mineness, QC13 actual motor/imagery target binding; whether any `BIND_AND_GLUE` contract is ontically complete for a real human; full subject individuation and overlap extension.
 
 **Recommended next positive question:** Can a single predeclared physically anchored *body-reference trace* distinguish (a) blocked human overt attempt, (b) automatic reflex with equivalent local D/C/E and (c) actively imagined movement, without imposing a biological gate or retrospectively using a feeling report to pick the trace? If no decisive independent bridge is found, preserve the negative result and move to the cross-scale subject-overlap question rather than manufacturing a feeling.
 
