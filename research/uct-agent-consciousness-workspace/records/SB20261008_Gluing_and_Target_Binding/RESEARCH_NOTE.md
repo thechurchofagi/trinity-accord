@@ -118,6 +118,22 @@ A **physical route/path signature** together with this perturbation distinguishe
 
 **Do not overclaim:** This toy establishes the actual routing rule by specification; the counterfactual is a check, not a way of creating actual membership. A real human bearer P_H with independently grounded motor reference, sensory feedback, history and admissible interventions has **not** been supplied. The route can be functional even if a reflex controller uses it; no specific felt trying has been identified. Thus QC13 gets a candidate *toy-contract repair*, not closure of its actual-instance requirement.
 
+## 6A. A genuinely shared directive may have several simultaneous targets
+
+The two-position switch in T4 distinguishes two alternatives, but R179 already establishes that overt dispatch and mental imagery can occur together. A physical representation carrier q may have actual outgoing roles to none, overt only, imagery only, or **both**. With two physically realized route switches \(s_o,s_i\in\{0,1\}\) and independently grounded consumer ports, set
+
+\[
+U_o= \begin{cases}q&s_o=1\\1&s_o=0\end{cases},
+\qquad
+H_i= \begin{cases}q&s_i=1\\1&s_i=0.\end{cases}
+\]
+
+At q=1, all four installations have \((U_o,H_i)=(1,1)\). Under the fixed-switch intervention do(q=0), the four distinct role signatures are \((1,1),(0,1),(1,0),(0,0)\). Exact enumeration confirms the four outcomes. This requires actual installed paths; a coincidental behavioral sensitivity alone is not enough to license token contribution.
+
+**Scoped positive repair:** define a **set-valued** physical target-binding profile as the set of actual consumer-path relations of q in this episode. If both circuits consume the same q, retain both target relations **without counting q as two different physical carriers**. No single \`tau\` title exhausts the action of the token unless a physically grounded target-selection scope is fixed. Thus a one-hot target classifier is **not valid over this declared joint consumer class**. The set is an organizational profile, not a set of independent minds or an experience count.
+
+This incorporates R179's known simultaneous-mode countercase rather than claiming priority for it. Under C1, *if* actual complete organization is admitted, it is part of the experience structure. It still does not say the person feels two agents, chooses voluntary overt action, or consciously imagines anything. The historical provenance of the routes and the wider body-reference embedding remain open.
+
 ## 7. T5: a generic-controller twin defeats a fast bridge to "felt trying"
 
 Freeze a local control motif (directive used, consequence fed back, mismatch consumed) \((D,C,E)=(1,1,1)\) in two hypothetical physically realizable devices. In the first, the local policy routes commands to an effector embedded in a broader human body reference and proprioceptive regulatory history; in the second, the **same local equations** regulate a simulated visual cursor or an artificial actuator.
