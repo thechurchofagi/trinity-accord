@@ -1,0 +1,11 @@
+{
+  "research_id": "METHOD20261008",
+  "old_version": "1.0.0",
+  "old_doi": "10.5281/zenodo.23241205",
+  "new_version": "1.0.1",
+  "new_doi": "10.5281/zenodo.23241982",
+  "arweave_for_old_version": "NOT_AUTHORIZED",
+  "ots_old": "HISTORICAL_PENDING_PROOF_PRESERVED",
+  "main_scheduled_workflow": "research-mgtd-v100-ots-arweave.yml DISABLED",
+  "reason": "Author directed preservation only of latest corrected edition; no replacement or deletion of v1.0.0 Zenodo deposit."
+}
