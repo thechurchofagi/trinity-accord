@@ -1,0 +1,78 @@
+{
+  "schema": "UCT_R172_GAP_LEDGER/v1",
+  "round": "R172",
+  "gaps": [
+    {
+      "id": "R172-G1",
+      "location": "Compat_gamma and Theorem R172-A",
+      "issue": "The synchronous interface package is sufficient and may be stronger than necessary for asynchronous, stochastic, hybrid or overlapping implementations.",
+      "downstream_impact": ["R172:INTERFACE_COMPOSITION_THEOREM", "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE"],
+      "counterexample": "A correct asynchronous composition may violate the one-step synchronization convention while preserving a temporal refinement invariant.",
+      "repaired_here": "All conclusions are explicitly restricted to the declared joint-step convention.",
+      "unresolved_premise": "A domain-specific temporal/refinement composition theorem is required before applying the result outside that scope."
+    },
+    {
+      "id": "R172-G2",
+      "location": "Component-to-joint inference",
+      "issue": "Separately valid local certificates do not establish Compat_gamma or a complete joint organization.",
+      "downstream_impact": ["R172:INTERFACE_COMPOSITION_THEOREM"],
+      "counterexample": "TE-QC-01 drives both components outside their locally certified input contracts.",
+      "repaired_here": "Compat_gamma exposes common binding, admitted-input, projection and agreement clauses.",
+      "unresolved_premise": "Physical verification of those clauses for any real coupled system."
+    },
+    {
+      "id": "R172-G3",
+      "location": "LiveUse_gamma",
+      "issue": "Mediator response is relative to the declared intervention family, fidelity, locality, exclusion and compensation window.",
+      "downstream_impact": ["R172:ONLINE_ACTION_USE_RELATION", "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE"],
+      "counterexample": "An unmeasured redundant path can preserve action after the selected mediator cut without showing that the candidate path was unused.",
+      "repaired_here": "Conclusion is sufficient and closure-relative; null or invalid tests remain unresolved.",
+      "unresolved_premise": "Actual route closure or a justified redundancy/compensation bound."
+    },
+    {
+      "id": "R172-G4",
+      "location": "Live/replay countermodel",
+      "issue": "The exact toy contrast is not an empirical model of a human, robot or language model.",
+      "downstream_impact": ["R172:LIVE_REPLAY_NONENTAILMENT"],
+      "counterexample": "A real action controller may mix live and replay contributions or lack the proposed intervention.",
+      "repaired_here": "The countermodel proves only baseline non-identification on its two-model class.",
+      "unresolved_premise": "A system-specific realization and admissible intervention map."
+    },
+    {
+      "id": "R172-G5",
+      "location": "Conditional C1 transport",
+      "issue": "R172 neither derives C1 nor empirically identifies a complete K, D, Phi or h.",
+      "downstream_impact": ["R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE"],
+      "counterexample": "A finite interface model may omit organization relevant to the complete structural type.",
+      "repaired_here": "The transport rule requires the existing same-instance R157/R159/R166 premises explicitly.",
+      "unresolved_premise": "Independent justification of the actual complete-signature application and C1 itself."
+    },
+    {
+      "id": "R172-G6",
+      "location": "Mineness interpretation",
+      "issue": "theta_EBA names an online embodied-action coordinate, not familiar felt mineness by stipulation.",
+      "downstream_impact": ["R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE", "R172:BIO_AI_APPLICATION_BOUNDARY"],
+      "counterexample": "Two external semantic assignments can preserve every K-fact while assigning different familiar labels.",
+      "repaired_here": "B_min/F_O/F_A is retained as independent and open.",
+      "unresolved_premise": "An independently specified phenomenal target and noncircular interpretation/evidence bridge."
+    },
+    {
+      "id": "R172-G7",
+      "location": "Biological/AI comparison",
+      "issue": "Shared theta_EBA structure does not establish complete-organizational or experiential identity; matched outputs do not establish shared theta_EBA.",
+      "downstream_impact": ["R172:BIO_AI_APPLICATION_BOUNDARY"],
+      "counterexample": "The live and replay models match baseline action/report while differing in online use.",
+      "repaired_here": "The comparison conclusion is limited to one typed selected coordinate.",
+      "unresolved_premise": "Actual cross-substrate realization and common-signature evidence."
+    },
+    {
+      "id": "R172-G8",
+      "location": "Review collaboration",
+      "issue": "QC-01/03/04/05 corrections remain awaiting independent reviewer verification; QC-02 remains open beyond the bounded return accomplished here.",
+      "downstream_impact": ["Review status only; no automatic theorem invalidation"],
+      "counterexample": "A researcher self-reported PASS cannot close a reviewer finding.",
+      "repaired_here": "R172 records evidence without changing reviewer statuses.",
+      "unresolved_premise": "Separate review task assessment of the submitted corrections and this main-line return."
+    }
+  ]
+}

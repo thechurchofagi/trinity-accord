@@ -1,0 +1,56 @@
+{
+  "schema": "UCT_R172_SOURCE_LEDGER/v1",
+  "round": "R172",
+  "sources": [
+    {
+      "id": "UCT-I-v1.2",
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "read_scope": "Sections 4, 8.11-8.14, 14.7-14.10 as pinned and indexed in the current map",
+      "use": "C1 status, actual-witness discipline, body/self distinctions and no-extra-owner boundary"
+    },
+    {
+      "id": "R156",
+      "path": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md",
+      "sha256": "b4cc3a51195ad8e525b249e3896556d8cf3b711d1bcdb90ebdcbc93dd36e1a35",
+      "read_scope": "Sections 2-3 and 6 via current node contracts",
+      "use": "Snapshot/use non-identification precedent"
+    },
+    {
+      "id": "R157",
+      "path": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md",
+      "sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+      "read_scope": "Sections 2-5 and 7 via current node/rule contracts",
+      "use": "K-definable coordinate transport and B_min semantic residual"
+    },
+    {
+      "id": "R159",
+      "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+      "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+      "read_scope": "Sections 2-8",
+      "use": "Typed Anchor-Bind-Use relation and same-instance C1 application"
+    },
+    {
+      "id": "R166",
+      "path": "records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md",
+      "sha256": "1f0e0d1238e365ddabd85bcea402c1118684b907a031504ea520f9efa971aec7",
+      "read_scope": "Complete note",
+      "use": "Same-token actual-use witness and bypass boundary"
+    },
+    {
+      "id": "R171",
+      "path": "records/R171_Universal_Range_Certificates_20261008/Universal_Target_Range_Certificates_v0_1.md",
+      "sha256": "f660d03d7269ba95c458427bf2c20e9a01a6ac994efe2da39750baa9999536e8",
+      "read_scope": "Current node/rule contracts plus effective review amendment",
+      "use": "Local certificate scope and composition question"
+    },
+    {
+      "id": "REVIEW-20261008-01",
+      "path": "REVIEW_SUPERVISION.md",
+      "sha256_at_start": "74440b988e03c4e94937eec13c1c6f74c74f651a30709855041bfd095f040569",
+      "read_scope": "Complete current file at start head 47f0088b58e37a438be331458ddb8efa714c0751",
+      "use": "QC-02 direction return, TE-QC-01 and TE-QC-02 acceptance conditions"
+    }
+  ],
+  "novelty_boundary": "No claim that invariant composition, intervention semantics, mediation or replay countermodels are new. The increment is a UCT-specific typed integration that connects an interface premise and online use to the existing C1 transport while retaining B_min/F_O as open."
+}

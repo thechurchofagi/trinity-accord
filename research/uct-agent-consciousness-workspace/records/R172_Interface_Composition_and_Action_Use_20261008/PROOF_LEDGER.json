@@ -1,0 +1,83 @@
+{
+  "schema": "UCT_R172_PROOF_LEDGER/v1",
+  "round": "R172",
+  "claims": [
+    {
+      "id": "R172:INTERFACE_COMPATIBILITY_CONTRACT",
+      "type": "definition_and_assumption_package",
+      "full_statement": "Compat_gamma jointly requires common actual binding, initial agreement, preservation of the locally certified admitted-input families, projection/refinement of every joint transition to both certified local transitions, and preservation of connector agreement.",
+      "domain": "One actual P/I/K/D, two selected component transition systems, one actual connector gamma and one joint-step convention.",
+      "all_premises": ["same P/I/K/D and realization map", "same synchronized step/mode binding", "joint initials in local invariants and J_gamma", "connector-induced inputs stay inside both certified input families", "joint transitions project to local certified transitions", "joint successors preserve J_gamma"],
+      "proof_or_source": "Declared conjunctive interface contract; Theorem R172-A uses it.",
+      "counterexample": "TE-QC-01 violates admitted-input preservation.",
+      "status": "DECLARED_SUFFICIENT_INTERFACE_CONTRACT_NOT_PHYSICALLY_INSTANTIATED",
+      "thought_experiment_role": "Makes the omitted premise in component composition explicit."
+    },
+    {
+      "id": "R172:INTERFACE_COMPOSITION_THEOREM",
+      "type": "conditional_theorem",
+      "full_statement": "If both local invariants are valid under their admitted inputs and Compat_gamma holds, then the joint set S_gamma=S_B x S_A intersect J_gamma is invariant under every admitted joint transition.",
+      "domain": "Finite or infinite deterministic/nondeterministic transition systems satisfying the exact contract; finite path induction.",
+      "all_premises": ["valid producer invariant", "valid consumer invariant", "R172:INTERFACE_COMPATIBILITY_CONTRACT"],
+      "proof_or_source": "Arbitrary-successor argument plus induction on joint path length; standard invariant composition reasoning.",
+      "counterexample": "Without admitted-input preservation, TE-QC-01 reaches (1,1) outside S_1 x S_2.",
+      "status": "PROVED_CONDITIONALLY_BY_MANUAL_ARGUMENT_AND_FINITE_REGRESSION",
+      "thought_experiment_role": "Separates a valid composition theorem from the false shortcut local closure implies joint closure."
+    },
+    {
+      "id": "R172:FAILED_CONNECTION_COUNTERMODEL",
+      "type": "exact_countermodel",
+      "full_statement": "Two Boolean components with x_i'=u_i and standalone input contract u_i=0 preserve S_i={0}; the connector u_1=1-x_2,u_2=1-x_1 sends (0,0) to (1,1), so local certificates alone do not entail joint closure.",
+      "domain": "Two finite Boolean transition systems.",
+      "all_premises": ["both standalone certificates use u_i=0", "joint connector as declared", "joint initial state (0,0)"],
+      "proof_or_source": "Direct exact evaluation, checked by verify_interface_action.py.",
+      "counterexample": "The model itself is the counterexample to the composition shortcut.",
+      "status": "EXACT_FINITE_COUNTERMODEL_VERIFIED",
+      "thought_experiment_role": "TE-QC-01 acceptance witness; no originality claim."
+    },
+    {
+      "id": "R172:ONLINE_ACTION_USE_RELATION",
+      "type": "definition_and_sufficient_application_contract",
+      "full_statement": "LiveUse_gamma(k,a|W) requires an actual connector occurrence, baseline consumer use, an admissible mediator/cut contrast changing a before compensation under fixed eligible background, passed realization/fidelity/locality assumptions, and no report-defined role.",
+      "domain": "One actual P/I/K/D, selected k/gamma/a occurrences, predeclared intervention family W and pre-compensation interval.",
+      "all_premises": ["actual connector", "actual baseline consumer occurrence", "admissible mediator or cut contrast", "eligible background held fixed", "different action response before compensation", "delivery/time/realization/locality assumptions pass", "report excluded from definition"],
+      "proof_or_source": "Refinement of R166 W3-W5 into a cross-interface selected relation.",
+      "counterexample": "Replay/bypass matches the baseline but lacks the selected mediator dependence.",
+      "status": "DECLARED_SUFFICIENT_SELECTED_RELATION_NOT_EXECUTED",
+      "thought_experiment_role": "Specifies what changes between live and replay cases."
+    },
+    {
+      "id": "R172:LIVE_REPLAY_NONENTAILMENT",
+      "type": "exact_nonentailment_theorem",
+      "full_statement": "On the two-model class L: k=b,a=k,r=ell(b) and Q: k=b,a=v,r=ell(b), with baseline v=b, the natural tuple (b,k,a,r) is identical while do(k=1-b) changes a only in L; therefore baseline action/report does not identify LiveUse_gamma.",
+      "domain": "Binary deterministic structural models with fixed exogenous replay tape and admissible mediator intervention.",
+      "all_premises": ["baseline v=b", "same report map ell", "intervention holds b,v,report fixed", "model equations as declared"],
+      "proof_or_source": "Exact two-model enumeration for b in {0,1}.",
+      "counterexample": "The paired models are the equal-observation/different-target witness.",
+      "status": "EXACT_FINITE_NONENTAILMENT_VERIFIED",
+      "thought_experiment_role": "TE-QC-02 functional/organizational distinction; not empirical evidence."
+    },
+    {
+      "id": "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
+      "type": "conditional_C1_application_with_semantic_residual",
+      "full_statement": "If theta_EBA=Anchor AND Bind AND Compat_gamma AND LiveUse_gamma is independently grounded as a K-relation on one actual P/I/K/D and the same instance satisfies C1, then theta_EBA holds of the h-images inside Phi; familiar felt mineness still requires independent B_min/F_O/F_A.",
+      "domain": "One common actual C1 instance and one selected grounded online body-action relation.",
+      "all_premises": ["R157:COORDINATE_TRANSPORT", "R157:SEMANTIC_RESIDUAL", "R159:ANCHOR_BINDING_CONTRACT", "R166:WITNESSED_FRAME_INSTALLATION", "R172:INTERFACE_COMPOSITION_THEOREM", "R172:ONLINE_ACTION_USE_RELATION"],
+      "proof_or_source": "Conjoin grounded K-relations and apply ordinary isomorphism preservation on the identical P/I/K/D/Phi/h instance; retain the R157 semantic countermodel.",
+      "counterexample": "Changing the external L-label while holding every K-fact fixed blocks unique familiar-mineness naming.",
+      "status": "MANUAL_CONDITIONAL_C1_APPLICATION_WITH_OPEN_B_MIN",
+      "thought_experiment_role": "Provides the positive experience-internal explanation without an extra owner."
+    },
+    {
+      "id": "R172:BIO_AI_APPLICATION_BOUNDARY",
+      "type": "conditional_cross_substrate_application_boundary",
+      "full_statement": "Biological and artificial processes may be compared on theta_EBA only after independent actual realization, interface, live-use and common-signature obligations are met; matched output/report does not establish the relation, and shared relation does not establish complete-organizational or experiential identity.",
+      "domain": "Named biological/artificial actual tokens and their separately grounded selected relations.",
+      "all_premises": ["R172:LIVE_REPLAY_NONENTAILMENT", "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE"],
+      "proof_or_source": "Direct scope consequence of the non-identification witness and selected-coordinate C1 application.",
+      "counterexample": "Live and replay models match baseline output/report while differing in theta_EBA's LiveUse conjunct.",
+      "status": "MANUAL_CONDITIONAL_APPLICATION_BOUNDARY",
+      "thought_experiment_role": "Explains what the UCT comparison adds beyond output matching without declaring consciousness status."
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "schema": "UCT_R172_EXACT_CHECKS/v1",
+  "round": "R172",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "standalone_zero_invariant",
+      "status": "PASS",
+      "detail": [
+        {
+          "x": 0,
+          "u": 0,
+          "next": 0
+        },
+        {
+          "x": 1,
+          "u": 0,
+          "next": 0
+        }
+      ]
+    },
+    {
+      "name": "failed_connection_witness",
+      "status": "PASS",
+      "detail": {
+        "initial": [
+          0,
+          0
+        ],
+        "inputs": [
+          1,
+          1
+        ],
+        "next": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "bounded_interface_composition",
+      "status": "PASS",
+      "detail": {
+        "cases": 512,
+        "failures": []
+      }
+    },
+    {
+      "name": "live_replay_baseline_match",
+      "status": "PASS",
+      "detail": [
+        {
+          "b": 0,
+          "baseline_equal": true,
+          "post_actions": [
+            1,
+            0
+          ],
+          "post_reports": [
+            0,
+            0
+          ]
+        },
+        {
+          "b": 1,
+          "baseline_equal": true,
+          "post_actions": [
+            0,
+            1
+          ],
+          "post_reports": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "live_replay_mediator_separation",
+      "status": "PASS",
+      "detail": [
+        {
+          "b": 0,
+          "baseline_equal": true,
+          "post_actions": [
+            1,
+            0
+          ],
+          "post_reports": [
+            0,
+            0
+          ]
+        },
+        {
+          "b": 1,
+          "baseline_equal": true,
+          "post_actions": [
+            0,
+            1
+          ],
+          "post_reports": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "baseline_decoder_nonidentification",
+      "status": "PASS",
+      "detail": {
+        "same_descriptor": true,
+        "live_use_labels": [
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "name": "online_use_all_of_gate",
+      "status": "PASS",
+      "detail": {
+        "assignments": 64,
+        "supported": 1
+      }
+    },
+    {
+      "name": "report_not_defining_use",
+      "status": "PASS",
+      "detail": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "claim_limits_all_false",
+      "status": "PASS",
+      "detail": {
+        "C1_derived": false,
+        "B_min_validated": false,
+        "F_O_validated": false,
+        "actual_biological_system_tested": false,
+        "actual_AI_system_tested": false,
+        "complete_organization_identified": false,
+        "basal_experience_gate_added": false,
+        "unique_owner_selected": false,
+        "current_assistant_consciousness_decided": false
+      }
+    }
+  ],
+  "counts": {
+    "standalone_rows": 2,
+    "bounded_composition_cases": 512,
+    "live_replay_cases": 2,
+    "online_use_gate_assignments": 64
+  },
+  "claim_limits": {
+    "C1_derived": false,
+    "B_min_validated": false,
+    "F_O_validated": false,
+    "actual_biological_system_tested": false,
+    "actual_AI_system_tested": false,
+    "complete_organization_identified": false,
+    "basal_experience_gate_added": false,
+    "unique_owner_selected": false,
+    "current_assistant_consciousness_decided": false
+  },
+  "limitations": [
+    "Finite enumeration is not a proof of C1 or a physical instantiation.",
+    "The general interface theorem is supported by the manual arbitrary-successor proof; enumeration is only a bounded regression.",
+    "The live/replay models establish non-identification only on the declared toy class."
+  ]
+}
