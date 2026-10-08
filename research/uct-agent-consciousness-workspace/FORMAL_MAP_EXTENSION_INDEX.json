@@ -1,0 +1,22 @@
+{
+  "schema":"uct-formal-extension-registry-v1",
+  "governing_policy":"FORMAL_MAP_REVIEW_POLICY.json",
+  "canonical_graph":"UCT_FORMAL_GRAPH.json",
+  "scope":"Catalogue of explicitly registered extensions; not a claim that all earlier unregistered supplements have been incorporated.",
+  "entries":[
+    {
+      "id":"EI20261008",
+      "order":1,
+      "base_commit":"2b8deb5a9f816f51ec6bd6961b3bfe8a8a439fcf",
+      "base_graph_blob":"172c254c5f09ce83a5daf67244f36fbc5a3b9254",
+      "path":"records/EI20261008_Architecture_Dependence/MAP_EXTENSION.json",
+      "readable_map":"records/EI20261008_Architecture_Dependence/RESEARCH_CHECKPOINT.md",
+      "status":"PENDING_MAP",
+      "audit_status":"AUDIT_INCOMPLETE",
+      "enabled_as_established_premises":false,
+      "depends_on":[],
+      "merge":"Add unique IDs only after source-ID resolution, whole-current-graph item review and affected-chain rederivation. Reject conflicting IDs and missing imports; reconcile changed base first."
+    }
+  ],
+  "processing_rule":"Load canonical graph first, then ordered entries for inspection. A pending entry is visible research material but must not supply established premises. Promotion requires recorded full audit and explicit status update; mere file existence never promotes a claim."
+}
