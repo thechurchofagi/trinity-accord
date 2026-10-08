@@ -1,4 +1,16 @@
-# Current research and review — BR20261008 / REVIEW-20261008-03
+# Authoritative current checkpoint — R175 oriented temporal order
+
+Latest substantive round: **R175**. Formal graph: **R175-v1.0, 566 nodes / 273 rules / 173 context links**, SHA256 `9c86deadcd6471d6966043b82f1d6c51dcd83e1db9c6d532ec2983fc805c1202`. Read [the note](records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md), [round record](records/R175_Oriented_Temporal_Order_20261008/ROUND_RECORD.md), [review response](records/R175_Oriented_Temporal_Order_20261008/REVIEW_RESPONSE_20261008_04.md), [effective amendments](records/R175_Oriented_Temporal_Order_20261008/REVIEW_AMENDMENTS.json), [map audit](records/R175_Oriented_Temporal_Order_20261008/MAP_AUDIT.json), [gaps](records/R175_Oriented_Temporal_Order_20261008/GAP_LEDGER.json), [Chinese review](records/R175_Oriented_Temporal_Order_20261008/REVIEW_ZH.md), and [handoff](records/R175_Oriented_Temporal_Order_20261008/CURRENT_HANDOFF.md).
+
+R175 instantiates BR's joint-correspondence strategy on a finite temporal chain. Independently admitted physical and experiential betweenness leave exactly increasing and decreasing common maps. A frozen same-token orientation-anchor package excludes reversal and forces an unfitted middle experienced-order relation. With no orientation anchor the two maps disagree; copied experiential structure, inconsistent anchors or fitted hold-out are explicit failure cases. Twelve exact model checks and fifteen map checks pass.
+
+QC-08 is accepted and corrected: on the baseline-admitted domain AgencyLoop implies Avail, six semantic rows replace unsupported eight-way independence, and a history twin requires an explicit admitted TwinDomain premise. QC-09's sufficiency and sensitivity failure directions are separated. QC-10 receives a positive conditional held-out prediction, but QC-08--10 remain reviewer-controlled pending assessment. C1 stays axiomatic; no actual human instance, basal gate, report definition, unique owner or assistant-consciousness conclusion is claimed.
+
+Next: instantiate one independently specified same-token experiential temporal relation and blinded orientation anchors. If independence, common binding or genuine hold-out cannot be maintained, record empirical underidentification and stop rather than adding more mechanism exclusions or generic certificates. Older current/latest headings below are historical where superseded.
+
+---
+
++# Current research and review — BR20261008 / REVIEW-20261008-03
 
 Latest scheduled research: R174. The author's conceptual extension [BR20261008](records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md) adds a one-coupling role-differentiation model and jointly constrained correspondence analysis; it does not reserve R175. [Chinese explanation](records/BR20261008_Relational_Differentiation/REVIEW_ZH.md), [proofs](records/BR20261008_Relational_Differentiation/PROOF_LEDGER.json), [model results](records/BR20261008_Relational_Differentiation/MODEL_RESULTS.json), [open gaps](records/BR20261008_Relational_Differentiation/GAP_LEDGER.json). Current graph: R174-BR20261008-v1.0 (554/267/168); counts are bookkeeping. Existing objects and R171/R172 effective overlays remain intact.
 

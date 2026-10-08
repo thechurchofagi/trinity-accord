@@ -1,0 +1,74 @@
+{
+  "revision": "R175-v1.0",
+  "counts": {
+    "nodes": 566,
+    "rules": 273,
+    "context_links": 173
+  },
+  "checks": [
+    {
+      "name": "exact_parent_counts",
+      "pass": true
+    },
+    {
+      "name": "exact_new_counts",
+      "pass": true
+    },
+    {
+      "name": "unique_ids",
+      "pass": true
+    },
+    {
+      "name": "all_rule_endpoints",
+      "pass": true
+    },
+    {
+      "name": "note_hash",
+      "pass": true
+    },
+    {
+      "name": "model_hash",
+      "pass": true
+    },
+    {
+      "name": "model_12",
+      "pass": true
+    },
+    {
+      "name": "qc08_twin_explicit",
+      "pass": true
+    },
+    {
+      "name": "qc09_direction_split",
+      "pass": true
+    },
+    {
+      "name": "independent_experience_premise",
+      "pass": true
+    },
+    {
+      "name": "one_common_map",
+      "pass": true
+    },
+    {
+      "name": "heldout_not_anchor",
+      "pass": true
+    },
+    {
+      "name": "semantic_residual_retained",
+      "pass": true
+    },
+    {
+      "name": "no_report_gate",
+      "pass": true
+    },
+    {
+      "name": "counts",
+      "pass": true
+    }
+  ],
+  "scope": "Structural and scoped semantic audit; not empirical validation, C1 proof or global theory proof.",
+  "graph_sha256": "9c86deadcd6471d6966043b82f1d6c51dcd83e1db9c6d532ec2983fc805c1202",
+  "note_sha256": "990fee3cea0309afe3d7de67637fb61cee29fd2436ef9531245c4c4821f20d14",
+  "model_sha256": "e51ed59be30bf5584adb10b16a5a2827be3f6d1964acca004a82ed72d6ab9bae"
+}

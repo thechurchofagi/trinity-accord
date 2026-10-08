@@ -1,0 +1,40 @@
+{
+  "round": "R175",
+  "items": [
+    {
+      "id": "R175-A",
+      "claim": "Finite-chain betweenness maps are exactly increasing or decreasing.",
+      "premises": [
+        "equal finite strict chains n>=3",
+        "bijection preserves and reflects betweenness"
+      ],
+      "proof": "Endpoint/rank proof in §3",
+      "counterexample_boundary": "Without chain/betweenness assumptions other maps may exist.",
+      "status": "PROVED_ON_DECLARED_CLASS"
+    },
+    {
+      "id": "R175-B",
+      "claim": "Common oriented endpoint anchors force the held-out middle experienced-order relation.",
+      "premises": [
+        "R175-A",
+        "one common same-token map",
+        "independent endpoint anchors",
+        "held-out relation not fitted"
+      ],
+      "proof": "Reversal elimination in §4",
+      "counterexample_boundary": "No anchors leaves two rivals; incompatible anchors leave no map.",
+      "status": "PROVED_CONDITIONALLY"
+    },
+    {
+      "id": "R175-C",
+      "claim": "QC-08 eight-way wording is unsupported on the baseline-admitted domain.",
+      "premises": [
+        "baseline trajectory admitted",
+        "AgencyLoop contains actual action production"
+      ],
+      "proof": "G=>A; explicit six-row models",
+      "counterexample_boundary": "Other Avail conventions must be separately declared.",
+      "status": "EFFECTIVE_SCOPE_CORRECTION_PENDING_REVIEW"
+    }
+  ]
+}

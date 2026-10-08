@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R174-BR20261008-v1.0",
+  "revision": "R175-v1.0",
   "date": "2026-10-08",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -23361,6 +23361,138 @@
           }
         ]
       }
+    },
+    {
+      "id": "R175:BASELINE_ADMITTED_ACTION_DOMAIN",
+      "statement": "The actual baseline trajectory belongs to the operation family used by Avail; on this domain an actual same-episode AgencyLoop contains an admitted action occurrence and therefore implies Avail.",
+      "kind": "EFFECTIVE_DOMAIN_CONTRACT",
+      "domain": "One declared actual bearer/token/episode unless explicitly a finite alternative-model class.",
+      "quantifiers": "Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.",
+      "actuality": "Actuality requires independent grounding; abstract models and evidence records do not install the relation.",
+      "status": "DECLARED_SCOPE_CORRECTION",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "limits": "Other availability conventions require separate disclosure."
+    },
+    {
+      "id": "R175:SIX_ROW_EVENT_MODELS",
+      "statement": "Under baseline admission, exactly six A/G/R rows remain; explicit event-role models realize no-loop, available-no-loop and admitted agency-loop cases, each with RetBind absent or present.",
+      "kind": "FINITE_SEMANTIC_WITNESS_CLASS",
+      "domain": "One declared actual bearer/token/episode unless explicitly a finite alternative-model class.",
+      "quantifiers": "Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.",
+      "actuality": "Actuality requires independent grounding; abstract models and evidence records do not install the relation.",
+      "status": "EXACT_CONSTRUCTION_ON_DECLARED_DOMAIN",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "limits": "Not empirical prevalence or eight-way independence."
+    },
+    {
+      "id": "R175:EXPLICIT_TWIN_DOMAIN",
+      "statement": "The comparison domain explicitly contains two alternative histories with identical present descriptors and different actual provenance/use paths.",
+      "kind": "APPLICATION_PREMISE",
+      "domain": "One declared actual bearer/token/episode unless explicitly a finite alternative-model class.",
+      "quantifiers": "Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.",
+      "actuality": "Actuality requires independent grounding; abstract models and evidence records do not install the relation.",
+      "status": "DECLARED_REQUIRED_PREMISE",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "limits": "Not entailed by predicate definitions or one positive instance."
+    },
+    {
+      "id": "R175:ADMITTED_HISTORY_TWIN",
+      "statement": "Given the explicit twin-domain premise, the same-present/different-history pair is admitted and can support the conditional present-slice nonentailment proof.",
+      "kind": "CORRECTED_COUNTERMODEL_INSTANCE",
+      "domain": "One declared actual bearer/token/episode unless explicitly a finite alternative-model class.",
+      "quantifiers": "Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.",
+      "actuality": "Actuality requires independent grounding; abstract models and evidence records do not install the relation.",
+      "status": "CONDITIONAL_EXACT_WITNESS",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "limits": "No phenomenal difference assigned."
+    },
+    {
+      "id": "R175:R173_EFFECTIVE_TARGET_SEPARATION",
+      "statement": "F_O, F_A and F_F remain separately fixed semantic targets; no eight-way organizational independence is asserted or needed for the familiar-mineness boundary.",
+      "kind": "EFFECTIVE_SCOPE_CORRECTION",
+      "domain": "One declared actual bearer/token/episode unless explicitly a finite alternative-model class.",
+      "quantifiers": "Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.",
+      "actuality": "Actuality requires independent grounding; abstract models and evidence records do not install the relation.",
+      "status": "CONDITIONAL_BOUNDARY",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "limits": "Targets may overlap or be undefined."
+    },
+    {
+      "id": "R175:R174_FIBER_DIRECTION_CORRECTION",
+      "statement": "Sufficiency fails when equal Theta_STC values admit different independently warranted F_order values; changed Theta_STC with invariant F_order addresses only a claimed sensitivity/injectivity direction.",
+      "kind": "EFFECTIVE_EDITORIAL_INFERENCE_CORRECTION",
+      "domain": "One declared actual bearer/token/episode unless explicitly a finite alternative-model class.",
+      "quantifiers": "Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.",
+      "actuality": "Actuality requires independent grounding; abstract models and evidence records do not install the relation.",
+      "status": "EXACT_LOGICAL_CORRECTION",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "limits": "Does not close the empirical bridge."
+    },
+    {
+      "id": "R175:PHYSICAL_TEMPORAL_CHAIN",
+      "statement": "Four actual physical events form an independently grounded strict order inside one Theta_STC-type route on one token and episode.",
+      "kind": "ACTUAL_ORGANIZATIONAL_TARGET",
+      "domain": "One declared actual bearer/token/episode unless explicitly a finite alternative-model class.",
+      "quantifiers": "Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.",
+      "actuality": "Actuality requires independent grounding; abstract models and evidence records do not install the relation.",
+      "status": "DECLARED_PENDING_ACTUAL_INSTANTIATION",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "limits": "A model chain or report is insufficient."
+    },
+    {
+      "id": "R175:INDEPENDENT_EXPERIENTIAL_ORDER",
+      "statement": "Four experiential relata and their before/betweenness structure are independently admitted for the same token, not generated by copying the physical chain.",
+      "kind": "EXPERIENTIAL_INTERPRETATION_PREMISE",
+      "domain": "One declared actual bearer/token/episode unless explicitly a finite alternative-model class.",
+      "quantifiers": "Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.",
+      "actuality": "Actuality requires independent grounding; abstract models and evidence records do not install the relation.",
+      "status": "OPEN_EMPIRICAL_SEMANTIC_ADMISSION",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "limits": "Report may be fallible evidence but not target definition."
+    },
+    {
+      "id": "R175:BETWEENNESS_CORRESPONDENCE_CLASS",
+      "statement": "For equal finite chains n>=3, the betweenness-preserving correspondence class contains exactly the increasing and decreasing maps, leaving one orientation bit.",
+      "kind": "CLASSICAL_FINITE_THEOREM",
+      "domain": "One declared actual bearer/token/episode unless explicitly a finite alternative-model class.",
+      "quantifiers": "Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.",
+      "actuality": "Actuality requires independent grounding; abstract models and evidence records do not install the relation.",
+      "status": "MANUAL_PROOF_AND_EXACT_CHECK",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "limits": "Assumes one common map and independently fixed relation meanings."
+    },
+    {
+      "id": "R175:ORIENTATION_ANCHOR_PACKAGE",
+      "statement": "Two common, independently admitted endpoint correspondences fix the same orientation and are frozen before the middle target is evaluated.",
+      "kind": "JOINT_ANCHOR_PREMISE",
+      "domain": "One declared actual bearer/token/episode unless explicitly a finite alternative-model class.",
+      "quantifiers": "Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.",
+      "actuality": "Actuality requires independent grounding; abstract models and evidence records do not install the relation.",
+      "status": "DECLARED_PENDING_EMPIRICAL_SUPPORT",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "limits": "Separate per-anchor maps, switched tokens or fitted anchors do not qualify."
+    },
+    {
+      "id": "R175:HELD_OUT_ORDER_PREDICTION",
+      "statement": "The common orientation package forces the increasing map and therefore the unfitted relation f(x1)<_E f(x2), while the reversal rival predicts the opposite.",
+      "kind": "POSITIVE_HELD_OUT_CONTENT_CONSTRAINT",
+      "domain": "One declared actual bearer/token/episode unless explicitly a finite alternative-model class.",
+      "quantifiers": "Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.",
+      "actuality": "Actuality requires independent grounding; abstract models and evidence records do not install the relation.",
+      "status": "MANUAL_PROOF_AND_EXACT_CHECK",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "limits": "Conditional on all physical, experiential, common-map and anchor premises."
+    },
+    {
+      "id": "R175:B_ORDER_NARROWED_BOUNDARY",
+      "statement": "R175 reduces the finite-chain B_order application to independent experiential admission and orientation anchoring, with explicit copied-structure, inconsistency and ambiguity failures; it does not close B_order generally.",
+      "kind": "CONDITIONAL_EXPLANATORY_BOUNDARY",
+      "domain": "One declared actual bearer/token/episode unless explicitly a finite alternative-model class.",
+      "quantifiers": "Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.",
+      "actuality": "Actuality requires independent grounding; abstract models and evidence records do not install the relation.",
+      "status": "POSITIVE_PROGRESS_WITH_OPEN_EMPIRICAL_BRIDGE",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "limits": "No basal gate, unique owner or cross-trial identity follows."
     }
   ],
   "rules": [
@@ -37416,6 +37548,90 @@
         "source_sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r175_r173_six_row_effective",
+      "all_of": [
+        "R175:BASELINE_ADMITTED_ACTION_DOMAIN",
+        "R173:CURRENT_ACTION_AVAILABILITY",
+        "R173:CURRENT_AGENCY_LOOP",
+        "R173:RETENTIVE_BINDING_RELATION"
+      ],
+      "conclusion": "R175:SIX_ROW_EVENT_MODELS",
+      "kind": "EFFECTIVE_SCOPE_CORRECTION",
+      "statement": "Baseline admission and the typed relations jointly yield the six-row event-model class; G=1,A=0 is excluded.",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "proof": "Explicit event-role construction and G=>A.",
+      "source_sha256": "990fee3cea0309afe3d7de67637fb61cee29fd2436ef9531245c4c4821f20d14"
+    },
+    {
+      "id": "r175_r173_history_twin_effective",
+      "all_of": [
+        "R175:EXPLICIT_TWIN_DOMAIN",
+        "R173:FIXED_FAMILIAR_TARGET_CONTRACT"
+      ],
+      "conclusion": "R175:ADMITTED_HISTORY_TWIN",
+      "kind": "CORRECTED_CONDITIONAL_COUNTERMODEL",
+      "statement": "An explicit admitted twin-domain premise, not predicate definitions alone, supplies the comparison pair.",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "proof": "Direct use of the declared two-history domain.",
+      "source_sha256": "990fee3cea0309afe3d7de67637fb61cee29fd2436ef9531245c4c4821f20d14"
+    },
+    {
+      "id": "r175_r173_target_boundary_effective",
+      "all_of": [
+        "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+        "R175:R173_EFFECTIVE_TARGET_SEPARATION",
+        "R157:SEMANTIC_RESIDUAL"
+      ],
+      "conclusion": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "kind": "EFFECTIVE_BOUNDARY_REPLACEMENT",
+      "statement": "The corrected familiar-mineness boundary needs target distinction and semantic residual, not eight-way organizational independence.",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "proof": "Scope correction; no new phenomenal assignment.",
+      "source_sha256": "990fee3cea0309afe3d7de67637fb61cee29fd2436ef9531245c4c4821f20d14"
+    },
+    {
+      "id": "r175_betweenness_residual",
+      "all_of": [
+        "R175:PHYSICAL_TEMPORAL_CHAIN",
+        "R175:INDEPENDENT_EXPERIENTIAL_ORDER",
+        "BR20261008:JOINT_MAPPING_CONSTRAINT"
+      ],
+      "conclusion": "R175:BETWEENNESS_CORRESPONDENCE_CLASS",
+      "kind": "CONDITIONAL_CLASSICAL_DEDUCTION",
+      "statement": "One common independently admitted betweenness correspondence leaves exactly increasing and decreasing rivals.",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "proof": "Endpoint and rank argument.",
+      "source_sha256": "990fee3cea0309afe3d7de67637fb61cee29fd2436ef9531245c4c4821f20d14"
+    },
+    {
+      "id": "r175_orientation_forces_heldout",
+      "all_of": [
+        "R175:BETWEENNESS_CORRESPONDENCE_CLASS",
+        "R175:ORIENTATION_ANCHOR_PACKAGE"
+      ],
+      "conclusion": "R175:HELD_OUT_ORDER_PREDICTION",
+      "kind": "POSITIVE_CONDITIONAL_DEDUCTION",
+      "statement": "Common oriented endpoint anchors select the increasing map and force the untouched middle relation.",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "proof": "Eliminate the reversal member of the two-map class.",
+      "source_sha256": "990fee3cea0309afe3d7de67637fb61cee29fd2436ef9531245c4c4821f20d14"
+    },
+    {
+      "id": "r175_b_order_narrowed",
+      "all_of": [
+        "R175:HELD_OUT_ORDER_PREDICTION",
+        "R175:R174_FIBER_DIRECTION_CORRECTION",
+        "R174:B_ORDER_BOUNDARY",
+        "R157:SEMANTIC_RESIDUAL"
+      ],
+      "conclusion": "R175:B_ORDER_NARROWED_BOUNDARY",
+      "kind": "CONDITIONAL_EXPLANATORY_BOUNDARY",
+      "statement": "The positive held-out constraint and corrected failure directions narrow but do not globally close B_order.",
+      "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "proof": "Held-out success is conditional; independent admission and residual semantics remain.",
+      "source_sha256": "990fee3cea0309afe3d7de67637fb61cee29fd2436ef9531245c4c4821f20d14"
     }
   ],
   "context_links": [
@@ -38258,6 +38474,36 @@
       "from": "R174:B_ORDER_BOUNDARY",
       "to": "BR20261008:COMMON_EXPERIENTIAL_CONSTRAINT",
       "relation": "proposed joint-constraint research direction; does not establish B_order"
+    },
+    {
+      "from": "R173:THREE_TARGET_SEPARATION",
+      "to": "R175:R173_EFFECTIVE_TARGET_SEPARATION",
+      "relation": "review_corrected_by",
+      "deductive": false
+    },
+    {
+      "from": "R174:B_ORDER_BOUNDARY",
+      "to": "R175:R174_FIBER_DIRECTION_CORRECTION",
+      "relation": "failure_direction_corrected_by",
+      "deductive": false
+    },
+    {
+      "from": "BR20261008:COMMON_EXPERIENTIAL_CONSTRAINT",
+      "to": "R175:HELD_OUT_ORDER_PREDICTION",
+      "relation": "instantiated_by",
+      "deductive": false
+    },
+    {
+      "from": "R174:SHARED_TEMPORAL_COORDINATE",
+      "to": "R175:PHYSICAL_TEMPORAL_CHAIN",
+      "relation": "scoped_as",
+      "deductive": false
+    },
+    {
+      "from": "R175:HELD_OUT_ORDER_PREDICTION",
+      "to": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "relation": "does_not_close",
+      "deductive": false
     }
   ],
   "prohibited_inferences_D": [

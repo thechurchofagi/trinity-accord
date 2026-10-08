@@ -1,0 +1,93 @@
+{
+  "status": "EXACT_FINITE_MODEL_ONLY",
+  "checks": [
+    "chain4_exactly_two_maps",
+    "chain5_exactly_two_maps",
+    "oriented_endpoints_unique",
+    "held_out_middle_order_forced",
+    "reversal_predicts_opposite",
+    "unanchored_maps_disagree",
+    "central_anchor_ambiguous",
+    "central_anchor_target_disagrees",
+    "incompatible_anchors_empty",
+    "baseline_domain_has_six_rows",
+    "agency_implies_availability",
+    "retentive_bit_crosses_each_admitted_AG"
+  ],
+  "checks_passed": 12,
+  "chain4_maps": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      3,
+      2,
+      1,
+      0
+    ]
+  ],
+  "endpoint_anchored_maps": [
+    [
+      0,
+      1,
+      2,
+      3
+    ]
+  ],
+  "chain5_center_anchored_maps": [
+    [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    [
+      4,
+      3,
+      2,
+      1,
+      0
+    ]
+  ],
+  "baseline_admitted_rows": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      1
+    ],
+    [
+      1,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      1
+    ]
+  ],
+  "limits": [
+    "No actual human or hardware instance",
+    "No phenomenal structure inferred from enumeration",
+    "No closure of B_order or reviewer findings"
+  ]
+}

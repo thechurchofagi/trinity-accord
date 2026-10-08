@@ -1,0 +1,30 @@
+{
+  "round": "R175",
+  "items": [
+    {
+      "id": "S1",
+      "source": "UCT A/I v1.2 and R157",
+      "use": "C1 transport and semantic residual",
+      "scope": "Pinned internal primary theory source."
+    },
+    {
+      "id": "S2",
+      "source": "R173/R174/BR20261008 and REVIEW-20261008-03",
+      "use": "Target contracts, route boundary, joint-map theorem and review corrections",
+      "scope": "Exact saved repository sources."
+    },
+    {
+      "id": "S3",
+      "source": "Kleiner 2024, Consciousness and Cognition 119:103653",
+      "use": "Independent phenomenal-structure and bare-isomorphism challenge",
+      "scope": "As pinned/read in BR20261008; not evidence for C1."
+    },
+    {
+      "id": "S4",
+      "source": "Aldé 2026, Synthese 207:204",
+      "use": "Similarity geometry does not by itself fix specific phenomenal content",
+      "scope": "As pinned/read in BR20261008; not a temporal-order experiment."
+    }
+  ],
+  "novelty": "Classical finite-order mathematics is not claimed new; project contribution is typed integration and held-out criterion."
+}

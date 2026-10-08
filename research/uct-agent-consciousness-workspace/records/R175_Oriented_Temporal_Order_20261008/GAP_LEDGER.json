@@ -1,0 +1,66 @@
+{
+  "round": "R175",
+  "record_type": "RESEARCH_SELF_CHECK_NOT_INDEPENDENT_REVIEW",
+  "items": [
+    {
+      "id": "R175-G1",
+      "severity": "HIGH",
+      "location": "§2 experiential admission",
+      "impact": "Blocks actual B_order application.",
+      "counterexample": "E is copied from the physical chain or defined by the report used as outcome.",
+      "repaired": "Independence firewall and pre-registration requirement.",
+      "unresolved": "No actual independently grounded same-token experiential chain.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R175-G2",
+      "severity": "HIGH",
+      "location": "§2 physical chain",
+      "impact": "Blocks actual route grounding.",
+      "counterexample": "Stored timestamps or correct answers without executed shared comparison/use.",
+      "repaired": "Requires one actual Theta_STC-type route and nonreport consumer.",
+      "unresolved": "No actual human/hardware path instance.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R175-G3",
+      "severity": "HIGH",
+      "location": "§4 anchors",
+      "impact": "Can make the held-out prediction circular.",
+      "counterexample": "Endpoint anchors are chosen after seeing the middle target or from different tokens.",
+      "repaired": "Common-map, frozen-anchor and held-out clauses.",
+      "unresolved": "No implemented blinded protocol.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R175-G4",
+      "severity": "MEDIUM",
+      "location": "§3 relation choice",
+      "impact": "Betweenness may be too weak or wrong for actual experienced time.",
+      "counterexample": "Nonlinear, cyclic or incomparable experiential temporal structure.",
+      "repaired": "No generalization beyond the admitted finite chain.",
+      "unresolved": "Appropriate experiential relation remains empirical/phenomenological.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R175-G5",
+      "severity": "HIGH",
+      "location": "QC-08--10",
+      "impact": "Reviewer closure and empirical content remain unavailable.",
+      "counterexample": "Self-declared PASS cannot close QC items.",
+      "repaired": "Explicit response, overlay and conditional positive prediction.",
+      "unresolved": "QC-08/09/10 await independent reviewer assessment.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R175-G6",
+      "severity": "MEDIUM",
+      "location": "C1 attachment",
+      "impact": "Selected mapping may not extend to the complete K-isomorphism.",
+      "counterexample": "Unique selected map conflicts with omitted complete relations.",
+      "repaired": "Actual restriction and extension premise retained.",
+      "unresolved": "No complete actual instance.",
+      "status": "OPEN"
+    }
+  ]
+}

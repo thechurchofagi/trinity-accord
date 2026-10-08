@@ -1,0 +1,26 @@
+{
+  "review": "REVIEW-20261008-03",
+  "response": "R175",
+  "status": "RESEARCHER_CORRECTION_PENDING_INDEPENDENT_REVIEW",
+  "suspended_raw_rules": [
+    "r173_history_twin_witness",
+    "r173_familiar_mineness_boundary"
+  ],
+  "effective_replacements": [
+    "r175_r173_six_row_effective",
+    "r175_r173_history_twin_effective",
+    "r175_r173_target_boundary_effective"
+  ],
+  "qc08": {
+    "accepted": true,
+    "correction": "G=>A on baseline-admitted domain; six semantic rows; explicit TwinDomain required; target distinction retained without eight-way independence."
+  },
+  "qc09": {
+    "accepted": true,
+    "correction": "Same Theta_STC/different F_order refutes sufficiency; changed Theta_STC/same F_order only refutes a sensitivity/injectivity claim."
+  },
+  "qc10": {
+    "response": "R175 positive conditional held-out temporal-order prediction with independent structures, common map, reversal rival and explicit failure criteria; empirical closure remains open."
+  },
+  "source_sha256": "990fee3cea0309afe3d7de67637fb61cee29fd2436ef9531245c4c4821f20d14"
+}
