@@ -1,6 +1,16 @@
 # UCT Agent Consciousness — Research Workspace
 
-**Current research entry:** R163, [bounded planwise coverage and target boundaries](records/R163_Bounded_Coverage_and_Missingness_20261008/CURRENT_HANDOFF.md). Current formal graph: R163-v1.0, 436 nodes / 209 rules / 117 context links. R163 corrects the exact bounded/non-degenerate-Gaussian conflict and provides a conservative finite-sample alternative; it is not an experiment or an experience-level proof.
+## Theory-first dialogue continuation — TF20261008
+
+Read [Coupling, retained distinctions, and relative time](records/TF20261008_Coupling_and_Relative_Time/RESEARCH_NOTE.md), including its local proof map and next question; [runnable checks](records/TF20261008_Coupling_and_Relative_Time/check_models.py) and [results](records/TF20261008_Coupling_and_Relative_Time/MODEL_RESULTS.json) accompany it. This is a non-R supplement after the R180/EX20261008/METHOD baseline, not a new numbered round or a paper release.
+
+The paired averaging/rotation constructions separate cross-influence from differential retention. Uniform slowing and link-only slowing differ; a graph or an asymptotic consensus limit does not supply a subject-merger threshold. Eleven small equation checks include 48 closed-form/RK4 cases; no human/animal/LLM consciousness experiment was performed. Finite-time attenuation is not exact information erasure. C1 remains conditional, physical realization and named feelings remain open, and no canonical graph objects were changed.
+
+The author's [theory-first method directive](records/METHOD_20261008_Theory_First_Organization/METHOD_NOTE.md) remains binding. Preserve the R179 nonduplication audit, R180 and EX evidence audit; do not treat a data-acquisition suggestion as overriding the current theory-first preference. Read [HANDOFF.md](HANDOFF.md) and [MASTER_INDEX.md](MASTER_INDEX.md) as well for concurrent work. Their contents were not overwritten by this supplement.
+
+---
+
+**Historical research entry (superseded; retained for provenance):** R163, [bounded planwise coverage and target boundaries](records/R163_Bounded_Coverage_and_Missingness_20261008/CURRENT_HANDOFF.md). Its formal graph was R163-v1.0, 436 nodes / 209 rules / 117 context links. R163 corrects the exact bounded/non-degenerate-Gaussian conflict and provides a conservative finite-sample alternative; it is not an experiment or an experience-level proof.
 
 **Research owner:** Hongju Liu / 刘烘炬. **Storage policy effective:** 2026-10-05, Asia/Shanghai.
 
@@ -9,9 +19,9 @@ This is the primary working archive for the ongoing UCT agent-consciousness rese
 - Repository: `thechurchofagi/trinity-accord`
 - Persistent research branch: `uct-agent-consciousness-workspace`
 - Directory: `research/uct-agent-consciousness-workspace/`
-- Start with [HANDOFF.md](HANDOFF.md), then [MASTER_INDEX.md](MASTER_INDEX.md).
+- Start with [HANDOFF.md](HANDOFF.md), then [MASTER_INDEX.md](MASTER_INDEX.md), and the current dialogue supplement above.
 - Latest completed research round at migration: **R76**.
-- Latest integrated manuscript: [English draft v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
+- Latest integrated manuscript at migration: [English draft v0.3](drafts/UCT_Agent_Self_Preservation_Draft_v0.3_20261005.md).
 
 ## Saving and continuation
 
