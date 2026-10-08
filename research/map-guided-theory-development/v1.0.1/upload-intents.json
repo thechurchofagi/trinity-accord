@@ -13,5 +13,10 @@
     "bytes": 843551,
     "sha256": "e4899ac0f41e0158c9ab05fbba797addbb9c8aa17346137f6e5992e5561b3ad3",
     "state": "FILE_TRANSFER_ATTEMPT"
+  },
+  "README-LICENSE.txt": {
+    "bytes": 815,
+    "sha256": "c796ebb061592d8f4371ad520cd6efa39edea408d5e5265b4dff723789653a8b",
+    "state": "FILE_TRANSFER_ATTEMPT"
   }
 }
