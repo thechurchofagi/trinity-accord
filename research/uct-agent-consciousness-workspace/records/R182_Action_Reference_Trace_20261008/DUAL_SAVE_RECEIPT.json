@@ -1,0 +1,31 @@
+{
+  "schema": "uct-dual-save-receipt-v1",
+  "round": "R182",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "core_commit": "2afa79a45f45bf048e60f73992fa26b99710a25f",
+    "verified_tree": "352706557d6d8801b7b93a44436a65e5d503bb7f",
+    "remote_readback": "PASS"
+  },
+  "library": {
+    "master": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_00000000a5a881f7a500a63d1a84623f",
+      "version": 41,
+      "size_bytes": 546285,
+      "local_sha256": "8587f0a5f9dd00bf49491e637587b00052823a746b2776431dc7be117bc00c9e",
+      "content_readback": "PASS"
+    },
+    "increment": {
+      "name": "UCT_R182_Increment_20261008.zip",
+      "library_file_id": "libfile_3c93847826a481919b7685d39865a06f",
+      "file_id": "file_000000005df881f78164c28817067dfe",
+      "size_bytes": 287430,
+      "local_sha256": "e2b1524b4c58921b82a21ce90fee584dad09c91146a9a2535b60dea4365e39ab",
+      "metadata_readback": "PASS",
+      "zip_integrity": "PASS_LOCAL",
+      "scope": "R182 changed files plus manifest; not the full repository or history"
+    }
+  }
+}
