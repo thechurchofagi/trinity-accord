@@ -140,14 +140,14 @@
       "id": "A04",
       "year": 2016,
       "species": "mouse",
-      "study": "Attenuation of responses to self-generated sounds in auditory cortical neurons",
-      "doi": "10.1523/JNEUROSCI.1565-16.2016",
+      "study": "Rummell, Klee & Sigurdsson, Attenuation of responses to self-generated sounds",
+      "doi": "10.1523/JNEUROSCI.1564-16.2016",
       "n": "not extracted in this audit",
       "measure": "same physical sound animal-triggered vs random",
       "finding": "Self-generated sound evokes attenuated mouse auditory responses in controlled trials, beyond general movement state effects",
-      "status": "PMC_INDEXED_PRIMARY_DOI_TO_VERIFY",
+      "status": "PUBMED_PRIMARY_DOI_VERIFIED",
       "relevance": "Closer same-stimulus source/contingency contrast at neuron level",
-      "limit": "Verify exact DOI before formal manuscript citation; no direct mouse phenomenal report."
+      "limit": "No direct mouse first-person report; neural recordings are not independent animals."
     }
   ]
 }
