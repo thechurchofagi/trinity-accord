@@ -1,0 +1,20 @@
+{
+  "schema": "mgtd-latest-preservation-target/1",
+  "research_id": "METHOD20261008",
+  "current_version": "1.0.1",
+  "record_id": 23241982,
+  "doi": "10.5281/zenodo.23241982",
+  "concept_doi": "10.5281/zenodo.23241204",
+  "pdf": "MGTD_Method_Paper_v1.0.1.pdf",
+  "pdf_sha256": "98abef0e92d0bb599146cdf525d98acb7045a168912ec9e87ba7723bc958097c",
+  "previous_version": {
+    "version": "1.0.0",
+    "record_id": 23241205,
+    "doi": "10.5281/zenodo.23241205",
+    "arweave": "PERMANENTLY_DISABLED"
+  },
+  "publication_receipt": "research/map-guided-theory-development/v1.0.1/publication-record.json",
+  "budget_policy": "STRICT_LT_0.1_AR_AND_RUNTIME_WALLET_AND_ROLLING_LIMIT",
+  "ots_gate": "BITCOIN_VERIFIED_REMOTE_HEADERS_BEFORE_ARWEAVE",
+  "status": "LATEST_VERSION_ONLY"
+}
