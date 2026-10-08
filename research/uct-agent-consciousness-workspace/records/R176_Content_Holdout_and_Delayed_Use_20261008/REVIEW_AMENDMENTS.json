@@ -1,0 +1,43 @@
+{
+  "round": "R176",
+  "status": "RESEARCHER_CORRECTIONS_PENDING_REVIEW",
+  "mandatory_in_addition_to": [
+    "R171 effective overlay",
+    "R172 effective overlay",
+    "R175 effective overlay"
+  ],
+  "suspended_raw_rules": [
+    "r175_orientation_forces_heldout",
+    "r175_b_order_narrowed",
+    "r175_r173_six_row_effective",
+    "r173_present_slice_nonidentification"
+  ],
+  "effective_rules": [
+    "r176_orientation_correspondence_completion",
+    "r176_present_slice_effective"
+  ],
+  "effective_node_readings": {
+    "R175:HELD_OUT_ORDER_PREDICTION": {
+      "statement": "Oriented anchors select an increasing correspondence between supplied full chains. No independently named experiential-content prediction is established.",
+      "status": "CORRESPONDENCE_COMPLETION_ONLY"
+    },
+    "R175:B_ORDER_NARROWED_BOUNDARY": {
+      "statement": "Full-chain correspondence completion is retained. Independent target identity, relation admission, common-map grounding and genuine target separation remain open; the empirical burden was not reduced to orientation alone.",
+      "status": "OPEN_INTERPRETIVE_APPLICATION"
+    },
+    "R175:SIX_ROW_EVENT_MODELS": {
+      "statement": "Baseline admission implies G=>A, leaving at most six Boolean valuations. All-six semantic realizability is not proved by bit filtering or event-role sketches.",
+      "status": "UPPER_BOUND_ONLY_SEMANTIC_REALIZATION_OPEN"
+    },
+    "R175:R174_FIBER_DIRECTION_CORRECTION": {
+      "statement": "Equal selector with distinct independently warranted targets refutes sufficiency. Current orientation interpretations are not a verified actual physical counterexample.",
+      "status": "LOGICAL_CRITERION_RETAINED_ACTUAL_WITNESS_OPEN"
+    }
+  },
+  "review_ids": {
+    "QC-20261008-08": "OPEN; upper bound narrowed; admitted-twin downstream route repaired; semantic construction outstanding.",
+    "QC-20261008-09": "OPEN pending review; logical direction retained; physical witness not supplied.",
+    "QC-20261008-10": "OPEN; content-success claim withdrawn; explicit competing bridges and causal contrast supplied without empirical closure."
+  },
+  "source_sha256": "16f29f72fa84962f3f942850a308a2c33ef7f4a694a950f2fe97c478b5b778c4"
+}

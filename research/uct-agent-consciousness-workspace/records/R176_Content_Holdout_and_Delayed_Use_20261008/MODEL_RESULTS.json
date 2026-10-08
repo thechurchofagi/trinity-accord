@@ -1,0 +1,53 @@
+{
+  "scope": "Finite exact models and algebra; no actual experiential instance or general semantic map proof",
+  "checks": {
+    "partial_data_exactly_two_completions": true,
+    "fixed_named_target_disagrees": true,
+    "same_endpoint_interior_facts": true,
+    "existential_oriented_maps_do_not_select_named_target": true,
+    "image_order_true_in_both": true,
+    "fixed_q_bridge_selects_one": true,
+    "target_not_used_in_partial_filter": true,
+    "delay_trichotomy_100_cases": true,
+    "causal_reversal_witness": true,
+    "baseline_agreement": true,
+    "tie_is_not_strict_order": true
+  },
+  "passed": true,
+  "named_completions": [
+    {
+      "order": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "T_b_before_c": true,
+      "f_image_order": true
+    },
+    {
+      "order": [
+        "a",
+        "c",
+        "b",
+        "d"
+      ],
+      "T_b_before_c": false,
+      "f_image_order": true
+    }
+  ],
+  "delay_case_count": 100,
+  "causal_witness": {
+    "production": {
+      "B": 1,
+      "C": 2
+    },
+    "use": {
+      "B": 3,
+      "C": 2
+    },
+    "candidate_H_prod": "B before C",
+    "candidate_H_use": "C before B",
+    "phenomenal_observation": null
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "round": "R176",
+  "checks": {
+    "parent_nodes_preserved": true,
+    "parent_rules_preserved": true,
+    "context_preserved": true,
+    "unique_ids": true,
+    "all_rule_endpoints_exist": true,
+    "fixed_target_countermodel": true,
+    "new_claims_source_hash": true
+  },
+  "all_checks_passed": true,
+  "counts": {
+    "nodes": 570,
+    "rules": 277,
+    "context_links": 173
+  },
+  "graph_sha256": "fa4fd1b86f8146f0894bc84899538d8bf847ee2097805dfbbcf00cd225db4e9e",
+  "manual_scope": {
+    "nodes": "All four new nodes and affected R175/R173 nodes; all historical nodes retained, not freshly re-proved.",
+    "all_of": "Each new route uses simultaneous premises; candidate content bridges are alternatives, never conjoined as truth.",
+    "joint_satisfiability": "Explicit two order completions and nonnegative-delay witness; no actual complete C1 realization pair asserted.",
+    "unconnected_concepts": "Familiar mineness, actual ownership, conceptual I and reports remain distinct from presentation order; no new implication added.",
+    "object_time_signature": "Producer and consumer occurrences distinct; same marker identity, bearer, consumer and interval fixed per candidate.",
+    "inference_direction": "Delay algebra -> organizational contrast; experiential prediction only under named open bridge. No test/evidence -> basal experience.",
+    "source_status": "C1 axiom; elementary mathematics; declared models; open semantic and physical premises distinct.",
+    "scope_limit": "Not proof assistant certification, a fresh global DAG/semantic audit, neuroscience result or independent review.",
+    "direction_result": "Bounded bridge comparison returns to action prediction/feedback experience; correction replaces prior overclaim."
+  }
+}

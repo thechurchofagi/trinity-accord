@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R175-v1.0",
+  "revision": "R176-v1.0",
   "date": "2026-10-08",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -23493,6 +23493,72 @@
       "status": "POSITIVE_PROGRESS_WITH_OPEN_EMPIRICAL_BRIDGE",
       "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
       "limits": "No basal gate, unique owner or cross-trial identity follows."
+    },
+    {
+      "id": "R176:PARTIAL_NAMED_ORDER_DOMAIN",
+      "kind": "ABSTRACT_DOMAIN_CONTRACT",
+      "statement": "D is all strict total orders on four neutral labels a,b,c,d with a least,d greatest and b,c interior; physical X is fixed x0<x1<x2<x3; only endpoint correspondences are given; T=[b<E c] is fixed independently of map choice.",
+      "domain": "Four-element finite logical completions, not actual worlds of identical complete organization.",
+      "all_premises": [
+        "Neutral fixed identities",
+        "Strict total order",
+        "Endpoint/interior facts",
+        "No middle relation or rank-based identity in data"
+      ],
+      "proof": "Declared domain.",
+      "status": "DECLARED_FINITE_SETUP",
+      "source": "records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md",
+      "source_sha256": "16f29f72fa84962f3f942850a308a2c33ef7f4a694a950f2fe97c478b5b778c4",
+      "counterexamples_and_limits": "Full E or a fixed common q-preservation bridge is extra information.",
+      "thought_experiment_role": "TE176-1 for partial order; TE176-2 for causal delayed-use distinction; no phenomenal observation."
+    },
+    {
+      "id": "R176:NAMED_ORDER_NOT_IDENTIFIED",
+      "kind": "FINITE_NONENTAILMENT",
+      "statement": "Exactly two completions satisfy the partial setup; each admits an endpoint-oriented betweenness map from X, but their fixed named targets T differ. In both, f(x1)<E f(x2); that map-dependent expression does not identify T.",
+      "domain": "Every completion in the declared four-label domain.",
+      "all_premises": [
+        "R176:PARTIAL_NAMED_ORDER_DOMAIN"
+      ],
+      "proof": "Enumerate the two middle permutations; identity and middle-swap maps are respective increasing isomorphisms. §2.",
+      "status": "MANUAL_PROOF_AND_FINITE_CHECK",
+      "source": "records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md",
+      "source_sha256": "16f29f72fa84962f3f942850a308a2c33ef7f4a694a950f2fe97c478b5b778c4",
+      "counterexamples_and_limits": "Does not refute R175 correspondence completion or show any actual C1 counterexample.",
+      "thought_experiment_role": "TE176-1 for partial order; TE176-2 for causal delayed-use distinction; no phenomenal observation."
+    },
+    {
+      "id": "R176:CAUSAL_DELAY_SETUP",
+      "kind": "ABSTRACT_ORGANIZATIONAL_MODEL",
+      "statement": "Fix producer events Bp,Cp at tB<tC, bound consumer-use events Bu,Cu at uB=tB+dB,uC=tC+dC, with dB,dC>=0; g=tC-tB>0. Fix one episode/consumer and content identity; use is executed, not a timestamp label.",
+      "domain": "Real-valued finite times in one stipulated model episode; no physical or phenomenal instantiation asserted.",
+      "all_premises": [
+        "Same marker/source/use bindings",
+        "Nonnegative delays",
+        "One consumer",
+        "Actual execution stipulated in model"
+      ],
+      "proof": "Definition of causal model.",
+      "status": "DECLARED_MODEL",
+      "source": "records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md",
+      "source_sha256": "16f29f72fa84962f3f942850a308a2c33ef7f4a694a950f2fe97c478b5b778c4",
+      "counterexamples_and_limits": "Actual application requires grounding; multiple consumers and reconstructed order need separate target specification.",
+      "thought_experiment_role": "TE176-1 for partial order; TE176-2 for causal delayed-use distinction; no phenomenal observation."
+    },
+    {
+      "id": "R176:DELAY_ORDER_CONTRAST",
+      "kind": "ELEMENTARY_CONDITIONAL_THEOREM",
+      "statement": "uB is greater than, equal to, or less than uC exactly as dB-dC is greater than, equal to, or less than g. For (tB,tC,dB,dC)=(1,2,2,0), production and use orders disagree. H_prod and H_use give opposing conditional predictions for one fixed named target; neither bridge is established.",
+      "domain": "All real parameters satisfying CAUSAL_DELAY_SETUP; named bridge predictions only if the respective separately stipulated bridge holds.",
+      "all_premises": [
+        "R176:CAUSAL_DELAY_SETUP"
+      ],
+      "proof": "Subtract times: uB-uC=dB-dC-g. Nonnegative-delay witness §4.",
+      "status": "MANUAL_ALGEBRA_AND_FINITE_CHECK",
+      "source": "records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md",
+      "source_sha256": "16f29f72fa84962f3f942850a308a2c33ef7f4a694a950f2fe97c478b5b778c4",
+      "counterexamples_and_limits": "Not an observed experiential reversal; equal case gives no strict order; not agency/familiarity conclusion.",
+      "thought_experiment_role": "TE176-1 for partial order; TE176-2 for causal delayed-use distinction; no phenomenal observation."
     }
   ],
   "rules": [
@@ -37632,6 +37698,76 @@
       "source": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
       "proof": "Held-out success is conditional; independent admission and residual semantics remain.",
       "source_sha256": "990fee3cea0309afe3d7de67637fb61cee29fd2436ef9531245c4c4821f20d14"
+    },
+    {
+      "id": "r176_partial_order_nonidentification",
+      "all_of": [
+        "R176:PARTIAL_NAMED_ORDER_DOMAIN"
+      ],
+      "conclusion": "R176:NAMED_ORDER_NOT_IDENTIFIED",
+      "statement": "Partial endpoint/interior data and existential maps do not identify the fixed named target.",
+      "proof": "Two explicit completions, §2.",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "source": "records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md",
+      "source_sha256": "16f29f72fa84962f3f942850a308a2c33ef7f4a694a950f2fe97c478b5b778c4",
+      "formal_contract_R176": {
+        "connective": "AND",
+        "same_binding": "All premises share their declared domain, objects, interval, signature and target; alternatives are not conjoined.",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r176_delay_order_contrast",
+      "all_of": [
+        "R176:CAUSAL_DELAY_SETUP"
+      ],
+      "conclusion": "R176:DELAY_ORDER_CONTRAST",
+      "statement": "Causal delayed use can reverse the selected relation without reversing production.",
+      "proof": "Time subtraction, §4.",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "source": "records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md",
+      "source_sha256": "16f29f72fa84962f3f942850a308a2c33ef7f4a694a950f2fe97c478b5b778c4",
+      "formal_contract_R176": {
+        "connective": "AND",
+        "same_binding": "All premises share their declared domain, objects, interval, signature and target; alternatives are not conjoined.",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r176_orientation_correspondence_completion",
+      "all_of": [
+        "R175:BETWEENNESS_CORRESPONDENCE_CLASS",
+        "R175:ORIENTATION_ANCHOR_PACKAGE"
+      ],
+      "conclusion": "R175:HELD_OUT_ORDER_PREDICTION",
+      "statement": "Under the R176 effective reading, oriented anchors identify the increasing correspondence between supplied full chains. This does not certify a new named-content hold-out.",
+      "proof": "R175 valid endpoint/rank proof; R176 §1–3 limit the empirical claim.",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "source": "records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md",
+      "source_sha256": "16f29f72fa84962f3f942850a308a2c33ef7f4a694a950f2fe97c478b5b778c4",
+      "formal_contract_R176": {
+        "connective": "AND",
+        "same_binding": "All premises share their declared domain, objects, interval, signature and target; alternatives are not conjoined.",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r176_present_slice_effective",
+      "all_of": [
+        "R173:FIXED_FAMILIAR_TARGET_CONTRACT",
+        "R175:ADMITTED_HISTORY_TWIN"
+      ],
+      "conclusion": "R173:PRESENT_SLICE_NONENTAILMENT",
+      "statement": "Given the explicitly admitted same-present/different-RetBind pair, no fixed function of the matched present descriptors recovers RetBind on that pair.",
+      "proof": "Equal input has one function value; pair target values differ. Targets are organizational RetBind, not F_F observations.",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "source": "records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md",
+      "source_sha256": "16f29f72fa84962f3f942850a308a2c33ef7f4a694a950f2fe97c478b5b778c4",
+      "formal_contract_R176": {
+        "connective": "AND",
+        "same_binding": "All premises share their declared domain, objects, interval, signature and target; alternatives are not conjoined.",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -39291,8 +39427,8 @@
     "unique_owner_selected": false,
     "current_assistant_consciousness_decided": false
   },
-  "parent_revision": "R173-TE20261008-TO20261008-v1.0",
-  "parent_sha256": "ff5acea4e2a49affb9d3cf0f7f6d23236268c403a42bd00cd71ca05d64b7c7f8",
+  "parent_revision": "R175-v1.0",
+  "parent_sha256": "9c86deadcd6471d6966043b82f1d6c51dcd83e1db9c6d532ec2983fc805c1202",
   "research_TE20261008": {
     "date": "2026-10-08",
     "base_commit": "8df66b1bcf7c21795c4fba67eb1061815bf8c645",
@@ -39336,5 +39472,13 @@
     "status": "AUTHOR_REQUESTED_CONCEPTUAL_EXTENSION_NOT_R175",
     "scope": "Role differentiation and joint correspondence constraints; no intrinsic-quality or richness solution",
     "review_separation": "BR contribution self-checks do not constitute independent review. REVIEW-20261008-03 covers earlier saved checkpoints."
+  },
+  "research_R176": {
+    "source": "records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md",
+    "source_sha256": "16f29f72fa84962f3f942850a308a2c33ef7f4a694a950f2fe97c478b5b778c4",
+    "mandatory_effective_overlay": "records/R176_Content_Holdout_and_Delayed_Use_20261008/REVIEW_AMENDMENTS.json",
+    "scope": "Partial named-content inference and causal delayed-use comparison; no actual experiential observation",
+    "node_count_added": 4,
+    "rule_count_added": 4
   }
 }

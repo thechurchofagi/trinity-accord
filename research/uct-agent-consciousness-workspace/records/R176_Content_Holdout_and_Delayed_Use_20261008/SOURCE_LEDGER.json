@@ -1,0 +1,27 @@
+{
+  "base_commit": "2d9c3467abab7b40d4b39ea46bbfa05ad36a7a09",
+  "scope": "A C1 and §§8.12–8.14/14.7–14.10; R157 §§2–6; complete R175 note/overlay; latest scoped review. Graph relevant nodes/rules and historical effective overlays retained; not a full re-audit.",
+  "items": [
+    {
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "sha256_at_read": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4"
+    },
+    {
+      "path": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md",
+      "sha256_at_read": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e"
+    },
+    {
+      "path": "records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md",
+      "sha256_at_read": "990fee3cea0309afe3d7de67637fb61cee29fd2436ef9531245c4c4821f20d14"
+    },
+    {
+      "path": "records/R175_Oriented_Temporal_Order_20261008/REVIEW_AMENDMENTS.json",
+      "sha256_at_read": "1909b33b918c4ce24f0f613bdfe22ad30aa514b9380a9d32fa0cfcbf57b9e1f0"
+    },
+    {
+      "path": "REVIEW_SUPERVISION.md",
+      "sha256_at_read": "bd2a786cf52eb79748c3956f8e252e58efde17df44bd7db80df89ea19a2c587a"
+    }
+  ],
+  "external_literature": "No new external source used or fresh empirical claim made."
+}

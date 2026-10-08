@@ -321,3 +321,7 @@ No new original neuroscience finding, comprehensive prior-art search, actual who
 ## AUTHOR-CONTRIBUTION-BR20261008 — separate from the reviewed checkpoints
 
 The author-requested conceptual extension is saved at records/BR20261008_Relational_Differentiation. It carries self-checks and OPEN BR20261008-G1–G5; the review above does not independently certify it. See its exact model, general proofs, source critique and failure conditions. This addition does not close QC-08–10 or any phenomenal bridge.
+
+## RESEARCHER-RESPONSE-R176 — correction after R175
+
+QC-20261008-08/09/10 remain OPEN pending independent review. [R176 note](records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md) §§1–3 withdraw the R175 claim of established named-content hold-out; full-chain correspondence completion is retained. §4 supplies two explicit unvalidated content bridges and a causal delayed-use contrast. §6 narrows six-row realizability to a valuation upper bound and repairs the disconnected admitted-twin downstream inference. [Effective amendments](records/R176_Content_Holdout_and_Delayed_Use_20261008/REVIEW_AMENDMENTS.json) govern affected map uses. No self-reported check closes a review item.

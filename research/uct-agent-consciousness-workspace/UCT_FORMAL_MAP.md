@@ -1,3 +1,13 @@
+# Current checkpoint — R176 content hold-out correction and delayed use
+
+R176 supersedes R175's **content-success wording**, while retaining its finite-chain correspondence theorem. Read [the English note](records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md), [mandatory effective amendments](records/R176_Content_Holdout_and_Delayed_Use_20261008/REVIEW_AMENDMENTS.json), [scoped audit](records/R176_Content_Holdout_and_Delayed_Use_20261008/MAP_AUDIT.json) and [current handoff](records/R176_Content_Holdout_and_Delayed_Use_20261008/CURRENT_HANDOFF.md).
+
+Two endpoint-compatible structures disagree on the **same named middle pair** even though each oriented map has increasing image order. A causal delay example separates producer order from actual consumer-use order, giving opposite conditional H_prod/H_use predictions. Neither bridge has independent phenomenal evidence. QC-08–10 remain open pending reviewer assessment; six Boolean possibilities are an upper bound, not six established semantic realizations. The repaired present-slice route consumes the explicitly admitted twin pair. All earlier frozen records remain historical and their mandatory overlays remain effective.
+
+Next bounded question: independently fix content identities and the intended presentation-order target for one action-feedback episode, then assess H_prod versus H_use. No further generic certificate series. C1 remains axiomatic; no new basal gate, exclusive owner, current-assistant consciousness verdict or familiar-mineness closure.
+
+---
+
 # Authoritative current checkpoint — R175 oriented temporal order
 
 Latest substantive round: **R175**. Formal graph: **R175-v1.0, 566 nodes / 273 rules / 173 context links**, SHA256 `9c86deadcd6471d6966043b82f1d6c51dcd83e1db9c6d532ec2983fc805c1202`. Read [the note](records/R175_Oriented_Temporal_Order_20261008/Oriented_Temporal_Order_and_Held_Out_Content_v0_1.md), [round record](records/R175_Oriented_Temporal_Order_20261008/ROUND_RECORD.md), [review response](records/R175_Oriented_Temporal_Order_20261008/REVIEW_RESPONSE_20261008_04.md), [effective amendments](records/R175_Oriented_Temporal_Order_20261008/REVIEW_AMENDMENTS.json), [map audit](records/R175_Oriented_Temporal_Order_20261008/MAP_AUDIT.json), [gaps](records/R175_Oriented_Temporal_Order_20261008/GAP_LEDGER.json), [Chinese review](records/R175_Oriented_Temporal_Order_20261008/REVIEW_ZH.md), and [handoff](records/R175_Oriented_Temporal_Order_20261008/CURRENT_HANDOFF.md).

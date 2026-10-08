@@ -1,0 +1,50 @@
+{
+  "round": "R176",
+  "gaps": [
+    {
+      "id": "R176-G1",
+      "location": "R175 §4 / HELD_OUT_ORDER_PREDICTION",
+      "impact": "Named content vs changing images; full E may include target",
+      "counterexample": "TE176-1 has two named orders but true image order in both",
+      "corrected": "Correspondence claim retained; content-success withdrawn",
+      "remaining": "Independent q and target evidence still missing",
+      "status": "OPEN"
+    },
+    {
+      "id": "R176-G2",
+      "location": "R175 §6 / SIX_ROW_EVENT_MODELS",
+      "impact": "Bit assignments promoted to semantic realization",
+      "counterexample": "Filtering G=>A realizes assignments, not producer/lineage/use structures",
+      "corrected": "Narrowed to at-most-six valuation bound",
+      "remaining": "Construct semantic instances if this claim is used again",
+      "status": "OPEN"
+    },
+    {
+      "id": "R176-G3",
+      "location": "r173_present_slice_nonidentification",
+      "impact": "Corrected twin node not consumed by raw route",
+      "counterexample": "Old positive definitions do not entail an admitted negative-history pair",
+      "corrected": "Raw route suspended; replacement consumes admitted pair",
+      "remaining": "Actual admissibility remains an instance premise",
+      "status": "STRUCTURAL_ROUTE_CORRECTED_INSTANCE_OPEN"
+    },
+    {
+      "id": "R176-G4",
+      "location": "R176 §4 H_prod/H_use",
+      "impact": "Unvalidated content bridges",
+      "counterexample": "Nonnegative delay produces opposing candidate predictions",
+      "corrected": "Target and strict tie boundary specified",
+      "remaining": "No phenomenal evidence chooses a bridge",
+      "status": "OPEN"
+    },
+    {
+      "id": "R176-G5",
+      "location": "R175 §5 same-theta fiber",
+      "impact": "Interpretation alternative promoted to actual counterexample",
+      "counterexample": "R157 permits naming alternatives without changing actual experience",
+      "corrected": "Actual/nonactual witness boundary explicit",
+      "remaining": "Independently warranted actual targets and realizations absent",
+      "status": "OPEN"
+    }
+  ]
+}
