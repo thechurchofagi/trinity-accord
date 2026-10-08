@@ -7,7 +7,7 @@ unknown outcome. Publication requires a separately frozen v1.0.1 PDF/ZIP.
 from __future__ import annotations
 import json, os, pathlib, subprocess, sys, time, urllib.parse, urllib.request, urllib.error
 P=pathlib.Path(__file__).resolve().parent
-REPO=P.parents[1]
+REPO=P.parents[2]
 BRANCH='research/mgtd-method-v1-0-1-20261008'
 OLD_ID=23241205
 OLD_DOI='10.5281/zenodo.23241205'
