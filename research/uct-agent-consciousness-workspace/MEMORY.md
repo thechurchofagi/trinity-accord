@@ -1,3 +1,15 @@
+# Current checkpoint — R183 target-relative experiential relevance
+
+Read [the derivation](records/R183_Target_Relative_Experiential_Relevance_20261008/Target_Relative_Experiential_Relevance_v0_1.md), [claims](records/R183_Target_Relative_Experiential_Relevance_20261008/CLAIM_LEDGER.json), [gaps](records/R183_Target_Relative_Experiential_Relevance_20261008/GAP_LEDGER.json), [map audit](records/R183_Target_Relative_Experiential_Relevance_20261008/MAP_AUDIT.json), [review response](records/R183_Target_Relative_Experiential_Relevance_20261008/REVIEW_RESPONSE.md), and [handoff](records/R183_Target_Relative_Experiential_Relevance_20261008/CURRENT_HANDOFF.md).
+
+R183 distinguishes an inadmissible fixed-organization experience-off pseudo-intervention from constitutive, evidence-channel and boundary/resource changes. `TRER` is defined only for one jointly grounded actual P/I/K/M/pi/T and a relation present in every successful support. Under C1 its experiential counterpart is target-relative constitutively relevant; it is not an extra causal force, named feeling, scalar richness or universal consciousness core.
+
+Redundancy requires disjunctive relevance: H and Q may each be dispensable while at least one of them is necessary. 65,535 finite families and 167 monotone families were checked; identical intact success underdetermines dependence, and experiential structure may change without the selected capability changing. These are applications of standard/inherited mathematics, not a standalone-paper breakthrough. Canonical graph unchanged; R183 is PENDING_MAP. Full structural traversal found inherited inline-schema gaps, while whole-map semantic audit and actual human/named-target bridges remain OPEN. Next: instantiate one independently grounded body/action relation and distinguish individual from disjunctive relevance.
+
+Older current checkpoints below remain historical where inconsistent.
+
+---
+
 # Current checkpoint — R182 action-reference trace and blocked attempt
 
 Read [the English note](records/R182_Action_Reference_Trace_20261008/Action_Reference_Trace_and_Blocked_Attempt_v0_1.md), [claims](records/R182_Action_Reference_Trace_20261008/CLAIM_LEDGER.json), [gaps](records/R182_Action_Reference_Trace_20261008/GAP_LEDGER.json), [map audit](records/R182_Action_Reference_Trace_20261008/MAP_AUDIT.json), [review response](records/R182_Action_Reference_Trace_20261008/REVIEW_RESPONSE.md), and [handoff](records/R182_Action_Reference_Trace_20261008/CURRENT_HANDOFF.md).

@@ -1,0 +1,40 @@
+{
+  "schema": "uct-r183-exact-checks-v1",
+  "universe_size": 4,
+  "all_nonempty_success_families": 65535,
+  "all_relation_family_instances_checked": 262140,
+  "nonempty_upward_closed_families": 167,
+  "upward_family_core_size_distribution": {"0":114,"1":36,"2":12,"3":4,"4":1},
+  "architecture_results": {
+    "shared": {
+      "minimal_supports": [["B","H"]],
+      "unavoidable_individual_relations": ["B","H"],
+      "minimal_disjunctive_hitting_sets": [["B"],["H"]]
+    },
+    "bypass": {
+      "minimal_supports": [["B","Q"]],
+      "unavoidable_individual_relations": ["B","Q"],
+      "minimal_disjunctive_hitting_sets": [["B"],["Q"]]
+    },
+    "redundant": {
+      "minimal_supports": [["B","H"],["B","Q"]],
+      "unavoidable_individual_relations": ["B"],
+      "minimal_disjunctive_hitting_sets": [["B"],["H","Q"]]
+    }
+  },
+  "verified": [
+    "intersection of all successes equals intersection of all inclusion-minimal successes",
+    "a relation is in that intersection iff every successful support contains it",
+    "for nonempty upward-closed families, full-support single deletion is critical iff the relation is in the intersection",
+    "all 167 monotone success families agree on intact full-support success yet can have different dependence profiles",
+    "shared, bypass and redundant EI witnesses have different unavoidable individual relations",
+    "redundancy can require the disjunction {H,Q} while requiring neither H nor Q individually",
+    "a selected report relation can change while the fixed arithmetic target remains successful"
+  ],
+  "limits": [
+    "finite selected-support families only",
+    "monotonicity is required only for the full-support single-deletion equivalence",
+    "no actual human, AI or calculator token is established",
+    "no C1 validation or named-feeling measurement is performed"
+  ]
+}

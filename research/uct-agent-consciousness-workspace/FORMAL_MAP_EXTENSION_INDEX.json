@@ -16,6 +16,22 @@
       "enabled_as_established_premises":false,
       "depends_on":[],
       "merge":"Add unique IDs only after source-ID resolution, whole-current-graph item review and affected-chain rederivation. Reject conflicting IDs and missing imports; reconcile changed base first."
+    },
+    {
+      "id":"R183",
+      "order":2,
+      "base_commit":"d8fe35b450fef523c9d48ded5639ef49bb10a999",
+      "base_graph_sha256":"40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+      "effective_manifest_revision":"R178-SB20261008+CORE20261008",
+      "path":"records/R183_Target_Relative_Experiential_Relevance_20261008/MAP_EXTENSION.json",
+      "map_extension_sha256":"dbacfc7d76da10523dad5533152fe57afabd02ddb3f1c0c660adc77279654e72",
+      "readable_map":"records/R183_Target_Relative_Experiential_Relevance_20261008/Target_Relative_Experiential_Relevance_v0_1.md",
+      "status":"PENDING_MAP",
+      "audit_status":"AUDIT_INCOMPLETE",
+      "enabled_as_established_premises":false,
+      "depends_on":["CORE20261008"],
+      "nonpremise_witnesses":["EI20261008"],
+      "merge":"Inspect only until the whole effective map receives per-item semantic review and the actual bridge remains explicit. Never promote the EI witness or R183 file existence to premise truth."
     }
   ],
   "processing_rule":"Load canonical graph first, then ordered entries for inspection. A pending entry is visible research material but must not supply established premises. Promotion requires recorded full audit and explicit status update; mere file existence never promotes a claim."

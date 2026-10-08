@@ -1,0 +1,24 @@
+{
+  "schema":"uct-r183-run-receipt-v1",
+  "date":"2026-10-08",
+  "base_commit":"d8fe35b450fef523c9d48ded5639ef49bb10a999",
+  "commands":[
+    {"command":"python3 check_relevance.py","exit_code":0,"result":"PASS","coverage":{"nonempty_success_families":65535,"relation_family_instances":262140,"nonempty_upward_closed_families":167}},
+    {"command":"python3 audit_map.py","exit_code":0,"result":"STRUCTURAL_PASS_SEMANTIC_AUDIT_INCOMPLETE","coverage":{"base_nodes":584,"base_rules":284,"base_context_links":178,"core_nodes":33,"core_rules":11,"r183_nodes":12,"r183_rules":5}},
+    {"command":"jq empty on all changed JSON and git diff --check","exit_code":0,"result":"PASS"}
+  ],
+  "file_sha256":{
+    "Target_Relative_Experiential_Relevance_v0_1.md":"eaa2166ad369c9334aad40092d07de9bdbcca1fb9d085f10e113510de928111d",
+    "ROUND_RECORD.md":"800f62f69e70e6db8855fdef4099b9a2a5858fd55ee348d90ad84386dd67880b",
+    "CLAIM_LEDGER.json":"74f596d3163ea3a34587406980f1f2fa15deb65b3367d5f689c924f0236bc816",
+    "GAP_LEDGER.json":"3f1703611c3e3b545bc3b4de1f958fc43874558758656564f7562b59ed8f077a",
+    "MAP_EXTENSION.json":"dbacfc7d76da10523dad5533152fe57afabd02ddb3f1c0c660adc77279654e72",
+    "MAP_AUDIT.json":"d8ed85cf17d16de0e2787ac064a6dccf13d7e24b27ded946e3f9468a563f5b44",
+    "MODEL_RESULTS.json":"0d26433a8651f1ca59950faf6d6a471084707148e28423b2ddf55febf346f637",
+    "check_relevance.py":"f0e5c65842f5ebbe31ec724e3d7f9405806ad74f5afadca952d4dd324d512ca4",
+    "audit_map.py":"3c74c88a490be95b220908e91ab48b7e16d2952664c2a762b0ce9331e31c2174",
+    "REVIEW_RESPONSE.md":"780239ae520230b22617a2a3785ce580cdd6c5bcbf68eef18cb0027c0398833e",
+    "CURRENT_HANDOFF.md":"c0ffc02951b28bfbfac73d2dc19f1ec4085ac34548c672c8a54bd33f6b14e4c6"
+  },
+  "limitations":["No full per-item semantic re-proof","No actual human/AI/calculator token established","No named phenomenal target measured","R183 pending layer disabled","No publication or preservation action"]
+}

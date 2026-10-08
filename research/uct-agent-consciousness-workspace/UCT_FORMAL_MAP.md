@@ -26,6 +26,12 @@ The extension contains 22 current definition/premise/result nodes, eleven inheri
 
 CG-C/R/UCT/SUB/ANF/W and CD-LIFT/PROTOCOL/INVARIANTS/FACTOR/CAPABILITY are registered as inherited conditional source cards. Their original detailed sources and hypotheses remain authoritative; this is not another discovery. Earlier shared-update, TF and SB material remains preserved through the original map/research archive and linked sources; claims not individually covered remain a named integration/review obligation, not silently promoted.
 
+## Pending experience–intelligence synthesis: R183
+
+[R183](records/R183_Target_Relative_Experiential_Relevance_20261008/Target_Relative_Experiential_Relevance_v0_1.md) separates the UCT-inadmissible fixed-organization experience-off switch from actual constitutive, evidence-channel and boundary/resource interventions. It defines target-relative constitutive-experiential relevance only for one jointly grounded actual P/I/K/M/pi/T. Individual unavoidable relations are separated from disjunctive route-family obligations, so redundancy does not imply irrelevance or a unique core.
+
+The 12-node/5-rule layer is registered in the pending catalogue and is **not** loaded as an established module. Its EI architecture examples are nonpremise witnesses. Full canonical structural traversal succeeded, but semantic review remains incomplete and actual/named-experience bridges stay open. Canonical graph bytes and the active CORE revision are unchanged.
+
 ## Remaining required work
 
 Recover the full base into the computation environment; complete per-ID semantic coverage of all old nodes/rules/context links and rederive affected dependencies. The loader's whole structural scan would still not prove all semantics. Independently identify a human experiential target and actual realization before asserting a specific anatomical core. Keep the author's non-erasure, theory-first, originality and progress-feedback requirements. No publication authorization.
