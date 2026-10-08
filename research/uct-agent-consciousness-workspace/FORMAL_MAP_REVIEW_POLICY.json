@@ -1,0 +1,35 @@
+{
+  "schema": "uct-research-governance-policy-v1",
+  "policy_id": "POLICY-20261008-WHOLE-MAP-PERSISTENCE",
+  "version": "2.0",
+  "date": "2026-10-08",
+  "layer": "methodology_not_consciousness_axiom",
+  "authority": "explicit_author_instruction",
+  "master_guide": "RESEARCH_MASTER_GUIDE.md",
+  "inherited_guide": "RESEARCH_MASTER_GUIDE_BEFORE_POLICY20261008.md",
+  "governed_files": ["UCT_FORMAL_MAP.md", "UCT_FORMAL_GRAPH.json", "UCT_FORMAL_AUDIT.md", "HANDOFF.md", "MASTER_INDEX.md", "REVIEW_SUPERVISION.md"],
+  "inherited_source_targets": [
+    {"paper": "UCT I v1.2", "sections": ["2.1", "2.2", "2.4 P3", "3.4", "4 C1/U1"], "constraint": "Actual valid local processes retain nonempty experience while persisting in an actual whole; macro experience does not wait for a subject selector."},
+    {"paper": "TA25 v1.0", "sections": ["3 D1/C1/D2", "4 D4/D5"], "constraint": "Actual organization, views, experience, named feelings, self-models, reports and capabilities are typed separately."}
+  ],
+  "per_substantive_step": {
+    "reread_source_when_definition_changes_or_disputed": true,
+    "integrate_every_substantive_claim_before_promotion": true,
+    "whole_current_graph_node_and_relation_review": true,
+    "review_unlinked_but_semantically_related_nodes": true,
+    "all_of_requires_joint_same_instance_satisfaction": true,
+    "keep_alternative_proof_routes_disjunctive": true,
+    "rederive_affected_dependency_closure": true,
+    "explicit_general_proof_or_counterexample_scope": true,
+    "check_originality_against_internal_and_primary_external_sources": true,
+    "save_failures_and_source_versions": true,
+    "report_intermediate_progress": true
+  },
+  "coverage_record_required": ["base_commit", "graph_version", "all_node_ids", "all_rule_ids", "all_context_relation_ids", "item_status_and_evidence", "semantic_cross_checks", "affected_downstream_rederivations", "missing_or_unreviewed_ids", "source_and_novelty_limits"],
+  "unintegrated_claim_status": "PENDING_MAP",
+  "incomplete_audit_status": "AUDIT_INCOMPLETE",
+  "prohibited_substitutions": ["whole_formation_erases_persisting_local_experience", "persistence_implies_unchanged_content", "unique_subject_required_for_experience", "author_policy_as_physical_evidence", "DAG_PASS_equals_semantic_proof", "finite_checks_equal_general_proof", "renamed_prior_art_equals_breakthrough"],
+  "adoption_action": "policy_only_no_new_theory_node_or_rule",
+  "full_graph_semantic_audit_completed_by_this_adoption": false,
+  "publication_authorized": false
+}
