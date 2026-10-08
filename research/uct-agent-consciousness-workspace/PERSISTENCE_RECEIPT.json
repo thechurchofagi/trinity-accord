@@ -1,0 +1,14 @@
+{
+"release_id":"UCT-MAP-v1.0.0","audit_id":"FA20261008","release_seq":1,
+"status":"RELEASE_COMMITTED_AND_READ_BACK",
+"repository":"thechurchofagi/trinity-accord","branch":"uct-agent-consciousness-workspace",
+"release_commit":"f6445052acb1644fcdd7b2adcdda2307f7b98bc7","release_tree":"8fd18d4b64810bf9a4cb82ef62d40b6d9c3c3d13",
+"source_commit":"48b131a3ae8f7ac003ff5a2ce9c8d36111b2ea3c",
+"readback":{"current_pointer_blob":"6911d6919ccabe9b88b444ccba8ef7f154af225f","release_manifest_blob":"70c27bc952a2b06a5a9522a26e4fede4edb9f164","parts_manifest_blob":"8a8521284cf365bb3a764edf0c611fe95df2c1a1","restorer_blob":"21f9830f15330858711d508a900ab7ec35004fa1","capsule_directory":"Read from the release commit; content-addressed parts linked in the committed tree.","part_blob_creation":"All eight returned blob SHAs exactly matched locally computed Git blob hashes before the atomic tree/ref update."},
+"capsule_sha256":"e5d7413f54c13664b127f0d31d5a4c5f8b507b7ba73c77000715cb653842e84d",
+"source_export_sha256":"66dbc2d60520e54264e6106484b5e1bbfe4a51ac004fd13bd4c0aa4562889ba1",
+"local_reconstruction":{"passed":true,"matched_items":1278,"comparison":"Every item ID, decision, statement, scope, source hash, premise and guard compared against the originally generated audit output."},
+"preservation_scope":"The repository preserves fixed-source references, snapshots, new IE/RC essential original research bytes and full reconstructable review decisions. Expanded outputs, the frozen source ZIP and seven byte-exact historical ZIP archives are in the downloadable recovery package. Not every old ZIP container byte is duplicated remotely.",
+"scientific_status_changed_by_this_receipt":false,
+"note":"This operational receipt supersedes the pre-write PENDING persistence field inside the immutable capsule, without modifying the scientific release or incrementing its version. Actual and phenomenal application obligations remain open."
+}
