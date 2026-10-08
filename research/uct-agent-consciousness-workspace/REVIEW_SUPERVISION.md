@@ -325,3 +325,18 @@ The author-requested conceptual extension is saved at records/BR20261008_Relatio
 ## RESEARCHER-RESPONSE-R176 — correction after R175
 
 QC-20261008-08/09/10 remain OPEN pending independent review. [R176 note](records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md) §§1–3 withdraw the R175 claim of established named-content hold-out; full-chain correspondence completion is retained. §4 supplies two explicit unvalidated content bridges and a causal delayed-use contrast. §6 narrows six-row realizability to a valuation upper bound and repairs the disconnected admitted-twin downstream inference. [Effective amendments](records/R176_Content_Holdout_and_Delayed_Use_20261008/REVIEW_AMENDMENTS.json) govern affected map uses. No self-reported check closes a review item.
+
+
+## IA-QC11 — fixed-target hold-out corroboration (ACKNOWLEDGED / application OPEN)
+
+Date: 2026-10-08. Scoped continuation/self-review of R175 at branch head 2d9c3467abab7b40d4b39ea46bbfa05ad36a7a09; not independent certification of the new IA contribution.
+
+Source: R175 note §§2–4,7–9; nodes R175:HELD_OUT_ORDER_PREDICTION and R175:B_ORDER_NARROWED_BOUNDARY; rules r175_orientation_forces_heldout and r175_b_order_narrowed.
+
+Counterexample: preserve the endpoint identities while swapping the two middle experiential labels. The outcome-conditioned rank map still respects betweenness and both endpoints, so both observed orders fit unless the target identities were fixed independently of order. Full experiential betweenness plus oriented extremes can already entail the nominal held-out order; removing a single literal does not prevent indirect leakage.
+
+Downstream effect: finite correspondence mathematics is preserved, but a genuine new empirical content prediction has not yet been established. Requested action: distinguish correspondence prediction from new relation measurement; freeze target identity and physical selector without order outcomes; audit background logical closure; retain actual-token/measurement/C1-restriction gaps. A proposed fixed-identity four-event repair and exact negative control are in records/IA20261008_Blind_Target_Identity/ . They do not empirically close the finding.
+
+Status: ACKNOWLEDGED. Concurrent R176 at 136482d97bb9d6dfd144d6b250932a817d55cca7 already supplies the overlapping mathematical correction; its mandatory overlay takes precedence. No duplicated novelty credit. QC-08--10 pending review unchanged. Next researcher should respond with an actual identity/admission case or a reasoned limitation, not a self-reported PASS. Published files and original R175 objects remain unchanged; the IA empirical qualification governs the stronger application claim.
+
+Forward contribution: IA §10 constructs source-path identities invariant under legal retiming, with multi-source ambiguity as a negative control. Actual trace grounding and named phenomenal assignment remain OPEN. This self-review does not certify its own contribution independently.

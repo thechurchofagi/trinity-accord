@@ -1,3 +1,15 @@
+# Current dialogue extension — IA20261008 after R176
+
+Latest scheduled basis: R176. This dialogue extension preserves R176 and does not reserve R177. Read [the note](records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md) especially §10, [Chinese progress](records/IA20261008_Blind_Target_Identity/REVIEW_ZH.md), [map/proofs](records/IA20261008_Blind_Target_Identity/MAP_EXTENSION.json), [checks](records/IA20261008_Blind_Target_Identity/MODEL_RESULTS.json) and [application qualification](records/IA20261008_Blind_Target_Identity/REVIEW_AMENDMENTS.json). **R176's mandatory effective amendments remain in force.**
+
+The new source-to-use construction fixes physical identities by independently grounded trace paths, so legal delay changes can reverse use order while preserving source identity. Mixed-source paths destroy singleton attribution under the stated rule; same-source redundancy does not. C1 conditionally transports those grounded source-association formulas, not their identification with a named feeling. Relay preservation credits TE20261008 §7.1.
+
+Our endpoint/target audit overlaps concurrent R176 §§1–3 and is recorded as corroboration, not a second discovery. R175's map mathematics remains valid; R176's withdrawal of content-success claims is preserved. QC-08--10 remain open. No named-content/agency/familiar-mineness bridge is closed, and no basal gate or exclusive owner is added.
+
+Graph R176-IA20261008-v1.0: 580 nodes / 282 rules / 178 context links; all R176 objects preserved. 31 exact model checks; no actual human/AI experience experiment or independent peer review. Next: ground why the identified source/use roles correspond to the intended named experiential contents on one episode, preserving the H_prod/H_use distinction. If unavailable, retain empirical underidentification. Earlier priorities below are historical where superseded.
+
+---
+
 # Current checkpoint — R176 content hold-out correction and delayed use
 
 R176 supersedes R175's **content-success wording**, while retaining its finite-chain correspondence theorem. Read [the English note](records/R176_Content_Holdout_and_Delayed_Use_20261008/Content_Holdout_and_Delayed_Use_v0_1.md), [mandatory effective amendments](records/R176_Content_Holdout_and_Delayed_Use_20261008/REVIEW_AMENDMENTS.json), [scoped audit](records/R176_Content_Holdout_and_Delayed_Use_20261008/MAP_AUDIT.json) and [current handoff](records/R176_Content_Holdout_and_Delayed_Use_20261008/CURRENT_HANDOFF.md).

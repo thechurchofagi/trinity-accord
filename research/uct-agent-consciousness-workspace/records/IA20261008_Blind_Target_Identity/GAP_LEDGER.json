@@ -1,0 +1,37 @@
+{
+  "status": "OPEN_APPLICATION",
+  "items": [
+    {
+      "id": "IA-G1",
+      "target": "actual trace provenance",
+      "status": "OPEN",
+      "reason": "No real source-port/path/use instance independently measured."
+    },
+    {
+      "id": "IA-G2",
+      "target": "named experiential content",
+      "status": "OPEN",
+      "reason": "C1 transports structural source association; does not identify action feeling or flash quality."
+    },
+    {
+      "id": "IA-G3",
+      "target": "presentation order bridge",
+      "status": "OPEN",
+      "reason": "H_prod/H_use remain alternatives; no ground truth experience measurement."
+    },
+    {
+      "id": "IA-G4",
+      "target": "measurement and trial binding",
+      "status": "OPEN",
+      "reason": "Proposed admission only; errors/identity confusion/cross-trial transport unresolved."
+    },
+    {
+      "id": "IA-QC11",
+      "target": "R175 empirical wording",
+      "status": "ACKNOWLEDGED",
+      "reason": "Concurrent R176 supplied overlapping correction; retain its mandatory overlay. Empirical application remains open; no self-certification."
+    }
+  ],
+  "retained_QC": "08/09/10 pending reviewer assessment",
+  "no_doi": true
+}

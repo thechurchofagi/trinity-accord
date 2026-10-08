@@ -1,0 +1,19 @@
+{
+  "id": "IA20261008_EMPIRICAL_QUALIFICATION",
+  "status": "CORROBORATES_CONCURRENT_R176_CORRECTION_ACTUAL_APPLICATION_OPEN",
+  "affected_nodes": [
+    "R175:HELD_OUT_ORDER_PREDICTION",
+    "R175:B_ORDER_NARROWED_BOUNDARY"
+  ],
+  "affected_rules": [
+    "r175_orientation_forces_heldout",
+    "r175_b_order_narrowed"
+  ],
+  "preserved": "Finite chain and correspondence theorems remain valid; historical graph objects unmodified.",
+  "effective_application": "Do not interpret R175 as an independently tested new experiential-order fact without outcome-blind target identities, D/H separation and a logical hold-out audit. Full pre-given experiential structure may support a mapping prediction, not automatically an unfitted relation measurement.",
+  "actual_application": "EMPIRICALLY_UNDERIDENTIFIED",
+  "qc_08_10": "PENDING_REVIEW_UNCHANGED",
+  "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md",
+  "mandatory_precedence": "R176 REVIEW_AMENDMENTS.json takes precedence, including its four suspended raw rules. No suspended rule is executed by IA.",
+  "concurrent_overlap": "IA §§3–5 and R176 §§1–3 overlap and count as one project correction; no independent novelty credit."
+}

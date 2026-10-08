@@ -1,0 +1,208 @@
+{
+  "scope": "Conditional bounded proofs, including concurrent R176 corroboration; no independent certification.",
+  "claims": [
+    {
+      "id": "IA20261008:CHAIN_DOMAIN",
+      "kind": "DEFINITION",
+      "statement": "Fix n>=4, X ordered x0<...<x(n-1), labeled E, and the class of all (n-2)! strict total E-orders with fixed extreme identities x0->e0 and x(n-1)->e(n-1). Interior identity matches may be outcome-dependent only in the adaptive comparison.",
+      "scope": "Fixed finite abstract chain class; actual same-token realization is not supplied.",
+      "domain": "Fixed finite abstract chain class; actual same-token realization is not supplied.",
+      "quantifiers": "Fix n>=4, X ordered x0<...<x(n-1), labeled E, and the class of all (n-2)! strict total E-orders with fixed extreme identities x0->e0 and x(n-1)->e(n-1). Interior identity matches may be outcome-dependent only in the adaptive comparison.",
+      "status": "DECLARED_LOGICAL_CONTRACT",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §3",
+      "proof": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §3",
+      "actuality": "Abstract model only; actual P/I/K, experiential admission, identity grounding, measurement and C1 restriction remain independently required.",
+      "purpose": "Make one proposed temporal-content prediction capable of failure on fixed targets without adding a basal-experience gate.",
+      "limits": "No empirical B_order/B_fam closure, complete organization claim, unique owner or assistant-consciousness verdict."
+    },
+    {
+      "id": "IA20261008:ADAPTIVE_SATURATION",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "For every E-order in CHAIN_DOMAIN, the post-outcome rank map is an increasing isomorphism respecting both endpoints. Thus all (n-2)! orders fit while the independently named e1<e2 query varies.",
+      "scope": "Existential fitting after each possible outcome, not one fixed physical/experiential correspondence.",
+      "domain": "Existential fitting after each possible outcome, not one fixed physical/experiential correspondence.",
+      "quantifiers": "For every E-order in CHAIN_DOMAIN, the post-outcome rank map is an increasing isomorphism respecting both endpoints. Thus all (n-2)! orders fit while the independently named e1<e2 query varies.",
+      "status": "MANUAL_PROOF_AND_EXACT_FINITE_CHECK",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §3",
+      "proof": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §3",
+      "actuality": "Abstract model only; actual P/I/K, experiential admission, identity grounding, measurement and C1 restriction remain independently required.",
+      "purpose": "Make one proposed temporal-content prediction capable of failure on fixed targets without adding a basal-experience gate.",
+      "limits": "No empirical B_order/B_fam closure, complete organization claim, unique owner or assistant-consciousness verdict."
+    },
+    {
+      "id": "IA20261008:FROZEN_IDENTITY_DOMAIN",
+      "kind": "DEFINITION_AND_APPLICATION_PREMISE",
+      "statement": "In CHAIN_DOMAIN freeze iota(x_i)=e_i without target-order information, and define H as betweenness preservation/reflection by this fixed iota. Background D permits all endpoint-preserving E-orders; H is a hypothesis, not background evidence.",
+      "scope": "Finite mathematical identity is stipulated; its actual experiential grounding and restriction to C1 remain OPEN.",
+      "domain": "Finite mathematical identity is stipulated; its actual experiential grounding and restriction to C1 remain OPEN.",
+      "quantifiers": "In CHAIN_DOMAIN freeze iota(x_i)=e_i without target-order information, and define H as betweenness preservation/reflection by this fixed iota. Background D permits all endpoint-preserving E-orders; H is a hypothesis, not background evidence.",
+      "status": "DECLARED_LOGICAL_CONTRACT",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §§2,4",
+      "proof": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §§2,4",
+      "actuality": "Abstract model only; actual P/I/K, experiential admission, identity grounding, measurement and C1 restriction remain independently required.",
+      "purpose": "Make one proposed temporal-content prediction capable of failure on fixed targets without adding a basal-experience gate.",
+      "limits": "No empirical B_order/B_fam closure, complete organization claim, unique owner or assistant-consciousness verdict."
+    },
+    {
+      "id": "IA20261008:FIXED_TARGET_CONSTRAINT",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "For every n>=4 in FROZEN_IDENTITY_DOMAIN, exactly one endpoint-preserving total order satisfies H. For n=4, D permits opposite e1/e2 orders, D+H entails e1<e2, and the swapped middle order violates H on B(e0,e1,e2).",
+      "scope": "Real failure case for the joint selected bridge; neither C1 falsification nor empirical phenomenal evidence.",
+      "domain": "Real failure case for the joint selected bridge; neither C1 falsification nor empirical phenomenal evidence.",
+      "quantifiers": "For every n>=4 in FROZEN_IDENTITY_DOMAIN, exactly one endpoint-preserving total order satisfies H. For n=4, D permits opposite e1/e2 orders, D+H entails e1<e2, and the swapped middle order violates H on B(e0,e1,e2).",
+      "status": "MANUAL_PROOF_AND_EXACT_FINITE_CHECK",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §4",
+      "proof": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §4",
+      "actuality": "Abstract model only; actual P/I/K, experiential admission, identity grounding, measurement and C1 restriction remain independently required.",
+      "purpose": "Make one proposed temporal-content prediction capable of failure on fixed targets without adding a basal-experience gate.",
+      "limits": "No empirical B_order/B_fam closure, complete organization claim, unique owner or assistant-consciousness verdict."
+    },
+    {
+      "id": "IA20261008:EVIDENCE_CLOSURE_DOMAIN",
+      "kind": "DEFINITION",
+      "statement": "Fix background D, candidate H and outcome q in one admitted model class with unchanged target identities. Logical consequence includes indirect relations, rank naming and background-derived constraints, not only a held-out literal cell.",
+      "scope": "Deterministic logical evidence accounting. Noise/measurement and actual targets need separate validation.",
+      "domain": "Deterministic logical evidence accounting. Noise/measurement and actual targets need separate validation.",
+      "quantifiers": "Fix background D, candidate H and outcome q in one admitted model class with unchanged target identities. Logical consequence includes indirect relations, rank naming and background-derived constraints, not only a held-out literal cell.",
+      "status": "DECLARED_LOGICAL_CONTRACT",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §5",
+      "proof": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §5",
+      "actuality": "Abstract model only; actual P/I/K, experiential admission, identity grounding, measurement and C1 restriction remain independently required.",
+      "purpose": "Make one proposed temporal-content prediction capable of failure on fixed targets without adding a basal-experience gate.",
+      "limits": "No empirical B_order/B_fam closure, complete organization claim, unique owner or assistant-consciousness verdict."
+    },
+    {
+      "id": "IA20261008:GENUINE_HOLDOUT_CRITERION",
+      "kind": "CONDITIONAL_EVIDENCE_CRITERION",
+      "statement": "A nontrivial deterministic contrast has D compatible with q and not q, satisfiable D+H entailing q, and D+not q incompatible with H. If D already entails q, withholding its literal record does not create incremental evidence for H.",
+      "scope": "Prospective information separation criterion, not a statistical significance theorem or universal empirical testing prescription.",
+      "domain": "Prospective information separation criterion, not a statistical significance theorem or universal empirical testing prescription.",
+      "quantifiers": "A nontrivial deterministic contrast has D compatible with q and not q, satisfiable D+H entailing q, and D+not q incompatible with H. If D already entails q, withholding its literal record does not create incremental evidence for H.",
+      "status": "DECLARED_LOGICAL_CONTRACT",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §5",
+      "proof": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §5",
+      "actuality": "Abstract model only; actual P/I/K, experiential admission, identity grounding, measurement and C1 restriction remain independently required.",
+      "purpose": "Make one proposed temporal-content prediction capable of failure on fixed targets without adding a basal-experience gate.",
+      "limits": "No empirical B_order/B_fam closure, complete organization claim, unique owner or assistant-consciousness verdict."
+    },
+    {
+      "id": "IA20261008:TRACE_DOMAIN",
+      "kind": "MODEL_AND_DEFINITION",
+      "statement": "Fix a finite DAG (V,L) of executed trace events, distinct independently grounded source-port events S_B/S_C, and selected use events U. A(u) is the subset of those sources with an L-path to u. id(u) is defined only for singleton A(u). Legal timestamp assignments strictly increase on every L edge; retiming preserves roles and L.",
+      "scope": "Declared trace transmission, not arbitrary causal ancestry or identical stored values. Abstract finite model.",
+      "domain": "Declared trace transmission, not arbitrary causal ancestry or identical stored values. Abstract finite model.",
+      "quantifiers": "Fix a finite DAG (V,L) of executed trace events, distinct independently grounded source-port events S_B/S_C, and selected use events U. A(u) is the subset of those sources with an L-path to u. id(u) is defined only for singleton A(u). Legal timestamp assignments strictly increase on every L edge; retiming preserves roles and L.",
+      "status": "DECLARED_MODEL",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §10 IA-4",
+      "proof": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §10 IA-4",
+      "actuality": "Abstract construction; actual interpretation is an explicit additional premise.",
+      "purpose": "Fix physical content-source roles independently of temporal rank and transport only justified structural relations.",
+      "limits": "Does not identify externally named phenomenal content, solve B_order/B_fam or add a basal gate."
+    },
+    {
+      "id": "IA20261008:TRACE_IDENTITY_INVARIANT",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Every legal retiming of TRACE_DOMAIN preserves A(u), including singleton identity and multi-source ambiguity. Role-preserving graph isomorphisms transport these sets covariantly; faithful relay subdivision preserves sets on old endpoints. Incomparable use times may reverse without changing source identity.",
+      "scope": "All old trace roles and paths fixed; new cross-source routes can invalidate unique identity. Classical reachability; relay precedent TE20261008 §7.1.",
+      "domain": "All old trace roles and paths fixed; new cross-source routes can invalidate unique identity. Classical reachability; relay precedent TE20261008 §7.1.",
+      "quantifiers": "Every legal retiming of TRACE_DOMAIN preserves A(u), including singleton identity and multi-source ambiguity. Role-preserving graph isomorphisms transport these sets covariantly; faithful relay subdivision preserves sets on old endpoints. Incomparable use times may reverse without changing source identity.",
+      "status": "MANUAL_CONDITIONAL_PROOF",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §10 IA-4",
+      "proof": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §10 IA-4",
+      "actuality": "Abstract construction; actual interpretation is an explicit additional premise.",
+      "purpose": "Fix physical content-source roles independently of temporal rank and transport only justified structural relations.",
+      "limits": "Does not identify externally named phenomenal content, solve B_order/B_fam or add a basal gate."
+    },
+    {
+      "id": "IA20261008:ACTUAL_TRACE_INSTANCE",
+      "kind": "ACTUAL_GROUNDING_PREMISE",
+      "statement": "Fix one actual P/I/K containing the selected finite source-to-use histories, complete D_K/Phi_K and C1 instance h_P. Independently interpret every source-port/trace/use predicate, domain bound and parameter; finite reachability uses only that interpreted domain. No external archive or test outcome is substituted for an actual trace.",
+      "scope": "Application premise OPEN. Retiming comparisons use separately grounded instances and a justified role-preserving map; no screened-history claim.",
+      "domain": "Application premise OPEN. Retiming comparisons use separately grounded instances and a justified role-preserving map; no screened-history claim.",
+      "quantifiers": "Fix one actual P/I/K containing the selected finite source-to-use histories, complete D_K/Phi_K and C1 instance h_P. Independently interpret every source-port/trace/use predicate, domain bound and parameter; finite reachability uses only that interpreted domain. No external archive or test outcome is substituted for an actual trace.",
+      "status": "OPEN_ACTUAL_APPLICATION",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §10 IA-5",
+      "proof": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §10 IA-5",
+      "actuality": "Abstract construction; actual interpretation is an explicit additional premise.",
+      "purpose": "Fix physical content-source roles independently of temporal rank and transport only justified structural relations.",
+      "limits": "Does not identify externally named phenomenal content, solve B_order/B_fam or add a basal gate."
+    },
+    {
+      "id": "IA20261008:TRACE_COUNTERPART",
+      "kind": "CONDITIONAL_UCT_INTERPRETATION",
+      "statement": "Given TRACE_IDENTITY_INVARIANT, ACTUAL_TRACE_INSTANCE and A:C1, the finite source-set and singleton association formulas hold in D_K exactly when their fully transported counterparts hold in Phi_K. This supplies source-associated experiential structural roles, without identifying a named feeling or choosing H_prod/H_use.",
+      "scope": "Same bound/domain and all parameters transported. No subjective event-name measurement, familiar-mineness bridge, total-richness or subject-count conclusion.",
+      "domain": "Same bound/domain and all parameters transported. No subjective event-name measurement, familiar-mineness bridge, total-richness or subject-count conclusion.",
+      "quantifiers": "Given TRACE_IDENTITY_INVARIANT, ACTUAL_TRACE_INSTANCE and A:C1, the finite source-set and singleton association formulas hold in D_K exactly when their fully transported counterparts hold in Phi_K. This supplies source-associated experiential structural roles, without identifying a named feeling or choosing H_prod/H_use.",
+      "status": "MANUAL_CONDITIONAL_PROOF",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §10 IA-5",
+      "proof": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §10 IA-5",
+      "actuality": "Abstract construction; actual interpretation is an explicit additional premise.",
+      "purpose": "Fix physical content-source roles independently of temporal rank and transport only justified structural relations.",
+      "limits": "Does not identify externally named phenomenal content, solve B_order/B_fam or add a basal gate."
+    }
+  ],
+  "arguments": [
+    {
+      "id": "ia20261008_adaptive",
+      "all_of": [
+        "IA20261008:CHAIN_DOMAIN"
+      ],
+      "conclusion": "IA20261008:ADAPTIVE_SATURATION",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "proof": "Map physical rank k to experiential rank k for each observed permutation. Every order fits; target identity changes.",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §3"
+    },
+    {
+      "id": "ia20261008_frozen",
+      "all_of": [
+        "IA20261008:CHAIN_DOMAIN",
+        "IA20261008:FROZEN_IDENTITY_DOMAIN"
+      ],
+      "conclusion": "IA20261008:FIXED_TARGET_CONSTRAINT",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "proof": "Betweenness plus fixed oriented extremes forces the increasing map; fixed iota permits only the original labeled order. Explicit middle swap violates B.",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §4"
+    },
+    {
+      "id": "ia20261008_closure",
+      "all_of": [
+        "IA20261008:EVIDENCE_CLOSURE_DOMAIN"
+      ],
+      "conclusion": "IA20261008:GENUINE_HOLDOUT_CRITERION",
+      "kind": "DEFINITIONAL_EVIDENCE_ACCOUNTING",
+      "proof": "Unpack semantic entailment and satisfiability; q already true in every background model cannot distinguish H within that background.",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §5"
+    },
+    {
+      "id": "ia20261008_trace_invariance",
+      "all_of": [
+        "IA20261008:TRACE_DOMAIN"
+      ],
+      "conclusion": "IA20261008:TRACE_IDENTITY_INVARIANT",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md",
+      "proof": "Reachability omits timestamps; isomorphisms map paths bijectively; relay expansion/contraction preserves old endpoint reachability."
+    },
+    {
+      "id": "ia20261008_trace_transport",
+      "all_of": [
+        "IA20261008:TRACE_IDENTITY_INVARIANT",
+        "IA20261008:ACTUAL_TRACE_INSTANCE",
+        "A:C1"
+      ],
+      "conclusion": "IA20261008:TRACE_COUNTERPART",
+      "kind": "CONDITIONAL_UCT_DEDUCTION",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md",
+      "proof": "Expand bounded reachability as a finite formula; isomorphism invariance transports formula, roles, all parameters, source sets and uniqueness on the same instance."
+    }
+  ],
+  "overlap": "IA §§3–5 and R176 §§1–3 overlap and count as one project correction; no independent novelty credit.",
+  "open": [
+    "physical trace grounding",
+    "independent named experiential contents",
+    "C1 restriction",
+    "measurement validity",
+    "H_prod vs H_use"
+  ]
+}

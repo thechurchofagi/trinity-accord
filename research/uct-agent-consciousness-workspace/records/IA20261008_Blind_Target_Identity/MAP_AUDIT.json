@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "checks": {
+    "nodes_prefix": true,
+    "rules_prefix": true,
+    "context_links_prefix": true,
+    "unique_nodes": true,
+    "unique_rules": true,
+    "rule_endpoints": true,
+    "context_endpoints": true,
+    "sources_unchanged": true,
+    "counts": true,
+    "R176_layers_preserved": true,
+    "model_pass": true,
+    "new_nodes_scoped": true,
+    "transport_grounding_required": true
+  },
+  "manual_review": {
+    "math": "IA-1/2 overlap R176; IA-4 paths invariant under retiming; source labels fixed; ambiguous source case retained.",
+    "C1": "IA-5 finite formula transports all parameters on one actual interval; named content not inferred.",
+    "R176": "All original objects and effective overlays preserved; no suspended rule executed.",
+    "scope": "Scoped mathematical/self-review only; no full global proof or empirical validation.",
+    "direction": "Experience existence unchanged; no owner threshold; familiar mineness open."
+  },
+  "parent_commit": "136482d97bb9d6dfd144d6b250932a817d55cca7",
+  "parent_graph_sha256": "fa4fd1b86f8146f0894bc84899538d8bf847ee2097805dfbbcf00cd225db4e9e",
+  "graph_sha256": "aa89a8040702771f26a4fc3d90c3598dbd78a3c123c1e7ede2a010a38adaf1c3"
+}
