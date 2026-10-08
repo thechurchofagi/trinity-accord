@@ -1,3 +1,17 @@
+# Current checkpoint — R184 target persistence after obstruction
+
+Read [the derivation](records/R184_Target_Persistence_After_Obstruction_20261008/Target_Persistence_After_Obstruction_v0_1.md), [round record](records/R184_Target_Persistence_After_Obstruction_20261008/ROUND_RECORD.md), [claims](records/R184_Target_Persistence_After_Obstruction_20261008/CLAIM_LEDGER.json), [gaps](records/R184_Target_Persistence_After_Obstruction_20261008/GAP_LEDGER.json), [exact results](records/R184_Target_Persistence_After_Obstruction_20261008/MODEL_RESULTS.json), [map audit](records/R184_Target_Persistence_After_Obstruction_20261008/MAP_AUDIT.json), [review response](records/R184_Target_Persistence_After_Obstruction_20261008/REVIEW_RESPONSE.md), and [handoff](records/R184_Target_Persistence_After_Obstruction_20261008/CURRENT_HANDOFF.md).
+
+R184 defines a retained target route `RTR_r(tau)`: an actually target-discriminating carrier spans obstruction, is consumed by the installed policy after release, and supports resumption without a new directive. Internal retention M and a continuing external cue Q give single-route and redundant architectures. In redundant systems neither route is individually unavoidable but `{M,Q}` is disjunctively unavoidable. Equal intact recovery does not identify priority; a declared conflict input separates the finite policies.
+
+The 256-row/17-check model contains no phenomenal variable. Deliberate/reflex, report and substrate labels do not select the declared dynamics, so the reflex twin survives. `RTR` is a positive organization coordinate with a conditional experience-internal counterpart under actual same-instance C1 premises, not felt trying, a basal gate or an exclusive owner. QC10/IA-QC11/QC12/QC13 actual and phenomenal applications remain OPEN. Canonical graph stays 584/284/178 at the pinned hash; R184 is PENDING_MAP/AUDIT_INCOMPLETE.
+
+Next: construct one cross-scale membership/gluing map for overlapping local retention, effector-loop and whole-organism process tokens, distinguishing one shared actual relation from equal-valued copied relations without selecting one privileged owner.
+
+Older current checkpoints below remain historical where inconsistent.
+
+---
+
 # Current checkpoint — R183 target-relative experiential relevance
 
 Read [the derivation](records/R183_Target_Relative_Experiential_Relevance_20261008/Target_Relative_Experiential_Relevance_v0_1.md), [claims](records/R183_Target_Relative_Experiential_Relevance_20261008/CLAIM_LEDGER.json), [gaps](records/R183_Target_Relative_Experiential_Relevance_20261008/GAP_LEDGER.json), [map audit](records/R183_Target_Relative_Experiential_Relevance_20261008/MAP_AUDIT.json), [review response](records/R183_Target_Relative_Experiential_Relevance_20261008/REVIEW_RESPONSE.md), and [handoff](records/R183_Target_Relative_Experiential_Relevance_20261008/CURRENT_HANDOFF.md).

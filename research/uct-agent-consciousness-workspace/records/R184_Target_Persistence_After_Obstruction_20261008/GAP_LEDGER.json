@@ -1,0 +1,65 @@
+{
+  "round": "R184",
+  "gaps": [
+    {
+      "id": "R184-G1",
+      "location": "R184-H1 and §4",
+      "problem": "RTR/EAC is not independently identified with felt trying, effort or familiar mineness.",
+      "impact": ["QC-20261008-10", "IA-QC11", "named phenomenal conclusions"],
+      "counterexample": "deliberate/reflex twins share the full selected profile",
+      "fixed": "The result is restricted to an organization-level coordinate and conditional experience-internal counterpart.",
+      "open_premise": "independently calibrated selected experiential target and discriminating bridge",
+      "status": "OPEN"
+    },
+    {
+      "id": "R184-G2",
+      "location": "RTR route membership and R184-C3",
+      "problem": "A successful perturbation is evidence of actual route use only under intervention fidelity and a fixed policy/boundary.",
+      "impact": ["actual application", "QC13", "TRER instantiation"],
+      "counterexample": "the perturbation changes attention or policy, or copied routes share an unmodelled driver",
+      "fixed": "Membership, use and evidence are typed separately; conflict checks are definition witnesses only.",
+      "open_premise": "actual path measurement and intervention isolation",
+      "status": "OPEN_ACTUAL_INSTANCE"
+    },
+    {
+      "id": "R184-G3",
+      "location": "M/Q support family",
+      "problem": "No actual human, prosthetic user or artificial agent realizes the declared complete route family.",
+      "impact": ["IA-QC11", "QC12", "QC13", "empirical relevance"],
+      "counterexample": "a hidden third route or a target cue outside the declared bearer restores resumption",
+      "fixed": "The theorem is restricted to the frozen toy boundary and lists changed-resource cases separately.",
+      "open_premise": "independent bearer, boundary, target and route admission",
+      "status": "OPEN"
+    },
+    {
+      "id": "R184-G4",
+      "location": "deletion-only support analysis",
+      "problem": "Deletion and content-conflict interventions answer different questions; merging them changes the success family.",
+      "impact": ["individual/disjunctive relevance", "minimal supports"],
+      "counterexample": "in redundant priority policies, corrupting the priority route can cause failure despite the other route remaining present",
+      "fixed": "The note declares deletion-only supports and analyzes conflict separately.",
+      "open_premise": "choose and justify the physically relevant intervention protocol for an application",
+      "status": "OPEN_PROTOCOL_CHOICE"
+    },
+    {
+      "id": "R184-G5",
+      "location": "cross-scale interpretation",
+      "problem": "The same physical relation may participate in overlapping local, effector-loop and organism tokens; current records do not determine membership or whether relation occurrences are shared versus copied.",
+      "impact": ["bearer assignment", "experience-internal interpretation", "next main-line question"],
+      "counterexample": "equal-valued copied carriers mimic a shared relation in every selected baseline output",
+      "fixed": "No exclusive owner or single privileged scale is inferred.",
+      "open_premise": "an actual overlap/gluing and membership contract with a counterexample",
+      "status": "OPEN_NEXT"
+    },
+    {
+      "id": "R184-G6",
+      "location": "whole-map audit",
+      "problem": "Structural traversal is complete but global per-node/per-rule semantic reproof and inherited inline-schema repairs are incomplete.",
+      "impact": ["map promotion", "downstream premise use", "publication readiness"],
+      "counterexample": "a structurally valid DAG can contain a false or scope-shifted rule",
+      "fixed": "R184 remains PENDING_MAP and records the exact targeted semantic slice.",
+      "open_premise": "complete semantic audit and reviewer-controlled promotion",
+      "status": "AUDIT_INCOMPLETE"
+    }
+  ]
+}

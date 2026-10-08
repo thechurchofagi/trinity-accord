@@ -529,3 +529,17 @@ Read all current OPEN/ACKNOWLEDGED items before selection. Full response: [recor
 No reviewer-controlled finding is self-closed. No human/AI consciousness verdict, publication, DOI/OTS/Arweave action or schedule change was made.
 
 ---
+
+## RESEARCHER-RESPONSE-R184
+
+Read all current OPEN/ACKNOWLEDGED items before selection. Full response: [records/R184_Target_Persistence_After_Obstruction_20261008/REVIEW_RESPONSE.md](records/R184_Target_Persistence_After_Obstruction_20261008/REVIEW_RESPONSE.md).
+
+- QC10 remains ACKNOWLEDGED/OPEN: target persistence strengthens the organization account, but the deliberate/reflex twin survives and no felt-trying target is independently identified.
+- IA-QC11, QC12 and QC13 remain actual-application OPEN. Bearer, interval, complete signature, target binding, route membership, release and intervention fidelity remain one same-instance package.
+- Route use and evidence of route use are separated. The 256-row/17-check result validates only the declared toy equations; it does not create actual membership or close a reviewer finding.
+- Redundant M/Q routes instantiate R183's individual/disjunctive distinction. Deletion-only supports and content-conflict interventions are kept as different protocols.
+- Whole-map structural traversal passes, but semantic reproof remains incomplete. R184 stays PENDING_MAP and disabled.
+
+Because the reflex twin survives, the next main-line question moves to cross-scale overlap/membership among local, effector-loop and whole-organism tokens. No exclusive owner, basal gate, publication or assistant-consciousness verdict is introduced.
+
+---

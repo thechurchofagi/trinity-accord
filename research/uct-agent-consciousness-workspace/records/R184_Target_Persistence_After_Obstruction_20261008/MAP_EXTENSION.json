@@ -1,0 +1,51 @@
+{
+  "schema": "uct-pending-typed-overlay-v1",
+  "record": "R184",
+  "base": {
+    "canonical_path": "UCT_FORMAL_GRAPH.json",
+    "canonical_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+    "effective_manifest": "UCT_FORMAL_GRAPH_MODULES.json"
+  },
+  "status": "PENDING_MAP",
+  "audit_status": "AUDIT_INCOMPLETE",
+  "enabled_as_established_premises": false,
+  "depends_on": [
+    {"id": "CORE20261008", "role": "typed support-family mathematics", "status": "REGISTERED_ADDITIVE_AUDIT_INCOMPLETE"},
+    {"id": "R183", "role": "individual/disjunctive target-relative relevance contract", "status": "PENDING_MAP; imported only as a conditional dependency"}
+  ],
+  "common_scope": "One fixed bearer candidate P, interval t0-t2, complete-signature candidate K, independently bound overt target tau, obstruction and release, no release-time directive, fixed boundary/resources and predeclared deletion or content intervention protocol. Toy equations do not establish actual realization, C1, a named feeling or one exclusive subject.",
+  "nodes": [
+    {"id":"R184:RESUMPTION_CONTRACT","kind":"definition","statement":"T_resume(tau) is target-correct post-release action resumption for both target values without a release-time directive.","scope":"Fixed P/I/K/TBI, obstruction, release, target, boundary and scoring contract.","source":"§1","status":"DEFINITION"},
+    {"id":"R184:RTR","kind":"definition","statement":"RTR_r(tau) requires an actually target-discriminating route spanning obstruction that is actually consumed by the same installed policy after release, with no reissue and a predeclared route-isolation consequence.","scope":"Route membership, policy use and evidence of use remain distinct; biological material, report and reflection are not clauses.","source":"§2","status":"DEFINITION"},
+    {"id":"R184:M_ROUTE","kind":"model_specification","statement":"M is an internal continuing target carrier consumed after release.","scope":"Toy route type; actual bearer membership remains open.","source":"§2-3","status":"MODEL_SPECIFICATION"},
+    {"id":"R184:Q_ROUTE","kind":"model_specification","statement":"Q is a continuing external target cue plus admitted sensor-consumer path, not a newly issued release-time directive.","scope":"Cue and path lie within the frozen boundary/resource contract.","source":"§2-3","status":"MODEL_SPECIFICATION"},
+    {"id":"R184:SUPPORT_FAMILIES","kind":"model_result","statement":"The M-only, Q-only and two redundant policies have deletion-only minimal supports {M}, {Q}, and {M}/{Q}, respectively.","scope":"Retained route content remains target-correct; content-conflict interventions are separate.","source":"§3; MODEL_RESULTS.json","status":"MODEL_CONDITIONAL_CHECKED"},
+    {"id":"R184:INDIVIDUAL_APPLICATION","kind":"conditional_application","statement":"M or Q is individually unavoidable only in the corresponding single-route architecture.","scope":"Same declared deletion family and R183 support contract.","source":"R184-C2","status":"CONDITIONAL_ON_PENDING_R183"},
+    {"id":"R184:DISJUNCTIVE_APPLICATION","kind":"conditional_application","statement":"In either redundant architecture neither route is individually unavoidable, while {M,Q} intersects every minimal success.","scope":"Architecture/protocol relative; no unique carrier or subject follows.","source":"R184-C2","status":"CONDITIONAL_ON_PENDING_R183"},
+    {"id":"R184:INTACT_UNDERIDENTIFICATION","kind":"counterexample","statement":"Equal intact resumption with M=Q=tau does not identify redundant priority; conflict input separates the policies.","scope":"Finite declared equations; actual intervention fidelity remains open.","source":"R184-C3","status":"PROVED_FINITE_SCOPE"},
+    {"id":"R184:REFLEX_TWIN","kind":"counterexample","statement":"Deliberate-labelled and reflex-labelled controllers can share the selected TBI/ART/EAC/RTR and resumption profile.","scope":"Blocks phenomenal identification only; does not establish complete-type or experience equality.","source":"R184-C4","status":"PROVED_INFERENCE_LIMIT"},
+    {"id":"R184:ACTUAL_BRIDGE","kind":"unresolved_premise","statement":"One actual token jointly satisfies bearer, interval, complete signature, target binding, route membership, policy consumption, boundary, release and intervention-fidelity premises.","scope":"Same-instance all_of premise; model success and test access do not discharge it.","source":"§4,§8","status":"OPEN"},
+    {"id":"R184:EXPERIENTIAL_RELEVANCE","kind":"conditional_application","statement":"Under C1, ACTUAL_BRIDGE and the matching R183 relevance package, an RTR relation or disjunctive route family has an experience-internal target-relative counterpart.","scope":"No extra causal force, named feeling, basal gate, richness order or exclusive owner.","source":"§4","status":"CONDITIONAL_ONLY"},
+    {"id":"R184:OVERLAP_NEXT","kind":"open_problem","statement":"Determine how local target-retention, effector-loop and whole-organism actual tokens overlap and whether one relation is shared across tokens or copied into distinct occurrences.","scope":"Membership/gluing problem, not an exclusive subject selector.","source":"§8","status":"OPEN_NEXT"}
+  ],
+  "rules": [
+    {"id":"r184_individual_application","type":"conditional_application","statement":"Apply individual relevance to the single-route support families.","all_of":["R184:RESUMPTION_CONTRACT","R184:SUPPORT_FAMILIES","R183:INDIVIDUAL_RELEVANCE"],"conclusion":"R184:INDIVIDUAL_APPLICATION","binding":"Same target, deletion protocol and support family","proof":"R184-C2"},
+    {"id":"r184_disjunctive_application","type":"conditional_application","statement":"Apply disjunctive relevance to each redundant support family.","all_of":["R184:RESUMPTION_CONTRACT","R184:SUPPORT_FAMILIES","R183:DISJUNCTIVE_RELEVANCE"],"conclusion":"R184:DISJUNCTIVE_APPLICATION","binding":"Same redundant architecture, target and deletion protocol","proof":"R184-C2"},
+    {"id":"r184_intact_underidentification","type":"model_deduction","statement":"Matching intact route contents leave priority unidentified until a declared conflict input.","all_of":["R184:M_ROUTE","R184:Q_ROUTE","R184:SUPPORT_FAMILIES"],"conclusion":"R184:INTACT_UNDERIDENTIFICATION","binding":"Same redundant policies and both target values","proof":"R184-C3; exact check"},
+    {"id":"r184_reflex_limit","type":"model_counterexample","statement":"Crossed external labels do not identify a named experience when selected dynamics are fixed.","all_of":["R184:RTR","R184:RESUMPTION_CONTRACT"],"conclusion":"R184:REFLEX_TWIN","binding":"Same selected finite organization; no complete-organization equality premise","proof":"R184-C4; 256-row enumeration"},
+    {"id":"r184_experiential_relevance","type":"conditional_UCT_application","statement":"Transport the actually grounded target-relevant relation under C1 only with the complete same-instance package.","all_of":["A:C1","R184:ACTUAL_BRIDGE","R184:RTR","R184:RESUMPTION_CONTRACT","R184:INDIVIDUAL_APPLICATION"],"conclusion":"R184:EXPERIENTIAL_RELEVANCE","binding":"Same actual P/I/K/TBI/route/target/protocol; disjunctive version requires the corresponding R184 disjunctive premise rather than this rule","proof":"§4"}
+  ],
+  "non_deductive_relations": [
+    {"from":"R184:REFLEX_TWIN","to":"R184:OVERLAP_NEXT","type":"research_direction_not_proof"},
+    {"from":"R184:EXPERIENTIAL_RELEVANCE","to":"R184:REFLEX_TWIN","type":"named_feeling_non_entailment"},
+    {"from":"R184:ACTUAL_BRIDGE","to":"R184:INTACT_UNDERIDENTIFICATION","type":"actual_application_obligation_not_model_premise"}
+  ],
+  "promotion_requirements": [
+    "Complete the full effective-map semantic audit and reconcile every newer pending layer",
+    "Retain R183 pending status unless independently promoted",
+    "Discharge ACTUAL_BRIDGE with same-instance evidence before actual application",
+    "Keep named phenomenal interpretation open unless independently calibrated",
+    "Explicit reviewer-controlled enablement; file existence never promotes a claim"
+  ],
+  "publication_authorized": false
+}

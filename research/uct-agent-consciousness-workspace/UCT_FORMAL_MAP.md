@@ -32,6 +32,12 @@ CG-C/R/UCT/SUB/ANF/W and CD-LIFT/PROTOCOL/INVARIANTS/FACTOR/CAPABILITY are regis
 
 The 12-node/5-rule layer is registered in the pending catalogue and is **not** loaded as an established module. Its EI architecture examples are nonpremise witnesses. Full canonical structural traversal succeeded, but semantic review remains incomplete and actual/named-experience bridges stay open. Canonical graph bytes and the active CORE revision are unchanged.
 
+## Pending body/action application: R184
+
+[R184](records/R184_Target_Persistence_After_Obstruction_20261008/Target_Persistence_After_Obstruction_v0_1.md) defines an actual-use-sensitive retained target route across obstruction and release, with no release-time directive. Internal retention, a continuing external cue and two redundant policies instantiate R183's individual/disjunctive distinction. Equal intact recovery does not identify route priority; a declared conflict input does in the finite model.
+
+The deliberate/reflex twin survives the temporal strengthening. `RTR` is therefore a positive organization coordinate with a conditional experience-internal counterpart under C1, not felt trying, familiar mineness, a basal gate or an exclusive owner. Its 12-node/5-rule layer is `PENDING_MAP`, depends conditionally on pending R183, and remains disabled. The next bounded issue is actual cross-scale relation membership among overlapping local, effector-loop and whole-organism tokens.
+
 ## Remaining required work
 
 Recover the full base into the computation environment; complete per-ID semantic coverage of all old nodes/rules/context links and rederive affected dependencies. The loader's whole structural scan would still not prove all semantics. Independently identify a human experiential target and actual realization before asserting a specific anatomical core. Keep the author's non-erasure, theory-first, originality and progress-feedback requirements. No publication authorization.

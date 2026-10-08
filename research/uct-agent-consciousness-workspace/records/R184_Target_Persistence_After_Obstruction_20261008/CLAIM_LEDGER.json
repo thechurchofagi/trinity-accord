@@ -1,0 +1,60 @@
+{
+  "round": "R184",
+  "claims": [
+    {
+      "id": "R184-C1",
+      "type": "finite_nonidentification_result",
+      "statement": "On the declared toy domain, the selected obstructed-time R181/R182 values do not determine target-correct post-release resumption without including a target-spanning route or an equivalent sufficient completion.",
+      "domain": "fixed toy bearer, interval t0-t2, target binding, obstruction, release and no-reissue contract",
+      "premises": ["declared M/Q equations", "fixed target and release", "no new directive at t2"],
+      "proof_or_source": "paired finite constructions and exact enumeration",
+      "counterexamples_or_limits": ["unmodelled routes defeat universality", "no actual human instance"],
+      "status": "PROVED_FINITE_SCOPE",
+      "thought_experiment_role": "TE1/TE2 separate present obstruction from spanning target availability"
+    },
+    {
+      "id": "R184-C2",
+      "type": "new_application_of_inherited_theorem",
+      "statement": "M or Q is individually unavoidable in the corresponding single-route architecture, while neither is individually unavoidable in the redundant architectures and the family {M,Q} is disjunctively unavoidable.",
+      "domain": "four declared deletion-only support families",
+      "premises": ["fixed target and resources", "retained route content stays target-correct", "R183 support definitions"],
+      "proof_or_source": "minimal-support calculation; inherited intersection/hitting-set mathematics",
+      "counterexamples_or_limits": ["content corruption is a different intervention family", "physical realizability not established"],
+      "status": "PROVED_FINITE_SCOPE_NEW_APPLICATION",
+      "thought_experiment_role": "TE2/TE3 block a unique-carrier inference"
+    },
+    {
+      "id": "R184-C3",
+      "type": "finite_intervention_witness",
+      "statement": "Equal intact target resumption does not identify redundant-route priority; a predeclared conflict perturbation distinguishes M-priority and Q-priority policies.",
+      "domain": "two redundant toy policies",
+      "premises": ["actual installed priority rule", "route-specific content intervention", "other policy relations fixed"],
+      "proof_or_source": "direct substitution for both target values",
+      "counterexamples_or_limits": ["off-target perturbation or policy change invalidates the isolation", "test evidence does not create route membership"],
+      "status": "PROVED_FINITE_SCOPE",
+      "thought_experiment_role": "TE3 separates use from evidence"
+    },
+    {
+      "id": "R184-C4",
+      "type": "missing_inference_witness",
+      "statement": "A deliberate-labelled and reflex-labelled twin can share the complete selected EAC/RTR/resumption profile, so target persistence does not identify felt trying.",
+      "domain": "declared 256-row finite model",
+      "premises": ["same selected organization", "labels excluded from dynamics", "no independent phenomenal target"],
+      "proof_or_source": "crossed exact enumeration",
+      "counterexamples_or_limits": ["real deliberate/reflex processes can differ in wider organization", "no conclusion of experiential equality or inequality"],
+      "status": "PROVED_INFERENCE_LIMIT",
+      "thought_experiment_role": "TE4 is the stopping counterexample"
+    },
+    {
+      "id": "R184-H1",
+      "type": "conditional_uct_interpretation",
+      "statement": "For one independently admitted actual P/I/K/TBI and fixed intervention family, C1 gives every actual RTR relation an experiential structural counterpart; individual or disjunctive target relevance follows only with the matching support premises.",
+      "domain": "one actual UCT instance under the declared route family",
+      "premises": ["A:C1", "actual token and complete signature", "actual route membership", "fixed target/intervention family", "R183 individual or disjunctive relevance premises"],
+      "proof_or_source": "conditional C1 transport plus R183 application",
+      "counterexamples_or_limits": ["no named feeling", "no actual human admission", "no unique owner", "no basal gate"],
+      "status": "OPEN_ACTUAL_APPLICATION_AND_PHENOMENAL_BRIDGE",
+      "thought_experiment_role": "TE5 protects actual-use and token-identity distinctions"
+    }
+  ]
+}

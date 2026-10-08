@@ -1,0 +1,42 @@
+{
+  "schema": "uct-r184-run-receipt/1.0",
+  "date": "2026-10-08",
+  "baseline_commit": "7c159777ffde9148f5e99830d844fe9b7139a3fa",
+  "initial_preconcurrency_commit": "116c4846f93d2ef71a023bb1374737606d557f2b",
+  "canonical_graph": {
+    "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH.json",
+    "sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+    "nodes": 584,
+    "rules": 284,
+    "context_links": 178,
+    "modified": false
+  },
+  "model": {
+    "script": "check_target_persistence.py",
+    "finite_rows": 256,
+    "checks": 17,
+    "result": "MODEL_RESULTS.json",
+    "status": "PASS_DECLARED_FINITE_MODEL_ONLY"
+  },
+  "map_audit": {
+    "script": "audit_map.py",
+    "result": "MAP_AUDIT.json",
+    "structural_traversal": "PASS",
+    "semantic_status": "AUDIT_INCOMPLETE",
+    "unreviewed_base_nodes": 575,
+    "unreviewed_base_rules": 279,
+    "unreviewed_base_context_links": 178
+  },
+  "validation": {
+    "json_parse": "PASS",
+    "changed_markdown_local_links": "PASS_11_FILES_0_MISSING",
+    "git_diff_check": "PASS"
+  },
+  "scientific_status": {
+    "increment": "typed RTR application; individual/disjunctive support classification; route-use/evidence split; reflex-twin stopping result",
+    "actual_application": "OPEN",
+    "named_phenomenal_bridge": "OPEN",
+    "map": "PENDING_MAP",
+    "publication": "NOT_AUTHORIZED"
+  }
+}

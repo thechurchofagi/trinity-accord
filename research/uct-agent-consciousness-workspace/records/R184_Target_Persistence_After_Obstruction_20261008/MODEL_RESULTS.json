@@ -1,0 +1,205 @@
+{
+  "schema": "uct-r184-target-persistence-check/1.0",
+  "finite_rows": 256,
+  "checks": [
+    {
+      "name": "baseline enumeration has 256 rows",
+      "passed": true,
+      "cases": 256,
+      "detail": null
+    },
+    {
+      "name": "no row contains a release-time directive",
+      "passed": true,
+      "cases": 256,
+      "detail": null
+    },
+    {
+      "name": "M_ONLY isolated route follows target swap",
+      "passed": true,
+      "cases": 2,
+      "detail": null
+    },
+    {
+      "name": "Q_ONLY isolated route follows target swap",
+      "passed": true,
+      "cases": 2,
+      "detail": null
+    },
+    {
+      "name": "M-only minimum is {M}",
+      "passed": true,
+      "cases": 4,
+      "detail": null
+    },
+    {
+      "name": "Q-only minimum is {Q}",
+      "passed": true,
+      "cases": 4,
+      "detail": null
+    },
+    {
+      "name": "RED_M_PRIORITY has two singleton minima",
+      "passed": true,
+      "cases": 4,
+      "detail": null
+    },
+    {
+      "name": "RED_M_PRIORITY has empty individual core",
+      "passed": true,
+      "cases": 2,
+      "detail": null
+    },
+    {
+      "name": "RED_M_PRIORITY requires disjunction {M,Q}",
+      "passed": true,
+      "cases": 2,
+      "detail": null
+    },
+    {
+      "name": "RED_Q_PRIORITY has two singleton minima",
+      "passed": true,
+      "cases": 4,
+      "detail": null
+    },
+    {
+      "name": "RED_Q_PRIORITY has empty individual core",
+      "passed": true,
+      "cases": 2,
+      "detail": null
+    },
+    {
+      "name": "RED_Q_PRIORITY requires disjunction {M,Q}",
+      "passed": true,
+      "cases": 2,
+      "detail": null
+    },
+    {
+      "name": "equal intact resumption underdetermines redundant priority",
+      "passed": true,
+      "cases": 2,
+      "detail": null
+    },
+    {
+      "name": "conflict intervention distinguishes redundant consumer rules",
+      "passed": true,
+      "cases": 2,
+      "detail": null
+    },
+    {
+      "name": "deliberate/reflex label is dynamically inert",
+      "passed": true,
+      "cases": 256,
+      "detail": null
+    },
+    {
+      "name": "report label is dynamically inert",
+      "passed": true,
+      "cases": 256,
+      "detail": null
+    },
+    {
+      "name": "biological/prosthetic label is dynamically inert",
+      "passed": true,
+      "cases": 256,
+      "detail": null
+    }
+  ],
+  "architectures": {
+    "M_ONLY": {
+      "successful_supports": [
+        [
+          "M"
+        ],
+        [
+          "M",
+          "Q"
+        ]
+      ],
+      "minimal_supports": [
+        [
+          "M"
+        ]
+      ]
+    },
+    "Q_ONLY": {
+      "successful_supports": [
+        [
+          "Q"
+        ],
+        [
+          "M",
+          "Q"
+        ]
+      ],
+      "minimal_supports": [
+        [
+          "Q"
+        ]
+      ]
+    },
+    "RED_M_PRIORITY": {
+      "successful_supports": [
+        [
+          "Q"
+        ],
+        [
+          "M"
+        ],
+        [
+          "M",
+          "Q"
+        ]
+      ],
+      "minimal_supports": [
+        [
+          "Q"
+        ],
+        [
+          "M"
+        ]
+      ]
+    },
+    "RED_Q_PRIORITY": {
+      "successful_supports": [
+        [
+          "Q"
+        ],
+        [
+          "M"
+        ],
+        [
+          "M",
+          "Q"
+        ]
+      ],
+      "minimal_supports": [
+        [
+          "Q"
+        ],
+        [
+          "M"
+        ]
+      ]
+    }
+  },
+  "conflict_witnesses": [
+    {
+      "tau": 0,
+      "M_priority": 0,
+      "Q_priority": 1
+    },
+    {
+      "tau": 1,
+      "M_priority": 1,
+      "Q_priority": 0
+    }
+  ],
+  "limits": [
+    "toy equations only",
+    "no phenomenal variable",
+    "no actual human or deployed-agent admission",
+    "deletion family assumes retained route content remains target-correct",
+    "labels are deliberately inert controls, not claims that real substrate or policy is irrelevant"
+  ]
+}
