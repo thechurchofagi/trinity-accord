@@ -1,3 +1,15 @@
+# Current checkpoint — R179 action modes and prior-paper overlap
+
+Read [the note](records/R179_Attempt_Observation_Imagery_20261008/Attempt_Observation_Imagery_v0_1.md), [prior-paper audit](records/R179_Attempt_Observation_Imagery_20261008/PRIOR_PAPER_OVERLAP_AUDIT.md), [narrowed outline](records/R179_Attempt_Observation_Imagery_20261008/PAPER_OUTLINE.md), and [handoff](records/R179_Attempt_Observation_Imagery_20261008/CURRENT_HANDOFF.md).
+
+R179 compares actual dispatch, rehearsal and registration at fixed movement feature: 64 finite configurations / 11 checks, no named feeling computed. Modes may overlap; doing c differs from actively imagining c. Proximal dispatch still fails to distinguish voluntary attempt from imposed/automatic issue. Three elementary construction cards and an OPEN interpretation candidate, no new canonical graph nodes/rules.
+
+Author requested prior-paper nonduplication. Seven directly relevant frozen source texts were scoped-read: TA25 already contains the four older thought experiments and actual-but-inaccurate attribution. Those are inherited, not new central contributions. Replace the broad dialogue outline with a focused attempt/observation/imagery paper; preparation permitted, release and breakthrough claims HOLD. No publication action.
+
+Next: one grounded source/commitment relation at fixed bearer/activity, with automatic/reflex and spontaneous imagery countercases; compare prior mechanisms. QC08/09 scoped resolution retained; QC10/IA-QC11 and actual QC12 remain OPEN. C1 is axiomatic; no basal gate, extra exclusive owner, assistant-consciousness verdict, or generic certificate expansion. Older current notices below are historical where inconsistent.
+
+---
+
 # Current dialogue supplement — SB20261008 after R178
 
 Read [the research note, especially §11](records/SB20261008_Source_Target_and_Replay/Source_Target_and_Replay_v0_1.md), [Chinese progress](records/SB20261008_Source_Target_and_Replay/REVIEW_ZH.md), [model checks](records/SB20261008_Source_Target_and_Replay/MODEL_RESULTS.json), [local proof cards](records/SB20261008_Source_Target_and_Replay/PROOF_LEDGER.json), [map audit](records/SB20261008_Source_Target_and_Replay/MAP_AUDIT.json), [review response](records/SB20261008_Source_Target_and_Replay/REVIEW_RESPONSE.md), [publication assessment](records/SB20261008_Source_Target_and_Replay/PUBLICATION_ASSESSMENT.md) and [handoff](records/SB20261008_Source_Target_and_Replay/CURRENT_HANDOFF.md).

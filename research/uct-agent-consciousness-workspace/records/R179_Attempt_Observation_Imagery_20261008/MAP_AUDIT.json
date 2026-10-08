@@ -1,0 +1,412 @@
+{
+  "scope": "manual affected-subgraph and unconnected target consistency; not global semantic proof",
+  "graph_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+  "graph_changed": false,
+  "counts": {
+    "nodes": 584,
+    "rules": 284,
+    "context_links": 178
+  },
+  "read_nodes": [
+    {
+      "id": "A:C1",
+      "kind": "AX_C",
+      "label": "Structural-Experiential Identity",
+      "source": "A §4",
+      "status": "FIXED_AXIOM",
+      "statement": "For every P in P_actual in the fixed signature K, there exist an experiential K-structure Phi_K(P) and a sort-preserving isomorphism h_P:D_ontic_K(P)->Phi_K(P). This is the stipulated tokenwise structural-experiential identity axiom, including its experiential interpretation and existential commitment; it is not an empirically derived bijection or a scalar measure.",
+      "scope": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+      "formal_contract_R153": {
+        "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+        "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+        "source_anchor": {
+          "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+          "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+          "original_locator": "A §4"
+        },
+        "premise_routes": [],
+        "root_premise_routes": [
+          [
+            "A:C1"
+          ]
+        ],
+        "proof_or_evidence": [
+          {
+            "role": "ROOT_DECLARATION_OR_RECORDED_EVIDENCE",
+            "status": "FIXED_AXIOM",
+            "note": "No graph derivation. Definition/assumption/model/evidence status is retained; a terminal dependency is not automatically a proven truth."
+          }
+        ],
+        "open_obligations": [
+          "F153-15",
+          "F153-16",
+          "F153-17"
+        ],
+        "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+        "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "A:U1",
+      "kind": "THM",
+      "label": "Universal Nonempty Experience",
+      "source": "A §4",
+      "status": "MANUAL_CONDITIONAL_PASS",
+      "statement": "Every actual token has a nonempty distinguished experiential carrier",
+      "scope": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+      "formal_contract_R153": {
+        "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+        "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+        "source_anchor": {
+          "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+          "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+          "original_locator": "A §4"
+        },
+        "premise_routes": [
+          {
+            "rule": "a03",
+            "all_of": [
+              "A:C1",
+              "A:NONEMPTY_CARRIER"
+            ]
+          }
+        ],
+        "root_premise_routes": [
+          [
+            "A:ACTUAL_TOKEN",
+            "A:C1"
+          ]
+        ],
+        "proof_or_evidence": [
+          {
+            "rule": "a03",
+            "argument": "Sort-preserving bijection preserves nonemptiness.",
+            "review": "R153_EXPANDED_ARGUMENT_AND_BOUNDARY_REVIEW"
+          }
+        ],
+        "open_obligations": [
+          "F153-09",
+          "F153-15",
+          "F153-16",
+          "F153-17"
+        ],
+        "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+        "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R158:TARGET_SPLIT",
+      "kind": "DEFINITION",
+      "label": "Target Split",
+      "statement": "Distinguish actual bearer P/support s from represented candidate c; distinguish actual membership M, coupling C, body-frame binding B, installed use U, intervention-relative efficacy E, internal judgments J, selected felt targets F, beliefs Q and reports R. Undefined membership is not false membership.",
+      "domain": "Declared actual token/candidate domain with typed partial membership and protocol-relative reports.",
+      "scope": "Declared actual token/candidate domain with typed partial membership and protocol-relative reports.",
+      "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §2",
+      "source_lineage": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §2",
+      "status": "DECLARED_TARGET_CONTRACT",
+      "proof": "Typed definitions, with candidate/implementation distinction and intervention convention.",
+      "counterexamples_and_limits": "A model hand and a virtual referent require different membership typing; R is not F.",
+      "formal_contract_R158": {
+        "object_domain": "Declared actual token/candidate domain with typed partial membership and protocol-relative reports.",
+        "quantifiers": "Fixed P,c,I,K per instance; each coordinate has its declared type; no universal F equivalence is asserted.",
+        "bearer_time_signature": "As specified per claim; actual token P, candidate c and interval I never conflated. Abstract K-witnesses are not asserted to be actual organisms.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§2"
+        },
+        "premise_routes": [],
+        "purpose": "Separate bodily ownership and action agency within experience and correct selector closure without adding basal gates.",
+        "thought_experiments": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      },
+      "formal_contract_R159": {
+        "amends": "Typing/application clarification only; inherited statement and contracts retained.",
+        "effective_reading": "Insert internal representation token k and separately grounded external reference psi(k)=c. Internal K-isomorphism applies to k, not automatically to external c; organism anatomy differs from neural support membership.",
+        "source_anchor": {
+          "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+          "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+          "locator": "§§3–6,8"
+        },
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R158:RELATIONAL_SELECTION_SETUP",
+      "kind": "ABSTRACT_WITNESS_PACKAGE",
+      "label": "Relational Selection Setup",
+      "statement": "Let K have one sort, constant a and unary f. D has carrier {0,1}, a=0, f(0)=1, f(1)=0; theta(x) is x=a and S={0}.",
+      "domain": "One fully specified finite abstract K-structure.",
+      "scope": "One fully specified finite abstract K-structure.",
+      "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T2",
+      "source_lineage": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T2",
+      "status": "SPECIFIED_FINITE_COUNTERMODEL",
+      "proof": "All carrier, constant and function assignments are explicit and jointly satisfiable.",
+      "counterexamples_and_limits": "Not a human or experiential observation; arbitrary relational selectors of higher arity are tuple relations.",
+      "formal_contract_R158": {
+        "object_domain": "One fully specified finite abstract K-structure.",
+        "quantifiers": "This concrete abstract structure; h, when used, is any K-isomorphism transporting a and f.",
+        "bearer_time_signature": "As specified per claim; actual token P, candidate c and interval I never conflated. Abstract K-witnesses are not asserted to be actual organisms.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§5 T2"
+        },
+        "premise_routes": [],
+        "purpose": "Separate bodily ownership and action agency within experience and correct selector closure without adding basal gates.",
+        "thought_experiments": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R158:SELECTION_CLOSURE_LIMIT",
+      "kind": "COUNTEREXAMPLE_LIMIT",
+      "label": "Selection Closure Limit",
+      "statement": "Definability alone does not guarantee substructure closure: in RELATIONAL_SELECTION_SETUP, f(0)=1 is outside S. R157 formula transport remains valid for the selected relation; closure/physical autonomy are additional obligations.",
+      "domain": "General not-guaranteed claim witnessed by one finite structure; closure means contains constants and closed under functions in a fixed signature.",
+      "scope": "General not-guaranteed claim witnessed by one finite structure; closure means contains constants and closed under functions in a fixed signature.",
+      "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T2",
+      "source_lineage": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §5 T2",
+      "status": "MANUAL_FINITE_COUNTEREXAMPLE",
+      "proof": "0 belongs to S while its f-image does not; this refutes the general entailment. Isomorphism carries both selected set and function, preserving the failure.",
+      "counterexamples_and_limits": "Purely relational induced substructures may be available; an arbitrary tuple relation still is not itself a carrier. C1 is not refuted.",
+      "formal_contract_R158": {
+        "object_domain": "General not-guaranteed claim witnessed by one finite structure; closure means contains constants and closed under functions in a fixed signature.",
+        "quantifiers": "There exists a definable selection not closed under a K-function; not every selection is claimed nonclosed.",
+        "bearer_time_signature": "As specified per claim; actual token P, candidate c and interval I never conflated. Abstract K-witnesses are not asserted to be actual organisms.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§5 T2"
+        },
+        "premise_routes": [
+          {
+            "rule": "r158_selection_closure",
+            "all_of": [
+              "R158:RELATIONAL_SELECTION_SETUP"
+            ]
+          }
+        ],
+        "purpose": "Separate bodily ownership and action agency within experience and correct selector closure without adding basal gates.",
+        "thought_experiments": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R158:TARGET_SPECIFIC_BRIDGE_PROFILE",
+      "kind": "OPEN_BRIDGE_SCHEMA",
+      "label": "Target Specific Bridge Profile",
+      "statement": "Retain the R157 conjunction only as an unproved joint functional body-use configuration. Compare ownership-oriented body-frame binding/use and agency-oriented source-attribution/use on separately declared target domains. Actual membership and efficacy are separate from judgments; optional coordinates have no proved universal necessity.",
+      "domain": "Declared actual intervention domain and independently fixed F_O/F_A interpretation, still to be supplied.",
+      "scope": "Declared actual intervention domain and independently fixed F_O/F_A interpretation, still to be supplied.",
+      "source": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §6",
+      "source_lineage": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §6",
+      "status": "OPEN_REFINED_SCHEMA",
+      "proof": "Explanatory proposal informed by scoped primary evidence and counterexamples; not deduced as a phenomenal theorem.",
+      "counterexamples_and_limits": "Reports, drift and threat measures are fallible; B+U is not established sufficient for familiar mineness; broad route deletion is not supplied.",
+      "formal_contract_R158": {
+        "object_domain": "Declared actual intervention domain and independently fixed F_O/F_A interpretation, still to be supplied.",
+        "quantifiers": "Candidate comparison only; no universal necessity, sufficiency, equivalence or basal-experience threshold.",
+        "bearer_time_signature": "As specified per claim; actual token P, candidate c and interval I never conflated. Abstract K-witnesses are not asserted to be actual organisms.",
+        "source_anchor": {
+          "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+          "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+          "locator": "§6"
+        },
+        "premise_routes": [],
+        "purpose": "Separate bodily ownership and action agency within experience and correct selector closure without adding basal gates.",
+        "thought_experiments": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      },
+      "formal_contract_R159": {
+        "amends": "Typing/application clarification only; inherited statement and contracts retained.",
+        "effective_reading": "Ownership/agency roles may be distinguished while strengths cross-modulate. The two candidate directions are not claims of uncoupled laws or sufficient F bridges.",
+        "source_anchor": {
+          "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+          "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+          "locator": "§§3–6,8"
+        },
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R159:ANCHOR_BINDING_CONTRACT",
+      "kind": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "label": "Anchor Binding Contract",
+      "statement": "For a fixed admitted actual P,I,complete K,D,Phi,h, internal sorted tokens r,k support grounded K-relations Anchor(r),Bind(r,k),Use(r,k). theta_frame is their conjunction, with fixed/transported parameters. A separately grounded partial psi maps representation tokens to external E; organism anatomical membership M(O(P),psi(k)) is not internal Bind. No h(c) is asserted unless c is in its declared carrier.",
+      "domain": "Selected installed body-frame organization on one actual-token domain; external reference/organism-membership interpretation is separately declared.",
+      "scope": "Selected installed body-frame organization on one actual-token domain; external reference/organism-membership interpretation is separately declared.",
+      "source": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §§2–3",
+      "source_lineage": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §§2–3",
+      "status": "DECLARED_ACTUAL_APPLICATION_CONTRACT",
+      "proof": "Definition plus independent actual-grounding assumptions; finite r/k/c/member witness demonstrates only abstract consistency.",
+      "counterexamples_and_limits": "Name/observer meaning does not install Bind/Use; finite protocol condition bits are not complete neural K; undefined psi/M requires domain restriction.",
+      "formal_contract_R159": {
+        "object_domain": "Selected installed body-frame organization on one actual-token domain; external reference/organism-membership interpretation is separately declared.",
+        "quantifiers": "Each instance satisfies every conjunct jointly; no universal necessary/sufficient F_O condition. Logical toy satisfiability does not assert physical realization.",
+        "bearer_time_signature": "Actual instance fixes P,I,complete K; trial tokens differ while lineage may be retained. Internal r,k and external referent c/E have different sorts. Abstract example is not an actual organism.",
+        "source_anchor": {
+          "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+          "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+          "locator": "§§2–3"
+        },
+        "premise_routes": [],
+        "purpose": "Explain erroneous body attribution inside actual/experiential organization while separating reference, anatomical truth and coupled roles.",
+        "thought_experiments": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R159:FRAME_RELATION_TRANSPORT",
+      "kind": "CONDITIONAL_STRUCTURAL_APPLICATION",
+      "label": "Frame Relation Transport",
+      "statement": "Given R157:COORDINATE_TRANSPORT and ANCHOR_BINDING_CONTRACT on the same instance, D|=theta_frame(r,k) iff Phi|=theta_frame(h(r),h(k)). False external anatomical membership does not logically negate the installed internal relation; this does not establish a familiar F_O interpretation.",
+      "domain": "Exactly the common actual P,I,K,D,Phi,h and internally sorted theta_frame from the full contract. External correctness is not a hidden K-premise.",
+      "scope": "Exactly the common actual P,I,K,D,Phi,h and internally sorted theta_frame from the full contract. External correctness is not a hidden K-premise.",
+      "source": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §4",
+      "source_lineage": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §4",
+      "status": "MANUAL_CONDITIONAL_C1_APPLICATION",
+      "proof": "Substitute the grounded K-formula and correctly sorted internal tuple into R157 preservation. External c need not be in the h-domain. Conjunction transport yields a selected relation, not autonomous substructure.",
+      "counterexamples_and_limits": "No h on external c without expanded sorts; no report-to-F, no empirical proof of C1, no claim that reference/world changes preserve every K-fact.",
+      "formal_contract_R159": {
+        "object_domain": "Exactly the common actual P,I,K,D,Phi,h and internally sorted theta_frame from the full contract. External correctness is not a hidden K-premise.",
+        "quantifiers": "For every admitted tuple/instance satisfying the simultaneous contract and transport premises; not every actual organism is asserted to realize that contract.",
+        "bearer_time_signature": "Actual instance fixes P,I,complete K; trial tokens differ while lineage may be retained. Internal r,k and external referent c/E have different sorts. Abstract example is not an actual organism.",
+        "source_anchor": {
+          "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+          "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+          "locator": "§4"
+        },
+        "premise_routes": [
+          {
+            "rule": "r159_frame_relation_transport",
+            "all_of": [
+              "R157:COORDINATE_TRANSPORT",
+              "R159:ANCHOR_BINDING_CONTRACT"
+            ]
+          }
+        ],
+        "purpose": "Explain erroneous body attribution inside actual/experiential organization while separating reference, anatomical truth and coupled roles.",
+        "thought_experiments": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md §7",
+        "open_obligations": [
+          "F153-09",
+          "F153-10",
+          "F153-11",
+          "F153-12",
+          "F153-17"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "IA20261008:ACTUAL_TRACE_INSTANCE",
+      "kind": "ACTUAL_GROUNDING_PREMISE",
+      "statement": "Fix one actual P/I/K containing the selected finite source-to-use histories, complete D_K/Phi_K and C1 instance h_P. Independently interpret every source-port/trace/use predicate, domain bound and parameter; finite reachability uses only that interpreted domain. No external archive or test outcome is substituted for an actual trace.",
+      "scope": "Application premise OPEN. Retiming comparisons use separately grounded instances and a justified role-preserving map; no screened-history claim.",
+      "domain": "Application premise OPEN. Retiming comparisons use separately grounded instances and a justified role-preserving map; no screened-history claim.",
+      "quantifiers": "Fix one actual P/I/K containing the selected finite source-to-use histories, complete D_K/Phi_K and C1 instance h_P. Independently interpret every source-port/trace/use predicate, domain bound and parameter; finite reachability uses only that interpreted domain. No external archive or test outcome is substituted for an actual trace.",
+      "status": "OPEN_ACTUAL_APPLICATION",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §10 IA-5",
+      "proof": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md §10 IA-5",
+      "actuality": "Abstract construction; actual interpretation is an explicit additional premise.",
+      "purpose": "Fix physical content-source roles independently of temporal rank and transport only justified structural relations.",
+      "limits": "Does not identify externally named phenomenal content, solve B_order/B_fam or add a basal gate."
+    }
+  ],
+  "read_rules": [
+    {
+      "id": "ia20261008_trace_transport",
+      "all_of": [
+        "IA20261008:TRACE_IDENTITY_INVARIANT",
+        "IA20261008:ACTUAL_TRACE_INSTANCE",
+        "A:C1"
+      ],
+      "conclusion": "IA20261008:TRACE_COUNTERPART",
+      "kind": "CONDITIONAL_UCT_DEDUCTION",
+      "source": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md",
+      "proof": "Expand bounded reachability as a finite formula; isomorphism invariance transports formula, roles, all parameters, source sets and uniqueness on the same instance."
+    }
+  ],
+  "checks": [
+    {
+      "axis": "concepts_and_quantifiers",
+      "finding": "C1/U1 token-relative universal premises retained; R179 construction claims quantify over 64 stipulated states only."
+    },
+    {
+      "axis": "all_of",
+      "finding": "IA rule needs TRACE_IDENTITY_INVARIANT + ACTUAL_TRACE_INSTANCE + A:C1 on the same P/I/K. Human actual-instance premise remains absent; no application licensed."
+    },
+    {
+      "axis": "joint_satisfiability",
+      "finding": "Distinct destination registers and explicit Boolean settings instantiate all declared route profiles. Display independence is stated; no fixed-natural-proprioception premise added."
+    },
+    {
+      "axis": "objects_time_signature",
+      "finding": "P_R interval [0,2] differs from P_H; represented c differs from the occurrence imagining c."
+    },
+    {
+      "axis": "actuality_and_evidence",
+      "finding": "Executed route is model mechanism; an auditor test is evidence. Neither test success nor E=q is basal-experience structure by definition."
+    },
+    {
+      "axis": "direction",
+      "finding": "Port occupancy and actual displacement do not entail named feeling; selected-feature equality does not entail full content equality."
+    },
+    {
+      "axis": "unconnected_targets",
+      "finding": "Ownership, familiar mineness, autobiographical I and numerical continuity are not inferred from agency-mode roles."
+    },
+    {
+      "axis": "source_lineage",
+      "finding": "TA25 actuality/error and four thought experiments explicitly credited. No new theorem node for elementary route enumeration."
+    },
+    {
+      "axis": "direction_check",
+      "finding": "Selection, result and save checks preserve the actual-organization experience/intelligence/self objective; no generic certificate extension."
+    }
+  ],
+  "review_status": {
+    "QC08": "RESOLVED_SCOPED_EFFECTIVE",
+    "QC09": "RESOLVED_SCOPED_EFFECTIVE",
+    "QC10": "ACKNOWLEDGED/OPEN",
+    "IA-QC11": "application OPEN",
+    "QC12": "ACKNOWLEDGED; actual application/reviewer disposition OPEN"
+  }
+}

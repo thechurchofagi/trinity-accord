@@ -1,0 +1,38 @@
+[
+  {
+    "id": "R179-G1",
+    "location": "§4 candidate R179-H1; QC10 and IA-QC11",
+    "impact": "Route profile does not identify named feeling.",
+    "counterexample": "Automatic/externally evoked dispatch can share U with attempted dispatch.",
+    "corrected": "Removed any iff between port occupancy and felt trying.",
+    "unresolved": "Independently grounded target-specific source/commitment bridge.",
+    "status": "OPEN_WITH_SCOPED_CORRECTION"
+  },
+  {
+    "id": "R179-G2",
+    "location": "§2 scope; QC12 actual application",
+    "impact": "Toy P_R is not a grounded human bearer.",
+    "counterexample": "Display q is unchanged while natural proprioception could differ.",
+    "corrected": "Fixed components, boundary inputs, interval and human/toy distinction.",
+    "unresolved": "Actual P_H membership and common signature admission.",
+    "status": "OPEN_WITH_SCOPED_CORRECTION"
+  },
+  {
+    "id": "R179-G3",
+    "location": "§§1,4–5 mode claim",
+    "impact": "Imagery/observation/action cannot be whole-person exclusive classes.",
+    "counterexample": "Imagery BCI and actively attending while viewing.",
+    "corrected": "Use overlapping profiles and target-qualified F_do(c) vs F_do(imagining(c)).",
+    "unresolved": "Human realization beyond three simplified routes.",
+    "status": "OPEN_WITH_SCOPED_CORRECTION"
+  },
+  {
+    "id": "R179-G4",
+    "location": "Initial dialogue paper outline; TA25 overlap",
+    "impact": "Claiming inherited distinctions as this paper's breakthrough would duplicate publication.",
+    "counterexample": "TA25 §§4,6 explicitly state mistaken attribution is an actual process; §§2,6 already use four experiment families.",
+    "corrected": "Added source-specific overlap table; narrowed outline and inherited-credit markings.",
+    "unresolved": "Paragraph-level completed-draft audit and external prior-art comparison; substantial distinct result still needed.",
+    "status": "OPEN_WITH_SCOPED_CORRECTION"
+  }
+]

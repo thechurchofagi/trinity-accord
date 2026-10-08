@@ -1,0 +1,81 @@
+[
+  {
+    "id": "R179-C1",
+    "type": "FINITE_CONSTRUCTION_CONSEQUENCE",
+    "statement": "In this domain neither presence of prospective q nor nonzero plant displacement suffices to infer plan-to-motor-port dispatch; dispatch is neither necessary nor sufficient for nonzero displacement.",
+    "domain": "P_R over I=[0,2], q in {-1,+1}; five Boolean route/plant settings; initially empty destinations",
+    "all_of": [
+      "All endpoints and roles have the §2 stipulated interpretation.",
+      "Routes and equations are exactly §3; no omitted input to destination registers.",
+      "All compared configurations are admitted in the finite domain."
+    ],
+    "proof": [
+      "For fixed q, E=q under every route profile.",
+      "d=1,b=1,x=0 gives U=q and B=0.",
+      "d=0,x=1 gives U empty and B=q."
+    ],
+    "source": "model.py and Attempt_Observation_Imagery_v0_1.md §3",
+    "counterexample_to_overextension": "Changing the model domain to forbid blocking and imposed motion removes these witnesses. No theorem about felt trying follows.",
+    "status": "PROVED_IN_DECLARED_MODEL_ONLY",
+    "thought_experiment_role": "Blocked attempt and imposed motion separate successful movement from current proximal issue.",
+    "novelty": "Elementary construction; no general mathematical priority or phenomenal result claimed."
+  },
+  {
+    "id": "R179-C2",
+    "type": "FINITE_CONSTRUCTION_CONSEQUENCE",
+    "statement": "For each q all eight dispatch/rehearsal/registration profiles occur in this stipulated program, including their conjunction; therefore feature q does not determine the profile and a one-hot three-mode partition fails.",
+    "domain": "P_R over I=[0,2], q in {-1,+1}; five Boolean route/plant settings; initially empty destinations",
+    "all_of": [
+      "All endpoints and roles have the §2 stipulated interpretation.",
+      "Routes and equations are exactly §3; no omitted input to destination registers.",
+      "All compared configurations are admitted in the finite domain.",
+      "The three route settings are independently configurable in this program."
+    ],
+    "proof": [
+      "For each triple d,r,s choose b=0,x=0; simultaneous writes go to distinct registers and are consistent.",
+      "Two different triples share q; (1,1,1) violates one-hot exclusivity."
+    ],
+    "source": "model.py and Attempt_Observation_Imagery_v0_1.md §3",
+    "counterexample_to_overextension": "No inference to eight human phenomenal states, semantic independence or complete natural mode taxonomy.",
+    "status": "PROVED_IN_DECLARED_MODEL_ONLY",
+    "thought_experiment_role": "Imagining while acting/observing; activity levels can overlap.",
+    "novelty": "Elementary construction; no general mathematical priority or phenomenal result claimed."
+  },
+  {
+    "id": "R179-C3",
+    "type": "FINITE_CONSTRUCTION_CONSEQUENCE",
+    "statement": "An executed nonempty rehearsal update can coexist with absence of the represented plant displacement.",
+    "domain": "P_R over I=[0,2], q in {-1,+1}; five Boolean route/plant settings; initially empty destinations",
+    "all_of": [
+      "All endpoints and roles have the §2 stipulated interpretation.",
+      "Routes and equations are exactly §3; no omitted input to destination registers.",
+      "All compared configurations are admitted in the finite domain."
+    ],
+    "proof": [
+      "Choose r=1,d=0,x=0: H=q and B=0.",
+      "The actual H write and absence of B motion are different predicates."
+    ],
+    "source": "model.py and Attempt_Observation_Imagery_v0_1.md §3",
+    "counterexample_to_overextension": "This does not prove that H has named imagery phenomenology or that imagery can never affect an effector.",
+    "status": "PROVED_IN_DECLARED_MODEL_ONLY",
+    "thought_experiment_role": "Actually imagining an event versus actuality of that event.",
+    "novelty": "Elementary construction; no general mathematical priority or phenomenal result claimed."
+  },
+  {
+    "id": "R179-H1",
+    "type": "INTERPRETIVE_CANDIDATE",
+    "statement": "On a separately admitted action domain, target-relative source/use relations may contribute to selected felt trying/doing, with doing c distinguished from doing the activity imagining c.",
+    "domain": "Independently grounded P_H,I,K and selected activity c; not yet supplied.",
+    "all_of": [
+      "C1 for the same admitted token",
+      "Actual grounded source/consumer/reference roles",
+      "Independent specification and evidential interpretation of the selected target",
+      "A fixed noncircular restriction/bridge relation valid on this domain"
+    ],
+    "proof": "No proof of the bridge. §4 supplies rationale; §5 supplies failures.",
+    "counterexample": "Same proximal dispatch can be automatic or externally imposed; route bit cannot define felt trying.",
+    "status": "OPEN",
+    "thought_experiment_role": "Refine R178 target binding; seek a source/commitment contrast.",
+    "novelty": "Targeted project refinement; prior-art priority unverified."
+  }
+]

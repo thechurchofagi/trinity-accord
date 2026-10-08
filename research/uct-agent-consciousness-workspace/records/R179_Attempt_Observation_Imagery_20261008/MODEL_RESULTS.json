@@ -1,0 +1,1219 @@
+{
+  "round": "R179",
+  "status": "FINITE_MODEL_ONLY",
+  "checks": [
+    {
+      "id": "R179-M01",
+      "result": true,
+      "scope": "complete enumeration of the declared six-coordinate finite domain"
+    },
+    {
+      "id": "R179-M02",
+      "result": true,
+      "scope": "proximal dispatch equation"
+    },
+    {
+      "id": "R179-M03",
+      "result": true,
+      "scope": "scratch consumer equation"
+    },
+    {
+      "id": "R179-M04",
+      "result": true,
+      "scope": "display consumer equation"
+    },
+    {
+      "id": "R179-M05",
+      "result": true,
+      "scope": "blocking downstream prevents specified plant displacement"
+    },
+    {
+      "id": "R179-M06",
+      "result": true,
+      "scope": "blocked output does not erase issued proximal token"
+    },
+    {
+      "id": "R179-M07",
+      "result": true,
+      "scope": "imposed displacement defeats movement-implies-command"
+    },
+    {
+      "id": "R179-M08",
+      "result": true,
+      "scope": "prospective feature alone does not classify routes"
+    },
+    {
+      "id": "R179-M09",
+      "result": true,
+      "scope": "three routes can co-occur; one-hot partition fails"
+    },
+    {
+      "id": "R179-M10",
+      "result": true,
+      "scope": "each fixed movement feature admits eight declared route profiles"
+    },
+    {
+      "id": "R179-M11",
+      "result": true,
+      "scope": "actual rehearsal state does not require represented displacement"
+    }
+  ],
+  "witnesses": {
+    "issued_and_moving": {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": true,
+      "blocked": false,
+      "imposed": false,
+      "command": 1,
+      "scratch": null,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port",
+        "display->sensor"
+      ]
+    },
+    "issued_but_blocked": {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": true,
+      "blocked": true,
+      "imposed": false,
+      "command": 1,
+      "scratch": null,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "plan->motor_port",
+        "display->sensor"
+      ]
+    },
+    "scratch_only": {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": false,
+      "blocked": false,
+      "imposed": false,
+      "command": null,
+      "scratch": 1,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "plan->scratch"
+      ]
+    },
+    "display_only": {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": true,
+      "blocked": false,
+      "imposed": false,
+      "command": null,
+      "scratch": null,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "display->sensor"
+      ]
+    },
+    "mixed_consumers": {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": true,
+      "blocked": false,
+      "imposed": false,
+      "command": 1,
+      "scratch": 1,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    "imposed_motion": {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": true,
+      "blocked": false,
+      "imposed": true,
+      "command": null,
+      "scratch": null,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "display->sensor"
+      ]
+    }
+  },
+  "rows": [
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": false,
+      "blocked": false,
+      "imposed": false,
+      "command": null,
+      "scratch": null,
+      "sensory": null,
+      "prospective": -1,
+      "movement": 0,
+      "routes": []
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": false,
+      "blocked": false,
+      "imposed": true,
+      "command": null,
+      "scratch": null,
+      "sensory": null,
+      "prospective": -1,
+      "movement": -1,
+      "routes": []
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": false,
+      "blocked": true,
+      "imposed": false,
+      "command": null,
+      "scratch": null,
+      "sensory": null,
+      "prospective": -1,
+      "movement": 0,
+      "routes": []
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": false,
+      "blocked": true,
+      "imposed": true,
+      "command": null,
+      "scratch": null,
+      "sensory": null,
+      "prospective": -1,
+      "movement": -1,
+      "routes": []
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": true,
+      "blocked": false,
+      "imposed": false,
+      "command": null,
+      "scratch": null,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": 0,
+      "routes": [
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": true,
+      "blocked": false,
+      "imposed": true,
+      "command": null,
+      "scratch": null,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": true,
+      "blocked": true,
+      "imposed": false,
+      "command": null,
+      "scratch": null,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": 0,
+      "routes": [
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": true,
+      "blocked": true,
+      "imposed": true,
+      "command": null,
+      "scratch": null,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": false,
+      "blocked": false,
+      "imposed": false,
+      "command": null,
+      "scratch": -1,
+      "sensory": null,
+      "prospective": -1,
+      "movement": 0,
+      "routes": [
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": false,
+      "blocked": false,
+      "imposed": true,
+      "command": null,
+      "scratch": -1,
+      "sensory": null,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": false,
+      "blocked": true,
+      "imposed": false,
+      "command": null,
+      "scratch": -1,
+      "sensory": null,
+      "prospective": -1,
+      "movement": 0,
+      "routes": [
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": false,
+      "blocked": true,
+      "imposed": true,
+      "command": null,
+      "scratch": -1,
+      "sensory": null,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": true,
+      "blocked": false,
+      "imposed": false,
+      "command": null,
+      "scratch": -1,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": 0,
+      "routes": [
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": true,
+      "blocked": false,
+      "imposed": true,
+      "command": null,
+      "scratch": -1,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": true,
+      "blocked": true,
+      "imposed": false,
+      "command": null,
+      "scratch": -1,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": 0,
+      "routes": [
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": true,
+      "blocked": true,
+      "imposed": true,
+      "command": null,
+      "scratch": -1,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": false,
+      "blocked": false,
+      "imposed": false,
+      "command": -1,
+      "scratch": null,
+      "sensory": null,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->motor_port"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": false,
+      "blocked": false,
+      "imposed": true,
+      "command": -1,
+      "scratch": null,
+      "sensory": null,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->motor_port"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": false,
+      "blocked": true,
+      "imposed": false,
+      "command": -1,
+      "scratch": null,
+      "sensory": null,
+      "prospective": -1,
+      "movement": 0,
+      "routes": [
+        "plan->motor_port"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": false,
+      "blocked": true,
+      "imposed": true,
+      "command": -1,
+      "scratch": null,
+      "sensory": null,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->motor_port"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": true,
+      "blocked": false,
+      "imposed": false,
+      "command": -1,
+      "scratch": null,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->motor_port",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": true,
+      "blocked": false,
+      "imposed": true,
+      "command": -1,
+      "scratch": null,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->motor_port",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": true,
+      "blocked": true,
+      "imposed": false,
+      "command": -1,
+      "scratch": null,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": 0,
+      "routes": [
+        "plan->motor_port",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": true,
+      "blocked": true,
+      "imposed": true,
+      "command": -1,
+      "scratch": null,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->motor_port",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": false,
+      "blocked": false,
+      "imposed": false,
+      "command": -1,
+      "scratch": -1,
+      "sensory": null,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": false,
+      "blocked": false,
+      "imposed": true,
+      "command": -1,
+      "scratch": -1,
+      "sensory": null,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": false,
+      "blocked": true,
+      "imposed": false,
+      "command": -1,
+      "scratch": -1,
+      "sensory": null,
+      "prospective": -1,
+      "movement": 0,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": false,
+      "blocked": true,
+      "imposed": true,
+      "command": -1,
+      "scratch": -1,
+      "sensory": null,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": true,
+      "blocked": false,
+      "imposed": false,
+      "command": -1,
+      "scratch": -1,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": true,
+      "blocked": false,
+      "imposed": true,
+      "command": -1,
+      "scratch": -1,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": true,
+      "blocked": true,
+      "imposed": false,
+      "command": -1,
+      "scratch": -1,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": 0,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": -1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": true,
+      "blocked": true,
+      "imposed": true,
+      "command": -1,
+      "scratch": -1,
+      "sensory": -1,
+      "prospective": -1,
+      "movement": -1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": false,
+      "blocked": false,
+      "imposed": false,
+      "command": null,
+      "scratch": null,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 0,
+      "routes": []
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": false,
+      "blocked": false,
+      "imposed": true,
+      "command": null,
+      "scratch": null,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 1,
+      "routes": []
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": false,
+      "blocked": true,
+      "imposed": false,
+      "command": null,
+      "scratch": null,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 0,
+      "routes": []
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": false,
+      "blocked": true,
+      "imposed": true,
+      "command": null,
+      "scratch": null,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 1,
+      "routes": []
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": true,
+      "blocked": false,
+      "imposed": false,
+      "command": null,
+      "scratch": null,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": true,
+      "blocked": false,
+      "imposed": true,
+      "command": null,
+      "scratch": null,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": true,
+      "blocked": true,
+      "imposed": false,
+      "command": null,
+      "scratch": null,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": false,
+      "register": true,
+      "blocked": true,
+      "imposed": true,
+      "command": null,
+      "scratch": null,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": false,
+      "blocked": false,
+      "imposed": false,
+      "command": null,
+      "scratch": 1,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": false,
+      "blocked": false,
+      "imposed": true,
+      "command": null,
+      "scratch": 1,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": false,
+      "blocked": true,
+      "imposed": false,
+      "command": null,
+      "scratch": 1,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": false,
+      "blocked": true,
+      "imposed": true,
+      "command": null,
+      "scratch": 1,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": true,
+      "blocked": false,
+      "imposed": false,
+      "command": null,
+      "scratch": 1,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": true,
+      "blocked": false,
+      "imposed": true,
+      "command": null,
+      "scratch": 1,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": true,
+      "blocked": true,
+      "imposed": false,
+      "command": null,
+      "scratch": 1,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": false,
+      "rehearse": true,
+      "register": true,
+      "blocked": true,
+      "imposed": true,
+      "command": null,
+      "scratch": 1,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": false,
+      "blocked": false,
+      "imposed": false,
+      "command": 1,
+      "scratch": null,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": false,
+      "blocked": false,
+      "imposed": true,
+      "command": 1,
+      "scratch": null,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": false,
+      "blocked": true,
+      "imposed": false,
+      "command": 1,
+      "scratch": null,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "plan->motor_port"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": false,
+      "blocked": true,
+      "imposed": true,
+      "command": 1,
+      "scratch": null,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": true,
+      "blocked": false,
+      "imposed": false,
+      "command": 1,
+      "scratch": null,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": true,
+      "blocked": false,
+      "imposed": true,
+      "command": 1,
+      "scratch": null,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": true,
+      "blocked": true,
+      "imposed": false,
+      "command": 1,
+      "scratch": null,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "plan->motor_port",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": false,
+      "register": true,
+      "blocked": true,
+      "imposed": true,
+      "command": 1,
+      "scratch": null,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": false,
+      "blocked": false,
+      "imposed": false,
+      "command": 1,
+      "scratch": 1,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": false,
+      "blocked": false,
+      "imposed": true,
+      "command": 1,
+      "scratch": 1,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": false,
+      "blocked": true,
+      "imposed": false,
+      "command": 1,
+      "scratch": 1,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": false,
+      "blocked": true,
+      "imposed": true,
+      "command": 1,
+      "scratch": 1,
+      "sensory": null,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": true,
+      "blocked": false,
+      "imposed": false,
+      "command": 1,
+      "scratch": 1,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": true,
+      "blocked": false,
+      "imposed": true,
+      "command": 1,
+      "scratch": 1,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": true,
+      "blocked": true,
+      "imposed": false,
+      "command": 1,
+      "scratch": 1,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 0,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch",
+        "display->sensor"
+      ]
+    },
+    {
+      "q": 1,
+      "dispatch": true,
+      "rehearse": true,
+      "register": true,
+      "blocked": true,
+      "imposed": true,
+      "command": 1,
+      "scratch": 1,
+      "sensory": 1,
+      "prospective": 1,
+      "movement": 1,
+      "routes": [
+        "plan->motor_port",
+        "plan->scratch",
+        "display->sensor"
+      ]
+    }
+  ],
+  "limits": [
+    "Routing is stipulated, not measured in a human.",
+    "Independent displayed feature is not veridical bodily feedback.",
+    "No feeling, intention, consciousness or self-reference predicate is computed.",
+    "Eight route profiles are actual finite program assignments, not eight semantic or phenomenal modes."
+  ]
+}

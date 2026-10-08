@@ -1,0 +1,82 @@
+{
+  "basis": "frozen repository source copies, not freshly downloaded release bytes",
+  "sources": [
+    {
+      "id": "A",
+      "path": "research/uct-agent-consciousness-workspace/records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "version": "1.2",
+      "doi": "10.5281/zenodo.23131575",
+      "bytes": 142624,
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "read_scope": "front matter, abstract, headings, §§8.12–8.14; earlier fixed-source reads retained"
+    },
+    {
+      "id": "B",
+      "path": "research/uct-agent-consciousness-workspace/records/R128_Unified_Formal_Map_Audit_20261006/sources/B_UCT_II_v1_1.md",
+      "version": "1.1",
+      "doi": "10.5281/zenodo.23030320",
+      "bytes": 59958,
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+      "read_scope": "front matter, abstract, headings, §4"
+    },
+    {
+      "id": "C",
+      "path": "research/uct-agent-consciousness-workspace/records/R128_Unified_Formal_Map_Audit_20261006/sources/C_UCT_III_v1_0.md",
+      "version": "1.0",
+      "doi": "10.5281/zenodo.23137088",
+      "bytes": 94626,
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+      "read_scope": "front matter, abstract, headings, §5"
+    },
+    {
+      "id": "TA24",
+      "path": "research/uct-agent-consciousness-workspace/records/R129_Four_Paper_Integration_20261006/sources/D_TA24_v1_0.md",
+      "version": "1.0",
+      "doi": "10.5281/zenodo.23176685",
+      "bytes": 36208,
+      "sha256": "af0eb63cca099b3d913218f503bc978c705f0fb9f065cca9ed472e5161d67490",
+      "read_scope": "front matter, abstract, headings"
+    },
+    {
+      "id": "TA25",
+      "path": "research/uct-agent-consciousness-workspace/records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md",
+      "version": "1.0",
+      "doi": "10.5281/zenodo.23206492",
+      "bytes": 42068,
+      "sha256": "694856862f75834024cd3e71ffdba95a6be4601c2832285902f7905907e3039c",
+      "read_scope": "front matter, abstract, headings, §§2–7,9–10"
+    },
+    {
+      "id": "TA17",
+      "path": "research/uct-agent-consciousness-workspace/records/R148_Publication_Census_20261007/sources/TA17_v1_0.md",
+      "version": "1.0",
+      "doi": "10.5281/zenodo.22950904",
+      "bytes": 99093,
+      "sha256": "bec4944db161db725648a18962b8a6c069aacf7512a259483f9d81e646e36a78",
+      "read_scope": "front matter, abstract, headings, §§4.3,14"
+    },
+    {
+      "id": "TA08",
+      "path": "research/artificial-self-attribution/published/artificial-self-attribution-v1.1.md",
+      "version": "1.1",
+      "doi": "10.5281/zenodo.22842789",
+      "bytes": 44851,
+      "sha256": "c1eec5951335240ca9fd83667e28469185acc192465f24d533e22334d6fa31ee",
+      "read_scope": "front matter, abstract, introduction and headings"
+    }
+  ],
+  "external_sources": [
+    {
+      "doi": "10.1038/s41467-018-03989-0",
+      "scope": "Earlier current-R179 publisher PDF abstract/intro/initial results; later reaccess failed. No EMG-control claim."
+    },
+    {
+      "doi": "10.1126/science.1169896",
+      "scope": "primary article PDF full text from York mirror; no supplements/raw data"
+    },
+    {
+      "doi": "10.1126/science.1183758",
+      "scope": "PubMed abstract only"
+    }
+  ]
+}
