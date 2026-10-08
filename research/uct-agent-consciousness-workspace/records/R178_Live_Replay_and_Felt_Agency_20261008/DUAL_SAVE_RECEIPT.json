@@ -1,0 +1,45 @@
+{
+  "round": "R178",
+  "date": "2026-10-08",
+  "core_commit": "ed94e8db94b233ec93fb8db6f2a7b01171122906",
+  "reconciled_parent": "88dad3cc265216461f568311c26dc3ee3db4a7d1",
+  "github_verification": {
+    "files": 17,
+    "method": "Fresh git fetch and byte comparison of every changed file against core commit",
+    "status": "PASS"
+  },
+  "fixed_master": {
+    "previous_version": 33,
+    "bytes": 451880,
+    "sha256": "b9502e99d4c4b3dd5a3ee25f004d3c9c98283be39f824a9718d03687b93e2bce",
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_000000000c1081f6a848f05bb5ecd78b",
+    "version": 34,
+    "status": "succeeded",
+    "history_preserved": true,
+    "local_metadata_applied": true
+  },
+  "increment": {
+    "name": "UCT_R178_Increment_20261008.zip",
+    "bytes": 249847,
+    "sha256": "943c40cdc5e879a847b1f4621467173cff13274ed8b5a8376d34a4b041329c91",
+    "members": 18,
+    "library_file_id": "libfile_06e3462749648191934a25c7d2a1f6a7",
+    "file_id": "file_0000000075fc81f6a06f39257cda2891",
+    "version": 0,
+    "status": "succeeded",
+    "scope": "INCREMENT_NOT_FULL_BACKUP",
+    "local_crc_and_member_hashes_verified": true,
+    "post_upload_full_byte_readback": false,
+    "excludes": "This receipt and final handoff save-status edit"
+  },
+  "recovery": "Fetch latest branch first; read current review/master. Core is recoverable directly from GitHub. Alternatively checkout reconciled_parent and apply increment MANIFEST paths with hashes. Do not overwrite newer concurrent work.",
+  "failures_and_recoveries": [
+    "Initial worktree command used wrong cwd, corrected without mutations.",
+    "Concurrent reviewer receipt 88dad3c fast-forwarded before core save.",
+    "Master33 reconstructed from authoritative current prefix plus exact verified v32 suffix; length and hash equal reviewer receipt. No full-byte download claimed."
+  ],
+  "open": "QC-10, IA-QC11, QC-12 actual application; named phenomenal bridge and human complete signature not established.",
+  "next": "Fixed-content action attempt versus witnessing/imagery; noncircular grounded self-reference and failure case.",
+  "scope": "Research checkpoint only; no publication, workflow, automation or model setting changes."
+}
