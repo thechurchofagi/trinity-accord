@@ -1,0 +1,130 @@
+{
+  "schema": "UCT_EFFECTIVE_REVIEW_AMENDMENT/v2",
+  "id": "R172-QC06-QC07",
+  "status": "CORRECTIONS_SUBMITTED_FOR_INDEPENDENT_REVIEW",
+  "precedence": "Apply after R171 REVIEW_AMENDMENTS.json. Suspended raw rules cannot be used; effective predicates below are typed application obligations, not additional raw graph nodes.",
+  "provenance": {
+    "start_head": "8059ed6fcbf87be5eb30717c04cac5f834c247bc",
+    "graph_sha256": "5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d",
+    "note_sha256": "511d1aac5a4214ea5b463c8e09cc4ae77f599a323953fb0829dc51d68ec8b096",
+    "frozen_graph_note_extension_proof_ledger_unchanged": true,
+    "source": "REVIEW_RESPONSE_20261008_02.md"
+  },
+  "binding_fields": [
+    "P",
+    "I",
+    "K",
+    "D",
+    "realization",
+    "gamma",
+    "component_signatures",
+    "step_convention"
+  ],
+  "review_ids": [
+    "QC-20261008-06",
+    "QC-20261008-07"
+  ],
+  "suspended_raw_rules": [
+    "r172_witnessed_online_action_use",
+    "r172_experience_internal_action_coordinate",
+    "r172_bio_ai_application_boundary"
+  ],
+  "types": {
+    "frame_instance": "Actual R166 frame installation on t; not schema availability",
+    "local_instance": "Actually discharged R172 local component certificate instance on t",
+    "compat_instance": "Every clause of R172 Compat_gamma holds on t with retained discharge; neither theorem schema nor J is sufficient",
+    "cert_positive": "W/E-indexed positive use evidence; NOT an internal physical relation",
+    "role_bridge": "Independently justified same-baseline-mechanism, realized-route, fidelity/locality and identification bridge from evidence to selected executed path",
+    "same_binding": "All premises concern the identical t tuple; identity is checked independently of Boolean premise values",
+    "witnessed_path_record": "Support record containing t and frame/local/compat/cert/bridge discharges; a record is not a physical constituent",
+    "C1_instance": "The same actual D/Phi/h instance is admitted under C1; not derived",
+    "K_grounding": "phi_path primitives have independent actual K interpretations and well-sorted actual witnesses",
+    "parameter_transport": "All declared actual internal parameters p map to h(p); W and E are external",
+    "common_comparison_signature": "Independently grounded type correspondence for both tokens; no total experiential identity follows"
+  },
+  "actual_selector": {
+    "id": "R172-QC07:phi_path",
+    "status": "NARROWED_TARGET_NOT_EQUIVALENT_TO_OLD_THETA_EBA",
+    "formula": "Anchor(b) AND Bind(b,k) AND EXISTS q,e1,e2 [TransferOccurrence(k,q,gamma,e1) AND OperandUseOccurrence(q,a,e2) AND SameEpisodeOrdered(e1,e2)]",
+    "parameters": [
+      "gamma"
+    ],
+    "excluded_analyst_parameters": [
+      "W",
+      "E",
+      "certificate_status"
+    ],
+    "compatibility_placement": "side condition retained in the application evidence; not assumed to be an internal K-relation",
+    "scope": "A selected actually executed operand path; not every causal contribution, not necessary output sensitivity, not familiar mineness",
+    "grounding_obligation": "Independent physical interpretations of transfer, operand-use and temporal predicates; merely declaring symbols is insufficient"
+  },
+  "effective_rules": [
+    {
+      "id": "r172_witnessed_online_action_use_effective",
+      "replaces": "r172_witnessed_online_action_use",
+      "all_of": [
+        "frame_instance",
+        "local_instance",
+        "compat_instance",
+        "cert_positive",
+        "role_bridge",
+        "same_binding"
+      ],
+      "conclusion_node": "R172:WITNESSED_ONLINE_ACTION_USE",
+      "conclusion": "witnessed_path_record",
+      "proof": "Retain all discharged same-instance obligations; apply the independently justified evidence-to-role bridge; no inversion of a conditional."
+    },
+    {
+      "id": "r172_experience_internal_action_coordinate_effective",
+      "replaces": "r172_experience_internal_action_coordinate",
+      "all_of": [
+        "witnessed_path_record",
+        "C1_instance",
+        "K_grounding",
+        "sorted_witnesses",
+        "parameter_transport",
+        "same_binding"
+      ],
+      "conclusion_node": "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
+      "conclusion": "Conditional phi_path counterpart inside Phi, with explicit h(p); B_min/F_O/F_A remains open",
+      "proof": "Apply R157 T1 to the grounded actual selector, not to W, a certificate or a global proof obligation."
+    },
+    {
+      "id": "r172_bio_ai_application_boundary_effective",
+      "replaces": "r172_bio_ai_application_boundary",
+      "all_of": [
+        "left_corrected_application",
+        "right_corrected_application",
+        "common_comparison_signature",
+        "baseline_nonidentification_boundary",
+        "semantic_residual"
+      ],
+      "conclusion_node": "R172:BIO_AI_APPLICATION_BOUNDARY",
+      "conclusion": "Compare selected grounded phi_path structures only; no full-type identity, mineness, richness or basal-existence inference",
+      "proof": "Each bearer separately satisfies the corrected instance/transport contract; restrict the conclusion to the selected common signature."
+    }
+  ],
+  "node_overrides": {
+    "R172:INTERFACE_COMPOSITION_THEOREM": "Conditional theorem schema. Any applied joint-invariant record must retain local_instance and compat_instance explicitly; bare theorem/J cannot project them.",
+    "R172:ONLINE_ACTION_USE_RELATION": "Read archived LiveUse(t|W,E) as a sufficient evidence package, not automatically an internal organization predicate. OnticUse_path is defined in the response independently of W/E.",
+    "R172:WITNESSED_ONLINE_ACTION_USE": "Typed support record with explicit compatibility and evidence-to-role bridge. Not itself a physical K-relation.",
+    "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE": "Use corrected phi_path and transported physical parameters only after independent grounding. Do not silently equate with the old theta_EBA certificate conjunction.",
+    "R172:BIO_AI_APPLICATION_BOUNDARY": "Uses the corrected selected-path applications for each token; all previous nonidentity and semantic limits persist."
+  },
+  "gaps": [
+    "R172-QC-G06",
+    "R172-QC-G07",
+    "R172-QC-G08",
+    "R172-G6",
+    "R172-QC-G09"
+  ],
+  "limits": [
+    "No actual system validated",
+    "No C1 derivation",
+    "No basal-experience gate",
+    "No familiar-mineness validation",
+    "No unique owner",
+    "No assistant-consciousness decision",
+    "No new numbered round or raw node count"
+  ]
+}

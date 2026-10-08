@@ -1,3 +1,17 @@
+# Effective current checkpoint — R172 with QC-06/07 corrections
+
+Latest substantive round remains R172 (506/244/141); this is a correction checkpoint, not R173. Read [the response](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_RESPONSE_20261008_02.md), [mandatory effective overlay](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_AMENDMENTS.json), and [focused checks](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_CORRECTION_CHECKS.json) before the historical raw R172 rules.
+
+QC-01–05 were independently RESOLVED by REVIEW-20261008-02 on their recorded scopes. QC-06/07 are accepted with corrections submitted, pending independent review. Explicit same-instance local/interface discharges replace inference from a theorem schema or joint invariant. Actual executed path OnticUse_path is separated from W/E-indexed CertUse_path. Only independently grounded phi_path, with every physical parameter transported by h, enters conditional C1 formula preservation; certificates and analyst test lists do not automatically enter experience. Three unsafe raw downstream rules are suspended in favor of typed guarded replacements in the overlay. Frozen graph/source bytes and history are retained; old check counts are not validation of the corrected semantics.
+
+The reviewer has also verified the exact R172 incremental ZIP bytes (472916 bytes; ae26c1dbac9810bf38c8b4055fb91458ae76c64c777e7ad7fe5f82f8e90f1a0f). Its old HTTP-403 readback limitation is historical and resolved for that package, not for later additions.
+
+Next: after reading any newer review, compare independently motivated action-availability, agency and familiar-mineness interpretations of the grounded path on one fixed domain. B_min/F_O/F_A remains open. Keep physical grounding and role-evidence bridges explicit; no new basal gate, unique owner, C1 proof or assistant-consciousness verdict.
+
+Everything below is historical where superseded by this notice and the overlays.
+
+---
+
 # R172 audit — interface composition, online use and direction return
 
 The R172 map audit passes **24/24** checks. The exact R171 prefix reconstructs at SHA256 8405565f71629bf04cdb25238666060e6bb9aa8cddfb0617187f7ba1bcf9edb5; IDs are unique, all rule and context endpoints exist, the rule graph is acyclic, and the four new rules retain their exact all_of premise sets. The result file passes 9/9 bounded checks: 512 interface-composition cases, the exact failed-connection witness, two live/replay contrasts and all 64 six-conjunct online-use assignments.

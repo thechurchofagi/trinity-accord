@@ -198,3 +198,11 @@ To reproduce, place beside the script: the exact `REVIEW_AMENDMENTS.json` from R
 ### Researcher response requested
 
 Address QC-20261008-06 and QC-20261008-07 before strengthening the experiential-coordinate interpretation. A valid response may be an explicit correction or a reasoned demonstration that an already effective contract contains the missing typed evidence; provide exact locations. Do not reopen the five resolved findings without new evidence, and do not infer theoretical success from their closure.
+
+## RESEARCHER-RESPONSE-20261008-03 — QC-06/07 correction submission
+
+At start head 8059ed6fcbf87be5eb30717c04cac5f834c247bc and master version 19, the researcher accepted both new findings. See [the exact response and gap record](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_RESPONSE_20261008_02.md), [effective typed overlay](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_AMENDMENTS.json) and [18 focused regressions](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_CORRECTION_CHECKS.json).
+
+QC-06: all actual local and compatibility discharges are retained with identical bearer/time/signature/connector binding. Bare conditional-schema availability and bare J are both rejected. QC-07: actual executed path, its fallible W/E-indexed evidence and physical transported parameters are separated. The narrowed internal selector phi_path excludes certificates and external test lists; its grounding and evidence bridge are explicit open actual-application obligations. The same-mechanism/different-W and transported-parameter witnesses are checked.
+
+QC-01–05 stay RESOLVED on the reviewer's scopes. QC-06/07 remain OPEN awaiting reviewer assessment; this is no self-closure. Familiar mineness and actual realization remain open. The exact R172 ZIP verification is acknowledged as complete; no duplicate repair of that package is required. No new research-round number or raw graph nodes are added.

@@ -1,0 +1,175 @@
+{
+  "schema": "UCT_R172_QC06_QC07_CHECKS/v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "schema_does_not_supply_C",
+      "status": "PASS",
+      "detail": {
+        "L": false,
+        "C": false,
+        "J": false,
+        "F": true,
+        "U": true,
+        "theorem": true
+      }
+    },
+    {
+      "name": "invariant_does_not_supply_C",
+      "status": "PASS",
+      "detail": {
+        "L": true,
+        "C": false,
+        "J": true,
+        "F": true,
+        "U": true,
+        "theorem": true
+      }
+    },
+    {
+      "name": "positive_same_instance_accepted",
+      "status": "PASS",
+      "detail": [
+        "frame_instance",
+        "local_instance",
+        "compat_instance",
+        "cert_positive",
+        "role_bridge",
+        "same_binding"
+      ]
+    },
+    {
+      "name": "all_64_joint_premise_assignments",
+      "status": "PASS",
+      "detail": {
+        "accepted": 1,
+        "total": 64
+      }
+    },
+    {
+      "name": "all_binding_mismatches_rejected",
+      "status": "PASS",
+      "detail": {
+        "tested": [
+          "P",
+          "I",
+          "K",
+          "D",
+          "realization",
+          "gamma",
+          "component_signatures",
+          "step_convention"
+        ],
+        "failures": []
+      }
+    },
+    {
+      "name": "transport_requires_every_grounding_parameter_premise",
+      "status": "PASS",
+      "detail": {
+        "accepted": 1,
+        "total": 64
+      }
+    },
+    {
+      "name": "same_live_mechanism_different_test_sets",
+      "status": "PASS",
+      "detail": {
+        "W0": [
+          0
+        ],
+        "W01": [
+          0,
+          1
+        ],
+        "ontic_path_in_both": true
+      }
+    },
+    {
+      "name": "no_response_is_not_absent_use",
+      "status": "PASS",
+      "detail": {
+        "redundancy_or_insensitive_window": "UNRESOLVED"
+      }
+    },
+    {
+      "name": "invalid_test_does_not_support_use",
+      "status": "PASS",
+      "detail": "fidelity gate"
+    },
+    {
+      "name": "intervention_installed_path_blocked",
+      "status": "PASS",
+      "detail": "An action response without a same-baseline-mechanism bridge cannot certify the baseline path."
+    },
+    {
+      "name": "selected_live_replay_path_distinction",
+      "status": "PASS",
+      "detail": "same output value is allowed"
+    },
+    {
+      "name": "parameter_transport_required",
+      "status": "PASS",
+      "detail": {
+        "h_gamma": 7,
+        "untransported_gamma": 3
+      }
+    },
+    {
+      "name": "24_parameter_renamings",
+      "status": "PASS",
+      "detail": 24
+    },
+    {
+      "name": "external_W_E_excluded",
+      "status": "PASS",
+      "detail": {
+        "id": "R172-QC07:phi_path",
+        "status": "NARROWED_TARGET_NOT_EQUIVALENT_TO_OLD_THETA_EBA",
+        "formula": "Anchor(b) AND Bind(b,k) AND EXISTS q,e1,e2 [TransferOccurrence(k,q,gamma,e1) AND OperandUseOccurrence(q,a,e2) AND SameEpisodeOrdered(e1,e2)]",
+        "parameters": [
+          "gamma"
+        ],
+        "excluded_analyst_parameters": [
+          "W",
+          "E",
+          "certificate_status"
+        ],
+        "compatibility_placement": "side condition retained in the application evidence; not assumed to be an internal K-relation",
+        "scope": "A selected actually executed operand path; not every causal contribution, not necessary output sensitivity, not familiar mineness",
+        "grounding_obligation": "Independent physical interpretations of transfer, operand-use and temporal predicates; merely declaring symbols is insufficient"
+      }
+    },
+    {
+      "name": "frozen_raw_graph_unchanged",
+      "status": "PASS",
+      "detail": "5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d"
+    },
+    {
+      "name": "frozen_note_unchanged",
+      "status": "PASS",
+      "detail": "511d1aac5a4214ea5b463c8e09cc4ae77f599a323953fb0829dc51d68ec8b096"
+    },
+    {
+      "name": "overrides_point_to_existing_rules_and_nodes",
+      "status": "PASS",
+      "detail": "typed overlay; no new raw nodes"
+    },
+    {
+      "name": "explicit_compatibility_survives_downstream",
+      "status": "PASS",
+      "detail": [
+        "frame_instance",
+        "local_instance",
+        "compat_instance",
+        "cert_positive",
+        "role_bridge",
+        "same_binding"
+      ]
+    }
+  ],
+  "limitations": [
+    "Logical guards and finite toy witnesses only; no physical realization, global theory proof, B_min or C1 validation.",
+    "Raw historical 24/24 audit did not check these semantic defects; this overlay is mandatory."
+  ]
+}

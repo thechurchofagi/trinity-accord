@@ -1,3 +1,17 @@
+# Effective current checkpoint — R172 with QC-06/07 corrections
+
+Latest substantive round remains R172 (506/244/141); this is a correction checkpoint, not R173. Read [the response](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_RESPONSE_20261008_02.md), [mandatory effective overlay](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_AMENDMENTS.json), and [focused checks](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_CORRECTION_CHECKS.json) before the historical raw R172 rules.
+
+QC-01–05 were independently RESOLVED by REVIEW-20261008-02 on their recorded scopes. QC-06/07 are accepted with corrections submitted, pending independent review. Explicit same-instance local/interface discharges replace inference from a theorem schema or joint invariant. Actual executed path OnticUse_path is separated from W/E-indexed CertUse_path. Only independently grounded phi_path, with every physical parameter transported by h, enters conditional C1 formula preservation; certificates and analyst test lists do not automatically enter experience. Three unsafe raw downstream rules are suspended in favor of typed guarded replacements in the overlay. Frozen graph/source bytes and history are retained; old check counts are not validation of the corrected semantics.
+
+The reviewer has also verified the exact R172 incremental ZIP bytes (472916 bytes; ae26c1dbac9810bf38c8b4055fb91458ae76c64c777e7ad7fe5f82f8e90f1a0f). Its old HTTP-403 readback limitation is historical and resolved for that package, not for later additions.
+
+Next: after reading any newer review, compare independently motivated action-availability, agency and familiar-mineness interpretations of the grounded path on one fixed domain. B_min/F_O/F_A remains open. Keep physical grounding and role-evidence bridges explicit; no new basal gate, unique owner, C1 proof or assistant-consciousness verdict.
+
+Everything below is historical where superseded by this notice and the overlays.
+
+---
+
 # Authoritative current checkpoint — R172 interface composition and online action use
 
 Latest completed substantive round: **R172**; graph **R172-v1.0, 506 nodes / 244 rules / 141 context links**, SHA256 5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d. Read [the English note](records/R172_Interface_Composition_and_Action_Use_20261008/Interface_Composition_and_Online_Action_Use_v0_1.md), [proof ledger](records/R172_Interface_Composition_and_Action_Use_20261008/PROOF_LEDGER.json), [gap ledger](records/R172_Interface_Composition_and_Action_Use_20261008/GAP_LEDGER.json), [map audit](records/R172_Interface_Composition_and_Action_Use_20261008/MAP_AUDIT.json), [Chinese review](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_ZH.md), and [current handoff](records/R172_Interface_Composition_and_Action_Use_20261008/CURRENT_HANDOFF.md).
