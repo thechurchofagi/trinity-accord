@@ -1,0 +1,36 @@
+{
+  "scope": "Three local argument cards, not added canonical graph rules. Corroborates R178; no priority claim.",
+  "arguments": [
+    {
+      "id": "SB-P1",
+      "premises": [
+        "§3 finite episode contract",
+        "A=R on paired episode; M changes live to replay"
+      ],
+      "conclusion": "Matched downstream trace, different selected current-command feedback path",
+      "argument": "Substitute A=R; downstream deterministic phases agree. Only live has selected A->S->J. A->V->U persists. Flip A holding R to verify feedback causation.",
+      "status": "MANUAL_PROOF_AND_EXACT_CHECK"
+    },
+    {
+      "id": "SB-P2",
+      "premises": [
+        "SB-P1",
+        "All target evidence solely from same trace with fixed readout kernel"
+      ],
+      "conclusion": "Equal permitted evidence distributions; hypotheses unselected",
+      "argument": "Same Z yields same p(E|Z). Deterministic case substitutes Z into f; exhaustive checks cover every binary function on four reachable traces. Extra channels are outside scope.",
+      "status": "MANUAL_CONDITIONAL_PROOF"
+    },
+    {
+      "id": "SB-P3",
+      "premises": [
+        "Grounded actual P/I/complete K and admitted path formula",
+        "A:C1",
+        "Frozen parameter/role correspondence"
+      ],
+      "conclusion": "Structural counterpart only, not named F_A",
+      "argument": "Finite interpreted path formulas are preserved under each token's isomorphism with all parameters transported. Role correspondences are fixed by ACTUAL_GROUNDING. No rule names the counterpart F_A.",
+      "status": "CONDITIONAL_ACTUAL_APPLICATION_OPEN"
+    }
+  ]
+}

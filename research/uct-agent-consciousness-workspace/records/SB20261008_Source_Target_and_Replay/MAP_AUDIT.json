@@ -1,0 +1,45 @@
+{
+  "scope": "New evidence annotation and local claims only; no global proof",
+  "checks": [
+    {
+      "name": "inherited nodes unchanged",
+      "passed": true
+    },
+    {
+      "name": "inherited rules unchanged",
+      "passed": true
+    },
+    {
+      "name": "inherited context links unchanged",
+      "passed": true
+    },
+    {
+      "name": "no new inferential edge",
+      "passed": true
+    },
+    {
+      "name": "C1 application premises explicit",
+      "passed": true
+    },
+    {
+      "name": "rival assumptions not simultaneous",
+      "passed": true
+    },
+    {
+      "name": "R178 overlap credited",
+      "passed": true
+    },
+    {
+      "name": "current direction follows R178",
+      "passed": true
+    }
+  ],
+  "manual_review": [
+    "Primary bearer is coupled finite controller, not human; P_down is a restriction.",
+    "Local P1/P2 model premises jointly satisfiable; actual human P3 premise open.",
+    "No suspended inherited rule executed; no F_A value inferred.",
+    "Target/source/ownership/agency distinct; all old overlays retained.",
+    "Hypotheses alternatives; source accuracy not same as enacted attribution.",
+    "Nonsignificance not equivalence; source summaries within stated read scope."
+  ]
+}

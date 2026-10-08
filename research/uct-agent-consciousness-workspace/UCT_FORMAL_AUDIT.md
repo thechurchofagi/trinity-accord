@@ -1,3 +1,13 @@
+# Current dialogue supplement — SB20261008 after R178
+
+Read [the research note, especially §11](records/SB20261008_Source_Target_and_Replay/Source_Target_and_Replay_v0_1.md), [Chinese progress](records/SB20261008_Source_Target_and_Replay/REVIEW_ZH.md), [model checks](records/SB20261008_Source_Target_and_Replay/MODEL_RESULTS.json), [local proof cards](records/SB20261008_Source_Target_and_Replay/PROOF_LEDGER.json), [map audit](records/SB20261008_Source_Target_and_Replay/MAP_AUDIT.json), [review response](records/SB20261008_Source_Target_and_Replay/REVIEW_RESPONSE.md), [publication assessment](records/SB20261008_Source_Target_and_Replay/PUBLICATION_ASSESSMENT.md) and [handoff](records/SB20261008_Source_Target_and_Replay/CURRENT_HANDOFF.md).
+
+Concurrent R178 already records the bearer-fixed replay result and evidence limitation. This supplement independently checks it (11 finite checks, 8 rows, 32 binary-readout evaluations) and adds a bodily source/target application. It does not count the shared result as another discovery. No canonical nodes, rules or context links added: 584/284/178 retained; graph has an evidence annotation only. H_match does not equal R178's richer B_enacted.
+
+QC-08/09 retain reviewer-scoped resolution. QC-10/IA-QC11 and actual QC-12 application remain open. All inherited overlays and R178 work preserved. Next follows R178's action-attempt/passive/imagined comparison with fixed represented consequence, grounded self-reference, bearer scope and failure condition; stop repeating hidden-source equality or generic decoder/certificate work. Author permits paper preparation when justified; present judgment HOLD standalone breakthrough paper. No publication, DOI/OTS/AR, basal gate, exclusive owner or assistant-consciousness verdict. No scheduled round reserved. Older current notices are historical where inconsistent.
+
+---
+
 # Current checkpoint — R178 live/replay scope and felt authorship
 
 Read [the conceptual result](records/R178_Live_Replay_and_Felt_Agency_20261008/Live_Replay_and_Felt_Agency_v0_1.md), [claims](records/R178_Live_Replay_and_Felt_Agency_20261008/CLAIM_LEDGER.json), [review response](records/R178_Live_Replay_and_Felt_Agency_20261008/REVIEW_RESPONSE.md), and [handoff](records/R178_Live_Replay_and_Felt_Agency_20261008/CURRENT_HANDOFF.md).

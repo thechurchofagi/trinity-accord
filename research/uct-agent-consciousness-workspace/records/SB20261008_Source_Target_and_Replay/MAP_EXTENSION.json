@@ -1,0 +1,15 @@
+{
+  "schema": "uct-evidence-annotation/1.0",
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "reason": "R178 already gives matched replay scope/evidence result. No duplicate canonical theorem nodes or edges.",
+  "related_existing_nodes": [
+    "A:C1",
+    "IA20261008:ACTUAL_TRACE_INSTANCE",
+    "IA20261008:TRACE_COUNTERPART",
+    "R177:SOURCE_FEATURE_SEPARATION"
+  ],
+  "local_argument_cards": "PROOF_LEDGER.json",
+  "canonical_change": "research_SB20261008 evidence annotation only; inherited objects unchanged"
+}

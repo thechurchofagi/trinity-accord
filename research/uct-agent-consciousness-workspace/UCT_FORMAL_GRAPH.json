@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R177-v1.0",
+  "revision": "R178-SB20261008-v1.0",
   "date": "2026-10-08",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -39761,7 +39761,7 @@
     "unique_owner_selected": false,
     "current_assistant_consciousness_decided": false
   },
-  "parent_revision": "R176-IA20261008-v1.0",
+  "parent_revision": "R177-v1.0",
   "research_TE20261008": {
     "date": "2026-10-08",
     "base_commit": "8df66b1bcf7c21795c4fba67eb1061815bf8c645",
@@ -39856,5 +39856,18 @@
     ],
     "new_nodes": 4,
     "new_rules": 2
+  },
+  "research_SB20261008": {
+    "date": "2026-10-08",
+    "baseline": "7ca710796f25dd7647c2c9ef90a90adf73090cff",
+    "record": "records/SB20261008_Source_Target_and_Replay",
+    "type": "CORROBORATIVE_EVIDENCE_ANNOTATION",
+    "canonical_nodes_added": 0,
+    "canonical_rules_added": 0,
+    "context_links_added": 0,
+    "overlap": "R178 §§2–4; REVIEW-04 proposal",
+    "next": "R178 action-attempt/passive/imagined consequence comparison",
+    "publication": "HOLD",
+    "checks": 11
   }
 }

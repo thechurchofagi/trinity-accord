@@ -1,0 +1,418 @@
+{
+  "schema": "uct-sb-exact-checks/1.0",
+  "model_checks": 11,
+  "checks": [
+    {
+      "name": "active current-command feedback path equals mode",
+      "passed": true,
+      "cases": 8
+    },
+    {
+      "name": "current command still reaches comparator in replay",
+      "passed": true,
+      "cases": 4
+    },
+    {
+      "name": "live feedback changes with current command at fixed replay",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "replay feedback independent of current command at fixed replay",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "matched traces with and without reports",
+      "passed": true,
+      "cases": 4
+    },
+    {
+      "name": "mismatched replay fails selected trace match",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "candidate predictions disagree in matched replay only",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "downstream edge restrictions identical",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "all binary functions of reachable trace give equal matched evidence",
+      "passed": true,
+      "cases": 32
+    },
+    {
+      "name": "upstream mode reveals condition while not deciding phenomenal bridge",
+      "passed": true,
+      "cases": 1
+    },
+    {
+      "name": "crossed limb source preserves stipulated feature and target binding",
+      "passed": true,
+      "cases": 1
+    }
+  ],
+  "finite_rows": [
+    {
+      "A": 0,
+      "R": 0,
+      "M": 0,
+      "trace": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "edges": [
+        [
+          "A",
+          "S"
+        ],
+        [
+          "A",
+          "V"
+        ],
+        [
+          "J",
+          "C"
+        ],
+        [
+          "C",
+          "U"
+        ],
+        [
+          "V",
+          "U"
+        ],
+        [
+          "R",
+          "J"
+        ],
+        [
+          "U",
+          "Q"
+        ]
+      ],
+      "G": 0,
+      "U": 1
+    },
+    {
+      "A": 0,
+      "R": 0,
+      "M": 1,
+      "trace": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "edges": [
+        [
+          "A",
+          "S"
+        ],
+        [
+          "A",
+          "V"
+        ],
+        [
+          "J",
+          "C"
+        ],
+        [
+          "C",
+          "U"
+        ],
+        [
+          "V",
+          "U"
+        ],
+        [
+          "S",
+          "J"
+        ],
+        [
+          "U",
+          "Q"
+        ]
+      ],
+      "G": 1,
+      "U": 1
+    },
+    {
+      "A": 0,
+      "R": 1,
+      "M": 0,
+      "trace": [
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "edges": [
+        [
+          "A",
+          "S"
+        ],
+        [
+          "A",
+          "V"
+        ],
+        [
+          "J",
+          "C"
+        ],
+        [
+          "C",
+          "U"
+        ],
+        [
+          "V",
+          "U"
+        ],
+        [
+          "R",
+          "J"
+        ],
+        [
+          "U",
+          "Q"
+        ]
+      ],
+      "G": 0,
+      "U": 0
+    },
+    {
+      "A": 0,
+      "R": 1,
+      "M": 1,
+      "trace": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "edges": [
+        [
+          "A",
+          "S"
+        ],
+        [
+          "A",
+          "V"
+        ],
+        [
+          "J",
+          "C"
+        ],
+        [
+          "C",
+          "U"
+        ],
+        [
+          "V",
+          "U"
+        ],
+        [
+          "S",
+          "J"
+        ],
+        [
+          "U",
+          "Q"
+        ]
+      ],
+      "G": 1,
+      "U": 1
+    },
+    {
+      "A": 1,
+      "R": 0,
+      "M": 0,
+      "trace": [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "edges": [
+        [
+          "A",
+          "S"
+        ],
+        [
+          "A",
+          "V"
+        ],
+        [
+          "J",
+          "C"
+        ],
+        [
+          "C",
+          "U"
+        ],
+        [
+          "V",
+          "U"
+        ],
+        [
+          "R",
+          "J"
+        ],
+        [
+          "U",
+          "Q"
+        ]
+      ],
+      "G": 0,
+      "U": 0
+    },
+    {
+      "A": 1,
+      "R": 0,
+      "M": 1,
+      "trace": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "edges": [
+        [
+          "A",
+          "S"
+        ],
+        [
+          "A",
+          "V"
+        ],
+        [
+          "J",
+          "C"
+        ],
+        [
+          "C",
+          "U"
+        ],
+        [
+          "V",
+          "U"
+        ],
+        [
+          "S",
+          "J"
+        ],
+        [
+          "U",
+          "Q"
+        ]
+      ],
+      "G": 1,
+      "U": 1
+    },
+    {
+      "A": 1,
+      "R": 1,
+      "M": 0,
+      "trace": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "edges": [
+        [
+          "A",
+          "S"
+        ],
+        [
+          "A",
+          "V"
+        ],
+        [
+          "J",
+          "C"
+        ],
+        [
+          "C",
+          "U"
+        ],
+        [
+          "V",
+          "U"
+        ],
+        [
+          "R",
+          "J"
+        ],
+        [
+          "U",
+          "Q"
+        ]
+      ],
+      "G": 0,
+      "U": 1
+    },
+    {
+      "A": 1,
+      "R": 1,
+      "M": 1,
+      "trace": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "edges": [
+        [
+          "A",
+          "S"
+        ],
+        [
+          "A",
+          "V"
+        ],
+        [
+          "J",
+          "C"
+        ],
+        [
+          "C",
+          "U"
+        ],
+        [
+          "V",
+          "U"
+        ],
+        [
+          "S",
+          "J"
+        ],
+        [
+          "U",
+          "Q"
+        ]
+      ],
+      "G": 1,
+      "U": 1
+    }
+  ],
+  "reachable_traces": 4,
+  "evidence_function_evaluations": 32,
+  "scope": "Finite stipulated controller only. No human data, no F_A/F_O/F_T values measured or inferred."
+}

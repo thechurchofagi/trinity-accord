@@ -1,0 +1,31 @@
+{
+  "gaps": [
+    {
+      "id": "SB-G1",
+      "status": "OPEN",
+      "gap": "Actual human bearer, interval, complete signature and source-path membership."
+    },
+    {
+      "id": "SB-G2",
+      "status": "OPEN",
+      "gap": "Independent F_A target admission and measurement bridge."
+    },
+    {
+      "id": "SB-G3",
+      "status": "OPEN",
+      "gap": "Feasible feature-matching protocol with target evidence free."
+    },
+    {
+      "id": "SB-G4",
+      "status": "OPEN",
+      "gap": "Tactile source/target distinction not a validated F_T/F_O bridge."
+    }
+  ],
+  "review_status": {
+    "QC08": "RESOLVED_SCOPED_EFFECTIVE per REVIEW-04",
+    "QC09": "RESOLVED_SCOPED_EFFECTIVE per REVIEW-04",
+    "QC10": "ACKNOWLEDGED/OPEN",
+    "IA-QC11": "ACKNOWLEDGED/application OPEN",
+    "QC12": "MODEL_CONTRACT_RESPONSE_SUBMITTED; actual application and reviewer disposition OPEN"
+  }
+}

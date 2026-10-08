@@ -1,0 +1,28 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "doi": "10.1371/journal.pone.0006933",
+      "read": "Primary methods/results/discussion",
+      "limit": "Not matched replay; drift not ownership; both limbs one body."
+    },
+    {
+      "id": "S2",
+      "doi": "10.1371/journal.pone.0017208",
+      "read": "Primary methods, Experiment 3 and discussion",
+      "limit": "No equivalence or interaction inferred from differing significance."
+    },
+    {
+      "id": "S3",
+      "doi": "10.1371/journal.pone.0156591",
+      "read": "Author abstract arXiv:1512.05220v2; inherited R158 context",
+      "limit": "Absent BCI brain-signal control does not exclude every participant causal path."
+    },
+    {
+      "id": "A-v1.2",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "read": "C1,C1-OI,C1-W reread."
+    }
+  ],
+  "priority": "REVIEW-04 proposed live/replay; TA17 nonexclusivity, R158 dissociations and R159/R160 frame/proxy boundaries inherited."
+}
