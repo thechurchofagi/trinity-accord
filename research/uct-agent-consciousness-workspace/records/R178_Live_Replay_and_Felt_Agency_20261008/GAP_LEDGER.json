@@ -1,0 +1,37 @@
+[
+  {
+    "id": "R178-G1",
+    "location": "\u00a72; IA actual trace premise",
+    "impact_and_counterexample": "Human bearer/complete signature not grounded; assembly property may be transferred to human incorrectly.",
+    "repair_and_remaining": "Fixed toy membership, separate P_C/P_down/P_H; actual grounding remains open.",
+    "status": "OPEN_APPLICATION_OR_RECORDED_LIMIT"
+  },
+  {
+    "id": "R178-G2",
+    "location": "\u00a7\u00a73\u20134; QC-12 evidence package",
+    "impact_and_counterexample": "Equal admitted downstream trajectories cannot discriminate source through those same readouts.",
+    "repair_and_remaining": "Explicit conditional argument; relax evidence matching or retain conceptual-only contrast.",
+    "status": "OPEN_APPLICATION_OR_RECORDED_LIMIT"
+  },
+  {
+    "id": "R178-G3",
+    "location": "\u00a7\u00a74\u20135; QC-10/IA-QC11",
+    "impact_and_counterexample": "Psi_A could reproduce functional attribution without identifying felt authorship.",
+    "repair_and_remaining": "Candidate labelled hypothesis; independent target/measurement and sufficiency remain open.",
+    "status": "OPEN_APPLICATION_OR_RECORDED_LIMIT"
+  },
+  {
+    "id": "R178-G4",
+    "location": "\u00a7\u00a71,5\u20136; R158 target split",
+    "impact_and_counterexample": "Agency, ownership, familiarity and causal belief may be conflated.",
+    "repair_and_remaining": "Choose F_A only; source studies do not identify all bodily mineness.",
+    "status": "OPEN_APPLICATION_OR_RECORDED_LIMIT"
+  },
+  {
+    "id": "R178-G5",
+    "location": "\u00a73; actual versus counterfactual relation",
+    "impact_and_counterexample": "Matching samples does not establish actual live causation or rule out redundancy.",
+    "repair_and_remaining": "Toy installed sole-source mechanisms explicit; no empirical causal identification claimed.",
+    "status": "OPEN_APPLICATION_OR_RECORDED_LIMIT"
+  }
+]

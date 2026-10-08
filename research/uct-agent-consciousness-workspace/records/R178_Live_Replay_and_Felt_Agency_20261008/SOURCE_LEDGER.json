@@ -1,0 +1,32 @@
+[
+  {
+    "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+    "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+    "scope": "Targeted \u00a7\u00a78.12\u20138.14,14.7\u201314.10; not a full reread"
+  },
+  {
+    "path": "records/R158_Body_Ownership_Agency_Ablation_20261007/Body_Ownership_Agency_Ablation_v0_1.md",
+    "sha256": "03b4482c4fb8320e8f41693a33fa753bbdd433dc69d7224867efe3defa0e5802",
+    "scope": "Full R158 note"
+  },
+  {
+    "path": "records/R177_Provenance_and_Content_Identity_20261008/Provenance_Feature_and_Experiential_Identity_v0_1.md",
+    "sha256": "8ff003ae128eac001ec8eeba9e65e88c368bbdefb05f905c84a4ba711b004605",
+    "scope": "Prior completed round context plus current handoff; not new full reread"
+  },
+  {
+    "path": "records/REVIEW_20261008_04/REVIEW_REPORT.md",
+    "sha256": "7ea702d049acabf7f0463fd4116ceaeac5b39aee2fcff1a58e25cec64f0e1dd5",
+    "scope": "Full review also reproduced in latest master33 and ledger"
+  },
+  {
+    "doi": "10.3389/fnhum.2012.00040",
+    "url": "https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2012.00040/full",
+    "scope": "Publisher methods, questionnaire and discussion incl bodily/external agency limitation; no raw data; prior R158 source revisited."
+  },
+  {
+    "doi": "10.1371/journal.pone.0156591",
+    "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0156591",
+    "scope": "Publisher abstract, methods, ownership/control results; no raw data; EEG disconnection is link-specific, not total uncoupling."
+  }
+]

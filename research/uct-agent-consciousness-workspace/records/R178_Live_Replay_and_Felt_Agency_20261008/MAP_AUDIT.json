@@ -1,0 +1,34 @@
+{
+  "scope": "Manual review of named relevant nodes and conjunctions, no global semantic proof",
+  "graph_sha256": "f1b3d5acceeb10f249f0964c970350e4ede24e2b96daee24601e13ff3e4cc5d8",
+  "graph_byte_unchanged": true,
+  "counts": {
+    "nodes": 584,
+    "rules": 284,
+    "context_links": 178
+  },
+  "reviewed": [
+    "A:C1/U1/U3",
+    "R157:COORDINATE_TRANSPORT/SEMANTIC_RESIDUAL with R158 amendment",
+    "R158:TARGET_SPLIT with R159 internal reference amendment",
+    "IA20261008:ACTUAL_TRACE_INSTANCE and ia20261008_trace_transport",
+    "R177:JOINT_SOURCE_FEATURE_DOMAIN"
+  ],
+  "all_of": "IA trace invariant + actual trace instance + C1 must bind same P/I/K; actual human instance not supplied by toy. No rule applied to produce F_A.",
+  "joint_satisfiability": "A=V=1, L Y=A versus replay Y=V; mode/active edge vary, common decoder/comparator downstream match. Opposite modes are alternatives, not simultaneous assumptions. Equal observation plus discriminating observation is rejected.",
+  "unlinked_consistency": "Ownership F_O, familiar F_F, conceptual I and efficacy stay distinct from F_A. Internal k and external c not conflated.",
+  "direction": "No report->experience existence, transport across bearers, partial->complete equivalence, or source->named quality inference.",
+  "new_graph_nodes": 0,
+  "new_graph_rules": 0,
+  "direction_checkpoints": [
+    "selection",
+    "formed result",
+    "pre-save"
+  ],
+  "limitations": [
+    "No empirical human contrast",
+    "No independently calibrated F_A measurement",
+    "No proof of B_source or B_enacted",
+    "QC-12 remains reviewer-controlled"
+  ]
+}

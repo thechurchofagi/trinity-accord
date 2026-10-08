@@ -1,3 +1,15 @@
+# Current checkpoint — R178 live/replay scope and felt authorship
+
+Read [the conceptual result](records/R178_Live_Replay_and_Felt_Agency_20261008/Live_Replay_and_Felt_Agency_v0_1.md), [claims](records/R178_Live_Replay_and_Felt_Agency_20261008/CLAIM_LEDGER.json), [review response](records/R178_Live_Replay_and_Felt_Agency_20261008/REVIEW_RESPONSE.md), and [handoff](records/R178_Live_Replay_and_Felt_Agency_20261008/CURRENT_HANDOFF.md).
+
+Freeze coupled assembly, downstream restriction and human bearer separately. Hidden genuine provenance may change while declared downstream organization matches; those same fixed readouts cannot then discriminate it. This is an evidence limitation, not an equality or inequality of feelings. Compare B_source with the unproved B_enacted agency interpretation. The latter separates actual self-related attribution from its causal accuracy; it is not a definition of all mineness.
+
+QC-08/09 retain reviewer RESOLVED_SCOPED_EFFECTIVE. QC-10 and IA-QC11 remain OPEN; QC-12 receives explicit scope/evidence response, actual human application OPEN and no self-closure. All earlier effective amendments remain binding. Graph nodes/rules/context links remain 584/284/178; no theorem added for counting.
+
+Next: one noncircular action-attempt versus passive/imagined consequence comparison at fixed represented content, with grounded self-reference and a failure condition. No generic decoder/certificate expansion, basal gate, exclusive owner or automatic publication. Historical current/latest notices below are superseded where inconsistent.
+
+---
+
 # Current checkpoint — R177 provenance and executed feature identity
 
 Latest round R177 follows R176 + IA20261008. Read [the English note](records/R177_Provenance_and_Content_Identity_20261008/Provenance_Feature_and_Experiential_Identity_v0_1.md), [review response](records/R177_Provenance_and_Content_Identity_20261008/REVIEW_RESPONSE.md), [scoped audit](records/R177_Provenance_and_Content_Identity_20261008/MAP_AUDIT.json) and [handoff](records/R177_Provenance_and_Content_Identity_20261008/CURRENT_HANDOFF.md).

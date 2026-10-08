@@ -1,0 +1,46 @@
+[
+  {
+    "id": "R178-C1",
+    "type": "SCOPED_LOGICAL_CONSEQUENCE_NOT_NEW_GRAPH_THEOREM",
+    "statement": "Every common deterministic readout of two equal admitted downstream trajectories has equal values; a common conditional stochastic kernel gives equal output laws.",
+    "domain": "The finite L/Yoked pair in \u00a73; arbitrary common readouts of the specified trajectory only.",
+    "all_of": [
+      "Equal trajectory arguments",
+      "Same readout or stochastic kernel",
+      "Readout has no additional source-sensitive input"
+    ],
+    "proof": "Substitution into common function/kernel.",
+    "counterexample": "A gate auditor or additional sensor observes a variable outside the matched trajectory; different readouts may differ.",
+    "status": "MANUAL_ARGUMENT",
+    "purpose": "Expose incompatible matching/evidence demands without concluding equal feelings."
+  },
+  {
+    "id": "R178-H1",
+    "type": "HYPOTHESIS",
+    "statement": "B_source: on independently admitted W, genuine source changes selected felt authorship under matched receiver organization.",
+    "domain": "Human action episodes with frozen P_H/I/K_H and intended target; admission open.",
+    "all_of": [
+      "Actual bearer membership and causal contrast",
+      "Independent target interpretation",
+      "All matching conditions and W"
+    ],
+    "proof": "No proof; prospective hypothesis in \u00a74.",
+    "counterexample": "An independently warranted equal/reversed F_A admitted comparison defeats its contrast.",
+    "status": "OPEN"
+  },
+  {
+    "id": "R178-H2",
+    "type": "EXPLANATORY_HYPOTHESIS",
+    "statement": "B_enacted: on W_H, matched constitutive self-indexed action/consequence organization preserves the selected felt-authorship relation despite hidden efficacy change.",
+    "domain": "Restricted independently grounded human action domain; not all ownership or experience.",
+    "all_of": [
+      "Grounded Psi_A with independent roles",
+      "Justified selected-target constitutive sufficiency",
+      "Other constitutive conditions matched",
+      "Independent phenomenal interpretation"
+    ],
+    "proof": "No proof; synthesis and rationale in \u00a75.",
+    "counterexample": "Matched Psi_A and all remaining conditions with independently warranted different F_A defeats sufficiency.",
+    "status": "OPEN"
+  }
+]
