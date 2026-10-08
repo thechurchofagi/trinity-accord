@@ -1,0 +1,24 @@
+{
+  "schema": "mgtd-current-publication/1.0",
+  "research_id": "METHOD20261008",
+  "current_version": "1.0.1",
+  "current_doi": "10.5281/zenodo.23241982",
+  "current_zenodo_record_id": 23241982,
+  "concept_doi": "10.5281/zenodo.23241204",
+  "current_pdf": "v1.0.1/MGTD_Method_Paper_v1.0.1.pdf",
+  "current_pdf_sha256": "98abef0e92d0bb599146cdf525d98acb7045a168912ec9e87ba7723bc958097c",
+  "publication_receipt": "v1.0.1/publication-record.json",
+  "public_readback": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "previous_version": {
+    "version": "1.0.0",
+    "doi": "10.5281/zenodo.23241205",
+    "arweave": "DISABLED"
+  },
+  "ots_status_file": "research/paper-timestamps/2026-10-08-mgtd-v101/status.json",
+  "ots_first_run": "PENDING_BITCOIN",
+  "arweave_policy": "EXCLUSIVE_LATEST_VERSION; VERIFIED_OTS_BTC_AND_CONCEPT_DOI_LATEST_CHECK_BEFORE_PAID_ARWEAVE",
+  "arweave_live_status": "READ_OTS_STATUS_JSON_FOR_CURRENT_VALUE",
+  "workflow_file": ".github/workflows/research-mgtd-v101-ots-arweave.yml",
+  "version_correction_class": "EDITORIAL_PUBLICATION_STATUS_ONLY",
+  "peer_reviewed": false
+}
