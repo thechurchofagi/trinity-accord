@@ -1,0 +1,53 @@
+{
+  "schema": "UCT_R171_PROOF_LEDGER/v1",
+  "claims": [
+    {
+      "id": "R171-A",
+      "type": "conditional theorem",
+      "statement": "A frozen total actual abstraction, universal inclusion T->S and universal fiber-to-cell coverage imply T=C and U is empty relative to the declared target.",
+      "domain": "one R170 actual target, specification range and cell family",
+      "all_of": ["D1 frozen target and total grounding", "D2 universal actual inclusion", "D3 universal fiber/route coverage"],
+      "proof": "Arbitrary-element inclusion followed by the definition of C and U.",
+      "source": "Universal_Target_Range_Certificates_v0_1.md §3",
+      "counterexample_boundary": "A finite abstract range without total actual grounding or fiber coverage does not discharge the theorem.",
+      "status": "PROVED_CONDITIONALLY",
+      "thought_experiment_role": "The calculator case separates encoded state enumeration from undocumented physical modes."
+    },
+    {
+      "id": "R171-B",
+      "type": "conditional theorem",
+      "statement": "For a target defined exactly as actual protocol reachability, initial inclusion, specification closure, actual forward refinement and invariant fiber coverage imply every reachable actual context is covered.",
+      "domain": "one frozen actual transition protocol and its abstract specification",
+      "all_of": ["I1 exact reachable target", "I2 initial inclusion", "I3 all-input/mode closure", "I4 actual refinement", "I5 invariant fiber/route coverage"],
+      "proof": "Induction on actual path length using refinement and specification closure, followed by fiber coverage.",
+      "source": "Universal_Target_Range_Certificates_v0_1.md §4",
+      "counterexample_boundary": "The result is protocol-relative and says nothing about contexts outside the frozen initial/input/mode scope.",
+      "status": "PROVED_CONDITIONALLY",
+      "thought_experiment_role": "The human-realized agent shows why type safety of the algorithm does not cover the humans' complete physical states."
+    },
+    {
+      "id": "R171-C",
+      "type": "non-entailment theorem",
+      "statement": "For every proper finite sample F of T, sample-restricted observations are compatible with both full coverage and an uncovered z* in T\\F; successful fitting on F does not entail universal coverage.",
+      "domain": "any target with a proper observed subset",
+      "all_of": ["F proper subset of T", "observations restricted to F"],
+      "proof": "Construct two worlds identical on F and differing only in Cov(z*) outside F.",
+      "source": "Universal_Target_Range_Certificates_v0_1.md §5",
+      "counterexample_boundary": "Complete enumeration works only if enumeration completeness and actual fiber coverage are independently proved.",
+      "status": "PROVED_EXACTLY",
+      "thought_experiment_role": "Copy/swap and ancestor formation create unobserved admissible modes despite identical sampled behavior."
+    },
+    {
+      "id": "R171-D",
+      "type": "premise-independence result",
+      "statement": "Initial inclusion, specification closure, actual refinement and invariant fiber coverage are each independently necessary for the general finite inductive implication.",
+      "domain": "two-state deterministic transition systems",
+      "all_of": ["one explicit countermodel per omitted premise"],
+      "proof": "Four saved two-state witnesses satisfy the other three obligations and falsify the conclusion.",
+      "source": "verify_range_certificates.py and EXACT_CHECKS.json",
+      "counterexample_boundary": "Necessity is for the stated general theorem; stronger domain-specific premises can imply an omitted clause.",
+      "status": "EXACT_FINITE_COUNTERMODELS_VERIFIED",
+      "thought_experiment_role": "Provides the reusable logical skeleton for all four domain families."
+    }
+  ]
+}

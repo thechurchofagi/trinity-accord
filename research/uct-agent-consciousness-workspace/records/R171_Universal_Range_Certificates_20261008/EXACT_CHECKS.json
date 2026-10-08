@@ -1,0 +1,89 @@
+{
+  "schema": "UCT_R171_EXACT_CHECKS/v1",
+  "status": "PASS",
+  "direct_inclusion_checks": 21844,
+  "proper_sample_nondetermination_witnesses": 3025,
+  "inductive_certificates": 1838,
+  "inductive_reachability_state_checks": 2530,
+  "premise_independence_witnesses": {
+    "missing_initial_inclusion": {
+      "initial": false,
+      "closure": true,
+      "refinement": true,
+      "fiber": true,
+      "conclusion": false
+    },
+    "missing_specification_closure": {
+      "initial": true,
+      "closure": false,
+      "refinement": true,
+      "fiber": true,
+      "conclusion": false
+    },
+    "missing_actual_refinement": {
+      "initial": true,
+      "closure": true,
+      "refinement": false,
+      "fiber": true,
+      "conclusion": false
+    },
+    "missing_fiber_coverage": {
+      "initial": true,
+      "closure": true,
+      "refinement": true,
+      "fiber": false,
+      "conclusion": false
+    }
+  },
+  "status_assignments": 64,
+  "status_counts": {
+    "INVALID_RANGE_PROTOCOL": 32,
+    "UNRESOLVED": 1,
+    "EMPIRICAL_COVER_ONLY": 1,
+    "SPECIFICATION_ONLY": 2,
+    "UNIVERSAL_RANGE_CERTIFIED_REACHABLE": 4,
+    "UNIVERSAL_RANGE_CERTIFIED_DIRECT": 8,
+    "RANGE_CERTIFICATE_REFUTED": 16
+  },
+  "domain_family_audit": {
+    "finite_hardware": [
+      "actual realization",
+      "initial/reset range",
+      "all admissible inputs/modes",
+      "inductive closure",
+      "fiber/route cover"
+    ],
+    "typed_program": [
+      "operational semantics",
+      "type preservation",
+      "compiler/runtime/FFI refinement",
+      "resource/environment scope",
+      "fiber/route cover"
+    ],
+    "sensorimotor": [
+      "physical joint/actuator limits",
+      "complete hybrid modes",
+      "interval/reachability bounds",
+      "model-error refinement",
+      "fiber/route cover"
+    ],
+    "biological_safety": [
+      "admission population",
+      "uncertainty/disturbance set",
+      "controlled invariance",
+      "monitor/actuator/failsafe",
+      "fiber/route cover"
+    ]
+  },
+  "claim_limits": {
+    "actual_hardware_range_validated": false,
+    "actual_program_refinement_validated": false,
+    "actual_sensorimotor_range_validated": false,
+    "actual_biological_envelope_validated": false,
+    "complete_organization_identified": false,
+    "C1_derived": false,
+    "B_min_validated": false,
+    "basal_experience_gate": false
+  },
+  "failures": []
+}

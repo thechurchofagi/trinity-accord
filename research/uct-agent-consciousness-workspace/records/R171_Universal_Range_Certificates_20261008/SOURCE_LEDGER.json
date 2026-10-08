@@ -1,0 +1,35 @@
+{
+  "schema": "UCT_R171_SOURCE_LEDGER/v1",
+  "sources": [
+    {
+      "id": "UCT-I-v1.2",
+      "kind": "fixed primary project source",
+      "locators": ["§8.11", "§8.12", "§8.13", "§8.14", "§14.7", "§14.8", "§14.9", "§14.10"],
+      "use": "Actual physical witness discipline, body-centered organization, self/conceptual-I and identity/isomorphism limits.",
+      "limit": "Does not provide any instantiated R171 hardware, program, sensorimotor or biological range certificate."
+    },
+    {
+      "id": "R169-R170-fixed",
+      "kind": "verified project derivations",
+      "locators": ["R169 actual route graph and partial-view radius", "R170 target/cell/remainder contract and G2/G3/G7"],
+      "use": "Defines the actual coverage conclusion and the exact open-world obligation discharged conditionally by R171.",
+      "limit": "No actual system range, invariant or refinement relation has been validated."
+    },
+    {
+      "id": "established-formal-methods",
+      "kind": "standard methods",
+      "locators": ["inductive invariants", "forward simulation/refinement", "type preservation", "reachability", "controlled invariance/barrier reasoning"],
+      "use": "General proof forms and domain-family comparisons.",
+      "limit": "No priority claim; each method needs domain-specific soundness and actual-realization premises."
+    },
+    {
+      "id": "R171-project-specific-synthesis",
+      "kind": "new project-specific formal application",
+      "locators": ["R171 note §§2-7", "verify_range_certificates.py"],
+      "use": "Direct versus inductive certificate split, fitted-cover obstruction, four-family obligation table and status logic.",
+      "limit": "Finite checks establish logical boundaries only, not physical truth or experience."
+    }
+  ],
+  "search_scope": "No new literature search was needed for the elementary certificate decomposition. Established formal-method families are credited generically and no historical novelty claim is made; the fixed UCT-I and R169-R170 source text was read directly.",
+  "source_failures": []
+}
