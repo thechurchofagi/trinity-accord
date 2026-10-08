@@ -1,0 +1,51 @@
+{
+  "access_date": "2026-10-08",
+  "raw_data_reanalysis": false,
+  "sources": [
+    {
+      "id": "Bertoni2025",
+      "doi": "10.1038/s41467-025-58683-9",
+      "scope": "Primary full article: experiment design, reported pre-movement phase/agency associations, sham BMI and interpretation limits.",
+      "use": "Constrains purely retrospective and purely output-based accounts.",
+      "limit": "Ratings/proxies and neural associations do not identify complete organization or C1."
+    },
+    {
+      "id": "Schreiner2025",
+      "doi": "10.1016/j.isci.2025.112583",
+      "scope": "PubMed abstract and figure descriptions for two goal-feedback experiments.",
+      "use": "Constrains prediction-match sufficiency; motivates target/goal binding.",
+      "limit": "No raw data or complete article reanalysis; report is not basal gate."
+    },
+    {
+      "id": "Kasahara2015",
+      "doi": "10.1371/journal.pone.0130019",
+      "scope": "Primary full text methods/rationale: motor-imagery BMI, delay/spatial conflicts, 15 healthy participants.",
+      "use": "Supports separating target-bound activity from overt bodily movement.",
+      "limit": "Does not establish UCT practical centering or named feeling identity."
+    },
+    {
+      "id": "Schaefer2010",
+      "doi": "10.1371/journal.pone.0015010",
+      "scope": "Primary single-patient alien-hand report, methods/results/discussion.",
+      "use": "Clinical counterexample to movement=will/agency.",
+      "limit": "Single pathological case; no universal signature or complete organizational equality."
+    },
+    {
+      "id": "Andrews2026",
+      "url": "https://link.springer.com/article/10.1007/s11098-026-02605-y",
+      "scope": "Conceptual analysis §§4.1–4.2 and cited intervention claims.",
+      "use": "Supports phase- and role-specific typing of LLM representations.",
+      "limit": "Not primary empirical evidence and not evidence of felt intention."
+    },
+    {
+      "id": "UCT_fixed_lineage",
+      "paths": [
+        "records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md",
+        "records/R179_Attempt_Observation_Imagery_20261008/Attempt_Observation_Imagery_v0_1.md",
+        "records/R180_Proposal_Uptake_and_Author_Report_20261008/Proposal_Uptake_and_Author_Report_v0_2.md",
+        "records/METHOD_20261008_Theory_First_Organization/METHOD_NOTE.md"
+      ],
+      "limit": "Inherited distinctions and thought experiments are not R181 novelty."
+    }
+  ]
+}

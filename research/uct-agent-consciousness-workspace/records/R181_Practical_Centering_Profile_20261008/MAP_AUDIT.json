@@ -1,0 +1,31 @@
+{
+  "scope": "Affected concepts, simultaneous rule premises, target/time/signature and unconnected-concept consistency; not global semantic proof.",
+  "graph_changed": false,
+  "graph_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+  "counts": {"nodes": 584, "rules": 284, "context_links": 178},
+  "affected_nodes": ["A:C1", "A:U1", "R158:TARGET_SPLIT", "R158:TARGET_SPECIFIC_BRIDGE_PROFILE", "R159:ANCHOR_BINDING_CONTRACT", "IA20261008:ACTUAL_TRACE_INSTANCE"],
+  "transport_rule": {
+    "id": "ia20261008_trace_transport",
+    "all_of": ["IA20261008:TRACE_IDENTITY_INVARIANT", "IA20261008:ACTUAL_TRACE_INSTANCE", "A:C1"],
+    "same_binding_required": "P/I/K"
+  },
+  "checks": {
+    "concepts": "D,C,E,A are typed actual relations; PC is D and C, not consciousness, owner, report or feeling.",
+    "quantifiers": "C1 universal admission is inherited. C1-C3 quantify only over the 128 declared rows; H1 is OPEN on grounded actual instances.",
+    "all_of": "No IA conclusion is used without all three simultaneous premises on the same binding. R181 supplies no actual human or deployed-model instance.",
+    "joint_satisfiability": "Blocked directive closure, imposed movement and imagery routing have explicit witnesses. Alternative episodes are not simultaneous assignments.",
+    "objects_time_signature": "Online D/C/E during I differs from later A/report; imagery target differs from overt target; external upstream history may lie outside P/I/K.",
+    "actuality_evidence": "Installed role differs from tests and reports used as evidence. Model variables stipulate roles only in the toy.",
+    "direction": "Origin, movement, report, prediction match and control success do not entail named feeling. C1 transport does not choose the label.",
+    "unconnected_concepts": "Ownership, familiar mineness, conceptual I, autobiographical identity and numerical persistence are not inferred.",
+    "joint_failure": "Removing independently grounded target or closure membership blocks H1 application.",
+    "direction_check": "The result returns to experience-internal action structure; no certificate expansion, basal gate or publication pressure."
+  },
+  "review_status": {
+    "QC08": "RESOLVED_SCOPED_EFFECTIVE",
+    "QC09": "RESOLVED_SCOPED_EFFECTIVE",
+    "QC10": "ACKNOWLEDGED_OPEN",
+    "IA-QC11": "APPLICATION_OPEN",
+    "QC12": "ACTUAL_APPLICATION_OPEN"
+  }
+}

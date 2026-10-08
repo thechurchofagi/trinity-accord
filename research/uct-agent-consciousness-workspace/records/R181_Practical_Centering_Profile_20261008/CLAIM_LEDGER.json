@@ -1,0 +1,61 @@
+[
+  {
+    "id": "R181-C1",
+    "type": "FINITE_NON_IDENTIFICATION_RESULT",
+    "statement": "Within the declared 128-configuration domain, joint internal origin, overt movement and positive later report do not identify target-bound practical centering.",
+    "domain": "model.py; fixed desired feature +1, overt target witness",
+    "all_of": [
+      "directive and closure are actual stipulated roles",
+      "movement may be supplied by the target policy or imposed-motion channel",
+      "later attribution is an independent current process"
+    ],
+    "proof": "R181-M10 fixes internal origin, movement=1 and report=1 while PC differs between directive-closure and imposed-motion witnesses.",
+    "counterexample_to_overextension": "A restricted natural domain that independently excludes imposed movement may remove this witness; no phenomenal conclusion follows.",
+    "status": "PROVED_IN_DECLARED_MODEL_ONLY",
+    "thought_experiment_role": "Internal bypass versus action-policy use."
+  },
+  {
+    "id": "R181-C2",
+    "type": "FINITE_DISSOCIATION_RESULT",
+    "statement": "Target-bound practical centering can occur without overt movement, and overt movement can occur without it.",
+    "domain": "model.py overt-target subdomain",
+    "all_of": [
+      "plant blockage and imposed motion are independently admitted",
+      "PC is the simultaneous directive-and-closure relation"
+    ],
+    "proof": "R181-M5/M6/M9: blocked directive closure gives PC=1,movement=0; imposed movement gives PC=0,movement=1.",
+    "counterexample_to_overextension": "This does not prove that every blocked human attempt has the named feeling of trying.",
+    "status": "PROVED_IN_DECLARED_MODEL_ONLY",
+    "thought_experiment_role": "Blocked attempt and passive/alien movement."
+  },
+  {
+    "id": "R181-C3",
+    "type": "TARGET_INDEXING_RESULT",
+    "statement": "The same represented movement can belong to practical centering for the activity of imagery without practical centering for overt movement.",
+    "domain": "model.py target selector and distinct command/rehearsal routes",
+    "all_of": [
+      "overt and imagery routes are physically distinct in the declared signature",
+      "target is frozen before interpreting the result"
+    ],
+    "proof": "R181-M7 gives imagery PC=1, rehearsal=1 and movement=0.",
+    "counterexample_to_overextension": "An analyst label without an actual target-specific route would not supply this distinction.",
+    "status": "PROVED_IN_DECLARED_MODEL_ONLY",
+    "thought_experiment_role": "Doing movement versus doing the activity of imagining it."
+  },
+  {
+    "id": "R181-H1",
+    "type": "INTERPRETIVE_CANDIDATE",
+    "statement": "For an independently grounded target, practical centering may contribute to an online feeling of doing, while mismatch-consuming events may contribute to felt trying and later attribution to remembered authorship.",
+    "domain": "actual bearer P, interval I, common signature K and independently specified phenomenal targets",
+    "all_of": [
+      "A:C1",
+      "actual grounded D/C/E/A relations on the same P/I/K",
+      "independent noncircular target meanings",
+      "a bridge surviving automatic skill, passive movement, blocked attempt and imagery countercases"
+    ],
+    "proof": "OPEN. The note supplies an explanatory map and falsifiers, not a proof.",
+    "counterexample_to_overextension": "Automatic skill may have PC without reflective endorsement; reported agency may arise postdictively.",
+    "status": "OPEN",
+    "thought_experiment_role": "Positive experience-internal agency profile without an extra owner or basal gate."
+  }
+]

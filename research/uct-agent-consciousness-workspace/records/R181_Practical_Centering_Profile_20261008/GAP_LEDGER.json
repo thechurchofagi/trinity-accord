@@ -1,0 +1,56 @@
+[
+  {
+    "id": "R181-G1",
+    "location": "§4 and R181-H1",
+    "impact": "Practical centering is not yet an independently identified feeling.",
+    "counterexample": "Automatic skilled execution may instantiate D/C while lacking reflective endorsement; postdictive agency may occur without declared D/C.",
+    "corrected": "Profile is a candidate coordinate, never a basal gate or sufficient phenomenal criterion.",
+    "unresolved": "A same-target bridge with independent felt-trying evidence and compensating-path controls.",
+    "status": "OPEN"
+  },
+  {
+    "id": "R181-G2",
+    "location": "§1 definition of C and E",
+    "impact": "A successful diagnostic intervention is not itself the installed closure.",
+    "counterexample": "A test can change output through an unmodeled bypass.",
+    "corrected": "Actual mechanism and external evidence are distinct; role membership must be grounded before testing.",
+    "unresolved": "Physical path evidence for a real bearer.",
+    "status": "OPEN"
+  },
+  {
+    "id": "R181-G3",
+    "location": "§2 automatic skill",
+    "impact": "The model does not distinguish reflective voluntary action from automatized target control.",
+    "counterexample": "Both may instantiate the same D/C relation.",
+    "corrected": "No voluntariness or ownership label is derived.",
+    "unresolved": "Whether another experiential dimension is required for endorsement without creating an exclusive owner.",
+    "status": "OPEN"
+  },
+  {
+    "id": "R181-G4",
+    "location": "§5 evidence",
+    "impact": "Existing agency ratings and BMI proxies do not reveal complete organization or validate C1.",
+    "counterexample": "Sham feedback, task expectations and later judgement can influence ratings.",
+    "corrected": "Sources constrain shortcuts only; no raw-data reanalysis or UCT-exclusive support claimed.",
+    "unresolved": "Independent role-specific evidence with frozen target/bearer and explicit observation family.",
+    "status": "OPEN"
+  },
+  {
+    "id": "R181-G5",
+    "location": "initial model run",
+    "impact": "Initial configuration count was false.",
+    "counterexample": "Seven binary factors yield 2^7=128, not 256.",
+    "corrected": "Assertion and note corrected; failure retained under failures/.",
+    "unresolved": "None for the count; semantic scope remains open.",
+    "status": "CORRECTED_WITH_HISTORY"
+  },
+  {
+    "id": "R180-READBACK",
+    "location": "R180 DUAL_SAVE_RECEIPT",
+    "impact": "Persistent increment remote SHA256 remains unverified by download.",
+    "counterexample": "Two current download attempts returned HTTP 403.",
+    "corrected": "Upload identity/version/size retained; no blind reupload and no false readback claim.",
+    "unresolved": "Restore through a supported materialization path and compare bytes to recorded SHA256.",
+    "status": "OPEN_STORAGE_VERIFICATION"
+  }
+]

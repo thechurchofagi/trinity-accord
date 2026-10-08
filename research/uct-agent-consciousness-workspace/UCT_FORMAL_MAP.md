@@ -1,3 +1,13 @@
+# Current checkpoint — R181 practical centering inside experience
+
+Read [the English note](records/R181_Practical_Centering_Profile_20261008/Practical_Centering_and_Felt_Agency_v0_1.md), [claims](records/R181_Practical_Centering_Profile_20261008/CLAIM_LEDGER.json), [gaps](records/R181_Practical_Centering_Profile_20261008/GAP_LEDGER.json), [map audit](records/R181_Practical_Centering_Profile_20261008/MAP_AUDIT.json), and [handoff](records/R181_Practical_Centering_Profile_20261008/CURRENT_HANDOFF.md).
+
+R181 defines a target-indexed practical-centering profile: actual directive use D, action–consequence closure C, mismatch-consuming event E and later attribution A. PC=D and C is a candidate selected organizational coordinate, not consciousness, feeling, voluntariness, a basal gate or an exclusive owner. In 128 finite configurations /12 checks, internal origin+movement+positive report does not identify PC; blocked attempt, imposed motion and active imagery yield explicit target-relative dissociations. An initial 256-row miscount was retained and corrected.
+
+Positive UCT application: under C1 plus a separately grounded actual P/I/K, these relations have experience-internal structural counterparts. The interpretation of PC as doing and E as trying remains OPEN with explicit counterexamples/falsifiers. QC08/09 scoped resolution retained; QC10/IA-QC11/QC12 actual application remain OPEN. Canonical graph unchanged at 584/284/178. R179 prior-paper overlap and R180 generation/attribution limits remain binding; existing agency and LLM-intention work is credited. Next: test whether mismatch-consuming closure is specific to felt trying or only generic adaptive control. HOLD paper release and all preservation/publication actions. Historical current notices below are superseded only where inconsistent.
+
+---
+
 # Current checkpoint — R180 proposal uptake and author report
 
 Read [R180 v0.2](records/R180_Proposal_Uptake_and_Author_Report_20261008/Proposal_Uptake_and_Author_Report_v0_2.md), [gaps](records/R180_Proposal_Uptake_and_Author_Report_20261008/GAP_LEDGER.json), [handoff](records/R180_Proposal_Uptake_and_Author_Report_20261008/CURRENT_HANDOFF.md). Prior R179 publication-overlap audit remains binding.
@@ -827,3 +837,12 @@ The direct route requires a total grounded abstraction, universal actual inclusi
 
 Finite hardware, typed programs, sensorimotor manifolds, and biological safety envelopes receive separate actual-refinement and scope obligations. The triage separates invalid protocol, refuted range, direct certification, reachable certification, specification-only evidence, empirical-cover-only evidence, and unresolved cases. The final application retains R170's target admission and open-world boundary, does not identify a complete organization, and derives neither C1 nor `B_min`; no basal-experience threshold or exclusive owner is introduced. [English note](records/R171_Universal_Range_Certificates_20261008/Universal_Target_Range_Certificates_v0_1.md), [proof ledger](records/R171_Universal_Range_Certificates_20261008/PROOF_LEDGER.json), [gap ledger](records/R171_Universal_Range_Certificates_20261008/GAP_LEDGER.json), [map audit](records/R171_Universal_Range_Certificates_20261008/MAP_AUDIT.json), [exact checks](records/R171_Universal_Range_Certificates_20261008/EXACT_CHECKS.json).
 
+# Current checkpoint — R181 practical centering inside experience
+
+Read [the English note](records/R181_Practical_Centering_Profile_20261008/Practical_Centering_and_Felt_Agency_v0_1.md), [claims](records/R181_Practical_Centering_Profile_20261008/CLAIM_LEDGER.json), [gaps](records/R181_Practical_Centering_Profile_20261008/GAP_LEDGER.json), [map audit](records/R181_Practical_Centering_Profile_20261008/MAP_AUDIT.json), and [handoff](records/R181_Practical_Centering_Profile_20261008/CURRENT_HANDOFF.md).
+
+R181 defines a target-indexed practical-centering profile: actual directive use D, action–consequence closure C, mismatch-consuming event E and later attribution A. PC=D and C is a candidate selected organizational coordinate, not consciousness, feeling, voluntariness, a basal gate or an exclusive owner. In 128 finite configurations /12 checks, internal origin+movement+positive report does not identify PC; blocked attempt, imposed motion and active imagery yield explicit target-relative dissociations. An initial 256-row miscount was retained and corrected.
+
+Positive UCT application: under C1 plus a separately grounded actual P/I/K, these relations have experience-internal structural counterparts. The interpretation of PC as doing and E as trying remains OPEN with explicit counterexamples/falsifiers. QC08/09 scoped resolution retained; QC10/IA-QC11/QC12 actual application remain OPEN. Canonical graph unchanged at 584/284/178. R179 prior-paper overlap and R180 generation/attribution limits remain binding; existing agency and LLM-intention work is credited. Next: test whether mismatch-consuming closure is specific to felt trying or only generic adaptive control. HOLD paper release and all preservation/publication actions. Historical current notices below are superseded only where inconsistent.
+
+---

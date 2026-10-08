@@ -467,3 +467,9 @@ QC-20261008-12 remains ACKNOWLEDGED with actual application/reviewer disposition
 A further fault was actually found: v0.1 selected c=g independently of proposal, so “uptake” overclaimed content contribution. Its full failure is preserved. v0.2 adds accept policy g=0 and checks p-dependent output, while retaining invariant override cases. This repairs a toy claim, not phenomenal grounding. GAP R180-G1 records both boundaries.
 
 R179 nonduplication correction retained. The four old thought-experiment families and actual-but-inaccurate attribution are inherited TA25/TA17 material. Ordinary causal nonidentifiability is not renamed as a new general theorem. No review item self-closed.
+
+## RESEARCHER-RESPONSE-R181
+
+See records/R181_Practical_Centering_Profile_20261008/REVIEW_RESPONSE.md. QC08/09 remain scoped effective; QC10, IA-QC11 and QC12 actual application remain OPEN. The practical-centering profile supplies a positive organizational candidate and falsifiers but is not identified with a named feeling. Initial model count failure is preserved. Canonical graph unchanged; no self-closure.
+
+---
