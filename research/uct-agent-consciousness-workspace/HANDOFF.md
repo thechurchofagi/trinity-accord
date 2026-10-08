@@ -196,3 +196,11 @@ Map R166-v1.0: **452 nodes / 217 rules / 117 context links**, new 6/2 with exact
 
 Read `records/R166_Token_Installation_Witness_20261008/`. Next: specify one ethical token-preserving anchor–mediator–consumer architecture, including fidelity, redundancy/compensation alternatives and refute/unresolved boundaries. Do not return to generic statistics, use ownership report to define the path, or treat the witness as necessary for experience.
 
+## R171 current handoff — universal target-range certificates
+
+R171 is the latest substantive round. It defines two honest positive routes: direct total actual inclusion plus actual fiber/route coverage, and protocol-relative inductive reachability plus initial inclusion, specification closure, actual forward refinement, and invariant fiber/route coverage. A proper finite sample never proves universal coverage; four exact countermodels show the four inductive premises are independently necessary.
+
+Map R171-v1.0 has 497 nodes, 240 rules, and 137 context links; the R170 prefix is exact. Round audit: 23/23 PASS. Exact checks include 21,844 direct-inclusion checks, 3,025 proper-sample nondetermination witnesses, 1,838 inductive certificates, 2,530 reachable-state checks, four premise-independence witnesses, and 64 status assignments. See `records/R171_Universal_Range_Certificates_20261008/CURRENT_HANDOFF.md` for exact recovery coordinates.
+
+Next question: when do separately valid range certificates compose across nested and overlapping device/program/human/coupled-system processes, and what interface/refinement compatibility is required? Do not infer one closed complete organization from component closure; preserve every C1/`B_min`/basal/owner boundary.
+

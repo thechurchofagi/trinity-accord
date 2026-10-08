@@ -224,3 +224,11 @@ Current map: R153-v1.0, 391/188. Statements/scopes are fully inventoried; 60 rul
 建立全节点/规则结构检查表，明确旧图缺字段；人工检查综合稿使用的跨概念关系和联合冲突；完成英文综合稿的核心论证与方法部分。数学版本仍为 R149-v1.0，391 节点/188 规则；R151 是新的整合稿和审查层，不以节点增长报成果。
 
 下一轮从当前综合稿和审查记录继续。优先完善被明确定位的解释/证明缺口，不重启自动堆定理、寻求唯一主体、实验优先或投稿优先队列。
+## R171 current priority — universal range certificates, not fitted covers
+
+R171 supplies two strictly scoped ways to discharge R170's universal target-range obligation. The direct route requires one frozen actual target `T`, a total grounded abstraction `alpha`, universal inclusion `alpha(T) subset S`, and universal actual fiber-to-cell/route coverage. The inductive route restricts the claim to `Reach(I,W,R_act)` and requires initial inclusion, specification closure under every admitted input/mode, actual-to-spec forward refinement, and invariant fiber/route coverage. Only then may the reachable target enter `C`; neither route establishes a complete organization.
+
+A proper finite sample `F subsetneq T` cannot entail universal coverage: the same observations admit both a fully covered completion and a hidden uncovered `z*`. Four two-state countermodels separately show that initial inclusion, specification closure, actual refinement, and fiber coverage are each necessary for the stated inductive implication. Map R171-v1.0: **497 nodes / 240 rules / 137 context links**, new 10/6/4 over the exact R170 prefix; the aggregate checker passes 23/23.
+
+Read the [English note](records/R171_Universal_Range_Certificates_20261008/Universal_Target_Range_Certificates_v0_1.md), [map audit](records/R171_Universal_Range_Certificates_20261008/MAP_AUDIT.json), [gaps](records/R171_Universal_Range_Certificates_20261008/GAP_LEDGER.json), [Chinese review](records/R171_Universal_Range_Certificates_20261008/REVIEW_ZH.md), and [handoff](records/R171_Universal_Range_Certificates_20261008/CURRENT_HANDOFF.md). No actual hardware, program, sensorimotor, or biological certificate has been validated. Next: certificate composition across nested and overlapping actual processes without inferring that separately closed components form one closed complete organization. No result derives C1 or `B_min`, adds a basal gate, selects a unique owner, or decides the current assistant's consciousness.
+

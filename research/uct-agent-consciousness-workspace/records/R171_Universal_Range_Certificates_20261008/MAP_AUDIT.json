@@ -1,0 +1,360 @@
+{
+  "schema": "UCT_R171_MAP_AUDIT/v1",
+  "round": "R171",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "note_hash_frozen",
+      "status": "PASS",
+      "detail": "f660d03d7269ba95c458427bf2c20e9a01a6ac994efe2da39750baa9999536e8"
+    },
+    {
+      "name": "graph_revision",
+      "status": "PASS",
+      "detail": "R171-v1.0"
+    },
+    {
+      "name": "graph_counts",
+      "status": "PASS",
+      "detail": {
+        "nodes": 497,
+        "rules": 240,
+        "context_links": 137
+      }
+    },
+    {
+      "name": "unique_ids",
+      "status": "PASS",
+      "detail": {
+        "nodes": 497,
+        "rules": 240
+      }
+    },
+    {
+      "name": "all_endpoints_exist",
+      "status": "PASS",
+      "detail": {
+        "rules": [],
+        "links": []
+      }
+    },
+    {
+      "name": "dag",
+      "status": "PASS",
+      "detail": {
+        "visited": 497,
+        "total": 497
+      }
+    },
+    {
+      "name": "exact_parent_reconstruction",
+      "status": "PASS",
+      "detail": "057c99a365940433579a765c2e52e5d4c5ce5b0bc4796cefef7b628c741e762b"
+    },
+    {
+      "name": "new_node_contract_fields",
+      "status": "PASS",
+      "detail": [
+        "R171:UNIVERSAL_RANGE_CERTIFICATE_CONTRACT",
+        "R171:DIRECT_TOTAL_RANGE_CERTIFICATE",
+        "R171:DIRECT_RANGE_CLOSURE",
+        "R171:INDUCTIVE_REACHABLE_RANGE_CERTIFICATE",
+        "R171:INDUCTIVE_RANGE_CLOSURE",
+        "R171:PREMISE_INDEPENDENCE_COUNTERMODELS",
+        "R171:FITTED_COVER_NONENTAILMENT",
+        "R171:FOUR_DOMAIN_APPLICATION_BOUNDARY",
+        "R171:RANGE_CERTIFICATE_TRIAGE",
+        "R171:R170_RANGE_APPLICATION_BOUNDARY"
+      ]
+    },
+    {
+      "name": "new_rules_explicit_all_of",
+      "status": "PASS",
+      "detail": {
+        "r171_direct_range_closure": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R171:UNIVERSAL_RANGE_CERTIFICATE_CONTRACT",
+          "R171:DIRECT_TOTAL_RANGE_CERTIFICATE"
+        ],
+        "r171_inductive_range_closure": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R171:UNIVERSAL_RANGE_CERTIFICATE_CONTRACT",
+          "R171:INDUCTIVE_REACHABLE_RANGE_CERTIFICATE"
+        ],
+        "r171_fitted_cover_nonentailment": [
+          "R170:COVERAGE_CHALLENGE_FALSIFIER",
+          "R171:PREMISE_INDEPENDENCE_COUNTERMODELS"
+        ],
+        "r171_four_domain_application": [
+          "R171:DIRECT_RANGE_CLOSURE",
+          "R171:INDUCTIVE_RANGE_CLOSURE",
+          "R171:FITTED_COVER_NONENTAILMENT"
+        ],
+        "r171_range_certificate_triage": [
+          "R171:UNIVERSAL_RANGE_CERTIFICATE_CONTRACT",
+          "R171:DIRECT_TOTAL_RANGE_CERTIFICATE",
+          "R171:INDUCTIVE_REACHABLE_RANGE_CERTIFICATE",
+          "R171:PREMISE_INDEPENDENCE_COUNTERMODELS",
+          "R171:FITTED_COVER_NONENTAILMENT"
+        ],
+        "r171_range_application_boundary": [
+          "R170:R169_OPEN_WORLD_APPLICATION_BOUNDARY",
+          "R171:DIRECT_RANGE_CLOSURE",
+          "R171:INDUCTIVE_RANGE_CLOSURE",
+          "R171:FOUR_DOMAIN_APPLICATION_BOUNDARY",
+          "R171:RANGE_CERTIFICATE_TRIAGE"
+        ]
+      }
+    },
+    {
+      "name": "joint_premises_exact",
+      "status": "PASS",
+      "detail": {
+        "r171_direct_range_closure": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R171:UNIVERSAL_RANGE_CERTIFICATE_CONTRACT",
+          "R171:DIRECT_TOTAL_RANGE_CERTIFICATE"
+        ],
+        "r171_inductive_range_closure": [
+          "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+          "R171:UNIVERSAL_RANGE_CERTIFICATE_CONTRACT",
+          "R171:INDUCTIVE_REACHABLE_RANGE_CERTIFICATE"
+        ],
+        "r171_fitted_cover_nonentailment": [
+          "R170:COVERAGE_CHALLENGE_FALSIFIER",
+          "R171:PREMISE_INDEPENDENCE_COUNTERMODELS"
+        ],
+        "r171_four_domain_application": [
+          "R171:DIRECT_RANGE_CLOSURE",
+          "R171:INDUCTIVE_RANGE_CLOSURE",
+          "R171:FITTED_COVER_NONENTAILMENT"
+        ],
+        "r171_range_certificate_triage": [
+          "R171:UNIVERSAL_RANGE_CERTIFICATE_CONTRACT",
+          "R171:DIRECT_TOTAL_RANGE_CERTIFICATE",
+          "R171:INDUCTIVE_REACHABLE_RANGE_CERTIFICATE",
+          "R171:PREMISE_INDEPENDENCE_COUNTERMODELS",
+          "R171:FITTED_COVER_NONENTAILMENT"
+        ],
+        "r171_range_application_boundary": [
+          "R170:R169_OPEN_WORLD_APPLICATION_BOUNDARY",
+          "R171:DIRECT_RANGE_CLOSURE",
+          "R171:INDUCTIVE_RANGE_CLOSURE",
+          "R171:FOUR_DOMAIN_APPLICATION_BOUNDARY",
+          "R171:RANGE_CERTIFICATE_TRIAGE"
+        ]
+      }
+    },
+    {
+      "name": "direct_requires_target_common_and_D1_D3",
+      "status": "PASS",
+      "detail": [
+        "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+        "R171:UNIVERSAL_RANGE_CERTIFICATE_CONTRACT",
+        "R171:DIRECT_TOTAL_RANGE_CERTIFICATE"
+      ]
+    },
+    {
+      "name": "inductive_requires_target_common_and_I1_I5",
+      "status": "PASS",
+      "detail": [
+        "R170:TARGET_DOMAIN_ADMISSION_CONTRACT",
+        "R171:UNIVERSAL_RANGE_CERTIFICATE_CONTRACT",
+        "R171:INDUCTIVE_REACHABLE_RANGE_CERTIFICATE"
+      ]
+    },
+    {
+      "name": "fitted_nonentailment_keeps_challenge_boundary",
+      "status": "PASS",
+      "detail": [
+        "R170:COVERAGE_CHALLENGE_FALSIFIER",
+        "R171:PREMISE_INDEPENDENCE_COUNTERMODELS"
+      ]
+    },
+    {
+      "name": "application_keeps_both_routes_and_fit_limit",
+      "status": "PASS",
+      "detail": [
+        "R171:DIRECT_RANGE_CLOSURE",
+        "R171:INDUCTIVE_RANGE_CLOSURE",
+        "R171:FITTED_COVER_NONENTAILMENT"
+      ]
+    },
+    {
+      "name": "final_application_keeps_R170_and_scope",
+      "status": "PASS",
+      "detail": [
+        "R170:R169_OPEN_WORLD_APPLICATION_BOUNDARY",
+        "R171:DIRECT_RANGE_CLOSURE",
+        "R171:INDUCTIVE_RANGE_CLOSURE",
+        "R171:FOUR_DOMAIN_APPLICATION_BOUNDARY",
+        "R171:RANGE_CERTIFICATE_TRIAGE"
+      ]
+    },
+    {
+      "name": "no_reverse_to_C1_basal_or_mineness",
+      "status": "PASS",
+      "detail": [
+        "R171:DIRECT_RANGE_CLOSURE",
+        "R171:INDUCTIVE_RANGE_CLOSURE",
+        "R171:FITTED_COVER_NONENTAILMENT",
+        "R171:FOUR_DOMAIN_APPLICATION_BOUNDARY",
+        "R171:RANGE_CERTIFICATE_TRIAGE",
+        "R171:R170_RANGE_APPLICATION_BOUNDARY"
+      ]
+    },
+    {
+      "name": "context_links_non_deductive",
+      "status": "PASS",
+      "detail": [
+        {
+          "from": "R171:R170_RANGE_APPLICATION_BOUNDARY",
+          "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+          "relation": "context only: universal range refines physical coverage but does not replace C1 or B_min"
+        },
+        {
+          "from": "R171:FITTED_COVER_NONENTAILMENT",
+          "to": "R170:COVERAGE_CHALLENGE_FALSIFIER",
+          "relation": "obstruction retained: finite challenge success is not a universal structural proof"
+        },
+        {
+          "from": "R171:RANGE_CERTIFICATE_TRIAGE",
+          "to": "A:U1",
+          "relation": "no type, invariant, reachability or safety certificate is added to basal-experience existence"
+        },
+        {
+          "from": "R171:FOUR_DOMAIN_APPLICATION_BOUNDARY",
+          "to": "R170:CELL_ROUTE_COVER_CERTIFICATE",
+          "relation": "non-deductive application refinement: domain proofs discharge R170 cells only with actual fiber and route evidence"
+        }
+      ]
+    },
+    {
+      "name": "exact_range_enumeration",
+      "status": "PASS",
+      "detail": {
+        "direct_inclusion_checks": 21844,
+        "proper_sample_nondetermination_witnesses": 3025,
+        "inductive_certificates": 1838,
+        "inductive_reachability_state_checks": 2530
+      }
+    },
+    {
+      "name": "four_premises_independently_required",
+      "status": "PASS",
+      "detail": {
+        "missing_initial_inclusion": {
+          "initial": false,
+          "closure": true,
+          "refinement": true,
+          "fiber": true,
+          "conclusion": false
+        },
+        "missing_specification_closure": {
+          "initial": true,
+          "closure": false,
+          "refinement": true,
+          "fiber": true,
+          "conclusion": false
+        },
+        "missing_actual_refinement": {
+          "initial": true,
+          "closure": true,
+          "refinement": false,
+          "fiber": true,
+          "conclusion": false
+        },
+        "missing_fiber_coverage": {
+          "initial": true,
+          "closure": true,
+          "refinement": true,
+          "fiber": false,
+          "conclusion": false
+        }
+      }
+    },
+    {
+      "name": "status_priority",
+      "status": "PASS",
+      "detail": {
+        "INVALID_RANGE_PROTOCOL": 32,
+        "UNRESOLVED": 1,
+        "EMPIRICAL_COVER_ONLY": 1,
+        "SPECIFICATION_ONLY": 2,
+        "UNIVERSAL_RANGE_CERTIFIED_REACHABLE": 4,
+        "UNIVERSAL_RANGE_CERTIFIED_DIRECT": 8,
+        "RANGE_CERTIFICATE_REFUTED": 16
+      }
+    },
+    {
+      "name": "four_domain_families_audited",
+      "status": "PASS",
+      "detail": {
+        "finite_hardware": [
+          "actual realization",
+          "initial/reset range",
+          "all admissible inputs/modes",
+          "inductive closure",
+          "fiber/route cover"
+        ],
+        "typed_program": [
+          "operational semantics",
+          "type preservation",
+          "compiler/runtime/FFI refinement",
+          "resource/environment scope",
+          "fiber/route cover"
+        ],
+        "sensorimotor": [
+          "physical joint/actuator limits",
+          "complete hybrid modes",
+          "interval/reachability bounds",
+          "model-error refinement",
+          "fiber/route cover"
+        ],
+        "biological_safety": [
+          "admission population",
+          "uncertainty/disturbance set",
+          "controlled invariance",
+          "monitor/actuator/failsafe",
+          "fiber/route cover"
+        ]
+      }
+    },
+    {
+      "name": "claim_limits",
+      "status": "PASS",
+      "detail": {
+        "actual_hardware_range_validated": false,
+        "actual_program_refinement_validated": false,
+        "actual_sensorimotor_range_validated": false,
+        "actual_biological_envelope_validated": false,
+        "complete_organization_identified": false,
+        "C1_derived": false,
+        "B_min_validated": false,
+        "basal_experience_gate": false
+      }
+    },
+    {
+      "name": "required_core_artifacts_present",
+      "status": "PASS",
+      "detail": [
+        "ROUND_RECORD.md",
+        "Universal_Target_Range_Certificates_v0_1.md",
+        "PROOF_LEDGER.json",
+        "GAP_LEDGER.json",
+        "SOURCE_LEDGER.json",
+        "MAP_EXTENSION.json",
+        "verify_range_certificates.py",
+        "EXACT_CHECKS.json",
+        "build_map.py"
+      ]
+    }
+  ],
+  "graph_sha256": "8405565f71629bf04cdb25238666060e6bb9aa8cddfb0617187f7ba1bcf9edb5",
+  "exact_results_sha256": "ced66acc0319c8248374d46bc74aa8f233fbabab2a9d5585db3ff67af038fcc8",
+  "limitations": [
+    "DAG and finite checks do not instantiate an actual hardware, program, sensorimotor or biological certificate.",
+    "Direct and inductive closure are target-relative and do not establish complete mechanism or compositional closure.",
+    "No neural completeness, C1 derivation, B_min validation, basal-experience gate or unique owner follows."
+  ]
+}

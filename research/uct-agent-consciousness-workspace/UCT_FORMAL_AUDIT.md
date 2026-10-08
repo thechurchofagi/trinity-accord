@@ -508,3 +508,11 @@ The audit explicitly rejects three inferences: population profile to named token
 
 Current open gaps are token-preserving measurement, intervention fidelity and locality, hidden redundancy/compensation, complete realization, necessity of the witness, and independent mineness semantics. C1 remains the consciousness-specific explanatory axiom; the selected body-frame role is not required for basal experience and no exclusive extra owner is introduced.
 
+## R171 audit — universal range without model/installation or component/organization promotion
+
+R171 passes the selection, result, and pre-save direction checks. The graph has 497 nodes, 240 rules, and 137 context links; inherited R170 node/rule/context prefixes reconstruct exactly. The direct closure rule requires target admission, the common actual range contract, and every direct inclusion/fiber premise simultaneously. The inductive closure rule requires target admission, the common contract, and initial inclusion, specification closure, actual refinement, and invariant fiber coverage together. The final application retains R170's open-world boundary plus both positive routes, the fitted-cover obstruction, domain scopes, and triage.
+
+Objects, quantifiers, bearer/time/signature/realization IDs, actuality, target scope, and evidence levels are explicit. No abstract state enumeration becomes deployed-hardware coverage; no type theorem becomes runtime/FFI coverage; no dense manifold sample becomes hybrid physical closure; no nominal barrier becomes population-wide biological safety; no component certificate becomes a complete organization. Exact checks cover 21,844 direct inclusions, 3,025 proper-sample ambiguity witnesses, 1,838 inductive certificates, 2,530 reachable-state checks, four independent-premise countermodels, and 64 statuses. The aggregate round checker passes 23/23.
+
+Gaps R171-G1–G9 retain partial/post-hoc abstraction, missing actual refinement, missing fiber routes, omitted hardware modes, runtime/FFI/compiler gaps, hidden sensorimotor modes, non-robust biological envelopes, finite-challenge incompleteness, and the component/complete-organization/C1/`B_min` boundary. DAG/code success is not theory truth, physical certification, or a global proof. No basal gate, exclusive owner, or claim about the current assistant is added.
+

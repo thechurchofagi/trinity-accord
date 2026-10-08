@@ -240,3 +240,14 @@ R166 returns from population statistics to actual organization. It separates fiv
 
 Read [current handoff](records/R166_Token_Installation_Witness_20261008/CURRENT_HANDOFF.md), [English note](records/R166_Token_Installation_Witness_20261008/Token_Installation_Witness_and_Mineness_Boundary_v0_1.md), [proof ledger](records/R166_Token_Installation_Witness_20261008/PROOF_LEDGER.json), [gap ledger](records/R166_Token_Installation_Witness_20261008/GAP_LEDGER.json), [audit](records/R166_Token_Installation_Witness_20261008/MAP_AUDIT.json) and [checks](records/R166_Token_Installation_Witness_20261008/EXACT_CHECKS.json). Map R166-v1.0: 452/217/117, new 6/2. No apparatus or token was tested; no complete mechanism, B_min/F_O, unique owner or basal-experience gate is claimed. Next: an ethically admissible, token-preserving W2–W5 architecture with explicit redundancy and compensation alternatives.
 
+## R171 — universal target-range certificates
+
+- English result: `records/R171_Universal_Range_Certificates_20261008/Universal_Target_Range_Certificates_v0_1.md`
+- Exact checker/results: `verify_range_certificates.py`, `EXACT_CHECKS.json`
+- Proof/source/gap ledgers: `PROOF_LEDGER.json`, `SOURCE_LEDGER.json`, `GAP_LEDGER.json`
+- Formal extension/audit/validation: `MAP_EXTENSION.json`, `MAP_AUDIT.json`, `verify_round.py`
+- Chinese review/current handoff: `REVIEW_ZH.md`, `CURRENT_HANDOFF.md`
+- Map: R171-v1.0, 497 nodes / 240 rules / 137 context links; new 10/6/4, exact R170 prefixes preserved
+- Result boundary: direct total inclusion or protocol-relative inductive reachability can certify range only with actual grounding/refinement and fiber routes; a fitted proper sample cannot
+- Next: interface-compatible composition across nested and overlapping actual processes
+

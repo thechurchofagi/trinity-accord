@@ -454,3 +454,11 @@ R168 answered the next R167 question without repeating finite Boolean enumeratio
 
 The map is R168-v1.0 (468 nodes / 222 rules / 125 context links), preserving the exact R167 prefixes. Exact checks pass after one retained validator-vocabulary repair. Do not treat metric smoothness, fitted kernels, interface labels or random prevalence as actual mediator installation. Next question: independent physical calibration/falsification of `d`, `L`, `delta`, `C`. C1 and the `B_min` residual remain separate; no basal-experience gate, exclusive owner or assistant-consciousness verdict was added.
 
+## R171 current priority — direct and inductive universal-range proof obligations
+
+R171 distinguishes universal actual range evidence from fitted coverage. The direct route proves all of a frozen actual target by total grounding, universal inclusion, and fiber/route coverage. The inductive route proves only protocol-reachable actual contexts and requires initial inclusion, specification closure, actual forward refinement, and invariant fiber/route coverage. Four independent countermodels show none of those inductive premises may be omitted. A proper finite sample remains compatible with a hidden uncovered target, regardless of fit or sample density.
+
+The four application families now have explicit limits: deployed hardware includes peripherals/environment/fault scope; typed programs need compiler/runtime/FFI/concurrency/I/O/resource refinement; sensorimotor manifolds need complete hybrid modes and model-error bounds; biological safety envelopes are admission- and disturbance-relative, not universal biology. Map R171-v1.0 has 497 nodes / 240 rules / 137 context links; 23 round checks and all exact finite enumerations pass.
+
+No real system certificate, complete organization, neural closure, C1 derivation, `B_min`, basal gate, or unique owner is established. Next: a composition theorem or obstruction for nested and overlapping actual-process certificates.
+
