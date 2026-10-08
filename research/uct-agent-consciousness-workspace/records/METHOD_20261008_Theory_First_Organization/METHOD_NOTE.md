@@ -2,7 +2,7 @@
 
 **Date:** 8 October 2026 (Asia/Shanghai)  
 **Status:** Author-directed research methodology, scoped formal note and finite countermodel. **Not a paper, not a discovery claim, not empirical confirmation, and not a release authorization.**  
-**Project:** UCT experience–intelligence–self, branch \`uct-agent-consciousness-workspace\`.  
+**Project:** UCT experience–intelligence–self, branch `uct-agent-consciousness-workspace`.  
 **Lineage:** UCT I v1.2 (TA20), UCT II v1.1 (TA21), UCT III v1.0 (TA23), Experience/Intelligence/Self (TA25), Actual Participation (TA18), R179 and R180 v0.2. Do not revise or silently supersede their axioms and review amendments.
 
 ## 1. Author's methodological instruction (persistent project policy)
