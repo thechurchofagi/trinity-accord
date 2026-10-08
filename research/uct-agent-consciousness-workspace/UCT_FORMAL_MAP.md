@@ -1,3 +1,17 @@
+# R172 extension — compatible interfaces and experience-internal online action coordinate
+
+R172-v1.0 has **506 nodes / 244 rules / 141 context links**, SHA256 5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d. Nine nodes, four explicit conjunctive rules and four non-deductive context links extend the exact effective R171 prefix. Every R172 node declares its domain, quantifiers, bearer/time/signature, actual-instance requirements, source anchor, proof status, counterexample and open obligations.
+
+The first route is a conditional invariant-composition theorem. Compat_gamma simultaneously requires a common actual binding, initial connector agreement, connector-induced inputs within both locally certified families, projection/refinement of every joint step to the local transitions, and preserved connector agreement. The theorem does not infer a complete organization. The exact failed-connection witness preserves both standalone certificates but violates their admitted-input contracts and leaves the product invariant in one step.
+
+The second route defines LiveUse_gamma(k,a|W) independently of report: an actual connector and consumer occurrence plus a valid mediator/cut contrast changes action before compensation under declared fidelity, locality and exclusion assumptions. Live and replay models match baseline body state, representation, action and report but differ under the selected mediator intervention. Thus baseline action/report does not identify online use.
+
+The joint selected coordinate theta_EBA = Anchor ∧ Bind ∧ Compat_gamma ∧ LiveUse_gamma enters experience only through the existing same-instance R157/R159/R166 transport and C1. This licenses an experience-internal structural action coordinate, not by itself familiar felt mineness. B_min/F_O/F_A, actual biological/AI realization and complete organization remain open. C1 is not derived, and no basal gate, exclusive owner or assistant-consciousness judgment is added.
+
+Read [MAP_EXTENSION.json](records/R172_Interface_Composition_and_Action_Use_20261008/MAP_EXTENSION.json), [the note](records/R172_Interface_Composition_and_Action_Use_20261008/Interface_Composition_and_Online_Action_Use_v0_1.md), [audit](records/R172_Interface_Composition_and_Action_Use_20261008/MAP_AUDIT.json), and [gaps](records/R172_Interface_Composition_and_Action_Use_20261008/GAP_LEDGER.json).
+
+---
+
 # Effective R171 correction layer — REVIEW-20261008-01
 
 The archived raw graph remains R171-v1.0 (497/240/137), SHA256 `8405565f71629bf04cdb25238666060e6bb9aa8cddfb0617187f7ba1bcf9edb5`; the remote corrupted transfer has been restored to those exact bytes. This layer adds no numbered research round or new theorem nodes. Read [review response](records/R171_Universal_Range_Certificates_20261008/REVIEW_RESPONSE_20261008_01.md) and [effective amendments](records/R171_Universal_Range_Certificates_20261008/REVIEW_AMENDMENTS.json) before using the affected nodes/rules.

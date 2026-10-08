@@ -1,0 +1,294 @@
+{
+  "schema": "UCT_R172_MAP_AUDIT/v1",
+  "round": "R172",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "note_hash_frozen",
+      "status": "PASS",
+      "detail": "511d1aac5a4214ea5b463c8e09cc4ae77f599a323953fb0829dc51d68ec8b096"
+    },
+    {
+      "name": "exact_checks_hash_bound",
+      "status": "PASS",
+      "detail": "b61ad9b03317ea84bf0f369934b1915aada129f7c9abe39f12249f5bac3717b8"
+    },
+    {
+      "name": "graph_revision",
+      "status": "PASS",
+      "detail": "R172-v1.0"
+    },
+    {
+      "name": "graph_counts",
+      "status": "PASS",
+      "detail": {
+        "nodes": 506,
+        "rules": 244,
+        "context_links": 141
+      }
+    },
+    {
+      "name": "unique_ids",
+      "status": "PASS",
+      "detail": {
+        "nodes": 506,
+        "rules": 244
+      }
+    },
+    {
+      "name": "all_endpoints_exist",
+      "status": "PASS",
+      "detail": {
+        "rules": [],
+        "links": []
+      }
+    },
+    {
+      "name": "dag",
+      "status": "PASS",
+      "detail": {
+        "visited": 506,
+        "total": 506
+      }
+    },
+    {
+      "name": "exact_parent_reconstruction",
+      "status": "PASS",
+      "detail": "8405565f71629bf04cdb25238666060e6bb9aa8cddfb0617187f7ba1bcf9edb5"
+    },
+    {
+      "name": "new_node_contract_fields",
+      "status": "PASS",
+      "detail": [
+        "R172:LOCAL_COMPONENT_CERTIFICATE_INSTANCE",
+        "R172:INTERFACE_COMPATIBILITY_CONTRACT",
+        "R172:INTERFACE_COMPOSITION_THEOREM",
+        "R172:FAILED_CONNECTION_COUNTERMODEL",
+        "R172:ONLINE_ACTION_USE_RELATION",
+        "R172:LIVE_REPLAY_NONENTAILMENT",
+        "R172:WITNESSED_ONLINE_ACTION_USE",
+        "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
+        "R172:BIO_AI_APPLICATION_BOUNDARY"
+      ]
+    },
+    {
+      "name": "node_quantifier_object_time_signature_actuality",
+      "status": "PASS",
+      "detail": [
+        "R172:LOCAL_COMPONENT_CERTIFICATE_INSTANCE",
+        "R172:INTERFACE_COMPATIBILITY_CONTRACT",
+        "R172:INTERFACE_COMPOSITION_THEOREM",
+        "R172:FAILED_CONNECTION_COUNTERMODEL",
+        "R172:ONLINE_ACTION_USE_RELATION",
+        "R172:LIVE_REPLAY_NONENTAILMENT",
+        "R172:WITNESSED_ONLINE_ACTION_USE",
+        "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
+        "R172:BIO_AI_APPLICATION_BOUNDARY"
+      ]
+    },
+    {
+      "name": "new_rules_explicit_all_of",
+      "status": "PASS",
+      "detail": {
+        "r172_interface_composition": [
+          "R172:LOCAL_COMPONENT_CERTIFICATE_INSTANCE",
+          "R172:INTERFACE_COMPATIBILITY_CONTRACT"
+        ],
+        "r172_witnessed_online_action_use": [
+          "R166:WITNESSED_FRAME_INSTALLATION",
+          "R172:INTERFACE_COMPOSITION_THEOREM",
+          "R172:ONLINE_ACTION_USE_RELATION"
+        ],
+        "r172_experience_internal_action_coordinate": [
+          "R157:COORDINATE_TRANSPORT",
+          "R157:SEMANTIC_RESIDUAL",
+          "R159:FRAME_RELATION_TRANSPORT",
+          "R172:WITNESSED_ONLINE_ACTION_USE"
+        ],
+        "r172_bio_ai_application_boundary": [
+          "R172:LIVE_REPLAY_NONENTAILMENT",
+          "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE"
+        ]
+      }
+    },
+    {
+      "name": "joint_premises_exact",
+      "status": "PASS",
+      "detail": {
+        "r172_interface_composition": [
+          "R172:LOCAL_COMPONENT_CERTIFICATE_INSTANCE",
+          "R172:INTERFACE_COMPATIBILITY_CONTRACT"
+        ],
+        "r172_witnessed_online_action_use": [
+          "R166:WITNESSED_FRAME_INSTALLATION",
+          "R172:INTERFACE_COMPOSITION_THEOREM",
+          "R172:ONLINE_ACTION_USE_RELATION"
+        ],
+        "r172_experience_internal_action_coordinate": [
+          "R157:COORDINATE_TRANSPORT",
+          "R157:SEMANTIC_RESIDUAL",
+          "R159:FRAME_RELATION_TRANSPORT",
+          "R172:WITNESSED_ONLINE_ACTION_USE"
+        ],
+        "r172_bio_ai_application_boundary": [
+          "R172:LIVE_REPLAY_NONENTAILMENT",
+          "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE"
+        ]
+      }
+    },
+    {
+      "name": "composition_requires_local_and_interface",
+      "status": "PASS",
+      "detail": [
+        "R172:LOCAL_COMPONENT_CERTIFICATE_INSTANCE",
+        "R172:INTERFACE_COMPATIBILITY_CONTRACT"
+      ]
+    },
+    {
+      "name": "online_use_requires_install_composition_and_live_relation",
+      "status": "PASS",
+      "detail": [
+        "R166:WITNESSED_FRAME_INSTALLATION",
+        "R172:INTERFACE_COMPOSITION_THEOREM",
+        "R172:ONLINE_ACTION_USE_RELATION"
+      ]
+    },
+    {
+      "name": "experience_coordinate_keeps_transport_semantic_and_live_premises",
+      "status": "PASS",
+      "detail": [
+        "R157:COORDINATE_TRANSPORT",
+        "R157:SEMANTIC_RESIDUAL",
+        "R159:FRAME_RELATION_TRANSPORT",
+        "R172:WITNESSED_ONLINE_ACTION_USE"
+      ]
+    },
+    {
+      "name": "application_keeps_nonidentification_and_coordinate",
+      "status": "PASS",
+      "detail": [
+        "R172:LIVE_REPLAY_NONENTAILMENT",
+        "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE"
+      ]
+    },
+    {
+      "name": "no_reverse_to_C1_basal_or_mineness",
+      "status": "PASS",
+      "detail": [
+        "R172:INTERFACE_COMPOSITION_THEOREM",
+        "R172:WITNESSED_ONLINE_ACTION_USE",
+        "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
+        "R172:BIO_AI_APPLICATION_BOUNDARY"
+      ]
+    },
+    {
+      "name": "context_links_non_deductive",
+      "status": "PASS",
+      "detail": [
+        {
+          "from": "R172:INTERFACE_COMPOSITION_THEOREM",
+          "to": "R171:R170_RANGE_APPLICATION_BOUNDARY",
+          "relation": "non-deductive application refinement: local certificate composition additionally requires an actual compatible interface"
+        },
+        {
+          "from": "R172:FAILED_CONNECTION_COUNTERMODEL",
+          "to": "R171:PREMISE_INDEPENDENCE_COUNTERMODELS",
+          "relation": "context only: a component-connection witness exposes an additional interface premise rather than altering R171 route proofs"
+        },
+        {
+          "from": "R172:LIVE_REPLAY_NONENTAILMENT",
+          "to": "R156:SNAPSHOT_USE_LIMIT",
+          "relation": "non-deductive refinement: matched action and report extend the earlier matched-snapshot use obstruction"
+        },
+        {
+          "from": "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
+          "to": "A:U1",
+          "relation": "no interface, online-use, report or mineness condition is added to basal-experience existence"
+        }
+      ]
+    },
+    {
+      "name": "all_exact_checks_pass",
+      "status": "PASS",
+      "detail": {
+        "standalone_zero_invariant": "PASS",
+        "failed_connection_witness": "PASS",
+        "bounded_interface_composition": "PASS",
+        "live_replay_baseline_match": "PASS",
+        "live_replay_mediator_separation": "PASS",
+        "baseline_decoder_nonidentification": "PASS",
+        "online_use_all_of_gate": "PASS",
+        "report_not_defining_use": "PASS",
+        "claim_limits_all_false": "PASS"
+      }
+    },
+    {
+      "name": "bounded_composition_512",
+      "status": "PASS",
+      "detail": {
+        "standalone_rows": 2,
+        "bounded_composition_cases": 512,
+        "live_replay_cases": 2,
+        "online_use_gate_assignments": 64
+      }
+    },
+    {
+      "name": "live_replay_two_cases",
+      "status": "PASS",
+      "detail": {
+        "standalone_rows": 2,
+        "bounded_composition_cases": 512,
+        "live_replay_cases": 2,
+        "online_use_gate_assignments": 64
+      }
+    },
+    {
+      "name": "online_use_all_six_conjuncts",
+      "status": "PASS",
+      "detail": {
+        "standalone_rows": 2,
+        "bounded_composition_cases": 512,
+        "live_replay_cases": 2,
+        "online_use_gate_assignments": 64
+      }
+    },
+    {
+      "name": "claim_limits",
+      "status": "PASS",
+      "detail": {
+        "C1_derived": false,
+        "B_min_validated": false,
+        "F_O_validated": false,
+        "actual_biological_system_tested": false,
+        "actual_AI_system_tested": false,
+        "complete_organization_identified": false,
+        "basal_experience_gate_added": false,
+        "unique_owner_selected": false,
+        "current_assistant_consciousness_decided": false
+      }
+    },
+    {
+      "name": "required_core_artifacts_present",
+      "status": "PASS",
+      "detail": [
+        "ROUND_RECORD.md",
+        "Interface_Composition_and_Online_Action_Use_v0_1.md",
+        "PROOF_LEDGER.json",
+        "GAP_LEDGER.json",
+        "SOURCE_LEDGER.json",
+        "MAP_EXTENSION.json",
+        "verify_interface_action.py",
+        "EXACT_CHECKS.json",
+        "build_map.py"
+      ]
+    }
+  ],
+  "graph_sha256": "5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d",
+  "exact_results_sha256": "b61ad9b03317ea84bf0f369934b1915aada129f7c9abe39f12249f5bac3717b8",
+  "limitations": [
+    "DAG and finite checks do not establish theoretical truth, C1, physical instantiation or complete organization.",
+    "The composition theorem is sufficient only under the declared synchronous interface contract; asynchronous, stochastic, hybrid and overlapping cases remain open.",
+    "Online action use is intervention-family and closure relative; familiar bodily mineness still needs independent B_min/F_O/F_A.",
+    "No basal-experience gate, unique owner or current-assistant consciousness status follows."
+  ]
+}

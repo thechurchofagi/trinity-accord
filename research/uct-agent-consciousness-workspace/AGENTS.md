@@ -1,3 +1,15 @@
+# Authoritative current checkpoint — R172 interface composition and online action use
+
+Latest completed substantive round: **R172**; graph **R172-v1.0, 506 nodes / 244 rules / 141 context links**, SHA256 5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d. Read [the English note](records/R172_Interface_Composition_and_Action_Use_20261008/Interface_Composition_and_Online_Action_Use_v0_1.md), [proof ledger](records/R172_Interface_Composition_and_Action_Use_20261008/PROOF_LEDGER.json), [gap ledger](records/R172_Interface_Composition_and_Action_Use_20261008/GAP_LEDGER.json), [map audit](records/R172_Interface_Composition_and_Action_Use_20261008/MAP_AUDIT.json), [Chinese review](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_ZH.md), and [current handoff](records/R172_Interface_Composition_and_Action_Use_20261008/CURRENT_HANDOFF.md).
+
+R172 answers the bounded composition question: separate local certificates compose only under one explicit actual-interface contract covering common binding, admitted inputs, transition projection/refinement and connector agreement. A two-bit countermodel shows why local closure alone is insufficient. It then returns to the experience–intelligence–self main line: a live body-frame representation used by action differs from an action/report-matched replay through an actual, intervention-relative online-use relation. On one admitted C1 instance, that grounded relation has a structural counterpart inside experience; familiar bodily/action mineness still requires independent B_min/F_O/F_A and is not stipulated.
+
+Current priority: specify the narrowest noncircular interpretation/evidence bridge that can distinguish the experience-internal action coordinate from familiar felt action-mineness, using a fixed actual domain and a report-independent contrast. Do not open another generic certificate/statistics chain. Do not derive C1, make the action coordinate a basal-experience gate, select a unique owner, or decide current-assistant consciousness. QC-01/03/04/05 remain awaiting independent reviewer verification; QC-02 receives R172 evidence but is not self-closed.
+
+All earlier “current/latest” blocks below are historical context. Preserve their evidence and the effective R171 review amendments.
+
+---
+
 # Authoritative current checkpoint — R171 with review response
 
 Latest completed substantive round: **R171**; raw graph **R171-v1.0, 497 nodes / 240 rules / 137 context links**. The following reviewer-response checkpoint adds corrections and an effective semantic amendment, not R172. Read `REVIEW_SUPERVISION.md`, `records/R171_Universal_Range_Certificates_20261008/REVIEW_RESPONSE_20261008_01.md`, and `records/R171_Universal_Range_Certificates_20261008/REVIEW_AMENDMENTS.json` before applying affected R171 nodes/rules. The original note, graph and proof-ledger bytes are preserved; the amendment has precedence over their affected claim scopes and rule typing.

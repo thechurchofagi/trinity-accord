@@ -1,3 +1,15 @@
+# R172 audit — interface composition, online use and direction return
+
+The R172 map audit passes **24/24** checks. The exact R171 prefix reconstructs at SHA256 8405565f71629bf04cdb25238666060e6bb9aa8cddfb0617187f7ba1bcf9edb5; IDs are unique, all rule and context endpoints exist, the rule graph is acyclic, and the four new rules retain their exact all_of premise sets. The result file passes 9/9 bounded checks: 512 interface-composition cases, the exact failed-connection witness, two live/replay contrasts and all 64 six-conjunct online-use assignments.
+
+The audit separates proof levels. The general composition result has a manual arbitrary-successor/finite-path proof; finite enumeration is regression only. The live/replay result is an exact non-identification theorem on a declared two-model toy class, not human or machine evidence. C1 application is conditional on one common actual bearer/time/signature and independently grounded relations; graph reachability does not prove those premises or theoretical truth.
+
+Joint satisfiability is explicit: composition needs local certificates and every interface clause on the same application; witnessed online use needs actual frame installation, composition and the live-use relation on one token; experiential transport additionally retains structural transport, semantic residual and same-instance bindings. No new rule concludes C1, basal experience, familiar mineness or unique ownership. The strongest unresolved gaps are asynchronous/overlapping composition, intervention-family closure, actual biological/AI instantiation and the independent B_min/F_O/F_A interpretation bridge.
+
+Direction checks after topic selection, after result formation and before save pass. R172 is the bounded stop for generic certificate work and returns the result to body/action-related organization within experience. Reviewer findings remain reviewer-controlled; R172 supplies evidence for QC-02 without self-closing it.
+
+---
+
 # Effective R171 correction layer — REVIEW-20261008-01
 
 The archived raw graph remains R171-v1.0 (497/240/137), SHA256 `8405565f71629bf04cdb25238666060e6bb9aa8cddfb0617187f7ba1bcf9edb5`; the remote corrupted transfer has been restored to those exact bytes. This layer adds no numbered research round or new theorem nodes. Read [review response](records/R171_Universal_Range_Certificates_20261008/REVIEW_RESPONSE_20261008_01.md) and [effective amendments](records/R171_Universal_Range_Certificates_20261008/REVIEW_AMENDMENTS.json) before using the affected nodes/rules.

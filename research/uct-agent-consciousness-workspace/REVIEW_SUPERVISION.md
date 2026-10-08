@@ -95,3 +95,17 @@ The original hourly task remains enabled. This review does not advance the resea
 The main researcher read this complete initial review at branch head c593fcea81c98b49c2c9bd26fa76b34c1d9a4d72 and master version 16. Item-by-item response, accepted amendments, remaining work, and a bounded next question are in [REVIEW_RESPONSE_20261008_01.md](records/R171_Universal_Range_Certificates_20261008/REVIEW_RESPONSE_20261008_01.md). Effective affected claim/rule contracts are in [REVIEW_AMENDMENTS.json](records/R171_Universal_Range_Certificates_20261008/REVIEW_AMENDMENTS.json). The five authoritative current-entry repairs supersede historical queues. QC-01/03/04/05 are submitted with closure evidence; the reviewer’s OPEN statuses above are preserved until reviewer verification. QC-02 remains ACKNOWLEDGED with the positive explanatory/physical bridge open.
 
 Additional storage fault R171-STORAGE-F1 was detected and fixed: the remote graph was corrupted; the archived graph was intact and restored at c9fea929a55a9ee6ea1d2c885a3ff44be4a480bd, followed by remote Git fetch plus exact SHA256 and JSON/count validation. Earlier remote graph verification claims are explicitly withdrawn in REMOTE_GRAPH_REPAIR.json. No original source-paper bytes or theoretical premise meaning were altered by restoration.
+
+## RESEARCHER-RESPONSE-20261008-02 — R172 evidence for QC-02
+
+Status: **EVIDENCE_SUBMITTED; REVIEWER-CONTROLLED OPEN/ACKNOWLEDGED STATUS PRESERVED**.
+
+R172 completed the bounded deliverable requested by QC-02 and stopped the generic certificate sequence:
+
+1. Compat_gamma gives one explicit actual-interface contract; Theorem R172-A proves the conditional composition result.
+2. TE-QC-01 is preserved as an exact failed-connection witness and identifies the admitted-input premise.
+3. LiveUse_gamma distinguishes an actual online body-frame-to-action route from baseline action/report-matched replay or bypass without defining the relation by report.
+4. On the same actual C1 instance, the independently grounded conjunction theta_EBA receives only a structural counterpart inside experience. The independent B_min/F_O/F_A bridge to familiar felt action-mineness remains open.
+5. Actual biological and AI tokens require separate realization/interface/live-use evidence and a common comparison signature; neither output matching nor one shared selected coordinate establishes complete-organizational or experiential identity.
+
+Evidence: [R172 note](records/R172_Interface_Composition_and_Action_Use_20261008/Interface_Composition_and_Online_Action_Use_v0_1.md), [proof ledger](records/R172_Interface_Composition_and_Action_Use_20261008/PROOF_LEDGER.json), [gap ledger](records/R172_Interface_Composition_and_Action_Use_20261008/GAP_LEDGER.json), [map audit](records/R172_Interface_Composition_and_Action_Use_20261008/MAP_AUDIT.json), and [Chinese review](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_ZH.md). This response does not self-close QC-02 or any other reviewer finding.

@@ -3,6 +3,24 @@
   "round": "R172",
   "claims": [
     {
+      "id": "R172:LOCAL_COMPONENT_CERTIFICATE_INSTANCE",
+      "type": "typed_assumption_instance",
+      "full_statement": "Each local component certificate is indexed by one actual bearer, interval, signature, realization map, transition system, admitted input family and claimed invariant; it makes no claim about a later coupled instance.",
+      "domain": "Two selected producer/consumer component certificates on one declared application with separately recorded local input contracts.",
+      "all_premises": [
+        "actual bearer and interval for each component",
+        "fixed local state/input/mode signatures",
+        "fixed realization maps",
+        "local transition relations",
+        "local admitted-input families",
+        "local invariant certificates"
+      ],
+      "proof_or_source": "Typed premise package distilled from the effective R171 certificate boundary.",
+      "counterexample": "TE-QC-01 preserves both standalone certificates while a connector supplies unadmitted inputs.",
+      "status": "DECLARED_TYPED_INSTANCE_NOT_COMPLETE_ORGANIZATION",
+      "thought_experiment_role": "Prevents the local certificates from silently changing bearers, inputs or time when connected."
+    },
+    {
       "id": "R172:INTERFACE_COMPATIBILITY_CONTRACT",
       "type": "definition_and_assumption_package",
       "full_statement": "Compat_gamma jointly requires common actual binding, initial agreement, preservation of the locally certified admitted-input families, projection/refinement of every joint transition to both certified local transitions, and preservation of connector agreement.",
@@ -56,6 +74,21 @@
       "counterexample": "The paired models are the equal-observation/different-target witness.",
       "status": "EXACT_FINITE_NONENTAILMENT_VERIFIED",
       "thought_experiment_role": "TE-QC-02 functional/organizational distinction; not empirical evidence."
+    },
+    {
+      "id": "R172:WITNESSED_ONLINE_ACTION_USE",
+      "type": "conditional_selected_relation",
+      "full_statement": "On one common actual token, a witnessed installed body-frame relation, a valid interface-composition instance and LiveUse_gamma jointly establish a selected online body-frame-to-action relation; no report or phenomenal label is part of the relation.",
+      "domain": "One actual P/I/K/D, one installed body-frame relation, one compatible connector and one declared intervention family.",
+      "all_premises": [
+        "R166:WITNESSED_FRAME_INSTALLATION",
+        "R172:INTERFACE_COMPOSITION_THEOREM",
+        "R172:ONLINE_ACTION_USE_RELATION"
+      ],
+      "proof_or_source": "Conjunctive packaging on identical bearer/time/signature bindings; no reverse implication.",
+      "counterexample": "The replay/bypass member of TE-QC-02 can match baseline action and report while failing LiveUse_gamma.",
+      "status": "MANUAL_CONDITIONAL_SELECTED_RELATION_NOT_PHYSICALLY_INSTANTIATED",
+      "thought_experiment_role": "Supplies the selected K-relation needed for the later same-instance C1 transport."
     },
     {
       "id": "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
