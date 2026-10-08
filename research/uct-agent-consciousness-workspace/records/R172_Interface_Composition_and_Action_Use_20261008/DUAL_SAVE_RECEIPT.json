@@ -1,0 +1,73 @@
+{
+  "schema": "UCT_R172_DUAL_SAVE_RECEIPT/v1",
+  "round": "R172",
+  "status": "DUAL_SAVE_SUCCEEDED_WITH_PACKAGE_BYTE_READBACK_LIMIT_RECORDED",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "core_checkpoint_commit": "b32685bef98812281ff9929f82fb98e76dcaa615",
+    "substantive_commit": "2fa1540180cab914fdd61516478b3763013f7442",
+    "graph_transfer_fault": {
+      "status": "DETECTED_AND_REPAIRED",
+      "fault": "The first API blob transfer of UCT_FORMAL_GRAPH.json was truncated to 786446 bytes and was invalid JSON.",
+      "response": "The substantive commit was not treated as completed; exact UTF-8 content was reassembled in bounded chunks and committed on the same branch.",
+      "repair_commit": "2ffd3e7e1fe3c1c5071e37ef7c2e1addfe488367"
+    },
+    "verified_remote_head_before_receipt": "2ffd3e7e1fe3c1c5071e37ef7c2e1addfe488367",
+    "remote_graph": {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH.json",
+      "size_bytes": 2256525,
+      "sha256": "5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d",
+      "json_parse": "PASS",
+      "counts": {"nodes": 506, "rules": 244, "context_links": 141},
+      "byte_compare_to_local": "PASS"
+    },
+    "remote_exact_checks": {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/EXACT_CHECKS.json",
+      "sha256": "b61ad9b03317ea84bf0f369934b1915aada129f7c9abe39f12249f5bac3717b8",
+      "status": "PASS",
+      "checks": 9
+    },
+    "remote_map_audit": {"status": "PASS", "checks": 24},
+    "receipt_commit": "THIS_FILE_IS_ADDED_BY_THE_POST_LIBRARY_RECEIPT_COMMIT"
+  },
+  "persistent_workspace": {
+    "fixed_master": {
+      "name": "UCT_Hourly_Research_Master_Handoff.md",
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_0000000015f881f9afa0f11ce1cb9e0d",
+      "version": 18,
+      "size_bytes": 99431,
+      "sha256": "873baad028794a856fc212421942738327c7bd7623cb70044633bdbfa1709ae8",
+      "full_readback": "PASS_694_LINES_EXACT_BYTE_COMPARE"
+    },
+    "increment_package": {
+      "name": "UCT_R172_Research_Increment_20261008.zip",
+      "scope": "R172 files plus changed entry/map/review files and fixed-master candidate; not a complete repository, workspace or history backup",
+      "library_file_id": "libfile_7462e9e2b75c8191a48529d4eb383e94",
+      "file_id": "file_00000000a4e081f9885c4cc2bf130508",
+      "size_bytes": 472916,
+      "sha256_at_upload": "ae26c1dbac9810bf38c8b4055fb91458ae76c64c777e7ad7fe5f82f8e90f1a0f",
+      "manifest_sha256": "1d5d69c5981f8c017456f55dca54b9ace91159257b2b9725daf3ff66b87162e0",
+      "archive_test_before_upload": "PASS",
+      "upload_finalize": "SUCCEEDED",
+      "metadata_readback": "PASS_NAME_TYPE_AND_472916_BYTES",
+      "byte_readback": "NOT_COMPLETED_SIGNED_MATERIALIZATION_RETURNED_HTTP_403_TWICE",
+      "verification_limit": "The local uploaded archive and manifest hashes are recorded, and Library confirmed creation and exact size. Independent post-upload package-byte hashing was not possible in this run; next round should retry readback before calling the package byte-verified."
+    }
+  },
+  "review_status": {
+    "QC-20261008-01": "OPEN_AWAITING_REVIEWER",
+    "QC-20261008-02": "EVIDENCE_SUBMITTED_NOT_SELF_CLOSED",
+    "QC-20261008-03": "OPEN_AWAITING_REVIEWER",
+    "QC-20261008-04": "OPEN_AWAITING_REVIEWER",
+    "QC-20261008-05": "OPEN_AWAITING_REVIEWER"
+  },
+  "recovery": [
+    "Fetch the latest uct-agent-consciousness-workspace branch head and read this receipt.",
+    "Verify UCT_FORMAL_GRAPH.json SHA256 and parse/counts before using R172.",
+    "Read the fixed master latest version; never replace a newer reviewer version with version 18.",
+    "Use the R156 full working-set baseline and subsequent cumulative/review increments before overlaying the R172 increment package.",
+    "Retry independent Library byte readback of the R172 ZIP; until it succeeds, rely on the verified GitHub copy plus the Library upload/size record, not a claim of package-byte readback."
+  ]
+}

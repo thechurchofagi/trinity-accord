@@ -1,0 +1,132 @@
+{
+  "schema": "UCT_R172_INCREMENT_MANIFEST/v1",
+  "scope": "R172 round files, changed research entry/map/review files, and fixed-master candidate; not a complete repository, workspace or history backup",
+  "base": {
+    "R156_working_set_library_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
+    "R156_working_set_sha256": "95cc3ea1ec45eb273531c25525edcb7f8e6f2088c650a39b97d24817704ec40a",
+    "R172_core_checkpoint": "b32685bef98812281ff9929f82fb98e76dcaa615",
+    "R172_verified_graph_repair_head": "2ffd3e7e1fe3c1c5071e37ef7c2e1addfe488367"
+  },
+  "files": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/CURRENT_HANDOFF.md",
+      "size_bytes": 2606,
+      "sha256": "5b9264506adcb15e191f35d8258bd64649630ed1949c1d8bcecd812b647f8ec3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/EXACT_CHECKS.json",
+      "size_bytes": 3829,
+      "sha256": "b61ad9b03317ea84bf0f369934b1915aada129f7c9abe39f12249f5bac3717b8"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/GAP_LEDGER.json",
+      "size_bytes": 5198,
+      "sha256": "7b7d689a2339ba04cd6cced666fbdd5f1259e44ce0e4b1fd02f409fa081617c7"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/Interface_Composition_and_Online_Action_Use_v0_1.md",
+      "size_bytes": 15726,
+      "sha256": "511d1aac5a4214ea5b463c8e09cc4ae77f599a323953fb0829dc51d68ec8b096"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/MAP_AUDIT.json",
+      "size_bytes": 9336,
+      "sha256": "4b2e0349b1bf0096534ab8efcf09d17fa68551ceb0a2c77eb03793e5e2bc3997"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/MAP_EXTENSION.json",
+      "size_bytes": 26911,
+      "sha256": "95c6240b8c5fe212a1a388036f78ef6d79732fc6a1c335a393620f7b5bdd1b7a"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/PROOF_LEDGER.json",
+      "size_bytes": 10091,
+      "sha256": "311e9affff44d65d8abb055511fed517d93f24eea221813b2605628b2cccf3ce"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_ZH.md",
+      "size_bytes": 3363,
+      "sha256": "24d452ccd98d37083435fef7bff21319dbeca9148fd36bebe15a21e5456fef36"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/ROUND_RECORD.md",
+      "size_bytes": 3782,
+      "sha256": "c594993074963433e831d7695216458c441adc369d7a8d8bb45303e79758bf5a"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/SOURCE_LEDGER.json",
+      "size_bytes": 2931,
+      "sha256": "9ac21dce25ed8e7ab6e279d659408d900267f7610319b3261e0e3d938812d3d1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/build_map.py",
+      "size_bytes": 3227,
+      "sha256": "93e4b7fa328634c86cebe76d6245bd077507ef20621d0b674ec3ac599a6d8ed0"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/make_increment.py",
+      "size_bytes": 2408,
+      "sha256": "4689187f44517bbc4907880a225b10bd6eb991fa05c4c84ad98e268098a73b6d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/verify_interface_action.py",
+      "size_bytes": 5566,
+      "sha256": "c9da4b39aa3c4c71598267bf6bff96503b7d0378d1026e2f57e26531035fa310"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R172_Interface_Composition_and_Action_Use_20261008/verify_round.py",
+      "size_bytes": 6854,
+      "sha256": "482ed5f65b5f6bc74af803092e8d1b071596f684097b02dd52aba12502291ae4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+      "size_bytes": 47167,
+      "sha256": "fa9ad7169cefd9fe1b42abdb987a0641bf621088aa49cb425298f30d863417f4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "size_bytes": 42743,
+      "sha256": "1006ec8ac05ad4b44bd1d1d2fda9c47309091086636e14c4658161bfb9b5ff1a"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "size_bytes": 77341,
+      "sha256": "e6935e1afc7ffea335ebf887a8051c60edf395964577401182713f76b5661078"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "size_bytes": 43422,
+      "sha256": "049684275a6352f55f69e46eb443a9b9f1bb71e8fd28b9e4c4d33ce12fcf174e"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "size_bytes": 38206,
+      "sha256": "3430349c9de175c9115537c06ea8bef13fed2662c67cdb32863fd908b19db74b"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "size_bytes": 15141,
+      "sha256": "f022e3386f6b8eee16462d99a675516555ec9bd379c6865de62641afcdd6ce4c"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "size_bytes": 96082,
+      "sha256": "861c0293daa5354d3475b2c64be7d3ff872495cc259b84b82c3d571687a87bae"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH.json",
+      "size_bytes": 2256525,
+      "sha256": "5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "size_bytes": 90092,
+      "sha256": "569897c43aade61764b7e1377cfacb9a54960860ca40cb5ed8a368e58a1bf7a9"
+    },
+    {
+      "path": "workspace_handoff/UCT_Hourly_Research_Master_Handoff.md",
+      "size_bytes": 99431,
+      "sha256": "873baad028794a856fc212421942738327c7bd7623cb70044633bdbfa1709ae8"
+    }
+  ]
+}
