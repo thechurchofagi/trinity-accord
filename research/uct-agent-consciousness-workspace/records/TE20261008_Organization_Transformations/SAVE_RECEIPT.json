@@ -1,0 +1,135 @@
+{
+  "commit": "f120b1afb29a30a64a327ea354326b625126244b",
+  "remote_branch_at_fetch": "f120b1afb29a30a64a327ea354326b625126244b",
+  "verified_remote_tree_blobs": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+      "expected": "4c96ca9ce3fd1895338eaed81f5b40681f289f5f",
+      "remote": "4c96ca9ce3fd1895338eaed81f5b40681f289f5f",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "expected": "5a3360de5f12ae226b1816cce71aceba1948d0d6",
+      "remote": "5a3360de5f12ae226b1816cce71aceba1948d0d6",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "expected": "8fff2798d3c7e2008863a77d4c79a5e5e5630b1e",
+      "remote": "8fff2798d3c7e2008863a77d4c79a5e5e5630b1e",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "expected": "2bffd3b8bc634b0ebd3a8683cbf67d869d2ee409",
+      "remote": "2bffd3b8bc634b0ebd3a8683cbf67d869d2ee409",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "expected": "55b36ad4d11602a1aa2a328372a3016cd1ca33d2",
+      "remote": "55b36ad4d11602a1aa2a328372a3016cd1ca33d2",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "expected": "55d224fa7a3d067317de55ec91bc0c58a151d880",
+      "remote": "55d224fa7a3d067317de55ec91bc0c58a151d880",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "expected": "3e31590fdbb5bd0ae63e5a0c4f0adbdc1f5b287d",
+      "remote": "3e31590fdbb5bd0ae63e5a0c4f0adbdc1f5b287d",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH.json",
+      "expected": "f0fc679dfafb677059d52658ccd17187427e12f7",
+      "remote": "f0fc679dfafb677059d52658ccd17187427e12f7",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "expected": "06598015413ae5b48616b36e883bfd8781339818",
+      "remote": "06598015413ae5b48616b36e883bfd8781339818",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/CHECKS.py",
+      "expected": "4b5dd9cd66dc33e7463088d3ea0f3f220892b2f3",
+      "remote": "4b5dd9cd66dc33e7463088d3ea0f3f220892b2f3",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/CHECK_RESULTS.json",
+      "expected": "448cdb72c7a986a93f4f40737c2c88fdaebf2b29",
+      "remote": "448cdb72c7a986a93f4f40737c2c88fdaebf2b29",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/CURRENT_HANDOFF.md",
+      "expected": "cc1cf2dd86c223f2e0edc0f3e8b623b0ffed739d",
+      "remote": "cc1cf2dd86c223f2e0edc0f3e8b623b0ffed739d",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/GAP_LEDGER.json",
+      "expected": "e1c3171ccb9006c71a68f5acb792cc962f9d5596",
+      "remote": "e1c3171ccb9006c71a68f5acb792cc962f9d5596",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/MAP_AUDIT.json",
+      "expected": "19ad0c1b0157643681e6d71a51f622aa89051089",
+      "remote": "19ad0c1b0157643681e6d71a51f622aa89051089",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/MAP_EXTENSION.json",
+      "expected": "57fa481dde0b8aa1af5632fd62300dd44ba0dd89",
+      "remote": "57fa481dde0b8aa1af5632fd62300dd44ba0dd89",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md",
+      "expected": "4558a805d7be8c46f8e5cbf92828a921ea6fe64a",
+      "remote": "4558a805d7be8c46f8e5cbf92828a921ea6fe64a",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/PROOF_LEDGER.json",
+      "expected": "d3d240123a3d45c4d570df8d899001165ce08c19",
+      "remote": "d3d240123a3d45c4d570df8d899001165ce08c19",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/REVIEW_ZH.md",
+      "expected": "0b7e377c4751faf413be41554e23d27c622196f4",
+      "remote": "0b7e377c4751faf413be41554e23d27c622196f4",
+      "pass": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/SAVE_MANIFEST.json",
+      "expected": "9896c59b5d25d05cd8eb765130307bb92179e8b9",
+      "remote": "9896c59b5d25d05cd8eb765130307bb92179e8b9",
+      "pass": true
+    }
+  ],
+  "scope": "Remote commit/tree readback and content-address identities; upload blob hashes matched local exact bytes. Not a full repository byte download or semantic proof.",
+  "master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_0000000088488230af685e100344733a",
+    "version": 24,
+    "bytes": 199668,
+    "sha256": "2ebde3ef359dc91e579ce9a748220b9af7a95109903ac241ca03c582311ee97c",
+    "exact_materialized_readback": true,
+    "scope": "New Chinese explanation, full English note, map extension and check results plus complete previous master v23; not full repository backup."
+  },
+  "status": "RESEARCH_COMMIT_AND_FIXED_MASTER_VERIFIED",
+  "unchanged_limits": [
+    "R173 original increment HTTP403 remains its own historical pending byte-readback issue; not retried or reclassified.",
+    "Actual physical realization, complete experiential identity, familiar phenomenology and unique numerical continuation remain open."
+  ]
+}
