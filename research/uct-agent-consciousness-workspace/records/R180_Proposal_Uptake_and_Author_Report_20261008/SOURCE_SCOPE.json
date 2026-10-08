@@ -1,0 +1,41 @@
+{
+  "access_date": "2026-10-08",
+  "no_raw_data_analysis": true,
+  "sources": [
+    {
+      "id": "Lindsey2025",
+      "url": "https://transformer-circuits.pub/2025/introspection/index.html",
+      "title": "Emergent Introspective Awareness in Large Language Models",
+      "published": "2025-10-29",
+      "revision_log": "2026-01-01",
+      "scope": "Intended/unintended prefill section, methods notes, timing/control discussion and caveats. Functional attribution evidence only; no circuit identification.",
+      "limits": "Not a subjective experience result. Report-only toy is not the inferred mechanism."
+    },
+    {
+      "id": "Singh2026",
+      "url": "https://arxiv.org/html/2605.26242v1",
+      "version": "v1 2026-05-25",
+      "scope": "Construct validity and §5.3 methods/results",
+      "limits": "Different models/protocol; not direct replication of intended-prefill experiment."
+    },
+    {
+      "id": "Lederman2026",
+      "url": "https://arxiv.org/abs/2603.05414",
+      "version": "v2 2026-04-07",
+      "title": "Emergent Introspection in AI is Content-Agnostic",
+      "scope": "Current abstract and metadata only",
+      "limits": "Earlier v1 title superseded; no detailed results or data checked."
+    },
+    {
+      "id": "Pryke2025",
+      "doi": "10.1016/j.cortex.2025.04.014",
+      "scope": "Search lead; full source access inadequate",
+      "limits": "Not used as human empirical evidence."
+    }
+  ],
+  "fixed_source_lineage": [
+    "R179 PRIOR_PAPER_OVERLAP_AUDIT.md and SOURCE_MANIFEST.json",
+    "TA25 §§2–7,9–10 already include four families and actuality/attribution distinction",
+    "R178/R179 source and role candidates; A:C1/U1, R158/R159, IA contract"
+  ]
+}

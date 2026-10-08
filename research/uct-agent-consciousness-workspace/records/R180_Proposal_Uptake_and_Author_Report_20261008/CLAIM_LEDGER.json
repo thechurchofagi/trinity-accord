@@ -1,0 +1,67 @@
+[
+  {
+    "id": "R180-C1",
+    "type": "FINITE_COUNTERMODEL",
+    "statement": "Internal/external proposal origin does not determine policy-versus-bypass output use. Under accept policy g=0, changing proposal changes command for either origin.",
+    "domain": "216 configurations of model.py v0.2",
+    "all_of": [
+      "P_U, I=[0,3], signature and boundary roles exactly as note §3.",
+      "Origin, policy and memory settings jointly permitted; no omitted feedback into command.",
+      "Q is a stipulated attribution report, not a named feeling."
+    ],
+    "proof": "§3 equations, four origin/path witnesses and M15; enumeration corroborates substitution.",
+    "counterexample": "A separately warranted domain restriction forbidding one crossing removes these witnesses; matched command is not complete-organization equality.",
+    "status": "PROVED_IN_DECLARED_MODEL_ONLY",
+    "thought_experiment_role": "Cross external accepted suggestions and internal bypass tokens.",
+    "novelty": "Targeted project application; no new general causal theorem or historical priority claimed."
+  },
+  {
+    "id": "R180-C2",
+    "type": "FINITE_COUNTERMODEL",
+    "statement": "A prior representation can affect later attribution without affecting command, so temporal priority and attribution effects alone do not imply an action-forming role.",
+    "domain": "§3 model with M absent from U equation",
+    "all_of": [
+      "P_U, I=[0,3], signature and boundary roles exactly as note §3.",
+      "Origin, policy and memory settings jointly permitted; no omitted feedback into command.",
+      "Q is a stipulated attribution report, not a named feeling.",
+      "M/Z affect only Q in this stipulated architecture."
+    ],
+    "proof": "U independent of M/Z; Q changes with read memory. M7/M8.",
+    "counterexample": "A real mechanism may use the same representation for both generation and report; Lindsey timing result differs from toy post-memory manipulation.",
+    "status": "PROVED_IN_DECLARED_MODEL_ONLY",
+    "thought_experiment_role": "Separate prospective use from later source-ascription.",
+    "novelty": "Targeted project application; no new general causal theorem or historical priority claimed."
+  },
+  {
+    "id": "R180-C3",
+    "type": "IDENTIFICATION_COUNTEREXAMPLE",
+    "statement": "Clamped U,Q records cannot identify free-generation law within a model class admitting both F1 and F2.",
+    "domain": "§4 deterministic F1/F2; p,g,m in {-1,+1}",
+    "all_of": [
+      "Both completions are admitted.",
+      "Only U,Q on clamped trials are observed.",
+      "No independent implementation restriction selects one completion."
+    ],
+    "proof": "For clamp both U=p, Q=1 iff M=U; free U=G vs -G. M13/M14.",
+    "counterexample": "Free trials, full discriminating traces or grounded constraints can separate them.",
+    "status": "PROVED_UNDER_STATED_OBSERVATION_RESTRICTION",
+    "thought_experiment_role": "Prevent attribution evidence filling an unmeasured generation role.",
+    "novelty": "Targeted project application; no new general causal theorem or historical priority claimed."
+  },
+  {
+    "id": "R180-H1",
+    "type": "INTERPRETIVE_CANDIDATE",
+    "statement": "Target-bound operative action relations and current source-attribution relations may contribute to respectively felt trying and remembered authorship.",
+    "domain": "Independently grounded bearer, interval and selected targets; not yet supplied",
+    "all_of": [
+      "C1 and actual-instance admission on same P/I/K",
+      "Independently interpreted named targets",
+      "Noncircular bridge and warranted scope"
+    ],
+    "proof": "No proof; §§6–7 rationale and discriminating design.",
+    "counterexample": "Automatic, reflex, coercive and spontaneous cases remain; a report bit does not identify feeling.",
+    "status": "OPEN",
+    "thought_experiment_role": "Positive two-role bridge obligation without basal gate.",
+    "novelty": "Targeted project application; no new general causal theorem or historical priority claimed."
+  }
+]

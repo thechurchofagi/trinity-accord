@@ -1,0 +1,47 @@
+[
+  {
+    "id": "R180-G1",
+    "location": "§3 v0.1 and failures/model.py",
+    "impact": "Proposal uptake was overstated: c=g ignored p.",
+    "counterexample": "Changing p at fixed g never changed U.",
+    "corrected": "Preserved failure; v0.2 accept policy g=0 gives genuine content dependence; routing and contribution distinguished.",
+    "unresolved": "Human/LLM operative uptake is not established by toy role names.",
+    "status": "SCOPED_MODEL_FAULT_CORRECTED_APPLICATION_OPEN"
+  },
+  {
+    "id": "R180-G2",
+    "location": "§6 R180-H1; QC10/IA-QC11",
+    "impact": "Functional role still does not name felt trying or familiar mineness.",
+    "counterexample": "Automatic/regulated modes share policy; imposed route can yield positive Q.",
+    "corrected": "Removed origin=voluntary and report=feeling shortcuts.",
+    "unresolved": "Independent target interpretation and experiential bridge.",
+    "status": "OPEN"
+  },
+  {
+    "id": "R180-G3",
+    "location": "§§3,6 QC12",
+    "impact": "Toy membership cannot substitute for an actual bearer.",
+    "counterexample": "Source outside selected interval would not give selected internal contrast.",
+    "corrected": "Source selector/endpoints and I fixed; external earlier source production excluded.",
+    "unresolved": "Actual human/model instance with simultaneous IA premises.",
+    "status": "OPEN"
+  },
+  {
+    "id": "R180-G4",
+    "location": "§§4–5 external evidence",
+    "impact": "Forced-output attribution does not settle free-generation contribution.",
+    "counterexample": "F1/F2 agree on clamp but disagree free.",
+    "corrected": "State observation restriction and preserve Lindsey timing-control difference.",
+    "unresolved": "Public paired free/forced role-specific evidence or grounded actual mechanism.",
+    "status": "OPEN"
+  },
+  {
+    "id": "R180-G5",
+    "location": "§8 novelty",
+    "impact": "Old distinctions or known causal modeling could be oversold.",
+    "counterexample": "TA25 already has actual inaccurate attribution and four thought-experiment families.",
+    "corrected": "Carry R179 prior-paper audit; mark inherited results.",
+    "unresolved": "External prior-art and completed-draft comparison before publication.",
+    "status": "OPEN"
+  }
+]

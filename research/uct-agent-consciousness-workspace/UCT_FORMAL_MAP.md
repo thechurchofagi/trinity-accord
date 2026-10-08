@@ -1,3 +1,13 @@
+# Current checkpoint — R180 proposal uptake and author report
+
+Read [R180 v0.2](records/R180_Proposal_Uptake_and_Author_Report_20261008/Proposal_Uptake_and_Author_Report_v0_2.md), [gaps](records/R180_Proposal_Uptake_and_Author_Report_20261008/GAP_LEDGER.json), [handoff](records/R180_Proposal_Uptake_and_Author_Report_20261008/CURRENT_HANDOFF.md). Prior R179 publication-overlap audit remains binding.
+
+R180 crosses proposal origin with operative policy and separates action formation from later attribution. 216 toy configurations /16 checks; no LLM or human experiment. v0.1 falsely implied content uptake from routing; failure preserved, v0.2 adds a content-sensitive accept policy. Internal origin, policy sensitivity and report remain insufficient to identify named feeling. Forced-output observations alone do not determine free-generation law without extra premises. Known causal principle, not general mathematical novelty.
+
+Next bounded task: inspect public evidence comparing one internal representation's unforced-generation role with its later attribution role; maintain target/time distinctions and return to the experiential bridge if data are unavailable. C1/actual-instance premises remain; QC08/09 scoped resolved, QC10/IA-QC11/QC12 application OPEN. Canonical graph unchanged. No publication or claimed breakthrough. Historical current notices below are superseded only where inconsistent.
+
+---
+
 # Current checkpoint — R179 action modes and prior-paper overlap
 
 Read [the note](records/R179_Attempt_Observation_Imagery_20261008/Attempt_Observation_Imagery_v0_1.md), [prior-paper audit](records/R179_Attempt_Observation_Imagery_20261008/PRIOR_PAPER_OVERLAP_AUDIT.md), [narrowed outline](records/R179_Attempt_Observation_Imagery_20261008/PAPER_OUTLINE.md), and [handoff](records/R179_Attempt_Observation_Imagery_20261008/CURRENT_HANDOFF.md).
