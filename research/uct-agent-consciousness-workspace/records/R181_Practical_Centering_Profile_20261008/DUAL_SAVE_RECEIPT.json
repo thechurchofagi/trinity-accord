@@ -1,0 +1,36 @@
+{
+  "schema": "uct-dual-save-receipt-v1",
+  "round": "R181",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "core_commit": "631ed8415eb1b1afee7ce126ea1ad0bcc6dd8bd6",
+    "verified_tree": "62ee97aa7b64a226cdfb6c3c13cef1fa72ac31ac",
+    "remote_readback": "PASS"
+  },
+  "library": {
+    "master": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_000000009bcc81f8b6b77ef4a2d22d26",
+      "version": 38,
+      "size_bytes": 540427,
+      "local_sha256": "56e32f9c4f1695d76387fb2c45d669b66fcf7ce4d2964d411de96ad0e325618f",
+      "metadata_readback": "PASS"
+    },
+    "increment": {
+      "name": "UCT_R181_Increment_20261008.zip",
+      "library_file_id": "libfile_0d8065711d548191bd19fe9614bc7507",
+      "file_id": "file_00000000d69481f586b977fe88b3dcd8",
+      "size_bytes": 274545,
+      "local_sha256": "ec4f8b5d825b0c15fff6a9a5fed6555fc56dafa55b032cd6f745fb8c5bfb45a7",
+      "metadata_readback": "PASS",
+      "scope": "R181 changed files plus manifest; not the full repository or history"
+    }
+  },
+  "open_storage_gap": {
+    "target": "UCT_R180_Increment_20261008.zip",
+    "status": "REMOTE_BYTE_HASH_NOT_VERIFIED",
+    "reason": "Canonical Library download readback returned HTTP 403 again in R181.",
+    "guard": "Do not claim remote SHA256 equality or blindly re-upload merely because readback is delayed."
+  }
+}
