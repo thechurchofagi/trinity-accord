@@ -1,5 +1,15 @@
 # UCT Agent Consciousness — Research Workspace
 
+## Shared-event composition continuation — CG20261008
+
+Read [the self-contained composition checkpoint](records/CG20261008_Coherent_Sharing_and_Interaction/RESEARCH_CHECKPOINT.md). It continues the author's theory-first shared-memory thought experiment, without reserving a numbered R-round. Current numbered research was read through R181; preserve that work, the R179 overlap audit, R180 and TF20261008 below.
+
+The checkpoint separates coherent identification of one shared physical carrier from completeness of cross-scope interaction relations. It proves a conditional overlap-composition/replacement result under explicit actual-instance and strong C1 premises, and gives a general Boolean interaction-completion counterfamily. Equal baseline-local laws do not establish equal full embedded organization. A compact executable verifier is included; expanded local checks covered 65,536 four-input laws and, separately, 65,536 open assemblies under eight recodings. No phenomenal variable or subject criterion was computed.
+
+This is the compact remote research record, not a claim that the larger downloadable local package or prior ZIP was uploaded in full. Standard transport, gluing and Boolean mathematics are credited; a 2026 phenomenal-sheaf dissertation is noted as a direct antecedent with limited reading scope. HOLD paper release/DOI/OTS/AR. Named-feeling and actual-brain realization gaps remain open. Continue from this section for the composition dialogue and from HANDOFF/MASTER_INDEX for concurrent scheduled research.
+
+---
+
 ## Theory-first dialogue continuation — TF20261008
 
 Read [Coupling, retained distinctions, and relative time](records/TF20261008_Coupling_and_Relative_Time/RESEARCH_NOTE.md), including its local proof map and next question; [runnable checks](records/TF20261008_Coupling_and_Relative_Time/check_models.py) and [results](records/TF20261008_Coupling_and_Relative_Time/MODEL_RESULTS.json) accompany it. This is a non-R supplement after the R180/EX20261008/METHOD baseline, not a new numbered round or a paper release.
