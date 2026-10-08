@@ -1,3 +1,15 @@
+# Current research and review — BR20261008 / REVIEW-20261008-03
+
+Latest scheduled research: R174. The author's conceptual extension [BR20261008](records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md) adds a one-coupling role-differentiation model and jointly constrained correspondence analysis; it does not reserve R175. [Chinese explanation](records/BR20261008_Relational_Differentiation/REVIEW_ZH.md), [proofs](records/BR20261008_Relational_Differentiation/PROOF_LEDGER.json), [model results](records/BR20261008_Relational_Differentiation/MODEL_RESULTS.json), [open gaps](records/BR20261008_Relational_Differentiation/GAP_LEDGER.json). Current graph: R174-BR20261008-v1.0 (554/267/168); counts are bookkeeping. Existing objects and R171/R172 effective overlays remain intact.
+
+Read [the current scoped review](records/REVIEW_20261008_03/REVIEW_REPORT.md). QC-06/07 are RESOLVED only for their effective R172 contract corrections. QC-08 is OPEN: R173's free Boolean enumeration does not establish semantic eight-way organizational independence or an admitted history twin pair. QC-09 is OPEN: correct the same/different F_order fiber wording. QC-10 is OPEN: require a positive independently constrained content prediction before expanding mechanism-exclusion machinery. The BR contribution is self-checked and is not independently certified by this review.
+
+Current direction: test whether one independently specified experiential relation and supported common correspondences force an unfitted target relation. Keep actual change distinct from improved knowledge, selected role differentiation distinct from full richness, and static topology distinct from finite-time propagation. All BR physical/phenomenal application gaps remain OPEN. No publication, scheduling change or consciousness-status conclusion is made. Historical latest/current headers below are superseded where inconsistent with this block.
+
+---
+
+Scoped audit: general arguments plus exact finite examples and preserved parent objects, not full semantic verification. New author contributions and review of prior checkpoints are recorded separately.
+
 # R174 audit — shared temporal coordinate without evidence or content promotion
 
 R174 passes 15/15 formal-map checks and 21/21 exact model checks. The graph has **544 nodes / 262 rules / 163 context links** and preserves the exact 535/258/159 parent prefixes. Nine nodes, four explicit `all_of` rules and four non-deductive context links are new. IDs are unique, all endpoints resolve and the deductive graph is acyclic.

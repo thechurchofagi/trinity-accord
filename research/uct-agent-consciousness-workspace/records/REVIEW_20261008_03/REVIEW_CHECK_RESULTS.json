@@ -1,0 +1,57 @@
+{
+  "review": "REVIEW-20261008-03",
+  "overlay_sha256": "a5b4b6f6d378cd31d7b727af8e9319ae5418db9520328fb8d910d9e3a1978931",
+  "checks": [
+    {
+      "name": "QC06_explicit_actual_instance_premises",
+      "pass": true,
+      "scope": "Effective rule retains actual discharges, not just a conditional schema."
+    },
+    {
+      "name": "QC06_old_countervaluation_blocked",
+      "pass": true,
+      "scope": "Schema-only and J-only routes cannot discharge explicit compat_instance."
+    },
+    {
+      "name": "QC06_same_binding_is_substantive",
+      "pass": true,
+      "scope": "True local facts about different P do not form one positive instance."
+    },
+    {
+      "name": "QC07_selector_separates_evidence",
+      "pass": true,
+      "scope": "Executed path distinct from W-indexed evidence; actual grounding remains unvalidated."
+    },
+    {
+      "name": "QC07_same_mechanism_different_tests",
+      "pass": true,
+      "scope": "Evidence availability changes; no physical path change is inferred."
+    },
+    {
+      "name": "QC07_parameter_transport",
+      "pass": true,
+      "scope": "For selector x=p, h maps p too; holding physical p fixed would change its truth."
+    },
+    {
+      "name": "QC08_baseline_admissible_counterdomain",
+      "pass": true,
+      "scope": "Under actual-baseline admission, AgencyLoop entails an executed admissible action, hence Avail. The premise must be specified, not assumed universal."
+    },
+    {
+      "name": "R174_three_signatures_distinct",
+      "pass": true,
+      "scope": "Checks displayed signatures on one exact instance; manual substitution supplies the general c!=0,s>0 argument."
+    },
+    {
+      "name": "QC09_fiber_counterexample_direction",
+      "pass": true,
+      "scope": "Same target in one selector fiber is compatible; different target is the sufficiency counterexample."
+    }
+  ],
+  "limits": [
+    "Scoped contract and model verification only",
+    "No complete semantic graph proof",
+    "No physical or phenomenal validation",
+    "New BR20261008 author contribution excluded from independent review closure"
+  ]
+}

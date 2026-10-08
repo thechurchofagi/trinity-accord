@@ -1,0 +1,55 @@
+{
+  "record_type": "AUTHOR_CONTRIBUTION_SELF_CHECK",
+  "items": [
+    {
+      "id": "BR20261008-G1",
+      "severity": "HIGH",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §§3,4,6.1",
+      "argument_or_counterexample": "Selected graph asymmetry may omit distinctions already present in full K; physical realization of the actual relation/interval is not supplied.",
+      "impact_scope": "§§3,4,6.1",
+      "recommended_action": "Ground one actual relation and its interval; do not infer full-experience novelty from selected orbit splitting.",
+      "status": "OPEN",
+      "verification_basis": "General manual proofs and exact finite model establish only their scoped mathematical claims; actual and phenomenal premises remain undisclosed/unvalidated."
+    },
+    {
+      "id": "BR20261008-G2",
+      "severity": "HIGH",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §§5,6.2–6.3",
+      "argument_or_counterexample": "A unique graph match does not establish that Y is experiential or that its anchors mean redness, pain, order or mineness.",
+      "impact_scope": "§§5,6.2–6.3",
+      "recommended_action": "Supply an independently specified experiential relation and independently supported correspondences, then test an uncalibrated consequence.",
+      "status": "OPEN",
+      "verification_basis": "General manual proofs and exact finite model establish only their scoped mathematical claims; actual and phenomenal premises remain undisclosed/unvalidated."
+    },
+    {
+      "id": "BR20261008-G3",
+      "severity": "HIGH",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §4.1",
+      "argument_or_counterexample": "An arbitrarily tiny coupling change gives n exact roles but arbitrarily small finite-time signal effects.",
+      "impact_scope": "§4.1",
+      "recommended_action": "Reject unqualified role-count richness metrics; state any geometry and continuity premise explicitly.",
+      "status": "OPEN",
+      "verification_basis": "General manual proofs and exact finite model establish only their scoped mathematical claims; actual and phenomenal premises remain undisclosed/unvalidated."
+    },
+    {
+      "id": "BR20261008-G4",
+      "severity": "HIGH",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §§4.2,6.2",
+      "argument_or_counterexample": "Static global roles do not imply immediate distant state changes; tokenwise h does not imply one h over trials, persons or substrates.",
+      "impact_scope": "§§4.2,6.2",
+      "recommended_action": "Retain finite propagation, actual interval and family-correspondence obligations in giant-network/replacement applications.",
+      "status": "OPEN",
+      "verification_basis": "General manual proofs and exact finite model establish only their scoped mathematical claims; actual and phenomenal premises remain undisclosed/unvalidated."
+    },
+    {
+      "id": "BR20261008-G5",
+      "severity": "MEDIUM",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §§2,8",
+      "argument_or_counterexample": "Automorphism/structuralist approaches and critiques are direct prior art; toy proofs do not yet answer intrinsic quality.",
+      "impact_scope": "§§2,8",
+      "recommended_action": "Credit primary precedents; require a non-tautological held-out experiential relation before claiming conceptual breakthrough.",
+      "status": "OPEN",
+      "verification_basis": "General manual proofs and exact finite model establish only their scoped mathematical claims; actual and phenomenal premises remain undisclosed/unvalidated."
+    }
+  ]
+}

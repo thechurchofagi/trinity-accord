@@ -1,0 +1,402 @@
+{
+  "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+  "nodes": [
+    {
+      "id": "BR20261008:ROLE_EXPANSION_SETUP",
+      "kind": "PREMISE_PACKAGE",
+      "label": "Role expansion setup",
+      "statement": "Fix a finite relational structure X in Sigma and a relation R on the same carrier, retaining all old relations. Selected symmetry roles are Aut(X) orbits. This is an organizational change only if R is independently realized; adding knowledge or an analyst tag is different.",
+      "domain": "Finite selected vocabulary/carrier, fixed sorts and any pointing; not a complete physical or phenomenal description by default.",
+      "scope": "Finite selected vocabulary/carrier, fixed sorts and any pointing; not a complete physical or phenomenal description by default.",
+      "status": "DECLARED_APPLICATION_PREMISES",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §3",
+      "proof": "Declared finite structure and expansion.",
+      "source_lineage": "A symmetry/selector and C1; R146 centered-reference distinction; R157 transport/semantic residual; classical group actions and matrix-power identity. Kleiner 2024 and Alde 2026 are direct structuralist precedents/critiques, not newly proved here.",
+      "counterexamples_and_limits": "Uniformly directed cycle, arbitrarily small weighted asymmetry, incompatible anchors, incomplete selected signature and ungrounded phenomenal graph; see §§3–6 and GAP_LEDGER.json.",
+      "formal_contract_BR20261008": {
+        "source_anchor": {
+          "path": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+          "sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+          "locator": "§3"
+        },
+        "object_time_signature": "Finite selected vocabulary/carrier, fixed sorts and any pointing; not a complete physical or phenomenal description by default.",
+        "quantifiers": "For each instance satisfying the stated package; physical/phenomenal application is conditional and not inferred from a schema.",
+        "actuality": "Abstract finite mathematics unless the explicit actual-token grounding package is separately discharged.",
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "BR20261008:ROLE_REFINEMENT",
+      "kind": "CONDITIONAL_STRUCTURAL_THEOREM",
+      "label": "Role refinement",
+      "statement": "Aut(X,R) is the subgroup of Aut(X) preserving R, so new role orbits refine old ones. Strict refinement requires an old orbit to split. A proper subgroup alone does not suffice: uniformly directing a cycle removes reflection but preserves a single vertex orbit.",
+      "domain": "Every ROLE_EXPANSION_SETUP instance; finite role distinction, not an experience count.",
+      "scope": "Every ROLE_EXPANSION_SETUP instance; finite role distinction, not an experience count.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §3",
+      "proof": "Simultaneous preservation gives group equality and subgroup inclusion; orbit inclusion follows. Rotations remain transitive in the counterexample.",
+      "source_lineage": "A symmetry/selector and C1; R146 centered-reference distinction; R157 transport/semantic residual; classical group actions and matrix-power identity. Kleiner 2024 and Alde 2026 are direct structuralist precedents/critiques, not newly proved here.",
+      "counterexamples_and_limits": "Uniformly directed cycle, arbitrarily small weighted asymmetry, incompatible anchors, incomplete selected signature and ungrounded phenomenal graph; see §§3–6 and GAP_LEDGER.json.",
+      "formal_contract_BR20261008": {
+        "source_anchor": {
+          "path": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+          "sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+          "locator": "§3"
+        },
+        "object_time_signature": "Every ROLE_EXPANSION_SETUP instance; finite role distinction, not an experience count.",
+        "quantifiers": "For each instance satisfying the stated package; physical/phenomenal application is conditional and not inferred from a schema.",
+        "actuality": "Abstract finite mathematics unless the explicit actual-token grounding package is separately discharged.",
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "br20261008_role_refinement",
+            "all_of": [
+              "BR20261008:ROLE_EXPANSION_SETUP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "BR20261008:WEIGHTED_RING_SETUP",
+      "kind": "PREMISE_PACKAGE",
+      "label": "Weighted ring setup",
+      "statement": "Fix n>=3, a symmetric cycle with uniform initial signal 1, common discrete clock, no unique vertex tags, M0=(I+A(Cn))/10 and M_epsilon=M0+(epsilon/10)e1 e0^T, 0<=epsilon<=1/2. Only the directed 0->1 coupling is strengthened; x_next=M_epsilon*x.",
+      "domain": "Finite idealized dissipative signal network. Real hardware grounding, experiential geometry and full K-completeness are not assumed.",
+      "scope": "Finite idealized dissipative signal network. Real hardware grounding, experiential geometry and full K-completeness are not assumed.",
+      "status": "DECLARED_APPLICATION_PREMISES",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §4",
+      "proof": "Explicit nonnegative linear update model; all matrices and initial conditions jointly specified.",
+      "source_lineage": "A symmetry/selector and C1; R146 centered-reference distinction; R157 transport/semantic residual; classical group actions and matrix-power identity. Kleiner 2024 and Alde 2026 are direct structuralist precedents/critiques, not newly proved here.",
+      "counterexamples_and_limits": "Uniformly directed cycle, arbitrarily small weighted asymmetry, incompatible anchors, incomplete selected signature and ungrounded phenomenal graph; see §§3–6 and GAP_LEDGER.json.",
+      "formal_contract_BR20261008": {
+        "source_anchor": {
+          "path": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+          "sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+          "locator": "§4"
+        },
+        "object_time_signature": "Finite idealized dissipative signal network. Real hardware grounding, experiential geometry and full K-completeness are not assumed.",
+        "quantifiers": "For each instance satisfying the stated package; physical/phenomenal application is conditional and not inferred from a schema.",
+        "actuality": "Abstract finite mathematics unless the explicit actual-token grounding package is separately discharged.",
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "BR20261008:LOCAL_ASYMMETRY_GLOBAL_ROLES",
+      "kind": "CONDITIONAL_MODEL_THEOREM",
+      "label": "Local asymmetry global roles",
+      "statement": "For every n>=3 and epsilon>0 in WEIGHTED_RING_SETUP, the selected weighted graph has identity-only automorphism and n roles versus one at epsilon=0. Yet at each t>=1, ||x_t^epsilon-x_t^0||_infty<=t(epsilon/10)(7/20)^(t-1)||x0||_infty. With the uniform positive initial state, the first change at i is at step 1+dist_Cn(1,i). Exact role count is discontinuous in this matrix norm and is not an established experiential-richness metric.",
+      "domain": "One selected structural model and finite actual-update placeholder interval; no full physical/phenomenal richness or subject count.",
+      "scope": "One selected structural model and finite actual-update placeholder interval; no full physical/phenomenal richness or subject count.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §4",
+      "proof": "A unique weighted directed edge fixes two adjacent vertices and hence the cycle. Telescoping powers bound finite-time signal differences. Shortest positive paths establish first arrival and exclude instantaneous distant effects.",
+      "source_lineage": "A symmetry/selector and C1; R146 centered-reference distinction; R157 transport/semantic residual; classical group actions and matrix-power identity. Kleiner 2024 and Alde 2026 are direct structuralist precedents/critiques, not newly proved here.",
+      "counterexamples_and_limits": "Uniformly directed cycle, arbitrarily small weighted asymmetry, incompatible anchors, incomplete selected signature and ungrounded phenomenal graph; see §§3–6 and GAP_LEDGER.json.",
+      "formal_contract_BR20261008": {
+        "source_anchor": {
+          "path": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+          "sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+          "locator": "§4"
+        },
+        "object_time_signature": "One selected structural model and finite actual-update placeholder interval; no full physical/phenomenal richness or subject count.",
+        "quantifiers": "For each instance satisfying the stated package; physical/phenomenal application is conditional and not inferred from a schema.",
+        "actuality": "Abstract finite mathematics unless the explicit actual-token grounding package is separately discharged.",
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "br20261008_weighted_ring_differentiation",
+            "all_of": [
+              "BR20261008:WEIGHTED_RING_SETUP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "BR20261008:JOINT_MAPPING_SETUP",
+      "kind": "PREMISE_PACKAGE",
+      "label": "Joint mapping setup",
+      "statement": "Fix finite Sigma-structures X,Y with independently specified relation meanings and candidate pairs A={(a_i,b_i)}. H=Iso(X,Y), H_A={f in H: every f(a_i)=b_i}. H_A may be empty. These are common-map constraints on fixed structures, not physical additions.",
+      "domain": "One common X,Y,Sigma and target; no switching token/time/relation meaning between correspondences.",
+      "scope": "One common X,Y,Sigma and target; no switching token/time/relation meaning between correspondences.",
+      "status": "DECLARED_APPLICATION_PREMISES",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §5",
+      "proof": "Declared matching problem. Phenomenal admission requires a separate actual-token package.",
+      "source_lineage": "A symmetry/selector and C1; R146 centered-reference distinction; R157 transport/semantic residual; classical group actions and matrix-power identity. Kleiner 2024 and Alde 2026 are direct structuralist precedents/critiques, not newly proved here.",
+      "counterexamples_and_limits": "Uniformly directed cycle, arbitrarily small weighted asymmetry, incompatible anchors, incomplete selected signature and ungrounded phenomenal graph; see §§3–6 and GAP_LEDGER.json.",
+      "formal_contract_BR20261008": {
+        "source_anchor": {
+          "path": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+          "sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+          "locator": "§5"
+        },
+        "object_time_signature": "One common X,Y,Sigma and target; no switching token/time/relation meaning between correspondences.",
+        "quantifiers": "For each instance satisfying the stated package; physical/phenomenal application is conditional and not inferred from a schema.",
+        "actuality": "Abstract finite mathematics unless the explicit actual-token grounding package is separately discharged.",
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "BR20261008:JOINT_MAPPING_CONSTRAINT",
+      "kind": "CONDITIONAL_STRUCTURAL_THEOREM",
+      "label": "Joint mapping constraint",
+      "statement": "If H_A is nonempty and f0 belongs to it, H_A=f0*Aut(X)_A and possible images of x are f0(Aut(X)_A x). A target is identified exactly when constant over H_A. Separate per-anchor satisfiability does not imply joint satisfiability; the eight-cycle adjacent-to-antipodal pair is an exact witness. Compatible adjacent anchors can determine all remaining matches.",
+      "domain": "Selected structural matching only; multiple selected maps need not extend to distinct complete C1 realizations.",
+      "scope": "Selected structural matching only; multiple selected maps need not extend to distinct complete C1 realizations.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §5",
+      "proof": "For f in H_A, f0^-1*f is exactly an automorphism fixing all anchors, and conversely. Taking images gives the orbit criterion. Cycle adjacency proves the incompatible-anchor counterexample.",
+      "source_lineage": "A symmetry/selector and C1; R146 centered-reference distinction; R157 transport/semantic residual; classical group actions and matrix-power identity. Kleiner 2024 and Alde 2026 are direct structuralist precedents/critiques, not newly proved here.",
+      "counterexamples_and_limits": "Uniformly directed cycle, arbitrarily small weighted asymmetry, incompatible anchors, incomplete selected signature and ungrounded phenomenal graph; see §§3–6 and GAP_LEDGER.json.",
+      "formal_contract_BR20261008": {
+        "source_anchor": {
+          "path": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+          "sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+          "locator": "§5"
+        },
+        "object_time_signature": "Selected structural matching only; multiple selected maps need not extend to distinct complete C1 realizations.",
+        "quantifiers": "For each instance satisfying the stated package; physical/phenomenal application is conditional and not inferred from a schema.",
+        "actuality": "Abstract finite mathematics unless the explicit actual-token grounding package is separately discharged.",
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "br20261008_joint_mapping",
+            "all_of": [
+              "BR20261008:JOINT_MAPPING_SETUP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "BR20261008:ACTUAL_ROLE_GROUNDING",
+      "kind": "PREMISE_PACKAGE",
+      "label": "Actual role grounding",
+      "statement": "Fix an actual P and interval, complete K and the C1 domain. Independently interpret the selected weighted ring and its unique-role formulas theta_i within K, with actual weights, executed events, ports, timing and transported parameters. The declared n>=3 and 0<epsilon<=1/2 and model relation must match the instantiated ring result. No completeness is inferred from the finite picture.",
+      "domain": "One common actual bearer/time/K/parameter binding; no history beyond the token imported from an external archive.",
+      "scope": "One common actual bearer/time/K/parameter binding; no history beyond the token imported from an external archive.",
+      "status": "DECLARED_APPLICATION_PREMISES",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §6.1",
+      "proof": "Undischarged physical application package, not supplied by code or a diagram.",
+      "source_lineage": "A symmetry/selector and C1; R146 centered-reference distinction; R157 transport/semantic residual; classical group actions and matrix-power identity. Kleiner 2024 and Alde 2026 are direct structuralist precedents/critiques, not newly proved here.",
+      "counterexamples_and_limits": "Uniformly directed cycle, arbitrarily small weighted asymmetry, incompatible anchors, incomplete selected signature and ungrounded phenomenal graph; see §§3–6 and GAP_LEDGER.json.",
+      "formal_contract_BR20261008": {
+        "source_anchor": {
+          "path": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+          "sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+          "locator": "§6.1"
+        },
+        "object_time_signature": "One common actual bearer/time/K/parameter binding; no history beyond the token imported from an external archive.",
+        "quantifiers": "For each instance satisfying the stated package; physical/phenomenal application is conditional and not inferred from a schema.",
+        "actuality": "Abstract finite mathematics unless the explicit actual-token grounding package is separately discharged.",
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "BR20261008:EXPERIENTIAL_ROLE_TRANSPORT",
+      "kind": "CONDITIONAL_C1_APPLICATION",
+      "label": "Experiential role transport",
+      "statement": "Under the ring result, ACTUAL_ROLE_GROUNDING and A:C1, the grounded role formulas and their uniqueness are preserved in E_K(P) by h_P. This yields selected differentiated experiential structural roles. It does not establish specific human qualities, an increase in complete richness, prior absence of all distinctions, report access or a unique owner.",
+      "domain": "Grounded actual selected roles within one complete C1 token, not a new experience-existence condition.",
+      "scope": "Grounded actual selected roles within one complete C1 token, not a new experience-existence condition.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §6.1",
+      "proof": "Use R157 formula preservation, including existence and uniqueness formulas and transported physical parameters.",
+      "source_lineage": "A symmetry/selector and C1; R146 centered-reference distinction; R157 transport/semantic residual; classical group actions and matrix-power identity. Kleiner 2024 and Alde 2026 are direct structuralist precedents/critiques, not newly proved here.",
+      "counterexamples_and_limits": "Uniformly directed cycle, arbitrarily small weighted asymmetry, incompatible anchors, incomplete selected signature and ungrounded phenomenal graph; see §§3–6 and GAP_LEDGER.json.",
+      "formal_contract_BR20261008": {
+        "source_anchor": {
+          "path": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+          "sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+          "locator": "§6.1"
+        },
+        "object_time_signature": "Grounded actual selected roles within one complete C1 token, not a new experience-existence condition.",
+        "quantifiers": "For each instance satisfying the stated package; physical/phenomenal application is conditional and not inferred from a schema.",
+        "actuality": "Abstract finite mathematics unless the explicit actual-token grounding package is separately discharged.",
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "br20261008_experiential_roles",
+            "all_of": [
+              "A:C1",
+              "BR20261008:LOCAL_ASYMMETRY_GLOBAL_ROLES",
+              "BR20261008:ACTUAL_ROLE_GROUNDING"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "BR20261008:PHENOMENAL_MAPPING_ADMISSION",
+      "kind": "PREMISE_PACKAGE",
+      "label": "Phenomenal mapping admission",
+      "statement": "For one actual P/I/K, independently admit X and candidate experiential Y as common-Sigma selected interpretations and justify that the complete C1 map restricts to an isomorphism X->Y. Candidate anchors assert that same restriction at the listed pairs. All JOINT_MAPPING_SETUP objects and meanings have identical bindings. No family map across trials or substrates follows from tokenwise C1.",
+      "domain": "Same-token selected correspondence; unresolved empirical/semantic package, not an unconditional C1 consequence.",
+      "scope": "Same-token selected correspondence; unresolved empirical/semantic package, not an unconditional C1 consequence.",
+      "status": "DECLARED_APPLICATION_PREMISES",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §6.2",
+      "proof": "Explicit additional application/interpretation obligations; independently evidenced Y and anchors are not constructed merely by renaming X.",
+      "source_lineage": "A symmetry/selector and C1; R146 centered-reference distinction; R157 transport/semantic residual; classical group actions and matrix-power identity. Kleiner 2024 and Alde 2026 are direct structuralist precedents/critiques, not newly proved here.",
+      "counterexamples_and_limits": "Uniformly directed cycle, arbitrarily small weighted asymmetry, incompatible anchors, incomplete selected signature and ungrounded phenomenal graph; see §§3–6 and GAP_LEDGER.json.",
+      "formal_contract_BR20261008": {
+        "source_anchor": {
+          "path": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+          "sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+          "locator": "§6.2"
+        },
+        "object_time_signature": "Same-token selected correspondence; unresolved empirical/semantic package, not an unconditional C1 consequence.",
+        "quantifiers": "For each instance satisfying the stated package; physical/phenomenal application is conditional and not inferred from a schema.",
+        "actuality": "Abstract finite mathematics unless the explicit actual-token grounding package is separately discharged.",
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "BR20261008:COMMON_EXPERIENTIAL_CONSTRAINT",
+      "kind": "CONDITIONAL_C1_APPLICATION",
+      "label": "Common experiential constraint",
+      "statement": "Under A:C1, PHENOMENAL_MAPPING_ADMISSION and the instantiated joint-mapping theorem, the actual restriction lies in H_A: it must be nonempty, and any target constant over H_A is a conditional selected prediction. Empty H_A rejects the joint application/anchor package, not C1 alone. Uniqueness of an ungrounded graph match proves no phenomenal interpretation.",
+      "domain": "Only the fixed independently admitted selected target. No automatic common h across distinct actual tokens, nor measured human qualia supplied by this theorem.",
+      "scope": "Only the fixed independently admitted selected target. No automatic common h across distinct actual tokens, nor measured human qualia supplied by this theorem.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §6.2",
+      "proof": "The admitted C1 restriction preserves Sigma and satisfies all asserted anchors, hence is a member of H_A; apply the target-invariance criterion.",
+      "source_lineage": "A symmetry/selector and C1; R146 centered-reference distinction; R157 transport/semantic residual; classical group actions and matrix-power identity. Kleiner 2024 and Alde 2026 are direct structuralist precedents/critiques, not newly proved here.",
+      "counterexamples_and_limits": "Uniformly directed cycle, arbitrarily small weighted asymmetry, incompatible anchors, incomplete selected signature and ungrounded phenomenal graph; see §§3–6 and GAP_LEDGER.json.",
+      "formal_contract_BR20261008": {
+        "source_anchor": {
+          "path": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+          "sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+          "locator": "§6.2"
+        },
+        "object_time_signature": "Only the fixed independently admitted selected target. No automatic common h across distinct actual tokens, nor measured human qualia supplied by this theorem.",
+        "quantifiers": "For each instance satisfying the stated package; physical/phenomenal application is conditional and not inferred from a schema.",
+        "actuality": "Abstract finite mathematics unless the explicit actual-token grounding package is separately discharged.",
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "br20261008_common_experiential_constraint",
+            "all_of": [
+              "A:C1",
+              "BR20261008:JOINT_MAPPING_CONSTRAINT",
+              "BR20261008:PHENOMENAL_MAPPING_ADMISSION"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "br20261008_role_refinement",
+      "all_of": [
+        "BR20261008:ROLE_EXPANSION_SETUP"
+      ],
+      "conclusion": "BR20261008:ROLE_REFINEMENT",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "statement": "Aut(X,R) is the subgroup of Aut(X) preserving R, so new role orbits refine old ones. Strict refinement requires an old orbit to split. A proper subgroup alone does not suffice: uniformly directing a cycle removes reflection but preserves a single vertex orbit.",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §3",
+      "proof_sketch": "Simultaneous preservation gives group equality and subgroup inclusion; orbit inclusion follows. Rotations remain transitive in the counterexample.",
+      "formal_contract_BR20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same carrier and old relations",
+          "R added, not substituted",
+          "selected role vocabulary fixed"
+        ],
+        "source_sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "br20261008_weighted_ring_differentiation",
+      "all_of": [
+        "BR20261008:WEIGHTED_RING_SETUP"
+      ],
+      "conclusion": "BR20261008:LOCAL_ASYMMETRY_GLOBAL_ROLES",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "statement": "For every n>=3 and epsilon>0 in WEIGHTED_RING_SETUP, the selected weighted graph has identity-only automorphism and n roles versus one at epsilon=0. Yet at each t>=1, ||x_t^epsilon-x_t^0||_infty<=t(epsilon/10)(7/20)^(t-1)||x0||_infty. With the uniform positive initial state, the first change at i is at step 1+dist_Cn(1,i). Exact role count is discontinuous in this matrix norm and is not an established experiential-richness metric.",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §4",
+      "proof_sketch": "A unique weighted directed edge fixes two adjacent vertices and hence the cycle. Telescoping powers bound finite-time signal differences. Shortest positive paths establish first arrival and exclude instantaneous distant effects.",
+      "formal_contract_BR20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same n,epsilon,initial state and clock",
+          "epsilon>0 for role/arrival clauses; stated closed range for norm bound",
+          "directed matrix entry is target 1, source 0"
+        ],
+        "source_sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "br20261008_joint_mapping",
+      "all_of": [
+        "BR20261008:JOINT_MAPPING_SETUP"
+      ],
+      "conclusion": "BR20261008:JOINT_MAPPING_CONSTRAINT",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "statement": "If H_A is nonempty and f0 belongs to it, H_A=f0*Aut(X)_A and possible images of x are f0(Aut(X)_A x). A target is identified exactly when constant over H_A. Separate per-anchor satisfiability does not imply joint satisfiability; the eight-cycle adjacent-to-antipodal pair is an exact witness. Compatible adjacent anchors can determine all remaining matches.",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §5",
+      "proof_sketch": "For f in H_A, f0^-1*f is exactly an automorphism fixing all anchors, and conversely. Taking images gives the orbit criterion. Cycle adjacency proves the incompatible-anchor counterexample.",
+      "formal_contract_BR20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same X,Y,Sigma and anchors",
+          "nonempty H_A only for coset/orbit clauses",
+          "separate-anchor maps are not conjoined into one map"
+        ],
+        "source_sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "br20261008_experiential_roles",
+      "all_of": [
+        "A:C1",
+        "BR20261008:LOCAL_ASYMMETRY_GLOBAL_ROLES",
+        "BR20261008:ACTUAL_ROLE_GROUNDING"
+      ],
+      "conclusion": "BR20261008:EXPERIENTIAL_ROLE_TRANSPORT",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "statement": "Under the ring result, ACTUAL_ROLE_GROUNDING and A:C1, the grounded role formulas and their uniqueness are preserved in E_K(P) by h_P. This yields selected differentiated experiential structural roles. It does not establish specific human qualities, an increase in complete richness, prior absence of all distinctions, report access or a unique owner.",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §6.1",
+      "proof_sketch": "Use R157 formula preservation, including existence and uniqueness formulas and transported physical parameters.",
+      "formal_contract_BR20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "one actual token and complete K",
+          "ring theorem instantiated at the same n/epsilon",
+          "grounded role formulas and mapped physical parameters"
+        ],
+        "source_sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "br20261008_common_experiential_constraint",
+      "all_of": [
+        "A:C1",
+        "BR20261008:JOINT_MAPPING_CONSTRAINT",
+        "BR20261008:PHENOMENAL_MAPPING_ADMISSION"
+      ],
+      "conclusion": "BR20261008:COMMON_EXPERIENTIAL_CONSTRAINT",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "statement": "Under A:C1, PHENOMENAL_MAPPING_ADMISSION and the instantiated joint-mapping theorem, the actual restriction lies in H_A: it must be nonempty, and any target constant over H_A is a conditional selected prediction. Empty H_A rejects the joint application/anchor package, not C1 alone. Uniqueness of an ungrounded graph match proves no phenomenal interpretation.",
+      "source": "records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md §6.2",
+      "proof_sketch": "The admitted C1 restriction preserves Sigma and satisfies all asserted anchors, hence is a member of H_A; apply the target-invariance criterion.",
+      "formal_contract_BR20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "one common actual h restriction",
+          "same instantiated matching problem",
+          "independently admitted experiential relations and anchor meanings"
+        ],
+        "source_sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+        "machine_proof": false
+      }
+    }
+  ],
+  "novelty": "Classical mathematics; project-level constructive synthesis, not a major original theorem claim.",
+  "proof_routes": "Grounded role transport and independently admitted joint correspondence are distinct routes. A phenomenal-map calibration is not required for every C1 application or for experience existence."
+}

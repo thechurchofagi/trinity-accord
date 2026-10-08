@@ -1,0 +1,163 @@
+{
+  "status": "EXACT_ABSTRACT_MODEL_ONLY",
+  "tests": [
+    {
+      "name": "C8_full_enumeration_matches_dihedral_proof",
+      "pass": true,
+      "scope": "Finite implementation witness; general C_n proof is in manuscript."
+    },
+    {
+      "name": "one_special_directed_coupling_fixes_all_roles",
+      "pass": true,
+      "scope": "One uniquely weighted directed edge; fixed selected signature, not total experience."
+    },
+    {
+      "name": "proper_group_reduction_need_not_split_roles",
+      "pass": true,
+      "scope": "Uniformly orienting the entire ring removes reflections but leaves every vertex in one orbit."
+    },
+    {
+      "name": "joint_correspondence_counts",
+      "pass": true,
+      "scope": "Knowledge constraints on a fixed structure, not new physical coupling."
+    },
+    {
+      "name": "individual_anchors_can_conflict_jointly",
+      "pass": true,
+      "scope": "Each anchor is separately possible; one common relation-preserving map cannot satisfy both."
+    },
+    {
+      "name": "held_out_mapping_after_compatible_anchors",
+      "pass": true,
+      "scope": "Conditional structural prediction from two stipulated correspondences; not inferred human labels."
+    },
+    {
+      "name": "weighted_rigidity_1/2",
+      "pass": true,
+      "scope": "Exact nonzero selected weight; no finite-resolution empirical identification."
+    },
+    {
+      "name": "weighted_rigidity_1/10",
+      "pass": true,
+      "scope": "Exact nonzero selected weight; no finite-resolution empirical identification."
+    },
+    {
+      "name": "weighted_rigidity_1/1000",
+      "pass": true,
+      "scope": "Exact nonzero selected weight; no finite-resolution empirical identification."
+    },
+    {
+      "name": "small_effect_bound",
+      "pass": true,
+      "scope": "Exact sample checks of general telescoping norm bound; fixed finite time and ||x0||_infty=1."
+    },
+    {
+      "name": "finite_speed_actual_effects",
+      "pass": true,
+      "scope": "Nonnegative ring dynamics and common uniform initial state. Static role uniqueness does not cause instantaneous state change."
+    }
+  ],
+  "role_orbits": {
+    "symmetric_ring": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    ],
+    "uniform_direction": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    ],
+    "one_special_coupling": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4
+      ],
+      [
+        5
+      ],
+      [
+        6
+      ],
+      [
+        7
+      ]
+    ]
+  },
+  "correspondence_counts": {
+    "none": 16,
+    "one": 2,
+    "adjacent": 1,
+    "antipodal": 2,
+    "incompatible": 0
+  },
+  "held_out_mapping": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    0,
+    1
+  ],
+  "small_perturbations": [
+    {
+      "epsilon": "1/2",
+      "roles": 8,
+      "difference_at_step_4": "11/4000"
+    },
+    {
+      "epsilon": "1/10",
+      "roles": 8,
+      "difference_at_step_4": "263/500000"
+    },
+    {
+      "epsilon": "1/1000",
+      "roles": 8,
+      "difference_at_step_4": "26003/5000000000"
+    }
+  ],
+  "first_changed_step_by_vertex": [
+    2,
+    1,
+    2,
+    3,
+    4,
+    5,
+    4,
+    3
+  ],
+  "limits": [
+    "Selected relational signature, not complete physical organization",
+    "No empirical phenomenal geometry or labels",
+    "No experience magnitude from orbit count",
+    "No subject count or basal gate",
+    "Finite enumeration supplements general proofs only"
+  ]
+}

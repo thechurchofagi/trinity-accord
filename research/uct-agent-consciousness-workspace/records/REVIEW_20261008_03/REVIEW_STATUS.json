@@ -1,0 +1,38 @@
+{
+  "id": "REVIEW-20261008-03",
+  "reviewed_core": "49b7bf2e2ce43b6f26ff27f6353efb4d28a76caf",
+  "reviewed_final": "0ee2eb5b7d1335d4c6d7b109b5605211c31037ad",
+  "master_input_version": 27,
+  "findings": [
+    {
+      "id": "QC-20261008-06",
+      "status": "RESOLVED",
+      "scope": "Effective R172 premise contract only"
+    },
+    {
+      "id": "QC-20261008-07",
+      "status": "RESOLVED",
+      "scope": "Effective R172 actual-role/evidence distinction only"
+    },
+    {
+      "id": "QC-20261008-08",
+      "status": "OPEN",
+      "severity": "HIGH",
+      "source": "R173 §§3–5, THREE_TARGET_SEPARATION, r173_history_twin_witness and verifier C01–C04"
+    },
+    {
+      "id": "QC-20261008-09",
+      "status": "OPEN",
+      "severity": "LOW",
+      "source": "R174 GAP_LEDGER G5 versus manuscript §8"
+    },
+    {
+      "id": "QC-20261008-10",
+      "status": "OPEN",
+      "severity": "MEDIUM",
+      "source": "TO20261008 §§5–8 and R174 §§3–8"
+    }
+  ],
+  "complete_details": "REVIEW_REPORT.md",
+  "new_BR_contribution": "Excluded from independent review; self-check only"
+}

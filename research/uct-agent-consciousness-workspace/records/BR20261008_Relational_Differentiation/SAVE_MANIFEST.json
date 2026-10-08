@@ -1,0 +1,189 @@
+{
+  "parent": "0ee2eb5b7d1335d4c6d7b109b5605211c31037ad",
+  "files": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/AGENTS.md",
+      "bytes": 56788,
+      "chars": 56708,
+      "sha256": "6f04053c01f57efd4f64d47971375bddc5444347d0db646e723b51c3ae3c2ba6",
+      "sha": "c14006768e11cf78199d7df58bb136a808342da0"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "bytes": 59045,
+      "chars": 56742,
+      "sha256": "acedc12b1c160c253f90ad8d65e875fe1574b938cc73a4ec3208625d10211ae7",
+      "sha": "f4db5b48051864db1bf558082f2e32da53c51ef4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "bytes": 52251,
+      "chars": 52168,
+      "sha256": "d82f8bd37f6a911171729bd9240459a1f3376f1e44421a34b12e4748fd18c807",
+      "sha": "4d49b552aaca8f95607fb1d46304a69d2dbc796c"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/MEMORY.md",
+      "bytes": 91386,
+      "chars": 69618,
+      "sha256": "0c7c76e1b684bd9129e8af212c04e33658231482788cb60f5a5de2f443d646e7",
+      "sha": "644bee47b1615daf09cd9042e0510a0633a29a88"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+      "bytes": 61212,
+      "chars": 55626,
+      "sha256": "df8d16d8c5a0d31997f41d7341f0da1370df0f2983eed67ec4fc7426e1cb719b",
+      "sha": "53be71f189753bc5de537dad969eee97851e38a5"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "bytes": 44682,
+      "chars": 44524,
+      "sha256": "bd2a786cf52eb79748c3956f8e252e58efde17df44bd7db80df89ea19a2c587a",
+      "sha": "5ebb9f3edd0fde607d7d1efaf4191282d1e4ac18"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "bytes": 103404,
+      "chars": 103223,
+      "sha256": "8515bca5d6b5c3f28616eeb10e9d1cdef70d44917a71080244b36332c70b0aa0",
+      "sha": "582aac814914fba6d6ee96f873c357d7d564cc3d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH.json",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH.json",
+      "bytes": 2415845,
+      "chars": 2413744,
+      "sha256": "b7d73135977e453e21d8188a109d840d2dbd699101df7d331fb9612bbc5e36ae",
+      "sha": "5affa812de589dd1821f38b87fc0e2d29c71ced8"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "bytes": 114418,
+      "chars": 114194,
+      "sha256": "81b8104e7d97f8d6c1d88846f10cc244578c08d9c971662c9c8af1bbf80cf07e",
+      "sha": "9f351641e0bf8250e33d90f47a480eb149912971"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/CURRENT_HANDOFF.md",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/CURRENT_HANDOFF.md",
+      "bytes": 4475,
+      "chars": 2888,
+      "sha256": "6bb1832a7ba950d20e3cd7ade2fb693c64744c6ff3a612c04535b6eff6376b98",
+      "sha": "de2d561e30a33a059b4cbb5ae231160696271d54"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/GAP_LEDGER.json",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/GAP_LEDGER.json",
+      "bytes": 3960,
+      "chars": 3938,
+      "sha256": "9096a22b7c270afd33a2471dfe4942d6d87926da1d52177314d9768cb0c4157f",
+      "sha": "462ddab8a65c1bed5f80bc203ba6f7a38dbba2f9"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/MAP_AUDIT.json",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/MAP_AUDIT.json",
+      "bytes": 1465,
+      "chars": 1465,
+      "sha256": "a18212d78d6a3b54f61a7c3b96e597ab9d864a8ff9614f6e66d249dfb621ac19",
+      "sha": "06594dbce0859db6b4855b3fc1b0d8a1d377c19f"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/MAP_CHECK.py",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/MAP_CHECK.py",
+      "bytes": 2480,
+      "chars": 2480,
+      "sha256": "1e0f8481b3405cb008771c7592da6387351e29f9255d3bd3615c2d179c0b386d",
+      "sha": "29fdf377677b7d71ac1a832d77bb5e65bb6dd2e9"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/MAP_EXTENSION.json",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/MAP_EXTENSION.json",
+      "bytes": 33312,
+      "chars": 33247,
+      "sha256": "3331efd22223d912d34d4038baa189c836b8e20e95c826d6f1ebe0f0dc425725",
+      "sha": "aea3283acce70015194e8e893c6942a123f1dcf2"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/MODEL.py",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/MODEL.py",
+      "bytes": 5266,
+      "chars": 5266,
+      "sha256": "76c3780575d26a29ebb171a9bcab68b2c24262ccbde338e809097595de593cc4",
+      "sha": "146f1d6a26ef6ba98b3120bde3491e6b4b9bccba"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/MODEL_RESULTS.json",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/MODEL_RESULTS.json",
+      "bytes": 3586,
+      "chars": 3586,
+      "sha256": "5dcb91944d9d2a467f1ac42abf158834180a014f0c1b4772c41e59b9bcbb92bd",
+      "sha": "23cab5a72f8b12384c9f06947b3ac269f7258cb1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/PROOF_LEDGER.json",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/PROOF_LEDGER.json",
+      "bytes": 32654,
+      "chars": 32589,
+      "sha256": "f627aa413f4f5b0fe8136636ffc43d0f46c0f6b514da487834bbbe4e447071cb",
+      "sha": "c42642f1c00329974cf4cfb857c29756cc1d6e60"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/REVIEW_ZH.md",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/REVIEW_ZH.md",
+      "bytes": 2494,
+      "chars": 909,
+      "sha256": "c0b1c76c04c288477c04670c61ecb6f69ee1b45a3cd61bc35897a2e03056df5a",
+      "sha": "eda1b0e52bb010ed89e21ab9519544365a2bc491"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/BR20261008_Relational_Differentiation/Relational_Differentiation_and_Joint_Experiential_Constraints_v0_1.md",
+      "bytes": 23053,
+      "chars": 23036,
+      "sha256": "a3846fdf48c9dd08679484b87e0cd178775c16cdfdb61ab35cd5a933a3948a8a",
+      "sha": "e9c56c07774be8bb5a050d8f9b8b20be4bb8d5e4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/REVIEW_20261008_03/REVIEW_CHECKS.py",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/REVIEW_20261008_03/REVIEW_CHECKS.py",
+      "bytes": 3752,
+      "chars": 3752,
+      "sha256": "78fed08102958ba5e923c7d02a02b74559e515bc199c667706a7f6752ddd7059",
+      "sha": "f3a30271f918cece4cdf68c0f7281801925ef7ae"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/REVIEW_20261008_03/REVIEW_CHECK_RESULTS.json",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/REVIEW_20261008_03/REVIEW_CHECK_RESULTS.json",
+      "bytes": 2101,
+      "chars": 2101,
+      "sha256": "a294489125ec02a0cfbb54579bcebcdd4a76c1caa636bf9369ef12f181485c2d",
+      "sha": "8cd635e4fcc9df1f0bbcc03c47ce5a6f820a9d57"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/REVIEW_20261008_03/REVIEW_REPORT.md",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/REVIEW_20261008_03/REVIEW_REPORT.md",
+      "bytes": 11702,
+      "chars": 11661,
+      "sha256": "c9f39d33a5aa52ad6d088806fe7f20d235c9125c8ff584cbec790834a15a922e",
+      "sha": "ed1c79d8158af045bc041fa17cb1b6e19a443b41"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/REVIEW_20261008_03/REVIEW_STATUS.json",
+      "local": "/workspace/scratch/2ffbf80bd780/bridge_research/research/uct-agent-consciousness-workspace/records/REVIEW_20261008_03/REVIEW_STATUS.json",
+      "bytes": 1101,
+      "chars": 1086,
+      "sha256": "bd6820aad93e10fbbc28511a8c1cf335252793c7f2c37b02882f7148a67226f1",
+      "sha": "cfda052bcc044d33ae73fd7d40357955d63cec63"
+    }
+  ]
+}
