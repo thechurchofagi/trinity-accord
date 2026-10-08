@@ -1,0 +1,116 @@
+{
+  "base_commit": "8df66b1bcf7c21795c4fba67eb1061815bf8c645",
+  "initial_read_commit": "0cfdf9aecc17c5a137d703fdddb2633e7e57e37d",
+  "fixed_master_input_version": 23,
+  "scope": "Research-only checkpoint; not publication. Existing R173 graph entries preserved. No claim of complete repository backup.",
+  "files": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+      "bytes": 54939,
+      "sha256": "095a9bae1839fcefbe4966556a968ba617539a627629452790aaaefda5aff826",
+      "git_blob_sha": "4c96ca9ce3fd1895338eaed81f5b40681f289f5f"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "bytes": 50515,
+      "sha256": "fa0f7f5bc33805d93de00dd8ba2fbb7c8cde89a503b9b96a57967dfdd4297f06",
+      "git_blob_sha": "5a3360de5f12ae226b1816cce71aceba1948d0d6"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "bytes": 85113,
+      "sha256": "d25410ed5cb11a3b4d053353cbbe6e645729e2a019fec5734a7ba13df3ab565b",
+      "git_blob_sha": "8fff2798d3c7e2008863a77d4c79a5e5e5630b1e"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "bytes": 52772,
+      "sha256": "a66d93e4c978805da5579d94675fe1902bd2e4d289a5041c22bb88f8307b093c",
+      "git_blob_sha": "2bffd3b8bc634b0ebd3a8683cbf67d869d2ee409"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "bytes": 45978,
+      "sha256": "4a50853a1a78013f3f239c7280ed0f8538416eb8e4bd42a4911d5c9fd7cc557c",
+      "git_blob_sha": "55b36ad4d11602a1aa2a328372a3016cd1ca33d2"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "bytes": 103281,
+      "sha256": "66064a0fb74557dd7bd01783c010ce8949b7f7560c91a4f2f88c777a9b662065",
+      "git_blob_sha": "55d224fa7a3d067317de55ec91bc0c58a151d880"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "bytes": 97088,
+      "sha256": "50d83b001fb3cc52cd9f4db14914f67b2ceaf29c603373f17e3601af8055084e",
+      "git_blob_sha": "3e31590fdbb5bd0ae63e5a0c4f0adbdc1f5b287d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH.json",
+      "bytes": 2323860,
+      "sha256": "3e1f12cf539564ebcda6d98e1e13e328c347e57dca42381b4c67991348627752",
+      "git_blob_sha": "f0fc679dfafb677059d52658ccd17187427e12f7"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "bytes": 30706,
+      "sha256": "7f1dc15ebc5a8776d1f848be85c662ff769dde572a5073e691da12aa27e0c35c",
+      "git_blob_sha": "06598015413ae5b48616b36e883bfd8781339818"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/CHECKS.py",
+      "bytes": 6834,
+      "sha256": "148daa1bed17c52889b4ea2ba1fd31e34ef3defe8da169990203edc35f64c53b",
+      "git_blob_sha": "4b5dd9cd66dc33e7463088d3ea0f3f220892b2f3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/CHECK_RESULTS.json",
+      "bytes": 4437,
+      "sha256": "c7979dc30fda53ebdcc9ed9ad1fbdaf87f4202e1e16ded62ac810f82619bced2",
+      "git_blob_sha": "448cdb72c7a986a93f4f40737c2c88fdaebf2b29"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/CURRENT_HANDOFF.md",
+      "bytes": 11765,
+      "sha256": "a0aa80eddb86eb285a48585e800d40191cae31111161dbed741caaf4f0d4d803",
+      "git_blob_sha": "cc1cf2dd86c223f2e0edc0f3e8b623b0ffed739d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/GAP_LEDGER.json",
+      "bytes": 5524,
+      "sha256": "667af198bcb8a556d1cd4652b86935042d89af10cc80ad9f090a177d039c8267",
+      "git_blob_sha": "e1c3171ccb9006c71a68f5acb792cc962f9d5596"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/MAP_AUDIT.json",
+      "bytes": 2241,
+      "sha256": "15117f07e0aafa4ad85223dbf01a7569c007e738522aa36eedd0c467f84cf492",
+      "git_blob_sha": "19ad0c1b0157643681e6d71a51f622aa89051089"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/MAP_EXTENSION.json",
+      "bytes": 39271,
+      "sha256": "ff08d0e40c4478665019141f8ce5f0781364ce063f160f5e303faa5101f6a729",
+      "git_blob_sha": "57fa481dde0b8aa1af5632fd62300dd44ba0dd89"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md",
+      "bytes": 27071,
+      "sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+      "git_blob_sha": "4558a805d7be8c46f8e5cbf92828a921ea6fe64a"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/PROOF_LEDGER.json",
+      "bytes": 37161,
+      "sha256": "24d692c8c63059b86401b52ee88466f546ad36f8233b97355f8265cfab67d82b",
+      "git_blob_sha": "d3d240123a3d45c4d570df8d899001165ce08c19"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/TE20261008_Organization_Transformations/REVIEW_ZH.md",
+      "bytes": 8440,
+      "sha256": "f4b378ba3f4e9f98af43c5f4f31de08e544024395bc6f49152ab5408ca671adf",
+      "git_blob_sha": "0b7e377c4751faf413be41554e23d27c622196f4"
+    }
+  ]
+}

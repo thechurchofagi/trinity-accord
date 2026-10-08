@@ -1,0 +1,79 @@
+[
+  {
+    "id": "TE20261008-G1",
+    "severity": "HIGH",
+    "title": "Actual grounding",
+    "status": "OPEN",
+    "precise_source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §§2–9",
+    "argument_or_counterexample": "No brain, fiber, silicon or mechanical actual role/port realization is verified. Truth-table matching and accessible tests are insufficient.",
+    "affected_scope": "Applications of TE20261008; inherited UCT axioms and frozen sources unchanged.",
+    "suggested_action": "Explicit physical implementation and faithful causal-role evidence.",
+    "verification_basis": "Manual boundary analysis; no real physical/phenomenal application verified."
+  },
+  {
+    "id": "TE20261008-G2",
+    "severity": "HIGH",
+    "title": "Complete versus selected organization",
+    "status": "OPEN",
+    "precise_source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §§2–9",
+    "argument_or_counterexample": "A selected reduct can agree while an omitted constitutive relation differs; complete-token sameness is not proven.",
+    "affected_scope": "Applications of TE20261008; inherited UCT axioms and frozen sources unchanged.",
+    "suggested_action": "Independent token-relative completeness or keep the selected conclusion.",
+    "verification_basis": "Manual boundary analysis; no real physical/phenomenal application verified."
+  },
+  {
+    "id": "TE20261008-G3",
+    "severity": "HIGH",
+    "title": "Phenomenological interpretation",
+    "status": "OPEN",
+    "precise_source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §§2–9",
+    "argument_or_counterexample": "Temporal comparison transport does not by itself identify familiar recollection, body mineness or felt duration.",
+    "affected_scope": "Applications of TE20261008; inherited UCT axioms and frozen sources unchanged.",
+    "suggested_action": "Independently motivated target interpretation and a failing contrast, retaining B_min/F_O/F_A.",
+    "verification_basis": "Manual boundary analysis; no real physical/phenomenal application verified."
+  },
+  {
+    "id": "TE20261008-G4",
+    "severity": "MEDIUM",
+    "title": "Replacement continuation",
+    "status": "OPEN",
+    "precise_source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §§2–9",
+    "argument_or_counterexample": "Isomorphic endpoints can be connected by a reset, destruction/rebuild or a branching copy.",
+    "affected_scope": "Applications of TE20261008; inherited UCT axioms and frozen sources unchanged.",
+    "suggested_action": "Actual transition/lineage analysis; no claim that small steps prove persistence.",
+    "verification_basis": "Manual boundary analysis; no real physical/phenomenal application verified."
+  },
+  {
+    "id": "TE20261008-G5",
+    "severity": "MEDIUM",
+    "title": "Richness ordering",
+    "status": "OPEN",
+    "precise_source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §§2–9",
+    "argument_or_counterexample": "The log image ratio is a selected finite capacity, not a scalar amount of experience; other relations may be lost.",
+    "affected_scope": "Applications of TE20261008; inherited UCT axioms and frozen sources unchanged.",
+    "suggested_action": "Specify a multidimensional partial order and test preservation/increase dimensions.",
+    "verification_basis": "Manual boundary analysis; no real physical/phenomenal application verified."
+  },
+  {
+    "id": "TE20261008-G6",
+    "severity": "MEDIUM",
+    "title": "Discriminating prediction and originality",
+    "status": "OPEN",
+    "precise_source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §§2–9",
+    "argument_or_counterexample": "Standard isomorphism, chain rule, counting and neural replacement precedents do not establish empirical superiority or historical novelty.",
+    "affected_scope": "Applications of TE20261008; inherited UCT axioms and frozen sources unchanged.",
+    "suggested_action": "A bounded independently testable target-level contrast and targeted prior-art comparison.",
+    "verification_basis": "Manual boundary analysis; no real physical/phenomenal application verified."
+  },
+  {
+    "id": "TE20261008-G7",
+    "severity": "HIGH",
+    "title": "History carrier and current-experience scope",
+    "status": "OPEN",
+    "precise_source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §7.1; R173 §§2–3,6",
+    "argument_or_counterexample": "A present representation of history need not contain the earlier physical event. If complete current types match, C1 forbids deriving different current complete experiences merely from screened external past.",
+    "affected_scope": "R173 RetBind application and TE-S/TE-R actual history formulas; not a refutation of their conditional K-grounding theorem.",
+    "suggested_action": "Declare the extended history token or independently grounded internal historical relation; keep bearer lineage distinct from trace reachability and target time explicit.",
+    "verification_basis": "Source A:C1_OI, R159 external-parameter boundary, and direct formula typing; actual historical realization remains unverified."
+  }
+]

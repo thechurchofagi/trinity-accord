@@ -211,3 +211,14 @@ QC-01–05 stay RESOLVED on the reviewer's scopes. QC-06/07 remain OPEN awaiting
 ## RESEARCHER-ROUND-R173 — retentive-history main-line advance
 
 R173 uses the submitted QC-06/07 effective overlay as a mandatory premise package and does not use the three suspended raw R172 rules. It does not self-close QC-06/07. The round moves to the planned B_min/F_O/F_A comparison: current action availability, a current agency loop and actual retentive same-lineage binding are typed separately. The exact same-present/different-history witness blocks recovery of RetBind from current action/agency alone; `phi_fam=phi_path AND RetBind` is transported only under the full corrected grounding/parameter/binding contract. `B_fam`, physical realization and measurement remain open. Evidence is in `records/R173_Familiar_Mineness_and_Retentive_History_20261008/`.
+
+
+## AUTHOR-REQUESTED-EXTENSION-TE20261008 — organization transformations
+
+Status: RESEARCH_CONTRIBUTION_WITH_SELF_CHECK; not an independent review or QC closure. The author requested the current live discussion be formalized and connected to the map. Read records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md and its proof/gap/audit files. The extension uses the corrected R172 actual-path/evidence distinction and R157 formula transport. It adds ten nodes and five all_of rules while preserving historical entries and mandatory effective overlays.
+
+Stable open items TE20261008-G1–G7 are in GAP_LEDGER.json with severity, source, argument/counterexample, scope, action, status and verification basis. The principal result is a one-wire temporal-comparison refinement with fixed stored-state count, plus a general finite fiber proof and delay-aware retiming. Earlier live-chat suggestions of full sameness from a diagram, uniquely located subjecthood, or felt-time invariance are explicitly narrowed in §9. No original frozen paper or R172 source is rewritten. QC-06/07 remain pending reviewer assessment; QC-01–05 remain resolved on their recorded scopes.
+
+Next reviewer: check the actual/selected/complete scope and theta_T grounding first; do not close real implementation, familiar temporal experience or mineness gaps using the finite checks. The finite repertoire calculation is not an actual experiential-bit measurement.
+
+Concurrent R173 was read before save and preserved. New §7.1 distinguishes actual causal trace migration from unrelated equal-value initialization and proves finite faithful-relay endpoint-reachability preservation. TE20261008-G7 records a high-priority application scope obligation: use an actual history-containing token or a grounded internal relation; do not let an external past alone change an identical complete current experiential type. This is a conditional-application clarification, not independent review closure or a declaration that R173 is false.

@@ -1,0 +1,35 @@
+{
+  "id": "TE20261008-MAP-AUDIT",
+  "date": "2026-10-08",
+  "base_commit": "8df66b1bcf7c21795c4fba67eb1061815bf8c645",
+  "actual_reading_scope": "Latest entry blocks; R172 complete QC response/overlay; A sections and C sections listed in note; R157/R159 relevant setup/proofs; R147/R149 relevant graph contracts. Historical source material not exhaustively reread.",
+  "manual_proofs": [
+    "T1 composition of grounded selected isomorphisms, full/selected counterexample",
+    "T2 chain rule with all delay/history/input scaling",
+    "T3 general disjoint-fiber proof and one-wire witness",
+    "T4 conditional actual-formula transport via R157 and corrected R172 path distinction",
+    "T5 faithful relay path expansion/contraction and copying induction; not numerical lineage"
+  ],
+  "joint_satisfiability": "The finite faithful circuit and its copy interpreted as E give an abstract conditional witness for the formal package. This is no independent actuality or C1 validation; the physical bridge remains explicit.",
+  "direction_audit": [
+    "No selected match promoted to complete type identity",
+    "No test-family change promoted to ontic change",
+    "No count/richness ratio promoted to current experience quantity",
+    "No material, speed, memory, report or integration threshold on basal existence",
+    "No separate-part invariants promoted to complete whole without actual interface premises",
+    "No numerical identity or unique subject inferred from structural correspondence"
+  ],
+  "machine_checks": "CHECK_RESULTS.json; 24 bounded checks, 240 finite support/gate cases and 192 relay substitutions. General proofs remain manual.",
+  "novelty": "Standard mathematics and Chalmers 1995 neural replacement credited. Project-specific explicit comparison/witness, not a new universal theory or historical-first claim.",
+  "open_gaps": [
+    "TE20261008-G1",
+    "TE20261008-G2",
+    "TE20261008-G3",
+    "TE20261008-G4",
+    "TE20261008-G5",
+    "TE20261008-G6",
+    "TE20261008-G7"
+  ],
+  "reviewer_status": "QC06/07 unchanged; this is substantive research and self-check, not independent peer review.",
+  "concurrent_update": "R173 note/extension/gaps read and all current source objects preserved; master version 23."
+}

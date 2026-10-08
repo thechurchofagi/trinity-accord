@@ -1,3 +1,19 @@
+# Author-requested extension — TE20261008 organization transformations
+
+Latest saved scheduled research basis: R173 at 8df66b1bcf7c21795c4fba67eb1061815bf8c645, retaining R172 QC-06/07 effective corrections. This dialogue extension does **not** reserve R174. Current aggregate graph: **R173-TE20261008-v1.0, 526 nodes / 253 rules / 154 context links**. All prior node/rule/context objects are preserved. Read [the English derivation](records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md), [Chinese explanation](records/TE20261008_Organization_Transformations/REVIEW_ZH.md), [proof ledger](records/TE20261008_Organization_Transformations/PROOF_LEDGER.json), [map extension](records/TE20261008_Organization_Transformations/MAP_EXTENSION.json), [open gaps](records/TE20261008_Organization_Transformations/GAP_LEDGER.json), and [checks](records/TE20261008_Organization_Transformations/CHECK_RESULTS.json).
+
+The author asks to retain and connect distant hemispheres/fiber links, gradual silicon substitution, cosmic mechanical networks, brain-versus-artificial organization, and minimal relational increments. The concrete new witness reroutes one XOR operand from current x to retained past m: the selected (x,comparison) repertoire grows from two to four while both mechanisms retain the same four stored states. The general finite fiber argument is in §6. Its conditional experiential conclusion is a grounded past-to-present relation, not doubled experience, familiar recollection or a new basal gate. The retiming proof scales every relevant delay/history/input; physical distance and slow mechanics alone establish neither equivalence nor its failure.
+
+R173 adds same-lineage retentive use. Section 7.1 now proves preservation of old-endpoint ancestry under faithful relay subdivision, so an actual causal migration can preserve a selected trace relation; unrelated equal-value initialization need not. This does not prove numerical identity or a unique successor. History witnesses require the declared token to contain them or a justified internal historical relation; no current-experience difference is inferred solely from a screened external past.
+
+Required reading for all effective graph use remains the R171 and R172 REVIEW_AMENDMENTS.json overlays. This extension does not execute the three suspended raw R172 rules. QC-01–05 retain their reviewer-resolved scopes; QC-06/07 remain submitted/pending review, not self-closed. C1, actual realization, complete versus selected structure, B_min/F_O/F_A, lineage and subject individuation retain their separate statuses.
+
+Current bounded research question, reflecting the author's new instruction: compare retained history with actually used temporal relation under fixed present input, memory availability and report; specify a noncircular target interpretation and a failure condition. Connect that result to body/agency relations when warranted. Do not turn this into another certificate/statistics series or rank total experience by node/state/parameter count. No publication, schedule change or assistant-consciousness conclusion is authorized by this checkpoint.
+
+Earlier current/latest notices below are historical where superseded. Their substantive evidence and open obligations are retained.
+
+---
+
 # R173 audit — current action, retentive history and semantic direction
 
 R173 passes 12/12 finite and map checks. The graph has **516 nodes / 248 rules / 145 context links**; its exact parent is R172-v1.0 at 506/244/141. New IDs are unique, endpoints exist, the combined recorded dependency graph is acyclic, and every new rule retains its exact simultaneous `all_of` premises.

@@ -1,0 +1,580 @@
+{
+  "scope": "All ten new nodes and five new all_of rules; existing R173 entries preserved; no all-map semantic review.",
+  "nodes": [
+    {
+      "id": "TE20261008:COMPARISON_SETUP",
+      "kind": "DECLARED_ACTUAL_COMPARISON_PREMISE",
+      "label": "Actual pair, grounded signature and comparison map",
+      "statement": "For each of two independently admitted actual tokens fix P_i,I_i, common token-relative complete K,D_i,E_i and C1 instance; select grounded relational Sigma contained in K, declared pointed current states/ports/physical parameters, and an actual Sigma-isomorphism f for the preservation route. An abstract model, diagram, transcript or evidence certificate does not establish these instances.",
+      "domain": "Actual-pair scope with independently established or explicitly conditional realization; full versus selected types and support/reference/lineage targets remain separate.",
+      "scope": "Actual-pair scope with independently established or explicitly conditional realization; full versus selected types and support/reference/lineage targets remain separate.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §§2–3",
+      "source_lineage": "A §3.5; R149 complete/selected target; R157 setup; R159 internal/external sorts; corrected R172 target/evidence distinction.",
+      "status": "EXPLICIT_PREMISE_NOT_DISCHARGED_FOR_REAL_SYSTEMS",
+      "proof": "Premise declaration; no actual brain, silicon or mechanical instance is certified.",
+      "counterexamples_and_limits": "See manuscript §§3–7 and GAP_LEDGER.json. No empirical C1 proof, exclusive owner or assistant-consciousness verdict.",
+      "formal_contract_TE20261008": {
+        "object_domain": "Actual-pair scope with independently established or explicitly conditional realization; full versus selected types and support/reference/lineage targets remain separate.",
+        "quantifiers": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "bearer_time_signature": "P_i,I_i,K,Sigma and physical parameters are fixed per actual application; mathematical models have their explicit domains.",
+        "source_anchor": {
+          "path": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md",
+          "sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+          "locator": "§§2–3"
+        },
+        "purpose": "Explain preserved and changed experiential relations across the author’s distance/substrate/tempo/rewiring experiments.",
+        "thought_experiments": [
+          "TE-H",
+          "TE-S",
+          "TE-M",
+          "TE-A",
+          "TE-R"
+        ],
+        "open_obligations": [
+          "TE20261008-G1",
+          "TE20261008-G2",
+          "TE20261008-G3",
+          "TE20261008-G4",
+          "TE20261008-G5",
+          "TE20261008-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "TE20261008:SELECTED_TRANSPORT",
+      "kind": "CONDITIONAL_THEOREM",
+      "label": "Transfer of a grounded selected structural comparison",
+      "statement": "Under COMPARISON_SETUP and C1, a Sigma-isomorphism f transports as g=h_1 f h_0^-1 between experiential reducts. The converse holds. A grounded Sigma-sentence difference gives a corresponding experiential difference. Equality of proper reducts need not give complete K-type equality.",
+      "domain": "All bindings and parameter transports simultaneous; only declared Sigma, complete case recovers existing A:C1_OI.",
+      "scope": "All bindings and parameter transports simultaneous; only declared Sigma, complete case recovers existing A:C1_OI.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §3",
+      "source_lineage": "R157 formula preservation; A:C1_OI; R149:NULL_TARGET.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "proof": "Compose restricted isomorphisms. A further unary K-predicate empty versus nonempty supplies the proper-reduct counterexample.",
+      "counterexamples_and_limits": "See manuscript §§3–7 and GAP_LEDGER.json. No empirical C1 proof, exclusive owner or assistant-consciousness verdict.",
+      "formal_contract_TE20261008": {
+        "object_domain": "All bindings and parameter transports simultaneous; only declared Sigma, complete case recovers existing A:C1_OI.",
+        "quantifiers": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "bearer_time_signature": "P_i,I_i,K,Sigma and physical parameters are fixed per actual application; mathematical models have their explicit domains.",
+        "source_anchor": {
+          "path": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md",
+          "sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+          "locator": "§3"
+        },
+        "purpose": "Explain preserved and changed experiential relations across the author’s distance/substrate/tempo/rewiring experiments.",
+        "thought_experiments": [
+          "TE-H",
+          "TE-S",
+          "TE-M",
+          "TE-A",
+          "TE-R"
+        ],
+        "open_obligations": [
+          "TE20261008-G1",
+          "TE20261008-G2",
+          "TE20261008-G3",
+          "TE20261008-G4",
+          "TE20261008-G5",
+          "TE20261008-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "te20261008_selected_transport",
+            "all_of": [
+              "A:C1",
+              "TE20261008:COMPARISON_SETUP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TE20261008:RETIMING_SETUP",
+      "kind": "DECLARED_MATHEMATICAL_MODEL",
+      "label": "Delayed dynamics with an explicit rescaling",
+      "statement": "Fix an actual differentiable solution of xdot=F(x(t),x(t-d_1),...,x(t-d_m),u(t)), supplied history, fixed delays and constant alpha>0. Set y(t)=x(t/alpha),v(t)=u(t/alpha); scale initial history and every relevant delay together. This is a mathematical solution assumption, not a hardware realization claim.",
+      "domain": "Declared classical time model only; fixed-unit time structure and rescaled/order comparison are different.",
+      "scope": "Declared classical time model only; fixed-unit time structure and rescaled/order comparison are different.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §5",
+      "source_lineage": "Elementary change of variable; A §3.5 temporal comparison discipline.",
+      "status": "DEFINITION_OR_MODEL",
+      "proof": "Model declaration with all delays, histories, current states and input schedules bound.",
+      "counterexamples_and_limits": "See manuscript §§3–7 and GAP_LEDGER.json. No empirical C1 proof, exclusive owner or assistant-consciousness verdict.",
+      "formal_contract_TE20261008": {
+        "object_domain": "Declared classical time model only; fixed-unit time structure and rescaled/order comparison are different.",
+        "quantifiers": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "bearer_time_signature": "P_i,I_i,K,Sigma and physical parameters are fixed per actual application; mathematical models have their explicit domains.",
+        "source_anchor": {
+          "path": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md",
+          "sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+          "locator": "§5"
+        },
+        "purpose": "Explain preserved and changed experiential relations across the author’s distance/substrate/tempo/rewiring experiments.",
+        "thought_experiments": [
+          "TE-H",
+          "TE-S",
+          "TE-M",
+          "TE-A",
+          "TE-R"
+        ],
+        "open_obligations": [
+          "TE20261008-G1",
+          "TE20261008-G2",
+          "TE20261008-G3",
+          "TE20261008-G4",
+          "TE20261008-G5",
+          "TE20261008-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "TE20261008:RETIMING_RESULT",
+      "kind": "MATHEMATICAL_THEOREM",
+      "label": "Delay-aware retiming correspondence",
+      "statement": "Under RETIMING_SETUP, ydot=(1/alpha)F(y(t),y(t-alpha*d_1),...,y(t-alpha*d_m),v(t)); the inverse is x(s)=y(alpha*s). Slowing local dynamics alone does not establish the correspondence. No physical feasibility or subjective-duration equivalence follows.",
+      "domain": "Every supplied solution and alpha>0 on the corresponding rescaled intervals/histories; no new global existence claim.",
+      "scope": "Every supplied solution and alpha>0 on the corresponding rescaled intervals/histories; no new global existence claim.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §5",
+      "source_lineage": "Standard dynamics; organizational-invariance thought experiments are credited to Chalmers 1995.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "proof": "Chain rule and y(t-alpha*d)=x(t/alpha-d), with the inverse substitution. The Boolean one-step feedback delay supplies a mismatch witness.",
+      "counterexamples_and_limits": "See manuscript §§3–7 and GAP_LEDGER.json. No empirical C1 proof, exclusive owner or assistant-consciousness verdict.",
+      "formal_contract_TE20261008": {
+        "object_domain": "Every supplied solution and alpha>0 on the corresponding rescaled intervals/histories; no new global existence claim.",
+        "quantifiers": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "bearer_time_signature": "P_i,I_i,K,Sigma and physical parameters are fixed per actual application; mathematical models have their explicit domains.",
+        "source_anchor": {
+          "path": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md",
+          "sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+          "locator": "§5"
+        },
+        "purpose": "Explain preserved and changed experiential relations across the author’s distance/substrate/tempo/rewiring experiments.",
+        "thought_experiments": [
+          "TE-H",
+          "TE-S",
+          "TE-M",
+          "TE-A",
+          "TE-R"
+        ],
+        "open_obligations": [
+          "TE20261008-G1",
+          "TE20261008-G2",
+          "TE20261008-G3",
+          "TE20261008-G4",
+          "TE20261008-G5",
+          "TE20261008-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "te20261008_delay_retiming",
+            "all_of": [
+              "TE20261008:RETIMING_SETUP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TE20261008:REFINEMENT_SETUP",
+      "kind": "FINITE_MODEL_DEFINITION",
+      "label": "Retained current channel and new relational consumer",
+      "statement": "Fix nonempty finite R subset A x B, A_R its current-value projection, fibers B_a, baseline c0(a) and revised c1(a,b). O0=(a,c0(a)), O1=(a,c1(a,b)) share the SAME R and retain current a. Set r_a=|c1(a,B_a)|. Strict refinement route requires some r_a>1.",
+      "domain": "Finite selected repertoire, not all histories simultaneously actual; physical implementation remains additional.",
+      "scope": "Finite selected repertoire, not all histories simultaneously actual; physical implementation remains additional.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §6",
+      "source_lineage": "Classical image/fiber count; A §8.11 physical distinction discipline; C §4.2 joint information precedent.",
+      "status": "DEFINITION_OR_MODEL",
+      "proof": "Definitions and explicit strictness premise. Restricted R can block growth.",
+      "counterexamples_and_limits": "See manuscript §§3–7 and GAP_LEDGER.json. No empirical C1 proof, exclusive owner or assistant-consciousness verdict.",
+      "formal_contract_TE20261008": {
+        "object_domain": "Finite selected repertoire, not all histories simultaneously actual; physical implementation remains additional.",
+        "quantifiers": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "bearer_time_signature": "P_i,I_i,K,Sigma and physical parameters are fixed per actual application; mathematical models have their explicit domains.",
+        "source_anchor": {
+          "path": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md",
+          "sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+          "locator": "§6"
+        },
+        "purpose": "Explain preserved and changed experiential relations across the author’s distance/substrate/tempo/rewiring experiments.",
+        "thought_experiments": [
+          "TE-H",
+          "TE-S",
+          "TE-M",
+          "TE-A",
+          "TE-R"
+        ],
+        "open_obligations": [
+          "TE20261008-G1",
+          "TE20261008-G2",
+          "TE20261008-G3",
+          "TE20261008-G4",
+          "TE20261008-G5",
+          "TE20261008-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "TE20261008:RELATIONAL_INCREMENT",
+      "kind": "FINITE_MATHEMATICAL_THEOREM",
+      "label": "One routed use can refine distinctions without new storage",
+      "statement": "Under REFINEMENT_SETUP, |im O0|=|A_R| and |im O1|=sum_a r_a; pi(a,c)=(a,c0(a)) is onto and is noninjective iff some r_a>1. In the fixed two-bit XOR witness, rerouting one operand from x to retained m gives image sizes 2 and 4 with four stored states on both sides. The optional log2 ratio describes selected capacity only.",
+      "domain": "No total phenomenal amount, intelligence order or universal physical minimum. Retained old channel and reachable joint support are required.",
+      "scope": "No total phenomenal amount, intelligence order or universal physical minimum. Retained old channel and reachable joint support are required.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §6",
+      "source_lineage": "Elementary disjoint-union cardinality; existing storage-versus-actual-use distinction.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "proof": "Partition outputs by retained first coordinate a; each fiber has r_a outputs. The four-row witness is an application, not the general proof.",
+      "counterexamples_and_limits": "See manuscript §§3–7 and GAP_LEDGER.json. No empirical C1 proof, exclusive owner or assistant-consciousness verdict.",
+      "formal_contract_TE20261008": {
+        "object_domain": "No total phenomenal amount, intelligence order or universal physical minimum. Retained old channel and reachable joint support are required.",
+        "quantifiers": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "bearer_time_signature": "P_i,I_i,K,Sigma and physical parameters are fixed per actual application; mathematical models have their explicit domains.",
+        "source_anchor": {
+          "path": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md",
+          "sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+          "locator": "§6"
+        },
+        "purpose": "Explain preserved and changed experiential relations across the author’s distance/substrate/tempo/rewiring experiments.",
+        "thought_experiments": [
+          "TE-H",
+          "TE-S",
+          "TE-M",
+          "TE-A",
+          "TE-R"
+        ],
+        "open_obligations": [
+          "TE20261008-G1",
+          "TE20261008-G2",
+          "TE20261008-G3",
+          "TE20261008-G4",
+          "TE20261008-G5",
+          "TE20261008-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "te20261008_relational_increment",
+            "all_of": [
+              "TE20261008:REFINEMENT_SETUP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TE20261008:ACTUAL_TEMPORAL_BRIDGE",
+      "kind": "CONDITIONAL_PHYSICAL_APPLICATION_PREMISE",
+      "label": "Actually retained past value enters current comparison",
+      "statement": "Independently ground each TE-R token, current and earlier events, actual storage provenance, transfer and executed operand dependence, order, comparator law and consumer. In B the stored earlier value is actually read by the comparison; in A it is not. All predicates are K-definable, sorted, and physical parameters transport via h. Toy equations and test certificates alone do not discharge this premise.",
+      "domain": "Same bearer/interval on each side and explicit comparison across sides; W and certificate status are external. Direct conditional actual-role route, not the suspended raw R172 proof route.",
+      "scope": "Same bearer/interval on each side and explicit comparison across sides; W and certificate status are external. Direct conditional actual-role route, not the suspended raw R172 proof route.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §7",
+      "source_lineage": "R172 QC-07 OnticUse_path and its grounding obligation; R157 selector setup.",
+      "status": "EXPLICIT_PREMISE_NOT_DISCHARGED_FOR_REAL_SYSTEMS",
+      "proof": "Explicit application assumption with a faithful idealized realization witness; no biological or AI instance observed.",
+      "counterexamples_and_limits": "See manuscript §§3–7 and GAP_LEDGER.json. No empirical C1 proof, exclusive owner or assistant-consciousness verdict.",
+      "formal_contract_TE20261008": {
+        "object_domain": "Same bearer/interval on each side and explicit comparison across sides; W and certificate status are external. Direct conditional actual-role route, not the suspended raw R172 proof route.",
+        "quantifiers": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "bearer_time_signature": "P_i,I_i,K,Sigma and physical parameters are fixed per actual application; mathematical models have their explicit domains.",
+        "source_anchor": {
+          "path": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md",
+          "sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+          "locator": "§7"
+        },
+        "purpose": "Explain preserved and changed experiential relations across the author’s distance/substrate/tempo/rewiring experiments.",
+        "thought_experiments": [
+          "TE-H",
+          "TE-S",
+          "TE-M",
+          "TE-A",
+          "TE-R"
+        ],
+        "open_obligations": [
+          "TE20261008-G1",
+          "TE20261008-G2",
+          "TE20261008-G3",
+          "TE20261008-G4",
+          "TE20261008-G5",
+          "TE20261008-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "TE20261008:EXPERIENTIAL_TEMPORAL_CONTRAST",
+      "kind": "CONDITIONAL_APPLICATION_THEOREM",
+      "label": "Selected past-to-present relation inside experience",
+      "statement": "Under ACTUAL_TEMPORAL_BRIDGE and each admitted C1 instance, theta_T for the actual past-to-present operand path and theta_diff for its unequal values are preserved and reflected by h. B versus A differs on the selected path; B episodes (x,m)=(1,0) and (1,1) differ on theta_diff despite equal current x. No familiar recollection, felt duration, unity, richness total or new basal-existence gate follows.",
+      "domain": "Grounded actual episodes only; repertoire growth is separate and cannot instantiate unexecuted histories.",
+      "scope": "Grounded actual episodes only; repertoire growth is separate and cannot instantiate unexecuted histories.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §7",
+      "source_lineage": "R157:COORDINATE_TRANSPORT; corrected R172 actual path; R159 support/reference separation.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "proof": "Instantiate R157 formula preservation at theta_T and theta_diff, transporting actual existential witnesses and every physical parameter.",
+      "counterexamples_and_limits": "See manuscript §§3–7 and GAP_LEDGER.json. No empirical C1 proof, exclusive owner or assistant-consciousness verdict.",
+      "formal_contract_TE20261008": {
+        "object_domain": "Grounded actual episodes only; repertoire growth is separate and cannot instantiate unexecuted histories.",
+        "quantifiers": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "bearer_time_signature": "P_i,I_i,K,Sigma and physical parameters are fixed per actual application; mathematical models have their explicit domains.",
+        "source_anchor": {
+          "path": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md",
+          "sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+          "locator": "§7"
+        },
+        "purpose": "Explain preserved and changed experiential relations across the author’s distance/substrate/tempo/rewiring experiments.",
+        "thought_experiments": [
+          "TE-H",
+          "TE-S",
+          "TE-M",
+          "TE-A",
+          "TE-R"
+        ],
+        "open_obligations": [
+          "TE20261008-G1",
+          "TE20261008-G2",
+          "TE20261008-G3",
+          "TE20261008-G4",
+          "TE20261008-G5",
+          "TE20261008-G6"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "te20261008_temporal_experiential_contrast",
+            "all_of": [
+              "A:C1",
+              "R157:COORDINATE_TRANSPORT",
+              "TE20261008:ACTUAL_TEMPORAL_BRIDGE"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TE20261008:RELAY_SETUP",
+      "kind": "FINITE_ACTUAL_EVENT_MODEL_PREMISE",
+      "label": "Faithful replacement relays on a declared event domain",
+      "statement": "Fix a finite directed trace-event graph, one edge u->v, fresh temporally ordered relay events, faithful copies along the replacement chain, no other incident routes at fresh events and no other old-graph change. Physical applications require actual events and a token/history domain containing them; branch ancestry is distinct from bearer lineage.",
+      "domain": "Finite trace-event graph and fixed old endpoints; optional actual applications independently grounded.",
+      "scope": "Exact edge subdivision, not arbitrary replacement, current/full history conflation or unique continuation.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §7.1",
+      "source_lineage": "R173 retentive binding, R172 actual-path distinction and elementary graph path subdivision.",
+      "status": "EXPLICIT_PREMISE_NOT_DISCHARGED_FOR_REAL_SYSTEMS",
+      "proof": "Explicit finite model and physical-application assumptions; not a hardware or lineage certificate.",
+      "counterexamples_and_limits": "See manuscript §§3–7 and GAP_LEDGER.json. No empirical C1 proof, exclusive owner or assistant-consciousness verdict.",
+      "formal_contract_TE20261008": {
+        "object_domain": "Finite trace-event graph and fixed old endpoints; optional actual applications independently grounded.",
+        "quantifiers": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "bearer_time_signature": "A fixed finite actual/idealized event interval containing the claimed past and present endpoints; common value types and declared relay timing.",
+        "source_anchor": {
+          "path": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md",
+          "sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+          "locator": "§7.1"
+        },
+        "purpose": "Explain what gradual silicon/mechanical replacement can preserve beyond copying the current value.",
+        "thought_experiments": [
+          "TE-H",
+          "TE-S",
+          "TE-M",
+          "TE-A",
+          "TE-R"
+        ],
+        "open_obligations": [
+          "TE20261008-G1",
+          "TE20261008-G2",
+          "TE20261008-G3",
+          "TE20261008-G4",
+          "TE20261008-G5",
+          "TE20261008-G6",
+          "TE20261008-G7"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "TE20261008:RELAY_PROVENANCE",
+      "kind": "CONDITIONAL_RELATIONAL_THEOREM",
+      "label": "Selected provenance can survive material replacement",
+      "statement": "Under RELAY_SETUP, replacing u->v by the fresh relay chain preserves directed reachability between all old endpoints and faithfully transmitted values. Any finite sequence preserves this selected ancestry relation. Full graph isomorphism, RetBind other clauses, numerical identity and unique subjecthood do not follow.",
+      "domain": "Finite trace-event graph and fixed old endpoints; optional actual applications independently grounded.",
+      "scope": "Exact edge subdivision, not arbitrary replacement, current/full history conflation or unique continuation.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §7.1",
+      "source_lineage": "R173 retentive binding, R172 actual-path distinction and elementary graph path subdivision.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "proof": "Expand old paths through the chain and contract new paths between old endpoints; fresh vertices have no other incident routes. Induct over substitutions and copy events; physical timing remains a premise.",
+      "counterexamples_and_limits": "See manuscript §§3–7 and GAP_LEDGER.json. No empirical C1 proof, exclusive owner or assistant-consciousness verdict.",
+      "formal_contract_TE20261008": {
+        "object_domain": "Finite trace-event graph and fixed old endpoints; optional actual applications independently grounded.",
+        "quantifiers": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "bearer_time_signature": "A fixed finite actual/idealized event interval containing the claimed past and present endpoints; common value types and declared relay timing.",
+        "source_anchor": {
+          "path": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md",
+          "sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+          "locator": "§7.1"
+        },
+        "purpose": "Explain what gradual silicon/mechanical replacement can preserve beyond copying the current value.",
+        "thought_experiments": [
+          "TE-H",
+          "TE-S",
+          "TE-M",
+          "TE-A",
+          "TE-R"
+        ],
+        "open_obligations": [
+          "TE20261008-G1",
+          "TE20261008-G2",
+          "TE20261008-G3",
+          "TE20261008-G4",
+          "TE20261008-G5",
+          "TE20261008-G6",
+          "TE20261008-G7"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "te20261008_relay_provenance",
+            "all_of": [
+              "TE20261008:RELAY_SETUP"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "te20261008_selected_transport",
+      "all_of": [
+        "A:C1",
+        "TE20261008:COMPARISON_SETUP"
+      ],
+      "conclusion": "TE20261008:SELECTED_TRANSPORT",
+      "statement": "Under COMPARISON_SETUP and C1, a Sigma-isomorphism f transports as g=h_1 f h_0^-1 between experiential reducts. The converse holds. A grounded Sigma-sentence difference gives a corresponding experiential difference. Equality of proper reducts need not give complete K-type equality.",
+      "proof_sketch": "Compose restricted isomorphisms. A further unary K-predicate empty versus nonempty supplies the proper-reduct counterexample.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §3",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "review": "MANUAL_PREMISES_SCOPE_AND_DIRECTION_REVIEW",
+      "formal_contract_TE20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "identical binding within each actual application",
+          "correctly grounded common signature and physical parameter transport when C1 is used",
+          "no certificate-to-role inference without an independent bridge"
+        ],
+        "quantification": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "proof_location": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §3",
+        "source_sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "te20261008_delay_retiming",
+      "all_of": [
+        "TE20261008:RETIMING_SETUP"
+      ],
+      "conclusion": "TE20261008:RETIMING_RESULT",
+      "statement": "Under RETIMING_SETUP, ydot=(1/alpha)F(y(t),y(t-alpha*d_1),...,y(t-alpha*d_m),v(t)); the inverse is x(s)=y(alpha*s). Slowing local dynamics alone does not establish the correspondence. No physical feasibility or subjective-duration equivalence follows.",
+      "proof_sketch": "Chain rule and y(t-alpha*d)=x(t/alpha-d), with the inverse substitution. The Boolean one-step feedback delay supplies a mismatch witness.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §5",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "review": "MANUAL_PREMISES_SCOPE_AND_DIRECTION_REVIEW",
+      "formal_contract_TE20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "identical binding within each actual application",
+          "correctly grounded common signature and physical parameter transport when C1 is used",
+          "no certificate-to-role inference without an independent bridge"
+        ],
+        "quantification": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "proof_location": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §5",
+        "source_sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "te20261008_relational_increment",
+      "all_of": [
+        "TE20261008:REFINEMENT_SETUP"
+      ],
+      "conclusion": "TE20261008:RELATIONAL_INCREMENT",
+      "statement": "Under REFINEMENT_SETUP, |im O0|=|A_R| and |im O1|=sum_a r_a; pi(a,c)=(a,c0(a)) is onto and is noninjective iff some r_a>1. In the fixed two-bit XOR witness, rerouting one operand from x to retained m gives image sizes 2 and 4 with four stored states on both sides. The optional log2 ratio describes selected capacity only.",
+      "proof_sketch": "Partition outputs by retained first coordinate a; each fiber has r_a outputs. The four-row witness is an application, not the general proof.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §6",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "review": "MANUAL_PREMISES_SCOPE_AND_DIRECTION_REVIEW",
+      "formal_contract_TE20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "identical binding within each actual application",
+          "correctly grounded common signature and physical parameter transport when C1 is used",
+          "no certificate-to-role inference without an independent bridge"
+        ],
+        "quantification": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "proof_location": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §6",
+        "source_sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "te20261008_temporal_experiential_contrast",
+      "all_of": [
+        "A:C1",
+        "R157:COORDINATE_TRANSPORT",
+        "TE20261008:ACTUAL_TEMPORAL_BRIDGE"
+      ],
+      "conclusion": "TE20261008:EXPERIENTIAL_TEMPORAL_CONTRAST",
+      "statement": "Under ACTUAL_TEMPORAL_BRIDGE and each admitted C1 instance, theta_T for the actual past-to-present operand path and theta_diff for its unequal values are preserved and reflected by h. B versus A differs on the selected path; B episodes (x,m)=(1,0) and (1,1) differ on theta_diff despite equal current x. No familiar recollection, felt duration, unity, richness total or new basal-existence gate follows.",
+      "proof_sketch": "Instantiate R157 formula preservation at theta_T and theta_diff, transporting actual existential witnesses and every physical parameter.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §7",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "review": "MANUAL_PREMISES_SCOPE_AND_DIRECTION_REVIEW",
+      "formal_contract_TE20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "identical binding within each actual application",
+          "correctly grounded common signature and physical parameter transport when C1 is used",
+          "no certificate-to-role inference without an independent bridge"
+        ],
+        "quantification": "For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced.",
+        "proof_location": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §7",
+        "source_sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "te20261008_relay_provenance",
+      "all_of": [
+        "TE20261008:RELAY_SETUP"
+      ],
+      "conclusion": "TE20261008:RELAY_PROVENANCE",
+      "statement": "Under RELAY_SETUP, replacing u->v by the fresh relay chain preserves directed reachability between all old endpoints and faithfully transmitted values. Any finite sequence preserves this selected ancestry relation. Full graph isomorphism, RetBind other clauses, numerical identity and unique subjecthood do not follow.",
+      "proof_sketch": "Expand old paths through the chain and contract new paths between old endpoints; fresh vertices have no other incident routes. Induct over substitutions and copy events; physical timing remains a premise.",
+      "source": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §7.1",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "review": "MANUAL_FINITE_PATH_EXPANSION_CONTRACTION_PROOF",
+      "formal_contract_TE20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same finite event domain and old endpoints",
+          "actual transfer and faithful values if physically applied",
+          "all R173 RetBind other clauses remain independent"
+        ],
+        "quantification": "Every old endpoint pair and every finite sequence satisfying RELAY_SETUP",
+        "proof_location": "records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md §7.1",
+        "source_sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4",
+        "machine_proof": false
+      }
+    }
+  ]
+}

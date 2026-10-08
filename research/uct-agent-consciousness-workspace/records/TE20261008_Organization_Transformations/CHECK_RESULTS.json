@@ -1,0 +1,133 @@
+{
+  "scope": "Exact toy regression and additive graph/source checks. Manual general proofs are in the note. No empirical experiment, full-map semantic proof or C1 validation.",
+  "checks": [
+    {
+      "name": "fixed_storage_one_wire_witness",
+      "pass": true,
+      "scope": "Exact four-row repertoire; both mechanisms retain two bits. No physical realization claimed."
+    },
+    {
+      "name": "current_channel_retained",
+      "pass": true,
+      "scope": "Projection pi(x,c)=(x,0)."
+    },
+    {
+      "name": "matched_current_temporal_contrast",
+      "pass": true,
+      "scope": "Same current x=1; comparator distinguishes m=0 from m=1."
+    },
+    {
+      "name": "matched_baseline_not_role_identity",
+      "pass": true,
+      "scope": "An equal baseline output does not identify the stored-past operand path."
+    },
+    {
+      "name": "all_boolean_joint_supports",
+      "pass": true,
+      "scope": "240 finite support/gate cases regress the general disjoint-fiber proof; not its replacement."
+    },
+    {
+      "name": "restricted_reachability_blocks_strict_gain",
+      "pass": true,
+      "scope": "Missing mixed histories prevents strict refinement; gate size alone is insufficient."
+    },
+    {
+      "name": "unscaled_delay_countermodel",
+      "pass": true,
+      "scope": "Declared-step feedback mismatch; not a subjective-time measurement."
+    },
+    {
+      "name": "retiming_delay_identity",
+      "pass": true,
+      "scope": "Exact rational samples of y(t-alpha*d)=x(t/alpha-d); general argument is the chain rule in the manuscript."
+    },
+    {
+      "name": "selected_equal_full_different",
+      "pass": true,
+      "scope": "Two abstract equal-carrier reducts; unary extra K predicate separates full structures."
+    },
+    {
+      "name": "unique_node_rule_ids",
+      "pass": true,
+      "scope": "Graph syntax only."
+    },
+    {
+      "name": "all_rule_endpoints",
+      "pass": true,
+      "scope": "References only, not logical validity."
+    },
+    {
+      "name": "all_context_endpoints",
+      "pass": true,
+      "scope": "Context links are not proof edges."
+    },
+    {
+      "name": "new_nodes_exact",
+      "pass": true,
+      "scope": "Exact extension objects present in aggregate."
+    },
+    {
+      "name": "new_rules_exact",
+      "pass": true,
+      "scope": "Exact extension objects present in aggregate."
+    },
+    {
+      "name": "new_context_links_exact",
+      "pass": true,
+      "scope": "Exact extension objects present in aggregate."
+    },
+    {
+      "name": "old_nodes_prefix_preserved",
+      "pass": true,
+      "scope": "All pre-existing entries preserved field-for-field, including historical rules and effective overlays."
+    },
+    {
+      "name": "old_rules_prefix_preserved",
+      "pass": true,
+      "scope": "All pre-existing entries preserved field-for-field, including historical rules and effective overlays."
+    },
+    {
+      "name": "old_context_links_prefix_preserved",
+      "pass": true,
+      "scope": "All pre-existing entries preserved field-for-field, including historical rules and effective overlays."
+    },
+    {
+      "name": "new_all_of_contracts",
+      "pass": true,
+      "scope": "Exact five rule premise routes; actual/model/axiom premises remain explicit."
+    },
+    {
+      "name": "new_source_hashes",
+      "pass": true,
+      "scope": "New source bytes match every new node anchor."
+    },
+    {
+      "name": "new_routes_do_not_execute_suspended_rules",
+      "pass": true,
+      "scope": "New C1 route uses independently grounded actual role plus R157; R172 only contextual/effective."
+    },
+    {
+      "name": "aggregate_acyclic_syntax",
+      "pass": true,
+      "scope": "Acyclicity is not semantic consistency or proof verification."
+    },
+    {
+      "name": "faithful_relay_endpoint_regression",
+      "pass": true,
+      "scope": "192 DAG/edge substitutions check endpoint reachability; general proof is path expansion/contraction, not enumeration."
+    },
+    {
+      "name": "migration_vs_fresh_initialization",
+      "pass": true,
+      "scope": "Equal final values stipulated; only the actual migration graph has the source-to-consumer path. No unique lineage inferred."
+    }
+  ],
+  "passed": 24,
+  "graph_counts": {
+    "nodes": 526,
+    "rules": 253,
+    "context_links": 154
+  },
+  "toy_support_gate_cases": 240,
+  "source_sha256": "c28624f5d70710e4f0b6ebec7c5ea57c3143b863155369d93bf06ba4f9174ac4"
+}
