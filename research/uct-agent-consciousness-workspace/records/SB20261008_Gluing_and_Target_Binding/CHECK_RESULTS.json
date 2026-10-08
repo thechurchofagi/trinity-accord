@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-08",
+  "status": "PASS",
+  "verified_scopes": {
+    "A": "crosswire q=1 outputs identical; do(q=0) produces different internal port roles",
+    "B": "3 marginal-consistent pairwise constraints with zero jointly admitted assignments",
+    "C": "same three pairwise marginals, joint support sizes 8 and 4",
+    "D": "shared update compatibility only for a=b, 4 of 8 states",
+    "E": "separately isomorphic nodes but no natural isomorphism over incompatible proposed arrow family"
+  },
+  "epistemic_status": "exact finite statements only; no empirical or phenomenal validation",
+  "code": "check_models.py"
+}
