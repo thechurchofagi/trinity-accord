@@ -1,0 +1,74 @@
+{
+  "round": "R174",
+  "reading_date": "2026-10-08",
+  "sources": [
+    {
+      "id": "A/I-v1.2",
+      "type": "fixed UCT source",
+      "location": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "scope_read": "§§2.5,3.5,C1,6.4,8.11-8.14,14.7",
+      "use": "token/signature/physical-witness/C1/self boundaries"
+    },
+    {
+      "id": "R157",
+      "type": "project source",
+      "location": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md",
+      "sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+      "scope_read": "complete note",
+      "use": "formula transport and semantic residual"
+    },
+    {
+      "id": "R172-effective",
+      "type": "mandatory effective overlay",
+      "location": "records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_AMENDMENTS.json",
+      "sha256": "a5b4b6f6d378cd31d7b727af8e9319ae5418db9520328fb8d910d9e3a1978931",
+      "scope_read": "complete file",
+      "use": "actual role/evidence/parameter separation"
+    },
+    {
+      "id": "R173",
+      "type": "project source",
+      "location": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa",
+      "scope_read": "complete note",
+      "use": "retentive history and F_O/F_A/F_F separation"
+    },
+    {
+      "id": "TO20261008",
+      "type": "project source",
+      "location": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md",
+      "sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+      "scope_read": "complete note",
+      "use": "S/C model, P2/P3, B_order"
+    },
+    {
+      "id": "Stetson2006",
+      "type": "primary human study",
+      "citation": "Stetson C, Cui X, Montague PR, Eagleman DM. Neuron 51:651-659.",
+      "doi": "10.1016/j.neuron.2006.08.006",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16950162/",
+      "scope_read": "Current round: PubMed abstract; inherited TO20261008 documents targeted full-article reading of results, discussion and behavioral methods. No raw-data reanalysis.",
+      "use": "motivates experienced-order target; does not identify S/C"
+    },
+    {
+      "id": "Sugano2010",
+      "type": "primary human study",
+      "citation": "Sugano Y, Keetels M, Vroomen J. Exp Brain Res 201:393-399.",
+      "doi": "10.1007/s00221-009-2047-3",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2832876/",
+      "scope_read": "Abstract, introduction, methods/design and discussion passages concerning cross-modal transfer and criterion alternative; no raw-data reanalysis.",
+      "use": "constrains modality-specific criterion, not modality-general criterion"
+    },
+    {
+      "id": "Cai2018",
+      "type": "primary human study",
+      "citation": "Cai C et al. NeuroImage 172:654-662.",
+      "doi": "10.1016/j.neuroimage.2018.02.015",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29428581/",
+      "scope_read": "PubMed abstract only; no full-text or raw-data analysis.",
+      "use": "neural timing evidence that constrains a purely late verbal account but does not establish mediator routing"
+    }
+  ],
+  "novelty_limit": "No new general algebra, causal-identification theorem or neuroscience priority is claimed; contribution is the project-specific typed synthesis and countermodel."
+}

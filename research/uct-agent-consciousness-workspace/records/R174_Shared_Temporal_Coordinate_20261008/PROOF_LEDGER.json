@@ -1,0 +1,103 @@
+{
+  "round": "R174",
+  "source_sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+  "entries": [
+    {
+      "id": "R174-P1",
+      "type": "exact counterexample",
+      "claim": "The previous baseline nonreport contrast separates S from C but not S from H.",
+      "domain": "Declared S/C/H equations.",
+      "all_premises": [
+        "same delta,beta,s",
+        "s>0",
+        "fixed z,u definitions"
+      ],
+      "argument": "Direct substitution: all z match; u_S=u_H!=u_C for beta!=0.",
+      "counterexample_or_limit": "Only the declared three routes; no actual system.",
+      "status": "PROVED_IN_MODEL",
+      "thought_experiment_role": "Shows why a mediator intervention is needed."
+    },
+    {
+      "id": "R174-P2",
+      "type": "conditional theorem",
+      "claim": "The source-perturbation plus mediator-clamp signature separates S,C,H.",
+      "domain": "Same-instance declared rival class.",
+      "all_premises": [
+        "R174:FIXED_ROUTE_PROTOCOL",
+        "R174:THREE_RIVAL_ROUTE_CLASS",
+        "c!=0",
+        "s>0"
+      ],
+      "argument": "Displayed algebra in §4; 21 exact regressions include boundary values.",
+      "counterexample_or_limit": "Off-target clamp, hidden paths or compensation invalidate application.",
+      "status": "MANUAL_PROOF_PLUS_EXACT_CHECKS",
+      "thought_experiment_role": "Definition and identification test."
+    },
+    {
+      "id": "R174-P3",
+      "type": "nonidentification theorem",
+      "claim": "Finite route evidence does not imply unrestricted route closure when an untested gated bypass is admitted.",
+      "domain": "Finite W plus admitted x* extension.",
+      "all_premises": [
+        "finite W",
+        "x* not in W",
+        "gate zero on W and one at x*",
+        "bypass admitted"
+      ],
+      "argument": "The added term vanishes on W and is nonzero at x*.",
+      "counterexample_or_limit": "A valid universal physical closure law can exclude the extension.",
+      "status": "PROVED_BY_CONSTRUCTION",
+      "thought_experiment_role": "Stops overgeneralization from finite PASS."
+    },
+    {
+      "id": "R174-P4",
+      "type": "source synthesis",
+      "claim": "The three primary studies successively constrain criterion variants but do not provide the complete R174 mediator-clamp certificate.",
+      "domain": "Recorded source scopes.",
+      "all_premises": [
+        "study manipulations/results as read",
+        "declared S/C/H and C_mod/C_gen contrasts",
+        "no unreported route intervention inferred"
+      ],
+      "argument": "Compare the reported evidence with each required route premise.",
+      "counterexample_or_limit": "No raw-data reanalysis; Cai scope is abstract; full studies may constrain more models.",
+      "status": "TARGETED_SOURCE_COMPARISON",
+      "thought_experiment_role": "Connects the model to a real evidence ladder without overclaiming."
+    },
+    {
+      "id": "R174-P5",
+      "type": "conditional C1 application",
+      "claim": "A grounded actual Theta_STC relation has an experiential structural counterpart.",
+      "domain": "One actual complete P/I/K/D/Phi/h instance.",
+      "all_premises": [
+        "A:C1",
+        "R174:SHARED_TEMPORAL_COORDINATE",
+        "R157:COORDINATE_TRANSPORT",
+        "K grounding",
+        "sorted occurrences",
+        "all physical parameters transported",
+        "W/E/certificate excluded"
+      ],
+      "argument": "Ordinary isomorphism preservation for the grounded K-formula.",
+      "counterexample_or_limit": "Does not name experienced order or validate C1.",
+      "status": "CONDITIONAL_MODEL_THEORETIC_ARGUMENT",
+      "thought_experiment_role": "Places the positive coordinate inside experience."
+    },
+    {
+      "id": "R174-P6",
+      "type": "semantic boundary",
+      "claim": "The evidence ladder and structural counterpart do not entail B_order.",
+      "domain": "Selected action-feedback experienced-order target.",
+      "all_premises": [
+        "R174:PRIMARY_EVIDENCE_LADDER",
+        "R174:EXPERIENTIAL_SHARED_COORDINATE",
+        "R157:SEMANTIC_RESIDUAL",
+        "TO20261008:ORDER_BRIDGE_CANDIDATE"
+      ],
+      "argument": "No premise supplies the external relation-to-content interpretation; explicit failure conditions remain.",
+      "counterexample_or_limit": "A future independently justified narrower bridge is not ruled out.",
+      "status": "OPEN_INTERPRETIVE_BOUNDARY",
+      "thought_experiment_role": "Prevents report or control from defining experience."
+    }
+  ]
+}

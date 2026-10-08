@@ -1,4 +1,16 @@
-# Current dialogue extension — TO20261008 temporal reference and order
+# Authoritative current checkpoint — R174 shared temporal coordinate
+
+Latest substantive round: **R174**. Formal graph: **R174-v1.0, 544 nodes / 262 rules / 163 context links**, SHA256 `fb38bfac90ff6ca97f7b44d25561acefcce9635edb95c5a92573858733e4f53e`. Read [the English derivation](records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md), [round record](records/R174_Shared_Temporal_Coordinate_20261008/ROUND_RECORD.md), [map extension](records/R174_Shared_Temporal_Coordinate_20261008/MAP_EXTENSION.json), [map audit](records/R174_Shared_Temporal_Coordinate_20261008/MAP_AUDIT.json), [proof ledger](records/R174_Shared_Temporal_Coordinate_20261008/PROOF_LEDGER.json), [source ledger](records/R174_Shared_Temporal_Coordinate_20261008/SOURCE_LEDGER.json), [gap ledger](records/R174_Shared_Temporal_Coordinate_20261008/GAP_LEDGER.json), [Chinese review](records/R174_Shared_Temporal_Coordinate_20261008/REVIEW_ZH.md), and [current handoff](records/R174_Shared_Temporal_Coordinate_20261008/CURRENT_HANDOFF.md).
+
+R174 repairs the two-route temporal-reference contrast with a third parallel-bypass rival. A localized source perturbation plus faithful mediator clamp gives pairwise distinct exact signatures for shared-comparator S, criterion-only C and downstream-bypass H routes. Twenty-one exact model checks and fifteen map checks pass. A hidden-context bypass proves that any finite tested set still fails to entail unrestricted route closure.
+
+The positive target is the actual same-instance `Theta_STC` relation; intervention records, test sets and certificates are external evidence and never enter the C1 selector. Under independently grounded C1/R157 transport, the physical shared coordinate has an experiential structural counterpart, but the selected experienced-order interpretation `B_order` remains OPEN. Existing primary studies narrow criterion alternatives without supplying the full mediator-clamp package or directly measuring experience. QC-06/07 remain reviewer-controlled; the R172 effective overlay is retained.
+
+Next: fix one realizable no-report temporal consumer and path-specific measurement, then test whether it supplies an independently motivated necessary direction of `B_order`. If not, construct a strict same-`Theta_STC`/different-`F_order` countermodel. Do not repeat the algebra, expand generic certificates, add a basal-experience gate, infer a unique owner, or decide current-assistant consciousness. Older current/latest headings below are historical where superseded.
+
+---
+
++# Current dialogue extension — TO20261008 temporal reference and order
 
 Latest scheduled basis remains R173; this author-requested extension follows TE20261008 and does not reserve R174. Read [the derivation](records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md), [Chinese progress](records/TO20261008_Temporal_Reference_and_Order/REVIEW_ZH.md), [proof ledger](records/TO20261008_Temporal_Reference_and_Order/PROOF_LEDGER.json), [model/results](records/TO20261008_Temporal_Reference_and_Order/MODEL_RESULTS.json) and [open gaps](records/TO20261008_Temporal_Reference_and_Order/GAP_LEDGER.json). Graph R173-TE20261008-TO20261008-v1.0: 535/258/159; old objects and mandatory R171/R172 effective overlays are preserved. Counts are bookkeeping, not progress evidence.
 

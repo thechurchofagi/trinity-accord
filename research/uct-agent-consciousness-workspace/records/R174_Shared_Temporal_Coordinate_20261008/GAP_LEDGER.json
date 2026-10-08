@@ -1,0 +1,76 @@
+{
+  "round": "R174",
+  "record_type": "RESEARCH_SELF_CHECK_NOT_INDEPENDENT_REVIEW",
+  "items": [
+    {
+      "id": "R174-G1",
+      "severity": "HIGH",
+      "location": "§§2,7 / SHARED_TEMPORAL_COORDINATE",
+      "impact": "Blocks actual satisfaction and C1 application.",
+      "counterexample": "A correct stored beta or analyst diagram with no executed beta-to-q-to-consumer occurrences.",
+      "repaired": "Ontic Theta_STC is separated from evidence and reports.",
+      "unresolved": "No actual human, neural or hardware instance has been grounded.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R174-G2",
+      "severity": "HIGH",
+      "location": "§4 / MEDIATOR_CLAMP_SIGNATURE",
+      "impact": "Blocks empirical route identification.",
+      "counterexample": "Clamp misses q, perturbs beta, changes calibration or recruits compensation.",
+      "repaired": "Same-instance fidelity/locality/window premises and failure conditions are explicit.",
+      "unresolved": "No intervention package has been executed or validated.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R174-G3",
+      "severity": "HIGH",
+      "location": "§5 / FINITE_ROUTE_NONENTAILMENT",
+      "impact": "Prevents unrestricted no-alternative-path claims.",
+      "counterexample": "A hidden gate is silent on W and activates a beta-to-u bypass at x*.",
+      "repaired": "Positive identification is limited to the declared rival/intervention class.",
+      "unresolved": "Any broader physical closure law must be independently justified.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R174-G4",
+      "severity": "MEDIUM",
+      "location": "§4 / z,u readout",
+      "impact": "Binary report and noisy consumer observations may not recover the algebraic signature.",
+      "counterexample": "A small z shift stays on the same side of a binary threshold; noise or recalibration hides u change.",
+      "repaired": "Requires calibrated physical z/u readout or a separately justified response-law inference.",
+      "unresolved": "Measurement/calibration and no-compensation evidence remain application-specific.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R174-G5",
+      "severity": "HIGH",
+      "location": "§8 / B_order",
+      "impact": "Blocks the claim that the transported coordinate is experienced order or familiar mineness.",
+      "counterexample": "Same independently warranted F_order inside one Theta_STC fiber, or changed Theta_STC with invariant F_order where sensitivity is claimed.",
+      "repaired": "Target, measurement, report, F_O, F_A, F_F and conceptual I are separated with explicit failure tests.",
+      "unresolved": "No independent relation-to-content bridge or no-report measurement is established.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R174-G6",
+      "severity": "MEDIUM",
+      "location": "§6 / primary evidence ladder",
+      "impact": "Limits claims about existing human evidence.",
+      "counterexample": "Cross-modal transfer can be reproduced by a modality-general criterion; neural correlation need not be shared causal use.",
+      "repaired": "Each primary source is assigned only its recorded scope and rival exclusion strength.",
+      "unresolved": "Stetson full text was not independently reread this round; Cai reading is abstract-only; no raw-data reanalysis.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R174-G7",
+      "severity": "MEDIUM",
+      "location": "REVIEW_SUPERVISION QC-06/07",
+      "impact": "Independent reviewer closure cannot be claimed.",
+      "counterexample": "A self-reported PASS or new derived node does not resolve reviewer-controlled status.",
+      "repaired": "R174 uses the effective overlay and preserves the actual/evidence firewall.",
+      "unresolved": "QC-06/07 remain pending reviewer assessment.",
+      "status": "OPEN"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "schema": "uct-unified-proof-map/1.0",
-  "revision": "R173-TE20261008-TO20261008-v1.0",
+  "revision": "R174-v1.0",
   "date": "2026-10-08",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
@@ -22771,6 +22771,312 @@
         ],
         "machine_formalized": false
       }
+    },
+    {
+      "id": "R174:FIXED_ROUTE_PROTOCOL",
+      "kind": "TYPED_PROTOCOL_SETUP",
+      "label": "Fixed same-instance route protocol",
+      "statement": "Fix one actual bearer/episode/signature/realization and physically typed beta,delta,q,z,u,s plus localized source perturbation, mediator clamp, calibrated readouts, common time convention and declared S/C/H rival class. Evidence records and reports remain distinct from the ontic relation.",
+      "domain": "One named P/I/K/realization and one predeclared intervention window; c!=0 and s>0.",
+      "scope": "Protocol setup only; no actual instance, route, experience or closure is inferred.",
+      "status": "CONDITIONAL_PROTOCOL",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §§2,4",
+      "proof": "Definition and binding contract.",
+      "source_lineage": "R172 effective QC-06/07 target/evidence separation; TO20261008 routed reference model.",
+      "counterexamples_and_limits": "Missed mediator, off-target source perturbation, changed calibration, compensation or undeclared route invalidates the application.",
+      "formal_contract_R174": {
+        "source_anchor": {
+          "path": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md",
+          "sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+          "locator": "§§2,4"
+        },
+        "object_time_signature": "One same-instance body-relative action-feedback protocol.",
+        "quantifiers": "Every instance satisfying the exact displayed premise package on one common binding; compared routes are alternatives.",
+        "actuality": "Abstract route model unless an actual P/I/K/realization and evidence-to-role bridge are independently discharged.",
+        "status": "CONDITIONAL",
+        "open_obligations": [
+          "R174-G1",
+          "R174-G2",
+          "R174-G3",
+          "R174-G4",
+          "R174-G5",
+          "R174-G6",
+          "R174-G7"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R174:SHARED_TEMPORAL_COORDINATE",
+      "kind": "ACTUAL_ORGANIZATIONAL_RELATION",
+      "label": "Actual shared temporal coordinate",
+      "statement": "Theta_STC asserts actual beta-to-q reference transfer, comparison occurrence and same-episode use of q by both the physical decision drive z and nonreport timing consumer u, with one actual binding. It excludes W/E/certificate status and does not assert phenomenology.",
+      "domain": "Actual P/I/K instance with independently grounded physical roles and correctly sorted occurrences.",
+      "scope": "Selected route occurrence; not complete temporal organization, route exclusivity, experienced order or basal experience.",
+      "status": "OPEN_ACTUAL_APPLICATION_RELATION",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §2",
+      "proof": "Definition only; actual satisfaction requires external evidence-to-role grounding.",
+      "source_lineage": "R157 K-definable selector; R172 phi_path correction; TO20261008 theta_S.",
+      "counterexamples_and_limits": "Correct stored beta, matched answers, an external archive or a certificate does not establish this occurrence relation.",
+      "formal_contract_R174": {
+        "source_anchor": {
+          "path": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md",
+          "sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+          "locator": "§2"
+        },
+        "object_time_signature": "Actual selected temporal path on one P/I/K binding.",
+        "quantifiers": "Every instance satisfying the exact displayed premise package on one common binding; compared routes are alternatives.",
+        "actuality": "Abstract route model unless an actual P/I/K/realization and evidence-to-role bridge are independently discharged.",
+        "status": "OPEN_ACTUAL_APPLICATION_RELATION",
+        "open_obligations": [
+          "R174-G1",
+          "R174-G2",
+          "R174-G3",
+          "R174-G4",
+          "R174-G5",
+          "R174-G6",
+          "R174-G7"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R174:THREE_RIVAL_ROUTE_CLASS",
+      "kind": "FINITE_MODEL_CLASS",
+      "label": "Shared, criterion and hidden-bypass rivals",
+      "statement": "The stipulated route class contains S: q=delta-beta,z=q,u=q/s; C: q=delta,z=q-beta,u=q/s; and H: q=delta,z=q-beta,u=(q-beta)/s. All have matched baseline z; S and H also match baseline u.",
+      "domain": "Exact deterministic algebraic routes over an ordered field with s>0.",
+      "scope": "Three rivals only; not a universal neural mechanism class.",
+      "status": "EXACT_FINITE_MODEL_CLASS",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §3",
+      "proof": "Direct definitions and substitution.",
+      "source_lineage": "TO20261008 S/C model plus R174 parallel downstream bypass H.",
+      "counterexamples_and_limits": "Additional paths, noise, compensation and context dependence require separate premises.",
+      "formal_contract_R174": {
+        "source_anchor": {
+          "path": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md",
+          "sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+          "locator": "§3"
+        },
+        "object_time_signature": "Declared S/C/H algebraic route class.",
+        "quantifiers": "Every instance satisfying the exact displayed premise package on one common binding; compared routes are alternatives.",
+        "actuality": "Abstract route model unless an actual P/I/K/realization and evidence-to-role bridge are independently discharged.",
+        "status": "CONDITIONAL",
+        "open_obligations": [
+          "R174-G1",
+          "R174-G2",
+          "R174-G3",
+          "R174-G4",
+          "R174-G5",
+          "R174-G6",
+          "R174-G7"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R174:MEDIATOR_CLAMP_SIGNATURE",
+      "kind": "CONDITIONAL_EXACT_IDENTIFICATION",
+      "label": "Mediator-clamp separating signature",
+      "statement": "For c!=0 and s>0, the source-perturbation and q-clamp signature is S=(-c,-c/s,0,0), C=(-c,0,-c,0), H=(-c,-c/s,-c,-c/s); the three vectors are pairwise distinct.",
+      "domain": "The exact fixed R174 protocol and declared S/C/H class.",
+      "scope": "Rival-class identification; not actual route certification or unrestricted mechanism discovery.",
+      "status": "MANUAL_PROOF_PLUS_EXACT_CHECKS",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §4",
+      "proof": "Substitution under source perturbation and mediator clamp; pairwise coordinate comparison.",
+      "source_lineage": "Elementary intervention algebra; not claimed as new general mathematics.",
+      "counterexamples_and_limits": "H defeats the prior baseline S/C contrast; hidden or compensating routes defeat unrestricted identification.",
+      "formal_contract_R174": {
+        "source_anchor": {
+          "path": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md",
+          "sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+          "locator": "§4"
+        },
+        "object_time_signature": "Same-instance S/C/H intervention signature.",
+        "quantifiers": "Every instance satisfying the exact displayed premise package on one common binding; compared routes are alternatives.",
+        "actuality": "Abstract route model unless an actual P/I/K/realization and evidence-to-role bridge are independently discharged.",
+        "status": "CONDITIONAL",
+        "open_obligations": [
+          "R174-G1",
+          "R174-G2",
+          "R174-G3",
+          "R174-G4",
+          "R174-G5",
+          "R174-G6",
+          "R174-G7"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R174:FINITE_TEST_EXTENSION_SETUP",
+      "kind": "OPEN_WORLD_COUNTERMODEL_SETUP",
+      "label": "Finite tested support with an untested context",
+      "statement": "Fix a finite tested context/intervention set W and an admitted untested context x*. Add a physically possible hidden gate g that is zero on W and one at x*, controlling a beta-to-u bypass.",
+      "domain": "Any admitted model class that permits the displayed context-gated extension.",
+      "scope": "Requires an untested admitted context and no independent law excluding the extension.",
+      "status": "CONDITIONAL_COUNTERMODEL_SETUP",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §5",
+      "proof": "Explicit construction.",
+      "source_lineage": "Standard finite-observation nonidentification pattern; applied here to route closure.",
+      "counterexamples_and_limits": "If a valid physical closure law excludes the gate/bypass, this countermodel is outside the admitted class.",
+      "formal_contract_R174": {
+        "source_anchor": {
+          "path": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md",
+          "sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+          "locator": "§5"
+        },
+        "object_time_signature": "Finite W plus admitted untested x* and hidden gated bypass.",
+        "quantifiers": "Every instance satisfying the exact displayed premise package on one common binding; compared routes are alternatives.",
+        "actuality": "Abstract route model unless an actual P/I/K/realization and evidence-to-role bridge are independently discharged.",
+        "status": "CONDITIONAL",
+        "open_obligations": [
+          "R174-G1",
+          "R174-G2",
+          "R174-G3",
+          "R174-G4",
+          "R174-G5",
+          "R174-G6",
+          "R174-G7"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R174:FINITE_ROUTE_NONENTAILMENT",
+      "kind": "EXACT_NONENTAILMENT",
+      "label": "Finite signatures do not imply unrestricted route closure",
+      "statement": "Every observation and intervention signature on finite W can match the shared route while an admitted hidden beta-to-u bypass is active at x*. Therefore finite route evidence alone does not entail unrestricted absence of alternative paths.",
+      "domain": "The R174 finite-test extension class.",
+      "scope": "Open-world limit only; it does not negate rival-relative identification or prove no route evidence is possible.",
+      "status": "MANUAL_PROOF_PLUS_EXACT_WITNESS",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §5",
+      "proof": "The bypass term vanishes on W and is nonzero at x*.",
+      "source_lineage": "Elementary pointwise construction.",
+      "counterexamples_and_limits": "A separately valid universal closure premise can remove this admitted extension.",
+      "formal_contract_R174": {
+        "source_anchor": {
+          "path": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md",
+          "sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+          "locator": "§5"
+        },
+        "object_time_signature": "Finite W in a model class admitting the hidden-gate extension.",
+        "quantifiers": "Every instance satisfying the exact displayed premise package on one common binding; compared routes are alternatives.",
+        "actuality": "Abstract route model unless an actual P/I/K/realization and evidence-to-role bridge are independently discharged.",
+        "status": "CONDITIONAL",
+        "open_obligations": [
+          "R174-G1",
+          "R174-G2",
+          "R174-G3",
+          "R174-G4",
+          "R174-G5",
+          "R174-G6",
+          "R174-G7"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R174:PRIMARY_EVIDENCE_LADDER",
+      "kind": "SOURCE_GROUNDED_EVIDENCE_COMPARISON",
+      "label": "Primary temporal-recalibration evidence ladder",
+      "statement": "Stetson 2006 motivates the order target but does not separate S/C; Sugano et al. 2010 cross-modal transfer constrains a modality-specific criterion but not a modality-general criterion; Cai et al. 2018 neural timing shifts constrain a purely late verbal account but do not supply the R174 mediator clamp or consumer-use certificate.",
+      "domain": "The recorded primary-source reading scopes and the explicitly declared rival interpretations.",
+      "scope": "Comparative evidence assessment; not a reanalysis, neural route proof or phenomenal measurement.",
+      "status": "TARGETED_PRIMARY_SOURCE_SYNTHESIS",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §6 and SOURCE_LEDGER.json",
+      "proof": "Compare reported manipulations/measurements against the premises of the S/C/H signature.",
+      "source_lineage": "Three cited primary studies plus R174 model distinctions.",
+      "counterexamples_and_limits": "Full uninspected analyses may constrain additional models; no claim that the studies reduced to one report curve.",
+      "formal_contract_R174": {
+        "source_anchor": {
+          "path": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md",
+          "sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+          "locator": "§6"
+        },
+        "object_time_signature": "Three primary-source reading scopes and declared rival classes.",
+        "quantifiers": "Every instance satisfying the exact displayed premise package on one common binding; compared routes are alternatives.",
+        "actuality": "Abstract route model unless an actual P/I/K/realization and evidence-to-role bridge are independently discharged.",
+        "status": "TARGETED_SOURCE_SYNTHESIS",
+        "open_obligations": [
+          "R174-G1",
+          "R174-G2",
+          "R174-G3",
+          "R174-G4",
+          "R174-G5",
+          "R174-G6",
+          "R174-G7"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R174:EXPERIENTIAL_SHARED_COORDINATE",
+      "kind": "CONDITIONAL_C1_TRANSPORT",
+      "label": "Experience-internal shared temporal coordinate",
+      "statement": "If Theta_STC is independently grounded in one actual complete K-instance and all physical parameters are transported by h, C1/R157 formula preservation gives the corresponding Theta_STC relation inside Phi. W,E and certificate status are excluded.",
+      "domain": "One actual P/I/K/D/Phi/h binding satisfying C1 and all grounding/sorting/parameter obligations.",
+      "scope": "Structural counterpart only; not experienced-order semantics, felt duration, familiar mineness or complete type comparison.",
+      "status": "CONDITIONAL_MODEL_THEORETIC_APPLICATION",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §7",
+      "proof": "Ordinary sorted formula preservation under the supplied K-isomorphism.",
+      "source_lineage": "A:C1; R157 coordinate transport; R172 effective target/evidence correction.",
+      "counterexamples_and_limits": "Abstract equations, analyst tests, external labels and ungrounded parameters cannot discharge the actual selector.",
+      "formal_contract_R174": {
+        "source_anchor": {
+          "path": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md",
+          "sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+          "locator": "§7"
+        },
+        "object_time_signature": "One actual complete K-instance with grounded Theta_STC and transported parameters.",
+        "quantifiers": "Every instance satisfying the exact displayed premise package on one common binding; compared routes are alternatives.",
+        "actuality": "Abstract route model unless an actual P/I/K/realization and evidence-to-role bridge are independently discharged.",
+        "status": "CONDITIONAL",
+        "open_obligations": [
+          "R174-G1",
+          "R174-G2",
+          "R174-G3",
+          "R174-G4",
+          "R174-G5",
+          "R174-G6",
+          "R174-G7"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "R174:B_ORDER_BOUNDARY",
+      "kind": "CONDITIONAL_EXPLANATORY_BOUNDARY",
+      "label": "Shared coordinate does not close experienced order",
+      "statement": "The primary evidence ladder and conditional experiential coordinate sharpen B_order but do not prove that the shared temporal relation constitutes experienced event order. Target, measurement, report, F_O, F_A, F_F and conceptual I remain distinct.",
+      "domain": "Selected action-feedback order target on a predeclared application domain.",
+      "scope": "Keeps B_order OPEN; no basal gate, unique owner, richness ranking or assistant-consciousness inference.",
+      "status": "OPEN_INTERPRETIVE_BOUNDARY",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §8",
+      "proof": "R157 semantic residual plus the source-evidence insufficiency and explicit bridge-failure conditions.",
+      "source_lineage": "R157 semantic residual; TO20261008 B_order; R174 evidence ladder and transport.",
+      "counterexamples_and_limits": "A future independently justified bridge may close a narrower domain; this note does not rule that out.",
+      "formal_contract_R174": {
+        "source_anchor": {
+          "path": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md",
+          "sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+          "locator": "§8"
+        },
+        "object_time_signature": "Selected F_order application; semantic bridge remains external.",
+        "quantifiers": "Every instance satisfying the exact displayed premise package on one common binding; compared routes are alternatives.",
+        "actuality": "Abstract route model unless an actual P/I/K/realization and evidence-to-role bridge are independently discharged.",
+        "status": "OPEN_INTERPRETIVE_BOUNDARY",
+        "open_obligations": [
+          "R174-G1",
+          "R174-G2",
+          "R174-G3",
+          "R174-G4",
+          "R174-G5",
+          "R174-G6",
+          "R174-G7"
+        ],
+        "machine_formalized": false
+      }
     }
   ],
   "rules": [
@@ -36615,6 +36921,108 @@
         "quantification": "All instances satisfying the displayed jointly satisfiable premise package, with the same bindings throughout.",
         "machine_proof": false
       }
+    },
+    {
+      "id": "r174_mediator_clamp_separation",
+      "all_of": [
+        "R174:FIXED_ROUTE_PROTOCOL",
+        "R174:THREE_RIVAL_ROUTE_CLASS"
+      ],
+      "conclusion": "R174:MEDIATOR_CLAMP_SIGNATURE",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "statement": "Under the same-instance protocol and exact S/C/H equations, the displayed source-perturbation plus mediator-clamp signature separates all three routes.",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §4",
+      "proof_sketch": "Direct substitution and pairwise comparison.",
+      "formal_contract_R174": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same P/I/K/realization",
+          "same c,s,z,u ports",
+          "faithful source perturbation and q clamp",
+          "declared S/C/H class"
+        ],
+        "source_sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+        "quantification": "Every exact S/C/H instance with c!=0 and s>0 satisfying all protocol clauses.",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r174_finite_route_nonidentification",
+      "all_of": [
+        "R174:FIXED_ROUTE_PROTOCOL",
+        "R174:MEDIATOR_CLAMP_SIGNATURE",
+        "R174:FINITE_TEST_EXTENSION_SETUP"
+      ],
+      "conclusion": "R174:FINITE_ROUTE_NONENTAILMENT",
+      "kind": "EXACT_COUNTERMODEL_DEDUCTION",
+      "statement": "Even a separating finite signature does not entail unrestricted route closure when the admitted class contains an untested context-gated bypass.",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §5",
+      "proof_sketch": "Set the hidden gate to zero on W and one at x*.",
+      "formal_contract_R174": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same finite W",
+          "admitted untested x*",
+          "same measured variables on W",
+          "no independent law excluding the hidden gate"
+        ],
+        "source_sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+        "quantification": "Every finite W in an admitted class containing the displayed extension.",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r174_experiential_coordinate_transport",
+      "all_of": [
+        "A:C1",
+        "R174:SHARED_TEMPORAL_COORDINATE",
+        "R157:COORDINATE_TRANSPORT"
+      ],
+      "conclusion": "R174:EXPERIENTIAL_SHARED_COORDINATE",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "statement": "The actual grounded Theta_STC relation and same-instance C1/R157 transport jointly yield its experiential structural counterpart; analyst evidence is not transported.",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §7",
+      "proof_sketch": "Sorted formula induction with every physical parameter mapped by h.",
+      "formal_contract_R174": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "one actual P/I/K/D/Phi/h",
+          "independent K-grounding",
+          "sorted occurrences",
+          "transported beta,q,z,u,gamma,s",
+          "W/E/certificate excluded"
+        ],
+        "source_sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+        "quantification": "Every actual instance satisfying all displayed grounding and C1 premises.",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r174_order_bridge_boundary",
+      "all_of": [
+        "R174:PRIMARY_EVIDENCE_LADDER",
+        "R174:EXPERIENTIAL_SHARED_COORDINATE",
+        "TO20261008:ORDER_BRIDGE_CANDIDATE",
+        "R157:SEMANTIC_RESIDUAL"
+      ],
+      "conclusion": "R174:B_ORDER_BOUNDARY",
+      "kind": "CONDITIONAL_EXPLANATORY_BOUNDARY",
+      "statement": "The source evidence and structural transport narrow the candidate while the semantic residual keeps B_order and its measurement obligations open.",
+      "source": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md §8",
+      "proof_sketch": "None of the premises supplies the missing external relation-to-content interpretation; explicit failure tests remain.",
+      "formal_contract_R174": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "fixed F_order target",
+          "recorded source scopes",
+          "no report definition",
+          "no basal gate",
+          "no unique owner"
+        ],
+        "source_sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+        "quantification": "The selected action-feedback application domain only.",
+        "machine_proof": false
+      }
     }
   ],
   "context_links": [
@@ -37412,6 +37820,26 @@
       "from": "R157:SEMANTIC_RESIDUAL",
       "to": "TO20261008:ORDER_BRIDGE_CANDIDATE",
       "relation": "structural transport leaves selected phenomenal interpretation open"
+    },
+    {
+      "from": "TO20261008:ROUTED_REFERENCE_SETUP",
+      "to": "R174:THREE_RIVAL_ROUTE_CLASS",
+      "relation": "extends the explicit S/C pair with a downstream-bypass rival; contextual, not a premise"
+    },
+    {
+      "from": "TO20261008:NONREPORT_ROUTE_CONTRAST",
+      "to": "R174:MEDIATOR_CLAMP_SIGNATURE",
+      "relation": "repairs pair-relative nonreport separation by adding mediator intervention; contextual"
+    },
+    {
+      "from": "R172:ONLINE_ACTION_USE_RELATION",
+      "to": "R174:SHARED_TEMPORAL_COORDINATE",
+      "relation": "inherits actual-use versus evidence typing through the effective overlay; contextual"
+    },
+    {
+      "from": "R173:RETENTIVE_BINDING_RELATION",
+      "to": "R174:SHARED_TEMPORAL_COORDINATE",
+      "relation": "a retained reference can enter the current relation only through grounded present use; contextual"
     }
   ],
   "prohibited_inferences_D": [
@@ -38199,8 +38627,8 @@
     "unique_owner_selected": false,
     "current_assistant_consciousness_decided": false
   },
-  "parent_revision": "R172-v1.0",
-  "parent_sha256": "5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d",
+  "parent_revision": "R173-TE20261008-TO20261008-v1.0",
+  "parent_sha256": "ff5acea4e2a49affb9d3cf0f7f6d23236268c403a42bd00cd71ca05d64b7c7f8",
   "research_TE20261008": {
     "date": "2026-10-08",
     "base_commit": "8df66b1bcf7c21795c4fba67eb1061815bf8c645",
@@ -38224,5 +38652,16 @@
     "C1_derived": false,
     "B_order_established": false,
     "review_QC_06_07": "OPEN_PENDING_REVIEW_UNCHANGED"
+  },
+  "research_R174": {
+    "title": "Shared temporal coordinate, intervention signature and B_order boundary",
+    "record": "records/R174_Shared_Temporal_Coordinate_20261008",
+    "parent_revision": "R173-TE20261008-TO20261008-v1.0",
+    "nodes_added": 9,
+    "rules_added": 4,
+    "context_links_added": 4,
+    "note_sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+    "model_results_sha256": "32ffd9469ba441220a643be64d78317dee099c188fd35d759b018c4fc34f9040",
+    "status": "CONDITIONAL_ROUTE_IDENTIFICATION_AND_OPEN_SEMANTIC_BOUNDARY"
   }
 }

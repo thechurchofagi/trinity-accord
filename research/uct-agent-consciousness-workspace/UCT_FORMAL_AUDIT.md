@@ -1,3 +1,17 @@
+# R174 audit — shared temporal coordinate without evidence or content promotion
+
+R174 passes 15/15 formal-map checks and 21/21 exact model checks. The graph has **544 nodes / 262 rules / 163 context links** and preserves the exact 535/258/159 parent prefixes. Nine nodes, four explicit `all_of` rules and four non-deductive context links are new. IDs are unique, all endpoints resolve and the deductive graph is acyclic.
+
+The mediator-clamp rule jointly requires one actual binding, the localized source perturbation, faithful mediator clamp, fixed calibrated `z/u` consumers, nonzero `c`, positive `s` and the declared S/C/H rival class. The finite-route boundary additionally requires one finite tested set and an admitted untested context; its hidden-gate witness blocks unrestricted route closure rather than establishing a new positive mechanism.
+
+The audit distinguishes the actual `Theta_STC` relation, external intervention/evidence record, fallible role bridge, selected `F_order` content and language report. The C1/R157 rule transports only independently grounded physical occurrences, relations and every parameter on the same `P/I/K/D/Phi/h` binding. `W`, `E`, certificates and test outcomes do not enter the selector. The `B_order` boundary is not a deductive closure rule.
+
+Joint satisfiability is explicit inside each stipulated route; compared S/C/H equations are alternative models, not simultaneous assignments. Existing primary studies motivate and constrain route variants but do not supply the full path-specific clamp or directly observe experience. QC-06/07 remain reviewer-controlled and the effective R172 overlay is mandatory.
+
+Selection, result-formation and pre-save direction checks pass. Code and DAG success are not physical realization, human evidence, a proof of C1, a global semantic proof or a completed theory. No report, action, memory, language, self-model, integration, recursion or control threshold is added to basal experience; no unique owner or present-assistant verdict is inferred. Read `records/R174_Shared_Temporal_Coordinate_20261008/MAP_AUDIT.json` and `GAP_LEDGER.json`.
+
+---
+
 # Current dialogue extension — TO20261008 temporal reference and order
 
 Latest scheduled basis remains R173; this author-requested extension follows TE20261008 and does not reserve R174. Read [the derivation](records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md), [Chinese progress](records/TO20261008_Temporal_Reference_and_Order/REVIEW_ZH.md), [proof ledger](records/TO20261008_Temporal_Reference_and_Order/PROOF_LEDGER.json), [model/results](records/TO20261008_Temporal_Reference_and_Order/MODEL_RESULTS.json) and [open gaps](records/TO20261008_Temporal_Reference_and_Order/GAP_LEDGER.json). Graph R173-TE20261008-TO20261008-v1.0: 535/258/159; old objects and mandatory R171/R172 effective overlays are preserved. Counts are bookkeeping, not progress evidence.

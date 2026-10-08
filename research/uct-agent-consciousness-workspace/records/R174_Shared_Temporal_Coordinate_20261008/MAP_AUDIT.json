@@ -1,0 +1,80 @@
+{
+  "status": "SCOPED_R174_INTEGRATION_CHECK_ONLY",
+  "parent_revision": "R173-TE20261008-TO20261008-v1.0",
+  "parent_graph_sha256": "ff5acea4e2a49affb9d3cf0f7f6d23236268c403a42bd00cd71ca05d64b7c7f8",
+  "graph_sha256": "fb38bfac90ff6ca97f7b44d25561acefcce9635edb95c5a92573858733e4f53e",
+  "counts": {
+    "nodes": 544,
+    "rules": 262,
+    "context_links": 163
+  },
+  "checks": [
+    {
+      "name": "exact_parent_nodes",
+      "pass": true
+    },
+    {
+      "name": "exact_parent_rules",
+      "pass": true
+    },
+    {
+      "name": "exact_parent_context_links",
+      "pass": true
+    },
+    {
+      "name": "exact_new_nodes",
+      "pass": true
+    },
+    {
+      "name": "exact_new_rules",
+      "pass": true
+    },
+    {
+      "name": "exact_new_context_links",
+      "pass": true
+    },
+    {
+      "name": "unique_ids",
+      "pass": true
+    },
+    {
+      "name": "all_endpoints_resolve",
+      "pass": true
+    },
+    {
+      "name": "rule_graph_acyclic",
+      "pass": true
+    },
+    {
+      "name": "note_hash_matches",
+      "pass": true
+    },
+    {
+      "name": "model_hash_matches",
+      "pass": true
+    },
+    {
+      "name": "model_checks_pass",
+      "pass": true
+    },
+    {
+      "name": "actual_relation_not_inferred_from_certificate",
+      "pass": true
+    },
+    {
+      "name": "semantic_bridge_has_no_deductive_closure",
+      "pass": true
+    },
+    {
+      "name": "c1_rule_excludes_evidence_parameters",
+      "pass": true
+    }
+  ],
+  "not_established": [
+    "Actual route realization",
+    "Intervention fidelity or unrestricted mechanism closure",
+    "C1 or B_order empirical truth",
+    "Independent review closure",
+    "Global semantic consistency"
+  ]
+}

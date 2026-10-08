@@ -1,0 +1,238 @@
+{
+  "status": "EXACT_STIPULATED_ROUTE_MODEL_ONLY",
+  "parameters": {
+    "delta": {
+      "exact": "20",
+      "decimal": 20.0
+    },
+    "beta": {
+      "exact": "90",
+      "decimal": 90.0
+    },
+    "s": {
+      "exact": "100",
+      "decimal": 100.0
+    },
+    "c": {
+      "exact": "10",
+      "decimal": 10.0
+    },
+    "qbar": {
+      "exact": "-5",
+      "decimal": -5.0
+    }
+  },
+  "baseline": {
+    "S": {
+      "q": {
+        "exact": "-70",
+        "decimal": -70.0
+      },
+      "z": {
+        "exact": "-70",
+        "decimal": -70.0
+      },
+      "u": {
+        "exact": "-7/10",
+        "decimal": -0.7
+      }
+    },
+    "C": {
+      "q": {
+        "exact": "20",
+        "decimal": 20.0
+      },
+      "z": {
+        "exact": "-70",
+        "decimal": -70.0
+      },
+      "u": {
+        "exact": "1/5",
+        "decimal": 0.2
+      }
+    },
+    "H": {
+      "q": {
+        "exact": "20",
+        "decimal": 20.0
+      },
+      "z": {
+        "exact": "-70",
+        "decimal": -70.0
+      },
+      "u": {
+        "exact": "-7/10",
+        "decimal": -0.7
+      }
+    }
+  },
+  "signatures": {
+    "S": [
+      {
+        "exact": "-10",
+        "decimal": -10.0
+      },
+      {
+        "exact": "-1/10",
+        "decimal": -0.1
+      },
+      {
+        "exact": "0",
+        "decimal": 0.0
+      },
+      {
+        "exact": "0",
+        "decimal": 0.0
+      }
+    ],
+    "C": [
+      {
+        "exact": "-10",
+        "decimal": -10.0
+      },
+      {
+        "exact": "0",
+        "decimal": 0.0
+      },
+      {
+        "exact": "-10",
+        "decimal": -10.0
+      },
+      {
+        "exact": "0",
+        "decimal": 0.0
+      }
+    ],
+    "H": [
+      {
+        "exact": "-10",
+        "decimal": -10.0
+      },
+      {
+        "exact": "-1/10",
+        "decimal": -0.1
+      },
+      {
+        "exact": "-10",
+        "decimal": -10.0
+      },
+      {
+        "exact": "-1/10",
+        "decimal": -0.1
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "baseline_report_drive_equivalence",
+      "pass": true,
+      "scope": "Exact stipulated S/C/H class; z is a physical decision drive, not experience."
+    },
+    {
+      "name": "previous_two_route_contrast_has_hidden_bypass",
+      "pass": true,
+      "scope": "Shows why the S/C nonreport contrast does not identify unrestricted routes."
+    },
+    {
+      "name": "exact_signature_formula",
+      "pass": true,
+      "scope": "Same binding, nonzero c, positive s, faithful source perturbation and q clamp."
+    },
+    {
+      "name": "three_rivals_pairwise_separated",
+      "pass": true,
+      "scope": "Identification is relative to the predeclared S/C/H rival class."
+    },
+    {
+      "name": "hidden_bypass_silent_on_finite_tests",
+      "pass": true,
+      "scope": "Finite tested support cannot establish unrestricted absence of a context-gated bypass."
+    },
+    {
+      "name": "pairwise_signature_-50_-30",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_-50_0",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_-50_50",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_-50_100",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_0_-30",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_0_0",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_0_50",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_0_100",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_20_-30",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_20_0",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_20_50",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_20_100",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_100_-30",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_100_0",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_100_50",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    },
+    {
+      "name": "pairwise_signature_100_100",
+      "pass": true,
+      "scope": "Boundary regression only; general separation follows from c!=0 and s>0."
+    }
+  ],
+  "limits": [
+    "No actual neural or hardware route certified",
+    "No intervention fidelity or mechanism closure established",
+    "No experience measurement, C1 validation or B_order proof",
+    "Finite tests do not identify unrestricted mechanisms"
+  ]
+}
