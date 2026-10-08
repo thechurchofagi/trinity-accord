@@ -1,0 +1,43 @@
+{
+  "round": "R176",
+  "core_commit": "136482d97bb9d6dfd144d6b250932a817d55cca7",
+  "base_commit": "2d9c3467abab7b40d4b39ea46bbfa05ad36a7a09",
+  "github_verification": {
+    "status": "PASS",
+    "method": "git fetch then git show core:path byte-equality for every 21 changed research files",
+    "files": 21
+  },
+  "increment": {
+    "library_file_id": "libfile_3ba34808f9e48191a5b99d8d3e3d19c2",
+    "file_id": "file_000000009b9081f59dda4c3763fa6be7",
+    "version": 0,
+    "filename": "UCT_R176_Increment_20261008.zip",
+    "sha256": "6d5ba5cb55f005e87f666d37ea603d3d416b209f59ae68c6530140f23407346e",
+    "bytes": 500950,
+    "members": 22,
+    "scope": "INCREMENT relative to base commit; not complete backup; excludes this later receipt and final handoff save-status edit",
+    "verification": "Local ZIP CRC/member hash checks plus successful persistent upload; no post-upload complete byte download claimed"
+  },
+  "master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_000000000f8881f5b55998070774c3a4",
+    "version": 30,
+    "filename": "UCT_Hourly_Research_Master_Handoff.md",
+    "bytes": 379145,
+    "sha256": "704fd94fbbc307253e86dfc4a293ca67a5bad4b5b39844c5ad52407a39bdcaef",
+    "verification": "Expected-version 29 replacement succeeded; unchanged v29 content preserved after new prefix; helper metadata application succeeded"
+  },
+  "remaining": [
+    "Independent experiential identity and order admission",
+    "H_prod/H_use bridge support",
+    "QC-08/09/10 reviewer disposition",
+    "Full six-row semantic realization"
+  ],
+  "recovery": "Fetch latest branch, compare latest fixed master, apply all effective overlays. Core already reconstructs theory. Receipt commit only adds storage metadata; use latest handoff for subsequent work.",
+  "no_claims": [
+    "No global semantic proof",
+    "No new phenomenal observation",
+    "No complete repository backup",
+    "No model scheduler reconfiguration"
+  ]
+}
