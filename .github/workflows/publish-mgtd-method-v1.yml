@@ -1,0 +1,73 @@
+name: Publish MGTD Method v1.0.0 to Zenodo
+
+on:
+  push:
+    branches:
+      - research/mgtd-method-v1-0-20261008
+    paths:
+      - research/map-guided-theory-development/PUBLISH-AUTHORIZATION.json
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mgtd-method-zenodo-create-once-v1
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      github.repository == 'thechurchofagi/trinity-accord' &&
+      (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[mgtd-publish]'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout exact research branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/mgtd-method-v1-0-20261008
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Validate authorization and frozen source (no secrets)
+        run: |
+          python3 research/map-guided-theory-development/publication.py verify
+          python3 - <<'PY'
+          import json,hashlib,pathlib
+          root=pathlib.Path('research/map-guided-theory-development')
+          a=json.loads((root/'PUBLISH-AUTHORIZATION.json').read_text())
+          assert a['report_number']=='METHOD20261008'
+          assert a['research_id']=='MGTD-PAPER-v1.0.0'
+          assert a['authorized']==True
+          for filename, digest in a['sha256'].items():
+              assert hashlib.sha256((root/filename).read_bytes()).hexdigest()==digest
+          print('EXACT_AUTHORIZATION_CHECK_PASS')
+          PY
+      - name: Publish once and verify anonymous public PDF and ZIP bytes
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/map-guided-theory-development/publication.py publish
+      - name: Preserve state even if publication failed
+        if: always()
+        run: python3 research/map-guided-theory-development/publication.py persist
+      - name: Keep release receipts and the exact immutable assets
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: mgtd-method-publication-${{ github.run_id }}
+          path: |
+            research/map-guided-theory-development/create-intent.json
+            research/map-guided-theory-development/create-uncertain.json
+            research/map-guided-theory-development/deposit.json
+            research/map-guided-theory-development/upload-check.json
+            research/map-guided-theory-development/publication-intent.json
+            research/map-guided-theory-development/publication-error.json
+            research/map-guided-theory-development/publication-record.json
+            research/map-guided-theory-development/PUBLISH-AUTHORIZATION.json
+            research/map-guided-theory-development/MGTD_Method_Paper_v1.0.0.pdf
+            research/map-guided-theory-development/MGTD_Method_Paper_v1.0.0_Complete_Package.zip
+          retention-days: 90
+          if-no-files-found: warn
