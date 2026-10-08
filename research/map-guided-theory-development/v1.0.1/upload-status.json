@@ -14,5 +14,9 @@
   "README-LICENSE.txt": {
     "bytes": 815,
     "sha256": "c796ebb061592d8f4371ad520cd6efa39edea408d5e5265b4dff723789653a8b"
+  },
+  "citation.bib": {
+    "bytes": 372,
+    "sha256": "57065f23b69ddb4250f2e7c1483fda21336c40cdfeb1b715d76f74f70a145573"
   }
 }
