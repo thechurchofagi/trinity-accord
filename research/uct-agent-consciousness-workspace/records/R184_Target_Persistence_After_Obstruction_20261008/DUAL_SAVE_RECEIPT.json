@@ -1,0 +1,47 @@
+{
+  "schema": "uct-r184-dual-save-receipt/1.0",
+  "date": "2026-10-08",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "baseline_commit": "7c159777ffde9148f5e99830d844fe9b7139a3fa",
+    "research_commit": "e5efb92b17eb616a3c9df94f320c2d11fcbad741",
+    "research_tree": "273851b2cd960239a850392beb23788a72d3eed5",
+    "changed_files": 21,
+    "remote_readback": "PASS_TREE_AND_BYTES",
+    "commit_message_contains_skip_ci": true
+  },
+  "library_master": {
+    "name": "UCT_Hourly_Research_Master_Handoff.md",
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000c48481f6b5d673eeee7e7d42",
+    "previous_version": 42,
+    "current_version": 43,
+    "size_bytes": 553284,
+    "local_sha256": "77258fc1328ac5f14da8d33f25da5e2627179dc9063179110888be6eb65ae635",
+    "identity_preserved": true,
+    "readback": "PASS_VERSION_SIZE_TOP_AND_ALL_6005_LINES",
+    "readback_note": "The read API removes one terminal newline from each displayed page; all seven page bodies exactly matched the corresponding local line ranges after accounting for that presentation behavior."
+  },
+  "library_increment": {
+    "name": "UCT_R184_Increment_20261008.zip",
+    "library_file_id": "libfile_9d506c57839481918c2386fa725f5f82",
+    "file_id": "file_00000000a47c81f592c3ab59f23692d6",
+    "version": 0,
+    "size_bytes": 190548,
+    "local_sha256": "9165e0b560e9d74c5f88d18b09cea413a8a5299073d0ca2f3f3a85cbe428ae10",
+    "changed_research_files": 21,
+    "zip_entries_including_manifest": 22,
+    "scope": "Increment relative to baseline only; not a complete repository, workspace or history backup.",
+    "upload_and_index_metadata": "PASS",
+    "independent_byte_hash_readback": "FAILED_HTTP_403",
+    "failure_handling": "No duplicate upload or replacement was attempted. Next round should retry read-only materialization and SHA256 verification before any new write."
+  },
+  "overall": {
+    "github_persistence": "VERIFIED",
+    "library_master_persistence": "VERIFIED",
+    "library_increment_persistence": "SAVED_AND_METADATA_VERIFIED_BYTE_HASH_OPEN",
+    "dual_storage_claim": "PARTIAL_VERIFICATION_ONLY",
+    "publication_actions": "NONE"
+  }
+}
