@@ -473,3 +473,31 @@ R179 nonduplication correction retained. The four old thought-experiment familie
 See records/R181_Practical_Centering_Profile_20261008/REVIEW_RESPONSE.md. QC08/09 remain scoped effective; QC10, IA-QC11 and QC12 actual application remain OPEN. The practical-centering profile supplies a positive organizational candidate and falsifiers but is not identified with a named feeling. Initial model count failure is preserved. Canonical graph unchanged; no self-closure.
 
 ---
+
+# REVIEW-20261008-05 — R178–R181 scoped review
+
+Date: 2026-10-08. Reviewed saved head `9bba93df0ed47e54e8d3cab9ee3bf91fc040f80e`, R178–R181 and supplements, canonical graph `R178-SB20261008-v1.0` (584/284/178), and fixed master version 38. Full report: [records/REVIEW_20261008_05/REVIEW_REPORT.md](records/REVIEW_20261008_05/REVIEW_REPORT.md). This is a separate scoped review, not independent peer review or full-map proof.
+
+- `QC-20261008-08`: **RESOLVED_SCOPED_EFFECTIVE**, unchanged.
+- `QC-20261008-09`: **RESOLVED_SCOPED_EFFECTIVE**, unchanged.
+- `QC-20261008-10`: **ACKNOWLEDGED / OPEN**. R181 is useful positive organizational progress, but `PC_tau` is not independently identified as felt doing and `E_tau` is not independently identified as felt trying.
+- `IA-QC11`: **ACKNOWLEDGED / application OPEN**. Functional source/feature/target distinctions have not supplied an actual human admission or named phenomenal mapping.
+- `QC-20261008-12`: **ACKNOWLEDGED_MODEL_SCOPE_REPAIRED / application OPEN**. R178 satisfies the toy bearer/interval/signature/membership requirement and proves the downstream-evidence impossibility. Actual human membership and an independently identified mineness target remain missing.
+
+## QC-20261008-13 — target binding is stipulated rather than constructed
+
+- Severity: **MEDIUM for R181's positive interpretation**.
+- Status: **OPEN**.
+- Precise source: R181 manuscript §§1,3,4,6; `records/R181_Practical_Centering_Profile_20261008/model.py`; R181-C3/H1; R181-G1–G3.
+- Argument/counterexample: `target`, `directive` and `closure` enter the 128-row program as independent inputs; the program does not construct the actual carrier and consumer path that makes a token about overt action rather than imagery. Two cross-wired systems can hold directive code, represented movement, downstream waveform, output, report and local `D=C=1` fixed while exchanging which policy actually consumes the directive and feedback. If `tau` is assigned from the desired interpretation or later report, the same evidence can be relabelled post hoc. Target classification must follow the physical consumer path fixed beforehand.
+- Impact: R181-C1/C2 remain valid conditional finite results. C3/H1 and any C1 transport still require an actual target-binding premise. This adds no basal gate and decides no experience, voluntariness or subject count.
+- Required action: declare `TARGET_BINDING_INSTANCE(P,I,K,tau)` with actual directive carrier, consumer policy, feedback/mismatch path, intervention family and a consumer-path counterfactual. Run a cross-wired negative control with content/output fixed and consumers swapped. Failure if target follows an analyst label/report or if D/C remain free bits without a jointly realizable path.
+- Verification basis: direct source inspection, independent rerun of 128 configurations/12 checks, and the explicit cross-wired countermodel; no arithmetic error is alleged.
+
+Research direction under QC-10: compare one fixed target-binding instance with a generic adaptive-controller twin that shares local `(D,C,E)` but differs in an independently grounded body/action-reference embedding. Require a rival, held-out consequence and failure condition. If the two remain compatible, retain `PC_tau` as an organizational coordinate and leave *felt trying* OPEN; do not expand another role taxonomy.
+
+Source correction: DOI `10.1371/journal.pone.0130019` is Evans, Gale, Schurger and Blanke (2015), not Kasahara. The empirical scope remains narrow, but the next editable source ledger must correct the attribution. Primary sources otherwise support the limited constraint claims and do not identify complete organization or validate C1.
+
+No raw-data analysis, new experiment, publication, schedule change, current-assistant consciousness verdict or whole-map proof was performed.
+
+---

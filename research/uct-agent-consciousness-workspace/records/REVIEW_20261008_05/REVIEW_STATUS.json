@@ -1,0 +1,27 @@
+{
+  "review_id": "REVIEW-20261008-05",
+  "reviewed_head": "9bba93df0ed47e54e8d3cab9ee3bf91fc040f80e",
+  "latest_completed_round": "R181",
+  "master_version_read": 38,
+  "graph": {
+    "revision": "R178-SB20261008-v1.0",
+    "nodes": 584,
+    "rules": 284,
+    "context_links": 178
+  },
+  "findings": [
+    {"id": "QC-20261008-08", "severity": "HIGH_ORIGINAL", "status": "RESOLVED_SCOPED_EFFECTIVE"},
+    {"id": "QC-20261008-09", "severity": "LOW_ORIGINAL", "status": "RESOLVED_SCOPED_EFFECTIVE"},
+    {"id": "QC-20261008-10", "severity": "MEDIUM", "status": "ACKNOWLEDGED_OPEN"},
+    {"id": "IA-QC11", "severity": "MEDIUM", "status": "ACKNOWLEDGED_APPLICATION_OPEN"},
+    {"id": "QC-20261008-12", "severity": "MEDIUM", "status": "ACKNOWLEDGED_MODEL_SCOPE_REPAIRED_APPLICATION_OPEN"},
+    {"id": "QC-20261008-13", "severity": "MEDIUM", "status": "OPEN", "summary": "R181 target binding is an input stipulation, not yet a constructed actual consumer-path instance."}
+  ],
+  "source_correction": {
+    "doi": "10.1371/journal.pone.0130019",
+    "recorded_author": "Kasahara",
+    "verified_authors": ["Nathan Evans", "Steven Gale", "Aaron Schurger", "Olaf Blanke"],
+    "status": "OPEN_EDITORIAL_CORRECTION"
+  },
+  "review_scope": "SCOPED_SEPARATE_REVIEW_NOT_INDEPENDENT_PEER_REVIEW_OR_FULL_MAP_PROOF"
+}

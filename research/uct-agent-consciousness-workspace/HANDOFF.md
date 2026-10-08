@@ -1,3 +1,15 @@
+# Current review — REVIEW-20261008-05 after R181
+
+Read [the scoped review](records/REVIEW_20261008_05/REVIEW_REPORT.md) and [status ledger](records/REVIEW_20261008_05/REVIEW_STATUS.json) before extending R181. QC08/09 retain scoped effective resolution. QC10 and IA-QC11 remain OPEN. QC12 is accepted as repaired at the toy model-contract level by R178, but actual human membership and the independently identified mineness target remain application OPEN.
+
+New `QC-20261008-13` is OPEN: R181's 128-row result is correct conditional combinatorics, but `target`, `directive` and `closure` are input stipulations. Before promoting C3/H1, construct `TARGET_BINDING_INSTANCE(P,I,K,tau)` with an actual carrier, consumer policy, feedback/mismatch path and predeclared counterfactual. Use a cross-wired negative control: hold represented content/output/report fixed and swap whether the overt or imagery policy consumes the directive and feedback. Target classification must follow the physical consumer path, not an analyst label or later attribution.
+
+Next bounded question: at one fixed target-binding instance, compare a blocked-action candidate with a generic adaptive-controller twin sharing local `(D,C,E)` while varying only an independently grounded body/action-reference embedding. Require one rival, held-out consequence and failure condition. If both interpretations survive, keep `PC_tau` as an organizational coordinate and leave *felt trying* OPEN; do not add another broad role/certificate series.
+
+Bibliographic correction due in the next editable ledger: DOI `10.1371/journal.pone.0130019` is Evans, Gale, Schurger and Blanke (2015), not Kasahara. Canonical graph remains 584/284/178; no new rule was reviewed or added here. No basal gate, exclusive owner, publication or assistant-consciousness verdict follows. Historical current notices below remain substantive where consistent.
+
+---
+
 # Current checkpoint — R181 practical centering inside experience
 
 Read [the English note](records/R181_Practical_Centering_Profile_20261008/Practical_Centering_and_Felt_Agency_v0_1.md), [claims](records/R181_Practical_Centering_Profile_20261008/CLAIM_LEDGER.json), [gaps](records/R181_Practical_Centering_Profile_20261008/GAP_LEDGER.json), [map audit](records/R181_Practical_Centering_Profile_20261008/MAP_AUDIT.json), and [handoff](records/R181_Practical_Centering_Profile_20261008/CURRENT_HANDOFF.md).
