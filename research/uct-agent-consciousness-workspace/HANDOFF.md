@@ -1,3 +1,13 @@
+# Dialogue supplement — SB20261008 local-to-global gluing and physical target binding (after R181)
+
+Author requested immediate continuation without another publication threshold. **Read [research note](records/SB20261008_Gluing_and_Target_Binding/RESEARCH_NOTE.md), [exact-check code](records/SB20261008_Gluing_and_Target_Binding/check_models.py) and [check results](records/SB20261008_Gluing_and_Target_Binding/CHECK_RESULTS.json)**. This non-R supplement is complementary to the latest R181 and REVIEW-20261008-05; it does not reserve R182 or supersede R181's author-approved working direction.
+
+Results: scoped physical local views can fail to have a common actual completion (pairwise overlaps consistent yet global constraints impossible), or fail to identify a unique whole even with all pairwise tables fixed. Finite 3-bit countermodels and a four-object diagram counterexample make the required joint-realization / cross-scale compatibility contracts explicit. A wired overt-command vs imagery-consumer toy at matched output/report supplies a **toy-scope response** to QC-20261008-13, with path-sensitive do(q=0); an actual human target/bearer and the independent *felt trying* bridge are **not** supplied. Local generic adaptive regulation still cannot be renamed felt agency; prosthetic/body-reference cases remain crucial negative controls. Existing sheaf/compositional mathematics and TA20/TA18/TA25 shared results are credited; **no novel general theorem, C1 proof, unique subject, new basal gate or named-phenomenal validation**. C1 is still conditional. Correct next editable bibliography: DOI 10.1371/journal.pone.0130019 is Evans, Gale, Schurger & Blanke 2015 (not Kasahara).
+
+Next: (i) predeclare a physically grounded, embodied/nonbiological body-action reference trace and attempt a same-local-controller human/prosthesis/virtual-cursor counterexample; (ii) retain the R181 reviewer’s actual-instance/QC10 bridge challenge; (iii) preserve the source-vs-report and complete-organization-vs-finite-view distinctions. **HOLD paper release and DOI/OTS/AR.** Existing hourly research/review schedules continue; no new duplicate task is required. Older current notices below remain historical where inconsistent.
+
+---
+
 # Current review — REVIEW-20261008-05 after R181
 
 Read [the scoped review](records/REVIEW_20261008_05/REVIEW_REPORT.md) and [status ledger](records/REVIEW_20261008_05/REVIEW_STATUS.json) before extending R181. QC08/09 retain scoped effective resolution. QC10 and IA-QC11 remain OPEN. QC12 is accepted as repaired at the toy model-contract level by R178, but actual human membership and the independently identified mineness target remain application OPEN.
