@@ -1,0 +1,16 @@
+{
+  "schema":"uct-effective-map-manifest/1.0",
+  "entry_id":"UCT_EFFECTIVE_FORMAL_MAP",
+  "revision":"R178-SB20261008+CORE20261008",
+  "authority":"FORMAL_MAP_REVIEW_POLICY.json; highest guide section 4.4 explicitly permits effective additive layers",
+  "base":{"path":"UCT_FORMAL_GRAPH.json","commit":"2b8deb5a9f816f51ec6bd6961b3bfe8a8a439fcf","git_blob_sha":"172c254c5f09ce83a5daf67244f36fbc5a3b9254"},
+  "modules":[{"id":"CORE20261008","path":"records/CORE20261008_Target_Relative_Support/MAP_EXTENSION.json","git_blob_sha":"10970dea8e86050e5e2fae4be0da0930404b7589","status":"REGISTERED_ADDITIVE_AUDIT_INCOMPLETE"}],
+  "merge_order":"base then modules in listed order; expand node/rule defaults; append only; no ID overwrite",
+  "loader":"records/CORE20261008_Target_Relative_Support/load_formal_map.py",
+  "generated_output":"UCT_EFFECTIVE_FORMAL_GRAPH.json",
+  "on_base_or_module_change":"Fail closed, retrieve current source, reconcile and audit; do not overwrite new research with pinned backup",
+  "node_presence_is_premise_truth":false,
+  "full_semantic_audit_completed":false,
+  "audit":"records/CORE20261008_Target_Relative_Support/MAP_AUDIT.json",
+  "current_handoff":"records/CORE20261008_Target_Relative_Support/CURRENT_HANDOFF_ZH.md"
+}

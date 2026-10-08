@@ -1,0 +1,13 @@
+{
+  "record":"CORE20261008",
+  "date":"2026-10-08",
+  "mathematical_verification":"ACTUALLY_EXECUTED_LOCALLY",
+  "expanded_checker":"check_core_support.py in the downloadable expanded package",
+  "compact_checker":"compact_core_check.py also actually executed locally",
+  "results":{"nonempty_four_slot_families":65535,"nonempty_monotone_families":167,"families_with_single_cut_but_not_global_minimum":27690,"relay_supports":64,"relay_horizon":3,"actual_paired_update_checks":4648,"minimal_retention_masks":[3,5],"minimal_retention_plus_input_masks":[11,13],"minimal_cut_masks":[1,6],"gate_success_masks":[1,7],"order_final_q":[1,0]},
+  "graph_slice_run":{"new_nodes":33,"imported_anchor_ids":7,"loaded_nodes":40,"new_rules":11,"new_contexts":6,"status":"PASS_FOR_LOADED_SLICE_ONLY","actual_bridge_gate":"without OPEN actual bridge the target interpretation is not derivable"},
+  "complete_base_graph_executed":false,
+  "whole_graph_semantic_audit":"AUDIT_INCOMPLETE",
+  "scope":"Logic/support models only; no human/cellular phenomenal experiment, unique core, consciousness threshold, clinical recommendation, general priority claim or publication.",
+  "preservation":"Compact remote proofs/map/core checker differ from expanded local artifacts. Existing prior research remains unchanged; downloadable package contains the three original prior ZIPs. No Library update claimed."
+}

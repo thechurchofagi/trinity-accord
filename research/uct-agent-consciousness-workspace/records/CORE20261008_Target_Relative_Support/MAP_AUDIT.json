@@ -1,0 +1,20 @@
+{
+  "record":"CORE20261008",
+  "base_commit":"2b8deb5a9f816f51ec6bd6961b3bfe8a8a439fcf",
+  "base_graph_blob":"172c254c5f09ce83a5daf67244f36fbc5a3b9254",
+  "status":"AUDIT_INCOMPLETE",
+  "integration":"Explicit additive machine layer via root UCT_FORMAL_GRAPH_MODULES.json; original canonical graph bytes preserved",
+  "new_node_count":33,
+  "new_rule_count":11,
+  "new_context_count":6,
+  "source_imports_read":["A:C1","A:U1","A:P3","A:ACTUAL_TOKEN","A:C1_OI","R155:SELECTED_TARGET","R155:MINENESS_OBLIGATION"],
+  "new_coverage":"Each current statement/condition and 11 rule arguments reviewed; eleven CG/CD source cards explicitly inherited, not new discoveries",
+  "local_machine_run":"Imported-anchor slice plus expanded module only; 40 nodes and 11 rules; no full-base run",
+  "base_unreviewed_set":"All base.nodes IDs except the named imported-definition scope, all other base.rules and historical context relations. The full loader expands this into per-ID NOT_REVIEWED_THIS_ROUND entries.",
+  "syntactic_conservativity":"All new conclusions have new CORE20261008 IDs; no new rule has an old conclusion. If the unchanged base is acyclic, the checked one-way additive layer cannot introduce a dependency cycle. This is not a semantic-consistency proof.",
+  "rederived_chains":["finite family -> minimal supports -> intersection -> leastness","stronger target -> nested success families -> required-set relation","upward closure AND minimal family -> destructive-cut duality","relay equations -> alternate supports -> sensory-loss/retention distinction","agreement-gate equations -> nonmonotone minimality and deletion-order counterexamples","actual persisting instance AND P3 AND U1 -> local nonempty experience","actual bridge AND C1 AND fixed target contract -> scoped interpretation only"],
+  "blocked_promotions":["model target failure -> no experience","surviving cells -> former human experience intact","minimal retained set -> unique subject","same final anatomy -> same pointed process","finite assertion PASS -> all old nodes semantically checked"],
+  "open":["full current graph materialization and complete review coverage","independent human experiential target","actual intervention/background/continuation instance","exhaustive originality comparison"],
+  "tool_failure":"Large graph readable through GitHub connector, but bulk transfer to computation failed; ordinary contents fetch returned empty for this large file, and public download routes were inaccessible.",
+  "publication_authorized":false
+}
