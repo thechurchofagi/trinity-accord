@@ -1,0 +1,428 @@
+{
+  "scope": "All five new deductions; conditional manual arguments, not machine formalization. The routed-reference package is jointly instantiated by MODEL.py. Actual temporal instance remains unestablished.",
+  "nodes": [
+    {
+      "id": "TO20261008:ROUTED_REFERENCE_SETUP",
+      "kind": "PREMISE_PACKAGE",
+      "label": "Routed reference setup",
+      "statement": "On one fixed trial history and probe interval, delta=Delta+l_F-l_A; beta updates by beta_next=(1-eta)beta+eta*d with 0<eta<1; q=delta-a*beta; R=1[q-b*beta+epsilon_R>0]; U=q/s+epsilon_U with s>0 and the specified independent consumer port. Compare S=(a,b)=(1,0) and C=(0,1) under identical inputs, registers and conditional noise laws; actual routing differs. Computation follows both arrivals.",
+      "domain": "Real time-valued delta,beta,d,epsilon_R; dimensionless a,b,eta,epsilon_U; positive time scale s; finite adaptation history and one probe; not a complete neural signature.",
+      "scope": "Real time-valued delta,beta,d,epsilon_R; dimensionless a,b,eta,epsilon_U; positive time scale s; finite adaptation history and one probe; not a complete neural signature.",
+      "status": "DECLARED_CONDITIONAL_PREMISES",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §3",
+      "proof": "Declared executable equations and typed ports. The concrete rational witness in §4 establishes simultaneous model satisfiability.",
+      "source_lineage": "A/I v1.2 C1; R157 definable transport and semantic residual; R172 effective actual-use correction; R173 retentive history; TE20261008. Elementary averaging/threshold/potential mathematics is not claimed novel.",
+      "counterexamples_and_limits": "See manuscript §§5–8 and GAP_LEDGER.json; model checks are not physical realization, phenomenal evidence or global consistency proof.",
+      "formal_contract_TO20261008": {
+        "source_anchor": {
+          "path": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md",
+          "sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+          "locator": "§3"
+        },
+        "object_time_signature": "Real time-valued delta,beta,d,epsilon_R; dimensionless a,b,eta,epsilon_U; positive time scale s; finite adaptation history and one probe; not a complete neural signature.",
+        "quantifiers": "Every instance satisfying the exact scoped premise package; semantic candidate remains unproved.",
+        "actuality": "Abstract model unless independently discharged for an actual token; no inferred actuality from a schema.",
+        "open_obligations": [
+          "TO20261008-G1",
+          "TO20261008-G2",
+          "TO20261008-G3",
+          "TO20261008-G4"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "TO20261008:REFERENCE_CROSSING_AND_RETIMING",
+      "kind": "CONDITIONAL_MODEL_THEOREM",
+      "label": "Reference crossing and retiming",
+      "statement": "For constant d and beta_0<delta<d, beta_N=d+(1-eta)^N(beta_0-d) exceeds delta for some finite N; in S q then becomes negative. Uniform positive scaling of all time-valued parameters/history/noise preserves R and U with eta and routes fixed. Unilateral added latency need not preserve either. No phenomenal inversion is entailed.",
+      "domain": "All constants and finite trials satisfying ROUTED_REFERENCE_SETUP plus the stated crossing or retiming conditions; positive physical arrival delta is an additional condition when claimed.",
+      "scope": "All constants and finite trials satisfying ROUTED_REFERENCE_SETUP plus the stated crossing or retiming conditions; positive physical arrival delta is an additional condition when claimed.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §4",
+      "proof": "Induction solves the recurrence; geometric decay yields crossing. Scale the recurrence and q, then cancel the common positive factor in the report sign and U ratio.",
+      "source_lineage": "A/I v1.2 C1; R157 definable transport and semantic residual; R172 effective actual-use correction; R173 retentive history; TE20261008. Elementary averaging/threshold/potential mathematics is not claimed novel.",
+      "counterexamples_and_limits": "See manuscript §§5–8 and GAP_LEDGER.json; model checks are not physical realization, phenomenal evidence or global consistency proof.",
+      "formal_contract_TO20261008": {
+        "source_anchor": {
+          "path": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md",
+          "sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+          "locator": "§4"
+        },
+        "object_time_signature": "All constants and finite trials satisfying ROUTED_REFERENCE_SETUP plus the stated crossing or retiming conditions; positive physical arrival delta is an additional condition when claimed.",
+        "quantifiers": "Every instance satisfying the exact scoped premise package; semantic candidate remains unproved.",
+        "actuality": "Abstract model unless independently discharged for an actual token; no inferred actuality from a schema.",
+        "open_obligations": [
+          "TO20261008-G1",
+          "TO20261008-G2",
+          "TO20261008-G3",
+          "TO20261008-G4"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "to20261008_reference_crossing_retiming",
+            "all_of": [
+              "TO20261008:ROUTED_REFERENCE_SETUP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TO20261008:REPORT_ROUTE_NONENTAILMENT",
+      "kind": "CONDITIONAL_MODEL_THEOREM",
+      "label": "Report route nonentailment",
+      "statement": "R depends on a,b only through a+b. S and C therefore agree pointwise under shared report noise, and have equal report laws for every admitted input/history under the same conditional noise law. Report observations alone do not identify their distinct reference routes.",
+      "domain": "All real probe inputs/reference values and common conditional report noise laws in the fixed model; no claim that all evidence in a human experiment is report-only.",
+      "scope": "All real probe inputs/reference values and common conditional report noise laws in the fixed model; no claim that all evidence in a human experiment is report-only.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §5",
+      "proof": "Substitute q to obtain R=1[delta-(a+b)beta+epsilon_R>0]; equality is exact for every noise value, not inferred from sampling.",
+      "source_lineage": "A/I v1.2 C1; R157 definable transport and semantic residual; R172 effective actual-use correction; R173 retentive history; TE20261008. Elementary averaging/threshold/potential mathematics is not claimed novel.",
+      "counterexamples_and_limits": "See manuscript §§5–8 and GAP_LEDGER.json; model checks are not physical realization, phenomenal evidence or global consistency proof.",
+      "formal_contract_TO20261008": {
+        "source_anchor": {
+          "path": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md",
+          "sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+          "locator": "§5"
+        },
+        "object_time_signature": "All real probe inputs/reference values and common conditional report noise laws in the fixed model; no claim that all evidence in a human experiment is report-only.",
+        "quantifiers": "Every instance satisfying the exact scoped premise package; semantic candidate remains unproved.",
+        "actuality": "Abstract model unless independently discharged for an actual token; no inferred actuality from a schema.",
+        "open_obligations": [
+          "TO20261008-G1",
+          "TO20261008-G2",
+          "TO20261008-G3",
+          "TO20261008-G4"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "to20261008_report_route_nonidentification",
+            "all_of": [
+              "TO20261008:ROUTED_REFERENCE_SETUP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TO20261008:NONREPORT_ROUTE_CONTRAST",
+      "kind": "CONDITIONAL_MODEL_THEOREM",
+      "label": "Nonreport route contrast",
+      "statement": "For the specified common actuator port with identical noise, U_S-U_C=-beta/s. At beta nonzero the architectures differ despite matched reports. For 0<delta<beta and zero noise, removing the S upstream reference changes R and U, whereas removing the C threshold reference changes R only. The corresponding mean difference additionally requires common finite mean-zero actuator noise.",
+      "domain": "Specified S/C architectures and independently fixed consumers; structural/command discrimination only, not identification of every rival mechanism or phenomenology.",
+      "scope": "Specified S/C architectures and independently fixed consumers; structural/command discrimination only, not identification of every rival mechanism or phenomenology.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §6",
+      "proof": "Direct subtraction and evaluation under two explicitly different route interventions. The criterion alternative fixes the second consumer and forbids an unmodeled beta path.",
+      "source_lineage": "A/I v1.2 C1; R157 definable transport and semantic residual; R172 effective actual-use correction; R173 retentive history; TE20261008. Elementary averaging/threshold/potential mathematics is not claimed novel.",
+      "counterexamples_and_limits": "See manuscript §§5–8 and GAP_LEDGER.json; model checks are not physical realization, phenomenal evidence or global consistency proof.",
+      "formal_contract_TO20261008": {
+        "source_anchor": {
+          "path": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md",
+          "sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+          "locator": "§6"
+        },
+        "object_time_signature": "Specified S/C architectures and independently fixed consumers; structural/command discrimination only, not identification of every rival mechanism or phenomenology.",
+        "quantifiers": "Every instance satisfying the exact scoped premise package; semantic candidate remains unproved.",
+        "actuality": "Abstract model unless independently discharged for an actual token; no inferred actuality from a schema.",
+        "open_obligations": [
+          "TO20261008-G1",
+          "TO20261008-G2",
+          "TO20261008-G3",
+          "TO20261008-G4"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "to20261008_nonreport_route_contrast",
+            "all_of": [
+              "TO20261008:ROUTED_REFERENCE_SETUP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TO20261008:PAIRWISE_CLOCK_SETUP",
+      "kind": "PREMISE_PACKAGE",
+      "label": "Pairwise clock setup",
+      "statement": "Fix a finite connected undirected comparison graph, one laboratory arrival time r_i per vertex, and antisymmetric real reference beta_ij per oriented edge. Each comparison is executed after its two arrivals and encodes q_ij=r_j-r_i-beta_ij. Exact global coordinates mean q_ij=u_j-u_i on every edge.",
+      "domain": "Finite graph with an orientation for notation and both oriented edge values; all local comparisons belong to the declared interval. No global clock or experiential unity is presumed.",
+      "scope": "Finite graph with an orientation for notation and both oriented edge values; all local comparisons belong to the declared interval. No global clock or experiential unity is presumed.",
+      "status": "DECLARED_CONDITIONAL_PREMISES",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §7",
+      "proof": "Declared pairwise model. The three-event construction provides a simultaneously executable witness.",
+      "source_lineage": "A/I v1.2 C1; R157 definable transport and semantic residual; R172 effective actual-use correction; R173 retentive history; TE20261008. Elementary averaging/threshold/potential mathematics is not claimed novel.",
+      "counterexamples_and_limits": "See manuscript §§5–8 and GAP_LEDGER.json; model checks are not physical realization, phenomenal evidence or global consistency proof.",
+      "formal_contract_TO20261008": {
+        "source_anchor": {
+          "path": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md",
+          "sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+          "locator": "§7"
+        },
+        "object_time_signature": "Finite graph with an orientation for notation and both oriented edge values; all local comparisons belong to the declared interval. No global clock or experiential unity is presumed.",
+        "quantifiers": "Every instance satisfying the exact scoped premise package; semantic candidate remains unproved.",
+        "actuality": "Abstract model unless independently discharged for an actual token; no inferred actuality from a schema.",
+        "open_obligations": [
+          "TO20261008-G1",
+          "TO20261008-G2",
+          "TO20261008-G3",
+          "TO20261008-G4"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "TO20261008:GLOBAL_CLOCK_COMPATIBILITY",
+      "kind": "CONDITIONAL_MODEL_THEOREM",
+      "label": "Global clock compatibility",
+      "statement": "Exact global coordinates exist iff all oriented cycle sums of beta vanish; they are unique up to a common additive constant. For arrivals (0,20,40) and references beta_AB=30,beta_BC=30,beta_AC=0, encoded signs cycle and no global coordinate exists. A nonzero cycle sum alone does not generally imply a sign cycle. Neither result counts subjects.",
+      "domain": "Every finite connected graph in PAIRWISE_CLOCK_SETUP; exact additive representation distinguished from mere ordinal consistency.",
+      "scope": "Every finite connected graph in PAIRWISE_CLOCK_SETUP; exact additive representation distinguished from mere ordinal consistency.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §7",
+      "proof": "Necessity telescopes edge differences. Sufficiency constructs vertex offsets by path sums; zero cycles give path independence. The explicit triangle verifies a sign cycle; the (0,0,1) reference example rejects the stronger claim.",
+      "source_lineage": "A/I v1.2 C1; R157 definable transport and semantic residual; R172 effective actual-use correction; R173 retentive history; TE20261008. Elementary averaging/threshold/potential mathematics is not claimed novel.",
+      "counterexamples_and_limits": "See manuscript §§5–8 and GAP_LEDGER.json; model checks are not physical realization, phenomenal evidence or global consistency proof.",
+      "formal_contract_TO20261008": {
+        "source_anchor": {
+          "path": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md",
+          "sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+          "locator": "§7"
+        },
+        "object_time_signature": "Every finite connected graph in PAIRWISE_CLOCK_SETUP; exact additive representation distinguished from mere ordinal consistency.",
+        "quantifiers": "Every instance satisfying the exact scoped premise package; semantic candidate remains unproved.",
+        "actuality": "Abstract model unless independently discharged for an actual token; no inferred actuality from a schema.",
+        "open_obligations": [
+          "TO20261008-G1",
+          "TO20261008-G2",
+          "TO20261008-G3",
+          "TO20261008-G4"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "to20261008_global_clock_compatibility",
+            "all_of": [
+              "TO20261008:PAIRWISE_CLOCK_SETUP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TO20261008:ACTUAL_TEMPORAL_INSTANCE",
+      "kind": "PREMISE_PACKAGE",
+      "label": "Actual temporal instance",
+      "statement": "Fix an actual token P, declared interval and token-relative complete K-signature admitting C1. Independently ground arrival, reference-read, comparator and consumer events, value/sign types, all physical parameters and their roles in K. Theta_S is the K-definable actual upstream reference-use/negative-comparison/consumer-transfer predicate of §8. Claimed historical events belong to the interval or a justified current relation; external archives, test lists and certificates are not inserted as constituents.",
+      "domain": "One common actual bearer/time/K/parameter binding. Current complete organization and history-containing organization remain distinct.",
+      "scope": "One common actual bearer/time/K/parameter binding. Current complete organization and history-containing organization remain distinct.",
+      "status": "DECLARED_CONDITIONAL_PREMISES",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §8",
+      "proof": "This is an actual-application obligation, not supplied by the abstract equations, the execution checks or another rule schema.",
+      "source_lineage": "A/I v1.2 C1; R157 definable transport and semantic residual; R172 effective actual-use correction; R173 retentive history; TE20261008. Elementary averaging/threshold/potential mathematics is not claimed novel.",
+      "counterexamples_and_limits": "See manuscript §§5–8 and GAP_LEDGER.json; model checks are not physical realization, phenomenal evidence or global consistency proof.",
+      "formal_contract_TO20261008": {
+        "source_anchor": {
+          "path": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md",
+          "sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+          "locator": "§8"
+        },
+        "object_time_signature": "One common actual bearer/time/K/parameter binding. Current complete organization and history-containing organization remain distinct.",
+        "quantifiers": "Every instance satisfying the exact scoped premise package; semantic candidate remains unproved.",
+        "actuality": "Abstract model unless independently discharged for an actual token; no inferred actuality from a schema.",
+        "open_obligations": [
+          "TO20261008-G1",
+          "TO20261008-G2",
+          "TO20261008-G3",
+          "TO20261008-G4"
+        ],
+        "machine_formalized": false
+      }
+    },
+    {
+      "id": "TO20261008:EXPERIENTIAL_STRUCTURAL_COUNTERPART",
+      "kind": "CONDITIONAL_STRUCTURAL_TRANSPORT",
+      "label": "Experiential structural counterpart",
+      "statement": "Given ACTUAL_TEMPORAL_INSTANCE and A:C1, D_K(P) satisfies theta_S(p) iff E_K(P) satisfies theta_S(h(p)), with all physical parameters transported by the supplied isomorphism. This yields a structural counterpart of the actual comparison/use relation; it does not identify perceived temporal order, felt duration, familiar mineness or an exclusive subject.",
+      "domain": "One grounded actual complete token and K-definable predicate; conditional on C1, not an empirical derivation of C1.",
+      "scope": "One grounded actual complete token and K-definable predicate; conditional on C1, not an empirical derivation of C1.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §8",
+      "proof": "C1 supplies a sort-preserving isomorphism; induction on the fixed K-formula preserves truth with mapped parameters, as in R157. No external semantic predicate is smuggled into theta_S.",
+      "source_lineage": "A/I v1.2 C1; R157 definable transport and semantic residual; R172 effective actual-use correction; R173 retentive history; TE20261008. Elementary averaging/threshold/potential mathematics is not claimed novel.",
+      "counterexamples_and_limits": "See manuscript §§5–8 and GAP_LEDGER.json; model checks are not physical realization, phenomenal evidence or global consistency proof.",
+      "formal_contract_TO20261008": {
+        "source_anchor": {
+          "path": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md",
+          "sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+          "locator": "§8"
+        },
+        "object_time_signature": "One grounded actual complete token and K-definable predicate; conditional on C1, not an empirical derivation of C1.",
+        "quantifiers": "Every instance satisfying the exact scoped premise package; semantic candidate remains unproved.",
+        "actuality": "Abstract model unless independently discharged for an actual token; no inferred actuality from a schema.",
+        "open_obligations": [
+          "TO20261008-G1",
+          "TO20261008-G2",
+          "TO20261008-G3",
+          "TO20261008-G4"
+        ],
+        "machine_formalized": false,
+        "premise_routes": [
+          {
+            "rule": "to20261008_experiential_structural_counterpart",
+            "all_of": [
+              "A:C1",
+              "TO20261008:ACTUAL_TEMPORAL_INSTANCE"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TO20261008:ORDER_BRIDGE_CANDIDATE",
+      "kind": "SEMANTIC_BRIDGE_CANDIDATE",
+      "label": "Order bridge candidate",
+      "statement": "B_order proposes that an independently specified consumer-shared temporal relation constitutes a selected perceived event-order target on an independently delimited domain, with fixed orientation/correspondence. This bridge remains OPEN. Reports motivate the target but do not identify this route; a second consumer constrains mechanisms without alone establishing phenomenology.",
+      "domain": "Selected temporal-order content on a future justified actual domain. Not an existence threshold, universal consciousness measure, or new C1 axiom.",
+      "scope": "Selected temporal-order content on a future justified actual domain. Not an existence threshold, universal consciousness measure, or new C1 axiom.",
+      "status": "OPEN_INTERPRETIVE_HYPOTHESIS",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §8",
+      "proof": "No proof asserted. P2 supplies an exact identification obstacle; P3 gives a scoped architectural contrast. Independent relation-to-content evidence is still required.",
+      "source_lineage": "A/I v1.2 C1; R157 definable transport and semantic residual; R172 effective actual-use correction; R173 retentive history; TE20261008. Elementary averaging/threshold/potential mathematics is not claimed novel.",
+      "counterexamples_and_limits": "See manuscript §§5–8 and GAP_LEDGER.json; model checks are not physical realization, phenomenal evidence or global consistency proof.",
+      "formal_contract_TO20261008": {
+        "source_anchor": {
+          "path": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md",
+          "sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+          "locator": "§8"
+        },
+        "object_time_signature": "Selected temporal-order content on a future justified actual domain. Not an existence threshold, universal consciousness measure, or new C1 axiom.",
+        "quantifiers": "Every instance satisfying the exact scoped premise package; semantic candidate remains unproved.",
+        "actuality": "Abstract model unless independently discharged for an actual token; no inferred actuality from a schema.",
+        "open_obligations": [
+          "TO20261008-G1",
+          "TO20261008-G2",
+          "TO20261008-G3",
+          "TO20261008-G4"
+        ],
+        "machine_formalized": false
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "to20261008_reference_crossing_retiming",
+      "all_of": [
+        "TO20261008:ROUTED_REFERENCE_SETUP"
+      ],
+      "conclusion": "TO20261008:REFERENCE_CROSSING_AND_RETIMING",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "statement": "For constant d and beta_0<delta<d, beta_N=d+(1-eta)^N(beta_0-d) exceeds delta for some finite N; in S q then becomes negative. Uniform positive scaling of all time-valued parameters/history/noise preserves R and U with eta and routes fixed. Unilateral added latency need not preserve either. No phenomenal inversion is entailed.",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §4",
+      "proof_sketch": "Recurrence induction, geometric convergence and positive scaling.",
+      "formal_contract_TO20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same history, eta and time units",
+          "crossing side conditions OR separately retiming side conditions as displayed; these are separate clauses, not a requirement to perform both operations"
+        ],
+        "source_sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+        "quantification": "All instances satisfying the displayed jointly satisfiable premise package, with the same bindings throughout.",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "to20261008_report_route_nonidentification",
+      "all_of": [
+        "TO20261008:ROUTED_REFERENCE_SETUP"
+      ],
+      "conclusion": "TO20261008:REPORT_ROUTE_NONENTAILMENT",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "statement": "R depends on a,b only through a+b. S and C therefore agree pointwise under shared report noise, and have equal report laws for every admitted input/history under the same conditional noise law. Report observations alone do not identify their distinct reference routes.",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §5",
+      "proof_sketch": "Algebraic factorization through a+b.",
+      "formal_contract_TO20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same delta,beta and conditional noise law",
+          "fixed report convention and admitted a,b"
+        ],
+        "source_sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+        "quantification": "All instances satisfying the displayed jointly satisfiable premise package, with the same bindings throughout.",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "to20261008_nonreport_route_contrast",
+      "all_of": [
+        "TO20261008:ROUTED_REFERENCE_SETUP"
+      ],
+      "conclusion": "TO20261008:NONREPORT_ROUTE_CONTRAST",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "statement": "For the specified common actuator port with identical noise, U_S-U_C=-beta/s. At beta nonzero the architectures differ despite matched reports. For 0<delta<beta and zero noise, removing the S upstream reference changes R and U, whereas removing the C threshold reference changes R only. The corresponding mean difference additionally requires common finite mean-zero actuator noise.",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §6",
+      "proof_sketch": "Subtract U; evaluate independent path knockouts.",
+      "formal_contract_TO20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same beta,s and fixed nonreport consumer",
+          "shared noise for pathwise comparison; common finite means for mean clause",
+          "isolated designated intervention and no alternative beta route"
+        ],
+        "source_sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+        "quantification": "All instances satisfying the displayed jointly satisfiable premise package, with the same bindings throughout.",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "to20261008_global_clock_compatibility",
+      "all_of": [
+        "TO20261008:PAIRWISE_CLOCK_SETUP"
+      ],
+      "conclusion": "TO20261008:GLOBAL_CLOCK_COMPATIBILITY",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "statement": "Exact global coordinates exist iff all oriented cycle sums of beta vanish; they are unique up to a common additive constant. For arrivals (0,20,40) and references beta_AB=30,beta_BC=30,beta_AC=0, encoded signs cycle and no global coordinate exists. A nonzero cycle sum alone does not generally imply a sign cycle. Neither result counts subjects.",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §7",
+      "proof_sketch": "Telescoping and path-independent potentials; two counterexamples.",
+      "formal_contract_TO20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same finite connected graph",
+          "antisymmetric beta and common time units",
+          "exact additive values, not just order signs"
+        ],
+        "source_sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+        "quantification": "All instances satisfying the displayed jointly satisfiable premise package, with the same bindings throughout.",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "to20261008_experiential_structural_counterpart",
+      "all_of": [
+        "A:C1",
+        "TO20261008:ACTUAL_TEMPORAL_INSTANCE"
+      ],
+      "conclusion": "TO20261008:EXPERIENTIAL_STRUCTURAL_COUNTERPART",
+      "kind": "CONDITIONAL_DEDUCTION",
+      "statement": "Given ACTUAL_TEMPORAL_INSTANCE and A:C1, D_K(P) satisfies theta_S(p) iff E_K(P) satisfies theta_S(h(p)), with all physical parameters transported by the supplied isomorphism. This yields a structural counterpart of the actual comparison/use relation; it does not identify perceived temporal order, felt duration, familiar mineness or an exclusive subject.",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §8",
+      "proof_sketch": "Sorted formula induction under the supplied isomorphism.",
+      "formal_contract_TO20261008": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "one actual bearer, interval and complete K",
+          "independently grounded predicate and all parameters",
+          "h transports every physical parameter; no unproved felt-order predicate"
+        ],
+        "source_sha256": "4bfa0fec2d9ac63bed7669a6f6806305d480743c44caadecb717cafc3c85bc97",
+        "quantification": "All instances satisfying the displayed jointly satisfiable premise package, with the same bindings throughout.",
+        "machine_proof": false
+      }
+    }
+  ],
+  "alternative_routes": "No rule treats alternative physical mechanisms S/C as simultaneous actual routes; they are comparison objects in the model. P1 crossing and scaling are separate conditional clauses."
+}

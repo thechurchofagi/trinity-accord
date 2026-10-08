@@ -1,0 +1,24 @@
+# Current dialogue extension — TO20261008 temporal reference and order
+
+Latest scheduled basis remains R173; this author-requested extension follows TE20261008 and does not reserve R174. Read [the derivation](records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md), [Chinese progress](records/TO20261008_Temporal_Reference_and_Order/REVIEW_ZH.md), [proof ledger](records/TO20261008_Temporal_Reference_and_Order/PROOF_LEDGER.json), [model/results](records/TO20261008_Temporal_Reference_and_Order/MODEL_RESULTS.json) and [open gaps](records/TO20261008_Temporal_Reference_and_Order/GAP_LEDGER.json). Graph R173-TE20261008-TO20261008-v1.0: 535/258/159; old objects and mandatory R171/R172 effective overlays are preserved. Counts are bookkeeping, not progress evidence.
+
+New bounded result: identical stored references and all temporal-order reports can coexist with different executed temporal comparisons and nonreport timing commands. Three pairwise comparators need not admit one common additive time coordinate; zero reference sum around every cycle is the exact model condition. Grounded C1 transport remains separate from the OPEN B_order perceived-order bridge. No experience quantity, unique owner or complete brain/mechanical equivalence is inferred.
+
+Next: constrain one concrete temporal relation and its independent content interpretation against the specified comparator-versus-report-criterion alternative. Require a fixed actual consumer path and a failure condition; no generic certificate/statistics expansion. TO20261008-G1–G4 remain OPEN; QC-06/07 remain pending reviewer assessment. Earlier current/latest headers below are historical where superseded.
+
+---
+
+# 本轮推进：实际时间参照与先后关系
+
+这轮没有推出“每多一个组织单位，体验必然增加”。它把问题收窄到可明确区分的一种内容：动作与反馈的先后关系。
+
+1. **小模型已运行。** 两个装置存着相同的时间参照，接收相同事件。一个把参照用于共同的时间比较器，另一个只用于回答门槛；它们的回答可以对所有输入完全相同，但独立时间修正指令不同。示例中参照约90毫秒、反馈晚20毫秒，两者分别输出约−0.70与+0.20的规范化指令。数值是示例，不是人脑拟合或体验测量。
+2. **组织差异给出了明确后果。** 实际用了哪条线路比“存着什么”“说了什么”更能限定这个具体时间关系。证明不是从有限枚举外推；报告等价和指令差异有代数推导。
+3. **远距离大脑实验有了具体检查项。** 三个局部时间比较器可能产生循环先后，不能自动拼成一个共同时间坐标。全局坐标存在的精确条件是每个环的参照偏移和为零。此为经典图势函数条件的本项目应用，不是新数学发明。它不决定主体数目。
+4. **C1 接口保留了缺口。** 如果这些实际关系已在完整组织中得到独立定位，C1 保留其体验结构对应；但“对应关系就是感到先/后”的 B_order 尚未建立。动作变化、报告变化、体验变化不能混写。
+
+一手先例：Stetson et al. (2006), Neuron, DOI 10.1016/j.neuron.2006.08.006。原研究有针对特定偏差解释的控制，本轮不声称推翻其完整证据。我们的贡献是把该现象目标、明确竞争线路和 UCT 的推理边界接到一起。
+
+精确论证及出处见英文正文 P1–P5；八项小模型检查验证示例和边界，不能当作体验证据。TO20261008-G1–G4 全部 OPEN。QC-06/07 仍由审查者判断，不在这里自我关闭。
+
+下一步只解决一个问题：有没有独立限制实际线路的证据，使某个身体相关时间关系同时解释先后体验目标与无报告时间动作，并排除这两种已指定线路中的一种？验收需给出实际关系、独立内容目标、对手解释和可失败预测；证据不足就保留 B_order，停止扩张辅助证书系列。

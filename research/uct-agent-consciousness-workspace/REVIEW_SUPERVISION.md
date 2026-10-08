@@ -222,3 +222,14 @@ Stable open items TE20261008-G1–G7 are in GAP_LEDGER.json with severity, sourc
 Next reviewer: check the actual/selected/complete scope and theta_T grounding first; do not close real implementation, familiar temporal experience or mineness gaps using the finite checks. The finite repertoire calculation is not an actual experiential-bit measurement.
 
 Concurrent R173 was read before save and preserved. New §7.1 distinguishes actual causal trace migration from unrelated equal-value initialization and proves finite faithful-relay endpoint-reachability preservation. TE20261008-G7 records a high-priority application scope obligation: use an actual history-containing token or a grounded internal relation; do not let an external past alone change an identical complete current experiential type. This is a conditional-application clarification, not independent review closure or a declaration that R173 is false.
+
+
+## AUTHOR-REQUESTED-EXTENSION-TO20261008 — temporal-reference model and semantic boundary
+
+Status: RESEARCH_CONTRIBUTION_WITH_SELF_CHECK, not independent review or closure of previous findings. Scope: R173 + TE20261008 at d2507806e4f3215e0484d0fadb8e5e0d325558f2; no running scheduled work is counted as failure or progress. New record: records/TO20261008_Temporal_Reference_and_Order.
+
+P1 derives a reference crossing and scoped retiming; P2 proves exact report equivalence of distinct routes; P3 derives their fixed nonreport-consumer contrast; P4 proves local-clock compatibility and gives an incompatible triangle; P5 states only grounded conditional C1 transport. The prior human study's bias controls are acknowledged. Neither its reports nor the toy actuator identify the proposed B_order bridge. Mathematical identities are not claimed historically novel.
+
+Stable open reminders with exact source, severity, argument, scope, action and verification basis are TO20261008-G1–G4 in GAP_LEDGER.json: actual path grounding (HIGH); temporal-content bridge (HIGH); common-clock/subject/richness distinction (HIGH); restricted mechanism identification (MEDIUM). All are OPEN. The main model has matching reports with different commands and a nonadditive-reference example without a sign cycle, preventing two common overclaims. Review these actual examples and the manual proofs rather than treating check counts as resolution.
+
+Next: one independently motivated, physically constrained temporal-order bridge against the explicit S/C rival. If evidence cannot identify it, record failure and keep the bridge OPEN; do not divert into another broad certificate chain. QC-01–05 retain prior scoped closure; QC-06/07 remain pending external-to-this-contribution review. No frozen paper, task frequency or publication state is changed.

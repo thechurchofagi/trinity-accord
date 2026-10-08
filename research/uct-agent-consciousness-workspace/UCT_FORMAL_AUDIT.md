@@ -1,3 +1,15 @@
+# Current dialogue extension — TO20261008 temporal reference and order
+
+Latest scheduled basis remains R173; this author-requested extension follows TE20261008 and does not reserve R174. Read [the derivation](records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md), [Chinese progress](records/TO20261008_Temporal_Reference_and_Order/REVIEW_ZH.md), [proof ledger](records/TO20261008_Temporal_Reference_and_Order/PROOF_LEDGER.json), [model/results](records/TO20261008_Temporal_Reference_and_Order/MODEL_RESULTS.json) and [open gaps](records/TO20261008_Temporal_Reference_and_Order/GAP_LEDGER.json). Graph R173-TE20261008-TO20261008-v1.0: 535/258/159; old objects and mandatory R171/R172 effective overlays are preserved. Counts are bookkeeping, not progress evidence.
+
+New bounded result: identical stored references and all temporal-order reports can coexist with different executed temporal comparisons and nonreport timing commands. Three pairwise comparators need not admit one common additive time coordinate; zero reference sum around every cycle is the exact model condition. Grounded C1 transport remains separate from the OPEN B_order perceived-order bridge. No experience quantity, unique owner or complete brain/mechanical equivalence is inferred.
+
+Next: constrain one concrete temporal relation and its independent content interpretation against the specified comparator-versus-report-criterion alternative. Require a fixed actual consumer path and a failure condition; no generic certificate/statistics expansion. TO20261008-G1–G4 remain OPEN; QC-06/07 remain pending reviewer assessment. Earlier current/latest headers below are historical where superseded.
+
+---
+
+Audit scope: manual P1–P5 arguments, eight exact toy checks, new rule typing and preserved old graph objects. No independent peer review, full semantic map proof, human fit or actual C1 instance validation. See records/TO20261008_Temporal_Reference_and_Order/MAP_AUDIT.json.
+
 # Author-requested extension — TE20261008 organization transformations
 
 Latest saved scheduled research basis: R173 at 8df66b1bcf7c21795c4fba67eb1061815bf8c645, retaining R172 QC-06/07 effective corrections. This dialogue extension does **not** reserve R174. Current aggregate graph: **R173-TE20261008-v1.0, 526 nodes / 253 rules / 154 context links**. All prior node/rule/context objects are preserved. Read [the English derivation](records/TE20261008_Organization_Transformations/Organization_Transformations_and_Relational_Increment_v0_1.md), [Chinese explanation](records/TE20261008_Organization_Transformations/REVIEW_ZH.md), [proof ledger](records/TE20261008_Organization_Transformations/PROOF_LEDGER.json), [map extension](records/TE20261008_Organization_Transformations/MAP_EXTENSION.json), [open gaps](records/TE20261008_Organization_Transformations/GAP_LEDGER.json), and [checks](records/TE20261008_Organization_Transformations/CHECK_RESULTS.json).

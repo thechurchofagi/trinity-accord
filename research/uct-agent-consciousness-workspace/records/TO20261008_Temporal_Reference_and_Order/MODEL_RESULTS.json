@@ -1,0 +1,127 @@
+{
+  "status": "EXACT_TOY_MODEL_ONLY",
+  "checks": [
+    {
+      "name": "closed_form_and_crossing",
+      "pass": true,
+      "scope": "Exact illustrative 8-trial model; P1 is general algebra."
+    },
+    {
+      "name": "report_route_equivalence_examples",
+      "pass": true,
+      "scope": "Boundary and signed examples only; P2 proves pointwise equivalence for all inputs/noise."
+    },
+    {
+      "name": "nonreport_separation",
+      "pass": true,
+      "scope": "Fixed ports and common actuator noise; does not measure experience."
+    },
+    {
+      "name": "route_knockout_contrast",
+      "pass": true,
+      "scope": "Two distinct stipulated knockouts, not one shared physical intervention."
+    },
+    {
+      "name": "full_retiming_vs_unilateral_latency",
+      "pass": true,
+      "scope": "All relevant model time parameters scale; added latency alone breaks sign preservation."
+    },
+    {
+      "name": "cyclic_encoding_obstruction",
+      "pass": true,
+      "scope": "Pairwise comparator countermodel; no experienced-cycle claim."
+    },
+    {
+      "name": "compatible_potential_reconstruction",
+      "pass": true,
+      "scope": "One exact compatible instance; general proof is path independence in P4."
+    },
+    {
+      "name": "nonzero_cycle_sum_need_not_reverse_signs",
+      "pass": true,
+      "scope": "Rejects overclaim that nonadditive offsets always produce a sign cycle."
+    }
+  ],
+  "example": {
+    "beta": {
+      "exact": "1474375/16384",
+      "decimal": 89.98870849609375
+    },
+    "S": {
+      "q": {
+        "exact": "-1146695/16384",
+        "decimal": -69.98870849609375
+      },
+      "R": 0,
+      "U": {
+        "exact": "-229339/327680",
+        "decimal": -0.6998870849609375
+      }
+    },
+    "C": {
+      "q": {
+        "exact": "20",
+        "decimal": 20.0
+      },
+      "R": 0,
+      "U": {
+        "exact": "1/5",
+        "decimal": 0.2
+      }
+    },
+    "S_route_off": {
+      "q": {
+        "exact": "20",
+        "decimal": 20.0
+      },
+      "R": 1,
+      "U": {
+        "exact": "1/5",
+        "decimal": 0.2
+      }
+    },
+    "C_threshold_off": {
+      "q": {
+        "exact": "20",
+        "decimal": 20.0
+      },
+      "R": 1,
+      "U": {
+        "exact": "1/5",
+        "decimal": 0.2
+      }
+    }
+  },
+  "three_event_q": {
+    "('A', 'B')": {
+      "exact": "-10",
+      "decimal": -10.0
+    },
+    "('B', 'C')": {
+      "exact": "-10",
+      "decimal": -10.0
+    },
+    "('A', 'C')": {
+      "exact": "40",
+      "decimal": 40.0
+    },
+    "('B', 'A')": {
+      "exact": "10",
+      "decimal": 10.0
+    },
+    "('C', 'B')": {
+      "exact": "10",
+      "decimal": 10.0
+    },
+    "('C', 'A')": {
+      "exact": "-40",
+      "decimal": -40.0
+    }
+  },
+  "limits": [
+    "No human data or quantitative fit",
+    "No actual neural/hardware realization certified",
+    "No C1/B_order validation",
+    "No global map semantic proof"
+  ]
+}

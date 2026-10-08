@@ -1,0 +1,45 @@
+{
+  "record_type": "RESEARCH_SELF_CHECK_NOT_INDEPENDENT_REVIEW",
+  "items": [
+    {
+      "id": "TO20261008-G1",
+      "severity": "HIGH",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §§3,8 / ACTUAL_TEMPORAL_INSTANCE",
+      "argument_or_counterexample": "A numerical simulation and identical response curves do not establish a brain or mechanical system's actual comparator, reference-read or consumer paths. Same stored reference values do not establish same executed use.",
+      "impact_scope": "§§3,8 / ACTUAL_TEMPORAL_INSTANCE",
+      "recommended_action": "Ground one actual instance and its independently fixed consumer ports; distinguish source statements, measurements and assumed circuit roles.",
+      "status": "OPEN",
+      "verification_basis": "Manual algebra/countermodels and MODEL_RESULTS.json establish only the model-level claim. Actual implementation and semantic bridge are not discharged."
+    },
+    {
+      "id": "TO20261008-G2",
+      "severity": "HIGH",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §§5,6,8 / ORDER_BRIDGE_CANDIDATE",
+      "argument_or_counterexample": "S/C produce identical report laws for all admitted inputs while q and U differ. Nonreport motor output alone also need not identify experienced temporal content. C1 preserves a grounded structural predicate without naming felt order.",
+      "impact_scope": "§§5,6,8 / ORDER_BRIDGE_CANDIDATE",
+      "recommended_action": "Specify one independently motivated relation-to-content bridge and its competing explanation. Accept only source-grounded evidence or a scoped impossibility result; do not close via PASS counts.",
+      "status": "OPEN",
+      "verification_basis": "Manual algebra/countermodels and MODEL_RESULTS.json establish only the model-level claim. Actual implementation and semantic bridge are not discharged."
+    },
+    {
+      "id": "TO20261008-G3",
+      "severity": "HIGH",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §§7,9 / GLOBAL_CLOCK_COMPATIBILITY",
+      "argument_or_counterexample": "Pairwise time coordination can fail to admit one additive coordinate; coordinate existence conversely selects no unique subject. Content change does not imply richer total experience.",
+      "impact_scope": "§§7,9 / GLOBAL_CLOCK_COMPATIBILITY",
+      "recommended_action": "Keep subject individuation, additive compatibility, ordinal consistency and richness distinct in the retained giant-network and split-brain experiments.",
+      "status": "OPEN",
+      "verification_basis": "Manual algebra/countermodels and MODEL_RESULTS.json establish only the model-level claim. Actual implementation and semantic bridge are not discharged."
+    },
+    {
+      "id": "TO20261008-G4",
+      "severity": "MEDIUM",
+      "source": "records/TO20261008_Temporal_Reference_and_Order/Temporal_Reference_and_Represented_Order_v0_1.md §6 / NONREPORT_ROUTE_CONTRAST",
+      "argument_or_counterexample": "A second output separates only the specified fixed architectures; a hidden beta path, changed readout calibration or nonisolated intervention can mimic the contrast.",
+      "impact_scope": "§6 / NONREPORT_ROUTE_CONTRAST",
+      "recommended_action": "Compare one concrete rival with independently constrained paths. State which assumption fails if the contrast is absent; do not claim identification of all possible mechanisms.",
+      "status": "OPEN",
+      "verification_basis": "Manual algebra/countermodels and MODEL_RESULTS.json establish only the model-level claim. Actual implementation and semantic bridge are not discharged."
+    }
+  ]
+}

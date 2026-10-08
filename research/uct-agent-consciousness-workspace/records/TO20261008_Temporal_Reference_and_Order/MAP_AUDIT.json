@@ -1,0 +1,67 @@
+{
+  "status": "SCOPED_INTEGRATION_CHECK_ONLY",
+  "base_commit": "d2507806e4f3215e0484d0fadb8e5e0d325558f2",
+  "parent_graph_sha256": "3e1f12cf539564ebcda6d98e1e13e328c347e57dca42381b4c67991348627752",
+  "graph_sha256": "ff5acea4e2a49affb9d3cf0f7f6d23236268c403a42bd00cd71ca05d64b7c7f8",
+  "counts": {
+    "nodes": 535,
+    "rules": 258,
+    "context_links": 159
+  },
+  "checks": [
+    {
+      "name": "exact_parent_nodes",
+      "pass": true
+    },
+    {
+      "name": "exact_extension_nodes",
+      "pass": true
+    },
+    {
+      "name": "exact_parent_rules",
+      "pass": true
+    },
+    {
+      "name": "exact_extension_rules",
+      "pass": true
+    },
+    {
+      "name": "exact_parent_context_links",
+      "pass": true
+    },
+    {
+      "name": "exact_extension_context_links",
+      "pass": true
+    },
+    {
+      "name": "unique_node_and_rule_ids",
+      "pass": true
+    },
+    {
+      "name": "new_references_resolve",
+      "pass": true
+    },
+    {
+      "name": "source_hashes_match",
+      "pass": true
+    },
+    {
+      "name": "semantic_bridge_has_no_deductive_incoming_rule",
+      "pass": true
+    },
+    {
+      "name": "actual_package_not_inferred_from_abstract_model",
+      "pass": true
+    },
+    {
+      "name": "C1_rule_retains_actuality",
+      "pass": true
+    }
+  ],
+  "not_established": [
+    "Global semantic consistency",
+    "Actual token grounding",
+    "C1 or B_order empirical truth",
+    "Independent review closure"
+  ]
+}
