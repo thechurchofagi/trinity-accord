@@ -1,0 +1,23 @@
+{
+  "batch": "2026-10-08-mgtd-v101",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 138355,
+      "doi": "10.5281/zenodo.23241982",
+      "name": "MGTD_Method_Paper_v1.0.1.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-10-08-mgtd-v101/proofs/METHOD20261008/MGTD_Method_Paper_v1.0.1.pdf.ots",
+      "proof_sha256": "e9e357a4361c1cfbbf1be4075dea48da7e26398a8b66ea0eb22a24cbdfce1293",
+      "report": "METHOD20261008",
+      "role": "Corrected and public-readback-verified English methods preprint",
+      "sha256": "98abef0e92d0bb599146cdf525d98acb7045a168912ec9e87ba7723bc958097c",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 1,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}
