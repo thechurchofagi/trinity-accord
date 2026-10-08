@@ -1,0 +1,29 @@
+{
+  "record":"RU20261008",
+  "status":"AUDIT_INCOMPLETE",
+  "module_status":"PENDING_MAP",
+  "enabled_as_established_premises":false,
+  "canonical_blob":"172c254c5f09ce83a5daf67244f36fbc5a3b9254",
+  "full_graph_materialized_locally":false,
+  "full_graph_semantic_review_completed":false,
+  "canonical_access":"Decoded searchable connector body was obtained; complete local materialization and all-node semantic review were not completed. A later cached resource expired; no cached-access failure was misreported as review completion.",
+  "local_checks":{
+    "node_count":19,
+    "rule_count":9,
+    "id_uniqueness":"PASS",
+    "premise_references":"PASS for expanded local module against explicitly listed source anchors",
+    "acyclicity":"PASS for expanded local module; not a semantic proof",
+    "joint_instance_guards":"Explicit four-bit source/query contract, ell=2 wiring instance and actual fixed-J bridge retained",
+    "proof_review":"All displayed new conditional proofs and model boundaries reviewed. No actual human or deployed-model bridge established.",
+    "remote_compact_serialization":"Same 19 node IDs and9 AND routes; source prose compressed with explicit defaults. Not byte-identical to expanded local map. Provenance context OO20261008 references a module, not an extra inference premise."
+  },
+  "reviewed_node_suffixes":["CONTRACT","WITNESS","ANSWER_POSTERIOR","POSTERIOR_LAWS","ALL_CODES","EQUALITY_CLASS","SELECTION","CEILING","FRONTIERS","LOSS","VALUE_REVERSAL","WIRING","WIRING_RESULTS","CALIBRATION","REALIZATION","ACTUAL_J_DIFFERENCE","TYPE_APPLICATION","PERSISTENCE","LOCAL_EXPERIENCE"],
+  "reviewed_rule_suffixes":["r_posteriors","r_equality","r_ceiling","r_frontier","r_value","r_binding","r_calibration","r_type","r_persist"],
+  "id_prefix":"RU20261008:",
+  "inherited_scoped_anchors":["A:C1","A:ACTUAL_TOKEN","A:U1","UCT I P3 source clause","C:FIXED_J","C:P1","C:P3","UCT III section2 task-monitor-report distinction"],
+  "unreviewed":["All remaining canonical nodes/rules and disconnected semantic relationships individually","Full effective CORE semantic compatibility","All pending EI/R183/OO cross-module relationships","Actual human or deployed AI realization","Named felt-confidence/self-related experiential bridge"],
+  "failure_controls":["Forced mean5/8 is not per-cell reliability","Both candidate encoders may be perfectly calibrated and Bayes optimal","No normalized metacognitive-efficiency ordering follows","Selection cannot use a hidden truth label or extra source access","Changing scoring contracts does not itself imply experiential-type change","Same confidence histogram does not fix answer binding","Persistent local experience is not removed by downstream abstention or missing report"],
+  "historical_priority":"UNVERIFIED; posterior rejection, risk-coverage, Walsh and bent functions are prior mathematics",
+  "promotion_requires":"Retrieve complete current base and all effective layers, perform required whole-map review, reconcile concurrent modules, and retain actual/phenomenal bridges as open unless independently discharged.",
+  "new_publication":false
+}
