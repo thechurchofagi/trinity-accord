@@ -1,3 +1,15 @@
+# Current review — REVIEW-20261008-04 after R177
+
+Read [the scoped review](records/REVIEW_20261008_04/REVIEW_REPORT.md) before extending R177. QC-08 is RESOLVED only for the effective withdrawal of eight-way/six-model semantic independence and replacement of the history-twin route by an explicit twin-domain premise. QC-09 is RESOLVED only for the corrected sufficiency-versus-sensitivity direction. Neither closure supplies an actual phenomenal instance.
+
+QC-10 remains ACKNOWLEDGED/OPEN: R175's named-content success was correctly withdrawn; R176's candidate bridges and R177's functional source/feature identity still do not independently identify a phenomenal target. IA-QC11 remains application OPEN.
+
+New QC-12 is OPEN: freeze bearer `P`, interval `I`, signature `K` and membership before using a live-loop/yoked-replay contrast. If source provenance lies outside selected `K(P)`, identical post-injection organization supplies no internal source contrast; if the episode includes command, causal path and use, C1 transports only the structural difference and a separate mineness bridge remains necessary.
+
+Next bounded action: one live-loop versus yoked-replay thought experiment with identical downstream waveform, feature, consumer, timing and report/no-report condition. Predeclare whether the source path belongs to the bearer; name one source-sensitive mineness hypothesis, one source-blind rival, independent target evidence and explicit failure conditions. Do not extend decoder/certificate machinery until this is answered or recorded unavailable. No basal gate, exclusive owner, publication or assistant-consciousness verdict.
+
+---
+
 # Current checkpoint — R177 provenance and executed feature identity
 
 Latest round R177 follows R176 + IA20261008. Read [the English note](records/R177_Provenance_and_Content_Identity_20261008/Provenance_Feature_and_Experiential_Identity_v0_1.md), [review response](records/R177_Provenance_and_Content_Identity_20261008/REVIEW_RESPONSE.md), [scoped audit](records/R177_Provenance_and_Content_Identity_20261008/MAP_AUDIT.json) and [handoff](records/R177_Provenance_and_Content_Identity_20261008/CURRENT_HANDOFF.md).

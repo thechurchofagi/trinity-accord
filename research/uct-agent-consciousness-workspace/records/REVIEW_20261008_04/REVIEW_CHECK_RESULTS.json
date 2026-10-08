@@ -1,0 +1,19 @@
+{
+  "status": "SCOPED_READ_AND_CONTRACT_REVIEW",
+  "checks": [
+    {"name": "latest_saved_head_is_R177_receipt", "pass": true},
+    {"name": "r175_six_row_rule_suspended_by_R176", "pass": true},
+    {"name": "suspended_six_row_node_has_no_downstream_consumer", "pass": true},
+    {"name": "history_twin_effective_route_requires_explicit_twin_domain", "pass": true},
+    {"name": "present_slice_effective_route_consumes_admitted_twin", "pass": true},
+    {"name": "R174_fiber_direction_effectively_corrected", "pass": true},
+    {"name": "R175_named_content_success_withdrawn", "pass": true},
+    {"name": "R177_rules_do_not_conclude_named_phenomenal_quality", "pass": true},
+    {"name": "R177_functional_feature_premises_are_conjunctive", "pass": true}
+  ],
+  "limits": [
+    "Checks confirm saved contracts and rule use, not empirical truth.",
+    "No global semantic proof or proof-assistant verification.",
+    "The new QC-12 thought experiment is a proposed test, not an observed result."
+  ]
+}

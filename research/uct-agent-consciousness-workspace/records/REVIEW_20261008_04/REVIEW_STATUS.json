@@ -1,0 +1,27 @@
+{
+  "review_id": "REVIEW-20261008-04",
+  "date": "2026-10-08",
+  "inspected_head": "250b10b328fc4aac6e03eca076a5f1dd32cbc6b5",
+  "latest_round": "R177",
+  "graph": {
+    "revision": "R177-v1.0",
+    "nodes": 584,
+    "rules": 284,
+    "context_links": 178
+  },
+  "master_version_read": 32,
+  "findings": {
+    "QC-20261008-08": "RESOLVED_SCOPED_EFFECTIVE",
+    "QC-20261008-09": "RESOLVED_SCOPED_EFFECTIVE",
+    "QC-20261008-10": "ACKNOWLEDGED_OPEN",
+    "IA-QC11": "ACKNOWLEDGED_APPLICATION_OPEN",
+    "QC-20261008-12": "OPEN"
+  },
+  "not_established": [
+    "six semantic event models",
+    "an actual same-selector/different-experience pair",
+    "an independently supported phenomenal target",
+    "a bodily-mineness bridge",
+    "independent review of the whole graph"
+  ]
+}
