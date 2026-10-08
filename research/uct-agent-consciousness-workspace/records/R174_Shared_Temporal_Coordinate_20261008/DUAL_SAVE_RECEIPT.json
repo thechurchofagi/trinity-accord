@@ -1,0 +1,79 @@
+{
+  "record": "R174_DUAL_SAVE_RECEIPT",
+  "date": "2026-10-08",
+  "scope": "R174 shared temporal coordinate research; no DOI/OTS/Arweave or production actions.",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "parent_commit": "53a127c4a9e8b867b21ab7f536109eb6408e5943",
+    "core_commit": "49b7bf2e2ce43b6f26ff27f6353efb4d28a76caf",
+    "core_tree": "6cb521d795c128d842ef26c57bb19f7ec02f2348",
+    "commit_message": "research: complete R174 shared temporal coordinate [skip ci]",
+    "remote_readback": {
+      "status": "PASS",
+      "method": "git fetch plus git show",
+      "branch_head": "49b7bf2e2ce43b6f26ff27f6353efb4d28a76caf",
+      "graph_sha256": "fb38bfac90ff6ca97f7b44d25561acefcce9635edb95c5a92573858733e4f53e",
+      "map_checks_all_true": true,
+      "model_check_count": 21
+    }
+  },
+  "library": {
+    "master_handoff": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_00000000cd10820a9884d529d7fd89b3",
+      "version": 26,
+      "bytes": 270133,
+      "sha256": "945214c61a97a31d2f5eb466cf9a7754f700c8c500fb08a1ad9d54e416e87d66",
+      "identity_preserved": true,
+      "replace_status": "succeeded",
+      "byte_readback_status": "UPLOAD_CONFIRMED_NO_POST_REPLACE_BYTE_READBACK_YET"
+    },
+    "r174_increment": {
+      "library_file_id": "libfile_dc2feecceb9881919963ab91f33e6907",
+      "file_id": "file_00000000fcbc820a892bf93a87679177",
+      "version": 0,
+      "bytes": 475016,
+      "sha256": "c5788c08bef3a64d0e9964fe36019500e0008e0d360f7d66e073ac9f83c0454b",
+      "member_count": 21,
+      "scope": "increment relative to parent_commit; not full repository/history",
+      "local_zip_test": "PASS",
+      "create_status": "succeeded",
+      "byte_readback_status": "UPLOAD_CONFIRMED_NO_POST_UPLOAD_BYTE_READBACK_YET"
+    }
+  },
+  "formal": {
+    "revision": "R174-v1.0",
+    "counts": {
+      "nodes": 544,
+      "rules": 262,
+      "context_links": 163
+    },
+    "map_checks": 15,
+    "exact_model_checks": 21,
+    "open_gaps": [
+      "R174-G1",
+      "R174-G2",
+      "R174-G3",
+      "R174-G4",
+      "R174-G5",
+      "R174-G6",
+      "R174-G7"
+    ],
+    "reviewer_controlled": [
+      "QC-06",
+      "QC-07"
+    ]
+  },
+  "recovery": [
+    "Fetch the latest branch head and read CURRENT_HANDOFF.md before applying any package.",
+    "For offline reconstruction only, checkout parent_commit and overlay the 20 research files from the increment ZIP.",
+    "Verify every member against R174_INCREMENT_MANIFEST.json; the ZIP is an increment, not a full baseline.",
+    "Use the persistent R156 working-set snapshot as the broader recovered baseline when needed, then apply verified later increments or fetch GitHub history."
+  ],
+  "caveats": [
+    "Graph/code checks do not prove physical realization, C1, B_order or global theory truth.",
+    "Library operations succeeded and local hashes are recorded; exact post-upload download was not available in this runtime, so no byte-readback claim is made."
+  ]
+}
+

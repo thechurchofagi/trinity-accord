@@ -1,7 +1,7 @@
 # R174 current handoff — shared temporal coordinate
 
 Date: 2026-10-08  
-Status: substantive round complete locally; persistence receipt is recorded separately after dual save.
+Status: substantive round complete; GitHub core and Library master/increment saves succeeded. Read `DUAL_SAVE_RECEIPT.json` for verified scope and byte-readback caveats.
 
 ## Resume basis
 
