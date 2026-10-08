@@ -1,0 +1,56 @@
+{
+  "schema": "UCT_R173_DUAL_SAVE_RECEIPT/v1",
+  "round": "R173",
+  "core_remote_commit": "aa44dc52aefc697d1516e3c3fb4aa6089b26540d",
+  "core_tree": "4c822ad514a49031cd31fd94d8ce92d18dff7219",
+  "github": {
+    "changed_files": 20,
+    "remote_fetch_head": "aa44dc52aefc697d1516e3c3fb4aa6089b26540d",
+    "all_changed_files_exact_readback": "PASS",
+    "graph": {
+      "bytes": 2284046,
+      "sha256": "ea703669ab522a1497560bdff7f4be7a3d6652a5021b5c241648467487fdae16",
+      "counts": "516/248/145"
+    },
+    "note_sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+  },
+  "fixed_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000e8d081f5b2a2cb39bd539755",
+    "version": 22,
+    "bytes": 117874,
+    "sha256": "fe9be8e3dd3b8c0a5148a41ac8f6cd37326016279937661ca0f9e3f42af54730",
+    "all_841_lines_exact_readback": "PASS"
+  },
+  "increment": {
+    "name": "UCT_R173_Research_Increment_20261008.zip",
+    "library_file_id": "libfile_f55799ef52a08191b9357ee253d732ec",
+    "file_id": "file_00000000357c81f59c2ca8f2882d5136",
+    "version": 0,
+    "bytes": 487347,
+    "sha256": "d4f6ba8cf211d01ce56ca62c883c296402cb4d3d768e93f0c178d6fbf4563607",
+    "members": 22,
+    "upload": "SUCCEEDED",
+    "local_crc_and_member_hashes": "PASS",
+    "remote_byte_readback": "PENDING_HTTP_403",
+    "scope": "incremental R173 checkpoint; not complete baseline or repository history"
+  },
+  "checks": {
+    "R173_exact_and_map": "12/12 PASS",
+    "limits": "finite/model checks do not prove physical realization, F_F, B_fam, C1 or theory truth"
+  },
+  "open": [
+    "QC-06/07 independent reviewer disposition",
+    "B_fam target/measurement bridge",
+    "physical RetBind realization and evidence",
+    "increment remote byte readback HTTP 403"
+  ],
+  "recovery": [
+    "Fetch branch and require the final receipt commit recorded after this file is published",
+    "Read fixed master newest version and review ledger before selecting work",
+    "Load R171 then R172 effective amendments before R173 extension",
+    "For increment readback require exactly 487347 bytes, SHA256 d4f6ba8cf211d01ce56ca62c883c296402cb4d3d768e93f0c178d6fbf4563607 and ZIP CRC PASS",
+    "If HTTP 403 persists, preserve GitHub and master version 22; do not duplicate R173 research or claim archive bytes verified",
+    "Continue with an independent consequence distinguishing same-lineage used trace from copied current-equivalent trace, with F_F measurement separate"
+  ]
+}

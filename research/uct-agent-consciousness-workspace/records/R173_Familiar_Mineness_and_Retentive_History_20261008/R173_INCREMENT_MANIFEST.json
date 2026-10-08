@@ -1,0 +1,139 @@
+{
+  "schema": "UCT_R173_INCREMENT_MANIFEST/v1",
+  "scope": "Incremental R173 research checkpoint only; not a complete repository, full research history or replacement for the R156 baseline",
+  "base_remote_commit": "0cfdf9aecc17c5a137d703fdddb2633e7e57e37d",
+  "core_remote_commit": "aa44dc52aefc697d1516e3c3fb4aa6089b26540d",
+  "core_files": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "bytes": 47190,
+      "sha256": "d8887fadaaf06ab239fd983be716b7cecf9f6a81dafe4f103165d82530e3b2e8",
+      "git_blob": "94f057751660937f48e469c35346c700fd0ce4bd"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "bytes": 49447,
+      "sha256": "f764a22b900bd66fddec3ea072d0a78ab5907f6b4cda05ab1bbcb9c183f7b6d9",
+      "git_blob": "85e7c7959dc7584dcb09360940beb0ccbb874f45"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "bytes": 42653,
+      "sha256": "66356d7373b170683ea330a2c96865932639c52ff5d95c4db71d9b580150610b",
+      "git_blob": "9208a9077038a0d711e790b2c94fa725910aadb3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "bytes": 81788,
+      "sha256": "7a76113e808787567eae198296b0fd21a1be3587e06b4688926bb206b306d206",
+      "git_blob": "aba838b99efd539f962a4476cdff0878af1583ca"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+      "bytes": 51614,
+      "sha256": "406a5cc6f5f7884ae4e4501c3d1f5c238da0a58b9a846a2bafbdf42ac6172a1c",
+      "git_blob": "25dc4045a9b0e184ae08525e0febc45d4bb0359e"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "bytes": 28647,
+      "sha256": "e67fe6ae1008a2782f5cea0bb79d3609d08116ed06a8be81280b04f78972a18b",
+      "git_blob": "55b06b6bc1ddad87691dc929ad971c6b11127b78"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "bytes": 93763,
+      "sha256": "b16920517bf31d3857e5faba76db1e2166df028403d3f29bf5676f8bc2d6b047",
+      "git_blob": "82aaaa4ec65bb170fb1803fa314f96e019e92013"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH.json",
+      "bytes": 2284046,
+      "sha256": "ea703669ab522a1497560bdff7f4be7a3d6652a5021b5c241648467487fdae16",
+      "git_blob": "5cd6677d4c0c09b4bdf1ea140782fb3ba03bb948"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "bytes": 99956,
+      "sha256": "375fb80bccae7e92b5e2f8e7146219ad9a0665445292be5e46c8b5752cabcb9e",
+      "git_blob": "7017fabbe0dc9c83adaf1316929d0d47135d4557"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R173_Familiar_Mineness_and_Retentive_History_20261008/CURRENT_HANDOFF.md",
+      "bytes": 2282,
+      "sha256": "abf0aadd89e7fa0b087389294fa5c1ec482ad693075757ee27e4d414c67c3796",
+      "git_blob": "8fc753c6b92fe2020df3411e83312202b96d736d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R173_Familiar_Mineness_and_Retentive_History_20261008/EXACT_CHECKS.json",
+      "bytes": 1649,
+      "sha256": "87e5d5e674a21b6b3d9fea3a17e0f9d46687e8b86be95020563722b3f5f097df",
+      "git_blob": "fa48cb9340c662632b889e1a182d0e26cf83710e"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "bytes": 13789,
+      "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa",
+      "git_blob": "619214ac40a0514e87d9c1d9a1eced05c4e41bc9"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R173_Familiar_Mineness_and_Retentive_History_20261008/GAP_LEDGER.json",
+      "bytes": 2962,
+      "sha256": "eed30e395a86ecfeb2fa313bcff1b3424cefe46881b27908c166953b9e28dc61",
+      "git_blob": "8f6eadf5be37ea3cf97c2321807cd4492ac7f414"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R173_Familiar_Mineness_and_Retentive_History_20261008/MAP_AUDIT.json",
+      "bytes": 3663,
+      "sha256": "c3caf7b3c7618b98a6bee03c67969060533d78ad42a5def5c0bb2a13a5f59631",
+      "git_blob": "f5505e5339e674d488e13292d0525b621529b9f7"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R173_Familiar_Mineness_and_Retentive_History_20261008/MAP_EXTENSION.json",
+      "bytes": 27965,
+      "sha256": "9aad155b7ac4b2f5cb3042bac462f455b479bc3fe2021e62a9744d7b7fc8f485",
+      "git_blob": "9b37e458351b3b11040bea1e9da693736953cc7b"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R173_Familiar_Mineness_and_Retentive_History_20261008/PROOF_LEDGER.json",
+      "bytes": 2703,
+      "sha256": "4265c25b77d483ea859118a7f1270e3b998db64130a4baaba5475977fc3af427",
+      "git_blob": "cc99dccb8c116860237f47293656609194bf027b"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R173_Familiar_Mineness_and_Retentive_History_20261008/REVIEW_ZH.md",
+      "bytes": 1894,
+      "sha256": "97e2e810f66a6d52538eed91b0f4aa520f7995a4d5f79fcf9587a4be5403e6f0",
+      "git_blob": "96063f36e979ea9a69b1297fb2155d5a868cea1b"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R173_Familiar_Mineness_and_Retentive_History_20261008/ROUND_RECORD.md",
+      "bytes": 1612,
+      "sha256": "72eaaceb28871341998442be38a47a67eabab531b291978e648a64edc1e4adbe",
+      "git_blob": "965983e4323f5234351d3433af08b894ba5926a3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R173_Familiar_Mineness_and_Retentive_History_20261008/SOURCE_LEDGER.json",
+      "bytes": 2208,
+      "sha256": "bb0710c8859731aeb4f2d4a6da5a109104b4a74a60576904d23ae28b119ce6e6",
+      "git_blob": "7e4eb9e583b8a0dde18daf833fe9c9462bf759db"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/R173_Familiar_Mineness_and_Retentive_History_20261008/verify_retentive_bridge.py",
+      "bytes": 5003,
+      "sha256": "01a15993b2dc2875cbd6ee265b381f41e99ec5a4f25fe75d6f346138c8a606a8",
+      "git_blob": "baa992f3335c41618fa9d1de4b54459cb2c98399"
+    }
+  ],
+  "master_candidate": {
+    "base_version": 21,
+    "name": "UCT_Hourly_Research_Master_Handoff.md",
+    "bytes": 117874,
+    "sha256": "fe9be8e3dd3b8c0a5148a41ac8f6cd37326016279937661ca0f9e3f42af54730"
+  },
+  "limits": [
+    "final save receipt is produced after upload and is not inside this increment",
+    "QC-06/07 reviewer closure pending",
+    "B_fam and physical instantiation open"
+  ]
+}

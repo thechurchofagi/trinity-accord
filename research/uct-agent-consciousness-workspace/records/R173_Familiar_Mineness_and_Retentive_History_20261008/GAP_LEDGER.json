@@ -48,12 +48,12 @@
     },
     {
       "id": "R173-G6",
-      "status": "OPEN_STORAGE",
+      "status": "PARTIALLY_VERIFIED",
       "location": "Durable copies",
-      "impact": "Completion cannot be claimed until remote Git and Library artifacts are verified.",
+      "impact": "GitHub and fixed master are exact; increment upload succeeded but remote archive byte readback is pending.",
       "counterexample": "Local files alone are transient.",
-      "repaired": "Pending end-of-round save.",
-      "remaining": "Git commit/readback, fixed-master guarded update, increment upload/readback status."
+      "repaired": "GitHub 20-file readback PASS; fixed master v22 117874-byte readback PASS; increment local CRC/member hashes PASS.",
+      "remaining": "Retry exact increment materialization later; HTTP 403 is recorded and does not justify duplicate upload."
     }
   ],
   "retained_review": [
