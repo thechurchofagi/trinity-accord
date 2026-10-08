@@ -1,0 +1,60 @@
+{
+  "round": "R185",
+  "claims": [
+    {
+      "id": "R185-C1",
+      "type": "typed_membership_consequence",
+      "statement": "If one grounded physical relation occurrence and all constitutive signature facts are faithfully included in several independently actual token organizations, the one occurrence is a member of every such token; membership multiplicity does not multiply occurrence count.",
+      "domain": "one actual episode, finitely many declared actual process tokens and faithful token-relative organizations",
+      "premises": ["actual token status for every selected token", "one grounded relation occurrence", "full support inclusion", "constitutive-signature inclusion", "boundary accountability"],
+      "proof_or_source": "definition expansion; UCT I v1.2 §§2.1-2.5 and TA25 D1",
+      "counterexamples_or_limits": ["a view is not automatically an actual token", "omitted endpoints or boundary mechanisms defeat membership", "no subject individuation"],
+      "status": "PROVED_CONDITIONAL_SCOPE",
+      "thought_experiment_role": "TE1 and TE5 show multiple membership without duplication or local erasure"
+    },
+    {
+      "id": "R185-C2",
+      "type": "finite_nonidentification_result",
+      "statement": "Equal relation type, carried value, local views, whole output and report do not identify same-occurrence equivalence or the cross-scale incidence profile.",
+      "domain": "shared one-occurrence and copied two-occurrence finite architectures",
+      "premises": ["declared occurrence identifiers and membership matrices", "fixed target and output contract"],
+      "proof_or_source": "explicit countermodel; 16 crossed configurations and exact assertions",
+      "counterexamples_or_limits": ["additional occurrence-sensitive evidence can distinguish the models", "not a claim of complete organizational equality"],
+      "status": "PROVED_FINITE_SCOPE",
+      "thought_experiment_role": "TE2 blocks value-based and report-based occurrence identity"
+    },
+    {
+      "id": "R185-C3",
+      "type": "finite_intervention_boundary",
+      "statement": "A synchronizer can propagate a perturbation between distinct copies, but the synchronizer is an additional whole-organization relation and does not make the copies numerically one occurrence.",
+      "domain": "directed two-copy finite architecture with declared synchronizer and clamp",
+      "premises": ["occurrence-specific perturbation", "fixed copy identities", "synchronizer represented in the whole signature"],
+      "proof_or_source": "direct substitution with synchronizer active versus clamped",
+      "counterexamples_or_limits": ["if the synchronizer cannot be isolated, shared versus copied remains underidentified", "intervention fidelity remains an actual-application obligation"],
+      "status": "PROVED_FINITE_SCOPE",
+      "thought_experiment_role": "TE2 and TE3 distinguish copied equality from shared occurrence membership"
+    },
+    {
+      "id": "R185-H1",
+      "type": "conditional_uct_interpretation",
+      "statement": "For every selected independently actual token, C1 transports each admitted member occurrence to a token-relative experiential structural counterpart; a grounded coherent overlap diagram relates the images without thereby proving a numerically single phenomenal event or exclusive subject.",
+      "domain": "same episode, actual token family, complete compatible token-relative signatures and grounded overlap maps",
+      "premises": ["A:C1", "actual same-episode membership package", "R157 coordinate transport", "CG20261008 coherent overlap package"],
+      "proof_or_source": "tokenwise isomorphism transport plus inherited coherent overlap construction",
+      "counterexamples_or_limits": ["no named feeling", "no actual human/AI admission", "no unique owner", "no basal gate", "no cross-token numerical identity from tokenwise C1 alone"],
+      "status": "OPEN_ACTUAL_APPLICATION_AND_PHENOMENAL_INTERPRETATION",
+      "thought_experiment_role": "TE1-TE5 preserve token relativity, copying and nonexclusive overlap"
+    },
+    {
+      "id": "R185-C4",
+      "type": "inference_limit",
+      "statement": "The sum of token memberships of an occurrence is not the number of physical occurrences and cannot be used as a consciousness amount, subject count or richness score.",
+      "domain": "cross-scale incidence matrices with grounded occurrence equivalence classes",
+      "premises": ["occurrence classes are fixed by physical identity", "membership is token relative"],
+      "proof_or_source": "shared and copied incidence matrices",
+      "counterexamples_or_limits": ["membership count can still be a useful organizational descriptor", "no global scalar conclusion"],
+      "status": "PROVED_SCOPE_CORRECTION",
+      "thought_experiment_role": "TE4 exposes value copies across a human-realized agent"
+    }
+  ]
+}

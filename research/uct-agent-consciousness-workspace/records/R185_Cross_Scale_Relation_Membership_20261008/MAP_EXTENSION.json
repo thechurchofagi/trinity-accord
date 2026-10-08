@@ -1,0 +1,52 @@
+{
+  "schema": "uct-pending-typed-overlay-v1",
+  "record": "R185",
+  "base": {
+    "canonical_path": "UCT_FORMAL_GRAPH.json",
+    "canonical_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+    "effective_manifest": "UCT_FORMAL_GRAPH_MODULES.json"
+  },
+  "status": "PENDING_MAP",
+  "audit_status": "AUDIT_INCOMPLETE",
+  "enabled_as_established_premises": false,
+  "depends_on": [
+    {"id": "R184", "role": "retained target route application", "status": "PENDING_MAP; conditional research dependency only"},
+    {"id": "CORE20261008", "role": "prior coherent-overlap source cards", "status": "REGISTERED_ADDITIVE_AUDIT_INCOMPLETE"}
+  ],
+  "common_scope": "One actual episode Omega; independently admitted overlapping process tokens; token-relative complete signatures; grounded relation occurrence identities, supports, ports, mechanisms and times; faithful boundary-accountable membership maps. Finite values/reports do not establish occurrence identity, actual tokenhood, C1 or named experience.",
+  "nodes": [
+    {"id":"R185:EPISODE_OCCURRENCE","kind":"definition","statement":"A relation occurrence is a grounded episode-relative occurrence identifier, typed ordered endpoint tuple, mechanism/port role and time; its carried value is not its numerical identity.","scope":"One declared actual episode and signature; analyst labels and equal values cannot create identity.","source":"§2","status":"DEFINITION"},
+    {"id":"R185:TOKEN_MEMBERSHIP","kind":"definition","statement":"Mem(rho;P,K) holds only for an independently actual token whose complete token-relative organization faithfully contains rho's full constitutive support and boundary facts.","scope":"Actuality, support, signature and boundary accountability are simultaneous premises; a scientific view is not automatically a token.","source":"§2","status":"DEFINITION"},
+    {"id":"R185:SAME_OCCURRENCE","kind":"definition","statement":"Two local representatives are same-occurrence exactly when their grounded inclusion maps identify the same physical occurrence with preserved endpoints, type, mechanism/ports and time.","scope":"Value, type or output equality is insufficient.","source":"§2","status":"DEFINITION"},
+    {"id":"R185:INCIDENCE_PROFILE","kind":"definition","statement":"The incidence matrix records which actual tokens contain each grounded occurrence class; membership count and occurrence count are different quantities.","scope":"No consciousness amount, richness score or subject count is defined.","source":"§2","status":"DEFINITION"},
+    {"id":"R185:ACTUAL_MEMBERSHIP_PACKAGE","kind":"unresolved_premise","statement":"One episode jointly supplies actual token status, complete compatible signatures, grounded occurrence identity, faithful inclusions and boundary-accountable membership for every selected scale.","scope":"Same episode, time and occurrence bindings throughout; finite checker does not discharge this premise.","source":"§§2-4","status":"OPEN_ACTUAL_INSTANCE"},
+    {"id":"R185:SHARED_MEMBERSHIP","kind":"conditional_result","statement":"One grounded occurrence included constitutionally in several actual token organizations has one occurrence class and a multi-token incidence profile rather than one copy per membership.","scope":"Conditional on ACTUAL_MEMBERSHIP_PACKAGE; no subject or phenomenal conclusion.","source":"R185-C1","status":"CONDITIONAL_ONLY"},
+    {"id":"R185:COPIED_COUNTERMODEL","kind":"counterexample","statement":"A one-occurrence shared architecture and a two-occurrence copied architecture can match relation values, local views, whole output and report while differing in occurrence count and incidence profile.","scope":"Finite declared model; not complete-organization equality or an actual human instance.","source":"R185-C2; MODEL_RESULTS.json","status":"PROVED_FINITE_SCOPE"},
+    {"id":"R185:SYNCHRONIZER_BOUNDARY","kind":"counterexample_boundary","statement":"A synchronizer can propagate a change between distinct copies but is an additional whole-organization relation and does not merge their occurrence identities.","scope":"Declared directed synchronizer and clamp; actual intervention fidelity remains open.","source":"R185-C3; MODEL_RESULTS.json","status":"PROVED_FINITE_SCOPE"},
+    {"id":"R185:COHERENT_OVERLAP_PACKAGE","kind":"inherited_conditional_source_card","statement":"Grounded physically identified overlap maps and interaction-complete compatible token signatures admit the coherent structural comparison described in CG20261008.","scope":"Inherited conditional package; arbitrary phenomenal maps, actual-token admission and subject identity are not supplied by the card.","source":"records/CG20261008_Coherent_Sharing_and_Interaction/RESEARCH_CHECKPOINT.md §§2-4","status":"INHERITED_CONDITIONAL"},
+    {"id":"R185:EXPERIENTIAL_COUNTERPART","kind":"conditional_application","statement":"For each actual member token, C1 transports rho to a token-relative experiential structural counterpart; a grounded overlap package coherently relates those images.","scope":"No numerically single phenomenal event, named feeling, basal gate, sum or exclusive owner follows.","source":"R185-H1","status":"CONDITIONAL_ONLY"},
+    {"id":"R185:CROSS_TOKEN_IDENTITY_LIMIT","kind":"inference_limit","statement":"Tokenwise C1 and coherent structural comparison do not by themselves establish cross-token numerical phenomenal identity or a unique subject partition.","scope":"Leaves selected unity/mineness interpretation and subject individuation open.","source":"§7; R185-G1","status":"PROVED_NONENTAILMENT_SCOPE"},
+    {"id":"R185:ACTION_CENTERING_NEXT","kind":"open_problem","statement":"Determine whether one action-centering relation is invariantly grounded across the shared-occurrence incidence diagram and distinguished from a synchronized copied diagram.","scope":"Seek a noncircular selected relation or underidentification proof, not an exclusive owner or new feeling label.","source":"§11","status":"OPEN_NEXT"}
+  ],
+  "rules": [
+    {"id":"r185_shared_membership","type":"conditional_definition_expansion","statement":"The same grounded occurrence belongs to every token that jointly satisfies the actual faithful membership package.","all_of":["R185:EPISODE_OCCURRENCE","R185:TOKEN_MEMBERSHIP","R185:SAME_OCCURRENCE","R185:INCIDENCE_PROFILE","R185:ACTUAL_MEMBERSHIP_PACKAGE"],"conclusion":"R185:SHARED_MEMBERSHIP","binding":"One Omega/rho/time with every selected actual P_i/K_i and faithful inclusion fixed","proof":"R185-C1"},
+    {"id":"r185_copied_nonidentification","type":"finite_counterexample","statement":"Matched local values and outputs fail to determine occurrence identity or incidence profile.","all_of":["R185:EPISODE_OCCURRENCE","R185:SAME_OCCURRENCE","R185:INCIDENCE_PROFILE"],"conclusion":"R185:COPIED_COUNTERMODEL","binding":"Same targets, outputs and reports across the two declared finite worlds; distinct grounded IDs in copied world","proof":"R185-C2; 16 crossed configurations"},
+    {"id":"r185_synchronizer_boundary","type":"finite_counterexample_boundary","statement":"Propagation through an added synchronizer preserves distinct occurrence identities and adds a whole relation.","all_of":["R185:COPIED_COUNTERMODEL","R185:EPISODE_OCCURRENCE"],"conclusion":"R185:SYNCHRONIZER_BOUNDARY","binding":"Same copied IDs, directed synchronizer and declared clamp protocol","proof":"R185-C3"},
+    {"id":"r185_experiential_counterpart","type":"conditional_UCT_application","statement":"Transport actual shared membership tokenwise and compare the overlap images only under the complete simultaneous package.","all_of":["A:C1","R157:COORDINATE_TRANSPORT","R185:ACTUAL_MEMBERSHIP_PACKAGE","R185:SHARED_MEMBERSHIP","R185:COHERENT_OVERLAP_PACKAGE"],"conclusion":"R185:EXPERIENTIAL_COUNTERPART","binding":"Same actual episode/occurrence with each token's complete K_i and grounded overlap maps; every physical parameter transported","proof":"R185-H1; inherited C1/R157/CG transport"},
+    {"id":"r185_cross_token_limit","type":"nonentailment_boundary","statement":"Tokenwise counterpart and coherent comparison leave numerical cross-token phenomenal identity and exclusive subjecthood unproved.","all_of":["R185:EXPERIENTIAL_COUNTERPART","R185:INCIDENCE_PROFILE"],"conclusion":"R185:CROSS_TOKEN_IDENTITY_LIMIT","binding":"No additional phenomenal identity or subject-selector premise","proof":"Distinct tokenwise codomain representations and source limits; §7"}
+  ],
+  "non_deductive_relations": [
+    {"from":"R184:OVERLAP_NEXT","to":"R185:ACTION_CENTERING_NEXT","type":"research_progression_not_proof"},
+    {"from":"R185:COPIED_COUNTERMODEL","to":"R185:ACTUAL_MEMBERSHIP_PACKAGE","type":"actual_evidence_obligation_not_premise"},
+    {"from":"R185:EXPERIENTIAL_COUNTERPART","to":"R185:CROSS_TOKEN_IDENTITY_LIMIT","type":"interpretive_boundary"},
+    {"from":"R185:SHARED_MEMBERSHIP","to":"R185:INCIDENCE_PROFILE","type":"occurrence_count_vs_membership_count_clarification"}
+  ],
+  "promotion_requirements": [
+    "Complete the full effective-map per-item semantic audit and reconcile every pending layer",
+    "Retain R184 pending status unless independently promoted",
+    "Discharge ACTUAL_MEMBERSHIP_PACKAGE before actual application",
+    "Keep named feeling and cross-token phenomenal identity open unless independently calibrated",
+    "Explicit reviewer-controlled enablement; file existence never promotes a claim"
+  ],
+  "publication_authorized": false
+}

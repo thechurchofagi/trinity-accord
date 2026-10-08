@@ -1,0 +1,25 @@
+{
+  "assertion_groups": 15,
+  "baseline_configurations": 16,
+  "checks": [
+    "16 crossed baseline rows preserve local values, whole output and report",
+    "shared architecture has one occurrence class",
+    "copied architecture has two occurrence classes despite equal values",
+    "shared incidence profile is (1,1,1)",
+    "copied profiles are (1,0,1) and (0,1,1)",
+    "occurrence count differs from membership-incidence count",
+    "shared occurrence intervention changes both local projections",
+    "clamped copied occurrence intervention changes only one local projection",
+    "an active synchronizer can propagate a copied change",
+    "clamping the synchronizer exposes distinct copies",
+    "synchronizer presence is an additional whole-organization fact",
+    "deliberate/reflex labels do not select occurrence identity",
+    "biological/prosthetic labels do not select occurrence identity",
+    "report labels do not select occurrence identity",
+    "matched baseline output does not identify membership profile"
+  ],
+  "round": "R185",
+  "scope": "finite occurrence/incidence model only; no phenomenal variable or actual human/AI instance",
+  "status": "PASS",
+  "target_values": 2
+}

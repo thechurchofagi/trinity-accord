@@ -1,0 +1,65 @@
+{
+  "round": "R185",
+  "gaps": [
+    {
+      "id": "R185-G1",
+      "location": "§7 R185-H1",
+      "problem": "Tokenwise C1 maps do not by themselves establish one numerically identical phenomenal occurrence across several token-relative experiential organizations.",
+      "impact": ["cross-token phenomenal identity", "subject unity", "QC-20261008-10"],
+      "counterexample": "two tokenwise isomorphic codomains can be represented by distinct carrier copies unless a grounded comparison/quotient is additionally admitted",
+      "fixed": "R185 claims coherent structural correspondence only and explicitly excludes numerical phenomenal identity and exclusive ownership.",
+      "open_premise": "independently warranted cross-token phenomenal comparison or subject-individuation bridge",
+      "status": "OPEN"
+    },
+    {
+      "id": "R185-G2",
+      "location": "§§2-4 membership contract",
+      "problem": "No actual human, biological subsystem, prosthetic loop or artificial agent has been shown to realize the declared token carriers, complete signatures and shared occurrence.",
+      "impact": ["IA-QC11", "QC-20261008-12", "QC-20261008-13", "actual application"],
+      "counterexample": "a supposed local token may be only a scientific view or may omit a constitutive boundary mechanism",
+      "fixed": "Every membership conclusion is conditional on independently admitted actual tokens and faithful complete token-relative organization.",
+      "open_premise": "same-episode actual bearer, interval, complete signatures and physical occurrence tracing",
+      "status": "OPEN_ACTUAL_INSTANCE"
+    },
+    {
+      "id": "R185-G3",
+      "location": "§6 occurrence intervention",
+      "problem": "Perturbation propagation distinguishes the finite models only if occurrence-specific isolation and synchronizer clamping are physically faithful.",
+      "impact": ["same-occurrence evidence", "R184 route membership", "QC13"],
+      "counterexample": "an unmodelled common driver or unclamped synchronizer makes distinct copies covary",
+      "fixed": "Use and membership remain prior ontic claims; intervention is typed as evidence and the synchronizer is represented as an extra relation.",
+      "open_premise": "actual path measurement and intervention isolation",
+      "status": "OPEN_ACTUAL_EVIDENCE"
+    },
+    {
+      "id": "R185-G4",
+      "location": "§§1,10 originality",
+      "problem": "Incidence, quotient and gluing mathematics are established, and CG20261008 already contains the general coherent-overlap result.",
+      "impact": ["novelty claim", "standalone paper readiness"],
+      "counterexample": "renaming coherent gluing as a new cross-scale theorem would duplicate existing work",
+      "fixed": "R185 claims only the occurrence-sensitive membership application, incidence-count correction and synchronizer boundary as project-level increments.",
+      "open_premise": "theorem-level external prior-art comparison before publication",
+      "status": "PRIORITY_UNVERIFIED"
+    },
+    {
+      "id": "R185-G5",
+      "location": "§11 next question",
+      "problem": "Occurrence membership does not yet explain which cross-scale relation supports action-centering, felt trying or familiar mineness.",
+      "impact": ["QC-20261008-10", "main experience-self question"],
+      "counterexample": "shared and copied architectures can match all declared reports and baseline outputs",
+      "fixed": "No feeling label is attached to the incidence profile and the next question requires an independent selected relation or an underidentification proof.",
+      "open_premise": "noncircular experiential target/measurement bridge",
+      "status": "OPEN_NEXT"
+    },
+    {
+      "id": "R185-G6",
+      "location": "whole-map audit",
+      "problem": "Whole-map structural traversal does not provide full per-node/per-rule semantic reproof or repair inherited inline schema gaps.",
+      "impact": ["map promotion", "downstream premise use", "publication readiness"],
+      "counterexample": "a structurally valid acyclic rule graph can still contain a false or scope-shifted rule",
+      "fixed": "R185 remains PENDING_MAP/AUDIT_INCOMPLETE and records the exact semantic slice.",
+      "open_premise": "complete semantic audit and reviewer-controlled promotion",
+      "status": "AUDIT_INCOMPLETE"
+    }
+  ]
+}
