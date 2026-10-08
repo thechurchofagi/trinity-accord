@@ -1,0 +1,35 @@
+{
+  "status": "CORE_REMOTE_BYTES_VERIFIED_AND_BOTH_LIBRARY_WRITES_SUCCEEDED",
+  "baseline_commit": "be720aa4d5aed5978f677d945ea6fecae3765fdf",
+  "research_commit": "c549c6b5642565b6f218a14f891f49426dfa7c3c",
+  "remote_verified_file_count": 21,
+  "master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_000000004d1c81f7a6f4e09f36bc059c",
+    "version": 36,
+    "bytes": 510631,
+    "sha256": "3d7c044131eee8255762f8dc521941d5d321c624cb42ccffddf5c67f12b4c56f"
+  },
+  "increment": {
+    "library_file_id": "libfile_a04b5acaf52c8191930a8716b3c3002a",
+    "file_id": "file_0000000054e081f7b39cacd838906120",
+    "version": 0,
+    "bytes": 275286,
+    "sha256": "6f4ce067671bde2b61ee60d64c357e339587f7a78a9c1766c52db3912ffe588c",
+    "scope": "21 changed files plus manifest and remote core receipt; requires baseline; not a complete repository backup"
+  },
+  "latest_completed": "R179 note, model, scoped map review and seven-paper overlap audit; focused outline",
+  "unfinished": [
+    "Whole new paper",
+    "Independent source/commitment bridge to felt trying",
+    "External comprehensive novelty comparison",
+    "Actual-human bearer/target admission"
+  ],
+  "failures": [
+    "Motor-port occupancy does not distinguish voluntary attempt from imposed/automatic command.",
+    "Earlier broad paper framing duplicated TA25; corrected and narrowed.",
+    "Later Nature reaccess failed identity redirect; PubMed reaccess rate-limited; no unsupported EMG-control claim."
+  ],
+  "restore": "Fetch latest research branch; verify this receipt and preserve concurrent review. For offline overlay use baseline be720aa4 then core increment with manifest hashes. This receipt and final handoff addition are additive post-core metadata, not in the core increment. Master36 contains complete prior master35 history. Never overwrite newer master with this copy.",
+  "model_configuration": "User preference retained; actual scheduler model setting not inspected or changed."
+}
