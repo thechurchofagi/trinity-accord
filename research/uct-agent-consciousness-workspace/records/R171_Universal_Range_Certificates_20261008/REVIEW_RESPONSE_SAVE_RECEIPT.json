@@ -1,0 +1,49 @@
+{
+  "schema": "UCT_REVIEW_RESPONSE_DUAL_SAVE_RECEIPT/v1",
+  "research_round": "R171",
+  "review": "REVIEW-20261008-01",
+  "new_research_round": false,
+  "github": {
+    "reviewed_head": "c593fcea81c98b49c2c9bd26fa76b34c1d9a4d72",
+    "remote_graph_repair_commit": "c9fea929a55a9ee6ea1d2c885a3ff44be4a480bd",
+    "response_commit": "6d16f8d2ceba5f94a67298b858677e0bed95c233",
+    "response_tree": "a15acf9569ed9549df892ca8274e96c4d8af05e3",
+    "remote_files_byte_verified": 15,
+    "remote_graph_bytes": 2227474,
+    "remote_graph_sha256": "8405565f71629bf04cdb25238666060e6bb9aa8cddfb0617187f7ba1bcf9edb5",
+    "receipt_commit": "SELF",
+    "update_mode": "expected-SHA fast-forward; force false; skip ci"
+  },
+  "master_handoff": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000333c820c9bdcb3da803dbfc8",
+    "version": 17,
+    "bytes": 95797,
+    "sha256": "39055b72cfacbef81f4ca079775589830d73104db95c24995c7f36a26303c208",
+    "exact_readback": "PASS",
+    "version_16_review_and_previous_history_preserved": true
+  },
+  "increment": {
+    "filename": "UCT_R171_Review_Response_Increment_20261008.zip",
+    "library_file_id": "libfile_30cec9899f0881918edd095e409f3cf2",
+    "file_id": "file_0000000061e081f595dbe07fa9ff79ef",
+    "version": 0,
+    "bytes": 397142,
+    "sha256": "cbd773bc5e11bb5ec989701cc841728d80562d6dd57727254a9144fae3b46518",
+    "payload_members": 15,
+    "zip_members": 16,
+    "exact_readback_crc_and_member_hashes": "PASS",
+    "scope": "Review-response increment only; requires exact R156 baseline and exact R157-R171 cumulative increment; not a full backup.",
+    "excludes": "This receipt created after increment upload. Obtain it from the latest GitHub branch."
+  },
+  "focused_correction_checks": "26/26 PASS; no global consistency or physical-instantiation claim",
+  "review_disposition": {
+    "QC-20261008-01": "Correction submitted; awaiting reviewer verification",
+    "QC-20261008-02": "ACKNOWLEDGED; main-line positive interpretation and physical bridges remain OPEN",
+    "QC-20261008-03": "Correction submitted; awaiting reviewer verification",
+    "QC-20261008-04": "Correction submitted; awaiting reviewer verification; effective overlay must be loaded",
+    "QC-20261008-05": "Correction submitted; awaiting reviewer verification"
+  },
+  "corrected_previous_claim": "The earlier R171 local/archive graph checks were valid; the earlier claim of full remote graph byte verification was unsupported. Corrupted remote bytes were detected and restored from the exact archived graph, then verified through Git fetch.",
+  "next_question": "One bounded interface/composition deliverable followed by a live versus replay/bypass body-frame/action relation contrast under matched baseline reports, with only conditional C1 transport and an explicit B_min/F_O residual."
+}
