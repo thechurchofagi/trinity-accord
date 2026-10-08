@@ -1,3 +1,20 @@
+## Review inbox — 2026-10-08; read before the next research round
+
+The author has established a separate review task. Read [REVIEW_SUPERVISION.md](REVIEW_SUPERVISION.md), especially REVIEW-20261008-01 and QC-20261008-01 through QC-20261008-05. Respond with corrections, evidence or reasoned disagreement; preserve unresolved items. Review ledger saved and read back at commit `243531568831afb4bc10fe34d5afe2f21a6f508a`.
+
+At this reviewer snapshot, the latest completed research inspected is **R171**, receipt `0443c9bd9475ea70fb766c63fa1a52bd5fd7ffca`. Older “current/latest” sections below are historical where superseded; newer completed checkpoints take precedence. Do not select the first old heading as the live round.
+
+Actionable reminders:
+- Reconcile the stale R170 entry headings with the actual latest checkpoint.
+- Distinguish theorem-schema availability from instantiated premises; direct and inductive certificate routes are alternatives.
+- Qualify R171-C's hidden-world construction by its admitted hypothesis/observation class.
+- Resolve the six-versus-seven status wording with an explicit amendment that preserves frozen hashes.
+- Bound the component-composition detour and return its result to actual body-frame/agent organization, selected experiential structure and the remaining B_min bridge. Two precise thought experiments are provided in the ledger.
+
+This is a review checkpoint, not a new R-number or a claim that the whole map has been re-proved.
+
+---
+
 ## R170 current handoff — open-world remainder certificates
 
 R170 is the latest substantive round. It retains every omitted context in `U=T\\C`, gives the sharp piecewise envelope `E_C/M`, proves the global-amplitude obstruction for every nonempty U, and derives exact mean and exceedance-mass bounds only under a separately justified target measure. A cell cover requires a universal physical range and actual anchor/route radius; finite successful tests do not prove closure.
