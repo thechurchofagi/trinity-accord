@@ -1,0 +1,28 @@
+{
+  "arweave_scope": "ONLY_NEWEST_VERSION_AFTER_OTS_BITCOIN_VERIFIED",
+  "author": "Hongju Liu",
+  "change_scope": "NON_SUBSTANTIVE_PUBLICATION_STATUS_CORRECTION",
+  "change_summary": [
+    "Update published/draft status on title page",
+    "Correct declarations to reflect published status",
+    "Add specific-version DOI, link immutable previous DOI",
+    "Regenerate exact new PDF and package; no theorem, experiment, evidence or citation list changed"
+  ],
+  "date": "2026-10-08",
+  "doi": "10.5281/zenodo.23241982",
+  "doi_publication_status": "DOI_RESERVED_AND_FILES_FROZEN_PUBLIC_READBACK_PENDING_AT_PACKAGE_FREEZE",
+  "external_validation_claimed": false,
+  "parent": "MGTD-PAPER-v1.0.0",
+  "parent_doi": "10.5281/zenodo.23241205",
+  "peer_reviewed": false,
+  "primary_files": [
+    "MGTD_Method_Paper_v1.0.1.pdf",
+    "MGTD_Method_Paper_v1.0.1.md"
+  ],
+  "release_id": "MGTD-PAPER-v1.0.1",
+  "release_seq": 2,
+  "research_id": "METHOD20261008",
+  "source_code_modified": false,
+  "version": "1.0.1",
+  "versions_preserved": true
+}

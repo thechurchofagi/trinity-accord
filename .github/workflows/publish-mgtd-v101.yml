@@ -1,0 +1,50 @@
+name: Publish corrected MGTD v1.0.1 linked Zenodo preprint
+on:
+  push:
+    branches: [research/mgtd-method-v1-0-1-20261008]
+    paths:
+      - research/map-guided-theory-development/v1.0.1/PUBLISH-AUTHORIZATION.json
+permissions:
+  contents: write
+concurrency:
+  group: mgtd-v101-zenodo-version-sequence
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[mgtd-v101-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout frozen linked-version research branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/mgtd-method-v1-0-1-20261008
+          fetch-depth: 1
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Verify exact PDF source and reproduction archive without credentials
+        run: python3 research/map-guided-theory-development/v1.0.1/publish_version.py verify
+      - name: Publish only the linked corrected version, verify all publicly downloadable files
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/map-guided-theory-development/v1.0.1/publish_version.py publish
+      - name: Preserve publication receipts even if remote response was uncertain
+        if: always()
+        run: python3 research/map-guided-theory-development/v1.0.1/publish_version.py persist
+      - name: Retain exact publication receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: mgtd-v101-publication-${{ github.run_id }}
+          path: |
+            research/map-guided-theory-development/v1.0.1/new-version-deposit.json
+            research/map-guided-theory-development/v1.0.1/metadata-updated.json
+            research/map-guided-theory-development/v1.0.1/upload-intents.json
+            research/map-guided-theory-development/v1.0.1/upload-status.json
+            research/map-guided-theory-development/v1.0.1/publication-intent.json
+            research/map-guided-theory-development/v1.0.1/publication-record.json
+            research/map-guided-theory-development/v1.0.1/publication-checks.json
+            research/map-guided-theory-development/v1.0.1/publication-error.json
+          retention-days: 90
+          if-no-files-found: warn

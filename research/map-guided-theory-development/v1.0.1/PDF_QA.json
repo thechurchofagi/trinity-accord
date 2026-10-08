@@ -1,0 +1,13 @@
+{
+  "build": "pandoc + XeLaTeX double compile; bounded source-only corrections",
+  "contains_new_doi": true,
+  "contains_previous_doi": true,
+  "old_incorrect_doi_not_registered_phrase_absent": true,
+  "pages": 13,
+  "pdf_bytes": 138355,
+  "pdf_sha256": "98abef0e92d0bb599146cdf525d98acb7045a168912ec9e87ba7723bc958097c",
+  "replacement_char_pages": [],
+  "scientific_or_peer_review_validation": false,
+  "stale_draft_title_phrase_absent": true,
+  "text_blocks_outside_page": []
+}

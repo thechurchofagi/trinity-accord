@@ -1,0 +1,37 @@
+--- MGTD-v1.0.0.md
++++ MGTD-v1.0.1.md
+@@ -2,7 +2,7 @@
+ title: "Map-Guided Theory Development"
+ subtitle: "A Versioned Protocol for Thought Experiments, Semantic Audits, and Human–AI Research"
+ author: "Hongju Liu"
+-date: "8 October 2026 · Manuscript v1.0.0"
++date: "8 October 2026 · Released preprint v1.0.1"
+ lang: en-US
+ fontsize: 10pt
+ documentclass: article
+@@ -12,8 +12,9 @@
+ 
+ \begin{center}
+ Independent researcher, Shenzhen, China\\
+-\texttt{MGTD-PAPER-v1.0.0} / \texttt{METHOD20261008}\\
+-Methodological manuscript prepared for author review; not peer reviewed.
++\texttt{MGTD-PAPER-v1.0.1} / \texttt{METHOD20261008}\\
++Released Zenodo methods preprint; not peer reviewed.\\
++Version DOI: \texttt{10.5281/zenodo.23241982}
+ \end{center}
+ 
+ ## Abstract {-}
+@@ -339,11 +340,11 @@
+ 
+ # Declarations {-}
+ 
+-**Authorship and AI assistance.** Hongju Liu supplied the motivating research program, methodological requirements, and originating thought-experiment discussions. This manuscript was prepared with substantial AI assistance in literature comparison, formalization, code development, checking, and drafting. The current document is prepared for the author's review. No independent human peer review, external methodological validation, or author approval of every final passage is represented as already completed. AI assistance is not listed as a human coauthor.
++**Authorship and AI assistance.** Hongju Liu supplied the motivating research program, methodological requirements, and originating thought-experiment discussions. This manuscript was prepared with substantial AI assistance in literature comparison, formalization, code development, checking, and drafting. This v1.0.1 correction was prepared following the author's instruction to update the public version. No independent human peer review or external methodological validation is claimed; this revision does not assert independent verification of every passage. AI assistance is not listed as a human coauthor.
+ 
+ **Data and code.** The supplementary package contains the reference implementation, input fixtures, executed results, a compact method-claim map, a review ledger, a source-access ledger, and the frozen case records needed for the descriptive count check. No human-subject or animal experiment was performed for this paper. The case archive is cited by immutable source and release identifiers [17].
+ 
+-**Publication status.** Manuscript version 1.0.0 is a completed drafting artifact, not journal acceptance or a DOI registration. Its version is independent of `UCT-MAP-v1.0.0`, the frozen case-study version. This manuscript does not modify the consciousness theory's current authoritative map.
++**Publication status.** Version 1.0.1 is a public Zenodo methods preprint (specific-version DOI: `10.5281/zenodo.23241982`), correcting two outdated release-stage statements in v1.0.0. The original v1.0.0 remains archived under DOI [10.5281/zenodo.23241205](https://doi.org/10.5281/zenodo.23241205). DOI assignment denotes a persistent public record, not journal acceptance, independent peer review, or proof of the method's effectiveness. The manuscript version is independent of `UCT-MAP-v1.0.0`, the frozen case-study version, and does not modify the consciousness theory's authoritative map.
+ 
+ # References {-}
+ 

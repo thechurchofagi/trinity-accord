@@ -1,0 +1,19 @@
+{
+  "doi": "10.5281/zenodo.23241982",
+  "md": {
+    "bytes": 51242,
+    "sha256": "0a4b8b47e835f2d0b6c5c584009ed6a9e862ea57a59cd88585ac56aaf9f83515"
+  },
+  "members": 26,
+  "pdf": {
+    "bytes": 138355,
+    "pages": 13,
+    "path": "/mnt/data/MGTD_Method_Paper_v1.0.1/MGTD_Method_Paper_v1.0.1.pdf",
+    "sha256": "98abef0e92d0bb599146cdf525d98acb7045a168912ec9e87ba7723bc958097c"
+  },
+  "zip": {
+    "bytes": 843551,
+    "path": "/mnt/data/MGTD_Method_Paper_v1.0.1/MGTD_Method_Paper_v1.0.1_Complete_Package.zip",
+    "sha256": "e4899ac0f41e0158c9ab05fbba797addbb9c8aa17346137f6e5992e5561b3ad3"
+  }
+}

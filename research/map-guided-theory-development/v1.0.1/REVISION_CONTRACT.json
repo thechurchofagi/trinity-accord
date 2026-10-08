@@ -1,0 +1,15 @@
+{
+  "arweave_policy": {
+    "new_v101": "OTS_VERIFIED_BITCOIN_FIRST_AND_BUDGET_GATED_ARWEAVE_ONLY",
+    "old_v100": "DISABLED"
+  },
+  "author": "Hongju Liu",
+  "date": "2026-10-08",
+  "new_version_doi": "10.5281/zenodo.23241982",
+  "peer_reviewed": false,
+  "prior_doi": "10.5281/zenodo.23241205",
+  "publication_type": "preprint",
+  "release": "MGTD-PAPER-v1.0.1",
+  "scope": "Two outdated publication-stage passages and title-page metadata. No scientific claims, proofs, test results or references were changed.",
+  "supersedes": "MGTD-PAPER-v1.0.0"
+}
