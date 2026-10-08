@@ -1,0 +1,10 @@
+{
+"release":"UCT-MAP-v1.0.0",
+"archive_file":"UCT_MAP_v1.0.0_Full_Audit_and_Research_Backup_20261008.zip",
+"archive_bytes":7874494,
+"archive_sha256":"063eea5a817f1868004f5bfe51e4bbf4f741dac32a6427fa75fb61eb0df636bb",
+"manifest_file_count":104,
+"zip_test":"PASS",
+"release_commit":"f6445052acb1644fcdd7b2adcdda2307f7b98bc7",
+"note":"Full downloadable recovery archive: expanded audit/map, saved research, verified capsule, frozen source export and seven original ZIPs. This hash is external to the ZIP to avoid self-referential hashing. This operational receipt changes no scientific content or map version."
+}
