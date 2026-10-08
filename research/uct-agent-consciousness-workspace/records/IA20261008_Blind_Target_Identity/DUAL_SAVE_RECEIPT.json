@@ -1,0 +1,129 @@
+{
+  "core_commit": "294b53a3eb79648466cf4b950a25081eb2afff82",
+  "parent_commit": "753a96bfb4a7c259cb843992475d0918e7cd1f2c",
+  "reconciled_R176": "136482d97bb9d6dfd144d6b250932a817d55cca7",
+  "remote_verification": "All 20 changed file Git blob identities match local bytes at the pinned core commit.",
+  "files": {
+    "research/uct-agent-consciousness-workspace/records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md": {
+      "size": 19264,
+      "sha256": "025f6abd832f7bb2f9066207a9f469fd7d199458d81b17e7ff5c2d8861ade5f9",
+      "git_blob": "79e9bc6f5d0b2e1f6518d93a10991ea5617bcfb8"
+    },
+    "research/uct-agent-consciousness-workspace/records/IA20261008_Blind_Target_Identity/check_model.py": {
+      "size": 4474,
+      "sha256": "45cf0ccc592111e8b07a18bc56bb00a5c984612c34cabce074aeefea16e4d6c3",
+      "git_blob": "8eda8b0e5c8b3288ad9e6ad4c7e25979f14d079e"
+    },
+    "research/uct-agent-consciousness-workspace/records/IA20261008_Blind_Target_Identity/MAP_EXTENSION.json": {
+      "size": 21427,
+      "sha256": "4742defb2cdd64e9c352d364b94d0f91cdcb9d885e48ed69a818495c6b4d5f19",
+      "git_blob": "e13f0a50b16a370d9ff880a43ccdfb9e4dd77532"
+    },
+    "research/uct-agent-consciousness-workspace/records/IA20261008_Blind_Target_Identity/PROOF_LEDGER.json": {
+      "size": 19348,
+      "sha256": "1d90f980c43ef8dff7e2885a9a120036d6818920f4bb9406668c5a73cee0b34b",
+      "git_blob": "f335709cbd60af060ed3ac4a79bddf235be1d06b"
+    },
+    "research/uct-agent-consciousness-workspace/records/IA20261008_Blind_Target_Identity/REVIEW_AMENDMENTS.json": {
+      "size": 1242,
+      "sha256": "a6a73bf0ec432752bfac77689089fdcb1e10b2b3f44ab57d6b1ba8a2b4a1a690",
+      "git_blob": "c21148cd5b6b9a326d76604b63aa4459cda910da"
+    },
+    "research/uct-agent-consciousness-workspace/records/IA20261008_Blind_Target_Identity/ROUND_RECORD.md": {
+      "size": 1615,
+      "sha256": "052b04e7db951c2fff1997ff8cf1859a60c001121763662ebb0346cd6bbe6f7a",
+      "git_blob": "282308d1511461f8e7a9e038358cb098bc38bd93"
+    },
+    "research/uct-agent-consciousness-workspace/records/IA20261008_Blind_Target_Identity/REVIEW_ZH.md": {
+      "size": 2666,
+      "sha256": "ae08689b2501a25308adb9c933b2ef4e5e2958e32c3c6a5d2994c44a8fbfb990",
+      "git_blob": "9319c54f9a1b7a8ae7bfe0ccf948d8b601e99fd9"
+    },
+    "research/uct-agent-consciousness-workspace/records/IA20261008_Blind_Target_Identity/CURRENT_HANDOFF.md": {
+      "size": 2666,
+      "sha256": "ae08689b2501a25308adb9c933b2ef4e5e2958e32c3c6a5d2994c44a8fbfb990",
+      "git_blob": "9319c54f9a1b7a8ae7bfe0ccf948d8b601e99fd9"
+    },
+    "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH.json": {
+      "size": 2462476,
+      "sha256": "aa89a8040702771f26a4fc3d90c3598dbd78a3c123c1e7ede2a010a38adaf1c3",
+      "git_blob": "47f8f6470c1ab09eb38ab4126df9fef9eab66381"
+    },
+    "research/uct-agent-consciousness-workspace/AGENTS.md": {
+      "size": 62691,
+      "sha256": "69300008fb06200157a0428b669dd3d9744929357843fdc3d2650497155ec199",
+      "git_blob": "628d5e565c681f5da52398fd31a347f79d7a4b8f"
+    },
+    "research/uct-agent-consciousness-workspace/HANDOFF.md": {
+      "size": 64948,
+      "sha256": "1f33ac2990bfd27308c746ae47ae897009b7761dd2da186d1f0d5d9421298dc1",
+      "git_blob": "5909d8af68108598e43fd03a6d9cb3c7ab1275c0"
+    },
+    "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md": {
+      "size": 67115,
+      "sha256": "2d20a907f6dc47e6e4f7627d651d655fa2b0d79dd3e69e73593465fdac468fb4",
+      "git_blob": "b216f937bb55b2a1f89826d1f88c2e36b7a558c1"
+    },
+    "research/uct-agent-consciousness-workspace/MEMORY.md": {
+      "size": 97289,
+      "sha256": "048a328171d3fe5cc385b6162f69db4e91e144bd54bdb527c63220b80f6f478a",
+      "git_blob": "17d8e33560524740d2d14549519b9556fb47f219"
+    },
+    "research/uct-agent-consciousness-workspace/MASTER_INDEX.md": {
+      "size": 58154,
+      "sha256": "55c596a876052681e9cf2c0a27aac2d3888bff200fb41b4936859d29838f0921",
+      "git_blob": "0fdc31d74fef999376be4690868c0cd3c2f9829f"
+    },
+    "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md": {
+      "size": 120321,
+      "sha256": "08cf968751289c56c70986ab66eae7ebfcec96d5a48b9d8ae6473fd22020310c",
+      "git_blob": "5442a75f1c7a90e2145600e1ffa794d7c951b851"
+    },
+    "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md": {
+      "size": 109307,
+      "sha256": "348e09b01099764b9aa3521cc7e2c79a087227df08d64e7b59189c6d1b47fa79",
+      "git_blob": "459d0331ae41033a7099f0f2c15e31c9d8805f34"
+    },
+    "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md": {
+      "size": 47624,
+      "sha256": "1a8c19603c556bce009ecb80566076a16192de6231376343beb1b190054d348f",
+      "git_blob": "e84f29d7cd61699d5188198ef783a88e1be5b04d"
+    },
+    "research/uct-agent-consciousness-workspace/records/IA20261008_Blind_Target_Identity/MODEL_RESULTS.json": {
+      "size": 2693,
+      "sha256": "c8aa1fb606bda87b1059121d029340c7624d972bcb60e6d28b43a4a9af6a55c2",
+      "git_blob": "14626c1fd73c3d9754e75c64eec4b484f053abe0"
+    },
+    "research/uct-agent-consciousness-workspace/records/IA20261008_Blind_Target_Identity/MAP_AUDIT.json": {
+      "size": 1218,
+      "sha256": "b7b8e674a5ae672549376f8f32dc9a8c52a301b45c3cca33aa603b82cce4cf9f",
+      "git_blob": "519008878b3d90f8755a9e6777f4ec5ce243be67"
+    },
+    "research/uct-agent-consciousness-workspace/records/IA20261008_Blind_Target_Identity/GAP_LEDGER.json": {
+      "size": 1197,
+      "sha256": "f2daf225f4a8afa4939ce94a3b4a863f7fcb4225534ece72813f7df7a387b032",
+      "git_blob": "27bdc6c6a412a739bac561f799df71ba0fad798f"
+    }
+  },
+  "library_save": "SUCCEEDED",
+  "library": {
+    "increment": {
+      "library_file_id": "libfile_c287c9532308819193e7628080d683fd",
+      "version": 0,
+      "bytes": 516276,
+      "sha256": "083e5baf502e53bd6c745e7310ca51fafae15a45875c8d3335425a7ed1ef7615",
+      "scope": "20 changed files + manifest + verification; baseline 753a96bfb4a7c259cb843992475d0918e7cd1f2c required"
+    },
+    "master": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "version": 31,
+      "previous_version": 30,
+      "bytes": 401934,
+      "sha256": "6df8a489d4f138ebd0b55254e43ec8d5a18e5e244eb494bf0706e67d1764f889"
+    }
+  },
+  "verification_scope": "Library helper returned both successes and applied local identity metadata. No post-upload byte download is claimed.",
+  "model_checks": 31,
+  "map_checks": 13,
+  "actual_experience_validated": false
+}
