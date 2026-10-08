@@ -1,0 +1,48 @@
+{
+  "schema": "UCT_R171_DUAL_SAVE_RECEIPT/v1",
+  "round": "R171",
+  "github": {
+    "core_checkpoint_commit": "10b50dd00ff05950349174edc5a38c931bbe3c9d",
+    "research_map_commit": "9605979926a37b7a396ce5ee11b4f7e46054c894",
+    "recovery_builder_commit": "f2f7cc97781549cb989ac8a1da8c14661157b9c1",
+    "validated_tree_before_receipt": "438847422a896d582a497523c7bd6d5b4e3b31c1",
+    "receipt_commit": "SELF"
+  },
+  "master_handoff": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000308481f7af0877a293e2c3d0",
+    "version": 15,
+    "bytes": 79034,
+    "sha256": "ec677bbd839455d40c9e1618368bbd0681a8508e4d5337ccc409613fccae385a",
+    "readback": "PASS"
+  },
+  "cumulative_increment": {
+    "library_file_id": "libfile_52d93f42bd0481919b4eddf20bc61c3e",
+    "file_id": "file_00000000477c81f79a7902aa9d638024",
+    "version": 0,
+    "bytes": 933538,
+    "sha256": "928167db8501a2ddf77598036ea0e33f36e4e67e4994a1b96097a9ceba2c1774",
+    "payload_members": 235,
+    "zip_members": 236,
+    "archive_test": "PASS",
+    "manifest_hashes": "PASS",
+    "scope": "R157-R171 cumulative increment relative to exact R156 working-set baseline; not a full repository or history backup"
+  },
+  "verification_record": {
+    "library_file_id": "libfile_1dadf89cc90c81918e400b2ad4ab06cf",
+    "file_id": "file_00000000904081f79cbc9e76627a861f",
+    "version": 0,
+    "bytes": 2741,
+    "sha256": "baf3228f9bddc47a212dffbd9b9dda28cb4febaac47242815ca016de740ea8f4",
+    "readback": "PASS"
+  },
+  "formal_map": {
+    "revision": "R171-v1.0",
+    "nodes": 497,
+    "rules": 240,
+    "context_links": 137,
+    "aggregate_checks": "23/23 PASS"
+  },
+  "direction": "PASS: no C1/B_min derivation, basal gate, unique owner, complete-organization promotion, or current-assistant consciousness claim",
+  "next_exact_problem": "Composition of range certificates across nested and overlapping actual processes with explicit interface/refinement compatibility and countermodels."
+}
