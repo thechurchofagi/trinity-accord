@@ -1,0 +1,63 @@
+{
+  "schema": "UCT_R173_GAP_LEDGER/v1",
+  "gaps": [
+    {
+      "id": "R173-G1",
+      "status": "OPEN",
+      "location": "F_F/B_fam target and R173:FAMILIAR_MINENESS_BOUNDARY",
+      "impact": "No familiar-mineness conclusion or measurement claim.",
+      "counterexample": "Same K facts admit different external names; no independent F_F contrast is supplied.",
+      "repaired": "F_O/F_A/F_F split and B_fam contract made explicit.",
+      "remaining": "Independent target semantics and fallible report-independent or report-partial measurement bridge."
+    },
+    {
+      "id": "R173-G2",
+      "status": "OPEN",
+      "location": "Effective R172 input and phi_fam transport",
+      "impact": "No biological/AI application.",
+      "counterexample": "Analyst test list or certificate can change without the actual process.",
+      "repaired": "Only actual RetBind primitives and transported physical parameters enter phi_fam.",
+      "remaining": "Reviewer closure of QC-06/07 and actual grounding/realization."
+    },
+    {
+      "id": "R173-G3",
+      "status": "OPEN",
+      "location": "Avail, AgencyLoop and RetBind physical predicates",
+      "impact": "Abstract independence does not identify neural or artificial mechanisms.",
+      "counterexample": "Idle stored record, copied value, intervention-created path.",
+      "repaired": "Current consumer use, lineage, order and actual-trace clauses stated.",
+      "remaining": "Fidelity, locality, trace identity/tolerance and consumer evidence."
+    },
+    {
+      "id": "R173-G4",
+      "status": "OPEN_FINITE_BOUNDARY",
+      "location": "R173-A/B",
+      "impact": "No unrestricted impossibility or minimal-mechanism theorem.",
+      "counterexample": "A restricted domain could make history a function of current state.",
+      "repaired": "The two-history domain and information-partition sense of minimal are explicit.",
+      "remaining": "State domain restrictions for each application."
+    },
+    {
+      "id": "R173-G5",
+      "status": "OPEN",
+      "location": "Three target separation",
+      "impact": "Organizational combinations do not prove phenomenal dissociations.",
+      "counterexample": "F_O/F_A/F_F could covary in a narrower empirical population.",
+      "repaired": "Partial/overlapping targets and absence of F assignments are explicit.",
+      "remaining": "Independent empirical/interpretive evidence."
+    },
+    {
+      "id": "R173-G6",
+      "status": "OPEN_STORAGE",
+      "location": "Durable copies",
+      "impact": "Completion cannot be claimed until remote Git and Library artifacts are verified.",
+      "counterexample": "Local files alone are transient.",
+      "repaired": "Pending end-of-round save.",
+      "remaining": "Git commit/readback, fixed-master guarded update, increment upload/readback status."
+    }
+  ],
+  "retained_review": [
+    "QC-20261008-06 OPEN pending reviewer assessment",
+    "QC-20261008-07 OPEN pending reviewer assessment"
+  ]
+}

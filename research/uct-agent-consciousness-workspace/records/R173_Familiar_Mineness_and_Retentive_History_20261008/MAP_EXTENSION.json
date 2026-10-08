@@ -1,0 +1,432 @@
+{
+  "schema": "UCT_R173_MAP_EXTENSION/v1",
+  "parent_revision": "R172-v1.0",
+  "parent_sha256": "5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d",
+  "note": "Familiar_Mineness_Retentive_History_v0_1.md",
+  "note_sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa",
+  "effective_parent_amendments": [
+    "../R171_Universal_Range_Certificates_20261008/REVIEW_AMENDMENTS.json",
+    "../R172_Interface_Composition_and_Action_Use_20261008/REVIEW_AMENDMENTS.json"
+  ],
+  "nodes": [
+    {
+      "id": "R173:FIXED_FAMILIAR_TARGET_CONTRACT",
+      "kind": "DECLARED_PARTIAL_TARGET_CONTRACT",
+      "label": "Fixed Ownership, Agency and Familiarity Targets",
+      "statement": "Fix partial selected targets F_O, F_A and history-sensitive F_F before comparison; allow overlap and undefined cases; no report or exclusive partition defines them.",
+      "domain": "One fixed admitted P, present I0, declared earlier physical history-window token H0, complete K/D/Phi/h, body candidate b, representation k and action a unless stated abstract-only.",
+      "scope": "Selected fixed comparison domain only; not a universal decomposition of self-experience.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "source_lineage": "A §§8.11–8.14/14.7; R150; R156; R157; R159; effective R172 QC-06/07 overlay.",
+      "status": "DECLARED_INTERPRETATION_TARGET_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Definition/target discipline, not deduction.",
+      "counterexamples_and_limits": "No F_F measurement or biological target assignment is supplied.",
+      "formal_contract_R173": {
+        "object_domain": "Actual bearer/interval/history occurrences and separately typed selected targets; abstract finite witnesses are not actual installations.",
+        "quantifiers": "All positive premises share one binding; alternative histories and target assignments are compared, not conjoined.",
+        "bearer_time_signature": "P/I0/H0/K/D/Phi/h and all physical parameters fixed per application.",
+        "source_anchor": {
+          "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+          "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+        },
+        "purpose": "Separate present action, agency, actual retentive history and familiar-mineness interpretation.",
+        "open_obligations": [
+          "R173-G1",
+          "R173-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R173:EFFECTIVE_R172_PATH_INSTANCE",
+      "kind": "DECLARED_CORRECTED_APPLICATION_PACKAGE",
+      "label": "Effective R172 Grounded Path Instance",
+      "statement": "One instance satisfies every premise of r172_witnessed_online_action_use_effective and r172_experience_internal_action_coordinate_effective, including actual grounding and parameter transport; suspended raw rules are not used.",
+      "domain": "One fixed admitted P, present I0, declared earlier physical history-window token H0, complete K/D/Phi/h, body candidate b, representation k and action a unless stated abstract-only.",
+      "scope": "One corrected conditional application only.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "source_lineage": "A §§8.11–8.14/14.7; R150; R156; R157; R159; effective R172 QC-06/07 overlay.",
+      "status": "DECLARED_INSTANCE_PACKAGE_PENDING_REVIEW_AND_PHYSICAL_INSTANTIATION",
+      "proof": "Assumption package referencing the mandatory overlay.",
+      "counterexamples_and_limits": "Reviewer closure of QC-06/07 and any actual physical instance remain open.",
+      "formal_contract_R173": {
+        "object_domain": "Actual bearer/interval/history occurrences and separately typed selected targets; abstract finite witnesses are not actual installations.",
+        "quantifiers": "All positive premises share one binding; alternative histories and target assignments are compared, not conjoined.",
+        "bearer_time_signature": "P/I0/H0/K/D/Phi/h and all physical parameters fixed per application.",
+        "source_anchor": {
+          "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+          "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+        },
+        "purpose": "Separate present action, agency, actual retentive history and familiar-mineness interpretation.",
+        "open_obligations": [
+          "R173-G2"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R173:CURRENT_ACTION_AVAILABILITY",
+      "kind": "DECLARED_ACTUAL_RELATION",
+      "label": "Current Action Availability",
+      "statement": "Avail(P,I0,b,k,a) is a declared physically available current action option involving the installed coordinate under fixed admissible operations.",
+      "domain": "One fixed admitted P, present I0, declared earlier physical history-window token H0, complete K/D/Phi/h, body candidate b, representation k and action a unless stated abstract-only.",
+      "scope": "Present ability only; does not entail executed agency, history or feeling.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "source_lineage": "A §§8.11–8.14/14.7; R150; R156; R157; R159; effective R172 QC-06/07 overlay.",
+      "status": "DECLARED_RELATION_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Definition with explicit scope.",
+      "counterexamples_and_limits": "Operation closure and actual implementation remain open.",
+      "formal_contract_R173": {
+        "object_domain": "Actual bearer/interval/history occurrences and separately typed selected targets; abstract finite witnesses are not actual installations.",
+        "quantifiers": "All positive premises share one binding; alternative histories and target assignments are compared, not conjoined.",
+        "bearer_time_signature": "P/I0/H0/K/D/Phi/h and all physical parameters fixed per application.",
+        "source_anchor": {
+          "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+          "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+        },
+        "purpose": "Separate present action, agency, actual retentive history and familiar-mineness interpretation.",
+        "open_obligations": [
+          "R173-G3"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R173:CURRENT_AGENCY_LOOP",
+      "kind": "DECLARED_ACTUAL_RELATION",
+      "label": "Current Agency Loop",
+      "statement": "AgencyLoop(P,I0,b,k,a) is the same-episode action-production and consequence-monitoring/attribution loop, independently of report.",
+      "domain": "One fixed admitted P, present I0, declared earlier physical history-window token H0, complete K/D/Phi/h, body candidate b, representation k and action a unless stated abstract-only.",
+      "scope": "Current loop only; may be newly installed and does not entail familiarity.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "source_lineage": "A §§8.11–8.14/14.7; R150; R156; R157; R159; effective R172 QC-06/07 overlay.",
+      "status": "DECLARED_RELATION_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Definition with explicit scope.",
+      "counterexamples_and_limits": "Physical source/consequence realization remains open.",
+      "formal_contract_R173": {
+        "object_domain": "Actual bearer/interval/history occurrences and separately typed selected targets; abstract finite witnesses are not actual installations.",
+        "quantifiers": "All positive premises share one binding; alternative histories and target assignments are compared, not conjoined.",
+        "bearer_time_signature": "P/I0/H0/K/D/Phi/h and all physical parameters fixed per application.",
+        "source_anchor": {
+          "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+          "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+        },
+        "purpose": "Separate present action, agency, actual retentive history and familiar-mineness interpretation.",
+        "open_obligations": [
+          "R173-G3"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R173:RETENTIVE_BINDING_RELATION",
+      "kind": "DECLARED_HISTORY_INDEXED_ACTUAL_RELATION",
+      "label": "Retentive Same-Lineage Frame Binding",
+      "statement": "RetBind holds only when an earlier same-lineage frame occurrence has an actual continued trace that is executed by a present frame consumer, with grounded parameters and temporal order.",
+      "domain": "One fixed admitted P, present I0, declared earlier physical history-window token H0, complete K/D/Phi/h, body candidate b, representation k and action a unless stated abstract-only.",
+      "scope": "History-sensitive actual relation; idle logs, copied values and external archives do not suffice.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "source_lineage": "A §§8.11–8.14/14.7; R150; R156; R157; R159; effective R172 QC-06/07 overlay.",
+      "status": "DECLARED_RELATION_NOT_EMPIRICALLY_INSTANTIATED",
+      "proof": "Explicit existential predicate in note §3.3.",
+      "counterexamples_and_limits": "Trace identity, tolerance, current use and K-grounding require independent evidence.",
+      "formal_contract_R173": {
+        "object_domain": "Actual bearer/interval/history occurrences and separately typed selected targets; abstract finite witnesses are not actual installations.",
+        "quantifiers": "All positive premises share one binding; alternative histories and target assignments are compared, not conjoined.",
+        "bearer_time_signature": "P/I0/H0/K/D/Phi/h and all physical parameters fixed per application.",
+        "source_anchor": {
+          "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+          "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+        },
+        "purpose": "Separate present action, agency, actual retentive history and familiar-mineness interpretation.",
+        "open_obligations": [
+          "R173-G2",
+          "R173-G3"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R173:SAME_PRESENT_DIFFERENT_HISTORY_WITNESS",
+      "kind": "FINITE_COUNTERMODEL",
+      "label": "Same Present Action/Agency, Different Retentive History",
+      "statement": "Two finite devices agree on present binding, executed path, action availability, agency loop and trace value, but differ in whether the value continues from and is used from a prior same-lineage frame occurrence.",
+      "domain": "One fixed admitted P, present I0, declared earlier physical history-window token H0, complete K/D/Phi/h, body candidate b, representation k and action a unless stated abstract-only.",
+      "scope": "Abstract two-history class; no phenomenal values assigned.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "source_lineage": "A §§8.11–8.14/14.7; R150; R156; R157; R159; effective R172 QC-06/07 overlay.",
+      "status": "EXACT_FINITE_COUNTERMODEL",
+      "proof": "Direct construction; exact checker enumerates all current fibers.",
+      "counterexamples_and_limits": "Abstract satisfiability is not physical realizability or a human/AI claim.",
+      "formal_contract_R173": {
+        "object_domain": "Actual bearer/interval/history occurrences and separately typed selected targets; abstract finite witnesses are not actual installations.",
+        "quantifiers": "All positive premises share one binding; alternative histories and target assignments are compared, not conjoined.",
+        "bearer_time_signature": "P/I0/H0/K/D/Phi/h and all physical parameters fixed per application.",
+        "source_anchor": {
+          "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+          "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+        },
+        "purpose": "Separate present action, agency, actual retentive history and familiar-mineness interpretation.",
+        "open_obligations": [
+          "R173-G4"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R173:PRESENT_SLICE_NONENTAILMENT",
+      "kind": "EXACT_NONENTAILMENT",
+      "label": "Current Action and Agency Do Not Recover Retentive Binding",
+      "statement": "On any domain containing the same-present/different-history pair, no fixed decoder of the present action/agency descriptor recovers RetBind.",
+      "domain": "One fixed admitted P, present I0, declared earlier physical history-window token H0, complete K/D/Phi/h, body candidate b, representation k and action a unless stated abstract-only.",
+      "scope": "Declared two-history comparison class only.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "source_lineage": "A §§8.11–8.14/14.7; R150; R156; R157; R159; effective R172 QC-06/07 overlay.",
+      "status": "MANUAL_PROOF_AND_EXACT_FINITE_CHECK",
+      "proof": "Equal decoder input and unequal target force one error.",
+      "counterexamples_and_limits": "Does not establish an F_F contrast or universal history necessity.",
+      "formal_contract_R173": {
+        "object_domain": "Actual bearer/interval/history occurrences and separately typed selected targets; abstract finite witnesses are not actual installations.",
+        "quantifiers": "All positive premises share one binding; alternative histories and target assignments are compared, not conjoined.",
+        "bearer_time_signature": "P/I0/H0/K/D/Phi/h and all physical parameters fixed per application.",
+        "source_anchor": {
+          "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+          "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+        },
+        "purpose": "Separate present action, agency, actual retentive history and familiar-mineness interpretation.",
+        "open_obligations": [
+          "R173-G1",
+          "R173-G4"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+      "kind": "CONDITIONAL_C1_APPLICATION",
+      "label": "History-Indexed Body/Action Coordinate Inside Experience",
+      "statement": "Under the corrected path instance, actual grounded RetBind, same binding, C1 and complete parameter transport, phi_fam=phi_path AND RetBind has its structural counterpart in Phi.",
+      "domain": "One fixed admitted P, present I0, declared earlier physical history-window token H0, complete K/D/Phi/h, body candidate b, representation k and action a unless stated abstract-only.",
+      "scope": "One fixed actual C1 instance and selected coordinate.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "source_lineage": "A §§8.11–8.14/14.7; R150; R156; R157; R159; effective R172 QC-06/07 overlay.",
+      "status": "MANUAL_CONDITIONAL_C1_APPLICATION",
+      "proof": "R157 formula preservation with correctly sorted actual history witnesses.",
+      "counterexamples_and_limits": "No B_fam, measurement, necessity, basal gate or physical instance follows.",
+      "formal_contract_R173": {
+        "object_domain": "Actual bearer/interval/history occurrences and separately typed selected targets; abstract finite witnesses are not actual installations.",
+        "quantifiers": "All positive premises share one binding; alternative histories and target assignments are compared, not conjoined.",
+        "bearer_time_signature": "P/I0/H0/K/D/Phi/h and all physical parameters fixed per application.",
+        "source_anchor": {
+          "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+          "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+        },
+        "purpose": "Separate present action, agency, actual retentive history and familiar-mineness interpretation.",
+        "open_obligations": [
+          "R173-G1",
+          "R173-G2",
+          "R173-G3"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R173:THREE_TARGET_SEPARATION",
+      "kind": "CONCEPTUAL_AND_FINITE_INDEPENDENCE_RESULT",
+      "label": "Availability, Agency and Familiarity Targets Remain Distinct",
+      "statement": "Avail, AgencyLoop and RetBind realize all eight Boolean combinations in the abstract comparison class; F_O, F_A and F_F remain separate partial semantic targets.",
+      "domain": "One fixed admitted P, present I0, declared earlier physical history-window token H0, complete K/D/Phi/h, body candidate b, representation k and action a unless stated abstract-only.",
+      "scope": "Finite organizational independence plus declared target distinction; no empirical frequencies.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "source_lineage": "A §§8.11–8.14/14.7; R150; R156; R157; R159; effective R172 QC-06/07 overlay.",
+      "status": "EXACT_FINITE_ROLE_SEPARATION_WITH_OPEN_SEMANTICS",
+      "proof": "Eight-row enumeration and source-aligned target typing.",
+      "counterexamples_and_limits": "Organizational independence does not prove phenomenal dissociation.",
+      "formal_contract_R173": {
+        "object_domain": "Actual bearer/interval/history occurrences and separately typed selected targets; abstract finite witnesses are not actual installations.",
+        "quantifiers": "All positive premises share one binding; alternative histories and target assignments are compared, not conjoined.",
+        "bearer_time_signature": "P/I0/H0/K/D/Phi/h and all physical parameters fixed per application.",
+        "source_anchor": {
+          "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+          "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+        },
+        "purpose": "Separate present action, agency, actual retentive history and familiar-mineness interpretation.",
+        "open_obligations": [
+          "R173-G1",
+          "R173-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    },
+    {
+      "id": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "kind": "OPEN_INTERPRETATION_BOUNDARY",
+      "label": "Familiar Mineness Bridge Remains Open",
+      "statement": "The transported retentive coordinate is a positive history-sensitive candidate, but familiar-mineness naming and measurement still require an independently fixed B_fam; RetBind is no basal-experience or universal-mineness condition.",
+      "domain": "One fixed admitted P, present I0, declared earlier physical history-window token H0, complete K/D/Phi/h, body candidate b, representation k and action a unless stated abstract-only.",
+      "scope": "Specifically familiar bodily/action mineness on the fixed domain.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "source_lineage": "A §§8.11–8.14/14.7; R150; R156; R157; R159; effective R172 QC-06/07 overlay.",
+      "status": "CONDITIONAL_PROGRESS_WITH_OPEN_B_FAM",
+      "proof": "Combine transport, three-target separation and R157 semantic residual.",
+      "counterexamples_and_limits": "No claim that current systems satisfy the bridge or that all mineness is retentive.",
+      "formal_contract_R173": {
+        "object_domain": "Actual bearer/interval/history occurrences and separately typed selected targets; abstract finite witnesses are not actual installations.",
+        "quantifiers": "All positive premises share one binding; alternative histories and target assignments are compared, not conjoined.",
+        "bearer_time_signature": "P/I0/H0/K/D/Phi/h and all physical parameters fixed per application.",
+        "source_anchor": {
+          "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+          "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+        },
+        "purpose": "Separate present action, agency, actual retentive history and familiar-mineness interpretation.",
+        "open_obligations": [
+          "R173-G1",
+          "R173-G5"
+        ],
+        "machine_formalized": false,
+        "premise_routes": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "r173_history_twin_witness",
+      "all_of": [
+        "R173:CURRENT_ACTION_AVAILABILITY",
+        "R173:CURRENT_AGENCY_LOOP",
+        "R173:RETENTIVE_BINDING_RELATION"
+      ],
+      "conclusion": "R173:SAME_PRESENT_DIFFERENT_HISTORY_WITNESS",
+      "statement": "The three separately typed relations admit a pair with matched present action/agency facts and different retentive history.",
+      "proof_sketch": "Construct the two devices with identical present tuple and alternative provenance/use paths.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "kind": "FINITE_COUNTERMODEL_CONSTRUCTION",
+      "review": "MANUAL_ALL_OF_OBJECT_TIME_SIGNATURE_ACTUALITY_DIRECTION_AUDIT",
+      "formal_contract_R173": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same present signature and value tuple",
+          "alternative prior histories",
+          "no F_F assignment"
+        ],
+        "quantification": "Every listed premise must hold on the same declared application; compared histories are alternatives.",
+        "proof_location": "R173 note",
+        "source_sha256": "2e579c8cd53f9155cf2618f1cdf44d199e3cfd9d2435948f69a3acdfcbfb5953",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r173_present_slice_nonidentification",
+      "all_of": [
+        "R173:FIXED_FAMILIAR_TARGET_CONTRACT",
+        "R173:SAME_PRESENT_DIFFERENT_HISTORY_WITNESS"
+      ],
+      "conclusion": "R173:PRESENT_SLICE_NONENTAILMENT",
+      "statement": "The fixed history-sensitive target contract and exact twin witness jointly block recovery of RetBind from present action/agency descriptors.",
+      "proof_sketch": "A fixed decoder on equal inputs cannot return unequal history targets.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "kind": "EXACT_NONENTAILMENT",
+      "review": "MANUAL_ALL_OF_OBJECT_TIME_SIGNATURE_ACTUALITY_DIRECTION_AUDIT",
+      "formal_contract_R173": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "same comparison domain",
+          "fixed decoder",
+          "history-sensitive organizational target distinct from F_F measurement"
+        ],
+        "quantification": "Every listed premise must hold on the same declared application; compared histories are alternatives.",
+        "proof_location": "R173 note",
+        "source_sha256": "2e579c8cd53f9155cf2618f1cdf44d199e3cfd9d2435948f69a3acdfcbfb5953",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r173_retentive_coordinate_transport",
+      "all_of": [
+        "R173:EFFECTIVE_R172_PATH_INSTANCE",
+        "R173:RETENTIVE_BINDING_RELATION",
+        "R157:COORDINATE_TRANSPORT"
+      ],
+      "conclusion": "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+      "statement": "The corrected actual path, grounded retentive relation and same-instance C1 transport jointly yield the history-indexed experiential coordinate.",
+      "proof_sketch": "Conjoin grounded phi_path and RetBind, then apply R157 formula preservation with all parameters mapped by h.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "kind": "CONDITIONAL_C1_AND_HISTORY_TRANSPORT",
+      "review": "MANUAL_ALL_OF_OBJECT_TIME_SIGNATURE_ACTUALITY_DIRECTION_AUDIT",
+      "formal_contract_R173": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "all effective R172 premises retained",
+          "same P/I0/K/D/Phi/h",
+          "actual H0/eta roles",
+          "sorted witnesses",
+          "parameter transport",
+          "no external archive/test list"
+        ],
+        "quantification": "Every listed premise must hold on the same declared application; compared histories are alternatives.",
+        "proof_location": "R173 note",
+        "source_sha256": "2e579c8cd53f9155cf2618f1cdf44d199e3cfd9d2435948f69a3acdfcbfb5953",
+        "machine_proof": false
+      }
+    },
+    {
+      "id": "r173_familiar_mineness_boundary",
+      "all_of": [
+        "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+        "R173:THREE_TARGET_SEPARATION",
+        "R157:SEMANTIC_RESIDUAL"
+      ],
+      "conclusion": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "statement": "The positive history-indexed coordinate and target separation refine the candidate explanation while the semantic residual keeps B_fam open.",
+      "proof_sketch": "Structural transport fixes a coordinate; organizational independence and external-name nonuniqueness block promotion to a universal familiar-mineness law.",
+      "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "kind": "CONDITIONAL_EXPLANATORY_BOUNDARY",
+      "review": "MANUAL_ALL_OF_OBJECT_TIME_SIGNATURE_ACTUALITY_DIRECTION_AUDIT",
+      "formal_contract_R173": {
+        "premise_connective": "AND",
+        "bindings_required": [
+          "fixed selected F_F target",
+          "no report definition",
+          "no basal gate",
+          "no unique owner",
+          "B_fam independently required"
+        ],
+        "quantification": "Every listed premise must hold on the same declared application; compared histories are alternatives.",
+        "proof_location": "R173 note",
+        "source_sha256": "2e579c8cd53f9155cf2618f1cdf44d199e3cfd9d2435948f69a3acdfcbfb5953",
+        "machine_proof": false
+      }
+    }
+  ],
+  "context_links": [
+    {
+      "from": "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+      "to": "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
+      "relation": "context only: adds an actual history-indexed conjunct to the corrected path candidate"
+    },
+    {
+      "from": "R173:THREE_TARGET_SEPARATION",
+      "to": "R158:TARGET_SPLIT",
+      "relation": "context only: refines ownership/agency separation with a familiar-history target"
+    },
+    {
+      "from": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "to": "R155:MINENESS_OBLIGATION",
+      "relation": "context only: narrows but does not close the independent mineness obligation"
+    },
+    {
+      "from": "R173:RETENTIVE_BINDING_RELATION",
+      "to": "R146:SELF_CONTRACT",
+      "relation": "context only: retentive use can occur without conceptual selfhood and is not a basal gate"
+    }
+  ]
+}

@@ -1,3 +1,17 @@
+# Authoritative current checkpoint — R173 familiar mineness and retentive history
+
+Latest substantive round: **R173**. The formal graph is **R173-v1.0, 516 nodes / 248 rules / 145 context links**, SHA256 `ea703669ab522a1497560bdff7f4be7a3d6652a5021b5c241648467487fdae16`. Read [the English note](records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md), [round record](records/R173_Familiar_Mineness_and_Retentive_History_20261008/ROUND_RECORD.md), [map extension](records/R173_Familiar_Mineness_and_Retentive_History_20261008/MAP_EXTENSION.json), [proof ledger](records/R173_Familiar_Mineness_and_Retentive_History_20261008/PROOF_LEDGER.json), [gap ledger](records/R173_Familiar_Mineness_and_Retentive_History_20261008/GAP_LEDGER.json), [Chinese review](records/R173_Familiar_Mineness_and_Retentive_History_20261008/REVIEW_ZH.md), and [current handoff](records/R173_Familiar_Mineness_and_Retentive_History_20261008/CURRENT_HANDOFF.md).
+
+R173 separates three actual organizational relations on one fixed domain: current action availability, a current agency loop, and history-indexed retentive binding. A same-present/different-history countermodel proves that current action/agency descriptors do not recover an actual prior-frame-to-current-use relation. The positive candidate `phi_fam = phi_path AND RetBind` has a conditional experiential counterpart under the corrected R172 instance, C1, independent K-grounding, sorted witnesses, full parameter transport and one common binding.
+
+This does **not** close familiar mineness. `F_O`, `F_A` and history-sensitive `F_F` remain separate partial targets, and the independent `B_fam` semantic/measurement bridge is open. Retentive history is no basal-experience gate, report requirement, conceptual-I condition, unique owner or verdict about any current assistant. QC-06/07 remain reviewer-controlled OPEN; R173 uses the effective correction package and does not traverse the suspended raw R172 rules.
+
+Twelve finite/map checks pass; they are not physical realization, phenomenal evidence or global proof. Next: distinguish an actually used same-lineage retentive trace from a copied but currently equivalent trace using an independently grounded consequence, while keeping `F_F` measurement separate from report.
+
+Everything below is historical where superseded by this checkpoint and the mandatory R171/R172 effective amendments.
+
+---
+
 # Effective current checkpoint — R172 with QC-06/07 corrections
 
 Latest substantive round remains R172 (506/244/141); this is a correction checkpoint, not R173. Read [the response](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_RESPONSE_20261008_02.md), [mandatory effective overlay](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_AMENDMENTS.json), and [focused checks](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_CORRECTION_CHECKS.json) before the historical raw R172 rules.

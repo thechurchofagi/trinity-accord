@@ -1,0 +1,65 @@
+{
+  "schema": "UCT_R173_PROOF_LEDGER/v1",
+  "proofs": [
+    {
+      "id": "R173-A",
+      "type": "exact nonidentification",
+      "statement": "No fixed decoder of the matched present action/agency tuple recovers RetBind on the two-history domain.",
+      "all_premises": [
+        "same present B,U,A,G,m",
+        "domain includes R=0 and R=1 histories",
+        "fixed decoder",
+        "RetBind target is actual provenance/current-use relation"
+      ],
+      "proof": "Equal input forces equal decoder output; target values differ.",
+      "counterexample_role": "Blocks present-slice promotion to a history-sensitive organizational target.",
+      "status": "MANUAL_PROOF_EXACT_FINITE_REGRESSION_PASS",
+      "limits": "No F_F values or physical instantiation."
+    },
+    {
+      "id": "R173-B",
+      "type": "finite sufficiency/minimal partition result",
+      "statement": "Adding RetBind value to the present tuple recovers RetBind on the finite witness class.",
+      "all_premises": [
+        "same declared witness class",
+        "augmented tuple contains actual relation value"
+      ],
+      "proof": "Projection to final coordinate.",
+      "counterexample_role": "Shows the exact missing information in this class.",
+      "status": "EXACT",
+      "limits": "Not biological minimality or phenomenal sufficiency."
+    },
+    {
+      "id": "R173-C",
+      "type": "conditional C1 application",
+      "statement": "Grounded phi_path AND RetBind is transported to Phi on one common admitted C1 instance.",
+      "all_premises": [
+        "effective R172 corrected instance",
+        "actual RetBind",
+        "independent K grounding",
+        "sorted witnesses",
+        "all physical parameters transported",
+        "same P/I0/K/D/Phi/h",
+        "A:C1 via R157 transport"
+      ],
+      "proof": "Ordinary first-order formula preservation under h.",
+      "counterexample_role": "External archives or unmapped history labels block the application.",
+      "status": "MANUAL_CONDITIONAL",
+      "limits": "Does not choose B_fam or prove C1."
+    },
+    {
+      "id": "R173-D",
+      "type": "semantic boundary",
+      "statement": "The transported coordinate does not alone determine the familiar-mineness label.",
+      "all_premises": [
+        "R173-C coordinate",
+        "R157 semantic vocabulary outside K",
+        "fixed three-target distinction"
+      ],
+      "proof": "Hold K/Phi fixed and vary external interpretation; no K-fact changes.",
+      "counterexample_role": "Prevents structural coordinate from becoming an unargued phenomenal name.",
+      "status": "MANUAL_METATHEORETIC",
+      "limits": "Does not say all interpretations are equally supported."
+    }
+  ]
+}

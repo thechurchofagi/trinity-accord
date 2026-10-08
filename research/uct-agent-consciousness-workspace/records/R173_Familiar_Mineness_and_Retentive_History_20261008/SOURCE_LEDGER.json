@@ -1,0 +1,49 @@
+{
+  "schema": "UCT_R173_SOURCE_LEDGER/v1",
+  "sources": [
+    {
+      "id": "A_UCT_I_v1_2",
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "scope_read": "\u00a7\u00a78.11\u20138.14, 14.7",
+      "role": "fixed UCT source"
+    },
+    {
+      "id": "R150",
+      "path": "records/R150_Self_Experience_and_Research_Purpose_20261007/SELF_EXPERIENCE_AND_PURPOSE.md",
+      "sha256": "888e24087b73bb6b45a85b000c4f093752a0daf4317364ac16f87abf18fb4181",
+      "scope_read": "\u00a7\u00a72\u20136",
+      "role": "source-aligned self-experience clarification"
+    },
+    {
+      "id": "R156",
+      "path": "records/R156_Mineness_Bridge_Comparison_20261007/Selected_Mineness_Bridges_v0_1.md",
+      "sha256": "b4cc3a51195ad8e525b249e3896556d8cf3b711d1bcdb90ebdcbc93dd36e1a35",
+      "scope_read": "\u00a7\u00a71\u20137",
+      "role": "installed-use and target-fiber boundary"
+    },
+    {
+      "id": "R157",
+      "path": "records/R157_Structural_Coordinate_and_Mineness_20261007/Structural_Coordinate_and_Mineness_v0_1.md",
+      "sha256": "f754373e4172495bce1214a1b5e19cf923527306c3afb8c5294365a92e72ad9e",
+      "scope_read": "\u00a7\u00a72\u20136",
+      "role": "coordinate transport and semantic residual"
+    },
+    {
+      "id": "R159",
+      "path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md",
+      "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422",
+      "scope_read": "\u00a7\u00a72\u20137",
+      "role": "frame binding/reference separation"
+    },
+    {
+      "id": "R172_overlay",
+      "path": "records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_AMENDMENTS.json",
+      "sha256": "a5b4b6f6d378cd31d7b727af8e9319ae5418db9520328fb8d910d9e3a1978931",
+      "scope_read": "actual_selector/effective_rules",
+      "role": "mandatory target/evidence/parameter correction"
+    }
+  ],
+  "coverage": "targeted fixed-source reading; no exhaustive novelty or literature review",
+  "attribution": "Causal history dependence and isomorphism preservation are not claimed as new mathematics."
+}

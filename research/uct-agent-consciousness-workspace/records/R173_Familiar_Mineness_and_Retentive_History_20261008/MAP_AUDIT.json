@@ -1,0 +1,101 @@
+{
+  "schema": "UCT_R173_MAP_AUDIT/v1",
+  "revision": "R173-v1.0",
+  "counts": {
+    "nodes": 516,
+    "rules": 248,
+    "context_links": 145
+  },
+  "parent": {
+    "revision": "R172-v1.0",
+    "counts": {
+      "nodes": 506,
+      "rules": 244,
+      "context_links": 141
+    },
+    "sha256": "5efd423f6b651649263d9703f31938b4259639c79f967b51f4109052fcb3587d"
+  },
+  "new": {
+    "nodes": 10,
+    "rules": 4,
+    "context_links": 4
+  },
+  "concept_audit": {
+    "objects": [
+      "actual bearer P",
+      "present interval I0",
+      "preceding intervals H0",
+      "complete K/D/Phi/h",
+      "body b",
+      "representation k",
+      "action a",
+      "actual trace m",
+      "external targets F_O/F_A/F_F",
+      "reports/certificates"
+    ],
+    "quantifiers": "Existential history witnesses are local to one actual application; alternative histories are comparison cases; no universal target assignment.",
+    "finite_boundary": "R173-A/B and eight combinations are finite-class results only.",
+    "actuality": "Actual relations, abstract witnesses, evidence and semantic targets are separately typed."
+  },
+  "rule_audit": [
+    {
+      "id": "r173_history_twin_witness",
+      "all_of": [
+        "R173:CURRENT_ACTION_AVAILABILITY",
+        "R173:CURRENT_AGENCY_LOOP",
+        "R173:RETENTIVE_BINDING_RELATION"
+      ],
+      "jointly_satisfiable": "YES as a declared abstract schema; actual instantiation separately open",
+      "direction": "No reverse inference to C1, F_F, basal experience or unique owner"
+    },
+    {
+      "id": "r173_present_slice_nonidentification",
+      "all_of": [
+        "R173:FIXED_FAMILIAR_TARGET_CONTRACT",
+        "R173:SAME_PRESENT_DIFFERENT_HISTORY_WITNESS"
+      ],
+      "jointly_satisfiable": "YES as a declared abstract schema; actual instantiation separately open",
+      "direction": "No reverse inference to C1, F_F, basal experience or unique owner"
+    },
+    {
+      "id": "r173_retentive_coordinate_transport",
+      "all_of": [
+        "R173:EFFECTIVE_R172_PATH_INSTANCE",
+        "R173:RETENTIVE_BINDING_RELATION",
+        "R157:COORDINATE_TRANSPORT"
+      ],
+      "jointly_satisfiable": "YES as a declared abstract schema; actual instantiation separately open",
+      "direction": "No reverse inference to C1, F_F, basal experience or unique owner"
+    },
+    {
+      "id": "r173_familiar_mineness_boundary",
+      "all_of": [
+        "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+        "R173:THREE_TARGET_SEPARATION",
+        "R157:SEMANTIC_RESIDUAL"
+      ],
+      "jointly_satisfiable": "YES as a declared abstract schema; actual instantiation separately open",
+      "direction": "No reverse inference to C1, F_F, basal experience or unique owner"
+    }
+  ],
+  "unlinked_consistency": "Action availability, agency, ownership, familiarity, conceptual I, report, lineage and complete organization remain distinct even where no deductive edge is added.",
+  "review_overlay": "R171 and R172 effective amendments are mandatory; no suspended raw R172 rule is used as a new premise.",
+  "checks": {
+    "status": "PASS",
+    "count": 12,
+    "limits": [
+      "finite logical/model audit only",
+      "no physical realization",
+      "no F_F observations",
+      "no proof of C1 or B_fam"
+    ]
+  },
+  "direction_checks": {
+    "after_selection": "PASS",
+    "after_result": "PASS",
+    "before_save": "PASS"
+  },
+  "theory_limit": "DAG/code success is not physical realization, semantic truth, C1 proof or global theory validation.",
+  "graph_sha256": "ea703669ab522a1497560bdff7f4be7a3d6652a5021b5c241648467487fdae16",
+  "note_sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+}

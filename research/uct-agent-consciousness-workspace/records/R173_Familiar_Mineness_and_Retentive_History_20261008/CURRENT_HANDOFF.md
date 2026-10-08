@@ -1,0 +1,11 @@
+# R173 current handoff
+
+- **Question answered:** current action availability and an online agency loop do not recover an actual history-sensitive frame relation on a domain containing same-present/different-history cases.
+- **Positive candidate:** `RetBind` requires an earlier same-lineage frame occurrence, an actually continued trace and executed current frame-consumer use. `phi_fam = phi_path AND RetBind` is transported inside experience only under the effective R172 correction, C1, independent K-grounding, sorted witnesses, parameter transport and identical bindings.
+- **Semantic boundary:** `F_O`, `F_A` and history-sensitive `F_F` are separate partial targets. The `B_fam` interpretation/measurement bridge remains open. No retentive relation is a basal-experience gate or extra owner.
+- **Formal state:** R173-v1.0, 516 nodes / 248 rules / 145 context links; adds 10/4/4 to exact R172 prefix 506/244/141. Read the R171 and R172 effective amendments before using downstream rules.
+- **Checks:** 12/12 finite/map checks pass, including all eight organizational combinations and the current-slice nonidentification witness. This is not a physical, phenomenal or global-theory validation.
+- **Review:** QC-01–05 remain resolved on their reviewed scopes. QC-06/07 corrections remain submitted and reviewer-controlled OPEN; R173 uses only the effective corrected package and does not self-close them.
+- **Open:** independent `F_F/B_fam` semantics and measurement; physical trace identity/tolerance/current use; biological/AI instantiation; domain restrictions for the finite nonidentification; empirical dissociation of ownership, agency and familiarity.
+- **Next exact question:** on a fixed actual domain, what independently observable consequence distinguishes an actually used same-lineage retentive binding from a copied but currently equivalent trace, while keeping `F_F` measurement separate from report and preserving the semantic residual?
+- **Recovery:** fetch the newest `uct-agent-consciousness-workspace` head; read all five entries, `REVIEW_SUPERVISION.md`, this handoff, the R172 effective overlay, R173 note/ledgers/extension and the fixed master handoff newest version. Verify the graph/note/check hashes and use the latest save receipt before continuing.

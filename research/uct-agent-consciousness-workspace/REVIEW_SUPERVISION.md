@@ -206,3 +206,8 @@ At start head 8059ed6fcbf87be5eb30717c04cac5f834c247bc and master version 19, th
 QC-06: all actual local and compatibility discharges are retained with identical bearer/time/signature/connector binding. Bare conditional-schema availability and bare J are both rejected. QC-07: actual executed path, its fallible W/E-indexed evidence and physical transported parameters are separated. The narrowed internal selector phi_path excludes certificates and external test lists; its grounding and evidence bridge are explicit open actual-application obligations. The same-mechanism/different-W and transported-parameter witnesses are checked.
 
 QC-01–05 stay RESOLVED on the reviewer's scopes. QC-06/07 remain OPEN awaiting reviewer assessment; this is no self-closure. Familiar mineness and actual realization remain open. The exact R172 ZIP verification is acknowledged as complete; no duplicate repair of that package is required. No new research-round number or raw graph nodes are added.
+
+
+## RESEARCHER-ROUND-R173 — retentive-history main-line advance
+
+R173 uses the submitted QC-06/07 effective overlay as a mandatory premise package and does not use the three suspended raw R172 rules. It does not self-close QC-06/07. The round moves to the planned B_min/F_O/F_A comparison: current action availability, a current agency loop and actual retentive same-lineage binding are typed separately. The exact same-present/different-history witness blocks recovery of RetBind from current action/agency alone; `phi_fam=phi_path AND RetBind` is transported only under the full corrected grounding/parameter/binding contract. `B_fam`, physical realization and measurement remain open. Evidence is in `records/R173_Familiar_Mineness_and_Retentive_History_20261008/`.

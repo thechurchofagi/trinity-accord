@@ -1,3 +1,15 @@
+# R173 audit — current action, retentive history and semantic direction
+
+R173 passes 12/12 finite and map checks. The graph has **516 nodes / 248 rules / 145 context links**; its exact parent is R172-v1.0 at 506/244/141. New IDs are unique, endpoints exist, the combined recorded dependency graph is acyclic, and every new rule retains its exact simultaneous `all_of` premises.
+
+The concept audit distinguishes the actual bearer, present interval, earlier physical history-window token, complete K/D/Phi/h, actual trace occurrence, current consumer, external selected targets, evidence and reports. Alternative histories are comparison cases rather than simultaneous assignments. The eight Boolean combinations and two-history decoder obstruction are finite-class results; they do not establish a universal biological minimum.
+
+The positive rule jointly requires the effective corrected R172 path instance, actual RetBind, R157 coordinate transport, independent K interpretations, sorted actual witnesses, transported physical parameters and one common binding. No suspended raw R172 rule is used. The downstream boundary jointly requires the transported coordinate, three-target separation and R157 semantic residual, so it cannot conclude familiar mineness without `B_fam`.
+
+Direction checks after selection, after result formation and before save pass. The work returns current action organization to the experience/self question by isolating its temporal component. DAG/code success is not physical realization, F_F evidence, C1 proof or global theory validation. No basal gate, report requirement, unique owner or current-assistant verdict is added.
+
+---
+
 # Effective current checkpoint — R172 with QC-06/07 corrections
 
 Latest substantive round remains R172 (506/244/141); this is a correction checkpoint, not R173. Read [the response](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_RESPONSE_20261008_02.md), [mandatory effective overlay](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_AMENDMENTS.json), and [focused checks](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_CORRECTION_CHECKS.json) before the historical raw R172 rules.

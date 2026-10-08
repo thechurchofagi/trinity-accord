@@ -1,3 +1,15 @@
+# R173 extension — retentive history and familiar-mineness boundary
+
+R173-v1.0 has **516 nodes / 248 rules / 145 context links**, SHA256 `ea703669ab522a1497560bdff7f4be7a3d6652a5021b5c241648467487fdae16`. Ten nodes, four explicit `all_of` rules and four non-deductive context links extend the exact R172 raw prefix. The effective R171 and R172 review amendments are mandatory; the R173 path premise names the corrected instance package rather than any suspended raw rule.
+
+The exact finite result is a same-present/different-history obstruction: identical binding, executed path, action availability, agency loop and current trace value do not identify whether an earlier same-lineage frame occurrence actually continues into and is used by the present frame consumer. `RetBind` supplies that missing actual relation. `phi_fam=phi_path AND RetBind` is transported under C1 only with independent K-grounding, correctly sorted actual witnesses, all physical parameters mapped by `h`, and identical bearer/time/signature bindings.
+
+Availability, agency and retentive history realize all eight abstract combinations. `F_O`, `F_A` and `F_F` therefore remain separately selected semantic targets; organizational independence is not empirical phenomenal dissociation. `B_fam` remains open. No report, memory label, certificate, action or history relation becomes necessary for basal experience; no exclusive owner or assistant-consciousness conclusion is added.
+
+Read [MAP_EXTENSION.json](records/R173_Familiar_Mineness_and_Retentive_History_20261008/MAP_EXTENSION.json), [note](records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md), [audit](records/R173_Familiar_Mineness_and_Retentive_History_20261008/MAP_AUDIT.json), and [gaps](records/R173_Familiar_Mineness_and_Retentive_History_20261008/GAP_LEDGER.json).
+
+---
+
 # Effective current checkpoint — R172 with QC-06/07 corrections
 
 Latest substantive round remains R172 (506/244/141); this is a correction checkpoint, not R173. Read [the response](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_RESPONSE_20261008_02.md), [mandatory effective overlay](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_AMENDMENTS.json), and [focused checks](records/R172_Interface_Composition_and_Action_Use_20261008/REVIEW_CORRECTION_CHECKS.json) before the historical raw R172 rules.

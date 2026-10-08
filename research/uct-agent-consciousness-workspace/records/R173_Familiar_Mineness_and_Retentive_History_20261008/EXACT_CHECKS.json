@@ -1,0 +1,73 @@
+{
+  "schema": "UCT_R173_EXACT_CHECKS/v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "id": "R173-C01",
+      "pass": true,
+      "detail": "all eight Avail/AgencyLoop/RetBind combinations"
+    },
+    {
+      "id": "R173-C02",
+      "pass": true,
+      "detail": "each current (Avail,AgencyLoop) fiber contains both history values"
+    },
+    {
+      "id": "R173-C03",
+      "pass": true,
+      "detail": "no fixed current-action/agency decoder can recover RetBind"
+    },
+    {
+      "id": "R173-C04",
+      "pass": true,
+      "detail": "augmented tuple recovers RetBind by projection"
+    },
+    {
+      "id": "R173-C05",
+      "pass": true,
+      "detail": "same-present/different-history witness"
+    },
+    {
+      "id": "R173-C06",
+      "pass": true,
+      "detail": "external label does not define RetBind"
+    },
+    {
+      "id": "R173-C07",
+      "pass": true,
+      "detail": "exact parent identity/counts"
+    },
+    {
+      "id": "R173-C08",
+      "pass": true,
+      "detail": "all new rule/link endpoints exist"
+    },
+    {
+      "id": "R173-C09",
+      "pass": true,
+      "detail": "new IDs unique against parent"
+    },
+    {
+      "id": "R173-C10",
+      "pass": true,
+      "detail": "exact all_of premise lists"
+    },
+    {
+      "id": "R173-C11",
+      "pass": true,
+      "detail": "no prohibited reverse/gate conclusion"
+    },
+    {
+      "id": "R173-C12",
+      "pass": true,
+      "detail": "combined recorded dependency DAG acyclic"
+    }
+  ],
+  "enumerated_rows": 8,
+  "limits": [
+    "finite logical/model audit only",
+    "no physical realization",
+    "no F_F observations",
+    "no proof of C1 or B_fam"
+  ]
+}
