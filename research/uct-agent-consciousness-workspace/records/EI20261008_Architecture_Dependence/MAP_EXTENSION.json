@@ -1,0 +1,51 @@
+{
+  "schema": "uct-pending-typed-overlay-v1",
+  "record": "EI20261008",
+  "base": {"commit":"2b8deb5a9f816f51ec6bd6961b3bfe8a8a439fcf","graph_path":"UCT_FORMAL_GRAPH.json","graph_blob":"172c254c5f09ce83a5daf67244f36fbc5a3b9254","graph_version":"R178-SB20261008-v1.0"},
+  "status": "PENDING_MAP",
+  "enabled_as_established_premises": false,
+  "merge_policy": "Unique additive IDs only after complete audit; reject unresolved imports/conflicts. No canonical item overwritten.",
+  "source": "RESEARCH_CHECKPOINT.md",
+  "base_node_imports": ["A:C1","A:C1OI","A:U1","A:P3","A:ONTIC","A:VIEW","A:SIGNATURE","A:TARGET_F"],
+  "versioned_statement_imports": [
+    {"id":"EI20261008:IMPORT_C5","source":"records/R128_Unified_Formal_Map_Audit_20261006/sources/C_UCT_III_v1_0.md","blob":"be7c7a952aa88831c6660187586d92a3da707cdf","sections":"5.1-5.4 and 7.1-7.3","statement":"Fixed capability changes imply full experiential-type changes under C1, without scalar monotonicity; usable information already treated.","canonical_id_binding":"UNRESOLVED_NOT_GUESSED"},
+    {"id":"EI20261008:IMPORT_TA25","source":"records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md","blob":"e042a32924d43cfd8178efa5b7ff248ea420c40d","sections":"3-4","statement":"Actual organization, finite views, task capability and named feelings/reports are different targets.","canonical_id_binding":"UNRESOLVED_NOT_GUESSED"}
+  ],
+  "common_scope": "Finite specified causal models only. Same task distribution, time, allowed future inputs and physical meaning of each clamp. H is not consciousness; R is not a phenomenal measure. No real-brain instance or experience-ranking premise supplied.",
+  "nodes": [
+    {"id":"EI20261008:CONTRACT","kind":"definition","statement":"Fix task distribution, boundary, time, installed mechanism and transported intervention family; define intact and post-intervention J.","scope":"The same evaluative quantities apply in each compared instance.","proof":"Section 2","status":"DEFINITION","excluded_inferences":["general intelligence from one task","unchanged task when external cues are added"]},
+    {"id":"EI20261008:ARITHMETIC","kind":"construction","statement":"H=Q=c; select H, Q, or H OR Q; answer sum or product on x,y in {0,1,2,3}, uniform c; context report R=H.","scope":"32 equal-probability tasks; value clamp before selection, no later cue source access.","proof":"Section 3 and check_core.py","status":"MODEL_SPECIFICATION","excluded_inferences":["H is a feeling","clamp deletes basal experience"]},
+    {"id":"EI20261008:NONTRANSPORT","kind":"counterexample","statement":"All intact task answers match, but H-clamping produces accuracy 9/16, 1, 1 in shared, bypass, redundant systems.","scope":"Specific physically matched intervention and fixed mechanisms.","proof":"EI-T1 algebra; 384 exact rows","status":"MODEL_CONDITIONAL_CHECKED","excluded_inferences":["all biological systems use shared route","all silicon systems bypass experience"]},
+    {"id":"EI20261008:CUT_CONTRACT","kind":"definition","statement":"N distinct complete task-response profiles must be produced after only M distinguishable context-dependent code states remain.","scope":"Fixed future mechanism; no further context-bearing input; whole-profile correctness distinct from single-query accuracy.","proof":"Section 4","status":"DEFINITION","excluded_inferences":["ignoring surviving environmental or compiled context"]},
+    {"id":"EI20261008:DISTINCTION_BOUND","kind":"conditional_theorem","statement":"Exact profile correctness requires M>=N; uniform complete-profile identification succeeds at most min(1,M/N).","scope":"CUT_CONTRACT; ordinary finite coding/decoding principle.","proof":"EI-T2 pigeonhole and sum of maximum encoder probabilities","status":"MODEL_CONDITIONAL_CHECKED","excluded_inferences":["novel general mathematics","universal phenomenal amount bound"]},
+    {"id":"EI20261008:SINGLE_QUERY_BOUND","kind":"conditional_theorem","statement":"After both context carriers are erased, no decoder of x,y alone beats 9/16 expected arithmetic accuracy.","scope":"Uniform 32 tasks, same mechanism/input contract, any x,y-only decoder.","proof":"EI-T3: fourteen distinct-answer pairs contribute 1/2 and two equal-answer pairs contribute 1.","status":"MODEL_CONDITIONAL_CHECKED","excluded_inferences":["claiming the whole-profile 1/2 bound for each query"]},
+    {"id":"EI20261008:CORE_FAMILY","kind":"model_consequence","statement":"Minimal sufficient context-route sets are {H}, {Q}, or either singleton, according to architecture.","scope":"Zero-clamp, no-adaptation regime and arithmetic target only.","proof":"Enumerate four retained subsets per architecture in check_core.py.","status":"MODEL_CONDITIONAL_CHECKED","excluded_inferences":["unique universal consciousness core","monotone effects of arbitrary brain lesions"]},
+    {"id":"EI20261008:ACTUAL_BRIDGE","kind":"unresolved_premise","statement":"Selected model relations are constitutive relations of one independently admitted actual complete token under a common P/I/K.","scope":"Actual bearer, interval, signature, boundary and realization are jointly required.","proof":"Not supplied for a human or deployed AI.","status":"OPEN","excluded_inferences":["abstract simulation implies complete actual realization"]},
+    {"id":"EI20261008:STRUCTURAL_INTERPRETATION","kind":"conditional_application","statement":"C1 and the actual-instance premise give experiential structural counterparts of actual task-executing organizational relations.","scope":"No independent experience-off switch at fixed complete organization; no particular familiar feeling inferred.","proof":"Inherited tokenwise structure-preserving identity.","status":"CONDITIONAL_ONLY","excluded_inferences":["named feeling","scalar richness","single exclusive owner"]},
+    {"id":"EI20261008:NAMED_BRIDGE","kind":"open_problem","statement":"Independently determine the named experiential counterpart of a task distinction or route in an admitted bearer.","scope":"A report or a task function cannot define and validate the target circularly.","proof":"No discharge here.","status":"OPEN","excluded_inferences":["promoting an unresolved interpretation to theorem"]}
+  ],
+  "rules": [
+    {"id":"EI20261008:R1","type":"model_deduction","all_of":["EI20261008:CONTRACT","EI20261008:ARITHMETIC"],"conclusion":"EI20261008:NONTRANSPORT","binding":"Same x,y,c,source-copy interval and clamp semantics","proof":"EI-T1"},
+    {"id":"EI20261008:R2","type":"conditional_deduction","all_of":["EI20261008:CUT_CONTRACT"],"conclusion":"EI20261008:DISTINCTION_BOUND","binding":"One common profile domain, future decoder and cut","proof":"EI-T2"},
+    {"id":"EI20261008:R3","type":"model_deduction","all_of":["EI20261008:CONTRACT","EI20261008:ARITHMETIC"],"conclusion":"EI20261008:SINGLE_QUERY_BOUND","binding":"Both carriers erased; all possible x,y-only decoders","proof":"EI-T3"},
+    {"id":"EI20261008:R4","type":"model_deduction","all_of":["EI20261008:CONTRACT","EI20261008:ARITHMETIC","EI20261008:NONTRANSPORT"],"conclusion":"EI20261008:CORE_FAMILY","binding":"Same no-adaptation zero-clamp contract","proof":"Retained-subset enumeration"},
+    {"id":"EI20261008:R5","type":"conditional_UCT_application","all_of":["A:C1","EI20261008:ACTUAL_BRIDGE"],"conclusion":"EI20261008:STRUCTURAL_INTERPRETATION","binding":"Same admitted actual P/I/K, not the abstract circuit alone","proof":"Tokenwise structural identity; not a named-target inference"}
+  ],
+  "non_deductive_relations": [
+    {"from":"EI20261008:IMPORT_C5","to":"EI20261008:NONTRANSPORT","type":"inherited_problem_refinement_not_proof"},
+    {"from":"EI20261008:STRUCTURAL_INTERPRETATION","to":"EI20261008:NAMED_BRIDGE","type":"open_interpretation_no_entailment"}
+  ],
+  "audit": {
+    "status":"AUDIT_INCOMPLETE",
+    "new_layer":"Ten definitions/claims and five rule directions checked for declared domains, all_of binding and excluded inferences.",
+    "inherited_source_scopes_checked":["C1/U1/P3 and no basal gate","UCT III section 5 fixed capability/type","UCT III section 7 prior information result","TA25 report/actual organization/named target distinction"],
+    "whole_graph_materialized":false,
+    "whole_graph_all_nodes_rules_contexts_reviewed":false,
+    "unreviewed":"All inherited items outside the explicitly inspected source scopes; no fabricated ID census.",
+    "failure":"Large graph connector body truncated; local materialization/download failed.",
+    "next":"Resolve canonical source imports; materialize pinned full graph; enumerate every current node/rule/context with evidence; reconcile amendments and rederive affected closure before promotion.",
+    "QC_status":"QC10, IA-QC11, QC12 and QC13 actual/phenomenal application remain OPEN."
+  },
+  "novelty":"NEW_APPLICATION of established causal, redundancy and coding principles; historical priority unverified, not a major-breakthrough claim.",
+  "publication_authorized":false
+}
