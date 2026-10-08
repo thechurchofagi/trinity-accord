@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-10-08-mgtd-v100",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "METHOD20261008",
+      "record_id": 23241205,
+      "doi": "10.5281/zenodo.23241205",
+      "version": "1.0.0",
+      "title": "Map-Guided Theory Development: A Versioned Protocol for Thought Experiments, Semantic Audits, and Human-AI Research",
+      "receipt_path": "research/map-guided-theory-development/publication-record.json",
+      "pdfs": [
+        {
+          "name": "MGTD_Method_Paper_v1.0.0.pdf",
+          "bytes": 138256,
+          "sha256": "ba85c0ff9f2bf4be9e0a29c051c2ad83d1eb72b57e0ca2ba827bd17c28dcc310",
+          "role": "Reviewed primary English methods preprint"
+        }
+      ]
+    }
+  ]
+}
