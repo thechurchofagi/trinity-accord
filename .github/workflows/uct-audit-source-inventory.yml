@@ -1,0 +1,38 @@
+name: UCT audit source inventory
+on:
+  push:
+    branches: [uct-agent-consciousness-workspace]
+    paths: [.github/workflows/uct-audit-source-inventory.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 48b131a3ae8f7ac003ff5a2ce9c8d36111b2ea3c
+          persist-credentials: false
+      - name: Collect immutable audit inputs, without semantic certification
+        shell: python
+        run: |
+          import pathlib, json, hashlib, shutil
+          root = pathlib.Path('research/uct-agent-consciousness-workspace')
+          out = pathlib.Path('uct-audit-inputs'); out.mkdir()
+          inventory = []
+          for p in sorted(root.rglob('*')):
+              if p.is_file() and p.suffix.lower() in {'.json','.md','.py','.txt','.tex'} and p.stat().st_size <= 2500000:
+                  rel = p.relative_to(root)
+                  dest = out/'workspace'/rel; dest.parent.mkdir(parents=True, exist_ok=True)
+                  shutil.copyfile(p,dest)
+                  inventory.append({'path':str(rel),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
+          (out/'SOURCE_INVENTORY.json').write_text(json.dumps({'source_commit':'48b131a3ae8f7ac003ff5a2ce9c8d36111b2ea3c','scope':'source inventory only; not a semantic audit','files':inventory},indent=2),encoding='utf-8')
+          print('Collected',len(inventory),'source files; no claims certified.')
+      - uses: actions/upload-artifact@v4
+        with:
+          name: uct-audit-inputs-48b131a3
+          path: uct-audit-inputs/
+          retention-days: 30
+          if-no-files-found: error
