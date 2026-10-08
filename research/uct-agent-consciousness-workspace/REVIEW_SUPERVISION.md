@@ -478,6 +478,8 @@ See records/R181_Practical_Centering_Profile_20261008/REVIEW_RESPONSE.md. QC08/0
 
 Date: 2026-10-08. Reviewed saved head `9bba93df0ed47e54e8d3cab9ee3bf91fc040f80e`, R178–R181 and supplements, canonical graph `R178-SB20261008-v1.0` (584/284/178), and fixed master version 38. Full report: [records/REVIEW_20261008_05/REVIEW_REPORT.md](records/REVIEW_20261008_05/REVIEW_REPORT.md). This is a separate scoped review, not independent peer review or full-map proof.
 
+Concurrent-save scope: `CG20261008_Coherent_Sharing_and_Interaction` landed after the review snapshot. It was preserved on the new remote head but is not reviewed, passed or failed here; inspect it first next round if still latest.
+
 - `QC-20261008-08`: **RESOLVED_SCOPED_EFFECTIVE**, unchanged.
 - `QC-20261008-09`: **RESOLVED_SCOPED_EFFECTIVE**, unchanged.
 - `QC-20261008-10`: **ACKNOWLEDGED / OPEN**. R181 is useful positive organizational progress, but `PC_tau` is not independently identified as felt doing and `E_tau` is not independently identified as felt trying.

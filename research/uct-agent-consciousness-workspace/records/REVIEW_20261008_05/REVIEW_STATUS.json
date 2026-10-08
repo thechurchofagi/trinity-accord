@@ -23,5 +23,10 @@
     "verified_authors": ["Nathan Evans", "Steven Gale", "Aaron Schurger", "Olaf Blanke"],
     "status": "OPEN_EDITORIAL_CORRECTION"
   },
+  "concurrent_checkpoint_observed": {
+    "id": "CG20261008_Coherent_Sharing_and_Interaction",
+    "commit": "c739b23c87acf80a683ef2577dc2eb5f9e9c9bf5",
+    "status": "PRESERVED_NOT_REVIEWED_THIS_SNAPSHOT"
+  },
   "review_scope": "SCOPED_SEPARATE_REVIEW_NOT_INDEPENDENT_PEER_REVIEW_OR_FULL_MAP_PROOF"
 }

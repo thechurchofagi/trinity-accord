@@ -1,0 +1,26 @@
+{
+  "schema": "uct-review-dual-save-receipt-v1",
+  "review_id": "REVIEW-20261008-05",
+  "review_snapshot_head": "9bba93df0ed47e54e8d3cab9ee3bf91fc040f80e",
+  "concurrent_checkpoint_preserved": {
+    "commit": "c739b23c87acf80a683ef2577dc2eb5f9e9c9bf5",
+    "record": "CG20261008_Coherent_Sharing_and_Interaction",
+    "review_status": "NOT_REVIEWED_THIS_SNAPSHOT"
+  },
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "review_core_commit": "2c1113ac9d8ab025afc1b10dbb43b20af37f9620",
+    "optimistic_concurrency": "expected-SHA used; initial mismatch detected, new head inspected and nonoverlapping concurrent checkpoint preserved",
+    "ci_or_pr": "NONE_SKIP_CI"
+  },
+  "library": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000db7881f79d6d2421ea6217f6",
+    "version": 40,
+    "size_bytes": 543324,
+    "local_sha256": "c624e545bcfa2e896fabb712d0468277a9e39f74519cece71b32daacdf647df4",
+    "metadata_and_prefix_readback": "PASS"
+  },
+  "scope": "Review ledger, handoff, fixed master and review record only; no frozen research manuscript modified."
+}

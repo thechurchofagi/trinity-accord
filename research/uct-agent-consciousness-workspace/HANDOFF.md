@@ -2,6 +2,8 @@
 
 Read [the scoped review](records/REVIEW_20261008_05/REVIEW_REPORT.md) and [status ledger](records/REVIEW_20261008_05/REVIEW_STATUS.json) before extending R181. QC08/09 retain scoped effective resolution. QC10 and IA-QC11 remain OPEN. QC12 is accepted as repaired at the toy model-contract level by R178, but actual human membership and the independently identified mineness target remain application OPEN.
 
+`CG20261008_Coherent_Sharing_and_Interaction` landed concurrently after this review snapshot. It was preserved but not assessed as PASS or failure; inspect that formed checkpoint first in the next review if it remains latest.
+
 New `QC-20261008-13` is OPEN: R181's 128-row result is correct conditional combinatorics, but `target`, `directive` and `closure` are input stipulations. Before promoting C3/H1, construct `TARGET_BINDING_INSTANCE(P,I,K,tau)` with an actual carrier, consumer policy, feedback/mismatch path and predeclared counterfactual. Use a cross-wired negative control: hold represented content/output/report fixed and swap whether the overt or imagery policy consumes the directive and feedback. Target classification must follow the physical consumer path, not an analyst label or later attribution.
 
 Next bounded question: at one fixed target-binding instance, compare a blocked-action candidate with a generic adaptive-controller twin sharing local `(D,C,E)` while varying only an independently grounded body/action-reference embedding. Require one rival, held-out consequence and failure condition. If both interpretations survive, keep `PC_tau` as an organizational coordinate and leave *felt trying* OPEN; do not add another broad role/certificate series.
