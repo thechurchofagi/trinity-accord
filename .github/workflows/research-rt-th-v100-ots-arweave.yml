@@ -118,7 +118,7 @@ jobs:
               print('DOI readback unavailable:',type(exc).__name__)
               allowed=False
           with open(os.environ['GITHUB_OUTPUT'],'a') as out:
-              out.write('current='+str(allowed).lower()+'\\n')
+              out.write('current='+str(allowed).lower()+'\n')
           print('LATEST_EXACT_DOI_PASS' if allowed else 'LATEST_DOI_GATE_WAIT')
           PY
       - name: Check strictly-limited dedicated paper budget
