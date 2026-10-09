@@ -22,7 +22,7 @@ INPUTS={SOURCE:('52f879101be072efd0651a512b03bac27e3dbf5a80facf55aa726b7515f88ed
 REPRO:('83c0050bfdddff7ac94cf716db107e6f63ef09d9d6b04cd74ead0be4adcb860b',108986)}
 MAX_FILE=16*1024*1024
 EXPECTED_FILES={PDF,MD,REPRO,'README-LICENSE.txt','REVIEW-AND-SOURCES.md','citation.bib','citation.ris','citation.csl.json','SHA256SUMS.txt'}
-STATE_FILES=['create-intent.json','deposit.json','create-uncertain.json','publish-intent.json','publish-uncertain.json','publication-record.json','EXPECTED-PUBLICATION.json','publication-error.json','format-checks.json','published']
+STATE_FILES=['collision-report.json','create-intent.json','deposit.json','create-uncertain.json','publish-intent.json','publish-uncertain.json','publication-record.json','EXPECTED-PUBLICATION.json','publication-error.json','format-checks.json','published']
 USER_AGENT='RT-TH-Zenodo-Publication/1.0'
 
 
@@ -279,10 +279,39 @@ def publish():
  rec=public_verify(dep,expected);save('publication-record.json',rec);persist()
  print('RT_PUBLICATION_SUCCESS',doi,'PDF_SHA256',next(x['sha256'] for x in rec['files'] if x['name']==PDF))
 
+def probe_existing_candidates():
+    ensure_ci()
+    source=verify_source()
+    abstract=source.split('## Abstract {-}',1)[1].split('**Keywords:**',1)[0].strip()
+    candidates=[]
+    for page in range(1,12):
+        rows=read(f'/deposit/depositions?page={page}&size=100')
+        if not isinstance(rows,list):raise RuntimeError('Zenodo draft list shape changed')
+        for row in rows:
+            md=row.get('metadata') or {}
+            if md.get('title')==TITLE and str(md.get('version'))==VERSION:
+                description=html.unescape(re.sub('<[^>]*>','',md.get('description') or ''))
+                candidate={'record_id':row.get('id'),'doi':row.get('doi') or md.get('prereserve_doi',{}).get('doi'),
+                    'submitted':bool(row.get('submitted')),'creator_names':[c.get('name') for c in md.get('creators',[])],
+                    'description_begins_like_source':abstract[:110].lower() in description.lower(),
+                    'description_excerpt':description[:240],
+                    'identity_marker_matches':identity_record() in md.get('notes',''),
+                    'notes_excerpt':(md.get('notes') or '')[:240],
+                    'files':[{'name':f.get('filename') or f.get('key'),'bytes':f.get('filesize',f.get('size')),'checksum':f.get('checksum')} for f in row.get('files',[])],
+                    'created':row.get('created'),'modified':row.get('modified')}
+                candidates.append(candidate)
+        if len(rows)<100:break
+    result={'scope':'Private Zenodo account inspection; no create, upload or publish calls','expected_record':REPORT,
+            'title':TITLE,'version':VERSION,'found':len(candidates),'candidates':candidates}
+    save('collision-report.json',result)
+    persist()
+    print('RT_TH_COLLISION_PROBE',json.dumps(result,ensure_ascii=False))
+
 if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('action',choices=['verify','publish','persist','preview']);p.add_argument('--sample-doi',default='10.5281/zenodo.99999999');a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('action',choices=['verify','publish','persist','preview','probe']);p.add_argument('--sample-doi',default='10.5281/zenodo.99999999');a=p.parse_args()
  if a.action=='verify':verify_source()
  elif a.action=='publish':publish()
  elif a.action=='persist':persist()
+ elif a.action=='probe':probe_existing_candidates()
  else:
   verify_source();print('preview source chars',len(patched_source((HERE/SOURCE).read_text(),a.sample_doi)))
