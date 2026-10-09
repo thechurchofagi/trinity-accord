@@ -1,0 +1,14 @@
+{
+  "compressed_sha256": "eb000a31444d9f68161442a381ef9c8ed773981b37b50f62fed69f099400da07",
+  "compressed_bytes": 29724,
+  "source_tar_bytes": 133120,
+  "parts": [
+    {"name":"source-01.b64","sha256":"ea8777262aa3d48702c1dfe444f6585253f633161438434212953e44357a16cc","bytes":8001},
+    {"name":"source-02.b64","sha256":"e8aa350413a667bdef106626ddbea0a19110bc1d720433744134f07989ce69b4","bytes":8001},
+    {"name":"source-03.b64","sha256":"2c88cef049b3ba8eef386a15c1d79ac72e68f7dafc676bf71610da0d6a77abbb","bytes":8001},
+    {"name":"source-04.b64","sha256":"418f7792c2df9d7cb59aa94b0f90e0ba4b5362f716acc656d560860ad6872fa7","bytes":8001},
+    {"name":"source-05.b64","sha256":"8b667631fa27caf8eb02f3a0bb1be96844bc2424f8eee3b189d36832206e4bd5","bytes":7633}
+  ],
+  "file_count":16,
+  "source_markdown_sha256":"6776cd0ffc26465c09bfb81e7b381557848677966503b54dfbc5a554495e1399"
+}
