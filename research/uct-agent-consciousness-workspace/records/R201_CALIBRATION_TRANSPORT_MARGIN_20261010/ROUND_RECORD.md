@@ -1,0 +1,9 @@
+# ROUND_RECORD — R201
+
+1. **User goal.** Advance UCT's positive account of bodily/action familiar mineness from actual organization, while preserving C1, the basal-experience non-gate, overlap without an exclusive owner, and the distinctions among experience, intelligence, self-feeling, conceptual self, report, actual use and evidence.
+2. **One concrete unresolved question.** Given a fallible signed adult comparison and a candidate marker measured on verified-use episodes, what explicit source-calibration and cross-domain drift margins are sufficient to preserve the positive orientation of the selected retentive-familiarity coordinate `H` in a no-report target domain, and what counterexamples defeat the certificate?
+3. **Relevant nodes and fixed sources.** UCT I v1.2 `C1/U1/P3/P6`; TA25 §§3–4; R173 `RetBind`/`B_fam`; R192 complete-signature levels; R197 fallible signed orientation; R198 typed `O/G/H/C`; R199 continuation-probe ceiling; R200 semantic calibration firewall; UCT-MAP-v1.1.2 and review items QC-20261008-10, IA-QC11, QC-20261008-12 and QC-20261008-13.
+4. **Planned addition or correction.** Derive a calibration–transport margin theorem with explicit bias and drift terms, give sharp rational counterexamples, separate actual route use `U` from evidence `E_U`, and turn response-key/success/bypass manipulations into falsifiers rather than experience definitions.
+5. **Deliverable.** English research note, exact rational checker and results, claim/gap/failure ledgers, thought-experiment matrix, disabled map extension plus complete-map compatibility audit, publication-coverage update, work log and Chinese handoff, all recoverably saved.
+
+Direction check at selection: this question directly addresses the named-experience bridge left open by R200. The calculation is bounded to that bridge and stops once the sharp sign condition and its failure cases are established; it is not a generic statistics program.

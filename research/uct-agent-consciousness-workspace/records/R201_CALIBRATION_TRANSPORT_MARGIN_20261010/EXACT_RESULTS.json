@@ -1,0 +1,56 @@
+{
+  "schema": "uct-r201-robust-orientation-margin-check/1",
+  "grid": {
+    "denominator": 8,
+    "checked_valid_instances": 786996
+  },
+  "robust_sign_certificate": {
+    "certified_instances": 11049,
+    "violations": [],
+    "statement": "If delta_source > beta + epsilon0 + epsilon1, rho is positive and at most one, |residual|<=beta, and each class-conditional target drift is bounded by epsilon_h, then delta_target>0."
+  },
+  "strictness_witnesses": {
+    "equality_can_reach_zero": {
+      "beta": "1/10",
+      "epsilon0": "1/10",
+      "epsilon1": "1/10",
+      "rho": "1",
+      "p0": "2/5",
+      "p1": "3/5",
+      "residual": "1/10",
+      "q0": "1/2",
+      "q1": "1/2",
+      "delta_source": "3/10",
+      "threshold": "3/10",
+      "delta_target": "0"
+    },
+    "below_threshold_can_reverse": {
+      "beta": "1/10",
+      "epsilon0": "1/10",
+      "epsilon1": "1/10",
+      "rho": "1",
+      "p0": "2/5",
+      "p1": "11/20",
+      "residual": "1/10",
+      "q0": "1/2",
+      "q1": "9/20",
+      "delta_source": "1/4",
+      "threshold": "3/10",
+      "delta_target": "-1/20"
+    },
+    "positive_endpoint_direction_is_required": {
+      "rho": "-1/2",
+      "p0": "1/4",
+      "p1": "3/4",
+      "residual": "0",
+      "delta_source": "-1/4"
+    }
+  },
+  "all_exact_checks_pass": true,
+  "not_proved": [
+    "that the adult comparative judgment is positively related to the intended H target",
+    "that the residual-bias or cross-domain drift bounds hold in any population",
+    "that a route-use test establishes actual same-episode route use",
+    "that any marker constitutes experience or that C1 is empirically true"
+  ]
+}
