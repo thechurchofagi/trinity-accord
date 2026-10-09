@@ -1,0 +1,40 @@
+{
+  "schema": "r203-persistence/1",
+  "content_commit": "f7d4e655628f1937556004fd97668158dc259909",
+  "remote_readback": [
+    "CURRENT_STATE.json",
+    "EXACT_RESULTS.json",
+    "MAP_COMPATIBILITY_AUDIT.json"
+  ],
+  "library_status": "WRITE_AND_EXACT_READBACK_PASS",
+  "base_remote_head": "c9dd1659b1849863a7c68f18966e5253e4c6b19e",
+  "science_version": "ACD-RESULT-v0.2.0",
+  "semantic_adoption": "OPEN",
+  "fixed_master_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "fixed_master_version": 67,
+  "increment_id": "libfile_28b352a04c1c8191bb17e6941770b572",
+  "manifest_id": "libfile_6dfa2d5da6008191af9a74001ef48266",
+  "checks": [
+    {
+      "name": "UCT_Hourly_Research_Master_Handoff.md",
+      "bytes": 659661,
+      "sha256": "f257680544fa24ac63ae1a294298419162d20d9f58695843c5a785f93790d6c3",
+      "remote_byte_readback": "PASS"
+    },
+    {
+      "name": "UCT_R203_Increment_20261010.zip",
+      "bytes": 179658,
+      "sha256": "2c6f7c7db07f405d9a4aa5c4fedf7a196251152b52d764ab61f4cba9687cbe79",
+      "remote_byte_readback": "PASS"
+    },
+    {
+      "name": "UCT_R203_Increment_20261010_MANIFEST.json",
+      "bytes": 7696,
+      "sha256": "779814fc71d82300478adc51a7543a96a72423878fa6b215f870c1c249e0a3e7",
+      "remote_byte_readback": "PASS"
+    }
+  ],
+  "zip_integrity": "PASS",
+  "scope": "31-file content increment, not full backup; this final receipt is subsequent and outside increment",
+  "verified_utc": "2026-10-09T22:47:04.021121+00:00"
+}
