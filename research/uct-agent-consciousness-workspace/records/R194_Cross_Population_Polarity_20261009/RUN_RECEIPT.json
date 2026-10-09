@@ -1,0 +1,17 @@
+{
+  "receipt_id": "R194-RUN-RECEIPT-v1",
+  "research_id": "R194-CPP-20261009",
+  "result_version": "CPP-RESULT-v0.1.0",
+  "base_remote_commit": "e3eb3f7e8b50961365039ca067816d7232631e61",
+  "local_science_commit": "93d794687eef33812414b8b5519baf945a5194a9",
+  "github_content_commit": "8bcd320218a93d9caaa87faf6eb12e2ed40af28a",
+  "completed_map": {"version":"UCT-MAP-v1.1.2","counts":{"nodes":913,"active_rules":424,"contexts":261,"suspended_rules":10,"review_items":1608},"graph_sha256":"0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612","review_ledger_sha256":"0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687"},
+  "exact_result": {"variables":7,"assignments_per_instance":128,"signed_tree_instances":64,"assignment_checks_for_tree_family":8192,"counts":{"connected_relative":2,"marker_convention_anchor":1,"substantive_target_anchor_conditional":1,"three_unanchored_components":8,"consistent_cycle":2,"inconsistent_cycle":0},"checks":8,"all_pass":true},
+  "candidate_map": {"status":"PENDING_CHECKPOINT_DISABLED","counts":{"nodes":9,"rules":6,"contexts":5},"compatibility_checks":18,"compatibility_audit_sha256":"49c3b9084f4758bb772949f7c095b4545edb1937d68218314934d82b7c927928","structural_status":"STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN"},
+  "key_hashes": {"RESEARCH_NOTE.md":"ec5d60f23202b9be51c5f584f375caca870b75ce7afda3099a907189a0f87194","EXACT_RESULTS.json":"770135b16c7f039d4e095036575bd5489d500da0666f1676786c75f5a64e6649","MAP_EXTENSION.json":"2827d07d0a279e9d86b0bf7044dc414702043ec0cb366ebca6c5b23119273c1b","CLAIM_LEDGER.md":"3646e3257469b58a067038389d85274e47c381895e9151e2eab1a2455b21c372","GAP_LEDGER.md":"e7da5ae274fdf9a3a584b7e8d856c540dfdb4fcaa6bd003a2950117374a39812"},
+  "review_status": {"QC-20261008-10":"ACKNOWLEDGED_OPEN","IA-QC11":"ACKNOWLEDGED_APPLICATION_OPEN","QC-20261008-12":"ACKNOWLEDGED_APPLICATION_OPEN","QC-20261008-13":"TOY_SCOPE_ADVANCED_APPLICATION_OPEN"},
+  "publication_coverage": {"version":"UCT-PUB-v1.0.6","decision":"CONTINUE_RESEARCH","worldwide_priority_verified":false},
+  "library": {"master_id":"libfile_4175a81748fc819187fa8f5771f056fa","master_previous_version":50,"master_new_version":51,"master_file_id":"file_000000008110820c8924ba52906e6bf0","master_bytes":621516,"master_sha256":"2e3ce5e9959c385bec5d21469721568bdf0a1468bc04ed87b17a4099ea84af22","increment_id":"libfile_5d7d6d7b3d548191888c25aa8a2db783","increment_file_id":"file_000000008a58820c88848c35242b5a7e","increment_version":0,"increment_bytes":120012,"increment_sha256":"79565755f7395083d235b86a2869beeec2fc56e300aca7f451ed41249c7a6078","exact_byte_redownload":"PASS_BOTH_FILES","r193_increment_retry":"PASS_SHA256_19315f1473962a9fcd3db2798ccffc00815ac0d94f5970d9d9bcea1ae239b95b"},
+  "failures_retained": ["Initial closing-edge parity was reversed and the first exact run failed; corrected by path XOR and retained.","Frozen UCT-PUB-v1.0.0 validator is not an incremental v1.0.6 validator and was not weakened.","Relative marker/population alignment does not identify familiar-mineness polarity.","Actual installation, use, target direction and token admission remain open."],
+  "next": "Specify one prospective substantive polarity anchor independent of report, marker convention and fitted class, state a defeating observation, and test it against common-calibration and adaptive-reflex twins."
+}

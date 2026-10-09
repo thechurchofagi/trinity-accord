@@ -1,0 +1,10 @@
+{
+  "receipt_id": "R194-DUAL-SAVE-v1",
+  "research_id": "R194-CPP-20261009",
+  "github": {"branch":"uct-agent-consciousness-workspace","base_commit":"e3eb3f7e8b50961365039ca067816d7232631e61","content_commit":"8bcd320218a93d9caaa87faf6eb12e2ed40af28a","final_receipt_commit":null,"key_file_readback":"PASS"},
+  "library_master": {"library_file_id":"libfile_4175a81748fc819187fa8f5771f056fa","previous_version":50,"new_version":51,"backing_file_id":"file_000000008110820c8924ba52906e6bf0","bytes":621516,"sha256":"2e3ce5e9959c385bec5d21469721568bdf0a1468bc04ed87b17a4099ea84af22","version_size_head_and_exact_byte_readback":"PASS"},
+  "library_increment": {"library_file_id":"libfile_5d7d6d7b3d548191888c25aa8a2db783","version":0,"backing_file_id":"file_000000008a58820c88848c35242b5a7e","bytes":120012,"sha256":"79565755f7395083d235b86a2869beeec2fc56e300aca7f451ed41249c7a6078","exact_byte_redownload_and_zip_test":"PASS","scope":"increment only: 29 repository files changed from recorded base to content commit, plus MANIFEST.json, README.md and SHA256SUMS.txt; not a full repository, workset or history backup"},
+  "prior_retry": {"r193_increment_exact_byte_redownload":"PASS","sha256":"19315f1473962a9fcd3db2798ccffc00815ac0d94f5970d9d9bcea1ae239b95b","note":"The earlier HTTP 403 remains preserved as historical failure; this later retry succeeded."},
+  "status":"GITHUB_CONTENT_VERIFIED_LIBRARY_MASTER_AND_INCREMENT_BYTE_VERIFIED",
+  "recovery_order": ["Fetch the branch and verify the content/final receipt commits.","Read CURRENT_STATE.json, HANDOFF.md, MASTER_INDEX.md, then R194 HANDOFF_ZH.md.","If using the increment, verify its ZIP SHA256, overlay only on base commit e3eb3f7e8b50961365039ca067816d7232631e61, then run sha256sum -c SHA256SUMS.txt."]
+}

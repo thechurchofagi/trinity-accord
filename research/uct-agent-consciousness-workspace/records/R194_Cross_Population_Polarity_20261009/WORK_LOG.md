@@ -10,6 +10,7 @@
 8. Restored the exact UCT-MAP-v1.1.2 capsule; all 82 members verified. Traversed 913 nodes, 424 active rules, 261 contexts, 10 suspended IDs and 1,608 review items. All 18 compatibility checks pass; semantic adoption stays open.
 9. Responded to QC10, IA-QC11, QC12 and QC13 without self-closing them.
 10. Updated nondeductive publication coverage to UCT-PUB-v1.0.6 with decision `CONTINUE_RESEARCH`; no standalone paper or publication action was forced.
-11. Updated current navigation, priority and handoff files. GitHub and Library receipts are filled only after remote and byte-level verification.
+11. Updated current navigation, priority and handoff files. Saved the content tree to GitHub with an expected-parent fast-forward and read back the branch head plus key files.
+12. Created a 29-file incremental recovery archive with manifest and checksums. Replaced the fixed Library master at the same ID as version 51 and created the R194 increment; exact byte redownload, SHA256 comparison and ZIP testing all passed. Retried the prior R193 increment readback successfully while preserving its earlier HTTP 403 as historical failure.
 
 No PR, CI request, deployment, DOI, Zenodo, OTS, Arweave, email, Slack, production or scheduler action was performed.
