@@ -1,26 +1,109 @@
 {
-  "schema":"uct-effective-map-manifest/1.2",
-  "entry_id":"UCT_EFFECTIVE_FORMAL_MAP",
-  "revision":"UCT-MAP-v1.1.0",
-  "base":{"release_id":"UCT-MAP-v1.0.0","descriptor_path":"versions/UCT-MAP-v1.1.0/history/UCT_FORMAL_GRAPH_MODULES.json","effective_graph_sha256":"943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830","review_ledger_sha256":"aa774c7cecd09056dba26b5d827a80d5e38ab6a0462f2e7401581cfd12ebc1e2","restorer":"versions/UCT-MAP-v1.0.0/restore_capsule.py"},
-  "inherited_modules":["CORE20261008","EI20261008","R183","OO20261008","RU20261008","R184","RC20261008","IE20261008"],
-  "modules":[{"id":"TH20261009-RB20261009","result_version":"0.2.0","source_kind":"verified_capsule_member","capsule_index":"versions/UCT-MAP-v1.1.0/capsule/PARTS.json","member":"MAP_EXTENSION.json","sha256":"4a59e3f2a9bc29f241b5b5ee39a384836ed7ea91b9f7c2427ed15f1c8fb331d3","status":"REVIEWED_CONDITIONAL_OR_DECLARED","automatic_premise_truth":false}],
-  "merge_order":"Restore the exact parent effective graph/ledger, then the TH/RB capsule. code/build_release.py appends the reviewed extension without changing parent scientific records and materializes saved per-ID compatibility judgments.",
-  "restorer":"versions/UCT-MAP-v1.1.0/restore_capsule.py",
-  "effective_loader_after_restore":"restored_TH_RB/code/build_release.py",
-  "expanded_outputs":["UCT_EFFECTIVE_GRAPH.json","REVIEW_LEDGER.json","REVIEW_LEDGER.csv","RELEASE.json"],
-  "effective_graph_sha256":"92368e0f0a4fd1e3c61849784ac090a3f8948f3b721d9fc0dade4b8f4ec4966d",
-  "review_ledger_sha256":"6375c6800e491fb9ae42b324340220c19ac30b4e75af0e41482dd269c65f3768",
-  "full_semantic_compatibility_review_completed":true,
-  "audit_scope":"All 1278 inherited active-census records plus 95 TH/RB records; saved proofs/evidence retained with this-cycle compatibility checks, not independent reproof. Pending R185/AC/IL and unmapped historical records are excluded from promotion.",
-  "reviewed_nodes":776,"reviewed_rule_records":376,"active_conditional_rules":366,"suspended_historical_rules":10,"context_links":221,"review_items":1373,
-  "audit":"versions/UCT-MAP-v1.1.0/AUDIT_REPORT.md",
-  "pending_checkpoints":[
-    {"id":"R185","path":"records/R185_Cross_Scale_Relation_Membership_20261008/MAP_EXTENSION.json","sha256":"6583a63c819a97dd53e9f95b0d0757a84cf0f36c0e3e7367335ec71dceaf622f","status":"PENDING_CHECKPOINT","enabled_as_established_premises":false,"compatibility_audit":"records/R185_Cross_Scale_Relation_Membership_20261008/V100_COMPATIBILITY_AUDIT.json","instruction":"Retained disabled. Existing structural checkpoint is not a completed semantic promotion."},
-    {"id":"AC20261009","result_version":"AC-RESULT-v1.0.0","candidate_map_id":"UCT-MAP-v1.0.1-AC20261009-candidate.1","path":"records/AC20261009_Action_Calibration/MAP_EXTENSION.json","git_blob_sha":"db6f9cef3191cc6c04f83c40146810ac39ba7d37","status":"PENDING_CHECKPOINT","enabled_as_established_premises":false,"compatibility_audit":"records/AC20261009_Action_Calibration/RUN_RECEIPT.json","handoff":"records/AC20261009_Action_Calibration/CURRENT_HANDOFF_ZH.md","instruction":"Historical candidate ID retained. Rebase future semantic promotion on current v1.1.0 and create a higher completed version; do not overwrite this release or confuse the old candidate number with the current map."},
-    {"id":"IL20261009","result_version":"IL-RESULT-v0.1.0","candidate_map_id":"UCT-MAP-v1.1.1-IL20261009-candidate.1","path":"records/IL20261009_Intervention_Locality/MAP_EXTENSION.json","git_blob_sha":"6e18c39a7a31733c6a47337d75d007b0782f4c81","status":"PENDING_MAP","audit_status":"AUDIT_INCOMPLETE","enabled_as_established_premises":false,"compatibility_audit":"records/IL20261009_Intervention_Locality/RUN_RECEIPT.json","handoff":"records/IL20261009_Intervention_Locality/CURRENT_HANDOFF_ZH.md","instruction":"Exact reset normal form, minimal LTI behavior twin and1/11 local-imitation gap are saved conditional results. Current whole-map fresh semantic integration is incomplete. Keep this module disabled until current v1.1.0 is completely restored/reviewed and affected conclusions rederived. No actual or named-phenomenal premise is discharged by storage."}
+  "schema": "uct-effective-map-manifest/1.2",
+  "entry_id": "UCT_EFFECTIVE_FORMAL_MAP",
+  "revision": "UCT-MAP-v1.1.0",
+  "base": {
+    "release_id": "UCT-MAP-v1.0.0",
+    "descriptor_path": "versions/UCT-MAP-v1.1.0/history/UCT_FORMAL_GRAPH_MODULES.json",
+    "effective_graph_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+    "review_ledger_sha256": "aa774c7cecd09056dba26b5d827a80d5e38ab6a0462f2e7401581cfd12ebc1e2",
+    "restorer": "versions/UCT-MAP-v1.0.0/restore_capsule.py"
+  },
+  "inherited_modules": [
+    "CORE20261008",
+    "EI20261008",
+    "R183",
+    "OO20261008",
+    "RU20261008",
+    "R184",
+    "RC20261008",
+    "IE20261008"
   ],
-  "node_presence_is_premise_truth":false,"actual_application_status":"OPEN","suspended_rules_may_infer":false,
-  "unmodified_root_graph_is_only_historical_base":true,
-  "on_source_change":"Fail closed; reconcile exact current sources and pending work, perform semantic compatibility review and affected rederivation, save a new immutable version/sequence."
+  "modules": [
+    {
+      "id": "TH20261009-RB20261009",
+      "result_version": "0.2.0",
+      "source_kind": "verified_capsule_member",
+      "capsule_index": "versions/UCT-MAP-v1.1.0/capsule/PARTS.json",
+      "member": "MAP_EXTENSION.json",
+      "sha256": "4a59e3f2a9bc29f241b5b5ee39a384836ed7ea91b9f7c2427ed15f1c8fb331d3",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "automatic_premise_truth": false
+    }
+  ],
+  "merge_order": "Restore the exact parent effective graph/ledger, then the TH/RB capsule. code/build_release.py appends the reviewed extension without changing parent scientific records and materializes saved per-ID compatibility judgments.",
+  "restorer": "versions/UCT-MAP-v1.1.0/restore_capsule.py",
+  "effective_loader_after_restore": "restored_TH_RB/code/build_release.py",
+  "expanded_outputs": [
+    "UCT_EFFECTIVE_GRAPH.json",
+    "REVIEW_LEDGER.json",
+    "REVIEW_LEDGER.csv",
+    "RELEASE.json"
+  ],
+  "effective_graph_sha256": "92368e0f0a4fd1e3c61849784ac090a3f8948f3b721d9fc0dade4b8f4ec4966d",
+  "review_ledger_sha256": "6375c6800e491fb9ae42b324340220c19ac30b4e75af0e41482dd269c65f3768",
+  "full_semantic_compatibility_review_completed": true,
+  "audit_scope": "All 1278 inherited active-census records plus 95 TH/RB records; saved proofs/evidence retained with this-cycle compatibility checks, not independent reproof. Pending R185/AC/IL and unmapped historical records are excluded from promotion.",
+  "reviewed_nodes": 776,
+  "reviewed_rule_records": 376,
+  "active_conditional_rules": 366,
+  "suspended_historical_rules": 10,
+  "context_links": 221,
+  "review_items": 1373,
+  "audit": "versions/UCT-MAP-v1.1.0/AUDIT_REPORT.md",
+  "pending_checkpoints": [
+    {
+      "id": "R185",
+      "path": "records/R185_Cross_Scale_Relation_Membership_20261008/MAP_EXTENSION.json",
+      "sha256": "6583a63c819a97dd53e9f95b0d0757a84cf0f36c0e3e7367335ec71dceaf622f",
+      "status": "PENDING_CHECKPOINT",
+      "enabled_as_established_premises": false,
+      "compatibility_audit": "records/R185_Cross_Scale_Relation_Membership_20261008/V100_COMPATIBILITY_AUDIT.json",
+      "instruction": "Retained disabled. Existing structural checkpoint is not a completed semantic promotion."
+    },
+    {
+      "id": "AC20261009",
+      "result_version": "AC-RESULT-v1.0.0",
+      "candidate_map_id": "UCT-MAP-v1.0.1-AC20261009-candidate.1",
+      "path": "records/AC20261009_Action_Calibration/MAP_EXTENSION.json",
+      "git_blob_sha": "db6f9cef3191cc6c04f83c40146810ac39ba7d37",
+      "status": "PENDING_CHECKPOINT",
+      "enabled_as_established_premises": false,
+      "compatibility_audit": "records/AC20261009_Action_Calibration/RUN_RECEIPT.json",
+      "handoff": "records/AC20261009_Action_Calibration/CURRENT_HANDOFF_ZH.md",
+      "instruction": "Historical candidate ID retained. Rebase future semantic promotion on current v1.1.0 and create a higher completed version; do not overwrite this release or confuse the old candidate number with the current map."
+    },
+    {
+      "id": "IL20261009",
+      "result_version": "IL-RESULT-v0.1.0",
+      "candidate_map_id": "UCT-MAP-v1.1.1-IL20261009-candidate.1",
+      "path": "records/IL20261009_Intervention_Locality/MAP_EXTENSION.json",
+      "git_blob_sha": "6e18c39a7a31733c6a47337d75d007b0782f4c81",
+      "status": "PENDING_MAP",
+      "audit_status": "AUDIT_INCOMPLETE",
+      "enabled_as_established_premises": false,
+      "compatibility_audit": "records/IL20261009_Intervention_Locality/RUN_RECEIPT.json",
+      "handoff": "records/IL20261009_Intervention_Locality/CURRENT_HANDOFF_ZH.md",
+      "instruction": "Exact reset normal form, minimal LTI behavior twin and1/11 local-imitation gap are saved conditional results. Current whole-map fresh semantic integration is incomplete. Keep this module disabled until current v1.1.0 is completely restored/reviewed and affected conclusions rederived. No actual or named-phenomenal premise is discharged by storage."
+    },
+    {
+      "id": "R186-HOM-20261009",
+      "result_version": "HOM-v0.1.0",
+      "candidate_map_id": "UCT-MAP-v1.1.1-R186-candidate.1",
+      "path": "records/R186_Higher_Order_Intervention_Masking_20261009/MAP_EXTENSION.json",
+      "git_blob_sha": "e13909d81ebb9a6912644d9c3e4bebad1e01b94b",
+      "status": "PENDING_MAP",
+      "audit_status": "AUDIT_INCOMPLETE",
+      "enabled_as_established_premises": false,
+      "work_log": "records/R186_Higher_Order_Intervention_Masking_20261009/WORK_LOG.md",
+      "handoff": "records/R186_Higher_Order_Intervention_Masking_20261009/HANDOFF_ZH.md",
+      "coverage": "records/R186_Higher_Order_Intervention_Masking_20261009/AUDIT_COVERAGE.json",
+      "note": "82,213 finite test words and proof; all 1,373 inherited items mechanically scanned, 625 requiring fresh semantic review; not fully promoted."
+    }
+  ],
+  "node_presence_is_premise_truth": false,
+  "actual_application_status": "OPEN",
+  "suspended_rules_may_infer": false,
+  "unmodified_root_graph_is_only_historical_base": true,
+  "on_source_change": "Fail closed; reconcile exact current sources and pending work, perform semantic compatibility review and affected rederivation, save a new immutable version/sequence."
 }
