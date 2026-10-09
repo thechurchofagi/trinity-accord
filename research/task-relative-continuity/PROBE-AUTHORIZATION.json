@@ -1,0 +1,7 @@
+{
+  "allowed": true,
+  "operation": "READ_ONLY_INSPECT_EXISTING_ZENODO_DEPOSITS",
+  "report": "RT20261009",
+  "version": "1.0.0",
+  "note": "No new DOI or upload; diagnose title-version collision before proceeding."
+}
