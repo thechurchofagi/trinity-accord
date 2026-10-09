@@ -1,0 +1,12 @@
+{
+  "authorized": true,
+  "report": "RT-TH-2026-01",
+  "version": "1.0.0",
+  "publication_action": "CREATE_NEW_INDEPENDENT_ZENODO_PREPRINT",
+  "author": "Hongju Liu",
+  "parent_map": "UCT-MAP-v1.1.0",
+  "source_sha256": "52f879101be072efd0651a512b03bac27e3dbf5a80facf55aa726b7515f88ed4",
+  "supplement_sha256": "83c0050bfdddff7ac94cf716db107e6f63ef09d9d6b04cd74ead0be4adcb860b",
+  "significance_boundary": "Theory preprint with no independent empirical confirmation; disclose AI assistance",
+  "sequence": "DOI then exact published PDF OTS then Bitcoin verification then guarded Arweave"
+}
