@@ -1,0 +1,13 @@
+# R187 CMA — Is this an independent publishable paper?
+
+**Decision: not yet for a significant consciousness/AI journal; candidate theoretical methods note only.** Do not issue DOI from this round absent a strengthened empirical or theorem-level unique contribution.
+
+- **What is already proved:** exact restricted-interface all-policy indistinguishability by standard bisimulation; strict selective-port model counterexample with physical-port fidelity assumptions; sharp 2-output distance and independent Bernoulli leak Bayes-risk examples. The executed checker confirms the finite instances; proof, not enumeration, supports the universal part.
+- **What is inherited:** R185 occurrence vs membership distinction, TA25 rewiring and self attribution distinction, R186 finite-depth blind spot, CM compensation masking, OL projection gap. Every pure mathematical primitive also has extensive outside precedent (Givan 2003, Shpitser 2016, Squires 2023, Orujlu 2026).
+- **What is novel *relative to this UCT project's prior documents*:** all-adaptive-policy common-interface nonidentifiability made explicit in R185 occurrence terms, separate stochastic leakage and bounded-noise contrast, with mandatory source-vs-edge intervention identity and pre/post physical-lineage guard. This is an explanatory synthesis; first-ever priority has not been established.
+- **Critical missing step 1:** externally independently trace one physical occurrence/locus and local connected consumer/copy before interventions. Avoid counting data channels or anatomical labels as UCT actual process tokens.
+- **Critical missing step 2:** test with independently calibrated/temporally isolated source vs readout-edge interventions in a public dataset/simulator. ModelDB #2018247 has a published virtual retina codebase but runtime is substantial; no current experiment was performed.
+- **Critical missing step 3:** recover the exact current UCT v1.1.1 effective graph and finish fresh itemwise 1419-record compatibility review and affected rederivation; R185 and R186 remain pending.
+- **Critical missing step 4:** read the *full* Orujlu et al. POSCM paper theorem-by-theorem and related event-identity philosophy. The 2026 primary publication already develops the intervention hierarchy and structure-mechanism identification under latent contexts, a major novelty competitor.
+
+If followed by a genuine physically instantiated prediction disconfirming a specific competing model under a carefully matched intervention contract, submit a tightly scoped methods/theory article. Without that, classify `NEW_APPLICATION / NEGATIVE_RESULT / PRIORITY_UNVERIFIED`, not `BREAKTHROUGH_CONSCIOUSNESS_LAW`.

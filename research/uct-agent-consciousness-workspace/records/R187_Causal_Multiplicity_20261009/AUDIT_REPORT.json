@@ -1,0 +1,35 @@
+{
+  "research_id": "R187-20261009",
+  "version": "CMA-RESULT-v0.1.0",
+  "current_completed_map": "UCT-MAP-v1.1.1",
+  "old_parent_item_id_inventory": 1419,
+  "parent_types": {
+    "node": 804,
+    "rule": 387,
+    "context": 228
+  },
+  "original_v100_node_statement_sample_count": 12,
+  "missing_old_sample_ids": [],
+  "new_nodes": 22,
+  "new_candidate_rules": 7,
+  "new_context_not_inference": 9,
+  "total_candidate_items_not_authoritative": 1457,
+  "fresh_whole_item_semantic_review_completed": false,
+  "audit_state": "AUDIT_INCOMPLETE",
+  "current_full_v111_effective_graph_loaded": false,
+  "R185_pending_became_premise": false,
+  "R186_625_review_debt_closed": false,
+  "existing_v111_map_modified": false,
+  "structural_checks": {
+    "unique_new_ids": true,
+    "no_collision_with_parent_id_inventory": true,
+    "deductive_premise_bindings_complete": true,
+    "rule_guards_nonempty": true,
+    "acyclic_candidate_only": true,
+    "no_old_rule_conclusion_replaced": true,
+    "contexts_not_inference": true,
+    "all_old_suspensions_retained_by_not_updating_map": true
+  },
+  "uncertainty": "Incomplete latest binary capsule access and absence of a full new semantic census; even passing finite tests would not discharge application or phenomenal bridges.",
+  "test_file_sha256": "8f99b988af8204284ff9af8d4e54cb7c473b328fec7bfb34aa5aaaaea6a692ec"
+}

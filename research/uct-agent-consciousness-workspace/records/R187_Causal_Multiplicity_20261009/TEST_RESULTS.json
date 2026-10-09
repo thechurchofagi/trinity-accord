@@ -1,0 +1,27 @@
+{
+  "research_id": "R187-20261009",
+  "result_version": "CMA-RESULT-v0.1.0",
+  "outcome": "PASS",
+  "common_protocol_complete_histories": 8184,
+  "copy_widths": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "max_word_length": 9,
+  "selective_write_witnesses": 2,
+  "synchronizer_and_edge_controls": 8,
+  "accessibility_rank_cases": 6,
+  "exact_noise_geometry_checks": 162,
+  "claims_not_tested": [
+    "actual physical occurrence identity",
+    "C1/U1/P3 truth",
+    "phenomenal content",
+    "unique self",
+    "genuine physical isolation"
+  ],
+  "scope": "Finite deterministic common-mode automata and exact linear 2-output toy geometry; adaptive-policy impossibility follows the stated mathematical bisimulation lemma, not an exhaustive policy enumeration.",
+  "stochastic_exact_tv_cases": 78,
+  "stochastic_bayes_error_T_12_delta_1_8": "13841287201/137438953472"
+}

@@ -1,0 +1,83 @@
+{
+  "research_id": "R187-20261009",
+  "version": "CMA-RESULT-v0.1.0",
+  "source_map": "UCT-MAP-v1.1.1",
+  "scope": "PENDING_MAP/AUDIT_INCOMPLETE",
+  "files": [
+    {
+      "path": "AUDIT_REPORT.json",
+      "bytes": 1357,
+      "sha256": "fd0e55b536fff3b9f3fdc24075f53d837afec2eb82f0c2ff16cc10105227b6df"
+    },
+    {
+      "path": "AUDIT_STDOUT.txt",
+      "bytes": 1357,
+      "sha256": "fd0e55b536fff3b9f3fdc24075f53d837afec2eb82f0c2ff16cc10105227b6df"
+    },
+    {
+      "path": "HANDOFF_ZH.md",
+      "bytes": 6119,
+      "sha256": "da6877652e00abc454a56e648f957dab9a6225c858d6547e144d3d7a03cf15b7"
+    },
+    {
+      "path": "MAP_EXTENSION.json",
+      "bytes": 19917,
+      "sha256": "d77f0de22466195eab88755de7d3ccb68191f283af915cfbee0449441e7af130"
+    },
+    {
+      "path": "PAPER_READINESS.md",
+      "bytes": 2674,
+      "sha256": "a2d82bd62c82f92f5ee345474bb8d5c548154c40c2839f8e20b2567a0831c5f0"
+    },
+    {
+      "path": "PRIOR_ART.md",
+      "bytes": 2663,
+      "sha256": "cf1034e7c96fd2326f742d236b6fed25558b2dd98fe1c71a3502ed46e2375ac3"
+    },
+    {
+      "path": "RESEARCH_NOTE.md",
+      "bytes": 18512,
+      "sha256": "950735be156e7898a39b55cb7fe2f866d3f8c165a58ad29d2839d190ba8a644b"
+    },
+    {
+      "path": "REVIEW_COVERAGE.json",
+      "bytes": 729312,
+      "sha256": "6b9187b065a56f7fa13627ecb09f0dfbe8fd53334135156fec48403fce8d3135"
+    },
+    {
+      "path": "TEST_RESULTS.json",
+      "bytes": 859,
+      "sha256": "8f99b988af8204284ff9af8d4e54cb7c473b328fec7bfb34aa5aaaaea6a692ec"
+    },
+    {
+      "path": "TEST_STDOUT.txt",
+      "bytes": 811,
+      "sha256": "f9edd682b67a4bb4ae1dbcffb5f02c2911f10ea3374be0c4caa1b28939053fd6"
+    },
+    {
+      "path": "WORK_LOG.md",
+      "bytes": 6191,
+      "sha256": "b5c5cdda548bb2fba7e626e20caf7c76277e9eea0f44bde582fc78bb1c13bfc9"
+    },
+    {
+      "path": "build_audit.py",
+      "bytes": 13453,
+      "sha256": "c8a2663e163a95fa8086742369b618ff6ac7cb6798909d5207bddd14f7b742fe"
+    },
+    {
+      "path": "check_models.py",
+      "bytes": 5931,
+      "sha256": "178f98d4df9d239e2682766add3e4dd0d16b80339b7c09496495450255185da7"
+    },
+    {
+      "path": "sources/PARENT_V111_ID_INVENTORY.csv",
+      "bytes": 706666,
+      "sha256": "a0c2d56cbc279ba457473799121b5cbba8c3df0ee70e13fb5692894de95b1ae6"
+    },
+    {
+      "path": "sources/UCT_EFFECTIVE_GRAPH.json",
+      "bytes": 2999760,
+      "sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830"
+    }
+  ]
+}

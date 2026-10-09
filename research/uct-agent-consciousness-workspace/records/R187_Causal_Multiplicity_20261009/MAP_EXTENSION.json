@@ -1,0 +1,411 @@
+{
+  "schema": "uct-pending-map-module/1.1",
+  "research_id": "R187-20261009",
+  "result_version": "CMA-RESULT-v0.1.0",
+  "base_completed_release": "UCT-MAP-v1.1.1",
+  "candidate_map_id": "UCT-MAP-v1.1.2-R187-candidate.1",
+  "status": "PENDING_MAP",
+  "audit_status": "AUDIT_INCOMPLETE",
+  "enabled_as_established_premises": false,
+  "common_application": "Finite deterministic/stochastic event-source models, matched control language/ports/clock; actual physical event identity and UCT basal-experience axiom remain independent assumptions.",
+  "nodes": [
+    {
+      "id": "R187:PORT_CONTRACT",
+      "kind": "definition",
+      "statement": "Admissible commands U require actual source/edge/clock identities; equal action names do not establish physically equivalent interventions.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "DEFINITION",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:OCCURRENCE_DISTINCTION",
+      "kind": "definition",
+      "statement": "One grounded physical relation occurrence may have multiple actual token memberships; distinct synchronized occurrence IDs remain distinct despite equal values or reports.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "DEFINITION",
+      "proof_source": "R185-C1/C2 (pending, source only)",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:BISIM_RELATION",
+      "kind": "domain_assumption",
+      "statement": "A related-state relation preserves all common-action transitions and admitted readouts; stochastic analogue has a relation-preserving kernel coupling.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "MODEL_GUARD",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:ALL_POLICY_THEOREM",
+      "kind": "conditional_theorem",
+      "statement": "With matched related initial states, PORT_CONTRACT and BISIM_RELATION, all adaptive policy transcript laws agree at every finite horizon; equal-prior discrimination Bayes risk=1/2.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "CONDITIONAL_OR_OPEN",
+      "proof_source": "RESEARCH_NOTE.md §2 Proposition 1",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:DIAGONAL_WITNESS",
+      "kind": "finite_countermodel",
+      "statement": "A shared single binary source and m>=2 distinct synchronized binary source loci driven only by a common toggle have identical every-length readout histories.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "CONDITIONAL_OR_OPEN",
+      "proof_source": "RESEARCH_NOTE.md §2 + check_models.py",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:DURATION_LIMIT",
+      "kind": "inference_limit",
+      "statement": "More trials cannot distinguish exactly bisimilar interface models; a finite-horizon hidden interaction need not be interface-level bisimulation. No global impossibility without fixed U.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "SCOPED_NEGATIVE_RESULT",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:PORT_FIDELITY",
+      "kind": "open_realization",
+      "statement": "Independently confirm a physical constituent write rather than an edge/readout rewrite, plus timing, omitted channels and traceable occurrence identity.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "OPEN_ACTUAL_INSTANCE",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:SELECTIVE_WITNESS",
+      "kind": "conditional_theorem",
+      "statement": "With genuinely constituent-specific write and no compensating synchronization before faithful readout, an off-diagonal output excludes the restricted one-bit shared source model.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "CONDITIONAL_OR_OPEN",
+      "proof_source": "RESEARCH_NOTE.md §3",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:SYNC_ERASURE",
+      "kind": "counterexample",
+      "statement": "Copied state may be overwritten by synchronizer before observation, hiding a valid internal selective write.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "COUNTEREXAMPLE",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:EDGE_MIMIC",
+      "kind": "counterexample",
+      "statement": "A single common-source event plus downstream readout-edge modifier can create same off-diagonal output as separate copy-write.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "COUNTEREXAMPLE",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:MULTIBIT_SINGLE",
+      "kind": "counterexample",
+      "statement": "A single physical occurrence with two writable internal degrees can exhibit 2-dimensional response rank; rank does not count actual occurrences.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "COUNTEREXAMPLE",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:RANK_LIMIT",
+      "kind": "inference_limit",
+      "statement": "Measured input-response rank counts controlled directions only under stipulated true physical port basis, not number of experience-bearing events or subjects.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "SCOPED_NEGATIVE_RESULT",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:METRIC_GUARD",
+      "kind": "domain_assumption",
+      "statement": "Known calibrated Euclidean two-output channels, fixed selective delta, best free common-mode t, and independent two-sided readout errors <=epsilon.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "MODEL_GUARD",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:NOISE_SEPARATION",
+      "kind": "conditional_theorem",
+      "statement": "Exact model gap is |delta|/sqrt(2); two-sided error balls disjoint if |delta|>2sqrt(2)epsilon.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "CONDITIONAL_OR_OPEN",
+      "proof_source": "RESEARCH_NOTE.md §4",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:PROB_LEAK_GUARD",
+      "kind": "domain_assumption",
+      "statement": "Reset independent Bernoulli mismatch in copied model with fixed p and exact zero mismatches for shared model; equal priors.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "MODEL_GUARD",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:TV_SHARP",
+      "kind": "conditional_theorem",
+      "statement": "After T independent reset trials TV=1-(1-p)^T and exact Bayes classification error=(1-p)^T/2; p=0 persists at 1/2.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "CONDITIONAL_OR_OPEN",
+      "proof_source": "RESEARCH_NOTE.md §5",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:APPROX_COUPLING",
+      "kind": "conditional_theorem",
+      "statement": "If per-step matched-history coupling failure<=eta under a common policy, T-step TV<=1-(1-eta)^T<=Teta and equal-prior error>=(1-min(1,Teta))/2.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "CONDITIONAL_OR_OPEN",
+      "proof_source": "RESEARCH_NOTE.md §5 coupling extension",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:LINEAGE_GUARD",
+      "kind": "open_realization",
+      "statement": "Selective intervention alters the physical process at test epoch; to infer earlier undisturbed occurrence identity requires independent same-bearer temporal lineage and noncircular intervention mapping.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "OPEN_ACTUAL_INSTANCE",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:SUBJECT_COUNT_LIMIT",
+      "kind": "inference_limit",
+      "statement": "Neither occurrence count nor incidence multiplicity nor intervention rank entails numeric phenomenal event identity, number of subjects, or experiential intensity.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "SCOPED_NEGATIVE_RESULT",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:UCT_APPLICATION",
+      "kind": "conditional_interpretation",
+      "statement": "When independent actual token admission, complete same-instance K and a comparison-invariant physical distinction hold, inherited C1-OI can conditionally distinguish complete types; not a named quality or existence gate.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "OPEN_ACTUAL_AND_PHENOMENAL",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:NOVELTY_BOUNDARY",
+      "kind": "research_status",
+      "statement": "Uses classical bisimulation, intervention hierarchy, Euclidean projection, Le Cam bounds; project-specific synthesis beyond R185/OL/CM, historical priority unverified.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "PRIORITY_UNVERIFIED",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R187:REAL_SYSTEM_TARGET",
+      "kind": "open_problem",
+      "statement": "Choose one actual retina/prosthetic/duplicated-compute instance with traceable physical event source and full intervention/observation boundary; measure whether branch and source writes are separable.",
+      "scope": "Finite controlled state systems with matched declared observation/action interfaces",
+      "status": "OPEN_NEXT",
+      "proof_source": "RESEARCH_NOTE.md",
+      "source": "R187-20261009 CMA-RESULT-v0.1.0",
+      "automatic_premise_truth": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "R187:r_allpolicy",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "all_of": [
+        "R187:PORT_CONTRACT",
+        "R187:BISIM_RELATION"
+      ],
+      "conclusion": "R187:ALL_POLICY_THEOREM",
+      "statement": "Identical related initial conditions; same fully supported common action algebra and observations, with bisimulation closure for every allowed action.",
+      "guard": "Identical related initial conditions; same fully supported common action algebra and observations, with bisimulation closure for every allowed action.",
+      "binding": "Same actual experiment interface, time interval and correctly typed source/readout port instances",
+      "status": "PENDING_MAP",
+      "no_assumption_promotion": true,
+      "proof_source": "RESEARCH_NOTE.md"
+    },
+    {
+      "id": "R187:r_diagonal",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "all_of": [
+        "R187:PORT_CONTRACT"
+      ],
+      "conclusion": "R187:DIAGONAL_WITNESS",
+      "statement": "One binary source versus distinct copied binary sources initially equal; global toggles only, faithful readouts, m>=2.",
+      "guard": "One binary source versus distinct copied binary sources initially equal; global toggles only, faithful readouts, m>=2.",
+      "binding": "Same actual experiment interface, time interval and correctly typed source/readout port instances",
+      "status": "PENDING_MAP",
+      "no_assumption_promotion": true,
+      "proof_source": "RESEARCH_NOTE.md"
+    },
+    {
+      "id": "R187:r_duration",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "all_of": [
+        "R187:ALL_POLICY_THEOREM",
+        "R187:DIAGONAL_WITNESS"
+      ],
+      "conclusion": "R187:DURATION_LIMIT",
+      "statement": "Do not widen from common interface to arbitrary physical interventions or from output identity to token identity.",
+      "guard": "Do not widen from common interface to arbitrary physical interventions or from output identity to token identity.",
+      "binding": "Same actual experiment interface, time interval and correctly typed source/readout port instances",
+      "status": "PENDING_MAP",
+      "no_assumption_promotion": true,
+      "proof_source": "RESEARCH_NOTE.md"
+    },
+    {
+      "id": "R187:r_selective",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "all_of": [
+        "R187:PORT_CONTRACT",
+        "R187:PORT_FIDELITY",
+        "R187:DIAGONAL_WITNESS"
+      ],
+      "conclusion": "R187:SELECTIVE_WITNESS",
+      "statement": "Physical copy-locus-specific writer independently verified, comparator limited to one single bit source and unchanged faithful readout, synchronizer isolated.",
+      "guard": "Physical copy-locus-specific writer independently verified, comparator limited to one single bit source and unchanged faithful readout, synchronizer isolated.",
+      "binding": "Same actual experiment interface, time interval and correctly typed source/readout port instances",
+      "status": "PENDING_MAP",
+      "no_assumption_promotion": true,
+      "proof_source": "RESEARCH_NOTE.md"
+    },
+    {
+      "id": "R187:r_noise",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "all_of": [
+        "R187:METRIC_GUARD",
+        "R187:SELECTIVE_WITNESS"
+      ],
+      "conclusion": "R187:NOISE_SEPARATION",
+      "statement": "Bounded calibrated errors, same physical port + time, no branch modifier or hidden synchronizer action.",
+      "guard": "Bounded calibrated errors, same physical port + time, no branch modifier or hidden synchronizer action.",
+      "binding": "Same actual experiment interface, time interval and correctly typed source/readout port instances",
+      "status": "PENDING_MAP",
+      "no_assumption_promotion": true,
+      "proof_source": "RESEARCH_NOTE.md"
+    },
+    {
+      "id": "R187:r_tv",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "all_of": [
+        "R187:PROB_LEAK_GUARD"
+      ],
+      "conclusion": "R187:TV_SHARP",
+      "statement": "Independent reset trials and fixed p, zero discrepancy in source model; Bayes error uses equal priors.",
+      "guard": "Independent reset trials and fixed p, zero discrepancy in source model; Bayes error uses equal priors.",
+      "binding": "Same actual experiment interface, time interval and correctly typed source/readout port instances",
+      "status": "PENDING_MAP",
+      "no_assumption_promotion": true,
+      "proof_source": "RESEARCH_NOTE.md"
+    },
+    {
+      "id": "R187:r_coupling",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "all_of": [
+        "R187:PORT_CONTRACT",
+        "R187:BISIM_RELATION"
+      ],
+      "conclusion": "R187:APPROX_COUPLING",
+      "statement": "For approximate case, a declared matched-history coupling of failure probability<=eta must be supplied independently; exact bisim alone gives eta=0.",
+      "guard": "For approximate case, a declared matched-history coupling of failure probability<=eta must be supplied independently; exact bisim alone gives eta=0.",
+      "binding": "Same actual experiment interface, time interval and correctly typed source/readout port instances",
+      "status": "PENDING_MAP",
+      "no_assumption_promotion": true,
+      "proof_source": "RESEARCH_NOTE.md"
+    }
+  ],
+  "context_links": [
+    {
+      "id": "R187:ctx_r185",
+      "source": "R185:SAME_OCCURRENCE",
+      "target": "R187:OCCURRENCE_DISTINCTION",
+      "relation": "CONTEXT_NOT_DEDUCTION",
+      "reason": "R185 pending occurrence identity definition; no premise promotion"
+    },
+    {
+      "id": "R187:ctx_r185_copy",
+      "source": "R185:COPIED_COUNTERMODEL",
+      "target": "R187:DIAGONAL_WITNESS",
+      "relation": "CONTEXT_NOT_DEDUCTION",
+      "reason": "All-policy extension of copied/shared finite witness"
+    },
+    {
+      "id": "R187:ctx_r186",
+      "source": "R186-HOM-20261009",
+      "target": "R187:DURATION_LIMIT",
+      "relation": "CONTEXT_NOT_DEDUCTION",
+      "reason": "Finite-depth hidden effects differ from interface-structural nonidentifiability"
+    },
+    {
+      "id": "R187:ctx_cm",
+      "source": "CM20261009:CAUSAL_MASK",
+      "target": "R187:SYNC_ERASURE",
+      "relation": "CONTEXT_NOT_DEDUCTION",
+      "reason": "Corrective/synchronizer masking; CM is separately pending"
+    },
+    {
+      "id": "R187:ctx_ol",
+      "source": "OL20261009",
+      "target": "R187:NOISE_SEPARATION",
+      "relation": "CONTEXT_NOT_DEDUCTION",
+      "reason": "Classical finite-observation projection used at physical port boundary"
+    },
+    {
+      "id": "R187:ctx_c1",
+      "source": "A:C1_OI",
+      "target": "R187:UCT_APPLICATION",
+      "relation": "CONTEXT_NOT_DEDUCTION",
+      "reason": "Only conditional same-complete-signature type inference"
+    },
+    {
+      "id": "R187:ctx_u1",
+      "source": "A:U1",
+      "target": "R187:SUBJECT_COUNT_LIMIT",
+      "relation": "CONTEXT_NOT_DEDUCTION",
+      "reason": "No experience gate or subject-number identity"
+    },
+    {
+      "id": "R187:ctx_p3",
+      "source": "A:P3",
+      "target": "R187:LINEAGE_GUARD",
+      "relation": "CONTEXT_NOT_DEDUCTION",
+      "reason": "Local persistence must be grounded"
+    },
+    {
+      "id": "R187:ctx_ta25",
+      "source": "C:P2_COORD",
+      "target": "R187:RANK_LIMIT",
+      "relation": "CONTEXT_NOT_DEDUCTION",
+      "reason": "Prior target-conditional factorization; coordinate views do not count events"
+    }
+  ],
+  "reference_sources": [
+    "RESEARCH_NOTE.md",
+    "PRIOR_ART.md",
+    "check_models.py",
+    "TEST_RESULTS.json"
+  ],
+  "note": "R185/CM/R186/OL are compared as source precedents; pending R185/CM/R186 are not used in deductive all_of."
+}

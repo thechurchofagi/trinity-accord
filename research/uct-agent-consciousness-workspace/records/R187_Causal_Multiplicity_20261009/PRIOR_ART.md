@@ -1,0 +1,13 @@
+# Novelty and closest-work boundary — R187 CMA v0.1.0
+
+- **Givan, Dean, Greig (2003)**, DOI `10.1016/S0004-3702(02)00376-4`: stochastic model minimization and bisimulation. Proposition 1 is an instantiation, **not mathematical priority**.
+- **Shpitser & Tchetgen Tchetgen (2016)**, DOI `10.1214/15-AOS1411`: node/edge/path interventions differ in model assumptions and identifiability. 'Same named action' cannot be silently switched from physical source write to outgoing edge rewrite.
+- **Squires et al. (2023)**, arXiv `2211.16467`: latent causal identifiability from interventions under explicit assumptions. Our two-world witness does not challenge their result, because it lacks latent-node selective interventions required for their guarantee.
+- **Orujlu et al. (2026)**, UAI 2026 `https://proceedings.mlr.press/v337/orujlu26a.html`: partially observed structural models explicitly include endogenous structure, node/edge interventions, identifiability and retina/gene simulators. **Closest current priority threat** for a standalone causal-discovery paper. The term 'first to distinguish latent structure from mechanism' is strictly prohibited.
+- **Tononi et al. (2023)**, IIT 4.0, DOI `10.1371/journal.pcbi.1011465`: actual intrinsic cause-effect structure/exclusion provides a distinct theoretical consciousness interpretation. Present R187 result does not demonstrate IIT false or UCT true.
+- **Metzinger (2008)**, DOI `10.1016/S0079-6123(07)68018-2`: pre-existing distinction of functional self-modeling and phenomenal selfhood.
+- **Internal Liu (2026)** R185 already differentiates occurrence identity from multiple memberships and synchronized copies; TA25 already studies correct prediction versus physical attachment; OL/CM model physical interventions and compensation; R186 distinguishes finite-horizon masking from genuine independence. These are acknowledged antecedents, not counted again.
+
+Contribution classification: `NEW_APPLICATION` of existing bisimulation/TV/geometry; `CORRECTION` of overinference from finite testing and intervention naming; `NEGATIVE_RESULT` for this fixed interface, `PRIORITY_UNVERIFIED` for any interdisciplinary theoretical synthesis beyond prior art. Not an empirical result about actual biological or AI consciousness.
+
+Major missing novelty test: full theorem-by-theorem comparison against POSCM and SCM abstraction (especially whether an intervenable locus can be physically identified separately from its downstream interface). Major missing evidence test: traceable real physical bearer, common actual time interval and independently certified surgical intervention with a non-circular target identity.
