@@ -31,3 +31,4 @@ jobs:
               if len(rows)<100:break
           print('RT_TH_EXACT_TITLE_RESULTS',json.dumps(hits,ensure_ascii=False))
           PY
+# Trigger a read-only identity check; no publish or modify action.
