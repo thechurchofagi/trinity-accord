@@ -6,6 +6,6 @@
   "user_intent": "Publish the completed RT/TH preprint using existing DOI -> DOI-in-PDF -> OTS -> AR workflow",
   "prior_records_protected": true,
   "resumption": "Reuse exact Zenodo draft after recovering failed concurrent Git checkpoint; no duplicate POST",
-  "reconciliation_attempt": 4,
+  "reconciliation_attempt": 5,
   "prior_zenodo_record": 23251651
 }
