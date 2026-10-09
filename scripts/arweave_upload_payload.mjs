@@ -82,9 +82,10 @@ const archiveType = process.env.ARWEAVE_ARCHIVE_TYPE || "record-chain-batch-arch
 if (!["record-chain-batch-archive", "research-paper-ots-archive"].includes(archiveType)) {
   throw new Error("Unsupported ARWEAVE_ARCHIVE_TYPE");
 }
-const scopeTag = archiveType === "research-paper-ots-archive" ? "Research-Series" : "Record-Chain";
-const scopeValue = archiveType === "research-paper-ots-archive" ? "TA-TR-2026" : "trinity-accord-public-reception-ledger";
 const payload = fs.readFileSync(payloadPath);
+const rt = archiveType === "research-paper-ots-archive" && (() => { const data=JSON.parse(payload.toString("utf8")); return data.targets?.papers?.length===1 && data.targets.papers[0].report==="RT20261009"; })();
+const scopeTag = rt ? "Research-Continuity" : archiveType === "research-paper-ots-archive" ? "Research-Series" : "Record-Chain";
+const scopeValue = rt ? "RT20261009" : archiveType === "research-paper-ots-archive" ? "TA-TR-2026" : "trinity-accord-public-reception-ledger";
 const payloadSha256 = sha256Hex(payload);
 
 const HTTP_TIMEOUT_MS = envInt("ARWEAVE_HTTP_TIMEOUT_MS", 30000, 5000);
