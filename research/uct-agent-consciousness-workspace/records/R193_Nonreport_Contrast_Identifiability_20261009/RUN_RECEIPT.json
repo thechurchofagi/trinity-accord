@@ -1,0 +1,17 @@
+{
+  "receipt_id": "R193-RUN-RECEIPT-v1",
+  "research_id": "R193-NCI-20261009",
+  "result_version": "NCI-RESULT-v0.1.0",
+  "base_remote_commit": "51e7b6cc97c58ddf00bc75adba5e37ca009ed313",
+  "core_science_checkpoint_commit": "a588bd423b8bc48a1a41e1a0f9d9a94579111042",
+  "github_content_commit": "af7792e40e45cac8941219d6033b2e1a188745b3",
+  "completed_map": {"version":"UCT-MAP-v1.1.2","counts":{"nodes":913,"active_rules":424,"contexts":261,"suspended_rules":10,"review_items":1608},"graph_sha256":"0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612","review_ledger_sha256":"0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687"},
+  "exact_result": {"states":16,"candidate_bridges":65536,"constraint_counts":[65536,16,4,2,1],"checks":9,"all_pass":true},
+  "candidate_map": {"status":"PENDING_CHECKPOINT_DISABLED","counts":{"nodes":9,"rules":6,"contexts":5},"compatibility_audit_sha256":"f7004c5422e59b2ad78933cefadec852f6ddf091a59817f36c4964cf69c782de","structural_status":"STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN"},
+  "key_hashes": {"RESEARCH_NOTE.md":"cbe5ab10eb01fc46e005e9f339ae6f8a5167e81c702ceeeadc387143d50b0c06","EXACT_RESULTS.json":"fdbe17f7de8fff4148809ebfaec2ecfeac8a60a878736c23e9b9404ed06f5d53","MAP_EXTENSION.json":"977e423d80c54bff29c9f45c1402fffaf0b559b3b4d819ff78bb750587f54001","CLAIM_LEDGER.json":"289f32e13e4164dba462c8f45565fe1e579f4465726775a7c7e42df48c8fe756","GAP_LEDGER.json":"e397b141af7c871f704864b296b4db1c2521f2a6774077a975e722f52db7a4be"},
+  "review_status": {"QC-20261008-10":"ACKNOWLEDGED_OPEN","IA-QC11":"ACKNOWLEDGED_APPLICATION_OPEN","QC-20261008-12":"ACKNOWLEDGED_APPLICATION_OPEN","QC-20261008-13":"TOY_SCOPE_ADVANCED_APPLICATION_OPEN"},
+  "publication_coverage": {"version":"UCT-PUB-v1.0.5","decision":"CONTINUE_RESEARCH","worldwide_priority_verified":false},
+  "library": {"master_id":"libfile_4175a81748fc819187fa8f5771f056fa","master_previous_version":49,"master_new_version":50,"master_file_id":"file_00000000c2f081fd82ce7cc83826b7e9","master_bytes":617499,"master_local_sha256":"fca8dc9809760e97491a915ae2e78a65650f00ba517773330dbec80368aa8bec","increment_id":"libfile_c2fb22102f188191bf9a11d9d9de7417","increment_file_id":"file_00000000674881f7993979f9ef708101","increment_version":0,"increment_bytes":118783,"increment_local_sha256":"19315f1473962a9fcd3db2798ccffc00815ac0d94f5970d9d9bcea1ae239b95b","metadata_and_content_head_readback":"PASS","exact_byte_redownload":"FAILED_HTTP_403_RETRY_NEXT_ROUND"},
+  "failures_retained": ["Complement-symmetric contrasts do not orient familiar-mineness polarity.","H AND U is a structural coordinate, not a validated B_fam identity.","Actual H/U admission and report-independent marker validity remain open.","Library exact byte redownload failed with HTTP 403 after successful writes and metadata/content-head verification."],
+  "next": "Retry Library byte readback first, then predeclare a reversed-marker or cross-population polarity-anchor test independent of report and proxy selection."
+}

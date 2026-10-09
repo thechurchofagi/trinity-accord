@@ -24,9 +24,10 @@
 
 ## 双份保存与恢复
 
-- GitHub 最终研究提交：`GITHUB_COMMIT_TO_FILL`，已按分支头租约快进并回读核验。
-- 固定主交接：Library ID `libfile_4175a81748fc819187fa8f5771f056fa`，版本 `LIBRARY_MASTER_VERSION_TO_FILL`。
-- R193 增量包：`LIBRARY_INCREMENT_ID_TO_FILL`；SHA256 `INCREMENT_SHA256_TO_FILL`；字节数 `INCREMENT_BYTES_TO_FILL`。这是相对交接所列基线的增量，不是整个仓库、全部历史或完整工作集备份。
+- GitHub 内容提交：`af7792e40e45cac8941219d6033b2e1a188745b3`，已按分支头租约快进并回读关键文件。
+- 固定主交接：Library ID `libfile_4175a81748fc819187fa8f5771f056fa`，版本 50，617,499 字节；版本、大小与开头 R193 内容已由 Library 读接口核验。
+- R193 增量包：Library ID `libfile_c2fb22102f188191bf9a11d9d9de7417`；SHA256 `19315f1473962a9fcd3db2798ccffc00815ac0d94f5970d9d9bcea1ae239b95b`；118,783 字节。这是相对交接所列基线的增量，不是整个仓库、全部历史或完整工作集备份。
+- 保留的保存失败：Library 两个文件均已确认写入且大小匹配，但两次签名下载回读返回 HTTP 403，故不能声称完成上传后字节对比；下轮应先重试精确字节回读。GitHub 和本地清单/ZIP 完整性已核验。
 
 精确恢复：获取 `uct-agent-consciousness-workspace` 分支并核验上述提交；依次读根 `CURRENT_STATE.json`、`HANDOFF.md`、`MASTER_INDEX.md` 和本文件，再读 `EXACT_RESULTS.json`、`GAP_LEDGER.json`、`REVIEW_RESPONSE.md`、`MAP_AUDIT.md`。固定主交接只使用同一 Library ID 的最新版本。若用增量包恢复，必须叠加在它的 manifest 所列基线提交并逐项核验 SHA256。
 

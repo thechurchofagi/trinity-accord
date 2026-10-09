@@ -1,0 +1,9 @@
+{
+  "receipt_id": "R193-DUAL-SAVE-v1",
+  "research_id": "R193-NCI-20261009",
+  "github": {"branch":"uct-agent-consciousness-workspace","base_commit":"51e7b6cc97c58ddf00bc75adba5e37ca009ed313","core_science_checkpoint":"a588bd423b8bc48a1a41e1a0f9d9a94579111042","content_commit":"af7792e40e45cac8941219d6033b2e1a188745b3","final_receipt_commit":null,"key_file_readback":"PASS"},
+  "library_master": {"library_file_id":"libfile_4175a81748fc819187fa8f5771f056fa","previous_version":49,"new_version":50,"backing_file_id":"file_00000000c2f081fd82ce7cc83826b7e9","bytes":617499,"local_sha256":"fca8dc9809760e97491a915ae2e78a65650f00ba517773330dbec80368aa8bec","version_size_and_head_readback":"PASS","exact_byte_redownload":"FAILED_HTTP_403"},
+  "library_increment": {"library_file_id":"libfile_c2fb22102f188191bf9a11d9d9de7417","version":0,"backing_file_id":"file_00000000674881f7993979f9ef708101","bytes":118783,"local_sha256":"19315f1473962a9fcd3db2798ccffc00815ac0d94f5970d9d9bcea1ae239b95b","metadata_readback":"PASS","exact_byte_redownload":"FAILED_HTTP_403","scope":"increment only: 28 repository files changed from recorded base to content commit, plus MANIFEST.json and SHA256SUMS.txt; not a full repository, workset or history backup"},
+  "status":"GITHUB_VERIFIED_LIBRARY_WRITES_CONFIRMED_EXACT_BYTE_READBACK_PENDING",
+  "recovery_order": ["Fetch the branch and verify the content/final receipt commits.","Read CURRENT_STATE.json, HANDOFF.md, MASTER_INDEX.md, then R193 HANDOFF_ZH.md.","Retry exact Library byte materialization before claiming byte-verified dual persistence.","If using the increment, verify its local SHA256 and overlay only on base commit 51e7b6cc97c58ddf00bc75adba5e37ca009ed313, then run sha256sum -c SHA256SUMS.txt."]
+}
