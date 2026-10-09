@@ -28,12 +28,12 @@ jobs:
         run: |
           python3 -m py_compile research/task-relative-continuity/publication.py
           python3 - <<'PY'
-          import hashlib,json,pathlib
+          import hashlib,json,pathlib,subprocess
           root=pathlib.Path('research/task-relative-continuity')
           a=json.loads((root/'PUBLISH-AUTHORIZATION.json').read_text())
           s=(root/'source-main.md').read_bytes()
           assert (a['authorized'],a['report'],a['version'])==(True,'RT20261009','1.0.0')
-          assert a['source_sha256']==hashlib.sha256(s).hexdigest()
+          assert a['source_git_blob']==subprocess.check_output(['git','hash-object',str(root/'source-main.md')],text=True).strip()
           assert b'not peer reviewed' in s.lower()
           assert (root/'code/check_transport.py').is_file()
           print('RTTH_AUTHOR_AND_SOURCE_PREFLIGHT_PASS')
