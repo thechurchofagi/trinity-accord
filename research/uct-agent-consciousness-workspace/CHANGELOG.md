@@ -1,3 +1,9 @@
+# R193-NCI-20261009 — 2026-10-09 — disabled research checkpoint
+
+Enumerates a predeclared nonreport contrast class on actual history/use versus test/report coordinates. Compatible Boolean bridges shrink 65,536 -> 16 -> 4 -> 2; the final pair is `H AND U` and its complement. A polarity anchor selects one table but does not validate the name familiar mineness. Candidate 9/6/5 is structurally compatible and disabled; actual installation, target orientation, marker validity and reviewer disposition remain open. Publication coverage advances nondeductively to UCT-PUB-v1.0.5; no publication action.
+
+---
+
 # R192-CTBI-20261009 — 2026-10-09 — disabled research checkpoint
 
 Repairs the adaptive-reflex question with an explicit current/history/complete signature ladder. Exhaustive finite checks cover 65,536 complete predicates and 256 selected-projection predicates; sparse endpoint labels leave 16,384 compatible bridges. Complete twins cannot be internally separated and, under C1, do not differ in complete experiential type; projection twins license only projection-relative limits. Candidate 9/6/4 is structurally compatible but disabled; `B_fam`, actual installation and reviewer disposition remain open. Publication coverage advances nondeductively to UCT-PUB-v1.0.4; no publication action.

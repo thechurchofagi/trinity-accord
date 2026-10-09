@@ -1,3 +1,16 @@
+# Current research index — R193 / completed map UCT-MAP-v1.1.2
+
+- R193 note: [Nonreport Contrast Constraints](records/R193_Nonreport_Contrast_Identifiability_20261009/RESEARCH_NOTE.md)
+- R193 exact model: [results](records/R193_Nonreport_Contrast_Identifiability_20261009/EXACT_RESULTS.json) and [checker](records/R193_Nonreport_Contrast_Identifiability_20261009/check_nonreport_contrasts.py)
+- R193 controls: [prior art](records/R193_Nonreport_Contrast_Identifiability_20261009/PRIOR_ART_AND_EVIDENCE.md), [claims](records/R193_Nonreport_Contrast_Identifiability_20261009/CLAIM_LEDGER.json), [gaps](records/R193_Nonreport_Contrast_Identifiability_20261009/GAP_LEDGER.json)
+- R193 continuation: [Chinese handoff](records/R193_Nonreport_Contrast_Identifiability_20261009/HANDOFF_ZH.md), [map audit](records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_AUDIT.md), [review response](records/R193_Nonreport_Contrast_Identifiability_20261009/REVIEW_RESPONSE.md), [work log](records/R193_Nonreport_Contrast_Identifiability_20261009/WORK_LOG.md)
+
+R193 is the latest checkpoint, not an integrated map release. Its 9-node/6-rule/5-context candidate is disabled; completed counts remain 913/424/261 with 10 suspended rules. UCT-PUB-v1.0.5 is nondeductive. The R192 entries below are retained as historical navigation.
+
+---
+
+## Superseded R192 index
+
 # Current research index — R192 / completed map UCT-MAP-v1.1.2
 
 - R192 note: [Complete-Twin Bridge Invariance](records/R192_Complete_Twin_Bridge_Invariance_20261009/RESEARCH_NOTE.md)

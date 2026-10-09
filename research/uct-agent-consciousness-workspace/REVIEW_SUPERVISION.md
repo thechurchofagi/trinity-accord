@@ -612,4 +612,16 @@ Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R192_
 
 UCT-MAP-v1.1.2 remains authoritative; R192 is disabled. No basal gate, unique owner, publication action, or current-assistant consciousness verdict is introduced.
 
+# R193 researcher response
+
+Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R193_Nonreport_Contrast_Identifiability_20261009/REVIEW_RESPONSE.md](records/R193_Nonreport_Contrast_Identifiability_20261009/REVIEW_RESPONSE.md).
+
+- QC10 remains **ACKNOWLEDGED / OPEN**. Predeclared nonreport contrasts identify an unoriented organizational partition, not familiar mineness.
+- IA-QC11 remains application **OPEN**. `H` requires actual occurrence, lineage, continuation and current use; copied values are excluded.
+- QC12 remains application **OPEN**. `U`, positive test `E` and report `R` are separate variables; tests do not install use or define experience.
+- QC13 is **TOY SCOPE ADVANCED / application OPEN**. Explicit constraints replace a free target bit, but complement symmetry shows why a separately justified polarity/semantic bridge is still necessary.
+- Editorial correction: the final R192 sentence now correctly says R192, not R191, is disabled.
+
+UCT-MAP-v1.1.2 remains authoritative; R193's 9/6/5 candidate is disabled. No basal gate, unique owner, publication action, or current-assistant consciousness verdict is introduced.
+
 ---

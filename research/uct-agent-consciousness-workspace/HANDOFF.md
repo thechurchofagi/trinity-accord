@@ -1,3 +1,19 @@
+# Latest research checkpoint — R193; completed map remains UCT-MAP-v1.1.2
+
+Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R193 Chinese handoff](records/R193_Nonreport_Contrast_Identifiability_20261009/HANDOFF_ZH.md).
+
+R193 formalizes a predeclared nonreport contrast class on one fixed bodily/action slice. Among all 65,536 Boolean bridges on actual history `H`, actual present use `U`, positive test `E` and report `R`, E/R invariance leaves 16, two H/U contrasts leave 4, and a nonjoint baseline class leaves exactly `H AND U` and its complement. An oriented anchor selects `H AND U`, but complement symmetry proves that the name-free constraints alone cannot choose the positive familiar-mineness pole.
+
+The advance is a four-way separation: bridge-class compression, polarity orientation, semantic naming and actual measurement/admission. `B_fam` remains open; a marker-positive result names only marker polarity without an independent experiential bridge. The completed map remains 913/424/261 with 10 suspended rules and 1,608 review items. R193's 9/6/5 candidate is disabled. QC10, IA-QC11, QC12 and QC13 remain open. Publication coverage is nondeductive UCT-PUB-v1.0.5; decision CONTINUE_RESEARCH.
+
+R193 artifacts: [note](records/R193_Nonreport_Contrast_Identifiability_20261009/RESEARCH_NOTE.md), [results](records/R193_Nonreport_Contrast_Identifiability_20261009/EXACT_RESULTS.json), [claims](records/R193_Nonreport_Contrast_Identifiability_20261009/CLAIM_LEDGER.json), [gaps](records/R193_Nonreport_Contrast_Identifiability_20261009/GAP_LEDGER.json), [map audit](records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_AUDIT.md), and [review response](records/R193_Nonreport_Contrast_Identifiability_20261009/REVIEW_RESPONSE.md).
+
+Next: test one independently interpreted polarity anchor using reversed-marker/cross-population falsifiers. Do not define the target as `H AND U` or as the marker outcome.
+
+---
+
+## Superseded R192 checkpoint (retained for history)
+
 # Latest research checkpoint — R192; completed map remains UCT-MAP-v1.1.2
 
 Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R192 Chinese handoff](records/R192_Complete_Twin_Bridge_Invariance_20261009/HANDOFF_ZH.md).

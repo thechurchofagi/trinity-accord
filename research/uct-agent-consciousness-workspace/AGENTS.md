@@ -1,3 +1,15 @@
+# Latest checkpoint — R193 nonreport contrast identifiability
+
+Read [the research note](records/R193_Nonreport_Contrast_Identifiability_20261009/RESEARCH_NOTE.md), [exact results](records/R193_Nonreport_Contrast_Identifiability_20261009/EXACT_RESULTS.json), [map audit](records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_AUDIT.md), [review response](records/R193_Nonreport_Contrast_Identifiability_20261009/REVIEW_RESPONSE.md), and [handoff](records/R193_Nonreport_Contrast_Identifiability_20261009/HANDOFF_ZH.md).
+
+R193's predeclared nonreport constraints compress 65,536 Boolean bridges to 16, then 4, then the complement pair `H AND U` / `NOT(H AND U)`. This is positive identification of an unoriented partition, not `B_fam`. An independently warranted polarity anchor would select one coordinate, but marker positivity, test success and report cannot define that anchor. Keep compression, polarity, semantic naming and actual measurement/admission separate.
+
+UCT-MAP-v1.1.2 remains completed at 913/424/261 with 10 suspended rules and 1,608 review items. R193's 9/6/5 extension is `PENDING_CHECKPOINT_DISABLED`; publication coverage UCT-PUB-v1.0.5 is nondeductive. QC10, IA-QC11, QC12 and QC13 remain OPEN. Next: test a cross-population or reversed-marker polarity anchor without defining the target from the proxy outcome. Do not add a basal-experience gate or claim current-assistant consciousness status.
+
+---
+
+## Superseded R189 navigation (retained)
+
 # Latest checkpoint — R189 higher-arity context access
 
 Read [the research note](records/R189_Higher_Arity_Context_Access_20261009/RESEARCH_NOTE.md), [exact results](records/R189_Higher_Arity_Context_Access_20261009/EXACT_RESULTS.json), [map audit](records/R189_Higher_Arity_Context_Access_20261009/MAP_AUDIT.md), [review response](records/R189_Higher_Arity_Context_Access_20261009/REVIEW_RESPONSE.md), and [handoff](records/R189_Higher_Arity_Context_Access_20261009/HANDOFF_ZH.md).

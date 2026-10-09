@@ -1,0 +1,27 @@
+{
+  "record_id": "R193-PUB-COVERAGE-20261009-v1",
+  "base_completed_map_version": "UCT-MAP-v1.1.2",
+  "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+  "previous_coverage_version": "UCT-PUB-v1.0.4",
+  "new_coverage_version": "UCT-PUB-v1.0.5",
+  "checked_publication_sources": [
+    {"work_id":"UCT-PUB-v1.0.0-VERIFIED-CORPUS","version":"UCT-PUB-v1.0.0","release_evidence":"publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json","read_scope":"Existing frozen 28-work/39-research-DOI census; R193 postdates it."},
+    {"work_id":"STEPHENS-2000-LABEL-SWITCHING","doi":"10.1111/1467-9868.00265","scope":"General likelihood symmetry, label switching and identifiability-constraint warning; no UCT or familiar-mineness claim."},
+    {"work_id":"ZHU-ET-AL-2024-NO-REPORT-SWS","doi":"10.1523/JNEUROSCI.0145-23.2023","scope":"Primary no-report design separating task relevance from conscious speech contrast; phase interpretation still supported by training and awareness assessments."}
+  ],
+  "changed_claim_ids": ["R193-C1","R193-C2","R193-C3","R193-C4","R193-C5","R193-C6"],
+  "newly_covered_claim_ids": [],
+  "uncovered_candidates_within_verified_corpus": ["R193-C1","R193-C2","R193-C3","R193-C4","R193-C5","R193-C6"],
+  "residual_assessment": {
+    "precise_problem": "How far can predeclared nonreport equality/difference contrasts identify a familiar-mineness bridge without outcome-selected labels?",
+    "net_increment_after_subtraction": "An exact UCT-specific constraint ladder from 65,536 bridges to one complementary pair, and a four-part separation of compression, polarity, semantic naming and actual measurement; no claim of new parity-graph mathematics or first no-report method.",
+    "closest_internal_predecessors": ["R149 representation-fiber compatibility","R157 coordinate transport and semantic residual","R173 actual retentive binding and B_fam boundary","R192 signature ladder and sparse-label obstruction"],
+    "reusable_knowledge": "Name-free contrasts can identify an unoriented organizational partition. A complement-symmetric evidence class cannot choose its positive experiential pole; marker orientation needs an independent bridge.",
+    "evidence_and_limits": "Exhaustive 65,536-bridge enumeration; signed-constraint component proof; reversed-marker and adaptive-reflex counterexamples; primary no-report design comparison; full v1.1.2 map traversal. No actual instance, valid B_fam anchor, reviewer closure or worldwide priority.",
+    "decision": "CONTINUE_RESEARCH",
+    "next_specific_action": "Predeclare a cross-population or interventionally reversed-marker polarity anchor and test whether its phenomenal interpretation is independent of report and of the marker chosen to measure it."
+  },
+  "map_semantics_changed": false,
+  "whole_map_audit_if_required": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_COMPATIBILITY_AUDIT.json",
+  "warning": "Absence from the frozen corpus is not a worldwide novelty claim. UCT-PUB-v1.0.5 is nondeductive and not a science-map release."
+}

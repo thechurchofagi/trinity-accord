@@ -8,7 +8,7 @@ The review preserves original proofs except documented affected rederivations, c
 
 ## Publication coverage and latest pending research
 
-Current non-deductive coverage entry: [UCT-PUB-v1.0.1](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs and reconciles formal published attachments; [R189's delta](records/R189_Higher_Arity_Context_Access_20261009/PUBLICATION_COVERAGE_UPDATE.json) records no new coverage and a CONTINUE_RESEARCH decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
+Current non-deductive coverage entry: [UCT-PUB-v1.0.5](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs and reconciles formal published attachments; [R193's delta](records/R193_Nonreport_Contrast_Identifiability_20261009/PUBLICATION_COVERAGE_UPDATE.json) records no new coverage and a CONTINUE_RESEARCH decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
 
 [ONLINE-AC-PROBE-20261009](records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md) is a locally reviewed pending checkpoint; AC/IL also remain pending. No new whole-map semantic release is claimed by this coverage update. Existing science bytes and all open obligations are unchanged.
 
@@ -23,3 +23,7 @@ R191 reuses the exact verified v1.1.2 baseline and traverses all 1,608 review ob
 ## R192 post-release compatibility note
 
 R192 restores the exact verified v1.1.2 baseline and traverses all 1,608 review objects before testing its disabled 9/6/4 candidate. Unique IDs, reference resolution, simultaneous `all_of` premises, same-instance bindings and acyclicity pass. Node-by-node review preserves current/history/complete signature levels and separates actual path use from diagnostic evidence. The pass does not validate C1 empirically, establish a complete real signature, identify `B_fam`, or close a reviewer item. See [R192 MAP_AUDIT.md](records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_AUDIT.md).
+
+## R193 post-release compatibility note
+
+R193 restores and hash-verifies all 82 v1.1.2 capsule members, loads the 913/424/261/10 graph and all 1,608 review items, then tests its disabled 9/6/5 candidate. All references, simultaneous `all_of` packages, same-instance bindings, concept/quantifier/scope fields and the combined DAG pass. This does not orient the experiential pole, validate a marker, establish actual H/U membership, identify `B_fam`, close review items or activate R193. See [R193 MAP_AUDIT.md](records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_AUDIT.md).
