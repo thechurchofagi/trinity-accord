@@ -1,0 +1,27 @@
+{
+  "schema": "uct-r199-run-receipt/1",
+  "research_id": "R199-CPC-20261010",
+  "completed_map": "UCT-MAP-v1.1.2",
+  "base_remote_commit": "c3d2d5cbad3327b74f216022290ae86fbb294c24",
+  "content_remote_commit": "4b1fc310a85e7cd58bac9d060e0b891991dd084d",
+  "content_commit_remote_readback": true,
+  "exact_results": {
+    "operational_machine_state_instances": 512,
+    "intervention_words": 31,
+    "complete_clone_trace_comparisons": 15872,
+    "complete_clone_trace_mismatches": 0,
+    "state_sensitive_machine_state_instances": 384
+  },
+  "map_audit": {
+    "base_counts": [913, 424, 261, 10],
+    "review_items": 1608,
+    "candidate_counts": [8, 5, 5],
+    "checks": 19,
+    "all_structural_checks_pass": true,
+    "candidate_enabled": false
+  },
+  "publication_coverage": "UCT-PUB-v1.0.11",
+  "standalone_decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+  "open_review_items": ["QC-20261008-10", "IA-QC11", "QC-20261008-12", "QC-20261008-13"],
+  "next_question": "Identify and preregister one independently signed marker of H and cross it with instrumented retained-route use/bypass, with bridge-falsifying result patterns."
+}

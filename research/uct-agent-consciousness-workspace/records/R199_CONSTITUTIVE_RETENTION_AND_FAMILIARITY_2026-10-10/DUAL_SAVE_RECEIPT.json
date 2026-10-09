@@ -1,0 +1,48 @@
+{
+  "schema": "uct-r199-dual-save-receipt/1",
+  "research_id": "R199-CPC-20261010",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "base_commit": "c3d2d5cbad3327b74f216022290ae86fbb294c24",
+    "content_commit": "4b1fc310a85e7cd58bac9d060e0b891991dd084d",
+    "content_commit_verified": true,
+    "verified_paths": [
+      "research/uct-agent-consciousness-workspace/CURRENT_STATE.json",
+      "research/uct-agent-consciousness-workspace/records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/RESEARCH_NOTE.md",
+      "research/uct-agent-consciousness-workspace/records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_COMPATIBILITY_AUDIT.json"
+    ],
+    "persistence_receipt_commit": null,
+    "final_close_commit": null
+  },
+  "library": {
+    "master": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "version": 59,
+      "bytes": 640847,
+      "sha256": "f26276c4b1ee44be7262b04b08f27ffeeb404ea82dcc3969b4cff125e9749a20",
+      "download_byte_verified": true,
+      "final_receipt_version_pending": true
+    },
+    "increment": {
+      "library_file_id": "libfile_6f9e5bc7f63c8191b4e0132a5dd7fe76",
+      "version": 0,
+      "bytes": 93348,
+      "sha256": "269e81cef9d1807415f8d6e1fda5cef6985e4f3bf6979b0c8cd94a7a3c14dfdc",
+      "download_byte_verified": true,
+      "zip_integrity_verified": true,
+      "scope": "Increment relative to c3d2d5cbad3327b74f216022290ae86fbb294c24; not a complete repository, working set, or history."
+    },
+    "manifest": {
+      "library_file_id": "libfile_2c639b8e4e6c81919e01a507a4e7579d",
+      "version": 0,
+      "bytes": 7503,
+      "sha256": "55144d91f1516d6e0f3ff7070c274d89d63f6c438615f49e1926ea1fd0b61610",
+      "download_byte_verified": true
+    }
+  },
+  "latest_completed_step": "Content commit and first master-handoff version plus byte-verified increment and manifest saved.",
+  "remaining_step": "Write GitHub persistence receipt commit; replace fixed master with that commit and final receipts; write final GitHub close commit.",
+  "failures": ["Direct git HTTPS push lacked credentials; authorized GitHub connector succeeded with expected-SHA update."],
+  "recovery": "Fetch latest branch head. If persistence_receipt_commit/final_close_commit or final master version is null, resume the two-phase receipt closure without repeating the science."
+}

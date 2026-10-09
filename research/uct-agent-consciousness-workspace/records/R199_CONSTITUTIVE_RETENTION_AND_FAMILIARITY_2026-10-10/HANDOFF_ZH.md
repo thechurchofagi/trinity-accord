@@ -34,6 +34,10 @@ R199 没有重复 R173 的保持绑定或 R192 的完整双胞胎结论，而是
 
 ## 保存与恢复
 
-持久化提交、固定主交接版本、增量包 ID 和哈希在本轮最终闭环后写入 `DUAL_SAVE_RECEIPT.json` 与本文件。本增量不等于完整仓库、完整工作集或全部历史。
+- GitHub 内容提交：`4b1fc310a85e7cd58bac9d060e0b891991dd084d`，已回读提交对象与三个关键文件。
+- 固定主交接：同一 Library ID `libfile_4175a81748fc819187fa8f5771f056fa`，版本 59，640,847 字节，SHA256 `f26276c4b1ee44be7262b04b08f27ffeeb404ea82dcc3969b4cff125e9749a20`；已下载逐字节核验。含完整双份收据的下一版本待写入并以 Library 返回为准。
+- R199 增量 ZIP：Library ID `libfile_6f9e5bc7f63c8191b4e0132a5dd7fe76`，版本 0，93,348 字节，SHA256 `269e81cef9d1807415f8d6e1fda5cef6985e4f3bf6979b0c8cd94a7a3c14dfdc`；已下载逐字节核验且 ZIP 完整。
+- 独立清单：Library ID `libfile_2c639b8e4e6c81919e01a507a4e7579d`，版本 0，7,503 字节，SHA256 `55144d91f1516d6e0f3ff7070c274d89d63f6c438615f49e1926ea1fd0b61610`；已下载逐字节核验。
+- 增量相对 R198 最终提交 `c3d2d5cbad3327b74f216022290ae86fbb294c24`，包含 29 个变更仓库文件及 README/内置清单；不是完整仓库、完整工作集或全部历史。
 
 恢复时先获取分支最新头，按总指导顺序读入口、R199 `CURRENT_HANDOFF.md`、审查台账和固定源；运行 `check_continuation_probe.py --output EXACT_RESULTS.json --horizon 4`，再从 v1.1.2 胶囊恢复有效图并运行 `audit_map_compatibility.py`。先补齐任何未成功的持久化，再进入下一问题。
