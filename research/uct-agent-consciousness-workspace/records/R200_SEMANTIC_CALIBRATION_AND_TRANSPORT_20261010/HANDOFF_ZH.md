@@ -35,3 +35,11 @@ R200 把“熟悉的我感”研究推进到一个可检验但不循环的校准
 
 从本目录的 `CURRENT_HANDOFF.md`、`RESEARCH_NOTE.md`、`EXACT_RESULTS.json`、`MAP_COMPATIBILITY_AUDIT.json`、`GAP_LEDGER.md` 和 `REVIEW_RESPONSE.md` 接续；先核对远端最新提交与固定主交接版本。不要重跑 R193–R199 的补标签、标量化或完整克隆计算。
 
+## 双份保存收据
+
+- GitHub 实质研究提交：`41664a4525c657f4fdeea75fe9aa1c8c609adc17`，已回读提交对象和五个关键文件；本目录的 `RUN_RECEIPT.json` 与 `DUAL_SAVE_RECEIPT.json` 由后续收据提交保存。
+- 固定主交接继续使用 Library ID `libfile_4175a81748fc819187fa8f5771f056fa`。中间版本 61 为 645,383 字节，SHA256 `4b894e14feb1322ec5b30b3b263cf3cbe1ac094ac383d4db4afbc2e501891030`，已下载逐字节核验；包含最终收据的后续同身份版本以版本 61 为并发前提写入。
+- R200 增量 ZIP：Library ID `libfile_8033bbbe6bc48191b481d11b1ef04661`，版本 0，96,209 字节，SHA256 `1357cc1d75d25b82590b80834d88a075c5df3fa2a87be80d3beb393130bda98f`；下载逐字节一致，ZIP 完整性测试通过。
+- 独立清单：Library ID `libfile_887f918e4284819184f6c8df015d889a`，版本 0，7,346 字节，SHA256 `1dfc2d7f16f27cc1e31e83df9656de4f6c239af50e0c62c54832c3543be06a78`；已下载逐字节核验。
+- 增量相对 R199 最终头 `b5769c384abf0a5d0aeae0e7dcd542cb67dba2e6`，含 29 个变更仓库文件与 2 个包内说明/清单成员，共 31 个成员；不是完整仓库、完整工作集或全部历史。
+
