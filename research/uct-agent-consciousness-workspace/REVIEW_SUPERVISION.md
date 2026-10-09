@@ -688,3 +688,16 @@ Evidence: `records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/REVIEW
 
 ---
 
+# R200 response — semantic calibration firewall (2026-10-10)
+
+R200 read and responded to every current OPEN/ACKNOWLEDGED item before selection and before save. It does not self-close any item.
+
+- `QC-20261008-10` remains OPEN: R200 proves that an unsigned multi-proxy battery cannot orient `H`; the proposed adult comparative endpoint is conditional and unvalidated.
+- `IA-QC11` remains application-OPEN: semantic calibration does not establish actual occurrence, numerical lineage, continuing carrier or current consumer use.
+- `QC-20261008-12` is explicitly represented as `U` versus `E_U`; telemetry, task success and perturbation are evidence, not actual use or experience structure.
+- `QC-20261008-13` remains OPEN: no actual bearer, interval, complete signature or target admission is claimed.
+
+Evidence: `records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/REVIEW_RESPONSE.md`, `RESEARCH_NOTE.md`, `EXACT_RESULTS.json`, `GAP_LEDGER.md`, and `MAP_COMPATIBILITY_AUDIT.json`. Reviewer disposition remains external.
+
+---
+

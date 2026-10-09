@@ -1,0 +1,11 @@
+# R200 Round Record — Semantic Calibration and Transport
+
+1. **User goal.** Advance UCT's positive account of body/action-related mineness from actual organization while preserving C1, the experience/intelligence/self/report distinctions, overlapping processes, and the absence of a basal-experience threshold or unique extra owner.
+2. **One concrete open question.** Can one predeclared, signed but fallible human endpoint for retentive bodily/action familiarity `H` be calibrated without defining `H` by task success, reward, ownership, agency, route-use telemetry, or marker code, and what additional premises are required before transporting that calibration to no-report episodes?
+3. **Relevant nodes and fixed sources.** UCT I v1.2 C1/U1 and actual-process discipline; TA25 experience/intelligence/self distinctions; R173 `RetBind`; R192 complete-twin invariance; R197 signed endpoint and class-conditional transport; R198 typed `O/G/H/C` profile; R199 continuation-probe ceiling; QC-20261008-10, IA-QC11, QC-20261008-12, and QC-20261008-13.
+4. **Planned addition or correction.** Specify one comparative human `H` endpoint as fallible evidence rather than a definition; cross formation with instrumented route use/bypass; derive exact identification/falsification conditions; test report-label, value, success, ownership/agency, copy/switch, and domain-transport countermodels. If the candidate cannot satisfy these conditions, reject or restrict it rather than naming a proxy `H`.
+5. **Deliverable.** English research note, claim/gap/source ledgers, thought-experiment matrix, exact finite checker and results, disabled map candidate plus whole-map compatibility audit, review responses, Chinese handoff, work log, publication-coverage update, and verified two-destination recovery receipts.
+
+## Direction check after selection
+
+PASS with limits. The question directly targets the missing experience-internal familiarity bridge. A report may orient a fallible marker in verbal humans but cannot constitute basal experience or silently transfer to infants, animals, artificial systems, or the current assistant. Actual route use, evidence of use, a particular experience, and a linguistic judgment remain separate.

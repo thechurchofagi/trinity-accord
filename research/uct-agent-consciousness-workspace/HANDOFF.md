@@ -1,3 +1,19 @@
+# Latest research checkpoint — R200; completed map remains UCT-MAP-v1.1.2
+
+Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R200 Chinese handoff](records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/HANDOFF_ZH.md).
+
+R200 proves that an unsigned battery of reports, telemetry, outcomes or objective markers cannot self-anchor retentive familiarity `H`: complementing the latent target and swapping class-conditional laws leaves the observed law unchanged. Exact checks cover 768 four-proxy models with zero mismatches. A predeclared signed comparative human endpoint can conditionally orient only the calibration domain; equal marginals do not justify no-report transport.
+
+A formation-by-actual-use design remains useful as a bridge test but not as an `H` definition. Five of 16 Boolean response tables have positive interactions, including a shared-success confound with fixed `H`. The next pilot therefore separates response-key direction, success/fluency, verified route bypass, ownership, agency and held-out marker validation. Completed counts remain 913/424/261 with 10 suspended rules and 1,608 review items. R200's 9/5/5 candidate is disabled; UCT-PUB-v1.0.12 is nondeductive.
+
+R200 artifacts: [note](records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/RESEARCH_NOTE.md), [results](records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/EXACT_RESULTS.json), [claims](records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/CLAIM_LEDGER.md), [gaps](records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/GAP_LEDGER.md), [thought experiments](records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/THOUGHT_EXPERIMENT_MATRIX.md), [map audit](records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_AUDIT.md), and [review response](records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/REVIEW_RESPONSE.md).
+
+Next: design the reporting-adult pilot and attack each candidate marker with response-key reversal, success/fluency dissociation and actual route bypass. Do not repeat the unsigned complement enumeration or treat agreement as semantics.
+
+---
+
+## Superseded R199 checkpoint (retained)
+
 # Latest research checkpoint — R199; completed map remains UCT-MAP-v1.1.2
 
 Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R199 Chinese handoff](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/HANDOFF_ZH.md).

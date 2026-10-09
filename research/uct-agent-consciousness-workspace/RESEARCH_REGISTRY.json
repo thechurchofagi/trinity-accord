@@ -318,14 +318,27 @@
       "novelty": "UCT_SPECIFIC_EVIDENTIAL_CEILING_AND_EXPERIMENT_CONTRACT_PRIORITY_UNVERIFIED",
       "compatibility_audit": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/HANDOFF_ZH.md"
+    },
+    {
+      "research_id": "R200-SCF-20261010",
+      "result_version": "SCF-RESULT-v0.1.0",
+      "title": "The Semantic Calibration Firewall for Retentive Familiarity",
+      "source": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.12",
+      "novelty": "UCT_SPECIFIC_SEMANTIC_CALIBRATION_FIREWALL_PRIORITY_UNVERIFIED",
+      "compatibility_audit": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/HANDOFF_ZH.md"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.11",
+    "version": "UCT-PUB-v1.0.12",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },

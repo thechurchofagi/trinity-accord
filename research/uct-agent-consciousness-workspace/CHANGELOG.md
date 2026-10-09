@@ -1,3 +1,15 @@
+# R200-SCF-20261010 — 2026-10-10 — disabled research checkpoint
+
+Establishes a semantic calibration firewall for retentive familiarity `H`. Exact enumeration checks 768 four-proxy latent models and finds zero complement mismatches; a signed endpoint condition excludes complement only within its calibration domain; equal marginals can transport a reversed conditional direction; and five of 16 Boolean formation/use tables have positive interactions, including shared-success confounds with fixed `H`. Candidate 9/5/5 is structurally compatible and disabled; no endpoint, actual route application or reviewer item is closed. Coverage advances nondeductively to UCT-PUB-v1.0.12; no publication action.
+
+---
+
+# R199-CPC-20261010 — 2026-10-10 — disabled research checkpoint
+
+Applies standard continuation/state-sufficiency reasoning to the retentive-familiarity program. Exact two-state enumeration gives 15,872 complete-clone trace comparisons and zero mismatches; a continuation contrast can refute a declared current clone but cannot alone identify lineage, `RetBind` or `H`. Adds a formation-by-instrumented-use experiment contract and explicit test/use separation. Candidate 8/5/5 is structurally compatible and disabled; all actual and semantic applications remain open. Coverage advances nondeductively to UCT-PUB-v1.0.11; no publication action.
+
+---
+
 # R194-CPP-20261009 — 2026-10-09 — disabled research checkpoint
 
 Proves the finite `2^c` polarity count for signed comparison graphs and applies it to three populations with two prospectively related marker channels each. Connected relative alignment leaves a global complement pair; a marker convention fixes only numeric coding, not familiar-mineness semantics. Exact checker covers 128 assignments per instance and all 64 signed-tree parity instances. Candidate 9/6/5 is structurally compatible and disabled; substantive target anchor, actual installation/use and reviewer disposition remain open. Publication coverage advances nondeductively to UCT-PUB-v1.0.6; no publication action.

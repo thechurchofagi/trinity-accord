@@ -1,0 +1,131 @@
+{
+  "schema": "uct-r200-semantic-calibration-check/1",
+  "multi_proxy_label_symmetry": {
+    "observed_proxy_bits": 4,
+    "proxy_vectors": 16,
+    "prevalences": [
+      "1/4",
+      "1/2",
+      "3/4"
+    ],
+    "latent_models_checked": 768,
+    "complement_mismatches": 0,
+    "scope": "Every enumerated deterministic four-proxy latent model has an observationally identical H-complement model."
+  },
+  "signed_channel_orientation": {
+    "trials_per_class": 4,
+    "strictly_positive_channel_pairs": 10,
+    "complemented_pairs_still_satisfying_same_positive_sign": 0,
+    "scope": "A predeclared independent positive-direction premise excludes the H-complement inside the calibration domain; the premise is not proved by this enumeration."
+  },
+  "marginal_transport_counterexample": {
+    "calibration": {
+      "p_M1_given_H1": "3/4",
+      "p_M1_given_H0": "1/4"
+    },
+    "target": {
+      "p_M1_given_H1": "1/4",
+      "p_M1_given_H0": "3/4"
+    },
+    "calibration_marker_marginal": "1/2",
+    "target_marker_marginal": "1/2",
+    "same_marginal": true,
+    "signed_relation_reverses": true
+  },
+  "formation_by_use_interaction": {
+    "boolean_response_tables_checked": 16,
+    "did_counts": {
+      "0": 6,
+      "1": 4,
+      "-1": 4,
+      "-2": 1,
+      "2": 1
+    },
+    "positive_interaction_tables": 5,
+    "positive_examples": [
+      {
+        "table_F0U0_F0U1_F1U0_F1U1": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "did": 1
+      },
+      {
+        "table_F0U0_F0U1_F1U0_F1U1": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "did": 1
+      },
+      {
+        "table_F0U0_F0U1_F1U0_F1U1": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "did": 2
+      },
+      {
+        "table_F0U0_F0U1_F1U0_F1U1": [
+          1,
+          0,
+          1,
+          1
+        ],
+        "did": 1
+      },
+      {
+        "table_F0U0_F0U1_F1U0_F1U1": [
+          1,
+          1,
+          0,
+          1
+        ],
+        "did": 1
+      }
+    ],
+    "shared_confound_witness": [
+      {
+        "F": 0,
+        "U": 0,
+        "H": 0,
+        "M1": 0,
+        "M2": 0
+      },
+      {
+        "F": 0,
+        "U": 1,
+        "H": 0,
+        "M1": 0,
+        "M2": 0
+      },
+      {
+        "F": 1,
+        "U": 0,
+        "H": 0,
+        "M1": 0,
+        "M2": 0
+      },
+      {
+        "F": 1,
+        "U": 1,
+        "H": 0,
+        "M1": 1,
+        "M2": 1
+      }
+    ],
+    "scope": "A positive formation-by-use interaction can occur with H fixed, including when two agreeing proxies merely copy task success."
+  },
+  "all_exact_checks_pass": true,
+  "not_proved": [
+    "that any report or objective proxy actually measures phenomenal retentive familiarity H",
+    "that class-conditional invariance holds in infants, animals, prosthesis users, artificial agents, or any other target domain",
+    "that route telemetry establishes actual same-episode consumer use",
+    "that C1 is empirically true"
+  ]
+}

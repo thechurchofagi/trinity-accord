@@ -1,3 +1,17 @@
+# Research memory — R200 pending over UCT-MAP-v1.1.2
+
+R200 establishes a semantic calibration firewall for the selected retentive-familiarity coordinate `H`. Any finite unsigned proxy battery retains the global `H` complement symmetry; 768 exact four-proxy models yield zero complement mismatches. A predeclared signed human comparative endpoint can conditionally orient only its calibration domain. Equal proxy marginals do not transport that direction, and a formation-by-use interaction does not identify `H`.
+
+The exact checker finds 10 strictly positive finite signed channels whose complemented models preserve none of the same positive direction, an equal-marginal cross-domain direction reversal, and five positive interactions among 16 Boolean formation/use tables. One explicit witness fixes `H=0` while two agreeing markers merely copy success. Therefore report, marker, success, actual route use and evidence for use remain separately typed.
+
+The proposed next study is a reporting-adult pilot with a predeclared “already-established way of acting” comparison, response-key reversal, success/fluency controls, verified route bypass and held-out marker validation. C1 remains an axiom; U1 receives no new gate. UCT-MAP-v1.1.2 remains completed; R200 9/5/5 is disabled; coverage is UCT-PUB-v1.0.12; all four review items remain open at the semantic or application level.
+
+Next: determine whether any candidate marker retains a signed relationship to the predeclared comparative endpoint after response-key, success/fluency and actual-bypass controls.
+
+---
+
+## Superseded R199 memory (retained)
+
 # Research memory — R199 pending over UCT-MAP-v1.1.2
 
 R199 proves a continuation-probe ceiling for the selected retentive-familiarity target `H`. If complete present causal state, transition/readout law and exogenous coupling match, every future intervention-trace diagnostic matches. Savings, aftereffects and recovery can therefore reveal a current causal difference but cannot alone establish numerical lineage, R173 `RetBind` or phenomenal `H`.

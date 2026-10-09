@@ -1,0 +1,26 @@
+{
+  "record_id": "R200-PUB-COVERAGE-20261010-v1",
+  "base_completed_map_version": "UCT-MAP-v1.1.2",
+  "previous_coverage_version": "UCT-PUB-v1.0.11",
+  "new_coverage_version": "UCT-PUB-v1.0.12",
+  "checked_publication_sources": [
+    {"work_id":"UCT-PUB-v1.0.0-VERIFIED-CORPUS","scope":"Frozen internal census plus UCT I, TA25, R173 and R197-R199 overlap comparison."},
+    {"work_id":"WHITTLESEA-WILLIAMS-2000","doi":"10.1037/0278-7393.26.3.547","scope":"Primary discrepancy-attribution familiarity evidence; warns against fluency identity."},
+    {"work_id":"SIDARUS-ET-AL-2017","doi":"10.3389/fpsyg.2017.00545","scope":"Primary prospective agency study; action-selection fluency is one cue among stronger feedback cues."},
+    {"work_id":"WESER-PROFFITT-2019","doi":"10.3389/fnhum.2018.00537","scope":"Primary tool-embodiment study; proprioceptive drift depends on input-output matching."},
+    {"work_id":"R199-PROSTHESIS-AND-MOTOR-SOURCES","scope":"Previously scoped longitudinal use and motor-retention evidence; motivates design but does not validate H."}
+  ],
+  "changed_claim_ids": ["R200-C1", "R200-C2", "R200-C3", "R200-C4", "R200-C5"],
+  "newly_covered_claim_ids": [],
+  "uncovered_candidates_within_verified_corpus": ["R200-C4", "R200-C5"],
+  "residual_assessment": {
+    "precise_problem": "How can a signed but fallible human H endpoint calibrate an objective marker without defining H by report, success, fluency or route telemetry, and under what premise can it be used in a no-report domain?",
+    "net_increment_after_subtraction": "A UCT-specific semantic calibration firewall: arbitrary unsigned proxy batteries retain H-complement symmetry; an independent signed endpoint orients only its calibration domain; class-conditional transport and actual-use grounding are separately required; a formation-by-use interaction is a falsifiable bridge test but not identification.",
+    "closest_predecessors": ["latent-label switching and measurement invariance", "difference-in-differences confounding", "familiarity attribution literature", "UCT I", "TA25", "R173", "R197", "R198", "R199"],
+    "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+    "next_specific_action": "Run or design a reporting-adult pilot with predeclared comparative H judgment, response-key reversal, success/fluency control, actual route bypass and held-out signed-marker validation."
+  },
+  "map_semantics_changed": false,
+  "warning": "Label symmetry, measurement invariance and factorial-confounding mathematics are prior work; absence of the exact UCT interface synthesis from checked sources is not worldwide priority."
+}
+

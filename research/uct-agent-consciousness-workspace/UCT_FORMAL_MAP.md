@@ -10,7 +10,7 @@ See [the full review](versions/UCT-MAP-v1.1.2/audit/WHOLE_MAP_SEMANTIC_REVIEW_RE
 
 ## Publication coverage and latest pending research
 
-Current non-deductive coverage entry: [UCT-PUB-v1.0.11](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs, reconciles formal published attachments, and assesses residual knowledge separately from validity. [R199's delta](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json) records no newly covered claim and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
+Current non-deductive coverage entry: [UCT-PUB-v1.0.12](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs, reconciles formal published attachments, and assesses residual knowledge separately from validity. [R200's delta](records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/PUBLICATION_COVERAGE_UPDATE.json) records no newly covered claim and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
 
 [ONLINE-AC-PROBE-20261009](records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md) is a locally reviewed pending checkpoint; AC/IL also remain pending. No new whole-map semantic release is claimed by this coverage update. Existing science bytes and all open obligations are unchanged.
 
@@ -52,3 +52,7 @@ R198 proposes 8 nodes, 5 rules and 5 context links that type ownership, agency, 
 # Latest pending disabled checkpoint — R199-CPC-20261010
 
 R199 proposes 8 nodes, 5 rules and 5 context links for the continuation-probe ceiling, lineage non-identification, use/evidence separation and a corrected formation-by-use experiment contract. The full v1.1.2 graph and all 1,608 review objects were traversed; all 19 structural checks pass. R199 is disabled and does not change completed counts or hashes. Coverage is UCT-PUB-v1.0.11.
+
+# Latest pending disabled checkpoint — R200-SCF-20261010
+
+R200 proposes 9 nodes, 5 rules and 5 context links for multi-proxy non-self-anchoring, conditional signed calibration, class-conditional transport, formation-by-use nonidentification and the semantic calibration firewall. The full v1.1.2 graph and all 1,608 review objects were traversed; all 19 structural checks pass. R200 is disabled and does not change completed counts or hashes. Coverage is UCT-PUB-v1.0.12.
