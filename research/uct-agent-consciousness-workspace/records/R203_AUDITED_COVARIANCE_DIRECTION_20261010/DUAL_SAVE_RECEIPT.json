@@ -36,5 +36,24 @@
   ],
   "zip_integrity": "PASS",
   "scope": "31-file content increment, not full backup; this final receipt is subsequent and outside increment",
-  "verified_utc": "2026-10-09T22:47:04.021121+00:00"
+  "verified_utc": "2026-10-09T22:47:04.021121+00:00",
+  "post_save_reconciliation": {
+    "remote_parent": "be8c5493035cd48323fd29442b7c8d7edbbe8b33",
+    "remote_commit": "810942190725948525c99913e073abceaac18aba",
+    "remote_tree": "a43fdca3cc07b5ca45270ba9e64e7599f517c38c",
+    "remote_tree_equals_validated_local_tree": "PASS",
+    "file_count": 10,
+    "fixed_master_version": 68,
+    "fixed_master_bytes": 661350,
+    "fixed_master_sha256": "f0429ac02653dca18caa793656b64d308922c35d7ece5d32151e6ea8e3d8443b",
+    "reconciliation_increment_id": "libfile_f8cc54a68ba481919c6d9634518c5ea3",
+    "reconciliation_increment_bytes": 76500,
+    "reconciliation_increment_sha256": "dfec5bf871a28c2e03e7e7b8c009cf18da998755e009f99756ab6eec697a0c3e",
+    "reconciliation_manifest_id": "libfile_32c00aa14afc8191882988e2632527a5",
+    "reconciliation_manifest_bytes": 2473,
+    "reconciliation_manifest_sha256": "9ada8d385b08427454b8a5ae4755f3715c89725c10736ed16e51cf427746caae",
+    "library_exact_byte_readback": "PASS",
+    "reconciliation_zip_integrity": "PASS",
+    "scope": "Ten-file post-save reconciliation delta; not a full repository, working-set, or history backup."
+  }
 }
