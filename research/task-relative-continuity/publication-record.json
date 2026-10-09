@@ -1,0 +1,46 @@
+{
+  "boundary": "Use actual public PDF SHA for OTS; historical local rebuild may have nondeterministic PDF bytes",
+  "doi": "10.5281/zenodo.23251651",
+  "files": [
+    {
+      "bytes": 37131,
+      "name": "Task_Relative_Continuity_v1.0.0.md",
+      "sha256": "e368150bee05f7501021f826970f358521da685c3eddcd48ff7fbefd69bc7a62"
+    },
+    {
+      "bytes": 414,
+      "name": "README-LICENSE.txt",
+      "sha256": "ee356520cc5f7c532f96b1cef6e2212dbfc35d75e749ef2a5569d8f35adad77c"
+    },
+    {
+      "bytes": 108986,
+      "name": "RT_TH_Reproducibility_v1.0.0.zip",
+      "sha256": "83c0050bfdddff7ac94cf716db107e6f63ef09d9d6b04cd74ead0be4adcb860b"
+    },
+    {
+      "bytes": 113610,
+      "name": "Task_Relative_Continuity_v1.0.0.pdf",
+      "sha256": "18a4914635c2853ed089df137cb6b21024ed70f7d6dd0fe071a6da2dd5ca38af"
+    },
+    {
+      "bytes": 358,
+      "name": "citation.bib",
+      "sha256": "4549683de528631cbc359942910fd56209f67f6a98b4928d2e00f4a8a55de04a"
+    }
+  ],
+  "frozen_build_mismatches": [
+    "Task_Relative_Continuity_v1.0.0.md",
+    "README-LICENSE.txt",
+    "RT_TH_Reproducibility_v1.0.0.zip",
+    "Task_Relative_Continuity_v1.0.0.pdf",
+    "citation.bib"
+  ],
+  "peer_reviewed": false,
+  "public_file_readback_pass": true,
+  "record_id": 23251651,
+  "report_number": "RT20261009",
+  "state": "PUBLISHED_PUBLIC_READBACK_PASS_WITH_FROZEN_BUILD_DIFF",
+  "submitted": true,
+  "title": "Task-Relative Continuity Through Changing Representations: Reversible Handoffs, Route Ambiguity, and the Limits of Stable Readout",
+  "version": "1.0.0"
+}
