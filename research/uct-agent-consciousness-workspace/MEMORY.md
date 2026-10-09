@@ -12,3 +12,7 @@ Next: define and attack one nonverbal predeclared positive `F` endpoint that is 
 # 2026-10-10 — R197 fallible endpoint orientation
 
 R197 corrected the R196 request for a “nonverbal positive endpoint.” Modality is neither necessary nor sufficient. A binary complement is conditionally oriented only by independently fixed target semantics plus independently warranted signed reliability; unsigned channels remain label-symmetric. Cross-domain/nonreport use requires class-conditional invariance, not equal marginals. No actual endpoint, route, complete organization or phenomenal target has been admitted. R197 remains disabled and all four open review items remain open.
+
+# 2026-10-10 — R198 self-profile non-scalarization
+
+R198 showed that the R193–R197 orientation program presupposes target selection. Ownership, agency, retentive familiarity and current practical coupling are typed relations and do not determine one global familiar-mineness bit. In the four-coordinate binary audit domain, fixed endpoints plus monotonicity leave 166 nonconstant scalarizations; crossed profiles receive every possible aggregate label pair. The immediate target is therefore narrowed to retentive familiarity `H`, with `O/G` as dissociation controls and actual `C` as an organizational candidate bridge. No endpoint, actual token or aggregation is validated. R198 remains disabled; all four open review items remain open.

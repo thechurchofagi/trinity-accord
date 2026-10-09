@@ -1,0 +1,25 @@
+{
+  "record_id": "R198-PUB-COVERAGE-20261010-v1",
+  "base_completed_map_version": "UCT-MAP-v1.1.2",
+  "previous_coverage_version": "UCT-PUB-v1.0.9",
+  "new_coverage_version": "UCT-PUB-v1.0.10",
+  "checked_publication_sources": [
+    {"work_id":"UCT-PUB-v1.0.0-VERIFIED-CORPUS","scope":"Frozen internal census plus TA15, TA19 and R193-R197 overlap comparison."},
+    {"work_id":"KALCKERT-EHRSSON-2012","doi":"10.3389/fnhum.2012.00040","scope":"Primary ownership/agency double dissociation; no UCT retentive-familiarity scalarization result."},
+    {"work_id":"LONGO-ET-AL-2008","doi":"10.1016/j.cognition.2007.12.004","scope":"Primary multidimensional psychometric embodiment result; factor structure is not a UCT ontology."},
+    {"work_id":"ABDULKARIM-ET-AL-2023","pmcid":"PMC10072298","scope":"Primary behavioral/neural ownership-agency study; convergence only."},
+    {"work_id":"CRONE-KALLEN-2024","pii":"S2451958824000551","scope":"Recent multidimensional virtual-embodiment psychometrics; no UCT scalarization theorem."}
+  ],
+  "changed_claim_ids": ["R198-C1", "R198-C2", "R198-C3", "R198-C4", "R198-C5"],
+  "newly_covered_claim_ids": [],
+  "uncovered_candidates_within_verified_corpus": ["R198-C1", "R198-C4"],
+  "residual_assessment": {
+    "precise_problem": "Does the endpoint-orientation program presuppose a unique global familiar-mineness scalar despite dissociable typed self-relations?",
+    "net_increment_after_subtraction": "A UCT interface correction and exact finite witness: target selection precedes complement orientation; endpoint-fixed monotonicity admits 166 four-coordinate scalarizations, so retentive familiarity must be studied as a typed coordinate rather than an inferred global aggregate.",
+    "closest_predecessors": ["multidimensional bodily-self literature", "standard Dedekind-number combinatorics", "TA15", "TA19", "R193-R197"],
+    "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+    "next_specific_action": "Design a habitual-versus-novel perturbation that targets H while measuring O, G and actual C separately, with copy/switch and demand-matching falsifiers."
+  },
+  "map_semantics_changed": false,
+  "warning": "Multidimensional embodiment and monotone Boolean counts are prior work; absence of this exact UCT interface statement from checked sources is not worldwide priority."
+}

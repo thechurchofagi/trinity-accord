@@ -1,3 +1,19 @@
+# Latest research checkpoint — R198; completed map remains UCT-MAP-v1.1.2
+
+Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R198 Chinese handoff](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/HANDOFF_ZH.md).
+
+R198 corrects a hidden target assumption in R193–R197. Ownership `O`, agency `G`, retentive familiarity `H`, and current practical coupling `C` are typed coordinates, not automatically one global familiar-mineness bit. Exact enumeration finds 166 endpoint-fixed nonconstant monotone scalarizations in the four-coordinate binary audit domain; crossed profiles receive every possible label pair. R197's orientation theorem therefore applies only after a target has been selected and typed.
+
+The completed map remains 913/424/261 with 10 suspended rules and 1,608 review items. R198's 8/5/5 candidate is disabled. QC10, IA-QC11, QC12 and QC13 remain open. Publication coverage is nondeductive UCT-PUB-v1.0.10; decision `CONTINUE_RESEARCH_HOLD_STANDALONE`.
+
+R198 artifacts: [note](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/RESEARCH_NOTE.md), [results](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/EXACT_RESULTS.json), [claims](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/CLAIM_LEDGER.md), [gaps](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/GAP_LEDGER.md), [thought experiments](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/THOUGHT_EXPERIMENT_MATRIX.md), [map audit](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_AUDIT.md), and [review response](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/REVIEW_RESPONSE.md).
+
+Next: design a matched habitual-versus-novel action perturbation targeting `H`, with `O/G` dissociation controls, actual online-correction evidence for `C`, and copy/switch plus demand-matching falsifiers. Do not substitute an aggregate score or task success for `H` or actual route use.
+
+---
+
+## Superseded R196 checkpoint (retained)
+
 # Latest research checkpoint — R196; completed map remains UCT-MAP-v1.1.2
 
 Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R196 Chinese handoff](records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md).

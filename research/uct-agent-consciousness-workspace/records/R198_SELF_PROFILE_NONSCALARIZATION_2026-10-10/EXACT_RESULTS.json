@@ -1,0 +1,115 @@
+{
+  "schema": "uct-r198-self-profile-check/1.0",
+  "result_id": "R198-SPNS-RESULT-v0.1.0",
+  "status": "PASS_DECLARED_FINITE_COMBINATORICS_ONLY",
+  "coordinate_order": [
+    "body_ownership",
+    "action_agency",
+    "retentive_familiarity",
+    "current_practical_coupling"
+  ],
+  "enumeration": {
+    "2": {
+      "all_monotone": 6,
+      "endpoint_fixed_nonconstant": 4,
+      "coordinate_permutation_invariant": 2
+    },
+    "3": {
+      "all_monotone": 20,
+      "endpoint_fixed_nonconstant": 18,
+      "coordinate_permutation_invariant": 3
+    },
+    "4": {
+      "all_monotone": 168,
+      "endpoint_fixed_nonconstant": 166,
+      "coordinate_permutation_invariant": 4
+    }
+  },
+  "two_axis_incomparable_profile_outcomes": {
+    "00": 1,
+    "10": 1,
+    "01": 1,
+    "11": 1
+  },
+  "four_axis_incomparable_profile_outcomes": {
+    "00": 47,
+    "10": 36,
+    "01": 36,
+    "11": 47
+  },
+  "symmetric_four_axis_threshold_vectors_by_positive_count_0_to_4": [
+    [
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      1,
+      1
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1
+    ]
+  ],
+  "total_truth_tables_examined": 65808,
+  "checks": [
+    {
+      "id": "R198-T1-ENUM-2D",
+      "pass": true,
+      "cases": 16,
+      "statement": "Exhaustive truth-table enumeration yields 4 nonconstant monotone scalarizations with fixed endpoints in 2 dimensions."
+    },
+    {
+      "id": "R198-T1-ENUM-3D",
+      "pass": true,
+      "cases": 256,
+      "statement": "Exhaustive truth-table enumeration yields 18 nonconstant monotone scalarizations with fixed endpoints in 3 dimensions."
+    },
+    {
+      "id": "R198-T1-ENUM-4D",
+      "pass": true,
+      "cases": 65536,
+      "statement": "Exhaustive truth-table enumeration yields 166 nonconstant monotone scalarizations with fixed endpoints in 4 dimensions."
+    },
+    {
+      "id": "R198-T2-OWNERSHIP-AGENCY-ANTICHAIN",
+      "pass": true,
+      "cases": 4,
+      "statement": "The four admissible 2-D scalarizations realize all four label pairs on ownership-without-agency versus agency-without-ownership profiles."
+    },
+    {
+      "id": "R198-T3-FOUR-AXIS-ANTICHAIN",
+      "pass": true,
+      "cases": 166,
+      "statement": "All four comparative label outcomes remain possible for crossed four-coordinate profiles under admissible monotone scalarizations."
+    },
+    {
+      "id": "R198-T4-SYMMETRY-INSUFFICIENT",
+      "pass": true,
+      "cases": 4,
+      "statement": "Even coordinate-permutation invariance leaves four different nonconstant monotone thresholds in four dimensions."
+    }
+  ],
+  "limitations": [
+    "The result is conditional on a finite binary abstraction and coordinatewise monotonicity.",
+    "The script does not establish that the four coordinates exhaust bodily or action-related self-experience.",
+    "The script neither validates a scalar familiar-mineness variable nor selects an aggregation convention.",
+    "No actual installation, route use, phenomenal state, report reliability, or current-system verdict is established."
+  ]
+}

@@ -1,3 +1,16 @@
+# Current research index — R198 / completed map UCT-MAP-v1.1.2
+
+- R198 note: [Self-Profile Non-Scalarization](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/RESEARCH_NOTE.md)
+- R198 exact model: [results](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/EXACT_RESULTS.json) and [checker](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/check_self_profile.py)
+- R198 controls: [claims](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/CLAIM_LEDGER.md), [gaps](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/GAP_LEDGER.md), [sources](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/SOURCE_SCOPE.md), [thought experiments](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/THOUGHT_EXPERIMENT_MATRIX.md), [review response](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/REVIEW_RESPONSE.md)
+- R198 handoff/audit: [Chinese handoff](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/HANDOFF_ZH.md), [map audit](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_AUDIT.md), [work log](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/WORK_LOG.md)
+
+R198 is the latest checkpoint, not an integrated map release. Its 8-node/5-rule/5-context candidate is disabled; completed counts remain 913/424/261 with 10 suspended rules. UCT-PUB-v1.0.10 is nondeductive. R197 and earlier entries below remain historical navigation.
+
+---
+
+## Superseded R197 index (retained)
+
 # Current research index — R197 / completed map UCT-MAP-v1.1.2
 
 - R197 note: [Fallible Endpoint Orientation](records/R197_Fallible_Endpoint_Orientation_20261010/RESEARCH_NOTE.md)

@@ -1,7 +1,7 @@
 # R198 Round Record — Self-Profile Non-Scalarization
 
 Date: 2026-10-10
-Status: OPENING CHECKPOINT
+Status: SUBSTANTIVE ROUND COMPLETE; PERSISTENCE RECEIPTS PENDING
 
 ## 1. User goal
 

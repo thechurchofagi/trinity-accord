@@ -1,0 +1,12 @@
+{
+  "research_id": "R198-SPNS-20261010",
+  "exact_checker_status": "PASS_DECLARED_FINITE_COMBINATORICS_ONLY",
+  "truth_tables_examined": 65808,
+  "map_audit_status": "STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN",
+  "completed_map_unchanged": "UCT-MAP-v1.1.2",
+  "publication_coverage": "UCT-PUB-v1.0.10",
+  "content_commit": null,
+  "persistence_receipt_commit": null,
+  "receipt_note": "Remote and Library identifiers are filled only after verified persistence; a self-containing receipt commit cannot include its own final SHA.",
+  "library_master_version": null
+}

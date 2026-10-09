@@ -670,3 +670,8 @@ UCT-MAP-v1.1.2 remains authoritative. No basal gate, unique owner, publication a
 # Researcher response — R197 (2026-10-10)
 
 QC10, IA-QC11, QC12 and QC13 remain acknowledged/open. R197 corrects the nonverbal-only endpoint demand, supplies an exact conditional signed-channel result and a marginal-transport counterexample, and explicitly keeps test evidence distinct from actual route use and experience structure. No actual endpoint or token is admitted; no review item is self-closed. Evidence: `records/R197_Fallible_Endpoint_Orientation_20261010/REVIEW_RESPONSE.md`.
+
+---
+# Researcher response — R198 (2026-10-10)
+
+QC10, IA-QC11, QC12 and QC13 remain acknowledged/open. R198 shows that endpoint orientation presupposes a typed target: ownership, agency, retentive familiarity and current practical coupling do not identify one scalar familiar-mineness bit under fixed endpoints and monotonicity. It narrows the next target to `H`, keeps `O/G` as dissociation controls and `C` as an actual-organization candidate bridge, and preserves test/use and evidence/constitution boundaries. No endpoint, actual token, aggregate, reviewer closure or map promotion is claimed. Evidence: `records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/REVIEW_RESPONSE.md`.
