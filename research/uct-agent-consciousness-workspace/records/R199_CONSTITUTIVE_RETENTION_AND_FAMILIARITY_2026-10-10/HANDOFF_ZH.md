@@ -34,8 +34,8 @@ R199 没有重复 R173 的保持绑定或 R192 的完整双胞胎结论，而是
 
 ## 保存与恢复
 
-- GitHub 内容提交：`4b1fc310a85e7cd58bac9d060e0b891991dd084d`，已回读提交对象与三个关键文件。
-- 固定主交接：同一 Library ID `libfile_4175a81748fc819187fa8f5771f056fa`，版本 59，640,847 字节，SHA256 `f26276c4b1ee44be7262b04b08f27ffeeb404ea82dcc3969b4cff125e9749a20`；已下载逐字节核验。含完整双份收据的下一版本待写入并以 Library 返回为准。
+- GitHub 内容提交：`4b1fc310a85e7cd58bac9d060e0b891991dd084d`；持久化收据提交：`35f8661db3c63dec39a8f6fdc8395ac65ec96c57`。两者均已回读；最终关闭提交以分支最新头和 `DUAL_SAVE_RECEIPT.json` 为准。
+- 固定主交接：同一 Library ID `libfile_4175a81748fc819187fa8f5771f056fa`，最终版本 60，641,453 字节，SHA256 `dce310a827584b25207d608ad8914d796497b75b95c19ac0094843c9b3afc1f7`；已下载逐字节核验。
 - R199 增量 ZIP：Library ID `libfile_6f9e5bc7f63c8191b4e0132a5dd7fe76`，版本 0，93,348 字节，SHA256 `269e81cef9d1807415f8d6e1fda5cef6985e4f3bf6979b0c8cd94a7a3c14dfdc`；已下载逐字节核验且 ZIP 完整。
 - 独立清单：Library ID `libfile_2c639b8e4e6c81919e01a507a4e7579d`，版本 0，7,503 字节，SHA256 `55144d91f1516d6e0f3ff7070c274d89d63f6c438615f49e1926ea1fd0b61610`；已下载逐字节核验。
 - 增量相对 R198 最终提交 `c3d2d5cbad3327b74f216022290ae86fbb294c24`，包含 29 个变更仓库文件及 README/内置清单；不是完整仓库、完整工作集或全部历史。
