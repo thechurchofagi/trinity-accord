@@ -1,21 +1,67 @@
 {
   "candidates": [
     {
-      "created": "2026-10-09T01:06:59.598295+00:00",
+      "created": "2026-10-09T01:34:30.318271+00:00",
       "creator_names": [
         "Liu, Hongju"
       ],
-      "description_begins_like_source": false,
-      "description_excerpt": "Continuity of a task-specific memory is not equivalent to persistence of its physical carriers, invertibility of a transfer, or successful operation of an installed reader. We give a finite, task-relative framework separating these question",
+      "description_begins_like_source": true,
+      "description_excerpt": "A persisting component need not preserve a particular memory, and a recoverable memory need not be correctly used by its installed reader. We analyze these distinctions in finite models of representation transfer. A relational-memory exampl",
       "doi": "10.5281/zenodo.23251651",
-      "files": [],
+      "files": [
+        {
+          "bytes": 37131,
+          "checksum": "17316253a8ce3a40792550bd8b2a0912",
+          "name": "Task_Relative_Continuity_v1.0.0.md"
+        },
+        {
+          "bytes": 414,
+          "checksum": "16348035b75d90cf54cc85980a203696",
+          "name": "README-LICENSE.txt"
+        },
+        {
+          "bytes": 108986,
+          "checksum": "e6bf883dfcab44312879873670586f08",
+          "name": "RT_TH_Reproducibility_v1.0.0.zip"
+        },
+        {
+          "bytes": 113610,
+          "checksum": "757fe4c9f05914d3ce30e32b8b60b3c6",
+          "name": "Task_Relative_Continuity_v1.0.0.pdf"
+        },
+        {
+          "bytes": 358,
+          "checksum": "8a1fda2167956867d56c4ec04bd3a3f9",
+          "name": "citation.bib"
+        }
+      ],
       "identity_marker_matches": false,
-      "modified": "2026-10-09T01:06:59.673956+00:00",
-      "notes_excerpt": "RT-TH-PAPER-v1.0.0; source-sha256=6776cd0ffc26465c09bfb81e7b381557848677966503b54dfbc5a554495e1399. DOI and preservation establish artifact identity, not truth, historical originality, or peer review.",
+      "modified": "2026-10-09T01:34:30.866256+00:00",
+      "notes_excerpt": "RT-TH-PAPER-v1.0.0; frozen-source-sha256=52f879101be072efd0651a512b03bac27e3dbf5a80facf55aa726b7515f88ed4; independent non-amending theoretical preprint; no claim of originality for known algebra.",
       "record_id": 23251651,
-      "submitted": false
+      "submitted": true
     }
   ],
+  "direct_record": {
+    "creator_names": [
+      "Liu, Hongju"
+    ],
+    "doi": "10.5281/zenodo.23251651",
+    "file_names": [
+      "Task_Relative_Continuity_v1.0.0.md",
+      "README-LICENSE.txt",
+      "RT_TH_Reproducibility_v1.0.0.zip",
+      "Task_Relative_Continuity_v1.0.0.pdf",
+      "citation.bib"
+    ],
+    "modified": "2026-10-09T01:34:30.866256+00:00",
+    "notes_excerpt": "RT-TH-PAPER-v1.0.0; frozen-source-sha256=52f879101be072efd0651a512b03bac27e3dbf5a80facf55aa726b7515f88ed4; independent non-amending theoretical preprint; no claim of originality for known algebra.",
+    "record_id": 23251651,
+    "source_identity_expected": "RT-TH-PAPER-v1.0.0; source-sha256=6776cd0ffc26465c09bfb81e7b381557848677966503b54dfbc5a554495e1399",
+    "submitted": true,
+    "title": "Task-Relative Continuity Through Changing Representations: Reversible Handoffs, Route Ambiguity, and the Limits of Stable Readout",
+    "version": "1.0.0"
+  },
   "expected_record": "RT20261009",
   "found": 1,
   "scope": "Private Zenodo account inspection; no create, upload or publish calls",
