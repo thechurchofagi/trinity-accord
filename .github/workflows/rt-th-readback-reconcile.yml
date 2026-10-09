@@ -2,7 +2,9 @@ name: RT/TH reconcile published Zenodo bytes
 on:
   push:
     branches: [research/rt-th-task-relative-continuity-v1-20261009]
-    paths: [.github/workflows/rt-th-readback-reconcile.yml]
+    paths:
+      - .github/workflows/rt-th-readback-reconcile.yml
+      - research/task-relative-continuity/RECONCILE-AUTHORIZATION.json
 permissions:
   contents: write
 jobs:
