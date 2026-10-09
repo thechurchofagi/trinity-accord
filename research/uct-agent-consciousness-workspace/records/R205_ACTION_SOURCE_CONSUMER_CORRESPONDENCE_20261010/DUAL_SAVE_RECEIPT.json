@@ -1,0 +1,77 @@
+{
+  "schema": "uct-r205-dual-save-receipt/1",
+  "research_id": "R205-ASC-20261010",
+  "result_version": "ASC-RESULT-v0.1.0",
+  "status": "SCIENTIFIC_CONTENT_AND_MASTER_DOUBLE_SAVE_BYTE_VERIFIED",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "starting_commit": "90a542d697d923aa484f2bd5a4484a438125325a",
+    "checkpoint_commit": "a0043d7a114402a68177a07168e71c7efb4abfc0",
+    "scientific_commit": "a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc",
+    "tree_sha": "894713f3d36d01ff0ba32f41536619568f6bb388",
+    "verification": "Remote fetched tree equals local checked tree; all 30 delta content files compared byte-for-byte via git show; review file UTF-8 valid. Receipt added in a later expected-SHA fast-forward storage commit."
+  },
+  "master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "prior_version": 69,
+    "current_version": 70,
+    "file_id": "file_0000000023088230baf115338d10b280",
+    "bytes": 667336,
+    "sha256": "15eb057893a80b70ff06c523bd61ffb1ed475bbbed5596979aa4dc703f760dc2",
+    "verification": "Fresh materialization matches all local bytes and retains every prior-v69 byte as suffix."
+  },
+  "package": {
+    "library_file_id": "libfile_bdc4a07c21788191a22faf9cbeab15b3",
+    "file_name": "UCT_R205_Result_Increment.zip",
+    "kind": "INCREMENT_NOT_COMPLETE_BACKUP",
+    "bytes": 220924,
+    "sha256": "4b598984a8d678bde1a52cfcac739d2ef18e27e3d1063f3890bdc075f67c45dc",
+    "content_files": 30,
+    "verification": "Fresh Library materialization equals uploaded bytes; ZIP integrity and all 30 MANIFEST hashes validated. Requires verified R204 working set."
+  },
+  "manifest": {
+    "library_file_id": "libfile_5d2d776868a48191a5cd127d80591a56",
+    "file_name": "UCT_R205_MANIFEST.json",
+    "sha256": "bb4455aeb763a6cddfead27561155cda1a420c5c98f13d675f024b550b99a288",
+    "verification": "Fresh Library bytes equal local manifest and package MANIFEST.json."
+  },
+  "handoff": {
+    "library_file_id": "libfile_b465a4475ef88191bc36723fb3bb1118",
+    "file_name": "UCT_R205_Handoff_ZH.md",
+    "sha256": "8c4dce79327c566782c71189ee36c4c2beed2c167f92c83618b17b87ce825ebe",
+    "verification": "Fresh Library bytes equal repository scientific-commit handoff."
+  },
+  "checkpoint_package": {
+    "library_file_id": "libfile_f8e881fc98048191828a526b723071b9",
+    "bytes": 11631,
+    "sha256": "1be0425c763edffc3415b9452cc712d561cb5a11ba4131e0779d940aac67cd69",
+    "verification": "Fresh download matched; final package supersedes checkpoint content."
+  },
+  "completed_steps": [
+    "Concrete source square and isolated-probe proof",
+    "Cancellation counterexample preserving failed unrestricted inference",
+    "Four thought-experiment families and scoped primary-source frontier comparison",
+    "Disabled map candidate, frozen whole-object coverage and focused semantic audit",
+    "Publication reuse accounting, QC responses and entry priorities",
+    "GitHub scientific bytes and Library package/master/manifest/handoff readback"
+  ],
+  "unresolved": [
+    "Actual bearer, interval, complete constitutive signature and actual named carrier/consumer installation",
+    "Independent selected phenomenal endpoint and non-oracular H bridge",
+    "Fresh end-to-end semantic adoption beyond frozen inherited map proofs",
+    "QC10, IA-QC11, QC12, QC13 reviewer disposition",
+    "Full methods/raw data for abstract-level source comparison"
+  ],
+  "failures": "FAILURES.md and GAP_LEDGER.json preserve cancellation failure, source access failures and corrected transfer-wrapper attempt; no outstanding core save failure.",
+  "map": {
+    "completed_release": "UCT-MAP-v1.1.2",
+    "candidate": "13 nodes/5 rules/7 contexts, disabled",
+    "structural_checks": 22,
+    "semantic_promotion": "OPEN_NOT_COMPLETED"
+  },
+  "publication": "UCT-PUB-v1.0.17; CONTINUE_RESEARCH_HOLD_STANDALONE; no formal publication added",
+  "restore": "Fetch latest research branch and fixed master. If needed restore verified R204 baseline (90a542...), apply package relative paths with MANIFEST hash checks, obtain this separately supplied post-save receipt and preserve later concurrent changes. R156 plus this increment alone is not a complete working set.",
+  "next_question": "Motor-command versus proprioceptive actual consumers under matched consequences, separating agency/ownership from intensity/sensitivity and testing passive/remote/reflex rivals.",
+  "receipt_self_reference": "This receipt is a post-save artifact outside the scientific ZIP; its own commit/file ID and readback are externally verified after creation, not inserted into its own hashed bytes."
+}
