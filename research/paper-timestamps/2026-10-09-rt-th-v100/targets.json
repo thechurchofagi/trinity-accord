@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-10-09-rt-th-v100",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "RT-TH-2026-01",
+      "record_id": 23251651,
+      "doi": "10.5281/zenodo.23251651",
+      "version": "1.0.0",
+      "title": "Task-Relative Continuity Through Changing Representations: Reversible Handoffs, Route Ambiguity, and the Limits of Stable Readout",
+      "receipt_path": "research/rt-th-paper/publication-record.json",
+      "pdfs": [
+        {
+          "name": "Task_Relative_Continuity_v1.0.0.pdf",
+          "bytes": 113610,
+          "sha256": "18a4914635c2853ed089df137cb6b21024ed70f7d6dd0fe071a6da2dd5ca38af",
+          "role": "DOI-embedded public PDF, byte-verified"
+        }
+      ]
+    }
+  ]
+}
