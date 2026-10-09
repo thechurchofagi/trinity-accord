@@ -15,12 +15,12 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "R191-OCCA-20261009",
-    "result_version": "OCCA-RESULT-v0.1.0",
+    "id": "R192-CTBI-20261009",
+    "result_version": "CTBI-RESULT-v0.1.0",
     "integration_status": "PENDING_CHECKPOINT_DISABLED",
-    "work_log": "records/R191_Conflict_Conditioned_Authorization_20261009/WORK_LOG.md",
-    "handoff": "records/R191_Conflict_Conditioned_Authorization_20261009/HANDOFF_ZH.md",
-    "paper": "records/R191_Conflict_Conditioned_Authorization_20261009/RESEARCH_NOTE.md"
+    "work_log": "records/R192_Complete_Twin_Bridge_Invariance_20261009/WORK_LOG.md",
+    "handoff": "records/R192_Complete_Twin_Bridge_Invariance_20261009/HANDOFF_ZH.md",
+    "paper": "records/R192_Complete_Twin_Bridge_Invariance_20261009/RESEARCH_NOTE.md"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -49,7 +49,8 @@
     "ONLINE-AC-PROBE-20261009",
     "R189-HACA-20261009",
     "R190-PCBC-20261009",
-    "R191-OCCA-20261009"
+    "R191-OCCA-20261009",
+    "R192-CTBI-20261009"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -61,12 +62,12 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "AC, IL, ONLINE-AC, R189, R190 and R191 remain separate disabled pending modules; working-paper completion and structural compatibility are not scientific-map promotion.",
+  "pending_note": "AC, IL, ONLINE-AC, R189, R190, R191 and R192 remain separate disabled pending modules; working-paper completion and structural compatibility are not scientific-map promotion.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.3",
+    "version": "UCT-PUB-v1.0.4",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R191_Conflict_Conditioned_Authorization_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/R192_Complete_Twin_Bridge_Invariance_20261009/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },
@@ -86,5 +87,5 @@
     "paper": "records/ONLINE_AC_20261009_Dynamic_Calibration/PAPER.md",
     "paper_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED"
   },
-  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; ONLINE-AC, R189, R190 and R191 remain disabled pending results."
+  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; ONLINE-AC, R189, R190, R191 and R192 remain disabled pending results."
 }

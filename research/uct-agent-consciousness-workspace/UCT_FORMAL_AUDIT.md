@@ -19,3 +19,7 @@ R189 restores the exact v1.1.2 capsule, verifies all 82 capsule members and trav
 ## R191 post-release compatibility note
 
 R191 reuses the exact verified v1.1.2 baseline and traverses all 1,608 review objects before testing its disabled 11/5/4 candidate. Unique IDs, reference resolution, simultaneous `all_of` premises, same-instance bindings, and acyclicity all pass. The pass does not establish actual carrier/consumer use, formation history, familiar mineness, or reviewer closure. See [R191 MAP_AUDIT.md](records/R191_Conflict_Conditioned_Authorization_20261009/MAP_AUDIT.md).
+
+## R192 post-release compatibility note
+
+R192 restores the exact verified v1.1.2 baseline and traverses all 1,608 review objects before testing its disabled 9/6/4 candidate. Unique IDs, reference resolution, simultaneous `all_of` premises, same-instance bindings and acyclicity pass. Node-by-node review preserves current/history/complete signature levels and separates actual path use from diagnostic evidence. The pass does not validate C1 empirically, establish a complete real signature, identify `B_fam`, or close a reviewer item. See [R192 MAP_AUDIT.md](records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_AUDIT.md).

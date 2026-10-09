@@ -1,0 +1,27 @@
+{
+  "receipt_id": "R192-RUN-RECEIPT-v1",
+  "research_id": "R192-CTBI-20261009",
+  "result_version": "CTBI-RESULT-v0.1.0",
+  "base_remote_commit": "dec7cc399dc590d23330c4ca307d407aeae55e5e",
+  "core_science_checkpoint_commit": "1a7dc63fe9347c5721e10f54ec0540c0af94768e",
+  "completed_map": {
+    "version": "UCT-MAP-v1.1.2",
+    "counts": {"nodes": 913, "active_rules": 424, "contexts": 261, "suspended_rules": 10, "review_items": 1608},
+    "graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+    "review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687"
+  },
+  "exact_result": {"signature_states": 16, "complete_predicates": 65536, "projection_predicates": 256, "compatible_sparse_label_bridges": 16384, "checks": 10, "all_pass": true},
+  "candidate_map": {"status": "PENDING_CHECKPOINT_DISABLED", "counts": {"nodes": 9, "rules": 6, "contexts": 4}, "compatibility_audit_sha256": "eb4c0c95ca34b8b1ca5a65322597f0902fa5984de421605e4ab8366d1d1d0258", "structural_status": "STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN"},
+  "key_hashes": {
+    "RESEARCH_NOTE.md": "f06bf3d4e5ba36aa43aa58c522d8cd4756f5181d9351e3925d3704f5ecb8a2c8",
+    "EXACT_RESULTS.json": "a712174b3c5632180bba87d663a2f2576ac03771a543d23355d98c888d4ee1f4",
+    "MAP_EXTENSION.json": "a546ebd83ddae5125411241a8cd5b074579df00cb6b98ecfab98b24e134047b6",
+    "CLAIM_LEDGER.json": "0a35040ac2140e0d68f9a40a3893eac5466d9417afa75b950f8c147ffe190c59",
+    "GAP_LEDGER.json": "0ac327d6361d9f64513cfa82c517b9071ae62a113676e0ec3120df209423da24"
+  },
+  "review_status": {"QC-20261008-10": "ACKNOWLEDGED_OPEN", "IA-QC11": "ACKNOWLEDGED_APPLICATION_OPEN", "QC-20261008-12": "ACKNOWLEDGED_APPLICATION_OPEN", "QC-20261008-13": "ACKNOWLEDGED_APPLICATION_OPEN"},
+  "publication_coverage": {"version": "UCT-PUB-v1.0.4", "decision": "CONTINUE_RESEARCH", "worldwide_priority_verified": false},
+  "persistence": {"github_content_commit": null, "github_final_receipt_commit": null, "library_master_expected_version": 48, "library_master_new_version": null, "library_increment_id": null, "status": "PENDING"},
+  "failures_retained": ["Current-projection twins do not establish complete twins.", "History expansion does not identify familiar mineness.", "Sparse target labels leave 16,384 compatible bridges in the finite witness.", "Actual installation, B_fam, reviewer disposition, and worldwide priority remain open."],
+  "next": "Predeclare a nonreport B_fam contrast class and test whether independent target constraints reduce bridge underdetermination without post-hoc target fitting."
+}

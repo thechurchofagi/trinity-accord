@@ -1,4 +1,20 @@
-# Latest research checkpoint — R191; completed map remains UCT-MAP-v1.1.2
+# Latest research checkpoint — R192; completed map remains UCT-MAP-v1.1.2
+
+Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R192 Chinese handoff](records/R192_Complete_Twin_Bridge_Invariance_20261009/HANDOFF_ZH.md).
+
+R192 repairs the adaptive-reflex research question with a signature ladder. Equality at a current selected projection, a history-expanded projection and declared complete actual organization are three different claims. A projection twin defeats only a bridge factoring through that projection. A complete `K*`-twin cannot be distinguished by an admissible internal isomorphism-invariant bridge; under C1 it also cannot differ in complete experiential type. An external reflex/endorsement label cannot supply the missing relation.
+
+The 16-state exact witness checks all 65,536 Boolean complete-signature predicates and all 256 predicates on the declared current projection. Actual history separates the finite frozen/formed pair but does not name familiar mineness; two sparse target labels leave 16,384 compatible bridges. Actual route use and test evidence remain separate.
+
+The completed map remains 913/424/261 with 10 suspended rules and 1,608 review items. R192's 9/6/4 candidate is disabled. QC10, IA-QC11, QC12 and QC13 remain open. Publication coverage is UCT-PUB-v1.0.4 and the decision is CONTINUE_RESEARCH.
+
+R192 artifacts: [note](records/R192_Complete_Twin_Bridge_Invariance_20261009/RESEARCH_NOTE.md), [results](records/R192_Complete_Twin_Bridge_Invariance_20261009/EXACT_RESULTS.json), [claims](records/R192_Complete_Twin_Bridge_Invariance_20261009/CLAIM_LEDGER.json), [gaps](records/R192_Complete_Twin_Bridge_Invariance_20261009/GAP_LEDGER.json), [map audit](records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_AUDIT.md), and [review response](records/R192_Complete_Twin_Bridge_Invariance_20261009/REVIEW_RESPONSE.md).
+
+Next: predeclare a nonreport `B_fam` target contrast and test whether independent constraints reduce bridge underdetermination without post-hoc target fitting.
+
+---
+
+## Superseded R191 checkpoint (retained for history)
 
 Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R191 Chinese handoff](records/R191_Conflict_Conditioned_Authorization_20261009/HANDOFF_ZH.md).
 

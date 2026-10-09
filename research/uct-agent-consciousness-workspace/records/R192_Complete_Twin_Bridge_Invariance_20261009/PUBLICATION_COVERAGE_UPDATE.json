@@ -1,0 +1,51 @@
+{
+  "record_id": "R192-PUB-COVERAGE-20261009-v1",
+  "base_completed_map_version": "UCT-MAP-v1.1.2",
+  "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+  "previous_coverage_version": "UCT-PUB-v1.0.3",
+  "new_coverage_version": "UCT-PUB-v1.0.4",
+  "checked_publication_sources": [
+    {
+      "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+      "version": "UCT-PUB-v1.0.0",
+      "release_evidence": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+      "read_scope": "Existing frozen 28-work/39-research-DOI census; R192 postdates it."
+    },
+    {
+      "work_id": "CHALMERS-1995-ORGANIZATIONAL-INVARIANCE",
+      "url": "https://www.consc.net/papers/qualia.html",
+      "scope": "Fine-grained functional isomorphism, organizational invariance and gradual replacement."
+    },
+    {
+      "work_id": "DOERIG-ET-AL-2019",
+      "doi": "10.1016/j.concog.2019.04.002",
+      "scope": "Unfolding argument and behavioral equivalence versus causal-structure predictions."
+    },
+    {
+      "work_id": "KLEINER-HOEL-2021",
+      "doi": "10.1093/nc/niab001",
+      "scope": "Prediction/inference distinction and falsification underdetermination."
+    },
+    {
+      "work_id": "ELLIA-TSUCHIYA-2025",
+      "doi": "10.1093/nc/niaf014",
+      "scope": "Structural approaches and prediction versus post-hoc accommodation."
+    }
+  ],
+  "changed_claim_ids": ["R192-C1", "R192-C2", "R192-C3", "R192-C4", "R192-C5", "R192-C6"],
+  "newly_covered_claim_ids": [],
+  "uncovered_candidates_within_verified_corpus": ["R192-C1", "R192-C2", "R192-C3", "R192-C4", "R192-C5", "R192-C6"],
+  "residual_assessment": {
+    "precise_problem": "How should UCT treat a reflex/endorsement twin when equality may refer to a selected projection, history-expanded organization or declared complete actual organization?",
+    "net_increment_after_subtraction": "A UCT-specific signature-ladder repair, complete-twin stopping rule, target-identification obstruction and explicit use/test direction discipline; no claim of new isomorphism or factorization mathematics.",
+    "closest_internal_predecessors": ["R149 representation-fiber compatibility", "R157 selector transport and semantic residual", "R173 familiar-mineness boundary", "R178 strict-match evidence limit", "R191 adaptive-reflex countermodel"],
+    "reusable_knowledge": "A projected twin refutes only projection-factorized bridges; a complete twin cannot be internally discriminated and, under C1, cannot differ in complete experiential type. Structural difference and phenomenal naming remain separate obligations.",
+    "evidence_and_limits": "65,536-predicate/256-projection exact enumeration, 16,384 compatible sparse-label bridges, primary-source comparison and full structural-map audit; no actual installation, B_fam, reviewer closure or worldwide priority.",
+    "decision": "CONTINUE_RESEARCH",
+    "next_specific_action": "Predeclare a nonreport contrast class for B_fam and determine whether independent target constraints reduce the bridge set without selecting the target from the same outcomes."
+  },
+  "map_semantics_changed": false,
+  "whole_map_audit_if_required": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_COMPATIBILITY_AUDIT.json",
+  "warning": "Absence from the frozen corpus is not a worldwide novelty claim. UCT-PUB-v1.0.4 is nondeductive and not a science-map release."
+}
+

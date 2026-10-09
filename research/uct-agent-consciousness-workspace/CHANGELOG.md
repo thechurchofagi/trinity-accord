@@ -1,3 +1,9 @@
+# R192-CTBI-20261009 — 2026-10-09 — disabled research checkpoint
+
+Repairs the adaptive-reflex question with an explicit current/history/complete signature ladder. Exhaustive finite checks cover 65,536 complete predicates and 256 selected-projection predicates; sparse endpoint labels leave 16,384 compatible bridges. Complete twins cannot be internally separated and, under C1, do not differ in complete experiential type; projection twins license only projection-relative limits. Candidate 9/6/4 is structurally compatible but disabled; `B_fam`, actual installation and reviewer disposition remain open. Publication coverage advances nondeductively to UCT-PUB-v1.0.4; no publication action.
+
+---
+
 # R191-OCCA-20261009 — 2026-10-09 — disabled research checkpoint
 
 Defines actual precommit conflict-conditioned authorization on a fixed PC+BDCC target. The weak rivals-plus-consumer proposal fails on post-hoc rationalization; the repaired 112-row construction passes 15 checks. A frozen reflex table preserves current OCCA, history separates only the frozen case, and an adaptive reflex preserves OCCA+LGRU. Candidate 11/5/4 is structurally compatible but disabled; named phenomenal interpretation and actual installation remain open. Publication coverage advances nondeductively to UCT-PUB-v1.0.3; no publication action.

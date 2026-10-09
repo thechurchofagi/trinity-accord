@@ -216,14 +216,27 @@
       "novelty": "SCOPED_INTERFACE_REPAIR_AND_COUNTERMODEL_PRIORITY_UNVERIFIED",
       "compatibility_audit": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R191_Conflict_Conditioned_Authorization_20261009/HANDOFF_ZH.md"
+    },
+    {
+      "research_id": "R192-CTBI-20261009",
+      "result_version": "CTBI-RESULT-v0.1.0",
+      "title": "Complete-Twin Bridge Invariance and the Signature-Ladder Repair",
+      "source": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.4",
+      "novelty": "UCT_SPECIFIC_SCOPE_AND_METHOD_SYNTHESIS_PRIORITY_UNVERIFIED",
+      "compatibility_audit": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R192_Complete_Twin_Bridge_Invariance_20261009/HANDOFF_ZH.md"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.3",
+    "version": "UCT-PUB-v1.0.4",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R191_Conflict_Conditioned_Authorization_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/R192_Complete_Twin_Bridge_Invariance_20261009/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },

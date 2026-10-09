@@ -1,11 +1,18 @@
-# Current research index — R191 / completed map UCT-MAP-v1.1.2
+# Current research index — R192 / completed map UCT-MAP-v1.1.2
+
+- R192 note: [Complete-Twin Bridge Invariance](records/R192_Complete_Twin_Bridge_Invariance_20261009/RESEARCH_NOTE.md)
+- R192 exact model: [results](records/R192_Complete_Twin_Bridge_Invariance_20261009/EXACT_RESULTS.json) and [checker](records/R192_Complete_Twin_Bridge_Invariance_20261009/check_bridge_invariance.py)
+- R192 controls: [prior art](records/R192_Complete_Twin_Bridge_Invariance_20261009/PRIOR_ART_AND_EVIDENCE.md), [claims](records/R192_Complete_Twin_Bridge_Invariance_20261009/CLAIM_LEDGER.json), [gaps](records/R192_Complete_Twin_Bridge_Invariance_20261009/GAP_LEDGER.json)
+- R192 continuation: [Chinese handoff](records/R192_Complete_Twin_Bridge_Invariance_20261009/HANDOFF_ZH.md), [map audit](records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_AUDIT.md), [review response](records/R192_Complete_Twin_Bridge_Invariance_20261009/REVIEW_RESPONSE.md), [work log](records/R192_Complete_Twin_Bridge_Invariance_20261009/WORK_LOG.md)
+
+R192 is the latest checkpoint, not an integrated map release. Its 9-node/6-rule/4-context candidate is disabled; completed counts remain 913/424/261 with 10 suspended rules. The following R191 entries are retained as historical navigation.
 
 - R191 note: [Online conflict-conditioned authorization](records/R191_Conflict_Conditioned_Authorization_20261009/RESEARCH_NOTE.md)
 - R191 exact model: [results](records/R191_Conflict_Conditioned_Authorization_20261009/EXACT_RESULTS.json) and [checker](records/R191_Conflict_Conditioned_Authorization_20261009/check_conflict_authorization.py)
 - R191 controls: [prior art](records/R191_Conflict_Conditioned_Authorization_20261009/PRIOR_ART_AND_EVIDENCE.md), [claims](records/R191_Conflict_Conditioned_Authorization_20261009/CLAIM_LEDGER.json), [gaps](records/R191_Conflict_Conditioned_Authorization_20261009/GAP_LEDGER.json)
 - R191 continuation: [Chinese handoff](records/R191_Conflict_Conditioned_Authorization_20261009/HANDOFF_ZH.md), [map audit](records/R191_Conflict_Conditioned_Authorization_20261009/MAP_AUDIT.md), [work log](records/R191_Conflict_Conditioned_Authorization_20261009/WORK_LOG.md)
 
-R191 is the latest checkpoint, not an integrated map release. Its 11-node/5-rule/4-context candidate is disabled; completed counts remain 913/424/261 with 10 suspended rules. The following R190 entries are retained as historical navigation.
+R191 is not an integrated map release. Its 11-node/5-rule/4-context candidate is disabled; completed counts remain unchanged.
 
 - Entry state: [CURRENT_STATE.json](CURRENT_STATE.json)
 - Governing guide: [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3

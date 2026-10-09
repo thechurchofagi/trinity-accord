@@ -598,6 +598,18 @@ Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R191_
 - QC13 remains OPEN. Primary conflict/fluency and automation research plus R173/R184/R190 are credited; the increment is narrowed to the timing repair and signature-scope result.
 - The weak WCU proposal failed on a post-hoc narrator and the failure is retained. Structural compatibility is not semantic adoption or reviewer closure.
 
+---
+
+# R192 researcher response
+
+Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R192_Complete_Twin_Bridge_Invariance_20261009/REVIEW_RESPONSE.md](records/R192_Complete_Twin_Bridge_Invariance_20261009/REVIEW_RESPONSE.md).
+
+- QC10 remains **ACKNOWLEDGED / OPEN**. R192 corrects the signature level of the reflex/endorsement question but does not supply `B_fam`.
+- IA-QC11 remains application **OPEN**. History requires actual occurrence, lineage, continuation and current use; copied values are excluded.
+- QC12 remains application **OPEN**. Actual use and positive test evidence are distinct variables; code validates neither a real installation nor experience.
+- QC13 remains **OPEN**. R149/R157/R173 and external organizational-invariance, unfolding/falsification and accommodation literature are credited. The increment is a UCT-specific stopping rule and scope protocol, not a new general theorem.
+- Every cited composition/application keeps its interface evidence in explicit `all_of`, binding and proof-location fields. The 9/6/4 candidate remains disabled and the completed map remains v1.1.2.
+
 UCT-MAP-v1.1.2 remains authoritative; R191 is disabled. No basal gate, unique owner, publication action, or current-assistant consciousness verdict is introduced.
 
 ---
