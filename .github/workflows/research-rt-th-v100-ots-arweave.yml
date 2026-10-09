@@ -1,3 +1,4 @@
+# RT/TH v1.0.0: repeat ONLY existing OTS proof upgrade/readback; no duplicate DOI or paid AR posting.
 # Corrected RT-TH v1.0.0, version DOI 10.5281/zenodo.23251651: verified OTS before any guarded AR.
 # guarded Arweave paid readback third. No upload can precede verified OTS.
 name: Research RT-TH v1.0.0 OTS and Arweave
