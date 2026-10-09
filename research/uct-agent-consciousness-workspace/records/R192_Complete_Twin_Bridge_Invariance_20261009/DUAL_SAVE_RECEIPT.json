@@ -1,0 +1,37 @@
+{
+  "receipt_id": "R192-DUAL-SAVE-v1",
+  "research_id": "R192-CTBI-20261009",
+  "github": {
+    "branch": "uct-agent-consciousness-workspace",
+    "base_commit": "dec7cc399dc590d23330c4ca307d407aeae55e5e",
+    "core_science_checkpoint": "1a7dc63fe9347c5721e10f54ec0540c0af94768e",
+    "content_commit": "f748bc7228b21178279030b7f5cb54a87ea6d372",
+    "final_receipt_commit": null,
+    "content_key_file_readback": "PASS"
+  },
+  "library_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "previous_version": 48,
+    "new_version": 49,
+    "backing_file_id": "file_00000000464081f69b669beaf90a2b28",
+    "bytes": 613214,
+    "sha256": "942ff12aceb564c94b25294e49b2c48e4a6bc33503dcda5bacedc8583ad3fdf4",
+    "readback": "EXACT_BYTE_COMPARE_PASS",
+    "history_policy": "same stable identity; all prior text retained below the new R192 section"
+  },
+  "library_increment": {
+    "library_file_id": "libfile_e54c391d4f6481919d5c2a3eb2b460e3",
+    "version": 0,
+    "backing_file_id": "file_00000000e0d481f9ac3a0b1f9588f744",
+    "bytes": 94249,
+    "sha256": "b28946052b7b30b63f9691720982f362705e15644a38e144c3446dd46f3360c1",
+    "readback": "EXACT_BYTE_COMPARE_AND_ZIP_TEST_PASS",
+    "scope": "increment only: 29 repository files changed from the recorded base to the content commit, plus MANIFEST.json and SHA256SUMS.txt; not a full repository, workset, or history backup"
+  },
+  "verification_note": "The first signed-URL download attempt failed because the destination directories had not been created after the preceding setfattr command was unavailable. The directories were then created explicitly, xattrs were applied with os.setxattr, both files were downloaded again, and exact byte comparisons plus the ZIP integrity test passed.",
+  "recovery_order": [
+    "Fetch the branch and verify the final receipt commit reported by the run.",
+    "Read CURRENT_STATE.json, HANDOFF.md, MASTER_INDEX.md, then the R192 HANDOFF_ZH.md.",
+    "If GitHub is unavailable, verify the increment SHA256, overlay it on base commit dec7cc399dc590d23330c4ca307d407aeae55e5e, and run sha256sum -c SHA256SUMS.txt."
+  ]
+}

@@ -9,7 +9,9 @@
 7. Wrote the English note, six-claim ledger, five-gap ledger, six thought experiments and disabled 9-node/6-rule/4-context candidate.
 8. Ran the complete structural compatibility audit against v1.1.2; all checks pass. No semantic activation or reviewer closure claimed.
 9. Saved the core scientific block to the remote branch as expected-SHA fast-forward commit `1a7dc63fe9347c5721e10f54ec0540c0af94768e` using the authorized GitHub connector after direct terminal push lacked credentials.
-10. Added review responses, publication-overlap update, map audit, navigation and handoff material. Final persistence receipts are filled only after verified GitHub and Library saves.
+10. Added review responses, publication-overlap update, map audit, navigation and handoff material.
+11. Updated the fixed Library master in place from v48 to v49 and uploaded the R192 increment. The first signed-URL readback command failed because its destination directories were absent after `setfattr` was unavailable; an explicit-directory retry used `os.setxattr`, and exact byte comparison plus ZIP integrity verification then passed.
+12. Filled the dual-save receipts only after the GitHub content commit and both Library byte streams had been verified.
 
 No PR, CI request, deployment, DOI, Zenodo, OTS, Arweave, email, Slack or scheduler action was performed.
 

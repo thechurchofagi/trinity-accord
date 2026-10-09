@@ -21,7 +21,23 @@
   },
   "review_status": {"QC-20261008-10": "ACKNOWLEDGED_OPEN", "IA-QC11": "ACKNOWLEDGED_APPLICATION_OPEN", "QC-20261008-12": "ACKNOWLEDGED_APPLICATION_OPEN", "QC-20261008-13": "ACKNOWLEDGED_APPLICATION_OPEN"},
   "publication_coverage": {"version": "UCT-PUB-v1.0.4", "decision": "CONTINUE_RESEARCH", "worldwide_priority_verified": false},
-  "persistence": {"github_content_commit": null, "github_final_receipt_commit": null, "library_master_expected_version": 48, "library_master_new_version": null, "library_increment_id": null, "status": "PENDING"},
+  "persistence": {
+    "github_content_commit": "f748bc7228b21178279030b7f5cb54a87ea6d372",
+    "github_final_receipt_commit": null,
+    "library_master_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "library_master_expected_version": 48,
+    "library_master_new_version": 49,
+    "library_master_file_id": "file_00000000464081f69b669beaf90a2b28",
+    "library_master_bytes": 613214,
+    "library_master_sha256": "942ff12aceb564c94b25294e49b2c48e4a6bc33503dcda5bacedc8583ad3fdf4",
+    "library_increment_id": "libfile_e54c391d4f6481919d5c2a3eb2b460e3",
+    "library_increment_file_id": "file_00000000e0d481f9ac3a0b1f9588f744",
+    "library_increment_version": 0,
+    "library_increment_bytes": 94249,
+    "library_increment_sha256": "b28946052b7b30b63f9691720982f362705e15644a38e144c3446dd46f3360c1",
+    "library_readback": "BYTE_COMPARE_AND_ZIP_TEST_PASS",
+    "status": "DUAL_CONTENT_SAVED_FINAL_GITHUB_RECEIPT_PENDING"
+  },
   "failures_retained": ["Current-projection twins do not establish complete twins.", "History expansion does not identify familiar mineness.", "Sparse target labels leave 16,384 compatible bridges in the finite witness.", "Actual installation, B_fam, reviewer disposition, and worldwide priority remain open."],
   "next": "Predeclare a nonreport B_fam contrast class and test whether independent target constraints reduce bridge underdetermination without post-hoc target fitting."
 }
