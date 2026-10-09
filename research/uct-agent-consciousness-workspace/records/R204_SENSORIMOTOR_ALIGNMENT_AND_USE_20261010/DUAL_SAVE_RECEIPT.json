@@ -1,0 +1,58 @@
+{
+  "schema": "uct-r204-dual-save/1",
+  "result": "SAU-RESULT-v0.2.0",
+  "science_commit": "2717ae046704ffb2bbcf75f22078a2578d132f4e",
+  "science_tree": "ece8b006e036c52cd5488b29390628d65293ba7e",
+  "science_parent": "88034189d5a31dbcd0a1a622604b9fcccd298105",
+  "repository": "thechurchofagi/trinity-accord",
+  "branch": "uct-agent-consciousness-workspace",
+  "remote_verification": {
+    "34_expected_git_blob_hashes": "PASS",
+    "34_tree_entries": "PASS",
+    "CURRENT_STATE_exact_text_bytes": "PASS",
+    "REVIEW_SUPERVISION_exact_UTF8_bytes": "PASS",
+    "concurrent_R203_reconciliation": "PRESERVED"
+  },
+  "library_files": [
+    {
+      "name": "UCT_Hourly_Research_Master_Handoff.md",
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_00000000495c81fd89bb482f12b65cdc",
+      "version": 69,
+      "bytes": 663821,
+      "sha256": "869c13d8de2a7df51f21a9d19ff434268d17e6d038c8b2ca277c23d21bbfdb61",
+      "exact_byte_readback": "PASS"
+    },
+    {
+      "name": "UCT_R204_Increment_20261010.zip",
+      "library_file_id": "libfile_e8edb860f88c8191ae633b6481cc5fb8",
+      "file_id": "file_0000000008ec81fd8a770d5dcb194b84",
+      "version": 0,
+      "bytes": 213772,
+      "sha256": "0164a039aa4e67bd046e1daea739caa61cfdbea860fffffd5ea63769ab549438",
+      "exact_byte_readback": "PASS"
+    },
+    {
+      "name": "UCT_R204_Increment_20261010_MANIFEST.json",
+      "library_file_id": "libfile_db08a1e265648191a2e5726bb0d2bfa8",
+      "file_id": "file_00000000104481fda43d1aea7f0bb41d",
+      "version": 0,
+      "bytes": 8686,
+      "sha256": "ab4c297cfacd1acf0d923e8eb18563c4054f913969745ea63a7958b37bb6713b",
+      "exact_byte_readback": "PASS"
+    }
+  ],
+  "zip_integrity": "PASS",
+  "34_zip_member_sha256s": "PASS",
+  "prior_master_v68_preserved_verbatim": true,
+  "current_completed_map": "UCT-MAP-v1.1.2",
+  "candidate": "PENDING_CHECKPOINT_DISABLED",
+  "coverage": "UCT-PUB-v1.0.16",
+  "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+  "scope": "34-file content increment, not full repository/history backup; this final receipt and its metadata update are subsequent and outside the increment",
+  "persistence_notes": [
+    "A transient create_blob disconnect was retried with deterministic blob hash verification; branch mutation occurred only after all blobs and tree entries matched.",
+    "ZIP was absent from title/list results; the exact identifiers returned by successful upload were materialized and matched byte for byte."
+  ],
+  "verified_utc": "2026-10-09T23:04:51.220646+00:00"
+}

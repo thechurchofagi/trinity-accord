@@ -27,5 +27,10 @@
     "audit_map_compatibility.py": "e9fee98597533a4d59939bae7f7e862a37c850e9cfa834198d7fe19d79e8d821",
     "check_alignment_and_use.py": "08e0556cb81055da7f78320f637358e83e366750df148430aa3a6a1c42ada99c"
   },
-  "initial_worktree_head": "be8c5493035cd48323fd29442b7c8d7edbbe8b33"
+  "initial_worktree_head": "be8c5493035cd48323fd29442b7c8d7edbbe8b33",
+  "dual_save_receipt": "DUAL_SAVE_RECEIPT.json",
+  "science_commit": "2717ae046704ffb2bbcf75f22078a2578d132f4e",
+  "archive_sha256": "0164a039aa4e67bd046e1daea739caa61cfdbea860fffffd5ea63769ab549438",
+  "fixed_master_actual_version": 69,
+  "receipt_outside_increment": true
 }
