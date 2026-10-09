@@ -1,0 +1,30 @@
+{
+  "research_id":"IL20261009",
+  "result_version":"IL-RESULT-v0.1.0",
+  "status":"COMPACT_RESEARCH_AND_DISABLED_MAP_ENTRY_READ_BACK",
+  "record_commit":"542f7b194e9cbf0a346ceeba1961417b15480016",
+  "map_module_commit":"c03d925e2a50398725bc1d0065adf19d1c4ee8e3",
+  "pending_entry_commit":"f63d4fd9f129eddb31c3751ca13115bcace363d2",
+  "readback_blobs":{
+    "RESEARCH_CHECKPOINT.md":"3471f1c241c92425cfd214d6164a1ad8eb4cf0c8",
+    "core_check.py":"201b0f5e9efb00e2ed4d3fe82ff55428f58b9147",
+    "MAP_EXTENSION.json":"6e18c39a7a31733c6a47337d75d007b0782f4c81",
+    "root_effective_map_descriptor":"bca8e29bb87db51293677113d9c5d9710e44fe90"
+  },
+  "core_code_local_remote_git_blob_match":true,
+  "downloadable_expanded_archive":{
+    "filename":"UCT_Intervention_Locality_20261009_v0.1.0.zip",
+    "bytes":463540,
+    "sha256":"1f87922f33ada5b0fc42626d11c4a6165a64c90cbc1efb66a9be78f9b0a0dab1",
+    "file_members":18,
+    "zip_integrity":"PASS",
+    "manifest_member_hashes":"PASS"
+  },
+  "storage_boundary":"GitHub has self-contained compact proofs,core code,typed pending map,results,audit and handoff. The downloaded ZIP has longer proofs,full verifier,outputs,local per-item audit and a historical baseline. Not all expanded bytes are separately uploaded as remote files; no Library write is claimed.",
+  "completed_map_still":"UCT-MAP-v1.1.0",
+  "new_map_status":"PENDING_MAP / AUDIT_INCOMPLETE",
+  "other_pending_preserved":["R185","AC20261009"],
+  "new_DOI_OTS_AR_or_scheduler_action":false,
+  "actual_physical_and_named_phenomenal_bridge":"OPEN",
+  "operational_receipt_changes_no_scientific_claim":true
+}
