@@ -8,5 +8,10 @@
   "source_sha256": "52f879101be072efd0651a512b03bac27e3dbf5a80facf55aa726b7515f88ed4",
   "supplement_sha256": "83c0050bfdddff7ac94cf716db107e6f63ef09d9d6b04cd74ead0be4adcb860b",
   "significance_boundary": "Theory preprint with no independent empirical confirmation; disclose AI assistance",
-  "sequence": "DOI then exact published PDF OTS then Bitcoin verification then guarded Arweave"
+  "sequence": "DOI then exact published PDF OTS then Bitcoin verification then guarded Arweave",
+  "zenodo_reuse_guard": {
+    "record_id": 23251651,
+    "allowed_only_if": "same creator, same title, empty, unpublished draft",
+    "new_record_creation_allowed": false
+  }
 }
