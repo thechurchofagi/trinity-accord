@@ -39,8 +39,9 @@
   "public_file_readback_pass": true,
   "record_id": 23251651,
   "report_number": "RT20261009",
-  "state": "PUBLISHED_PUBLIC_READBACK_PASS_WITH_FROZEN_BUILD_DIFF",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
   "submitted": true,
   "title": "Task-Relative Continuity Through Changing Representations: Reversible Handoffs, Route Ambiguity, and the Limits of Stable Readout",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "source_variance_note": "Different earlier public publication build from this frozen local build. Preserve mismatch list; only verified public Zenodo bytes are authoritative for timestamp."
 }
