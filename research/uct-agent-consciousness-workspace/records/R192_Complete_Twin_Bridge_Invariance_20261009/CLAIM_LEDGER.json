@@ -1,0 +1,73 @@
+{
+  "schema": "uct-r192-claim-ledger/1",
+  "research_id": "R192-CTBI-20261009",
+  "claims": [
+    {
+      "id": "R192-C1",
+      "type": "CONDITIONAL_CONSEQUENCE_AND_UCT_APPLICATION",
+      "statement": "Sort-preserving complete K*-isomorphism preserves every admissible internal K*-isomorphism-invariant bridge candidate; under A:C1 it also preserves complete experiential type.",
+      "domain": "Same admitted P,Q,K*, complete actual structures, bearer/time binding and transported parameters.",
+      "all_premises": ["D_K*(P) is isomorphic to D_K*(Q)", "q is internal/extensional and K*-isomorphism invariant", "all parameters are fixed or transported", "A:C1 only for the experiential-type clause"],
+      "proof_or_source": "RESEARCH_NOTE.md §3 R192-C1; A:C1; R157:DEFINABLE_SELECTOR_SETUP; R157:COORDINATE_TRANSPORT",
+      "counterexamples_and_limits": "A label-indexed function can differ only by violating admissibility or showing the label was an omitted installed relation.",
+      "status": "DERIVED_APPLICATION_NO_GENERAL_NOVELTY_CLAIM",
+      "thought_experiment_role": "Complete twin with swapped placards; gradual replacement."
+    },
+    {
+      "id": "R192-C2",
+      "type": "EXACT_FACTORIZATION_LIMIT",
+      "statement": "Equal selected projection defeats every candidate bridge that factors through that projection but does not entail complete-organizational equality.",
+      "domain": "One fixed comparison domain, projection pi and q=g∘pi.",
+      "all_premises": ["pi(P)=pi(Q)", "q factors through pi"],
+      "proof_or_source": "Substitution; R149:COMPATIBILITY and R149:NULL_TARGET; exact enumeration in EXACT_RESULTS.json",
+      "counterexamples_and_limits": "A hidden actual history coordinate can distinguish complete states within one projection fiber.",
+      "status": "EXACT_REUSE_NOT_NEW_MATHEMATICS",
+      "thought_experiment_role": "Frozen versus formed controller."
+    },
+    {
+      "id": "R192-C3",
+      "type": "CONDITIONAL_SIGNATURE_SCOPE_CORRECTION",
+      "statement": "Actual retained revision separates the declared formed/frozen pair after history expansion, but the coordinate is not thereby identified as familiar mineness or endorsement.",
+      "domain": "R191 declared formed/frozen finite pair and a same-instance actual-history contract.",
+      "all_premises": ["actual prior occurrence", "same-lineage continuation", "current consumer use", "no copied-value substitution"],
+      "proof_or_source": "RESEARCH_NOTE.md §3 R192-C3; EXACT_RESULTS.json; R173:RETENTIVE_BINDING_RELATION",
+      "counterexamples_and_limits": "An adaptive reflex may itself satisfy the expanded projection.",
+      "status": "EXACT_FINITE_SCOPE_ACTUAL_APPLICATION_OPEN",
+      "thought_experiment_role": "Frozen/formed and adaptive-reflex-after-learning cases."
+    },
+    {
+      "id": "R192-C4",
+      "type": "CONDITIONAL_NONIDENTIFICATION",
+      "statement": "External source-class or report labels do not distinguish an unchanged complete structure for any admissible internal predicate.",
+      "domain": "One complete state with noninstalled external labels.",
+      "all_premises": ["label/report is not a K* relation", "complete structure is unchanged"],
+      "proof_or_source": "R192-C1; 65,536-function enumeration in EXACT_RESULTS.json",
+      "counterexamples_and_limits": "If report production changes actual organization, it must be included in the comparison rather than treated as a free label.",
+      "status": "EXACT_CONDITIONAL_NONENTAILMENT",
+      "thought_experiment_role": "Swapped placards and equal-report copies."
+    },
+    {
+      "id": "R192-C5",
+      "type": "FINITE_UNDERDETERMINATION_WITNESS",
+      "statement": "Two endpoint target labels in the 16-state finite signature leave exactly 16,384 compatible Boolean bridge functions.",
+      "domain": "Declared 4-bit finite signature and two fixed labeled endpoints.",
+      "all_premises": ["bridge is a Boolean function on the full finite signature", "only two endpoint values are constrained"],
+      "proof_or_source": "2^14 count and exhaustive enumeration in EXACT_RESULTS.json",
+      "counterexamples_and_limits": "Additional independent target constraints may reduce the compatible set; this is not an empirical population estimate.",
+      "status": "EXACT_FINITE_WITNESS_NO_GLOBAL_IMPOSSIBILITY_CLAIM",
+      "thought_experiment_role": "Predeclared versus post-hoc target naming."
+    },
+    {
+      "id": "R192-C6",
+      "type": "EPISTEMIC_ONTIC_SEPARATION_REQUIREMENT",
+      "statement": "Actual route use and positive diagnostic evidence are distinct variables; neither entails the other without an explicit reliability premise, and neither alone identifies a named experience.",
+      "domain": "One route-use proposition and one diagnostic result.",
+      "all_premises": ["no perfect-reliability premise is assumed"],
+      "proof_or_source": "Four-pair finite epistemic witness in EXACT_RESULTS.json; QC-20261008-12",
+      "counterexamples_and_limits": "A separately validated biconditional diagnostic can license inference in its domain but still does not install the route or name experience.",
+      "status": "METHOD_REQUIREMENT_ACTUAL_APPLICATION_OPEN",
+      "thought_experiment_role": "False-positive and false-negative diagnostic cases."
+    }
+  ]
+}
+

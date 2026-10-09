@@ -1,0 +1,52 @@
+{
+  "schema": "uct-r192-gap-ledger/1",
+  "research_id": "R192-CTBI-20261009",
+  "gaps": [
+    {
+      "id": "R192-G1",
+      "location": "R191 next-question wording and RESEARCH_NOTE.md §§1,4",
+      "issue": "The phrase adaptive-reflex twin did not consistently state whether equality meant the current selected projection, the history-expanded projection, or complete actual organization.",
+      "impact_nodes_or_downstream": ["R191:CURRENT_TWIN", "R191:ADAPTIVE_REFLEX_LIMIT", "R173:FAMILIAR_MINENESS_BOUNDARY"],
+      "counterexample": "A frozen table and formed controller agree currently but differ in actual history; two external labels can also differ while complete organization remains identical.",
+      "corrected_now": "Introduced the three-level signature ladder and restricted every nonidentification claim to its declared projection.",
+      "unresolved_premise": "No real complete signature has been admitted for a human or artificial bearer."
+    },
+    {
+      "id": "R192-G2",
+      "location": "candidate bridge search",
+      "issue": "Demanding an internal discriminator after stipulating complete K*-isomorphism is inconsistent with bridge admissibility and, inside UCT, with C1-based experiential difference.",
+      "impact_nodes_or_downstream": ["A:C1", "R157:COORDINATE_TRANSPORT", "R173:FAMILIAR_MINENESS_BOUNDARY"],
+      "counterexample": "Swapping reflex/endorsement placards on one unchanged complete structure changes only the external annotation.",
+      "corrected_now": "Complete-twin cases are now classified as C1 challenges or inadmissible label swaps, not prompts for another mechanism feature.",
+      "unresolved_premise": "C1 remains a fixed axiom, not empirically established by this argument."
+    },
+    {
+      "id": "R192-G3",
+      "location": "phenomenal target selection",
+      "issue": "Structural admissibility does not uniquely identify the external name familiar mineness.",
+      "impact_nodes_or_downstream": ["R157:SEMANTIC_RESIDUAL", "R157:MINENESS_BRIDGE_SCHEMA", "R173:FAMILIAR_MINENESS_BOUNDARY"],
+      "counterexample": "The 16-state finite signature has 16,384 bridges compatible with two fixed endpoint labels.",
+      "corrected_now": "Target naming is represented as a separate B_fam obligation and post-hoc label fitting is excluded.",
+      "unresolved_premise": "An independently warranted B_fam and its measurement/interpretive contract remain open."
+    },
+    {
+      "id": "R192-G4",
+      "location": "QC-20261008-12 response",
+      "issue": "A positive diagnostic could still be read as proof that a system actually uses the tested path.",
+      "impact_nodes_or_downstream": ["R191:GROUNDING", "R191:UCT_APPLICATION"],
+      "counterexample": "The finite epistemic space contains positive-test/no-use and use/negative-test cases.",
+      "corrected_now": "Actual use and test evidence are explicitly separate variables with a missing reliability premise.",
+      "unresolved_premise": "No real diagnostic reliability or installation evidence is supplied."
+    },
+    {
+      "id": "R192-G5",
+      "location": "novelty and publication framing",
+      "issue": "Complete-twin invariance overlaps classical organizational invariance, model-theoretic isomorphism preservation, and existing UCT R149/R157 results.",
+      "impact_nodes_or_downstream": ["R192-C1", "R192-C2", "R192-C4"],
+      "counterexample": "Presenting the result as a novel mathematical theorem would ignore those predecessors.",
+      "corrected_now": "The contribution is limited to a UCT-specific problem correction, signature-ladder protocol and exact application audit.",
+      "unresolved_premise": "Worldwide priority for the combined protocol has not been established and is not claimed."
+    }
+  ]
+}
+

@@ -1,0 +1,76 @@
+{
+  "schema": "uct-r192-complete-twin-check/1",
+  "research_id": "R192-CTBI-20261009",
+  "signature": {
+    "features": [
+      "online_authorization",
+      "actual_retained_revision",
+      "bearer_directed_coupling",
+      "actual_consumer_use"
+    ],
+    "state_count": 16
+  },
+  "current_projection": {
+    "coordinates": [
+      "online_authorization",
+      "bearer_directed_coupling",
+      "actual_consumer_use"
+    ],
+    "state_count": 8,
+    "predicate_count": 256
+  },
+  "complete_predicate_count": 65536,
+  "complete_twin_predicate_evaluations": 65536,
+  "projection_predicate_evaluations": 256,
+  "declared_pair": {
+    "frozen_reflex": {
+      "online_authorization": 1,
+      "actual_retained_revision": 0,
+      "bearer_directed_coupling": 1,
+      "actual_consumer_use": 1
+    },
+    "formed_controller": {
+      "online_authorization": 1,
+      "actual_retained_revision": 1,
+      "bearer_directed_coupling": 1,
+      "actual_consumer_use": 1
+    },
+    "equal_current_projection": true,
+    "equal_complete_signature": false
+  },
+  "sparse_target_sample_size": 2,
+  "compatible_complete_bridge_count": 16384,
+  "use_test_pairs": [
+    {
+      "actual_use": 0,
+      "positive_test": 0
+    },
+    {
+      "actual_use": 0,
+      "positive_test": 1
+    },
+    {
+      "actual_use": 1,
+      "positive_test": 0
+    },
+    {
+      "actual_use": 1,
+      "positive_test": 1
+    }
+  ],
+  "checks": {
+    "complete_twin_invariance_all_boolean_predicates": true,
+    "external_source_label_swap_changes_no_internal_predicate": true,
+    "current_projection_collision_is_exact": true,
+    "all_current_projection_predicates_fail_to_separate_pair": true,
+    "history_expansion_separates_declared_pair": true,
+    "complete_pair_is_not_a_complete_twin_after_history_expansion": true,
+    "sparse_named_targets_leave_multiple_compatible_bridges": true,
+    "compatible_bridge_count_matches_2_pow_14": true,
+    "positive_test_does_not_entail_actual_use_in_declared_epistemic_model": true,
+    "actual_use_does_not_entail_positive_test_without_reliability_premise": true
+  },
+  "all_checks_pass": true,
+  "interpretation_boundary": "Enumeration proves only the displayed finite extensional/projection facts. The general complete-twin result is ordinary isomorphism/extensionality reasoning. No row establishes actual installation, a named feeling, report accuracy, or consciousness.",
+  "content_sha256_without_this_field": "24c1856f6a378e73a727a17c6565e2a11978fa0f5070cf930bf714ab7efbeb54"
+}

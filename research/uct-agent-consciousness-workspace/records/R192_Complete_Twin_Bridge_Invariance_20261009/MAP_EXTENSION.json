@@ -1,0 +1,189 @@
+{
+  "schema": "uct-additive-research-module/1",
+  "research_id": "R192-CTBI-20261009",
+  "result_version": "CTBI-RESULT-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "integration_status": "PENDING_CHECKPOINT_DISABLED",
+  "source_note": "RESEARCH_NOTE.md",
+  "nodes": [
+    {
+      "id": "R192:DOMAIN",
+      "kind": "TYPED_COMPARISON_DOMAIN",
+      "statement": "Fix independently admitted actual token-windows P,Q, bearer/time binding, one common declared complete signature K*, complete actual structures, and any transported parameters.",
+      "scope": "One same-signature comparison; finite models, projections, reports and external names remain different sorts.",
+      "status": "CONDITIONAL_DECLARATION_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R192:SIGNATURE_LADDER",
+      "kind": "DEFINITION_AND_SCOPE_DISCIPLINE",
+      "statement": "Distinguish a selected current projection, a history-expanded projection and the declared complete actual K*-isomorphism type; equality at one level is never silently promoted to another.",
+      "scope": "Exactly R192:DOMAIN and explicitly declared projections.",
+      "status": "DECLARED_SCOPE_DISCIPLINE_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R192:ADMISSIBLE_BRIDGE",
+      "kind": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "statement": "An admissible candidate q is internal/extensional to K*, invariant under sort-preserving K*-isomorphism, uses only grounded relations and fixed or transported parameters, and excludes desired phenomenal names, reports, analyst source labels and outcome-selected features.",
+      "scope": "Candidate-selection discipline on R192:DOMAIN; admissibility does not establish correct phenomenal meaning.",
+      "status": "DECLARED_SELECTOR_CONTRACT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R192:COMPLETE_TWIN_INVARIANCE",
+      "kind": "CONDITIONAL_CONSEQUENCE",
+      "statement": "If D_K*(P) and D_K*(Q) are sort-preserving isomorphic, every admissible q agrees; under A:C1 their complete experiential types agree as well.",
+      "scope": "Complete K*-twins only, with transported parameters; no conclusion from partial behavioral or model equality.",
+      "status": "DERIVED_APPLICATION_NO_GENERAL_NOVELTY_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R192:PROJECTION_LIMIT",
+      "kind": "EXACT_FACTORIZATION_LIMIT",
+      "statement": "Equal selected projection defeats only candidate bridges factoring through that projection and does not entail complete-organizational equality.",
+      "scope": "One fixed projection pi and q=g∘pi on the R192 comparison domain.",
+      "status": "EXACT_REUSE_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R192:HISTORY_SCOPE_REPAIR",
+      "kind": "CONDITIONAL_SCOPE_CORRECTION",
+      "statement": "Actual prior occurrence, same-lineage continuation and present use may separate a current-projection twin after history expansion, but the new coordinate is not thereby familiar mineness or endorsement.",
+      "scope": "Actual-history application satisfying the R173 interface; copied values are excluded as occurrence substitutes.",
+      "status": "FINITE_SCOPE_RESULT_ACTUAL_APPLICATION_OPEN_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R192:LABEL_SWAP_LIMIT",
+      "kind": "CONDITIONAL_NONIDENTIFICATION",
+      "statement": "Swapping external reflex/endorsement labels or reports on one unchanged complete structure changes no admissible internal predicate.",
+      "scope": "Only labels not installed as K* relations; actual report-production changes require a new organization comparison.",
+      "status": "EXACT_CONDITIONAL_NONENTAILMENT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R192:TARGET_IDENTIFICATION_OBSTRUCTION",
+      "kind": "FINITE_UNDERDETERMINATION_AND_OPEN_BRIDGE",
+      "statement": "Structural admissibility and sparse external target labels need not select a unique B_fam; target naming remains a separate independently constrained bridge problem.",
+      "scope": "Finite witness plus the existing semantic-residual boundary; no global impossibility claim.",
+      "status": "EXACT_FINITE_WITNESS_INTERPRETATION_OPEN_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R192:RESEARCH_PROTOCOL",
+      "kind": "CONDITIONAL_METHOD_RESULT",
+      "statement": "Future twin arguments must declare their signature level, seek new organization only for projection twins, treat complete-twin experiential difference as a C1 challenge, and keep actual route use, diagnostic evidence and named phenomenal interpretation separate.",
+      "scope": "UCT research protocol; not a consciousness test or basal-experience gate.",
+      "status": "METHOD_PROPOSAL_DISABLED_PENDING_REVIEW",
+      "actual_premises_discharged": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "R192:r_complete_twin",
+      "all_of": ["R192:DOMAIN", "R192:ADMISSIBLE_BRIDGE", "R157:COORDINATE_TRANSPORT", "A:C1"],
+      "conclusion": "R192:COMPLETE_TWIN_INVARIANCE",
+      "statement": "Apply isomorphism preservation to one complete K* comparison and C1 only after actual/completeness premises.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "same_instance_required": true,
+      "binding": "P,Q,K*, h, parameters and q are fixed throughout; complete and projected structures are not interchanged.",
+      "proof_location": "RESEARCH_NOTE.md §3 R192-C1",
+      "alternative_route_semantics": "No alternative route; all premises are simultaneous.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R192:r_projection",
+      "all_of": ["R192:DOMAIN", "R192:SIGNATURE_LADDER", "R149:COMPATIBILITY", "R149:NULL_TARGET"],
+      "conclusion": "R192:PROJECTION_LIMIT",
+      "statement": "Restrict the existing fiber criterion to one declared selected projection.",
+      "kind": "RESTRICTED_INHERITED_APPLICATION",
+      "same_instance_required": true,
+      "binding": "The projection, target domain, bearer/time assignments and factorizing bridge are common.",
+      "proof_location": "RESEARCH_NOTE.md §3 R192-C2; EXACT_RESULTS.json",
+      "alternative_route_semantics": "Projection and complete-signature routes are distinct claims, not disjunctive proofs.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R192:r_history_repair",
+      "all_of": ["R192:DOMAIN", "R192:SIGNATURE_LADDER", "R173:RETENTIVE_BINDING_RELATION", "R173:PRESENT_SLICE_NONENTAILMENT"],
+      "conclusion": "R192:HISTORY_SCOPE_REPAIR",
+      "statement": "Expand a current projection only with actual R173-style occurrence, lineage, continuation and current-use relations.",
+      "kind": "RESTRICTED_HISTORY_APPLICATION",
+      "same_instance_required": true,
+      "binding": "All history facts concern the same bearer lineage, target and current consumer; copied memory is not an occurrence.",
+      "proof_location": "RESEARCH_NOTE.md §3 R192-C3; EXACT_RESULTS.json",
+      "alternative_route_semantics": "Actual history and copied value are rival cases, not interchangeable premises.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R192:r_label_swap",
+      "all_of": ["R192:ADMISSIBLE_BRIDGE", "R192:COMPLETE_TWIN_INVARIANCE"],
+      "conclusion": "R192:LABEL_SWAP_LIMIT",
+      "statement": "Vary only an excluded external label while retaining the complete structure.",
+      "kind": "COUNTERMODEL_CONDITIONAL",
+      "same_instance_required": true,
+      "binding": "The complete state and admissible q remain fixed; only the noninstalled annotation varies.",
+      "proof_location": "RESEARCH_NOTE.md §3 R192-C4; EXACT_RESULTS.json",
+      "alternative_route_semantics": "A changed report-producing mechanism is outside this label-only case.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R192:r_target_obstruction",
+      "all_of": ["R192:ADMISSIBLE_BRIDGE", "R157:SEMANTIC_RESIDUAL", "R173:FAMILIAR_MINENESS_BOUNDARY"],
+      "conclusion": "R192:TARGET_IDENTIFICATION_OBSTRUCTION",
+      "statement": "Combine selector admissibility with the existing naming residual and an exact sparse-label witness.",
+      "kind": "CONDITIONAL_LIMIT",
+      "same_instance_required": true,
+      "binding": "The internal candidate set and external target labels remain separately typed on one fixed domain.",
+      "proof_location": "RESEARCH_NOTE.md §3 R192-C5; EXACT_RESULTS.json",
+      "alternative_route_semantics": "More independent target constraints may narrow the candidate set; they are not silently supplied.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R192:r_protocol",
+      "all_of": ["R192:PROJECTION_LIMIT", "R192:COMPLETE_TWIN_INVARIANCE", "R192:HISTORY_SCOPE_REPAIR", "R192:TARGET_IDENTIFICATION_OBSTRUCTION"],
+      "conclusion": "R192:RESEARCH_PROTOCOL",
+      "statement": "Use the four jointly scoped results to choose the next research operation without adding a basal-experience gate.",
+      "kind": "SYNTHETIC_METHOD_CONCLUSION",
+      "same_instance_required": true,
+      "binding": "Each comparison retains its own fixed bearer/time/signature and evidence grade; no finite witness is promoted to actual installation.",
+      "proof_location": "RESEARCH_NOTE.md §§4,7–8",
+      "alternative_route_semantics": "Projection-twin and complete-twin branches are mutually exclusive diagnoses of one declared comparison.",
+      "status": "CANDIDATE_DISABLED"
+    }
+  ],
+  "context_links": [
+    {
+      "id": "R192:ctx_R149",
+      "type": "APPLICATION_NOT_NEW_FACTORIZATION_THEOREM",
+      "from": "R192:PROJECTION_LIMIT",
+      "to": "R149:COMPATIBILITY",
+      "statement": "R192 applies the existing representation-fiber theorem to reflex/endorsement projections."
+    },
+    {
+      "id": "R192:ctx_R157",
+      "type": "SELECTOR_TRANSPORT_AND_NAMING_BOUNDARY",
+      "from": "R192:TARGET_IDENTIFICATION_OBSTRUCTION",
+      "to": "R157:SEMANTIC_RESIDUAL",
+      "statement": "Internal coordinate transport does not select the external familiar-mineness name."
+    },
+    {
+      "id": "R192:ctx_R173",
+      "type": "OPEN_FAMILIAR_MINENESS_BRIDGE",
+      "from": "R192:HISTORY_SCOPE_REPAIR",
+      "to": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "statement": "History expansion can distinguish structure while B_fam remains open."
+    },
+    {
+      "id": "R192:ctx_U1",
+      "type": "NON_GATE_CONTEXT",
+      "from": "R192:RESEARCH_PROTOCOL",
+      "to": "A:U1",
+      "statement": "No selector, history relation, bridge identification or report is required for basal nonempty experience."
+    }
+  ],
+  "enabled_as_established_premise": false,
+  "release_effect": "NONE; UCT-MAP-v1.1.2 remains current"
+}
+
