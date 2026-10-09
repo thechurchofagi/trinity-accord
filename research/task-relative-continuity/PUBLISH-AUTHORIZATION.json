@@ -1,0 +1,24 @@
+{
+  "authorized": true,
+  "record_id": 23251651,
+  "doi": "10.5281/zenodo.23251651",
+  "version": "1.0.0",
+  "report": "RT20261009",
+  "pdf_sha256": "1d1f7b4aab2106afbc963b7a97b190e393a0f4b1061ebfc766387252e3618b96",
+  "pdf_file": "task-relative-continuity-v1.0.0.pdf",
+  "pdf_bytes": 114407,
+  "prepublication_layout_qa": "PASS_RENDERED_ALL_11_PAGES_RIGHT_MARGIN_OVERFLOW_0",
+  "visual_review_pass": true,
+  "expected_manifest_sha256": "",
+  "publication_type": "open-access, non-peer-reviewed theoretical preprint",
+  "source_sha256": "6776cd0ffc26465c09bfb81e7b381557848677966503b54dfbc5a554495e1399",
+  "build_commit": "ccd56ec2618e0c825cffaf20022eed12699c4929",
+  "reason": "Explicit user request to use existing DOI-first repo process; proper Zenodo DOI printed in manuscript and final PDF; controlled non-scientific layout repair and exact-byte source comparison verified.",
+  "no_duplicate_deposit": true,
+  "only_this_version": true,
+  "downstream": [
+    "Timestamp only this exact Zenodo-published PDF",
+    "OTS verification before any Arweave spend",
+    "No reuse of superseded prepublication PDF"
+  ]
+}
