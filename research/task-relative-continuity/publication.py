@@ -144,16 +144,36 @@ def publish():
  public=read("/records/"+str(rid),auth=False)
  if public.get("doi")!=doi or public.get("id")!=rid:raise RuntimeError("Public DOI differs")
  print("PUBLIC_FILE_INVENTORY",[(x.get("key"),x.get("size"),x.get("checksum")) for x in public.get("files",[])],flush=True)
- rows=[]; mismatches=[]
- for f in exp["files"]:
-  name=f["name"]
-  url="https://zenodo.org/records/"+str(rid)+"/files/"+urllib.parse.quote(name)+"?download=1"
-  with urllib.request.urlopen(url,timeout=100) as response:b=response.read(16000000)
-  if not b or len(b)>=16000000:raise RuntimeError("Public file empty or oversized: "+name)
+ rows=[];mismatches=[]
+ names={x.get("key") for x in public.get("files",[])}
+ if PDF not in names or MD not in names or ZIP not in names:raise RuntimeError("Public inventory lacks expected core files")
+ e_map={x["name"]:x for x in exp["files"]}
+ for remote in public["files"]:
+  name=remote["key"]
+  if "/" in name or ".." in name:raise RuntimeError("Unsafe filename")
+  links=remote.get("links") or {}
+  urls=[links.get("content"),links.get("download"),
+        "https://zenodo.org/api/records/"+str(rid)+"/files/"+urllib.parse.quote(name)+"/content",
+        "https://zenodo.org/records/"+str(rid)+"/files/"+urllib.parse.quote(name)+"?download=1"]
+  b=None
+  for url in urls:
+   if not url:continue
+   q=urllib.parse.urlsplit(url)
+   if q.scheme!="https" or q.hostname!="zenodo.org":continue
+   try:
+    with urllib.request.urlopen(urllib.request.Request(url,headers={"User-Agent":"RTTH-DOI-Readback/1.0"}),timeout=80) as response:c=response.read(16000000)
+    if not c or len(c)>=16000000:continue
+    if name==PDF and not c.startswith(b"%PDF"):continue
+    if name==ZIP and not c.startswith(b"PK"):continue
+    b=c;break
+   except (urllib.error.HTTPError,urllib.error.URLError,TimeoutError):continue
+  if b is None:raise RuntimeError("Cannot retrieve authentic public file from declared Zenodo links: "+name)
   observed={"name":name,"bytes":len(b),"sha256":digest(b)}
-  if observed["sha256"]!=f["sha256"] or observed["bytes"]!=f["bytes"]:mismatches.append(name)
-  (pub/name).write_bytes(b)
-  rows.append(observed)
+  hash_from_metadata=remote.get("checksum")
+  if hash_from_metadata and hash_from_metadata not in ("md5:"+__import__("hashlib").md5(b).hexdigest(),__import__("hashlib").md5(b).hexdigest()):raise RuntimeError("Public metadata checksum mismatch: "+name)
+  prior=e_map.get(name)
+  if prior is None or observed["sha256"]!=prior["sha256"] or observed["bytes"]!=prior["bytes"]:mismatches.append(name)
+  (pub/name).write_bytes(b);rows.append(observed)
  md=(pub/MD).read_text()
  if TITLE.split(":")[0] not in md or "route" not in md.lower():raise RuntimeError("Published Markdown is unrelated to reviewed study")
  pdftext=subprocess.check_output(["pdftotext",str(pub/PDF),"-"],text=True)
