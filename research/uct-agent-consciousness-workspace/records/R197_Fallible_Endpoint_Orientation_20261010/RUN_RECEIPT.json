@@ -1,0 +1,12 @@
+{
+  "research_id": "R197-FEO-20261010",
+  "exact_checker_status": "PASS_DECLARED_FINITE_ALGEBRA_ONLY",
+  "checked_instances": 193,
+  "map_audit_status": "STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN",
+  "completed_map_unchanged": "UCT-MAP-v1.1.2",
+  "publication_coverage": "UCT-PUB-v1.0.9",
+  "content_commit": "2896928ce07d52151568ade05434b3ead4cfb0e9",
+  "persistence_receipt_commit": null,
+  "persistence_receipt_commit_note": "The self-containing receipt commit is verified and reported after creation; its SHA cannot be embedded without changing itself.",
+  "library_master_version": 55
+}

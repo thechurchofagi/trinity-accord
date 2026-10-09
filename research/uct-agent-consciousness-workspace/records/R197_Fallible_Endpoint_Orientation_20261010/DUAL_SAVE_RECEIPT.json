@@ -1,0 +1,39 @@
+{
+  "schema": "uct-dual-save-receipt/1",
+  "research_id": "R197-FEO-20261010",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "opening_commit": "0f016f3db3c692539e18f0757ecdd9c9724557cb",
+    "content_commit": "2896928ce07d52151568ade05434b3ead4cfb0e9",
+    "content_tree": "56c7f987a6fb5f706add84f614d0e7d394f3a595",
+    "content_commit_verified": true,
+    "key_files_verified": ["CURRENT_STATE.json", "records/R197_Fallible_Endpoint_Orientation_20261010/EXACT_RESULTS.json"]
+  },
+  "library": {
+    "master": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "version": 55,
+      "bytes": 632423,
+      "sha256": "03f6426d4236d77ab31d050bd47a8c744a57bd3178193613163223672c4e2f45",
+      "identity_preserved": true
+    },
+    "increment_zip": {
+      "library_file_id": "libfile_094d82fb52748191abd45f5da0bb6723",
+      "bytes": 122671,
+      "sha256": "48c4090b33f576f59e7d21064c665c5e45940541b5f986802bb0c6d048881ed6",
+      "scope": "29-file incremental working-set recovery package relative to remote commit 29dd938938cc468d15105fc1cb70ea17105cb1fe; not the whole repository or complete history"
+    },
+    "manifest": {
+      "library_file_id": "libfile_73919b2c07d0819188b685076555c4ef",
+      "bytes": 7114,
+      "sha256": "797812ebd4f4833a7720e756c2dc4e5d717f93924bbd4add0888e20ee223cc4f"
+    },
+    "reported_bytes_match_local": true,
+    "local_identity_xattrs_applied": true
+  },
+  "latest_completed_step": "R197 conditional signed-endpoint result, modality correction, transport countermodel, complete-map audit and entry-point update",
+  "unfinished": ["identify and preregister one actual endpoint candidate with independent semantics, signed reliability, same-instance use and class-conditional transport evidence", "external review of disabled R197 map candidate"],
+  "failures": ["no actual familiar-mineness endpoint was validated", "standalone manuscript remains on hold", "open review items remain unresolved"],
+  "exact_resume": "Fetch the verified branch head, read the required entry files and Library master v55, then resume from R197 HANDOFF_ZH.md. Use the increment only with Git history or a complete baseline."
+}
