@@ -26,4 +26,8 @@ QC10、IA-QC11、QC12、QC13 均未自报关闭。特别保留“实际使用某
 
 ## 保存与恢复
 
-本节将在 GitHub 与固定持久副本完成逐字节回读后补入实际提交、版本、包 ID 和哈希。恢复时先取远端分支最新头，再读根 `CURRENT_STATE.json`、`HANDOFF.md`、`MASTER_INDEX.md`、固定主交接最新版和本文件；不要用旧副本覆盖新提交。
+- GitHub 内容提交：`5e2b49f026eb65efa96756e2921efd7c267708aa`；以 `24654110394aa30c740f4687ad1d76793a449cb8` 为预期头快进，状态、精确结果和本交接回读通过。
+- 固定主交接保持 ID `libfile_4175a81748fc819187fa8f5771f056fa`，当前版本 53，625,769 字节，返回 backing file `file_00000000c9c482108fa1a0f9e31cd013`；元数据和开头内容回读通过。本地待上传字节 SHA256 为 `02cfe7ab0994250c3245a5dc6bea1ae57df7506b156c72e90f20a6795903dd48`，但下载端 HTTP 403，未完成逐字节回下载，不能称为字节级核验。
+- R195 增量包 ID `libfile_a25b64ae13648191954f7fd1ac541052`，版本 0，118,766 字节，backing file `file_000000008f0c8211ad60358b90f4aea4`；本地 SHA256 `fa1968e921a6f6642b58458a9479b5a71f8e97fb98ac65280263f6a1b32df366`，本地 ZIP 与 31 条内部校验通过，Library 元数据回读一致。下载端同样 HTTP 403，尚未逐字节回读。该包只含相对基线 `24654110394aa30c740f4687ad1d76793a449cb8` 的 29 个仓库变更文件及 MANIFEST/README/SHA256SUMS，不是完整备份。
+
+恢复时先取远端分支最新头，再读根 `CURRENT_STATE.json`、`HANDOFF.md`、`MASTER_INDEX.md`、固定主交接 v53 和本文件。若以后能下载增量包，先核对外部 SHA256，再从所列基线叠加并运行 `sha256sum -c SHA256SUMS.txt`。下一轮先补做两项持久文件的逐字节回读，不用旧副本覆盖新提交。

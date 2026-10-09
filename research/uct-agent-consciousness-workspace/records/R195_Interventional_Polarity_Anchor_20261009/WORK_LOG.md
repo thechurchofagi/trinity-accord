@@ -10,5 +10,8 @@
 8. Restored and verified all 82 UCT-MAP-v1.1.2 capsule members. Traversed 913 nodes, 424 active rules, 261 contexts, 10 suspended IDs and 1,608 review items. All 18 structural checks pass; semantic adoption stays open.
 9. Responded to QC10, IA-QC11, QC12 and QC13 without self-closing them.
 10. Updated nondeductive publication coverage to UCT-PUB-v1.0.7 with decision `CONTINUE_RESEARCH_HOLD_STANDALONE`; no manuscript or publication action was forced.
+11. Saved the content tree to GitHub by expected-SHA fast-forward and read back the branch commit, current state, exact results and Chinese handoff.
+12. Built a 29-file incremental recovery archive plus manifest, README and 31-entry checksum file. Local SHA256 and ZIP integrity checks pass.
+13. Replaced the fixed persistent master at the same identity through version 53 and created the R195 increment. Metadata and master-head reads pass, but exact byte materialization for both files returned HTTP 403; this is retained as incomplete verification rather than reported as dual byte-level success.
 
-Persistence steps and verified receipts are appended only after the remote and persistent copies are read back. No PR, CI request, deployment, DOI, Zenodo, OTS, Arweave, message, production or scheduler action is part of R195.
+No PR, CI request, deployment, DOI, Zenodo, OTS, Arweave, message, production or scheduler action is part of R195.

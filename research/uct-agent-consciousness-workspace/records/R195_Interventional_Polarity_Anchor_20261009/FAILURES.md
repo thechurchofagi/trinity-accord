@@ -7,3 +7,7 @@
 5. **“The negative result rules out all future anchors.”** Rejected. The theorem is restricted to a complement-closed deterministic binary model class and explicitly admits independently target-directed asymmetry as an escape.
 
 No checker failure occurred in the final run. These conceptual failures are preserved because each was a plausible but invalid route from R194.
+
+## Persistence verification failure
+
+Both persistent writes were accepted and their names, backing IDs and byte sizes were read back; the fixed master v53's opening content was also read successfully. Exact byte materialization of the master and increment nevertheless returned HTTP 403 on repeated signed-download attempts. Local hashes and ZIP tests are recorded, but they are not substituted for a remote-byte comparison. Next round must retry exact readback before describing the persistent copies as byte-verified.

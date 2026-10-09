@@ -1,0 +1,41 @@
+{
+  "receipt_id": "R195-DUAL-SAVE-v1",
+  "research_id": "R195-IPA-20261009",
+  "github": {
+    "branch": "uct-agent-consciousness-workspace",
+    "base_commit": "24654110394aa30c740f4687ad1d76793a449cb8",
+    "content_commit": "5e2b49f026eb65efa96756e2921efd7c267708aa",
+    "final_receipt_commit": null,
+    "expected_sha_fast_forward": "PASS",
+    "key_file_readback": "PASS"
+  },
+  "library_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "previous_version": 51,
+    "intermediate_version": 52,
+    "current_version": 53,
+    "backing_file_id": "file_00000000c9c482108fa1a0f9e31cd013",
+    "bytes": 625769,
+    "local_sha256": "02cfe7ab0994250c3245a5dc6bea1ae57df7506b156c72e90f20a6795903dd48",
+    "metadata_and_head_readback": "PASS",
+    "exact_byte_redownload": "FAILED_HTTP_403"
+  },
+  "library_increment": {
+    "library_file_id": "libfile_a25b64ae13648191954f7fd1ac541052",
+    "version": 0,
+    "backing_file_id": "file_000000008f0c8211ad60358b90f4aea4",
+    "bytes": 118766,
+    "local_sha256": "fa1968e921a6f6642b58458a9479b5a71f8e97fb98ac65280263f6a1b32df366",
+    "local_zip_and_31_member_checksum_test": "PASS",
+    "metadata_readback": "PASS",
+    "exact_byte_redownload": "FAILED_HTTP_403",
+    "scope": "Increment only: 29 repository files changed from verified R194 final head to verified R195 content commit, plus MANIFEST.json, README.md and SHA256SUMS.txt; not a full repository, workset or history backup."
+  },
+  "status": "GITHUB_VERIFIED_LIBRARY_WRITES_ACCEPTED_METADATA_VERIFIED_EXACT_LIBRARY_BYTE_READBACK_INCOMPLETE",
+  "recovery_order": [
+    "Fetch the branch and verify the content and final receipt commits.",
+    "Read CURRENT_STATE.json, HANDOFF.md, MASTER_INDEX.md, fixed master version 53, then R195 HANDOFF_ZH.md.",
+    "If using the increment after byte download becomes available, verify its external SHA256, overlay only on base commit 24654110394aa30c740f4687ad1d76793a449cb8, then run sha256sum -c SHA256SUMS.txt.",
+    "Next round retry exact byte materialization for master v53 and the R195 increment before calling the Library copy byte-verified."
+  ]
+}
