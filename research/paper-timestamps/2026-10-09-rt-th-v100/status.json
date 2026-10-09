@@ -1,0 +1,23 @@
+{
+  "batch": "2026-10-09-rt-th-v100",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 113610,
+      "doi": "10.5281/zenodo.23251651",
+      "name": "Task_Relative_Continuity_v1.0.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-10-09-rt-th-v100/proofs/RT-TH-2026-01/Task_Relative_Continuity_v1.0.0.pdf.ots",
+      "proof_sha256": "07276b9481e921ff126a0bd163f5a0f4379d0bc9fc56d3f64136c3ef6437163b",
+      "report": "RT-TH-2026-01",
+      "role": "DOI-embedded public PDF, byte-verified",
+      "sha256": "18a4914635c2853ed089df137cb6b21024ed70f7d6dd0fe071a6da2dd5ca38af",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 1,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}
