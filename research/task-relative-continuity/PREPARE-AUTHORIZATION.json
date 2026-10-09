@@ -5,7 +5,10 @@
  "version":"1.0.0",
  "source_sha256":"6776cd0ffc26465c09bfb81e7b381557848677966503b54dfbc5a554495e1399",
  "author":"Hongju Liu",
- "instruction":"Author explicitly requests final review then DOI, OTS and Arweave through repository flow. This stage reserves one new record and freezes the exact PDF only; public publish requires exact-build authorization after visual QA.",
+ "instruction":"Author requests final review then DOI, OTS and Arweave. Resume build of existing reserved DOI only; exact public publish still awaits PDF visual QA.",
  "old_records_must_not_be_changed":true,
- "new_record_only":true
+ "new_record_only":true,
+ "resume_existing_record_id":23251651,
+ "resume_existing_doi":"10.5281/zenodo.23251651",
+ "build_recovery":"Install lmodern.sty; keep diagnostic whitespace in raw logs; source and proofs unchanged."
 }
