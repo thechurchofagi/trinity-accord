@@ -38,5 +38,14 @@
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.1 (existing canonical concurrent update, retained without overwriting)",
   "complete_map_sha256": "c7cb8feafa905518bf485019fd7b2e463d70682a563993eb5856678ccfe0ba66",
-  "review_ledger_sha256": "6e46361436fa64081bb7d961a491dab241f77948e3bd7fe01c17b773436b2cd3"
+  "review_ledger_sha256": "6e46361436fa64081bb7d961a491dab241f77948e3bd7fe01c17b773436b2cd3",
+  "latest_pending_research": {
+    "id": "R187-CMA-20261009",
+    "result_version": "CMA-RESULT-v0.1.0",
+    "status": "PENDING_MAP_AUDIT_INCOMPLETE",
+    "work_log": "records/R187_Causal_Multiplicity_20261009/WORK_LOG.md",
+    "handoff": "records/R187_Causal_Multiplicity_20261009/HANDOFF_ZH.md",
+    "complete_archive": "records/R187_Causal_Multiplicity_20261009/CMA-RESULT-v0.1.0_Complete_Archive.zip"
+  },
+  "latest_pending_research_note": "Pending R187 added without altering the completed formal graph, release sequence, review counts or source hashes; older R185/AC/IL/R186/UI/CM remain pending and non-authoritative."
 }
