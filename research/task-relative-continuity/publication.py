@@ -143,6 +143,7 @@ def publish():
    if not obj.get("submitted"):raise RuntimeError("Unresolved publish intent")
  public=read("/records/"+str(rid),auth=False)
  if public.get("doi")!=doi or public.get("id")!=rid:raise RuntimeError("Public DOI differs")
+ print("PUBLIC_FILE_INVENTORY",[(x.get("key"),x.get("size"),x.get("checksum")) for x in public.get("files",[])],flush=True)
  rows=[]; mismatches=[]
  for f in exp["files"]:
   name=f["name"]
