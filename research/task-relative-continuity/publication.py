@@ -301,8 +301,17 @@ def probe_existing_candidates():
                     'created':row.get('created'),'modified':row.get('modified')}
                 candidates.append(candidate)
         if len(rows)<100:break
+    # Diagnose exactly the already-identified draft even if its title was changed.
+    record_id=23251651
+    remote=read('/deposit/depositions/'+str(record_id))
+    md=remote.get('metadata') or {}
+    direct_record={'record_id':remote.get('id'),'doi':remote.get('doi') or md.get('prereserve_doi',{}).get('doi'),
+      'title':md.get('title'),'version':md.get('version'),'creator_names':[c.get('name') for c in md.get('creators',[])],
+      'notes_excerpt':(md.get('notes') or '')[:500],'submitted':remote.get('submitted'),
+      'file_names':[f.get('filename') or f.get('key') for f in remote.get('files',[])],
+      'modified':remote.get('modified'),'source_identity_expected':'RT-TH-PAPER-v1.0.0; source-sha256=6776cd0ffc26465c09bfb81e7b381557848677966503b54dfbc5a554495e1399'}
     result={'scope':'Private Zenodo account inspection; no create, upload or publish calls','expected_record':REPORT,
-            'title':TITLE,'version':VERSION,'found':len(candidates),'candidates':candidates}
+            'title':TITLE,'version':VERSION,'found':len(candidates),'candidates':candidates,'direct_record':direct_record}
     save('collision-report.json',result)
     persist()
     print('RT_TH_COLLISION_PROBE',json.dumps(result,ensure_ascii=False))
