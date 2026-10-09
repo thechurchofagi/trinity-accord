@@ -1,12 +1,13 @@
 {
-  "schema": "uct-effective-map-manifest/1.3",
+  "schema": "uct-effective-map-manifest/1.2",
   "entry_id": "UCT_EFFECTIVE_FORMAL_MAP",
-  "revision": "UCT-MAP-v1.1.1",
+  "revision": "UCT-MAP-v1.1.0",
   "base": {
-    "release_id": "UCT-MAP-v1.1.0",
-    "descriptor_path": "versions/UCT-MAP-v1.1.0/RELEASE.json",
-    "effective_graph_sha256": "92368e0f0a4fd1e3c61849784ac090a3f8948f3b721d9fc0dade4b8f4ec4966d",
-    "review_ledger_sha256": "6375c6800e491fb9ae42b324340220c19ac30b4e75af0e41482dd269c65f3768"
+    "release_id": "UCT-MAP-v1.0.0",
+    "descriptor_path": "versions/UCT-MAP-v1.1.0/history/UCT_FORMAL_GRAPH_MODULES.json",
+    "effective_graph_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+    "review_ledger_sha256": "aa774c7cecd09056dba26b5d827a80d5e38ab6a0462f2e7401581cfd12ebc1e2",
+    "restorer": "versions/UCT-MAP-v1.0.0/restore_capsule.py"
   },
   "inherited_modules": [
     "CORE20261008",
@@ -28,40 +29,28 @@
       "sha256": "4a59e3f2a9bc29f241b5b5ee39a384836ed7ea91b9f7c2427ed15f1c8fb331d3",
       "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
       "automatic_premise_truth": false
-    },
-    {
-      "id": "OL20261009",
-      "result_version": "OL-RESULT-v0.1.0",
-      "source_kind": "verified_capsule_member_and_remote_text",
-      "capsule_path": "versions/UCT-MAP-v1.1.1/UCT_MAP_v1.1.1_Capsule.tar.xz",
-      "capsule_sha256": "f4604377a3c6dca5de56bf71883006a03dbf290b7f92af2136e682087ff7bfc3",
-      "member": "MAP_EXTENSION.json",
-      "source_path": "records/OL20261009_Observable_Locality/MAP_EXTENSION.json",
-      "sha256": "9d3fcf5ab75903c549eed8a4c3d8828a4789f55754a353f628172bb306532994",
-      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
-      "automatic_premise_truth": false
     }
   ],
-  "merge_order": "Restore exact v1.1.0 effective graph/ledger; apply the OL module. The first 1,373 scientific item objects are unchanged; all 11 OL rules have fresh OL heads. Pending modules are not active.",
-  "restorer": "versions/UCT-MAP-v1.1.1/restore_capsule.py",
-  "effective_loader_after_restore": "build_map_release.py",
+  "merge_order": "Restore the exact parent effective graph/ledger, then the TH/RB capsule. code/build_release.py appends the reviewed extension without changing parent scientific records and materializes saved per-ID compatibility judgments.",
+  "restorer": "versions/UCT-MAP-v1.1.0/restore_capsule.py",
+  "effective_loader_after_restore": "restored_TH_RB/code/build_release.py",
   "expanded_outputs": [
     "UCT_EFFECTIVE_GRAPH.json",
     "REVIEW_LEDGER.json",
     "REVIEW_LEDGER.csv",
     "RELEASE.json"
   ],
-  "effective_graph_sha256": "c7cb8feafa905518bf485019fd7b2e463d70682a563993eb5856678ccfe0ba66",
-  "review_ledger_sha256": "6e46361436fa64081bb7d961a491dab241f77948e3bd7fe01c17b773436b2cd3",
+  "effective_graph_sha256": "92368e0f0a4fd1e3c61849784ac090a3f8948f3b721d9fc0dade4b8f4ec4966d",
+  "review_ledger_sha256": "6375c6800e491fb9ae42b324340220c19ac30b4e75af0e41482dd269c65f3768",
   "full_semantic_compatibility_review_completed": true,
-  "audit_scope": "Author-side full-item compatibility review on frozen v1.1.0 1,373 records + 46 OL records; original proofs retained, affected derivations rechecked. Concurrent disabled R186 and other pending records not included in activated census.",
-  "reviewed_nodes": 804,
-  "reviewed_rule_records": 387,
-  "active_conditional_rules": 377,
+  "audit_scope": "All 1278 inherited active-census records plus 95 TH/RB records; saved proofs/evidence retained with this-cycle compatibility checks, not independent reproof. Pending R185/AC/IL and unmapped historical records are excluded from promotion.",
+  "reviewed_nodes": 776,
+  "reviewed_rule_records": 376,
+  "active_conditional_rules": 366,
   "suspended_historical_rules": 10,
-  "context_links": 228,
-  "review_items": 1419,
-  "audit": "versions/UCT-MAP-v1.1.1/AUDIT_REPORT.md",
+  "context_links": 221,
+  "review_items": 1373,
+  "audit": "versions/UCT-MAP-v1.1.0/AUDIT_REPORT.md",
   "pending_checkpoints": [
     {
       "id": "R185",
@@ -110,22 +99,11 @@
       "handoff": "records/R186_Higher_Order_Intervention_Masking_20261009/HANDOFF_ZH.md",
       "coverage": "records/R186_Higher_Order_Intervention_Masking_20261009/AUDIT_COVERAGE.json",
       "note": "82,213 finite test words and proof; all 1,373 inherited items mechanically scanned, 625 requiring fresh semantic review; not fully promoted."
-    },
-    {
-      "id": "UI20261009",
-      "result_version": "UI-RESULT-v0.1.0",
-      "status": "PENDING_MAP",
-      "enabled_as_established_premises": false,
-      "source_kind": "preserved_archive_member",
-      "capsule": "versions/UCT-MAP-v1.1.1/UCT_MAP_v1.1.1_Capsule.tar.xz",
-      "member_prefix": "pending_UI/",
-      "instruction": "Previous-conversation UI mathematical construction is preserved for audit, not activated. Its entire missing full-map semantic review remains open."
     }
   ],
   "node_presence_is_premise_truth": false,
   "actual_application_status": "OPEN",
   "suspended_rules_may_infer": false,
   "unmodified_root_graph_is_only_historical_base": true,
-  "on_source_change": "Fail closed; reconcile exact current sources and pending work, perform semantic compatibility review and affected rederivation, save a new immutable version/sequence.",
-  "parent_release": "UCT-MAP-v1.1.0"
+  "on_source_change": "Fail closed; reconcile exact current sources and pending work, perform semantic compatibility review and affected rederivation, save a new immutable version/sequence."
 }

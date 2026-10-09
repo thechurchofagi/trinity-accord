@@ -1,0 +1,636 @@
+{
+  "schema": "uct-additive-conditional-module/1.0",
+  "module_id": "OL20261009",
+  "result_version": "OL-RESULT-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.0",
+  "method": "MGTD v1.0.1",
+  "status": "REVIEWED_CONDITIONAL_SCHEMA",
+  "scientific_claim_scope": "Finite LTI, fixed physical write ports, finite observability, explicit Q metric and separately justified actual processes.",
+  "automatic_premise_truth": false,
+  "nodes": [
+    {
+      "id": "OL20261009:RESEARCH_CHARTER",
+      "kind": "METHOD_CHARTER",
+      "statement": "Differentiate externally matched competent controllers with distinct actual installed local intervention organization, without turning task success, synchronized values, or a fitted mathematical chart into a phenomenal-existence gate.",
+      "scope": "UCT research-method choice; no deductive ontology.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:MODEL",
+      "kind": "MODEL_ASSUMPTION",
+      "statement": "Use z(t+1)=Az(t)+Bu(t), y(t)=Cz(t), real n-state LTI recipient; matched source/recipient episode and identical subsequent controls u. No extra controller or later corrective write before evaluation.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:HORIZON",
+      "kind": "DEFINITION",
+      "statement": "O_H=[C;CA;...;CA^(H-1)] and the H-stack of differences is O_H dz, including immediate lag0; only H declared snapshots are judged.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:SOURCE_KICK",
+      "kind": "MODEL_ASSUMPTION",
+      "statement": "A source primitive write transports through admitted I/O-equivalence map to target recipient state displacement v; a passive coordinate relabeling transports ALL primitive write ports and observers too.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:WRITE_FAMILY",
+      "kind": "MODEL_ASSUMPTION",
+      "statement": "For each admitted subset J of <=k physical primitive recipient write coordinates, the recipient may choose ANY instantaneous amplitude E_J a on that set at the declared write instant; supports are fixed physically and cannot be replaced with analyst-chosen virtual coordinates.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:METRIC",
+      "kind": "MODEL_ASSUMPTION",
+      "statement": "A predeclared positive-definite observation precision matrix Q assigns ||r||_Q^2=rTQr, in fixed calibrated output units across both comparisons.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:GAP",
+      "kind": "DEFINITION",
+      "statement": "Gamma_H,k(v)=min_{|J|<=k} inf_{a} ||Q^(1/2) O_H(v-E_J a)||_2. This is an observable counterfactual imitation gap, NOT an experience measure.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:PROJECTION",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "For W=O_H^T Q O_H, Gamma^2=min_J vT[W-W E_J(E_J^T W E_J)^+ E_J^T W]v; use Moore-Penrose + when singular. With O_H full column rank and nonempty J, ordinary inverse applies.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md Proposition 1; weighted least squares orthogonal projection in the Q norm.",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:ZERO",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Gamma=0 iff at least one admissible J has O_H v in range(O_H E_J); a zero observed gap can coexist with nonlocal hidden state differences when O_H is rank deficient.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md Proposition 2; exact image criterion.",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:OBSERVABLE",
+      "kind": "MODEL_ASSUMPTION",
+      "statement": "O_H has full column rank n (the chosen finite observation horizon sees all n state directions). This is a model/measurement assumption, not an actual-brain empirical certificate.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:SPARSE_IFF",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Under OBSERVABLE, Gamma=0 iff there is an admissible <=k-sparse physical write v. If support(v)>k, Gamma>0 for fixed installed write ports and observation metric.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md Proposition 2; injectivity of O_H.",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:NOISE_CONTRACT",
+      "kind": "MODEL_ASSUMPTION",
+      "statement": "Each independently observed H-trace is perturbed by an adversarial additive error of Q-norm at most epsilon; both comparisons use the same calibrated Q and same target condition.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:NOISE_SEPARATION",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "If Gamma>2epsilon then no recipient admissible single-write trace and source target trace can share one observed outcome within the two epsilon-balls; if Gamma<=2epsilon this test alone does not force distinguishability.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md Proposition 3; triangle inequality.",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:COORDINATE_CONTRACT",
+      "kind": "MODEL_ASSUMPTION",
+      "statement": "For any passive invertible z=Lzprime, transform Oprime=O L, vprime=L^-1 v and each installed write subspace WJprime=L^-1 WJ; do not repick coordinate-sparse writes after re-description.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:COVARIANCE",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Under COORDINATE_CONTRACT, Gamma is invariant. Using newly stipulated sparse-coordinate ports after a change of coordinates is a DIFFERENT experimental intervention contract.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md Proposition 4; equality of feasible output-trace sets.",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:TWIN_MODEL",
+      "kind": "FINITE_CONSTRUCTION",
+      "statement": "Source A=diag(1/2,1/4), B=(1,1), C=(1,1); recipient state z=Sx with S=[[1,1],[1,-1]], Arec=[[3/8,1/8],[1/8,3/8]], Brec=(2,0), Crec=(1,0); matched ordinary IO for all input sequences, independently fixed primitive one-component writes.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md Example 1; IL20261009 antecedent is explicitly credited but not promoted as a premise.",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:RESET_NONISO",
+      "kind": "CONDITIONAL_MATHEMATICAL_THEOREM",
+      "statement": "For TWIN_MODEL with its independently stipulated physical primitive single-component overwrite families, there is no bijection preserving all primitive resets and dynamics between source and recipient. Product reset normal form restricts candidates to factorwise/permutation maps; recipient dynamics are cross-coupled whereas source is coordinatewise autonomous.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md Proposition 5; proof independently restated from IL20261009, not promoted from pending checkpoint.",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:PREPARED",
+      "kind": "FINITE_CONSTRUCTION",
+      "statement": "From source x=(1,2) and recipient z=(3,-1), desired source x1:=0 transports to recipient v=(-1,-1), requiring both primitive target components if physically enacted.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md Example 1.",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:HORIZON_EFFECT",
+      "kind": "FINITE_PROVED_WITNESS",
+      "statement": "With k=1, Q=I, H=1 gives Gamma=0 because immediate readout may be matched by z1-only write; at H=2, squared optimal gap becomes 1/73 (>0).",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md Example 1; executable exact rational check.",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:OPTIMAL_WRITE",
+      "kind": "FINITE_PROVED_WITNESS",
+      "statement": "At H=2 source target outputs (2,1/2). Best one-port recipient writes z1:=143/73 give two-readout squared Euclidean discrepancy 1/73; no one-port write attains zero. Old infinity-norm gap 1/11 remains a different norm and is not replaced.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md Example 1; exact minimization.",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:UNOBSERVABLE_CONTROL",
+      "kind": "FINITE_COUNTEREXAMPLE",
+      "statement": "O_1=[1,0] is rank deficient: the kick v=(-1,-1) and a matching z1-only kick have identical immediate readout although their states differ; instant endpoint agreement is insufficient.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:FALSE_GAUGE_CONTROL",
+      "kind": "FINITE_COUNTEREXAMPLE",
+      "statement": "For K=I2, v=(1,1), k=1 original squared gap is1; after passive L=[[1,1],[1,-1]], illegitimately redefining recipient primitive ports as new coordinate axes can produce zero gap. This is a different intervention set, not invariance failure.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:COMPENSATION_CONTROL",
+      "kind": "INFERENCE_GUARD",
+      "statement": "Allowing an unmodeled second write, new side input, alternate readout or modified horizon can erase the target residual. Without installed physical port scope and full incoming transcript, Gamma is not a physical organization certificate.",
+      "scope": "Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:PHYSICAL_REDUCT",
+      "kind": "OPEN_PHYSICAL_BRIDGE",
+      "statement": "Before a real-world UCT application, independently identify actual tokens, complete common signature K, physical part/port ontology, timed write events, source-target matching, and a constitutive reduct whose full isomorphisms preserve these operations. No simulated fit or report completes this obligation.",
+      "scope": "Actual organism, cell, neural ensemble or deployed AI process; independent ontic grounding required.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "APPLICATION_OPEN",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "OPEN physical instantiation, not inferred from fitted mathematical outputs.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:C1_APPLICATION",
+      "kind": "CONDITIONAL_UCT_APPLICATION",
+      "statement": "If PHYSICAL_REDUCT is independently discharged for two actual tokens, their complete K-isomorphisms must preserve grounded local-write structures. Nonisomorphism of those reducts excludes full isomorphism; inherited A:C1_OI then implies distinct COMPLETE phenomenal structural types, not named qualia or scalar intensity.",
+      "scope": "Two separately admitted actual process tokens, common complete K, same comparison scale and physically grounded reduct.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "C1 truth not independently proved, actual bearer/ports and named phenomenal quality still OPEN.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:LOCAL_NO_ERASURE",
+      "kind": "INHERITED_CONDITIONAL_GUARD",
+      "statement": "Where real local processes continue over the episode and meet A:P3/A:U1, altering accessible ports, noise tolerance or reader competence does not by itself erase their nonempty experience; complete token-relative types may change.",
+      "scope": "Actual local process persistence, independently checked; not mathematical storage only.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:NOVELTY",
+      "kind": "PRIOR_ART_BOUNDARY",
+      "statement": "Optimal projection, observability Gramians, robust residuals and sparse actuation are established mathematics. New scoped contribution is operationally combining their calibrated finite-horizon quotient with IL local-write counterexample and UCT token/port caveats; first-in-literature priority NOT claimed.",
+      "scope": "Research priority, not theorem premise.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "A finite mathematical result; no actual neural/phenomenal bearer or feeling established.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    },
+    {
+      "id": "OL20261009:OPEN_AGENCY",
+      "kind": "OPEN_PHENOMENAL_BRIDGE",
+      "statement": "A gap in physically grounded local write imitation may identify organization relevant to control, but no independent mapping to felt agency, bodily mineness, particular pleasure/pain, personal identity, global richness or subject count is supplied.",
+      "scope": "Named phenomenal interpretation remains OPEN.",
+      "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+      "status": "APPLICATION_OPEN",
+      "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+      "proof_or_definition": "RESEARCH_NOTE.md",
+      "limits": "This target may guide future theory, not a solved claim.",
+      "actual_premises_discharged": false,
+      "source_research_id": "OL20261009"
+    }
+  ],
+  "rules": [
+    {
+      "id": "OL20261009:r_projection",
+      "all_of": [
+        "OL20261009:MODEL",
+        "OL20261009:HORIZON",
+        "OL20261009:SOURCE_KICK",
+        "OL20261009:WRITE_FAMILY",
+        "OL20261009:METRIC",
+        "OL20261009:GAP"
+      ],
+      "conclusion": "OL20261009:PROJECTION",
+      "statement": "Optimal weighted observable residual equals projection onto union of physically admitted k-local input subspaces.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "same_instance_required": true,
+      "binding": "Same installed (A,C), time and horizon, same actual admissible primitive write family, source/recipient state matching, Q metric, target kick and counterfactual future inputs. All quantified premises conjunctive; instantiation is NOT certified by graph membership.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "OL20261009:r_zero",
+      "all_of": [
+        "OL20261009:PROJECTION"
+      ],
+      "conclusion": "OL20261009:ZERO",
+      "statement": "Zero-distance criterion for union of image subspaces, independent of coordinate labels.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "same_instance_required": true,
+      "binding": "Same installed (A,C), time and horizon, same actual admissible primitive write family, source/recipient state matching, Q metric, target kick and counterfactual future inputs. All quantified premises conjunctive; instantiation is NOT certified by graph membership.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "OL20261009:r_sparse",
+      "all_of": [
+        "OL20261009:OBSERVABLE",
+        "OL20261009:WRITE_FAMILY",
+        "OL20261009:ZERO"
+      ],
+      "conclusion": "OL20261009:SPARSE_IFF",
+      "statement": "Full-column rank converts quotient zero into physical k-sparse support equality.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "same_instance_required": true,
+      "binding": "Same installed (A,C), time and horizon, same actual admissible primitive write family, source/recipient state matching, Q metric, target kick and counterfactual future inputs. All quantified premises conjunctive; instantiation is NOT certified by graph membership.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "OL20261009:r_noise",
+      "all_of": [
+        "OL20261009:GAP",
+        "OL20261009:NOISE_CONTRACT"
+      ],
+      "conclusion": "OL20261009:NOISE_SEPARATION",
+      "statement": "Triangle-inequality robust distinguishability bound under matched noise contracts.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "same_instance_required": true,
+      "binding": "Same installed (A,C), time and horizon, same actual admissible primitive write family, source/recipient state matching, Q metric, target kick and counterfactual future inputs. All quantified premises conjunctive; instantiation is NOT certified by graph membership.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "OL20261009:r_covariance",
+      "all_of": [
+        "OL20261009:GAP",
+        "OL20261009:COORDINATE_CONTRACT"
+      ],
+      "conclusion": "OL20261009:COVARIANCE",
+      "statement": "Transport observation map and actual write family; equality under passive representation.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "same_instance_required": true,
+      "binding": "Same installed (A,C), time and horizon, same actual admissible primitive write family, source/recipient state matching, Q metric, target kick and counterfactual future inputs. All quantified premises conjunctive; instantiation is NOT certified by graph membership.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "OL20261009:r_noniso",
+      "all_of": [
+        "OL20261009:TWIN_MODEL",
+        "OL20261009:MODEL",
+        "OL20261009:WRITE_FAMILY"
+      ],
+      "conclusion": "OL20261009:RESET_NONISO",
+      "statement": "Under full admitted product reset families, all factorwise maps preserve or rule out cross-coordinate dependence; no such map conjugates the twinned dynamics.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "same_instance_required": true,
+      "binding": "Same installed (A,C), time and horizon, same actual admissible primitive write family, source/recipient state matching, Q metric, target kick and counterfactual future inputs. All quantified premises conjunctive; instantiation is NOT certified by graph membership.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "OL20261009:r_prep",
+      "all_of": [
+        "OL20261009:TWIN_MODEL"
+      ],
+      "conclusion": "OL20261009:PREPARED",
+      "statement": "Construct precise common-source state and recipient image before write.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "same_instance_required": true,
+      "binding": "Same installed (A,C), time and horizon, same actual admissible primitive write family, source/recipient state matching, Q metric, target kick and counterfactual future inputs. All quantified premises conjunctive; instantiation is NOT certified by graph membership.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "OL20261009:r_horizon",
+      "all_of": [
+        "OL20261009:TWIN_MODEL",
+        "OL20261009:PREPARED",
+        "OL20261009:HORIZON",
+        "OL20261009:WRITE_FAMILY",
+        "OL20261009:METRIC",
+        "OL20261009:PROJECTION"
+      ],
+      "conclusion": "OL20261009:HORIZON_EFFECT",
+      "statement": "Exact two-time-window witness; immediate readout alone fails.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "same_instance_required": true,
+      "binding": "Same installed (A,C), time and horizon, same actual admissible primitive write family, source/recipient state matching, Q metric, target kick and counterfactual future inputs. All quantified premises conjunctive; instantiation is NOT certified by graph membership.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "OL20261009:r_optimal",
+      "all_of": [
+        "OL20261009:TWIN_MODEL",
+        "OL20261009:PREPARED",
+        "OL20261009:PROJECTION",
+        "OL20261009:HORIZON_EFFECT"
+      ],
+      "conclusion": "OL20261009:OPTIMAL_WRITE",
+      "statement": "Exact one-port optimization in the calibrated two-readout Euclidean metric.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "same_instance_required": true,
+      "binding": "Same installed (A,C), time and horizon, same actual admissible primitive write family, source/recipient state matching, Q metric, target kick and counterfactual future inputs. All quantified premises conjunctive; instantiation is NOT certified by graph membership.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "OL20261009:r_blind",
+      "all_of": [
+        "OL20261009:HORIZON_EFFECT"
+      ],
+      "conclusion": "OL20261009:UNOBSERVABLE_CONTROL",
+      "statement": "First-time-window zero gap is not evidence of identical installed port organization.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "same_instance_required": true,
+      "binding": "Same installed (A,C), time and horizon, same actual admissible primitive write family, source/recipient state matching, Q metric, target kick and counterfactual future inputs. All quantified premises conjunctive; instantiation is NOT certified by graph membership.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "OL20261009:r_uct",
+      "all_of": [
+        "OL20261009:PHYSICAL_REDUCT",
+        "OL20261009:RESET_NONISO",
+        "A:C1_OI"
+      ],
+      "conclusion": "OL20261009:C1_APPLICATION",
+      "statement": "Actual grounded reduct-nonisomorphism plus inherited C1 structural identity yields a conditional full-type result; do not infer from score alone.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "same_instance_required": true,
+      "binding": "Same installed (A,C), time and horizon, same actual admissible primitive write family, source/recipient state matching, Q metric, target kick and counterfactual future inputs. All quantified premises conjunctive; instantiation is NOT certified by graph membership.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    }
+  ],
+  "context_links": [
+    {
+      "id": "OL20261009:ctx_token",
+      "from": "A:TOKEN_CRITERIA",
+      "to": "OL20261009:PHYSICAL_REDUCT",
+      "relation": "Actual-token criteria are NOT discharged by state-space fitting or measured output.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "OL20261009:ctx_sig",
+      "from": "A:K",
+      "to": "OL20261009:COORDINATE_CONTRACT",
+      "relation": "The complete comparison signature must preserve physically installed part and write port sorts, not just chosen coordinates.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "OL20261009:ctx_c1",
+      "from": "A:C1_OI",
+      "to": "OL20261009:C1_APPLICATION",
+      "relation": "Conditional C1 transport; mathematical residual is not direct qualitative feeling.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "OL20261009:ctx_capacity",
+      "from": "C:P1",
+      "to": "OL20261009:GAP",
+      "relation": "A gap in one observable intervention contract is not a fixed-J maximal task-capability difference.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "OL20261009:ctx_th",
+      "from": "TH20261009:FIELD_CONTRACT",
+      "to": "OL20261009:HORIZON",
+      "relation": "A memory cut and finite observation horizon are different experimental contracts; no substitution.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "OL20261009:ctx_rb",
+      "from": "RB20261009:BOUND",
+      "to": "OL20261009:NOISE_CONTRACT",
+      "relation": "Top-K posterior bounds neither prove local installed write scope nor replace known Q observation metric.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "OL20261009:ctx_p3",
+      "from": "A:P3",
+      "to": "OL20261009:LOCAL_NO_ERASURE",
+      "relation": "Preserve actually continuing local tokens; no exclusive owner asserted.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    }
+  ],
+  "source": "RESEARCH_NOTE.md and check_observable_locality.py",
+  "external_nonpremise_lineage": [
+    "IL20261009 (pending), local reset normal form and prepared twin; independently rederived here",
+    "UI20261009 (pending local study), sequential update noncommutation; no deductive import",
+    "R185 (pending), occurrence-sensitive membership; not promoted",
+    "AC20261009 (pending), action-port calibration; not promoted"
+  ],
+  "pending_application_bonds": [
+    "OL20261009:PHYSICAL_REDUCT",
+    "OL20261009:OPEN_AGENCY"
+  ]
+}

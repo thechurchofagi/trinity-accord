@@ -1,0 +1,15 @@
+{
+  "research_id": "OL20261009",
+  "version": "OL-RESULT-v0.1.0",
+  "test_status": "PASS",
+  "test_file": "OBSERVABLE_LOCALITY_RESULTS.json",
+  "exact_rational_vs_independent_weighted_lstsq_cases": 1750,
+  "coordinate_transport_exact_equalities": 275,
+  "twin_H1_squared_gap": "0",
+  "twin_H2_squared_gap": "1/73",
+  "test_corrections": [
+    "singular observation matrix requires pseudoinverse",
+    "tuple/scalar test assertion fixed"
+  ],
+  "interpretation": "Finite mathematical checks, not consciousness evidence."
+}

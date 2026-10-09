@@ -1,9 +1,3 @@
-# Current completed map UCT-MAP-v1.1.1
-
-Authoritative: `CURRENT_STATE.json` and `UCT_FORMAL_GRAPH_MODULES.json`. Seq 3, audit `OL20261009-COMPAT-v1`. Current author-side defined census 1,419: 804 nodes, 377 active conditional rules, 10 historical suspended rules, 228 contextual links. Not empirical validation or all prior proofs independently redone. Current highest guide `RESEARCH_MASTER_GUIDE.md v2.1` §8A mandates per-result work log and handoff; do not overwrite the existing concurrent policy. OL research note: `records/OL20261009_Observable_Locality/RESEARCH_NOTE.md`, WORK_LOG: `records/OL20261009_Observable_Locality/WORK_LOG.md`, HANDOFF: `records/OL20261009_Observable_Locality/HANDOFF_ZH.md`. Restore full effective map & ledger from `versions/UCT-MAP-v1.1.1/UCT_MAP_v1.1.1_Capsule.tar.xz` using `versions/UCT-MAP-v1.1.1/restore_capsule.py`; hashes listed in release. Pending R185/AC/IL/R186 and archived UI are disabled. Physical realization and named phenomenal bridges OPEN; no new UCT experience threshold or exclusive owner. Next work: independent grounding of physical primitive writes and finite-horizon actual counterfactual support. No paper publication/DOI/OTS/AR action.
-
-## Historical prior handoff (for traceability only)
-
 # Current completed map: UCT-MAP-v1.1.0
 
 Read CURRENT_STATE.json, VERSIONING_POLICY.md and RESEARCH_MASTER_GUIDE.md. Audit THRB20261009-COMPAT-v1; release sequence 2. Completed compatibility census: 1,278 inherited +95 new =1,373 decisions. Active graph: 776 nodes, 366 conditional rules, 221 contextual relations; ten historical rules remain suspended. Actual and named-phenomenal obligations remain OPEN.

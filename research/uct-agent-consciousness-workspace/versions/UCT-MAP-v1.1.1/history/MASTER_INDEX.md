@@ -1,9 +1,3 @@
-# UCT research master index — completed v1.1.1
-
-START with `CURRENT_STATE.json`, highest `RESEARCH_MASTER_GUIDE.md` v2.1, `HANDOFF.md`, latest `RESEARCH_SESSION_LOG_INDEX.json`, `versions/UCT-MAP-v1.1.1/AUDIT_REPORT.md`. Work log and executable source in `records/OL20261009_Observable_Locality/`. Baseline v1.1.0 is immutable. All 1,419 item review decisions and effective graph are recovered from hash-verified v1.1.1 capsule, **not** from the old root graph. R185/AC/IL/R186/UI PENDING remain separate, disabled and recorded. The latest completed scientific addition is conditional optimized local intervention imitation, not proof of particular consciousness.
-
-## Historical parent index
-
 # Research master index — UCT-MAP-v1.1.0
 
 Authoritative pointer: CURRENT_STATE.json. Read the highest RESEARCH_MASTER_GUIDE.md, VERSIONING_POLICY.md and versions/UCT-MAP-v1.1.0/AUDIT_REPORT.md. The current completed compatibility census contains 1,373 review records. Review completion is not premise truth or independent validation.

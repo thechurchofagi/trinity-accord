@@ -1,8 +1,8 @@
 # Versioning and research identity
 
-Current release: **UCT-MAP-v1.1.1**, sequence 3, audit OL20261009-COMPAT-v1.
+Current release: **UCT-MAP-v1.0.0**, sequence 1, audit FA20261008.
 
-A completed substantive research or full-map audit cycle must create a NEW immutable release directory and increment the release sequence and version. The next ordinary completion is v1.1.2; compatible substantive additions may use v1.1.0 and breaking ontology/signature changes require v2.0.0 with an explicit migration. Never overwrite v1.0.0 with changed content. Work-in-progress checkpoints use a checkpoint ID and do not falsely advance a completed status.
+A completed substantive research or full-map audit cycle must create a NEW immutable release directory and increment the release sequence and version. The next ordinary completion is v1.0.1; compatible substantive additions may use v1.1.0 and breaking ontology/signature changes require v2.0.0 with an explicit migration. Never overwrite v1.0.0 with changed content. Work-in-progress checkpoints use a checkpoint ID and do not falsely advance a completed status.
 
 Required release fields: version, sequence, parent version/commit, source hashes, added/changed/suspended item IDs, complete coverage ledger, result/proof/code/evidence locations, OPEN obligations, local archive hash, remote commit and readback result.
 
@@ -13,7 +13,3 @@ Only `CURRENT_STATE.json` identifies the current completed release. `MASTER_INDE
 Audit coverage, conditional validity, actual instantiation, named phenomenal bridge, publication and persistence are separate states. A successful file save does not promote a premise. Reviewer-controlled OPEN findings cannot be self-closed.
 
 For concurrent workers: read the current branch head, compare the expected head, build an additive commit without deleting new work, and move the ref only with an expected-SHA lease. Failed leases require rereading. Use [skip ci]; no publication, DOI, OTS, Arweave, deployment, PR or scheduler changes are implied.
-
-
-## Binding output policy (canonical guide v2.1 §8A)
-Every substantive user-visible research result requires a versioned WORK_LOG.md, HANDOFF_ZH.md, exact code/test receipts, map ledger and GitHub readback (or explicit failures), separate research result and completed-map version identities. The root guide already contains this requirement and takes precedence.

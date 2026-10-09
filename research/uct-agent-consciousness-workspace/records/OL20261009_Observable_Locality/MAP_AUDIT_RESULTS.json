@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "base_graph_sha256": "92368e0f0a4fd1e3c61849784ac090a3f8948f3b721d9fc0dade4b8f4ec4966d",
+  "base_ledger_sha256": "6375c6800e491fb9ae42b324340220c19ac30b4e75af0e41482dd269c65f3768",
+  "module_sha256": "9d3fcf5ab75903c549eed8a4c3d8828a4789f55754a353f628172bb306532994",
+  "graph_sha256": "c7cb8feafa905518bf485019fd7b2e463d70682a563993eb5856678ccfe0ba66",
+  "ledger_sha256": "6e46361436fa64081bb7d961a491dab241f77948e3bd7fe01c17b773436b2cd3",
+  "counts": {
+    "parent_reviewed_items": 1373,
+    "new_nodes": 28,
+    "new_rules": 11,
+    "new_contexts": 7,
+    "review_items": 1419,
+    "nodes": 804,
+    "active_conditional_rules": 377,
+    "suspended_historical_rules": 10,
+    "reviewed_rule_records": 387,
+    "context_links": 228,
+    "unreviewed_within_scope": 0
+  },
+  "census_semantic_topic_flags": {
+    "physical_instance": 332,
+    "operator_port": 345,
+    "time_lineage": 209,
+    "probability": 223,
+    "phenomenal_qualia": 111,
+    "representation": 166,
+    "task_report": 145,
+    "other_fixed_contract": 486
+  },
+  "source_bytes_unchanged": true,
+  "old_rule_closure_syntactically_conservative": true,
+  "no_suspended_rule_reactivated": true,
+  "new_model_actual_bearers_unproved": true,
+  "pending_checkpoints_not_promoted": [
+    "R185",
+    "AC20261009",
+    "IL20261009",
+    "UI20261009"
+  ],
+  "all_old_proofs_independently_reproved": false,
+  "logical_interpretation": "Syntactic noninterference proof plus human-authored scoped semantic compatibility decisions; all-item machine readback alone is not an independent semantic proof."
+}

@@ -1,5 +1,3 @@
-# Current effective formal map — UCT-MAP-v1.1.0
+# Effective UCT formal map — v1.1.1
 
-Use CURRENT_STATE.json and UCT_FORMAL_GRAPH_MODULES.json. The root UCT_FORMAL_GRAPH.json remains the historical base; it is not the full current effective map. Current reviewed union has 776 nodes, 366 active conditional rules, ten suspended historical rules and 221 non-deductive contexts. Source-and-review capsule: versions/UCT-MAP-v1.1.0/. See its audit/recovery instructions. Generated UCT_EFFECTIVE_GRAPH.json and per-ID ledger are expanded in the offline archive and reconstructable from exact parent plus capsule.
-
-R185 and AC20261009 are retained as disabled pending checkpoints, not premises of this release. Actual instance and named-phenomenal application conditions remain open. Historical map texts remain accessible at parent commits and immutable v1.0.0 history.
+Use `UCT_FORMAL_GRAPH_MODULES.json` unique authoritative loader descriptor and `CURRENT_STATE.json`; root historical graph alone is incomplete. Active effective map is 804 nodes, 377 guarded conditional deduction rules, 10 suspended old rules, 228 nondeductive links. Exact materialized graph SHA256 `c7cb8feafa905518bf485019fd7b2e463d70682a563993eb5856678ccfe0ba66`; exact per-item ledger SHA256 `6e46361436fa64081bb7d961a491dab241f77948e3bd7fe01c17b773436b2cd3`. Recover exact expanded files from `versions/UCT-MAP-v1.1.1/UCT_MAP_v1.1.1_Capsule.tar.xz` with `versions/UCT-MAP-v1.1.1/restore_capsule.py`. Omitted R185/AC/IL/R186/UI modules remain pending.

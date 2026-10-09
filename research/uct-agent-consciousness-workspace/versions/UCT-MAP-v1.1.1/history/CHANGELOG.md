@@ -1,9 +1,3 @@
-# UCT-MAP-v1.1.1 — 2026-10-09 — seq. 3
-
-OL20261009 v0.1.0: calibrated primitive local-write finite-horizon optimal imitation gap and observability/uncertainty conditions. Adds 28 nodes, 11 conditional routes, 7 non-deductive contexts; 1,419 reviewed schema/compatibility records total; old science and 10 suspended rules unchanged. Mathematical checks 1,750 rational-versus-numeric cases plus 275 transported-coordinate equalities; full author-side contract audit, not independent theorem reproof. Exact H1 gap=0, H2 squared-gap=1/73 in specified IL mathematical twin. Reader/code/scope limitations and physical/phenomenal bridge OPEN. Frozen version capsule sha256 `f4604377a3c6dca5de56bf71883006a03dbf290b7f92af2136e682087ff7bfc3`. R185, AC, IL, R186 and UI remain disabled. No paper DOI/OTS/AR. The highest guide is the already-current v2.1 §8A; this release updates the operational policy JSON without overwriting that concurrent guide. Full worklog and handoff: `records/OL20261009_Observable_Locality/WORK_LOG.md`, `records/OL20261009_Observable_Locality/HANDOFF_ZH.md`.
-
----
-
 # Completed map changelog
 
 ## UCT-MAP-v1.1.0 — 2026-10-09 — sequence 2

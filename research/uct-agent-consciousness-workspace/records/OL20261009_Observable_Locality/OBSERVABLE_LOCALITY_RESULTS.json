@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "seed": 20261009,
+  "formula": "min_{|J|<=k} vT[W-W E_J(E_J^T W E_J)^+ E_J^T W]v; W=K_H^T Q K_H; pseudoinverse in general, inverse if O_H full column rank",
+  "exact_case": {
+    "source_A": "[[1/2, 0], [0, 1/4]]",
+    "recipient_A": "[[3/8, 1/8], [1/8, 3/8]]",
+    "source_B": "Matrix([[1], [1]])",
+    "recipient_B": "Matrix([[2], [0]])",
+    "source_C": "Matrix([[1, 1]])",
+    "recipient_C": "Matrix([[1, 0]])",
+    "source_state": [
+      1,
+      2
+    ],
+    "recipient_state": [
+      3,
+      -1
+    ],
+    "desired_recipient_kick": [
+      -1,
+      -1
+    ],
+    "horizon_one_squared_gap": "0",
+    "horizon_two_squared_gap": "1/73",
+    "horizon_two_gap": "1/sqrt(73)",
+    "recipient_best_z1_after_write": "143/73",
+    "older_infinity_norm_minimum": "1/11"
+  },
+  "exact_rational_vs_independent_weighted_lstsq_cases": 1750,
+  "random_model_k_counts": 630,
+  "coordinate_transport_exact_equalities": 275,
+  "countercontrols": [
+    {
+      "label": "false gauge invariance from resetting coordinate sparsity after passive recoding",
+      "old_squared_gap": "1",
+      "naive_new_squared_gap": "0"
+    }
+  ],
+  "two_sided_noise_separation_example": "epsilon < 1/(2 sqrt(73))",
+  "interpretation": "Finite mathematical LTI and intervention models only. No actual neural subject or phenomenal validation."
+}
