@@ -9,7 +9,7 @@
   "candidate_map":{"status":"PENDING_CHECKPOINT_DISABLED","counts":{"nodes":11,"rules":5,"contexts":4},"compatibility_audit_sha256":"abdde7007601c47aec71ec276e622dcd20cd2cd1d2858cbc35755be322d92563","structural_status":"STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN"},
   "review_status":{"QC-20261008-10":"ACKNOWLEDGED_OPEN","IA-QC11":"ACKNOWLEDGED_APPLICATION_OPEN","QC-20261008-12":"ACKNOWLEDGED_APPLICATION_OPEN","QC-20261008-13":"ACKNOWLEDGED_APPLICATION_OPEN"},
   "publication_coverage":{"version":"UCT-PUB-v1.0.3","decision":"CONTINUE_RESEARCH","worldwide_priority_verified":false},
-  "persistence":{"github_content_commit":null,"github_final_receipt_commit":null,"library_master_expected_version":47,"library_master_new_version":null,"library_increment_id":null,"status":"PENDING"},
+  "persistence":{"github_content_commit":"f05285b8daef1d1408fea8fcd66ae478985b0ec4","github_final_receipt_commit":null,"library_master_expected_version":47,"library_master_new_version":48,"library_increment_id":"libfile_576c253f4c2c8191a779e92a0837bd21","status":"DUAL_CONTENT_SAVED_FINAL_GITHUB_RECEIPT_PENDING"},
   "failures_retained":["Weak WCU admitted post-hoc rationalization.","Present OCCA admitted a frozen reflex table.","History-expanded LGRU admitted an adaptive reflex controller.","Actual installation, familiar-mineness bridge, reviewer disposition, and worldwide priority remain open."],
   "next":"Seek a noncircular transformation that distinguishes adaptive-reflex revision from experienced endorsement without report/self labels or a basal-experience gate."
 }
