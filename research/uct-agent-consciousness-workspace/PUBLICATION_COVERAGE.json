@@ -1,6 +1,7 @@
 {
   "schema": "uct-publication-coverage-entry/1.0",
-  "coverage_version": "UCT-PUB-v1.0.0",
+  "coverage_version": "UCT-PUB-v1.0.1",
+  "base_census_version": "UCT-PUB-v1.0.0",
   "ledger": {
     "path": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
     "bytes": 20787,
@@ -10,7 +11,7 @@
   "published_works": "publication/UCT-PUB-v1.0.0/PUBLISHED_WORKS_AND_VERSIONS.json",
   "readable_report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
   "current_decision": "publication/UCT-PUB-v1.0.0/MANUSCRIPT_DECISION.json",
-  "latest_update": "records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json",
+  "latest_update": "records/R189_Higher_Arity_Context_Access_20261009/PUBLICATION_COVERAGE_UPDATE.json",
   "current_scientific_map": "UCT-MAP-v1.1.2",
   "nondeductive": true,
   "unknown_is_unpublished": false,
@@ -20,5 +21,9 @@
     "sha256": "e09d81dcf3c0366a86c83fc16d2580c9564caa32c991398263224aee7c4c5940"
   },
   "source_manifest": "publication/UCT-PUB-v1.0.0/SOURCE_CAPSULE_MANIFEST.json",
-  "new_pending_research": "publication/UCT-PUB-v1.0.0/DYNAMIC_RESULT_COVERAGE.json"
+  "new_pending_research": "publication/UCT-PUB-v1.0.0/DYNAMIC_RESULT_COVERAGE.json",
+  "pending_research_updates": [
+    "records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md",
+    "records/R189_Higher_Arity_Context_Access_20261009/PUBLICATION_COVERAGE_UPDATE.json"
+  ]
 }

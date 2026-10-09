@@ -1,0 +1,62 @@
+{
+  "schema": "uct-claim-ledger/1",
+  "research_id": "R189-HACA-20261009",
+  "result_version": "HACA-RESULT-v0.1.0",
+  "claims": [
+    {
+      "id": "R189-C1",
+      "type": "CONDITIONAL_THEOREM",
+      "statement": "For the finite one-feedback/one-reply protocol over arbitrary contexts, the optimum is the maximum over response-word assignments of the sum, over contexts, of the best-coordinate MAP cell mass.",
+      "domain": "Finite classical target-context laws; source sees T and feedback only; reader sees X; fixed K,L, score, timing and policy class; independent randomness.",
+      "all_premises": ["R189 protocol", "finite positive-mass law", "no uncounted current channel", "feedback before reply", "MAP decoding permitted"],
+      "proof": "RESEARCH_NOTE.md section 2",
+      "counterlimits": ["Changed interaction order or extra channels require a new formula", "Not an asymptotic rate theorem"],
+      "status": "PROVED_CONDITIONAL",
+      "novelty": "DERIVED_EXTENSION_PRIORITY_UNVERIFIED"
+    },
+    {
+      "id": "R189-C2",
+      "type": "EXACT_MATCHED_COUNTEREXAMPLE",
+      "statement": "The displayed colorable and Fano 3-uniform 3-regular systems match all declared local summaries but have binary source-only optima 2/3 and 13/21.",
+      "domain": "The two displayed seven-target uniform-incidence systems; K=2,L=1.",
+      "all_premises": ["R189-C1", "displayed hyperedges", "uniform incidence law", "one common installed source code"],
+      "proof": "RESEARCH_NOTE.md sections 3-4; EXACT_RESULTS.json",
+      "counterlimits": ["Complete organizations and joint laws differ", "Scores are not experience amounts"],
+      "status": "PROVED_FINITE_CONDITIONAL",
+      "novelty": "NEW_APPLICATION_PRIORITY_UNVERIFIED"
+    },
+    {
+      "id": "R189-C3",
+      "type": "CONSTRUCTIVE_RESULT",
+      "statement": "With K=2,L=2, a timely coordinate selector lets both systems attain but not exceed the local binary ceiling 2/3.",
+      "domain": "Same displayed systems and law; binary feedback label reaches source before its binary reply.",
+      "all_premises": ["R189 protocol", "two-coordinate response words", "feedback before commitment"],
+      "proof": "RESEARCH_NOTE.md section 4; explicit response words in EXACT_RESULTS.json",
+      "counterlimits": ["Late feedback does not repair the scored reply", "No biological timing or basal-experience inference"],
+      "status": "PROVED_FINITE_CONDITIONAL",
+      "novelty": "NEW_APPLICATION_PRIORITY_UNVERIFIED"
+    },
+    {
+      "id": "R189-H1",
+      "type": "CONDITIONAL_UCT_INTERPRETATION",
+      "statement": "Only if actual same-instance grounding and one fixed capability contract are independently satisfied may a genuine capability-profile difference be transported by inherited C:P1 to a difference in complete experiential structural type.",
+      "domain": "Actual UCT process tokens with fixed interval, complete signature, ports, access, timing and type-invariant J.",
+      "all_premises": ["A:TOKEN_CRITERIA", "A:C1", "C:FIXED_J", "C:P1", "actual R189 grounding", "genuine J difference"],
+      "proof": "Inherited UCT III/T1 route; RESEARCH_NOTE.md section 6",
+      "counterlimits": ["No named feeling", "No scalar experience", "No subject count or exclusive owner", "Finite witnesses do not discharge actual premises"],
+      "status": "APPLICATION_OPEN",
+      "novelty": "INHERITED_THEOREM_NEW_APPLICATION"
+    },
+    {
+      "id": "R189-N1",
+      "type": "NEGATIVE_RESULT",
+      "statement": "The access result cannot by itself distinguish deliberate action, reflex control or active imagery when the finite access contract is preserved.",
+      "domain": "Thought-experiment comparisons preserving the declared finite protocol while changing source/consumer interpretation.",
+      "all_premises": ["Reflex twin", "imagery consumer reroute", "same finite table"],
+      "proof": "RESEARCH_NOTE.md section 5",
+      "counterlimits": ["Does not say these modes have identical complete organization in actual organisms"],
+      "status": "COUNTERMODEL_LIMIT",
+      "novelty": "BOUNDARY_APPLICATION"
+    }
+  ]
+}

@@ -15,6 +15,14 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
+    "id": "R189-HACA-20261009",
+    "result_version": "HACA-RESULT-v0.1.0",
+    "integration_status": "PENDING_CHECKPOINT_DISABLED",
+    "work_log": "records/R189_Higher_Arity_Context_Access_20261009/WORK_LOG.md",
+    "handoff": "records/R189_Higher_Arity_Context_Access_20261009/HANDOFF_ZH.md",
+    "paper": "records/R189_Higher_Arity_Context_Access_20261009/RESEARCH_NOTE.md"
+  },
+  "latest_integrated_research": {
     "id": "R188-CER-20261009",
     "result_version": "CER-RESULT-v0.1.0",
     "work_log": "records/R188_Encoder_Access_and_Recovery_20261009/WORK_LOG.md",
@@ -22,7 +30,8 @@
     "paper": "records/R188_Encoder_Access_and_Recovery_20261009/RESEARCH_NOTE.md",
     "paper_pdf": "records/R188_Encoder_Access_and_Recovery_20261009/When_Behavioral_Recovery_Conceals_Organizational_Change_v0.1.0.pdf",
     "current_manuscript_decision": "HOLD_STANDALONE_PRESERVE_TECHNICAL_SUPPLEMENT_CANDIDATE",
-    "decision_record": "records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md"
+    "decision_record": "records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md",
+    "map_release": "UCT-MAP-v1.1.2"
   },
   "persistence_receipt": "persistence/UCT-MAP-v1.1.2_RECEIPT.json",
   "next_ordinary_completed_version": "UCT-MAP-v1.1.3",
@@ -37,7 +46,8 @@
   "pending_checkpoints_not_promoted": [
     "AC20261009",
     "IL20261009",
-    "ONLINE-AC-PROBE-20261009"
+    "ONLINE-AC-PROBE-20261009",
+    "R189-HACA-20261009"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -49,11 +59,12 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "AC, IL and ONLINE-AC remain separate disabled pending modules; working-paper completion is not scientific-map promotion.",
+  "pending_note": "AC, IL, ONLINE-AC and R189 remain separate disabled pending modules; working-paper completion and structural compatibility are not scientific-map promotion.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.0",
-    "update": "records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json",
+    "version": "UCT-PUB-v1.0.1",
+    "base_census_version": "UCT-PUB-v1.0.0",
+    "update": "records/R189_Higher_Arity_Context_Access_20261009/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },
@@ -73,5 +84,5 @@
     "paper": "records/ONLINE_AC_20261009_Dynamic_Calibration/PAPER.md",
     "paper_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED"
   },
-  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; latest online result remains PENDING_MAP."
+  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; ONLINE-AC and R189 remain disabled pending results."
 }

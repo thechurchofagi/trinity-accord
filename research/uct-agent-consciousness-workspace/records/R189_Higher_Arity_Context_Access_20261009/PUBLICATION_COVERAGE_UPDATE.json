@@ -1,0 +1,61 @@
+{
+  "record_id": "R189-PUB-COVERAGE-20261009-v1",
+  "date_utc": "2026-10-09T08:54:39Z",
+  "base_research_commit": "2eaf7d357437205d9be66d620caf3aea2425786f",
+  "base_completed_map_version": "UCT-MAP-v1.1.2",
+  "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+  "previous_coverage_version": "UCT-PUB-v1.0.0",
+  "new_coverage_version": "UCT-PUB-v1.0.1",
+  "checked_publication_sources": [
+    {
+      "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+      "version": "UCT-PUB-v1.0.0",
+      "source_commit": "2eaf7d357437205d9be66d620caf3aea2425786f",
+      "manuscript_sha256": "e976c3c5a65dddb284aaebc5a7a12330285979f1f8c7e848a41b1e0324fdadbb",
+      "release_evidence": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+      "read_scope": "Existing verified 28-work/39-research-DOI census and claim index; R189 postdates this frozen corpus."
+    }
+  ],
+  "changed_claim_ids": [
+    "R189-C1",
+    "R189-C2",
+    "R189-C3",
+    "R189-H1",
+    "R189-N1"
+  ],
+  "newly_covered_claim_ids": [],
+  "partially_covered_claims": [],
+  "uncovered_candidates_within_verified_corpus": [
+    "R189-C1",
+    "R189-C2",
+    "R189-C3",
+    "R189-H1",
+    "R189-N1"
+  ],
+  "unverified_scope": [
+    "Worldwide priority beyond the primary antecedents scoped in PRIOR_ART_AND_REUSE.md",
+    "Any public work or version created after the UCT-PUB-v1.0.0 frozen corpus"
+  ],
+  "unchanged_reason": null,
+  "residual_assessment": {
+    "precise_problem": "Does arbitrary higher-arity candidate incidence create an exact installed-access distinction beyond R188's two-candidate cut, and does it identify bodily/action mineness?",
+    "net_increment_after_subtraction": "An arbitrary-context one-shot response-vector optimum, a matched seven-target triple-context counterexample with optima 2/3 versus 13/21, timely-feedback repair to 2/3, and the negative reflex/imagery boundary.",
+    "closest_internal_and_external_predecessors": [
+      "R133 common-policy/message-cover results",
+      "R188 two-candidate weighted cut",
+      "Witsenhausen zero-error side-information coloring",
+      "Orlitsky-Roche graph/conditional-entropy coding",
+      "Bakshi-Effros feedback source coding"
+    ],
+    "reusable_knowledge": "Future work can compute the exact finite optimum from response vectors and use the matched pair to reject local-summary sufficiency under the declared interface.",
+    "evidence_and_limits": "Written conditional proof plus 33,024-assignment finite check; no actual human/AI installation, named phenomenal measurement, or global priority verification.",
+    "decision": "CONTINUE_RESEARCH",
+    "next_specific_action": "Independently define and ground one bodily/action relation, then test it against reflex and active-imagery twins without using report or the desired feeling label."
+  },
+  "map_semantics_changed": false,
+  "whole_map_audit_if_required": "records/R189_Higher_Arity_Context_Access_20261009/MAP_COMPATIBILITY_AUDIT.json",
+  "work_log_path": "records/R189_Higher_Arity_Context_Access_20261009/WORK_LOG.md",
+  "handoff_path": "records/R189_Higher_Arity_Context_Access_20261009/HANDOFF_ZH.md",
+  "persistence_receipt_path": "records/R189_Higher_Arity_Context_Access_20261009/DUAL_SAVE_RECEIPT.json",
+  "warning": "Not found in the frozen verified corpus is not a claim of worldwide nonpublication or priority. UCT-PUB-v1.0.1 is a nondeductive incremental coverage entry, not a science-map release."
+}

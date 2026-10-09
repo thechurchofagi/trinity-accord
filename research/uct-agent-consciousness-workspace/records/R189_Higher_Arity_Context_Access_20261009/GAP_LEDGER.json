@@ -1,0 +1,51 @@
+{
+  "schema": "uct-gap-ledger/1",
+  "research_id": "R189-HACA-20261009",
+  "gaps": [
+    {
+      "id": "R189-G1",
+      "location": "R189-H1 actual application",
+      "impact": "Blocks promotion of the finite access relation to an actual human, animal or artificial process premise.",
+      "counterexample_or_reason": "A mathematical router or a test harness can satisfy the table without proving the claimed carrier, boundary, consumer or absence of side channels in a physical token.",
+      "corrected_now": "Actual grounding is an explicit simultaneous premise; the map candidate is disabled.",
+      "unresolved": "One actual same-instance installation and intervention audit.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R189-G2",
+      "location": "Named self-related interpretation",
+      "impact": "Blocks identification of the access coordinate with agency, trying or familiar mineness.",
+      "counterexample_or_reason": "Reflex and active-imagery twins preserve the finite table while changing the intended action interpretation.",
+      "corrected_now": "Recorded R189-N1 and kept QC10/IA-QC11 open.",
+      "unresolved": "An independently specified bodily/action experiential relation and evidence for its actual carrier/consumer path.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R189-G3",
+      "location": "External novelty",
+      "impact": "Blocks a worldwide-first claim for the formula or witness.",
+      "counterexample_or_reason": "Graph/hypergraph coloring, receiver side information, functional coding and limited feedback have substantial prior art.",
+      "corrected_now": "Contribution narrowed to a project-level application and synthesis.",
+      "unresolved": "Exhaustive historical priority search for the exact finite formula and matched pair.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R189-G4",
+      "location": "Map integration",
+      "impact": "Prevents using R189 as an established premise of UCT-MAP-v1.1.2.",
+      "counterexample_or_reason": "Structural compatibility is not semantic adoption or premise truth.",
+      "corrected_now": "Created a disabled additive candidate and compatibility audit.",
+      "unresolved": "Independent semantic review and a future ordinary map release if warranted.",
+      "status": "OPEN"
+    },
+    {
+      "id": "R189-G5",
+      "location": "Scope beyond one shot",
+      "impact": "Blocks transfer to blocks, changing context roles, noisy channels or arbitrary interaction.",
+      "counterexample_or_reason": "R188 already contains a mixed-role block failure; the R189 formula fixes one feedback and one reply.",
+      "corrected_now": "One-shot scope and alphabet cardinalities are explicit.",
+      "unresolved": "Any broader protocol requires a separately declared model and proof.",
+      "status": "OPEN"
+    }
+  ]
+}

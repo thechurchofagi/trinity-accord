@@ -10,6 +10,10 @@ See [the full review](versions/UCT-MAP-v1.1.2/audit/WHOLE_MAP_SEMANTIC_REVIEW_RE
 
 ## Publication coverage and latest pending research
 
-Current non-deductive coverage: [UCT-PUB-v1.0.0](PUBLICATION_COVERAGE.json). [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs, reconciles formal published attachments, and assesses residual knowledge separately from validity. The frozen R188 working paper now has a [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
+Current non-deductive coverage entry: [UCT-PUB-v1.0.1](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs, reconciles formal published attachments, and assesses residual knowledge separately from validity. [R189's delta](records/R189_Higher_Arity_Context_Access_20261009/PUBLICATION_COVERAGE_UPDATE.json) records no new coverage and a CONTINUE_RESEARCH decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
 
 [ONLINE-AC-PROBE-20261009](records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md) is a locally reviewed pending checkpoint; AC/IL also remain pending. No new whole-map semantic release is claimed by this coverage update. Existing science bytes and all open obligations are unchanged.
+
+## Post-release disabled checkpoint: R189
+
+[R189](records/R189_Higher_Arity_Context_Access_20261009/MAP_EXTENSION.json) proposes 11 nodes, 6 conditional rules and 3 nondeductive contexts over this release. Exact structural compatibility passed, but semantic adoption, actual installation/use and named-phenomenal application remain open. It is disabled and is not included in the 913/424/261 completed counts or the v1.1.2 hashes. Read its [map audit](records/R189_Higher_Arity_Context_Access_20261009/MAP_AUDIT.md).

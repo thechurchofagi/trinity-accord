@@ -559,3 +559,17 @@ No reviewer-controlled finding is self-closed. No unique owner, basal gate, publ
 Concurrent reconciliation: UCT-MAP-v1.0.0 landed during R185 persistence and remains the authoritative completed release. R185's original root-oriented audit is not represented as a current whole-map audit. The verified v1.0.0 reconstruction plus disabled R185 addition passes structural compatibility only; semantic integration and reviewer disposition remain open for a later version.
 
 ---
+
+## RESEARCHER-RESPONSE-R189
+
+Read current OPEN/ACKNOWLEDGED items before selection. Full response: [records/R189_Higher_Arity_Context_Access_20261009/REVIEW_RESPONSE.md](records/R189_Higher_Arity_Context_Access_20261009/REVIEW_RESPONSE.md).
+
+- The response-vector theorem records its exact interface: source sees target `T`; reader sees context `X`; feedback label `B=g(X)` arrives before source reply `Z=f(T,B)`; decoder sees `X,B,Z`. The R188 reduction is claimed only for two-candidate contexts under that interface. This preserves the reviewer requirement that every composition instance carry its interface evidence.
+- The installed source/reader policy is a formal model component. The checker proves properties of the declared table; it does not prove that a human, AI or other physical token actually uses that route. Actual use and test evidence remain explicitly separate.
+- QC10 remains ACKNOWLEDGED/OPEN: reflex and active-imagery reroutes preserve the table, so familiar mineness, felt trying and agency are not identified.
+- IA-QC11, QC12 and QC13 remain actual-application OPEN. No current assistant consciousness verdict, experience quantity, subject count or unique owner is inferred.
+- UCT-MAP-v1.1.2 remains authoritative. R189 is disabled pending semantic adoption and reviewer disposition; a structural pass is not self-closure.
+
+Next work returns to an independently grounded bodily/action relation and tests it against the preserved twins. No publication or preservation claim is made here beyond separately verified receipts.
+
+---

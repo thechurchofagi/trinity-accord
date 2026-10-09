@@ -1,0 +1,18 @@
+{
+  "schema": "uct-r189-run-receipt/1",
+  "date": "2026-10-09",
+  "python": "3.12.14",
+  "command": "python check_higher_arity_access.py --output EXACT_RESULTS.json",
+  "status": "PASS",
+  "response_vector_assignments_checked": 33024,
+  "assertion_groups": 15,
+  "all_assertions_pass": true,
+  "sha256": {
+    "check_higher_arity_access.py": "3fee47f30b0355b2ebd28dbd16df3db7823119d82899ce56d361a1c6f86a7cdd",
+    "EXACT_RESULTS.json": "13de6cf6cbaca5453f6ba955d38d0a22388f223ca4c5dcb1677bd0c14bdf862f",
+    "RESEARCH_NOTE.md": "6b32e09b4ce9d14811923221a120e085581fc4534c55edfc9832899c80e6886c",
+    "MAP_EXTENSION.json": "1944e1ffbad4bac1883ed7fe2752ef1547484c0f43236eb04c9115850dff1f59",
+    "MAP_COMPATIBILITY_AUDIT.json": "3e9e10a484589d51903d9357d595a69321928e41999cf6b34fdc53db13cafeeb"
+  },
+  "scope": "Exact finite mathematical execution only; not a proof of the general theorem, physical route audit, human/AI experience measurement, or UCT validation."
+}

@@ -1,0 +1,355 @@
+{
+  "schema": "uct-r189-higher-arity-access-results/1",
+  "model_scope": "Two finite uniform 3-candidate context systems; binary replies; L=1 or L=2 feedback labels before reply.",
+  "results": {
+    "A_colorable": {
+      "edges": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          1,
+          4
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          2,
+          5,
+          6
+        ],
+        [
+          3,
+          5,
+          6
+        ],
+        [
+          4,
+          5,
+          6
+        ]
+      ],
+      "degrees": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "connected": true,
+      "pair_multiplicity_multiset": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
+        3
+      ],
+      "K2_L1": {
+        "response_words_per_target": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        "correct_mass_numerator": 14,
+        "correct_mass_denominator": 21,
+        "score": "2/3",
+        "per_context_correct_candidates": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "assignments_checked": 128,
+        "optimal_assignment_count": 24
+      },
+      "K2_L2": {
+        "response_words_per_target": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "correct_mass_numerator": 14,
+        "correct_mass_denominator": 21,
+        "score": "2/3",
+        "per_context_correct_candidates": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "assignments_checked": 16384,
+        "optimal_assignment_count": 11112
+      },
+      "binary_coloring": {
+        "minimum_monochromatic_contexts": 0,
+        "maximum_monochromatic_contexts": 7,
+        "colorings_checked": 128
+      }
+    },
+    "B_fano": {
+      "edges": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          3,
+          4
+        ],
+        [
+          0,
+          5,
+          6
+        ],
+        [
+          1,
+          3,
+          5
+        ],
+        [
+          1,
+          4,
+          6
+        ],
+        [
+          2,
+          3,
+          6
+        ],
+        [
+          2,
+          4,
+          5
+        ]
+      ],
+      "degrees": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "connected": true,
+      "pair_multiplicity_multiset": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "K2_L1": {
+        "response_words_per_target": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ],
+        "correct_mass_numerator": 13,
+        "correct_mass_denominator": 21,
+        "score": "13/21",
+        "per_context_correct_candidates": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "assignments_checked": 128,
+        "optimal_assignment_count": 70
+      },
+      "K2_L2": {
+        "response_words_per_target": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "correct_mass_numerator": 14,
+        "correct_mass_denominator": 21,
+        "score": "2/3",
+        "per_context_correct_candidates": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "assignments_checked": 16384,
+        "optimal_assignment_count": 10248
+      },
+      "binary_coloring": {
+        "minimum_monochromatic_contexts": 1,
+        "maximum_monochromatic_contexts": 7,
+        "colorings_checked": 128
+      }
+    }
+  },
+  "checks": {
+    "same_vertex_count": true,
+    "same_context_count": true,
+    "all_contexts_size_three": true,
+    "both_three_regular": true,
+    "both_connected": true,
+    "matched_uniform_target_marginal": true,
+    "matched_uniform_local_posterior": true,
+    "different_overlap_structure": true,
+    "A_L1_equals_two_thirds": true,
+    "Fano_L1_equals_thirteen_twenty_firsts": true,
+    "Fano_requires_a_monochromatic_context": true,
+    "A_has_property_B": true,
+    "timely_binary_feedback_restores_local_ceiling_A": true,
+    "timely_binary_feedback_restores_local_ceiling_Fano": true,
+    "binary_reply_local_ceiling_is_two_thirds": true
+  },
+  "all_pass": true,
+  "total_response_vector_assignments_checked": 33024,
+  "limitations": [
+    "The finite enumerator does not prove the general formula; see RESEARCH_NOTE.md.",
+    "The two hypergraphs are mathematical organizations, not admitted human or AI process tokens.",
+    "Scores are selected capability probabilities, not experience amounts or subject counts.",
+    "The declared summaries match; complete organizations and full joint laws do not."
+  ]
+}

@@ -1,3 +1,15 @@
+# Latest checkpoint — R189 higher-arity context access
+
+Read [the research note](records/R189_Higher_Arity_Context_Access_20261009/RESEARCH_NOTE.md), [exact results](records/R189_Higher_Arity_Context_Access_20261009/EXACT_RESULTS.json), [map audit](records/R189_Higher_Arity_Context_Access_20261009/MAP_AUDIT.md), [review response](records/R189_Higher_Arity_Context_Access_20261009/REVIEW_RESPONSE.md), and [handoff](records/R189_Higher_Arity_Context_Access_20261009/HANDOFF_ZH.md).
+
+R189 proves an arbitrary-context one-shot response-vector optimum and supplies a matched 3-uniform pair: equal local posterior/marginal/degree summaries but no-feedback binary optima 2/3 and 13/21; one timely feedback bit restores the Fano instance to 2/3. The reflex and active-imagery reroutes preserve the finite table. Therefore familiar mineness, felt trying, agency, actual installation and actual use remain OPEN.
+
+UCT-MAP-v1.1.2 stays completed at 913/424/261 with 10 suspended rules. R189's 11/6/3 extension is `PENDING_CHECKPOINT_DISABLED`; ONLINE-AC remains a separate `PENDING_MAP` result. Next: define one bodily/action relation independently of report and the desired feeling label, then test it against reflex and imagery twins. Do not continue accumulating access certificates unless they directly discharge that bridge.
+
+The frozen UCT-PUB-v1.0.0 census and R188 decision below remain current where they do not concern R189. `PUBLICATION_COVERAGE.json` now points to nondeductive UCT-PUB-v1.0.1, which records no new R189 coverage, unverified worldwide priority and a CONTINUE_RESEARCH decision. R189 has no publication action.
+
+---
+
 # Current research decision — UCT-PUB-v1.0.0 / PUB20261009
 
 **Read [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [CURRENT_STATE.json](CURRENT_STATE.json), and [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json) first.** The paper purpose is original, inspectable knowledge that future AI and researchers can cite and reuse, serving the UCT main line. Each log/map update must synchronize the same coverage version.
@@ -17,6 +29,7 @@ Latest [work log](records/PUB20261009_Publication_Coverage/WORK_LOG.md), [Chines
 ## Preserved earlier navigation (historical; current decisions above take precedence)
 
 # Current checkpoint — R185 cross-scale occurrence membership
+# Historical checkpoint — R185 cross-scale occurrence membership
 
 Read [the derivation](records/R185_Cross_Scale_Relation_Membership_20261008/Cross_Scale_Relation_Membership_v0_1.md), [round record](records/R185_Cross_Scale_Relation_Membership_20261008/ROUND_RECORD.md), [claims](records/R185_Cross_Scale_Relation_Membership_20261008/CLAIM_LEDGER.json), [gaps](records/R185_Cross_Scale_Relation_Membership_20261008/GAP_LEDGER.json), [exact results](records/R185_Cross_Scale_Relation_Membership_20261008/MODEL_RESULTS.json), [v1.0.0 compatibility audit](records/R185_Cross_Scale_Relation_Membership_20261008/V100_COMPATIBILITY_AUDIT.json), [review response](records/R185_Cross_Scale_Relation_Membership_20261008/REVIEW_RESPONSE.md), and [handoff](records/R185_Cross_Scale_Relation_Membership_20261008/CURRENT_HANDOFF.md).
 
