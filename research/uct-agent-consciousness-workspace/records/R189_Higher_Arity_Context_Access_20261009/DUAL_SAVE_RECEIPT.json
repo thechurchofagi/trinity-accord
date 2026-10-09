@@ -1,0 +1,66 @@
+{
+  "schema": "uct-r189-dual-save-receipt/1",
+  "research_id": "R189-HACA-20261009",
+  "result_version": "HACA-RESULT-v0.1.0",
+  "recorded_at_utc": "2026-10-09T09:12:00Z",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "expected_parent": "2eaf7d357437205d9be66d620caf3aea2425786f",
+    "content_commit": "144697cbe28bc837536ef8d4eab57ed5a32bd6a2",
+    "update_mode": "NORMAL_FAST_FORWARD_WITH_EXPECTED_SHA",
+    "status": "SUCCESS",
+    "readback": {
+      "current_state_blob": "4b14fc513a530731229d9af151cdf48f6f505332",
+      "research_note_blob": "d52bb2bed53f25e7cd3548ac6716798c481f1ab2",
+      "exact_results_blob": "2fb81b07831e55d320b6b2103dfee473bf106d07",
+      "coverage_update_blob": "c5a86ccf0782138f82ad6cf6260e7fbfec978ded",
+      "critical_content_status": "DIRECT_REMOTE_READBACK_SUCCESS"
+    }
+  },
+  "library_master_handoff": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "previous_file_id": "file_00000000453881f590ec6b9fa265ac79",
+    "previous_version": 45,
+    "new_file_id": "file_00000000dcd881f5ac3cc7569faca377",
+    "new_version": 46,
+    "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+    "size_bytes": 603692,
+    "status": "REPLACED_SAME_IDENTITY",
+    "readback": "VERSION_SIZE_AND_R189_TOP_CONTENT_VERIFIED"
+  },
+  "library_increment": {
+    "library_file_id": "libfile_4ff363cf480c8191ae994e0b770b0984",
+    "file_id": "file_0000000079e481f79dc2b6a956fe59f8",
+    "file_name": "UCT_R189_Increment_20261009.zip",
+    "size_bytes": 112969,
+    "local_sha256": "11436fcf8ba8ab33c10eb7e7354ebe196c0a9623f20732a5ade0d5e4a6c893e4",
+    "package_file_count": 31,
+    "scope": "Increment relative to verified base 2eaf7d357437205d9be66d620caf3aea2425786f; not a full repository or complete history backup.",
+    "status": "CREATE_SUCCESS_REMOTE_METADATA_SIZE_MATCH",
+    "exact_remote_byte_readback": "NOT_COMPLETED_HTTP_403_ON_SINGLE_MATERIALIZATION_ATTEMPT"
+  },
+  "validation": {
+    "exact_checker": "33024 response-vector assignments; 15 assertion groups; saved output byte-identical on rerun",
+    "map_compatibility": "STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN; saved output byte-identical on rerun",
+    "completed_map_unchanged": "UCT-MAP-v1.1.2; 913 nodes, 424 active rules, 261 contexts, 10 suspended rules, 1608 review decisions",
+    "publication_coverage": "UCT-PUB-v1.0.1 nondeductive delta; no newly covered R189 claims; worldwide priority unverified; CONTINUE_RESEARCH"
+  },
+  "failures_retained": [
+    "Direct shell git push could not obtain credentials; the connected GitHub write path then completed the expected-SHA fast-forward and direct remote readback.",
+    "Library signed materialization returned HTTP 403. The v45 master was instead reconstructed through seven version-stable full-text read windows, verified at 6408 lines and 601208 bytes, then replaced as v46.",
+    "The first prepared upload request incorrectly marked the owned master file as shared and failed before finalization; the corrected owned-file request succeeded without duplicate writes.",
+    "One post-create materialization attempt for the increment returned HTTP 403. Remote metadata confirms filename and size, but exact remote bytes were not downloaded; the local SHA256 is therefore not represented as a remote-byte readback."
+  ],
+  "latest_completed_step": "R189 scientific result, whole-map compatibility review, publication-coverage delta, GitHub save/readback, fixed master replacement/readback, and incremental Library create/metadata check completed.",
+  "remaining_work": [
+    "Retry exact increment byte readback only in a later run with a fresh supported transfer path; do not retry the failed URL.",
+    "Reviewer disposition and semantic adoption of the disabled R189 candidate remain open.",
+    "Return to an independently grounded bodily/action relation against reflex and active-imagery twins."
+  ],
+  "restore": [
+    "Primary: fetch commit 144697cbe28bc837536ef8d4eab57ed5a32bd6a2 from the named branch and read CURRENT_STATE.json plus the R189 handoff.",
+    "Secondary: read fixed Library file libfile_4175a81748fc819187fa8f5771f056fa version 46.",
+    "Offline increment: materialize libfile_4ff363cf480c8191ae994e0b770b0984, verify 112969 bytes and SHA256 11436fcf8ba8ab33c10eb7e7354ebe196c0a9623f20732a5ade0d5e4a6c893e4, then follow RECOVERY_MANIFEST.json."
+  ]
+}
