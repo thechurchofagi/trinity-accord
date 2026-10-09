@@ -1,0 +1,90 @@
+name: RT-TH v1.0.0 exact public Zenodo readback
+on:
+  push:
+    branches: [research/rt-paper-v1-0-0-20261009]
+    paths: [research/task-relative-continuity/VERIFY-AUTHORIZATION.json]
+permissions:
+  contents: write
+concurrency:
+  group: rt-th-public-identity-readback-v100
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/rt-paper-v1-0-0-20261009
+          persist-credentials: true
+      - name: Verify Zenodo published exact source and preserve public assets
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,pathlib,subprocess,tempfile,urllib.request,urllib.parse
+          base=pathlib.Path('research/task-relative-continuity')
+          record_id=23251651
+          doi='10.5281/zenodo.23251651'
+          expected_title='Task-Relative Continuity Through Changing Representations: Reversible Handoffs, Route Ambiguity, and the Limits of Stable Readout'
+          def get(url,limit):
+              with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'RTTH-Exact-Public-Readback/1.0'}),timeout=80) as resp:
+                  data=resp.read(limit+1)
+              if len(data)>limit:raise RuntimeError('Size guard')
+              return data
+          obj=json.loads(get('https://zenodo.org/api/records/23251651',4_000_000))
+          assert obj.get('id')==record_id and obj.get('doi')==doi, 'Public Zenodo identity mismatch'
+          md=obj.get('metadata') or {}
+          assert md.get('title')==expected_title and str(md.get('version'))=='1.0.0', 'Metadata changed'
+          note=str(md.get('notes',''))
+          assert 'source-sha256=52f879101be072efd0651a512b03bac27e3dbf5a80facf55aa726b7515f88ed4' in note, 'Provenance mismatch'
+          files=obj.get('files') or []
+          names={str(x.get('key') or x.get('filename')):x for x in files}
+          expected={'Task_Relative_Continuity_v1.0.0.pdf','Task_Relative_Continuity_v1.0.0.md','RT_TH_Reproducibility_v1.0.0.zip','README-LICENSE.txt','citation.bib'}
+          assert set(names)==expected, f'Public file inventory mismatch: {set(names)}'
+          out=base/'published';out.mkdir(parents=True,exist_ok=True)
+          result=[]
+          for name in sorted(expected):
+              f=names[name]
+              data=get('https://zenodo.org/records/23251651/files/'+urllib.parse.quote(name)+'?download=1',16_000_000)
+              md5=hashlib.md5(data).hexdigest()
+              if f.get('checksum','').replace('md5:','')!=md5:
+                  raise RuntimeError('Zenodo file checksum mismatch '+name)
+              count=f.get('size',f.get('filesize'))
+              if count is not None and int(count)!=len(data):raise RuntimeError('File size mismatch '+name)
+              (out/name).write_bytes(data)
+              result.append({'name':name,'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data),'md5':md5})
+          pdf=out/'Task_Relative_Continuity_v1.0.0.pdf'
+          if not pdf.read_bytes().startswith(b'%PDF-'):raise RuntimeError('PDF signature absent')
+          try:
+              txt=subprocess.check_output(['pdftotext',str(pdf),'-'],text=True,stderr=subprocess.STDOUT,timeout=30)
+          except Exception as exc:raise RuntimeError('PDF text-extract validation failed') from exc
+          if doi not in txt or expected_title.split(':')[0] not in txt or len(txt)<15000:
+              raise RuntimeError('DOI missing from published PDF or PDF content incomplete')
+          mdt=(out/'Task_Relative_Continuity_v1.0.0.md').read_text()
+          if doi not in mdt or len(mdt)<15000:raise RuntimeError('DOI absent from published markdown')
+          result_dict={'status':'PUBLISHED_AND_PUBLIC_READBACK_PASS','record_id':record_id,'doi':doi,'title':expected_title,
+              'version':'1.0.0','report_number':'RT20261009','submitted':True,'public_file_readback_pass':True,
+              'peer_reviewed':False,'provenance':'Published source identity from Zenodo API, not the competing prepublication draft',
+              'files':result,'boundary':'DOI and hashes prove availability and identity, not scientific validity or originality'}
+          (base/'PUBLIC-LIVE-READBACK.json').write_text(json.dumps(result_dict,indent=2,sort_keys=True)+'\n')
+          (base/'publication-record.json').write_text(json.dumps(result_dict,indent=2,sort_keys=True)+'\n')
+          print('RT_TH_PUBLISHED_PUBLIC_READBACK_PASS',doi,result)
+          PY
+      - name: Retain actual source and readback proof, no new Zenodo writes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/task-relative-continuity/published research/task-relative-continuity/PUBLIC-LIVE-READBACK.json research/task-relative-continuity/publication-record.json
+          git diff --cached --check
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m '[skip ci] Preserve actual DOI published bytes and verified public readback of RT paper'
+          git push origin HEAD:research/rt-paper-v1-0-0-20261009
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: rt-th-v100-public-readback-${{ github.run_id }}
+          path: |
+            research/task-relative-continuity/published
+            research/task-relative-continuity/PUBLIC-LIVE-READBACK.json
+          retention-days: 90
+          if-no-files-found: warn
