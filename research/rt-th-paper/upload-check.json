@@ -1,0 +1,12 @@
+{
+  "doi": "10.5281/zenodo.23251651",
+  "files": {
+    "README-LICENSE.txt": "ee356520cc5f7c532f96b1cef6e2212dbfc35d75e749ef2a5569d8f35adad77c",
+    "RT_TH_Reproducibility_v1.0.0.zip": "83c0050bfdddff7ac94cf716db107e6f63ef09d9d6b04cd74ead0be4adcb860b",
+    "Task_Relative_Continuity_v1.0.0.md": "e368150bee05f7501021f826970f358521da685c3eddcd48ff7fbefd69bc7a62",
+    "Task_Relative_Continuity_v1.0.0.pdf": "18a4914635c2853ed089df137cb6b21024ed70f7d6dd0fe071a6da2dd5ca38af",
+    "citation.bib": "4549683de528631cbc359942910fd56209f67f6a98b4928d2e00f4a8a55de04a"
+  },
+  "record_id": 23251651,
+  "state": "ALL_DRAFT_FILES_VERIFIED"
+}
