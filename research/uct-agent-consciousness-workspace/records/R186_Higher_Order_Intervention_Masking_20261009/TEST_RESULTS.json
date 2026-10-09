@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "models": [
+    {
+      "num_flags": 1,
+      "short_words_tested": 3,
+      "min_witness_length": 2,
+      "late_probe_output": 1,
+      "early_probe_output": 0
+    },
+    {
+      "num_flags": 2,
+      "short_words_tested": 13,
+      "min_witness_length": 3,
+      "late_probe_output": 1,
+      "early_probe_output": 0
+    },
+    {
+      "num_flags": 3,
+      "short_words_tested": 85,
+      "min_witness_length": 4,
+      "late_probe_output": 1,
+      "early_probe_output": 0
+    },
+    {
+      "num_flags": 4,
+      "short_words_tested": 781,
+      "min_witness_length": 5,
+      "late_probe_output": 1,
+      "early_probe_output": 0
+    },
+    {
+      "num_flags": 5,
+      "short_words_tested": 9331,
+      "min_witness_length": 6,
+      "late_probe_output": 1,
+      "early_probe_output": 0
+    },
+    {
+      "num_flags": 6,
+      "short_words_tested": 21000,
+      "min_witness_length": 7,
+      "late_probe_output": 1,
+      "early_probe_output": 0
+    },
+    {
+      "num_flags": 7,
+      "short_words_tested": 24000,
+      "min_witness_length": 8,
+      "late_probe_output": 1,
+      "early_probe_output": 0
+    },
+    {
+      "num_flags": 8,
+      "short_words_tested": 27000,
+      "min_witness_length": 9,
+      "late_probe_output": 1,
+      "early_probe_output": 0
+    }
+  ],
+  "scope": "Exhaustive all words length <= m for m<=5, 3000 deterministic cases per length for m=6..8; plus analytical general proof"
+}

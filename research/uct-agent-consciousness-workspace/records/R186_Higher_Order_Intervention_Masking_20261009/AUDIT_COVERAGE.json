@@ -1,0 +1,16 @@
+{
+  "baseline": "UCT-MAP-v1.1.0",
+  "source_commit": "e1ceadd3097bec5ac6abb4510ae613ff7e41bbc3",
+  "census": 1373,
+  "nodes": 776,
+  "active_rules": 366,
+  "context_links": 221,
+  "suspended_rules": 10,
+  "status_counts": {
+    "REQUIRES_HUMAN_SEMANTIC_REVIEW": 625,
+    "INHERITED_UNCHANGED_REVIEW_NOT_REPROVED": 748
+  },
+  "scope": "mechanical full-census and targeted conceptual attack only; full fresh per-item semantic certification NOT COMPLETE",
+  "map_status": "PENDING_MAP / AUDIT_INCOMPLETE",
+  "policy": "No automatic premise promotion"
+}

@@ -1,0 +1,65 @@
+{
+  "module_id": "R186-HOM-20261009",
+  "version": "HOM-v0.1.0",
+  "candidate_map_version": "UCT-MAP-v1.1.1-R186-candidate.1",
+  "base": "UCT-MAP-v1.1.0",
+  "activation": "PENDING_MAP",
+  "conceptual_nodes": [
+    {
+      "id": "HOM:MODEL",
+      "kind": "FINITE_MODEL",
+      "statement": "Finite flag and gated-command transducers are compared under identical zero-reset and complete state-trace readout."
+    },
+    {
+      "id": "HOM:SHORT_EQ",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Two constructed transducers agree for all words of length <=m from zero reset, including full state prefixes."
+    },
+    {
+      "id": "HOM:DEEP_WITNESS",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "A_1,...,A_m,C first separates constructed machines at length m+1."
+    },
+    {
+      "id": "HOM:BOUNDARY",
+      "kind": "COUNTEREXAMPLE_LIMIT",
+      "statement": "Other reset states and unbounded active probing can distinguish earlier, so the claim is contract-relative."
+    },
+    {
+      "id": "HOM:EXPERIENCE_GUARD",
+      "kind": "OPEN_BRIDGE",
+      "statement": "No actual physical realization or particular phenomenal content follows from finite transducer construction."
+    }
+  ],
+  "rules": [
+    {
+      "id": "HOM:R1",
+      "all_of": [
+        "HOM:MODEL"
+      ],
+      "conclusion": "HOM:SHORT_EQ",
+      "status": "CONDITIONAL_PENDING_SEMANTIC_REVIEW"
+    },
+    {
+      "id": "HOM:R2",
+      "all_of": [
+        "HOM:MODEL"
+      ],
+      "conclusion": "HOM:DEEP_WITNESS",
+      "status": "CONDITIONAL_PENDING_SEMANTIC_REVIEW"
+    }
+  ],
+  "context_links": [
+    {
+      "from": "HOM:SHORT_EQ",
+      "to": "HOM:BOUNDARY",
+      "kind": "LIMITATION_NOT_DEDUCTION"
+    },
+    {
+      "from": "HOM:DEEP_WITNESS",
+      "to": "HOM:EXPERIENCE_GUARD",
+      "kind": "APPLICATION_GUARD_NOT_DEDUCTION"
+    }
+  ],
+  "notes": "All claims are pending; no rule is active in authoritative graph; instance gate remains unfulfilled."
+}
