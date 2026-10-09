@@ -24,7 +24,7 @@ def persist():
  if os.getenv('GITHUB_ACTIONS')!='true':raise RuntimeError('GitHub Actions only')
  branch=subprocess.check_output(['git','branch','--show-current'],cwd=REPO,text=True).strip()
  if branch!=BRANCH:raise RuntimeError('Wrong branch '+branch)
- names=['create-intent.json','deposit.json','preparation-error.json','publication-intent.json','publish-attempt.json','publication-record.json','upload-check.json','published','build-qa.json','citation.bib','README-LICENSE.txt']
+ names=['create-intent.json','deposit.json','preparation-error.json','draft-adoption.json','publication-intent.json','publish-attempt.json','publication-record.json','upload-check.json','published','build-qa.json','citation.bib','README-LICENSE.txt']
  items=[str((HERE/n).relative_to(REPO)) for n in names if (HERE/n).exists()]
  if not items:return
  cmd(['git','config','user.name','github-actions[bot]']);cmd(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com']);cmd(['git','add','--',*items])
@@ -82,6 +82,16 @@ def find_existing():
   for row in rows:
    m=row.get('metadata',{})
    if m.get('title')==TITLE and str(m.get('version'))==VERSION:
+    if IDENTITY not in m.get('notes',''):
+     names=[v.get('name') for v in m.get('creators',[])]
+     expected_prefix='RT-TH-PAPER-v1.0.0; source-sha256='
+     if row.get('id')!=23251651 or row.get('submitted') or row.get('files') or names!=['Liu, Hongju'] or not m.get('notes','').startswith(expected_prefix):
+      raise RuntimeError('Nonempty/published/unrelated Zenodo identity collision')
+     # A draft with no files has not yet bound a public PDF. Record explicit replacement.
+     save('draft-adoption.json',{'record_id':23251651,'prior_note':m.get('notes'),'new_identity':IDENTITY,'state':'IDENTICAL_AUTHOR_EMPTY_DRAFT_ADOPTION_INTENT'})
+     persist()
+     api('/deposit/depositions/23251651',method='PUT',data={'metadata':metadata()})
+     row=get('/deposit/depositions/23251651')
     validate(row);matches.append(row)
   if len(rows)<100:break
  if len(matches)>1:raise RuntimeError('Multiple matching Zenodo deposits')
