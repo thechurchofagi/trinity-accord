@@ -1,0 +1,321 @@
+{
+  "validation_id": "PUB20261009-FINAL-CONSISTENCY",
+  "status": "PASS",
+  "coverage_version": "UCT-PUB-v1.0.0",
+  "checks_passed": 60,
+  "checks": [
+    {
+      "check": "current coverage version and nonscientific layer",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "entry binds exact ledger bytes",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "all ledger document and item-shard hashes match",
+      "status": "PASS",
+      "evidence": {
+        "documents": 10,
+        "shards": 17
+      }
+    },
+    {
+      "check": "shard part_01.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_02.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_03.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_04.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_05.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_06.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_07.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_08.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_09.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_10.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_11.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_12.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_13.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_14.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_15.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_16.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "shard part_17.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "all1608 review IDs unique and indexed",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "index status and item status agree",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "exact publication-role counts",
+      "status": "PASS",
+      "evidence": {
+        "not_applicable": 1139,
+        "covered_exact": 382,
+        "unverified": 71,
+        "inherited": 14,
+        "covered_partial": 2
+      }
+    },
+    {
+      "check": "12 semantic reconciliations preserve71 unknowns",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "unknown and publication do not imply originality or truth",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "28research works and39 distinct research DOI records",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "38work/version pairs; duplicateUCTI v1.1 retained",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "editorial separate and no reserved-only counted records",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "source capsule exact hash",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "225 unique safe source members",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "capsule member manifest exact coverage",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "all225 source member hashes match",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "current ID set equals frozen independent inventory",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "private transfer request excluded",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "14 exact pre-edit files retained",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "historical suffix retained: HANDOFF.md",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "historical suffix retained: MASTER_INDEX.md",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "historical suffix retained: MEMORY.md",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "historical suffix retained: AGENTS.md",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "current metadata version: CURRENT_STATE.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "current metadata version: UCT_FORMAL_GRAPH_MODULES.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "current metadata version: RESEARCH_REGISTRY.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "current metadata version: RESEARCH_SESSION_LOG_INDEX.json",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "guide purpose and fixed cycle present",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "machine policy current coverage",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "completed graph unchanged",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "completed semantic ledger unchanged",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "completed graph counts unchanged",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "new scientific module remains disabled",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "unique pending module pointer/hash/version",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "12 candidate records without ID collisions or enabled premises",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "old research note bytes preserved",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "final scientific manuscript is reviewed exact version",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "independent closed certificate bindings and counts",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "independent two-template transport bindings and counts",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "final independent review exact version",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "PDF layout receipt binds current11-page output",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "all research manifest members hash-match",
+      "status": "PASS",
+      "evidence": 35
+    },
+    {
+      "check": "distinct R188 HOLD and completed unpublished new paper",
+      "status": "PASS",
+      "evidence": null
+    },
+    {
+      "check": "log/coverage/map update synchronized",
+      "status": "PASS",
+      "evidence": null
+    }
+  ],
+  "scientific_map": "UCT-MAP-v1.1.2",
+  "new_scientific_module": "PENDING_MAP",
+  "scope": "Exact artifact/corpus/ID/hash and declared-status consistency. Not a new scientific proof, literature-priority clearance, empirical validation, or full-map semantic integration.",
+  "validator_sha256": "3756e526286f70ce05a02ead8e8e413798e18eec36dccfedb57a054fab30d088"
+}

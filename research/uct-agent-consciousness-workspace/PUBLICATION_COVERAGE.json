@@ -1,0 +1,24 @@
+{
+  "schema": "uct-publication-coverage-entry/1.0",
+  "coverage_version": "UCT-PUB-v1.0.0",
+  "ledger": {
+    "path": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+    "bytes": 20787,
+    "sha256": "e976c3c5a65dddb284aaebc5a7a12330285979f1f8c7e848a41b1e0324fdadbb"
+  },
+  "claim_id_index": "publication/UCT-PUB-v1.0.0/CLAIM_ID_INDEX.json",
+  "published_works": "publication/UCT-PUB-v1.0.0/PUBLISHED_WORKS_AND_VERSIONS.json",
+  "readable_report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
+  "current_decision": "publication/UCT-PUB-v1.0.0/MANUSCRIPT_DECISION.json",
+  "latest_update": "records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json",
+  "current_scientific_map": "UCT-MAP-v1.1.2",
+  "nondeductive": true,
+  "unknown_is_unpublished": false,
+  "source_capsule": {
+    "path": "publication/UCT-PUB-v1.0.0/SOURCE_CAPSULE.tar.xz",
+    "bytes": 3109460,
+    "sha256": "e09d81dcf3c0366a86c83fc16d2580c9564caa32c991398263224aee7c4c5940"
+  },
+  "source_manifest": "publication/UCT-PUB-v1.0.0/SOURCE_CAPSULE_MANIFEST.json",
+  "new_pending_research": "publication/UCT-PUB-v1.0.0/DYNAMIC_RESULT_COVERAGE.json"
+}

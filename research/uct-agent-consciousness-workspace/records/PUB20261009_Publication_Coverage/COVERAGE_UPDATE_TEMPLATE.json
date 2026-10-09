@@ -1,0 +1,46 @@
+{
+  "record_id": "REPLACE_WITH_STABLE_ACTIVITY_ID",
+  "date_utc": "ISO-8601",
+  "base_research_commit": "exact_sha",
+  "base_completed_map_version": "current_release",
+  "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+  "previous_coverage_version": "exact_version",
+  "new_coverage_version": "exact_version_or_explicit_unchanged",
+  "checked_publication_sources": [
+    {
+      "work_id": "",
+      "version": "",
+      "source_commit": "",
+      "manuscript_sha256": "",
+      "release_evidence": "",
+      "read_scope": ""
+    }
+  ],
+  "changed_claim_ids": [],
+  "newly_covered_claim_ids": [],
+  "partially_covered_claims": [
+    {
+      "claim_id": "",
+      "covered_part": "",
+      "remaining_increment": ""
+    }
+  ],
+  "uncovered_candidates_within_verified_corpus": [],
+  "unverified_scope": [],
+  "unchanged_reason": null,
+  "residual_assessment": {
+    "precise_problem": "",
+    "net_increment_after_subtraction": "",
+    "closest_internal_and_external_predecessors": [],
+    "reusable_knowledge": "",
+    "evidence_and_limits": "",
+    "decision": "COMPLETE_MANUSCRIPT | CONTINUE_RESEARCH | HOLD_FOR_SPECIFIC_EVIDENCE | NO_NEW_PAPER",
+    "next_specific_action": ""
+  },
+  "map_semantics_changed": false,
+  "whole_map_audit_if_required": null,
+  "work_log_path": "",
+  "handoff_path": "",
+  "persistence_receipt_path": "",
+  "warning": "Template only. Empty examples are not publication or semantic evidence."
+}

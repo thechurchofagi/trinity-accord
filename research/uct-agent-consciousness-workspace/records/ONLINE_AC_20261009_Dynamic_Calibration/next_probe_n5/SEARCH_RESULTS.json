@@ -1,0 +1,82 @@
+{
+  "result_id": "ONLINE-AC-N5-BOUNDED-20261009",
+  "status": "COMPLETED_DEFINED_HORIZONS",
+  "n": 5,
+  "probes_per_round": 2,
+  "initial_wiring": "identity",
+  "goal_effect_port": 0,
+  "wiring_count": 120,
+  "drift_choices": 11,
+  "terminal_feedback": "full; forced on successful prefixes",
+  "objective": "every round net increment is e_0",
+  "horizons_completed": [
+    {
+      "horizon": 1,
+      "zero_error_strategy_exists": true,
+      "seconds": 0.00021939900034340099,
+      "cumulative_counts": {
+        "round_states": 1,
+        "probe_states": 18,
+        "query_candidates": 8
+      }
+    },
+    {
+      "horizon": 2,
+      "zero_error_strategy_exists": true,
+      "seconds": 0.0018652109993126942,
+      "cumulative_counts": {
+        "round_states": 12,
+        "probe_states": 143,
+        "query_candidates": 77
+      }
+    },
+    {
+      "horizon": 3,
+      "zero_error_strategy_exists": true,
+      "seconds": 0.008302698999614222,
+      "cumulative_counts": {
+        "round_states": 68,
+        "probe_states": 579,
+        "query_candidates": 359
+      }
+    },
+    {
+      "horizon": 4,
+      "zero_error_strategy_exists": true,
+      "seconds": 0.02021776299989142,
+      "cumulative_counts": {
+        "round_states": 223,
+        "probe_states": 1581,
+        "query_candidates": 1110
+      }
+    },
+    {
+      "horizon": 5,
+      "zero_error_strategy_exists": true,
+      "seconds": 0.03311504200064519,
+      "cumulative_counts": {
+        "round_states": 505,
+        "probe_states": 3208,
+        "query_candidates": 2458
+      }
+    },
+    {
+      "horizon": 6,
+      "zero_error_strategy_exists": true,
+      "seconds": 0.0294149359997391,
+      "cumulative_counts": {
+        "round_states": 887,
+        "probe_states": 5212,
+        "query_candidates": 4183
+      }
+    }
+  ],
+  "counts": {
+    "round_states": 887,
+    "probe_states": 5212,
+    "query_candidates": 4183
+  },
+  "elapsed_seconds": 0.09356214100080251,
+  "code_sha256": "51c7eb1c23c30870aa9637a72a46b9e4ffa48d89f9bc606599f1afebb38a7089",
+  "limit": "Exact finite belief recursion if completed; no infinite-horizon result or general n theorem is inferred from positive bounded horizons."
+}

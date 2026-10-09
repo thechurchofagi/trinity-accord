@@ -1,0 +1,329 @@
+{
+  "coverage_version": "UCT-PUB-v1.0.0",
+  "items": [
+    {
+      "item_id": "te20261008_relay_provenance",
+      "item_type": "rule",
+      "family_id": "TE20261008",
+      "map_object_sha256": "a2644514a4221653fb74b06fb844ce6e789a262a9c03b70aaeb60b9aca59633d",
+      "role": "derivation_route",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "Under RELAY_SETUP, replacing u->v by the fresh relay chain preserves directed reachability between all old endpoints and faithfully transmitted values. Any finite sequence preserves this selected ancestry relation. Full graph isomorphism, RetBind other clauses, numerical identity and unique subjecthood do not follow.",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "te20261008_relay_provenance",
+          "published_object_sha256": "a2644514a4221653fb74b06fb844ce6e789a262a9c03b70aaeb60b9aca59633d",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is a derivation route with simultaneous premises, not an independent result to add to the conclusion count. Alternate rules remain alternatives; publication of a conclusion does not silently publish every stronger scope or premise change.",
+      "original_map_kind": "CONDITIONAL_DEDUCTION",
+      "original_map_status": null,
+      "conclusion_id": "TE20261008:RELAY_PROVENANCE",
+      "premise_ids": [
+        "TE20261008:RELAY_SETUP"
+      ],
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "te20261008_selected_transport",
+      "item_type": "rule",
+      "family_id": "TE20261008",
+      "map_object_sha256": "b9f488f05e3fef61bfceb27c8a62e1aad9c8433b88c763c5ce29194e4a101158",
+      "role": "derivation_route",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "Under COMPARISON_SETUP and C1, a Sigma-isomorphism f transports as g=h_1 f h_0^-1 between experiential reducts. The converse holds. A grounded Sigma-sentence difference gives a corresponding experiential difference. Equality of proper reducts need not give complete K-type equality.",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "te20261008_selected_transport",
+          "published_object_sha256": "b9f488f05e3fef61bfceb27c8a62e1aad9c8433b88c763c5ce29194e4a101158",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is a derivation route with simultaneous premises, not an independent result to add to the conclusion count. Alternate rules remain alternatives; publication of a conclusion does not silently publish every stronger scope or premise change.",
+      "original_map_kind": "CONDITIONAL_DEDUCTION",
+      "original_map_status": null,
+      "conclusion_id": "TE20261008:SELECTED_TRANSPORT",
+      "premise_ids": [
+        "A:C1",
+        "TE20261008:COMPARISON_SETUP"
+      ],
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "te20261008_temporal_experiential_contrast",
+      "item_type": "rule",
+      "family_id": "TE20261008",
+      "map_object_sha256": "4d45707acc1a817f380f93156ce73780f9d4c9686a315666c403f59324d472b1",
+      "role": "derivation_route",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "Under ACTUAL_TEMPORAL_BRIDGE and each admitted C1 instance, theta_T for the actual past-to-present operand path and theta_diff for its unequal values are preserved and reflected by h. B versus A differs on the selected path; B episodes (x,m)=(1,0) and (1,1) differ on theta_diff despite equal current x. No familiar recollection, felt duration, unity, richness total or new basal-existence gate follows.",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "te20261008_temporal_experiential_contrast",
+          "published_object_sha256": "4d45707acc1a817f380f93156ce73780f9d4c9686a315666c403f59324d472b1",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is a derivation route with simultaneous premises, not an independent result to add to the conclusion count. Alternate rules remain alternatives; publication of a conclusion does not silently publish every stronger scope or premise change.",
+      "original_map_kind": "CONDITIONAL_DEDUCTION",
+      "original_map_status": null,
+      "conclusion_id": "TE20261008:EXPERIENTIAL_TEMPORAL_CONTRAST",
+      "premise_ids": [
+        "A:C1",
+        "R157:COORDINATE_TRANSPORT",
+        "TE20261008:ACTUAL_TEMPORAL_BRIDGE"
+      ],
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "to20261008_experiential_structural_counterpart",
+      "item_type": "rule",
+      "family_id": "TO20261008",
+      "map_object_sha256": "35530a7fbc6bbbbb0f7a8c6b6efca42f294b593e3e986e4310657524a3c8eced",
+      "role": "derivation_route",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "Given ACTUAL_TEMPORAL_INSTANCE and A:C1, D_K(P) satisfies theta_S(p) iff E_K(P) satisfies theta_S(h(p)), with all physical parameters transported by the supplied isomorphism. This yields a structural counterpart of the actual comparison/use relation; it does not identify perceived temporal order, felt duration, familiar mineness or an exclusive subject.",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "to20261008_experiential_structural_counterpart",
+          "published_object_sha256": "35530a7fbc6bbbbb0f7a8c6b6efca42f294b593e3e986e4310657524a3c8eced",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is a derivation route with simultaneous premises, not an independent result to add to the conclusion count. Alternate rules remain alternatives; publication of a conclusion does not silently publish every stronger scope or premise change.",
+      "original_map_kind": "CONDITIONAL_DEDUCTION",
+      "original_map_status": null,
+      "conclusion_id": "TO20261008:EXPERIENTIAL_STRUCTURAL_COUNTERPART",
+      "premise_ids": [
+        "A:C1",
+        "TO20261008:ACTUAL_TEMPORAL_INSTANCE"
+      ],
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "to20261008_global_clock_compatibility",
+      "item_type": "rule",
+      "family_id": "TO20261008",
+      "map_object_sha256": "5f4d0a1762a4f1e72960c0cc5d2958e22851b408cc97a3b6be976c0845757e2c",
+      "role": "derivation_route",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "Exact global coordinates exist iff all oriented cycle sums of beta vanish; they are unique up to a common additive constant. For arrivals (0,20,40) and references beta_AB=30,beta_BC=30,beta_AC=0, encoded signs cycle and no global coordinate exists. A nonzero cycle sum alone does not generally imply a sign cycle. Neither result counts subjects.",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "to20261008_global_clock_compatibility",
+          "published_object_sha256": "5f4d0a1762a4f1e72960c0cc5d2958e22851b408cc97a3b6be976c0845757e2c",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is a derivation route with simultaneous premises, not an independent result to add to the conclusion count. Alternate rules remain alternatives; publication of a conclusion does not silently publish every stronger scope or premise change.",
+      "original_map_kind": "CONDITIONAL_DEDUCTION",
+      "original_map_status": null,
+      "conclusion_id": "TO20261008:GLOBAL_CLOCK_COMPATIBILITY",
+      "premise_ids": [
+        "TO20261008:PAIRWISE_CLOCK_SETUP"
+      ],
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "to20261008_nonreport_route_contrast",
+      "item_type": "rule",
+      "family_id": "TO20261008",
+      "map_object_sha256": "d325717f2afe8a5a8bfd7fdd1f4210cbf5865046eaea0ffb591b1d30673ed054",
+      "role": "derivation_route",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "For the specified common actuator port with identical noise, U_S-U_C=-beta/s. At beta nonzero the architectures differ despite matched reports. For 0<delta<beta and zero noise, removing the S upstream reference changes R and U, whereas removing the C threshold reference changes R only. The corresponding mean difference additionally requires common finite mean-zero actuator noise.",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "to20261008_nonreport_route_contrast",
+          "published_object_sha256": "d325717f2afe8a5a8bfd7fdd1f4210cbf5865046eaea0ffb591b1d30673ed054",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is a derivation route with simultaneous premises, not an independent result to add to the conclusion count. Alternate rules remain alternatives; publication of a conclusion does not silently publish every stronger scope or premise change.",
+      "original_map_kind": "CONDITIONAL_DEDUCTION",
+      "original_map_status": null,
+      "conclusion_id": "TO20261008:NONREPORT_ROUTE_CONTRAST",
+      "premise_ids": [
+        "TO20261008:ROUTED_REFERENCE_SETUP"
+      ],
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "to20261008_reference_crossing_retiming",
+      "item_type": "rule",
+      "family_id": "TO20261008",
+      "map_object_sha256": "01da91167d7a9f0b7b0bb8372b4a76c0ecd1e46dfe137b33f871ccbfa4cf32b1",
+      "role": "derivation_route",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "For constant d and beta_0<delta<d, beta_N=d+(1-eta)^N(beta_0-d) exceeds delta for some finite N; in S q then becomes negative. Uniform positive scaling of all time-valued parameters/history/noise preserves R and U with eta and routes fixed. Unilateral added latency need not preserve either. No phenomenal inversion is entailed.",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "to20261008_reference_crossing_retiming",
+          "published_object_sha256": "01da91167d7a9f0b7b0bb8372b4a76c0ecd1e46dfe137b33f871ccbfa4cf32b1",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is a derivation route with simultaneous premises, not an independent result to add to the conclusion count. Alternate rules remain alternatives; publication of a conclusion does not silently publish every stronger scope or premise change.",
+      "original_map_kind": "CONDITIONAL_DEDUCTION",
+      "original_map_status": null,
+      "conclusion_id": "TO20261008:REFERENCE_CROSSING_AND_RETIMING",
+      "premise_ids": [
+        "TO20261008:ROUTED_REFERENCE_SETUP"
+      ],
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "to20261008_report_route_nonidentification",
+      "item_type": "rule",
+      "family_id": "TO20261008",
+      "map_object_sha256": "2865d906387f21903b66f85b168402e8ed2a18b86128612945b36c9a4ff29a2d",
+      "role": "derivation_route",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "R depends on a,b only through a+b. S and C therefore agree pointwise under shared report noise, and have equal report laws for every admitted input/history under the same conditional noise law. Report observations alone do not identify their distinct reference routes.",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "to20261008_report_route_nonidentification",
+          "published_object_sha256": "2865d906387f21903b66f85b168402e8ed2a18b86128612945b36c9a4ff29a2d",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is a derivation route with simultaneous premises, not an independent result to add to the conclusion count. Alternate rules remain alternatives; publication of a conclusion does not silently publish every stronger scope or premise change.",
+      "original_map_kind": "CONDITIONAL_DEDUCTION",
+      "original_map_status": null,
+      "conclusion_id": "TO20261008:REPORT_ROUTE_NONENTAILMENT",
+      "premise_ids": [
+        "TO20261008:ROUTED_REFERENCE_SETUP"
+      ],
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    }
+  ]
+}

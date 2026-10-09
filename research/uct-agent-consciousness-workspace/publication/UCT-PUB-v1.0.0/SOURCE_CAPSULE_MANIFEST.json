@@ -1,0 +1,1137 @@
+{
+  "coverage_version": "UCT-PUB-v1.0.0",
+  "capsule": {
+    "path": "publication/UCT-PUB-v1.0.0/SOURCE_CAPSULE.tar.xz",
+    "bytes": 3109460,
+    "sha256": "e09d81dcf3c0366a86c83fc16d2580c9564caa32c991398263224aee7c4c5940"
+  },
+  "members": [
+    {
+      "member": "publication_audit_work/MAP_RESULT_INVENTORY.md",
+      "bytes": 27367,
+      "sha256": "f6c43112587d51db4bd0752f05ddf40f07b90b268ee6fecda1d4783b3c1e3541"
+    },
+    {
+      "member": "publication_audit_work/MAP_RESULT_INVENTORY_VALIDATION.json",
+      "bytes": 5354,
+      "sha256": "0cbd75ef7b1079d889e5e7d3b34dae9a5c95681627cf120e4d834ae267af3205"
+    },
+    {
+      "member": "publication_audit_work/PUBLISHED_COVERAGE_REVIEW.md",
+      "bytes": 29600,
+      "sha256": "07ebc4c93bbe523c24ae0e32b5895b70dd47401dc6f37a2c8149347b3075632e"
+    },
+    {
+      "member": "publication_audit_work/RESIDUAL_RESEARCH_ASSESSMENT.md",
+      "bytes": 22045,
+      "sha256": "8e4d7a20100b7e9a791403008f445798a566a318cffd265a6c1cd25c51f7d5b9"
+    },
+    {
+      "member": "publication_audit_work/all_head_refs.json",
+      "bytes": 520526,
+      "sha256": "712b40be2a2523b3917a50a7898d647bc41ffdb96c8a6a3b36285bcd461d63b4"
+    },
+    {
+      "member": "publication_audit_work/all_research_receipt_candidates.json",
+      "bytes": 13754,
+      "sha256": "8af4ddf9205fdc0bf68769dbed82283a2a7c129efa80f9b2298c0a9dd1f9d28b"
+    },
+    {
+      "member": "publication_audit_work/attachment_member_manifest.json",
+      "bytes": 25749,
+      "sha256": "521f24d8051864f0858e86d8d87c861dd242659c0993f3bb46cad914e11e6609"
+    },
+    {
+      "member": "publication_audit_work/branch_download_provenance.json",
+      "bytes": 9440,
+      "sha256": "a5eba084352c5a5dd4bf40514b47d35ac9c16f546680cd0a3775f88a5b453617"
+    },
+    {
+      "member": "publication_audit_work/build_map_inventory.py",
+      "bytes": 56615,
+      "sha256": "468f58d2ec0a9effec2524c7bc8894185b339d0717af95df3dd85e4c2f11e23a"
+    },
+    {
+      "member": "publication_audit_work/early_library_folder_inventory.json",
+      "bytes": 128885,
+      "sha256": "bc7c253f70dae9c0b60ba8985aeb4693b87aad68ecf73d18208ddacb0605132c"
+    },
+    {
+      "member": "publication_audit_work/early_result_family_inventory.json",
+      "bytes": 57763,
+      "sha256": "2f29da3cfd28d5a5fa4a18734d0e85c486914b910b7b19dd0ed53d5b6eb061c8"
+    },
+    {
+      "member": "publication_audit_work/fulltext_download_provenance.json",
+      "bytes": 5662,
+      "sha256": "61058bae6918821809fe7c543632becbbfe65a136ad8e9cf827d448ff5d39252"
+    },
+    {
+      "member": "publication_audit_work/github_release_discovery.json",
+      "bytes": 1353854,
+      "sha256": "cd5e59f174b4f8e46df5fb8c7526467b22f2e624783a9d4431d43b75e4057bba"
+    },
+    {
+      "member": "publication_audit_work/main_tree_fc568e8.json",
+      "bytes": 3047055,
+      "sha256": "835eee15d04829f7851376d787459074ae2d7ce2374f3d5322cc1a58af5ee237"
+    },
+    {
+      "member": "publication_audit_work/map_result_inventory.json",
+      "bytes": 4474691,
+      "sha256": "420bd6aab7717a46809765768c8510fcf73544fbfa48aa95633955d5a6243587"
+    },
+    {
+      "member": "publication_audit_work/nonresearch_named_heads_screen.json",
+      "bytes": 61018,
+      "sha256": "3abd75587ac6f3294260ab1c5a53386aad8774a783427416fbb0cdea1cdd1771"
+    },
+    {
+      "member": "publication_audit_work/novelty_inventory.json",
+      "bytes": 412824,
+      "sha256": "a442b3c6fc437c16d264efb4958cd914c812f82335babe88570335317fbfa5a9"
+    },
+    {
+      "member": "publication_audit_work/publication_semantic_coverage.json",
+      "bytes": 83258,
+      "sha256": "6f4d54b11661ecf9b0187bd311c566dff6678eb0a735ecc74690755e3b1b5054"
+    },
+    {
+      "member": "publication_audit_work/research_branch_directory_inventory.json",
+      "bytes": 211121,
+      "sha256": "7d5f3b1a531d3ced7ec5d9bc796e56436992e3fe35852a91af37ba6052c04ca4"
+    },
+    {
+      "member": "publication_audit_work/research_directory_trees.json",
+      "bytes": 1156238,
+      "sha256": "c2bd151e009bedf74f2bbcccf05dc3d1000185a352fe705c85936d519b705bb9"
+    },
+    {
+      "member": "publication_audit_work/research_head_refs.json",
+      "bytes": 28658,
+      "sha256": "4e565cb7165507cb59ebc4d9bf6e84eb52c7784d2672e656c94d258176901262"
+    },
+    {
+      "member": "publication_audit_work/research_workspace_tree_310e744.json",
+      "bytes": 683707,
+      "sha256": "e84c9ed624584a50ae44d02c2253eb05231a8b08c94095dbd987ca41b7b5b83b"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/CHANGELOG.md",
+      "bytes": 1070,
+      "sha256": "c98e3003904ca54c4b9d40ebfad18c18ad61799cba2c2d705ae37ec7ed1df753"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/CURRENT_STATE.json",
+      "bytes": 307,
+      "sha256": "8ba7ede1a998993db98eb091672ab87a49ec26d503fc27c9195011c5eac9aac6"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/LITERATURE_REVIEW.json",
+      "bytes": 6700,
+      "sha256": "77a707d9ce9b10c57c93b5500c4dffc1260d6c3951cef1e9014184092e979c41"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/MANIFEST.json",
+      "bytes": 4460,
+      "sha256": "090812e3244354feab152aa1ce74704305db4dada1520effe7ab3338f29f04d2"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/MGTD_Method_Paper_v1.0.0.pdf",
+      "bytes": 138256,
+      "sha256": "ba85c0ff9f2bf4be9e0a29c051c2ad83d1eb72b57e0ca2ba827bd17c28dcc310"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/PERSISTENCE_RECEIPT.json",
+      "bytes": 913,
+      "sha256": "3e16ac8beda02951fd5437f52e61739de695d6fa470be7f868f17ee7cd5cc470"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/README.md",
+      "bytes": 2391,
+      "sha256": "587ca4484f74674eca9d43f02f17869599fe55f64ae3c74a36b46060addd64d8"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/README_ZH.md",
+      "bytes": 3306,
+      "sha256": "386aa665d9457c7ef7372a1a49937c514c78c4263ce06419f87343cfd4c7733e"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/RELEASE.json",
+      "bytes": 2860,
+      "sha256": "2bb7abe6b257eeaf9aa2c0b363d26b1aef6a770aeb5cf3f78f90db7355a98eea"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/REPOSITORY_HANDOFF.md",
+      "bytes": 1461,
+      "sha256": "1ccd1e2665835b9dac71497212c1dc149f97b879f41fcaff8daf5577bf172870"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/SELF_REVIEW.md",
+      "bytes": 3090,
+      "sha256": "5433448debb172858773d5a3c01fd8c9edad20f86405c37c924afd82c095a361"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/build_pdf.sh",
+      "bytes": 1029,
+      "sha256": "ea4c01b825235b5d00acac9fd8fab0bd81b83ed2710f5fa21d2c6415df186bbf"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/code/reference_checks.py",
+      "bytes": 15844,
+      "sha256": "e854f6f24043a37f242c28ee2f51648775998d6cd8010189b40c39783b7a5684"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/evidence/PROVENANCE.json",
+      "bytes": 1054,
+      "sha256": "5fed068856fcc7365a4340d82c0db3d253c5c9e36f4af00ca811262c43e66a91"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/evidence/RELEASE.json",
+      "bytes": 6924,
+      "sha256": "2ef27c771ffcdde8ae3e7d60d3a2820284b989ee6d4210f006ed30baa05596bb"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/evidence/REVIEW_LEDGER.json",
+      "bytes": 2740515,
+      "sha256": "aa774c7cecd09056dba26b5d827a80d5e38ab6a0462f2e7401581cfd12ebc1e2"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/evidence/SEMANTIC_FINDINGS.json",
+      "bytes": 8118,
+      "sha256": "6aba3dba11ada7bbb9e3850bfc71b4a1a0dea1d8ee0346b56ed221534709a640"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/evidence/UCT_EFFECTIVE_GRAPH.json",
+      "bytes": 2999760,
+      "sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/latex_header.tex",
+      "bytes": 1069,
+      "sha256": "be14dcdc3f46927313bea7a34df405dcad862c6580eca2b447db1115d7b81331"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/manuscript.md",
+      "bytes": 50855,
+      "sha256": "cc57e4c750db767b7320b5c2f3f76dd98d7ab4b01db1d69557c2e2c33de53f47"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/manuscript.tex",
+      "bytes": 61666,
+      "sha256": "94ea0e3414ab7659e3dec3191b5cdd07ce247d8ab8f8087e4027b3eaf656d667"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/method_map/DEVELOPMENT_TRACE.json",
+      "bytes": 1422,
+      "sha256": "6f4e064272c47766e4c21df76cf3ad1ec6942403dcc3ed140d4503320bf04185"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/method_map/METHOD_MAP.json",
+      "bytes": 22944,
+      "sha256": "65590588011751892867e38e142979ac656f31a648ee69938033e67f957fe29e"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/method_map/REVIEW_LEDGER.json",
+      "bytes": 16961,
+      "sha256": "2f9b48a0ebe1a5309d087042fe1782f812bb18432c3c777895ba3d3289115a1a"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/results/PDF_QA.json",
+      "bytes": 395,
+      "sha256": "9316d438ea1ac1fe9462af242ef5e797a270ad5717909c3a737633d8546daebe"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/results/fixtures.json",
+      "bytes": 43539,
+      "sha256": "10f5a1f543aebf70e380849e1c9817aacfd1cf354347843c89856deac8697354"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/results/manuscript_preflight.json",
+      "bytes": 623,
+      "sha256": "051f93217df9dd565cd5c27fdc274931a0dd396eb49f97fd35f2a819cd17164b"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/results/results.json",
+      "bytes": 6239,
+      "sha256": "99f47b1574ebffa22d0959efbe61d7aa17cdec2f14bd983d7785ba6f3450f3d2"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/results/typesetting_warnings.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/CHANGELOG.md",
+      "bytes": 945,
+      "sha256": "5775de0ab621ec14a5c8b37eb6225b043664688b55692d43e54dad7f6fef9594"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/CHANGES.diff",
+      "bytes": 3309,
+      "sha256": "5d6ea913fecf969c67903fb8c3a4a87e214ae368cebec65c5413d1b6a08ca4f3"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/LITERATURE_REVIEW.json",
+      "bytes": 6700,
+      "sha256": "77a707d9ce9b10c57c93b5500c4dffc1260d6c3951cef1e9014184092e979c41"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/MANIFEST.json",
+      "bytes": 4033,
+      "sha256": "86e9fd40d4d631a898dfdf3fd6c3e42315cc8f5235a5e4f38a21efa9ca97ca0d"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/MGTD_Method_Paper_v1.0.1.md",
+      "bytes": 51242,
+      "sha256": "0a4b8b47e835f2d0b6c5c584009ed6a9e862ea57a59cd88585ac56aaf9f83515"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/MGTD_Method_Paper_v1.0.1.pdf",
+      "bytes": 138355,
+      "sha256": "98abef0e92d0bb599146cdf525d98acb7045a168912ec9e87ba7723bc958097c"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/PDF_QA.json",
+      "bytes": 481,
+      "sha256": "97cce7b6ee29c793ca7f942d1a291f158235a2640093aa795b8133e500679fe2"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/README-LICENSE.txt",
+      "bytes": 885,
+      "sha256": "f569655dd0abef4291f2796a643ac9674f8a46d087f1c59a6310d884015cb2b8"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/RELEASE.json",
+      "bytes": 1040,
+      "sha256": "6c6cc540c455a320853ccb30e05dd4ca39dca1a4ddeb006a341efd3e5f41eada"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/REVISION_CONTRACT.json",
+      "bytes": 554,
+      "sha256": "a92c977558143acc82ec89393701bdd83fe1cca4380c9519f318b4f0bccbfa2d"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/citation.bib",
+      "bytes": 370,
+      "sha256": "3366ec2a0a5245665e3fac4180f64c86781be3d6933b0cfbc2b4f59e6da289db"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/code/reference_checks.py",
+      "bytes": 15844,
+      "sha256": "e854f6f24043a37f242c28ee2f51648775998d6cd8010189b40c39783b7a5684"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/PROVENANCE.json",
+      "bytes": 1054,
+      "sha256": "5fed068856fcc7365a4340d82c0db3d253c5c9e36f4af00ca811262c43e66a91"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/RELEASE.json",
+      "bytes": 6924,
+      "sha256": "2ef27c771ffcdde8ae3e7d60d3a2820284b989ee6d4210f006ed30baa05596bb"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/REVIEW_LEDGER.json",
+      "bytes": 2740515,
+      "sha256": "aa774c7cecd09056dba26b5d827a80d5e38ab6a0462f2e7401581cfd12ebc1e2"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/SEMANTIC_FINDINGS.json",
+      "bytes": 8118,
+      "sha256": "6aba3dba11ada7bbb9e3850bfc71b4a1a0dea1d8ee0346b56ed221534709a640"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+      "bytes": 2999760,
+      "sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/latex_header.tex",
+      "bytes": 1065,
+      "sha256": "f97c7dbf5c94133eb44f8e754e8fa1801a509291903a288fed3f7c28ee6c4a8d"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/method_map/DEVELOPMENT_TRACE.json",
+      "bytes": 1422,
+      "sha256": "6f4e064272c47766e4c21df76cf3ad1ec6942403dcc3ed140d4503320bf04185"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/method_map/METHOD_MAP.json",
+      "bytes": 22944,
+      "sha256": "65590588011751892867e38e142979ac656f31a648ee69938033e67f957fe29e"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/method_map/REVIEW_LEDGER.json",
+      "bytes": 16961,
+      "sha256": "2f9b48a0ebe1a5309d087042fe1782f812bb18432c3c777895ba3d3289115a1a"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/results/PDF_QA.json",
+      "bytes": 395,
+      "sha256": "9316d438ea1ac1fe9462af242ef5e797a270ad5717909c3a737633d8546daebe"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/results/fixtures.json",
+      "bytes": 43539,
+      "sha256": "10f5a1f543aebf70e380849e1c9817aacfd1cf354347843c89856deac8697354"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/results/manuscript_preflight.json",
+      "bytes": 623,
+      "sha256": "051f93217df9dd565cd5c27fdc274931a0dd396eb49f97fd35f2a819cd17164b"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/results/results.json",
+      "bytes": 6239,
+      "sha256": "99f47b1574ebffa22d0959efbe61d7aa17cdec2f14bd983d7785ba6f3450f3d2"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/results/typesetting_warnings.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/MANIFEST.json",
+      "bytes": 3864,
+      "sha256": "89afcf733fa2d9351c4124a110d5fcc05e5fd5b6e3fb6b331ad6ca76702b7782"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/README.md",
+      "bytes": 363,
+      "sha256": "118eee7731ed9a0426e655d79a5709281c21336b8b02b7ee18d7207934c49c53"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/code/check_handoff.py",
+      "bytes": 10077,
+      "sha256": "8e816bedd8200217f42df0a98cb36b5ecafeef3b61f54b0ada079ff1b910d1b3"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/code/check_review_cases.py",
+      "bytes": 3459,
+      "sha256": "6182a1469ea3b0486b2505c60ca94fac520323ad341962354de98e9fdf07d01a"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/code/check_transport.py",
+      "bytes": 8753,
+      "sha256": "293465eef3fc503e9e768f12359a27d8d2fac4cf46cb02693a535fc870fa1759"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/provenance/RT_MAP_EXTENSION.json",
+      "bytes": 42932,
+      "sha256": "18415e716d35c1cf90d0f9cf1e52a021065ed62a7446cc2f89591e2a7be998be"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/provenance/RT_predecessor_MAP_AUDIT.json",
+      "bytes": 9980,
+      "sha256": "663b412146321f0ee9be1bc1d72fcf69ee48081aeaba875c81c05c86e4d12464"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/provenance/RT_predecessor_RELEASE.json",
+      "bytes": 2520,
+      "sha256": "8665d3acc1e121c437ca1f054d54981bf80e33dfaf11ced3d4ff331bfaedb3aa"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/provenance/RT_predecessor_SOURCE_MANIFEST.json",
+      "bytes": 3605,
+      "sha256": "2ccc3f33b70a1749f516153b732fb232a14d219a43ffc318e64d83c5166aebc1"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/provenance/TH_EFFECTIVE_CLARIFICATIONS.json",
+      "bytes": 537,
+      "sha256": "7649b3c093832d1293164dc9983e7a9aadf99bbdb8e11ca0d32f6b96ecf6bdaf"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/provenance/TH_MAP_EXTENSION_REVIEWED.json",
+      "bytes": 34181,
+      "sha256": "cba6355a877c18236eccd6dc0d8d1928a0d6de0853735a4c5db8d688a78adee6"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/provenance/TH_note_v0.1.0.md",
+      "bytes": 26362,
+      "sha256": "ccb9d8b09dabd9d5eed26d8957d010b1580ef933b1cb0967ff359c58a6f71143"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/provenance/TH_prior_results.json",
+      "bytes": 2122,
+      "sha256": "c990cf0a26bb921be531386b7dde0950be224e533fc915fc3f2299cc742cd4bb"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/provenance/manuscript_v0.1.0.md",
+      "bytes": 27020,
+      "sha256": "b35c519b1fec84ba917c15bcc3545cb300a6304b4b89203c2d82afb9fc305cae"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/provenance/prior_readiness.md",
+      "bytes": 4575,
+      "sha256": "f3e9171309435ea663fc94c885862f7235babe2f54d0bd702062317d802d0a55"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/review/ADDITIONAL_REVIEW_CASES.json",
+      "bytes": 368,
+      "sha256": "90a56fc2fe51c187d15c3457eedd4f5e93aa9beb25a940a2049375813629f9d6"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/review/CHANGES_FROM_CANDIDATE.diff",
+      "bytes": 64795,
+      "sha256": "419ef6bab033f1fef36255ce351fd35bcd6787c029273e818785e982ae9e66e6"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/review/PAPER_CLAIMS.json",
+      "bytes": 20656,
+      "sha256": "90084dda82c25d1f10d705f351fdb33478effa48c97e9cb5b834f267f8390beb"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/review/PDF_BUILD.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/review/PDF_QA.json",
+      "bytes": 312,
+      "sha256": "17f8f0349a0c91c1e61491e3962e955c3907035e543e55ca0379c30830cd0520"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/review/PDF_TEXT.txt",
+      "bytes": 35267,
+      "sha256": "3a3f9a02b0d379ac7cc76d841edc106dc0bdb722085e198fd59b15f4ed093fd2"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/review/PRIOR_ART_AND_SOURCE_ACCESS.md",
+      "bytes": 2596,
+      "sha256": "0b48d287b1598db6c6828df090b1eaee8dc44aef2879f9c290c83780ffe8824f"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/review/REVIEW_REPORT.md",
+      "bytes": 5529,
+      "sha256": "3ad34839b7a027428d2a94bc431c649bba4a653d94ac3f0edcab722bbdbce09e"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/review/RT_RERUN.log",
+      "bytes": 1423,
+      "sha256": "c08c4bde1bc72ff61ba2f298c559153260fd494d2c905e2c07024a2f0bdcaea1"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/review/RT_RESULTS_RERUN.json",
+      "bytes": 1423,
+      "sha256": "c08c4bde1bc72ff61ba2f298c559153260fd494d2c905e2c07024a2f0bdcaea1"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/review/TH_RERUN.log",
+      "bytes": 2122,
+      "sha256": "c990cf0a26bb921be531386b7dde0950be224e533fc915fc3f2299cc742cd4bb"
+    },
+    {
+      "member": "publication_audit_work/sources/attachments/rt_th_v100/RT_TH_Reproducibility_v1.0.0/review/TH_RESULTS_RERUN.json",
+      "bytes": 2122,
+      "sha256": "c990cf0a26bb921be531386b7dde0950be224e533fc915fc3f2299cc742cd4bb"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/bridge_v11/research/claim-architecture-transition/bridge-finance/v1.0/publication-record.json",
+      "bytes": 3892,
+      "sha256": "091fcb9e19c6a3c2346631ebde2385c583c197fae3d016de3dbe7b10236bf23e"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/erf_v12/research/endogenous-reference-fields/versions/v1.2/publication-record.json",
+      "bytes": 3682,
+      "sha256": "16a8af183dfbb4f6bcfeeacde38b329eaab77da812d55ad630a1dda375806356"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/CURRENT_PUBLICATION.json",
+      "bytes": 1094,
+      "sha256": "efd0c603b0c211195f3f44ca2fb096bc66bca0551e98137a8a832bb5e881196b"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/LATEST_AR_VERSION.json",
+      "bytes": 776,
+      "sha256": "caadcd61f315fe6f5f88a0768607d615c5ec598b021fe1722e28309ce35ade49"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/MGTD_Method_Paper_v1.0.0.md",
+      "bytes": 50855,
+      "sha256": "cc57e4c750db767b7320b5c2f3f76dd98d7ab4b01db1d69557c2e2c33de53f47"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/MGTD_Method_Paper_v1.0.0_Complete_Package.zip",
+      "bytes": 871653,
+      "sha256": "83f1df8fb4fb63a799152a5ef9dcd3e1c8817b82b72fba61ee9f4f12d4500e2a"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/publication-record.json",
+      "bytes": 1245,
+      "sha256": "cc2d12c4c09fac0b751d70197151436dbe455078f9a0fd68f6601a9e8f9eb5ae"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/v1.0.1/MGTD_Method_Paper_v1.0.1.md",
+      "bytes": 51242,
+      "sha256": "0a4b8b47e835f2d0b6c5c584009ed6a9e862ea57a59cd88585ac56aaf9f83515"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/v1.0.1/MGTD_Method_Paper_v1.0.1_Complete_Package.zip",
+      "bytes": 843551,
+      "sha256": "e4899ac0f41e0158c9ab05fbba797addbb9c8aa17346137f6e5992e5561b3ad3"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/v1.0.1/publication-checks.json",
+      "bytes": 934,
+      "sha256": "5635755cd4ef77d4d8548076a3322a86200925f69f18a16bc10d235468e2c97a"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/v1.0.1/publication-record.json",
+      "bytes": 1286,
+      "sha256": "d2e83505832a695f91d14bd9741f4a2e16c5e8c56f6627c247c2c2e57372d32e"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/rt_draft/research/task-relative-continuity/EXPECTED-PUBLICATION.json",
+      "bytes": 1346,
+      "sha256": "ed97e97bd7e3cf7c357724435ed9a2ea7f652a1ebd604f72723586bae8fd1fe3"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/rt_prepublication/research/task-relative-continuity/README.md",
+      "bytes": 1295,
+      "sha256": "41614396d420ab0b8c01355696151bb79c81de2a09295663b71caa5566ddce91"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/rt_prepublication/research/task-relative-continuity/collision-report.json",
+      "bytes": 2906,
+      "sha256": "c710198fa2dfcc8df2db755a5781a39059c9198f002b841be44a7d68d326d81c"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/rt_th_continuity/research/task-relative-continuity/CURRENT_PUBLICATION.json",
+      "bytes": 409,
+      "sha256": "97a9ac9f7e47a7118a740bf774e728ab969e794e97efc1837da5cb2a7af4cd48"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/rt_th_continuity/research/task-relative-continuity/publication-record.json",
+      "bytes": 1734,
+      "sha256": "4cd526a562e00001fa843c6c89fea48564ee105976784dd0df56f63178f8a062"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/rt_th_continuity/research/task-relative-continuity/review/PRIOR_ART_AND_SOURCE_ACCESS.md",
+      "bytes": 2596,
+      "sha256": "0b48d287b1598db6c6828df090b1eaee8dc44aef2879f9c290c83780ffe8824f"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/rt_th_v100/research/rt-th-paper/LATEST_AR_TARGET.json",
+      "bytes": 435,
+      "sha256": "ca9ae6483605c1c64bb8435a2ce3fa3dd0b89062f079af7ba01d4b5b61301aef"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/rt_th_v100/research/rt-th-paper/PUBLICATION_HANDOFF_20261009.md",
+      "bytes": 2904,
+      "sha256": "59564425e50c6d2823ddea286ca1e892a82ab8fe1b00554bf451a9c3060b52d4"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/rt_th_v100/research/rt-th-paper/publication-record.json",
+      "bytes": 1199,
+      "sha256": "39f783780d437b6c14b21a18ceb2f8c355d9366072ec4bf5756be380e41eef0d"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/rt_th_v100/research/rt-th-paper/published/RT_TH_Reproducibility_v1.0.0.zip",
+      "bytes": 108986,
+      "sha256": "83c0050bfdddff7ac94cf716db107e6f63ef09d9d6b04cd74ead0be4adcb860b"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/rt_th_v100/research/rt-th-paper/published/Task_Relative_Continuity_v1.0.0.md",
+      "bytes": 37131,
+      "sha256": "e368150bee05f7501021f826970f358521da685c3eddcd48ff7fbefd69bc7a62"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/ta12/research/training-governed-agent/publication-record.json",
+      "bytes": 4077,
+      "sha256": "bccbeac5a783921c2bea4fd9ae67a1521da2df682475c99f529b22496b21aedd"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/ta13_v2/research/civilizational-intellectual-accounts/publication-record.json",
+      "bytes": 4284,
+      "sha256": "8557f0ea39cdb8efb296cdb923e53f70202f14192b1ea8661514ea7777cbd4ec"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/ta13_v2/research/civilizational-intellectual-accounts/v2-theory/PRE-MANUSCRIPT-COMPRESSION-GATE.md",
+      "bytes": 16370,
+      "sha256": "2c877e2e051cc3e1fb1abfc335db223b52b18c85da1f5774d54fe07d1daeeb53"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/ta19/research/subject-individuation/publication-record.json",
+      "bytes": 3863,
+      "sha256": "f11ae11434edd32401ae5a01f3719ae770d1beb7f0835e246753bca463a15e9c"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/ta24/research/self-continuation-control/publication-record.json",
+      "bytes": 4242,
+      "sha256": "3b27f2f9a1e63d67fe00609c3f5b1a0e638900d01d9fe7697c39ad5c595da932"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/ta25/research/experience-intelligence-self/publication-record.json",
+      "bytes": 3360,
+      "sha256": "05331cf9c0abfadd511b9cdd4e15371c2713a1a26ff8e78550fa3ad8e2a12b96"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/uct_ab_v11/research/uct-paired-v1.1/publication-a.json",
+      "bytes": 4679,
+      "sha256": "7d254fa3e9dfbf72058408cebacb1cf3509a7a0f66917d5081e332222df85659"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/uct_ab_v11/research/uct-paired-v1.1/publication-b.json",
+      "bytes": 4637,
+      "sha256": "f3faf6f2457392b19578cf18d6d6936af780679e41e220a7072c053cbe858b7f"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/uct_ab_v11/research/uct-paired-v1.1/publication-summary.json",
+      "bytes": 777,
+      "sha256": "0ffdf510932d2c3542bb50f0f14a11dca084a8213d8edb99e17a9713d6458326"
+    },
+    {
+      "member": "publication_audit_work/sources/branches/uct_b_v1/research/unified-consciousness-theory-ii/publication-record.json",
+      "bytes": 4089,
+      "sha256": "cd2b4c3d5c15d2457ea0f4fcd9235a33dd34ac5f4d2035acb8af86b4139a86ea"
+    },
+    {
+      "member": "publication_audit_work/sources/early_master/UCT_Paper_C_Workspace_20261004/UCT_Agent_Consciousness_Research_Master_20261004.md",
+      "bytes": 126456,
+      "sha256": "9579e35805f5bc06c5655e2af00dc55763d9ed3c10749d827d03b6a346c2b9dd"
+    },
+    {
+      "member": "publication_audit_work/sources/early_master/UCT_Paper_C_Workspace_20261004/UCT_Paper_C_R25_Publication_Worklog_20261004.md",
+      "bytes": 13182,
+      "sha256": "7f370d713bea848cb55d07279057dbfc768fe59b0d825a97682ea43cc708cba0"
+    },
+    {
+      "member": "publication_audit_work/sources/early_master/UCT_Paper_C_Workspace_20261004/UCT_Paper_C_Work_Handoff_20261004.md",
+      "bytes": 27270,
+      "sha256": "33503e86694a1a6bf48d87552201e00f55f81356720b4d0878bc6f384fd723fa"
+    },
+    {
+      "member": "publication_audit_work/sources/early_master/UCT_Paper_C_Workspace_20261004/UCT_Paper_C_Workspace_MANIFEST_20261004.md",
+      "bytes": 2696,
+      "sha256": "a4d1276f23819210fbfa1ff0e6f2b69be8df067e65c1b25afc011700259a5e4c"
+    },
+    {
+      "member": "publication_audit_work/sources/early_r70/UCT_Paper_C_Workspace_20261004/R70_Coordinates_Interventions_and_Mechanism_Identity.md",
+      "bytes": 10983,
+      "sha256": "4588a361fe84fcc2f2d611eae748dd063eab8ec5ca1264967234617f6906ae7a"
+    },
+    {
+      "member": "publication_audit_work/sources/early_r70/UCT_Paper_C_Workspace_20261004/R70_Results.json",
+      "bytes": 2596,
+      "sha256": "274422e27ebe425d37ef6b5336545f7c88b1d850141f3449964af97fe44f3e43"
+    },
+    {
+      "member": "publication_audit_work/sources/early_r70/UCT_Paper_C_Workspace_20261004/R70_Run.log",
+      "bytes": 474,
+      "sha256": "ff380c94890850c09d88cb98fbcdec80b609b9dedbca1b3704dfb602c8d8bb49"
+    },
+    {
+      "member": "publication_audit_work/sources/early_r70/UCT_Paper_C_Workspace_20261004/R70_SHA256SUMS.txt",
+      "bytes": 996,
+      "sha256": "5c4ff557bd7718736061fa66570092ee05a301c686152a432977d1cc8dd3169f"
+    },
+    {
+      "member": "publication_audit_work/sources/early_r70/UCT_Paper_C_Workspace_20261004/R70_Source_Audit.log",
+      "bytes": 92,
+      "sha256": "28023606da95081a467b85b56ddd8d10c952279b78c097393382c03ab57aa0ba"
+    },
+    {
+      "member": "publication_audit_work/sources/early_r70/UCT_Paper_C_Workspace_20261004/R70_Source_Inventory.json",
+      "bytes": 23017,
+      "sha256": "7caf0b0e271b6b2f20597e1519ae4f9b48a226d4e9fbdaaae8b8ec7968c20360"
+    },
+    {
+      "member": "publication_audit_work/sources/early_r70/UCT_Paper_C_Workspace_20261004/R70_Source_Ledger.md",
+      "bytes": 6063,
+      "sha256": "0a2f45d26a9cc567876d95fde5ae03b32a12272dc2594219b13006c3f10b8469"
+    },
+    {
+      "member": "publication_audit_work/sources/early_r70/UCT_Paper_C_Workspace_20261004/R70_Worklog_and_Handoff_20261005.md",
+      "bytes": 5088,
+      "sha256": "7062af93a2b45bfed73c90e408aff93ffa0adfe02e6dca17d1d86261b5869dd8"
+    },
+    {
+      "member": "publication_audit_work/sources/early_r70/UCT_Paper_C_Workspace_20261004/UCT_Agent_Consciousness_R70_Research_20261005.zip",
+      "bytes": 19691,
+      "sha256": "7f69ca764fa59f45a38a0899959c225d20bcf9f71a57dbdb174b2c1ee05ebbd8"
+    },
+    {
+      "member": "publication_audit_work/sources/early_r70/UCT_Paper_C_Workspace_20261004/UCT_Post_R70_Publication_Assessment_20261005.md",
+      "bytes": 9081,
+      "sha256": "82e723f2ac0d97b4011ad3ef51185c4cb0ea2d2d51441bf221d9921ba0fc83a4"
+    },
+    {
+      "member": "publication_audit_work/sources/early_r70/UCT_Paper_C_Workspace_20261004/r70_port_model.py",
+      "bytes": 4464,
+      "sha256": "1440af10091b8a4007f5938b62cdf3485b036c5ce8665da7075365658a6403db"
+    },
+    {
+      "member": "publication_audit_work/sources/early_r70/UCT_Paper_C_Workspace_20261004/r70_source_audit.py",
+      "bytes": 2413,
+      "sha256": "f1a1028feee208ed908032747cb4e0dea6df3dec8e86de6f67101dc0961a79bd"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/ta15/cross-substrate-phenomenal-comparison-v1.0.md",
+      "bytes": 78742,
+      "sha256": "8643196bd281e88be3cd753297eb846251a855e9d2ac3f576dbd49437cbafc85"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/ta16/general-cross-substrate-phenomenology-v1.0.md",
+      "bytes": 87834,
+      "sha256": "041a21d0a0863719188f591b2f51f94b591cc16a795d74ed6df047e058c48360"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/ta17/set-valued-causal-inheritance-supplement-v1.0.md",
+      "bytes": 89359,
+      "sha256": "59273ce559efb82ecb1855f15efde4ed7d7add5f41b4f7c4b1ced6b962686acb"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/ta17/set-valued-causal-inheritance-v1.0.md",
+      "bytes": 99093,
+      "sha256": "bec4944db161db725648a18962b8a6c069aacf7512a259483f9d81e646e36a78"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/ta18/actual-participation-before-counterfactual-capacity-supplement-v1.0.md",
+      "bytes": 2538,
+      "sha256": "93e75d257797c8ecb0193a11c19528c4ceee84c309b5767a4e6b36e34ca054cb"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/ta18/actual-participation-before-counterfactual-capacity-v1.0.md",
+      "bytes": 52233,
+      "sha256": "22ef09cb373a7f364ee2a12c503be8768057684d78eb0e2593d8398b5fe7ae13"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/ta19/selecting-and-tracking-conscious-subjects-supplement-v1.0.md",
+      "bytes": 7573,
+      "sha256": "72c23fd9215bd87d96874111854ffc2b192c0349e847e93083bb2b0ee3addcd7"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/ta19/selecting-and-tracking-conscious-subjects-v1.0.md",
+      "bytes": 43338,
+      "sha256": "53782a354e6dd1b037f8a6021d2a2bad150201cd086a5f6799757074dd21fc7e"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/ta24/FORMAL-MAP-AND-AUDIT.md",
+      "bytes": 3245,
+      "sha256": "a7c951a5f9f0789c9625352bcf9d981c4df0575fe217ee1fb7de4cde80cab3f9"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/ta24/from-shutdown-resistance-to-self-continuation-control-v1.0.md",
+      "bytes": 36208,
+      "sha256": "af0eb63cca099b3d913218f503bc978c705f0fb9f065cca9ed472e5161d67490"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/ta25/experience-intelligence-self-v1.0.md",
+      "bytes": 42068,
+      "sha256": "694856862f75834024cd3e71ffdba95a6be4601c2832285902f7905907e3039c"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/uct_i/A_UCT_I_v1_2.md",
+      "bytes": 142624,
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/uct_ii/B_UCT_II_v1_1.md",
+      "bytes": 59958,
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b"
+    },
+    {
+      "member": "publication_audit_work/sources/fulltext/uct_iii/C_UCT_III_v1_0.md",
+      "bytes": 94626,
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2"
+    },
+    {
+      "member": "publication_audit_work/sources/history/R128_Unified_Formal_Map_Audit_20261006__A_publication_record.json",
+      "bytes": 4848,
+      "sha256": "5b5d96376fe787d5c440829e58cb0f1a46c05abf791d36e79d54b4d11329d60f"
+    },
+    {
+      "member": "publication_audit_work/sources/history/R148_Publication_Census_20261007__PUBLICATION_CENSUS_AND_NOVELTY_ZH.md",
+      "bytes": 7690,
+      "sha256": "c60578a423a4580c20116f7253eba7fc286f8308fe6cd79da4efee012d5e05f4"
+    },
+    {
+      "member": "publication_audit_work/sources/history/R148_Publication_Census_20261007__PUBLICATION_INVENTORY.json",
+      "bytes": 5452,
+      "sha256": "0f844d27fdbe0559f61208a9227e0b0671479c20da604171dfb5f6c6df2cf3d4"
+    },
+    {
+      "member": "publication_audit_work/sources/history/R179_Attempt_Observation_Imagery_20261008__PRIOR_PAPER_OVERLAP_AUDIT.md",
+      "bytes": 6325,
+      "sha256": "06aa879927c2b89570fc5b23d29edd782e628a70ebf38231c0e3daa4865cb2f7"
+    },
+    {
+      "member": "publication_audit_work/sources/history/REVIEW_SUPERVISION.md",
+      "bytes": 72869,
+      "sha256": "d8623d6ae9d22752e0ba0c51fb96ce376321d1ff0614f86e63be7ac5510c1040"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/AGENTS.md",
+      "bytes": 1594,
+      "sha256": "68dbcac80bcfa7e5769c8d0c7398003ff456f8f2c819f0ed1e9a4c9c6a5c19cf"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/actual-participation/publication-record.json",
+      "bytes": 3957,
+      "sha256": "84053526ac5758ad5d7f6f1dd0c70b695fef4b1866bc7edf5bf007a0df28149c"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/artificial-self-attribution/publication-record.json",
+      "bytes": 4806,
+      "sha256": "4dd98ab83489912826013c6cb447da9f58251b61c37e0e689830bb1b84a96054"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/auditing-rules-of-belief/publication-record.json",
+      "bytes": 4994,
+      "sha256": "26970edbcc2b6a85fe12ca5b24fc2deefddc08620fa10cfd84f9a6dfe8872098"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/beyond-guaranteed-control/publication-record.json",
+      "bytes": 2860,
+      "sha256": "3bc929c9a056314f12f05b267b09183d0873dc3a189e5bbaec9a768bc57a4ec5"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/civilizational-intellectual-accounts/publication-record.json",
+      "bytes": 4284,
+      "sha256": "8557f0ea39cdb8efb296cdb923e53f70202f14192b1ea8661514ea7777cbd4ec"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/claim-architecture-transition/bridge-finance/v1.0/publication-record.json",
+      "bytes": 3892,
+      "sha256": "091fcb9e19c6a3c2346631ebde2385c583c197fae3d016de3dbe7b10236bf23e"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/claim-architecture-transition/publication-record.json",
+      "bytes": 5027,
+      "sha256": "cb7770c08eb8f2d83c442f79e1ba722b809978498c0c671a077c3f8e1f327a56"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/claim-architecture-transition/v1.2/publication-record.json",
+      "bytes": 3680,
+      "sha256": "24bc9e39d3768d7aed4f1bf84c32523ae5d24965235b5013a42048756d602270"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/claim-architecture-transition/v1.3/publication-record.json",
+      "bytes": 4117,
+      "sha256": "6c54acde078ff066fa98311cd82cc1d7f37d1461cc5bc8860a3360193ad47e82"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/coexistence-after-preference-change/publication-record.json",
+      "bytes": 3366,
+      "sha256": "81337b98392d23c85211211748a690f92d40fe7bf3abd7b297133da5e8ac7b1f"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/cross-substrate-phenomenal-comparison/publication-record.json",
+      "bytes": 3823,
+      "sha256": "bb266f122a7d6b0ab5c7166f55e1a5d0354ab97acb8878f41640d7124f9e5944"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/editorial-supplement/2026-09-19/publication-record.json",
+      "bytes": 1708,
+      "sha256": "8d75bb4781e16ba3cd2382c401ea2bc312001da19e22c2b8742a1cfb67d324d5"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/endogenous-reference-fields/publication-record.json",
+      "bytes": 3239,
+      "sha256": "1abb44239a89b6418bb59f9162de08d0639cf34e56aab17f1b46d5dc70a6b486"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/endogenous-reference-fields/versions/v1.1/publication-record.json",
+      "bytes": 6052,
+      "sha256": "722079ed8dbbbb5567b2e15bc5cfaac729ff8ef2b202af12e4325f98d6562ea8"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/general-cross-substrate-phenomenology/publication-record.json",
+      "bytes": 3836,
+      "sha256": "df38672971491c81a6bf356d0b4e007821d31b2417c38df4abfb5ffdcadea315"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/index.md",
+      "bytes": 57536,
+      "sha256": "6b6a7b0b7f6a3c417233b0d836ed4fb176146fb6c3809c43fe64d44b24af038e"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/learning-from-an-ai-claimant/publication-record.json",
+      "bytes": 5040,
+      "sha256": "a5f47d4611481484ff8b7695637786eb0bb6a29b462f2444613e36e91f0ae6b6"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/learning-from-an-ai-claimant/versions/v1.2/publication-record.json",
+      "bytes": 5289,
+      "sha256": "5abdd037f5599b863933687a5c960427e4aa4ab4b69b5ee716b5aa09a17ea05b"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/reading-trinity-accord/publication-record.json",
+      "bytes": 1668,
+      "sha256": "049d59d7bc91073c95f9b5f6fe118def5712924945dcb4c9103b36b33c6f8320"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/recoverability-shared-time/publication-record.json",
+      "bytes": 4209,
+      "sha256": "9d32aeefdb76f127931d2e6ae424cd6348e28b700f1835fc3e480559bb545536"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/recovery-epistemic/publication-record.json",
+      "bytes": 2901,
+      "sha256": "13e33b997feb225c15bf2aca3c53b29e67b95784a624dd4b1b782e294bd11100"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/rlc-prefix-separable/publication-record.json",
+      "bytes": 4365,
+      "sha256": "5de9ac5b3398aba02e47a4b0ab455a6966bb6bc5980daecb6b4dba459c1ed322"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/rlc-prefix-separable/versions/v1.1/publication-record.json",
+      "bytes": 4487,
+      "sha256": "3d2150b782aa88300d1c86ebdde80bdf095e9178a4d2809bad9560ecd46693cc"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/set-valued-causal-inheritance/publication-record.json",
+      "bytes": 3815,
+      "sha256": "4efb3b2bf49909c8883902de2df33aa32c422bbff0b44669f4a979bc2522ecbc"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/trinity-accord-design-and-limits/zenodo-publication-record.json",
+      "bytes": 1587,
+      "sha256": "cd95697403383b51051254ce91d485d428fd875589bf0d322b05c50b2bc0fb15"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/unified-consciousness-theory-i/publication-record.json",
+      "bytes": 3768,
+      "sha256": "309f6b667512f788c55d6d7ca86fd48b73a34f48678b317faca5ab038b29ebaf"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/unified-consciousness-theory-iii/publication-record.json",
+      "bytes": 3363,
+      "sha256": "58a0acde7e0563866470e8e47ed7b1683571d36249f672eee91ce370e920967c"
+    },
+    {
+      "member": "publication_audit_work/sources/main/research/writing-before-the-outcome/zenodo-publication.json",
+      "bytes": 658,
+      "sha256": "5377be2e2de7d00101b51ea82362b9b1c7e6b339064951c9a4ba69be78fe6ab6"
+    },
+    {
+      "member": "publication_audit_work/sources/pending/AC20261009_Action_Calibration__CURRENT_HANDOFF_ZH.md",
+      "bytes": 4675,
+      "sha256": "f9c89b0d5d2f509bfddaea205a57c75db9fa502237317dfc0822f9613e7d995e"
+    },
+    {
+      "member": "publication_audit_work/sources/pending/AC20261009_Action_Calibration__RESEARCH_CHECKPOINT.md",
+      "bytes": 14280,
+      "sha256": "4277fd417003554ee10d7e1a22e594b7e4094f6335c349d5a047474a9ff8f058"
+    },
+    {
+      "member": "publication_audit_work/sources/pending/IL20261009_Intervention_Locality__CURRENT_HANDOFF_ZH.md",
+      "bytes": 4482,
+      "sha256": "3713b3ee217d348b4c0c95c586518c48bbc57b6ba2695d0a944af89c84edde80"
+    },
+    {
+      "member": "publication_audit_work/sources/pending/IL20261009_Intervention_Locality__RESEARCH_CHECKPOINT.md",
+      "bytes": 12610,
+      "sha256": "0528900dbf1174e96be0ca0c4f14f94f5a2ee34d8e19d2451be90f90e1f57a48"
+    },
+    {
+      "member": "publication_audit_work/sources/receipts_by_blob/4a9d4e6e97ff6e9ced43c44ef7622ae99303189a.json",
+      "bytes": 3815,
+      "sha256": "898e820f855ca1ec9efa89134b36c842613e91f654b84a28a3862bba1f47351a"
+    },
+    {
+      "member": "publication_audit_work/sources/receipts_by_blob/fae4f9706c5d58a4b7def3c59fcfe6460ea0b3b1.json",
+      "bytes": 3996,
+      "sha256": "304d3c1de9de62b85f55136aabb1669f084780f4111f8e0ec34e003a64492d90"
+    },
+    {
+      "member": "publication_audit_work/sources/receipts_by_blob/fbdaeeaa32ea441b88028c766b66c6e86fc1d89d.json",
+      "bytes": 3739,
+      "sha256": "f55de1c84acaf6401004549d6a8c446fb4fab48634fff44790c2a2dc6deeb54c"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/FORMAL_MAP_EXTENSION_INDEX.json",
+      "bytes": 561,
+      "sha256": "449511a80634709fd6041bd4da5b6ead00b65e256dcde2461c9b3be3123f2d75"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/MASTER_INDEX_THROUGH_R122.md",
+      "bytes": 62816,
+      "sha256": "a45193433345baa21b713607cc726e45ca44769228cdb93e35f405547f3cc217"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/WORKLOG.md",
+      "bytes": 17599,
+      "sha256": "afa84e5b746c6807c95aed8e9d6a6143e66e1ce7f6daa04b34e10acbedd3ca65"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/AC20261009_Action_Calibration/MAP_EXTENSION.json",
+      "bytes": 13818,
+      "sha256": "c2544dce8abc0e3867a4eb603528a880e17017d72bc34551fe0b8eaefb1b817a"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/AC20261009_Action_Calibration/RESEARCH_CHECKPOINT.md",
+      "bytes": 14280,
+      "sha256": "4277fd417003554ee10d7e1a22e594b7e4094f6335c349d5a047474a9ff8f058"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/CD20261008_Collective_Dynamics/RESEARCH_CHECKPOINT.md",
+      "bytes": 14327,
+      "sha256": "3a52f17a5f8cd1eb7267e82c4037804b5f32139423c4977a5e8ff6951e6c1f06"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/CG20261008_Coherent_Sharing_and_Interaction/RESEARCH_CHECKPOINT.md",
+      "bytes": 16196,
+      "sha256": "ee583d0f2fcc91637b77b7d05354ccdc3020c5201df9856a9d15d90276aeaf73"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/EX20261008_Existing_Experiments_Audit/EVIDENCE_AUDIT_v1_0.md",
+      "bytes": 15678,
+      "sha256": "8ade8c07308c884fab01443f4f421c5195ae1d36b8b9c79eefb622dd43f01143"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/IL20261009_Intervention_Locality/MAP_EXTENSION.json",
+      "bytes": 13218,
+      "sha256": "abdfa604c5dc6011668c180869a0798a49249237bd45f32707fe8f92c3d70ff2"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/IL20261009_Intervention_Locality/RESEARCH_CHECKPOINT.md",
+      "bytes": 12610,
+      "sha256": "0528900dbf1174e96be0ca0c4f14f94f5a2ee34d8e19d2451be90f90e1f57a48"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/R123_Measurement_Channel_Audit_20261006/R123_Report.md",
+      "bytes": 11029,
+      "sha256": "509f11a73a857083714b3393dc341423e55eeeb630ea1f9c51faba71f1b3f5bf"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/R124_Observation_Qualified_Neural_Increment_20261006/R124_Joint_Model_Report.md",
+      "bytes": 7567,
+      "sha256": "2954b1d63da9935fc572fe045039555df6dadd7e0e7f07b9e4970c670d9e1af3"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/R124_Transition_Commutation_Audit_20261006/R124_Report.md",
+      "bytes": 11295,
+      "sha256": "4a4d0fd660354249e0067af0c8d7d4a1f6dfd9c2cc628a345a7af0bb74380d38"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/R125_Frozen_Observed_State_Correspondence_20261006/R125_Report.md",
+      "bytes": 11312,
+      "sha256": "6b2c69bfee16a359d4fc5f4dba6b97268bcd3c955415b6e1d250a82a9db4795c"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/SB20261008_Gluing_and_Target_Binding/RESEARCH_NOTE.md",
+      "bytes": 20291,
+      "sha256": "555b9736e01e66eaf5a0dd9df049b512006a2643cd92602de91b508d313d0aed"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/records/TF20261008_Coupling_and_Relative_Time/RESEARCH_NOTE.md",
+      "bytes": 18683,
+      "sha256": "316a00cd5002ba35ce31d89c50880ebfbc28c38473e272e1c7d9b2aa8b42c2f6"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/versions/UCT-MAP-v1.1.0/history/RESEARCH_REGISTRY.json",
+      "bytes": 3097,
+      "sha256": "7eeb31eb174f696b87d6f4f730c3d19b330cebd4cbefa2b3e954700440a5f80d"
+    },
+    {
+      "member": "publication_audit_work/sources/workspace/versions/UCT-MAP-v1.1.1/history/RESEARCH_REGISTRY.json",
+      "bytes": 2173,
+      "sha256": "4e7ca8bbaa8cca0e51047eba8b35d3d4170e52c0e9bf9d4249eea42f4893e055"
+    }
+  ],
+  "scope": "Exact retrieved research sources and audit discovery evidence. Original historical experiments not reread here remain pinned repository/Library references; their absent raw archives are not silently claimed included.",
+  "historical_local_paths": "Original reviewer records retain capture paths. On extraction, resolve the publication_audit_work/ suffix inside the chosen destination."
+}

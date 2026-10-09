@@ -1,7 +1,7 @@
 {
   "schema": "uct-research-governance-policy-v1",
   "policy_id": "POLICY-20261008-WHOLE-MAP-PERSISTENCE",
-  "version": "2.3",
+  "version": "2.4",
   "date": "2026-10-09",
   "layer": "methodology_not_consciousness_axiom",
   "authority": "explicit_author_instruction",
@@ -14,7 +14,11 @@
     "UCT_FORMAL_AUDIT.md",
     "HANDOFF.md",
     "MASTER_INDEX.md",
-    "REVIEW_SUPERVISION.md"
+    "REVIEW_SUPERVISION.md",
+    "PUBLICATION_COVERAGE.json",
+    "CURRENT_STATE.json",
+    "RESEARCH_REGISTRY.json",
+    "RESEARCH_SESSION_LOG_INDEX.json"
   ],
   "inherited_source_targets": [
     {
@@ -92,9 +96,9 @@
     "AUDIT_REPORT.md",
     "PERSISTENCE_RECEIPT"
   ],
-  "implementation_of_master_guide_section": "RESEARCH_MASTER_GUIDE.md v2.2 sections 0 and 8A; governance schema version 2.3 preserves earlier requirements.",
+  "implementation_of_master_guide_section": "RESEARCH_MASTER_GUIDE.md v2.3 sections 0.3–0.6 and 8A; existing scientific and persistence constraints preserved.",
   "current_completed_map": "UCT-MAP-v1.1.2",
-  "master_guide_version": "2.2",
+  "master_guide_version": "2.3",
   "research_purpose": {
     "primary_goal": "Original, durable, verifiable and reusable knowledge for future AI and researchers, serving the UCT experience-organization-intelligence-self program.",
     "reaffirms": "R150 author clarification, 2026-10-07; reiterated 2026-10-09",
@@ -113,5 +117,56 @@
     "combine_related_increments_in_one_self_contained_paper": true
   },
   "last_completed_audit": "R188-ALLMAP-COMPAT-20261009-v1",
-  "navigation_update": "v1.1.2 current pointers updated after full contract review; policy purpose and scientific axioms unchanged."
+  "navigation_update": "Publication overlay synchronized; completed science graph remains v1.1.2. New online calibration is a pending research checkpoint.",
+  "publication_coverage": {
+    "entry": "PUBLICATION_COVERAGE.json",
+    "orthogonal_to_scientific_premise_truth": true,
+    "required_on_every_work_log_or_map_update": true,
+    "unchanged_requires_explicit_checked_reason": true,
+    "must_check_current_publication_branch_and_exact_versions": true,
+    "reserved_doi_is_published": false,
+    "working_draft_is_formal_release": false,
+    "public_preprint_may_be_published_without_journal_acceptance": true,
+    "one_work_multiple_versions_not_multiple_works": true,
+    "unknown_is_unpublished": false,
+    "unpublished_is_original": false,
+    "published_is_validated": false,
+    "unit": "stable claim ID, grouped into problem-centered result families",
+    "coverage_states": [
+      "covered_exact",
+      "covered_partial",
+      "inherited",
+      "not_found_in_verified_corpus",
+      "not_applicable",
+      "unverified"
+    ],
+    "cycle": [
+      "inventory_all_results_and_published_versions",
+      "subtract_published_and_inherited_coverage",
+      "assess_residual_originality_and_reusable_knowledge",
+      "if_insufficient_select_and_pursue_specific_gap",
+      "integrate_and_audit_substantive_results",
+      "reassess",
+      "if_sufficient_complete_and_reaudit_manuscript",
+      "after_actual_release_backfill_precise_claim_coverage"
+    ],
+    "required_update_fields": [
+      "coverage_version",
+      "checked_publication_sources",
+      "changed_claim_ids",
+      "newly_covered_claim_ids",
+      "residual_increment",
+      "unverified_scope",
+      "originality_and_manuscript_decision",
+      "next_specific_action"
+    ],
+    "metadata_only_changes_do_not_increment_scientific_map": true,
+    "publication_permissions": "Use the author’s actual scoped instructions; a manuscript-readiness decision is not itself a publication action.",
+    "distinguish_body_attachment_and_citation_only": true,
+    "same_version_label_different_deposits_require_separate_records": true,
+    "current_version": "UCT-PUB-v1.0.0",
+    "current_update": "records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json"
+  },
+  "latest_governance_activity": "PUB20261009",
+  "latest_pending_research": "ONLINE-AC-PROBE-20261009"
 }

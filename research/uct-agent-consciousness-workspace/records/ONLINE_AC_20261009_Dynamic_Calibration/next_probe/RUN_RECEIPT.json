@@ -1,0 +1,15 @@
+{
+  "run_id": "ONLINE-AC-PROBE-20261009-verified-label-rerun",
+  "start_utc": "2026-10-09T07:58:47.169872+00:00",
+  "end_utc": "2026-10-09T07:58:47.426518+00:00",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "/workspace/scratch/328b6dbb55c2/publication_audit_work/next_probe/check_online_calibration.py"
+  ],
+  "cwd": "/workspace/scratch/328b6dbb55c2",
+  "exit_code": 0,
+  "code_sha256": "bc829ade2c93197c86aed4646ae119628b8b4ebe25181f595dd6b7ee605bd304",
+  "results_sha256": "7054e1f31175f799c71e3bd6e21430017f90e557bb3659ef731faa4d4b8aa8a7",
+  "stdout_sha256": "8c4e8e033d2f8ec055b847aa894640a2923fe7e093dd7344282d08a8c28e289e",
+  "stderr_bytes": 0
+}

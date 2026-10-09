@@ -1,0 +1,117 @@
+{
+  "schema": "uct-research-governance-policy-v1",
+  "policy_id": "POLICY-20261008-WHOLE-MAP-PERSISTENCE",
+  "version": "2.3",
+  "date": "2026-10-09",
+  "layer": "methodology_not_consciousness_axiom",
+  "authority": "explicit_author_instruction",
+  "master_guide": "RESEARCH_MASTER_GUIDE.md",
+  "inherited_guide": "RESEARCH_MASTER_GUIDE_BEFORE_POLICY20261008.md",
+  "governed_files": [
+    "UCT_FORMAL_MAP.md",
+    "UCT_FORMAL_GRAPH.json",
+    "UCT_FORMAL_GRAPH_MODULES.json",
+    "UCT_FORMAL_AUDIT.md",
+    "HANDOFF.md",
+    "MASTER_INDEX.md",
+    "REVIEW_SUPERVISION.md"
+  ],
+  "inherited_source_targets": [
+    {
+      "paper": "UCT I v1.2",
+      "sections": [
+        "2.1",
+        "2.2",
+        "2.4 P3",
+        "3.4",
+        "4 C1/U1"
+      ],
+      "constraint": "Actual valid local processes retain nonempty experience while persisting in an actual whole; macro experience does not wait for a subject selector."
+    },
+    {
+      "paper": "TA25 v1.0",
+      "sections": [
+        "3 D1/C1/D2",
+        "4 D4/D5"
+      ],
+      "constraint": "Actual organization, views, experience, named feelings, self-models, reports and capabilities are typed separately."
+    }
+  ],
+  "per_substantive_step": {
+    "reread_source_when_definition_changes_or_disputed": true,
+    "integrate_every_substantive_claim_before_promotion": true,
+    "whole_current_graph_node_and_relation_review": true,
+    "review_unlinked_but_semantically_related_nodes": true,
+    "all_of_requires_joint_same_instance_satisfaction": true,
+    "keep_alternative_proof_routes_disjunctive": true,
+    "rederive_affected_dependency_closure": true,
+    "explicit_general_proof_or_counterexample_scope": true,
+    "check_originality_against_internal_and_primary_external_sources": true,
+    "save_failures_and_source_versions": true,
+    "report_intermediate_progress": true,
+    "must_create_work_log_and_handoff_per_research_output": true,
+    "must_store_and_readback_persistence_receipt": true,
+    "failed_tests_must_remain_logged": true,
+    "research_result_and_map_versions_separate": true
+  },
+  "coverage_record_required": [
+    "base_commit",
+    "graph_version",
+    "all_node_ids",
+    "all_rule_ids",
+    "all_context_relation_ids",
+    "item_status_and_evidence",
+    "semantic_cross_checks",
+    "affected_downstream_rederivations",
+    "missing_or_unreviewed_ids",
+    "source_and_novelty_limits"
+  ],
+  "unintegrated_claim_status": "PENDING_MAP",
+  "incomplete_audit_status": "AUDIT_INCOMPLETE",
+  "prohibited_substitutions": [
+    "whole_formation_erases_persisting_local_experience",
+    "persistence_implies_unchanged_content",
+    "unique_subject_required_for_experience",
+    "author_policy_as_physical_evidence",
+    "DAG_PASS_equals_semantic_proof",
+    "finite_checks_equal_general_proof",
+    "renamed_prior_art_equals_breakthrough"
+  ],
+  "effective_map_entry": "UCT_FORMAL_GRAPH_MODULES.json",
+  "effective_map_merge": "Preserved canonical base then explicitly listed additive layers; no silent overwrite, missing imports or changed source hash. Registration does not discharge OPEN premises or complete audit.",
+  "current_additive_record": "records/R188_Encoder_Access_and_Recovery_20261009/HANDOFF_ZH.md",
+  "adoption_action": "register_explicit_additive_layer_without_new_consciousness_axiom_or_publication",
+  "full_graph_semantic_audit_completed_by_this_adoption": "AUTHOR_COMPATIBILITY_SCOPE_ONLY_NOT_INDEPENDENT_REPROOF",
+  "publication_authorized": false,
+  "required_output_files": [
+    "WORK_LOG.md",
+    "HANDOFF_ZH.md",
+    "RESEARCH_NOTE.md",
+    "RUN_RECEIPT.json",
+    "MAP_EXTENSION.json",
+    "AUDIT_REPORT.md",
+    "PERSISTENCE_RECEIPT"
+  ],
+  "implementation_of_master_guide_section": "RESEARCH_MASTER_GUIDE.md v2.2 sections 0 and 8A; governance schema version 2.3 preserves earlier requirements.",
+  "current_completed_map": "UCT-MAP-v1.1.2",
+  "master_guide_version": "2.2",
+  "research_purpose": {
+    "primary_goal": "Original, durable, verifiable and reusable knowledge for future AI and researchers, serving the UCT experience-organization-intelligence-self program.",
+    "reaffirms": "R150 author clarification, 2026-10-07; reiterated 2026-10-09",
+    "publication_metrics_primary": false,
+    "future_citation_guaranteed": false,
+    "required_candidate_paper_audit": [
+      "precise_problem_and_mainline_connection",
+      "net_citable_increment",
+      "internal_and_primary_external_predecessors",
+      "same_instance_assumptions_proofs_and_counterexamples",
+      "reproducible_evidence_and_failures",
+      "reuse_conditions_and_open_obligations",
+      "stable_versions_logs_handoff_and_map_audit"
+    ],
+    "known_math_may_support_original_application_but_is_not_rebranded": true,
+    "combine_related_increments_in_one_self_contained_paper": true
+  },
+  "last_completed_audit": "R188-ALLMAP-COMPAT-20261009-v1",
+  "navigation_update": "v1.1.2 current pointers updated after full contract review; policy purpose and scientific axioms unchanged."
+}

@@ -1,0 +1,424 @@
+{
+  "schema": "uct-publication-coverage-ledger/1.0",
+  "coverage_version": "UCT-PUB-v1.0.0",
+  "sequence": 1,
+  "parent_coverage": null,
+  "date": "2026-10-09",
+  "layer": "NONDEDUCTIVE_PUBLICATION_AND_REUSE_METADATA",
+  "record_id": "PUB20261009",
+  "scientific_map": "UCT-MAP-v1.1.2",
+  "scientific_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "research_base_commit": "310e744f8d0195d05fac4e56e807adc48784f0ca",
+  "publication_main_commit": "fc568e8718e82b3cda6ede0e628aa3342179bebc",
+  "purpose": "Original, inspectable, reusable knowledge serving the UCT program and future AI citation; not paper count or venue status.",
+  "publication_counts": {
+    "distinct_research_works": 28,
+    "distinct_research_work_version_label_pairs": 38,
+    "distinct_published_research_doi_records": 39,
+    "separate_editorial_supplement_works": 1,
+    "separate_editorial_doi_records": 1,
+    "all_verified_publication_doi_records_including_editorial": 40,
+    "reserved_only_records_within_the_40_verified_publication_records": 0,
+    "uninspected_live_account_drafts": "NOT_ENUMERATED"
+  },
+  "counting_decisions": [
+    "TA01–TA25 are 25 works; TA14-BRIDGE is a separate standalone work; MGTD and RTTH add one work each: 28 research works.",
+    "UCT I has two verified DOI records both labeled v1.1, 23029358 and 23030207; they remain one work and one version label, but two published deposit records. Current preferred edition is v1.2 DOI23131575.",
+    "MGTD v1.0.0 DOI23241205 and v1.0.1 DOI23241982 are one methods work, two versions. Report label METHOD20261008 is used rather than inventing a TA26 identifier.",
+    "RT-TH-2026-01 and RT20261009 receipts describe the same work/version/DOI23251651, not two papers.",
+    "Editorial DOI22839629 is separately counted. Project-level metadata DOI21675727 and concept DOIs are not independent research-paper works or manuscript versions.",
+    "DOI resolver lag and OTS/Arweave preservation status do not reverse a submitted published deposit with public-readback receipt. A reserved DOI alone would not establish publication."
+  ],
+  "map_counts": {
+    "effective_nodes": 913,
+    "active_rules": 424,
+    "nondeductive_contexts": 261,
+    "suspended_historical_rules": 10,
+    "reviewed_map_items": 1608,
+    "node_families": 67,
+    "workspace_tree_entries": 2002,
+    "workspace_files": 1838,
+    "record_files": 1643,
+    "record_artifact_groups": 149,
+    "role_counts": {
+      "theory_commitment_or_ontological_domain": 7,
+      "conditional_interpretation": 54,
+      "definition_or_model": 129,
+      "method_or_inference_governance": 20,
+      "scientific_result": 390,
+      "reported_evidence": 14,
+      "premise_or_contract": 220,
+      "open_obligation": 55,
+      "research_method_result": 4,
+      "correction_or_withdrawal": 17,
+      "inherited_source_or_alias": 13,
+      "derivation_route": 424,
+      "nondeductive_context": 261
+    },
+    "coverage_counts": {
+      "not_claim": 1139,
+      "exact": 382,
+      "partial": 2,
+      "unknown": 83,
+      "inherited": 2
+    }
+  },
+  "current_item_coverage_counts": {
+    "not_applicable": 1139,
+    "covered_exact": 382,
+    "unverified": 71,
+    "inherited": 14,
+    "covered_partial": 2
+  },
+  "explicit_inherited_reconciliations": 12,
+  "disclosure_findings": {
+    "MGTD_v100_graph_records": 1268,
+    "matching_current_review_item_ids_including_10_suspended": 1278,
+    "exact_active_objects": 1266,
+    "corrected_active_ids": [
+      "R173:THREE_TARGET_SEPARATION",
+      "BASE:CTX:143"
+    ],
+    "TH_original_module_counts": {
+      "nodes": 30,
+      "rules": 15,
+      "context_links": 8
+    },
+    "TH_same_statement_nodes": 28,
+    "TH_current_contract_difference_ids": [
+      "TH20261009:CORRELATION_SETUP",
+      "TH20261009:r_correlation"
+    ],
+    "TH_published_only_ids": [
+      "TH20261009:PROTOCOL_BASE",
+      "TH20261009:r_protocol_specialization"
+    ],
+    "RB": "RTTH §9 and reference [6] cite later RB v0.2; that is not republication of the budget theorem in the main result or supplied TH v0.1 module.",
+    "disclosure_not_validation": "A formal attachment can disclose a conditional statement, model, open obligation, or even historically corrected assertion. Disclosure does not make all of them established truths or the body contribution.",
+    "all_current_review_items_with_matched_attachment_ID": 1329,
+    "current_review_items_without_matched_ID_in_these_attachments": 279
+  },
+  "documents": {
+    "PUBLISHED_WORKS_AND_VERSIONS.json": {
+      "path": "publication/UCT-PUB-v1.0.0/PUBLISHED_WORKS_AND_VERSIONS.json",
+      "bytes": 412824,
+      "sha256": "a442b3c6fc437c16d264efb4958cd914c812f82335babe88570335317fbfa5a9"
+    },
+    "PAPER_ARGUMENT_COVERAGE.json": {
+      "path": "publication/UCT-PUB-v1.0.0/PAPER_ARGUMENT_COVERAGE.json",
+      "bytes": 83258,
+      "sha256": "6f4d54b11661ecf9b0187bd311c566dff6678eb0a735ecc74690755e3b1b5054"
+    },
+    "RESULT_FAMILIES.json": {
+      "path": "publication/UCT-PUB-v1.0.0/RESULT_FAMILIES.json",
+      "bytes": 380789,
+      "sha256": "52aa2a674aa664a4109ed940f549a6f1b005a675a5c9a584bb4316a6d59c8dd7"
+    },
+    "RESEARCH_ARTIFACT_INVENTORY.json": {
+      "path": "publication/UCT-PUB-v1.0.0/RESEARCH_ARTIFACT_INVENTORY.json",
+      "bytes": 694831,
+      "sha256": "f04be473f438ed1cd1c7ccd8663eb223d79a4d551d16a87b9990b6a76a1559d1"
+    },
+    "EARLY_RESULT_FAMILIES.json": {
+      "path": "publication/UCT-PUB-v1.0.0/EARLY_RESULT_FAMILIES.json",
+      "bytes": 57763,
+      "sha256": "2f29da3cfd28d5a5fa4a18734d0e85c486914b910b7b19dd0ed53d5b6eb061c8"
+    },
+    "CLAIM_ID_INDEX.json": {
+      "path": "publication/UCT-PUB-v1.0.0/CLAIM_ID_INDEX.json",
+      "bytes": 240278,
+      "sha256": "a09b46bc78d767f9f3ef05809aadfd809b478b20f4983c898674e01349fc56c8"
+    },
+    "COVERAGE_RECONCILIATION.json": {
+      "path": "publication/UCT-PUB-v1.0.0/COVERAGE_RECONCILIATION.json",
+      "bytes": 6386,
+      "sha256": "88604de9122fb589880e304dbf8789a5428f6f0682e73745fae0f1ecf7186a2a"
+    },
+    "SOURCE_CAPSULE_MANIFEST.json": {
+      "path": "publication/UCT-PUB-v1.0.0/SOURCE_CAPSULE_MANIFEST.json",
+      "bytes": 53387,
+      "sha256": "a95356d644f19ea9c984c2dd856ab7e8ec5a6a1117edc5acdae86f8cd154dc34"
+    },
+    "MANUSCRIPT_DECISION.json": {
+      "path": "publication/UCT-PUB-v1.0.0/MANUSCRIPT_DECISION.json",
+      "bytes": 2869,
+      "sha256": "974beb1ef9c566610bfa3c075a892f03c51f2f52ab81638d7c0e317126e0610d"
+    },
+    "DYNAMIC_RESULT_COVERAGE.json": {
+      "path": "publication/UCT-PUB-v1.0.0/DYNAMIC_RESULT_COVERAGE.json",
+      "bytes": 29973,
+      "sha256": "8e67cc5cf70b4151b149ffbad2ac460fb7832d9542d5896306f42ca865694c3a"
+    }
+  },
+  "item_shards": [
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_01.json",
+      "bytes": 289545,
+      "sha256": "0afe68ca550254f8dd9f0d1de2a8770e7b5df0eb773c6553d16eace5e9f988fa",
+      "items": 100,
+      "first_id": "A:ACTUAL_COMPLETE_TOY",
+      "last_id": "B:GRAPH"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_02.json",
+      "bytes": 213522,
+      "sha256": "7c503935cd6372cb6995c0db1180bd1203c31319d591ac7429e8e409bac969d9",
+      "items": 100,
+      "first_id": "B:GRID19",
+      "last_id": "BASE:CTX:073"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_03.json",
+      "bytes": 189374,
+      "sha256": "df018d1f15e60a1976ac8e0046b462ea2bfc2389323d2d506d7511295fa08cee",
+      "items": 100,
+      "first_id": "BASE:CTX:074",
+      "last_id": "BASE:CTX:173"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_04.json",
+      "bytes": 237907,
+      "sha256": "f73e9d1572bf6c5e8ae62582b42a658ac7a125dc292115004176138625aa3e5a",
+      "items": 100,
+      "first_id": "BASE:CTX:174",
+      "last_id": "CORE20261008:ALTERNATIVE_SUPPORTS"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_05.json",
+      "bytes": 252906,
+      "sha256": "9b25b6fd2549f75e661fdbfad3d73e2d6911d665f17860f6b65664bb85786c4c",
+      "items": 100,
+      "first_id": "CORE20261008:CONTRACT",
+      "last_id": "IA20261008:FIXED_TARGET_CONSTRAINT"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_06.json",
+      "bytes": 219579,
+      "sha256": "5fb9b2a138e2bf005f3d5a30b9aeac668037cb5653471d5a3e0c0fc8a1dad7a3",
+      "items": 100,
+      "first_id": "IA20261008:FROZEN_IDENTITY_DOMAIN",
+      "last_id": "OO20261008:TYPE_CONSEQUENCE"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_07.json",
+      "bytes": 294960,
+      "sha256": "a35ad0157bd22f6e257e995d3784462709b17b5dff4212974793f70033f4933f",
+      "items": 100,
+      "first_id": "OO20261008:WALSH_SCORE",
+      "last_id": "R135:SIMULATION_SETUP"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_08.json",
+      "bytes": 312265,
+      "sha256": "5a3564d5b9977909b1bee47ab86e258ffddddbbb19f9eb2f6f6a700907c3765d",
+      "items": 100,
+      "first_id": "R135:TRANSFER_BOUND",
+      "last_id": "R164:CONSTANT_BET_AVERAGE_TARGET"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_09.json",
+      "bytes": 288642,
+      "sha256": "73225771225f4dfdce93de12f93b70736085c758b6fae301137c8f0d430aabf1",
+      "items": 100,
+      "first_id": "R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE",
+      "last_id": "R175:SIX_ROW_EVENT_MODELS"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_10.json",
+      "bytes": 203270,
+      "sha256": "2ce84267dbb8ba0d41e3d629f43a93af110887448f347c93aaf7f570c1d87fce",
+      "items": 100,
+      "first_id": "R176:CAUSAL_DELAY_SETUP",
+      "last_id": "R188:FEEDBACK_REPAIR"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_11.json",
+      "bytes": 191241,
+      "sha256": "5493601452497b58ff93b231fd0988b2430e79ed228f9123c57b74b9816a7c04",
+      "items": 100,
+      "first_id": "R188:GAP",
+      "last_id": "RC20261008:r_context"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_12.json",
+      "bytes": 267599,
+      "sha256": "7e04223a2c381631d146eca034559a40745fe1bc8f0c0c36a3726e8de74292ce",
+      "items": 100,
+      "first_id": "RC20261008:r_joint",
+      "last_id": "TH20261009:HANDOFF_MODEL"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_13.json",
+      "bytes": 215437,
+      "sha256": "e39eaecfad79b6ba8908848c98879446bd6c5213e4764ff244859abdf05503cc",
+      "items": 100,
+      "first_id": "TH20261009:LOCAL_EXPERIENCE",
+      "last_id": "a14"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_14.json",
+      "bytes": 214840,
+      "sha256": "c5d1f6d614ac191646193723d36a40c18d4e77b0cfafb3b593cb2221bb4f148c",
+      "items": 100,
+      "first_id": "a15",
+      "last_id": "ie_role"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_15.json",
+      "bytes": 220925,
+      "sha256": "147f5834be4b5262c3807dfd746e7f41efef242395b59dd439cca8be792def8b",
+      "items": 100,
+      "first_id": "ie_uct",
+      "last_id": "r149_ta19_monodromy"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_16.json",
+      "bytes": 215252,
+      "sha256": "70c0e1c1ea74f2fe25a792ad39302ef226af802ae769802be2f5b9437bd49517",
+      "items": 100,
+      "first_id": "r149_ta19_regularity",
+      "last_id": "te20261008_relational_increment"
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.0/items/part_17.json",
+      "bytes": 19499,
+      "sha256": "227c27f8c139a7b94892494316ffc2579e0f28b958c2bc2e34d0365cd18d6c16",
+      "items": 8,
+      "first_id": "te20261008_relay_provenance",
+      "last_id": "to20261008_report_route_nonidentification"
+    }
+  ],
+  "read_scope": {
+    "subagent_independent_text_review": [
+      {
+        "work": "UCT I v1.2",
+        "scope": "Full exact MD retrieved; domain/organization/identity sections, theorem U1/U2 locators, product/symmetry/retention/rewiring headings and targeted passages inspected; no claim to rerun every proof."
+      },
+      {
+        "work": "UCT II v1.1",
+        "scope": "Full exact MD retrieved; organization/representation/identified-set locators inspected; no new complete semantic audit."
+      },
+      {
+        "work": "UCT III v1.0",
+        "scope": "Full exact MD retrieved; §7.2 and §7.3 read in full, §5/fixed-type and other relevant locators inspected. Root/theory independently reviewed these predecessors."
+      },
+      {
+        "work": "TA25 v1.0",
+        "scope": "Full exact MD retrieved; §§5–6 and §8 targeted text reviewed. Root/theory report full/extended independent reading of relevant argument."
+      },
+      {
+        "work": "MGTD v1.0.0 / v1.0.1",
+        "scope": "Both complete exact MDs retrieved; v1.0.1 abstract, proposition/contract locators, worked cycle, retrospective case, and both appendices independently inspected. Root reports full v1.0.1 text reading. Both deposited ZIPs exhaustively inventoried and exact graph bytes checked."
+      },
+      {
+        "work": "RT/TH v1.0.0",
+        "scope": "Complete exact MD retrieved; §§2.2–10 and references independently inspected, every named theorem/result located; root reports full manuscript reading. Formal ZIP and all its member identities checked; C01–C20 claim crosswalk parsed."
+      },
+      {
+        "work": "TA15–19, TA24",
+        "scope": "Complete exact published MDs retrieved and matched to receipt SHA; topic/section/claim passages inspected. TA17/18/19 supplements retrieved; TA19 supplement read in full. No blanket new verification of every previous benchmark."
+      }
+    ],
+    "not_claimed": [
+      "Full new body review of TA01–14",
+      "Fresh anonymous Zenodo download of all PDFs",
+      "Independent replication of every archived experiment",
+      "Exhaustive world literature priority search in this census"
+    ],
+    "negative_coverage_scope": "not_found_in_verified_core_arguments_and_inspected_formal_packages, with the above actual reading scope. Global coverage/priority stays UNKNOWN. This is a scoped reuse decision, not a universal absence proof."
+  },
+  "completeness_limits": [
+    "Complete per-stable-ID role/disclosure inventory for the pinned 1608 reviewed map items; earlier v1.1.2 semantic review is the basis, not a fresh repetition of all proofs.",
+    "All 1838 files of the pinned workspace tree are counted; all records files and all current/historical index/registry entry points are enumerated. Artifact enumeration is not a claim of full substantive reading of every file.",
+    "Earlier R1–R70 materials are not fully migrated in this Git tree. Parent recovered all 12 R70 package files under sources/early_r70/UCT_Paper_C_Workspace_20261004 and read the post-R70 publication assessment/worklog. Earlier lineage remains a separate audit. Absence from this tree does not mean data are lost or unpublished; reused round numbers need project/date/source identity. R70_Source_Inventory.json inventories third-party Penzolab sources, not our R1–R69 results.",
+    "Original scientific source proofs/data not reread here are explicitly distinguished from full graph semantic reading. No complete history-wide literature priority clearance is asserted.",
+    "Body semantic coverage remains unknown where only an official attachment or source anchor was checked. Parent/novelty complete public-paper inventory is a separate input to the final overlay.",
+    "AC/IL remain PENDING_NOT_LOADED. RT and METHOD formal modules are published outside the current effective map and require their own IDs in the publication corpus.",
+    "No reviewer-controlled OPEN status, actual/named-experience premise, suspended rule or frozen map/paper byte is changed.",
+    "Live Zenodo record/API recheck was unavailable in this session. Publication assertions are supported by pinned first-party receipts and exact-byte manifest matches, not by pretending to have freshly downloaded every deposit from Zenodo.",
+    "Full MD artifacts were retrieved for focused UCT-related semantic comparison. Older paper metadata was inventoried across the repository; not every older body or supplement received a full new semantic/proof audit.",
+    "TA19's exact published MD ends at the §5 double-cover example; its formal supplement independently supplies additional results. PDF body extent was not checked.",
+    "Formal disclosure, main-text argument coverage, proof validity, actual application, experiential interpretation, and world-first priority remain separate fields.",
+    "Formal supplemental disclosure of a statement does not convert its OPEN premise, suspended rule, or conjectural bridge into an established finding."
+  ],
+  "publication_states": [
+    "published_formal_body",
+    "published_formal_attachment",
+    "cited_source_only",
+    "working_checkpoint",
+    "reserved_only",
+    "unknown"
+  ],
+  "coverage_states": [
+    "covered_exact",
+    "covered_partial",
+    "inherited",
+    "not_applicable",
+    "unverified",
+    "not_found_in_verified_corpus"
+  ],
+  "orthogonal_axes": [
+    "formal publication/disclosure",
+    "body argument coverage",
+    "proof/evidence validity",
+    "originality",
+    "actual/named-experience application"
+  ],
+  "claim_count_is_paper_count": false,
+  "unknown_means_unpublished": false,
+  "unpublished_means_original": false,
+  "publication_means_validated": false,
+  "manuscript_decision": {
+    "id": "PUB20261009-DECISION-3",
+    "purpose": "Original, inspectable, reusable knowledge serving the UCT program and future AI citation; not paper count or venue status.",
+    "r188": "HOLD_STANDALONE_PRESERVE_TECHNICAL_SUPPLEMENT_CANDIDATE",
+    "supersedes_readiness_only": "Frozen CER-RESULT-v0.1.0 section 9.3 broad-manuscript readiness judgment. All original mathematical text and evidence remain unchanged.",
+    "remaining_increment": "Source-access restricted weighted finite-error recovery and matched benchmark; later intervention/compensation/occurrence/calibration applications and empirical negative-mapping records need exact predecessor-aware assessment.",
+    "combined_paper": "NOT_YET_JUSTIFIED_BY_SIMPLY_GROUPING_SEPARATE_MODELS",
+    "new_probe": "ONLINE-AC-RESULT-v0.2.0: exact n5 two-probe sustained control with closed partial beliefs; matched full-identification budget3; one-probe obstruction and n3 value7/8.",
+    "assessment_paths": [
+      "records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md",
+      "records/PUB20261009_Publication_Coverage/PENDING_RESULTS_ASSESSMENT.md",
+      "records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md",
+      "records/PUB20261009_Publication_Coverage/POST_PROBE_REASSESSMENT.md",
+      "publication/UCT-PUB-v1.0.0/DYNAMIC_RESULT_COVERAGE.json"
+    ],
+    "actual_application_and_named_experience": "OPEN",
+    "worldwide_priority": "UNVERIFIED",
+    "publication_action": "NO_NEW_DOI_OTS_ARWEAVE_ACTION",
+    "decision_sequence": [
+      {
+        "id": 1,
+        "object": "R188 broad standalone manuscript",
+        "decision": "HOLD_TECHNICAL_SUPPLEMENT_CANDIDATE"
+      },
+      {
+        "id": 2,
+        "object": "ONLINE-AC-RESULT-v0.1.0",
+        "decision": "PRESERVE_USEFUL_FINITE_RESULT_CONTINUE_AT_N5"
+      },
+      {
+        "id": 3,
+        "object": "ONLINE-AC-RESULT-v0.2.0",
+        "decision": "COMPLETE_FOCUSED_TECHNICAL_WORKING_PAPER"
+      }
+    ],
+    "new_paper": {
+      "version": "ONLINE-AC-PAPER-v0.1.0",
+      "title": "Correct Control without Complete Recalibration: Exact bounds and a two-probe five-port controller under transposition drift",
+      "decision": "COMPLETE_SCOPED_WORKING_MANUSCRIPT",
+      "path": "records/ONLINE_AC_20261009_Dynamic_Calibration/PAPER.md",
+      "pdf": "records/ONLINE_AC_20261009_Dynamic_Calibration/Correct_Control_Without_Complete_Recalibration_v0.1.0.pdf",
+      "publication_status": "NOT_FORMALLY_PUBLISHED",
+      "new_publication_count": 0,
+      "local_scientific_review": "PASS_PROOF_PROTOCOL_WITNESS_AND_FINAL_MANUSCRIPT",
+      "map_status": "PENDING_MAP",
+      "formal_release_next_requirement": "Complete applicable whole-map semantic integration and affected downstream rederivations; preserve prior attribution and obtain actual publication evidence when an authorized release occurs.",
+      "global_priority": "UNVERIFIED"
+    }
+  },
+  "update_template": "records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE_TEMPLATE.json",
+  "required_update": "Every new work log and map-entry update must point to the same coverage version and provide changed claims/publications or a checked no-change reason. Do not back-edit frozen historical log assertions.",
+  "science_promotion": "Any new substantive result remains pending until applicable complete-map semantic integration. Coverage reconciliation itself does not amend science.",
+  "new_pending_research": "publication/UCT-PUB-v1.0.0/DYNAMIC_RESULT_COVERAGE.json"
+}

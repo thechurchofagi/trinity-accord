@@ -1,0 +1,6546 @@
+{
+  "code_sha256": "bc829ade2c93197c86aed4646ae119628b8b4ebe25181f595dd6b7ee605bd304",
+  "contract": {
+    "command_alphabet": "All 8 parallel binary vectors; terminal action also permits all 8.",
+    "deadline": "After terminal action in each round; no claim of correct plant state immediately after calibration probe.",
+    "drift_law": "Independent uniform draws from 4 changes, equivalently uniform over 16 fixed oblivious two-round sequences.",
+    "goal": "Each round's net effect toggles named effect port 0 only.",
+    "goal_vector_integer": 1,
+    "initial_wiring": [
+      0,
+      1,
+      2
+    ],
+    "last_round_increment_only": "Scores state_end_2 XOR state_start_2 == e_0; it does not score the final plant state relative to the initial state and is not terminal-memory recovery.",
+    "memory": "All past returned observations and issued actions may be retained without bound.",
+    "n": 3,
+    "plant": "Both commands physically XOR-toggle the same plant. No reset is assumed; actual end states are traced.",
+    "probe_observation": "Entire 3-bit effect vector, not one scalar.",
+    "randomization": "Independent randomization cannot improve the fixed-prior average optimum, since it is a mixture of deterministic complete policies.",
+    "terminal_observation": "Main branch returns entire terminal effect vector; separate branch withholds it.",
+    "wiring_change": "Identity or one effect-port transposition before each round; no changes within a round."
+  },
+  "n2_exception_perfect_probes_without_old_wiring": [
+    1,
+    2
+  ],
+  "one_round_known_old_wiring": [
+    {
+      "old_wiring": [
+        0,
+        1,
+        2
+      ],
+      "perfect_probes": [
+        1,
+        6
+      ]
+    },
+    {
+      "old_wiring": [
+        0,
+        2,
+        1
+      ],
+      "perfect_probes": [
+        1,
+        6
+      ]
+    },
+    {
+      "old_wiring": [
+        1,
+        0,
+        2
+      ],
+      "perfect_probes": [
+        2,
+        5
+      ]
+    },
+    {
+      "old_wiring": [
+        1,
+        2,
+        0
+      ],
+      "perfect_probes": [
+        3,
+        4
+      ]
+    },
+    {
+      "old_wiring": [
+        2,
+        0,
+        1
+      ],
+      "perfect_probes": [
+        2,
+        5
+      ]
+    },
+    {
+      "old_wiring": [
+        2,
+        1,
+        0
+      ],
+      "perfect_probes": [
+        3,
+        4
+      ]
+    }
+  ],
+  "one_round_two_old_wirings": [
+    {
+      "old_wirings": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 4,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 3,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 4,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 4,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 3,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 5,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 5,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 4,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 3,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 4,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 3,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 5,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 5,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 4,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 1,
+              "terminal_2": 4,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 3,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 4,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 6,
+              "terminal_2": 3,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 1,
+              "terminal_2": 4,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 3,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 5,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 5,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 4,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 6,
+              "terminal_2": 3,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 1,
+              "terminal_2": 4,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 3,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 5,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 5,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 4,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 6,
+              "terminal_2": 3,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 1,
+              "terminal_2": 4,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 6,
+              "terminal_2": 3,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          1,
+          0,
+          2
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 5,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 6,
+              "terminal_2": 3,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 1,
+              "terminal_2": 4,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 5,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          1,
+          0,
+          2
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 4,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 6,
+              "terminal_2": 3,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 1,
+              "terminal_2": 4,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 4,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          1,
+          0,
+          2
+        ],
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 4,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                1,
+                2
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 3,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 3,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 4,
+              "terminal_1": 6,
+              "terminal_2": 3,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 1,
+              "terminal_2": 4,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 7,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 4,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 4,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 4,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 3,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 5,
+              "terminal_2": 3,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 6,
+              "terminal_2": 3,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 6,
+              "terminal_2": 3,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 5,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 1,
+              "terminal_2": 4,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 1,
+              "terminal_2": 4,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 2,
+              "terminal_2": 4,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                2,
+                0,
+                1
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 2,
+              "terminal_2": 4,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                1,
+                0,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                1,
+                2,
+                0
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 4,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    },
+    {
+      "old_wirings": [
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "probe_search": [
+        {
+          "conflicts": [
+            {
+              "observed": 0,
+              "terminal_1": 2,
+              "terminal_2": 4,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 0,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 5,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 5,
+          "probe": 1,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 6,
+              "terminal_2": 3,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 3,
+              "terminal_2": 6,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 2,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 1,
+              "terminal_2": 2,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 3,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 2,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                0,
+                2,
+                1
+              ]
+            },
+            {
+              "observed": 4,
+              "terminal_1": 6,
+              "terminal_2": 5,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 4,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 1,
+              "world_1": [
+                0,
+                2,
+                1
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 1,
+              "terminal_2": 4,
+              "world_1": [
+                2,
+                1,
+                0
+              ],
+              "world_2": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "correct_worlds": 6,
+          "probe": 5,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 3,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            },
+            {
+              "observed": 5,
+              "terminal_1": 4,
+              "terminal_2": 2,
+              "world_1": [
+                1,
+                0,
+                2
+              ],
+              "world_2": [
+                1,
+                2,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 5,
+          "probe": 6,
+          "total_worlds": 8
+        },
+        {
+          "conflicts": [
+            {
+              "observed": 7,
+              "terminal_1": 5,
+              "terminal_2": 3,
+              "world_1": [
+                2,
+                0,
+                1
+              ],
+              "world_2": [
+                2,
+                1,
+                0
+              ]
+            }
+          ],
+          "correct_worlds": 3,
+          "probe": 7,
+          "total_worlds": 8
+        }
+      ]
+    }
+  ],
+  "result_id": "ONLINE-AC-PROBE-20261009",
+  "status": "RESEARCH_CHECKPOINT_NOT_SCIENTIFIC_MAP_INTEGRATION",
+  "two_probe_repair": {
+    "all_succeeded": true,
+    "extension_to_arbitrary_horizon": "Per-round identification and algebraic net-effect correction, with wiring fixed inside each round; proof in NEXT_RESEARCH_PROBE.md.",
+    "probe_commands": [
+      2,
+      4
+    ],
+    "two_round_sequences_checked": 16
+  },
+  "two_round_policy_search": [
+    {
+      "attaining_policy": {
+        "probe": 1,
+        "second": [
+          {
+            "observed_first_history": [
+              1
+            ],
+            "probe": 1,
+            "terminal_by_probe_effect": {
+              "1": 0,
+              "2": 3,
+              "4": 3
+            }
+          },
+          {
+            "observed_first_history": [
+              2
+            ],
+            "probe": 2,
+            "terminal_by_probe_effect": {
+              "1": 0,
+              "2": 3,
+              "4": 6
+            }
+          },
+          {
+            "observed_first_history": [
+              4
+            ],
+            "probe": 3,
+            "terminal_by_probe_effect": {
+              "3": 2,
+              "5": 1,
+              "6": 7
+            }
+          }
+        ],
+        "terminal_by_probe_effect": {
+          "1": 0,
+          "2": 3,
+          "4": 5
+        }
+      },
+      "attainment_traces": [
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 2,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 3,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 1,
+          "end_state_2": 3,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 4,
+          "second_success": false,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 6,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 3,
+          "terminal_2": 0,
+          "terminal_effect_1": 3,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 2,
+          "second_success": true,
+          "terminal_1": 3,
+          "terminal_2": 3,
+          "terminal_effect_1": 3,
+          "terminal_effect_2": 3,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 4,
+          "second_success": true,
+          "terminal_1": 3,
+          "terminal_2": 6,
+          "terminal_effect_1": 3,
+          "terminal_effect_2": 5,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 3,
+          "terminal_2": 0,
+          "terminal_effect_1": 3,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 6,
+          "second_success": true,
+          "terminal_1": 5,
+          "terminal_2": 7,
+          "terminal_effect_1": 5,
+          "terminal_effect_2": 7,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 5,
+          "second_success": true,
+          "terminal_1": 5,
+          "terminal_2": 1,
+          "terminal_effect_1": 5,
+          "terminal_effect_2": 4,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 3,
+          "second_success": true,
+          "terminal_1": 5,
+          "terminal_2": 2,
+          "terminal_effect_1": 5,
+          "terminal_effect_2": 2,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 6,
+          "second_success": true,
+          "terminal_1": 5,
+          "terminal_2": 7,
+          "terminal_effect_1": 5,
+          "terminal_effect_2": 7,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 5,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 2,
+          "second_success": false,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 6,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 4,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 5,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "correct_sequences": 14,
+      "enumeration_counters": {
+        "distinct_second_subproblems": 6,
+        "first_probe_candidates": 8,
+        "first_terminal_policies": 3088,
+        "second_probe_candidates": 48,
+        "second_terminal_action_cell_checks": 800
+      },
+      "first_policies_perfect_on_all_first_drifts": [
+        {
+          "probe": 1,
+          "terminal": {
+            "1": 0,
+            "2": 3,
+            "4": 5
+          }
+        },
+        {
+          "probe": 6,
+          "terminal": {
+            "3": 2,
+            "5": 4,
+            "6": 7
+          }
+        }
+      ],
+      "objective": "all_prefixes",
+      "oblivious_sequences": 16,
+      "optimal_success": "7/8",
+      "terminal_feedback": false
+    },
+    {
+      "attaining_policy": {
+        "probe": 1,
+        "second": [
+          {
+            "observed_first_history": [
+              1
+            ],
+            "probe": 1,
+            "terminal_by_probe_effect": {
+              "1": 0,
+              "2": 3,
+              "4": 3
+            }
+          },
+          {
+            "observed_first_history": [
+              2
+            ],
+            "probe": 2,
+            "terminal_by_probe_effect": {
+              "1": 0,
+              "2": 3,
+              "4": 6
+            }
+          },
+          {
+            "observed_first_history": [
+              4
+            ],
+            "probe": 3,
+            "terminal_by_probe_effect": {
+              "3": 2,
+              "5": 1,
+              "6": 7
+            }
+          }
+        ],
+        "terminal_by_probe_effect": {
+          "1": 0,
+          "2": 0,
+          "4": 0
+        }
+      },
+      "attainment_traces": [
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 2,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 3,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 1,
+          "end_state_2": 3,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 4,
+          "second_success": false,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 6,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 2,
+          "end_state_2": 3,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 2,
+          "end_state_2": 3,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 2,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 3,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 2,
+          "end_state_2": 3,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 4,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 6,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 5,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 2,
+          "end_state_2": 3,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 4,
+          "end_state_2": 5,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 6,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 7,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 7,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 4,
+          "end_state_2": 5,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 5,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 1,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 4,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 4,
+          "end_state_2": 5,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 3,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 2,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 2,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 4,
+          "end_state_2": 5,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 6,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 7,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 7,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 5,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 2,
+          "second_success": false,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 6,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 4,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 5,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "correct_sequences": 14,
+      "enumeration_counters": {
+        "distinct_second_subproblems": 7,
+        "first_probe_candidates": 8,
+        "first_terminal_policies": 3088,
+        "second_probe_candidates": 56,
+        "second_terminal_action_cell_checks": 1120
+      },
+      "first_policies_perfect_on_all_first_drifts": [
+        {
+          "probe": 1,
+          "terminal": {
+            "1": 0,
+            "2": 3,
+            "4": 5
+          }
+        },
+        {
+          "probe": 6,
+          "terminal": {
+            "3": 2,
+            "5": 4,
+            "6": 7
+          }
+        }
+      ],
+      "objective": "last_round_increment_only",
+      "oblivious_sequences": 16,
+      "optimal_success": "7/8",
+      "terminal_feedback": false
+    },
+    {
+      "attaining_policy": {
+        "probe": 1,
+        "second": [
+          {
+            "observed_first_history": [
+              1,
+              0
+            ],
+            "probe": 1,
+            "terminal_by_probe_effect": {
+              "1": 0,
+              "2": 3,
+              "4": 3
+            }
+          },
+          {
+            "observed_first_history": [
+              2,
+              3
+            ],
+            "probe": 2,
+            "terminal_by_probe_effect": {
+              "1": 0,
+              "2": 3,
+              "4": 6
+            }
+          },
+          {
+            "observed_first_history": [
+              4,
+              5
+            ],
+            "probe": 3,
+            "terminal_by_probe_effect": {
+              "3": 2,
+              "5": 1,
+              "6": 7
+            }
+          }
+        ],
+        "terminal_by_probe_effect": {
+          "1": 0,
+          "2": 3,
+          "4": 5
+        }
+      },
+      "attainment_traces": [
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 2,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 3,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 1,
+          "end_state_2": 3,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 4,
+          "second_success": false,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 6,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 3,
+          "terminal_2": 0,
+          "terminal_effect_1": 3,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 2,
+          "second_success": true,
+          "terminal_1": 3,
+          "terminal_2": 3,
+          "terminal_effect_1": 3,
+          "terminal_effect_2": 3,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 4,
+          "second_success": true,
+          "terminal_1": 3,
+          "terminal_2": 6,
+          "terminal_effect_1": 3,
+          "terminal_effect_2": 5,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 3,
+          "terminal_2": 0,
+          "terminal_effect_1": 3,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 6,
+          "second_success": true,
+          "terminal_1": 5,
+          "terminal_2": 7,
+          "terminal_effect_1": 5,
+          "terminal_effect_2": 7,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 5,
+          "second_success": true,
+          "terminal_1": 5,
+          "terminal_2": 1,
+          "terminal_effect_1": 5,
+          "terminal_effect_2": 4,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 3,
+          "second_success": true,
+          "terminal_1": 5,
+          "terminal_2": 2,
+          "terminal_effect_1": 5,
+          "terminal_effect_2": 2,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 6,
+          "second_success": true,
+          "terminal_1": 5,
+          "terminal_2": 7,
+          "terminal_effect_1": 5,
+          "terminal_effect_2": 7,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 1,
+          "end_state_2": 5,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 2,
+          "second_success": false,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 6,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 4,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 5,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": true,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 1,
+          "end_state_2": 0,
+          "first_success": true,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "correct_sequences": 14,
+      "enumeration_counters": {
+        "distinct_second_subproblems": 6,
+        "first_probe_candidates": 8,
+        "first_terminal_policies": 3088,
+        "second_probe_candidates": 48,
+        "second_terminal_action_cell_checks": 800
+      },
+      "first_policies_perfect_on_all_first_drifts": [
+        {
+          "probe": 1,
+          "terminal": {
+            "1": 0,
+            "2": 3,
+            "4": 5
+          }
+        },
+        {
+          "probe": 6,
+          "terminal": {
+            "3": 2,
+            "5": 4,
+            "6": 7
+          }
+        }
+      ],
+      "objective": "all_prefixes",
+      "oblivious_sequences": 16,
+      "optimal_success": "7/8",
+      "terminal_feedback": true
+    },
+    {
+      "attaining_policy": {
+        "probe": 1,
+        "second": [
+          {
+            "observed_first_history": [
+              1,
+              2
+            ],
+            "probe": 1,
+            "terminal_by_probe_effect": {
+              "1": 0,
+              "2": 3,
+              "4": 5
+            }
+          },
+          {
+            "observed_first_history": [
+              1,
+              4
+            ],
+            "probe": 1,
+            "terminal_by_probe_effect": {
+              "1": 0,
+              "2": 5,
+              "4": 3
+            }
+          },
+          {
+            "observed_first_history": [
+              2,
+              0
+            ],
+            "probe": 2,
+            "terminal_by_probe_effect": {
+              "1": 0,
+              "2": 3,
+              "4": 6
+            }
+          },
+          {
+            "observed_first_history": [
+              4,
+              0
+            ],
+            "probe": 3,
+            "terminal_by_probe_effect": {
+              "3": 2,
+              "5": 1,
+              "6": 7
+            }
+          }
+        ],
+        "terminal_by_probe_effect": {
+          "1": 2,
+          "2": 0,
+          "4": 0
+        }
+      },
+      "attainment_traces": [
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 3,
+          "end_state_2": 2,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 2,
+          "terminal_2": 0,
+          "terminal_effect_1": 2,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 3,
+          "end_state_2": 2,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 2,
+          "second_success": true,
+          "terminal_1": 2,
+          "terminal_2": 3,
+          "terminal_effect_1": 2,
+          "terminal_effect_2": 3,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 3,
+          "end_state_2": 2,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 4,
+          "second_success": true,
+          "terminal_1": 2,
+          "terminal_2": 5,
+          "terminal_effect_1": 2,
+          "terminal_effect_2": 5,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            1,
+            2
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 3,
+          "end_state_2": 2,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 2,
+          "terminal_2": 0,
+          "terminal_effect_1": 2,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            1,
+            2
+          ],
+          "wiring_2": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 2,
+          "end_state_2": 3,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 2,
+          "end_state_2": 3,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 2,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 3,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 3,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 2,
+          "end_state_2": 3,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 4,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 6,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 5,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            1,
+            0,
+            2
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 2,
+          "end_state_2": 3,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 2,
+          "probe_effect_1": 2,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 0,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            1,
+            0,
+            2
+          ],
+          "wiring_2": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 4,
+          "end_state_2": 5,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 6,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 7,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 7,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 4,
+          "end_state_2": 5,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 5,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 1,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 4,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 4,
+          "end_state_2": 5,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 3,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 2,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 2,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            2,
+            1,
+            0
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 4,
+          "end_state_2": 5,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 3,
+          "probe_effect_1": 4,
+          "probe_effect_2": 6,
+          "second_success": true,
+          "terminal_1": 0,
+          "terminal_2": 7,
+          "terminal_effect_1": 0,
+          "terminal_effect_2": 7,
+          "wiring_1": [
+            2,
+            1,
+            0
+          ],
+          "wiring_2": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            0,
+            1,
+            2
+          ],
+          "end_state_1": 5,
+          "end_state_2": 4,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 2,
+          "terminal_2": 0,
+          "terminal_effect_1": 4,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            1,
+            0,
+            2
+          ],
+          "end_state_1": 5,
+          "end_state_2": 4,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 2,
+          "second_success": true,
+          "terminal_1": 2,
+          "terminal_2": 5,
+          "terminal_effect_1": 4,
+          "terminal_effect_2": 3,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            2,
+            1,
+            0
+          ],
+          "end_state_1": 5,
+          "end_state_2": 4,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 4,
+          "second_success": true,
+          "terminal_1": 2,
+          "terminal_2": 3,
+          "terminal_effect_1": 4,
+          "terminal_effect_2": 5,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "all_prefix_success": false,
+          "drift_1": [
+            0,
+            2,
+            1
+          ],
+          "drift_2": [
+            0,
+            2,
+            1
+          ],
+          "end_state_1": 5,
+          "end_state_2": 4,
+          "first_success": false,
+          "probe_1": 1,
+          "probe_2": 1,
+          "probe_effect_1": 1,
+          "probe_effect_2": 1,
+          "second_success": true,
+          "terminal_1": 2,
+          "terminal_2": 0,
+          "terminal_effect_1": 4,
+          "terminal_effect_2": 0,
+          "wiring_1": [
+            0,
+            2,
+            1
+          ],
+          "wiring_2": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "correct_sequences": 16,
+      "enumeration_counters": {
+        "distinct_second_subproblems": 8,
+        "first_probe_candidates": 8,
+        "first_terminal_policies": 3088,
+        "second_probe_candidates": 64,
+        "second_terminal_action_cell_checks": 1280
+      },
+      "first_policies_perfect_on_all_first_drifts": [
+        {
+          "probe": 1,
+          "terminal": {
+            "1": 0,
+            "2": 3,
+            "4": 5
+          }
+        },
+        {
+          "probe": 6,
+          "terminal": {
+            "3": 2,
+            "5": 4,
+            "6": 7
+          }
+        }
+      ],
+      "objective": "last_round_increment_only",
+      "oblivious_sequences": 16,
+      "optimal_success": "1",
+      "terminal_feedback": true
+    }
+  ]
+}

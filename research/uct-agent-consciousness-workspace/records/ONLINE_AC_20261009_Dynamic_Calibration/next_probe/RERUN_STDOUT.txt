@@ -1,0 +1,57 @@
+{
+  "old_singletons_checked": 6,
+  "old_pairs_checked": 15,
+  "two_round_optima": [
+    {
+      "terminal_feedback": false,
+      "objective": "all_prefixes",
+      "optimal_success": "7/8",
+      "enumeration_counters": {
+        "first_probe_candidates": 8,
+        "first_terminal_policies": 3088,
+        "distinct_second_subproblems": 6,
+        "second_probe_candidates": 48,
+        "second_terminal_action_cell_checks": 800
+      }
+    },
+    {
+      "terminal_feedback": false,
+      "objective": "last_round_increment_only",
+      "optimal_success": "7/8",
+      "enumeration_counters": {
+        "first_probe_candidates": 8,
+        "first_terminal_policies": 3088,
+        "distinct_second_subproblems": 7,
+        "second_probe_candidates": 56,
+        "second_terminal_action_cell_checks": 1120
+      }
+    },
+    {
+      "terminal_feedback": true,
+      "objective": "all_prefixes",
+      "optimal_success": "7/8",
+      "enumeration_counters": {
+        "first_probe_candidates": 8,
+        "first_terminal_policies": 3088,
+        "distinct_second_subproblems": 6,
+        "second_probe_candidates": 48,
+        "second_terminal_action_cell_checks": 800
+      }
+    },
+    {
+      "terminal_feedback": true,
+      "objective": "last_round_increment_only",
+      "optimal_success": "1",
+      "enumeration_counters": {
+        "first_probe_candidates": 8,
+        "first_terminal_policies": 3088,
+        "distinct_second_subproblems": 8,
+        "second_probe_candidates": 64,
+        "second_terminal_action_cell_checks": 1280
+      }
+    }
+  ],
+  "two_probe_repair_sequences": 16,
+  "code_sha256": "bc829ade2c93197c86aed4646ae119628b8b4ebe25181f595dd6b7ee605bd304",
+  "receipt_sha256": "7054e1f31175f799c71e3bd6e21430017f90e557bb3659ef731faa4d4b8aa8a7"
+}

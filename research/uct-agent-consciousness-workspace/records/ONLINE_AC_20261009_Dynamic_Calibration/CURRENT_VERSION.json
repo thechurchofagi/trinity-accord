@@ -1,0 +1,13 @@
+{
+  "result_id": "ONLINE-AC-PROBE-20261009",
+  "result_version": "ONLINE-AC-RESULT-v0.2.0",
+  "previous_result": "versions/ONLINE-AC-RESULT-v0.1.0/RESEARCH_CHECKPOINT.md",
+  "paper_version": "ONLINE-AC-PAPER-v0.1.0",
+  "paper": "PAPER.md",
+  "status": "PENDING_MAP",
+  "publication_coverage": "UCT-PUB-v1.0.0",
+  "formal_publication": "NOT_PUBLISHED",
+  "new_doi": null,
+  "checkpoint": "RESEARCH_CHECKPOINT.md",
+  "claim_ledger": "CLAIM_REUSE_LEDGER.json"
+}

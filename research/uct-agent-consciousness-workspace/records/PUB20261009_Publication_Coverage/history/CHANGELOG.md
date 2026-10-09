@@ -1,0 +1,31 @@
+# UCT-MAP-v1.1.2 — 2026-10-09 — sequence4
+
+R188-CER-20261009, CER-RESULT-v0.1.0, completes the related UI/HOM/CM/R185/R187 sequence as one English working paper, with an exact weighted access-restricted recovery application, matched1 versus8/9 witness and timely feedback repair. Classical and internal predecessors are explicitly credited; worldwide priority and actual/named-content application remain open.
+
+Full effective-contract review:1,419 inherited+189 new/normalized=1,608 items. Counts913 nodes,424 active conditional schemas,261 nondeductive contexts,10 suspended rules. Corrects old R173 target-independence wording and CTX143 under existing R175; all other old objects are unchanged. Expands fixed observer, reset, timing, real-domain, complete-observation and K/L/law guards. AC/IL remain pending.
+
+Guidev2.2 prominently reaffirms future-AI/researcher citable knowledge as the paper purpose; policyv2.3. Exact51-record/38,013-table and126-case process receipts,13-page PDF, full map ledger/source capsule, logs and handoff are preserved. The capsule hash is `fa4b43e5d9a69e8c249ccd26161c28dbafcb8e7447e24bff33a811bcbe94dd8d`. No publication action.
+
+---
+
+# UCT-MAP-v1.1.1 — 2026-10-09 — seq. 3
+
+OL20261009 v0.1.0: calibrated primitive local-write finite-horizon optimal imitation gap and observability/uncertainty conditions. Adds 28 nodes, 11 conditional routes, 7 non-deductive contexts; 1,419 reviewed schema/compatibility records total; old science and 10 suspended rules unchanged. Mathematical checks 1,750 rational-versus-numeric cases plus 275 transported-coordinate equalities; full author-side contract audit, not independent theorem reproof. Exact H1 gap=0, H2 squared-gap=1/73 in specified IL mathematical twin. Reader/code/scope limitations and physical/phenomenal bridge OPEN. Frozen version capsule sha256 `f4604377a3c6dca5de56bf71883006a03dbf290b7f92af2136e682087ff7bfc3`. R185, AC, IL, R186 and UI remain disabled. No paper DOI/OTS/AR. The highest guide is the already-current v2.1 §8A; this release updates the operational policy JSON without overwriting that concurrent guide. Full worklog and handoff: `records/OL20261009_Observable_Locality/WORK_LOG.md`, `records/OL20261009_Observable_Locality/HANDOFF_ZH.md`.
+
+---
+
+# Completed map changelog
+
+## UCT-MAP-v1.1.0 — 2026-10-09 — sequence 2
+
+Compatible substantive addition, so minor version advances under VERSIONING_POLICY.md. Parent completed version v1.0.0 and repository head 11c1af83fa7e9eabca8351b67dfe162f59da7dd1.
+
+Integrates TH20261009 v0.1 temporal-handoff work and RB20261009 new recovery-budget analysis as combined result TH v0.2.0: 54 nodes, 23 guarded rules, 18 context links. Exact 95 added IDs are listed in the capsule's full RELEASE.json. No old scientific node/rule is overwritten; ten suspended routes remain suspended. Current census 776 nodes, 376 rule records (366 active), 221 contexts =1,373 items. All parent items received compatibility decisions and all new items were reviewed; physical/named applications remain open.
+
+Adds sharp posterior top-K recovery bound and inverse, uniform residual/deadline specialization, approximate-mediation/prior-TV controls, and correlated-key/timing/reader/target counterexamples. Credits old R127/R136 and classical information theory. Working manuscript prepared; historical priority is unverified and no public paper release occurred.
+
+Preserves R185 and AC20261009 as disabled pending checkpoints. Saves exact source capsule and reproducible full-map/ledger reconstruction; previous current navigation is archived in this version's history/. Full offline archive includes expanded outputs and baseline.
+
+## Prior completed history
+
+The complete unchanged previous CHANGELOG.md is at versions/UCT-MAP-v1.1.0/history/CHANGELOG.md. The v1.0.0 release directory and its original claims, corrections and receipts remain immutable. The next ordinary completed version is v1.1.1.

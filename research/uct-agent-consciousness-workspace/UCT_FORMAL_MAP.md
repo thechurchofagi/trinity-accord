@@ -7,3 +7,9 @@ The hash-verified [release capsule](versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsu
 Counts:913 nodes;424 active conditional schemas;261 nondeductive contexts;10 suspended historical rules. Graph SHA256 `0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612`; review ledger SHA256 `0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687`. Full contract review is not actual premise truth or independent re-proof of every historical source.
 
 See [the full review](versions/UCT-MAP-v1.1.2/audit/WHOLE_MAP_SEMANTIC_REVIEW_REPORT.md), [assembled-object validation](versions/UCT-MAP-v1.1.2/audit/ASSEMBLED_VALIDATION.md) and [the latest paper](records/R188_Encoder_Access_and_Recovery_20261009/RESEARCH_NOTE.md). AC/IL remain separately pending.
+
+## Publication coverage and latest pending research
+
+Current non-deductive coverage: [UCT-PUB-v1.0.0](PUBLICATION_COVERAGE.json). [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs, reconciles formal published attachments, and assesses residual knowledge separately from validity. The frozen R188 working paper now has a [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
+
+[ONLINE-AC-PROBE-20261009](records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md) is a locally reviewed pending checkpoint; AC/IL also remain pending. No new whole-map semantic release is claimed by this coverage update. Existing science bytes and all open obligations are unchanged.

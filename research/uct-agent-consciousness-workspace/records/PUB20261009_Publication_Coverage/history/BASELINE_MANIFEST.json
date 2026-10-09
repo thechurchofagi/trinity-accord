@@ -1,0 +1,76 @@
+{
+  "research_branch_sha": "310e744f8d0195d05fac4e56e807adc48784f0ca",
+  "main_sha": "fc568e8718e82b3cda6ede0e628aa3342179bebc",
+  "files": [
+    {
+      "path": "RESEARCH_MASTER_GUIDE.md",
+      "sha256": "7c09c593f712e2d9120c7ad54f10ace75a0270992469d6b7abaedc45b74e6abb",
+      "bytes": 22250
+    },
+    {
+      "path": "FORMAL_MAP_REVIEW_POLICY.json",
+      "sha256": "ef29fd7467f7d470765d24c27ca209a2838919eb9e15fe9451983cf5002c2cba",
+      "bytes": 4991
+    },
+    {
+      "path": "CURRENT_STATE.json",
+      "sha256": "0c72fd1f60e92e6d8fe6435881114cf07697043d63f2f20d76695f240dbc35d0",
+      "bytes": 2278
+    },
+    {
+      "path": "UCT_FORMAL_GRAPH_MODULES.json",
+      "sha256": "868a553f957635904e9e784be2fb67dcae77f071f6414191a00b9b7932625fb4",
+      "bytes": 8661
+    },
+    {
+      "path": "HANDOFF.md",
+      "sha256": "81ebb31426bef0276b7e071d23c02e3ab937c75f67ef4aa44f6965bfd0de04c4",
+      "bytes": 3926
+    },
+    {
+      "path": "MASTER_INDEX.md",
+      "sha256": "9d840bbba8501ce0f7bf7b0bdf030ddd5d48bfda2464b4f3fea2bd3c4efa6d84",
+      "bytes": 3955
+    },
+    {
+      "path": "MEMORY.md",
+      "sha256": "922899d8a0445b7812365c84fd55792d263b523d8f565a2ba00dde062c80bff0",
+      "bytes": 3999
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "cc153a5289b443ceb31a71e390bc18591ede57c98d74e401dce106f5cfebde9e",
+      "bytes": 82643
+    },
+    {
+      "path": "RESEARCH_REGISTRY.json",
+      "sha256": "deff0598c9ce5665c653d4fe88958dd78d1e5fea571cec2c57e8153e77984f29",
+      "bytes": 8001
+    },
+    {
+      "path": "RESEARCH_SESSION_LOG_INDEX.json",
+      "sha256": "b499256019d03d06ece418c81b3c3abd81ae895abc56f62f0e32d9712f1f03ff",
+      "bytes": 597
+    },
+    {
+      "path": "VERSIONING_POLICY.md",
+      "sha256": "671c8f04d002b67444353244db40cb1461369289f148eb4b7a5fb4335ad5069f",
+      "bytes": 2379
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "b55ad5c0fb7deb9e3b8554e93425a5049e98af7f690914dc08038a6380ad2675",
+      "bytes": 3938
+    },
+    {
+      "path": "UCT_FORMAL_MAP.md",
+      "sha256": "0142c7ddc58dcbaaf1700f68c1ecc02dd9d32428c190c34dd835877b2aea5bf7",
+      "bytes": 1508
+    },
+    {
+      "path": "UCT_FORMAL_AUDIT.md",
+      "sha256": "f7021132afe4098e8b6afba64b51f7c3c5e24713a51cc5d98f26c541a982747a",
+      "bytes": 917
+    }
+  ]
+}

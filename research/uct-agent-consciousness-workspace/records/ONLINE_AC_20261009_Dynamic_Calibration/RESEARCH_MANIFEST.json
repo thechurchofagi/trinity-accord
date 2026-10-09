@@ -1,0 +1,185 @@
+{
+  "result_version": "ONLINE-AC-RESULT-v0.2.0",
+  "coverage_version": "UCT-PUB-v1.0.0",
+  "members": [
+    {
+      "path": "CLAIM_REUSE_LEDGER.json",
+      "bytes": 28869,
+      "sha256": "23412c99ce364a51be115eaf6d6daac05d1e9f11fefe710b2b6eaf6cd93a930b"
+    },
+    {
+      "path": "CURRENT_VERSION.json",
+      "bytes": 459,
+      "sha256": "e850928d16fbb1201db915336abab0f64d15696b7a2186eca33948ae21e6060d"
+    },
+    {
+      "path": "Correct_Control_Without_Complete_Recalibration_v0.1.0.pdf",
+      "bytes": 105023,
+      "sha256": "6cfae9bd04e761509c1815c1c544f68349f926e9bfb09b06f0e1c26c5587d54a"
+    },
+    {
+      "path": "HANDOFF_ZH.md",
+      "bytes": 2279,
+      "sha256": "b9ceec34862c258a144dad4fee3bcf5c15513d1bd554741562a9268092375e90"
+    },
+    {
+      "path": "MAP_EXTENSION_PENDING.json",
+      "bytes": 30885,
+      "sha256": "d33d61cdfcab5f54d14c9afbdb91ca210137408077d61eb5724fb31bc125b8dc"
+    },
+    {
+      "path": "PAPER.md",
+      "bytes": 39779,
+      "sha256": "713c99e59d2abf6278a2f036dbb49514fafd89ee7f781be8bf5bc91bf1827b65"
+    },
+    {
+      "path": "PDF_QA_RECEIPT.json",
+      "bytes": 1133,
+      "sha256": "2a9673fc3c75a06fd57e1f0b54fb340d07e4244697ccdc2102dd35522b99037f"
+    },
+    {
+      "path": "RESEARCH_CHECKPOINT.md",
+      "bytes": 6404,
+      "sha256": "33e7ec0cff1306ba6cc986ccfc76bf516e09535adb39b429a9beece920c8d42a"
+    },
+    {
+      "path": "WORK_LOG.md",
+      "bytes": 2569,
+      "sha256": "b506fc2889f4176b62e9e9511877c222d0723363f40e91ad66158c73df2f091c"
+    },
+    {
+      "path": "build_online_ac_paper.py",
+      "bytes": 3822,
+      "sha256": "74cc05218ab5390bb35598b26e6f94978491f067d5f78b28e4cbc31f4e5e51de"
+    },
+    {
+      "path": "finalize_dynamic_checkpoint.py",
+      "bytes": 21735,
+      "sha256": "636934d70f36de63a38dba22cb09404d70cdaff03e61a52e6bf037d75658e4e9"
+    },
+    {
+      "path": "next_probe/EXACT_RESULTS.json",
+      "bytes": 136121,
+      "sha256": "7054e1f31175f799c71e3bd6e21430017f90e557bb3659ef731faa4d4b8aa8a7"
+    },
+    {
+      "path": "next_probe/INDEPENDENT_TRACE_REPLAY.json",
+      "bytes": 17798,
+      "sha256": "5bc03613d2e99f71ddd6bc78962a11e3411f1d197c6dd5449f159c21cb48986c"
+    },
+    {
+      "path": "next_probe/RERUN_STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "next_probe/RERUN_STDOUT.txt",
+      "bytes": 1774,
+      "sha256": "8c4e8e033d2f8ec055b847aa894640a2923fe7e093dd7344282d08a8c28e289e"
+    },
+    {
+      "path": "next_probe/REVIEW_CHANGES.md",
+      "bytes": 2669,
+      "sha256": "7656815978eefd166d9c22ae74a5fba243e227e80d225467e20ae5a8e249955b"
+    },
+    {
+      "path": "next_probe/RUN_RECEIPT.json",
+      "bytes": 707,
+      "sha256": "5b84310de0228ed0e3f0b454805780ebd6b17e0e405731aa90d8cb05b9cf4fab"
+    },
+    {
+      "path": "next_probe/check_online_calibration.py",
+      "bytes": 15374,
+      "sha256": "bc829ade2c93197c86aed4646ae119628b8b4ebe25181f595dd6b7ee605bd304"
+    },
+    {
+      "path": "next_probe/independent_trace_replay.py",
+      "bytes": 14399,
+      "sha256": "f5a522fc26797e3dfecc62cdcc19c94d07e11ccdd4b0985ad181ec7a58b3214b"
+    },
+    {
+      "path": "next_probe_n5/CANONICAL_TABLES.md",
+      "bytes": 1860,
+      "sha256": "39011dab4817d96e7618ce466ece6ce8cd1b9a9e98a573c5e5cba5a776211471"
+    },
+    {
+      "path": "next_probe_n5/CANONICAL_TEMPLATES.json",
+      "bytes": 11013,
+      "sha256": "149bcada929b4dd92236f10734eb3b6f19ac929970207b8475dc02c7d5076bb7"
+    },
+    {
+      "path": "next_probe_n5/CANONICAL_TRANSPORT_INDEPENDENT_VALIDATION.json",
+      "bytes": 16357,
+      "sha256": "3fe8b00e208d0bd93be02f805aa328052ad554c805a6aa0517f168516781eefd"
+    },
+    {
+      "path": "next_probe_n5/CERTIFICATE_INDEPENDENT_VALIDATION.json",
+      "bytes": 87848,
+      "sha256": "285e4a993abac070eebbc3c13d4321d744ca09f5077b9d83585383d176670416"
+    },
+    {
+      "path": "next_probe_n5/CLOSED_CONTROLLER.json",
+      "bytes": 784009,
+      "sha256": "2d5ba3fb65730620c2ef1308d1236aa08360f79623fb202899cd9f11af6db0fe"
+    },
+    {
+      "path": "next_probe_n5/ONLINE_AC_N5_INDEPENDENT_REVIEW.md",
+      "bytes": 23225,
+      "sha256": "66c70cb94e4041cd3871f91aef25274a57c7192ca457a6a6bf516d9b991e4e3e"
+    },
+    {
+      "path": "next_probe_n5/SEARCH_RESULTS.json",
+      "bytes": 2193,
+      "sha256": "f76ed353579342d98c048477445edfb9c803fab748838c09316959b973273b1c"
+    },
+    {
+      "path": "next_probe_n5/canonical_transport_independent.py",
+      "bytes": 24657,
+      "sha256": "9a2d29db9ca0f3c978e37aeaef8b90477fcbb281b000c5a817d521cd35f1d632"
+    },
+    {
+      "path": "next_probe_n5/extract_canonical_templates.py",
+      "bytes": 4449,
+      "sha256": "f63920aea60ef34bd8abe2f455c8a688189fa8e7795918b0d480b9e435c06c30"
+    },
+    {
+      "path": "next_probe_n5/extract_closed_controller.py",
+      "bytes": 3381,
+      "sha256": "59015089286dc6edfa4a0b0d11bbb6c5e895d3fa324d240dfe84a2f0e9fd34a6"
+    },
+    {
+      "path": "next_probe_n5/search_sustainable.py",
+      "bytes": 4090,
+      "sha256": "51c7eb1c23c30870aa9637a72a46b9e4ffa48d89f9bc606599f1afebb38a7089"
+    },
+    {
+      "path": "next_probe_n5/verify_closed_controller_independent.py",
+      "bytes": 18857,
+      "sha256": "c275352f0177f1935dd192231b36fe83a0d52d7920ab5150fa63122d57f4d7d0"
+    },
+    {
+      "path": "reviews/DYNAMIC_AC_CLAIM_REUSE.json",
+      "bytes": 22309,
+      "sha256": "e2014d29fad0c6686fa70a308c88c5a796f8e9bbddf16bfb65274d056c1628d2"
+    },
+    {
+      "path": "reviews/DYNAMIC_AC_REUSE_REVIEW.md",
+      "bytes": 12633,
+      "sha256": "7d9a3448f25aedc9760a10272f61f98dea308c291ab57cc01fe9d932f5ca5543"
+    },
+    {
+      "path": "reviews/ONLINE_AC_INDEPENDENT_REVIEW.md",
+      "bytes": 31897,
+      "sha256": "5936df43cce324bb067f8f219520b90a3b279e0e9deea5ea40f539757dab477b"
+    },
+    {
+      "path": "versions/ONLINE-AC-RESULT-v0.1.0/RESEARCH_CHECKPOINT.md",
+      "bytes": 32688,
+      "sha256": "e4cc302bae8b722eb109605dfdebafd2f9d13902e42bb5841ccab04880c16b5c"
+    }
+  ],
+  "science_map": "UCT-MAP-v1.1.2",
+  "new_module_status": "PENDING_MAP",
+  "publication_count_effect": 0,
+  "global_priority": "UNVERIFIED"
+}

@@ -1,0 +1,224 @@
+{
+  "coverage_version": "UCT-PUB-v1.0.0",
+  "source_inventory_sha256": "420bd6aab7717a46809765768c8510fcf73544fbfa48aa95633955d5a6243587",
+  "publication_review_sha256": "a442b3c6fc437c16d264efb4958cd914c812f82335babe88570335317fbfa5a9",
+  "explicit_semantic_overrides": [
+    {
+      "item_id": "RB20261009:KEY_CURVE",
+      "from": "unknown",
+      "to": "inherited",
+      "source": "PAPER_ARGUMENT_COVERAGE.json",
+      "paper_coverage_ids": [
+        "RT_EARLY_TH",
+        "RT_ROUTE_RESULTS",
+        "C_MATCHED_ACCESS"
+      ]
+    },
+    {
+      "item_id": "RB20261009:WRONG_READER",
+      "from": "unknown",
+      "to": "inherited",
+      "source": "PAPER_ARGUMENT_COVERAGE.json",
+      "paper_coverage_ids": [
+        "RT_EARLY_TH",
+        "RT_ROUTE_RESULTS",
+        "C_MATCHED_ACCESS"
+      ]
+    },
+    {
+      "item_id": "OL20261009:C1_APPLICATION",
+      "from": "unknown",
+      "to": "inherited",
+      "source": "PAPER_ARGUMENT_COVERAGE.json",
+      "paper_coverage_ids": [
+        "A_FOUNDATION",
+        "TA15_TRANSPORT",
+        "TA25_FACTORIZATION_AND_ATTACHMENT",
+        "RT_ROUTE_RESULTS"
+      ]
+    },
+    {
+      "item_id": "OL20261009:LOCAL_NO_ERASURE",
+      "from": "unknown",
+      "to": "inherited",
+      "source": "PAPER_ARGUMENT_COVERAGE.json",
+      "paper_coverage_ids": [
+        "A_FOUNDATION",
+        "TA15_TRANSPORT",
+        "TA25_FACTORIZATION_AND_ATTACHMENT",
+        "RT_ROUTE_RESULTS"
+      ]
+    },
+    {
+      "item_id": "R185:EXPERIENTIAL_COUNTERPART",
+      "from": "unknown",
+      "to": "inherited",
+      "source": "PAPER_ARGUMENT_COVERAGE.json",
+      "paper_coverage_ids": [
+        "A_FOUNDATION",
+        "TA16_COMMON_WITNESS",
+        "TA18_ACTUAL_PARTICIPATION",
+        "TA19_SELECTION",
+        "TA25_FACTORIZATION_AND_ATTACHMENT"
+      ]
+    },
+    {
+      "item_id": "R185:CROSS_TOKEN_IDENTITY_LIMIT",
+      "from": "unknown",
+      "to": "inherited",
+      "source": "PAPER_ARGUMENT_COVERAGE.json",
+      "paper_coverage_ids": [
+        "A_FOUNDATION",
+        "TA16_COMMON_WITNESS",
+        "TA18_ACTUAL_PARTICIPATION",
+        "TA19_SELECTION",
+        "TA25_FACTORIZATION_AND_ATTACHMENT"
+      ]
+    },
+    {
+      "item_id": "UI20261009:TYPE_TRANSFER",
+      "from": "unknown",
+      "to": "inherited",
+      "source": "PAPER_ARGUMENT_COVERAGE.json",
+      "paper_coverage_ids": [
+        "RT_ROUTE_RESULTS",
+        "A_FOUNDATION",
+        "TA25_FACTORIZATION_AND_ATTACHMENT"
+      ]
+    },
+    {
+      "item_id": "UI20261009:PERSISTENCE",
+      "from": "unknown",
+      "to": "inherited",
+      "source": "PAPER_ARGUMENT_COVERAGE.json",
+      "paper_coverage_ids": [
+        "RT_ROUTE_RESULTS",
+        "A_FOUNDATION",
+        "TA25_FACTORIZATION_AND_ATTACHMENT"
+      ]
+    },
+    {
+      "item_id": "CM20261009:TYPE_CONSEQUENCE",
+      "from": "unknown",
+      "to": "inherited",
+      "source": "PAPER_ARGUMENT_COVERAGE.json",
+      "paper_coverage_ids": [
+        "TA15_TRANSPORT",
+        "TA25_FACTORIZATION_AND_ATTACHMENT",
+        "RT_EARLY_TH",
+        "RT_ROUTE_RESULTS"
+      ]
+    },
+    {
+      "item_id": "CM20261009:NONERASURE",
+      "from": "unknown",
+      "to": "inherited",
+      "source": "PAPER_ARGUMENT_COVERAGE.json",
+      "paper_coverage_ids": [
+        "TA15_TRANSPORT",
+        "TA25_FACTORIZATION_AND_ATTACHMENT",
+        "RT_EARLY_TH",
+        "RT_ROUTE_RESULTS"
+      ]
+    },
+    {
+      "item_id": "R187:UCT_APPLICATION",
+      "from": "unknown",
+      "to": "inherited",
+      "source": "PAPER_ARGUMENT_COVERAGE.json",
+      "paper_coverage_ids": [
+        "TA25_FACTORIZATION_AND_ATTACHMENT",
+        "A_FOUNDATION",
+        "TA18_ACTUAL_PARTICIPATION",
+        "TA19_SELECTION"
+      ]
+    },
+    {
+      "item_id": "R188:UCT_TYPE",
+      "from": "unknown",
+      "to": "inherited",
+      "source": "PAPER_ARGUMENT_COVERAGE.json",
+      "paper_coverage_ids": [
+        "C_MATCHED_ACCESS",
+        "TA16_COMMON_WITNESS",
+        "TA25_FACTORIZATION_AND_ATTACHMENT",
+        "RT_ROUTE_RESULTS"
+      ]
+    }
+  ],
+  "remaining_unverified_ids": [
+    "CM20261009:BUDGET_GUARD",
+    "CM20261009:CAUSAL_MASK",
+    "CM20261009:CHANNEL_BOUND",
+    "CM20261009:IDENTIFICATION",
+    "CM20261009:MINIMAX_RADIUS",
+    "CM20261009:PROBE_COUNTERCONTROL",
+    "CM20261009:PROBE_IDENTIFICATION",
+    "CM20261009:ROBUST_RECONSTRUCTION",
+    "CM20261009:SUMDIFF",
+    "HOM:BOUNDARY",
+    "HOM:DEEP_WITNESS",
+    "HOM:SHORT_EQ",
+    "OL20261009:COVARIANCE",
+    "OL20261009:FALSE_GAUGE_CONTROL",
+    "OL20261009:HORIZON_EFFECT",
+    "OL20261009:NOISE_SEPARATION",
+    "OL20261009:OPTIMAL_WRITE",
+    "OL20261009:PREPARED",
+    "OL20261009:PROJECTION",
+    "OL20261009:RESET_NONISO",
+    "OL20261009:SPARSE_IFF",
+    "OL20261009:TWIN_MODEL",
+    "OL20261009:UNOBSERVABLE_CONTROL",
+    "OL20261009:ZERO",
+    "R185:COPIED_COUNTERMODEL",
+    "R185:SHARED_MEMBERSHIP",
+    "R185:SYNCHRONIZER_BOUNDARY",
+    "R187:APPROX_COUPLING",
+    "R187:DIAGONAL_WITNESS",
+    "R187:DURATION_LIMIT",
+    "R187:EDGE_MIMIC",
+    "R187:MULTIBIT_SINGLE",
+    "R187:NOISE_SEPARATION",
+    "R187:RANK_LIMIT",
+    "R187:SELECTIVE_WITNESS",
+    "R187:SUBJECT_COUNT_LIMIT",
+    "R187:SYNC_ERASURE",
+    "R187:TV_SHARP",
+    "R188:COINS",
+    "R188:COMPLETE_FAMILY",
+    "R188:EXACT_SCORE",
+    "R188:EXECUTED_CHECKS",
+    "R188:FEEDBACK_REPAIR",
+    "R188:GAP",
+    "R188:LATE_FEEDBACK",
+    "R188:MATCHED_SUMMARIES",
+    "R188:ONE_SHOT",
+    "R188:PROCESS_REFERENCE",
+    "R188:RESPONSE_WORD",
+    "RB20261009:APPROX_BOUND",
+    "RB20261009:BOUND",
+    "RB20261009:DEADLINE_BOUND",
+    "RB20261009:DELAY_WITNESS",
+    "RB20261009:INVERSE",
+    "RB20261009:NONUNIFORM",
+    "RB20261009:PRIOR_LIPSCHITZ",
+    "RB20261009:TARGET_CONTROL",
+    "RB20261009:TIGHT",
+    "RB20261009:TIMING_CONTROL",
+    "RB20261009:UNIFORM_RESIDUAL",
+    "UI20261009:BIT_WITNESS",
+    "UI20261009:COMMUTATION",
+    "UI20261009:DELAY_WITNESS",
+    "UI20261009:FINITE_WITNESS",
+    "UI20261009:FUTURE_QUOTIENT",
+    "UI20261009:KERNEL_BOUND",
+    "UI20261009:LIMITS",
+    "UI20261009:NOISE_RESULT",
+    "UI20261009:OBSTRUCTION",
+    "UI20261009:PRED_BOUND",
+    "UI20261009:RECODING"
+  ],
+  "remaining_unverified_limit": "Late-family scope and exact candidate objects are assessed in PAPER_ARGUMENT_COVERAGE. A family-level not-found statement is not inflated into universal item-level absence or worldwide novelty.",
+  "science_changed": false
+}

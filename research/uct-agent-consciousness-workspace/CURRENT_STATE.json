@@ -1,5 +1,5 @@
 {
-  "schema": "uct-current-state/1.3",
+  "schema": "uct-current-state/1.4",
   "release_id": "UCT-MAP-v1.1.2",
   "release_seq": 4,
   "parent_release": "UCT-MAP-v1.1.1",
@@ -20,7 +20,9 @@
     "work_log": "records/R188_Encoder_Access_and_Recovery_20261009/WORK_LOG.md",
     "handoff": "records/R188_Encoder_Access_and_Recovery_20261009/HANDOFF_ZH.md",
     "paper": "records/R188_Encoder_Access_and_Recovery_20261009/RESEARCH_NOTE.md",
-    "paper_pdf": "records/R188_Encoder_Access_and_Recovery_20261009/When_Behavioral_Recovery_Conceals_Organizational_Change_v0.1.0.pdf"
+    "paper_pdf": "records/R188_Encoder_Access_and_Recovery_20261009/When_Behavioral_Recovery_Conceals_Organizational_Change_v0.1.0.pdf",
+    "current_manuscript_decision": "HOLD_STANDALONE_PRESERVE_TECHNICAL_SUPPLEMENT_CANDIDATE",
+    "decision_record": "records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md"
   },
   "persistence_receipt": "persistence/UCT-MAP-v1.1.2_RECEIPT.json",
   "next_ordinary_completed_version": "UCT-MAP-v1.1.3",
@@ -31,12 +33,13 @@
     "QC-20261008-12",
     "QC-20261008-13"
   ],
-  "publication_status": "WORKING_PAPER_PREPARED_NO_PUBLICATION_ACTION",
+  "publication_status": "CLAIM_LEVEL_CURRENT_COVERAGE_IN_PUBLICATION_COVERAGE_JSON",
   "pending_checkpoints_not_promoted": [
     "AC20261009",
-    "IL20261009"
+    "IL20261009",
+    "ONLINE-AC-PROBE-20261009"
   ],
-  "current_guide": "RESEARCH_MASTER_GUIDE.md v2.2",
+  "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
   "review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
   "counts": {
@@ -46,5 +49,29 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "AC and IL remain separate. Five other previously pending modules are now reviewed conditional declarations, without actual-premise promotion."
+  "pending_note": "AC, IL and ONLINE-AC remain separate disabled pending modules; working-paper completion is not scientific-map promotion.",
+  "publication_coverage": {
+    "entry": "PUBLICATION_COVERAGE.json",
+    "version": "UCT-PUB-v1.0.0",
+    "update": "records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json",
+    "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
+    "nondeductive": true
+  },
+  "latest_activity": {
+    "id": "PUB20261009",
+    "kind": "publication_census_residual_reassessment_and_pending_research",
+    "work_log": "records/PUB20261009_Publication_Coverage/WORK_LOG.md",
+    "handoff": "records/PUB20261009_Publication_Coverage/HANDOFF_ZH.md"
+  },
+  "latest_pending_research": {
+    "id": "ONLINE-AC-PROBE-20261009",
+    "result_version": "0.2.0",
+    "status": "PENDING_MAP",
+    "source": "records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md",
+    "enabled_as_established_premises": false,
+    "paper_version": "ONLINE-AC-PAPER-v0.1.0",
+    "paper": "records/ONLINE_AC_20261009_Dynamic_Calibration/PAPER.md",
+    "paper_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED"
+  },
+  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; latest online result remains PENDING_MAP."
 }

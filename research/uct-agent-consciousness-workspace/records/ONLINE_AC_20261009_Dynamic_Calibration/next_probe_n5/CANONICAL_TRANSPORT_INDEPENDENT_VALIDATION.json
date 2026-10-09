@@ -1,0 +1,557 @@
+{
+  "algebra_checked": {
+    "closure": "Every mapped posterior is exactly the compatible current-wiring set and is a singleton or pair differing by a non-goal effect transposition",
+    "commands": "Actual command is c applied to the canonical command vector",
+    "fresh_drift": "inverse(f) composed with sigma composed with f remains identity or one transposition",
+    "observations": "Canonical effect is inverse(f) applied to the actual effect vector",
+    "old_family": "inverse(f) composed with B composed with c equals {I} or {I,(34)} exactly",
+    "successor": "Each canonical posterior eta maps to f composed with eta composed with inverse(c)"
+  },
+  "assertions_passed": 137055,
+  "declared_formatter_hash_not_verified_by_reading_or_execution": "f63920aea60ef34bd8abe2f455c8a688189fa8e7795918b0d480b9e435c06c30",
+  "discrepancies": [],
+  "extracted_rows_matched_exactly_to_original_certificate": 28,
+  "independent_script_sha256": "9a2d29db9ca0f3c978e37aeaef8b90477fcbb281b000c5a817d521cd35f1d632",
+  "induction": "The identity singleton belongs to F. Every B in F and every legal fresh drift has executable observation-only commands, physical net effect e0, and an exact successor in F. Recanonicalizing that known successor and repeating gives the round-end goal at every finite horizon. This uses closed-family induction, not a lookahead test.",
+  "limits": [
+    "Only the stated n=5, goal-port-0, two-full-vector-probe protocol is verified; commands may be zero.",
+    "Physical probes and terminal act on one persistent plant, and drift changes the wiring only. The goal is the round-end net increment; intermediate states are unrestricted.",
+    "One nonzero plant start is replayed here per labeled world; the net-effect identities give translation-independent increments. The earlier all-32-state verifier was not imported or rerun.",
+    "All 480 family members are closed, but only the separately reported subset is reachable under this particular deterministic canonicalization. The family size is not a memory lower bound.",
+    "No search, recursion, extractor, or formatter source was read, imported, or executed; their metadata provenance is not independently established.",
+    "No general-n synthesis, new probe lower bound, empirical realization, external priority, or whole-map integration claim is made."
+  ],
+  "map_status": "PENDING_MAP",
+  "other_controller_trees_used": false,
+  "physical_start_state": 21,
+  "source_canonical_templates_sha256": "149bcada929b4dd92236f10734eb3b6f19ac929970207b8475dc02c7d5076bb7",
+  "source_certificate_sha256": "2d5ba3fb65730620c2ef1308d1236aa08360f79623fb202899cd9f11af6db0fe",
+  "source_tree_ids_used": [
+    "1",
+    "3"
+  ],
+  "status": "TWO_CANONICAL_TEMPLATES_AND_FULL_TRANSPORT_FAMILY_VERIFIED",
+  "template_checks": [
+    {
+      "distinct_current_wirings": 11,
+      "first_effect_cells": 7,
+      "name": "known_identity",
+      "old_drift_worlds": 11,
+      "old_wirings": 1,
+      "pair_leaves": [
+        {
+          "differing_non_goal_effect_swap": [
+            3,
+            4
+          ],
+          "effects": [
+            3,
+            5
+          ],
+          "posterior": [
+            [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              0,
+              1,
+              2,
+              4,
+              3
+            ]
+          ]
+        }
+      ],
+      "physical_nonzero_start_cases": 11,
+      "source_state": "1",
+      "status": "PASS",
+      "terminal_leaves": 10
+    },
+    {
+      "distinct_current_wirings": 20,
+      "first_effect_cells": 9,
+      "name": "identity_or_swap_34",
+      "old_drift_worlds": 22,
+      "old_wirings": 2,
+      "pair_leaves": [
+        {
+          "differing_non_goal_effect_swap": [
+            2,
+            4
+          ],
+          "effects": [
+            9,
+            3
+          ],
+          "posterior": [
+            [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              0,
+              1,
+              4,
+              3,
+              2
+            ]
+          ]
+        },
+        {
+          "differing_non_goal_effect_swap": [
+            2,
+            3
+          ],
+          "effects": [
+            17,
+            3
+          ],
+          "posterior": [
+            [
+              0,
+              1,
+              2,
+              4,
+              3
+            ],
+            [
+              0,
+              1,
+              3,
+              4,
+              2
+            ]
+          ]
+        }
+      ],
+      "physical_nonzero_start_cases": 22,
+      "source_state": "3",
+      "status": "PASS",
+      "terminal_leaves": 18
+    }
+  ],
+  "total_nonzero_start_physical_cases": 9273,
+  "transport_family_check": {
+    "all_normalization_rows_sha256": "1933f3b1380a9f27efe4477bf107f5e33f32ae5669f59cc0c61e0a93cfa67a3e",
+    "all_verified_transition_rows_sha256": "8708a12279f0089b8f5114c23263208c9bcfa17a3601ddafe3526fd90756db97",
+    "counts": {
+      "beliefs_checked": 480,
+      "distinct_current_wiring_belief_pairs": 8520,
+      "first_effect_cells": 4080,
+      "old_drift_worlds": 9240,
+      "terminal_leaves": 7680
+    },
+    "deterministic_canonicalization": "rho is the lexicographically smallest member of the known belief. For a singleton, f=I. For a pair, infer sorted non-goal swap r<s; set f=(0, remaining_non_goal_labels_in_sorted_order, r, s). In both cases c=inverse(rho) composed with f.",
+    "distinct_state_edges": 7680,
+    "family_belief_size_distribution": {
+      "1": 120,
+      "2": 360
+    },
+    "family_size": 480,
+    "normalization_examples": {
+      "initial_identity": {
+        "belief_id": "1",
+        "c": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "f": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "old_belief": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "rho": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "template": "1"
+      },
+      "nonidentity_pair": {
+        "belief_id": "83886080",
+        "c": [
+          1,
+          0,
+          4,
+          2,
+          3
+        ],
+        "f": [
+          0,
+          1,
+          4,
+          2,
+          3
+        ],
+        "old_belief": [
+          [
+            1,
+            0,
+            2,
+            3,
+            4
+          ],
+          [
+            1,
+            0,
+            3,
+            2,
+            4
+          ]
+        ],
+        "rho": [
+          1,
+          0,
+          2,
+          3,
+          4
+        ],
+        "template": "3"
+      },
+      "nonidentity_singleton": {
+        "belief_id": "16777216",
+        "c": [
+          1,
+          0,
+          2,
+          3,
+          4
+        ],
+        "f": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "old_belief": [
+          [
+            1,
+            0,
+            2,
+            3,
+            4
+          ]
+        ],
+        "rho": [
+          1,
+          0,
+          2,
+          3,
+          4
+        ],
+        "template": "1"
+      }
+    },
+    "physical_commands_executed": 27720,
+    "physical_nonzero_start_cases": 9240,
+    "posterior_size_distribution_across_leaves": {
+      "1": 6840,
+      "2": 840
+    },
+    "reachable_from_identity": {
+      "belief_ids": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "8",
+        "10",
+        "12",
+        "16",
+        "20",
+        "32",
+        "33",
+        "40",
+        "48",
+        "64",
+        "128",
+        "192",
+        "256",
+        "512",
+        "1024",
+        "1280",
+        "2048",
+        "2560",
+        "4096",
+        "8192",
+        "8320",
+        "12288",
+        "16384",
+        "32768",
+        "65536",
+        "66560",
+        "81920",
+        "131072",
+        "133120",
+        "163840",
+        "262144",
+        "266240",
+        "524288",
+        "524352",
+        "532480",
+        "786432",
+        "1048576",
+        "1064960",
+        "2097152",
+        "2129920",
+        "4194304",
+        "4194560",
+        "4259840",
+        "5242880",
+        "8388608",
+        "8389120",
+        "8519680",
+        "10485760",
+        "16777216",
+        "33554432",
+        "50331648",
+        "67108864",
+        "134217728",
+        "167772160",
+        "201326592",
+        "268435456",
+        "335544320",
+        "536870912",
+        "553648128",
+        "671088640",
+        "805306368",
+        "1073741824",
+        "2147483648",
+        "3221225472",
+        "4294967296",
+        "8589934592",
+        "17179869184",
+        "21474836480",
+        "34359738368",
+        "42949672960",
+        "68719476736",
+        "137438953472",
+        "139586437120",
+        "206158430208",
+        "274877906944",
+        "549755813888",
+        "1099511627776",
+        "1116691496960",
+        "1374389534720",
+        "2199023255552",
+        "2233382993920",
+        "2748779069440",
+        "4398046511104",
+        "4466765987840",
+        "8796093022208",
+        "8797166764032",
+        "8933531975680",
+        "13194139533312",
+        "17592186044416",
+        "17867063951360",
+        "35184372088832",
+        "35734127902720",
+        "70368744177664",
+        "70373039144960",
+        "71468255805440",
+        "87960930222080",
+        "140737488355328",
+        "140746078289920",
+        "142936511610880",
+        "175921860444160",
+        "281474976710656",
+        "562949953421312",
+        "844424930131968",
+        "1125899906842624",
+        "2251799813685248",
+        "4503599627370496",
+        "5629499534213120",
+        "9007199254740992",
+        "11258999068426240",
+        "18014398509481984",
+        "36028797018963968",
+        "54043195528445952",
+        "72057594037927936",
+        "144115188075855872",
+        "288230376151711744",
+        "360287970189639680",
+        "576460752303423488",
+        "720575940379279360",
+        "1152921504606846976",
+        "2305843009213693952",
+        "4611686018427387904",
+        "9223372036854775808",
+        "18446744073709551616",
+        "36893488147419103232",
+        "73786976294838206464",
+        "74939897799445053440",
+        "147573952589676412928",
+        "149879795598890106880",
+        "295147905179352825856",
+        "299759591197780213760",
+        "590295810358705651712",
+        "599519182395560427520",
+        "1180591620717411303424",
+        "1199038364791120855040",
+        "2361183241434822606848",
+        "2398076729582241710080",
+        "4722366482869645213696",
+        "9444732965739290427392",
+        "9444733528689243848704",
+        "14167099448608935641088",
+        "18889465931478580854784",
+        "37778931862957161709568",
+        "75557863725914323419136",
+        "75557868229513950789632",
+        "94447329657392904273920",
+        "151115727451828646838272",
+        "151115736459027901579264",
+        "188894659314785808547840",
+        "302231454903657293676544",
+        "604462909807314587353088",
+        "604462945836111606317056",
+        "906694364710971881029632",
+        "1208925819614629174706176",
+        "2417851639229258349412352",
+        "4835703278458516698824704",
+        "4835703566688892850536448",
+        "6044629098073145873530880",
+        "9671406556917033397649408",
+        "9671407133377785701072896",
+        "12089258196146291747061760",
+        "19342813113834066795298816",
+        "38685626227668133590597632",
+        "77371252455336267181195264",
+        "154742504910672534362390528",
+        "309485009821345068724781056",
+        "618970019642690137449562112",
+        "1237940039285380274899124224",
+        "1237940113072356569737330688",
+        "1257282852399214341694423040",
+        "2475880078570760549798248448",
+        "2475880226144713139474661376",
+        "2514565704798428683388846080",
+        "4951760157141521099596496896",
+        "4951760452289426278949322752",
+        "5029131409596857366777692160",
+        "9903520314283042199192993792",
+        "9903520904578852557898645504",
+        "10058262819193714733555384320",
+        "19807040628566084398385987584",
+        "19807041809157705115797291008",
+        "20116525638387429467110768640",
+        "39614081257132168796771975168",
+        "39614083618315410231594582016",
+        "40233051276774858934221537280",
+        "79228162514264337593543950336",
+        "79228167236630820463189164032",
+        "158456325028528675187087900672",
+        "158456325028528956662064611328",
+        "158456334473261640926378328064",
+        "237684487542793012780631851008",
+        "316912650057057350374175801344",
+        "316912668946523281852756656128",
+        "633825300114114700748351602688",
+        "633825337893046563705513312256",
+        "1267650600228229401496703205376",
+        "1267650600228230527396610048000",
+        "1267650675786093127411026624512",
+        "1584563250285286751870879006720",
+        "2535301200456458802993406410752",
+        "2535301200456461054793220096000",
+        "2535301351572186254822053249024",
+        "3169126500570573503741758013440",
+        "5070602400912917605986812821504",
+        "5070602703144372509644106498048",
+        "10141204801825835211973625643008",
+        "10141204801825853226372135124992",
+        "10141205406288745019288212996096",
+        "15211807202738752817960438464512",
+        "20282409603651670423947251286016",
+        "20282410812577490038576425992192",
+        "40564819207303340847894502572032",
+        "40564821625154980077152851984384",
+        "81129638414606681695789005144064",
+        "81129638414606753753383043072000",
+        "81129643250309960154305703968768",
+        "101412048018258352119736256430080",
+        "162259276829213363391578010288128",
+        "162259276829213507506766086144000",
+        "162259286500619920308611407937536",
+        "202824096036516704239472512860160",
+        "324518553658426726783156020576256",
+        "324518573001239840617222815875072",
+        "649037107316853453566312041152512",
+        "649037146002479681234445631750144",
+        "1298074214633706907132624082305024",
+        "1298074292004959362468891263500288",
+        "2596148429267413814265248164610048",
+        "2596148584009918724937782527000576",
+        "5192296858534827628530496329220096",
+        "5192297168019837449875565054001152",
+        "10384593717069655257060992658440192",
+        "10384594336039674899751130108002304",
+        "20769187434139310514121985316880384",
+        "20769187434139311667043489923727360",
+        "20769188672079349799502260216004608",
+        "21093705987797737240905141337456640",
+        "41538374868278621028243970633760768",
+        "41538374868278623334086979847454720",
+        "41538377344158699599004520432009216",
+        "42187411975595474481810282674913280",
+        "83076749736557242056487941267521536",
+        "83076749736557246668173959694909440",
+        "83076754688317399198009040864018432",
+        "84374823951190948963620565349826560",
+        "166153499473114484112975882535043072",
+        "166153499473114493336347919389818880",
+        "166153509376634798396018081728036864",
+        "168749647902381897927241130699653120",
+        "332306998946228968225951765070086144",
+        "332306998946228986672695838779637760",
+        "332307018753269596792036163456073728",
+        "337499295804763795854482261399306240",
+        "664613997892457936451903530140172288",
+        "664613997892457973345391677559275520",
+        "664614037506539193584072326912147456",
+        "674998591609527591708964522798612480"
+      ],
+      "belief_size_distribution": {
+        "1": 120,
+        "2": 140
+      },
+      "count": 260,
+      "distance_distribution": {
+        "0": 1,
+        "1": 10,
+        "2": 46,
+        "3": 93,
+        "4": 86,
+        "5": 24
+      },
+      "note": "Closure was checked for all 480 beliefs. Reachability is separately computed for this deterministic canonicalization; all 480 need not be reachable.",
+      "unreachable_members_of_closed_family": 220
+    },
+    "status": "PASS"
+  },
+  "verification_id": "ONLINE-AC-N5-CANONICAL-TRANSPORT-INDEPENDENT-20261009"
+}

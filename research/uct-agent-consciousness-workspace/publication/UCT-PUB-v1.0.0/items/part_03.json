@@ -1,0 +1,3809 @@
+{
+  "coverage_version": "UCT-PUB-v1.0.0",
+  "items": [
+    {
+      "item_id": "BASE:CTX:074",
+      "item_type": "context_link",
+      "family_id": "A",
+      "map_object_sha256": "aee363a1560e8832ff468b7fbe556375cd1aa903df9e634d2275043a0e7889d3",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "separate actual macro bearer may be invariant; macro actuality not supplied",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:074",
+          "published_object_sha256": "aee363a1560e8832ff468b7fbe556375cd1aa903df9e634d2275043a0e7889d3",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R145:TYPE_LIMIT",
+      "to": "A:MACRO_EXP_EQ",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:075",
+      "item_type": "context_link",
+      "family_id": "R145",
+      "map_object_sha256": "258bde0f4d851106553fa8ecb74e5faf1aedc73cfaf12831b0a5efa252c04e84",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "same scoped-feedback principle; R145 is deterministic specialization, not contradiction",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:075",
+          "published_object_sha256": "258bde0f4d851106553fa8ecb74e5faf1aedc73cfaf12831b0a5efa252c04e84",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R137:CLOSED_LOOP",
+      "to": "R145:TRANSPORT_BLIND",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:076",
+      "item_type": "context_link",
+      "family_id": "R146",
+      "map_object_sha256": "4aaaff3ab0ae2acbdf0c5fe574c45e2bccbc921dd4343cfdb5f7f317137cfcf8",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "bearer versus exclusive subject; contextual source",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:076",
+          "published_object_sha256": "4aaaff3ab0ae2acbdf0c5fe574c45e2bccbc921dd4343cfdb5f7f317137cfcf8",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "A:SUBJECT_FIREWALL",
+      "to": "R146:DEFINITION_CONTRACT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:077",
+      "item_type": "context_link",
+      "family_id": "R146",
+      "map_object_sha256": "6abb163c94f3634a2e0001259ac7f1d2ca463daf6f462a5ebaa0795213226649",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "self-model contract is not an experience prerequisite",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:077",
+          "published_object_sha256": "6abb163c94f3634a2e0001259ac7f1d2ca463daf6f462a5ebaa0795213226649",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "A:U3",
+      "to": "R146:SELF_CONTRACT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:078",
+      "item_type": "context_link",
+      "family_id": "R146",
+      "map_object_sha256": "84c21bc72563c3c411f64a8a6e8d7db7a9b39afa18e54047b4882df5b86b0669",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "grounded bearer antecedent, not deduction of full semantics",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:078",
+          "published_object_sha256": "84c21bc72563c3c411f64a8a6e8d7db7a9b39afa18e54047b4882df5b86b0669",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "D:D0",
+      "to": "R146:SELF_CONTRACT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:079",
+      "item_type": "context_link",
+      "family_id": "R146",
+      "map_object_sha256": "8d5ca654d10b45b783f18967c92cee709a1ca55e3ffe8b9cc006f08cb01ef549",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "installed functional evidence distinct from valence/fear",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:079",
+          "published_object_sha256": "8d5ca654d10b45b783f18967c92cee709a1ca55e3ffe8b9cc006f08cb01ef549",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "D:S1",
+      "to": "R146:SELF_CONTRACT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:080",
+      "item_type": "context_link",
+      "family_id": "C",
+      "map_object_sha256": "f0394799068d5ff7efad036472348d658dcc26b17eafe4f77a88cd5cb730272d",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "two-coordinate non-ordering example, not a new proof of general phenomenal claims",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:080",
+          "published_object_sha256": "f0394799068d5ff7efad036472348d658dcc26b17eafe4f77a88cd5cb730272d",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R146:DUPLICATE_SEPARATION",
+      "to": "C:P3",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:081",
+      "item_type": "context_link",
+      "family_id": "R147",
+      "map_object_sha256": "759511e605161e5a1ee8acd29afc0bf206a882f272ccb421244390d43315d207",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "restricted attachment-grounding stress test, not deduction of universal selfhood",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:081",
+          "published_object_sha256": "759511e605161e5a1ee8acd29afc0bf206a882f272ccb421244390d43315d207",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R146:SELF_CONTRACT",
+      "to": "R147:ROUTING_MODEL",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:082",
+      "item_type": "context_link",
+      "family_id": "R147",
+      "map_object_sha256": "0fd0083993c20929b6ec0874798ad76906e5151e0db3821e8434eb45ebef0e61",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "avoid requiring a unique uncentered self before local relational analysis",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:082",
+          "published_object_sha256": "0fd0083993c20929b6ec0874798ad76906e5151e0db3821e8434eb45ebef0e61",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R146:CENTERED_REFERENCE",
+      "to": "R147:ROUTING_LIMIT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:083",
+      "item_type": "context_link",
+      "family_id": "R147",
+      "map_object_sha256": "b08e744e087f85818e442ddc6d52b0b054498ef08336541eaf6efdacf2f96888",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "bearer must be justified independently of its self label",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:083",
+          "published_object_sha256": "b08e744e087f85818e442ddc6d52b0b054498ef08336541eaf6efdacf2f96888",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "D:D0",
+      "to": "R147:ACTUAL_BRIDGE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:084",
+      "item_type": "context_link",
+      "family_id": "R147",
+      "map_object_sha256": "a44eefacf599f85c7cd005b4e9bb5137d8b6a0c4454ca1f32bc9054c2699f284",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "token/type/lineage distinction; contextual antecedent",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:084",
+          "published_object_sha256": "a44eefacf599f85c7cd005b4e9bb5137d8b6a0c4454ca1f32bc9054c2699f284",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "A:P6",
+      "to": "R147:MEMORY_LIMIT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:085",
+      "item_type": "context_link",
+      "family_id": "C",
+      "map_object_sha256": "a322c6e054a5ca08ac969ce7ed75c35df6b5058073ea702e1c5380424cfb31be",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "earlier standard factorization antecedent; contextual attribution",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:085",
+          "published_object_sha256": "a322c6e054a5ca08ac969ce7ed75c35df6b5058073ea702e1c5380424cfb31be",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TA15:FIBER",
+      "to": "C:P2_COORD",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:086",
+      "item_type": "context_link",
+      "family_id": "A",
+      "map_object_sha256": "e405de666bbf4a6d872927364b60eae5f0ad8dbcb19ae1e929694a8fd56dbe9d",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "mechanism/intervention warnings; no automatic physical bridge",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:086",
+          "published_object_sha256": "e405de666bbf4a6d872927364b60eae5f0ad8dbcb19ae1e929694a8fd56dbe9d",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TA16:CAUSAL_LIMITS",
+      "to": "A:K",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:087",
+      "item_type": "context_link",
+      "family_id": "A",
+      "map_object_sha256": "5ae20287336f985d647243a78f440f3b2a61d5dc77b9951b33baa69db40c0659",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "historical whole-target gate must not be imported as basal necessity",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:087",
+          "published_object_sha256": "5ae20287336f985d647243a78f440f3b2a61d5dc77b9951b33baa69db40c0659",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TA16:RRH_HISTORY",
+      "to": "A:U1",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:088",
+      "item_type": "context_link",
+      "family_id": "R149",
+      "map_object_sha256": "ea74e19abcc81f02839c4f6fc8889d0d9a1b43b1560bf4ec08fd54792fe38170",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "internal attribution is distinguished from grounded actual membership",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:088",
+          "published_object_sha256": "ea74e19abcc81f02839c4f6fc8889d0d9a1b43b1560bf4ec08fd54792fe38170",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TA17:FUNCTIONAL_CONTRACT",
+      "to": "R149:SELF_TARGET",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:089",
+      "item_type": "context_link",
+      "family_id": "A",
+      "map_object_sha256": "1ccf864d7e8b8fe4592e87a92e8f879b49886c443db4130814c4e65b939bc96d",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "TA18/TA19 antecedents; retained later A scope",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:089",
+          "published_object_sha256": "1ccf864d7e8b8fe4592e87a92e8f879b49886c443db4130814c4e65b939bc96d",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TA19:LOCAL",
+      "to": "A:ORBIT_LEMMA",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:090",
+      "item_type": "context_link",
+      "family_id": "R146",
+      "map_object_sha256": "1b8a261a8f54a3ffce617551d80b9125344baa6bcc987455c7fe5eafdd89f22d",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "prior uncentered obstruction; centered extension retains independent installation premise",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:090",
+          "published_object_sha256": "1b8a261a8f54a3ffce617551d80b9125344baa6bcc987455c7fe5eafdd89f22d",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TA19:LOCAL",
+      "to": "R146:CENTERED_REFERENCE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:091",
+      "item_type": "context_link",
+      "family_id": "R149",
+      "map_object_sha256": "1bbb7a248a69dda634aaa760b4bdc93744be867775b033ab1b4c04fadf4bd6f3",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "compatibility of a selected germ quotient with a complete target needs type reflection",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:091",
+          "published_object_sha256": "1bbb7a248a69dda634aaa760b4bdc93744be867775b033ab1b4c04fadf4bd6f3",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TA18:FACTOR",
+      "to": "R149:COMPATIBILITY",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:092",
+      "item_type": "context_link",
+      "family_id": "R155",
+      "map_object_sha256": "127aee53a51025b73add077ff2de4d0d20d9597abc4eeeaf0df608ba7deafe58",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "experiential axiom does not independently identify the selected mineness coordinate",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:092",
+          "published_object_sha256": "127aee53a51025b73add077ff2de4d0d20d9597abc4eeeaf0df608ba7deafe58",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "A:C1",
+      "to": "R155:MINENESS_OBLIGATION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:093",
+      "item_type": "context_link",
+      "family_id": "R155",
+      "map_object_sha256": "dd8ceb456c605febcc849ad3565a88f9f4cd22f6b630d9e783aae1457ed93edc",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "consumer threshold is not a basal experience gate",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:093",
+          "published_object_sha256": "dd8ceb456c605febcc849ad3565a88f9f4cd22f6b630d9e783aae1457ed93edc",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "A:U1",
+      "to": "R155:MODEL",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:094",
+      "item_type": "context_link",
+      "family_id": "R155",
+      "map_object_sha256": "d73ef0131d8cadfc3edb5af6b6e854bd32d1d7d8a8e0cae12b9daa51b39399b2",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "target/grounding/use distinctions; source estimate is not automatically an own-target estimator",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:094",
+          "published_object_sha256": "d73ef0131d8cadfc3edb5af6b6e854bd32d1d7d8a8e0cae12b9daa51b39399b2",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R146:SELF_CONTRACT",
+      "to": "R155:MODEL",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:095",
+      "item_type": "context_link",
+      "family_id": "R155",
+      "map_object_sha256": "96b28376c0b329a4fad04864bf6d4ea497ad9afdf25f0f92ae4017dd73c48e4a",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "grounded routing counterexample motivates separation of prediction and attachment; context not a Bayes proof premise",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:095",
+          "published_object_sha256": "96b28376c0b329a4fad04864bf6d4ea497ad9afdf25f0f92ae4017dd73c48e4a",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R147:ROUTING_LIMIT",
+      "to": "R155:ERROR",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:096",
+      "item_type": "context_link",
+      "family_id": "R155",
+      "map_object_sha256": "019df42f65a0991f21917be72548ac852b5f2ae10a6e39698c1de4df357fed8f",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "different isolation assumptions: active consumer memory versus report-only record",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:096",
+          "published_object_sha256": "019df42f65a0991f21917be72548ac852b5f2ae10a6e39698c1de4df357fed8f",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R147:MEMORY_LIMIT",
+      "to": "R155:MEMORY_BOUNDARY",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:097",
+      "item_type": "context_link",
+      "family_id": "R155",
+      "map_object_sha256": "f4f6bf94ec567c09bb217af200e15bb83f1525c9ddef928aab7335d8d583951c",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "criterion states the unfulfilled selected-target sufficiency obligation",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:097",
+          "published_object_sha256": "f4f6bf94ec567c09bb217af200e15bb83f1525c9ddef928aab7335d8d583951c",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R155:BRIDGE_CRITERION",
+      "to": "R155:MINENESS_OBLIGATION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:098",
+      "item_type": "context_link",
+      "family_id": "R156",
+      "map_object_sha256": "beb7b9547a9ecb821cd671e55f6dbf382888a9e9bfb9405ee958eb6808bba61d",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "equal-descriptor contrast for functional R only; not an independently given phenomenal target",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:098",
+          "published_object_sha256": "beb7b9547a9ecb821cd671e55f6dbf382888a9e9bfb9405ee958eb6808bba61d",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R155:BRIDGE_CRITERION",
+      "to": "R156:SNAPSHOT_USE_LIMIT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:099",
+      "item_type": "context_link",
+      "family_id": "R155",
+      "map_object_sha256": "832654d42325863b81340d31f55441afee731ada694cefb4f4ad2800333bf4ef",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "open selected-mineness interpretation remains; no deductive discharge",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:099",
+          "published_object_sha256": "832654d42325863b81340d31f55441afee731ada694cefb4f4ad2800333bf4ef",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R156:SNAPSHOT_USE_LIMIT",
+      "to": "R155:MINENESS_OBLIGATION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:100",
+      "item_type": "context_link",
+      "family_id": "R156",
+      "map_object_sha256": "6a72f25283dc366479358b24b8d28dca748a00c3cff2c67130a91c2ea9326e02",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "causal installation versus record-only isolation comparison",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:100",
+          "published_object_sha256": "6a72f25283dc366479358b24b8d28dca748a00c3cff2c67130a91c2ea9326e02",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R147:MEMORY_LIMIT",
+      "to": "R156:INSTALLATION_WITNESS",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:101",
+      "item_type": "context_link",
+      "family_id": "R157",
+      "map_object_sha256": "a725c04abede0458fd9583b6abd49061d5e4eb6747ceff97a485960f0520100f",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "contrast: arbitrary transported type projection versus internally definable physically grounded selector",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:101",
+          "published_object_sha256": "a725c04abede0458fd9583b6abd49061d5e4eb6747ceff97a485960f0520100f",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R126:P1",
+      "to": "R157:DEFINABLE_SELECTOR_SETUP",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:102",
+      "item_type": "context_link",
+      "family_id": "R157",
+      "map_object_sha256": "18547791aae2ef3f3c5ab812f1794b1b6be4a8e28b1e58868b2c2868f8247319",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "methodological admissibility requirements for the still-open semantic/measurement bridge",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:102",
+          "published_object_sha256": "18547791aae2ef3f3c5ab812f1794b1b6be4a8e28b1e58868b2c2868f8247319",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "B:BAC",
+      "to": "R157:MINENESS_BRIDGE_SCHEMA",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:103",
+      "item_type": "context_link",
+      "family_id": "R157",
+      "map_object_sha256": "567076f6266593e6aae8a53c353cf41c82a434c100181a9ed2dd8004d4f5fa2c",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "R157 refines the open obligation into structural, semantic and measurement layers",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:103",
+          "published_object_sha256": "567076f6266593e6aae8a53c353cf41c82a434c100181a9ed2dd8004d4f5fa2c",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R155:MINENESS_OBLIGATION",
+      "to": "R157:MINENESS_BRIDGE_SCHEMA",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:104",
+      "item_type": "context_link",
+      "family_id": "R157",
+      "map_object_sha256": "61919e3b2655abcafb6e6495d426ea3c295e594f5573229b109f0eba9a83f341",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "installed use is one possible K-relation, not itself a mineness conclusion",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:104",
+          "published_object_sha256": "61919e3b2655abcafb6e6495d426ea3c295e594f5573229b109f0eba9a83f341",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R156:SNAPSHOT_USE_LIMIT",
+      "to": "R157:DEFINABLE_SELECTOR_SETUP",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:105",
+      "item_type": "context_link",
+      "family_id": "R157",
+      "map_object_sha256": "20bacb3239a02eaccb5f52ebbbf8e47a2a9bbd586c2709ceb1daf93740a8013a",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "conditional structural transport discharges only the middle layer",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:105",
+          "published_object_sha256": "20bacb3239a02eaccb5f52ebbbf8e47a2a9bbd586c2709ceb1daf93740a8013a",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R157:COORDINATE_TRANSPORT",
+      "to": "R157:MINENESS_BRIDGE_SCHEMA",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:106",
+      "item_type": "context_link",
+      "family_id": "R157",
+      "map_object_sha256": "d107af6046fbc14048ebdb5b370d2393d3fb482dd0cd80e339db795d6a2941cc",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "semantic residual remains to be supplied and tested",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:106",
+          "published_object_sha256": "d107af6046fbc14048ebdb5b370d2393d3fb482dd0cd80e339db795d6a2941cc",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R157:SEMANTIC_RESIDUAL",
+      "to": "R157:MINENESS_BRIDGE_SCHEMA",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:107",
+      "item_type": "context_link",
+      "family_id": "R157",
+      "map_object_sha256": "76ba1095c522359b5b800b8520e881b97eb8e7486e052098da22da7503079f58",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "context: undefined/no report cannot be made an experience-existence or mineness conclusion from U1",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:107",
+          "published_object_sha256": "76ba1095c522359b5b800b8520e881b97eb8e7486e052098da22da7503079f58",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "A:U1",
+      "to": "R157:REPORT_COVERAGE_LIMIT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:108",
+      "item_type": "context_link",
+      "family_id": "R158",
+      "map_object_sha256": "5f05d1376aa23485ab652fefa55b96c281ca672e6db0f2615b2a164f3391b89c",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "scope refinement, not inference",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:108",
+          "published_object_sha256": "5f05d1376aa23485ab652fefa55b96c281ca672e6db0f2615b2a164f3391b89c",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R157:MINENESS_BRIDGE_SCHEMA",
+      "to": "R158:TARGET_SPECIFIC_BRIDGE_PROFILE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:109",
+      "item_type": "context_link",
+      "family_id": "R158",
+      "map_object_sha256": "a991653fc96fc6dfe6c4cab61cc69b536a9fb784e197296308e605b339e8e8ee",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "terminology correction; coordinate theorem retained",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:109",
+          "published_object_sha256": "a991653fc96fc6dfe6c4cab61cc69b536a9fb784e197296308e605b339e8e8ee",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R157:COORDINATE_TRANSPORT",
+      "to": "R158:SELECTION_CLOSURE_LIMIT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:110",
+      "item_type": "context_link",
+      "family_id": "R158",
+      "map_object_sha256": "ce868925e0c838f8b5818ea08f567bf551fe19de76a86782a92fddd7c526da0a",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "target typing for candidate comparison; not proof",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:110",
+          "published_object_sha256": "ce868925e0c838f8b5818ea08f567bf551fe19de76a86782a92fddd7c526da0a",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R158:TARGET_SPLIT",
+      "to": "R158:TARGET_SPECIFIC_BRIDGE_PROFILE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:111",
+      "item_type": "context_link",
+      "family_id": "R158",
+      "map_object_sha256": "b5c0ea2c3386edc30d0ef3e4d7a9db932339a1dec530afccc010b37f57dfa37e",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "functional installed-use limit remains; no phenomenal witness",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:111",
+          "published_object_sha256": "b5c0ea2c3386edc30d0ef3e4d7a9db932339a1dec530afccc010b37f57dfa37e",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R156:SNAPSHOT_USE_LIMIT",
+      "to": "R158:TARGET_SPECIFIC_BRIDGE_PROFILE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:112",
+      "item_type": "context_link",
+      "family_id": "R158",
+      "map_object_sha256": "bf73a8bc636c3b7e6ed5f152a8045dda9742527c40ac69cbe419bba1a2387602",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "independent target witness cannot be supplied by report partiality",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:112",
+          "published_object_sha256": "bf73a8bc636c3b7e6ed5f152a8045dda9742527c40ac69cbe419bba1a2387602",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R157:REPORT_COVERAGE_LIMIT",
+      "to": "R158:CONJUNCTION_REJECTION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:113",
+      "item_type": "context_link",
+      "family_id": "R159",
+      "map_object_sha256": "3f75efb7655fc4907b577fbe7d6b74927d3e82fc8865db27c6434149a596f113",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "counterexample to uncoupling shortcut; not evidence that this is a neural law",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:113",
+          "published_object_sha256": "3f75efb7655fc4907b577fbe7d6b74927d3e82fc8865db27c6434149a596f113",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R159:COUPLED_ROLE_WITNESS",
+      "to": "R159:SELECTED_OWNERSHIP_APPLICATION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:114",
+      "item_type": "context_link",
+      "family_id": "R159",
+      "map_object_sha256": "6cb8c0278b24efcc3847d7b72a30fdb3a90fef74ce73db3ea4cb0602787ec38c",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "positive application refinement; target semantics remain open",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:114",
+          "published_object_sha256": "6cb8c0278b24efcc3847d7b72a30fdb3a90fef74ce73db3ea4cb0602787ec38c",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R158:TARGET_SPECIFIC_BRIDGE_PROFILE",
+      "to": "R159:SELECTED_OWNERSHIP_APPLICATION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:115",
+      "item_type": "context_link",
+      "family_id": "R159",
+      "map_object_sha256": "3abfeee138a9fb858c3c70e4b1cf202c6daf2bc58fa2ad40e8f85066946718c3",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "methodological criteria and failure obligations, not a deduction",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:115",
+          "published_object_sha256": "3abfeee138a9fb858c3c70e4b1cf202c6daf2bc58fa2ad40e8f85066946718c3",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "B:BAC",
+      "to": "R159:SELECTED_OWNERSHIP_APPLICATION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:116",
+      "item_type": "context_link",
+      "family_id": "R159",
+      "map_object_sha256": "c6388fe61685f6be08ca71018c85a92bf69d3797624175a6c7ab26b8395b7547",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "installed consumers remain independent physical grounding obligation",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:116",
+          "published_object_sha256": "c6388fe61685f6be08ca71018c85a92bf69d3797624175a6c7ab26b8395b7547",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R156:SNAPSHOT_USE_LIMIT",
+      "to": "R159:ANCHOR_BINDING_CONTRACT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:117",
+      "item_type": "context_link",
+      "family_id": "R159",
+      "map_object_sha256": "0280192eca5deaea5e39cec2a8a23bf139c5579dcd36cb79c4bd7c3c85aa16a3",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "context: no selected-body clause added to basal existence",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:117",
+          "published_object_sha256": "0280192eca5deaea5e39cec2a8a23bf139c5579dcd36cb79c4bd7c3c85aa16a3",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "A:U1",
+      "to": "R159:SELECTED_OWNERSHIP_APPLICATION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:118",
+      "item_type": "context_link",
+      "family_id": "R166",
+      "map_object_sha256": "c2cbbd2bc360de8056d028627b957deabb52392a34ccf39c6cb58ac1a162807d",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "operational instantiation route; not a replacement for any R166 premise",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:118",
+          "published_object_sha256": "c2cbbd2bc360de8056d028627b957deabb52392a34ccf39c6cb58ac1a162807d",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R167:R166_WITNESS_APPLICATION_BOUNDARY",
+      "to": "R166:WITNESSED_FRAME_INSTALLATION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:119",
+      "item_type": "context_link",
+      "family_id": "R166",
+      "map_object_sha256": "b0ecff16f61d621ac0a9c34b3b8c7c06b2a0171afc30f0c0b1a997856ec9cd27",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "context only: C1 transport and B_min boundary remain separately governed",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:119",
+          "published_object_sha256": "b0ecff16f61d621ac0a9c34b3b8c7c06b2a0171afc30f0c0b1a997856ec9cd27",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R167:R166_WITNESS_APPLICATION_BOUNDARY",
+      "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:120",
+      "item_type": "context_link",
+      "family_id": "A",
+      "map_object_sha256": "7840d5a9c8d92b2a40f628d052c9071cce633cf293bd1eca79ea8c02a7baa772",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "no operational mediator clause is added to basal-experience existence",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:120",
+          "published_object_sha256": "7840d5a9c8d92b2a40f628d052c9071cce633cf293bd1eca79ea8c02a7baa772",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R167:OPERATIONAL_MEDIATOR_ARCHITECTURE",
+      "to": "A:U1",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:121",
+      "item_type": "context_link",
+      "family_id": "B",
+      "map_object_sha256": "7517ad8e6af7856a10c7205f88715a974e6fa098b2a084007e9cd4a843a74c65",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "identity and level bookkeeping context, not a deduction",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:121",
+          "published_object_sha256": "7517ad8e6af7856a10c7205f88715a974e6fa098b2a084007e9cd4a843a74c65",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R167:TOKEN_LINEAGE_INTERVAL_CONTRACT",
+      "to": "B:BAC",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:122",
+      "item_type": "context_link",
+      "family_id": "R167",
+      "map_object_sha256": "0cfc5951960f47cc90f6deb4367c016fc9a6c9ed36155054651ffdce6998df71",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "stochastic/continuous refinement of W4-W5 only; not a replacement for R167 premises",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:122",
+          "published_object_sha256": "0cfc5951960f47cc90f6deb4367c016fc9a6c9ed36155054651ffdce6998df71",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+      "to": "R167:R166_WITNESS_APPLICATION_BOUNDARY",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:123",
+      "item_type": "context_link",
+      "family_id": "R166",
+      "map_object_sha256": "5325a527aff7571cb5d48a4328edd4af66332228a483886f91e094ddb5f1262c",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "context only: same-instance C1 transport and independent B_min remain separately governed",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:123",
+          "published_object_sha256": "5325a527aff7571cb5d48a4328edd4af66332228a483886f91e094ddb5f1262c",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R168:R167_WITNESS_STOCHASTIC_BOUNDARY",
+      "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:124",
+      "item_type": "context_link",
+      "family_id": "R166",
+      "map_object_sha256": "cdf706e6c3ed274cc69309feaba882f300601eed29814d48bde1482db25a5d27",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "analogous quantifier warning: context mass does not settle a named actual context",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:124",
+          "published_object_sha256": "cdf706e6c3ed274cc69309feaba882f300601eed29814d48bde1482db25a5d27",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R168:AMPLITUDE_MASS_SEPARATION",
+      "to": "R166:POPULATION_TOKEN_NONENTAILMENT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:125",
+      "item_type": "context_link",
+      "family_id": "A",
+      "map_object_sha256": "80abc55687ea263700ef10cb0120914af7eba92544e232885631050c49939cb5",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "no envelope, sensitivity, or detection clause is added to basal-experience existence",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:125",
+          "published_object_sha256": "80abc55687ea263700ef10cb0120914af7eba92544e232885631050c49939cb5",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R168:ENVELOPE_RELATIVE_TRIAGE",
+      "to": "A:U1",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:126",
+      "item_type": "context_link",
+      "family_id": "R166",
+      "map_object_sha256": "6f2636fd312e2790150141e527e892b103aa69880f7fcdd937aceee586bcc73d",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "context only: route calibration refines physical evidence and does not replace C1 or B_min",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:126",
+          "published_object_sha256": "6f2636fd312e2790150141e527e892b103aa69880f7fcdd937aceee586bcc73d",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R169:R168_ROUTE_APPLICATION_BOUNDARY",
+      "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:127",
+      "item_type": "context_link",
+      "family_id": "R168",
+      "map_object_sha256": "dd7991a1a2b151d220eb8c543aa2c4ba71dc299db0a4eac96f9b05e51df8748d",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "non-deductive representation warning: envelope evidence fixes Ld products, not separate physical meanings",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:127",
+          "published_object_sha256": "dd7991a1a2b151d220eb8c543aa2c4ba71dc299db0a4eac96f9b05e51df8748d",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R169:METRIC_SCALE_GAUGE_NONENTAILMENT",
+      "to": "R168:SHARP_METRIC_ENVELOPE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:128",
+      "item_type": "context_link",
+      "family_id": "R168",
+      "map_object_sha256": "3373061bfec8729b0831fe6210bac040cff8df58239e8e2c065559e65b1bfe5d",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "obstruction retained: direct radius requires actual hidden graph inventory, not observed-label equality",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:128",
+          "published_object_sha256": "3373061bfec8729b0831fe6210bac040cff8df58239e8e2c065559e65b1bfe5d",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R169:PARTIAL_VIEW_DIRECT_RADIUS_BOUND",
+      "to": "R168:PARTIAL_VIEW_NONENTAILMENT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:129",
+      "item_type": "context_link",
+      "family_id": "A",
+      "map_object_sha256": "aed1038791a532ec6409c156c1d38baceeab7287a966d4c098a95f9dacc434a0",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "no route validity, smoothness or coverage clause is added to basal-experience existence",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:129",
+          "published_object_sha256": "aed1038791a532ec6409c156c1d38baceeab7287a966d4c098a95f9dacc434a0",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R169:ROUTE_CALIBRATION_TRIAGE",
+      "to": "A:U1",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:130",
+      "item_type": "context_link",
+      "family_id": "R166",
+      "map_object_sha256": "231c8fc73c2e00e2713358ee5dd6502c51a837c8e8ce16a831cdc9292bab97b8",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "context only: domain coverage refines physical evidence and does not replace C1 or B_min",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:130",
+          "published_object_sha256": "231c8fc73c2e00e2713358ee5dd6502c51a837c8e8ce16a831cdc9292bab97b8",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R170:R169_OPEN_WORLD_APPLICATION_BOUNDARY",
+      "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:131",
+      "item_type": "context_link",
+      "family_id": "R168",
+      "map_object_sha256": "3e4c33ba3b72e8c560f348575cf4628bc1602db1700701d4eff169204b22334d",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "obstruction retained: small or zero remainder mass does not imply a nontrivial pointwise amplitude bound",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:131",
+          "published_object_sha256": "3e4c33ba3b72e8c560f348575cf4628bc1602db1700701d4eff169204b22334d",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R170:GLOBAL_SUPREMUM_OBSTRUCTION",
+      "to": "R168:AMPLITUDE_MASS_SEPARATION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:132",
+      "item_type": "context_link",
+      "family_id": "A",
+      "map_object_sha256": "c1ef9bb5ba435d07d85fae674727f6f2d78a26c9e39d6c1c6ccde896d29e47bb",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "no target coverage, cell radius, measure or remainder clause is added to basal-experience existence",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:132",
+          "published_object_sha256": "c1ef9bb5ba435d07d85fae674727f6f2d78a26c9e39d6c1c6ccde896d29e47bb",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R170:OPEN_WORLD_COVERAGE_TRIAGE",
+      "to": "A:U1",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:133",
+      "item_type": "context_link",
+      "family_id": "R169",
+      "map_object_sha256": "ad756325a8635b849983c29b32fb58ac2aecd043cf8b048fef5752fe3e71d1d3",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "non-deductive application refinement: cell certificates can discharge continuum radius only when their universal physical range premise is valid",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:133",
+          "published_object_sha256": "ad756325a8635b849983c29b32fb58ac2aecd043cf8b048fef5752fe3e71d1d3",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R170:CELL_ROUTE_COVER_CERTIFICATE",
+      "to": "R169:PARTIAL_VIEW_DIRECT_RADIUS_BOUND",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:134",
+      "item_type": "context_link",
+      "family_id": "R166",
+      "map_object_sha256": "ac23b5a62d2ea81699a791394b990ed38482f9f76b40d39443a997663d774359",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "context only: universal range refines physical coverage but does not replace C1 or B_min",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:134",
+          "published_object_sha256": "ac23b5a62d2ea81699a791394b990ed38482f9f76b40d39443a997663d774359",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R171:R170_RANGE_APPLICATION_BOUNDARY",
+      "to": "R166:EXPERIENTIAL_COUNTERPART_BOUNDARY",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:135",
+      "item_type": "context_link",
+      "family_id": "R170",
+      "map_object_sha256": "c971801e5c32818dc9018e5c68bed1138dacb94a3d373b390708bff027586904",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "obstruction retained: finite challenge success is not a universal structural proof",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:135",
+          "published_object_sha256": "c971801e5c32818dc9018e5c68bed1138dacb94a3d373b390708bff027586904",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R171:FITTED_COVER_NONENTAILMENT",
+      "to": "R170:COVERAGE_CHALLENGE_FALSIFIER",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:136",
+      "item_type": "context_link",
+      "family_id": "A",
+      "map_object_sha256": "b77b0509a6adf4b8f33bbee29aab9015568b5111aaca727b51235563f04c03ec",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "no type, invariant, reachability or safety certificate is added to basal-experience existence",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:136",
+          "published_object_sha256": "b77b0509a6adf4b8f33bbee29aab9015568b5111aaca727b51235563f04c03ec",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R171:RANGE_CERTIFICATE_TRIAGE",
+      "to": "A:U1",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:137",
+      "item_type": "context_link",
+      "family_id": "R170",
+      "map_object_sha256": "bb09b6b59c89056ee60f11b2a48829a6179dcebb812e8c5487a1f23990f6ebf3",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "non-deductive application refinement: domain proofs discharge R170 cells only with actual fiber and route evidence",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:137",
+          "published_object_sha256": "bb09b6b59c89056ee60f11b2a48829a6179dcebb812e8c5487a1f23990f6ebf3",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R171:FOUR_DOMAIN_APPLICATION_BOUNDARY",
+      "to": "R170:CELL_ROUTE_COVER_CERTIFICATE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:138",
+      "item_type": "context_link",
+      "family_id": "R171",
+      "map_object_sha256": "e692b026ad10fcfac2719339e049456a969ee5a1cbc0baedf1c97e277af3b2de",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "non-deductive application refinement: local certificate composition additionally requires an actual compatible interface",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:138",
+          "published_object_sha256": "e692b026ad10fcfac2719339e049456a969ee5a1cbc0baedf1c97e277af3b2de",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R172:INTERFACE_COMPOSITION_THEOREM",
+      "to": "R171:R170_RANGE_APPLICATION_BOUNDARY",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:139",
+      "item_type": "context_link",
+      "family_id": "R171",
+      "map_object_sha256": "16522dae108de3137d09a5ecb67c9017c12170d6b7fe20b4037d60eee0e3ed82",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "context only: a component-connection witness exposes an additional interface premise rather than altering R171 route proofs",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:139",
+          "published_object_sha256": "16522dae108de3137d09a5ecb67c9017c12170d6b7fe20b4037d60eee0e3ed82",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R172:FAILED_CONNECTION_COUNTERMODEL",
+      "to": "R171:PREMISE_INDEPENDENCE_COUNTERMODELS",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:140",
+      "item_type": "context_link",
+      "family_id": "R156",
+      "map_object_sha256": "ee03109c2cec7a6b6b6ca9178d037def3e04e9ed85a9d3f6dee7949a0bf6e898",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "non-deductive refinement: matched action and report extend the earlier matched-snapshot use obstruction",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:140",
+          "published_object_sha256": "ee03109c2cec7a6b6b6ca9178d037def3e04e9ed85a9d3f6dee7949a0bf6e898",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R172:LIVE_REPLAY_NONENTAILMENT",
+      "to": "R156:SNAPSHOT_USE_LIMIT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:141",
+      "item_type": "context_link",
+      "family_id": "A",
+      "map_object_sha256": "8515d333cf94de7c4bba8736afe2f3a81efc580d461684c9cec6eea69d95d7da",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "no interface, online-use, report or mineness condition is added to basal-experience existence",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:141",
+          "published_object_sha256": "8515d333cf94de7c4bba8736afe2f3a81efc580d461684c9cec6eea69d95d7da",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
+      "to": "A:U1",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:142",
+      "item_type": "context_link",
+      "family_id": "R172",
+      "map_object_sha256": "b241935a55fe38a2f41d122a3423892fd80ab568029c507465f06cb4ab0e7b03",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "context only: adds an actual history-indexed conjunct to the corrected path candidate",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:142",
+          "published_object_sha256": "b241935a55fe38a2f41d122a3423892fd80ab568029c507465f06cb4ab0e7b03",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+      "to": "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:143",
+      "item_type": "context_link",
+      "family_id": "R158",
+      "map_object_sha256": "d5f359f20218989988059eb18d025adae134c9978c6ac4ed5c475c7c92544656",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "Context only: distinguishes the separately fixed ownership, agency and familiar-history targets under the R175 effective correction; does not assert eight-way organizational independence or all-six semantic realizability.",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:143",
+          "published_object_sha256": "3305a2f74f8a9125d154e67b938ebfe553a92a1b6fc394a7d75096432e0ff1d0",
+          "comparison": "corrected_since_published_declaration",
+          "differing_keys": [
+            "relation"
+          ],
+          "semantic_fields_differing": [
+            "relation"
+          ]
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R173:THREE_TARGET_SEPARATION",
+      "to": "R158:TARGET_SPLIT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:144",
+      "item_type": "context_link",
+      "family_id": "R155",
+      "map_object_sha256": "3259a5a5c03861f3a9d7626d9c779c03276c4b2cc72e2865c29ec970c02c5a12",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "context only: narrows but does not close the independent mineness obligation",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:144",
+          "published_object_sha256": "3259a5a5c03861f3a9d7626d9c779c03276c4b2cc72e2865c29ec970c02c5a12",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "to": "R155:MINENESS_OBLIGATION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:145",
+      "item_type": "context_link",
+      "family_id": "R146",
+      "map_object_sha256": "49b8d3da640f8b5fbf7e2ba2a6118bff166cfe019a4f972e3bbab443f9480d81",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "context only: retentive use can occur without conceptual selfhood and is not a basal gate",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:145",
+          "published_object_sha256": "49b8d3da640f8b5fbf7e2ba2a6118bff166cfe019a4f972e3bbab443f9480d81",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R173:RETENTIVE_BINDING_RELATION",
+      "to": "R146:SELF_CONTRACT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:146",
+      "item_type": "context_link",
+      "family_id": "TE20261008",
+      "map_object_sha256": "ad0ef9df670d6e5f3f5b98431373227af6f9e4b72f77e0c9f09adcf1dc572eee",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "historical selected-versus-complete scope; no claim of a new full-type theorem",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:146",
+          "published_object_sha256": "ad0ef9df670d6e5f3f5b98431373227af6f9e4b72f77e0c9f09adcf1dc572eee",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R149:NULL_TARGET",
+      "to": "TE20261008:SELECTED_TRANSPORT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:147",
+      "item_type": "context_link",
+      "family_id": "TE20261008",
+      "map_object_sha256": "76f0e7fd67265c4538ceeb48fb7c9e761ba75af5f4880deb8ad0617b62036a30",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "context only; governed by R172 QC06/QC07 effective overlay, not the raw historical predicate",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:147",
+          "published_object_sha256": "76f0e7fd67265c4538ceeb48fb7c9e761ba75af5f4880deb8ad0617b62036a30",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R172:ONLINE_ACTION_USE_RELATION",
+      "to": "TE20261008:ACTUAL_TEMPORAL_BRIDGE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:148",
+      "item_type": "context_link",
+      "family_id": "TE20261008",
+      "map_object_sha256": "5bf1ef9a98db654c392a6e1cb8739842ccbb0c44a36cb56b4a725c3ca8eb4e75",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "separate physical support, internal frame and external referent",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:148",
+          "published_object_sha256": "5bf1ef9a98db654c392a6e1cb8739842ccbb0c44a36cb56b4a725c3ca8eb4e75",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R159:ANCHOR_BINDING_CONTRACT",
+      "to": "TE20261008:COMPARISON_SETUP",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:149",
+      "item_type": "context_link",
+      "family_id": "TE20261008",
+      "map_object_sha256": "ef0955353cef7f7bd42e986abf6830ad81d8ee5c27c0546a626024d7772da7ad",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "motivation only; finite capacity counting does not discharge actual realization or C1",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:149",
+          "published_object_sha256": "ef0955353cef7f7bd42e986abf6830ad81d8ee5c27c0546a626024d7772da7ad",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TE20261008:RELATIONAL_INCREMENT",
+      "to": "TE20261008:EXPERIENTIAL_TEMPORAL_CONTRAST",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:150",
+      "item_type": "context_link",
+      "family_id": "TE20261008",
+      "map_object_sha256": "8bfaad16c6e1698e1cc853df7e96d3c034338708bf27e6da3529ec04d9100efc",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "potential implementation evidence only; no automatic actual isomorphism or felt-duration deduction",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:150",
+          "published_object_sha256": "8bfaad16c6e1698e1cc853df7e96d3c034338708bf27e6da3529ec04d9100efc",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TE20261008:RETIMING_RESULT",
+      "to": "TE20261008:SELECTED_TRANSPORT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:151",
+      "item_type": "context_link",
+      "family_id": "A",
+      "map_object_sha256": "59075ea4f069f0f8e796b6e5228840a9fe3e84c23bb0c9f955a65db461d6ba81",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "no temporal comparison, memory, report or integration threshold is added to basal experience",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:151",
+          "published_object_sha256": "59075ea4f069f0f8e796b6e5228840a9fe3e84c23bb0c9f955a65db461d6ba81",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TE20261008:EXPERIENTIAL_TEMPORAL_CONTRAST",
+      "to": "A:U1",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:152",
+      "item_type": "context_link",
+      "family_id": "TE20261008",
+      "map_object_sha256": "cac8a612b802733ef6927d7bfc719705ac65ed8d80299f23ffd3ef079bc6c118",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "motivation for preserving actual ancestry across replacement; RetBind lineage and other clauses are not derived by graph reachability",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:152",
+          "published_object_sha256": "cac8a612b802733ef6927d7bfc719705ac65ed8d80299f23ffd3ef079bc6c118",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R173:RETENTIVE_BINDING_RELATION",
+      "to": "TE20261008:RELAY_SETUP",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:153",
+      "item_type": "context_link",
+      "family_id": "TE20261008",
+      "map_object_sha256": "f0e6f0b39b843ba07d26916395df65c902a8762d801ed34ffcc3638e3b9394d7",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "selected physical relation preservation only; separate actual K-grounding/C1 needed for experiential application",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:153",
+          "published_object_sha256": "f0e6f0b39b843ba07d26916395df65c902a8762d801ed34ffcc3638e3b9394d7",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TE20261008:RELAY_PROVENANCE",
+      "to": "TE20261008:SELECTED_TRANSPORT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:154",
+      "item_type": "context_link",
+      "family_id": "TE20261008",
+      "map_object_sha256": "d5c4e428f8740415ce037bc7422ea6a89b6622d5c2d42bb37f9ec86d3a638585",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "same present descriptor does not identify provenance; current complete token and extended history must remain distinct",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:154",
+          "published_object_sha256": "d5c4e428f8740415ce037bc7422ea6a89b6622d5c2d42bb37f9ec86d3a638585",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R173:PRESENT_SLICE_NONENTAILMENT",
+      "to": "TE20261008:ACTUAL_TEMPORAL_BRIDGE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:155",
+      "item_type": "context_link",
+      "family_id": "TO20261008",
+      "map_object_sha256": "462024fe7ef550cff195edd12c55a5b871ed215d5cfc5dca0d4bc89b190421e5",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "selected temporal-reference application; contextual, not an extra premise",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:155",
+          "published_object_sha256": "462024fe7ef550cff195edd12c55a5b871ed215d5cfc5dca0d4bc89b190421e5",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TE20261008:RETIMING_RESULT",
+      "to": "TO20261008:REFERENCE_CROSSING_AND_RETIMING",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:156",
+      "item_type": "context_link",
+      "family_id": "TO20261008",
+      "map_object_sha256": "b75f736e234d1806c511706afd0bcf4ebffb0a67ddad6d460335b9a0fb0410b5",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "history acts here through present reference and execution; no external-history-only current difference",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:156",
+          "published_object_sha256": "b75f736e234d1806c511706afd0bcf4ebffb0a67ddad6d460335b9a0fb0410b5",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R173:RETENTIVE_BINDING_RELATION",
+      "to": "TO20261008:ROUTED_REFERENCE_SETUP",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:157",
+      "item_type": "context_link",
+      "family_id": "TO20261008",
+      "map_object_sha256": "f19563d9975f89d73362e51417b09db0f4cbf143ce58c9492c7ff881e6a749d0",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "specific executed-use contrast; no total richness ordering",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:157",
+          "published_object_sha256": "f19563d9975f89d73362e51417b09db0f4cbf143ce58c9492c7ff881e6a749d0",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TE20261008:RELATIONAL_INCREMENT",
+      "to": "TO20261008:NONREPORT_ROUTE_CONTRAST",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:158",
+      "item_type": "context_link",
+      "family_id": "TO20261008",
+      "map_object_sha256": "9ec81cfeb8c61f3d1bda064ffec6d4c194dad9e9c4817ddcd3609f72c4a097e4",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "existing theorem instantiated by the explicit actual package",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:158",
+          "published_object_sha256": "9ec81cfeb8c61f3d1bda064ffec6d4c194dad9e9c4817ddcd3609f72c4a097e4",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R157:COORDINATE_TRANSPORT",
+      "to": "TO20261008:EXPERIENTIAL_STRUCTURAL_COUNTERPART",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:159",
+      "item_type": "context_link",
+      "family_id": "TO20261008",
+      "map_object_sha256": "502e546d04e58d76697a309d6596e11ac63b7ac2813ee8d4bdbd0d6f5467f342",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "structural transport leaves selected phenomenal interpretation open",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:159",
+          "published_object_sha256": "502e546d04e58d76697a309d6596e11ac63b7ac2813ee8d4bdbd0d6f5467f342",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R157:SEMANTIC_RESIDUAL",
+      "to": "TO20261008:ORDER_BRIDGE_CANDIDATE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:160",
+      "item_type": "context_link",
+      "family_id": "R174",
+      "map_object_sha256": "9e202f695637432fb5d58bd70387d1510fdd2552f0730755179d07a841329f31",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "extends the explicit S/C pair with a downstream-bypass rival; contextual, not a premise",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:160",
+          "published_object_sha256": "9e202f695637432fb5d58bd70387d1510fdd2552f0730755179d07a841329f31",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TO20261008:ROUTED_REFERENCE_SETUP",
+      "to": "R174:THREE_RIVAL_ROUTE_CLASS",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:161",
+      "item_type": "context_link",
+      "family_id": "R174",
+      "map_object_sha256": "bd926d129f8ed92005c525e90c2bac2299ff4b1e9e46700715639f15355537c7",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "repairs pair-relative nonreport separation by adding mediator intervention; contextual",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:161",
+          "published_object_sha256": "bd926d129f8ed92005c525e90c2bac2299ff4b1e9e46700715639f15355537c7",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "TO20261008:NONREPORT_ROUTE_CONTRAST",
+      "to": "R174:MEDIATOR_CLAMP_SIGNATURE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:162",
+      "item_type": "context_link",
+      "family_id": "R174",
+      "map_object_sha256": "31ecf5feaa226ae76559673abcaebe769586bbf8bbad42e60b2b6eb788551ae4",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "inherits actual-use versus evidence typing through the effective overlay; contextual",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:162",
+          "published_object_sha256": "31ecf5feaa226ae76559673abcaebe769586bbf8bbad42e60b2b6eb788551ae4",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R172:ONLINE_ACTION_USE_RELATION",
+      "to": "R174:SHARED_TEMPORAL_COORDINATE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:163",
+      "item_type": "context_link",
+      "family_id": "R174",
+      "map_object_sha256": "82f5af961292e1fb1ad9a130d937888234fd058413e52b8eb465d9f739cd4c8b",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "a retained reference can enter the current relation only through grounded present use; contextual",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:163",
+          "published_object_sha256": "82f5af961292e1fb1ad9a130d937888234fd058413e52b8eb465d9f739cd4c8b",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R173:RETENTIVE_BINDING_RELATION",
+      "to": "R174:SHARED_TEMPORAL_COORDINATE",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:164",
+      "item_type": "context_link",
+      "family_id": "BR20261008",
+      "map_object_sha256": "29867b7d6424c989a186bfbab8cf23be9829fe3c303bb49055a1263fbf3f645e",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "existing symmetry apparatus; no originality claim",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:164",
+          "published_object_sha256": "29867b7d6424c989a186bfbab8cf23be9829fe3c303bb49055a1263fbf3f645e",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "A:SYM_PREM",
+      "to": "BR20261008:ROLE_EXPANSION_SETUP",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:165",
+      "item_type": "context_link",
+      "family_id": "BR20261008",
+      "map_object_sha256": "0389b2a72e4a1e88424b640e6a1c1583b6f4849b00196183b24fb19ca04ee010",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "role individuation is not selection of a unique owner",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:165",
+          "published_object_sha256": "0389b2a72e4a1e88424b640e6a1c1583b6f4849b00196183b24fb19ca04ee010",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R146:CENTERED_REFERENCE",
+      "to": "BR20261008:EXPERIENTIAL_ROLE_TRANSPORT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:166",
+      "item_type": "context_link",
+      "family_id": "BR20261008",
+      "map_object_sha256": "1a15648382ad254d34f1078b74303335481d84d2c6821852e805c7cbff116dc4",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "independent semantic interpretation remains required",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:166",
+          "published_object_sha256": "1a15648382ad254d34f1078b74303335481d84d2c6821852e805c7cbff116dc4",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R157:SEMANTIC_RESIDUAL",
+      "to": "BR20261008:PHENOMENAL_MAPPING_ADMISSION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:167",
+      "item_type": "context_link",
+      "family_id": "BR20261008",
+      "map_object_sha256": "f0c09645466b11255c2c2117b88ee820e0665a220de308b54bfd10fdb487d162",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "grounded formula transport used with full parameter mapping",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:167",
+          "published_object_sha256": "f0c09645466b11255c2c2117b88ee820e0665a220de308b54bfd10fdb487d162",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R157:COORDINATE_TRANSPORT",
+      "to": "BR20261008:EXPERIENTIAL_ROLE_TRANSPORT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:168",
+      "item_type": "context_link",
+      "family_id": "BR20261008",
+      "map_object_sha256": "21cb1964952883ab1540e8b0cb92803286e09e9a1baca08a60c97f64e0adc9d5",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "proposed joint-constraint research direction; does not establish B_order",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:168",
+          "published_object_sha256": "21cb1964952883ab1540e8b0cb92803286e09e9a1baca08a60c97f64e0adc9d5",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R174:B_ORDER_BOUNDARY",
+      "to": "BR20261008:COMMON_EXPERIENTIAL_CONSTRAINT",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:169",
+      "item_type": "context_link",
+      "family_id": "R175",
+      "map_object_sha256": "1f16928180f78e6c648d23c82e20610226f45efedfa34ee74b00a1c9b9434ac5",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "review_corrected_by",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:169",
+          "published_object_sha256": "1f16928180f78e6c648d23c82e20610226f45efedfa34ee74b00a1c9b9434ac5",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R173:THREE_TARGET_SEPARATION",
+      "to": "R175:R173_EFFECTIVE_TARGET_SEPARATION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:170",
+      "item_type": "context_link",
+      "family_id": "R175",
+      "map_object_sha256": "228724465d9722d90280cfe4aac942959d3221dc1c7a8e7c0a78eb8e82532144",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "failure_direction_corrected_by",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:170",
+          "published_object_sha256": "228724465d9722d90280cfe4aac942959d3221dc1c7a8e7c0a78eb8e82532144",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R174:B_ORDER_BOUNDARY",
+      "to": "R175:R174_FIBER_DIRECTION_CORRECTION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:171",
+      "item_type": "context_link",
+      "family_id": "R175",
+      "map_object_sha256": "7a38d5ee059434380dc1e7f80b2cba05a67b2ae27176eb58a00b7efc86ed3db7",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "instantiated_by",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:171",
+          "published_object_sha256": "7a38d5ee059434380dc1e7f80b2cba05a67b2ae27176eb58a00b7efc86ed3db7",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "BR20261008:COMMON_EXPERIENTIAL_CONSTRAINT",
+      "to": "R175:HELD_OUT_ORDER_PREDICTION",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:172",
+      "item_type": "context_link",
+      "family_id": "R175",
+      "map_object_sha256": "cff4910d86671952272736ddd84aa34f91710f55ffcafdb6f98dc84edf778eba",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "scoped_as",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:172",
+          "published_object_sha256": "cff4910d86671952272736ddd84aa34f91710f55ffcafdb6f98dc84edf778eba",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R174:SHARED_TEMPORAL_COORDINATE",
+      "to": "R175:PHYSICAL_TEMPORAL_CHAIN",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    },
+    {
+      "item_id": "BASE:CTX:173",
+      "item_type": "context_link",
+      "family_id": "R173",
+      "map_object_sha256": "c1229551667a1ae57815b9c50f43f6dd1af76f055416db54f376d69ec94c09f9",
+      "role": "nondeductive_context",
+      "claim_unit": false,
+      "label": "",
+      "semantic_summary": "does_not_close",
+      "coverage_status": "not_applicable",
+      "coverage_basis": "Official disclosed declaration when exact/partial; paper-body and novelty are independent fields.",
+      "formal_disclosures": [
+        {
+          "publication_id": "MGTD-v1.0.1",
+          "doi": "10.5281/zenodo.23241982",
+          "member": "publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+          "member_sha256": "943b136a48c40e44a976867604cbb76df5cdf9efcad2975c647970a0f23e7830",
+          "item_id": "BASE:CTX:173",
+          "published_object_sha256": "c1229551667a1ae57815b9c50f43f6dd1af76f055416db54f376d69ec94c09f9",
+          "comparison": "exact_object",
+          "differing_keys": [],
+          "semantic_fields_differing": []
+        }
+      ],
+      "body_semantic_coverage": {
+        "status": "not_claim",
+        "explanation": "No item-level paper-body equivalence is asserted solely from a source anchor or official attachment."
+      },
+      "classification_reason": "This is nondeductive context/provenance, not proof or an additional scientific discovery.",
+      "original_map_kind": null,
+      "original_map_status": null,
+      "from": "R175:HELD_OUT_ORDER_PREDICTION",
+      "to": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "source_inventory_coverage_status": "not_claim",
+      "coverage_version": "UCT-PUB-v1.0.0",
+      "publication_is_scientific_validation": false,
+      "residual_originality": "NOT_ESTABLISHED_BY_DISCLOSURE_STATUS"
+    }
+  ]
+}

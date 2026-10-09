@@ -1,0 +1,50 @@
+{
+  "schema": "uct-current-state/1.3",
+  "release_id": "UCT-MAP-v1.1.2",
+  "release_seq": 4,
+  "parent_release": "UCT-MAP-v1.1.1",
+  "audit_id": "R188-ALLMAP-COMPAT-20261009-v1",
+  "review_status": "COMPATIBILITY_REVIEW_AND_ASSEMBLY_COMPLETE_WITH_OPEN_APPLICATIONS",
+  "source_commit": "f72f99d60c391c4b15f5c9334b49d09e13abaac8",
+  "source_commit_role": "parent revision containing purpose-policy adoption; final science commit in persistence receipt",
+  "version_directory": "versions/UCT-MAP-v1.1.2",
+  "report": "versions/UCT-MAP-v1.1.2/AUDIT_REPORT.md",
+  "release_manifest": "versions/UCT-MAP-v1.1.2/RELEASE.json",
+  "map_descriptor": "UCT_FORMAL_GRAPH_MODULES.json",
+  "research_registry": "RESEARCH_REGISTRY.json",
+  "version_policy": "VERSIONING_POLICY.md",
+  "changelog": "CHANGELOG.md",
+  "latest_research": {
+    "id": "R188-CER-20261009",
+    "result_version": "CER-RESULT-v0.1.0",
+    "work_log": "records/R188_Encoder_Access_and_Recovery_20261009/WORK_LOG.md",
+    "handoff": "records/R188_Encoder_Access_and_Recovery_20261009/HANDOFF_ZH.md",
+    "paper": "records/R188_Encoder_Access_and_Recovery_20261009/RESEARCH_NOTE.md",
+    "paper_pdf": "records/R188_Encoder_Access_and_Recovery_20261009/When_Behavioral_Recovery_Conceals_Organizational_Change_v0.1.0.pdf"
+  },
+  "persistence_receipt": "persistence/UCT-MAP-v1.1.2_RECEIPT.json",
+  "next_ordinary_completed_version": "UCT-MAP-v1.1.3",
+  "actual_premise_discharge": false,
+  "qc_open": [
+    "QC-20261008-10",
+    "IA-QC11",
+    "QC-20261008-12",
+    "QC-20261008-13"
+  ],
+  "publication_status": "WORKING_PAPER_PREPARED_NO_PUBLICATION_ACTION",
+  "pending_checkpoints_not_promoted": [
+    "AC20261009",
+    "IL20261009"
+  ],
+  "current_guide": "RESEARCH_MASTER_GUIDE.md v2.2",
+  "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "counts": {
+    "nodes": 913,
+    "active_conditional_rules": 424,
+    "suspended_historical_rules": 10,
+    "nondeductive_context_links": 261,
+    "total_review_items": 1608
+  },
+  "pending_note": "AC and IL remain separate. Five other previously pending modules are now reviewed conditional declarations, without actual-premise promotion."
+}

@@ -1,7 +1,7 @@
 {
   "release": "UCT-MAP-v1.1.2",
   "identity_rule": "Stable research IDs are distinct from map versions and R round labels. IE is not EI. TH includes the RB submodule.",
-  "parent_registry": "versions/UCT-MAP-v1.1.2/history/RESEARCH_REGISTRY.json",
+  "parent_registry": "records/PUB20261009_Publication_Coverage/history/RESEARCH_REGISTRY.json",
   "inherited_results": [
     "CORE20261008",
     "EI20261008",
@@ -30,7 +30,13 @@
       "status": "REVIEWED_CONDITIONAL_SCHEMAS_WITH_OPEN_APPLICATIONS",
       "actual_application": "OPEN",
       "novelty": "CLASSICAL_ANTECEDENTS_CREDITED_PRIORITY_UNVERIFIED",
-      "publication": "WORKING_MANUSCRIPT_NOT_PUBLISHED"
+      "publication": "SEE_CURRENT_CLAIM_LEVEL_COVERAGE",
+      "historical_publication_label": "WORKING_MANUSCRIPT_NOT_PUBLISHED",
+      "publication_coverage_version": "UCT-PUB-v1.0.0",
+      "publication_subclaims": {
+        "TH_v0.1": "Published in RT/TH v1.0.0 body and formal module, DOI10.5281/zenodo.23251651; exact contract differences are recorded.",
+        "RB_v0.2": "Cited by RT/TH, not deposited or republished there; inherited specializations and residual budget applications are assessed separately."
+      }
     },
     {
       "research_id": "OL20261009",
@@ -44,9 +50,11 @@
       "work_log": "records/OL20261009_Observable_Locality/WORK_LOG.md",
       "handoff": "records/OL20261009_Observable_Locality/HANDOFF_ZH.md",
       "actual_application": "OPEN",
-      "publication": "NOT_PUBLISHED",
+      "publication": "SEE_CURRENT_CLAIM_LEVEL_COVERAGE",
       "novelty": "SCOPED_METHOD_SYNTHESIS_PRIORITY_UNVERIFIED",
-      "proof_status": "CONDITIONAL_MATHEMATICAL"
+      "proof_status": "CONDITIONAL_MATHEMATICAL",
+      "historical_publication_label": "NOT_PUBLISHED",
+      "publication_coverage_version": "UCT-PUB-v1.0.0"
     },
     {
       "research_id": "R185",
@@ -59,8 +67,10 @@
       "capsule": "versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
       "status": "REVIEWED_CONDITIONAL_SCHEMAS_WITH_OPEN_APPLICATIONS",
       "actual_application": "OPEN",
-      "publication": "NO_PUBLICATION_ACTION",
-      "novelty": "SCOPED_APPLICATION_OR_INHERITED_RESULT_PRIORITY_UNVERIFIED"
+      "publication": "SEE_CURRENT_CLAIM_LEVEL_COVERAGE",
+      "novelty": "SCOPED_APPLICATION_OR_INHERITED_RESULT_PRIORITY_UNVERIFIED",
+      "historical_publication_label": "NO_PUBLICATION_ACTION",
+      "publication_coverage_version": "UCT-PUB-v1.0.0"
     },
     {
       "research_id": "R186-HOM-20261009",
@@ -73,8 +83,10 @@
       "capsule": "versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
       "status": "REVIEWED_CONDITIONAL_SCHEMAS_WITH_OPEN_APPLICATIONS",
       "actual_application": "OPEN",
-      "publication": "NO_PUBLICATION_ACTION",
-      "novelty": "SCOPED_APPLICATION_OR_INHERITED_RESULT_PRIORITY_UNVERIFIED"
+      "publication": "SEE_CURRENT_CLAIM_LEVEL_COVERAGE",
+      "novelty": "SCOPED_APPLICATION_OR_INHERITED_RESULT_PRIORITY_UNVERIFIED",
+      "historical_publication_label": "NO_PUBLICATION_ACTION",
+      "publication_coverage_version": "UCT-PUB-v1.0.0"
     },
     {
       "research_id": "UI20261009",
@@ -87,8 +99,10 @@
       "capsule": "versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
       "status": "REVIEWED_CONDITIONAL_SCHEMAS_WITH_OPEN_APPLICATIONS",
       "actual_application": "OPEN",
-      "publication": "NO_PUBLICATION_ACTION",
-      "novelty": "SCOPED_APPLICATION_OR_INHERITED_RESULT_PRIORITY_UNVERIFIED"
+      "publication": "SEE_CURRENT_CLAIM_LEVEL_COVERAGE",
+      "novelty": "SCOPED_APPLICATION_OR_INHERITED_RESULT_PRIORITY_UNVERIFIED",
+      "historical_publication_label": "NO_PUBLICATION_ACTION",
+      "publication_coverage_version": "UCT-PUB-v1.0.0"
     },
     {
       "research_id": "CM20261009",
@@ -101,8 +115,10 @@
       "capsule": "versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
       "status": "REVIEWED_CONDITIONAL_SCHEMAS_WITH_OPEN_APPLICATIONS",
       "actual_application": "OPEN",
-      "publication": "NO_PUBLICATION_ACTION",
-      "novelty": "SCOPED_APPLICATION_OR_INHERITED_RESULT_PRIORITY_UNVERIFIED"
+      "publication": "SEE_CURRENT_CLAIM_LEVEL_COVERAGE",
+      "novelty": "SCOPED_APPLICATION_OR_INHERITED_RESULT_PRIORITY_UNVERIFIED",
+      "historical_publication_label": "NO_PUBLICATION_ACTION",
+      "publication_coverage_version": "UCT-PUB-v1.0.0"
     },
     {
       "research_id": "R187-CMA-20261009",
@@ -115,8 +131,10 @@
       "capsule": "versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
       "status": "REVIEWED_CONDITIONAL_SCHEMAS_WITH_OPEN_APPLICATIONS",
       "actual_application": "OPEN",
-      "publication": "NO_PUBLICATION_ACTION",
-      "novelty": "SCOPED_APPLICATION_OR_INHERITED_RESULT_PRIORITY_UNVERIFIED"
+      "publication": "SEE_CURRENT_CLAIM_LEVEL_COVERAGE",
+      "novelty": "SCOPED_APPLICATION_OR_INHERITED_RESULT_PRIORITY_UNVERIFIED",
+      "historical_publication_label": "NO_PUBLICATION_ACTION",
+      "publication_coverage_version": "UCT-PUB-v1.0.0"
     },
     {
       "research_id": "R188-CER-20261009",
@@ -129,14 +147,18 @@
       "capsule": "versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
       "status": "REVIEWED_CONDITIONAL_SCHEMAS_WITH_OPEN_APPLICATIONS",
       "actual_application": "OPEN",
-      "publication": "NO_PUBLICATION_ACTION",
+      "publication": "SEE_CURRENT_CLAIM_LEVEL_COVERAGE",
       "novelty": "SCOPED_APPLICATION_OR_INHERITED_RESULT_PRIORITY_UNVERIFIED",
       "result_version": "CER-RESULT-v0.1.0",
       "source": "records/R188_Encoder_Access_and_Recovery_20261009/RESEARCH_NOTE.md",
       "work_log": "records/R188_Encoder_Access_and_Recovery_20261009/WORK_LOG.md",
       "handoff": "records/R188_Encoder_Access_and_Recovery_20261009/HANDOFF_ZH.md",
       "claims": "records/R188_Encoder_Access_and_Recovery_20261009/CLAIM_REUSE_LEDGER.json",
-      "scientific_delta": "Exact weighted finite-error access-restricted recovery application, matched six-state routers, constructive timely feedback repair and integrated organizational inference contracts."
+      "scientific_delta": "Exact weighted finite-error access-restricted recovery application, matched six-state routers, constructive timely feedback repair and integrated organizational inference contracts.",
+      "historical_publication_label": "NO_PUBLICATION_ACTION",
+      "publication_coverage_version": "UCT-PUB-v1.0.0",
+      "manuscript_decision": "HOLD_STANDALONE_TECHNICAL_SUPPLEMENT_CANDIDATE",
+      "decision_record": "records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md"
     }
   ],
   "pending_checkpoints": [
@@ -151,7 +173,22 @@
       "source": "records/IL20261009_Intervention_Locality/MAP_EXTENSION.json",
       "status": "PENDING_MAP",
       "enabled_as_established_premises": false
+    },
+    {
+      "research_id": "ONLINE-AC-PROBE-20261009",
+      "source": "records/ONLINE_AC_20261009_Dynamic_Calibration/MAP_EXTENSION_PENDING.json",
+      "status": "PENDING_MAP",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.0"
     }
   ],
-  "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive."
+  "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
+  "publication_coverage": {
+    "entry": "PUBLICATION_COVERAGE.json",
+    "version": "UCT-PUB-v1.0.0",
+    "update": "records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json",
+    "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
+    "nondeductive": true
+  },
+  "registry_scope": "Recent navigation register; complete fixed-source inventories are in the current publication coverage ledger."
 }

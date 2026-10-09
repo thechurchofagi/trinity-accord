@@ -1,3 +1,11 @@
+# UCT-PUB-v1.0.0 — 2026-10-09 — publication/reuse coverage sequence 1
+
+PUB20261009 fulfills the author's inventory → published coverage → net-increment assessment → breakthrough or manuscript → reassessment cycle. Guide v2.3 and machine policy v2.4 require synchronized publication coverage on every log/map update. Census: 28 research works, 39 research DOI deposits, plus one editorial DOI; 1,608 current review objects receive separate disclosure/role metadata. MGTD's old graph and RT/TH's early handoff disclosure narrow the residual. R188's earlier standalone-readiness judgment is superseded by HOLD, retaining its technical contribution and exact frozen files.
+
+ONLINE-AC-PROBE-20261009 resultv0.2.0 is a new pending research checkpoint with a verified five-port two-probe closed controller and matched three-probe identification baseline; its focused working manuscript is complete, not formally published; it remains outside the completed science graph. This update is not v1.1.3 and does not repeat the earlier full-map proof audit. Sources, unknown scope, negative routes, score-label correction, receipts and exact pre-edit navigation are retained in [records/PUB20261009_Publication_Coverage](records/PUB20261009_Publication_Coverage/WORK_LOG.md).
+
+---
+
 # UCT-MAP-v1.1.2 — 2026-10-09 — sequence4
 
 R188-CER-20261009, CER-RESULT-v0.1.0, completes the related UI/HOM/CM/R185/R187 sequence as one English working paper, with an exact weighted access-restricted recovery application, matched1 versus8/9 witness and timely feedback repair. Classical and internal predecessors are explicitly credited; worldwide priority and actual/named-content application remain open.

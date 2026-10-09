@@ -15,5 +15,11 @@ Audit coverage, conditional validity, actual instantiation, named phenomenal bri
 For concurrent workers: read the current branch head, compare the expected head, build an additive commit without deleting new work, and move the ref only with an expected-SHA lease. Failed leases require rereading. Use [skip ci]; no publication, DOI, OTS, Arweave, deployment, PR or scheduler changes are implied.
 
 
-## Binding output policy (canonical guide v2.2 §§0,8A)
+## Binding output policy (canonical guide v2.3 §§0,8A)
 Every substantive user-visible research result requires a versioned WORK_LOG.md, HANDOFF_ZH.md, exact code/test receipts, map ledger and GitHub readback (or explicit failures), separate research result and completed-map version identities. The root guide already contains this requirement and takes precedence.
+
+## Publication coverage versions
+
+[UCT-PUB-v1.0.0](PUBLICATION_COVERAGE.json) is the first immutable publication coverage release. It is independent of UCT-MAP-v1.1.2. Its ledger and shards bind exact work/deposit identities, formal disclosures, body comparison scope, residual assessments and source evidence. Advance the coverage version when claims/publication evidence/assessments change; retain the preceding snapshot. Metadata-only coverage, guide or citation changes do not increment the scientific-map version.
+
+Every current log, handoff, registry and map entry must cite the same coverage version and a change record or an explicit checked no-change reason. Working research, formal publication, reserved DOI and preservation are different states. A same-label different DOI deposit remains a separate publication record of the same work. A new pending checkpoint is not a completed map release.

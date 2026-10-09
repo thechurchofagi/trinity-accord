@@ -1,3 +1,21 @@
+# Current research decision — UCT-PUB-v1.0.0 / PUB20261009
+
+**Read [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [CURRENT_STATE.json](CURRENT_STATE.json), and [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json) first.** The paper purpose is original, inspectable knowledge that future AI and researchers can cite and reuse, serving the UCT main line. Each log/map update must synchronize the same coverage version.
+
+The verified publication census contains **28 research works, 39 research DOI deposits (38 work/version-label pairs), plus one separately counted editorial supplement**. Published body, formal supplement disclosure, cited working source, proof validity and originality are distinct. MGTD disclosed the v1.0.0 map; RT/TH published early TH and the route results. Old registry `NOT_PUBLISHED` labels are historical and cannot supersede current claim coverage.
+
+**Current R188 decision: HOLD standalone; preserve the exact technical supplement candidate.** This reassesses the broad working manuscript's readiness after deducting newly verified published coverage. Its source-only weighted finite-error result and matched benchmark remain useful. The frozen manuscript, code and graph are unchanged. Read [the residual assessment](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md) and [the current report](records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md).
+
+Actual continuation produced [ONLINE-AC-PROBE-20261009](records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md): an exact five-port two-probe sustainable controller, matched three-probe complete-identification baseline, and three-port7/8 benchmark, with proofs and independent checks. The focused [working paper](records/ONLINE_AC_20261009_Dynamic_Calibration/PAPER.md), ONLINE-AC-PAPER-v0.1.0, is complete and not formally published. It is **PENDING_MAP**, like AC and IL; it is not an enabled scientific premise or a completed v1.1.3 release.
+
+The completed science remains **UCT-MAP-v1.1.2**, 913 nodes, 424 active rules, 261 contexts and 10 suspended rules: 1,608 review records. Coverage metadata creates no new science version. QC10, IA-QC11, QC12, QC13 and actual/named-experience obligations remain open.
+
+Latest [work log](records/PUB20261009_Publication_Coverage/WORK_LOG.md), [Chinese handoff](records/PUB20261009_Publication_Coverage/HANDOFF_ZH.md), [coverage update](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) and [save receipt](persistence/UCT-PUB-v1.0.0_RECEIPT.json). Keep the inventory's declared unknown scope; neither 71 unresolved map-body comparisons nor the 279 IDs absent from two formal attachments are counts of unpublished discoveries.
+
+---
+
+## Preserved earlier navigation (historical; current decisions above take precedence)
+
 # Current completed research and map — R188 / UCT-MAP-v1.1.2
 
 **Start with [CURRENT_STATE.json](CURRENT_STATE.json) and [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.2.** The guide's opening section makes future-AI/researcher citable knowledge the paper's purpose, serving the UCT main line. Historical publication queues do not override it.

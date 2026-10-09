@@ -1,0 +1,9 @@
+# Effective formal map — UCT-MAP-v1.1.2
+
+The unique machine entry is [UCT_FORMAL_GRAPH_MODULES.json](UCT_FORMAL_GRAPH_MODULES.json); current release identity is [CURRENT_STATE.json](CURRENT_STATE.json). The unchanged root UCT_FORMAL_GRAPH.json is historical base content and must not be mistaken for the complete current graph.
+
+The hash-verified [release capsule](versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz) contains complete UCT_EFFECTIVE_GRAPH.json, UCT_FORMAL_MAP_COMPLETE.md and REVIEW_LEDGER.json/CSV, all1,608 current review items, exact normalized source objects and correction history. Restore with [restore_capsule.py](versions/UCT-MAP-v1.1.2/restore_capsule.py), using [CAPSULE.json](versions/UCT-MAP-v1.1.2/CAPSULE.json). The expanded downloadable research package includes these complete files directly.
+
+Counts:913 nodes;424 active conditional schemas;261 nondeductive contexts;10 suspended historical rules. Graph SHA256 `0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612`; review ledger SHA256 `0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687`. Full contract review is not actual premise truth or independent re-proof of every historical source.
+
+See [the full review](versions/UCT-MAP-v1.1.2/audit/WHOLE_MAP_SEMANTIC_REVIEW_REPORT.md), [assembled-object validation](versions/UCT-MAP-v1.1.2/audit/ASSEMBLED_VALIDATION.md) and [the latest paper](records/R188_Encoder_Access_and_Recovery_20261009/RESEARCH_NOTE.md). AC/IL remain separately pending.

@@ -161,6 +161,17 @@
       "compatibility_audit": "records/IL20261009_Intervention_Locality/RUN_RECEIPT.json",
       "handoff": "records/IL20261009_Intervention_Locality/CURRENT_HANDOFF_ZH.md",
       "instruction": "Exact reset normal form, minimal LTI behavior twin and1/11 local-imitation gap are saved conditional results. Current whole-map fresh semantic integration is incomplete. Keep this module disabled until current v1.1.0 is completely restored/reviewed and affected conclusions rederived. No actual or named-phenomenal premise is discharged by storage."
+    },
+    {
+      "id": "ONLINE-AC-PROBE-20261009",
+      "result_version": "0.2.0",
+      "path": "records/ONLINE_AC_20261009_Dynamic_Calibration/MAP_EXTENSION_PENDING.json",
+      "sha256": "d33d61cdfcab5f54d14c9afbdb91ca210137408077d61eb5724fb31bc125b8dc",
+      "status": "PENDING_MAP",
+      "audit_status": "LOCAL_REVIEW_ONLY_FULL_MAP_INTEGRATION_NOT_COMPLETED",
+      "enabled_as_established_premises": false,
+      "handoff": "records/ONLINE_AC_20261009_Dynamic_Calibration/HANDOFF_ZH.md",
+      "instruction": "Specific online calibration result; static AC is independently pending. Read the exact contract, proof and independent review before any semantic integration. Do not treat this entry as completed v1.1.3."
     }
   ],
   "pending_rebase_target": "UCT-MAP-v1.1.2; prior pending instructions and candidate version labels remain historical source metadata.",
@@ -168,5 +179,14 @@
   "actual_application_status": "OPEN",
   "suspended_rules_may_infer": false,
   "unmodified_root_graph_is_only_historical_base": true,
-  "on_source_change": "Fail closed; compare exact current bytes, repeat applicable semantic compatibility review and affected rederivation, then create a new immutable completed version."
+  "on_source_change": "Fail closed; compare exact current bytes, repeat applicable semantic compatibility review and affected rederivation, then create a new immutable completed version.",
+  "publication_coverage": {
+    "entry": "PUBLICATION_COVERAGE.json",
+    "version": "UCT-PUB-v1.0.0",
+    "update": "records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json",
+    "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
+    "nondeductive": true
+  },
+  "publication_coverage_changes_scientific_graph": false,
+  "full_review_status_scope": "The completed compatibility review applies to UCT-MAP-v1.1.2 only, not to pending checkpoints."
 }

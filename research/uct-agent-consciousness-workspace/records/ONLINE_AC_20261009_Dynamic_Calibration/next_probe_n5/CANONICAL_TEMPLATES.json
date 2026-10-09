@@ -1,0 +1,525 @@
+{
+  "result_version": "ONLINE-AC-RESULT-v0.2.0",
+  "n": 5,
+  "goal_effect_port": 0,
+  "source_certificate_sha256": "2d5ba3fb65730620c2ef1308d1236aa08360f79623fb202899cd9f11af6db0fe",
+  "formatter_sha256": "f63920aea60ef34bd8abe2f455c8a688189fa8e7795918b0d480b9e435c06c30",
+  "status": "EXTRACTED_WITNESS_REQUIRES_INDEPENDENT_VALIDATION",
+  "templates": [
+    {
+      "name": "known_identity",
+      "old_belief": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "first_probe": 3,
+      "rows": [
+        {
+          "first_effect": 3,
+          "second_probe": 5,
+          "second_effect": 5,
+          "posterior_wirings": [
+            [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              0,
+              1,
+              2,
+              4,
+              3
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 7
+        },
+        {
+          "first_effect": 3,
+          "second_probe": 5,
+          "second_effect": 6,
+          "posterior_wirings": [
+            [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          ],
+          "net_command": 2,
+          "terminal_command": 4
+        },
+        {
+          "first_effect": 3,
+          "second_probe": 5,
+          "second_effect": 9,
+          "posterior_wirings": [
+            [
+              0,
+              1,
+              3,
+              2,
+              4
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 7
+        },
+        {
+          "first_effect": 3,
+          "second_probe": 5,
+          "second_effect": 17,
+          "posterior_wirings": [
+            [
+              0,
+              1,
+              4,
+              3,
+              2
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 7
+        },
+        {
+          "first_effect": 5,
+          "second_probe": 0,
+          "second_effect": 0,
+          "posterior_wirings": [
+            [
+              0,
+              2,
+              1,
+              3,
+              4
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 2
+        },
+        {
+          "first_effect": 6,
+          "second_probe": 0,
+          "second_effect": 0,
+          "posterior_wirings": [
+            [
+              2,
+              1,
+              0,
+              3,
+              4
+            ]
+          ],
+          "net_command": 4,
+          "terminal_command": 7
+        },
+        {
+          "first_effect": 9,
+          "second_probe": 0,
+          "second_effect": 0,
+          "posterior_wirings": [
+            [
+              0,
+              3,
+              2,
+              1,
+              4
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 2
+        },
+        {
+          "first_effect": 10,
+          "second_probe": 0,
+          "second_effect": 0,
+          "posterior_wirings": [
+            [
+              3,
+              1,
+              2,
+              0,
+              4
+            ]
+          ],
+          "net_command": 8,
+          "terminal_command": 11
+        },
+        {
+          "first_effect": 17,
+          "second_probe": 0,
+          "second_effect": 0,
+          "posterior_wirings": [
+            [
+              0,
+              4,
+              2,
+              3,
+              1
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 2
+        },
+        {
+          "first_effect": 18,
+          "second_probe": 0,
+          "second_effect": 0,
+          "posterior_wirings": [
+            [
+              4,
+              1,
+              2,
+              3,
+              0
+            ]
+          ],
+          "net_command": 16,
+          "terminal_command": 19
+        }
+      ]
+    },
+    {
+      "name": "identity_or_swap_34",
+      "old_belief": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          4,
+          3
+        ]
+      ],
+      "first_probe": 9,
+      "rows": [
+        {
+          "first_effect": 3,
+          "second_probe": 2,
+          "second_effect": 8,
+          "posterior_wirings": [
+            [
+              0,
+              3,
+              2,
+              1,
+              4
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 10
+        },
+        {
+          "first_effect": 3,
+          "second_probe": 2,
+          "second_effect": 16,
+          "posterior_wirings": [
+            [
+              0,
+              4,
+              2,
+              1,
+              3
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 10
+        },
+        {
+          "first_effect": 5,
+          "second_probe": 4,
+          "second_effect": 8,
+          "posterior_wirings": [
+            [
+              0,
+              1,
+              3,
+              2,
+              4
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 12
+        },
+        {
+          "first_effect": 5,
+          "second_probe": 4,
+          "second_effect": 16,
+          "posterior_wirings": [
+            [
+              0,
+              1,
+              4,
+              2,
+              3
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 12
+        },
+        {
+          "first_effect": 9,
+          "second_probe": 3,
+          "second_effect": 3,
+          "posterior_wirings": [
+            [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              0,
+              1,
+              4,
+              3,
+              2
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 11
+        },
+        {
+          "first_effect": 9,
+          "second_probe": 3,
+          "second_effect": 5,
+          "posterior_wirings": [
+            [
+              0,
+              2,
+              1,
+              3,
+              4
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 11
+        },
+        {
+          "first_effect": 9,
+          "second_probe": 3,
+          "second_effect": 10,
+          "posterior_wirings": [
+            [
+              3,
+              1,
+              2,
+              0,
+              4
+            ]
+          ],
+          "net_command": 8,
+          "terminal_command": 2
+        },
+        {
+          "first_effect": 9,
+          "second_probe": 3,
+          "second_effect": 17,
+          "posterior_wirings": [
+            [
+              0,
+              4,
+              2,
+              3,
+              1
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 11
+        },
+        {
+          "first_effect": 10,
+          "second_probe": 0,
+          "second_effect": 0,
+          "posterior_wirings": [
+            [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          ],
+          "net_command": 2,
+          "terminal_command": 11
+        },
+        {
+          "first_effect": 12,
+          "second_probe": 0,
+          "second_effect": 0,
+          "posterior_wirings": [
+            [
+              2,
+              1,
+              0,
+              3,
+              4
+            ]
+          ],
+          "net_command": 4,
+          "terminal_command": 13
+        },
+        {
+          "first_effect": 17,
+          "second_probe": 3,
+          "second_effect": 3,
+          "posterior_wirings": [
+            [
+              0,
+              1,
+              2,
+              4,
+              3
+            ],
+            [
+              0,
+              1,
+              3,
+              4,
+              2
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 11
+        },
+        {
+          "first_effect": 17,
+          "second_probe": 3,
+          "second_effect": 5,
+          "posterior_wirings": [
+            [
+              0,
+              2,
+              1,
+              4,
+              3
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 11
+        },
+        {
+          "first_effect": 17,
+          "second_probe": 3,
+          "second_effect": 9,
+          "posterior_wirings": [
+            [
+              0,
+              3,
+              2,
+              4,
+              1
+            ]
+          ],
+          "net_command": 1,
+          "terminal_command": 11
+        },
+        {
+          "first_effect": 17,
+          "second_probe": 3,
+          "second_effect": 18,
+          "posterior_wirings": [
+            [
+              4,
+              1,
+              2,
+              0,
+              3
+            ]
+          ],
+          "net_command": 8,
+          "terminal_command": 2
+        },
+        {
+          "first_effect": 18,
+          "second_probe": 0,
+          "second_effect": 0,
+          "posterior_wirings": [
+            [
+              1,
+              0,
+              2,
+              4,
+              3
+            ]
+          ],
+          "net_command": 2,
+          "terminal_command": 11
+        },
+        {
+          "first_effect": 20,
+          "second_probe": 0,
+          "second_effect": 0,
+          "posterior_wirings": [
+            [
+              2,
+              1,
+              0,
+              4,
+              3
+            ]
+          ],
+          "net_command": 4,
+          "terminal_command": 13
+        },
+        {
+          "first_effect": 24,
+          "second_probe": 1,
+          "second_effect": 8,
+          "posterior_wirings": [
+            [
+              3,
+              1,
+              2,
+              4,
+              0
+            ]
+          ],
+          "net_command": 16,
+          "terminal_command": 24
+        },
+        {
+          "first_effect": 24,
+          "second_probe": 1,
+          "second_effect": 16,
+          "posterior_wirings": [
+            [
+              4,
+              1,
+              2,
+              3,
+              0
+            ]
+          ],
+          "net_command": 16,
+          "terminal_command": 24
+        }
+      ]
+    }
+  ],
+  "transport": {
+    "old_representative": "rho is a selected member of the known belief, not an oracle for the actual wiring",
+    "effect_bijection": "f(0)=g; for a two-wiring belief {rho,(rs)rho}, f(3)=r, f(4)=s",
+    "command_bijection": "c = inverse(rho) composed with f",
+    "canonical_observation": "inverse(f) applied to the actual effect vector",
+    "canonical_current_wiring": "inverse(f) composed with actual_current_wiring composed with c",
+    "invariant_family": "singleton beliefs and pairs differing by one transposition of two non-goal effect ports",
+    "family_size_for_fixed_goal": 480
+  }
+}

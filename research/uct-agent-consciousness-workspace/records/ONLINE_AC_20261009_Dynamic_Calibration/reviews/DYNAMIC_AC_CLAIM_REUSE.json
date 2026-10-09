@@ -1,0 +1,383 @@
+{
+  "schema_version": "1.0",
+  "result_id": "ONLINE-AC-PROBE-20261009",
+  "reviewer": "/root/novelty",
+  "review_date": "2026-10-09",
+  "status": "LOCAL_RESEARCH_CHECKPOINT_PASSED_MANUAL_REVIEW_PENDING_MAP",
+  "reviewed_note": {
+    "path": "NEXT_RESEARCH_PROBE.md",
+    "sha256": "e4cc302bae8b722eb109605dfdebafd2f9d13902e42bb5841ccab04880c16b5c",
+    "observed_current_sha256": "e4cc302bae8b722eb109605dfdebafd2f9d13902e42bb5841ccab04880c16b5c",
+    "read_scope": "Complete reviewed version"
+  },
+  "verification": {
+    "kind": "Independent manual proof and interface review of the same verifier, not a second implementation or new execution",
+    "code": {
+      "path": "next_probe/check_online_calibration.py",
+      "sha256": "bc829ade2c93197c86aed4646ae119628b8b4ebe25181f595dd6b7ee605bd304",
+      "read_scope": "Complete 325-line source"
+    },
+    "result": {
+      "path": "next_probe/EXACT_RESULTS.json",
+      "sha256": "7054e1f31175f799c71e3bd6e21430017f90e557bb3659ef731faa4d4b8aa8a7",
+      "read_scope": "Contract, exact aggregate scores, selected policy and attainment trace fields"
+    }
+  },
+  "publication_count_effect": 0,
+  "core_predecessors": {
+    "UCTIII": {
+      "title": "Unified Consciousness Theory III",
+      "doi": "10.5281/zenodo.23137088",
+      "locator": "Section 6.4, Proposition 6; Sections 7.2-7.3",
+      "path": "sources/fulltext/uct_iii/C_UCT_III_v1_0.md",
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+      "read_scope": "Sections 6.4, 7.2, 7.3 directly read; full-source bytes bound to published receipt"
+    },
+    "RTTH": {
+      "title": "Task-Relative Continuity Through Changing Representations",
+      "doi": "10.5281/zenodo.23251651",
+      "locator": "Sections 5, 8.2, 11",
+      "path": "sources/branches/rt_th_v100/research/rt-th-paper/published/Task_Relative_Continuity_v1.0.0.md",
+      "sha256": "e368150bee05f7501021f826970f358521da685c3eddcd48ff7fbefd69bc7a62",
+      "read_scope": "Complete local published Markdown directly read"
+    },
+    "STATIC_AC": {
+      "title": "Action-Port Calibration and Task-Relative Self-Model Sufficiency",
+      "identifier": "AC-RESULT-v1.0.0",
+      "locator": "Sections 3-6, 8",
+      "path": "sources/pending/AC20261009_Action_Calibration__RESEARCH_CHECKPOINT.md",
+      "sha256": "4277fd417003554ee10d7e1a22e594b7e4094f6335c349d5a047474a9ff8f058",
+      "read_scope": "Complete local checkpoint directly read",
+      "disclosure_status": "Publicly discoverable project predecessor; cited by RT; not treated as republished argument in RT supplement"
+    }
+  },
+  "external_primary_sources": [
+    {
+      "url": "https://www.mathnet.ru/eng/at12624",
+      "title": "Dual control theory. I",
+      "authors": "A. A. Feldbaum",
+      "year": 1960,
+      "read_scope": "Official metadata and English abstract only; Russian full text not read",
+      "role": "Historical dual-control predecessor; not an exact permutation-result attribution"
+    },
+    {
+      "url": "https://arxiv.org/abs/math/0702191",
+      "fulltext_url": "https://arxiv.org/pdf/math/0702191",
+      "doi": "10.48550/arXiv.math/0702191",
+      "title": "Reconstruction of permutations distorted by single transposition errors",
+      "authors": "E. Konstantinova, V. Levenshtein, J. Siemons",
+      "year": 2007,
+      "read_scope": "Abstract and extracted introduction, model, early results; not full theorem-by-theorem review",
+      "role": "Nearby fixed-permutation reconstruction from complete noisy permutations; observation model differs"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "ONLINE_AC:CACHE_CONTROL",
+      "paper_locator": "Section 2, Rejected attempt A",
+      "statement": "A correctly decoded fixed target can simply be cached when persistent target-sized memory and the same future query are allowed.",
+      "conditions": [
+        "A fixed target has already been correctly decoded",
+        "The reader persists and can retain a target-sized register",
+        "Future task only repeats that same target"
+      ],
+      "proof_evidence": [
+        "Direct elementary construction in Section 2"
+      ],
+      "prior_attribution": [
+        "STATIC_AC",
+        "RTTH"
+      ],
+      "reuse_role": "exclusion_control",
+      "formal_disclosure": "New local research checkpoint; no new published deposit or formal supplement is created by this audit",
+      "argument_coverage": "Supporting application, inherited construction, or contract; not asserted as a new general result",
+      "global_priority": "UNVERIFIED",
+      "not_allowed_to_infer": [
+        "Does not solve a current physical action problem under changed wiring",
+        "Does not establish a new memory theory"
+      ],
+      "OPEN": [
+        "External priority for the exact contract has not been exhaustively assessed"
+      ],
+      "review_status": "PASS_MANUAL_PROOF_AND_INTERFACE_REVIEW; PENDING_MAP"
+    },
+    {
+      "claim_id": "ONLINE_AC:CONTRACT",
+      "paper_locator": "Section 3",
+      "statement": "The scored object is each deadline's physical net increment under causal probes and transposition drift.",
+      "conditions": [
+        "n >= 3 unless the n = 3 exact-value specialization is stated",
+        "Fixed command/effect ports and a permutation command-to-effect law on one binary XOR plant",
+        "Before each round identity or one arbitrary output transposition; wiring fixed within that round",
+        "Probe and terminal are arbitrary parallel binary vectors and both physically act on the same plant",
+        "Probe returns the complete effect vector; main branch also returns the terminal effect after terminal action",
+        "Each scored round requires net increment e_g including all probes, with no further correction before the deadline",
+        "All accessible wiring-correlated information is counted; unlimited actual observation history may be retained; randomness independent of drift"
+      ],
+      "proof_evidence": [
+        "Explicit command, feedback, timing, drift and score definitions",
+        "EXACT_RESULTS.json: contract"
+      ],
+      "prior_attribution": [
+        "STATIC_AC",
+        "RTTH"
+      ],
+      "reuse_role": "contract",
+      "formal_disclosure": "New local research checkpoint; no new published deposit or formal supplement is created by this audit",
+      "argument_coverage": "Supporting application, inherited construction, or contract; not asserted as a new general result",
+      "global_priority": "UNVERIFIED",
+      "not_allowed_to_infer": [
+        "No uninterrupted correctness at probe microsteps",
+        "No final-plant-state recovery score",
+        "No biological or phenomenal realization supplied"
+      ],
+      "OPEN": [
+        "External priority for the exact contract has not been exhaustively assessed"
+      ],
+      "review_status": "PASS_MANUAL_PROOF_AND_INTERFACE_REVIEW; PENDING_MAP"
+    },
+    {
+      "claim_id": "ONLINE_AC:ONE_ROUND_REPAIR",
+      "paper_locator": "Section 4, Eq. (3)",
+      "statement": "Complete old wiring permits one-probe exact action after an identity or arbitrary transposition.",
+      "conditions": [
+        "n >= 3 unless the n = 3 exact-value specialization is stated",
+        "Fixed command/effect ports and a permutation command-to-effect law on one binary XOR plant",
+        "Before each round identity or one arbitrary output transposition; wiring fixed within that round",
+        "Probe and terminal are arbitrary parallel binary vectors and both physically act on the same plant",
+        "Probe returns the complete effect vector; main branch also returns the terminal effect after terminal action",
+        "Each scored round requires net increment e_g including all probes, with no further correction before the deadline",
+        "All accessible wiring-correlated information is counted; unlimited actual observation history may be retained; randomness independent of drift",
+        "Complete old wiring is known"
+      ],
+      "proof_evidence": [
+        "Involution identity sigma(sigma(g)) = g",
+        "Algebraic cancellation of probe and terminal commands",
+        "check_online_calibration.py: one_round_search; all six n=3 singleton old families"
+      ],
+      "prior_attribution": [
+        "STATIC_AC"
+      ],
+      "reuse_role": "inherited_construction",
+      "formal_disclosure": "New local research checkpoint; no new published deposit or formal supplement is created by this audit",
+      "argument_coverage": "Supporting application, inherited construction, or contract; not asserted as a new general result",
+      "global_priority": "UNVERIFIED",
+      "not_allowed_to_infer": [
+        "Current success does not identify a non-goal transposition",
+        "This is not itself the claimed novel theorem"
+      ],
+      "OPEN": [
+        "External priority for the exact contract has not been exhaustively assessed"
+      ],
+      "review_status": "PASS_MANUAL_PROOF_AND_INTERFACE_REVIEW; PENDING_MAP"
+    },
+    {
+      "claim_id": "ONLINE_AC:OLD_WIRING_INJECTIVITY",
+      "paper_locator": "Section 5, Eqs. (4)-(5)",
+      "statement": "For any admitted old-wiring family H subset S_n, guaranteed one-probe action requires retained accessible state injective on H; minimum |H|, hence n! for H=S_n.",
+      "conditions": [
+        "n >= 3 unless the n = 3 exact-value specialization is stated",
+        "Fixed command/effect ports and a permutation command-to-effect law on one binary XOR plant",
+        "Before each round identity or one arbitrary output transposition; wiring fixed within that round",
+        "Probe and terminal are arbitrary parallel binary vectors and both physically act on the same plant",
+        "Probe returns the complete effect vector; main branch also returns the terminal effect after terminal action",
+        "Each scored round requires net increment e_g including all probes, with no further correction before the deadline",
+        "All accessible wiring-correlated information is counted; unlimited actual observation history may be retained; randomness independent of drift",
+        "Zero error for every old wiring in H and every allowed fresh drift",
+        "The old-wiring-to-retained-state relation includes every available correlated hardware, record, and plant-state channel"
+      ],
+      "proof_evidence": [
+        "Goal must be isolated in its binary probe bit class",
+        "A common target-to-h drift forces every inverse(h) to agree in a retained-state cell",
+        "Complete old wiring supplies attainment",
+        "check_online_calibration.py: one_round_search for six singleton and 15 pair old families; n=2 exception"
+      ],
+      "prior_attribution": [
+        "STATIC_AC",
+        "UCTIII"
+      ],
+      "reuse_role": "specific_candidate_increment",
+      "formal_disclosure": "New local research checkpoint; no new published deposit or formal supplement is created by this audit",
+      "argument_coverage": "Exact specified statement not found in the inspected core predecessors",
+      "global_priority": "UNVERIFIED",
+      "not_allowed_to_infer": [
+        "Publicly known identity has |H|=1 and no n! burden",
+        "Not an arbitrary-prior average-error formula",
+        "Not a lower bound for a smaller drift family",
+        "n=2 is excluded; a fixed nonconstant probe identifies current two-port wiring"
+      ],
+      "OPEN": [
+        "Exact result priority unverified",
+        "Memory-error and restricted-drift variants are not solved"
+      ],
+      "review_status": "PASS_MANUAL_PROOF_AND_INTERFACE_REVIEW; PENDING_MAP"
+    },
+    {
+      "claim_id": "ONLINE_AC:TWO_ROUND_OBSTRUCTION",
+      "paper_locator": "Section 6, Eq. (6)",
+      "statement": "No one-probe-per-round controller can guarantee both first deadlines from a completely known initial wiring for n>=3, even with full terminal feedback and all returned history.",
+      "conditions": [
+        "n >= 3 unless the n = 3 exact-value specialization is stated",
+        "Fixed command/effect ports and a permutation command-to-effect law on one binary XOR plant",
+        "Before each round identity or one arbitrary output transposition; wiring fixed within that round",
+        "Probe and terminal are arbitrary parallel binary vectors and both physically act on the same plant",
+        "Probe returns the complete effect vector; main branch also returns the terminal effect after terminal action",
+        "Each scored round requires net increment e_g including all probes, with no further correction before the deadline",
+        "All accessible wiring-correlated information is counted; unlimited actual observation history may be retained; randomness independent of drift",
+        "Initially known wiring",
+        "At least two non-goal effect ports exist"
+      ],
+      "proof_evidence": [
+        "A first-round successful probe cannot distinguish identity from a non-goal swap",
+        "Successful terminal effect equals probe effect XOR goal and therefore adds no distinguishing information",
+        "The same plant end state and same returned history leave two old wirings for round two",
+        "Apply OLD_WIRING_INJECTIVITY"
+      ],
+      "prior_attribution": [
+        "STATIC_AC",
+        "UCTIII",
+        "RTTH"
+      ],
+      "reuse_role": "specific_candidate_increment",
+      "formal_disclosure": "New local research checkpoint; no new published deposit or formal supplement is created by this audit",
+      "argument_coverage": "Exact specified statement not found in the inspected core predecessors",
+      "global_priority": "UNVERIFIED",
+      "not_allowed_to_infer": [
+        "The general need for transition-closed information is already covered by UCT III Section 6.4",
+        "Does not show memory content or experience disappears",
+        "Extra unknown physical disturbances outside the model are not covered"
+      ],
+      "OPEN": [
+        "External priority for the exact contract has not been exhaustively assessed"
+      ],
+      "review_status": "PASS_MANUAL_PROOF_AND_INTERFACE_REVIEW; PENDING_MAP"
+    },
+    {
+      "claim_id": "ONLINE_AC:TWO_ROUND_VALUE",
+      "paper_locator": "Section 7, Eq. (7)",
+      "statement": "For n=3, identity initial wiring and uniform independent identity/single-transposition changes, maximal probability both round deadlines succeed is exactly 7/8.",
+      "conditions": [
+        "n >= 3 unless the n = 3 exact-value specialization is stated",
+        "Fixed command/effect ports and a permutation command-to-effect law on one binary XOR plant",
+        "Before each round identity or one arbitrary output transposition; wiring fixed within that round",
+        "Probe and terminal are arbitrary parallel binary vectors and both physically act on the same plant",
+        "Probe returns the complete effect vector; main branch also returns the terminal effect after terminal action",
+        "Each scored round requires net increment e_g including all probes, with no further correction before the deadline",
+        "All accessible wiring-correlated information is counted; unlimited actual observation history may be retained; randomness independent of drift",
+        "n=3, goal port 0, initial identity",
+        "The two drift draws are independent uniform over four choices, equivalently 16 equally weighted fixed sequences",
+        "Score is conjunction of both round increment successes"
+      ],
+      "proof_evidence": [
+        "First-round failure implies joint score <=3/4",
+        "Every first-perfect policy has a 1/2 known-wiring branch and a 1/2 two-old-wiring branch",
+        "Six-current-permutation conditional table gives exact one-probe score 3/4 in the ambiguous branch",
+        "check_online_calibration.py: optimize_two_rounds; exhaustive first terminal policies and observable-history dynamic programming",
+        "EXACT_RESULTS.json: two_round_policy_search, main feedback/all_prefixes, 14 successful fixed sequences of 16"
+      ],
+      "prior_attribution": [
+        "UCTIII",
+        "RTTH",
+        "STATIC_AC"
+      ],
+      "reuse_role": "specific_candidate_increment",
+      "formal_disclosure": "New local research checkpoint; no new published deposit or formal supplement is created by this audit",
+      "argument_coverage": "Exact specified statement not found in the inspected core predecessors",
+      "global_priority": "UNVERIFIED",
+      "not_allowed_to_infer": [
+        "Not per-sequence success 7/8",
+        "Not a per-round error rate",
+        "Not a minimax randomized value",
+        "Not a final-plant-state or endpoint memory score",
+        "Does not apply to an arbitrary prior or uniformly sampled S3 each round"
+      ],
+      "OPEN": [
+        "Exact-result external priority unverified",
+        "Larger-n or longer-horizon exact average values remain unsolved"
+      ],
+      "review_status": "PASS_MANUAL_PROOF_AND_INTERFACE_REVIEW; PENDING_MAP"
+    },
+    {
+      "claim_id": "ONLINE_AC:TWO_PROBE_REPAIR",
+      "paper_locator": "Section 8, Eq. (8)",
+      "statement": "For n=3 two identifying probes each round and one compensating terminal vector guarantee every finite deadline sequence; complete binary signatures give a general ceil(log2 n) upper bound.",
+      "conditions": [
+        "n >= 3 unless the n = 3 exact-value specialization is stated",
+        "Fixed command/effect ports and a permutation command-to-effect law on one binary XOR plant",
+        "Before each round identity or one arbitrary output transposition; wiring fixed within that round",
+        "Probe and terminal are arbitrary parallel binary vectors and both physically act on the same plant",
+        "Probe returns the complete effect vector; main branch also returns the terminal effect after terminal action",
+        "Each scored round requires net increment e_g including all probes, with no further correction before the deadline",
+        "All accessible wiring-correlated information is counted; unlimited actual observation history may be retained; randomness independent of drift",
+        "Two probes permitted before the same terminal deadline for n=3",
+        "General bound uses ceil(log2 n) probes for complete reidentification"
+      ],
+      "proof_evidence": [
+        "Static AC binary-signature identification",
+        "Per-round XOR algebra includes both probe effects",
+        "check_online_calibration.py: two_probe_indefinite_construction verifies all16 two-round sequences; arbitrary-horizon extension is algebraic"
+      ],
+      "prior_attribution": [
+        "STATIC_AC"
+      ],
+      "reuse_role": "inherited_positive_control",
+      "formal_disclosure": "New local research checkpoint; no new published deposit or formal supplement is created by this audit",
+      "argument_coverage": "Supporting application, inherited construction, or contract; not asserted as a new general result",
+      "global_priority": "UNVERIFIED",
+      "not_allowed_to_infer": [
+        "Does not prove complete reidentification is necessary for maintaining one fixed goal at larger n",
+        "No within-round drift",
+        "The two-round verifier alone is not evidence for every horizon"
+      ],
+      "OPEN": [
+        "For n>=5, whether two or another sub-identification probe budget suffices indefinitely is unresolved"
+      ],
+      "review_status": "PASS_MANUAL_PROOF_AND_INTERFACE_REVIEW; PENDING_MAP"
+    },
+    {
+      "claim_id": "ONLINE_AC:FEEDBACK_AND_OBJECTIVE_CONTROL",
+      "paper_locator": "Section 8",
+      "statement": "With full first terminal feedback and no first-round success requirement, the second round's increment-only optimum is one; all-prefix optimum remains 7/8.",
+      "conditions": [
+        "n >= 3 unless the n = 3 exact-value specialization is stated",
+        "Fixed command/effect ports and a permutation command-to-effect law on one binary XOR plant",
+        "Before each round identity or one arbitrary output transposition; wiring fixed within that round",
+        "Probe and terminal are arbitrary parallel binary vectors and both physically act on the same plant",
+        "Probe returns the complete effect vector; main branch also returns the terminal effect after terminal action",
+        "Each scored round requires net increment e_g including all probes, with no further correction before the deadline",
+        "All accessible wiring-correlated information is counted; unlimited actual observation history may be retained; randomness independent of drift",
+        "n=3 and the same16-sequence prior",
+        "Alternate objective scores only state_end_2 XOR state_start_2 = e0"
+      ],
+      "proof_evidence": [
+        "First probe and first terminal can jointly identify first wiring if first deadline is not scored",
+        "Apply ONE_ROUND_REPAIR in round two",
+        "EXACT_RESULTS.json: both objective variants and full/withheld feedback branches"
+      ],
+      "prior_attribution": [
+        "STATIC_AC",
+        "RTTH"
+      ],
+      "reuse_role": "benchmark_control",
+      "formal_disclosure": "New local research checkpoint; no new published deposit or formal supplement is created by this audit",
+      "argument_coverage": "Supporting application, inherited construction, or contract; not asserted as a new general result",
+      "global_priority": "UNVERIFIED",
+      "not_allowed_to_infer": [
+        "A first-round error may remain in the actual final plant state",
+        "Cannot label the alternate score terminal-memory recovery",
+        "Withheld-feedback branch is a separate observation interface"
+      ],
+      "OPEN": [
+        "No claim about other feedback alphabets or deadline objectives"
+      ],
+      "review_status": "PASS_MANUAL_PROOF_AND_INTERFACE_REVIEW; PENDING_MAP"
+    }
+  ],
+  "review_actions": [
+    "Requested explicit UCT III Section6.4 Proposition6 attribution in the research note",
+    "Retained all exact-contract restrictions and last_round_increment_only naming",
+    "No frozen paper, code, result receipt, map module, DOI, OTS or external application modified"
+  ],
+  "global_priority": "UNVERIFIED",
+  "paper_judgment": "Coherent potentially citable dynamic AC extension; compactness does not negate value. No broad new foundational claim or standalone-paper sufficiency is established by this review."
+}

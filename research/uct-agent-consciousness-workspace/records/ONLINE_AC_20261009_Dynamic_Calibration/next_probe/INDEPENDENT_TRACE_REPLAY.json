@@ -1,0 +1,754 @@
+{
+  "ambiguous_family_response_cell_check": {
+    "current_wiring_world_counts": [
+      {
+        "wiring": [
+          0,
+          1,
+          2
+        ],
+        "worlds": 2
+      },
+      {
+        "wiring": [
+          0,
+          2,
+          1
+        ],
+        "worlds": 2
+      },
+      {
+        "wiring": [
+          1,
+          0,
+          2
+        ],
+        "worlds": 1
+      },
+      {
+        "wiring": [
+          1,
+          2,
+          0
+        ],
+        "worlds": 1
+      },
+      {
+        "wiring": [
+          2,
+          0,
+          1
+        ],
+        "worlds": 1
+      },
+      {
+        "wiring": [
+          2,
+          1,
+          0
+        ],
+        "worlds": 1
+      }
+    ],
+    "old_wirings": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        2,
+        1
+      ]
+    ],
+    "optimization": "Each returned-effect cell chooses one common terminal action among all eight commands; disjoint cells optimize independently.",
+    "plant_initial_state": 5,
+    "prior": "Uniform over two old wirings times four legal next drifts; eight labeled worlds.",
+    "probe_results": [
+      {
+        "correct_worlds": 4,
+        "optimal_success": "1/2",
+        "probe": 0,
+        "response_cells": [
+          {
+            "best_correct_worlds": 4,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              4,
+              2,
+              0,
+              2,
+              0,
+              0,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              1
+            ],
+            "probe_effect": 0,
+            "worlds": 8
+          }
+        ],
+        "total_worlds": 8
+      },
+      {
+        "correct_worlds": 6,
+        "optimal_success": "3/4",
+        "probe": 1,
+        "response_cells": [
+          {
+            "best_correct_worlds": 4,
+            "correct_worlds_by_terminal_0_through_7": [
+              4,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              0
+            ],
+            "probe_effect": 1,
+            "worlds": 4
+          },
+          {
+            "best_correct_worlds": 1,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              3,
+              5
+            ],
+            "probe_effect": 2,
+            "worlds": 2
+          },
+          {
+            "best_correct_worlds": 1,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              3,
+              5
+            ],
+            "probe_effect": 4,
+            "worlds": 2
+          }
+        ],
+        "total_worlds": 8
+      },
+      {
+        "correct_worlds": 6,
+        "optimal_success": "3/4",
+        "probe": 2,
+        "response_cells": [
+          {
+            "best_correct_worlds": 2,
+            "correct_worlds_by_terminal_0_through_7": [
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              0
+            ],
+            "probe_effect": 1,
+            "worlds": 2
+          },
+          {
+            "best_correct_worlds": 2,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              1,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              3
+            ],
+            "probe_effect": 2,
+            "worlds": 3
+          },
+          {
+            "best_correct_worlds": 2,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              1,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              3
+            ],
+            "probe_effect": 4,
+            "worlds": 3
+          }
+        ],
+        "total_worlds": 8
+      },
+      {
+        "correct_worlds": 6,
+        "optimal_success": "3/4",
+        "probe": 3,
+        "response_cells": [
+          {
+            "best_correct_worlds": 2,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              2
+            ],
+            "probe_effect": 3,
+            "worlds": 3
+          },
+          {
+            "best_correct_worlds": 2,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              2
+            ],
+            "probe_effect": 5,
+            "worlds": 3
+          },
+          {
+            "best_correct_worlds": 2,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2
+            ],
+            "maximizing_terminal_actions": [
+              7
+            ],
+            "probe_effect": 6,
+            "worlds": 2
+          }
+        ],
+        "total_worlds": 8
+      },
+      {
+        "correct_worlds": 6,
+        "optimal_success": "3/4",
+        "probe": 4,
+        "response_cells": [
+          {
+            "best_correct_worlds": 2,
+            "correct_worlds_by_terminal_0_through_7": [
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              0
+            ],
+            "probe_effect": 1,
+            "worlds": 2
+          },
+          {
+            "best_correct_worlds": 2,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              1,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              5
+            ],
+            "probe_effect": 2,
+            "worlds": 3
+          },
+          {
+            "best_correct_worlds": 2,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              1,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              5
+            ],
+            "probe_effect": 4,
+            "worlds": 3
+          }
+        ],
+        "total_worlds": 8
+      },
+      {
+        "correct_worlds": 6,
+        "optimal_success": "3/4",
+        "probe": 5,
+        "response_cells": [
+          {
+            "best_correct_worlds": 2,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              1,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              4
+            ],
+            "probe_effect": 3,
+            "worlds": 3
+          },
+          {
+            "best_correct_worlds": 2,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              1,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              4
+            ],
+            "probe_effect": 5,
+            "worlds": 3
+          },
+          {
+            "best_correct_worlds": 2,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2
+            ],
+            "maximizing_terminal_actions": [
+              7
+            ],
+            "probe_effect": 6,
+            "worlds": 2
+          }
+        ],
+        "total_worlds": 8
+      },
+      {
+        "correct_worlds": 6,
+        "optimal_success": "3/4",
+        "probe": 6,
+        "response_cells": [
+          {
+            "best_correct_worlds": 1,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              2,
+              4
+            ],
+            "probe_effect": 3,
+            "worlds": 2
+          },
+          {
+            "best_correct_worlds": 1,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              2,
+              4
+            ],
+            "probe_effect": 5,
+            "worlds": 2
+          },
+          {
+            "best_correct_worlds": 4,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4
+            ],
+            "maximizing_terminal_actions": [
+              7
+            ],
+            "probe_effect": 6,
+            "worlds": 4
+          }
+        ],
+        "total_worlds": 8
+      },
+      {
+        "correct_worlds": 4,
+        "optimal_success": "1/2",
+        "probe": 7,
+        "response_cells": [
+          {
+            "best_correct_worlds": 4,
+            "correct_worlds_by_terminal_0_through_7": [
+              0,
+              0,
+              0,
+              2,
+              0,
+              2,
+              4,
+              0
+            ],
+            "maximizing_terminal_actions": [
+              6
+            ],
+            "probe_effect": 7,
+            "worlds": 8
+          }
+        ],
+        "total_worlds": 8
+      }
+    ],
+    "scoring": "final plant XOR initial plant equals 1 after both physical commands",
+    "status": "PASS",
+    "terminal_candidate_world_tests": 512
+  },
+  "assertions_passed": 2899,
+  "check_id": "ONLINE-AC-INDEPENDENT-TRACE-REPLAY-20261009",
+  "independence": "Fresh coordinate-wise simulator and observable controller; original search code was not imported or executed.",
+  "independent_check_script_sha256": "f5a522fc26797e3dfecc62cdcc19c94d07e11ccdd4b0985ad181ec7a58b3214b",
+  "limits": [
+    "No independent enumeration of all 3088 first-round policies.",
+    "No general n theorem, prior-art, whole-map, or premise-realization review.",
+    "Receipt agreement is not a new claim of global optimality; only the ambiguous one-round response-cell subproblem is independently optimized."
+  ],
+  "policy_replays": [
+    {
+      "all_prefix_successes": 14,
+      "attained_fraction": "7/8",
+      "canonical_replayed_trace_sha256": "02c88364a69132eee7bb46a4652c9d2d718736b492700a9e38ab003e05e4ebfe",
+      "canonical_saved_trace_sha256": "02c88364a69132eee7bb46a4652c9d2d718736b492700a9e38ab003e05e4ebfe",
+      "correct_sequences": 14,
+      "distinct_observable_action_rows": {
+        "first_probe": 1,
+        "first_terminal": 3,
+        "second_probe": 3,
+        "second_terminal": 9
+      },
+      "final_state_equals_initial": 14,
+      "first_history_world_counts": [
+        {
+          "history": [
+            1
+          ],
+          "worlds": 8
+        },
+        {
+          "history": [
+            2
+          ],
+          "worlds": 4
+        },
+        {
+          "history": [
+            4
+          ],
+          "worlds": 4
+        }
+      ],
+      "first_round_successes": 16,
+      "objective": "all_prefixes",
+      "paths_replayed": 16,
+      "scope": "Verifies attainment and serialization; does not independently establish global two-round optimality.",
+      "scored_failure_paths": [
+        {
+          "drift_path": [
+            "I",
+            "s02"
+          ],
+          "end_state_1": 1,
+          "end_state_2": 3
+        },
+        {
+          "drift_path": [
+            "s12",
+            "s01"
+          ],
+          "end_state_1": 1,
+          "end_state_2": 5
+        }
+      ],
+      "second_round_increment_successes": 14,
+      "status": "PASS",
+      "terminal_feedback": false,
+      "trace_fields_compared": 272
+    },
+    {
+      "all_prefix_successes": 6,
+      "attained_fraction": "7/8",
+      "canonical_replayed_trace_sha256": "3b82eb869027e4f10b1b7e78eee0c748589642b198465ec1390d1c6e44b97730",
+      "canonical_saved_trace_sha256": "3b82eb869027e4f10b1b7e78eee0c748589642b198465ec1390d1c6e44b97730",
+      "correct_sequences": 14,
+      "distinct_observable_action_rows": {
+        "first_probe": 1,
+        "first_terminal": 3,
+        "second_probe": 3,
+        "second_terminal": 9
+      },
+      "final_state_equals_initial": 6,
+      "first_history_world_counts": [
+        {
+          "history": [
+            1
+          ],
+          "worlds": 8
+        },
+        {
+          "history": [
+            2
+          ],
+          "worlds": 4
+        },
+        {
+          "history": [
+            4
+          ],
+          "worlds": 4
+        }
+      ],
+      "first_round_successes": 8,
+      "objective": "last_round_increment_only",
+      "paths_replayed": 16,
+      "scope": "Verifies attainment and serialization; does not independently establish global two-round optimality.",
+      "scored_failure_paths": [
+        {
+          "drift_path": [
+            "I",
+            "s02"
+          ],
+          "end_state_1": 1,
+          "end_state_2": 3
+        },
+        {
+          "drift_path": [
+            "s12",
+            "s01"
+          ],
+          "end_state_1": 1,
+          "end_state_2": 5
+        }
+      ],
+      "second_round_increment_successes": 14,
+      "status": "PASS",
+      "terminal_feedback": false,
+      "trace_fields_compared": 272
+    },
+    {
+      "all_prefix_successes": 14,
+      "attained_fraction": "7/8",
+      "canonical_replayed_trace_sha256": "02c88364a69132eee7bb46a4652c9d2d718736b492700a9e38ab003e05e4ebfe",
+      "canonical_saved_trace_sha256": "02c88364a69132eee7bb46a4652c9d2d718736b492700a9e38ab003e05e4ebfe",
+      "correct_sequences": 14,
+      "distinct_observable_action_rows": {
+        "first_probe": 1,
+        "first_terminal": 3,
+        "second_probe": 3,
+        "second_terminal": 9
+      },
+      "final_state_equals_initial": 14,
+      "first_history_world_counts": [
+        {
+          "history": [
+            1,
+            0
+          ],
+          "worlds": 8
+        },
+        {
+          "history": [
+            2,
+            3
+          ],
+          "worlds": 4
+        },
+        {
+          "history": [
+            4,
+            5
+          ],
+          "worlds": 4
+        }
+      ],
+      "first_round_successes": 16,
+      "objective": "all_prefixes",
+      "paths_replayed": 16,
+      "scope": "Verifies attainment and serialization; does not independently establish global two-round optimality.",
+      "scored_failure_paths": [
+        {
+          "drift_path": [
+            "I",
+            "s02"
+          ],
+          "end_state_1": 1,
+          "end_state_2": 3
+        },
+        {
+          "drift_path": [
+            "s12",
+            "s01"
+          ],
+          "end_state_1": 1,
+          "end_state_2": 5
+        }
+      ],
+      "second_round_increment_successes": 14,
+      "status": "PASS",
+      "terminal_feedback": true,
+      "trace_fields_compared": 272
+    },
+    {
+      "all_prefix_successes": 0,
+      "attained_fraction": "1",
+      "canonical_replayed_trace_sha256": "941446308ec723189f9a4c56b1aba0123d615c2ec55ccf8cfde8c5ff522d9c51",
+      "canonical_saved_trace_sha256": "941446308ec723189f9a4c56b1aba0123d615c2ec55ccf8cfde8c5ff522d9c51",
+      "correct_sequences": 16,
+      "distinct_observable_action_rows": {
+        "first_probe": 1,
+        "first_terminal": 3,
+        "second_probe": 4,
+        "second_terminal": 12
+      },
+      "final_state_equals_initial": 0,
+      "first_history_world_counts": [
+        {
+          "history": [
+            1,
+            2
+          ],
+          "worlds": 4
+        },
+        {
+          "history": [
+            1,
+            4
+          ],
+          "worlds": 4
+        },
+        {
+          "history": [
+            2,
+            0
+          ],
+          "worlds": 4
+        },
+        {
+          "history": [
+            4,
+            0
+          ],
+          "worlds": 4
+        }
+      ],
+      "first_round_successes": 0,
+      "objective": "last_round_increment_only",
+      "paths_replayed": 16,
+      "scope": "Verifies attainment and serialization; does not independently establish global two-round optimality.",
+      "scored_failure_paths": [],
+      "second_round_increment_successes": 16,
+      "status": "PASS",
+      "terminal_feedback": true,
+      "trace_fields_compared": 272
+    }
+  ],
+  "source_receipt_sha256": "7054e1f31175f799c71e3bd6e21430017f90e557bb3659ef731faa4d4b8aa8a7",
+  "source_search_code_sha256_verified_without_execution": "bc829ade2c93197c86aed4646ae119628b8b4ebe25181f595dd6b7ee605bd304",
+  "status": "SCOPED_RECEIPT_CHECK_PASS",
+  "trace_fields_compared": 1088,
+  "traces_replayed": 64
+}

@@ -1,0 +1,210 @@
+{
+  "schema": "uct-publication-inventory-validation/1.0",
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "frozen_graph_digest",
+      "pass": true
+    },
+    {
+      "check": "frozen_ledger_digest",
+      "pass": true
+    },
+    {
+      "check": "all_1608_unique",
+      "pass": true
+    },
+    {
+      "check": "all_1598_canonical_objects",
+      "pass": true
+    },
+    {
+      "check": "exact_reviewed_id_inventory",
+      "pass": true
+    },
+    {
+      "check": "family67_and_913",
+      "pass": true
+    },
+    {
+      "check": "424_conclusion_routes",
+      "pass": true
+    },
+    {
+      "check": "rules_not_extra_claims",
+      "pass": true
+    },
+    {
+      "check": "contexts_nondeductive_notclaims",
+      "pass": true
+    },
+    {
+      "check": "suspended10_never_reactivated",
+      "pass": true
+    },
+    {
+      "check": "attachment_1266_exact",
+      "pass": true
+    },
+    {
+      "check": "attachment_1329_IDs",
+      "pass": true
+    },
+    {
+      "check": "279_without_matched_attachment_ID",
+      "pass": true
+    },
+    {
+      "check": "no_unpublished_by_date_status",
+      "pass": true
+    },
+    {
+      "check": "workspace_records_all1643",
+      "pass": true
+    },
+    {
+      "check": "unique_records_files",
+      "pass": true
+    },
+    {
+      "check": "separate_parallel_rounds",
+      "pass": true
+    },
+    {
+      "check": "AC_stays_pending_45",
+      "pass": true
+    },
+    {
+      "check": "IL_stays_pending_46",
+      "pass": true
+    },
+    {
+      "check": "TH_published_extra2",
+      "pass": true
+    },
+    {
+      "check": "RT_published_outside56",
+      "pass": true
+    },
+    {
+      "check": "METHOD_published_outside48",
+      "pass": true
+    },
+    {
+      "check": "early_namespace_51_unique",
+      "pass": true
+    },
+    {
+      "check": "all_materialized_source_hashes",
+      "pass": true
+    },
+    {
+      "check": "standalone_report_exists",
+      "pass": true
+    }
+  ],
+  "failed_checks": [],
+  "files": [
+    {
+      "path": "/workspace/scratch/328b6dbb55c2/publication_audit_work/map_result_inventory.json",
+      "sha256": "420bd6aab7717a46809765768c8510fcf73544fbfa48aa95633955d5a6243587",
+      "bytes": 4474691
+    },
+    {
+      "path": "/workspace/scratch/328b6dbb55c2/publication_audit_work/MAP_RESULT_INVENTORY.md",
+      "sha256": "f6c43112587d51db4bd0752f05ddf40f07b90b268ee6fecda1d4783b3c1e3541",
+      "bytes": 27367
+    },
+    {
+      "path": "/workspace/scratch/328b6dbb55c2/publication_audit_work/early_result_family_inventory.json",
+      "sha256": "2f29da3cfd28d5a5fa4a18734d0e85c486914b910b7b19dd0ed53d5b6eb061c8",
+      "bytes": 57763
+    }
+  ],
+  "unknown_claim_ids": [
+    "RB20261009:BOUND",
+    "RB20261009:TIGHT",
+    "RB20261009:INVERSE",
+    "RB20261009:NONUNIFORM",
+    "RB20261009:UNIFORM_RESIDUAL",
+    "RB20261009:DEADLINE_BOUND",
+    "RB20261009:KEY_CURVE",
+    "RB20261009:DELAY_WITNESS",
+    "RB20261009:APPROX_BOUND",
+    "RB20261009:PRIOR_LIPSCHITZ",
+    "RB20261009:WRONG_READER",
+    "RB20261009:TIMING_CONTROL",
+    "RB20261009:TARGET_CONTROL",
+    "OL20261009:PROJECTION",
+    "OL20261009:ZERO",
+    "OL20261009:SPARSE_IFF",
+    "OL20261009:NOISE_SEPARATION",
+    "OL20261009:COVARIANCE",
+    "OL20261009:TWIN_MODEL",
+    "OL20261009:RESET_NONISO",
+    "OL20261009:PREPARED",
+    "OL20261009:HORIZON_EFFECT",
+    "OL20261009:OPTIMAL_WRITE",
+    "OL20261009:UNOBSERVABLE_CONTROL",
+    "OL20261009:FALSE_GAUGE_CONTROL",
+    "OL20261009:C1_APPLICATION",
+    "OL20261009:LOCAL_NO_ERASURE",
+    "R185:SHARED_MEMBERSHIP",
+    "R185:COPIED_COUNTERMODEL",
+    "R185:SYNCHRONIZER_BOUNDARY",
+    "R185:EXPERIENTIAL_COUNTERPART",
+    "R185:CROSS_TOKEN_IDENTITY_LIMIT",
+    "HOM:SHORT_EQ",
+    "HOM:DEEP_WITNESS",
+    "HOM:BOUNDARY",
+    "UI20261009:COMMUTATION",
+    "UI20261009:OBSTRUCTION",
+    "UI20261009:BIT_WITNESS",
+    "UI20261009:RECODING",
+    "UI20261009:PRED_BOUND",
+    "UI20261009:KERNEL_BOUND",
+    "UI20261009:NOISE_RESULT",
+    "UI20261009:FUTURE_QUOTIENT",
+    "UI20261009:FINITE_WITNESS",
+    "UI20261009:DELAY_WITNESS",
+    "UI20261009:LIMITS",
+    "UI20261009:TYPE_TRANSFER",
+    "UI20261009:PERSISTENCE",
+    "CM20261009:IDENTIFICATION",
+    "CM20261009:CHANNEL_BOUND",
+    "CM20261009:SUMDIFF",
+    "CM20261009:MINIMAX_RADIUS",
+    "CM20261009:CAUSAL_MASK",
+    "CM20261009:BUDGET_GUARD",
+    "CM20261009:ROBUST_RECONSTRUCTION",
+    "CM20261009:PROBE_IDENTIFICATION",
+    "CM20261009:PROBE_COUNTERCONTROL",
+    "CM20261009:TYPE_CONSEQUENCE",
+    "CM20261009:NONERASURE",
+    "R187:DIAGONAL_WITNESS",
+    "R187:DURATION_LIMIT",
+    "R187:SELECTIVE_WITNESS",
+    "R187:SYNC_ERASURE",
+    "R187:EDGE_MIMIC",
+    "R187:MULTIBIT_SINGLE",
+    "R187:RANK_LIMIT",
+    "R187:NOISE_SEPARATION",
+    "R187:TV_SHARP",
+    "R187:APPROX_COUPLING",
+    "R187:SUBJECT_COUNT_LIMIT",
+    "R187:UCT_APPLICATION",
+    "R188:RESPONSE_WORD",
+    "R188:EXACT_SCORE",
+    "R188:COINS",
+    "R188:MATCHED_SUMMARIES",
+    "R188:GAP",
+    "R188:FEEDBACK_REPAIR",
+    "R188:LATE_FEEDBACK",
+    "R188:COMPLETE_FAMILY",
+    "R188:EXECUTED_CHECKS",
+    "R188:PROCESS_REFERENCE",
+    "R188:UCT_TYPE",
+    "R188:ONE_SHOT"
+  ],
+  "scope": "Structural completeness, source hashes and all stable-ID disclosure comparison checked. Does not claim new theorem validation, complete body semantic coverage, historical priority or actual-instance discharge."
+}

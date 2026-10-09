@@ -1,0 +1,50 @@
+{
+  "coverage_version": "UCT-PUB-v1.0.0",
+  "id": "PUB20261009-DECISION-3",
+  "purpose": "Original, inspectable, reusable knowledge serving the UCT program and future AI citation; not paper count or venue status.",
+  "r188": "HOLD_STANDALONE_PRESERVE_TECHNICAL_SUPPLEMENT_CANDIDATE",
+  "supersedes_readiness_only": "Frozen CER-RESULT-v0.1.0 section 9.3 broad-manuscript readiness judgment. All original mathematical text and evidence remain unchanged.",
+  "remaining_increment": "Source-access restricted weighted finite-error recovery and matched benchmark; later intervention/compensation/occurrence/calibration applications and empirical negative-mapping records need exact predecessor-aware assessment.",
+  "combined_paper": "NOT_YET_JUSTIFIED_BY_SIMPLY_GROUPING_SEPARATE_MODELS",
+  "new_probe": "ONLINE-AC-RESULT-v0.2.0: exact n5 two-probe sustained control with closed partial beliefs; matched full-identification budget3; one-probe obstruction and n3 value7/8.",
+  "assessment_paths": [
+    "records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md",
+    "records/PUB20261009_Publication_Coverage/PENDING_RESULTS_ASSESSMENT.md",
+    "records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md",
+    "records/PUB20261009_Publication_Coverage/POST_PROBE_REASSESSMENT.md",
+    "publication/UCT-PUB-v1.0.0/DYNAMIC_RESULT_COVERAGE.json"
+  ],
+  "actual_application_and_named_experience": "OPEN",
+  "worldwide_priority": "UNVERIFIED",
+  "publication_action": "NO_NEW_DOI_OTS_ARWEAVE_ACTION",
+  "decision_sequence": [
+    {
+      "id": 1,
+      "object": "R188 broad standalone manuscript",
+      "decision": "HOLD_TECHNICAL_SUPPLEMENT_CANDIDATE"
+    },
+    {
+      "id": 2,
+      "object": "ONLINE-AC-RESULT-v0.1.0",
+      "decision": "PRESERVE_USEFUL_FINITE_RESULT_CONTINUE_AT_N5"
+    },
+    {
+      "id": 3,
+      "object": "ONLINE-AC-RESULT-v0.2.0",
+      "decision": "COMPLETE_FOCUSED_TECHNICAL_WORKING_PAPER"
+    }
+  ],
+  "new_paper": {
+    "version": "ONLINE-AC-PAPER-v0.1.0",
+    "title": "Correct Control without Complete Recalibration: Exact bounds and a two-probe five-port controller under transposition drift",
+    "decision": "COMPLETE_SCOPED_WORKING_MANUSCRIPT",
+    "path": "records/ONLINE_AC_20261009_Dynamic_Calibration/PAPER.md",
+    "pdf": "records/ONLINE_AC_20261009_Dynamic_Calibration/Correct_Control_Without_Complete_Recalibration_v0.1.0.pdf",
+    "publication_status": "NOT_FORMALLY_PUBLISHED",
+    "new_publication_count": 0,
+    "local_scientific_review": "PASS_PROOF_PROTOCOL_WITNESS_AND_FINAL_MANUSCRIPT",
+    "map_status": "PENDING_MAP",
+    "formal_release_next_requirement": "Complete applicable whole-map semantic integration and affected downstream rederivations; preserve prior attribution and obtain actual publication evidence when an authorized release occurs.",
+    "global_priority": "UNVERIFIED"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "status": "PASS_RENDER_AND_CONTENT_QA",
+  "pdf_sha256": "6cfae9bd04e761509c1815c1c544f68349f926e9bfb09b06f0e1c26c5587d54a",
+  "manuscript_sha256": "713c99e59d2abf6278a2f036dbb49514fafd89ee7f781be8bf5bc91bf1827b65",
+  "pages": 11,
+  "visual_scope": "All11 pages inspected in two contact sheets; canonical-table page6 and claim-table page9 additionally inspected at full rendered resolution.",
+  "findings": "No clipped text, overlapping table cells, missing math glyphs, empty pages or broken section transitions observed.",
+  "content_checks": "All pages contain substantive text; theorem4, proposition5, both canonical tables, key exact values and references present after normalizing extraction whitespace.",
+  "initial_check_correction": "A strict literal Table B. extraction assertion failed because the extractor inserts spacing in the caption; rendered caption verified and whitespace-normalized check passes. PDF unchanged.",
+  "render_command": "pdftoppm -r 100 -png <paper.pdf> pdf_qa/page",
+  "scientific_review": "Separate independent review bound to manuscript713c99e5; PDF QA is layout/content verification only."
+}
