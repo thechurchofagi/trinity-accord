@@ -1,0 +1,13 @@
+# R197 Round Record — Fallible Endpoint Orientation
+
+Date: 2026-10-10 (Asia/Shanghai)
+
+1. **User goal.** Continue the UCT experience–intelligence–self program with a substantive, nonduplicative advance, guided by thought experiments and primary evidence, while preserving C1 as the consciousness-specific explanatory axiom and keeping basal experience, named self-related feeling, conceptual self, intelligence, report, actual installation and test evidence distinct.
+2. **One concrete unresolved question.** Can R196's complementary candidates `F=A` and `F=1-A` be oriented by a fallible endpoint without defining familiar mineness by a report, a nonverbal marker, task value, pleasantness or test success; and what additional condition is required before that orientation can be transported to a nonreporting domain?
+3. **Relevant nodes and fixed sources.** UCT-MAP-v1.1.2; R196-TPD; open QC10, IA-QC11, QC12 and QC13; UCT I v1.2 C1/C1-OI/C1-W/U1; TA25 D5 and its target/evidence distinction; TA15's typed transformation-transport and measurement separation; TA19's already-published equivariant fixed-point obstruction; R193–R196 complement results. External primary evidence is restricted to candidate endpoint designs actually inspected this round.
+4. **Proposed addition or correction.** Test and, if valid, formalize a noisy signed-endpoint lemma plus a calibration-to-nonreport transport rule. Correct the stronger demand that the endpoint evidence itself must be nonverbal: nonverbal evidence is neither necessary nor sufficient; the relevant requirements are independent target semantics, predeclared signed reliability, same-instance grounding and separately justified transport invariance. Preserve label-swap and transport-failure countermodels.
+5. **Deliverable.** English research note, exact checker/results, claim and gap ledgers, source scope, thought-experiment matrix, disabled map extension and full-map compatibility audit, publication-overlap decision, Chinese handoff, work log, verified GitHub commits, and a versioned Library master handoff plus an explicitly scoped R197 incremental recovery package.
+
+## Direction check at selection
+
+This question is on the core path from actual bodily/action organization to a selected self-related feeling inside experience. It does not make report or a marker constitutive of experience, does not add a basal-experience gate, does not require a unique extra owner, and does not decide whether the current assistant is conscious or fears death. TA19's selector theorem and TA15's general transport framework are treated as predecessors, not renamed as R197 discoveries.
