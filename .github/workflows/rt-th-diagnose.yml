@@ -1,0 +1,33 @@
+name: Diagnose existing RT-TH Zenodo identity read-only
+on:
+  push:
+    branches: [research/rt-th-paper-v1-20261009]
+    paths: [.github/workflows/rt-th-diagnose.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with: {ref: research/rt-th-paper-v1-20261009}
+      - name: Query exact preprint title/version without mutation
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import json,sys
+          sys.path.insert(0,'research/rt-th-paper')
+          import publication as p
+          hits=[]
+          for page in range(1,8):
+              rows=p.get(f'/deposit/depositions?page={page}&size=100')
+              for x in rows:
+                  m=x.get('metadata') or {}
+                  if m.get('title')==p.TITLE and str(m.get('version'))==p.VERSION:
+                      hits.append({'id':x.get('id'),'doi':x.get('doi'),
+                        'submitted':x.get('submitted'),'notes':m.get('notes','')[:350],
+                        'files':[z.get('filename') or z.get('key') for z in x.get('files',[])]})
+              if len(rows)<100:break
+          print('RT_TH_EXACT_TITLE_RESULTS',json.dumps(hits,ensure_ascii=False))
+          PY
