@@ -1,0 +1,43 @@
+{
+  "research_id": "CM20261009",
+  "result_version": "CM-RESULT-v0.1.0",
+  "repository": "thechurchofagi/trinity-accord",
+  "branch": "uct-agent-consciousness-workspace",
+  "record_directory": "research/uct-agent-consciousness-workspace/records/CM20261009_Compensation_Observability",
+  "source_head_read": "2fb510071b34c1df434e1ef7cd6d853051ce7907",
+  "completed_map_unchanged": "UCT-MAP-v1.1.1",
+  "candidate_map": "UCT-MAP-v1.1.2-CM20261009-candidate.1",
+  "candidate_status": "PENDING_MAP / AUDIT_INCOMPLETE",
+  "commits": {
+    "research_checkpoint": "43555654159b6bcf172abae72e357bc755f3cc18",
+    "core_program": "92c962a0adf25e30fedd51bcda2395b710189559",
+    "pending_map": "d1ab798c3f41f2ba3a7e2ca51c6ac1d1bb4e1e34",
+    "work_log": "56f8300043d8c13a8beb7c9d4d7478cd165c49f1",
+    "handoff": "b1c0a3f9a9b5ceac6485fb9d18334e4192940c2e",
+    "run_audit_receipt": "54d479b078a2467f65780452e08ad822947422f9",
+    "root_map_pending_registration": "55867cb80a050efc5285ad1077dd770fe76e1da3",
+    "root_handoff_link": "c4f24924fcf059357a5a9eac2ad45c628ae0dcb5"
+  },
+  "readback_verified_git_blobs": {
+    "RESEARCH_CHECKPOINT.md": "75146e7308fafd1943b196e56b0700666dfc3fa8",
+    "core_check.py": "7d2508066d723ae086723b2991d42f77af0f4350",
+    "MAP_EXTENSION.json": "9d7bf178505c58dda48c560b44716593f7129202",
+    "root_UCT_FORMAL_GRAPH_MODULES.json": "ee4b0927f853a53e23763d049352e667848779bc"
+  },
+  "core_program_matches_executed_local_file": true,
+  "core_program_sha256": "a41c469ab7a7a8c250152e18a4f79fcd08c2450025665ca692a81d38ff8598d6",
+  "expanded_local_archive": {
+    "file": "UCT_Compensation_Observability_20261009_v0.1.0.zip",
+    "bytes": 1053531,
+    "sha256": "fef2453cd8892267d420e8e9f0f98f60635ef36a21c946f297f686f08d8cb416",
+    "manifest_members": 28,
+    "zip_integrity": "PASS",
+    "member_hashes": "PASS"
+  },
+  "preservation_boundary": "The remote compact record preserves self-contained proofs, the actually executed core verifier, a typed pending module, log, handoff and receipts. The local expanded archive also contains the longer manuscript, expanded verifier/results, historical sources and itemwise incomplete-coverage inventory. These are not byte-identical overall archives. No Library copy, DOI, OTS, Arweave, new scheduler or full repository backup is claimed.",
+  "full_current_map_semantic_audit_completed": false,
+  "R186_625_review_obligations_discharged": false,
+  "actual_or_phenomenal_premises_discharged_by_preservation": false,
+  "paper_publication_action": false,
+  "clarification": "Not all raw correction coordinates need monitoring; the target-relevant correction combinations must be determined. Saving or re-reading these statements is not an independent scientific verification."
+}
