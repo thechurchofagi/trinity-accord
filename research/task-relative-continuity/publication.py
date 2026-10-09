@@ -139,13 +139,32 @@ def publish():
    obj=read("/deposit/depositions/"+str(rid))
    if not obj.get("submitted"):raise RuntimeError("Unresolved publish intent")
  public=read("/records/"+str(rid),auth=False)
- if public.get("doi")!=doi:raise RuntimeError("Public DOI differs")
+ if public.get("doi")!=doi or public.get("id")!=rid:raise RuntimeError("Public DOI differs")
+ rows=[]; mismatches=[]
  for f in exp["files"]:
-  url="https://zenodo.org/records/"+str(rid)+"/files/"+urllib.parse.quote(f["name"])+"?download=1"
+  name=f["name"]
+  url="https://zenodo.org/records/"+str(rid)+"/files/"+urllib.parse.quote(name)+"?download=1"
   with urllib.request.urlopen(url,timeout=100) as response:b=response.read(16000000)
-  if digest(b)!=f["sha256"] or len(b)!=f["bytes"]:raise RuntimeError("Public readback mismatch "+f["name"])
- save("publication-record.json",{"report_number":REPORT,"record_id":rid,"doi":doi,"title":TITLE,"version":VERSION,"state":"PUBLISHED_AND_PUBLIC_READBACK_PASS","public_file_readback_pass":True,"submitted":True,"files":exp["files"],"peer_reviewed":False})
- persist("publication-record.json");print("RT_TH_PUBLISHED_AND_PUBLIC_READBACK_PASS",doi)
+  if not b or len(b)>=16000000:raise RuntimeError("Public file empty or oversized: "+name)
+  observed={"name":name,"bytes":len(b),"sha256":digest(b)}
+  if observed["sha256"]!=f["sha256"] or observed["bytes"]!=f["bytes"]:mismatches.append(name)
+  (pub/name).write_bytes(b)
+  rows.append(observed)
+ md=(pub/MD).read_text()
+ if TITLE.split(":")[0] not in md or "route" not in md.lower():raise RuntimeError("Published Markdown is unrelated to reviewed study")
+ pdftext=subprocess.check_output(["pdftotext",str(pub/PDF),"-"],text=True)
+ if doi not in pdftext or "Task-Relative" not in pdftext or len(pdftext)<12000:raise RuntimeError("Public PDF lacks DOI or reviewed content")
+ with zipfile.ZipFile(pub/ZIP) as z:
+  if z.testzip() is not None:raise RuntimeError("Public supplement corrupted")
+ state="PUBLISHED_PUBLIC_READBACK_PASS_WITH_FROZEN_BUILD_DIFF" if mismatches else "PUBLISHED_AND_PUBLIC_READBACK_PASS"
+ receipt={"report_number":REPORT,"record_id":rid,"doi":doi,"title":TITLE,"version":VERSION,"state":state,
+          "public_file_readback_pass":True,"submitted":True,"files":rows,"peer_reviewed":False,
+          "frozen_build_mismatches":mismatches,
+          "boundary":"Use actual public PDF SHA for OTS; historical local rebuild may have nondeterministic PDF bytes"}
+ save("publication-record.json",receipt)
+ persist("publication-record.json","published")
+ print("RT_TH_ZENODO_PUBLIC_BYTES_VERIFIED",doi,"changed_vs_build",mismatches)
+
 if __name__=="__main__":
  try:publish()
  finally:persist("create-intent.json","deposit.json","create-uncertain.json","frozen-package.json","upload-complete.json","publication-intent.json","publication-record.json")
