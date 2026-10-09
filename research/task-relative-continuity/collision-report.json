@@ -1,0 +1,24 @@
+{
+  "candidates": [
+    {
+      "created": "2026-10-09T01:06:59.598295+00:00",
+      "creator_names": [
+        "Liu, Hongju"
+      ],
+      "description_begins_like_source": false,
+      "description_excerpt": "Continuity of a task-specific memory is not equivalent to persistence of its physical carriers, invertibility of a transfer, or successful operation of an installed reader. We give a finite, task-relative framework separating these question",
+      "doi": "10.5281/zenodo.23251651",
+      "files": [],
+      "identity_marker_matches": false,
+      "modified": "2026-10-09T01:06:59.673956+00:00",
+      "notes_excerpt": "RT-TH-PAPER-v1.0.0; source-sha256=6776cd0ffc26465c09bfb81e7b381557848677966503b54dfbc5a554495e1399. DOI and preservation establish artifact identity, not truth, historical originality, or peer review.",
+      "record_id": 23251651,
+      "submitted": false
+    }
+  ],
+  "expected_record": "RT20261009",
+  "found": 1,
+  "scope": "Private Zenodo account inspection; no create, upload or publish calls",
+  "title": "Task-Relative Continuity Through Changing Representations: Reversible Handoffs, Route Ambiguity, and the Limits of Stable Readout",
+  "version": "1.0.0"
+}
