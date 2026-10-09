@@ -1,0 +1,13 @@
+{
+  "schema": "uct-r201-run-receipt/1",
+  "research_id": "R201-ROTM-20261010",
+  "base_remote_commit": "5589734347d5455e9990f7ca8eb8b3a3b17e21b5",
+  "first_recoverable_remote_commit": "ca13f817f5b8802c72c3f47fd50b8fb9491fb1d5",
+  "content_remote_commit": "d8448e440b4348f5cd2735534e219ed474b9fa9a",
+  "content_commit_verified": true,
+  "exact_check": {"valid_instances":786996,"certificate_instances":11049,"violations":0,"pass":true},
+  "map_audit": {"base":"UCT-MAP-v1.1.2","nodes":913,"active_rules":424,"contexts":261,"suspended_rules":10,"review_items":1608,"candidate_nodes":9,"candidate_rules":3,"candidate_contexts":5,"structural_checks":19,"pass":true,"candidate_disabled":true},
+  "open_review_items": ["QC-20261008-10", "IA-QC11", "QC-20261008-12", "QC-20261008-13"],
+  "publication_coverage": "UCT-PUB-v1.0.13",
+  "next_question": "Obtain a simultaneous lower bound for delta_C and independent upper bounds for beta, epsilon_0 and epsilon_1 in a preregistered adult calibration/held-out transport design while keeping actual U distinct from E_U."
+}

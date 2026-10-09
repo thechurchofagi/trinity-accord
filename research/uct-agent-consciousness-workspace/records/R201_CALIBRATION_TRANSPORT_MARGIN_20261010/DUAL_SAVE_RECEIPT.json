@@ -1,0 +1,36 @@
+{
+  "schema": "uct-r201-dual-save-receipt/1",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "content_commit": "d8448e440b4348f5cd2735534e219ed474b9fa9a",
+    "verified_files": ["CURRENT_STATE.json", "HANDOFF.md", "RESEARCH_NOTE.md", "EXACT_RESULTS.json", "MAP_COMPATIBILITY_AUDIT.json"]
+  },
+  "library_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "version": 63,
+    "file_id": "file_00000000323481f5a5fc6c8f94d70bd0",
+    "bytes": 651578,
+    "sha256": "3ffab44a4bbfb6842add245ff9a63236aa6784e75b86911513e8e15ce3423ed6",
+    "download_byte_verified": true
+  },
+  "library_increment": {
+    "library_file_id": "libfile_8bcf15e425cc81919e67fd48ba421a21",
+    "version": 0,
+    "file_id": "file_0000000065b081f5ac68ce1b0db08411",
+    "bytes": 89700,
+    "sha256": "334e989d50eed40e80acd5031997834001eda82a434ff72df3e6d606c15921f8",
+    "download_byte_verified": true,
+    "zip_integrity": "PASS",
+    "scope": "27-file increment relative to R200 final head; not a full repository or working-set backup"
+  },
+  "library_manifest": {
+    "library_file_id": "libfile_e33a1ed88b84819187361c5460baff92",
+    "version": 0,
+    "file_id": "file_000000003c4481f59002aec3576c40be",
+    "bytes": 5791,
+    "sha256": "e91e5eabe76c6ed44a304d1d55441a54b83260c2b38d81967e4729c32f051412",
+    "download_byte_verified": true
+  },
+  "failures_retained": ["initial capsule restore named a nonexistent metadata file; corrected with CAPSULE.json", "ordinary git CLI push lacked credentials; authorized GitHub connector with expected-head lease succeeded"]
+}
