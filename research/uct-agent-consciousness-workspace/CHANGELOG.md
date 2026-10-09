@@ -67,3 +67,9 @@ Preserves R185 and AC20261009 as disabled pending checkpoints. Saves exact sourc
 ## Prior completed history
 
 The complete unchanged previous CHANGELOG.md is at versions/UCT-MAP-v1.1.0/history/CHANGELOG.md. The v1.0.0 release directory and its original claims, corrections and receipts remain immutable. The next ordinary completed version is v1.1.1.
+# R199-CPC-20261010 — 2026-10-10 — disabled research checkpoint
+
+Applies standard continuation/state-sufficiency reasoning to the retentive-familiarity program. Exact two-state enumeration gives 15,872 complete-clone trace comparisons and zero mismatches; a continuation contrast can refute a declared current clone but cannot alone identify lineage, `RetBind` or `H`. Adds a formation-by-instrumented-use experiment contract and explicit test/use separation. Candidate 8/5/5 is structurally compatible and disabled; all actual and semantic applications remain open. Coverage advances nondeductively to UCT-PUB-v1.0.11; no publication action.
+
+---
+

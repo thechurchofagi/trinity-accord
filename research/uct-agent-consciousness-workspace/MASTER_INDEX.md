@@ -1,3 +1,16 @@
+# Current research index — R199 / completed map UCT-MAP-v1.1.2
+
+- R199 note: [Continuation-Probe Ceiling](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/RESEARCH_NOTE.md)
+- R199 exact model: [results](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/EXACT_RESULTS.json) and [checker](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/check_continuation_probe.py)
+- R199 controls: [claims](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/CLAIM_LEDGER.md), [gaps](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/GAP_LEDGER.md), [sources](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/SOURCE_SCOPE.md), [thought experiments](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/THOUGHT_EXPERIMENT_MATRIX.md), [review response](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/REVIEW_RESPONSE.md)
+- R199 handoff/audit: [Chinese handoff](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/HANDOFF_ZH.md), [map audit](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_AUDIT.md), [work log](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/WORK_LOG.md)
+
+R199 is the latest checkpoint, not an integrated map release. Its 8-node/5-rule/5-context candidate is disabled; completed counts remain 913/424/261 with 10 suspended rules. UCT-PUB-v1.0.11 is nondeductive. R198 and earlier entries below remain historical navigation.
+
+---
+
+## Superseded R198 index (retained)
+
 # Current research index — R198 / completed map UCT-MAP-v1.1.2
 
 - R198 note: [Self-Profile Non-Scalarization](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/RESEARCH_NOTE.md)

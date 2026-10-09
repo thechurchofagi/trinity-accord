@@ -8,7 +8,7 @@ The review preserves original proofs except documented affected rederivations, c
 
 ## Publication coverage and latest pending research
 
-Current non-deductive coverage entry: [UCT-PUB-v1.0.10](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs and reconciles formal published attachments; [R198's delta](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json) records no new coverage and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
+Current non-deductive coverage entry: [UCT-PUB-v1.0.11](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs and reconciles formal published attachments; [R199's delta](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json) records no new coverage and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
 
 [ONLINE-AC-PROBE-20261009](records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md) is a locally reviewed pending checkpoint; AC/IL also remain pending. No new whole-map semantic release is claimed by this coverage update. Existing science bytes and all open obligations are unchanged.
 
@@ -46,3 +46,7 @@ The complete UCT-MAP-v1.1.2 graph and all 1,608 review items were traversed with
 # Latest compatibility audit — R198
 
 The complete UCT-MAP-v1.1.2 graph and all 1,608 review items were traversed with the disabled R198 8/5/5 candidate. All 20 structural checks pass: IDs are unique, references resolve, simultaneous `all_of` packages and same-instance bindings are explicit, the combined graph is acyclic, C1 remains an axiom, and no self coordinate gates basal experience. Structural PASS is not theory truth, an exhaustive self ontology, a validated scalar target, actual route use, reviewer closure or activation. See `records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_COMPATIBILITY_AUDIT.json`.
+
+# Latest compatibility audit — R199
+
+The exact UCT-MAP-v1.1.2 graph and all 1,608 review items were traversed with the disabled R199 8/5/5 candidate. All 19 structural checks pass, including references, simultaneous `all_of` premises, same-instance bindings, direction fields, full DAG acyclicity, C1 axiom preservation and the basal non-gate. Structural PASS is not complete real-state matching, lineage proof, actual route use, `H` identification, reviewer closure or activation. See `records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_COMPATIBILITY_AUDIT.json`.

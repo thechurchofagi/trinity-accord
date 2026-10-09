@@ -15,12 +15,12 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "R198-SPNS-20261010",
-    "result_version": "SPNS-RESULT-v0.1.0",
+    "id": "R199-CPC-20261010",
+    "result_version": "CPC-RESULT-v0.1.0",
     "integration_status": "PENDING_CHECKPOINT_DISABLED",
-    "work_log": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/WORK_LOG.md",
-    "handoff": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/HANDOFF_ZH.md",
-    "paper": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/RESEARCH_NOTE.md"
+    "work_log": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/WORK_LOG.md",
+    "handoff": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/HANDOFF_ZH.md",
+    "paper": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/RESEARCH_NOTE.md"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -56,7 +56,8 @@
     "R195-IPA-20261009",
     "R196-TPD-20261009",
     "R197-FEO-20261010",
-    "R198-SPNS-20261010"
+    "R198-SPNS-20261010",
+    "R199-CPC-20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -68,12 +69,12 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "AC, IL, ONLINE-AC, R189, R190, R191, R192, R193, R194, R195, R196, R197 and R198 remain separate disabled pending modules; structural compatibility is not scientific-map promotion.",
+  "pending_note": "AC, IL, ONLINE-AC, R189, R190, R191, R192, R193, R194, R195, R196, R197, R198 and R199 remain separate disabled pending modules; structural compatibility is not scientific-map promotion.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.10",
+    "version": "UCT-PUB-v1.0.11",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },
@@ -93,5 +94,5 @@
     "paper": "records/ONLINE_AC_20261009_Dynamic_Calibration/PAPER.md",
     "paper_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED"
   },
-  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; ONLINE-AC, R189, R190, R191, R192, R193, R194, R195, R196, R197 and R198 remain disabled pending results."
+  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; ONLINE-AC, R189, R190, R191, R192, R193, R194, R195, R196, R197, R198 and R199 remain disabled pending results."
 }

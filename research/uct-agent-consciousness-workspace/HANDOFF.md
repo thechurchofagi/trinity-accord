@@ -1,3 +1,19 @@
+# Latest research checkpoint — R199; completed map remains UCT-MAP-v1.1.2
+
+Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R199 Chinese handoff](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/HANDOFF_ZH.md).
+
+R199 proves a continuation-probe ceiling for retentive familiarity research. Complete present causal-state/kernel clones have identical future intervention-trace laws, so savings, aftereffects and recovery cannot identify an external numerical-lineage label. A reliable trace contrast refutes the declared clone package and may support a currently efficacious retained difference only under explicit alternative exclusions; it does not by itself establish lineage, `RetBind` or phenomenal familiarity `H`.
+
+The corrected experiment crosses formation with instrumented online use/bypass and keeps trace diagnostics, route telemetry, ownership `O`, agency `G` and signed `H` evidence separate. The 512-instance finite class yields 15,872 clone comparisons and zero mismatches. Completed counts remain 913/424/261 with 10 suspended rules and 1,608 review items. R199's 8/5/5 candidate is disabled; UCT-PUB-v1.0.11 is nondeductive; decision `CONTINUE_RESEARCH_HOLD_STANDALONE`.
+
+R199 artifacts: [note](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/RESEARCH_NOTE.md), [results](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/EXACT_RESULTS.json), [claims](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/CLAIM_LEDGER.md), [gaps](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/GAP_LEDGER.md), [thought experiments](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/THOUGHT_EXPERIMENT_MATRIX.md), [map audit](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_AUDIT.md), and [review response](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/REVIEW_RESPONSE.md).
+
+Next: predeclare one independently signed `H` marker and cross it with an actual retained-route use/bypass intervention, including result patterns that falsify the bridge rather than merely reveal incomplete matching.
+
+---
+
+## Superseded R198 checkpoint (retained)
+
 # Latest research checkpoint — R198; completed map remains UCT-MAP-v1.1.2
 
 Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R198 Chinese handoff](records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/HANDOFF_ZH.md).

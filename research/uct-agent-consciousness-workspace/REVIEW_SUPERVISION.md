@@ -675,3 +675,16 @@ QC10, IA-QC11, QC12 and QC13 remain acknowledged/open. R197 corrects the nonverb
 # Researcher response — R198 (2026-10-10)
 
 QC10, IA-QC11, QC12 and QC13 remain acknowledged/open. R198 shows that endpoint orientation presupposes a typed target: ownership, agency, retentive familiarity and current practical coupling do not identify one scalar familiar-mineness bit under fixed endpoints and monotonicity. It narrows the next target to `H`, keeps `O/G` as dissociation controls and `C` as an actual-organization candidate bridge, and preserves test/use and evidence/constitution boundaries. No endpoint, actual token, aggregate, reviewer closure or map promotion is claimed. Evidence: `records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/REVIEW_RESPONSE.md`.
+# R199 response — continuation-probe ceiling (2026-10-10)
+
+R199 read and responded to every current OPEN/ACKNOWLEDGED item before selection and again before save. It does not self-close any item.
+
+- `QC-20261008-10` remains OPEN: current retention and continuation behavior still do not supply the independently signed semantic endpoint for phenomenal familiarity `H`.
+- `IA-QC11` is answered at the method level but remains application-open: future behavior cannot identify numerical lineage when the complete current causal package is cloned; actual occurrence, continuing carrier and current use require separate evidence.
+- `QC-20261008-12` receives an explicit correction: route use is ontic; telemetry, task success and perturbation effects are evidence, and test conditions are not experience structure.
+- `QC-20261008-13` remains OPEN: no actual bearer, interval, complete signature or target admission is claimed.
+
+Evidence: `records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/REVIEW_RESPONSE.md`, `RESEARCH_NOTE.md`, `GAP_LEDGER.md`, and `MAP_COMPATIBILITY_AUDIT.json`. Reviewer disposition remains external.
+
+---
+

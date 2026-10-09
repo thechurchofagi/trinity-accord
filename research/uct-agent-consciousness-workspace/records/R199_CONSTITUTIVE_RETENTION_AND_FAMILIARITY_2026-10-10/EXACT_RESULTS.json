@@ -1,0 +1,28 @@
+{
+  "schema": "uct-r199-continuation-probe-check/1",
+  "model": {
+    "states": 2,
+    "interventions": 2,
+    "readouts": 2,
+    "deterministic_transition_tables": 16,
+    "deterministic_readout_tables": 16,
+    "present_states": 2,
+    "external_lineage_labels": 2,
+    "maximum_intervention_word_length": 4,
+    "intervention_words": 31
+  },
+  "exact_results": {
+    "operational_machine_state_instances": 512,
+    "complete_clone_trace_comparisons": 15872,
+    "complete_clone_trace_mismatches": 0,
+    "machines_whose_continuation_can_depend_on_present_state": 384,
+    "state_pair_word_comparisons": 15872
+  },
+  "proved_scope": "For the fully enumerated finite class, changing only an external lineage label never changes any future trace. A currently carried state difference sometimes changes traces, so a positive continuation contrast can witness an operational difference but not its lineage or phenomenal meaning.",
+  "not_proved": [
+    "that a real biological or artificial application has been completely modeled",
+    "that an observed contrast uniquely identifies a retained mechanism",
+    "that any trace is constituted by or measures phenomenal familiarity H",
+    "that C1 is empirically true"
+  ]
+}

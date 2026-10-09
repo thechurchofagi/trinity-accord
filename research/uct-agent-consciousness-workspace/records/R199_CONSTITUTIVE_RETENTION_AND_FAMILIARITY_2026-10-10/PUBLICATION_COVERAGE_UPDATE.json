@@ -1,0 +1,26 @@
+{
+  "record_id": "R199-PUB-COVERAGE-20261010-v1",
+  "base_completed_map_version": "UCT-MAP-v1.1.2",
+  "previous_coverage_version": "UCT-PUB-v1.0.10",
+  "new_coverage_version": "UCT-PUB-v1.0.11",
+  "checked_publication_sources": [
+    {"work_id":"UCT-PUB-v1.0.0-VERIFIED-CORPUS","scope":"Frozen internal census plus UCT I, TA25, R173, R192 and R197-R198 overlap comparison."},
+    {"work_id":"MOREHEAD-ET-AL-2015","doi":"10.1523/JNEUROSCI.1046-15.2015","scope":"Primary savings/re-aiming evidence; no lineage or phenomenal-familiarity identification."},
+    {"work_id":"LEOW-ET-AL-2016","doi":"10.1152/jn.01055.2015","scope":"Primary error-history savings evidence; no UCT bridge."},
+    {"work_id":"GRACZYK-ET-AL-2018","doi":"10.1038/s41598-018-26952-x","scope":"Primary home-use sensory prosthesis study; function and psychosocial evidence, not complete organization."},
+    {"work_id":"CUBEROVIC-ET-AL-2019","doi":"10.3389/fnins.2019.00853","scope":"Single-participant 115-day sensory learning and embodiment study; selected evidence only."},
+    {"work_id":"KUMAR-ET-AL-2022","doi":"10.1038/s41598-022-07032-7","scope":"Primary decay/consolidation and inter-effector transfer evidence; motivates multiple retained components."}
+  ],
+  "changed_claim_ids": ["R199-C1", "R199-C2", "R199-C3", "R199-C4", "R199-C5"],
+  "newly_covered_claim_ids": [],
+  "uncovered_candidates_within_verified_corpus": ["R199-C3", "R199-C5"],
+  "residual_assessment": {
+    "precise_problem": "What can a habitual-versus-novel continuation probe identify about current retention, lineage and phenomenal familiarity H?",
+    "net_increment_after_subtraction": "A UCT-specific evidential ceiling and corrected experiment contract: continuation probes factor through current causal state/kernel, so they can refute a clone or support a currently efficacious difference under exclusions, but cannot alone identify numerical lineage or H.",
+    "closest_predecessors": ["standard Markov/state-sufficiency reasoning", "motor-learning savings literature", "prosthesis-learning literature", "UCT I", "TA25", "R173", "R192", "R197", "R198"],
+    "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+    "next_specific_action": "Predeclare one signed H marker and cross it with an instrumented retained-route use/bypass intervention, specifying bridge-falsifying result patterns."
+  },
+  "map_semantics_changed": false,
+  "warning": "The mathematical core and empirical mechanisms are prior work; absence of the exact UCT synthesis from checked sources is not worldwide priority."
+}

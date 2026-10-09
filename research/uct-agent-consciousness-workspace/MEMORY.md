@@ -1,3 +1,17 @@
+# Research memory — R199 pending over UCT-MAP-v1.1.2
+
+R199 proves a continuation-probe ceiling for the selected retentive-familiarity target `H`. If complete present causal state, transition/readout law and exogenous coupling match, every future intervention-trace diagnostic matches. Savings, aftereffects and recovery can therefore reveal a current causal difference but cannot alone establish numerical lineage, R173 `RetBind` or phenomenal `H`.
+
+The exact two-state checker evaluates 512 machine/state instances and 31 intervention words: 15,872 complete-clone comparisons, zero mismatches. Current-state changes are observably relevant in 384/512 instances, so the result is not anti-experimental; it limits the meaning of a positive or null probe.
+
+The corrected experiment crosses formation with instrumented retained-route use/bypass and separately measures continuation, route telemetry, ownership, agency and signed `H` evidence. C1 remains an axiom and no retention or self variable gates basal experience. UCT-MAP-v1.1.2 remains completed; R199 8/5/5 is disabled; coverage is UCT-PUB-v1.0.11; all four review items remain open or acknowledged without self-closure.
+
+Next: identify and attack one independently signed `H` marker under an actual route-use intervention, with predeclared bridge-falsifying patterns.
+
+---
+
+## Superseded R196/R197/R198 memory (retained)
+
 # Research memory — R196 pending over UCT-MAP-v1.1.2
 
 R196 crosses independently grounded structure `A` with independently manipulated value `V`. Across all 16 Boolean tables, structural sensitivity in both value contexts plus value invariance at both structural poles leaves exactly identity and complement. Both-axis-sensitive functional outcomes are XOR/XNOR. Thus a full outcome reversal can reject simple reward/success/value inheritance.

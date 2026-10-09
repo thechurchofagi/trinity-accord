@@ -281,14 +281,51 @@
       "novelty": "UCT_SPECIFIC_TWO_AXIS_PHENOMENAL_CALIBRATION_APPLICATION_PRIORITY_UNVERIFIED",
       "compatibility_audit": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md"
+    },
+    {
+      "research_id": "R197-FEO-20261010",
+      "result_version": "FEO-RESULT-v0.1.0",
+      "title": "Fallible Endpoint Orientation Without a Nonverbality Requirement",
+      "source": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.9",
+      "compatibility_audit": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R197_Fallible_Endpoint_Orientation_20261010/HANDOFF_ZH.md"
+    },
+    {
+      "research_id": "R198-SPNS-20261010",
+      "result_version": "SPNS-RESULT-v0.1.0",
+      "title": "The Self-Profile Non-Scalarization Result",
+      "source": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.10",
+      "compatibility_audit": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/HANDOFF_ZH.md"
+    },
+    {
+      "research_id": "R199-CPC-20261010",
+      "result_version": "CPC-RESULT-v0.1.0",
+      "title": "The Continuation-Probe Ceiling for Retentive Familiarity",
+      "source": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.11",
+      "novelty": "UCT_SPECIFIC_EVIDENTIAL_CEILING_AND_EXPERIMENT_CONTRACT_PRIORITY_UNVERIFIED",
+      "compatibility_audit": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/HANDOFF_ZH.md"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.8",
+    "version": "UCT-PUB-v1.0.11",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },

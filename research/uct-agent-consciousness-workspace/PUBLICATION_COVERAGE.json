@@ -1,6 +1,6 @@
 {
   "schema": "uct-publication-coverage-entry/1.0",
-  "coverage_version": "UCT-PUB-v1.0.10",
+  "coverage_version": "UCT-PUB-v1.0.11",
   "base_census_version": "UCT-PUB-v1.0.0",
   "ledger": {
     "path": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
@@ -11,7 +11,7 @@
   "published_works": "publication/UCT-PUB-v1.0.0/PUBLISHED_WORKS_AND_VERSIONS.json",
   "readable_report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
   "current_decision": "publication/UCT-PUB-v1.0.0/MANUSCRIPT_DECISION.json",
-  "latest_update": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json",
+  "latest_update": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json",
   "current_scientific_map": "UCT-MAP-v1.1.2",
   "nondeductive": true,
   "unknown_is_unpublished": false,
@@ -33,6 +33,7 @@
     "records/R195_Interventional_Polarity_Anchor_20261009/PUBLICATION_COVERAGE_UPDATE.json",
     "records/R196_Two_Axis_Phenomenal_Calibration_20261009/PUBLICATION_COVERAGE_UPDATE.json",
     "records/R197_Fallible_Endpoint_Orientation_20261010/PUBLICATION_COVERAGE_UPDATE.json",
-    "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json"
+    "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json",
+    "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json"
   ]
 }

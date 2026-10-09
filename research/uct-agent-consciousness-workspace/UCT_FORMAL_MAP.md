@@ -10,7 +10,7 @@ See [the full review](versions/UCT-MAP-v1.1.2/audit/WHOLE_MAP_SEMANTIC_REVIEW_RE
 
 ## Publication coverage and latest pending research
 
-Current non-deductive coverage entry: [UCT-PUB-v1.0.8](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs, reconciles formal published attachments, and assesses residual knowledge separately from validity. [R196's delta](records/R196_Two_Axis_Phenomenal_Calibration_20261009/PUBLICATION_COVERAGE_UPDATE.json) records no newly covered claim and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
+Current non-deductive coverage entry: [UCT-PUB-v1.0.11](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs, reconciles formal published attachments, and assesses residual knowledge separately from validity. [R199's delta](records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json) records no newly covered claim and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
 
 [ONLINE-AC-PROBE-20261009](records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md) is a locally reviewed pending checkpoint; AC/IL also remain pending. No new whole-map semantic release is claimed by this coverage update. Existing science bytes and all open obligations are unchanged.
 
@@ -44,3 +44,11 @@ Current non-deductive coverage entry: [UCT-PUB-v1.0.8](PUBLICATION_COVERAGE.json
 # Pending disabled checkpoint — R197-FEO-20261010
 
 R197 proposes 9 nodes, 5 conditional rules and 5 nondeductive context links concerning fallible signed endpoint orientation, modality neutrality and class-conditional transport. The candidate is disabled and does not change UCT-MAP-v1.1.2 (913 nodes, 424 active rules, 261 context links, 10 suspended historical rules). See `records/R197_Fallible_Endpoint_Orientation_20261010/MAP_EXTENSION.json` and `MAP_AUDIT.md`.
+
+# Pending disabled checkpoint — R198-SPNS-20261010
+
+R198 proposes 8 nodes, 5 rules and 5 context links that type ownership, agency, retentive familiarity and practical coupling and reject an unargued global scalar. It is disabled and does not change completed counts or hashes.
+
+# Latest pending disabled checkpoint — R199-CPC-20261010
+
+R199 proposes 8 nodes, 5 rules and 5 context links for the continuation-probe ceiling, lineage non-identification, use/evidence separation and a corrected formation-by-use experiment contract. The full v1.1.2 graph and all 1,608 review objects were traversed; all 19 structural checks pass. R199 is disabled and does not change completed counts or hashes. Coverage is UCT-PUB-v1.0.11.
