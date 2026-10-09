@@ -1,0 +1,10 @@
+{
+  "action": "VERIFY_ANONYMOUS_ZENODO_PUBLICATION_ONLY",
+  "record_id": 23251651,
+  "doi": "10.5281/zenodo.23251651",
+  "no_posts": true,
+  "source_sha256": "52f879101be072efd0651a512b03bac27e3dbf5a80facf55aa726b7515f88ed4",
+  "version": "1.0.0",
+  "author": "Hongju Liu",
+  "reason": "Detect and preserve actual published bytes after authorized concurrent publisher won same-record race"
+}
