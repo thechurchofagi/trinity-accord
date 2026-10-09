@@ -1,0 +1,19 @@
+{
+  "schema": "uct-r202-dual-save-receipt/1",
+  "github": {
+    "science_commit": "d48e6f59a791ffbe623bc111bd46ef3aaa6a640a",
+    "verified": true,
+    "final_receipt_commit": "RECORDED_BY_COMMIT_CONTAINING_THIS_FILE"
+  },
+  "library_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "version": 65,
+    "bytes": 656761,
+    "local_sha256": "dfe24b330cd371874507c400d2175ba4af9a8850fe7d1ad405fe154bbd20e308",
+    "write_status": "SUCCEEDED_WRITE_ACKNOWLEDGED",
+    "postwrite_byte_verification": "FAILED_HTTP_403"
+  },
+  "incremental_backup": "BACKUP_MANIFEST.json",
+  "double_persistence_status": "BOTH_WRITES_ACKNOWLEDGED_GITHUB_VERIFIED_LIBRARY_POSTWRITE_BYTE_READBACK_PENDING",
+  "recovery": "Fetch the branch at or after the final receipt commit; use fixed master Library ID version 65 or later; use the R202 incremental ZIP only on top of base d078d85bf7921512ebb8234aba23298a490267d5; rerun exact and map audits."
+}

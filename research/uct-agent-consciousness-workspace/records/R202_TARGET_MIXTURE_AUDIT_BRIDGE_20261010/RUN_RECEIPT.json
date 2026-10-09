@@ -1,0 +1,25 @@
+{
+  "schema": "uct-r202-run-receipt/1",
+  "branch": "uct-agent-consciousness-workspace",
+  "starting_head": "d078d85bf7921512ebb8234aba23298a490267d5",
+  "recoverable_checkpoint": "a034202f8f8753d54f01b8a530fe17435cdc909b",
+  "science_commit": "d48e6f59a791ffbe623bc111bd46ef3aaa6a640a",
+  "github_write_method": "expected-head fast-forward",
+  "github_verification": [
+    "commit object fetched",
+    "CURRENT_STATE.json fetched at science commit",
+    "R202 MAP_COMPATIBILITY_AUDIT.json fetched at science commit"
+  ],
+  "exact_checker": {
+    "marginal_pairs": 7,
+    "audit_instances": 20412,
+    "violations": 0,
+    "status": "PASS"
+  },
+  "map_audit": {
+    "checks": 20,
+    "passed": 20,
+    "status": "STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN"
+  },
+  "final_receipt_commit": "RECORDED_BY_COMMIT_CONTAINING_THIS_FILE"
+}

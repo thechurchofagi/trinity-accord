@@ -1,0 +1,26 @@
+{
+  "schema": "uct-r202-backup-manifest/1",
+  "backup_kind": "incremental_not_full_backup",
+  "base_commit": "d078d85bf7921512ebb8234aba23298a490267d5",
+  "science_commit": "d48e6f59a791ffbe623bc111bd46ef3aaa6a640a",
+  "changed_repository_files": 29,
+  "zip": {
+    "name": "UCT_R202_Incremental_20261010.zip",
+    "bytes": 95215,
+    "sha256": "de227c8d2c1a282b4e7d0e653f413d462e3db6779f3e9ff30a38ffd6b4c85d2f",
+    "library_file_id": "libfile_22c0fac11814819184756d0ae0892cb9",
+    "version": 0,
+    "upload_status": "SUCCEEDED_WRITE_ACKNOWLEDGED"
+  },
+  "manifest": {
+    "name": "UCT_R202_Incremental_Manifest_20261010.json",
+    "bytes": 6331,
+    "sha256": "204fd99c316c0d3b133b3e9ef71a6c1ae88ddc0453f020a26574030b5c7cd485",
+    "library_file_id": "libfile_bec58a68abfc819197760dffa19a277c",
+    "version": 0,
+    "upload_status": "SUCCEEDED_WRITE_ACKNOWLEDGED"
+  },
+  "local_zip_integrity": "PASS",
+  "remote_byte_materialization": "NOT_RECHECKED_DUE_SIGNED_DOWNLOAD_HTTP_403",
+  "scope_warning": "This package is an incremental set of changed repository files, not a full repository, full working set or full history."
+}
