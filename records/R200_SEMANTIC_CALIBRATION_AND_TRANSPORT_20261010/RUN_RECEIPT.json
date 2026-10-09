@@ -1,0 +1,32 @@
+{
+  "schema": "UCT-RUN-RECEIPT-v1",
+  "round": "R200",
+  "content_commit": "41664a4525c657f4fdeea75fe9aa1c8c609adc17",
+  "content_tree": "21301a9f5c1fa263e1c72a586d3e76b5b23fdbaa",
+  "base_commit": "b5769c384abf0a5d0aeae0e7dcd542cb67dba2e6",
+  "branch": "uct-agent-consciousness-workspace",
+  "remote_verification": {
+    "commit_verified": true,
+    "critical_files_read_back": [
+      "CURRENT_STATE.json",
+      "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/RESEARCH_NOTE.md",
+      "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/EXACT_RESULTS.json",
+      "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/HANDOFF_ZH.md"
+    ]
+  },
+  "exact_check": {
+    "four_proxy_latent_models": 768,
+    "complement_mismatches": 0,
+    "strictly_positive_finite_signed_channels": 10,
+    "complemented_channels_preserving_positive_sign": 0,
+    "boolean_formation_use_tables": 16,
+    "positive_interaction_tables": 5
+  },
+  "map_audit": {
+    "base_version": "UCT-MAP-v1.1.2",
+    "structural_checks_passed": 19,
+    "candidate_status": "PENDING_CHECKPOINT_DISABLED",
+    "interpretation": "structural compatibility only; not theoretical truth, actual installation, evidence of experience, or review closure"
+  }
+}

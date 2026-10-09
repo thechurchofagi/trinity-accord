@@ -1,0 +1,41 @@
+{
+  "schema": "UCT-DUAL-SAVE-RECEIPT-v1",
+  "round": "R200",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "content_commit": "41664a4525c657f4fdeea75fe9aa1c8c609adc17",
+    "content_commit_verified": true,
+    "persistence_receipt_commit": "SELF",
+    "persistence_receipt_commit_note": "SELF means the commit containing this receipt; the stable main handoff records its resolved SHA."
+  },
+  "library": {
+    "master_handoff": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "verified_intermediate_version": 61,
+      "file_size_bytes": 645383,
+      "sha256": "4b894e14feb1322ec5b30b3b263cf3cbe1ac094ac383d4db4afbc2e501891030",
+      "byte_verified": true,
+      "note": "A later same-identity version records the resolved persistence-receipt commit."
+    },
+    "increment_zip": {
+      "library_file_id": "libfile_8033bbbe6bc48191b481d11b1ef04661",
+      "version": 0,
+      "file_size_bytes": 96209,
+      "sha256": "1357cc1d75d25b82590b80834d88a075c5df3fa2a87be80d3beb393130bda98f",
+      "byte_verified": true,
+      "zip_test_passed": true,
+      "changed_repository_files": 29,
+      "archive_members": 31,
+      "classification": "increment relative to R199 final head; not a complete repository, working set, or history backup"
+    },
+    "external_manifest": {
+      "library_file_id": "libfile_887f918e4284819184f6c8df015d889a",
+      "version": 0,
+      "file_size_bytes": 7346,
+      "sha256": "1dfc2d7f16f27cc1e31e83df9656de4f6c239af50e0c62c54832c3543be06a78",
+      "byte_verified": true
+    }
+  },
+  "verification_scope": "All three Library objects listed above were downloaded and compared byte-for-byte with the local source bytes; the ZIP was independently integrity-tested."
+}
