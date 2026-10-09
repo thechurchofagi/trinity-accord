@@ -1,0 +1,40 @@
+{
+  "report_number": "RT20261009",
+  "title": "Task-Relative Continuity Through Changing Representations: Reversible Handoffs, Route Ambiguity, and the Limits of Stable Readout",
+  "version": "1.0.0",
+  "record_id": 23251651,
+  "doi": "10.5281/zenodo.23251651",
+  "source_sha256": "6776cd0ffc26465c09bfb81e7b381557848677966503b54dfbc5a554495e1399",
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 454,
+      "sha256": "d707f612f5a58c49834ff59f2b34ac1f1afcea88a5f8a1c94d3683f3a183eab5"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 3271,
+      "sha256": "0d9047116183e0c0e2602e7ab4a90474ce7af837999c3a813beb84bc1b010b80"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 312,
+      "sha256": "f2bb01a48f8513bf289accf74dd895d5318ec7b3201bdcfa0aba7e450ffdb3ea"
+    },
+    {
+      "name": "task-relative-continuity-v1.0.0-supplement.zip",
+      "bytes": 173689,
+      "sha256": "ad4660b21cd9d1f71d6a58322e2a048a2bb44a6c00015940bfc6b6a95f50a873"
+    },
+    {
+      "name": "task-relative-continuity-v1.0.0.md",
+      "bytes": 36582,
+      "sha256": "b7d917e7a7d32fab5acf1e4695a38afe25e1a68eac588c5df51d68edee8c2945"
+    },
+    {
+      "name": "task-relative-continuity-v1.0.0.pdf",
+      "bytes": 115250,
+      "sha256": "98b9756e1ec7fc766e47e3fe307b2f774987b725dacee7b2586b920142aea4bd"
+    }
+  ]
+}
