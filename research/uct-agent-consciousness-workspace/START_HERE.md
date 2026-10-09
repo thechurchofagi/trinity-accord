@@ -1,9 +1,7 @@
-# Start here — current completed UCT map
+# Start here — UCT-MAP-v1.1.0
 
-Current release: **UCT-MAP-v1.0.0**, sequence 1, audit FA20261008.
+Read CURRENT_STATE.json first. Completed map v1.1.0, sequence 2, audit THRB20261009-COMPAT-v1. Highest methodological policy is still RESEARCH_MASTER_GUIDE.md; current completed state is not determined by older progress headers in other files.
 
-The authoritative pointer is CURRENT_STATE.json. Read versions/UCT-MAP-v1.0.0/AUDIT_REPORT.md and VERSIONING_POLICY.md before further research. The complete author-side semantic census is finished with corrections; actual/phenomenal obligations and reviewer-controlled OPEN findings remain open. The unchanged root UCT_FORMAL_GRAPH.json is the historical base, not the complete effective version.
+Read versions/UCT-MAP-v1.1.0/AUDIT_REPORT.md, RELEASE.json and records/TH20261009_Temporal_Handoff/README.md. Restore the verified capsule for the full working manuscript, proof/module sources and saved audit reconstruction. For Git-only recovery, materialize the parent v1.0.0 effective graph/ledger before building the new effective union. The downloadable full archive already contains that baseline and expanded outputs.
 
-Use the effective-map descriptor UCT_FORMAL_GRAPH_MODULES.json. Reconstruct the full ledger and graph using versions/UCT-MAP-v1.0.0/restore_capsule.py and the capsule README. For original policy and chronology read RESEARCH_MASTER_GUIDE.md and versions/UCT-MAP-v1.0.0/history/. Do not restart from R38 or rely on an older chat handoff. IE20261008, EI20261008 and RC20261008 are separate research IDs.
-
-Each completed substantive cycle must increment the map version and release sequence, add an immutable release, list added/changed/suspended item IDs, preserve sources and results, and update CURRENT_STATE.json plus CHANGELOG.md. Read the current branch head and use an expected-SHA lease. A checkpoint is not completion. File persistence is not proof. No publication or scheduler changes are authorized by this handoff.
+Do not treat preservation, graph validation or a completed author-side semantic review as empirical truth. R185/AC20261009 remain disabled pending; QC10/IA-QC11/QC12/QC13 remain open. No new DOI or automatic publication is authorized. Use the next immutable version for future completed work.

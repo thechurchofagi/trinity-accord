@@ -1,0 +1,9 @@
+# TH20261009 — temporal handoff and omitted-input recovery budget
+
+Result v0.2.0, included in completed map UCT-MAP-v1.1.0 (sequence 2), 2026-10-09. Read ../../CURRENT_STATE.json and ../../versions/UCT-MAP-v1.1.0/AUDIT_REPORT.md. Exact full English manuscript, prior TH source, 54-node/23-rule/18-context module, checks and saved review decisions are in the SHA-256-verified version capsule. Restore via ../../versions/UCT-MAP-v1.1.0/restore_capsule.py; the offline downloadable archive also includes expanded map/ledger and baseline.
+
+Main addition: Pr(Y=T) <= G_K(T|X) <= min(1,K*p_guess(T|X)) under the complete-transcript and source-screening conditions. G_K is the posterior top-K list-success functional. Sharpness has a declared unrestricted helper class. Nonuniform ambiguity tightens the old R127 coarse bound; uniform linear residuals give min(1,K/M), and fixed-rate deadlines restrict K. Total-variation uncertainty has explicit margins. Terminal recovery does not establish timely access throughout the interval. A poor installed reader is not a proof that information is absent; a hidden correlated key can restore access while all local processes persist.
+
+Scientific limits: classical coding/list-decoding/min-entropy antecedents credited; no new basal-experience gate, intensity, subject count, actual physiological instantiation or named-feeling bridge. Working manuscript title: Memory Across Changing Support: Recoverability, Timely Access, and the Cost of Omitted Inputs. Publication assessment: substantive candidate material, targeted application/priority refinement needed; no DOI, submission, OTS or AR action.
+
+R185 and AC20261009 remain separately pending; their results are not silently promoted. Future completed research requires a new immutable version/sequence, normally v1.1.1. Keep the highest guide and give progress feedback. Do not restart from R38 or treat root graph alone as the full effective map.

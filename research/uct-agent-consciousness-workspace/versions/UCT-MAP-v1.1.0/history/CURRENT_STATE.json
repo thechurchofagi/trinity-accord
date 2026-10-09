@@ -1,0 +1,10 @@
+{
+"schema":"uct-current-state/1.0","release_id":"UCT-MAP-v1.0.0","release_seq":1,"audit_id":"FA20261008",
+"review_status":"COMPLETE_WITH_EXPLICIT_CORRECTIONS_AND_OPEN_APPLICATIONS",
+"source_commit":"48b131a3ae8f7ac003ff5a2ce9c8d36111b2ea3c",
+"version_directory":"versions/UCT-MAP-v1.0.0","report":"versions/UCT-MAP-v1.0.0/AUDIT_REPORT.md",
+"map_descriptor":"UCT_FORMAL_GRAPH_MODULES.json","research_registry":"RESEARCH_REGISTRY.json","version_policy":"VERSIONING_POLICY.md","changelog":"CHANGELOG.md",
+"persistence":"The branch commit containing this pointer preserves the capsule; see PERSISTENCE_RECEIPT.json for readback details.",
+"next_ordinary_completed_version":"UCT-MAP-v1.0.1","actual_premise_discharge":false,
+"qc_open":["QC-20261008-10","IA-QC11","QC-20261008-12","QC-20261008-13"]
+}

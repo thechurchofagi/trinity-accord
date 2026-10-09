@@ -1,0 +1,23 @@
+# UCT-MAP-v1.1.0 — temporal handoff and recovery-budget integration
+
+Completed release sequence 2; audit THRB20261009-COMPAT-v1; 9 October 2026. Parent completed release UCT-MAP-v1.0.0, repository head 11c1af83fa7e9eabca8351b67dfe162f59da7dd1.
+
+## Result and review scope
+
+Research TH20261009 v0.2.0 integrates the previous temporal-handoff module (29 nodes, 14 rules, eight context links) and the new RB recovery-budget module (25 nodes, nine rules, ten context links). For finite target T, accessible record X and entire later transcript Z with at most K outcomes per X, a source-screened downstream reader has recovery at most G_K(T|X): the sum of the K largest posterior joint masses at each X. The familiar K*p_guess bound is a looser corollary. Achievability requires a helper that may inspect T and X, and is not asserted for every physical channel. Uniform residuals give min(1,K/M); fixed-rate slots give a deadline constraint. TV approximation and prior uncertainty produce explicit additive margins. Timing, correlated keys, wrong installed decoders and target coarsening are retained failure controls.
+
+All 1,278 parent items were read for compatibility with this addition, including statements, premises, scope, interpretations and contextual relations. Twenty-one item batches and six unique-scope batches were examined, with truncated spans reread. All 95 additional items were reviewed. Total: 776 nodes, 376 rule records (366 active conditional and ten suspended historical), 221 non-deductive contexts, 1,373 item decisions. No item is unreviewed within this defined active census. The exact parent node/rule scientific records are retained. Existing proof/evidence judgments are reused with source identity and this-cycle compatibility decisions, not falsely represented as independent reproof or empirical revalidation. New proofs and relevant downstream application guards received deeper checking.
+
+Old R127 complete-cut/leakage and R136 endpoint/delay results are credited; they are not discoveries of this release. C1/U1/P3 and the actual-instance/named-phenomenal QC obligations remain unchanged. No experience-existence threshold or numerical subject count is introduced. R185 and AC20261009 remain separately disabled pending checkpoints; their handoffs were compared for interference, but their whole semantic promotion is outside this completed census.
+
+## Executed checks and preservation
+
+New exact checks: 5,095 finite joint laws; 60 optimization cases comprising 38,568 candidate helper encodings; six approximate-mediation controls; 1,221 prior-TV comparisons and key/deadline/timing/coarse-target controls. The inherited TH verifier was rerun, including 6,666 matrix cases, and is explicitly a regression rather than a new experiment. Structural checks retain all ten suspended routes, prohibit automatic acceptance of root assumptions, and find no new dangling AND premises or directed dependency cycle.
+
+The source capsule was restored locally; its reconstruction script regenerated the full extension, effective graph, per-ID JSON/CSV ledger and inner release record byte-for-byte. Reconstruction materializes recorded review judgments; it does not perform semantic review. Reading-manifest hashes and limitations are inside the capsule. Counts or graph acyclicity do not themselves establish semantic validity.
+
+Run `python restore_capsule.py --output restored_TH_RB`. For Git-only recovery, first reconstruct the exact UCT-MAP-v1.0.0 outputs using that release's instructions. Place its UCT_EFFECTIVE_GRAPH.json and REVIEW_LEDGER.json in restored_TH_RB/baseline/, with their required hashes from RELEASE.json. Then run `python restored_TH_RB/code/build_release.py`. The downloadable research ZIP already includes this baseline and the expanded outputs, so it is self-contained for the same reconstruction. All code uses the standard library. Do not mistake compressed preservation for missing records, or claim that the large generated files are separately stored as flat remote files.
+
+## Paper assessment
+
+A complete English working manuscript is preserved as RESEARCH_NOTE.md: *Memory Across Changing Support: Recoverability, Timely Access, and the Cost of Omitted Inputs*. It is candidate material, not a new DOI or submission. The package has useful explicit theorems and counterexamples beyond the published UCT papers, but top-K guessing, min-entropy leakage and coding have close antecedents. Priority is not established. The defensible positioning is a bounded analysis of memory/readout organization, not a newly proved consciousness law. Large new experiments and an exclusive-subject solution are not made prerequisites for theoretical progress.

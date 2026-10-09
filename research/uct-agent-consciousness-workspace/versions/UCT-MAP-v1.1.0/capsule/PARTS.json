@@ -1,0 +1,11 @@
+{
+  "uncompressed_tar_bytes":225280,
+  "compressed_bytes":45476,
+  "compressed_sha256":"9820ba9acff4343dbc801376c8ec038f68137ef2671d8c3a455fafdbfa89df5d",
+  "parts":[
+    {"file":"part-01.b64","bytes":16001,"sha256":"ff8b5a2885ea0985e818589d7921170e4d477e15bd35735cd688e39af69b9a41","git_blob":"ead1b152ade240991cd81dedb965e7b366b4c807"},
+    {"file":"part-02.b64","bytes":16001,"sha256":"4c06df1869310bffc398c0b18ac0548851aa57ec3e37eacd2001c1bdbac8e751","git_blob":"081c9d3be019ba91d7a39268c166f2c89082a579"},
+    {"file":"part-03.b64","bytes":16001,"sha256":"2fb4123f29a64cce3eff8035978982e901bf7a25bba47ca253c23d00d881e602","git_blob":"1310a36aa61f9f56749ce23803ac4fb15e15fde1"},
+    {"file":"part-04.b64","bytes":12637,"sha256":"81e1f5f9454bc9f0f9d470155befeb443642a164e14c6e492ea2c3dbe1454e1b","git_blob":"bce2a7ae153d46b3fcff454a85ca29824c874c06"}
+  ]
+}

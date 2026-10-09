@@ -1,0 +1,19 @@
+{
+"release":"UCT-MAP-v1.0.0","registry_scope":"Current eight reviewed modules; full historical registry is reconstructed from capsule and pinned source, without blanket certification of unmapped historical notes.",
+"identity_rule":"Research ID is primary, R round label is not unique. IE is not EI.",
+"shared_fields":{"result_version":"source-preserved-20261008","first_map_release":"UCT-MAP-v1.0.0","last_reviewed_map_release":"UCT-MAP-v1.0.0","review_status":"COMPLETE_CONDITIONAL_SCHEMA_REVIEW","actual_application_status":"OPEN"},
+"results":[
+{"research_id":"CORE20261008","title":"Target-relative supports and redundancy","source":"records/CORE20261008_Target_Relative_Support/MAP_EXTENSION.json"},
+{"research_id":"EI20261008","title":"Arithmetic architecture dependence: shared, bypass and redundant routes","source":"records/EI20261008_Architecture_Dependence/MAP_EXTENSION.json"},
+{"research_id":"R183","title":"Individual versus disjunctive constitutive relevance","source":"records/R183_Target_Relative_Experiential_Relevance_20261008/MAP_EXTENSION.json"},
+{"research_id":"OO20261008","title":"Task access, coding distinctions and query timing","source":"records/OO20261008_Task_Access/MAP_EXTENSION.json"},
+{"research_id":"RU20261008","title":"Reliability, calibration, selection and information use","source":"records/RU20261008_Reliability_and_Use/MAP_EXTENSION.json"},
+{"research_id":"R184","title":"Target persistence after obstruction and reflex counterlimits","source":"records/R184_Target_Persistence_After_Obstruction_20261008/MAP_EXTENSION.json"},
+{"research_id":"RC20261008","title":"Marginal accuracy, joint coherence and source-message bounds","source":"restored_capsule/originals/UCT_Response_Coherence_20261008","sha256_map":"5d37d8dba5ecb0de9b82e7d70d9e98f0dd12541d2251835541e5e4f674166fea"},
+{"research_id":"IE20261008","title":"Contextual selection, report dissociation and delayed-query sufficiency","source":"restored_capsule/originals/UCT_Intelligence_Experience_20261008","sha256_map":"dcdfaaf16ba5320fe0125783d5dc0615d232c27f0e6a9bf73d87e6b58d064ed0"}
+],
+"pending_checkpoints":[
+{"research_id":"R185","title":"Cross-scale relation occurrence and token membership","result_version":"v0.1-checkpoint","base_map_release":"UCT-MAP-v1.0.0","first_completed_map_release":null,"status":"PENDING_CHECKPOINT","scientific_delta":"Occurrence identity and token-membership incidence applied to R184 target persistence; synchronized equal-valued copies remain distinct occurrences.","source":"records/R185_Cross_Scale_Relation_Membership_20261008/MAP_EXTENSION.json","compatibility_audit":"records/R185_Cross_Scale_Relation_Membership_20261008/V100_COMPATIBILITY_AUDIT.json","truth_and_novelty_limits":"Structural compatibility only; no actual bearer, named phenomenal bridge, semantic-release integration or priority clearance."}
+],
+"source_commit":"48b131a3ae8f7ac003ff5a2ce9c8d36111b2ea3c","capsule_restorer":"versions/UCT-MAP-v1.0.0/restore_capsule.py","complete_hashes_and_deltas":"Capsule RELEASE.json, EFFECTIVE_OVERLAY.json, REVIEW_LEDGER.json after reconstruction."
+}

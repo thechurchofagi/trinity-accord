@@ -1,11 +1,15 @@
-# Completed release changelog
+# Completed map changelog
 
-## UCT-MAP-v1.0.0 — 2026-10-08 — sequence 1
+## UCT-MAP-v1.1.0 — 2026-10-09 — sequence 2
 
-Frozen parent/source: 48b131a3ae8f7ac003ff5a2ce9c8d36111b2ea3c, historical revision R178-SB20261008-v1.0. First unified numbered full-audit release; earlier research and versions are not erased or renumbered.
+Compatible substantive addition, so minor version advances under VERSIONING_POLICY.md. Parent completed version v1.0.0 and repository head 11c1af83fa7e9eabca8351b67dfe162f59da7dd1.
 
-Completed 1,278 item-level semantic decisions over the base plus eight modules. Suspended 10 historical rules; added six guarded/alternative routes; checked 25 affected downstream nodes. Resolved six references, normalized 20 node scopes and five missing rule statements. Exact changed IDs and reasons are in the capsule overlay, findings and ledger.
+Integrates TH20261009 v0.1 temporal-handoff work and RB20261009 new recovery-budget analysis as combined result TH v0.2.0: 54 nodes, 23 guarded rules, 18 context links. Exact 95 added IDs are listed in the capsule's full RELEASE.json. No old scientific node/rule is overwritten; ten suspended routes remain suspended. Current census 776 nodes, 376 rule records (366 active), 221 contexts =1,373 items. All parent items received compatibility decisions and all new items were reviewed; physical/named applications remain open.
 
-Preserved previously unsaved IE and RC source notes, modules, scripts and results. Registered eight modules with stable IDs; IE is not EI. Reran finite-model checks, verified 49 source anchors and tested frozen reconstruction. Added current-state pointer, version policy, archive hashes and immutable source-and-review capsule. Archived old navigation files before replacing their current-entry roles.
+Adds sharp posterior top-K recovery bound and inverse, uniform residual/deadline specialization, approximate-mediation/prior-TV controls, and correlated-key/timing/reader/target counterexamples. Credits old R127/R136 and classical information theory. Working manuscript prepared; historical priority is unverified and no public paper release occurred.
 
-Open actual/phenomenal bridges and reviewer-controlled QC10/IA-QC11/QC12/QC13 remain OPEN. No publication or claim of independent review. Removed the temporary read-only source-inventory workflow used in source recovery. Next completed substantive cycle must use a higher release sequence and new version (normally v1.0.1).
+Preserves R185 and AC20261009 as disabled pending checkpoints. Saves exact source capsule and reproducible full-map/ledger reconstruction; previous current navigation is archived in this version's history/. Full offline archive includes expanded outputs and baseline.
+
+## Prior completed history
+
+The complete unchanged previous CHANGELOG.md is at versions/UCT-MAP-v1.1.0/history/CHANGELOG.md. The v1.0.0 release directory and its original claims, corrections and receipts remain immutable. The next ordinary completed version is v1.1.1.
