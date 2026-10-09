@@ -24,4 +24,9 @@ QC10、IA-QC11、QC12、QC13 均未自报关闭。新审查要求“组合接口
 
 ## 保存与恢复
 
-保存回执将在本轮持久化完成后追加。恢复时以远端最新分支头、固定主交接最新版本和本目录为准；不要用旧 Library 副本覆盖较新的已核验 GitHub 成果。
+- GitHub 内容提交：`40c3585a9055d77ea2d960276762bb97f65e322b`；从检查点 `f42707ff9464c3f4630d2437b055af9a7459d22a` 按 expected-SHA 快进，远端提交、`CURRENT_STATE.json`、`EXACT_RESULTS.json` 和本交接均已回读。
+- 固定主交接保持同一 Library ID `libfile_4175a81748fc819187fa8f5771f056fa`，现为版本 54、629,681 字节、backing file `file_00000000d73481fb9470fb880eb17c4e`。下载字节 SHA256 `5eec88d05eda1bd096b4f7df17d17e822bddb87eab5fcf78d0316bad35303b77` 与上传前一致，开头内容回读为 R196。
+- R196 增量包 ID `libfile_9a948a5e4068819198edb22d4952cd36`，版本 0、123,777 字节、backing file `file_00000000c41081fb9009d9b1c056ffdd`，SHA256 `4784044cefc0f468aa78e62146823a3be1b85cd0ae280cd5e73018173fc18c04`。下载字节逐一相同、ZIP 测试通过，33 条内部校验通过。该包只含相对基线 `84c8d8944737684a50e73cdb562f5430b0c20dad` 的 31 个仓库变更文件及 MANIFEST/README/SHA256SUMS，不是完整仓库、完整工作集或全部历史。
+- 初次对旧 v53 的 Library 下载仍曾返回 HTTP 403，失败已保留；新的 v54 与 R196 包回读成功，不虚报为 R195 包已补验。
+
+恢复时先获取 GitHub 分支最新头，依次读根 `CURRENT_STATE.json`、`HANDOFF.md`、`MASTER_INDEX.md`、固定主交接 v54 和本文件。若使用增量包，先核对外部 SHA256，从所列基线叠加 `repo/`，再在包根运行 `sha256sum -c SHA256SUMS.txt`。不要用旧 Library 副本覆盖较新的已核验 GitHub 成果。

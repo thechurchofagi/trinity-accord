@@ -10,6 +10,6 @@
 | R196-G6 | Measurement | No-report does not mean target absence; report can be evidence without defining basal experience. | Target and measurement remain separate. | No validated fallible measurement bridge for `F_F`. |
 | R196-G7 | Literature/priority | Relevant factorial, agency, ownership and value work predates this round. | Primary precedents are cited and mathematics is not claimed new. | Exhaustive novelty/priority review not done. |
 | R196-G8 | Map/review | Disabled structural compatibility does not establish semantics or reviewer closure. | Candidate remains disabled; QC10/11/12/13 remain open. | Independent review and any future map adoption. |
-| R196-G9 | Persistence | Library v53 and R195 ZIP materialization again returned HTTP 403. | Metadata/content read and failure retained; GitHub remains recoverable. | Exact Library byte readback for R195 and R196 must be retried. |
+| R196-G9 | Persistence | The first retry against Library v53 returned HTTP 403 and did not reach the R195 ZIP. | Failure retained. After the R196 update, fixed master v54 and the R196 ZIP were both downloaded through fresh signed URLs and matched local SHA256 byte-for-byte. | Historical R195 ZIP byte readback was not retried; R196 persistence is verified. |
 
 No gap is interpreted as absence of experience, mineness, consciousness or an exclusive owner.

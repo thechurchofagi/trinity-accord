@@ -10,5 +10,8 @@
 8. Traversed the complete UCT-MAP-v1.1.2 graph and 1,608-item ledger with a disabled 9-node/6-rule/5-context candidate. All 19 structural checks pass; semantic adoption remains open.
 9. Responded to QC10, IA-QC11, QC12 and QC13 without self-closing them and preserved the interface-evidence and test/use distinctions.
 10. Updated nondeductive publication coverage to UCT-PUB-v1.0.8 with decision `CONTINUE_RESEARCH_HOLD_STANDALONE`.
+11. Saved the content tree to GitHub by expected-SHA fast-forward at `40c3585a9055d77ea2d960276762bb97f65e322b` and read back the commit, current state, exact results and Chinese handoff.
+12. Built a 31-file R196 incremental recovery archive plus manifest, README and 33-entry checksum file. Local SHA256 is `4784044cefc0f468aa78e62146823a3be1b85cd0ae280cd5e73018173fc18c04`; local ZIP and all internal checks pass.
+13. Created Library increment `libfile_9a948a5e4068819198edb22d4952cd36` and replaced the fixed handoff at the same ID through version 54. Fresh signed-URL downloads matched the local master and ZIP byte-for-byte.
 
-Persistence steps and verified receipts are recorded in `HANDOFF_ZH.md` and the final save receipt. No PR, CI request, deployment, DOI, Zenodo, OTS, Arweave, message, production or scheduler action is part of R196.
+Persistence steps and verified receipts are recorded in `HANDOFF_ZH.md` and `DUAL_SAVE_RECEIPT.json`. No PR, CI request, deployment, DOI, Zenodo, OTS, Arweave, message, production or scheduler action is part of R196.
