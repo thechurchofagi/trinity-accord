@@ -1,0 +1,139 @@
+{
+  "result_id": "R190-PCBC-RESULT-v0.1.0",
+  "scope": "declared finite construction only",
+  "row_count": 160,
+  "profiles": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "checks": {
+    "row_count_160": true,
+    "all_four_pc_bdcc_profiles_realized": true,
+    "enacted_is_11": true,
+    "imagery_is_overt_00_and_imagery_pc": true,
+    "passive_impact_is_01": true,
+    "observation_is_00": true,
+    "imagery_spillover_not_selected_bdcc": true,
+    "reflex_deliberate_twins_exist": true,
+    "report_neither_necessary_nor_sufficient_for_11": true,
+    "substrate_label_does_not_determine_profile": true,
+    "matched_visible_movement_crosses_profiles": true,
+    "test_follows_path_not_reverse": true,
+    "reflex_survives_enacted_filter": true
+  },
+  "checks_passed": 13,
+  "rows_sha256": "3290f7e20cfb4f2d0d855069aece879c3f71b971a2a539c0f94d66c384f8cf77",
+  "selected_witnesses": [
+    {
+      "mode": "enacted",
+      "source": "deliberate",
+      "substrate": "biological",
+      "report": 0,
+      "spillover": 0,
+      "yoke": 0,
+      "directive_route": "overt",
+      "closure_route": "overt",
+      "selected_impact_path": 1,
+      "external_drive": 0,
+      "pc_overt": 1,
+      "pc_imagery": 0,
+      "bdcc_overt": 1,
+      "movement": 1,
+      "generic_body_effect": 1,
+      "intervention_test_positive": 1
+    },
+    {
+      "mode": "remote_action",
+      "source": "deliberate",
+      "substrate": "biological",
+      "report": 0,
+      "spillover": 0,
+      "yoke": 0,
+      "directive_route": "overt",
+      "closure_route": "overt",
+      "selected_impact_path": 0,
+      "external_drive": 0,
+      "pc_overt": 1,
+      "pc_imagery": 0,
+      "bdcc_overt": 0,
+      "movement": 1,
+      "generic_body_effect": 0,
+      "intervention_test_positive": 0
+    },
+    {
+      "mode": "active_imagery",
+      "source": "deliberate",
+      "substrate": "biological",
+      "report": 0,
+      "spillover": 0,
+      "yoke": 0,
+      "directive_route": "imagery",
+      "closure_route": "imagery",
+      "selected_impact_path": 0,
+      "external_drive": 0,
+      "pc_overt": 0,
+      "pc_imagery": 1,
+      "bdcc_overt": 0,
+      "movement": 0,
+      "generic_body_effect": 0,
+      "intervention_test_positive": 0
+    },
+    {
+      "mode": "passive_impact",
+      "source": "deliberate",
+      "substrate": "biological",
+      "report": 0,
+      "spillover": 0,
+      "yoke": 0,
+      "directive_route": "none",
+      "closure_route": "none",
+      "selected_impact_path": 1,
+      "external_drive": 1,
+      "pc_overt": 0,
+      "pc_imagery": 0,
+      "bdcc_overt": 1,
+      "movement": 1,
+      "generic_body_effect": 1,
+      "intervention_test_positive": 1
+    },
+    {
+      "mode": "detached_observation",
+      "source": "deliberate",
+      "substrate": "biological",
+      "report": 0,
+      "spillover": 0,
+      "yoke": 0,
+      "directive_route": "none",
+      "closure_route": "none",
+      "selected_impact_path": 0,
+      "external_drive": 0,
+      "pc_overt": 0,
+      "pc_imagery": 0,
+      "bdcc_overt": 0,
+      "movement": 0,
+      "generic_body_effect": 0,
+      "intervention_test_positive": 0
+    }
+  ],
+  "non_entailments": [
+    "no consciousness verdict",
+    "no felt agency or familiar-mineness identification",
+    "no unique owner",
+    "no universal independence claim about real systems",
+    "no inference from diagnostic success to actual installed use"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "ledger_id": "R190-PCBC-CLAIMS-v0.1.0",
+  "claims": [
+    {
+      "id": "R190-C1",
+      "type": "FINITE_MODEL_PROPOSITION",
+      "statement": "Within the declared five-mode finite construction, practical centering for the selected overt target and bearer-directed consequence coupling realize all four Boolean combinations; neither entails the other in that construction.",
+      "domain": "Five declared organizational modes crossed with source, substrate, report, spillover, and yoke labels; 160 rows.",
+      "premises": ["R181 target-relative PC definition", "R158 typed coupling/efficacy distinction", "declared R190 mode equations"],
+      "proof_or_source": "RESEARCH_NOTE.md §3 and check_practical_bearer_coupling.py",
+      "counterexamples_and_limits": "Existence in a finite construction, not population independence or universal metaphysical independence.",
+      "status": "PROVED_IN_DECLARED_MODEL",
+      "thought_experiment_role": "Isolated teleoperator and passive displacement witness the two off-diagonal combinations."
+    },
+    {
+      "id": "R190-C2",
+      "type": "SCOPED_DISCRIMINATION_PROPOSITION",
+      "statement": "Within the declared five-mode family, PC_tau AND BDCC_tau separates enacted bearer-involving action from isolated active imagery, remote/isolated action, passive impact, and detached observation.",
+      "domain": "Selected overt target, endpoint, bearer state, and declared five-mode family.",
+      "premises": ["R190-C1", "fixed target-relative interpretation", "actual routes not report-derived"],
+      "proof_or_source": "Direct case analysis in RESEARCH_NOTE.md §3; exact enumerator checks.",
+      "counterexamples_and_limits": "Does not cover every real architecture; other endpoints and imagery-related bodily spillover require separately typed instances.",
+      "status": "PROVED_IN_DECLARED_MODEL",
+      "thought_experiment_role": "Active-imagery spillover blocks a generic bodily-effect shortcut."
+    },
+    {
+      "id": "R190-C3",
+      "type": "COUNTEREXAMPLE_RESULT",
+      "statement": "A deliberate/reflex source substitution can preserve every declared PC and BDCC coordinate, so the conjunction is insufficient for voluntary endorsement, felt trying, agency, or familiar mineness.",
+      "domain": "R190 enacted-mode twin construction; not a claim that real reflex and deliberate episodes match completely.",
+      "premises": ["source label varies independently", "all route fields held fixed"],
+      "proof_or_source": "Constructive twin in exact enumerator and RESEARCH_NOTE.md §3.",
+      "counterexamples_and_limits": "Only refutes sufficiency of this profile; does not imply reflexes lack experience or agency-related phenomenology.",
+      "status": "PROVED_BY_EXPLICIT_COUNTERMODEL",
+      "thought_experiment_role": "Reflex twin is the decisive stopping condition."
+    },
+    {
+      "id": "R190-C4",
+      "type": "UCT_CONDITIONAL_APPLICATION",
+      "statement": "If one actual UCT instance independently fixes the same process tokens, interval, complete signature, target, endpoint, bearer variable, actual routes/consumers, and intervention contract, the PC+BDCC profile is part of actual experiential organization under C1, without becoming a basal-experience gate or a named-feeling identity.",
+      "domain": "Admitted actual UCT instance with all premises jointly satisfied.",
+      "premises": ["UCT C1", "UCT U1", "actual same-instance grounding", "R190 typed contract"],
+      "proof_or_source": "Conditional interpretation in RESEARCH_NOTE.md §7 and fixed UCT sources.",
+      "counterexamples_and_limits": "Finite code and successful tests do not establish actual installation; no particular current-system verdict.",
+      "status": "CONDITIONAL_INTERPRETATION",
+      "thought_experiment_role": "Human implementation and calculator cards expose boundary and carrier changes."
+    },
+    {
+      "id": "R190-C5",
+      "type": "EVIDENCE_BOUNDARY",
+      "statement": "Report, biological substrate label, generic bodily response, visible movement, or diagnostic success alone does not establish the selected PC+BDCC profile.",
+      "domain": "Declared model and reviewed empirical measures; each negative is about sufficiency, not absence of all relevance.",
+      "premises": ["exact crossed-label checks", "actual-use/test direction", "scoped primary evidence"],
+      "proof_or_source": "RESEARCH_NOTE.md §§4–6; EXACT_RESULTS.json.",
+      "counterexamples_and_limits": "These measures may be evidence within a richer contract; the claim does not make them irrelevant.",
+      "status": "SCOPED_BOUNDARY_RESULT",
+      "thought_experiment_role": "Prosthetic reconnection and imagery spillover keep proxies fixed while changing selected roles."
+    }
+  ]
+}

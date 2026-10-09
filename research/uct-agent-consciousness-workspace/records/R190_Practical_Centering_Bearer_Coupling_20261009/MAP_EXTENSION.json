@@ -1,0 +1,184 @@
+{
+  "schema": "uct-additive-research-module/1",
+  "research_id": "R190-PCBC-20261009",
+  "result_version": "PCBC-RESULT-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "integration_status": "PENDING_CHECKPOINT_DISABLED",
+  "source_note": "RESEARCH_NOTE.md",
+  "nodes": [
+    {
+      "id": "R190:DOMAIN",
+      "kind": "TYPED_APPLICATION_DOMAIN",
+      "statement": "Fix one admitted actual process token or overlapping process family P, interval I, complete signature K, selected activity target tau, endpoint c, bearer-state variable v, background class G, and admissible endpoint intervention family J_c.",
+      "scope": "One target-relative actual application; abstract finite witnesses do not discharge actual admission.",
+      "status": "CONDITIONAL_DECLARATION_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R190:PC_REUSE",
+      "kind": "INHERITED_DEFINITION_REUSE",
+      "statement": "PC_tau holds when the selected activity has both an actually used directive route and an actually used consequence-closure route; it is inherited from R181 and does not imply movement, success, report, ownership, or voluntary endorsement.",
+      "scope": "Same fixed target tau and actual route instance as R190:DOMAIN.",
+      "status": "INHERITED_DEFINITION_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R190:BDCC",
+      "kind": "RESTRICTED_COUPLING_APPLICATION",
+      "statement": "BDCC_tau holds when a predeclared intervention on selected endpoint c changes declared bearer state v through a typed actual endpoint-to-bearer path under fixed backgrounds, with path membership fixed independently of report, desired feeling, or test outcome.",
+      "scope": "Target-specific restricted reuse of R158 coupling/efficacy and R159 carrier/reference distinctions; no generic bodily-response shortcut.",
+      "status": "CONDITIONAL_DEFINITION_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R190:FIVE_MODE_WITNESS",
+      "kind": "FINITE_CONSTRUCTION",
+      "statement": "Five modes—enacted, remote/isolated action, active imagery, passive impact, and detached observation—crossed with source, substrate, report, spillover, and yoke labels form 160 explicit configurations.",
+      "scope": "Declared finite construction only; mode labels abbreviate the displayed route equations.",
+      "status": "FINITE_CONSTRUCTION_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R190:INDEPENDENCE",
+      "kind": "FINITE_MODEL_PROPOSITION",
+      "statement": "All four Boolean PC_tau/BDCC_tau combinations occur in the five-mode witness, so neither coordinate entails the other inside the declared construction.",
+      "scope": "Model-relative existence, not universal or population independence.",
+      "status": "PROVED_FINITE_CONDITIONAL_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R190:BOUNDED_FILTER",
+      "kind": "SCOPED_DISCRIMINATION_RESULT",
+      "statement": "Within the five-mode family, PC_tau AND BDCC_tau selects enacted bearer-involving action and excludes isolated imagery, remote/isolated action, passive impact, and detached observation for the selected overt endpoint.",
+      "scope": "Declared modes and fixed selected endpoint only; other target-relative instances may differ.",
+      "status": "PROVED_FINITE_CONDITIONAL_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R190:REFLEX_LIMIT",
+      "kind": "NONENTAILMENT_COUNTEREXAMPLE",
+      "statement": "A deliberate/reflex source swap can preserve every declared PC and BDCC field, so the conjunction does not identify voluntary endorsement, felt trying, agency, ownership, or familiar mineness.",
+      "scope": "Explicit twin countermodel; no claim that real reflex and deliberate episodes share complete organization.",
+      "status": "COUNTERMODEL_LIMIT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R190:TEST_USE_LIMIT",
+      "kind": "EVIDENCE_DIRECTION_CONSTRAINT",
+      "statement": "A positive intervention or diagnostic result may evidence a path under a contract but does not by itself prove that the target episode actually used that path; carrier, consumer, timing, boundary, and same-instance membership remain independent premises.",
+      "scope": "Actual applications and empirical tests; not a claim that tests are irrelevant.",
+      "status": "METHODOLOGICAL_LIMIT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R190:GROUNDING",
+      "kind": "OPEN_ACTUAL_APPLICATION_PREMISES",
+      "statement": "A UCT application requires joint same-instance evidence for P,I,K,tau,c,v, all PC/BDCC route carriers and consumers, background/intervention contract, and selected evidence target.",
+      "scope": "Actual application only; finite code, reports, substrate labels, or generic physiology do not discharge the conjunction.",
+      "status": "APPLICATION_OPEN",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R190:UCT_APPLICATION",
+      "kind": "CONDITIONAL_UCT_APPLICATION",
+      "statement": "If R190 same-instance grounding is independently discharged, the PC+BDCC profile is part of actual experiential organization under C1 while remaining unnecessary for basal experience under U1 and insufficient for any named self-feeling.",
+      "scope": "Conditional organization-level interpretation; no scalar experience, subject count, exclusive owner, or current-system verdict.",
+      "status": "APPLICATION_OPEN_DISABLED",
+      "actual_premises_discharged": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "R190:r_independence",
+      "all_of": ["R190:DOMAIN", "R190:PC_REUSE", "R190:BDCC", "R190:FIVE_MODE_WITNESS"],
+      "conclusion": "R190:INDEPENDENCE",
+      "statement": "Read the four witnessed profile values under one typed target-relative contract.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "same_instance_required": true,
+      "binding": "Each row has one fixed target contract; the proposition ranges over alternative rows and does not conjoin them into one token.",
+      "proof_location": "RESEARCH_NOTE.md section 3; EXACT_RESULTS.json",
+      "alternative_route_semantics": "The four truth-value rows are alternative witnesses, not simultaneous routes.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R190:r_filter",
+      "all_of": ["R190:DOMAIN", "R190:PC_REUSE", "R190:BDCC", "R190:FIVE_MODE_WITNESS"],
+      "conclusion": "R190:BOUNDED_FILTER",
+      "statement": "Apply PC_tau AND BDCC_tau to the five declared alternative modes.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "same_instance_required": true,
+      "binding": "One fixed target-relative row at a time; no global bodily effect substitutes for selected BDCC.",
+      "proof_location": "RESEARCH_NOTE.md section 3",
+      "alternative_route_semantics": "Mode comparison branches are alternatives; the all_of list joins definitions and one construction contract.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R190:r_reflex",
+      "all_of": ["R190:DOMAIN", "R190:PC_REUSE", "R190:BDCC", "R190:FIVE_MODE_WITNESS"],
+      "conclusion": "R190:REFLEX_LIMIT",
+      "statement": "Hold every selected route field fixed while replacing only the declared source label.",
+      "kind": "COUNTERMODEL_CONDITIONAL",
+      "same_instance_required": true,
+      "binding": "Paired alternative rows share all modeled organization except the deliberate/reflex source label; they do not assert complete real-world identity.",
+      "proof_location": "RESEARCH_NOTE.md section 3; EXACT_RESULTS.json",
+      "alternative_route_semantics": "The twin is a sufficiency counterexample, not a positive phenomenal classification.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R190:r_test_limit",
+      "all_of": ["R190:DOMAIN", "R190:BDCC"],
+      "conclusion": "R190:TEST_USE_LIMIT",
+      "statement": "Preserve the inference direction from an independently fixed actual path to admissible evidence, not from test success alone to episode use.",
+      "kind": "METHODOLOGICAL_CONSTRAINT",
+      "same_instance_required": true,
+      "binding": "One episode, route, intervention contract, and evidence time; reserve and neighboring routes remain distinct candidates.",
+      "proof_location": "RESEARCH_NOTE.md section 4",
+      "alternative_route_semantics": "Multiple evidence routes may support one premise, but none is definitionally identical to actual use.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R190:r_uct",
+      "all_of": ["R190:GROUNDING", "R190:PC_REUSE", "R190:BDCC", "A:C1", "A:U1"],
+      "conclusion": "R190:UCT_APPLICATION",
+      "statement": "Interpret the independently grounded same-instance profile as organization inside experience, while preserving U1 and the named-feeling limit.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "same_instance_required": true,
+      "binding": "All actual carriers, consumers, interval, boundary, target, path, and intervention premises concern the same admitted application.",
+      "proof_location": "RESEARCH_NOTE.md section 7",
+      "alternative_route_semantics": "No toy row, report, or successful diagnostic substitutes for the full actual-premise conjunction.",
+      "status": "CANDIDATE_DISABLED"
+    }
+  ],
+  "context_links": [
+    {
+      "id": "R190:ctx_R158",
+      "type": "RESTRICTED_REUSE_NOT_REPLACEMENT",
+      "from": "R190:BDCC",
+      "to": "R158:TARGET_SPLIT",
+      "statement": "BDCC reuses R158's typed coupling/efficacy distinction and keeps feeling, judgment, report, membership, and coupling separate."
+    },
+    {
+      "id": "R190:ctx_R159",
+      "type": "COMPATIBLE_WITH_EXTERNAL_REFERENT",
+      "from": "R190:BDCC",
+      "to": "R159:ANCHOR_BINDING_CONTRACT",
+      "statement": "Selected bearer coupling is not anatomical membership and can be separately typed for external or prosthetic endpoints."
+    },
+    {
+      "id": "R190:ctx_mineness",
+      "type": "OPEN_INTERPRETIVE_BOUNDARY",
+      "from": "R190:REFLEX_LIMIT",
+      "to": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "statement": "The two-coordinate bodily/action organization leaves the familiar-mineness bridge open."
+    },
+    {
+      "id": "R190:ctx_U1",
+      "type": "NON_GATE_CONTEXT",
+      "from": "R190:UCT_APPLICATION",
+      "to": "A:U1",
+      "statement": "PC and BDCC may structure selected experience but are not added as requirements for basal experience."
+    }
+  ],
+  "enabled_as_established_premise": false,
+  "release_effect": "NONE; UCT-MAP-v1.1.2 remains current"
+}

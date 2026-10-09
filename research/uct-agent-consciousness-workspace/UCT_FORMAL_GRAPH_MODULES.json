@@ -189,6 +189,23 @@
       "compatibility_audit": "records/R189_Higher_Arity_Context_Access_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R189_Higher_Arity_Context_Access_20261009/HANDOFF_ZH.md",
       "instruction": "Structural compatibility with v1.1.2 passed. Semantic adoption, actual installation/use, named phenomenal interpretation and reviewer disposition remain open; do not count this module in completed-release totals."
+    },
+    {
+      "id": "R190-PCBC-20261009",
+      "result_version": "PCBC-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.2",
+      "candidate_counts": {
+        "nodes": 10,
+        "active_conditional_rules": 5,
+        "nondeductive_context_links": 4
+      },
+      "compatibility_audit": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R190_Practical_Centering_Bearer_Coupling_20261009/HANDOFF_ZH.md",
+      "instruction": "Structural compatibility with v1.1.2 passed. PC and BDCC are independent only in the declared finite construction; actual installation, named phenomenal interpretation, semantic adoption and reviewer disposition remain open."
     }
   ],
   "pending_rebase_target": "UCT-MAP-v1.1.2; prior pending instructions and candidate version labels remain historical source metadata.",
@@ -199,9 +216,9 @@
   "on_source_change": "Fail closed; compare exact current bytes, repeat applicable semantic compatibility review and affected rederivation, then create a new immutable completed version.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.1",
+    "version": "UCT-PUB-v1.0.2",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R189_Higher_Arity_Context_Access_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/R190_Practical_Centering_Bearer_Coupling_20261009/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },

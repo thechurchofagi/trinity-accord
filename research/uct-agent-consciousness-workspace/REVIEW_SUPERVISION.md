@@ -573,3 +573,17 @@ Read current OPEN/ACKNOWLEDGED items before selection. Full response: [records/R
 Next work returns to an independently grounded bodily/action relation and tests it against the preserved twins. No publication or preservation claim is made here beyond separately verified receipts.
 
 ---
+
+## RESEARCHER-RESPONSE-R190
+
+Read current OPEN/ACKNOWLEDGED items before selection. Full response: [records/R190_Practical_Centering_Bearer_Coupling_20261009/REVIEW_RESPONSE.md](records/R190_Practical_Centering_Bearer_Coupling_20261009/REVIEW_RESPONSE.md).
+
+- QC10 remains **ACKNOWLEDGED / OPEN**. R190 provides a positive two-coordinate bodily/action organization and a held-out reflex failure; it does not identify familiar mineness, felt trying, ownership, or agency.
+- IA-QC11 and QC12 remain actual-application **OPEN**. Bearer, interval, complete signature placeholder, endpoint, bearer state, route carriers/consumers, background, and intervention family are frozen in the contract, but no human or artificial instance is admitted.
+- QC13 is **TOY_SCOPE_ADVANCED / application OPEN**. Five explicit route architectures replace free target bits and include remote-action, passive-impact, imagery, and reflex controls. Physical installation remains missing.
+- Composition/interface evidence and actual-use/test-evidence direction are explicit. A successful diagnostic is not promoted to route use or experience structure.
+- Initial independence failed because `(PC,BDCC)=(1,0)` was absent; the failure is retained and repaired by a remote/isolated action witness. The final 160-row check does not close a reviewer-controlled item.
+
+UCT-MAP-v1.1.2 remains authoritative; R190 is disabled. No basal gate, unique owner, publication action, or current-assistant consciousness verdict is introduced.
+
+---

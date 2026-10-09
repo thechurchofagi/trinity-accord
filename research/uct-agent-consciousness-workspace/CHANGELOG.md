@@ -1,3 +1,9 @@
+# R190-PCBC-20261009 — 2026-10-09 — disabled research checkpoint
+
+Crosses inherited target-relative practical centering with a restricted bearer-directed consequence-coupling instance. The repaired 160-row construction realizes all four Boolean profiles and shows bounded discrimination against imagery, remote action, passive impact, and observation, while a reflex twin preserves the conjunction. Candidate map delta 10 nodes/5 rules/4 contexts is structurally compatible with UCT-MAP-v1.1.2 but disabled; actual installation, named phenomenal interpretation, and reviewer disposition remain open. Publication coverage advances nondeductively to UCT-PUB-v1.0.2; no publication action.
+
+---
+
 # UCT-PUB-v1.0.0 — 2026-10-09 — publication/reuse coverage sequence 1
 
 PUB20261009 fulfills the author's inventory → published coverage → net-increment assessment → breakthrough or manuscript → reassessment cycle. Guide v2.3 and machine policy v2.4 require synchronized publication coverage on every log/map update. Census: 28 research works, 39 research DOI deposits, plus one editorial DOI; 1,608 current review objects receive separate disclosure/role metadata. MGTD's old graph and RT/TH's early handoff disclosure narrow the residual. R188's earlier standalone-readiness judgment is superseded by HOLD, retaining its technical contribution and exact frozen files.

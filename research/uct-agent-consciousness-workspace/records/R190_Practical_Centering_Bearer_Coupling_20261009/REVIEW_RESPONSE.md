@@ -1,0 +1,8 @@
+# R190 response to current review supervision
+
+- **QC-20261008-10 — ACKNOWLEDGED / OPEN.** R190 gives a positive two-coordinate bodily/action organization and an explicit rival family rather than only excluding mechanisms. It still does not independently identify familiar mineness, felt trying, ownership, or agency. The reflex twin is a held-out failure of sufficiency, not a phenomenal success.
+- **IA-QC11 — ACKNOWLEDGED / application OPEN.** Target identity, selected endpoint, bearer variable, and source/consumer roles are frozen in the contract. No actual human or artificial installation and no named phenomenal correspondence is supplied.
+- **QC-20261008-12 — ACKNOWLEDGED / application OPEN.** `R190:DOMAIN` fixes bearer, interval, complete signature placeholder, endpoint, bearer state, background, and intervention family before comparison. The finite rows do not establish that a real endpoint/path belongs to a selected whole process.
+- **QC-20261008-13 — TOY_SCOPE_ADVANCED / application OPEN.** PC target binding is no longer represented by free `D,C` bits alone: the five modes declare directive and closure consumer routes, selected endpoint, and endpoint-to-bearer path. Remote action, passive impact, active imagery, and reflex twins are explicit negative controls. Actual route carriers/consumers remain uninstantiated.
+
+The two later reviewer cautions are addressed directly: R190 retains evidence for each instance's interface/path conditions, and `TEST_USE_LIMIT` prevents a test condition from being promoted to experience structure. Machine checks certify only declared finite equations. UCT-MAP-v1.1.2 remains authoritative; R190 is disabled. No reviewer-controlled item is closed by self-report.

@@ -1,0 +1,38 @@
+{
+  "schema": "uct-r190-map-compatibility-audit/1",
+  "base_release": "UCT-MAP-v1.1.2",
+  "base_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "base_review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "base_counts": {
+    "nodes": 913,
+    "active_rules": 424,
+    "contexts": 261,
+    "suspended_historical_rules": 10
+  },
+  "candidate_counts": {
+    "nodes": 10,
+    "rules": 5,
+    "contexts": 4,
+    "combined_nodes": 923,
+    "combined_rules": 429,
+    "combined_contexts": 265
+  },
+  "checks": {
+    "base_release_is_v1_1_2": true,
+    "base_counts_match_release": true,
+    "review_ledger_has_1608_items": true,
+    "extension_disabled": true,
+    "new_ids_unique": true,
+    "no_id_collision": true,
+    "all_new_nodes_scoped": true,
+    "all_rules_have_nonempty_all_of": true,
+    "all_rules_same_instance": true,
+    "all_rules_have_binding_and_proof": true,
+    "all_references_resolve": true,
+    "combined_rule_graph_acyclic": true
+  },
+  "unresolved_references": [],
+  "all_structural_checks_pass": true,
+  "semantic_scope": "Full structural traversal of the exact 1,608-item reviewed baseline plus manual affected-family review. This does not re-prove inherited mathematics, validate actual premise truth, identify a phenomenal target, or make R190 active.",
+  "integration_status": "STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN"
+}

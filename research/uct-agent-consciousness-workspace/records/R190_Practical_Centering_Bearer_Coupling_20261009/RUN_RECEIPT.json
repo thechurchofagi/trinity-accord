@@ -1,0 +1,52 @@
+{
+  "receipt_id": "R190-RUN-RECEIPT-v0.1.0",
+  "research_id": "R190-PCBC-20261009",
+  "base_remote_commit": "2ed44e238b7402293c884616202cee4d9cff4e7c",
+  "branch": "uct-agent-consciousness-workspace",
+  "result_version": "PCBC-RESULT-v0.1.0",
+  "exact_model": {
+    "rows": 160,
+    "checks_passed": 13,
+    "profiles": [[0, 0], [0, 1], [1, 0], [1, 1]],
+    "results_sha256": "b2998d86d15454d3393e311737602a0dcb3b69f0f3dc03123ec6f3743b8072de"
+  },
+  "completed_map": {
+    "release": "UCT-MAP-v1.1.2",
+    "capsule_members_verified": 82,
+    "effective_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+    "review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+    "counts": {"nodes": 913, "active_rules": 424, "contexts": 261, "suspended_rules": 10, "review_items": 1608}
+  },
+  "candidate_map": {
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "counts": {"nodes": 10, "rules": 5, "contexts": 4},
+    "compatibility_audit_sha256": "1485c88d43cd9b3b075f0dc39e737cc6a61ca32ec77df55b786caefe7cd0529c",
+    "structural_status": "STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN"
+  },
+  "review_status": {
+    "QC-20261008-10": "ACKNOWLEDGED_OPEN",
+    "IA-QC11": "ACKNOWLEDGED_APPLICATION_OPEN",
+    "QC-20261008-12": "ACKNOWLEDGED_APPLICATION_OPEN",
+    "QC-20261008-13": "TOY_SCOPE_ADVANCED_APPLICATION_OPEN"
+  },
+  "publication_coverage": {
+    "version": "UCT-PUB-v1.0.2",
+    "decision": "CONTINUE_RESEARCH",
+    "worldwide_priority_verified": false
+  },
+  "persistence": {
+    "github_content_commit": null,
+    "github_final_receipt_commit": null,
+    "library_master_expected_version": 46,
+    "library_master_new_version": null,
+    "library_increment_id": null,
+    "status": "PENDING_DUAL_SAVE"
+  },
+  "failures_retained": [
+    "Initial R189 recovery name assumption was wrong and corrected from source.",
+    "An old-schema quick graph field checker failed and was discarded; release ledger and schema-aware audit used.",
+    "Initial four-mode model lacked the (1,0) profile; remote/isolated action repaired it.",
+    "Actual installation, named phenomenal target, reviewer disposition, and worldwide priority remain open."
+  ],
+  "next": "Ground one online conflict/endorsement transformation on a fixed PC+BDCC episode and test it against a reflex-table duplicate without using a deliberateness or self label as the answer."
+}

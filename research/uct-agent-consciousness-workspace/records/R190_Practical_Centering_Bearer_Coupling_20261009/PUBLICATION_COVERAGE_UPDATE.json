@@ -1,0 +1,50 @@
+{
+  "record_id": "R190-PUB-COVERAGE-20261009-v1",
+  "date_utc": "2026-10-09T09:46:33Z",
+  "base_research_commit": "2ed44e238b7402293c884616202cee4d9cff4e7c",
+  "base_completed_map_version": "UCT-MAP-v1.1.2",
+  "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+  "previous_coverage_version": "UCT-PUB-v1.0.1",
+  "new_coverage_version": "UCT-PUB-v1.0.2",
+  "checked_publication_sources": [
+    {
+      "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+      "version": "UCT-PUB-v1.0.0",
+      "source_commit": "2eaf7d357437205d9be66d620caf3aea2425786f",
+      "manuscript_sha256": "e976c3c5a65dddb284aaebc5a7a12330285979f1f8c7e848a41b1e0324fdadbb",
+      "release_evidence": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+      "read_scope": "Existing verified 28-work/39-research-DOI census and claim index; R190 postdates this frozen corpus."
+    }
+  ],
+  "changed_claim_ids": ["R190-C1", "R190-C2", "R190-C3", "R190-C4", "R190-C5"],
+  "newly_covered_claim_ids": [],
+  "partially_covered_claims": [],
+  "uncovered_candidates_within_verified_corpus": ["R190-C1", "R190-C2", "R190-C3", "R190-C4", "R190-C5"],
+  "unverified_scope": [
+    "Worldwide priority beyond the primary empirical sources and internal predecessors checked in PRIOR_ART_AND_EVIDENCE.md",
+    "Any public work or version created after the UCT-PUB-v1.0.0 frozen corpus"
+  ],
+  "residual_assessment": {
+    "precise_problem": "Can a target-specific bodily consequence relation combine with practical centering to distinguish enacted action from imagery/passive impact without defining a desired feeling, and can it exclude a reflex twin?",
+    "net_increment_after_subtraction": "A four-cell PC/BDCC witness, bounded five-mode discrimination, explicit remote-action repair of the initially missing (1,0) case, and a reflex-invariance counterexample.",
+    "closest_internal_and_external_predecessors": [
+      "R158 typed coupling/efficacy and ownership-agency ablation",
+      "R159 body-frame/reference distinction",
+      "R181 target-relative practical centering",
+      "R182–R185 route, obstruction, and overlap controls",
+      "Matamala-Gomez et al. 2025 virtual body continuity",
+      "Critchley et al. 2021 autonomic null in rubber-hand illusion",
+      "Hong et al. 2026 divergent prosthesis embodiment measures"
+    ],
+    "reusable_knowledge": "Future work can keep practical policy organization and selected endpoint-to-bearer coupling as separate coordinates, reject generic physiology/report/substrate shortcuts, and use the reflex twin as a mandatory sufficiency control.",
+    "evidence_and_limits": "Written case proof plus 160-row/13-check finite witness and scoped primary evidence; no actual installation, independently measured familiar-mineness target, global priority verification, or complete organization.",
+    "decision": "CONTINUE_RESEARCH",
+    "next_specific_action": "Specify one independently grounded online conflict/endorsement transformation on a fixed PC+BDCC episode and test whether a reflex-table duplicate preserves it; do not add a deliberateness label as the answer."
+  },
+  "map_semantics_changed": false,
+  "whole_map_audit_if_required": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_COMPATIBILITY_AUDIT.json",
+  "work_log_path": "records/R190_Practical_Centering_Bearer_Coupling_20261009/WORK_LOG.md",
+  "handoff_path": "records/R190_Practical_Centering_Bearer_Coupling_20261009/HANDOFF_ZH.md",
+  "persistence_receipt_path": "records/R190_Practical_Centering_Bearer_Coupling_20261009/DUAL_SAVE_RECEIPT.json",
+  "warning": "Not found in the frozen verified corpus is not a claim of worldwide nonpublication or priority. UCT-PUB-v1.0.2 is a nondeductive incremental coverage entry, not a science-map release."
+}

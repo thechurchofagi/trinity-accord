@@ -190,14 +190,27 @@
       "publication_coverage_version": "UCT-PUB-v1.0.1",
       "compatibility_audit": "records/R189_Higher_Arity_Context_Access_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R189_Higher_Arity_Context_Access_20261009/HANDOFF_ZH.md"
+    },
+    {
+      "research_id": "R190-PCBC-20261009",
+      "result_version": "PCBC-RESULT-v0.1.0",
+      "title": "Practical Centering and Bearer-Directed Consequence Coupling",
+      "source": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.2",
+      "novelty": "NEW_APPLICATION_SYNTHESIS_PRIORITY_UNVERIFIED",
+      "compatibility_audit": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R190_Practical_Centering_Bearer_Coupling_20261009/HANDOFF_ZH.md"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.1",
+    "version": "UCT-PUB-v1.0.2",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R189_Higher_Arity_Context_Access_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/R190_Practical_Centering_Bearer_Coupling_20261009/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },

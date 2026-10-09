@@ -1,0 +1,50 @@
+{
+  "ledger_id": "R190-PCBC-GAPS-v0.1.0",
+  "gaps": [
+    {
+      "id": "R190-G1",
+      "status": "REPAIRED_THIS_ROUND",
+      "location": "Initial finite witness",
+      "impact": "The first four modes realized only three PC/BDCC combinations, so independence was unsupported.",
+      "counterexample": "No (1,0) row existed.",
+      "repair": "Added remote/isolated action with overt directive/closure use but no selected endpoint-to-bearer path; reran 160 rows.",
+      "unresolved": "Real-system realization of the isolated mode remains an empirical grounding question."
+    },
+    {
+      "id": "R190-G2",
+      "status": "OPEN",
+      "location": "BDCC actual grounding",
+      "impact": "Without same-instance carrier, consumer, timing, boundary, and intervention evidence, BDCC is only an abstract typed relation.",
+      "counterexample": "A test may activate a reserve or neighboring route unused in the target episode.",
+      "repair": "Definition separates actual path membership from test evidence and requires target-specific grounding.",
+      "unresolved": "No complete biological or artificial installation is supplied."
+    },
+    {
+      "id": "R190-G3",
+      "status": "OPEN",
+      "location": "Phenomenal interpretation",
+      "impact": "PC+BDCC does not identify felt agency, trying, ownership, or familiar mineness.",
+      "counterexample": "Reflex twin preserves the full declared profile.",
+      "repair": "Downgraded the conclusion to bearer-involving practical organization and retained non-identification.",
+      "unresolved": "An independent online conflict/endorsement transformation, if any, needs definition and a non-report discriminator."
+    },
+    {
+      "id": "R190-G4",
+      "status": "OPEN",
+      "location": "Completeness and overlap",
+      "impact": "A selected profile is not complete ontic organization and does not determine subject count or exclusive ownership.",
+      "counterexample": "Overlapping local and whole processes can share routes while copies can share abstract profiles.",
+      "repair": "Restricted every claim to fixed targets/instances and retained UCT overlap doctrine.",
+      "unresolved": "No global subject-boundary theorem is attempted."
+    },
+    {
+      "id": "R190-G5",
+      "status": "OPEN",
+      "location": "Empirical target validity",
+      "impact": "Explicit ratings, drift, intentional binding, MEPs, and autonomic signals diverge and cannot be collapsed into one target.",
+      "counterexample": "Critchley et al. report illusion evidence with null sustained autonomic differences; Hong et al. report divergent embodiment measures.",
+      "repair": "Evidence is used only as constraint and motivation, not as a phenomenal identity proof.",
+      "unresolved": "No independent direct measure of familiar mineness is available."
+    }
+  ]
+}
