@@ -1,0 +1,64 @@
+{
+  "research_id": "R187-20261009",
+  "result_version": "CMA-RESULT-v0.1.0",
+  "date": "2026-10-09",
+  "repository": "thechurchofagi/trinity-accord",
+  "branch": "uct-agent-consciousness-workspace",
+  "scientific_completed_release_preserved": "UCT-MAP-v1.1.1",
+  "scientific_release_sequence_unchanged": 3,
+  "new_candidate": "UCT-MAP-v1.1.2-R187-candidate.1",
+  "candidate_status": "PENDING_MAP",
+  "full_1419_item_semantic_audit_completed": false,
+  "old_R186_625_obligations_discharged": false,
+  "artifact_path": "research/uct-agent-consciousness-workspace/records/R187_Causal_Multiplicity_20261009/",
+  "commits": {
+    "research_files_archive": "9ab721f171fad94a3edb3843af557fab2fbad51a",
+    "registered_disabled_module": "6b2e74ab65d8966cca741a0b0d4f16f6b19b9f2e",
+    "handoff_index": "9b6bf8900b5e0ceb33d98f03fe7f9cd5c740a6a1",
+    "master_index": "848dff18c7239f98f876b0d47122e07b47ac32c2",
+    "current_state_pending_pointer": "1a8d377db993c3938941c71aca549e94c2ee12ed"
+  },
+  "readback": {
+    "work_log_git_blob": "2dd890c0d9ccc5ece7fe1f15972646f15423c208",
+    "handoff_git_blob": "bce0668a0d6496028f90741332f513f7a5aca456",
+    "map_extension_git_blob": "32afef9f304b0adc9e90aac2cd499ef709cd079e",
+    "study_markdown_git_blob": "051ee9a829dec9238f4e04828e68e875aa66ce98",
+    "test_script_git_blob": "f9bb732a26789f1fcf58b241c64e28f6f80b6db4",
+    "archive_git_blob": "bf5045375eab7bf949a91479637a5147ed1c1f38",
+    "readback_state": "TEXT_BLOBS_READ_BACK; BINARY_BLOB_MATCHED_GIT_HASH_OBJECT_ON_UPLOAD"
+  },
+  "local_archive": {
+    "name": "UCT_Causal_Multiplicity_20261009_v0.1.0.zip",
+    "sha256": "c48f7830fcd61a7692cea2a7c853ef7d36c33c3f4f0bd717e34eb89831ed557d",
+    "bytes": 539780,
+    "zip_integrity_pass": true,
+    "member_hash_integrity_pass": true,
+    "manifest_members": 16
+  },
+  "library_backup": {
+    "folder": "/UCT_Causal_Multiplicity_20261009_v0.1.0",
+    "zip_library_file_id": "libfile_ec31a42518908191be9c694224f75ab0",
+    "work_log_library_file_id": "libfile_62064a676f44819193c42352c82ca587",
+    "handoff_library_file_id": "libfile_b607505552208191a0b46ffc22d5222d",
+    "research_note_library_file_id": "libfile_3107002b5d748191a8f3b3c8cbcf0e70"
+  },
+  "validated_test_counts": {
+    "histories_common_interface": 8184,
+    "rank_cases": 6,
+    "noise_geometry_checks": 162,
+    "stochastic_exact_tv_cases": 78,
+    "test_status": "PASS"
+  },
+  "scope_limits": [
+    "All 1419 inherited current IDs checked mechanically, 12 v1.0.0 inherited source clauses read, NOT full v1.1.1 semantic audit",
+    "Finite toy automata do not identify actual physical bearer or subject multiplicity",
+    "R185/AC/IL/R186/UI/CM remain pending independently",
+    "Conceptual no-go based on pre-existing bisimulation literature; not new fundamental logic"
+  ],
+  "publication": {
+    "doi": null,
+    "ots": false,
+    "arweave": false,
+    "journal_submission": false
+  }
+}
