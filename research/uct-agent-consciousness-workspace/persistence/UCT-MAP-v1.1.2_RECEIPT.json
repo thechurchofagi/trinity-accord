@@ -1,0 +1,678 @@
+{
+  "schema": "uct-persistence-receipt/1.0",
+  "research_id": "R188-CER-20261009",
+  "result_version": "CER-RESULT-v0.1.0",
+  "release": "UCT-MAP-v1.1.2",
+  "repository": "thechurchofagi/trinity-accord",
+  "branch": "uct-agent-consciousness-workspace",
+  "scientific_commit": "fa32518b0d956a461db65416920ec2eea8acfe88",
+  "scientific_tree": "6020c5d1069e0d42f16f937fefa5ab7d612edb56",
+  "parent_commit": "f72f99d60c391c4b15f5c9334b49d09e13abaac8",
+  "github_status": "COMMITTED_AND_READBACK_VERIFIED",
+  "branch_update": "expected-SHA fast-forward; force=false; [skip ci]",
+  "readback_method": "All69written Git blob IDs compared with locally computed exact-byte Git hashes across12tree reads; branch head, current state and complete manuscript then read back. Binary blob creation SHA and tree identity checked; not a claim to have re-downloaded every binary file.",
+  "targeted_readbacks": [
+    {
+      "target": "branch",
+      "head": "fa32518b0d956a461db65416920ec2eea8acfe88",
+      "confirmed": true
+    },
+    {
+      "target": "state",
+      "git_blob_sha": "b1bb9354bfcb5ce54f1a683d77e8c5625f15fa99",
+      "confirmed": true
+    },
+    {
+      "target": "paper",
+      "git_blob_sha": "5eb8d0e8fabbbb8d062f46ac7e6c4c8e2839949a",
+      "confirmed": true
+    }
+  ],
+  "verification": {
+    "status": "ALL_69_WRITTEN_BLOBS_MATCH_LOCAL_BYTES",
+    "tree": "6020c5d1069e0d42f16f937fefa5ab7d612edb56",
+    "trees_read": 12,
+    "files": [
+      {
+        "path": "research/uct-agent-consciousness-workspace/CHANGELOG.md",
+        "git_blob_sha": "fe0e9a788eaa6462589c72954c5b17a38173f5bd",
+        "sha256": "b55ad5c0fb7deb9e3b8554e93425a5049e98af7f690914dc08038a6380ad2675",
+        "bytes": 3938
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/CURRENT_STATE.json",
+        "git_blob_sha": "b1bb9354bfcb5ce54f1a683d77e8c5625f15fa99",
+        "sha256": "0c72fd1f60e92e6d8fe6435881114cf07697043d63f2f20d76695f240dbc35d0",
+        "bytes": 2278
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/FORMAL_MAP_REVIEW_POLICY.json",
+        "git_blob_sha": "9ea15b05a73d4fc07d64c82a6f91adef4be94a6a",
+        "sha256": "ef29fd7467f7d470765d24c27ca209a2838919eb9e15fe9451983cf5002c2cba",
+        "bytes": 4991
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+        "git_blob_sha": "4f48ac550f5027436dda08a8c70f8dac753c6d5f",
+        "sha256": "81ebb31426bef0276b7e071d23c02e3ab937c75f67ef4aa44f6965bfd0de04c4",
+        "bytes": 3926
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+        "git_blob_sha": "2a793bef3b30d5d25e772a92267113ec31c01548",
+        "sha256": "9d840bbba8501ce0f7bf7b0bdf030ddd5d48bfda2464b4f3fea2bd3c4efa6d84",
+        "bytes": 3955
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+        "git_blob_sha": "2677545ccaac0017051084fdd1276db1d3465ebe",
+        "sha256": "922899d8a0445b7812365c84fd55792d263b523d8f565a2ba00dde062c80bff0",
+        "bytes": 3999
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+        "git_blob_sha": "2ad26907ebc351c7447f68518aad7915c3e11927",
+        "sha256": "7c09c593f712e2d9120c7ad54f10ace75a0270992469d6b7abaedc45b74e6abb",
+        "bytes": 22250
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/RESEARCH_REGISTRY.json",
+        "git_blob_sha": "f491e0d28d646cb02d81db8728b6ae48baf79dba",
+        "sha256": "deff0598c9ce5665c653d4fe88958dd78d1e5fea571cec2c57e8153e77984f29",
+        "bytes": 8001
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/RESEARCH_SESSION_LOG_INDEX.json",
+        "git_blob_sha": "0b3e37e25aa70fb4f69afa2680114bd80abcba1b",
+        "sha256": "b499256019d03d06ece418c81b3c3abd81ae895abc56f62f0e32d9712f1f03ff",
+        "bytes": 597
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+        "git_blob_sha": "cd03e53e8d98a99962e5aa3ce708cd8d95d4d6b1",
+        "sha256": "f7021132afe4098e8b6afba64b51f7c3c5e24713a51cc5d98f26c541a982747a",
+        "bytes": 917
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH_MODULES.json",
+        "git_blob_sha": "6faefd502597e3fce7ee331a700e85e5a3c0bef4",
+        "sha256": "868a553f957635904e9e784be2fb67dcae77f071f6414191a00b9b7932625fb4",
+        "bytes": 8661
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+        "git_blob_sha": "4145c43773c83e2b01d6c0b8e059565c3da1b718",
+        "sha256": "0142c7ddc58dcbaaf1700f68c1ecc02dd9d32428c190c34dd835877b2aea5bf7",
+        "bytes": 1508
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/VERSIONING_POLICY.md",
+        "git_blob_sha": "189f3613cadc7c9f4f627e382b37e6a86e969d3b",
+        "sha256": "671c8f04d002b67444353244db40cb1461369289f148eb4b7a5fb4335ad5069f",
+        "bytes": 2379
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/AUDIT_REPORT.md",
+        "git_blob_sha": "ba789b6dda3d26838a469fa979b50909a540942a",
+        "sha256": "35a16ff5a4e727015bb74ff14f011f4f265937c7340d10d962fa34c904ef16ff",
+        "bytes": 1575
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/CLAIM_REUSE_LEDGER.json",
+        "git_blob_sha": "5039592ff43737210e6cdea8ef10787f70e6b021",
+        "sha256": "cd56eb28d88833a6a78b288f095188b85207f72242dc6788adef8d07c13c3397",
+        "bytes": 21179
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/EXACT_RESULTS.json",
+        "git_blob_sha": "854c06a12c2fedcb1290953f34ca91a4c6b225b3",
+        "sha256": "67414cb323922a99bfe949bb9e6e8ec256c04ed69942b8f5bc3834d180a53a59",
+        "bytes": 18065
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/GUIDE_PURPOSE_ADOPTION.md",
+        "git_blob_sha": "a936c3db88d600f4a07787459d2e472400d90eda",
+        "sha256": "bde4b3e5facf32994349af6d955d99df2e1932d112c02b7983f937c962bf5eaa",
+        "bytes": 955
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/HANDOFF_ZH.md",
+        "git_blob_sha": "41ab4f280170c8c6aea39be00bb612975979f198",
+        "sha256": "221f51b94b5fff13b533d3e80c044043a911b6f34c3e396dd111f2799bf2a6bd",
+        "bytes": 9755
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/INDEPENDENT_PROTOCOL_REVIEW.md",
+        "git_blob_sha": "808d39185bd7ec31ce2a70019deb9b4a29859fa3",
+        "sha256": "69711bc84e3da44ba3a89f9ebe0087b23978edd6d012da6caaefda4c6c166719",
+        "bytes": 9637
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/MAP_EXTENSION.json",
+        "git_blob_sha": "6f7719d7ed1d81fce0fb926e8cec62ebefd20b69",
+        "sha256": "66c047490121ea27e668c89008936806ad15a92dbab15c8115e99dd421739be6",
+        "bytes": 33692
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/PDF_QA_RECEIPT.json",
+        "git_blob_sha": "0807cd2440aae078177115da7e3da8a8ac3169ff",
+        "sha256": "ec6420df1fa4ef51a2dedf7faf08241aa48c74964186e5002096f5927b1cc50f",
+        "bytes": 976
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/PRIOR_ART_AND_REUSE.md",
+        "git_blob_sha": "1d634cdc2c1d8b777c9b3b1eb0916b5430f5fb86",
+        "sha256": "548236ca01ed96ddf1027ebe7e437ca1351c2c6f0962e70d426f58483eb75a78",
+        "bytes": 12356
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/PROCESS_RESULTS.json",
+        "git_blob_sha": "2853b5838dd62cb321147c90cdd987629f5ab37b",
+        "sha256": "165d0d152f035801e8c09c3fff5aa72d7be26aff07e679a74cfd131ae44611c4",
+        "bytes": 125749
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/README.md",
+        "git_blob_sha": "ff6cdcce6d4e090445d0741ce46ddd736015d691",
+        "sha256": "d3ba744a7e070f23ec680e3dcbbeed5efc15129c3f3a84ea30a365831faf45c0",
+        "bytes": 2920
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/RESEARCH_MASTER_GUIDE_v2.1_ARCHIVE.md",
+        "git_blob_sha": "fe7d9ad499850123bce1c5c05d9bbc49777b0481",
+        "sha256": "f3b7da9983c8d59c846284caf3cd42d3d8ea1c55995bb20a7c036080f686f782",
+        "bytes": 18231
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/RESEARCH_NOTE.md",
+        "git_blob_sha": "5eb8d0e8fabbbb8d062f46ac7e6c4c8e2839949a",
+        "sha256": "a3a8578005bf24e38dc62b9b3a5ebba0364635e63266fc8b33ccf89e243f2046",
+        "bytes": 40732
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/REVIEW_RESPONSE.md",
+        "git_blob_sha": "5e6797c9a566740cbc3fd1da22863038774ee6e6",
+        "sha256": "d0333ca2cde78a342d3520186f98020d09188849fb4a737f87f54ad209266ae4",
+        "bytes": 8475
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/RUN_RECEIPT.json",
+        "git_blob_sha": "ad5ec63c3be3125a79103ed094bdf9431cee10b2",
+        "sha256": "756b1926bf5ff557c2143ff9bfe0ed910f60bbfb2568b1fb7322ca94a70feb4b",
+        "bytes": 5702
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/WORK_LOG.md",
+        "git_blob_sha": "ea24b2256b6a82071bafbc2b3a3b44afc7fba07a",
+        "sha256": "e7588fdf6a7b73062e68ae9d6301000f7dc28fad3bc801a11683277fd08e1241",
+        "bytes": 13376
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/When_Behavioral_Recovery_Conceals_Organizational_Change_v0.1.0.pdf",
+        "git_blob_sha": "9c33c5520d4128267da09772b9a821139736708b",
+        "sha256": "296110764ace968ced3086312614f7b6e4f068a0c631b8b64ba813a029441bc0",
+        "bytes": 114605
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/build_paper.py",
+        "git_blob_sha": "f4f8b32f0a5553a98ec2dd21163ea5d907b7023a",
+        "sha256": "f1b9152e3dd492af174056fe2605a6977f2f13d6d1f9ad95f2981e560c977eec",
+        "bytes": 4893
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/check_encoder_access.py",
+        "git_blob_sha": "0563dd95ecc894b0f198f7680d4d12d161a45e88",
+        "sha256": "8245d18ce337d152f46ceb0d0c376abb4e51ca5d67b8bbf7998bfe88fbc265f8",
+        "bytes": 8826
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/run_process_reference.py",
+        "git_blob_sha": "fe6aab84eff046b658700049143ebf79dc950f1a",
+        "sha256": "49844d4134d68b2ee75c7b7c22d95ad424364dee57ddd64710d2214cd3c53b47",
+        "bytes": 5611
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/AUDIT_REPORT.md",
+        "git_blob_sha": "cc7264d7072c4266620a8f072a65aea3503458a6",
+        "sha256": "faa027eba1ef5a3567a5469e988d4e331e4ff6805738278344fe3d92e6920da5",
+        "bytes": 2457
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/BUILD_RECEIPT.json",
+        "git_blob_sha": "33c726d2b7e202f238b9fe11104007312e30491c",
+        "sha256": "72ca0656a9e874c863eef1992b4a2f7c59eaf3c513cd21523a34bff583a57076",
+        "bytes": 11030
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/CAPSULE.json",
+        "git_blob_sha": "c259154f34cf080ee3254aba880e992fca79abd2",
+        "sha256": "da8629a3d345939d0b8859b6a009bbc09e20c2532c1ce402c81541388d59b6a0",
+        "bytes": 494
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/CAPSULE_MEMBER_MANIFEST.json",
+        "git_blob_sha": "cc4654176a782a4d9f30c413b485c468d099d7f8",
+        "sha256": "fafa1450b7a8511b9502502abc3b2bfd20e2a7ad0a238bce05c33c8bd25f4101",
+        "bytes": 15101
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/RELEASE.json",
+        "git_blob_sha": "f30af32f9a15839c23703592ac5e3b83d3d78110",
+        "sha256": "7232f91a872d1244211ffd5fe95d2acba35dd282d6528a26412d22cd40f89bd6",
+        "bytes": 10161
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/SOURCE_LOCATIONS.json",
+        "git_blob_sha": "336f111561c2ccefb714dbe2c1125f71c33e86c6",
+        "sha256": "4a8407f630147a4f9227088931fa90128cb8277d09e03bfede141410bff14abd",
+        "bytes": 19062
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
+        "git_blob_sha": "fe4ff9b97b1dfba4eeb14ad60ee769a2420e7d3d",
+        "sha256": "fa4b43e5d9a69e8c249ccd26161c28dbafcb8e7447e24bff33a811bcbe94dd8d",
+        "bytes": 1118692
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/build_release.py",
+        "git_blob_sha": "ce1653d158a80fbaf68df476bb4a2bface90eb82",
+        "sha256": "1cade184b20e2816374f5ef721e2daf0cbd84b05488e0132f849df8f58780614",
+        "bytes": 10668
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/restore_capsule.py",
+        "git_blob_sha": "16c06bea35c0a52e27965f3f0c46e43e89808f90",
+        "sha256": "ebb6335f5c0cf32f82b321ca9d7a5799d164bd1dd1b163bb7eec66954acdf0e6",
+        "bytes": 2033
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/figures/matched_architectures.pdf",
+        "git_blob_sha": "0894868b9e49a9f6d3ef51a964d17e9fd1fa056a",
+        "sha256": "b6994e3b97862aedb4be054a516c7719f8a426ce1142770b92e8c816dbe7cb95",
+        "bytes": 23442
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/figures/matched_architectures.png",
+        "git_blob_sha": "84cf4e1307a9c1837e201cc5f4c709288bf3b79b",
+        "sha256": "3566017f6f9eec612141d112260735c0a29b25ffeb3b4589df2595da7e09ffe0",
+        "bytes": 81495
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/initial_verification/EXACT_RESULTS.json",
+        "git_blob_sha": "15d38c058f0dc3c3915a02578abad6d369a1061b",
+        "sha256": "8f063a43a05b69b18117488b8b73100acf42a82ef70c0b97f947c8c95c7f9c11",
+        "bytes": 17469
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/initial_verification/check_encoder_access.py",
+        "git_blob_sha": "0c204aeaee1620948f76aa0173556713a30f78f2",
+        "sha256": "04c2049adccf6df7b5426ba40aff174f0cc99f01749071a4518400e1959c0354",
+        "bytes": 8230
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/audit/ASSEMBLED_VALIDATION.json",
+        "git_blob_sha": "1259a465dbac00c0e463eb9c9dc30867be5c5cc0",
+        "sha256": "482b1765d9a4d84bcc2f6293ed258a70db473bac9c4ebc9eacf1120cca0d40cc",
+        "bytes": 11191
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/audit/ASSEMBLED_VALIDATION.md",
+        "git_blob_sha": "eea353dc2dde5a3cfc577b1f04e3080dadfaf622",
+        "sha256": "43b8617a06b158b9346d9451594637a0a161d411884d47299586126ee1dbd1b3",
+        "bytes": 2678
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/audit/ASSEMBLY_SPEC.json",
+        "git_blob_sha": "9fe8a66e30b04844d8cd758b2f1c34d14e0848a2",
+        "sha256": "9beb648869f93413f0c3ce0ac4a7bcc56c6f32b70c4a812ace6f205478901f3c",
+        "bytes": 220058
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/audit/FAMILY_COMPATIBILITY_ASSESSMENTS.json",
+        "git_blob_sha": "acdd8e6904e16253951a5f401000fc685561674f",
+        "sha256": "2093aba0fc810e19bee28567196186d795d8b022a10d5ed49b42e68a51467895",
+        "bytes": 23568
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/audit/R173_EFFECTIVE_CORRECTION_PATCH.json",
+        "git_blob_sha": "b68e5aa65b56461052766f21cc92c2b1fd320cf5",
+        "sha256": "fadc0c83c2e6fc4e6bf3274a020f5ee5f1cfbf66d2b2948874e51df90f28f78d",
+        "bytes": 3574
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/audit/WHOLE_MAP_SEMANTIC_REVIEW_REPORT.md",
+        "git_blob_sha": "49f047fb37fa9e39ef9db916264d53a9fcdc7a89",
+        "sha256": "fbcd8d25f9d545caa931b9d853ae2b60c53d91c05db13d9334ed0a4e407c898d",
+        "bytes": 20165
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/history/CHANGELOG.md",
+        "git_blob_sha": "1b22e84d450ec37504683ec276d02cea33ca6361",
+        "sha256": "9414490f6036d7672285633e32e16ea500f65593c1ea4e79b35aafdd96c0f8fb",
+        "bytes": 2764
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/history/CURRENT_STATE.json",
+        "git_blob_sha": "caa10399a147ab52876e0815e62c62ac318e9401",
+        "sha256": "fe54b5f94c10f50f1b311d3763c7e5b1701da5920506f8fb112391df78aaba2e",
+        "bytes": 2276
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/history/HANDOFF.md",
+        "git_blob_sha": "24ed8aabd44dbb262cf8b599ec6573ee8b71eb58",
+        "sha256": "35546c4137854d993ba912424c1ad16a87fcb0f00fb4c4fae25df94ab6cd331b",
+        "bytes": 8059
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/history/MASTER_INDEX.md",
+        "git_blob_sha": "bae99f67388956b630ad6c5f5595fa800fa59e28",
+        "sha256": "3a61e218c131f01311f913426648c21480b1c5c3111c4f6785463452d06c808f",
+        "bytes": 5252
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/history/MEMORY.md",
+        "git_blob_sha": "ae1b9d623b8a192ce5f49a274f484b7b85e082ab",
+        "sha256": "b070fdebd4dc6c73a59defcf38624cdba0ece6cfaa2a53aa12625ba31ef18803",
+        "bytes": 117242
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/history/RESEARCH_REGISTRY.json",
+        "git_blob_sha": "f63b05ed8cd38c75af0cace2ff5870dee04f139b",
+        "sha256": "3e1f4490f8d39691e1eba1db4ce72ac01847580d6193dd180e83ffa2bafec427",
+        "bytes": 3851
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/history/RESEARCH_SESSION_LOG_INDEX.json",
+        "git_blob_sha": "e9254634627a4970e45e98cdfb0f9d537ffa83cf",
+        "sha256": "db8aef69f33723c0b4b33a8a8b608671e763eb7ca93e1ea229586fff3ff9ad2b",
+        "bytes": 644
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/history/UCT_FORMAL_AUDIT.md",
+        "git_blob_sha": "efd63a055eee84bbc2272352832eceb1750a5d70",
+        "sha256": "f2fd9c728bf722809fdf9209eb704ef930461cabc61627714d28c1f5989e4968",
+        "bytes": 587
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/history/UCT_FORMAL_GRAPH_MODULES.json",
+        "git_blob_sha": "e9c5e6a1080118f2f60ee7d976fb4489e9ee0154",
+        "sha256": "5825fbfaf722893ea89086e6142af7cac7942f6ae6bc55ce4779e13aa3a8cd45",
+        "bytes": 9200
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/history/UCT_FORMAL_MAP.md",
+        "git_blob_sha": "dfc9d33e0bde5f534460bf5b59a4188e23ec118a",
+        "sha256": "b7c840c11e9c30e33d86ddf4e20d0265b7f7d740c150ff8284e6c268b779f744",
+        "bytes": 696
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/history/VERSIONING_POLICY.md",
+        "git_blob_sha": "b520091e47f51d2d35bf26d9188fde2ff27e89cd",
+        "sha256": "7eae01107a10bfd006df3fef08b07618f1865470f3cf544871182728c0b4c689",
+        "bytes": 2351
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/normalized/CM20261009.json",
+        "git_blob_sha": "8bdcd609f6578ea720c9157c276cd00000f1e8c0",
+        "sha256": "188fdbe90cff55d6b867eccb40b2b8be1bb83e973ea74f05961d209b44f4fed3",
+        "bytes": 251855
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/normalized/HOM.json",
+        "git_blob_sha": "9fac1683c9eae4a5e4670d7096ed41dab08450e9",
+        "sha256": "1bbaa2b42cde1fa4c1cfe74664e130ec8b1da1856427036037b92a099ee32184",
+        "bytes": 10587
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/normalized/R185.json",
+        "git_blob_sha": "e7d2437775a665badab6508cc9bdf2bf9872fbc4",
+        "sha256": "80fd222ab13f306a9cccd885abe69c2a3d9ade4cc7ffc139886a97c045cfc2b6",
+        "bytes": 20344
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/normalized/R187.json",
+        "git_blob_sha": "a168c1d29893748908937345d91b5c8c2d17f9ab",
+        "sha256": "90f1d28ac0318eb35892ae59a1b57a850583e679f29afb30bd0cc55ade046c92",
+        "bytes": 39296
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/normalized/R188.json",
+        "git_blob_sha": "cee5e88104267658c345b97b6945574689b65f39",
+        "sha256": "eb9b44bbe25cd66ef019abb686653a56a71dab245bd7877fa6b003d5212efe85",
+        "bytes": 47650
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.2/normalized/UI20261009.json",
+        "git_blob_sha": "a227e006dd6be5e2d8ce6e85894d5a79faa37a36",
+        "sha256": "6f90e069cff478e7211697cf232f4c6edcf15119597dd24011228baec860f81f",
+        "bytes": 304486
+      }
+    ]
+  },
+  "capsule": {
+    "sha256": "fa4b43e5d9a69e8c249ccd26161c28dbafcb8e7447e24bff33a811bcbe94dd8d",
+    "bytes": 1118692,
+    "restored_member_hashes_verified": 82,
+    "rebuilt_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+    "rebuilt_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687"
+  },
+  "user_files": {
+    "status": "ALL_FIVE_SAVES_SUCCEEDED_AND_MATERIALIZED_FOR_READBACK",
+    "uploads": [
+      {
+        "local_path": "/workspace/scratch/328b6dbb55c2/uct/research/uct-agent-consciousness-workspace/records/R188_Encoder_Access_and_Recovery_20261009/When_Behavioral_Recovery_Conceals_Organizational_Change_v0.1.0.pdf",
+        "purpose": "create_library_file",
+        "status": "succeeded",
+        "file_id": "file_00000000b78081f58dce27cb53fd3f2f",
+        "library_file_id": "libfile_57691efad3ac81918261955edb65fa27",
+        "file_name": "When_Behavioral_Recovery_Conceals_Organizational_Change_v0.1.0.pdf",
+        "local_metadata_applied": true,
+        "path": "/When_Behavioral_Recovery_Conceals_Organizational_Change_v0.1.0.pdf",
+        "current_version_number": 0
+      },
+      {
+        "local_path": "/workspace/scratch/328b6dbb55c2/deliverables/UCT_R188_CER_v0.1.0_Complete_Research_Archive.zip",
+        "purpose": "create_library_file",
+        "status": "succeeded",
+        "file_id": "file_000000006de8820ca7de4c22c5bf7737",
+        "library_file_id": "libfile_5a77f1b0083c8191ae1d7659cbde5b5a",
+        "file_name": "UCT_R188_CER_v0.1.0_Complete_Research_Archive.zip",
+        "local_metadata_applied": true,
+        "path": "/UCT_R188_CER_v0.1.0_Complete_Research_Archive.zip",
+        "current_version_number": 0
+      },
+      {
+        "local_path": "/workspace/scratch/328b6dbb55c2/deliverables/UCT_R188_CER_v0.1.0_HANDOFF_ZH.md",
+        "purpose": "create_library_file",
+        "status": "succeeded",
+        "file_id": "file_00000000d3f481f6b37c1bdfed8a6d5f",
+        "library_file_id": "libfile_cdc6331e36bc8191a155d637f2da2db4",
+        "file_name": "UCT_R188_CER_v0.1.0_HANDOFF_ZH.md",
+        "local_metadata_applied": true,
+        "path": "/UCT_R188_CER_v0.1.0_HANDOFF_ZH.md",
+        "current_version_number": 0
+      },
+      {
+        "local_path": "/workspace/scratch/328b6dbb55c2/deliverables/UCT_R188_CER_v0.1.0_WORK_LOG.md",
+        "purpose": "create_library_file",
+        "status": "succeeded",
+        "file_id": "file_000000008f4481f59dd60b8e4a342adc",
+        "library_file_id": "libfile_b9b2fd4ec9788191bb3466dd2fd3f424",
+        "file_name": "UCT_R188_CER_v0.1.0_WORK_LOG.md",
+        "local_metadata_applied": true,
+        "path": "/UCT_R188_CER_v0.1.0_WORK_LOG.md",
+        "current_version_number": 0
+      },
+      {
+        "local_path": "/workspace/scratch/328b6dbb55c2/library_work/UCT_Hourly_Research_Master_Handoff.md",
+        "purpose": "replace_library_file",
+        "status": "succeeded",
+        "file_id": "file_00000000cf4481f5a2e39a000eca9644",
+        "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+        "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+        "local_metadata_applied": true,
+        "path": "/UCT_Hourly_Research_Master_Handoff.md",
+        "current_version_number": 44
+      }
+    ],
+    "readback_byte_checks": [
+      {
+        "name": "When_Behavioral_Recovery_Conceals_Organizational_Change_v0.1.0.pdf",
+        "original_bytes": 114605,
+        "readback_bytes": 164919,
+        "original_sha256": "296110764ace968ced3086312614f7b6e4f068a0c631b8b64ba813a029441bc0",
+        "readback_sha256": "ec4cbe29d9e74146a04b927ec80a3706d81dab09db06ba3e68a0a3f39759c631",
+        "byte_equal": false
+      },
+      {
+        "name": "UCT_R188_CER_v0.1.0_Complete_Research_Archive.zip",
+        "original_bytes": 5963181,
+        "readback_bytes": 5963181,
+        "original_sha256": "3a73ac25c33b8f809a958537a2f1fe3d25c2090b2c0fe7f8f58068cb4ca39735",
+        "readback_sha256": "3a73ac25c33b8f809a958537a2f1fe3d25c2090b2c0fe7f8f58068cb4ca39735",
+        "byte_equal": true
+      },
+      {
+        "name": "UCT_R188_CER_v0.1.0_HANDOFF_ZH.md",
+        "original_bytes": 9755,
+        "readback_bytes": 9755,
+        "original_sha256": "221f51b94b5fff13b533d3e80c044043a911b6f34c3e396dd111f2799bf2a6bd",
+        "readback_sha256": "221f51b94b5fff13b533d3e80c044043a911b6f34c3e396dd111f2799bf2a6bd",
+        "byte_equal": true
+      },
+      {
+        "name": "UCT_R188_CER_v0.1.0_WORK_LOG.md",
+        "original_bytes": 13376,
+        "readback_bytes": 13376,
+        "original_sha256": "e7588fdf6a7b73062e68ae9d6301000f7dc28fad3bc801a11683277fd08e1241",
+        "readback_sha256": "e7588fdf6a7b73062e68ae9d6301000f7dc28fad3bc801a11683277fd08e1241",
+        "byte_equal": true
+      },
+      {
+        "name": "UCT_Hourly_Research_Master_Handoff.md",
+        "original_bytes": 564689,
+        "readback_bytes": 564689,
+        "original_sha256": "a726e6ef7fe0a775e81eaf5a9df29a52eff558bebf490f0190d052ca7056000a",
+        "readback_sha256": "a726e6ef7fe0a775e81eaf5a9df29a52eff558bebf490f0190d052ca7056000a",
+        "byte_equal": true
+      }
+    ],
+    "standalone_pdf_equivalence": {
+      "status": "SAVED_PDF_RENDER_TEXT_AND_CONTENT_STREAMS_IDENTICAL",
+      "canonical_pdf_sha256": "296110764ace968ced3086312614f7b6e4f068a0c631b8b64ba813a029441bc0",
+      "saved_pdf_sha256": "ec4cbe29d9e74146a04b927ec80a3706d81dab09db06ba3e68a0a3f39759c631",
+      "canonical_bytes": 114605,
+      "saved_bytes": 164919,
+      "saved_contains_c2pa_marker": true,
+      "canonical_prefix_preserved": false,
+      "render_method": "MuPDF in-memory RGB at108dpi; every page pixel-identical",
+      "interpretation": "The saved standalone PDF contains C2PA provenance metadata. Its bytes differ from the canonical Git/ZIP PDF; every page has identical rendered pixels, extracted text and decoded page content streams. Preserve both hashes and do not assert byte equality for this derivative.",
+      "resolved_verification_failure": "The first disk-PNG comparison found a truncated old page04 PNG and an empty new page11 PNG from the overridden pdftoppm path. Strict decoding failed; no equality claim was issued. In-memory rendering of both PDFs verified all13pages without accepting damaged PNGs. A dependent receipt-write attempt then failed before writing because the equality receipt did not yet exist.",
+      "pages": [
+        {
+          "page": 1,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        },
+        {
+          "page": 2,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        },
+        {
+          "page": 3,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        },
+        {
+          "page": 4,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        },
+        {
+          "page": 5,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        },
+        {
+          "page": 6,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        },
+        {
+          "page": 7,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        },
+        {
+          "page": 8,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        },
+        {
+          "page": 9,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        },
+        {
+          "page": 10,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        },
+        {
+          "page": 11,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        },
+        {
+          "page": 12,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        },
+        {
+          "page": 13,
+          "identical_rendered_pixels": true,
+          "identical_extracted_text": true,
+          "identical_page_content_stream": true
+        }
+      ]
+    },
+    "master_update": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "expected_current_version": 43,
+      "old_sha256": "77258fc1328ac5f14da8d33f25da5e2627179dc9063179110888be6eb65ae635",
+      "old_bytes": 553284,
+      "new_bytes": 564689,
+      "all_prior_bytes_retained": true,
+      "new_version": 44,
+      "readback_all_prior_bytes_retained": true
+    },
+    "complete_archive": {
+      "file": "UCT_R188_CER_v0.1.0_Complete_Research_Archive.zip",
+      "bytes": 5963181,
+      "sha256": "3a73ac25c33b8f809a958537a2f1fe3d25c2090b2c0fe7f8f58068cb4ca39735",
+      "members": 131,
+      "all_member_checks": "PASS_SHA256_AND_ZIP_CRC",
+      "scientific_commit": "fa32518b0d956a461db65416920ec2eea8acfe88",
+      "map_release": "UCT-MAP-v1.1.2"
+    },
+    "no_automatic_scientific_premise_promotion": true
+  },
+  "scientific_premise_promotion": false,
+  "publication_action": "NONE",
+  "completed_utc": "2026-10-09T07:17:03Z",
+  "timestamp_source": "clock tool after all artifact byte/content readback checks",
+  "receipt_version": 2
+}
