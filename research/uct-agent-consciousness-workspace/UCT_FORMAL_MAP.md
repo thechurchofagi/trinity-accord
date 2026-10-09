@@ -17,3 +17,7 @@ Current non-deductive coverage entry: [UCT-PUB-v1.0.1](PUBLICATION_COVERAGE.json
 ## Post-release disabled checkpoint: R189
 
 [R189](records/R189_Higher_Arity_Context_Access_20261009/MAP_EXTENSION.json) proposes 11 nodes, 6 conditional rules and 3 nondeductive contexts over this release. Exact structural compatibility passed, but semantic adoption, actual installation/use and named-phenomenal application remain open. It is disabled and is not included in the 913/424/261 completed counts or the v1.1.2 hashes. Read its [map audit](records/R189_Higher_Arity_Context_Access_20261009/MAP_AUDIT.md).
+
+## Latest disabled checkpoint: R191
+
+[R191](records/R191_Conflict_Conditioned_Authorization_20261009/MAP_EXTENSION.json) adds an 11-node/5-rule/4-context disabled candidate for actual precommit conflict-conditioned authorization and lineage-grounded revision use. The exact v1.1.2 baseline and all 1,608 review objects were traversed; structural compatibility passed. Present/history signatures, copied values/actual occurrences, route use/test evidence, and organization/named feeling remain separate. R191 is not included in completed counts or hashes. Current nondeductive coverage is UCT-PUB-v1.0.3.

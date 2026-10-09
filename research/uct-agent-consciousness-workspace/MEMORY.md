@@ -1,11 +1,11 @@
-# Research memory — R190 pending over UCT-MAP-v1.1.2
+# Research memory — R191 pending over UCT-MAP-v1.1.2
 
-R190 returns the main line to bodily/action self-organization. It keeps R181 practical centering separate from a target-specific endpoint-to-bearer causal relation inherited from R158/R159. The declared five-mode construction realizes all four `(PC,BDCC)` combinations. Their conjunction selects enacted bearer-involving action against active imagery, remote action, passive impact, and detached observation within the bounded family.
+R191 studies one fixed PC+BDCC bodily/action episode. A weak “rivals plus consumer” proposal failed because it admitted post-hoc rationalization. OCCA repairs the defect by requiring actual rival carriers, actual authorization-consumer use before commitment, and intervention-sensitive authorization under fixed backgrounds.
 
-The first model failed because it omitted `(1,0)`; remote/isolated action supplied the missing witness. The repaired 160-row model passes 13 checks. Its decisive limit is a deliberate/reflex twin that preserves the entire two-coordinate profile. Thus R190 advances a positive organization inside experience but does not identify voluntary endorsement, felt trying, ownership, agency, familiar mineness, subject count, or a unique owner.
+The 112-row model passes 15 checks. A frozen reflex table preserves all current OCCA fields. Adding actual same-lineage conflict-driven revision (LGRU) separates that table, but an adaptive reflex controller preserves both OCCA and LGRU. Thus R191 adds positive organization and a typed current/history scope fork, not an identity with deliberateness, endorsement, agency, ownership, familiar mineness, or a unique owner.
 
-Generic physiology, biological/prosthetic label, report, visible movement, and diagnostic success are not definitions of actual path use. Body-continuity, autonomic-null, and prosthesis-measure studies constrain simplistic proxies but do not prove complete installation or the phenomenal bridge. C1 remains the sole consciousness-specific explanatory axiom; U1 has no new body/action gate.
+R173 history conditions, R184 reflex limits, R190 PC+BDCC, and established action-selection fluency/conflict research are credited. Tests remain evidence rather than definitions of actual use. C1 remains the consciousness-specific axiom and U1 receives no new gate.
 
-UCT-MAP-v1.1.2 remains completed at 913 nodes, 424 active rules, 261 contexts, 10 suspended rules, and 1,608 decisions. R190 is structurally compatible but disabled. UCT-PUB-v1.0.2 records nondeductive claim coverage; the decision remains CONTINUE_RESEARCH.
+UCT-MAP-v1.1.2 remains completed at 913 nodes, 424 active rules, 261 contexts, 10 suspended rules, and 1,608 decisions. R191's 11/5/4 candidate is structurally compatible but disabled. UCT-PUB-v1.0.3 is nondeductive. Decision: CONTINUE_RESEARCH.
 
-Next: on one fixed PC+BDCC episode, test an independently grounded online conflict/endorsement transformation against a reflex-table duplicate. Preserve non-identification if it fails. Byte-exact earlier memory remains in Git history and the v1.1.2 release history.
+Next: seek a noncircular transformation that distinguishes adaptive reflex revision from experienced endorsement/familiar mineness without report, language, self-label, or a basal-experience gate.

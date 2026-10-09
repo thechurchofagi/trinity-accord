@@ -1,0 +1,11 @@
+{
+  "schema":"uct-gap-ledger/1",
+  "research_id":"R191-OCCA-20261009",
+  "gaps":[
+    {"id":"R191-G1","location":"Initial WCU definition","impact":["R191:OCCA","any endorsement inference"],"counterexample":"A post-hoc rationalizer consumes real conflict only after commitment.","fixed":"Added precommit timing and authorization-sensitivity requirements.","remaining":"Empirical timing and consumer evidence must still be supplied for an actual application.","status":"LOCAL_FORMAL_DEFECT_FIXED_APPLICATION_OPEN"},
+    {"id":"R191-G2","location":"Current-episode OCCA signature","impact":["deliberateness","voluntary endorsement","felt trying","familiar mineness"],"counterexample":"Frozen reflex table matches all current OCCA fields.","fixed":"Added an explicitly separate history-expanded LGRU relation rather than silently changing the signature.","remaining":"OCCA alone remains insufficient for named phenomenal interpretation.","status":"OPEN_BOUNDARY_RETAINED"},
+    {"id":"R191-G3","location":"History-expanded LGRU","impact":["deliberateness and familiar-mineness bridge"],"counterexample":"Adaptive reflex has actual conflict-driven revision, continuation, and current use.","fixed":"None; recorded as a decisive limit.","remaining":"Find a noncircular positive bridge or retain underidentification.","status":"OPEN"},
+    {"id":"R191-G4","location":"Actual application","impact":["R191:UCT_APPLICATION"],"counterexample":"Code rows and successful tests do not establish installed carriers or actual use.","fixed":"Separated definition, evidence, actual use, and phenomenal interpretation.","remaining":"Independent same-instance carrier/consumer/timing/intervention evidence.","status":"OPEN"},
+    {"id":"R191-G5","location":"Prior-art and internal overlap","impact":["novelty and theorem attribution"],"counterexample":"Selection-conflict/agency effects and retained-history/reflex limits predate R191.","fixed":"Narrowed the increment to the typed timing repair and scope fork; credited sources and R173/R184/R190.","remaining":"Worldwide priority unverified; no standalone-paper claim.","status":"BOUNDED_NOT_CLOSED"}
+  ]
+}

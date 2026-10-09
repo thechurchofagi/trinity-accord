@@ -1,3 +1,9 @@
+# R191-OCCA-20261009 — 2026-10-09 — disabled research checkpoint
+
+Defines actual precommit conflict-conditioned authorization on a fixed PC+BDCC target. The weak rivals-plus-consumer proposal fails on post-hoc rationalization; the repaired 112-row construction passes 15 checks. A frozen reflex table preserves current OCCA, history separates only the frozen case, and an adaptive reflex preserves OCCA+LGRU. Candidate 11/5/4 is structurally compatible but disabled; named phenomenal interpretation and actual installation remain open. Publication coverage advances nondeductively to UCT-PUB-v1.0.3; no publication action.
+
+---
+
 # R190-PCBC-20261009 — 2026-10-09 — disabled research checkpoint
 
 Crosses inherited target-relative practical centering with a restricted bearer-directed consequence-coupling instance. The repaired 160-row construction realizes all four Boolean profiles and shows bounded discrimination against imagery, remote action, passive impact, and observation, while a reflex twin preserves the conjunction. Candidate map delta 10 nodes/5 rules/4 contexts is structurally compatible with UCT-MAP-v1.1.2 but disabled; actual installation, named phenomenal interpretation, and reviewer disposition remain open. Publication coverage advances nondeductively to UCT-PUB-v1.0.2; no publication action.

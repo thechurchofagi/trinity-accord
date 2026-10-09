@@ -15,3 +15,7 @@ Current non-deductive coverage entry: [UCT-PUB-v1.0.1](PUBLICATION_COVERAGE.json
 ## R189 post-release compatibility note
 
 R189 restores the exact v1.1.2 capsule, verifies all 82 capsule members and traverses all 1,608 prior review decisions before testing its disabled 11-node/6-rule/3-context candidate. The combined structure has unique IDs, resolved references, complete `all_of`/same-instance guards and no deductive cycle. Status: `STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN`. This does not alter v1.1.2, prove actual route use, validate C1 empirically or close QC10/IA-QC11/QC12/QC13. See [R189 MAP_AUDIT.md](records/R189_Higher_Arity_Context_Access_20261009/MAP_AUDIT.md).
+
+## R191 post-release compatibility note
+
+R191 reuses the exact verified v1.1.2 baseline and traverses all 1,608 review objects before testing its disabled 11/5/4 candidate. Unique IDs, reference resolution, simultaneous `all_of` premises, same-instance bindings, and acyclicity all pass. The pass does not establish actual carrier/consumer use, formation history, familiar mineness, or reviewer closure. See [R191 MAP_AUDIT.md](records/R191_Conflict_Conditioned_Authorization_20261009/MAP_AUDIT.md).

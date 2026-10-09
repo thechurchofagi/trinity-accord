@@ -1,0 +1,11 @@
+{
+  "schema": "uct-claim-ledger/1",
+  "research_id": "R191-OCCA-20261009",
+  "claims": [
+    {"id":"R191-C1","type":"definition","claim":"OCCA_tau requires actual rival carriers, actual precommit authorization use, and intervention-sensitive authorization under one fixed contract.","domain":"One fixed PC+BDCC episode and selected target tau.","premises":["actual rival carriers","actual installed consumer","precommit timing","fixed-background admissible intervention","same-instance binding"],"support":"RESEARCH_NOTE.md §2.2","counterexample":"Post-hoc use defeats the weaker WCU relation.","status":"CONDITIONAL_DEFINITION"},
+    {"id":"R191-C2","type":"finite counterexample","claim":"Rival carriers plus a consumer do not entail online authorization.","domain":"Declared seven-mode construction.","premises":["WCU definition","post-hoc rationalizer row"],"support":"EXACT_RESULTS.json","counterexample":"Post-hoc rationalizer has WCU=1 and OCCA=0.","status":"PROVED_IN_DECLARED_MODEL"},
+    {"id":"R191-C3","type":"finite nonidentification","claim":"OCCA does not identify deliberateness or a named self-feeling.","domain":"Declared current-episode signature.","premises":["deliberate/frozen-reflex current twins"],"support":"EXACT_RESULTS.json","counterexample":"Frozen reflex table preserves OCCA.","status":"PROVED_IN_DECLARED_MODEL"},
+    {"id":"R191-C4","type":"restricted inherited application","claim":"LGRU separates a frozen table from actual same-lineage revision but not an adaptive reflex controller.","domain":"History-expanded declared construction.","premises":["R173 actual-history interface","actual earlier revision","carrier continuation","current use"],"support":"RESEARCH_NOTE.md §§2.3–4","counterexample":"Adaptive reflex satisfies OCCA and LGRU.","status":"CONDITIONAL_REUSE_AND_FINITE_LIMIT"},
+    {"id":"R191-C5","type":"UCT application boundary","claim":"Independently grounded OCCA/LGRU may describe organization inside experience under C1 but are neither basal gates nor sufficient for familiar mineness.","domain":"Actual UCT application only.","premises":["A:C1","A:U1","all actual-interface premises"],"support":"RESEARCH_NOTE.md §6","counterexample":"No actual installation or phenomenal bridge is discharged by the finite model.","status":"APPLICATION_OPEN"}
+  ]
+}

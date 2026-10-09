@@ -1,0 +1,15 @@
+{
+  "receipt_id":"R191-RUN-RECEIPT-v0.1.0",
+  "research_id":"R191-OCCA-20261009",
+  "base_remote_commit":"61bcde1425b4054c4342dafd0218537030e8797b",
+  "branch":"uct-agent-consciousness-workspace",
+  "result_version":"OCCA-RESULT-v0.1.0",
+  "exact_model":{"rows":112,"checks_passed":15,"rows_sha256":"816bd567916486d680e8b804cacfbaab0897d2d51dc8930415fb44678d069e45","results_sha256":"ab4379c4b6a4b54387ac7280e24a6876bc79fab4041f8f6ec70c489bc90b2e8e"},
+  "completed_map":{"release":"UCT-MAP-v1.1.2","capsule_members_verified":82,"effective_graph_sha256":"0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612","review_ledger_sha256":"0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687","counts":{"nodes":913,"active_rules":424,"contexts":261,"suspended_rules":10,"review_items":1608}},
+  "candidate_map":{"status":"PENDING_CHECKPOINT_DISABLED","counts":{"nodes":11,"rules":5,"contexts":4},"compatibility_audit_sha256":"abdde7007601c47aec71ec276e622dcd20cd2cd1d2858cbc35755be322d92563","structural_status":"STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN"},
+  "review_status":{"QC-20261008-10":"ACKNOWLEDGED_OPEN","IA-QC11":"ACKNOWLEDGED_APPLICATION_OPEN","QC-20261008-12":"ACKNOWLEDGED_APPLICATION_OPEN","QC-20261008-13":"ACKNOWLEDGED_APPLICATION_OPEN"},
+  "publication_coverage":{"version":"UCT-PUB-v1.0.3","decision":"CONTINUE_RESEARCH","worldwide_priority_verified":false},
+  "persistence":{"github_content_commit":null,"github_final_receipt_commit":null,"library_master_expected_version":47,"library_master_new_version":null,"library_increment_id":null,"status":"PENDING"},
+  "failures_retained":["Weak WCU admitted post-hoc rationalization.","Present OCCA admitted a frozen reflex table.","History-expanded LGRU admitted an adaptive reflex controller.","Actual installation, familiar-mineness bridge, reviewer disposition, and worldwide priority remain open."],
+  "next":"Seek a noncircular transformation that distinguishes adaptive-reflex revision from experienced endorsement without report/self labels or a basal-experience gate."
+}

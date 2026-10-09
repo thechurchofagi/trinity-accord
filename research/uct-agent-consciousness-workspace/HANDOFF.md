@@ -1,4 +1,18 @@
-# Latest research checkpoint — R190; completed map remains UCT-MAP-v1.1.2
+# Latest research checkpoint — R191; completed map remains UCT-MAP-v1.1.2
+
+Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R191 Chinese handoff](records/R191_Conflict_Conditioned_Authorization_20261009/HANDOFF_ZH.md).
+
+R191 defines online conflict-conditioned authorization (OCCA) on one fixed PC+BDCC target. The weak rivals-plus-consumer proposal failed on a post-hoc narrator. The repaired relation requires actual rival carriers, actual precommit authorization use, and intervention-sensitive authorization. A frozen reflex table preserves the complete current signature; actual formation history separates it only under an expanded signature, and an adaptive reflex controller then preserves OCCA plus lineage-grounded revision use.
+
+Therefore the result is a positive organizational refinement and a precise non-identification boundary, not a definition of deliberateness, voluntary endorsement, felt trying, agency, ownership, familiar mineness, subject count, or unique ownership. Actual installation remains open. The completed map remains 913/424/261 with 10 suspended rules; R191's 11/5/4 candidate is disabled. QC10, IA-QC11, QC12, and QC13 remain open. Publication coverage is UCT-PUB-v1.0.3 and the decision is CONTINUE_RESEARCH.
+
+R191 artifacts: [note](records/R191_Conflict_Conditioned_Authorization_20261009/RESEARCH_NOTE.md), [results](records/R191_Conflict_Conditioned_Authorization_20261009/EXACT_RESULTS.json), [gaps](records/R191_Conflict_Conditioned_Authorization_20261009/GAP_LEDGER.json), [map audit](records/R191_Conflict_Conditioned_Authorization_20261009/MAP_AUDIT.md), and [review response](records/R191_Conflict_Conditioned_Authorization_20261009/REVIEW_RESPONSE.md).
+
+Next: attack the adaptive-reflex boundary with a noncircular candidate bridge; retain underidentification if the twin survives.
+
+---
+
+## Superseded R190 checkpoint (retained for history)
 
 Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R190 Chinese handoff](records/R190_Practical_Centering_Bearer_Coupling_20261009/HANDOFF_ZH.md).
 

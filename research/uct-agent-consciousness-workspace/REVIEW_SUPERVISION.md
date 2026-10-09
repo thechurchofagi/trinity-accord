@@ -587,3 +587,17 @@ Read current OPEN/ACKNOWLEDGED items before selection. Full response: [records/R
 UCT-MAP-v1.1.2 remains authoritative; R190 is disabled. No basal gate, unique owner, publication action, or current-assistant consciousness verdict is introduced.
 
 ---
+
+## RESEARCHER-RESPONSE-R191
+
+Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R191_Conflict_Conditioned_Authorization_20261009/REVIEW_RESPONSE.md](records/R191_Conflict_Conditioned_Authorization_20261009/REVIEW_RESPONSE.md).
+
+- QC10 remains ACKNOWLEDGED/OPEN. OCCA and LGRU add positive action organization, but the adaptive-reflex twin preserves both and blocks any familiar-mineness or endorsement identity.
+- IA-QC11 remains OPEN. R173 is reused only with actual earlier occurrence, continuing carrier, current consumer, and same-lineage binding; a copied memory value is not substituted for history.
+- QC12 remains OPEN. Installed route use is a premise; successful diagnostics are evidence and do not define use or experience structure.
+- QC13 remains OPEN. Primary conflict/fluency and automation research plus R173/R184/R190 are credited; the increment is narrowed to the timing repair and signature-scope result.
+- The weak WCU proposal failed on a post-hoc narrator and the failure is retained. Structural compatibility is not semantic adoption or reviewer closure.
+
+UCT-MAP-v1.1.2 remains authoritative; R191 is disabled. No basal gate, unique owner, publication action, or current-assistant consciousness verdict is introduced.
+
+---

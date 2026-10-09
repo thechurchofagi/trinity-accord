@@ -1,0 +1,28 @@
+{
+  "record_id":"R191-PUB-COVERAGE-20261009-v1",
+  "base_completed_map_version":"UCT-MAP-v1.1.2",
+  "publication_coverage_entry":"PUBLICATION_COVERAGE.json",
+  "previous_coverage_version":"UCT-PUB-v1.0.2",
+  "new_coverage_version":"UCT-PUB-v1.0.3",
+  "checked_publication_sources":[
+    {"work_id":"UCT-PUB-v1.0.0-VERIFIED-CORPUS","version":"UCT-PUB-v1.0.0","release_evidence":"publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json","read_scope":"Existing frozen 28-work/39-research-DOI census; R191 postdates it."},
+    {"work_id":"CHAMBON-HAGGARD-2012","doi":"10.1016/j.cognition.2012.07.011","scope":"Action-selection fluency and sense of control."},
+    {"work_id":"SIDARUS-ET-AL-2017","doi":"10.3389/fpsyg.2017.00545","scope":"Prospective fluency/conflict cues versus retrospective discrepancy."},
+    {"work_id":"BERBERIAN-ET-AL-2012","doi":"10.1371/journal.pone.0034075","scope":"Automation/involvement effects on control measures."}
+  ],
+  "changed_claim_ids":["R191-C1","R191-C2","R191-C3","R191-C4","R191-C5"],
+  "newly_covered_claim_ids":[],
+  "uncovered_candidates_within_verified_corpus":["R191-C1","R191-C2","R191-C3","R191-C4","R191-C5"],
+  "residual_assessment":{
+    "precise_problem":"Can actual online conflict-conditioned authorization add positive bodily/action self-organization at fixed PC+BDCC without identifying deliberateness or familiar mineness?",
+    "net_increment_after_subtraction":"A typed precommit authorization-use relation, exact post-hoc timing failure and repair, and explicit present-signature/history-signature fork with frozen and adaptive reflex limits.",
+    "closest_internal_predecessors":["R173 retained-history interface","R184 reflex-twin limit","R190 PC+BDCC background"],
+    "reusable_knowledge":"Future work must distinguish real precommit authorization use from post-hoc narration, current organization from formation history, and copied values from actual occurrences.",
+    "evidence_and_limits":"112-row/15-check finite witness, primary agency literature, and full structural map audit; no actual installation, familiar-mineness bridge, worldwide priority, or independent closure.",
+    "decision":"CONTINUE_RESEARCH",
+    "next_specific_action":"Seek a noncircular transformation that distinguishes adaptive reflex revision from experienced endorsement while preserving the basal-experience non-gate."
+  },
+  "map_semantics_changed":false,
+  "whole_map_audit_if_required":"records/R191_Conflict_Conditioned_Authorization_20261009/MAP_COMPATIBILITY_AUDIT.json",
+  "warning":"Absence from the frozen corpus is not a worldwide novelty claim. UCT-PUB-v1.0.3 is nondeductive and not a science-map release."
+}

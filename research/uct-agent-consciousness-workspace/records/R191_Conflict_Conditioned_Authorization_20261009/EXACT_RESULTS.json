@@ -1,0 +1,269 @@
+{
+  "result_id": "R191-OCCA-RESULT-v0.1.0",
+  "scope": "declared finite construction at fixed PC+BDCC only",
+  "row_count": 112,
+  "checks": {
+    "row_count_112": true,
+    "base_pc_bdcc_fixed": true,
+    "weak_definition_admits_posthoc_failure": true,
+    "occa_excludes_direct_posthoc_unused_and_yoked": true,
+    "occa_in_three_online_modes": true,
+    "deliberative_frozen_reflex_current_twins": true,
+    "history_scope_separates_frozen_reflex": true,
+    "lgru_excludes_frozen_table": true,
+    "adaptive_reflex_survives_occa_lgru": true,
+    "copied_memory_not_actual_revision": true,
+    "report_neither_necessary_nor_sufficient_for_occa": true,
+    "substrate_does_not_determine_occa_or_lgru": true,
+    "matched_outcome_does_not_determine_occa": true,
+    "present_profile_does_not_recover_formation_history": true,
+    "no_source_class_identification": true
+  },
+  "checks_passed": 15,
+  "rows_sha256": "816bd567916486d680e8b804cacfbaab0897d2d51dc8930415fb44678d069e45",
+  "selected_witnesses": [
+    {
+      "mode": "deliberative_online",
+      "source_class": "deliberative",
+      "report": 0,
+      "substrate": "biological",
+      "copied_memory": 1,
+      "matched_outcome": 1,
+      "pc": 1,
+      "bdcc": 1,
+      "rival_route_carriers": 1,
+      "conflict_consumer": 1,
+      "use_before_action_commitment": 1,
+      "authorization_intervention_sensitive": 1,
+      "actual_prior_revision_same_lineage": 1,
+      "continuous_revision_carrier": 1,
+      "current_lineage_carrier_use": 1,
+      "weak_conflict_use": 1,
+      "occa": 1,
+      "lgru": 1,
+      "current_profile": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "history_profile": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "mode": "frozen_reflex_table",
+      "source_class": "reflex",
+      "report": 0,
+      "substrate": "biological",
+      "copied_memory": 1,
+      "matched_outcome": 1,
+      "pc": 1,
+      "bdcc": 1,
+      "rival_route_carriers": 1,
+      "conflict_consumer": 1,
+      "use_before_action_commitment": 1,
+      "authorization_intervention_sensitive": 1,
+      "actual_prior_revision_same_lineage": 0,
+      "continuous_revision_carrier": 0,
+      "current_lineage_carrier_use": 0,
+      "weak_conflict_use": 1,
+      "occa": 1,
+      "lgru": 0,
+      "current_profile": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "history_profile": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "mode": "adaptive_reflex",
+      "source_class": "reflex",
+      "report": 0,
+      "substrate": "biological",
+      "copied_memory": 1,
+      "matched_outcome": 1,
+      "pc": 1,
+      "bdcc": 1,
+      "rival_route_carriers": 1,
+      "conflict_consumer": 1,
+      "use_before_action_commitment": 1,
+      "authorization_intervention_sensitive": 1,
+      "actual_prior_revision_same_lineage": 1,
+      "continuous_revision_carrier": 1,
+      "current_lineage_carrier_use": 1,
+      "weak_conflict_use": 1,
+      "occa": 1,
+      "lgru": 1,
+      "current_profile": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "history_profile": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "mode": "habitual_direct",
+      "source_class": "automatic",
+      "report": 0,
+      "substrate": "biological",
+      "copied_memory": 1,
+      "matched_outcome": 1,
+      "pc": 1,
+      "bdcc": 1,
+      "rival_route_carriers": 0,
+      "conflict_consumer": 0,
+      "use_before_action_commitment": 1,
+      "authorization_intervention_sensitive": 0,
+      "actual_prior_revision_same_lineage": 1,
+      "continuous_revision_carrier": 1,
+      "current_lineage_carrier_use": 1,
+      "weak_conflict_use": 0,
+      "occa": 0,
+      "lgru": 1,
+      "current_profile": [
+        1,
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "history_profile": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "mode": "posthoc_rationalizer",
+      "source_class": "posthoc",
+      "report": 0,
+      "substrate": "biological",
+      "copied_memory": 1,
+      "matched_outcome": 1,
+      "pc": 1,
+      "bdcc": 1,
+      "rival_route_carriers": 1,
+      "conflict_consumer": 1,
+      "use_before_action_commitment": 0,
+      "authorization_intervention_sensitive": 0,
+      "actual_prior_revision_same_lineage": 1,
+      "continuous_revision_carrier": 1,
+      "current_lineage_carrier_use": 0,
+      "weak_conflict_use": 1,
+      "occa": 0,
+      "lgru": 0,
+      "current_profile": [
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "history_profile": [
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "mode": "unused_conflict_monitor",
+      "source_class": "monitor",
+      "report": 0,
+      "substrate": "biological",
+      "copied_memory": 1,
+      "matched_outcome": 1,
+      "pc": 1,
+      "bdcc": 1,
+      "rival_route_carriers": 1,
+      "conflict_consumer": 0,
+      "use_before_action_commitment": 1,
+      "authorization_intervention_sensitive": 0,
+      "actual_prior_revision_same_lineage": 1,
+      "continuous_revision_carrier": 1,
+      "current_lineage_carrier_use": 0,
+      "weak_conflict_use": 0,
+      "occa": 0,
+      "lgru": 0,
+      "current_profile": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        0
+      ],
+      "history_profile": [
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "mode": "yoked_override",
+      "source_class": "yoked",
+      "report": 0,
+      "substrate": "biological",
+      "copied_memory": 1,
+      "matched_outcome": 1,
+      "pc": 1,
+      "bdcc": 1,
+      "rival_route_carriers": 1,
+      "conflict_consumer": 1,
+      "use_before_action_commitment": 1,
+      "authorization_intervention_sensitive": 0,
+      "actual_prior_revision_same_lineage": 1,
+      "continuous_revision_carrier": 1,
+      "current_lineage_carrier_use": 1,
+      "weak_conflict_use": 1,
+      "occa": 0,
+      "lgru": 1,
+      "current_profile": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "history_profile": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "negative_results": [
+    "Rival-carrier consumption without precommit authorization sensitivity admits post-hoc rationalization.",
+    "OCCA does not distinguish deliberative from frozen or adaptive reflex implementations.",
+    "LGRU excludes a frozen lookup but not an adaptive reflex controller with actual lineage-grounded revision use.",
+    "Present-episode projection does not recover actual formation history."
+  ],
+  "non_entailments": [
+    "no consciousness verdict",
+    "no felt endorsement, agency, trying, ownership, or familiar-mineness identification",
+    "no unique owner or subject-count conclusion",
+    "no inference from report, memory value, substrate label, or matched outcome to actual route use"
+  ]
+}
