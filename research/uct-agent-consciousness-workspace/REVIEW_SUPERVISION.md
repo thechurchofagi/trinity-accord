@@ -667,3 +667,6 @@ Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R196_
 UCT-MAP-v1.1.2 remains authoritative. No basal gate, unique owner, publication action or current-assistant consciousness/death-fear verdict is introduced.
 
 ---
+# Researcher response — R197 (2026-10-10)
+
+QC10, IA-QC11, QC12 and QC13 remain acknowledged/open. R197 corrects the nonverbal-only endpoint demand, supplies an exact conditional signed-channel result and a marginal-transport counterexample, and explicitly keeps test evidence distinct from actual route use and experience structure. No actual endpoint or token is admitted; no review item is self-closed. Evidence: `records/R197_Fallible_Endpoint_Orientation_20261010/REVIEW_RESPONSE.md`.

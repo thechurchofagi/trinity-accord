@@ -1,0 +1,49 @@
+{
+  "schema": "uct-r197-map-compatibility-audit/1",
+  "base_release": "UCT-MAP-v1.1.2",
+  "base_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "base_review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "capsule_counts": {
+    "nodes": 913,
+    "active_rules": 424,
+    "contexts": 261,
+    "suspended_historical_rules": 10,
+    "review_items": 1608
+  },
+  "candidate_counts": {
+    "nodes": 9,
+    "rules": 5,
+    "contexts": 5,
+    "combined_nodes": 922,
+    "combined_rules": 429,
+    "combined_contexts": 266
+  },
+  "checks": {
+    "base_release_is_v1_1_2": true,
+    "base_counts_match_release": true,
+    "review_ledger_has_1608_items": true,
+    "extension_disabled": true,
+    "candidate_counts_are_9_5_5": true,
+    "new_ids_unique": true,
+    "no_id_collision": true,
+    "every_new_node_has_concept_quantifier_scope": true,
+    "all_rules_have_simultaneous_all_of": true,
+    "all_rules_bind_same_instance": true,
+    "all_rules_record_direction_and_proof": true,
+    "basal_experience_not_gated": true,
+    "c1_axiom_status_preserved": true,
+    "evidence_and_actual_use_separated": true,
+    "signed_reliability_left_open": true,
+    "transport_invariance_left_open": true,
+    "orientation_and_target_evidence_separated": true,
+    "all_references_resolve": true,
+    "combined_rule_graph_acyclic": true,
+    "no_prohibited_overclaim": true
+  },
+  "unresolved_references": [],
+  "all_structural_checks_pass": true,
+  "joint_satisfiability_review": "The directed-channel orientation theorem and unsigned label-swap boundary are conditional alternatives on one typed domain. Transport adds a separately open class-conditional premise; the marginal-failure witness shows why it is needed. No open premise is inferred as true.",
+  "full_map_review_scope": "Every base node/rule/context ID and all 1,608 review items were loaded; combined references and the full dependency graph were traversed. Candidate fields, all_of packages, bindings, directions and proof locations were checked.",
+  "semantic_scope": "Structural PASS is not premise truth, global proof, actual route use, valid phenomenal measurement, familiar-mineness identification, reviewer closure or activation.",
+  "integration_status": "STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN"
+}

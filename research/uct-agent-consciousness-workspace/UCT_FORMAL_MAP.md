@@ -41,3 +41,6 @@ Current non-deductive coverage entry: [UCT-PUB-v1.0.8](PUBLICATION_COVERAGE.json
 ## Latest disabled checkpoint: R196
 
 [R196](records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_EXTENSION.json) adds a 9-node/6-rule/5-context disabled candidate for two-axis phenomenal calibration. Exact enumeration shows that structural sensitivity plus value invariance identifies a structural partition up to complement, while outcome reversal can reject simple value inheritance. The same constraints leave the familiar-mineness target globally complemented until an independent positive endpoint is supplied. The full v1.1.2 graph and all 1,608 review objects were traversed; structural compatibility passed. R196 is not included in completed counts or hashes. Current nondeductive coverage is UCT-PUB-v1.0.8.
+# Pending disabled checkpoint — R197-FEO-20261010
+
+R197 proposes 9 nodes, 5 conditional rules and 5 nondeductive context links concerning fallible signed endpoint orientation, modality neutrality and class-conditional transport. The candidate is disabled and does not change UCT-MAP-v1.1.2 (913 nodes, 424 active rules, 261 context links, 10 suspended historical rules). See `records/R197_Fallible_Endpoint_Orientation_20261010/MAP_EXTENSION.json` and `MAP_AUDIT.md`.

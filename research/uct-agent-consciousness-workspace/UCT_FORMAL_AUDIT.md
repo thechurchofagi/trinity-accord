@@ -39,3 +39,6 @@ R195 restores and hash-verifies all 82 v1.1.2 capsule members, loads the 913/424
 ## R196 post-release compatibility note
 
 R196 loads the exact verified v1.1.2 baseline, traverses the 913/424/261/10 graph and all 1,608 review items, then tests its disabled 9/6/5 candidate. All 19 structural checks pass. Per-node and per-rule review keeps structure, value, marker, outcome, target, actual route use and test evidence distinct. The pass does not provide an independent phenomenal endpoint, establish actual installation/use, identify familiar mineness, close review items or activate R196. See [R196 MAP_AUDIT.md](records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_AUDIT.md).
+# Latest compatibility audit — R197
+
+The complete UCT-MAP-v1.1.2 graph and all 1,608 review items were traversed with the disabled R197 9/5/5 candidate. References resolve, simultaneous `all_of` bindings are explicit, and the combined dependency graph is acyclic. Structural PASS is not theory truth, premise discharge, actual route use, target validity or activation. See `records/R197_Fallible_Endpoint_Orientation_20261010/MAP_COMPATIBILITY_AUDIT.json`.

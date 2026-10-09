@@ -111,3 +111,6 @@ R190 artifacts: [research note](records/R190_Practical_Centering_Bearer_Coupling
 Next bounded question: on one fixed PC+BDCC episode, independently ground an online conflict/endorsement transformation and test it against a reflex-table duplicate. If the duplicate preserves it or the proposal merely renames “deliberateness,” retain familiar mineness as underidentified.
 
 No publication, DOI, OTS, Arweave, PR, deployment, production workflow, or scheduler action accompanies R190.
+# Latest handoff — R197 (2026-10-10)
+
+Resume from `records/R197_Fallible_Endpoint_Orientation_20261010/HANDOFF_ZH.md`. The substantive correction is that verbal/nonverbal modality does not orient R196's complement; independent signed reliability does so only conditionally, and nonreport transport additionally requires class-conditional invariance. Do not redo R155–R196. Keep QC10, IA-QC11, QC12 and QC13 open. Next test one actual endpoint candidate with copy/switch and transport falsifiers.

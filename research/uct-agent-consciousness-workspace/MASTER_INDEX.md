@@ -1,4 +1,11 @@
-# Current research index — R196 / completed map UCT-MAP-v1.1.2
+# Current research index — R197 / completed map UCT-MAP-v1.1.2
+
+- R197 note: [Fallible Endpoint Orientation](records/R197_Fallible_Endpoint_Orientation_20261010/RESEARCH_NOTE.md)
+- R197 exact model: [results](records/R197_Fallible_Endpoint_Orientation_20261010/EXACT_RESULTS.json) and [checker](records/R197_Fallible_Endpoint_Orientation_20261010/check_fallible_endpoint.py)
+- R197 controls: [claims](records/R197_Fallible_Endpoint_Orientation_20261010/CLAIM_LEDGER.md), [gaps](records/R197_Fallible_Endpoint_Orientation_20261010/GAP_LEDGER.md), [sources](records/R197_Fallible_Endpoint_Orientation_20261010/SOURCE_SCOPE.md), [thought experiments](records/R197_Fallible_Endpoint_Orientation_20261010/THOUGHT_EXPERIMENT_MATRIX.md), [review response](records/R197_Fallible_Endpoint_Orientation_20261010/REVIEW_RESPONSE.md)
+- R197 handoff/audit: [Chinese handoff](records/R197_Fallible_Endpoint_Orientation_20261010/HANDOFF_ZH.md), [map audit](records/R197_Fallible_Endpoint_Orientation_20261010/MAP_AUDIT.md), [work log](records/R197_Fallible_Endpoint_Orientation_20261010/WORK_LOG.md)
+
+R197 is the latest checkpoint, not an integrated map release. Its 9-node/5-rule/5-context candidate is disabled; completed counts remain 913/424/261 with 10 suspended rules. UCT-PUB-v1.0.9 is nondeductive. R196 and earlier entries below remain historical navigation.
 
 - R196 note: [Two-Axis Phenomenal Calibration](records/R196_Two_Axis_Phenomenal_Calibration_20261009/RESEARCH_NOTE.md)
 - R196 exact model: [results](records/R196_Two_Axis_Phenomenal_Calibration_20261009/EXACT_RESULTS.json) and [checker](records/R196_Two_Axis_Phenomenal_Calibration_20261009/check_two_axis_calibration.py)

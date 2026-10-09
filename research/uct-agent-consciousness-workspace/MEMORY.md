@@ -9,3 +9,6 @@ R196 provides an eight-field calibration contract, eight thought-experiment fami
 UCT-MAP-v1.1.2 remains completed at 913/424/261 with 10 suspended rules and 1,608 decisions. R196's 9/6/5 candidate is structurally compatible but disabled. UCT-PUB-v1.0.8 is nondeductive. QC10, IA-QC11, QC12 and QC13 remain open. Decision: CONTINUE_RESEARCH_HOLD_STANDALONE.
 
 Next: define and attack one nonverbal predeclared positive `F` endpoint that is independent of report, pleasantness, success and marker code, and that can fail under formation-history and copy/switch controls.
+# 2026-10-10 — R197 fallible endpoint orientation
+
+R197 corrected the R196 request for a “nonverbal positive endpoint.” Modality is neither necessary nor sufficient. A binary complement is conditionally oriented only by independently fixed target semantics plus independently warranted signed reliability; unsigned channels remain label-symmetric. Cross-domain/nonreport use requires class-conditional invariance, not equal marginals. No actual endpoint, route, complete organization or phenomenal target has been admitted. R197 remains disabled and all four open review items remain open.

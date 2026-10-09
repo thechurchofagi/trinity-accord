@@ -520,3 +520,6 @@ Positive UCT application: under C1 plus a separately grounded actual P/I/K, thes
 
 ---
 <!-- file end -->
+# Latest operational checkpoint — R197
+
+Read R197 before selecting the next question. Do not treat “nonverbal” as an endpoint guarantee. Require independent target semantics, signed reliability, same-instance evidence and class-conditional transport, while preserving all open review items and C1/U1 boundaries.

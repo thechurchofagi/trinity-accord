@@ -1,0 +1,67 @@
+{
+  "schema": "uct-r197-fallible-endpoint-check/1.0",
+  "result_id": "R197-FEO-RESULT-v0.1.0",
+  "status": "PASS_DECLARED_FINITE_ALGEBRA_ONLY",
+  "grid_denominator": 8,
+  "directed_channels": 36,
+  "all_channels": 81,
+  "total_checked_instances": 193,
+  "checks": [
+    {
+      "id": "R197-T1-GRID",
+      "pass": true,
+      "cases": 72,
+      "statement": "Every p1>p0 channel has opposite nonzero structural-contrast signs under the two complement orientations."
+    },
+    {
+      "id": "R197-T2-LABEL-SWAP",
+      "pass": true,
+      "cases": 81,
+      "statement": "Without a signed reliability premise, swapping endpoint semantics and channel rates preserves every observed structural contrast."
+    },
+    {
+      "id": "R197-T3-MARGINAL-TRANSPORT-FAILURE",
+      "pass": true,
+      "cases": 1,
+      "statement": "Equal marker marginals can coexist with a complete reversal of the endpoint-conditioned marker direction."
+    },
+    {
+      "id": "R197-T4-CONDITIONAL-TRANSPORT",
+      "pass": true,
+      "cases": 36,
+      "statement": "Exact class-conditional endpoint-channel invariance preserves the directed contrast."
+    },
+    {
+      "id": "R197-T5-MODALITY-NEUTRALITY",
+      "pass": true,
+      "cases": 2,
+      "statement": "At fixed signed channel behavior, verbal versus nonverbal modality does not alter the orientation algebra."
+    },
+    {
+      "id": "R197-T6-COPY-SWITCH",
+      "pass": true,
+      "cases": 1,
+      "statement": "Copied marker prevalence and code do not preserve the endpoint-conditioned direction after a generator switch."
+    }
+  ],
+  "transport_countermodel": {
+    "prevalence": "1/2",
+    "calibration_rates": {
+      "p1": "4/5",
+      "p0": "1/5",
+      "marginal": "1/2",
+      "contrast": "3/5"
+    },
+    "target_rates": {
+      "p1": "1/5",
+      "p0": "4/5",
+      "marginal": "1/2",
+      "contrast": "-3/5"
+    }
+  },
+  "limitations": [
+    "No actual token, episode, phenomenal target, report reliability, marker reliability or transport invariance is established.",
+    "The checker does not validate C1, familiar mineness, consciousness, agency, ownership or current route use.",
+    "The sign argument and label-swap symmetry use standard probability and identifiability mathematics."
+  ]
+}
