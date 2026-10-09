@@ -5,5 +5,7 @@
   "source_git_blob": "2609be123b53405a7e97de0896e6a578f6696375",
   "user_intent": "Publish the completed RT/TH preprint using existing DOI -> DOI-in-PDF -> OTS -> AR workflow",
   "prior_records_protected": true,
-  "resumption": "Reuse exact Zenodo draft after recovering failed concurrent Git checkpoint; no duplicate POST"
+  "resumption": "Reuse exact Zenodo draft after recovering failed concurrent Git checkpoint; no duplicate POST",
+  "reconciliation_attempt": 3,
+  "prior_zenodo_record": 23251651
 }
