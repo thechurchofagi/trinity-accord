@@ -62,6 +62,15 @@ def proof_details(path, expected_sha):
 
 
 def pdf_bytes(paper, item):
+    # Exact public Zenodo bytes mirrored after verified public readback.
+    # Avoid CDN propagation 404 for the independent RT/TH record; hash remains mandatory.
+    if paper.get('report') == 'RT20261009':
+        local = ROOT / 'research/task-relative-continuity/published' / item['name']
+        if local.is_file():
+            contents = local.read_bytes()
+            if digest(contents) != item['sha256'] or len(contents) != item['bytes'] or not contents.startswith(b'%PDF-'):
+                raise ValueError('Local Zenodo-public mirror identity mismatch: '+str(local))
+            return local
     path = CACHE / paper['report'] / item['name']
     if not path.exists():
         url = f"https://zenodo.org/records/{paper['record_id']}/files/{urllib.parse.quote(item['name'])}?download=1"
