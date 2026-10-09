@@ -31,7 +31,7 @@ jobs:
       - name: Install PDF build dependencies without publication secrets
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended fonts-dejavu-core poppler-utils
+          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended fonts-dejavu-core lmodern poppler-utils
       - name: Reserve one DOI for the reviewed source, never publish here
         env:
           ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
