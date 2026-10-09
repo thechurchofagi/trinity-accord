@@ -21,7 +21,15 @@ def persist(*names):
  subprocess.run(["git","add","--",*[str((R/n).relative_to(REPO)) for n in names if (R/n).exists()]],cwd=REPO,check=True)
  if subprocess.check_output(["git","diff","--cached","--name-only"],cwd=REPO,text=True).strip():
   subprocess.run(["git","commit","-m","[skip ci] Preserve RT/TH Zenodo release stage"],cwd=REPO,check=True)
-  subprocess.run(["git","push","origin","HEAD:"+BRANCH],cwd=REPO,check=True)
+  for retry in range(4):
+   p=subprocess.run(["git","push","origin","HEAD:"+BRANCH],cwd=REPO)
+   if p.returncode==0:return
+   subprocess.run(["git","fetch","origin",BRANCH,"--prune"],cwd=REPO,check=True)
+   q=subprocess.run(["git","rebase","origin/"+BRANCH],cwd=REPO)
+   if q.returncode!=0:
+    subprocess.run(["git","rebase","--abort"],cwd=REPO)
+    raise RuntimeError("Checkpoint conflict requires manual reconciliation")
+  raise RuntimeError("Unable to checkpoint publication stage")
 class NoRedirect(urllib.request.HTTPRedirectHandler):
  def redirect_request(self,*a):raise RuntimeError("Redirect not allowed for authenticated request")
 def api(path,method="GET",data=None,binary=False,auth=True):
