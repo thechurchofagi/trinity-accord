@@ -110,7 +110,10 @@ def build(doi):
  return expected
 def publish():
  obj=prepare();rid,doi=check(obj)
- exp=build(doi); pub=R/"published"
+ if obj.get("submitted") and (R/"frozen-package.json").exists():
+  exp=load("frozen-package.json");pub=R/"published";pub.mkdir(exist_ok=True)
+ else:
+  exp=build(doi);pub=R/"published"
  if (R/"publication-record.json").exists():
   r=load("publication-record.json");assert r["doi"]==doi;return
  if not obj.get("submitted"):
