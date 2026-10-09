@@ -1,0 +1,23 @@
+{
+  "release_id":"UCT-MAP-v1.1.0",
+  "release_seq":2,
+  "research_id":"TH20261009",
+  "result_version":"0.2.0",
+  "state":"COMMITTED_AND_READ_BACK",
+  "release_commit":"a62a8ab17044cd34dff694f21f6460558885a39c",
+  "release_tree":"b44061686dc1a12f9089354f661694cb374e3c76",
+  "expected_parent":"11c1af83fa7e9eabca8351b67dfe162f59da7dd1",
+  "lease_update_succeeded":true,
+  "readback":{"current_state_blob":"4d1673cf63803018a6731a002a101b4b0bd9629f","release_pointer_blob":"92f8301c0382c18b4512776d8f53ae3ced47dd10","parts_manifest_blob":"be29de7df6a1e9eff38f561abd605c4e3af2edc7","audit_report_blob":"82e74b5f00f34d9ea9dee6dd0b880092f3e429f9"},
+  "part_blobs_match_local_git_hashes":true,
+  "capsule_sha256":"9820ba9acff4343dbc801376c8ec038f68137ef2671d8c3a455fafdbfa89df5d",
+  "local_exact_reconstruction_pass":true,
+  "reconstructed_files":["MAP_EXTENSION.json","UCT_EFFECTIVE_GRAPH.json","REVIEW_LEDGER.json","REVIEW_LEDGER.csv","RELEASE.json"],
+  "effective_graph_sha256":"92368e0f0a4fd1e3c61849784ac090a3f8948f3b721d9fc0dade4b8f4ec4966d",
+  "review_ledger_sha256":"6375c6800e491fb9ae42b324340220c19ac30b4e75af0e41482dd269c65f3768",
+  "review_items":1373,
+  "preservation_boundary":"Remote capsule holds the full source/manuscript/module and saved compatibility decisions; large effective outputs require the exact prior completed graph/ledger and the recorded reconstruction. The downloadable offline ZIP includes those expanded outputs and baseline. Remote pointer RELEASE.json and the full inner release record are explicitly distinct serializations.",
+  "scientific_status_changed_by_receipt":false,
+  "publication_action":false,
+  "note":"Reconstruction is not a new audit. The immutable inner release's SEPARATE_RECEIPT_REQUIRED field is discharged only as preservation metadata by this receipt; actual/named-phenomenal and external-priority obligations remain open."
+}
