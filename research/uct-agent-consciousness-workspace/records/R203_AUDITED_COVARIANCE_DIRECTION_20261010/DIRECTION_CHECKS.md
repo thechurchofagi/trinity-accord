@@ -1,0 +1,1 @@
+C1 remains a postulate; U1 is not gated by audit/report/control/familiarity. Actual organization, experience, marker, conceptual self and report remain distinct. Local/whole coexistence and nonexclusive actual processes are retained. No present-assistant claim. Statistical certificate is a bounded interface for selected H, not a substitute for a positive mechanism.

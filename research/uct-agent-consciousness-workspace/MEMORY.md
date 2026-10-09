@@ -1,3 +1,11 @@
+# Current operational checkpoint — R203-ACD-20261010
+
+Read [R203 handoff](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/HANDOFF_ZH.md), [state](CURRENT_STATE.json), and [master guide](RESEARCH_MASTER_GUIDE.md) first. ACD-RESULT-v0.2.0 supplies a conditional covariance-direction certificate and corrects latent-conditioning/bypass controls. Completed map unchanged; candidate disabled; coverage UCT-PUB-v1.0.15; all four reviews remain open. No human H endpoint or actual use validated.
+
+---
+
+## Prior navigation retained
+
 # Research memory — R202 pending over UCT-MAP-v1.1.2
 
 R202 closes a specific observability loophole in R201: a genuinely unlabelled target marker marginal cannot identify the sign of the target class-conditional contrast. Equal-marginal twins can have opposite familiar-continuity orientation even with fixed source calibration. A prospectively random audit in a target-style reporting validation domain can conditionally recover latent prevalence and both class-conditionals when endpoint error is independently fixed and informative, conditional nondifferentiality and positivity hold, and the same actual-use stratum is retained.

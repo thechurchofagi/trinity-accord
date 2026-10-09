@@ -1,3 +1,11 @@
+# Current operational checkpoint — R203-ACD-20261010
+
+Read [R203 handoff](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/HANDOFF_ZH.md), [state](CURRENT_STATE.json), and [master guide](RESEARCH_MASTER_GUIDE.md) first. ACD-RESULT-v0.2.0 supplies a conditional covariance-direction certificate and corrects latent-conditioning/bypass controls. Completed map unchanged; candidate disabled; coverage UCT-PUB-v1.0.15; all four reviews remain open. No human H endpoint or actual use validated.
+
+---
+
+## Prior navigation retained
+
 # Latest research checkpoint — R202; completed map remains UCT-MAP-v1.1.2
 
 Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R202 Chinese handoff](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/HANDOFF_ZH.md).

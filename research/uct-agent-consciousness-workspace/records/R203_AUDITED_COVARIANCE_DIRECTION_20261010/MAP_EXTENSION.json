@@ -1,0 +1,203 @@
+{
+  "schema": "uct-disabled-checkpoint-extension/1",
+  "research_id": "R203-ACD-20261010",
+  "result_version": "ACD-RESULT-v0.2.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "source_note": "R203_AUDITED_COVARIANCE_DIRECTION_20261010/RESEARCH_NOTE.md",
+  "integration_status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled_as_established_premise": false,
+  "release_effect": "NONE; completed release unchanged",
+  "nodes": [
+    {
+      "id": "R203:CONTRACT",
+      "kind": "TYPED_DOMAIN",
+      "statement": "Fix V,H,M,J,pi,a,c and actual U versus E_U.",
+      "status": "DECLARATION_DISABLED",
+      "scope": "Fixed reporting V, selected H, one bearer/episode/signature and actual-use stratum; not no-report T or basal admission.",
+      "quantifier": "For every instance satisfying its stated joint premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R203:SIGNED_ENDPOINT",
+      "kind": "OPEN_PREMISE",
+      "statement": "Independently warranted a-c>0, nondegenerate H prevalence.",
+      "status": "OPEN_PREMISE_DISABLED",
+      "scope": "Fixed reporting V, selected H, one bearer/episode/signature and actual-use stratum; not no-report T or basal admission.",
+      "quantifier": "For every instance satisfying its stated joint premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R203:RESIDUAL_BOUND",
+      "kind": "OPEN_PREMISE",
+      "statement": "Independent weighted within-H residual covariance bound |R|<=kappa.",
+      "status": "OPEN_PREMISE_DISABLED",
+      "scope": "Fixed reporting V, selected H, one bearer/episode/signature and actual-use stratum; not no-report T or basal admission.",
+      "quantifier": "For every instance satisfying its stated joint premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R203:COVARIANCE_IDENTITY",
+      "kind": "KNOWN_MATHEMATICS",
+      "statement": "K=pi(1-pi)(a-c)Delta+R.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "scope": "Fixed reporting V, selected H, one bearer/episode/signature and actual-use stratum; not no-report T or basal admission.",
+      "quantifier": "For every instance satisfying its stated joint premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R203:SIGN_CERTIFICATE",
+      "kind": "SENSITIVITY_RESULT",
+      "statement": "K>kappa implies Delta>0 and Delta>=4(K-kappa).",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "scope": "Fixed reporting V, selected H, one bearer/episode/signature and actual-use stratum; not no-report T or basal admission.",
+      "quantifier": "For every instance satisfying its stated joint premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R203:EXACT_TWIN",
+      "kind": "CONSTRUCTIVE_COUNTERMODEL",
+      "statement": "Same full MJ law and exact signed endpoint errors can have opposite Delta under residual dependence.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "scope": "Fixed reporting V, selected H, one bearer/episode/signature and actual-use stratum; not no-report T or basal admission.",
+      "quantifier": "For every instance satisfying its stated joint premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R203:FIXED_N_BOX",
+      "kind": "KNOWN_CONCENTRATION_RESULT",
+      "statement": "Independent complete draws at fixed n give simultaneous bounds L_K,U_K with a union-bound error allocation.",
+      "status": "OPEN_APPLICATION_RESULT_DISABLED",
+      "scope": "Fixed reporting V, selected H, one bearer/episode/signature and actual-use stratum; not no-report T or basal admission.",
+      "quantifier": "For every instance satisfying its stated joint premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R203:GUARDED_DECISION",
+      "kind": "CONDITIONAL_METHOD",
+      "statement": "Use L_K>kappa only with independent premise warrants; otherwise observed association or abstention.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "scope": "Fixed reporting V, selected H, one bearer/episode/signature and actual-use stratum; not no-report T or basal admission.",
+      "quantifier": "For every instance satisfying its stated joint premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R203:LATENT_CONDITIONING_CORRECTION",
+      "kind": "CORRECTION",
+      "statement": "Grouping on J cannot test conditional independence given latent H; bypass preservation rejects only a declared necessary-route bridge.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "scope": "Fixed reporting V, selected H, one bearer/episode/signature and actual-use stratum; not no-report T or basal admission.",
+      "quantifier": "For every instance satisfying its stated joint premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R203:ACTUAL_USE_FIREWALL",
+      "kind": "METHOD_CONSTRAINT",
+      "statement": "Audit, telemetry and assigned bypass are E_U; actual carrier-consumer use and no-report transport remain independent.",
+      "status": "METHOD_CONSTRAINT_DISABLED",
+      "scope": "Fixed reporting V, selected H, one bearer/episode/signature and actual-use stratum; not no-report T or basal admission.",
+      "quantifier": "For every instance satisfying its stated joint premises.",
+      "actual_premises_discharged": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "R203:r_identity",
+      "all_of": [
+        "R203:CONTRACT",
+        "R203:ACTUAL_USE_FIREWALL"
+      ],
+      "conclusion": "R203:COVARIANCE_IDENTITY",
+      "statement": "Apply total covariance in the fixed actual-use domain.",
+      "kind": "CONDITIONAL_RULE",
+      "same_instance_required": true,
+      "binding": "Same V,H,M,J and fixed bearer/episode/signature/U; no cross-system premise assembly.",
+      "proof_location": "RESEARCH_NOTE.md \u00a7\u00a72\u20136; EXACT_RESULTS.json",
+      "alternative_route_semantics": "Stronger independent evidence may justify another route; no missing premise is inferred from observed association.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R203:r_sign",
+      "all_of": [
+        "R203:COVARIANCE_IDENTITY",
+        "R203:SIGNED_ENDPOINT",
+        "R203:RESIDUAL_BOUND"
+      ],
+      "conclusion": "R203:SIGN_CERTIFICATE",
+      "statement": "Strict residual margin and positive coefficient select the direction.",
+      "kind": "CONDITIONAL_RULE",
+      "same_instance_required": true,
+      "binding": "Same V,H,M,J and fixed bearer/episode/signature/U; no cross-system premise assembly.",
+      "proof_location": "RESEARCH_NOTE.md \u00a7\u00a72\u20136; EXACT_RESULTS.json",
+      "alternative_route_semantics": "Stronger independent evidence may justify another route; no missing premise is inferred from observed association.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R203:r_decision",
+      "all_of": [
+        "R203:SIGN_CERTIFICATE",
+        "R203:FIXED_N_BOX",
+        "R203:ACTUAL_USE_FIREWALL"
+      ],
+      "conclusion": "R203:GUARDED_DECISION",
+      "statement": "Use simultaneous moment coverage and independent warranted budget.",
+      "kind": "CONDITIONAL_RULE",
+      "same_instance_required": true,
+      "binding": "Same V,H,M,J and fixed bearer/episode/signature/U; no cross-system premise assembly.",
+      "proof_location": "RESEARCH_NOTE.md \u00a7\u00a72\u20136; EXACT_RESULTS.json",
+      "alternative_route_semantics": "Stronger independent evidence may justify another route; no missing premise is inferred from observed association.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R203:r_limit",
+      "all_of": [
+        "R203:CONTRACT",
+        "R203:EXACT_TWIN"
+      ],
+      "conclusion": "R203:LATENT_CONDITIONING_CORRECTION",
+      "statement": "Observed data alone cannot establish conditional independence or latent calibration.",
+      "kind": "CONDITIONAL_RULE",
+      "same_instance_required": true,
+      "binding": "Same V,H,M,J and fixed bearer/episode/signature/U; no cross-system premise assembly.",
+      "proof_location": "RESEARCH_NOTE.md \u00a7\u00a72\u20136; EXACT_RESULTS.json",
+      "alternative_route_semantics": "Stronger independent evidence may justify another route; no missing premise is inferred from observed association.",
+      "status": "CANDIDATE_DISABLED"
+    }
+  ],
+  "context_links": [
+    {
+      "id": "R203:ctx_C1",
+      "type": "AXIOM_STATUS_PRESERVED",
+      "from": "R203:GUARDED_DECISION",
+      "to": "A:C1",
+      "statement": "Certificate does not prove C1."
+    },
+    {
+      "id": "R203:ctx_U1",
+      "type": "NON_GATE_CONTEXT",
+      "from": "R203:GUARDED_DECISION",
+      "to": "A:U1",
+      "statement": "Report/calibration are not basal gates."
+    },
+    {
+      "id": "R203:ctx_report",
+      "type": "REPORT_DOMAIN_LIMIT_RETAINED",
+      "from": "R203:GUARDED_DECISION",
+      "to": "R157:REPORT_COVERAGE_LIMIT",
+      "statement": "No V-to-T inference."
+    },
+    {
+      "id": "R203:ctx_use",
+      "type": "ACTUAL_USE_BOUNDARY",
+      "from": "R203:ACTUAL_USE_FIREWALL",
+      "to": "R173:RETENTIVE_BINDING_RELATION",
+      "statement": "Evidence does not supply actual retention/use."
+    },
+    {
+      "id": "R203:ctx_transport",
+      "type": "TRANSPORT_BOUNDARY",
+      "from": "R203:GUARDED_DECISION",
+      "to": "R157:COORDINATE_TRANSPORT",
+      "statement": "No silent nonreport transport."
+    }
+  ]
+}

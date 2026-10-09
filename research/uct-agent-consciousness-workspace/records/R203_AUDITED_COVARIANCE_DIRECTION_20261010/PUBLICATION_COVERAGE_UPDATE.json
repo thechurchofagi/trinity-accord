@@ -1,0 +1,19 @@
+{
+  "schema": "uct-publication-coverage-update/1.0",
+  "coverage_version": "UCT-PUB-v1.0.15",
+  "round": "R203",
+  "research_id": "R203-ACD-20261010",
+  "newly_covered_published_claims": [],
+  "new_pending_claims": [
+    "R203-C1",
+    "R203-C2",
+    "R203-C3",
+    "R203-C4",
+    "R203-C5"
+  ],
+  "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+  "recommended_home": "R192-R203 methods family",
+  "reason": "Conditional direction certificate and correction; no independent H endpoint, residual budget or adult data.",
+  "nondeductive": true,
+  "map_release_unchanged": "UCT-MAP-v1.1.2"
+}

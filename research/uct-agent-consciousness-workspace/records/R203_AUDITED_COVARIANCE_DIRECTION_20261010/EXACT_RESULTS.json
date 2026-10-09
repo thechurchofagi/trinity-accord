@@ -1,0 +1,126 @@
+{
+  "covariance_identity_violations": 0,
+  "denominator_grid": 8,
+  "dependent_error_counterexample": {
+    "dependent_latent_covariance": "-3/100",
+    "dependent_within_class_residual": "3/50",
+    "independent_latent_covariance": "3/100",
+    "observed_m_j_r_cov": [
+      "1/2",
+      "1/2",
+      "7/25",
+      "3/100"
+    ],
+    "opposite_latent_marker_direction": true,
+    "same_observed_binary_MJ_law": true
+  },
+  "feasible_conditional_tables": {
+    "negative": [
+      [
+        "19/50",
+        "1/50",
+        "21/50",
+        "9/50"
+      ],
+      [
+        "9/50",
+        "21/50",
+        "1/50",
+        "19/50"
+      ]
+    ],
+    "observed": [
+      "7/25",
+      "11/50",
+      "11/50",
+      "7/25"
+    ],
+    "positive": [
+      [
+        "12/25",
+        "3/25",
+        "8/25",
+        "2/25"
+      ],
+      [
+        "2/25",
+        "8/25",
+        "3/25",
+        "12/25"
+      ]
+    ]
+  },
+  "guarded_analyzer_checks": 4,
+  "informative_oriented_models_checked": 20412,
+  "oriented_residual_models": 3381,
+  "overall": "PASS",
+  "population_centered_first_positive_n_alpha_0_05": {
+    "interpretation": "Descriptive threshold if empirical moments equal population moments; not a power calculation or recommended sample size.",
+    "strong_endpoint_cov_0_09": 1235,
+    "weak_endpoint_cov_0_015": 42875
+  },
+  "residual_certificate_triggers": 3432,
+  "residual_certificate_violations": 0,
+  "residual_table_models": 8575,
+  "result_id": "R203-EXACT-v0.2.0",
+  "sign_violations_under_conditional_independence": 0,
+  "simultaneous_hoeffding_examples": {
+    "negative_n2000": {
+      "h": 0.03459585142319107,
+      "lower_cov": -0.1603885757820777,
+      "moment_box": {
+        "j": [
+          0.46540414857680895,
+          0.5345958514231911
+        ],
+        "m": [
+          0.46540414857680895,
+          0.5345958514231911
+        ],
+        "r": [
+          0.12540414857680893,
+          0.19459585142319108
+        ]
+      },
+      "upper_cov": -0.02200517008931338
+    },
+    "null_n2000": {
+      "h": 0.03459585142319107,
+      "lower_cov": -0.07038857578207772,
+      "moment_box": {
+        "j": [
+          0.46540414857680895,
+          0.5345958514231911
+        ],
+        "m": [
+          0.46540414857680895,
+          0.5345958514231911
+        ],
+        "r": [
+          0.21540414857680892,
+          0.28459585142319105
+        ]
+      },
+      "upper_cov": 0.06799482991068659
+    },
+    "positive_n2000": {
+      "h": 0.03459585142319107,
+      "lower_cov": 0.019611424217922335,
+      "moment_box": {
+        "j": [
+          0.46540414857680895,
+          0.5345958514231911
+        ],
+        "m": [
+          0.46540414857680895,
+          0.5345958514231911
+        ],
+        "r": [
+          0.305404148576809,
+          0.3745958514231911
+        ]
+      },
+      "upper_cov": 0.1579948299106866
+    }
+  }
+}

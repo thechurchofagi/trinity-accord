@@ -1,3 +1,7 @@
+## R203 — ACD-RESULT-v0.2.0 / UCT-PUB-v1.0.15
+
+Conditional covariance-direction certificate, same-accuracy observational twin, fixed-n guarded analyzer, and corrected audit protocol. All candidate objects remain disabled; completed map unchanged. Semantic adoption and actual application open.
+
 # R200-SCF-20261010 — 2026-10-10 — disabled research checkpoint
 
 Establishes a semantic calibration firewall for retentive familiarity `H`. Exact enumeration checks 768 four-proxy latent models and finds zero complement mismatches; a signed endpoint condition excludes complement only within its calibration domain; equal marginals can transport a reversed conditional direction; and five of 16 Boolean formation/use tables have positive interactions, including shared-success confounds with fixed `H`. Candidate 9/5/5 is structurally compatible and disabled; no endpoint, actual route application or reviewer item is closed. Coverage advances nondeductively to UCT-PUB-v1.0.12; no publication action.

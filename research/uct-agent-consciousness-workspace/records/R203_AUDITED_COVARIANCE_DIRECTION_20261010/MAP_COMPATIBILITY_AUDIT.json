@@ -1,0 +1,47 @@
+{
+  "schema": "uct-r203-map-audit/1",
+  "base_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "counts": {
+    "nodes": 913,
+    "rules": 424,
+    "contexts": 261,
+    "suspended": 10,
+    "review_items": 1608
+  },
+  "candidate_counts": {
+    "nodes": 10,
+    "rules": 4,
+    "contexts": 5
+  },
+  "checks": {
+    "base_release": true,
+    "base_counts": true,
+    "suspended_rules": true,
+    "ledger_count": true,
+    "base_hash": true,
+    "ledger_hash": true,
+    "candidate_disabled": true,
+    "no_release_change": true,
+    "candidate_counts": true,
+    "unique_new_nodes": true,
+    "no_collision": true,
+    "typed_scoped_nodes": true,
+    "joint_premises": true,
+    "same_instance": true,
+    "proof_and_alternatives": true,
+    "refs_resolve": true,
+    "acyclic": true,
+    "c1_preserved": true,
+    "non_gate": true,
+    "actual_use_separation": true,
+    "report_limit": true,
+    "empirical_premises_open": true
+  },
+  "all_structural_checks_pass": true,
+  "unresolved": [],
+  "semantic_adoption": "OPEN; FULL_NEW_SEMANTIC_REPROOF_NOT_COMPLETED",
+  "inherited_coverage": "Every base item recorded by stable ID and content hash; base proofs reused, not newly reproved.",
+  "affected_rederivation": "R202 exact inversion remains conditional. R203 weakens errors-needed for direction only; its preregistration conditioning/bypass statements are corrected. R157 transport remains open. C1/U1/RetBind unchanged.",
+  "integration": "PENDING_CHECKPOINT_DISABLED"
+}
