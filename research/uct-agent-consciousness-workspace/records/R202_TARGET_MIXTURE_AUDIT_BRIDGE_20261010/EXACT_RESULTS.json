@@ -1,0 +1,30 @@
+{
+  "schema": "uct-r202-exact-results/1",
+  "unlabelled_marginal_grid_points": 7,
+  "opposite_orientation_pairs_found": 7,
+  "audit_inversion_instances_checked": 20412,
+  "audit_inversion_exact_recoveries": 20412,
+  "audit_inversion_violations": 0,
+  "singular_endpoint_observational_tie": true,
+  "selective_audit_same_audit_prevalence_different_population_prevalence": true,
+  "canonical_equal_marginal_witness": {
+    "source": {
+      "q0": "1/4",
+      "q1": "3/4"
+    },
+    "target_same": {
+      "pi": "1/2",
+      "q0": "1/4",
+      "q1": "3/4",
+      "m": "1/2"
+    },
+    "target_reversed": {
+      "pi": "1/2",
+      "q0": "3/4",
+      "q1": "1/4",
+      "m": "1/2"
+    }
+  },
+  "status": "PASS",
+  "scope": "Finite rational-grid implementation check plus exact witnesses; symbolic arguments carry the general claims."
+}
