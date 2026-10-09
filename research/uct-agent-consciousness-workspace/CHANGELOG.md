@@ -1,3 +1,7 @@
+## R204 — SAU-RESULT-v0.2.0 / UCT-PUB-v1.0.16
+
+Sensorimotor success/alignment/use quartet, explicit discrepancy probes and continuous coordinate. Known antecedents credited; no H closure or completed map change.
+
 ## R203 — ACD-RESULT-v0.2.0 / UCT-PUB-v1.0.15
 
 Conditional covariance-direction certificate, same-accuracy observational twin, fixed-n guarded analyzer, and corrected audit protocol. All candidate objects remain disabled; completed map unchanged. Semantic adoption and actual application open.

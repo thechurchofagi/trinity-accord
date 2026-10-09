@@ -1,0 +1,392 @@
+{
+  "result_version": "SAU-RESULT-v0.2.0",
+  "executed_utc": "2026-10-09T22:55:20.734916+00:00",
+  "exact_execution": {
+    "result_id": "R204-SAU-v0.2.0",
+    "comparator_reflex_pairs": 892,
+    "write_event_differences": 118,
+    "model_instances": 28096,
+    "real_feedback_probe_checks": 111920,
+    "port_relabel_checks": 333088,
+    "exact_continuous_mixture_checks": 6776,
+    "all_eight_combinations": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        1
+      ]
+    ],
+    "axis_witnesses": [
+      {
+        "axes": [
+          0,
+          0,
+          0
+        ],
+        "n": 2,
+        "plant": [
+          0,
+          1
+        ],
+        "predictor": [
+          1,
+          0
+        ],
+        "controller": [
+          1,
+          0
+        ],
+        "use": 0
+      },
+      {
+        "axes": [
+          0,
+          0,
+          1
+        ],
+        "n": 2,
+        "plant": [
+          0,
+          1
+        ],
+        "predictor": [
+          1,
+          0
+        ],
+        "controller": [
+          1,
+          0
+        ],
+        "use": 1
+      },
+      {
+        "axes": [
+          0,
+          1,
+          0
+        ],
+        "n": 2,
+        "plant": [
+          0,
+          1
+        ],
+        "predictor": [
+          0,
+          1
+        ],
+        "controller": [
+          1,
+          0
+        ],
+        "use": 0
+      },
+      {
+        "axes": [
+          0,
+          1,
+          1
+        ],
+        "n": 2,
+        "plant": [
+          0,
+          1
+        ],
+        "predictor": [
+          0,
+          1
+        ],
+        "controller": [
+          1,
+          0
+        ],
+        "use": 1
+      },
+      {
+        "axes": [
+          1,
+          0,
+          0
+        ],
+        "n": 2,
+        "plant": [
+          0,
+          1
+        ],
+        "predictor": [
+          1,
+          0
+        ],
+        "controller": [
+          0,
+          1
+        ],
+        "use": 0
+      },
+      {
+        "axes": [
+          1,
+          0,
+          1
+        ],
+        "n": 2,
+        "plant": [
+          0,
+          1
+        ],
+        "predictor": [
+          1,
+          0
+        ],
+        "controller": [
+          0,
+          1
+        ],
+        "use": 1
+      },
+      {
+        "axes": [
+          1,
+          1,
+          0
+        ],
+        "n": 2,
+        "plant": [
+          0,
+          1
+        ],
+        "predictor": [
+          0,
+          1
+        ],
+        "controller": [
+          0,
+          1
+        ],
+        "use": 0
+      },
+      {
+        "axes": [
+          1,
+          1,
+          1
+        ],
+        "n": 2,
+        "plant": [
+          0,
+          1
+        ],
+        "predictor": [
+          0,
+          1
+        ],
+        "controller": [
+          0,
+          1
+        ],
+        "use": 1
+      }
+    ],
+    "successful_output_matched_quartet": [
+      {
+        "plant": [
+          0,
+          1
+        ],
+        "controller": [
+          0,
+          1
+        ],
+        "predictor": [
+          0,
+          1
+        ],
+        "use": 0,
+        "task_outputs": [
+          0,
+          1
+        ],
+        "prediction_mismatch": "0",
+        "prediction_after_real_feedback": [
+          0,
+          1
+        ],
+        "prediction_after_forced_feedback": [
+          0,
+          1
+        ]
+      },
+      {
+        "plant": [
+          0,
+          1
+        ],
+        "controller": [
+          0,
+          1
+        ],
+        "predictor": [
+          0,
+          1
+        ],
+        "use": 1,
+        "task_outputs": [
+          0,
+          1
+        ],
+        "prediction_mismatch": "0",
+        "prediction_after_real_feedback": [
+          0,
+          1
+        ],
+        "prediction_after_forced_feedback": [
+          1,
+          1
+        ]
+      },
+      {
+        "plant": [
+          0,
+          1
+        ],
+        "controller": [
+          0,
+          1
+        ],
+        "predictor": [
+          1,
+          0
+        ],
+        "use": 0,
+        "task_outputs": [
+          0,
+          1
+        ],
+        "prediction_mismatch": "1",
+        "prediction_after_real_feedback": [
+          1,
+          0
+        ],
+        "prediction_after_forced_feedback": [
+          1,
+          0
+        ]
+      },
+      {
+        "plant": [
+          0,
+          1
+        ],
+        "controller": [
+          0,
+          1
+        ],
+        "predictor": [
+          1,
+          0
+        ],
+        "use": 1,
+        "task_outputs": [
+          0,
+          1
+        ],
+        "prediction_mismatch": "1",
+        "prediction_after_real_feedback": [
+          0,
+          0
+        ],
+        "prediction_after_forced_feedback": [
+          0,
+          0
+        ]
+      }
+    ],
+    "violations": 0,
+    "h_labels_generated": false,
+    "scope": "Finite sensorimotor organization and update law only",
+    "status": "PASS"
+  },
+  "structural_audit": {
+    "schema": "uct-r204-map-audit/1",
+    "base_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+    "ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+    "counts": {
+      "nodes": 913,
+      "rules": 424,
+      "contexts": 261,
+      "suspended": 10,
+      "review_items": 1608
+    },
+    "candidate_counts": {
+      "nodes": 11,
+      "rules": 5,
+      "contexts": 5
+    },
+    "checks": {
+      "base_release": true,
+      "base_counts": true,
+      "suspended_rules": true,
+      "ledger_count": true,
+      "base_hash": true,
+      "ledger_hash": true,
+      "candidate_disabled": true,
+      "no_release_change": true,
+      "candidate_counts": true,
+      "unique_new_nodes": true,
+      "no_collision": true,
+      "typed_scoped_nodes": true,
+      "joint_premises": true,
+      "same_instance": true,
+      "proof_and_alternatives": true,
+      "refs_resolve": true,
+      "acyclic": true,
+      "c1_preserved": true,
+      "non_gate": true,
+      "actual_use_separation": true,
+      "report_limit": true,
+      "empirical_premises_open": true
+    },
+    "all_structural_checks_pass": true,
+    "unresolved": [],
+    "semantic_adoption": "OPEN; FULL_NEW_SEMANTIC_REPROOF_NOT_COMPLETED",
+    "inherited_coverage": "Every base item recorded by stable ID and content hash; base proofs reused, not newly reproved.",
+    "affected_rederivation": "R173 actual RetBind remains more than current F/use. R199 clones retain matched future traces. R204 success/alignment/use separation and probes do not supply H or an actual complete signature. C1/U1 and R157 transport remain unchanged/open.",
+    "integration": "PENDING_CHECKPOINT_DISABLED"
+  },
+  "human_data": false,
+  "semantic_adoption": "OPEN"
+}

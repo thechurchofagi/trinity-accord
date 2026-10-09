@@ -729,3 +729,10 @@ Evidence: `records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/REVIEW_RESPONSE.md`
 # R203 response
 
 QC-20261008-10 remains OPEN: a signed-direction certificate and a feasible opposite-direction twin do not validate H. IA-QC11 remains application-OPEN: all algebra uses one fixed actual instance; no bearer/history/use evidence was acquired. QC-20261008-12 remains application-OPEN: U differs from E_U; randomized gate/audit and tests are evidential. QC-20261008-13 remains OPEN: no actual token or complete signature is admitted. The restored review-supervision record retains prior notices and responses; R203 does not self-close reviewer findings.
+
+
+---
+
+# R204 review response
+
+QC10 remains OPEN: concrete organization and its probes do not establish familiar-mineness semantics. IA-QC11 remains application-OPEN: model gate/write chronology is explicit, actual biological instance grounding remains missing. QC12 remains application-OPEN: U is the actual model consumer, E_U is instrument evidence; tests do not constitute experience. QC13 remains OPEN: no actual named human/AI bearer, interval or complete signature is admitted. No reviewer status is self-closed.

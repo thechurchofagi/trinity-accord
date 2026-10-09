@@ -1,0 +1,339 @@
+{
+  "result_id": "R204-SAU-v0.2.0",
+  "comparator_reflex_pairs": 892,
+  "write_event_differences": 118,
+  "model_instances": 28096,
+  "real_feedback_probe_checks": 111920,
+  "port_relabel_checks": 333088,
+  "exact_continuous_mixture_checks": 6776,
+  "all_eight_combinations": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      1
+    ],
+    [
+      1,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      1
+    ]
+  ],
+  "axis_witnesses": [
+    {
+      "axes": [
+        0,
+        0,
+        0
+      ],
+      "n": 2,
+      "plant": [
+        0,
+        1
+      ],
+      "predictor": [
+        1,
+        0
+      ],
+      "controller": [
+        1,
+        0
+      ],
+      "use": 0
+    },
+    {
+      "axes": [
+        0,
+        0,
+        1
+      ],
+      "n": 2,
+      "plant": [
+        0,
+        1
+      ],
+      "predictor": [
+        1,
+        0
+      ],
+      "controller": [
+        1,
+        0
+      ],
+      "use": 1
+    },
+    {
+      "axes": [
+        0,
+        1,
+        0
+      ],
+      "n": 2,
+      "plant": [
+        0,
+        1
+      ],
+      "predictor": [
+        0,
+        1
+      ],
+      "controller": [
+        1,
+        0
+      ],
+      "use": 0
+    },
+    {
+      "axes": [
+        0,
+        1,
+        1
+      ],
+      "n": 2,
+      "plant": [
+        0,
+        1
+      ],
+      "predictor": [
+        0,
+        1
+      ],
+      "controller": [
+        1,
+        0
+      ],
+      "use": 1
+    },
+    {
+      "axes": [
+        1,
+        0,
+        0
+      ],
+      "n": 2,
+      "plant": [
+        0,
+        1
+      ],
+      "predictor": [
+        1,
+        0
+      ],
+      "controller": [
+        0,
+        1
+      ],
+      "use": 0
+    },
+    {
+      "axes": [
+        1,
+        0,
+        1
+      ],
+      "n": 2,
+      "plant": [
+        0,
+        1
+      ],
+      "predictor": [
+        1,
+        0
+      ],
+      "controller": [
+        0,
+        1
+      ],
+      "use": 1
+    },
+    {
+      "axes": [
+        1,
+        1,
+        0
+      ],
+      "n": 2,
+      "plant": [
+        0,
+        1
+      ],
+      "predictor": [
+        0,
+        1
+      ],
+      "controller": [
+        0,
+        1
+      ],
+      "use": 0
+    },
+    {
+      "axes": [
+        1,
+        1,
+        1
+      ],
+      "n": 2,
+      "plant": [
+        0,
+        1
+      ],
+      "predictor": [
+        0,
+        1
+      ],
+      "controller": [
+        0,
+        1
+      ],
+      "use": 1
+    }
+  ],
+  "successful_output_matched_quartet": [
+    {
+      "plant": [
+        0,
+        1
+      ],
+      "controller": [
+        0,
+        1
+      ],
+      "predictor": [
+        0,
+        1
+      ],
+      "use": 0,
+      "task_outputs": [
+        0,
+        1
+      ],
+      "prediction_mismatch": "0",
+      "prediction_after_real_feedback": [
+        0,
+        1
+      ],
+      "prediction_after_forced_feedback": [
+        0,
+        1
+      ]
+    },
+    {
+      "plant": [
+        0,
+        1
+      ],
+      "controller": [
+        0,
+        1
+      ],
+      "predictor": [
+        0,
+        1
+      ],
+      "use": 1,
+      "task_outputs": [
+        0,
+        1
+      ],
+      "prediction_mismatch": "0",
+      "prediction_after_real_feedback": [
+        0,
+        1
+      ],
+      "prediction_after_forced_feedback": [
+        1,
+        1
+      ]
+    },
+    {
+      "plant": [
+        0,
+        1
+      ],
+      "controller": [
+        0,
+        1
+      ],
+      "predictor": [
+        1,
+        0
+      ],
+      "use": 0,
+      "task_outputs": [
+        0,
+        1
+      ],
+      "prediction_mismatch": "1",
+      "prediction_after_real_feedback": [
+        1,
+        0
+      ],
+      "prediction_after_forced_feedback": [
+        1,
+        0
+      ]
+    },
+    {
+      "plant": [
+        0,
+        1
+      ],
+      "controller": [
+        0,
+        1
+      ],
+      "predictor": [
+        1,
+        0
+      ],
+      "use": 1,
+      "task_outputs": [
+        0,
+        1
+      ],
+      "prediction_mismatch": "1",
+      "prediction_after_real_feedback": [
+        0,
+        0
+      ],
+      "prediction_after_forced_feedback": [
+        0,
+        0
+      ]
+    }
+  ],
+  "violations": 0,
+  "h_labels_generated": false,
+  "scope": "Finite sensorimotor organization and update law only",
+  "status": "PASS"
+}

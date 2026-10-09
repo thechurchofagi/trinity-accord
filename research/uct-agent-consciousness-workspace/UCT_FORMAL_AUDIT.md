@@ -8,7 +8,7 @@ The review preserves original proofs except documented affected rederivations, c
 
 ## Publication coverage and latest pending research
 
-Current non-deductive coverage entry: [UCT-PUB-v1.0.15](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs and reconciles formal published attachments; [R203's delta](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/PUBLICATION_COVERAGE_UPDATE.json) records no new published coverage and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
+Current non-deductive coverage entry: [UCT-PUB-v1.0.16](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs and reconciles formal published attachments; [R204's delta](records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/PUBLICATION_COVERAGE_UPDATE.json) records no new published coverage and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
 
 [ONLINE-AC-PROBE-20261009](records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md) is a locally reviewed pending checkpoint; AC/IL also remain pending. No new whole-map semantic release is claimed by this coverage update. Existing science bytes and all open obligations are unchanged.
 
@@ -66,3 +66,7 @@ The exact UCT-MAP-v1.1.2 graph and all 1,608 review items were traversed with th
 # Latest compatibility audit — R203
 
 The exact UCT-MAP-v1.1.2 capsule (82 verified members) and all 1,608 review items were loaded with the disabled R203 10/4/5 candidate. All 22 structural checks pass; 1,598 base nodes/rules/contexts receive stable-ID content-hash coverage. References resolve, simultaneous `all_of` packages and same-instance bearer/time/signature/use bindings are explicit, and the combined dependency graph is acyclic. The check reuses frozen base proofs and is not a new end-to-end semantic proof. PASS does not validate endpoint orientation, the residual budget, actual route use, familiar-continuity `H`, no-report transport, reviewer closure or activation. See `records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_AUDIT.md`.
+
+# Latest compatibility audit — R204
+
+The verified 82-member v1.1.2 capsule and all 1,608 review items were loaded with the disabled R204 11/5/5 candidate. All 22 structural checks pass; stable-ID/content-hash coverage includes all 1,598 completed nodes/rules/contexts. New rules retain simultaneous premises, actual same-instance bindings, proofs and alternative mechanisms. The combined graph is acyclic. Frozen proofs are inherited rather than newly reproved; full semantic promotion remains OPEN. PASS does not establish actual consumer use, comparator execution, RetBind, H, no-report transport, reviewer closure or activation. See `records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_AUDIT.md`.

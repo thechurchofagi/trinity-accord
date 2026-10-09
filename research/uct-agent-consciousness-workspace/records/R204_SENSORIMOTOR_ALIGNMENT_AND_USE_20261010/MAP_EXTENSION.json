@@ -1,0 +1,228 @@
+{
+  "schema": "uct-disabled-checkpoint-extension/1",
+  "research_id": "R204-SAU-20261010",
+  "result_version": "SAU-RESULT-v0.2.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "source_note": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/RESEARCH_NOTE.md",
+  "integration_status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled_as_established_premise": false,
+  "release_effect": "NONE; completed release unchanged",
+  "nodes": [
+    {
+      "id": "R204:DOMAIN",
+      "kind": "TYPED_MODEL",
+      "statement": "Define grounded plant P, controller C, carried predictor F, feedback consumer U, action/output ports and episode order.",
+      "status": "DECLARATION_DISABLED",
+      "scope": "Fixed sensorimotor finite model and explicitly grounded same-instance application only; no automatic H or basal gate.",
+      "quantifier": "For every declared instance within the stated model domain and simultaneous premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R204:PERFORMANCE",
+      "kind": "DEFINITION",
+      "statement": "S iff P composed with C is identity on declared target support.",
+      "status": "DECLARATION_DISABLED",
+      "scope": "Fixed sensorimotor finite model and explicitly grounded same-instance application only; no automatic H or basal gate.",
+      "quantifier": "For every declared instance within the stated model domain and simultaneous premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R204:ALIGNMENT",
+      "kind": "DEFINITION",
+      "statement": "K iff F=P on declared action support.",
+      "status": "DECLARATION_DISABLED",
+      "scope": "Fixed sensorimotor finite model and explicitly grounded same-instance application only; no automatic H or basal gate.",
+      "quantifier": "For every declared instance within the stated model domain and simultaneous premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R204:FEEDBACK_USE",
+      "kind": "DEFINED_MODEL_MECHANISM",
+      "statement": "Enabled actual named writer replaces row a with sensory feedback y; blocked writer preserves F.",
+      "status": "DECLARATION_DISABLED",
+      "scope": "Fixed sensorimotor finite model and explicitly grounded same-instance application only; no automatic H or basal gate.",
+      "quantifier": "For every declared instance within the stated model domain and simultaneous premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R204:AXIS_INDEPENDENCE",
+      "kind": "CONSTRUCTIVE_RESULT",
+      "statement": "All eight S/K/U combinations exist for n>=2; four have matching perfect target output.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "scope": "Fixed sensorimotor finite model and explicitly grounded same-instance application only; no automatic H or basal gate.",
+      "quantifier": "For every declared instance within the stated model domain and simultaneous premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R204:PROBE_SIGNATURE",
+      "kind": "CONDITIONAL_RESULT",
+      "statement": "Veridical feedback changes F iff U and mismatch; forced nonmatching feedback distinguishes gate under update/readout validity.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "scope": "Fixed sensorimotor finite model and explicitly grounded same-instance application only; no automatic H or basal gate.",
+      "quantifier": "For every declared instance within the stated model domain and simultaneous premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R204:PORT_INVARIANCE",
+      "kind": "RELABELING_RESULT",
+      "statement": "Transport all maps and weights across action/output relabeling; alignment and success are preserved.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "scope": "Fixed sensorimotor finite model and explicitly grounded same-instance application only; no automatic H or basal gate.",
+      "quantifier": "For every declared instance within the stated model domain and simultaneous premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R204:CONTINUOUS_COORDINATE",
+      "kind": "STOCHASTIC_MODEL_RESULT",
+      "statement": "Mean TV mismatch E_lambda=(1-lambda)E_0 under row mixing toward deterministic plant.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "scope": "Fixed sensorimotor finite model and explicitly grounded same-instance application only; no automatic H or basal gate.",
+      "quantifier": "For every declared instance within the stated model domain and simultaneous premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R204:ACTUAL_APPLICATION",
+      "kind": "OPEN_ACTUAL_PREMISE",
+      "statement": "Actual bearer/interval/signature, carrier/consumer and feedback/readout validity require independent grounding.",
+      "status": "OPEN_PREMISE_DISABLED",
+      "scope": "Fixed sensorimotor finite model and explicitly grounded same-instance application only; no automatic H or basal gate.",
+      "quantifier": "For every declared instance within the stated model domain and simultaneous premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R204:H_BRIDGE",
+      "kind": "OPEN_SEMANTIC_PREMISE",
+      "statement": "No alignment/use/performance bit defines familiar-continuity H or signed measurement.",
+      "status": "OPEN_PREMISE_DISABLED",
+      "scope": "Fixed sensorimotor finite model and explicitly grounded same-instance application only; no automatic H or basal gate.",
+      "quantifier": "For every declared instance within the stated model domain and simultaneous premises.",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R204:COMPARATOR_REFLEX_TWIN",
+      "kind": "CONSTRUCTIVE_VIEW_LIMIT",
+      "statement": "Error-gated and unconditional reflex writers share every predictor-state transition while their physical write-event interfaces may differ; F-state probes do not certify comparator consumption.",
+      "scope": "Explicit two writer implementations at fixed F,a,y,U; not complete-signature equivalence.",
+      "quantifier": "For every feedback episode in the declared implementation pair.",
+      "status": "COUNTERMODEL_DISABLED",
+      "actual_premises_discharged": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "R204:r_axes",
+      "all_of": [
+        "R204:DOMAIN",
+        "R204:PERFORMANCE",
+        "R204:ALIGNMENT",
+        "R204:FEEDBACK_USE"
+      ],
+      "conclusion": "R204:AXIS_INDEPENDENCE",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "Construct independent maps/gate, not a general biological independence claim.",
+      "same_instance_required": true,
+      "binding": "Same P,F,C,U, port support and episode ordering; actual groundings cannot be assembled across unrelated systems.",
+      "proof_location": "RESEARCH_NOTE.md \u00a7\u00a72\u20135; check_alignment_and_use.py",
+      "alternative_route_semantics": "Alternative physical mechanisms must be separately declared; absent H/actual premises remain open.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R204:r_probe",
+      "all_of": [
+        "R204:DOMAIN",
+        "R204:FEEDBACK_USE"
+      ],
+      "conclusion": "R204:PROBE_SIGNATURE",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "Expand the sole-row writer; actual application still requires grounding.",
+      "same_instance_required": true,
+      "binding": "Same P,F,C,U, port support and episode ordering; actual groundings cannot be assembled across unrelated systems.",
+      "proof_location": "RESEARCH_NOTE.md \u00a7\u00a72\u20135; check_alignment_and_use.py",
+      "alternative_route_semantics": "Alternative physical mechanisms must be separately declared; absent H/actual premises remain open.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R204:r_ports",
+      "all_of": [
+        "R204:DOMAIN",
+        "R204:PERFORMANCE",
+        "R204:ALIGNMENT"
+      ],
+      "conclusion": "R204:PORT_INVARIANCE",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "Conjugate all maps and transport support.",
+      "same_instance_required": true,
+      "binding": "Same P,F,C,U, port support and episode ordering; actual groundings cannot be assembled across unrelated systems.",
+      "proof_location": "RESEARCH_NOTE.md \u00a7\u00a72\u20135; check_alignment_and_use.py",
+      "alternative_route_semantics": "Alternative physical mechanisms must be separately declared; absent H/actual premises remain open.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R204:r_continuity",
+      "all_of": [
+        "R204:DOMAIN",
+        "R204:ALIGNMENT"
+      ],
+      "conclusion": "R204:CONTINUOUS_COORDINATE",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "TV distance from deterministic rows changes linearly under mixing.",
+      "same_instance_required": true,
+      "binding": "Same P,F,C,U, port support and episode ordering; actual groundings cannot be assembled across unrelated systems.",
+      "proof_location": "RESEARCH_NOTE.md \u00a7\u00a72\u20135; check_alignment_and_use.py",
+      "alternative_route_semantics": "Alternative physical mechanisms must be separately declared; absent H/actual premises remain open.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R204:r_comparator_limit",
+      "all_of": [
+        "R204:DOMAIN",
+        "R204:FEEDBACK_USE"
+      ],
+      "conclusion": "R204:COMPARATOR_REFLEX_TWIN",
+      "kind": "CONSTRUCTIVE_RULE",
+      "statement": "Replacing equal values is state-preserving, giving identical transition functions but possibly distinct event traces.",
+      "same_instance_required": true,
+      "binding": "Same F,a,y,U law and same F-state view; event readout not silently included.",
+      "proof_location": "RESEARCH_NOTE.md \u00a74 R204-C5; check_alignment_and_use.py",
+      "alternative_route_semantics": "A separately validated interior event or comparator-intervention port can distinguish implementations.",
+      "status": "CANDIDATE_DISABLED"
+    }
+  ],
+  "context_links": [
+    {
+      "id": "R204:ctx_C1",
+      "type": "AXIOM_STATUS_PRESERVED",
+      "from": "R204:ACTUAL_APPLICATION",
+      "to": "A:C1",
+      "statement": "Selected actual organization transports only under independent complete-instance premises."
+    },
+    {
+      "id": "R204:ctx_U1",
+      "type": "NON_GATE_CONTEXT",
+      "from": "R204:AXIS_INDEPENDENCE",
+      "to": "A:U1",
+      "statement": "Performance/calibration/use do not gate basal experience."
+    },
+    {
+      "id": "R204:ctx_use",
+      "type": "ACTUAL_USE_BOUNDARY",
+      "from": "R204:FEEDBACK_USE",
+      "to": "R173:RETENTIVE_BINDING_RELATION",
+      "statement": "Current gate/use does not supply same-lineage retention."
+    },
+    {
+      "id": "R204:ctx_report",
+      "type": "REPORT_DOMAIN_LIMIT_RETAINED",
+      "from": "R204:H_BRIDGE",
+      "to": "R157:REPORT_COVERAGE_LIMIT",
+      "statement": "No H endpoint or nonreport inference supplied."
+    },
+    {
+      "id": "R204:ctx_transport",
+      "type": "TRANSPORT_BOUNDARY",
+      "from": "R204:H_BRIDGE",
+      "to": "R157:COORDINATE_TRANSPORT",
+      "statement": "A selected organization coordinate is not an independently named feeling."
+    }
+  ]
+}

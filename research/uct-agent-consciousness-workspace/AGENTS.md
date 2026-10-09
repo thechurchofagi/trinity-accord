@@ -1,3 +1,15 @@
+# Latest checkpoint — R204 sensorimotor alignment and use
+
+Read [the research note](records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/RESEARCH_NOTE.md), [probe protocol](records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/PROBE_PROTOCOL.md), [exact results](records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/EXACT_RESULTS.json), [map audit](records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_AUDIT.md), [review response](records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/REVIEW_RESPONSE.md), and [handoff](records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/HANDOFF_ZH.md).
+
+SAU-RESULT-v0.2.0 separates task success, predictor–consequence alignment and actual named feedback use. All eight combinations occur; a quartet has identical successful initial outputs. A natural null update does not imply no use. Forced-discrepancy probes identify the declared writer only under explicit interface, sole-writer and readout premises. Error-gated and unconditional reflex writers have identical predictor-state traces but can differ in actual write events, so state probes do not establish an executed error comparator or familiar mineness H.
+
+UCT-MAP-v1.1.2 remains completed at 913/424/261, 10 suspended and 1,608 review items. The 11/5/5 R204 candidate is disabled; coverage UCT-PUB-v1.0.16 is nondeductive. All four QC obligations remain OPEN. Next: physically define action-source carrier use under matched task output and calibration, attacking self-produced/passive/remote comparisons with reflex and clone alternatives.
+
+---
+
+## Superseded R203 navigation (retained)
+
 # Latest checkpoint — R203 audited covariance direction
 
 Read [the research note](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/RESEARCH_NOTE.md), [protocol](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/PRE_REGISTRATION_PROTOCOL.md), [exact results](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/EXACT_RESULTS.json), [map audit](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_AUDIT.md), [review response](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/REVIEW_RESPONSE.md), and [handoff](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/HANDOFF_ZH.md).

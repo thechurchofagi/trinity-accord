@@ -15,12 +15,12 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "R203-ACD-20261010",
-    "result_version": "ACD-RESULT-v0.2.0",
+    "id": "R204-SAU-20261010",
+    "result_version": "SAU-RESULT-v0.2.0",
     "integration_status": "PENDING_CHECKPOINT_DISABLED",
-    "work_log": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/WORK_LOG.md",
-    "handoff": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/HANDOFF_ZH.md",
-    "paper": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/RESEARCH_NOTE.md"
+    "work_log": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/WORK_LOG.md",
+    "handoff": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/HANDOFF_ZH.md",
+    "paper": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/RESEARCH_NOTE.md"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -61,7 +61,8 @@
     "R200-SCF-20261010",
     "R201-ROTM-20261010",
     "R202-TMAB-20261010",
-    "R203-ACD-20261010"
+    "R203-ACD-20261010",
+    "R204-SAU-20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -73,12 +74,12 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "AC, IL, ONLINE-AC and R189-R203 remain separate disabled pending modules; structural compatibility is not scientific-map promotion.",
+  "pending_note": "AC, IL, ONLINE-AC and R189-R204 remain separate disabled pending modules; structural compatibility is not scientific-map promotion.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.15",
+    "version": "UCT-PUB-v1.0.16",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },
@@ -98,5 +99,5 @@
     "paper": "records/ONLINE_AC_20261009_Dynamic_Calibration/PAPER.md",
     "paper_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED"
   },
-  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; ONLINE-AC and R189-R203 remain disabled pending results."
+  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; ONLINE-AC and R189-R204 remain disabled pending results."
 }

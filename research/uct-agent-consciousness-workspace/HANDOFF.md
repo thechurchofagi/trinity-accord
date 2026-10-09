@@ -1,3 +1,11 @@
+# Current operational checkpoint — R204-SAU-20261010
+
+Read [R204 handoff](records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/HANDOFF_ZH.md), [state](CURRENT_STATE.json), and [master guide](RESEARCH_MASTER_GUIDE.md) first. SAU-RESULT-v0.2.0 separates task success, predictor alignment and feedback use; concrete probes and prior-art limits are retained. UCT-PUB-v1.0.16; completed map unchanged; candidate disabled; all four reviews open.
+
+---
+
+## Earlier navigation retained
+
 # Current operational checkpoint — R203-ACD-20261010
 
 Read [R203 handoff](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/HANDOFF_ZH.md), [state](CURRENT_STATE.json), and [master guide](RESEARCH_MASTER_GUIDE.md) first. ACD-RESULT-v0.2.0 supplies a conditional covariance-direction certificate and corrects latent-conditioning/bypass controls. Completed map unchanged; candidate disabled; coverage UCT-PUB-v1.0.15; all four reviews remain open. No human H endpoint or actual use validated.

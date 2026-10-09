@@ -1,0 +1,19 @@
+{
+  "schema": "uct-publication-coverage-update/1.0",
+  "coverage_version": "UCT-PUB-v1.0.16",
+  "round": "R204",
+  "research_id": "R204-SAU-20261010",
+  "newly_covered_published_claims": [],
+  "new_pending_claims": [
+    "R204-C1",
+    "R204-C2",
+    "R204-C3",
+    "R204-C4",
+    "R204-C5"
+  ],
+  "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+  "reason": "Concrete mechanism/probe application with known forward-model precedents; no independently established H or actual biological carrier. Comparator/reflex interpretation narrowed explicitly.",
+  "recommended_home": "Combined sensorimotor organization / familiar-continuity methods family",
+  "nondeductive": true,
+  "map_release_unchanged": "UCT-MAP-v1.1.2"
+}
