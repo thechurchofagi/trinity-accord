@@ -1,3 +1,15 @@
+# Latest checkpoint — R203 audited covariance direction
+
+Read [the research note](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/RESEARCH_NOTE.md), [protocol](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/PRE_REGISTRATION_PROTOCOL.md), [exact results](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/EXACT_RESULTS.json), [map audit](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_AUDIT.md), [review response](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/REVIEW_RESPONSE.md), and [handoff](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/HANDOFF_ZH.md).
+
+R203 factors audited endpoint-marker covariance into a latent-direction term and within-`H` residual dependence. Exact endpoint error magnitudes are unnecessary for direction only when positive endpoint orientation and a nontrivial residual budget are independently warranted. A complete observed-law twin reverses the latent direction under residual dependence; conditioning on observed `J` cannot test independence conditional on latent `H`.
+
+UCT-MAP-v1.1.2 remains completed at 913/424/261 with 10 suspended rules and 1,608 review items. R203's 10/4/5 extension is `PENDING_CHECKPOINT_DISABLED`; coverage UCT-PUB-v1.0.15 is nondeductive. QC10, IA-QC11, QC12 and QC13 remain OPEN. Next: return to a concrete retained-route mechanism and test its organizational prediction against matched bypass/common-fluency alternatives; do not call the prediction `H` without an independent bridge.
+
+---
+
+## Superseded R196 navigation (retained)
+
 # Latest checkpoint — R196 two-axis phenomenal calibration
 
 Read [the research note](records/R196_Two_Axis_Phenomenal_Calibration_20261009/RESEARCH_NOTE.md), [exact results](records/R196_Two_Axis_Phenomenal_Calibration_20261009/EXACT_RESULTS.json), [map audit](records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_AUDIT.md), [review response](records/R196_Two_Axis_Phenomenal_Calibration_20261009/REVIEW_RESPONSE.md), and [handoff](records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md).

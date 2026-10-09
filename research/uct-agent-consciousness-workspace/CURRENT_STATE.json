@@ -73,7 +73,7 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "AC, IL, ONLINE-AC, R189-R202 remain separate disabled pending modules; structural compatibility is not scientific-map promotion.; R203 remains disabled",
+  "pending_note": "AC, IL, ONLINE-AC and R189-R203 remain separate disabled pending modules; structural compatibility is not scientific-map promotion.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
     "version": "UCT-PUB-v1.0.15",
@@ -98,5 +98,5 @@
     "paper": "records/ONLINE_AC_20261009_Dynamic_Calibration/PAPER.md",
     "paper_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED"
   },
-  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; ONLINE-AC and R189-R202 remain disabled pending results.; R203 disabled"
+  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; ONLINE-AC and R189-R203 remain disabled pending results."
 }

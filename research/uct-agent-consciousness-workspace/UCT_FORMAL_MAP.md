@@ -10,7 +10,7 @@ See [the full review](versions/UCT-MAP-v1.1.2/audit/WHOLE_MAP_SEMANTIC_REVIEW_RE
 
 ## Publication coverage and latest pending research
 
-Current non-deductive coverage entry: [UCT-PUB-v1.0.12](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs, reconciles formal published attachments, and assesses residual knowledge separately from validity. [R200's delta](records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/PUBLICATION_COVERAGE_UPDATE.json) records no newly covered claim and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
+Current non-deductive coverage entry: [UCT-PUB-v1.0.15](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs, reconciles formal published attachments, and assesses residual knowledge separately from validity. [R203's delta](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/PUBLICATION_COVERAGE_UPDATE.json) records no newly covered published claim and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
 
 [ONLINE-AC-PROBE-20261009](records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md) is a locally reviewed pending checkpoint; AC/IL also remain pending. No new whole-map semantic release is claimed by this coverage update. Existing science bytes and all open obligations are unchanged.
 
@@ -60,3 +60,7 @@ R200 proposes 9 nodes, 5 rules and 5 context links for multi-proxy non-self-anch
 # Latest pending disabled checkpoint — R202-TMAB-20261010
 
 R202 proposes 10 nodes, 4 rules and 5 context links for target-mixture sign nonidentifiability, conditional audit inversion, the three-domain `C→V→T` stop rule and actual-use/evidence separation. The full v1.1.2 graph and all 1,608 review objects were traversed; all 20 structural checks pass. R202 is disabled and does not change completed counts or hashes. Coverage is UCT-PUB-v1.0.14.
+
+# Latest pending disabled checkpoint — R203-ACD-20261010
+
+R203 proposes 10 nodes, 4 rules and 5 context links for audited covariance factorization, a residual-sensitive direction certificate, a fixed-sample abstention rule, and the correction that conditioning on observed endpoint `J` cannot test independence conditional on latent `H`. An exact same-observed-law twin has opposite latent directions under residual dependence. The full v1.1.2 graph and all 1,608 review items were structurally traversed; all 22 checks pass. R203 is disabled, changes no completed count or hash, and does not validate an endpoint, residual budget, actual route use, `H`, or `V→T` transport. Coverage is UCT-PUB-v1.0.15.

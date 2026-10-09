@@ -8,7 +8,7 @@ The review preserves original proofs except documented affected rederivations, c
 
 ## Publication coverage and latest pending research
 
-Current non-deductive coverage entry: [UCT-PUB-v1.0.13](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs and reconciles formal published attachments; [R201's delta](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/PUBLICATION_COVERAGE_UPDATE.json) records no new coverage and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
+Current non-deductive coverage entry: [UCT-PUB-v1.0.15](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs and reconciles formal published attachments; [R203's delta](records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/PUBLICATION_COVERAGE_UPDATE.json) records no new published coverage and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
 
 [ONLINE-AC-PROBE-20261009](records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md) is a locally reviewed pending checkpoint; AC/IL also remain pending. No new whole-map semantic release is claimed by this coverage update. Existing science bytes and all open obligations are unchanged.
 
@@ -62,3 +62,7 @@ The exact UCT-MAP-v1.1.2 graph and all 1,608 review items were traversed with th
 # Latest compatibility audit — R202
 
 The exact UCT-MAP-v1.1.2 graph and all 1,608 review items were traversed with the disabled R202 10/4/5 candidate. All 20 structural checks pass, including references, simultaneous `all_of` premises, same-instance bindings, direction/proof/alternative fields, full DAG acyclicity, C1 axiom preservation, report-domain limits, actual-use/evidence separation and the basal non-gate. Structural PASS is not endpoint validation, ignorable audit sampling, conditional nondifferentiality, `V→T` transport, actual route use, `H` identification, reviewer closure or activation. See `records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_COMPATIBILITY_AUDIT.json`.
+
+# Latest compatibility audit — R203
+
+The exact UCT-MAP-v1.1.2 capsule (82 verified members) and all 1,608 review items were loaded with the disabled R203 10/4/5 candidate. All 22 structural checks pass; 1,598 base nodes/rules/contexts receive stable-ID content-hash coverage. References resolve, simultaneous `all_of` packages and same-instance bearer/time/signature/use bindings are explicit, and the combined dependency graph is acyclic. The check reuses frozen base proofs and is not a new end-to-end semantic proof. PASS does not validate endpoint orientation, the residual budget, actual route use, familiar-continuity `H`, no-report transport, reviewer closure or activation. See `records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_AUDIT.md`.

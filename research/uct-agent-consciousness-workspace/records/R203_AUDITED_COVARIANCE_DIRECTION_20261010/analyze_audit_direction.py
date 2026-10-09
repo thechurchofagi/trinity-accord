@@ -7,7 +7,7 @@ def analyze(counts,kappa,alpha=0.05,warrants=None):
     if len(counts)!=4 or any(type(x)!=int or x<0 for x in counts) or sum(counts)<=0:raise ValueError('Four nonnegative integer counts required')
     if not 0<alpha<1 or not 0<=kappa<=0.25:raise ValueError('Invalid alpha or residual budget')
     n=sum(counts);m=(counts[2]+counts[3])/n;j=(counts[1]+counts[3])/n;r=counts[3]/n
-    h=math.sqrt(math.log(6/alpha)/(2*n));lo=r-h-min(1,m+h)*min(1,j+h);hi=min(1,r+h)-max(0,m-h)*max(0,j-h)
+    h=math.sqrt(math.log(6/alpha)/(2*n));hi=min(1,r+h)-max(0,m-h)*max(0,j-h)
     lo=max(0,r-h)-min(1,m+h)*min(1,j+h)
     asserted=all((warrants or {}).get(x,{}).get('asserted') is True and (warrants or {}).get(x,{}).get('evidence') for x in REQUIRED)
     direction='POSITIVE_CONDITIONAL_IN_V' if lo>kappa else 'NEGATIVE_CONDITIONAL_IN_V' if hi<-kappa else 'ABSTAIN'

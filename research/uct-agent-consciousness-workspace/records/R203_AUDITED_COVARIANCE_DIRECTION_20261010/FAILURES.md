@@ -14,4 +14,6 @@
 
 - First structural audit assumed every baseline context used from/to. TH20261009 retains source/target and declared external-source records; normalizer now accepts both schemas and distinguishes external source anchors from node references. Failed run preserved.
 
+- Review-ledger recovery evidence: starting remote head `c9dd1659b1849863a7c68f18966e5253e4c6b19e` contained a 60,060-byte non-UTF-8 ledger with SHA256 `f4b7ec27993ea66b2182f3b486f4a043a0e178b01baf60782b2cce1a69546ee7`. A file-by-file comparison of the complete research tree against the intended verified R202 local tree found no other mismatch. The restored pre-R203 UTF-8 ledger was 88,613 bytes with SHA256 `828a90d84d01bda2374da4eb9b33164bf61e41f7e08cdb293ea2243f61b16d1a`; the final ledger differs only by the appended R203 response. The precise earlier upload failure mechanism remains unknown.
+
 - Second audit found four typed nondeductive source/module references and mistakenly treated them as node IDs. Ref-type normalization was corrected without changing the frozen graph; references labelled node still require node resolution.
