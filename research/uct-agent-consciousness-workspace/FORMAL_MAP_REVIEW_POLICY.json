@@ -79,7 +79,7 @@
   ],
   "effective_map_entry": "UCT_FORMAL_GRAPH_MODULES.json",
   "effective_map_merge": "Preserved canonical base then explicitly listed additive layers; no silent overwrite, missing imports or changed source hash. Registration does not discharge OPEN premises or complete audit.",
-  "current_additive_record": "records/CORE20261008_Target_Relative_Support/CURRENT_HANDOFF_ZH.md",
+  "current_additive_record": "records/R188_Encoder_Access_and_Recovery_20261009/HANDOFF_ZH.md",
   "adoption_action": "register_explicit_additive_layer_without_new_consciousness_axiom_or_publication",
   "full_graph_semantic_audit_completed_by_this_adoption": "AUTHOR_COMPATIBILITY_SCOPE_ONLY_NOT_INDEPENDENT_REPROOF",
   "publication_authorized": false,
@@ -93,7 +93,7 @@
     "PERSISTENCE_RECEIPT"
   ],
   "implementation_of_master_guide_section": "RESEARCH_MASTER_GUIDE.md v2.2 sections 0 and 8A; governance schema version 2.3 preserves earlier requirements.",
-  "current_completed_map": "UCT-MAP-v1.1.1",
+  "current_completed_map": "UCT-MAP-v1.1.2",
   "master_guide_version": "2.2",
   "research_purpose": {
     "primary_goal": "Original, durable, verifiable and reusable knowledge for future AI and researchers, serving the UCT experience-organization-intelligence-self program.",
@@ -111,5 +111,7 @@
     ],
     "known_math_may_support_original_application_but_is_not_rebranded": true,
     "combine_related_increments_in_one_self_contained_paper": true
-  }
+  },
+  "last_completed_audit": "R188-ALLMAP-COMPAT-20261009-v1",
+  "navigation_update": "v1.1.2 current pointers updated after full contract review; policy purpose and scientific axioms unchanged."
 }

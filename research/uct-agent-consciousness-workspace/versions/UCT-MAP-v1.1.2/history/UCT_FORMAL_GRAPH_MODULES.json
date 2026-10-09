@@ -1,0 +1,162 @@
+{
+  "schema": "uct-effective-map-manifest/1.3",
+  "entry_id": "UCT_EFFECTIVE_FORMAL_MAP",
+  "revision": "UCT-MAP-v1.1.1",
+  "base": {
+    "release_id": "UCT-MAP-v1.1.0",
+    "descriptor_path": "versions/UCT-MAP-v1.1.0/RELEASE.json",
+    "effective_graph_sha256": "92368e0f0a4fd1e3c61849784ac090a3f8948f3b721d9fc0dade4b8f4ec4966d",
+    "review_ledger_sha256": "6375c6800e491fb9ae42b324340220c19ac30b4e75af0e41482dd269c65f3768"
+  },
+  "inherited_modules": [
+    "CORE20261008",
+    "EI20261008",
+    "R183",
+    "OO20261008",
+    "RU20261008",
+    "R184",
+    "RC20261008",
+    "IE20261008"
+  ],
+  "modules": [
+    {
+      "id": "TH20261009-RB20261009",
+      "result_version": "0.2.0",
+      "source_kind": "verified_capsule_member",
+      "capsule_index": "versions/UCT-MAP-v1.1.0/capsule/PARTS.json",
+      "member": "MAP_EXTENSION.json",
+      "sha256": "4a59e3f2a9bc29f241b5b5ee39a384836ed7ea91b9f7c2427ed15f1c8fb331d3",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "OL20261009",
+      "result_version": "OL-RESULT-v0.1.0",
+      "source_kind": "verified_capsule_member_and_remote_text",
+      "capsule_path": "versions/UCT-MAP-v1.1.1/UCT_MAP_v1.1.1_Capsule.tar.xz",
+      "capsule_sha256": "f4604377a3c6dca5de56bf71883006a03dbf290b7f92af2136e682087ff7bfc3",
+      "member": "MAP_EXTENSION.json",
+      "source_path": "records/OL20261009_Observable_Locality/MAP_EXTENSION.json",
+      "sha256": "9d3fcf5ab75903c549eed8a4c3d8828a4789f55754a353f628172bb306532994",
+      "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+      "automatic_premise_truth": false
+    }
+  ],
+  "merge_order": "Restore exact v1.1.0 effective graph/ledger; apply the OL module. The first 1,373 scientific item objects are unchanged; all 11 OL rules have fresh OL heads. Pending modules are not active.",
+  "restorer": "versions/UCT-MAP-v1.1.1/restore_capsule.py",
+  "effective_loader_after_restore": "build_map_release.py",
+  "expanded_outputs": [
+    "UCT_EFFECTIVE_GRAPH.json",
+    "REVIEW_LEDGER.json",
+    "REVIEW_LEDGER.csv",
+    "RELEASE.json"
+  ],
+  "effective_graph_sha256": "c7cb8feafa905518bf485019fd7b2e463d70682a563993eb5856678ccfe0ba66",
+  "review_ledger_sha256": "6e46361436fa64081bb7d961a491dab241f77948e3bd7fe01c17b773436b2cd3",
+  "full_semantic_compatibility_review_completed": true,
+  "audit_scope": "Author-side full-item compatibility review on frozen v1.1.0 1,373 records + 46 OL records; original proofs retained, affected derivations rechecked. Concurrent disabled R186 and other pending records not included in activated census.",
+  "reviewed_nodes": 804,
+  "reviewed_rule_records": 387,
+  "active_conditional_rules": 377,
+  "suspended_historical_rules": 10,
+  "context_links": 228,
+  "review_items": 1419,
+  "audit": "versions/UCT-MAP-v1.1.1/AUDIT_REPORT.md",
+  "pending_checkpoints": [
+    {
+      "id": "R185",
+      "path": "records/R185_Cross_Scale_Relation_Membership_20261008/MAP_EXTENSION.json",
+      "sha256": "6583a63c819a97dd53e9f95b0d0757a84cf0f36c0e3e7367335ec71dceaf622f",
+      "status": "PENDING_CHECKPOINT",
+      "enabled_as_established_premises": false,
+      "compatibility_audit": "records/R185_Cross_Scale_Relation_Membership_20261008/V100_COMPATIBILITY_AUDIT.json",
+      "instruction": "Retained disabled. Existing structural checkpoint is not a completed semantic promotion."
+    },
+    {
+      "id": "AC20261009",
+      "result_version": "AC-RESULT-v1.0.0",
+      "candidate_map_id": "UCT-MAP-v1.0.1-AC20261009-candidate.1",
+      "path": "records/AC20261009_Action_Calibration/MAP_EXTENSION.json",
+      "git_blob_sha": "db6f9cef3191cc6c04f83c40146810ac39ba7d37",
+      "status": "PENDING_CHECKPOINT",
+      "enabled_as_established_premises": false,
+      "compatibility_audit": "records/AC20261009_Action_Calibration/RUN_RECEIPT.json",
+      "handoff": "records/AC20261009_Action_Calibration/CURRENT_HANDOFF_ZH.md",
+      "instruction": "Historical candidate ID retained. Rebase future semantic promotion on current v1.1.0 and create a higher completed version; do not overwrite this release or confuse the old candidate number with the current map."
+    },
+    {
+      "id": "IL20261009",
+      "result_version": "IL-RESULT-v0.1.0",
+      "candidate_map_id": "UCT-MAP-v1.1.1-IL20261009-candidate.1",
+      "path": "records/IL20261009_Intervention_Locality/MAP_EXTENSION.json",
+      "git_blob_sha": "6e18c39a7a31733c6a47337d75d007b0782f4c81",
+      "status": "PENDING_MAP",
+      "audit_status": "AUDIT_INCOMPLETE",
+      "enabled_as_established_premises": false,
+      "compatibility_audit": "records/IL20261009_Intervention_Locality/RUN_RECEIPT.json",
+      "handoff": "records/IL20261009_Intervention_Locality/CURRENT_HANDOFF_ZH.md",
+      "instruction": "Exact reset normal form, minimal LTI behavior twin and1/11 local-imitation gap are saved conditional results. Current whole-map fresh semantic integration is incomplete. Keep this module disabled until current v1.1.0 is completely restored/reviewed and affected conclusions rederived. No actual or named-phenomenal premise is discharged by storage."
+    },
+    {
+      "id": "R186-HOM-20261009",
+      "result_version": "HOM-v0.1.0",
+      "candidate_map_id": "UCT-MAP-v1.1.1-R186-candidate.1",
+      "path": "records/R186_Higher_Order_Intervention_Masking_20261009/MAP_EXTENSION.json",
+      "git_blob_sha": "e13909d81ebb9a6912644d9c3e4bebad1e01b94b",
+      "status": "PENDING_MAP",
+      "audit_status": "AUDIT_INCOMPLETE",
+      "enabled_as_established_premises": false,
+      "work_log": "records/R186_Higher_Order_Intervention_Masking_20261009/WORK_LOG.md",
+      "handoff": "records/R186_Higher_Order_Intervention_Masking_20261009/HANDOFF_ZH.md",
+      "coverage": "records/R186_Higher_Order_Intervention_Masking_20261009/AUDIT_COVERAGE.json",
+      "note": "82,213 finite test words and proof; all 1,373 inherited items mechanically scanned, 625 requiring fresh semantic review; not fully promoted."
+    },
+    {
+      "id": "UI20261009",
+      "result_version": "UI-RESULT-v0.1.0",
+      "status": "PENDING_MAP",
+      "enabled_as_established_premises": false,
+      "source_kind": "preserved_archive_member",
+      "capsule": "versions/UCT-MAP-v1.1.1/UCT_MAP_v1.1.1_Capsule.tar.xz",
+      "member_prefix": "pending_UI/",
+      "instruction": "Previous-conversation UI mathematical construction is preserved for audit, not activated. Its entire missing full-map semantic review remains open."
+    },
+    {
+      "id": "CM20261009",
+      "result_version": "CM-RESULT-v0.1.0",
+      "candidate_map_id": "UCT-MAP-v1.1.2-CM20261009-candidate.1",
+      "path": "records/CM20261009_Compensation_Observability/MAP_EXTENSION.json",
+      "git_blob_sha": "9d7bf178505c58dda48c560b44716593f7129202",
+      "status": "PENDING_MAP",
+      "audit_status": "AUDIT_INCOMPLETE",
+      "enabled_as_established_premises": false,
+      "work_log": "records/CM20261009_Compensation_Observability/WORK_LOG.md",
+      "handoff": "records/CM20261009_Compensation_Observability/HANDOFF_ZH.md",
+      "compatibility_audit": "records/CM20261009_Compensation_Observability/RUN_AND_AUDIT_RECEIPT.json",
+      "instruction": "Inspect target-specific compensation observability and sharp ambiguity proofs. Twenty-four new nodes, ten conditional rules and four nondeductive links are not automatically promoted. Latest full graph restoration and fresh whole-map semantic review remain incomplete; preserve R186's separate obligations. Correction magnitude is not experience, and quiet behavior is not proof of unchanged organization."
+    },
+    {
+      "id": "R187-CMA-20261009",
+      "result_version": "CMA-RESULT-v0.1.0",
+      "candidate_map_id": "UCT-MAP-v1.1.2-R187-candidate.1",
+      "path": "records/R187_Causal_Multiplicity_20261009/MAP_EXTENSION.json",
+      "git_blob_sha": "32afef9f304b0adc9e90aac2cd499ef709cd079e",
+      "status": "PENDING_MAP",
+      "audit_status": "AUDIT_INCOMPLETE",
+      "enabled_as_established_premises": false,
+      "work_log": "records/R187_Causal_Multiplicity_20261009/WORK_LOG.md",
+      "handoff": "records/R187_Causal_Multiplicity_20261009/HANDOFF_ZH.md",
+      "proof": "records/R187_Causal_Multiplicity_20261009/RESEARCH_NOTE.md",
+      "test": "records/R187_Causal_Multiplicity_20261009/TEST_RESULTS.json",
+      "audit": "records/R187_Causal_Multiplicity_20261009/AUDIT_REPORT.json",
+      "complete_zip": "records/R187_Causal_Multiplicity_20261009/CMA-RESULT-v0.1.0_Complete_Archive.zip",
+      "scope": "22 declarations, 7 conditional rules, 9 non-deductive links; 1419 prior items ID-scanned, 12 inherited old source clauses read; complete current semantic census not reaudited. R185/CM/R186 remain disabled. No basal gate, experiential count, subject numerosity or named feeling inferred."
+    }
+  ],
+  "node_presence_is_premise_truth": false,
+  "actual_application_status": "OPEN",
+  "suspended_rules_may_infer": false,
+  "unmodified_root_graph_is_only_historical_base": true,
+  "on_source_change": "Fail closed; reconcile exact current sources and pending work, perform semantic compatibility review and affected rederivation, save a new immutable version/sequence.",
+  "parent_release": "UCT-MAP-v1.1.0"
+}

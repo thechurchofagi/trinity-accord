@@ -1,0 +1,30 @@
+{
+  "status": "RENDERED_AND_VISUALLY_REVIEWED",
+  "pages": 13,
+  "sha256": "296110764ace968ced3086312614f7b6e4f068a0c631b8b64ba813a029441bc0",
+  "font": "DejaVu Serif 10pt",
+  "render_dpi": 90,
+  "visual_inspection": "All13pages inspected in contact layout; proof/formula pages5and6, scope/control page10, and final reference page13 inspected at page resolution. No remaining clipping, overlap or missing glyphs; continued tables repeat headings.",
+  "out_of_page_glyphs": [],
+  "page_character_counts": [
+    2706,
+    3158,
+    2535,
+    2658,
+    2814,
+    2299,
+    1450,
+    2696,
+    2897,
+    3401,
+    3058,
+    3257,
+    2320
+  ],
+  "resolved_layout_issues": [
+    "Unavailable TeX Gyre Pagella replaced with installed DejaVu Serif.",
+    "Initial14-page orphan ending corrected to13-page layout.",
+    "Reference URLs initially exceeded page edge; explicit autolinks and xurl enabled wrapping, then glyph boundaries rechecked."
+  ],
+  "final_pdf_build_stderr": ""
+}

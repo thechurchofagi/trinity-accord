@@ -1,0 +1,365 @@
+{
+  "schema": "uct-pending-typed-overlay-v1",
+  "record": "R185",
+  "base": {
+    "canonical_path": "UCT_FORMAL_GRAPH.json",
+    "canonical_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+    "effective_manifest": "UCT_FORMAL_GRAPH_MODULES.json"
+  },
+  "status": "PENDING_MAP",
+  "audit_status": "AUDIT_INCOMPLETE",
+  "enabled_as_established_premises": false,
+  "depends_on": [
+    {
+      "id": "R184",
+      "role": "retained target route application",
+      "status": "PENDING_MAP; conditional research dependency only"
+    },
+    {
+      "id": "CORE20261008",
+      "role": "prior coherent-overlap source cards",
+      "status": "REGISTERED_ADDITIVE_AUDIT_INCOMPLETE"
+    }
+  ],
+  "common_scope": "For definitions and actual applications: One actual episode Omega; independently admitted overlapping process tokens; token-relative complete signatures; grounded relation occurrence identities, supports, ports, mechanisms and times; faithful boundary-accountable membership maps. Finite values/reports do not establish occurrence identity, actual tokenhood, C1 or named experience. For the explicitly finite countermodels: a declared typed episode model with the stated occurrence identities and incidence matrices, not an actually admitted human or AI instance.",
+  "nodes": [
+    {
+      "id": "R185:EPISODE_OCCURRENCE",
+      "kind": "definition",
+      "statement": "A relation occurrence is a grounded episode-relative occurrence identifier, typed ordered endpoint tuple, mechanism/port role and time; its carried value is not its numerical identity.",
+      "scope": "One declared actual episode and signature; analyst labels and equal values cannot create identity. When occurrence identity is represented or transported, use an explicit occurrence sort together with its endpoint/type/port/time maps; equal relation tuples alone need not encode multiplicity.",
+      "source": "§2",
+      "status": "DEFINITION",
+      "original_source_record_sha256": "2dc572d938b02df1895a0bbeca63115630589da6869640b4a08e4180dc676880",
+      "source_status_preserved": "DEFINITION",
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH"
+    },
+    {
+      "id": "R185:TOKEN_MEMBERSHIP",
+      "kind": "definition",
+      "statement": "Mem(rho;P,K) holds only for an independently actual token whose complete token-relative organization faithfully contains rho's full constitutive support and boundary facts.",
+      "scope": "Actuality, support, signature and boundary accountability are simultaneous premises; a scientific view is not automatically a token.",
+      "source": "§2",
+      "status": "DEFINITION",
+      "original_source_record_sha256": "20790f94e74d88886d337f2d659a5f0497cff0d2a944590b218429af62e5697b",
+      "source_status_preserved": "DEFINITION",
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH"
+    },
+    {
+      "id": "R185:SAME_OCCURRENCE",
+      "kind": "definition",
+      "statement": "Two local representatives are same-occurrence exactly when grounded inclusion maps on the event and occurrence sorts identify the same physical occurrence, preserving endpoints, type, mechanism/ports and time.",
+      "scope": "Value, type or output equality is insufficient.",
+      "source": "§2",
+      "status": "DEFINITION",
+      "original_source_record_sha256": "3457f2c9f8ea3b41b6dba7f7927f8f4648d06af3a790b3dd54f6a752059e3e03",
+      "source_status_preserved": "DEFINITION",
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH"
+    },
+    {
+      "id": "R185:INCIDENCE_PROFILE",
+      "kind": "definition",
+      "statement": "The incidence matrix records which actual tokens contain each grounded occurrence class; membership count and occurrence count are different quantities.",
+      "scope": "No consciousness amount, richness score or subject count is defined.",
+      "source": "§2",
+      "status": "DEFINITION",
+      "original_source_record_sha256": "f463f2d8489a08ab3b8e552cb79f78e6c1e0221c3a67f33f332c319472adf6d4",
+      "source_status_preserved": "DEFINITION",
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH"
+    },
+    {
+      "id": "R185:ACTUAL_MEMBERSHIP_PACKAGE",
+      "kind": "unresolved_premise",
+      "statement": "One episode jointly supplies actual token status, complete compatible signatures, grounded occurrence identity, faithful inclusions and boundary-accountable membership for every selected scale.",
+      "scope": "Same episode, time and occurrence bindings throughout; finite checker does not discharge this premise. The complete K_i include the relevant occurrence sort or an explicitly faithful encoding of it; carrier inclusion alone does not create an occurrence-identity map.",
+      "source": "§§2-4",
+      "status": "OPEN_ACTUAL_INSTANCE",
+      "original_source_record_sha256": "8a5225b5010fc6c5cd04de732a18b790a76c7fb0b198a9140764367d3e6711ab",
+      "source_status_preserved": "OPEN_ACTUAL_INSTANCE",
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH"
+    },
+    {
+      "id": "R185:SHARED_MEMBERSHIP",
+      "kind": "conditional_result",
+      "statement": "One grounded occurrence included constitutionally in several actual token organizations has one occurrence class and a multi-token incidence profile rather than one copy per membership.",
+      "scope": "Conditional on ACTUAL_MEMBERSHIP_PACKAGE; no subject or phenomenal conclusion.",
+      "source": "R185-C1",
+      "status": "CONDITIONAL_ONLY",
+      "original_source_record_sha256": "9819abdc86b563430a5045be875e11a267991d22b684e8b5f7148e54e71535d3",
+      "source_status_preserved": "CONDITIONAL_ONLY",
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH"
+    },
+    {
+      "id": "R185:COPIED_COUNTERMODEL",
+      "kind": "counterexample",
+      "statement": "A one-occurrence shared architecture and a two-occurrence copied architecture can match relation values, local views, whole output and report while differing in occurrence count and incidence profile.",
+      "scope": "Finite declared model; not complete-organization equality or an actual human instance.",
+      "source": "R185-C2; MODEL_RESULTS.json",
+      "status": "PROVED_FINITE_SCOPE",
+      "original_source_record_sha256": "6c51b6efcb84ee539e207284d271591f955442c1b77e85a6ecf5963a7ff40403",
+      "source_status_preserved": "PROVED_FINITE_SCOPE",
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH"
+    },
+    {
+      "id": "R185:SYNCHRONIZER_BOUNDARY",
+      "kind": "counterexample_boundary",
+      "statement": "A synchronizer can propagate a change between distinct copies but is an additional whole-organization relation and does not merge their occurrence identities.",
+      "scope": "Declared directed synchronizer and clamp; actual intervention fidelity remains open.",
+      "source": "R185-C3; MODEL_RESULTS.json",
+      "status": "PROVED_FINITE_SCOPE",
+      "original_source_record_sha256": "ea3eda4b21a736d0ccf58a30638feb16dddc493c838214b7ffc90f2f86fb93a1",
+      "source_status_preserved": "PROVED_FINITE_SCOPE",
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH"
+    },
+    {
+      "id": "R185:COHERENT_OVERLAP_PACKAGE",
+      "kind": "inherited_conditional_source_card",
+      "statement": "Grounded physically identified overlap maps and interaction-complete compatible token signatures admit the coherent structural comparison described in CG20261008.",
+      "scope": "Inherited conditional package; arbitrary phenomenal maps, actual-token admission and subject identity are not supplied by the card.",
+      "source": "records/CG20261008_Coherent_Sharing_and_Interaction/RESEARCH_CHECKPOINT.md §§2-4",
+      "status": "INHERITED_CONDITIONAL",
+      "original_source_record_sha256": "aea723649eee980b6112d24f246d4ced38fd0891811bdbfba6ec4ba61248f9bd",
+      "source_status_preserved": "INHERITED_CONDITIONAL",
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH"
+    },
+    {
+      "id": "R185:EXPERIENTIAL_COUNTERPART",
+      "kind": "conditional_application",
+      "statement": "For each actual member token, C1 transports rho to a token-relative experiential structural counterpart; a grounded overlap package coherently relates those images.",
+      "scope": "No numerically single phenomenal event, named feeling, basal gate, sum or exclusive owner follows.",
+      "source": "R185-H1",
+      "status": "CONDITIONAL_ONLY",
+      "original_source_record_sha256": "04091a005d170cd58abdd24ab72ce4da8114b33d9c76491ca4e267d55046d6c1",
+      "source_status_preserved": "CONDITIONAL_ONLY",
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH"
+    },
+    {
+      "id": "R185:CROSS_TOKEN_IDENTITY_LIMIT",
+      "kind": "inference_limit",
+      "statement": "Tokenwise C1 and coherent structural comparison do not by themselves establish cross-token numerical phenomenal identity or a unique subject partition.",
+      "scope": "Leaves selected unity/mineness interpretation and subject individuation open.",
+      "source": "§7; R185-G1",
+      "status": "PROVED_NONENTAILMENT_SCOPE",
+      "original_source_record_sha256": "9f846b35cac5d43793547997ec3b591442249e0258c906cdd66179d1a103fd91",
+      "source_status_preserved": "PROVED_NONENTAILMENT_SCOPE",
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH"
+    },
+    {
+      "id": "R185:ACTION_CENTERING_NEXT",
+      "kind": "open_problem",
+      "statement": "Determine whether one action-centering relation is invariantly grounded across the shared-occurrence incidence diagram and distinguished from a synchronized copied diagram.",
+      "scope": "Seek a noncircular selected relation or underidentification proof, not an exclusive owner or new feeling label.",
+      "source": "§11",
+      "status": "OPEN_NEXT",
+      "original_source_record_sha256": "6e581e883be86ef05291af51dc41a867e2eecd745e8e72443556fdd595e5c232",
+      "source_status_preserved": "OPEN_NEXT",
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r185_shared_membership",
+      "type": "conditional_definition_expansion",
+      "statement": "The same grounded occurrence belongs to every token that jointly satisfies the actual faithful membership package.",
+      "all_of": [
+        "R185:EPISODE_OCCURRENCE",
+        "R185:TOKEN_MEMBERSHIP",
+        "R185:SAME_OCCURRENCE",
+        "R185:INCIDENCE_PROFILE",
+        "R185:ACTUAL_MEMBERSHIP_PACKAGE"
+      ],
+      "conclusion": "R185:SHARED_MEMBERSHIP",
+      "binding": "One Omega/rho/time with every selected actual P_i/K_i and faithful inclusion fixed",
+      "proof": "R185-C1",
+      "original_source_record_sha256": "162026597ef30168205aaef1c0bfc2339974321c973d6cf4b800d972af239c40",
+      "source_status_preserved": null,
+      "same_instance_required": true,
+      "alternative_route_semantics": "AND within the complete typed instance, including external obligations; separate rules are OR alternatives.",
+      "premise_truth_discharged_by_review": false,
+      "registry_review_status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "enabled_as_established_premise": false,
+      "instance_obligations": []
+    },
+    {
+      "id": "r185_copied_nonidentification",
+      "type": "finite_counterexample",
+      "statement": "Matched local values and outputs fail to determine occurrence identity or incidence profile.",
+      "all_of": [
+        "R185:EPISODE_OCCURRENCE",
+        "R185:SAME_OCCURRENCE",
+        "R185:INCIDENCE_PROFILE"
+      ],
+      "conclusion": "R185:COPIED_COUNTERMODEL",
+      "binding": "One declared finite comparison class, same target and observed values, alternative incidence structures. No actual-token membership is inferred from definitions alone.",
+      "proof": "R185-C2; 16 crossed configurations",
+      "original_source_record_sha256": "dafdbd24f4b988ca46631354abf80126344d9c813b5596802090d82db783610d",
+      "source_status_preserved": null,
+      "same_instance_required": true,
+      "alternative_route_semantics": "AND within the complete typed instance, including external obligations; separate rules are OR alternatives.",
+      "premise_truth_discharged_by_review": false,
+      "registry_review_status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "enabled_as_established_premise": false,
+      "instance_obligations": [
+        "The declared finite witness has one shared occurrence with column (1,1,1), or two distinct copied occurrences with columns (1,0,1),(0,1,1).",
+        "Both variants use the same target value and fixed local readout, whole output and report; they are alternative finite models."
+      ]
+    },
+    {
+      "id": "r185_synchronizer_boundary",
+      "type": "finite_counterexample_boundary",
+      "statement": "Propagation through an added synchronizer preserves distinct occurrence identities and adds a whole relation.",
+      "all_of": [
+        "R185:COPIED_COUNTERMODEL",
+        "R185:EPISODE_OCCURRENCE"
+      ],
+      "conclusion": "R185:SYNCHRONIZER_BOUNDARY",
+      "binding": "Same copied IDs, directed synchronizer and declared clamp protocol",
+      "proof": "R185-C3",
+      "original_source_record_sha256": "d6b4abfcf0a12274fdc8a872823c8351af97bd21cc4cd4606cf8d168af2c9964",
+      "source_status_preserved": null,
+      "same_instance_required": true,
+      "alternative_route_semantics": "AND within the complete typed instance, including external obligations; separate rules are OR alternatives.",
+      "premise_truth_discharged_by_review": false,
+      "registry_review_status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "enabled_as_established_premise": false,
+      "instance_obligations": [
+        "Distinct copied occurrence IDs persist; the added synchronizer is a separately represented occurrence/relation.",
+        "Source-specific intervention and synchronizer clamp have the stated finite-model semantics; real fidelity is separately OPEN."
+      ]
+    },
+    {
+      "id": "r185_experiential_counterpart",
+      "type": "conditional_UCT_application",
+      "statement": "Transport actual shared membership tokenwise and compare the overlap images only under the complete simultaneous package.",
+      "all_of": [
+        "A:C1",
+        "R157:COORDINATE_TRANSPORT",
+        "R185:ACTUAL_MEMBERSHIP_PACKAGE",
+        "R185:SHARED_MEMBERSHIP",
+        "R185:COHERENT_OVERLAP_PACKAGE"
+      ],
+      "conclusion": "R185:EXPERIENTIAL_COUNTERPART",
+      "binding": "Same actual episode/occurrence with each token's complete K_i and grounded overlap maps; every physical parameter transported",
+      "proof": "R185-H1; inherited C1/R157/CG transport",
+      "original_source_record_sha256": "b0e7abcdacf9e21697fac18bd43562bc10c72d555cf248b32d4e2f0cd004d199",
+      "source_status_preserved": null,
+      "same_instance_required": true,
+      "alternative_route_semantics": "AND within the complete typed instance, including external obligations; separate rules are OR alternatives.",
+      "premise_truth_discharged_by_review": false,
+      "registry_review_status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "enabled_as_established_premise": false,
+      "instance_obligations": []
+    },
+    {
+      "id": "r185_cross_token_limit",
+      "type": "nonentailment_boundary",
+      "statement": "Tokenwise counterpart and coherent comparison leave numerical cross-token phenomenal identity and exclusive subjecthood unproved.",
+      "all_of": [
+        "R185:EXPERIENTIAL_COUNTERPART",
+        "R185:INCIDENCE_PROFILE"
+      ],
+      "conclusion": "R185:CROSS_TOKEN_IDENTITY_LIMIT",
+      "binding": "No additional phenomenal identity or subject-selector premise",
+      "proof": "Distinct tokenwise codomain representations and source limits; §7",
+      "original_source_record_sha256": "0a45af3b66585b2fa6eac3692d7d59d086ae0d68183ef828e782cabe284e8365",
+      "source_status_preserved": null,
+      "same_instance_required": true,
+      "alternative_route_semantics": "AND within the complete typed instance, including external obligations; separate rules are OR alternatives.",
+      "premise_truth_discharged_by_review": false,
+      "registry_review_status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "enabled_as_established_premise": false,
+      "instance_obligations": []
+    }
+  ],
+  "promotion_requirements": [
+    "Complete the full effective-map per-item semantic audit and reconcile every pending layer",
+    "Retain R184 pending status unless independently promoted",
+    "Discharge ACTUAL_MEMBERSHIP_PACKAGE before actual application",
+    "Keep named feeling and cross-token phenomenal identity open unless independently calibrated",
+    "Explicit reviewer-controlled enablement; file existence never promotes a claim"
+  ],
+  "publication_authorized": false,
+  "normalization_source": {
+    "path": "/workspace/scratch/328b6dbb55c2/uct/research/uct-agent-consciousness-workspace/records/R185_Cross_Scale_Relation_Membership_20261008/MAP_EXTENSION.json",
+    "sha256": "6583a63c819a97dd53e9f95b0d0757a84cf0f36c0e3e7367335ec71dceaf622f",
+    "source_status": "PENDING_MAP"
+  },
+  "integration_status": "REVIEWED_CONDITIONAL_DECLARATIONS",
+  "actual_application": "OPEN",
+  "scientific_promotion": false,
+  "reviewer_controlled_status_changed": false,
+  "context_links": [
+    {
+      "from": "R184:OVERLAP_NEXT",
+      "to": "R185:ACTION_CENTERING_NEXT",
+      "type": "research_progression_not_proof",
+      "original_source_record_sha256": "63c7147000db125bd7e61e2c53f29af156fe52a430c3dcdfc0a6ac68b9721cfa",
+      "id": "R185:CTX:001",
+      "relation": "research_progression_not_proof",
+      "deductive": false,
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "from": "R185:COPIED_COUNTERMODEL",
+      "to": "R185:ACTUAL_MEMBERSHIP_PACKAGE",
+      "type": "actual_evidence_obligation_not_premise",
+      "original_source_record_sha256": "019883079f92785783c36d8fc33b2d1b61405dbd004e0fd3905ccc123b45cdcb",
+      "id": "R185:CTX:002",
+      "relation": "actual_evidence_obligation_not_premise",
+      "deductive": false,
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "from": "R185:EXPERIENTIAL_COUNTERPART",
+      "to": "R185:CROSS_TOKEN_IDENTITY_LIMIT",
+      "type": "interpretive_boundary",
+      "original_source_record_sha256": "3aaf6fa56c9bf1147f59ba549d697aac512bf192101778af1e3da0a5a1e38093",
+      "id": "R185:CTX:003",
+      "relation": "interpretive_boundary",
+      "deductive": false,
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "from": "R185:SHARED_MEMBERSHIP",
+      "to": "R185:INCIDENCE_PROFILE",
+      "type": "occurrence_count_vs_membership_count_clarification",
+      "original_source_record_sha256": "c35570088f56e708d4b2384ecd2a84b2606392588618fd26c87cc299a899f0e1",
+      "id": "R185:CTX:004",
+      "relation": "occurrence_count_vs_membership_count_clarification",
+      "deductive": false,
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "source_type": "node",
+      "target_type": "node"
+    }
+  ]
+}

@@ -1,0 +1,618 @@
+{
+  "schema": "uct-claim-reuse-ledger/1",
+  "research_id": "R188-CER-20261009",
+  "result_version": "CER-RESULT-v0.1.0",
+  "date": "2026-10-09",
+  "paper": "RESEARCH_NOTE.md",
+  "citation_title": "When Behavioral Recovery Conceals Organizational Change",
+  "author": "Hongju Liu",
+  "status": "BOUNDED_REUSE_ADDENDUM",
+  "global_priority": "OPEN; no worldwide-first claim",
+  "release_commit": null,
+  "release_status": "Not decided by this ledger; consult current release records.",
+  "inspected_artifact_sha256": {
+    "RESEARCH_NOTE.md": "a3a8578005bf24e38dc62b9b3a5ebba0364635e63266fc8b33ccf89e243f2046",
+    "check_encoder_access.py": "8245d18ce337d152f46ceb0d0c376abb4e51ca5d67b8bbf7998bfe88fbc265f8",
+    "run_process_reference.py": "49844d4134d68b2ee75c7b7c22d95ad424364dee57ddd64710d2214cd3c53b47",
+    "EXACT_RESULTS.json": "67414cb323922a99bfe949bb9e6e8ec256c04ed69942b8f5bc3834d180a53a59",
+    "PROCESS_RESULTS.json": "165d0d152f035801e8c09c3fff5aa72d7be26aff07e679a74cfd131ae44611c4",
+    "MAP_EXTENSION.json": "66c047490121ea27e668c89008936806ad15a92dbab15c8115e99dd421739be6",
+    "INDEPENDENT_PROTOCOL_REVIEW.md": "69711bc84e3da44ba3a89f9ebe0087b23978edd6d012da6caaefda4c6c166719"
+  },
+  "source_registry": "PRIOR_ART_AND_REUSE.md section 4, F1-F9; F8/F9 are supplementary context.",
+  "inspection_scope": "Final paper, current receipts/module, preceding novelty memo and versioned independent review inspected. Neither experiment rerun here. This is not a full inherited-map semantic audit.",
+  "independent_review_scope": {
+    "record_count": 50,
+    "checker_sha256": "04c2049adccf6df7b5426ba40aff174f0cc99f01749071a4518400e1959c0354",
+    "exact_receipt_sha256": "8f063a43a05b69b18117488b8b73100acf42a82ef70c0b97f947c8c95c7f9c11",
+    "final_exact_record_count": 51,
+    "qualification": "Earlier review snapshot; not an independent rerun or bytewise review of final checker. Final receipt adds mixed-role failure witness."
+  },
+  "condition_sets": {
+    "P": "Section 3: finite positive pair-context law; source sees T; reader sees X; one feedback B=g(X) from <=L labels precedes one reply Z=f(T,B) from <=K labels; decoder sees X,B,Z; no uncounted current input or transcript distinctions. Randomness, if used, satisfies COINS.",
+    "COINS": "All private/public random tapes independent of current (T,X). Correlated state is additional side information.",
+    "MATCH": "Section 5.1: same uniform external (T,J) in [6]x[3], fixed graph-specific 3-regular neighbor routers; only T reaches source and only candidate pair reaches reader.",
+    "ACTUAL": "Independently admitted actual comparison tokens, interval, router/ports/timing, true access boundaries, physically supported policy class, and one invariant capability contract J."
+  },
+  "OPEN_definitions": {
+    "PRIORITY": "External historical priority of this specific formula/example remains unconfirmed.",
+    "ACTUAL": "Physical instantiation and complete causal-access/policy boundaries require independent evidence.",
+    "PHENOMENAL": "UCT empirical validity and particular experiential interpretation are not established.",
+    "EXTENSIONS": "Changed blocks, alphabets, side channels, interactions or resource theories require new analysis.",
+    "RELEASE": "Current archival commit, publication and completed-map status require separate verified records.",
+    "ROLE_REALIZABILITY": "All-six semantic role realizability remains unproved under the admitted R175 baseline."
+  },
+  "OPEN_interpretation": "OPEN items concern priority, application, extension or release; they do not assert a missing step in a stated finite conditional proof.",
+  "claims": [
+    {
+      "claim_id": "R188-REUSE-01",
+      "claim": "A common commuting prediction has maximum TV error at least D/2.",
+      "paper_locator": "2.1, equation (1)",
+      "conditions": [
+        "Separate product-component updates; same preparation, clock and observer."
+      ],
+      "proof_evidence": [
+        "Triangle inequality; explicit changed-readout continuation example."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "UI20261009"
+        ],
+        "external_source_ids": [
+          "F5"
+        ]
+      },
+      "non_extrapolation": "A null order effect proves neither independence nor source/subject count.",
+      "OPEN": [
+        "ACTUAL",
+        "PHENOMENAL"
+      ],
+      "map_nodes": [],
+      "status": "INHERITED_CONDITIONAL"
+    },
+    {
+      "claim_id": "R188-REUSE-02",
+      "claim": "All traces through depth m agree; a depth m+1 trace separates.",
+      "paper_locator": "2.2",
+      "conditions": [
+        "Fixed zero reset, flag-setting actions and conditional C; m>=1."
+      ],
+      "proof_evidence": [
+        "Before any short-trace C, at most m-1 flags were set."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "R186-HOM"
+        ],
+        "external_source_ids": [
+          "F6"
+        ]
+      },
+      "non_extrapolation": "Presetting flags changes the experiment; no universal finite-identification impossibility.",
+      "OPEN": [
+        "ACTUAL"
+      ],
+      "map_nodes": [],
+      "status": "INHERITED_CONDITIONAL"
+    },
+    {
+      "claim_id": "R188-REUSE-03",
+      "claim": "Exact compensation-target recovery iff ker(H) is contained in ker(AM); minimum exact monitor dimension rank(AM).",
+      "paper_locator": "2.3, equations (2)-(3)",
+      "conditions": [
+        "Fixed linear model; d,u unrestricted; freely designed exact linear monitors for dimension claim."
+      ],
+      "proof_evidence": [
+        "Factorization AM=LH and indistinguishable kernel witness."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "CM20261009"
+        ],
+        "external_source_ids": []
+      },
+      "non_extrapolation": "Real monitor dimension is neither bit budget nor experience amount.",
+      "OPEN": [
+        "ACTUAL",
+        "PHENOMENAL"
+      ],
+      "map_nodes": [],
+      "status": "INHERITED_CONDITIONAL"
+    },
+    {
+      "claim_id": "R188-REUSE-04",
+      "claim": "Bounded-correction target set has minimax radius sqrt(rho^2-||H^+z||^2)||AM(I-H^+H)||_2.",
+      "paper_locator": "2.3, equation (4)",
+      "conditions": [
+        "Feasible exact z; Euclidean ||u||<=rho; d unrestricted."
+      ],
+      "proof_evidence": [
+        "Orthogonal kernel decomposition; antipodal extremes; central estimator."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "CM20261009"
+        ],
+        "external_source_ids": []
+      },
+      "non_extrapolation": "Additional constraints on d can shrink the set; causal baseline meaning needs justification.",
+      "OPEN": [
+        "ACTUAL"
+      ],
+      "map_nodes": [],
+      "status": "INHERITED_CONDITIONAL"
+    },
+    {
+      "claim_id": "R188-REUSE-05",
+      "claim": "Controlled-interface equivalence preserves observed laws for every adaptive finite-history policy.",
+      "paper_locator": "2.4",
+      "conditions": [
+        "Related initial states; matching readouts; relation preserved by every allowed command; suitable stochastic coupling."
+      ],
+      "proof_evidence": [
+        "Induction on policy histories."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "R185",
+          "R187-CMA"
+        ],
+        "external_source_ids": [
+          "F7"
+        ]
+      },
+      "non_extrapolation": "Cannot infer occurrence multiplicity or pre-intervention subject count.",
+      "OPEN": [
+        "ACTUAL",
+        "PHENOMENAL"
+      ],
+      "map_nodes": [],
+      "status": "INHERITED_CONDITIONAL"
+    },
+    {
+      "claim_id": "R188-REUSE-06",
+      "claim": "Sharp decoder-aware top-K recovery need not be attained by a source-only installed helper.",
+      "paper_locator": "3, equations (5)-(6); 6.1",
+      "conditions": [
+        "P",
+        "MATCH",
+        "K=2,L=1; distinguish helper(T,X) from source(T)."
+      ],
+      "proof_evidence": [
+        "Both G_2=1; prism optimum 8/9; EXACT_RESULTS check deliberate_context_access_countercontrol."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "TH/RB:HELPER",
+          "R133:MESSAGE_COVER",
+          "R137",
+          "IE:QUERY_SPEC"
+        ],
+        "external_source_ids": [
+          "F1",
+          "F2",
+          "F3",
+          "F4"
+        ]
+      },
+      "non_extrapolation": "Does not retract the ideal bound or imply all blind sources fail.",
+      "OPEN": [
+        "PRIORITY",
+        "ACTUAL"
+      ],
+      "map_nodes": [
+        "R188:IDEAL_NOT_INSTALLED"
+      ],
+      "status": "PROVED_CONDITIONAL"
+    },
+    {
+      "claim_id": "R188-REUSE-07",
+      "claim": "S*=1-W+Cut_(K^L)(G,w), with w_e the smaller endpoint joint mass; deterministic attainment.",
+      "paper_locator": "4.1, Proposition 1, equations (7)-(9)",
+      "conditions": [
+        "P",
+        "K,L positive integers; L counts symbols, not bits."
+      ],
+      "proof_evidence": [
+        "Equal response words incur w_e; differing-coordinate selector attains the bound; EXACT_RESULTS check weighted_complete_protocol_vs_cut."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "R133:MESSAGE_COVER",
+          "TH/RB access distinction"
+        ],
+        "external_source_ids": [
+          "F1",
+          "F2",
+          "F3",
+          "F4"
+        ]
+      },
+      "non_extrapolation": "New project application of classical machinery; not arbitrary-interaction, quantum or asymptotic theory.",
+      "OPEN": [
+        "PRIORITY",
+        "ACTUAL",
+        "EXTENSIONS"
+      ],
+      "map_nodes": [
+        "R188:PROTOCOL",
+        "R188:RESPONSE_WORD",
+        "R188:EXACT_SCORE"
+      ],
+      "status": "PROVED_CONDITIONAL"
+    },
+    {
+      "claim_id": "R188-REUSE-08",
+      "claim": "Independent private/public randomness cannot improve average optimum.",
+      "paper_locator": "4.1, Randomization",
+      "conditions": [
+        "P",
+        "COINS"
+      ],
+      "proof_evidence": [
+        "Condition all tapes; input law unchanged; average deterministic bounds."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "Classical deterministic-mixture argument"
+        ],
+        "external_source_ids": []
+      },
+      "non_extrapolation": "Correlated pre-shared task state is not free randomness.",
+      "OPEN": [
+        "ACTUAL"
+      ],
+      "map_nodes": [
+        "R188:COINS"
+      ],
+      "status": "PROVED_CONDITIONAL"
+    },
+    {
+      "claim_id": "R188-REUSE-09",
+      "claim": "Zero error iff chi(G)<=K^L; K=1 leaves success 1-W.",
+      "paper_locator": "4.2, Corollary 1, equation (10)",
+      "conditions": [
+        "P",
+        "Every supported endpoint mass positive; logarithmic label formula only for K>=2."
+      ],
+      "proof_evidence": [
+        "Positive edge losses vanish exactly under proper coloring."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "R133 compatibility"
+        ],
+        "external_source_ids": [
+          "F1",
+          "F2",
+          "F3",
+          "F4"
+        ]
+      },
+      "non_extrapolation": "K^L counts response words, not target symbols transmitted per reply.",
+      "OPEN": [
+        "ACTUAL",
+        "EXTENSIONS"
+      ],
+      "map_nodes": [
+        "R188:ZERO_ERROR"
+      ],
+      "status": "CLASSICAL_METHOD_COROLLARY"
+    },
+    {
+      "claim_id": "R188-REUSE-10",
+      "claim": "Complete-graph value equals equation (11), attained by balanced classes.",
+      "paper_locator": "4.3, Corollary 2, equation (11)",
+      "conditions": [
+        "P",
+        "Uniform complete graph; n>=2; C=min(n,K^L), n=Cq+r."
+      ],
+      "proof_evidence": [
+        "Balancing decreases within-class pairs; EXACT_RESULTS check complete_graph_balanced_formula."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "Classical graph partition counting"
+        ],
+        "external_source_ids": [
+          "F1"
+        ]
+      },
+      "non_extrapolation": "Not a new asymptotic coding rate or an experience scale.",
+      "OPEN": [
+        "PRIORITY",
+        "EXTENSIONS"
+      ],
+      "map_nodes": [
+        "R188:COMPLETE_FAMILY"
+      ],
+      "status": "DERIVED_ILLUSTRATION"
+    },
+    {
+      "claim_id": "R188-REUSE-11",
+      "claim": "The six-state organizations match the listed marginals, posterior spectra and isolated ideal scores.",
+      "paper_locator": "5.1",
+      "conditions": [
+        "MATCH"
+      ],
+      "proof_evidence": [
+        "Eighteen oriented-edge counts; EXACT_RESULTS check common_external_input_law."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "R188 matched construction"
+        ],
+        "external_source_ids": []
+      },
+      "non_extrapolation": "Full joint laws and internal routers differ; graph is not physical wiring.",
+      "OPEN": [
+        "PRIORITY",
+        "ACTUAL"
+      ],
+      "map_nodes": [
+        "R188:COMMON_STIMULUS",
+        "R188:MATCHED_SUMMARIES"
+      ],
+      "status": "PROVED_CONDITIONAL"
+    },
+    {
+      "claim_id": "R188-REUSE-12",
+      "claim": "Best one-bit source-only success is 1 for K3,3 and 8/9 for the prism.",
+      "paper_locator": "5.2, Proposition 2, equation (12)",
+      "conditions": [
+        "P",
+        "MATCH",
+        "K=2,L=1."
+      ],
+      "proof_evidence": [
+        "Bipartition; two triangles force two uncut edges; seven-edge cut attained; EXACT_RESULTS no-feedback enumerations."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "R188 matched application"
+        ],
+        "external_source_ids": [
+          "F1",
+          "F4"
+        ]
+      },
+      "non_extrapolation": "Average optimum, not each-context accuracy, a learner limitation or experience ratio.",
+      "OPEN": [
+        "PRIORITY",
+        "ACTUAL"
+      ],
+      "map_nodes": [
+        "R188:GAP"
+      ],
+      "status": "PROVED_CONDITIONAL"
+    },
+    {
+      "claim_id": "R188-REUSE-13",
+      "claim": "One timely feedback bit plus one reply bit attains perfect recovery; three forward symbols also suffice.",
+      "paper_locator": "5.3, Proposition 3",
+      "conditions": [
+        "P",
+        "MATCH",
+        "K=2,L=2 before encoding, or K=3,L=1."
+      ],
+      "proof_evidence": [
+        "Coloring (0,1,2,1,2,0), words 00/01/10 and distinguishing coordinate; receipt attainment checks."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "R188 constructive application",
+          "IE query access"
+        ],
+        "external_source_ids": [
+          "F2",
+          "F3",
+          "F4"
+        ]
+      },
+      "non_extrapolation": "Added route changes the assembly; feedback is not an experience gate.",
+      "OPEN": [
+        "PRIORITY",
+        "ACTUAL"
+      ],
+      "map_nodes": [
+        "R188:FEEDBACK_REPAIR"
+      ],
+      "status": "PROVED_CONDITIONAL"
+    },
+    {
+      "claim_id": "R188-REUSE-14",
+      "claim": "Feedback after the scored reply is fixed retains the source-only prism ceiling 8/9.",
+      "paper_locator": "5.3; 7.2",
+      "conditions": [
+        "P",
+        "MATCH",
+        "K=2; irrevocable reply; no later target-dependent modulation."
+      ],
+      "proof_evidence": [
+        "Effective pre-reply L=1; PROCESS_RESULTS late_feedback event ordering."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "IE:QUERY_SPEC",
+          "TH/RB timing"
+        ],
+        "external_source_ids": []
+      },
+      "non_extrapolation": "Logical order does not estimate biological or hardware milliseconds.",
+      "OPEN": [
+        "ACTUAL",
+        "EXTENSIONS"
+      ],
+      "map_nodes": [
+        "R188:LATE_FEEDBACK"
+      ],
+      "status": "PROVED_CONDITIONAL"
+    },
+    {
+      "claim_id": "R188-REUSE-15",
+      "claim": "Final exact run reports 51 records and 38,013 enumerated candidate tables.",
+      "paper_locator": "7.1",
+      "conditions": [
+        "Current receipt and checker hashes above."
+      ],
+      "proof_evidence": [
+        "EXACT_RESULTS record_count/enumerated_candidate_tables; direct protocol cells on small weighted instances."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "R188 execution artifacts"
+        ],
+        "external_source_ids": []
+      },
+      "non_extrapolation": "Larger checks reuse reduction; counts do not prove theorem or enumerate random strategies.",
+      "OPEN": [
+        "RELEASE"
+      ],
+      "map_nodes": [
+        "R188:EXECUTED_CHECKS"
+      ],
+      "status": "FINITE_EXECUTION_RECEIPT"
+    },
+    {
+      "claim_id": "R188-REUSE-16",
+      "claim": "Executed reference has 126 trials, 252 workers; prism 16/18 blind/late and 18/18 timely.",
+      "paper_locator": "7.2",
+      "conditions": [
+        "Inspected fixed functions; explicit pipes; eighteen external stimuli per mode."
+      ],
+      "proof_evidence": [
+        "PROCESS_RESULTS summary/trials and recorded code hash."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "R188 execution artifacts"
+        ],
+        "external_source_ids": []
+      },
+      "non_extrapolation": "No OS security, all-program causal isolation, biological latency or phenomenality certification.",
+      "OPEN": [
+        "ACTUAL",
+        "PHENOMENAL",
+        "RELEASE"
+      ],
+      "map_nodes": [
+        "R188:PROCESS_REFERENCE"
+      ],
+      "status": "FINITE_EXECUTION_RECEIPT"
+    },
+    {
+      "claim_id": "R188-REUSE-17",
+      "claim": "The separate two-coordinate common-role block decodes 48 cases; mixed roles can fail.",
+      "paper_locator": "7.3",
+      "conditions": [
+        "One fixed reader role across block: A, B, or A XOR B; specified binary matrix M."
+      ],
+      "proof_evidence": [
+        "M and I+M invertible; EXACT_RESULTS records 49 and 50."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "Classical block coding; R188 countercontrols"
+        ],
+        "external_source_ids": []
+      },
+      "non_extrapolation": "Not unrestricted iid batching or a demonstrated repair of the prism protocol.",
+      "OPEN": [
+        "EXTENSIONS"
+      ],
+      "map_nodes": [
+        "R188:ONE_SHOT"
+      ],
+      "status": "COUNTERCONTROL"
+    },
+    {
+      "claim_id": "R188-REUSE-18",
+      "claim": "Excess recovery rejects a conjunction of law/access/alphabet/timing/protocol/measurement assumptions.",
+      "paper_locator": "6.2; 8",
+      "conditions": [
+        "Declared bound is applicable to the tested contract; comparison measurement justified."
+      ],
+      "proof_evidence": [
+        "Logical contrapositive of conditional optimum; explicit alternative premise violations."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "UI",
+          "CM",
+          "R187",
+          "TH/RB"
+        ],
+        "external_source_ids": [
+          "F5",
+          "F7"
+        ]
+      },
+      "non_extrapolation": "No unique hidden wire, occurrence/subject count, or free remote-source access.",
+      "OPEN": [
+        "ACTUAL",
+        "PHENOMENAL"
+      ],
+      "map_nodes": [
+        "R188:INFERENCE_CONTRACT"
+      ],
+      "status": "METHODOLOGICAL_SYNTHESIS"
+    },
+    {
+      "claim_id": "R188-REUSE-19",
+      "claim": "A genuinely different common-J capability implies different complete experiential types only through inherited C:P1.",
+      "paper_locator": "8",
+      "conditions": [
+        "ACTUAL",
+        "UCT C1/C:P1 admitted; proven score gap is truly J(s)!=J(t)."
+      ],
+      "proof_evidence": [
+        "Inherited conditional implication; finite benchmark supplies no independent actual grounding."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "UCT I C1/U1/P3",
+          "UCT III C:P1",
+          "TA25"
+        ],
+        "external_source_ids": []
+      },
+      "non_extrapolation": "No empirical UCT validation, named feeling, intensity, threshold or exclusive owner; local persistence retained.",
+      "OPEN": [
+        "ACTUAL",
+        "PHENOMENAL"
+      ],
+      "map_nodes": [
+        "R188:GROUNDING",
+        "R188:UCT_TYPE"
+      ],
+      "status": "CONDITIONAL_UCT_APPLICATION"
+    },
+    {
+      "claim_id": "R188-REUSE-20",
+      "claim": "R173 eight-combination wording is restricted to free-bit enumeration under later R175 correction.",
+      "paper_locator": "9.2",
+      "conditions": [
+        "Recovered baseline and effective R175 G-implies-A restriction."
+      ],
+      "proof_evidence": [
+        "Frozen paper reports effective-record correction; release patch must be verified separately."
+      ],
+      "predecessor_attribution": {
+        "internal": [
+          "R173",
+          "R175"
+        ],
+        "external_source_ids": []
+      },
+      "non_extrapolation": "No eight-way semantic independence; all-six realizability remains unproved.",
+      "OPEN": [
+        "ROLE_REALIZABILITY",
+        "RELEASE"
+      ],
+      "map_nodes": [],
+      "status": "REPORTED_RECORD_CORRECTION"
+    }
+  ],
+  "claim_count": 20,
+  "prior_art_sha256": "548236ca01ed96ddf1027ebe7e437ca1351c2c6f0962e70d426f58483eb75a78"
+}

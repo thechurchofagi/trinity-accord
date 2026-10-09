@@ -1,0 +1,5885 @@
+{
+  "research_id": "R188-CER-20261009",
+  "version": "CER-RESULT-v0.1.0",
+  "status": "PASS",
+  "implementation": "two fresh spawned Python processes per finite case; explicit directional pipes",
+  "interpretation": "executed reference policies over every common external (T,J) input",
+  "not_certified": [
+    "OS-level isolation",
+    "complete physical organization",
+    "biological latency",
+    "phenomenal experience"
+  ],
+  "trial_count": 126,
+  "worker_process_count": 252,
+  "python": "3.12.14",
+  "elapsed_seconds": 8.419,
+  "code_sha256": "49844d4134d68b2ee75c7b7c22d95ad424364dee57ddd64710d2214cd3c53b47",
+  "summary": [
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "correct": 18,
+      "trials": 18,
+      "accuracy": "1"
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "correct": 18,
+      "trials": 18,
+      "accuracy": "1"
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "correct": 18,
+      "trials": 18,
+      "accuracy": "1"
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "correct": 16,
+      "trials": 18,
+      "accuracy": "8/9"
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "correct": 18,
+      "trials": 18,
+      "accuracy": "1"
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "correct": 16,
+      "trials": 18,
+      "accuracy": "8/9"
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "correct": 18,
+      "trials": 18,
+      "accuracy": "1"
+    }
+  ],
+  "trials": [
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 0,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 6,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 7,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 0,
+      "context": [
+        0,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 8,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 9,
+        "context": [
+          0,
+          4
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 0,
+      "context": [
+        0,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 10,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 11,
+        "context": [
+          0,
+          5
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 1,
+      "context": [
+        1,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 12,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 13,
+        "context": [
+          1,
+          3
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 1,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 14,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 15,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 1,
+      "context": [
+        1,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 16,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 17,
+        "context": [
+          1,
+          5
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 2,
+      "context": [
+        2,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 18,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 19,
+        "context": [
+          2,
+          3
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 2,
+      "context": [
+        2,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 20,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 21,
+        "context": [
+          2,
+          4
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 2,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 22,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 23,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 3,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 24,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 25,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 3,
+      "context": [
+        1,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 26,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 27,
+        "context": [
+          1,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 3,
+      "context": [
+        2,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 28,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 29,
+        "context": [
+          2,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 4,
+      "context": [
+        0,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 30,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 31,
+        "context": [
+          0,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 4,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 32,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 33,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 4,
+      "context": [
+        2,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 34,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 35,
+        "context": [
+          2,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 5,
+      "context": [
+        0,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 36,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 37,
+        "context": [
+          0,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 5,
+      "context": [
+        1,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 38,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 39,
+        "context": [
+          1,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "no_feedback",
+      "target": 5,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 40,
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 41,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 0,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 42,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 43,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 0,
+      "context": [
+        0,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 44,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 45,
+        "context": [
+          0,
+          4
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 0,
+      "context": [
+        0,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 46,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 47,
+        "context": [
+          0,
+          5
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 1,
+      "context": [
+        1,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 48,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 49,
+        "context": [
+          1,
+          3
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 1,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 50,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 51,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 1,
+      "context": [
+        1,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 52,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 53,
+        "context": [
+          1,
+          5
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 2,
+      "context": [
+        2,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 54,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 55,
+        "context": [
+          2,
+          3
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 2,
+      "context": [
+        2,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 56,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 57,
+        "context": [
+          2,
+          4
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 2,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 58,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 59,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 3,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 60,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 61,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 3,
+      "context": [
+        1,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 62,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 63,
+        "context": [
+          1,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 3,
+      "context": [
+        2,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 64,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 65,
+        "context": [
+          2,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 4,
+      "context": [
+        0,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 66,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 67,
+        "context": [
+          0,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 4,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 68,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 69,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 4,
+      "context": [
+        2,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 70,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 71,
+        "context": [
+          2,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 5,
+      "context": [
+        0,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 72,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 73,
+        "context": [
+          0,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 5,
+      "context": [
+        1,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 74,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 75,
+        "context": [
+          1,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "timely_feedback",
+      "target": 5,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 76,
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 77,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 0,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 78,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 79,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 0,
+      "context": [
+        0,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 80,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 81,
+        "context": [
+          0,
+          4
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 0,
+      "context": [
+        0,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 82,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 83,
+        "context": [
+          0,
+          5
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 1,
+      "context": [
+        1,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 84,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 85,
+        "context": [
+          1,
+          3
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 1,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 86,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 87,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 1,
+      "context": [
+        1,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 88,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 89,
+        "context": [
+          1,
+          5
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 2,
+      "context": [
+        2,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 90,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 91,
+        "context": [
+          2,
+          3
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 2,
+      "context": [
+        2,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 92,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 93,
+        "context": [
+          2,
+          4
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 2,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 94,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 95,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 3,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 96,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 97,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 3,
+      "context": [
+        1,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 98,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 99,
+        "context": [
+          1,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 3,
+      "context": [
+        2,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 100,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 101,
+        "context": [
+          2,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 4,
+      "context": [
+        0,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 102,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 103,
+        "context": [
+          0,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 4,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 104,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 105,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 4,
+      "context": [
+        2,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 106,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 107,
+        "context": [
+          2,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 5,
+      "context": [
+        0,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 108,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 109,
+        "context": [
+          0,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 5,
+      "context": [
+        1,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 110,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 111,
+        "context": [
+          1,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "bipartite",
+      "mode": "late_feedback",
+      "target": 5,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 112,
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 113,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 0,
+      "context": [
+        0,
+        1
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 114,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 115,
+        "context": [
+          0,
+          1
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 0,
+      "context": [
+        0,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 116,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 117,
+        "context": [
+          0,
+          2
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 1,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 0,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 118,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 119,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 1,
+      "context": [
+        0,
+        1
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 120,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 121,
+        "context": [
+          0,
+          1
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 1,
+      "context": [
+        1,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 122,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 123,
+        "context": [
+          1,
+          2
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 1,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 124,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 125,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 2,
+      "context": [
+        0,
+        2
+      ],
+      "correct": false,
+      "source": {
+        "role": "source",
+        "pid": 126,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 127,
+        "context": [
+          0,
+          2
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 1,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 2,
+      "context": [
+        1,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 128,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 129,
+        "context": [
+          1,
+          2
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 2,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 130,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 131,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 1,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 3,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 132,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 133,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 3,
+      "context": [
+        3,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 134,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 135,
+        "context": [
+          3,
+          4
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 3,
+      "context": [
+        3,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 136,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 137,
+        "context": [
+          3,
+          5
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 4,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 138,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 139,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 4,
+      "context": [
+        3,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 140,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 141,
+        "context": [
+          3,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 4,
+      "context": [
+        4,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 142,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 143,
+        "context": [
+          4,
+          5
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 1,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 5,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 144,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 145,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 1,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 5,
+      "context": [
+        3,
+        5
+      ],
+      "correct": false,
+      "source": {
+        "role": "source",
+        "pid": 146,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 147,
+        "context": [
+          3,
+          5
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "no_feedback",
+      "target": 5,
+      "context": [
+        4,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 148,
+        "graph": "prism",
+        "mode": "no_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 149,
+        "context": [
+          4,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 1,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 0,
+      "context": [
+        0,
+        1
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 150,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 151,
+        "context": [
+          0,
+          1
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 0,
+      "context": [
+        0,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 152,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": 1,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 153,
+        "context": [
+          0,
+          2
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 1,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 0,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 154,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 155,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 1,
+      "context": [
+        0,
+        1
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 156,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 157,
+        "context": [
+          0,
+          1
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 1,
+      "context": [
+        1,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 158,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 159,
+        "context": [
+          1,
+          2
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 1,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 160,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 161,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 2,
+      "context": [
+        0,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 162,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 1,
+        "feedback": 1,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 163,
+        "context": [
+          0,
+          2
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 1,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 2,
+      "context": [
+        1,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 164,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 165,
+        "context": [
+          1,
+          2
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 2,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 166,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 1,
+        "feedback": 1,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 167,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 1,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 3,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 168,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 169,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 3,
+      "context": [
+        3,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 170,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 171,
+        "context": [
+          3,
+          4
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 3,
+      "context": [
+        3,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 172,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 173,
+        "context": [
+          3,
+          5
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 4,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 174,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 175,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 4,
+      "context": [
+        3,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 176,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 177,
+        "context": [
+          3,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 4,
+      "context": [
+        4,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 178,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 1,
+        "feedback": 1,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 179,
+        "context": [
+          4,
+          5
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 1,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 5,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 180,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 0,
+        "feedback": 1,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 181,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 1,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 5,
+      "context": [
+        3,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 182,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 183,
+        "context": [
+          3,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "timely_feedback",
+      "target": 5,
+      "context": [
+        4,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 184,
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 0,
+        "feedback": 1,
+        "feedback_used": true,
+        "events": [
+          "feedback_received",
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 185,
+        "context": [
+          4,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 1,
+        "events": [
+          "feedback_sent",
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 0,
+      "context": [
+        0,
+        1
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 186,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 187,
+        "context": [
+          0,
+          1
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 0,
+      "context": [
+        0,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 188,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": 1,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 189,
+        "context": [
+          0,
+          2
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 1,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 0,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 190,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 191,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 1,
+      "context": [
+        0,
+        1
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 192,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 193,
+        "context": [
+          0,
+          1
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 1,
+      "context": [
+        1,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 194,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 195,
+        "context": [
+          1,
+          2
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 1,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 196,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 197,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 2,
+      "context": [
+        0,
+        2
+      ],
+      "correct": false,
+      "source": {
+        "role": "source",
+        "pid": 198,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": 1,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 199,
+        "context": [
+          0,
+          2
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 1,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 2,
+      "context": [
+        1,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 200,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 201,
+        "context": [
+          1,
+          2
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 2,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 202,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 0,
+        "feedback": 1,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 203,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 1,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 3,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 204,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 205,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 3,
+      "context": [
+        3,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 206,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 207,
+        "context": [
+          3,
+          4
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 3,
+      "context": [
+        3,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 208,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 209,
+        "context": [
+          3,
+          5
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 4,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 210,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 211,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 4,
+      "context": [
+        3,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 212,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 0,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 213,
+        "context": [
+          3,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 4,
+      "context": [
+        4,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 214,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 0,
+        "feedback": 1,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 215,
+        "context": [
+          4,
+          5
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": 1,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 5,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 216,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": 1,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 217,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 1,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 5,
+      "context": [
+        3,
+        5
+      ],
+      "correct": false,
+      "source": {
+        "role": "source",
+        "pid": 218,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": 0,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 219,
+        "context": [
+          3,
+          5
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 0,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "late_feedback",
+      "target": 5,
+      "context": [
+        4,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 220,
+        "graph": "prism",
+        "mode": "late_feedback",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 1,
+        "feedback": 1,
+        "feedback_used": false,
+        "events": [
+          "reply_sent",
+          "feedback_received_after_reply"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 221,
+        "context": [
+          4,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": 1,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed",
+          "feedback_sent_after_deadline_guess"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 0,
+      "context": [
+        0,
+        1
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 222,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 223,
+        "context": [
+          0,
+          1
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 0,
+      "context": [
+        0,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 224,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 225,
+        "context": [
+          0,
+          2
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 0,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 226,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 0,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 227,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 0,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 1,
+      "context": [
+        0,
+        1
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 228,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 229,
+        "context": [
+          0,
+          1
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 1,
+      "context": [
+        1,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 230,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 231,
+        "context": [
+          1,
+          2
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 1,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 232,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 1,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 233,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 1,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 2,
+      "context": [
+        0,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 234,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 2,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 235,
+        "context": [
+          0,
+          2
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 2,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 2,
+      "context": [
+        1,
+        2
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 236,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 2,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 237,
+        "context": [
+          1,
+          2
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 2,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 2,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 238,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 2,
+        "reply": 2,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 239,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 2,
+        "target_argument_supplied": false,
+        "reply": 2,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 3,
+      "context": [
+        0,
+        3
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 240,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 241,
+        "context": [
+          0,
+          3
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 3,
+      "context": [
+        3,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 242,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 243,
+        "context": [
+          3,
+          4
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 3,
+      "context": [
+        3,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 244,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 3,
+        "reply": 1,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 245,
+        "context": [
+          3,
+          5
+        ],
+        "guess": 3,
+        "target_argument_supplied": false,
+        "reply": 1,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 4,
+      "context": [
+        1,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 246,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 2,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 247,
+        "context": [
+          1,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 2,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 4,
+      "context": [
+        3,
+        4
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 248,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 2,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 249,
+        "context": [
+          3,
+          4
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 2,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 4,
+      "context": [
+        4,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 250,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 4,
+        "reply": 2,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 251,
+        "context": [
+          4,
+          5
+        ],
+        "guess": 4,
+        "target_argument_supplied": false,
+        "reply": 2,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 5,
+      "context": [
+        2,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 252,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 253,
+        "context": [
+          2,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 5,
+      "context": [
+        3,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 254,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 255,
+        "context": [
+          3,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    },
+    {
+      "graph": "prism",
+      "mode": "three_symbol",
+      "target": 5,
+      "context": [
+        4,
+        5
+      ],
+      "correct": true,
+      "source": {
+        "role": "source",
+        "pid": 256,
+        "graph": "prism",
+        "mode": "three_symbol",
+        "inputs": [
+          "target",
+          "fixed_graph_and_code",
+          "counted_feedback_if_used"
+        ],
+        "reader_context_argument_supplied": false,
+        "target": 5,
+        "reply": 0,
+        "feedback": null,
+        "feedback_used": false,
+        "events": [
+          "reply_sent"
+        ]
+      },
+      "reader": {
+        "role": "reader",
+        "pid": 257,
+        "context": [
+          4,
+          5
+        ],
+        "guess": 5,
+        "target_argument_supplied": false,
+        "reply": 0,
+        "feedback": null,
+        "events": [
+          "reply_received",
+          "deadline_guess_fixed"
+        ]
+      }
+    }
+  ]
+}

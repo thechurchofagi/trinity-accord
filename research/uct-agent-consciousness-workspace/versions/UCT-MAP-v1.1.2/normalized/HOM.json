@@ -1,0 +1,148 @@
+{
+  "module_id": "R186-HOM-20261009",
+  "version": "HOM-v0.1.0",
+  "candidate_map_version": "UCT-MAP-v1.1.1-R186-candidate.1",
+  "base": "UCT-MAP-v1.1.0",
+  "activation": "PENDING_MAP",
+  "rules": [
+    {
+      "id": "HOM:R1",
+      "all_of": [
+        "HOM:MODEL"
+      ],
+      "conclusion": "HOM:SHORT_EQ",
+      "status": "CONDITIONAL_PENDING_SEMANTIC_REVIEW",
+      "original_source_record_sha256": "46cf77d297df898f3f0fe41bad10f2753444d8eefc7c524fda44415cb24f8f0e",
+      "source_status_preserved": "CONDITIONAL_PENDING_SEMANTIC_REVIEW",
+      "same_instance_required": true,
+      "alternative_route_semantics": "AND within the complete typed instance, including external obligations; separate rules are OR alternatives.",
+      "premise_truth_discharged_by_review": false,
+      "registry_review_status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "enabled_as_established_premise": false,
+      "instance_obligations": [],
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "binding": "For each integer m>=1, compare two deterministic finite machines on S={0,1}^{m+1} from the same zero reset, with common action alphabet {A_1,...,A_m,C} and full-state readout after each operation. Only those actions, that reset and discrete operation boundary times are admitted. Finite model statements do not establish actual physical realization.",
+      "statement": "For every m>=1 and every word over {A_1,...,A_m,C} of length at most m, the two HOM:MODEL machines from zero reset have identical full-state traces at every prefix, including the empty prefix.",
+      "proof_location": "RESEARCH_NOTE.md, Construction and theorem",
+      "proof": "Before any C in a word of length<=m, at most m-1 distinct flag-setting commands have occurred. Its gate is false; A_i agrees in both machines. Induct over every prefix."
+    },
+    {
+      "id": "HOM:R2",
+      "all_of": [
+        "HOM:MODEL"
+      ],
+      "conclusion": "HOM:DEEP_WITNESS",
+      "status": "CONDITIONAL_PENDING_SEMANTIC_REVIEW",
+      "original_source_record_sha256": "f2f99d79a05ff4c307077f0f6c25a41c8d4e8d76ebe0b6f3ae90a602c19cd1c3",
+      "source_status_preserved": "CONDITIONAL_PENDING_SEMANTIC_REVIEW",
+      "same_instance_required": true,
+      "alternative_route_semantics": "AND within the complete typed instance, including external obligations; separate rules are OR alternatives.",
+      "premise_truth_discharged_by_review": false,
+      "registry_review_status": "REVIEWED_CONDITIONAL_SCHEMA",
+      "enabled_as_established_premise": false,
+      "instance_obligations": [],
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "binding": "For each integer m>=1, compare two deterministic finite machines on S={0,1}^{m+1} from the same zero reset, with common action alphabet {A_1,...,A_m,C} and full-state readout after each operation. Only those actions, that reset and discrete operation boundary times are admitted. Finite model statements do not establish actual physical realization.",
+      "statement": "For every m>=1, the word A_1,...,A_m,C of length m+1 yields z=1 in the coupled machine and z=0 in N. No shorter word separates the machines under the same zero-reset full-state contract.",
+      "proof_location": "RESEARCH_NOTE.md, Construction and theorem",
+      "proof": "The displayed m flag writes activate the C gate, giving different z at the next step. The same flag-count argument rules out every shorter separating word from zero reset."
+    }
+  ],
+  "context_links": [
+    {
+      "from": "HOM:SHORT_EQ",
+      "to": "HOM:BOUNDARY",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "original_source_record_sha256": "c2e4b09d5c478ecf49d2f6b7aab71cff8ad9899f19df1cbd77cecd10d54421ac",
+      "id": "HOM:CTX:001",
+      "relation": "LIMITATION_NOT_DEDUCTION",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "from": "HOM:DEEP_WITNESS",
+      "to": "HOM:EXPERIENCE_GUARD",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "original_source_record_sha256": "06968ca05afbaca559aeb9baa4df7179ffaf0f8ca956d6984a341033fbd3421b",
+      "id": "HOM:CTX:002",
+      "relation": "APPLICATION_GUARD_NOT_DEDUCTION",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    }
+  ],
+  "notes": "All claims are pending; no rule is active in authoritative graph; instance gate remains unfulfilled.",
+  "normalization_source": {
+    "path": "/workspace/scratch/328b6dbb55c2/uct/research/uct-agent-consciousness-workspace/records/R186_Higher_Order_Intervention_Masking_20261009/MAP_EXTENSION.json",
+    "sha256": "38031ffcaca58ce3e8ad4d640f5ec62085e458f970cc78a430b20459930d374e",
+    "source_status": "PENDING_MAP"
+  },
+  "integration_status": "REVIEWED_CONDITIONAL_DECLARATIONS",
+  "enabled_as_established_premises": false,
+  "actual_application": "OPEN",
+  "scientific_promotion": false,
+  "reviewer_controlled_status_changed": false,
+  "nodes": [
+    {
+      "id": "HOM:MODEL",
+      "kind": "FINITE_MODEL",
+      "statement": "Fix m>=1 and state (f_1,...,f_m,z) in {0,1}^{m+1}, initially all zero. In both machines A_i sets f_i=1 and leaves other coordinates fixed. In the coupled machine C flips z iff all m flags equal1; comparator N has C=id. Full state is observed after each admitted action.",
+      "original_source_record_sha256": "c8c89efc50377d99be30177912ffb34ed4de5a69a66cc36865fc2bbb3077ea8f",
+      "source_status_preserved": null,
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH",
+      "scope": "For each integer m>=1, compare two deterministic finite machines on S={0,1}^{m+1} from the same zero reset, with common action alphabet {A_1,...,A_m,C} and full-state readout after each operation. Only those actions, that reset and discrete operation boundary times are admitted. Finite model statements do not establish actual physical realization.",
+      "proof_location": "RESEARCH_NOTE.md, Construction and theorem / Countercontrols"
+    },
+    {
+      "id": "HOM:SHORT_EQ",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "For every m>=1 and every word over {A_1,...,A_m,C} of length at most m, the two HOM:MODEL machines from zero reset have identical full-state traces at every prefix, including the empty prefix.",
+      "original_source_record_sha256": "e3c19c7cc646052976665d66db741959e04cf93d9182206f656a19ecb93817ab",
+      "source_status_preserved": null,
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH",
+      "scope": "For each integer m>=1, compare two deterministic finite machines on S={0,1}^{m+1} from the same zero reset, with common action alphabet {A_1,...,A_m,C} and full-state readout after each operation. Only those actions, that reset and discrete operation boundary times are admitted. Finite model statements do not establish actual physical realization.",
+      "proof_location": "RESEARCH_NOTE.md, Construction and theorem / Countercontrols"
+    },
+    {
+      "id": "HOM:DEEP_WITNESS",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "For every m>=1, the word A_1,...,A_m,C of length m+1 yields z=1 in the coupled machine and z=0 in N. No shorter word separates the machines under the same zero-reset full-state contract.",
+      "original_source_record_sha256": "d4032c8c19266786700c1307cebedb6890710503b8430403c716aa6fbad60ae5",
+      "source_status_preserved": null,
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH",
+      "scope": "For each integer m>=1, compare two deterministic finite machines on S={0,1}^{m+1} from the same zero reset, with common action alphabet {A_1,...,A_m,C} and full-state readout after each operation. Only those actions, that reset and discrete operation boundary times are admitted. Finite model statements do not establish actual physical realization.",
+      "proof_location": "RESEARCH_NOTE.md, Construction and theorem / Countercontrols"
+    },
+    {
+      "id": "HOM:BOUNDARY",
+      "kind": "COUNTEREXAMPLE_LIMIT",
+      "statement": "Presetting all flags to1 changes the reset contract and lets C separate in one action. Testing every state/transition under justified finite-state bounds is a different information class. Commutation alone does not imply independent-product factorization. The theorem concerns no continuous-time or unrestricted intervention claim.",
+      "original_source_record_sha256": "780b876b81b8a879bbad09985e43345e3f9d20c7cabd5a5fa8798f4b55372c1f",
+      "source_status_preserved": null,
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH",
+      "scope": "For each integer m>=1, compare two deterministic finite machines on S={0,1}^{m+1} from the same zero reset, with common action alphabet {A_1,...,A_m,C} and full-state readout after each operation. Only those actions, that reset and discrete operation boundary times are admitted. Finite model statements do not establish actual physical realization.",
+      "proof_location": "RESEARCH_NOTE.md, Construction and theorem / Countercontrols"
+    },
+    {
+      "id": "HOM:EXPERIENCE_GUARD",
+      "kind": "OPEN_BRIDGE",
+      "statement": "Actual tokenhood, a complete constitutive signature and a comparison-preserving physical realization are independent OPEN premises. The finite construction neither assigns named phenomenal content nor introduces an experience gate, subject count or richness measure; any continuing independently actual local token retains the inherited U1/P3 boundary.",
+      "original_source_record_sha256": "c7227e6d9a08387fc45e290f910ab0e450395bb4575820b30410bc7f5bc7e078",
+      "source_status_preserved": null,
+      "actual_premises_discharged": false,
+      "enabled_as_established_premise": false,
+      "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH",
+      "scope": "For each integer m>=1, compare two deterministic finite machines on S={0,1}^{m+1} from the same zero reset, with common action alphabet {A_1,...,A_m,C} and full-state readout after each operation. Only those actions, that reset and discrete operation boundary times are admitted. Finite model statements do not establish actual physical realization.",
+      "proof_location": "RESEARCH_NOTE.md, Construction and theorem / Countercontrols"
+    }
+  ]
+}

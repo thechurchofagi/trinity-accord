@@ -1,0 +1,182 @@
+{
+  "schema": "uct-research-run-receipt/1.0",
+  "research_id": "R188-CER-20261009",
+  "result_version": "CER-RESULT-v0.1.0",
+  "map_release": "UCT-MAP-v1.1.2",
+  "date": "2026-10-09",
+  "exact_run": {
+    "research_id": "R188-CER-20261009",
+    "version": "CER-RESULT-v0.1.0",
+    "status": "ALL_CHECKS_PASSED",
+    "scope": "exact finite probability and admissible classical protocol models",
+    "not_evidence_of": "human/AI experience or physical causal closure",
+    "record_count": 51,
+    "enumerated_candidate_tables": 38013,
+    "python": "3.12.14",
+    "elapsed_seconds": 0.239,
+    "code_sha256": "8245d18ce337d152f46ceb0d0c376abb4e51ca5d67b8bbf7998bfe88fbc265f8"
+  },
+  "process_run": {
+    "research_id": "R188-CER-20261009",
+    "version": "CER-RESULT-v0.1.0",
+    "status": "PASS",
+    "implementation": "two fresh spawned Python processes per finite case; explicit directional pipes",
+    "interpretation": "executed reference policies over every common external (T,J) input",
+    "not_certified": [
+      "OS-level isolation",
+      "complete physical organization",
+      "biological latency",
+      "phenomenal experience"
+    ],
+    "trial_count": 126,
+    "worker_process_count": 252,
+    "python": "3.12.14",
+    "elapsed_seconds": 8.419,
+    "code_sha256": "49844d4134d68b2ee75c7b7c22d95ad424364dee57ddd64710d2214cd3c53b47",
+    "summary": [
+      {
+        "graph": "bipartite",
+        "mode": "no_feedback",
+        "correct": 18,
+        "trials": 18,
+        "accuracy": "1"
+      },
+      {
+        "graph": "bipartite",
+        "mode": "timely_feedback",
+        "correct": 18,
+        "trials": 18,
+        "accuracy": "1"
+      },
+      {
+        "graph": "bipartite",
+        "mode": "late_feedback",
+        "correct": 18,
+        "trials": 18,
+        "accuracy": "1"
+      },
+      {
+        "graph": "prism",
+        "mode": "no_feedback",
+        "correct": 16,
+        "trials": 18,
+        "accuracy": "8/9"
+      },
+      {
+        "graph": "prism",
+        "mode": "timely_feedback",
+        "correct": 18,
+        "trials": 18,
+        "accuracy": "1"
+      },
+      {
+        "graph": "prism",
+        "mode": "late_feedback",
+        "correct": 16,
+        "trials": 18,
+        "accuracy": "8/9"
+      },
+      {
+        "graph": "prism",
+        "mode": "three_symbol",
+        "correct": 18,
+        "trials": 18,
+        "accuracy": "1"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "RESEARCH_NOTE.md",
+      "bytes": 40732,
+      "sha256": "a3a8578005bf24e38dc62b9b3a5ebba0364635e63266fc8b33ccf89e243f2046"
+    },
+    {
+      "path": "MAP_EXTENSION.json",
+      "bytes": 33692,
+      "sha256": "66c047490121ea27e668c89008936806ad15a92dbab15c8115e99dd421739be6"
+    },
+    {
+      "path": "check_encoder_access.py",
+      "bytes": 8826,
+      "sha256": "8245d18ce337d152f46ceb0d0c376abb4e51ca5d67b8bbf7998bfe88fbc265f8"
+    },
+    {
+      "path": "EXACT_RESULTS.json",
+      "bytes": 18065,
+      "sha256": "67414cb323922a99bfe949bb9e6e8ec256c04ed69942b8f5bc3834d180a53a59"
+    },
+    {
+      "path": "run_process_reference.py",
+      "bytes": 5611,
+      "sha256": "49844d4134d68b2ee75c7b7c22d95ad424364dee57ddd64710d2214cd3c53b47"
+    },
+    {
+      "path": "PROCESS_RESULTS.json",
+      "bytes": 125749,
+      "sha256": "165d0d152f035801e8c09c3fff5aa72d7be26aff07e679a74cfd131ae44611c4"
+    },
+    {
+      "path": "INDEPENDENT_PROTOCOL_REVIEW.md",
+      "bytes": 9637,
+      "sha256": "69711bc84e3da44ba3a89f9ebe0087b23978edd6d012da6caaefda4c6c166719"
+    },
+    {
+      "path": "REVIEW_RESPONSE.md",
+      "bytes": 8475,
+      "sha256": "d0333ca2cde78a342d3520186f98020d09188849fb4a737f87f54ad209266ae4"
+    },
+    {
+      "path": "initial_verification/check_encoder_access.py",
+      "bytes": 8230,
+      "sha256": "04c2049adccf6df7b5426ba40aff174f0cc99f01749071a4518400e1959c0354"
+    },
+    {
+      "path": "initial_verification/EXACT_RESULTS.json",
+      "bytes": 17469,
+      "sha256": "8f063a43a05b69b18117488b8b73100acf42a82ef70c0b97f947c8c95c7f9c11"
+    },
+    {
+      "path": "PRIOR_ART_AND_REUSE.md",
+      "bytes": 12356,
+      "sha256": "548236ca01ed96ddf1027ebe7e437ca1351c2c6f0962e70d426f58483eb75a78"
+    },
+    {
+      "path": "CLAIM_REUSE_LEDGER.json",
+      "bytes": 21179,
+      "sha256": "cd56eb28d88833a6a78b288f095188b85207f72242dc6788adef8d07c13c3397"
+    },
+    {
+      "path": "When_Behavioral_Recovery_Conceals_Organizational_Change_v0.1.0.pdf",
+      "bytes": 114605,
+      "sha256": "296110764ace968ced3086312614f7b6e4f068a0c631b8b64ba813a029441bc0"
+    },
+    {
+      "path": "PDF_QA_RECEIPT.json",
+      "bytes": 976,
+      "sha256": "ec6420df1fa4ef51a2dedf7faf08241aa48c74964186e5002096f5927b1cc50f"
+    },
+    {
+      "path": "build_paper.py",
+      "bytes": 4893,
+      "sha256": "f1b9152e3dd492af174056fe2605a6977f2f13d6d1f9ad95f2981e560c977eec"
+    },
+    {
+      "path": "HANDOFF_ZH.md",
+      "bytes": 9755,
+      "sha256": "221f51b94b5fff13b533d3e80c044043a911b6f34c3e396dd111f2799bf2a6bd"
+    },
+    {
+      "path": "WORK_LOG.md",
+      "bytes": 13376,
+      "sha256": "e7588fdf6a7b73062e68ae9d6301000f7dc28fad3bc801a11683277fd08e1241"
+    }
+  ],
+  "full_map_review": "../../versions/UCT-MAP-v1.1.2/audit/WHOLE_MAP_SEMANTIC_REVIEW_REPORT.md",
+  "assembly_checks": "../../versions/UCT-MAP-v1.1.2/BUILD_RECEIPT.json",
+  "full_map_review_scope": "1608 effective contract decisions; retained historical proofs; not independent re-proof of all history or empirical UCT validation.",
+  "actual_and_named_phenomenal_application": "OPEN",
+  "external_historical_priority": "UNVERIFIED",
+  "publication_action": "NONE",
+  "persistence_receipt_written_after_save": "../../persistence/UCT-MAP-v1.1.2_RECEIPT.json"
+}

@@ -1,0 +1,416 @@
+{
+  "release": "UCT-MAP-v1.1.2",
+  "scope": "Exact reviewed effective map, ledger, selected read sources, governance snapshot, review and reconstruction; no claim to all historical source papers.",
+  "files": [
+    {
+      "path": "AUDIT_REPORT.md",
+      "bytes": 2457,
+      "sha256": "faa027eba1ef5a3567a5469e988d4e331e4ff6805738278344fe3d92e6920da5"
+    },
+    {
+      "path": "BUILD_RECEIPT.json",
+      "bytes": 11030,
+      "sha256": "72ca0656a9e874c863eef1992b4a2f7c59eaf3c513cd21523a34bff583a57076"
+    },
+    {
+      "path": "RELEASE.json",
+      "bytes": 10161,
+      "sha256": "7232f91a872d1244211ffd5fe95d2acba35dd282d6528a26412d22cd40f89bd6"
+    },
+    {
+      "path": "REVIEW_LEDGER.csv",
+      "bytes": 294981,
+      "sha256": "15f1cb55d54fa6703634cee0b82a7c99dc9aed52f8d4a10c18f7dd103d077753"
+    },
+    {
+      "path": "REVIEW_LEDGER.json",
+      "bytes": 7409443,
+      "sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687"
+    },
+    {
+      "path": "SOURCE_LOCATIONS.json",
+      "bytes": 19062,
+      "sha256": "4a8407f630147a4f9227088931fa90128cb8277d09e03bfede141410bff14abd"
+    },
+    {
+      "path": "UCT_EFFECTIVE_GRAPH.json",
+      "bytes": 3773145,
+      "sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612"
+    },
+    {
+      "path": "UCT_FORMAL_MAP_COMPLETE.md",
+      "bytes": 3580261,
+      "sha256": "79273fc6840096f5941c324d3e06419b4eb015f4d4c301f18ab4e9f59cb456ad"
+    },
+    {
+      "path": "audit/ASSEMBLED_VALIDATION.json",
+      "bytes": 11191,
+      "sha256": "482b1765d9a4d84bcc2f6293ed258a70db473bac9c4ebc9eacf1120cca0d40cc"
+    },
+    {
+      "path": "audit/ASSEMBLED_VALIDATION.md",
+      "bytes": 2678,
+      "sha256": "43b8617a06b158b9346d9451594637a0a161d411884d47299586126ee1dbd1b3"
+    },
+    {
+      "path": "audit/ASSEMBLY_SPEC.json",
+      "bytes": 220058,
+      "sha256": "9beb648869f93413f0c3ce0ac4a7bcc56c6f32b70c4a812ace6f205478901f3c"
+    },
+    {
+      "path": "audit/ASSEMBLY_SPEC.sha256",
+      "bytes": 85,
+      "sha256": "25f2c497eda0976170134180147f46846bb473cff19d8580c9788344192bb6b7"
+    },
+    {
+      "path": "audit/BASELINE_MODULE_DESCRIPTOR.json",
+      "bytes": 9200,
+      "sha256": "5825fbfaf722893ea89086e6142af7cac7942f6ae6bc55ce4779e13aa3a8cd45"
+    },
+    {
+      "path": "audit/BASELINE_PER_ID_SEMANTIC_REVIEW.json",
+      "bytes": 6093298,
+      "sha256": "092e97142d07d15242a48ced5e641b920b36cdac57978cafb69bd314937b4df4"
+    },
+    {
+      "path": "audit/FAMILY_COMPATIBILITY_ASSESSMENTS.json",
+      "bytes": 23568,
+      "sha256": "2093aba0fc810e19bee28567196186d795d8b022a10d5ed49b42e68a51467895"
+    },
+    {
+      "path": "audit/NORMALIZATION_UI_CM.json",
+      "bytes": 736565,
+      "sha256": "faf6f4af7b3393769aef0276b6058c64a59c5488629f4a64bc877c01d0c2a8f3"
+    },
+    {
+      "path": "audit/R173_EFFECTIVE_CORRECTION_PATCH.json",
+      "bytes": 3574,
+      "sha256": "fadc0c83c2e6fc4e6bf3274a020f5ee5f1cfbf66d2b2948874e51df90f28f78d"
+    },
+    {
+      "path": "audit/R185_HOM_R187_PER_ID_REVIEW.json",
+      "bytes": 118064,
+      "sha256": "7e29b2d2c53e4c83b85a378375a037caa1c2dabe237a73a42fdc6b5805fa2169"
+    },
+    {
+      "path": "audit/R188_PER_ID_REVIEW.json",
+      "bytes": 79121,
+      "sha256": "5ede2a95536c7d2b896398602fff564a3012c70ff00075ad323e424dad7028f1"
+    },
+    {
+      "path": "audit/UI_CM_REVIEW.json",
+      "bytes": 314895,
+      "sha256": "36f987031073ba02a1ee3096732fef252b853360c00de595afb8b7ec7ec2fc95"
+    },
+    {
+      "path": "audit/UI_CM_REVIEW_REPORT.md",
+      "bytes": 12347,
+      "sha256": "effbb526da3d614a6ac53745917c45e844fe52d9571926f536d58de13c5020c1"
+    },
+    {
+      "path": "audit/WHOLE_MAP_SEMANTIC_REVIEW_REPORT.md",
+      "bytes": 20165,
+      "sha256": "fbcd8d25f9d545caa931b9d853ae2b60c53d91c05db13d9334ed0a4e407c898d"
+    },
+    {
+      "path": "audit/provenance/source_materialization_receipt.json",
+      "bytes": 7070,
+      "sha256": "b369db3befce802fc5d94dc2195a71c47496ae50bc9036373b62bd87db8c2cb0"
+    },
+    {
+      "path": "audit/serialization_sources/build_assembly_spec.py",
+      "bytes": 9534,
+      "sha256": "44bf1c7689d23e5f9f8c062894277d92e884e92486e3823bb5727df4b70caca7"
+    },
+    {
+      "path": "audit/serialization_sources/build_semantic_audit.py",
+      "bytes": 44616,
+      "sha256": "ec88286b8576cd236a9681386f76c4d488987813153821243699333b162cc2d5"
+    },
+    {
+      "path": "audit/serialization_sources/build_ui_cm_review.py",
+      "bytes": 35654,
+      "sha256": "2d411b1031b791c322181ffd52ec41192db6da34091c937b4fc2bff8e1811099"
+    },
+    {
+      "path": "audit/serialization_sources/normalize_pending_review.py",
+      "bytes": 26693,
+      "sha256": "ae885f8a413eea4419b7cc535568c03fea121fa0329cbd9c0536c6347fbc5fbf"
+    },
+    {
+      "path": "audit/serialization_sources/normalize_ui_cm.py",
+      "bytes": 49617,
+      "sha256": "a50c3e65e94375699a7adb4f9b62d0cc04aa3db0e3f72aff9fcae30fe3e8f7c3"
+    },
+    {
+      "path": "audit/serialization_sources/review_r188.py",
+      "bytes": 18944,
+      "sha256": "4da21256388a112720fab9dd8b3f5641bf6c48e88ae82d12d5f95a1422357b36"
+    },
+    {
+      "path": "audit/serialization_sources/rule_binding_dictionary.json",
+      "bytes": 18460,
+      "sha256": "5686c7751b5617ca68898dc267868db408983429e25cd09ed2955c9c251decb7"
+    },
+    {
+      "path": "audit/serialization_sources/scope_dictionary.json",
+      "bytes": 84033,
+      "sha256": "40df16b5499f7c47b32497ff584faf06d79b81716018d3a51b94005785210be0"
+    },
+    {
+      "path": "build_release.py",
+      "bytes": 10668,
+      "sha256": "1cade184b20e2816374f5ef721e2daf0cbd84b05488e0132f849df8f58780614"
+    },
+    {
+      "path": "history/CHANGELOG.md",
+      "bytes": 2764,
+      "sha256": "9414490f6036d7672285633e32e16ea500f65593c1ea4e79b35aafdd96c0f8fb"
+    },
+    {
+      "path": "history/CURRENT_STATE.json",
+      "bytes": 2276,
+      "sha256": "fe54b5f94c10f50f1b311d3763c7e5b1701da5920506f8fb112391df78aaba2e"
+    },
+    {
+      "path": "history/HANDOFF.md",
+      "bytes": 8059,
+      "sha256": "35546c4137854d993ba912424c1ad16a87fcb0f00fb4c4fae25df94ab6cd331b"
+    },
+    {
+      "path": "history/MASTER_INDEX.md",
+      "bytes": 5252,
+      "sha256": "3a61e218c131f01311f913426648c21480b1c5c3111c4f6785463452d06c808f"
+    },
+    {
+      "path": "history/MEMORY.md",
+      "bytes": 117242,
+      "sha256": "b070fdebd4dc6c73a59defcf38624cdba0ece6cfaa2a53aa12625ba31ef18803"
+    },
+    {
+      "path": "history/RESEARCH_REGISTRY.json",
+      "bytes": 3851,
+      "sha256": "3e1f4490f8d39691e1eba1db4ce72ac01847580d6193dd180e83ffa2bafec427"
+    },
+    {
+      "path": "history/RESEARCH_SESSION_LOG_INDEX.json",
+      "bytes": 644,
+      "sha256": "db8aef69f33723c0b4b33a8a8b608671e763eb7ca93e1ea229586fff3ff9ad2b"
+    },
+    {
+      "path": "history/UCT_FORMAL_AUDIT.md",
+      "bytes": 587,
+      "sha256": "f2fd9c728bf722809fdf9209eb704ef930461cabc61627714d28c1f5989e4968"
+    },
+    {
+      "path": "history/UCT_FORMAL_GRAPH_MODULES.json",
+      "bytes": 9200,
+      "sha256": "5825fbfaf722893ea89086e6142af7cac7942f6ae6bc55ce4779e13aa3a8cd45"
+    },
+    {
+      "path": "history/UCT_FORMAL_MAP.md",
+      "bytes": 696,
+      "sha256": "b7c840c11e9c30e33d86ddf4e20d0265b7f7d740c150ff8284e6c268b779f744"
+    },
+    {
+      "path": "history/VERSIONING_POLICY.md",
+      "bytes": 2351,
+      "sha256": "7eae01107a10bfd006df3fef08b07618f1865470f3cf544871182728c0b4c689"
+    },
+    {
+      "path": "inputs/baseline/REVIEW_LEDGER.json",
+      "bytes": 2038487,
+      "sha256": "6e46361436fa64081bb7d961a491dab241f77948e3bd7fe01c17b773436b2cd3"
+    },
+    {
+      "path": "inputs/baseline/UCT_EFFECTIVE_GRAPH.json",
+      "bytes": 3102831,
+      "sha256": "c7cb8feafa905518bf485019fd7b2e463d70682a563993eb5856678ccfe0ba66"
+    },
+    {
+      "path": "normalized/CM20261009.json",
+      "bytes": 251855,
+      "sha256": "188fdbe90cff55d6b867eccb40b2b8be1bb83e973ea74f05961d209b44f4fed3"
+    },
+    {
+      "path": "normalized/HOM.json",
+      "bytes": 10587,
+      "sha256": "1bbaa2b42cde1fa4c1cfe74664e130ec8b1da1856427036037b92a099ee32184"
+    },
+    {
+      "path": "normalized/R185.json",
+      "bytes": 20344,
+      "sha256": "80fd222ab13f306a9cccd885abe69c2a3d9ade4cc7ffc139886a97c045cfc2b6"
+    },
+    {
+      "path": "normalized/R187.json",
+      "bytes": 39296,
+      "sha256": "90f1d28ac0318eb35892ae59a1b57a850583e679f29afb30bd0cc55ade046c92"
+    },
+    {
+      "path": "normalized/R188.json",
+      "bytes": 47650,
+      "sha256": "eb9b44bbe25cd66ef019abb686653a56a71dab245bd7877fa6b003d5212efe85"
+    },
+    {
+      "path": "normalized/UI20261009.json",
+      "bytes": 304486,
+      "sha256": "6f90e069cff478e7211697cf232f4c6edcf15119597dd24011228baec860f81f"
+    },
+    {
+      "path": "restore_capsule.py",
+      "bytes": 2033,
+      "sha256": "ebb6335f5c0cf32f82b321ca9d7a5799d164bd1dd1b163bb7eec66954acdf0e6"
+    },
+    {
+      "path": "sources/previous_release/RESEARCH_NOTE.md",
+      "bytes": 16733,
+      "sha256": "10d831e702a89d190864c061f4122953c4c20a7aa7e1b9a59563599cd926b14a"
+    },
+    {
+      "path": "sources/previous_release/pending_UI/MAP_EXTENSION.json",
+      "bytes": 31004,
+      "sha256": "9660da2f8e3bee14e1ebd2804fbdf2b2fced019ed1053125d3a4898ae0f5b628"
+    },
+    {
+      "path": "sources/previous_release/pending_UI/README_ZH.md",
+      "bytes": 4774,
+      "sha256": "891a9a0a471b74f8d01b9408e133b3b8c69cab605de785f541f15b918339abfd"
+    },
+    {
+      "path": "sources/previous_release/pending_UI/RESEARCH_NOTE.md",
+      "bytes": 20981,
+      "sha256": "dfc1d1ea5a798427a2f0d0c016f229e6c5a20645ded661228df82e32b5c18627"
+    },
+    {
+      "path": "sources/previous_release/pending_UI/RUN_RECEIPT.json",
+      "bytes": 1886,
+      "sha256": "a73bff0ab709f4b4a85b5df2d62df9c4173fe28fb8afc22ab89dfad1938e19fa"
+    },
+    {
+      "path": "sources/previous_release/pending_UI/check_future_observability.py",
+      "bytes": 2583,
+      "sha256": "4f932d15b367285e49c42e9b60f1dd429f0de8fab3a196909cf00edfc35622d2"
+    },
+    {
+      "path": "sources/previous_release/pending_UI/check_update_interference.py",
+      "bytes": 7486,
+      "sha256": "7235ed940a57e407f25dba1205f7dc426904781bae5f9e2027239bdea37140b4"
+    },
+    {
+      "path": "sources/previous_release/v11_source/RESEARCH_NOTE.md",
+      "bytes": 25413,
+      "sha256": "bc88d3ee9768182eb49bb868837af79afafe8eb47c83f168a4d30808dc5df3c1"
+    },
+    {
+      "path": "sources/repository/AGENTS.md",
+      "bytes": 82643,
+      "sha256": "cc153a5289b443ceb31a71e390bc18591ede57c98d74e401dce106f5cfebde9e"
+    },
+    {
+      "path": "sources/repository/FORMAL_MAP_REVIEW_POLICY.json",
+      "bytes": 4800,
+      "sha256": "b56d44e5ffff033b10573478866b111677069625dcea576490788e22c3c814b9"
+    },
+    {
+      "path": "sources/repository/MEMORY.md",
+      "bytes": 117242,
+      "sha256": "b070fdebd4dc6c73a59defcf38624cdba0ece6cfaa2a53aa12625ba31ef18803"
+    },
+    {
+      "path": "sources/repository/RESEARCH_MASTER_GUIDE.md",
+      "bytes": 22250,
+      "sha256": "7c09c593f712e2d9120c7ad54f10ace75a0270992469d6b7abaedc45b74e6abb"
+    },
+    {
+      "path": "sources/repository/REVIEW_SUPERVISION.md",
+      "bytes": 72869,
+      "sha256": "d8623d6ae9d22752e0ba0c51fb96ce376321d1ff0614f86e63be7ac5510c1040"
+    },
+    {
+      "path": "sources/repository/records/CM20261009_Compensation_Observability/MAP_EXTENSION.json",
+      "bytes": 9278,
+      "sha256": "09932a947bff198b4058025084ad0bb8b6ab86d7854e1aae65a525306465f1a8"
+    },
+    {
+      "path": "sources/repository/records/CM20261009_Compensation_Observability/RESEARCH_CHECKPOINT.md",
+      "bytes": 10742,
+      "sha256": "b3c03e89be2d216b7209ad1c11ab58819a404bd68efd0a4e5db3e1f210e59328"
+    },
+    {
+      "path": "sources/repository/records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "bytes": 142624,
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4"
+    },
+    {
+      "path": "sources/repository/records/R128_Unified_Formal_Map_Audit_20261006/sources/B_UCT_II_v1_1.md",
+      "bytes": 59958,
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b"
+    },
+    {
+      "path": "sources/repository/records/R128_Unified_Formal_Map_Audit_20261006/sources/C_UCT_III_v1_0.md",
+      "bytes": 94626,
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2"
+    },
+    {
+      "path": "sources/repository/records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md",
+      "bytes": 42068,
+      "sha256": "694856862f75834024cd3e71ffdba95a6be4601c2832285902f7905907e3039c"
+    },
+    {
+      "path": "sources/repository/records/R185_Cross_Scale_Relation_Membership_20261008/Cross_Scale_Relation_Membership_v0_1.md",
+      "bytes": 15139,
+      "sha256": "cf8837edc3227d4d9759bf0a138ddc5080d03a8ae60f68f5c7e6ef0797709bbb"
+    },
+    {
+      "path": "sources/repository/records/R185_Cross_Scale_Relation_Membership_20261008/MAP_EXTENSION.json",
+      "bytes": 9469,
+      "sha256": "6583a63c819a97dd53e9f95b0d0757a84cf0f36c0e3e7367335ec71dceaf622f"
+    },
+    {
+      "path": "sources/repository/records/R186_Higher_Order_Intervention_Masking_20261009/MAP_EXTENSION.json",
+      "bytes": 1962,
+      "sha256": "38031ffcaca58ce3e8ad4d640f5ec62085e458f970cc78a430b20459930d374e"
+    },
+    {
+      "path": "sources/repository/records/R186_Higher_Order_Intervention_Masking_20261009/RESEARCH_NOTE.md",
+      "bytes": 6094,
+      "sha256": "cd44aaa4f892d6522e42fd7de6a1c1b185ba81f237eddbf52a459c203878f257"
+    },
+    {
+      "path": "sources/repository/records/R187_Causal_Multiplicity_20261009/MAP_EXTENSION.json",
+      "bytes": 19917,
+      "sha256": "d77f0de22466195eab88755de7d3ccb68191f283af915cfbee0449441e7af130"
+    },
+    {
+      "path": "sources/repository/records/R187_Causal_Multiplicity_20261009/RESEARCH_NOTE.md",
+      "bytes": 18512,
+      "sha256": "950735be156e7898a39b55cb7fe2f866d3f8c165a58ad29d2839d190ba8a644b"
+    },
+    {
+      "path": "sources/repository/records/R188_Encoder_Access_and_Recovery_20261009/EXACT_RESULTS.json",
+      "bytes": 18065,
+      "sha256": "67414cb323922a99bfe949bb9e6e8ec256c04ed69942b8f5bc3834d180a53a59"
+    },
+    {
+      "path": "sources/repository/records/R188_Encoder_Access_and_Recovery_20261009/INDEPENDENT_PROTOCOL_REVIEW.md",
+      "bytes": 9637,
+      "sha256": "69711bc84e3da44ba3a89f9ebe0087b23978edd6d012da6caaefda4c6c166719"
+    },
+    {
+      "path": "sources/repository/records/R188_Encoder_Access_and_Recovery_20261009/MAP_EXTENSION.json",
+      "bytes": 33692,
+      "sha256": "66c047490121ea27e668c89008936806ad15a92dbab15c8115e99dd421739be6"
+    },
+    {
+      "path": "sources/repository/records/R188_Encoder_Access_and_Recovery_20261009/PROCESS_RESULTS.json",
+      "bytes": 125749,
+      "sha256": "165d0d152f035801e8c09c3fff5aa72d7be26aff07e679a74cfd131ae44611c4"
+    },
+    {
+      "path": "sources/repository/records/R188_Encoder_Access_and_Recovery_20261009/RESEARCH_NOTE.md",
+      "bytes": 40732,
+      "sha256": "a3a8578005bf24e38dc62b9b3a5ebba0364635e63266fc8b33ccf89e243f2046"
+    }
+  ]
+}

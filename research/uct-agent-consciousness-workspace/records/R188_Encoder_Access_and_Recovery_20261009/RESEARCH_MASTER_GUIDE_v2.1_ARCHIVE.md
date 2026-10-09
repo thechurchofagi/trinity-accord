@@ -144,4 +144,3 @@ UCT I v1.2 的 C1 是普遍的、逐实际过程的结构—体验同一公设�
 - [TA25](records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md)，DOI 10.5281/zenodo.23206492。
 
 本次任务是核对基础并固化研究规程，不是完成全图的全量语义证明。大 JSON 图的完整可处理读取未完成，不能据部分源文声称所有节点均已审查。实际读取及限制见 [政策采用记录](records/POLICY20261008_Whole_Map_and_Persistent_Experience/ADOPTION_RECORD.md)。本节说明本次操作范围，不降低此后每实质步骤全图检查的要求。
-

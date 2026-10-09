@@ -1,0 +1,85 @@
+{
+  "release": "UCT-MAP-v1.1.1",
+  "identity_rule": "Stable research IDs are distinct from map versions and R round labels. IE is not EI. TH includes the RB submodule.",
+  "parent_registry": "versions/UCT-MAP-v1.1.1/history/RESEARCH_REGISTRY.json",
+  "inherited_results": [
+    "CORE20261008",
+    "EI20261008",
+    "R183",
+    "OO20261008",
+    "RU20261008",
+    "R184",
+    "RC20261008",
+    "IE20261008"
+  ],
+  "inheritance_rule": "Resolve exact prior records through parent_registry; preserve their first_map_release, source identity and actual-application OPEN state. Last compatibility review for these inherited formal items is v1.1.0.",
+  "results": [
+    {
+      "research_id": "TH20261009",
+      "submodule_id": "RB20261009",
+      "title": "Memory Across Changing Support: Recoverability, Timely Access, and the Cost of Omitted Inputs",
+      "result_version": "0.2.0",
+      "first_map_release": "UCT-MAP-v1.1.0",
+      "last_reviewed_map_release": "UCT-MAP-v1.1.0",
+      "source_kind": "verified_capsule",
+      "release": "versions/UCT-MAP-v1.1.0/RELEASE.json",
+      "manuscript_member": "RESEARCH_NOTE.md",
+      "module_member": "MAP_EXTENSION.json",
+      "handoff": "records/TH20261009_Temporal_Handoff/README.md",
+      "scientific_delta": "Temporal handoff plus sharp top-K omitted-input budget, uniform residual/deadline and TV-robustness applications; explicit timing, wrong-reader, correlated-key and target controls.",
+      "status": "REVIEWED_CONDITIONAL_SCHEMAS_WITH_OPEN_APPLICATIONS",
+      "actual_application": "OPEN",
+      "novelty": "CLASSICAL_ANTECEDENTS_CREDITED_PRIORITY_UNVERIFIED",
+      "publication": "WORKING_MANUSCRIPT_NOT_PUBLISHED"
+    },
+    {
+      "research_id": "OL20261009",
+      "title": "Observable Locality: Finite-Horizon Intervention Imitation and Calibrated Structural Discrimination",
+      "result_version": "0.1.0",
+      "first_map_release": "UCT-MAP-v1.1.1",
+      "last_reviewed_map_release": "UCT-MAP-v1.1.1",
+      "source": "records/OL20261009_Observable_Locality/RESEARCH_NOTE.md",
+      "module": "records/OL20261009_Observable_Locality/MAP_EXTENSION.json",
+      "review": "versions/UCT-MAP-v1.1.1/AUDIT_REPORT.md",
+      "work_log": "records/OL20261009_Observable_Locality/WORK_LOG.md",
+      "handoff": "records/OL20261009_Observable_Locality/HANDOFF_ZH.md",
+      "actual_application": "OPEN",
+      "publication": "NOT_PUBLISHED",
+      "novelty": "SCOPED_METHOD_SYNTHESIS_PRIORITY_UNVERIFIED",
+      "proof_status": "CONDITIONAL_MATHEMATICAL"
+    }
+  ],
+  "pending_checkpoints": [
+    {
+      "research_id": "R185",
+      "source": "records/R185_Cross_Scale_Relation_Membership_20261008/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT",
+      "enabled_as_established_premises": false
+    },
+    {
+      "research_id": "AC20261009",
+      "source": "records/AC20261009_Action_Calibration/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT",
+      "enabled_as_established_premises": false
+    },
+    {
+      "research_id": "IL20261009",
+      "source": "records/IL20261009_Intervention_Locality/MAP_EXTENSION.json",
+      "status": "PENDING_MAP",
+      "enabled_as_established_premises": false
+    },
+    {
+      "research_id": "R186-HOM-20261009",
+      "source": "records/R186_Higher_Order_Intervention_Masking_20261009/MAP_EXTENSION.json",
+      "status": "PENDING_MAP",
+      "enabled_as_established_premises": false
+    },
+    {
+      "research_id": "UI20261009",
+      "source": "versions/UCT-MAP-v1.1.1/UCT_MAP_v1.1.1_Capsule.tar.xz",
+      "status": "PENDING_MAP",
+      "enabled_as_established_premises": false
+    }
+  ],
+  "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive."
+}

@@ -1,0 +1,49 @@
+{
+  "audit_id": "R188_R173_EFFECTIVE_SCOPE_REPAIR",
+  "classification": "CORRECTION_OF_EFFECTIVE_READOUT_NOT_NEW_SCIENTIFIC_RESULT",
+  "expected_baseline_file_sha256": "c7cb8feafa905518bf485019fd7b2e463d70682a563993eb5856678ccfe0ba66",
+  "operations": [
+    {
+      "collection": "nodes",
+      "id": "R173:THREE_TARGET_SEPARATION",
+      "expected_record_sha256": "f0920ec0d009c109b323c6a86b1e4649ef3b13f18a42bf3e6c6ca027650751ba",
+      "preserve_original_record_in_correction_history": true,
+      "set": {
+        "statement": "F_O, F_A and F_F remain separately fixed partial semantic targets. The historical eight-row enumeration concerns unconstrained Boolean assignments only and does not establish organizational realizability. Under R175 baseline admission, AgencyLoop implies Avail, so at most six Boolean valuations remain; realizability of all six is OPEN.",
+        "kind": "EFFECTIVE_TARGET_DISTINCTION_WITH_WITHDRAWN_INDEPENDENCE",
+        "scope": "Same declared target domains and R175 baseline-admitted action family. Target distinction does not imply independence, exclusivity, totality, empirical prevalence or a named experiential dissociation. Historical raw Boolean rows are not actual organizational witnesses.",
+        "status": "EFFECTIVE_SCOPE_CORRECTED_SEMANTIC_REALIZATION_OPEN",
+        "proof": "Apply the existing R175 effective target-separation correction. Baseline membership gives AgencyLoop=>Avail and excludes the two G=1,A=0 rows; no construction of all six remaining semantic models is supplied.",
+        "counterexamples_and_limits": "Neither eight-way organizational independence nor all-six semantic realizability is established. Actual grounding, B_min and independently fixed F_O/F_A/F_F interpretations remain OPEN.",
+        "effective_reading_overrides_historical_status": true,
+        "effective_override_source": "R188 map audit; enforces existing R175:BASELINE_ADMITTED_ACTION_DOMAIN, R175:SIX_ROW_EVENT_MODELS and R175:R173_EFFECTIVE_TARGET_SEPARATION.",
+        "historical_statement_preserved": "Avail, AgencyLoop and RetBind realize all eight Boolean combinations in the abstract comparison class; F_O, F_A and F_F remain separate partial semantic targets.",
+        "scientific_promotion": false
+      }
+    },
+    {
+      "collection": "context_links",
+      "id": "BASE:CTX:143",
+      "expected_record_sha256": "3305a2f74f8a9125d154e67b938ebfe553a92a1b6fc394a7d75096432e0ff1d0",
+      "preserve_original_record_in_correction_history": true,
+      "set": {
+        "relation": "Context only: distinguishes the separately fixed ownership, agency and familiar-history targets under the R175 effective correction; does not assert eight-way organizational independence or all-six semantic realizability.",
+        "deductive": false
+      }
+    }
+  ],
+  "active_rule_descendants_of_raw_node": [],
+  "outgoing_context_ids": [
+    "BASE:CTX:143",
+    "BASE:CTX:169"
+  ],
+  "retain_context_id_unchanged": "BASE:CTX:169",
+  "effective_routes_rederived": [
+    "r175_r173_target_boundary_effective",
+    "r175_r173_history_twin_effective",
+    "r176_present_slice_effective",
+    "r173_retentive_coordinate_transport"
+  ],
+  "rederivation_reason": "The target-boundary route uses the existing R175 corrected target node, not raw R173 independence. The twin and present-slice routes require an explicit admitted twin. Retentive C1 transport uses the grounded history/path contract. All remain valid under their original conditions and no suspended historical route is reactivated.",
+  "reviewer_statuses_changed": false
+}

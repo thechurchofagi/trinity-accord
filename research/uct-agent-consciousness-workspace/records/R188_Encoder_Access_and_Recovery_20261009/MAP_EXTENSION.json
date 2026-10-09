@@ -1,0 +1,491 @@
+{
+  "schema": "uct-additive-research-module/1",
+  "research_id": "R188-CER-20261009",
+  "result_version": "CER-RESULT-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.1",
+  "integration_status": "CANDIDATE_UNTIL_WHOLE_REVIEW",
+  "source_note": "RESEARCH_NOTE.md",
+  "nodes": [
+    {
+      "id": "R188:PROTOCOL",
+      "kind": "MODEL_ASSUMPTION",
+      "statement": "A finite graph of two-candidate contexts has endpoint masses p(t,e)>0 totaling one. Feedback B=g(X) has <=L labels, reply Z=f(T,B) has <=K labels, and guess h(X,B,Z) has no uncounted inputs. w_e=min endpoint joint masses; W=sum w_e.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §3",
+      "novelty": "NEW_APPLICATION",
+      "limits": "The confusion graph is an information-access relation, not anatomical connectivity; no source-count identification.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:RESPONSE_WORD",
+      "kind": "CLASSICAL_RESPONSE_TABLE_LEMMA",
+      "statement": "Every deterministic permitted encoder gives c(t)=(f(t,1),...,f(t,L)) in [K]^L. Identical endpoint words cannot be distinguished; differing words can be distinguished by selecting a differing coordinate.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §4.1",
+      "novelty": "INHERITED_MATHEMATICS_APPLIED",
+      "limits": "Counterfactual response words are not all transmitted during a trial.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:EXACT_SCORE",
+      "kind": "CONDITIONAL_FINITE_ERROR_RESULT",
+      "statement": "The optimal average recovery is S*=1-W+Cut_(K^L)(G,w), where Cut counts the maximum total weight of unequal-colored endpoint pairs. A deterministic protocol attains this value.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §4.1",
+      "novelty": "NEW_APPLICATION_PRIORITY_UNVERIFIED",
+      "limits": "Uses classical coloring/response-table machinery. No claim of first mathematical discovery, unlimited interaction, block coding or actual physical capability.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:COINS",
+      "kind": "CONDITIONAL_RANDOMIZATION_RESULT",
+      "statement": "Independent public and private random tapes do not raise the average optimum: conditioning on all tapes produces deterministic protocols with the same input law.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §4.1",
+      "novelty": "INHERITED_DECISION_ARGUMENT_APPLIED",
+      "limits": "A tape correlated with current T or X is additional side information.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:ZERO_ERROR",
+      "kind": "CLASSICAL_COLORING_COROLLARY",
+      "statement": "For the positive support graph, zero error is feasible iff chi(G)<=K^L. For K>=2 the minimum feedback-label cardinality is max(1,ceil(log_K chi(G))).",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §4.2",
+      "novelty": "INHERITED_MATHEMATICS_APPLIED",
+      "limits": "Feedback labels are not bits; K=1 is handled separately. Not an asymptotic rate theorem.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:COMMON_STIMULUS",
+      "kind": "FINITE_MODEL_DEFINITION",
+      "statement": "For both K3,3 and the triangular prism use the same uniform external (T,J) in [6]x[3]. A fixed internal router returns the incident edge e={T,neighbor_G(T,J)} to the reader, while source receives only T.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §5.1",
+      "novelty": "NEW_APPLICATION",
+      "limits": "The internally induced full joint laws P(T,X) differ; do not claim all information is matched.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:MATCHED_SUMMARIES",
+      "kind": "FINITE_COMPARISON_RESULT",
+      "statement": "Both architectures have six equiprobable targets, nine equiprobable contexts, posterior spectrum (1/2,1/2) in every context, three contexts per target, H(T|X)=1, and identical isolated context-aware one-bit recovery.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §5.1",
+      "novelty": "NEW_APPLICATION",
+      "limits": "Equality of these listed summaries does not imply equality of joint incidence supports.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:GAP",
+      "kind": "EXACT_COUNTEREXAMPLE",
+      "statement": "With K=2,L=1 the bipartite architecture has optimal recovery1 while the prism has8/9: its two disjoint triangles force two monochromatic edges, and a7-edge cut is attained.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §5.2",
+      "novelty": "NEW_APPLICATION_PRIORITY_UNVERIFIED",
+      "limits": "Fixed-prior average ceiling over admissible algorithms; no consciousness fraction or statement each context has accuracy8/9.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:FEEDBACK_REPAIR",
+      "kind": "CONSTRUCTIVE_RESULT",
+      "statement": "With K=2,L=2 both reach1. For the prism use three response words00,01,10 with coloring(0,1,2,1,2,0); reader sends a differing coordinate and source returns that digit. K=3,L=1 also reaches1.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §5.3",
+      "novelty": "NEW_APPLICATION_PRIORITY_UNVERIFIED",
+      "limits": "The reverse route is a real protocol resource; full context, timing, or extra forward signals are not free.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:LATE_FEEDBACK",
+      "kind": "CONDITIONAL_TIMING_RESULT",
+      "statement": "If the source reply is fixed before feedback arrives and no later target-dependent modulation is allowed, feedback cannot improve that scored reply: prism optimum remains8/9 under K=2.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §5.3",
+      "novelty": "NEW_APPLICATION",
+      "limits": "Logical protocol deadline only; no assumed biological delay.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:IDEAL_NOT_INSTALLED",
+      "kind": "NONENTAILMENT_COUNTEREXAMPLE",
+      "statement": "RB top-K=1 is a valid upper bound. Its general sharpness theorem assumes the RB:HELPER access class and does not guarantee attainment for the smaller source-only class; some laws such as K3,3 do attain it source-blind. The prism is an exact counterexample to unconditional achievability transfer.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §6.1",
+      "novelty": "CORRECTION_OF_POTENTIAL_APPLICATION_NOT_OLD_THEOREM",
+      "limits": "R133 already has a general action-cover theorem. This connects that inherited condition to RB sharpness without retracting RB.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:COMPLETE_FAMILY",
+      "kind": "CONDITIONAL_CLOSED_FORM",
+      "statement": "For uniform complete-graph contexts on n>=2 vertices let C=min(n,K^L), n=Cq+r. S*=1-[r(q+1)q+(C-r)q(q-1)]/[2n(n-1)], attained by balanced response-word classes.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §4.3",
+      "novelty": "DERIVED_APPLICATION_PRIORITY_UNVERIFIED",
+      "limits": "Counting corollary of exact score; not new coding theory or asymptotic-rate result.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:EXECUTED_CHECKS",
+      "kind": "FINITE_MATHEMATICAL_EVIDENCE",
+      "statement": "check_encoder_access.py executed exact Fraction checks:51 result records and38013 enumerated candidate tables, including direct complete small interactive protocols, weighted laws, matched graphs, constructive decoders and invalid-access/block controls.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §7",
+      "novelty": "NEW_REPRODUCIBLE_ARTIFACT",
+      "limits": "Finite program checks do not prove the universal theorem; proof is separate.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:PROCESS_REFERENCE",
+      "kind": "EXECUTED_SOFTWARE_EVIDENCE",
+      "statement": "run_process_reference.py executed126 finite cases with252 fresh spawned source/reader processes. Prism scores16/18 without or with late feedback and18/18 with timely feedback; comparator18/18.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §7",
+      "novelty": "NEW_REPRODUCIBLE_ARTIFACT",
+      "limits": "Explicit function and pipe interface demonstration only: no OS security proof, complete physical causal closure, biological latency or experience measurement.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:GROUNDING",
+      "kind": "OPEN_ACTUAL_APPLICATION_PREMISES",
+      "statement": "A UCT use additionally requires the same admitted actual comparison tokens, common complete signature, independently grounded router/source/reader/ports/timing, no omitted information, and one true type-invariant capability contract whose permitted policy class is physically justified.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §8",
+      "novelty": "INHERITED_APPLICATION_OBLIGATIONS",
+      "limits": "Neither the theorem, code trace nor a graph record discharges these premises.",
+      "status": "APPLICATION_OPEN",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:UCT_TYPE",
+      "kind": "CONDITIONAL_UCT_APPLICATION",
+      "statement": "If the actual grounding and fixed-J premises hold and the proven access-limited capability difference is truly J(s)!=J(t), inherited C:P1 yields different complete experiential structural types.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §8",
+      "novelty": "INHERITED_THEOREM_NEW_APPLICATION",
+      "limits": "No specified feeling, experiential intensity, subject count, exclusive owner or basal-experience gate follows; continuing actual local processes retain U1/P3.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:ONE_SHOT",
+      "kind": "COUNTERCONTROL_AND_SCOPE",
+      "statement": "The exact bound is one-shot. A two-coordinate common-helper example with one fixed side-information role across the block is decoded in48 cases; a mixed-role counterexample fails. Different block laws or deadlines need their own access analysis.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §7.3",
+      "novelty": "INHERITED_BOUNDARY_WITH_EXECUTED_COUNTERCONTROL",
+      "limits": "Not an iid block-coding theorem for changing side-information roles; not every one-shot graph gap is removed by batching.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    },
+    {
+      "id": "R188:INFERENCE_CONTRACT",
+      "kind": "METHODOLOGICAL_SYNTHESIS",
+      "statement": "A score inconsistent with the bound rejects the combined target-law/access/alphabet/timing/protocol/measurement contract. It does not uniquely locate a hidden wire, identify source-event multiplicity, or establish experience; source-shared remote reads also consume causal access.",
+      "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md §6.2 and §8",
+      "novelty": "NEW_APPLICATION_SYNTHESIS",
+      "limits": "The role of feedback and sharing must be independently grounded rather than defined by the desired result.",
+      "status": "CONDITIONAL_OR_DECLARED",
+      "actual_premises_discharged": false,
+      "source_research_id": "R188-CER-20261009"
+    }
+  ],
+  "rules": [
+    {
+      "id": "R188:r_word",
+      "all_of": [
+        "R188:PROTOCOL"
+      ],
+      "conclusion": "R188:RESPONSE_WORD",
+      "statement": "Represent the same permitted source strategy by its response word.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "CANDIDATE_REVIEW",
+      "same_instance_required": true,
+      "binding": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "R188:r_score",
+      "all_of": [
+        "R188:PROTOCOL",
+        "R188:RESPONSE_WORD"
+      ],
+      "conclusion": "R188:EXACT_SCORE",
+      "statement": "The weighted indistinguishable-pair converse and matching coordinate construction give equality.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "CANDIDATE_REVIEW",
+      "same_instance_required": true,
+      "binding": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "R188:r_coins",
+      "all_of": [
+        "R188:PROTOCOL",
+        "R188:EXACT_SCORE"
+      ],
+      "conclusion": "R188:COINS",
+      "statement": "Independent tapes preserve the task law in each deterministic realization.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "CANDIDATE_REVIEW",
+      "same_instance_required": true,
+      "binding": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "R188:r_zero",
+      "all_of": [
+        "R188:PROTOCOL",
+        "R188:EXACT_SCORE"
+      ],
+      "conclusion": "R188:ZERO_ERROR",
+      "statement": "Positive supported edge weights vanish exactly under proper coloring.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "CANDIDATE_REVIEW",
+      "same_instance_required": true,
+      "binding": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "R188:r_profile",
+      "all_of": [
+        "R188:COMMON_STIMULUS"
+      ],
+      "conclusion": "R188:MATCHED_SUMMARIES",
+      "statement": "Enumerate18 equiprobable external stimuli and count incident endpoints.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "CANDIDATE_REVIEW",
+      "same_instance_required": true,
+      "binding": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "R188:r_gap",
+      "all_of": [
+        "R188:PROTOCOL",
+        "R188:COMMON_STIMULUS",
+        "R188:EXACT_SCORE"
+      ],
+      "conclusion": "R188:GAP",
+      "statement": "Under K2,L1 use bipartition and two disjoint triangle bounds.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "CANDIDATE_REVIEW",
+      "same_instance_required": true,
+      "binding": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "R188:r_repair",
+      "all_of": [
+        "R188:PROTOCOL",
+        "R188:COMMON_STIMULUS",
+        "R188:RESPONSE_WORD"
+      ],
+      "conclusion": "R188:FEEDBACK_REPAIR",
+      "statement": "The explicit proper3-color response words and early selector attain1.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "CANDIDATE_REVIEW",
+      "same_instance_required": true,
+      "binding": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "R188:r_late",
+      "all_of": [
+        "R188:PROTOCOL",
+        "R188:GAP"
+      ],
+      "conclusion": "R188:LATE_FEEDBACK",
+      "statement": "Feedback arriving after irrevocable reply does not enter source encoding under this timing specialization.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "CANDIDATE_REVIEW",
+      "same_instance_required": true,
+      "binding": "One scored reply fixed before any current context reaches the encoder. The admitted pre-reply PROTOCOL therefore has effective L=1. A later context message is outside this deadline transcript and may not modulate it.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "R188:r_nonsuff",
+      "all_of": [
+        "R188:PROTOCOL",
+        "R188:COMMON_STIMULUS",
+        "R188:GAP"
+      ],
+      "conclusion": "R188:IDEAL_NOT_INSTALLED",
+      "statement": "On the same finite target/context law compare the restricted encoder class to an explicitly context-aware countercontrol; RB helper/tightness are antecedent schemas, not joint actual access assumptions. The restricted counterexample has ideal G2=1 but feasible8/9.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "CANDIDATE_REVIEW",
+      "same_instance_required": true,
+      "binding": "One common target/context law and score; two explicitly different hypothetical encoder-access classes. No claim that a single actual encoder simultaneously has and lacks context access.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "R188:r_complete",
+      "all_of": [
+        "R188:PROTOCOL",
+        "R188:EXACT_SCORE"
+      ],
+      "conclusion": "R188:COMPLETE_FAMILY",
+      "statement": "On the separately specified complete graph instance, balancing classes minimizes equal-word pairs.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "CANDIDATE_REVIEW",
+      "same_instance_required": true,
+      "binding": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    },
+    {
+      "id": "R188:r_uct",
+      "all_of": [
+        "R188:GROUNDING",
+        "R188:GAP",
+        "C:FIXED_J",
+        "C:P1"
+      ],
+      "conclusion": "R188:UCT_TYPE",
+      "statement": "Only after actual same-instance/fixed-capability premises are established apply inherited C:P1. The graph does not assert those OPEN premises true.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "status": "CANDIDATE_REVIEW",
+      "same_instance_required": true,
+      "binding": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+      "proof_location": "RESEARCH_NOTE.md",
+      "premise_truth_discharged_by_review": false
+    }
+  ],
+  "context_links": [
+    {
+      "id": "R188:ctx_1",
+      "from": "R133:MESSAGE_COVER",
+      "to": "R188:IDEAL_NOT_INSTALLED",
+      "relation": "General common-action/message-cover antecedent; not a newly discovered factorization principle.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "R188:ctx_2",
+      "from": "IE:QUERY_SPEC",
+      "to": "R188:PROTOCOL",
+      "relation": "Related late-query access restriction; pair-context law and exact finite-error surface are separate specializations.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "R188:ctx_3",
+      "from": "RB20261009:HELPER",
+      "to": "R188:PROTOCOL",
+      "relation": "The encoder access variable changes; unrestricted-helper upper bound remains valid.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "R188:ctx_4",
+      "from": "A:U1",
+      "to": "R188:UCT_TYPE",
+      "relation": "Preserve basal experience for every continuing admitted actual process; this is a constraint, not a feedback-to-experience deduction.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "R188:ctx_5",
+      "from": "A:P3",
+      "to": "R188:UCT_TYPE",
+      "relation": "Embedding or compensation alone does not erase a persisting actual local process.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "R188:ctx_6",
+      "from": "R188:EXECUTED_CHECKS",
+      "to": "R188:EXACT_SCORE",
+      "relation": "Finite evidence corroborates constructions; not a general proof edge.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "R188:ctx_7",
+      "from": "R188:PROCESS_REFERENCE",
+      "to": "R188:GROUNDING",
+      "relation": "Interface reference implementation does not discharge actual full-organization premises.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "R188:ctx_8",
+      "from": "R188:ONE_SHOT",
+      "to": "R188:EXACT_SCORE",
+      "relation": "Blocks/longer protocols are out-of-scope controls, not a contradiction.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    },
+    {
+      "id": "R188:ctx_9",
+      "from": "R188:IDEAL_NOT_INSTALLED",
+      "to": "R188:INFERENCE_CONTRACT",
+      "relation": "Synthesis with prior compensation and shared-occurrence audits; non-deductive method relation.",
+      "kind": "NONDEDUCTIVE_CONTEXT",
+      "deductive": false,
+      "source_type": "node",
+      "target_type": "node"
+    }
+  ],
+  "historical_priority": "No new coding-theory priority claimed; exact application formula/example priority unverified.",
+  "actual_application": "OPEN",
+  "publication": "NO_PUBLICATION_ACTION"
+}

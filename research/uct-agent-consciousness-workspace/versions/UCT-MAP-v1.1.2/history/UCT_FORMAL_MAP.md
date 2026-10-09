@@ -1,0 +1,3 @@
+# Effective UCT formal map — v1.1.1
+
+Use `UCT_FORMAL_GRAPH_MODULES.json` unique authoritative loader descriptor and `CURRENT_STATE.json`; root historical graph alone is incomplete. Active effective map is 804 nodes, 377 guarded conditional deduction rules, 10 suspended old rules, 228 nondeductive links. Exact materialized graph SHA256 `c7cb8feafa905518bf485019fd7b2e463d70682a563993eb5856678ccfe0ba66`; exact per-item ledger SHA256 `6e46361436fa64081bb7d961a491dab241f77948e3bd7fe01c17b773436b2cd3`. Recover exact expanded files from `versions/UCT-MAP-v1.1.1/UCT_MAP_v1.1.1_Capsule.tar.xz` with `versions/UCT-MAP-v1.1.1/restore_capsule.py`. Omitted R185/AC/IL/R186/UI modules remain pending.

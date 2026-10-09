@@ -1,0 +1,402 @@
+{
+  "schema": "uct-independent-assembled-review-validation/1",
+  "validation_id": "R188-ASSEMBLED-VALIDATION-v1.1.2",
+  "time_utc": "2026-10-09T07:01:47.486264+00:00",
+  "status": "PASS_EXACT_REVIEWED_ASSEMBLY",
+  "validated_release": "UCT-MAP-v1.1.2",
+  "graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "assembly_spec_sha256": "9beb648869f93413f0c3ce0ac4a7bcc56c6f32b70c4a812ace6f205478901f3c",
+  "validator_sha256": "3a18b4dea24c7427cbc19351ea5f246ea490aeeef51cab06773c8b969fc647e9",
+  "counts": {
+    "nodes": 913,
+    "rules": 424,
+    "context_links": 261,
+    "suspended_historical_rules": 10,
+    "total": 1608
+  },
+  "checks_passed": 57,
+  "checks_failed": 0,
+  "checks": [
+    {
+      "check": "frozen_assembly_spec_source_hash",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "frozen_assembly_spec_release_copy",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "exact_baseline_graph_copy",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "exact_baseline_ledger_archive",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "canonical_parent_descriptor_snapshot",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "frozen_review_copy:BASELINE_PER_ID_SEMANTIC_REVIEW.json",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "frozen_review_copy:R185_HOM_R187_PER_ID_REVIEW.json",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "frozen_review_copy:UI_CM_REVIEW.json",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "frozen_review_copy:R188_PER_ID_REVIEW.json",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "frozen_auxiliary_copy:R173_EFFECTIVE_CORRECTION_PATCH.json",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "frozen_auxiliary_copy:FAMILY_COMPATIBILITY_ASSESSMENTS.json",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "frozen_auxiliary_copy:NORMALIZATION_UI_CM.json",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "frozen_auxiliary_copy:UI_CM_REVIEW_REPORT.md",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "frozen_auxiliary_copy:WHOLE_MAP_SEMANTIC_REVIEW_REPORT.md",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "exact_order_and_ids:nodes",
+      "status": "PASS",
+      "details": {
+        "count": 913
+      }
+    },
+    {
+      "check": "exact_order_and_ids:rules",
+      "status": "PASS",
+      "details": {
+        "count": 424
+      }
+    },
+    {
+      "check": "exact_order_and_ids:context_links",
+      "status": "PASS",
+      "details": {
+        "count": 261
+      }
+    },
+    {
+      "check": "all1598_effective_record_hashes",
+      "status": "PASS",
+      "details": {
+        "checked": 1598,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "no_duplicate_graph_ids",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "exact_ten_suspended_ids",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "exact_release_counts",
+      "status": "PASS",
+      "details": {
+        "nodes": 913,
+        "rules": 424,
+        "context_links": 261,
+        "suspended_historical_rules": 10,
+        "total": 1608
+      }
+    },
+    {
+      "check": "only_two_inherited_records_changed",
+      "status": "PASS",
+      "details": [
+        "R173:THREE_TARGET_SEPARATION",
+        "BASE:CTX:143"
+      ]
+    },
+    {
+      "check": "complete_same_id_correction_history:R173:THREE_TARGET_SEPARATION",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "complete_same_id_correction_history:BASE:CTX:143",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "existing_correction_link_retained",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "no_suspended_rule_reactivated",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "raw_R173_has_no_active_rule_users",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "reviewed_downstream_route_unchanged:r175_r173_target_boundary_effective",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "reviewed_downstream_route_unchanged:r175_r173_history_twin_effective",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "reviewed_downstream_route_unchanged:r176_present_slice_effective",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "reviewed_downstream_route_unchanged:r173_retentive_coordinate_transport",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "ledger_exact1608_unique_ids",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "every_ledger_row_matches_exact_review_and_effective_record",
+      "status": "PASS",
+      "details": {
+        "checked": 1608,
+        "failures": []
+      }
+    },
+    {
+      "check": "exact_normalized_copy:R185",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "exact_normalized_copy:HOM",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "exact_normalized_copy:UI20261009",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "exact_normalized_copy:CM20261009",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "exact_normalized_copy:R187",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "exact_normalized_copy:R188",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "all189_new_records_equal_reviewed_normalizations",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "no_new_actual_or_premise_truth_promotion",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "global_actual_and_reviewer_status_open",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "all_conditional_premises_and_heads_resolve_as_nodes",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "all_contexts_are_nondeductive",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "typed_module_source_external_context_resolution",
+      "status": "PASS",
+      "details": [
+        {
+          "context_id": "EI20261008:CTX:001",
+          "source": "EI20261008:IMPORT_C5",
+          "source_type": "source_reference",
+          "resolution": "explicit non-identity source locator",
+          "resolved": true
+        },
+        {
+          "context_id": "RU20261008:CTX:002",
+          "source": "OO20261008",
+          "source_type": "module_reference",
+          "resolution": "current or frozen parent module descriptor",
+          "resolved": true
+        },
+        {
+          "context_id": "TH20261009:ctx1",
+          "source": "CORE20261008",
+          "source_type": "external_reference",
+          "resolution": "explicit nondeductive external/pending source",
+          "resolved": true
+        },
+        {
+          "context_id": "RB20261009:ctx8",
+          "source": "EXTERNAL:Dodis2008Lemma2.2b",
+          "source_type": "external_reference",
+          "resolution": "explicit nondeductive external/pending source",
+          "resolved": true
+        },
+        {
+          "context_id": "RB20261009:ctx9",
+          "source": "EXTERNAL:Wolff2017",
+          "source_type": "external_reference",
+          "resolution": "explicit nondeductive external/pending source",
+          "resolved": true
+        },
+        {
+          "context_id": "RB20261009:ctx10",
+          "source": "PENDING:AC20261009",
+          "source_type": "external_reference",
+          "resolution": "explicit nondeductive external/pending source",
+          "resolved": true
+        },
+        {
+          "context_id": "R187:ctx_r186",
+          "source": "R186-HOM-20261009",
+          "source_type": "module",
+          "resolution": "current or frozen parent module descriptor",
+          "resolved": true
+        },
+        {
+          "context_id": "R187:ctx_ol",
+          "source": "OL20261009",
+          "source_type": "module",
+          "resolution": "current or frozen parent module descriptor",
+          "resolved": true
+        }
+      ]
+    },
+    {
+      "check": "AC_IL_remain_separately_pending_only",
+      "status": "PASS",
+      "details": [
+        "AC20261009",
+        "IL20261009"
+      ]
+    },
+    {
+      "check": "no_AC_IL_declarations_loaded",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "material_protocol_guard_preserved:UI_delayed_observer_route",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "material_protocol_guard_preserved:R187_selective_guard",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "material_protocol_guard_preserved:R187_metric_scope",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "material_protocol_guard_preserved:R187_approximate_guard",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "material_protocol_guard_preserved:R188_gap_specialization",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "material_protocol_guard_preserved:R188_complete_specialization",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "material_protocol_guard_preserved:R188_late_effective_L1",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "material_protocol_guard_preserved:R188_no_conjoined_RB_helper",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "material_protocol_guard_preserved:R188_common_role_block_scope",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "human_complete_view_contains_every_reviewed_id",
+      "status": "PASS",
+      "details": {
+        "missing_ids": []
+      }
+    }
+  ],
+  "semantic_review_scope": "All1608 author-side per-item compatibility reviews are preserved exactly; this check verifies released bytes implement those already completed reviews. It is not itself a new semantic census, global consistency proof or reproof of all historical sources.",
+  "source_proof_preservation": "1596 old/new effective records equal their expected reviewed objects plus the two exact corrected old records; unchanged old objects retain original source/proof annotations, and corrected historical records are preserved in full.",
+  "actual_empirical_phenomenal_or_priority_promotion": false,
+  "reviewer_controlled_statuses_changed": false,
+  "unread_effective_ids": [],
+  "excluded_pending_source_bodies": [
+    "AC20261009",
+    "IL20261009"
+  ],
+  "frozen_review_inputs_modified": false,
+  "external_actions_performed": false,
+  "remaining_release_owner_tasks": "Package/manifest/persistence/readback and any release descriptor updates are owned by root; no remote save, publication or empirical experiment was performed by this validator."
+}

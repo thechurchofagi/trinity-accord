@@ -1,14 +1,14 @@
 {
-  "current_release": "UCT-MAP-v1.1.1",
-  "latest_research": "OL20261009",
-  "latest_work_log": "records/OL20261009_Observable_Locality/WORK_LOG.md",
-  "latest_handoff": "records/OL20261009_Observable_Locality/HANDOFF_ZH.md",
-  "guide": "RESEARCH_MASTER_GUIDE.md v2.1 §8A",
-  "retained_concurrent_R186": {
-    "work_log": "records/R186_Higher_Order_Intervention_Masking_20261009/WORK_LOG.md",
-    "handoff": "records/R186_Higher_Order_Intervention_Masking_20261009/HANDOFF_ZH.md",
-    "status": "PENDING_MAP"
-  },
-  "archive": "versions/UCT-MAP-v1.1.1/UCT_MAP_v1.1.1_Capsule.tar.xz",
-  "readback": "persistence/UCT-MAP-v1.1.1_RECEIPT.json"
+  "current_release": "UCT-MAP-v1.1.2",
+  "latest_research": "R188-CER-20261009",
+  "latest_work_log": "records/R188_Encoder_Access_and_Recovery_20261009/WORK_LOG.md",
+  "latest_handoff": "records/R188_Encoder_Access_and_Recovery_20261009/HANDOFF_ZH.md",
+  "guide": "RESEARCH_MASTER_GUIDE.md v2.2 sections0and8A",
+  "archive": "versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
+  "readback": "persistence/UCT-MAP-v1.1.2_RECEIPT.json",
+  "pending_checkpoints": [
+    "AC20261009",
+    "IL20261009"
+  ],
+  "previous_index": "versions/UCT-MAP-v1.1.2/history/RESEARCH_SESSION_LOG_INDEX.json"
 }

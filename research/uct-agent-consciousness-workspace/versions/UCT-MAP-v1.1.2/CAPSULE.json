@@ -1,0 +1,10 @@
+{
+  "release": "UCT-MAP-v1.1.2",
+  "path": "UCT_MAP_v1.1.2_Capsule.tar.xz",
+  "bytes": 1118692,
+  "sha256": "fa4b43e5d9a69e8c249ccd26161c28dbafcb8e7447e24bff33a811bcbe94dd8d",
+  "member_manifest_sha256": "fafa1450b7a8511b9502502abc3b2bfd20e2a7ad0a238bce05c33c8bd25f4101",
+  "verified_file_members": 82,
+  "effective_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687"
+}
