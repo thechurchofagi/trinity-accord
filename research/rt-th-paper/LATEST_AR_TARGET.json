@@ -1,0 +1,11 @@
+{
+  "schema": "rt-th-latest-ar-target/1",
+  "paper": "RT-TH-2026-01",
+  "latest_version": "1.0.0",
+  "record_id": 23251651,
+  "doi": "10.5281/zenodo.23251651",
+  "pdf": "Task_Relative_Continuity_v1.0.0.pdf",
+  "sha256": "18a4914635c2853ed089df137cb6b21024ed70f7d6dd0fe071a6da2dd5ca38af",
+  "rule": "Published exact PDF, BTC-verified OTS proof, same public record and strict budget before single AR post",
+  "superseded_versions": []
+}
