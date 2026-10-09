@@ -1,0 +1,51 @@
+{
+  "domain": {
+    "model_count": 256,
+    "model_parameters": [
+      "z(0)",
+      "z(1)",
+      "s1",
+      "s2",
+      "y(0,0)",
+      "y(0,1)",
+      "y(1,0)",
+      "y(1,1)"
+    ],
+    "observed_under_each_do_Q": [
+      "M1",
+      "M2",
+      "Y"
+    ],
+    "variables": [
+      "Q",
+      "Z",
+      "M1",
+      "M2",
+      "Y"
+    ]
+  },
+  "exact_counts": {
+    "all_models": 256,
+    "functional_anchor_Y_eq_Z_models": 16,
+    "global_complement_pairs": 128,
+    "marker_convention_s1_eq_0_models": 128,
+    "models_with_reversed_marker_channels_s1_ne_s2": 128,
+    "opposite_functional_anchor_Y_eq_not_Z_models": 16,
+    "route_sensitive_and_reversed_marker_models": 64,
+    "route_sensitive_and_reversed_marker_pairs": 32,
+    "route_sensitive_complement_pairs": 64,
+    "route_sensitive_models_z0_ne_z1": 128
+  },
+  "research_id": "R195-IPA-20261009",
+  "scope": "Finite deterministic binary SCM. Exact enumeration is not a human/AI experience experiment and does not validate C1 or B_fam.",
+  "verified": {
+    "all_do_Q_observation_tables_preserved": true,
+    "complement_is_involution": true,
+    "functional_anchor_breaks_symmetry_by_added_Y_to_Z_orientation": true,
+    "functional_anchor_complements_to_opposite_bridge": true,
+    "marker_convention_breaks_numeric_symmetry_only": true,
+    "no_complement_fixed_points": true,
+    "reversed_second_marker_does_not_break_symmetry": true,
+    "route_sensitivity_does_not_break_symmetry": true
+  }
+}

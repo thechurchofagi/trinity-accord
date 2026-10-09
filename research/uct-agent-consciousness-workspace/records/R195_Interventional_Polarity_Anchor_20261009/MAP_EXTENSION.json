@@ -1,0 +1,204 @@
+{
+  "schema": "uct-disabled-checkpoint-extension/1",
+  "research_id": "R195-IPA-20261009",
+  "result_version": "IPA-RESULT-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "source_note": "records/R195_Interventional_Polarity_Anchor_20261009/RESEARCH_NOTE.md",
+  "integration_status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled_as_established_premise": false,
+  "release_effect": "NONE; completed UCT-MAP-v1.1.2 remains unchanged",
+  "nodes": [
+    {
+      "id": "R195:DOMAIN",
+      "kind": "TYPED_FINITE_SCM_DOMAIN",
+      "statement": "Fix binary intervention Q, latent structural pole Z, two marker channels M1/M2 and ordered consequence Y; actual bearer, interval, complete signature, route installation/use, target and measurement remain distinct sorts.",
+      "scope": "256 deterministic binary SCM parameterizations; not a complete organization or actual-token admission.",
+      "quantifier": "For every assignment of the eight declared structural-equation bits.",
+      "status": "DECLARATION_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R195:INTERVENTION_TABLE",
+      "kind": "DECLARED_INTERVENTIONAL_OBSERVATION",
+      "statement": "Under each do(Q=q), observe M1=Z XOR s1, M2=Z XOR s2 and Y=y(Z,q) with Z=z(q).",
+      "scope": "Both binary Q values within the R195 domain.",
+      "quantifier": "For each model and q in {0,1}.",
+      "status": "MODEL_DECLARATION_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R195:LATENT_COMPLEMENT",
+      "kind": "EXACT_INTERVENTIONAL_INVARIANCE_RESULT",
+      "statement": "Complementing Z and both marker signs while conjugating the Y kernel preserves every declared do(Q) observation; 256 models form 128 fixed-point-free pairs.",
+      "scope": "The deterministic binary R195 model class.",
+      "quantifier": "For every model in R195:DOMAIN and both declared interventions.",
+      "status": "PROVED_SCOPE_RESULT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R195:CAUSAL_ORIENTATION_BOUNDARY",
+      "kind": "NONIDENTIFICATION_BOUNDARY",
+      "statement": "Route sensitivity and a prospectively reversed marker can establish intervention-relative causal structure while retaining global latent-pole complement symmetry.",
+      "scope": "The route-sensitive and reversed-marker subset of the R195 model class.",
+      "quantifier": "For every model satisfying z(0)!=z(1) and s1!=s2.",
+      "status": "PROVED_SCOPE_BOUNDARY_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R195:FUNCTIONAL_ANCHOR",
+      "kind": "CONDITIONAL_FUNCTIONAL_ORIENTATION",
+      "statement": "An explicit ordered-outcome bridge such as Y=Z orients the latent pole relative to Y; its complement is the opposite bridge Y=1-Z.",
+      "scope": "Complete consequence-table restrictions in the finite domain.",
+      "quantifier": "For every model satisfying the declared full-table bridge.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R195:PHENOMENAL_DIRECTION_TRANSFER",
+      "kind": "OPEN_BRIDGE_PREMISE",
+      "statement": "A separate prospective premise must justify why the functionally oriented pole is the positive familiar-mineness pole rather than merely success, reward, protection or low-error polarity.",
+      "scope": "The selected familiar embodied/action-mineness target, not basal experience.",
+      "quantifier": "For every proposed transfer from an ordered consequence to F_fam.",
+      "status": "OPEN_PREMISE_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R195:ANCHOR_CONTRACT",
+      "kind": "PROSPECTIVE_METHOD_CONTRACT",
+      "statement": "A substantive interventional anchor jointly requires target declaration, same-instance actuality, ontic intervention, installed use, functional direction, phenomenal direction transfer, reliability/rival control and a defeater.",
+      "scope": "Future UCT familiar-mineness applications.",
+      "quantifier": "For every proposed interventional polarity anchor.",
+      "status": "METHOD_PROPOSAL_DISABLED_PENDING_REVIEW",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R195:EVIDENCE_USE_SEPARATION",
+      "kind": "TYPE_AND_DIRECTION_DISCIPLINE",
+      "statement": "A declared intervention and positive test are evidence about an actual route; they do not install the route, prove its same-episode use or define experience structure.",
+      "scope": "One bound body/action protocol absent separately discharged physical and measurement premises.",
+      "quantifier": "For every R195-style experimental application.",
+      "status": "METHOD_CONSTRAINT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R195:RESEARCH_PROTOCOL",
+      "kind": "CONDITIONAL_METHOD_RESULT",
+      "statement": "Use interventions to identify causal or functional orientation, then independently audit phenomenal direction transfer, actuality, use, reliability and token admission before naming familiar mineness.",
+      "scope": "UCT bodily/action self-experience research; no basal gate, unique owner or assistant-consciousness verdict.",
+      "quantifier": "For every future named-target application using interventions.",
+      "status": "METHOD_PROPOSAL_DISABLED_PENDING_REVIEW",
+      "actual_premises_discharged": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "R195:r_latent_complement",
+      "all_of": ["R195:DOMAIN", "R195:INTERVENTION_TABLE", "R149:COMPATIBILITY"],
+      "conclusion": "R195:LATENT_COMPLEMENT",
+      "statement": "Apply the explicit complement/conjugation transform and compare both do(Q) observation tables.",
+      "kind": "EXACT_FINITE_SCM_THEOREM",
+      "same_instance_required": true,
+      "binding": "The variable sorts, intervention family, observation channels and structural-equation class remain fixed across each model pair.",
+      "proof_location": "RESEARCH_NOTE.md R195-C1; check_interventional_anchor.py; EXACT_RESULTS.json",
+      "alternative_route_semantics": "An asymmetric target-directed restriction is outside the complement-closed class rather than an alternative proof route.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R195:r_causal_boundary",
+      "all_of": ["R195:LATENT_COMPLEMENT", "R195:INTERVENTION_TABLE"],
+      "conclusion": "R195:CAUSAL_ORIENTATION_BOUNDARY",
+      "statement": "Restrict to route-sensitive and reversed-marker models and retain the complement pairing.",
+      "kind": "EXACT_NONIDENTIFICATION",
+      "same_instance_required": true,
+      "binding": "Both restrictions are imposed on the same model and both interventions.",
+      "proof_location": "RESEARCH_NOTE.md R195-C2; EXACT_RESULTS.json",
+      "alternative_route_semantics": "A functional anchor is treated by a different rule and adds a directional premise.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R195:r_functional_anchor",
+      "all_of": ["R195:DOMAIN", "R195:INTERVENTION_TABLE", "R195:LATENT_COMPLEMENT"],
+      "conclusion": "R195:FUNCTIONAL_ANCHOR",
+      "statement": "Add the full-table directional relation Y=Z and show its complement is Y=1-Z.",
+      "kind": "CONDITIONAL_FUNCTIONAL_IDENTIFICATION",
+      "same_instance_required": true,
+      "binding": "The complete Y ordering and Y-to-Z relation are fixed prospectively on one model domain.",
+      "proof_location": "RESEARCH_NOTE.md R195-C3; EXACT_RESULTS.json",
+      "alternative_route_semantics": "Other ordered consequences orient only relative to their separately declared semantics.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R195:r_semantic_residual",
+      "all_of": ["R195:FUNCTIONAL_ANCHOR", "R157:SEMANTIC_RESIDUAL", "R173:FAMILIAR_MINENESS_BOUNDARY"],
+      "conclusion": "R195:PHENOMENAL_DIRECTION_TRANSFER",
+      "statement": "Expose rather than discharge the independent premise linking functional outcome polarity to F_fam.",
+      "kind": "TYPED_OPEN_OBLIGATION",
+      "same_instance_required": true,
+      "binding": "The structural pole, ordered consequence and selected experiential target remain different sorts on one proposed application.",
+      "proof_location": "RESEARCH_NOTE.md R195-C4",
+      "alternative_route_semantics": "Opposite target interpretations preserve all structural and outcome facts until independent phenomenal evidence is added.",
+      "status": "CANDIDATE_DISABLED_NONINFERENTIAL_OBLIGATION"
+    },
+    {
+      "id": "R195:r_anchor_contract",
+      "all_of": ["R195:CAUSAL_ORIENTATION_BOUNDARY", "R195:FUNCTIONAL_ANCHOR", "R195:PHENOMENAL_DIRECTION_TRANSFER", "R195:EVIDENCE_USE_SEPARATION"],
+      "conclusion": "R195:ANCHOR_CONTRACT",
+      "statement": "Combine the causal result and open semantic premise into an eight-field prospective adequacy contract.",
+      "kind": "SYNTHETIC_METHOD_CONSTRAINT",
+      "same_instance_required": true,
+      "binding": "All fields concern one bearer, interval, signature, route, intervention and target; none is borrowed from a different experiment.",
+      "proof_location": "RESEARCH_NOTE.md §4 and CLAIM_LEDGER.md R195-C5",
+      "alternative_route_semantics": "Missing phenomenal direction transfer yields functional orientation only; missing actuality yields a model/test result only.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R195:r_protocol",
+      "all_of": ["R195:ANCHOR_CONTRACT", "R157:COORDINATE_TRANSPORT", "R195:EVIDENCE_USE_SEPARATION"],
+      "conclusion": "R195:RESEARCH_PROTOCOL",
+      "statement": "Place interventional orientation inside the existing coordinate-transport/semantic-residual architecture without gating basal experience.",
+      "kind": "CONDITIONAL_UCT_METHOD_CONCLUSION",
+      "same_instance_required": true,
+      "binding": "Any positive UCT application must retain one actual P/I/K binding and all R157 parameter-transport premises simultaneously.",
+      "proof_location": "RESEARCH_NOTE.md §§7-9",
+      "alternative_route_semantics": "No individual premise establishes actual application or B_fam.",
+      "status": "CANDIDATE_DISABLED"
+    }
+  ],
+  "context_links": [
+    {
+      "id": "R195:ctx_C1",
+      "type": "AXIOM_STATUS_PRESERVED",
+      "from": "R195:RESEARCH_PROTOCOL",
+      "to": "A:C1",
+      "statement": "R195 uses C1 only conditionally and neither proves nor replaces it."
+    },
+    {
+      "id": "R195:ctx_U1",
+      "type": "NON_GATE_CONTEXT",
+      "from": "R195:ANCHOR_CONTRACT",
+      "to": "A:U1",
+      "statement": "Intervention, success, familiar mineness, report and self-model are not conditions for basal experience."
+    },
+    {
+      "id": "R195:ctx_R157",
+      "type": "TRANSPORT_VERSUS_NAMING",
+      "from": "R195:FUNCTIONAL_ANCHOR",
+      "to": "R157:SEMANTIC_RESIDUAL",
+      "statement": "An oriented transported coordinate still does not acquire a phenomenal name without a bridge."
+    },
+    {
+      "id": "R195:ctx_R173",
+      "type": "ACTUAL_HISTORY_AND_OPEN_TARGET",
+      "from": "R195:EVIDENCE_USE_SEPARATION",
+      "to": "R173:RETENTIVE_BINDING_RELATION",
+      "statement": "Present intervention tables do not manufacture actual same-lineage history or current consumer use."
+    },
+    {
+      "id": "R195:ctx_FF",
+      "type": "FAMILIAR_MINENESS_REMAINS_OPEN",
+      "from": "R195:PHENOMENAL_DIRECTION_TRANSFER",
+      "to": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "statement": "The positive F_fam pole remains an independently justified application target."
+    }
+  ]
+}

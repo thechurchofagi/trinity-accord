@@ -10,7 +10,7 @@ See [the full review](versions/UCT-MAP-v1.1.2/audit/WHOLE_MAP_SEMANTIC_REVIEW_RE
 
 ## Publication coverage and latest pending research
 
-Current non-deductive coverage entry: [UCT-PUB-v1.0.6](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs, reconciles formal published attachments, and assesses residual knowledge separately from validity. [R194's delta](records/R194_Cross_Population_Polarity_20261009/PUBLICATION_COVERAGE_UPDATE.json) records no newly covered claim and a CONTINUE_RESEARCH decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
+Current non-deductive coverage entry: [UCT-PUB-v1.0.7](PUBLICATION_COVERAGE.json), whose frozen base census is UCT-PUB-v1.0.0. [PUB20261009](records/PUB20261009_Publication_Coverage/COVERAGE_UPDATE.json) inventories all 1,608 existing review IDs, reconciles formal published attachments, and assesses residual knowledge separately from validity. [R195's delta](records/R195_Interventional_Polarity_Anchor_20261009/PUBLICATION_COVERAGE_UPDATE.json) records no newly covered claim and a `CONTINUE_RESEARCH_HOLD_STANDALONE` decision. The frozen R188 working paper retains its [HOLD standalone readiness decision](records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md).
 
 [ONLINE-AC-PROBE-20261009](records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md) is a locally reviewed pending checkpoint; AC/IL also remain pending. No new whole-map semantic release is claimed by this coverage update. Existing science bytes and all open obligations are unchanged.
 
@@ -33,3 +33,7 @@ Current non-deductive coverage entry: [UCT-PUB-v1.0.6](PUBLICATION_COVERAGE.json
 ## Latest disabled checkpoint: R194
 
 [R194](records/R194_Cross_Population_Polarity_20261009/MAP_EXTENSION.json) adds a 9-node/6-rule/5-context disabled candidate for cross-population polarity. Exact enumeration and the `2^c` signed-component result show that multi-population alignment and known reversals identify relative parity but retain a global complement pair. Marker conventions do not supply phenomenal semantics. The full v1.1.2 graph and all 1,608 review objects were traversed; structural compatibility passed. R194 is not included in completed counts or hashes. Current nondeductive coverage is UCT-PUB-v1.0.6.
+
+## Latest disabled checkpoint: R195
+
+[R195](records/R195_Interventional_Polarity_Anchor_20261009/MAP_EXTENSION.json) adds a 9-node/6-rule/5-context disabled candidate for interventional polarity. Exact enumeration shows that the complete declared intervention table retains one latent complement per model; route sensitivity and reversed markers do not remove it. An explicit ordered-outcome restriction orients functional polarity only. The full v1.1.2 graph and all 1,608 review objects were traversed; structural compatibility passed. R195 is not included in completed counts or hashes. Current nondeductive coverage is UCT-PUB-v1.0.7.

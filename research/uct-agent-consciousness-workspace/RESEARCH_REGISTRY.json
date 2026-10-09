@@ -255,14 +255,27 @@
       "novelty": "UCT_SPECIFIC_RELATIVE_VERSUS_SEMANTIC_ANCHOR_APPLICATION_PRIORITY_UNVERIFIED",
       "compatibility_audit": "records/R194_Cross_Population_Polarity_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md"
+    },
+    {
+      "research_id": "R195-IPA-20261009",
+      "result_version": "IPA-RESULT-v0.1.0",
+      "title": "Interventional Causal Orientation Is Not Yet Phenomenal Polarity",
+      "source": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.7",
+      "novelty": "UCT_SPECIFIC_FUNCTIONAL_VERSUS_PHENOMENAL_DIRECTION_APPLICATION_PRIORITY_UNVERIFIED",
+      "compatibility_audit": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R195_Interventional_Polarity_Anchor_20261009/HANDOFF_ZH.md"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.6",
+    "version": "UCT-PUB-v1.0.7",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R194_Cross_Population_Polarity_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/R195_Interventional_Polarity_Anchor_20261009/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },

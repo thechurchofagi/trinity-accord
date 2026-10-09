@@ -1,0 +1,28 @@
+{
+  "record_id": "R195-PUB-COVERAGE-20261009-v1",
+  "base_completed_map_version": "UCT-MAP-v1.1.2",
+  "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+  "previous_coverage_version": "UCT-PUB-v1.0.6",
+  "new_coverage_version": "UCT-PUB-v1.0.7",
+  "checked_publication_sources": [
+    {"work_id":"UCT-PUB-v1.0.0-VERIFIED-CORPUS","version":"UCT-PUB-v1.0.0","release_evidence":"publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json","read_scope":"Existing frozen 28-work/39-research-DOI census; R195 postdates it."},
+    {"work_id":"AHUJA-ET-AL-2023-ICRL","url":"https://proceedings.mlr.press/v202/ahuja23a.html","scope":"Perfect-intervention latent identification up to permutation and scaling under stated assumptions; no phenomenal interpretation."},
+    {"work_id":"PENAUD-ET-AL-2023-BSC","doi":"10.1038/s41598-023-43823-2","scope":"Visuomotor/body-visibility manipulation with questionnaire-defined bodily-self measures; no report-independent B_fam."},
+    {"work_id":"BUCHHOLZ-ET-AL-2019-AGENCY","doi":"10.1038/s41598-018-37912-w","scope":"Agency-belief manipulation under matched sensorimotor contingencies; no complete-organization or familiar-mineness identification."}
+  ],
+  "changed_claim_ids": ["R195-C1","R195-C2","R195-C3","R195-C4","R195-C5","R195-C6"],
+  "newly_covered_claim_ids": [],
+  "uncovered_candidates_within_verified_corpus": ["R195-C1","R195-C2","R195-C3","R195-C4","R195-C5","R195-C6"],
+  "residual_assessment": {
+    "precise_problem": "Can intervention on a bodily/action route orient an unoriented structural partition as familiar mineness without letting outcome value, marker coding or report define the target?",
+    "net_increment_after_subtraction": "A UCT-specific functional-versus-phenomenal direction boundary, exact 256-model interventional complement witness and an eight-field anchor adequacy contract; no claim of new causal-representation or latent-relabeling mathematics.",
+    "closest_internal_predecessors": ["R157 coordinate transport and semantic residual","R173 actual retentive binding and B_fam boundary","R193 complement-pair bridge compression","R194 relative-versus-substantive anchor taxonomy"],
+    "reusable_knowledge": "Interventions can orient a latent coordinate only relative to independently ordered consequences. Transfer to a named experiential direction requires its own same-instance premise, measurement warrant and defeater.",
+    "evidence_and_limits": "Exact deterministic-binary enumeration, eight thought experiments, primary-source comparison and full v1.1.2 traversal. No actual instance, complete organization, valid phenomenal calibration or discharged B_dir.",
+    "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+    "next_specific_action": "Formalize one independently phenomenological direction-transfer candidate and preregister an outcome-reversal/stable-target defeater; abandon the candidate if its target direction is inherited only from task value or marker choice."
+  },
+  "map_semantics_changed": false,
+  "whole_map_audit_if_required": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_COMPATIBILITY_AUDIT.json",
+  "warning": "Absence from the frozen corpus is not a worldwide novelty claim. UCT-PUB-v1.0.7 is nondeductive and not a science-map release."
+}

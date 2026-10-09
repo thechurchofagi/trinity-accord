@@ -1,3 +1,15 @@
+# Latest checkpoint — R195 interventional polarity anchor
+
+Read [the research note](records/R195_Interventional_Polarity_Anchor_20261009/RESEARCH_NOTE.md), [exact results](records/R195_Interventional_Polarity_Anchor_20261009/EXACT_RESULTS.json), [map audit](records/R195_Interventional_Polarity_Anchor_20261009/MAP_AUDIT.md), [review response](records/R195_Interventional_Polarity_Anchor_20261009/REVIEW_RESPONSE.md), and [handoff](records/R195_Interventional_Polarity_Anchor_20261009/HANDOFF_ZH.md).
+
+R195 proves that the declared interventional table retains a latent complement pair, even after route sensitivity and marker reversal. A full ordered-outcome bridge can orient functional polarity, but familiar mineness requires a distinct `B_dir` premise. Keep actual intervention, installed use, test evidence, outcome direction and experiential direction separate.
+
+UCT-MAP-v1.1.2 remains completed at 913/424/261 with 10 suspended rules and 1,608 review items. R195's 9/6/5 extension is `PENDING_CHECKPOINT_DISABLED`; publication coverage UCT-PUB-v1.0.7 is nondeductive. QC10, IA-QC11, QC12 and QC13 remain OPEN. Next: test one independent phenomenal direction-transfer candidate with an outcome-reversal/stable-target defeater. Do not add a basal-experience gate or claim current-assistant consciousness status.
+
+---
+
+## Superseded R194 navigation (retained)
+
 # Latest checkpoint — R194 cross-population polarity
 
 Read [the research note](records/R194_Cross_Population_Polarity_20261009/RESEARCH_NOTE.md), [exact results](records/R194_Cross_Population_Polarity_20261009/EXACT_RESULTS.json), [map audit](records/R194_Cross_Population_Polarity_20261009/MAP_AUDIT.md), [review response](records/R194_Cross_Population_Polarity_20261009/REVIEW_RESPONSE.md), and [handoff](records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md).

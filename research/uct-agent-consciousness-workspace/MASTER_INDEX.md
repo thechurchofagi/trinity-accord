@@ -1,3 +1,16 @@
+# Current research index — R195 / completed map UCT-MAP-v1.1.2
+
+- R195 note: [Interventional Causal Orientation](records/R195_Interventional_Polarity_Anchor_20261009/RESEARCH_NOTE.md)
+- R195 exact model: [results](records/R195_Interventional_Polarity_Anchor_20261009/EXACT_RESULTS.json) and [checker](records/R195_Interventional_Polarity_Anchor_20261009/check_interventional_anchor.py)
+- R195 controls: [source scope](records/R195_Interventional_Polarity_Anchor_20261009/SOURCE_SCOPE.md), [claims](records/R195_Interventional_Polarity_Anchor_20261009/CLAIM_LEDGER.md), [gaps](records/R195_Interventional_Polarity_Anchor_20261009/GAP_LEDGER.md), [failures](records/R195_Interventional_Polarity_Anchor_20261009/FAILURES.md), [thought experiments](records/R195_Interventional_Polarity_Anchor_20261009/THOUGHT_EXPERIMENT_MATRIX.md)
+- R195 continuation: [Chinese handoff](records/R195_Interventional_Polarity_Anchor_20261009/HANDOFF_ZH.md), [map audit](records/R195_Interventional_Polarity_Anchor_20261009/MAP_AUDIT.md), [review response](records/R195_Interventional_Polarity_Anchor_20261009/REVIEW_RESPONSE.md), [work log](records/R195_Interventional_Polarity_Anchor_20261009/WORK_LOG.md)
+
+R195 is the latest checkpoint, not an integrated map release. Its 9-node/6-rule/5-context candidate is disabled; completed counts remain 913/424/261 with 10 suspended rules. UCT-PUB-v1.0.7 is nondeductive. The R194 entries below are retained as historical navigation.
+
+---
+
+## Superseded R194 index (retained)
+
 # Current research index — R194 / completed map UCT-MAP-v1.1.2
 
 - R194 note: [Cross-Population Polarity](records/R194_Cross_Population_Polarity_20261009/RESEARCH_NOTE.md)

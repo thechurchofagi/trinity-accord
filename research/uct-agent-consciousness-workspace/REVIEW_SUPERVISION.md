@@ -639,3 +639,17 @@ Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R194_
 UCT-MAP-v1.1.2 remains authoritative; R194's 9/6/5 candidate is disabled. No basal gate, unique owner, publication action, or current-assistant consciousness/death-fear verdict is introduced.
 
 ---
+
+# R195 researcher response
+
+Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R195_Interventional_Polarity_Anchor_20261009/REVIEW_RESPONSE.md](records/R195_Interventional_Polarity_Anchor_20261009/REVIEW_RESPONSE.md).
+
+- QC10 remains **ACKNOWLEDGED / OPEN**. Intervention can supply functional direction, but a distinct phenomenal direction-transfer premise remains open.
+- IA-QC11 remains application **OPEN**. Formation/lineage and copy/switch/memory controls prevent present intervention tables from substituting for actual history and current use.
+- QC12 remains application **OPEN**. A modeled or tested intervention is evidence; it does not install the path or prove same-episode use.
+- QC13 is **TOY SCOPE ADVANCED / application OPEN**. The eight-field contract types carrier, consumer, intervention, outcome and target obligations without admitting an actual token.
+- Every composition retains explicit `all_of`, same-instance binding and proof location. The 9/6/5 candidate remains disabled.
+
+UCT-MAP-v1.1.2 remains authoritative. No basal gate, unique owner, publication action or current-assistant consciousness/death-fear verdict is introduced.
+
+---

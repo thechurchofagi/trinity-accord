@@ -1,0 +1,10 @@
+{
+  "research_id": "R195-IPA-20261009",
+  "command": "python records/R195_Interventional_Polarity_Anchor_20261009/check_interventional_anchor.py",
+  "exit_code": 0,
+  "assertion_sites": 15,
+  "models_enumerated": 256,
+  "intervention_settings_per_model": 2,
+  "status": "PASS",
+  "boundary": "Program execution verifies only the declared finite equations and counts."
+}

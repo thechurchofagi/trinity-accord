@@ -1,3 +1,19 @@
+# Latest research checkpoint — R195; completed map remains UCT-MAP-v1.1.2
+
+Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R195 Chinese handoff](records/R195_Interventional_Polarity_Anchor_20261009/HANDOFF_ZH.md).
+
+R195 proves a finite interventional complement boundary. All 256 declared binary SCMs form 128 observation-equivalent complement pairs under both interventions; adding route sensitivity and a reversed marker leaves 32 pairs. The full `Y=Z` restriction orients the latent pole relative to the ordered outcome, but familiar mineness still needs an independent phenomenal direction-transfer premise `B_dir`.
+
+The positive advance is an eight-field prospective anchor contract separating target declaration, same-instance actuality, ontic intervention, installed use, functional direction, phenomenal transfer, reliability/rivals and a defeater. The completed map remains 913/424/261 with 10 suspended rules and 1,608 review items. R195's 9/6/5 candidate is disabled. QC10, IA-QC11, QC12 and QC13 remain open. Publication coverage is nondeductive UCT-PUB-v1.0.7; decision `CONTINUE_RESEARCH_HOLD_STANDALONE`.
+
+R195 artifacts: [note](records/R195_Interventional_Polarity_Anchor_20261009/RESEARCH_NOTE.md), [results](records/R195_Interventional_Polarity_Anchor_20261009/EXACT_RESULTS.json), [claims](records/R195_Interventional_Polarity_Anchor_20261009/CLAIM_LEDGER.md), [gaps](records/R195_Interventional_Polarity_Anchor_20261009/GAP_LEDGER.md), [thought experiments](records/R195_Interventional_Polarity_Anchor_20261009/THOUGHT_EXPERIMENT_MATRIX.md), [map audit](records/R195_Interventional_Polarity_Anchor_20261009/MAP_AUDIT.md), and [review response](records/R195_Interventional_Polarity_Anchor_20261009/REVIEW_RESPONSE.md).
+
+Next: formalize one independent `B_dir` candidate and an outcome-reversal/stable-target defeater. Do not repeat R193/R194 enumeration, treat task value as experience direction or confuse a test of route use with actual use.
+
+---
+
+## Superseded R194 checkpoint (retained)
+
 # Latest research checkpoint — R194; completed map remains UCT-MAP-v1.1.2
 
 Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R194 Chinese handoff](records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md).
