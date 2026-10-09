@@ -4,6 +4,7 @@ on:
     branches: [uct-agent-consciousness-workspace]
     paths:
       - .github/workflows/uct-v11-author-audit-export.yml
+      - research/uct-agent-consciousness-workspace/AUTHOR_AUDIT_EXPORT_REQUEST.json
 permissions:
   contents: read
 jobs:
