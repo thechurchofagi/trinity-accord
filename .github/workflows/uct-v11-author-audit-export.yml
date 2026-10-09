@@ -1,0 +1,36 @@
+name: UCT v1.1.0 verified capsule export for author audit
+on:
+  push:
+    branches: [uct-agent-consciousness-workspace]
+    paths:
+      - .github/workflows/uct-v11-author-audit-export.yml
+permissions:
+  contents: read
+jobs:
+  export:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: uct-agent-consciousness-workspace
+          persist-credentials: false
+      - name: Verify and expand frozen full-map review source
+        run: |
+          python3 research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.0/restore_capsule.py --output /tmp/uct-review-v11
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          p=pathlib.Path('/tmp/uct-review-v11')
+          index=json.loads((p/'CAPSULE_MANIFEST.json').read_text())
+          assert len(index)>0
+          out=p/'SOURCE_ATTESTATION.json'
+          out.write_text(json.dumps({'release':'UCT-MAP-v1.1.0','source_branch':'uct-agent-consciousness-workspace','source_head':'${{ github.sha }}','member_count':len(index),'members':index},indent=2)+'\n')
+          print('SOURCE_VERIFIED',len(index),[x['path'] for x in index])
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: uct-v11-verified-author-audit-inputs
+          path: /tmp/uct-review-v11/
+          retention-days: 30
+          if-no-files-found: error
