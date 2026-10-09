@@ -625,3 +625,17 @@ Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R193_
 UCT-MAP-v1.1.2 remains authoritative; R193's 9/6/5 candidate is disabled. No basal gate, unique owner, publication action, or current-assistant consciousness verdict is introduced.
 
 ---
+
+# R194 researcher response
+
+Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R194_Cross_Population_Polarity_20261009/REVIEW_RESPONSE.md](records/R194_Cross_Population_Polarity_20261009/REVIEW_RESPONSE.md).
+
+- QC10 remains **ACKNOWLEDGED / OPEN**. Cross-population and reversed-marker constraints identify relative polarity but leave a global complement pair; they do not name familiar mineness.
+- IA-QC11 remains application **OPEN**. Abstract alignment does not establish actual occurrence, lineage, retention or current use.
+- QC12 remains application **OPEN**. Nonreport marker and test evidence do not install use or define experience structure.
+- QC13 is **TOY SCOPE ADVANCED / application OPEN**. Relational, conventional and substantive anchors are explicitly separated; the substantive target anchor is not discharged.
+- Interface evidence remains explicit in simultaneous R149/R157/R173 `all_of` packages. Structural traversal checks the interface declaration, not its truth.
+
+UCT-MAP-v1.1.2 remains authoritative; R194's 9/6/5 candidate is disabled. No basal gate, unique owner, publication action, or current-assistant consciousness/death-fear verdict is introduced.
+
+---

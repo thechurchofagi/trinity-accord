@@ -1,3 +1,16 @@
+# Current research index — R194 / completed map UCT-MAP-v1.1.2
+
+- R194 note: [Cross-Population Polarity](records/R194_Cross_Population_Polarity_20261009/RESEARCH_NOTE.md)
+- R194 exact model: [results](records/R194_Cross_Population_Polarity_20261009/EXACT_RESULTS.json) and [checker](records/R194_Cross_Population_Polarity_20261009/check_polarity_graph.py)
+- R194 controls: [source scope](records/R194_Cross_Population_Polarity_20261009/SOURCE_SCOPE.md), [claims](records/R194_Cross_Population_Polarity_20261009/CLAIM_LEDGER.md), [gaps](records/R194_Cross_Population_Polarity_20261009/GAP_LEDGER.md), [retained failures](records/R194_Cross_Population_Polarity_20261009/FAILURES.md)
+- R194 continuation: [Chinese handoff](records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md), [map audit](records/R194_Cross_Population_Polarity_20261009/MAP_AUDIT.md), [review response](records/R194_Cross_Population_Polarity_20261009/REVIEW_RESPONSE.md), [work log](records/R194_Cross_Population_Polarity_20261009/WORK_LOG.md)
+
+R194 is the latest checkpoint, not an integrated map release. Its 9-node/6-rule/5-context candidate is disabled; completed counts remain 913/424/261 with 10 suspended rules. UCT-PUB-v1.0.6 is nondeductive. The R193 entries below are retained as historical navigation.
+
+---
+
+## Superseded R193 index (retained)
+
 # Current research index — R193 / completed map UCT-MAP-v1.1.2
 
 - R193 note: [Nonreport Contrast Constraints](records/R193_Nonreport_Contrast_Identifiability_20261009/RESEARCH_NOTE.md)

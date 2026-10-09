@@ -1,6 +1,6 @@
 {
   "schema": "uct-publication-coverage-entry/1.0",
-  "coverage_version": "UCT-PUB-v1.0.5",
+  "coverage_version": "UCT-PUB-v1.0.6",
   "base_census_version": "UCT-PUB-v1.0.0",
   "ledger": {
     "path": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
@@ -11,7 +11,7 @@
   "published_works": "publication/UCT-PUB-v1.0.0/PUBLISHED_WORKS_AND_VERSIONS.json",
   "readable_report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
   "current_decision": "publication/UCT-PUB-v1.0.0/MANUSCRIPT_DECISION.json",
-  "latest_update": "records/R193_Nonreport_Contrast_Identifiability_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+  "latest_update": "records/R194_Cross_Population_Polarity_20261009/PUBLICATION_COVERAGE_UPDATE.json",
   "current_scientific_map": "UCT-MAP-v1.1.2",
   "nondeductive": true,
   "unknown_is_unpublished": false,
@@ -28,6 +28,7 @@
     "records/R190_Practical_Centering_Bearer_Coupling_20261009/PUBLICATION_COVERAGE_UPDATE.json",
     "records/R191_Conflict_Conditioned_Authorization_20261009/PUBLICATION_COVERAGE_UPDATE.json",
     "records/R192_Complete_Twin_Bridge_Invariance_20261009/PUBLICATION_COVERAGE_UPDATE.json",
-    "records/R193_Nonreport_Contrast_Identifiability_20261009/PUBLICATION_COVERAGE_UPDATE.json"
+    "records/R193_Nonreport_Contrast_Identifiability_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+    "records/R194_Cross_Population_Polarity_20261009/PUBLICATION_COVERAGE_UPDATE.json"
   ]
 }

@@ -15,12 +15,12 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "R193-NCI-20261009",
-    "result_version": "NCI-RESULT-v0.1.0",
+    "id": "R194-CPP-20261009",
+    "result_version": "CPP-RESULT-v0.1.0",
     "integration_status": "PENDING_CHECKPOINT_DISABLED",
-    "work_log": "records/R193_Nonreport_Contrast_Identifiability_20261009/WORK_LOG.md",
-    "handoff": "records/R193_Nonreport_Contrast_Identifiability_20261009/HANDOFF_ZH.md",
-    "paper": "records/R193_Nonreport_Contrast_Identifiability_20261009/RESEARCH_NOTE.md"
+    "work_log": "records/R194_Cross_Population_Polarity_20261009/WORK_LOG.md",
+    "handoff": "records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md",
+    "paper": "records/R194_Cross_Population_Polarity_20261009/RESEARCH_NOTE.md"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -51,7 +51,8 @@
     "R190-PCBC-20261009",
     "R191-OCCA-20261009",
     "R192-CTBI-20261009",
-    "R193-NCI-20261009"
+    "R193-NCI-20261009",
+    "R194-CPP-20261009"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -63,12 +64,12 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "AC, IL, ONLINE-AC, R189, R190, R191, R192 and R193 remain separate disabled pending modules; working-paper completion and structural compatibility are not scientific-map promotion.",
+  "pending_note": "AC, IL, ONLINE-AC, R189, R190, R191, R192, R193 and R194 remain separate disabled pending modules; working-paper completion and structural compatibility are not scientific-map promotion.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.5",
+    "version": "UCT-PUB-v1.0.6",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R193_Nonreport_Contrast_Identifiability_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/R194_Cross_Population_Polarity_20261009/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },
@@ -88,5 +89,5 @@
     "paper": "records/ONLINE_AC_20261009_Dynamic_Calibration/PAPER.md",
     "paper_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED"
   },
-  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; ONLINE-AC, R189, R190, R191, R192 and R193 remain disabled pending results."
+  "review_status_scope": "Completed scientific release UCT-MAP-v1.1.2 only; ONLINE-AC, R189, R190, R191, R192, R193 and R194 remain disabled pending results."
 }

@@ -1,0 +1,97 @@
+{
+  "schema": "uct-r194-cross-population-polarity/1",
+  "domain": {
+    "nodes": [
+      "Z",
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1",
+      "C2"
+    ],
+    "interpretation": "Z is an unoriented latent structural coordinate; A1..C2 are marker-channel polarities across three populations and two markers.",
+    "assignments_enumerated_per_instance": 128,
+    "tree_parity_instances_exhausted": 64,
+    "total_assignment_checks_for_tree_family": 8192
+  },
+  "declared_tree_edges": [
+    {
+      "a": "Z",
+      "b": "A1",
+      "xor": 0,
+      "meaning": "observed latent/marker partition correspondence"
+    },
+    {
+      "a": "A1",
+      "b": "A2",
+      "xor": 1,
+      "meaning": "known marker reversal in population A"
+    },
+    {
+      "a": "A1",
+      "b": "B1",
+      "xor": 0,
+      "meaning": "cross-population marker-1 alignment"
+    },
+    {
+      "a": "B1",
+      "b": "B2",
+      "xor": 1,
+      "meaning": "known marker reversal in population B"
+    },
+    {
+      "a": "B1",
+      "b": "C1",
+      "xor": 1,
+      "meaning": "known reversed marker-1 coding in population C"
+    },
+    {
+      "a": "C1",
+      "b": "C2",
+      "xor": 1,
+      "meaning": "known marker reversal in population C"
+    }
+  ],
+  "counts": {
+    "relative_alignment_only": 2,
+    "plus_marker_convention_anchor_A1_equals_1": 1,
+    "plus_independent_target_anchor_Z_equals_1": 1,
+    "three_disconnected_unanchored_components": 8,
+    "plus_consistent_cycle": 2,
+    "plus_inconsistent_cycle": 0
+  },
+  "relative_solutions": [
+    {
+      "Z": 0,
+      "A1": 0,
+      "A2": 1,
+      "B1": 0,
+      "B2": 1,
+      "C1": 1,
+      "C2": 0
+    },
+    {
+      "Z": 1,
+      "A1": 1,
+      "A2": 0,
+      "B1": 1,
+      "B2": 0,
+      "C1": 0,
+      "C2": 1
+    }
+  ],
+  "checks": {
+    "connected_relative_constraints_leave_two_solutions": true,
+    "remaining_solutions_are_global_complements": true,
+    "marker_convention_anchor_leaves_one_numeric_solution": true,
+    "independent_target_anchor_leaves_one_solution": true,
+    "three_unanchored_components_leave_eight_solutions": true,
+    "consistent_cycle_does_not_orient": true,
+    "inconsistent_cycle_falsifies_model": true,
+    "all_64_signed_tree_instances_have_two_solutions": true
+  },
+  "all_checks_pass": true,
+  "interpretive_boundary": "The marker anchor fixes a numeric coding convention but does not by itself warrant the name familiar mineness. Only an independently target-directed anchor could orient the phenomenal interpretation, and its warrant is the open bridge.",
+  "claim_scope": "Exact for finite binary signed constraints invariant under simultaneous global complement. Not a claim that every future evidence class is complement-invariant."
+}

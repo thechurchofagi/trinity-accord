@@ -1,3 +1,9 @@
+# R194-CPP-20261009 — 2026-10-09 — disabled research checkpoint
+
+Proves the finite `2^c` polarity count for signed comparison graphs and applies it to three populations with two prospectively related marker channels each. Connected relative alignment leaves a global complement pair; a marker convention fixes only numeric coding, not familiar-mineness semantics. Exact checker covers 128 assignments per instance and all 64 signed-tree parity instances. Candidate 9/6/5 is structurally compatible and disabled; substantive target anchor, actual installation/use and reviewer disposition remain open. Publication coverage advances nondeductively to UCT-PUB-v1.0.6; no publication action.
+
+---
+
 # R193-NCI-20261009 — 2026-10-09 — disabled research checkpoint
 
 Enumerates a predeclared nonreport contrast class on actual history/use versus test/report coordinates. Compatible Boolean bridges shrink 65,536 -> 16 -> 4 -> 2; the final pair is `H AND U` and its complement. A polarity anchor selects one table but does not validate the name familiar mineness. Candidate 9/6/5 is structurally compatible and disabled; actual installation, target orientation, marker validity and reviewer disposition remain open. Publication coverage advances nondeductively to UCT-PUB-v1.0.5; no publication action.

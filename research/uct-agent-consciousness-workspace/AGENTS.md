@@ -1,3 +1,15 @@
+# Latest checkpoint — R194 cross-population polarity
+
+Read [the research note](records/R194_Cross_Population_Polarity_20261009/RESEARCH_NOTE.md), [exact results](records/R194_Cross_Population_Polarity_20261009/EXACT_RESULTS.json), [map audit](records/R194_Cross_Population_Polarity_20261009/MAP_AUDIT.md), [review response](records/R194_Cross_Population_Polarity_20261009/REVIEW_RESPONSE.md), and [handoff](records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md).
+
+R194 proves that connected cross-population correspondences and prospectively reversed marker channels identify relative polarity but retain exactly one global complement pair. A marker convention can select one numeric code without warranting the name familiar mineness. Keep relational, conventional and substantive target anchors separate; the substantive anchor remains OPEN.
+
+UCT-MAP-v1.1.2 remains completed at 913/424/261 with 10 suspended rules and 1,608 review items. R194's 9/6/5 extension is `PENDING_CHECKPOINT_DISABLED`; publication coverage UCT-PUB-v1.0.6 is nondeductive. QC10, IA-QC11, QC12 and QC13 remain OPEN. Next: specify a prospective target-directed anchor independent of report, marker convention and fitted class, including a defeating observation. Do not add a basal-experience gate or claim current-assistant consciousness status.
+
+---
+
+## Superseded R193 navigation (retained)
+
 # Latest checkpoint — R193 nonreport contrast identifiability
 
 Read [the research note](records/R193_Nonreport_Contrast_Identifiability_20261009/RESEARCH_NOTE.md), [exact results](records/R193_Nonreport_Contrast_Identifiability_20261009/EXACT_RESULTS.json), [map audit](records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_AUDIT.md), [review response](records/R193_Nonreport_Contrast_Identifiability_20261009/REVIEW_RESPONSE.md), and [handoff](records/R193_Nonreport_Contrast_Identifiability_20261009/HANDOFF_ZH.md).

@@ -1,3 +1,19 @@
+# Latest research checkpoint — R194; completed map remains UCT-MAP-v1.1.2
+
+Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R194 Chinese handoff](records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md).
+
+R194 proves an exact relative-versus-absolute polarity boundary for the R193 partition. A connected signed comparison graph spanning three populations and two markers leaves two globally complemented labellings; a marker-code anchor leaves one numeric labelling but provides no phenomenal semantics. A substantive target anchor could orient familiar mineness only conditionally, with independent target direction, reliability and actual same-instance applicability.
+
+The advance is a three-way anchor taxonomy plus the exact `2^c` component count. Nonreport is not equivalent to target-directed, and an inconsistent parity cycle falsifies the model rather than selecting a desired pole. The completed map remains 913/424/261 with 10 suspended rules and 1,608 review items. R194's 9/6/5 candidate is disabled. QC10, IA-QC11, QC12 and QC13 remain open. Publication coverage is nondeductive UCT-PUB-v1.0.6; decision CONTINUE_RESEARCH.
+
+R194 artifacts: [note](records/R194_Cross_Population_Polarity_20261009/RESEARCH_NOTE.md), [results](records/R194_Cross_Population_Polarity_20261009/EXACT_RESULTS.json), [claims](records/R194_Cross_Population_Polarity_20261009/CLAIM_LEDGER.md), [gaps](records/R194_Cross_Population_Polarity_20261009/GAP_LEDGER.md), [map audit](records/R194_Cross_Population_Polarity_20261009/MAP_AUDIT.md), and [review response](records/R194_Cross_Population_Polarity_20261009/REVIEW_RESPONSE.md).
+
+Next: predeclare one substantive familiar-mineness polarity anchor independent of report, marker convention and fitted class, state what would defeat it, and attack it with common-calibration, adaptive-reflex, formation/lineage and replacement twins. Do not repeat R193/R194 enumeration or call a coding convention an experiential bridge.
+
+---
+
+## Superseded R193 checkpoint (retained)
+
 # Latest research checkpoint — R193; completed map remains UCT-MAP-v1.1.2
 
 Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R193 Chinese handoff](records/R193_Nonreport_Contrast_Identifiability_20261009/HANDOFF_ZH.md).

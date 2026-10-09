@@ -1,0 +1,29 @@
+{
+  "record_id": "R194-PUB-COVERAGE-20261009-v1",
+  "base_completed_map_version": "UCT-MAP-v1.1.2",
+  "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+  "previous_coverage_version": "UCT-PUB-v1.0.5",
+  "new_coverage_version": "UCT-PUB-v1.0.6",
+  "checked_publication_sources": [
+    {"work_id":"UCT-PUB-v1.0.0-VERIFIED-CORPUS","version":"UCT-PUB-v1.0.0","release_evidence":"publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json","read_scope":"Existing frozen 28-work/39-research-DOI census; R194 postdates it."},
+    {"work_id":"KUNKEL-PERUGGIA-2020-ANCHORED-MIXTURES","doi":"10.1214/20-EJS1769","scope":"Mixture labels are arbitrary under exchangeability; anchors add membership assumptions. No phenomenal interpretation."},
+    {"work_id":"POHL-SCHULZE-STETS-2021-PARTIAL-INVARIANCE","doi":"10.1177/01466216211042809","scope":"Cross-group scale indeterminacy and substantive anchor choice; no claim that invariance measures experience."},
+    {"work_id":"ALLMAN-MATIAS-RHODES-2009-LATENT-IDENTIFIABILITY","doi":"10.1214/09-AOS689","scope":"Latent-structure identifiability up to class permutation."},
+    {"work_id":"CHEN-LI-OUYANG-XU-2023-DIF-NO-KNOWN-ANCHORS","url":"https://arxiv.org/abs/2110.11112","scope":"Anchor-free inference still uses an explicit identifying condition; no phenomenal polarity result."}
+  ],
+  "changed_claim_ids": ["R194-C1","R194-C2","R194-C3","R194-C4","R194-C5","R194-C6"],
+  "newly_covered_claim_ids": [],
+  "uncovered_candidates_within_verified_corpus": ["R194-C1","R194-C2","R194-C3","R194-C4","R194-C5","R194-C6"],
+  "residual_assessment": {
+    "precise_problem": "Can cross-population agreement and prospectively reversed nonreport markers orient the R193 structural partition as familiar mineness without defining the target from the proxy?",
+    "net_increment_after_subtraction": "A UCT-specific relative-versus-semantic anchor taxonomy, exact 2^c polarity accounting and a proof that connected multi-population/reversal evidence still leaves one global complement pair; no claim of new signed-graph or label-switching mathematics.",
+    "closest_internal_predecessors": ["R157 coordinate transport and semantic residual","R173 actual retentive binding and B_fam boundary","R192 signature ladder","R193 complement-pair bridge compression"],
+    "reusable_knowledge": "Cross-population alignment can reduce independent sign freedoms to one but cannot supply phenomenal polarity. Conventional coding, substantive target direction and actual token measurement must be separately justified.",
+    "evidence_and_limits": "Exact 128-state enumeration, exhaustive 64 signed-tree parity instances, graph proof, eight thought experiments, primary-source comparison and full v1.1.2 traversal. Binary complement-invariant scope only; no actual instance or valid B_fam anchor.",
+    "decision": "CONTINUE_RESEARCH",
+    "next_specific_action": "Specify one prospective substantive polarity anchor whose target direction is independent of report, marker convention and fitted class; state a defeating observation and test it against the common-calibration and adaptive-reflex twins."
+  },
+  "map_semantics_changed": false,
+  "whole_map_audit_if_required": "records/R194_Cross_Population_Polarity_20261009/MAP_COMPATIBILITY_AUDIT.json",
+  "warning": "Absence from the frozen corpus is not a worldwide novelty claim. UCT-PUB-v1.0.6 is nondeductive and not a science-map release."
+}

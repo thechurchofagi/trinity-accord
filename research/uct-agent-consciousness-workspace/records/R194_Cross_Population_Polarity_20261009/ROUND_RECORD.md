@@ -1,0 +1,11 @@
+# R194 ROUND RECORD — Cross-population polarity and reversed-marker anchors
+
+Date: 2026-10-09
+
+1. **User goal.** Continue UCT from actual organization toward a rigorous account of experience, intelligence and self-related feeling, while preserving C1 as the consciousness-specific explanatory axiom and keeping basal experience independent of introspection, self-model, report, language, integration, recurrence, prediction accuracy or continuation control.
+2. **One concrete unresolved question.** Can cross-population agreement and prospectively reversed marker channels orient the two surviving R193 bridge candidates `L = H AND U` and `NOT L` without defining the experiential target from a report or from the marker selected to measure it?
+3. **Relevant nodes and fixed sources.** UCT-MAP-v1.1.2; `A:C1`, `A:U1`; R157 structural-coordinate transport; R173 actual retained-history/current-use contract; R192 signature ladder; R193 complement-pair result; TA25 distinctions among complete organization, experience-internal self, conceptual self and report; current review items QC10, IA-QC11, QC12 and QC13.
+4. **Proposed addition or correction.** State and test a signed-channel model spanning several populations and marker families. Prove or refute the claim that relative cross-population/reversal constraints identify marker polarities only up to one global complement, and specify the minimal additional independently directional anchor needed for absolute orientation. Preserve actual use, test evidence, report and named experience as separate types.
+5. **Deliverable.** English derivation with a stable claim ledger, exact finite checker and result receipt, explicit reversed-marker/cross-population thought experiments, prior-art scope, gap ledger, disabled map candidate plus whole-map compatibility audit, review response, publication-coverage decision, work log, Chinese handoff and two-destination recoverable save.
+
+Direction check after topic selection: PASS. The question directly addresses the remaining familiar-mineness bridge and does not expand generic control or access certificates. A negative result is acceptable; no named feeling will be stipulated as a variable and no new basal-experience gate or unique owner will be introduced.
