@@ -8,5 +8,5 @@
   "content_commit": "2896928ce07d52151568ade05434b3ead4cfb0e9",
   "persistence_receipt_commit": null,
   "persistence_receipt_commit_note": "The self-containing receipt commit is verified and reported after creation; its SHA cannot be embedded without changing itself.",
-  "library_master_version": 55
+  "library_master_version": 56
 }
