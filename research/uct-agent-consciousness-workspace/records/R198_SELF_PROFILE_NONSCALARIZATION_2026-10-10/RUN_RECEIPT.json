@@ -6,7 +6,7 @@
   "completed_map_unchanged": "UCT-MAP-v1.1.2",
   "publication_coverage": "UCT-PUB-v1.0.10",
   "content_commit": "bcf31a4f991008575a558c792747b7d8936eb502",
-  "persistence_receipt_commit": null,
+  "persistence_receipt_commit": "746d8dc02a848e53afd1c80725435c9b65a32df2",
   "receipt_note": "Remote and Library identifiers are filled only after verified persistence; a self-containing receipt commit cannot include its own final SHA.",
   "library_master_version": 58,
   "library_master_id": "libfile_4175a81748fc819187fa8f5771f056fa",

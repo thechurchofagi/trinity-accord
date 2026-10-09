@@ -13,8 +13,8 @@
       "research/uct-agent-consciousness-workspace/records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/EXACT_RESULTS.json",
       "research/uct-agent-consciousness-workspace/CURRENT_STATE.json"
     ],
-    "receipt_commit": null,
-    "receipt_commit_note": "The receipt commit is created after this file; its verified SHA is recorded in the final run report and may be added by a correction commit."
+    "receipt_commit": "746d8dc02a848e53afd1c80725435c9b65a32df2",
+    "receipt_commit_note": "This SHA is the verified persistence-receipt commit. The present correction commit records it and closes the round status."
   },
   "library_master": {
     "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
