@@ -9,7 +9,7 @@ export function publicationKeys(config) {
     throw new Error('Invalid paper publication inventory');
   }
   const keys = config.papers.map(p => {
-    if (!/^TA-TR-2026-\d{2}(?:-BRIDGE)?$/.test(p.report || '') ||
+    if (!(/^TA-TR-2026-\d{2}(?:-BRIDGE)?$/.test(p.report || '') || p.report === 'RT20261009') ||
         !/^10\.5281\/zenodo\.\d+$/.test(p.doi || '')) throw new Error('Invalid paper publication identity');
     return `${p.report}@${p.doi}`;
   });
