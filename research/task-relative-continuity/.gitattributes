@@ -1,0 +1,2 @@
+# Logs retain exact diagnostic whitespace; source/manuscript checks remain active.
+checks/*.log -whitespace
