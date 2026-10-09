@@ -5,8 +5,11 @@
   "map_audit_status": "STRUCTURAL_COMPATIBILITY_PASS_SEMANTIC_ADOPTION_OPEN",
   "completed_map_unchanged": "UCT-MAP-v1.1.2",
   "publication_coverage": "UCT-PUB-v1.0.10",
-  "content_commit": null,
+  "content_commit": "bcf31a4f991008575a558c792747b7d8936eb502",
   "persistence_receipt_commit": null,
   "receipt_note": "Remote and Library identifiers are filled only after verified persistence; a self-containing receipt commit cannot include its own final SHA.",
-  "library_master_version": null
+  "library_master_version": 58,
+  "library_master_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "library_increment_id": "libfile_d559e58e0fd08191a38fef92f45b171a",
+  "library_manifest_id": "libfile_e9646b7306788191b53a5f99ab3896c9"
 }

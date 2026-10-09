@@ -1,0 +1,68 @@
+{
+  "schema": "uct-dual-save-receipt/1",
+  "research_id": "R198-SPNS-20261010",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "baseline_verified_commit": "7afd12b1868a1340d32efcfc33bcb67f5a14132f",
+    "opening_checkpoint_commit": "4c79c821fe12b7480617f9300778926d93f167fa",
+    "content_commit": "bcf31a4f991008575a558c792747b7d8936eb502",
+    "content_commit_verified": true,
+    "verified_key_files": [
+      "research/uct-agent-consciousness-workspace/records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/RESEARCH_NOTE.md",
+      "research/uct-agent-consciousness-workspace/records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/EXACT_RESULTS.json",
+      "research/uct-agent-consciousness-workspace/CURRENT_STATE.json"
+    ],
+    "receipt_commit": null,
+    "receipt_commit_note": "The receipt commit is created after this file; its verified SHA is recorded in the final run report and may be added by a correction commit."
+  },
+  "library_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_0000000031c481f5b71084682f61556c",
+    "version": 58,
+    "bytes": 637088,
+    "sha256": "af0ca285e8b811850cffc37dcbddce9380204b7a981337e16bffaf4b0d192732",
+    "same_identity_preserved": true,
+    "download_byte_verification": "BYTE_VERIFIED_VERSION_58"
+  },
+  "library_increment": {
+    "scope": "increment relative to R197 final; not a complete repository, complete working-set snapshot, or complete history",
+    "baseline_commit": "7afd12b1868a1340d32efcfc33bcb67f5a14132f",
+    "content_commit": "bcf31a4f991008575a558c792747b7d8936eb502",
+    "included_repository_files": 27,
+    "zip": {
+      "library_file_id": "libfile_d559e58e0fd08191a38fef92f45b171a",
+      "file_id": "file_00000000c28081f78bc54e56dadfeeab",
+      "version": 0,
+      "bytes": 87790,
+      "sha256": "e2ae8e2e0c6d3b368d094cabe1211656ca46790c2b4e8a9fcd3a446b1121aeca",
+      "download_byte_verified": true,
+      "zip_integrity_verified": true
+    },
+    "manifest": {
+      "library_file_id": "libfile_e9646b7306788191b53a5f99ab3896c9",
+      "file_id": "file_00000000cc24820da1319203ab6bb24a",
+      "version": 0,
+      "bytes": 6845,
+      "sha256": "ad9d552ae40a37c6be4a3705b02aba6ebca8b5b24269329f2082a02fa9029117",
+      "download_byte_verified": true
+    }
+  },
+  "latest_completed_step": "Typed-target correction, exact enumeration, source audit, full-map audit, remote content verification, fixed-master v58 update, and incremental-package byte verification.",
+  "unfinished": [
+    "Validate an independently anchored endpoint for retentive familiarity H.",
+    "Discharge actual installation, same-episode route use, formation/lineage and transport premises.",
+    "Obtain reviewer-controlled disposition of QC10, IA-QC11, QC12 and QC13."
+  ],
+  "failures": [
+    "No unique scalar familiar-mineness variable was identified.",
+    "No actual endpoint, phenomenal token or current route use was validated."
+  ],
+  "recovery": [
+    "Verify the GitHub branch at or after the content commit and read CURRENT_STATE plus the R198 current handoff.",
+    "Use the Library master version as the cross-location continuation record.",
+    "Overlay the R198 increment only on the stated R197 baseline or use Git history; verify the ZIP and internal SHA256SUMS.",
+    "Run check_self_profile.py and the capsule-based audit_map_compatibility.py before continuing."
+  ]
+}
+
