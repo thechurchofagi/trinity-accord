@@ -1,0 +1,62 @@
+{
+  "schema": "uct-release-persistence-receipt/1.0",
+  "release_id": "UCT-MAP-v1.1.1",
+  "release_seq": 3,
+  "scientific_commit": "0dcd1ec182586ad91822a4c0e663edf9306d93d5",
+  "readback_head": "0dcd1ec182586ad91822a4c0e663edf9306d93d5",
+  "verified_remote_files": [
+    {
+      "path": "CURRENT_STATE.json",
+      "blob": "ac5bccb4e05eb9e83ca604313cca06bded3cd6ea"
+    },
+    {
+      "path": "UCT_FORMAL_GRAPH_MODULES.json",
+      "blob": "e855e5940cb75704a3252ddd2d0f2f30e33a6ed4"
+    },
+    {
+      "path": "RESEARCH_MASTER_GUIDE.md",
+      "blob": "fe7d9ad499850123bce1c5c05d9bbc49777b0481",
+      "note": "Existing canonical v2.1 section 8A log/handoff discipline preserved from concurrent update"
+    },
+    {
+      "path": "records/OL20261009_Observable_Locality/WORK_LOG.md",
+      "blob": "6f99d4583dab2a869272e6bdcbe56b641f9bd5df"
+    },
+    {
+      "path": "records/OL20261009_Observable_Locality/HANDOFF_ZH.md",
+      "blob": "d6dc2aa51fc0dc076864ec7dfab8b5f52391d431"
+    },
+    {
+      "path": "versions/UCT-MAP-v1.1.1/RELEASE.json",
+      "blob": "bc1067bd35aff56aa599ef6e6f066c4d5b962f7a"
+    },
+    {
+      "path": "versions/UCT-MAP-v1.1.1/UCT_MAP_v1.1.1_Capsule.tar.xz",
+      "blob": "f897f631ad9d13dd9eb2e0efd659e8a0dfc8ccdf",
+      "bytes": 499624
+    }
+  ],
+  "capsule_sha256": "f4604377a3c6dca5de56bf71883006a03dbf290b7f92af2136e682087ff7bfc3",
+  "effective_graph_sha256": "c7cb8feafa905518bf485019fd7b2e463d70682a563993eb5856678ccfe0ba66",
+  "review_ledger_sha256": "6e46361436fa64081bb7d961a491dab241f77948e3bd7fe01c17b773436b2cd3",
+  "offline_zip_sha256": "10bc1cfbef782a83d28d9dd457af9a16c3f9de9cb52dcd392bd569876230400d",
+  "active_review_entries": 1419,
+  "disabled_pending_preserved": [
+    "R185",
+    "AC20261009",
+    "IL20261009",
+    "R186-HOM-20261009",
+    "UI20261009"
+  ],
+  "scientific_status": "AUTHOR_CONDITIONAL_COMPATIBILITY_REVIEW_NOT_INDEPENDENT_PROOF_OR_EMPIRICAL_CONSCIOUSNESS_VALIDATION",
+  "checks": {
+    "github_metadata_and_text_readback": "PASS",
+    "capsule_local_offline_restore_all_32_member_hashes": "PASS",
+    "local_reexecutable_math_model_checks": "PASS",
+    "full_map_new_deductive_old_predicate_conservativity": "PASS"
+  },
+  "library_folder": "/UCT_MGTD_OL20261009_v0.1.0",
+  "caveat": "The offline archive retains a pre-concurrency alternative v2.1 guide draft. The canonical highest guide is the unchanged repository root at the above blob, not that capsule copy. The archive records prior research inputs; concurrent R186 stays disabled.",
+  "publication": "NONE",
+  "external_doi_ots_ar": "NOT_STARTED"
+}
