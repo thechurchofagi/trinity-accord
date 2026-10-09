@@ -736,3 +736,8 @@ QC-20261008-10 remains OPEN: a signed-direction certificate and a feasible oppos
 # R204 review response
 
 QC10 remains OPEN: concrete organization and its probes do not establish familiar-mineness semantics. IA-QC11 remains application-OPEN: model gate/write chronology is explicit, actual biological instance grounding remains missing. QC12 remains application-OPEN: U is the actual model consumer, E_U is instrument evidence; tests do not constitute experience. QC13 remains OPEN: no actual named human/AI bearer, interval or complete signature is admitted. No reviewer status is self-closed.
+
+
+# R205 review response
+
+QC-20261008-10 remains OPEN: no independent familiar self-related target. IA-QC11 remains application-OPEN: model occurrence/chronology and recoding are explicit, actual installation is absent. QC-20261008-12 remains application-OPEN: source net influence differs from internal route consumption; cancellation defeats unrestricted probes. QC-20261008-13 remains OPEN: named carriers and branch probes are model-level, no actual bearer or complete signature admitted. Evidence: records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/REVIEW_RESPONSE.md, RESEARCH_NOTE.md, EXACT_RESULTS.json and GAP_LEDGER.json. No reviewer status is self-closed.

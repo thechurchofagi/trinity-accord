@@ -1,0 +1,69 @@
+{
+  "schema": "uct-source-scope/1",
+  "fixed": [
+    {
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "version": "UCT I v1.2",
+      "read_lines": "60–145,175–270,359–439",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "scope": "Relevant excerpts read; no claim of fresh whole-paper re-review."
+    },
+    {
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/B_UCT_II_v1_1.md",
+      "version": "UCT II v1.1",
+      "read_lines": "120–219",
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+      "scope": "Relevant excerpts read; no claim of fresh whole-paper re-review."
+    },
+    {
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/C_UCT_III_v1_0.md",
+      "version": "UCT III v1.0",
+      "read_lines": "43–89",
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+      "scope": "Relevant excerpts read; no claim of fresh whole-paper re-review."
+    },
+    {
+      "path": "records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md",
+      "version": "TA25 v1.0",
+      "read_lines": "57–160,212–272",
+      "sha256": "694856862f75834024cd3e71ffdba95a6be4601c2832285902f7905907e3039c",
+      "scope": "Relevant excerpts read; no claim of fresh whole-paper re-review."
+    }
+  ],
+  "internal_prior_art": [
+    "TA25 §6: synchronized commands hide swaps; exact prediction does not identify attachment",
+    "R182: shared occurrence versus equal values, local consumer paths and hidden couplings",
+    "R204 v0.2.0: success/alignment/use; comparator/reflex output twins",
+    "R177: covariance and provenance/content separation; review as antecedent rather than new theorem"
+  ],
+  "external": [
+    {
+      "title": "Efference Copy Is Necessary for the Attenuation of Self-Generated Touch",
+      "authors": "Kilteni, Engeler, Ehrsson",
+      "doi": "10.1016/j.isci.2020.100843",
+      "published": "2020-01-16 online; 2020-02-21 issue",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32058957/",
+      "read_scope": "Primary indexed abstract and figure captions via web search; direct open returned a footer/PMC recaptcha. No raw-data reanalysis.",
+      "finding_scope": "In this self-touch design active but not passive triggering attenuated perceived intensity. This supports source-sensitive mechanisms in a particular protocol, not a universal gate or H identity."
+    },
+    {
+      "title": "Movement enhances tactile sensitivity through prediction",
+      "authors": "D’Onofrio Pacheco, Zimmermann",
+      "doi": "10.1152/jn.00558.2025",
+      "published": "2026-03-17 ahead of print; 2026-04-02 online issue",
+      "url": "https://journals.physiology.org/doi/10.1152/jn.00558.2025",
+      "data_link": "https://doi.org/10.5281/zenodo.17414491",
+      "read_scope": "Publisher search retrieval: abstract, introductory distinctions, publication history and data link. Data not downloaded/reanalysed.",
+      "finding_scope": "Matched active/passive kinematics separate reduced felt intensity from enhanced sensitivity. Distinct readouts must not be collapsed into one attenuation or agency scalar."
+    },
+    {
+      "title": "Sensory Attenuation Reflects Proprioceptive Recalibration Rather Than Motor Forward Models",
+      "authors": "Johnen, Bayer, Zimmermann",
+      "published": "2026-04-09 posted; preprint at retrieval",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6545167",
+      "read_scope": "Primary preprint abstract via search; direct open 403, full methods/raw data not read.",
+      "finding_scope": "The abstract reports passive transport with comparable attenuation and proprioceptive predictability dependence. Treat as provisional challenge to universal motor-copy necessity, not a replicated refutation of every earlier protocol."
+    }
+  ],
+  "synthesis": "Frontier evidence constrains candidate mechanisms and readout specificity. It does not validate C1 or assign familiar self-related feeling to model coordinates. Different protocols and preprint status prevent declaring the 2020 result globally refuted."
+}

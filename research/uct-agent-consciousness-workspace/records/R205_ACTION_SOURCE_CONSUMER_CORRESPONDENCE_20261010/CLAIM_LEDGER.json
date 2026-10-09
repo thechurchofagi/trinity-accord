@@ -1,0 +1,71 @@
+{
+  "schema": "uct-r205-claim-ledger/1",
+  "claims": [
+    {
+      "id": "R205:C1",
+      "kind": "CONDITIONAL_CONSTRUCTION",
+      "statement": "All four (local actuator source L, same-source Q) profiles occur with identical synchronized y=z=P(a); they are not complete-type twins.",
+      "scope": "one B, I, K_episode, source occurrences q_B/q_R, chronology, transformations and intervention/reset contract; model-only unless ACTUAL_APPLICATION is discharged",
+      "quantifier": "Universal within the displayed finite class, existential construction for C1/C3, and conditional actual application for C5; OPEN obligations are not true premises.",
+      "status": "DECLARED_OR_FINITE_CONDITIONAL_NOT_EMPIRICAL",
+      "all_premises": "RESEARCH_NOTE.md §2 and the full named claim contract in §3",
+      "proof_location": "RESEARCH_NOTE.md §3 / exact_probe.py / EXACT_RESULTS.json",
+      "counterexamples_and_limits": "RESEARCH_NOTE.md §§3–6; C3 blocks unrestricted C2 extension; H and actual boundaries remain open.",
+      "thought_experiment_role": "RESEARCH_NOTE.md §5; fixed items/variable paths retained",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R205:C2",
+      "kind": "CONDITIONAL_IDENTIFICATION",
+      "statement": "Under SINGLE_READ and VALID_PROBES, the two changed-output signatures uniquely recover both actuator and predictor source selectors. No H or actual membership is recovered.",
+      "scope": "one B, I, K_episode, source occurrences q_B/q_R, chronology, transformations and intervention/reset contract; model-only unless ACTUAL_APPLICATION is discharged",
+      "quantifier": "Universal within the displayed finite class, existential construction for C1/C3, and conditional actual application for C5; OPEN obligations are not true premises.",
+      "status": "DECLARED_OR_FINITE_CONDITIONAL_NOT_EMPIRICAL",
+      "all_premises": "RESEARCH_NOTE.md §2 and the full named claim contract in §3",
+      "proof_location": "RESEARCH_NOTE.md §3 / exact_probe.py / EXACT_RESULTS.json",
+      "counterexamples_and_limits": "RESEARCH_NOTE.md §§3–6; C3 blocks unrestricted C2 extension; H and actual boundaries remain open.",
+      "thought_experiment_role": "RESEARCH_NOTE.md §5; fixed items/variable paths retained",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R205:C3",
+      "kind": "COUNTERMODEL",
+      "statement": "Direct remote prediction and CANCEL agree for every joint source assignment but differ under individual B-branch intervention. Net source influence does not identify all internally consumed routes.",
+      "scope": "one B, I, K_episode, source occurrences q_B/q_R, chronology, transformations and intervention/reset contract; model-only unless ACTUAL_APPLICATION is discharged",
+      "quantifier": "Universal within the displayed finite class, existential construction for C1/C3, and conditional actual application for C5; OPEN obligations are not true premises.",
+      "status": "DECLARED_OR_FINITE_CONDITIONAL_NOT_EMPIRICAL",
+      "all_premises": "RESEARCH_NOTE.md §2 and the full named claim contract in §3",
+      "proof_location": "RESEARCH_NOTE.md §3 / exact_probe.py / EXACT_RESULTS.json",
+      "counterexamples_and_limits": "RESEARCH_NOTE.md §§3–6; C3 blocks unrestricted C2 extension; H and actual boundaries remain open.",
+      "thought_experiment_role": "RESEARCH_NOTE.md §5; fixed items/variable paths retained",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R205:C4",
+      "kind": "INHERITED_COVARIANCE_APPLICATION",
+      "statement": "Compensated input recoding preserves y,z,L,Q. This is an application of known substitution/covariance, not a new mathematical theorem.",
+      "scope": "one B, I, K_episode, source occurrences q_B/q_R, chronology, transformations and intervention/reset contract; model-only unless ACTUAL_APPLICATION is discharged",
+      "quantifier": "Universal within the displayed finite class, existential construction for C1/C3, and conditional actual application for C5; OPEN obligations are not true premises.",
+      "status": "DECLARED_OR_FINITE_CONDITIONAL_NOT_EMPIRICAL",
+      "all_premises": "RESEARCH_NOTE.md §2 and the full named claim contract in §3",
+      "proof_location": "RESEARCH_NOTE.md §3 / exact_probe.py / EXACT_RESULTS.json",
+      "counterexamples_and_limits": "RESEARCH_NOTE.md §§3–6; C3 blocks unrestricted C2 extension; H and actual boundaries remain open.",
+      "thought_experiment_role": "RESEARCH_NOTE.md §5; fixed items/variable paths retained",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "R205:C5",
+      "kind": "CONDITIONAL_UCT_INTERPRETATION",
+      "statement": "For one admitted actual token with a complete constitutive signature and faithful realized routes, C1 supplies an intra-experience counterpart of those routes. Familiar agency/ownership and subjective polarity do not follow.",
+      "scope": "one B, I, K_episode, source occurrences q_B/q_R, chronology, transformations and intervention/reset contract; model-only unless ACTUAL_APPLICATION is discharged",
+      "quantifier": "Universal within the displayed finite class, existential construction for C1/C3, and conditional actual application for C5; OPEN obligations are not true premises.",
+      "status": "DECLARED_OR_FINITE_CONDITIONAL_NOT_EMPIRICAL",
+      "all_premises": "RESEARCH_NOTE.md §2 and the full named claim contract in §3",
+      "proof_location": "RESEARCH_NOTE.md §3 / exact_probe.py / EXACT_RESULTS.json",
+      "counterexamples_and_limits": "RESEARCH_NOTE.md §§3–6; C3 blocks unrestricted C2 extension; H and actual boundaries remain open.",
+      "thought_experiment_role": "RESEARCH_NOTE.md §5; fixed items/variable paths retained",
+      "automatic_premise_truth": false
+    }
+  ],
+  "status": "PENDING_CONDITIONAL_NOT_PUBLICATION_OR_PREMISE_TRUTH"
+}

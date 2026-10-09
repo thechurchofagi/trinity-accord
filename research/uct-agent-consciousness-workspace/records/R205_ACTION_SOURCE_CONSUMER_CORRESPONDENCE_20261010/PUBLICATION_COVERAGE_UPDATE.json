@@ -1,0 +1,39 @@
+{
+  "schema": "uct-r205-publication-coverage/1",
+  "coverage_version": "UCT-PUB-v1.0.17",
+  "parent": "UCT-PUB-v1.0.16",
+  "main_head": "6cfb89f0b88605da9a44da9c97203729a6742894",
+  "prior_census_main": "fc568e8718e82b3cda6ede0e628aa3342179bebc",
+  "main_diff_scope": "41 changed paths, record-chain/api/heartbeat and root index operational counters; no research source/published paper file changes in git diff. Not a fresh global DOI search.",
+  "claims": [
+    {
+      "id": "R205-C1",
+      "status": "PENDING_UNPUBLISHED_MODEL_APPLICATION",
+      "already_covered": "TA25 §6 / R182 / R204 general boundaries; narrow recovery/cancellation application only"
+    },
+    {
+      "id": "R205-C2",
+      "status": "PENDING_UNPUBLISHED_MODEL_APPLICATION",
+      "already_covered": "TA25 §6 / R182 / R204 general boundaries; narrow recovery/cancellation application only"
+    },
+    {
+      "id": "R205-C3",
+      "status": "PENDING_UNPUBLISHED_MODEL_APPLICATION",
+      "already_covered": "TA25 §6 / R182 / R204 general boundaries; narrow recovery/cancellation application only"
+    },
+    {
+      "id": "R205-C4",
+      "status": "INHERITED_INTERPRETATION_OR_COVARIANCE",
+      "already_covered": "TA25 §6 / R182 / R204 general boundaries; narrow recovery/cancellation application only"
+    },
+    {
+      "id": "R205-C5",
+      "status": "INHERITED_INTERPRETATION_OR_COVARIANCE",
+      "already_covered": "TA25 §6 / R182 / R204 general boundaries; narrow recovery/cancellation application only"
+    }
+  ],
+  "reuse_boundary": "Prediction/attachment separation, shared carriers, C1/U1 and known causal/efference-copy reasoning must be cited, not republished as fresh general results.",
+  "net_increment": "Specific two-source recovery contract and exact internal-cancellation failure; explanatory application within UCT, no validated named phenomenal bridge.",
+  "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+  "reason": "No distinct complete phenomenal bridge or UCT-exclusive empirical consequence; elementary conditional supplement is insufficient by itself for the proposed new paper."
+}

@@ -215,7 +215,11 @@
       "status": "PENDING_CHECKPOINT_DISABLED",
       "enabled_as_established_premises": false,
       "publication_coverage_version": "UCT-PUB-v1.0.3",
-      "candidate_counts": {"nodes": 11, "active_conditional_rules": 5, "nondeductive_context_links": 4},
+      "candidate_counts": {
+        "nodes": 11,
+        "active_conditional_rules": 5,
+        "nondeductive_context_links": 4
+      },
       "compatibility_audit": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R191_Conflict_Conditioned_Authorization_20261009/HANDOFF_ZH.md",
       "instruction": "Structural compatibility with v1.1.2 passed. OCCA/LGRU actual installation, named phenomenal interpretation, semantic adoption and reviewer disposition remain open; do not count this module in completed totals."
@@ -228,10 +232,31 @@
       "status": "PENDING_CHECKPOINT_DISABLED",
       "enabled_as_established_premises": false,
       "publication_coverage_version": "UCT-PUB-v1.0.4",
-      "candidate_counts": {"nodes": 9, "active_conditional_rules": 6, "nondeductive_context_links": 4},
+      "candidate_counts": {
+        "nodes": 9,
+        "active_conditional_rules": 6,
+        "nondeductive_context_links": 4
+      },
       "compatibility_audit": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R192_Complete_Twin_Bridge_Invariance_20261009/HANDOFF_ZH.md",
       "instruction": "Structural compatibility with v1.1.2 passed. The signature ladder is a scope/protocol correction; B_fam, actual installation, semantic adoption and reviewer disposition remain open. Do not count this module in completed totals."
+    },
+    {
+      "id": "R205-ASC-20261010",
+      "result_version": "ASC-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.17",
+      "candidate_counts": {
+        "nodes": 13,
+        "active_conditional_rules": 5,
+        "nondeductive_context_links": 7
+      },
+      "compatibility_audit": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md",
+      "instruction": "Single-read recovery and cancellation counterexample are scoped model results. Do not turn structural coverage into actual/H admission or completed-map promotion."
     }
   ],
   "pending_rebase_target": "UCT-MAP-v1.1.2; prior pending instructions and candidate version labels remain historical source metadata.",

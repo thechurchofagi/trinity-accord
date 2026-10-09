@@ -1,3 +1,9 @@
+# 最新接续 R205 / ASC-RESULT-v0.1.0
+
+[本轮交接](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md) · [工作日志](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/WORK_LOG.md) · [研究稿](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/RESEARCH_NOTE.md) · [审计](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_AUDIT.md)。最新优先级：比较运动命令/本体感觉实际消费者的组织差异，分离agency、ownership与触觉指标；不要重跑来源枚举。UCT-MAP-v1.1.2不变，R205候选停用；发表覆盖v1.0.17，HOLD_STANDALONE。QC10/IA-QC11/QC12/QC13仍开放。以下旧标题属于保留历史，按已核验提交与CURRENT_STATE接续。
+
+---
+
 # Current full-map audit — UCT-MAP-v1.1.2
 
 Audit `R188-ALLMAP-COMPAT-20261009-v1`:1,608 effective contract decisions, plus an independent exact-object reconciliation.
