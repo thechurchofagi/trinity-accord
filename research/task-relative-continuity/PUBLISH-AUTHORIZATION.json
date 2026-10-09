@@ -1,0 +1,25 @@
+{
+  "authorized": true,
+  "report": "RT20261009",
+  "version": "1.0.0",
+  "publication_kind": "new-independent-preprint",
+  "author": "Hongju Liu",
+  "inputs": {
+    "source-main.md": [
+      "52f879101be072efd0651a512b03bac27e3dbf5a80facf55aa726b7515f88ed4",
+      37089
+    ],
+    "RT_TH_Reproducibility_v1.0.0.zip": [
+      "83c0050bfdddff7ac94cf716db107e6f63ef09d9d6b04cd74ead0be4adcb860b",
+      108986
+    ]
+  },
+  "doi_handling": "reserve-first-inject-into-published-markdown-and-pdf-before-publish",
+  "authorization": "Explicit user instruction to complete RT/TH publication, DOI inside final article, then OTS and Arweave by existing repository process.",
+  "safety": [
+    "Only this independent RT20261009 record",
+    "No duplicate create/publish POST after uncertain state",
+    "No OTS/Arweave until Zenodo public readback",
+    "Do not alter old MGTD / UCT Zenodo records"
+  ]
+}
