@@ -1,0 +1,70 @@
+{
+  "research_id": "TH20261009",
+  "result_version": "0.1.0",
+  "status": "PASS",
+  "matrix_bayes_cases": 6666,
+  "scenarios": {
+    "shared": {
+      "installed_accuracy": "1",
+      "best_decoding_accuracy": "1",
+      "full_snapshot_states_before": 4,
+      "full_snapshot_states_after": 4
+    },
+    "reversed": {
+      "installed_accuracy": "0",
+      "best_decoding_accuracy": "1",
+      "full_snapshot_states_before": 4,
+      "full_snapshot_states_after": 4
+    },
+    "independent": {
+      "installed_accuracy": "1/2",
+      "best_decoding_accuracy": "1/2",
+      "full_snapshot_states_before": 4,
+      "full_snapshot_states_after": 4
+    },
+    "reversed_compensated": {
+      "installed_accuracy": "1",
+      "best_decoding_accuracy": "1",
+      "full_snapshot_states_before": 4,
+      "full_snapshot_states_after": 4
+    },
+    "support_migration": {
+      "before": [
+        [
+          0,
+          1
+        ]
+      ],
+      "after": [
+        [
+          2,
+          3
+        ]
+      ],
+      "intersection": [],
+      "all_conditional_single_register_histories_match": true,
+      "endpoint_full_unconditional_snapshot_distributions_match": true,
+      "intermediate_full_joint_snapshot_is_not_matched": true,
+      "simultaneous_joint_or_cross_register_time_history_not_claimed_matched": true
+    }
+  },
+  "dynamic_independent_noise_checks": 6400,
+  "coordinate_and_loss_checks": 1408,
+  "controls": {
+    "duplicated_memory_rank": 1,
+    "xor_consumer_rank": 0,
+    "one_branch_consumer_rank": 1,
+    "biased_prior_and_external_side_information_excluded": true
+  },
+  "correlation_family": {
+    "continuous_family_exact_rational_cases": 21,
+    "independent_three_stage_sequence_cases": 125,
+    "reused_noise_counterexample": {
+      "incomplete_midcut_accuracy": "1/2",
+      "complete_midcut_accuracy": "1",
+      "after_reused_mask_accuracy": "1",
+      "lesson": "Noise independent of target alone is insufficient; require a complete causal cut or fresh conditional randomness."
+    }
+  },
+  "epistemic_scope": "Exact mathematical tests only; no brain, animal, or LLM experience measured."
+}

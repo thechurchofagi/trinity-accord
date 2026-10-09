@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "nonuniform_bayes_cases": 1824,
+  "scope": "Finite verification of Eq. (10); source zeros allowed in this probability formula, not substituted into full-domain zero-error claims."
+}

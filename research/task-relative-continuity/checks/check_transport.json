@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "verification_kind": "exact_finite_models_not_experience_measurement",
+  "counts": {
+    "route_target_universal_checks": 9216,
+    "minimal_tag_partition_checks": 9216,
+    "group_orbit_bayes_checks": 9216,
+    "pairwise_error_bound_checks": 9216,
+    "maximal_invariant_algebra_checks": 576,
+    "coordinate_covariance_checks": 27648
+  },
+  "finite_field_tests": {
+    "2": {
+      "invertible_matrices": 6,
+      "generator_pair_checks": 36
+    },
+    "3": {
+      "invertible_matrices": 48,
+      "generator_pair_checks": 2304
+    }
+  },
+  "three_register_orbits": [
+    [
+      0
+    ],
+    [
+      1,
+      2,
+      4
+    ],
+    [
+      3,
+      5,
+      6
+    ],
+    [
+      7
+    ]
+  ],
+  "route_tags_required": {
+    "first_bit": 3,
+    "parity": 1,
+    "weight": 1,
+    "whole_state": 6
+  },
+  "optimal_untagged_accuracy": {
+    "first_bit": "3/4",
+    "parity": "1",
+    "weight": "1",
+    "whole_state": "1/2"
+  },
+  "invariant_binary_targets": 16,
+  "retained_counterexamples": [
+    "A route/clock bit restores exact identity, so the untagged impossibility cannot be applied when route history is accessible.",
+    "Nonlinear Hamming weight has four invariant classes although the invariant linear target subspace has dimension one.",
+    "Restricted route-dependent source domains can need fewer labels than the full-domain formula; keep full-support/route-domain assumptions."
+  ]
+}
