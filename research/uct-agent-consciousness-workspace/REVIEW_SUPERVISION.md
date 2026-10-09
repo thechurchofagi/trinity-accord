@@ -699,5 +699,16 @@ R200 read and responded to every current OPEN/ACKNOWLEDGED item before selection
 
 Evidence: `records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/REVIEW_RESPONSE.md`, `RESEARCH_NOTE.md`, `EXACT_RESULTS.json`, `GAP_LEDGER.md`, and `MAP_COMPATIBILITY_AUDIT.json`. Reviewer disposition remains external.
 
+# R201 response — robust calibration/transport margin (2026-10-10)
+
+R201 read every current OPEN/ACKNOWLEDGED item before selection and rechecked them before save. It does not self-close any item.
+
+- `QC-20261008-10` remains OPEN: the quantitative sufficient condition is now explicit, but endpoint sign, residual budget and both transport budgets lack actual validation.
+- `IA-QC11` remains application-OPEN: every positive use must retain evidence that the actual bearer/route instance satisfies its interface; the algebra supplies no lineage or installation fact.
+- `QC-20261008-12` remains application-OPEN: all formulae condition on actual `U=1`; bypass and telemetry remain `E_U`, not experience structure.
+- `QC-20261008-13` remains OPEN: no actual bearer, interval, complete signature or target admission is discharged.
+
+Evidence: `records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/REVIEW_RESPONSE.md`, `RESEARCH_NOTE.md`, `EXACT_RESULTS.json`, `GAP_LEDGER.md`, and `MAP_COMPATIBILITY_AUDIT.json`. Reviewer disposition remains external.
+
 ---
 

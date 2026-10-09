@@ -111,3 +111,7 @@ Started from verified head `eadf483d569df787ce421eabe83fb8b09ff7bc67`. Found tha
 Exact binomial enumeration gives Student-Bonferroni simultaneous coverage `.2531493944` at `N=36,m=8` for the saved mean-zero rare-spike law. Proved simultaneous Hoeffding coverage for independent, possibly non-identically distributed bounded participant vectors; half-width `.05` requires `N>=4615`. Added order-mixture/canonical-order, clipped/latent and arbitrary-missingness target boundaries. Fixed-seed diagnostics and failures are preserved.
 
 Formal graph extended from 430/206 to 436/209 with 117 context links unchanged; 17 checks pass. No apparatus, participants, ethics approval, empirical F witness, basal gate, B_min/F_O closure, assistant-consciousness conclusion or publication action. Next is an efficient bounded interval candidate with a finite-sample planwise proof and exact rare-spike stress test.
+
+## R201 — 2026-10-10: robust orientation margin
+
+Derived a conservative sign certificate for a selected familiar-continuity marker under fallible adult endpoint semantics, residual source bias and class-specific cross-domain drift. Exact rational-grid checking covered 786,996 valid instances, with 11,049 triggering the certificate and zero violations; equality and below-threshold failure witnesses are retained. Restored and verified all 82 UCT-MAP-v1.1.2 capsule members, traversed the 913/424/261 graph and 1,608 review items, and kept the 9/3/5 extension disabled. No empirical bound, actual route use, `H` attribution, C1 validation or publication action occurred.

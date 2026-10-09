@@ -1,3 +1,16 @@
+# Current research index — R201 / completed map UCT-MAP-v1.1.2
+
+- R201 note: [Robust Orientation Margin](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/RESEARCH_NOTE.md)
+- R201 exact model: [results](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/EXACT_RESULTS.json) and [checker](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/check_robust_orientation_margin.py)
+- R201 controls: [claims](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/CLAIM_LEDGER.md), [gaps](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/GAP_LEDGER.md), [sources](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/SOURCE_SCOPE.md), [thought experiments](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/THOUGHT_EXPERIMENT_MATRIX.md), [review response](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/REVIEW_RESPONSE.md)
+- R201 handoff/audit: [Chinese handoff](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/HANDOFF_ZH.md), [map audit](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_AUDIT.md), [work log](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/WORK_LOG.md)
+
+R201 is the latest checkpoint, not an integrated map release. Its 9-node/3-rule/5-context candidate is disabled; completed counts remain 913/424/261 with 10 suspended rules. UCT-PUB-v1.0.13 is nondeductive. R200 and earlier entries below remain historical navigation.
+
+---
+
+## Superseded R200 index (retained)
+
 # Current research index — R200 / completed map UCT-MAP-v1.1.2
 
 - R200 note: [Semantic Calibration Firewall](records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/RESEARCH_NOTE.md)

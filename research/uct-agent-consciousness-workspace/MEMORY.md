@@ -1,3 +1,17 @@
+# Research memory — R201 pending over UCT-MAP-v1.1.2
+
+R201 quantifies the remaining calibration/transport gap for the selected familiar-continuity target `H`. On one actual-use stratum, if the adult endpoint-marker contrast exceeds an independently bounded residual-bias term plus both class-specific cross-domain drift bounds, the target marker direction remains positive. Equality can fall to zero and a smaller margin can reverse.
+
+The checker covers 786,996 rational-grid cases; 11,049 satisfy the strict certificate and none violate it. The theorem is elementary sensitivity algebra and no mathematical priority is claimed. Its project value is the typed UCT stop rule: endpoint meaning, marker, actual use, use evidence, residual bias and transport remain separate.
+
+No actual `rho`, `beta`, `epsilon_0` or `epsilon_1` bound was obtained. C1 remains an axiom and U1 receives no new gate. UCT-MAP-v1.1.2 remains completed; R201 9/3/5 is disabled; coverage is UCT-PUB-v1.0.13; all four review items remain open/application-open.
+
+Next: preregister and power a reporting-adult calibration pilot with response-key reversal, success/fluency controls, physical route bypass, simultaneous uncertainty bounds and held-out validation.
+
+---
+
+## Superseded R200 memory (retained)
+
 # Research memory — R200 pending over UCT-MAP-v1.1.2
 
 R200 establishes a semantic calibration firewall for the selected retentive-familiarity coordinate `H`. Any finite unsigned proxy battery retains the global `H` complement symmetry; 768 exact four-proxy models yield zero complement mismatches. A predeclared signed human comparative endpoint can conditionally orient only its calibration domain. Equal proxy marginals do not transport that direction, and a formation-by-use interaction does not identify `H`.

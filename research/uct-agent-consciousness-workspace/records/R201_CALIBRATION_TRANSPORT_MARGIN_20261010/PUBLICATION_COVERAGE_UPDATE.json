@@ -1,0 +1,26 @@
+{
+  "record_id": "R201-PUB-COVERAGE-20261010-v1",
+  "base_completed_map_version": "UCT-MAP-v1.1.2",
+  "previous_coverage_version": "UCT-PUB-v1.0.12",
+  "new_coverage_version": "UCT-PUB-v1.0.13",
+  "checked_publication_sources": [
+    {"work_id":"UCT-PUB-v1.0.0-VERIFIED-CORPUS","scope":"Frozen internal census plus UCT I, TA25, R173, R197 and R200 overlap comparison."},
+    {"work_id":"WHITTLESEA-WILLIAMS-2000","doi":"10.1037/0278-7393.26.3.547","scope":"Primary discrepancy-attribution evidence; familiarity is not fluency identity."},
+    {"work_id":"DEWEY-KNOBLICH-2014","doi":"10.1371/journal.pone.0110118","scope":"Primary implicit/explicit agency-measure comparison."},
+    {"work_id":"KONG-ET-AL-2024","doi":"10.1037/xhp0001204","scope":"Primary matched-predictability intentional-binding challenge."},
+    {"work_id":"SEGHEZZI-ET-AL-2026","doi":"10.1177/17470218251349521","scope":"Primary learning-dependent intentional-binding evidence."},
+    {"work_id":"DRAXLER-KURZ-2025","doi":"10.3758/s13428-024-02551-9","scope":"Primary measurement-invariance methods antecedent."}
+  ],
+  "changed_claim_ids": ["R201-C1", "R201-C2", "R201-C3", "R201-C4"],
+  "newly_covered_claim_ids": [],
+  "uncovered_candidates_within_verified_corpus": ["R201-C1", "R201-C3"],
+  "residual_assessment": {
+    "precise_problem": "Under endpoint fallibility, residual marker bias and class-specific cross-domain drift, what strict quantitative margin preserves the direction of a candidate familiar-continuity marker?",
+    "net_increment_after_subtraction": "A UCT-typed conservative sign certificate and sharp boundary witnesses that keep selected experience, report, objective marker, actual route use, use evidence and empirical transport separate.",
+    "closest_predecessors": ["robust classification and sensitivity analysis", "measurement invariance and differential item functioning", "UCT I", "TA25", "R173", "R197", "R200"],
+    "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+    "next_specific_action": "Preregister an adult pilot that estimates a simultaneous lower bound for delta_C and independent upper bounds for beta, epsilon_0 and epsilon_1, with response-key reversal, fluency controls, physical bypass and held-out validation."
+  },
+  "map_semantics_changed": false,
+  "warning": "The inequality is elementary and sensitivity/invariance methods are prior work; the project contribution is the typed UCT interface, not a worldwide mathematical priority or an empirical H finding."
+}
