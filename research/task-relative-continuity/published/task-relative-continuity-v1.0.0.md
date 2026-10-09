@@ -349,7 +349,7 @@ What they do provide is a precise diagnostic order: determine whether informatio
 
 [8] Grover, A., and Bourgerie, R. (2026). *Do Sheaf Neural Networks Use Holonomy? A Measure--Intervene--Control Study*. **arXiv:2607.19514v2**. Preprint; no independent replication is reported here.
 
-[9] Liu, H. (2026). *UCT-MAP-v1.0.0: Frozen Author-Side Semantic Audit and Research Recovery Artifacts*. Repository `thechurchofagi/trinity-accord`, release commit `f6445052acb1644fcdd7b2adcdda2307f7b98bc7`, path `research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.0.0/`. Archived project material, not independent validation.
+[9] Liu, H. (2026). *UCT-MAP-v1.0.0: Frozen Author-Side Semantic Audit and Research Recovery Artifacts*. Repository `thechurchofagi/trinity-accord`, release commit [f6445052](https://github.com/thechurchofagi/trinity-accord/commit/f6445052acb1644fcdd7b2adcdda2307f7b98bc7), path `research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.0.0/`. Archived project material, not independent validation.
 
 [10] Liu, H. (2026). *Temporal Handoff of Relational Memory* (TH20261009, v0.1.0), and *UCT-MAP-v1.1.0* (TH result v0.2.0, including recovery-budget extension). Repository `thechurchofagi/trinity-accord`, fixed current-state inspection commit `e1ceadd3097bec5ac6abb4510ae613ff7e41bbc3`, path `research/uct-agent-consciousness-workspace/versions/UCT-MAP-v1.1.0/`. Unpublished source work; not an additional peer-reviewed publication.
 

@@ -23,18 +23,18 @@
     },
     {
       "name": "task-relative-continuity-v1.0.0-supplement.zip",
-      "bytes": 173689,
-      "sha256": "ad4660b21cd9d1f71d6a58322e2a048a2bb44a6c00015940bfc6b6a95f50a873"
+      "bytes": 173711,
+      "sha256": "64a9b7f3749ea49dc54fad4de1aa8b8c8f284da2123be9ccd6c3c7c233686218"
     },
     {
       "name": "task-relative-continuity-v1.0.0.md",
-      "bytes": 36582,
-      "sha256": "b7d917e7a7d32fab5acf1e4695a38afe25e1a68eac588c5df51d68edee8c2945"
+      "bytes": 36648,
+      "sha256": "a91f68f51909e3a283920ead03c7b2f95c8dd882549e5221583eafaa48f984d2"
     },
     {
       "name": "task-relative-continuity-v1.0.0.pdf",
-      "bytes": 115250,
-      "sha256": "98b9756e1ec7fc766e47e3fe307b2f774987b725dacee7b2586b920142aea4bd"
+      "bytes": 114407,
+      "sha256": "1d1f7b4aab2106afbc963b7a97b190e393a0f4b1061ebfc766387252e3618b96"
     }
   ]
 }

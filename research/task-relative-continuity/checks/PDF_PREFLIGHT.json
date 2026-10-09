@@ -2,6 +2,10 @@
   "pages": 11,
   "doi_present": true,
   "text_extractable": true,
-  "visual_review": "AWAITING_DOWNLOADED_PDF_REVIEW",
-  "text_chars": 34311
+  "visual_review": "PASS_RENDERED_ALL_11_PAGES",
+  "text_chars": 34284,
+  "right_margin_overflow_count": 0,
+  "reviewer": "AI-assisted visual inspection of actual frozen PDF, not independent scholarly peer review",
+  "old_pdf_sha256": "98b9756e1ec7fc766e47e3fe307b2f774987b725dacee7b2586b920142aea4bd",
+  "new_pdf_sha256": "1d1f7b4aab2106afbc963b7a97b190e393a0f4b1061ebfc766387252e3618b96"
 }

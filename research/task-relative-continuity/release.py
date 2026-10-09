@@ -187,6 +187,13 @@ def build():
     dst=ROOT/'published';dst.mkdir(exist_ok=True)
     if any(dst.iterdir()):raise RuntimeError('Unmanifested build output: reconcile first')
     md=(src/'manuscript-template.md').read_text().replace('__RESERVED_DOI__',doi)
+    # Presentation-only reference repair before DOI publication.
+    # Keep the complete historical commit identity inside the clickable URL while
+    # shortening its printed label, so LaTeX does not extend beyond page 11.
+    long_ref='release commit `f6445052acb1644fcdd7b2adcdda2307f7b98bc7`'
+    short_ref='release commit [f6445052](https://github.com/thechurchofagi/trinity-accord/commit/f6445052acb1644fcdd7b2adcdda2307f7b98bc7)'
+    if md.count(long_ref)!=1: raise RuntimeError('Reference [9] layout contract changed')
+    md=md.replace(long_ref,short_ref,1)
     if '__RESERVED_DOI__' in md or doi not in md:raise RuntimeError('DOI injection failed')
     (dst/(STEM+'.md')).write_text(md,encoding='utf-8')
     cmd=['pandoc',str(dst/(STEM+'.md')),'--from=markdown+tex_math_single_backslash','--pdf-engine=xelatex','-o',str(dst/(STEM+'.pdf'))]

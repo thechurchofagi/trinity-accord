@@ -1,0 +1,18 @@
+{
+  "id": "RT20261009-REF-LINK-REFLOW-1",
+  "scope": "Purely typographic reference [9] line overflow; no scientific proposition/abstract/reference changed",
+  "old_pdf_sha256": "98b9756e1ec7fc766e47e3fe307b2f774987b725dacee7b2586b920142aea4bd",
+  "new_pdf_sha256": "1d1f7b4aab2106afbc963b7a97b190e393a0f4b1061ebfc766387252e3618b96",
+  "old_full_commit": "f6445052acb1644fcdd7b2adcdda2307f7b98bc7",
+  "new_visible_short_commit": "f6445052",
+  "full_commit_url": "https://github.com/thechurchofagi/trinity-accord/commit/f6445052acb1644fcdd7b2adcdda2307f7b98bc7",
+  "doi": "10.5281/zenodo.23251651",
+  "changed_publication_files": [
+    "task-relative-continuity-v1.0.0.md",
+    "task-relative-continuity-v1.0.0.pdf",
+    "task-relative-continuity-v1.0.0-supplement.zip"
+  ],
+  "pdf_pages": 11,
+  "all_pages_rendered": true,
+  "right_margin_overflow_count": 0
+}

@@ -1,6 +1,7 @@
 {
-  "state": "EXACT_PACKAGE_FROZEN_PENDING_VISUAL_AUTHORIZATION",
+  "state": "EXACT_PACKAGE_FROZEN_AFTER_RENDER_REVIEW",
   "doi": "10.5281/zenodo.23251651",
-  "pdf_sha256": "98b9756e1ec7fc766e47e3fe307b2f774987b725dacee7b2586b920142aea4bd",
-  "pages": 11
+  "pdf_sha256": "1d1f7b4aab2106afbc963b7a97b190e393a0f4b1061ebfc766387252e3618b96",
+  "pages": 11,
+  "layout_repair": "checks/LAYOUT_REPAIR.json"
 }
