@@ -1,3 +1,15 @@
+# Latest checkpoint — R196 two-axis phenomenal calibration
+
+Read [the research note](records/R196_Two_Axis_Phenomenal_Calibration_20261009/RESEARCH_NOTE.md), [exact results](records/R196_Two_Axis_Phenomenal_Calibration_20261009/EXACT_RESULTS.json), [map audit](records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_AUDIT.md), [review response](records/R196_Two_Axis_Phenomenal_Calibration_20261009/REVIEW_RESPONSE.md), and [handoff](records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md).
+
+R196 proves that a complete structure-by-value design can isolate structure tracking up to global complement and reject simple outcome-value inheritance. It does not orient the positive familiar-mineness pole: `F=A` and `F=1-A` remain observationally tied until one independently warranted endpoint is supplied.
+
+UCT-MAP-v1.1.2 remains completed at 913/424/261 with 10 suspended rules and 1,608 review items. R196's 9/6/5 extension is `PENDING_CHECKPOINT_DISABLED`; publication coverage UCT-PUB-v1.0.8 is nondeductive. QC10, IA-QC11, QC12 and QC13 remain OPEN. Next: test one nonverbal predeclared positive endpoint under formation-history and copy/switch controls. Do not treat report, value, pleasantness, marker coding or test success as experience structure.
+
+---
+
+## Superseded R195 navigation (retained)
+
 # Latest checkpoint — R195 interventional polarity anchor
 
 Read [the research note](records/R195_Interventional_Polarity_Anchor_20261009/RESEARCH_NOTE.md), [exact results](records/R195_Interventional_Polarity_Anchor_20261009/EXACT_RESULTS.json), [map audit](records/R195_Interventional_Polarity_Anchor_20261009/MAP_AUDIT.md), [review response](records/R195_Interventional_Polarity_Anchor_20261009/REVIEW_RESPONSE.md), and [handoff](records/R195_Interventional_Polarity_Anchor_20261009/HANDOFF_ZH.md).

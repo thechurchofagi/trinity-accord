@@ -1,0 +1,28 @@
+{
+  "record_id": "R196-PUB-COVERAGE-20261009-v1",
+  "base_completed_map_version": "UCT-MAP-v1.1.2",
+  "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+  "previous_coverage_version": "UCT-PUB-v1.0.7",
+  "new_coverage_version": "UCT-PUB-v1.0.8",
+  "checked_publication_sources": [
+    {"work_id":"UCT-PUB-v1.0.0-VERIFIED-CORPUS","version":"UCT-PUB-v1.0.0","release_evidence":"publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json","read_scope":"Existing frozen 28-work/39-research-DOI census; R196 postdates it and was compared with prior R157/R173/R193-R195 claims."},
+    {"work_id":"YOSHIE-HAGGARD-2017","doi":"10.1038/s41598-017-08803-3","scope":"Outcome valence and predictability in intentional binding; evidence that value can contaminate agency measures, not a familiar-mineness calibration."},
+    {"work_id":"DE-JONG-ET-AL-2017","doi":"10.1007/s00221-017-4912-9","scope":"Affective touch crossed with visuotactile synchrony in a full-body illusion; mixed subjective ownership/agency effects, no report-independent F target."},
+    {"work_id":"HOMMEL-ET-AL-2020","doi":"10.1038/s41598-020-60385-9","scope":"Response effectiveness distinguished from monetary value across six experiments; supports factorial separation, not UCT or phenomenal orientation."}
+  ],
+  "changed_claim_ids": ["R196-C1","R196-C2","R196-C3","R196-C4"],
+  "newly_covered_claim_ids": [],
+  "uncovered_candidates_within_verified_corpus": ["R196-C1","R196-C2","R196-C3","R196-C4"],
+  "residual_assessment": {
+    "precise_problem": "Can a structural bodily/action axis be separated from reward, success and affective value strongly enough to orient familiar mineness?",
+    "net_increment_after_subtraction": "An exact UCT-specific two-axis stopping rule: outcome reversal can falsify value-bound markers and identify structural tracking up to complement, but a positive familiar-mineness direction still requires one independent endpoint.",
+    "closest_internal_predecessors": ["R157 coordinate transport and semantic residual","R173 retentive binding and familiar-mineness boundary","R193 one-axis complement pair","R195 functional-versus-phenomenal direction transfer"],
+    "reusable_knowledge": "Use a complete structural-by-value factorial design to reject simple value inheritance; retain the global phenomenal complement unless a same-token endpoint is warranted independently of report, marker code and outcome value.",
+    "evidence_and_limits": "Exact enumeration of 4,096 marker/outcome/target triples, eight thought-experiment families, three primary experimental comparisons and complete v1.1.2 traversal. No actual token, complete organization or independent phenomenal endpoint.",
+    "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+    "next_specific_action": "Define and attack one nonverbal predeclared positive F endpoint under formation-history and copy/switch controls; if it depends on report, pleasantness, success or marker coding, reject it."
+  },
+  "map_semantics_changed": false,
+  "whole_map_audit_if_required": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_COMPATIBILITY_AUDIT.json",
+  "warning": "Absence from the frozen corpus is not a worldwide novelty claim. The Boolean classification is elementary. UCT-PUB-v1.0.8 is nondeductive and not a science-map release."
+}

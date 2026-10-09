@@ -1,3 +1,15 @@
+# Current checkpoint — R196 two-axis phenomenal calibration
+
+Start with [CURRENT_STATE.json](CURRENT_STATE.json), [HANDOFF.md](HANDOFF.md), and the [R196 Chinese handoff](records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md).
+
+R196 separates an independently grounded body/action structural axis from outcome value in a complete `2 x 2` design. Exact enumeration identifies structure tracking up to identity/complement and shows that outcome reversal can reject simple reward/success/value inheritance. It still cannot choose between `F=A` and `F=1-A`; familiar-mineness direction needs one independently warranted nonverbal endpoint.
+
+The completed release remains UCT-MAP-v1.1.2 at 913 nodes, 424 active rules, 261 contexts, 10 suspended rules and 1,608 review items. R196's 9/6/5 candidate is disabled. QC10, IA-QC11, QC12 and QC13 remain open. Next: attack one predeclared endpoint with formation-history and copy/switch controls, without defining it by report, pleasantness, success or marker coding.
+
+---
+
+## Preserved historical entry — R182
+
 # Current checkpoint — R182 action-reference trace and blocked attempt
 
 Read [the English note](records/R182_Action_Reference_Trace_20261008/Action_Reference_Trace_and_Blocked_Attempt_v0_1.md), [claims](records/R182_Action_Reference_Trace_20261008/CLAIM_LEDGER.json), [gaps](records/R182_Action_Reference_Trace_20261008/GAP_LEDGER.json), [map audit](records/R182_Action_Reference_Trace_20261008/MAP_AUDIT.json), [review response](records/R182_Action_Reference_Trace_20261008/REVIEW_RESPONSE.md), and [handoff](records/R182_Action_Reference_Trace_20261008/CURRENT_HANDOFF.md).

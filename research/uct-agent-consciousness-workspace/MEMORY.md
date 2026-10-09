@@ -1,11 +1,11 @@
-# Research memory — R195 pending over UCT-MAP-v1.1.2
+# Research memory — R196 pending over UCT-MAP-v1.1.2
 
-R195 asks whether a prospective intervention on a bodily/action route can orient R193/R194's structural partition as familiar mineness. In the declared 256-model deterministic binary SCM, every model has a distinct complement with identical marker and consequence observations under both interventions, yielding 128 pairs. Route sensitivity plus a prospectively reversed marker still leaves 64 models in 32 pairs.
+R196 crosses independently grounded structure `A` with independently manipulated value `V`. Across all 16 Boolean tables, structural sensitivity in both value contexts plus value invariance at both structural poles leaves exactly identity and complement. Both-axis-sensitive functional outcomes are XOR/XNOR. Thus a full outcome reversal can reject simple reward/success/value inheritance.
 
-The positive result is limited and useful: the complete restriction `Y=Z` selects 16 models and orients the latent pole relative to an independently ordered consequence. Its complements are exactly the 16 `Y=1-Z` models. Thus intervention can add causal/functional direction, but familiar-mineness direction still requires a separate `B_dir` premise rather than inheriting the semantics of success, reward, protection or low error.
+This does not orient familiar mineness. Applying the same constraints to the selected target leaves `F=A` and `F=1-A`; fixing marker and functional outcome codes still leaves both. One independently warranted positive endpoint is sufficient, but no such noncircular endpoint is supplied.
 
-R195 supplies an eight-field prospective anchor contract and eight fixed/varied/defeater thought experiments. It keeps physical intervention, installed use, diagnostic evidence, functional polarity, phenomenal polarity and report separate. The finite result is not a complete human/AI model and no actual token is admitted.
+R196 provides an eight-field calibration contract, eight thought-experiment families and explicit test/use separation. C1 remains an explanatory axiom; no basal gate, complete human/AI model or actual token admission is added.
 
-UCT-MAP-v1.1.2 remains completed at 913 nodes, 424 active rules, 261 contexts, 10 suspended rules and 1,608 decisions. R195's 9/6/5 candidate is structurally compatible but disabled. UCT-PUB-v1.0.7 is nondeductive. QC10, IA-QC11, QC12 and QC13 remain open. Decision: CONTINUE_RESEARCH_HOLD_STANDALONE.
+UCT-MAP-v1.1.2 remains completed at 913/424/261 with 10 suspended rules and 1,608 decisions. R196's 9/6/5 candidate is structurally compatible but disabled. UCT-PUB-v1.0.8 is nondeductive. QC10, IA-QC11, QC12 and QC13 remain open. Decision: CONTINUE_RESEARCH_HOLD_STANDALONE.
 
-Next: formalize one independently phenomenological direction-transfer candidate and preregister an outcome-reversal/stable-target defeater. If the target direction is inherited only from task value, report or marker coding, retain `B_dir` as open.
+Next: define and attack one nonverbal predeclared positive `F` endpoint that is independent of report, pleasantness, success and marker code, and that can fail under formation-history and copy/switch controls.

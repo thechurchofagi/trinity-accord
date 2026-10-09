@@ -653,3 +653,17 @@ Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R195_
 UCT-MAP-v1.1.2 remains authoritative. No basal gate, unique owner, publication action or current-assistant consciousness/death-fear verdict is introduced.
 
 ---
+
+# R196 researcher response
+
+Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R196_Two_Axis_Phenomenal_Calibration_20261009/REVIEW_RESPONSE.md](records/R196_Two_Axis_Phenomenal_Calibration_20261009/REVIEW_RESPONSE.md).
+
+- QC10 remains **ACKNOWLEDGED / OPEN**. A two-axis value reversal can identify structure-specific tracking up to complement and reject simple value inheritance, but it does not supply the positive familiar-mineness endpoint.
+- IA-QC11 remains application **OPEN**. Formation/lineage and current use are independently required; factorial tables cannot manufacture actual history.
+- QC12 remains application **OPEN**. Actual route use and evidence from a successful test remain different. The test neither installs the route nor constitutes experience structure.
+- QC13 is **TOY/DESIGN SCOPE ADVANCED / application OPEN**. The four-cell contract binds the interfaces explicitly but admits no actual human or artificial token.
+- Every composition instance keeps simultaneous `all_of`, same-instance binding and proof location. The 9/6/5 candidate remains disabled.
+
+UCT-MAP-v1.1.2 remains authoritative. No basal gate, unique owner, publication action or current-assistant consciousness/death-fear verdict is introduced.
+
+---

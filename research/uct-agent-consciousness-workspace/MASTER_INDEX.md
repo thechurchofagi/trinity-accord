@@ -1,3 +1,16 @@
+# Current research index — R196 / completed map UCT-MAP-v1.1.2
+
+- R196 note: [Two-Axis Phenomenal Calibration](records/R196_Two_Axis_Phenomenal_Calibration_20261009/RESEARCH_NOTE.md)
+- R196 exact model: [results](records/R196_Two_Axis_Phenomenal_Calibration_20261009/EXACT_RESULTS.json) and [checker](records/R196_Two_Axis_Phenomenal_Calibration_20261009/check_two_axis_calibration.py)
+- R196 controls: [source scope](records/R196_Two_Axis_Phenomenal_Calibration_20261009/SOURCE_SCOPE.md), [claims](records/R196_Two_Axis_Phenomenal_Calibration_20261009/CLAIM_LEDGER.md), [gaps](records/R196_Two_Axis_Phenomenal_Calibration_20261009/GAP_LEDGER.md), [failures](records/R196_Two_Axis_Phenomenal_Calibration_20261009/FAILURES.md), [thought experiments](records/R196_Two_Axis_Phenomenal_Calibration_20261009/THOUGHT_EXPERIMENT_MATRIX.md)
+- R196 continuation: [Chinese handoff](records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md), [map audit](records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_AUDIT.md), [review response](records/R196_Two_Axis_Phenomenal_Calibration_20261009/REVIEW_RESPONSE.md), [work log](records/R196_Two_Axis_Phenomenal_Calibration_20261009/WORK_LOG.md)
+
+R196 is the latest checkpoint, not an integrated map release. Its 9-node/6-rule/5-context candidate is disabled; completed counts remain 913/424/261 with 10 suspended rules. UCT-PUB-v1.0.8 is nondeductive. The R195 entries below are retained as historical navigation.
+
+---
+
+## Superseded R195 index (retained)
+
 # Current research index — R195 / completed map UCT-MAP-v1.1.2
 
 - R195 note: [Interventional Causal Orientation](records/R195_Interventional_Polarity_Anchor_20261009/RESEARCH_NOTE.md)

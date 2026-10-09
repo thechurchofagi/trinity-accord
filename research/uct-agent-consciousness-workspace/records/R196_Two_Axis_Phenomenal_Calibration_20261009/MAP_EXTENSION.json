@@ -1,0 +1,174 @@
+{
+  "schema": "uct-disabled-checkpoint-extension/1",
+  "research_id": "R196-TPD-20261009",
+  "result_version": "TPD-RESULT-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "source_note": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/RESEARCH_NOTE.md",
+  "integration_status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled_as_established_premise": false,
+  "release_effect": "NONE; completed UCT-MAP-v1.1.2 remains unchanged",
+  "nodes": [
+    {
+      "id": "R196:TWO_AXIS_DOMAIN",
+      "kind": "TYPED_BOOLEAN_FACTORIAL_DOMAIN",
+      "statement": "Fix an independently grounded binary structural contrast A, independently manipulated binary value contrast V, marker M(A,V), functional outcome Y(A,V), and selected familiar-mineness target F(A,V), while keeping actual bearer, route use, target admission and measurement as distinct application sorts.",
+      "scope": "All 16 Boolean tables for each of M, Y and F over four A-by-V cells; not an actual-token admission.",
+      "quantifier": "For every Boolean table on the declared four-cell domain.",
+      "status": "DECLARATION_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R196:STRUCTURAL_SPECIFICITY",
+      "kind": "EXACT_FINITE_IDENTIFICATION_RESULT",
+      "statement": "Sensitivity to A in both V contexts together with invariance to V at both A poles leaves exactly M=A and M=1-A.",
+      "scope": "The declared Boolean marker class only.",
+      "quantifier": "For every marker table M(A,V) satisfying both simultaneous constraints.",
+      "status": "PROVED_SCOPE_RESULT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R196:VALUE_REVERSAL",
+      "kind": "EXACT_FUNCTIONAL_DISSOCIATION_RESULT",
+      "statement": "Sensitivity of Y to both A and V leaves XOR and XNOR tables, so reversing V at fixed A can flip Y while any structurally specific M remains fixed.",
+      "scope": "The declared complete four-cell Boolean outcome class.",
+      "quantifier": "For every outcome table satisfying both-axis sensitivity and every C1-admissible marker table.",
+      "status": "PROVED_SCOPE_RESULT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R196:PHENOMENAL_COMPLEMENT",
+      "kind": "NONIDENTIFICATION_BOUNDARY",
+      "statement": "Applying structural sensitivity and value invariance to F leaves exactly F=A and F=1-A, which agree on all structural and value relations but reverse the positive familiar-mineness pole.",
+      "scope": "The selected familiar-mineness application target in the declared Boolean class, not basal experience.",
+      "quantifier": "For every target table satisfying both simultaneous constraints.",
+      "status": "PROVED_SCOPE_BOUNDARY_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R196:INDEPENDENT_ENDPOINT",
+      "kind": "OPEN_PHENOMENAL_DIRECTION_PREMISE",
+      "statement": "One positive F endpoint selects between the complement pair only if warranted independently of A's label, M's code, Y's value, success, pleasantness and report-defined target construction.",
+      "scope": "One admitted actual token and predeclared familiar-mineness target.",
+      "quantifier": "For every proposed positive endpoint used to orient F.",
+      "status": "OPEN_PREMISE_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R196:CALIBRATION_CONTRACT",
+      "kind": "PROSPECTIVE_METHOD_CONTRACT",
+      "statement": "A two-axis application jointly requires same-token actuality, independent A and V grounding, four-cell intervention fidelity, installed route use, predeclared target, separate marker/outcome bridges, one independent endpoint or explicit residual complement, and defeaters.",
+      "scope": "Future UCT bodily/action familiar-mineness applications.",
+      "quantifier": "For every proposed two-axis phenomenal calibration.",
+      "status": "METHOD_PROPOSAL_DISABLED_PENDING_REVIEW",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R196:EVIDENCE_USE_SEPARATION",
+      "kind": "TYPE_AND_DIRECTION_DISCIPLINE",
+      "statement": "A factorial test is evidence about an actual route and its invariances; it does not install the route, prove same-episode use, identify the complete organization or constitute experience structure.",
+      "scope": "Any physical application of the R196 four-cell design.",
+      "quantifier": "For every test result used in an R196-style application.",
+      "status": "METHOD_CONSTRAINT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R196:VALUE_CONTAMINATION_FALSIFIER",
+      "kind": "CONDITIONAL_NEGATIVE_TEST",
+      "statement": "If V reversal preserves independently grounded A but flips a purportedly structural marker, that marker fails the declared structure-specificity claim; if it leaves M fixed while flipping Y, simple value inheritance is rejected within scope.",
+      "scope": "One prospectively declared four-cell application with successful interventions.",
+      "quantifier": "For every marker and outcome pair subjected to the complete design.",
+      "status": "CONDITIONAL_METHOD_RESULT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R196:RESEARCH_PROTOCOL",
+      "kind": "CONDITIONAL_UCT_METHOD_RESULT",
+      "statement": "Use two-axis reversal to reject value-bound anchors, retain the global phenomenal complement until an independent endpoint is available, and require actual same-instance UCT premises before any familiar-mineness interpretation.",
+      "scope": "UCT experience-intelligence-self research; no basal gate, unique owner or assistant-consciousness verdict.",
+      "quantifier": "For every future named-target application using the two-axis design.",
+      "status": "METHOD_PROPOSAL_DISABLED_PENDING_REVIEW",
+      "actual_premises_discharged": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "R196:r_structural_specificity",
+      "all_of": ["R196:TWO_AXIS_DOMAIN", "R149:COMPATIBILITY"],
+      "conclusion": "R196:STRUCTURAL_SPECIFICITY",
+      "statement": "Enumerate all Boolean marker tables under the simultaneous sensitivity and invariance constraints.",
+      "kind": "EXACT_FINITE_THEOREM",
+      "same_instance_required": true,
+      "binding": "A, V, M and the four declared cells remain fixed across both constraints.",
+      "proof_location": "RESEARCH_NOTE.md R196-C1; check_two_axis_calibration.py; EXACT_RESULTS.json",
+      "alternative_route_semantics": "Non-Boolean, noisy or hidden-variable applications require additional premises and are outside the theorem.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R196:r_value_reversal",
+      "all_of": ["R196:TWO_AXIS_DOMAIN", "R196:STRUCTURAL_SPECIFICITY"],
+      "conclusion": "R196:VALUE_REVERSAL",
+      "statement": "Enumerate outcome tables sensitive to both axes and compare fixed-A value reversals with structurally specific markers.",
+      "kind": "EXACT_FACTORIAL_DISSOCIATION",
+      "same_instance_required": true,
+      "binding": "The same A, V and four cells are used for M and Y; no result is borrowed across experiments.",
+      "proof_location": "RESEARCH_NOTE.md R196-C2; EXACT_RESULTS.json",
+      "alternative_route_semantics": "A failed intervention or changed A invalidates rather than confirms the dissociation.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R196:r_phenomenal_complement",
+      "all_of": ["R196:TWO_AXIS_DOMAIN", "R196:STRUCTURAL_SPECIFICITY", "R157:SEMANTIC_RESIDUAL", "R173:FAMILIAR_MINENESS_BOUNDARY"],
+      "conclusion": "R196:PHENOMENAL_COMPLEMENT",
+      "statement": "Apply the same constraints to F while preserving the existing separation between transported structure and phenomenal naming.",
+      "kind": "EXACT_NONIDENTIFICATION_BOUNDARY",
+      "same_instance_required": true,
+      "binding": "The structural contrast and selected target belong to one proposed application, while remaining distinct sorts.",
+      "proof_location": "RESEARCH_NOTE.md R196-C3; EXACT_RESULTS.json",
+      "alternative_route_semantics": "Opposite phenomenal orientations preserve every M and Y observation until an independent endpoint is added.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R196:r_value_contamination_falsifier",
+      "all_of": ["R196:VALUE_REVERSAL", "R196:EVIDENCE_USE_SEPARATION"],
+      "conclusion": "R196:VALUE_CONTAMINATION_FALSIFIER",
+      "statement": "Use the complete value reversal as a negative test of simple value inheritance while refusing to treat test success as actual route use or phenomenal orientation.",
+      "kind": "CONDITIONAL_FALSIFICATION_RULE",
+      "same_instance_required": true,
+      "binding": "The reversal, independently grounded structural contrast, marker and route-use evidence concern the same token and four-cell application.",
+      "proof_location": "RESEARCH_NOTE.md R196-C4 and §4",
+      "alternative_route_semantics": "Failure to flip Y or preservation failure for A defeats the test; passing it still leaves the target complement open.",
+      "status": "CANDIDATE_DISABLED_CONDITIONAL"
+    },
+    {
+      "id": "R196:r_contract",
+      "all_of": ["R196:VALUE_REVERSAL", "R196:PHENOMENAL_COMPLEMENT", "R196:EVIDENCE_USE_SEPARATION"],
+      "conclusion": "R196:CALIBRATION_CONTRACT",
+      "statement": "Combine the exact dissociation, residual complement and test/use discipline into an eight-field prospective contract.",
+      "kind": "SYNTHETIC_METHOD_CONSTRAINT",
+      "same_instance_required": true,
+      "binding": "All fields concern one bearer, interval, signature, route, design and target.",
+      "proof_location": "RESEARCH_NOTE.md §4; CLAIM_LEDGER.md",
+      "alternative_route_semantics": "Missing actuality yields only a table; missing endpoint yields only a value-contamination falsifier.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R196:r_protocol",
+      "all_of": ["R196:CALIBRATION_CONTRACT", "R157:COORDINATE_TRANSPORT", "R196:EVIDENCE_USE_SEPARATION"],
+      "conclusion": "R196:RESEARCH_PROTOCOL",
+      "statement": "Place two-axis dissociation inside existing UCT coordinate transport without adding a basal experience gate.",
+      "kind": "CONDITIONAL_UCT_METHOD_CONCLUSION",
+      "same_instance_required": true,
+      "binding": "Any positive application retains one actual P/I/K binding and all transport premises simultaneously.",
+      "proof_location": "RESEARCH_NOTE.md §§7-9",
+      "alternative_route_semantics": "No individual premise establishes actual application, C1 truth or familiar mineness.",
+      "status": "CANDIDATE_DISABLED"
+    }
+  ],
+  "context_links": [
+    {"id": "R196:ctx_C1", "type": "AXIOM_STATUS_PRESERVED", "from": "R196:RESEARCH_PROTOCOL", "to": "A:C1", "statement": "R196 uses C1 only conditionally and neither proves nor replaces it."},
+    {"id": "R196:ctx_U1", "type": "NON_GATE_CONTEXT", "from": "R196:CALIBRATION_CONTRACT", "to": "A:U1", "statement": "The two-axis contract is not a condition for basal experience."},
+    {"id": "R196:ctx_R157", "type": "TRANSPORT_VERSUS_NAMING", "from": "R196:PHENOMENAL_COMPLEMENT", "to": "R157:SEMANTIC_RESIDUAL", "statement": "Structural specificity does not name the positive phenomenal pole."},
+    {"id": "R196:ctx_R173", "type": "ACTUAL_RETENTIVE_USE_REQUIRED", "from": "R196:EVIDENCE_USE_SEPARATION", "to": "R173:RETENTIVE_BINDING_RELATION", "statement": "Factorial evidence does not manufacture same-lineage history or current consumer use."},
+    {"id": "R196:ctx_direction", "type": "FUNCTIONAL_TO_PHENOMENAL_DIRECTION_REFINEMENT", "from": "R196:VALUE_REVERSAL", "to": "R173:FAMILIAR_MINENESS_BOUNDARY", "statement": "Value reversal removes one confound while preserving the open phenomenal-direction transfer identified historically in R195."}
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "all_boolean_tables": 16,
+  "all_marker_outcome_target_triples": 4096,
+  "cell_order": ["A0V0", "A0V1", "A1V0", "A1V1"],
+  "checks": {
+    "full_factorial_identifies_each_declared_truth_table": true,
+    "numeric_marker_and_functional_outcome_do_not_orient_target": true,
+    "one_independent_phenomenal_endpoint_orients_the_pair": true,
+    "structure_tracking_excludes_value_and_interaction_dependence": true,
+    "value_reversal_leaves_marker_and_stable_target_fixed": true
+  },
+  "crossed_outcome_tables": ["0110", "1001"],
+  "interpretive_boundary": "The endpoint condition is exactly the still-open phenomenal-direction premise; the enumeration does not supply or measure it.",
+  "remaining_target_tables": ["0011", "1100"],
+  "research_id": "R196-TPD-20261009",
+  "selected_target_table": "0011",
+  "structure_and_value_sensitive_tables": 2,
+  "structure_only_tables": ["0011", "1100"],
+  "structure_sensitive_and_value_invariant_tables": 2,
+  "structure_sensitive_tables": 4,
+  "triples_after_independent_positive_endpoint": 1,
+  "triples_after_numeric_marker_and_outcome_anchors": 2,
+  "triples_after_two_axis_constraints": 8
+}

@@ -1,3 +1,19 @@
+# Latest research checkpoint — R196; completed map remains UCT-MAP-v1.1.2
+
+Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R196 Chinese handoff](records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md).
+
+R196 crosses an independently grounded structural axis `A` with an independently manipulated value axis `V`. The complete four-cell constraints isolate structure tracking up to identity/complement and separate it from XOR/XNOR functional outcome reversal. They still leave `F=A` versus `F=1-A`; the positive familiar-mineness endpoint remains open.
+
+The advance is a prospective value-contamination falsifier and an eight-field calibration contract. The completed map remains 913/424/261 with 10 suspended rules and 1,608 review items. R196's 9/6/5 candidate is disabled. QC10, IA-QC11, QC12 and QC13 remain open. Publication coverage is nondeductive UCT-PUB-v1.0.8; decision `CONTINUE_RESEARCH_HOLD_STANDALONE`.
+
+R196 artifacts: [note](records/R196_Two_Axis_Phenomenal_Calibration_20261009/RESEARCH_NOTE.md), [results](records/R196_Two_Axis_Phenomenal_Calibration_20261009/EXACT_RESULTS.json), [claims](records/R196_Two_Axis_Phenomenal_Calibration_20261009/CLAIM_LEDGER.md), [gaps](records/R196_Two_Axis_Phenomenal_Calibration_20261009/GAP_LEDGER.md), [thought experiments](records/R196_Two_Axis_Phenomenal_Calibration_20261009/THOUGHT_EXPERIMENT_MATRIX.md), [map audit](records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_AUDIT.md), and [review response](records/R196_Two_Axis_Phenomenal_Calibration_20261009/REVIEW_RESPONSE.md).
+
+Next: define one nonverbal predeclared positive `F` endpoint independent of report, pleasantness, success and marker code, with formation-history and copy/switch defeaters. Do not repeat R193-R195 enumeration or treat a successful test as actual route use.
+
+---
+
+## Superseded R195 checkpoint (retained)
+
 # Latest research checkpoint — R195; completed map remains UCT-MAP-v1.1.2
 
 Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R195 Chinese handoff](records/R195_Interventional_Polarity_Anchor_20261009/HANDOFF_ZH.md).

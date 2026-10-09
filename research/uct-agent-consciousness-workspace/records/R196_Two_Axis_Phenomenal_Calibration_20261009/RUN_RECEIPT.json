@@ -1,0 +1,10 @@
+{
+  "research_id": "R196-TPD-20261009",
+  "command": "python records/R196_Two_Axis_Phenomenal_Calibration_20261009/check_two_axis_calibration.py",
+  "exit_code": 0,
+  "boolean_tables_per_variable": 16,
+  "marker_outcome_target_triples": 4096,
+  "assertion_sites": 5,
+  "status": "PASS",
+  "boundary": "Program execution verifies only the declared finite Boolean classifications and counts."
+}
