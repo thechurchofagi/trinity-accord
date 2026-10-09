@@ -610,6 +610,6 @@ Read all OPEN/ACKNOWLEDGED items before selection. Full response: [records/R192_
 - QC13 remains **OPEN**. R149/R157/R173 and external organizational-invariance, unfolding/falsification and accommodation literature are credited. The increment is a UCT-specific stopping rule and scope protocol, not a new general theorem.
 - Every cited composition/application keeps its interface evidence in explicit `all_of`, binding and proof-location fields. The 9/6/4 candidate remains disabled and the completed map remains v1.1.2.
 
-UCT-MAP-v1.1.2 remains authoritative; R191 is disabled. No basal gate, unique owner, publication action, or current-assistant consciousness verdict is introduced.
+UCT-MAP-v1.1.2 remains authoritative; R192 is disabled. No basal gate, unique owner, publication action, or current-assistant consciousness verdict is introduced.
 
 ---

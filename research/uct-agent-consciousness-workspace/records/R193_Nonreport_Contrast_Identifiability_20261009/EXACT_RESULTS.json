@@ -1,0 +1,71 @@
+{
+  "schema": "uct-r193-nonreport-contrast-check/1",
+  "research_id": "R193-NCI-20261009",
+  "domain": {
+    "features": [
+      "actual_same_lineage_history",
+      "actual_present_use",
+      "positive_test",
+      "positive_report"
+    ],
+    "state_count": 16,
+    "candidate_boolean_bridges": 65536,
+    "actuality_note": "H and U are typed as actual same-instance relations; E and R are evidence/output coordinates, not experiential constituents."
+  },
+  "constraint_ladder": [
+    {
+      "package": "none",
+      "compatible_bridges": 65536
+    },
+    {
+      "package": "E/R invariance",
+      "compatible_bridges": 16
+    },
+    {
+      "package": "E/R invariance + H-at-U=1 and U-at-H=1 contrasts",
+      "compatible_bridges": 4
+    },
+    {
+      "package": "previous + one baseline equivalence class",
+      "compatible_bridges": 2
+    },
+    {
+      "package": "previous + positive-pole anchor at H=U=1",
+      "compatible_bridges": 1
+    }
+  ],
+  "signed_constraint_graph": {
+    "unoriented": {
+      "consistent": true,
+      "components": 1,
+      "anchored_components": 0,
+      "predicted_bridge_count": 2
+    },
+    "oriented": {
+      "consistent": true,
+      "components": 1,
+      "anchored_components": 1,
+      "predicted_bridge_count": 1
+    },
+    "standard_result": "For a consistent Boolean XOR/equality graph, compatible labelings equal 2^(components without an oriented anchor)."
+  },
+  "surviving_unoriented_functions": [
+    "H AND U",
+    "NOT(H AND U)"
+  ],
+  "oriented_function": "H AND U",
+  "checks": {
+    "unconstrained_count_is_2_pow_16": true,
+    "test_and_report_invariance_leaves_16": true,
+    "two_predeclared_contrasts_leave_4": true,
+    "baseline_equivalence_leaves_complement_pair": true,
+    "remaining_pair_is_conjunction_and_complement": true,
+    "positive_polarity_anchor_selects_unique_conjunction": true,
+    "signed_graph_predicts_unoriented_count": true,
+    "signed_graph_predicts_oriented_count": true,
+    "actual_use_and_positive_test_are_logically_independent": true
+  },
+  "all_checks_pass": true,
+  "interpretation_boundary": "The unique oriented truth table is unique only relative to the declared anchor. The enumeration does not show that the positive pole is familiar mineness, that any proxy is valid, or that H/U/E/R are actually instantiated in a particular system.",
+  "content_sha256_without_this_field": "351be5c7b2d3394fe2d484250fe1c25baa7640b91b538572a229df44be1c03d7"
+}
