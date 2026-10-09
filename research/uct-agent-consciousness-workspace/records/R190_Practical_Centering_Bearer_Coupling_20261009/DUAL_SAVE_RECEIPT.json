@@ -1,0 +1,57 @@
+{
+  "receipt_id": "R190-DUAL-SAVE-RECEIPT-v1",
+  "research_id": "R190-PCBC-20261009",
+  "status": "DUAL_SAVE_VERIFIED",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "base_commit": "2ed44e238b7402293c884616202cee4d9cff4e7c",
+    "content_commit": "1555466bc7607ac41c608fc304f74ea7ff38e764",
+    "content_commit_verified": true,
+    "key_file_verified": "research/uct-agent-consciousness-workspace/records/R190_Practical_Centering_Bearer_Coupling_20261009/HANDOFF_ZH.md",
+    "final_receipt_commit": null,
+    "note": "The containing fast-forward receipt commit is recorded in the run report after ref verification; scientific recovery requires only content_commit."
+  },
+  "library_master": {
+    "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_000000006a5081f99ad200ae5b1e5251",
+    "previous_version": 46,
+    "current_version": 47,
+    "bytes": 606551,
+    "sha256": "c7ab99eccf36b363caca434b1565be7433e1564d99f2794fbd7a2a05f315853f",
+    "same_identity_preserved": true,
+    "verified_readback": true
+  },
+  "library_increment": {
+    "file_name": "UCT_R190_Increment_20261009.zip",
+    "library_file_id": "libfile_dcc1ea7c854881919f494764a4c571cd",
+    "file_id": "file_000000008bd882439cc442a42d96b606",
+    "version": 0,
+    "bytes": 88168,
+    "sha256": "18fe19cf08ce3dc8ca46490102f42158b25a4537b363822826e18a34858bafea",
+    "archive_test": "PASS",
+    "changed_repository_files": 28,
+    "package_extra_files": 2,
+    "scope": "Increment from base_commit to content_commit only; not a complete repository, complete working set, or full history backup."
+  },
+  "latest_completed_step": "R190 scientific artifacts, exact checks, disabled map candidate, navigation and coverage were saved to GitHub; the fixed Library handoff was advanced from v46 to v47 and an independently hashed increment was created.",
+  "unfinished": [
+    "Actual PC/BDCC installation and same-instance carrier/consumer evidence",
+    "Independent phenomenal target for familiar mineness/agency/trying",
+    "Reviewer disposition for QC10, IA-QC11, QC12 and QC13",
+    "Worldwide novelty search beyond the scoped sources"
+  ],
+  "failures": [
+    "Initial recovery misnamed R189 and was corrected from the current source.",
+    "An obsolete-schema quick map checker failed and was replaced by the release-ledger/schema-aware audit.",
+    "The initial four-mode model lacked the (1,0) witness; the failure is retained and repaired by remote/isolated action."
+  ],
+  "exact_restore": [
+    "Fetch branch uct-agent-consciousness-workspace and verify content commit 1555466bc7607ac41c608fc304f74ea7ff38e764.",
+    "Read CURRENT_STATE.json, HANDOFF.md, MASTER_INDEX.md, then records/R190_Practical_Centering_Bearer_Coupling_20261009/HANDOFF_ZH.md.",
+    "If GitHub is unavailable, obtain Library increment libfile_dcc1ea7c854881919f494764a4c571cd, verify SHA256, overlay it on base commit 2ed44e238b7402293c884616202cee4d9cff4e7c, and verify SHA256SUMS.txt.",
+    "Read fixed master handoff libfile_4175a81748fc819187fa8f5771f056fa version 47; do not overwrite it from an older copy."
+  ],
+  "next": "Ground one online conflict/endorsement transformation on a fixed PC+BDCC episode and test it against a reflex-table duplicate without using a deliberateness/self label as the answer."
+}

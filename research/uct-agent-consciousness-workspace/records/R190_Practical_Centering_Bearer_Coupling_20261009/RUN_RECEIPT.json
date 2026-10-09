@@ -35,12 +35,12 @@
     "worldwide_priority_verified": false
   },
   "persistence": {
-    "github_content_commit": null,
+    "github_content_commit": "1555466bc7607ac41c608fc304f74ea7ff38e764",
     "github_final_receipt_commit": null,
     "library_master_expected_version": 46,
-    "library_master_new_version": null,
-    "library_increment_id": null,
-    "status": "PENDING_DUAL_SAVE"
+    "library_master_new_version": 47,
+    "library_increment_id": "libfile_dcc1ea7c854881919f494764a4c571cd",
+    "status": "DUAL_CONTENT_SAVED_FINAL_GITHUB_RECEIPT_PENDING"
   },
   "failures_retained": [
     "Initial R189 recovery name assumption was wrong and corrected from source.",
