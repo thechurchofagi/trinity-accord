@@ -115,3 +115,7 @@ Formal graph extended from 430/206 to 436/209 with 117 context links unchanged; 
 ## R201 — 2026-10-10: robust orientation margin
 
 Derived a conservative sign certificate for a selected familiar-continuity marker under fallible adult endpoint semantics, residual source bias and class-specific cross-domain drift. Exact rational-grid checking covered 786,996 valid instances, with 11,049 triggering the certificate and zero violations; equality and below-threshold failure witnesses are retained. Restored and verified all 82 UCT-MAP-v1.1.2 capsule members, traversed the 913/424/261 graph and 1,608 review items, and kept the 9/3/5 extension disabled. No empirical bound, actual route use, `H` attribution, C1 validation or publication action occurred.
+
+## R202 — 2026-10-10: target-mixture audit bridge
+
+Proved that the unlabelled target marker marginal cannot identify target class-conditional direction and derived a conditional audit inversion for a prospectively sampled reporting validation domain. Exact arithmetic checked 7 opposite-orientation marginal pairs and 20,412 informative audit models with zero recovery violations; singular endpoint and selective-audit failures are retained. The complete 913/424/261 graph and all 1,608 reviews were traversed; the disabled 10/4/5 candidate passed 20 checks. No endpoint, cohort, no-report transport, actual use, `H` attribution, token admission or publication action occurred.

@@ -1,0 +1,206 @@
+{
+  "schema": "uct-disabled-checkpoint-extension/1",
+  "research_id": "R202-TMAB-20261010",
+  "result_version": "TMAB-RESULT-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "source_note": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/RESEARCH_NOTE.md",
+  "integration_status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled_as_established_premise": false,
+  "release_effect": "NONE; completed UCT-MAP-v1.1.2 remains unchanged",
+  "nodes": [
+    {
+      "id": "R202:FIXED_THREE_DOMAIN_CONTRACT",
+      "kind": "TYPED_VALIDATION_TRANSPORT_DOMAIN",
+      "statement": "Fix source semantic-calibration C, reporting target-style validation V, genuinely nonreporting target T, selected H, marker M, audit endpoint J, audit inclusion A, actual-use U=1, bearer class, interval and complete application signature.",
+      "scope": "Selected familiar-continuity marker validation only; not basal-experience admission.",
+      "quantifier": "For every proposed R202 validation or transport application.",
+      "status": "DECLARATION_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R202:UNLABELLED_TARGET_MARGINAL",
+      "kind": "LIMITED_OBSERVATION_MODEL",
+      "statement": "The unlabelled target supplies only m_T=P_T(M=1|U=1), with latent prevalence and two H-class marker rates unspecified.",
+      "scope": "One binary marker and selected binary H coordinate in T.",
+      "quantifier": "For every target domain lacking endpoint or equivalent H-stratifying evidence.",
+      "status": "DECLARATION_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R202:MARGINAL_SIGN_NONIDENTIFIABILITY",
+      "kind": "GENERAL_NONIDENTIFIABILITY_RESULT",
+      "statement": "Every nondegenerate unlabelled marker marginal is compatible with both positive and negative H-class marker contrasts, so neither target direction nor R201 class-specific drift budgets are identified from that marginal alone.",
+      "scope": "Binary mixture model under only probability validity.",
+      "quantifier": "For every m in (0,1) and a permitted positive displacement d.",
+      "status": "PROVED_SCOPE_RESULT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R202:PROSPECTIVE_IGNORABLE_AUDIT",
+      "kind": "OPEN_SAMPLING_PREMISE",
+      "statement": "Audit inclusion is prospectively assigned and independent of H, M and J conditional on the frozen validation domain and actual U=1, or a justified selection model replaces this condition.",
+      "scope": "Reporting target-style validation domain V.",
+      "quantifier": "For every use of the audit sample to represent V.",
+      "status": "OPEN_PREMISE_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R202:INFORMATIVE_SIGNED_ENDPOINT",
+      "kind": "OPEN_ENDPOINT_ERROR_PREMISE",
+      "statement": "Endpoint semantics and response-key direction are fixed independently, with a=P(J=1|H=1) and c=P(J=1|H=0) independently calibrated and a>c.",
+      "scope": "One endpoint in V and the selected H meaning.",
+      "quantifier": "For every inversion application.",
+      "status": "OPEN_PREMISE_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R202:CONDITIONAL_NONDIFFERENTIALITY",
+      "kind": "OPEN_MEASUREMENT_ERROR_PREMISE",
+      "statement": "Within V and actual U=1, endpoint error is conditionally independent of marker M given H, or departures receive an explicit residual sensitivity bound.",
+      "scope": "One endpoint-marker pair in V.",
+      "quantifier": "For both H classes in every inversion application.",
+      "status": "OPEN_PREMISE_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R202:ACTUAL_USE_EVIDENCE_FIREWALL",
+      "kind": "ONTOLOGY_EVIDENCE_SEPARATION",
+      "statement": "Validation formulae condition on actual U=1; telemetry, perturbation, bypass and audit success remain evidence E_U and cannot be substituted for U without a further error model.",
+      "scope": "Every R202 route-conditioned application.",
+      "quantifier": "For every bearer, episode and route-use claim.",
+      "status": "METHOD_CONSTRAINT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R202:AUDIT_INVERSION_RESULT",
+      "kind": "CONDITIONAL_IDENTIFICATION_RESULT",
+      "statement": "Under the full audit interface, latent prevalence and both validation-domain H-class marker rates are recovered exactly from the audited M,J joint law and independent endpoint error rates.",
+      "scope": "The fixed V,H,M,J,A,U=1 contract only.",
+      "quantifier": "For every instance satisfying all simultaneous inversion premises and positivity.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R202:THREE_DOMAIN_STOP_RULE",
+      "kind": "METHOD_STOPPING_RULE",
+      "statement": "A reporting target-style audit validates at most C-to-V; any claim in genuinely nonreporting T still requires explicit V-to-T class-conditional transport or a justified same-domain missingness design.",
+      "scope": "The fixed C,V,T chain and selected target only.",
+      "quantifier": "For every attempted no-report extension.",
+      "status": "CONDITIONAL_METHOD_RESULT_DISABLED",
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "R202:FAILURE_WITNESSES",
+      "kind": "EXACT_COUNTERMODELS",
+      "statement": "Equal target marginals permit opposite directions; a=c makes the audit matrix singular; and H-dependent audit selection can equalize audit prevalence across populations with different true prevalence.",
+      "scope": "Declared binary mixture and audit models.",
+      "quantifier": "There exist exact rational witnesses for each omitted premise.",
+      "status": "PROVED_COUNTERMODELS_DISABLED",
+      "actual_premises_discharged": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "R202:r_marginal_nonidentifiability",
+      "all_of": [
+        "R202:FIXED_THREE_DOMAIN_CONTRACT",
+        "R202:UNLABELLED_TARGET_MARGINAL"
+      ],
+      "conclusion": "R202:MARGINAL_SIGN_NONIDENTIFIABILITY",
+      "statement": "Construct equal-weight class-conditionals m-d,m+d and their swap.",
+      "kind": "CONSTRUCTIVE_NONIDENTIFIABILITY_RULE",
+      "same_instance_required": true,
+      "binding": "One T,H,M,U=1 and the same observed marginal are retained across the two rival models.",
+      "proof_location": "RESEARCH_NOTE.md §3; check_target_mixture_audit.py",
+      "alternative_route_semantics": "Additional independently justified target information may shrink the identified set but must be represented explicitly.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R202:r_audit_inversion",
+      "all_of": [
+        "R202:FIXED_THREE_DOMAIN_CONTRACT",
+        "R202:PROSPECTIVE_IGNORABLE_AUDIT",
+        "R202:INFORMATIVE_SIGNED_ENDPOINT",
+        "R202:CONDITIONAL_NONDIFFERENTIALITY",
+        "R202:ACTUAL_USE_EVIDENCE_FIREWALL"
+      ],
+      "conclusion": "R202:AUDIT_INVERSION_RESULT",
+      "statement": "Invert the two-by-two endpoint misclassification equations with a-c nonzero and retain actual U=1.",
+      "kind": "CONDITIONAL_MATRIX_INVERSION_RULE",
+      "same_instance_required": true,
+      "binding": "One V,H,M,J,A,U=1, endpoint-error matrix and audited joint law are retained.",
+      "proof_location": "RESEARCH_NOTE.md §4; EXACT_RESULTS.json",
+      "alternative_route_semantics": "If endpoint errors are differential or audit selection is nonignorable, report a sensitivity set rather than point identification.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R202:r_three_domain_stop",
+      "all_of": [
+        "R202:MARGINAL_SIGN_NONIDENTIFIABILITY",
+        "R202:AUDIT_INVERSION_RESULT",
+        "R202:ACTUAL_USE_EVIDENCE_FIREWALL"
+      ],
+      "conclusion": "R202:THREE_DOMAIN_STOP_RULE",
+      "statement": "Separate validation-domain identification from the remaining no-report-domain transport step.",
+      "kind": "TYPED_METHOD_RULE",
+      "same_instance_required": true,
+      "binding": "One declared C-to-V-to-T chain, target meaning, marker event and actual-use interface are retained.",
+      "proof_location": "RESEARCH_NOTE.md §5",
+      "alternative_route_semantics": "A genuine same-domain randomized missing-endpoint design may collapse V and T, but that equality must be established rather than named.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "R202:r_failure_witnesses",
+      "all_of": [
+        "R202:UNLABELLED_TARGET_MARGINAL",
+        "R202:FIXED_THREE_DOMAIN_CONTRACT"
+      ],
+      "conclusion": "R202:FAILURE_WITNESSES",
+      "statement": "Evaluate exact orientation, singular-endpoint and selective-audit witness pairs.",
+      "kind": "FINITE_COUNTERMODEL_RULE",
+      "same_instance_required": true,
+      "binding": "Each witness retains one declared observed law while varying only the hidden premise under attack.",
+      "proof_location": "RESEARCH_NOTE.md §§3–4; EXACT_RESULTS.json",
+      "alternative_route_semantics": "Stronger sampling or endpoint assumptions can exclude a witness only when independently supported.",
+      "status": "CANDIDATE_DISABLED"
+    }
+  ],
+  "context_links": [
+    {
+      "id": "R202:ctx_C1",
+      "type": "AXIOM_STATUS_PRESERVED",
+      "from": "R202:THREE_DOMAIN_STOP_RULE",
+      "to": "A:C1",
+      "statement": "The audit interface neither proves nor replaces C1."
+    },
+    {
+      "id": "R202:ctx_U1",
+      "type": "NON_GATE_CONTEXT",
+      "from": "R202:THREE_DOMAIN_STOP_RULE",
+      "to": "A:U1",
+      "statement": "Report, audit inclusion, endpoint reliability and transport are not basal-experience requirements."
+    },
+    {
+      "id": "R202:ctx_R157",
+      "type": "REPORT_DOMAIN_LIMIT_RETAINED",
+      "from": "R202:THREE_DOMAIN_STOP_RULE",
+      "to": "R157:REPORT_COVERAGE_LIMIT",
+      "statement": "A reporting validation domain does not silently totalize a report measure over nonreporting T."
+    },
+    {
+      "id": "R202:ctx_R173",
+      "type": "ACTUAL_USE_BOUNDARY",
+      "from": "R202:ACTUAL_USE_EVIDENCE_FIREWALL",
+      "to": "R173:RETENTIVE_BINDING_RELATION",
+      "statement": "Audit or bypass evidence does not supply actual trace continuation and consumer use."
+    },
+    {
+      "id": "R202:ctx_R201",
+      "type": "DRIFT_OBSERVABILITY_CORRECTION",
+      "from": "R202:MARGINAL_SIGN_NONIDENTIFIABILITY",
+      "to": "R157:COORDINATE_TRANSPORT",
+      "statement": "R201 drift budgets cannot be estimated from an unlabelled target marker marginal alone."
+    }
+  ]
+}
+

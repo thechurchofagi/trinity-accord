@@ -58,3 +58,7 @@ The exact UCT-MAP-v1.1.2 graph and all 1,608 review items were traversed with th
 # Latest compatibility audit — R201
 
 The exact UCT-MAP-v1.1.2 graph and all 1,608 review items were traversed with the disabled R201 9/3/5 candidate. All 19 structural checks pass, including references, simultaneous `all_of` premises, same-instance bindings, direction/proof/alternative fields, full DAG acyclicity, C1 axiom preservation, actual-use/evidence separation and the basal non-gate. Structural PASS is not empirical endpoint validation, actual bias/drift bounds, actual route use, `H` identification, reviewer closure or activation. See `records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_COMPATIBILITY_AUDIT.json`.
+
+# Latest compatibility audit — R202
+
+The exact UCT-MAP-v1.1.2 graph and all 1,608 review items were traversed with the disabled R202 10/4/5 candidate. All 20 structural checks pass, including references, simultaneous `all_of` premises, same-instance bindings, direction/proof/alternative fields, full DAG acyclicity, C1 axiom preservation, report-domain limits, actual-use/evidence separation and the basal non-gate. Structural PASS is not endpoint validation, ignorable audit sampling, conditional nondifferentiality, `V→T` transport, actual route use, `H` identification, reviewer closure or activation. See `records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_COMPATIBILITY_AUDIT.json`.

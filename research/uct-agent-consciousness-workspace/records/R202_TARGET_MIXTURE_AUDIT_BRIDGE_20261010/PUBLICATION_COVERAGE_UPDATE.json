@@ -1,0 +1,13 @@
+{
+  "schema": "uct-publication-coverage-update/1.0",
+  "coverage_version": "UCT-PUB-v1.0.14",
+  "round": "R202",
+  "research_id": "R202-TMAB-20261010",
+  "newly_covered_published_claims": [],
+  "new_pending_claims": ["R202-C1", "R202-C2", "R202-C3", "R202-C4"],
+  "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+  "recommended_home": "R192-R202 familiar-mineness identifiability and calibration methods family",
+  "reason": "The nonidentifiability result and audit bridge are substantive and reusable, but no actual endpoint, audit cohort, target transport or token is validated; a standalone empirical paper would overstate the evidence.",
+  "nondeductive": true,
+  "map_release_unchanged": "UCT-MAP-v1.1.2"
+}

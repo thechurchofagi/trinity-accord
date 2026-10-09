@@ -1,3 +1,16 @@
+# Current research index — R202 / completed map UCT-MAP-v1.1.2
+
+- R202 note: [Target-Mixture Audit Bridge](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/RESEARCH_NOTE.md)
+- R202 exact model: [results](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/EXACT_RESULTS.json) and [checker](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/check_target_mixture_audit.py)
+- R202 controls: [claims](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/CLAIM_LEDGER.md), [gaps](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/GAP_LEDGER.md), [sources](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/SOURCE_SCOPE.md), [thought experiments](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/THOUGHT_EXPERIMENT_MATRIX.md), [review response](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/REVIEW_RESPONSE.md)
+- R202 design/handoff/audit: [preregistration](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/PRE_REGISTRATION_SKELETON.md), [Chinese handoff](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/HANDOFF_ZH.md), [map audit](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_AUDIT.md), [work log](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/WORK_LOG.md)
+
+R202 is the latest checkpoint, not an integrated map release. Its 10-node/4-rule/5-context candidate is disabled; completed counts remain 913/424/261 with 10 suspended rules. UCT-PUB-v1.0.14 is nondeductive. R201 and earlier entries below remain historical navigation.
+
+---
+
+## Superseded R201 index (retained)
+
 # Current research index — R201 / completed map UCT-MAP-v1.1.2
 
 - R201 note: [Robust Orientation Margin](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/RESEARCH_NOTE.md)

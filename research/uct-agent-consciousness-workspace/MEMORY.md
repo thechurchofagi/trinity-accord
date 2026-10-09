@@ -1,3 +1,15 @@
+# Research memory — R202 pending over UCT-MAP-v1.1.2
+
+R202 closes a specific observability loophole in R201: a genuinely unlabelled target marker marginal cannot identify the sign of the target class-conditional contrast. Equal-marginal twins can have opposite familiar-continuity orientation even with fixed source calibration. A prospectively random audit in a target-style reporting validation domain can conditionally recover latent prevalence and both class-conditionals when endpoint error is independently fixed and informative, conditional nondifferentiality and positivity hold, and the same actual-use stratum is retained.
+
+The audit identifies `V`, not a genuinely nonreporting `T`. `V→T` still needs class-conditional bounds or a justified same-domain missingness design. Audit/test evidence remains distinct from actual use and experience structure. Exact arithmetic checked 20,412 inversion instances with zero violations; the disabled 10/4/5 map candidate passed 20 structural checks against all 1,608 review items.
+
+No actual endpoint, sample, transport bound or token was validated. C1 and U1 are unchanged; all four review items remain open/application-open; coverage is UCT-PUB-v1.0.14. Next: preregister a reporting-adult random audit with response-key, success/fluency, residual-dependence and physical-bypass falsifiers before any no-report transport.
+
+---
+
+## Superseded R201 memory (retained)
+
 # Research memory — R201 pending over UCT-MAP-v1.1.2
 
 R201 quantifies the remaining calibration/transport gap for the selected familiar-continuity target `H`. On one actual-use stratum, if the adult endpoint-marker contrast exceeds an independently bounded residual-bias term plus both class-specific cross-domain drift bounds, the target marker direction remains positive. Equality can fall to zero and a smaller margin can reverse.

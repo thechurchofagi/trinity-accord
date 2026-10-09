@@ -1,3 +1,19 @@
+# Latest research checkpoint — R202; completed map remains UCT-MAP-v1.1.2
+
+Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R202 Chinese handoff](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/HANDOFF_ZH.md).
+
+R202 proves that an unlabelled target marker marginal cannot identify the sign of its latent class-conditional contrast: fixed equal marginals permit opposite familiar-continuity orientations. It then derives an explicit audit inversion for a prospectively sampled target-style reporting validation domain under independently calibrated informative endpoint error, conditional nondifferentiality, positivity and the same actual-use stratum. Exact arithmetic recovers 20,412 models without violation.
+
+The result identifies `V`, not genuinely nonreporting `T`; `V→T` remains a separate transport obligation. Audit, telemetry and bypass tests remain evidence rather than actual use or experience structure. Completed counts remain 913/424/261 with 10 suspended rules and 1,608 review items. R202's 10/4/5 candidate is disabled; UCT-PUB-v1.0.14 is nondeductive; all four review items remain open/application-open.
+
+R202 artifacts: [note](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/RESEARCH_NOTE.md), [results](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/EXACT_RESULTS.json), [claims](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/CLAIM_LEDGER.md), [gaps](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/GAP_LEDGER.md), [preregistration](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/PRE_REGISTRATION_SKELETON.md), [map audit](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_AUDIT.md), and [review response](records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/REVIEW_RESPONSE.md).
+
+Next: convert the preregistration skeleton into an executable `C→V` audit and predeclare rejection conditions. Do not estimate R201 drift from an unlabelled marginal or infer `V→T` without a bridge.
+
+---
+
+## Superseded R201 checkpoint (retained)
+
 # Latest research checkpoint — R201; completed map remains UCT-MAP-v1.1.2
 
 Start with [CURRENT_STATE.json](CURRENT_STATE.json), [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [PUBLICATION_COVERAGE.json](PUBLICATION_COVERAGE.json), and the [R201 Chinese handoff](records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/HANDOFF_ZH.md).

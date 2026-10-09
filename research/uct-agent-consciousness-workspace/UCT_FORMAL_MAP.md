@@ -56,3 +56,7 @@ R199 proposes 8 nodes, 5 rules and 5 context links for the continuation-probe ce
 # Latest pending disabled checkpoint — R200-SCF-20261010
 
 R200 proposes 9 nodes, 5 rules and 5 context links for multi-proxy non-self-anchoring, conditional signed calibration, class-conditional transport, formation-by-use nonidentification and the semantic calibration firewall. The full v1.1.2 graph and all 1,608 review objects were traversed; all 19 structural checks pass. R200 is disabled and does not change completed counts or hashes. Coverage is UCT-PUB-v1.0.12.
+
+# Latest pending disabled checkpoint — R202-TMAB-20261010
+
+R202 proposes 10 nodes, 4 rules and 5 context links for target-mixture sign nonidentifiability, conditional audit inversion, the three-domain `C→V→T` stop rule and actual-use/evidence separation. The full v1.1.2 graph and all 1,608 review objects were traversed; all 20 structural checks pass. R202 is disabled and does not change completed counts or hashes. Coverage is UCT-PUB-v1.0.14.
