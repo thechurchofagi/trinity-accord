@@ -1,0 +1,112 @@
+{
+  "schema": "uct-novelty-dual-save-receipt/1",
+  "id": "NOV20261010",
+  "review_version": "NOV-REVIEW-v0.1.0",
+  "status": "SAVED_AND_VERIFIED",
+  "science": {
+    "commit": "1dca2275808ee0577542fe3f26ffdf66d1d33f11",
+    "parent": "7b3c8ca6d7dd945aa06b2cff1b968f2ed65e63ee",
+    "tree": "bd2dbdf31a999c61c898a7f375e087a22ff4940d",
+    "verified": {
+      "commit": "1dca2275808ee0577542fe3f26ffdf66d1d33f11",
+      "all_selected_git_blob_sha1_verified": 36,
+      "method": "immutable blob SHA1 plus committed tree path readback"
+    },
+    "research_note_exact_text_readback": true,
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "skip_ci": true
+  },
+  "library": {
+    "status": "ALL_FOUR_SAVED_AND_EXACT_BYTE_VERIFIED",
+    "fixed_master_version": 98,
+    "fixed_master_same_identity": true,
+    "ordered_results": [
+      {
+        "purpose": "replace_library_file",
+        "status": "succeeded",
+        "file_id": "file_0000000086888230b073a0e274ede671",
+        "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+        "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+        "local_metadata_applied": true,
+        "path": "/UCT_Hourly_Research_Master_Handoff.md",
+        "current_version_number": 98,
+        "bytes": 9932,
+        "sha256": "d8451407a018a1cfdd28b85cec8736179781c8a16ee4f31e557135b3d0ee831a",
+        "exact_byte_verified": true
+      },
+      {
+        "purpose": "create_library_file",
+        "status": "succeeded",
+        "file_id": "file_000000005bfc81f7a5095c74ebbd6cb5",
+        "library_file_id": "libfile_bc3cbd0395b081918e6f8f1423658175",
+        "file_name": "UCT_NOV20261010_Increment.zip",
+        "local_metadata_applied": true,
+        "path": "/UCT_NOV20261010_Increment.zip",
+        "current_version_number": 0,
+        "bytes": 234066,
+        "sha256": "fa7322ad77c2ed2d13fb1a4453f177c763b487d649fa1018584184756dfc7d72",
+        "exact_byte_verified": true
+      },
+      {
+        "purpose": "create_library_file",
+        "status": "succeeded",
+        "file_id": "file_00000000b0bc81f5abcc33321bc4505e",
+        "library_file_id": "libfile_f2716fa599f48191bcbc1eb0cae95a15",
+        "file_name": "UCT_NOV20261010_Increment_MANIFEST.json",
+        "local_metadata_applied": true,
+        "path": "/UCT_NOV20261010_Increment_MANIFEST.json",
+        "current_version_number": 0,
+        "bytes": 9337,
+        "sha256": "bb470583faf934f149bd9a84b924a49d9a128dc48c0ce9968eef7107b85b2eed",
+        "exact_byte_verified": true
+      },
+      {
+        "purpose": "create_library_file",
+        "status": "succeeded",
+        "file_id": "file_00000000e27081f8b7e962763f986a6a",
+        "library_file_id": "libfile_0c9e6c514dc08191a984cb1665159a0d",
+        "file_name": "UCT_NOV20261010_Handoff_ZH.md",
+        "local_metadata_applied": true,
+        "path": "/UCT_NOV20261010_Handoff_ZH.md",
+        "current_version_number": 0,
+        "bytes": 2758,
+        "sha256": "9184c62b221e1f9afc621f305c26bf801106f30ff1fc6c1d5f66a02eb7269db3",
+        "exact_byte_verified": true
+      }
+    ],
+    "archive_members_verified": 36,
+    "previous_master_v97_exact_suffix_preserved": true
+  },
+  "scope": {
+    "science_continuation_preserved": "A3V20261010",
+    "completed_map": "UCT-MAP-v1.1.2",
+    "navigation": "UCT-INTEGRATION-v1.0.0",
+    "disabled_pending_identities": 38,
+    "publication_coverage": "UCT-PUB-v1.0.32",
+    "new_publications": 0,
+    "new_theorems": 0,
+    "new_H_data": false,
+    "manuscript_decision": "HOLD_STANDALONE_INTEGRATE_SCOPE_AND_PRIOR_ART",
+    "priority_verified": false,
+    "semantic_audit": "AUDIT_INCOMPLETE",
+    "all_existing_OPEN_preserved": true,
+    "backup_scope": "36_CHANGED_PATH_INCREMENT_NOT_FULL_REPOSITORY",
+    "post_save_receipt_not_in_prior_increment": true
+  },
+  "reconciliation": {
+    "concurrent_navigation_heads": [
+      "559a7427cd8904370f68cf1b0e04c6b5fb5bef03",
+      "062663b762ed45407ebfc7584b3712ecb9d84c28",
+      "7b3c8ca6d7dd945aa06b2cff1b968f2ed65e63ee"
+    ],
+    "method": "Preserved canonical navigation, all 38 pending identities, current A3V scientific pointers, and all concurrent NAV receipt paths; metadata merged with expected-SHA protection",
+    "failures_retained": [
+      "Stale master v94 materialization failed; refreshed v95 succeeded",
+      "Stale master v96 materialization failed after concurrent v97 replacement; refreshed v97 succeeded",
+      "Initial expected-head mismatch stopped before mutation; concurrent navigation reconciled",
+      "Local update-ref response-shape assertion raised after successful ref move; readback proved requested science commit; no blind write retry"
+    ]
+  },
+  "receipt_location": "This file is a post-save GitHub record; its own resolving commit is not self-encoded."
+}
