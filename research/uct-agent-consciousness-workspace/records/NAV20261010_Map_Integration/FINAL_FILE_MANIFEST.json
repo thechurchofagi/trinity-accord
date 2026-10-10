@@ -1,0 +1,231 @@
+{
+  "scope": "Current integrated navigation files after final pointer reconciliation; original integration/FILE_MANIFEST records the earlier immutable snapshot.",
+  "commit": "062663b762ed45407ebfc7584b3712ecb9d84c28",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 114419,
+      "sha256": "6bd0e94b8e3a2ce1b44b7c673f81748770590dc1a43206b32c587a53c5acc962"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 16442,
+      "sha256": "d462b800a89bc9ef44853600986028d83dd0b68aa4deaa47dd374da4cee32bdd"
+    },
+    {
+      "path": "CURRENT_STATE.json",
+      "bytes": 27706,
+      "sha256": "008b1ff2a3f735b5bf695717f7de6b0b97e27acad0466000564c429b2772ea21"
+    },
+    {
+      "path": "FORMAL_MAP_EXTENSION_INDEX.json",
+      "bytes": 3531,
+      "sha256": "a24f55933d8a3bf52b97726d81514dedbeb2daa9e70c8aea9e005acf7123a60d"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 1134,
+      "sha256": "54900e6f6d13d6cd6dd16f4879ec4c9efa984075776c60812cd8099074095405"
+    },
+    {
+      "path": "MASTER_INDEX.md",
+      "bytes": 700,
+      "sha256": "9ef3846786ad01a00c3995aed030638304290dc6dc3d080f6d83ad3bf3debc93"
+    },
+    {
+      "path": "MEMORY.md",
+      "bytes": 949,
+      "sha256": "944cbc9bd44d724cbc3a47a09a03b86c592c6b582a730cda8898f990af8e74af"
+    },
+    {
+      "path": "PENDING_RESEARCH.md",
+      "bytes": 11562,
+      "sha256": "bf876eeb428060d4925d441f2b94e53e33cb76d609d27a1a1cd1a6dc2374f81c"
+    },
+    {
+      "path": "README.md",
+      "bytes": 489,
+      "sha256": "c35779721e7d0d93bbc51b3070518ad5ae7c7d2ea086458b0a5115c162ebc7b3"
+    },
+    {
+      "path": "RESEARCH_MASTER_GUIDE.md",
+      "bytes": 29194,
+      "sha256": "fc925a1be24ee5ecb201dfd135a59bb3de7bfe65a282114f247e5e1323559ba9"
+    },
+    {
+      "path": "RESEARCH_REGISTRY.json",
+      "bytes": 59674,
+      "sha256": "50cfe3508a0c78018e55a51756ae20b88b4edd81af79aabb7c70cdd7fb190ec9"
+    },
+    {
+      "path": "RESEARCH_SESSION_LOG_INDEX.json",
+      "bytes": 9259,
+      "sha256": "7d099cc969450fc57b37c19c7e094de292e22e8d11296dc9368efc4e7c9e4b77"
+    },
+    {
+      "path": "START_HERE.md",
+      "bytes": 836,
+      "sha256": "c3655673e7fdf2b1812da0f7c4df8a57925dfaa33da0d90ba22b91aa02236881"
+    },
+    {
+      "path": "UCT_FORMAL_AUDIT.md",
+      "bytes": 1180,
+      "sha256": "69b664563320015c107c9c2c5c8885192717cfd05a38494a2ee3b95519bb7e2f"
+    },
+    {
+      "path": "UCT_FORMAL_GRAPH_MODULES.json",
+      "bytes": 57253,
+      "sha256": "71f5f104776830e1467d056bdec77ee98e9d5270e9b82f01143581eb3c464733"
+    },
+    {
+      "path": "UCT_FORMAL_MAP.md",
+      "bytes": 4632,
+      "sha256": "a5603603170f217d867dd9fb25b2ab90ab01375d85c8183a805defe1ebd49d09"
+    },
+    {
+      "path": "UNIFIED_RESEARCH_INDEX.json",
+      "bytes": 142644,
+      "sha256": "82064817253249dd6a25011b2befe35fba92c70d98872017997ecdedee43e48f"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/BUILD_SOURCE.py",
+      "bytes": 25127,
+      "sha256": "5771ee7cab6edff89a4f3b32917ab8df84248f920520fc15e7a244c04a7f122a"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/COMPLETED_RULE_ROUTES.md",
+      "bytes": 119541,
+      "sha256": "3ab11d1cea38a78047573be90016c7c9f7b16e51a509b20f88c283b09893d8d5"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/FILE_MANIFEST.json",
+      "bytes": 7129,
+      "sha256": "794df84e72bea89f3754b675ae41da8bd69c50eea2fe76cbc947b476865e8918"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/FINALIZE_SOURCE.py",
+      "bytes": 10719,
+      "sha256": "20ee73e5e29321ee09986d980ed858bdc7bd5338481f9cb504a7ecf24dd3c11c"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/HISTORY_INDEX.md",
+      "bytes": 1275,
+      "sha256": "fb11c80653a39fb5590df7c5683498975596ae4ebadc0d9bce2e7cd5745c269e"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/RECONCILIATION.json",
+      "bytes": 3522,
+      "sha256": "e91e84c8b9c44c4f79c8ae86aac395f9e55166154dd74b8467906890b4f0a168"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/REFERENCE_RESOLUTION.json",
+      "bytes": 406165,
+      "sha256": "6f2d5318178993227cccc647b3c3fd94d0a13066b1b2cc02cb7542757571ad3f"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/UNIFIED_MAP.json.gz",
+      "bytes": 628109,
+      "sha256": "b37711fb7dbaca9b728feb38e7cb14abf4f63a9571035b40c048a97472df35be"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/VALIDATION.json",
+      "bytes": 609,
+      "sha256": "a8ec81abf56489a29fc116957bb9fd816c8fc851db5da617b19077f3b0714ce8"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/history/AGENTS.md",
+      "bytes": 113844,
+      "sha256": "08dc3ae137d132a1f565f14787db60bf2b340cf1f6417c703700cf3b970d8b28"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/history/HANDOFF.md",
+      "bytes": 51303,
+      "sha256": "3f4d1d27e6bb99ac262b365958a04a570f715c5ab7b99a8b6761c9ca9bba827e"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/history/MASTER_INDEX.md",
+      "bytes": 40580,
+      "sha256": "eb79a4f49f1b35513d766404313607e1e1c72d70439d9d5ef7239f9e55710536"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/history/MEMORY.md",
+      "bytes": 31612,
+      "sha256": "ece27ca12bacad00f7b3217829784ce3653e42ee116ef3cfc835d2199cd86a7c"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/history/README.md",
+      "bytes": 13964,
+      "sha256": "3581b3c8168a215bcf40020b56af7c9ced546fac4f92816b27defcf2f9d3f804"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/history/RESEARCH_MASTER_GUIDE.md",
+      "bytes": 34685,
+      "sha256": "2c262e6c73e890d310a75b55ba53141665daa5fc52d87460fdfcb42a8d1b0986"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/history/START_HERE.md",
+      "bytes": 4277,
+      "sha256": "15164dba9785d9baffffcdb66a5dfa93b39ef1de054340fcc3cb90e45864218f"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/history/UCT_FORMAL_AUDIT.md",
+      "bytes": 23757,
+      "sha256": "9436bf51a4e4e4e2a3208260ff23d4e9bd42b2cc3d5922e019f4d4c9a4f66556"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/history/UCT_FORMAL_MAP.md",
+      "bytes": 22962,
+      "sha256": "010a27e4ac1ccde3d14ca62f10bc86e06b9342234ce4cfaf36e8e4b7bd66cf6e"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/restore_unified_map.py",
+      "bytes": 844,
+      "sha256": "55f02ce20e98f5b40d30fd5817da6b03b047d5649af9bbc56454e820835061a4"
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/validate_navigation.py",
+      "bytes": 3269,
+      "sha256": "596deacf0ad8cc51f97c9318720959a1635b0e23535478af595f138f0d8752ab"
+    },
+    {
+      "path": "records/NAV20261010_Map_Integration/CURRENT_POINTER_RECONCILIATION.json",
+      "bytes": 1458,
+      "sha256": "dfcde43be470628ee6b3efc02dec74aa75ca7fcdb79825069c8f398a0874c853"
+    },
+    {
+      "path": "records/NAV20261010_Map_Integration/FINAL_VALIDATION.json",
+      "bytes": 527,
+      "sha256": "c2ce20d49d2e0b34d14d34d3fe3ccec7aed5f8d522511be0b63e0f633a02731d"
+    },
+    {
+      "path": "records/NAV20261010_Map_Integration/HANDOFF_ZH.md",
+      "bytes": 4605,
+      "sha256": "227da25c3b07088ba8817435eaa3321237081e51bbb8c87a7d008f1607ac2dd8"
+    },
+    {
+      "path": "records/NAV20261010_Map_Integration/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 717,
+      "sha256": "373de38d523f0f7c04597c91648bbb9081647fe8d9f1709a439868d70bd4b2c7"
+    },
+    {
+      "path": "records/NAV20261010_Map_Integration/RESEARCH_NOTE.md",
+      "bytes": 371,
+      "sha256": "f7db8335623b56182c7a3ba98b0618a7d4a054403390f8a457eb57d470d3e129"
+    },
+    {
+      "path": "records/NAV20261010_Map_Integration/WORK_LOG.md",
+      "bytes": 2390,
+      "sha256": "7bea65acd5e005cadca8d91bf3fbaf6be21df7e7cf8801c12d4ccfa912a3ba39"
+    },
+    {
+      "path": "records/NAV20261010_Map_Integration/sync_current_pointers.py",
+      "bytes": 2583,
+      "sha256": "283b431488037123471950ed3f52c6b70e3244d88fd73cefa1df66e95308cf86"
+    },
+    {
+      "path": "records/NAV20261010_Map_Integration/validate_current_map.py",
+      "bytes": 1366,
+      "sha256": "eedb207f30cae8bf300fe0c76ee220e979a11e9aa8bc9436e4595ebe7b7458cf"
+    }
+  ]
+}

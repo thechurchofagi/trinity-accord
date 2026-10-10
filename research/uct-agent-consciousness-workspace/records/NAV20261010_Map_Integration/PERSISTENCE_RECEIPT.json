@@ -42,7 +42,7 @@
       "match": true
     }
   ],
-  "library_status": "INITIAL_PACKAGE_AND_MASTER_V96_SAVED; FINAL_POINTER_RECONCILIATION_PACKAGE_UPDATE_PENDING",
+  "library_status": "PACKAGE_V1_AND_MASTER_V97_SAVED; MASTER_CURRENT_TEXT_READ_BACK",
   "completion_scope": "NAVIGATION_AND_DISABLED_CANDIDATE_ASSEMBLY",
   "scientific_promotion": false,
   "library_initial_save": [
@@ -58,5 +58,32 @@
       "current_version_number": 96,
       "status": "succeeded"
     }
-  ]
+  ],
+  "github_pointer_reconciliation_commit": "062663b762ed45407ebfc7584b3712ecb9d84c28",
+  "library_final_save": [
+    {
+      "library_file_id": "libfile_2620ff277d208191871c054f7f2d8df8",
+      "file_name": "UCT_Map_Integration_v1.0.0_20261010.zip",
+      "current_version_number": 1,
+      "status": "succeeded"
+    },
+    {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+      "current_version_number": 97,
+      "status": "succeeded"
+    }
+  ],
+  "package_sha256": "2345058a82b7c57ebb1065c89803148b92bb7f269e88ac314f85bae574db0a2d",
+  "package_bytes": 6801251,
+  "package_validation": "ZIP_CRC_PASS; HELPER_UPLOAD_SUCCESS; NO_SEPARATE_REMOTE_BYTE_DOWNLOAD",
+  "master_readback_version": "97",
+  "github_pointer_reconciliation_readback": {
+    "commit": "062663b762ed45407ebfc7584b3712ecb9d84c28",
+    "path": "RESEARCH_SESSION_LOG_INDEX.json",
+    "latest_scientific": "A3V20261010",
+    "pending_checkpoints": 38
+  },
+  "final_receipt_commit": "The branch commit containing this receipt; self-SHA omitted to avoid self-reference.",
+  "completed": true
 }
