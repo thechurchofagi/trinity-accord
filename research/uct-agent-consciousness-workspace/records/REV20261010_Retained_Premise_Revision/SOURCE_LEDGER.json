@@ -1,0 +1,82 @@
+{
+  "retrieval_date": "2026-10-10",
+  "sources": [
+    {
+      "id": "E1",
+      "url": "https://alignment.anthropic.com/2026/chive/",
+      "scope": "First-party research account, pipeline and limitations",
+      "use": "Counterfactual prompt explanations already studied"
+    },
+    {
+      "id": "E2",
+      "url": "https://arxiv.org/html/2602.20710v2",
+      "scope": "Abstract, introduction and related work; no full training reproduction",
+      "use": "Counterfactual explanation training already studied"
+    },
+    {
+      "id": "E3",
+      "url": "https://arxiv.org/html/2609.27038v1",
+      "scope": "Methods, results and limitations, v1",
+      "use": "Text-edit versus targeted activation comparison; bounded preprint"
+    },
+    {
+      "id": "E4",
+      "url": "https://arxiv.org/html/2412.06769v2",
+      "scope": "Abstract and introduction, v2",
+      "use": "Existence of continuous-state reasoning architecture; no cache-erasure claim"
+    },
+    {
+      "id": "E5",
+      "url": "https://proceedings.mlr.press/v115/beckers20a.html",
+      "scope": "Publisher abstract and metadata only",
+      "use": "Background attribution, not a fresh full proof review"
+    },
+    {
+      "id": "R145",
+      "local_snapshot": "inputs/R145.md",
+      "sha256": "b38d2e69c16fa5ba725042a0ae3ab4b711c9dc9b72a257631b48caff40c89f5b"
+    },
+    {
+      "id": "RESEARCH_MASTER_GUIDE",
+      "local_snapshot": "inputs/RESEARCH_MASTER_GUIDE.md",
+      "sha256": "b2cc18778621b1f4d8a0e3ac25755f126442bbfbd5b65398f05f16211a1fe0c3"
+    },
+    {
+      "id": "TA25",
+      "local_snapshot": "inputs/TA25.md",
+      "sha256": "b876dd6c82477fe2a73267af7df40ffc1f0c16c19109ea0c84ac3d9fe8288947"
+    },
+    {
+      "id": "UCT_I",
+      "local_snapshot": "inputs/UCT_I.md",
+      "sha256": "ec85194c0cb545bf55094a41291bf02cd12f85c1c3b8dd620939b2fc3909fec1"
+    },
+    {
+      "id": "UCT_II",
+      "local_snapshot": "inputs/UCT_II.md",
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b"
+    },
+    {
+      "id": "UCT_III",
+      "local_snapshot": "inputs/UCT_III.md",
+      "sha256": "35606b2b2545920a803489f4498e976daf175fd96274d2c41a44ce3b2cad2bc2"
+    },
+    {
+      "id": "UI_EFFECTIVE_SCOPE",
+      "local_snapshot": "inputs/UI_EFFECTIVE_SCOPE.json",
+      "sha256": "52c20b9f799ac88fd9837ef1ce5d5ac63cd0dd9e92bfdf0e049b999882299616"
+    },
+    {
+      "id": "UI_SOURCE",
+      "local_snapshot": "inputs/UI_SOURCE.md",
+      "sha256": "dfc1d1ea5a798427a2f0d0c016f229e6c5a20645ded661228df82e32b5c18627"
+    }
+  ],
+  "limitations": [
+    "Bounded source search, not an exhaustive census.",
+    "Human working-memory source candidates were located but full-text requests were blocked; no new empirical human claim is based on those snippets.",
+    "The unversioned CST HTML failed; v2 was successfully retrieved.",
+    "External full texts are not redistributed in this package."
+  ],
+  "global_priority": "NOT_CLAIMED"
+}

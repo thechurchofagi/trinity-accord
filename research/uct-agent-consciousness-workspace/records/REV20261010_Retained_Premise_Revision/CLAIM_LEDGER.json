@@ -1,0 +1,135 @@
+{
+  "research_id": "REV20261010",
+  "version": "REV-v0.1.0",
+  "claims": [
+    {
+      "id": "REV-C1",
+      "classification": "INHERITED",
+      "statement": "Exact future retention is characterized by the existing output-stable quotient.",
+      "existing_anchors": [
+        "UI20261009:FUTURE_DOMAIN",
+        "UI20261009:FUTURE_QUOTIENT",
+        "C:P2_COORD"
+      ],
+      "prior_coverage": "UCT I Appendix D and normalized UI; classical state minimization",
+      "evidence": "RESEARCH_NOTE.md sections 3",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "REV-C2",
+      "classification": "NEW_APPLICATION",
+      "statement": "For all Boolean functions, toggle-state minimum equals the number of translation-period cosets.",
+      "existing_anchors": [
+        "UI20261009:FUTURE_QUOTIENT",
+        "R145:TRANSPORT_BLIND"
+      ],
+      "prior_coverage": "Elementary group-action specialization; no global priority claimed",
+      "evidence": "RESEARCH_NOTE.md sections 4",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "REV-C3",
+      "classification": "NEW_APPLICATION",
+      "statement": "Assignment-state minimum is 2**k for k essential Boolean coordinates.",
+      "existing_anchors": [
+        "UI20261009:FUTURE_QUOTIENT",
+        "IE:QUERY_SUFFICIENCY"
+      ],
+      "prior_coverage": "Elementary distinguishing-continuation specialization; exact all-state/all-word contract",
+      "evidence": "RESEARCH_NOTE.md sections 4",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "REV-C4",
+      "classification": "CORRECTION",
+      "statement": "The flip/reset contrast is already present in R145 and cannot count as a new general discovery.",
+      "existing_anchors": [
+        "R145:TRANSPORT_SETUP",
+        "R145:AFFINE_DIAGNOSTIC"
+      ],
+      "prior_coverage": "R145 v0.2 exact source reviewed",
+      "evidence": "RESEARCH_NOTE.md sections 1,4",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "REV-C5",
+      "classification": "NEW_APPLICATION",
+      "statement": "An outside old-bit message repairs parity assignment but does not show local retention.",
+      "existing_anchors": [
+        "IE:QUERY_SUFFICIENCY",
+        "TH20261009:STORED_VS_READ"
+      ],
+      "prior_coverage": "Standard information argument and existing source-use boundary",
+      "evidence": "RESEARCH_NOTE.md sections 5",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "REV-C6",
+      "classification": "NEW_APPLICATION",
+      "statement": "Correct one-step revision reports do not imply installed state updates; a committed composition separates specified consumers.",
+      "existing_anchors": [
+        "UI20261009:FUTURE_EQ",
+        "TH20261009:STORED_VS_READ"
+      ],
+      "prior_coverage": "Classical stateful semantics; bounded software witness",
+      "evidence": "RESEARCH_NOTE.md sections 2,6",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "REV-C7",
+      "classification": "CORRECTION",
+      "statement": "Editability bounds and scores do not determine complete experiential organization or basal admission.",
+      "existing_anchors": [
+        "A:C1",
+        "A:C1_OI",
+        "A:U1",
+        "A:P3",
+        "OL20261009:C1_APPLICATION"
+      ],
+      "prior_coverage": "UCT I/III and existing physical-reduct contract",
+      "evidence": "RESEARCH_NOTE.md sections 7",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "REV-C8",
+      "classification": "NEGATIVE_RESULT",
+      "statement": "This application is insufficient for an independent new-theory manuscript at present.",
+      "existing_anchors": [
+        "TA17:QUOTIENT",
+        "UI20261009:FUTURE_QUOTIENT",
+        "R145:TRANSPORT_BLIND"
+      ],
+      "prior_coverage": "Bounded internal/external novelty assessment, not a scientific inference rule",
+      "evidence": "RESEARCH_NOTE.md sections 9",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    }
+  ],
+  "manuscript_decision": "HOLD",
+  "reason": "Reusable exact classification and protocol, inherited foundations and substantial internal/external overlap.",
+  "coverage_version": "UCT-PUB-v1.0.33",
+  "coverage_change": "NO_CHANGE_AFTER_RELEVANT_CLAIM_REVIEW"
+}

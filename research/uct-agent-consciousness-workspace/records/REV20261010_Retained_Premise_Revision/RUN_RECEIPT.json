@@ -1,0 +1,16 @@
+{
+  "command": "python3 revision_reuse/check_revision.py",
+  "python": "3.12.14",
+  "source_sha256": "9914d4ac9f909da5bf9ca12d4885647eaa9ed01d2fca270872298534c983923f",
+  "result_sha256": "0161dbb19566c07dc64637ef29bfc5ea5baf69a94e4f208dbd1af809f039e8ca",
+  "examples_sha256": "25c51fb22b761a076dec8a4c966500b85dfb0a0a045816d8a982c2404e96ed04",
+  "boolean_functions_exhausted": 276,
+  "protocol_examples": 128,
+  "status": "PASS",
+  "not_established": [
+    "Neural performance",
+    "Physical organization identity",
+    "Phenomenal classification",
+    "Global mathematical priority"
+  ]
+}

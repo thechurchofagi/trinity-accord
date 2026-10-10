@@ -1,0 +1,38 @@
+{
+  "research_id": "REV20261010",
+  "coverage_version_before": "UCT-PUB-v1.0.33",
+  "coverage_version_after": "UCT-PUB-v1.0.33",
+  "status": "RELEVANT_CLAIMS_REVIEWED_NO_CHANGE",
+  "published_sources_compared": [
+    "UCT I v1.2 C1/U1/Appendix D",
+    "UCT II v1.1 inherited scope",
+    "UCT III v1.0 inherited scope",
+    "TA25 v1.0 inherited scope"
+  ],
+  "internal_exact_sources_compared": [
+    "R145 working source v0.2",
+    "UI source plus effective normalized FUTURE_DOMAIN/FUTURE_QUOTIENT",
+    "TJR-v0.1.0"
+  ],
+  "map_source_only_overlap": [
+    "TA17:QUOTIENT",
+    "IE:QUERY_SUFFICIENCY",
+    "TH20261009:STORED_VS_READ",
+    "R173:RETENTIVE_BINDING_RELATION"
+  ],
+  "claim_ids": [
+    "REV-C1",
+    "REV-C2",
+    "REV-C3",
+    "REV-C4",
+    "REV-C5",
+    "REV-C6",
+    "REV-C7",
+    "REV-C8"
+  ],
+  "new_publications": 0,
+  "new_published_versions": 0,
+  "published_source_bytes_modified": false,
+  "standalone_manuscript": "HOLD",
+  "uncertainty": "Not an exhaustive publication census or global priority proof. R145 source draft label is not used to determine its present publication status."
+}

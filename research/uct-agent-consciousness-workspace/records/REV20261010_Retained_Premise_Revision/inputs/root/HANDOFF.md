@@ -23,5 +23,3 @@
 最新测量对象身份修正：[A3Y交接](records/A3Y20261010_Measurand_Identity_Barrier/HANDOFF_ZH.md)；[正文](records/A3Y20261010_Measurand_Identity_Barrier/RESEARCH_NOTE.md)；[精确结果](records/A3Y20261010_Measurand_Identity_Barrier/EXACT_RESULTS.json)。共同潜类`Z`的恢复不等于`Z=H_way`；相同观测表允许正、零、负的`H_way`方向。下一题必须给出一个独立指向现象目标且有预注册否决结果的锚/干预，否则停止H层校准，只报告`Z`层或组织层后果。
 
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。
-
-基础问题专线 REV20261010：[交接](records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md) · [正文](records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md) · [日志](records/REV20261010_Retained_Premise_Revision/WORK_LOG.md)。承接 TJR，完成前提修改的精确信息条件与连续修改对照；0/0/0 停用应用，独立成稿 HOLD。原 A3V/A3Y 接续和全历史审查未完成状态保留。

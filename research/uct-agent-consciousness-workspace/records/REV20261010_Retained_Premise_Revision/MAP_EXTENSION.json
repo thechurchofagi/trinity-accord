@@ -1,0 +1,52 @@
+{
+  "schema": "uct-disabled-scoped-application/1",
+  "research_id": "REV20261010",
+  "version": "REV-v0.1.0",
+  "base_map": "UCT-MAP-v1.1.2",
+  "status": "PENDING_MAP_SCOPED_APPLICATION",
+  "enabled_as_established_premises": false,
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "application_records": [
+    {
+      "id": "REV-APP1",
+      "claim_ids": [
+        "REV-C1",
+        "REV-C2",
+        "REV-C3",
+        "REV-C4",
+        "REV-C5",
+        "REV-C6",
+        "REV-C7",
+        "REV-C8"
+      ],
+      "existing_anchors": [
+        "A:C1",
+        "A:C1_OI",
+        "A:P3",
+        "A:U1",
+        "C:P2_COORD",
+        "IE:QUERY_SUFFICIENCY",
+        "OL20261009:C1_APPLICATION",
+        "R145:AFFINE_DIAGNOSTIC",
+        "R145:TRANSPORT_BLIND",
+        "R145:TRANSPORT_SETUP",
+        "TA17:QUOTIENT",
+        "TH20261009:STORED_VS_READ",
+        "UI20261009:FUTURE_DOMAIN",
+        "UI20261009:FUTURE_EQ",
+        "UI20261009:FUTURE_QUOTIENT"
+      ],
+      "source": "RESEARCH_NOTE.md",
+      "claim_ledger": "CLAIM_LEDGER.json",
+      "audit": "AUDIT_REPORT.md",
+      "same_instance_required": true,
+      "automatic_inference": false
+    }
+  ],
+  "merge_semantics": "Navigation only; do not load as an active scientific module.",
+  "canonical_entry": "UNIFIED_RESEARCH_INDEX.json#scoped_foundational_reviews",
+  "global_semantic_status": "AUDIT_INCOMPLETE",
+  "new_actual_or_named_phenomenal_claims": 0
+}

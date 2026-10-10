@@ -1,0 +1,7 @@
+{
+  "version": "UCT-MAP-v1.1.2",
+  "effective_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "graph_included_in_this_increment": false,
+  "restoration": "Use the existing completed-map archive or repository integration/UCT-INTEGRATION-v1.0.0/restore_unified_map.py; verify the descriptor hash before building audit ledgers.",
+  "source_branch_head": "1f4002993a0f2bde15e12927686bf06ec8946c8d"
+}

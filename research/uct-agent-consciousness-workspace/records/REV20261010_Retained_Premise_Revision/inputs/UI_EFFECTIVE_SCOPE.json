@@ -1,0 +1,190 @@
+[
+  {
+    "id": "UI20261009:FUTURE_DOMAIN",
+    "kind": "MODEL_PREMISE",
+    "statement": "S is finite nonempty, |S|=n; U is a finite alphabet of deterministic total updates F_u:S->S, fixed readout r has c=|r(S)| classes, and all finite common words including empty are allowed. A and B in the quotient claim belong to U; external actions require a separate equivalence-preservation proof.",
+    "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+    "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+    "proof_locator": "RESEARCH_NOTE.md section 6",
+    "limits": "Deterministic result; no unproved stochastic-bisimulation extension.",
+    "research_status": "CONDITIONAL_MATHEMATICS_OR_EXPLICIT_PREMISE",
+    "map_status": "PENDING_MAP",
+    "actual_physical_application": "NOT_ESTABLISHED",
+    "source_provenance": {
+      "module": "UI20261009",
+      "source_file": "/workspace/scratch/328b6dbb55c2/effective_v111/pending_UI/MAP_EXTENSION.json",
+      "source_file_sha256": "9660da2f8e3bee14e1ebd2804fbdf2b2fced019ed1053125d3a4898ae0f5b628",
+      "source_record_sha256": "6a64fad156f2eb0d97e9e2f73f9ef8428ddef6aa70d11c360e4d6c4c2f7b77a9",
+      "source_record_hash_scheme": "SHA256 of UTF-8 json.dumps(record,sort_keys=True,ensure_ascii=False,separators=(comma,colon)); normalized records contain no self-hash.",
+      "source_record": {
+        "id": "UI20261009:FUTURE_DOMAIN",
+        "kind": "MODEL_PREMISE",
+        "statement": "S finite of size n, fixed deterministic total actions, fixed r, all finite common future action words allowed.",
+        "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+        "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+        "proof_locator": "RESEARCH_NOTE.md section 6",
+        "limits": "Deterministic result; no unproved stochastic-bisimulation extension.",
+        "research_status": "CONDITIONAL_MATHEMATICS_OR_EXPLICIT_PREMISE",
+        "map_status": "PENDING_MAP",
+        "actual_physical_application": "NOT_ESTABLISHED"
+      },
+      "source_inherited_defaults": {},
+      "source_status": "PENDING_MAP",
+      "source_note_path": "/workspace/scratch/328b6dbb55c2/effective_v111/pending_UI/RESEARCH_NOTE.md",
+      "source_note_sha256": "dfc1d1ea5a798427a2f0d0c016f229e6c5a20645ded661228df82e32b5c18627"
+    },
+    "declaration_role": "DECLARED_MODEL_PREMISE_SCHEMA",
+    "conditional_declaration_available": true,
+    "mathematical_registry_availability": true,
+    "registry_status": "REVIEWED_CONDITIONAL_DECLARATION_ONLY",
+    "enabled_as_established_premise": false,
+    "enabled_as_established_premises": false,
+    "automatic_premise_truth": false,
+    "node_presence_is_premise_truth": false,
+    "actual_application_status": "OPEN",
+    "phenomenal_application_status": "OPEN",
+    "scientific_promotion": false,
+    "same_instance_required": true,
+    "source_review_rationale": "The full note fixes a finite alphabet of deterministic total updates and all common future words. For the quotient statement about A and B, the effective contract must explicitly say A and B belong to that alphabet (or independently preserve the resulting equivalence).",
+    "proof_review_rationale": "The normalized finite deterministic domain explicitly includes A,B in U and fixes n,c, all common words and the empty word. Every quotient-action reference is now typed; applying an external action still needs its own preservation proof.",
+    "normalization_contract_updates_applied": [
+      "GLOBAL-C1",
+      "GLOBAL-C2",
+      "UI-C2"
+    ],
+    "originality_status": "INHERITED_CONDITIONAL_APPLICATION_OR_NEW_APPLICATION; PRIORITY_UNVERIFIED",
+    "formal_contract": {
+      "declaration_role": "DECLARED_MODEL_PREMISE_SCHEMA",
+      "complete_inline_domain": {
+        "deterministic_future_readout": {
+          "domain": "Finite nonempty S and finite alphabet U of deterministic total maps F_u:S->S, with fixed readout r:S->Y.",
+          "words": "Every finite common action word w in U*, including the empty word, is allowed. F_w denotes sequential execution of that word.",
+          "equivalence": "s~t iff r(F_w(s))=r(F_w(t)) for every w in U*.",
+          "named_actions": "A and B in the quotient-commutation statement are among the admitted F_u. An additional action outside U may be used only after separately proving it preserves ~.",
+          "sizes": "n=|S| and c=|r(S)|. Proper partition refinement increases the number of classes and gives the bound n-c.",
+          "limits": "This deterministic behavioral quotient and action menu is a selected view. No probabilistic-bisimulation extension or experiential equivalence is asserted."
+        }
+      },
+      "quantifiers": "Definitions/model hypotheses are declared schemas. A theorem quantifies only over instances satisfying its full same-submodel assumptions; an open physical bridge is not discharged by declaration.",
+      "mathematical_and_actual_instances_are_distinct": true,
+      "instance_binding": "Use this exact declared model/paired comparison with its fixed target, time, ports, observer and units. Separate alternatives or observer instances are identified explicitly.",
+      "proof_or_evidence": "The normalized finite deterministic domain explicitly includes A,B in U and fixes n,c, all common words and the empty word. Every quotient-action reference is now typed; applying an external action still needs its own preservation proof.",
+      "proof_source": {
+        "path": "/workspace/scratch/328b6dbb55c2/effective_v111/pending_UI/RESEARCH_NOTE.md",
+        "sha256": "dfc1d1ea5a798427a2f0d0c016f229e6c5a20645ded661228df82e32b5c18627",
+        "section": "RESEARCH_NOTE.md section 6"
+      },
+      "actual_application_obligations": {
+        "actual_pair": "Independently admit the nominated actual process tokens, interval, boundaries, constitutive support and source/event provenance.",
+        "signature": "Use one physically justified complete A:K. Actual full isomorphisms must preserve the corresponding installed operations, state/preparation, readouts, ports, time and noise structure used by the invariant.",
+        "pair_binding": "For type transfer, one member of the paired actual comparison has the commuting pair and the other a justified positive order contrast. Never assign these incompatible properties to one member.",
+        "persistence": "For local nonerasure, the same nominated actual local process must continue under original A:P3; embedding or task success alone does not establish persistence.",
+        "status": "All actual realization, constitutive-invariant and persistence instance obligations remain OPEN; C1/U1 are inherited conditional theory commitments."
+      },
+      "no_inference_to": [
+        "named_quality",
+        "phenomenal_intensity",
+        "unique_subject",
+        "subject_count",
+        "basal_experience_threshold",
+        "actual_source_occurrence_without_evidence"
+      ],
+      "machine_proof": false,
+      "new_scientific_execution": false
+    }
+  },
+  {
+    "id": "UI20261009:FUTURE_QUOTIENT",
+    "kind": "CONDITIONAL_THEOREM",
+    "statement": "On FUTURE_DOMAIN, future-readout equality is the coarsest update-stable refinement of current-readout equality. Every admitted F_u descends to S/~; for admitted A,B, their quotient maps commute iff no common future word distinguishes the two orders from any initial state.",
+    "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+    "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+    "proof_locator": "RESEARCH_NOTE.md section 6",
+    "limits": "A standard behavioral quotient, not a subject selector.",
+    "research_status": "CONDITIONAL_MATHEMATICS_OR_EXPLICIT_PREMISE",
+    "map_status": "PENDING_MAP",
+    "actual_physical_application": "NOT_ESTABLISHED",
+    "source_provenance": {
+      "module": "UI20261009",
+      "source_file": "/workspace/scratch/328b6dbb55c2/effective_v111/pending_UI/MAP_EXTENSION.json",
+      "source_file_sha256": "9660da2f8e3bee14e1ebd2804fbdf2b2fced019ed1053125d3a4898ae0f5b628",
+      "source_record_sha256": "7157e4a2d022fc73892cc175805e4cb108a9ac18807b0fdcca55220e288d2105",
+      "source_record_hash_scheme": "SHA256 of UTF-8 json.dumps(record,sort_keys=True,ensure_ascii=False,separators=(comma,colon)); normalized records contain no self-hash.",
+      "source_record": {
+        "id": "UI20261009:FUTURE_QUOTIENT",
+        "kind": "CONDITIONAL_THEOREM",
+        "statement": "~ is the coarsest update-stable refinement of current-readout equality; A,B commute on S/~ iff no shared continuation distinguishes AB from BA on any state.",
+        "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+        "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+        "proof_locator": "RESEARCH_NOTE.md section 6",
+        "limits": "A standard behavioral quotient, not a subject selector.",
+        "research_status": "CONDITIONAL_MATHEMATICS_OR_EXPLICIT_PREMISE",
+        "map_status": "PENDING_MAP",
+        "actual_physical_application": "NOT_ESTABLISHED"
+      },
+      "source_inherited_defaults": {},
+      "source_status": "PENDING_MAP",
+      "source_note_path": "/workspace/scratch/328b6dbb55c2/effective_v111/pending_UI/RESEARCH_NOTE.md",
+      "source_note_sha256": "dfc1d1ea5a798427a2f0d0c016f229e6c5a20645ded661228df82e32b5c18627"
+    },
+    "declaration_role": "CONDITIONAL_THEOREM_SCHEMA",
+    "conditional_declaration_available": true,
+    "mathematical_registry_availability": true,
+    "registry_status": "REVIEWED_CONDITIONAL_DECLARATION_ONLY",
+    "enabled_as_established_premise": false,
+    "enabled_as_established_premises": false,
+    "automatic_premise_truth": false,
+    "node_presence_is_premise_truth": false,
+    "actual_application_status": "OPEN",
+    "phenomenal_application_status": "OPEN",
+    "scientific_promotion": false,
+    "same_instance_required": true,
+    "source_review_rationale": "Prefixing an allowed action preserves future equality, so each allowed action descends and the coarsest stable refinement proof is sound. The A/B commutation iff clause requires A,B among those allowed actions; no stochastic-bisimulation extension follows.",
+    "proof_review_rationale": "With A,B now explicitly in the finite action alphabet, prefixing an admitted action preserves future equality and all named actions descend. The coarsest stable-refinement and quotient-commutation iff argument is valid in this deterministic selected-view domain.",
+    "normalization_contract_updates_applied": [
+      "GLOBAL-C1",
+      "GLOBAL-C2",
+      "UI-C2"
+    ],
+    "originality_status": "INHERITED_CONDITIONAL_APPLICATION_OR_NEW_APPLICATION; PRIORITY_UNVERIFIED",
+    "formal_contract": {
+      "declaration_role": "CONDITIONAL_THEOREM_SCHEMA",
+      "complete_inline_domain": {
+        "deterministic_future_readout": {
+          "domain": "Finite nonempty S and finite alphabet U of deterministic total maps F_u:S->S, with fixed readout r:S->Y.",
+          "words": "Every finite common action word w in U*, including the empty word, is allowed. F_w denotes sequential execution of that word.",
+          "equivalence": "s~t iff r(F_w(s))=r(F_w(t)) for every w in U*.",
+          "named_actions": "A and B in the quotient-commutation statement are among the admitted F_u. An additional action outside U may be used only after separately proving it preserves ~.",
+          "sizes": "n=|S| and c=|r(S)|. Proper partition refinement increases the number of classes and gives the bound n-c.",
+          "limits": "This deterministic behavioral quotient and action menu is a selected view. No probabilistic-bisimulation extension or experiential equivalence is asserted."
+        }
+      },
+      "quantifiers": "Definitions/model hypotheses are declared schemas. A theorem quantifies only over instances satisfying its full same-submodel assumptions; an open physical bridge is not discharged by declaration.",
+      "mathematical_and_actual_instances_are_distinct": true,
+      "instance_binding": "Use this exact declared model/paired comparison with its fixed target, time, ports, observer and units. Separate alternatives or observer instances are identified explicitly.",
+      "proof_or_evidence": "With A,B now explicitly in the finite action alphabet, prefixing an admitted action preserves future equality and all named actions descend. The coarsest stable-refinement and quotient-commutation iff argument is valid in this deterministic selected-view domain.",
+      "proof_source": {
+        "path": "/workspace/scratch/328b6dbb55c2/effective_v111/pending_UI/RESEARCH_NOTE.md",
+        "sha256": "dfc1d1ea5a798427a2f0d0c016f229e6c5a20645ded661228df82e32b5c18627",
+        "section": "RESEARCH_NOTE.md section 6"
+      },
+      "actual_application_obligations": {
+        "actual_pair": "Independently admit the nominated actual process tokens, interval, boundaries, constitutive support and source/event provenance.",
+        "signature": "Use one physically justified complete A:K. Actual full isomorphisms must preserve the corresponding installed operations, state/preparation, readouts, ports, time and noise structure used by the invariant.",
+        "pair_binding": "For type transfer, one member of the paired actual comparison has the commuting pair and the other a justified positive order contrast. Never assign these incompatible properties to one member.",
+        "persistence": "For local nonerasure, the same nominated actual local process must continue under original A:P3; embedding or task success alone does not establish persistence.",
+        "status": "All actual realization, constitutive-invariant and persistence instance obligations remain OPEN; C1/U1 are inherited conditional theory commitments."
+      },
+      "no_inference_to": [
+        "named_quality",
+        "phenomenal_intensity",
+        "unique_subject",
+        "subject_count",
+        "basal_experience_threshold",
+        "actual_source_occurrence_without_evidence"
+      ],
+      "machine_proof": false,
+      "new_scientific_execution": false
+    }
+  }
+]

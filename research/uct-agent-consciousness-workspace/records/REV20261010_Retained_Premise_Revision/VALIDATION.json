@@ -1,0 +1,22 @@
+{
+  "status": "PASS_NAVIGATION_AND_DISABLED_ASSEMBLY",
+  "version": "UCT-INTEGRATION-v1.0.0",
+  "pending_checkpoints": 38,
+  "families": 7,
+  "completed_nodes": 913,
+  "completed_rules": 424,
+  "pending_objects": {
+    "node": 360,
+    "rule": 163,
+    "context": 188,
+    "application": 16
+  },
+  "unresolved_deductive_references": 0,
+  "declared_external_context_refs": 6,
+  "scientific_promotion": false,
+  "full_semantic_reproof": false,
+  "current_scientific_pointer_match": true,
+  "completed_module_index_match": true,
+  "scoped_foundational_mirrors_identical": true,
+  "untouched_other_fields_checked": true
+}

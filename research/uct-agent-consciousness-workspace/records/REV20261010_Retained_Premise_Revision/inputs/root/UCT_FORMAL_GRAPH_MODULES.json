@@ -1335,30 +1335,6 @@
       "application_records": 1,
       "manuscript_status": "HOLD",
       "actual_and_named_phenomenal_status": "OPEN"
-    },
-    {
-      "id": "REV20261010",
-      "version": "REV-v0.1.0",
-      "title": "Retained premises and committed revision",
-      "status": "DISABLED_SCOPED_FOUNDATIONAL_APPLICATION",
-      "enabled_as_established_premises": false,
-      "source": "records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md",
-      "handoff": "records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md",
-      "work_log": "records/REV20261010_Retained_Premise_Revision/WORK_LOG.md",
-      "claim_ledger": "records/REV20261010_Retained_Premise_Revision/CLAIM_LEDGER.json",
-      "map_extension": "records/REV20261010_Retained_Premise_Revision/MAP_EXTENSION.json",
-      "audit": "records/REV20261010_Retained_Premise_Revision/AUDIT_REPORT.md",
-      "source_sha256": "e10b59e03adac4fec61b08e0274db7e1de5ac5047a221ee09c264fadfdc41304",
-      "completed_map": "UCT-MAP-v1.1.2",
-      "coverage_version": "UCT-PUB-v1.0.33",
-      "scientific_delta": {
-        "nodes": 0,
-        "rules": 0,
-        "contexts": 0
-      },
-      "application_records": 1,
-      "manuscript_status": "HOLD",
-      "actual_and_named_phenomenal_status": "OPEN"
     }
   ]
 }

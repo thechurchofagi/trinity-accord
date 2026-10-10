@@ -1,0 +1,17 @@
+{
+  "baseline": "UCT-MAP-v1.1.2",
+  "baseline_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "rows": 1608,
+  "counts": {
+    "nodes": 913,
+    "rules": 424,
+    "contexts": 261,
+    "suspended": 10
+  },
+  "scoped_node_count": 18,
+  "historical_items_without_scoped_semantic_review": 1590,
+  "full_historical_proofs_reproved_this_run": 0,
+  "full_semantic_audit": "AUDIT_INCOMPLETE",
+  "complete_map_changed": false,
+  "pending_premises_promoted": false
+}
