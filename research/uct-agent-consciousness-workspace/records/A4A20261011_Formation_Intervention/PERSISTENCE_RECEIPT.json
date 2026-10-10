@@ -6,34 +6,37 @@
     "branch": "uct-agent-consciousness-workspace",
     "science_commit": "11f73b641610f490e5088039aaaae99c58f91182",
     "receipt_commit": "898df7ba104a71ff21232ef84b427aac84e335a9",
+    "validator_repair_commit": "5a4c71739cfb6a19bcf8858147302415d7a5fe3b",
     "expected_parent": "f440ed310cb6c3d7766ce90b5a9111cb2f2f9e4c",
     "fast_forward_expected_sha_verified": true,
     "key_file_readback": "PERSISTENCE_RECEIPT.json at receipt commit; final confirmation commit is the branch-head successor",
-    "status": "SCIENCE_AND_RECEIPT_CONFIRMED; FINAL_CONFIRMATION_COMMIT_SELF_RECORDS_RECEIPT"
+    "status": "SCIENCE_RECEIPT_AND_VALIDATOR_REPAIR_CONFIRMED; FINAL_METADATA_COMMIT_IS_BRANCH_HEAD_SUCCESSOR"
   },
   "library": {
     "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
-    "master_previous_version": 106,
-    "master_expected_version": 107,
-    "master_version": 107,
-    "master_file_id": "file_00000000968481f7ac2133ee75884a14",
-    "master_sha256": "6ed10cd34c51ff977592a7dabfbd1fb19ea7fe977788981430280c0727817cba",
+    "master_previous_version": 107,
+    "master_expected_version": 108,
+    "master_version": 108,
+    "master_file_id": "file_0000000006e481f7822f9c8770e70d0e",
+    "master_sha256": "ac8d98668d1f1444263040a77829b92c2cc7a970d4af2654b0afeb65807daf8b",
     "master_readback_confirmed": true,
-    "increment_library_file_id": "libfile_35a02a48f4e48191a6e82b887ac8f1af",
-    "increment_manifest_library_file_id": "libfile_5744f60c958881918a2cf37cb4ad87c6",
-    "increment_sha256": "d111a70e6c4ab750815a8d1f0d48d8c5862b23fd32a0e14ac7d25d458b53addb",
-    "increment_manifest_sha256": "1cb6c9bebc1458b742790a7b9d06a70ed56b9e4f6d3a25604a46c79c532b74b2",
-    "increment_size_bytes": 112008,
-    "increment_file_count": 26,
+    "increment_library_file_id": "libfile_9b87c5858e2c81918594e1ed8811ca77",
+    "increment_manifest_library_file_id": "libfile_8c536aa7e29c81918a3a3637709f733b",
+    "increment_sha256": "67556761068adb97ee97a76c3a936c82bc89ff449d203d6f8a5b885f714660a0",
+    "increment_manifest_sha256": "3e8d8e136d70a96183444cbe2f68a6216f2c31fab5e6445df47bf27b71e9cdc9",
+    "increment_size_bytes": 114564,
+    "increment_file_count": 27,
+    "superseded_increment_library_file_id": "libfile_35a02a48f4e48191a6e82b887ac8f1af",
+    "superseded_increment_manifest_library_file_id": "libfile_5744f60c958881918a2cf37cb4ad87c6",
     "classification": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_BACKUP",
-    "status": "INCREMENT_MANIFEST_AND_FIXED_MASTER_V107_CONFIRMED"
+    "status": "FINAL_INCREMENT_MANIFEST_AND_FIXED_MASTER_V108_CONFIRMED"
   },
-  "latest_completed_step": "A4A exact causal correction, formal/review audit, GitHub science and receipt readback, Library increment plus manifest upload, and fixed-master v107 readback.",
+  "latest_completed_step": "A4A exact causal correction, formal/review audit, GitHub science/receipt/validator-repair readback, final Library increment plus manifest upload, and fixed-master v108 readback.",
   "unfinished": [
     "No actual same-event RetBind trace-to-consumer route has been installed.",
     "No independent identity or polarity calibration for H_way has been established.",
     "No route-preserving five-way physical clamp or joint positivity has been demonstrated.",
     "Open supervision items and full historical semantic audit remain unresolved."
   ],
-  "resume": "Read the fixed Library master expected at v107; verify the live branch is the receipt confirmation commit or a fast-forward successor; verify science commit 11f73b6 and increment SHA256; then instantiate only one randomized longitudinal total-effect formation study plus an independently verified same-event retentive consumer route."
+  "resume": "Read the fixed Library master v108; verify the live branch is validator-repair commit 5a4c717 or a fast-forward successor; verify final increment SHA256 67556761068adb97ee97a76c3a936c82bc89ff449d203d6f8a5b885f714660a0; then instantiate only one randomized longitudinal total-effect formation study plus an independently verified same-event retentive consumer route."
 }

@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import sys
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -59,7 +60,7 @@ assert relevant_rules["r173_retentive_coordinate_transport"]["all_of"] == [
 ]
 assert relevant_rules["r175_r173_target_boundary_effective"]["conclusion"] == "R173:FAMILIAR_MINENESS_BOUNDARY"
 
-subprocess.check_call([str(HERE / "check_exact_models.py")])
+subprocess.check_call([sys.executable, str(HERE / "check_exact_models.py")])
 exact = json.loads((HERE / "EXACT_RESULTS.json").read_text(encoding="utf-8"))
 assert exact["all_checks_pass"] and exact["model_count"] == 4
 claims = json.loads((HERE / "CLAIM_LEDGER.json").read_text(encoding="utf-8"))["claims"]

@@ -12,6 +12,8 @@ The proposed five-way post-formation matched residual is not presently an instal
 
 After dual-persistence readback, a clean-checkout composed validation failed because `check_exact_models.py` lacked the executable bit expected by `validate_application.py`. Running the exact script through Python still passed, so no finite-model result changed. The mode was restored and the final increment was regenerated; the earlier `11f73b6` increment remains a superseded science snapshot, not the final recovery package.
 
+The mode-only repair was not robust to the workspace's later materialization behavior. The durable fix changes the composed validator to call the checker through the active Python interpreter. Packages ending at the mode-only `5a4c717` checkpoint are therefore also superseded by the interpreter-explicit recovery package.
+
 ## Unresolved premises
 
 - No actual same-event `RetBind` trace-to-consumer route has been installed.
