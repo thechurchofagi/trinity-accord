@@ -1,0 +1,12 @@
+{
+  "round_id": "A4G20261011",
+  "coverage_version": "UCT-PUB-v1.0.33",
+  "coverage_changed": false,
+  "new_claims": ["A4G-C1", "A4G-C2", "A4G-C3", "A4G-C4"],
+  "published_coverage": "NONE_NEW",
+  "inherited_methods": ["set disjointness", "causal graphs", "cut sets", "fault trees", "noninterference", "provenance", "freshness and replay resistance"],
+  "net_increment": "UCT-specific bounded distinction among shared ancestry, forge capability, same-trial composability and protected-coordinate separation, plus repair of a corrupted review ledger",
+  "priority_status": "EXACT_SYNTHESIS_PRIORITY_UNVERIFIED",
+  "standalone_manuscript": "HOLD",
+  "reason": "Useful negative and protocol result, but no actual device installation or independent phenomenal bridge."
+}

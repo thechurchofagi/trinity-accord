@@ -38,6 +38,8 @@
 
 审查状态：`QC-20261008-10`、`IA-QC11`、`QC-20261008-12/13`、`SCU-OPEN-R191-NORMALIZATION`保持OPEN，`SCU-AUDIT-DEPTH`保持AUDIT_INCOMPLETE；详见[A4F稳定ID回应](records/A4F20261011_Witness_Independence_and_Provenance/REVIEW_RESPONSE.md)，不凭有限枚举或协议自报关闭。
 
+最新共同控制切割推进：[A4G交接](records/A4G20261011_Common_Control_Cuts/HANDOFF_ZH.md)；[正文](records/A4G20261011_Common_Control_Cuts/RESEARCH_NOTE.md)；[协议](records/A4G20261011_Common_Control_Cuts/COMMON_CONTROL_CUT_PROTOCOL.md)；[精确结果](records/A4G20261011_Common_Control_Cuts/EXACT_RESULTS.json)。共同祖先/图切与可伪造能力、同试次联合可组合性已分开；受保护坐标只在完整生成—传输—验收路径受保护时条件分离。下一题落实到有公开原理图或可信硬件文档的一个执行器；完整物理签名与`H_way`仍OPEN。A4F审查台账持久化损坏已恢复并保留缺口记录。
+
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。
 
 基础问题专线 REV20261010：[交接](records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md) · [正文](records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md) · [日志](records/REV20261010_Retained_Premise_Revision/WORK_LOG.md)。承接 TJR，完成前提修改的精确信息条件与连续修改对照；0/0/0 停用应用，独立成稿 HOLD。原 A3V/A3Y 接续和全历史审查未完成状态保留。

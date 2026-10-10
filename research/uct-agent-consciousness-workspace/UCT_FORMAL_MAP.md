@@ -68,6 +68,10 @@ Test one independent current bodily/action-familiarity interpretation against or
 
 [A4F 非循环来源见证](records/A4F20261011_Witness_Independence_and_Provenance/RESEARCH_NOTE.md)证明：当前提交与来源标签仍不足以识别实际写入者；自报标签、同根双日志及来源无关的独立事件探针都允许目标/隐藏来源观测重叠。声明双写入器模型内的来源专用探针只有在完整写入器清单、最终仲裁后布置与完整向量不可伪造/重放/压制/复位/改时序同时成立时才分离；恢复重放权限即恢复双胞胎。应用保持停用，0新节点/规则/语境；完整物理实际性与`B_fam/H_way`均未闭合。
 
+### 最新共同控制切割应用
+
+[A4G 共同控制切割](records/A4G20261011_Common_Control_Cuts/RESEARCH_NOTE.md)把共同祖先、坐标伪造能力与同试次联合可组合性分开。声明有限模型的16个联盟中，5个坐标并集覆盖只产生1个相容观察双胞胎；受保护来源坐标条件性分离，维护重放权限恢复双胞胎。应用保持停用，0新节点/规则/语境；实际装置、完整物理实际性与`B_fam/H_way`均未闭合。
+
 ### 当前端点应用修正
 
 [A3W H_way范围及端点草案](records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md)接续A3N/A3V及FAM；0新图节点，停用应用。统一登记的followup_applications保存这类应用，不改变38项待整合图与已完成图。

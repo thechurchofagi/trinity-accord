@@ -88,7 +88,7 @@
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
-  "review_ledger_sha256": "5f270b70204b51d4b7b3b5eb8a2f98fd5f5ffd86dac821351afd579c6b6e47e1",
+  "review_ledger_sha256": "55da83ea3cd3c6aeee2bd6fd2e52cd3504f063f80bddd17f9d2992539a2fa916",
   "counts": {
     "nodes": 913,
     "active_conditional_rules": 424,
@@ -103,7 +103,7 @@
     "latest_update": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true,
     "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
-    "latest_followup_application": "records/A4F20261011_Witness_Independence_and_Provenance/PUBLICATION_COVERAGE_UPDATE.json"
+    "latest_followup_application": "records/A4G20261011_Common_Control_Cuts/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
     "id": "A3V20261010",
@@ -545,30 +545,29 @@
     }
   },
   "latest_followup_application": {
-    "id": "A4F20261011",
-    "version": "A4F-WITNESS-INDEPENDENCE-v0.1.0",
+    "id": "A4G20261011",
+    "version": "A4G-COMMON-CONTROL-CUT-v0.1.0",
     "status": "DISABLED_SCOPED_NEGATIVE_AND_PROTOCOL_APPLICATION",
     "enabled_as_established_premises": false,
-    "source": "records/A4F20261011_Witness_Independence_and_Provenance/RESEARCH_NOTE.md",
-    "handoff": "records/A4F20261011_Witness_Independence_and_Provenance/HANDOFF_ZH.md",
-    "work_log": "records/A4F20261011_Witness_Independence_and_Provenance/WORK_LOG.md",
-    "claim_ledger": "records/A4F20261011_Witness_Independence_and_Provenance/CLAIM_LEDGER.json",
-    "map_extension": "records/A4F20261011_Witness_Independence_and_Provenance/MAP_EXTENSION.json",
-    "exact_results": "records/A4F20261011_Witness_Independence_and_Provenance/EXACT_RESULTS.json",
-    "persistence_receipt": "records/A4F20261011_Witness_Independence_and_Provenance/PERSISTENCE_RECEIPT.json",
+    "source": "records/A4G20261011_Common_Control_Cuts/RESEARCH_NOTE.md",
+    "handoff": "records/A4G20261011_Common_Control_Cuts/HANDOFF_ZH.md",
+    "work_log": "records/A4G20261011_Common_Control_Cuts/WORK_LOG.md",
+    "claim_ledger": "records/A4G20261011_Common_Control_Cuts/CLAIM_LEDGER.json",
+    "map_extension": "records/A4G20261011_Common_Control_Cuts/MAP_EXTENSION.json",
+    "exact_results": "records/A4G20261011_Common_Control_Cuts/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4E20261011",
+    "parent_followup": "A4F20261011",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "self_attested_source_nonidentification_proved": true,
-    "shared_root_redundancy_nonidentification_proved": true,
-    "source_agnostic_event_witness_scope_separated": true,
-    "conditional_source_tap_separation_proved": true,
-    "witness_independence_protocol_instantiated": false,
+    "common_control_compatible_cut_nonidentification_proved": true,
+    "graph_ancestry_sufficiency_rejected": true,
+    "protected_coordinate_separator_proved_conditionally": true,
+    "review_ledger_corruption_repaired": true,
+    "common_control_protocol_instantiated": false,
     "complete_physical_route_use_instantiated": false,
     "independent_h_validation": false,
     "standalone_manuscript": "HOLD"
@@ -822,6 +821,30 @@
       "complete_physical_route_use_instantiated": false,
       "independent_h_validation": false,
       "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A4G20261011",
+      "version": "A4G-COMMON-CONTROL-CUT-v0.1.0",
+      "status": "DISABLED_SCOPED_NEGATIVE_AND_PROTOCOL_APPLICATION",
+      "enabled_as_established_premises": false,
+      "source": "records/A4G20261011_Common_Control_Cuts/RESEARCH_NOTE.md",
+      "handoff": "records/A4G20261011_Common_Control_Cuts/HANDOFF_ZH.md",
+      "work_log": "records/A4G20261011_Common_Control_Cuts/WORK_LOG.md",
+      "claim_ledger": "records/A4G20261011_Common_Control_Cuts/CLAIM_LEDGER.json",
+      "map_extension": "records/A4G20261011_Common_Control_Cuts/MAP_EXTENSION.json",
+      "exact_results": "records/A4G20261011_Common_Control_Cuts/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A4F20261011",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+      "common_control_compatible_cut_nonidentification_proved": true,
+      "graph_ancestry_sufficiency_rejected": true,
+      "protected_coordinate_separator_proved_conditionally": true,
+      "review_ledger_corruption_repaired": true,
+      "protocol_instantiated": false,
+      "complete_physical_route_use_instantiated": false,
+      "independent_h_validation": false,
+      "standalone_manuscript": "HOLD"
     }
   ],
   "next_priority_before_A3W": "Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.",
@@ -834,6 +857,7 @@
   "next_priority_after_A4D": "On one bounded physical robot platform, freeze the full actuator-writer inventory and arbitration boundary, place a trusted post-arbitration/pre-plant probe, and run paired unpredictable challenges under target cut and same-interface rescue. First try to falsify writer completeness with the hidden-writer negative control; do not return to H_way unless device-relative route evidence and complete-token admission are independently obtained.",
   "next_priority_after_A4E": "Choose one accessible bounded robot or actuator interface and establish whether it exposes a verified physical pre-state plus a post-arbitration commit/source/time witness that cannot be forged by request software. If only final level is available, use anti-current challenges and faithful target cut to establish a current transition, while retaining every A4D writer-completeness premise and the H_way stop.",
   "next_priority_after_A4F": "On one accessible actuator, draw the final post-arbitration command/energy paths and separately enumerate every common power, reset, clock, bus, DMA, logger and human-control ancestor of the source witnesses. Attempt to make an admitted alternative writer realize the target's complete witness vector; if it can, redesign or stop source attribution. Keep complete-K admission and H_way validation separate.",
+  "next_priority_after_A4G": "Select one actuator interface with public schematics or trustworthy hardware documentation. Type every power/reset/clock/bus/DMA/firmware/maintenance/acceptance edge by observe, suppress, retime, reset, replay or forge capability; seek one post-arbitration fresh coordinate whose acquisition and acceptance path excludes all admitted alternatives. If no such coordinate exists, stop source attribution and redesign the apparatus. Keep complete-K and H_way bridges separate.",
   "scoped_foundational_reviews": [
     {
       "id": "TJR20261010",

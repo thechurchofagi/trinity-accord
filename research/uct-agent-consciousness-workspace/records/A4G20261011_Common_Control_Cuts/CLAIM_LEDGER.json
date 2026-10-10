@@ -1,0 +1,48 @@
+{
+  "claims": [
+    {
+      "id": "A4G-C1",
+      "type": "NEGATIVE_RESULT",
+      "statement": "Within a fixed nonempty finite witness model, if a jointly compatible alternative-writer intervention realizes every accepted target vector, then the target source is not identifiable.",
+      "domain": "fixed bearer, actuator, arbitration boundary, trial, writer set, witness vector and declared capability model",
+      "premises": ["nonempty target accepted set", "complete admitted alternative set for the declared model", "same-trial joint compatibility", "faithful physical capability semantics"],
+      "proof": "set inclusion implies nonempty intersection",
+      "counterexample_boundary": "coordinate-wise union coverage without joint compatibility does not establish the premise",
+      "status": "PROVED_IN_DECLARED_FINITE_MODEL",
+      "thought_experiment_role": "same output and redundant logs can coexist with a hidden writer"
+    },
+    {
+      "id": "A4G-C2",
+      "type": "CONDITIONAL_RESULT",
+      "statement": "A witness coordinate whose target and alternative projections are disjoint separates the whole witness sets, conditional on protection of its complete acquisition and acceptance path from every admitted alternative capability.",
+      "domain": "same fixed finite witness model",
+      "premises": ["projection disjointness", "source-specific post-arbitration generation", "freshness", "no alternative forge/replay/suppress/reset/retime path", "protected acceptance path"],
+      "proof": "intersection would contradict disjoint coordinate projections",
+      "counterexample_boundary": "maintenance replay of the coordinate restores the twin",
+      "status": "PROVED_CONDITIONALLY_NOT_INSTALLED",
+      "thought_experiment_role": "copying a seal with memory is distinguished from current seal generation"
+    },
+    {
+      "id": "A4G-C3",
+      "type": "CORRECTION",
+      "statement": "Causal ancestry, shared-root reachability, or a vertex cut is not alone sufficient to infer either forgery or source nonidentification; capability type and joint composability are required.",
+      "domain": "bounded provenance graphs",
+      "premises": ["typed influence edges", "separate suppress and forge capabilities"],
+      "proof": "finite audit has five union covers but one compatible twin; suppress-only common influence produces no target vector",
+      "counterexample_boundary": "if the cut is independently shown to synthesize every accepted vector jointly, A4G-C1 applies",
+      "status": "FINITE_COUNTEREXAMPLE_AND_SCOPE_CORRECTION",
+      "thought_experiment_role": "shared power versus replay-capable maintenance root"
+    },
+    {
+      "id": "A4G-C4",
+      "type": "PERSISTENCE_CORRECTION",
+      "statement": "The A4F remote branch contained a corrupted binary REVIEW_SUPERVISION.md whose bytes disagreed with CURRENT_STATE's recorded reviewed-ledger hash; the previously verified UTF-8 ledger is restored without closing any item.",
+      "domain": "repository persistence state",
+      "premises": ["remote head b013ae7f verified", "binary SHA256 63a998... observed", "recorded and local verified UTF-8 SHA256 5f270b..."],
+      "proof": "byte hashes and file-type inspection",
+      "counterexample_boundary": "does not prove all historical review content is complete",
+      "status": "CORRECTED_LOCALLY_PENDING_REMOTE_CHECKPOINT",
+      "thought_experiment_role": "none"
+    }
+  ]
+}

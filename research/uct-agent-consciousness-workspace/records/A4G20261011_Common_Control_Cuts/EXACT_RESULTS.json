@@ -1,0 +1,28 @@
+{
+  "coalition_count": 16,
+  "controllers": {
+    "bus_dma": ["commit", "lineage"],
+    "clock": ["time"],
+    "maintenance": ["lineage"],
+    "software": ["commit"]
+  },
+  "coordinates": ["commit", "lineage", "time"],
+  "graph_ancestry_alone_is_sufficient": false,
+  "joint_compatibility_is_required": true,
+  "joint_twin_masks": ["clock+maintenance+software"],
+  "jointly_compatible_twins": 1,
+  "protected_coordinate_separates_conditionally": true,
+  "protected_coordinate_twins": 0,
+  "replay_restores_twin": true,
+  "replay_twin_masks": ["clock+maintenance+software"],
+  "replay_upgrade_twins": 1,
+  "schema": "a4g-common-control-cut/1.0",
+  "union_cover_candidates": 5,
+  "union_cover_masks": [
+    "bus_dma+clock",
+    "bus_dma+clock+maintenance",
+    "bus_dma+clock+maintenance+software",
+    "bus_dma+clock+software",
+    "clock+maintenance+software"
+  ]
+}

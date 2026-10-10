@@ -1,0 +1,12 @@
+{
+  "completed_nodes": 913,
+  "active_rules": 424,
+  "context_links": 261,
+  "pending_disabled": 727,
+  "suspended_historical_rules": 10,
+  "all_of_semantics": "AND",
+  "a4g_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "r173_triggered": false,
+  "global_semantic_audit": "AUDIT_INCOMPLETE",
+  "direction_check": "PASS_WITH_H_LEVEL_STOP"
+}

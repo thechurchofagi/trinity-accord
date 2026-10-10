@@ -1,0 +1,8 @@
+{
+  "round_id": "A4G20261011",
+  "status": "DISABLED_SCOPED_NEGATIVE_AND_PROTOCOL_APPLICATION",
+  "completed_graph_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "candidate_claims": ["A4G-C1", "A4G-C2", "A4G-C3"],
+  "promotion": false,
+  "reason": "Finite provenance results do not discharge actual-device, complete-K, RetBind, H_way or phenomenal-bridge premises."
+}
