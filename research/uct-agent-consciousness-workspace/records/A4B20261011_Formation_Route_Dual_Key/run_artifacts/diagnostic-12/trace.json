@@ -1,0 +1,13 @@
+{
+  "payload": {
+    "bearer_id": "A4B-software-bearer-v1",
+    "carrier_id": "A4B-software-bearer-v1:persistent-json-carrier",
+    "formation_assignment": 0,
+    "formation_event_id": "708f4b42-4aa1-49e5-bfb3-991ebaeb4728",
+    "formed_at_utc": "2026-10-10T17:41:03.947675+00:00",
+    "retained_value": 0,
+    "schema": "A4B-TRACE-v1",
+    "trial_id": "diagnostic-12"
+  },
+  "payload_sha256": "3d84be5d2f27e6b6af43324d7b9bf2d31d475261d5b749260bff000ec62ac3d8"
+}

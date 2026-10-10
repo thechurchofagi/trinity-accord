@@ -1,0 +1,14 @@
+{
+  "bearer_id": "A4B-software-bearer-v1",
+  "block_read": 0,
+  "consumed_value": 0,
+  "consumer_id": "A4B-later-consumer-v1",
+  "endpoint_j_org": 0,
+  "tested_at_utc": "2026-10-10T17:41:02.676498+00:00",
+  "trace_opened": true,
+  "trace_path": "run_artifacts/primary-11/trace.json",
+  "trace_payload_sha256": "4a2ac91da14739eaa2d3aed3e3a8c44090ca7b76eda1c2f95e4e777f1cf7647f",
+  "trace_validated": true,
+  "trial_id": "primary-11",
+  "validation_reason": "accepted"
+}

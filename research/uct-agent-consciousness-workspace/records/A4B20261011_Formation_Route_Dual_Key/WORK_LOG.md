@@ -15,8 +15,17 @@
 5. selected experiential target `H_way`;
 6. UCT C1 conditional structural interpretation.
 
-## Pending at checkpoint
+## Completed research blocks
 
-- Complete formal-map and source read.
-- Derive and execute finite exact model.
-- Write protocol, claims, gaps, review response, audit, handoff, and persistence receipts.
+- Fixed-source reread completed: UCT I v1.2 C1/U1, §§8.11–8.14 and §14.7; R157/R173 and A3X/A3Z/A4A boundaries rechecked.
+- Exact block completed: four finite models realize formation-effect/route-use truth values (1/0), (0/1), (1/1), and (0/0).
+- Installed block completed: separate formation/test processes, persistent bearer-bound traces, balanced randomized intact and route-probe blocks, and equal-value foreign-copy challenge.
+- Executed result: intact randomized formation effect 1.0; route-gate interaction 1.0; all declared read/block events conform; foreign copy rejected for bearer mismatch.
+- Interpretation stop: actual software route established only in the declared finite view; complete physical signature, human body route, `H_way`, C1 empirical truth and any claim about a present assistant remain unestablished.
+- Formal-map decision: 0 nodes / 0 rules / 0 context links; local node and all-of audit completed without promoting the application into a theorem.
+
+## Still pending before persistence
+
+- Validate artifacts and hashes.
+- Update entry points, Chinese handoff and recovery manifest.
+- Persist and verify both copies.

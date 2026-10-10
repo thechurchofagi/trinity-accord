@@ -1,0 +1,81 @@
+{
+  "round": "A4B20261011",
+  "claims": [
+    {
+      "id": "A4B-C1",
+      "type": "NEGATIVE_RESULT",
+      "statement": "A nonzero randomized formation effect and actual use of a retained formation trace are logically independent properties.",
+      "domain": "finite binary structural causal models with pre-formation F, later trace gate D, and endpoint J",
+      "premises": [
+        "F and D are binary",
+        "actual route use is distinguished from endpoint-level effect",
+        "the four models use the displayed endpoint laws"
+      ],
+      "proof": "Four exact models realize all four truth-value combinations; see FORMATION_ROUTE_DUAL_KEY.md section 3 and EXACT_RESULTS.json.",
+      "counterexample_boundary": "This is logical independence, not a universal empirical frequency claim.",
+      "status": "PROVED_EXACT",
+      "thought_experiment_role": "The ancestor/direct-shortcut and abacus/calculator pairs hold output or formation fixed while varying route use."
+    },
+    {
+      "id": "A4B-C2",
+      "type": "APPLICATION_CONTRACT",
+      "statement": "A formation-sensitive retained-route claim requires both a valid randomized formation contrast and an actual same-event route package with a faithful trace-specific perturbation.",
+      "domain": "declared organizational endpoints",
+      "premises": [
+        "formation assignment precedes formation",
+        "no post-formation adjustment is used for the total formation estimand",
+        "bearer, precedence, continuation, consumer, current read/use, and perturbation fidelity hold simultaneously"
+      ],
+      "proof": "A4B-C1 blocks either key from substituting for the other; R173 supplies the actual-route obligations.",
+      "counterexample_boundary": "A nonzero gate interaction alone can be caused by direct gate effects; event logs alone do not establish necessity.",
+      "status": "SUPPORTED_CONDITIONAL",
+      "thought_experiment_role": "The copy/switch/memory family separates equal value, same lineage, and causal use."
+    },
+    {
+      "id": "A4B-C3",
+      "type": "ACTUAL_SOFTWARE_INSTALLATION",
+      "statement": "The A4B software bearer has an executed randomized formation effect and an independently randomized actual later trace-read route with an equal-value foreign-copy rejection.",
+      "domain": "the declared A4B Python/JSON software bearer and endpoint J_org",
+      "premises": [
+        "the recorded run artifacts are the executed outputs of run_dual_key_study.py",
+        "the script implements the declared exclusion and bypass contract",
+        "software file/process identity is the intended finite-view domain"
+      ],
+      "proof": "EXACT_RESULTS.json records tau_0=1, interaction=1, conforming read/block events, and bearer-mismatch rejection.",
+      "counterexample_boundary": "The human-implemented-agent case shows that the software ledger does not exhaust the complete physical bearer.",
+      "status": "EXECUTED_VERIFIED_SOFTWARE_SCOPE",
+      "thought_experiment_role": "The human-implemented agent fixes software behavior while varying unrepresented physical implementation."
+    },
+    {
+      "id": "A4B-C4",
+      "type": "UCT_BOUNDARY",
+      "statement": "The conjunction of A4B's two keys advances an organizational account but does not establish H, a complete token/signature binding, C1's empirical truth, or a unique subject.",
+      "domain": "UCT interpretation of A4B",
+      "premises": [
+        "C1 remains the consciousness-specific interpretive axiom",
+        "R157 transport is conditional on complete same-token binding",
+        "R173 does not identify familiar mineness from retention alone"
+      ],
+      "proof": "Type separation: J_org and the software route are not H and are not a complete D_ontic(K) witness.",
+      "counterexample_boundary": "No organizational score or report can repair a missing phenomenal endpoint identity.",
+      "status": "BOUNDARY_ENFORCED",
+      "thought_experiment_role": "All four families block value/output/lineage evidence from being promoted to phenomenal identity."
+    },
+    {
+      "id": "A4B-C5",
+      "type": "PROTOCOL_RESULT",
+      "statement": "A two-block prospective design can estimate a formation effect without destroying the formation route and can separately probe actual route use.",
+      "domain": "future human or robotic body/action studies with an installable trace perturbation",
+      "premises": [
+        "the primary and diagnostic blocks preserve endpoint meaning",
+        "D has a calibrated route-specific intervention",
+        "loss, adherence, and report-policy changes are audited"
+      ],
+      "proof": "DUAL_KEY_PROTOCOL.md gives the estimands and simultaneous premises.",
+      "counterexample_boundary": "No qualifying human/robotic intervention has been installed in this round.",
+      "status": "PROSPECTIVE_NOT_EXECUTED",
+      "thought_experiment_role": "The family battery supplies fixed-variable and failure cases for protocol design."
+    }
+  ]
+}
+

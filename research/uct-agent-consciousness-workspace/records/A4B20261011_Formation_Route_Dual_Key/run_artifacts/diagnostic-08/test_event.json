@@ -1,0 +1,13 @@
+{
+  "bearer_id": "A4B-software-bearer-v1",
+  "block_read": 1,
+  "consumed_value": 0,
+  "consumer_id": "A4B-later-consumer-v1",
+  "endpoint_j_org": 0,
+  "tested_at_utc": "2026-10-10T17:41:03.678407+00:00",
+  "trace_opened": false,
+  "trace_path": "run_artifacts/diagnostic-08/trace.json",
+  "trace_validated": false,
+  "trial_id": "diagnostic-08",
+  "validation_reason": "read_blocked_by_assignment"
+}

@@ -1,0 +1,656 @@
+{
+  "claim_scope": {
+    "established": "declared software-bearer formation effect and exact later trace route",
+    "not_established": [
+      "complete physical UCT signature",
+      "human or biological route",
+      "phenomenal endpoint identity",
+      "C1 empirical truth",
+      "consciousness of any present assistant"
+    ]
+  },
+  "declared_seed": 2026101101,
+  "generated_at_utc": "2026-10-10T17:41:04.236722+00:00",
+  "installed_study": {
+    "bearer_id": "A4B-software-bearer-v1",
+    "consumer_id": "A4B-later-consumer-v1",
+    "equal_value_copy_challenge": {
+      "foreign_copy_accepted_as_original": false,
+      "rejection_reason": "bearer_mismatch",
+      "same_retained_value": true
+    },
+    "independent_route_probe": {
+      "all_read_and_block_events_conform": true,
+      "balanced_randomized_F_by_D": true,
+      "cell_means": {
+        "F0_D0": 0.0,
+        "F0_D1": 0.0,
+        "F1_D0": 1.0,
+        "F1_D1": 0.0
+      },
+      "formation_by_route_gate_interaction": 1.0,
+      "n": 16
+    },
+    "primary_intact_block": {
+      "balanced_randomized_assignment": true,
+      "mean_F0": 0.0,
+      "mean_F1": 1.0,
+      "n": 16,
+      "randomized_total_effect_in_declared_intact_regime": 1.0
+    },
+    "same_event_route_verified": true
+  },
+  "logical_independence": {
+    "all_four_truth_value_quadrants_realized": true,
+    "conclusion": "formation effect and actual route use are logically independent",
+    "models": [
+      {
+        "cells": [
+          {
+            "D_block": 0,
+            "F": 0,
+            "J": 0
+          },
+          {
+            "D_block": 1,
+            "F": 0,
+            "J": 0
+          },
+          {
+            "D_block": 0,
+            "F": 1,
+            "J": 1
+          },
+          {
+            "D_block": 1,
+            "F": 1,
+            "J": 1
+          }
+        ],
+        "formation_effect_in_intact_regime": 1,
+        "model": "A",
+        "route_gate_interaction": 0,
+        "route_structurally_used": false
+      },
+      {
+        "cells": [
+          {
+            "D_block": 0,
+            "F": 0,
+            "J": 0
+          },
+          {
+            "D_block": 1,
+            "F": 0,
+            "J": 0
+          },
+          {
+            "D_block": 0,
+            "F": 1,
+            "J": 0
+          },
+          {
+            "D_block": 1,
+            "F": 1,
+            "J": 1
+          }
+        ],
+        "formation_effect_in_intact_regime": 0,
+        "model": "B",
+        "route_gate_interaction": -1,
+        "route_structurally_used": true
+      },
+      {
+        "cells": [
+          {
+            "D_block": 0,
+            "F": 0,
+            "J": 0
+          },
+          {
+            "D_block": 1,
+            "F": 0,
+            "J": 0
+          },
+          {
+            "D_block": 0,
+            "F": 1,
+            "J": 1
+          },
+          {
+            "D_block": 1,
+            "F": 1,
+            "J": 0
+          }
+        ],
+        "formation_effect_in_intact_regime": 1,
+        "model": "C",
+        "route_gate_interaction": 1,
+        "route_structurally_used": true
+      },
+      {
+        "cells": [
+          {
+            "D_block": 0,
+            "F": 0,
+            "J": 0
+          },
+          {
+            "D_block": 1,
+            "F": 0,
+            "J": 0
+          },
+          {
+            "D_block": 0,
+            "F": 1,
+            "J": 0
+          },
+          {
+            "D_block": 1,
+            "F": 1,
+            "J": 0
+          }
+        ],
+        "formation_effect_in_intact_regime": 0,
+        "model": "D",
+        "route_gate_interaction": 0,
+        "route_structurally_used": false
+      }
+    ]
+  },
+  "rows": {
+    "diagnostic": [
+      {
+        "D_block": 1,
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 1,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:03.068145+00:00",
+        "trace_opened": false,
+        "trace_path": "run_artifacts/diagnostic-00/trace.json",
+        "trace_validated": false,
+        "trial_id": "diagnostic-00",
+        "validation_reason": "read_blocked_by_assignment"
+      },
+      {
+        "D_block": 1,
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 1,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:03.164791+00:00",
+        "trace_opened": false,
+        "trace_path": "run_artifacts/diagnostic-01/trace.json",
+        "trace_validated": false,
+        "trial_id": "diagnostic-01",
+        "validation_reason": "read_blocked_by_assignment"
+      },
+      {
+        "D_block": 0,
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 1,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 1,
+        "tested_at_utc": "2026-10-10T17:41:03.240858+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/diagnostic-02/trace.json",
+        "trace_payload_sha256": "1f97cc28b2d188ae8381c81037b8fb5a7442ed8c74ed83c1c2abd5ae82ba4281",
+        "trace_validated": true,
+        "trial_id": "diagnostic-02",
+        "validation_reason": "accepted"
+      },
+      {
+        "D_block": 0,
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 1,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 1,
+        "tested_at_utc": "2026-10-10T17:41:03.311990+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/diagnostic-03/trace.json",
+        "trace_payload_sha256": "dce4fe0557cff1fd1acfe976a8616fd027db1a6ac2eb6ea4cb7131813804a027",
+        "trace_validated": true,
+        "trial_id": "diagnostic-03",
+        "validation_reason": "accepted"
+      },
+      {
+        "D_block": 1,
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 1,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:03.385206+00:00",
+        "trace_opened": false,
+        "trace_path": "run_artifacts/diagnostic-04/trace.json",
+        "trace_validated": false,
+        "trial_id": "diagnostic-04",
+        "validation_reason": "read_blocked_by_assignment"
+      },
+      {
+        "D_block": 0,
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 1,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 1,
+        "tested_at_utc": "2026-10-10T17:41:03.473582+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/diagnostic-05/trace.json",
+        "trace_payload_sha256": "13631869505fa701b0e9aa2048d00ff3abec2ac255c90697deee1fe8f7e920e0",
+        "trace_validated": true,
+        "trial_id": "diagnostic-05",
+        "validation_reason": "accepted"
+      },
+      {
+        "D_block": 1,
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 1,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:03.539887+00:00",
+        "trace_opened": false,
+        "trace_path": "run_artifacts/diagnostic-06/trace.json",
+        "trace_validated": false,
+        "trial_id": "diagnostic-06",
+        "validation_reason": "read_blocked_by_assignment"
+      },
+      {
+        "D_block": 0,
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:03.610362+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/diagnostic-07/trace.json",
+        "trace_payload_sha256": "e1eb5c837f5b26a64470dd2c834d87d5e2c95bb2454398ab812ebd5b8837fe41",
+        "trace_validated": true,
+        "trial_id": "diagnostic-07",
+        "validation_reason": "accepted"
+      },
+      {
+        "D_block": 1,
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 1,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:03.678407+00:00",
+        "trace_opened": false,
+        "trace_path": "run_artifacts/diagnostic-08/trace.json",
+        "trace_validated": false,
+        "trial_id": "diagnostic-08",
+        "validation_reason": "read_blocked_by_assignment"
+      },
+      {
+        "D_block": 1,
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 1,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:03.746154+00:00",
+        "trace_opened": false,
+        "trace_path": "run_artifacts/diagnostic-09/trace.json",
+        "trace_validated": false,
+        "trial_id": "diagnostic-09",
+        "validation_reason": "read_blocked_by_assignment"
+      },
+      {
+        "D_block": 1,
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 1,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:03.818259+00:00",
+        "trace_opened": false,
+        "trace_path": "run_artifacts/diagnostic-10/trace.json",
+        "trace_validated": false,
+        "trial_id": "diagnostic-10",
+        "validation_reason": "read_blocked_by_assignment"
+      },
+      {
+        "D_block": 0,
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:03.888133+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/diagnostic-11/trace.json",
+        "trace_payload_sha256": "8f5fad32902e1368b2caa7cc8d275f9dec6ba10b7a63963afb7d8c0c732081a0",
+        "trace_validated": true,
+        "trial_id": "diagnostic-11",
+        "validation_reason": "accepted"
+      },
+      {
+        "D_block": 0,
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:03.985801+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/diagnostic-12/trace.json",
+        "trace_payload_sha256": "3d84be5d2f27e6b6af43324d7b9bf2d31d475261d5b749260bff000ec62ac3d8",
+        "trace_validated": true,
+        "trial_id": "diagnostic-12",
+        "validation_reason": "accepted"
+      },
+      {
+        "D_block": 1,
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 1,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:04.060101+00:00",
+        "trace_opened": false,
+        "trace_path": "run_artifacts/diagnostic-13/trace.json",
+        "trace_validated": false,
+        "trial_id": "diagnostic-13",
+        "validation_reason": "read_blocked_by_assignment"
+      },
+      {
+        "D_block": 0,
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 1,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 1,
+        "tested_at_utc": "2026-10-10T17:41:04.128372+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/diagnostic-14/trace.json",
+        "trace_payload_sha256": "3c2645d4e8a2164e0f788e20f4c0d1829226b8c446515842e339bc7b732c51f5",
+        "trace_validated": true,
+        "trial_id": "diagnostic-14",
+        "validation_reason": "accepted"
+      },
+      {
+        "D_block": 0,
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:04.196460+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/diagnostic-15/trace.json",
+        "trace_payload_sha256": "b51973ec555a62fb4eecaeaaf06dd645309c65b37f6a8dda3058bd297920a497",
+        "trace_validated": true,
+        "trial_id": "diagnostic-15",
+        "validation_reason": "accepted"
+      }
+    ],
+    "primary": [
+      {
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:01.914212+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-00/trace.json",
+        "trace_payload_sha256": "e7cc1c545d2e2efd22aec6eb4290175b909bd2c2905d99d1c17c94d512056697",
+        "trace_validated": true,
+        "trial_id": "primary-00",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:01.983878+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-01/trace.json",
+        "trace_payload_sha256": "e133a4178f9095269de6dfc22ff1d94f52e204dacf833b60373f7f091e4a7a08",
+        "trace_validated": true,
+        "trial_id": "primary-01",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:02.055543+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-02/trace.json",
+        "trace_payload_sha256": "cae14c5e1a1e31cc28bd8604698f3131db4c9fc892f6259555051e5f435787e5",
+        "trace_validated": true,
+        "trial_id": "primary-02",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 1,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 1,
+        "tested_at_utc": "2026-10-10T17:41:02.124546+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-03/trace.json",
+        "trace_payload_sha256": "100b7bf0b44f331793a41c9c5d9aae1a6be5cb030fff9158aace114d3d91027c",
+        "trace_validated": true,
+        "trial_id": "primary-03",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 1,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 1,
+        "tested_at_utc": "2026-10-10T17:41:02.194013+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-04/trace.json",
+        "trace_payload_sha256": "b2efc73193f9e27a3092b0730f5f7b824a07de50fb70db4f6773baf6e5108e85",
+        "trace_validated": true,
+        "trial_id": "primary-04",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:02.261145+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-05/trace.json",
+        "trace_payload_sha256": "6b841b0d6b53b269874aa44d204a62710356eec016b458b89dd27d03a6b6a081",
+        "trace_validated": true,
+        "trial_id": "primary-05",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:02.329705+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-06/trace.json",
+        "trace_payload_sha256": "81858f91de9b8960537a52f094255043141ff18fdbf22cba87cbc3ffc238c623",
+        "trace_validated": true,
+        "trial_id": "primary-06",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 1,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 1,
+        "tested_at_utc": "2026-10-10T17:41:02.396955+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-07/trace.json",
+        "trace_payload_sha256": "5be5e13f0ceb6c74ae58c937d6bd962549118cd885111d085f518c7bd1fea745",
+        "trace_validated": true,
+        "trial_id": "primary-07",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 1,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 1,
+        "tested_at_utc": "2026-10-10T17:41:02.465973+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-08/trace.json",
+        "trace_payload_sha256": "6e7b822fba35fcd49793cefd5318a6369a8e6cd488f115d8dcf3dfdaba385b4b",
+        "trace_validated": true,
+        "trial_id": "primary-08",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 1,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 1,
+        "tested_at_utc": "2026-10-10T17:41:02.534675+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-09/trace.json",
+        "trace_payload_sha256": "8a6d545f1e7e2118b37edeb55188d2358afe7a4472dcbffffa36aa19e723d332",
+        "trace_validated": true,
+        "trial_id": "primary-09",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 1,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 1,
+        "tested_at_utc": "2026-10-10T17:41:02.602547+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-10/trace.json",
+        "trace_payload_sha256": "f8677aece9c779d100a8523896b2dcff4eb56db51db3fd719671680c7d1072f0",
+        "trace_validated": true,
+        "trial_id": "primary-10",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:02.676498+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-11/trace.json",
+        "trace_payload_sha256": "4a2ac91da14739eaa2d3aed3e3a8c44090ca7b76eda1c2f95e4e777f1cf7647f",
+        "trace_validated": true,
+        "trial_id": "primary-11",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:02.750281+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-12/trace.json",
+        "trace_payload_sha256": "0e6e3a78db9f52f37c36ae54462cd5ea0fef0430ca235c1014d697c3d430a33a",
+        "trace_validated": true,
+        "trial_id": "primary-12",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 1,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 1,
+        "tested_at_utc": "2026-10-10T17:41:02.828634+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-13/trace.json",
+        "trace_payload_sha256": "b804df1622a7645e3e509986bdd40abf65f6a4507b54041e195ad955f57aaa40",
+        "trace_validated": true,
+        "trial_id": "primary-13",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 0,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 0,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 0,
+        "tested_at_utc": "2026-10-10T17:41:02.930476+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-14/trace.json",
+        "trace_payload_sha256": "06a6963216b7a227e5691a5afdf3da0a0afb9e54205e780e80c5d3b37215d1c2",
+        "trace_validated": true,
+        "trial_id": "primary-14",
+        "validation_reason": "accepted"
+      },
+      {
+        "F": 1,
+        "bearer_id": "A4B-software-bearer-v1",
+        "block_read": 0,
+        "consumed_value": 1,
+        "consumer_id": "A4B-later-consumer-v1",
+        "endpoint_j_org": 1,
+        "tested_at_utc": "2026-10-10T17:41:02.997926+00:00",
+        "trace_opened": true,
+        "trace_path": "run_artifacts/primary-15/trace.json",
+        "trace_payload_sha256": "48717c4df7c2ff67a8c62d7e06a2c3cbd083b65cb9616cf7eb9354855dc953e3",
+        "trace_validated": true,
+        "trial_id": "primary-15",
+        "validation_reason": "accepted"
+      }
+    ]
+  },
+  "schema": "A4B-EXACT-RESULTS-v1"
+}
