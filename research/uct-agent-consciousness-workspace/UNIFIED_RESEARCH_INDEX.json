@@ -3,7 +3,7 @@
   "version": "UCT-INTEGRATION-v1.0.0",
   "source_commit": "0ef07e2e92d4b7279b1c324abc31fd76650bbcd1",
   "completed_map": "UCT-MAP-v1.1.2",
-  "publication_coverage": "UCT-PUB-v1.0.31",
+  "publication_coverage": "UCT-PUB-v1.0.32",
   "latest_scientific_research": {
     "id": "A3V20261010",
     "result_version": "A3V-SCOPE-v0.1.0",
@@ -2552,5 +2552,39 @@
   ],
   "scientific_promotion": false,
   "audit_depth_status": "AUDIT_INCOMPLETE",
-  "scope": "All 38 pending identities from the pinned current-state and available canonical registries; not a claim that every unregistered archive file has been rediscovered."
+  "scope": "All 38 pending identities from the pinned current-state and available canonical registries; not a claim that every unregistered archive file has been rediscovered.",
+  "latest_originality_review": {
+    "id": "NOV20261010",
+    "version": "NOV-REVIEW-v0.1.0",
+    "source": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/RESEARCH_NOTE.md",
+    "handoff": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/HANDOFF_ZH.md",
+    "work_log": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/WORK_LOG.md",
+    "claim_ledger": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/CLAIM_LEDGER.json",
+    "map_extension": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/MAP_EXTENSION.json",
+    "enabled_as_established_premises": false,
+    "coverage_version": "UCT-PUB-v1.0.32",
+    "scientific_delta": {
+      "nodes": 0,
+      "rules": 0,
+      "contexts": 0
+    }
+  },
+  "governance_reviews": [
+    {
+      "id": "NOV20261010",
+      "version": "NOV-REVIEW-v0.1.0",
+      "source": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/RESEARCH_NOTE.md",
+      "handoff": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/HANDOFF_ZH.md",
+      "work_log": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/WORK_LOG.md",
+      "claim_ledger": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/CLAIM_LEDGER.json",
+      "map_extension": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/MAP_EXTENSION.json",
+      "enabled_as_established_premises": false,
+      "coverage_version": "UCT-PUB-v1.0.32",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      }
+    }
+  ]
 }

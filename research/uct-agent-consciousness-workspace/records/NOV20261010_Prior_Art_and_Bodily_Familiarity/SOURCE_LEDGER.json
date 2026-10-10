@@ -1,0 +1,118 @@
+{
+  "schema": "uct-prior-art-source-ledger/1",
+  "date": "2026-10-10",
+  "systematic_review": false,
+  "worldwide_priority_verified": false,
+  "closest_sources": 11,
+  "background_sources": 1,
+  "sources": [
+    {
+      "id": "P1",
+      "authors_year": "Geiger et al. (2025)",
+      "title": "Causal Abstraction: A Theoretical Foundation for Mechanistic Interpretability",
+      "url": "https://jmlr.org/papers/v26/23-0058.html",
+      "text_url": "https://jmlr.org/papers/volume26/23-0058/23-0058.pdf",
+      "read_scope": "Publisher abstract; PDF definitions 25/28 and §§3.4–3.5 selected passages, not full 64-page proof audit.",
+      "comparison": "Intervention-preserving abstractions, mediation and path patching precede our certificate. Identified mathematical models and independently grounded physical ports are different evidence situations."
+    },
+    {
+      "id": "P2",
+      "authors_year": "Geiger et al. (2022)",
+      "title": "Inducing Causal Structure for Interpretable Neural Networks",
+      "url": "https://proceedings.mlr.press/v162/geiger22a.html",
+      "text_url": null,
+      "read_scope": "Publisher abstract and method description only.",
+      "comparison": "Interchange training aligns internal representations to causal variables; zero loss has a conditional abstraction guarantee. Not our bodily-familiarity endpoint."
+    },
+    {
+      "id": "P3",
+      "authors_year": "Heimersheim and Nanda (2024)",
+      "title": "How to use and interpret activation patching",
+      "url": "https://arxiv.org/abs/2404.15255",
+      "text_url": "https://arxiv.org/html/2404.15255v1",
+      "read_scope": "Author text §3, noising/denoising, scope, minimality and backup-behavior passages.",
+      "comparison": "Necessary and sufficient perturbation evidence need not coincide; path-specific interventions and compensating backup mechanisms are established concerns."
+    },
+    {
+      "id": "P4",
+      "authors_year": "Zhang and Nanda (2024; first preprint 2023)",
+      "title": "Towards Best Practices of Activation Patching in Language Models: Metrics and Methods",
+      "url": "https://arxiv.org/abs/2309.16042",
+      "text_url": null,
+      "read_scope": "Author abstract only; experiments not reanalyzed.",
+      "comparison": "Metrics and corruption choices affect localization; no claim of our method outperforming theirs is justified."
+    },
+    {
+      "id": "P5",
+      "authors_year": "Cisek (2007)",
+      "title": "Cortical mechanisms of action selection: the affordance competition hypothesis",
+      "url": "https://doi.org/10.1098/rstb.2007.2054",
+      "text_url": "https://www.cisek.org/pavel/Pubs/Cisek2007.pdf",
+      "read_scope": "Author PDF abstract and competition-model passages, pp. 5–6; not all cited neural experiments or supplements.",
+      "comparison": "Parallel action options, mutual inhibition and biased selection have longstanding antecedents. A model-specific choice threshold is not a basal experience threshold."
+    },
+    {
+      "id": "P6",
+      "authors_year": "Chambon and Haggard (2012)",
+      "title": "Sense of control depends on fluency of action selection, not motor performance",
+      "url": "https://doi.org/10.1016/j.cognition.2012.07.011",
+      "text_url": "https://discovery.ucl.ac.uk/id/eprint/1376597/1/1376597.pdf",
+      "read_scope": "Repository abstract; original PDF methods, PCE/NCE comparison, results and discussion excerpts; supplements not reviewed.",
+      "comparison": "Compatibility effects on control ratings dissociate from response performance. Selection fluency here is inferred from priming, not a verified count of live A3O policy tokens."
+    },
+    {
+      "id": "P7",
+      "authors_year": "Rohde, Di Luca and Ernst (2011)",
+      "title": "The Rubber Hand Illusion: Feeling of Ownership and Proprioceptive Drift Do Not Go Hand in Hand",
+      "url": "https://doi.org/10.1371/journal.pone.0021659",
+      "text_url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0021659",
+      "read_scope": "Publisher abstract, discussion and conclusion; no new data analysis.",
+      "comparison": "Spatial drift cannot simply identify ownership in their paradigm; it does not validate a retentive bodily-familiarity measure."
+    },
+    {
+      "id": "P8",
+      "authors_year": "Kalckert and Ehrsson (2012)",
+      "title": "Moving a Rubber Hand that Feels Like Your Own: A Dissociation of Ownership and Agency",
+      "url": "https://doi.org/10.3389/fnhum.2012.00040",
+      "text_url": "https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2012.00040/full",
+      "read_scope": "Publisher hypothesis, factorial active/passive and congruence results, and double-dissociation conclusion; not complete raw-data audit.",
+      "comparison": "Ownership/agency dissociation is empirical prior work. Neither axis is independently established as our familiar bodily H."
+    },
+    {
+      "id": "P9",
+      "authors_year": "Rule and O’Leary (2022)",
+      "title": "Self-healing codes: How stable neural populations can track continually reconfiguring neural representations",
+      "url": "https://doi.org/10.1073/pnas.2106692119",
+      "text_url": "https://www.repository.cam.ac.uk/bitstreams/fd934642-296f-4515-afd4-bf3600d76c98/download",
+      "read_scope": "Repository abstract and original PDF pp. 1–2, background/readout description; later model proofs and code not rerun.",
+      "comparison": "Adaptive readers can track changing population codes. Stable output does not guarantee an unchanged code/reader; this is not a natural-source area-3a rescue experiment."
+    },
+    {
+      "id": "P10",
+      "authors_year": "Whittlesea and Leboe (2003)",
+      "title": "Two fluency heuristics (and how to tell them apart)",
+      "url": "https://doi.org/10.1016/S0749-596X(03)00009-3",
+      "text_url": "https://www.sciencedirect.com/science/article/abs/pii/S0749596X03000093",
+      "read_scope": "Primary publisher indexed abstract only; direct full-page access failed twice.",
+      "comparison": "Fluency-related familiarity and attribution already have a research literature. Scope is recognition familiarity, not current bodily mineness; detailed experiments and priority were not assessed."
+    },
+    {
+      "id": "P11",
+      "authors_year": "Kruse et al. (2016)",
+      "title": "Am I seeing myself, my friend or a stranger? The role of personal familiarity in visual distinction of body identities in the human brain",
+      "url": "https://doi.org/10.1016/j.cortex.2016.07.010",
+      "text_url": "https://pubmed.ncbi.nlm.nih.gov/27498040/",
+      "read_scope": "Author PubMed abstract only.",
+      "comparison": "Self, personally familiar other and unfamiliar body images were compared. Visual identity familiarity is a nearby construct, not retentive enactment or validated H."
+    },
+    {
+      "id": "P12",
+      "authors_year": "Aldridge, Johnson and Scarlett (2019)",
+      "title": "Group Testing: An Information Theory Perspective",
+      "url": "https://doi.org/10.1561/0100000099",
+      "text_url": "https://arxiv.org/abs/1902.06002",
+      "read_scope": "Author abstract only; mathematical background reference, no exact theorem-priority determination.",
+      "comparison": "Binary pooled OR testing and information bounds are established. SCU already explicitly credits separating-system and cover-free antecedents; no new general group-testing bound is claimed."
+    }
+  ]
+}

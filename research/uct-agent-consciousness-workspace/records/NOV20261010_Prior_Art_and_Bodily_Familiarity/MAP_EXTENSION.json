@@ -1,0 +1,33 @@
+{
+  "schema": "uct-disabled-novelty-review/1",
+  "id": "NOV20261010",
+  "review_version": "NOV-REVIEW-v0.1.0",
+  "enabled": false,
+  "enabled_as_established_premise": false,
+  "foundation_effect": "NONE",
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "applications": [
+    {
+      "id": "NOV:ATTRIBUTION_AND_BODY_FAMILIARITY_SCOPE",
+      "completed_node_refs": [
+        "R173:RETENTIVE_BINDING_RELATION",
+        "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+        "R175:R173_EFFECTIVE_TARGET_SEPARATION"
+      ],
+      "claim_ids": [
+        "NOV-C1",
+        "NOV-C2",
+        "NOV-C3",
+        "NOV-C4",
+        "NOV-C5",
+        "NOV-C6",
+        "NOV-C7",
+        "NOV-C8"
+      ],
+      "actual_premises_discharged": false,
+      "status": "DISABLED_NONDEDUCTIVE_REVIEW"
+    }
+  ]
+}

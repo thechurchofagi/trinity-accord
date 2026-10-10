@@ -1,0 +1,11 @@
+# One prospective bodily-familiarity contrast
+
+Status: PROPOSED_APPLICATION_NOT_RUN. Inherits A3V-C5, R173 effective target separation and the Chambon/Haggard 2012 performance-reversal precedent. Does not reopen PMd/SPC instrumentation.
+
+1. Fix an actual bearer, body/action episode, route grain and frame consumer. Identify current retained trace use and present fit independently; do not assign them from training duration, RT, errors or a report.
+2. Propose paired J_H as the felt familiarity of this bodily enactment, not cue recognition, ease, ownership or responsibility. Wording is unvalidated; it supplies no theorem of signed reliability. Participant comprehension and failure cases must be assessed in a separately authorized study.
+3. Reuse PCE/NCE as a stress test: performance direction changes across prime timings while the inherited agency effect follows compatibility. Measure agency separately. This validates neither our actual-token L_sel nor J_H. If J_H is only the agency/performance pattern with renamed labels, no new H increment is established. A different pattern alone also does not prove H or reject a broad agency theory.
+4. Only when actual binding is available, compare retained enactment versus first-use enactment at matched present fit, and fit variations at matched retained use. Predeclare B_ret/B_fit predicted directions and the nuisance domain. Prior route-use effects and current congruence effects are different hypotheses; broad unrestricted variants must not be forced into pure predictions.
+5. Failure states: INVALID_ROUTE_BINDING; INVALID_FIT_BINDING; ENDPOINT_CONSTRUCT_UNRESOLVED; EFFECT_CONFOUNDED; OPEN_BRIDGE. Unverified sameness is not an invariant. No null result means no experience.
+
+This is a proposed application of prior dissociation methodology to the specific UCT target. No physical crossing, participant data, latent-variable estimator or endpoint validation was performed. Its priority and scientific outcome remain unverified. The first next action is to locate independently interpreted bodily-enactment familiarity items or evidence that distinguish them from agency and visual recognition, rather than invent a large new control taxonomy.

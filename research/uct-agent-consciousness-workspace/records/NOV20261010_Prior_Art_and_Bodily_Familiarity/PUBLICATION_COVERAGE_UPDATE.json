@@ -1,0 +1,30 @@
+{
+  "coverage_version": "UCT-PUB-v1.0.32",
+  "previous_coverage_version": "UCT-PUB-v1.0.31",
+  "review_id": "NOV20261010",
+  "checked_publication_sources": [
+    "RT-TH v1.0.0 §§8–9",
+    "SCU v1.0.1 §§5–7",
+    "CTD v1.0.0 §7",
+    "UCT I v1.2 §4/§10",
+    "TA25 v1.0 D4/D5"
+  ],
+  "changed_claim_ids": [
+    "NOV-C1",
+    "NOV-C2",
+    "NOV-C3",
+    "NOV-C4",
+    "NOV-C5",
+    "NOV-C6",
+    "NOV-C7",
+    "NOV-C8"
+  ],
+  "newly_covered_claim_ids": [],
+  "public_release_bytes_changed": false,
+  "publication_counts_changed": false,
+  "scientific_map_changed": false,
+  "residual_increment": "Attribution and prospective application only; no new general theory or independently signed H effect.",
+  "unverified_scope": "Exact worldwide synthesis priority; unread primary supplements/full proofs; historical deep semantics; actual endpoint/route installation.",
+  "originality_and_manuscript_decision": "HOLD_STANDALONE_INTEGRATE_SCOPE_AND_PRIOR_ART",
+  "next_specific_action": "Continue A3V independently interpreted bodily-familiarity endpoint; borrow PCE/NCE as proxy challenge, not an invented dissociation."
+}

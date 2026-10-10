@@ -98,11 +98,10 @@
   },
   "pending_note": "All prior pending identities retained. A3V adds disabled0/0/0 application scope review, no physical token/resolver/phenomenal premise discharge.",
   "publication_coverage": {
-    "version": "UCT-PUB-v1.0.32",
+    "version": "UCT-PUB-v1.0.31",
     "entry": "PUBLICATION_COVERAGE.json",
     "latest_update": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
-    "nondeductive": true,
-    "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json"
+    "nondeductive": true
   },
   "latest_activity": {
     "id": "A3V20261010",
@@ -523,21 +522,5 @@
     "handoff": "records/NAV20261010_Map_Integration/HANDOFF_ZH.md",
     "scope": "NAVIGATION_AND_DISABLED_CANDIDATE_ASSEMBLY",
     "persistence_receipt": "records/NAV20261010_Map_Integration/PERSISTENCE_RECEIPT.json"
-  },
-  "latest_originality_review": {
-    "id": "NOV20261010",
-    "version": "NOV-REVIEW-v0.1.0",
-    "source": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/RESEARCH_NOTE.md",
-    "handoff": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/HANDOFF_ZH.md",
-    "work_log": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/WORK_LOG.md",
-    "claim_ledger": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/CLAIM_LEDGER.json",
-    "map_extension": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/MAP_EXTENSION.json",
-    "enabled_as_established_premises": false,
-    "coverage_version": "UCT-PUB-v1.0.32",
-    "scientific_delta": {
-      "nodes": 0,
-      "rules": 0,
-      "contexts": 0
-    }
   }
 }

@@ -1,0 +1,129 @@
+{
+  "schema": "uct-novelty-review/1",
+  "id": "NOV20261010",
+  "version": "NOV-REVIEW-v0.1.0",
+  "claims": [
+    {
+      "id": "NOV-C1",
+      "target": "Internal substitution/cut/replay identifies bounded causal use",
+      "prior": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "internal": [
+        "SCU v1.0.1 §§4,7,10",
+        "A3R §§2,7"
+      ],
+      "classification": "INHERITED_METHOD_WITH_PROJECT_SPECIFIC_APPLICATION",
+      "residual": "A3R fixes token/port/clock/dispatch obligations for its particular use claim. No new calculus or generic circuit-identification method."
+    },
+    {
+      "id": "NOV-C2",
+      "target": "Same behavior or public trace need not imply same consuming mechanism",
+      "prior": [
+        "P1",
+        "P3",
+        "P9"
+      ],
+      "internal": [
+        "SCU v1.0.1 §7",
+        "RT-TH v1.0.0 §§8–9",
+        "A3R-C2"
+      ],
+      "classification": "INHERITED_IDENTIFICATION_LIMIT_WITH_FINITE_APPLICATION",
+      "residual": "The explicit logger/bypass witness is reproducible for the declared family; exact-synthesis priority unverified. More configurations alone add no originality."
+    },
+    {
+      "id": "NOV-C3",
+      "target": "Behavioral rescue need not restore original code/reader",
+      "prior": [
+        "P3",
+        "P9"
+      ],
+      "internal": [
+        "RT-TH v1.0.0 §8.2",
+        "A3L SOURCE_SCOPE and source-specific correction"
+      ],
+      "classification": "INHERITED_WITH_SCOPE_CORRECTION",
+      "residual": "A3L applies the known stable-readout distinction to A3U rescue interpretation, not a new compensation theorem."
+    },
+    {
+      "id": "NOV-C4",
+      "target": "Selection fluency differs from observable movement performance",
+      "prior": [
+        "P6"
+      ],
+      "internal": [
+        "A3N/A3O visible summaries; A3R actual participation definition"
+      ],
+      "classification": "INHERITED_BROAD_DISTINCTION_NEW_OPERATIONAL_APPLICATION_POSSIBLE",
+      "residual": "The actual-token operational definition is narrower than priming-inferred fluency; no biological equivalence, first discovery or superiority established."
+    },
+    {
+      "id": "NOV-C5",
+      "target": "Parallel action alternatives and biased competition",
+      "prior": [
+        "P5"
+      ],
+      "internal": [
+        "A3V §2 and named feasibility stop"
+      ],
+      "classification": "INHERITED_MECHANISM_FAMILY",
+      "residual": "Actual same-trial token/resolver evidence still must be grounded. Do not add more SPC taxonomy after the PMd stop."
+    },
+    {
+      "id": "NOV-C6",
+      "target": "Familiarity, fluency, ownership and agency require separate interpretation",
+      "prior": [
+        "P6",
+        "P7",
+        "P8",
+        "P10",
+        "P11"
+      ],
+      "internal": [
+        "UCT I v1.2 §10",
+        "TA25 D4/D5",
+        "R173/R175 effective target separation"
+      ],
+      "classification": "INHERITED_CONSTRUCT_WARNING_WITH_OPEN_UCT_BRIDGE",
+      "residual": "Retentive body/action H is a selected unresolved target. A new wording, label or questionnaire cannot establish an independent new phenomenon."
+    },
+    {
+      "id": "NOV-C7",
+      "target": "Fewest binary probes for specific pure/OR consumer classes",
+      "prior": [
+        "P12"
+      ],
+      "internal": [
+        "SCU v1.0.1 §§5–6 explicitly cites classical antecedents"
+      ],
+      "classification": "PUBLISHED_RESTRICTED_APPLICATION_NOT_NEW_GENERAL_THEORY",
+      "residual": "Optimality applies only to the stated mechanism class/readout/intervention law. Generic least-experiment claims are too broad."
+    },
+    {
+      "id": "NOV-C8",
+      "target": "Retained bodily enactment versus present fit with an independently oriented endpoint",
+      "prior": [
+        "P6",
+        "P7",
+        "P8",
+        "P10",
+        "P11"
+      ],
+      "internal": [
+        "A3V-C5",
+        "A3L B_ret/B_fit",
+        "R173 corrected transport"
+      ],
+      "classification": "INHERITED_PROJECT_HYPOTHESIS_WITH_PROPOSED_NEW_APPLICATION",
+      "residual": "Borrow PCE/NCE as a proxy challenge, then compare actual retained use and present fit. No new H data, signed endpoint or verified historical priority."
+    }
+  ],
+  "new_general_theorems": 0,
+  "new_empirical_findings": 0,
+  "manuscript_decision": "HOLD_STANDALONE_INTEGRATE_AS_PRIOR_ART_AND_SCOPE_CORRECTION",
+  "verified_exact_synthesis_priority": false
+}

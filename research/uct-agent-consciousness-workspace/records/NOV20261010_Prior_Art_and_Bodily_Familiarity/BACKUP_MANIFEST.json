@@ -1,0 +1,115 @@
+{
+  "scope": "NOV20261010 science and review files before post-save receipt",
+  "files": [
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/CLAIM_LEDGER.json",
+      "bytes": 4459,
+      "sha256": "fb2e70a81c0ad6b9a5938973098ce8329e0e7c338297e79436f8280b8b9fe77b"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/COVERAGE_ENTRY_BEFORE.json",
+      "bytes": 10431,
+      "sha256": "8f97e00b33210e2069eb9193d8ef9c9345b9961d85ad58e50ed25d642f879f34"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/HANDOFF_ZH.md",
+      "bytes": 2758,
+      "sha256": "9184c62b221e1f9afc621f305c26bf801106f30ff1fc6c1d5f66a02eb7269db3"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/MAP_AUDIT.md",
+      "bytes": 2202,
+      "sha256": "259385fab3f4fcd278293c9b92d78e3180470f1bb4e16d78d22af8e047b6d08d"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/MAP_COMPATIBILITY_AUDIT.json",
+      "bytes": 1184,
+      "sha256": "cc68ab16be6fb6e845af616db0466172a93748d08ecc655d319105055713e3cc"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/MAP_EXTENSION.json",
+      "bytes": 798,
+      "sha256": "8b3f539041da2e0c5c02cdc77a550298b64914aa768bf948a4a9e2dc7cea4287"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/NAVIGATION_COMPATIBILITY.json",
+      "bytes": 527,
+      "sha256": "c2ce20d49d2e0b34d14d34d3fe3ccec7aed5f8d522511be0b63e0f633a02731d"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/NAV_BASE_CURRENT_STATE.json",
+      "bytes": 27706,
+      "sha256": "008b1ff2a3f735b5bf695717f7de6b0b97e27acad0466000564c429b2772ea21"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/NAV_BASE_RESEARCH_REGISTRY.json",
+      "bytes": 59674,
+      "sha256": "50cfe3508a0c78018e55a51756ae20b88b4edd81af79aabb7c70cdd7fb190ec9"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/NAV_BASE_RESEARCH_SESSION_LOG_INDEX.json",
+      "bytes": 9259,
+      "sha256": "7d099cc969450fc57b37c19c7e094de292e22e8d11296dc9368efc4e7c9e4b77"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/NAV_BASE_UCT_FORMAL_GRAPH_MODULES.json",
+      "bytes": 57253,
+      "sha256": "71f5f104776830e1467d056bdec77ee98e9d5270e9b82f01143581eb3c464733"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/NEXT_CONTRAST.md",
+      "bytes": 2206,
+      "sha256": "08bb4f02f6955771b34f8b28a88afd6a71fb04eaff5b830dbba140fefb95c1be"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 1127,
+      "sha256": "88beb141ad2932511fcd9429394466e894a631871413e24bc936c59be3111085"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/RESEARCH_NOTE.md",
+      "bytes": 10145,
+      "sha256": "7743a4d36c23f23ced8086e7cace3a3a0a6f37d27c2cc95096fc23add5d57eeb"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/REVIEW_RESPONSE.md",
+      "bytes": 867,
+      "sha256": "c223f69eefedf4199a7830aa4cd8709007a90ba371eba7cc9adb01724262eef2"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/ROUND_RECORD.json",
+      "bytes": 672,
+      "sha256": "bd83e6a9758ef8d0a8a32514429bb8454337b07cdf9dc8093826e7dd80022dbe"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/RUN_RECEIPT.json",
+      "bytes": 3870,
+      "sha256": "7b13bcf38c9f2baf56a28cd8eeffd719148178823c866b3d67b79d6b5f4be7d7"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/SOURCE_LEDGER.json",
+      "bytes": 7467,
+      "sha256": "561162b9cf68492874b8dcf74fa9b660e586e420c38641cda687eac092aeb851"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/SOURCE_SCOPE.md",
+      "bytes": 4154,
+      "sha256": "201fded00b5e97f7b78b1ce041e236ca3fc4788c87446ecbfb9dff0b2f65e3cf"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/WHOLE_MAP_COVERAGE.json.gz",
+      "bytes": 89597,
+      "sha256": "60de71dd43e4652c3384bc52509d7dbe6d4478a6a8878b8bae77f30dd34b65b8"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/WORK_LOG.md",
+      "bytes": 3583,
+      "sha256": "4427720388ec59949618a32bb40778728fc89b6881539bca36eda32ad2b1a790"
+    },
+    {
+      "path": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/audit_map.py",
+      "bytes": 4496,
+      "sha256": "ba5ecf105257d0355fc6b3863ce6087a6dae9f2d8d7a38ffbc3b7eba92b1df18"
+    }
+  ]
+}

@@ -12,3 +12,5 @@
 - [本轮整合及原始历史](integration/UCT-INTEGRATION-v1.0.0/HISTORY_INDEX.md)
 
 研究按问题家族阅读；轮次编号用于追溯。精确主张和论文覆盖仍以各自台账为准。
+
+原创性复核：[NOV20261010](records/NOV20261010_Prior_Art_and_Bodily_Familiarity/HANDOFF_ZH.md)，仅前例/范围元数据，独立成稿HOLD；科学接续仍A3V。
