@@ -35,3 +35,11 @@
 3. 复跑 `python records/A4B20261011_Formation_Route_Dual_Key/run_dual_key_study.py run`；核验两项数值均为 `1.0` 且异承载者副本拒绝。
 4. 先读 `REVIEW_SUPERVISION.md` 最新段，再决定人体/机器人痕迹干预是否可安装；不要回到形成后五变量匹配或泛化控制研究。
 
+## 双份保存定位
+
+- GitHub科学/整合提交：`7eec64da21c5bad51435cd2a5c5525fa1beb3e9d`，远端头、关键结果与当前优先级已回读。
+- 工作空间增量：`libfile_faf36b62ce308191980bf7f2f4d6196c`，123950字节、85文件、SHA256 `2021476036c1a60cb384ac76546a6655f5ab052b9d35d2cc6c71e92b538b88e1`。
+- 增量清单：`libfile_55ae6ac4c66081918b073a52cda74e0d`，23501字节、SHA256 `6ae848aba221106bfe32d9cfe4ceb7180b9dcc40426250445decbc5f46728e07`。
+- 固定主交接同一ID `libfile_4175a81748fc819187fa8f5771f056fa` 已替换并回读 v110；文件ID `file_000000007fdc81f7bf698027e7a14fbf`，SHA256 `22e7cea9e616c7064a2b83910e69dc4d684324382bd4c9b8c8164b7d06849fe4`。
+- 增量不是完整仓库或完整历史；保存后产生的收据/确认元数据不在该包内，以 `PERSISTENCE_RECEIPT.json` 与固定主交接后继版本为准。
+

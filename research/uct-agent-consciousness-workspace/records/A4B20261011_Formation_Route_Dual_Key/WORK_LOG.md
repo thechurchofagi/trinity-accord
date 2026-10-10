@@ -32,7 +32,9 @@
 - Rechecked C1/U1, R157/R173 node scopes, effective `all_of` rules, object/time/signature/actuality/evidence types, inference direction, joint satisfiability and absent H links before save.
 - Direction: PASS_WITH_H_LEVEL_STOP. The work returns directly to actual body/action-related organization; it does not expand into generic control research.
 
-## Still pending before completion
+## Persistence completed
 
-- Create recovery increment and manifest with hashes.
-- Persist and verify both copies; record exact commit/version identifiers.
+- GitHub science/integration head `7eec64da21c5bad51435cd2a5c5525fa1beb3e9d` fast-forwarded from the verified A4A head and read back with key results/current priority.
+- Recovery increment and manifest uploaded and byte-read back: IDs and hashes are in `PERSISTENCE_RECEIPT.json`. The increment is explicitly not a full repository/history backup.
+- Fixed master handoff retained its stable identity and was replaced/read back as v110.
+- Direct push, argument-limit and xattr-tool failures are retained in `FAILURES.md` with the successful recovery path.
